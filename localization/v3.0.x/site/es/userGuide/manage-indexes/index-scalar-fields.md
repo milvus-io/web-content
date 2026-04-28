@@ -21,7 +21,10 @@ title: Índice de campos escalares
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>En Milvus, un índice escalar se utiliza para acelerar el metafiltrado por un valor de campo no vectorial específico, de forma similar a un índice de base de datos tradicional. Esta guía le guiará a través de la creación y configuración de índices escalares para campos como enteros, cadenas, etc.</p>
+    </button></h1><p>En Milvus, un índice escalar se utiliza para acelerar el metafiltrado por un valor de campo no vectorial específico, de forma similar a un índice de base de datos tradicional. Esta guía le mostrará cómo crear y configurar índices escalares para campos como enteros, cadenas, etc.</p>
+<div class="alert warning">
+<p>Esta página está obsoleta. Para la última implementación, consulte <a href="/docs/es/bitmap.md">BITMAP</a>, <a href="/docs/es/inverted.md">INVERTED</a>, <a href="/docs/es/ngram.md">NGRAM</a>, <a href="/docs/es/rtree.md">RTREE</a> <a href="/docs/es/stl-sort.md">STL_SORT</a>, etc.</p>
+</div>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">Tipos de indexación escalar<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,8 +41,8 @@ title: Índice de campos escalares
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Indexación automática</a></strong>: Milvus decide automáticamente el tipo de índice basándose en el tipo de datos del campo escalar. Esto es adecuado cuando no necesita controlar el tipo de índice específico.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Indexación personalizada</a></strong>: Usted especifica el tipo de índice exacto, como un índice invertido. Esto proporciona un mayor control sobre la selección del tipo de índice.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Auto indexación</a></strong>: Milvus decide automáticamente el tipo de índice basándose en el tipo de datos del campo escalar. Esto es adecuado cuando no necesita controlar el tipo de índice específico.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Indexación personalizada</a></strong>: Usted especifica el tipo de índice exacto, como un índice invertido o un <a href="/docs/es/bitmap.md">índice de mapa de bits</a>. Esto proporciona un mayor control sobre la selección del tipo de índice.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">Indexación automática<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -193,6 +196,7 @@ client.createIndex(createIndexReq);
 <p>Para la indexación personalizada, los valores válidos son:</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (Recomendado) Un índice invertido consiste en un diccionario de términos que contiene todas las palabras tokenizadas ordenadas alfabéticamente. Para más detalles, consulte <a href="/docs/es/scalar_index.md">Índice escalar</a>.</p></li>
+<li><p><strong>BITMAP</strong>: Tipo de índice que almacena un mapa de bits de todos los valores únicos de un campo. Para más información, consulte <a href="/docs/es/bitmap.md">BITMAP</a>.</p></li>
 <li><p><strong>STL_SORT</strong>: Ordena los campos escalares utilizando el algoritmo de ordenación estándar de la biblioteca de plantillas. Sólo admite campos numéricos (por ejemplo, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: Una estructura de datos en árbol para búsquedas y recuperaciones rápidas de prefijos. Admite campos VARCHAR.</p></li>
 </ul></li>
@@ -306,21 +310,3 @@ System.out.println(indexNames);
 <span class="hljs-comment">//     &quot;inverted_index&quot;</span>
 <span class="hljs-comment">// ]   </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">Límites<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li>Actualmente, la indexación escalar soporta los tipos de datos INT8, INT16, INT32, INT64, FLOAT, DOUBLE, BOOL, VARCHAR y ARRAY, pero no el tipo de datos JSON.</li>
-</ul>

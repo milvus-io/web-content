@@ -47,7 +47,7 @@ beta: Milvus 2.6.x
      <td><p>amazon.titan-embed-text-v2:0</p></td>
      <td><p>1،024 (افتراضي)، 512، 256</p></td>
      <td><p>8,192</p></td>
-     <td><p>RAG، والبحث عن المستندات، وإعادة التصنيف، والتصنيف، إلخ.</p></td>
+     <td><p>RAG، والبحث عن المستندات، وإعادة التصنيف، والتصنيف، وما إلى ذلك.</p></td>
    </tr>
 </table>
 <p>للحصول على التفاصيل، راجع <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html">نماذج تضمين النص من أمازون تيتان تيتان</a>.</p>
@@ -69,13 +69,28 @@ beta: Milvus 2.6.x
     </button></h2><p>يجب أن يعرف Milvus بيانات اعتماد الوصول إلى Bedrock قبل أن يتمكن من طلب التضمينات. يوفر ميلفوس طريقتين لتكوين بيانات الاعتماد:</p>
 <ul>
 <li><p><strong>ملف التكوين (موصى به):</strong> قم بتخزين بيانات الاعتماد في <code translate="no">milvus.yaml</code> بحيث تلتقطها كل إعادة تشغيل وعقدة تلقائيًا.</p></li>
-<li><p><strong>متغيرات البيئة:</strong> أدخل بيانات الاعتماد في وقت النشر - مثالي لـ Docker Compose.</p></li>
+<li><p><strong>متغيرات البيئة:</strong> حقن بيانات الاعتماد في وقت النشر - مثالي لـ Docker Compose.</p></li>
 </ul>
 <p>اختر واحدة من الطريقتين أدناه - ملف التكوين أسهل في الحفاظ عليه على الأجهزة العارية والأجهزة الافتراضية، بينما يناسب مسار env-var سير عمل الحاوية.</p>
 <div class="alert note">
 <p>في حالة وجود بيانات اعتماد لنفس الموفر في كل من ملف التكوين ومتغير البيئة، يستخدم Milvus دائمًا القيمة الموجودة في <code translate="no">milvus.yaml</code> ويتجاهل متغير البيئة.</p>
 </div>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">الخيار 1: ملف التكوين (موصى به وأولوية أعلى)</h3><p>احتفظ ببيانات الاعتماد الخاصة بك في <code translate="no">milvus.yaml</code> ؛ يقرأها Milvus عند بدء التشغيل ويتجاوز أي متغير بيئة لنفس الموفر.</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">الخيار 1: ملف التكوين (موصى به وأولوية أعلى)<button data-href="#Option-1-Configuration-file-recommended--higher-priority" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>احتفظ ببيانات الاعتماد الخاصة بك في <code translate="no">milvus.yaml</code> ؛ يقرأها Milvus عند بدء التشغيل ويتجاوز أي متغير بيئة لنفس الموفر.</p>
 <ol>
 <li><p>**أعلن بيانات الاعتماد الخاصة بك ضمن <code translate="no">credential:</code></p>
 <p>يمكنك إدراج واحد أو أكثر من بيانات الاعتماد - أعطِ كل منها تسمية تخترعها وستشير إليها لاحقًا.</p>
@@ -99,7 +114,22 @@ beta: Milvus 2.6.x
 <button class="copy-code-btn"></button></code></pre>
 <p>هذا يربط بيانات اعتماد محددة لكل طلب يرسله ميلفوس إلى خدمة تضمين Bedrock.</p></li>
 </ol>
-<h3 id="Option-2-Environment-variable" class="common-anchor-header">الخيار 2: متغير البيئة</h3><p>استخدم هذه الطريقة عندما تقوم بتشغيل Milvus مع Docker Compose وتفضل الاحتفاظ بالأسرار خارج الملفات والصور.</p>
+<h3 id="Option-2-Environment-variable" class="common-anchor-header">الخيار 2: متغير البيئة<button data-href="#Option-2-Environment-variable" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>استخدم هذه الطريقة عندما تقوم بتشغيل Milvus مع Docker Compose وتفضل الاحتفاظ بالأسرار خارج الملفات والصور.</p>
 <p>يعود Milvus إلى متغير البيئة فقط إذا لم يتم العثور على بيانات اعتماد للموفر في <code translate="no">milvus.yaml</code>.</p>
 <table>
    <tr>
@@ -145,7 +175,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>بمجرد تكوين بيانات الاعتماد، اتبع هذه الخطوات لتعريف دوال التضمين واستخدامها.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">الخطوة 1: تحديد حقول المخطط</h3><p>لاستخدام دالة التضمين، قم بإنشاء مجموعة بمخطط محدد. يجب أن يتضمن هذا المخطط ثلاثة حقول ضرورية على الأقل:</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">الخطوة 1: تحديد حقول المخطط<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لاستخدام دالة التضمين، قم بإنشاء مجموعة بمخطط محدد. يجب أن يتضمن هذا المخطط ثلاثة حقول ضرورية على الأقل:</p>
 <ul>
 <li><p>الحقل الأساسي الذي يحدد بشكل فريد كل كيان في المجموعة.</p></li>
 <li><p>حقل قياسي يخزن البيانات الأولية المراد تضمينها.</p></li>
@@ -172,7 +217,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-function-to-schema" class="common-anchor-header">الخطوة 2: إضافة دالة إلى المخطط</h3><p>تقوم الوحدة النمطية الدالة في ميلفوس تلقائيًا بتحويل البيانات الأولية المخزنة في حقل قياسي إلى تضمينات وتخزينها في حقل المتجه المحدد صراحة.</p>
+<h3 id="Step-2-Add-function-to-schema" class="common-anchor-header">الخطوة 2: إضافة دالة إلى المخطط<button data-href="#Step-2-Add-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تقوم الوحدة النمطية الدالة في ميلفوس تلقائيًا بتحويل البيانات الأولية المخزنة في حقل قياسي إلى تضمينات وتخزينها في حقل المتجه المحدد صراحة.</p>
 <p>يضيف المثال أدناه وحدة الدالة (<code translate="no">bedrk</code>) التي تقوم بتحويل الحقل القياسي <code translate="no">&quot;document&quot;</code> إلى تضمينات، وتخزين المتجهات الناتجة في الحقل المتجه <code translate="no">&quot;dense&quot;</code> المحدد مسبقًا.</p>
 <p>بمجرد تعريف دالة التضمين الخاصة بك، قم بإضافتها إلى مخطط مجموعتك. هذا يوجه ميلفوس لاستخدام دالة التضمين المحددة لمعالجة التضمينات وتخزينها من بياناتك النصية.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function specifically for OpenAI provider</span>

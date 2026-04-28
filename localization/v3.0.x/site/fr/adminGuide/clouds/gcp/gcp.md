@@ -22,7 +22,7 @@ summary: Découvrez comment déployer un cluster Milvus sur GKE.
     </button></h1><p>Milvus est une base de données vectorielle native pour le cloud et peut être déployée dans divers environnements cloud. Ce guide vous présente tous les détails de la configuration de Milvus sur Google Cloud Platform (GCP).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gcp-networking.png" alt="Deploy a Milvus cluster on GCP" class="doc-image" id="deploy-a-milvus-cluster-on-gcp" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gcp-networking.png" alt="Deploy a Milvus cluster on GCP" class="doc-image" id="deploy-a-milvus-cluster-on-gcp" />
    </span> <span class="img-wrapper"> <span>Déployer un cluster Milvus sur GCP</span> </span></p>
 <h2 id="Before-you-start" class="common-anchor-header">Avant de commencer<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -179,11 +179,11 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
 <pre><code translate="no" class="language-bash">gcloud storage buckets create gs://milvus-testing-nonprod --project=milvus-testing-nonprod --default-storage-class=STANDARD --location=us-west1 --uniform-bucket-level-access
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Générez la clé d'accès utilisateur et la clé secrète, vous devez aller sur la page de stockage de votre projet. Dans la barre latérale gauche du tableau de bord, cliquez sur Google Cloud Storage puis sur Paramètres. Sélectionnez l'onglet INTEROPÉRABILITÉ. Si vous ne l'avez pas encore activé, cliquez sur Accès interopérable. Cliquez ensuite sur le bouton CRÉER UNE CLÉ pour créer des clés d'accès GCP pour votre compte utilisateur.</li>
+<li>Générez la clé d'accès de l'utilisateur et la clé secrète, vous devez aller sur la page de stockage de votre projet. Dans la barre latérale gauche du tableau de bord, cliquez sur Google Cloud Storage puis sur Paramètres. Sélectionnez l'onglet INTEROPÉRABILITÉ. Si vous ne l'avez pas encore activé, cliquez sur Accès interopérable. Cliquez ensuite sur le bouton CRÉER UNE CLÉ pour créer des clés d'accès GCP pour votre compte utilisateur.</li>
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/access_key.jpg" alt="GCP Access keys for your user account" class="doc-image" id="gcp-access-keys-for-your-user-account" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/access_key.jpg" alt="GCP Access keys for your user account" class="doc-image" id="gcp-access-keys-for-your-user-account" />
    </span> <span class="img-wrapper"> <span>Clés d'accès GCP pour votre compte utilisateur</span> </span></p>
 <ul>
 <li>Ajouter values.yaml</li>
@@ -283,5 +283,5 @@ helm install -f values.yaml my-release milvus/milvus
     </button></h2><p>Si vous souhaitez apprendre à déployer Milvus sur d'autres clouds :</p>
 <ul>
 <li><a href="/docs/fr/eks.md">Déployer Milvus Cluster sur AWS avec Kubernetes</a></li>
-<li><a href="/docs/fr/azure.md">Déployer Milvus Cluster sur Azure avec Kubernetes</a></li>
+<li><a href="/docs/fr/azure.md">Déployer le cluster Milvus sur Azure avec Kubernetes</a></li>
 </ul>

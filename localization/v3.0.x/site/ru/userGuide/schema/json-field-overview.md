@@ -64,7 +64,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>В данном примере <code translate="no">metadata</code> - это одно поле JSON, которое содержит смесь плоских значений (например, <code translate="no">category</code>, <code translate="no">in_stock</code>), массивов (<code translate="no">tags</code>) и вложенных объектов (<code translate="no">supplier</code>).</p>
 <div class="alert note">
-<p><strong>Соглашение об именовании:</strong> Используйте в ключах JSON только буквы, цифры и символы подчеркивания. Избегайте специальных символов, пробелов и точек, так как они могут вызвать проблемы с разбором в запросах.</p>
+<p><strong>Соглашение об именовании:</strong> Используйте только буквы, цифры и символы подчеркивания в ключах JSON. Избегайте специальных символов, пробелов и точек, так как они могут вызвать проблемы с разбором в запросах.</p>
 </div>
 <h2 id="JSON-field-vs-dynamic-field" class="common-anchor-header">Поле JSON против динамического поля<button data-href="#JSON-field-vs-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,7 +86,7 @@ summary: >-
 <table>
    <tr>
      <th><p>Характеристика</p></th>
-     <th><p>JSON-поле</p></th>
+     <th><p>Поле JSON</p></th>
      <th><p>Динамическое поле</p></th>
    </tr>
    <tr>
@@ -177,7 +177,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>После создания коллекции вставьте сущности, содержащие структурированные JSON-объекты, в указанное вами JSON-поле. Данные должны быть оформлены в виде списка словарей.</p>
+    </button></h3><p>После создания коллекции вставьте сущности, содержащие структурированные JSON-объекты, в указанное JSON-поле. Данные должны быть оформлены в виде списка словарей.</p>
 <pre><code translate="no" class="language-python">entities = [
     {
         <span class="hljs-string">&quot;product_id&quot;</span>: <span class="hljs-number">1</span>,
@@ -269,7 +269,7 @@ res = client.search(
 <h4 id="Filtering-with-JSON-specific-operators" class="common-anchor-header">Фильтрация с помощью операторов, специфичных для JSON</h4><p>Milvus также предоставляет специальные операторы для запроса значений массивов по определенным ключам полей JSON. Например:</p>
 <ul>
 <li><p><code translate="no">json_contains(identifier, expr)</code>: Проверяет, существует ли определенный элемент или подмассив в массиве JSON.</p></li>
-<li><p><code translate="no">json_contains_all(identifier, expr)</code>: : Проверяет, что все элементы указанного JSON-выражения присутствуют в поле</p></li>
+<li><p><code translate="no">json_contains_all(identifier, expr)</code>: : Проверяет наличие в поле всех элементов указанного JSON-выражения</p></li>
 <li><p><code translate="no">json_contains_any(identifier, expr)</code>: Фильтрует сущности, в которых хотя бы один член JSON-выражения присутствует в поле.</p></li>
 </ul>
 <p>Чтобы найти продукт, который имеет значение <code translate="no">&quot;summer_sale&quot;</code> по ключу <code translate="no">tags</code>:</p>

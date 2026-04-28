@@ -2,7 +2,7 @@
 id: aisaq.md
 title: AISAQCompatible with Milvus 2.6.4+
 summary: >-
-  AISAQはディスクベースのベクトルインデックスで、DISKANNを拡張し、RAMの制限を超えることなく億単位のデータセットを扱うことができます。圧縮されたベクトルをメモリ上に保持するDISKANNとは異なり、AISAQは全てのデータをディスク上に保持し、性能とストレージコストのバランスを取るために2つのモードを提供します。
+  AISAQはディスクベースのベクトルインデックスで、DISKANNを拡張し、RAMの制限を超えることなく億単位のデータセットを扱うことができます。圧縮されたベクトルをメモリ上に保持するDISKANNとは異なり、AISAQはすべてのデータをディスク上に保持し、性能とストレージコストのバランスをとるために2つのモードを提供します。
 beta: Milvus 2.6.4+
 ---
 <h1 id="AISAQ" class="common-anchor-header">AISAQ<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#AISAQ" class="anchor-icon" translate="no">
@@ -204,7 +204,7 @@ beta: Milvus 2.6.4+
      <td><p><code translate="no">num_entry_points</code></p></td>
      <td><p>検索エントリーポイントの選択を最適化するための候補エントリーポイントの数。</p></td>
      <td><p><strong>型</strong>：整数</p><p><strong>範囲</strong>： [0, 1000[0, 1000]</p><p><strong>デフォルト値</strong>：<code translate="no">100</code></p></td>
-     <td><p>高い値は、より近いエントリーポイントから検索を開始することにより、検索時間を短縮することができる。</p><p>大きなセグメントではより大きな値を設定する（例えば 10M ベクトル以上では 1000 を使用）。</p></td>
+     <td><p>高い値は、より近いエントリーポイントから検索を開始することにより、検索時間を短縮することができる。</p><p>大きなセグメント（例えば 10M ベクトル以上の場合は 1000 を使用）には大きな値を設定する。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">pq_code_budget_gb_ratio</code></p></td>
@@ -216,7 +216,7 @@ beta: Milvus 2.6.4+
      <td><p><code translate="no">disk_pq_code_budget_gb_ratio</code></p></td>
      <td><p>インデックスに格納された高精度ベクトル（再順位付けに使用）のPQコードのサイズを、非圧縮データのサイズと比較して制御します。</p></td>
      <td><p><strong>タイプ</strong>浮動小数点数</p><p><strong>範囲</strong>： [0, 0.25[0, 0.25]</p><p><strong>デフォルト値</strong>：<code translate="no">0.25</code></p></td>
-     <td><p>デフォルト値0.25では、ベクトルは元のサイズの25%に量子化され(4倍圧縮)、精度の影響を最小限に抑えながらディスクの占有量を減らします。</p><p>再順位付けのためにディスク・インデックスに全精度のベクトルを保存するには、値を0に設定します。値を大きくすると再現率は高くなるが、ディスク使用量は増加する。</p></td>
+     <td><p>デフォルト値0.25では、ベクトルは元のサイズの25%に量子化され(4倍圧縮)、精度の影響を比較的小さくしながらディスクの占有量を減らします。</p><p>再順位付けのためにディスク・インデックスに全精度のベクトルを保存するには、値を0に設定します。値を大きくすると再現率は高くなるが、ディスク使用量は増加する。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">pq_cache_size</code></p></td>

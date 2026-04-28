@@ -21,7 +21,7 @@ summary: Pelajari cara membuat peringatan untuk layanan Milvus di Grafana.
       </svg>
     </button></h1><p>Topik ini memperkenalkan mekanisme peringatan untuk layanan Milvus dan menjelaskan mengapa, kapan, dan bagaimana cara membuat peringatan di Milvus.</p>
 <p>Dengan membuat peringatan, Anda dapat menerima notifikasi ketika nilai metrik tertentu melebihi ambang batas yang telah Anda tentukan sebelumnya.</p>
-<p>Sebagai contoh, Anda membuat peringatan dan menetapkan 80 MB sebagai nilai maksimum untuk penggunaan memori oleh komponen Milvus. Jika penggunaan aktual melebihi angka yang telah ditetapkan, Anda akan menerima peringatan yang mengingatkan Anda bahwa penggunaan memori oleh komponen Milvus melebihi 80 MB. Setelah menerima peringatan tersebut, Anda dapat menyesuaikan alokasi sumber daya secara tepat dan tepat waktu untuk memastikan ketersediaan layanan.</p>
+<p>Sebagai contoh, Anda membuat peringatan dan menetapkan 80 MB sebagai nilai maksimum untuk penggunaan memori oleh komponen Milvus. Jika penggunaan aktual melebihi angka yang telah ditetapkan, Anda akan menerima peringatan yang mengingatkan bahwa penggunaan memori oleh komponen Milvus melebihi 80 MB. Setelah menerima peringatan tersebut, Anda dapat menyesuaikan alokasi sumber daya secara tepat dan tepat waktu untuk memastikan ketersediaan layanan.</p>
 <h2 id="Scenarios-for-creating-alerts" class="common-anchor-header">Skenario untuk membuat peringatan<button data-href="#Scenarios-for-creating-alerts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -106,7 +106,7 @@ summary: Pelajari cara membuat peringatan untuk layanan Milvus di Grafana.
     </button></h3><p>Untuk menambahkan peringatan untuk penggunaan memori komponen Milvus, edit panel Memori. Kemudian, tambahkan kueri baru dengan metrik: <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
    </span> <span class="img-wrapper"> <span>Alert_metric</span> </span></p>
 <h3 id="2-Save-the-dashboard" class="common-anchor-header">2. Menyimpan dasbor<button data-href="#2-Save-the-dashboard" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -126,12 +126,12 @@ summary: Pelajari cara membuat peringatan untuk layanan Milvus di Grafana.
     </button></h3><p>Simpan dasbor, dan tunggu beberapa menit untuk melihat peringatan.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
    </span> <span class="img-wrapper"> <span>Alert_dashboard</span> </span></p>
 <p>Kueri peringatan Grafana tidak mendukung variabel template. Oleh karena itu, Anda harus menambahkan kueri kedua tanpa variabel template dalam label. Kueri kedua diberi nama "A" secara default. Anda dapat mengganti namanya dengan mengklik dropdown.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
    </span> <span class="img-wrapper"> <span>Alert_query</span> </span></p>
 <h3 id="3-Add-alert-notifications" class="common-anchor-header">3. Menambahkan notifikasi peringatan<button data-href="#3-Add-alert-notifications" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,17 +151,17 @@ summary: Pelajari cara membuat peringatan untuk layanan Milvus di Grafana.
     </button></h3><p>Untuk menerima notifikasi peringatan, tambahkan "saluran notifikasi". Kemudian, tentukan saluran di bidang "Kirim ke".</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
    </span> <span class="img-wrapper"> <span>Alert_notification</span> </span></p>
 <p>Jika peringatan berhasil dibuat dan dipicu, Anda akan menerima notifikasi seperti yang ditunjukkan pada gambar di bawah ini.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
-   </span> <span class="img-wrapper"> <span>Pemberitahuan_pesan</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
+   </span> <span class="img-wrapper"> <span>Pesan_pemberitahuan</span> </span></p>
 <p>Untuk menghapus peringatan, buka panel "Peringatan" dan klik tombol hapus.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
    </span> <span class="img-wrapper"> <span>Hapus_peringatan</span> </span></p>
 <h2 id="Whats-next" class="common-anchor-header">Apa selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

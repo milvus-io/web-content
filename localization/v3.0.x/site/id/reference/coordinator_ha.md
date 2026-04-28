@@ -39,7 +39,7 @@ title: Koordinator HA
     </button></h2><p>Dalam rilis 2.2.3, Milvus mengimplementasikan ketersediaan tinggi untuk koordinator untuk membuatnya bekerja dalam mode siaga aktif, memitigasi kemungkinan titik kegagalan tunggal (SPoF) yang dapat menyebabkan tidak tersedianya layanan.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
    </span> <span class="img-wrapper"> <span>Koordinator HA</span> </span></p>
 <p>Gambar di atas mengilustrasikan bagaimana koordinator bekerja dalam mode siaga aktif. Ketika sepasang koordinator memulai, mereka mendaftar ke etcd menggunakan ID server mereka dan bersaing untuk mendapatkan peran aktif. Koordinator yang berhasil menyewa peran aktif dari etcd akan mulai melayani, dan koordinator lain dalam pasangan tersebut akan tetap siaga, mengawasi peran aktif dan siap melayani jika koordinator aktif mati.</p>
 <h2 id="Enable-coordinator-HA" class="common-anchor-header">Aktifkan koordinator HA<button data-href="#Enable-coordinator-HA" class="anchor-icon" translate="no">
@@ -57,7 +57,22 @@ title: Koordinator HA
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="With-Helm" class="common-anchor-header">Dengan Helm</h3><p>Untuk memulai beberapa koordinator dan membuat mereka bekerja dalam mode siaga aktif, anda harus membuat perubahan berikut ini pada berkas <code translate="no">values.yaml</code>.</p>
+    </button></h2><h3 id="With-Helm" class="common-anchor-header">Dengan Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk memulai beberapa koordinator dan membuat mereka bekerja dalam mode siaga aktif, anda harus membuat perubahan berikut ini pada berkas <code translate="no">values.yaml</code>.</p>
 <ul>
 <li>Atur <code translate="no">xxxCoordinator.replicas</code> ke <code translate="no">2</code>.</li>
 <li>2. Atur <code translate="no">xxxCoordinator.activeStandby.enabled</code> menjadi <code translate="no">true</code>.</li>
@@ -79,7 +94,22 @@ title: Koordinator HA
   <span class="hljs-attr">activeStandby:</span>
     <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>  <span class="hljs-comment"># Set this to true to have RootCoordinators work in active-standby mode.</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="With-Docker" class="common-anchor-header">Dengan Docker</h3><p>Untuk memulai beberapa koordinator dan membuatnya bekerja dalam mode siaga-aktif, Anda dapat menambahkan beberapa definisi ke berkas <code translate="no">docker-compose</code> yang Anda gunakan untuk memulai klaster Milvus.</p>
+<h3 id="With-Docker" class="common-anchor-header">Dengan Docker<button data-href="#With-Docker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk memulai beberapa koordinator dan membuatnya bekerja dalam mode siaga-aktif, Anda dapat menambahkan beberapa definisi ke berkas <code translate="no">docker-compose</code> yang Anda gunakan untuk memulai klaster Milvus.</p>
 <p>Cuplikan kode berikut ini menggunakan RootCoord sebagai contoh. Anda dapat melakukan hal yang sama pada koordinator jenis lain.</p>
 <pre><code translate="no" class="language-yaml">  <span class="hljs-attr">rootcoord:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
@@ -114,12 +144,27 @@ title: Koordinator HA
 <span class="hljs-comment">#      - &quot;pulsar&quot;</span>
 <span class="hljs-comment">#      - &quot;minio&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="With-MacLinux-shell" class="common-anchor-header">Dengan shell Mac/Linux</h3><p>Untuk memulai beberapa koordinator dan membuatnya bekerja dalam mode siaga aktif, Anda dapat</p>
+<h3 id="With-MacLinux-shell" class="common-anchor-header">Dengan shell Mac/Linux<button data-href="#With-MacLinux-shell" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk memulai beberapa koordinator dan membuatnya bekerja dalam mode siaga aktif, Anda dapat</p>
 <ol>
 <li><p>Unduh kode sumber Milvus ke drive lokal Anda, dan <a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">mulai sebuah cluster Milvus dari kode sumber</a> sebagai berikut:</p>
 <pre><code translate="no" class="language-shell">sudo ./scripts/start_cluster.sh
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus akan berjalan dengan hanya satu koordinator dari setiap jenis pada akhir langkah ini.</p></li>
+<p>Milvus akan berjalan dengan hanya satu koordinator untuk setiap jenis pada akhir langkah ini.</p></li>
 <li><p>Perbarui <code translate="no">milvus.yaml</code> untuk mengubah nomor port dari koordinator setiap jenis. Berikut ini menggunakan <strong>rootCoord</strong> sebagai contoh.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">rootCoord:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span>

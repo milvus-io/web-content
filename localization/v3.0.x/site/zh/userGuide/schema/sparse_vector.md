@@ -35,10 +35,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>稀疏向量是一种特殊的高维向量，其中大部分元素为零，只有少数维度具有非零值。如下图所示，稠密向量通常表示为连续数组，其中每个位置都有一个值（例如<code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code> ）。相比之下，稀疏向量只存储非零元素及其维度的索引，通常以<code translate="no">{ index: value}</code> 的键值对表示（如<code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code> ）。</p>
+    </button></h2><p>稀疏向量是一种特殊的高维向量，其中大部分元素为零，只有少数维度的值不为零。如下图所示，稠密向量通常表示为连续数组，其中每个位置都有一个值（例如<code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code> ）。相比之下，稀疏向量只存储非零元素及其维度的索引，通常以<code translate="no">{ index: value}</code> 的键值对表示（如<code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code> ）。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
    </span> <span class="img-wrapper"> <span>稀疏向量表示法</span> </span></p>
 <p>通过标记化和评分，文档可以表示为词袋向量，其中每个维度对应词汇表中的一个特定单词。只有文档中出现的单词才有非零值，从而形成稀疏向量表示法。稀疏向量可通过两种方法生成：</p>
 <ul>
@@ -48,7 +48,7 @@ summary: >-
 <p>稀疏向量和原文可以存储在 Milvus 中，以便高效检索。下图概述了整个流程。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
    </span> <span class="img-wrapper"> <span>稀疏向量工作流程</span> </span></p>
 <div class="alert note">
 <p>除了稀疏向量，Milvus 还支持密集向量和二进制向量。密集向量是捕捉深层语义关系的理想选择，而二进制向量则在快速相似性比较和重复内容删除等场景中表现出色。更多信息，请参阅<a href="/docs/zh/dense-vector.md">密集向量</a>和<a href="/docs/zh/binary-vector.md">二进制向量</a>。</p>

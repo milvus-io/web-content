@@ -63,7 +63,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">환경 준비하기</h3><p>LLM 서비스로 Together AI를 사용해야 하므로 먼저 공식 홈페이지에 로그인하여 <a href="https://api.together.xyz/settings/api-keys">API 키를</a> 신청하고 환경 변수로 <code translate="no">TOGETHER_API_KEY</code> 을 설정해야 합니다.</p>
+    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">환경 준비하기<button data-href="#Prepare-the-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>LLM 서비스로 Together AI를 사용해야 하므로 먼저 공식 홈페이지에 로그인하여 <a href="https://api.together.xyz/settings/api-keys">API 키를</a> 신청하고 환경 변수로 <code translate="no">TOGETHER_API_KEY</code> 을 설정해야 합니다.</p>
 <p>라마 스택 소스 코드 복제</p>
 <pre><code translate="no" class="language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/meta-llama/llama-stack.git
 $ <span class="hljs-built_in">cd</span> llama-stack
@@ -96,13 +111,28 @@ $ pip install -e .
 <li>Milvus의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">Zilliz Cloud를</a> 사용하려면 Zilliz Cloud의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">공용 엔드포인트와 API 키에</a> 해당하는 <code translate="no">uri</code> 및 <code translate="no">token</code> 을 조정하세요.</li>
 </ul></li>
 </ul>
-<h3 id="Build-distribution-from-the-template" class="common-anchor-header">템플릿에서 배포 빌드하기</h3><p>다음 명령어를 실행하여 배포를 빌드합니다:</p>
+<h3 id="Build-distribution-from-the-template" class="common-anchor-header">템플릿에서 배포 빌드하기<button data-href="#Build-distribution-from-the-template" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 명령어를 실행하여 배포를 빌드합니다:</p>
 <pre><code translate="no" class="language-bash">$ llama stack build --template together --image-type conda
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">~/.llama/distributions/together/together-run.yaml</code> 에 파일이 생성됩니다. 그런 다음 이 명령을 실행하여 서버를 시작합니다:</p>
 <pre><code translate="no" class="language-bash">$ llama stack run --image-type conda ~/.llama/distributions/together/together-run.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>모든 것이 순조롭게 진행되면 포트 8321에서 라마 스택 서버가 성공적으로 실행되는 것을 볼 수 있습니다.</p>
+<p>모든 것이 순조롭게 진행되면 포트 8321에서 라마 스택 서버가 성공적으로 실행되는 것을 볼 수 있을 것입니다.</p>
 <h2 id="Perform-RAG-from-client" class="common-anchor-header">클라이언트에서 RAG 수행<button data-href="#Perform-RAG-from-client" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

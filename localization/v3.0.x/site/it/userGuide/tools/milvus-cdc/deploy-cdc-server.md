@@ -62,19 +62,49 @@ title: Distribuzione del server CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Obtain-the-Milvus-CDC-config-file" class="common-anchor-header">Ottenere il file di configurazione di Milvus-CDC</h3><p>Clonare il <a href="https://github.com/zilliztech/milvus-cdc">repo Milvus-CDC</a> e navigare nella directory <code translate="no">milvus-cdc/server/configs</code> per accedere al file di configurazione <code translate="no">cdc.yaml</code>.</p>
+    </button></h2><h3 id="Obtain-the-Milvus-CDC-config-file" class="common-anchor-header">Ottenere il file di configurazione di Milvus-CDC<button data-href="#Obtain-the-Milvus-CDC-config-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Clonare il <a href="https://github.com/zilliztech/milvus-cdc">repo Milvus-CDC</a> e navigare nella directory <code translate="no">milvus-cdc/server/configs</code> per accedere al file di configurazione <code translate="no">cdc.yaml</code>.</p>
 <pre><code translate="no" class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/milvus-cdc.git
 
 <span class="hljs-built_in">cd</span> milvus-cdc/server/configs
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Edit-the-config-file" class="common-anchor-header">Modificare il file di configurazione</h3><p>Nella directory <code translate="no">milvus-cdc/server/configs</code>, modificare il file <code translate="no">cdc.yaml</code> per personalizzare le configurazioni relative al metastore Milvus-CDC e ai dettagli di connessione del Milvus di origine.</p>
+<h3 id="Edit-the-config-file" class="common-anchor-header">Modificare il file di configurazione<button data-href="#Edit-the-config-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nella directory <code translate="no">milvus-cdc/server/configs</code>, modificare il file <code translate="no">cdc.yaml</code> per personalizzare le configurazioni relative al metastore Milvus-CDC e ai dettagli di connessione del Milvus di origine.</p>
 <ul>
 <li><p><strong>Configurazione del metastore</strong>:</p>
 <ul>
 <li><p><code translate="no">metaStoreConfig.storeType</code>: Tipo di metastore per Milvus-CDC. I valori possibili sono <code translate="no">etcd</code> o <code translate="no">mysql</code>.</p></li>
 <li><p><code translate="no">metaStoreConfig.etcdEndpoints</code>: Indirizzo per la connessione all'etcd di Milvus-CDC. Richiesto se <code translate="no">storeType</code> è impostato su <code translate="no">etcd</code>.</p></li>
 <li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>: Indirizzo di connessione del database MySQL per il server Milvus-CDC. Richiesto se <code translate="no">storeType</code> è impostato su <code translate="no">mysql</code>.</p></li>
-<li><p><code translate="no">metaStoreConfig.rootPath</code>: Percorso radice del metastore Milvus-CDC. Questa configurazione consente la multi-tenancy, permettendo a più servizi CDC di utilizzare la stessa istanza etcd o MySQL, pur ottenendo l'isolamento attraverso percorsi radice diversi.</p></li>
+<li><p><code translate="no">metaStoreConfig.rootPath</code>: Percorso della radice del metastore Milvus-CDC. Questa configurazione consente la multi-tenancy, permettendo a più servizi CDC di utilizzare la stessa istanza etcd o MySQL, pur ottenendo l'isolamento attraverso percorsi radice diversi.</p></li>
 </ul>
 <p>Esempio di configurazione:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># cdc meta data config</span>
@@ -99,7 +129,7 @@ title: Distribuzione del server CDC
 <li><p><strong>Operatore</strong>: Valore predefinito: <code translate="no">&lt;release_name&gt;</code>.</p></li>
 </ul></li>
 <li><p><code translate="no">replicateChan</code>Nome del canale di replica di Milvus, che è <code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> nel file milvus.yaml.</p></li>
-<li><p><code translate="no">sourceConfig.pulsar</code>: Configurazioni di Pulsar per il Milvus di origine. Se il Milvus di origine utilizza Kafka per l'archiviazione dei messaggi, rimuovere tutte le configurazioni relative a Pulsar. Per ulteriori informazioni, fare riferimento a <a href="https://milvus.io/docs/configure_pulsar.md">Configurazioni relative a Pulsar</a>.</p></li>
+<li><p><code translate="no">sourceConfig.pulsar</code>: Configurazioni Pulsar per il Milvus di origine. Se il Milvus di origine utilizza Kafka per l'archiviazione dei messaggi, rimuovere tutte le configurazioni relative a Pulsar. Per ulteriori informazioni, fare riferimento a <a href="https://milvus.io/docs/configure_pulsar.md">Configurazioni relative a Pulsar</a>.</p></li>
 <li><p><code translate="no">sourceConfig.kafka.address</code>: Indirizzo Kafka per il Milvus di origine. Togliere il commento a questa configurazione se il Milvus di origine usa Kafka per l'archiviazione dei messaggi.</p></li>
 </ul></li>
 </ul>
@@ -128,7 +158,22 @@ title: Distribuzione del server CDC
 <span class="hljs-comment">#  kafka:</span>
 <span class="hljs-comment">#    address: 127.0.0.1:9092</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">Compilazione del server Milvus-CDC</h3><p>Dopo aver salvato il file <code translate="no">cdc.yaml</code>, navigare nella directory <code translate="no">milvus-cdc</code> ed eseguire uno dei seguenti comandi per compilare il server:</p>
+<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">Compilazione del server Milvus-CDC<button data-href="#Compile-the-Milvus-CDC-server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dopo aver salvato il file <code translate="no">cdc.yaml</code>, navigare nella directory <code translate="no">milvus-cdc</code> ed eseguire uno dei seguenti comandi per compilare il server:</p>
 <ul>
 <li><p>Per un file binario:</p>
 <pre><code translate="no" class="language-bash">make build
@@ -138,7 +183,22 @@ title: Distribuzione del server CDC
 <button class="copy-code-btn"></button></code></pre>
 <p>Per un'immagine Docker, montare il file compilato su <code translate="no">/app/server/configs/cdc.yaml</code> all'interno del contenitore.</p></li>
 </ul>
-<h3 id="Start-the-server" class="common-anchor-header">Avviare il server</h3><ul>
+<h3 id="Start-the-server" class="common-anchor-header">Avviare il server<button data-href="#Start-the-server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Utilizzando il file binario</p>
 <p>Navigare nella directory contenente il binario <code translate="no">milvus-cdc</code> e nella directory <code translate="no">configs</code> con il file <code translate="no">cdc.yaml</code>, quindi avviare il server:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># dir tree</span>

@@ -42,7 +42,7 @@ summary: >-
 <p>Схема коллекции имеет первичный ключ, максимум четыре векторных поля и несколько скалярных полей. На следующей схеме показано, как сопоставить статью со списком полей схемы.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
    </span> <span class="img-wrapper"> <span>Проектирование схемы</span> </span></p>
 <p>Проектирование модели данных поисковой системы включает в себя анализ потребностей бизнеса и абстрагирование информации в виде модели данных, выраженной в виде схемы. Например, поиск по фрагменту текста должен быть "проиндексирован" путем преобразования буквенной строки в вектор с помощью "встраивания" и включения векторного поиска. Помимо этого основного требования, может потребоваться хранение других свойств, таких как временная метка публикации и автор. Эти метаданные позволяют уточнять семантический поиск с помощью фильтрации, возвращая только тексты, опубликованные после определенной даты или определенным автором. Вы также можете получить эти скаляры вместе с основным текстом, чтобы отобразить результат поиска в приложении. Для упорядочивания этих фрагментов текста каждому из них должен быть присвоен уникальный идентификатор, выраженный в виде целого числа или строки. Эти элементы необходимы для реализации сложной логики поиска.</p>
 <p>Обратитесь к <a href="/docs/ru/schema-hands-on.md">Schema Design Hands-On</a>, чтобы узнать, как создать хорошо продуманную схему.</p>
@@ -143,7 +143,7 @@ export schema='{​
 }'​
 
 </code></pre>
-<p>При добавлении поля вы можете явно указать его как первичное, установив для свойства <code translate="no">is_primary</code> значение <code translate="no">True</code>. По умолчанию первичное поле принимает значения <strong>Int64</strong>. В этом случае значением первичного поля должны быть целые числа, как в <code translate="no">12345</code>. Если вы решили использовать в первичном поле значения <strong>VarChar</strong>, то значения должны быть строками, как в <code translate="no">my_entity_1234</code>.</p>
+<p>При добавлении поля вы можете явно указать его как первичное, установив для свойства <code translate="no">is_primary</code> значение <code translate="no">True</code>. По умолчанию первичное поле принимает значения <strong>Int64</strong>. В этом случае значение первичного поля должно быть целым числом, как на <code translate="no">12345</code>. Если вы решили использовать в первичном поле значения <strong>VarChar</strong>, то значение должно быть строкой, как на <code translate="no">my_entity_1234</code>.</p>
 <p>Вы также можете установить для свойства <code translate="no">autoId</code> значение <code translate="no">True</code>, чтобы Milvus автоматически выделял значения первичного поля при вставке данных.</p>
 <p>Подробнее см. в разделе <a href="/docs/ru/primary-field.md">Первичное поле и автоидентификация</a>.</p>
 <h2 id="Add-Vector-Fields​" class="common-anchor-header">Добавление векторных полей<button data-href="#Add-Vector-Fields​" class="anchor-icon" translate="no">
@@ -229,7 +229,22 @@ export schema=&quot;{​
         ></path>
       </svg>
     </button></h2><p>В распространенных случаях вы можете использовать скалярные поля для хранения метаданных векторных вкраплений, хранящихся в Milvus, и проводить поиск по ANN с фильтрацией метаданных для повышения корректности результатов поиска. Milvus поддерживает несколько типов скалярных полей, включая <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, Float, <strong>Double</strong>, <strong>Array</strong> и JSON.</p>
-<h3 id="Add-String-Fields​" class="common-anchor-header">Добавление строковых полей</h3><p>В Milvus вы можете использовать поля VarChar для хранения строк. Подробнее о поле VarChar см. в разделе <a href="/docs/ru/string.md">"Строковое поле"</a>.</p>
+<h3 id="Add-String-Fields​" class="common-anchor-header">Добавление строковых полей<button data-href="#Add-String-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В Milvus вы можете использовать поля VarChar для хранения строк. Подробнее о поле VarChar см. в разделе <a href="/docs/ru/string.md">"Строковое поле"</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -271,7 +286,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Number-Fields​" class="common-anchor-header">Добавление числовых полей</h3><p>Milvus поддерживает следующие типы чисел: <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code> и <code translate="no">Double</code>. Подробнее о числовых полях см. в разделе <a href="/docs/ru/number.md">Числовое поле</a>.</p>
+<h3 id="Add-Number-Fields​" class="common-anchor-header">Добавление числовых полей<button data-href="#Add-Number-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus поддерживает следующие типы чисел: <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code> и <code translate="no">Double</code>. Подробнее о числовых полях см. в разделе <a href="/docs/ru/number.md">Числовое поле</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -308,7 +338,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Boolean-Fields​" class="common-anchor-header">Добавление булевых полей</h3><p>Milvus поддерживает булевы поля. Следующие фрагменты кода демонстрируют, как добавить булево поле.</p>
+<h3 id="Add-Boolean-Fields​" class="common-anchor-header">Добавление булевых полей<button data-href="#Add-Boolean-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus поддерживает булевы поля. В следующих фрагментах кода показано, как добавить булево поле.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -346,7 +391,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-JSON-fields​" class="common-anchor-header">Добавление полей JSON</h3><p>В поле JSON обычно хранятся полуструктурированные данные в формате JSON. Подробнее о полях JSON читайте в разделе <a href="/docs/ru/use-json-fields.md">Поле JSON</a>.</p>
+<h3 id="Add-JSON-fields​" class="common-anchor-header">Добавление полей JSON<button data-href="#Add-JSON-fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В поле JSON обычно хранятся полуструктурированные данные в формате JSON. Подробнее о полях JSON читайте в разделе <a href="/docs/ru/use-json-fields.md">Поле JSON</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -385,7 +445,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Array-Fields​" class="common-anchor-header">Добавление полей массива</h3><p>Поле массива хранит список элементов. Типы данных всех элементов в поле массива должны быть одинаковыми. Подробнее о полях массива см. в разделе <a href="/docs/ru/array_data_type.md">Поле массива</a>.</p>
+<h3 id="Add-Array-Fields​" class="common-anchor-header">Добавление полей массива<button data-href="#Add-Array-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Поле массива хранит список элементов. Типы данных всех элементов в поле массива должны быть одинаковыми. Подробнее о полях массива см. в разделе <a href="/docs/ru/array_data_type.md">Поле массива</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​

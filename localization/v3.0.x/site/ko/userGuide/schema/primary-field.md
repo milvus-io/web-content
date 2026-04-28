@@ -41,7 +41,7 @@ summary: >-
 <p>기본 요구 사항:</p>
 <ul>
 <li><p>각 컬렉션에는 <strong>정확히 하나의</strong> 기본 필드가 있어야 합니다.</p></li>
-<li><p>기본 필드 값은 null이 될 수 없습니다.</p></li>
+<li><p>기본 필드 값은 null일 수 없습니다.</p></li>
 <li><p>데이터 유형은 생성 시 지정해야 하며 나중에 변경할 수 없습니다.</p></li>
 </ul>
 <h2 id="Supported-data-types" class="common-anchor-header">지원되는 데이터 유형<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
@@ -98,7 +98,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>자동 ID</p></td>
-     <td><p>Milvus는 삽입하거나 가져온 엔티티에 대한 고유 식별자를 자동으로 생성합니다.</p></td>
+     <td><p>Milvus는 삽입되거나 가져온 엔티티에 대한 고유 식별자를 자동으로 생성합니다.</p></td>
      <td><p>ID를 수동으로 관리할 필요가 없는 대부분의 시나리오에 적합합니다.</p></td>
    </tr>
    <tr>
@@ -692,7 +692,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
 <button class="copy-code-btn"></button></code></pre>
 <p>이 구성에서 <code translate="no">clusterID</code> 은 AutoID 생성에 사용되는 고유 식별자를 0에서 7까지 지정합니다(최대 8개 클러스터 지원).</p>
 <div class="alert note">
-<p>Milvus는 내부적으로 비트 반전을 처리하여 향후 ID 중복 없이 확장할 수 있습니다. 클러스터 ID를 설정하는 것 외에는 수동 구성이 필요하지 않습니다.</p>
+<p>Milvus는 내부적으로 비트 반전을 처리하여 향후 ID 중복 없이 확장할 수 있습니다. 클러스터 ID를 설정하는 것 외에 수동 구성이 필요하지 않습니다.</p>
 </div>
 <h2 id="Reference-How-AutoID-works" class="common-anchor-header">참조: AutoID 작동 방식<button data-href="#Reference-How-AutoID-works" class="anchor-icon" translate="no">
       <svg translate="no"

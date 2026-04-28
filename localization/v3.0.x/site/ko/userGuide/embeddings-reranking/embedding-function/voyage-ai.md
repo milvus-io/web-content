@@ -126,7 +126,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>API 키를 <code translate="no">milvus.yaml</code>; Milvus는 시작 시 키를 읽고 동일한 공급자에 대한 모든 환경 변수를 재정의합니다.</p>
+    </button></h3><p>API 키를 <code translate="no">milvus.yaml</code>; Milvus는 시작 시 해당 키를 읽고 동일한 공급자에 대한 모든 환경 변수를 재정의합니다.</p>
 <ol>
 <li><p>**아래에 키를 선언하세요. <code translate="no">credential:</code></p>
 <p>하나 또는 여러 개의 API 키를 나열할 수 있으며, 각 키에 나중에 참조할 레이블을 지정할 수 있습니다.</p>
@@ -139,7 +139,7 @@ beta: Milvus 2.6.x
 <button class="copy-code-btn"></button></code></pre>
 <p>여기에 API 키를 넣으면 재시작 시에도 지속되며 레이블을 변경하는 것만으로 키를 전환할 수 있습니다.</p></li>
 <li><p><strong>Milvus에 서비스 호출에 사용할 키 알려주기</strong></p>
-<p>동일한 파일에서 Voyage AI 제공업체가 사용하려는 레이블을 가리키세요.</p>
+<p>같은 파일에서 Voyage AI 제공업체가 사용하려는 레이블을 가리키세요.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
@@ -187,7 +187,7 @@ beta: Milvus 2.6.x
     <span class="hljs-comment"># Set the environment variable pointing to the Voyage AI API key inside the container</span>
     <span class="hljs-attr">MILVUSAI_VOYAGEAI_API_KEY:</span> <span class="hljs-string">&lt;MILVUSAI_VOYAGEAI_API_KEY&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">environment:</code> 블록은 호스트 OS는 그대로 둔 채 Milvus 컨테이너에만 키를 삽입합니다. 자세한 내용은 <a href="/docs/ko/configure-docker.md#Configure-Milvus-with-Docker-Compose">Docker Compose로 Milvus 구성을</a> 참조하세요.</p>
+<p><code translate="no">environment:</code> 블록은 호스트 OS는 그대로 두고 Milvus 컨테이너에만 키를 삽입합니다. 자세한 내용은 <a href="/docs/ko/configure-docker.md#Configure-Milvus-with-Docker-Compose">Docker Compose로 Milvus 구성을</a> 참조하세요.</p>
 <h2 id="Use-embedding-function" class="common-anchor-header">임베딩 기능 사용<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

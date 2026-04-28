@@ -24,12 +24,12 @@ title: 效能常見問題
 <p>以下圖表是在 sift50m 資料集和 IVF_SQ8 索引上執行測試的結果，其中比較了不同<code translate="no">nlist</code>/<code translate="no">nprobe</code> 對的召回率和查詢效能。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/accuracy_nlist_nprobe.png" alt="Accuracy test" class="doc-image" id="accuracy-test" />
-   </span> <span class="img-wrapper"> <span>精確度測試</span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/performance_nlist_nprobe.png" alt="Performance test" class="doc-image" id="performance-test" /><span>效能測試</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/accuracy_nlist_nprobe.png" alt="Accuracy test" class="doc-image" id="accuracy-test" />
+   </span> <span class="img-wrapper"> <span>精確度測試</span> </span> <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/performance_nlist_nprobe.png" alt="Performance test" class="doc-image" id="performance-test" /><span>效能測試</span> </span></p>
 <h4 id="Why-do-queries-sometimes-take-longer-on-smaller-datasets" class="common-anchor-header">為什麼有時候在較小的資料集上查詢需要較長的時間？</h4><p>查詢作業是在區段上進行的。索引可減少查詢資料段所需的時間。如果資料段沒有索引，Milvus 就會對原始資料進行暴力搜尋，大大增加查詢時間。</p>
 <p>因此，在小型資料集（集合）上查詢通常需要較長的時間，因為它尚未建立索引。這是因為其區段的大小尚未達到<code translate="no">rootCoord.minSegmentSizeToEnableindex</code> 所設定的索引建立臨界值。呼叫<code translate="no">create_index()</code> ，強制 Milvus 為已達到臨界值但尚未自動建立索引的區段建立索引，可大幅改善查詢效能。</p>
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">哪些因素影響 CPU 使用量？</h4><p>當 Milvus 建立索引或執行查詢時，CPU 使用量會增加。一般而言，除了使用 Annoy（在單一線程上執行）外，索引建立都是 CPU 密集型的。</p>
-<p>當執行查詢時，CPU 使用量會受到<code translate="no">nq</code> 和<code translate="no">nprobe</code> 的影響。當<code translate="no">nq</code> 和<code translate="no">nprobe</code> 較小的時候，並發量會很低，CPU 使用量也會保持在低水平。</p>
+<p>當執行查詢時，CPU 使用量會受到<code translate="no">nq</code> 和<code translate="no">nprobe</code> 的影響。當<code translate="no">nq</code> 和<code translate="no">nprobe</code> 較小的時候，並發量會很低，CPU 使用量也會維持在低水平。</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">同時插入資料和搜尋會影響查詢效能嗎？</h4><p>插入作業不是 CPU 密集型作業。然而，由於新的區段可能尚未達到建立索引的臨界值，Milvus 會採用強制搜尋，這會嚴重影響查詢效能。</p>
 <p><code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> 參數決定段的索引建立臨界值，預設為 1024 行。如需詳細資訊，請參閱<a href="/docs/zh-hant/system_configuration.md">系統設定</a>。</p>
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">索引 VARCHAR 欄位可以提高刪除速度嗎？</h4><p>為 VARCHAR 欄位建立索引可以加快「Delete By Expression」作業的速度，但僅限於特定情況：</p>

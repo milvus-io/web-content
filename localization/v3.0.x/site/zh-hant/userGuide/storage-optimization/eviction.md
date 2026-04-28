@@ -22,7 +22,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>Eviction 管理 Milvus 中每個 QueryNode 的快取資源。啟用後，一旦達到資源臨界值，它會自動移除快取資料，以確保穩定的效能，並防止記憶體或磁碟耗盡。</p>
-<p>驅逐使用<a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">最近最少使用 (LRU)</a>策略來回收快取空間。元資料永遠都會被快取而不會被驅逐，因為元資料對於查詢規劃來說是不可或缺的，而且通常都很小。</p>
+<p>驅逐使用<a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">最近最少使用 (LRU)</a>政策來回收快取空間。元資料永遠都會被快取而不會被驅逐，因為元資料對於查詢規劃來說是不可或缺的，而且通常都很小。</p>
 <div class="alert note">
 <p>驅逐必須明確啟用。如果沒有設定，快取資料會繼續累積，直到資源耗盡為止。</p>
 </div>
@@ -61,7 +61,7 @@ beta: Milvus 2.6.4+
    <tr>
      <td><p>最適合</p></td>
      <td><p>可容忍高峰使用期間短暫延遲或暫停的工作負載。當異步驅逐無法快速回收空間時非常有用。</p></td>
-     <td><p>對延遲敏感的工作負載，需要流暢且可預測的查詢效能。適用於主動式資源管理。</p></td>
+     <td><p>需要流暢且可預測查詢效能的延遲敏感型工作負載。適用於主動式資源管理。</p></td>
    </tr>
    <tr>
      <td><p>注意事項</p></td>

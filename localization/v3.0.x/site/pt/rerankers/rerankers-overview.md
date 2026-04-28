@@ -42,7 +42,7 @@ title: Visão geral dos rerankers
 <li><p>Para rerankers baseados em API, obtenha uma chave de API do fornecedor e defina-a nas variáveis de ambiente ou argumentos apropriados.</p></li>
 </ul>
 </div>
-<h2 id="Example-1-Use-BGE-rerank-function-to-rerank-documents-according-to-a-query" class="common-anchor-header">Exemplo 1: Usar a função de classificação do BGE para classificar documentos de acordo com uma consulta<button data-href="#Example-1-Use-BGE-rerank-function-to-rerank-documents-according-to-a-query" class="anchor-icon" translate="no">
+<h2 id="Example-1-Use-BGE-rerank-function-to-rerank-documents-according-to-a-query" class="common-anchor-header">Exemplo 1: Usar a função de classificação da BGE para classificar documentos de acordo com uma consulta<button data-href="#Example-1-Use-BGE-rerank-function-to-rerank-documents-according-to-a-query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -118,7 +118,22 @@ bge_rf(query, documents)
 <li><code translate="no">doc_vector</code>: Embeddings vectoriais que representam o documento. Para obter orientação sobre como gerar embeddings, consulte <a href="/docs/pt/embeddings.md">Embeddings</a>.</li>
 <li><code translate="no">doc_text</code>: Conteúdo do texto do documento.</li>
 </ul>
-<h3 id="Preparations" class="common-anchor-header">Preparativos</h3><p>Antes de iniciar uma pesquisa por semelhança, é necessário estabelecer uma ligação com o Milvus, criar uma coleção e preparar e inserir dados nessa coleção. O trecho de código a seguir ilustra essas etapas preliminares.</p>
+<h3 id="Preparations" class="common-anchor-header">Preparativos<button data-href="#Preparations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Antes de iniciar uma pesquisa por semelhança, é necessário estabelecer uma ligação com o Milvus, criar uma coleção e preparar e inserir dados nessa coleção. O trecho de código a seguir ilustra essas etapas preliminares.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -152,7 +167,22 @@ client.insert(collection_name=<span class="hljs-string">&quot;test_collection&qu
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># {&#x27;insert_count&#x27;: 4, &#x27;ids&#x27;: [0, 1, 2, 3]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Conduct-a-similarity-search" class="common-anchor-header">Realizar uma pesquisa de similaridade</h3><p>Após a inserção de dados, execute pesquisas de similaridade usando o método <code translate="no">search</code>.</p>
+<h3 id="Conduct-a-similarity-search" class="common-anchor-header">Realizar uma pesquisa de similaridade<button data-href="#Conduct-a-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Após a inserção de dados, execute pesquisas de similaridade usando o método <code translate="no">search</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># search results based on our query</span>
 
 res = client.search(
@@ -174,7 +204,22 @@ doc_text: In <span class="hljs-number">1950</span>, Alan Turing published his se
 distance: <span class="hljs-number">0.5340118408203125</span>
 doc_text: The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, <span class="hljs-keyword">and</span> Cliff Shaw <span class="hljs-keyword">in</span> <span class="hljs-number">1955</span> marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-a-reranker-to-enhance-search-results" class="common-anchor-header">Utilizar um reranker para melhorar os resultados da pesquisa</h3><p>Em seguida, melhore a relevância dos resultados da pesquisa com uma etapa de reranking. Neste exemplo, usamos o <code translate="no">CrossEncoderRerankFunction</code> criado no PyMilvus para classificar os resultados para melhorar a precisão.</p>
+<h3 id="Use-a-reranker-to-enhance-search-results" class="common-anchor-header">Utilizar um reranker para melhorar os resultados da pesquisa<button data-href="#Use-a-reranker-to-enhance-search-results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Em seguida, melhore a relevância dos resultados da pesquisa com uma etapa de reranking. Neste exemplo, usamos o <code translate="no">CrossEncoderRerankFunction</code> criado no PyMilvus para classificar os resultados para melhorar a precisão.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># use reranker to rerank search results</span>
 
 <span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> CrossEncoderRerankFunction

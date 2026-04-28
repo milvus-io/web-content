@@ -115,7 +115,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
    <tr>
      <td><p><code translate="no">stop_words</code></p></td>
-     <td><p>토큰화에서 제거될 중지 단어 목록이 포함된 배열입니다. 기본값은 기본 제공되는 일반적인 영어 중지 단어 집합인 <code translate="no">_english_</code> 입니다.</p></td>
+     <td><p>토큰화에서 제거될 중지 단어 목록이 포함된 배열입니다. 기본값은 기본 제공된 일반적인 영어 중지 단어 집합인 <code translate="no">_english_</code> 입니다.</p></td>
    </tr>
 </table>
 <p>사용자 정의 중지 단어의 구성 예시:</p>

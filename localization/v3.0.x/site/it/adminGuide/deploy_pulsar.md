@@ -274,7 +274,7 @@ summary: Imparate a configurare l'archiviazione dei messaggi con Docker Compose 
       </svg>
     </button></h2><p>Milvus standalone utilizza RocksMQ come archivio messaggi predefinito. Per i passi dettagliati su come configurare Milvus con Helm, fate riferimento a <a href="/docs/it/configure-helm.md">Configurare Milvus con i grafici di Helm</a>. Per i dettagli sulle voci di configurazione relative a RocksMQ, fate riferimento a <a href="/docs/it/configure_rocksmq.md">Configurazioni relative a RocksMQ</a>.</p>
 <ul>
-<li><p>Se si avvia Milvus con RocksMQ e si vogliono modificare le sue impostazioni, si può eseguire <code translate="no">helm upgrade -f</code> con le impostazioni modificate nel seguente file YAML.</p></li>
+<li><p>Se si avvia Milvus con RocksMQ e si vogliono cambiare le sue impostazioni, si può eseguire <code translate="no">helm upgrade -f</code> con le impostazioni modificate nel seguente file YAML.</p></li>
 <li><p>Se avete installato Milvus standalone usando Helm con un message store diverso da RocksMQ e volete tornare a RocksMQ, eseguite <code translate="no">helm upgrade -f</code> con il seguente file YAML dopo aver scaricato tutte le collezioni e fermato Milvus.</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>

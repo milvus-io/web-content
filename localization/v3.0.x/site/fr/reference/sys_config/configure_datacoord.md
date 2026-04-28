@@ -43,7 +43,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Délai d'attente pour l'observation des chaînes (en secondes). La progression de la surveillance de la mise à jour du tickler d'un code de données réinitialise le délai d'attente.      </td>
+      <td>        Délai d'attente pour l'observation des canaux (en secondes). La progression de la surveillance de la mise à jour du tickler d'un code de données réinitialise le délai d'attente.      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -72,7 +72,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Les datanodes &lt;= cette version sont considérés comme des nœuds anciens, qui n'ont pas de watch() basé sur rpc. Cette valeur n'est utilisée que lors d'une mise à jour progressive, lorsque les nœuds hérités ne reçoivent pas de nouveaux canaux.      </td>
+      <td>        Les datanodes &lt;= cette version sont considérés comme des nœuds anciens, qui n'ont pas de watch() basé sur rpc. Cette valeur n'est utilisée que lors d'une mise à jour progressive, lorsque les nœuds anciens ne reçoivent pas de nouveaux canaux.      </td>
       <td>2.4.1</td>
     </tr>
   </tbody>
@@ -101,7 +101,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Durée après laquelle le gestionnaire de canal commence à équilibrer les canaux en arrière-plan.      </td>
+      <td>        Durée après laquelle le gestionnaire de canaux commence à équilibrer les canaux en arrière-plan.      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -246,7 +246,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Taille maximale d'un segment en Mo pour la collection qui a un index de disque.      </td>
+      <td>        Taille maximale d'un segment en Mo pour une collection ayant un index Disque      </td>
       <td>2048</td>
     </tr>
   </tbody>
@@ -446,7 +446,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
     </button></h2><table id="dataCoord.segment.minSizeFromIdleToSealed">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur</th>
+      <th class="width80">Description de la valeur par défaut</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
@@ -543,7 +543,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
     <tr>
       <td>
         <li>(smallProportion * segment max # of rows).</li>      
-        <li>Un compactage aura lieu sur des petits segments si le segment après compactage aura</li>      </td>
+        <li>Un compactage aura lieu sur les petits segments si le segment après compactage aura</li>      </td>
       <td>0.85</td>
     </tr>
   </tbody>
@@ -1339,7 +1339,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        ratio maximum de taille de données dans le train Kmeans, s'il est plus grand, l'échantillonnage sera réduit pour respecter cette limite.      </td>
+      <td>        ratio maximum de taille de données dans le train de Kmeans, s'il est supérieur, l'échantillonnage sera réduit pour respecter cette limite.      </td>
       <td>0.8</td>
     </tr>
   </tbody>
@@ -1455,7 +1455,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        taille maximale de la grappe / taille moyenne dans le train de Kmeans      </td>
+      <td>        taille maximale des grappes / taille moyenne dans le train de Kmeans      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1687,7 +1687,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        nombre de goroutines simultanées pour supprimer les objets s3 abandonnés      </td>
+      <td>        nombre de goroutines concurrentes pour supprimer les objets s3 abandonnés      </td>
       <td>32</td>
     </tr>
   </tbody>

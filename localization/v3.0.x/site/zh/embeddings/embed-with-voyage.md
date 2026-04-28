@@ -34,7 +34,7 @@ voyage_ef = VoyageEmbeddingFunction(
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>参数</strong>：</p>
 <ul>
-<li><code translate="no">model_name</code> (字符串）用于编码的 Voyage 模型名称。可以指定任何可用的 Voyage 模型名称，例如 , 等。如果不指定此参数，则将使用 。有关可用模型的列表，请参阅<code translate="no">voyage-3-lite</code> <code translate="no">voyage-finance-2</code> <code translate="no">voyage-3</code> <a href="https://docs.voyageai.com/docs/embeddings">Voyage 官方文档</a>。</li>
+<li><code translate="no">model_name</code> (字符串）用于编码的 Voyage 模型名称。可以指定任何可用的 Voyage 模型名称，例如<code translate="no">voyage-3-lite</code>,<code translate="no">voyage-finance-2</code> 等。如果不指定此参数，则将使用<code translate="no">voyage-3</code> 。有关可用模型的列表，请参阅<a href="https://docs.voyageai.com/docs/embeddings">Voyage 官方文档</a>。</li>
 <li><code translate="no">api_key</code> (字符串）访问 Voyage API 的 API 密钥。有关如何创建 API 密钥的信息，请参阅<a href="https://docs.voyageai.com/docs/api-key-and-installation">API 密钥和 Python 客户端</a>。</li>
 </ul>
 <p>要为文档创建 Embeddings，请使用<code translate="no">encode_documents()</code> 方法：</p>

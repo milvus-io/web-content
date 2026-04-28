@@ -30,14 +30,59 @@ title: Гибридный поиск с Milvus
 <li>Гибридный поиск: Сочетает в себе плотный и разреженный подходы, захватывая полный контекст и конкретные ключевые слова для получения исчерпывающих результатов поиска.</li>
 </ul>
 <p>Интегрируя эти методы, гибридный поиск Milvus уравновешивает семантическое и лексическое сходство, улучшая общую релевантность результатов поиска. В этом блокноте мы рассмотрим процесс настройки и использования этих стратегий поиска, подчеркнем их эффективность в различных сценариях поиска.</p>
-<h3 id="Dependencies-and-Environment" class="common-anchor-header">Зависимости и окружение</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+<h3 id="Dependencies-and-Environment" class="common-anchor-header">Зависимости и окружение<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Download-Dataset" class="common-anchor-header">Загрузить набор данных</h3><p>Для демонстрации поиска нам нужен корпус документов. Давайте воспользуемся набором данных Quora Duplicate Questions и поместим его в локальную директорию.</p>
+<h3 id="Download-Dataset" class="common-anchor-header">Загрузить набор данных<button data-href="#Download-Dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Для демонстрации поиска нам нужен корпус документов. Давайте воспользуемся набором данных Quora Duplicate Questions и поместим его в локальную директорию.</p>
 <p>Источник набора данных: <a href="https://www.quora.com/q/quoradata/First-Quora-Dataset-Release-Question-Pairs">First Quora Dataset Release: Question Pairs</a></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Run this cell to download the dataset</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget http://qim.fs.quoracdn.net/quora_duplicate_questions.tsv</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Load-and-Prepare-Data" class="common-anchor-header">Загрузка и подготовка данных</h3><p>Мы загрузим набор данных и подготовим небольшой корпус для поиска.</p>
+<h3 id="Load-and-Prepare-Data" class="common-anchor-header">Загрузка и подготовка данных<button data-href="#Load-and-Prepare-Data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Мы загрузим набор данных и подготовим небольшой корпус для поиска.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 file_path = <span class="hljs-string">&quot;quora_duplicate_questions.tsv&quot;</span>
@@ -57,7 +102,22 @@ docs = <span class="hljs-built_in">list</span>(questions)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">What is the strongest Kevlar cord?
 </code></pre>
-<h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">Использование модели BGE-M3 для вкраплений</h3><p>Модель BGE-M3 может встраивать тексты в виде плотных и разреженных векторов.</p>
+<h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">Использование модели BGE-M3 для вкраплений<button data-href="#Use-BGE-M3-Model-for-Embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Модель BGE-M3 может встраивать тексты в виде плотных и разреженных векторов.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 
 ef = BGEM3EmbeddingFunction(use_fp16=<span class="hljs-literal">False</span>, device=<span class="hljs-string">&quot;cpu&quot;</span>)
@@ -69,7 +129,22 @@ docs_embeddings = ef(docs)
 <pre><code translate="no">Fetching 30 files: 100%|██████████| 30/30 [00:00&lt;00:00, 302473.85it/s]
 Inference Embeddings: 100%|██████████| 32/32 [01:59&lt;00:00,  3.74s/it]
 </code></pre>
-<h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">Настройка коллекции и индекса Milvus</h3><p>Мы настроим коллекцию Milvus и создадим индексы для векторных полей.</p>
+<h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">Настройка коллекции и индекса Milvus<button data-href="#Setup-Milvus-Collection-and-Index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Мы настроим коллекцию Milvus и создадим индексы для векторных полей.</p>
 <div class="alert alert-info">
 <ul>
 <li>Задание uri локального файла, например "./milvus.db", является наиболее удобным методом, поскольку он автоматически использует <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> для хранения всех данных в этом файле.</li>
@@ -117,7 +192,22 @@ dense_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span cl
 col.create_index(<span class="hljs-string">&quot;dense_vector&quot;</span>, dense_index)
 col.load()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-Data-into-Milvus-Collection" class="common-anchor-header">Вставка данных в коллекцию Milvus</h3><p>Вставьте документы и их вкрапления в коллекцию.</p>
+<h3 id="Insert-Data-into-Milvus-Collection" class="common-anchor-header">Вставка данных в коллекцию Milvus<button data-href="#Insert-Data-into-Milvus-Collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Вставьте документы и их вкрапления в коллекцию.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># For efficiency, we insert 50 records in each small batch</span>
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(docs), <span class="hljs-number">50</span>):
     batched_entities = [
@@ -130,7 +220,22 @@ col.load()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Number of entities inserted: 502
 </code></pre>
-<h3 id="Enter-Your-Search-Query" class="common-anchor-header">Введите поисковый запрос</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Enter your search query</span>
+<h3 id="Enter-Your-Search-Query" class="common-anchor-header">Введите поисковый запрос<button data-href="#Enter-Your-Search-Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Enter your search query</span>
 query = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;Enter your search query: &quot;</span>)
 <span class="hljs-built_in">print</span>(query)
 
@@ -140,7 +245,22 @@ query_embeddings = ef([query])
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">How to start learning programming?
 </code></pre>
-<h3 id="Run-the-Search" class="common-anchor-header">Запустить поиск</h3><p>Сначала мы подготовим несколько полезных функций для запуска поиска:</p>
+<h3 id="Run-the-Search" class="common-anchor-header">Запустить поиск<button data-href="#Run-the-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Сначала мы подготовим несколько полезных функций для запуска поиска:</p>
 <ul>
 <li><code translate="no">dense_search</code>: только поиск по плотному векторному полю</li>
 <li><code translate="no">sparse_search</code>: поиск только по разреженному векторному полю</li>
@@ -212,7 +332,22 @@ hybrid_results = hybrid_search(
     dense_weight=<span class="hljs-number">1.0</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Display-Search-Results" class="common-anchor-header">Отображение результатов поиска</h3><p>Чтобы отобразить результаты плотного, разреженного и гибридного поиска, нам понадобятся утилиты для форматирования результатов.</p>
+<h3 id="Display-Search-Results" class="common-anchor-header">Отображение результатов поиска<button data-href="#Display-Search-Results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы отобразить результаты плотного, разреженного и гибридного поиска, нам понадобятся утилиты для форматирования результатов.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">doc_text_formatting</span>(<span class="hljs-params">ef, query, docs</span>):
     tokenizer = ef.model.tokenizer
     query_tokens_ids = tokenizer.encode(query, return_offsets_mapping=<span class="hljs-literal">True</span>)
@@ -311,4 +446,19 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>Какой бизнес лучше<span style='color:red'> начать</span> в Хайдарабаде<span style='color:red'>?</span></p>
 <p>Какая математика нужна новичку<span style='color:red'> для</span> понимания алгоритмов компьютерного<span style='color:red'> программирования?</span> Какие книги по алгоритмам подходят для начинающих<span style='color:red'>?</span></p>
 <p><span style='color:red'>Как</span> сделать так, чтобы жизнь вас устраивала, и не дать жизни издеваться <span style='color:red'>над</span> вами психически и эмоционально<span style='color:red'>?</span></p>
-<h3 id="Quick-Deploy" class="common-anchor-header">Быстрое развертывание</h3><p>Чтобы узнать, как запустить онлайн-демонстрацию с помощью этого учебника, пожалуйста, обратитесь к <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus">примеру приложения</a>.</p>
+<h3 id="Quick-Deploy" class="common-anchor-header">Быстрое развертывание<button data-href="#Quick-Deploy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы узнать, как запустить онлайн-демонстрацию с помощью этого учебника, пожалуйста, обратитесь к <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus">примеру приложения</a>.</p>

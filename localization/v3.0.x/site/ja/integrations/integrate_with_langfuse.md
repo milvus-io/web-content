@@ -1,7 +1,7 @@
 ---
 id: integrate_with_langfuse.md
 summary: >-
-  これはLlamaIndex Langfuse統合の使い方を示すシンプルなクックブックです。ドキュメントとQueryの保存にはMilvus
+  これはLlamaIndex Langfuse統合の使い方を示すシンプルなクックブックです。ドキュメントとQueryの保存にMilvus
   Liteを使用しています。
 title: Langfuseを使用したRAGの品質評価
 ---
@@ -45,7 +45,7 @@ title: Langfuseを使用したRAGの品質評価
     </button></h2><p><code translate="no">llama-index</code> と<code translate="no">langfuse</code> の両方がインストールされていることを確認してください。</p>
 <pre><code translate="no" class="language-python">$ pip install llama-index langfuse llama-index-vector-stores-milvus --upgrade
 <button class="copy-code-btn"></button></code></pre>
-<p>インテグレーションを初期化する。<a href="https://cloud.langfuse.com">Langfuseプロジェクトの設定から</a>APIキーを取得し、public_key secret_keyをキーの値に置き換えてください。この例では埋め込みとチャット補完にOpenAIを使用しているので、環境変数にOpenAIのキーも指定する必要があります。</p>
+<p>統合を初期化する。<a href="https://cloud.langfuse.com">Langfuseプロジェクトの設定から</a>APIキーを取得し、public_key secret_keyをキーの値に置き換えてください。この例では埋め込みとチャット補完にOpenAIを使用しているので、環境変数にOpenAIのキーも指定する必要があります。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-comment"># Get keys for your project from the project settings page</span>

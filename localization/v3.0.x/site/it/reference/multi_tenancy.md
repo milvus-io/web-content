@@ -38,10 +38,25 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus supporta la multi-tenancy a quattro livelli: <strong>Database</strong>, <strong>Collezione</strong>, <strong>Partizione</strong> e <strong>Chiave di partizione</strong>.</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Multi-tenancy a livello di database</h3><p>Con la multi-tenancy a livello di database, ogni tenant riceve un <a href="/docs/it/manage_databases.md">database</a> corrispondente contenente una o più collezioni.</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Multi-tenancy a livello di database<button data-href="#Database-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Con la multi-tenancy a livello di database, ogni tenant riceve un <a href="/docs/it/manage_databases.md">database</a> corrispondente contenente una o più collezioni.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>Multitenancy a livello di database</span> </span></p>
 <ul>
 <li><p><strong>Scalabilità</strong>: La strategia di multi-tenancy a livello di database supporta un massimo di 64 tenant per impostazione predefinita.</p></li>
@@ -49,10 +64,25 @@ summary: >-
 <li><p><strong>Flessibilità</strong>: Ogni database può avere collezioni con schemi diversi, offrendo un'organizzazione dei dati altamente flessibile e consentendo a ogni tenant di avere il proprio schema di dati.</p></li>
 <li><p><strong>Altri</strong>: Questa strategia supporta anche RBAC, consentendo un controllo a grana fine sull'accesso degli utenti per tenant. Inoltre, è possibile caricare o rilasciare in modo flessibile i dati per tenant specifici, per gestire efficacemente i dati caldi e freddi.</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Multi-tenancy a livello di collezione</h3><p>Con la multi-tenancy a livello di collezione, a ogni tenant viene assegnata una <a href="/docs/it/manage-collections.md">collezione</a>, offrendo un forte isolamento dei dati.</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Multi-tenancy a livello di collezione<button data-href="#Collection-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Con la multi-tenancy a livello di collezione, a ogni tenant viene assegnata una <a href="/docs/it/manage-collections.md">collezione</a>, offrendo un forte isolamento dei dati.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>Multitenancy a livello di collezione</span> </span></p>
 <ul>
 <li><p><strong>Scalabilità</strong>: Poiché un cluster può contenere fino a 65.536 collezioni per impostazione predefinita, questa strategia può ospitare lo stesso numero di tenant all'interno del cluster.</p></li>
@@ -60,10 +90,25 @@ summary: >-
 <li><p><strong>Flessibilità</strong>: Questa strategia consente a ogni raccolta di avere il proprio schema, per accogliere tenant con schemi di dati diversi.</p></li>
 <li><p><strong>Altri</strong>: Questa strategia supporta anche RBAC, consentendo un controllo granulare dell'accesso ai tenant. Inoltre, è possibile caricare o rilasciare in modo flessibile i dati per tenant specifici, per gestire efficacemente i dati caldi e freddi.</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multi-tenancy a livello di partizione</h3><p>Nella multi-tenancy a livello di partizione, ogni tenant viene assegnato a una <a href="/docs/it/manage-partitions.md">partizione</a> creata manualmente all'interno di una raccolta condivisa.</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multi-tenancy a livello di partizione<button data-href="#Partition-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nella multi-tenancy a livello di partizione, ogni tenant viene assegnato a una <a href="/docs/it/manage-partitions.md">partizione</a> creata manualmente all'interno di una raccolta condivisa.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>Multitenancy a livello di partizione</span> </span></p>
 <ul>
 <li><p><strong>Scalabilità</strong>: Una raccolta può contenere fino a 1.024 partizioni per raccolta, consentendo lo stesso numero di tenant al suo interno.</p></li>
@@ -71,10 +116,25 @@ summary: >-
 <li><p><strong>Flessibilità</strong>: Questa strategia richiede che tutti i tenant condividano lo stesso schema di dati. E le partizioni devono essere create manualmente.</p></li>
 <li><p><strong>Altri</strong>: RBAC non è supportato a livello di partizione. I tenant possono essere interrogati singolarmente o su più partizioni, il che rende questo approccio adatto a scenari che prevedono query aggregate o analisi su segmenti di tenant. Inoltre, è possibile caricare o rilasciare in modo flessibile i dati per tenant specifici, per gestire efficacemente i dati caldi e freddi.</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Multi-tenancy a livello di chiave di partizione</h3><p>Con questa strategia, tutti i tenant condividono un'unica raccolta e un unico schema, ma i dati di ciascun tenant vengono automaticamente instradati in 16 partizioni fisicamente isolate in base al valore della <a href="/docs/it/use-partition-key.md">chiave di partizione</a>. Anche se ogni partizione fisica può contenere più tenant, i dati dei diversi tenant rimangono logicamente separati.</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Multi-tenancy a livello di chiave di partizione<button data-href="#Partition-key-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Con questa strategia, tutti i tenant condividono un'unica raccolta e un unico schema, ma i dati di ciascun tenant vengono automaticamente instradati in 16 partizioni fisicamente isolate in base al valore della <a href="/docs/it/use-partition-key.md">chiave di partizione</a>. Anche se ogni partizione fisica può contenere più tenant, i dati dei diversi tenant rimangono logicamente separati.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>Livello della chiave di partizione Multi Tenancy</span> </span></p>
 <ul>
 <li><p><strong>Scalabilità</strong>: La strategia a livello di chiave di partizione offre l'approccio più scalabile, in grado di supportare milioni di tenant.</p></li>

@@ -19,14 +19,14 @@ title: 嵌入概述
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>嵌入（Embedding）是一種機器學習概念，用於將資料映射到高維空間，將語義相似的資料放在一起。嵌入模型通常是來自 BERT 或其他 Transformer 系列的深度神經網路，可以有效地以一系列稱為向量的數字來表示文字、影像和其他資料類型的語意。這些模型的一個主要特點是，向量之間在高維空間中的數學距離可以表示原始文字或影像語義的相似性。這個特性釋放了許多資訊檢索的應用，例如 Google 和 Bing 等網路搜尋引擎、電子商務網站上的產品搜尋和推薦，以及最近在生成式人工智慧 (Generative AI) 中流行的檢索擴增生成 (Retrieval Augmented Generation, RAG) 模式。</p>
+    </button></h1><p>嵌入（Embedding）是一種機器學習概念，用於將資料映射到高維空間，將語義相似的資料放在一起。嵌入模型通常是來自 BERT 或其他 Transformer 系列的深度神經網路，能有效地以一系列稱為向量的數字來表示文字、影像和其他資料類型的語意。這些模型的一個主要特點是，向量之間在高維空間的數學距離可以表示原始文字或影像語義的相似性。這個特性釋放了許多資訊檢索的應用，例如 Google 和 Bing 等網路搜尋引擎、電子商務網站上的產品搜尋和推薦，以及最近在生成式人工智慧 (Generative AI) 中流行的檢索擴增生成 (Retrieval Augmented Generation, RAG) 模式。</p>
 <p>嵌入有兩大類，各自產生不同類型的向量：</p>
 <ul>
-<li><p><strong>密集嵌入</strong>：大多數的嵌入模型將資訊表示為數百到數千維的浮點向量。由於大部分的維度都有非零值，因此輸出的向量稱為「密集」向量。舉例來說，流行的開放原始碼嵌入模型 BAAI/bge-base-en-v1.5 會輸出 768 個浮點數的向量 (768 維浮點向量)。</p></li>
+<li><p><strong>密集嵌入</strong>：大多數的嵌入模型將資訊表示為數百到數千維的浮點向量。由於大部分的維度都有非零值，因此輸出的向量稱為「密集」向量。例如，流行的開放原始碼嵌入模型 BAAI/bge-base-en-v1.5 會輸出 768 個浮點數的向量 (768 dimension float vector)。</p></li>
 <li><p><strong>稀疏嵌入</strong>：相比之下，稀疏嵌入的輸出向量大多數維度為零，即「稀疏」向量。這些向量通常有更高的維度（數萬或更多），這是由標記詞彙的大小決定的。稀疏向量可以由深度神經網路或文字庫的統計分析產生。由於稀疏嵌入向量具有可解釋性及更好的域外泛化能力，因此越來越多的開發人員採用稀疏嵌入向量作為密集嵌入向量的補充。</p></li>
 </ul>
-<p>Milvus 是專為向量資料管理、儲存和檢索而設計的向量資料庫。透過整合主流的<a href="https://milvus.io/docs/rerankers-overview.md">embeddings</a>和<a href="https://milvus.io/docs/rerankers-overview.md">reranking</a>模型，您可以輕鬆地將原始文字轉換為可搜尋的向量，或使用強大的模型對結果進行 rerank，以達到更精確的 RAG 結果。此一整合簡化了文字轉換，不需要額外的 embedding 或 reranking 元件，進而簡化 RAG 的開發與驗證。</p>
-<p>要以實際操作<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">來</a>建立嵌入，請參考<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">使用 PyMilvus 的模型來產生文字嵌入</a>。</p>
+<p>Milvus 是專為向量資料管理、儲存和檢索而設計的向量資料庫。透過整合主流的<a href="https://milvus.io/docs/rerankers-overview.md">embeddings</a>和<a href="https://milvus.io/docs/rerankers-overview.md">reranking</a>模型，您可以輕鬆地將原始文字轉換為可搜尋的向量，或使用強大的模型對結果進行 rerank，以達到更精確的 RAG 結果。這種整合簡化了文字轉換，不需要額外的 embedding 或 reranking 元件，進而簡化 RAG 的開發與驗證。</p>
+<p>要以實作方式建立嵌入，請參閱<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">使用 PyMilvus 的模型來產生文字嵌入</a>。</p>
 <table>
 <thead>
 <tr><th>嵌入函數</th><th>類型</th><th>API 或開放源碼</th></tr>

@@ -280,7 +280,7 @@ summary: Saiba como configurar o queryNode para o Milvus.
   <tbody>
     <tr>
       <td>        Ativar a pesquisa múltipla em pedaços      </td>
-      <td>verdadeiro</td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -457,7 +457,7 @@ summary: Saiba como configurar o queryNode para o Milvus.
         <li>opções: async, sync, disable. </li>      
         <li>Especifica a necessidade de aquecimento do cache de pedaços. </li>      
         <li>1. Se definido como "sync" ou "async", os dados vectoriais originais serão carregados de forma síncrona/assíncrona na </li>      
-        <li>cache de pedaços durante o processo de carregamento. Esta abordagem tem o potencial de reduzir substancialmente a latência de consulta/pesquisa</li>      
+        <li>cache de bloco durante o processo de carregamento. Esta abordagem tem o potencial de reduzir substancialmente a latência de consulta/pesquisa</li>      
         <li>durante um período específico após o carregamento, embora acompanhada de um aumento simultâneo da utilização do disco;</li>      
         <li>2. Se definido como "disable" (desativar), os dados vectoriais originais só serão carregados para a cache de blocos durante a pesquisa/consulta.</li>      </td>
       <td>desativar</td>
@@ -636,7 +636,7 @@ summary: Saiba como configurar o queryNode para o Milvus.
       <td>
         <li>Ativar o mapeamento de memória (mmap) para otimizar o tratamento de dados brutos em crescimento. </li>      
         <li>Ao ativar esse recurso, a sobrecarga de memória associada aos dados recém-adicionados ou modificados será significativamente minimizada. </li>      
-        <li>No entanto, essa otimização pode vir ao custo de uma ligeira diminuição na latência de consulta para os segmentos de dados afetados.</li>      </td>
+        <li>No entanto, esta otimização pode ter como custo uma ligeira diminuição da latência de consulta para os segmentos de dados afectados.</li>      </td>
       <td>falso</td>
     </tr>
   </tbody>
@@ -781,7 +781,7 @@ summary: Saiba como configurar o queryNode para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Tempo máximo de espera em milissegundos para aguardar o recurso de pedido de carregamento lento, 5s por defeito      </td>
+      <td>        tempo máximo de espera em milissegundos para aguardar o recurso de pedido de carregamento lento, 5s por defeito      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -868,7 +868,7 @@ summary: Saiba como configurar o queryNode para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        contagem máxima de despejos para carga preguiçosa, 1 por defeito      </td>
+      <td>        contagem máxima de evacuações para carga preguiçosa, 1 por defeito      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -1141,7 +1141,7 @@ summary: Saiba como configurar o queryNode para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Política de reencaminhamento de eliminação de fluxo contínuo do delegador, opção possível["FilterByBF", "Diret"]      </td>
+      <td>        Política de reencaminhamento da eliminação de fluxo contínuo do delegador, opção possível["FilterByBF", "Diret"]      </td>
       <td>FilterByBF</td>
     </tr>
   </tbody>

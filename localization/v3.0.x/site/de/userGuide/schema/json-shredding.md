@@ -117,7 +117,7 @@ beta: Milvus 2.6.2+
    </span> <span class="img-wrapper"> <span>Json Shredding Fluss</span> </span></p>
 <ul>
 <li><p><strong>Geschredderte Spalten</strong>: Für <strong>typisierte</strong> und <strong>dynamische</strong> <strong>Schlüssel</strong> werden die Daten in dedizierte Spalten geschrieben. Diese spaltenförmige Speicherung ermöglicht schnelle, direkte Scans bei Abfragen, da Milvus nur die benötigten Daten für einen bestimmten Schlüssel lesen kann, ohne das gesamte Dokument zu verarbeiten.</p></li>
-<li><p><strong>Gemeinsame Spalte</strong>: Alle <strong>gemeinsam genutzten Schlüssel</strong> werden zusammen in einer einzigen, kompakten binären JSON-Spalte gespeichert. Auf dieser Spalte wird ein <strong>invertierter Index für</strong> gemeinsame Schlüssel erstellt. Dieser Index ist von entscheidender Bedeutung für die Beschleunigung von Abfragen zu Schlüsseln mit geringer Häufigkeit, da er Milvus ermöglicht, die Daten schnell zu beschneiden und den Suchraum effektiv auf die Zeilen zu beschränken, die den angegebenen Schlüssel enthalten.</p></li>
+<li><p><strong>Gemeinsame Spalte</strong>: Alle <strong>gemeinsam genutzten Schlüssel</strong> werden zusammen in einer einzigen, kompakten binären JSON-Spalte gespeichert. Auf dieser Spalte wird ein <strong>invertierter Index für</strong> gemeinsame Schlüssel erstellt. Dieser Index ist entscheidend für die Beschleunigung von Abfragen nach Schlüsseln mit geringer Häufigkeit, da er Milvus ermöglicht, die Daten schnell zu beschneiden und so den Suchraum auf die Zeilen zu beschränken, die den angegebenen Schlüssel enthalten.</p></li>
 </ul>
 <h3 id="Phase-3-Query-execution" class="common-anchor-header">Phase 3: Ausführung der Abfrage<button data-href="#Phase-3-Query-execution" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -205,7 +205,7 @@ beta: Milvus 2.6.2+
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.jsonShreddingMaxColumns</code></p></td>
-     <td><p>Die maximale Anzahl von JSON-Schlüsseln, die in geshredderten Spalten gespeichert werden. </p><p>Wenn die Anzahl der häufig vorkommenden Schlüssel diese Grenze überschreitet, priorisiert Milvus die häufigsten für das Shredding, und die restlichen Schlüssel werden in der gemeinsamen Spalte gespeichert.</p></td>
+     <td><p>Die maximale Anzahl von JSON-Schlüsseln, die in geshredderten Spalten gespeichert werden. </p><p>Wenn die Anzahl der häufig vorkommenden Schlüssel diese Grenze überschreitet, priorisiert Milvus die häufigsten Schlüssel für das Shredding, und die restlichen Schlüssel werden in der gemeinsamen Spalte gespeichert.</p></td>
      <td><p>1024</p></td>
      <td><p>Dies ist für die meisten Szenarien ausreichend. Für JSON mit Tausenden von häufig vorkommenden Schlüsseln müssen Sie diesen Wert möglicherweise erhöhen, aber überwachen Sie die Speichernutzung.</p></td>
    </tr>
@@ -348,7 +348,7 @@ beta: Milvus 2.6.2+
       </svg>
     </button></h3><ul>
 <li><p><strong>Gemeinsame Schlüsselabfragen</strong> zeigen die größten Verbesserungen (bis zu 89x schneller)</p></li>
-<li><p><strong>Typisierte Schlüsselabfragen</strong> bieten konsistente 15-30-fache Leistungssteigerungen</p></li>
+<li><p><strong>Typisierte Schlüsselabfragen</strong> bieten konsistente 15-30fache Leistungssteigerungen</p></li>
 <li><p><strong>Alle Abfragetypen</strong> profitieren vom JSON Shredding ohne Leistungseinbußen.</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
@@ -369,7 +369,7 @@ beta: Milvus 2.6.2+
     </button></h2><ul>
 <li><p><strong>Wie kann ich überprüfen, ob JSON Shredding richtig funktioniert?</strong></p>
 <ol>
-<li><p>Prüfen Sie zunächst, ob die Daten mit dem Befehl <code translate="no">show segment --format table</code> im <a href="/docs/de/birdwatcher_usage_guides.md">Birdwatcher-Tool</a> erstellt wurden. Wenn dies erfolgreich war, enthält die Ausgabe <code translate="no">shredding_data/</code> und <code translate="no">shared_key_index/</code> unter dem Feld <strong>Json Key Stats</strong>.</p>
+<li><p>Überprüfen Sie zunächst, ob die Daten mit dem Befehl <code translate="no">show segment --format table</code> im <a href="/docs/de/birdwatcher_usage_guides.md">Birdwatcher-Tool</a> erstellt wurden. Wenn dies erfolgreich war, enthält die Ausgabe <code translate="no">shredding_data/</code> und <code translate="no">shared_key_index/</code> unter dem Feld <strong>Json Key Stats</strong>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/birdwatcher-output.png" alt="Birdwatcher Output" class="doc-image" id="birdwatcher-output" />

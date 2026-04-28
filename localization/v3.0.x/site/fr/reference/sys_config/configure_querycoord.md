@@ -2,7 +2,7 @@
 id: configure_querycoord.md
 related_key: configure
 group: system_configuration.md
-summary: Découvrez comment configurer queryCoord pour Milvus.
+summary: Learn how to configure queryCoord for Milvus.
 ---
 <h1 id="queryCoord-related-Configurations" class="common-anchor-header">Configurations liées à queryCoord<button data-href="#queryCoord-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -512,7 +512,7 @@ summary: Découvrez comment configurer queryCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        pas max du générateur de plan basé sur le nombre de segments      </td>
+      <td>        pas maximum du générateur de plan basé sur le nombre de segments      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -744,7 +744,7 @@ summary: Découvrez comment configurer queryCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        la valeur du délai pour l'avertissement du rapport querycoord lorsque le dernier battement de chaleur est trop ancien, en millisecondes      </td>
+      <td>        la valeur du délai pour l'avertissement du rapport de querycoord lorsque le dernier battement de chaleur est trop ancien, en millisecondes      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -854,7 +854,7 @@ summary: Découvrez comment configurer queryCoord pour Milvus.
     </button></h2><table id="queryCoord.collectionRecoverTimes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
+      <th class="width80">Description de la valeur par défaut</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>

@@ -2,7 +2,7 @@
 id: tune_consistency.md
 title: 一貫性レベル
 summary: >-
-  分散ベクトルデータベースとして、Milvusは各ノードまたはレプリカが読み書きの際に同じデータにアクセスできることを保証するために、複数の一貫性レベルを提供しています。現在サポートされている一貫性レベルには、Strong、Bounded、Eventually、Sessionがあり、Boundedはデフォルトで使用される一貫性レベルです。
+  分散ベクタデータベースとして、Milvusは各ノードまたはレプリカが読み書きの際に同じデータにアクセスできることを保証するために、複数の一貫性レベルを提供しています。現在サポートされている一貫性レベルには、Strong、Bounded、Eventually、Sessionがあり、Boundedはデフォルトの一貫性レベルです。
 ---
 <h1 id="Consistency-Level" class="common-anchor-header">一貫性レベル<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"

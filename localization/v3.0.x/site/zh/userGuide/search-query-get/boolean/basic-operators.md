@@ -294,7 +294,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要执行<strong>词缀</strong>匹配，即模式可以出现在字符串的任何位置，可以在模式的开头和结尾处都加上<code translate="no">%</code> 符号。例如，要查找<code translate="no">name</code> 中包含 "Pro "一词的所有产品：</p>
+    </button></h3><p>要执行<strong>词缀</strong>匹配，即模式可以出现在字符串的任何位置，可以在模式的开头和结尾处都加上<code translate="no">%</code> 符号。例如，要查找<code translate="no">name</code> 包含单词 "Pro "的所有产品：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%Pro%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>这将匹配名称包含子串 "Pro "的任何产品，如 "Product"、"ProLine "或 "SuperPro"。</p>
@@ -427,7 +427,7 @@ summary: >-
     </button></h3><p>查找<code translate="no">price</code> 大于 100 且<code translate="no">stock</code> 大于 50 的所有产品：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &gt; 100 AND stock &gt; 50&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-OR-to-Combine-Conditions" class="common-anchor-header">例 2：使用<code translate="no">OR</code> 合并条件<button data-href="#Example-2-Using-OR-to-Combine-Conditions" class="anchor-icon" translate="no">
+<h3 id="Example-2-Using-OR-to-Combine-Conditions" class="common-anchor-header">例 2：使用<code translate="no">OR</code> 组合条件<button data-href="#Example-2-Using-OR-to-Combine-Conditions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -481,7 +481,7 @@ summary: >-
     </button></h2><p><code translate="no">IS NULL</code> 和<code translate="no">IS NOT NULL</code> 操作符用于根据字段是否包含空值（无数据）过滤字段。</p>
 <ul>
 <li><p><code translate="no">IS NULL</code>:识别特定字段包含空值（即值不存在或未定义）的实体。</p></li>
-<li><p><code translate="no">IS NOT NULL</code>:识别特定字段包含除空值以外的任何值的实体，即字段具有有效的定义值。</p></li>
+<li><p><code translate="no">IS NOT NULL</code>:识别特定字段包含除空值以外任何值的实体，即字段具有有效的定义值。</p></li>
 </ul>
 <div class="alert note">
 <p>操作符不区分大小写，因此可以使用<code translate="no">IS NULL</code> 或<code translate="no">is null</code> ，以及<code translate="no">IS NOT NULL</code> 或<code translate="no">is not null</code> 。</p>
@@ -681,7 +681,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 提供了一系列基本操作符，让您可以灵活地过滤和查询数据。通过结合比较、范围、算术和逻辑操作符，您可以创建功能强大的过滤表达式，以缩小搜索结果的范围，并高效检索所需的数据。</p>
+    </button></h2><p>Milvus 提供了一系列基本操作符，让您可以灵活地过滤和查询数据。通过结合比较、范围、算术和逻辑操作符，您可以创建功能强大的过滤表达式，从而缩小搜索结果的范围，并高效检索所需的数据。</p>
 <h2 id="FAQ" class="common-anchor-header">常见问题<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -27,7 +27,7 @@ beta: Milvus v2.5.15+
         ></path>
       </svg>
     </button></h1><p><code translate="no">language_identifier</code> es un tokenizador especializado diseñado para mejorar las capacidades de búsqueda de texto de Milvus automatizando el proceso de análisis del idioma. Su función principal es detectar el idioma de un campo de texto y, a continuación, aplicar dinámicamente un analizador preconfigurado que sea el más adecuado para ese idioma. Esto es especialmente valioso para las aplicaciones que manejan varios idiomas, ya que elimina la necesidad de asignar manualmente un idioma a cada entrada.</p>
-<p>Al dirigir de forma inteligente los datos de texto a la cadena de procesamiento adecuada, <code translate="no">language_identifier</code> agiliza la entrada de datos multilingües y garantiza una tokenización precisa para las posteriores operaciones de búsqueda y recuperación.</p>
+<p>Al dirigir de forma inteligente los datos de texto al proceso de procesamiento adecuado, <code translate="no">language_identifier</code> agiliza la entrada de datos multilingües y garantiza una tokenización precisa para las posteriores operaciones de búsqueda y recuperación.</p>
 <h2 id="Language-detection-workflow" class="common-anchor-header">Flujo de trabajo de detección de idiomas<button data-href="#Language-detection-workflow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +46,7 @@ beta: Milvus v2.5.15+
     </button></h2><p><code translate="no">language_identifier</code> realiza una serie de pasos para procesar una cadena de texto, un flujo de trabajo que es fundamental para que los usuarios comprendan cómo configurarlo correctamente.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
    </span> <span class="img-wrapper"> <span>Flujo de trabajo de detección de idioma</span> </span></p>
 <ol>
 <li><p><strong>Entrada:</strong> El flujo de trabajo comienza con una cadena de texto como entrada.</p></li>

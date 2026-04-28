@@ -204,7 +204,7 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><p><code translate="no">IN</code>: Utilizzati per trovare valori all'interno di un insieme o di un intervallo specifico.</p></li>
-<li><p><code translate="no">LIKE</code>: Utilizzati per corrispondere a un modello (soprattutto per i campi di testo).  Milvus consente di creare un indice <code translate="no">NGRAM</code> su campi VARCHAR o JSON per accelerare le query di testo. Per maggiori dettagli, consultare <a href="/docs/it/ngram.md">NGRAM</a>.</p></li>
+<li><p><code translate="no">LIKE</code>: Utilizzati per corrispondere a uno schema (soprattutto per i campi di testo).  Milvus consente di costruire un indice <code translate="no">NGRAM</code> su campi VARCHAR o JSON per accelerare le query di testo. Per maggiori dettagli, consultare <a href="/docs/it/ngram.md">NGRAM</a>.</p></li>
 </ul>
 <h3 id="Example-1-Using-IN-to-Match-Multiple-Values" class="common-anchor-header">Esempio 1: Utilizzo di <code translate="no">IN</code> per la corrispondenza di più valori<button data-href="#Example-1-Using-IN-to-Match-Multiple-Values" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -300,7 +300,7 @@ summary: >-
     </button></h3><p>Per eseguire una corrispondenza <strong>infissa</strong>, in cui il modello può apparire in qualsiasi punto della stringa, è possibile inserire il simbolo <code translate="no">%</code> sia all'inizio che alla fine del modello. Ad esempio, per trovare tutti i prodotti il cui <code translate="no">name</code> contiene la parola "Pro":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%Pro%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Questo corrisponde a tutti i prodotti il cui nome contiene la sottostringa "Pro", come "Product", "ProLine" o "SuperPro".</p>
+<p>Questo corrisponderà a tutti i prodotti il cui nome contiene la sottostringa "Pro", come "Product", "ProLine" o "SuperPro".</p>
 <h2 id="Arithmetic-Operators" class="common-anchor-header">Operatori aritmetici<button data-href="#Arithmetic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -448,7 +448,7 @@ summary: >-
     </button></h3><p>Per trovare tutti i prodotti in cui <code translate="no">color</code> è "rosso" o "blu":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color == &quot;red&quot; OR color == &quot;blue&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Using-NOT-to-Exclude-a-Condition" class="common-anchor-header">Esempio 3: Utilizzo di <code translate="no">NOT</code> per escludere una condizione<button data-href="#Example-3-Using-NOT-to-Exclude-a-Condition" class="anchor-icon" translate="no">
+<h3 id="Example-3-Using-NOT-to-Exclude-a-Condition" class="common-anchor-header">Esempio 3: Usare <code translate="no">NOT</code> per escludere una condizione<button data-href="#Example-3-Using-NOT-to-Exclude-a-Condition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -627,7 +627,7 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Esempio 1: Recupero delle entità in cui tag è nullo</strong></p>
+<p><strong>Esempio 1: Recupero di entità in cui tag è nullo</strong></p>
 <p>Per recuperare le entità in cui il campo <code translate="no">tags</code> manca o è esplicitamente impostato su <code translate="no">None</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
 
@@ -647,7 +647,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="common-anchor-header">Suggerimenti sull'uso degli operatori di base con i campi JSON e ARRAY<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="anchor-icon" translate="no">
+<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="common-anchor-header">Suggerimenti per l'uso degli operatori di base con campi JSON e ARRAY<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

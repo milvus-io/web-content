@@ -42,7 +42,7 @@ title: 'Milvus와 OpenAI 에이전트 통합: 단계별 가이드'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>OpenAI 에이전트 SDK를 사용하면 추상화가 거의 없는 가볍고 사용하기 쉬운 패키지로 에이전트 AI 앱을 구축할 수 있습니다. 이는 에이전트를 위한 이전 실험 버전인 Swarm을 프로덕션용으로 업그레이드한 것입니다. 에이전트 SDK에는 매우 작은 기본 요소 집합이 있습니다:</p>
+    </button></h2><p>OpenAI 에이전트 SDK를 사용하면 추상화가 거의 없는 가볍고 사용하기 쉬운 패키지로 에이전트 AI 앱을 구축할 수 있습니다. 이는 에이전트를 위한 이전 실험 버전인 Swarm을 프로덕션용으로 업그레이드한 것입니다. 에이전트 SDK에는 매우 작은 기본 요소 세트가 있습니다:</p>
 <ul>
 <li>에이전트: 지침과 도구를 갖춘 LLM인 에이전트</li>
 <li>핸드오프: 상담원이 특정 작업을 다른 상담원에게 위임할 수 있는 기능</li>
@@ -51,7 +51,7 @@ title: 'Milvus와 OpenAI 에이전트 통합: 단계별 가이드'
 <p>이러한 기본 요소는 Python과 함께 사용하면 도구와 에이전트 간의 복잡한 관계를 표현할 수 있을 만큼 강력하며, 가파른 학습 곡선 없이 실제 애플리케이션을 구축할 수 있습니다. 또한 SDK에는 에이전트 플로우를 시각화하고 디버깅할 수 있는 추적 기능이 내장되어 있어 이를 평가하고 애플리케이션에 맞게 모델을 미세 조정할 수도 있습니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/openai-agent.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openai-agent.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -126,7 +126,22 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 <li>문서 콘텐츠를 저장하는 텍스트 필드</li>
 <li>BM25 임베딩을 저장하는 스파스 벡터 필드</li>
 </ul>
-<h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Milvus 2.5의 전체 텍스트 검색</h3><ul>
+<h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Milvus 2.5의 전체 텍스트 검색<button data-href="#Full-Text-Search-in-Milvus-25" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>벡터 및 키워드 검색을 위한 통합 시스템(통합 API)</li>
 <li>내장된 스파스-BM25 알고리즘(Elasticsearch에서 사용하는 것과 유사하지만 벡터 기반)</li>
 <li>키워드 검색을 위한 임베딩을 수동으로 생성할 필요가 없습니다.</li>
@@ -326,7 +341,7 @@ client.insert(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'insert_count': 37, 'ids': [456486814660619140, 456486814660619141, 456486814660619142, 456486814660619143, 456486814660619144, 456486814660619145, 456486814660619146, 456486814660619147, 456486814660619148, 456486814660619149, 456486814660619150, 456486814660619151, 456486814660619152, 456486814660619153, 456486814660619154, 456486814660619155, 456486814660619156, 456486814660619157, 456486814660619158, 456486814660619159, 456486814660619160, 456486814660619161, 456486814660619162, 456486814660619163, 456486814660619164, 456486814660619165, 456486814660619166, 456486814660619167, 456486814660619168, 456486814660619169, 456486814660619170, 456486814660619171, 456486814660619172, 456486814660619173, 456486814660619174, 456486814660619175, 456486814660619176], 'cost': 0}
 </code></pre>
-<h2 id="Defining-Output-Types-for-Structured-Results" class="common-anchor-header">구조화된 결과를 위한 출력 유형 정의<button data-href="#Defining-Output-Types-for-Structured-Results" class="anchor-icon" translate="no">
+<h2 id="Defining-Output-Types-for-Structured-Results" class="common-anchor-header">구조화된 결과를 위한 출력 유형 정의하기<button data-href="#Defining-Output-Types-for-Structured-Results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -40,7 +40,7 @@ summary: >-
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/users-roles-privileges.png" alt="Users Roles Privileges" class="doc-image" id="users-roles-privileges" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/users-roles-privileges.png" alt="Users Roles Privileges" class="doc-image" id="users-roles-privileges" />
    </span> <span class="img-wrapper"> <span>사용자 역할 권한</span> </span></p>
 <p>RBAC 모델에는 네 가지 주요 구성 요소가 있습니다.</p>
 <ul>

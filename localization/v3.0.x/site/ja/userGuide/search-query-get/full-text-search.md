@@ -52,7 +52,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/full-text-search.png" alt="Full Text Search" class="doc-image" id="full-text-search" />
    </span> <span class="img-wrapper"> <span>全文検索</span> </span></p>
-<p>全文検索を使用するには、主に以下の手順に従ってください：</p>
+<p>全文検索を使用するには、以下の主な手順に従ってください：</p>
 <ol>
 <li><p><a href="/docs/ja/full-text-search.md#Create-a-collection-for-BM25-full-text-search">コレクションを作成</a>します：必要なフィールドを設定し、生テキストをスパース埋め込みに変換する BM25 関数を定義します。</p></li>
 <li><p><a href="/docs/ja/full-text-search.md#Insert-text-data">データを挿入</a>します：生テキスト文書をコレクションに取り込む。</p></li>

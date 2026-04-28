@@ -335,7 +335,7 @@ summary: 學習如何為 Milvus 設定共用。
     <tr>
       <td>
         <li>預設值：自動</li>      
-        <li>有效值：[自動、avx512、avx2、avx、sse4_2]</li>      
+        <li>有效值：[auto、avx512、avx2、avx、sse4_2］</li>      
         <li>此設定僅供 querynode 和 indexnode 使用，它選擇搜尋和建立索引的 CPU 指令集。</li>      </td>
       <td>自動</td>
     </tr>
@@ -1066,7 +1066,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        將 pk 應用於 Bloom filter 時的批次大小      </td>
+      <td>        將 pk 應用於 bloom filter 時的批次大小      </td>
       <td>1000</td>
     </tr>
   </tbody>

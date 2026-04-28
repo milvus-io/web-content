@@ -45,7 +45,7 @@ beta: Milvus 2.6.4+
 <li><p>Umum: <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
 <li><p>Berbasis jarak: <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
 </ul>
-<p>Di mana</p>
+<p>Di mana:</p>
 <ul>
 <li><p><code translate="no">operator</code> adalah salah satu operator geometri yang didukung (misalnya, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Nama operator harus menggunakan huruf besar atau huruf kecil. Untuk daftar operator yang didukung, lihat <a href="/docs/id/geometry-operators.md#Supported-geometry-operators">Operator geometri yang didukung</a>.</p></li>
 <li><p><code translate="no">geo_field</code> adalah nama bidang <code translate="no">GEOMETRY</code> Anda.</p></li>
@@ -86,7 +86,7 @@ beta: Milvus 2.6.4+
    <tr>
      <td><p><code translate="no">ST_CONTAINS(A, B)</code> / <code translate="no">st_contains(A, B)</code></p></td>
      <td><p>Mengembalikan nilai TRUE jika geometri A sepenuhnya berisi geometri B, dengan interiornya memiliki setidaknya satu titik yang sama.</p></td>
-     <td><p>Apakah sebuah batas kota (A) berisi sebuah taman tertentu (B)?</p></td>
+     <td><p>Apakah batas kota (A) berisi taman tertentu (B)?</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">ST_CROSSES(A, B)</code> / <code translate="no">st_crosses(A, B)</code></p></td>
@@ -119,7 +119,7 @@ beta: Milvus 2.6.4+
      <td><p>Temukan semua titik dalam jarak 5000 meter dari titik tertentu (B).</p></td>
    </tr>
 </table>
-<h2 id="STEQUALS--stequals" class="common-anchor-header">ST_SAMA / st_equals<button data-href="#STEQUALS--stequals" class="anchor-icon" translate="no">
+<h2 id="STEQUALS--stequals" class="common-anchor-header">ST_EQUALS / st_equals<button data-href="#STEQUALS--stequals" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -220,7 +220,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>Operator <code translate="no">ST_OVERLAPS</code> mengembalikan <code translate="no">TRUE</code> jika dua geometri dengan dimensi yang sama memiliki perpotongan parsial, di mana perpotongan itu sendiri memiliki dimensi yang sama dengan geometri asli, tetapi tidak sama dengan salah satu dari mereka.</p>
 <p><strong>Contoh</strong></p>
-<p>Anda memiliki sekumpulan wilayah penjualan yang tumpang tindih dan ingin menemukan semua wilayah yang sebagian tumpang tindih dengan zona penjualan baru yang diusulkan.</p>
+<p>Anda memiliki sekumpulan wilayah penjualan yang tumpang tindih dan ingin menemukan semua wilayah yang tumpang tindih secara parsial dengan zona penjualan baru yang diusulkan.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries that partially overlap with a polygon.</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_OVERLAPS(geo_field, &#x27;POLYGON((0 0, 0 10, 10 10, 10 0, 0 0))&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -239,7 +239,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Operator <code translate="no">ST_TOUCHES</code> mengembalikan <code translate="no">TRUE</code> jika dua batas geometri bersentuhan, tetapi interiornya tidak berpotongan. Hal ini berguna untuk mendeteksi kedekatan.</p>
+    </button></h2><p>Operator <code translate="no">ST_TOUCHES</code> mengembalikan <code translate="no">TRUE</code> jika dua batas geometri bersentuhan, tetapi interiornya tidak bersinggungan. Hal ini berguna untuk mendeteksi kedekatan.</p>
 <p><strong>Contoh</strong></p>
 <p>Jika Anda memiliki peta bidang properti dan ingin menemukan semua bidang yang berbatasan langsung dengan taman umum tanpa adanya tumpang tindih.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries that only touch a line string at their boundaries.</span>

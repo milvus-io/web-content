@@ -1,8 +1,8 @@
 ---
 id: integrate_with_langfuse.md
 summary: >-
-  هذا كتاب طبخ بسيط يوضح كيفية استخدام تكامل LlamaIndex Langfuse. يستخدم ميلفوس
-  لايت لتخزين المستندات والاستعلام.
+  هذا هو كتاب طبخ بسيط يوضح كيفية استخدام تكامل LlamaIndex Langfuse. يستخدم
+  ميلفوس لايت لتخزين المستندات والاستعلام.
 title: استخدام Langfuse لتقييم جودة RAG
 ---
 <h1 id="Using-Langfuse-to-Trace-Queries-in-RAG" class="common-anchor-header">استخدام Langfuse لتتبع الاستعلامات في RAG<button data-href="#Using-Langfuse-to-Trace-Queries-in-RAG" class="anchor-icon" translate="no">
@@ -152,7 +152,7 @@ langfuse_callback_handler.flush()
 <li><a href="https://cloud.langfuse.com/project/cloramnkj0002jz088vzn1ja4/traces/2b26fc72-044f-4b0b-a3c3-485328975161">استعلام</a></li>
 <li><a href="https://cloud.langfuse.com/project/cloramnkj0002jz088vzn1ja4/traces/72503163-2b25-4693-9cc9-56190b8e32b9">استعلام (دردشة)</a></li>
 </ol>
-<p>تتبع في لانجفيوز</p>
+<p>تتبع في لانجفوس</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://static.langfuse.com/llamaindex-langfuse-docs.gif" alt="Langfuse Traces" class="doc-image" id="langfuse-traces" />

@@ -40,7 +40,7 @@ title: Migrare tra istanze in un bucket (percorsi radice diversi)
     </button></h2><p>Il diagramma seguente illustra il processo di backup e ripristino utilizzando un bucket condiviso.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/shared-bucket-backup-and-restore.png" alt="shared-bucket-backup-and-restore.png" class="doc-image" id="shared-bucket-backup-and-restore.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/shared-bucket-backup-and-restore.png" alt="shared-bucket-backup-and-restore.png" class="doc-image" id="shared-bucket-backup-and-restore.png" />
    </span> <span class="img-wrapper"> <span>bucket condiviso-backup-e-ripristino.png</span> </span></p>
 <p>Supponiamo di avere istanze Milvus, <code translate="no">milvus_A</code> e <code translate="no">milvus_B</code>, che utilizzano entrambe il motore di archiviazione MinIO predefinito per l'archiviazione degli oggetti. Queste istanze condividono lo stesso bucket, <code translate="no">bucket_A</code>, ma memorizzano i loro dati in percorsi radice diversi: <code translate="no">files_A</code> per <code translate="no">milvus_A</code> e files_B per <code translate="no">milvus_B</code>. In questo esempio, l'obiettivo è completare le seguenti operazioni:</p>
 <ol>
@@ -81,7 +81,22 @@ title: Migrare tra istanze in un bucket (percorsi radice diversi)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">Passo 1: Preparare la configurazione</h3><p>Andare nella directory del progetto milvus-backup e creare una directory denominata configs:</p>
+    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">Passo 1: Preparare la configurazione<button data-href="#Step-1-Prepare-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Andare nella directory del progetto milvus-backup e creare una directory denominata configs:</p>
 <pre><code translate="no" class="language-shell">mkdir configs
 cd configs
 <button class="copy-code-btn"></button></code></pre>
@@ -94,7 +109,22 @@ cd configs
 ├── milvus-backup
 └── README.md
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">Passo 2: Modifica del file di configurazione</h3><p>Modificare il file backup.yaml per impostare le configurazioni appropriate per<code translate="no">milvus_A</code>:</p>
+<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">Passo 2: Modifica del file di configurazione<button data-href="#Step-2-Edit-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Modificare il file backup.yaml per impostare le configurazioni appropriate per<code translate="no">milvus_A</code>:</p>
 <ul>
 <li><p>Connessione configs</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
@@ -138,12 +168,27 @@ cd configs
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><p><code translate="no">minio.bucketName</code>: Nome del bucket utilizzato per l'archiviazione di <code translate="no">milvus_A</code>. In questo esempio, impostato su <code translate="no">bucket_A</code>.</p></li>
-<li><p><code translate="no">minio.rootPath</code>: Percorso principale all'interno del bucket in cui vengono memorizzati i dati di <code translate="no">milvus_A</code>. In questo esempio, impostato su <code translate="no">files_A</code>.</p></li>
+<li><p><code translate="no">minio.rootPath</code>: Percorso principale all'interno del bucket in cui sono memorizzati i dati di <code translate="no">milvus_A</code>. In questo esempio, impostato su <code translate="no">files_A</code>.</p></li>
 <li><p><code translate="no">minio.backupBucketName</code>: Nome del bucket utilizzato per l'archiviazione. In questo esempio, <code translate="no">milvus_A</code> e <code translate="no">milvus_B</code> condividono il bucket. Pertanto, impostare su<code translate="no">bucket_A</code>.</p></li>
 <li><p><code translate="no">minio.backupRootPath</code>: Percorso principale all'interno del bucket designato per l'archiviazione dei file di backup in <code translate="no">milvus_B</code>. In questo esempio, utilizzare un percorso diverso da <code translate="no">milvus_A</code>. Pertanto, impostare <code translate="no">backup</code>.</p></li>
 </ul></li>
 </ul>
-<h3 id="Step-3-Create-backup" class="common-anchor-header">Passo 3: Creare il backup</h3><p>Una volta salvato <code translate="no">backup.yaml</code>, creare un backup chiamato my_backup:</p>
+<h3 id="Step-3-Create-backup" class="common-anchor-header">Passo 3: Creare il backup<button data-href="#Step-3-Create-backup" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Una volta salvato <code translate="no">backup.yaml</code>, creare un backup chiamato my_backup:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup create -c coll -n my_backup
 <button class="copy-code-btn"></button></code></pre>
 <p>Questo comando crea il backup <code translate="no">bucket_A/backup/my_backup</code> nell'archivio oggetti per la raccolta <code translate="no">coll</code>.</p>
@@ -162,7 +207,22 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Configure-restoration-settings" class="common-anchor-header">Passo 1: Configurare le impostazioni di ripristino</h3><p>Ripetere il passaggio 2 per modificare le configurazioni per il ripristino di <code translate="no">milvus_B</code>, assicurandosi che <code translate="no">minio.bucketName</code> sia impostato su <code translate="no">bucket_A</code> e <code translate="no">minio.rootPath</code> su <code translate="no">files_B</code> per distinguere le posizioni di archiviazione tra le due istanze.</p>
+    </button></h2><h3 id="Step-1-Configure-restoration-settings" class="common-anchor-header">Passo 1: Configurare le impostazioni di ripristino<button data-href="#Step-1-Configure-restoration-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ripetere il passaggio 2 per modificare le configurazioni per il ripristino di <code translate="no">milvus_B</code>, assicurandosi che <code translate="no">minio.bucketName</code> sia impostato su <code translate="no">bucket_A</code> e <code translate="no">minio.rootPath</code> su <code translate="no">files_B</code> per distinguere le posizioni di archiviazione tra le due istanze.</p>
 <p>Ecco un esempio di configurazione:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
@@ -193,7 +253,22 @@ cd configs
   <span class="hljs-attr">rootPath:</span> <span class="hljs-string">&quot;files_B&quot;</span> <span class="hljs-comment"># Milvus storage root path in MinIO/S3, make it the same as your milvus instance</span>
   <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Restore-backup" class="common-anchor-header">Passo 2: Ripristino del backup</h3><p>Ripristinare il backup in <code translate="no">milvus_B</code>:</p>
+<h3 id="Step-2-Restore-backup" class="common-anchor-header">Passo 2: Ripristino del backup<button data-href="#Step-2-Restore-backup" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ripristinare il backup in <code translate="no">milvus_B</code>:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak
 <button class="copy-code-btn"></button></code></pre>
 <p>Questo comando ripristina il backup in una nuova raccolta denominata <code translate="no">coll_bak</code> in <code translate="no">milvus_B</code>, con i dati archiviati in <code translate="no">bucket_A/files_B/insert_log/[ID of new collection]</code>.</p>

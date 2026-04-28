@@ -121,7 +121,7 @@ COLLECTION = <span class="hljs-string">&quot;private_kb&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Kami mensimulasikan satu set dokumen internal perusahaan - spesifikasi produk, kebijakan, laporan pendapatan, dan dokumen API - yang tidak akan muncul di web publik. Dalam skenario nyata, dokumen-dokumen ini dapat berasal dari wiki, basis data, atau sistem manajemen dokumen internal Anda.</p>
+    </button></h2><p>Kami mensimulasikan satu set dokumen internal perusahaan - spesifikasi produk, kebijakan, laporan pendapatan, dan dokumen API - yang tidak akan muncul di web publik. Dalam skenario yang sebenarnya, dokumen-dokumen ini dapat berasal dari wiki, basis data, atau sistem manajemen dokumen internal Anda.</p>
 <pre><code translate="no" class="language-python">private_docs = [
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
@@ -248,7 +248,7 @@ results = milvus.search(
         ></path>
       </svg>
     </button></h2><p>Sebelum membangun agen, mari jelajahi fitur-fitur pencarian Exa. Exa mendukung beberapa mode pencarian yang berguna untuk berbagai skenario.</p>
-<p><strong>Pencarian semantik</strong> dengan ekstraksi konten - Exa tidak hanya dapat mengembalikan tautan tetapi juga teks artikel, sorotan utama, dan ringkasan yang dibuat oleh AI dalam satu permintaan:</p>
+<p><strong>Pencarian semantik</strong> dengan ekstraksi konten - Exa tidak hanya dapat mengembalikan tautan, tetapi juga teks artikel, sorotan utama, dan ringkasan yang dibuat oleh AI dalam satu permintaan:</p>
 <pre><code translate="no" class="language-python">web_results = exa.search_and_contents(
     query=<span class="hljs-string">&quot;latest trends in AI agents 2026&quot;</span>,
     <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;auto&quot;</span>,

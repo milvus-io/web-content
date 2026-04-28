@@ -23,7 +23,7 @@ title: Cohere einbetten
       </svg>
     </button></h1><p>Die Einbettungsmodelle von Cohere dienen zur Erzeugung von Texteinbettungen, d. h. von Listen mit Fließkommazahlen, die semantische Informationen über den Text enthalten. Diese Einbettungen können für Aufgaben wie Textklassifizierung und semantische Suche verwendet werden.</p>
 <p>Milvus lässt sich mit den Einbettungsmodellen von Cohere über die Klasse <code translate="no">CohereEmbeddingFunction</code> integrieren. Diese Klasse übernimmt die Berechnung der Einbettungen und gibt sie in einem mit Milvus kompatiblen Format zur Indizierung und Suche zurück.</p>
-<p>Um diese Funktion zu nutzen, installieren Sie die notwendigen Abhängigkeiten:</p>
+<p>Um diese Funktion zu nutzen, installieren Sie die erforderlichen Abhängigkeiten:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

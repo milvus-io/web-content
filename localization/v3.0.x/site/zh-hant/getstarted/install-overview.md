@@ -21,7 +21,7 @@ title: Milvus 部署選項概述
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 是一個高效能、可擴充的向量資料庫。它支援各種規模的使用案例，從在本機 Jupyter Notebooks 中執行的示範，到處理數百億向量的大型 Kubernetes 集群。目前，Milvus 有三種部署選項：Milvus Lite、Milvus Standalone 和 Milvus Distributed。</p>
+    </button></h1><p>Milvus 是一個高效能、可擴充的向量資料庫。它支援各種規模的使用案例，從在本機 Jupyter Notebooks 中執行的演示，到處理數百億向量的大規模 Kubernetes 集群。目前，Milvus 有三種部署選項：Milvus Lite、Milvus Standalone 和 Milvus Distributed。</p>
 <h2 id="Milvus-Lite" class="common-anchor-header">Milvus Lite<button data-href="#Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +38,7 @@ title: Milvus 部署選項概述
         ></path>
       </svg>
     </button></h2><p><a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>是一個 Python 函式庫，可以匯入您的應用程式。作為 Milvus 的輕量級版本，它非常適合在 Jupyter Notebook 或資源有限的智慧型裝置上執行快速原型。Milvus Lite 支援與其他 Milvus 部署相同的 API。與 Milvus Lite 互動的用戶端程式碼也可以在其他部署模式下與 Milvus 實體一起運作。</p>
-<p>要將 Milvus Lite 整合到您的應用程式中，請執行<code translate="no">pip install pymilvus</code> 來安裝它，並使用<code translate="no">MilvusClient(&quot;./demo.db&quot;)</code> 語句來實體化一個向量資料庫，該資料庫的本機檔案會持久化您所有的資料。如需更多詳細資訊，請參閱<a href="https://milvus.io/docs/milvus_lite.md">運行 Milvus Lite</a>。</p>
+<p>若要將 Milvus Lite 整合到您的應用程式中，請執行<code translate="no">pip install pymilvus</code> 來安裝它，並使用<code translate="no">MilvusClient(&quot;./demo.db&quot;)</code> 語句來實體化一個向量資料庫，其本地檔案會持久化您所有的資料。如需更多詳細資訊，請參閱<a href="https://milvus.io/docs/milvus_lite.md">運行 Milvus Lite</a>。</p>
 <h2 id="Milvus-Standalone" class="common-anchor-header">Milvus 單機版<button data-href="#Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,7 +93,7 @@ title: Milvus 部署選項概述
 <li><p><strong>小規模生產部署</strong></p>
 <p>對於早期階段的生產，當專案仍在尋求產品與市場的契合，敏捷性比可擴展性更重要時，Milvus Standalone 是最好的選擇。只要有足夠的機器資源，Milvus Standalone 仍可擴充至 1 億向量，同時對 DevOps 的需求遠低於維護 K8s 集群。</p></li>
 <li><p><strong>大型生產部署</strong></p>
-<p>當您的業務快速成長，資料規模超過單一伺服器的容量，是時候考慮Milvus Distributed。您可以繼續使用Milvus Standalone作為開發或暫存環境，並運行Milvus Distributed的K8s集群。這可以讓您持續處理數百億個向量，並提供針對特定工作負載調整節點大小的彈性，例如高讀取量、不常寫入或高寫入量、低讀取量的情況。</p></li>
+<p>當您的業務快速成長，資料規模超過單一伺服器的容量，是時候考慮Milvus Distributed。您可以繼續使用Milvus Standalone作為開發或暫存環境，並運行Milvus Distributed的K8s集群。這可以讓您持續處理數百億個向量，並提供針對特定工作負載調整節點大小的彈性，例如高讀取次數、低寫入次數或高寫入次數、低讀取次數的情況。</p></li>
 <li><p><strong>邊緣裝置上的本機搜尋</strong></p>
 <p>若要在邊緣裝置上搜尋私人或敏感資料，您可以在裝置上部署 Milvus Lite，而無需依賴雲端服務來進行文字或影像搜尋。這適用於專屬文件搜尋或裝置上物件偵測等情況。</p></li>
 </ul>
@@ -105,7 +105,7 @@ title: Milvus 部署選項概述
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" />
    </span> <span class="img-wrapper"> <span>選擇適合您使用情況的部署選項</span> </span></p>
 <h2 id="Comparison-on-functionalities" class="common-anchor-header">功能比較<button data-href="#Comparison-on-functionalities" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -47,14 +47,14 @@ beta: Milvus v2.5.15+
     </button></h2><p><code translate="no">language_identifier</code> esegue una serie di passaggi per elaborare una stringa di testo, un flusso di lavoro che è fondamentale per gli utenti per capire come configurarlo correttamente.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
    </span> <span class="img-wrapper"> <span>Flusso di lavoro per il rilevamento della lingua</span> </span></p>
 <ol>
 <li><p><strong>Ingresso:</strong> Il flusso di lavoro inizia con una stringa di testo come input.</p></li>
 <li><p><strong>Rilevamento della lingua:</strong> Questa stringa viene prima passata a un motore di rilevamento della lingua, che cerca di identificare la lingua. Milvus supporta due motori: <strong>whatlang</strong> e <strong>lingua</strong>.</p></li>
 <li><p><strong>Selezione dell'analizzatore:</strong></p>
 <ul>
-<li><p><strong>Successo:</strong> Se la lingua viene rilevata con successo, il sistema controlla se il nome della lingua rilevata ha un analizzatore corrispondente configurato nel dizionario <code translate="no">analyzers</code>. Se viene trovata una corrispondenza, il sistema applica l'analizzatore specificato al testo in ingresso. Ad esempio, un testo rilevato come "mandarino" viene indirizzato a un tokenizzatore <code translate="no">jieba</code>.</p></li>
+<li><p><strong>Successo:</strong> Se la lingua viene rilevata con successo, il sistema verifica se il nome della lingua rilevata ha un analizzatore corrispondente configurato nel dizionario <code translate="no">analyzers</code>. Se viene trovata una corrispondenza, il sistema applica l'analizzatore specificato al testo in ingresso. Ad esempio, un testo rilevato come "mandarino" viene indirizzato a un tokenizzatore <code translate="no">jieba</code>.</p></li>
 <li><p><strong>Fallback:</strong> Se il rilevamento fallisce, o se una lingua viene rilevata con successo ma non è stato fornito un analizzatore specifico per essa, il sistema si affida a un <strong>analizzatore</strong> predefinito preconfigurato. Questo è un punto cruciale di chiarimento: l'analizzatore <code translate="no">default</code> è un ripiego sia per il fallimento del rilevamento che per l'assenza di un analizzatore corrispondente.</p></li>
 </ul></li>
 </ol>
@@ -191,7 +191,7 @@ beta: Milvus v2.5.15+
 <ul>
 <li><p><code translate="no">analyzers</code> config set - Un dizionario contenente tutte le configurazioni dell'analizzatore, che devono includere:</p>
 <ul>
-<li><p><code translate="no">default</code> - L'analizzatore di riserva usato quando il rilevamento della lingua fallisce o non viene trovato alcun analizzatore corrispondente.</p></li>
+<li><p><code translate="no">default</code> - L'analizzatore di riserva usato quando il rilevamento della lingua fallisce o non viene trovato un analizzatore corrispondente.</p></li>
 <li><p><strong>Analizzatori specifici per la lingua</strong> - Ciascuno definito come <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code>, dove:</p>
 <ul>
 <li><p><code translate="no">analyzer_name</code> corrisponde all'output del motore di rilevamento scelto (ad esempio, <code translate="no">&quot;English&quot;</code>, <code translate="no">&quot;Japanese&quot;</code>)</p></li>
@@ -204,7 +204,7 @@ beta: Milvus v2.5.15+
 <li><p><code translate="no">identifier</code> - Specifica quale motore di rilevamento della lingua utilizzare (<code translate="no">whatlang</code> o <code translate="no">lingua</code>). Se non viene specificato, l'opzione predefinita è <code translate="no">whatlang</code> </p></li>
 <li><p><code translate="no">mapping</code> - Crea alias personalizzati per gli analizzatori, consentendo di usare nomi descrittivi invece del formato di output esatto del motore di rilevamento.</p></li>
 </ul>
-<p>Il tokenizer funziona rilevando prima la lingua del testo in ingresso, quindi selezionando l'analizzatore appropriato dalla configurazione. Se il rilevamento fallisce o se non esiste un analizzatore corrispondente, si passa automaticamente all'analizzatore <code translate="no">default</code>.</p>
+<p>Il tokenizer funziona rilevando prima la lingua del testo in ingresso, quindi selezionando l'analizzatore appropriato dalla configurazione. Se il rilevamento fallisce o non esiste un analizzatore corrispondente, passa automaticamente all'analizzatore <code translate="no">default</code>.</p>
 <h4 id="Recommended-Direct-name-matching" class="common-anchor-header">Consigliato: Corrispondenza diretta dei nomi</h4><p>I nomi degli analizzatori devono corrispondere esattamente all'output del motore di rilevamento linguistico scelto. Questo approccio è più semplice ed evita potenziali confusioni.</p>
 <p>Sia per <code translate="no">whatlang</code> che per <code translate="no">lingua</code>, utilizzare i nomi delle lingue come indicato nella rispettiva documentazione:</p>
 <ul>

@@ -277,7 +277,7 @@ Creating milvus-standalone ... done​
     </button></h3><p>После установки Docker Desktop в Windows вы можете столкнуться с ошибкой <code translate="no">Docker Engine stopped</code>, если ваш компьютер не настроен должным образом. В этом случае вам может потребоваться выполнить следующие проверки.</p>
 <ol>
 <li><p>Проверьте, включена ли виртуализация.</p>
-<p>Проверить, включена ли виртуализация, можно на вкладке <strong>"Производительность</strong> " в <strong>диспетчере задач</strong>.</p>
+<p>Проверить, включена ли виртуализация, можно на вкладке <strong>"Производительность"</strong> в <strong>диспетчере задач</strong>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />

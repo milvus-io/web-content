@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>A indexação Bitmap é uma técnica de indexação eficiente concebida para melhorar o desempenho das consultas em campos escalares de baixa cardinalidade. A cardinalidade refere-se ao número de valores distintos num campo. Os campos com menos elementos distintos são considerados de baixa cardinalidade.</p>
-<p>Este tipo de índice ajuda a reduzir o tempo de recuperação de consultas escalares, representando os valores do campo num formato binário compacto e efectuando operações bit a bit eficientes sobre eles. Em comparação com outros tipos de índices, os índices de mapa de bits têm normalmente uma maior eficiência de espaço e velocidades de consulta mais rápidas quando se trata de campos de baixa cardinalidade.</p>
+<p>Este tipo de índice ajuda a reduzir o tempo de recuperação de consultas escalares, representando os valores do campo num formato binário compacto e efectuando operações bit a bit eficientes sobre eles. Em comparação com outros tipos de índices, os índices bitmap têm normalmente uma maior eficiência de espaço e velocidades de consulta mais rápidas quando lidam com campos de baixa cardinalidade.</p>
 <h2 id="Overview" class="common-anchor-header">Descrição geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +45,7 @@ summary: >-
 <p>Considere uma coleção de documentos com os campos <strong>Categoria</strong> e <strong>Público</strong>. Queremos obter documentos que se enquadrem na categoria <strong>Técnico</strong> e que estejam abertos ao <strong>Público</strong>. Neste caso, as chaves para os nossos índices de bitmap são <strong>Tech</strong> e <strong>Public</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" />
    </span> <span class="img-wrapper"> <span>Mapa de bits</span> </span></p>
 <p>Como se mostra na figura, os índices bitmap para <strong>Categoria</strong> e <strong>Público</strong> são:</p>
 <ul>
@@ -91,7 +91,7 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Neste exemplo, criamos um índice de mapa de bits no campo <code translate="no">category</code> da coleção <code translate="no">my_collection</code>. O método <code translate="no">add_index()</code> é utilizado para especificar o nome do campo, o tipo de índice e o nome do índice.</p>
+<p>Neste exemplo, criamos um índice bitmap no campo <code translate="no">category</code> da coleção <code translate="no">my_collection</code>. O método <code translate="no">add_index()</code> é utilizado para especificar o nome do campo, o tipo de índice e o nome do índice.</p>
 <p>Uma vez criado o índice bitmap, pode utilizar o parâmetro <code translate="no">filter</code> em operações de consulta para efetuar uma filtragem escalar com base no campo indexado. Isto permite-lhe restringir eficazmente os resultados da pesquisa utilizando o índice bitmap. Para obter mais informações, consulte <a href="/docs/pt/boolean.md">Explicação sobre filtragem</a>.</p>
 <h2 id="Drop-an-index" class="common-anchor-header">Remover um índice<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -140,9 +140,9 @@ client.create_index(
 <li><p>O tipo de dados do campo deve ser um dos seguintes:</p>
 <ul>
 <li><p><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code></p></li>
-<li><p><code translate="no">ARRAY</code> (os elementos devem ser um dos seguintes: <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>)</p></li>
+<li><p><code translate="no">ARRAY</code> (os elementos têm de ser um dos seguintes: <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>)</p></li>
 </ul></li>
-<li><p>Os índices bitmap não suportam os seguintes tipos de dados:</p>
+<li><p>Os índices de bitmap não suportam os seguintes tipos de dados:</p>
 <ul>
 <li><p><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>: Os tipos de vírgula flutuante não são compatíveis com a natureza binária dos índices de bitmap.</p></li>
 <li><p><code translate="no">JSON</code>: Os tipos de dados JSON têm uma estrutura complexa que não pode ser representada de forma eficiente utilizando índices bitmap.</p></li>

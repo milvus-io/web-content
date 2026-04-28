@@ -41,7 +41,7 @@ title: Milvus Lite 로컬 실행
 <li>노트북</li>
 <li>엣지 디바이스</li>
 </ul>
-<p>Milvus Lite는 Milvus 독립형 및 분산형과 동일한 API를 공유하며 벡터 데이터 지속성 및 관리, 벡터 CRUD 작업, 스파스 및 고밀도 벡터 검색, 메타데이터 필터링, 멀티 벡터 및 hybrid_search와 같은 대부분의 기능을 다룹니다. 이 기능들은 엣지 디바이스에서 클라우드의 클러스터에 이르기까지 다양한 유형의 환경에서 일관된 경험을 제공하며, 다양한 규모의 사용 사례에 적합합니다. 동일한 클라이언트 측 코드를 사용하여 노트북이나 Jupyter Notebook에서 Milvus Lite로 GenAI 앱을 실행하거나, Docker 컨테이너에서 Milvus Standalone으로, 또는 운영 환경에서 수십억 개의 벡터를 제공하는 대규모 Kubernetes 클러스터에서 Milvus Distributed로 실행할 수 있습니다.</p>
+<p>Milvus Lite는 Milvus 독립형 및 분산형과 동일한 API를 공유하며 벡터 데이터 지속성 및 관리, 벡터 CRUD 작업, 스파스 및 고밀도 벡터 검색, 메타데이터 필터링, 멀티 벡터 및 hybrid_search와 같은 대부분의 기능을 다룹니다. 이 기능들은 엣지 디바이스에서 클라우드의 클러스터에 이르기까지 다양한 유형의 환경에 걸쳐 일관된 경험을 제공하며, 다양한 규모의 사용 사례에 적합합니다. 동일한 클라이언트 측 코드를 사용하여 노트북이나 Jupyter Notebook에서 Milvus Lite로 GenAI 앱을 실행하거나, Docker 컨테이너에서 Milvus Standalone으로, 또는 운영 환경에서 수십억 개의 벡터를 제공하는 대규모 Kubernetes 클러스터에서 Milvus Distributed로 실행할 수 있습니다.</p>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

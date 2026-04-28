@@ -36,7 +36,7 @@ beta: Milvus v2.6.2+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>與其他依賴交叉編碼器模型或融合演算法的排名器不同，Boost Ranker 會直接將可選的元資料驅動規則注入排名過程中，因此更適用於下列情況。</p>
+    </button></h2><p>與其他依賴交叉編碼器模型或融合演算法的排名器不同，Boost Ranker 直接將可選的元資料驅動規則注入排名過程，因此更適用於下列情況。</p>
 <table>
    <tr>
      <th><p>使用案例</p></th>
@@ -45,8 +45,8 @@ beta: Milvus v2.6.2+
    </tr>
    <tr>
      <td><p>商業驅動的內容優先排序</p></td>
-     <td><ul><li><p>在電子商務搜尋結果中突顯優質產品</p></li><li><p>提高具有高使用者參與度指標（如觀看、讚好和分享）的內容的能見度</p></li><li><p>在時間敏感的搜尋應用中提升最新內容</p></li><li><p>優先處理來自經驗證或可信來源的內容</p></li><li><p>提升符合精確短語或高相關度關鍵字的結果</p></li></ul></td>
-     <td rowspan="2"><p>您無需重建索引或修改向量嵌入模型 (這些作業可能很花時間)，即可即時套用選用的 metadata 過濾器，在搜尋結果中提升或降低特定項目的排名。此機制可實現彈性、動態的搜尋排名，輕鬆適應不斷變化的業務需求。</p></td>
+     <td><ul><li><p>在電子商務搜尋結果中突顯優質產品</p></li><li><p>提高具有高使用者參與度指標（如觀看、讚好和分享）的內容的能見度</p></li><li><p>在時間敏感的搜尋應用中提升最新內容</p></li><li><p>優先處理來自經驗證或可信來源的內容</p></li><li><p>提升符合精確短語或高相關關鍵字的結果</p></li></ul></td>
+     <td rowspan="2"><p>您無需重建索引或修改向量嵌入模型 (這些作業可能很花時間)，即可即時套用選用的 metadata 過濾器，在搜尋結果中提升或降低特定項目的排名。此機制可實現靈活、動態的搜尋排名，輕鬆適應不斷變化的業務需求。</p></td>
    </tr>
    <tr>
      <td><p>策略性內容降級</p></td>
@@ -72,9 +72,9 @@ beta: Milvus v2.6.2+
     </button></h2><p>下圖說明 Boost Ranker 的主要工作流程。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
    </span> <span class="img-wrapper"> <span>Boost Ranker 機制</span> </span></p>
-<p>當您插入資料時，Milvus 會將資料分散到不同的區段。在搜尋過程中，每個區段會回傳一組候選人，Milvus 會將這些來自所有區段的候選人排序，產生最後的結果。當搜尋請求包含提升排名器時，Milvus 會將其應用於每個區段的候選結果，以防止潛在的精確度損失，並提高召回率。</p>
+<p>當您插入資料時，Milvus 會將資料分散到不同的區段。在搜尋過程中，每個區段會回傳一組候選項目，Milvus 會將這些來自所有區段的候選項目進行排名，產生最終結果。當搜尋請求包含提升排名器時，Milvus 會將其應用於每個區段的候選結果，以防止潛在的精確度損失，並提高召回率。</p>
 <p>在最後完成結果之前，Milvus 會以 Boost Ranker 處理這些候選結果，如下所示：</p>
 <ol>
 <li><p>套用 Boost Ranker 中指定的可選過濾表達式，以識別符合該表達式的實體。</p></li>
@@ -100,7 +100,7 @@ beta: Milvus v2.6.2+
       </svg>
     </button></h2><p>以下範例說明如何在單向量搜尋中使用 Boost Ranker，該搜尋要求返回前五名最相關的實體，並為具有抽象文件類型的實體的得分加上權重。</p>
 <ol>
-<li><p><strong>分段收集搜尋結果候選項目。</strong></p>
+<li><p><strong>分段收集搜尋結果候選。</strong></p>
 <p>下表假定 Milvus 將實體分為兩個區段<strong>(0001</strong>和<strong>0002</strong>)，每個區段返回五個候選實體。</p>
 <p><table>
 <tr>
@@ -357,7 +357,7 @@ beta: Milvus v2.6.2+
 <p><div class="alert note"></p>
 <p>權重必須是您選擇的浮點數。在類似上述範例的情況中，分數越小表示相關性越高，請使用小於<strong>1</strong> 的權重。</p>
 <p></div></p></li>
-<li><p><strong>根據加權分數匯集所有區段的候選人，以確定結果。</strong></p>
+<li><p><strong>根據加權分數彙總來自所有區段的候選人，以確定結果。</strong></p>
 <p><table>
 <tr>
 <th><p>ID</p></th>
@@ -526,7 +526,7 @@ ranker = Function(
    <tr>
      <td><p><code translate="no">params.weight</code></p></td>
      <td><p>是</p></td>
-     <td><p>指定原始搜尋結果中任何匹配實體的得分所乘以的權重。</p><p>該值應該是浮點數。 </p><ul><li><p>若要強調匹配實體的重要性，請將其設定為可提高分數的值。</p></li><li><p>若要降低匹配實體的重要性，請將此參數設定為可降低其分數的值。</p></li></ul></td>
+     <td><p>指定原始搜尋結果中任何匹配實體的得分所乘以的權重。</p><p>該值應該是浮點數。 </p><ul><li><p>若要強調匹配實體的重要性，請將其設定為可提升分數的值。</p></li><li><p>若要降低匹配實體的重要性，請將此參數設定為可降低其分數的值。</p></li></ul></td>
      <td><p><code translate="no">1</code></p></td>
    </tr>
    <tr>
@@ -538,7 +538,7 @@ ranker = Function(
    <tr>
      <td><p><code translate="no">params.random_score</code></p></td>
      <td><p>無</p></td>
-     <td><p>指定隨機函數，隨機產生<code translate="no">0</code> 和<code translate="no">1</code> 之間的值。它有以下兩個可選參數：</p><ul><li><p><code translate="no">seed</code> (number)指定用於啟動偽隨機數生成器 (PRNG) 的初始值。</p></li><li><p><code translate="no">field</code> (string)指定欄位的名稱，其值將用作產生隨機數的隨機因子。具有唯一值的欄位即可。</p><p>建議您同時設定<code translate="no">seed</code> 和<code translate="no">field</code> ，以使用相同的種子和欄位值來確保各代的一致性。</p></li></ul></td>
+     <td><p>指定隨機函數，隨機產生<code translate="no">0</code> 和<code translate="no">1</code> 之間的值。它有以下兩個可選參數：</p><ul><li><p><code translate="no">seed</code> (number) 指定用於啟動偽隨機數生成器 (PRNG) 的初始值。</p></li><li><p><code translate="no">field</code> (string)指定欄位的名稱，其值將用作產生隨機數的隨機因子。具有唯一值的欄位即可。</p><p>建議您同時設定<code translate="no">seed</code> 和<code translate="no">field</code> ，以使用相同的種子和欄位值來確保各代的一致性。</p></li></ul></td>
      <td><p><code translate="no">{"seed": 126, "field": "id"}</code></p></td>
    </tr>
 </table>
@@ -642,7 +642,7 @@ client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>您可以在單一搜尋結合多個 Boost Ranker 來影響搜尋結果。要做到這一點，請建立多個 Boost Ranker，在<strong>FunctionScore</strong>範例中引用它們，並在搜尋請求中使用<strong>FunctionScore</strong>範例作為排名器。</p>
+    </button></h3><p>您可以在單一搜尋結合多個 Boost Ranker 來影響搜尋結果。若要這樣做，請建立數個 Boost Ranker，在<strong>FunctionScore</strong>範例中引用它們，並在搜尋請求中使用<strong>FunctionScore</strong>範例作為排名器。</p>
 <p>以下範例顯示如何透過套用介於<strong>0.8</strong>和<strong>1.2</strong> 之間的權重，來修改所有已識別實體的得分。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

@@ -88,7 +88,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要使用<code translate="no">GEOMETRY</code> 欄位，請在建立集合時，在集合模式中明確定義。以下範例示範如何建立具有<code translate="no">geo</code> 欄位類型<code translate="no">DataType.GEOMETRY</code> 的集合。</p>
+    </button></h3><p>若要使用<code translate="no">GEOMETRY</code> 欄位，請在建立集合時，在集合模式中明確定義。以下範例示範如何建立具有<code translate="no">geo</code> 欄位類型<code translate="no">DataType.GEOMETRY</code> 的集合。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -189,7 +189,7 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT</a>格式插入具有幾何資料的實體。下面是一個有幾個地理點的範例：</p>
+    </button></h3><p>以<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT</a>格式插入具有幾何資料的實體。以下是一個有幾個地理點的範例：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">rng = np.random.default_rng(seed=<span class="hljs-number">19530</span>)
@@ -604,7 +604,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = statusR.getSearc
         ></path>
       </svg>
     </button></h3><p>是的，<code translate="no">GEOMETRY</code> 欄位支援 mmap。如需詳細資訊，請參閱<a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">使用 mmap</a>。</p>
-<h3 id="Can-I-define-the-GEOMETRY-field-as-nullable-or-set-a-default-value" class="common-anchor-header">我是否可以將 GEOMETRY 欄位定義為可為空或設定預設值？<button data-href="#Can-I-define-the-GEOMETRY-field-as-nullable-or-set-a-default-value" class="anchor-icon" translate="no">
+<h3 id="Can-I-define-the-GEOMETRY-field-as-nullable-or-set-a-default-value" class="common-anchor-header">我是否可以將 GEOMETRY 欄位定義為可空值或設定預設值？<button data-href="#Can-I-define-the-GEOMETRY-field-as-nullable-or-set-a-default-value" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

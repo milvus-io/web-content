@@ -24,7 +24,7 @@ title: 삼바노바와 함께 Milvus 사용
 <p>삼바노바<a href="https://github.com/sambanova/ai-starter-kit">AI 스타터 키트는</a> 개발자와 기업이 삼바노바를 통해 AI 기반 애플리케이션을 배포하는 데 도움이 되도록 설계된 오픈 소스 리소스 모음입니다. 이 키트는 다양한 AI 사용 사례를 쉽게 구현할 수 있는 실용적인 예제와 가이드를 제공하여 사용자가 삼바노바의 고급 기술을 보다 쉽게 활용할 수 있도록 지원합니다.</p>
 <p>이 튜토리얼에서는 삼바노바 AI 스타터 키트의 Milvus 통합 기능을 활용하여 기업 비공개 문서를 기반으로 검색 및 답변을 제공하는 RAG(검색 증강 세대)와 유사한 엔터프라이즈 지식 검색 시스템을 구축합니다.</p>
 <div class="alert note">
-<p>이 튜토리얼은 주로 <a href="https://github.com/sambanova/ai-starter-kit/tree/main">삼바노바 AI 스타터 키트</a> 공식 가이드를 참조합니다. 이 튜토리얼에 오래된 부분이 있다고 생각되면 공식 가이드를 우선적으로 따르고 이슈를 생성해 주세요.</p>
+<p>이 튜토리얼은 주로 <a href="https://github.com/sambanova/ai-starter-kit/tree/main">삼바노바 AI 스타터 키트</a> 공식 가이드를 참조합니다. 이 튜토리얼에 오래된 부분이 있다고 생각되면 공식 가이드를 우선적으로 따르고 이슈를 생성할 수 있습니다.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -125,7 +125,7 @@ pip install -r requirements.txt
 <p>그 후 브라우저에 사용자 인터페이스가 표시됩니다:<code translate="no">http://localhost:8501/</code></p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/sambanava_ui.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sambanava_ui.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

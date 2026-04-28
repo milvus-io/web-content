@@ -85,7 +85,7 @@ title: Aggiornamento di Milvus standalone con Docker Compose
 <ul>
 <li>Milvus v2.6.0-rc1 <strong>non è compatibile</strong> con la v2.6.15. Gli aggiornamenti diretti dalle release candidate non sono supportati.</li>
 <li>Se attualmente si sta eseguendo la v2.6.0-rc1 e si desidera preservare i propri dati, consultare <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">questa guida della comunità</a> per ottenere assistenza nella migrazione.</li>
-<li><strong>È necessario eseguire l</strong> 'aggiornamento alla versione 2.5.16 o successiva prima di passare alla versione 2.6.15.</li>
+<li><strong>È necessario eseguire l</strong> 'aggiornamento alla versione v2.5.16 o successiva prima di eseguire l'aggiornamento alla versione v2.6.15.</li>
 </ul>
 <p><strong>Limitazioni della coda di messaggi</strong>: Quando si esegue l'aggiornamento a Milvus v2.6.15, è necessario mantenere l'attuale scelta della coda di messaggi. Il passaggio da un sistema di code di messaggi all'altro durante l'aggiornamento non è supportato. Il supporto per il cambio di sistemi di code di messaggi sarà disponibile nelle versioni future.</p>
 <div class="alter note">

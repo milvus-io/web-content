@@ -289,7 +289,7 @@ fmt.Println(state)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># REST</span>
 Not support yet
 <button class="copy-code-btn"></button></code></pre>
-<p>特定のフィールドをロードすることを選択した場合、<code translate="no">load_fields</code> に含まれるフィールドのみが、検索やクエリーのフィルターや出力フィールドとして使用できることに注意してください。<code translate="no">load_fields</code> には、常にプライマリ・フィールドと少なくとも1つのベクター・フィールドの名前を含める必要があります。</p>
+<p>特定のフィールドをロードすることを選択した場合、<code translate="no">load_fields</code> に含まれるフィールドだけが、検索やクエリーのフィルターや出力フィールドとして使用できることに注意してください。<code translate="no">load_fields</code> には、常にプライマリ・フィールドと少なくとも1つのベクター・フィールドの名前を含める必要があります。</p>
 <p>また、<code translate="no">skip_load_dynamic_field</code> を使用して、ダイナミック・フィールドをロードするかどうかを決定することもできます。ダイナミック・フィールドは<strong>$metaという</strong>名前の予約済みJSONフィールドで、スキーマで定義されていないすべてのフィールドとその値をキーと値のペアで保存します。ダイナミック・フィールドをロードすると、フィールド内のすべてのキーがロードされ、フィルタリングや出力に利用できるようになります。ダイナミック・フィールドのすべてのキーがメタデータのフィルタリングと出力に関与しない場合は、<code translate="no">skip_load_dynamic_field</code> を<code translate="no">True</code> に設定します。</p>
 <p>コレクションのロード後にさらにフィールドをロードするには、インデックス変更に起因するエラーの可能性を避けるために、最初にコレクションをリリースする必要があります。</p>
 <h2 id="Release-Collection" class="common-anchor-header">コレクションの解放<button data-href="#Release-Collection" class="anchor-icon" translate="no">

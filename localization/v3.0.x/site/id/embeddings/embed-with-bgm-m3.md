@@ -45,7 +45,7 @@ bge_m3_ef = BGEM3EmbeddingFunction(
 <li><p><strong>use_fp16</strong><em>(bool</em>)</p>
 <p>Apakah akan menggunakan presisi floating-point 16-bit (fp16). Tentukan <strong>False</strong> bila <strong>perangkat</strong> adalah <strong>cpu</strong>.</p></li>
 </ul>
-<p>Untuk membuat penyematan untuk dokumen, gunakan metode <strong>encode_documents()</strong>:</p>
+<p>Untuk membuat penyematan dokumen, gunakan metode <strong>encode_documents()</strong>:</p>
 <pre><code translate="no" class="language-python">docs = [
     <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
     <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,

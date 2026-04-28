@@ -27,7 +27,7 @@ summary: >-
 <p>Milvus consente di specificare il modello di dati di ricerca attraverso uno schema di raccolta, organizzando i dati non strutturati, le loro rappresentazioni vettoriali dense o rade e i metadati strutturati. Sia che si lavori con testo, immagini o altri tipi di dati, questa guida pratica vi aiuterà a capire e ad applicare i concetti chiave di schema per progettare un modello di dati di ricerca nella pratica.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
    </span> <span class="img-wrapper"> <span>Anatomia del modello di dati</span> </span></p>
 <h2 id="Data-Model" class="common-anchor-header">Modello di dati<button data-href="#Data-Model" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -62,11 +62,11 @@ summary: >-
       </svg>
     </button></h3><p>Per rispondere efficacemente alle esigenze aziendali è necessario analizzare i tipi di query che gli utenti eseguiranno e determinare i metodi di ricerca più adatti.</p>
 <ul>
-<li><p><strong>Query degli utenti:</strong> Identificare i tipi di query che gli utenti dovrebbero eseguire. Questo aiuta a garantire che lo schema supporti i casi d'uso reali e ottimizzi le prestazioni di ricerca. Queste possono includere</p>
+<li><p><strong>Query degli utenti:</strong> Identificare i tipi di query che gli utenti dovranno eseguire. Questo aiuta a garantire che lo schema supporti i casi d'uso reali e ottimizzi le prestazioni di ricerca. Queste possono includere</p>
 <ul>
 <li><p>Recupero di documenti che corrispondono a una query in linguaggio naturale.</p></li>
 <li><p>Trovare immagini simili a un'immagine di riferimento o corrispondenti a una descrizione testuale</p></li>
-<li><p>Ricerca di prodotti in base ad attributi quali il nome, la categoria o il marchio</p></li>
+<li><p>Ricerca di prodotti in base ad attributi come il nome, la categoria o il marchio</p></li>
 <li><p>Filtrare gli articoli in base a metadati strutturati (ad esempio, data di pubblicazione, tag, valutazioni).</p></li>
 <li><p>Combinazione di più criteri in query ibride (ad esempio, nella ricerca visiva, considerando la somiglianza semantica delle immagini e delle loro didascalie).</p></li>
 </ul></li>
@@ -137,7 +137,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>I campi vettoriali memorizzano le incorporazioni per i tipi di dati non strutturati, come testo, immagini e audio. Queste incorporazioni possono essere dense, rade o binarie, a seconda del tipo di dati e del metodo di recupero utilizzato. In genere, i vettori densi sono utilizzati per la ricerca semantica, mentre i vettori radi sono più adatti per la ricerca full-text o lessicale. I vettori binari sono utili quando le risorse di memoria e di calcolo sono limitate. Una raccolta può contenere diversi campi vettoriali per consentire strategie di recupero multimodali o ibride. Per una guida dettagliata su questo argomento, consultare la <a href="/docs/it/multi-vector-search.md">Ricerca ibrida multivettoriale</a>.</p>
+    </button></h3><p>I campi vettoriali memorizzano le incorporazioni per i tipi di dati non strutturati, come testo, immagini e audio. Queste incorporazioni possono essere dense, rade o binarie, a seconda del tipo di dati e del metodo di recupero utilizzato. In genere, i vettori densi sono utilizzati per la ricerca semantica, mentre i vettori radi sono più adatti per la ricerca full-text o lessicale. I vettori binari sono utili quando le risorse di memoria e di calcolo sono limitate. Una collezione può contenere diversi campi vettoriali per consentire strategie di recupero multimodali o ibride. Per una guida dettagliata su questo argomento, consultare la <a href="/docs/it/multi-vector-search.md">Ricerca ibrida multivettoriale</a>.</p>
 <p>Milvus supporta i tipi di dati vettoriali: <code translate="no">FLOAT_VECTOR</code> per <a href="/docs/it/dense-vector.md">Dense Vector</a>, <code translate="no">SPARSE_FLOAT_VECTOR</code> per <a href="/docs/it/sparse_vector.md">Sparse Vector</a> e <code translate="no">BINARY_VECTOR</code> per <a href="/docs/it/binary-vector.md">Binary Vector</a>.</p>
 <h3 id="Scalar-Field" class="common-anchor-header">Campo scalare<button data-href="#Scalar-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -156,7 +156,7 @@ summary: >-
       </svg>
     </button></h3><p>I campi scalari memorizzano valori primitivi e strutturati, comunemente chiamati metadati, come numeri, stringhe o date. Questi valori possono essere restituiti insieme ai risultati della ricerca vettoriale e sono essenziali per il filtraggio e l'ordinamento. Permettono di restringere i risultati della ricerca in base ad attributi specifici, come limitare i documenti a una particolare categoria o a un intervallo di tempo definito.</p>
 <p>Milvus supporta tipi scalari come <code translate="no">BOOL</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code>, e <code translate="no">ARRAY</code> per memorizzare e filtrare dati non vettoriali. Questi tipi migliorano la precisione e la personalizzazione delle operazioni di ricerca.</p>
-<h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">Sfruttare le funzionalità avanzate nella progettazione degli schemi<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
+<h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">Sfruttare le funzioni avanzate nella progettazione degli schemi<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -221,7 +221,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>L'analizzatore è uno strumento essenziale per l'elaborazione e la trasformazione dei dati di testo. La sua funzione principale è quella di convertire il testo grezzo in token e di strutturarli per l'indicizzazione e il recupero. A tal fine, l'analizzatore effettua la tokenizzazione della stringa, l'eliminazione delle stop words e lo stemming delle singole parole in tokens.</p>
+    </button></h3><p>L'analizzatore è uno strumento essenziale per l'elaborazione e la trasformazione dei dati di testo. La sua funzione principale è quella di convertire il testo grezzo in token e di strutturarli per l'indicizzazione e il recupero. A tal fine, l'analizzatore effettua la tokenizzazione della stringa, l'eliminazione delle stop words e la suddivisione delle singole parole in tokens.</p>
 <p>Per ulteriori dettagli, consultare la sezione <a href="/docs/it/analyzer-overview.md">Panoramica dell'analizzatore</a>.</p>
 <h3 id="Function" class="common-anchor-header">Funzione<button data-href="#Function" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -545,7 +545,7 @@ schema.addField(AddFieldReq.builder()
     \&quot;fields\&quot;: <span class="hljs-variable">$fields</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In questo esempio, per i campi sono specificati i seguenti attributi:</p>
+<p>In questo esempio, per i campi vengono specificati i seguenti attributi:</p>
 <ul>
 <li><p>Chiave primaria: <code translate="no">article_id</code> è utilizzata come chiave primaria, consentendo l'assegnazione automatica delle chiavi primarie per le entità in arrivo.</p></li>
 <li><p>Chiave di partizione: <code translate="no">timestamp</code> è assegnata come chiave di partizione, consentendo il filtraggio per partizioni. Questa potrebbe essere</p></li>

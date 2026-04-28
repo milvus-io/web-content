@@ -1,7 +1,10 @@
 ---
 id: rerankers-bge.md
 order: 2
-summary: Milvus 透過`BGERerankFunction`類支援 BGE ranker 模型。此功能可讓您有效地為查詢與文件對的相關性進行評分。
+summary: >-
+  Milvus supports BGE reranker models through the `BGERerankFunction` class.
+  This functionality allows you to score the relevance of query-document pairs
+  effectively.
 title: BGE
 ---
 <h1 id="BGE" class="common-anchor-header">BGE<button data-href="#BGE" class="anchor-icon" translate="no">

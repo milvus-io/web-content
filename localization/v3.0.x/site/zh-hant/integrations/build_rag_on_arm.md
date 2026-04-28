@@ -211,7 +211,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h3><p>Meta 的<a href="https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf">Llama-3.1-8B 模型</a>屬於 Llama 3.1 模型系列，可免費用於研究與商業用途。在使用該模型之前，請造訪 Llama<a href="https://llama.meta.com/llama-downloads/">網站</a>並填寫表格以申請存取權限。</p>
-<p><a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a>是一個開放原始碼的 C/C++ 專案，可在各種硬體上實現高效的 LLM 推論 - 包括本機和雲端。您可以使用<code translate="no">llama.cpp</code> 方便地託管 Llama 3.1 模型。</p>
+<p><a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a>是一個開放原始碼的 C/C++ 專案，可在各種硬體上實現高效率的 LLM 推論 - 包括本機和雲端。您可以使用<code translate="no">llama.cpp</code> 方便地託管 Llama 3.1 模型。</p>
 <h3 id="Download-and-build-llamacpp" class="common-anchor-header">下載並建立 llama.cpp<button data-href="#Download-and-build-llamacpp" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

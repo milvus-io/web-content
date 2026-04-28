@@ -27,7 +27,7 @@ summary: >-
 <p>Milvus le permite especificar el modelo de datos de búsqueda mediante un esquema de colección, organizando los datos no estructurados, sus representaciones vectoriales densas o dispersas y los metadatos estructurados. Tanto si trabaja con texto, imágenes u otros tipos de datos, esta guía práctica le ayudará a comprender y aplicar los conceptos clave del esquema para diseñar un modelo de datos de búsqueda en la práctica.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
    </span> <span class="img-wrapper"> <span>Anatomía del modelo de datos</span> </span></p>
 <h2 id="Data-Model" class="common-anchor-header">Modelo de datos<button data-href="#Data-Model" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,7 +73,7 @@ summary: >-
 <li><p><strong>Métodos de búsqueda:</strong> Elija las técnicas de búsqueda apropiadas que se ajusten a los tipos de consultas que realizarán sus usuarios. Los distintos métodos sirven para diferentes propósitos y a menudo pueden combinarse para obtener resultados más potentes:</p>
 <ul>
 <li><p><strong>Búsqueda semántica</strong>: Utiliza la similitud de vectores densos para encontrar elementos con significado similar, ideal para datos no estructurados como texto o imágenes.</p></li>
-<li><p><strong>Búsqueda de texto completo</strong>: Complementa la búsqueda semántica con la concordancia de palabras clave.  La búsqueda de texto completo puede utilizar el análisis léxico para evitar dividir palabras largas en tokens fragmentados, captando los términos especiales durante la recuperación.</p></li>
+<li><p><strong>Búsqueda de texto completo</strong>: Complementa la búsqueda semántica con la concordancia de palabras clave.  La búsqueda de texto completo puede utilizar el análisis léxico para evitar dividir palabras largas en fichas fragmentadas, captando los términos especiales durante la recuperación.</p></li>
 <li><p><strong>Filtrado de metadatos</strong>: Además de la búsqueda vectorial, aplica restricciones como intervalos de fechas, categorías o etiquetas.</p></li>
 </ul></li>
 </ul>
@@ -171,7 +171,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Al diseñar un esquema, no basta con asignar los datos a los campos utilizando los tipos de datos admitidos. Es esencial conocer a fondo las relaciones entre campos y las estrategias disponibles para la configuración. Tener en cuenta las características clave durante la fase de diseño garantiza que el esquema no sólo satisfaga los requisitos inmediatos de gestión de datos, sino que también sea escalable y adaptable a las necesidades futuras. Al integrar cuidadosamente estas características, puede construir una arquitectura de datos sólida que maximice las capacidades de Milvus y apoye su estrategia y objetivos de datos más amplios. He aquí un resumen de las características clave que crean un esquema de colección:</p>
+    </button></h2><p>Al diseñar un esquema, no basta con asignar los datos a los campos utilizando los tipos de datos admitidos. Es esencial conocer a fondo las relaciones entre los campos y las estrategias disponibles para su configuración. Tener en cuenta las características clave durante la fase de diseño garantiza que el esquema no sólo satisfaga los requisitos inmediatos de gestión de datos, sino que también sea escalable y adaptable a las necesidades futuras. Al integrar cuidadosamente estas características, puede construir una arquitectura de datos sólida que maximice las capacidades de Milvus y apoye su estrategia y objetivos de datos más amplios. He aquí un resumen de las características clave que crean un esquema de colección:</p>
 <h3 id="Primary-Key" class="common-anchor-header">Clave primaria<button data-href="#Primary-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -222,7 +222,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>Un analizador es una herramienta esencial para procesar y transformar datos de texto. Su función principal es convertir el texto bruto en tokens y estructurarlos para su indexación y recuperación. Para ello, tokeniza la cadena, elimina las palabras vacías y convierte las palabras individuales en tokens.</p>
-<p>Para más información, consulte la sección <a href="/docs/es/analyzer-overview.md">Descripción general del analizador</a>.</p>
+<p>Para obtener más información, consulte la <a href="/docs/es/analyzer-overview.md">descripción general del analizador</a>.</p>
 <h3 id="Function" class="common-anchor-header">Función<button data-href="#Function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

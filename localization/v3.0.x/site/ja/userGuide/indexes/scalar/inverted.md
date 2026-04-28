@@ -2,7 +2,7 @@
 id: inverted.md
 title: 反転
 summary: >-
-  データに対して頻繁にフィルタクエリを実行する必要がある場合、転置インデックスによりクエリのパフォーマンスを劇的に向上させることができます。Milvusは、すべての文書をスキャンする代わりに、転置インデックスを使用して、フィルタ条件に一致する正確なレコードを迅速に検索します。
+  データに対して頻繁にフィルタクエリを実行する必要がある場合、転置インデックスによりクエリパフォーマンスを劇的に向上させることができます。Milvusは、すべての文書をスキャンする代わりに、転置インデックスを使用して、フィルタ条件に一致する正確なレコードを迅速に検索します。
 ---
 <h1 id="INVERTED" class="common-anchor-header">反転<button data-href="#INVERTED" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,7 +39,7 @@ summary: >-
 <ul>
 <li><p><strong>特定の値でフィルタリング</strong>する：フィールドが特定の値に等しいすべてのレコードを検索します（例：<code translate="no">category == &quot;electronics&quot;</code> ）。</p></li>
 <li><p><strong>テキストコンテンツのフィルタリング</strong>：<code translate="no">VARCHAR</code> フィールドを効率的に検索する。</p></li>
-<li><p><strong>JSONフィールド値のクエリー</strong>：JSON構造内の特定のキーにフィルターをかける</p></li>
+<li><p><strong>JSONフィールド値のクエリ</strong>：JSON構造内の特定のキーにフィルターをかける</p></li>
 </ul>
 <p><strong>パフォーマンス上の利点</strong>：INVERTEDインデックスは、コレクション全体のスキャンを不要にすることで、大規模なデータセットのクエリ時間を数秒から数ミリ秒に短縮することができる。</p>
 <h2 id="How-INVERTED-indexes-work" class="common-anchor-header">INVERTED インデックスの仕組み<button data-href="#How-INVERTED-indexes-work" class="anchor-icon" translate="no">
@@ -66,7 +66,7 @@ summary: >-
 <p>例えば、<strong>"electronics "</strong>という値はID1と<strong>3に</strong>、<strong>"books "</strong>はID2と<strong>5に</strong>マッピングされます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
    </span> <span class="img-wrapper"> <span>転置インデックスの仕組み</span> </span></p>
 <p>特定の値(例:<code translate="no">category == &quot;electronics&quot;</code>)を検索する場合、Milvusは単純にインデックスでその用語を検索し、一致するIDを直接取得します。これにより、データセット全体をスキャンする必要がなくなり、特にカテゴリ値や繰り返し値の高速フィルタリングが可能になります。</p>
 <p>INVERTEDインデックスは、<strong>BOOL</strong>、<strong>INT8</strong>、<strong>INT16</strong>、<strong>INT32</strong>、<strong>INT64</strong>、<strong>FLOAT</strong>、<strong>DOUBLE</strong>、<strong>VARCHAR</strong>、<strong>JSON</strong>、<strong>ARRAYなど</strong>、すべてのスカラーフィールド型をサポートしています。ただし、JSONフィールドにインデックスを作成する際のインデックス・パラメータは、通常のスカラー・フィールドとは若干異なります。</p>

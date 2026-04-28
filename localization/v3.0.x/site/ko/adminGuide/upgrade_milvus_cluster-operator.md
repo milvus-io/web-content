@@ -145,7 +145,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
     </button></h3><h4 id="21-Check-current-coordinator-configuration" class="common-anchor-header">2.1 현재 코디네이터 구성 확인</h4><p>클러스터가 이미 <code translate="no">mixCoord</code> 을 사용하고 있는지 확인합니다:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>대신 별도의 코디네이터 파드(<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>)가 표시되는 경우 다음 단계에서 <code translate="no">mixCoord</code> 를 활성화해야 합니다.</p>
+<p>대신 별도의 코디네이터 파드(<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>)가 표시되는 경우 다음 단계에서 <code translate="no">mixCoord</code> 을 활성화해야 합니다.</p>
 <h4 id="22-Upgrade-to-v2516-with-mixCoord" class="common-anchor-header">2.2 mixCoord로 v2.5.16으로 업그레이드하기</h4><div class="alert-note">
 <p>클러스터가 이미 <code translate="no">mixCoord</code> 를 활성화하여 v2.5.16 이상을 실행 중인 경우 이 단계를 건너뛰세요.</p>
 </div>

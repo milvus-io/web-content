@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O termo <strong>IVF_FLAT</strong> significa <strong>Inverted File Flat (Ficheiro Invertido Plano</strong>), que encapsula a sua abordagem de duas camadas para indexação e pesquisa de vectores de vírgula flutuante:</p>
+    </button></h2><p>O termo <strong>IVF_FLAT</strong> significa <strong>Inverted File Flat (Ficheiro Invertido Plano</strong>), que engloba a sua abordagem de duas camadas à indexação e pesquisa de vectores de vírgula flutuante:</p>
 <ul>
 <li><p><strong>Inverted File (IVF):</strong> Refere-se ao agrupamento do espaço vetorial em regiões gerenciáveis usando <a href="https://en.wikipedia.org/wiki/K-means_clustering">o agrupamento k-means</a>. Cada agrupamento é representado por um <strong>centróide</strong>, que serve de ponto de referência para os vectores nele contidos.</p></li>
 <li><p><strong>Plano:</strong> Indica que, dentro de cada cluster, os vectores são armazenados na sua forma original (estrutura plana), sem qualquer compressão ou quantização, para cálculos de distância precisos.</p></li>
@@ -45,9 +45,9 @@ summary: >-
 <p>A figura seguinte mostra o seu funcionamento:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF-FLAT-workflow.png" alt="IVF FLAT Workflow" class="doc-image" id="ivf-flat-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF-FLAT-workflow.png" alt="IVF FLAT Workflow" class="doc-image" id="ivf-flat-workflow" />
    </span> <span class="img-wrapper"> <span>Fluxo de trabalho IVF FLAT</span> </span></p>
-<p>Este método de indexação acelera o processo de pesquisa, mas tem um potencial inconveniente: o candidato encontrado como o mais próximo da incorporação da consulta pode não ser exatamente o mais próximo. Isto pode acontecer se a incorporação mais próxima da incorporação de consulta residir num agrupamento diferente do selecionado com base no centróide mais próximo (ver visualização abaixo).</p>
+<p>Este método de indexação acelera o processo de pesquisa, mas tem uma potencial desvantagem: o candidato encontrado como o mais próximo da incorporação da consulta pode não ser exatamente o mais próximo. Isto pode acontecer se a incorporação mais próxima da incorporação de consulta residir num agrupamento diferente do selecionado com base no centróide mais próximo (ver visualização abaixo).</p>
 <p>Para resolver este problema, <strong>o IVF_FLAT</strong> fornece dois hiperparâmetros que podemos ajustar:</p>
 <ul>
 <li><p><code translate="no">nlist</code>: Especifica o número de partições a criar utilizando o algoritmo k-means.</p></li>
@@ -56,7 +56,7 @@ summary: >-
 <p>Agora, se definirmos <code translate="no">nprobe</code> para 3 em vez de 1, obtemos o seguinte resultado:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF-FLAT-workflow-2.png" alt="IVF FLAT Workflow 2" class="doc-image" id="ivf-flat-workflow-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF-FLAT-workflow-2.png" alt="IVF FLAT Workflow 2" class="doc-image" id="ivf-flat-workflow-2" />
    </span> <span class="img-wrapper"> <span>Fluxo de trabalho 2 do IVF FLAT</span> </span></p>
 <p>Ao aumentar o valor de <code translate="no">nprobe</code>, pode incluir mais partições na pesquisa, o que pode ajudar a garantir que a incorporação mais próxima da consulta não é perdida, mesmo que resida numa partição diferente. No entanto, isso tem o custo de aumentar o tempo de pesquisa, pois mais candidatos precisam ser avaliados. Para obter mais informações sobre o ajuste de parâmetros de índice, consulte <a href="/docs/pt/ivf-flat.md#Index-params">Parâmetros de índice</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Construir índice<button data-href="#Build-index" class="anchor-icon" translate="no">
@@ -116,7 +116,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de o índice ser construído e as entidades serem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
+    </button></h2><p>Depois de o índice ser criado e as entidades serem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of clusters to search</span>
@@ -155,7 +155,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Esta secção fornece uma visão geral dos parâmetros utilizados para criar um índice e efetuar pesquisas no índice.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parâmetros de construção do índice</h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">params</code> ao <a href="/docs/pt/ivf-flat.md#Build-index">construir um índice</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parâmetros de construção do índice<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">params</code> ao <a href="/docs/pt/ivf-flat.md#Build-index">construir um índice</a>.</p>
 <table>
    <tr>
      <th><p>Parâmetro</p></th>
@@ -170,7 +185,22 @@ res = MilvusClient.search(
      <td><p>Valores maiores <code translate="no">nlist</code> melhoram a recuperação, criando clusters mais refinados, mas aumentam o tempo de construção do índice. Optimize com base no tamanho do conjunto de dados e nos recursos disponíveis. Na maioria dos casos, recomendamos que você defina um valor dentro deste intervalo: [32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parâmetros de pesquisa específicos do índice</h3><p>A tabela a seguir lista os parâmetros que podem ser configurados em <code translate="no">search_params.params</code> ao <a href="/docs/pt/ivf-flat.md#Search-on-index">pesquisar no índice</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parâmetros de pesquisa específicos do índice<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>A tabela a seguir lista os parâmetros que podem ser configurados em <code translate="no">search_params.params</code> ao <a href="/docs/pt/ivf-flat.md#Search-on-index">pesquisar no índice</a>.</p>
 <table>
    <tr>
      <th><p>Parâmetro</p></th>

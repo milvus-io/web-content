@@ -45,7 +45,7 @@ summary: >-
 <p>Рассмотрим коллекцию документов с полями <strong>Category</strong> и <strong>Public</strong>. Мы хотим получить документы, которые относятся к категории <strong>Tech</strong> и открыты для <strong>публики</strong>. В этом случае ключами для наших растровых индексов будут <strong>Tech</strong> и <strong>Public</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" />
    </span> <span class="img-wrapper"> <span>Растровый индекс</span> </span></p>
 <p>Как показано на рисунке, растровые индексы для <strong>категорий Category</strong> и <strong>Public</strong> будут следующими:</p>
 <ul>

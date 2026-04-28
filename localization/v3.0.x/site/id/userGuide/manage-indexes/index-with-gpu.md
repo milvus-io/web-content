@@ -22,6 +22,9 @@ title: Indeks dengan GPU
         ></path>
       </svg>
     </button></h1><p>Panduan ini menguraikan langkah-langkah untuk membuat indeks dengan dukungan GPU di Milvus, yang secara signifikan dapat meningkatkan performa pencarian dalam skenario throughput tinggi dan recall tinggi. Untuk detail tentang jenis indeks GPU yang didukung oleh Milvus, lihat <a href="/docs/id/gpu_index.md">Indeks GPU</a>.</p>
+<div class="alert warning">
+<p>Halaman ini sudah tidak digunakan lagi. Untuk implementasi terbaru, lihat <a href="/docs/id/gpu-index-overview.md">Ikhtisar Indeks GPU</a></p>
+</div>
 <h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Mengonfigurasi pengaturan Milvus untuk kontrol memori GPU<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -102,7 +105,7 @@ title: Indeks dengan GPU
 <p>Opsi yang mungkin untuk <strong>params</strong> meliputi:</p>
 <ul>
 <li><p><strong>intermediate_graph_degree</strong><em>(int</em>): Mempengaruhi waktu pemanggilan dan pembuatan dengan menentukan derajat grafik sebelum pemangkasan. Nilai yang disarankan adalah <strong>32</strong> atau <strong>64</strong>.</p></li>
-<li><p><strong>graph_degree</strong><em>(int</em>): Mempengaruhi performa pencarian dan pemanggilan dengan mengatur derajat graf setelah pemangkasan. Biasanya, nilai ini adalah setengah dari <strong>intermediate_graph_degree</strong>. Perbedaan yang lebih besar antara kedua derajat ini menghasilkan waktu pembangunan yang lebih lama. Nilainya harus lebih kecil dari nilai <strong>intermediate_graph_degree</strong>.</p></li>
+<li><p><strong>graph_degree</strong><em>(int</em>): Mempengaruhi performa pencarian dan pemanggilan dengan mengatur derajat graf setelah pemangkasan. Biasanya, ini adalah setengah dari <strong>intermediate_graph_degree</strong>. Perbedaan yang lebih besar antara kedua derajat ini menghasilkan waktu pembangunan yang lebih lama. Nilainya harus lebih kecil dari nilai <strong>intermediate_graph_degree</strong>.</p></li>
 <li><p><strong>build_algo</strong><em>(string</em>): Memilih algoritma pembuatan graf sebelum pemangkasan. Pilihan yang mungkin:</p>
 <ul>
 <li><p><strong>IVF_PQ</strong>: Menawarkan kualitas yang lebih tinggi tetapi waktu pembuatan yang lebih lambat.</p></li>
@@ -218,7 +221,7 @@ collection.create_index(
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Parameter pencarian untuk kedua jenis indeks ini serupa dengan yang digunakan pada <strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> dan <a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong>. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/search.md#Prepare-search-parameters">Melakukan Pencarian Kemiripan Vektor</a>.</p></li>
+<p>Parameter pencarian untuk kedua jenis indeks ini serupa dengan yang digunakan di <strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> dan <a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong>. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/search.md#Prepare-search-parameters">Melakukan Pencarian Kemiripan Vektor</a>.</p></li>
 </ul>
 <h3 id="Conduct-a-search" class="common-anchor-header">Melakukan pencarian<button data-href="#Conduct-a-search" class="anchor-icon" translate="no">
       <svg translate="no"

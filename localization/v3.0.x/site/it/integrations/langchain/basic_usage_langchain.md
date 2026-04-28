@@ -39,7 +39,7 @@ title: Utilizzare Milvus come negozio di vettori
     </button></h2><p>È necessario installare <code translate="no">langchain-milvus</code> e altre dipendenze necessarie.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU langchain-milvus milvus-lite langchain-openai</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>L'ultima versione di pymilvus viene fornita con un database vettoriale locale Milvus Lite, buono per la prototipazione. Se si dispone di una grande quantità di dati, come più di un milione di documenti, si consiglia di configurare un server Milvus più performante su <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker o kubernetes</a>.</p>
+<p>L'ultima versione di pymilvus viene fornita con un database vettoriale locale Milvus Lite, buono per la prototipazione. Se si dispone di una grande quantità di dati, come ad esempio più di un milione di documenti, si consiglia di configurare un server Milvus più performante su <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker o kubernetes</a>.</p>
 <h2 id="Initialization" class="common-anchor-header">Inizializzazione<button data-href="#Initialization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -283,7 +283,7 @@ I0000 00:00:1761298048.354308 7886403 fork_posix.cc:71] Other threads are curren
 * Building an exciting new project with LangChain - come check it out! [{'source': 'tweet', 'pk': 'e991a253-5f37-46ae-850a-82a660e33013'}]
 * LangGraph is the best framework for building stateful, agentic applications! [{'source': 'tweet', 'pk': 'eb149e29-239a-4e2c-9f99-751cb7207abf'}]
 </code></pre>
-<h4 id="Similarity-search-with-score" class="common-anchor-header">Ricerca per similarità con punteggio</h4><p>È anche possibile effettuare una ricerca con punteggio:</p>
+<h4 id="Similarity-search-with-score" class="common-anchor-header">Ricerca per similarità con punteggio</h4><p>È possibile effettuare la ricerca anche con il punteggio:</p>
 <pre><code translate="no" class="language-python">results = vector_store.similarity_search_with_score(
     <span class="hljs-string">&quot;Will it be hot tomorrow?&quot;</span>, k=<span class="hljs-number">1</span>, expr=<span class="hljs-string">&#x27;source == &quot;news&quot;&#x27;</span>
 )

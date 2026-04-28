@@ -19,7 +19,7 @@ title: 使用 Milvus 和 FiftyOne 进行视觉搜索
         ></path>
       </svg>
     </button></h1><p><a href="https://docs.voxel51.com/">FiftyOne</a>是一款用于构建高质量数据集和计算机视觉模型的开源工具。本指南可帮助您将 Milvus 的相似性搜索功能集成到 FiftyOne 中，从而在自己的数据集上进行视觉搜索。</p>
-<p>FiftyOne 提供了一个 API，用于创建 Milvus Collections、上传向量和运行相似性查询，既可以在 Python 中<a href="https://docs.voxel51.com/integrations/milvus.html#milvus-query">编程</a>，也可以在应用程序中通过点选进行操作。本页演示的重点是编程集成。</p>
+<p>FiftyOne 提供了一个 API，用于创建 Milvus Collections、上传向量和运行相似性查询，既可以在 Python 中<a href="https://docs.voxel51.com/integrations/milvus.html#milvus-query">编程</a>，也可以在应用程序中通过点选进行操作。本页的演示重点是程序集成。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -421,7 +421,7 @@ dataset.list_brain_runs(
     supports_prompts=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>或使用 <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.get_brain_info"><code translate="no">get_brain_info()</code></a>检索大脑运行的配置信息：</p>
+<p>或使用 <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.get_brain_info"><code translate="no">get_brain_info()</code></a>检索有关大脑运行配置的信息：</p>
 <pre><code translate="no" class="language-python">info = dataset.get_brain_info(brain_key)
 <span class="hljs-built_in">print</span>(info)
 <button class="copy-code-btn"></button></code></pre>

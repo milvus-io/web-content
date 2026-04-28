@@ -108,7 +108,7 @@ summary: Scoprite come configurare il log per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Dimensione massima di un file di log, unità: MB.      </td>
+      <td>        La dimensione massima di un file di log, unità: MB.      </td>
       <td>300</td>
     </tr>
   </tbody>

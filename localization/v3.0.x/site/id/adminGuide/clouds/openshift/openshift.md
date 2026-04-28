@@ -65,12 +65,12 @@ summary: Pelajari cara menggunakan cluster Milvus di OpenShift.
 <li><p>Di konsol openshift Anda, navigasikan ke <strong>Workloads</strong> &gt; <strong>Pods</strong>. Pilih proyek <strong>cert-manager</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/openshift-cert-manager-1.png" alt="cert-manager-1" class="doc-image" id="cert-manager-1" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openshift-cert-manager-1.png" alt="cert-manager-1" class="doc-image" id="cert-manager-1" />
    </span> <span class="img-wrapper"> <span>cert-manager-1</span> </span></p></li>
 <li><p>Pastikan semua pod sudah siap. Sebagai contoh, gambar di bawah ini menunjukkan bahwa pods masih dalam proses memulai. Tunggu hingga semua pod ini siap.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/openshift-cert-manager-2.png" alt="cert-manager-2" class="doc-image" id="cert-manager-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openshift-cert-manager-2.png" alt="cert-manager-2" class="doc-image" id="cert-manager-2" />
    </span> <span class="img-wrapper"> <span>cert-manager-2</span> </span></p></li>
 </ol></li>
 </ol>

@@ -201,6 +201,7 @@ job_id = client.compact(
     target_size=max_int64
 )
 <button class="copy-code-btn"></button></code></pre>
+<p><a id="parameter-reference"></a></p>
 <h4 id="Parameter-reference" class="common-anchor-header">Référence des paramètres</h4><p>Le tableau suivant explique les paramètres.</p>
 <table>
    <tr>
@@ -263,6 +264,7 @@ state = client.get_compaction_state(job_id)
 <li><p><strong>Tenez compte du compromis de performance.</strong> Le compactage par fusion forcée est une opération gourmande en ressources. Elle lit, fusionne et réécrit les données des segments. Programmez-la pendant les périodes de faible trafic pour minimiser l'impact sur la latence des requêtes.</p></li>
 <li><p><strong>Surveillez le nombre de segments avant et après l'opération.</strong> Utilisez <code translate="no">get_compaction_state()</code> et <code translate="no">list_persistent_segments</code> pour vérifier que le compactage a produit des segments moins nombreux et plus grands, comme prévu.</p></li>
 </ul>
+<p><a id="faq"></a></p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -329,7 +331,7 @@ state = client.get_compaction_state(job_id)
    <tr>
      <td><p>Capacité d'aplanissement de la collection</p></td>
      <td><p>Limitée ; des exécutions répétées peuvent encore laisser de nombreux segments moyens.</p></td>
-     <td><p>Forte ; conçue pour réduire le nombre de segments et augmenter le taux de remplissage.</p></td>
+     <td><p>Forte ; conçue pour réduire le nombre de segments et augmenter le taux de remplissage</p></td>
    </tr>
    <tr>
      <td><p>Prise en compte de la topologie</p></td>
@@ -339,7 +341,7 @@ state = client.get_compaction_state(job_id)
    <tr>
      <td><p>Réglage du parallélisme de lecture</p></td>
      <td><p>Aucun</p></td>
-     <td><p>Ajuste le nombre de sorties en utilisant queryNodeCount / (replicas × shards) lorsque c'est valide</p></td>
+     <td><p>Ajuste le nombre de sorties en utilisant queryNodeCount / (replicas × shards) lorsqu'il est valide</p></td>
    </tr>
    <tr>
      <td><p>Cas d'utilisation typique</p></td>

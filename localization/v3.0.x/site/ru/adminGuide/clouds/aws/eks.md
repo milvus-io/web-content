@@ -101,7 +101,22 @@ summary: 'Узнайте, как развернуть кластер Milvus на
         ></path>
       </svg>
     </button></h2><p>Вы можете настроить необходимые ресурсы AWS, включая ведро AWS S3 и кластер EKS, используя AWS Management Console, AWS CLI или инструменты IaC, такие как Terraform. В этом документе для демонстрации настройки ресурсов AWS предпочтительно использовать AWS CLI.</p>
-<h3 id="Create-an-Amazon-S3-Bucket" class="common-anchor-header">Создание ведра Amazon S3</h3><ul>
+<h3 id="Create-an-Amazon-S3-Bucket" class="common-anchor-header">Создание ведра Amazon S3<button data-href="#Create-an-Amazon-S3-Bucket" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Создайте ведро AWS S3.</p>
 <p>Ознакомьтесь с <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">правилами именования ведер</a> и соблюдайте правила именования при присвоении имени ведру AWS S3.</p>
 <pre><code translate="no" class="language-shell">milvus_bucket_name=&quot;milvus-bucket-$(openssl rand -hex 12)&quot;
@@ -156,7 +171,22 @@ aws iam create-policy --policy-name MilvusS3ReadWrite --policy-document file://m
 <pre><code translate="no" class="language-shell">aws iam attach-user-policy --user-name &lt;your-user-name&gt; --policy-arn &quot;arn:aws:iam::&lt;your-iam-account-id&gt;:policy/MilvusS3ReadWrite&quot;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Create-an-Amazon-EKS-Cluster" class="common-anchor-header">Создание кластера Amazon EKS</h3><ul>
+<h3 id="Create-an-Amazon-EKS-Cluster" class="common-anchor-header">Создание кластера Amazon EKS<button data-href="#Create-an-Amazon-EKS-Cluster" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Подготовьте файл конфигурации кластера следующим образом и назовите его <code translate="no">eks_cluster.yaml</code>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">eksctl.io/v1alpha5</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">ClusterConfig</span>
@@ -241,7 +271,22 @@ kubectl get nodes -A -o wide
 <p>Установите оригинальный класс хранения gp2 StorageClass в значение не по умолчанию.</p>
 <pre><code translate="no" class="language-shell">kubectl patch storageclass gp2 -p &#x27;{&quot;metadata&quot;: {&quot;annotations&quot;:{&quot;storageclass.kubernetes.io/is-default-class&quot;:&quot;false&quot;}}}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Install-AWS-LoadBalancer-Controller" class="common-anchor-header">Установите контроллер AWS LoadBalancer</h3><ul>
+<h3 id="Install-AWS-LoadBalancer-Controller" class="common-anchor-header">Установите контроллер AWS LoadBalancer<button data-href="#Install-AWS-LoadBalancer-Controller" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Добавьте репо Helm chars.</p>
 <pre><code translate="no" class="language-shell">helm repo add eks https://aws.github.io/eks-charts
 helm repo update
@@ -486,7 +531,7 @@ query after delete by expr=`pk in [&quot;0&quot; , &quot;1&quot;]` -&gt; result:
 <pre><code translate="no" class="language-shell">eksctl delete cluster --name milvus-eks-cluster --region us-east-2
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Удалите ведро AWS S3 и связанные с ним политики IAM.</p>
-<p><strong>Вам следует заменить имя ведра и ARN политики на свои собственные.</strong></p>
+<p><strong>Замените имя ведра и ARN политики на свои собственные.</strong></p>
 <pre><code translate="no" class="language-shell">aws s3 rm s3://milvus-bucket-039dd013c0712f085d60e21f --recursive
 
 aws s3api delete-bucket --bucket milvus-bucket-039dd013c0712f085d60e21f --region us-east-2

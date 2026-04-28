@@ -110,7 +110,7 @@ Le configurazioni delle risorse private sovrascrivono le configurazioni delle ri
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster_resource.yaml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-Le risorse del cluster verranno aggiornate in base al file di configurazione se nel cluster K8s è presente un cluster Milvus chiamato <code translate="no">my-release</code>. Altrimenti, verrà creato un nuovo cluster Milvus.</div>
+Le risorse del cluster saranno aggiornate in base al file di configurazione se nel cluster K8s è presente un cluster Milvus chiamato <code translate="no">my-release</code>. Altrimenti, verrà creato un nuovo cluster Milvus.</div>
 <h2 id="Configure-private-resources" class="common-anchor-header">Configurare le risorse private<button data-href="#Configure-private-resources" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -174,10 +174,9 @@ Inoltre, quando si configura il proxy, c'è un campo aggiuntivo chiamato `servic
             <li><a href="/docs/it/configure_indexcoord.md">Indice coord</a></li>
             <li><a href="/docs/it/configure_metastore.md">Metastore</a></li>
             <li><a href="/docs/it/configure_mq.md">Coda di messaggi</a></li>
-            <li><a href="/docs/it/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/it/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/it/configure_trace.md">Traccia</a></li>
-            <li><a href="/docs/it/configure_quotaandlimits.md">Quote e limiti</a></li>
+            <li><a href="/docs/it/configure_quotaandlimits.md">Quota e limiti</a></li>
         </ul>
     </td>
   </tr>

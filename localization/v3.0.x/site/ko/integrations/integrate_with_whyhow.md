@@ -90,19 +90,64 @@ milvus_client = ClientMilvus(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Defining-necessary-variables" class="common-anchor-header">필요한 변수 정의</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Define collection name</span>
+    </button></h2><h3 id="Defining-necessary-variables" class="common-anchor-header">필요한 변수 정의<button data-href="#Defining-necessary-variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Define collection name</span>
 COLLECTION_NAME=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span> <span class="hljs-comment"># take your own collection name</span>
 
 <span class="hljs-comment"># Define vector dimension size</span>
 DIMENSION=<span class="hljs-number">1536</span> <span class="hljs-comment"># decide by the model you use</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-schema" class="common-anchor-header">스키마 추가</h3><p>밀버스 라이트 데이터베이스에 데이터를 삽입하기 전에 먼저 데이터 필드를 정의해야 하는데, 이를 여기서 스키마라고 합니다. <code translate="no">CollectionSchema</code> 객체를 생성하고 <code translate="no">add_field()</code> 을 통해 데이터 필드를 추가하면 데이터 유형과 특성을 제어할 수 있습니다. 이 단계는 Milvus에 데이터를 삽입하기 전에 반드시 거쳐야 하는 단계입니다.</p>
+<h3 id="Add-schema" class="common-anchor-header">스키마 추가<button data-href="#Add-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>밀버스 라이트 데이터베이스에 데이터를 삽입하기 전에 먼저 데이터 필드를 정의해야 하는데, 이를 여기서 스키마라고 합니다. <code translate="no">CollectionSchema</code> 객체를 생성하고 <code translate="no">add_field()</code> 을 통해 데이터 필드를 추가하면 데이터 유형과 특성을 제어할 수 있습니다. 이 단계는 Milvus에 데이터를 삽입하기 전에 반드시 거쳐야 하는 단계입니다.</p>
 <pre><code translate="no" class="language-python">schema = milvus_client.create_schema(auto_id=<span class="hljs-literal">True</span>) <span class="hljs-comment"># Enable id matching</span>
 
 schema = milvus_client.add_field(schema=schema, field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 schema = milvus_client.add_field(schema=schema, field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=DIMENSION)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-index" class="common-anchor-header">인덱스 생성</h3><p>각 스키마마다 인덱스가 있으면 쿼리가 훨씬 더 효율적입니다. 인덱스를 생성하려면 먼저 <code translate="no">index_params</code> 객체가 필요하고 나중에 이 <code translate="no">IndexParams</code> 객체에 인덱스 데이터를 추가합니다.</p>
+<h3 id="Create-index" class="common-anchor-header">인덱스 생성<button data-href="#Create-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>각 스키마마다 인덱스가 있으면 쿼리가 훨씬 더 효율적입니다. 인덱스를 생성하려면 먼저 <code translate="no">index_params</code> 객체가 필요하고 나중에 이 <code translate="no">IndexParams</code> 객체에 인덱스 데이터를 추가합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Start to indexing data field</span>
 index_params = milvus_client.prepare_index_params()
 index_params = milvus_client.add_index(
@@ -113,7 +158,22 @@ index_params = milvus_client.add_index(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>이 방법은 공식 Milvus 구현<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md">(공식 문서)</a>에 대한 얇은 래퍼입니다.</p>
-<h3 id="Create-collection" class="common-anchor-header">컬렉션 만들기</h3><p>모든 데이터 필드를 정의하고 색인을 생성한 후에는 이제 데이터에 빠르고 정확하게 액세스할 수 있도록 데이터베이스 컬렉션을 만들어야 합니다. 여기서 한 가지 언급해야 할 것은 모든 데이터를 자유롭게 업로드할 수 있도록 <code translate="no">enable_dynamic_field</code> 을 true로 초기화했다는 것입니다. 그 대가는 데이터 쿼리가 비효율적일 수 있다는 것입니다.</p>
+<h3 id="Create-collection" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>모든 데이터 필드를 정의하고 색인을 생성한 후에는 이제 데이터에 빠르고 정확하게 액세스할 수 있도록 데이터베이스 컬렉션을 만들어야 합니다. 여기서 한 가지 언급해야 할 것은 모든 데이터를 자유롭게 업로드할 수 있도록 <code translate="no">enable_dynamic_field</code> 을 true로 초기화했다는 것입니다. 그 대가는 데이터 쿼리가 비효율적일 수 있다는 것입니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection</span>
 milvus_client.create_collection(
     collection_name=COLLECTION_NAME,
@@ -177,7 +237,22 @@ res = milvus_client.search(
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&#x27;answer&#x27;</span>])
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&#x27;matches&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Rules" class="common-anchor-header">규칙</h3><p>이전 예제에서는 인덱스의 모든 문서를 고려했습니다. 그러나 때로는 미리 정의된 일부 조건(예: <code translate="no">filename=harry-potter.pdf</code>)을 충족하는 문서만 검색하는 것이 유리할 수 있습니다. <code translate="no">whyhow_rbr</code> 에서는 검색 매개변수를 조정하여 이 작업을 수행할 수 있습니다.</p>
+<h3 id="Rules" class="common-anchor-header">규칙<button data-href="#Rules" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이전 예제에서는 인덱스의 모든 문서를 고려했습니다. 그러나 때로는 미리 정의된 일부 조건(예: <code translate="no">filename=harry-potter.pdf</code>)을 충족하는 문서만 검색하는 것이 유리할 수 있습니다. <code translate="no">whyhow_rbr</code> 에서는 검색 매개변수를 조정하여 이 작업을 수행할 수 있습니다.</p>
 <p>규칙은 다음과 같은 메타데이터 속성을 제어할 수 있습니다.</p>
 <ul>
 <li><code translate="no">filename</code> 파일 이름</li>
@@ -208,7 +283,22 @@ res = milvus_client.search(
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&#x27;matches&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
 <p>이 예에서는 먼저 해리포터 관련 PDF를 저장하는 파티션을 만들고, 이 파티션 내에서 검색을 통해 가장 직접적인 정보를 얻을 수 있습니다. 또한 페이지 번호를 필터로 적용하여 검색하고자 하는 정확한 페이지를 지정합니다. 파일러 매개변수는 <a href="https://milvus.io/docs/boolean.md">부울 규칙을</a> 따라야 한다는 점을 기억하세요.</p>
-<h3 id="Clean-up" class="common-anchor-header">정리</h3><p>마지막으로 모든 지침을 구현한 후 <code translate="no">drop_collection()</code> 을 호출하여 데이터베이스를 정리할 수 있습니다.</p>
+<h3 id="Clean-up" class="common-anchor-header">정리<button data-href="#Clean-up" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>마지막으로 모든 지침을 구현한 후 <code translate="no">drop_collection()</code> 을 호출하여 데이터베이스를 정리할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Clean up</span>
 milvus_client.drop_collection(
     collection_name=COLLECTION_NAME

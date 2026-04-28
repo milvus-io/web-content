@@ -22,7 +22,10 @@ title: Bidang Skalar Indeks
         ></path>
       </svg>
     </button></h1><p>Di Milvus, indeks skalar digunakan untuk mempercepat penyaringan metafilter berdasarkan nilai bidang non-vektor tertentu, mirip dengan indeks basis data tradisional. Panduan ini akan memandu Anda dalam membuat dan mengonfigurasi indeks skalar untuk bidang seperti bilangan bulat, string, dll.</p>
-<h2 id="Types-of-scalar-indexing" class="common-anchor-header">Jenis pengindeksan skalar<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
+<div class="alert warning">
+<p>Halaman ini sudah tidak digunakan lagi. Untuk implementasi terbaru, lihat <a href="/docs/id/bitmap.md">BITMAP</a>, <a href="/docs/id/inverted.md">INVERTED</a>, <a href="/docs/id/ngram.md">NGRAM</a>, <a href="/docs/id/rtree.md">RTREE</a> <a href="/docs/id/stl-sort.md">STL_SORT</a>, dan lainnya.</p>
+</div>
+<h2 id="Types-of-scalar-indexing" class="common-anchor-header">Jenis-jenis pengindeksan skalar<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,8 +41,8 @@ title: Bidang Skalar Indeks
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Pengindeksan otomatis</a></strong>: Milvus secara otomatis menentukan tipe indeks berdasarkan tipe data dari field skalar. Ini cocok bila Anda tidak perlu mengontrol jenis indeks tertentu.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Pengindeksan khusus</a></strong>: Anda menentukan jenis indeks yang tepat, seperti indeks terbalik. Ini memberikan kontrol lebih besar atas pemilihan jenis indeks.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Pengindeksan otomatis</a></strong>: Milvus secara otomatis menentukan tipe indeks berdasarkan tipe data dari bidang skalar. Ini cocok bila Anda tidak perlu mengontrol jenis indeks tertentu.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Pengindeksan khusus</a></strong>: Anda menentukan jenis indeks yang tepat, seperti indeks terbalik atau <a href="/docs/id/bitmap.md">indeks bitmap</a>. Ini memberikan kontrol lebih besar atas pemilihan jenis indeks.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">Pengindeksan otomatis<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -193,6 +196,7 @@ client.createIndex(createIndexReq);
 <p>Untuk pengindeksan khusus, nilai yang valid adalah:</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (Disarankan) Indeks terbalik terdiri dari kamus istilah yang berisi semua kata bertanda yang diurutkan menurut abjad. Untuk detailnya, lihat <a href="/docs/id/scalar_index.md">Indeks Skalar</a>.</p></li>
+<li><p><strong>BITMAP</strong>: Jenis indeks yang menyimpan bitmap dari semua nilai unik dalam suatu bidang. Untuk detailnya, lihat <a href="/docs/id/bitmap.md">BITMAP</a>.</p></li>
 <li><p><strong>STL_SORT</strong>: Mengurutkan bidang skalar menggunakan algoritme pengurutan pustaka templat standar. Hanya mendukung bidang numerik (misalnya, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: Struktur data pohon untuk pencarian dan pengambilan awalan yang cepat. Mendukung bidang VARCHAR.</p></li>
 </ul></li>
@@ -306,21 +310,3 @@ System.out.println(indexNames);
 <span class="hljs-comment">//     &quot;inverted_index&quot;</span>
 <span class="hljs-comment">// ]   </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li>Saat ini, pengindeksan skalar mendukung tipe data INT8, INT16, INT32, INT64, FLOAT, DOUBLE, BOOL, VARCHAR, dan ARRAY, tetapi tidak mendukung tipe data JSON.</li>
-</ul>

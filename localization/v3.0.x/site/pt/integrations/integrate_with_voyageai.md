@@ -111,7 +111,7 @@ res = milvus_client.insert(collection_name=<span class="hljs-string">&quot;demo_
 <li>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste os endereços <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">chave Api</a> no Zilliz Cloud.</li>
 </ul>
 </div>
-<p>Com todos os dados na base de dados vetorial do Milvus, podemos agora efetuar uma pesquisa semântica gerando uma incorporação vetorial para a consulta e realizar uma pesquisa vetorial.</p>
+<p>Com todos os dados na base de dados de vectores do Milvus, podemos agora efetuar uma pesquisa semântica gerando uma incorporação de vectores para a consulta e realizar uma pesquisa de vectores.</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded?&quot;</span>]
 
 query_vectors = voyage_client.embed(
@@ -196,7 +196,7 @@ res = milvus_client.search(
 
 DIMENSION = <span class="hljs-number">1024</span>  <span class="hljs-comment"># Dimension of vector embedding</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Em seguida, precisamos de preparar os dados de entrada para o Milvus. Vamos reutilizar o cliente VoyageAI que criámos no capítulo anterior. Para ver o modelo de incorporação multimodal do VoyageAI disponível, consulte esta <a href="https://docs.voyageai.com/docs/multimodal-embeddings">página</a>.</p>
+<p>Em seguida, precisamos de preparar os dados de entrada para o Milvus. Vamos reutilizar o cliente VoyageAI que criámos no capítulo anterior. Para conhecer o modelo de incorporação multimodal do VoyageAI disponível, consulte esta <a href="https://docs.voyageai.com/docs/multimodal-embeddings">página</a>.</p>
 <pre><code translate="no" class="language-python">pages = pdf_url_to_screenshots(<span class="hljs-string">&quot;https://www.fdrlibrary.org/documents/356632/390886/readingcopy.pdf&quot;</span>, zoom=<span class="hljs-number">3.0</span>)
 inputs = [[img] <span class="hljs-keyword">for</span> img <span class="hljs-keyword">in</span> pages]
 

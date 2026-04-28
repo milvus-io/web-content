@@ -2,7 +2,7 @@
 id: embed-with-cohere.md
 order: 9
 summary: 이 문서에서는 코히어 임베딩 함수를 사용하여 코히어 임베딩 모델을 사용하여 문서와 쿼리를 인코딩하는 방법을 설명합니다.
-title: Cohere 임베드
+title: Cohere 포함
 ---
 <h1 id="Cohere" class="common-anchor-header">Cohere<button data-href="#Cohere" class="anchor-icon" translate="no">
       <svg translate="no"

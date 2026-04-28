@@ -96,7 +96,7 @@ title: 術語
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">Bulk Writer</a>是 Milvus SDK (例如 PyMilvus、Java SDK) 提供的資料處理工具，設計用來將原始資料集轉換成與 Milvus 相容的格式，以便有效率的匯入。</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">Bulk Writer</a>是 Milvus SDK (例如 PyMilvus、Java SDK) 提供的資料處理工具，設計用來將原始資料集轉換成與 Milvus 相容的格式，以便有效率地匯入。</p>
 <h2 id="Bulk-Insert" class="common-anchor-header">大量插入<button data-href="#Bulk-Insert" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -208,7 +208,7 @@ title: 術語
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 提供內建嵌入功能，可與常用的嵌入提供者一起使用。在 Milvus 中建立資料集之前，您可以使用這些功能為您的資料集製作內嵌，簡化準備資料和向量搜尋的程序。要以實際操作<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">來</a>建立嵌入，請參閱<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">使用 PyMilvus 的模型來產生文字嵌入</a>。</p>
+    </button></h2><p>Milvus 提供內建嵌入功能，可與常用的嵌入提供者一起使用。在 Milvus 中建立資料集之前，您可以使用這些功能來為您的資料集產生嵌入，簡化準備資料和向量搜尋的流程。要以實際操作<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">來</a>建立嵌入，請參閱<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">使用 PyMilvus 的模型來產生文字嵌入</a>。</p>
 <h2 id="Entity" class="common-anchor-header">實體<button data-href="#Entity" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -407,7 +407,7 @@ title: 術語
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>記憶體映射檔案可將檔案內容直接映射到記憶體中，從而實現高效的資料處理。當記憶體有限，無法載入所有資料時，這一點尤其有用。此技術可提升資料容量，並在某個程度上維持效能。但是，如果資料大大超出記憶體容量，搜尋和查詢速度可能會大幅降低。如需詳細資訊，請參閱<a href="https://milvus.io/docs/mmap.md">MMap-enabled Data Storage</a>。</p>
+    </button></h2><p>記憶體映射檔案透過直接將檔案內容映射到記憶體，實現高效的資料處理。當記憶體有限，無法載入所有資料時，這一點尤其有用。此技術可提升資料容量，並在某個程度上維持效能。但是，如果資料大大超出記憶體容量，搜尋和查詢速度可能會大幅降低。如需詳細資訊，請參閱<a href="https://milvus.io/docs/mmap.md">MMap-enabled Data Storage</a>。</p>
 <h2 id="Milvus-Backup" class="common-anchor-header">Milvus 備份<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -551,7 +551,7 @@ title: 術語
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>欄位的分割區金鑰屬性可根據實體的分割區金鑰值，將實體分割成不同的分割區。這種分組方式可確保分享相同關鍵值的實體儲存在一起，這可讓系統在使用分區關鍵欄位篩選的查詢過程中，繞過不相關的分區，從而加快搜尋作業。如需詳細資訊，請參閱<a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">使用分割區金鑰</a>。</p>
+    </button></h2><p>欄位的分割區金鑰屬性可根據實體的分割區金鑰值，將實體分割成不同的分割區。這種分組方式可確保分享相同關鍵值的實體儲存在一起，這可讓系統在使用分區關鍵字段篩選的查詢過程中，繞過不相關的分區，從而加快搜尋作業。如需詳細資訊，請參閱<a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">使用分割區金鑰</a>。</p>
 <h2 id="PChannel" class="common-anchor-header">PC 通道<button data-href="#PChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -647,7 +647,7 @@ title: 術語
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>模式是定義資料類型和資料屬性的元資訊。每個集合都有自己的集合模式，定義集合的所有欄位、自動 ID (主索引鍵) 分配啟用和集合描述。欄位模式也包含在集合模式中，它定義了欄位的名稱、資料類型和其他屬性。如需詳細資訊，請參閱<a href="https://milvus.io/docs/schema.md#Manage-Schema">管理模式</a>。</p>
+    </button></h2><p>模式是定義資料類型和資料屬性的元資訊。每個集合都有自己的集合模式，定義集合的所有欄位、自動 ID (主索引鍵) 分配啟用，以及集合描述。欄位模式也包含在集合模式中，它定義了欄位的名稱、資料類型和其他屬性。如需詳細資訊，請參閱<a href="https://milvus.io/docs/schema.md#Manage-Schema">管理模式</a>。</p>
 <h2 id="Search" class="common-anchor-header">搜尋<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -680,7 +680,7 @@ title: 術語
         ></path>
       </svg>
     </button></h2><p>片段是自動建立的資料檔案，用來儲存插入的資料。一個集合可能包含多個區段，每個區段可以容納許多實體。在向量相似性搜尋期間，Milvus 會檢查每個區段以編譯搜尋結果。</p>
-<p>區段有兩種類型：成長型和封閉型。成長中的片段會持續收集新資料，直到達到特定的臨界值或時間限制，之後它就會被封鎖。一旦封鎖，區段就不再接受新資料，並轉移至物件儲存區。同時，傳入的資料會被路由到新的成長區段。達到預先定義的實體限制或超過成長狀態允許的最大持續時間，都會觸發從成長區段轉換到封閉區段。如需詳細資訊，請參閱<a href="https://milvus.io/docs/replica.md#Design-Details">設計細節</a>。</p>
+<p>分段有兩種類型：成長型和封閉型。成長中的片段會持續收集新資料，直到達到特定的臨界值或時間限制，之後它就會被封鎖。一旦封鎖，區段就不再接受新資料，並轉移至物件儲存區。同時，傳入的資料會被路由到新的成長區段。達到預先定義的實體限制或超過成長狀態允許的最大持續時間，都會觸發從成長區段轉換到封閉區段。如需詳細資訊，請參閱<a href="https://milvus.io/docs/replica.md#Design-Details">設計細節</a>。</p>
 <h2 id="Spark-Milvus-Connector" class="common-anchor-header">Spark-Milvus Connector<button data-href="#Spark-Milvus-Connector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -712,7 +712,7 @@ title: 術語
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 可透過使用分片 (Shard) 將寫入作業分散至多個節點，進而增強資料寫入效能。這可充分利用群集的平行運算能力。</p>
+    </button></h2><p>Milvus 透過使用 Shard 將寫入作業分散到多個節點來增強資料寫入效能，Shard 是根據主鍵的散列方式來組織。這可充分利用群集的平行運算能力。</p>
 <p><em>分區可透過指定分區名稱來降低讀取負載，而分片則可將寫入負載分散到多台伺服器。</em></p>
 <h2 id="Sparse-vector" class="common-anchor-header">稀疏向量<button data-href="#Sparse-vector" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -777,7 +777,7 @@ title: 術語
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>VChannel 代表虛擬通道。每個 VChannel 代表集合中的一個分片。每個集合會被指派一組 VChannel，用來記錄資料的插入、刪除和更新。VChannels 在邏輯上是分開的，但透過串流服務在實體上共用資源。如需詳細資訊，請參閱<a href="/docs/zh-hant/streaming_service.md">串流服務</a>。</p>
+    </button></h2><p>VChannel 代表虛擬通道。每個 VChannel 代表集合中的一個分片。每個集合都會被指派一組 VChannels，用來記錄資料的插入、刪除和更新。VChannels 在邏輯上是分開的，但透過串流服務在實體上共用資源。如需詳細資訊，請參閱<a href="/docs/zh-hant/streaming_service.md">串流服務</a>。</p>
 <h2 id="Vector" class="common-anchor-header">向量<button data-href="#Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

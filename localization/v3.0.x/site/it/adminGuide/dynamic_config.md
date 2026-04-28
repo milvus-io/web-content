@@ -150,7 +150,7 @@ QueryCoord-1(ip:port) &gt; configuration  # List the configuration of the node
 <tr><td>quotaAndLimits.flushRate.enabled</td><td>FALSO</td></tr>
 <tr><td>quotaAndLimits.compactionRate.enabled</td><td>FALSO</td></tr>
 <tr><td>quotaElimiti.dml.abilitato</td><td>FALSO</td></tr>
-<tr><td>quotaAndLimits.dql.enabled</td><td>FALSO</td></tr>
+<tr><td>quotaElimiti.dql.abilitato</td><td>FALSO</td></tr>
 <tr><td>quotaAndLimits.limits.collection.maxNum</td><td>64</td></tr>
 <tr><td>quotaAndLimits.limitWriting.forceDeny</td><td>FALSO</td></tr>
 <tr><td>quotaAndLimits.limitWriting.ttProtection.enabled</td><td>FALSO</td></tr>

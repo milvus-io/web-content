@@ -94,13 +94,13 @@ beta: Milvus 2.6.4+
 <ul>
 <li><p>Der Rohvektor eines jeden Knotens, die Kantenliste und die PQ-Daten seiner Nachbarn werden zusammen auf der Festplatte gespeichert.</p></li>
 <li><p>Dieses Layout stellt sicher, dass der Besuch eines Knotens (z. B. Vektor 0) nur eine einzige Festplatten-E/A erfordert.</p></li>
-<li><p>Da die PQ-Daten in der Nähe mehrerer Knoten redundant gespeichert werden, erhöht sich die Größe der Indexdatei beträchtlich, wodurch mehr Speicherplatz benötigt wird.</p></li>
+<li><p>Da die PQ-Daten in der Nähe mehrerer Knoten redundant gespeichert werden, erhöht sich die Größe der Indexdatei beträchtlich, so dass mehr Speicherplatz benötigt wird.</p></li>
 </ul>
 <h4 id="AISAQ-scale-mode" class="common-anchor-header">AISAQ-Skala-Modus</h4><p><strong>AISAQ-scale</strong> konzentriert sich auf die Reduzierung des Speicherplatzbedarfs bei gleichzeitiger Erfüllung der Leistungsanforderungen der Zielanwendungen.</p>
 <p>In diesem Modus:</p>
 <ul>
 <li><p>Die PQ-Daten werden separat auf der Festplatte gespeichert, ohne Redundanz.</p></li>
-<li><p>Dieses Design minimiert die Indexgröße, führt aber zu mehr E/A-Operationen während der Graphenüberquerung.</p></li>
+<li><p>Dieses Design minimiert die Indexgröße, führt aber zu mehr E/A-Operationen während der Durchquerung des Graphen.</p></li>
 <li><p>Um den IOPS-Overhead zu mindern, führt AISAQ zwei Optimierungen ein:</p>
 <ul>
 <li><p>Ein Rearrange-Algorithmus, der die PQ-Vektoren nach Priorität sortiert, um die Datenlokalität zu verbessern.</p></li>
@@ -188,13 +188,13 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p><code translate="no">search_list_size</code></p></td>
-     <td><p>Während der Indexerstellung definiert dieser Parameter die Größe des Kandidatenpools, der bei der Suche nach den nächsten Nachbarn für jeden Knoten verwendet wird. Für jeden Knoten, der dem Graphen hinzugefügt wird, führt der Algorithmus eine Liste der bisher gefundenen besten Kandidaten in der Größe search_list_size. Die Suche nach Nachbarn wird beendet, wenn diese Liste nicht mehr verbessert werden kann. Aus diesem endgültigen Kandidatenpool werden die Knoten mit dem höchsten Grad ausgewählt, um die endgültigen Kanten zu bilden.</p></td>
+     <td><p>Während der Indexerstellung definiert dieser Parameter die Größe des Kandidatenpools, der bei der Suche nach den nächsten Nachbarn für jeden Knoten verwendet wird. Für jeden Knoten, der dem Graphen hinzugefügt wird, führt der Algorithmus eine Liste der bisher gefundenen besten Kandidaten in der Größe search_list_size. Die Suche nach Nachbarn endet, wenn diese Liste nicht mehr verbessert werden kann. Aus diesem endgültigen Kandidatenpool werden die Knoten mit dem höchsten Grad ausgewählt, um die endgültigen Kanten zu bilden.</p></td>
      <td><p><strong>Typ</strong>: Integer</p><p><strong>Bereich</strong>: [1, 512]</p><p><strong>Standardwert</strong>: <code translate="no">100</code></p></td>
      <td><p>Eine größere search_list_size erhöht die Wahrscheinlichkeit, die wahren nächsten Nachbarn für jeden Knoten zu finden, was zu einem qualitativ hochwertigeren Graphen und einer besseren Suchleistung (recall) führen kann. Dies geht jedoch auf Kosten einer deutlich längeren Indexerstellungszeit. Er sollte immer auf einen Wert größer oder gleich max_degree gesetzt werden.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">inline_pq</code></p></td>
-     <td><p>Anzahl der PQ-Vektoren, die pro Indexknoten inline gespeichert werden (wird beim Zugriff auf den Knoten gelesen, um IO zu reduzieren)</p></td>
+     <td><p>Anzahl der PQ-Vektoren, die pro Index-Knoten inline gespeichert werden (wird beim Zugriff auf den Knoten gelesen, um den IO-Aufwand zu verringern)</p></td>
      <td><p><strong>Typ</strong>: Integer</p><p><strong>Bereich</strong>: [0, <em>max_degree</em>]</p><p><strong>Standardwert</strong>: <code translate="no">-1</code></p></td>
      <td><p>Höhere Werte von <code translate="no">inline_pq</code> verbessern die Leistung, erhöhen aber den Speicherplatz.</p><p>Setzen Sie <code translate="no">inline_pq</code>=0 für AISAQ im Skalierungsmodus.</p><p>Setzen Sie <code translate="no">inline_pq</code>=-1, um ungenutzten Platz im Index automatisch mit PQ-Vektoren zu füllen, um AISAQ im Skalierungsmodus weiter zu optimieren.</p><p>Setzen Sie <code translate="no">inline_pq</code><em>=max_degree</em> für AISAQ im Leistungsmodus.</p><p><code translate="no">inline_pq</code> Einstellungen zwischen 0 und <em>max_degree</em> ermöglichen ein einstellbares Gleichgewicht zwischen Leistung und Speicherplatzverbrauch.</p></td>
    </tr>
@@ -214,13 +214,13 @@ beta: Milvus 2.6.4+
      <td><p><code translate="no">pq_code_budget_gb_ratio</code></p></td>
      <td><p>Steuert die Größe der PQ-Codes (komprimierte Darstellungen der Datenpunkte) im Vergleich zur Größe der unkomprimierten Daten.</p></td>
      <td><p><strong>Typ</strong>: Fließkomma</p><p><strong>Bereich</strong>: (0.0, 0.25]</p><p><strong>Standardwert</strong>: <code translate="no">0.125</code></p></td>
-     <td><p>Ein höheres Verhältnis führt zu genaueren Suchergebnissen, da mehr Informationen über die ursprünglichen Vektoren gespeichert werden, erhöht aber den Rechenaufwand bei der Suche.</p><p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs zu wählen: (0.0417, 0.25].</p></td>
+     <td><p>Ein höheres Verhältnis führt zu genaueren Suchergebnissen, da mehr Informationen über die ursprünglichen Vektoren gespeichert werden, erhöht aber den Rechenaufwand bei der Suche.</p><p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs festzulegen: (0.0417, 0.25].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">disk_pq_code_budget_gb_ratio</code></p></td>
      <td><p>Steuert die Größe der PQ-Codes der im Index gespeicherten hochpräzisen Vektoren (die für die Neuordnung verwendet werden) im Vergleich zur Größe der unkomprimierten Daten.</p></td>
      <td><p><strong>Typ</strong>: Fließkomma</p><p><strong>Bereich</strong>: [0, 0.25]</p><p><strong>Standardwert</strong>: <code translate="no">0.25</code></p></td>
-     <td><p>Mit dem Standardwert 0,25 werden die Vektoren auf 25 % ihrer ursprünglichen Größe quantisiert (4fache Komprimierung), wodurch der Speicherplatz auf der Festplatte bei relativ geringen Auswirkungen auf die Genauigkeit reduziert wird.</p><p>Setzen Sie den Wert 0, um Vektoren mit voller Genauigkeit im Festplattenindex zu speichern und neu zu ordnen. Ein größerer Wert bietet eine höhere Wiederfindungsrate, erhöht aber die Festplattennutzung.</p></td>
+     <td><p>Mit dem Standardwert 0,25 werden die Vektoren auf 25 % ihrer ursprünglichen Größe quantisiert (4fache Komprimierung), was den Speicherplatz auf der Festplatte bei relativ geringen Auswirkungen auf die Genauigkeit reduziert.</p><p>Setzen Sie den Wert 0, um Vektoren mit voller Genauigkeit im Festplattenindex zu speichern und neu zu ordnen. Ein größerer Wert bietet eine höhere Wiederfindungsrate, erhöht aber die Festplattennutzung.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">pq_cache_size</code></p></td>

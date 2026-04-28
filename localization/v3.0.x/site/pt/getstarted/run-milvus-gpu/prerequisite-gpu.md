@@ -106,9 +106,24 @@ version:        545.29.06
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">Como posso iniciar um cluster do K8s localmente para fins de teste?</h3><p>Pode utilizar ferramentas como <a href="https://minikube.sigs.k8s.io/docs/">minikube</a>, <a href="https://kind.sigs.k8s.io/">kind</a> e <a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm</a> para configurar rapidamente um cluster Kubernetes localmente. O procedimento a seguir usa o minikube como exemplo.</p>
+    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">Como posso iniciar um cluster do K8s localmente para fins de teste?<button data-href="#How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pode utilizar ferramentas como o <a href="https://minikube.sigs.k8s.io/docs/">minikube</a>, o <a href="https://kind.sigs.k8s.io/">kind</a> e <a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">o Kubeadm</a> para configurar rapidamente um cluster Kubernetes localmente. O procedimento a seguir usa o minikube como exemplo.</p>
 <ol>
-<li>Descarregar o minikube</li>
+<li>Baixar o minikube</li>
 </ol>
 <p>Aceda à página <a href="https://minikube.sigs.k8s.io/docs/start/">Get Started</a>, verifique se cumpre as condições listadas na secção <strong>What you'll need</strong>, clique nos botões que descrevem a sua plataforma de destino e copie os comandos para transferir e instalar o binário.</p>
 <ol start="2">
@@ -125,7 +140,22 @@ version:        545.29.06
 <div class="alert note">
 <p>Certifique-se de que pode aceder ao cluster K8s através de <code translate="no">kubectl</code>. Se não tiver instalado o <code translate="no">kubectl</code> localmente, consulte <a href="https://minikube.sigs.k8s.io/docs/handbook/kubectl/">Utilizar o kubectl dentro do minikube</a>.</p>
 </div>
-<h3 id="How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes" class="common-anchor-header">Como posso iniciar um cluster do K8s com nós de trabalho de GPU?</h3><p>Se preferir usar nós de trabalho habilitados para GPU, pode seguir as etapas abaixo para criar um cluster K8s com nós de trabalho de GPU. Recomendamos instalar o Milvus em um cluster K8s com nós de trabalho de GPU e usar a classe de armazenamento padrão provisionada.</p>
+<h3 id="How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes" class="common-anchor-header">Como posso iniciar um cluster do K8s com nós de trabalho de GPU?<button data-href="#How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Se preferir usar nós de trabalho habilitados para GPU, pode seguir as etapas abaixo para criar um cluster K8s com nós de trabalho de GPU. Recomendamos instalar o Milvus em um cluster K8s com nós de trabalho de GPU e usar a classe de armazenamento padrão provisionada.</p>
 <ol>
 <li>Preparar nós de trabalho da GPU</li>
 </ol>

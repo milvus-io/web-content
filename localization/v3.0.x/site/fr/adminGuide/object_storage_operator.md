@@ -25,7 +25,7 @@ summary: Découvrez comment configurer le stockage d'objets avec Milvus Operator
 <p>Vous devez spécifier un fichier de configuration pour utiliser Milvus Operator afin de démarrer un cluster Milvus.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Il suffit de modifier le modèle de code dans <code translate="no">milvus_cluster_default.yaml</code> pour configurer les dépendances tierces. Les sections suivantes expliquent comment configurer respectivement le stockage d'objets, etcd et Pulsar.</p>
+<p>Il suffit de modifier le modèle de code dans <code translate="no">milvus_cluster_default.yaml</code> pour configurer les dépendances tierces. Les sections suivantes présentent la configuration du stockage d'objets, d'etcd et de Pulsar respectivement.</p>
 <h2 id="Configure-object-storage" class="common-anchor-header">Configuration du stockage d'objets<button data-href="#Configure-object-storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +42,22 @@ summary: Découvrez comment configurer le stockage d'objets avec Milvus Operator
         ></path>
       </svg>
     </button></h2><p>Un cluster Milvus utilise MinIO ou S3 comme stockage d'objets pour conserver les fichiers à grande échelle, tels que les fichiers d'index et les journaux binaires. Ajoutez les champs requis sous <code translate="no">spec.dependencies.storage</code> pour configurer le stockage d'objets, les options possibles sont <code translate="no">external</code> et <code translate="no">inCluster</code>.</p>
-<h3 id="Internal-object-storage" class="common-anchor-header">Stockage d'objets interne</h3><p>Par défaut, Milvus Operator déploie un MinIO en cluster pour Milvus. L'exemple de configuration suivant montre comment utiliser ce MinIO en tant que stockage d'objets interne.</p>
+<h3 id="Internal-object-storage" class="common-anchor-header">Stockage d'objets interne<button data-href="#Internal-object-storage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Par défaut, Milvus Operator déploie un MinIO en cluster pour Milvus. L'exemple de configuration suivant montre comment utiliser ce MinIO en tant que stockage d'objets interne.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -73,7 +88,22 @@ summary: Découvrez comment configurer le stockage d'objets avec Milvus Operator
 <li><p>Le champ <code translate="no">pvcDeletion</code> indique s'il faut supprimer le PVC (Persistent Volume Claim) lorsque le MinIO en cluster est supprimé.</p></li>
 </ul>
 <p>Les champs sous <code translate="no">inCluster.values</code> sont les mêmes que ceux du Milvus Helm Chart, et vous pouvez les trouver <a href="https://github.com/milvus-io/milvus-helm/blob/master/charts/minio/values.yaml">ici</a>.</p>
-<h3 id="External-object-storage" class="common-anchor-header">Stockage d'objets externes</h3><p>L'utilisation de <code translate="no">external</code> dans le fichier YAML modèle indique l'utilisation d'un service de stockage d'objets externe. Pour utiliser un stockage d'objets externe, vous devez définir correctement les champs sous <code translate="no">spec.dependencies.storage</code> et <code translate="no">spec.config.minio</code> dans le CRD Milvus.</p>
+<h3 id="External-object-storage" class="common-anchor-header">Stockage d'objets externes<button data-href="#External-object-storage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>L'utilisation de <code translate="no">external</code> dans le fichier YAML modèle indique l'utilisation d'un service de stockage d'objets externe. Pour utiliser un stockage d'objets externe, vous devez définir correctement les champs sous <code translate="no">spec.dependencies.storage</code> et <code translate="no">spec.config.minio</code> dans le CRD Milvus.</p>
 <h4 id="Use-Amazon-Web-Service-AWS-S3-as-external-object-storage" class="common-anchor-header">Utiliser Amazon Web Service (AWS) S3 comme stockage d'objets externe</h4><ul>
 <li><p>Configurer l'accès AWS S3 par AK/SK</p>
 <p>Il est généralement possible d'accéder à un seau S3 par une paire de clés d'accès et de secret d'accès. Vous pouvez créer un objet <code translate="no">Secret</code> pour les stocker dans votre Kubernetes comme suit :</p>

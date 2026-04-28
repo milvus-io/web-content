@@ -273,7 +273,7 @@ summary: >-
 <tr>
 <td><p>JatuhkanIndeks</p></td>
 <td><p>Jatuhkan indeks</p></td>
-<td><p><a href="/docs/id/index-vector-fields.md">Jatuhkan Indeks</a></p></td>
+<td><p><a href="/docs/id/index-vector-fields.md">Jatuhkan indeks</a></p></td>
 </tr>
 <tr>
 <td rowspan="10"><p>Hak Istimewa Manajemen Sumber Daya</p></td>

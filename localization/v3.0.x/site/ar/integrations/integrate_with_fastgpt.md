@@ -48,7 +48,7 @@ title: نشر FastGPT مع Milvus
 <span class="hljs-meta prompt_"># </span><span class="language-bash">curl -o docker-compose.yml https://raw.githubusercontent.com/labring/FastGPT/main/files/docker/docker-compose-zilliz.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>إذا كنت تستخدم إصدار <a href="https://zilliz.com/cloud">Zilliz،</a> فقم بتعديل معلمات الرابط <code translate="no">MILVUS_ADDRESS</code> و <code translate="no">MILVUS_TOKEN</code> في ملف docker-compose.yml، والذي يتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
+<p>إذا كنت تستخدم إصدار Zilliz، فقم بتعديل معلمات الرابط <code translate="no">MILVUS_ADDRESS</code> و <code translate="no">MILVUS_TOKEN</code> في ملف docker-compose.yml، والذي يتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
 </blockquote>
 <h2 id="Launch-the-Container" class="common-anchor-header">قم بتشغيل الحاوية<button data-href="#Launch-the-Container" class="anchor-icon" translate="no">
       <svg translate="no"

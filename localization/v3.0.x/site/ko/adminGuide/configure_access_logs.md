@@ -46,7 +46,22 @@ title: 액세스 로그 구성
 <li><strong>로컬 액세스 로그 파일용 구성</strong>: 로그를 로컬에 저장합니다.</li>
 <li><strong>로컬 액세스 로그를 MinIO에 업로드하기 위한 구성</strong>: 클라우드 스토리지 및 백업용.</li>
 </ul>
-<h3 id="Base-config" class="common-anchor-header">기본 구성</h3><p>기본 구성에는 액세스 로그를 활성화하고 로그 파일명을 정의하거나 stdout을 사용하는 것이 포함됩니다.</p>
+<h3 id="Base-config" class="common-anchor-header">기본 구성<button data-href="#Base-config" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>기본 구성에는 액세스 로그를 활성화하고 로그 파일명을 정의하거나 stdout을 사용하는 것이 포함됩니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -58,7 +73,22 @@ title: 액세스 로그 구성
 <li><code translate="no">proxy.accessLog.enable</code>: 액세스 로그 기능을 활성화할지 여부입니다. 기본값은 <strong>false입니다</strong>.</li>
 <li><code translate="no">proxy.accessLog.filename</code>: 접근 로그 파일의 이름입니다. 이 매개변수를 비워두면 액세스 로그가 stdout에 인쇄됩니다.</li>
 </ul>
-<h3 id="Config-for-local-access-log-files" class="common-anchor-header">로컬 액세스 로그 파일 구성</h3><p>로컬 파일 경로, 파일 크기, 순환 간격 등의 매개변수를 사용하여 액세스 로그 파일의 로컬 저장소를 구성합니다:</p>
+<h3 id="Config-for-local-access-log-files" class="common-anchor-header">로컬 액세스 로그 파일 구성<button data-href="#Config-for-local-access-log-files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>로컬 파일 경로, 파일 크기, 순환 간격 등의 매개변수를 사용하여 액세스 로그 파일의 로컬 저장소를 구성합니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -76,7 +106,22 @@ title: 액세스 로그 구성
 <li><code translate="no">proxy.accessLog.rotatedTime</code>: 단일 액세스 로그 파일을 순환하는 데 허용되는 최대 시간 간격(초)입니다. 지정된 시간 간격에 도달하면 로테이션 프로세스가 트리거되어 새 액세스 로그 파일이 생성되고 이전 로그 파일이 봉인됩니다.</li>
 <li><code translate="no">proxy.accessLog.maxBackups</code>: 보관할 수 있는 봉인된 액세스 로그 파일의 최대 개수입니다. 봉인된 액세스 로그 파일 수가 이 제한을 초과하면 가장 오래된 파일이 삭제됩니다.</li>
 </ul>
-<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">로컬 액세스 로그 파일을 MinIO에 업로드하기 위한 설정</h3><p>로컬 액세스 로그 파일을 MinIO에 업로드하도록 설정을 활성화하고 구성합니다:</p>
+<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">로컬 액세스 로그 파일을 MinIO에 업로드하기 위한 설정<button data-href="#Config-for-uploading-local-access-log-files-to-MinIO" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>로컬 액세스 로그 파일을 MinIO에 업로드하도록 설정을 활성화하고 구성합니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>

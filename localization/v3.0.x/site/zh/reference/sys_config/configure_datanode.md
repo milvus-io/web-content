@@ -188,7 +188,7 @@ summary: 了解如何为 Milvus 配置 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        在 x 秒内只有时间戳消息后开启跳过模式      </td>
+      <td>        在 x 秒内只有时间戳信息后开启跳过模式      </td>
       <td>60</td>
     </tr>
   </tbody>

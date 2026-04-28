@@ -36,7 +36,22 @@ title: Зависимости от масштаба
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">Увеличение ресурсов на одну капсулу MinIO</h3><p>MinIO, система хранения объектов, используемая Milvus, может увеличить ресурсы процессора и памяти для каждого стручка.</p>
+    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">Увеличение ресурсов на одну капсулу MinIO<button data-href="#Increase-resources-per-MinIO-pod" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>MinIO, система хранения объектов, используемая Milvus, может увеличить ресурсы процессора и памяти для каждого стручка.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">resources:</span>
@@ -48,7 +63,22 @@ title: Зависимости от масштаба
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Вы также можете увеличить дисковую емкость кластера MioIO, вручную изменив значение <code translate="no">spec.resources.requests.storage</code> для каждого MioIO Persistent Volume Claim (PVC). Обратите внимание, что класс хранения по умолчанию должен позволять расширение тома.</p>
-<h3 id="Add-an-extra-MinIO-server-pool-Recommended" class="common-anchor-header">Добавьте дополнительный пул серверов MinIO (рекомендуется)</h3><p>Рекомендуется добавить дополнительный пул серверов MioIO для экземпляра Milvus.</p>
+<h3 id="Add-an-extra-MinIO-server-pool-Recommended" class="common-anchor-header">Добавьте дополнительный пул серверов MinIO (рекомендуется)<button data-href="#Add-an-extra-MinIO-server-pool-Recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Рекомендуется добавить дополнительный пул серверов MioIO для экземпляра Milvus.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yam;</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">zones:</span> <span class="hljs-number">2</span>
@@ -85,7 +115,22 @@ title: Зависимости от масштаба
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resource-per-Kafka-broker-pod" class="common-anchor-header">Увеличение ресурсов для каждого стручка брокера Kafka</h3><p>Увеличьте пропускную способность брокера Kafka, настроив ресурсы процессора и памяти для каждого пода брокера.</p>
+    </button></h2><h3 id="Increase-resource-per-Kafka-broker-pod" class="common-anchor-header">Увеличение ресурсов для каждого стручка брокера Kafka<button data-href="#Increase-resource-per-Kafka-broker-pod" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Увеличьте пропускную способность брокера Kafka, настроив ресурсы процессора и памяти для каждого пода брокера.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">kafka:</span>
   <span class="hljs-attr">resources:</span>
@@ -201,7 +246,22 @@ title: Зависимости от масштаба
         <span class="hljs-attr">size:</span> <span class="hljs-string">20Gi</span>
         <span class="hljs-attr">storageClassName:</span> <span class="hljs-string">gp3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-an-extra-Pulsar-broker-pod" class="common-anchor-header">Добавьте дополнительный брокерский стручок Pulsar</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+<h3 id="Add-an-extra-Pulsar-broker-pod" class="common-anchor-header">Добавьте дополнительный брокерский стручок Pulsar<button data-href="#Add-an-extra-Pulsar-broker-pod" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">broker:</span>
     <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">3</span>
@@ -209,7 +269,22 @@ title: Зависимости от масштаба
 <p>После сохранения файла примените изменения с помощью следующей команды:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-an-extra-Pulsar-bookie-pod-Recommended" class="common-anchor-header">Добавить дополнительную капсулу Pulsar bookie pod (рекомендуется)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+<h3 id="Add-an-extra-Pulsar-bookie-pod-Recommended" class="common-anchor-header">Добавить дополнительную капсулу Pulsar bookie pod (рекомендуется)<button data-href="#Add-an-extra-Pulsar-bookie-pod-Recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">bookkeeper:</span>
     <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">3</span>
@@ -232,7 +307,22 @@ title: Зависимости от масштаба
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resources-per-etcd-pod-recommended" class="common-anchor-header">Увеличить количество ресурсов для каждого подкада etcd (рекомендуется)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+    </button></h2><h3 id="Increase-resources-per-etcd-pod-recommended" class="common-anchor-header">Увеличить количество ресурсов для каждого пода etcd (рекомендуется)<button data-href="#Increase-resources-per-etcd-pod-recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">etcd:</span>
   <span class="hljs-attr">resources:</span>
      <span class="hljs-attr">limits:</span>
@@ -242,7 +332,22 @@ title: Зависимости от масштаба
 <p>После сохранения файла примените изменения следующей командой:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-extra-etcd-pods" class="common-anchor-header">Добавить дополнительные etcd-подсистемы</h3><p>Общее количество etcd-подов должно быть нечетным.</p>
+<h3 id="Add-extra-etcd-pods" class="common-anchor-header">Добавить дополнительные etcd-подсистемы<button data-href="#Add-extra-etcd-pods" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Общее количество etcd-подов должно быть нечетным.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">etcd:</span>
   <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">5</span>

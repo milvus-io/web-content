@@ -87,7 +87,7 @@ client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</sp
 <div class="alert note">
 <p><code translate="no">url</code> と<code translate="no">token</code> の引数については以下の通りです：</p>
 <ul>
-<li><code translate="no">uri</code> 、<code translate="no">./milvus.db</code> のように、ローカルファイルとして設定するのが最も便利です。</li>
+<li><code translate="no">uri</code> 、<code translate="no">./milvus.db</code> のようにローカルファイルとして設定するのが、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteを</a>自動的に利用し、すべてのデータをこのファイルに格納するため、最も便利な方法です。</li>
 <li>100万ベクトルを超えるような大規模なデータをお持ちの場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合は、トークンに "<your_username>:<your_password>" を使用します。そうでない場合は、トークンを設定しないでください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、<code translate="no">uri</code> と<code translate="no">token</code> をZilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応させてください。</li>
 </ul>
@@ -221,7 +221,7 @@ batch = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusにデータが無事挿入されたので、クエリーを実行することができます。クエリには検索する映画の説明と使用するフィルタのタプルを取り込みます。フィルタについての詳細は<a href="https://milvus.io/docs/boolean.md">こちらを</a>ご覧ください。検索はまず、説明とフィルター式を出力します。その後、各結果について、スコア、タイトル、タイプ、リリース年、評価、結果ムービーの説明を表示します。</p>
+    </button></h2><p>Milvusにデータが無事挿入されたので、クエリーを実行することができます。クエリは検索する映画の説明と使用するフィルタのタプルを受け取ります。フィルタについての詳細は<a href="https://milvus.io/docs/boolean.md">こちらを</a>ご覧ください。検索はまず、説明とフィルター式を出力します。その後、各結果について、スコア、タイトル、タイプ、リリース年、評価、結果ムービーの説明を表示します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> textwrap
 
 

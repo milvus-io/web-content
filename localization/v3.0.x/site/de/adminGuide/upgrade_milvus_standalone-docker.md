@@ -218,7 +218,7 @@ docker compose logs standalone | grep <span class="hljs-string">&quot;version&qu
 </ul></li>
 <li>Wenn Sie bereit sind, Ihren Cluster in der Cloud einzusetzen:<ul>
 <li>Erfahren Sie, wie Sie <a href="/docs/de/eks.md">Milvus auf Amazon EKS mit Terraform bereitstellen</a></li>
-<li>Lernen Sie, wie Sie <a href="/docs/de/gcp.md">Milvus Cluster auf GCP mit Kubernetes bereitstellen</a> können</li>
+<li>Erfahren Sie, wie Sie <a href="/docs/de/gcp.md">Milvus Cluster auf GCP mit Kubernetes bereitstellen</a> können</li>
 <li>Erfahren Sie, wie Sie <a href="/docs/de/azure.md">Milvus auf Microsoft Azure mit Kubernetes bereitstellen</a> können</li>
 </ul></li>
 </ul>

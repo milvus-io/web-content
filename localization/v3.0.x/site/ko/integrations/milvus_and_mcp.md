@@ -36,7 +36,7 @@ title: 'MCP + Milvus: AI와 벡터 데이터베이스의 연결'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>MCP(모델 컨텍스트 프로토콜)</strong> 는 Claude 및 Cursor와 같은 AI 애플리케이션이 외부 데이터 소스 및 툴과 원활하게 상호 작용할 수 있도록 지원하는 개방형 프로토콜입니다. 맞춤형 AI 애플리케이션을 구축하든, AI 워크플로를 통합하든, 채팅 인터페이스를 개선하든, MCP는 대규모 언어 모델(LLM)을 관련 문맥 데이터와 연결하는 표준화된 방법을 제공합니다.</p>
+    </button></h2><p><strong>MCP(모델 컨텍스트 프로토콜)</strong> 는 Claude 및 Cursor와 같은 AI 애플리케이션이 외부 데이터 소스 및 툴과 원활하게 상호 작용할 수 있도록 지원하는 개방형 프로토콜입니다. 맞춤형 AI 애플리케이션을 구축하든, AI 워크플로를 통합하든, 채팅 인터페이스를 개선하든, MCP는 대규모 언어 모델(LLM)을 관련 컨텍스트 데이터와 연결하는 표준화된 방법을 제공합니다.</p>
 <p>이 튜토리얼에서는 사용자 지정 데이터베이스 쿼리를 작성하지 <strong>않고도</strong>AI 애플리케이션이 벡터 검색을 수행하고, 컬렉션을 관리하고, <strong>자연어 명령을</strong>사용하여 데이터를 검색할 수 있도록 <strong>Milvus용 MCP 서버를 설정하는</strong> 방법을 안내합니다.</p>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,7 +74,7 @@ title: 'MCP + Milvus: AI와 벡터 데이터베이스의 연결'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 MCP 서버를 사용하는 권장 방법은 설치 없이 uv로 직접 실행하는 것입니다. 아래 예제에서 Claude 데스크톱과 커서가 이 서버를 사용하도록 구성한 방식입니다.</p>
+    </button></h2><p>이 MCP 서버를 사용하는 권장 방법은 설치 없이 uv로 직접 실행하는 것입니다. 아래 예제에서 클로드 데스크톱과 커서가 이 서버를 사용하도록 구성한 방식입니다.</p>
 <p>리포지토리를 복제하려는 경우:</p>
 <pre><code translate="no" class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/mcp-server-milvus.git
 <span class="hljs-built_in">cd</span> mcp-server-milvus
@@ -160,7 +160,22 @@ title: 'MCP + Milvus: AI와 벡터 데이터베이스의 연결'
         ></path>
       </svg>
     </button></h2><p><a href="https://docs.cursor.com/context/model-context-protocol">Cursor는</a> Composer의 에이전트 기능을 통해 MCP 도구도 지원합니다. 두 가지 방법으로 Milvus MCP 서버를 Cursor에 추가할 수 있습니다:</p>
-<h3 id="Option-1-Using-Cursor-Settings-UI" class="common-anchor-header">옵션 1: 커서 설정 UI 사용</h3><ol>
+<h3 id="Option-1-Using-Cursor-Settings-UI" class="common-anchor-header">옵션 1: 커서 설정 UI 사용<button data-href="#Option-1-Using-Cursor-Settings-UI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li><code translate="no">Cursor Settings</code> → <code translate="no">Features</code> → <code translate="no">MCP</code> 을 엽니다.</li>
 <li><code translate="no">+ Add New MCP Server</code> 을 클릭합니다.</li>
 <li>입력합니다:<ul>
@@ -171,7 +186,22 @@ title: 'MCP + Milvus: AI와 벡터 데이터베이스의 연결'
 <li>⚠️ 팁: 잠재적인 DNS 확인 문제를 방지하려면 <code translate="no">localhost</code> 대신 <code translate="no">127.0.0.1</code> 을 사용하세요.</li>
 </ul></li>
 </ol>
-<h3 id="Option-2-Using-Project-specific-Configuration-Recommended" class="common-anchor-header">옵션 2: 프로젝트별 구성 사용(권장)</h3><ol>
+<h3 id="Option-2-Using-Project-specific-Configuration-Recommended" class="common-anchor-header">옵션 2: 프로젝트별 구성 사용(권장)<button data-href="#Option-2-Using-Project-specific-Configuration-Recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li><strong>프로젝트 루트 디렉터리에</strong> <code translate="no">.cursor/mcp.json</code> 파일을 만듭니다:</li>
 </ol>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
@@ -210,7 +240,22 @@ title: 'MCP + Milvus: AI와 벡터 데이터베이스의 연결'
         ></path>
       </svg>
     </button></h2><p>MCP 서버가 올바르게 설정되었는지 확인합니다:</p>
-<h3 id="For-Cursor" class="common-anchor-header">커서의 경우</h3><ol>
+<h3 id="For-Cursor" class="common-anchor-header">커서의 경우<button data-href="#For-Cursor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li><code translate="no">Cursor Settings</code> → <code translate="no">Features</code> → <code translate="no">MCP</code> 로 이동합니다.</li>
 <li>MCP 서버 목록에 <code translate="no">&quot;Milvus&quot;</code> 이 표시되는지 확인합니다.</li>
 <li>Milvus 도구(예: <code translate="no">milvus_list_collections</code>, <code translate="no">milvus_vector_search</code>)가 나열되어 있는지 확인합니다.</li>
@@ -232,7 +277,22 @@ title: 'MCP + Milvus: AI와 벡터 데이터베이스의 연결'
         ></path>
       </svg>
     </button></h2><p>이 MCP 서버는 <strong>Milvus에서 벡터 데이터를 검색, 쿼리 및 관리하기</strong> 위한 여러 도구를 제공합니다. 자세한 내용은 <a href="https://github.com/zilliztech/mcp-server-milvus">mcp-server-milvus</a> 문서를 참조하세요.</p>
-<h3 id="🔍-Search-and-Query-Tools" class="common-anchor-header">🔍 검색 및 쿼리 도구</h3><ul>
+<h3 id="🔍-Search-and-Query-Tools" class="common-anchor-header">🔍 검색 및 쿼리 도구<button data-href="#🔍-Search-and-Query-Tools" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-text-search</code></strong> → 전체 텍스트 검색으로 문서를 검색합니다.</li>
 <li><strong><code translate="no">milvus-vector-search</code></strong> → 컬렉션에서 벡터 유사도 검색을 수행합니다.</li>
 <li><strong><code translate="no">milvus-hybrid-search</code></strong> → 벡터 유사도 검색과 속성 필터링을 결합한 하이브리드 검색을 수행합니다.</li>
@@ -240,7 +300,22 @@ title: 'MCP + Milvus: AI와 벡터 데이터베이스의 연결'
 <li><strong><code translate="no">milvus-query</code></strong> → 필터 표현식을 사용하여 컬렉션 쿼리하기.</li>
 <li><strong><code translate="no">milvus-count</code></strong> → 컬렉션의 엔티티 개수 계산하기.</li>
 </ul>
-<h3 id="📁-Collection-Management" class="common-anchor-header">📁 컬렉션 관리</h3><ul>
+<h3 id="📁-Collection-Management" class="common-anchor-header">📁 컬렉션 관리<button data-href="#📁-Collection-Management" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-list-collections</code></strong> → 데이터베이스에 있는 모든 컬렉션을 나열합니다.</li>
 <li><strong><code translate="no">milvus-collection-info</code></strong> → 컬렉션에 대한 상세 정보를 조회합니다.</li>
 <li><strong><code translate="no">milvus-get-collection-stats</code></strong> → 컬렉션에 대한 통계 가져오기.</li>
@@ -250,14 +325,44 @@ title: 'MCP + Milvus: AI와 벡터 데이터베이스의 연결'
 <li><strong><code translate="no">milvus-get-query-segment-info</code></strong> → 쿼리 세그먼트에 대한 정보 조회하기.</li>
 <li><strong><code translate="no">milvus-get-collection-loading-progress</code></strong> → 컬렉션의 로딩 진행률 조회하기.</li>
 </ul>
-<h3 id="📊-Data-Operations" class="common-anchor-header">📊 데이터 작업</h3><ul>
+<h3 id="📊-Data-Operations" class="common-anchor-header">📊 데이터 작업<button data-href="#📊-Data-Operations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-insert-data</code></strong> → 컬렉션에 데이터를 삽입합니다.</li>
 <li><strong><code translate="no">milvus-bulk-insert</code></strong> → 성능 향상을 위해 데이터를 일괄적으로 삽입합니다.</li>
 <li><strong><code translate="no">milvus-upsert-data</code></strong> → 컬렉션에 데이터를 삽입합니다(있는 경우 삽입 또는 업데이트).</li>
 <li><strong><code translate="no">milvus-delete-entities</code></strong> → 필터 표현식에 따라 컬렉션에서 엔티티를 삭제합니다.</li>
 <li><strong><code translate="no">milvus-create-dynamic-field</code></strong> → 기존 컬렉션에 동적 필드를 추가합니다.</li>
 </ul>
-<h3 id="⚙️-Index-Management" class="common-anchor-header">⚙️ 인덱스 관리</h3><ul>
+<h3 id="⚙️-Index-Management" class="common-anchor-header">⚙️ 인덱스 관리<button data-href="#⚙️-Index-Management" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-create-index</code></strong> → 벡터 필드에 인덱스를 생성합니다.</li>
 <li><strong><code translate="no">milvus-get-index-info</code></strong> → 컬렉션의 인덱스에 대한 정보를 가져옵니다.</li>
 </ul>
@@ -314,7 +419,22 @@ title: 'MCP + Milvus: AI와 벡터 데이터베이스의 연결'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">Claude 데스크톱 사용</h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">예제 1: 컬렉션 나열하기</h4><pre><code translate="no">What are the collections <span class="hljs-selector-tag">I</span> have in my Milvus DB?
+    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">Claude 데스크톱 사용<button data-href="#Using-Claude-Desktop" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">예제 1: 컬렉션 나열하기</h4><pre><code translate="no">What are the collections <span class="hljs-selector-tag">I</span> have in my Milvus DB?
 <button class="copy-code-btn"></button></code></pre>
 <p>그런 다음 Claude는 MCP를 사용하여 Milvus DB에서 이 정보를 확인합니다.</p>
 <pre><code translate="no">I<span class="hljs-comment">&#x27;ll check what collections are available in your Milvus database.</span>
@@ -341,7 +461,22 @@ Here are the collections <span class="hljs-keyword">in</span> your Milvus databa
 Here are the documents I found that mention machine learning:
 [Results will appear here based <span class="hljs-keyword">on</span> your actual data]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Using-Cursor" class="common-anchor-header">커서 사용</h3><h4 id="Example-Creating-a-Collection" class="common-anchor-header">예시: 컬렉션 만들기</h4><p>커서의 작곡기에서 요청할 수 있습니다:</p>
+<h3 id="Using-Cursor" class="common-anchor-header">커서 사용<button data-href="#Using-Cursor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-Creating-a-Collection" class="common-anchor-header">예시: 컬렉션 만들기</h4><p>커서의 작곡기에서 요청할 수 있습니다:</p>
 <pre><code translate="no">Create a <span class="hljs-keyword">new</span> collection called <span class="hljs-string">&#x27;articles&#x27;</span> <span class="hljs-function"><span class="hljs-keyword">in</span> Milvus <span class="hljs-keyword">with</span> fields <span class="hljs-keyword">for</span> <span class="hljs-title">title</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-title">content</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-keyword">and</span> a vector <span class="hljs-title">field</span> (<span class="hljs-params"><span class="hljs-number">128</span> dimensions</span>)
 </span><button class="copy-code-btn"></button></code></pre>
 <p>커서는 MCP 서버를 사용하여 이 작업을 실행합니다:</p>
@@ -369,7 +504,22 @@ Collection <span class="hljs-comment">&#x27;articles&#x27; has been created succ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Common-Issues" class="common-anchor-header">일반적인 문제</h3><h4 id="Connection-Errors" class="common-anchor-header">연결 오류</h4><p>"Milvus 서버에 연결하지 못했습니다"와 같은 오류가 표시되는 경우:</p>
+    </button></h2><h3 id="Common-Issues" class="common-anchor-header">일반적인 문제<button data-href="#Common-Issues" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Connection-Errors" class="common-anchor-header">연결 오류</h4><p>"Milvus 서버에 연결하지 못했습니다"와 같은 오류가 표시되는 경우:</p>
 <ol>
 <li>Milvus 인스턴스가 실행 중인지 확인합니다: <code translate="no">docker ps</code> (Docker를 사용하는 경우).</li>
 <li>구성에서 URI가 올바른지 확인합니다.</li>
@@ -389,7 +539,22 @@ Collection <span class="hljs-comment">&#x27;articles&#x27; has been created succ
 <li>MCP 서버가 올바르게 실행되고 있는지 확인합니다.</li>
 <li>MCP 설정에서 새로고침 버튼을 누릅니다(커서의 경우).</li>
 </ol>
-<h3 id="Getting-Help" class="common-anchor-header">도움말 받기</h3><p>문제가 계속 발생하는 경우</p>
+<h3 id="Getting-Help" class="common-anchor-header">도움말 받기<button data-href="#Getting-Help" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>문제가 계속 발생하는 경우</p>
 <ol>
 <li><a href="https://github.com/zilliztech/mcp-server-milvus/issues">깃허브 이슈에서</a> 비슷한 문제가 있는지 확인하세요.</li>
 <li><a href="https://discord.gg/zilliz">질리즈 커뮤니티 디스코드에</a> 가입하여 지원 받기</li>

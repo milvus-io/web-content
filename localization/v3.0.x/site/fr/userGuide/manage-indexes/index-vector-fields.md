@@ -22,6 +22,9 @@ title: Indexer des champs vectoriels
         ></path>
       </svg>
     </button></h1><p>Ce guide vous présente les opérations de base pour créer et gérer des index sur les champs vectoriels d'une collection.</p>
+<div class="alert warning">
+<p>Cette page est obsolète. Pour une mise en œuvre plus récente, reportez-vous à <a href="/docs/fr/ivf-flat.md">IVF_FLAT</a>, <a href="/docs/fr/hnsw.md">HNSW</a>, etc.</p>
+</div>
 <h2 id="Overview" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +41,7 @@ title: Indexer des champs vectoriels
         ></path>
       </svg>
     </button></h2><p>En exploitant les métadonnées stockées dans un fichier d'index, Milvus organise vos données dans une structure spécialisée, ce qui facilite la récupération rapide des informations demandées lors des recherches ou des requêtes.</p>
-<p>Milvus propose plusieurs types d'index et de métriques pour trier les valeurs des champs afin d'effectuer des recherches de similarité efficaces. Le tableau suivant répertorie les types d'index et les métriques pris en charge pour différents types de champs vectoriels. Actuellement, Milvus prend en charge différents types de données vectorielles, notamment les encastrements à virgule flottante (souvent appelés vecteurs à virgule flottante ou vecteurs denses), les encastrements binaires (également appelés vecteurs binaires) et les encastrements épars (également appelés vecteurs épars). Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/index.md">Index en mémoire</a> et <a href="/docs/fr/metric.md">métriques de similarité</a>.</p>
+<p>Milvus fournit plusieurs types d'index et de métriques pour trier les valeurs de champ afin d'effectuer des recherches de similarité efficaces. Le tableau suivant répertorie les types d'index et les métriques pris en charge pour différents types de champs vectoriels. Actuellement, Milvus prend en charge différents types de données vectorielles, notamment les encastrements à virgule flottante (souvent appelés vecteurs à virgule flottante ou vecteurs denses), les encastrements binaires (également appelés vecteurs binaires) et les encastrements épars (également appelés vecteurs épars). Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/index.md">Index en mémoire</a> et <a href="/docs/fr/metric.md">métriques de similarité</a>.</p>
 <div class="filter">
  <a href="#floating">Encastrements en virgule flottante</a> <a href="#binary">Encastrements binaires</a> <a href="#sparse">Encastrements épars</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
@@ -84,12 +87,21 @@ title: Indexer des champs vectoriels
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky"><ul><li>INDEX_INVERTI_SPARSE</li><li>SPARSE_WAND</li></ul></td>
+    <td class="tg-0pky">INDEX_INVERSÉ_SPARSE</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td class="tg-0pky">BM25</td>
+    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
   </tr>
 </tbody>
 </table>
+<div class="alert note">
+<p>À partir de la version 2.5.4 de Milvus, <code translate="no">SPARSE_WAND</code> est obsolète. Il est recommandé d'utiliser <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> par souci d'équivalence tout en maintenant la compatibilité. Pour plus d'informations, reportez-vous à <a href="/docs/fr/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
 </div>
-<p>Il est recommandé de créer des index pour les champs vectoriels et les champs scalaires auxquels on accède fréquemment.</p>
+</div>
+<p>Il est recommandé de créer des index pour le champ vectoriel et les champs scalaires auxquels on accède fréquemment.</p>
 <h2 id="Preparations" class="common-anchor-header">Préparations<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -334,7 +346,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">sync</code></td>
-      <td>Contrôle la façon dont l'index est construit en fonction de la demande du client. Valeurs valides :<br><ul><li><code translate="no">True</code> (par défaut) : Le client attend que l'index soit entièrement construit avant de revenir. Cela signifie que vous n'obtiendrez pas de réponse tant que le processus ne sera pas terminé.</li><li><code translate="no">False</code>: Le client retourne immédiatement après la réception de la demande et l'index est construit en arrière-plan. Pour savoir si la création de l'index est terminée, utilisez la méthode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
+      <td>Contrôle la manière dont l'index est construit en fonction de la demande du client. Valeurs valides :<br><ul><li><code translate="no">True</code> (par défaut) : Le client attend que l'index soit entièrement construit avant de revenir. Cela signifie que vous n'obtiendrez pas de réponse tant que le processus ne sera pas terminé.</li><li><code translate="no">False</code>: Le client retourne immédiatement après la réception de la demande et l'index est construit en arrière-plan. Pour savoir si la création de l'index est terminée, utilisez la méthode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
     </tr>
   </tbody>
 </table>

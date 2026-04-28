@@ -20,7 +20,7 @@ title: Memutakhirkan Milvus Cluster dengan Docker Compose
         ></path>
       </svg>
     </button></h1><p>Topik ini menjelaskan cara memutakhirkan Milvus menggunakan Docker Compose.</p>
-<p>Dalam kasus normal, Anda dapat <a href="#Upgrade-Milvus-by-changing-its-image">memutakhirkan Milvus dengan mengubah citranya.</a> Namun, Anda perlu <a href="#Migrate-the-metadata">memigrasikan metadata</a> sebelum melakukan peningkatan apa pun dari v2.1.x ke v2.6.15.</p>
+<p>Dalam kasus normal, Anda dapat memutakhirkan <a href="#Upgrade-Milvus-by-changing-its-image">Milvus dengan mengubah citranya.</a> Namun, Anda perlu <a href="#Migrate-the-metadata">memigrasikan metadata</a> sebelum melakukan peningkatan apa pun dari v2.1.x ke v2.6.15.</p>
 <div class="alert note">
 <p><strong>Keterbatasan Antrian Pesan</strong>: Ketika mengupgrade ke Milvus v2.6.15, anda harus mempertahankan pilihan antrian pesan anda saat ini. Beralih di antara sistem antrian pesan yang berbeda selama upgrade tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.</p>
 </div>

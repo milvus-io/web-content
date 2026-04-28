@@ -2,8 +2,8 @@
 id: vertex-ai.md
 title: 버텍스 AICompatible with Milvus 2.6.x
 summary: >-
-  구글 클라우드 버텍스 AI는 텍스트 임베딩 모델을 위해 특별히 설계된 고성능 서비스입니다. 이 가이드는 효율적인 텍스트 임베딩 생성을 위해
-  Milvus와 함께 구글 클라우드 버텍스 AI를 사용하는 방법을 설명합니다.
+  구글 클라우드 버텍스 AI는 텍스트 임베딩 모델을 위해 특별히 설계된 고성능 서비스입니다. 이 가이드에서는 효율적인 텍스트 임베딩 생성을
+  위해 Milvus와 함께 구글 클라우드 버텍스 AI를 사용하는 방법을 설명합니다.
 beta: Milvus 2.6.x
 ---
 <h1 id="Vertex-AI" class="common-anchor-header">버텍스 AI<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Vertex-AI" class="anchor-icon" translate="no">
@@ -83,7 +83,22 @@ beta: Milvus 2.6.x
      <td><p>컨테이너 워크플로우, 빠른 테스트</p></td>
    </tr>
 </table>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">옵션 1: 구성 파일(권장 및 우선순위 높음)</h3><p>Milvus는 항상 동일한 공급자에 대한 환경 변수보다 <code translate="no">milvus.yaml</code> 에 선언된 자격 증명을 선호합니다.</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">옵션 1: 구성 파일(권장 및 우선순위 높음)<button data-href="#Option-1-Configuration-file-recommended--higher-priority" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus는 항상 동일한 공급자에 대한 환경 변수보다 <code translate="no">milvus.yaml</code> 에 선언된 자격 증명을 선호합니다.</p>
 <ol>
 <li><p>JSON 키 Base64 인코딩</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> credentials.json | jq . | <span class="hljs-built_in">base64</span>
@@ -108,7 +123,22 @@ beta: Milvus 2.6.x
 <p>나중에 키를 교체해야 하는 경우 환경이나 컨테이너를 변경할 필요 없이 <code translate="no">credential_json</code> 에서 Base64 문자열을 업데이트하고 Milvus를 다시 시작하면 됩니다.</p>
 <p></div></p></li>
 </ol>
-<h3 id="Option-2-Environment-variables" class="common-anchor-header">옵션 2: 환경 변수</h3><p>배포 시점에 시크릿을 주입하는 것을 선호하는 경우 이 방법을 사용하세요. Milvus는 <code translate="no">milvus.yaml</code> 에 일치하는 항목이 없는 경우에만 env-vars로 되돌아갑니다.</p>
+<h3 id="Option-2-Environment-variables" class="common-anchor-header">옵션 2: 환경 변수<button data-href="#Option-2-Environment-variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>배포 시점에 시크릿을 주입하는 것을 선호하는 경우 이 방법을 사용하세요. Milvus는 <code translate="no">milvus.yaml</code> 에 일치하는 항목이 없는 경우에만 env-vars로 되돌아갑니다.</p>
 <div class="alert note">
 <p>구성 단계는 Milvus 배포 모드(독립형 대 분산 클러스터) 및 오케스트레이션 플랫폼(Docker Compose 대 Kubernetes)에 따라 다릅니다.</p>
 </div>
@@ -158,7 +188,7 @@ beta: Milvus 2.6.x
   --from-file=credentials.json=/path/to/your/credentials.json \
   -n &lt;your-milvus-namespace&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>앞의 명령어에서</p>
+<p>앞의 명령에서</p>
 <ul>
 <li><p><code translate="no">vertex-ai-secret</code>: 시크릿의 이름(사용자 정의 가능)</p></li>
 <li><p><code translate="no">/path/to/your/credentials.json</code>: GCP 자격 증명 파일의 로컬 파일 이름</p></li>
@@ -184,7 +214,7 @@ beta: Milvus 2.6.x
       <span class="hljs-attr">subPath:</span> <span class="hljs-string">credentials.json</span>  <span class="hljs-comment"># Must match secret key name</span>
       <span class="hljs-attr">readOnly:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>분산 배포의 경우(각 컴포넌트에 추가)</strong></p>
+<li><p><strong>분산 배포의 경우(각 구성 요소에 추가)</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">extraEnv:</span> 
     <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS</span>
@@ -224,7 +254,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Vertex AI가 구성되면 다음 단계에 따라 임베딩 함수를 정의하고 사용하세요.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">1단계: 스키마 필드 정의</h3><p>임베딩 함수를 사용하려면 특정 스키마로 컬렉션을 만듭니다. 이 스키마에는 최소 3개의 필수 필드가 포함되어야 합니다:</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">1단계: 스키마 필드 정의<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>임베딩 함수를 사용하려면 특정 스키마로 컬렉션을 만듭니다. 이 스키마에는 최소 3개의 필수 필드가 포함되어야 합니다:</p>
 <ul>
 <li><p>컬렉션의 각 엔티티를 고유하게 식별하는 기본 필드.</p></li>
 <li><p>임베드할 원시 데이터를 저장하는 스칼라 필드.</p></li>
@@ -244,7 +289,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the output dimension of the model and parameters</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">2단계: 스키마에 임베딩 함수 추가하기</h3><p>Milvus의 함수 모듈은 스칼라 필드에 저장된 원시 데이터를 임베딩으로 자동 변환하여 명시적으로 정의된 벡터 필드에 저장합니다.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">2단계: 스키마에 임베딩 함수 추가하기<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus의 함수 모듈은 스칼라 필드에 저장된 원시 데이터를 임베딩으로 자동 변환하여 명시적으로 정의된 벡터 필드에 저장합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define Vertex AI embedding function</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;vert_func&quot;</span>,                           <span class="hljs-comment"># Unique identifier for this embedding function</span>

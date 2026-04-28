@@ -83,7 +83,7 @@ summary: Saiba como configurar o gcs com o Workload Identity.
     --member <span class="hljs-string">&quot;serviceAccount:milvus-testing-nonprod.svc.id.goog[default/milvus-gcs-access-sa]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Anote a conta de serviço do Kubernetes com o endereço de email da conta de serviço do IAM.</li>
+<li>Anote a conta de serviço do Kubernetes com o endereço de e-mail da conta de serviço do IAM.</li>
 </ul>
 <pre><code translate="no" class="language-bash">kubectl annotate serviceaccount milvus-gcs-access-sa \
     --namespace default \

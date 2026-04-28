@@ -2,7 +2,7 @@
 id: knowledge_table_with_milvus.md
 summary: >-
   기본적으로 지식 테이블은 Milvus 데이터베이스를 사용하여 추출된 데이터를 저장하고 검색합니다. 이를 통해 사용자는 Milvus의 강력한
-  기능을 사용하여 데이터를 쉽게 검색, 필터링 및 분석할 수 있습니다. 이 튜토리얼에서는 지식 테이블과 Milvus를 시작하는 방법을
+  기능을 사용하여 데이터를 쉽게 검색, 필터링 및 분석할 수 있습니다. 이 튜토리얼에서는 지식창고와 Milvus를 시작하는 방법을
   보여드리겠습니다.
 title: Milvus를 사용한 지식 테이블
 ---
@@ -136,7 +136,7 @@ title: Milvus를 사용한 지식 테이블
     </button></h2><p>프론트엔드는 <code translate="no">http://localhost:3000</code> 에서, 백엔드는 <code translate="no">http://localhost:8000</code> 에서 액세스할 수 있습니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/knowlege_table.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/knowlege_table.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

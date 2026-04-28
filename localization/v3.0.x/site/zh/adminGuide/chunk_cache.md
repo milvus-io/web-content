@@ -59,7 +59,22 @@ title: 配置块缓存
 <li><p>对于使用 Operator 安装的 Milvus 实例</p>
 <p>将配置添加到<code translate="no">Milvus</code> 自定义资源的<code translate="no">spec.components</code> 部分。有关详情，请参阅<a href="/docs/zh/configure_operator.md">使用 Operator 配置 Milvus</a>。</p></li>
 </ul>
-<h3 id="Configuration-options" class="common-anchor-header">配置选项</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
+<h3 id="Configuration-options" class="common-anchor-header">配置选项<button data-href="#Configuration-options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
     <span class="hljs-attr">cache:</span>
         <span class="hljs-attr">warmup:</span> <span class="hljs-string">async</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -70,7 +85,22 @@ title: 配置块缓存
 <li><code translate="no">disable</code>:Milvus 不会将数据预加载到内存缓存中。</li>
 </ul>
 <p>请注意，大块缓存设置也适用于向 Collections 插入新数据或重建 Collections 索引时。</p>
-<h3 id="FAQ" class="common-anchor-header">常见问题</h3><ul>
+<h3 id="FAQ" class="common-anchor-header">常见问题<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>如何确定块缓存机制是否正常工作？</strong></p>
 <p>建议您在加载集合后检查搜索或查询请求的延迟。如果延迟时间明显高于预期（如几秒），则可能表明分块缓存机制仍在工作。</p>
 <p>如果查询延迟长时间居高不下。可以检查对象存储的吞吐量，以确保分块缓存仍在工作。在正常情况下，工作中的分块缓存会在对象存储上产生高吞吐量。或者，也可以在<code translate="no">sync</code> 模式下尝试使用块缓存。</p></li>

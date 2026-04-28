@@ -1,12 +1,11 @@
 ---
 id: array-of-structs.md
-title: صفيف الهياكلCompatible with Milvus 2.6.4+
+title: صفيف الهياكل
 summary: >-
-  يخزن حقل صفيف الهياكل في كيان ما مجموعة مرتبة من عناصر الهياكل. تشترك كل بنية
-  في المصفوفة في نفس المخطط المحدد مسبقًا، وتتألف من عدة متجهات وحقول قياسية.
-beta: Milvus 2.6.4+
+  استخدم حقول StructArray لتخزين عناصر Struct مرتبة مع مخطط مشترك للحقول المتجهة
+  والقياسية.
 ---
-<h1 id="Array-of-Structs" class="common-anchor-header">صفيف الهياكل<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Array-of-Structs" class="anchor-icon" translate="no">
+<h1 id="StructArray" class="common-anchor-header">صفيف الهياكل<button data-href="#StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +20,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يخزن حقل صفيف الهياكل في كيان ما مجموعة مرتبة من عناصر الهياكل. تشترك كل بنية في المصفوفة في نفس المخطط المحدد مسبقًا، وتتألف من عدة متجهات وحقول قياسية.</p>
-<p>إليك مثال لكيان من مجموعة تحتوي على حقل صفيف من الهياكل.</p>
+    </button></h1><p>يخزن حقل مصفوفة الهياكل، أو حقل StructArray، في كيان ما مجموعة مرتبة من عناصر الهياكل. تشترك كل بنية في المصفوفة في نفس المخطط المحدد مسبقًا، وتتألف من عدة متجهات وحقول قياسية.</p>
+<p>إليك مثال لكيان من مجموعة تحتوي على حقل StructArray.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     &#x27;id&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
     &#x27;title&#x27;<span class="hljs-punctuation">:</span> &#x27;Walden&#x27;<span class="hljs-punctuation">,</span>
@@ -44,8 +43,31 @@ beta: Milvus 2.6.4+
 <span class="highlighted-comment-line">    <span class="hljs-comment">// hightlight-end</span></span>
 <span class="highlighted-comment-line"><span class="hljs-punctuation">}</span></span>
 <span class="highlighted-comment-line"></span><button class="copy-code-btn"></button></code></pre>
-<p>في المثال أعلاه، الحقل <code translate="no">chunks</code> هو حقل صفيف من حقول الهياكل، ويحتوي كل عنصر من عناصر الهياكل على الحقول الخاصة به، وهي <code translate="no">text</code> و <code translate="no">text_vector</code> و <code translate="no">chapter</code>.</p>
-<h2 id="Limits" class="common-anchor-header">الحدود<button data-href="#Limits" class="anchor-icon" translate="no">
+<p>في المثال أعلاه، الحقل <code translate="no">chunks</code> هو حقل StructArray، ويحتوي كل عنصر من عناصر Struct على الحقول الخاصة به، وهي <code translate="no">text</code> و <code translate="no">text_vector</code> و <code translate="no">chapter</code>.</p>
+<h2 id="When-to-use" class="common-anchor-header">متى تستخدم<button data-href="#When-to-use" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>تعتمد تطبيقات الذكاء الاصطناعي الحديثة، من القيادة الذاتية إلى الاسترجاع متعدد الوسائط، بشكل متزايد على البيانات المتداخلة وغير المتجانسة. وتكافح نماذج البيانات المسطحة التقليدية لتمثيل العلاقات المعقدة مثل<strong>"مستند واحد مع العديد من الأجزاء المشروحة</strong>" أو<strong>"مشهد قيادة واحد مع مناورات متعددة مرصودة</strong>". هذا هو المكان الذي يتألق فيه نوع بيانات StructArray في Milvus.</p>
+<p>لتحديد ما إذا كان حقل StructArray يناسب سيناريوهات تطبيقك بسرعة، ضع في اعتبارك ما إذا كانت</p>
+<ul>
+<li><p>بياناتك في بنية هرمية، مثل مستند واحد مع العديد من الأجزاء المشروحة.</p></li>
+<li><p>يجب أن تكون نتيجة البحث هي المستند، وليس القطع، كما في المثال أعلاه.</p></li>
+<li><p>تحتوي نتائج البحث على عدد هائل من الكيانات المكررة، وتواجه صعوبة في استرداد النتائج النهائية باستخدام تقنيات مثل التجميع وإلغاء التكرار وإعادة الترتيب.</p></li>
+</ul>
+<p>إذا كانت إجاباتك على الأسئلة أعلاه بنعم، فيجب عليك استخدام StructArray.</p>
+<h2 id="Limits" class="common-anchor-header">حدود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,68 +84,77 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><ul>
 <li><p><strong>أنواع البيانات</strong></p>
-<p>عند إنشاء مجموعة، يمكنك استخدام نوع Struct كنوع بيانات للعناصر في حقل Array. ومع ذلك، لا يمكنك إضافة مصفوفة من الهياكل إلى مجموعة موجودة، ولا يدعم Milvus استخدام نوع Struct كنوع بيانات لحقل مجموعة.</p>
+<p>عندما تقوم بإنشاء مجموعة، يمكنك استخدام نوع Struct كنوع البيانات للعناصر في حقل المصفوفة. ومع ذلك، لا يمكنك إضافة StructArray إلى مجموعة موجودة، ولا يدعم Milvus استخدام نوع Struct كنوع بيانات لحقل مجموعة.</p>
 <p>تشترك الهياكل في حقل المصفوفة في نفس المخطط، والذي يجب تعريفه عند إنشاء حقل المصفوفة.</p>
-<p>يحتوي مخطط Struct على كل من حقول المتجهات والحقول القياسية، كما هو موضح في الجدول التالي:</p>
-<p><table>
-<tr>
-<th><p>نوع الحقل</p></th>
-<th><p>نوع البيانات</p></th>
-</tr>
-<tr>
-<td><p>المتجه</p></td>
-<td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-</tr>
-<tr>
-<td rowspan="5"><p>عددية</p></td>
-<td><p><code translate="no">VARCHAR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">INT8/16/32/64</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">FLOAT</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">DOUBLE</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">BOOLEAN</code></p></td>
-</tr>
-</table></p>
+<p>يحتوي مخطط الهيكل على كل من الحقول المتجهة والحقول القياسية، كما هو موضح أدناه:</p>
+<p><Grid columnSize="2" widthRatios="50,50"></p>
+<pre><code translate="no">  &lt;div&gt;
+
+      Applicable vector fields:
+
+      - `FLOAT_VECTOR`
+
+      - `FLOAT16_VECTOR`
+
+      - `BFLOAT16_VECTOR`
+
+      - `INT8_VECTOR`
+
+      - `BINARY_VECTOR`
+
+  &lt;/div&gt;
+
+  &lt;div&gt;
+
+      Applicable scalar fields:
+
+      - `VARCHAR`
+
+      - `INT8/16/32/64`
+
+      - `FLOAT`
+
+      - `DOUBLE`
+
+      - `BOOL`
+
+  &lt;/div&gt;
+</code></pre>
+<p></Grid></p>
 <p>احتفظ بعدد حقول المتجهات على مستوى المجموعة وفي الهياكل مجتمعة بحيث لا يزيد عن أو يساوي 10.</p></li>
-<li><p><strong>قابل للفراغ والقيم الافتراضية</strong></p>
-<p>حقل صفيف الهياكل غير قابل للإلغاء ولا يقبل أي قيمة افتراضية.</p></li>
+<li><p><strong>القيم القابلة للإلغاء والقيم الافتراضية</strong></p>
+<p>حقل StructArray غير قابل للإلغاء ولا يقبل أي قيمة افتراضية.</p></li>
 <li><p><strong>الدالة</strong></p>
 <p>لا يمكنك استخدام دالة لاشتقاق حقل متجه من حقل قياسي داخل بنية.</p></li>
 <li><p><strong>نوع الفهرس والنوع المتري</strong></p>
-<p>يجب أن تكون جميع الحقول المتجهة في مجموعة مفهرسة. لفهرسة حقل متجه داخل حقل صفيف من الهياكل، يستخدم ميلفوس قائمة تضمين لتنظيم التضمينات المتجهة في كل عنصر من عناصر الهيكل وفهرسة قائمة التضمين بأكملها ككل.</p>
-<p>ويمكنك استخدام <code translate="no">AUTOINDEX</code> أو <code translate="no">HNSW</code> كنوع الفهرس وأي نوع قياس مدرج أدناه لإنشاء فهارس لقوائم التضمين في حقل صفيف الهياكل.</p>
+<p>يجب أن تكون جميع الحقول المتجهة في مجموعة مفهرسة. لفهرسة حقل متجه داخل حقل StructArray، يستخدم Milvus قائمة تضمين لتنظيم التضمينات المتجهة في كل عنصر من عناصر Struct ويفهرس قائمة التضمين بأكملها ككل.</p>
+<p>ويمكنك استخدام <code translate="no">AUTOINDEX</code> أو <code translate="no">HNSW</code> كنوع الفهرس وأي نوع قياس مدرج أدناه لإنشاء فهارس لقوائم التضمين في حقل StructArray.</p>
 <p><table>
 <tr>
 <th><p>نوع الفهرس</p></th>
 <th><p>النوع المتري</p></th>
-<th><p>الملاحظات</p></th>
+<th><p>ملاحظات</p></th>
 </tr>
 <tr>
-<td rowspan="3"><p><code translate="no">AUTOINDEX</code> (أو <code translate="no">HNSW</code>)</p></td>
-<td><p><code translate="no">MAX_SIM_COSINE</code></p></td>
-<td rowspan="3"><p>لتضمين القوائم من الأنواع التالية:</p><ul><li>FLOAT_VECTOR</li></ul></td>
-</tr>
-<tr>
-<td><p><code translate="no">MAX_SIM_IP</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">MAX_SIM_L2</code></p></td>
+<td rowspan="3"><ul><li><p><code translate="no">AUTOINDEX</code></p></li><li><p><code translate="no">HNSW</code></p></li><li><p><code translate="no">IVF_FLAT</code></p></li><li><p><code translate="no">DISKANN</code></p></li></ul></td>
+<td rowspan="3"><ul><li><p><code translate="no">MAX_SIM_COSINE</code></p></li><li><p><code translate="no">MAX_SIM_IP</code></p></li><li><p><code translate="no">MAX_SIM_L2</code></p></li></ul></td>
+<td rowspan="3"><p>لتضمين القوائم من الأنواع التالية:</p><ul><li><p><code translate="no">FLOAT_VECTOR</code></p></li><li><p><code translate="no">FLOAT16_VECTOR</code></p></li><li><p><code translate="no">BFLOAT16_VECTOR</code></p></li><li><p><code translate="no">INT8_VECTOR</code></p></li><li><p><code translate="no">BINARY_VECTOR</code></p></li></ul></td>
 </tr>
 </table></p>
-<p>لا تدعم الحقول القياسية في حقل Array of Structs الفهارس.</p></li>
+<p>للحصول على تفاصيل حول كيفية حساب ميلفوس للتشابه بين الاستعلام وقائمة التضمين، راجع <a href="/docs/ar/metric.md#Maximum-similarity">التشابه الأقصى</a>.</p>
+<p>تدعم الحقول القياسية في حقل StructArray أنواع الفهرس التالية:</p>
+<ul>
+<li><p><code translate="no">INVERTED</code></p>
+<p>ينطبق هذا عادةً على الفلاتر الشبيهة بالسلسلة أو الفئوية، مثل <code translate="no">structA[color]</code> أو <code translate="no">structA[str_val]</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/inverted.md">INVERTED</a>.</p></li>
+<li><p><code translate="no">STL_SORT</code></p>
+<p>ينطبق هذا عادةً على التسارع الشبيه بالنطاق أو نمط الطلب على القيم الرقمية، مثل <code translate="no">strctA[num_val]</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/stl-sort.md">STL_SORT</a>.</p></li>
+</ul></li>
 <li><p><strong>بيانات Upsert</strong></p>
-<p>لا تدعم الهياكل عمليات إعادة إدراج في وضع الدمج. ومع ذلك، لا يزال بإمكانك إجراء عمليات الإدراج في وضع التجاوز لتحديث البيانات في الهياكل. للاطلاع على تفاصيل حول الاختلافات بين عمليات الإدراج في وضع الدمج ووضع التجاوز، راجع <a href="/docs/ar/upsert-entities.md#Overview">Upsert Entities</a>.</p></li>
+<p>لا تدعم الهياكل عمليات إعادة الإدراج في وضع الدمج. ومع ذلك، لا يزال بإمكانك إجراء عمليات الإدراج في وضع التجاوز لتحديث البيانات في الهياكل. للحصول على تفاصيل حول الاختلافات بين عمليات إعادة الإدراج في وضع الدمج ووضع التجاوز، راجع <a href="/docs/ar/upsert-entities.md#Overview">كيانات Upsert</a>.</p></li>
 <li><p><strong>التصفية العددية</strong></p>
-<p>لا يمكنك استخدام مصفوفة من الهياكل أو أي حقول داخل عنصر الهيكل الخاص بها في تعابير التصفية داخل عمليات البحث والاستعلامات.</p></li>
+<p>يمكنك استخدام <strong>عوامل تصفية العناصر</strong> <strong>والعوامل في عائلة المطابقة</strong> لإجراء تصفية قياسية ضد حقل فرعي قياسي في حقل StructArray. للحصول على التفاصيل، راجع التصفية <a href="/docs/ar/array-of-structs.md#Scalar-filtering-in-a-StructArray-field">العددية في حقل StructArray</a>.</p></li>
 </ul>
-<h2 id="Add-Array-of-Structs" class="common-anchor-header">إضافة مصفوفة من الهياكل<button data-href="#Add-Array-of-Structs" class="anchor-icon" translate="no">
+<h2 id="Add-a-StructArray" class="common-anchor-header">إضافة StructArray<button data-href="#Add-a-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -138,17 +169,17 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لاستخدام مصفوفة من الهياكل في Milvus، تحتاج إلى تحديد حقل مصفوفة عند إنشاء مجموعة، وتعيين نوع البيانات لعناصرها إلى Struct. العملية كالتالي:</p>
+    </button></h2><p>لإضافة حقل StructArray في Milvus، تحتاج إلى تحديد حقل مصفوفة عند إنشاء مجموعة، وتعيين نوع البيانات لعناصرها إلى Struct. العملية كالتالي:</p>
 <ol>
-<li><p>تعيين نوع بيانات الحقل إلى <code translate="no">DataType.ARRAY</code> عند إضافة الحقل كحقل مصفوفة إلى مخطط المجموعة.</p></li>
-<li><p>قم بتعيين سمة الحقل <code translate="no">element_type</code> إلى <code translate="no">DataType.STRUCT</code> لجعل الحقل مصفوفة من الهياكل.</p></li>
-<li><p>قم بإنشاء مخطط Struct (بنية) وقم بتضمين الحقول المطلوبة. بعد ذلك، قم بالإشارة إلى مخطط الهيكل في سمة الحقل <code translate="no">struct_schema</code>.</p></li>
+<li><p>قم بتعيين نوع بيانات الحقل إلى <code translate="no">DataType.ARRAY</code> عند إضافة الحقل كحقل مصفوفة إلى مخطط المجموعة.</p></li>
+<li><p>قم بتعيين سمة الحقل <code translate="no">element_type</code> إلى <code translate="no">DataType.STRUCT</code> لجعل الحقل مصفوفة هيكلية.</p></li>
+<li><p>قم بإنشاء مخطط هيكلي وقم بتضمين الحقول المطلوبة. بعد ذلك، قم بالإشارة إلى مخطط الهيكل في سمة الحقل <code translate="no">struct_schema</code>.</p></li>
 <li><p>قم بتعيين سمة الحقل <code translate="no">max_capacity</code> إلى قيمة مناسبة لتحديد الحد الأقصى لعدد الهياكل التي يمكن أن يحتويها كل كيان في هذا الحقل.</p></li>
 <li><p><strong>(اختياري</strong>) يمكنك تعيين <code translate="no">mmap.enabled</code> لأي حقل داخل عنصر Struct لموازنة البيانات الساخنة والباردة في Struct.</p></li>
 </ol>
-<p>إليك كيفية تحديد مخطط مجموعة يتضمن مصفوفة من الهياكل:</p>
+<p>إليك كيف يمكنك تحديد مخطط مجموعة يتضمن حقل StructArray:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -359,7 +390,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>توضّح الأسطر المظللة في مثال الشيفرة أعلاه الإجراء لتضمين مصفوفة من الهياكل في مخطط مجموعة.</p>
+<p>توضح الأسطر المظللة في المثال البرمجي أعلاه كيفية تضمين StructArray في مخطط مجموعة.</p>
 <h2 id="Set-index-params" class="common-anchor-header">تعيين بارامترات الفهرس<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -375,11 +406,26 @@ SCHEMA=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تكون الفهرسة إلزامية لجميع حقول المتجهات، بما في ذلك حقول المتجهات في المجموعة وتلك المحددة في بنية العنصر.</p>
-<p>تختلف معلمات الفهرس القابلة للتطبيق اعتمادًا على نوع الفهرس المستخدم. للحصول على تفاصيل حول معلمات الفهرس القابلة للتطبيق، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a> وصفحات التوثيق الخاصة بنوع الفهرس المحدد.</p>
-<p>لفهرسة قائمة تضمين، تحتاج إلى تعيين نوع الفهرس الخاص بها إلى <code translate="no">AUTOINDEX</code> أو <code translate="no">HNSW</code> ، واستخدام <code translate="no">MAX_SIM_COSINE</code> كنوع مقياس لـ Milvus لقياس أوجه التشابه بين قوائم التضمين.</p>
+    </button></h2><p>الفهرسة إلزامية لجميع حقول المتجهات، بما في ذلك حقول المتجهات في المجموعة وتلك المحددة في بنية العنصر.</p>
+<p>تختلف معلمات الفهرس القابلة للتطبيق حسب نوع الفهرس. للحصول على تفاصيل حول معلمات الفهرس القابلة للتطبيق، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a> والوثائق الخاصة بنوع الفهرس المحدد.</p>
+<h3 id="Index-an-embedding-list" class="common-anchor-header">فهرسة قائمة تضمين<button data-href="#Index-an-embedding-list" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لفهرسة قائمة تضمين، تحتاج إلى تعيين نوع الفهرس الخاص بها إلى <code translate="no">AUTOINDEX</code> أو أي من أنواع الفهرس القابلة للتطبيق المذكورة أعلاه، واستخدام نوع مقياس مدرج لـ Milvus لقياس أوجه التشابه بين قوائم التضمين.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -447,6 +493,48 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
   }
 ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h3 id="Index-a-scalar-struct-sub-field" class="common-anchor-header">فهرسة حقل فرعي لهيكل قياسي فرعي<button data-href="#Index-a-scalar-struct-sub-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>عندما تنشئ فهارس على حقل فرعي لهيكل قياسي فرعي فإن ميلفوس ينشئ الفهرس فعليًا على <strong>مستوى العنصر</strong> وليس على مستوى الصف، لتسريع التصفية القياسية.</p>
+<p>يقوم مقتطف التعليمات البرمجية التالي بإنشاء فهرس على حقل فرعي بنيوي فرعي قياسي باسم <code translate="no">chunks[text]</code>.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+<pre><code translate="no" class="language-python">index_params.add_index(
+    field_name=<span class="hljs-string">&quot;chunks[text]&quot;</span>,
+    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;chunks[text]&quot;</span>)
+        .indexType(IndexParam.IndexType.INVERTED)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">indexParams.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;chunks[text]&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;INVERTED&quot;</span>
+})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">INDEX_PARAMS += <span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;chunks[text]&quot;,
+    &quot;indexName&quot;: &quot;chunks_text_vector_index&quot;,
+    &quot;indexType&quot;: &quot;INVERTED&quot;
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Create-a-collection" class="common-anchor-header">إنشاء مجموعة<button data-href="#Create-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -462,7 +550,7 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد أن يصبح المخطط والفهرس جاهزين، يمكنك إنشاء مجموعة تتضمن حقل مصفوفة من الهياكل.</p>
+    </button></h2><p>بمجرد أن يصبح المخطط والفهرس جاهزين، يمكنك إنشاء مجموعة تتضمن حقل StructArray.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جافا جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -471,14 +559,7 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
-<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
-
-<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
-        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
-        .build());
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -490,7 +571,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">createCollection</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;books&quot;</span>,
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
   <span class="hljs-attr">fields</span>: schema,
   <span class="hljs-attr">indexes</span>: indexParams,
 });
@@ -719,7 +800,7 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
 client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h2 id="Vector-search-against-an-Array-of-Structs-field" class="common-anchor-header">بحث متجه مقابل حقل صفيف من الهياكل<button data-href="#Vector-search-against-an-Array-of-Structs-field" class="anchor-icon" translate="no">
+<h2 id="Vector-search-in-a-StructArray-field" class="common-anchor-header">البحث عن المتجهات في حقل StructArray<button data-href="#Vector-search-in-a-StructArray-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -734,11 +815,11 @@ client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك إجراء عمليات بحث متجهية على حقول المتجهات في مجموعة وفي مصفوفة من الهياكل.</p>
-<p>على وجه التحديد، يجب عليك ربط اسم حقل صفيف الهياكل وحقول المتجهات المستهدفة داخل عناصر الهياكل كقيمة للمعلمة <code translate="no">anns_field</code> في طلب البحث، واستخدام <code translate="no">EmbeddingList</code> لتنظيم متجهات الاستعلام بشكل منظم.</p>
+    </button></h2><p>يمكنك إجراء عمليات بحث متجهية في حقول المتجهات في مجموعة وفي StructArray.</p>
+<p>على وجه التحديد، يجب عليك ربط اسم حقل StructArray وأسماء حقول المتجهات المستهدفة داخل عناصر Struct كقيمة للمعلمة <code translate="no">anns_field</code> في طلب البحث، واستخدام <code translate="no">EmbeddingList</code> لتنظيم متجهات الاستعلام بشكل منظم.</p>
 <div class="alert note">
-<p>يوفر Milvus <code translate="no">EmbeddingList</code> لمساعدتك في تنظيم متجهات الاستعلام لعمليات البحث مقابل قائمة تضمين في مصفوفة من الهياكل بشكل أكثر دقة. يحتوي كل <code translate="no">EmbeddingList</code> على تضمين متجه على الأقل ويتوقع عددًا من الكيانات الأعلىK في المقابل.</p>
-<p>ومع ذلك، لا يمكن استخدام <code translate="no">EmbeddingList</code> إلا في طلبات <code translate="no">search()</code> دون البحث عن النطاق أو تجميع معلمات البحث، ناهيك عن طلبات <code translate="no">search_iterator()</code>.</p>
+<p>يوفر Milvus <code translate="no">EmbeddingList</code> لمساعدتك في تنظيم ناقلات الاستعلام لعمليات البحث مقابل قائمة تضمين في StructArray بشكل أكثر دقة. يحتوي كل <code translate="no">EmbeddingList</code> على تضمين متجه على الأقل ويتوقع عددًا من الكيانات الأعلىK في المقابل.</p>
+<p>ومع ذلك، يمكن استخدام <code translate="no">EmbeddingList</code> فقط في طلبات <code translate="no">search()</code> دون البحث عن النطاق أو تجميع معلمات البحث، ناهيك عن طلبات <code translate="no">search_iterator()</code>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -997,6 +1078,76 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>في المثال البرمجي أعلاه، <code translate="no">embeddingList1</code> هي قائمة تضمين من متجه واحد، بينما <code translate="no">embeddingList2</code> تحتوي على متجهين. يقوم كل منهما بتشغيل طلب بحث منفصل ويتوقع قائمة بالكيانات الأكثر تشابهًا من بين الكيانات المتشابهة.</p>
+<h2 id="Scalar-filtering-in-a-StructArray-field" class="common-anchor-header">التصفية العددية في حقل StructArray<button data-href="#Scalar-filtering-in-a-StructArray-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>يمكنك استخدام <strong>عوامل تصفية العناصر</strong> <strong>والمشغلات في عائلة المطابقة</strong> لإجراء تصفية عددية ضد حقل فرعي عددية في StructArray. للمزيد من التفاصيل والأمثلة على نوعي المشغلين أعلاه، راجع <a href="/docs/ar/struct-array-operators.md">صفيف مشغلي الهياكل</a>.</p>
+<h3 id="Element-filters" class="common-anchor-header">مرشحات العناصر<button data-href="#Element-filters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>هذا هو عامل تصفية على مستوى الكيان يتحقق مما إذا كان عنصر واحد على الأقل في حقل StructArray لكيان ما يستوفي المسند. على سبيل المثال، يقوم عامل تصفية العناصر التالي بإرجاع الكيانات التي تحتوي على قطعة واحدة على الأقل تبدأ بـ "أحمر" في الحقل الفرعي <code translate="no">text</code>.</p>
+<pre><code translate="no" class="language-python">element_filter(chunks, $[text] LIKE <span class="hljs-string">&quot;Red%&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<p>يمكنك استخدام جميع عوامل المقارنة والنطاق والعوامل الحسابية تقريبًا في المسند، والتي يتم تقييمها لكل عنصر، ويمكن استخدام العوامل المنطقية لدمج عدة شروط على نفس العنصر. لمزيد من التفاصيل، راجع المعاملات <a href="/docs/ar/basic-operators.md">الأساسية</a>.</p>
+<p>في حالة وجود تعبيرات تصفية قياسية متعددة في بحث تمت تصفيته أو طلب استعلام، ضع تعبير تصفية العنصر بعد جميع تعبيرات التصفية على مستوى الكيان، كما هو موضح أدناه.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># correct</span>
+<span class="hljs-built_in">id</span> &gt; <span class="hljs-number">0</span> &amp;&amp; element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>)
+
+<span class="hljs-comment"># incorrect, resulting errors</span>
+element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; <span class="hljs-built_in">id</span> &gt; <span class="hljs-number">0</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Match-family-operators" class="common-anchor-header">عوامل عائلة التطابق<button data-href="#Match-family-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تعمل مشغلات عائلة المطابقة على حقل StructArray أيضًا. بدلاً من مجرد التحقق مما إذا كان العنصر موجودًا أم لا، يمكنك تحديد عدد العناصر (أو النسبة) التي يجب أن تستوفي مسند العنصر.</p>
+<ul>
+<li><p><code translate="no">MATCH_ANY(chunks, $[text] LIKE &quot;Red%&quot;)</code></p>
+<p>يؤدي هذا إلى إرجاع الكيانات التي تحتوي على جزء واحد على الأقل يبدأ بـ "أحمر" في الحقل الفرعي <code translate="no">text</code> ؛ من الناحية الدلالية، هذا يعادل <code translate="no">element_filter</code>.</p></li>
+<li><p><code translate="no">MATCH_ALL(chunks, $[text] LIKE &quot;Red%&quot;)</code></p>
+<p>يؤدي هذا إلى إرجاع الكيانات التي تبدأ حقولها الفرعية النصية في جميع القطع ب "أحمر".</p></li>
+<li><p><code translate="no">MATCH_LEAST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
+<p>يؤدي هذا إلى إرجاع الكيانات التي تحتوي على <code translate="no">k</code> على الأقل على أجزاء تبدأ ب "أحمر" في الحقل الفرعي <code translate="no">text</code>.</p></li>
+<li><p><code translate="no">MATCH_MOST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
+<p>يؤدي هذا إلى إرجاع الكيانات التي تحتوي على <code translate="no">k</code> على الأكثر على أجزاء تبدأ ب "أحمر" في الحقل الفرعي <code translate="no">text</code>.</p></li>
+<li><p><code translate="no">MATCH_EXACT(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
+<p>يقوم هذا بإرجاع الكيانات التي تحتوي بالضبط على <code translate="no">k</code> قطع تبدأ ب "أحمر" في الحقل الفرعي <code translate="no">text</code>.</p></li>
+</ul>
 <h2 id="Next-steps" class="common-anchor-header">الخطوات التالية<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1012,4 +1163,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمثل تطوير صفيف أصلي من نوع بيانات Structs تقدمًا كبيرًا في قدرة ميلفوس على التعامل مع بنيات البيانات المعقدة. لفهم حالات الاستخدام بشكل أفضل وتعظيم هذه الميزة الجديدة، ننصحك بقراءة <a href="/docs/ar/best-practices-for-array-of-structs.md">تصميم المخطط باستخدام مصفوفة الهياكل</a>.</p>
+    </button></h2><p>يمثل تطوير نوع بيانات StructArray أصلي تقدمًا كبيرًا في قدرة Milvus على التعامل مع هياكل البيانات المعقدة. لفهم حالات الاستخدام بشكل أفضل والاستفادة القصوى من هذه الميزة الجديدة، ننصحك بقراءة <a href="/docs/ar/best-practices-for-array-of-structs.md">تصميم المخطط باستخدام مصفوفة من الهياكل</a>.</p>

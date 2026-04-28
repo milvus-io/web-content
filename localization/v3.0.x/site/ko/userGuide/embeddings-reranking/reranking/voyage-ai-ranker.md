@@ -26,7 +26,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>재랭크 작업을 위해 특별히 훈련된 모델을 통한 고급 의미론적 이해</p></li>
 <li><p>프로덕션 워크로드에 최적화된 추론을 통한 고성능 처리</p></li>
-<li><p>다양한 문서 길이를 처리하기 위한 유연한 잘라내기 제어 기능</p></li>
+<li><p>다양한 문서 길이 처리를 위한 유연한 잘라내기 제어 기능</p></li>
 <li><p>다양한 모델 변형(재랭크-2, 재랭크-라이트 등)에 걸쳐 미세 조정된 성능</p></li>
 </ul>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -53,7 +53,7 @@ beta: Milvus 2.6.x
 <li><p>랭커 구성에서 직접 API 키를 지정합니다.</p></li>
 </ul></li>
 </ul>
-<h2 id="Create-a-Voyage-AI-ranker-function" class="common-anchor-header">Voyage AI 랭커 함수 생성하기<button data-href="#Create-a-Voyage-AI-ranker-function" class="anchor-icon" translate="no">
+<h2 id="Create-a-Voyage-AI-ranker-function" class="common-anchor-header">Voyage AI 랭커 함수 생성<button data-href="#Create-a-Voyage-AI-ranker-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -66,7 +66,7 @@ summary: Milvusの時刻同期システムについて学ぶ。
 <p>この理想的なシナリオは、ノードが1つしかない場合には容易に達成できる。しかし、milvusは分散ベクタデータベースであり、異なるノードにおけるすべてのDMLおよびDDL操作が整然と保たれるようにするために、milvusは以下の2つの問題に対処する必要がある：</p>
 <ol>
 <li><p>上の例の2人のユーザが異なるノードにいる場合、タイムクロックが異なります。例えば、ユーザ 2 がユーザ 1 より 24 時間遅れている場合、ユーザ 1 によるすべての操作は翌日までユーザ 2 には見えません。</p></li>
-<li><p>ネットワークの待ち時間が発生することもあります。ユーザー2がコレクション<code translate="no">C0</code> の検索を<code translate="no">t17</code> で行った場合、milvusは<code translate="no">t17</code> 以前のすべての操作が正常に処理され、完了したことを保証できるはずです。<code translate="no">t15</code> での削除操作がネットワーク遅延のために遅延した場合、ユーザ 2 が<code translate="no">t17</code> で検索を行う際に、削除されたはずのデータ<code translate="no">A1</code> をまだ見ることができる可能性が非常に高い。</p></li>
+<li><p>ネットワーク遅延が発生する可能性もあります。ユーザー2がコレクション<code translate="no">C0</code> の検索を<code translate="no">t17</code> で行った場合、milvusは<code translate="no">t17</code> 以前のすべての操作が正常に処理され完了したことを保証できるはずです。<code translate="no">t15</code> での削除操作がネットワーク遅延のために遅延した場合、ユーザ2が<code translate="no">t17</code> で検索を行う際に、削除されたはずのデータ<code translate="no">A1</code> をまだ見ることができる可能性が非常に高い。</p></li>
 </ol>
 <p>そこでMilvusでは、この問題を解決するために時刻同期システム（timetick）を採用している。</p>
 <h2 id="Timestamp-oracle-TSO" class="common-anchor-header">タイムスタンプ・オラクル（TSO）<button data-href="#Timestamp-oracle-TSO" class="anchor-icon" translate="no">
@@ -89,7 +89,7 @@ summary: Milvusの時刻同期システムについて学ぶ。
 <p>TSOタイムスタンプは物理的な部分と論理的な部分で構成される<code translate="no">uint64</code> 。下図はタイムスタンプのフォーマットを示している。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
    </span> <span class="img-wrapper"> <span>TSO_Timestamp</span>。 </span></p>
 <p>図示されているように、先頭の46ビットは物理的な部分、すなわちミリ秒単位のUTC時間である。最後の18ビットは論理部分である。</p>
 <h2 id="Time-synchronization-system-timetick" class="common-anchor-header">時刻同期システム（timetick）<button data-href="#Time-synchronization-system-timetick" class="anchor-icon" translate="no">
@@ -114,32 +114,32 @@ summary: Milvusの時刻同期システムについて学ぶ。
   <code translate="no">MsgStream</code> はメッセージ・キューのラッパーで、Milvus 2.0ではデフォルトでPulsarとなっています。</div>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
    </span> <span class="img-wrapper"> <span>timesync_proxy_insert_msg</span> </span></p>
 <p>一般的な原則の1つは、<code translate="no">MsgStream</code> 、同じプロキシからの<code translate="no">InsertMsgs</code> のタイムスタンプはインクリメンタルでなければならないということである。しかし、異なるプロキシからの<code translate="no">InsertMsgs</code> のタイムスタンプにはそのようなルールはない。</p>
 <p>以下の図は、<code translate="no">MsgStream</code> の中の<code translate="no">InsertMsgs</code> の例である。このスニペットには5つの<code translate="no">InsertMsgs</code> が含まれ、そのうちの3つは<code translate="no">Proxy1</code> からのもので、残りは<code translate="no">Proxy2</code> からのものである。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
    </span> <span class="img-wrapper"> <span>msgstream</span> </span></p>
-<p><code translate="no">Proxy1</code> からの3つの<code translate="no">InsertMsgs</code> のタイムスタンプはインクリメンタルであり、<code translate="no">Proxy2</code> からの2つの<code translate="no">InsertMsgs</code> もインクリメンタルである。しかし、<code translate="no">Proxy1</code> と<code translate="no">Proxy2</code> <code translate="no">InsertMsgs</code> の間には特定の順序はない。</p>
+<p><code translate="no">Proxy1</code> からの3つの<code translate="no">InsertMsgs</code> のタイムスタンプはインクリメンタルであり、<code translate="no">Proxy2</code> からの2つの<code translate="no">InsertMsgs</code> も同様である。 しかし、<code translate="no">Proxy1</code> と<code translate="no">Proxy2</code> <code translate="no">InsertMsgs</code> の間には特定の順序はない。</p>
 <p>考えられるシナリオとしては、<code translate="no">Proxy2</code> からのタイムスタンプ<code translate="no">110</code> のメッセージを読むときに、<code translate="no">Proxy1</code> からのタイムスタンプ<code translate="no">80</code> のメッセージがまだ<code translate="no">MsgStream</code> の中にあることをMilvusが発見することです。したがって、Milvusは時間同期システムtimetickを導入し、<code translate="no">MsgStream</code> からのメッセージを読むときに、タイムスタンプ値の小さいメッセージはすべて消費されなければならないようにしています。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
    </span> <span class="img-wrapper"> <span>時間同期</span> </span></p>
 <p>上の図に示すように</p>
 <ul>
 <li><p>各プロキシは、定期的(デフォルトでは200ミリ秒ごと)に、<code translate="no">MsgStream</code>の最新の<code translate="no">InsertMsg</code> の最大のタイムスタンプ値をroot coordに報告する。</p></li>
 <li><p>ルートコーデ ィックは、<code translate="no">InsertMsgs</code> がどのプロキシに属していても、この<code translate="no">Msgstream</code> の最小タイムスタンプ値を特定する。それからルートコーデ ィックは、この最小タイムスタンプを<code translate="no">Msgstream</code> 。 このタイムスタンプはtimetickとも呼ばれる。</p></li>
-<li><p>コンシューマーコンポーネントがルートコー ディネートによって挿入されたタイムスティックを読むとき、コンシューマー コンポーネントは、より小さいタイムスタンプ値を持つすべての挿入メッセー ジが消費されたことを理解する。したがって、関連するリクエストは、オー ダーを中断することなく安全に実行できる。</p></li>
+<li><p>コンシューマーコンポーネントがルートコー ディネートによって挿入されたタイムスティックを読むとき、コンシューマー コンポーネントは、より小さなタイムスタンプ値を持つすべての挿入メッセー ジが消費されたことを理解する。したがって、関連するリクエストは、オー ダーを中断することなく安全に実行できる。</p></li>
 </ul>
 <p>以下の図は、タイムティックが挿入された<code translate="no">Msgstream</code> の例である。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
    </span> <span class="img-wrapper"> <span>タイムティック</span> </span></p>
-<p><code translate="no">MsgStream</code> は、出力メッセージがタイムスタンプの要件を満たすように、タイムティッ クに従ってメッセージをバッチ処理します。上の例では、 の を除くすべてのレコードを、 で消費する。これは、最新のタイムティックの後だからである。<code translate="no">Proxy2</code> <code translate="no">InsertMsgs</code> <code translate="no">Timestamp: 120</code> </p>
+<p><code translate="no">MsgStream</code> は、出力メッセージがタイムスタンプの要件を満たすように、タイムティッ クに従ってメッセージをバッチ処理します。上の例では、<code translate="no">Proxy2</code> の<code translate="no">InsertMsgs</code> を除くすべてのレコードを<code translate="no">Timestamp: 120</code> で消費する。</p>
 <h2 id="Whats-next" class="common-anchor-header">次へ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

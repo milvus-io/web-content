@@ -101,7 +101,7 @@ summary: Découvrez comment configurer dataNode pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Nombre maximal de tâches de synchronisation simultanées de la gestion de la synchronisation des nœuds de données au niveau mondial      </td>
+      <td>        Nombre maximal de tâches de synchronisation simultanées de la gestion de la synchronisation du datanode au niveau mondial      </td>
       <td>256</td>
     </tr>
   </tbody>
@@ -131,7 +131,7 @@ summary: Découvrez comment configurer dataNode pour Milvus.
   <tbody>
     <tr>
       <td>        Supporte le saut de certains messages de timetick pour réduire l'utilisation du CPU   </td>
-      <td>true</td>
+      <td>vrai</td>
     </tr>
   </tbody>
 </table>

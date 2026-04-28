@@ -118,7 +118,7 @@ deepseek_client = OpenAI(
     base_url=<span class="hljs-string">&quot;https://api.deepseek.com&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Definire un modello di embedding per generare embeddings di testo utilizzando <code translate="no">milvus_model</code>. Utilizziamo come esempio il modello <code translate="no">DefaultEmbeddingFunction</code>, che è un modello di embedding pre-addestrato e leggero.</p>
+<p>Definire un modello di embedding per generare embedding di testo utilizzando <code translate="no">milvus_model</code>. Come esempio utilizziamo il modello <code translate="no">DefaultEmbeddingFunction</code>, che è un modello di embedding pre-addestrato e leggero.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model <span class="hljs-keyword">as</span> milvus_model
 
 embedding_model = milvus_model.DefaultEmbeddingFunction()

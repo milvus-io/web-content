@@ -6,9 +6,9 @@ summary: >-
   scénarios où une précision sans compromis est essentielle. Il garantit un
   rappel de 1 en comparant de manière exhaustive chaque requête à tous les
   vecteurs de l'ensemble de données, en s'assurant qu'aucune correspondance
-  potentielle n'est négligée. En s'appuyant sur l'accélération GPU,
-  GPU_BRUTE_FORCE est adapté aux applications exigeant une précision absolue
-  dans les recherches de similarité vectorielle.
+  potentielle n'est négligée. Grâce à l'accélération GPU, GPU_BRUTE_FORCE est
+  adapté aux applications exigeant une précision absolue dans les recherches de
+  similarité vectorielle.
 ---
 <h1 id="GPUBRUTEFORCE" class="common-anchor-header">GPU_BRUTE_FORCE<button data-href="#GPUBRUTEFORCE" class="anchor-icon" translate="no">
       <svg translate="no"

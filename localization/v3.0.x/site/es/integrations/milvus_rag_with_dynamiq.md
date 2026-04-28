@@ -110,7 +110,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
       </svg>
     </button></h2><p>Este tutorial muestra un flujo de trabajo RAG (Retrieval-Augmented Generation) para indexar documentos con Milvus como base de datos vectorial. El flujo de trabajo toma archivos PDF de entrada, los procesa en trozos más pequeños, genera incrustaciones vectoriales utilizando el modelo de incrustación de OpenAI y almacena las incrustaciones en una colección Milvus para una recuperación eficiente.</p>
 <p>Al final de este flujo de trabajo, tendrá un sistema de indexación de documentos escalable y eficiente que soporta futuras tareas RAG como la búsqueda semántica y la respuesta a preguntas.</p>
-<h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">Importe las bibliotecas necesarias e inicie el flujo de trabajo<button data-href="#Import-Required-Libraries-and-Initialize-Workflow" class="anchor-icon" translate="no">
+<h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">Importar las bibliotecas necesarias e inicializar el flujo de trabajo<button data-href="#Import-Required-Libraries-and-Initialize-Workflow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

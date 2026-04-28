@@ -40,7 +40,7 @@ title: Utiliser ColPali pour la recherche multimodale avec Milvus
   </span>
 </p>
 <p>La fonction MaxSim compare une requête avec un document (ce que vous recherchez) en examinant leurs enchâssements de jetons. Pour chaque mot de la requête, elle choisit le mot le plus similaire du document (en utilisant la similarité cosinus ou la distance L2 au carré) et additionne ces similarités maximales pour tous les mots de la requête.</p>
-<p>ColPali est une méthode qui combine la représentation multi-vectorielle de ColBERT avec PaliGemma (un modèle de langage large et multimodal) pour tirer parti de ses fortes capacités de compréhension. Cette approche permet de représenter une page contenant à la fois du texte et des images à l'aide d'une représentation multi-vectorielle unifiée. Les encastrements dans cette représentation multi-vectorielle peuvent capturer des informations détaillées, améliorant ainsi les performances de la génération augmentée de recherche (RAG) pour les données multimodales.</p>
+<p>ColPali est une méthode qui combine la représentation multi-vectorielle de ColBERT avec PaliGemma (un modèle de langage large et multimodal) pour tirer parti de ses capacités de compréhension. Cette approche permet de représenter une page contenant à la fois du texte et des images à l'aide d'une représentation multi-vectorielle unifiée. Les encastrements dans cette représentation multi-vectorielle peuvent capturer des informations détaillées, améliorant ainsi les performances de la génération augmentée de recherche (RAG) pour les données multimodales.</p>
 <p>Dans ce manuel, nous appelons ce type de représentation multi-vectorielle "encastrements ColBERT" pour des raisons de généralité. Cependant, le modèle utilisé est le <strong>modèle ColPali</strong>. Nous montrerons comment utiliser Milvus pour la recherche multi-vectorielle. Sur cette base, nous présenterons l'utilisation de ColPali pour la recherche de pages sur la base d'une requête donnée.</p>
 <h2 id="Preparation" class="common-anchor-header">Préparation<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -282,7 +282,7 @@ qs: <span class="hljs-type">List</span>[torch.Tensor] = []
         embeddings_query = model(**batch_query)
     qs.extend(<span class="hljs-built_in">list</span>(torch.unbind(embeddings_query.to(<span class="hljs-string">&quot;cpu&quot;</span>))))
 <button class="copy-code-btn"></button></code></pre>
-<p>En outre, nous devrons extraire la liste d'encastrements pour chaque page, qui contient 1030 encastrements à 128 dimensions.</p>
+<p>En outre, nous devrons extraire la liste d'encastrements pour chaque page et nous verrons qu'il y a 1030 encastrements à 128 dimensions pour chaque page.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 <span class="hljs-keyword">import</span> os

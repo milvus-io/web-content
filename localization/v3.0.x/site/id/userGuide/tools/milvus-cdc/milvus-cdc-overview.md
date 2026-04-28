@@ -58,10 +58,10 @@ title: Gambaran Umum CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus-CDC mengadopsi arsitektur dengan dua komponen utama - server HTTP yang mengelola tugas dan metadata, dan <strong>corelib</strong> yang menyinkronkan eksekusi tugas dengan pembaca yang memperoleh data dari instance Milvus sumber dan penulis yang mengirimkan data yang telah diproses ke instance Milvus target.</p>
+    </button></h2><p>Milvus-CDC mengadopsi arsitektur dengan dua komponen utama - server HTTP yang mengelola tugas dan metadata, dan <strong>corelib</strong> yang menyinkronkan eksekusi tugas dengan pembaca yang mendapatkan data dari instance Milvus sumber dan penulis yang mengirimkan data yang telah diproses ke instance Milvus target.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
    </span> <span class="img-wrapper"> <span>arsitektur milvus-cdc</span> </span></p>
 <p>Dalam diagram sebelumnya,</p>
 <ul>
@@ -92,7 +92,7 @@ title: Gambaran Umum CDC
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
    </span> <span class="img-wrapper"> <span>milvus-cdc-alur kerja</span> </span></p>
 <h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -118,7 +118,7 @@ title: Gambaran Umum CDC
 <li><p>Menyisipkan/Menghapus/Memasang</p></li>
 <li><p>Membuat/Menghapus Partisi</p></li>
 <li><p>Membuat/Menghapus Indeks</p></li>
-<li><p>Memuat/Melepas/Menyiram</p></li>
+<li><p>Memuat/Melepaskan/Menyiram</p></li>
 <li><p>Memuat/Melepaskan Partisi</p></li>
 <li><p>Membuat/Menghapus Basis Data</p></li>
 </ul></li>

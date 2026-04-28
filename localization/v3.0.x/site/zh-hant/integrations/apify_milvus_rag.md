@@ -145,7 +145,7 @@ run_input = {
 
 actor_call = client.actor(actor_id).call(run_input=run_input)
 <button class="copy-code-btn"></button></code></pre>
-<p>網站內容抓取程式會徹底抓取網站，直到達到<code translate="no">maxCrawlPages</code> 所設定的預定限制。抓取的資料會儲存在 Apify 平台上的<code translate="no">Dataset</code> 。要存取及分析這些資料，您可以使用<code translate="no">defaultDatasetId</code></p>
+<p>網站內容抓取程式會徹底抓取網站，直到達到<code translate="no">maxCrawlPages</code> 所設定的預設限制。抓取的資料會儲存在 Apify 平台上的<code translate="no">Dataset</code> 。要存取及分析這些資料，您可以使用<code translate="no">defaultDatasetId</code></p>
 <pre><code translate="no" class="language-python">dataset_id = actor_call[<span class="hljs-string">&quot;defaultDatasetId&quot;</span>]
 dataset_id
 <button class="copy-code-btn"></button></code></pre>
@@ -174,7 +174,7 @@ item[<span class="hljs-number">0</span>].get(<span class="hljs-string">&quot;tex
     run_input=milvus_integration_inputs
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>現在所有的 scraped 資料都儲存在 Milvus 資料庫中，可以進行擷取和問題回答了</p>
+<p>現在，所有的 scraped 資料都儲存在 Milvus 資料庫中，並已準備好進行檢索和問題回答</p>
 <h1 id="Retrieval-and-LLM-generative-pipeline" class="common-anchor-header">檢索與 LLM 產生管道<button data-href="#Retrieval-and-LLM-generative-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -257,6 +257,6 @@ rag_chain.invoke(question)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在本教程中，我們示範了如何使用 Apify 抓取網站內容、將資料儲存在 Milvus 向量資料庫，並使用檢索增強管道來執行問題解答任務。透過結合 Apify 的網頁抓取功能與向量儲存的 Milvus/Zilliz 以及語言模型的 Langchain，您可以建立高效能的資訊檢索系統。</p>
+    </button></h1><p>在本教程中，我們示範了如何使用 Apify 抓取網站內容、將資料儲存在 Milvus 向量資料庫，並使用檢索增強管道來執行問題解答任務。將 Apify 的網頁抓取功能與向量儲存的 Milvus/Zilliz 以及語言模型的 Langchain 相結合，就能建立高效能的資訊檢索系統。</p>
 <p>為了改善資料庫中的資料蒐集與更新，Apify 整合提供<a href="https://apify.com/apify/milvus-integration#incrementally-update-database-from-the-website-content-crawler">增量更新</a>功能，僅根據校驗和更新新的或修改過的資料。此外，它還可以自動<a href="https://apify.com/apify/milvus-integration#delete-outdated-expired-data">移除</a>在指定時間內未被抓取的<a href="https://apify.com/apify/milvus-integration#delete-outdated-expired-data">過期</a>資料。這些功能有助於保持您的向量資料庫最佳化，並確保您的檢索增強管道以最少的手動工作保持高效率與最新。</p>
 <p>有關 Apify-Milvus 整合的詳細資訊，請參閱<a href="https://docs.apify.com/platform/integrations/milvus">Apify Milvus 文件</a>及<a href="https://apify.com/apify/milvus-integration">整合 README 檔案</a>。</p>

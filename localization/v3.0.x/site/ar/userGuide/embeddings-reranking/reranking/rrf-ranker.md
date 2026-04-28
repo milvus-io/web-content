@@ -256,7 +256,7 @@ summary: >-
 </tr>
 </table></p></li>
 </ul>
-<h2 id="Usage-of-RRF-Ranker" class="common-anchor-header">استخدام مصنف RRRF<button data-href="#Usage-of-RRF-Ranker" class="anchor-icon" translate="no">
+<h2 id="Usage-of-RRF-Ranker" class="common-anchor-header">استخدام مصنف RRF<button data-href="#Usage-of-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

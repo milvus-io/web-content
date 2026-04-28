@@ -140,7 +140,7 @@ beta: Milvus 2.6.x
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
 <p>Wenn Sie die API-Schlüssel hier angeben, bleiben sie über Neustarts hinweg bestehen und Sie können die Schlüssel einfach durch Ändern einer Bezeichnung wechseln.</p></li>
-<li><p><strong>Sagen Sie Milvus, welchen Schlüssel es für Dienstaufrufe verwenden soll</strong></p>
+<li><p><strong>Teilen Sie Milvus mit, welchen Schlüssel es für Dienstaufrufe verwenden soll</strong></p>
 <p>In derselben Datei weisen Sie dem Voyage AI-Anbieter das Label zu, das er verwenden soll.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
@@ -265,7 +265,7 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
       </svg>
     </button></h3><p>Das Function-Modul in Milvus wandelt Rohdaten, die in einem Skalarfeld gespeichert sind, automatisch in Einbettungen um und speichert sie in dem explizit definierten Vektorfeld.</p>
 <p>Das folgende Beispiel fügt ein Funktionsmodul (<code translate="no">voya</code>) hinzu, das das Skalarfeld <code translate="no">&quot;document&quot;</code> in Einbettungen umwandelt und die resultierenden Vektoren in dem zuvor definierten Vektorfeld <code translate="no">&quot;dense&quot;</code> speichert.</p>
-<p>Sobald Sie Ihre Einbettungsfunktion definiert haben, fügen Sie sie zu Ihrem Sammlungsschema hinzu. Dadurch wird Milvus angewiesen, die angegebene Einbettungsfunktion zur Verarbeitung und Speicherung von Einbettungen aus Ihren Textdaten zu verwenden.</p>
+<p>Sobald Sie Ihre Einbettungsfunktion definiert haben, fügen Sie sie zu Ihrem Sammlungsschema hinzu. Dies weist Milvus an, die angegebene Einbettungsfunktion zu verwenden, um Einbettungen aus Ihren Textdaten zu verarbeiten und zu speichern.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function specifically for embedding model provider</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;voya&quot;</span>,                                  <span class="hljs-comment"># Unique identifier for this embedding function</span>

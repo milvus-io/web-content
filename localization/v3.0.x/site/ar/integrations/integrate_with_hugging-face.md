@@ -23,7 +23,7 @@ title: الإجابة عن الأسئلة باستخدام ميلفوس ومعا
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/qa_with_milvus_and_hf.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/qa_with_milvus_and_hf.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>يعمل نظام الإجابة على الأسئلة المستند إلى البحث الدلالي من خلال إيجاد السؤال الأكثر تشابهًا من مجموعة بيانات لأزواج الأسئلة والأجوبة لسؤال استعلام معين. وبمجرد تحديد السؤال الأكثر تشابهًا، يتم اعتبار الإجابة المقابلة من مجموعة البيانات كإجابة للاستعلام. يعتمد هذا النهج على مقاييس التشابه الدلالي لتحديد التشابه بين الأسئلة واسترجاع الإجابات ذات الصلة.</p>
+<p>يعمل نظام الإجابة عن الأسئلة المستند إلى البحث الدلالي من خلال إيجاد السؤال الأكثر تشابهًا من مجموعة بيانات لأزواج الأسئلة والأجوبة لسؤال استعلام معين. وبمجرد تحديد السؤال الأكثر تشابهًا، يتم اعتبار الإجابة المقابلة من مجموعة البيانات كإجابة للاستعلام. يعتمد هذا النهج على مقاييس التشابه الدلالي لتحديد التشابه بين الأسئلة واسترجاع الإجابات ذات الصلة.</p>
 <p>يوضح هذا البرنامج التعليمي كيفية إنشاء نظام للإجابة عن الأسئلة باستخدام <a href="https://huggingface.co">Hugging Face</a> كمحمّل بيانات ومولد تضمين لمعالجة البيانات <a href="https://milvus.io">وMilvus</a> كقاعدة بيانات متجهة للبحث الدلالي.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">قبل أن تبدأ<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"

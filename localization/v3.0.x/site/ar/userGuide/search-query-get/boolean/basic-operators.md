@@ -563,7 +563,7 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>مثال 1: استرداد الكيانات التي تكون فيها البيانات الوصفية فارغة</strong></p>
+<p><strong>مثال 1: استرداد الكيانات حيث البيانات الوصفية فارغة</strong></p>
 <p>للعثور على الكيانات التي يكون فيها الحقل <code translate="no">metadata</code> إما مفقودًا أو تم تعيينه صراحةً إلى لا شيء:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
 
@@ -573,7 +573,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>مثال 2: استرداد الكيانات التي تكون فيها البيانات الوصفية غير فارغة</strong></p>
+<p><strong>مثال 2: استرجاع الكيانات التي تكون فيها البيانات الوصفية غير فارغة</strong></p>
 <p>للعثور على الكيانات التي يكون فيها الحقل <code translate="no">metadata</code> غير فارغ:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
 
@@ -638,7 +638,7 @@ summary: >-
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>مثال 2: استرداد الكيانات التي تكون فيها العلامات غير فارغة</strong></p>
-<p>لاسترداد الكيانات حيث يكون الحقل <code translate="no">tags</code> غير فارغ:</p>
+<p>لاسترداد الكيانات التي يكون فيها الحقل <code translate="no">tags</code> غير فارغ:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>

@@ -113,7 +113,7 @@ summary: >-
       </svg>
     </button></h2><p>Der <code translate="no">json_contains_any</code> Operator filtert Entitäten, bei denen mindestens ein Element des JSON-Ausdrucks innerhalb des Feldes existiert. Dies ist nützlich, wenn Sie Entitäten auf der Grundlage eines beliebigen von mehreren möglichen Werten abgleichen möchten.</p>
 <p><strong>Beispiel</strong></p>
-<p>Angenommen, Sie möchten Produkte filtern, die mindestens eines der Tags <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code> oder <code translate="no">&quot;new&quot;</code> enthalten. Sie können den Operator <code translate="no">json_contains_any</code> verwenden, um dies zu erreichen.</p>
+<p>Angenommen, Sie möchten Produkte filtern, die mindestens eines der Tags <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code> oder <code translate="no">&quot;new&quot;</code> enthalten. Um dies zu erreichen, können Sie den Operator <code translate="no">json_contains_any</code> verwenden.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

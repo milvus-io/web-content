@@ -80,11 +80,11 @@ summary: 瞭解如何在 Kubernetes 上為 Milvus 分配資源。
     </button></h3><p>如果使用<code translate="no">--set</code> 更新資源配置，您需要為每個 Milvus 元件設定資源變數。</p>
 <div class="filter">
 <a href="#standalone">Milvus 單機</a> <a href="#cluster">Milvus 集群</a></div>
-<div class="table-wrapper filter-standalone" markdown="block">
+<div class="filter-standalone table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set standalone.resources.limits.cpu=2 --set standalone.resources.limits.memory=4Gi --set standalone.resources.requests.cpu=0.1 --set standalone.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<div class="table-wrapper filter-cluster" markdown="block">
+<div class="filter-cluster table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set dataNode.resources.limits.cpu=2 --set dataNode.resources.limits.memory=4Gi --set dataNode.resources.requests.cpu=0.1 --set dataNode.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>

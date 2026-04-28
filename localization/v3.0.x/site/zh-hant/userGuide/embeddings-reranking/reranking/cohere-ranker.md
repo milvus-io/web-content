@@ -154,7 +154,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">provider</code></p></td>
      <td><p>是</p></td>
-     <td><p>用於重新排列的模型服務提供者。</p></td>
+     <td><p>用於重排的模型服務提供者。</p></td>
      <td><p><code translate="no">"cohere"</code></p></td>
    </tr>
    <tr>

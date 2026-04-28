@@ -159,7 +159,7 @@ helm repo update zilliztech
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Upgrade-to-v2615" class="common-anchor-header">步驟 3: 升級到 v2.6.15<button data-href="#Step-3-Upgrade-to-v2615" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-to-v2615" class="common-anchor-header">步驟 3: 升級至 v2.6.15<button data-href="#Step-3-Upgrade-to-v2615" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

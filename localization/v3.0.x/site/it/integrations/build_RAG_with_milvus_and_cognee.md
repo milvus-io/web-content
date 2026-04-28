@@ -11,7 +11,22 @@ title: Costruire RAG con Milvus e Cognee
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_cognee.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h3 id="Build-RAG-with-Milvus-and-Cognee" class="common-anchor-header">Costruire RAG con Milvus e Cognee</h3><p><a href="https://www.cognee.ai">Cognee</a> è una piattaforma per sviluppatori che semplifica lo sviluppo di applicazioni AI con pipeline ECL (Extract, Cognify, Load) scalabili e modulari. Integrandosi perfettamente con Milvus, Cognee consente di collegare e recuperare in modo efficiente conversazioni, documenti e trascrizioni, riducendo le allucinazioni e ottimizzando i costi operativi.</p>
+<h3 id="Build-RAG-with-Milvus-and-Cognee" class="common-anchor-header">Costruire RAG con Milvus e Cognee<button data-href="#Build-RAG-with-Milvus-and-Cognee" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="https://www.cognee.ai">Cognee</a> è una piattaforma per sviluppatori che semplifica lo sviluppo di applicazioni AI con pipeline ECL (Extract, Cognify, Load) scalabili e modulari. Integrandosi perfettamente con Milvus, Cognee consente di collegare e recuperare in modo efficiente conversazioni, documenti e trascrizioni, riducendo le allucinazioni e ottimizzando i costi operativi.</p>
 <p>Grazie al forte supporto per archivi vettoriali come Milvus, database a grafo e LLM, Cognee offre un framework flessibile e personalizzabile per la creazione di sistemi di generazione aumentata del reperimento (RAG). La sua architettura pronta per la produzione garantisce una maggiore precisione ed efficienza per le applicazioni basate sull'intelligenza artificiale.</p>
 <p>In questo tutorial vi mostreremo come costruire una pipeline RAG (Retrieval-Augmented Generation) con Milvus e Cognee.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus git+https://github.com/topoteretes/cognee.git</span>
@@ -39,7 +54,22 @@ os.environ[<span class="hljs-string">&quot;VECTOR_DB_URL&quot;</span>] = <span c
 <li>Se si desidera utilizzare <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, il servizio cloud completamente gestito da Milvus, è necessario impostare <code translate="no">VECTOR_DB_URL</code> e <code translate="no">VECTOR_DB_KEY</code>, che corrispondono all'<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">endpoint pubblico e alla chiave Api</a> di Zilliz Cloud.</li>
 </ul>
 <p></a></p>
-<h3 id="Prepare-the-data" class="common-anchor-header">Preparare i dati</h3><p>Utilizziamo le pagine FAQ della <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Documentazione di Milvus 2.4.x</a> come conoscenza privata nel nostro RAG, che è una buona fonte di dati per una semplice pipeline RAG.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">Preparare i dati<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Come conoscenza privata nel nostro RAG utilizziamo le pagine FAQ della <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Documentazione di Milvus 2.4.x</a>, una buona fonte di dati per una semplice pipeline RAG.</p>
 <p>Scaricare il file zip ed estrarre i documenti nella cartella <code translate="no">milvus_docs</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
@@ -70,18 +100,63 @@ text_lines = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Resetting-Cognee-Data" class="common-anchor-header">Ripristino dei dati di Cognee</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">await</span> cognee.prune.prune_data()
+    </button></h2><h3 id="Resetting-Cognee-Data" class="common-anchor-header">Ripristino dei dati di Cognee<button data-href="#Resetting-Cognee-Data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">await</span> cognee.prune.prune_data()
 <span class="hljs-keyword">await</span> cognee.prune.prune_system(metadata=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Dopo aver fatto tabula rasa, possiamo aggiungere il nostro set di dati ed elaborarlo in un grafo della conoscenza.</p>
-<h3 id="Adding-Data-and-Cognifying" class="common-anchor-header">Aggiungere i dati e cognificare</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">await</span> cognee.add(data=text_lines, dataset_name=<span class="hljs-string">&quot;milvus_faq&quot;</span>)
+<h3 id="Adding-Data-and-Cognifying" class="common-anchor-header">Aggiungere i dati e cognificare<button data-href="#Adding-Data-and-Cognifying" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">await</span> cognee.add(data=text_lines, dataset_name=<span class="hljs-string">&quot;milvus_faq&quot;</span>)
 <span class="hljs-keyword">await</span> cognee.cognify()
 
 <span class="hljs-comment"># [DocumentChunk(id=UUID(&#x27;6889e7ef-3670-555c-bb16-3eb50d1d30b0&#x27;), updated_at=datetime.datetime(2024, 12, 4, 6, 29, 46, 472907, tzinfo=datetime.timezone.utc), text=&#x27;Does the query perform in memory? What are incremental data and historical data?\n\nYes. When ...</span>
 <span class="hljs-comment"># ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Il metodo <code translate="no">add</code> carica il set di dati (Milvus FAQs) in Cognee e il metodo <code translate="no">cognify</code> elabora i dati per estrarre entità, relazioni e sommari, costruendo un grafo della conoscenza.</p>
-<h3 id="Querying-for-Summaries" class="common-anchor-header">Interrogazione dei sommari</h3><p>Ora che i dati sono stati elaborati, interroghiamo il grafo della conoscenza.</p>
+<h3 id="Querying-for-Summaries" class="common-anchor-header">Interrogazione dei sommari<button data-href="#Querying-for-Summaries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ora che i dati sono stati elaborati, interroghiamo il grafo della conoscenza.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> cognee.api.v1.search <span class="hljs-keyword">import</span> SearchType
 
 query_text = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
@@ -92,7 +167,22 @@ search_results = <span class="hljs-keyword">await</span> cognee.search(SearchTyp
 <pre><code translate="no">{'id': 'de5c6713-e079-5d0b-b11d-e9bacd1e0d73', 'text': 'Milvus stores two data types: inserted data and metadata.'}
 </code></pre>
 <p>Questa interrogazione cerca nel grafo della conoscenza un sommario correlato al testo dell'interrogazione e il candidato più correlato viene stampato.</p>
-<h3 id="Querying-for-Chunks" class="common-anchor-header">Interrogazione per pezzi</h3><p>I riepiloghi offrono approfondimenti di alto livello, ma per ottenere dettagli più dettagliati è possibile interrogare pezzi specifici di dati direttamente dal set di dati elaborati. Questi pezzi sono derivati dai dati originali che sono stati aggiunti e analizzati durante la creazione del grafo della conoscenza.</p>
+<h3 id="Querying-for-Chunks" class="common-anchor-header">Interrogazione per pezzi<button data-href="#Querying-for-Chunks" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>I riepiloghi offrono approfondimenti di alto livello, ma per ottenere dettagli più dettagliati è possibile interrogare pezzi specifici di dati direttamente dal set di dati elaborati. Questi pezzi sono derivati dai dati originali che sono stati aggiunti e analizzati durante la creazione del grafo della conoscenza.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> cognee.api.v1.search <span class="hljs-keyword">import</span> SearchType
 
 query_text = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
@@ -124,12 +214,42 @@ Metadata are generated within Milvus. Each Milvus module has its own metadata th
 
 ###
 </code></pre>
-<p>Nelle fasi precedenti, abbiamo interrogato il dataset Milvus FAQ per ottenere sia riepiloghi che pezzi specifici di dati. Se da un lato questo ha fornito approfondimenti dettagliati e informazioni granulari, dall'altro il set di dati era di grandi dimensioni, il che ha reso difficile visualizzare chiaramente le dipendenze all'interno del grafo della conoscenza.</p>
+<p>Nelle fasi precedenti, abbiamo interrogato il dataset Milvus FAQ per ottenere sia riepiloghi che pezzi specifici di dati. Sebbene ciò abbia fornito approfondimenti dettagliati e informazioni granulari, il set di dati era di grandi dimensioni, il che ha reso difficile visualizzare chiaramente le dipendenze all'interno del grafo della conoscenza.</p>
 <p>Per risolvere questo problema, ripristineremo l'ambiente Cognee e lavoreremo con un set di dati più piccolo e mirato. Questo ci permetterà di mostrare meglio le relazioni e le dipendenze estratte durante il processo di cognificazione. Semplificando i dati, possiamo vedere chiaramente come Cognee organizza e struttura le informazioni nel grafo della conoscenza.</p>
-<h3 id="Reset-Cognee" class="common-anchor-header">Resettare Cognee</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">await</span> cognee.prune.prune_data()
+<h3 id="Reset-Cognee" class="common-anchor-header">Resettare Cognee<button data-href="#Reset-Cognee" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">await</span> cognee.prune.prune_data()
 <span class="hljs-keyword">await</span> cognee.prune.prune_system(metadata=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Adding-the-Focused-Dataset" class="common-anchor-header">Aggiunta del set di dati focalizzato</h3><p>In questo caso, viene aggiunto ed elaborato un set di dati più piccolo con una sola riga di testo, per garantire un grafico della conoscenza mirato e facilmente interpretabile.</p>
+<h3 id="Adding-the-Focused-Dataset" class="common-anchor-header">Aggiunta del set di dati focalizzato<button data-href="#Adding-the-Focused-Dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In questo caso, viene aggiunto ed elaborato un set di dati più piccolo con una sola riga di testo, per garantire un grafico della conoscenza mirato e facilmente interpretabile.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># We only use one line of text as the dataset, which simplifies the output later</span>
 text = <span class="hljs-string">&quot;&quot;&quot;
     Natural language processing (NLP) is an interdisciplinary
@@ -139,7 +259,22 @@ text = <span class="hljs-string">&quot;&quot;&quot;
 <span class="hljs-keyword">await</span> cognee.add(text)
 <span class="hljs-keyword">await</span> cognee.cognify()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Querying-for-Insights" class="common-anchor-header">Interrogazione per gli approfondimenti</h3><p>Concentrandoci su questo set di dati più piccolo, possiamo ora analizzare chiaramente le relazioni e la struttura all'interno del grafico della conoscenza.</p>
+<h3 id="Querying-for-Insights" class="common-anchor-header">Interrogazione per gli approfondimenti<button data-href="#Querying-for-Insights" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Concentrandoci su questo set di dati più piccolo, possiamo ora analizzare chiaramente le relazioni e la struttura all'interno del grafico della conoscenza.</p>
 <pre><code translate="no" class="language-python">query_text = <span class="hljs-string">&quot;Tell me about NLP&quot;</span>
 search_results = <span class="hljs-keyword">await</span> cognee.search(SearchType.INSIGHTS, query_text=query_text)
 

@@ -149,7 +149,7 @@ docker compose up -d
 <li>Vous pouvez également apprendre à<ul>
 <li><a href="/docs/fr/scaleout.md">Faire évoluer un cluster Milvus</a></li>
 </ul></li>
-<li>Si vous êtes prêt à déployer votre cluster sur des clouds :<ul>
+<li>Si vous êtes prêt à déployer votre cluster sur des nuages :<ul>
 <li>Apprendre à <a href="/docs/fr/eks.md">déployer Milvus sur Amazon EKS avec Terraform</a></li>
 <li>Apprendre à <a href="/docs/fr/gcp.md">déployer le cluster Milvus sur GCP avec Kubernetes</a></li>
 <li>Apprendre à <a href="/docs/fr/azure.md">déployer Milvus sur Microsoft Azure avec Kubernetes</a></li>

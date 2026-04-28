@@ -70,7 +70,7 @@ title: Milvus WebUI
     </button></h2><p>Milvus Web UI 提供以下功能：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 概述</span> </span></p>
 <ul>
 <li><p><a href="#Home">主页</a></p>
@@ -108,7 +108,7 @@ title: Milvus WebUI
     </button></h2><p>在主页上，您可以找到以下信息：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-home.png" alt="Milvus Web UI Home" class="doc-image" id="milvus-web-ui-home" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-home.png" alt="Milvus Web UI Home" class="doc-image" id="milvus-web-ui-home" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 主页</span> </span></p>
 <ul>
 <li><p><strong>系统信息</strong>：查看系统信息，包括部署模式、部署中使用的映像和相关信息。</p></li>
@@ -134,7 +134,7 @@ title: Milvus WebUI
     </button></h2><p>在 "Collections "页面，您可以查看 Milvus 当前的数据库和 Collections 列表，并检查它们的详细信息。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-collections.png" alt="Milvus Web UI Collections" class="doc-image" id="milvus-web-ui-collections" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-collections.png" alt="Milvus Web UI Collections" class="doc-image" id="milvus-web-ui-collections" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 集合</span> </span></p>
 <ul>
 <li><p><strong>数据库</strong>：查看当前 Milvus 中的数据库列表及其详细信息。</p></li>
@@ -142,7 +142,7 @@ title: Milvus WebUI
 <p>可以点击某个 Collection 查看其详细信息，包括字段数量、分区、索引等详细信息。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI Collectionions 详情</span> </span></p></li>
 </ul>
 <h2 id="Query" class="common-anchor-header">查询<button data-href="#Query" class="anchor-icon" translate="no">
@@ -162,7 +162,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 查询页面</span> </span></p>
 <ul>
 <li><p><strong>分段</strong>：查看分段列表及其详细信息，包括分段 ID、对应的 Collections、状态、大小等。</p></li>
@@ -187,7 +187,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-data.png" alt="Milvus Web UI Data Page" class="doc-image" id="milvus-web-ui-data-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-data.png" alt="Milvus Web UI Data Page" class="doc-image" id="milvus-web-ui-data-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 数据页面</span> </span></p>
 <ul>
 <li><p><strong>分段</strong>：查看数据节点/协调器的分段列表及其详细信息，包括分段 ID、对应的 Collections、状态、大小等。</p></li>
@@ -210,14 +210,14 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-tasks.png" alt="Milvus Web UI Tasks Page" class="doc-image" id="milvus-web-ui-tasks-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-tasks.png" alt="Milvus Web UI Tasks Page" class="doc-image" id="milvus-web-ui-tasks-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 任务页面</span> </span></p>
 <ul>
 <li><p><strong>任务</strong>：查看在 Milvus 中运行的任务列表，包括任务类型、状态和操作。</p>
 <ul>
 <li><p><strong>QueryCoord 任务</strong>：查看所有 QueryCoord 调度器任务，包括过去 15 分钟内的平衡器、索引/区段/通道/领导者检查器。</p></li>
 <li><p><strong>压缩任务</strong>：查看过去 15 分钟内来自数据协调器的所有压缩任务。</p></li>
-<li><p><strong>索引建立任务</strong>：查看数据协调人员在过去 30 分钟内执行的所有索引建立任务。</p></li>
+<li><p><strong>索引建立任务</strong>：查看数据协调员在过去 30 分钟内的所有索引建立任务。</p></li>
 <li><p><strong>导入任务</strong>：查看过去 30 分钟内数据协调人员的所有导入任务。</p></li>
 <li><p><strong>数据同步任务</strong>：查看过去 15 分钟内数据节点的所有数据同步任务。</p></li>
 </ul></li>
@@ -239,7 +239,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 慢请求页面</span> </span></p>
 <ul>
 <li><strong>慢请求</strong>：慢请求是指延迟时间超过配置中指定的<code translate="no">proxy.slowQuerySpanInSeconds</code> 值的搜索或查询。慢速请求列表显示最近 15 分钟内的所有慢速请求。</li>
@@ -261,7 +261,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-configurations.png" alt="Milvus Web UI Configurations Page" class="doc-image" id="milvus-web-ui-configurations-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-configurations.png" alt="Milvus Web UI Configurations Page" class="doc-image" id="milvus-web-ui-configurations-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 配置页面</span> </span></p>
 <ul>
 <li><strong>配置</strong>：查看 Milvus 运行时配置及其值的列表。</li>

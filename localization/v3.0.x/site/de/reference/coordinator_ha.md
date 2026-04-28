@@ -39,7 +39,7 @@ title: Koordinator HA
     </button></h2><p>In der Version 2.2.3 implementiert Milvus Hochverfügbarkeit für Koordinatoren, um sie im Aktiv-Standby-Modus arbeiten zu lassen und so mögliche Single Points of Failure (SPoFs) zu entschärfen, die zur Nichtverfügbarkeit von Diensten führen können.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
    </span> <span class="img-wrapper"> <span>Koordinator HA</span> </span></p>
 <p>Die obige Abbildung veranschaulicht, wie Koordinatoren im Active-Standby-Modus arbeiten. Wenn ein Koordinatorenpaar startet, registrieren sie sich mit ihrer Server-ID bei etcd und konkurrieren um die aktive Rolle. Der Koordinator, dem es gelingt, die aktive Rolle vom etcd zu leasen, beginnt mit dem Dienst, während der andere Koordinator des Paares in Bereitschaft bleibt, die aktive Rolle überwacht und bereit ist, den Dienst zu übernehmen, wenn der aktive Koordinator ausfällt.</p>
 <h2 id="Enable-coordinator-HA" class="common-anchor-header">Aktivieren von Koordinator-HA<button data-href="#Enable-coordinator-HA" class="anchor-icon" translate="no">
@@ -57,7 +57,22 @@ title: Koordinator HA
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="With-Helm" class="common-anchor-header">Mit Helm</h3><p>Um mehrere Koordinatoren zu starten und sie im Aktiv-Standby-Modus arbeiten zu lassen, sollten Sie die folgenden Änderungen an Ihrer Datei <code translate="no">values.yaml</code> vornehmen.</p>
+    </button></h2><h3 id="With-Helm" class="common-anchor-header">Mit Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um mehrere Koordinatoren zu starten und sie im Aktiv-Standby-Modus arbeiten zu lassen, sollten Sie die folgenden Änderungen an Ihrer Datei <code translate="no">values.yaml</code> vornehmen.</p>
 <ul>
 <li>Setzen Sie <code translate="no">xxxCoordinator.replicas</code> auf <code translate="no">2</code>.</li>
 <li>Setzen Sie <code translate="no">xxxCoordinator.activeStandby.enabled</code> auf <code translate="no">true</code>.</li>
@@ -79,7 +94,22 @@ title: Koordinator HA
   <span class="hljs-attr">activeStandby:</span>
     <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>  <span class="hljs-comment"># Set this to true to have RootCoordinators work in active-standby mode.</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="With-Docker" class="common-anchor-header">Mit Docker</h3><p>Um mehrere Koordinatoren zu starten und sie im Aktiv-Standby-Modus arbeiten zu lassen, können Sie einige Definitionen in die Datei <code translate="no">docker-compose</code> einfügen, die Sie zum Starten Ihres Milvus-Clusters verwenden.</p>
+<h3 id="With-Docker" class="common-anchor-header">Mit Docker<button data-href="#With-Docker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um mehrere Koordinatoren zu starten und sie im Aktiv-Standby-Modus arbeiten zu lassen, können Sie einige Definitionen zu der Datei <code translate="no">docker-compose</code> hinzufügen, die Sie zum Starten Ihres Milvus-Clusters verwenden.</p>
 <p>Der folgende Codeschnipsel verwendet RootCoord als Beispiel. Sie können das Gleiche für andere Koordinatoren tun.</p>
 <pre><code translate="no" class="language-yaml">  <span class="hljs-attr">rootcoord:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
@@ -114,7 +144,22 @@ title: Koordinator HA
 <span class="hljs-comment">#      - &quot;pulsar&quot;</span>
 <span class="hljs-comment">#      - &quot;minio&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="With-MacLinux-shell" class="common-anchor-header">Mit Mac/Linux-Shell</h3><p>Um mehrere Koordinatoren zu starten und sie im Aktiv-Standby-Modus arbeiten zu lassen, können Sie</p>
+<h3 id="With-MacLinux-shell" class="common-anchor-header">Mit Mac/Linux-Shell<button data-href="#With-MacLinux-shell" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um mehrere Koordinatoren zu starten und sie im Aktiv-Standby-Modus arbeiten zu lassen, können Sie</p>
 <ol>
 <li><p>Laden Sie den Milvus-Quellcode auf Ihr lokales Laufwerk herunter, und <a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">starten Sie einen Milvus-Cluster aus dem Quellcode</a> wie folgt:</p>
 <pre><code translate="no" class="language-shell">sudo ./scripts/start_cluster.sh

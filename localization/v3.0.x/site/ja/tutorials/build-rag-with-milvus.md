@@ -83,7 +83,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 <pre><code translate="no" class="language-bash">$ wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip
 $ unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs
 <button class="copy-code-btn"></button></code></pre>
-<p>すべてのマークダウン・ファイルをフォルダ<code translate="no">milvus_docs/en/faq</code> からロードする。各ドキュメントについて、私たちは単に "# "を使ってファイル内のコンテンツを区切るだけで、マークダウン・ファイルの各主要部分のコンテンツを大まかに区切ることができる。</p>
+<p>フォルダ<code translate="no">milvus_docs/en/faq</code> からすべてのマークダウン・ファイルをロードする。各ドキュメントについて、私たちは単に "# "を使ってファイル内のコンテンツを区切るだけで、マークダウン・ファイルの各主要部分のコンテンツを大まかに区切ることができる。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -170,8 +170,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <div class="alert note">
 <p><code translate="no">MilvusClient</code> の引数については、以下の通りです：</p>
 <ul>
-<li><code translate="no">./milvus.db</code> のように、<code translate="no">uri</code> をローカルファイルとして設定する方法が、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteを</a>自動的に利用して、すべてのデータをこのファイルに格納することができるので、最も便利な方法です。</li>
-<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、<code translate="no">http://localhost:19530</code> などのサーバURIを<code translate="no">uri</code> としてください。</li>
+<li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> とするのが最も便利です。</li>
+<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>
@@ -204,7 +204,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
         ></path>
       </svg>
     </button></h3><p>テキスト行を繰り返し、エンベッディングを作成し、milvusにデータを挿入します。</p>
-<p>ここに新しいフィールド<code translate="no">text</code> 、コレクションスキーマで定義されていないフィールドがあります。これは予約されたJSONダイナミックフィールドに自動的に追加され、高レベルでは通常のフィールドとして扱うことができる。</p>
+<p>ここに新しいフィールド<code translate="no">text</code> 、コレクションスキーマで定義されていないフィールドです。これは予約されたJSONダイナミックフィールドに自動的に追加され、高レベルでは通常のフィールドとして扱うことができる。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
@@ -306,7 +306,7 @@ retrieved_lines_with_distances = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>検索されたドキュメントを文字列形式に変換する。</p>
+    </button></h3><p>検索されたドキュメントを文字列フォーマットに変換する。</p>
 <pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.join(
     [line_with_distance[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )

@@ -39,14 +39,14 @@ beta: Milvus 3.0.x
 <p>這種將您的資料帶到 Milvus 的工作流程會產生難以同步的冗餘資料，並增加工程維護的負擔，以確保資料的一致性。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/yqxwwpq3vheya4b8398cwopnnyn.png" alt="Yqxwwpq3vheya4b8398cwopnnyn" class="doc-image" id="yqxwwpq3vheya4b8398cwopnnyn" />
-   </span> <span class="img-wrapper"> <span>Yqxwwpq3vheya4b8398cwopnnyn</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" />
+   </span> <span class="img-wrapper"> <span>將資料帶到計算工作流程</span> </span></p>
 <p>為了解決這些問題，Milvus 提供外部集合，讓您從 Milvus 存取外部儲存的資料，而不必擔心資料同步和 ETL 管道。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/q6f4wtcd2h3pnkbnmxncw3urn3f.png" alt="Q6f4wtcd2h3pnkbnmxncw3urn3f" class="doc-image" id="q6f4wtcd2h3pnkbnmxncw3urn3f" />
-   </span> <span class="img-wrapper"> <span>Q6f4wtcd2h3pnkbnmxncw3urn3f</span> </span></p>
-<p>一旦建立，外部集合可以直接存取您的資料，並將資料保存在您儲存資料的相同位置。在後台，Milvus 會建立清單檔案，記錄 Milvus 元資料與外部資料檔案中的資料行之間的對應關係。清單檔案就緒後，您就可以在外部資料集中建立索引，就像在任何受管理的資料集中一樣。</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" />
+   </span> <span class="img-wrapper"> <span>將計算帶入資料工作流程</span> </span></p>
+<p>一旦建立，外部資料集可直接存取您的資料，並將資料保存在您儲存資料的相同位置。在後台，Milvus 會建立艙單檔案，記錄 Milvus 元資料與外部資料檔案中的資料行之間的對應關係。清單檔案就緒後，您就可以在外部資料集中建立索引，就像在任何受管理的資料集中一樣。</p>
 <p>當您的資料變更時，手動觸發次秒級的刷新即可更新元資料，讓 Milvus 永遠保持最新狀態。</p>
 <h2 id="Limits--restrictions" class="common-anchor-header">限制與約束<button data-href="#Limits--restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -619,7 +619,7 @@ jobID := refreshResult.JobID
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>刷新操作是異步的，因此您需要設定一個迭代來監控其進度。</p>
+<p>刷新作業是異步的，因此您需要設定一個迭代來監控其進度。</p>
 <div class="alert note">
 <ul>
 <li><p>刷新作業會掃描資料檔案的 metadata，並產生相應的 manifest 檔案。通常需要 150-250 毫秒。</p></li>

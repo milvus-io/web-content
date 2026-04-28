@@ -112,7 +112,7 @@ summary: >-
 <li><p><strong>Compression des données :</strong> Chaque vecteur est d'abord transformé par PQ en une représentation grossière, puis les résidus sont quantifiés par RQ pour être affinés. Le résultat est un ensemble de codes compacts représentant chaque vecteur.</p></li>
 <li><p><strong>Construction du graphique :</strong> Les vecteurs compressés (y compris les codes PQ et RQ) constituent la base de la construction du graphe HNSW. Les données étant stockées sous une forme compacte, le graphe nécessite moins de mémoire et la navigation est accélérée.</p></li>
 <li><p><strong>Recherche de candidats :</strong> Pendant la recherche, HNSW utilise les représentations comprimées pour parcourir le graphe et récupérer un ensemble de candidats. Cela permet de réduire considérablement le nombre de vecteurs à examiner.</p></li>
-<li><p><strong>Affinage des résultats (facultatif) :</strong> Les résultats initiaux des candidats peuvent être affinés pour une meilleure précision, en fonction des paramètres suivants :</p>
+<li><p><strong>Affinage des résultats (facultatif) :</strong> Les résultats initiaux des candidats peuvent être affinés pour une meilleure précision, sur la base des paramètres suivants :</p>
 <ul>
 <li><p><code translate="no">refine</code>: Contrôle si cette étape d'affinage est activée. Lorsqu'il est défini sur <code translate="no">true</code>, le système recalcule les distances à l'aide de représentations plus précises ou non compressées.</p></li>
 <li><p><code translate="no">refine_type</code>: Spécifie le niveau de précision des données utilisées pendant l'affinage (par exemple, SQ6, SQ8, BF16). Un choix de précision plus élevé, tel que <code translate="no">FP32</code>, peut donner des résultats plus précis, mais nécessite plus de mémoire. La précision doit être supérieure à celle de l'ensemble de données compressées d'origine de <code translate="no">sq_type</code>.</p></li>
@@ -245,7 +245,7 @@ res = MilvusClient.search(
      <td><p>Nombre maximal de connexions （ou d'arêtes) que chaque nœud peut avoir dans le graphe, y compris les arêtes sortantes et entrantes. Ce paramètre affecte directement la construction de l'index et la recherche.</p></td>
      <td><p><strong>Type</strong>: Integer (nombre entier) <strong>Plage</strong>: [2, 2048]</p>
 <p><strong>Valeur par défaut</strong>: <code translate="no">30</code> (jusqu'à 30 arêtes sortantes et 30 arêtes entrantes par nœud)</p></td>
-     <td><p>Une valeur plus élevée de <code translate="no">M</code> conduit généralement à une <strong>plus grande précision</strong>, mais <strong>augmente la charge de mémoire</strong> et <strong>ralentit à la fois la construction de l'index et la recherche</strong>. Envisagez d'augmenter <code translate="no">M</code> pour les ensembles de données à haute dimensionnalité ou lorsqu'un rappel élevé est crucial.</p>
+     <td><p>Une valeur plus élevée de <code translate="no">M</code> entraîne généralement une <strong>plus grande précision</strong>, mais <strong>augmente la charge de mémoire</strong> et <strong>ralentit à la fois la construction de l'index et la recherche</strong>. Envisagez d'augmenter <code translate="no">M</code> pour les ensembles de données de grande dimensionnalité ou lorsqu'un rappel élevé est crucial.</p>
 <p>Pensez à diminuer <code translate="no">M</code> lorsque l'utilisation de la mémoire et la vitesse de recherche sont des préoccupations majeures.</p>
 <p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette fourchette : [5, 100].</p></td>
    </tr>
@@ -266,7 +266,7 @@ res = MilvusClient.search(
      <td><p><strong>Type</strong>: Entier <strong>Plage</strong>: [1, 65536]</p>
 <p><strong>Valeur par défaut</strong>: Aucune</p></td>
      <td><p>Une valeur plus élevée de <code translate="no">m</code> peut améliorer la précision, mais elle augmente également la complexité du calcul et l'utilisation de la mémoire. <code translate="no">m</code> doit être un diviseur de la dimension du vecteur<em>(D)</em> pour garantir une décomposition correcte. Une valeur couramment recommandée est <em>m = D/2</em>.</p>
-<p>Dans la plupart des cas, nous vous recommandons de choisir une valeur comprise dans cette fourchette : [D/8, D].</p></td>
+<p>Dans la plupart des cas, nous vous recommandons de choisir une valeur comprise dans cet intervalle : [D/8, D].</p></td>
    </tr>
    <tr>
      <td></td>

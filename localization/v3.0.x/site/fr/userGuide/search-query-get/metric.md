@@ -144,7 +144,7 @@ summary: >-
 <p>La formule de la distance euclidienne est la suivante :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/euclidean-metric.png" alt="Euclidean Metric" class="doc-image" id="euclidean-metric" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/euclidean-metric.png" alt="Euclidean Metric" class="doc-image" id="euclidean-metric" />
    </span> <span class="img-wrapper"> <span>Métrique euclidienne</span> </span></p>
 <p>où <strong>a = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> et <strong>b = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong> sont deux points dans un espace euclidien à n dimensions.</p>
 <p>Il s'agit de la mesure de distance la plus couramment utilisée et elle est très utile lorsque les données sont continues.</p>
@@ -169,7 +169,7 @@ summary: >-
     </button></h2><p>La distance IP entre deux embeddings est définie comme suit :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IP-formula.png" alt="IP Formula" class="doc-image" id="ip-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IP-formula.png" alt="IP Formula" class="doc-image" id="ip-formula" />
    </span> <span class="img-wrapper"> <span>Formule IP</span> </span></p>
 <p>Le produit intérieur est plus utile si vous devez comparer des données non normalisées ou si vous vous intéressez à la magnitude et à l'angle.</p>
 <div class="alert note">
@@ -178,12 +178,12 @@ summary: >-
 <p>Supposons que X' soit normalisé à partir de l'intégration X :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/normalize-formula.png" alt="Normalize Formula" class="doc-image" id="normalize-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalize-formula.png" alt="Normalize Formula" class="doc-image" id="normalize-formula" />
    </span> <span class="img-wrapper"> <span>Formule de normalisation</span> </span></p>
 <p>La corrélation entre les deux embeddings est la suivante :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/correlation-between-embeddings.png" alt="Correlation Between Embeddings" class="doc-image" id="correlation-between-embeddings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/correlation-between-embeddings.png" alt="Correlation Between Embeddings" class="doc-image" id="correlation-between-embeddings" />
    </span> <span class="img-wrapper"> <span>Corrélation entre les embeddings</span> </span></p>
 <h2 id="Cosine-similarity" class="common-anchor-header">Similitude en cosinus<button data-href="#Cosine-similarity" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -204,7 +204,7 @@ summary: >-
 <p>Pour calculer la similitude en cosinus entre deux ensembles de vecteurs <strong>A = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> et <strong>B = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong>, utilisez la formule suivante :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
    </span> <span class="img-wrapper"> <span>Similitude en cosinus</span> </span></p>
 <p>La similitude en cosinus est toujours comprise dans l'intervalle <strong>[-1, 1]</strong>. Par exemple, deux vecteurs proportionnels ont un cosinus de <strong>1</strong>, deux vecteurs orthogonaux ont un cosinus de <strong>0</strong> et deux vecteurs opposés ont un cosinus de <strong>-1</strong>. Plus le cosinus est grand, plus l'angle entre les deux vecteurs est petit, ce qui indique que ces deux vecteurs sont plus semblables l'un à l'autre.</p>
 <p>En soustrayant leur cosinus de 1, on obtient la distance en cosinus entre deux vecteurs.</p>
@@ -226,12 +226,12 @@ summary: >-
     </button></h2><p>Le coefficient de distance JACCARD mesure la similarité entre deux ensembles d'échantillons et est défini comme la cardinalité de l'intersection des ensembles définis divisée par la cardinalité de leur union. Il ne peut être appliqué qu'à des ensembles d'échantillons finis.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
    </span> <span class="img-wrapper"> <span>Formule du coefficient de similarité JACCARD</span> </span></p>
 <p>La distance de JACCARD mesure la dissimilarité entre les ensembles de données et est obtenue en soustrayant le coefficient de similarité de JACCARD de 1. Pour les variables binaires, la distance de JACCARD est équivalente au coefficient de Tanimoto.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
    </span> <span class="img-wrapper"> <span>Formule de la distance JACCARD</span> </span></p>
 <h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -255,7 +255,7 @@ summary: >-
 <li><code translate="no">BINARY_VECTOR</code>Les vecteurs de type MinHash sont des vecteurs de données, où chaque vecteur stocke une signature MinHash. Chaque élément correspond à la valeur de hachage minimale sous l'une des fonctions de hachage indépendantes appliquées à l'ensemble d'origine.</li>
 </ul>
 <p><strong>Définition de la distance</strong></p>
-<p>MHJACCARD mesure le nombre de positions qui correspondent dans deux signatures MinHash. Plus le taux de correspondance est élevé, plus les ensembles sous-jacents sont similaires.</p>
+<p>MHJACCARD mesure le nombre de positions de deux signatures MinHash qui correspondent. Plus le taux de correspondance est élevé, plus les ensembles sous-jacents sont similaires.</p>
 <p>Milvus rapporte :</p>
 <ul>
 <li><strong>Distance = 1 - similarité estimée (taux de correspondance)</strong></li>

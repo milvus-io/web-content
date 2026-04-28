@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>Le <strong>service de diffusion en continu</strong> est un concept pour le module de système de diffusion en continu interne de Milvus, construit autour du journal en avance sur l'écriture (WAL) pour prendre en charge diverses fonctions liées à la diffusion en continu. Il s'agit notamment de l'ingestion/souscription de données en continu, de la reprise sur panne de l'état de la grappe, de la conversion des données en continu en données historiques et des requêtes de données croissantes. Sur le plan architectural, le service de diffusion en continu se compose de trois éléments principaux :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/streaming_distributed_arch.png" alt="Streaming Distributed Arc" class="doc-image" id="streaming-distributed-arc" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/streaming_distributed_arch.png" alt="Streaming Distributed Arc" class="doc-image" id="streaming-distributed-arc" />
    </span> <span class="img-wrapper"> <span>Arc distribué de diffusion en continu</span> </span></p>
 <ul>
 <li><p><strong>Coordinateur de streaming</strong>: Un composant logique dans le nœud coordinateur. Il utilise Etcd pour la découverte de services afin de localiser les nœuds de diffusion en continu disponibles et est chargé de lier le WAL aux nœuds de diffusion en continu correspondants. Il enregistre également le service pour exposer la topologie de distribution des WAL, ce qui permet aux clients de streaming de connaître le nœud de streaming approprié pour un WAL donné.</p></li>
@@ -54,7 +54,7 @@ summary: >-
 <p>L'ordre des messages dans Milvus peut ressembler à ce qui suit :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/message_order.png" alt="Message Order" class="doc-image" id="message-order" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/message_order.png" alt="Message Order" class="doc-image" id="message-order" />
    </span> <span class="img-wrapper"> <span>Ordre des messages</span> </span></p>
 <h2 id="WAL-Component" class="common-anchor-header">Composant WAL<button data-href="#WAL-Component" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,7 +75,7 @@ summary: >-
 <p>Les autres caractéristiques du composant WAL sont les suivantes</p>
 <ul>
 <li><p><strong>Gestion du cycle de vie des segments</strong>: Basé sur la politique telle que les conditions de mémoire/la taille du segment/le temps d'inactivité du segment, le WAL gère le cycle de vie de chaque segment.</p></li>
-<li><p><strong>Prise en charge des transactions de base</strong>: Comme chaque message a une taille limite, le composant WAL prend en charge des transactions simples pour promettre des écritures atomiques au niveau du canal V.</p></li>
+<li><p><strong>Prise en charge des transactions de base</strong>: Étant donné que chaque message a une limite de taille, le composant WAL prend en charge des transactions simples pour promettre des écritures atomiques au niveau du canal V.</p></li>
 <li><p><strong>Écriture de journaux à distance à haute concordance</strong>: Milvus prend en charge les files d'attente de messages distants de tiers en tant que stockage WAL. Pour atténuer la latence aller-retour (RTT) entre le nœud de streaming et le stockage WAL distant afin d'améliorer le débit d'écriture, le service de streaming prend en charge les écritures de journaux simultanées. Il maintient l'ordre des messages par TSO et la synchronisation TSO, et les messages dans WAL sont lus dans l'ordre TSO.</p></li>
 <li><p><strong>Tampon d'avance sur l'écriture</strong>: Une fois que les messages sont écrits dans le WAL, ils sont temporairement stockés dans une mémoire tampon d'écriture. Cela permet de lire les journaux sans avoir à récupérer les messages dans le stockage WAL distant.</p></li>
 <li><p><strong>Prise en charge de plusieurs types de stockage WAL</strong>: Woodpecker, Pulsar, Kafka. En utilisant Woodpecker avec le mode zéro disque, nous pouvons supprimer la dépendance au stockage WAL distant.</p></li>
@@ -102,7 +102,7 @@ summary: >-
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/recovery_storage.png" alt="Recovery Storage" class="doc-image" id="recovery-storage" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/recovery_storage.png" alt="Recovery Storage" class="doc-image" id="recovery-storage" />
    </span> <span class="img-wrapper"> <span>Stockage de récupération</span> </span></p>
 <h2 id="Query-Delegator" class="common-anchor-header">Délégateur de requêtes<button data-href="#Query-Delegator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -140,7 +140,7 @@ summary: >-
     </button></h2><p>En séparant les nœuds de calcul du stockage, Milvus peut facilement transférer le WAL d'un nœud de diffusion en continu à un autre, ce qui permet d'obtenir une haute disponibilité du service de diffusion en continu.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/wal_lifetime.png" alt="wal lifetime" class="doc-image" id="wal-lifetime" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/wal_lifetime.png" alt="wal lifetime" class="doc-image" id="wal-lifetime" />
    </span> <span class="img-wrapper"> <span>Durée de vie du WAL</span> </span></p>
 <h2 id="Wait-for-Ready" class="common-anchor-header">Attente de disponibilité<button data-href="#Wait-for-Ready" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -160,5 +160,5 @@ summary: >-
     </button></h2><p>Lorsque le WAL est transféré vers un nouveau nœud de diffusion en continu, le client constate que l'ancien nœud de diffusion en continu rejette certaines demandes. Pendant ce temps, le WAL sera récupéré au nouveau nœud de diffusion en continu, et le client attendra que le WAL du nouveau nœud de diffusion en continu soit prêt à servir.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/streaming_wait_for_ready.png" alt="wait for ready" class="doc-image" id="wait-for-ready" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/streaming_wait_for_ready.png" alt="wait for ready" class="doc-image" id="wait-for-ready" />
    </span> <span class="img-wrapper"> <span>attendre que le</span> </span>WAL <span class="img-wrapper"> <span>soit prêt</span> </span></p>

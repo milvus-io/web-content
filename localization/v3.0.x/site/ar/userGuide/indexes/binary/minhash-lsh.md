@@ -2,10 +2,8 @@
 id: minhash-lsh.md
 title: MINHASH_LSH
 summary: >-
-  يُعد إلغاء التكرار والبحث عن التشابه بكفاءة أمرًا بالغ الأهمية لمجموعات بيانات
-  التعلم الآلي واسعة النطاق، خاصةً بالنسبة لمهام مثل تنظيف مجموعات التدريب
-  لنماذج اللغات الكبيرة (LLMs). عند التعامل مع ملايين أو مليارات المستندات، تصبح
-  المطابقة الدقيقة التقليدية بطيئة ومكلفة للغاية.
+  استخدم فهارس MinHash LSH لتسريع عملية الكشف عن التكرارات شبه المكررة والبحث عن
+  تشابه جاكارد في مجموعات البيانات النصية الكبيرة.
 ---
 <h1 id="MINHASHLSH" class="common-anchor-header">MINHASH_LSH<button data-href="#MINHASHLSH" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -62,7 +60,7 @@ summary: >-
     </button></h3><p>يقيس تشابه جاكارد التداخل بين مجموعتين (أ) و(ب)، ويُعرّف رسميًا على النحو التالي:</p>
 <p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>J</mi><mo stretchy="false">(</mo><mi>A</mi><mo separator="true">,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mo>∩</mo><mi>B</mi><mi mathvariant="normal">∣</mi></mrow><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mo>∪</mo><mi>B</mi><mi mathvariant="normal">∣</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">J(A, B) = \frac{|A \cap B|}{|A \cup B|}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∪</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord">∣</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∩</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord">∣</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
 <p>حيث تتراوح قيمته من 0 (منفصلتان تمامًا) إلى 1 (متطابقتان).</p>
-<p>ومع ذلك، فإن حساب تشابه جاكارد بالضبط بين جميع أزواج المستندات في مجموعات البيانات واسعة النطاق مكلف حسابيًا - O<strong>(n²)</strong> من حيث الوقت والذاكرة عندما يكون <strong>n</strong> كبيرًا. هذا يجعلها غير مجدية لحالات الاستخدام مثل تنظيف مجموعة تدريب LLM أو تحليل المستندات على نطاق الويب.</p>
+<p>ومع ذلك، فإن حساب تشابه جاكارد بالضبط بين جميع أزواج المستندات في مجموعات البيانات واسعة النطاق مكلف حسابيًا - O<strong>(n²)</strong> من حيث الوقت والذاكرة عندما يكون <strong>n</strong> كبيرًا. وهذا يجعلها غير مجدية لحالات الاستخدام مثل تنظيف مجموعة تدريب LLM أو تحليل المستندات على نطاق الويب.</p>
 <h3 id="MinHash-signatures-Approximate-Jaccard-similarity" class="common-anchor-header">تواقيع MinHash: تشابه جاكارد التقريبي<button data-href="#MinHash-signatures-Approximate-Jaccard-similarity" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -91,7 +89,7 @@ summary: >-
 <p>يمكنك رؤية العملية بأكملها موضحة أدناه:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
    </span> <span class="img-wrapper"> <span>سير عمل التجزئة المصغرة</span> </span></p>
 <div class="alert note">
 <p>يحدد عدد دوال التجزئة المستخدمة بُعدية توقيع MinHash. توفر الأبعاد الأعلى دقة تقريب أفضل، على حساب زيادة التخزين والحساب.</p>
@@ -116,7 +114,7 @@ summary: >-
 <p>تتضمن العملية:</p>
 <ol>
 <li><p><strong>تجزئة التواقيع:</strong></p>
-<p>يتم تقسيم توقيع MinHash <em>ذي الأبعاد n إلى نطاقات</em> <em>b</em>. يحتوي كل نطاق على <em>ص من</em> قيم التجزئة المتتالية، وبالتالي فإن طول التوقيع الإجمالي يحقق: <em>n = b × r</em>.</p>
+<p>يتم تقسيم توقيع MinHash <em>ذي الأبعاد n إلى نطاقات</em> <em>b</em>. يحتوي كل نطاق على <em>ص من</em> قيم التجزئة المتتالية، وبالتالي فإن طول التوقيع الكلي يحقق: <em>n = b × r</em>.</p>
 <p>على سبيل المثال، إذا كان لديك توقيع MinHash ذو 128 بُعدًا<em>(n = 128</em>) وقسمته إلى 32 نطاقًا<em>(b = 32</em>)، فإن كل نطاق يحتوي على 4 قيم تجزئة<em>(r = 4</em>).</p></li>
 <li><p><strong>التجزئة على مستوى النطاق:</strong></p>
 <p>بعد التجزئة، تتم معالجة كل نطاق بشكل مستقل باستخدام دالة تجزئة قياسية لتعيينه إلى دلو. إذا أنتج توقيعان نفس قيمة التجزئة داخل النطاق - أي أنهما يقعان في نفس الدلو - يتم اعتبارهما متطابقين محتملين.</p></li>
@@ -125,9 +123,9 @@ summary: >-
 </ol>
 <div class="alert note">
 <p>لماذا تعمل هذه الطريقة؟</p>
-<p>رياضياً، إذا كان هناك توقيعان متشابهان في جاكارد <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">s</annotation></semantics></math></span></span>,</p>
+<p>رياضيًا، إذا كان هناك توقيعان متشابهان في جاكارد <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">s</annotation></semantics></math></span></span>,</p>
 <ul>
-<li><p>يكون احتمال تطابقهما في صف واحد (موضع التجزئة) هو <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> s</p></li>
+<li><p>فإن احتمال تطابقهما في صف واحد (موضع التجزئة) هو <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> s</p></li>
 <li><p> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span>احتمالية تطابقهما في جميع الصفوف في النطاق هي</span></span></span> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">srs^r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6644em;"></span></span></span></span> s <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> r</span></span></span></span></span></span></span></span></span></p></li>
 <li><p>احتمال تطابقهما في <strong>نطاق واحد على الأقل</strong> هو <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>1-</mo><mo stretchy="false">(1-(</mo><msup><mi>1</mi></msup><mn>- ص ص</mn><msup><mo stretchy="false">)</mo><mi>ب1</mi></msup></mrow><annotation encoding="application/x-tex">- (1 - ص^ ص) ^ ب</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span></span></span></span> 1 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">(1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0991em;vertical-align:-0.25em;"></span> ص ص</span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> ص</span></span></span></span></span></span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mclose"><span class="mclose">)</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> ب</p></li>
 </ul>
@@ -136,22 +134,22 @@ summary: >-
 <p>ضع في اعتبارك ثلاثة مستندات بتوقيعات MinHash ذات 128 بُعدًا:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
    </span> <span class="img-wrapper"> <span>سير عمل Lsh 1</span> </span></p>
 <p>أولاً، يقسّم LSH التوقيع ذا الـ 128 بُعدًا إلى 32 نطاقًا كل منها 4 قيم متتالية:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
    </span> <span class="img-wrapper"> <span>سير عمل Lsh 2</span> </span></p>
 <p>بعد ذلك، يتم تجزئة كل نطاق إلى دلاء مختلفة باستخدام دالة تجزئة. يتم اختيار أزواج المستندات التي تشترك في دلاء كمرشحين للتشابه. في المثال أدناه، يتم اختيار المستند A والمستند B كمرشحين للتشابه حيث تتطابق نتائج التجزئة الخاصة بهما في <strong>النطاق 0</strong>:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
    </span> <span class="img-wrapper"> <span>سير عمل Lsh 3</span> </span></p>
 <div class="alert note">
 <p>يتم التحكم في عدد النطاقات بواسطة المعلمة <code translate="no">mh_lsh_band</code>. لمزيد من المعلومات، راجع <a href="/docs/ar/minhash-lsh.md#Index-building-params">بارامترات بناء الفهرس</a>.</p>
 </div>
-<h3 id="MHJACCARD-Comparing-MinHash-signatures" class="common-anchor-header">MHJACCARD: مقارنة تواقيع MinHash الصغيرة<button data-href="#MHJACCARD-Comparing-MinHash-signatures" class="anchor-icon" translate="no">
+<h3 id="MHJACCARD-Comparing-MinHash-signatures" class="common-anchor-header">MHJACCARD: مقارنة تواقيع MinHash MinHash<button data-href="#MHJACCARD-Comparing-MinHash-signatures" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -166,7 +164,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>تقارب تواقيع MinHash توقيعات MinHash تشابه Jaccard بين المجموعات باستخدام متجهات ثنائية ذات طول ثابت. ومع ذلك، نظرًا لأن هذه التواقيع لا تحافظ على المجموعات الأصلية، لا يمكن تطبيق المقاييس القياسية مثل <code translate="no">JACCARD</code> أو <code translate="no">L2</code> أو <code translate="no">COSINE</code> مباشرةً لمقارنتها.</p>
+    </button></h3><p>تقارب تواقيع MinHash توقيعات MinHash تشابه Jaccard بين المجموعات باستخدام متجهات ثنائية ذات طول ثابت. ومع ذلك، نظرًا لأن هذه التواقيع لا تحافظ على المجموعات الأصلية، فلا يمكن تطبيق المقاييس القياسية مثل <code translate="no">JACCARD</code> أو <code translate="no">L2</code> أو <code translate="no">COSINE</code> مباشرةً لمقارنتها.</p>
 <p>لمعالجة هذه المشكلة، يقدم Milvus نوع مقياس متخصص يسمى <code translate="no">MHJACCARD</code> ، مصمم خصيصًا لمقارنة تواقيع MinHash.</p>
 <p>عند استخدام MinHash في Milvus:</p>
 <ul>
@@ -192,7 +190,10 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>تسمح عملية إلغاء البيانات المكررة المدعومة من MinHash LSH لـ Milvus بتحديد وتصفية السجلات النصية أو السجلات المهيكلة شبه المكررة بكفاءة قبل إدراجها في المجموعة.</p>
-<p><img translate="no" src="/docs/v2.6.x/assets/deduplication-workflow.png" alt="Deduplication Workflow" width="600"></p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/it9wwbcfwhft0rbwosacgltzneb.png" alt="It9wwbcfwhft0rbwosacgltzneb" class="doc-image" id="it9wwbcfwhft0rbwosacgltzneb" />
+   </span> <span class="img-wrapper"> <span>It9wwwwbcfwhft0rbwosacgltzneb</span> </span></p>
 <ol>
 <li><p><strong>التجزئة والمعالجة المسبقة</strong>: تقسيم البيانات النصية الواردة أو البيانات المهيكلة (مثل السجلات والحقول) إلى أجزاء؛ وتطبيع النص (تصغير الحروف وإزالة علامات الترقيم) وإزالة الكلمات المتوقفة حسب الحاجة.</p></li>
 <li><p><strong>إنشاء الميزات</strong>: إنشاء مجموعة الرموز الرمزية المستخدمة في MinHash (على سبيل المثال، القوالب من النص؛ رموز الحقول المتسلسلة للبيانات المهيكلة).</p></li>
@@ -217,7 +218,14 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>قبل استخدام MinHash LSH في Milvus، يجب عليك أولاً إنشاء <strong>تواقيع MinHash</strong>. تقارب هذه التواقيع الثنائية المدمجة تشابه جاكارد بين المجموعات وهي مطلوبة للبحث المستند إلى <code translate="no">MHJACCARD</code> في Milvus.</p>
-<h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">اختر طريقة لتوليد تواقيع MinHash<button data-href="#Choose-a-method-to-generate-MinHash-signatures" class="anchor-icon" translate="no">
+<div class="alert note">
+<p>يمكنك إعداد تواقيع MinHash لفهرس <code translate="no">MINHASH_LSH</code> بطريقتين:</p>
+<ul>
+<li><p>إنشاء التواقيع بنفسك باستخدام أدوات خارجية وإدراجها في حقل BINARY_VECTOR، أو</p></li>
+<li><p>استخدام دالة MinHash المدمجة لإنشاء متجهات ثنائية متوافقة تلقائيًا من النص. للاطلاع على سير العمل من النهاية إلى النهاية وخيارات التكوين الخاصة بدالة MinHash، راجع دالة <a href="/docs/ar/minhash-function.md">MinHash</a>.</p></li>
+</ul>
+</div>
+<h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">اختر طريقة لإنشاء توقيعات MinHash MinHash<button data-href="#Choose-a-method-to-generate-MinHash-signatures" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -235,7 +243,7 @@ summary: >-
     </button></h3><p>اعتمادًا على عبء العمل الخاص بك، يمكنك اختيار:</p>
 <ul>
 <li><p>استخدام طريقة بايثون <a href="https://ekzhu.github.io/datasketch/"><code translate="no">datasketch</code></a> للتبسيط (موصى به للنماذج الأولية)</p></li>
-<li><p>استخدام الأدوات الموزعة (على سبيل المثال، Spark، Ray) لمجموعات البيانات واسعة النطاق</p></li>
+<li><p>استخدم الأدوات الموزعة (مثل Spark وRay) لمجموعات البيانات واسعة النطاق</p></li>
 <li><p>تنفيذ منطق مخصص (NumPy، C++، إلخ) إذا كان ضبط الأداء أمرًا بالغ الأهمية</p></li>
 </ul>
 <p>في هذا الدليل، نستخدم <code translate="no">datasketch</code> للتبسيط والتوافق مع تنسيق إدخال ميلفوس.</p>
@@ -506,7 +514,7 @@ client.flush(<span class="hljs-string">&quot;minhash_demo&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يدعم ميلفوس وضعين للبحث عن التشابه باستخدام MinHash LSH:</p>
+    </button></h3><p>يدعم ميلفوس طريقتين للبحث عن التشابه باستخدام MinHash LSH:</p>
 <ul>
 <li><p><strong>البحث التقريبي</strong> - يستخدم فقط توقيعات MinHash و LSH للحصول على نتائج سريعة ولكن احتمالية.</p></li>
 <li><p><strong>البحث المنقح</strong> - إعادة حساب تشابه جاكارد باستخدام مجموعات الرموز الأصلية لتحسين الدقة.</p></li>
@@ -690,7 +698,7 @@ refined_results = client.search(
    <tr>
      <td><p><code translate="no">refine_k</code></p></td>
      <td><p>عدد المرشحين المطلوب استرجاعهم قبل تنقيح جاكارد. فعال فقط عندما يكون <code translate="no">mh_search_with_jaccard</code> هو <code translate="no">true</code>.</p></td>
-     <td><p><em>[top_k</em>, *top_k * 10*]</p></td>
+     <td><p><em>[top_k،</em> <em>top_k &amp;ast؛ 10</em>]</p></td>
      <td><p>اضبطه على 2-5 أضعاف <em>top_k</em> المطلوب لتحقيق توازن جيد بين الاستدعاء والأداء. تعمل القيم الأعلى على تحسين الاستدعاء ولكنها تزيد من تكلفة الحساب.</p></td>
    </tr>
    <tr>

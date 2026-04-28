@@ -106,7 +106,7 @@ title: 使用 Milvus 部署 FastGPT
         ></path>
       </svg>
     </button></h2><p>按一下「Token」索引標籤。預設情況下，有一個代號<code translate="no">Initial Root Token</code> 。您也可以自行建立新的代號並設定配額。<br>
-點選「Copy」你的代碼，確保這個代碼的值與在 docker-compose.yml 檔案中設定的<code translate="no">CHAT_API_KEY</code> 值相符。</p>
+點選「複製」您的代碼，確保這個代碼的值與在 docker-compose.yml 檔案中設定的<code translate="no">CHAT_API_KEY</code> 值相符。</p>
 <h2 id="Accessing-FastGPT" class="common-anchor-header">存取 FastGPT<button data-href="#Accessing-FastGPT" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

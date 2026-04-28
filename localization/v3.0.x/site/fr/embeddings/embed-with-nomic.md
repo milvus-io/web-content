@@ -42,7 +42,7 @@ ef = NomicEmbeddingFunction(
 <p><strong>Paramètres</strong>:</p>
 <ul>
 <li><p><code translate="no">model_name</code> <em>(chaîne</em>)</p>
-<p>Le nom du modèle d'intégration Nomic à utiliser pour l'encodage. La valeur par défaut est <code translate="no">nomic-embed-text-v1.5</code>. Pour plus d'informations, consultez la <a href="https://docs.nomic.ai/atlas/models/image-embedding">documentation officielle de Nomic</a>.</p></li>
+<p>Le nom du modèle Nomic embedding à utiliser pour l'encodage. La valeur par défaut est <code translate="no">nomic-embed-text-v1.5</code>. Pour plus d'informations, consultez la <a href="https://docs.nomic.ai/atlas/models/image-embedding">documentation officielle de Nomic</a>.</p></li>
 </ul>
 <p>Pour créer des embeddings pour des documents, utilisez la méthode <code translate="no">encode_documents()</code>:</p>
 <pre><code translate="no" class="language-python">docs = [

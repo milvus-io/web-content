@@ -73,23 +73,38 @@ title: Aggiornamento di Pulsar a Milvus da V2 a V3
         ></path>
       </svg>
     </button></h2><p>Questa sezione fornisce le procedure dettagliate per l'aggiornamento di Pulsar da V2 a V3 in Milvus.</p>
-<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">Persistere i dati non consumati in Pulsar</h3><p>In questa fase è necessario assicurarsi che i dati esistenti in Pulsar siano stati persistiti nel servizio di archiviazione degli oggetti. Sono disponibili due approcci e si può scegliere quello più adatto alle proprie esigenze.</p>
+<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">Persistere i dati non consumati in Pulsar<button data-href="#Persist-data-not-consumed-in-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In questa fase è necessario assicurarsi che i dati esistenti in Pulsar siano stati persistiti nel servizio di archiviazione degli oggetti. Sono disponibili due approcci e si può scegliere quello più adatto alle proprie esigenze.</p>
 <h4 id="Approach-1-Using-Attu" class="common-anchor-header">Approccio 1: utilizzo di Attu</h4><p>Se nella vostra implementazione Milvus funzionante avete solo un piccolo numero di collezioni con pochi segmenti, potete usare Attu per persistere i dati nel servizio di archiviazione degli oggetti.</p>
 <ol>
 <li><p>Selezionate ogni raccolta in tutti i database, accedete al pannello <code translate="no">Segments</code> e fate clic sul pulsante <code translate="no">Flush</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
    </span> <span class="img-wrapper"> <span>Pannello dei segmenti di una raccolta</span> </span></p></li>
-<li><p>Quindi, quando appare il popup, fare di nuovo clic su <code translate="no">Flush</code>.</p>
+<li><p>Poi, quando appare il popup, fare di nuovo clic su <code translate="no">Flush</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
    </span> <span class="img-wrapper"> <span>Richiesta di lavaggio dei dati in Attu</span> </span></p></li>
 <li><p>Attendere quindi che gli stati di segmento persistenti di tutte le raccolte siano <code translate="no">Flushed</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/view-data-peristent-process.png" alt="View data flush status in Attu" class="doc-image" id="view-data-flush-status-in-attu" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/view-data-peristent-process.png" alt="View data flush status in Attu" class="doc-image" id="view-data-flush-status-in-attu" />
    </span> <span class="img-wrapper"> <span>Visualizzazione dello stato di lavaggio dei dati in Attu</span> </span></p></li>
 </ol>
 <h4 id="Approach-2-Using-management-API" class="common-anchor-header">Approccio 2: Utilizzo dell'API di gestione</h4><ol>
@@ -140,7 +155,22 @@ title: Aggiornamento di Pulsar a Milvus da V2 a V3
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Arresto di Milvus e cancellazione di Pulsar V2</h3><p>In questo passaggio, è necessario arrestare il pod Milvus ed eliminare il deployment di Pulsar V2. Sono disponibili due sezioni separate:</p>
+<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Arresto di Milvus e cancellazione di Pulsar V2<button data-href="#Stop-Milvus-and-delete-Pulsar-V2" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In questo passaggio, è necessario arrestare il pod Milvus ed eliminare il deployment di Pulsar V2. Sono disponibili due sezioni separate:</p>
 <ul>
 <li><p>Per gli utenti di Milvus Helm</p>
 <p>Se avete installato Milvus usando il diagramma Milvus Helm, andate a <a href="#Delete-Pulsar-V2-using-Helm">Cancellare Pulsar v2 usando Helm</a>.</p></li>
@@ -214,7 +244,7 @@ kubectl -n default get pvc -lapp=pulsar,release=my-release -o custom-columns=VOL
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h4 id="Delete-Pulsar-V2-using-Milvus-Operator" class="common-anchor-header">Eliminare Pulsar V2 usando Milvus Operator</h4><p>Se avete installato Milvus usando Milvus Operator, seguite i passi seguenti per fermare il pod Milvus ed eliminare il deployment di Pulsar V2.</p>
+<h4 id="Delete-Pulsar-V2-using-Milvus-Operator" class="common-anchor-header">Eliminare Pulsar V2 utilizzando Milvus Operator</h4><p>Se avete installato Milvus usando Milvus Operator, seguite i passi seguenti per fermare il pod Milvus ed eliminare il deployment di Pulsar V2.</p>
 <ol>
 <li><p>Salvare il manifesto Milvus corrente in <code translate="no">milvus.yaml</code> per un uso successivo.</p>
 <pre><code translate="no" class="language-bash">kubectl -n default get milvus my-release -o yaml &gt; milvus.yaml​
@@ -293,7 +323,22 @@ milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">Avviare Pulsar V3 e Milvus</h3><p>In questo passaggio è necessario avviare i pod Pulsar V3 e Milvus. Sono disponibili due sezioni separate:</p>
+<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">Avviare Pulsar V3 e Milvus<button data-href="#Start-Pulsar-V3-and-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In questo passaggio è necessario avviare i pod Pulsar V3 e Milvus. Sono disponibili due sezioni separate:</p>
 <ul>
 <li><p>Per l'utente Helm</p>
 <p>Se avete installato Milvus utilizzando la tabella Milvus Helm, andate a <a href="#For-Helm-User">Per l'utente Helm</a>.</p></li>
@@ -324,7 +369,7 @@ Hang tight <span class="hljs-keyword">while</span> we grab the latest from your 
 Update Complete. ⎈Happy Helming!⎈​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Installare la release di Milvus con la versione più recente del grafico di Helm utilizzando il file <code translate="no">values.yaml</code> modificato.</p>
+<li><p>Installare la release di Milvus con la versione più recente di helm chart utilizzando il file <code translate="no">values.yaml</code> modificato.</p>
 <pre><code translate="no" class="language-bash">helm -n default install my-release zilliztech/milvus --reset-values -f values.yaml​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -364,7 +409,7 @@ my-release-pulsarv3-zookeeper-2               1/1     Running     0          4m2
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h4 id="Start-Pulsar-V3-and-using-Milvus-Operator" class="common-anchor-header">Avviare Pulsar V3 e utilizzare Milvus Operator</h4><ol>
+<h4 id="Start-Pulsar-V3-and-using-Milvus-Operator" class="common-anchor-header">Avviare Pulsar V3 e usare Milvus Operator</h4><ol>
 <li><p>Modificare il file <code translate="no">milvus.yaml</code> salvato nel passo precedente.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change the followings fields:​</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1​</span>

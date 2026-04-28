@@ -5,7 +5,7 @@ summary: >-
   Quando si effettuano ricerche di similarità, viene sempre richiesto di fornire
   uno o più vettori di query, anche se i vettori di query sono già presenti
   nella collezione di destinazione. Per evitare di recuperare i vettori prima
-  della ricerca, si possono usare le chiavi primarie.
+  della ricerca, è possibile utilizzare le chiavi primarie.
 beta: Milvus 2.6.9+
 ---
 <h1 id="Primary-Key-Search" class="common-anchor-header">Ricerca con chiave primaria<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.9+</span><button data-href="#Primary-Key-Search" class="anchor-icon" translate="no">
@@ -39,7 +39,7 @@ beta: Milvus 2.6.9+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nelle piattaforme di e-commerce, gli utenti possono inserire una parola chiave per recuperare i prodotti che vi corrispondono. Una volta che l'utente visualizza la pagina di dettaglio di un prodotto, la piattaforma mostra anche un elenco di prodotti simili in fondo alla pagina per gli utenti che vogliono confrontarli.</p>
+    </button></h2><p>Nelle piattaforme di e-commerce, gli utenti possono inserire una parola chiave per recuperare i prodotti che vi corrispondono. Una volta che l'utente visualizza la pagina di dettaglio di un prodotto, la piattaforma mostra anche un elenco di prodotti simili in fondo alla pagina per gli utenti che desiderano confrontarli.</p>
 <p>Le raccomandazioni sono ordinate in base alla loro somiglianza con la parola chiave o con il prodotto corrente. Per ottenere questo risultato, gli sviluppatori della piattaforma devono recuperare la rappresentazione vettoriale della parola chiave o del prodotto corrente da Milvus prima dell'effettiva ricerca di somiglianza, il che aumenta i tempi di andata e ritorno tra la piattaforma e Milvus e comporta la trasmissione di un gran numero di float ad alta dimensionalità attraverso la rete.</p>
 <p>Per semplificare la logica di interazione tra le applicazioni e Milvus, ridurre il numero di viaggi di andata e ritorno ed evitare la trasmissione di grandi quantità di valori in virgola mobile ad alta dimensione attraverso la rete, si può prendere in considerazione l'uso di ricerche a chiave primaria.</p>
 <p>In una ricerca a chiave primaria, non è necessario fornire alcun vettore di interrogazione. Viene invece richiesto di fornire le chiavi primarie (<code translate="no">ids</code>) delle entità che contengono i vettori di interrogazione.</p>
@@ -59,7 +59,7 @@ beta: Milvus 2.6.9+
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Le ricerche con le chiavi primarie si applicano a tutti i tipi di dati vettoriali, ad eccezione dei campi vettoriali sparsi derivati dai campi VarChar, come nelle funzioni BM25.</p></li>
+<li><p>Le ricerche con le chiavi primarie si applicano a tutti i tipi di dati vettoriali, ad eccezione dei campi vettoriali sparsi derivati da campi VarChar, come nelle funzioni BM25.</p></li>
 <li><p>È possibile utilizzare le chiavi primarie al posto dei vettori di query nelle ricerche filtrate, per intervallo e per raggruppamento, eventualmente con la paginazione abilitata. Tuttavia, questa funzione non si applica alle ricerche ibride e agli iteratori di ricerca.</p></li>
 <li><p>Per le ricerche di somiglianza che coinvolgono elenchi di incorporazioni, è ancora necessario recuperare i vettori di query, organizzarli in elenchi di incorporazioni ed eseguire le ricerche.</p></li>
 <li><p>Non è possibile utilizzare chiavi primarie al posto dei vettori di query nelle API RESTful.</p></li>

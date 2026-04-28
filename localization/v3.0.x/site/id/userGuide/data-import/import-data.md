@@ -382,7 +382,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
 <li><p>Kendala terkait perilaku penghapusan:</p>
 <ul>
 <li><p>Sebelum status pekerjaan impor adalah <strong>Selesai</strong>, penghapusan tidak dijamin dan mungkin atau mungkin tidak berhasil.</p></li>
-<li><p>Penghapusan setelah status pekerjaan <strong>selesai</strong> dijamin akan berhasil.</p></li>
+<li><p>Penghapusan setelah status pekerjaan <strong>selesai</strong> dijamin berhasil.</p></li>
 </ul></li>
 </ul>
 <h2 id="Recommendations" class="common-anchor-header">Rekomendasi<button data-href="#Recommendations" class="anchor-icon" translate="no">

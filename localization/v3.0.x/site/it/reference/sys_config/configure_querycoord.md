@@ -133,7 +133,7 @@ summary: Imparare a configurare queryCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        bilanciatore automatico usato per i segmenti sui queryNodes      </td>
+      <td>        bilanciatore automatico usato per i segmenti sui queryNode      </td>
       <td>Bilanciatore basato sul punteggio</td>
     </tr>
   </tbody>
@@ -976,7 +976,7 @@ summary: Imparare a configurare queryCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        secondi. forzare l'arresto del nodo senza l'arresto graduale      </td>
+      <td>        secondi. forzare l'arresto del nodo senza l'arresto di grazia      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -1121,7 +1121,7 @@ summary: Imparare a configurare queryCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        5m, intervallo massimo di aggiornamento dello stato di caricamento della raccolta per il controllo della salute      </td>
+      <td>        5m, intervallo massimo di aggiornamento dello stato di caricamento della raccolta per il controllo dello stato di salute      </td>
       <td>5</td>
     </tr>
   </tbody>

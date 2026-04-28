@@ -1,6 +1,6 @@
 ---
 id: integrate_with_memgpt.md
-summary: MemGPT 可轻松构建和部署有状态 LLM 代理。通过 Milvus 集成，您可以构建与外部数据源（RAG）连接的 Agents。
+summary: MemGPT 可轻松构建和部署有状态 LLM 代理。通过与 Milvus 集成，您可以构建与外部数据源（RAG）连接的 Agents。
 title: 与 Milvus 集成的 MemGPT
 ---
 <h1 id="MemGPT-with-Milvus-Integration" class="common-anchor-header">与 Milvus 集成的 MemGPT<button data-href="#MemGPT-with-Milvus-Integration" class="anchor-icon" translate="no">
@@ -46,7 +46,7 @@ title: 与 Milvus 集成的 MemGPT
 ? Select storage backend for archival data: milvus
 ? Enter the Milvus connection URI (Default: ~/.memgpt/milvus.db): ~/.memgpt/milvus.db
 <button class="copy-code-btn"></button></code></pre>
-<p>只需将 URI 设置为本地文件路径，例如<code translate="no">~/.memgpt/milvus.db</code> ，就会通过 Milvus Lite 自动调用本地 Milvus 服务实例。</p>
+<p>你只需将 URI 设置为本地文件路径，例如<code translate="no">~/.memgpt/milvus.db</code> ，它就会通过 Milvus Lite 自动调用本地 Milvus 服务实例。</p>
 <p>如果你有大规模数据，比如超过一百万个文档，我们建议在<a href="https://milvus.io/docs/quickstart.md">docker 或 kubenetes</a> 上设置性能更强的 Milvus 服务器。 在这种情况下，你的 URI 应该是服务器 URI，比如<code translate="no">http://localhost:19530</code> 。</p>
 <h2 id="Creating-an-external-data-source" class="common-anchor-header">创建外部数据源<button data-href="#Creating-an-external-data-source" class="anchor-icon" translate="no">
       <svg translate="no"

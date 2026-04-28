@@ -161,7 +161,7 @@ client.create_collection(
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>引数として<code translate="no">MilvusClient</code> を指定します：</p>
+<p>引数の<code translate="no">MilvusClient</code> ：</p>
 <ul>
 <li><code translate="no">./milvus.db</code> のように、<code translate="no">uri</code> をローカルファイルとして設定するのが最も便利な方法である。このファイルには自動的に<a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteが</a>利用され、すべてのデータが格納される。</li>
 <li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
@@ -236,13 +236,13 @@ display(concatenated_image)
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <pre><code translate="no">'results'
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/results.png" alt="Results" class="doc-image" id="results" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results.png" alt="Results" class="doc-image" id="results" />
    </span> <span class="img-wrapper"> <span>結果</span> </span></p>
 <p>ほとんどの画像が検索画像と同じカテゴリー（アフガンハウンド）の画像であることがわかる。つまり、検索画像と類似した画像が見つかったということです。</p>
 <h2 id="Quick-Deploy" class="common-anchor-header">クイックデプロイ<button data-href="#Quick-Deploy" class="anchor-icon" translate="no">

@@ -431,4 +431,4 @@ result = evaluate(
 Evaluating 3 test case(s) in parallel: |██████████|100% (3/3) [Time Taken: 00:11,  3.97s/test case]
 </code></pre>
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #05f58d; text-decoration-color: #05f58d">✓</span> Tests beendet 🎉! Führen Sie <span style="color: #008000; text-decoration-color: #008000">'deepeval login'</span> aus, um die Evaluierungsergebnisse von Confident AI zu sehen. 
-‼️ HINWEIS: Sie können stattdessen auch Auswertungen zu ALLEN deepeval-Metriken direkt auf Confident AI durchführen.</pre>
+‼️ HINWEIS: Sie können stattdessen auch Auswertungen für ALLE deepeval-Metriken direkt auf Confident AI durchführen.</pre>

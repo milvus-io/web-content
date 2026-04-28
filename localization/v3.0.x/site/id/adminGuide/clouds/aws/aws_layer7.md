@@ -23,20 +23,80 @@ summary: >-
       </svg>
     </button></h1><p>Jika dibandingkan dengan penyeimbang beban Layer-4, penyeimbang beban Layer-7 menawarkan kemampuan penyeimbangan beban dan caching yang cerdas dan merupakan pilihan yang tepat untuk layanan cloud-native.</p>
 <p>Panduan ini memandu Anda dalam menyiapkan penyeimbang beban Layer-7 untuk cluster Milvus yang sudah berjalan di belakang penyeimbang beban Layer-4.</p>
-<h3 id="Before-your-start" class="common-anchor-header">Sebelum memulai</h3><ul>
+<h3 id="Before-your-start" class="common-anchor-header">Sebelum memulai<button data-href="#Before-your-start" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Anda telah <a href="/docs/id/eks.md">menerapkan cluster Milvus di belakang penyeimbang beban Layer-4 di AWS</a>.</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Mengubah konfigurasi Milvus</h3><p>Panduan ini mengasumsikan bahwa Anda telah <a href="/docs/id/eks.md">menggunakan cluster Milvus di belakang penyeimbang beban Layer-4 di AWS</a>.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Mengubah konfigurasi Milvus<button data-href="#Tweak-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Panduan ini mengasumsikan bahwa Anda telah <a href="/docs/id/eks.md">menggunakan cluster Milvus di belakang penyeimbang beban Layer-4 di AWS</a>.</p>
 <p>Sebelum menyiapkan penyeimbang beban Layer-7 untuk klaster Milvus ini, jalankan perintah berikut untuk menghapus penyeimbang beban Layer-4.</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Siapkan sertifikat TLS</h3><p>TLS membutuhkan sertifikat agar dapat berfungsi. Kami menggunakan <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">ACM</a> untuk mengelola sertifikat dan perlu mengimpor sertifikat yang sudah ada ke ACM. Lihat <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate-api-cli.html#import-certificate-api">Mengimpor Sertifikat</a>. Berikut ini adalah contohnya.</p>
+<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Siapkan sertifikat TLS<button data-href="#Prepare-TLS-certificates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>TLS membutuhkan sertifikat agar dapat berfungsi. Kita menggunakan <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">ACM</a> untuk mengelola sertifikat dan perlu mengimpor sertifikat yang sudah ada ke ACM. Lihat <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate-api-cli.html#import-certificate-api">Mengimpor Sertifikat</a>. Berikut ini adalah contohnya.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># If the import-certificate command is successful, it returns the arn of the imported certificate.</span>
 aws acm import-certificate --certificate fileb://Certificate.pem \
       --certificate-chain fileb://CertificateChain.pem \
       --private-key fileb://PrivateKey.pem  
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Membuat Ingress untuk menghasilkan Load Balancer Layer-7</h3><p>Siapkan berkas ingress sebagai berikut dan beri nama <code translate="no">ingress.yaml</code>. <strong>Ganti arn sertifikat dan host dengan milik Anda sendiri.</strong></p>
+<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Membuat Ingress untuk menghasilkan Load Balancer Layer-7<button data-href="#Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Siapkan berkas ingress sebagai berikut dan beri nama <code translate="no">ingress.yaml</code>. <strong>Ganti arn sertifikat dan host dengan milik Anda sendiri.</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
 <span class="hljs-attr">metadata:</span>

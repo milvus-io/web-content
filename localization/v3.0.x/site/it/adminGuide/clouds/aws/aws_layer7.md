@@ -23,20 +23,80 @@ summary: >-
       </svg>
     </button></h1><p>Rispetto a un bilanciatore di carico Layer-4, un bilanciatore di carico Layer-7 offre funzionalità intelligenti di bilanciamento del carico e di caching ed è un'ottima scelta per i servizi cloud-nativi.</p>
 <p>Questa guida illustra la configurazione di un bilanciatore di carico Layer-7 per un cluster Milvus già in esecuzione dietro un bilanciatore di carico Layer-4.</p>
-<h3 id="Before-your-start" class="common-anchor-header">Prima di iniziare</h3><ul>
+<h3 id="Before-your-start" class="common-anchor-header">Prima di iniziare<button data-href="#Before-your-start" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Avete <a href="/docs/it/eks.md">distribuito un cluster Milvus dietro un bilanciatore di carico Layer-4 su AWS</a>.</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Modificare le configurazioni di Milvus</h3><p>Questa guida presuppone che abbiate già <a href="/docs/it/eks.md">implementato un cluster Milvus dietro un bilanciatore di carico Layer-4 su AWS</a>.</p>
-<p>Prima di impostare un bilanciatore di carico Layer-7 per questo cluster Milvus, eseguire il seguente comando per rimuovere il bilanciatore di carico Layer-4.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Modificare le configurazioni di Milvus<button data-href="#Tweak-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Questa guida presuppone che abbiate già <a href="/docs/it/eks.md">implementato un cluster Milvus dietro un bilanciatore di carico Layer-4 su AWS</a>.</p>
+<p>Prima di impostare un bilanciatore di carico Layer-7 per questo cluster Milvus, eseguite il seguente comando per rimuovere il bilanciatore di carico Layer-4.</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Preparare i certificati TLS</h3><p>Il TLS richiede certificati per funzionare. Stiamo usando <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">ACM</a> per gestire i certificati e dobbiamo importare un certificato esistente in ACM. Fare riferimento a <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate-api-cli.html#import-certificate-api">Importazione di certificati</a>. Di seguito è riportato un esempio.</p>
+<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Preparare i certificati TLS<button data-href="#Prepare-TLS-certificates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Il TLS richiede certificati per funzionare. Stiamo usando <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">ACM</a> per gestire i certificati e dobbiamo importare un certificato esistente in ACM. Fare riferimento a <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate-api-cli.html#import-certificate-api">Importazione di certificati</a>. Di seguito è riportato un esempio.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># If the import-certificate command is successful, it returns the arn of the imported certificate.</span>
 aws acm import-certificate --certificate fileb://Certificate.pem \
       --certificate-chain fileb://CertificateChain.pem \
       --private-key fileb://PrivateKey.pem  
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Creare un ingress per generare un bilanciatore di carico Layer-7</h3><p>Preparare il file di ingress come segue e nominarlo <code translate="no">ingress.yaml</code>. <strong>Sostituire il certificato arn e host con il proprio.</strong></p>
+<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Creare un ingress per generare un bilanciatore di carico Layer-7<button data-href="#Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Preparare il file di ingress come segue e nominarlo <code translate="no">ingress.yaml</code>. <strong>Sostituire il certificato arn e host con il proprio.</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
 <span class="hljs-attr">metadata:</span>

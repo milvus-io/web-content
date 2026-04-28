@@ -1,7 +1,7 @@
 ---
 id: recommendation_system.md
 summary: Milvusでパーソナライズされたレコメンダーシステムを構築。
-title: 推薦システム
+title: レコメンダー・システム
 ---
 <h1 id="Recommender-System" class="common-anchor-header">推薦システム<button data-href="#Recommender-System" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -28,9 +28,9 @@ title: 推薦システム
 <p></br></p>
 <p>レコメンダーシステムは情報フィルタリングシステムのサブセットであり、パーソナライズされた映画、音楽、商品、フィードストリーム推薦を含む様々なシナリオで使用できる。検索エンジンとは異なり、レコメンダーシステムはユーザーが自分のニーズを正確に記述する必要はなく、ユーザーの行動を分析することでユーザーのニーズや興味を発見します。</p>
 <p></br></p>
-<p>このチュートリアルでは、ユーザーの興味に合った映画を推薦する映画推薦システムを構築する方法を学びます。このようなレコメンダーシステムを構築するには、まず映画関連のデータセットをダウンロードします。このチュートリアルでは MovieLens 1M を使用します。あるいは、ユーザの映画に対する評価、ユーザの人口統計学的特徴、映画の説明などの情報を含むデータセットを自分で用意することもできます。PaddlePaddleを使用して、ユーザIDと特徴を結合し、256次元ベクトルに変換します。同様に映画のIDと特徴をベクトルに変換する。映画のベクトルをMilvusに保存し、類似検索にユーザーベクトルを使用する。ユーザベクトルが映画ベクトルと類似していれば、Milvusは映画ベクトルとそのIDを推薦結果として返す。その後、RedisまたはMySQLに保存された映画ベクトルIDを使用して映画情報をクエリします。</p>
+<p>このチュートリアルでは、ユーザーの興味に合った映画を推薦する映画推薦システムを構築する方法を学びます。このようなレコメンダーシステムを構築するには、まず映画関連のデータセットをダウンロードします。このチュートリアルでは MovieLens 1M を使用します。あるいは、ユーザの映画に対する評価、ユーザの人口統計学的特徴、映画の説明などの情報を含むデータセットを自分で用意することもできます。PaddlePaddleを使用して、ユーザIDと特徴を組み合わせ、256次元ベクトルに変換します。同様に映画のIDと特徴をベクトルに変換する。映画のベクトルをMilvusに保存し、類似検索にユーザーベクトルを使用する。ユーザベクトルが映画ベクトルと類似していれば、Milvusは映画ベクトルとそのIDを推薦結果として返す。その後、RedisまたはMySQLに保存された映画ベクトルIDを使用して映画情報をクエリします。</p>
 <p></br></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/recommendation_system.png" alt="recommender_system" class="doc-image" id="recommender_system" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/recommendation_system.png" alt="recommender_system" class="doc-image" id="recommender_system" />
    </span> <span class="img-wrapper"> <span>レコメンドシステム</span> </span></p>

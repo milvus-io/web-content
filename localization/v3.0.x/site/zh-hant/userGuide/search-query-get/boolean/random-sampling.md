@@ -2,7 +2,7 @@
 id: random-sampling.md
 title: 隨機抽樣Compatible with Milvus 2.6.x
 summary: >-
-  在處理大型資料集時，您通常不需要處理所有資料，就能獲得洞察力或測試篩選邏輯。隨機抽樣提供了一個解決方案，讓您可以處理具有統計代表性的資料子集，大幅減少查詢時間和資源消耗。
+  在處理大規模資料集時，您通常不需要處理所有資料來獲得洞察力或測試篩選邏輯。隨機抽樣提供了一個解決方案，讓您可以處理具有統計代表性的資料子集，大幅減少查詢時間和資源消耗。
 beta: Milvus 2.6.x
 ---
 <h1 id="Random-Sampling" class="common-anchor-header">隨機抽樣<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Random-Sampling" class="anchor-icon" translate="no">
@@ -20,11 +20,11 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在處理大規模資料集時，您通常不需要處理所有資料來獲得洞察力或測試篩選邏輯。隨機抽樣提供了一個解決方案，讓您可以處理具有統計代表性的資料子集，大幅減少查詢時間和資源消耗。</p>
+    </button></h1><p>在處理大規模資料集時，您通常不需要處理所有資料，就能獲得洞察力或測試篩選邏輯。隨機抽樣提供了一個解決方案，讓您可以處理具有統計代表性的資料子集，大幅減少查詢時間和資源消耗。</p>
 <p>隨機抽樣在區段層級運作，可確保高效的效能，同時在您的集合資料分佈中維持抽樣的隨機性。</p>
 <p><strong>主要用例：</strong></p>
 <ul>
-<li><p><strong>資料探索</strong>：以最少的資源使用量快速預覽資料集結構與內容</p></li>
+<li><p><strong>資料探索</strong>：以最少的資源使用量快速預覽資料集結構和內容</p></li>
 <li><p><strong>開發測試</strong>：在全面部署之前，在可管理的資料樣本上測試複雜的篩選邏輯</p></li>
 <li><p><strong>資源最佳化</strong>：降低探索性查詢和統計分析的計算成本</p></li>
 </ul>
@@ -79,7 +79,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>隨機抽樣運算符號必須使用邏輯<code translate="no">AND</code> 與其他篩選表達式結合。結合篩選器時，Milvus 會先套用其他條件，然後在結果集上執行隨機抽樣。</p>
+    </button></h2><p>隨機抽樣運算符號必須與其他篩選表達式結合，使用邏輯<code translate="no">AND</code> 。結合篩選器時，Milvus 會先套用其他條件，然後在結果集上執行隨機抽樣。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Correct: Filter first, then sample</span>
@@ -124,7 +124,22 @@ filter := <span class="hljs-string">&#x27;color == &quot;red&quot; OR RANDOM_SAM
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Example-1-Data-exploration" class="common-anchor-header">範例 1：資料探索</h3><p>快速預覽您的集合結構：</p>
+    </button></h2><h3 id="Example-1-Data-exploration" class="common-anchor-header">範例 1：資料探索<button data-href="#Example-1-Data-exploration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>快速預覽您的集合結構：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -200,7 +215,22 @@ fmt.Println(<span class="hljs-string">&quot;product_name: &quot;</span>, resultS
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Combined-filtering-with-random-sampling" class="common-anchor-header">範例 2：結合篩選與隨機抽樣</h3><p>在可管理的子集中測試篩選邏輯：</p>
+<h3 id="Example-2-Combined-filtering-with-random-sampling" class="common-anchor-header">範例 2：結合篩選與隨機抽樣<button data-href="#Example-2-Combined-filtering-with-random-sampling" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在可管理的子集中測試篩選邏輯：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># First filter by category and price, then sample 0.5% of results</span>
@@ -240,7 +270,22 @@ resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hlj
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Quick-analytics" class="common-anchor-header">範例 3：快速分析</h3><p>在篩選過的資料上執行快速統計分析：</p>
+<h3 id="Example-3-Quick-analytics" class="common-anchor-header">範例 3：快速分析<button data-href="#Example-3-Quick-analytics" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在篩選過的資料上執行快速統計分析：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get insights from ~0.1% of premium customer data</span>
@@ -287,7 +332,22 @@ resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hlj
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Combined-with-vector-search" class="common-anchor-header">範例 4：結合向量搜尋</h3><p>在篩選搜尋情境中使用隨機抽樣：</p>
+<h3 id="Example-4-Combined-with-vector-search" class="common-anchor-header">範例 4：結合向量搜尋<button data-href="#Example-4-Combined-with-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在篩選搜尋情境中使用隨機抽樣：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search for similar products within a sampled subset</span>

@@ -30,14 +30,59 @@ title: البحث الهجين مع ميلفوس
 <li>الاسترجاع الهجين: يجمع بين النهجين الكثيف والمتناثر، حيث يلتقط السياق الكامل والكلمات المفتاحية المحددة للحصول على نتائج بحث شاملة.</li>
 </ul>
 <p>من خلال دمج هذه الأساليب، يوازن البحث الهجين في ميلفوس بين أوجه التشابه الدلالي والمعجمي، مما يحسّن من الملاءمة الإجمالية لنتائج البحث. سيتناول هذا الدفتر عملية إعداد واستخدام استراتيجيات الاسترجاع هذه، مع تسليط الضوء على فعاليتها في سيناريوهات البحث المختلفة.</p>
-<h3 id="Dependencies-and-Environment" class="common-anchor-header">التبعيات والبيئة</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+<h3 id="Dependencies-and-Environment" class="common-anchor-header">التبعيات والبيئة<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Download-Dataset" class="common-anchor-header">تحميل مجموعة البيانات</h3><p>لتوضيح البحث، نحتاج إلى مجموعة من المستندات. لنستخدم مجموعة بيانات Quora Duplicate Questions ونضعها في الدليل المحلي.</p>
+<h3 id="Download-Dataset" class="common-anchor-header">تحميل مجموعة البيانات<button data-href="#Download-Dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لتوضيح البحث، نحتاج إلى مجموعة من المستندات. لنستخدم مجموعة بيانات Quora Duplicate Questions ونضعها في الدليل المحلي.</p>
 <p>مصدر مجموعة البيانات: <a href="https://www.quora.com/q/quoradata/First-Quora-Dataset-Release-Question-Pairs">أول إصدار لمجموعة بيانات Quora: أزواج الأسئلة</a></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Run this cell to download the dataset</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget http://qim.fs.quoracdn.net/quora_duplicate_questions.tsv</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Load-and-Prepare-Data" class="common-anchor-header">تحميل وإعداد البيانات</h3><p>سنقوم بتحميل مجموعة البيانات وإعداد مجموعة صغيرة للبحث.</p>
+<h3 id="Load-and-Prepare-Data" class="common-anchor-header">تحميل وإعداد البيانات<button data-href="#Load-and-Prepare-Data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>سنقوم بتحميل مجموعة البيانات وإعداد مجموعة صغيرة للبحث.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 file_path = <span class="hljs-string">&quot;quora_duplicate_questions.tsv&quot;</span>
@@ -57,7 +102,22 @@ docs = <span class="hljs-built_in">list</span>(questions)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">What is the strongest Kevlar cord?
 </code></pre>
-<h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">استخدام نموذج BGE-M3 للتضمين</h3><p>يمكن لنموذج BGE-M3 تضمين النصوص كمتجهات كثيفة ومتناثرة.</p>
+<h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">استخدام نموذج BGE-M3 للتضمين<button data-href="#Use-BGE-M3-Model-for-Embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكن لنموذج BGE-M3 تضمين النصوص كمتجهات كثيفة ومتناثرة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 
 ef = BGEM3EmbeddingFunction(use_fp16=<span class="hljs-literal">False</span>, device=<span class="hljs-string">&quot;cpu&quot;</span>)
@@ -69,10 +129,25 @@ docs_embeddings = ef(docs)
 <pre><code translate="no">Fetching 30 files: 100%|██████████| 30/30 [00:00&lt;00:00, 302473.85it/s]
 Inference Embeddings: 100%|██████████| 32/32 [01:59&lt;00:00,  3.74s/it]
 </code></pre>
-<h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">إعداد مجموعة ميلفوس والفهرس</h3><p>سنقوم بإعداد مجموعة Milvus وإنشاء مؤشرات لحقول المتجهات.</p>
+<h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">إعداد مجموعة ميلفوس والفهرس<button data-href="#Setup-Milvus-Collection-and-Index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>سنقوم بإعداد مجموعة Milvus وإنشاء مؤشرات لحقول المتجهات.</p>
 <div class="alert alert-info">
 <ul>
-<li>يعد إعداد الفهرس كملف محلي، على سبيل المثال "./milvus.db"، الطريقة الأكثر ملاءمة، حيث يستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
+<li>يعد تعيين الفهرس كملف محلي، على سبيل المثال "./milvus.db"، الطريقة الأكثر ملاءمة، حيث يستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
 <li>إذا كان لديك حجم كبير من البيانات، على سبيل المثال أكثر من مليون ناقل، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">Docker أو Kubernetes</a>. في هذا الإعداد، يُرجى استخدام uri الخادم، على سبيل المثال http://localhost:19530، كـ uri الخاص بك.</li>
 <li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، قم بتعديل uri والرمز المميز، اللذين يتوافقان مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">نقطة النهاية العامة ومفتاح واجهة برمجة التطبيقات</a> في Zilliz Cloud.</li>
 </ul>
@@ -117,7 +192,22 @@ dense_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span cl
 col.create_index(<span class="hljs-string">&quot;dense_vector&quot;</span>, dense_index)
 col.load()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-Data-into-Milvus-Collection" class="common-anchor-header">إدراج البيانات في مجموعة ميلفوس</h3><p>أدرج المستندات وتضميناتها في المجموعة.</p>
+<h3 id="Insert-Data-into-Milvus-Collection" class="common-anchor-header">إدراج البيانات في مجموعة ميلفوس<button data-href="#Insert-Data-into-Milvus-Collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>أدرج المستندات وتضميناتها في المجموعة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># For efficiency, we insert 50 records in each small batch</span>
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(docs), <span class="hljs-number">50</span>):
     batched_entities = [
@@ -130,7 +220,22 @@ col.load()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Number of entities inserted: 502
 </code></pre>
-<h3 id="Enter-Your-Search-Query" class="common-anchor-header">أدخل استعلام البحث</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Enter your search query</span>
+<h3 id="Enter-Your-Search-Query" class="common-anchor-header">أدخل استعلام البحث<button data-href="#Enter-Your-Search-Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Enter your search query</span>
 query = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;Enter your search query: &quot;</span>)
 <span class="hljs-built_in">print</span>(query)
 
@@ -140,9 +245,24 @@ query_embeddings = ef([query])
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">How to start learning programming?
 </code></pre>
-<h3 id="Run-the-Search" class="common-anchor-header">قم بتشغيل البحث</h3><p>سنقوم أولاً بإعداد بعض الوظائف المفيدة لتشغيل البحث:</p>
+<h3 id="Run-the-Search" class="common-anchor-header">قم بتشغيل البحث<button data-href="#Run-the-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>سنقوم أولاً بإعداد بعض الوظائف المفيدة لتشغيل البحث:</p>
 <ul>
-<li><code translate="no">dense_search</code>: البحث عبر حقل متجه كثيف فقط</li>
+<li><code translate="no">dense_search</code>: البحث فقط عبر حقل متجه كثيف</li>
 <li><code translate="no">sparse_search</code>: البحث عبر حقل متجه متناثر فقط</li>
 <li><code translate="no">hybrid_search</code>: البحث عبر كلا الحقلين المتجهين الكثيف والمتجه مع إعادة ترتيب مرجحة</li>
 </ul>
@@ -212,7 +332,22 @@ hybrid_results = hybrid_search(
     dense_weight=<span class="hljs-number">1.0</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Display-Search-Results" class="common-anchor-header">عرض نتائج البحث</h3><p>لعرض نتائج عمليات البحث الكثيفة والمتناثرة والهجينة، نحتاج إلى بعض الأدوات المساعدة لتنسيق النتائج.</p>
+<h3 id="Display-Search-Results" class="common-anchor-header">عرض نتائج البحث<button data-href="#Display-Search-Results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لعرض نتائج عمليات البحث الكثيفة والمتناثرة والهجينة، نحتاج إلى بعض الأدوات المساعدة لتنسيق النتائج.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">doc_text_formatting</span>(<span class="hljs-params">ef, query, docs</span>):
     tokenizer = ef.model.tokenizer
     query_tokens_ids = tokenizer.encode(query, return_offsets_mapping=<span class="hljs-literal">True</span>)
@@ -291,7 +426,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>ما هو العمل الأفضل<span style='color:red'> للبدء</span> في حيدر<span style='color:red'> أباد؟</span></p>
 <p>ما هو العمل التجاري الأفضل<span style='color:red'> للبدء</span> في حيدر<span style='color:red'> أباد؟</span></p>
 <p>ما هي أفضل طريقة<span style='color:red'> لبدء</span><span style='color:red'> الروبوتات؟</span> ما هي أفضل لوحة تطوير يمكنني<span style='color:red'> البدء</span> في العمل<span style='color:red'> عليها؟</span></p>
-<p>ما هي الرياضيات التي يحتاجها المبتدئ<span style='color:red'> لفهم</span> خوارزميات<span style='color:red'> برمجة الكمبيوتر؟</span> ما هي الكتب عن الخوارزميات المناسبة للمبتدئ<span style='color:red'> الكامل؟</span></p>
+<p>ما هي الرياضيات التي يحتاجها المبتدئ<span style='color:red'> لفهم</span> خوارزميات<span style='color:red'> برمجة الكمبيوتر</span> ؟ ما هي الكتب عن الخوارزميات المناسبة للمبتدئ<span style='color:red'> الكامل؟</span></p>
 <p><span style='color:red'>كيف</span> تجعل الحياة تناسبك وتمنع الحياة من <span style='color:red'>الإساءة</span> إليك عقلياً<span style='color:red'> وعاطفياً؟</span></p>
 <p><strong>نتائج البحث الهجين:</strong></p>
 <p>ما هي أفضل طريقة<span style='color:red'> لبدء</span> برمجة<span style='color:red'> الروبوتات؟</span> ما هي أفضل لوحة تطوير يمكنني<span style='color:red'> البدء في</span> العمل<span style='color:red'> عليها؟</span></p>
@@ -311,4 +446,19 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>ما هو العمل التجاري الأفضل<span style='color:red'> للبدء</span> في حيدر<span style='color:red'> أباد؟</span></p>
 <p>ما هي الرياضيات التي يحتاجها المبتدئ<span style='color:red'> لفهم</span> خوارزميات<span style='color:red'> برمجة الكمبيوتر؟</span> ما هي الكتب عن الخوارزميات المناسبة للمبتدئ<span style='color:red'> الكامل؟</span></p>
 <p><span style='color:red'>كيف</span> تجعل الحياة تناسبك وتمنع الحياة من <span style='color:red'>الإساءة</span> إليك عقليًا<span style='color:red'> وعاطفيًا؟</span></p>
-<h3 id="Quick-Deploy" class="common-anchor-header">النشر السريع</h3><p>لمعرفة كيفية بدء عرض توضيحي عبر الإنترنت باستخدام هذا البرنامج التعليمي، يرجى الرجوع إلى <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus">مثال التطبيق</a>.</p>
+<h3 id="Quick-Deploy" class="common-anchor-header">النشر السريع<button data-href="#Quick-Deploy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لمعرفة كيفية بدء عرض توضيحي عبر الإنترنت باستخدام هذا البرنامج التعليمي، يرجى الرجوع إلى <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus">مثال التطبيق</a>.</p>

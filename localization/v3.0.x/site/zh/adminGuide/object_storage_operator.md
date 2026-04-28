@@ -19,7 +19,7 @@ summary: 了解如何使用 Milvus Operator 配置对象存储。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 使用 MinIO 或 S3 作为对象存储来持久化大型文件，如索引文件和二进制日志。本主题介绍如何在使用 Milvus Operator 安装 Milvus 时配置对象存储依赖关系。有关详细信息，请参阅 Milvus Operator 存储库中的<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/object-storage.md">使用 Milvus Operator 配置对象存储</a>。</p>
+    </button></h1><p>Milvus 使用 MinIO 或 S3 作为对象存储来持久化大型文件，如索引文件和二进制日志。本主题介绍如何在使用 Milvus Operator 安装 Milvus 时配置对象存储依赖关系。有关详细信息，请参阅 Milvus Operator 存储库中的<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/object-storage.md">配置对象存储与 Milvus</a>Operator。</p>
 <p>本主题假设您已部署 Milvus Operator。</p>
 <div class="alert note">有关详细信息，请参阅<a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">部署 Milvus Operator</a>。 </div>
 <p>您需要指定使用 Milvus Operator 启动 Milvus 群集的配置文件。</p>
@@ -42,7 +42,22 @@ summary: 了解如何使用 Milvus Operator 配置对象存储。
         ></path>
       </svg>
     </button></h2><p>Milvus 集群使用 MinIO 或 S3 作为对象存储来持久化大型文件，如索引文件和二进制日志。在<code translate="no">spec.dependencies.storage</code> 下添加必填字段以配置对象存储，可能的选项有<code translate="no">external</code> 和<code translate="no">inCluster</code> 。</p>
-<h3 id="Internal-object-storage" class="common-anchor-header">内部对象存储</h3><p>默认情况下，Milvus Operator 会为 Milvus 部署一个集群内 MinIO。下面是一个配置示例，演示如何将该 MinIO 用作内部对象存储。</p>
+<h3 id="Internal-object-storage" class="common-anchor-header">内部对象存储<button data-href="#Internal-object-storage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>默认情况下，Milvus Operator 会为 Milvus 部署一个集群内 MinIO。下面是一个配置示例，演示如何将该 MinIO 用作内部对象存储。</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -73,7 +88,22 @@ summary: 了解如何使用 Milvus Operator 配置对象存储。
 <li><p><code translate="no">pvcDeletion</code> 字段指定在删除群集内 MinIO 时是否删除 PVC（持久卷要求）。</p></li>
 </ul>
 <p><code translate="no">inCluster.values</code> 下的字段与 Milvus Helm Chart 中的字段相同，你可以<a href="https://github.com/milvus-io/milvus-helm/blob/master/charts/minio/values.yaml">在这里</a>找到它们。</p>
-<h3 id="External-object-storage" class="common-anchor-header">外部对象存储</h3><p>在模板 YAML 文件中使用<code translate="no">external</code> 表示使用外部对象存储服务。要使用外部对象存储，需要在 Milvus CRD 中正确设置<code translate="no">spec.dependencies.storage</code> 和<code translate="no">spec.config.minio</code> 下的字段。</p>
+<h3 id="External-object-storage" class="common-anchor-header">外部对象存储<button data-href="#External-object-storage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在模板 YAML 文件中使用<code translate="no">external</code> 表示使用外部对象存储服务。要使用外部对象存储，需要在 Milvus CRD 中正确设置<code translate="no">spec.dependencies.storage</code> 和<code translate="no">spec.config.minio</code> 下的字段。</p>
 <h4 id="Use-Amazon-Web-Service-AWS-S3-as-external-object-storage" class="common-anchor-header">使用亚马逊网络服务（AWS）S3 作为外部对象存储</h4><ul>
 <li><p>按 AK/SK 配置 AWS S3 访问权限</p>
 <p>通常可以通过一对访问密钥和访问秘钥访问 S3 存储桶。您可以创建一个<code translate="no">Secret</code> 对象，将它们存储在 Kubernetes 中，如下所示：</p>

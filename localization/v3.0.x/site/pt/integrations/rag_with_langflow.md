@@ -60,10 +60,25 @@ title: Construir um sistema RAG usando Langflow com Milvus
     </button></h2><p>Quando todas as dependências estiverem instaladas, inicie um painel do Langflow digitando o seguinte comando:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">python -m langflow run</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Em seguida, um painel aparecerá como mostrado abaixo: <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/langflow_dashboard_start.png" alt="langflow" class="doc-image" id="langflow" /><span>langflow</span> </span></p>
-<p>Queremos criar um projeto <strong>Vetor Store</strong>, por isso, primeiro temos de clicar no botão <strong>New Project (Novo projeto</strong> ). Aparece um painel e escolhemos a opção <strong>Vetor Store RAG</strong>: <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/langflow_dashboard_new_project.png" alt="panel" class="doc-image" id="panel" /><span>panel</span> </span></p>
-<p>Depois de o projeto Vetor Store Rag ser criado com êxito, o armazenamento de vectores predefinido é o AstraDB, mas nós queremos utilizar o Milvus. Por isso, temos de substituir estes dois módulos do astraDB pelo Milvus para podermos utilizar o Milvus como armazenamento de vectores. <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/langflow_default_structure.png" alt="astraDB" class="doc-image" id="astradb" /><span>astraDB</span> </span></p>
-<h3 id="Steps-to-replace-astraDB-with-Milvus" class="common-anchor-header">Passos para substituir o astraDB pelo Milvus:</h3><ol>
+<p>Em seguida, um painel aparecerá como mostrado abaixo: <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_dashboard_start.png" alt="langflow" class="doc-image" id="langflow" /><span>langflow</span> </span></p>
+<p>Queremos criar um projeto <strong>Vetor Store</strong>, por isso, primeiro temos de clicar no botão <strong>New Project (Novo projeto</strong> ). Aparece um painel e escolhemos a opção <strong>Vetor Store RAG</strong>: <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_dashboard_new_project.png" alt="panel" class="doc-image" id="panel" /><span>panel</span> </span></p>
+<p>Depois de o projeto Vetor Store Rag ser criado com êxito, o armazenamento de vectores predefinido é o AstraDB, mas nós queremos utilizar o Milvus. Por isso, temos de substituir estes dois módulos do astraDB pelo Milvus para podermos utilizar o Milvus como armazenamento de vectores. <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_default_structure.png" alt="astraDB" class="doc-image" id="astradb" /><span>astraDB</span> </span></p>
+<h3 id="Steps-to-replace-astraDB-with-Milvus" class="common-anchor-header">Passos para substituir o astraDB pelo Milvus:<button data-href="#Steps-to-replace-astraDB-with-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>Remover os cartões existentes do Vetor Store. Clique nos dois cartões AstraDB marcados a vermelho na imagem acima e prima <strong>backspace</strong> para os eliminar.</li>
 <li>Clique na opção <strong>Vetor Store</strong> na barra lateral, escolha Milvus e arraste-o para a tela. Faça isto duas vezes, pois precisamos de 2 cartões Milvus, um para armazenar o fluxo de trabalho de processamento de ficheiros e outro para o fluxo de trabalho de pesquisa.</li>
 <li>Ligue os módulos Milvus ao resto dos componentes. Veja a imagem abaixo para referência.</li>
@@ -71,14 +86,29 @@ title: Construir um sistema RAG usando Langflow com Milvus
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/langflow_milvus_structure.png" alt="Milvus Structure demo" class="doc-image" id="milvus-structure-demo" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_milvus_structure.png" alt="Milvus Structure demo" class="doc-image" id="milvus-structure-demo" />
    </span> <span class="img-wrapper"> <span>Demonstração da estrutura do Milvus</span> </span></p>
-<h3 id="Embed-knowledge-into-the-RAG-system" class="common-anchor-header">Integrar conhecimentos no sistema RAG</h3><ol>
+<h3 id="Embed-knowledge-into-the-RAG-system" class="common-anchor-header">Integrar conhecimentos no sistema RAG<button data-href="#Embed-knowledge-into-the-RAG-system" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>Carregue um ficheiro como base de conhecimento do LLM através do módulo de ficheiros no canto inferior esquerdo. Neste caso, carregámos um ficheiro com uma breve introdução ao Milvus</li>
 <li>Execute o fluxo de trabalho de inserção, premindo o botão executar no módulo Milvus, no canto inferior direito. Isto irá inserir o conhecimento no armazenamento de vectores do Milvus</li>
 <li>Teste se o conhecimento está na memória. Abra o playground e pergunte qualquer coisa relacionada com o ficheiro que carregou.</li>
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/langflow_why_milvus.png" alt="why milvus" class="doc-image" id="why-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_why_milvus.png" alt="why milvus" class="doc-image" id="why-milvus" />
    </span> <span class="img-wrapper"> <span>porquê milvus</span> </span></p>

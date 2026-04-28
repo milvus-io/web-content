@@ -44,7 +44,7 @@ ef = InstructorEmbeddingFunction(
 <li><p><code translate="no">query_instruction</code> <em>(stringa</em>)</p>
 <p>Istruzioni specifiche del compito che guidano il modello su come generare un embedding per una query o una domanda.</p></li>
 <li><p><code translate="no">doc_instruction</code> <em>(stringa</em>)</p>
-<p>Istruzione specifica che guida il modello a generare un'incorporamento per un documento.</p></li>
+<p>Istruzione specifica del compito che guida il modello a generare un'incorporamento per un documento.</p></li>
 </ul>
 <p>Per creare le incorporazioni per i documenti, utilizzare il metodo <code translate="no">encode_documents()</code>:</p>
 <pre><code translate="no" class="language-python">docs = [

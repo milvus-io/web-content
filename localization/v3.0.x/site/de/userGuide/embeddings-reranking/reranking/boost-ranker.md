@@ -23,9 +23,9 @@ beta: Milvus v2.6.2+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Anstatt sich nur auf die semantische Ähnlichkeit zu verlassen, die auf der Grundlage von Vektorabständen berechnet wird, können Sie mit Boost Rankers die Suchergebnisse sinnvoll beeinflussen. Sie sind ideal für die schnelle Anpassung von Suchergebnissen mit Hilfe von Metadaten-Filterung.</p>
+    </button></h1><p>Anstatt sich nur auf die semantische Ähnlichkeit zu verlassen, die auf der Grundlage von Vektorabständen berechnet wird, können Sie mit Boost Ranker die Suchergebnisse auf sinnvolle Art und Weise beeinflussen. Sie sind ideal für die schnelle Anpassung von Suchergebnissen mit Hilfe von Metadaten-Filterung.</p>
 <p>Wenn eine Suchanfrage eine Boost Ranker-Funktion enthält, verwendet Milvus die optionale Filterbedingung innerhalb der Funktion, um Übereinstimmungen unter den Suchergebniskandidaten zu finden und erhöht die Punktzahlen dieser Übereinstimmungen durch Anwendung der angegebenen Gewichtung, wodurch die Rangfolge der übereinstimmenden Entitäten im Endergebnis verbessert oder verschlechtert wird.</p>
-<h2 id="When-to-use-Boost-Ranker" class="common-anchor-header">Wann wird Boost Ranker verwendet?<button data-href="#When-to-use-Boost-Ranker" class="anchor-icon" translate="no">
+<h2 id="When-to-use-Boost-Ranker" class="common-anchor-header">Wann sollte Boost Ranker verwendet werden?<button data-href="#When-to-use-Boost-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -50,11 +50,11 @@ beta: Milvus v2.6.2+
    <tr>
      <td><p>Business-gesteuerte Inhaltspriorisierung</p></td>
      <td><ul><li><p>Hervorhebung von Premium-Produkten in E-Commerce-Suchergebnissen</p></li><li><p>Erhöhen der Sichtbarkeit von Inhalten mit hoher Nutzerbindung (z. B. Aufrufe, Likes und Freigaben)</p></li><li><p>Hervorhebung von aktuellen Inhalten in zeitkritischen Suchanwendungen</p></li><li><p>Bevorzugung von Inhalten aus verifizierten oder vertrauenswürdigen Quellen</p></li><li><p>Aufwertung von Ergebnissen, die mit exakten Phrasen oder hochrelevanten Keywords übereinstimmen</p></li></ul></td>
-     <td rowspan="2"><p>Ohne die Notwendigkeit, Indizes neu zu erstellen oder Vektoreinbettungsmodelle zu ändern - Vorgänge, die zeitaufwändig sein können - können Sie bestimmte Elemente in den Suchergebnissen sofort auf- oder abwerten, indem Sie optionale Metadatenfilter in Echtzeit anwenden. Dieser Mechanismus ermöglicht ein flexibles, dynamisches Suchranking, das sich problemlos an sich verändernde Geschäftsanforderungen anpassen lässt.</p></td>
+     <td rowspan="2"><p>Ohne die Notwendigkeit, Indizes neu zu erstellen oder Vektoreinbettungsmodelle zu ändern - Vorgänge, die zeitaufwändig sein können -, können Sie bestimmte Elemente in den Suchergebnissen sofort auf- oder abwerten, indem Sie optionale Metadatenfilter in Echtzeit anwenden. Dieser Mechanismus ermöglicht ein flexibles, dynamisches Suchranking, das sich problemlos an sich verändernde Geschäftsanforderungen anpassen lässt.</p></td>
    </tr>
    <tr>
      <td><p>Strategische Herabstufung von Inhalten</p></td>
-     <td><ul><li><p>Reduzieren der Bedeutung von Artikeln mit geringem Bestand, ohne sie vollständig zu entfernen</p></li><li><p>Herabstufung von Inhalten mit potenziell anstößigen Begriffen ohne Zensur</p></li><li><p>Herabstufung älterer Dokumentationen, während sie in der technischen Suche zugänglich bleiben</p></li><li><p>Subtiles Verringern der Sichtbarkeit von Konkurrenzprodukten in Marktplatzsuchen</p></li><li><p>Verringerung der Relevanz von Inhalten mit Qualitätsmängeln (z. B. Formatierungsprobleme, geringe Länge usw.)</p></li></ul></td>
+     <td><ul><li><p>Reduzieren der Bedeutung von Artikeln mit geringem Bestand, ohne sie vollständig zu entfernen</p></li><li><p>Herabstufung von Inhalten mit potenziell anstößigen Begriffen ohne Zensur</p></li><li><p>Herabstufung älterer Dokumentationen, während sie in der technischen Suche zugänglich bleiben</p></li><li><p>Subtiles Verringern der Sichtbarkeit von Konkurrenzprodukten bei der Suche auf dem Marktplatz</p></li><li><p>Verringerung der Relevanz von Inhalten mit Qualitätsmängeln (z. B. Formatierungsprobleme, geringe Länge usw.)</p></li></ul></td>
    </tr>
 </table>
 <p>Sie können auch mehrere Boost Ranker kombinieren, um eine dynamischere und robustere gewichtsbasierte Rankingstrategie zu implementieren.</p>
@@ -76,7 +76,7 @@ beta: Milvus v2.6.2+
     </button></h2><p>Das folgende Diagramm veranschaulicht den Hauptarbeitsablauf von Boost Rankern.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
    </span> <span class="img-wrapper"> <span>Boost Ranker-Mechanismus</span> </span></p>
 <p>Wenn Sie Daten einfügen, verteilt Milvus diese auf Segmente. Während einer Suche gibt jedes Segment eine Reihe von Kandidaten zurück, und Milvus ordnet diese Kandidaten aus allen Segmenten ein, um die endgültigen Ergebnisse zu erhalten. Wenn eine Suchanfrage einen Boost Ranker enthält, wendet Milvus diesen auf die Kandidatenergebnisse aus jedem Segment an, um einen potenziellen Präzisionsverlust zu verhindern und den Recall zu verbessern.</p>
 <p>Bevor die Ergebnisse abgeschlossen werden, verarbeitet Milvus diese Kandidaten mit dem Boost Ranker wie folgt:</p>
@@ -782,7 +782,7 @@ params.put(<span class="hljs-string">&quot;function_mode&quot;</span>,<span clas
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Konkret gibt es zwei Boost Ranker: Einer wendet eine feste Gewichtung auf alle gefundenen Entitäten an, während der andere ihnen eine zufällige Gewichtung zuweist. Anschließend referenzieren wir diese beiden Ranker in einer <strong>FunctionScore</strong>, die auch definiert, wie die Gewichtungen die Punktzahlen der gefundenen Entitäten beeinflussen.</p>
+<p>Konkret gibt es zwei Boost Ranker: Einer wendet eine feste Gewichtung auf alle gefundenen Entitäten an, während der andere ihnen eine zufällige Gewichtung zuweist. Anschließend referenzieren wir diese beiden Ranker in einer <strong>FunctionScore</strong>, die auch definiert, wie die Gewichte die Punktzahlen der gefundenen Entitäten beeinflussen.</p>
 <p>In der folgenden Tabelle sind die Parameter aufgeführt, die zur Erstellung einer <strong>FunctionScore-Instanz</strong> erforderlich sind.</p>
 <table>
    <tr>

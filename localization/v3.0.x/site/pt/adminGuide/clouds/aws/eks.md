@@ -42,7 +42,7 @@ summary: Saiba como implementar um cluster Milvus no EKS
 <li><a href="https://helm.sh/docs/intro/install/"><code translate="no">helm</code></a></li>
 <li><a href="https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html"><code translate="no">eksctl</code></a></li>
 </ul></li>
-<li>As permissões do AWS IAM foram concedidas corretamente. A entidade de segurança IAM que está a usar deve ter permissão para usar funções IAM do Amazon EKS, funções relacionadas com serviços, AWS CloudFormation, VPCs e outros recursos relacionados. Pode seguir uma das seguintes formas para conceder as permissões adequadas ao seu principal.<ul>
+<li>As permissões do AWS IAM foram concedidas corretamente. A entidade de segurança do IAM que está a utilizar deve ter permissão para utilizar funções do Amazon EKS IAM, funções relacionadas com serviços, AWS CloudFormation, VPCs e outros recursos relacionados. Pode seguir uma das seguintes formas para conceder as permissões adequadas ao seu principal.<ul>
 <li>(Não recomendado) Basta definir a política de associação do usuário/função que você usou para a política gerenciada da AWS <code translate="no">AdministratorAccess</code>.</li>
 <li>(Altamente recomendado) Para implementar o princípio do menor privilégio, faça o seguinte:<ul>
 <li><p>Para configurar a permissão para <code translate="no">eksctl</code>, consulte <a href="https://eksctl.io/usage/minimum-iam-policies/">Permissão mínima para <code translate="no">eksctl</code></a>.</p></li>
@@ -66,7 +66,7 @@ summary: Saiba como implementar um cluster Milvus no EKS
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Para configurar permissões para criar/eliminar políticas de IAM, consulte as seguintes configurações de permissão. Substitua o endereço <code translate="no">YOUR_ACCOUNT_ID</code> pelo seu próprio.</p>
+<li><p>Para configurar permissões para criar/excluir políticas de IAM, consulte as seguintes configurações de permissão. Substitua o endereço <code translate="no">YOUR_ACCOUNT_ID</code> pelo seu próprio.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -101,7 +101,22 @@ summary: Saiba como implementar um cluster Milvus no EKS
         ></path>
       </svg>
     </button></h2><p>É possível configurar os recursos necessários do AWS, incluindo um bucket do AWS S3 e um cluster EKS, usando o Console de Gerenciamento do AWS, a CLI do AWS ou ferramentas de IaC, como o Terraform. Neste documento, a CLI da AWS é preferida para demonstrar como configurar os recursos da AWS.</p>
-<h3 id="Create-an-Amazon-S3-Bucket" class="common-anchor-header">Criar um bucket do Amazon S3</h3><ul>
+<h3 id="Create-an-Amazon-S3-Bucket" class="common-anchor-header">Criar um bucket do Amazon S3<button data-href="#Create-an-Amazon-S3-Bucket" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Crie um bucket do AWS S3.</p>
 <p>Leia <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">Regras de nomenclatura de bucket</a> e observe as regras de nomenclatura ao nomear seu bucket do AWS S3.</p>
 <pre><code translate="no" class="language-shell">milvus_bucket_name=&quot;milvus-bucket-$(openssl rand -hex 12)&quot;
@@ -156,7 +171,22 @@ aws iam create-policy --policy-name MilvusS3ReadWrite --policy-document file://m
 <pre><code translate="no" class="language-shell">aws iam attach-user-policy --user-name &lt;your-user-name&gt; --policy-arn &quot;arn:aws:iam::&lt;your-iam-account-id&gt;:policy/MilvusS3ReadWrite&quot;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Create-an-Amazon-EKS-Cluster" class="common-anchor-header">Criar um cluster do Amazon EKS</h3><ul>
+<h3 id="Create-an-Amazon-EKS-Cluster" class="common-anchor-header">Criar um cluster do Amazon EKS<button data-href="#Create-an-Amazon-EKS-Cluster" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Prepare um arquivo de configuração de cluster da seguinte forma e nomeie-o como <code translate="no">eks_cluster.yaml</code>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">eksctl.io/v1alpha5</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">ClusterConfig</span>
@@ -241,7 +271,22 @@ kubectl get nodes -A -o wide
 <p>Defina a StorageClass gp2 original como não padrão.</p>
 <pre><code translate="no" class="language-shell">kubectl patch storageclass gp2 -p &#x27;{&quot;metadata&quot;: {&quot;annotations&quot;:{&quot;storageclass.kubernetes.io/is-default-class&quot;:&quot;false&quot;}}}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Install-AWS-LoadBalancer-Controller" class="common-anchor-header">Instalar o controlador do AWS LoadBalancer</h3><ul>
+<h3 id="Install-AWS-LoadBalancer-Controller" class="common-anchor-header">Instalar o controlador do AWS LoadBalancer<button data-href="#Install-AWS-LoadBalancer-Controller" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Adicione o repositório Helm chars.</p>
 <pre><code translate="no" class="language-shell">helm repo add eks https://aws.github.io/eks-charts
 helm repo update
@@ -282,7 +327,7 @@ helm repo update
 <p><div class="alert note"></p>
 <ul>
 <li>Para configurar a HA para o seu Milvus, consulte <a href="https://milvus.io/tools/sizing/">esta calculadora</a> para obter mais informações. Pode transferir as configurações relacionadas diretamente da calculadora e deve remover as configurações relacionadas com o MinIO.</li>
-<li>Para implementar implementações multi-replicativas de coordenadores, defina <code translate="no">xxCoordinator.activeStandby.enabled</code> como <code translate="no">true</code>.</li>
+<li>Para implementar implementações multi-replicativas de coordenadores, defina <code translate="no">xxCoordinator.activeStandby.enabled</code> para <code translate="no">true</code>.</li>
 </ul>
 <p></div></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">cluster:</span>
@@ -364,7 +409,7 @@ helm repo update
 <pre><code translate="no" class="language-shell">kubectl get pods -n milvus
 <button class="copy-code-btn"></button></code></pre>
 <p><div class="alert note"></p>
-<p>O Helm não suporta o agendamento da ordem de criação do serviço. É normal que os pods empresariais sejam reiniciados uma ou duas vezes antes de <code translate="no">etcd</code> e <code translate="no">pulsar</code> estarem activos na fase inicial.</p>
+<p>O Helm não suporta o agendamento da ordem de criação do serviço. É normal que os pods de negócio reiniciem uma ou duas vezes antes de <code translate="no">etcd</code> e <code translate="no">pulsar</code> estarem activos na fase inicial.</p>
 <p></div></p></li>
 <li><p>Obter o endereço do serviço Milvus.</p>
 <pre><code translate="no" class="language-shell">kubectl get svc -n milvus

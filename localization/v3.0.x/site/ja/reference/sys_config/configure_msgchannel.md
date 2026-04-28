@@ -144,7 +144,7 @@ summary: MilvusのmsgChannelの設定方法について説明します。
     <tr>
       <td>
         <li>ルートコードがデータ操作言語(DML)メッセージを発行するメッセージチャネルのサブネームプレフィックス。</li>      
-        <li>完全なチャネル名接頭辞は${msgChannel.chanNamePrefix.cluster}-${msgChannel.chanNamePrefix.rootCoordDml}です。</li>      
+        <li>完全なチャネル名のプレフィックスは${msgChannel.chanNamePrefix.cluster}-${msgChannel.chanNamePrefix.rootCoordDml}です。</li>      
         <li>注意Milvusを一定期間使用した後にこのパラメータを変更すると、古いデータへのアクセスに影響します。</li>      
         <li>Milvusを初めて起動する前にこのパラメータを変更することをお勧めします。</li>      </td>
       <td>ルートコードDml</td>

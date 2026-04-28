@@ -179,7 +179,7 @@ fmt.Printf(<span class="hljs-string">&quot;Collection: %s\n&quot;</span>, resp.G
         ></path>
       </svg>
     </button></h3><p>Pode restaurar um instantâneo para uma nova coleção. Esta operação é assíncrona e devolve um ID de trabalho para acompanhar o progresso do restauro.</p>
-<p>A restauração usa um mecanismo de <strong>cópia de segmento</strong> em vez de importação de dados, que é mais eficiente porque</p>
+<p>A restauração usa um mecanismo <strong>de cópia de segmento</strong> em vez de importação de dados, que é mais eficiente porque</p>
 <ul>
 <li><p>copia diretamente os arquivos de segmento (binlogs, deltalogs, arquivos de índice) do armazenamento de instantâneos</p></li>
 <li><p>preserva IDs de campo e IDs de índice para garantir a compatibilidade com arquivos de dados existentes</p></li>

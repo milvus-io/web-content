@@ -2,7 +2,7 @@
 id: metric.md
 title: メトリクスの種類
 summary: >-
-  類似度メトリクスは、ベクトル間の類似度を測定するために使用される。適切な距離メトリックを選択することで、分類やクラスタリングの性能を大幅に向上させることができる。
+  類似度メトリクスは、ベクトル間の類似性を測定するために使用される。適切な距離メトリックを選択することで、分類やクラスタリングの性能を大幅に向上させることができる。
 ---
 <h1 id="Metric-Types" class="common-anchor-header">メトリクスの種類<button data-href="#Metric-Types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -141,7 +141,7 @@ summary: >-
 <p>ユークリッド距離の公式は以下の通り：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/euclidean-metric.png" alt="Euclidean Metric" class="doc-image" id="euclidean-metric" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/euclidean-metric.png" alt="Euclidean Metric" class="doc-image" id="euclidean-metric" />
    </span> <span class="img-wrapper"> <span>ユークリッド距離</span> </span></p>
 <p>ここで、<strong>a = (<sub>a0</sub>,<sub>a1</sub>,...,<sub>an-1</sub>)</strong>と<strong>b = (<sub>b0</sub>,<sub>b1</sub>,...,<sub>bn</sub>-1)</strong>はn次元ユークリッド空間の2点である。</p>
 <p>これは最も一般的に使用される距離メトリックであり、データが連続的である場合に非常に有用である。</p>
@@ -166,21 +166,21 @@ summary: >-
     </button></h2><p>2つの埋め込み間のIP距離は次のように定義されます：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IP-formula.png" alt="IP Formula" class="doc-image" id="ip-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IP-formula.png" alt="IP Formula" class="doc-image" id="ip-formula" />
    </span> <span class="img-wrapper"> <span>IPの公式</span> </span></p>
 <p>IPは、正規化されていないデータを比較する場合や、大きさや角度を気にする場合に便利です。</p>
 <div class="alert note">
-<p>IPを使って埋め込み間の類似度を計算する場合、埋め込みを正規化する必要があります。正規化後の内積は余弦類似度に等しくなります。</p>
+<p>埋め込み間の類似度を計算するためにIPを使う場合、埋め込みを正規化する必要があります。正規化後の内積は余弦類似度に等しくなります。</p>
 </div>
 <p>X'が埋め込みXから正規化されたとします：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/normalize-formula.png" alt="Normalize Formula" class="doc-image" id="normalize-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalize-formula.png" alt="Normalize Formula" class="doc-image" id="normalize-formula" />
    </span> <span class="img-wrapper"> <span>正規化式</span> </span></p>
 <p>2つの埋め込み間の相関は次のようになります：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/correlation-between-embeddings.png" alt="Correlation Between Embeddings" class="doc-image" id="correlation-between-embeddings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/correlation-between-embeddings.png" alt="Correlation Between Embeddings" class="doc-image" id="correlation-between-embeddings" />
    </span> <span class="img-wrapper"> <span>埋め込み間の相関</span> </span></p>
 <h2 id="Cosine-similarity" class="common-anchor-header">コサイン類似度<button data-href="#Cosine-similarity" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -201,9 +201,9 @@ summary: >-
 <p>2組のベクトル<strong>A = (<sub>a0</sub>,<sub>a1</sub>,...,<sub>an-1</sub>)</strong>と<strong>B = (<sub>b0</sub>,<sub>b1</sub>,...,<sub>bn</sub>-1)</strong>のコサイン類似度を計算するには、次の式を使います：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
    </span> <span class="img-wrapper"> <span>コサイン類似度</span> </span></p>
-<p>余弦類似度は常に区間<strong>[-1, 1]</strong>にある。例えば、2つの比例ベクトルは<strong>1の</strong>余弦類似度を持ち、2つの直交ベクトルは<strong>0の</strong>類似度を持ち、2つの反対ベクトルは<strong>-</strong>1の類似度を持ちます。余弦が大きいほど、2つのベクトル間の角度が小さくなり、これらの2つのベクトルが互いに似ていることを示します。</p>
+<p>余弦類似度は常に区間<strong>[-1, 1]</strong>にある。例えば、2つの比例ベクトルは余弦類似度が<strong>1</strong>、2つの直交ベクトルは類似度が<strong>0</strong>、2つの対向ベクトルは類似度が<strong>-1</strong>です。余弦が大きいほど、2つのベクトル間の角度が小さくなり、これらの2つのベクトルが互いに似ていることを示します。</p>
 <p>2つのベクトルの余弦類似度を1から引くことで、2つのベクトル間の余弦距離を求めることができます。</p>
 <h2 id="JACCARD-distance" class="common-anchor-header">JACCARD距離<button data-href="#JACCARD-distance" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -223,12 +223,12 @@ summary: >-
     </button></h2><p>JACCARD距離係数は，2つの標本集合間の類似度を測定し，定義された集合の交点のカーディナリティをそれらの和のカーディナリティで割ったものとして定義される．これは有限の標本集合にのみ適用できる．</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
    </span> <span class="img-wrapper"> <span>JACCARD類似度係数公式</span> </span></p>
 <p>JACCARD 距離は，データ集合間の非類似度を測定し，JACCARD 類似度係数を1から引くことによって得られる．</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
    </span> <span class="img-wrapper"> <span>JACCARD 距離の公式</span> </span></p>
 <h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -253,7 +253,7 @@ summary: >-
 </ul>
 <p><strong>距離の定義</strong></p>
 <p>MHJACCARDは、2つのMinHash署名の何番目の位置が一致するかを測定します。一致率が高いほど、基礎となる集合がより類似していることを示す。</p>
-<p>milvusは次のように報告します：</p>
+<p>Milvusは次のように報告します：</p>
 <ul>
 <li><strong>距離 = 1 - 推定類似度（一致率）</strong></li>
 </ul>
@@ -298,7 +298,7 @@ summary: >-
       </svg>
     </button></h2><p>BM25は広く使われているテキスト関連性測定法で、特に<a href="/docs/ja/full-text-search.md">全文検索</a>用に設計されている。以下の3つの重要な要素を組み合わせている：</p>
 <ul>
-<li><p><strong>用語頻度（TF）：</strong>ある用語が文書に出現する頻度を測定する。頻度が高いほど重要度が高いことを示すことが多いが、BM25では飽和パラメータ<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">1</annotation><mrow><msub><mi>k_1</mi></msub></mrow></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span></span></span></span>k<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">1</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>を使用し、頻度が高すぎる用語が関連性スコアを支配するのを防ぐ。</p></li>
+<li><p><strong>用語頻度（TF）：</strong>用語の文書内での出現頻度を測定する。頻度が高いほど重要度が高いことを示すことが多いが、BM25では飽和パラメータ<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">1</annotation><mrow><msub><mi>k_1</mi></msub></mrow></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span></span></span></span>k<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">1</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>を使用し、頻度が高すぎる用語が関連性スコアを支配するのを防ぐ。</p></li>
 <li><p><strong>逆文書頻度（IDF）：</strong>コーパス全体における用語の重要度を反映する。より少ない文書に出現する用語ほどIDF値が高くなり、関連性に大きく寄与していることを示す。</p></li>
 <li><p><strong>文書の長さの正規化：</strong>長い文書は、より多くの用語を含むため、スコアが高くなる傾向があります。BM25 は文書の長さを正規化することで、このバイアスを軽減する。パラメータ<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">bb</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span></span></span></span>b はこの正規化の強さを制御する。</p></li>
 </ul>

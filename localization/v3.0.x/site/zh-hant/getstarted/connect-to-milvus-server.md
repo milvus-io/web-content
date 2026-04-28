@@ -158,7 +158,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>令牌格式為<code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code> 。說明文件明確註明<code translate="no">root:Milvus</code> 為預設憑證，「<a href="/docs/zh-hant/users_and_roles.md">建立使用者與角色</a>」指南涵蓋管理使用者。</p>
+<p>令牌格式為<code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code> 。說明文件明確註明<code translate="no">root:Milvus</code> 為預設憑證，而<a href="/docs/zh-hant/users_and_roles.md">Create Users &amp; Roles</a>指南則涵蓋管理使用者。</p>
 </div>
 <h2 id="Configure-a-timeout" class="common-anchor-header">設定逾時<button data-href="#Configure-a-timeout" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Cuando el campo dinámico está activado, Milvus añade un campo oculto <code translate="no">$meta</code> a cada entidad. Este campo es de tipo JSON, lo que significa que puede almacenar cualquier estructura de datos compatible con JSON y puede indexarse utilizando la sintaxis de rutas JSON.</p>
+    </button></h2><p>Cuando se activa el campo dinámico, Milvus añade un campo oculto <code translate="no">$meta</code> a cada entidad. Este campo es de tipo JSON, lo que significa que puede almacenar cualquier estructura de datos compatible con JSON y puede indexarse utilizando la sintaxis de rutas JSON.</p>
 <p>Durante la inserción de datos, cualquier campo no declarado en el esquema se almacena automáticamente como un par clave-valor dentro de este campo dinámico.</p>
 <p>No es necesario gestionar <code translate="no">$meta</code> manualmente: Milvus lo hace de forma transparente.</p>
 <p>Por ejemplo, si su esquema de colección define sólo <code translate="no">id</code> y <code translate="no">vector</code>, y usted inserta la siguiente entidad:</p>
@@ -416,9 +416,24 @@ curl --request POST \
       </svg>
     </button></h2><p>Milvus le permite utilizar <strong>la indexación de rutas JSON</strong> para crear índices sobre claves específicas dentro del campo dinámico. Pueden ser valores escalares o valores anidados en objetos JSON.</p>
 <div class="alert note">
-<p>La indexación de claves de campos dinámicos es <strong>opcional</strong>. Puede seguir consultando o filtrando por claves de campos dinámicos sin un índice, pero el rendimiento puede disminuir debido a la búsqueda por fuerza bruta.</p>
+<p>La indexación de claves de campos dinámicos es <strong>opcional</strong>. Puede seguir consultando o filtrando por claves de campos dinámicos sin un índice, pero el rendimiento puede disminuir debido a la búsqueda de fuerza bruta.</p>
 </div>
-<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">Sintaxis de indexación de rutas JSON</h3><p>Para crear un índice de ruta JSON, especifique:</p>
+<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">Sintaxis de indexación de rutas JSON<button data-href="#JSON-path-indexing-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para crear un índice de ruta JSON, especifique:</p>
 <ul>
 <li><p><strong>Ruta JSON</strong> (<code translate="no">json_path</code>): La ruta a la clave o campo anidado dentro de su objeto JSON que desea indexar.</p>
 <ul>
@@ -431,7 +446,22 @@ curl --request POST \
 <li><p>Para obtener una lista completa, consulte <a href="/docs/es/use-json-fields.md#Supported-JSON-cast-types">Tipos de reparto JSON admitidos</a>.</p></li>
 </ul></li>
 </ul>
-<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">Utilizar la ruta JSON para indexar claves de campos dinámicos</h3><p>Dado que el campo dinámico es un campo JSON, puede indexar cualquier clave dentro de él utilizando la sintaxis de ruta JSON. Esto funciona tanto para valores escalares simples como para estructuras anidadas complejas.</p>
+<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">Utilizar la ruta JSON para indexar claves de campos dinámicos<button data-href="#Use-JSON-path-to-index-dynamic-field-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dado que el campo dinámico es un campo JSON, puede indexar cualquier clave dentro de él utilizando la sintaxis de ruta JSON. Esto funciona tanto para valores escalares simples como para estructuras anidadas complejas.</p>
 <p><strong>Ejemplos de rutas JSON:</strong></p>
 <ul>
 <li><p>Para claves simples: <code translate="no">overview</code>, <code translate="no">words</code></p></li>
@@ -635,7 +665,22 @@ indexOpt4 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">Utilizar funciones de conversión JSON para la conversión de tipos<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h3><p>Si una clave de campo dinámico contiene valores en un formato incorrecto (por ejemplo, números almacenados como cadenas), puedes utilizar una función cast para convertirlos:</p>
+<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">Utilizar funciones de conversión JSON para la conversión de tipos<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span><button data-href="#Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Si una clave de campo dinámico contiene valores en un formato incorrecto (por ejemplo, números almacenados como cadenas), puedes utilizar una función cast para convertirlos:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Convert a string to double before indexing</span>
@@ -698,7 +743,22 @@ indexOpt5 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
 <li><p>Para obtener más información sobre los parámetros de la función cast, consulte <a href="/docs/es/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">Campo JSON</a>.</p></li>
 </ul>
 </div>
-<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">Aplicar índices a la colección</h3><p>Después de definir los parámetros de índice, puede aplicarlos a la colección utilizando <code translate="no">create_index()</code>:</p>
+<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">Aplicar índices a la colección<button data-href="#Apply-indexes-to-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Después de definir los parámetros de índice, puede aplicarlos a la colección utilizando <code translate="no">create_index()</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_index(
@@ -954,19 +1014,79 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">¿Cuándo debo definir un campo explícitamente en el esquema en lugar de utilizar una clave de campo dinámica?</h3><p>Debe definir un campo explícitamente en el esquema en lugar de utilizar una clave de campo dinámica cuando:</p>
+    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">¿Cuándo debo definir un campo explícitamente en el esquema en lugar de utilizar una clave de campo dinámica?<button data-href="#When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Debe definir un campo explícitamente en el esquema en lugar de utilizar una clave de campo dinámica cuando:</p>
 <ul>
 <li><p><strong>El campo se incluye con frecuencia en output_fields</strong>: Sólo se garantiza que los campos definidos explícitamente se puedan recuperar de forma eficiente a través de <code translate="no">output_fields</code>. Las claves de campo dinámicas no están optimizadas para recuperaciones de alta frecuencia y pueden provocar sobrecargas de rendimiento.</p></li>
 <li><p><strong>Se accede al campo o se filtra con frecuencia</strong>: Aunque la indexación de una clave de campo dinámica puede proporcionar un rendimiento de filtrado similar al de los campos de esquema fijos, los campos definidos explícitamente ofrecen una estructura más clara y una mejor capacidad de mantenimiento.</p></li>
 <li><p><strong>Necesita un control total sobre el comportamiento del campo</strong>: Los campos explícitos admiten restricciones a nivel de esquema, validaciones y una tipificación más clara, lo que puede resultar útil para gestionar la integridad y coherencia de los datos.</p></li>
 <li><p><strong>Desea evitar incoherencias de indexación</strong>: Los datos en claves de campo dinámicas son más propensos a incoherencias de tipo o estructura. Utilizar un esquema fijo ayuda a garantizar la calidad de los datos, especialmente si tiene previsto utilizar la indexación o el casting.</p></li>
 </ul>
-<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">¿Puedo crear varios índices en la misma clave de campo dinámica con distintos tipos de datos?</h3><p>No, <strong>sólo</strong> puede crear <strong>un índice por cada ruta JSON</strong>. Incluso si una clave de campo dinámico contiene valores de tipo mixto (por ejemplo, algunas cadenas y algunos números), debe elegir un único <code translate="no">json_cast_type</code> al indexar esa ruta. En este momento no se admiten múltiples índices en la misma clave con diferentes tipos.</p>
-<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">Al indexar una clave de campo dinámico, ¿qué ocurre si falla el vaciado de datos?</h3><p>Si ha creado un índice en una clave de campo dinámico y la conversión de datos falla (por ejemplo, si un valor que debe convertirse a <code translate="no">double</code> es una cadena no numérica como <code translate="no">&quot;abc&quot;</code>), esos valores específicos se <strong>omitirán silenciosamente durante la creación del índice</strong>. No aparecerán en el índice y, por tanto, <strong>no se devolverán en las búsquedas basadas en filtros o en los resultados de consultas</strong> que dependen del índice.</p>
+<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">¿Puedo crear varios índices en la misma clave de campo dinámica con distintos tipos de datos?<button data-href="#Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>No, <strong>sólo</strong> puede crear <strong>un índice por cada ruta JSON</strong>. Incluso si una clave de campo dinámico contiene valores de tipo mixto (por ejemplo, algunas cadenas y algunos números), debe elegir un único <code translate="no">json_cast_type</code> al indexar esa ruta. En este momento no se admiten múltiples índices en la misma clave con diferentes tipos.</p>
+<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">Al indexar una clave de campo dinámico, ¿qué ocurre si falla el vaciado de datos?<button data-href="#When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Si ha creado un índice en una clave de campo dinámico y la conversión de datos falla (por ejemplo, si un valor que debe convertirse a <code translate="no">double</code> es una cadena no numérica como <code translate="no">&quot;abc&quot;</code>), esos valores específicos se <strong>omitirán silenciosamente durante la creación del índice</strong>. No aparecerán en el índice y, por tanto, <strong>no se devolverán en las búsquedas basadas en filtros o en los resultados de consultas</strong> que dependen del índice.</p>
 <p>Esto tiene algunas implicaciones importantes:</p>
 <ul>
 <li><p><strong>No hay vuelta atrás al escaneo completo</strong>: Si la mayoría de las entidades se indexan correctamente, las consultas de filtrado se basarán por completo en el índice. Las entidades con fallos en el reparto se excluirán del conjunto de resultados, incluso aunque coincidan lógicamente con la condición de filtrado.</p></li>
-<li><p><strong>Riesgo para la precisión de la búsqueda</strong>: En grandes conjuntos de datos en los que la calidad de los datos es inconsistente (especialmente en las claves de campo dinámicas), este comportamiento puede dar lugar a resultados perdidos inesperados. Es fundamental garantizar un formato de datos coherente y válido antes de la indexación.</p></li>
+<li><p><strong>Riesgo para la precisión de la búsqueda</strong>: En grandes conjuntos de datos donde la calidad de los datos es inconsistente (especialmente en claves de campo dinámicas), este comportamiento puede conducir a resultados inesperados. Es fundamental garantizar un formato de datos coherente y válido antes de la indexación.</p></li>
 <li><p><strong>Utilice las funciones de conversión con precaución</strong>: Si utiliza <code translate="no">json_cast_function</code> para convertir cadenas en números durante la indexación, asegúrese de que los valores de las cadenas son convertibles de forma fiable. Un desajuste entre <code translate="no">json_cast_type</code> y el tipo convertido real provocará errores o entradas omitidas.</p></li>
 </ul>
-<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">¿Qué ocurre si mi consulta utiliza un tipo de datos distinto del tipo de conversión indexado?</h3><p>Si su consulta compara una clave de campo dinámico utilizando un <strong>tipo de datos diferente</strong> del que se utilizó en el índice (por ejemplo, una consulta con una comparación de cadenas cuando el índice se ha convertido a <code translate="no">double</code>), el sistema <strong>no utilizará el índice</strong> y <em>, si es posible,</em> realizará un escaneo completo. Para un mejor rendimiento y precisión, asegúrese de que el tipo de consulta coincide con el <code translate="no">json_cast_type</code> utilizado durante la creación del índice.</p>
+<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">¿Qué ocurre si mi consulta utiliza un tipo de datos distinto del tipo de conversión indexado?<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Si su consulta compara una clave de campo dinámico utilizando un <strong>tipo de datos diferente</strong> del que se utilizó en el índice (por ejemplo, una consulta con una comparación de cadenas cuando el índice se ha convertido a <code translate="no">double</code>), el sistema <strong>no utilizará el índice</strong> y <em>, si es posible,</em> realizará un escaneo completo. Para un mejor rendimiento y precisión, asegúrese de que el tipo de consulta coincide con el <code translate="no">json_cast_type</code> utilizado durante la creación del índice.</p>

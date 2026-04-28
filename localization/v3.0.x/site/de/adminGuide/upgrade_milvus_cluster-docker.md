@@ -1,6 +1,8 @@
 ---
 id: upgrade_milvus_cluster-docker.md
-summary: 'Erfahren Sie, wie Sie Milvus-Cluster mit Docker Compose aktualisieren können.'
+summary: >-
+  Erfahren Sie, wie Sie den Milvus-Cluster mit Docker Compose aktualisieren
+  können.
 title: Upgrade des Milvus-Clusters mit Docker Compose
 ---
 <div class="tab-wrapper"><a href="/docs/de/upgrade_milvus_standalone-operator.md" class=''>Milvus OperatorMilvus</a><a href="/docs/de/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/de/configure-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/de/upgrade_milvus_standalone-helm.md" class=''>ComposeHelmDocker</a><a href="/docs/de/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>

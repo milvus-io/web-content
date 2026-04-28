@@ -26,7 +26,7 @@ summary: >-
     </button></h1><p>Los campos JSON proporcionan una forma flexible de almacenar metadatos estructurados en Milvus. Sin indexación, las consultas en campos JSON requieren escaneos completos de la colección, que se vuelven lentos a medida que crece su conjunto de datos. La indexación JSON permite búsquedas rápidas mediante la creación de índices dentro de sus datos JSON.</p>
 <p>La indexación JSON es ideal para:</p>
 <ul>
-<li><p>Esquemas estructurados con claves coherentes y conocidas</p></li>
+<li><p>esquemas estructurados con claves coherentes y conocidas</p></li>
 <li><p>Consultas de igualdad y rango en rutas JSON específicas</p></li>
 <li><p>Escenarios en los que se necesita un control preciso sobre qué claves se indexan</p></li>
 <li><p>Aceleración eficiente del almacenamiento de consultas específicas</p></li>

@@ -25,7 +25,7 @@ summary: >-
     </button></h1><p>L'indice <code translate="no">STL_SORT</code> è un tipo di indice progettato specificamente per migliorare le prestazioni delle query sui campi numerici (INT8, INT16, ecc.), sui campi <code translate="no">VARCHAR</code> o sui campi <code translate="no">TIMESTAMPTZ</code> all'interno di Milvus, organizzando i dati in un ordine ordinato.</p>
 <p>Utilizzare l'indice <code translate="no">STL_SORT</code> se si eseguono frequentemente query con:</p>
 <ul>
-<li><p>Filtro di confronto con gli operatori <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code> e <code translate="no">&lt;=</code> </p></li>
+<li><p>Filtraggio di confronto con gli operatori <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code> e <code translate="no">&lt;=</code> </p></li>
 <li><p>Filtraggio dell'intervallo con gli operatori <code translate="no">IN</code> e <code translate="no">LIKE</code> </p></li>
 </ul>
 <h2 id="Supported-data-types" class="common-anchor-header">Tipi di dati supportati<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
@@ -46,7 +46,7 @@ summary: >-
     </button></h2><ul>
 <li><p>Campi numerici (ad esempio, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>). Per maggiori dettagli, consultare la sezione <a href="/docs/it/number.md">Campi booleani e numerici</a>.</p></li>
 <li><p><code translate="no">VARCHAR</code> campi. Per maggiori dettagli, vedere <a href="/docs/it/string.md">Campo stringa</a>.</p></li>
-<li><p><code translate="no">TIMESTAMPTZ</code> campi. Per maggiori dettagli, vedere <a href="/docs/it/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p></li>
+<li><p><code translate="no">TIMESTAMPTZ</code> campi. Per ulteriori informazioni, vedere <a href="/docs/it/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">Come funziona<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"

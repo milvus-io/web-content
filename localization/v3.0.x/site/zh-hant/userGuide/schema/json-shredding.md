@@ -378,7 +378,7 @@ beta: Milvus 2.6.2+
 <li><p><strong>如何在 JSON 切碎和 JSON 索引之間進行選擇？</strong></p>
 <ul>
 <li><p><strong>JSON 切碎</strong>非常適用於在您的文件中經常出現的鍵，尤其是複雜的 JSON 結構。它結合了列式儲存和反向索引的優點，因此非常適合您查詢許多不同鍵的重讀情境。但是，不建議用於非常小的 JSON 文件，因為性能增益微乎其微。關鍵值佔 JSON 文件總大小的比例越小，粉碎的性能優化效果就越好。</p></li>
-<li><p><strong>JSON 索引</strong>更適合針對特定基於關鍵值的查詢進行有針對性的優化，而且儲存開銷較低。它適用於較簡單的 JSON 結構。請注意，JSON 切碎並不涵蓋對陣列內部鍵的查詢，因此您需要 JSON 索引來加速這些查詢。</p></li>
+<li><p><strong>JSON 索引</strong>更適合針對特定的基於關鍵值的查詢進行有針對性的優化，並且具有較低的存儲開銷。它適用於較簡單的 JSON 結構。請注意，JSON 切碎並不涵蓋對陣列內部鍵的查詢，因此您需要 JSON 索引來加速這些查詢。</p></li>
 </ul>
 <p>詳情請參閱<a href="/docs/zh-hant/json-field-overview.md#Next-Accelerate-JSON-queries">JSON 欄位概述</a>。</p></li>
 </ul>

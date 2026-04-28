@@ -35,7 +35,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JSONフィールドはMilvusのスキーマ定義フィールドで、構造化されたキーバリューのデータを格納します。値には、文字列、数値、ブーリアン、配列、または深くネストされたオブジェクトを含めることができます。</p>
+    </button></h2><p>JSONフィールドとは、Milvusでスキーマ定義されたフィールドで、構造化されたKey-Valueデータを格納します。値には、文字列、数値、ブーリアン、配列、または深くネストされたオブジェクトを含めることができます。</p>
 <p>以下はJSONフィールドがドキュメント内でどのように見えるかの例です：</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;metadata&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -76,7 +76,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JSON フィールドを使用するには、コレクションスキーマで<code translate="no">DataType</code> を<code translate="no">JSON</code> のように指定して明示的に定義します。</p>
+    </button></h2><p>JSON フィールドを使用するには、コレクションスキーマで<code translate="no">DataType</code> を<code translate="no">JSON</code> と指定して明示的に定義します。</p>
 <p>以下の例では、これらのフィールドを含むスキーマでコレクションを作成します：</p>
 <ul>
 <li><p>主キー (<code translate="no">product_id</code>)</p></li>
@@ -495,7 +495,7 @@ curl --request POST \
      <td><p>高い</p></td>
    </tr>
 </table>
-<p>¹<em>LHSとしての配列は</em>、フィルター式の左辺がJSON配列であることを意味する：</p>
+<p>¹<em>LHSとしての配列は</em>、例えばフィルター式の左辺がJSON配列であることを意味する：</p>
 <pre><code translate="no" class="language-plaintext">metadata[&quot;tags&quot;] == [&quot;clearance&quot;, &quot;summer_sale&quot;]
 json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 <button class="copy-code-btn"></button></code></pre>
@@ -916,7 +916,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JSONフィールドを挿入してインデックスを作成した後、JSONパス構文を使用した標準的なフィルター式を使用して、フィールドにフィルターをかけることができます。</p>
+    </button></h2><p>JSONフィールドを挿入してインデックスを作成した後、JSONパス構文を使用した標準的なフィルター式を使用して、JSONフィールドにフィルターをかけることができます。</p>
 <p>例えば</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -962,7 +962,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ここまでで、JSON フィールド内に構造化値を定義、挿入、およびオプションでインデックスを作成する方法を学びました。</p>
+    </button></h2><p>ここまでで、JSONフィールド内の構造化された値を定義、挿入、およびオプションでインデックスを作成する方法を学びました。</p>
 <p>実際のアプリケーションでワークフローを完成させるには、次のことも行う必要があります：</p>
 <ul>
 <li><p><strong>ベクトルフィールドにインデックスを作成する</strong>（コレクション内の各ベクトルフィールドに必須）。</p>
@@ -1040,7 +1040,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
         ></path>
       </svg>
     </button></h3><p>いいえ、JSONフィールドはデフォルト値をサポートしていません。ただし、フィールドの定義時に<code translate="no">nullable=True</code> を設定して、空の入力を許可することはできます。</p>
-<p>詳細は「<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Default</a>」を参照してください。</p>
+<p>詳細については、「<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Default</a>」を参照してください。</p>
 <h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">JSONフィールド・キーの命名規則はありますか？<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1139,7 +1139,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>いいえ、各 JSON パスがサポートする<strong>インデックスは 1 つだけです</strong>。データに一致する 1 つの<code translate="no">json_cast_type</code> を選択する必要があります。異なるキャスト・タイプで同じパスに複数のインデックスを作成することはサポートされていません。</p>
+    </button></h3><p>いいえ、各 JSON パスは<strong>1 つのインデックスしか</strong>サポートしません。データに一致する 1 つの<code translate="no">json_cast_type</code> を選択する必要があります。異なるキャスト・タイプで同じパスに複数のインデックスを作成することはサポートされていません。</p>
 <h3 id="What-if-values-on-a-JSON-path-have-inconsistent-types" class="common-anchor-header">JSON パス上の値に一貫性のない型がある場合はどうなりますか？<button data-href="#What-if-values-on-a-JSON-path-have-inconsistent-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1156,7 +1156,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
         ></path>
       </svg>
     </button></h3><p>エンティティ間で型が一貫していないと、<strong>部分的なインデックスが作成さ</strong>れる可能性があります。たとえば、<code translate="no">metadata[&quot;price&quot;]</code> が数値 (<code translate="no">99.99</code>) と文字列 (<code translate="no">&quot;99.99&quot;</code>) の両方として格納され、インデックスが<code translate="no">json_cast_type=&quot;double&quot;</code> で定義されている場合、数値のみがインデックス化されます。文字列形式のエントリはスキップされ、フィルタ結果には表示されません。</p>
-<h3 id="Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="common-anchor-header">インデックス付きキャスト型とは異なる型のフィルタを使用できますか？<button data-href="#Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
+<h3 id="Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="common-anchor-header">インデックス付きキャスト型とは異なる型のフィルタを使用できますか?<button data-href="#Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

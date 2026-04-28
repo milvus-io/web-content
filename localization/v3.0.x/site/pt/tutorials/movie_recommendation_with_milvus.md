@@ -31,7 +31,7 @@ title: Recomendação de filmes com o Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/movie_recommendation_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>Neste caderno, vamos explorar como gerar embeddings de descrições de filmes utilizando o OpenAI e aproveitar esses embeddings no Milvus para recomendar filmes que correspondam às suas preferências. Para melhorar os nossos resultados de pesquisa, vamos utilizar a filtragem para efetuar pesquisas de metadados. O conjunto de dados utilizado neste exemplo é proveniente dos conjuntos de dados HuggingFace e contém mais de 8000 entradas de filmes, proporcionando um vasto leque de opções para recomendações de filmes.</p>
+<p>Neste caderno, vamos explorar como gerar embeddings de descrições de filmes utilizando o OpenAI e aproveitar esses embeddings no Milvus para recomendar filmes que correspondam às suas preferências. Para melhorar os nossos resultados de pesquisa, vamos utilizar a filtragem para efetuar pesquisas de metadados. O conjunto de dados utilizado neste exemplo é proveniente dos conjuntos de dados HuggingFace e contém mais de 8.000 entradas de filmes, fornecendo um conjunto rico de opções para recomendações de filmes.</p>
 <h2 id="Dependencies-and-Environment" class="common-anchor-header">Dependências e ambiente<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,7 +93,7 @@ client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</sp
 <div class="alert note">
 <p>Tal como para o argumento de <code translate="no">url</code> e <code translate="no">token</code>:</p>
 <ul>
-<li>Definir o <code translate="no">uri</code> como um ficheiro local, por exemplo<code translate="no">./milvus.db</code>, é o método mais conveniente, pois utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
+<li>Definir o <code translate="no">uri</code> como um ficheiro local, por exemplo<code translate="no">./milvus.db</code>, é o método mais conveniente, uma vez que utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
 <li>Se tiver uma grande escala de dados, digamos mais de um milhão de vectores, pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Nesta configuração, use o endereço e a porta do servidor como seu uri, por exemplo,<code translate="no">http://localhost:19530</code>. Se ativar a funcionalidade de autenticação no Milvus, utilize "<your_username>:<your_password>" como token, caso contrário não defina o token.</li>
 <li>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste os campos <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">chave Api</a> no Zilliz Cloud.</li>
 </ul>

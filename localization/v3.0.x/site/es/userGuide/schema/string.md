@@ -249,7 +249,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>La indexación ayuda a mejorar la búsqueda y el rendimiento de las consultas. En Milvus, la indexación es obligatoria para los campos vectoriales pero opcional para los campos escalares.</p>
-<p>El siguiente ejemplo crea índices en el campo vectorial <code translate="no">embedding</code> y en el campo escalar <code translate="no">varchar_field1</code>, ambos utilizando el tipo de índice <code translate="no">AUTOINDEX</code>. Con este tipo, Milvus selecciona automáticamente el índice más adecuado en función del tipo de datos. También puede personalizar el tipo de índice y los parámetros para cada campo. Para más detalles, consulte <a href="/docs/es/index-explained.md">Explicación de los índices</a>.</p>
+<p>El siguiente ejemplo crea índices en el campo vectorial <code translate="no">embedding</code> y el campo escalar <code translate="no">varchar_field1</code>, ambos utilizando el tipo de índice <code translate="no">AUTOINDEX</code>. Con este tipo, Milvus selecciona automáticamente el índice más adecuado en función del tipo de datos. También puede personalizar el tipo de índice y los parámetros para cada campo. Para más detalles, consulte <a href="/docs/es/index-explained.md">Explicación de los índices</a>.</p>
 <div class="alert note">
 <p>También puede crear un índice <code translate="no">NGRAM</code> para acelerar el filtrado <code translate="no">LIKE</code> en los campos <code translate="no">VARCHAR</code>. Para más detalles, consulta <a href="/docs/es/ngram.md">NGRAM</a>.</p>
 </div>

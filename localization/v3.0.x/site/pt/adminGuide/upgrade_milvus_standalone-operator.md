@@ -78,7 +78,7 @@ title: Atualização do Milvus Standalone com o Milvus Operator
       </svg>
     </button></h3><p><strong>Requisitos do sistema:</strong></p>
 <ul>
-<li>Cluster Kubernetes com Milvus standalone implantado via Milvus Operator</li>
+<li>Cluster Kubernetes com Milvus autónomo implantado através do Milvus Operator</li>
 <li><code translate="no">kubectl</code> configurado para aceder ao seu cluster</li>
 <li>Helm 3.x instalado</li>
 </ul>
@@ -127,7 +127,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <p>Verificar a atualização do operador:</p>
 <pre><code translate="no" class="language-bash">kubectl -n milvus-operator get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Upgrade-your-Milvus-standalone" class="common-anchor-header">Passo 2: Atualizar o seu Milvus standalone<button data-href="#Step-2-Upgrade-your-Milvus-standalone" class="anchor-icon" translate="no">
+<h3 id="Step-2-Upgrade-your-Milvus-standalone" class="common-anchor-header">Passo 2: Atualização do seu Milvus standalone<button data-href="#Step-2-Upgrade-your-Milvus-standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

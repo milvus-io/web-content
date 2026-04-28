@@ -449,7 +449,7 @@ curl --request POST \
 <li><p><strong>JSON flat index</strong> - indicizza un intero oggetto JSON (o un sottoalbero) con inferenza automatica del tipo.</p></li>
 </ul>
 <div class="alert note">
-<p>L'indicizzazione dei campi JSON è <strong>facoltativa</strong>. È comunque possibile eseguire interrogazioni o filtrare per percorsi JSON senza un indice, ma le prestazioni potrebbero risultare più lente a causa di una ricerca brutale.</p>
+<p>L'indicizzazione dei campi JSON è <strong>facoltativa</strong>. È comunque possibile eseguire interrogazioni o filtri in base ai percorsi JSON senza un indice, ma ciò può comportare un rallentamento delle prestazioni a causa di una ricerca brutale.</p>
 </div>
 <h3 id="Choose-between-path-index-and-flat-index--Milvus-26x" class="common-anchor-header">Scegliere tra indice di percorso e indice piatto<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Choose-between-path-index-and-flat-index--Milvus-26x" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -530,9 +530,9 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Per creare un indice di percorso JSON, specificare:</p>
+    </button></h3><p>Per creare un indice di percorsi JSON, specificare:</p>
 <ul>
-<li><p><strong>Percorso JSON</strong> (<code translate="no">json_path</code>): Il percorso della chiave o del campo annidato all'interno dell'oggetto JSON che si vuole indicizzare.</p>
+<li><p><strong>Percorso JSON</strong> (<code translate="no">json_path</code>): Il percorso della chiave o del campo annidato all'interno dell'oggetto JSON che si desidera indicizzare.</p>
 <ul>
 <li><p>Esempio:</p>
 <ul>
@@ -859,7 +859,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Dopo aver definito i parametri degli indici, è possibile applicarli all'insieme utilizzando <code translate="no">create_index()</code>:</p>
+    </button></h3><p>Dopo aver definito i parametri degli indici, è possibile applicarli alla collezione utilizzando <code translate="no">create_index()</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_index(
@@ -1106,7 +1106,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p><strong>Indicizzazione numerica</strong>:</p>
 <p>Se un indice viene creato con <code translate="no">json_cast_type=&quot;double&quot;</code>, solo le condizioni di filtro numeriche (ad esempio, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">== 42</code>) sfrutteranno l'indice. Le condizioni non numeriche possono essere utilizzate per una scansione brutale.</p></li>
 <li><p><strong>Indicizzazione delle stringhe</strong>:</p>
-<p>Se un indice utilizza <code translate="no">json_cast_type=&quot;varchar&quot;</code>, solo le condizioni di filtro stringa trarranno vantaggio dall'indice; altri tipi possono essere sottoposti a una scansione brutale.</p></li>
+<p>Se un indice utilizza <code translate="no">json_cast_type=&quot;varchar&quot;</code>, solo le condizioni di filtro stringa trarranno vantaggio dall'indice; gli altri tipi possono essere sottoposti a una scansione brutale.</p></li>
 <li><p><strong>Indicizzazione booleana</strong>:</p>
 <p>L'indicizzazione booleana si comporta in modo simile all'indicizzazione delle stringhe, con l'utilizzo dell'indice solo quando la condizione corrisponde rigorosamente a vero o falso.</p></li>
 </ul>

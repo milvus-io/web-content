@@ -1,8 +1,8 @@
 ---
 id: kafka-connect-milvus.md
 summary: >-
-  Apache Kafka는 Milvus 및 Zilliz Cloud와 통합되어 벡터 데이터를 스트리밍합니다. 의미론적 검색, 추천 시스템, AI
-  기반 분석을 위한 실시간 파이프라인을 구축하기 위해 Kafka-Milvus 커넥터를 사용하는 방법을 알아보세요.
+  Apache Kafka는 Milvus 및 Zilliz Cloud와 통합되어 벡터 데이터를 스트리밍합니다. Kafka-Milvus 커넥터를
+  사용해 시맨틱 검색, 추천 시스템, AI 기반 분석을 위한 실시간 파이프라인을 구축하는 방법을 알아보세요.
 title: 실시간 벡터 데이터 수집을 위해 Apache Kafka®와 Milvus/Zilliz Cloud 연결하기
 ---
 <h1 id="Connect-Apache-Kafka®-with-MilvusZilliz-Cloud-for-Real-Time-Vector-Data-Ingestion" class="common-anchor-header">실시간 벡터 데이터 수집을 위해 Apache Kafka®와 Milvus/Zilliz Cloud 연결하기<button data-href="#Connect-Apache-Kafka®-with-MilvusZilliz-Cloud-for-Real-Time-Vector-Data-Ingestion" class="anchor-icon" translate="no">
@@ -183,4 +183,19 @@ topics=topic_0
 <li><p>Zilliz Cloud의 컬렉션에 엔티티가 삽입되었는지 확인합니다. 삽입에 성공하면 Zilliz Cloud에서 다음과 같이 표시됩니다:</p>
 <p><img translate="no" src="https://github.com/zilliztech/kafka-connect-milvus/raw/main/src/main/resources/images/insearted_entities.png" width="80%" /></p></li>
 </ol>
-<h3 id="Support" class="common-anchor-header">지원</h3><p>Kafka Connect Milvus 커넥터와 관련하여 도움이 필요하거나 궁금한 점이 있으면 언제든지 커넥터 관리자에게 문의하시기 바랍니다: <strong>이메일:</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>
+<h3 id="Support" class="common-anchor-header">지원<button data-href="#Support" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kafka Connect Milvus 커넥터와 관련하여 도움이 필요하거나 궁금한 점이 있으면 언제든지 커넥터 관리자에게 문의하시기 바랍니다: <strong>이메일:</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>

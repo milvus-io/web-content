@@ -68,19 +68,19 @@ title: Utiliser Milvus dans AnythingLLM
 <li>Ouvrez AnythingLLM et cliquez sur l'icône des <strong>paramètres</strong> dans le coin inférieur gauche.<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_dashboard.png" alt="Open Settings" class="doc-image" id="open-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_dashboard.png" alt="Open Settings" class="doc-image" id="open-settings" />
    </span> <span class="img-wrapper"> <span>Ouvrir les paramètres</span> </span></li>
 </ol>
 <ol start="2">
 <li><p>Dans le menu de gauche, sélectionnez <code translate="no">AI Providers</code> &gt; <code translate="no">Vector Database</code> <br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_config.png" alt="Select Vector Database" class="doc-image" id="select-vector-database" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_config.png" alt="Select Vector Database" class="doc-image" id="select-vector-database" />
    </span> <span class="img-wrapper"> <span>Sélectionnez Vector Database (Base de données vectorielle)</span> </span></p></li>
 <li><p>Dans la liste déroulante Vector Database Provider, sélectionnez <strong>Milvus</strong> (ou Zilliz Cloud)<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_vectordb.png" alt="Choose Milvus" class="doc-image" id="choose-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_vectordb.png" alt="Choose Milvus" class="doc-image" id="choose-milvus" />
    </span> <span class="img-wrapper"> <span>Choisissez Milvus</span> </span></p></li>
 <li><p>Remplissez les détails de votre connexion Milvus (pour Milvus local). Voici un exemple :</p>
 <ul>
@@ -89,16 +89,16 @@ title: Utiliser Milvus dans AnythingLLM
 <li><strong>Mot de passe Milvus</strong>: <code translate="no">Milvus</code>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_milvus.png" alt="Milvus Connection" class="doc-image" id="milvus-connection" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_milvus.png" alt="Milvus Connection" class="doc-image" id="milvus-connection" />
    </span> <span class="img-wrapper"> <span>Connexion Milvus</span> </span></li>
 </ul>
 <blockquote>
-<p>Si vous utilisez Zilliz Cloud, entrez votre point de terminaison de cluster et votre jeton API à la place :</p>
-</blockquote>
-<p>
+<p>Si vous utilisez Zilliz Cloud, entrez votre point de terminaison de cluster et votre jeton API à la place :<br>
+
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_zilliz_cloud.png" alt="Zilliz Cloud Connection" class="doc-image" id="zilliz-cloud-connection" />
-   </span> <span class="img-wrapper"> <span>Connexion Zilliz Cloud</span> </span></p></li>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_zilliz_cloud.png" alt="Zilliz Cloud Connection" class="doc-image" id="zilliz-cloud-connection" />
+   </span> <span class="img-wrapper"> <span>Connexion Zilliz Cloud</span> </span></p>
+</blockquote></li>
 <li><p>Cliquez sur <strong>Enregistrer les modifications</strong> pour appliquer vos paramètres.</p></li>
 </ol>
 <hr>
@@ -121,7 +121,7 @@ title: Utiliser Milvus dans AnythingLLM
 <li><p>Entrez dans votre espace de travail et cliquez sur l'icône de <strong>téléchargement</strong> pour ouvrir la boîte de dialogue de téléchargement des documents.<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_upload_file.png" alt="Open Upload Dialog" class="doc-image" id="open-upload-dialog" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_upload_file.png" alt="Open Upload Dialog" class="doc-image" id="open-upload-dialog" />
    </span> <span class="img-wrapper"> <span>Ouvrir la boîte de dialogue de téléchargement</span> </span></p></li>
 <li><p>Vous pouvez télécharger une grande variété de sources de données :</p>
 <ul>
@@ -130,17 +130,17 @@ title: Utiliser Milvus dans AnythingLLM
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_upload_interface.png" alt="Upload Documents" class="doc-image" id="upload-documents" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_upload_interface.png" alt="Upload Documents" class="doc-image" id="upload-documents" />
    </span> <span class="img-wrapper"> <span>Téléchargement de documents</span> </span></p></li>
 <li><p>Après avoir téléchargé ou récupéré des documents, cliquez sur <strong>Déplacer vers l'espace de travail</strong> pour déplacer le document ou les données dans votre espace de travail actuel.<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_move_to_workspace.png" alt="Move to Workspace" class="doc-image" id="move-to-workspace" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_move_to_workspace.png" alt="Move to Workspace" class="doc-image" id="move-to-workspace" />
    </span> <span class="img-wrapper"> <span>Déplacer vers l'espace de travail</span> </span></p></li>
 <li><p>Sélectionnez le document ou les données et cliquez sur <strong>Save and Embed</strong>. AnythingLLM se chargera automatiquement du découpage, de l'intégration et du stockage de votre contenu dans Milvus.<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_save_and_embed.png" alt="Save and Embed" class="doc-image" id="save-and-embed" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_save_and_embed.png" alt="Save and Embed" class="doc-image" id="save-and-embed" />
    </span> <span class="img-wrapper"> <span>Enregistrer et incorporer</span> </span></p></li>
 </ol>
 <hr>
@@ -163,7 +163,7 @@ title: Utiliser Milvus dans AnythingLLM
 <li>Retournez à l'interface de chat de l'espace de travail et posez des questions. AnythingLLM recherchera dans votre base de données vectorielle Milvus le contenu pertinent et utilisera le LLM pour générer des réponses.<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_chat.png" alt="Chat with Docs" class="doc-image" id="chat-with-docs" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_chat.png" alt="Chat with Docs" class="doc-image" id="chat-with-docs" />
    </span> <span class="img-wrapper"> <span>Chat avec Docs</span> </span></li>
 </ol>
 <hr>

@@ -36,7 +36,22 @@ title: 規模依賴性
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">增加每個 MinIO pod 的資源</h3><p>MinIO 是 Milvus 使用的物件儲存系統，可以增加每個 Pod 的 CPU 和記憶體資源。</p>
+    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">增加每個 MinIO pod 的資源<button data-href="#Increase-resources-per-MinIO-pod" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>MinIO 是 Milvus 使用的物件儲存系統，可以增加每個 Pod 的 CPU 和記憶體資源。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">resources:</span>
@@ -48,7 +63,22 @@ title: 規模依賴性
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>您也可以手動變更每個 MioIO Persistent Volume Claim (PVC) 的<code translate="no">spec.resources.requests.storage</code> 值，以增加 MioIO 群集的磁碟容量。請注意，您的預設儲存類別應允許卷擴充。</p>
-<h3 id="Add-an-extra-MinIO-server-pool-Recommended" class="common-anchor-header">新增一個額外的 MinIO 伺服器池 (建議)</h3><p>建議您為您的 Milvus 實例新增一個額外的 MioIO 伺服器池。</p>
+<h3 id="Add-an-extra-MinIO-server-pool-Recommended" class="common-anchor-header">新增一個額外的 MinIO 伺服器池 (建議)<button data-href="#Add-an-extra-MinIO-server-pool-Recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>建議您為您的 Milvus 實例新增一個額外的 MioIO 伺服器池。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yam;</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">zones:</span> <span class="hljs-number">2</span>
@@ -85,7 +115,22 @@ title: 規模依賴性
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resource-per-Kafka-broker-pod" class="common-anchor-header">增加每個 Kafka 代理 pod 的資源</h3><p>透過調整每個 Kafka 代理 pod 的 CPU 和記憶體資源來增強 Kafka 代理的容量。</p>
+    </button></h2><h3 id="Increase-resource-per-Kafka-broker-pod" class="common-anchor-header">增加每個 Kafka 代理 pod 的資源<button data-href="#Increase-resource-per-Kafka-broker-pod" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>透過調整每個 Kafka 代理 pod 的 CPU 和記憶體資源來增強 Kafka 代理的容量。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">kafka:</span>
   <span class="hljs-attr">resources:</span>
@@ -140,7 +185,7 @@ title: 規模依賴性
         ></path>
       </svg>
     </button></h2><p>Pulsar 將計算和儲存分開。您可以獨立增加 Pulsar 代理伺服器（運算）和 Pulsar 帳戶（儲存）的容量。</p>
-<h2 id="Increase-resources-per-Pulsar-broker-pod" class="common-anchor-header">增加每個 Pulsar 代理 pod 的資源<button data-href="#Increase-resources-per-Pulsar-broker-pod" class="anchor-icon" translate="no">
+<h2 id="Increase-resources-per-Pulsar-broker-pod" class="common-anchor-header">增加每個 Pulsar 經紀人 pod 的資源<button data-href="#Increase-resources-per-Pulsar-broker-pod" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -201,7 +246,22 @@ title: 規模依賴性
         <span class="hljs-attr">size:</span> <span class="hljs-string">20Gi</span>
         <span class="hljs-attr">storageClassName:</span> <span class="hljs-string">gp3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-an-extra-Pulsar-broker-pod" class="common-anchor-header">新增額外的 Pulsar 代理 pod</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+<h3 id="Add-an-extra-Pulsar-broker-pod" class="common-anchor-header">新增額外的 Pulsar 代理 pod<button data-href="#Add-an-extra-Pulsar-broker-pod" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">broker:</span>
     <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">3</span>
@@ -209,7 +269,22 @@ title: 規模依賴性
 <p>儲存檔案後，使用下列指令套用變更：</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-an-extra-Pulsar-bookie-pod-Recommended" class="common-anchor-header">新增一個額外的 Pulsar bookie pod (建議)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+<h3 id="Add-an-extra-Pulsar-bookie-pod-Recommended" class="common-anchor-header">新增一個額外的 Pulsar bookie pod (建議)<button data-href="#Add-an-extra-Pulsar-bookie-pod-Recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">bookkeeper:</span>
     <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">3</span>
@@ -232,7 +307,22 @@ title: 規模依賴性
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resources-per-etcd-pod-recommended" class="common-anchor-header">增加每個 etcd pod 的資源 (建議)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+    </button></h2><h3 id="Increase-resources-per-etcd-pod-recommended" class="common-anchor-header">增加每個 etcd pod 的資源 (建議)<button data-href="#Increase-resources-per-etcd-pod-recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">etcd:</span>
   <span class="hljs-attr">resources:</span>
      <span class="hljs-attr">limits:</span>
@@ -242,7 +332,22 @@ title: 規模依賴性
 <p>儲存檔案後，使用下列指令套用變更：</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-extra-etcd-pods" class="common-anchor-header">增加額外的 etcd pod</h3><p>etcd pod 的總數應為奇數。</p>
+<h3 id="Add-extra-etcd-pods" class="common-anchor-header">增加額外的 etcd pod<button data-href="#Add-extra-etcd-pods" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>etcd pod 的總數應為奇數。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">etcd:</span>
   <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">5</span>

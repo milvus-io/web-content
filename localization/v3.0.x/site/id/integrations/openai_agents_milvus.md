@@ -53,7 +53,7 @@ title: 'Integrasi Milvus dengan Agen OpenAI: Panduan Langkah-demi-Langkah'
 <p>Jika dikombinasikan dengan Python, primitif-primitif ini cukup kuat untuk mengekspresikan hubungan yang kompleks antara alat dan agen, dan memungkinkan Anda untuk membangun aplikasi dunia nyata tanpa kurva pembelajaran yang curam. Selain itu, SDK ini dilengkapi dengan penelusuran bawaan yang memungkinkan Anda memvisualisasikan dan men-debug alur agen Anda, serta mengevaluasinya dan bahkan menyempurnakan model untuk aplikasi Anda.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/openai-agent.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openai-agent.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -128,7 +128,22 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 <li>Bidang teks untuk menyimpan konten dokumen kita</li>
 <li>Bidang vektor jarang untuk menyimpan sematan BM25</li>
 </ul>
-<h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Pencarian Teks Lengkap di Milvus 2.5</h3><ul>
+<h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Pencarian Teks Lengkap di Milvus 2.5<button data-href="#Full-Text-Search-in-Milvus-25" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Sistem terpadu untuk pencarian vektor dan kata kunci (API terpadu)</li>
 <li>Algoritme BM25 jarang bawaan (serupa dengan yang digunakan Elasticsearch tetapi berbasis vektor)</li>
 <li>Tidak perlu membuat sematan secara manual untuk pencarian kata kunci</li>
@@ -328,7 +343,7 @@ client.insert(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'insert_count': 37, 'ids': [456486814660619140, 456486814660619141, 456486814660619142, 456486814660619143, 456486814660619144, 456486814660619145, 456486814660619146, 456486814660619147, 456486814660619148, 456486814660619149, 456486814660619150, 456486814660619151, 456486814660619152, 456486814660619153, 456486814660619154, 456486814660619155, 456486814660619156, 456486814660619157, 456486814660619158, 456486814660619159, 456486814660619160, 456486814660619161, 456486814660619162, 456486814660619163, 456486814660619164, 456486814660619165, 456486814660619166, 456486814660619167, 456486814660619168, 456486814660619169, 456486814660619170, 456486814660619171, 456486814660619172, 456486814660619173, 456486814660619174, 456486814660619175, 456486814660619176], 'cost': 0}
 </code></pre>
-<h2 id="Defining-Output-Types-for-Structured-Results" class="common-anchor-header">Mendefinisikan Jenis Keluaran untuk Hasil Terstruktur<button data-href="#Defining-Output-Types-for-Structured-Results" class="anchor-icon" translate="no">
+<h2 id="Defining-Output-Types-for-Structured-Results" class="common-anchor-header">Menentukan Jenis Keluaran untuk Hasil Terstruktur<button data-href="#Defining-Output-Types-for-Structured-Results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

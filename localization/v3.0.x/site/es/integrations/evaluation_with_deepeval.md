@@ -24,7 +24,7 @@ title: Evaluación con DeepEval
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/evaluation_with_deepeval.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Esta guía muestra cómo utilizar <a href="https://docs.confident-ai.com/">DeepEval</a> para evaluar un sistema de generación mejorada por recuperación (RAG) basado en <a href="https://milvus.io/">Milvus</a>.</p>
 <p>El sistema RAG combina un sistema de recuperación con un modelo generativo para generar nuevo texto basado en una petición dada. En primer lugar, el sistema recupera documentos relevantes de un corpus utilizando Milvus y, a continuación, utiliza un modelo generativo para generar un nuevo texto basado en los documentos recuperados.</p>
-<p>DeepEval es un marco de trabajo que le ayuda a evaluar sus procesos RAG. Existen herramientas y marcos de trabajo que ayudan a construir estos pipelines, pero evaluarlos y cuantificar su rendimiento puede ser difícil. Aquí es donde entra DeepEval.</p>
+<p>DeepEval es un marco de trabajo que le ayuda a evaluar sus procesos GAR. Existen herramientas y marcos de trabajo que ayudan a construir estos pipelines, pero evaluarlos y cuantificar su rendimiento puede ser difícil. Aquí es donde entra DeepEval.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -329,7 +329,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
       </svg>
     </button></h2><p>Cuando se evalúa un recuperador en sistemas de grandes modelos lingüísticos (LLM), es crucial evaluar lo siguiente:</p>
 <ol>
-<li><p><strong>Relevancia de la clasificación</strong>: La eficacia con la que el recuperador prioriza la información relevante sobre los datos irrelevantes.</p></li>
+<li><p><strong>Relevancia de la clasificación</strong>: La eficacia con la que el recuperador da prioridad a la información relevante frente a los datos irrelevantes.</p></li>
 <li><p><strong>Recuperación contextual</strong>: La capacidad de capturar y recuperar información contextualmente relevante basada en la entrada.</p></li>
 <li><p><strong>Equilibrio</strong>: Cómo gestiona el recuperador el tamaño de los fragmentos de texto y el alcance de la recuperación para minimizar las irrelevancias.</p></li>
 </ol>
@@ -395,7 +395,7 @@ Evaluating 3 test case(s) in parallel: |██████████|100% (3/3
     </button></h2><p>Para evaluar la calidad de los resultados generados en grandes modelos lingüísticos (LLM), es importante centrarse en dos aspectos clave:</p>
 <ol>
 <li><p><strong>Relevancia</strong>: Evaluar si la instrucción guía eficazmente al LLM para generar respuestas útiles y adecuadas al contexto.</p></li>
-<li><p><strong>Fidelidad</strong>: Medir la exactitud del resultado, asegurándose de que el modelo produce información que es factualmente correcta y libre de alucinaciones o contradicciones. El contenido generado debe coincidir con la información factual proporcionada en el contexto de recuperación.</p></li>
+<li><p><strong>Fidelidad</strong>: Mide la exactitud del resultado, asegurando que el modelo produce información que es factualmente correcta y libre de alucinaciones o contradicciones. El contenido generado debe coincidir con la información factual proporcionada en el contexto de recuperación.</p></li>
 </ol>
 <p>Todos estos factores garantizan que los resultados sean pertinentes y fiables.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> deepeval.metrics <span class="hljs-keyword">import</span> AnswerRelevancyMetric, FaithfulnessMetric

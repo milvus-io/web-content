@@ -88,7 +88,7 @@ title: Instalar o Milvus Nodejs SDK
 yarn add @zilliz/milvus2-sdk-node
 <button class="copy-code-btn"></button></code></pre>
 <p>Isto irá descarregar o sdk do Milvus node.js e adicionar uma entrada de dependência no seu ficheiro package.json.</p>
-<h2 id="Whats-next" class="common-anchor-header">O que vem a seguir<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">O que se segue<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

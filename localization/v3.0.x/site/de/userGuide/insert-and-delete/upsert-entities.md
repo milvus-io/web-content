@@ -53,7 +53,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Eine Upsert-Anfrage, die im Override-Modus arbeitet, kombiniert einen Einfüge- und einen Löschvorgang. Wenn eine <code translate="no">upsert</code> -Anfrage für eine bestehende Entität empfangen wird, fügt Milvus die in der Nutzlast der Anfrage enthaltenen Daten ein und löscht gleichzeitig die bestehende Entität mit dem ursprünglichen Primärschlüssel, der in den Daten angegeben ist.</p>
+    </button></h3><p>Eine Upsert-Anfrage, die im Override-Modus arbeitet, kombiniert einen Einfüge- und einen Löschvorgang. Wenn eine <code translate="no">upsert</code> Anfrage für eine bestehende Entität empfangen wird, fügt Milvus die in der Nutzlast der Anfrage enthaltenen Daten ein und löscht gleichzeitig die bestehende Entität mit dem in den Daten angegebenen ursprünglichen Primärschlüssel.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
@@ -486,7 +486,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Das folgende Codebeispiel zeigt, wie man Entitäten mit teilweisen Aktualisierungen einfügt. Geben Sie nur die zu aktualisierenden Felder und ihre neuen Werte an, zusammen mit dem expliziten Flag für die teilweise Aktualisierung.</p>
+    </button></h2><p>Das folgende Codebeispiel zeigt, wie man Entitäten mit teilweisen Aktualisierungen einfügt. Geben Sie nur die zu aktualisierenden Felder und ihre neuen Werte an, zusammen mit dem expliziten Flag für partielle Aktualisierung.</p>
 <p>Im folgenden Beispiel wird das Feld <code translate="no">issue</code> der Entitäten, die in der Upsert-Anforderung angegeben sind, auf die in der Anforderung enthaltenen Werte aktualisiert.</p>
 <div class="alert note">
 <p>Wenn Sie ein Upsert im Merge-Modus durchführen, stellen Sie sicher, dass die an der Anforderung beteiligten Entitäten den gleichen Satz von Feldern haben. Angenommen, es gibt zwei oder mehr Entitäten, die upserted werden sollen, wie im folgenden Codeschnipsel gezeigt, ist es wichtig, dass sie identische Felder enthalten, um Fehler zu vermeiden und die Datenintegrität zu wahren.</p>

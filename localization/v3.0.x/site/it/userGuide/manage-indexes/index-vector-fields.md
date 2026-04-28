@@ -22,6 +22,9 @@ title: Indicizzare i campi vettoriali
         ></path>
       </svg>
     </button></h1><p>Questa guida illustra le operazioni di base per la creazione e la gestione degli indici sui campi vettoriali di una collezione.</p>
+<div class="alert warning">
+<p>Questa pagina è stata deprecata. Per le ultime implementazioni, consultare <a href="/docs/it/ivf-flat.md">IVF_FLAT</a>, <a href="/docs/it/hnsw.md">HNSW</a> e altro.</p>
+</div>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +41,7 @@ title: Indicizzare i campi vettoriali
         ></path>
       </svg>
     </button></h2><p>Sfruttando i metadati memorizzati in un file indice, Milvus organizza i dati in una struttura specializzata, facilitando il rapido recupero delle informazioni richieste durante le ricerche o le interrogazioni.</p>
-<p>Milvus offre diversi tipi di indice e metriche per ordinare i valori dei campi per una ricerca efficiente delle somiglianze. La tabella seguente elenca i tipi di indice e le metriche supportate per i diversi tipi di campi vettoriali. Attualmente Milvus supporta diversi tipi di dati vettoriali, tra cui embedding in virgola mobile (spesso noti come vettori in virgola mobile o vettori densi), embedding binari (noti anche come vettori binari) e embedding sparsi (noti anche come vettori sparsi). Per ulteriori informazioni, consultare <a href="/docs/it/index.md">Indice in-memory</a> e <a href="/docs/it/metric.md">metriche di somiglianza</a>.</p>
+<p>Milvus offre diversi tipi di indice e metriche per ordinare i valori dei campi per una ricerca efficiente delle somiglianze. La tabella seguente elenca i tipi di indice e le metriche supportate per i diversi tipi di campi vettoriali. Attualmente Milvus supporta vari tipi di dati vettoriali, tra cui embedding in virgola mobile (spesso noti come vettori in virgola mobile o vettori densi), embedding binari (noti anche come vettori binari) e embedding sparsi (noti anche come vettori sparsi). Per ulteriori informazioni, consultare <a href="/docs/it/index.md">Indice in-memory</a> e <a href="/docs/it/metric.md">metriche di somiglianza</a>.</p>
 <div class="filter">
  <a href="#floating">Incorporamenti in virgola mobile</a> <a href="#binary">Incorporamenti binari</a> <a href="#sparse">Incorporamenti sparsi</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
@@ -84,10 +87,19 @@ title: Indicizzare i campi vettoriali
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky"><ul><li>INDICE SPARSE_INVERTITO</li><li>SPARSE_WAND</li></ul></td>
+    <td class="tg-0pky">INDICE SPARSO_INVERTITO</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td class="tg-0pky">BM25</td>
+    <td class="tg-0pky">INDICE SPARSO_INVERTITO</td>
   </tr>
 </tbody>
 </table>
+<div class="alert note">
+<p>A partire da Milvus 2.5.4, <code translate="no">SPARSE_WAND</code> viene deprecato. Si raccomanda invece di utilizzare <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> per ottenere l'equivalenza e mantenere la compatibilità. Per ulteriori informazioni, consultare <a href="/docs/it/sparse_vector.md#Set-index-params-for-vector-field">Vettore sparso</a>.</p>
+</div>
 </div>
 <p>Si consiglia di creare indici sia per il campo vettoriale che per i campi scalari a cui si accede di frequente.</p>
 <h2 id="Preparations" class="common-anchor-header">Preparazione<button data-href="#Preparations" class="anchor-icon" translate="no">
@@ -322,7 +334,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>I parametri di regolazione fine per il tipo di indice specificato. Per i dettagli sulle chiavi e gli intervalli di valori possibili, consultare <a href="https://milvus.io/docs/index.md">Indice in memoria</a>.</td>
+      <td>I parametri di regolazione fine per il tipo di indice specificato. Per i dettagli sulle chiavi e gli intervalli di valori possibili, fare riferimento a <a href="https://milvus.io/docs/index.md">Indice in memoria</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">collection_name</code></td>

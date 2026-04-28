@@ -179,7 +179,22 @@ result_nodes = retriever.retrieve(<span class="hljs-string">&quot;Books about li
 Life
 {'author': 'Keith Richards', 'genre': 'Memoir', 'year': 2010}
 </code></pre>
-<h3 id="Multiple-Metdata-Filters" class="common-anchor-header">여러 메타데이터 필터</h3><p>여러 메타데이터 필터를 결합하여 더 복잡한 쿼리를 만들 수도 있습니다. LlamaIndex는 <code translate="no">AND</code> 및 <code translate="no">OR</code> 조건을 모두 지원하여 필터를 결합할 수 있습니다. 이를 통해 메타데이터 속성에 따라 문서를 보다 정확하고 유연하게 검색할 수 있습니다.</p>
+<h3 id="Multiple-Metdata-Filters" class="common-anchor-header">여러 메타데이터 필터<button data-href="#Multiple-Metdata-Filters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>여러 메타데이터 필터를 결합하여 더 복잡한 쿼리를 만들 수도 있습니다. LlamaIndex는 <code translate="no">AND</code> 및 <code translate="no">OR</code> 조건을 모두 지원하여 필터를 결합할 수 있습니다. 이를 통해 메타데이터 속성에 따라 문서를 보다 정확하고 유연하게 검색할 수 있습니다.</p>
 <p><strong>조건 <code translate="no">AND</code></strong></p>
 <p>1979년부터 2010년 사이에 출판된 책(특히 1979년 &lt;연도 ≤ 2010년)에 대한 필터링 예제를 사용해 보세요:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core.vector_stores <span class="hljs-keyword">import</span> FilterCondition

@@ -191,7 +191,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">adapt_for_cpu</code></p></td>
-     <td><p>Decide se a GPU deve ser usada para construção de índice e a CPU para pesquisa.</p><p>A definição deste parâmetro para <code translate="no">"true"</code> requer a presença do parâmetro <code translate="no">ef</code> nos pedidos de pesquisa.</p></td>
+     <td><p>Decide se a GPU deve ser usada para a construção do índice e a CPU para a pesquisa.</p><p>A definição deste parâmetro para <code translate="no">"true"</code> requer a presença do parâmetro <code translate="no">ef</code> nos pedidos de pesquisa.</p></td>
      <td><p><code translate="no">"false"</code></p></td>
    </tr>
 </table>
@@ -224,7 +224,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">search_width</code></p></td>
-     <td><p>Especifica o número de pontos de entrada no gráfico CAGRA durante a pesquisa. Aumentar este valor pode aumentar a recordação, mas pode afetar o desempenho da pesquisa (por exemplo, 1, 2, 4, 8, 16, 32).</p></td>
+     <td><p>Especifica o número de pontos de entrada no gráfico CAGRA durante a pesquisa. Aumentar este valor pode melhorar a recordação, mas pode afetar o desempenho da pesquisa (por exemplo, 1, 2, 4, 8, 16, 32).</p></td>
      <td><p>Vazio</p></td>
    </tr>
    <tr>

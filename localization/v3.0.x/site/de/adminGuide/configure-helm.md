@@ -54,7 +54,7 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">Laden Sie</a> <code translate="no">values.yaml</code> direkt oder mit dem folgenden Befehl<a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">herunter</a>.</p>
+    </button></h3><p><a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">Laden Sie</a> <code translate="no">values.yaml</code> direkt oder mit dem folgenden Befehl<a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">herunter</a>.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">Ändern Sie die Konfigurationsdatei<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
@@ -126,9 +126,8 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
             <li><a href="/docs/de/configure_indexcoord.md">Index-Koordinate</a></li>
             <li><a href="/docs/de/configure_metastore.md">Metaspeicher</a></li>
             <li><a href="/docs/de/configure_mq.md">Nachrichten-Warteschlange</a></li>
-            <li><a href="/docs/de/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/de/configure_tikv.md">Tikv</a></li>
-            <li><a href="/docs/de/configure_trace.md">Trace</a></li>
+            <li><a href="/docs/de/configure_trace.md">Verfolgung</a></li>
             <li><a href="/docs/de/configure_quotaandlimits.md">Quoten und Limits</a></li>
         </ul>
     </td>

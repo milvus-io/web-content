@@ -40,7 +40,7 @@ summary: >-
     </button></h2><p>A coleção de destino requer o mapeamento dos dados de origem para o seu esquema. O diagrama abaixo mostra como os dados de origem aceitáveis são mapeados para o esquema de uma coleção de destino.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
    </span> <span class="img-wrapper"> <span>Mapear dados para o esquema</span> </span></p>
 <p>Deve examinar cuidadosamente os seus dados e conceber o esquema da coleção de destino em conformidade.</p>
 <p>Tomando como exemplo os dados JSON no diagrama acima, existem duas entidades na lista de linhas, cada linha com seis campos. O esquema da coleção inclui seletivamente quatro: <strong>id</strong>, <strong>vetor</strong>, <strong>scalar_1</strong> e <strong>scalar_2</strong>.</p>
@@ -224,7 +224,7 @@ schema.verify()
     </button></h2><p><strong>BulkWriter</strong> é uma ferramenta concebida para converter conjuntos de dados brutos num formato adequado para importação através da API de importação RESTful. Ele oferece dois tipos de gravadores:</p>
 <ul>
 <li><strong>LocalBulkWriter</strong>: Lê o conjunto de dados designado e o transforma em um formato fácil de usar.</li>
-<li><strong>RemoteBulkWriter</strong>: Executa a mesma tarefa que o LocalBulkWriter, mas transfere adicionalmente os arquivos de dados convertidos para um bucket de armazenamento de objeto remoto especificado.</li>
+<li><strong>RemoteBulkWriter</strong>: Executa a mesma tarefa que o LocalBulkWriter, mas transfere adicionalmente os arquivos de dados convertidos para um bucket de armazenamento de objetos remoto especificado.</li>
 </ul>
 <p><strong>RemoteBulkWriter</strong> difere de <strong>LocalBulkWriter</strong> porque <strong>RemoteBulkWriter</strong> transfere os arquivos de dados convertidos para um bucket de armazenamento de objetos de destino.</p>
 <h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">Configurar o LocalBulkWriter<button data-href="#Set-up-LocalBulkWriter" class="anchor-icon" translate="no">
@@ -285,7 +285,7 @@ writer = LocalBulkWriter(
 <li>Referenciar o esquema criado em <code translate="no">CollectionSchema()</code>.</li>
 <li>Definir o diretório de saída em <code translate="no">withLocalPath()</code>.</li>
 <li>Definir o tipo de ficheiro de saída em <code translate="no">withFileType()</code>.</li>
-<li>Se o conjunto de dados contiver um grande número de registos, é aconselhável segmentar os dados definindo <code translate="no">withChunkSize()</code> para um valor adequado.</li>
+<li>Se o conjunto de dados contiver um grande número de registos, é aconselhável segmentar os dados, definindo <code translate="no">withChunkSize()</code> para um valor adequado.</li>
 </ul>
 <p>Para obter detalhes sobre as definições de parâmetros, consulte LocalBulkWriter na referência do SDK.</p>
 </div>

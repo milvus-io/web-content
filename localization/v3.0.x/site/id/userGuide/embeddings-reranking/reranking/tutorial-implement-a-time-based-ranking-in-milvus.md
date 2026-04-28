@@ -87,7 +87,7 @@ collection_name = <span class="hljs-string">&quot;news_articles_tutorial&quot;</
 <span class="hljs-comment"># Clean up any existing collection with the same name</span>
 milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-1-Design-the-schema" class="common-anchor-header">Langkah 1: Merancang skema<button data-href="#Step-1-Design-the-schema" class="anchor-icon" translate="no">
+<h2 id="Step-1-Design-the-schema" class="common-anchor-header">Langkah 1: Rancang skema<button data-href="#Step-1-Design-the-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -165,7 +165,7 @@ documents = SimpleDirectoryReader(
       </svg>
     </button></h3><p>Ahora que tenemos un documento, podemos crear un índice e insertar el documento. Para el índice utilizaremos un MilvusVectorStore. MilvusVectorStore toma algunos argumentos:</p>
 <h4 id="basic-args" class="common-anchor-header">argumentos básicos</h4><ul>
-<li><code translate="no">uri (str, optional)</code>: El URI para conectarse, viene en la forma de "https://address:port" para Milvus o Zilliz Cloud service, o "path/to/local/milvus.db" para el Milvus local lite. Por defecto es "./milvus_llamaindex.db".</li>
+<li><code translate="no">uri (str, optional)</code>: El URI al que conectarse, viene en forma de "https://address:port" para Milvus o Zilliz Cloud service, o "path/to/local/milvus.db" para el Milvus local lite. Por defecto es "./milvus_llamaindex.db".</li>
 <li><code translate="no">token (str, optional)</code>: El token para iniciar sesión. Vacío si no se utiliza rbac, si se utiliza rbac lo más probable es que sea "username:password".</li>
 <li><code translate="no">collection_name (str, optional)</code>: El nombre de la colección donde se almacenarán los datos. Por defecto es "llamalection".</li>
 <li><code translate="no">overwrite (bool, optional)</code>: Si se sobrescribirá la colección existente con el mismo nombre. Por defecto es False.</li>

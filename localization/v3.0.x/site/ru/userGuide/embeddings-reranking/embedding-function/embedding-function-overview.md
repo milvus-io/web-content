@@ -4,10 +4,10 @@ title: Обзор функций встраиванияCompatible with Milvus 2.
 summary: >-
   Модуль Function в Milvus позволяет преобразовывать необработанные текстовые
   данные в векторные вкрапления, автоматически вызывая внешних провайдеров
-  вкраплений (например, OpenAI, AWS Bedrock, Google Vertex AI и т. д.).
-  Благодаря модулю Function вам больше не нужно вручную взаимодействовать с API
-  для встраивания - весь процесс отправки запросов провайдерам, получения
-  встраиваний и их хранения в ваших коллекциях выполняет модуль Milvus. Для
+  вкраплений (например, OpenAI, AWS Bedrock, Google Vertex AI и т. д.). С
+  модулем Function вам больше не нужно вручную взаимодействовать с API для
+  встраивания - Milvus сам управляет всем процессом отправки запросов
+  провайдерам, получения встраиваний и их хранения в ваших коллекциях. Для
   семантического поиска вам нужно предоставить только исходные данные запроса,
   но не вектор запроса. Milvus генерирует вектор запроса на основе той же
   модели, которую вы использовали для встраивания, сравнивает его с сохраненными
@@ -151,7 +151,7 @@ beta: Milvus 2.6.x
     </button></h2><p>На следующей схеме показано, как функция работает в Milvus.</p>
 <ol>
 <li><p><strong>Входной текст</strong>: Пользователи вводят в Milvus исходные данные (например, документы).</p></li>
-<li><p><strong>Генерация вкраплений</strong>: Модуль Function в Milvus автоматически вызывает сконфигурированный поставщик моделей для преобразования исходных данных в векторные вкрапления.</p></li>
+<li><p><strong>Генерация вкраплений</strong>: Модуль Function в Milvus автоматически вызывает настроенный поставщик моделей для преобразования исходных данных в векторные вкрапления.</p></li>
 <li><p><strong>Хранить эмбеддинги</strong>: Полученные эмбеддинги хранятся в явно определенных векторных полях в коллекциях Milvus.</p></li>
 <li><p><strong>Запрашивать текст</strong>: Пользователи отправляют текстовые запросы в Milvus.</p></li>
 <li><p><strong>Семантический поиск</strong>: Milvus преобразует запросы в векторные вкрапления, проводит поиск по сходству с хранящимися вкраплениями и извлекает релевантные результаты.</p></li>
@@ -159,7 +159,7 @@ beta: Milvus 2.6.x
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
    </span> <span class="img-wrapper"> <span>Обзор функций встраивания</span> </span></p>
 <h2 id="Configure-credentials" class="common-anchor-header">Настройка учетных данных<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -182,12 +182,12 @@ beta: Milvus 2.6.x
 <li><p><strong>Файл конфигурации</strong> (<code translate="no">milvus.yaml</code>):</p>
 <p>Пример в этой теме демонстрирует <strong>рекомендуемую настройку</strong> с помощью <code translate="no">milvus.yaml</code>.</p></li>
 <li><p><strong>Переменные среды</strong>:</p>
-<p>Подробные сведения о настройке учетных данных с помощью переменных окружения см. в документации поставщика службы встраивания (например, <a href="/docs/ru/openai.md">OpenAI</a> или <a href="/docs/ru/azure-openai.md">Azure OpenAI</a>).</p></li>
+<p>Подробную информацию о настройке учетных данных с помощью переменных окружения см. в документации поставщика службы встраивания (например, <a href="/docs/ru/openai.md">OpenAI</a> или <a href="/docs/ru/azure-openai.md">Azure OpenAI</a>).</p></li>
 </ul>
 <p>На следующей схеме показан процесс настройки учетных данных через файл конфигурации Milvus (<code translate="no">milvus.yaml</code>) и последующего вызова функции в Milvus.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
    </span> <span class="img-wrapper"> <span>Переполнение конфигурации учетных данных</span> </span></p>
 <h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Шаг 1: Добавьте учетные данные в файл конфигурации Milvus<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"

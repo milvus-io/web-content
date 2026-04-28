@@ -41,14 +41,14 @@ beta: Milvus 3.0.x
 <p>Este fluxo de trabalho "traga os seus dados para o Milvus" cria dados redundantes que são difíceis de sincronizar e aumenta a carga de manutenção da engenharia para garantir a consistência dos dados.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/yqxwwpq3vheya4b8398cwopnnyn.png" alt="Yqxwwpq3vheya4b8398cwopnnyn" class="doc-image" id="yqxwwpq3vheya4b8398cwopnnyn" />
-   </span> <span class="img-wrapper"> <span>Yqxwwpq3vheya4b8398cwopnnyn</span> </span></p>
-<p>Para resolver estes problemas, o Milvus fornece colecções externas que lhe permitem aceder aos seus dados armazenados externamente a partir do Milvus sem se preocupar com a sincronização de dados e com os pipelines ETL.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" />
+   </span> <span class="img-wrapper"> <span>Fluxo de trabalho "Bring data to compute</span> </span></p>
+<p>Para resolver estes problemas, o Milvus fornece colecções externas que lhe permitem aceder aos seus dados armazenados externamente a partir do Milvus sem se preocupar com a sincronização dos dados e com os pipelines ETL.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/q6f4wtcd2h3pnkbnmxncw3urn3f.png" alt="Q6f4wtcd2h3pnkbnmxncw3urn3f" class="doc-image" id="q6f4wtcd2h3pnkbnmxncw3urn3f" />
-   </span> <span class="img-wrapper"> <span>Q6f4wtcd2h3pnkbnmxncw3urn3f</span> </span></p>
-<p>Uma vez criada, uma coleção externa pode aceder diretamente aos seus dados e mantê-los no mesmo local onde os armazena. Em segundo plano, o Milvus cria ficheiros de manifesto para registar os mapeamentos entre os metadados do Milvus e as linhas dos ficheiros de dados externos. Depois que os arquivos de manifesto estiverem prontos, você pode criar índices na coleção externa como faria em qualquer coleção gerenciada.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" />
+   </span> <span class="img-wrapper"> <span>Trazer a computação para o fluxo de trabalho de dados</span> </span></p>
+<p>Uma vez criada, uma coleção externa pode aceder diretamente aos seus dados e mantê-los no mesmo local onde os armazena. Em segundo plano, o Milvus cria ficheiros de manifesto para registar os mapeamentos entre os metadados do Milvus e as linhas nos ficheiros de dados externos. Depois que os arquivos de manifesto estiverem prontos, você pode criar índices na coleção externa como faria em qualquer coleção gerenciada.</p>
 <p>Quando os seus dados são alterados, a ativação manual de uma atualização de sub-segundo actualiza os metadados, mantendo o Milvus sempre atualizado.</p>
 <h2 id="Limits--restrictions" class="common-anchor-header">Limites e restrições<button data-href="#Limits--restrictions" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -3,8 +3,8 @@ id: streaming_service.md
 title: Servizio di streaming
 summary: >-
   Il servizio di streaming è un concetto per il modulo del sistema di streaming
-  interno di Milvus, costruito attorno al registro di scrittura (WAL) per
-  supportare varie funzioni legate allo streaming.
+  interno di Milvus, costruito intorno al Write-Ahead Log (WAL) per supportare
+  varie funzioni legate allo streaming.
 ---
 <h1 id="Streaming-Service" class="common-anchor-header">Servizio di streaming<button data-href="#Streaming-Service" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,10 +21,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Il <strong>servizio di streaming</strong> è un concetto per il modulo interno del sistema di streaming di Milvus, costruito attorno al registro di scrittura (WAL) per supportare varie funzioni legate allo streaming. Queste includono l'ingestione/sottoscrizione di dati in streaming, il ripristino dello stato del cluster in caso di errore, la conversione dei dati in streaming in dati storici e le query sui dati in crescita. Dal punto di vista architetturale, il servizio di streaming è composto da tre componenti principali:</p>
+    </button></h1><p>Il <strong>servizio di streaming</strong> è un concetto per il modulo interno del sistema di streaming di Milvus, costruito intorno al registro di scrittura (WAL) per supportare varie funzioni legate allo streaming. Queste includono l'ingestione/sottoscrizione di dati in streaming, il ripristino dello stato del cluster in caso di errore, la conversione dei dati in streaming in dati storici e le query sui dati in crescita. Dal punto di vista architetturale, il servizio di streaming è composto da tre componenti principali:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/streaming_distributed_arch.png" alt="Streaming Distributed Arc" class="doc-image" id="streaming-distributed-arc" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/streaming_distributed_arch.png" alt="Streaming Distributed Arc" class="doc-image" id="streaming-distributed-arc" />
    </span> <span class="img-wrapper"> <span>Arco distribuito di streaming</span> </span></p>
 <ul>
 <li><p><strong>Coordinatore di streaming</strong>: Un componente logico nel nodo coordinatore. Utilizza Etcd per la scoperta dei servizi per individuare i nodi di streaming disponibili ed è responsabile del binding del WAL ai nodi di streaming corrispondenti. Registra anche un servizio per esporre la topologia di distribuzione del WAL, consentendo ai client di streaming di conoscere il nodo di streaming appropriato per un determinato WAL.</p></li>
@@ -54,7 +54,7 @@ summary: >-
 <p>L'ordine dei messaggi in Milvus può assomigliare al seguente:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/message_order.png" alt="Message Order" class="doc-image" id="message-order" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/message_order.png" alt="Message Order" class="doc-image" id="message-order" />
    </span> <span class="img-wrapper"> <span>Ordine dei messaggi</span> </span></p>
 <h2 id="WAL-Component" class="common-anchor-header">Componente WAL<button data-href="#WAL-Component" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -71,7 +71,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per supportare la scalabilità orizzontale su larga scala, il WAL di Milvus non è un singolo file di log, ma un insieme di più log. Ciascun registro può supportare in modo indipendente la funzionalità di streaming per più canali V. In qualsiasi momento, un componente WAL può operare <strong>esattamente</strong> su <strong>un nodo di streaming</strong>; questo vincolo è garantito sia da un meccanismo di recinzione dello storage wal sottostante sia dal coordinatore dello streaming.</p>
+    </button></h2><p>Per supportare la scalabilità orizzontale su larga scala, il WAL di Milvus non è un singolo file di log, ma un insieme di più log. Ogni registro può supportare in modo indipendente la funzionalità di streaming per più canali V. In qualsiasi momento, un componente WAL può operare <strong>esattamente</strong> su <strong>un nodo di streaming</strong>; questo vincolo è garantito sia da un meccanismo di recinzione dello storage wal sottostante sia dal coordinatore dello streaming.</p>
 <p>Altre caratteristiche del componente WAL sono:</p>
 <ul>
 <li><p><strong>Gestione del ciclo di vita del segmento</strong>: In base a criteri quali condizioni di memoria/dimensioni del segmento/tempo di inattività del segmento, il WAL gestisce il ciclo di vita di ogni segmento.</p></li>
@@ -102,7 +102,7 @@ summary: >-
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/recovery_storage.png" alt="Recovery Storage" class="doc-image" id="recovery-storage" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/recovery_storage.png" alt="Recovery Storage" class="doc-image" id="recovery-storage" />
    </span> <span class="img-wrapper"> <span>Storage di recupero</span> </span></p>
 <h2 id="Query-Delegator" class="common-anchor-header">Delegatore di query<button data-href="#Query-Delegator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -140,7 +140,7 @@ summary: >-
     </button></h2><p>Separando i nodi di calcolo dallo storage, Milvus può trasferire facilmente il WAL da un nodo di streaming a un altro, ottenendo un'elevata disponibilità del servizio di streaming.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/wal_lifetime.png" alt="wal lifetime" class="doc-image" id="wal-lifetime" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/wal_lifetime.png" alt="wal lifetime" class="doc-image" id="wal-lifetime" />
    </span> <span class="img-wrapper"> <span>durata del wal</span> </span></p>
 <h2 id="Wait-for-Ready" class="common-anchor-header">Attesa per il pronto<button data-href="#Wait-for-Ready" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -160,5 +160,5 @@ summary: >-
     </button></h2><p>Quando il WAL viene trasferito a un nuovo nodo di streaming, il client scoprirà che il vecchio nodo di streaming rifiuta alcune richieste. Nel frattempo, il WAL verrà recuperato nel nuovo nodo di streaming e il client attenderà che il wal sul nuovo nodo di streaming sia pronto per essere servito.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/streaming_wait_for_ready.png" alt="wait for ready" class="doc-image" id="wait-for-ready" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/streaming_wait_for_ready.png" alt="wait for ready" class="doc-image" id="wait-for-ready" />
    </span> <span class="img-wrapper"> <span>attendere che sia pronto</span> </span></p>

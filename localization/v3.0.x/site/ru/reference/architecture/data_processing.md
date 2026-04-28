@@ -18,7 +18,7 @@ title: Обработка данных
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>В этой статье представлено подробное описание реализации в Milvus вставки данных, построения индекса и запроса данных.</p>
+    </button></h1><p>Эта статья содержит подробное описание реализации в Milvus вставки данных, построения индекса и запроса данных.</p>
 <h2 id="Data-insertion" class="common-anchor-header">Вставка данных<button data-href="#Data-insertion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,17 +37,17 @@ title: Обработка данных
     </button></h2><p>В Milvus вы можете выбрать, сколько шардов будет использоваться в коллекции - каждый шард сопоставляется с виртуальным каналом<em>(vchannel</em>). Как показано ниже, Milvus присваивает каждому <em>vchannel</em> физический канал<em>(pchannel</em>), а каждый <em>pchannel</em> привязывается к определенному узлу потоковой передачи.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/pvchannel_wal.png" alt="VChannel PChannel and StreamingNode" class="doc-image" id="vchannel-pchannel-and-streamingnode" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/pvchannel_wal.png" alt="VChannel PChannel and StreamingNode" class="doc-image" id="vchannel-pchannel-and-streamingnode" />
    </span> <span class="img-wrapper"> <span>VChannel PChannel и StreamingNode</span> </span></p>
 <p>После проверки данных прокси разделит записанное сообщение на различные пакеты данных в соответствии с заданными правилами маршрутизации шардов.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/channels_1.png" alt="Channels 1" class="doc-image" id="channels-1" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_1.png" alt="Channels 1" class="doc-image" id="channels-1" />
    </span> <span class="img-wrapper"> <span>Каналы 1</span> </span></p>
 <p>Затем записанные данные одного шарда<em>(vchannel</em>) отправляются на соответствующий стриминговый узел <em>pchannel</em>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/written_data_flow.png" alt="write flow" class="doc-image" id="write-flow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/written_data_flow.png" alt="write flow" class="doc-image" id="write-flow" />
    </span> <span class="img-wrapper"> <span>поток записи</span> </span></p>
 <p>Потоковый узел назначает оракул временных меток (TSO) каждому пакету данных, чтобы установить общий порядок операций. Он выполняет проверку согласованности полезной нагрузки перед записью в базовый журнал с опережением записи (WAL). После того как данные зафиксированы в WAL, они гарантированно не будут потеряны - даже в случае сбоя потоковый узел может воспроизвести WAL для полного восстановления всех незавершенных операций.</p>
 <p>Тем временем потоковый узел также асинхронно разбивает зафиксированные записи WAL на отдельные сегменты. Существует два типа сегментов:</p>
@@ -74,11 +74,11 @@ title: Обработка данных
     </button></h2><p>Построение индекса выполняется узлом данных. Чтобы избежать частого создания индексов при обновлении данных, коллекция в Milvus делится на сегменты, каждый из которых имеет свой собственный индекс.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/index_building.png" alt="Index building" class="doc-image" id="index-building" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/index_building.png" alt="Index building" class="doc-image" id="index-building" />
    </span> <span class="img-wrapper"> <span>Построение индекса</span> </span></p>
 <p>Milvus поддерживает построение индекса для каждого векторного поля, скалярного поля и первичного поля. Как на входе, так и на выходе построения индекса происходит взаимодействие с хранилищем объектов: Узел данных загружает снимки журнала для индексации из сегмента (который находится в объектном хранилище) в память, десериализует соответствующие данные и метаданные для построения индекса, сериализует индекс по завершении построения индекса и записывает его обратно в объектное хранилище.</p>
 <p>Построение индекса в основном включает в себя операции с векторами и матрицами и, следовательно, требует больших затрат вычислений и памяти. Векторы не могут быть эффективно проиндексированы традиционными древовидными индексами из-за их высокой размерности, но могут быть проиндексированы методами, которые более развиты в этой области, такими как кластерные или графовые индексы. Независимо от типа, построение индекса предполагает массивные итерационные вычисления для крупномасштабных векторов, такие как Kmeans или graph traverse.</p>
-<p>В отличие от индексирования скалярных данных, построение векторного индекса должно в полной мере использовать преимущества ускорения SIMD (single instruction, multiple data). Milvus имеет встроенную поддержку наборов инструкций SIMD, например, SSE, AVX2 и AVX512. Учитывая "заминки" и ресурсоемкость построения векторных индексов, эластичность приобретает для Milvus решающее значение с экономической точки зрения. В будущих релизах Milvus будут продолжены исследования в области гетерогенных вычислений и бессерверных вычислений для снижения соответствующих затрат.</p>
+<p>В отличие от индексирования скалярных данных, построение векторного индекса должно в полной мере использовать преимущества ускорения SIMD (single instruction, multiple data). Milvus имеет встроенную поддержку наборов инструкций SIMD, например, SSE, AVX2 и AVX512. Учитывая "заминки" и ресурсоемкость построения векторных индексов, эластичность становится крайне важной для Milvus с экономической точки зрения. В будущих релизах Milvus будут продолжены исследования в области гетерогенных вычислений и бессерверных вычислений для снижения соответствующих затрат.</p>
 <p>Кроме того, Milvus поддерживает скалярную фильтрацию и запросы по первичному полю. Для повышения эффективности запросов в нем имеются встроенные индексы, например, индексы фильтра Блума, хеш-индексы, древовидные индексы и инвертированные индексы, а также планируется внедрение внешних индексов, например, растровых индексов и грубых индексов.</p>
 <h2 id="Data-query" class="common-anchor-header">Запрос данных<button data-href="#Data-query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -98,7 +98,7 @@ title: Обработка данных
     </button></h2><p>Запрос данных - это процесс поиска в заданной коллекции <em>k-го</em> количества векторов, ближайших к целевому вектору, или <em>всех</em> векторов в заданном диапазоне расстояний до вектора. Векторы возвращаются вместе с соответствующими первичными ключами и полями.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
    </span> <span class="img-wrapper"> <span>Запрос данных</span> </span></p>
 <p>Коллекция в Milvus разбивается на несколько сегментов; потоковый узел загружает растущие сегменты и поддерживает данные в реальном времени, а узлы запросов загружают закрытые сегменты.</p>
 <p>Когда поступает запрос на запрос/поиск, прокси транслирует его всем потоковым узлам, отвечающим за соответствующие шарды, для одновременного поиска.</p>
@@ -107,7 +107,7 @@ title: Обработка данных
 <p>Наконец, прокси собирает все результаты шардов, объединяет их в окончательный результат и возвращает его клиенту.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/handoff.png" alt="Handoff" class="doc-image" id="handoff" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/handoff.png" alt="Handoff" class="doc-image" id="handoff" />
    </span> <span class="img-wrapper"> <span>Передача</span> </span></p>
 <p>Когда растущий сегмент на потоковом узле сливается в закрытый сегмент или когда узел данных завершает уплотнение, координатор инициирует операцию handoff для преобразования растущих данных в исторические. Затем координатор равномерно распределяет запечатанные сегменты между всеми узлами запроса, балансируя использование памяти, нагрузку на ЦП и количество сегментов, и освобождает все избыточные сегменты.</p>
 <h2 id="Whats-next" class="common-anchor-header">Что дальше<button data-href="#Whats-next" class="anchor-icon" translate="no">

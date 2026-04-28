@@ -101,7 +101,7 @@ summary: Aprenda a configurar común para Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Expiración de la entidad en segundos, ATENCIÓN -1 significa que nunca expira      </td>
+      <td>        Caducidad de la entidad en segundos, ATENCIÓN -1 significa que nunca caduca      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1272,7 +1272,7 @@ summary: Aprenda a configurar común para Milvus.
       <td>
         <li>Identificador único para el cluster utilizado en la generación de AutoID para asegurar la unicidad global a través de múltiples clusters Milvus.</li>      
         <li>Valores válidos: [0, 1, 2, 3, 4, 5, 6, 7] (admite hasta 8 clústeres)</li>      
-        <li>Cada cluster debe tener un clusterID único para evitar el solapamiento de AutoID cuando se ejecutan múltiples clusters.</li>      
+        <li>Cada cluster debe tener un clusterID único para evitar la superposición de AutoID cuando se ejecutan múltiples clusters.</li>      
         <li>Este ID está incrustado en la estructura AutoID de 64 bits como parte del segmento cluster_id.</li>      
         <li>Para más información, consulte <a href="/docs/es/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">Campo primario y AutoID</a>.</li>      </td>
       <td>0</td>

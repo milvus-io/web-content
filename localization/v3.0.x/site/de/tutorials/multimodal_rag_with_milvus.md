@@ -1,9 +1,9 @@
 ---
 id: multimodal_rag_with_milvus.md
 summary: Multimodale RAG mit Milvus
-title: Multimodales RAG mit Milvus
+title: Multimodale RAG mit Milvus
 ---
-<h1 id="Multimodal-RAG-with-Milvus" class="common-anchor-header">Multimodales RAG mit Milvus<button data-href="#Multimodal-RAG-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Multimodal-RAG-with-Milvus" class="common-anchor-header">Multimodale RAG mit Milvus<button data-href="#Multimodal-RAG-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,11 +18,13 @@ title: Multimodales RAG mit Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p>Wenn Sie den endgültigen Effekt dieses Tutorials erleben möchten, können Sie direkt zur <a href="https://demos.milvus.io/multimodal-image-search/">Online-Demo</a> gehen.</p>
+<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
-<p>Dieses Tutorial zeigt das multimodale RAG, das von Milvus, dem <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">visualisierten BGE-Modell</a> und <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a> unterstützt wird. Mit diesem System können Benutzer ein Bild hochladen und Textanweisungen bearbeiten, die von dem zusammengesetzten BGE-Modell verarbeitet werden, um nach möglichen Bildern zu suchen. GPT-4o fungiert dann als Reranker, der das am besten geeignete Bild auswählt und die Gründe für die Auswahl angibt. Diese leistungsstarke Kombination ermöglicht eine nahtlose und intuitive Bildsuche, wobei Milvus für eine effiziente Suche, das BGE-Modell für eine präzise Bildverarbeitung und -abgleichung und GPT-4o für ein fortschrittliches Reranking eingesetzt werden.</p>
+<p>Dieses Tutorial zeigt das multimodale RAG, das von Milvus, dem <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">visualisierten BGE-Modell</a> und <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a> unterstützt wird. Mit diesem System können Benutzer ein Bild hochladen und Textanweisungen bearbeiten, die von dem zusammengesetzten BGE-Modell verarbeitet werden, um nach geeigneten Bildern zu suchen. GPT-4o fungiert dann als Reranker, der das am besten geeignete Bild auswählt und die Gründe für die Auswahl angibt. Diese leistungsstarke Kombination ermöglicht eine nahtlose und intuitive Bildsuche, wobei Milvus für eine effiziente Suche, das BGE-Modell für eine präzise Bildverarbeitung und -abgleichung und GPT-4o für ein fortschrittliches Reranking eingesetzt werden.</p>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus.png" width="100%" /></p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,8 +80,8 @@ title: Multimodales RAG mit Milvus
       </svg>
     </button></h3><p>Mit dem folgenden Befehl werden die Beispieldaten heruntergeladen und in einen lokalen Ordner "./images_folder" entpackt:</p>
 <ul>
-<li><p><strong>Bilder</strong>: Eine Teilmenge von <a href="https://github.com/hyp1231/AmazonReviews2023">Amazon Reviews 2023</a> mit etwa 900 Bildern aus den Kategorien "Appliance", "Cell_Phones_and_Accessories" und "Electronics".</p></li>
-<li><p><strong>leopard.jpg</strong>: Ein Beispiel für ein Suchbild.</p></li>
+<li><strong>Bilder</strong>: Eine Teilmenge von <a href="https://github.com/hyp1231/AmazonReviews2023">Amazon Reviews 2023</a> mit etwa 900 Bildern aus den Kategorien "Appliance", "Cell_Phones_and_Accessories" und "Electronics".</li>
+<li><strong>leopard.jpg</strong>: Ein Beispiel für ein Suchbild.</li>
 </ul>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/bootcamp/releases/download/data/amazon_reviews_2023_subset.tar.gz</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">tar -xzf amazon_reviews_2023_subset.tar.gz</span>
@@ -105,7 +107,7 @@ title: Multimodales RAG mit Milvus
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>2. Encoder erstellen</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
-<span class="hljs-keyword">from</span> FlagEmbedding.visual.modeling <span class="hljs-keyword">import</span> Visualized_BGE
+<span class="hljs-keyword">from</span> visual_bge.modeling <span class="hljs-keyword">import</span> Visualized_BGE
 
 
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">Encoder</span>:
@@ -206,7 +208,7 @@ Number of encoded images: 900
 <ul>
 <li>Das Einstellen von <code translate="no">uri</code> als lokale Datei, z. B. <code translate="no">./milvus_demo.db</code>, ist die bequemste Methode, da sie automatisch <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> verwendet, um alle Daten in dieser Datei zu speichern.</li>
 <li>Wenn Sie große Datenmengen haben, können Sie einen leistungsfähigeren Milvus-Server auf <a href="https://milvus.io/docs/quickstart.md">Docker oder Kubernetes</a> einrichten. Bei dieser Einrichtung verwenden Sie bitte die Server-Uri, z. B.<code translate="no">http://localhost:19530</code>, als <code translate="no">uri</code>.</li>
-<li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Service für Milvus, nutzen möchten, passen Sie <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint und Api-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
+<li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Service für Milvus, verwenden möchten, passen Sie <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">öffentlichen Endpunkt und dem Api-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -233,7 +235,15 @@ milvus_client.insert(
     data=[{<span class="hljs-string">&quot;image_path&quot;</span>: k, <span class="hljs-string">&quot;vector&quot;</span>: v} <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> image_dict.items()],
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">{'insert_count': 900,
+<pre><code translate="no">DEBUG:pymilvus.milvus_client.milvus_client:Created new connection using: 7f33daeed99a4d8e8a5e28d47673ecc8
+DEBUG:pymilvus.milvus_client.milvus_client:Successfully created collection: multimodal_rag_demo
+DEBUG:pymilvus.milvus_client.milvus_client:Successfully created an index on collection: multimodal_rag_demo
+
+
+
+
+
+{'insert_count': 900,
  'ids': [451537887696781312, 451537887696781313, ..., 451537887696782211],
  'cost': 0}
 </code></pre>
@@ -541,4 +551,4 @@ best_img.show()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Um zu erfahren, wie Sie mit diesem Tutorial eine Online-Demo starten können, sehen Sie sich bitte <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus">die Beispielanwendung</a> an.</p>
+    </button></h3><p>Um zu erfahren, wie Sie mit diesem Tutorial eine Online-Demo starten können, sehen Sie sich bitte <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/multimodal_rag_with_milvus">die Beispielanwendung</a> an.</p>

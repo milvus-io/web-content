@@ -2,7 +2,7 @@
 id: hnsw-sq.md
 title: HNSW_SQ
 summary: >-
-  HNSW_SQ는 계층 탐색이 가능한 작은 세계(HNSW) 그래프와 스칼라 양자화(SQ)를 결합하여 크기와 정확도 간의 균형을 제어할 수 있는
+  HNSW_SQ는 계층적 탐색 가능한 작은 세계(HNSW) 그래프와 스칼라 양자화(SQ)를 결합하여 크기와 정확도 간의 균형을 제어할 수 있는
   고급 벡터 인덱싱 방법을 생성합니다. 이 인덱스 유형은 표준 HNSW에 비해 쿼리 처리 속도가 빠른 반면 인덱스 구축 시간이 약간
   증가합니다.
 ---
@@ -96,7 +96,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>극한의 쿼리 속도와 최소한의 메모리 사용량이 요구되는 시나리오를 위해 Milvus는 4비트 균일 스칼라 양자화( <code translate="no">SQ4U</code> )를 도입했습니다. 이것은 각 차원의 부동 소수점 값을 <strong>4비트</strong> 부호 없는 정수로 압축하는 공격적인 형태의 스칼라 양자화입니다.</p>
-<p>SQ4U의 "U"는 Uniform을 의미합니다. 일반적으로 각 차원에 대해 최소값과 최대값을 독립적으로 계산하는 비균일 스칼라 양자화(차원별 양자화)와 달리 SQ4U는 <strong>전역 균일 양자화</strong> 전략을 적용합니다:</p>
+<p>SQ4U의 "U"는 Uniform을 의미합니다. 일반적으로 각 차원에 대해 최소값과 최대값을 독립적으로 계산하는 비균일 스칼라 양자화(차원별 양자화)와 달리, SQ4U는 <strong>전역 균일 양자화</strong> 전략을 적용합니다:</p>
 <ol>
 <li><p><strong>글로벌 통계</strong>: 시스템은 벡터의 <strong>모든 차원</strong> (또는 전체 벡터 세그먼트)에 적용되는 <strong>단일</strong> 최소값( <code translate="no">vmin</code> )과 <strong>단일</strong> 값 범위( <code translate="no">vdiff</code> )를 계산합니다.</p></li>
 <li><p><strong>균일 매핑</strong>: 전역 값 범위는 16개의 동일한 간격으로 나뉩니다. 벡터의 모든 부동 소수점 값은 어떤 차원에 속해 있는지에 관계없이 이러한 공유 매개 변수를 사용하여 4비트 정수(0-15)로 매핑됩니다.</p></li>
@@ -274,7 +274,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">sq_type</code></p></td>
      <td><p>벡터 압축을 위한 스칼라 양자화 방법을 지정합니다. 각 옵션은 압축과 정확도 간에 서로 다른 균형을 제공합니다:</p><ul><li><p><code translate="no">SQ4U</code>: 4비트 균일 양자화를 사용하여 벡터를 인코딩합니다. 이 모드는 가장 빠른 속도와 압축을 제공합니다.</p></li><li><p><code translate="no">SQ6</code>: 6비트 정수를 사용하여 벡터를 인코딩합니다.</p></li><li><p><code translate="no">SQ8</code>: 8비트 정수를 사용하여 벡터를 인코딩합니다.</p></li><li><p><code translate="no">BF16</code>: Bfloat16 형식을 사용합니다.</p></li><li><p><code translate="no">FP16</code>: 표준 16비트 부동 소수점 형식을 사용합니다.</p></li></ul></td>
      <td><p><strong>유형</strong>: 문자열</p><p><strong>범위</strong>: [ <code translate="no">SQ4U</code>, <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code> ]입니다.</p><p><strong>기본값입니다</strong>: <code translate="no">SQ8</code></p></td>
-     <td><p><code translate="no">sq_type</code> 선택은 특정 애플리케이션의 요구 사항에 따라 달라집니다. 속도와 메모리 효율을 극대화하려면 <code translate="no">SQ4U</code>, 균형 잡힌 성능을 원한다면 <code translate="no">SQ6</code> 또는 <code translate="no">SQ8</code> 이 적합할 수 있습니다. 반면 정확성이 가장 중요한 경우 <code translate="no">BF16</code> 또는 <code translate="no">FP16</code> 이 선호될 수 있습니다.</p></td>
+     <td><p><code translate="no">sq_type</code> 선택은 특정 애플리케이션의 요구 사항에 따라 달라집니다. 속도와 메모리 효율을 극대화하려면 <code translate="no">SQ4U</code>, 균형 잡힌 성능을 원한다면 <code translate="no">SQ6</code> 또는 <code translate="no">SQ8</code> 이 적합할 수 있습니다. 반면 정확성이 가장 중요한 경우 <code translate="no">BF16</code> 또는 <code translate="no">FP16</code> 을 선호할 수 있습니다.</p></td>
    </tr>
    <tr>
      <td></td>

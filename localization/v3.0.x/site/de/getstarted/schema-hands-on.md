@@ -27,7 +27,7 @@ summary: >-
 <p>Milvus ermöglicht es Ihnen, das Suchdatenmodell durch ein Sammlungsschema zu spezifizieren, das unstrukturierte Daten, ihre dichten oder spärlichen Vektordarstellungen und strukturierte Metadaten organisiert. Unabhängig davon, ob Sie mit Text, Bildern oder anderen Datentypen arbeiten, wird Ihnen diese praktische Anleitung helfen, wichtige Schemakonzepte zu verstehen und anzuwenden, um ein Suchdatenmodell in der Praxis zu entwerfen.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
    </span> <span class="img-wrapper"> <span>Datenmodell Anatomie</span> </span></p>
 <h2 id="Data-Model" class="common-anchor-header">Datenmodell<button data-href="#Data-Model" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -137,7 +137,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Vektorfelder speichern Einbettungen für unstrukturierte Datentypen wie Text, Bilder und Audio. Diese Einbettungen können dicht, spärlich oder binär sein, je nach Datentyp und verwendeter Abrufmethode. Typischerweise werden dichte Vektoren für die semantische Suche verwendet, während spärliche Vektoren besser für die Volltextsuche oder den lexikalischen Abgleich geeignet sind. Binäre Vektoren sind nützlich, wenn die Speicher- und Rechenressourcen begrenzt sind. Eine Sammlung kann mehrere Vektorfelder enthalten, um multimodale oder hybride Abfragestrategien zu ermöglichen. Eine ausführliche Anleitung zu diesem Thema finden Sie in der <a href="/docs/de/multi-vector-search.md">Multi-Vector Hybrid Search</a>.</p>
+    </button></h3><p>Vektorfelder speichern Einbettungen für unstrukturierte Datentypen wie Text, Bilder und Audio. Diese Einbettungen können dicht, spärlich oder binär sein, je nach Datentyp und verwendeter Abrufmethode. Typischerweise werden dichte Vektoren für die semantische Suche verwendet, während spärliche Vektoren besser für die Volltextsuche oder den lexikalischen Abgleich geeignet sind. Binäre Vektoren sind nützlich, wenn die Speicher- und Rechenressourcen begrenzt sind. Eine Sammlung kann mehrere Vektorfelder enthalten, um multimodale oder hybride Abfragestrategien zu ermöglichen. Eine detaillierte Anleitung zu diesem Thema finden Sie in der <a href="/docs/de/multi-vector-search.md">Multi-Vector Hybrid Search</a>.</p>
 <p>Milvus unterstützt die folgenden Vektordatentypen: <code translate="no">FLOAT_VECTOR</code> für <a href="/docs/de/dense-vector.md">Dense Vector</a>, <code translate="no">SPARSE_FLOAT_VECTOR</code> für <a href="/docs/de/sparse_vector.md">Sparse Vector</a> und <code translate="no">BINARY_VECTOR</code> für <a href="/docs/de/binary-vector.md">Binary Vector</a></p>
 <h3 id="Scalar-Field" class="common-anchor-header">Skalares Feld<button data-href="#Scalar-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -154,7 +154,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Skalare Felder speichern primitive, strukturierte Werte - üblicherweise als Metadaten bezeichnet - wie Zahlen, Zeichenketten oder Daten. Diese Werte können zusammen mit Vektorsuchergebnissen zurückgegeben werden und sind für die Filterung und Sortierung unerlässlich. Sie ermöglichen es Ihnen, die Suchergebnisse auf der Grundlage bestimmter Attribute einzugrenzen, z. B. die Beschränkung von Dokumenten auf eine bestimmte Kategorie oder einen bestimmten Zeitraum.</p>
+    </button></h3><p>Skalare Felder speichern primitive, strukturierte Werte - üblicherweise als Metadaten bezeichnet - wie Zahlen, Zeichenketten oder Daten. Diese Werte können zusammen mit Vektorsuchergebnissen zurückgegeben werden und sind für das Filtern und Sortieren wichtig. Sie ermöglichen es Ihnen, die Suchergebnisse auf der Grundlage bestimmter Attribute einzugrenzen, z. B. die Beschränkung von Dokumenten auf eine bestimmte Kategorie oder einen bestimmten Zeitraum.</p>
 <p>Milvus unterstützt skalare Typen wie <code translate="no">BOOL</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code> und <code translate="no">ARRAY</code> zur Speicherung und Filterung von Nicht-Vektordaten. Diese Typen verbessern die Präzision und Anpassung von Suchvorgängen.</p>
 <h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">Nutzung erweiterter Funktionen beim Schemadesign<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -383,7 +383,7 @@ schema := entity.NewSchema()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sobald das Schema erstellt ist, müssen im nächsten Schritt die Felder festgelegt werden, aus denen die Daten bestehen sollen. Jedes Feld ist mit den entsprechenden Datentypen und Attributen verbunden.</p>
+    </button></h3><p>Sobald das Schema erstellt ist, müssen im nächsten Schritt die Felder festgelegt werden, die Ihre Daten enthalten sollen. Jedes Feld ist mit den entsprechenden Datentypen und Attributen verbunden.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType

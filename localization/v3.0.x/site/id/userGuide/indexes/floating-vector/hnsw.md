@@ -44,13 +44,13 @@ summary: >-
 <p>Inilah cara kerjanya:</p>
 <ol>
 <li><p><strong>Titik masuk</strong>: Pencarian dimulai dari titik masuk tetap di lapisan teratas, yang merupakan simpul yang telah ditentukan sebelumnya dalam grafik.</p></li>
-<li><p><strong>Pencarian serakah</strong>: Algoritme dengan rakus bergerak ke tetangga terdekat pada lapisan saat ini hingga tidak bisa lebih dekat lagi ke vektor kueri. Lapisan atas melayani tujuan navigasi, bertindak sebagai filter kasar untuk menemukan titik masuk potensial untuk pencarian yang lebih baik di tingkat yang lebih rendah.</p></li>
+<li><p><strong>Pencarian serakah</strong>: Algoritme dengan rakus bergerak ke tetangga terdekat pada lapisan saat ini hingga tidak dapat mendekati vektor kueri. Lapisan atas melayani tujuan navigasi, bertindak sebagai filter kasar untuk menemukan titik masuk potensial untuk pencarian yang lebih baik di tingkat yang lebih rendah.</p></li>
 <li><p><strong>Lapisan turun</strong>: Setelah <strong>minimum lokal</strong> tercapai pada lapisan saat ini, algoritme akan turun ke lapisan yang lebih rendah, menggunakan koneksi yang telah dibuat sebelumnya, dan mengulangi pencarian yang serakah.</p></li>
 <li><p><strong>Penyempurnaan</strong><strong>akhir</strong>: Proses ini berlanjut hingga lapisan paling bawah tercapai, di mana langkah penyempurnaan akhir mengidentifikasi tetangga terdekat.</p></li>
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
    </span> <span class="img-wrapper"> <span>HNSW</span> </span></p>
 <p>Kinerja HNSW bergantung pada beberapa parameter kunci yang mengontrol struktur graf dan perilaku pencarian. Parameter-parameter tersebut antara lain:</p>
 <ul>
@@ -97,7 +97,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>: Metode yang digunakan untuk menghitung jarak antara vektor. Nilai yang didukung termasuk <code translate="no">COSINE</code>, <code translate="no">L2</code>, dan <code translate="no">IP</code>. Untuk detailnya, lihat <a href="/docs/id/metric.md">Jenis Metrik</a>.</p></li>
 <li><p><code translate="no">params</code>: Opsi konfigurasi tambahan untuk membangun indeks.</p>
 <ul>
-<li><p><code translate="no">M</code>: Jumlah maksimum tetangga yang dapat dihubungkan oleh setiap node.</p></li>
+<li><p><code translate="no">M</code>: Jumlah maksimum tetangga yang dapat disambungkan oleh setiap node.</p></li>
 <li><p><code translate="no">efConstruction</code>: Jumlah kandidat tetangga yang dipertimbangkan untuk koneksi selama pembangunan indeks.</p></li>
 </ul>
 <p>Untuk mempelajari lebih lanjut parameter pembangunan yang tersedia untuk indeks <code translate="no">HNSW</code>, lihat Parameter <a href="/docs/id/hnsw.md#Index-building-params">pembangunan indeks</a>.</p></li>
@@ -157,7 +157,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Bagian ini memberikan ikhtisar parameter yang digunakan untuk membangun indeks dan melakukan pencarian pada indeks.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parameter pembangunan indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/hnsw.md#Build-index">membangun indeks.</a></p>
+<h3 id="Index-building-params" class="common-anchor-header">Parameter pembangunan indeks<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/hnsw.md#Build-index">membangun indeks.</a></p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -178,7 +193,22 @@ res = MilvusClient.search(
      <td><p>Nilai <code translate="no">efConstruction</code> yang lebih tinggi biasanya menghasilkan <strong>indeks yang lebih akurat</strong>, karena lebih banyak koneksi potensial yang dieksplorasi. Namun, hal ini juga menyebabkan <strong>waktu pengindeksan yang lebih lama dan penggunaan memori yang lebih besar</strong> selama konstruksi. Pertimbangkan untuk meningkatkan <code translate="no">efConstruction</code> untuk meningkatkan akurasi, terutama dalam skenario di mana waktu pengindeksan tidak terlalu penting.</p><p>Pertimbangkan untuk mengurangi <code translate="no">efConstruction</code> untuk mempercepat konstruksi indeks ketika keterbatasan sumber daya menjadi perhatian.</p><p>Dalam kebanyakan kasus, kami menyarankan Anda menetapkan nilai dalam kisaran ini: [50, 500].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> ketika melakukan <a href="/docs/id/hnsw.md#Search-on-index">pencarian di indeks</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> ketika melakukan <a href="/docs/id/hnsw.md#Search-on-index">pencarian di indeks</a>.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>

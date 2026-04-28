@@ -162,7 +162,7 @@ collection.flush()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>HDBSCAN 需要計算點與點之間的距離，以進行聚類，而這可能是計算密集的工作。由於較遠的點對聚類分派的影響較小，我們可以透過計算前 k 個最近鄰居來提高效率。在這個範例中，我們使用 FLAT 索引，但對於大規模的資料集，Milvus 支援更進階的索引方法來加速搜尋過程。 首先，我們需要取得一個迭代器來迭代之前建立的 Milvus 集合。</p>
+    </button></h2><p>HDBSCAN 需要計算點與點之間的距離，以進行聚類，而這可能是計算密集的工作。由於遠方的點對聚類分派的影響較小，我們可以透過計算前 k 個最近鄰居來提高效率。在這個範例中，我們使用 FLAT 索引，但對於大規模的資料集，Milvus 支援更進階的索引方法來加速搜尋過程。 首先，我們需要取得一個迭代器來迭代之前建立的 Milvus 集合。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> hdbscan
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
@@ -187,7 +187,7 @@ dist = {}
 
 embeddings = []
 <button class="copy-code-btn"></button></code></pre>
-<p>我們將遍历 Milvus 集合中的所有嵌入。對於每個嵌入，我們會搜尋它在同一集合中的前 k 個鄰居，並取得它們的 ID 和距離。之後，我們還要建立字典，將原始 ID 對應至距離矩陣中的連續索引。完成後，我們需要建立一個距離矩陣，初始化所有元素為無窮大，並填充我們搜尋到的元素。如此一來，遠距離的點之間的距離將會被忽略。最後，我們使用 HDBSCAN 函式庫，利用我們建立的距離矩陣對點進行聚類。我們需要設定 metric 為「precomputed」，以表示資料是距離矩陣，而不是原始的 embeddings。</p>
+<p>我們將遍历 Milvus 集合中的所有嵌入。對於每個嵌入，我們會搜尋它在同一集合中的前 k 個鄰居，並取得它們的 ID 和距離。然後，我們還要建立字典，將原始 ID 對應至距離矩陣中的連續索引。完成後，我們需要建立一個初始化所有元素為無限的距離矩陣，並填上我們搜尋到的元素。如此一來，遠距離的點之間的距離將會被忽略。最後，我們使用 HDBSCAN 函式庫，利用我們建立的距離矩陣對點進行聚類。我們需要設定 metric 為「precomputed」，以表示資料是距離矩陣，而不是原始的 embeddings。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
     batch = iterator.<span class="hljs-built_in">next</span>()
     batch_ids = [data[<span class="hljs-string">&quot;id&quot;</span>] <span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> batch]

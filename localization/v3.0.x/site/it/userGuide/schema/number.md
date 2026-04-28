@@ -4,7 +4,7 @@ title: Campo numerico
 summary: >-
   Un campo numerico è un campo scalare che memorizza valori numerici. Questi
   valori possono essere numeri interi o decimali (numeri a virgola mobile). In
-  genere, vengono utilizzati per rappresentare quantità, misure o qualsiasi dato
+  genere vengono utilizzati per rappresentare quantità, misure o qualsiasi dato
   che debba essere elaborato matematicamente.
 ---
 <h1 id="Number-Field" class="common-anchor-header">Campo numerico<button data-href="#Number-Field" class="anchor-icon" translate="no">

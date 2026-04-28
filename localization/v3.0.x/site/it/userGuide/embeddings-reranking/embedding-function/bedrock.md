@@ -52,7 +52,7 @@ beta: Milvus 2.6.x
      <td><p>RAG, ricerca di documenti, reranking, classificazione, ecc.</p></td>
    </tr>
 </table>
-<p>Per maggiori dettagli, consultare i <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html">modelli di Text Embeddings di Amazon Titan</a>.</p>
+<p>Per maggiori dettagli, consultare i <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html">modelli Amazon Titan Text Embeddings</a>.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">Configurare le credenziali<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,7 +77,22 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>Se una credenziale per lo stesso provider è presente sia nel file di configurazione che in una variabile d'ambiente, Milvus utilizza sempre il valore in <code translate="no">milvus.yaml</code> e ignora la variabile d'ambiente.</p>
 </div>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Opzione 1: File di configurazione (consigliata e con priorità più alta)</h3><p>Mantenere le credenziali in <code translate="no">milvus.yaml</code>; Milvus le legge all'avvio e sovrascrive qualsiasi variabile d'ambiente per lo stesso provider.</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Opzione 1: File di configurazione (consigliata e con priorità più alta)<button data-href="#Option-1-Configuration-file-recommended--higher-priority" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Mantenere le credenziali in <code translate="no">milvus.yaml</code>; Milvus le legge all'avvio e sovrascrive qualsiasi variabile d'ambiente per lo stesso provider.</p>
 <ol>
 <li><p>**Dichiarare le credenziali in <code translate="no">credential:</code></p>
 <p>Si possono elencare una o più credenziali, dando a ciascuna un'etichetta inventata e a cui si farà riferimento in seguito.</p>
@@ -91,7 +106,7 @@ beta: Milvus 2.6.x
     <span class="hljs-attr">secret_access_key:</span> <span class="hljs-string">&lt;YOUR_PROD_SECRET_ACCESS_KEY&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Mettere le credenziali qui le rende persistenti tra i vari riavvii e permette di cambiare le credenziali semplicemente cambiando un'etichetta.</p></li>
-<li><p><strong>Indicare a Milvus quale credenziale usare per le chiamate di servizio</strong></p>
+<li><p><strong>Dire a Milvus quale credenziale usare per le chiamate di servizio</strong></p>
 <p>Nello stesso file, si indica al provider Bedrock l'etichetta che si desidera utilizzare.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
@@ -101,7 +116,22 @@ beta: Milvus 2.6.x
 <button class="copy-code-btn"></button></code></pre>
 <p>In questo modo si lega una credenziale specifica a ogni richiesta che Milvus invia al servizio di incorporazione di Bedrock.</p></li>
 </ol>
-<h3 id="Option-2-Environment-variable" class="common-anchor-header">Opzione 2: Variabile d'ambiente</h3><p>Utilizzate questo metodo quando eseguite Milvus con Docker Compose e preferite tenere i segreti fuori dai file e dalle immagini.</p>
+<h3 id="Option-2-Environment-variable" class="common-anchor-header">Opzione 2: variabile d'ambiente<button data-href="#Option-2-Environment-variable" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Utilizzate questo metodo quando eseguite Milvus con Docker Compose e preferite tenere i segreti fuori dai file e dalle immagini.</p>
 <p>Milvus ricorre alla variabile d'ambiente solo se non viene trovata alcuna credenziale per il provider in <code translate="no">milvus.yaml</code>.</p>
 <table>
    <tr>
@@ -147,13 +177,28 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Una volta configurate le credenziali, seguite questi passaggi per definire e utilizzare le funzioni di incorporamento.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Passo 1: Definire i campi dello schema</h3><p>Per utilizzare una funzione di incorporamento, creare una raccolta con uno schema specifico. Questo schema deve includere almeno tre campi necessari:</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Passo 1: Definire i campi dello schema<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per utilizzare una funzione di incorporamento, creare una raccolta con uno schema specifico. Questo schema deve includere almeno tre campi necessari:</p>
 <ul>
 <li><p>Il campo primario che identifica in modo univoco ogni entità della raccolta.</p></li>
 <li><p>Un campo scalare che memorizza i dati grezzi da incorporare.</p></li>
 <li><p>Un campo vettoriale riservato a memorizzare le incorporazioni vettoriali che la funzione genererà per il campo scalare.</p></li>
 </ul>
-<p>L'esempio seguente definisce uno schema con un campo scalare <code translate="no">&quot;document&quot;</code> per memorizzare i dati testuali e un campo vettoriale <code translate="no">&quot;dense&quot;</code> per memorizzare le incorporazioni che saranno generate dal modulo Function. Ricordarsi di impostare la dimensione del vettore (<code translate="no">dim</code>) in modo che corrisponda all'output del modello di embedding scelto.</p>
+<p>L'esempio seguente definisce uno schema con un campo scalare <code translate="no">&quot;document&quot;</code> per memorizzare i dati testuali e un campo vettoriale <code translate="no">&quot;dense&quot;</code> per memorizzare gli embeddings che saranno generati dal modulo Function. Ricordarsi di impostare la dimensione del vettore (<code translate="no">dim</code>) in modo che corrisponda all'output del modello di embedding scelto.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -174,7 +219,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-function-to-schema" class="common-anchor-header">Passo 2: Aggiungere la funzione allo schema</h3><p>Il modulo Function di Milvus converte automaticamente i dati grezzi memorizzati in un campo scalare in embeddings e li memorizza nel campo vettoriale esplicitamente definito.</p>
+<h3 id="Step-2-Add-function-to-schema" class="common-anchor-header">Passo 2: Aggiungere la funzione allo schema<button data-href="#Step-2-Add-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Il modulo Function di Milvus converte automaticamente i dati grezzi memorizzati in un campo scalare in embeddings e li memorizza nel campo vettoriale esplicitamente definito.</p>
 <p>L'esempio seguente aggiunge un modulo Function (<code translate="no">bedrk</code>) che converte il campo scalare <code translate="no">&quot;document&quot;</code> in embedding, memorizzando i vettori risultanti nel campo vettoriale <code translate="no">&quot;dense&quot;</code> definito in precedenza.</p>
 <p>Una volta definita la funzione di embedding, aggiungerla allo schema della collezione. In questo modo si indica a Milvus di utilizzare la funzione di embedding specificata per elaborare e memorizzare gli embeddings dai dati di testo.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function specifically for OpenAI provider</span>

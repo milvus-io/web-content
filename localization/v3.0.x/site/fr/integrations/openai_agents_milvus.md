@@ -53,7 +53,7 @@ title: 'Intégration de Milvus avec les agents OpenAI : Un guide étape par éta
 <p>En combinaison avec Python, ces primitives sont suffisamment puissantes pour exprimer des relations complexes entre les outils et les agents, et vous permettent de construire des applications du monde réel sans une courbe d'apprentissage abrupte. En outre, le SDK est livré avec un traçage intégré qui vous permet de visualiser et de déboguer vos flux d'agents, ainsi que de les évaluer et même d'affiner les modèles pour votre application.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/openai-agent.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openai-agent.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -72,7 +72,7 @@ title: 'Intégration de Milvus avec les agents OpenAI : Un guide étape par éta
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus est une base de données vectorielles Open-Source hautement performante et évolutive qui s'exécute efficacement dans un large éventail d'environnements, de l'ordinateur portable aux systèmes distribués à grande échelle. Elle est disponible à la fois en tant que logiciel open-source et en tant qu'<a href="https://zilliz.com/">offre cloud</a>.</p>
+    </button></h2><p>Milvus est une base de données vectorielle Open-Source hautement performante et évolutive qui fonctionne efficacement dans un large éventail d'environnements, de l'ordinateur portable aux systèmes distribués à grande échelle. Elle est disponible à la fois en tant que logiciel open-source et en tant qu'<a href="https://zilliz.com/">offre cloud</a>.</p>
 <h2 id="Setup-and-Dependencies" class="common-anchor-header">Configuration et dépendances<button data-href="#Setup-and-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -128,7 +128,22 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 <li>Un champ texte pour stocker le contenu de notre document</li>
 <li>Un champ de vecteurs clairsemés pour stocker les encastrements BM25</li>
 </ul>
-<h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Recherche plein texte dans Milvus 2.5</h3><ul>
+<h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Recherche plein texte dans Milvus 2.5<button data-href="#Full-Text-Search-in-Milvus-25" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Système unifié pour la recherche vectorielle et la recherche par mot-clé (API unifiées)</li>
 <li>Algorithme sparse-BM25 intégré (similaire à l'utilisation d'Elasticsearch mais basé sur les vecteurs)</li>
 <li>Pas besoin de générer manuellement des embeddings pour la recherche par mot-clé</li>

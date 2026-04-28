@@ -40,7 +40,7 @@ summary: Notas
 <p>Um analisador funciona num pipeline simples de duas fases:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
    </span> <span class="img-wrapper"> <span>Fluxo de trabalho do analisador</span> </span></p>
 <ol>
 <li><p><strong>Tokenização (obrigatório):</strong> Este estágio inicial aplica um <strong>tokenizador</strong> para quebrar uma cadeia contínua de texto em unidades discretas e significativas chamadas tokens. O método de tokenização pode variar significativamente, dependendo do idioma e do tipo de conteúdo.</p></li>
@@ -191,7 +191,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
      <td><p>Línguas multilingues ou desconhecidas</p></td>
      <td><p>Não</p></td>
      <td><p>O analisador <code translate="no">standard</code> não possui a lógica específica do idioma necessária para lidar com diferentes conjuntos de caracteres e regras de tokenização.</p></td>
-     <td><p>Use um analisador personalizado com o <a href="/docs/pt/icu-tokenizer.md"><code translate="no">icu</code></a> para a tokenização com reconhecimento de unicode. </p><p>Como alternativa, considere a configuração de <a href="/docs/pt/multi-language-analyzers.md">analisadores</a> multilíngues ou um <a href="/docs/pt/language-identifier.md">identificador de idioma</a> para um tratamento mais preciso do conteúdo multilíngue.</p></td>
+     <td><p>Use um analisador personalizado com o <a href="/docs/pt/icu-tokenizer.md"><code translate="no">icu</code></a> para a tokenização com reconhecimento de unicode. </p><p>Como alternativa, considere a configuração de <a href="/docs/pt/multi-language-analyzers.md">analisadores multil</a> íngues ou um <a href="/docs/pt/language-identifier.md">identificador de idioma</a> para um tratamento mais preciso do conteúdo multilíngue.</p></td>
    </tr>
 </table>
 <p>Se o analisador padrão <code translate="no">standard</code> não atender aos seus requisitos, será necessário implementar um diferente. Existem dois caminhos:</p>
@@ -386,7 +386,7 @@ schema.add_field(
      <td><ul><li><p>Entrada: <code translate="no">"안녕하세요"</code></p></li><li><p>Saída: <code translate="no">["안녕", "하", "세요"]</code></p></li></ul></td>
    </tr>
 </table>
-<h4 id="Multilingual-or-unknown-languages" class="common-anchor-header">Línguas multilingues ou desconhecidas</h4><p>Para conteúdos em que os idiomas são imprevisíveis ou misturados nos documentos:</p>
+<h4 id="Multilingual-or-unknown-languages" class="common-anchor-header">Línguas multilingues ou desconhecidas</h4><p>Para conteúdos em que as línguas são imprevisíveis ou misturadas nos documentos:</p>
 <table>
    <tr>
      <th><p>Tokenizador</p></th>
@@ -435,7 +435,7 @@ schema.add_field(
    <tr>
      <td><p><a href="/docs/pt/lowercase-filter.md"><code translate="no">lowercase</code></a></p></td>
      <td><p>Converter todos os tokens em minúsculas</p></td>
-     <td><p>Universal - aplica-se a todos os idiomas com distinção de maiúsculas e minúsculas</p></td>
+     <td><p>Universal - aplica-se a todas as línguas com distinção de maiúsculas e minúsculas</p></td>
      <td><ul><li><p>Entrada: <code translate="no">["Apple", "iPhone"]</code></p></li><li><p>Saída: <code translate="no">[['apple'], ['iphone']]</code></p></li></ul></td>
    </tr>
    <tr>
@@ -624,7 +624,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Utilize um tokenizador <code translate="no">standard</code> com conversão em minúsculas, stemming específico do idioma e remoção de stopwords. Esta configuração também funciona para outros idiomas europeus, modificando os parâmetros <code translate="no">language</code> e <code translate="no">stop_words</code>.</p>
+    </button></h3><p>Utilize um tokenizador <code translate="no">standard</code> com conversão em minúsculas, stemming específico do idioma e remoção de stopwords. Essa configuração também funciona para outros idiomas europeus, modificando os parâmetros <code translate="no">language</code> e <code translate="no">stop_words</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># French example</span>
 analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
@@ -727,7 +727,7 @@ analyzer_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Utilize o tokenizador <code translate="no">lindera</code> com o dicionário japonês e filtros para limpar a pontuação e controlar o comprimento dos tokens:</p>
+    </button></h3><p>Utilize o tokenizador <code translate="no">lindera</code> com dicionário e filtros japoneses para limpar a pontuação e controlar o comprimento dos tokens:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>,
@@ -789,7 +789,7 @@ analyzer_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ao trabalhar com conteúdo que abrange vários idiomas ou utiliza scripts de forma imprevisível, comece com o analisador <code translate="no">icu</code>. Este analisador com reconhecimento de Unicode lida eficazmente com scripts e símbolos mistos.</p>
+    </button></h3><p>Ao trabalhar com conteúdos que abrangem vários idiomas ou utilizam scripts de forma imprevisível, comece com o analisador <code translate="no">icu</code>. Este analisador com reconhecimento de Unicode lida eficazmente com scripts e símbolos mistos.</p>
 <p><strong>Configuração multilingue básica (sem stemming)</strong>:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;icu&quot;</span>,
@@ -797,7 +797,7 @@ analyzer_params = {
 }
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Processamento multilingue avançado</strong>:</p>
-<p>Para um melhor controlo sobre o comportamento dos símbolos em diferentes idiomas:</p>
+<p>Para um melhor controlo do comportamento dos símbolos em diferentes idiomas:</p>
 <ul>
 <li><p>Utilize uma configuração de <strong>analisador multilingue</strong>. Para obter detalhes, consulte <a href="/docs/pt/multi-language-analyzers.md">Analisadores multilíngues</a>.</p></li>
 <li><p>Implemente um <strong>identificador de idioma</strong> no seu conteúdo. Para obter detalhes, consulte <a href="/docs/pt/language-identifier.md">Identificador de idioma</a>.</p></li>

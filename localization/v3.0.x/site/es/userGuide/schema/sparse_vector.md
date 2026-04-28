@@ -40,10 +40,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un vector disperso es un vector especial de alta dimensión en el que la mayoría de los elementos son cero y sólo unas pocas dimensiones tienen valores distintos de cero. Como se muestra en el diagrama siguiente, los vectores densos suelen representarse como matrices continuas en las que cada posición tiene un valor (por ejemplo, <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). En cambio, los vectores dispersos sólo almacenan elementos distintos de cero y sus índices de dimensión, a menudo representados como pares clave-valor de <code translate="no">{ index: value}</code> (por ejemplo, <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>).</p>
+    </button></h2><p>Un vector disperso es un vector especial de alta dimensión en el que la mayoría de los elementos son cero y sólo unas pocas dimensiones tienen valores distintos de cero. Como se muestra en el diagrama siguiente, los vectores densos suelen representarse como matrices continuas en las que cada posición tiene un valor (por ejemplo, <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). En cambio, los vectores dispersos sólo almacenan elementos distintos de cero y sus índices de la dimensión, a menudo representados como pares clave-valor de <code translate="no">{ index: value}</code> (por ejemplo, <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
    </span> <span class="img-wrapper"> <span>Representación de vectores dispersos</span> </span></p>
 <p>Con la tokenización y la puntuación, los documentos pueden representarse como vectores de bolsa de palabras, donde cada dimensión corresponde a una palabra específica del vocabulario. Sólo las palabras presentes en el documento tienen valores distintos de cero, lo que crea una representación vectorial dispersa. Los vectores dispersos pueden generarse mediante dos enfoques:</p>
 <ul>
@@ -53,7 +53,7 @@ summary: >-
 <p>Los vectores dispersos y el texto original pueden almacenarse en Milvus para una recuperación eficiente. El siguiente diagrama describe el proceso general.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
    </span> <span class="img-wrapper"> <span>Flujo de trabajo de vectores dispersos</span> </span></p>
 <div class="alert note">
 <p>Además de los vectores dispersos, Milvus también admite vectores densos y vectores binarios. Los vectores densos son ideales para capturar relaciones semánticas profundas, mientras que los vectores binarios sobresalen en escenarios como comparaciones rápidas de similitud y deduplicación de contenido. Para obtener más información, consulte <a href="/docs/es/dense-vector.md">Vectores densos</a> y <a href="/docs/es/binary-vector.md">vectores binarios</a>.</p>

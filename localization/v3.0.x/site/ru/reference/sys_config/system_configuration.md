@@ -140,14 +140,15 @@ summary: Узнайте о конфигурации системы Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus поддерживает четыре MQ: rocksmq (на основе RockDB), natsmq (встроенный nats-сервер), Pulsar и Kafka.</p>
+    </button></h3><p>Milvus поддерживает четыре MQ: rocksmq (основанный на RockDB), Pulsar, Kafka и Woodpecker.</p>
 <p>Вы можете изменить свой MQ, задав поле mq.type.</p>
-<p>Если вы не установите поле mq.type по умолчанию, в этом файле есть примечание о включении приоритета, если мы настраиваем несколько mq.</p>
+<p>Если вы не установите поле mq.type по умолчанию, в этом файле есть примечание о включении приоритета при настройке нескольких MQ.</p>
 <ol>
-<li><p>автономный (локальный) режим: rocksmq (по умолчанию) &gt; natsmq &gt; Pulsar &gt; Kafka</p></li>
-<li><p>кластерный режим:  Pulsar(по умолчанию) &gt; Kafka (rocksmq и natsmq не поддерживаются в кластерном режиме).</p></li>
+<li><p>автономный (локальный) режим: rocksmq (по умолчанию) &gt; Pulsar &gt; Kafka</p></li>
+<li><p>кластерный режим:  Pulsar(по умолчанию) &gt; Kafka (rocksmq не поддерживается в кластерном режиме).</p></li>
+<li><p>Woodpecker можно использовать как в автономном, так и в кластерном режиме, установив для параметра mq.type значение woodpecker.</p></li>
 </ol>
-<p>Подробное описание каждого параметра в этом разделе смотрите в разделе <a href="/docs/ru/configure_mq.md">Конфигурации, связанные с mq</a>.</p>
+<p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/configure_mq.md">Конфигурации, связанные с mq</a>.</p>
 <h3 id="pulsar" class="common-anchor-header"><code translate="no">pulsar</code><button data-href="#pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -182,7 +183,7 @@ summary: Узнайте о конфигурации системы Milvus.
       </svg>
     </button></h3><p>Если вы хотите включить kafka, необходимо закомментировать конфигурацию pulsar</p>
 <p>kafka:</p>
-<p>brokerList:</p>
+<p>brokerList: localhost:9092</p>
 <p>saslUsername:</p>
 <p>saslPassword:</p>
 <p>saslMechanisms:</p>
@@ -200,24 +201,6 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 </code></pre>
 <p>readTimeout: 10</p>
 <p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/configure_rocksmq.md">Конфигурации, связанные с rocksmq</a>.</p>
-<h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code><button data-href="#natsmq" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>конфигурация natsmq.</p>
-<p>подробнее: https://docs.nats.io/running-a-nats-service/configuration</p>
-<p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/configure_natsmq.md">Конфигурации, связанные с natsmq</a>.</p>
 <h3 id="rootCoord" class="common-anchor-header"><code translate="no">rootCoord</code><button data-href="#rootCoord" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -415,8 +398,25 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Настройка включения прокси-сервера tls.</p>
+    </button></h3><p>Настройка внешнего tls.</p>
 <p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/configure_tls.md">Конфигурации, связанные с tls</a>.</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code><button data-href="#internaltls" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Настроить внутренний tls.</p>
+<p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/configure_internaltls.md">Конфигурации, связанные с internaltls</a>.</p>
 <h3 id="common" class="common-anchor-header"><code translate="no">common</code><button data-href="#common" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -432,7 +432,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Конфигурации, <a href="/docs/ru/configure_common.md">связанные с common</a>, для подробного описания каждого параметра в этом разделе.</p>
+    </button></h3><p>Конфигурации, <a href="/docs/ru/configure_common.md">связанные с общим,</a> см. в разделе Конфигурации, связанные <a href="/docs/ru/configure_common.md">с общим</a>, для подробного описания каждого параметра в этом разделе.</p>
 <h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code><button data-href="#quotaAndLimits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -497,8 +497,59 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
       </svg>
     </button></h3><p>#при использовании индексирования на GPU Milvus будет использовать пул памяти, чтобы избежать частого выделения и удаления памяти.</p>
 <p>#здесь вы можете задать размер памяти, занимаемой пулом памяти, единицей измерения является МБ.</p>
-<p>#отметим, что существует вероятность аварийного завершения работы Milvus, когда фактическая потребность в памяти превышает значение, заданное параметром maxMemSize.</p>
+<p>#отметим, что существует вероятность аварийного завершения работы Milvus, когда фактический объем памяти превышает значение, заданное параметром maxMemSize.</p>
 <p>#если initMemSize и MaxMemSize оба равны нулю,</p>
 <p>#milvus автоматически инициализирует половину доступной памяти GPU,</p>
 <p>#maxMemSize - всю доступную память GPU.</p>
 <p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/configure_gpu.md">Конфигурации, связанные с gpu</a>.</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code><button data-href="#streamingNode" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Любая конфигурация, связанная с сервером потокового узла.</p>
+<p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/configure_streamingnode.md">Конфигурации, связанные с потоковым узлом</a>.</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code><button data-href="#streaming" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Любая конфигурация, связанная со службой потоковой передачи.</p>
+<p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/configure_streaming.md">Конфигурации, связанные с потоковой передачей</a>.</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code><button data-href="#knowhere" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Любая конфигурация, связанная с векторной поисковой системой knowhere.</p>
+<p>См. <a href="/docs/ru/configure_knowhere.md">Конфигурации, связанные с knowhere</a>, для подробного описания каждого параметра в этом разделе.</p>

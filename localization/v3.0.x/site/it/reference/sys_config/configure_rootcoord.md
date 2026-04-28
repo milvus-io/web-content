@@ -75,7 +75,7 @@ summary: Imparare a configurare rootCoord per Milvus.
     <tr>
       <td>
         <li>Il numero massimo di partizioni in ogni collezione.</li>      
-        <li>Non è possibile creare nuove partizioni se questo parametro è impostato su 0 o 1.</li>      
+        <li>Non è possibile creare nuove partizioni se questo parametro è impostato a 0 o 1.</li>      
         <li>Intervallo: [0, INT64MAX]</li>      </td>
       <td>1024</td>
     </tr>
@@ -106,7 +106,7 @@ summary: Imparare a configurare rootCoord per Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Il numero minimo di righe di un segmento richiesto per la creazione di un indice.</li>      
+        <li>Il numero minimo di righe di un segmento richiesto per la creazione dell'indice.</li>      
         <li>I segmenti con dimensioni inferiori a questo parametro non saranno indicizzati e verranno cercati con la forza bruta.</li>      </td>
       <td>1024</td>
     </tr>
@@ -165,7 +165,7 @@ summary: Imparare a configurare rootCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        limite massimo per la somma del prodotto di partitionNumber e shardNumber      </td>
+      <td>        limite superiore per la somma del prodotto di partitionNumber e shardNumber      </td>
       <td>65536</td>
     </tr>
   </tbody>

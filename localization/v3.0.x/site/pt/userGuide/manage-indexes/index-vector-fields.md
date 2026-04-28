@@ -22,6 +22,9 @@ title: Indexar campos vectoriais
         ></path>
       </svg>
     </button></h1><p>Este guia orienta-o nas operações básicas de criação e gestão de índices em campos vectoriais de uma coleção.</p>
+<div class="alert warning">
+<p>Esta página foi descontinuada. Para obter a implementação mais recente, consulte <a href="/docs/pt/ivf-flat.md">IVF_FLAT</a>, <a href="/docs/pt/hnsw.md">HNSW</a> e muito mais.</p>
+</div>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +40,7 @@ title: Indexar campos vectoriais
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Aproveitando os metadados armazenados num ficheiro de índice, o Milvus organiza os seus dados numa estrutura especializada, facilitando a rápida recuperação da informação solicitada durante as pesquisas ou consultas.</p>
+    </button></h2><p>Aproveitando os metadados armazenados num ficheiro de índice, o Milvus organiza os seus dados numa estrutura especializada, facilitando a recuperação rápida das informações solicitadas durante as pesquisas ou consultas.</p>
 <p>O Milvus fornece vários tipos de índices e métricas para ordenar os valores de campo para pesquisas de similaridade eficientes. A tabela seguinte lista os tipos de índices e métricas suportados para diferentes tipos de campos vectoriais. Atualmente, o Milvus suporta vários tipos de dados vectoriais, incluindo embeddings de vírgula flutuante (frequentemente conhecidos como vectores de vírgula flutuante ou vectores densos), embeddings binários (também conhecidos como vectores binários) e embeddings esparsos (também conhecidos como vectores esparsos). Para obter detalhes, consulte <a href="/docs/pt/index.md">Índice na memória</a> e <a href="/docs/pt/metric.md">métricas de similaridade</a>.</p>
 <div class="filter">
  <a href="#floating">Incorporações de ponto flutuante</a> <a href="#binary">Incorporações binárias</a> <a href="#sparse">Incorporações esparsas</a></div>
@@ -84,12 +87,21 @@ title: Indexar campos vectoriais
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky"><ul><li>ÍNDICE_ESPARSO_INVERTIDO</li><li>SPARSE_WAND</li></ul></td>
+    <td class="tg-0pky">ÍNDICE_ESPARSO_INVERTIDO</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td class="tg-0pky">BM25</td>
+    <td class="tg-0pky">ÍNDICE_INVERTIDO_ESPARSO</td>
   </tr>
 </tbody>
 </table>
+<div class="alert note">
+<p>A partir da versão 2.5.4 do Milvus, <code translate="no">SPARSE_WAND</code> está a ser preterido. Em vez disso, recomenda-se a utilização de <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> para equivalência, mantendo a compatibilidade. Para mais informações, consulte <a href="/docs/pt/sparse_vector.md#Set-index-params-for-vector-field">Vetor esparso</a>.</p>
 </div>
-<p>Recomenda-se a criação de índices para o campo vetorial e para os campos escalares que são acessados com freqüência.</p>
+</div>
+<p>Recomenda-se a criação de índices tanto para o campo vetorial como para os campos escalares que são frequentemente acedidos.</p>
 <h2 id="Preparations" class="common-anchor-header">Preparações<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

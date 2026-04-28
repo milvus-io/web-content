@@ -61,7 +61,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/filtered-search.png" alt="Filtered Search" class="doc-image" id="filtered-search" />
    </span> <span class="img-wrapper"> <span>Pesquisa filtrada</span> </span></p>
-<p>Como mostra o diagrama acima, o pedido de pesquisa tem <code translate="no">chunk like &quot;%red%&quot;</code> como condição de filtragem, indicando que Milvus deve efetuar a pesquisa ANN em todas as entidades que tenham a palavra <code translate="no">red</code> no campo <code translate="no">chunk</code>. Especificamente, o Milvus faz o seguinte:</p>
+<p>Como mostra o diagrama acima, o pedido de pesquisa tem <code translate="no">chunk like &quot;%red%&quot;</code> como condição de filtragem, indicando que Milvus deve efetuar a pesquisa ANN em todas as entidades que tenham a palavra <code translate="no">red</code> no campo <code translate="no">chunk</code>. Especificamente, Milvus faz o seguinte:</p>
 <ul>
 <li><p>Filtra as entidades que correspondem às condições de filtragem indicadas no pedido de pesquisa.</p></li>
 <li><p>Realiza a pesquisa ANN dentro das entidades filtradas.</p></li>

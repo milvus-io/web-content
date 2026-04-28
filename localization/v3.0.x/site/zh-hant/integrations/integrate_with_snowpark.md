@@ -51,15 +51,45 @@ title: 在 Snowpark 容器服務上使用 Milvus
         ></path>
       </svg>
     </button></h2><p>以下將透過配置與程式碼，讓使用者了解 Milvus 的功能，以及如何在 SPCS 中使用 Milvus。</p>
-<h3 id="1-Obtain-account-information" class="common-anchor-header">1.取得帳號資訊</h3><p>下載 SPCS 客戶端：<a href="https://docs.snowflake.com/en/user-guide/snowsql-install-config">SnowSQL</a>，然後登入您的帳戶。</p>
+<h3 id="1-Obtain-account-information" class="common-anchor-header">1.取得帳號資訊<button data-href="#1-Obtain-account-information" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下載 SPCS 客戶端：<a href="https://docs.snowflake.com/en/user-guide/snowsql-install-config">SnowSQL</a>，然後登入您的帳戶。</p>
 <pre><code translate="no" class="language-shell">snowsql -a ${instance_name} -u ${user_name}
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">${instance_name}</code> 的規則是<code translate="no">${org_name}-${acct_name}</code> 。登入<a href="http://app.snowflake.com/sn">app.snowflake.com</a>並查看個人帳戶資訊，即可獲得相關資訊。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/snowflake-01.png" alt="Snowflake account information" class="doc-image" id="snowflake-account-information" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-01.png" alt="Snowflake account information" class="doc-image" id="snowflake-account-information" />
    </span> <span class="img-wrapper"> <span>雪花帳戶資訊</span> </span></p>
-<h3 id="2-Configure-Role-and-privileges" class="common-anchor-header">2.配置角色和權限</h3><p>配置 OAUTH 整合。</p>
+<h3 id="2-Configure-Role-and-privileges" class="common-anchor-header">2.配置角色和權限<button data-href="#2-Configure-Role-and-privileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>配置 OAUTH 整合。</p>
 <pre><code translate="no" class="language-sql">USE ROLE ACCOUNTADMIN;
 <span class="hljs-keyword">CREATE</span> SECURITY INTEGRATION SNOWSERVICES_INGRESS_OAUTH
   TYPE<span class="hljs-operator">=</span>oauth
@@ -83,7 +113,22 @@ USE ROLE USERADMIN;
 USE ROLE SECURITYADMIN;
 <span class="hljs-keyword">GRANT</span> ROLE MILVUS_ROLE <span class="hljs-keyword">TO</span> <span class="hljs-keyword">USER</span> milvus_user;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Create-data-storage-configuration" class="common-anchor-header">3.建立資料儲存設定</h3><ul>
+<h3 id="3-Create-data-storage-configuration" class="common-anchor-header">3.建立資料儲存設定<button data-href="#3-Create-data-storage-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>建立倉庫和資料庫</p>
 <pre><code translate="no" class="language-sql">USE ROLE SYSADMIN;
 <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">OR</span> REPLACE WAREHOUSE MILVUS_WAREHOUSE <span class="hljs-keyword">WITH</span>
@@ -123,7 +168,22 @@ ENABLED<span class="hljs-operator">=</span><span class="hljs-literal">TRUE</span
 <span class="hljs-keyword">GRANT</span> USAGE <span class="hljs-keyword">ON</span> INTEGRATION allow_all_eai <span class="hljs-keyword">TO</span> ROLE SYSADMIN;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="4-Create-images" class="common-anchor-header">4.建立影像</h3><p>Milvus 使用的映像需要在本地建立，然後由使用者上傳。關於 image 的相關設定，請參考<a href="https://github.com/dald001/milvus_on_spcs">此 repo</a>。克隆代碼後，到專案根目錄準備建立映像。</p>
+<h3 id="4-Create-images" class="common-anchor-header">4.建立影像<button data-href="#4-Create-images" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 使用的映像需要在本地建立，然後由使用者上傳。關於 image 的相關設定，請參考<a href="https://github.com/dald001/milvus_on_spcs">此 repo</a>。克隆代碼後，到專案根目錄準備建立映像。</p>
 <ul>
 <li><p>在本機建立映像</p>
 <p>開啟本機 shell 並開始建立映像。</p>
@@ -152,7 +212,22 @@ $</span><span class="language-bash">{instance_name}.registry.snowflakecomputing.
 docker push ${instance_name}.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/jupyter
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="5-Create-and-start-services" class="common-anchor-header">5.建立並啟動服務</h3><p>讓我們回到 SnowSQL shell。</p>
+<h3 id="5-Create-and-start-services" class="common-anchor-header">5.建立並啟動服務<button data-href="#5-Create-and-start-services" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>讓我們回到 SnowSQL shell。</p>
 <ul>
 <li>建立運算池</li>
 </ul>
@@ -174,7 +249,7 @@ docker push ${instance_name}.registry.snowflakecomputing.com/milvus_demo/public/
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/snowflake-02.png" alt="Compute pool status" class="doc-image" id="compute-pool-status" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-02.png" alt="Compute pool status" class="doc-image" id="compute-pool-status" />
    </span> <span class="img-wrapper"> <span>計算池狀態</span> </span></p>
 <ul>
 <li>上傳規格檔案</li>
@@ -219,7 +294,7 @@ USE SCHEMA PUBLIC;
 <p>如果您在啟動服務時遇到問題，您可以透過<code translate="no">CALL SYSTEM$GET_SERVICE_STATUS('milvus');</code> 檢視服務資訊。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/snowflake-03.png" alt="Service status" class="doc-image" id="service-status" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-03.png" alt="Service status" class="doc-image" id="service-status" />
    </span> <span class="img-wrapper"> <span>服務狀態</span> </span></p>
 <p>可透過<code translate="no">CALL SYSTEM$GET_SERVICE_LOGS('milvus', '0', 'milvus', 10);</code> 獲得更多資訊。</p>
 <h2 id="Use-Notebook" class="common-anchor-header">使用筆記本<button data-href="#Use-Notebook" class="anchor-icon" translate="no">
@@ -248,12 +323,12 @@ USE SCHEMA PUBLIC;
 <p>記錄<code translate="no">ingress_url</code> 部分資訊，然後開啟瀏覽器並輸入<code translate="no">ingress_url</code> ，使用 milvus_user 帳號登入網站。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/snowflake-04.png" alt="Obtain the ingress URL" class="doc-image" id="obtain-the-ingress-url" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-04.png" alt="Obtain the ingress URL" class="doc-image" id="obtain-the-ingress-url" />
    </span> <span class="img-wrapper"> <span>取得入口 URL</span> </span></p>
 <p>透過<code translate="no">ingress_url</code> 開啟筆記型電腦，雙擊頁面上的<code translate="no">TestMilvus.ipynb</code> 檔案試用 Milvus。選擇程式碼區塊的第一部分，然後按一下<strong>執行</strong>按鈕，開始建立連線和初始化嵌入功能。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/snowflake-05.png" alt="Run TestMilvus.ipynb in the notebook" class="doc-image" id="run-testmilvus.ipynb-in-the-notebook" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-05.png" alt="Run TestMilvus.ipynb in the notebook" class="doc-image" id="run-testmilvus.ipynb-in-the-notebook" />
    </span> <span class="img-wrapper"> <span>在筆記型電腦中執行 TestMilvus.ipynb</span> </span></p>
 <p>建立連線後，繼續按一下<strong>RUN</strong>。程式碼會將一段文字經過嵌入處理後，變成向量資料，再插入到 Milvus 中。</p>
 <pre><code translate="no" class="language-python">docs = [
@@ -265,7 +340,7 @@ USE SCHEMA PUBLIC;
 <p>然後使用一段文字作為查詢："Who started AI research?"，執行嵌入處理後的查詢，最後獲得並顯示最相關的結果。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
    </span> <span class="img-wrapper"> <span>取得並顯示最相關的結果</span> </span></p>
 <p>關於 Milvus 客戶端的使用方法，您可以參考<a href="/docs/zh-hant/quickstart.md">Milvus Doc</a>章節。</p>
 <h2 id="7-Clean-up" class="common-anchor-header">7.清理<button data-href="#7-Clean-up" class="anchor-icon" translate="no">

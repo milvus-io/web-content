@@ -681,7 +681,7 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor predefinido</th> 
+      <th class="width20">Valor por defeito</th> 
     </tr>
   </thead>
   <tbody>
@@ -950,7 +950,7 @@ summary: Saiba como configurar o common para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Informações do pedido de rastreio      </td>
+      <td>        informação do pedido de rastreio      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -1037,7 +1037,7 @@ summary: Saiba como configurar o common para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        taxa máxima de falsos positivos para filtro bloom     </td>
+      <td>        taxa máxima de falsos positivos para o filtro bloom     </td>
       <td>0.001</td>
     </tr>
   </tbody>

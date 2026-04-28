@@ -65,7 +65,7 @@ summary: >-
 <p>La figura seguente mostra come viene costruito un grafo Vamana.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
    </span> <span class="img-wrapper"> <span>Diskann</span> </span></p>
 <ol>
 <li><p><strong>Connessioni iniziali casuali:</strong> Ogni punto di dati (vettore) è rappresentato come un nodo del grafo. Questi nodi sono inizialmente collegati in modo casuale, formando una rete densa. In genere, un nodo inizia con circa 500 bordi (o connessioni) per un'ampia connettività.</p></li>
@@ -74,7 +74,7 @@ summary: >-
 <li><p><strong>Potatura degli spigoli ridondanti:</strong> L'algoritmo scarta le connessioni non necessarie in base alle distanze tra i nodi. Questo passaggio dà priorità ai bordi di qualità superiore.</p>
 <p>Il parametro <code translate="no">max_degree</code> limita il numero massimo di bordi per nodo. Un valore più alto di <code translate="no">max_degree</code> si traduce in un grafo più denso, che potenzialmente può trovare più vicini rilevanti (maggiore richiamo), ma anche aumentare l'uso della memoria e il tempo di ricerca.</p></li>
 <li><p><strong>Aggiunta di scorciatoie strategiche:</strong> Vamana introduce bordi a lungo raggio, che collegano punti di dati molto distanti tra loro nello spazio vettoriale. Queste scorciatoie consentono alle ricerche di saltare rapidamente attraverso il grafo, aggirando i nodi intermedi e accelerando notevolmente la navigazione.</p>
-<p>Il parametro <code translate="no">search_list_size</code> determina l'ampiezza del processo di raffinamento del grafo. Un valore più alto di <code translate="no">search_list_size</code> estende la ricerca dei vicini durante la costruzione e può migliorare la precisione finale, ma aumenta il tempo di costruzione dell'indice.</p></li>
+<p>Il parametro <code translate="no">search_list_size</code> determina l'ampiezza del processo di raffinamento del grafo. Un valore più alto di <code translate="no">search_list_size</code> estende la ricerca dei vicini durante la costruzione e può migliorare l'accuratezza finale, ma aumenta il tempo di costruzione dell'indice.</p></li>
 </ul></li>
 </ol>
 <p>Per saperne di più sulla regolazione dei parametri, consultare i <a href="/docs/it/diskann.md#DISKANN-params">parametri di DISKANN</a>.</p>
@@ -106,11 +106,11 @@ summary: >-
     </button></h3><p>Una volta costruito l'indice (il grafico Vamana su disco e i codici PQ in memoria), DISKANN esegue le ricerche di RNA come segue:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
    </span> <span class="img-wrapper"> <span>Diskann 2</span> </span></p>
 <ol>
 <li><p><strong>Query e punto di ingresso:</strong> Viene fornito un vettore di query per individuare i suoi vicini più prossimi. DISKANN parte da un punto di ingresso selezionato nel grafo di Vamana, spesso un nodo vicino al centroide globale del dataset. Il centroide globale rappresenta la media di tutti i vettori e aiuta a minimizzare la distanza di attraversamento del grafo per trovare i vicini desiderati.</p></li>
-<li><p><strong>Esplorazione dei vicini:</strong> L'algoritmo raccoglie i potenziali vicini candidati (cerchi in rosso nella figura) dai bordi del nodo corrente, sfruttando i codici PQ in memoria per approssimare le distanze tra questi candidati e il vettore di interrogazione. Questi potenziali vicini candidati sono i nodi direttamente connessi al punto di ingresso selezionato attraverso i bordi del grafo di Vamana.</p></li>
+<li><p><strong>Esplorazione dei vicini:</strong> L'algoritmo raccoglie i potenziali vicini candidati (cerchi in rosso nella figura) dagli spigoli del nodo corrente, sfruttando i codici PQ in memoria per approssimare le distanze tra questi candidati e il vettore di interrogazione. Questi potenziali vicini candidati sono i nodi direttamente connessi al punto di ingresso selezionato attraverso i bordi del grafo di Vamana.</p></li>
 <li><p><strong>Selezione dei nodi per il calcolo accurato della distanza:</strong> Dai risultati approssimativi, un sottoinsieme dei vicini più promettenti (cerchi in verde nella figura) viene selezionato per una valutazione precisa della distanza utilizzando i loro vettori originali non compressi. Ciò richiede la lettura dei dati dal disco, che può richiedere molto tempo. DISKANN utilizza due parametri per controllare questo delicato equilibrio tra precisione e velocità:</p>
 <ul>
 <li><p><code translate="no">beam_width_ratio</code>: Una razione che controlla l'ampiezza della ricerca, determinando quanti candidati vicini vengono selezionati in parallelo per esplorare i loro vicini. Una <code translate="no">beam_width_ratio</code> più grande comporta un'esplorazione più ampia, che potenzialmente porta a una maggiore accuratezza, ma aumenta anche il costo computazionale e l'I/O su disco. L'ampiezza del fascio, o il numero di nodi selezionati, è determinata dalla formula: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
@@ -139,7 +139,7 @@ summary: >-
 <ol>
 <li><p><strong>Aggiornare il file di configurazione di Milvus</strong></p>
 <ol>
-<li><p>Individuare il file di configurazione di Milvus<strong>.</strong> (Per maggiori dettagli su come trovare questo file, consultare la documentazione di Milvus sulla configurazione).</p></li>
+<li><p>Individuare il file di configurazione di Milvus<strong>.</strong> (Per maggiori informazioni su come trovare questo file, consultare la documentazione di Milvus sulla configurazione).</p></li>
 <li><p>Trovare il parametro <code translate="no">queryNode.enableDisk</code> e impostarne il valore su <code translate="no">true</code>:</p>
 <pre><code translate="no" class="language-yaml"> <span class="hljs-attr">queryNode:</span>
      <span class="hljs-attr">enableDisk:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Enables query nodes to load and search using the on-disk index</span>
@@ -248,7 +248,7 @@ summary: >-
      <td><p>Durante la costruzione dell'indice, questo parametro definisce la dimensione del pool di candidati utilizzato per la ricerca dei vicini più prossimi per ogni nodo. Per ogni nodo aggiunto al grafo, l'algoritmo mantiene un elenco dei <code translate="no">search_list_size</code> migliori candidati trovati finora. La ricerca dei vicini si ferma quando questo elenco non può più essere migliorato. Da questa lista finale di candidati, i migliori <code translate="no">max_degree</code> nodi vengono selezionati per formare i bordi finali.</p></td>
      <td><p><strong>Tipo</strong>: Intero <strong>Intervallo</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">100</code></p></td>
-     <td><p>Un valore maggiore di <code translate="no">search_list_size</code> aumenta la probabilità di trovare i veri vicini per ogni nodo, il che può portare a un grafo di qualità superiore e a migliori prestazioni di ricerca (recall). Tuttavia, ciò ha il costo di un tempo di creazione dell'indice significativamente più lungo. Dovrebbe essere sempre impostato a un valore maggiore o uguale a <code translate="no">max_degree</code>.</p></td>
+     <td><p>Un valore maggiore di <code translate="no">search_list_size</code> aumenta la probabilità di trovare i veri vicini per ogni nodo, il che può portare a un grafo di qualità superiore e a migliori prestazioni di ricerca (recall). Tuttavia, ciò comporta un tempo di creazione dell'indice significativamente più lungo. Dovrebbe essere sempre impostato a un valore maggiore o uguale a <code translate="no">max_degree</code>.</p></td>
    </tr>
    <tr>
      <td></td>

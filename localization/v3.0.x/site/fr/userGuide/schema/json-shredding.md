@@ -4,7 +4,7 @@ title: Déchiquetage JSONCompatible with Milvus 2.6.2+
 summary: >-
   Le déchiquetage JSON accélère les requêtes JSON en convertissant le stockage
   traditionnel basé sur les lignes en un stockage optimisé en colonnes. Tout en
-  conservant la flexibilité de JSON pour la modélisation des données, Milvus
+  conservant la souplesse de JSON pour la modélisation des données, Milvus
   effectue en coulisses une optimisation en colonnes qui améliore
   considérablement l'accès et l'efficacité des requêtes.
 beta: Milvus 2.6.2+
@@ -377,7 +377,7 @@ beta: Milvus 2.6.2+
 <li><p>Ensuite, vérifiez que les données ont été chargées en exécutant <code translate="no">show loaded-json-stats</code> sur le nœud de requête. La sortie affichera des détails sur les données déchiquetées chargées pour chaque nœud de requête.</p></li>
 </ol></li>
 <li><p><strong>Que faire en cas d'erreur ?</strong></p>
-<p>Si le processus de construction ou de chargement échoue, vous pouvez rapidement désactiver la fonctionnalité en configurant <code translate="no">common.enabledJSONShredding=false</code>. Pour effacer toutes les tâches restantes, utilisez la commande <code translate="no">remove stats-task &lt;task_id&gt;</code> dans <a href="/docs/fr/birdwatcher_usage_guides.md">Birdwatcher</a>. Si une requête échoue, paramétrez <code translate="no">common.usingjsonShreddingForQuery=false</code> pour revenir au chemin de requête original, en contournant les données déchiquetées.</p></li>
+<p>Si le processus de construction ou de chargement échoue, vous pouvez rapidement désactiver la fonctionnalité en configurant <code translate="no">common.enabledJSONShredding=false</code>. Pour effacer toutes les tâches restantes, utilisez la commande <code translate="no">remove stats-task &lt;task_id&gt;</code> dans <a href="/docs/fr/birdwatcher_usage_guides.md">Birdwatcher</a>. Si une requête échoue, paramétrez <code translate="no">common.usingjsonShreddingForQuery=false</code> pour revenir au chemin d'accès original de la requête, en contournant les données déchiquetées.</p></li>
 <li><p><strong>Comment choisir entre le déchiquetage et l'indexation JSON ?</strong></p>
 <ul>
 <li><p>Le<strong>déchiquetage JSON</strong> est idéal pour les clés qui apparaissent fréquemment dans vos documents, en particulier pour les structures JSON complexes. Il combine les avantages du stockage en colonnes et de l'indexation inversée, ce qui le rend bien adapté aux scénarios de lecture intensive dans lesquels vous interrogez de nombreuses clés différentes. Cependant, il n'est pas recommandé pour les très petits documents JSON, car le gain de performance est minime. Plus la proportion de la valeur de la clé par rapport à la taille totale du document JSON est faible, plus le déchiquetage permet d'optimiser les performances.</p></li>

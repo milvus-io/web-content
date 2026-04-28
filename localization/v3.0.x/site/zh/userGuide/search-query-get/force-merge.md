@@ -199,6 +199,7 @@ job_id = client.compact(
     target_size=max_int64
 )
 <button class="copy-code-btn"></button></code></pre>
+<p><a id="parameter-reference"></a></p>
 <h4 id="Parameter-reference" class="common-anchor-header">参数参考</h4><p>下表解释了参数。</p>
 <table>
    <tr>
@@ -258,9 +259,10 @@ state = client.get_compaction_state(job_id)
     </button></h2><ul>
 <li><p><strong>不要在生产环境中使用强制合并压缩。</strong></p></li>
 <li><p><strong>大多数情况下使用自动大小计算模式。</strong>将<code translate="no">target_size</code> 设置为<code translate="no">max_int64</code> ，让 Milvus 分析你的网段分布和节点资源，以确定最佳大小。除非您有特定的大小要求，否则建议使用这种方法。</p></li>
-<li><p><strong>考虑性能权衡。</strong>强制合并压缩是一种资源密集型操作。它会读取、合并和重写段数据。将其安排在低流量时段，以尽量减少对查询延迟的影响。</p></li>
+<li><p><strong>考虑性能权衡。</strong>强制合并压缩是一种资源密集型操作。它会读取、合并和重写段数据。将其安排在流量较低的时段，以尽量减少对查询延迟的影响。</p></li>
 <li><p><strong>监控之前和之后的段计数。</strong>使用<code translate="no">get_compaction_state()</code> 和<code translate="no">list_persistent_segments</code> 验证压缩是否如预期产生了更少、更大的数据段。</p></li>
 </ul>
+<p><a id="faq"></a></p>
 <h2 id="FAQ" class="common-anchor-header">常见问题<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -353,7 +355,7 @@ state = client.get_compaction_state(job_id)
 <p><strong>选择指导：</strong></p>
 <ul>
 <li><p>选择标准压缩进行低风险增量清理。</p></li>
-<li><p>当您明确希望将 Collections 重塑为与搜索和加载行为一致的更少、更大的片段时，请选择强制合并。</p></li>
+<li><p>当您明确希望将 Collections 重塑为更少、更大的片段，并与搜索和加载行为保持一致时，请选择强制合并。</p></li>
 </ul>
 <p><strong>强制合并与聚类压缩有何不同？</strong></p>
 <p><a href="/docs/zh/clustering-compaction.md">聚类压缩</a>(<code translate="no">is_clustering=True</code>) 基于聚类键在段内重组数据，以改进搜索剪枝。强制合并 (<code translate="no">target_size=N</code>) 在不改变数据分布的情况下优化数据段大小。它们的作用不同，但可以一起使用--先运行聚类压缩来组织数据，然后再运行强制合并来合并生成的数据段。</p>

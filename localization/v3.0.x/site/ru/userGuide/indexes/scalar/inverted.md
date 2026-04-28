@@ -69,7 +69,7 @@ summary: >-
 <p>Например, значение <strong>"электроника"</strong> соотносится с идентификаторами <strong>1</strong> и <strong>3</strong>, а <strong>"книги"</strong> - с идентификаторами <strong>2</strong> и <strong>5</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
    </span> <span class="img-wrapper"> <span>Принцип работы инвертированного индекса</span> </span></p>
 <p>Когда вы фильтруете определенное значение (например, <code translate="no">category == &quot;electronics&quot;</code>), Milvus просто ищет термин в индексе и получает соответствующие идентификаторы напрямую. Это позволяет избежать сканирования всего набора данных и обеспечивает быструю фильтрацию, особенно для категориальных или повторяющихся значений.</p>
 <p>Индексы INVERTED поддерживают все скалярные типы полей, такие как <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong> и <strong>ARRAY</strong>. Однако параметры индекса для индексирования поля JSON несколько отличаются от обычных скалярных полей.</p>

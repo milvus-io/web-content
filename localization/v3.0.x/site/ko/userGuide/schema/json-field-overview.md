@@ -59,7 +59,7 @@ summary: >-
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예에서 <code translate="no">metadata</code> 는 플랫 값(예: <code translate="no">category</code>, <code translate="no">in_stock</code>), 배열(<code translate="no">tags</code>) 및 중첩된 개체(<code translate="no">supplier</code>)가 혼합되어 있는 단일 JSON 필드입니다.</p>
+<p>이 예에서 <code translate="no">metadata</code> 는 플랫 값(예: <code translate="no">category</code>, <code translate="no">in_stock</code>), 배열(<code translate="no">tags</code>), 중첩된 개체(<code translate="no">supplier</code>)가 혼합되어 있는 단일 JSON 필드입니다.</p>
 <div class="alert note">
 <p><strong>이름 지정 규칙:</strong> JSON 키에는 문자, 숫자, 밑줄만 사용하세요. 특수 문자, 공백 또는 점은 쿼리에서 구문 분석 문제를 일으킬 수 있으므로 피하세요.</p>
 </div>

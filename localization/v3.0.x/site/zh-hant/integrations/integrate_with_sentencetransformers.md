@@ -63,7 +63,7 @@ collection_name = <span class="hljs-string">&quot;movie_embeddings&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在單一行中，<code translate="no">datasets</code> 允許我們下載和開啟資料集。資料庫會在本機快取資料集，並在下次執行時使用該副本。每一行都包含一部電影的詳細資料，該電影附有一篇 Wikipedia 文章。我們使用<code translate="no">Title</code>,<code translate="no">PlotSummary</code>,<code translate="no">Release Year</code> 和<code translate="no">Origin/Ethnicity</code> 列。</p>
+    </button></h2><p>在單一行中，<code translate="no">datasets</code> 允許我們下載和開啟資料集。資料庫會在本機快取資料集，並在下次執行時使用該副本。每一行都包含一部電影的詳細資訊，該電影附有一篇 Wikipedia 文章。我們使用<code translate="no">Title</code>,<code translate="no">PlotSummary</code>,<code translate="no">Release Year</code> 和<code translate="no">Origin/Ethnicity</code> 列。</p>
 <pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
@@ -103,7 +103,7 @@ schema = CollectionSchema(fields=fields, enable_dynamic_field=<span class="hljs-
 client.create_collection(collection_name=collection_name, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
-<li>定義向量搜尋索引演算法。Milvus Lite 支援 FLAT 索引類型，而 Milvus Standalone 和 Milvus Distributed 則實施多種方法，例如 IVF、HNSW 和 DiskANN。對於本範例中的小規模資料，任何搜尋索引類型都已經足夠，因此我們在此使用最簡單的 FLAT 索引類型。</li>
+<li>定義向量搜尋索引演算法。Milvus Lite 支援 FLAT 索引類型，而 Milvus Standalone 和 Milvus Distributed 則實施多種方法，例如 IVF、HNSW 和 DiskANN。對於本範例中的小型資料，任何搜尋索引類型都已經足夠，因此我們在此使用最簡單的 FLAT 索引類型。</li>
 </ol>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;IP&quot;</span>)
@@ -140,7 +140,7 @@ client.create_index(collection_name, index_params)
     res = client.insert(collection_name=collection_name, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>上述操作相對耗時，因為嵌入需要時間。在 2023 MacBook Pro 上使用 CPU 執行此步驟約需 2 分鐘，使用專用 GPU 執行此步驟則會更快。休息一下，喝杯咖啡吧！</p>
+<p>上述操作相對耗時，因為嵌入需要時間。在 2023 MacBook Pro 上使用 CPU 執行此步驟約需 2 分鐘，而使用專用 GPU 執行此步驟則會更快。休息一下，喝杯咖啡吧！</p>
 </div>
 <h2 id="Performing-the-Search" class="common-anchor-header">執行搜尋<button data-href="#Performing-the-Search" class="anchor-icon" translate="no">
       <svg translate="no"

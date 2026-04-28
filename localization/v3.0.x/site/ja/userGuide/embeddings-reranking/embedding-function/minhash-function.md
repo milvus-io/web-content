@@ -58,7 +58,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><p><details></p>
 <p><summary>MinHashがどのように機能するかを見るには、次のように展開します。</summary></p>
-<p><a href="https://en.wikipedia.org/wiki/MinHash">MinHashは</a>、集合間の<a href="https://en.wikipedia.org/wiki/Jaccard_index">Jaccard類似度を</a>推定する局所性を考慮したハッシュ技法である。Milvusでは、MinHash関数は次のようなパイプラインに従っています：入力として生のテキストを提供し、Milvusは出力としてバイナリベクトルを生成します。</p>
+<p><a href="https://en.wikipedia.org/wiki/MinHash">MinHashは</a>、集合間の<a href="https://en.wikipedia.org/wiki/Jaccard_index">Jaccard類似度を</a>推定する局所性を考慮したハッシュ技法である。Milvusでは、MinHash関数は次のようなパイプラインに従っています：入力として生テキストを提供し、Milvusは出力としてバイナリベクトルを生成します。</p>
 <p>全体的なワークフローは、ドキュメントの取り込みとクエリ処理の両方で使用される<strong>共有テキスト処理パイプラインと</strong>、それに続く保存と検索のためのフェーズ固有の操作で構成される。</p>
 <p>
   
@@ -79,12 +79,12 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>文書取り込みとクエリ処理の両方が、生のテキストを同じ4段階の変換に通す：</p>
+    </button></h3><p>文書取り込みとクエリ処理の両方が、生テキストを同じ4段階の変換に通す：</p>
 <ol>
 <li><p><strong>テキスト分析</strong>：テキストは、<a href="/docs/ja/analyzer-overview.md">アナライザーによって</a>処理されるか（<code translate="no">token_level</code> が<code translate="no">&quot;word&quot;</code> の場合）、直接使用される（<code translate="no">token_level</code> が<code translate="no">&quot;char&quot;</code> の場合）。単語レベルのトークン化は、入力フィールドに設定されたアナライザーを適用して、テキストを用語に分割します。たとえば、<code translate="no">&quot;milvus is vector db&quot;</code> は<code translate="no">[&quot;milvus&quot;, &quot;is&quot;, &quot;vector&quot;, &quot;db&quot;]</code> になります。</p></li>
 <li><p><strong>シンギング</strong>：トークンは、<code translate="no">shingle_size</code> サイズの重複する n-gram（シング ル）に分割されます。たとえば、単語レベルで3-gramを使用すると、トークン<code translate="no">[&quot;information&quot;, &quot;retrieval&quot;, &quot;is&quot;, &quot;a&quot;, &quot;field&quot;]</code> は<code translate="no">[&quot;information retrieval is&quot;, &quot;retrieval is a&quot;, &quot;is a field&quot;]</code> のようなシングルになる。</p></li>
-<li><p><strong>MinHash署名生成</strong>：複数のハッシュ関数（H1、H2、...、Hn、ここでn =<code translate="no">num_hashes</code> ）がシング ル集合に適用される。各ハッシュ関数について、すべての帯状疱疹にわたる最小のハッシュ値が選択される。これらの最小値の集合がMinHash署名を形成する - これはオリジナル文書のJaccard類似度を近似する固定長の表現である。</p></li>
-<li><p><strong>バイナリベクターエンコーディング</strong>：各署名値は32ビットのハッシュであり、完全な署名は次元<code translate="no">32 * num_hashes</code> の<code translate="no">BINARY_VECTOR</code> にパックされる。</p></li>
+<li><p><strong>MinHash署名生成</strong>：複数のハッシュ関数（H1、H2、...、Hn、n =<code translate="no">num_hashes</code> ）がシング ル集合に適用される。各ハッシュ関数について、すべての帯状疱疹にわたる最小のハッシュ値が選択される。これらの最小値の集合がMinHash署名を形成する - これはオリジナル文書のJaccard類似度を近似する固定長の表現である。</p></li>
+<li><p><strong>バイナリベクターエンコーディング</strong>：各署名値は32ビットのハッシュであり、完全な署名は<code translate="no">32 * num_hashes</code> の次元<code translate="no">BINARY_VECTOR</code> にパックされる。</p></li>
 </ol>
 <h3 id="Document-ingestion" class="common-anchor-header">文書の取り込み<button data-href="#Document-ingestion" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -101,7 +101,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>挿入時には、共有パイプラインによって生成されたバイナリベクトルが<code translate="no">MINHASH_LSH</code> インデックスに格納される。このインデックスはLSH（Locality-Sensitive Hashing）テーブルを保持し、類似の署名を同じバケットにグループ化することで、クエリ時に高速な候補検索を可能にしている。</p>
+    </button></h3><p>挿入時には、共有パイプラインによって生成されたバイナリベクトルが<code translate="no">MINHASH_LSH</code> インデックスに格納される。このインデックスはLSH（Locality-Sensitive Hashing）テーブルを保持し、類似の署名を同じバケットにグループ化することで、クエリ時に高速な候補検索を可能にする。</p>
 <h3 id="Query-processing" class="common-anchor-header">クエリ処理<button data-href="#Query-processing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -272,7 +272,7 @@ schema.add_function(minhash_function)
      <td><p><code translate="no">token_level</code></p></td>
      <td><p>str</p></td>
      <td><p><code translate="no">"word"</code></p></td>
-     <td><p>トークン化レベル。オプション：</p><ul><li><p><code translate="no">"word"</code>トークン化のためにフィールドの解析器を使用し、その後n-gram shinglingを適用する。</p></li><li><p><code translate="no">"char"</code> /<code translate="no">"character"</code>: 生の文字に直接n-gram shinglingを適用する（アナライザーなし）。</p><p>単語レベルは、より強力なセマンティクスと高い効率を提供するが、言語固有のトークン化に依存する。文字レベルは言語に依存しないが、高次元のシングルを生成し、セマンティクスは弱い。</p></li></ul></td>
+     <td><p>トークン化レベル。オプション：</p><ul><li><p><code translate="no">"word"</code>トークン化にフィールドのアナライザーを使い、n-gram shinglingを適用する。</p></li><li><p><code translate="no">"char"</code> /<code translate="no">"character"</code>: 生の文字に直接n-gram shinglingを適用する（アナライザーなし）。</p><p>単語レベルは、より強力なセマンティクスと高い効率を提供するが、言語固有のトークン化に依存する。文字レベルは言語に依存しないが、高次元のシングルを生成し、セマンティクスは弱い。</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">seed</code></p></td>
@@ -448,7 +448,7 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/ja/full-text-search.md">全文検索</a>：重複検出の代わりに、語彙の関連性ランキングにBM25を使用。</p></li>
+<li><p><a href="/docs/ja/full-text-search.md">全文検索</a>：重複検出の代わりに、語彙の関連性ランキングにBM25を使用します。</p></li>
 <li><p><a href="/docs/ja/analyzer-overview.md">アナライザーの概要</a>：テキスト・トークナイゼーションのためのカスタム・アナライザーの設定。</p></li>
 <li><p><a href="/docs/ja/minhash-lsh.md">MINHASH_LSH インデックス</a>：リコールとパフォーマンスのための LSH パラメーターのチューニングについて学びます。</p></li>
 </ul>

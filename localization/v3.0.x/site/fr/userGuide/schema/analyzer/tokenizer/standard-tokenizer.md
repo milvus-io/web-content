@@ -2,8 +2,8 @@
 id: standard-tokenizer.md
 title: Tokeniseur standard
 summary: >-
-  Le tokenizer standard de Milvus divise le texte en fonction des espaces et des
-  signes de ponctuation, ce qui le rend adapté à la plupart des langues.
+  Le tokéniseur standard de Milvus divise le texte en fonction des espaces et
+  des signes de ponctuation, ce qui le rend adapté à la plupart des langues.
 ---
 <h1 id="Standard-Tokenizer" class="common-anchor-header">Tokeniseur standard<button data-href="#Standard-Tokenizer" class="anchor-icon" translate="no">
       <svg translate="no"

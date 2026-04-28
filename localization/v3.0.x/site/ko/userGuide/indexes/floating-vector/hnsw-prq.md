@@ -4,7 +4,7 @@ title: HNSW_PRQ
 summary: >-
   HNSW_PRQ는 계층적 탐색 가능한 작은 세계(HNSW) 그래프와 제품 잔여 정량화(PRQ)를 활용하여 인덱스 크기와 정확도 사이의 균형을
   미세하게 조정할 수 있는 고급 벡터 인덱싱 방법을 제공합니다. PRQ는 추가 정보를 캡처하기 위해 잔여 정량화(RQ) 단계를 도입함으로써
-  기존의 제품 정량화(PQ)를 뛰어넘어 순수 PQ 기반 방식에 비해 정확도가 더 높거나 인덱스가 더 콤팩트해집니다. 그러나 추가 단계로 인해
+  기존의 제품 정량화(PQ)를 뛰어넘어 순수 PQ 기반 방식에 비해 정확도가 더 높거나 인덱스가 더 콤팩트해집니다. 하지만 추가 단계로 인해
   인덱스 구축 및 검색 시 계산 오버헤드가 높아질 수 있습니다.
 ---
 <h1 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ<button data-href="#HNSWPRQ" class="anchor-icon" translate="no">
@@ -276,12 +276,12 @@ res = MilvusClient.search(
      <td><p>RQ 단계에서 사용되는 잔여 서브퀀티저의 수를 제어합니다. 서브퀀타이저가 많을수록 압축률이 높아지지만 정보 손실이 더 많이 발생할 수 있습니다.</p></td>
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [1, 16]</p>
 <p><strong>기본값입니다</strong>: <code translate="no">2</code></p></td>
-     <td><p><code translate="no">nrq</code> 값이 클수록 잔여 하위 양자화 단계가 추가되어 원본 벡터를 더 정밀하게 재구성할 수 있습니다. 하지만 더 많은 서브퀀타이저를 저장하고 계산해야 하므로 인덱스 크기가 커지고 계산 오버헤드가 증가합니다.</p></td>
+     <td><p><code translate="no">nrq</code> 값이 클수록 잔여 하위 양자화 단계가 추가되어 원본 벡터를 더 정밀하게 재구성할 수 있습니다. 하지만 더 많은 서브퀀타이저를 저장하고 계산해야 하므로 인덱스 크기가 커지고 계산 오버헤드가 커집니다.</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine</code></p></td>
-     <td><p>검색 중에 세분화 단계를 적용할지 여부를 제어하는 부울 플래그입니다. 세분화에는 쿼리 벡터와 후보 사이의 정확한 거리를 계산하여 초기 결과의 순위를 다시 매기는 작업이 포함됩니다.</p></td>
+     <td><p>검색 중에 세분화 단계를 적용할지 여부를 제어하는 부울 플래그입니다. 구체화에는 쿼리 벡터와 후보 사이의 정확한 거리를 계산하여 초기 결과의 순위를 다시 매기는 작업이 포함됩니다.</p></td>
      <td><p><strong>유형</strong>: 부울 <strong>범위</strong>: [<code translate="no">true</code>, <code translate="no">false</code>]</p>
 <p><strong>기본값입니다</strong>: <code translate="no">false</code></p></td>
      <td><p>높은 정확도가 필수적이며 약간 느린 검색 시간을 용인할 수 있는 경우 <code translate="no">true</code> 로 설정합니다. 속도가 우선이고 약간의 정확도 저하를 감수할 수 있는 경우 <code translate="no">false</code> 을 사용합니다.</p></td>
@@ -292,7 +292,7 @@ res = MilvusClient.search(
      <td><p>세분화 과정에서 사용되는 데이터의 정밀도를 결정합니다. 이 정밀도는 압축 벡터( <code translate="no">m</code> 및 <code translate="no">nbits</code> 매개변수에 의해 설정된 대로)보다 높아야 합니다.</p></td>
      <td><p><strong>Type</strong>: 문자열 <strong>범위</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]입니다.</p>
 <p><strong>기본값</strong>: None</p></td>
-     <td><p>더 높은 메모리 비용으로 정밀도를 최대화하려면 <code translate="no">FP32</code>, 더 나은 압축을 위해서는 <code translate="no">SQ6</code>/<code translate="no">SQ8</code> 를 사용하세요. <code translate="no">BF16</code> 와 <code translate="no">FP16</code> 는 균형 잡힌 대안을 제공합니다.</p></td>
+     <td><p>더 높은 메모리 비용으로 정밀도를 최대화하려면 <code translate="no">FP32</code>, 더 나은 압축을 위해서는 <code translate="no">SQ6</code>/<code translate="no">SQ8</code> 을 사용하세요. <code translate="no">BF16</code> 과 <code translate="no">FP16</code> 은 균형 잡힌 대안을 제공합니다.</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
@@ -327,13 +327,13 @@ res = MilvusClient.search(
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [1, <em>int_max</em>]</p>
 <p><strong>기본값</strong>: <em>limit</em> (반환할 가장 가까운 이웃 TopK)</p></td>
      <td><p><code translate="no">ef</code> 이 클수록 일반적으로 더 많은 잠재적 이웃을 고려하므로 <strong>검색 정확도가 높아</strong> 집니다. 그러나 <strong>검색 시간도 증가</strong>합니다. 높은 회상률을 달성하는 것이 중요하고 검색 속도가 덜 중요한 경우에는 <code translate="no">ef</code> 을 늘리는 것이 좋습니다.</p>
-<p>특히 약간의 정확도 저하를 감수할 수 있는 시나리오에서는 <code translate="no">ef</code> 을 줄여 검색 속도를 우선시하는 것이 좋습니다.</p>
+<p>특히 약간의 정확도 감소를 감수할 수 있는 시나리오에서는 <code translate="no">ef</code> 을 줄여 검색 속도를 우선시하는 것이 좋습니다.</p>
 <p>대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [K, 10K].</p></td>
    </tr>
    <tr>
      <td><p>PRQ</p></td>
      <td><p><code translate="no">refine_k</code></p></td>
-     <td><p>요청된 상위 K 결과와 비교하여 정제(순위 재조정) 단계에서 추가로 검토할 후보자 수를 제어하는 배율입니다.</p></td>
+     <td><p>요청된 상위 K 결과와 비교하여 정제(순위 재조정) 단계에서 추가로 검토하는 후보자 수를 제어하는 배율입니다.</p></td>
      <td><p><strong>유형</strong>: 실수 <strong>범위</strong>: [1, <em>float_max</em>)</p>
 <p><strong>기본값</strong>: 1</p></td>
      <td><p><code translate="no">refine_k</code> 값이 클수록 검색 회수율과 정확도가 향상되지만 검색 시간과 리소스 사용량도 증가합니다. 값이 1이면 구체화 프로세스에서 초기 상위 K 결과만 고려한다는 의미입니다.</p></td>

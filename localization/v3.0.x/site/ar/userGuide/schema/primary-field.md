@@ -558,7 +558,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
       </svg>
     </button></h3><p>يجب عليك تضمين عمود الحقل الأساسي في كل عملية إدراج.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">نودجيز</a> <a href="#go">جو</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Each entity must contain the primary field `product_id`</span>
 data = [
     {<span class="hljs-string">&quot;product_id&quot;</span>: <span class="hljs-string">&quot;PROD-001&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>], <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;book&quot;</span>},
@@ -653,7 +653,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Migrate-data-with-existing-AutoIDs" class="common-anchor-header">ترحيل البيانات باستخدام المعرّفات التلقائية الموجودة<button data-href="#Migrate-data-with-existing-AutoIDs" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Migrate-data-with-existing-AutoIDs" class="common-anchor-header">ترحيل البيانات باستخدام المعرفات التلقائية الموجودة<button data-href="#Migrate-data-with-existing-AutoIDs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -668,7 +668,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>للحفاظ على المعرفات الحالية أثناء ترحيل البيانات، قم بتمكين الخاصية <code translate="no">allow_insert_auto_id</code> عن طريق إجراء الاستدعاء <code translate="no">alter_collection_properties</code>. عند التعيين على صواب، يقبل Milvus المعرفات المقدمة من المستخدم حتى إذا تم تمكين المعرف التلقائي.</p>
+    </button></h3><p>للحفاظ على المعرفات الموجودة أثناء ترحيل البيانات، قم بتمكين الخاصية <code translate="no">allow_insert_auto_id</code> عن طريق إجراء الاستدعاء <code translate="no">alter_collection_properties</code>. عند التعيين على صواب، يقبل Milvus المعرفات المقدمة من المستخدم حتى إذا تم تمكين المعرف التلقائي.</p>
 <p>للحصول على تفاصيل التكوين، راجع <a href="/docs/ar/modify-collection.md#Example-5-Enable-allowinsertautoid">تعديل المجموعة</a>.</p>
 <h3 id="Ensure-global-AutoID-uniqueness-across-clusters" class="common-anchor-header">ضمان تفرد المعرف التلقائي العام عبر المجموعات<button data-href="#Ensure-global-AutoID-uniqueness-across-clusters" class="anchor-icon" translate="no">
       <svg translate="no"

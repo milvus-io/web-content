@@ -5,11 +5,11 @@ summary: >-
   Der Weighted Ranker kombiniert und priorisiert auf intelligente Weise
   Ergebnisse aus mehreren Suchpfaden, indem er ihnen eine unterschiedliche
   Gewichtung zuweist. Ähnlich wie ein geschickter Koch mehrere Zutaten zu einem
-  perfekten Gericht kombiniert, wägt Weighted Ranker verschiedene Suchergebnisse
-  ab, um die relevantesten kombinierten Ergebnisse zu liefern. Dieser Ansatz ist
-  ideal für die Suche in mehreren Vektorfeldern oder Modalitäten, bei denen
-  bestimmte Felder einen größeren Beitrag zum endgültigen Ranking leisten
-  sollten als andere.
+  perfekten Gericht kombiniert, gleicht Weighted Ranker verschiedene
+  Suchergebnisse aus, um die relevantesten kombinierten Ergebnisse zu liefern.
+  Dieser Ansatz ist ideal für die Suche in mehreren Vektorfeldern oder
+  Modalitäten, bei denen bestimmte Felder einen größeren Beitrag zum endgültigen
+  Ranking leisten sollten als andere.
 ---
 <h1 id="Weighted-Ranker" class="common-anchor-header">Gewichteter Ranker<button data-href="#Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -84,7 +84,7 @@ summary: >-
     </button></h2><p>Der Hauptarbeitsablauf der WeightedRanker-Strategie ist wie folgt:</p>
 <ol>
 <li><p><strong>Sammeln von Suchergebnissen</strong>: Sammeln der Ergebnisse und Scores von jedem Pfad der Vektorsuche (score_1, score_2).</p></li>
-<li><p><strong>Normalisierung der Ergebnisse</strong>: Jede Suche kann unterschiedliche Ähnlichkeitsmetriken verwenden, was zu unterschiedlichen Punkteverteilungen führt. Beispielsweise kann die Verwendung des Inneren Produkts (IP) als Ähnlichkeitstyp zu Ergebnissen im Bereich von [-∞,+∞] führen, während die Verwendung des Euklidischen Abstands (L2) zu Ergebnissen im Bereich von [0,+∞] führt. Da die Wertebereiche der verschiedenen Suchvorgänge unterschiedlich sind und nicht direkt miteinander verglichen werden können, müssen die Werte der einzelnen Suchpfade normalisiert werden. In der Regel wird die Funktion <code translate="no">arctan</code> angewendet, um die Punktzahlen in einen Bereich zwischen [0, 1] zu transformieren (Punktzahl_1_normalisiert, Punktzahl_2_normalisiert). Werte, die näher bei 1 liegen, zeigen eine höhere Ähnlichkeit an.</p></li>
+<li><p><strong>Normalisierung der Ergebnisse</strong>: Jede Suche kann unterschiedliche Ähnlichkeitsmetriken verwenden, was zu unterschiedlichen Punkteverteilungen führt. Beispielsweise kann die Verwendung des Inneren Produkts (IP) als Ähnlichkeitstyp zu Ergebnissen im Bereich [-∞,+∞] führen, während die Verwendung des Euklidischen Abstands (L2) zu Ergebnissen im Bereich [0,+∞] führt. Da die Wertebereiche der verschiedenen Suchvorgänge unterschiedlich sind und nicht direkt miteinander verglichen werden können, müssen die Werte der einzelnen Suchpfade normalisiert werden. In der Regel wird die Funktion <code translate="no">arctan</code> angewendet, um die Punktzahlen in einen Bereich zwischen [0, 1] umzuwandeln (score_1_normalisiert, score_2_normalisiert). Werte, die näher bei 1 liegen, zeigen eine höhere Ähnlichkeit an.</p></li>
 <li><p><strong>Gewichte zuweisen</strong>: Auf der Grundlage der Bedeutung, die den verschiedenen Vektorfeldern zugewiesen wird, werden den normalisierten Scores (score_1_normalisiert, score_2_normalisiert) Gewichte<strong>(wi</strong>) zugewiesen. Die Gewichte der einzelnen Pfade sollten zwischen [0,1] liegen. Die resultierenden gewichteten Scores sind score_1_weighted und score_2_weighted.</p></li>
 <li><p><strong>Scores zusammenführen</strong>: Die gewichteten Punktzahlen (score_1_weighted, score_2_weighted) werden vom höchsten zum niedrigsten Wert geordnet, um einen endgültigen Satz von Punktzahlen (score_final) zu erhalten.</p></li>
 </ol>

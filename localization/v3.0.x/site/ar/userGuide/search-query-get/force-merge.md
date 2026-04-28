@@ -1,12 +1,12 @@
 ---
 id: force-merge.md
-title: فرض الدمج بالقوةCompatible with Milvus 3.0.x
+title: فرض الدمج الإجباريCompatible with Milvus 3.0.x
 summary: >-
   استخدم ضغط الدمج القسري لدمج المقاطع الصغيرة وتحسين أداء الاستعلام وكفاءة
   التخزين.
 beta: Milvus 3.0.x
 ---
-<h1 id="Force-Merge-Compaction" class="common-anchor-header">فرض الدمج بالقوة<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Force-Merge-Compaction" class="anchor-icon" translate="no">
+<h1 id="Force-Merge-Compaction" class="common-anchor-header">فرض الدمج الإجباري<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Force-Merge-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,7 +41,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>يحافظ <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md">الدمج</a> القياسي على أحجام المقاطع بالقرب من <code translate="no">maxSize</code> المكوّنة من خلال عمليات الدمج من واحد إلى واحد، ولكن لا يزال بإمكانه ترك أجزاء متوسطة الحجم لا يمكن دمجها أكثر دون تجاوز الحدود. على سبيل المثال، كما هو موضح أدناه، إذا كانت المجموعة تحتوي على خمسة مقاطع بحجم 2 ميغابايت و <code translate="no">maxSize</code> 3 ميغابايت، فإن دمج أي مقطعين سيتجاوز الحد، لذلك لا يمكن للضغط القياسي تقليل عدد المقاطع بشكل أكبر ويبقى التخطيط المجزأ.</p>
-<p>تضيف فرض الدمج معلمة <code translate="no">target_size</code> وتدعم إعادة تنظيم المقاطع نحو الحجم المطلوب في حدود تفاوت ضيق عندما يكون ذلك ممكنًا. كما هو موضح أدناه، إذا كان الحجم المحدد <code translate="no">target_size</code> هو 4 ميغابايت، يمكن دمج المقاطع الخمسة الصغيرة بحجم 2 ميغابايت في عدد أقل من المقاطع الأكبر. يقلل هذا من عدد المقاطع الزائد، ويدعم أهدافًا أكبر من الإعدادات الافتراضية <code translate="no">maxSize</code> ، وعندما يكون الهدف كبيرًا جدًا، يتيح للنظام اختيار حجم الإخراج العملي وعدد المقاطع للأجهزة الحالية وطوبولوجيا QueryNode.</p>
+<p>تضيف فرض الدمج معلمة <code translate="no">target_size</code> وتدعم إعادة تنظيم المقاطع نحو الحجم المطلوب في حدود تفاوت ضيق عندما يكون ذلك ممكنًا. كما هو موضح أدناه، إذا كان الحجم المحدد <code translate="no">target_size</code> هو 4 ميغابايت، يمكن دمج المقاطع الخمسة الصغيرة بحجم 2 ميغابايت في عدد أقل من المقاطع الأكبر. وهذا يقلل من عدد المقاطع الزائد، ويدعم أهدافًا أكبر من الإعدادات الافتراضية <code translate="no">maxSize</code> ، وعندما يكون الهدف كبيرًا جدًا، يتيح للنظام اختيار حجم الإخراج العملي وعدد المقاطع للأجهزة الحالية وطوبولوجيا QueryNode.</p>
 <p>لفهم طريقة الضغط التي يجب استخدامها، راجع <a href="#faq">الأسئلة الشائعة</a>.</p>
 <p>
   
@@ -177,7 +177,7 @@ beta: Milvus 3.0.x
    Auto-calculates optimal size based on
    segment distribution and node memory
 <button class="copy-code-btn"></button></code></pre>
-<p>فيما يلي أمثلة توضح كيفية استخدام كل وضع من أوضاع ضغط الدمج القسري.</p>
+<p>فيما يلي أمثلة لتوضيح كيفية استخدام كل وضع من أوضاع ضغط الدمج القسري.</p>
 <h4 id="Default-standard-compaction" class="common-anchor-header">افتراضي (ضغط قياسي)</h4><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -201,6 +201,7 @@ job_id = client.compact(
     target_size=max_int64
 )
 <button class="copy-code-btn"></button></code></pre>
+<p><a id="parameter-reference"></a></p>
 <h4 id="Parameter-reference" class="common-anchor-header">مرجع المعلمة</h4><p>يشرح الجدول التالي المعلمات.</p>
 <table>
    <tr>
@@ -263,6 +264,7 @@ state = client.get_compaction_state(job_id)
 <li><p><strong>ضع في اعتبارك مفاضلة الأداء.</strong> يعد ضغط الدمج القسري عملية كثيفة الاستخدام للموارد. فهي تقوم بقراءة بيانات المقطع ودمجها وإعادة كتابتها. قم بجدولتها خلال فترات انخفاض حركة المرور لتقليل التأثير على زمن انتقال الاستعلام.</p></li>
 <li><p><strong>راقب عدد المقاطع قبل وبعد.</strong> استخدم <code translate="no">get_compaction_state()</code> و <code translate="no">list_persistent_segments</code> للتحقق من أن عملية الدمج أنتجت عددًا أقل وأكبر من المقاطع كما هو متوقع.</p></li>
 </ul>
+<p><a id="faq"></a></p>
 <h2 id="FAQ" class="common-anchor-header">الأسئلة الشائعة<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -323,7 +325,7 @@ state = client.get_compaction_state(job_id)
    </tr>
    <tr>
      <td><p>سلوك المقطع المتوسط</p></td>
-     <td><p>يمكن أن تتعطل بشكل دائم (على سبيل المثال، لا يمكن أن يصبح مقطعان بنسبة 60% قانونيًا مقطعًا واحدًا بنسبة 120%)</p></td>
+     <td><p>يمكن أن يعلق بشكل دائم (على سبيل المثال، لا يمكن أن يصبح مقطعان بنسبة 60% قانونيًا مقطعًا واحدًا بنسبة 120%)</p></td>
      <td><p>إعادة التجميع + التقسيم يعمل؛ لا يوجد نمط "عالق عند 60%"</p></td>
    </tr>
    <tr>

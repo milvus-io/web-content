@@ -90,19 +90,64 @@ milvus_client = ClientMilvus(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Defining-necessary-variables" class="common-anchor-header">定义必要的变量</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Define collection name</span>
+    </button></h2><h3 id="Defining-necessary-variables" class="common-anchor-header">定义必要的变量<button data-href="#Defining-necessary-variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Define collection name</span>
 COLLECTION_NAME=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span> <span class="hljs-comment"># take your own collection name</span>
 
 <span class="hljs-comment"># Define vector dimension size</span>
 DIMENSION=<span class="hljs-number">1536</span> <span class="hljs-comment"># decide by the model you use</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-schema" class="common-anchor-header">添加 Schema</h3><p>在向 Milvus Lite 数据库插入任何数据之前，我们需要先定义数据字段，这里称为 Schema。通过创建对象<code translate="no">CollectionSchema</code> 和添加数据字段<code translate="no">add_field()</code> ，我们可以控制数据类型及其特征。在向 Milvus 插入任何数据之前，这一步是必须的。</p>
+<h3 id="Add-schema" class="common-anchor-header">添加 Schema<button data-href="#Add-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在向 Milvus Lite 数据库插入任何数据之前，我们需要先定义数据字段，这里称为 Schema。通过创建对象<code translate="no">CollectionSchema</code> 和添加数据字段<code translate="no">add_field()</code> ，我们可以控制数据类型及其特征。在向 Milvus 插入任何数据之前，这一步是必须的。</p>
 <pre><code translate="no" class="language-python">schema = milvus_client.create_schema(auto_id=<span class="hljs-literal">True</span>) <span class="hljs-comment"># Enable id matching</span>
 
 schema = milvus_client.add_field(schema=schema, field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 schema = milvus_client.add_field(schema=schema, field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=DIMENSION)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-index" class="common-anchor-header">创建索引</h3><p>对于每个 Schema，最好都有一个索引，这样查询效率会更高。要创建索引，我们首先需要一个<code translate="no">index_params</code> ，然后在这个<code translate="no">IndexParams</code> 对象上添加更多索引数据。</p>
+<h3 id="Create-index" class="common-anchor-header">创建索引<button data-href="#Create-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>对于每个 Schema，最好都有一个索引，这样查询效率会更高。要创建索引，我们首先需要一个<code translate="no">index_params</code> ，然后在这个<code translate="no">IndexParams</code> 对象上添加更多索引数据。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Start to indexing data field</span>
 index_params = milvus_client.prepare_index_params()
 index_params = milvus_client.add_index(
@@ -113,7 +158,22 @@ index_params = milvus_client.add_index(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>该方法是对 Milvus 官方实现<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md">（官方文档</a>）的精简封装。</p>
-<h3 id="Create-collection" class="common-anchor-header">创建 Collections</h3><p>定义好所有数据字段并建立索引后，我们现在需要创建数据库 Collections，这样就能快速、准确地访问数据了。需要说明的是，我们将<code translate="no">enable_dynamic_field</code> 初始化为 true，这样就可以自由上传任何数据。这样做的代价是数据查询可能会效率低下。</p>
+<h3 id="Create-collection" class="common-anchor-header">创建 Collections<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>定义好所有数据字段并建立索引后，我们现在需要创建数据库 Collections，这样就能快速、准确地访问数据了。需要说明的是，我们将<code translate="no">enable_dynamic_field</code> 初始化为 true，这样就可以自由上传任何数据。这样做的代价是数据查询可能会效率低下。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection</span>
 milvus_client.create_collection(
     collection_name=COLLECTION_NAME,
@@ -177,7 +237,22 @@ res = milvus_client.search(
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&#x27;answer&#x27;</span>])
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&#x27;matches&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Rules" class="common-anchor-header">规则</h3><p>在前面的例子中，我们考虑了索引中的每一份文档。不过，有时只检索满足某些预定义条件（如<code translate="no">filename=harry-potter.pdf</code> ）的文档可能是有益的。在<code translate="no">whyhow_rbr</code> 通过 Milvus Lite，这可以通过调整搜索参数来实现。</p>
+<h3 id="Rules" class="common-anchor-header">规则<button data-href="#Rules" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在前面的例子中，我们考虑了索引中的每一份文档。不过，有时只检索满足某些预定义条件（如<code translate="no">filename=harry-potter.pdf</code> ）的文档可能是有益的。在<code translate="no">whyhow_rbr</code> 通过 Milvus Lite，这可以通过调整搜索参数来实现。</p>
 <p>规则可以控制以下元数据属性</p>
 <ul>
 <li><code translate="no">filename</code> 文件名</li>
@@ -208,7 +283,22 @@ res = milvus_client.search(
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&#x27;matches&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
 <p>在这个例子中，我们首先创建了一个分区来存储与哈利-波特相关的 PDF 文件，通过在这个分区内搜索，我们可以获得最直接的信息。此外，我们还应用页码作为过滤器，以指定我们希望搜索的确切页面。请记住，过滤器参数需要遵循<a href="https://milvus.io/docs/boolean.md">布尔规则</a>。</p>
-<h3 id="Clean-up" class="common-anchor-header">清理</h3><p>最后，在执行完所有指令后，可以调用<code translate="no">drop_collection()</code> 清理数据库。</p>
+<h3 id="Clean-up" class="common-anchor-header">清理<button data-href="#Clean-up" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>最后，在执行完所有指令后，可以调用<code translate="no">drop_collection()</code> 清理数据库。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Clean up</span>
 milvus_client.drop_collection(
     collection_name=COLLECTION_NAME

@@ -49,7 +49,7 @@ summary: >-
 <table>
    <tr>
      <th><p>Consultas Elasticsearch</p></th>
-     <th><p>Equivalentes em Milvus</p></th>
+     <th><p>Equivalentes no Milvus</p></th>
      <th><p>Observações</p></th>
    </tr>
    <tr>
@@ -593,7 +593,7 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <p>Neste exemplo, a RRF combina resultados de dois recuperadores:</p>
 <ul>
-<li><p>Uma pesquisa padrão baseada em termos para documentos contendo o termo <code translate="no">&quot;shoes&quot;</code> no campo <code translate="no">text</code>.</p></li>
+<li><p>Uma pesquisa padrão baseada em termos para documentos que contêm o termo <code translate="no">&quot;shoes&quot;</code> no campo <code translate="no">text</code>.</p></li>
 <li><p>Uma pesquisa kNN no campo <code translate="no">vector</code> usando o vetor de consulta fornecido.</p></li>
 </ul>
 <p>Cada recuperador contribui com até 50 correspondências de topo, que são reavaliadas pela RRF, e os 10 resultados finais de topo são devolvidos.</p>
@@ -650,4 +650,4 @@ res = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Neste artigo, abordamos as conversões de consultas típicas do Elasticsearch em seus equivalentes do Milvus, incluindo consultas em nível de termo, consultas booleanas, consultas de texto completo e consultas de vetor. Se tiver mais perguntas sobre a conversão de outras consultas do Elasticsearch, não hesite em contactar-nos.</p>
+    </button></h2><p>Neste artigo, abordamos as conversões de consultas típicas do Elasticsearch para seus equivalentes no Milvus, incluindo consultas no nível do termo, consultas booleanas, consultas de texto completo e consultas de vetor. Se tiver mais perguntas sobre a conversão de outras consultas do Elasticsearch, não hesite em contactar-nos.</p>

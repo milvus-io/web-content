@@ -69,7 +69,7 @@ go build
 </pre>
 <p>Milvus Backup ne pouvant pas sauvegarder vos données sur un chemin local, assurez-vous que les paramètres Minio sont corrects lorsque vous adaptez le fichier de configuration.</p>
 <div class="alert note">
-<p>Le nom du seau Minio par défaut varie en fonction de la manière dont vous installez Milvus. Lorsque vous modifiez les paramètres Minio, reportez-vous au tableau suivant.</p>
+<p>Le nom du seau Minio par défaut varie en fonction de la manière dont vous installez Milvus. Lorsque vous modifiez les paramètres de Minio, reportez-vous au tableau suivant.</p>
 <table>
 <thead>
 <tr><th>champ</th><th>Docker Compose</th><th>Helm / Milvus Operator</th></tr>
@@ -132,7 +132,7 @@ mc ls my_minio
 # </span><span class="language-bash">Download a bucket recursively</span>
 mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>Vous pouvez maintenant enregistrer les fichiers de sauvegarde dans un endroit sûr pour les restaurer ultérieurement ou les télécharger vers <a href="https://cloud.zilliz.com">Zilliz Cloud</a> pour créer une base de données vectorielle gérée avec vos données. Pour plus de détails, reportez-vous à la section <a href="https://zilliz.com/doc/migrate_from_milvus-2x">Migrer de Milvus vers Zilliz Cloud</a>.</p>
+<p>Vous pouvez maintenant enregistrer les fichiers de sauvegarde dans un endroit sûr pour les restaurer ultérieurement ou les télécharger vers <a href="https://cloud.zilliz.com">Zilliz Cloud</a> pour créer une base de données vectorielle gérée avec vos données. Pour plus de détails, voir <a href="https://zilliz.com/doc/migrate_from_milvus-2x">Migrer de Milvus vers Zilliz Cloud</a>.</p>
 <h2 id="Restore-data" class="common-anchor-header">Restauration des données<button data-href="#Restore-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

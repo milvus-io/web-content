@@ -87,7 +87,7 @@ Na versão atual, todos os parâmetros só têm efeito depois de serem configura
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Configuração relacionada do tikv, usado para armazenar metadados do Milvus.</p>
+    </button></h3><p>Configuração relacionada do tikv, usada para armazenar metadados do Milvus.</p>
 <p>Note que quando o TiKV é ativado para o metastore, continua a ser necessário ter o etcd para a descoberta de serviços.</p>
 <p>O TiKV é uma boa opção quando o tamanho dos metadados requer uma melhor escalabilidade horizontal.</p>
 <p>Consulte <a href="/docs/pt/configure_tikv.md">Configurações relacionadas com o tikv</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
@@ -140,12 +140,13 @@ Na versão atual, todos os parâmetros só têm efeito depois de serem configura
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>O Milvus suporta quatro MQ: rocksmq (baseado no RockDB), natsmq (servidor nats incorporado), Pulsar e Kafka.</p>
+    </button></h3><p>O Milvus suporta quatro MQ: rocksmq (baseado no RockDB), Pulsar, Kafka e Woodpecker.</p>
 <p>Pode alterar o seu MQ definindo o campo mq.type.</p>
 <p>Se não definir o campo mq.type como predefinido, existe uma nota sobre a ativação da prioridade se configurarmos vários mq neste ficheiro.</p>
 <ol>
-<li><p>modo autónomo (local): rocksmq (predefinição) &gt; natsmq &gt; Pulsar &gt; Kafka</p></li>
-<li><p>modo de cluster:  Pulsar(default) &gt; Kafka (rocksmq e natsmq não são suportados no modo cluster)</p></li>
+<li><p>modo autónomo (local): rocksmq (predefinição) &gt; Pulsar &gt; Kafka</p></li>
+<li><p>modo de cluster:  Pulsar(padrão) &gt; Kafka (rocksmq não é suportado no modo cluster)</p></li>
+<li><p>O Woodpecker pode ser usado tanto no modo autônomo quanto no modo de cluster, definindo mq.type como woodpecker.</p></li>
 </ol>
 <p>Consulte <a href="/docs/pt/configure_mq.md">Configurações relacionadas com mq</a> para obter uma descrição detalhada de cada parâmetro nesta secção.</p>
 <h3 id="pulsar" class="common-anchor-header"><code translate="no">pulsar</code><button data-href="#pulsar" class="anchor-icon" translate="no">
@@ -163,7 +164,7 @@ Na versão atual, todos os parâmetros só têm efeito depois de serem configura
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Configuração relacionada com o pulsar, utilizada para gerir os registos Milvus de operações de mutação recentes, registo de streaming de saída e fornecer serviços de publicação-subscrição de registos.</p>
+    </button></h3><p>Configuração relacionada com o pulsar, usada para gerir os registos Milvus de operações de mutação recentes, registo de fluxo de saída e fornecer serviços de publicação e subscrição de registos.</p>
 <p>Consulte <a href="/docs/pt/configure_pulsar.md">Configurações relacionadas com o pulsar</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
 <h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code><button data-href="#rocksmq" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -182,7 +183,7 @@ Na versão atual, todos os parâmetros só têm efeito depois de serem configura
       </svg>
     </button></h3><p>Se quiser ativar o kafka, tem de comentar as configurações do pulsar</p>
 <p>kafka:</p>
-<p>brokerList:</p>
+<p>brokerList: localhost:9092</p>
 <p>saslUsername:</p>
 <p>saslPassword:</p>
 <p>saslMechanisms:</p>
@@ -200,24 +201,6 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 </code></pre>
 <p>readTimeout: 10</p>
 <p>Ver <a href="/docs/pt/configure_rocksmq.md">Configurações relacionadas com rocksmq</a> para uma descrição detalhada de cada parâmetro desta secção.</p>
-<h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code><button data-href="#natsmq" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>configuração do natsmq.</p>
-<p>mais detalhes: https://docs.nats.io/running-a-nats-service/configuration</p>
-<p>Ver <a href="/docs/pt/configure_natsmq.md">Configurações relacionadas com natsmq</a> para uma descrição detalhada de cada parâmetro desta secção.</p>
 <h3 id="rootCoord" class="common-anchor-header"><code translate="no">rootCoord</code><button data-href="#rootCoord" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -233,8 +216,8 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Configuração relacionada com o rootCoord, utilizada para tratar os pedidos de linguagem de definição de dados (DDL) e de linguagem de controlo de dados (DCL)</p>
-<p>Consulte Configurações <a href="/docs/pt/configure_rootcoord.md">relacionadas com rootCoord</a> para obter uma descrição pormenorizada de cada parâmetro desta secção.</p>
+    </button></h3><p>Configuração relacionada com o rootCoord, utilizada para tratar os pedidos em linguagem de definição de dados (DDL) e em linguagem de controlo de dados (DCL)</p>
+<p>Consulte <a href="/docs/pt/configure_rootcoord.md">Configurações relacionadas com rootCoord</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
 <h3 id="proxy" class="common-anchor-header"><code translate="no">proxy</code><button data-href="#proxy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -399,7 +382,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ver <a href="/docs/pt/configure_grpc.md">Configurações relacionadas com o grpc</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
+    </button></h3><p>Ver Configurações <a href="/docs/pt/configure_grpc.md">relacionadas com o grpc</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
 <h3 id="tls" class="common-anchor-header"><code translate="no">tls</code><button data-href="#tls" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -415,8 +398,25 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Configurar a ativação do proxy tls.</p>
+    </button></h3><p>Configurar o tls externo.</p>
 <p>Consulte Configurações <a href="/docs/pt/configure_tls.md">relacionadas com tls</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code><button data-href="#internaltls" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Configurar tls interno.</p>
+<p>Ver Configurações <a href="/docs/pt/configure_internaltls.md">relacionadas com internaltls</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
 <h3 id="common" class="common-anchor-header"><code translate="no">common</code><button data-href="#common" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -495,10 +495,61 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>#quando utilizar a indexação GPU, o Milvus utilizará um pool de memória para evitar a alocação e desalocação frequente de memória.</p>
+    </button></h3><p>#quando usar indexação GPU, Milvus utilizará um pool de memória para evitar alocação e desalocação frequente de memória.</p>
 <p>#aqui, você pode definir o tamanho da memória ocupada pelo pool de memória, com a unidade sendo MB.</p>
 <p>#note que existe a possibilidade do Milvus falhar quando a demanda real de memória exceder o valor definido por maxMemSize.</p>
 <p>#se initMemSize e MaxMemSize estão ambos a zero,</p>
 <p>#milvus inicializará automaticamente metade da memória disponível da GPU,</p>
 <p>#maxMemSize irá toda a memória disponível da GPU.</p>
-<p>Veja <a href="/docs/pt/configure_gpu.md">Configurações relacionadas com o gpu</a> para uma descrição detalhada de cada parâmetro nesta secção.</p>
+<p>Consulte <a href="/docs/pt/configure_gpu.md">Configurações relacionadas com o gpu</a> para obter uma descrição detalhada de cada parâmetro nesta secção.</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code><button data-href="#streamingNode" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Qualquer configuração relacionada ao servidor do nó de streaming.</p>
+<p>Consulte <a href="/docs/pt/configure_streamingnode.md">Configurações relacionadas com o streamingNode</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code><button data-href="#streaming" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Qualquer configuração relacionada com o serviço de streaming.</p>
+<p>Consulte <a href="/docs/pt/configure_streaming.md">Configurações relacionadas com o streaming</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code><button data-href="#knowhere" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Qualquer configuração relacionada ao mecanismo de pesquisa vetorial do knowhere</p>
+<p>Consulte <a href="/docs/pt/configure_knowhere.md">Configurações relacionadas com o know</a> here para obter uma descrição detalhada de cada parâmetro desta secção.</p>

@@ -139,7 +139,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
         ></path>
       </svg>
     </button></h2><p>يمكن لـ Docling تحليل تنسيقات المستندات المختلفة إلى تمثيل موحد (Docling Document)، والذي يمكن تصديره بعد ذلك إلى تنسيقات إخراج مختلفة. للحصول على قائمة كاملة بتنسيقات الإدخال والإخراج المدعومة، يرجى الرجوع إلى <a href="https://docling-project.github.io/docling/usage/supported_formats/">الوثائق الرسمية</a>.</p>
-<p>في هذا البرنامج التعليمي، سنستخدم ملف Markdown<a href="https://milvus.io/docs/overview.md">(مصدر</a>) كمدخل. سنقوم بمعالجة المستند باستخدام <strong>HierarchicalChunker</strong> الذي توفره Docling لتوليد أجزاء هرمية منظمة ومناسبة لمهام RAG النهائية.</p>
+<p>في هذا البرنامج التعليمي، سنستخدم ملف Markdown<a href="https://milvus.io/docs/overview.md">(مصدر</a>) كمدخل. سنقوم بمعالجة المستند باستخدام <strong>HierarchicalChunker</strong> الذي يوفره Docling لتوليد أجزاء هرمية منظمة ومناسبة لمهام RAG النهائية.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> docling.document_converter <span class="hljs-keyword">import</span> DocumentConverter
 <span class="hljs-keyword">from</span> docling_core.transforms.chunker <span class="hljs-keyword">import</span> HierarchicalChunker
 
@@ -172,7 +172,7 @@ Chunk 5:
 Untructured data, embeddings, and Milvus
 --------------------------------------------------
 </code></pre>
-<h2 id="Load-Data-into-Milvus" class="common-anchor-header">تحميل البيانات إلى ملف ميلفوس<button data-href="#Load-Data-into-Milvus" class="anchor-icon" translate="no">
+<h2 id="Load-Data-into-Milvus" class="common-anchor-header">تحميل البيانات إلى ميلفوس<button data-href="#Load-Data-into-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -18,11 +18,13 @@ title: 使用 Milvus 的多模式 RAG
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p>如果您想體驗本教學的最終效果，可以直接進入<a href="https://demos.milvus.io/multimodal-image-search/">線上演示</a>。</p>
+<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
-<p>本教學展示由 Milvus、<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">可視化 BGE 模型</a>和<a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a> 支援的多模式 RAG。使用此系統，使用者可以上傳圖片並編輯文字說明，由 BGE 的組成檢索模型處理，以搜尋候選圖片。然後，GPT-4o 會扮演重新篩選者的角色，選出最適合的影像，並提供選擇背後的理由。這種強大的組合可實現無縫且直觀的圖像搜尋體驗，利用 Milvus 進行高效率的檢索，利用 BGE 模型進行精確的圖像處理和匹配，並利用 GPT-4o 進行先進的重新排序。</p>
+<p>本教學展示了由 Milvus、<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">可視化 BGE 模型</a>和<a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a> 所提供的多模式 RAG。透過此系統，使用者可以上傳圖片並編輯文字說明，經由 BGE 的組成檢索模型處理後，搜尋候選圖片。然後，GPT-4o 會扮演重新篩選者的角色，選出最適合的影像，並提供選擇背後的理由。這種強大的組合可實現無縫且直觀的圖像搜尋體驗，利用 Milvus 進行高效率的檢索，利用 BGE 模型進行精確的圖像處理和匹配，並利用 GPT-4o 進行先進的重新排序。</p>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus.png" width="100%" /></p>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,7 +61,7 @@ title: 使用 Milvus 的多模式 RAG
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -e FlagEmbedding</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
+<p>如果您正在使用 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面頂端的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
 </div>
 <h3 id="Download-Data" class="common-anchor-header">下載資料<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,8 +80,8 @@ title: 使用 Milvus 的多模式 RAG
       </svg>
     </button></h3><p>以下指令會下載範例資料，並解壓縮到本機資料夾「./images_folder」，包括</p>
 <ul>
-<li><p><strong>images</strong>：<a href="https://github.com/hyp1231/AmazonReviews2023">Amazon Reviews 2023</a>的子集，包含「Appliance」、「Cell_Phones_and_Accessories」和「Electronics」類別中約 900 張圖片。</p></li>
-<li><p><strong>leopard.jpg</strong>: 範例查詢影像。</p></li>
+<li><strong>images</strong>：<a href="https://github.com/hyp1231/AmazonReviews2023">Amazon Reviews 2023</a>的子集，包含「Appliance」、「Cell_Phones_and_Accessories」和「Electronics」類別中約 900 張圖片。</li>
+<li><strong>leopard.jpg</strong>: 範例查詢影像。</li>
 </ul>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/bootcamp/releases/download/data/amazon_reviews_2023_subset.tar.gz</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">tar -xzf amazon_reviews_2023_subset.tar.gz</span>
@@ -99,13 +101,13 @@ title: 使用 Milvus 的多模式 RAG
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>我們將使用 Visualized BGE 模型「bge-visualized-base-en-v1.5」來產生圖像和文字的嵌入。</p>
+    </button></h3><p>我們將使用 Visualized BGE 模型「bge-visualized-base-en-v1.5」來產生圖片和文字的嵌入。</p>
 <p><strong>1.下載權重</strong></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://huggingface.co/BAAI/bge-visualized/resolve/main/Visualized_base_en_v1.5.pth</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>2.建立編碼器</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
-<span class="hljs-keyword">from</span> FlagEmbedding.visual.modeling <span class="hljs-keyword">import</span> Visualized_BGE
+<span class="hljs-keyword">from</span> visual_bge.modeling <span class="hljs-keyword">import</span> Visualized_BGE
 
 
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">Encoder</span>:
@@ -233,7 +235,15 @@ milvus_client.insert(
     data=[{<span class="hljs-string">&quot;image_path&quot;</span>: k, <span class="hljs-string">&quot;vector&quot;</span>: v} <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> image_dict.items()],
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">{'insert_count': 900,
+<pre><code translate="no">DEBUG:pymilvus.milvus_client.milvus_client:Created new connection using: 7f33daeed99a4d8e8a5e28d47673ecc8
+DEBUG:pymilvus.milvus_client.milvus_client:Successfully created collection: multimodal_rag_demo
+DEBUG:pymilvus.milvus_client.milvus_client:Successfully created an index on collection: multimodal_rag_demo
+
+
+
+
+
+{'insert_count': 900,
  'ids': [451537887696781312, 451537887696781313, ..., 451537887696782211],
  'cost': 0}
 </code></pre>
@@ -290,7 +300,7 @@ retrieved_images = [hit.get(<span class="hljs-string">&quot;entity&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">['./images_folder/images/518Gj1WQ-RL._AC_.jpg', './images_folder/images/41n00AOfWhL._AC_.jpg', './images_folder/images/51Wqge9HySL._AC_.jpg', './images_folder/images/51R2SZiywnL._AC_.jpg', './images_folder/images/516PebbMAcL._AC_.jpg', './images_folder/images/51RrgfYKUfL._AC_.jpg', './images_folder/images/515DzQVKKwL._AC_.jpg', './images_folder/images/51BsgVw6RhL._AC_.jpg', './images_folder/images/51INtcXu9FL._AC_.jpg']
 </code></pre>
-<h3 id="Rerank-with-GPT-4o" class="common-anchor-header">使用 GPT-4o 重新排序<button data-href="#Rerank-with-GPT-4o" class="anchor-icon" translate="no">
+<h3 id="Rerank-with-GPT-4o" class="common-anchor-header">使用 GPT-4o 重新排名<button data-href="#Rerank-with-GPT-4o" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -541,4 +551,4 @@ best_img.show()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>若要瞭解如何利用本教學開始線上演示，請參閱<a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus">範例應用程式</a>。</p>
+    </button></h3><p>若要瞭解如何利用本教學開始線上演示，請參閱<a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/multimodal_rag_with_milvus">範例應用程式</a>。</p>

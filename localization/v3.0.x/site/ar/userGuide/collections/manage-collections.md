@@ -41,7 +41,7 @@ summary: >-
 <p>يعرض المخطط التالي مجموعة تحتوي على ثمانية أعمدة وستة كيانات.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/collection-explained.png" alt="Collection Explained" class="doc-image" id="collection-explained" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/collection-explained.png" alt="Collection Explained" class="doc-image" id="collection-explained" />
    </span> <span class="img-wrapper"> <span>شرح المجموعة</span> </span></p>
 <h2 id="Schema-and-Fields" class="common-anchor-header">المخطط والحقول<button data-href="#Schema-and-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -83,7 +83,7 @@ summary: >-
       </svg>
     </button></h2><p>على غرار الحقل الأساسي في قاعدة البيانات العلائقية، تحتوي المجموعة على حقل أساسي لتمييز الكيان عن غيره. كل قيمة في الحقل الأساسي فريدة عالميًا وتتوافق مع كيان واحد محدد.</p>
 <p>كما هو موضح في الرسم البياني أعلاه، يعمل الحقل المسمى <strong>بالمعرّف</strong> كحقل أساسي، ويتوافق المعرف الأول <strong>0</strong> مع كيان بعنوان <em>معدل وفيات فيروس كورونا غير مهم</em>. لن يكون هناك أي كيان آخر يحتوي على الحقل الأساسي 0.</p>
-<p>يقبل الحقل الأساسي الأعداد الصحيحة أو السلاسل فقط. عند إدراج الكيانات، يجب عليك تضمين قيم الحقل الأساسي افتراضيًا. ومع ذلك، إذا قمت بتمكين <strong>المعرف التلقائي</strong> عند إنشاء المجموعة، فسوف يقوم Milvus بإنشاء تلك القيم عند إدراج البيانات. في مثل هذه الحالة، استبعد قيم الحقل الأساسي من الكيانات المراد إدراجها.</p>
+<p>يقبل الحقل الأساسي الأعداد الصحيحة أو السلاسل فقط. عند إدراج الكيانات، يجب عليك تضمين قيم الحقل الأساسي افتراضيًا. ومع ذلك، إذا قمت بتمكين <strong>المعرف التلقائي</strong> عند إنشاء المجموعة، فسوف يقوم Milvus بإنشاء هذه القيم عند إدراج البيانات. في مثل هذه الحالة، استبعد قيم الحقل الأساسي من الكيانات المراد إدراجها.</p>
 <p>لمزيد من المعلومات، يرجى الرجوع إلى <a href="/docs/ar/primary-field.md">الحقل الأساسي والمعرف التلقائي</a>.</p>
 <h2 id="Index" class="common-anchor-header">الفهرس<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -100,7 +100,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يؤدي إنشاء فهارس على حقول محددة إلى تحسين كفاءة البحث. ننصحك بإنشاء فهارس لجميع الحقول التي تعتمد عليها خدمتك، ومن بينها فهارس على حقول المتجهات إلزامية.</p>
+    </button></h2><p>يؤدي إنشاء فهارس على حقول محددة إلى تحسين كفاءة البحث. يُنصح بإنشاء فهارس لجميع الحقول التي تعتمد عليها خدمتك، ومن بينها فهارس على حقول المتجهات إلزامية.</p>
 <h2 id="Entity" class="common-anchor-header">الكيانات<button data-href="#Entity" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -23,7 +23,7 @@ title: Utilizar o Milvus com o SambaNova
         ></path>
       </svg>
     </button></h1><p><a href="https://sambanova.ai/">O SambaNova</a> é uma plataforma tecnológica de IA inovadora que acelera a implementação de capacidades avançadas de IA e de aprendizagem profunda. Concebida para utilização empresarial, permite às organizações tirar partido da IA generativa para um melhor desempenho e eficiência. Ao fornecer soluções de ponta como o SambaNova Suite e o DataScale, a plataforma permite que as empresas extraiam informações valiosas dos seus dados, impulsionando melhorias operacionais e promovendo novas oportunidades no cenário da IA.</p>
-<p><a href="https://github.com/sambanova/ai-starter-kit">Os SambaNova AI Starter Kits</a> são uma coleção de recursos de código aberto concebidos para ajudar os programadores e as empresas a implementar aplicações orientadas para a IA com o SambaNova. Estes kits fornecem exemplos práticos e guias que facilitam a implementação de vários casos de utilização de IA, tornando mais fácil para os utilizadores aproveitarem a tecnologia avançada do SambaNova.</p>
+<p><a href="https://github.com/sambanova/ai-starter-kit">Os SambaNova AI Starter Kits</a> são um conjunto de recursos de código aberto concebidos para ajudar os programadores e as empresas a implementar aplicações orientadas para a IA com o SambaNova. Estes kits fornecem exemplos práticos e guias que facilitam a implementação de vários casos de utilização de IA, tornando mais fácil para os utilizadores aproveitarem a tecnologia avançada do SambaNova.</p>
 <p>Este tutorial aproveita a integração do Milvus no SambaNova AI Starter Kits para criar um sistema de recuperação de conhecimento empresarial, semelhante ao RAG (Retrieval-Augmented Generation), para recuperar e responder com base nos documentos privados da empresa.</p>
 <div class="alert note">
 <p>Este tutorial tem como referência principal o guia oficial <a href="https://github.com/sambanova/ai-starter-kit/tree/main">do SambaNova AI Starter Kits</a>. Se achar que este tutorial tem partes desactualizadas, pode dar prioridade a seguir o guia oficial e criar um problema para nós.</p>
@@ -78,7 +78,7 @@ title: Utilizar o Milvus com o SambaNova
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Altere o armazenamento vetorial definindo <code translate="no">db_type='milvus'</code> nas funções <code translate="no">create_vector_store()</code> e <code translate="no">load_vdb()</code> em <code translate="no">src/document_retrieval.py</code>.</p>
+    </button></h2><p>Altere o armazenamento de vetores definindo <code translate="no">db_type='milvus'</code> nas funções <code translate="no">create_vector_store()</code> e <code translate="no">load_vdb()</code> em <code translate="no">src/document_retrieval.py</code>.</p>
 <pre><code translate="no" class="language-python">...
 vectorstore = <span class="hljs-variable language_">self</span>.vectordb.create_vector_store(
     ..., db_type=<span class="hljs-string">&#x27;milvus&#x27;</span>
@@ -127,7 +127,7 @@ pip install -r requirements.txt
 <p>Depois disso, verá a interface do utilizador no seu browser:<code translate="no">http://localhost:8501/</code></p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/sambanava_ui.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sambanava_ui.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

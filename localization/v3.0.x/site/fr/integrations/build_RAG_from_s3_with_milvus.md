@@ -3,8 +3,8 @@ id: build_RAG_from_s3_with_milvus.md
 summary: >-
   Ce tutoriel vous guide à travers le processus de construction d'un pipeline
   Retrieval-Augmented Generation (RAG) à l'aide de Milvus et d'Amazon S3. Vous
-  apprendrez à charger efficacement des documents à partir d'un bac S3, à les
-  diviser en morceaux gérables et à stocker leurs embeddings vectoriels dans
+  apprendrez comment charger efficacement des documents à partir d'un godet S3,
+  les diviser en morceaux gérables et stocker leurs embeddings vectoriels dans
   Milvus pour une récupération rapide et évolutive. Pour rationaliser ce
   processus, nous utiliserons LangChain comme outil pour charger les données
   depuis S3 et faciliter leur stockage dans Milvus.

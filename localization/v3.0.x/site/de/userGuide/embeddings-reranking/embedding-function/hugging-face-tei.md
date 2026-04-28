@@ -33,7 +33,7 @@ beta: Milvus 2.6.x
 <li><p>Und viele weitere</p></li>
 </ul>
 <div class="alert note">
-<p>Die aktuelle Liste der unterstützten Modelle finden Sie im <a href="https://github.com/huggingface/text-embeddings-inference">TEI GitHub Repository</a> und im <a href="https://huggingface.co/models?pipeline_tag=text-embedding">Hugging Face Hub</a>.</p>
+<p>Eine aktuelle Liste der unterstützten Modelle finden Sie im <a href="https://github.com/huggingface/text-embeddings-inference">TEI GitHub Repository</a> und im <a href="https://huggingface.co/models?pipeline_tag=text-embedding">Hugging Face Hub</a>.</p>
 </div>
 <h2 id="TEI-deployment" class="common-anchor-header">TEI-Einsatz<button data-href="#TEI-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,10 +51,40 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Bevor Sie Milvus mit der TEI-Funktion konfigurieren können, müssen Sie einen laufenden TEI-Dienst haben. Milvus unterstützt zwei Ansätze für den TEI-Einsatz:</p>
-<h3 id="Standard-deployment-external" class="common-anchor-header">Standard-Einsatz (extern)</h3><p>Sie können TEI als eigenständigen Dienst mit den offiziellen Methoden von Hugging Face bereitstellen. Dieser Ansatz bietet Ihnen maximale Flexibilität und Kontrolle über Ihren TEI-Dienst.</p>
+<h3 id="Standard-deployment-external" class="common-anchor-header">Standard-Einsatz (extern)<button data-href="#Standard-deployment-external" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sie können TEI als eigenständigen Dienst mit den offiziellen Methoden von Hugging Face bereitstellen. Dieser Ansatz bietet Ihnen maximale Flexibilität und Kontrolle über Ihren TEI-Dienst.</p>
 <p>Detaillierte Anweisungen zur Bereitstellung von TEI mit Docker oder anderen Methoden finden Sie in der <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour#deploy">offiziellen Dokumentation von Hugging Face Text Embeddings Inference</a>.</p>
-<p>Notieren Sie sich nach der Bereitstellung den Endpunkt Ihres TEI-Dienstes (z. B. <code translate="no">http://localhost:8080</code>), da Sie ihn bei der <a href="/docs/de/hugging-face-tei.md#Use-embedding-function-">Verwendung der TEI-Funktion in Milvus</a> benötigen.</p>
-<h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Milvus Helm Chart-Bereitstellung (integriert)</h3><p>Für Kubernetes-Umgebungen bietet Milvus eine integrierte Bereitstellungsoption über sein Helm Chart. Dies vereinfacht den Prozess, indem TEI zusammen mit Milvus bereitgestellt und konfiguriert wird.</p>
+<p>Notieren Sie sich nach der Bereitstellung den Endpunkt Ihres TEI-Dienstes (z. B. <code translate="no">http://localhost:8080</code>), da Sie ihn für die <a href="/docs/de/hugging-face-tei.md#Use-embedding-function-">Verwendung der TEI-Funktion in Milvus</a> benötigen.</p>
+<h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Milvus Helm Chart-Bereitstellung (integriert)<button data-href="#Milvus-Helm-Chart-deployment-integrated" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Für Kubernetes-Umgebungen bietet Milvus eine integrierte Bereitstellungsoption über sein Helm Chart. Dies vereinfacht den Prozess, indem TEI zusammen mit Milvus bereitgestellt und konfiguriert wird.</p>
 <p>So aktivieren Sie TEI in Ihrer Milvus Helm-Bereitstellung:</p>
 <ol>
 <li><p>Konfigurieren Sie <strong>values.yaml</strong>, um TEI zu aktivieren:</p>
@@ -140,7 +170,22 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
         ></path>
       </svg>
     </button></h2><p>Sobald der TEI-Dienst konfiguriert ist, folgen Sie diesen Schritten, um Einbettungsfunktionen zu definieren und zu verwenden.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Schritt 1: Definieren Sie Schemafelder</h3><p>Um eine Einbettungsfunktion zu verwenden, erstellen Sie eine Sammlung mit einem bestimmten Schema. Dieses Schema muss mindestens drei notwendige Felder enthalten:</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Schritt 1: Definieren Sie Schemafelder<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um eine Einbettungsfunktion zu verwenden, erstellen Sie eine Sammlung mit einem bestimmten Schema. Dieses Schema muss mindestens drei notwendige Felder enthalten:</p>
 <ul>
 <li><p>Das Primärfeld, das jede Entität in einer Sammlung eindeutig identifiziert.</p></li>
 <li><p>Ein Skalarfeld, das die einzubettenden Rohdaten speichert.</p></li>
@@ -161,9 +206,24 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to exactly match the TEI model&#x27;s output dimension</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Schritt 2: Einbettungsfunktion zum Schema hinzufügen</h3><p>Das Function-Modul in Milvus wandelt Rohdaten, die in einem Skalarfeld gespeichert sind, automatisch in Einbettungen um und speichert sie in dem explizit definierten Vektorfeld.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Schritt 2: Einbettungsfunktion zum Schema hinzufügen<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Das Function-Modul in Milvus wandelt Rohdaten, die in einem Skalarfeld gespeichert sind, automatisch in Einbettungen um und speichert sie in dem explizit definierten Vektorfeld.</p>
 <p>Das folgende Beispiel fügt ein Funktionsmodul (<code translate="no">tei_func</code>) hinzu, das das Skalarfeld <code translate="no">&quot;document&quot;</code> in Einbettungen umwandelt und die resultierenden Vektoren in dem zuvor definierten Vektorfeld <code translate="no">&quot;dense_vector&quot;</code> speichert.</p>
-<p>Sobald Sie Ihre Einbettungsfunktion definiert haben, fügen Sie sie zu Ihrem Sammlungsschema hinzu. Dadurch wird Milvus angewiesen, die angegebene Einbettungsfunktion zur Verarbeitung und Speicherung von Einbettungen aus Ihren Textdaten zu verwenden.</p>
+<p>Sobald Sie Ihre Einbettungsfunktion definiert haben, fügen Sie sie zu Ihrem Sammlungsschema hinzu. Dies weist Milvus an, die angegebene Einbettungsfunktion zu verwenden, um Einbettungen aus Ihren Textdaten zu verarbeiten und zu speichern.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define TEI embedding function</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;tei_func&quot;</span>,                            <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -213,7 +273,7 @@ schema.add_function(text_embedding_function)
    <tr>
      <td><p><code translate="no">truncation_direction</code></p></td>
      <td><p>Nein</p></td>
-     <td><p>Wirksam, wenn "truncate" wahr ist. Gibt an, ob von links oder rechts abgeschnitten werden soll. Standardwert ist rechts.</p></td>
+     <td><p>Wirksam, wenn "truncate" wahr ist. Gibt an, ob von links oder rechts abgeschnitten werden soll. Die Voreinstellung ist rechts.</p></td>
      <td><p>"links"</p></td>
    </tr>
    <tr>

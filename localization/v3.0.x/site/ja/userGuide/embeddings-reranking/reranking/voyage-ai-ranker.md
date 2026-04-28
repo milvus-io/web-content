@@ -3,7 +3,7 @@ id: voyage-ai-ranker.md
 title: Voyage AI ランカーCompatible with Milvus 2.6.x
 summary: >-
   Voyage AI Rankerは、Voyage
-  AIに特化したリランカーを活用し、セマンティック・リランキングによって検索の関連性を高めます。検索拡張世代（RAG）や検索アプリケーションに最適化された高性能なリランキング機能を提供します。
+  AIに特化したリランカーを活用し、セマンティック・リランキングによって検索の関連性を高めます。検索補強世代（RAG）や検索アプリケーションに最適化された高性能なリランキング機能を提供します。
 beta: Milvus 2.6.x
 ---
 <h1 id="Voyage-AI-Ranker" class="common-anchor-header">Voyage AI ランカー<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Voyage-AI-Ranker" class="anchor-icon" translate="no">

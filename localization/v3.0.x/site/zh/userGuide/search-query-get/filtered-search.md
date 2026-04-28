@@ -2,7 +2,7 @@
 id: filtered-search.md
 title: 过滤搜索
 summary: >-
-  ANN 搜索能找到与指定向量嵌入最相似的向量嵌入。但是，搜索结果不一定总是正确的。您可以在搜索请求中包含过滤条件，这样 Milvus 就会在进行 ANN
+  ANN 搜索能找到与指定向量嵌入最相似的向量嵌入。不过，搜索结果不一定总是正确的。您可以在搜索请求中包含过滤条件，这样 Milvus 就会在进行 ANN
   搜索前进行元数据过滤，将搜索范围从整个 Collections 缩小到只搜索符合指定过滤条件的实体。
 ---
 <h1 id="Filtered-Search" class="common-anchor-header">过滤搜索<button data-href="#Filtered-Search" class="anchor-icon" translate="no">

@@ -42,7 +42,7 @@ summary: >-
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/users-roles-privileges.png" alt="Users Roles Privileges" class="doc-image" id="users-roles-privileges" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/users-roles-privileges.png" alt="Users Roles Privileges" class="doc-image" id="users-roles-privileges" />
    </span> <span class="img-wrapper"> <span>Пользователи Роли Привилегии</span> </span></p>
 <p>В модели RBAC есть четыре основных компонента.</p>
 <ul>

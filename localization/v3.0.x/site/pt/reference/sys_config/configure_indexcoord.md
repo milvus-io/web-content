@@ -43,7 +43,7 @@ summary: Saiba como configurar o indexCoord para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        É um limiar. Quando o número de linhas do segmento for inferior a este valor, o segmento não será indexado      </td>
+      <td>        É um limiar. Quando o número de linhas do segmento é inferior a este valor, o segmento não será indexado      </td>
       <td>1024</td>
     </tr>
   </tbody>

@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus bietet einen umfangreichen Satz von Basisoperatoren, die Ihnen helfen, Daten effizient zu filtern und abzufragen. Mit diesen Operatoren können Sie Ihre Suchbedingungen auf der Grundlage von skalaren Feldern, numerischen Berechnungen, logischen Bedingungen und mehr verfeinern. Das Verständnis für die Verwendung dieser Operatoren ist entscheidend für die Erstellung präziser Abfragen und die Maximierung der Effizienz Ihrer Suchen.</p>
+    </button></h1><p>Milvus bietet einen umfangreichen Satz von Basisoperatoren, die Ihnen helfen, Daten effizient zu filtern und abzufragen. Mit diesen Operatoren können Sie Ihre Suchbedingungen auf der Grundlage von skalaren Feldern, numerischen Berechnungen, logischen Bedingungen und mehr verfeinern. Das Verständnis für die Verwendung dieser Operatoren ist entscheidend für die Erstellung präziser Abfragen und die Maximierung der Effizienz Ihrer Suchvorgänge.</p>
 <h2 id="Comparison-operators" class="common-anchor-header">Vergleichsoperatoren<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -374,7 +374,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Um Entitäten zu finden, bei denen <code translate="no">price</code> als Potenz von 2 größer als 1000 ist:</p>
+    </button></h3><p>Um Entitäten zu finden, bei denen <code translate="no">price</code> hoch 2 größer als 1000 ist:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Logical-Operators" class="common-anchor-header">Logische Operatoren<button data-href="#Logical-Operators" class="anchor-icon" translate="no">

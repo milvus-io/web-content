@@ -70,7 +70,7 @@ title: 'Sistem Multi-agen dengan Mistral AI, Milvus, dan Llama-agen'
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
    </span> <span class="img-wrapper"> <span>image.png</span> </span></p>
 <h2 id="llama-agents" class="common-anchor-header">llama-agents<button data-href="#llama-agents" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -112,7 +112,7 @@ title: 'Sistem Multi-agen dengan Mistral AI, Milvus, dan Llama-agen'
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
    </span> <span class="img-wrapper"> <span>image.png</span> </span></p>
 <h2 id="Mistral-AI" class="common-anchor-header">Mistral AI<button data-href="#Mistral-AI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -263,7 +263,7 @@ Settings.llm = Ollama(<span class="hljs-string">&quot;mistral-nemo&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/">Milvus</a> adalah basis data vektor sumber terbuka yang populer yang mendukung aplikasi AI dengan pencarian kemiripan vektor yang berkinerja tinggi dan dapat diskalakan.</p>
+    </button></h2><p><a href="https://milvus.io/">Milvus</a> adalah basis data vektor sumber terbuka yang populer yang memberdayakan aplikasi AI dengan pencarian kemiripan vektor yang berkinerja tinggi dan dapat diskalakan.</p>
 <ul>
 <li>Mengatur uri sebagai file lokal, misalnya<code translate="no">./milvus.db</code>, adalah metode yang paling mudah, karena secara otomatis menggunakan <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> untuk menyimpan semua data dalam file ini.</li>
 <li>Jika Anda memiliki data berskala besar, misalnya lebih dari satu juta vektor, Anda dapat menyiapkan server Milvus yang lebih berkinerja tinggi di <a href="https://milvus.io/docs/quickstart.md">Docker atau Kubernetes</a>. Dalam pengaturan ini, silakan gunakan uri server, misalnya<code translate="no">http://localhost:19530</code>, sebagai uri Anda.</li>
@@ -677,7 +677,7 @@ Uber's total revenue for the year ended December 31, 2021, is $17.455 billion.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pertanyaan yang dijawab di bawah ini sangat menantang karena membutuhkan orkestrasi berbagai layanan dan agen untuk memberikan respons yang koheren dan akurat. Hal ini melibatkan koordinasi berbagai alat dan agen untuk mengambil dan memproses informasi dari sumber yang berbeda, seperti data keuangan dari berbagai perusahaan.</p>
+    </button></h3><p>Pertanyaan yang dijawab di bawah ini sangat menantang karena membutuhkan orkestrasi beberapa layanan dan agen untuk memberikan respons yang koheren dan akurat. Hal ini melibatkan koordinasi berbagai alat dan agen untuk mengambil dan memproses informasi dari sumber yang berbeda, seperti data keuangan dari berbagai perusahaan.</p>
 <h3 id="Whats-so-difficult-about-that" class="common-anchor-header">Apa yang sulit dari hal itu?<button data-href="#Whats-so-difficult-about-that" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -698,7 +698,7 @@ Uber's total revenue for the year ended December 31, 2021, is $17.455 billion.
 </ul>
 <ul>
 <li><p>Integrasi Data: Pertanyaan ini membutuhkan pengintegrasian data dari berbagai sumber, yang dapat menjadi tantangan karena adanya variasi format, struktur, dan metadata data.</p></li>
-<li><p>Pemahaman Kontekstual: Pertanyaan mungkin memerlukan pemahaman konteks dan hubungan antara berbagai informasi, yang merupakan tugas yang menuntut kognitif.</p></li>
+<li><p>Pemahaman Kontekstual: Pertanyaan tersebut mungkin memerlukan pemahaman konteks dan hubungan antara berbagai informasi, yang merupakan tugas yang menuntut secara kognitif.</p></li>
 </ul>
 <h3 id="Why-would-Mistral-Large-help-in-this-case" class="common-anchor-header">Mengapa Mistral Large dapat membantu dalam kasus ini?<button data-href="#Why-would-Mistral-Large-help-in-this-case" class="anchor-icon" translate="no">
       <svg translate="no"

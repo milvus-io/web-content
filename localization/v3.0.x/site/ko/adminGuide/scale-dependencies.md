@@ -36,7 +36,22 @@ title: 스케일 종속성
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">MinIO 포드당 리소스 늘리기</h3><p>Milvus에서 사용하는 오브젝트 스토리지 시스템인 MinIO는 각 포드마다 CPU와 메모리 리소스를 늘릴 수 있습니다.</p>
+    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">MinIO 포드당 리소스 늘리기<button data-href="#Increase-resources-per-MinIO-pod" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus에서 사용하는 오브젝트 스토리지 시스템인 MinIO는 각 포드마다 CPU 및 메모리 리소스를 늘릴 수 있습니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">resources:</span>
@@ -48,7 +63,22 @@ title: 스케일 종속성
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>또한 각 MioIO 영구 볼륨 클레임(PVC)에 대해 <code translate="no">spec.resources.requests.storage</code> 값을 수동으로 변경하여 MioIO 클러스터의 디스크 용량을 늘릴 수 있습니다. 기본 스토리지 클래스는 볼륨 확장을 허용해야 한다는 점에 유의하세요.</p>
-<h3 id="Add-an-extra-MinIO-server-pool-Recommended" class="common-anchor-header">추가 MinIO 서버 풀 추가(권장)</h3><p>Milvus 인스턴스를 위해 추가 MioIO 서버 풀을 추가하는 것이 좋습니다.</p>
+<h3 id="Add-an-extra-MinIO-server-pool-Recommended" class="common-anchor-header">추가 MinIO 서버 풀 추가(권장)<button data-href="#Add-an-extra-MinIO-server-pool-Recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 인스턴스를 위해 추가 MioIO 서버 풀을 추가하는 것이 좋습니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yam;</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">zones:</span> <span class="hljs-number">2</span>
@@ -85,7 +115,22 @@ title: 스케일 종속성
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resource-per-Kafka-broker-pod" class="common-anchor-header">Kafka 브로커 포드당 리소스 증가</h3><p>각 브로커 파드의 CPU 및 메모리 리소스를 조정하여 Kafka 브로커 용량을 향상하세요.</p>
+    </button></h2><h3 id="Increase-resource-per-Kafka-broker-pod" class="common-anchor-header">Kafka 브로커 포드당 리소스 증가<button data-href="#Increase-resource-per-Kafka-broker-pod" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>각 브로커 파드의 CPU 및 메모리 리소스를 조정하여 Kafka 브로커 용량을 향상하세요.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">kafka:</span>
   <span class="hljs-attr">resources:</span>
@@ -201,7 +246,22 @@ title: 스케일 종속성
         <span class="hljs-attr">size:</span> <span class="hljs-string">20Gi</span>
         <span class="hljs-attr">storageClassName:</span> <span class="hljs-string">gp3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-an-extra-Pulsar-broker-pod" class="common-anchor-header">추가 Pulsar 브로커 포드 추가</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+<h3 id="Add-an-extra-Pulsar-broker-pod" class="common-anchor-header">추가 Pulsar 브로커 포드 추가<button data-href="#Add-an-extra-Pulsar-broker-pod" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">broker:</span>
     <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">3</span>
@@ -209,7 +269,22 @@ title: 스케일 종속성
 <p>파일을 저장한 후 다음 명령어로 변경 사항을 적용합니다:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-an-extra-Pulsar-bookie-pod-Recommended" class="common-anchor-header">추가 Pulsar 부키 포드 추가(권장)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+<h3 id="Add-an-extra-Pulsar-bookie-pod-Recommended" class="common-anchor-header">추가 Pulsar 부키 포드 추가(권장)<button data-href="#Add-an-extra-Pulsar-bookie-pod-Recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">bookkeeper:</span>
     <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">3</span>
@@ -232,7 +307,22 @@ title: 스케일 종속성
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resources-per-etcd-pod-recommended" class="common-anchor-header">etcd 파드당 리소스 늘리기(권장)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+    </button></h2><h3 id="Increase-resources-per-etcd-pod-recommended" class="common-anchor-header">etcd 파드당 리소스 늘리기(권장)<button data-href="#Increase-resources-per-etcd-pod-recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">etcd:</span>
   <span class="hljs-attr">resources:</span>
      <span class="hljs-attr">limits:</span>
@@ -242,7 +332,22 @@ title: 스케일 종속성
 <p>파일을 저장한 후, 다음 명령어로 변경 사항을 적용합니다:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-extra-etcd-pods" class="common-anchor-header">추가 etcd 파드 추가</h3><p>etcd 파드의 총 개수는 홀수여야 합니다.</p>
+<h3 id="Add-extra-etcd-pods" class="common-anchor-header">추가 etcd 파드 추가<button data-href="#Add-extra-etcd-pods" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>etcd 파드의 총 개수는 홀수여야 합니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">etcd:</span>
   <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">5</span>

@@ -54,7 +54,7 @@ title: Integrar Milvus com DSPy
         ></path>
       </svg>
     </button></h2><ul>
-<li>Abordagem de programação: O DSPy fornece uma abordagem de programação sistemática para o desenvolvimento de pipelines de linhas de produção, abstraindo pipelines como gráficos de transformação de texto em vez de apenas solicitar as LLMs. Os seus módulos declarativos permitem o design estruturado e a otimização, substituindo o método de tentativa e erro dos modelos tradicionais de comandos.</li>
+<li>Abordagem de programação: O DSPy fornece uma abordagem de programação sistemática para o desenvolvimento de pipelines de linhas de produção, abstraindo pipelines como gráficos de transformação de texto em vez de apenas solicitar os LLMs. Os seus módulos declarativos permitem o design estruturado e a otimização, substituindo o método de tentativa e erro dos modelos tradicionais de comandos.</li>
 <li>Melhoria do desempenho: O DSPy demonstra ganhos significativos de desempenho em relação aos métodos existentes. Através de estudos de caso, ele supera o desempenho do prompting padrão e das demonstrações criadas por especialistas, demonstrando sua versatilidade e eficácia mesmo quando compilado em modelos LM menores.</li>
 <li>Abstração modularizada: O DSPy abstrai efetivamente os aspectos intrincados do desenvolvimento do pipeline linear, tais como decomposição, ajuste fino e seleção de modelos. Com o DSPy, um programa conciso pode ser facilmente traduzido em instruções para vários modelos, como GPT-4, Llama2-13b ou T5-base, simplificando o desenvolvimento e melhorando o desempenho.</li>
 </ul>
@@ -76,7 +76,7 @@ title: Integrar Milvus com DSPy
     </button></h2><p>Existem inúmeros componentes que contribuem para a construção de um pipeline LLM. Aqui, descreveremos alguns componentes-chave para fornecer uma compreensão de alto nível de como o DSPy opera.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
    </span> <span class="img-wrapper"> <span>Módulos DSPy</span> </span></p>
 <p>Assinatura: As assinaturas em DSPy servem como especificações declarativas, delineando o comportamento de entrada/saída dos módulos, orientando o modelo de linguagem na execução de tarefas. Módulo: Os módulos DSPy servem como componentes fundamentais para programas que utilizam modelos de linguagem (LMs). Abstraem várias técnicas de estímulo, como a cadeia de pensamento ou o ReAct, e são adaptáveis para lidar com qualquer assinatura DSPy. Com parâmetros que podem ser aprendidos e a capacidade de processar entradas e produzir saídas, esses módulos podem ser combinados para formar programas maiores, inspirando-se nos módulos NN do PyTorch, mas adaptados para aplicações LM. Otimizador: Os optimizadores em DSPy afinam os parâmetros dos programas DSPy, tais como prompts e pesos LLM, para maximizar as métricas especificadas como a precisão, melhorando a eficiência do programa.</p>
 <h2 id="Why-Milvus-in-DSPy" class="common-anchor-header">Porquê Milvus em DSPy<button data-href="#Why-Milvus-in-DSPy" class="anchor-icon" translate="no">
@@ -94,7 +94,7 @@ title: Integrar Milvus com DSPy
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DSPy é uma poderosa estrutura de programação que impulsiona as aplicações RAG. Estas aplicações necessitam de obter informação útil para melhorar a qualidade das respostas, o que requer uma base de dados vetorial. O Milvus é uma conhecida base de dados vetorial de código aberto para melhorar o desempenho e a escalabilidade. Com o MilvusRM, um módulo de recuperação em DSPy, a integração do Milvus torna-se perfeita. Agora, os programadores podem facilmente definir e otimizar programas RAG utilizando o DSPy, tirando partido das fortes capacidades de pesquisa vetorial do Milvus. Esta colaboração torna as aplicações RAG mais eficientes e escaláveis, combinando as capacidades de programação do DSPy com as funcionalidades de pesquisa do Milvus.</p>
+    </button></h2><p>DSPy é uma poderosa estrutura de programação que impulsiona as aplicações RAG. Estas aplicações necessitam de obter informação útil para melhorar a qualidade das respostas, o que requer uma base de dados vetorial. O Milvus é uma conhecida base de dados vetorial de código aberto para melhorar o desempenho e a escalabilidade. Com o MilvusRM, um módulo retriever em DSPy, a integração do Milvus torna-se perfeita. Agora, os programadores podem facilmente definir e otimizar programas RAG utilizando o DSPy, tirando partido das fortes capacidades de pesquisa vetorial do Milvus. Esta colaboração torna as aplicações RAG mais eficientes e escaláveis, combinando as capacidades de programação do DSPy com as funcionalidades de pesquisa do Milvus.</p>
 <h2 id="Examples" class="common-anchor-header">Exemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -111,13 +111,43 @@ title: Integrar Milvus com DSPy
         ></path>
       </svg>
     </button></h2><p>Agora, vamos analisar um exemplo rápido para demonstrar como aproveitar o Milvus no DSPy para otimizar um aplicativo RAG.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Pré-requisitos</h3><p>Antes de criar o aplicativo RAG, instale o DSPy e o PyMilvus.</p>
+<h3 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Antes de criar o aplicativo RAG, instale o DSPy e o PyMilvus.</p>
 <pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;dspy-ai[milvus]&quot;</span>
 $ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 Se estiver usando o Google Colab, para habilitar as dependências recém-instaladas, talvez seja necessário **reiniciar o tempo de execução** (clique no menu "Tempo de execução" na parte superior da tela e selecione "Reiniciar sessão" no menu suspenso).</div>
-<h3 id="Loading-the-dataset" class="common-anchor-header">Carregar o conjunto de dados</h3><p>Neste exemplo, utilizamos o HotPotQA, uma coleção de pares complexos de perguntas e respostas, como o nosso conjunto de dados de treino. Podemos carregá-los através da classe HotPotQA.</p>
+<h3 id="Loading-the-dataset" class="common-anchor-header">Carregar o conjunto de dados<button data-href="#Loading-the-dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Neste exemplo, utilizamos o HotPotQA, uma coleção de pares complexos de perguntas e respostas, como o nosso conjunto de dados de treino. Podemos carregá-los através da classe HotPotQA.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.datasets <span class="hljs-keyword">import</span> HotPotQA
 
 <span class="hljs-comment"># Load the dataset.</span>
@@ -129,7 +159,22 @@ dataset = HotPotQA(
 trainset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.train]
 devset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.dev]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">Ingerir dados na base de dados vetorial Milvus</h3><p>Ingerir a informação de contexto na coleção Milvus para recuperação de vectores. Esta coleção deve ter um campo <code translate="no">embedding</code> e um campo <code translate="no">text</code>. Neste caso, utilizamos o modelo <code translate="no">text-embedding-3-small</code> da OpenAI como função de incorporação de consulta predefinida.</p>
+<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">Ingerir dados na base de dados vetorial Milvus<button data-href="#Ingest-data-into-the-Milvus-vector-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ingerir a informação de contexto na coleção Milvus para recuperação de vectores. Esta coleção deve ter um campo <code translate="no">embedding</code> e um campo <code translate="no">text</code>. Neste caso, utilizamos o modelo <code translate="no">text-embedding-3-small</code> da OpenAI como função de incorporação de consulta predefinida.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> os
 
@@ -172,7 +217,22 @@ text = requests.get(
         ],
     )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-MilvusRM" class="common-anchor-header">Definir MilvusRM.</h3><p>Agora, é necessário definir o MilvusRM.</p>
+<h3 id="Define-MilvusRM" class="common-anchor-header">Definir MilvusRM.<button data-href="#Define-MilvusRM" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Agora, é necessário definir o MilvusRM.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.retrieve.milvus_rm <span class="hljs-keyword">import</span> MilvusRM
 <span class="hljs-keyword">import</span> dspy
 
@@ -185,7 +245,22 @@ retriever_model = MilvusRM(
 turbo = dspy.OpenAI(model=<span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>)
 dspy.settings.configure(lm=turbo)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Building-signatures" class="common-anchor-header">Construir assinaturas</h3><p>Agora que carregámos os dados, vamos começar a definir as assinaturas para as subtarefas do nosso pipeline. Podemos identificar o nosso simples input <code translate="no">question</code> e output <code translate="no">answer</code>, mas como estamos a construir uma pipeline RAG, vamos obter informação contextual do Milvus. Assim, vamos definir a nossa assinatura como <code translate="no">context, question --&gt; answer</code>.</p>
+<h3 id="Building-signatures" class="common-anchor-header">Construir assinaturas<button data-href="#Building-signatures" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Agora que carregámos os dados, vamos começar a definir as assinaturas para as subtarefas do nosso pipeline. Podemos identificar o nosso simples input <code translate="no">question</code> e output <code translate="no">answer</code>, mas como estamos a construir uma pipeline RAG, vamos obter informação contextual do Milvus. Assim, vamos definir a nossa assinatura como <code translate="no">context, question --&gt; answer</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">GenerateAnswer</span>(dspy.Signature):
     <span class="hljs-string">&quot;&quot;&quot;Answer questions with short factoid answers.&quot;&quot;&quot;</span>
 
@@ -194,7 +269,22 @@ dspy.settings.configure(lm=turbo)
     answer = dspy.OutputField(desc=<span class="hljs-string">&quot;often between 1 and 5 words&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Incluímos descrições curtas para os campos <code translate="no">context</code> e <code translate="no">answer</code> para definir diretrizes mais claras sobre o que o modelo irá receber e gerar.</p>
-<h3 id="Building-the-pipeline" class="common-anchor-header">Construir o pipeline</h3><p>Agora, vamos definir o pipeline RAG.</p>
+<h3 id="Building-the-pipeline" class="common-anchor-header">Construir o pipeline<button data-href="#Building-the-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Agora, vamos definir o pipeline RAG.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">RAG</span>(dspy.Module):
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, rm</span>):
         <span class="hljs-built_in">super</span>().__init__()
@@ -212,7 +302,22 @@ dspy.settings.configure(lm=turbo)
             context=[item.long_text <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> context], answer=prediction.answer
         )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Executing-the-pipeline-and-getting-the-results" class="common-anchor-header">Executando o pipeline e obtendo os resultados</h3><p>Agora, criámos este pipeline RAG. Vamos experimentá-lo e obter resultados.</p>
+<h3 id="Executing-the-pipeline-and-getting-the-results" class="common-anchor-header">Executando o pipeline e obtendo os resultados<button data-href="#Executing-the-pipeline-and-getting-the-results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Agora, criámos este pipeline RAG. Vamos experimentá-lo e obter resultados.</p>
 <pre><code translate="no" class="language-python">rag = RAG(retriever_model)
 <span class="hljs-built_in">print</span>(rag(<span class="hljs-string">&quot;who write At My Window&quot;</span>).answer)
 <button class="copy-code-btn"></button></code></pre>
@@ -230,7 +335,22 @@ metric = dspy.evaluate.answer_exact_match
 score = evaluate_on_hotpotqa(rag, metric=metric)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;rag:&quot;</span>, score)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optimizing-the-pipeline" class="common-anchor-header">Otimização do pipeline</h3><p>Depois de definir esse programa, a próxima etapa é a compilação. Esse processo atualiza os parâmetros em cada módulo para melhorar o desempenho. O processo de compilação depende de três fatores críticos:</p>
+<h3 id="Optimizing-the-pipeline" class="common-anchor-header">Otimização do pipeline<button data-href="#Optimizing-the-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Depois de definir esse programa, a próxima etapa é a compilação. Esse processo atualiza os parâmetros em cada módulo para melhorar o desempenho. O processo de compilação depende de três fatores críticos:</p>
 <ul>
 <li>Conjunto de treinamento: Utilizaremos os 20 exemplos de perguntas e respostas do nosso conjunto de dados de treinamento para esta demonstração.</li>
 <li>Métrica de validação: Estabeleceremos uma métrica <code translate="no">validate_context_and_answer</code> simples. Esta métrica verifica a exatidão da resposta prevista e assegura que o contexto recuperado inclui a resposta.</li>

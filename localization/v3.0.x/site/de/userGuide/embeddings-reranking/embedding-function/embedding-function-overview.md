@@ -3,15 +3,15 @@ id: embedding-function-overview.md
 title: Überblick über die EinbettungsfunktionCompatible with Milvus 2.6.x
 summary: >-
   Mit dem Funktionsmodul in Milvus können Sie Rohtextdaten in Vektoreinbettungen
-  umwandeln, indem Sie automatisch externe Einbettungsdienstleister (wie OpenAI,
-  AWS Bedrock, Google Vertex AI usw.) aufrufen. Mit dem Funktionsmodul müssen
-  Sie sich nicht mehr manuell mit Einbettungs-APIs auseinandersetzen - Milvus
-  übernimmt den gesamten Prozess des Sendens von Anfragen an Anbieter, des
-  Empfangs von Einbettungen und deren Speicherung in Ihren Sammlungen. Für die
-  semantische Suche müssen Sie nur die Rohdaten der Abfrage bereitstellen, nicht
-  aber einen Abfragevektor. Milvus generiert den Abfragevektor mit demselben
-  Modell, das Sie für die Aufnahme verwendet haben, vergleicht ihn mit den
-  gespeicherten Vektoren und gibt die relevantesten Ergebnisse zurück.
+  umwandeln, indem Sie automatisch externe Anbieter von Einbettungsdiensten (wie
+  OpenAI, AWS Bedrock, Google Vertex AI usw.) aufrufen. Mit dem Funktionsmodul
+  müssen Sie sich nicht mehr manuell mit Einbettungs-APIs auseinandersetzen -
+  Milvus übernimmt den gesamten Prozess des Sendens von Anfragen an Anbieter,
+  des Empfangs von Einbettungen und deren Speicherung in Ihren Sammlungen. Für
+  die semantische Suche müssen Sie nur die Rohdaten der Abfrage bereitstellen,
+  nicht aber einen Abfragevektor. Milvus generiert den Abfragevektor mit
+  demselben Modell, das Sie für die Aufnahme verwendet haben, vergleicht ihn mit
+  den gespeicherten Vektoren und gibt die relevantesten Ergebnisse zurück.
 beta: Milvus 2.6.x
 ---
 <h1 id="Embedding-Function-Overview" class="common-anchor-header">Überblick über die Einbettungsfunktion<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Embedding-Function-Overview" class="anchor-icon" translate="no">
@@ -159,8 +159,8 @@ beta: Milvus 2.6.x
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
-   </span> <span class="img-wrapper"> <span>Überblick über die Einbettungsfunktion</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
+   </span> <span class="img-wrapper"> <span>Überblick über die Einbettungsfunktionen</span> </span></p>
 <h2 id="Configure-credentials" class="common-anchor-header">Anmeldeinformationen konfigurieren<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -187,7 +187,7 @@ beta: Milvus 2.6.x
 <p>Das folgende Diagramm zeigt den Prozess der Konfiguration von Anmeldeinformationen über die Milvus-Konfigurationsdatei (<code translate="no">milvus.yaml</code>) und den anschließenden Aufruf der Funktion innerhalb von Milvus.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
    </span> <span class="img-wrapper"> <span>Überlauf der Berechtigungsnachweiskonfiguration</span> </span></p>
 <h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Schritt 1: Hinzufügen von Anmeldeinformationen zur Milvus-Konfigurationsdatei<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -424,7 +424,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>Die Anzahl der Dimensionen für die Ausgabe-Embeddings. Bei den OpenAI-Modellen der dritten Generation können Sie den vollständigen Vektor kürzen, um Kosten und Latenzzeit zu reduzieren, ohne dass ein signifikanter Verlust an semantischen Informationen entsteht. Weitere Informationen finden Sie im <a href="https://openai.com/blog/new-embedding-models-and-api-updates">OpenAI-Ankündigungs-Blogpost</a>.</p><p><strong>Hinweis:</strong> Wenn Sie die Vektordimension verkürzen, stellen Sie sicher, dass der <code translate="no">dim</code> Wert, der in der <code translate="no">add_field</code> Methode des Schemas für das Vektorfeld angegeben ist, mit der endgültigen Ausgabedimension Ihrer Einbettungsfunktion übereinstimmt.</p></td>
+     <td><p>Die Anzahl der Dimensionen für die Ausgabe-Embeddings. Bei den Modellen der dritten Generation von OpenAI können Sie den vollständigen Vektor kürzen, um Kosten und Latenzzeit zu reduzieren, ohne dass ein signifikanter Verlust an semantischen Informationen entsteht. Weitere Informationen finden Sie im <a href="https://openai.com/blog/new-embedding-models-and-api-updates">Blogbeitrag zur OpenAI-Ankündigung</a>.</p><p><strong>Hinweis:</strong> Wenn Sie die Vektordimension verkürzen, stellen Sie sicher, dass der <code translate="no">dim</code> Wert, der in der <code translate="no">add_field</code> Methode des Schemas für das Vektorfeld angegeben ist, mit der endgültigen Ausgabedimension Ihrer Einbettungsfunktion übereinstimmt.</p></td>
      <td><p><code translate="no">"1536"</code></p></td>
    </tr>
    <tr>
@@ -434,7 +434,7 @@ schema.add_function(text_embedding_function)
    </tr>
 </table>
 <div class="alert note">
-<p>Bei Sammlungen mit mehreren Skalarfeldern, die eine Text-zu-Vektor-Konvertierung erfordern, fügen Sie dem Sammlungsschema separate Funktionen hinzu und stellen Sie sicher, dass jede Funktion einen eindeutigen Namen und <code translate="no">output_field_names</code> Wert hat.</p>
+<p>Für Sammlungen mit mehreren skalaren Feldern, die eine Text-zu-Vektor-Konvertierung erfordern, fügen Sie dem Sammlungsschema separate Funktionen hinzu und stellen sicher, dass jede Funktion einen eindeutigen Namen und <code translate="no">output_field_names</code> Wert hat.</p>
 </div>
 <h3 id="Step-3-Configure-index" class="common-anchor-header">Schritt 3: Konfigurieren Sie den Index<button data-href="#Step-3-Configure-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -609,7 +609,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Beide Methoden funktionieren, aber die Verwendung von <code translate="no">milvus.yaml</code> ist die empfohlene Vorgehensweise, da sie eine zentrale Verwaltung der Anmeldeinformationen und eine einheitliche Benennung der Anmeldeinformationen über alle Anbieter hinweg ermöglicht. Bei der Verwendung von Umgebungsvariablen variieren die Variablennamen je nach Anbieter des Einbettungsdienstes, daher sollten Sie sich auf der entsprechenden Seite des jeweiligen Anbieters über die spezifischen Namen der Umgebungsvariablen informieren (z. B. <a href="/docs/de/openai.md">OpenAI</a> oder <a href="/docs/de/azure-openai.md">Azure OpenAI</a>).</p>
+    </button></h3><p>Beide Methoden funktionieren, aber die Verwendung von <code translate="no">milvus.yaml</code> ist der empfohlene Ansatz, da er eine zentrale Verwaltung der Anmeldeinformationen und eine einheitliche Benennung der Anmeldeinformationen über alle Anbieter hinweg ermöglicht. Bei der Verwendung von Umgebungsvariablen variieren die Variablennamen je nach Anbieter des Einbettungsdienstes, daher sollten Sie sich auf der entsprechenden Seite des jeweiligen Anbieters über die spezifischen Namen der Umgebungsvariablen informieren (z. B. <a href="/docs/de/openai.md">OpenAI</a> oder <a href="/docs/de/azure-openai.md">Azure OpenAI</a>).</p>
 <h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">Was passiert, wenn ich in der Funktionsdefinition keinen Credential-Parameter angebe?<button data-href="#What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -650,7 +650,7 @@ results = client.search(
 <ol>
 <li>Ihre Sammlung nach dem Einfügen abfragen, um zu sehen, ob das Vektorfeld Daten enthält</li>
 <li>Prüfen, ob die Länge des Vektorfeldes mit den erwarteten Dimensionen übereinstimmt</li>
-<li>eine einfache Ähnlichkeitssuche durchführen, um zu überprüfen, ob die Einbettungen sinnvolle Ergebnisse liefern</li>
+<li>eine einfache Ähnlichkeitssuche durchführen, um zu prüfen, ob die Einbettungen sinnvolle Ergebnisse liefern</li>
 </ol>
 <h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">Kann ich bei einer Ähnlichkeitssuche einen Abfragevektor anstelle von Rohtext verwenden?<button data-href="#When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="anchor-icon" translate="no">
       <svg translate="no"

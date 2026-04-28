@@ -56,9 +56,9 @@ go build
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Unduh <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/master/configs/backup.yaml">contoh berkas konfigurasi</a> dan sesuaikan dengan kebutuhan Anda.</p>
+    </button></h2><p>Unduh <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/master/configs/backup.yaml">berkas konfigurasi contoh</a> dan sesuaikan dengan kebutuhan Anda.</p>
 <p>Kemudian buat sebuah folder di samping berkas biner Milvus Backup yang telah diunduh atau dibuat, beri nama folder tersebut <code translate="no">configs</code>, dan letakkan berkas konfigurasi di dalam folder <code translate="no">configs</code>.</p>
-<p>Struktur folder Anda seharusnya mirip dengan yang berikut ini:</p>
+<p>Struktur folder Anda harus mirip dengan yang berikut ini:</p>
 <pre>
   <code translate="no">
   workspace
@@ -117,7 +117,7 @@ go build
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jika Anda menjalankan instans Milvus lokal kosong yang mendengarkan pada port default 19530, gunakan contoh skrip Python untuk menghasilkan beberapa data dalam instans Anda. Jangan ragu untuk membuat perubahan yang diperlukan pada skrip agar sesuai dengan kebutuhan Anda.</p>
+    </button></h2><p>Jika Anda menjalankan instans Milvus lokal kosong yang mendengarkan pada port default 19530, gunakan contoh skrip Python untuk menghasilkan beberapa data dalam instans Anda. Jangan ragu untuk melakukan perubahan yang diperlukan pada skrip agar sesuai dengan kebutuhan Anda.</p>
 <p>Dapatkan <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/main/example/prepare_data.py">skripnya</a>. Kemudian jalankan skrip untuk menghasilkan data. Pastikan bahwa <a href="https://pypi.org/project/pymilvus/">PyMilvus</a>, SDK Python Milvus resmi, telah terinstal.</p>
 <pre><code translate="no" class="language-shell">python example/prepare_data.py
 <button class="copy-code-btn"></button></code></pre>
@@ -227,4 +227,4 @@ go build
     </button></h2><p>Setelah pemulihan selesai, Anda dapat memverifikasi data yang dipulihkan dengan mengindeks koleksi yang dipulihkan sebagai berikut:</p>
 <pre><code translate="no" class="language-shell">python example/verify_data.py
 <button class="copy-code-btn"></button></code></pre>
-<p>Perhatikan bahwa skrip di atas mengasumsikan bahwa Anda telah menjalankan perintah <code translate="no">restore</code> dengan bendera <code translate="no">-s</code> dan akhiran disetel ke <code translate="no">-recover</code>. Jangan ragu untuk membuat perubahan yang diperlukan pada skrip agar sesuai dengan kebutuhan Anda.</p>
+<p>Perhatikan bahwa skrip di atas mengasumsikan bahwa Anda telah menjalankan perintah <code translate="no">restore</code> dengan bendera <code translate="no">-s</code> dan akhiran diatur ke <code translate="no">-recover</code>. Jangan ragu untuk membuat perubahan yang diperlukan pada skrip agar sesuai dengan kebutuhan Anda.</p>

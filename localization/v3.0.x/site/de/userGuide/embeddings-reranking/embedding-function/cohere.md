@@ -104,7 +104,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus muss Ihren Cohere API-Schlüssel kennen, bevor es Einbettungen anfordern kann. Milvus bietet zwei Methoden zur Konfiguration von Anmeldeinformationen:</p>
+    </button></h2><p>Milvus muss Ihren Cohere-API-Schlüssel kennen, bevor es Einbettungen anfordern kann. Milvus bietet zwei Methoden zur Konfiguration von Anmeldeinformationen:</p>
 <ul>
 <li><p><strong>Konfigurationsdatei (empfohlen):</strong> Speichern Sie den API-Schlüssel in <code translate="no">milvus.yaml</code>, damit er bei jedem Neustart und Knoten automatisch übernommen wird.</p></li>
 <li><p><strong>Umgebungsvariablen:</strong> Injizieren Sie den Schlüssel zum Zeitpunkt der Bereitstellung - ideal für Docker Compose.</p></li>
@@ -131,7 +131,7 @@ beta: Milvus 2.6.x
     </button></h3><p>Bewahren Sie Ihre API-Schlüssel in <code translate="no">milvus.yaml</code> auf; Milvus liest sie beim Start und setzt jede Umgebungsvariable für denselben Anbieter außer Kraft.</p>
 <ol>
 <li><p>**Deklarieren Sie Ihre Schlüssel unter <code translate="no">credential:</code></p>
-<p>Sie können einen oder mehrere API-Schlüssel auflisten - geben Sie jedem einen Namen, den Sie erfinden und später referenzieren werden.</p>
+<p>Sie können einen oder mehrere API-Schlüssel auflisten - geben Sie jedem einen Namen, den Sie selbst erfinden und später referenzieren werden.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">apikey_dev:</span>            <span class="hljs-comment"># dev environment</span>
@@ -140,7 +140,7 @@ beta: Milvus 2.6.x
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
 <p>Wenn Sie die API-Schlüssel hier angeben, bleiben sie über Neustarts hinweg bestehen und Sie können die Schlüssel einfach durch Ändern einer Bezeichnung wechseln.</p></li>
-<li><p><strong>Sagen Sie Milvus, welchen Schlüssel es für OpenAI-Aufrufe verwenden soll</strong></p>
+<li><p><strong>Teilen Sie Milvus mit, welchen Schlüssel es für OpenAI-Aufrufe verwenden soll</strong></p>
 <p>In der gleichen Datei verweisen Sie den Cohere-Anbieter auf das Label, das er verwenden soll.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
@@ -166,7 +166,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Verwenden Sie diese Methode, wenn Sie Milvus mit Docker Compose ausführen und es vorziehen, Geheimnisse aus Dateien und Images herauszuhalten.</p>
+    </button></h3><p>Verwenden Sie diese Methode, wenn Sie Milvus mit Docker Compose betreiben und es vorziehen, Geheimnisse aus Dateien und Images herauszuhalten.</p>
 <p>Milvus greift nur dann auf die Umgebungsvariable zurück, wenn unter <code translate="no">milvus.yaml</code> kein Schlüssel für den Anbieter gefunden wird.</p>
 <table>
    <tr>
@@ -265,7 +265,7 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
       </svg>
     </button></h3><p>Das Function-Modul in Milvus wandelt Rohdaten, die in einem Skalarfeld gespeichert sind, automatisch in Einbettungen um und speichert sie in dem explizit definierten Vektorfeld.</p>
 <p>Das folgende Beispiel fügt ein Funktionsmodul (<code translate="no">cohere_func</code>) hinzu, das das Skalarfeld <code translate="no">&quot;document&quot;</code> in Einbettungen umwandelt und die resultierenden Vektoren in dem zuvor definierten Vektorfeld <code translate="no">&quot;dense&quot;</code> speichert.</p>
-<p>Sobald Sie Ihre Einbettungsfunktion definiert haben, fügen Sie sie zu Ihrem Sammlungsschema hinzu. Dadurch wird Milvus angewiesen, die angegebene Einbettungsfunktion zur Verarbeitung und Speicherung von Einbettungen aus Ihren Textdaten zu verwenden.</p>
+<p>Sobald Sie Ihre Einbettungsfunktion definiert haben, fügen Sie sie zu Ihrem Sammelschema hinzu. Dies weist Milvus an, die angegebene Einbettungsfunktion zu verwenden, um Einbettungen aus Ihren Textdaten zu verarbeiten und zu speichern.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function specifically for embedding model provider</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;cohere_func&quot;</span>,                                 <span class="hljs-comment"># Unique identifier for this embedding function</span>

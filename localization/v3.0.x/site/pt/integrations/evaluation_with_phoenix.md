@@ -298,7 +298,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
     <tr>
       <th>1</th>
       <td>Qual é a linguagem de programação usada para escrever...</td>
-      <td>[CMake &amp; Conan\n\nA biblioteca de algoritmos do Mil...</td>
+      <td>[CMake &amp; Conan\n\nA biblioteca de algoritmos de Mil...</td>
       <td>A linguagem de programação usada para escrever o Knowher...</td>
       <td>A linguagem de programação usada para escrever o Knowher...</td>
     </tr>
@@ -331,7 +331,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
 <ul>
 <li><p><strong>Avaliação de alucinação</strong>: Determina se o conteúdo é factual ou alucinatório (informação não fundamentada no contexto), garantindo a integridade dos dados.</p>
 <ul>
-<li><strong>Explicação</strong> da<strong>alucinação</strong>: Explica porque é que uma resposta é factual ou não.</li>
+<li><strong>Explicação da alucinação</strong>: Explica porque é que uma resposta é factual ou não.</li>
 </ul></li>
 <li><p><strong>Avaliação de QA</strong>: Avalia a exatidão das respostas do modelo às consultas de entrada.</p>
 <ul>

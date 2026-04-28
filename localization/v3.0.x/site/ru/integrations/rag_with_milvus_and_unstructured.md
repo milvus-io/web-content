@@ -74,7 +74,7 @@ title: Построение RAG с помощью Milvus и Unstructured
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-Milvus-and-OpenAI-clients" class="common-anchor-header">Подготовьте клиенты Milvus и OpenAI<button data-href="#Prepare-Milvus-and-OpenAI-clients" class="anchor-icon" translate="no">
+<h3 id="Prepare-Milvus-and-OpenAI-clients" class="common-anchor-header">Подготовка клиентов Milvus и OpenAI<button data-href="#Prepare-Milvus-and-OpenAI-clients" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -517,7 +517,22 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>您可以為要建立的集合設定屬性，使其適合您的服務。適用的屬性如下。</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">設定分片編號</h3><p>Shard 是集合的水平切片，每個 Shard 對應一個資料輸入通道。預設情況下，每個集合都有一個分片。您可以在建立集合時指定分片的數量，以更適合您的資料量和工作負載。</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">設定分片編號<button data-href="#Set-Shard-Number" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Shard 是集合的水平切片，每個 Shard 對應一個資料輸入通道。預設情況下，每個集合都有一個分片。您可以在建立集合時指定分片的數量，以更適合您的資料量和工作負載。</p>
 <p>作為一般指引，設定分片數量時請考慮下列事項：</p>
 <ul>
 <li><strong>資料大小：</strong>常見的做法是每 2 億個實體設一個分片。您也可以根據總資料大小進行估算，例如，為計劃插入的每 100 GB 資料增加一個分區。</li>
@@ -571,7 +586,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">啟用 mmap</h3><p>Milvus 在所有集合上預設啟用 mmap，允許 Milvus 將原始欄位資料映射到記憶體，而不是完全載入它們。這可減少記憶體佔用量並增加集合容量。有關 mmap 的詳細資訊，請參閱<a href="/docs/zh-hant/mmap.md">使用 mmap</a>。</p>
+<h3 id="Enable-mmap" class="common-anchor-header">啟用 mmap<button data-href="#Enable-mmap" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 在所有集合上預設啟用 mmap，允許 Milvus 將原始欄位資料映射到記憶體，而不是完全載入它們。這可減少記憶體佔用量並增加集合容量。有關 mmap 的詳細資訊，請參閱<a href="/docs/zh-hant/mmap.md">使用 mmap</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#plaintext">明文</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap</span>
@@ -624,7 +654,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Collection-TTL" class="common-anchor-header">設定集合 TTL</h3><p>如果集合中的資料需要在特定時間內丟棄，請考慮設定其 Time-To-Live (TTL)，單位為秒。一旦 TTL 超時，Milvus 就會刪除集合中的實體。刪除是異步的，表示在刪除完成之前，仍可進行搜尋與查詢。</p>
+<h3 id="Set-Collection-TTL" class="common-anchor-header">設定集合 TTL<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果集合中的資料需要在特定時間內丟棄，請考慮設定其 Time-To-Live (TTL)，單位為秒。一旦 TTL 超時，Milvus 就會刪除集合中的實體。刪除是異步的，表示在刪除完成之前，仍可進行搜尋與查詢。</p>
 <p>以下程式碼片段將 TTL 設定為一天 (86400 秒)。建議您至少將 TTL 設定為幾天。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -680,7 +725,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Consistency-Level" class="common-anchor-header">設定一致性等級</h3><p>建立資料集時，您可以設定資料集中搜尋與查詢的一致性等級。您也可以在特定搜尋或查詢時變更集合的一致性層級。</p>
+<h3 id="Set-Consistency-Level" class="common-anchor-header">設定一致性等級<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>建立資料集時，您可以設定資料集中搜尋與查詢的一致性等級。您也可以在特定搜尋或查詢時變更集合的一致性層級。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With consistency level</span>
@@ -734,5 +794,20 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>有關一致性層級的更多資訊，請參閱<a href="/docs/zh-hant/tune_consistency.md">一致性</a>層級。</p>
-<h3 id="Enable-Dynamic-Field" class="common-anchor-header">啟用動態欄位</h3><p>集合中的動態欄位是一個保留的 JavaScript Object Notation (JSON) 欄位，名為<strong>$meta</strong>。一旦啟用這個欄位，Milvus 會將每個實體中所有非模式定義的欄位及其值儲存為保留欄位中的鍵值對。</p>
+<h3 id="Enable-Dynamic-Field" class="common-anchor-header">啟用動態欄位<button data-href="#Enable-Dynamic-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>集合中的動態欄位是一個保留的 JavaScript Object Notation (JSON) 欄位，名為<strong>$meta</strong>。一旦啟用這個欄位，Milvus 會將每個實體中所有非模式定義的欄位及其值儲存為保留欄位中的鍵值對。</p>
 <p>有關如何使用動態欄位的詳細資訊，請參閱<a href="/docs/zh-hant/enable-dynamic-field.md">動態</a>欄位。</p>

@@ -38,17 +38,17 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>En una canalización de datos de IA típica, es posible que los usuarios ya hayan almacenado sus datos en Parquet u otros formatos en su sistema de almacenamiento, como AWS S3. Para hacer que Milvus consuma estos datos almacenados externamente, los usuarios normalmente necesitan importarlos al propio almacenamiento de Milvus utilizando canalizaciones Extract-Transform-Load (ETL).</p>
-<p>Este flujo de trabajo de "traiga sus datos a Milvus" crea datos redundantes que son difíciles de sincronizar y aumenta la carga de mantenimiento de ingeniería para garantizar la coherencia de los datos.</p>
+<p>Este flujo de trabajo de traer los datos a Milvus crea datos redundantes que son difíciles de sincronizar y aumenta la carga de mantenimiento de ingeniería para garantizar la coherencia de los datos.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/yqxwwpq3vheya4b8398cwopnnyn.png" alt="Yqxwwpq3vheya4b8398cwopnnyn" class="doc-image" id="yqxwwpq3vheya4b8398cwopnnyn" />
-   </span> <span class="img-wrapper"> <span>Yqxwwpq3vheya4b8398cwopnnyn</span> </span></p>
-<p>Para resolver estos problemas, Milvus ofrece colecciones externas que le permiten acceder a sus datos almacenados externamente desde Milvus sin preocuparse por la sincronización de datos y las canalizaciones ETL.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" />
+   </span> <span class="img-wrapper"> <span>Flujo de trabajo de llevar los datos a la computación</span> </span></p>
+<p>Para resolver estos problemas, Milvus ofrece colecciones externas que le permiten acceder a sus datos almacenados externamente desde Milvus sin tener que preocuparse por la sincronización de datos y las canalizaciones ETL.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/q6f4wtcd2h3pnkbnmxncw3urn3f.png" alt="Q6f4wtcd2h3pnkbnmxncw3urn3f" class="doc-image" id="q6f4wtcd2h3pnkbnmxncw3urn3f" />
-   </span> <span class="img-wrapper"> <span>Q6f4wtcd2h3pnkbnmxncw3urn3f</span> </span></p>
-<p>Una vez creada, una colección externa puede acceder directamente a sus datos y mantenerlos en el mismo lugar donde usted los almacena. En segundo plano, Milvus crea archivos de manifiesto para registrar las correspondencias entre los metadatos de Milvus y las filas de los archivos de datos externos. Una vez que los archivos de manifiesto están listos, puede crear índices en la colección externa como lo haría en cualquier colección gestionada.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" />
+   </span> <span class="img-wrapper"> <span>Llevar la computación al flujo de trabajo de datos</span> </span></p>
+<p>Una vez creada, una colección externa puede acceder directamente a sus datos y mantenerlos en el mismo lugar donde los almacena. En segundo plano, Milvus crea archivos de manifiesto para registrar las correspondencias entre los metadatos de Milvus y las filas de los archivos de datos externos. Una vez que los archivos de manifiesto están listos, puede crear índices en la colección externa como lo haría en cualquier colección gestionada.</p>
 <p>Cuando sus datos cambian, la activación manual de una actualización de menos de un segundo actualiza los metadatos, manteniendo Milvus siempre al día.</p>
 <h2 id="Limits--restrictions" class="common-anchor-header">Límites y restricciones<button data-href="#Limits--restrictions" class="anchor-icon" translate="no">
       <svg translate="no"

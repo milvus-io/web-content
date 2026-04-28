@@ -91,7 +91,7 @@ metadata:
 EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Estabelecer uma credencial de identidade federada entre a identidade e o emissor e sujeito da conta de serviço.</li>
+<li>Estabelecer uma credencial de identidade federada entre a identidade e o emissor e o sujeito da conta de serviço.</li>
 </ul>
 <pre><code translate="no" class="language-bash">az identity federated-credential create \
   --name <span class="hljs-string">&quot;kubernetes-federated-credential&quot;</span> \

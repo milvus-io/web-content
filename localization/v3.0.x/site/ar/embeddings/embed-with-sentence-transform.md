@@ -26,7 +26,7 @@ title: محولات الجمل
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>بعد ذلك، قم بإنشاء <strong>دالة SentenceTransformerEmbeddingFunction</strong>:</p>
+<p>ثم، قم بإنشاء <strong>دالة SentenceTransformerEmbeddingFunction</strong>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
 
 sentence_transformer_ef = model.dense.SentenceTransformerEmbeddingFunction(

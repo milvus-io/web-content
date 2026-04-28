@@ -2,7 +2,7 @@
 id: primary-field.md
 title: プライマリフィールドとAutoID
 summary: >-
-  Milvusのすべてのコレクションには、各エンティティを一意に識別するためのプライマリフィールドが必要です。このフィールドにより、すべてのエンティティが曖昧さなく挿入、更新、照会、削除できるようになります。
+  Milvusの全てのコレクションには、各エンティティを一意に識別するためのプライマリフィールドが必要です。このフィールドにより、すべてのエンティティが曖昧さなく挿入、更新、照会、削除できるようになります。
 ---
 <h1 id="Primary-Field--AutoID" class="common-anchor-header">プライマリフィールドとAutoID<button data-href="#Primary-Field--AutoID" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Milvusの全てのコレクションには、各エンティティを一意に識別するためのプライマリフィールドが必要です。このフィールドにより、すべてのエンティティが曖昧さなく挿入、更新、照会、削除できるようになります。</p>
-<p>使用するケースに応じて、MilvusにIDを自動生成させるか（AutoID）、手動でIDを割り当てることができます。</p>
+<p>使用するケースに応じて、MilvusにIDを自動生成させるか(AutoID)、手動でIDを割り当てることができます。</p>
 <h2 id="What-is-a-primary-field" class="common-anchor-header">プライマリフィールドとは何ですか？<button data-href="#What-is-a-primary-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

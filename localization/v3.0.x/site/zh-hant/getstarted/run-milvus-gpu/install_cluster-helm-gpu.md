@@ -138,7 +138,7 @@ helm upgrade my-release zilliztech/milvus
 <ul>
 <li><p>Milvus 集群</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
-indexNode:
+dataNode:
   resources:
     requests:
       nvidia.com/gpu: &quot;1&quot;
@@ -164,10 +164,10 @@ standalone:
       nvidia.com/gpu: &quot;1&quot;
 EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsar.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
+<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="2-Assign-multiple-GPU-devices" class="common-anchor-header">2.指派多個 GPU 裝置<button data-href="#2-Assign-multiple-GPU-devices" class="anchor-icon" translate="no">
+<h3 id="2-Assign-multiple-GPU-devices" class="common-anchor-header">2.指定多個 GPU 裝置<button data-href="#2-Assign-multiple-GPU-devices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -186,7 +186,7 @@ EOF</span>
 <ul>
 <li><p>Milvus 集群</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
-indexNode:
+dataNode:
   resources:
     requests:
       nvidia.com/gpu: &quot;2&quot;
@@ -200,9 +200,9 @@ queryNode:
       nvidia.com/gpu: &quot;2&quot;
 EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在上面的配置中，索引節點 (indexNode) 和查詢節點 (queryNode) 共用兩個 GPU。要為 indexNode 和 queryNode 分配不同的 GPU，您可以在配置文件中相應地修改配置，方法如下：設定<code translate="no">extraEnv</code> ：</p>
+<p>在上面的配置中，有四顆 CPU 可用，每個 dataNode 和 queryNode 使用兩顆 GPU。若要為資料節點 (dataNode) 和查詢節點 (queryNode) 分配不同的 GPU，您可以在配置檔案中設定<code translate="no">extraEnv</code> ，相應修改配置，如下所示：</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
-indexNode:
+dataNode:
   resources:
     requests:
       nvidia.com/gpu: &quot;1&quot;
@@ -226,7 +226,7 @@ EOF</span>
 <button class="copy-code-btn"></button></code></pre>
   <div class="alert note">
     <ul>
-      <li>版本名稱只能包含字母、數字和破折號。版本名稱中不允許使用點。</li>
+      <li>版本名稱只能包含字母、數字和破折號。版本名稱中不允許使用小點。</li>
       <li>使用 Helm 安裝 Milvus 時，預設命令列會安裝群集版本的 Milvus。獨立安裝 Milvus 時需要進一步設定。</li>
       <li>根據<a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">Kuberenetes 的廢棄 API 移轉指南</a>，PodDisruptionBudget 的<b>policy/v1beta1</b>API 版本自 v1.25 起不再提供服務。建議您遷移艙單和 API 用戶端，改用<b>policy/v1</b>API 版本。<br/>對於仍在 Kuberenetes v1.25 及更新版本上使用<b>policy/v1beta1</b>API 版本 PodDisruptionBudget 的使用者，作為一個解決方案，您可以執行下列指令來安裝 Milvus：<br/> <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
       <li>更多資訊請參閱<a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a>與<a href="https://helm.sh/docs/">Helm</a>。</li>
@@ -235,7 +235,7 @@ EOF</span>
 </li>
 <li><p>Milvus 單機版</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
-indexNode:
+dataNode:
   resources:
     requests:
       nvidia.com/gpu: &quot;2&quot;
@@ -249,9 +249,9 @@ queryNode:
       nvidia.com/gpu: &quot;2&quot;
 EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在上述配置中，indexNode 和 queryNode 共用兩個 GPU。若要為 indexNode 和 queryNode 分配不同的 GPU，您可以在設定檔中設定 extraEnv 來相應修改配置，如下所示：</p>
+<p>在上面的配置中，有四顆 CPU 可用，每個 dataNode 和 queryNode 使用兩顆 GPU。若要為 dataNode 和 queryNode 分配不同的 GPU，您可以在設定檔中設定 extraEnv，相應修改配置，如下所示：</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
-indexNode:
+dataNode:
   resources:
     requests:
       nvidia.com/gpu: &quot;1&quot;
@@ -271,7 +271,7 @@ queryNode:
       value: &quot;1&quot;
 EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsar.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
+<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="2-Check-Milvus-status" class="common-anchor-header">2.檢查 Milvus 狀態<button data-href="#2-Check-Milvus-status" class="anchor-icon" translate="no">
@@ -296,28 +296,31 @@ EOF</span>
 <ul>
 <li><p>Milvus 集群</p>
 <pre><code translate="no" class="language-shell">NAME                                             READY  STATUS   RESTARTS  AGE
-my-release-etcd-0                                1/1    Running   0        3m23s
-my-release-etcd-1                                1/1    Running   0        3m23s
-my-release-etcd-2                                1/1    Running   0        3m23s
-my-release-milvus-datacoord-6fd4bd885c-gkzwx     1/1    Running   0        3m23s
-my-release-milvus-datanode-68cb87dcbd-4khpm      1/1    Running   0        3m23s
-my-release-milvus-indexcoord-5bfcf6bdd8-nmh5l    1/1    Running   0        3m23s
-my-release-milvus-indexnode-5c5f7b5bd9-l8hjg     1/1    Running   0        3m24s
-my-release-milvus-proxy-6bd7f5587-ds2xv          1/1    Running   0        3m24s
-my-release-milvus-querycoord-579cd79455-xht5n    1/1    Running   0        3m24s
-my-release-milvus-querynode-5cd8fff495-k6gtg     1/1    Running   0        3m24s
-my-release-milvus-rootcoord-7fb9488465-dmbbj     1/1    Running   0        3m23s
-my-release-minio-0                               1/1    Running   0        3m23s
-my-release-minio-1                               1/1    Running   0        3m23s
-my-release-minio-2                               1/1    Running   0        3m23s
-my-release-minio-3                               1/1    Running   0        3m23s
-my-release-pulsar-autorecovery-86f5dbdf77-lchpc  1/1    Running   0        3m24s
-my-release-pulsar-bookkeeper-0                   1/1    Running   0        3m23s
-my-release-pulsar-bookkeeper-1                   1/1    Running   0        98s
-my-release-pulsar-broker-556ff89d4c-2m29m        1/1    Running   0        3m23s
-my-release-pulsar-proxy-6fbd75db75-nhg4v         1/1    Running   0        3m23s
-my-release-pulsar-zookeeper-0                    1/1    Running   0        3m23s
-my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
+my-release-etcd-0                                  1/1     Running     0             3m24s
+my-release-etcd-1                                  1/1     Running     0             3m24s
+my-release-etcd-2                                  1/1     Running     0             3m24s
+my-release-milvus-datanode-698dbf7d77-rjkkq        1/1     Running     0             3m24s
+my-release-milvus-mixcoord-856d666559-rpj8z        1/1     Running     0             3m24s
+my-release-milvus-proxy-7f7cf47689-pzltw           1/1     Running     0             3m24s
+my-release-milvus-querynode-7fb6d5b5f8-92phj       1/1     Running     0             3m24s
+my-release-milvus-streamingnode-5867bfbcbf-cg9xx   1/1     Running     0             3m24s
+my-release-minio-0                                 1/1     Running     0             3m24s
+my-release-minio-1                                 1/1     Running     0             3m24s
+my-release-minio-2                                 1/1     Running     0             3m24s
+my-release-minio-3                                 1/1     Running     0             3m24s
+my-release-pulsarv3-bookie-0                       1/1     Running     0             3m24s
+my-release-pulsarv3-bookie-1                       1/1     Running     0             3m24s
+my-release-pulsarv3-bookie-2                       1/1     Running     0             3m24s
+my-release-pulsarv3-bookie-init-p8hcq              0/1     Completed   0             3m24s
+my-release-pulsarv3-broker-0                       1/1     Running     0             3m24s
+my-release-pulsarv3-broker-1                       1/1     Running     0             3m24s
+my-release-pulsarv3-proxy-0                        1/1     Running     0             3m24s
+my-release-pulsarv3-proxy-1                        1/1     Running     0             3m24s
+my-release-pulsarv3-pulsar-init-8kjsj              0/1     Completed   0             3m24s
+my-release-pulsarv3-recovery-0                     1/1     Running     0             3m24s
+my-release-pulsarv3-zookeeper-0                    1/1     Running     0             3m24s
+my-release-pulsarv3-zookeeper-1                    1/1     Running     0             3m24s
+my-release-pulsarv3-zookeeper-2                    1/1     Running     0             3m24s
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Milvus 獨立</p>
 <pre><code translate="no" class="language-shell">NAME                                               READY   STATUS      RESTARTS   AGE
@@ -351,10 +354,32 @@ my-release-minio-5564fbbddc-mz7f5                  1/1     Running     0        
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以選擇在上述指令中使用<code translate="no">:19530</code> 而不是<code translate="no">27017:19530</code> ，讓<code translate="no">kubectl</code> 替您分配一個本機連接埠，這樣您就不必管理連接埠衝突。</p>
-<p>預設情況下，kubectl 的連接埠轉發只會在<code translate="no">localhost</code> 上監聽。如果您希望 Milvus 監聽選定或所有的 IP 位址，請使用<code translate="no">address</code> 。下列指令會讓 port-forward 聆聽主機上所有的 IP 位址。</p>
+<p>預設情況下，kubectl 的連接埠轉發只會監聽<code translate="no">localhost</code> 。如果您希望 Milvus 監聽選定或所有的 IP 位址，請使用<code translate="no">address</code> 。以下指令會讓 port-forward 聆聽主機上所有的 IP 位址。</p>
 <pre><code translate="no" class="language-bash">$ kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
+<p>現在，您可以使用轉送的連接埠連線到 Milvus。</p>
+<h2 id="Access-Milvus-WebUI" class="common-anchor-header">存取 Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus 隨附一個內建的 GUI 工具，稱為 Milvus WebUI，您可以透過瀏覽器存取。Milvus Web UI 以簡單直觀的介面增強系統的可觀察性。您可以使用 Milvus Web UI 觀察 Milvus 元件和相依性的統計和指標、檢查資料庫和收集的詳細資訊，以及列出 Milvus 的詳細配置。有關 Milvus Web UI 的詳細資訊，請參閱<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>。</p>
+<p>要啟用對 Milvus Web UI 的存取，您需要將代理 pod 的連接埠轉發到本機連接埠。</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
+Forwarding from 0.0.0.0:27018 -&gt; 9091
+<button class="copy-code-btn"></button></code></pre>
+<p>現在，您可以在<code translate="no">http://localhost:27018</code> 存取 Milvus Web UI。</p>
 <h2 id="Uninstall-Milvus" class="common-anchor-header">卸載 Milvus<button data-href="#Uninstall-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -370,7 +395,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>執行下列命令卸載 Milvus。</p>
+    </button></h2><p>執行以下指令卸載 Milvus。</p>
 <pre><code translate="no" class="language-bash">$ helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -408,8 +433,9 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
 <li><a href="/docs/zh-hant/gcp.md">谷歌雲</a></li>
 <li><a href="/docs/zh-hant/azure.md">微軟 Azure</a></li>
 </ul></li>
+<li><p>探索<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>，Milvus 可觀察與管理的直覺式網頁介面。</p></li>
 <li><p>探索<a href="/docs/zh-hant/milvus_backup_overview.md">Milvus 備份</a>，Milvus 資料備份的開放原始碼工具。</p></li>
-<li><p>探索<a href="/docs/zh-hant/birdwatcher_overview.md">Birdwatcher</a>，用於調試 Milvus 和動態配置更新的開放源碼工具。</p></li>
-<li><p>探索<a href="https://milvus.io/docs/attu.md">Attu</a>，一個用於直覺式 Milvus 管理的開放原始碼 GUI 工具。</p></li>
+<li><p>探索<a href="/docs/zh-hant/birdwatcher_overview.md">Birdwatcher</a>，用於調試 Milvus 和動態組態更新的開放原始碼工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>，一個開放源碼 GUI 工具，用於直觀的 Milvus 管理。</p></li>
 <li><p><a href="/docs/zh-hant/monitor.md">使用 Prometheus 監控 Milvus</a>。</p></li>
 </ul>

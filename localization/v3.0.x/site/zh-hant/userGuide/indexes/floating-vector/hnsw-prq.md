@@ -333,9 +333,9 @@ res = MilvusClient.search(
    <tr>
      <td><p>PRQ</p></td>
      <td><p><code translate="no">refine_k</code></p></td>
-     <td><p>放大係數，用來控制在精細化（重新排序）階段中，相對於所要求的前 K 個結果，有多少額外的候選人會被檢驗。</p></td>
+     <td><p>放大係數，用來控制在精細化（重新排序）階段中，相對於要求的前 K 個結果，有多少額外的候選人會被檢驗。</p></td>
      <td><p><strong>類型</strong>：浮動<strong>範圍</strong>：[1,<em>float_max</em>)</p>
 <p><strong>預設值</strong>：1</p></td>
-     <td><p><code translate="no">refine_k</code> 的較高值可以提高召回率和精確度，但也會增加搜尋時間和資源使用。值為 1 表示精煉過程只考慮初始的前 K 個結果。</p></td>
+     <td><p><code translate="no">refine_k</code> 的值越高，可提高召回率和準確度，但也會增加搜尋時間和資源使用。值為 1 表示精煉過程只考慮初始的前 K 個結果。</p></td>
    </tr>
 </table>

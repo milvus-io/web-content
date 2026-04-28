@@ -1,7 +1,7 @@
 ---
 id: use-async-milvus-client-with-asyncio.md
 summary: >-
-  AsyncMilvusClient 是一种异步 MilvusClient，它提供了一种基于例程的 API，可通过 asyncio 对 Milvus
+  AsyncMilvusClient 是一种异步 MilvusClient，它提供了基于例程的 API，可通过 asyncio 对 Milvus
   进行非阻塞访问。本文将介绍调用 AsyncMilvusClient 提供的 API 的过程以及需要注意的方面。
 title: 答题系统
 ---
@@ -378,7 +378,7 @@ loop.run_until_complete(conduct_vector_search(<span class="hljs-string">&quot;my
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>混合搜索结合了多个搜索结果，并对它们进行重新排序，以获得更好的召回率。本节将使用密集向量场和稀疏向量场进行混合搜索。</p>
+    </button></h2><p>混合搜索结合了多个搜索结果，并对其进行重新排序，以获得更好的召回率。本节将使用密集向量场和稀疏向量场进行混合搜索。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">conduct_hybrid_search</span>(<span class="hljs-params">collection_name</span>):​
     req_dense = AnnSearchRequest(​
         data=[ rng.random(<span class="hljs-number">5</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">3</span>) ],​

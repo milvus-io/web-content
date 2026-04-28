@@ -39,7 +39,7 @@ title: 部署 CDC 伺服器
 <ul>
 <li><p><strong>Milvus Instances</strong>：源 Milvus 和至少一個目標 Milvus 都應已部署並運作。</p>
 <ul>
-<li><p>源和目標 Milvus 版本都必須是 2.3.2 或更高，最好是 2.4.x。我們建議使用相同版本的源和目標 Milvus 以確保兼容性。</p></li>
+<li><p>源和目標 Milvus 版本都必須是 2.3.2 或更高，最好是 2.4.x。我們建議使用相同版本的源和目標 Milvus，以確保兼容性。</p></li>
 <li><p>將目標 Milvus 的<code translate="no">common.ttMsgEnabled</code> 設定為<code translate="no">false</code> 。</p></li>
 <li><p>使用不同的元和訊息儲存設定來設定來源和目標 Milvus，以防止衝突。例如，避免在多個 Milvus 實體中使用相同的 etcd 和 rootPath 設定，以及相同的 Pulsar 服務和<code translate="no">chanNamePrefix</code> 。</p></li>
 </ul></li>
@@ -60,19 +60,49 @@ title: 部署 CDC 伺服器
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Obtain-the-Milvus-CDC-config-file" class="common-anchor-header">取得 Milvus-CDC 的設定檔</h3><p>克隆<a href="https://github.com/zilliztech/milvus-cdc">Milvus-CDC repo</a>並導航到<code translate="no">milvus-cdc/server/configs</code> 目錄，以存取<code translate="no">cdc.yaml</code> 配置檔案。</p>
+    </button></h2><h3 id="Obtain-the-Milvus-CDC-config-file" class="common-anchor-header">取得 Milvus-CDC 的設定檔<button data-href="#Obtain-the-Milvus-CDC-config-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>克隆<a href="https://github.com/zilliztech/milvus-cdc">Milvus-CDC 倉庫</a>，並導航至<code translate="no">milvus-cdc/server/configs</code> 目錄，以存取<code translate="no">cdc.yaml</code> 配置檔案。</p>
 <pre><code translate="no" class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/milvus-cdc.git
 
 <span class="hljs-built_in">cd</span> milvus-cdc/server/configs
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Edit-the-config-file" class="common-anchor-header">編輯設定檔</h3><p>在<code translate="no">milvus-cdc/server/configs</code> 目錄中，修改<code translate="no">cdc.yaml</code> 檔案，以自訂與 Milvus-CDC 元端程式庫及來源 Milvus 連線細節相關的設定。</p>
+<h3 id="Edit-the-config-file" class="common-anchor-header">編輯設定檔<button data-href="#Edit-the-config-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在<code translate="no">milvus-cdc/server/configs</code> 目錄中，修改<code translate="no">cdc.yaml</code> 檔案，以自訂與 Milvus-CDC 元端程式庫及來源 Milvus 連線細節相關的設定。</p>
 <ul>
 <li><p><strong>元端儲存配置</strong>：</p>
 <ul>
 <li><p><code translate="no">metaStoreConfig.storeType</code>:Milvus-CDC 的 metastore 類型。可能的值是<code translate="no">etcd</code> 或<code translate="no">mysql</code> 。</p></li>
 <li><p><code translate="no">metaStoreConfig.etcdEndpoints</code>:連線至 Milvus-CDC 的 etcd 位址。如果<code translate="no">storeType</code> 設為<code translate="no">etcd</code> 則必須。</p></li>
-<li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>:Milvus-CDC 伺服器 MySQL 資料庫的連線位址。如果<code translate="no">storeType</code> 設為<code translate="no">mysql</code> 則需要。</p></li>
-<li><p><code translate="no">metaStoreConfig.rootPath</code>:Milvus-CDC 元庫的根目錄。此設定可實現多租戶功能，允許多個 CDC 服務使用相同的 etcd 或 MySQL 實例，同時透過不同的根目錄實現隔離。</p></li>
+<li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>:Milvus-CDC 伺服器 MySQL 資料庫的連線位址。若<code translate="no">storeType</code> 設為<code translate="no">mysql</code> 則必須。</p></li>
+<li><p><code translate="no">metaStoreConfig.rootPath</code>:Milvus-CDC 元資料庫的根目錄。此設定可實現多租戶功能，允許多個 CDC 服務使用相同的 etcd 或 MySQL 實例，同時透過不同的根目錄實現隔離。</p></li>
 </ul>
 <p>配置範例：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># cdc meta data config</span>
@@ -126,7 +156,22 @@ title: 部署 CDC 伺服器
 <span class="hljs-comment">#  kafka:</span>
 <span class="hljs-comment">#    address: 127.0.0.1:9092</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">編譯 Milvus-CDC 伺服器</h3><p>儲存<code translate="no">cdc.yaml</code> 檔案後，導覽到<code translate="no">milvus-cdc</code> 目錄，並執行下列其中一個指令來編譯伺服器：</p>
+<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">編譯 Milvus-CDC 伺服器<button data-href="#Compile-the-Milvus-CDC-server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>儲存<code translate="no">cdc.yaml</code> 檔案後，導覽到<code translate="no">milvus-cdc</code> 目錄，並執行下列其中一個指令來編譯伺服器：</p>
 <ul>
 <li><p>對於二進位檔案</p>
 <pre><code translate="no" class="language-bash">make build
@@ -136,7 +181,22 @@ title: 部署 CDC 伺服器
 <button class="copy-code-btn"></button></code></pre>
 <p>對於 Docker 映像檔，將已編譯的檔案掛載到容器內的<code translate="no">/app/server/configs/cdc.yaml</code> 。</p></li>
 </ul>
-<h3 id="Start-the-server" class="common-anchor-header">啟動伺服器</h3><ul>
+<h3 id="Start-the-server" class="common-anchor-header">啟動伺服器<button data-href="#Start-the-server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>使用二進位檔案</p>
 <p>導覽到包含<code translate="no">milvus-cdc</code> 二進位檔案的目錄，以及包含<code translate="no">cdc.yaml</code> 檔案的<code translate="no">configs</code> 目錄，然後啟動伺服器：</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># dir tree</span>

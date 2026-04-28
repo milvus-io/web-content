@@ -38,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Il vantaggio principale dell'uso di un alias è quello di disaccoppiare l'applicazione client da uno specifico nome fisico di raccolta.</p>
-<p>Si immagini di avere un'applicazione live che interroga una raccolta denominata <code translate="no">prod_data</code>. Quando è necessario aggiornare i dati sottostanti, è possibile eseguire l'aggiornamento senza alcuna interruzione del servizio. Il flusso di lavoro sarebbe:</p>
+<p>Si immagini di avere un'applicazione live che interroga un insieme chiamato <code translate="no">prod_data</code>. Quando è necessario aggiornare i dati sottostanti, è possibile eseguire l'aggiornamento senza alcuna interruzione del servizio. Il flusso di lavoro sarebbe:</p>
 <ol>
 <li><strong>Creare una nuova raccolta</strong>: Creare una nuova raccolta, ad esempio <code translate="no">prod_data_v2</code>.</li>
 <li><strong>Preparare i dati</strong>: Caricare e indicizzare i nuovi dati in <code translate="no">prod_data_v2</code>.</li>

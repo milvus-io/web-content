@@ -149,7 +149,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <h4 id="22-Upgrade-to-v2516-with-mixCoord" class="common-anchor-header">2.2 mixCoordを使用したv2.5.16へのアップグレード</h4><div class="alert-note">
 <p>クラスタがすでにv2.5.16以降を実行しており、<code translate="no">mixCoord</code> が有効になっている場合は、この手順をスキップします。</p>
 </div>
-<p>コンフィギュレーションファイル<code translate="no">milvusupgrade.yaml</code> を作成して<code translate="no">mixCoord</code> を有効にし、v2.5.16 にアップグレードします：</p>
+<p><code translate="no">mixCoord</code> 、v2.5.16にアップグレードするための設定ファイル<code translate="no">milvusupgrade.yaml</code> ：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

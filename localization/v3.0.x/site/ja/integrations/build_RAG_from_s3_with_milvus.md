@@ -2,7 +2,7 @@
 id: build_RAG_from_s3_with_milvus.md
 summary: >-
   このチュートリアルでは、MilvusとAmazon S3を使用したRAG(Retrieval-Augmented
-  Generation)パイプラインの構築プロセスを説明します。S3バケットからドキュメントを効率的にロードし、管理可能なチャンクに分割し、高速でスケーラブルな検索のためにMilvusにベクトル埋め込みを保存する方法を学びます。このプロセスを効率化するために、S3からデータをロードし、Milvusへの保存を容易にするツールとしてLangChainを使用します。
+  Generation)パイプラインの構築プロセスを説明します。S3バケットから効率的にドキュメントをロードし、管理可能なチャンクに分割し、高速でスケーラブルな検索のためにMilvusにベクトル埋め込みを保存する方法を学びます。このプロセスを効率化するために、S3からデータをロードし、Milvusへの保存を容易にするツールとしてLangChainを使用します。
 title: RAGパイプラインの構築S3からMilvusへのデータロード
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_from_s3_with_milvus.ipynb" target="_parent">
@@ -62,7 +62,7 @@ title: RAGパイプラインの構築S3からMilvusへのデータロード
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択）。</p>
 </div>
-<p>この例では、LLMとしてOpenAIを使います。<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を環境変数として用意してください。</p>
+<p>この例では、LLMとしてOpenAIを使います。環境変数として、<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を用意してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;your-openai-api-key&quot;</span>
@@ -171,7 +171,7 @@ vectorstore = Milvus.from_documents(
 <p><code translate="no">connection_args</code> ：</p>
 <ul>
 <li><p><code translate="no">./milvus.db</code> のように<code translate="no">uri</code> をローカルファイルとして設定する方法は、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite を</a>自動的に利用してすべてのデータをこのファイルに格納するため、最も便利な方法です。</p></li>
-<li><p>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</p></li>
+<li><p>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、<code translate="no">http://localhost:19530</code> などのサーバ uri を<code translate="no">uri</code> として使用してください。</p></li>
 <li><p>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</p></li>
 </ul>
 </div>

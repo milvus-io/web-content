@@ -130,7 +130,7 @@ async_client = AsyncMilvusClient(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>目前，AsyncMilvusClient 無法提供<code translate="no">create_schema()</code> 。取而代之，我們將使用 MilvusClient 來建立集合的模式。</p>
+    </button></h2><p>目前，<code translate="no">create_schema()</code> 在 AsyncMilvusClient 中不可用。取而代之，我們將使用 MilvusClient 來建立集合的模式。</p>
 <pre><code translate="no" class="language-python">schema = async_client.create_schema(​
     auto_id=<span class="hljs-literal">False</span>,​
     description=<span class="hljs-string">&quot;This is a sample schema&quot;</span>,​
@@ -227,7 +227,7 @@ loop.run_until_complete(create_indexes(<span class="hljs-string">&quot;my_collec
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在為必要的欄位建立索引後，就可以載入集合。以下程式碼示範如何以異步方式載入集合。</p>
+    </button></h2><p>在為必要的欄位建立索引之後，就可以載入一個集合。以下程式碼示範如何以異步方式載入集合。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">load_my_collection</span>(<span class="hljs-params">collection_name</span>):​
     <span class="hljs-keyword">await</span> async_client.load_collection(collection_name)​
     <span class="hljs-built_in">print</span>(client.get_load_state(collection_name))​
@@ -299,7 +299,7 @@ loop.run_until_complete(insert_sample_data(<span class="hljs-string">&quot;my_co
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當資料集載入並填滿資料後，您就可以在其中進行搜尋和查詢。在本節中，您將找出<code translate="no">text</code> 欄位中以<code translate="no">random</code> 開頭的實體數目，該實體的集合名為<code translate="no">my_collection</code> 。</p>
+    </button></h2><p>當資料集載入並填滿資料後，您就可以在其中進行搜尋和查詢。在本節中，您將在命名為<code translate="no">my_collection</code> 的資料集中，找出<code translate="no">text</code> 欄位中以<code translate="no">random</code> 開頭的實體數目。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">query_my_collection</span>(<span class="hljs-params">collection_name</span>):​
     <span class="hljs-comment"># Find the number of entities with the `text` fields starting with the word &quot;random&quot; in the `my_collection` collection.​</span>
 ​

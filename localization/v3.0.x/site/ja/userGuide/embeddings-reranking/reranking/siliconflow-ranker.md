@@ -162,7 +162,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">model_name</code></p></td>
      <td><p>はい</p></td>
-     <td><p>SiliconFlow プラットフォームでサポートされているモデルの中から使用する SiliconFlow リランキング モデル。</p><p>使用可能なリランキング モデルのリストについては、<a href="https://docs.siliconflow.cn/en/api-reference/rerank/create-rerank">SiliconFlow のドキュメントを</a>参照してください。</p></td>
+     <td><p>SiliconFlow プラットフォームでサポートされているモデルから使用する SiliconFlow リランキング モデル。</p><p>使用可能なリランキング モデルのリストについては、<a href="https://docs.siliconflow.cn/en/api-reference/rerank/create-rerank">SiliconFlow のドキュメントを</a>参照してください。</p></td>
      <td><p><code translate="no">"BAAI/bge-reranker-v2-m3"</code></p></td>
    </tr>
    <tr>

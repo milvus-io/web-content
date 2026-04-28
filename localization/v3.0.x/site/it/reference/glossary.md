@@ -128,7 +128,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Cardinal, sviluppato da Zilliz Cloud, è un algoritmo di ricerca vettoriale all'avanguardia che offre qualità e prestazioni di ricerca senza precedenti. Grazie al suo design innovativo e alle estese ottimizzazioni, Cardinal supera Knowhere di diverse volte o di un ordine di grandezza, gestendo in modo adattivo diversi scenari di produzione, come dimensioni K variabili, filtraggio elevato, diverse distribuzioni di dati e così via.</p>
+    </button></h2><p>Cardinal, sviluppato da Zilliz Cloud, è un algoritmo di ricerca vettoriale all'avanguardia che offre qualità e prestazioni di ricerca senza precedenti. Grazie al suo design innovativo e alle ampie ottimizzazioni, Cardinal supera Knowhere di diverse volte o di un ordine di grandezza, gestendo in modo adattivo diversi scenari di produzione, come ad esempio dimensioni K variabili, filtraggio elevato, diverse distribuzioni di dati e così via.</p>
 <h2 id="Channel" class="common-anchor-header">Il canale<button data-href="#Channel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -391,7 +391,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MemoryBuffer è una modalità di distribuzione leggera di Woodpecker che bufferizza temporaneamente le scritture in arrivo nella memoria e le scarica periodicamente sullo storage di oggetti nel cloud. Questa modalità è più adatta ai carichi di lavoro batch-heavy in distribuzioni su scala ridotta o in ambienti di produzione che privilegiano la semplicità rispetto alle prestazioni. Per ulteriori informazioni, consultare l'<a href="/docs/it/woodpecker_architecture.md">Architettura di Woodpecker</a>.</p>
+    </button></h2><p>MemoryBuffer è una modalità di distribuzione leggera di Woodpecker che bufferizza temporaneamente le scritture in arrivo in memoria e le scarica periodicamente sullo storage di oggetti del cloud. Questa modalità è più adatta ai carichi di lavoro batch-heavy in distribuzioni su scala ridotta o in ambienti di produzione che privilegiano la semplicità rispetto alle prestazioni. Per ulteriori informazioni, consultare l'<a href="/docs/it/woodpecker_architecture.md">Architettura di Woodpecker</a>.</p>
 <h2 id="Mmap" class="common-anchor-header">Mmap<button data-href="#Mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -439,7 +439,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/milvus-cdc-overview.md">Milvus CDC</a> (Change data capture) è uno strumento di facile utilizzo che consente di acquisire e sincronizzare i dati incrementali nelle istanze Milvus. Garantisce l'affidabilità dei dati aziendali trasferendoli senza soluzione di continuità tra le istanze di origine e di destinazione, consentendo di semplificare il backup incrementale e il disaster recovery.</p>
+    </button></h2><p><a href="https://milvus.io/docs/milvus-cdc-overview.md">Milvus CDC</a> (Change data capture) è uno strumento di facile utilizzo che consente di acquisire e sincronizzare i dati incrementali nelle istanze Milvus. Garantisce l'affidabilità dei dati aziendali trasferendoli senza soluzione di continuità tra le istanze di origine e quelle di destinazione, consentendo un facile backup incrementale e il disaster recovery.</p>
 <h2 id="Milvus-CLI" class="common-anchor-header">Milvus CLI<button data-href="#Milvus-CLI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -471,7 +471,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/zilliztech/milvus-migration/">Milvus Migration</a> è uno strumento open-source progettato per facilitare la migrazione dei dati da varie fonti di dati in Milvus 2.x.</p>
+    </button></h2><p><a href="https://github.com/zilliztech/milvus-migration/">Milvus Migration</a> è uno strumento open source progettato per facilitare la migrazione dei dati da varie fonti di dati a Milvus 2.x.</p>
 <h2 id="Milvus-cluster" class="common-anchor-header">Cluster Milvus<button data-href="#Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -519,7 +519,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supporta più campi vettoriali in una collezione dalla versione 2.4.0. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a>.</p>
+    </button></h2><p>Milvus supporta campi vettoriali multipli in un'unica collezione dalla versione 2.4.0. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a>.</p>
 <h2 id="Partition" class="common-anchor-header">Partizione<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -551,7 +551,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L'attributo chiave di partizione di un campo consente di suddividere le entità in partizioni distinte in base ai valori della chiave di partizione. Questo raggruppamento garantisce che le entità che condividono lo stesso valore chiave siano memorizzate insieme, il che può accelerare le operazioni di ricerca consentendo al sistema di bypassare le partizioni irrilevanti durante le interrogazioni filtrate dal campo chiave di partizione. Per ulteriori informazioni, fare riferimento a <a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">Utilizzare la chiave di partizione</a>.</p>
+    </button></h2><p>L'attributo chiave di partizione di un campo consente di suddividere le entità in partizioni distinte in base ai valori della chiave di partizione. Questo raggruppamento garantisce che le entità che condividono lo stesso valore chiave siano archiviate insieme, il che può accelerare le operazioni di ricerca consentendo al sistema di bypassare le partizioni irrilevanti durante le interrogazioni filtrate dal campo chiave di partizione. Per ulteriori informazioni, fare riferimento a <a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">Utilizzare la chiave di partizione</a>.</p>
 <h2 id="PChannel" class="common-anchor-header">Canale PC<button data-href="#PChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -696,7 +696,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/zilliztech/spark-milvus">Spark-Milvus Connector</a> fornisce un'integrazione perfetta tra Apache Spark e Milvus, combinando le funzioni di elaborazione dei dati e di apprendimento automatico (ML) di Apache Spark con le capacità di archiviazione e ricerca dei dati vettoriali di Milvus.</p>
+    </button></h2><p><a href="https://github.com/zilliztech/spark-milvus">Spark-Milvus Connector</a> fornisce un'integrazione perfetta tra Apache Spark e Milvus, combinando l'elaborazione dei dati e le funzionalità di machine learning (ML) di Apache Spark con le capacità di archiviazione e ricerca dei dati vettoriali di Milvus.</p>
 <h2 id="Shard" class="common-anchor-header">Shard<button data-href="#Shard" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -745,7 +745,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il servizio di streaming è un concetto per il modulo del sistema di streaming interno di Milvus, costruito attorno al Write-Ahead Log (WAL) per supportare varie funzioni legate allo streaming. Queste includono l'ingestione/sottoscrizione di dati in streaming, il ripristino dello stato del cluster in caso di errore, la conversione dei dati in streaming in dati storici e le query sui dati in crescita. Il servizio è composto dai componenti Streaming Coordinator, Streaming Node Cluster e Streaming Client. Per ulteriori informazioni, consultare il <a href="/docs/it/streaming_service.md">servizio di streaming</a>.</p>
+    </button></h2><p>Il servizio di streaming è un concetto per il modulo del sistema di streaming interno di Milvus, costruito intorno al Write-Ahead Log (WAL) per supportare varie funzioni legate allo streaming. Queste includono l'ingestione/sottoscrizione di dati in streaming, il ripristino dello stato del cluster in caso di errore, la conversione dei dati in streaming in dati storici e le query sui dati in crescita. Il servizio è composto dai componenti Streaming Coordinator, Streaming Node Cluster e Streaming Client. Per ulteriori informazioni, consultare il <a href="/docs/it/streaming_service.md">servizio di streaming</a>.</p>
 <h2 id="Unstructured-data" class="common-anchor-header">Dati non strutturati<button data-href="#Unstructured-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

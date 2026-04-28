@@ -42,10 +42,10 @@ Node(s) querynode
         ID: 2        Version: 2.4.0        Address: 10.0.0.5:19530
         ID: 3        Version: 2.4.0        Address: 10.0.0.6:19530
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="What-parameters-can-be-adjusted-if-query-node-memory-usage-is-unbalanced" class="common-anchor-header">Welche Parameter können angepasst werden, wenn der Abfrageknoten-Speicher unausgeglichen ist?</h4><p>Manchmal variiert der Abfrageknotenspeicher, weil einige als Delegatoren agieren und mehr RAM benötigen. Wenn der Speicher eines Delegators hoch ist, passen Sie queryCoord.delegatorMemoryOverloadFactor an, um versiegelte Segmente auf andere Knoten auszulagern und die RAM-Nutzung zu reduzieren.</p>
+<h4 id="What-parameters-can-be-adjusted-if-query-node-memory-usage-is-unbalanced" class="common-anchor-header">Welche Parameter können angepasst werden, wenn der Abfrageknotenspeicher unausgewogen ist?</h4><p>Manchmal variiert der Abfrageknotenspeicher, weil einige als Delegatoren agieren und mehr RAM benötigen. Wenn der Speicher eines Delegators hoch ist, passen Sie queryCoord.delegatorMemoryOverloadFactor an, um versiegelte Segmente auf andere Knoten auszulagern und die RAM-Nutzung zu reduzieren.</p>
 <ul>
 <li>Der Standardwert ist 0.1.</li>
-<li>Eine Erhöhung dieses Wertes (z. B. auf 0,3 oder höher) führt dazu, dass das System mehr versiegelte Segmente von dem überlasteten Delegator auf andere QueryNodes auslagert, was zu einem Ausgleich der Speichernutzung beiträgt. Sie können auch versuchen, den Wert auf 1 zu erhöhen, was bedeutet, dass keine versiegelten Segmente in den Delegator-Knoten geladen werden.</li>
+<li>Eine Erhöhung dieses Wertes (z. B. auf 0,3 oder höher) führt dazu, dass das System mehr versiegelte Segmente vom überlasteten Delegator auf andere QueryNodes auslagert, wodurch die Speichernutzung ausgeglichen wird. Sie können auch versuchen, den Wert auf 1 zu erhöhen, was bedeutet, dass keine versiegelten Segmente in den Delegator-Knoten geladen werden.</li>
 </ul>
 <p>Wenn Sie den Cluster nicht neu starten wollen, können Sie die Konfiguration von milvus mit birdwatcher ändern:</p>
 <pre><code translate="no">.<span class="hljs-operator">/</span>birdwatcher
@@ -66,13 +66,13 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <h4 id="What-are-the-main-factors-affecting-recall" class="common-anchor-header">Welches sind die Hauptfaktoren, die den Abruf beeinflussen?</h4><p>Der Abruf wird hauptsächlich durch den Indextyp und die Suchparameter beeinflusst.</p>
 <p>Bei FLAT-Indizes führt Milvus einen vollständigen Scan innerhalb einer Sammlung durch, mit einer 100%igen Rückgabe.</p>
 <p>Bei IVF-Indizes bestimmt der Parameter nprobe den Umfang einer Suche innerhalb der Sammlung. Eine Erhöhung von nprobe erhöht den Anteil der durchsuchten Vektoren und den Rücklauf, verschlechtert aber die Abfrageleistung.</p>
-<p>Beim HNSW-Index bestimmt der Parameter ef die Breite der Graphensuche. Eine Erhöhung von ef erhöht die Anzahl der gesuchten Punkte im Graphen und die Wiederauffindbarkeit, verschlechtert jedoch die Abfrageleistung.</p>
+<p>Beim HNSW-Index bestimmt der ef-Parameter die Breite der Graphensuche. Eine Erhöhung von ef erhöht die Anzahl der im Graphen gesuchten Punkte und die Wiederauffindbarkeit, verschlechtert jedoch die Abfrageleistung.</p>
 <p>Weitere Informationen finden Sie unter <a href="https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">Vektorindizierung</a>.</p>
 <h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">Warum sind meine Änderungen an den Konfigurationsdateien nicht wirksam geworden?</h4><p>Milvus unterstützt keine Änderungen an den Konfigurationsdateien während der Laufzeit. Sie müssen Milvus Docker neu starten, damit Änderungen an den Konfigurationsdateien wirksam werden.</p>
 <h4 id="How-do-I-know-if-Milvus-has-started-successfully" class="common-anchor-header">Woher weiß ich, ob Milvus erfolgreich gestartet wurde?</h4><p>Wenn Milvus unter Verwendung von Docker Compose gestartet wurde, führen Sie <code translate="no">docker ps</code> aus, um zu beobachten, wie viele Docker-Container ausgeführt werden, und um zu überprüfen, ob die Milvus-Dienste korrekt gestartet wurden.</p>
 <p>Bei Milvus standalone sollten Sie mindestens drei laufende Docker-Container beobachten können, von denen einer der Milvus-Dienst und die beiden anderen der etcd-Verwaltungs- und Speicherdienst sind. Weitere Informationen finden Sie unter <a href="/docs/de/install_standalone-docker.md">Installieren von Milvus Standalone</a>.</p>
 <h4 id="Why-is-the-time-in-the-log-files-different-from-the-system-time" class="common-anchor-header">Warum weicht die Zeit in den Protokolldateien von der Systemzeit ab?</h4><p>Der Zeitunterschied ist in der Regel darauf zurückzuführen, dass der Host-Rechner nicht die Coordinated Universal Time (UTC) verwendet.</p>
-<p>Die Protokolldateien im Docker-Image verwenden standardmäßig die UTC-Zeit. Wenn Ihr Host-Rechner nicht UTC verwendet, kann dieses Problem auftreten.</p>
+<p>Die Protokolldateien im Docker-Abbild verwenden standardmäßig die UTC-Zeit. Wenn Ihr Host-Rechner nicht UTC verwendet, kann dieses Problem auftreten.</p>
 <h4 id="How-do-I-know-if-my-CPU-supports-Milvus" class="common-anchor-header">Woher weiß ich, ob meine CPU Milvus unterstützt?</h4><p>Die Rechenoperationen von Milvus hängen von der Unterstützung der CPU für den SIMD (Single Instruction, Multiple Data) Erweiterungsbefehlssatz ab. Ob Ihre CPU den SIMD-Erweiterungsbefehlssatz unterstützt, ist entscheidend für die Indexerstellung und die Vektorähnlichkeitssuche in Milvus. Stellen Sie sicher, dass Ihre CPU mindestens einen der folgenden SIMD-Befehlssätze unterstützt:</p>
 <ul>
 <li>SSE4.2</li>
@@ -83,7 +83,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <p>Führen Sie den Befehl lscpu aus, um zu überprüfen, ob Ihre CPU die oben genannten SIMD-Befehlssätze unterstützt:</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>lscpu |<span class="hljs-params"> grep -e sse4_2 -e avx -e avx2 -e avx512
 </span><button class="copy-code-btn"></button></code></pre>
-<h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">Warum gibt Milvus während des Starts <code translate="no">illegal instruction</code> zurück?</h4><p>Milvus setzt voraus, dass Ihre CPU einen SIMD-Befehlssatz unterstützt: SSE4.2, AVX, AVX2, oder AVX512. Die CPU muss mindestens einen dieser Befehle unterstützen, um sicherzustellen, dass Milvus normal funktioniert. Ein <code translate="no">illegal instruction</code> Fehler, der während des Starts zurückgegeben wird, deutet darauf hin, dass Ihre CPU keinen der vier oben genannten Befehlssätze unterstützt.</p>
+<h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">Warum gibt Milvus während des Starts <code translate="no">illegal instruction</code> zurück?</h4><p>Milvus erfordert, dass Ihre CPU einen SIMD-Befehlssatz unterstützt: SSE4.2, AVX, AVX2, oder AVX512. Die CPU muss mindestens einen dieser Befehle unterstützen, um sicherzustellen, dass Milvus normal funktioniert. Ein <code translate="no">illegal instruction</code> Fehler, der während des Starts zurückgegeben wird, deutet darauf hin, dass Ihre CPU keinen der vier oben genannten Befehlssätze unterstützt.</p>
 <p>Siehe <a href="/docs/de/prerequisite-docker.md">CPU-Unterstützung für SIMD-Befehlssatz</a>.</p>
 <h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">Kann ich Milvus unter Windows installieren?</h4><p>Ja. Sie können Milvus unter Windows entweder durch Kompilieren aus dem Quellcode oder aus einem Binärpaket installieren.</p>
 <p>Siehe <a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">Milvus unter Windows ausführen</a>, um zu erfahren, wie man Milvus unter Windows installiert.</p>
@@ -126,7 +126,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 </ul>
 <p>Um diese Fehler zu verstehen und zu beheben:</p>
 <ul>
-<li>Verstehen Sie, dass <code translate="no">len(str)</code> in Python die Anzahl der Zeichen und nicht die Größe in Bytes angibt.</li>
+<li>Verstehen Sie, dass <code translate="no">len(str)</code> in Python die Anzahl der Zeichen angibt, nicht die Größe in Bytes.</li>
 <li>Für String-basierte Datentypen wie VARCHAR und JSON verwenden Sie <code translate="no">len(bytes(str, encoding='utf-8'))</code>, um die tatsächliche Größe in Bytes zu bestimmen, die Milvus für "max-length" verwendet.</li>
 </ul>
 <p>Beispiel in Python:</p>

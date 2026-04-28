@@ -160,7 +160,22 @@ response = query_engine.query(<span class="hljs-string">&quot;What did the autho
 <pre><code translate="no">The author learned about retail, the importance of user feedback, and the significance of growth
 rate as the ultimate test of a startup at Viaweb.
 </code></pre>
-<h3 id="Customize-text-analyzer" class="common-anchor-header">Text-Analysator anpassen</h3><p>Analyzer spielen eine wichtige Rolle bei der Volltextsuche, indem sie Sätze in Token zerlegen und lexikalische Verarbeitungen durchführen, z. B. Stemming und Stoppwortentfernung. Sie sind in der Regel sprachspezifisch. Weitere Einzelheiten finden Sie im <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Milvus Analyzer Guide</a>.</p>
+<h3 id="Customize-text-analyzer" class="common-anchor-header">Text-Analysator anpassen<button data-href="#Customize-text-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Analyzer spielen eine wichtige Rolle bei der Volltextsuche, indem sie Sätze in Token zerlegen und lexikalische Verarbeitungen durchführen, z. B. Stemming und Stoppwortentfernung. Sie sind in der Regel sprachspezifisch. Weitere Einzelheiten finden Sie im <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Milvus Analyzer Guide</a>.</p>
 <p>Milvus unterstützt zwei Arten von Analyzern: <strong>Eingebaute Analyzer</strong> und <strong>benutzerdefinierte Analyzer</strong>. Wenn <code translate="no">enable_sparse</code> auf True gesetzt ist, verwendet <code translate="no">MilvusVectorStore</code> standardmäßig <code translate="no">BM25BuiltInFunction</code> mit Standardkonfigurationen, wobei der standardmäßig eingebaute Analyzer verwendet wird, der Text auf der Grundlage von Interpunktion tokenisiert.</p>
 <p>Um einen anderen Analyzer zu verwenden oder den vorhandenen anzupassen, können Sie beim Erstellen von <code translate="no">BM25BuiltInFunction</code> Werte für das Argument <code translate="no">analyzer_params</code> angeben. Setzen Sie diese Funktion dann als <code translate="no">sparse_embedding_function</code> in <code translate="no">MilvusVectorStore</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.vector_stores.milvus.utils <span class="hljs-keyword">import</span> BM25BuiltInFunction
@@ -207,7 +222,7 @@ vector_store = MilvusVectorStore(
 <p>Zunächst müssen wir das Paket <code translate="no">FlagEmbedding</code> installieren:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -q FlagEmbedding</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dann erstellen wir den Vektorspeicher und den Index unter Verwendung des OpenAI-Standardmodells für die Densen-Einbettung und des integrierten BGE-M3 für die Sparse-Einbettung:</p>
+<p>Dann erstellen wir den Vektorspeicher und den Index unter Verwendung des OpenAI-Standardmodells für die Densen-Einbettung und des eingebauten BGE-M3 für die Sparse-Einbettung:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.vector_stores.milvus.utils <span class="hljs-keyword">import</span> BGEM3SparseEmbeddingFunction
 
 vector_store = MilvusVectorStore(
@@ -240,7 +255,22 @@ The author learned about retail, the importance of user feedback, the value of g
 startup, the significance of pricing strategy, the benefits of working on things that weren't
 prestigious, and the challenges and rewards of running a startup.
 </code></pre>
-<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">Anpassen der Sparse Embedding Funktion</h3><p>Sie können auch die Sparse Embedding-Funktion anpassen, solange sie von <code translate="no">BaseSparseEmbeddingFunction</code> erbt, einschließlich der folgenden Methoden:</p>
+<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">Anpassen der Sparse Embedding Funktion<button data-href="#Customize-Sparse-Embedding-Function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sie können auch die Sparse Embedding-Funktion anpassen, solange sie von <code translate="no">BaseSparseEmbeddingFunction</code> erbt, einschließlich der folgenden Methoden:</p>
 <ul>
 <li><code translate="no">encode_queries</code>: Diese Methode wandelt Texte in eine Liste von Sparse Embeddings für Abfragen um.</li>
 <li><code translate="no">encode_documents</code>: Diese Methode wandelt Text in eine Liste von Sparse Embeddings für Dokumente um.</li>
@@ -300,7 +330,7 @@ prestigious, and the challenges and rewards of running a startup.
 <li><code translate="no">hybrid_ranker (str)</code>: Gibt den Typ des Rankers an, der in hybriden Suchanfragen verwendet wird. Derzeit wird nur ["RRFRanker", "WeightedRanker"] unterstützt. Die Voreinstellung ist "RRFRanker".</li>
 <li><code translate="no">hybrid_ranker_params (dict, optional)</code>: Konfigurationsparameter für den hybriden Ranker. Die Struktur dieses Wörterbuchs hängt von dem spezifischen Ranker ab, der verwendet wird:<ul>
 <li>Für "RRFRanker" sollte es enthalten:<ul>
-<li>"k" (int): Ein bei der Reciprocal Rank Fusion (RRF) verwendeter Parameter. Dieser Wert wird zur Berechnung der Rank Scores als Teil des RRF-Algorithmus verwendet, der mehrere Ranking-Strategien zu einem einzigen Score kombiniert, um die Suchrelevanz zu verbessern. Der Standardwert ist 60, wenn er nicht angegeben wird.</li>
+<li>"k" (int): Ein Parameter, der bei der Reciprocal Rank Fusion (RRF) verwendet wird. Dieser Wert wird zur Berechnung der Rank Scores als Teil des RRF-Algorithmus verwendet, der mehrere Ranking-Strategien zu einem einzigen Score kombiniert, um die Suchrelevanz zu verbessern. Der Standardwert ist 60, wenn er nicht angegeben wird.</li>
 </ul></li>
 <li>Für "WeightedRanker" wird erwartet:<ul>
 <li>"weights" (Liste von Floats): Eine Liste mit genau zwei Gewichten:<ol>

@@ -3,9 +3,9 @@ id: install_cluster-helm-gpu.md
 label: Cluster (Helm)
 related_key: Kubernetes
 summary: Aprenda a instalar el clúster Milvus en Kubernetes.
-title: Ejecutar Milvus con soporte GPU utilizando Helm Chart
+title: Ejecutar Milvus con soporte GPU usando Helm Chart
 ---
-<h1 id="Run-Milvus-with-GPU-Support-Using-Helm-Chart" class="common-anchor-header">Ejecutar Milvus con soporte GPU utilizando Helm Chart<button data-href="#Run-Milvus-with-GPU-Support-Using-Helm-Chart" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-with-GPU-Support-Using-Helm-Chart" class="common-anchor-header">Ejecutar Milvus con soporte GPU usando Helm Chart<button data-href="#Run-Milvus-with-GPU-Support-Using-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -138,7 +138,7 @@ helm upgrade my-release zilliztech/milvus
 <ul>
 <li><p>Milvus cluster</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
-indexNode:
+dataNode:
   resources:
     requests:
       nvidia.com/gpu: &quot;1&quot;
@@ -164,7 +164,7 @@ standalone:
       nvidia.com/gpu: &quot;1&quot;
 EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsar.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
+<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="2-Assign-multiple-GPU-devices" class="common-anchor-header">2. Asignar múltiples dispositivos GPU<button data-href="#2-Assign-multiple-GPU-devices" class="anchor-icon" translate="no">
@@ -186,7 +186,7 @@ EOF</span>
 <ul>
 <li><p>Cluster Milvus</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
-indexNode:
+dataNode:
   resources:
     requests:
       nvidia.com/gpu: &quot;2&quot;
@@ -200,9 +200,9 @@ queryNode:
       nvidia.com/gpu: &quot;2&quot;
 EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>En la configuración anterior, el indexNode y el queryNode comparten dos GPUs. Para asignar diferentes GPUs al indexNode y al queryNode, puede modificar la configuración en consecuencia estableciendo <code translate="no">extraEnv</code> en el archivo de configuración como se indica a continuación:</p>
+<p>En la configuración anterior, hay cuatro CPUs disponibles, y cada dataNode y queryNode utiliza dos GPUs. Para asignar diferentes GPUs al dataNode y al queryNode, puede modificar la configuración en consecuencia estableciendo <code translate="no">extraEnv</code> en el archivo de configuración como se indica a continuación:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
-indexNode:
+dataNode:
   resources:
     requests:
       nvidia.com/gpu: &quot;1&quot;
@@ -235,7 +235,7 @@ EOF</span>
 </li>
 <li><p>Milvus independiente</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
-indexNode:
+dataNode:
   resources:
     requests:
       nvidia.com/gpu: &quot;2&quot;
@@ -249,9 +249,9 @@ queryNode:
       nvidia.com/gpu: &quot;2&quot;
 EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>En la configuración anterior, el indexNode y el queryNode comparten dos GPUs. Para asignar GPUs diferentes al indexNode y al queryNode, puede modificar la configuración en consecuencia estableciendo extraEnv en el archivo de configuración como se indica a continuación:</p>
+<p>En la configuración anterior, hay cuatro CPUs disponibles, y cada dataNode y queryNode utiliza dos GPUs. Para asignar diferentes GPUs al dataNode y al queryNode, puede modificar la configuración en consecuencia estableciendo extraEnv en el archivo de configuración como se indica a continuación:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
-indexNode:
+dataNode:
   resources:
     requests:
       nvidia.com/gpu: &quot;1&quot;
@@ -271,7 +271,7 @@ queryNode:
       value: &quot;1&quot;
 EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsar.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
+<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="2-Check-Milvus-status" class="common-anchor-header">2. Comprobar el estado de Milvus<button data-href="#2-Check-Milvus-status" class="anchor-icon" translate="no">
@@ -296,28 +296,31 @@ EOF</span>
 <ul>
 <li><p>Milvus cluster</p>
 <pre><code translate="no" class="language-shell">NAME                                             READY  STATUS   RESTARTS  AGE
-my-release-etcd-0                                1/1    Running   0        3m23s
-my-release-etcd-1                                1/1    Running   0        3m23s
-my-release-etcd-2                                1/1    Running   0        3m23s
-my-release-milvus-datacoord-6fd4bd885c-gkzwx     1/1    Running   0        3m23s
-my-release-milvus-datanode-68cb87dcbd-4khpm      1/1    Running   0        3m23s
-my-release-milvus-indexcoord-5bfcf6bdd8-nmh5l    1/1    Running   0        3m23s
-my-release-milvus-indexnode-5c5f7b5bd9-l8hjg     1/1    Running   0        3m24s
-my-release-milvus-proxy-6bd7f5587-ds2xv          1/1    Running   0        3m24s
-my-release-milvus-querycoord-579cd79455-xht5n    1/1    Running   0        3m24s
-my-release-milvus-querynode-5cd8fff495-k6gtg     1/1    Running   0        3m24s
-my-release-milvus-rootcoord-7fb9488465-dmbbj     1/1    Running   0        3m23s
-my-release-minio-0                               1/1    Running   0        3m23s
-my-release-minio-1                               1/1    Running   0        3m23s
-my-release-minio-2                               1/1    Running   0        3m23s
-my-release-minio-3                               1/1    Running   0        3m23s
-my-release-pulsar-autorecovery-86f5dbdf77-lchpc  1/1    Running   0        3m24s
-my-release-pulsar-bookkeeper-0                   1/1    Running   0        3m23s
-my-release-pulsar-bookkeeper-1                   1/1    Running   0        98s
-my-release-pulsar-broker-556ff89d4c-2m29m        1/1    Running   0        3m23s
-my-release-pulsar-proxy-6fbd75db75-nhg4v         1/1    Running   0        3m23s
-my-release-pulsar-zookeeper-0                    1/1    Running   0        3m23s
-my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
+my-release-etcd-0                                  1/1     Running     0             3m24s
+my-release-etcd-1                                  1/1     Running     0             3m24s
+my-release-etcd-2                                  1/1     Running     0             3m24s
+my-release-milvus-datanode-698dbf7d77-rjkkq        1/1     Running     0             3m24s
+my-release-milvus-mixcoord-856d666559-rpj8z        1/1     Running     0             3m24s
+my-release-milvus-proxy-7f7cf47689-pzltw           1/1     Running     0             3m24s
+my-release-milvus-querynode-7fb6d5b5f8-92phj       1/1     Running     0             3m24s
+my-release-milvus-streamingnode-5867bfbcbf-cg9xx   1/1     Running     0             3m24s
+my-release-minio-0                                 1/1     Running     0             3m24s
+my-release-minio-1                                 1/1     Running     0             3m24s
+my-release-minio-2                                 1/1     Running     0             3m24s
+my-release-minio-3                                 1/1     Running     0             3m24s
+my-release-pulsarv3-bookie-0                       1/1     Running     0             3m24s
+my-release-pulsarv3-bookie-1                       1/1     Running     0             3m24s
+my-release-pulsarv3-bookie-2                       1/1     Running     0             3m24s
+my-release-pulsarv3-bookie-init-p8hcq              0/1     Completed   0             3m24s
+my-release-pulsarv3-broker-0                       1/1     Running     0             3m24s
+my-release-pulsarv3-broker-1                       1/1     Running     0             3m24s
+my-release-pulsarv3-proxy-0                        1/1     Running     0             3m24s
+my-release-pulsarv3-proxy-1                        1/1     Running     0             3m24s
+my-release-pulsarv3-pulsar-init-8kjsj              0/1     Completed   0             3m24s
+my-release-pulsarv3-recovery-0                     1/1     Running     0             3m24s
+my-release-pulsarv3-zookeeper-0                    1/1     Running     0             3m24s
+my-release-pulsarv3-zookeeper-1                    1/1     Running     0             3m24s
+my-release-pulsarv3-zookeeper-2                    1/1     Running     0             3m24s
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Milvus independiente</p>
 <pre><code translate="no" class="language-shell">NAME                                               READY   STATUS      RESTARTS   AGE
@@ -355,6 +358,28 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
 <pre><code translate="no" class="language-bash">$ kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
+<p>Ahora puede conectarse a Milvus utilizando el puerto reenviado.</p>
+<h2 id="Access-Milvus-WebUI" class="common-anchor-header">Acceso a Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus se entrega con una herramienta GUI integrada llamada Milvus WebUI a la que puede acceder a través de su navegador. Milvus Web UI mejora la observabilidad del sistema con una interfaz sencilla e intuitiva. Puede utilizar Milvus Web UI para observar las estadísticas y métricas de los componentes y dependencias de Milvus, comprobar los detalles de la base de datos y la colección, y listar las configuraciones detalladas de Milvus. Para más detalles sobre Milvus Web UI, consulte <a href="/docs/es/milvus-webui.md">Milvus WebUI</a></p>
+<p>Para habilitar el acceso a Milvus Web UI, necesita reenviar el puerto del pod proxy a un puerto local.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
+Forwarding from 0.0.0.0:27018 -&gt; 9091
+<button class="copy-code-btn"></button></code></pre>
+<p>Ahora, puede acceder a Milvus Web UI en <code translate="no">http://localhost:27018</code>.</p>
 <h2 id="Uninstall-Milvus" class="common-anchor-header">Desinstalar Milvus<button data-href="#Uninstall-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -373,7 +398,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
     </button></h2><p>Ejecute el siguiente comando para desinstalar Milvus.</p>
 <pre><code translate="no" class="language-bash">$ helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">Lo que sigue<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">A continuación<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -390,7 +415,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
       </svg>
     </button></h2><p>Una vez instalado Milvus, puede</p>
 <ul>
-<li><p>Comprobar <a href="/docs/es/quickstart.md">el Inicio rápido</a> para ver qué puede hacer Milvus.</p></li>
+<li><p>Consultar <a href="/docs/es/quickstart.md">Inicio rápido</a> para ver qué puede hacer Milvus.</p></li>
 <li><p>Aprender las operaciones básicas de Milvus:</p>
 <ul>
 <li><a href="/docs/es/manage_databases.md">Gestionar bases de datos</a></li>
@@ -408,8 +433,9 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
 <li><a href="/docs/es/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/es/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Explore <a href="/docs/es/milvus_backup_overview.md">Milvus Backup</a>, una herramienta de código abierto para realizar copias de seguridad de los datos de Milvus.</p></li>
+<li><p>Explore Milvus <a href="/docs/es/milvus-webui.md">WebUI</a>, una interfaz web intuitiva para la observabilidad y gestión de Milvus.</p></li>
+<li><p>Explore Milvus <a href="/docs/es/milvus_backup_overview.md">Backup</a>, una herramienta de código abierto para las copias de seguridad de los datos de Milvus.</p></li>
 <li><p>Explore <a href="/docs/es/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para depurar Milvus y actualizaciones de configuración dinámicas.</p></li>
-<li><p>Explore <a href="https://milvus.io/docs/attu.md">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>
+<li><p>Explore <a href="https://github.com/zilliztech/attu">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>
 <li><p><a href="/docs/es/monitor.md">Supervise Milvus con Prometheus</a>.</p></li>
 </ul>

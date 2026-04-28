@@ -49,10 +49,40 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>在設定 Milvus 的 TEI 功能之前，您需要有一個執行中的 TEI 服務。Milvus 支援兩種 TEI 部署方式：</p>
-<h3 id="Standard-deployment-external" class="common-anchor-header">標準部署 (外部)</h3><p>您可以使用 Hugging Face 的官方方法，將 TEI 部署為獨立的服務。此方法可讓您對 TEI 服務擁有最大的彈性與控制。</p>
+<h3 id="Standard-deployment-external" class="common-anchor-header">標準部署 (外部)<button data-href="#Standard-deployment-external" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您可以使用 Hugging Face 的官方方法，將 TEI 部署為獨立的服務。此方法可讓您對 TEI 服務擁有最大的彈性與控制。</p>
 <p>有關使用 Docker 或其他方法部署 TEI 的詳細說明，請參閱<a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour#deploy">Hugging Face Text Embeddings Inference 官方文件</a>。</p>
 <p>部署完成後，請記下您的 TEI 服務端點 (例如：<code translate="no">http://localhost:8080</code>)，因為您<a href="/docs/zh-hant/hugging-face-tei.md#Use-embedding-function-">在 Milvus 中使用 TEI 功能</a>時會需要它。</p>
-<h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Milvus Helm Chart 部署 (整合)</h3><p>對於 Kubernetes 環境，Milvus 透過其 Helm 圖表提供整合式部署選項。這簡化了在 Milvus 旁邊部署和設定 TEI 的流程。</p>
+<h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Milvus Helm Chart 部署 (整合)<button data-href="#Milvus-Helm-Chart-deployment-integrated" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>對於 Kubernetes 環境，Milvus 透過其 Helm 圖表提供整合式部署選項。這簡化了在 Milvus 旁邊部署和設定 TEI 的流程。</p>
 <p>若要在 Milvus Helm 部署中啟用 TEI，請</p>
 <ol>
 <li><p>設定<strong>values.yaml</strong>以啟用 TEI：</p>
@@ -86,7 +116,7 @@ beta: Milvus 2.6.x
 helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -n &lt;your-milvus-namespace&gt;
 <button class="copy-code-btn"></button></code></pre>
 <p><div class="alert note"></p>
-<p>使用 Helm 圖表部署時，TEI 服務將可在您的 Kubernetes 群集中存取，網址為<code translate="no">http://my-release-milvus-tei:80</code> (使用您的發行版名稱)。在 TEI 功能組態中使用此作為您的端點。</p>
+<p>使用 Helm 圖表部署時，TEI 服務將可在您的 Kubernetes 叢集中存取，網址為<code translate="no">http://my-release-milvus-tei:80</code> (使用您的發行版名稱)。在 TEI 功能組態中使用此作為您的端點。</p>
 <p></div></p></li>
 </ol>
 <h2 id="Configuration-in-Milvus" class="common-anchor-header">在 Milvus 中進行組態<button data-href="#Configuration-in-Milvus" class="anchor-icon" translate="no">
@@ -105,7 +135,7 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
         ></path>
       </svg>
     </button></h2><p>部署 TEI 服務後，您需要在定義 TEI 嵌入函式時提供其端點。在大多數情況下，不需要額外的設定，因為在 Milvus 中 TEI 是預設啟用的。</p>
-<p>然而，如果您的 TEI 服務是以 API 金鑰驗證 (<code translate="no">--api-key</code> flag) 部署的，您就需要設定 Milvus 來使用此金鑰：</p>
+<p>然而，如果您的 TEI 服務是以 API 金鑰驗證 (<code translate="no">--api-key</code> flag) 部署的，您就需要設定 Milvus 以使用此金鑰：</p>
 <ol>
 <li><p><strong>在<code translate="no">credential</code> 部分定義 API 金鑰：</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
@@ -138,13 +168,28 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
         ></path>
       </svg>
     </button></h2><p>一旦設定好 TEI 服務，請依照下列步驟定義並使用嵌入函式。</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">步驟 1：定義模式欄位</h3><p>若要使用嵌入函式，請建立具有特定模式的集合。此模式必須包含至少三個必要欄位：</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">步驟 1：定義模式欄位<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>若要使用嵌入函式，請建立具有特定模式的集合。此模式必須包含至少三個必要欄位：</p>
 <ul>
 <li><p>唯一識別集合中每個實體的主要欄位。</p></li>
 <li><p>儲存要嵌入的原始資料的標量欄位。</p></li>
 <li><p>預留向量欄位，用來儲存函式將為標量欄位產生的向量嵌入。</p></li>
 </ul>
-<p>以下範例定義了一個模式，其中一個標量欄位<code translate="no">&quot;document&quot;</code> 用來儲存文字資料，另一個向量欄位<code translate="no">&quot;dense_vector&quot;</code> 用來儲存函式模組要產生的嵌入資料。切記設定向量維度 (<code translate="no">dim</code>) 以符合您所選擇的嵌入模型輸出。</p>
+<p>以下範例定義了一個模式，其中一個標量欄位<code translate="no">&quot;document&quot;</code> 用來儲存文字資料，另一個向量欄位<code translate="no">&quot;dense_vector&quot;</code> 用來儲存函式模組要產生的嵌入資料。請記住設定向量維度 (<code translate="no">dim</code>) 以符合您所選擇的嵌入模型輸出。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType, CollectionSchema, FieldSchema
 
 <span class="hljs-comment"># Assume you have connected to Milvus</span>
@@ -159,7 +204,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to exactly match the TEI model&#x27;s output dimension</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">步驟 2：在模式中加入嵌入函數</h3><p>Milvus 中的 Function 模組會自動將儲存在標量欄位中的原始資料轉換為嵌入資料，並將其儲存在明確定義的向量欄位中。</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">步驟 2：在模式中加入嵌入函數<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 中的 Function 模組會自動將儲存在標量欄位中的原始資料轉換為嵌入資料，並將其儲存在明確定義的向量欄位中。</p>
 <p>下面的範例新增了一個 Function 模組 (<code translate="no">tei_func</code>)，將標量欄位<code translate="no">&quot;document&quot;</code> 轉換為嵌入，將產生的向量儲存到之前定義的<code translate="no">&quot;dense_vector&quot;</code> 向量欄位中。</p>
 <p>定義好嵌入函數後，將它加入集合模式。這會指示 Milvus 使用指定的 embedding 函式來處理和儲存文字資料的 embeddings。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define TEI embedding function</span>
@@ -254,4 +314,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>設定嵌入功能之後，請參閱<a href="/docs/zh-hant/embedding-function-overview.md">功能概述</a>，以獲得關於索引設定、資料插入範例和語意搜尋作業的其他指引。</p>
+    </button></h2><p>設定嵌入功能之後，請參閱<a href="/docs/zh-hant/embedding-function-overview.md">功能概述</a>，以取得有關索引設定、資料插入範例和語意搜尋作業的其他指引。</p>

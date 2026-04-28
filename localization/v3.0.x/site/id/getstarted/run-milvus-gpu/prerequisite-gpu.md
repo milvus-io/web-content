@@ -80,7 +80,7 @@ version:        545.29.06
       </svg>
     </button></h2><p>Anda disarankan untuk menjalankan klaster Kubernetes pada platform Linux.</p>
 <ul>
-<li>kubectl adalah alat baris perintah untuk Kubernetes. Gunakan versi kubectl yang berada dalam satu perbedaan versi kecil dari klaster Anda. Menggunakan versi terbaru dari kubectl membantu menghindari masalah yang tidak terduga.</li>
+<li>kubectl adalah alat baris perintah untuk Kubernetes. Gunakan versi kubectl yang memiliki perbedaan versi kecil dari klaster Anda. Menggunakan versi terbaru dari kubectl membantu menghindari masalah yang tidak terduga.</li>
 <li>minikube diperlukan saat menjalankan klaster Kubernetes secara lokal. minikube membutuhkan Docker sebagai dependensi. Pastikan Anda menginstal Docker sebelum menginstal Milvus menggunakan Helm. Lihat <a href="https://docs.docker.com/get-docker">Dapatkan Docker</a> untuk informasi lebih lanjut.</li>
 </ul>
 <table>
@@ -106,7 +106,22 @@ version:        545.29.06
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">Bagaimana cara memulai cluster K8s secara lokal untuk tujuan pengujian?</h3><p>Anda dapat menggunakan alat seperti <a href="https://minikube.sigs.k8s.io/docs/">minikube</a>, <a href="https://kind.sigs.k8s.io/">kind</a>, dan <a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm</a>, untuk menyiapkan klaster Kubernetes secara lokal dengan cepat. Prosedur berikut ini menggunakan minikube sebagai contoh.</p>
+    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">Bagaimana cara memulai cluster K8s secara lokal untuk tujuan pengujian?<button data-href="#How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Anda dapat menggunakan alat seperti <a href="https://minikube.sigs.k8s.io/docs/">minikube</a>, <a href="https://kind.sigs.k8s.io/">kind</a>, dan <a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm</a>, untuk menyiapkan klaster Kubernetes secara lokal dengan cepat. Prosedur berikut ini menggunakan minikube sebagai contoh.</p>
 <ol>
 <li>Unduh minikube</li>
 </ol>
@@ -125,7 +140,22 @@ version:        545.29.06
 <div class="alert note">
 <p>Pastikan Anda dapat mengakses klaster K8s melalui <code translate="no">kubectl</code>. Jika Anda belum menginstal <code translate="no">kubectl</code> secara lokal, lihat <a href="https://minikube.sigs.k8s.io/docs/handbook/kubectl/">Menggunakan kubectl di dalam minikube</a>.</p>
 </div>
-<h3 id="How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes" class="common-anchor-header">Bagaimana cara memulai klaster K8s dengan node pekerja GPU?</h3><p>Jika Anda lebih suka menggunakan node pekerja berkemampuan GPU, Anda dapat mengikuti langkah-langkah di bawah ini untuk membuat klaster K8s dengan node pekerja GPU. Kami menyarankan untuk menginstal Milvus pada cluster K8s dengan node pekerja GPU dan menggunakan kelas penyimpanan default yang disediakan.</p>
+<h3 id="How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes" class="common-anchor-header">Bagaimana cara memulai klaster K8s dengan node pekerja GPU?<button data-href="#How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jika Anda lebih suka menggunakan node pekerja berkemampuan GPU, Anda dapat mengikuti langkah-langkah di bawah ini untuk membuat klaster K8s dengan node pekerja GPU. Kami menyarankan untuk menginstal Milvus pada cluster K8s dengan node pekerja GPU dan menggunakan kelas penyimpanan default yang disediakan.</p>
 <ol>
 <li>Menyiapkan node pekerja GPU</li>
 </ol>

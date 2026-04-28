@@ -37,13 +37,13 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>在 Milvus 中，Collection Schema 是关系数据库中一个表的组合，它定义了 Milvus 如何组织 Collection 中的数据。</p>
-<p>设计良好的 Schema 至关重要，因为它抽象了数据模型，并决定能否通过搜索实现业务目标。此外，由于插入 Collections 的每一行数据都必须遵循 Schema，因此有助于保持数据的一致性和长期质量。从技术角度来看，定义明确的 Schema 会带来组织良好的列数据存储和更简洁的索引结构，从而提升搜索性能。</p>
+<p>设计良好的 Schema 至关重要，因为它抽象了数据模型，并决定能否通过搜索实现业务目标。此外，由于插入 Collections 的每一行数据都必须遵循 Schema，因此有助于保持数据的一致性和长期质量。从技术角度看，定义明确的 Schema 会带来组织良好的列数据存储和更简洁的索引结构，从而提升搜索性能。</p>
 <p>一个 Collections Schema 有一个主键、最多四个向量字段和几个标量字段。下图说明了如何将文章映射到模式字段列表。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
    </span> <span class="img-wrapper"> <span>Schema 设计</span> </span></p>
-<p>搜索系统的数据模型设计包括分析业务需求，并将信息抽象为模式表达的数据模型。例如，搜索一段文本必须通过 "嵌入 "将字面字符串转换为向量并启用向量搜索，从而实现 "索引"。除了这一基本要求外，可能还需要存储出版时间戳和作者等其他属性。有了这些元数据，就可以通过过滤来完善语义搜索，只返回特定日期之后或特定作者发表的文本。您还可以检索这些标量与主文本，以便在应用程序中呈现搜索结果。每个标量都应分配一个唯一标识符，以整数或字符串的形式组织这些文本片段。这些元素对于实现复杂的搜索逻辑至关重要。</p>
+<p>搜索系统的数据模型设计包括分析业务需求，并将信息抽象为模式表达的数据模型。例如，搜索一段文本必须 "索引"，通过 "嵌入 "将字面字符串转换为向量，实现向量搜索。除了这一基本要求外，可能还需要存储出版时间戳和作者等其他属性。有了这些元数据，就可以通过过滤来完善语义搜索，只返回特定日期之后或特定作者发表的文本。您还可以检索这些标量与主文本，以便在应用程序中呈现搜索结果。每个标量都应分配一个唯一标识符，以整数或字符串的形式组织这些文本片段。这些元素对于实现复杂的搜索逻辑至关重要。</p>
 <p>请参考<a href="/docs/zh/schema-hands-on.md">Schema Design Hands-On</a>，了解如何制作一个精心设计的模式。</p>
 <h2 id="Create-Schema​" class="common-anchor-header">创建 Schema<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -228,7 +228,22 @@ export schema=&quot;{​
         ></path>
       </svg>
     </button></h2><p>在常见情况下，可以使用标量字段来存储 Milvus 中存储的向量嵌入的元数据，并通过元数据过滤进行 ANN 搜索，以提高搜索结果的正确性。Milvus 支持多种标量字段类型，包括<strong>VarChar</strong>、<strong>Boolean</strong>、<strong>Int</strong>、Float、<strong>Double</strong>、<strong>Array</strong> 和 JSON。</p>
-<h3 id="Add-String-Fields​" class="common-anchor-header">添加字符串字段</h3><p>在 Milvus 中，可以使用 VarChar 字段存储字符串。有关 VarChar 字段的更多信息，请参阅<a href="/docs/zh/string.md">字符串字段</a>。</p>
+<h3 id="Add-String-Fields​" class="common-anchor-header">添加字符串字段<button data-href="#Add-String-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在 Milvus 中，可以使用 VarChar 字段存储字符串。有关 VarChar 字段的更多信息，请参阅<a href="/docs/zh/string.md">字符串字段</a>。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -270,7 +285,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Number-Fields​" class="common-anchor-header">添加数字字段</h3><p>Milvus 支持的数字类型有<code translate="no">Int8</code>,<code translate="no">Int16</code>,<code translate="no">Int32</code>,<code translate="no">Int64</code>,<code translate="no">Float</code> 和<code translate="no">Double</code> 。有关数字字段的更多信息，请参阅<a href="/docs/zh/number.md">数字</a>字段。</p>
+<h3 id="Add-Number-Fields​" class="common-anchor-header">添加数字字段<button data-href="#Add-Number-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 支持的数字类型有<code translate="no">Int8</code>,<code translate="no">Int16</code>,<code translate="no">Int32</code>,<code translate="no">Int64</code>,<code translate="no">Float</code> 和<code translate="no">Double</code> 。有关数字字段的更多信息，请参阅<a href="/docs/zh/number.md">数字</a>字段。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -307,7 +337,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Boolean-Fields​" class="common-anchor-header">添加布尔字段</h3><p>Milvus 支持布尔字段。以下代码片段演示了如何添加布尔字段。</p>
+<h3 id="Add-Boolean-Fields​" class="common-anchor-header">添加布尔字段<button data-href="#Add-Boolean-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 支持布尔字段。以下代码片段演示了如何添加布尔字段。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -345,7 +390,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-JSON-fields​" class="common-anchor-header">添加 JSON 字段</h3><p>JSON 字段通常存储半结构化的 JSON 数据。有关 JSON 字段的更多信息，请参阅<a href="/docs/zh/use-json-fields.md">JSON 字段</a>。</p>
+<h3 id="Add-JSON-fields​" class="common-anchor-header">添加 JSON 字段<button data-href="#Add-JSON-fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>JSON 字段通常存储半结构化的 JSON 数据。有关 JSON 字段的更多信息，请参阅<a href="/docs/zh/use-json-fields.md">JSON 字段</a>。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -384,7 +444,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Array-Fields​" class="common-anchor-header">添加数组字段</h3><p>数组字段存储元素列表。数组字段中所有元素的数据类型应相同。有关数组字段的更多信息，请参阅<a href="/docs/zh/array_data_type.md">数组</a>字段。</p>
+<h3 id="Add-Array-Fields​" class="common-anchor-header">添加数组字段<button data-href="#Add-Array-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>数组字段存储元素列表。数组字段中所有元素的数据类型应相同。有关数组字段的更多信息，请参阅<a href="/docs/zh/array_data_type.md">数组</a>字段。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​

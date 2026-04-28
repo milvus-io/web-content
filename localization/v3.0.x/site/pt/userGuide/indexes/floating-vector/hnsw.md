@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O índice <strong>HNSW</strong> é um algoritmo de indexação <strong>baseado em grafos</strong> que pode melhorar o desempenho na pesquisa de vectores flutuantes de elevada dimensão. Oferece <strong>uma excelente</strong> precisão de pesquisa e <strong>baixa</strong> latência, embora exija um <strong>elevado</strong> consumo de memória para manter a sua estrutura hierárquica de grafos.</p>
+    </button></h1><p>O índice <strong>HNSW</strong> é um algoritmo de indexação <strong>baseado em grafos</strong> que pode melhorar o desempenho na pesquisa de vectores flutuantes de elevada dimensão. Oferece <strong>uma excelente</strong> precisão de pesquisa e <strong>baixa</strong> latência, embora exija <strong>uma elevada</strong> sobrecarga de memória para manter a sua estrutura hierárquica de grafos.</p>
 <h2 id="Overview" class="common-anchor-header">Síntese<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,7 +49,7 @@ summary: >-
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
    </span> <span class="img-wrapper"> <span>HNSW</span> </span></p>
 <p>O desempenho do HNSW depende de vários parâmetros chave que controlam tanto a estrutura do grafo como o comportamento da pesquisa. Estes incluem:</p>
 <ul>
@@ -117,7 +117,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de o índice ser criado e as entidades serem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
+    </button></h2><p>Depois de o índice ter sido criado e as entidades terem sido inseridas, pode efetuar pesquisas de similaridade no índice.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;ef&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of neighbors to consider during the search</span>
@@ -156,7 +156,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Esta secção fornece uma visão geral dos parâmetros utilizados para criar um índice e efetuar pesquisas no índice.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parâmetros de construção do índice</h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">params</code> ao <a href="/docs/pt/hnsw.md#Build-index">construir um índice</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parâmetros de construção do índice<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">params</code> ao <a href="/docs/pt/hnsw.md#Build-index">construir um índice</a>.</p>
 <table>
    <tr>
      <th><p>Parâmetro</p></th>
@@ -177,7 +192,22 @@ res = MilvusClient.search(
      <td><p>Um valor mais elevado em <code translate="no">efConstruction</code> resulta normalmente num <strong>índice mais preciso</strong>, uma vez que são exploradas mais ligações potenciais. No entanto, isto também leva a um <strong>tempo de indexação mais longo e a uma maior utilização de memória</strong> durante a construção. Considere aumentar <code translate="no">efConstruction</code> para melhorar a precisão, especialmente em cenários em que o tempo de indexação é menos crítico.</p><p>Considere diminuir <code translate="no">efConstruction</code> para acelerar a construção do índice quando as restrições de recursos são uma preocupação.</p><p>Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [50, 500].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parâmetros de pesquisa específicos do índice</h3><p>A tabela a seguir lista os parâmetros que podem ser configurados em <code translate="no">search_params.params</code> ao <a href="/docs/pt/hnsw.md#Search-on-index">pesquisar no índice</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parâmetros de pesquisa específicos do índice<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>A tabela a seguir lista os parâmetros que podem ser configurados em <code translate="no">search_params.params</code> ao <a href="/docs/pt/hnsw.md#Search-on-index">pesquisar no índice</a>.</p>
 <table>
    <tr>
      <th><p>Parâmetro</p></th>
@@ -189,6 +219,6 @@ res = MilvusClient.search(
      <td><p><code translate="no">ef</code></p></td>
      <td><p>Controla a amplitude da pesquisa durante a recuperação do vizinho mais próximo. Ele determina quantos nós são visitados e avaliados como possíveis vizinhos mais próximos.  Este parâmetro afecta apenas o processo de pesquisa e aplica-se exclusivamente à camada inferior do gráfico.</p></td>
      <td><p><strong>Tipo</strong>: Integer <strong>Intervalo</strong>: [1, <em>int_max</em>]</p><p><strong>Valor por defeito</strong>: <em>limite</em> (TopK vizinhos mais próximos a devolver)</p></td>
-     <td><p>Um <code translate="no">ef</code> maior conduz geralmente a uma <strong>maior precisão de pesquisa</strong>, uma vez que são considerados mais vizinhos potenciais. No entanto, isto também <strong>aumenta o tempo de pesquisa</strong>. Considere aumentar <code translate="no">ef</code> quando a obtenção de uma elevada recuperação é crítica e a velocidade de pesquisa é menos preocupante.</p><p>Considere diminuir <code translate="no">ef</code> para dar prioridade a pesquisas mais rápidas, especialmente em cenários em que uma ligeira redução na precisão é aceitável.</p><p>Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [K, 10K].</p></td>
+     <td><p>Um <code translate="no">ef</code> maior leva geralmente a uma <strong>maior precisão de pesquisa</strong>, uma vez que são considerados mais vizinhos potenciais. No entanto, isto também <strong>aumenta o tempo de pesquisa</strong>. Considere aumentar <code translate="no">ef</code> quando a obtenção de uma elevada recuperação é crítica e a velocidade de pesquisa é menos preocupante.</p><p>Considere diminuir <code translate="no">ef</code> para dar prioridade a pesquisas mais rápidas, especialmente em cenários em que uma ligeira redução na precisão é aceitável.</p><p>Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [K, 10K].</p></td>
    </tr>
 </table>

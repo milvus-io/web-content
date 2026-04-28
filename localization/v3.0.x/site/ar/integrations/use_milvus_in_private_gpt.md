@@ -20,7 +20,7 @@ title: استخدام Milvus في PrivateGPT
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://privategpt.dev/">برايفتGPT</a> هو مشروع ذكاء اصطناعي جاهز للإنتاج يُمكِّن المستخدمين من طرح أسئلة حول مستنداتهم باستخدام نماذج لغوية كبيرة دون الحاجة للاتصال بالإنترنت مع ضمان الخصوصية بنسبة 100%. يقدم PrivateGPT واجهة برمجة تطبيقات مقسمة إلى كتل عالية المستوى وأخرى منخفضة المستوى. كما يوفر أيضاً عميل واجهة مستخدم Gradio UI وأدوات مفيدة مثل البرامج النصية لتنزيل النماذج المجمّعة والبرامج النصية للاستيعاب. من الناحية النظرية، يغلّف PrivateGPT خط أنابيب RAG ويكشف عن أولياته، بحيث يكون جاهزًا للاستخدام ويوفر تنفيذًا كاملًا لواجهة برمجة التطبيقات وخط أنابيب RAG.</p>
+    </button></h1><p><a href="https://privategpt.dev/">برايفتGPT</a> هو مشروع ذكاء اصطناعي جاهز للإنتاج يُمكِّن المستخدمين من طرح أسئلة حول مستنداتهم باستخدام نماذج لغوية كبيرة دون الحاجة للاتصال بالإنترنت مع ضمان الخصوصية بنسبة 100%. يقدم PrivateGPT واجهة برمجة تطبيقات مقسمة إلى كتل عالية المستوى وأخرى منخفضة المستوى. كما يوفر أيضاً عميل واجهة مستخدم Gradio UI وأدوات مفيدة مثل البرامج النصية لتنزيل النماذج المجمّعة والبرامج النصية للاستيعاب. من الناحية المفاهيمية، يغلّف PrivateGPT خط أنابيب RAG ويكشف عن أولياته، بحيث يكون جاهزًا للاستخدام ويوفر تنفيذًا كاملًا لواجهة برمجة التطبيقات وخط أنابيب RAG.</p>
 <p>سنوضح لك في هذا البرنامج التعليمي كيفية استخدام Milvus كقاعدة بيانات متجهية خلفية لـ PrivateGPT.</p>
 <div class="alert note">
 <p>يُشار في هذا البرنامج التعليمي بشكل أساسي إلى دليل التثبيت الرسمي لـ <a href="https://docs.privategpt.dev/installation/getting-started/installation">PrivateGPT</a>. إذا وجدت أن هذا البرنامج التعليمي يحتوي على أجزاء قديمة، يمكنك إعطاء الأولوية لاتباع الدليل الرسمي وإنشاء مشكلة لنا.</p>
@@ -40,12 +40,57 @@ title: استخدام Milvus في PrivateGPT
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Clone-the-PrivateGPT-Repository" class="common-anchor-header">1. استنساخ مستودع PrivateGPT</h3><p>استنسخ المستودع وانتقل إليه:</p>
+    </button></h2><h3 id="1-Clone-the-PrivateGPT-Repository" class="common-anchor-header">1. استنساخ مستودع PrivateGPT<button data-href="#1-Clone-the-PrivateGPT-Repository" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>استنسخ المستودع وانتقل إليه:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/zylon-ai/private-gpt</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> private-gpt</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Install-Poetry" class="common-anchor-header">2. تثبيت Poetry</h3><p>قم بتثبيت <a href="https://python-poetry.org/docs/#installing-with-the-official-installer">Poetry</a> لإدارة التبعية: اتبع التعليمات الموجودة على موقع Poetry الرسمي لتثبيته.</p>
-<h3 id="3-Optional-Install-make" class="common-anchor-header">3. 3. (اختياري) تثبيت Make</h3><p>لتشغيل العديد من البرامج النصية المختلفة، تحتاج إلى تثبيت Make.</p>
+<h3 id="2-Install-Poetry" class="common-anchor-header">2. تثبيت Poetry<button data-href="#2-Install-Poetry" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قم بتثبيت <a href="https://python-poetry.org/docs/#installing-with-the-official-installer">Poetry</a> لإدارة التبعية: اتبع التعليمات الموجودة على موقع Poetry الرسمي لتثبيته.</p>
+<h3 id="3-Optional-Install-make" class="common-anchor-header">3. 3. (اختياري) تثبيت Make<button data-href="#3-Optional-Install-make" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لتشغيل العديد من البرامج النصية المختلفة، تحتاج إلى تثبيت Make.</p>
 <p>macOS (باستخدام Homebrew):</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">brew install make</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -135,8 +180,8 @@ title: استخدام Milvus في PrivateGPT
 <tr><th>خيار الحقل</th><th>الوصف</th></tr>
 </thead>
 <tbody>
-<tr><td>يوري</td><td>يتم تعيين الإعداد الافتراضي على "local_data/private_gpt/milvus/milvus_local.db" كملف محلي؛ يمكنك أيضًا إعداد خادم Milvus أكثر أداءً على docker أو k8s على سبيل المثال http://localhost:19530، كـ uri الخاص بك؛ لاستخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> اضبط uri والرمز المميز على <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">نقطة النهاية العامة ومفتاح API</a> في Zilliz Cloud.</td></tr>
-<tr><td>الرمز المميز</td><td>إقران مع خادم Milvus على docker أو k8s أو مفتاح واجهة برمجة التطبيقات في Zilliz Cloud.</td></tr>
+<tr><td>يوري</td><td>يتم تعيين الإعداد الافتراضي إلى "local_data/private_gpt/milvus/milvus_local.db" كملف محلي؛ يمكنك أيضًا إعداد خادم Milvus أكثر أداءً على docker أو k8s على سبيل المثال http://localhost:19530، كـ uri الخاص بك؛ لاستخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> اضبط uri والرمز المميز على <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">نقطة النهاية العامة ومفتاح API</a> في Zilliz Cloud.</td></tr>
+<tr><td>الرمز المميز</td><td>الإقران مع خادم Milvus على docker أو k8s أو مفتاح واجهة برمجة التطبيقات في Zilliz Cloud.</td></tr>
 <tr><td>اسم_المجموعة</td><td>اسم المجموعة، مضبوط على "milvus_db" الافتراضي.</td></tr>
 <tr><td>الكتابة فوق</td><td>الكتابة فوق البيانات الموجودة في المجموعة إذا كانت موجودة، مضبوطة على الوضع الافتراضي True.</td></tr>
 </tbody>
@@ -162,7 +207,7 @@ title: استخدام Milvus في PrivateGPT
 <p>ستكون واجهة المستخدم متاحة على <code translate="no">http://0.0.0.0:8001</code>.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/private_gpt_ui.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/private_gpt_ui.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

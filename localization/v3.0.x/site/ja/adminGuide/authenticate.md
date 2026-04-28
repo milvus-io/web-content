@@ -21,7 +21,7 @@ title: ユーザアクセスの認証
     </button></h1><p>このガイドでは、認証の有効化、ユーザーとしての接続、ユーザー認証情報の変更など、Milvusにおけるユーザー認証の管理方法について説明します。</p>
 <div class="alert note">
 <ul>
-<li><p>TLSとユーザ認証は2つの異なるセキュリティアプローチです。Milvusシステムでユーザ認証とTLSの両方を有効にした場合、ユーザ名、パスワード、証明書ファイルのパスを指定する必要があります。TLSを有効にする方法については、<a href="/docs/ja/tls.md">Encryption in Transitを</a>参照してください。</p></li>
+<li><p>TLSとユーザ認証は2つの異なるセキュリティアプローチです。Milvusシステムでユーザー認証とTLSの両方を有効にした場合、ユーザー名、パスワード、証明書ファイルのパスを指定する必要があります。TLSを有効にする方法については、<a href="/docs/ja/tls.md">Encryption in Transitを</a>参照してください。</p></li>
 <li><p>このページのコードスニペットでは、新しい<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a>(Python)を使用してMilvusと対話します。他の言語用の新しいMilvusClient SDKは今後のアップデートでリリースされる予定です。</p></li>
 </ul>
 </div>
@@ -48,7 +48,7 @@ title: ユーザアクセスの認証
 <span class="hljs-attr">common:</span>
 <span class="hljs-string">...</span>
   <span class="hljs-attr">security:</span>
-    <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">false</span>
+    <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">true</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 </div>
@@ -64,7 +64,7 @@ title: ユーザアクセスの認証
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-operator">
-<p>認証を有効にするには、<code translate="no">Milvus</code> CRD で<code translate="no">spec.common.security.authorizationEnabled</code> を<code translate="no">true</code> に設定します。MilvusのCRDについては、<a href="https://milvus.io/docs/configure_operator.md?tab=component">Milvus Operatorを使用したMilvusの設定を</a>参照してください。</p>
+<p>認証を有効にするには、<code translate="no">Milvus</code> CRD で<code translate="no">spec.config.common.security.authorizationEnabled</code> を<code translate="no">true</code> に設定します。MilvusのCRDについては、<a href="https://milvus.io/docs/configure_operator.md?tab=component">Milvus Operatorを使用したMilvusの設定を</a>参照してください。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -248,7 +248,7 @@ client.list_users()
       </svg>
     </button></h2><ol>
 <li>ユーザー名は空白であってはならず、32文字以内でなければなりません。文字で始まり、アンダースコア、アルファベット、数字のみを含む必要があります。</li>
-<li>パスワードは6文字以上で、256文字以内です。</li>
+<li>パスワードは6文字以上で、256文字以内でなければなりません。</li>
 </ol>
 <h2 id="Whats-next" class="common-anchor-header">次のページ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -270,7 +270,7 @@ client.list_users()
 <li><a href="/docs/ja/scaleout.md">Milvusクラスタのスケール</a></li>
 </ul></li>
 <li>クラウド上にクラスターをデプロイする準備が整いましたら、次の方法をご覧ください：<ul>
-<li><a href="/docs/ja/eks.md">Terraformを使用してAmazon EKSにMilvusをデプロイ</a>する方法を学びます。</li>
+<li><a href="/docs/ja/eks.md">Terraformを使用してAmazon EKSにMilvusをデプロイ</a>する方法を学ぶ</li>
 <li><a href="/docs/ja/gcp.md">Kubernetesを使用してGCPにMilvusクラスタをデプロイ</a>する方法を学ぶ</li>
 <li><a href="/docs/ja/azure.md">Kubernetesを使ってMicrosoft AzureにMilvusをデプロイ</a>する方法を学ぶ</li>
 </ul></li>

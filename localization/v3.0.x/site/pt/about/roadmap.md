@@ -125,7 +125,7 @@ summary: >-
       </svg>
     </button></h3><h4 id="🔹-Search-Experience-Overhaul" class="common-anchor-header"><strong>🔹 Revisão da experiência de pesquisa</strong></h4><ul>
 <li><p>Introduzir a pesquisa de similaridade <strong>More Like This (MLT)</strong> com suporte para pesquisas com posição ou exemplos negativos.</p></li>
-<li><p>Adicionar recursos de pesquisa semântica, como <strong>destaque</strong> e <strong>reforço</strong>.</p></li>
+<li><p>Adicione recursos de pesquisa semântica, como <strong>destaque</strong> e <strong>reforço</strong>.</p></li>
 <li><p>Suporte a <strong>dicionários personalizados</strong> e <strong>tabelas de sinónimos</strong>, permitindo definições de regras léxicas e semânticas na camada Analyzer.</p></li>
 <li><p>Introduzir recursos <strong>de agregação</strong> para consultas.</p></li>
 </ul>
@@ -140,7 +140,7 @@ summary: >-
 </ul>
 <h4 id="🔹-Expanded-Unstructured-Data-Types-BLOB--Text" class="common-anchor-header"><strong>Tipos de dados não estruturados alargados (BLOB / Texto)</strong></h4><ul>
 <li><p>Introduzir o <strong>tipo BLOB</strong>, que fornece armazenamento nativo e referenciação para dados binários, como ficheiros, imagens e vídeos.</p></li>
-<li><p>Introduzir o <strong>tipo TEXT</strong>, que fornece capacidades melhoradas de pesquisa de texto integral e baseada em conteúdos.</p></li>
+<li><p>Introduzir o <strong>tipo TEXT</strong>, que fornece capacidades melhoradas de pesquisa de texto completo e baseada em conteúdos.</p></li>
 </ul>
 <h4 id="🔹-Enterprise-Grade-Capabilities" class="common-anchor-header"><strong>Capacidades de nível empresarial</strong></h4><ul>
 <li><p>Suporte a <strong>backup e recuperação baseados em instantâneos</strong>.</p></li>

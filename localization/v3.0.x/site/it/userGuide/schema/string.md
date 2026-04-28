@@ -251,7 +251,7 @@ schema.WithField(entity.NewField().
     </button></h2><p>L'indicizzazione aiuta a migliorare le prestazioni delle ricerche e delle query. In Milvus, l'indicizzazione è obbligatoria per i campi vettoriali, ma facoltativa per i campi scalari.</p>
 <p>L'esempio seguente crea indici sul campo vettoriale <code translate="no">embedding</code> e sul campo scalare <code translate="no">varchar_field1</code>, entrambi usando il tipo di indice <code translate="no">AUTOINDEX</code>. Con questo tipo, Milvus seleziona automaticamente l'indice più adatto in base al tipo di dati. È anche possibile personalizzare il tipo di indice e i parametri per ogni campo. Per maggiori dettagli, consultare la sezione <a href="/docs/it/index-explained.md">Indice spiegato</a>.</p>
 <div class="alert note">
-<p>È anche possibile costruire un indice <code translate="no">NGRAM</code> per accelerare il filtraggio <code translate="no">LIKE</code> sui campi <code translate="no">VARCHAR</code>. Per i dettagli, fare riferimento a <a href="/docs/it/ngram.md">NGRAM</a>.</p>
+<p>Si può anche costruire un indice <code translate="no">NGRAM</code> per accelerare il filtraggio <code translate="no">LIKE</code> sui campi <code translate="no">VARCHAR</code>. Per i dettagli, fare riferimento a <a href="/docs/it/ngram.md">NGRAM</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -663,7 +663,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per recuperare le entità in cui <code translate="no">varchar_field1</code> ha il valore <code translate="no">&quot;Unknown&quot;</code>, utilizzare la seguente espressione. Poiché il valore predefinito di <code translate="no">varchar_field1</code> è <code translate="no">&quot;Unknown&quot;</code>, il risultato atteso dovrebbe includere entità con <code translate="no">varchar_field1</code> esplicitamente impostato su <code translate="no">&quot;Unknown&quot;</code> o con <code translate="no">varchar_field1</code> impostato su null.</p>
+<p>Per recuperare le entità in cui <code translate="no">varchar_field1</code> ha il valore <code translate="no">&quot;Unknown&quot;</code>, utilizzare la seguente espressione. Poiché il valore predefinito di <code translate="no">varchar_field1</code> è <code translate="no">&quot;Unknown&quot;</code>, il risultato atteso dovrebbe includere entità con <code translate="no">varchar_field1</code> impostato esplicitamente su <code translate="no">&quot;Unknown&quot;</code> o con <code translate="no">varchar_field1</code> impostato su null.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter entities with `varchar_field1` with value `Unknown`</span>

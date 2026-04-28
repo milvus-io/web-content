@@ -149,7 +149,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <ul>
 <li><code translate="no">scaleTargetRef</code>: 확장할 배포를 지정합니다(예: <code translate="no">my-release-milvus-proxy</code>).</li>
 <li><code translate="no">minReplicas</code> 및 <code translate="no">maxReplicas</code>: 스케일링 범위를 설정한다(이 예에서는 2~10개의 파드).</li>
-<li><code translate="no">metrics</code>: 평균 사용량의 60%를 목표로 CPU 및 메모리 사용량을 기반으로 스케일링을 구성한다.</li>
+<li><code translate="no">metrics</code>: 평균 사용량의 60%를 목표로 CPU 및 메모리 사용률을 기반으로 스케일링을 구성한다.</li>
 </ul>
 <h2 id="Conclusion" class="common-anchor-header">결론<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"

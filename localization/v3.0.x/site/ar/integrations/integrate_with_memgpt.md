@@ -49,7 +49,7 @@ title: MemGPT مع تكامل Milvus
 ? Enter the Milvus connection URI (Default: ~/.memgpt/milvus.db): ~/.memgpt/milvus.db
 <button class="copy-code-btn"></button></code></pre>
 <p>ما عليك سوى تعيين URI إلى مسار الملف المحلي، على سبيل المثال <code translate="no">~/.memgpt/milvus.db</code> ، والذي سيقوم تلقائيًا باستدعاء مثيل خدمة Milvus المحلي من خلال Milvus Lite.</p>
-<p>إذا كان لديك حجم كبير من البيانات مثل أكثر من مليون مستند، نوصي بإعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">docker أو kubenetes</a>. وفي هذه الحالة، يجب أن يكون URI الخاص بك هو URI الخادم، على سبيل المثال <code translate="no">http://localhost:19530</code>.</p>
+<p>إذا كان لديك نطاق كبير من البيانات مثل أكثر من مليون مستند، نوصي بإعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">docker أو kubenetes</a>. وفي هذه الحالة، يجب أن يكون URI الخاص بك هو URI الخادم، على سبيل المثال <code translate="no">http://localhost:19530</code>.</p>
 <h2 id="Creating-an-external-data-source" class="common-anchor-header">إنشاء مصدر بيانات خارجي<button data-href="#Creating-an-external-data-source" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

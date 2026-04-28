@@ -59,7 +59,22 @@ title: Настройка кэш-памяти
 <li><p>Для экземпляров Milvus, установленных с помощью Operator</p>
 <p>Добавьте конфигурацию в раздел <code translate="no">spec.components</code> пользовательского ресурса <code translate="no">Milvus</code>. Подробнее см. в разделе <a href="/docs/ru/configure_operator.md">Настройка Milvus с помощью Operator</a>.</p></li>
 </ul>
-<h3 id="Configuration-options" class="common-anchor-header">Параметры конфигурации</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
+<h3 id="Configuration-options" class="common-anchor-header">Параметры конфигурации<button data-href="#Configuration-options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
     <span class="hljs-attr">cache:</span>
         <span class="hljs-attr">warmup:</span> <span class="hljs-string">async</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -70,7 +85,22 @@ title: Настройка кэш-памяти
 <li><code translate="no">disable</code>: Milvus не выполняет предварительную загрузку данных в кэш памяти.</li>
 </ul>
 <p>Обратите внимание, что настройки кэша чанков также применяются при вставке новых данных в коллекции или перестройке индексов коллекций.</p>
-<h3 id="FAQ" class="common-anchor-header">ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ</h3><ul>
+<h3 id="FAQ" class="common-anchor-header">ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>Как я могу определить, правильно ли работает механизм кэширования чанков?</strong></p>
 <p>Рекомендуется проверить задержку запроса на поиск или запрос после загрузки коллекции. Если задержка значительно выше ожидаемой (например, несколько секунд), это может указывать на то, что механизм кэширования чанков все еще работает.</p>
 <p>Если задержка запроса остается высокой в течение длительного времени. Вы можете проверить пропускную способность хранилища объектов, чтобы убедиться, что кэш чанков все еще работает. В нормальных случаях работающий кэш будет генерировать высокую пропускную способность объектного хранилища. В качестве альтернативы можно просто попробовать кэш чанков в режиме <code translate="no">sync</code>.</p></li>

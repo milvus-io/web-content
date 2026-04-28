@@ -45,7 +45,7 @@ summary: >-
       </svg>
     </button></h2><p>Milvus integriert <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, um den zugrunde liegenden invertierten Index und die begriffsbasierte Textsuche zu betreiben. Für jeden Texteintrag indiziert Milvus diesen nach folgendem Verfahren:</p>
 <ol>
-<li><p><a href="/docs/de/analyzer-overview.md">Analyzer</a>: Der Analyzer verarbeitet den eingegebenen Text, indem er ihn in einzelne Wörter (Token) zerlegt und dann nach Bedarf Filter anwendet. So kann Milvus einen Index auf der Grundlage dieser Token erstellen.</p></li>
+<li><p><a href="/docs/de/analyzer-overview.md">Analyzer</a>: Der Analyzer verarbeitet den eingegebenen Text, indem er ihn in einzelne Wörter (Token) zerlegt und dann je nach Bedarf Filter anwendet. So kann Milvus einen Index auf der Grundlage dieser Token erstellen.</p></li>
 <li><p><a href="/docs/de/index-explained.md">Indizierung</a>: Nach der Textanalyse erstellt Milvus einen invertierten Index, der jedes einzelne Token den Dokumenten zuordnet, die es enthalten.</p></li>
 </ol>
 <p>Wenn ein Benutzer einen Textabgleich durchführt, wird der invertierte Index verwendet, um schnell alle Dokumente aufzufinden, die die Begriffe enthalten. Dies ist wesentlich schneller als das Durchsuchen jedes einzelnen Dokuments.</p>
@@ -219,7 +219,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>Die Leistung und Genauigkeit des Schlüsselwortabgleichs hängt vom gewählten Analysator ab. Verschiedene Analysatoren sind auf verschiedene Sprachen und Textstrukturen zugeschnitten, so dass die Wahl des richtigen Analysators die Suchergebnisse für Ihren speziellen Anwendungsfall erheblich beeinflussen kann.</p>
-<p>Standardmäßig verwendet Milvus den Analysator <code translate="no">standard</code>, der Text auf der Grundlage von Leerzeichen und Interpunktion in Token umwandelt, Token entfernt, die länger als 40 Zeichen sind, und Text in Kleinbuchstaben umwandelt. Zur Anwendung dieser Standardeinstellung sind keine zusätzlichen Parameter erforderlich. Weitere Informationen finden Sie unter <a href="/docs/de/standard-analyzer.md">Standard</a>.</p>
+<p>Standardmäßig verwendet Milvus den Analysator <code translate="no">standard</code>, der Text auf der Grundlage von Leerzeichen und Interpunktion in Token umwandelt, Token entfernt, die länger als 40 Zeichen sind, und Text in Kleinbuchstaben konvertiert. Zur Anwendung dieser Standardeinstellung sind keine zusätzlichen Parameter erforderlich. Weitere Informationen finden Sie unter <a href="/docs/de/standard-analyzer.md">Standard</a>.</p>
 <p>In Fällen, in denen ein anderer Analyzer erforderlich ist, können Sie diesen mit dem Parameter <code translate="no">analyzer_params</code> konfigurieren. Zum Beispiel, um den <code translate="no">english</code> Analyzer für die Verarbeitung von englischem Text anzuwenden:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

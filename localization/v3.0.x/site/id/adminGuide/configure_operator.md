@@ -22,7 +22,7 @@ title: Mengkonfigurasi Milvus dengan Operator Milvus
       </svg>
     </button></h1><p>Dalam lingkungan produksi, Anda perlu mengalokasikan sumber daya ke cluster Milvus berdasarkan jenis mesin dan beban kerja. Anda dapat mengonfigurasi selama penerapan atau memperbarui konfigurasi saat cluster berjalan.</p>
 <p>Topik ini memperkenalkan cara mengonfigurasi cluster Milvus saat Anda menginstalnya dengan Milvus Operator.</p>
-<p>Topik ini mengasumsikan bahwa Anda telah menerapkan Milvus Operator. Lihat <a href="/docs/id/install_cluster-milvusoperator.md">Menyebarkan Milvus Operator</a> untuk informasi lebih lanjut.</p>
+<p>Topik ini mengasumsikan bahwa Anda telah menerapkan Milvus Operator. Lihat <a href="/docs/id/install_cluster-milvusoperator.md">Menyebarkan Operator Milvus</a> untuk informasi lebih lanjut.</p>
 <p>Mengonfigurasi cluster Milvus dengan Milvus Operator meliputi:</p>
 <ul>
 <li>Konfigurasi sumber daya global</li>
@@ -174,9 +174,8 @@ Selain itu, ketika mengkonfigurasi proxy, ada bidang tambahan yang disebut `serv
             <li><a href="/docs/id/configure_indexcoord.md">Kode indeks</a></li>
             <li><a href="/docs/id/configure_metastore.md">Metastore</a></li>
             <li><a href="/docs/id/configure_mq.md">Antrian Pesan</a></li>
-            <li><a href="/docs/id/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/id/configure_tikv.md">Tikv</a></li>
-            <li><a href="/docs/id/configure_trace.md">Lacak</a></li>
+            <li><a href="/docs/id/configure_trace.md">Jejak</a></li>
             <li><a href="/docs/id/configure_quotaandlimits.md">Kuota dan Batas</a></li>
         </ul>
     </td>

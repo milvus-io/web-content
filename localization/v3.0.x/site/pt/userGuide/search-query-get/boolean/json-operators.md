@@ -27,7 +27,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus suporta operadores avançados para consulta e filtragem de campos JSON, tornando-os perfeitos para a gestão de dados complexos e estruturados. Estes operadores permitem uma consulta altamente eficaz de documentos JSON, permitindo-lhe recuperar entidades com base em elementos específicos, valores ou condições dentro dos campos JSON. Esta secção irá guiá-lo através da utilização de operadores específicos de JSON no Milvus, fornecendo exemplos práticos para ilustrar a sua funcionalidade.</p>
 <div class="alert note">
-<p>Os campos JSON não podem lidar com estruturas complexas e aninhadas e tratam todas as estruturas aninhadas como strings simples. Por conseguinte, ao trabalhar com campos JSON, é aconselhável evitar aninhamentos excessivamente profundos e garantir que as suas estruturas de dados são tão planas quanto possível para um desempenho ótimo.</p>
+<p>Os campos JSON não podem lidar com estruturas complexas e aninhadas e tratam todas as estruturas aninhadas como strings simples. Portanto, ao trabalhar com campos JSON, é aconselhável evitar aninhamentos excessivamente profundos e garantir que suas estruturas de dados sejam tão planas quanto possível para um desempenho ideal.</p>
 </div>
 <h2 id="Available-JSON-Operators" class="common-anchor-header">Operadores JSON disponíveis<button data-href="#Available-JSON-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,7 +90,7 @@ summary: >-
       </svg>
     </button></h2><p>O operador <code translate="no">json_contains_all</code> garante que todos os elementos de uma expressão JSON especificada estão presentes no campo de destino. É particularmente útil quando é necessário fazer corresponder vários valores numa matriz JSON.</p>
 <p><strong>Exemplo</strong></p>
-<p>Continuando com o cenário das etiquetas de produto, se pretender encontrar todos os produtos que tenham as etiquetas <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code> e <code translate="no">&quot;new&quot;</code>, pode utilizar o operador <code translate="no">json_contains_all</code>.</p>
+<p>Continuando com o cenário das etiquetas de produto, se pretender encontrar todos os produtos que tenham as etiquetas <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code>, e <code translate="no">&quot;new&quot;</code>, pode utilizar o operador <code translate="no">json_contains_all</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;, &quot;discount&quot;]}</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_contains_all(product[&quot;tags&quot;], [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

@@ -2,7 +2,7 @@
 id: rtree.md
 title: RTREECompatible with Milvus 2.6.4+
 summary: >-
-  RTREE 索引是一種以樹狀結構為基礎的資料結構，可加速在 Milvus 中對 GEOMETRY 欄位的查詢。如果您的資料庫以已知文字 (WKT)
+  RTREE 索引是一種以樹狀結構為基礎的資料結構，可加速在 Milvus 中對 GEOMETRY 欄位的查詢。如果您的資料集以已知文字 (WKT)
   格式儲存幾何物件，例如點、線或多邊形，而且您想要加速空間篩選，RTREE 是理想的選擇。
 beta: Milvus 2.6.4+
 ---
@@ -60,7 +60,7 @@ beta: Milvus 2.6.4+
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-retree-works.png" alt="How Retree Works" class="doc-image" id="how-retree-works" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-retree-works.png" alt="How Retree Works" class="doc-image" id="how-retree-works" />
    </span> <span class="img-wrapper"> <span>Retree 如何運作</span> </span></p>
 <h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">第二階段：加速查詢<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"

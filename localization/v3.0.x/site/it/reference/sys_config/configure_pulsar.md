@@ -47,7 +47,7 @@ summary: Imparare a configurare pulsar per Milvus.
       <td>
         <li>Indirizzo IP del servizio Pulsar.</li>      
         <li>Variabile d'ambiente: PULSAR_ADDRESS</li>      
-        <li>pulsar.address e pulsar.port generano insieme l'accesso valido a Pulsar.</li>      
+        <li>pulsar.address e pulsar.port insieme generano l'accesso valido a Pulsar.</li>      
         <li>Pulsar acquisisce preferibilmente l'indirizzo IP valido dalla variabile d'ambiente PULSAR_ADDRESS all'avvio di Milvus.</li>      
         <li>Il valore predefinito si applica quando Pulsar è in esecuzione sulla stessa rete di Milvus.</li>      </td>
       <td>localhost</td>

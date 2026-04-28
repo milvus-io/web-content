@@ -150,7 +150,7 @@ summary: >-
 <h4 id="🔹-Vector-Lake-v02" class="common-anchor-header">🔹 <strong>Vector Lake (v0.2)</strong></h4><ul>
 <li><p>Supporto dell'<strong>archiviazione TEXT / BLOB</strong> e della <strong>gestione di snapshot multiversione</strong>.</p></li>
 <li><p>Integrazione di Spark per l'indicizzazione offline, il clustering, la deduplicazione e la riduzione della dimensionalità.</p></li>
-<li><p>Fornisce <strong>dimostrazioni di ChatPDF cold-query e benchmark offline</strong>.</p></li>
+<li><p>Fornisce <strong>demo di ChatPDF cold-query e benchmark offline</strong>.</p></li>
 </ul>
 <h2 id="🪐-Milvus-v31-Long-Term-Vision" class="common-anchor-header">Milvus v3.1 (visione a lungo termine)<button data-href="#🪐-Milvus-v31-Long-Term-Vision" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -184,7 +184,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="🔹-UDF--Distributed-Computing-Ecosystem" class="common-anchor-header">🔹 <strong>Ecosistema UDF e calcolo distribuito</strong></h4><ul>
+    </button></h3><h4 id="🔹-UDF--Distributed-Computing-Ecosystem" class="common-anchor-header">🔹 <strong>Ecosistema UDF e di calcolo distribuito</strong></h4><ul>
 <li><p>Supporto delle <strong>funzioni definite dall'utente (UDF)</strong>, che consentono agli sviluppatori di iniettare logica personalizzata nei flussi di lavoro di recupero e calcolo.</p></li>
 <li><p>Profonda integrazione con <strong>Ray Dataset / Daft</strong> per l'esecuzione distribuita di UDF e l'elaborazione multimodale dei dati.</p></li>
 </ul>
@@ -194,7 +194,7 @@ summary: >-
 <li><p>Supporto degli <strong>aggiornamenti in-place</strong> per i formati di file locali.</p></li>
 </ul>
 <h4 id="🔹-Advanced-Search-Capabilities" class="common-anchor-header">🔹 F <strong>unzionalità di ricerca avanzata</strong></h4><ul>
-<li><p>Aggiunte le seguenti funzioni: Query <strong>RankBy</strong>, <strong>OrderBy</strong>, <strong>Facet</strong> e <strong>Fuzzy match</strong>.</p></li>
+<li><p>Aggiunte le seguenti funzioni: query <strong>RankBy</strong>, <strong>OrderBy</strong>, <strong>Facet</strong> e <strong>Fuzzy match</strong>.</p></li>
 <li><p>Miglioramento del reperimento del testo con il supporto di:</p>
 <ul>
 <li><p><code translate="no">match_phrase_prefix</code></p></li>
@@ -230,7 +230,7 @@ summary: >-
 <p>Invitiamo caldamente tutti i membri della comunità a contribuire alla creazione del database multimodale di prossima generazione:</p>
 <ul>
 <li><p>💬 <strong>Condividere il feedback</strong>: Proporre nuove funzionalità o idee di ottimizzazione</p></li>
-<li><p>🐛 S <strong>egnalare problemi</strong>: Segnalare i bug tramite GitHub Issues</p></li>
+<li><p>🐛 S <strong>egnalare problemi</strong>: Segnalare bug tramite GitHub Issues</p></li>
 <li><p>🔧 <strong>Contribuire al codice</strong>: Invia PR e contribuisci alla creazione delle funzionalità principali</p>
 <ul>
 <li><p><strong>Richieste di prelievo</strong>: Contribuire direttamente alla nostra <a href="https://github.com/milvus-io/milvus/pulls">base di codice</a>. Che si tratti di correggere bug, aggiungere funzionalità o migliorare la documentazione, i vostri contributi sono benvenuti.</p></li>

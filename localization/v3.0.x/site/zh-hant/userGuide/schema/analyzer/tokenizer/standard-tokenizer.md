@@ -85,7 +85,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 <div class="alert note">
 <p>若要簡化設定，您可以選擇使用 <a href="/docs/zh-hant/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/zh-hant/standard-analyzer.md">分析器</a>，它結合了<code translate="no">standard</code> tokenizer 與 <a href="/docs/zh-hant/lowercase-filter.md"><code translate="no">lowercase</code></a><a href="/docs/zh-hant/lowercase-filter.md"> 過濾器</a>。</p>
 </div>
-<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這可讓 Milvus 使用指定的分析器來處理該欄位中的文字，以達到有效的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/analyzer-overview.md#Example-use">範例使用</a>。</p>
+<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這可讓 Milvus 使用指定的分析器來處理該欄位中的文字，以達到有效的符記化和過濾。詳情請參閱<a href="/docs/zh-hant/analyzer-overview.md#Example-use">範例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -3,7 +3,7 @@ id: eviction.md
 title: EvicçãoCompatible with Milvus 2.6.4+
 summary: >-
   O Eviction gerencia os recursos de cache de cada QueryNode no Milvus. Quando
-  ativado, remove automaticamente os dados em cache assim que os limites de
+  ativado, remove automaticamente os dados em cache quando os limites de
   recursos são atingidos, garantindo um desempenho estável e evitando o
   esgotamento da memória ou do disco.
 beta: Milvus 2.6.4+
@@ -51,7 +51,7 @@ beta: Milvus 2.6.4+
      <th><p>Evicção assíncrona</p></th>
    </tr>
    <tr>
-     <td><p>Gatilho</p></td>
+     <td><p>Acionador</p></td>
      <td><p>Ocorre durante a consulta ou pesquisa quando a utilização da memória ou do disco excede os limites internos.</p></td>
      <td><p>Acionado por um thread em segundo plano quando o uso excede a marca d'água alta ou quando os dados em cache atingem seu tempo de vida (TTL).</p></td>
    </tr>
@@ -67,7 +67,7 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p>Precauções</p></td>
-     <td><p>Pode causar atrasos ou tempos limite de consulta curtos se não houver dados evitáveis suficientes disponíveis.</p></td>
+     <td><p>Pode causar pequenos atrasos ou tempos limite de consulta se não houver dados eviccionáveis suficientes disponíveis.</p></td>
      <td><p>Requer marcas d'água altas/baixas e configurações TTL adequadamente ajustadas. Ligeira sobrecarga do thread em segundo plano.</p></td>
    </tr>
    <tr>
@@ -78,7 +78,7 @@ beta: Milvus 2.6.4+
 </table>
 <p><strong>Configuração recomendada</strong>:</p>
 <ul>
-<li><p>Ambos os modos de despejo podem ser ativados juntos para um equilíbrio ideal, desde que a carga de trabalho se beneficie do Armazenamento em camadas e possa tolerar a latência de busca relacionada ao despejo.</p></li>
+<li><p>Ambos os modos de despejo podem ser habilitados juntos para um equilíbrio ideal, desde que a carga de trabalho se beneficie do Armazenamento em camadas e possa tolerar a latência de busca relacionada ao despejo.</p></li>
 <li><p>Para testes de desempenho ou cenários críticos de latência, considere desabilitar o despejo completamente para evitar a sobrecarga de busca de rede após o despejo.</p></li>
 </ul>
 <div class="alert note">
@@ -147,7 +147,7 @@ beta: Milvus 2.6.4+
     </button></h2><p>As marcas d'água definem quando o despejo do cache começa e termina para a memória e o disco. Cada tipo de recurso tem dois limites:</p>
 <ul>
 <li><p><strong>Marca d'água alta</strong>: O despejo começa quando o uso excede esse valor.</p></li>
-<li><p><strong>Marca de água baixa</strong>: O despejo continua até que o uso caia abaixo desse valor.</p></li>
+<li><p><strong>Marca de água baixa</strong>: O despejo continua até que o uso caia abaixo deste valor.</p></li>
 </ul>
 <div class="alert note">
 <p>Esta configuração só tem efeito quando <a href="/docs/pt/eviction.md#Enable-eviction">o despejo está ativado</a>.</p>
@@ -203,7 +203,7 @@ beta: Milvus 2.6.4+
 </table>
 <p><strong>Melhores práticas</strong>:</p>
 <ul>
-<li><p>Não defina marcas d'água altas ou baixas acima de ~0,80 para deixar espaço para o uso estático do QueryNode e explosões de tempo de consulta.</p></li>
+<li><p>Não defina marcas d'água altas ou baixas acima de ~0,80 para deixar espaço livre para o uso estático do QueryNode e explosões de tempo de consulta.</p></li>
 <li><p>Evite grandes intervalos entre as marcas d'água alta e baixa; grandes intervalos prolongam cada ciclo de despejo e podem adicionar latência.</p></li>
 </ul>
 <h2 id="Configure-cache-TTL" class="common-anchor-header">Configurar o TTL da cache<button data-href="#Configure-cache-TTL" class="anchor-icon" translate="no">
@@ -223,7 +223,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p><strong>O TTL (Cache Time-to-Live)</strong> remove automaticamente os dados em cache após uma duração definida, mesmo que os limites de recursos não sejam atingidos. Ele funciona junto com o despejo LRU para evitar que dados obsoletos ocupem o cache indefinidamente.</p>
 <div class="alert note">
-<p>O TTL de cache requer <code translate="no">backgroundEvictionEnabled: true</code>, pois é executado no mesmo thread em segundo plano.</p>
+<p>O TTL do cache requer <code translate="no">backgroundEvictionEnabled: true</code>, pois é executado no mesmo thread em segundo plano.</p>
 </div>
 <p><strong>Exemplo de YAML</strong>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>

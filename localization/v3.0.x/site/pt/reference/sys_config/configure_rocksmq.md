@@ -64,7 +64,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
     <tr>
       <td>
         <li>Prefixo da chave onde o Milvus armazena os dados no RocksMQ.</li>      
-        <li>Atenção: Alterar este parâmetro depois de usar o Milvus por um período de tempo afetará o acesso a dados antigos.</li>      
+        <li>Cuidado: Alterar este parâmetro depois de usar o Milvus por um período de tempo afetará o acesso a dados antigos.</li>      
         <li>Recomenda-se alterar este parâmetro antes de iniciar o Milvus pela primeira vez.</li>      
         <li>Defina um prefixo de chave raiz fácil de identificar para o Milvus se o serviço etcd já existir.</li>      </td>
       <td>/var/lib/milvus/rdb_data</td>

@@ -283,7 +283,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <button class="copy-code-btn"></button></code></pre>
 <p>Ожидаемое поведение:</p>
 <ul>
-<li><p><strong>Существующие сущности</strong> будут иметь значение по умолчанию (<code translate="no">&quot;standard&quot;</code>) для вновь добавленного поля.</p></li>
+<li><p><strong>Существующие сущности</strong> будут иметь значение по умолчанию (<code translate="no">&quot;standard&quot;</code>) для нового добавленного поля.</p></li>
 <li><p><strong>Новые сущности</strong> могут переопределить значение по умолчанию или использовать его, если значение не указано.</p></li>
 <li><p><strong>Доступность поля</strong> происходит практически сразу с минимальной задержкой</p></li>
 <li><p><strong>Возможность запросов сразу</strong> после короткого периода синхронизации</p></li>

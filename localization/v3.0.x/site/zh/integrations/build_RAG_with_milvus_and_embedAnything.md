@@ -65,7 +65,7 @@ title: 用 Milvus 和 EmbedAnything 构建 RAG
     </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU pymilvus milvus-lite openai embed_anything</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果使用的是 Google Colab，要启用刚安装的依赖项，可能需要<strong>重启运行时</strong>（点击屏幕上方的 "运行时 "菜单，从下拉菜单中选择 "重启会话"）。</p>
+<p>如果使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重启运行时</strong>（点击屏幕上方的 "运行时 "菜单，从下拉菜单中选择 "重启会话"）。</p>
 </div>
 <h3 id="Clone-the-Repository-and-Load-Adapter" class="common-anchor-header">克隆存储库并加载适配器<button data-href="#Clone-the-Repository-and-Load-Adapter" class="anchor-icon" translate="no">
       <svg translate="no"

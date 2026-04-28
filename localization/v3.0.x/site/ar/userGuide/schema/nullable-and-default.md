@@ -1,14 +1,11 @@
 ---
 id: nullable-and-default.md
-title: قابل للإلغاء والافتراضي
+title: الحقول القابلة للإلغاء
 summary: >-
-  يسمح لك Milvus بتعيين السمة القابلة للإلغاء والقيم الافتراضية للحقول القياسية،
-  باستثناء الحقل الأساسي. بالنسبة للحقول التي تم وضع علامة nullable=صحيح، يمكنك
-  تخطي الحقل عند إدراج البيانات، أو تعيينه مباشرة إلى قيمة لاغية وسيتعامل النظام
-  معه على أنه لاغٍ دون التسبب في حدوث خطأ. عندما يكون للحقل قيمة افتراضية، سيقوم
-  النظام تلقائيًا بتطبيق هذه القيمة إذا لم يتم تحديد بيانات للحقل أثناء الإدراج.
+  تكوين الحقول القابلة للإلغاء والقيم الافتراضية، بما في ذلك سلوك المخطط
+  والإدراج والفهرس والبحث والتصفية.
 ---
-<h1 id="Nullable--Default" class="common-anchor-header">قابل للإلغاء والافتراضي<button data-href="#Nullable--Default" class="anchor-icon" translate="no">
+<h1 id="Nullable-Fields" class="common-anchor-header">الحقول القابلة للإلغاء<button data-href="#Nullable-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +20,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يسمح لك Milvus بتعيين السمة <code translate="no">nullable</code> والقيم الافتراضية للحقول القياسية، باستثناء الحقل الأساسي. بالنسبة للحقول التي تم وضع علامة <code translate="no">nullable=True</code> ، يمكنك تخطي الحقل عند إدراج البيانات، أو تعيينه مباشرة إلى قيمة فارغة، وسيتعامل النظام معه على أنه فارغ دون التسبب في حدوث خطأ. عندما يكون للحقل قيمة افتراضية، سيقوم النظام تلقائيًا بتطبيق هذه القيمة إذا لم يتم تحديد بيانات للحقل أثناء الإدراج.</p>
-<p>تعمل القيمة الافتراضية والسمات القابلة للإلغاء على تبسيط عملية ترحيل البيانات من أنظمة قواعد البيانات الأخرى إلى ميلفوس من خلال السماح بمعالجة مجموعات البيانات ذات القيم الفارغة والحفاظ على إعدادات القيمة الافتراضية. عند إنشاء مجموعة، يمكنك أيضًا تمكين القيمة القابلة للإلغاء أو تعيين قيم افتراضية للحقول التي قد تكون القيم فيها غير مؤكدة.</p>
+    </button></h1><p>تدعم Milvus الحقول القابلة للفراغ، والتي تسمح بأن تكون قيمة الحقل مفقودة أو يتم تعيينها صراحةً إلى NULL. يتم تعريف قابلية الإلغاء على مستوى المخطط ويتم تطبيقها بشكل متسق عبر عمليات استيعاب البيانات والفهرسة والبحث والاستعلام.</p>
+<p>استخدم الحقول القابلة للإلغاء عندما:</p>
+<ul>
+<li>يتم إدخال البيانات من أنظمة خارجية تسمح بالقيم المفقودة.</li>
+<li>تكون بعض البيانات الوصفية اختيارية أو متاحة فقط لجزء من مجموعة البيانات.</li>
+<li>يتم إنشاء تضمينات المتجهات بشكل غير متزامن وإدراجها لاحقًا.</li>
+</ul>
 <h2 id="Limits" class="common-anchor-header">الحدود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,14 +43,12 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>تدعم الحقول العددية فقط، باستثناء الحقل الأساسي، القيم الافتراضية والسمة القابلة للإلغاء.</p></li>
-<li><p>لا تدعم حقول JSON و Array القيم الافتراضية.</p></li>
-<li><p>يمكن تكوين القيم الافتراضية أو السمة القابلة للإلغاء فقط أثناء إنشاء المجموعة ولا يمكن تعديلها بعد ذلك.</p></li>
-<li><p>لا يمكن استخدام الحقول التي تم تمييزها على أنها قابلة للإلغاء كمفاتيح تقسيم. لمزيد من المعلومات حول مفاتيح التقسيم، راجع <a href="/docs/ar/use-partition-key.md">استخدام مفتاح التقسيم</a>.</p></li>
-<li><p>عند إنشاء فهرس على حقل قياسي مع تمكين السمة القابلة للإلغاء، سيتم استبعاد القيم الفارغة من الفهرس.</p></li>
-<li><p><strong>حقول JSON و ARRAY</strong>: عند استخدام المشغلين <code translate="no">IS NULL</code> أو <code translate="no">IS NOT NULL</code> للتصفية على حقول JSON أو ARRAY، يعمل هذان المشغلان على مستوى العمود، مما يشير إلى أنهما يقيمان فقط ما إذا كان كائن JSON أو المصفوفة بأكملها فارغة. على سبيل المثال، إذا كان أحد المفاتيح داخل كائن JSON فارغًا، فلن يتعرف عليه عامل التصفية <code translate="no">IS NULL</code>. لمزيد من المعلومات، راجع <a href="/docs/ar/basic-operators.md">المعاملات الأساسية</a>.</p></li>
+<li><p>لا تدعم حقول المتجهات التي تسمح بقيم فارغة <code translate="no">IS NULL</code> أو تعبيرات التصفية <code translate="no">IS NOT NULL</code>. لا يمكنك تصفية الكيانات بشكل صريح استنادًا إلى ما إذا كانت قيمة الحقل المتجه NULL.</p></li>
+<li><p>حقول<a href="/docs/ar/array-of-structs.md">صفيف الهياكل</a> لا تدعم القيم الفارغة. لا يمكنك وضع علامة على حقل صفيف الهياكل أو أي حقل متداخل داخله على أنه قابل للإلغاء.</p></li>
+<li><p>يتم تعريف السمة القابلة للإلغاء عند إنشاء الحقل ولا يمكن تعديلها بعد ذلك. لا يمكنك تمكين أو تعطيل قابلية البطلان لحقل موجود.</p></li>
+<li><p>لا يمكن استخدام الحقول التي تم وضع علامة لاغية عليها كمفاتيح تقسيم. يجب أن تحتوي حقول مفاتيح التقسيم دائمًا على قيم صحيحة وغير فارغة. لمزيد من المعلومات، راجع <a href="/docs/ar/use-partition-key.md">استخدام مفتاح التقسيم</a>.</p></li>
 </ul>
-<h2 id="Nullable-attribute" class="common-anchor-header">سمة لاغية<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
+<h2 id="What-is-a-nullable-field" class="common-anchor-header">ما هو الحقل القابل للإلغاء؟<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,8 +63,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تسمح لك السمة <code translate="no">nullable</code> بتخزين قيم فارغة في مجموعة، مما يوفر مرونة عند التعامل مع بيانات غير معروفة.</p>
-<h3 id="Set-the-nullable-attribute" class="common-anchor-header">تعيين السمة لاغية<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
+    </button></h2><p>في Milvus، يتم التحكم فيما إذا كان الحقل مسموحًا بتخزين قيمة فارغة أم لا بواسطة سمة حقل على مستوى المخطط تسمى <code translate="no">nullable</code>.</p>
+<p>عندما يتم تعريف الحقل بـ <code translate="no">nullable=True</code> ، يسمح ميلفوس بأن تكون قيمة الحقل مفقودة أثناء استيعاب البيانات. في الممارسة العملية، يتعامل Milvus مع المدخلين التاليين على أنهما متكافئان ويخزن قيمة الحقل على أنها NULL:</p>
+<ul>
+<li>يتم حذف الحقل من كيان الإدخال.</li>
+<li>يتم تعيين الحقل بشكل صريح إلى NULL (على سبيل المثال، <code translate="no">None</code> في Python).</li>
+</ul>
+<p>إذا لم يتم تعريف الحقل على أنه غير قابل للإلغاء (السلوك الافتراضي)، يجب على كل كيان توفير قيمة صالحة لهذا الحقل. سيؤدي حذف الحقل أو تعيين قيمة فارغة بشكل صريح إلى فشل عملية الإدراج أو الاستيراد.</p>
+<p>يتم دعم السمة القابلة للإلغاء لكل من <strong>الحقول القياسية والمتجهة</strong> في مخطط المجموعة. ومع ذلك، لا تدعم حقول صفيف الهياكل السمة القابلة للإلغاء.</p>
+<div class="alert note">
+<p>تحدد قابلية الإلغاء ما إذا كانت قيمة الحقل مفقودة أم لا؛ ولا تحدد القيمة المستخدمة عندما يكون الحقل مفقودًا.</p>
+<ul>
+<li>إذا تم تكوين حقل قابل للإلغاء بدون قيمة افتراضية، فإن حذف الحقل ينتج عنه قيمة فارغة مخزنة.</li>
+<li>إذا تم تكوين قيمة افتراضية، فقد يخزن ميلفوس القيمة الافتراضية بدلاً من ذلك. لمزيد من التفاصيل، راجع <a href="/docs/ar/default-values.md">القيم الافتراضية</a>.</li>
+</ul>
+</div>
+<h2 id="Define-a-nullable-field-in-the-collection-schema" class="common-anchor-header">تعريف حقل قابل للإلغاء في مخطط المجموعة<button data-href="#Define-a-nullable-field-in-the-collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,77 +93,62 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>عند إنشاء مجموعة، استخدم <code translate="no">nullable=True</code> لتعريف الحقول القابلة للفراغ (الإعدادات الافتراضية إلى <code translate="no">False</code>). ينشئ المثال التالي مجموعة باسم <code translate="no">my_collection</code> ويضبط الحقل <code translate="no">age</code> على أنه قابل للإلغاء:</p>
+    </button></h2><p>لاستخدام الحقول القابلة للإلغاء، يجب تمكين السمة القابلة للإلغاء عند تعريف مخطط المجموعة.</p>
+<p>في هذا المثال، يحدد مخطط المجموعة حقلاً متجهًا باسم <code translate="no">embedding</code> مع <code translate="no">nullable=True</code>. يسمح هذا للكيانات في المجموعة بحذف قيمة المتجه أو تعيينها صراحةً إلى NULL أثناء استيعاب البيانات.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
-client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>)
-
-<span class="hljs-comment"># Define collection schema</span>
-schema = client.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_schema=<span class="hljs-literal">True</span>,
+client = MilvusClient(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;age&quot;</span>, datatype=DataType.INT64, nullable=<span class="hljs-literal">True</span>) <span class="hljs-comment"># Nullable field</span>
+<span class="hljs-comment"># Define schema fields</span>
+schema = client.create_schema()
+schema.add_field(<span class="hljs-string">&quot;id&quot;</span>, DataType.INT64, is_primary=<span class="hljs-literal">True</span>)  <span class="hljs-comment"># Primary field</span>
+schema.add_field(
+    field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
+    datatype=DataType.FLOAT_VECTOR,
+    dim=<span class="hljs-number">4</span>,
+<span class="highlighted-wrapper-line">    nullable=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Enable the nullable attribute; defaults to False</span></span>
+)
 
-<span class="hljs-comment"># Set index params</span>
-index_params = client.prepare_index_params()
-index_params.add_index(field_name=<span class="hljs-string">&quot;vector&quot;</span>, index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, metric_type=<span class="hljs-string">&quot;L2&quot;</span>)
-
-<span class="hljs-comment"># Create collection</span>
-client.create_collection(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, schema=schema, index_params=index_params)
+client.create_collection(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    schema=schema,
+)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
-<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
-<span class="hljs-keyword">import</span> java.util.*;
+<span class="hljs-keyword">import</span> java.util.Collections;
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
         .build());
-        
-CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
-schema.setEnableDynamicField(<span class="hljs-literal">true</span>);
 
+CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
 schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
         .dataType(DataType.Int64)
         .isPrimaryKey(<span class="hljs-literal">true</span>)
         .build());
-
 schema.addField(AddFieldReq.builder()
-        .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
+        .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
         .dataType(DataType.FloatVector)
-        .dimension(<span class="hljs-number">5</span>)
-        .build());
-
-schema.addField(AddFieldReq.builder()
-        .fieldName(<span class="hljs-string">&quot;age&quot;</span>)
-        .dataType(DataType.Int64)
+        .dimension(<span class="hljs-number">4</span>)
         .isNullable(<span class="hljs-literal">true</span>)
-        .build());
-
-List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-Map&lt;String,Object&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.L2)
         .build());
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .collectionSchema(schema)
-        .indexParams(indexes)
+        .indexParams(Collections.emptyList())
         .build();
 client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
@@ -162,45 +161,35 @@ client.createCollection(requestCreate);
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
   <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-  <span class="hljs-attr">schema</span>: [
+  <span class="hljs-attr">fields</span>: [
     {
       <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;id&quot;</span>,
+      <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
       <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,
-      <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">int64</span>,
+      <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span>,
     },
-    { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>, <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span> },
-
-    { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>, <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span> },
-  ],
-
-  <span class="hljs-attr">index_params</span>: [
     {
-      <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;vector_inde&quot;</span>,
-      <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;vector&quot;</span>,
-      <span class="hljs-attr">metric_type</span>: <span class="hljs-title class_">MetricType</span>.<span class="hljs-property">L2</span>,
-      <span class="hljs-attr">index_type</span>: <span class="hljs-title class_">IndexType</span>.<span class="hljs-property">AUTOINDEX</span>,
+      <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
+      <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,
+      <span class="hljs-attr">dim</span>: <span class="hljs-number">4</span>,
+      <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>,
     },
   ],
 });
-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
-
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
-    Address: milvusAddr,
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
@@ -214,74 +203,87 @@ schema.WithField(entity.NewField().
     WithDataType(entity.FieldTypeInt64).
     WithIsPrimaryKey(<span class="hljs-literal">true</span>),
 ).WithField(entity.NewField().
-    WithName(<span class="hljs-string">&quot;vector&quot;</span>).
+    WithName(<span class="hljs-string">&quot;embedding&quot;</span>).
     WithDataType(entity.FieldTypeFloatVector).
-    WithDim(<span class="hljs-number">5</span>),
-).WithField(entity.NewField().
-    WithName(<span class="hljs-string">&quot;age&quot;</span>).
-    WithDataType(entity.FieldTypeInt64).
+    WithDim(<span class="hljs-number">4</span>).
     WithNullable(<span class="hljs-literal">true</span>),
 )
 
-indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>,
-    index.NewAutoIndex(index.MetricType(entity.L2)))
-
 err = client.CreateCollection(ctx,
-    milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
-        WithIndexOptions(indexOption))
+    milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> pkField=<span class="hljs-string">&#x27;{
-    &quot;fieldName&quot;: &quot;id&quot;,
-    &quot;dataType&quot;: &quot;Int64&quot;,
-    &quot;isPrimary&quot;: true
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+
+<span class="hljs-built_in">export</span> pkField=<span class="hljs-string">&#x27;{
+  &quot;fieldName&quot;: &quot;id&quot;,
+  &quot;dataType&quot;: &quot;Int64&quot;,
+  &quot;isPrimary&quot;: true
 }&#x27;</span>
 
-<span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{
-    &quot;fieldName&quot;: &quot;vector&quot;,
-    &quot;dataType&quot;: &quot;FloatVector&quot;,
-    &quot;elementTypeParams&quot;: {
-        &quot;dim&quot;: 5
-    }
+<span class="hljs-built_in">export</span> embeddingField=<span class="hljs-string">&#x27;{
+  &quot;fieldName&quot;: &quot;embedding&quot;,
+  &quot;dataType&quot;: &quot;FloatVector&quot;,
+  &quot;typeParams&quot;: {&quot;dim&quot;: &quot;4&quot;},
+  &quot;nullable&quot;: true
 }&#x27;</span>
-
-<span class="hljs-built_in">export</span> nullField=<span class="hljs-string">&#x27;{
-    &quot;fieldName&quot;: &quot;age&quot;,
-    &quot;dataType&quot;: &quot;Int64&quot;,
-    &quot;nullable&quot;: true
-}&#x27;</span>
-
-<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-    \&quot;autoID\&quot;: false,
-    \&quot;fields\&quot;: [
-        <span class="hljs-variable">$pkField</span>,
-        <span class="hljs-variable">$vectorField</span>,
-        <span class="hljs-variable">$nullField</span>
-    ]
-}&quot;</span>
-
-<span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
-        {
-            &quot;fieldName&quot;: &quot;vector&quot;,
-            &quot;metricType&quot;: &quot;L2&quot;,
-            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
-        }
-    ]&#x27;</span>
 
 curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&quot;{
+  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
-    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
-}&quot;</span>
+    \&quot;schema\&quot;: {
+      \&quot;fields\&quot;: [
+        <span class="hljs-variable">$pkField</span>,
+        <span class="hljs-variable">$embeddingField</span>
+      ]
+    }
+  }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">إدراج الكيانات<button data-href="#Insert-entities" class="anchor-icon" translate="no">
+<p>في هذا المخطط</p>
+<ul>
+<li>يتم تمييز الحقل <code translate="no">embedding</code> بشكل صريح على أنه قابل للإلغاء.</li>
+<li>يجوز للكيانات حذف الحقل <code translate="no">embedding</code> أو تعيين قيمة فارغة له أثناء الإدراج.</li>
+<li>يتم تحديد قرار السماح بالقيم الفارغة في وقت إنشاء المجموعة.</li>
+</ul>
+<p>للتوضيح، تركز الأمثلة التالية على الحقل المتجه القابل للفراغ (<code translate="no">embedding</code>). يعد تحديد الحقول القياسية القابلة للإلغاء اختياريًا وغير مطلوب لاتباع بقية هذا الدليل.</p>
+<p><details>
+<summary>اختياري: تعريف الحقل القياسي القابل للإلغاء</summary></p>
+<p>يمكن أيضًا تعريف الحقول العددية على أنها قابلة للإلغاء باستخدام نفس السمة <code translate="no">nullable</code> واتباع نفس القواعد أثناء الاستيعاب. على سبيل المثال:</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">schema.add_field(
+    field_name=<span class="hljs-string">&quot;age&quot;</span>,
+    datatype=DataType.INT64,
+<span class="highlighted-wrapper-line">    nullable=<span class="hljs-literal">True</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;age&quot;</span>)
+        .dataType(DataType.Int64)
+        .isNullable(<span class="hljs-literal">true</span>)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Add to the fields array when calling createCollection:</span>
+<span class="hljs-comment">// { name: &quot;age&quot;, data_type: DataType.Int64, nullable: true },</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;age&quot;</span>).
+    WithDataType(entity.FieldTypeInt64).
+    WithNullable(<span class="hljs-literal">true</span>),
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Add another field object to the schema &quot;fields&quot; array, for example:</span>
+<span class="hljs-comment"># { &quot;fieldName&quot;: &quot;age&quot;, &quot;dataType&quot;: &quot;Int64&quot;, &quot;nullable&quot;: true }</span>
+<button class="copy-code-btn"></button></code></pre>
+<p></details></p>
+<h2 id="Insert-behavior-with-missing-or-NULL-values" class="common-anchor-header">سلوك الإدراج مع القيم المفقودة أو الفارغة<button data-href="#Insert-behavior-with-missing-or-NULL-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -296,28 +298,42 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>عندما تقوم بإدراج بيانات في حقل قابل للإلغاء، قم بإدراج بيانات لاغية أو احذف هذا الحقل مباشرةً:</p>
+    </button></h2><p>بمجرد تعريف الحقل على أنه قابل للإلغاء في مخطط المجموعة، يسمح Milvus بأن تكون قيمة الحقل مفقودة أو يتم تعيينها صراحةً إلى NULL أثناء استيعاب البيانات.</p>
+<p>يقوم المثال أدناه بإدراج ثلاثة كيانات في المجموعة التي تم إنشاؤها في <a href="#define-a-nullable-field-in-the-collection-schema">تحديد حقل قابل للفراغ في مخطط المجموعة،</a> مما يوضح هذه الحالات المختلفة.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span>},
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-literal">None</span>},
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>]}
+    {
+        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>],
+    },
+    {
+        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>,
+        <span class="hljs-string">&quot;embedding&quot;</span>: <span class="hljs-literal">None</span>,  <span class="hljs-comment"># Explicitly set to NULL</span>
+    },
+    {
+        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">3</span>,  <span class="hljs-comment"># Field omitted → stored as NULL</span>
+    },
 ]
 
-client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
+client.insert(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    data=data,
+)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
-
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;
 
+<span class="hljs-keyword">import</span> java.util.ArrayList;
+<span class="hljs-keyword">import</span> java.util.List;
+
 List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 <span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
-rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 1, \&quot;vector\&quot;: [0.1, 0.2, 0.3, 0.4, 0.5], \&quot;age\&quot;: 30}&quot;</span>, JsonObject.class));
-rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 2, \&quot;vector\&quot;: [0.2, 0.3, 0.4, 0.5, 0.6], \&quot;age\&quot;: null}&quot;</span>, JsonObject.class));
-rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 3, \&quot;vector\&quot;: [0.3, 0.4, 0.5, 0.6, 0.7]}&quot;</span>, JsonObject.class));
+rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 1, \&quot;embedding\&quot;: [0.1, 0.2, 0.3, 0.4]}&quot;</span>, JsonObject.class));
+rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 2, \&quot;embedding\&quot;: null}&quot;</span>, JsonObject.class));
+rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 3}&quot;</span>, JsonObject.class));
 
 <span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -325,606 +341,185 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 3, \&q
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> data = [
-  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">vector</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>], <span class="hljs-attr">age</span>: <span class="hljs-number">30</span> },
-  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">vector</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>], <span class="hljs-attr">age</span>: <span class="hljs-literal">null</span> },
-  { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">vector</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>] },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>] },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">embedding</span>: <span class="hljs-literal">null</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span> },
 ];
 
-client.<span class="hljs-title function_">insert</span>({
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
   <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
   <span class="hljs-attr">data</span>: data,
 });
-
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">column, _ := column.NewNullableColumnInt64(<span class="hljs-string">&quot;age&quot;</span>,
-    []<span class="hljs-type">int64</span>{<span class="hljs-number">30</span>},
-    []<span class="hljs-type">bool</span>{<span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>})
-
-_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
-    WithInt64Column(<span class="hljs-string">&quot;id&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>}).
-    WithFloatVectorColumn(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-number">5</span>, [][]<span class="hljs-type">float32</span>{
-        {<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>},
-        {<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>},
-        {<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>},
-    }).
-    WithColumns(column),
-)
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle err</span>
-}
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
-    &quot;data&quot;: [
-        {&quot;id&quot;: 1, &quot;vector&quot;: [0.1, 0.2, 0.3, 0.4, 0.5], &quot;age&quot;: 30},
-        {&quot;id&quot;: 2, &quot;vector&quot;: [0.2, 0.3, 0.4, 0.5, 0.6], &quot;age&quot;: null}, 
-        {&quot;id&quot;: 3, &quot;vector&quot;: [0.3, 0.4, 0.5, 0.6, 0.7]} 
-    ],
-    &quot;collectionName&quot;: &quot;my_collection&quot;
-}&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-and-query-with-null-values" class="common-anchor-header">البحث والاستعلام بقيم فارغة<button data-href="#Search-and-query-with-null-values" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>عند استخدام الطريقة <code translate="no">search</code> ، إذا كان الحقل يحتوي على قيم <code translate="no">null</code> ، ستُرجع نتيجة البحث الحقل على أنه فارغ:</p>
-<div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">نودجيس</a> <a href="#go">جو جو</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">res = client.search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.128</span>]],
-    limit=<span class="hljs-number">2</span>,
-    search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">16</span>}},
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]
-)
-
-<span class="hljs-built_in">print</span>(res)
-
-<span class="hljs-comment"># Output</span>
-<span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.15838398039340973, &#x27;entity&#x27;: {&#x27;age&#x27;: 30, &#x27;id&#x27;: 1}}, {&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.28278401494026184, &#x27;entity&#x27;: {&#x27;age&#x27;: None, &#x27;id&#x27;: 2}}]&quot;] </span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
-
-Map&lt;String,Object&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-params.put(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-number">16</span>);
-<span class="hljs-type">SearchResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .annsField(<span class="hljs-string">&quot;vector&quot;</span>)
-        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span>})))
-        .topK(<span class="hljs-number">2</span>)
-        .searchParams(params)
-        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>))
-        .build());
-
-System.out.println(resp.getSearchResults());
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">//</span>
-<span class="hljs-comment">// [[SearchResp.SearchResult(entity={id=1, age=30}, score=0.0, id=1), SearchResp.SearchResult(entity={id=2, age=null}, score=0.050000004, id=2)]]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">search</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
-    <span class="hljs-attr">data</span>: [<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.5</span>],
-    <span class="hljs-attr">limit</span>: <span class="hljs-number">2</span>,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;age&#x27;</span>, <span class="hljs-string">&#x27;id&#x27;</span>],
-    <span class="hljs-attr">params</span>: {
-        <span class="hljs-attr">nprobe</span>: <span class="hljs-number">16</span>
-    }
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.128</span>}
-
-annParam := index.NewCustomAnnParam()
-annParam.WithExtraParam(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-number">16</span>)
-resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
-    <span class="hljs-number">2</span>,                    <span class="hljs-comment">// limit</span>
-    []entity.Vector{entity.FloatVector(queryVector)},
-).WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>).
-    WithAnnParam(annParam).
-    WithOutputFields(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
-}
-
-<span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
-    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
-    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
-    fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;age&quot;</span>).FieldData().GetScalars())
-}
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;my_collection&quot;,
-    &quot;data&quot;: [
-        [0.1, -0.2, 0.3, 0.4, 0.5]
-    ],
-    &quot;annsField&quot;: &quot;vector&quot;,
-    &quot;limit&quot;: 2,
-    &quot;outputFields&quot;: [&quot;id&quot;, &quot;age&quot;]
-}&#x27;</span>
-
-<span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;distance&quot;:0.16000001,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;distance&quot;:0.28999996,&quot;id&quot;:2}]}</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>عند استخدام الأسلوب <code translate="no">query</code> للتصفية العددية، تكون نتائج التصفية للقيم الفارغة كلها خاطئة، مما يشير إلى أنه لن يتم تحديدها.</p>
-<div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Reviewing previously inserted data:</span>
-<span class="hljs-comment"># {&quot;id&quot;: 1, &quot;vector&quot;: [0.1, 0.2, ..., 0.128], &quot;age&quot;: 30}</span>
-<span class="hljs-comment"># {&quot;id&quot;: 2, &quot;vector&quot;: [0.2, 0.3, ..., 0.129], &quot;age&quot;: None}</span>
-<span class="hljs-comment"># {&quot;id&quot;: 3, &quot;vector&quot;: [0.3, 0.4, ..., 0.130], &quot;age&quot;: None}  # Omitted age  column is treated as None</span>
-
-results = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;age &gt;= 0&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]
-)
-
-<span class="hljs-comment"># Example output:</span>
-<span class="hljs-comment"># [</span>
-<span class="hljs-comment">#     {&quot;id&quot;: 1, &quot;age&quot;: 30}</span>
-<span class="hljs-comment"># ]</span>
-<span class="hljs-comment"># Note: Entities with `age` as `null` (id 2 and 3) will not appear in the result.</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
-
-<span class="hljs-type">QueryResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .filter(<span class="hljs-string">&quot;age &gt;= 0&quot;</span>)
-        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>))
-        .build());
-
-System.out.println(resp.getQueryResults());
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">//</span>
-<span class="hljs-comment">// [QueryResp.QueryResult(entity={id=1, age=30})]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>(
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;age &gt;= 0&quot;</span>,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]
-);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
-    WithFilter(<span class="hljs-string">&quot;age &gt;= 0&quot;</span>).
-    WithOutputFields(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
-}
-fmt.Println(<span class="hljs-string">&quot;id: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;id&quot;</span>).FieldData().GetScalars())
-fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;age&quot;</span>).FieldData().GetScalars())
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;my_collection&quot;,
-    &quot;filter&quot;: &quot;age &gt;= 0&quot;,
-    &quot;outputFields&quot;: [&quot;id&quot;, &quot;age&quot;]
-}&#x27;</span>
-
-<span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1}]}</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>لإرجاع كيانات بقيم <code translate="no">null</code> ، قم بالاستعلام بدون أي شرط تصفية عددية على النحو التالي:</p>
-<div class="alert note">
-<p>يقوم الأسلوب <code translate="no">query</code> ، عند استخدامه بدون أي شروط تصفية، باسترجاع جميع الكيانات في المجموعة، بما في ذلك الكيانات ذات القيم الفارغة. لتقييد عدد الكيانات التي تم إرجاعها، يجب تحديد المعلمة <code translate="no">limit</code>.</p>
-</div>
-<div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">null_results = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,     <span class="hljs-comment"># Query without any filtering condition</span>
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>],
-    limit=<span class="hljs-number">10</span>
-)
-
-<span class="hljs-comment"># Example output:</span>
-<span class="hljs-comment"># [{&quot;id&quot;: 2, &quot;age&quot;: None}, {&quot;id&quot;: 3, &quot;age&quot;: None}]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">QueryResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .filter(<span class="hljs-string">&quot;&quot;</span>)
-        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>))
-        .limit(<span class="hljs-number">10</span>)
-        .build());
-
-System.out.println(resp.getQueryResults());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>(
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;&quot;</span>,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>],
-    <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>
-);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
-    WithFilter(<span class="hljs-string">&quot;&quot;</span>).
-    WithLimit(<span class="hljs-number">10</span>).
-    WithOutputFields(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
-}
-fmt.Println(<span class="hljs-string">&quot;id: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;id&quot;</span>))
-fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;age&quot;</span>))
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;my_collection&quot;,
-    &quot;expr&quot;: &quot;&quot;,
-    &quot;outputFields&quot;: [&quot;id&quot;, &quot;age&quot;],
-    &quot;limit&quot;: 10
-}&#x27;</span>
-
-<span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;id&quot;:2},{&quot;age&quot;:null,&quot;id&quot;:3}]}</span>
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Default-values" class="common-anchor-header">القيم الافتراضية<button data-href="#Default-values" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>القيم الافتراضية هي قيم محددة مسبقًا للحقول العددية. إذا لم تقم بتوفير قيمة لحقل بقيم افتراضية أثناء الإدراج، يستخدم النظام تلقائيًا القيمة الافتراضية.</p>
-<h3 id="Set-default-values" class="common-anchor-header">تعيين القيم الافتراضية<button data-href="#Set-default-values" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>عند إنشاء مجموعة، استخدم المعلمة <code translate="no">default_value</code> لتحديد القيمة الافتراضية للحقل. يوضح المثال التالي كيفية تعيين القيمة الافتراضية <code translate="no">age</code> إلى <code translate="no">18</code> و <code translate="no">status</code> إلى <code translate="no">&quot;active&quot;</code>:</p>
-<div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">schema = client.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_schema=<span class="hljs-literal">True</span>,
-)
-
-schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;age&quot;</span>, datatype=DataType.INT64, default_value=<span class="hljs-number">18</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;status&quot;</span>, datatype=DataType.VARCHAR, default_value=<span class="hljs-string">&quot;active&quot;</span>, max_length=<span class="hljs-number">10</span>)
-
-index_params = client.prepare_index_params()
-index_params.add_index(field_name=<span class="hljs-string">&quot;vector&quot;</span>, index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, metric_type=<span class="hljs-string">&quot;L2&quot;</span>)
-
-client.create_collection(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, schema=schema, index_params=index_params)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
-<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
-
-<span class="hljs-keyword">import</span> java.util.*;
-
-CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
-schema.setEnableDynamicField(<span class="hljs-literal">true</span>);
-
-schema.addField(AddFieldReq.builder()
-        .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
-        .dataType(DataType.Int64)
-        .isPrimaryKey(<span class="hljs-literal">true</span>)
-        .build());
-
-schema.addField(AddFieldReq.builder()
-        .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
-        .dataType(DataType.FloatVector)
-        .dimension(<span class="hljs-number">5</span>)
-        .build());
-
-schema.addField(AddFieldReq.builder()
-        .fieldName(<span class="hljs-string">&quot;age&quot;</span>)
-        .dataType(DataType.Int64)
-        .defaultValue(<span class="hljs-number">18L</span>)
-        .build());
-
-schema.addField(AddFieldReq.builder()
-        .fieldName(<span class="hljs-string">&quot;status&quot;</span>)
-        .dataType(DataType.VarChar)
-        .maxLength(<span class="hljs-number">10</span>)
-        .defaultValue(<span class="hljs-string">&quot;active&quot;</span>)
-        .build());
-
-List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-Map&lt;String,Object&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.L2)
-        .build());
-
-<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .collectionSchema(schema)
-        .indexParams(indexes)
-        .build();
-client.createCollection(requestCreate);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
-
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
-  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-  <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span>,
-});
-
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-  <span class="hljs-attr">schema</span>: [
-    {
-      <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;id&quot;</span>,
-      <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,
-      <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">int64</span>,
-    },
-    { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>, <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span> },
-    { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>, <span class="hljs-attr">default_value</span>: <span class="hljs-number">18</span> },
-    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;status&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>, <span class="hljs-attr">max_length</span>: <span class="hljs-number">30</span>, <span class="hljs-attr">default_value</span>: <span class="hljs-string">&#x27;active&#x27;</span>},
-  ],
-
-  <span class="hljs-attr">index_params</span>: [
-    {
-      <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;vector_inde&quot;</span>,
-      <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;vector&quot;</span>,
-      <span class="hljs-attr">metric_type</span>: <span class="hljs-title class_">MetricType</span>.<span class="hljs-property">L2</span>,
-      <span class="hljs-attr">index_type</span>: <span class="hljs-title class_">IndexType</span>.<span class="hljs-property">AUTOINDEX</span>,
-    },
-  ],
-});
-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+<span class="hljs-comment">// Assumes `client` is the Milvus client from the Go schema example above.</span>
+ctx := context.Background()
+
+rows := []any{
+    <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-type">int64</span>(<span class="hljs-number">1</span>), <span class="hljs-string">&quot;embedding&quot;</span>: []<span class="hljs-type">float32</span>{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>}},
+    <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-type">int64</span>(<span class="hljs-number">2</span>), <span class="hljs-string">&quot;embedding&quot;</span>: <span class="hljs-literal">nil</span>},
+    <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-type">int64</span>(<span class="hljs-number">3</span>)},
+}
+
+_, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>, rows...))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;data&quot;: [
+      {&quot;id&quot;: 1, &quot;embedding&quot;: [0.1, 0.2, 0.3, 0.4]},
+      {&quot;id&quot;: 2, &quot;embedding&quot;: null},
+      {&quot;id&quot;: 3}
+    ]
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>في هذا المثال</p>
+<ul>
+<li><strong>معرف</strong> الكيان <strong>= 1</strong> يوفر قيمة متجه صالحة.</li>
+<li><strong>معرف</strong> الكيان <strong>= 2</strong> يعين صراحةً قيمة فارغة للحقل <code translate="no">embedding</code>.</li>
+<li><strong>معرّف</strong> الكيان <strong>= 3</strong> يحذف الحقل <code translate="no">embedding</code> بالكامل؛ حيث يخزنه ميلفوس على أنه NULL.</li>
+</ul>
+<h2 id="Index-behavior-on-nullable-fields" class="common-anchor-header">سلوك الفهرس على الحقول القابلة للإلغاء<button data-href="#Index-behavior-on-nullable-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>بعد إدراج البيانات، يمكنك إنشاء فهرس على حقل قابل للإلغاء كالمعتاد. الفرق الرئيسي هو كيفية تعامل Milvus مع القيم الفارغة أثناء إنشاء الفهرس:</p>
+<ul>
+<li>تتم إضافة الكيانات ذات القيم غير الفارغة فقط إلى الفهرس.</li>
+<li>يتم تخطي الكيانات ذات القيم الفارغة ولا تشارك في بناء الفهرس.</li>
+</ul>
+<p>بالنسبة لحقل المتجهات القابلة للفراغ، هذا يعني أن الكيانات ذات المتجهات الصالحة فقط تصبح قابلة للبحث عن طريق تشابه المتجهات.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index parameters</span>
+index_params = client.prepare_index_params()
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
+)
+
+<span class="hljs-comment"># Create index</span>
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    index_params=index_params,
+)
+
+<span class="hljs-comment"># Load collection for future search operations</span>
+client.load_collection(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.LoadCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
+
+<span class="hljs-keyword">import</span> java.util.ArrayList;
+<span class="hljs-keyword">import</span> java.util.List;
+
+List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+indexes.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;embedding_idx&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.COSINE)
+        .build());
+
+client.createIndex(CreateIndexReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .indexParams(indexes)
+        .build());
+
+<span class="hljs-type">LoadCollectionReq</span> <span class="hljs-variable">loadReq</span> <span class="hljs-operator">=</span> LoadCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .build();
+client.loadCollection(loadReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+  <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
+  <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;embedding_idx&quot;</span>,
+  <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+  <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;COSINE&quot;</span>,
+});
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">loadCollection</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
 )
 
-ctx, cancel := context.WithCancel(context.Background())
-<span class="hljs-keyword">defer</span> cancel()
+<span class="hljs-comment">// Assumes `client` is the Milvus client from the Go schema example above.</span>
+ctx := context.Background()
 
-milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>,
+    index.NewAutoIndex(entity.COSINE))
 
-client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
-    Address: milvusAddr,
-})
+_, err := client.CreateIndex(ctx, indexOption)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
 }
 
-schema := entity.NewSchema()
-schema.WithField(entity.NewField().
-    WithName(<span class="hljs-string">&quot;id&quot;</span>).
-    WithDataType(entity.FieldTypeInt64).
-    WithIsPrimaryKey(<span class="hljs-literal">true</span>),
-).WithField(entity.NewField().
-    WithName(<span class="hljs-string">&quot;vector&quot;</span>).
-    WithDataType(entity.FieldTypeFloatVector).
-    WithDim(<span class="hljs-number">5</span>),
-).WithField(entity.NewField().
-    WithName(<span class="hljs-string">&quot;age&quot;</span>).
-    WithDataType(entity.FieldTypeInt64).
-    WithDefaultValueLong(<span class="hljs-number">18</span>),
-).WithField(entity.NewField().
-    WithName(<span class="hljs-string">&quot;status&quot;</span>).
-    WithDataType(entity.FieldTypeVarChar).
-    WithMaxLength(<span class="hljs-number">10</span>).
-    WithDefaultValueString(<span class="hljs-string">&quot;active&quot;</span>),
-)
-
-indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>,
-    index.NewAutoIndex(index.MetricType(entity.L2)))
-
-err = client.CreateCollection(ctx,
-    milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
-        WithIndexOptions(indexOption))
+_, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
-}
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> pkField=<span class="hljs-string">&#x27;{
-    &quot;fieldName&quot;: &quot;id&quot;,
-    &quot;dataType&quot;: &quot;Int64&quot;,
-    &quot;isPrimary&quot;: true
-}&#x27;</span>
-
-<span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{
-    &quot;fieldName&quot;: &quot;vector&quot;,
-    &quot;dataType&quot;: &quot;FloatVector&quot;,
-    &quot;elementTypeParams&quot;: {
-        &quot;dim&quot;: 5
-    }
-}&#x27;</span>
-
-<span class="hljs-built_in">export</span> defaultValueField1=<span class="hljs-string">&#x27;{
-    &quot;fieldName&quot;: &quot;age&quot;,
-    &quot;dataType&quot;: &quot;Int64&quot;,
-    &quot;defaultValue&quot;: 18
-}&#x27;</span>
-
-<span class="hljs-built_in">export</span> defaultValueField2=<span class="hljs-string">&#x27;{
-    &quot;fieldName&quot;: &quot;status&quot;,
-    &quot;dataType&quot;: &quot;VarChar&quot;,
-    &quot;defaultValue&quot;: &quot;active&quot;,
-    &quot;elementTypeParams&quot;: {
-        &quot;max_length&quot;: 10
-    }
-}&#x27;</span>
-
-<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-    \&quot;autoID\&quot;: false,
-    \&quot;fields\&quot;: [
-        <span class="hljs-variable">$pkField</span>,
-        <span class="hljs-variable">$vectorField</span>,
-        <span class="hljs-variable">$defaultValueField1</span>,
-        <span class="hljs-variable">$defaultValueField2</span>
-    ]
-}&quot;</span>
-
-<span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
-        {
-            &quot;fieldName&quot;: &quot;vector&quot;,
-            &quot;metricType&quot;: &quot;L2&quot;,
-            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
-        }
-    ]&#x27;</span>
-
-curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
-    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
-}&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">إدراج الكيانات<button data-href="#Insert-entities" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>عند إدراج البيانات، إذا حذفت الحقول ذات القيمة الافتراضية أو عيّنت قيمتها إلى لا شيء، يستخدم النظام القيمة الافتراضية:</p>
-<div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">data = [
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, ..., <span class="hljs-number">0.128</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span>, <span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-string">&quot;premium&quot;</span>},
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, ..., <span class="hljs-number">0.129</span>]},  <span class="hljs-comment"># `age` and `status` use default values</span>
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, ..., <span class="hljs-number">0.130</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-literal">None</span>},  <span class="hljs-comment"># `status` uses default value</span>
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, ..., <span class="hljs-number">0.131</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-literal">None</span>, <span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-string">&quot;inactive&quot;</span>}  <span class="hljs-comment"># `age` uses default value</span>
-]
-
-client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
-<span class="hljs-keyword">import</span> com.google.gson.JsonObject;
-
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;
-
-List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
-rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 1, \&quot;vector\&quot;: [0.1, 0.2, 0.3, 0.4, 0.5], \&quot;age\&quot;: 30, \&quot;status\&quot;: \&quot;premium\&quot;}&quot;</span>, JsonObject.class));
-rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 2, \&quot;vector\&quot;: [0.2, 0.3, 0.4, 0.5, 0.6]}&quot;</span>, JsonObject.class));
-rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 3, \&quot;vector\&quot;: [0.3, 0.4, 0.5, 0.6, 0.7], \&quot;age\&quot;: 25, \&quot;status\&quot;: null}&quot;</span>, JsonObject.class));
-rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 4, \&quot;vector\&quot;: [0.4, 0.5, 0.6, 0.7, 0.8], \&quot;age\&quot;: null, \&quot;status\&quot;: \&quot;inactive\&quot;}&quot;</span>, JsonObject.class));
-
-<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .data(rows)
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> data = [
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span>, <span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-string">&quot;premium&quot;</span>},
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>]}, 
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-literal">null</span>}, 
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-literal">null</span>, <span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-string">&quot;inactive&quot;</span>}  
-];
-
-client.<span class="hljs-title function_">insert</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-  <span class="hljs-attr">data</span>: data,
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">column1, _ := column.NewNullableColumnInt64(<span class="hljs-string">&quot;age&quot;</span>,
-    []<span class="hljs-type">int64</span>{<span class="hljs-number">30</span>, <span class="hljs-number">25</span>},
-    []<span class="hljs-type">bool</span>{<span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>})
-column2, _ := column.NewNullableColumnVarChar(<span class="hljs-string">&quot;status&quot;</span>,
-    []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;premium&quot;</span>, <span class="hljs-string">&quot;inactive&quot;</span>},
-    []<span class="hljs-type">bool</span>{<span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>})
-
-_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
-    WithInt64Column(<span class="hljs-string">&quot;id&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>}).
-    WithFloatVectorColumn(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-number">5</span>, [][]<span class="hljs-type">float32</span>{
-        {<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>},
-        {<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>},
-        {<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>},
-        {<span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>},
-    }).
-    WithColumns(column1, column2),
-)
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle err</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
-    &quot;data&quot;: [
-        {&quot;id&quot;: 1, &quot;vector&quot;: [0.1, 0.2, 0.3, 0.4, 0.5], &quot;age&quot;: 30, &quot;status&quot;: &quot;premium&quot;},
-        {&quot;id&quot;: 2, &quot;vector&quot;: [0.2, 0.3, 0.4, 0.5, 0.6]},
-        {&quot;id&quot;: 3, &quot;vector&quot;: [0.3, 0.4, 0.5, 0.6, 0.7], &quot;age&quot;: 25, &quot;status&quot;: null}, 
-        {&quot;id&quot;: 4, &quot;vector&quot;: [0.4, 0.5, 0.6, 0.7, 0.8], &quot;age&quot;: null, &quot;status&quot;: &quot;inactive&quot;}      
-    ],
-    &quot;collectionName&quot;: &quot;my_collection&quot;
-}&#x27;</span>
+  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;indexParams&quot;: [
+      {
+        &quot;fieldName&quot;: &quot;embedding&quot;,
+        &quot;metricType&quot;: &quot;COSINE&quot;,
+        &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+      }
+    ]
+  }&#x27;</span>
+
+curl --request POST \
+  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -d <span class="hljs-string">&#x27;{&quot;collectionName&quot;: &quot;my_collection&quot;}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<p>لمزيد من المعلومات حول كيفية تفعيل إعدادات القيمة الفارغة والافتراضية، راجع <a href="/docs/ar/nullable-and-default.md#Applicable-rules">القواعد القابلة للتطبيق</a>.</p>
-</div>
-<h3 id="Search-and-query-with-default-values" class="common-anchor-header">البحث والاستعلام بالقيم الافتراضية<button data-href="#Search-and-query-with-default-values" class="anchor-icon" translate="no">
+<p>في هذه المرحلة</p>
+<ul>
+<li>يتم فهرسة الكيانات التي تحتوي على قيم تضمين صالحة وجاهزة للبحث.</li>
+<li>تظل الكيانات التي يكون تضمينها فارغًا في المجموعة، ولكن لا يتم تضمينها في فهرس المتجهات.</li>
+</ul>
+<h2 id="Search-behavior-with-nullable-fields" class="common-anchor-header">سلوك البحث مع الحقول القابلة للإلغاء<button data-href="#Search-behavior-with-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -939,203 +534,103 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يتم التعامل مع الكيانات التي تحتوي على قيم افتراضية مثل أي كيانات أخرى أثناء عمليات البحث المتجه والتصفية القياسية. يمكنك تضمين القيم الافتراضية كجزء من عمليات <code translate="no">search</code> و <code translate="no">query</code> الخاصة بك.</p>
-<p>على سبيل المثال، في عملية <code translate="no">search</code> ، سيتم تضمين الكيانات التي تحتوي على <code translate="no">age</code> على القيمة الافتراضية <code translate="no">18</code> في النتائج:</p>
+    </button></h2><p>عند إجراء عمليات بحث على حقل قابل للإلغاء، يقوم Milvus بتقييم الكيانات التي تحتوي على قيم غير فارغة للحقل المستخدم في البحث فقط. يتم تخطي الكيانات التي يكون حقلها المتجه فارغًا تلقائيًا.</p>
+<p>بالنسبة لحقل متجه قابل للإلغاء مثل <code translate="no">embedding</code> في هذا المثال:</p>
+<ul>
+<li>يتم تقييم وترتيب الكيانات ذات القيم المتجهة الصالحة فقط.</li>
+<li>لا تتسبب الكيانات ذات المتجهات الفارغة في حدوث أخطاء.</li>
+<li>إذا كان عدد المتجهات الصالحة أصغر من المطلوب <code translate="no">topK</code> (<code translate="no">limit</code>)، قد يُرجع ميلفوس نتائج أقل من <code translate="no">limit</code>.</li>
+</ul>
+<p>يقوم المثال التالي بإجراء بحث متجه على حقل المتجه القابل للفراغ <code translate="no">embedding</code>:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.5</span>]],
-    search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">16</span>}},
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;age == 18&quot;</span>,  <span class="hljs-comment"># 18 is the default value of the `age` field</span>
-    limit=<span class="hljs-number">10</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>]
+    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]],
+    anns_field=<span class="hljs-string">&quot;embedding&quot;</span>,
+    limit=<span class="hljs-number">3</span>,
+    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span>},
+    output_fields=[<span class="hljs-string">&quot;embedding&quot;</span>],
 )
 
 <span class="hljs-built_in">print</span>(res)
-
-<span class="hljs-comment"># Output</span>
-<span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.050000004, &#x27;entity&#x27;: {&#x27;id&#x27;: 2, &#x27;age&#x27;: 18, &#x27;status&#x27;: &#x27;active&#x27;}}, {&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.45000002, &#x27;entity&#x27;: {&#x27;id&#x27;: 4, &#x27;age&#x27;: 18, &#x27;status&#x27;: &#x27;inactive&#x27;}}]&quot;] </span>
-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
 
-Map&lt;String,Object&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-params.put(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-number">16</span>);
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+searchParams.put(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;COSINE&quot;</span>);
+
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .annsField(<span class="hljs-string">&quot;vector&quot;</span>)
-        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span>})))
-        .searchParams(params)
-        .filter(<span class="hljs-string">&quot;age == 18&quot;</span>)
-        .topK(<span class="hljs-number">10</span>)
-        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>))
+        .annsField(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>})))
+        .topK(<span class="hljs-number">3</span>)
+        .searchParams(searchParams)
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;embedding&quot;</span>))
         .build());
 
 System.out.println(resp.getSearchResults());
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">//</span>
-<span class="hljs-comment">// [[SearchResp.SearchResult(entity={id=2, age=18, status=active}, score=0.050000004, id=2), SearchResp.SearchResult(entity={id=4, age=18, status=inactive}, score=0.45000002, id=4)]]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">search</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
-    <span class="hljs-attr">data</span>: [<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.5</span>],
-    <span class="hljs-attr">limit</span>: <span class="hljs-number">2</span>,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;age&#x27;</span>, <span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;status&#x27;</span>],
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;age == 18&#x27;</span>,
-    <span class="hljs-attr">params</span>: {
-        <span class="hljs-attr">nprobe</span>: <span class="hljs-number">16</span>
-    }
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+  <span class="hljs-attr">data</span>: [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]],
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">search_params</span>: { <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;COSINE&quot;</span> },
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;embedding&quot;</span>],
 });
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.5</span>}
 
-annParam := index.NewCustomAnnParam()
-annParam.WithExtraParam(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-number">16</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+<span class="hljs-comment">// Assumes `client` is the Milvus client from the Go schema example above.</span>
+ctx := context.Background()
+
+query := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>}
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
-    <span class="hljs-number">10</span>,              <span class="hljs-comment">// limit</span>
-    []entity.Vector{entity.FloatVector(queryVector)},
-).WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>).
-    WithFilter(<span class="hljs-string">&quot;age == 18&quot;</span>).
-    WithAnnParam(annParam).
-    WithOutputFields(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>))
+    <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-number">3</span>,
+    []entity.Vector{entity.FloatVector(query)},
+).WithANNSField(<span class="hljs-string">&quot;embedding&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;embedding&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
 }
-
-<span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
-    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
-    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
-    fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;age&quot;</span>).FieldData().GetScalars())
-    fmt.Println(<span class="hljs-string">&quot;status: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;status&quot;</span>).FieldData().GetScalars())
-}
+fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
-    &quot;data&quot;: [
-        [0.1, 0.2, 0.3, 0.4, 0.5]
-    ],
-    &quot;annsField&quot;: &quot;vector&quot;,
-    &quot;limit&quot;: 10,
-    &quot;filter&quot;: &quot;age == 18&quot;,
-    &quot;outputFields&quot;: [&quot;id&quot;, &quot;age&quot;, &quot;status&quot;]
-}&#x27;</span>
-
-<span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:18,&quot;distance&quot;:0.050000004,&quot;id&quot;:2,&quot;status&quot;:&quot;active&quot;},{&quot;age&quot;:18,&quot;distance&quot;:0.45000002,&quot;id&quot;:4,&quot;status&quot;:&quot;inactive&quot;}]}</span>
+    &quot;data&quot;: [[0.1, 0.2, 0.3, 0.4]],
+    &quot;annsField&quot;: &quot;embedding&quot;,
+    &quot;limit&quot;: 3,
+    &quot;searchParams&quot;: {&quot;metricType&quot;: &quot;COSINE&quot;},
+    &quot;outputFields&quot;: [&quot;embedding&quot;]
+  }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>في عملية <code translate="no">query</code> ، يمكنك المطابقة أو التصفية حسب القيم الافتراضية مباشرةً:</p>
-<div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Query all entities where `age` equals the default value (18)</span>
-default_age_results = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;age == 18&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>]
-)
-
-<span class="hljs-comment"># Query all entities where `status` equals the default value (&quot;active&quot;)</span>
-default_status_results = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
-
-<span class="hljs-type">QueryResp</span> <span class="hljs-variable">ageResp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .filter(<span class="hljs-string">&quot;age == 18&quot;</span>)
-        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>))
-        .build());
-
-System.out.println(ageResp.getQueryResults());
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">//</span>
-<span class="hljs-comment">// [QueryResp.QueryResult(entity={id=2, age=18, status=active}), QueryResp.QueryResult(entity={id=4, age=18, status=inactive})]</span>
-
-<span class="hljs-type">QueryResp</span> <span class="hljs-variable">statusResp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .filter(<span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>)
-        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>))
-        .build());
-
-System.out.println(statusResp.getQueryResults());
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">//</span>
-<span class="hljs-comment">// [QueryResp.QueryResult(entity={id=2, age=18, status=active}), QueryResp.QueryResult(entity={id=3, age=25, status=active})]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Query all entities where `age` equals the default value (18)</span>
-<span class="hljs-keyword">const</span> default_age_results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>(
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;age == 18&quot;</span>,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>]
-);
-<span class="hljs-comment">// Query all entities where `status` equals the default value (&quot;active&quot;)</span>
-<span class="hljs-keyword">const</span> default_status_results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>(
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
-    WithFilter(<span class="hljs-string">&quot;age == 18&quot;</span>).
-    WithOutputFields(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
-}
-fmt.Println(<span class="hljs-string">&quot;id: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;id&quot;</span>).FieldData().GetScalars())
-fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;age&quot;</span>).FieldData().GetScalars())
-fmt.Println(<span class="hljs-string">&quot;status: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;status&quot;</span>).FieldData().GetScalars())
-
-resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
-    WithFilter(<span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>).
-    WithOutputFields(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
-}
-fmt.Println(<span class="hljs-string">&quot;id: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;id&quot;</span>).FieldData().GetScalars())
-fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;age&quot;</span>).FieldData().GetScalars())
-fmt.Println(<span class="hljs-string">&quot;status: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;status&quot;</span>).FieldData().GetScalars())
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;my_collection&quot;,
-    &quot;filter&quot;: &quot;age == 18&quot;,
-    &quot;outputFields&quot;: [&quot;id&quot;, &quot;age&quot;, &quot;status&quot;]
-}&#x27;</span>
-
-<span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:18,&quot;id&quot;:2,&quot;status&quot;:&quot;active&quot;},{&quot;age&quot;:18,&quot;id&quot;:4,&quot;status&quot;:&quot;inactive&quot;}]}</span>
-
-curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;my_collection&quot;,
-    &quot;filter&quot;: &quot;status == \&quot;active\&quot;&quot;,
-    &quot;outputFields&quot;: [&quot;id&quot;, &quot;age&quot;, &quot;status&quot;]
-}&#x27;</span>
-
-<span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:18,&quot;id&quot;:2,&quot;status&quot;:&quot;active&quot;},{&quot;age&quot;:25,&quot;id&quot;:3,&quot;status&quot;:&quot;active&quot;}]}</span>
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Applicable-rules" class="common-anchor-header">القواعد المطبقة<button data-href="#Applicable-rules" class="anchor-icon" translate="no">
+<p>في هذا البحث</p>
+<ul>
+<li>يتم اعتبار الكيانات التي تحتوي على قيم <code translate="no">embedding</code> غير فارغة فقط مرشحة.</li>
+<li>يتم استبعاد الكيانات ذات القيم الفارغة <code translate="no">embedding</code> من التقييم.</li>
+<li>يعتمد عدد النتائج التي تم إرجاعها على عدد المتجهات الصالحة الموجودة في المجموعة.</li>
+</ul>
+<h2 id="Query-and-filtering-implications" class="common-anchor-header">آثار الاستعلام والتصفية<button data-href="#Query-and-filtering-implications" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1150,54 +645,70 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يلخّص الجدول التالي سلوك الأعمدة القابلة للإلغاء والقيم الافتراضية ضمن مجموعات تكوين مختلفة. تحدد هذه القواعد كيفية تعامل Milvus مع البيانات عند محاولة إدراج قيم فارغة أو إذا لم يتم توفير قيم الحقل.</p>
+    </button></h2><p>تركز الأمثلة السابقة على حقول المتجهات. يصف هذا القسم كيف تتصرف القيم الفارغة في <strong>تعبيرات</strong> التصفية <strong>العددية</strong>.</p>
+<p>يمكن تعريف الحقول العددية باستخدام <code translate="no">nullable=True</code> واتباع نفس قواعد الاستيعاب مثل الحقول المتجهة. ومع ذلك، <strong>يتم دائمًا تقييم القيم القياسية الفارغة إلى خطأ في تعبيرات التصفية</strong>.</p>
+<p>على سبيل المثال، بالنظر إلى الحقل القياسي القابل للإلغاء <code translate="no">age</code> ، يختار المرشح التالي الكيانات التي يكون عمرها أكبر من 18 عامًا:</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; 18&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">expr</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;age &gt; 18&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> expr = <span class="hljs-string">&quot;age &gt; 18&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;age &gt; 18&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Use in query/search filter parameter, for example:</span>
+<span class="hljs-comment"># &quot;filter&quot;: &quot;age &gt; 18&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>تُستبعد الكيانات التي يكون فيها <code translate="no">age</code> هو NULL من النتائج لأن القيمة NULL لا تفي بشرط التصفية.</p>
+<p>وبالمثل، لا تتطابق عمليات التحقق من المساواة مع القيم الفارغة. على سبيل المثال:</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">expr = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">expr</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> expr = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">`status == &quot;active&quot;`</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># &quot;filter&quot;: &quot;status == \&quot;active\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>يتم استبعاد الكيانات التي يكون فيها <code translate="no">status</code> هو NULL من النتائج.</p>
+<h2 id="Nullable-fields-and-default-values" class="common-anchor-header">الحقول القابلة للإلغاء والقيم الافتراضية<button data-href="#Nullable-fields-and-default-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>عندما يتم تكوين كل من <code translate="no">nullable</code> و <code translate="no">default_value</code> لحقل ما، تحدد القواعد التالية كيفية تعامل ميلفوس مع المدخلات الفارغة أو قيم الحقل المفقودة أثناء الإدراج.</p>
 <table>
-   <tr>
-     <th><p>قابل للفراغ</p></th>
-     <th><p>القيمة الافتراضية</p></th>
-     <th><p>نوع القيمة الافتراضية</p></th>
-     <th><p>إدخال المستخدم</p></th>
-     <th><p>النتيجة</p></th>
-     <th><p>مثال</p></th>
-   </tr>
-   <tr>
-     <td><p>✅</p></td>
-     <td><p>✅</p></td>
-     <td><p>غير فارغة</p></td>
-     <td><p>لا شيء/لاغية</p></td>
-     <td><p>يستخدم القيمة الافتراضية</p></td>
-     <td><p>الحقل: <code translate="no">age</code> القيمة الافتراضية: <code translate="no">18</code></p><p>إدخال المستخدم: فارغة</p><p>النتيجة: يتم تخزينها كـ <code translate="no">18</code></p></td>
-   </tr>
-   <tr>
-     <td><p>✅</p></td>
-     <td><p>❌</p></td>
-     <td><p>-</p></td>
-     <td><p>لا شيء / فارغ</p></td>
-     <td><p>مخزنة على أنها لاغية</p></td>
-     <td><p>الحقل: <code translate="no">middle_name</code> القيمة الافتراضية: -</p><p>إدخال المستخدم: فارغ</p><p>النتيجة: مخزنة كقيمة لاغية</p></td>
-   </tr>
-   <tr>
-     <td><p>❌</p></td>
-     <td><p>✅</p></td>
-     <td><p>غير فارغة</p></td>
-     <td><p>لا شيء/لاغية</p></td>
-     <td><p>يستخدم القيمة الافتراضية</p></td>
-     <td><p>الحقل: <code translate="no">status</code> القيمة الافتراضية: <code translate="no">"active"</code></p><p>إدخال المستخدم: فارغة</p><p>النتيجة: مخزنة كـ <code translate="no">"active"</code></p></td>
-   </tr>
-   <tr>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
-     <td><p>-</p></td>
-     <td><p>لا شيء / فارغ</p></td>
-     <td><p>يلقي خطأ</p></td>
-     <td><p>الحقل: <code translate="no">email</code> القيمة الافتراضية: -</p><p>إدخال المستخدم: فارغ</p><p>النتيجة: العملية مرفوضة، يقوم النظام بإلقاء خطأ</p></td>
-   </tr>
-   <tr>
-     <td><p>❌</p></td>
-     <td><p>✅</p></td>
-     <td><p>فارغة</p></td>
-     <td><p>لا شيء / لاغية</p></td>
-     <td><p>يلقي خطأ</p></td>
-     <td><p>الحقل: <code translate="no">username</code> القيمة الافتراضية: فارغ</p><p>إدخال المستخدم: فارغ</p><p>النتيجة: العملية مرفوضة، يقوم النظام بإلقاء خطأ</p></td>
-   </tr>
+<thead>
+<tr><th>ممكّن قابل للفراغ</th><th>القيمة الافتراضية</th><th>إدخال المستخدم (فارغة أو محذوفة)</th><th>النتيجة</th></tr>
+</thead>
+<tbody>
+<tr><td>نعم (غير فارغة)</td><td>نعم (غير فارغة)</td><td>فارغة أو محذوفة</td><td>يستخدم القيمة الافتراضية</td></tr>
+<tr><td>نعم</td><td>غير موجودة</td><td>فارغة أو محذوفة</td><td>مخزنة ك NULLL</td></tr>
+<tr><td>لا يوجد</td><td>نعم (غير فارغة)</td><td>فارغة أو محذوفة</td><td>يستخدم القيمة الافتراضية</td></tr>
+<tr><td>لا يوجد</td><td>لا يوجد</td><td>فارغة أو محذوفة</td><td>إلقاء خطأ</td></tr>
+<tr><td>لا يوجد</td><td>نعم (افتراضي غير موجود)</td><td>فارغة أو محذوفة</td><td>إلقاء خطأ</td></tr>
+</tbody>
 </table>
+<p><strong>الخلاصة الرئيسية:</strong></p>
+<ul>
+<li>عندما يكون للحقل قيمة افتراضية غير فارغة، يتم استخدام تلك القيمة بغض النظر عما إذا كان <code translate="no">nullable</code> ممكّنًا أم لا.</li>
+<li>عندما <code translate="no">nullable=True</code> ولكن لم يتم تعيين قيمة افتراضية، يتم تخزين الحقل NULL.</li>
+<li>عند <code translate="no">nullable=False</code> ولم يتم تعيين قيمة افتراضية، يفشل الإدراج مع حدوث خطأ.</li>
+<li>تعيين قيمة افتراضية فارغة في حقل غير قابل للفراغ غير صالح ويتسبب في حدوث خطأ.</li>
+</ul>
+<p>للاطلاع على أمثلة كاملة واستخدام واجهة برمجة التطبيقات للقيم الافتراضية، راجع <a href="/docs/ar/default-values.md">القيم الافتراضية</a>.</p>

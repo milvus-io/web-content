@@ -336,7 +336,7 @@ summary: 'Erfahren Sie, wie Sie queryCoord für Milvus konfigurieren können.'
   </thead>
   <tbody>
     <tr>
-      <td>        die Zeilenzahlgewichtung, die beim Segmentausgleich zwischen QueryNodes verwendet wird    </td>
+      <td>        die Zeilenzahlgewichtung, die beim Ausgleich von Segmenten zwischen QueryNodes verwendet wird    </td>
       <td>0.4</td>
     </tr>
   </tbody>
@@ -599,7 +599,7 @@ summary: 'Erfahren Sie, wie Sie queryCoord für Milvus konfigurieren können.'
   </thead>
   <tbody>
     <tr>
-      <td>        der Schwellenwert der Ausgleichskosten; wenn die Differenz der Kosten des Clusters nach der Ausführung des Ausgleichsplans geringer ist als dieser Wert, wird der Plan nicht ausgeführt      </td>
+      <td>        der Schwellenwert der Ausgleichskosten; wenn die Differenz der Kosten des Clusters nach Ausführung des Ausgleichsplans unter diesem Wert liegt, wird der Plan nicht ausgeführt      </td>
       <td>0.001</td>
     </tr>
   </tbody>
@@ -1092,7 +1092,7 @@ summary: 'Erfahren Sie, wie Sie queryCoord für Milvus konfigurieren können.'
   </thead>
   <tbody>
     <tr>
-      <td>        das Intervall für das Flag "Check executed", um das Ziehen von Distanzen zu erzwingen      </td>
+      <td>        das Intervall, in dem das Flag "Check executed" zum Ziehen von Distanzen erzwungen wird    </td>
       <td>100</td>
     </tr>
   </tbody>

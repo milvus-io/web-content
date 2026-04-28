@@ -2,7 +2,7 @@
 id: use_ColPali_with_milvus.md
 summary: >-
   Dalam buku catatan ini, kami menyebut representasi multi-vektor semacam ini
-  sebagai "embeddings ColBERT" untuk keumuman. Namun, model sebenarnya yang
+  sebagai "penyematan ColBERT" untuk keumuman. Namun, model sebenarnya yang
   digunakan adalah model ColPali. Kami akan mendemonstrasikan cara menggunakan
   Milvus untuk pengambilan multi-vektor. Selanjutnya, kami akan memperkenalkan
   cara menggunakan ColPali untuk mengambil halaman berdasarkan kueri yang
@@ -102,8 +102,8 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>
 <li>Jika Anda menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang dikelola sepenuhnya untuk Milvus, sesuaikan <code translate="no">uri</code> dan <code translate="no">token</code>, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint dan API key</a> di Zilliz Cloud.</li>
 </ul>
 </div>
-<p>Kita akan mendefinisikan kelas MilvusColbertRetriever untuk membungkus klien Milvus untuk pengambilan data multi-vektor. Implementasi ini meratakan sematan ColBERT dan memasukkannya ke dalam sebuah koleksi, di mana setiap baris mewakili sematan individu dari daftar sematan ColBERT. Implementasi ini juga mencatat doc_id dan seq_id untuk melacak asal usul setiap embedding.</p>
-<p>Ketika mencari dengan daftar embedding ColBERT, beberapa pencarian akan dilakukan-satu untuk setiap embedding ColBERT. Doc_id yang diambil kemudian akan diduplikasi. Proses pemeringkatan ulang akan dilakukan, di mana penyematan lengkap untuk setiap doc_id diambil, dan skor MaxSim dihitung untuk menghasilkan hasil peringkat akhir.</p>
+<p>Kita akan mendefinisikan kelas MilvusColbertRetriever untuk membungkus klien Milvus untuk pengambilan data multi-vektor. Implementasi ini meratakan penyematan ColBERT dan memasukkannya ke dalam sebuah koleksi, di mana setiap baris mewakili penyematan individu dari daftar penyematan ColBERT. Implementasi ini juga mencatat doc_id dan seq_id untuk melacak asal usul setiap embedding.</p>
+<p>Ketika mencari dengan daftar penyematan ColBERT, beberapa pencarian akan dilakukan-satu untuk setiap penyematan ColBERT. Doc_id yang diambil kemudian akan diduplikasi. Proses pemeringkatan ulang akan dilakukan, di mana penyematan lengkap untuk setiap doc_id diambil, dan skor MaxSim dihitung untuk menghasilkan hasil peringkat akhir.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MilvusColbertRetriever</span>:
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, milvus_client, collection_name, dim=<span class="hljs-number">128</span></span>):
         <span class="hljs-comment"># Initialize the retriever with a Milvus client, collection name, and dimensionality of the vector embeddings.</span>

@@ -2,7 +2,7 @@
 id: configure_localstorage.md
 related_key: configure
 group: system_configuration.md
-summary: 了解如何為 Milvus 設定 localStorage。
+summary: 學習如何為 Milvus 設定 localStorage。
 ---
 <h1 id="localStorage-related-Configurations" class="common-anchor-header">localStorage 相關設定<button data-href="#localStorage-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"

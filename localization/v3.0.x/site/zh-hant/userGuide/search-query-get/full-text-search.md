@@ -2,7 +2,7 @@
 id: full-text-search.md
 title: 全文檢索
 summary: >-
-  全文檢索是一種在文字資料集中擷取包含特定詞彙或短語的文件，然後根據相關性對結果進行排序的功能。此功能克服了語意搜尋可能會忽略精確詞彙的限制，確保您收到最精確且與上下文最相關的結果。此外，它還可以接受原始文字輸入，自動將您的文字資料轉換為稀疏嵌入，而不需要手動產生向量嵌入，從而簡化向量搜尋。
+  全文檢索是一種在文字資料集中擷取包含特定詞彙或短語的文件，然後根據相關性對結果進行排序的功能。此功能克服了語意搜尋可能會忽略精確詞彙的限制，確保您收到最精確且與上下文最相關的結果。此外，它還可以接受原始文字輸入，自動將您的文字資料轉換為稀疏嵌入，無須手動產生向量嵌入，從而簡化向量搜尋。
 ---
 <h1 id="Full-Text-Search" class="common-anchor-header">全文檢索<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -447,7 +447,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>用於建立和查詢索引的演算法。有效值：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (預設）：使用 MaxScore 演算法的最佳化 Document-at-a-Time (DAAT) 查詢處理。MaxScore 透過跳過可能影響最小的詞彙和文件，為高<em>k</em>值或包含許多詞彙的查詢提供更好的效能。為了達到這個目的，MaxScore 會根據最大影響分數，將詞彙分為必要和非必要兩組，並將重點放在對 top-k 結果有貢獻的詞彙上。</p></li><li><p><code translate="no">"DAAT_WAND"</code>:使用 WAND 演算法優化 DAAT 查詢處理。WAND 利用最大影響分數跳過非競爭性文件，評估較少的命中文件，但每次命中的開銷較高。這使得 WAND 對於<em>k</em>值較小的查詢或較短的查詢更有效率，在這些情況下跳過是較可行的。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>:Basic Term-at-a-Time (TAAT) 查詢處理。雖然與<code translate="no">DAAT_MAXSCORE</code> 和<code translate="no">DAAT_WAND</code> 相比較慢，但<code translate="no">TAAT_NAIVE</code> 提供了獨特的優勢。DAAT 演算法使用快取的最大影響分數，不論全域集合參數 (avgdl) 如何改變，這些分數都會保持靜態，而<code translate="no">TAAT_NAIVE</code> 則不同，它會動態適應這些變化。</p></li></ul></td>
+     <td><p>用於建立和查詢索引的演算法。有效值：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (預設）：使用 MaxScore 演算法的最佳化 Document-at-a-Time (DAAT) 查詢處理。MaxScore 透過跳過可能影響最小的詞彙和文件，為高<em>k</em>值或包含許多詞彙的查詢提供更好的效能。為了達到這個目的，MaxScore 會根據最大影響分數，將詞彙分為必要和非必要兩組，並將重點放在對 top-k 結果有貢獻的詞彙上。</p></li><li><p><code translate="no">"DAAT_WAND"</code>:使用 WAND 演算法優化 DAAT 查詢處理。WAND 利用最大影響分數跳過非競爭性文件，評估較少的命中文件，但每次命中的開銷較高。這使得 WAND 對於<em>k</em>值較小的查詢或較短的查詢更有效率，在這些情況下跳過是較可行的。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>:Basic Term-at-a-Time (TAAT) 查詢處理。雖然與<code translate="no">DAAT_MAXSCORE</code> 和<code translate="no">DAAT_WAND</code> 相比較慢，但<code translate="no">TAAT_NAIVE</code> 提供了獨特的優勢。DAAT 演算法使用快取的最大影響分數，不論全域集合參數 (avgdl) 如何變更，這些分數都會保持靜態，而<code translate="no">TAAT_NAIVE</code> 則不同，它會動態適應這些變更。</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -688,7 +688,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>搜尋時要忽略的低重要性詞彙比例。詳情請參閱<a href="/docs/zh-hant/sparse_vector.md">Sparse Vector</a>。</p></td>
+     <td><p>搜尋時要忽略的低重要性字詞比例。詳情請參閱<a href="/docs/zh-hant/sparse_vector.md">Sparse Vector</a>。</p></td>
    </tr>
    <tr>
      <td></td>
@@ -744,7 +744,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     </button></h3><p>不可以，BM25 函式產生的稀疏向量無法直接在全文檢索中存取或輸出。以下是詳細資訊：</p>
 <ul>
 <li><p>BM25 函式會在內部產生稀疏向量，用於排序和檢索</p></li>
-<li><p>這些向量會儲存在稀疏欄位中，但無法包含在<code translate="no">output_fields</code></p></li>
+<li><p>這些向量會儲存在稀疏字段中，但無法包含在<code translate="no">output_fields</code></p></li>
 <li><p>您只能輸出原始文字欄位和元資料 (如<code translate="no">id</code>,<code translate="no">text</code>)</p></li>
 </ul>
 <p>範例：</p>

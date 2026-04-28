@@ -49,7 +49,7 @@ summary: 'Erfahren Sie, wie Sie die Grafikkarte für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        Gpu-Speicher-Pool-Init-Größe      </td>
+      <td>        Größe des GPU-Speicherpools init    </td>
       <td>2048</td>
     </tr>
   </tbody>

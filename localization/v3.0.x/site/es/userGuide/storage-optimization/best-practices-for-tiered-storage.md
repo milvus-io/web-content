@@ -26,7 +26,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus proporciona Almacenamiento por niveles para ayudarle a manejar eficientemente datos a gran escala a la vez que equilibra la latencia de las consultas, la capacidad y el uso de recursos. Esta guía resume las configuraciones recomendadas para cargas de trabajo típicas y explica el razonamiento detrás de cada estrategia de ajuste.</p>
+    </button></h1><p>Milvus proporciona almacenamiento por niveles para ayudarle a manejar eficientemente datos a gran escala mientras equilibra la latencia de las consultas, la capacidad y el uso de recursos. Esta guía resume las configuraciones recomendadas para cargas de trabajo típicas y explica el razonamiento detrás de cada estrategia de ajuste.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Antes de empezar<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -108,7 +108,7 @@ beta: Milvus 2.6.4+
 <ul>
 <li><p>La latencia de la consulta es crítica (por ejemplo, recomendación en tiempo real o clasificación de búsquedas)</p></li>
 <li><p>Se accede con frecuencia a los índices vectoriales centrales y a los filtros escalares.</p></li>
-<li><p>El rendimiento constante importa más que la velocidad de arranque</p></li>
+<li><p>El rendimiento constante es más importante que la velocidad de arranque</p></li>
 </ul>
 <p><strong>Configuración recomendada</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
@@ -215,7 +215,7 @@ beta: Milvus 2.6.4+
 <ul>
 <li><p>Aplicar la <strong>configuración en tiempo real</strong> a las colecciones sensibles a la latencia</p></li>
 <li><p>Aplicar la <strong>configuración fuera de línea</strong> a las colecciones analíticas o de archivo</p></li>
-<li><p>Ajustar los ratios evictableMemoryCacheRatio, cacheTtl y watermark de forma independiente para cada tipo de carga de trabajo</p></li>
+<li><p>Ajustar los ratios evictableMemoryCacheRatio, cacheTtl y watermark independientemente para cada tipo de carga de trabajo</p></li>
 </ul>
 <p><strong>Justificación</strong></p>
 <p>La combinación de configuraciones permite un control detallado de la asignación de recursos.</p>

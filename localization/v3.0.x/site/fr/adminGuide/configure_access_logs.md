@@ -46,7 +46,22 @@ title: Configuration des journaux d'accès
 <li><strong>Config pour les fichiers journaux d'accès local</strong>: Pour stocker les journaux localement.</li>
 <li><strong>Configuration pour le téléchargement des journaux d'accès locaux vers MinIO</strong>: Pour le stockage et la sauvegarde dans le nuage.</li>
 </ul>
-<h3 id="Base-config" class="common-anchor-header">Configuration de base</h3><p>La configuration de base consiste à activer les journaux d'accès et à définir le nom du fichier journal ou à utiliser stdout.</p>
+<h3 id="Base-config" class="common-anchor-header">Configuration de base<button data-href="#Base-config" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La configuration de base consiste à activer les journaux d'accès et à définir le nom du fichier journal ou à utiliser stdout.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -58,7 +73,22 @@ title: Configuration des journaux d'accès
 <li><code translate="no">proxy.accessLog.enable</code>: Activation ou non de la fonction de journal d'accès. La valeur par défaut est <strong>false</strong>.</li>
 <li><code translate="no">proxy.accessLog.filename</code>: Le nom du fichier journal d'accès. Si vous laissez ce paramètre vide, les journaux d'accès seront imprimés sur stdout.</li>
 </ul>
-<h3 id="Config-for-local-access-log-files" class="common-anchor-header">Configuration des fichiers journaux d'accès locaux</h3><p>Configurez le stockage local des fichiers journaux d'accès avec des paramètres tels que le chemin d'accès au fichier local, la taille du fichier et l'intervalle de rotation :</p>
+<h3 id="Config-for-local-access-log-files" class="common-anchor-header">Configuration des fichiers journaux d'accès locaux<button data-href="#Config-for-local-access-log-files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Configurez le stockage local des fichiers journaux d'accès avec des paramètres tels que le chemin d'accès au fichier local, la taille du fichier et l'intervalle de rotation :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -76,7 +106,22 @@ title: Configuration des journaux d'accès
 <li><code translate="no">proxy.accessLog.rotatedTime</code>: Intervalle de temps maximum en secondes autorisé pour la rotation d'un seul fichier journal d'accès. Lorsque l'intervalle de temps spécifié est atteint, un processus de rotation est déclenché, ce qui entraîne la création d'un nouveau fichier journal d'accès et le scellement du précédent.</li>
 <li><code translate="no">proxy.accessLog.maxBackups</code>: Nombre maximal de fichiers journaux d'accès scellés pouvant être conservés. Si le nombre de fichiers journaux d'accès scellés dépasse cette limite, le plus ancien sera supprimé.</li>
 </ul>
-<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">Configuration du téléchargement des fichiers journaux d'accès locaux vers MinIO</h3><p>Activez et configurez les paramètres pour télécharger les fichiers journaux d'accès locaux vers MinIO :</p>
+<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">Configuration du téléchargement des fichiers journaux d'accès locaux vers MinIO<button data-href="#Config-for-uploading-local-access-log-files-to-MinIO" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Activez et configurez les paramètres pour télécharger les fichiers journaux d'accès locaux vers MinIO :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>

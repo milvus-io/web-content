@@ -421,7 +421,7 @@ summary: 了解如何为 Milvus 配置 dataCoord。
   <tbody>
     <tr>
       <td>
-        <li>如果一个网段在 maxIdleTime 内没有接受 dml 记录，且网段大小大于</li>      
+        <li>如果段在 maxIdleTime 内未接受 dml 记录，且段的大小大于</li>      
         <li>minSizeFromIdleToSealed 时，Milvus 会自动将其封存。</li>      
         <li>段的最大空闲时间，单位为秒，10*60。</li>      </td>
       <td>600</td>
@@ -452,7 +452,7 @@ summary: 了解如何为 Milvus 配置 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        从密封到空闲的最小分段大小（MB）。      </td>
+      <td>        从封存到空闲的最小分段大小（MB）。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -575,7 +575,7 @@ summary: 了解如何为 Milvus 配置 dataCoord。
       <td>
         <li>超过 (compactableProportion * segment max # of rows) 行数。</li>      
         <li>必须大于或等于<smallProportion>!!!！</li>      
-        <li>在压缩过程中，段的行数可以超过段的最大行数 (expansionRate-1) * 100%。 </li>      </td>
+        <li>在压缩过程中，分段行数的大小可以超过分段最大行数的 (expansionRate-1) * 100%。 </li>      </td>
       <td>1.25</td>
     </tr>
   </tbody>
@@ -635,7 +635,7 @@ summary: 了解如何为 Milvus 配置 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        是否将分段索引自动升级为索引引擎版本      </td>
+      <td>        是否将分段索引自动升级到索引引擎版本      </td>
       <td>假</td>
     </tr>
   </tbody>
@@ -927,7 +927,7 @@ summary: 了解如何为 Milvus 配置 dataCoord。
     </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.minSize">
   <thead>
     <tr>
-      <th class="width80">描述</th>
+      <th class="width80">说明</th>
       <th class="width20">默认值</th> 
     </tr>
   </thead>
@@ -1484,7 +1484,7 @@ summary: 了解如何为 Milvus 配置 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        均值训练中的最大聚类规模      </td>
+      <td>        均值训练中的最大聚类大小      </td>
       <td>5g</td>
     </tr>
   </tbody>
@@ -2006,7 +2006,7 @@ summary: 了解如何为 Milvus 配置 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        单个导入请求允许的最大文件数。      </td>
+      <td>        单次导入请求允许的最大文件数。      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -2065,7 +2065,7 @@ summary: 了解如何为 Milvus 配置 dataCoord。
   <tbody>
     <tr>
       <td>        表示导入操作是否等待索引建立完成。      </td>
-      <td>真</td>
+      <td>等待</td>
     </tr>
   </tbody>
 </table>
@@ -2180,7 +2180,7 @@ summary: 了解如何为 Milvus 配置 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        L0 压实任务的插槽使用量。      </td>
+      <td>        L0 压实作业的插槽使用量。      </td>
       <td>8</td>
     </tr>
   </tbody>

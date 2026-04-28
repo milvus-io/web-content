@@ -192,7 +192,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>动态模式允许您在不修改现有模式的情况下，将带有新字段的实体插入 Collections。这意味着您可以在不知道 Collections 的完整模式的情况下插入数据，并可以包含尚未定义的字段。您可以在创建 Collections 时启用动态字段，从而启用这种无 Schema 功能。有关详细信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">启用动态字段</a>。</p>
+    </button></h2><p>动态模式允许你在不修改现有模式的情况下，将带有新字段的实体插入 Collections。这意味着您可以在不知道 Collections 的完整模式的情况下插入数据，并可以包含尚未定义的字段。您可以在创建 Collections 时启用动态字段，从而启用这种无 Schema 功能。有关详细信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">启用动态字段</a>。</p>
 <h2 id="Embeddings" class="common-anchor-header">嵌入<button data-href="#Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -355,7 +355,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>日志快照是二进制日志，是段中较小的单元，记录并处理 Milvus 中数据的更新和更改。段中的数据会被持久保存在多个二进制日志中。Milvus 中有三种二进制日志：InsertBinlog、DeleteBinlog 和 DDLBinlog。更多信息，请参阅<a href="https://milvus.io/docs/four_layers.md#Meta-storage">元存储</a>。</p>
+    </button></h2><p>日志快照是二进制日志，是段中较小的单元，记录并处理 Milvus 中数据的更新和更改。段中的数据会被持久保存在多个二进制日志中。Milvus 中有三种二进制日志：InsertBinlog、DeleteBinlog 和 DDLBinlog。有关详细信息，请参阅<a href="https://milvus.io/docs/four_layers.md#Meta-storage">元存储</a>。</p>
 <!-- ## Log subscriber
 <p>Log subscribers subscribe to the log sequence to update the local data and provide services in the form of read-only copies. --></p>
 <!-- ## Message storage
@@ -519,7 +519,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 自 2.4.0 起支持在一个 Collections 中使用多个向量场。更多信息，请参阅<a href="/docs/zh/multi-vector-search.md">混合搜索</a>。</p>
+    </button></h2><p>Milvus 自 2.4.0 起支持在一个 Collections 中使用多个向量字段。更多信息，请参阅<a href="/docs/zh/multi-vector-search.md">混合搜索</a>。</p>
 <h2 id="Partition" class="common-anchor-header">分区<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -599,7 +599,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">查询</a>（<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">Query</a>）是一种以指定的布尔表达式作为过滤器进行标量过滤的 API。更多信息，请参阅<a href="https://milvus.io/docs/get-and-scalar-query.md#Use-Basic-Operators">Get &amp; Scalar Query</a>。</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">查询</a>（<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">Query</a>）是一个以指定的布尔表达式作为过滤器进行标量过滤的 API。更多信息，请参阅<a href="https://milvus.io/docs/get-and-scalar-query.md#Use-Basic-Operators">Get &amp; Scalar Query</a>。</p>
 <h2 id="QuorumBuffer" class="common-anchor-header">QuorumBuffer<button data-href="#QuorumBuffer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -615,7 +615,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>QuorumBuffer 是啄木鸟的一种部署模式，专为对延迟敏感、需要实时响应能力和强大容错能力的高频读/写工作负载而设计。它作为一个高速写缓冲区，具有三重法定人数写入功能，可确保较强的一致性和高可用性。如需了解更多信息，请参阅<a href="/docs/zh/woodpecker_architecture.md">啄木鸟架构</a>。</p>
+    </button></h2><p>QuorumBuffer 是啄木鸟的一种部署模式，专为对延迟敏感、高频读/写工作负载而设计，既要求实时响应能力，又要求较强的容错能力。它作为一个高速写缓冲区，具有三重法定人数写入功能，可确保较强的一致性和高可用性。如需了解更多信息，请参阅<a href="/docs/zh/woodpecker_architecture.md">啄木鸟架构</a>。</p>
 <h2 id="Range-search" class="common-anchor-header">范围搜索<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

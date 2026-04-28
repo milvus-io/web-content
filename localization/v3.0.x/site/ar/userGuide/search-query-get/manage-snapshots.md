@@ -42,7 +42,7 @@ beta: Milvus 3.0.x
 <p>عند تسمية اللقطة، استخدم أسماء واضحة ووصفية، مثل <code translate="no">&quot;daily_backup_20240101&quot;</code> أو <code translate="no">&quot;v2.1_production_release&quot;</code> وتجنب المصطلحات العامة، مثل <code translate="no">&quot;backup1&quot;</code> و <code translate="no">&quot;test&quot;</code>. استخدم أسماء اللقطات بحكمة لتمييز اللقطات عبر الإصدارات والبيئات والمراحل.</p>
 <p>تفترض الأمثلة البرمجية أدناه أن لديك بالفعل مجموعة باسم <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -182,9 +182,9 @@ fmt.Printf(<span class="hljs-string">&quot;Collection: %s\n&quot;</span>, resp.G
 <p>تستخدم عملية الاستعادة آلية <strong>نسخ المقطع</strong> بدلاً من استيراد البيانات، وهي أكثر كفاءة لأنها</p>
 <ul>
 <li><p>تقوم بنسخ ملفات المقاطع مباشرةً (السجلات المجمعة والدليلات وملفات الفهرس) من تخزين اللقطات</p></li>
-<li><p>يحافظ على معرّفات الحقول ومعرفات الفهرس لضمان التوافق مع ملفات البيانات الموجودة</p></li>
+<li><p>تحافظ على معرّفات الحقول ومعرفات الفهرس لضمان التوافق مع ملفات البيانات الموجودة</p></li>
 <li><p>يتجنب إعادة كتابة البيانات وإعادة بناء الفهرس، مما يؤدي إلى أوقات استعادة أسرع بكثير، و</p></li>
-<li><p>يضمن زيادة في الأداء من 10 إلى 100 ضعف مقارنةً بطرق النسخ الاحتياطي والاستعادة التقليدية</p></li>
+<li><p>تضمن زيادة الأداء من 10 إلى 100 ضعف مقارنةً بطرق النسخ الاحتياطي والاستعادة التقليدية</p></li>
 </ul>
 <p>لاستعادة لقطة، قم بما يلي:</p>
 <div class="multipleCode">

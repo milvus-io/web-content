@@ -99,7 +99,7 @@ helm repo update
       </svg>
     </button></h3><p>Elige una de las siguientes opciones de almacenamiento y crea un archivo de configuración <code translate="no">loki.yaml</code>:</p>
 <ul>
-<li><p>Opción 1: Usar MinIO para almacenamiento</p>
+<li><p>Opción 1: Usar MinIO para el almacenamiento</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">loki:</span>
   <span class="hljs-attr">commonConfig:</span>
     <span class="hljs-attr">replication_factor:</span> <span class="hljs-number">1</span>
@@ -340,7 +340,7 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
    </span> <span class="img-wrapper"> <span>Fuente de datos</span> </span></p>
 <h3 id="3-Query-Milvus-Logs" class="common-anchor-header">3. Consulta de registros Milvus<button data-href="#3-Query-Milvus-Logs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -361,9 +361,9 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000
 <ol>
 <li>En el menú de la izquierda, haz clic en <strong>Explorar</strong>.</li>
 <li>En la esquina superior izquierda de la página, seleccione la fuente de datos loki.</li>
-<li>Utilice <strong>el explorador de</strong> etiquetas para seleccionar las etiquetas y consultar los registros.</li>
+<li>Utilice el <strong>explorador de</strong> etiquetas para seleccionar las etiquetas y consultar los registros.</li>
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvuslog.jpg" alt="Query" class="doc-image" id="query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvuslog.jpg" alt="Query" class="doc-image" id="query" />
    </span> <span class="img-wrapper"> <span>Consulta</span> </span></p>

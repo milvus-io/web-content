@@ -43,7 +43,7 @@ bge_m3_ef = BGEM3EmbeddingFunction(
 <li><p><strong>USE_FP16</strong><em>(부울</em>)</p>
 <p>16비트 부동 소수점 정밀도(fp16)를 사용할지 여부. <strong>장치가</strong> <strong>CPU인</strong> 경우 <strong>False를</strong> 지정합니다.</p></li>
 </ul>
-<p>문서 임베딩을 만들려면 <strong>encode_documents()</strong> 메서드를 사용합니다:</p>
+<p>문서용 임베딩을 만들려면 <strong>encode_documents()</strong> 메서드를 사용합니다:</p>
 <pre><code translate="no" class="language-python">docs = [
     <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
     <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,

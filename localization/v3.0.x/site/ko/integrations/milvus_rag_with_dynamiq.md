@@ -34,7 +34,7 @@ title: Dynamiq 및 Milvus 시작하기
 <li><p><strong>문서 색인 흐름</strong>: 입력 파일(예: PDF)을 처리하고, 그 콘텐츠를 벡터 임베딩으로 변환하여 Milvus에 저장하는 방법을 알아보세요. Milvus의 고성능 인덱싱 기능을 활용하면 데이터를 신속하게 검색할 수 있습니다.</p></li>
 <li><p><strong>문서 검색 흐름</strong>: Milvus에서 관련 문서 임베딩을 쿼리하고 이를 사용하여 Dynamiq의 LLM 에이전트로 통찰력 있는 컨텍스트 인식 응답을 생성하여 원활한 AI 기반 사용자 환경을 구축하는 방법을 알아보세요.</p></li>
 </ul>
-<p>이 튜토리얼을 마치면 Milvus와 Dynamiq이 어떻게 협력하여 필요에 맞게 확장 가능한 상황 인식 AI 시스템을 구축하는지 확실히 이해할 수 있을 것입니다.</p>
+<p>이 튜토리얼을 마치면 Milvus와 Dynamiq이 어떻게 협력하여 필요에 맞게 확장 가능한 상황 인식 AI 시스템을 구축하는지에 대해 확실히 이해할 수 있을 것입니다.</p>
 <h2 id="Preparation" class="common-anchor-header">준비 사항<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,7 +105,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 튜토리얼에서는 Milvus를 벡터 데이터베이스로 사용하여 문서를 색인하기 위한 검색 증강 생성(RAG) 워크플로우를 보여드립니다. 이 워크플로에서는 입력 PDF 파일을 가져와서 더 작은 덩어리로 처리하고, OpenAI의 임베딩 모델을 사용해 벡터 임베딩을 생성한 다음, 효율적인 검색을 위해 임베딩을 Milvus 컬렉션에 저장합니다.</p>
+    </button></h2><p>이 튜토리얼에서는 Milvus를 벡터 데이터베이스로 사용하여 문서를 색인하기 위한 검색 증강 생성(RAG) 워크플로우를 보여드립니다. 이 워크플로에서는 입력 PDF 파일을 가져와서 더 작은 청크로 처리하고, OpenAI의 임베딩 모델을 사용해 벡터 임베딩을 생성한 다음, 효율적인 검색을 위해 임베딩을 Milvus 컬렉션에 저장합니다.</p>
 <p>이 워크플로우가 끝나면 시맨틱 검색과 질문 답변과 같은 향후 RAG 작업을 지원하는 확장 가능하고 효율적인 문서 색인 시스템을 갖추게 됩니다.</p>
 <h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">필요한 라이브러리 가져오기 및 워크플로우 초기화<button data-href="#Import-Required-Libraries-and-Initialize-Workflow" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -279,7 +279,7 @@ milvus_writer_added = rag_wf.flow.add_nodes(vector_store)  <span class="hljs-com
 </ul>
 <p><strong>질리즈 클라우드(관리형 서비스)</strong></p>
 <ul>
-<li>완전 관리형 클라우드 기반 밀버스 환경을 사용하려면 <a href="https://zilliz.com/cloud">Zilliz Cloud를</a> 사용하세요.</li>
+<li>클라우드 기반의 완전 관리형 밀버스 환경을 사용하려면 <a href="https://zilliz.com/cloud">Zilliz Cloud를</a> 사용하세요.</li>
 <li>질리즈 클라우드 콘솔에서 제공하는 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">퍼블릭 엔드포인트와 API 키에</a> 따라 <code translate="no">uri</code> 및 <code translate="no">token</code> 을 설정합니다.</li>
 </ul></li>
 </ul>
@@ -332,7 +332,7 @@ ResourceWarning: Enable tracemalloc to get the object allocation traceback
 2024-11-19 22:14:10 - INFO - Flow b30b48ec-d5d2-4e4c-8e25-d6976c8a9c17: execution succeeded in 1.3s.
 2024-11-19 22:14:10 - INFO - Workflow 87878444-6a3d-43f3-ae32-0127564a959f: execution succeeded in 1.3s.
 </code></pre>
-<p>이 워크플로우를 통해 Milvus를 벡터 데이터베이스로, OpenAI의 의미 표현을 위한 임베딩 모델을 사용하여 문서 인덱싱 파이프라인을 성공적으로 구현했습니다. 이 설정은 빠르고 정확한 벡터 기반 검색을 가능하게 하여 시맨틱 검색, 문서 검색, 문맥 AI 기반 상호 작용과 같은 RAG 워크플로우의 토대를 형성합니다.</p>
+<p>이 워크플로우를 통해 밀버스를 벡터 데이터베이스로, OpenAI의 시맨틱 표현을 위한 임베딩 모델을 사용하여 문서 인덱싱 파이프라인을 성공적으로 구현했습니다. 이 설정은 빠르고 정확한 벡터 기반 검색을 가능하게 하여 시맨틱 검색, 문서 검색, 문맥 AI 기반 상호 작용과 같은 RAG 워크플로우의 토대를 형성합니다.</p>
 <p>Milvus의 확장 가능한 스토리지 기능과 Dynamiq의 오케스트레이션을 통해 이 솔루션은 프로토타이핑과 대규모 프로덕션 배포에 모두 사용할 수 있습니다. 이제 이 파이프라인을 확장하여 검색 기반 질문 답변 또는 AI 기반 콘텐츠 생성과 같은 추가 작업을 포함할 수 있습니다.</p>
 <h2 id="RAG-Document-Retrieval-Flow" class="common-anchor-header">RAG 문서 검색 흐름<button data-href="#RAG-Document-Retrieval-Flow" class="anchor-icon" translate="no">
       <svg translate="no"

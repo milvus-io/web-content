@@ -51,10 +51,40 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Avant de configurer Milvus avec la fonction TEI, vous devez disposer d'un service TEI en cours d'exécution. Milvus prend en charge deux approches pour le déploiement de la TEI :</p>
-<h3 id="Standard-deployment-external" class="common-anchor-header">Déploiement standard (externe)</h3><p>Vous pouvez déployer la TEI en tant que service autonome en utilisant les méthodes officielles de Hugging Face. Cette approche vous donne un maximum de flexibilité et de contrôle sur votre service TEI.</p>
+<h3 id="Standard-deployment-external" class="common-anchor-header">Déploiement standard (externe)<button data-href="#Standard-deployment-external" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Vous pouvez déployer la TEI en tant que service autonome en utilisant les méthodes officielles de Hugging Face. Cette approche vous donne un maximum de flexibilité et de contrôle sur votre service TEI.</p>
 <p>Pour des instructions détaillées sur le déploiement de la TEI en utilisant Docker ou d'autres méthodes, référez-vous à la <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour#deploy">documentation officielle de Hugging Face Text Embeddings Inference</a>.</p>
 <p>Après le déploiement, notez le point de terminaison de votre service TEI (par exemple, <code translate="no">http://localhost:8080</code>) car vous en aurez besoin lorsque vous <a href="/docs/fr/hugging-face-tei.md#Use-embedding-function-">utiliserez la fonction TEI dans Milvus</a>.</p>
-<h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Déploiement de Milvus Helm Chart (intégré)</h3><p>Pour les environnements Kubernetes, Milvus propose une option de déploiement intégrée via sa carte Helm. Cela simplifie le processus en déployant et en configurant le TEI en même temps que Milvus.</p>
+<h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Déploiement de Milvus Helm Chart (intégré)<button data-href="#Milvus-Helm-Chart-deployment-integrated" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour les environnements Kubernetes, Milvus propose une option de déploiement intégrée via sa carte Helm. Cela simplifie le processus en déployant et en configurant le TEI en même temps que Milvus.</p>
 <p>Pour activer le TEI dans votre déploiement Milvus Helm :</p>
 <ol>
 <li><p>Configurer <strong>values.yaml</strong> pour activer le TEI :</p>
@@ -140,7 +170,22 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
         ></path>
       </svg>
     </button></h2><p>Une fois le service TEI configuré, suivez les étapes suivantes pour définir et utiliser les fonctions d'intégration.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Étape 1 : Définir les champs du schéma</h3><p>Pour utiliser une fonction d'intégration, créez une collection avec un schéma spécifique. Ce schéma doit comprendre au moins trois champs nécessaires :</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Étape 1 : Définir les champs du schéma<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour utiliser une fonction d'intégration, créez une collection avec un schéma spécifique. Ce schéma doit comprendre au moins trois champs nécessaires :</p>
 <ul>
 <li><p>Le champ primaire qui identifie de manière unique chaque entité d'une collection.</p></li>
 <li><p>Un champ scalaire qui stocke les données brutes à intégrer.</p></li>
@@ -161,7 +206,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to exactly match the TEI model&#x27;s output dimension</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Étape 2 : Ajouter la fonction d'intégration au schéma</h3><p>Le module Function de Milvus convertit automatiquement les données brutes stockées dans un champ scalaire en embeddings et les stocke dans le champ vectoriel explicitement défini.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Étape 2 : Ajouter la fonction d'intégration au schéma<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le module Function de Milvus convertit automatiquement les données brutes stockées dans un champ scalaire en embeddings et les stocke dans le champ vectoriel explicitement défini.</p>
 <p>L'exemple ci-dessous ajoute un module Function (<code translate="no">tei_func</code>) qui convertit le champ scalaire <code translate="no">&quot;document&quot;</code> en embeddings, en stockant les vecteurs résultants dans le champ vectoriel <code translate="no">&quot;dense_vector&quot;</code> défini précédemment.</p>
 <p>Une fois que vous avez défini votre fonction d'intégration, ajoutez-la à votre schéma de collection. Cela indique à Milvus d'utiliser la fonction d'intégration spécifiée pour traiter et stocker les intégrations à partir de vos données textuelles.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define TEI embedding function</span>

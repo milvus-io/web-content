@@ -26,11 +26,11 @@ title: Audio-Ähnlichkeitssuche
 <li><a href="https://towhee.io/">Towhee</a></li>
 </ul>
 <p></br></p>
-<p>Die Suche nach Sprache, Musik, Soundeffekten und anderen Arten von Audiodaten ermöglicht die schnelle Abfrage großer Mengen von Audiodaten und das Auffinden ähnlicher Klänge. Zu den Anwendungen von Systemen zur Suche nach Audioähnlichkeit gehören die Identifizierung ähnlicher Klangeffekte, die Minimierung von Verletzungen des geistigen Eigentums und vieles mehr. Die Audiosuche kann dazu verwendet werden, Online-Medien in Echtzeit zu durchsuchen und zu überwachen, um gegen die Verletzung von Rechten des geistigen Eigentums vorzugehen. Sie spielt auch eine wichtige Rolle bei der Klassifizierung und statistischen Analyse von Audiodaten.</p>
+<p>Die Suche nach Sprache, Musik, Soundeffekten und anderen Arten von Audiodaten ermöglicht die schnelle Abfrage großer Mengen von Audiodaten und das Auffinden ähnlicher Klänge. Zu den Anwendungen von Systemen zur Suche nach Audioähnlichkeit gehören die Identifizierung ähnlicher Klangeffekte, die Minimierung von Verletzungen des geistigen Eigentums und vieles mehr. Die Audiosuche kann dazu verwendet werden, Online-Medien in Echtzeit zu durchsuchen und zu überwachen, um die Verletzung von Rechten des geistigen Eigentums zu unterbinden. Sie spielt auch eine wichtige Rolle bei der Klassifizierung und statistischen Analyse von Audiodaten.</p>
 <p></br></p>
 <p>In diesem Tutorial lernen Sie, wie man ein System zur Suche nach ähnlichen Audioclips aufbaut, das ähnliche Soundclips zurückliefert. Die hochgeladenen Audioclips werden mithilfe von PANNs in Vektoren umgewandelt. Diese Vektoren werden in Milvus gespeichert, das automatisch eine eindeutige ID für jeden Vektor erzeugt. Anschließend können die Benutzer eine Vektorähnlichkeitssuche in Milvus durchführen und den Audioclip-Datenpfad abfragen, der der von Milvus zurückgegebenen eindeutigen Vektor-ID entspricht.</p>
 <p><br/></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/audio_search.png" alt="Audio_search" class="doc-image" id="audio_search" />
-   </span> <span class="img-wrapper"> <span>Audio_Suche</span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/audio_search_demo.png" alt="Audio_search_demo" class="doc-image" id="audio_search_demo" /><span>Audio_Suche_demo</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/audio_search.png" alt="Audio_search" class="doc-image" id="audio_search" />
+   </span> <span class="img-wrapper"> <span>Audio_Suche</span> </span> <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/audio_search_demo.png" alt="Audio_search_demo" class="doc-image" id="audio_search_demo" /><span>Audio_Suche_demo</span> </span></p>

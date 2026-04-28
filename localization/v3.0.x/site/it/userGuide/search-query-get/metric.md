@@ -143,7 +143,7 @@ summary: >-
 <p>La formula della distanza euclidea è la seguente:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/euclidean-metric.png" alt="Euclidean Metric" class="doc-image" id="euclidean-metric" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/euclidean-metric.png" alt="Euclidean Metric" class="doc-image" id="euclidean-metric" />
    </span> <span class="img-wrapper"> <span>Metrica euclidea</span> </span></p>
 <p>dove <strong>a = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> e <strong>b = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong> sono due punti nello spazio euclideo n-dimensionale.</p>
 <p>È la metrica di distanza più utilizzata ed è molto utile quando i dati sono continui.</p>
@@ -168,7 +168,7 @@ summary: >-
     </button></h2><p>La distanza IP tra due incorporazioni è definita come segue:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IP-formula.png" alt="IP Formula" class="doc-image" id="ip-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IP-formula.png" alt="IP Formula" class="doc-image" id="ip-formula" />
    </span> <span class="img-wrapper"> <span>Formula IP</span> </span></p>
 <p>L'IP è più utile se si devono confrontare dati non normalizzati o se si tiene conto della grandezza e dell'angolo.</p>
 <div class="alert note">
@@ -177,12 +177,12 @@ summary: >-
 <p>Supponiamo che X' sia normalizzato dall'incorporamento X:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/normalize-formula.png" alt="Normalize Formula" class="doc-image" id="normalize-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalize-formula.png" alt="Normalize Formula" class="doc-image" id="normalize-formula" />
    </span> <span class="img-wrapper"> <span>Formula di normalizzazione</span> </span></p>
 <p>La correlazione tra le due incorporazioni è la seguente:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/correlation-between-embeddings.png" alt="Correlation Between Embeddings" class="doc-image" id="correlation-between-embeddings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/correlation-between-embeddings.png" alt="Correlation Between Embeddings" class="doc-image" id="correlation-between-embeddings" />
    </span> <span class="img-wrapper"> <span>Correlazione tra le incorporazioni</span> </span></p>
 <h2 id="Cosine-similarity" class="common-anchor-header">Somiglianza coseno<button data-href="#Cosine-similarity" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -203,7 +203,7 @@ summary: >-
 <p>Per calcolare la somiglianza del coseno tra due insiemi di vettori <strong>A = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> e <strong>B = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong>, utilizzare la seguente formula:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
    </span> <span class="img-wrapper"> <span>Similitudine del coseno</span> </span></p>
 <p>La somiglianza del coseno è sempre nell'intervallo <strong>[-1, 1]</strong>. Ad esempio, due vettori proporzionali hanno una somiglianza di coseno pari a <strong>1</strong>, due vettori ortogonali hanno una somiglianza pari a <strong>0</strong> e due vettori opposti hanno una somiglianza pari a <strong>-1</strong>. Più grande è il coseno, minore è l'angolo tra i due vettori, il che indica che questi due vettori sono più simili tra loro.</p>
 <p>Sottraendo la somiglianza del coseno da 1, si ottiene la distanza del coseno tra due vettori.</p>
@@ -225,12 +225,12 @@ summary: >-
     </button></h2><p>Il coefficiente di distanza JACCARD misura la somiglianza tra due insiemi di campioni ed è definito come la cardinalità dell'intersezione degli insiemi definiti divisa per la cardinalità dell'unione degli stessi. Può essere applicato solo a insiemi di campioni finiti.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
    </span> <span class="img-wrapper"> <span>Formula del coefficiente di somiglianza JACCARD</span> </span></p>
-<p>La distanza JACCARD misura la dissimilarità tra gli insiemi di dati e si ottiene sottraendo il coefficiente di somiglianza JACCARD da 1. Per le variabili binarie, la distanza JACCARD è equivalente al coefficiente Tanimoto.</p>
+<p>La distanza JACCARD misura la dissimilarità tra gli insiemi di dati e si ottiene sottraendo il coefficiente di similarità JACCARD da 1. Per le variabili binarie, la distanza JACCARD è equivalente al coefficiente di Tanimoto.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
    </span> <span class="img-wrapper"> <span>Formula della distanza JACCARD</span> </span></p>
 <h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -251,7 +251,7 @@ summary: >-
 <p>Questo approccio è significativamente più veloce del calcolo della somiglianza di Jaccard esatta ed è particolarmente utile in scenari su larga scala o ad alta dimensionalità.</p>
 <p><strong>Tipo di vettore applicabile</strong></p>
 <ul>
-<li><code translate="no">BINARY_VECTOR</code>in cui ogni vettore memorizza una firma MinHash. Ogni elemento corrisponde al valore minimo di hash secondo una delle funzioni hash indipendenti applicate all'insieme originale.</li>
+<li><code translate="no">BINARY_VECTOR</code>dove ogni vettore memorizza una firma MinHash. Ogni elemento corrisponde al valore minimo di hash secondo una delle funzioni hash indipendenti applicate all'insieme originale.</li>
 </ul>
 <p><strong>Definizione di distanza</strong></p>
 <p>MHJACCARD misura il numero di posizioni corrispondenti in due firme MinHash. Più alto è il rapporto di corrispondenza, più simili sono gli insiemi sottostanti.</p>
@@ -282,7 +282,7 @@ summary: >-
       </svg>
     </button></h2><p>La distanza HAMMING misura stringhe di dati binari. La distanza tra due stringhe di uguale lunghezza è il numero di posizioni di bit in cui i bit sono diversi.</p>
 <p>Ad esempio, si supponga che esistano due stringhe, 1101 1001 e 1001 1101.</p>
-<p>11011001 ⊕ 10011101 = 01000100. Dato che contiene due 1, la distanza HAMMING, d (11011001, 10011101) = 2.</p>
+<p>11011001 ⊕ 10011101 = 01000100. Poiché contiene due 1, la distanza di HAMMING, d (11011001, 10011101) = 2.</p>
 <h2 id="BM25-similarity" class="common-anchor-header">Similitudine BM25<button data-href="#BM25-similarity" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -301,7 +301,7 @@ summary: >-
     </button></h2><p>Il BM25 è un metodo di misurazione della rilevanza del testo ampiamente utilizzato, progettato specificamente per la <a href="/docs/it/full-text-search.md">ricerca di testi completi</a>. Combina i seguenti tre fattori chiave:</p>
 <ul>
 <li><p><strong>Frequenza dei termini (TF):</strong> Misura la frequenza con cui un termine appare in un documento. Sebbene frequenze più elevate indichino spesso una maggiore importanza, BM25 utilizza il parametro di saturazione <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">k1k_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span></span></span></span> k <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">1</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> per evitare che termini troppo frequenti dominino il punteggio di rilevanza.</p></li>
-<li><p><strong>Frequenza inversa del documento (IDF):</strong> Riflette l'importanza di un termine nell'intero corpus. I termini che compaiono in un minor numero di documenti ricevono un valore IDF più alto, indicando un maggiore contributo alla rilevanza.</p></li>
+<li><p><strong>Frequenza inversa del documento (IDF):</strong> Riflette l'importanza di un termine nell'intero corpus. I termini che compaiono in un minor numero di documenti ricevono un valore IDF più alto, indicando un maggior contributo alla rilevanza.</p></li>
 <li><p><strong>Normalizzazione della lunghezza del documento:</strong> I documenti più lunghi tendono a ottenere un punteggio più alto perché contengono più termini. BM25 attenua questa distorsione normalizzando la lunghezza dei documenti, con il parametro <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">bb</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span></span></span></span> b che controlla la forza di questa normalizzazione.</p></li>
 </ul>
 <p>Il punteggio di BM25 è calcolato come segue:</p>
@@ -317,5 +317,5 @@ summary: >-
 <li><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">∣D∣|D|</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">∣D</span><span class="mord">∣:</span></span></span></span> Lunghezza del documento <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">DD</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span></span></span></span> D (numero totale di termini).</p></li>
 <li><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">avgdlavgdl</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">avgdl</span></span></span></span>: Lunghezza media di tutti i documenti del corpus.</p></li>
 <li><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">k1k_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span></span></span></span> k<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">1</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>: Controlla l'influenza della frequenza dei termini sul punteggio. Valori più alti aumentano l'importanza della frequenza dei termini. L'intervallo tipico è [1,2, 2,0], mentre Milvus consente un intervallo di [0, 3].</p></li>
-<li><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">bb</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span></span></span></span> b: Controlla il grado di normalizzazione della lunghezza, che va da 0 a 1. Quando il valore è 0, non c'è normalizzazione. Quando il valore è 0, non viene applicata alcuna normalizzazione; quando il valore è 1, viene applicata una normalizzazione completa.</p></li>
+<li><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">bb</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span></span></span></span> b: Controlla il grado di normalizzazione della lunghezza, che va da 0 a 1. Quando il valore è 0, non viene applicata alcuna normalizzazione. Quando il valore è 0, non viene applicata alcuna normalizzazione; quando il valore è 1, viene applicata una normalizzazione completa.</p></li>
 </ul>

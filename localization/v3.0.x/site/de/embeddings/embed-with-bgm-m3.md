@@ -2,8 +2,8 @@
 id: embed-with-bgm-m3.md
 order: 4
 summary: >-
-  Der Name BGE-M3 steht für seine Fähigkeiten in den Bereichen
-  Multi-Lingualität, Multi-Funktionalität und Multi-Granularität.
+  Der Name BGE-M3 steht für seine Fähigkeiten in den Bereichen Mehrsprachigkeit,
+  Multifunktionalität und Multigranularität.
 title: BGE M3
 ---
 <h1 id="BGE-M3" class="common-anchor-header">BGE M3<button data-href="#BGE-M3" class="anchor-icon" translate="no">

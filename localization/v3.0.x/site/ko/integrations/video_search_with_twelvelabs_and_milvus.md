@@ -37,7 +37,7 @@ title: '고급 비디오 검색: 시맨틱 검색을 위한 Twelve Labs와 Milvu
         ></path>
       </svg>
     </button></h2><p><a href="https://docs.twelvelabs.io/docs/create-embeddings">Twelve Labs Embed API와</a> Milvus를 사용해 시맨틱 비디오 검색을 구현하는 방법에 대한 종합적인 튜토리얼에 오신 것을 환영합니다. 이 가이드에서는 <a href="https://www.twelvelabs.io/blog/multimodal-embeddings">Twelve Labs의 고급 멀티모달 임베딩과</a> <a href="https://milvus.io/intro">Milvus의 효율적인 벡터 데이터베이스를</a> 활용하여 강력한 동영상 검색 솔루션을 구축하는 방법을 살펴봅니다. 이러한 기술을 통합함으로써 개발자는 동영상 콘텐츠 분석의 새로운 가능성을 열어 콘텐츠 기반 동영상 검색, 추천 시스템, 동영상 데이터의 뉘앙스를 이해하는 정교한 검색 엔진과 같은 애플리케이션을 구현할 수 있습니다.</p>
-<p>이 튜토리얼에서는 개발 환경 설정부터 기능적인 시맨틱 비디오 검색 애플리케이션 구현까지 전체 프로세스를 안내합니다. 동영상에서 멀티모달 임베딩 생성하기, Milvus에 효율적으로 저장하기, 유사도 검색을 수행하여 관련 콘텐츠를 검색하기 등의 핵심 개념을 다룹니다. 동영상 분석 플랫폼, 콘텐츠 검색 도구를 구축하든, 동영상 검색 기능으로 기존 애플리케이션을 개선하든, 이 가이드는 Twelve Labs와 Milvus의 강점을 프로젝트에 활용할 수 있는 지식과 실용적인 단계를 제공합니다.</p>
+<p>이 튜토리얼에서는 개발 환경 설정부터 기능적인 시맨틱 비디오 검색 애플리케이션 구현까지 전체 과정을 안내합니다. 동영상에서 멀티모달 임베딩 생성하기, Milvus에 효율적으로 저장하기, 유사도 검색을 수행하여 관련 콘텐츠를 검색하기 등의 핵심 개념을 다룹니다. 동영상 분석 플랫폼, 콘텐츠 검색 도구를 구축하든, 동영상 검색 기능으로 기존 애플리케이션을 개선하든, 이 가이드는 프로젝트에서 Twelve Labs와 Milvus의 결합된 강점을 활용할 수 있는 지식과 실용적인 단계를 제공합니다.</p>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -184,7 +184,7 @@ TWELVE_LABS_API_KEY = os.getenv(<span class="hljs-string">&#x27;TWELVE_LABS_API_
       </svg>
     </button></h2><pre><code translate="no" class="language-python">twelvelabs_client = TwelveLabs(api_key=TWELVE_LABS_API_KEY)
 <button class="copy-code-btn"></button></code></pre>
-<p>지정된 동영상 URL에 대한 임베딩을 생성하는 함수를 생성합니다:</p>
+<p>지정된 동영상 URL에 대한 임베딩을 생성하는 함수를 만듭니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_embedding</span>(<span class="hljs-params">video_url</span>):
     <span class="hljs-string">&quot;&quot;&quot;
     Generate embeddings for a given video URL using the Twelve Labs API.
@@ -403,7 +403,7 @@ search_results = perform_similarity_search(milvus_client, collection_name, query
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>자, 이제 이 앱을 한 단계 업그레이드해 봅시다! 대규모 동영상 컬렉션을 다룰 때는 <strong>성능이 핵심입니다</strong>. 최적화를 위해서는 <a href="https://milvus.io/docs/v2.3.x/bulk_insert.md">임베딩 생성 및 삽입을 위한 일괄 처리를 Milvus에</a> 구현해야 합니다. 이렇게 하면 여러 동영상을 동시에 처리할 수 있어 전체 처리 시간을 크게 단축할 수 있습니다. 또한 <a href="https://milvus.io/docs/v2.2.x/partition_key.md">Milvus의 파티셔닝 기능을</a> 활용하여 동영상 카테고리 또는 기간별로 데이터를 보다 효율적으로 구성할 수 있습니다. 이렇게 하면 관련성이 높은 파티션만 검색할 수 있어 쿼리 속도가 빨라집니다.</p>
+    </button></h2><p>자, 이제 이 앱을 한 단계 업그레이드해 봅시다! 대규모 동영상 컬렉션을 다룰 때는 <strong>성능이 핵심입니다</strong>. 최적화를 위해서는 <a href="https://milvus.io/docs/v2.3.x/bulk_insert.md">임베딩 생성 및 삽입을 위한 일괄 처리를 Milvus에</a> 구현해야 합니다. 이렇게 하면 여러 동영상을 동시에 처리하여 전체 처리 시간을 크게 줄일 수 있습니다. 또한 <a href="https://milvus.io/docs/v2.2.x/partition_key.md">Milvus의 파티셔닝 기능을</a> 활용하여 동영상 카테고리 또는 기간별로 데이터를 보다 효율적으로 구성할 수 있습니다. 이렇게 하면 관련성이 높은 파티션만 검색할 수 있어 쿼리 속도가 빨라집니다.</p>
 <p>또 다른 최적화 요령은 <strong>자주 액세스하는 임베딩이나 검색 결과에 캐싱 메커니즘을 사용하는</strong> 것입니다. 이렇게 하면 인기 있는 쿼리의 응답 시간을 크게 개선할 수 있습니다. 특정 데이터 세트와 쿼리 패턴에 따라 <a href="https://milvus.io/docs/index-vector-fields.md?tab=floating">Milvus의 인덱스 매개변수를 미세 조정하는</a> 것을 잊지 마세요. 여기서 약간의 조정만으로도 검색 성능을 향상시키는 데 큰 도움이 될 수 있습니다.</p>
 <h2 id="Advanced-Features" class="common-anchor-header">고급 기능<button data-href="#Advanced-Features" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -438,7 +438,7 @@ search_results = perform_similarity_search(milvus_client, collection_name, query
         ></path>
       </svg>
     </button></h2><p>현실을 직시하자, 문제가 발생할 수 있으며, 문제가 발생하면 이에 대비해야 합니다. <strong>강력한 오류 처리 기능을 구현하는 것이 중요합니다</strong>. <a href="https://softwareengineering.stackexchange.com/questions/64180/good-use-of-try-catch-blocks">API 호출과 데이터베이스 작업을 시도 예외 블록으로 래핑하여</a> 실패 시 사용자에게 유익한 오류 메시지를 제공해야 합니다. 네트워크 관련 문제의 경우 <a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/implement-retries-exponential-backoff">기하급수적 백오프를 사용하여 재시도를 구현하면</a> 일시적인 결함을 원활하게 처리하는 데 도움이 될 수 있습니다.</p>
-<p><strong>로깅은 디버깅과 모니터링을 위한 가장 좋은 친구입니다</strong>. 애플리케이션 전체에서 중요한 이벤트, 오류 및 성능 메트릭을 추적하려면 <a href="https://blog.sentry.io/logging-in-python-a-developers-guide/">Python의 로깅 모듈을</a> 사용해야 합니다. 개발을 위한 DEBUG, 일반 운영을 위한 INFO, 중요한 문제를 위한 ERROR 등 다양한 로그 수준을 설정해 보겠습니다. 그리고 파일 크기를 관리하기 위해 로그 로테이션을 구현하는 것도 잊지 마세요. 적절한 로깅을 설정하면 문제를 신속하게 식별하고 해결할 수 있으므로 확장 시에도 동영상 검색 앱이 원활하게 실행될 수 있습니다.</p>
+<p><strong>로깅은 디버깅과 모니터링을 위한 가장 좋은 친구입니다</strong>. 애플리케이션 전체에서 중요한 이벤트, 오류 및 성능 메트릭을 추적하려면 <a href="https://blog.sentry.io/logging-in-python-a-developers-guide/">Python의 로깅 모듈을</a> 사용해야 합니다. 개발을 위한 DEBUG, 일반 운영을 위한 INFO, 중요한 문제를 위한 ERROR 등 다양한 로그 수준을 설정해 보겠습니다. 그리고 파일 크기를 관리하기 위해 로그 로테이션을 구현하는 것도 잊지 마세요. 적절한 로깅을 설정하면 문제를 신속하게 파악하고 해결할 수 있어 확장 시에도 동영상 검색 앱이 원활하게 실행될 수 있습니다.</p>
 <h2 id="Conclusion" class="common-anchor-header">결론<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -80,11 +80,11 @@ L'uso di Helm per aggiornare le risorse farà sì che i pod in esecuzione esegua
     </button></h3><p>È necessario impostare le variabili delle risorse per ogni componente di Milvus se si usa <code translate="no">--set</code> per aggiornare le configurazioni delle risorse.</p>
 <div class="filter">
 <a href="#standalone">Milvus standalone</a> <a href="#cluster">Milvus cluster</a></div>
-<div class="table-wrapper filter-standalone" markdown="block">
+<div class="filter-standalone table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set standalone.resources.limits.cpu=2 --set standalone.resources.limits.memory=4Gi --set standalone.resources.requests.cpu=0.1 --set standalone.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<div class="table-wrapper filter-cluster" markdown="block">
+<div class="filter-cluster table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set dataNode.resources.limits.cpu=2 --set dataNode.resources.limits.memory=4Gi --set dataNode.resources.requests.cpu=0.1 --set dataNode.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>

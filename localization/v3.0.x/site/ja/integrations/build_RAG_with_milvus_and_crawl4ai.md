@@ -2,7 +2,7 @@
 id: build_RAG_with_milvus_and_crawl4ai.md
 summary: >-
   このチュートリアルでは、MilvusとCrawl4AIを使用したRAG（Retrieval-Augmented
-  Generation）パイプラインの構築方法を紹介します。このパイプラインは、ウェブデータのクロールのためにCrawl4AIを、ベクターストレージのためにMilvusを、そして、洞察に満ちた、コンテキストを考慮したレスポンスを生成するためにOpenAIを統合しています。
+  Generation）パイプラインの構築方法を紹介します。このパイプラインは、ウェブデータのクロールのためにCrawl4AIを、ベクターストレージのためにMilvusを、そして、洞察に満ちた、コンテキストを認識したレスポンスを生成するためにOpenAIを統合しています。
 title: MilvusとCrawl4AIでRAGを構築する
 ---
 <h1 id="Building-RAG-with-Milvus-and-Crawl4AI" class="common-anchor-header">MilvusとCrawl4AIでRAGを構築する<button data-href="#Building-RAG-with-Milvus-and-Crawl4AI" class="anchor-icon" translate="no">

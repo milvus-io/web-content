@@ -23,7 +23,7 @@ title: Pencarian Corong dengan Penyematan Matryoshka
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.6.x/assets/funnel-search.png' width='100%'></div>
+    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/funnel-search.png' width='100%'></div>
 Ketika membangun sistem pencarian vektor yang efisien, salah satu tantangan utama adalah mengelola biaya penyimpanan sambil mempertahankan latensi dan pemanggilan yang dapat diterima. Model penyematan modern menghasilkan vektor dengan ratusan atau ribuan dimensi, menciptakan penyimpanan yang signifikan dan overhead komputasi untuk vektor mentah dan indeks.<p>Secara tradisional, kebutuhan penyimpanan dikurangi dengan menerapkan metode kuantisasi atau pengurangan dimensi sebelum membangun indeks. Sebagai contoh, kita dapat menghemat penyimpanan dengan menurunkan presisi menggunakan Product Quantization (PQ) atau jumlah dimensi menggunakan Principal Component Analysis (PCA). Metode-metode ini menganalisis seluruh kumpulan vektor untuk menemukan vektor yang lebih ringkas yang mempertahankan hubungan semantik antar vektor.</p>
 <p>Meskipun efektif, pendekatan standar ini mengurangi presisi atau dimensi hanya sekali dan pada skala tunggal. Namun, bagaimana jika kita dapat mempertahankan beberapa lapisan detail secara bersamaan, seperti piramida representasi yang semakin presisi?</p>
 <p>Masuklah ke dalam penyematan Matryoshka. Dinamai berdasarkan boneka sarang Rusia (lihat ilustrasi), konstruksi cerdas ini menyematkan beberapa skala representasi dalam satu vektor. Tidak seperti metode pasca-pemrosesan tradisional, embeddings Matryoshka mempelajari struktur multi-skala ini selama proses pelatihan awal. Hasilnya luar biasa: tidak hanya penyematan penuh yang menangkap semantik input, tetapi setiap awalan subset bersarang (paruh pertama, kuartal pertama, dll.) memberikan representasi yang koheren, meskipun tidak terlalu detail.</p>
@@ -434,7 +434,7 @@ res = client.search(
 <pre><code translate="no">Query: A teenager fakes illness to get off school and have adventures with two friends.
 Row 228: Ferris Bueller's Day Off
 </code></pre>
-<p>Kami melihat bahwa masalahnya adalah daftar kandidat awal tidak cukup besar, atau lebih tepatnya, hasil yang diinginkan tidak cukup mirip dengan kueri pada tingkat perincian tertinggi. Mengubahnya dari <code translate="no">128</code> ke <code translate="no">256</code> menghasilkan pengambilan yang berhasil. <em>Kita harus membuat sebuah aturan praktis untuk mengatur jumlah kandidat pada kumpulan yang ditahan untuk mengevaluasi secara empiris pertukaran antara recall dan latensi.</em></p>
+<p>Kami melihat bahwa masalahnya adalah daftar kandidat awal tidak cukup besar, atau lebih tepatnya, hasil yang diinginkan tidak cukup mirip dengan kueri pada tingkat perincian tertinggi. Mengubahnya dari <code translate="no">128</code> ke <code translate="no">256</code> menghasilkan pengambilan yang berhasil. <em>Kita harus membuat aturan praktis untuk mengatur jumlah kandidat pada kumpulan yang ditahan untuk mengevaluasi secara empiris pertukaran antara recall dan latensi.</em></p>
 <pre><code translate="no" class="language-python">dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 
 dfs_results = [
@@ -588,7 +588,7 @@ Leopard in the Snow
         ></path>
       </svg>
     </button></h2><p>Berikut ini adalah perbandingan hasil pencarian kami di seluruh metode:</p>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.6.x/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
-<div style='margin: auto; width: 100%;'><img translate="no" src='/docs/v2.6.x/assets/results-ferris-buellers-day-off.png' width='100%'></div>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.6.x/assets/results-the-shining.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
+<div style='margin: auto; width: 100%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-ferris-buellers-day-off.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-the-shining.png' width='100%'></div>
 Kami telah menunjukkan cara menggunakan penyematan Matryoshka dengan Milvus untuk melakukan algoritme pencarian semantik yang lebih efisien yang disebut "pencarian corong." Kami juga mengeksplorasi pentingnya langkah pemeringkatan dan pemangkasan algoritma, serta mode kegagalan ketika daftar kandidat awal terlalu kecil. Terakhir, kami membahas bagaimana urutan dimensi itu penting ketika membentuk sub-embedding - harus dengan cara yang sama seperti ketika model dilatih. Atau lebih tepatnya, hanya karena model dilatih dengan cara tertentu, maka awalan embedding menjadi bermakna. Sekarang Anda tahu cara mengimplementasikan sematan Matryoshka dan pencarian corong untuk mengurangi biaya penyimpanan pencarian semantik tanpa mengorbankan terlalu banyak kinerja pencarian!

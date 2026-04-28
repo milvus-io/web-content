@@ -21,7 +21,7 @@ title: بناء RAG مع ميلفوس
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/build_RAG_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/build_RAG_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/rag_search_with_milvus/pics/rag_demo.png"/></p>
-<p>في هذا البرنامج التعليمي، سوف نوضح لك في هذا البرنامج التعليمي كيفية بناء خط أنابيب RAG (استرجاع-توليد معزز) باستخدام Milvus.</p>
+<p>في هذا البرنامج التعليمي، سنوضح لك في هذا البرنامج التعليمي كيفية بناء خط أنابيب RAG (استرجاع-توليد معزز) باستخدام Milvus.</p>
 <p>يجمع نظام RAG بين نظام الاسترجاع والنموذج التوليدي لتوليد نص جديد بناءً على مطالبة معينة. يقوم النظام أولاً باسترجاع المستندات ذات الصلة من مجموعة مستندات باستخدام Milvus، ثم يستخدم نموذجًا توليديًا لإنشاء نص جديد بناءً على المستندات المسترجعة.</p>
 <h2 id="Preparation" class="common-anchor-header">الإعداد<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"

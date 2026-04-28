@@ -191,7 +191,7 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        nilai terkecil untuk tingkat ketidakseimbangan antara dari dan ke node saat melakukan penyeimbangan      </td>
+      <td>        nilai terkecil untuk tingkat ketidakseimbangan antara dari dan ke node saat melakukan keseimbangan      </td>
       <td>0.05</td>
     </tr>
   </tbody>
@@ -802,7 +802,7 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        100ms, batas waktu untuk memeriksa kesehatan rpc ke node kueri     </td>
+      <td>        100ms, batas waktu pemeriksaan kesehatan rpc ke node kueri     </td>
       <td>2000</td>
     </tr>
   </tbody>

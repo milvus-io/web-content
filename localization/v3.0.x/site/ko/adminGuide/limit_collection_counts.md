@@ -58,7 +58,7 @@ title: 수거 횟수 제한 설정
 </thead>
 <tbody>
 <tr><td><code translate="no">rootCoord.maxGeneralCapacity</code></td><td>현재 인스턴스가 보유할 수 있는 최대 컬렉션 단위 수(샤드 × 파티션)입니다.</td><td><code translate="no">65536</code></td></tr>
-<tr><td><code translate="no">quotaAndLimits.limits.maxCollectionNum</code></td><td>현재 인스턴스의 모든 데이터베이스에서 허용되는 최대 컬렉션 수입니다.</td><td><code translate="no">65536</code></td></tr>
+<tr><td><code translate="no">quotaAndLimits.limits.maxCollectionNum</code></td><td>현재 인스턴스의 모든 데이터베이스에 허용되는 최대 컬렉션 수입니다.</td><td><code translate="no">65536</code></td></tr>
 <tr><td><code translate="no">quotaAndLimits.limits.maxCollectionNumPerDB</code></td><td>단일 데이터베이스에 허용되는 최대 컬렉션 수입니다.</td><td><code translate="no">65536</code></td></tr>
 </tbody>
 </table>
@@ -96,4 +96,4 @@ title: 수거 횟수 제한 설정
 <p>이 예에서 계산된 총 960개의 컬렉션 단위는 현재 사용량을 나타냅니다. <code translate="no">maxGeneralCapacity</code> 은 인스턴스가 지원할 수 있는 최대 컬렉션 단위 수를 정의하며, 기본적으로 <code translate="no">65536</code> 으로 설정되어 있습니다. 즉, 인스턴스는 최대 65,536개의 컬렉션 단위를 수용할 수 있습니다. 총 개수가 이 제한을 초과하면 시스템에서 다음 오류 메시지를 표시합니다:</p>
 <pre><code translate="no" class="language-shell">failed checking constraint: sum_collections(parition*shard) exceeding the max general capacity:
 <button class="copy-code-btn"></button></code></pre>
-<p>이 오류를 방지하려면 기존 컬렉션 또는 새 컬렉션의 샤드 또는 파티션 수를 줄이거나 일부 컬렉션을 삭제하거나 <code translate="no">maxGeneralCapacity</code>, <code translate="no">maxCollectionNum</code>, <code translate="no">maxCollectionNumPerDB</code> 를 함께 수정하여 컬렉션 제한을 늘릴 수 있습니다.</p>
+<p>이 오류를 방지하려면 기존 컬렉션 또는 새 컬렉션의 샤드 또는 파티션 수를 줄이거나 일부 컬렉션을 삭제하거나 <code translate="no">maxGeneralCapacity</code>, <code translate="no">maxCollectionNum</code>, <code translate="no">maxCollectionNumPerDB</code> 을 함께 수정하여 컬렉션 제한을 늘릴 수 있습니다.</p>

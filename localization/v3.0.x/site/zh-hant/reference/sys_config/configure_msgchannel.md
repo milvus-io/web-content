@@ -210,7 +210,7 @@ summary: 了解如何為 Milvus 設定 msgChannel。
     <tr>
       <td>
         <li>資料協調器發布時間刻度訊息的訊息通道的子名稱前綴。</li>      
-        <li>完整的頻道名稱前綴是 ${msgChannel.chanNamePrefix.cluster}-${msgChannel.chanNamePrefix.dataCoordTimeTick} 。</li>      
+        <li>完整的頻道名稱前綴為 ${msgChannel.chanNamePrefix.cluster}-${msgChannel.chanNamePrefix.dataCoordTimeTick} 。</li>      
         <li>注意：在使用 Milvus 一段時間後更改此參數會影響您對舊資料的存取。</li>      
         <li>建議在第一次啟動 Milvus 之前更改此參數。</li>      </td>
       <td>datacoord-timetick-channel</td>
@@ -309,7 +309,7 @@ summary: 了解如何為 Milvus 設定 msgChannel。
       <td>
         <li>資料節點的訂閱名稱前綴。</li>      
         <li>注意：在使用 Milvus 一段時間後更改此參數，會影響您存取舊資料。</li>      
-        <li>建議在第一次啟動 Milvus 前變更此參數。</li>      </td>
+        <li>建議在第一次啟動 Milvus 之前更改此參數。</li>      </td>
       <td>數據節點</td>
     </tr>
   </tbody>

@@ -185,7 +185,7 @@ documents = SimpleDirectoryReader(
 <h4 id="sparse-field" class="common-anchor-header">스파스 필드</h4><ul>
 <li><code translate="no">enable_sparse (bool)</code>: 스파스 임베딩을 활성화 또는 비활성화하는 부울 플래그입니다. 기본값은 False입니다.</li>
 <li><code translate="no">sparse_embedding_field (str)</code>: 스파스 임베딩 필드의 이름, 기본값은 DEFAULT_SPARSE_EMBEDDING_KEY입니다.</li>
-<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>: enable_sparse가 True인 경우, 텍스트를 스파스 임베딩으로 변환하려면 이 객체를 제공해야 합니다. None이면 기본 스파스 임베딩 함수(BGEM3SparseEmbeddingFunction)가 사용됩니다.</li>
+<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>: enable_sparse가 True인 경우 텍스트를 스파스 임베딩으로 변환하려면 이 객체를 제공해야 합니다. None이면 기본 스파스 임베딩 함수(BGEM3SparseEmbeddingFunction)가 사용됩니다.</li>
 <li><code translate="no">sparse_index_config (dict, optional)</code>: 스파스 임베딩 인덱스를 구축하는 데 사용되는 구성입니다. 기본값은 None입니다.</li>
 </ul>
 <h4 id="hybrid-ranker" class="common-anchor-header">하이브리드 랭커</h4><ul>
@@ -197,7 +197,7 @@ documents = SimpleDirectoryReader(
 </ul></li>
 <li>"가중랭커"의 경우, 예상되는 값은 다음과 같습니다:<ul>
 <li>"가중치"(플로트 목록): 정확히 두 개의 가중치 목록입니다:<ol>
-<li>밀집 임베딩 컴포넌트에 대한 가중치.</li>
+<li>밀집 임베딩 구성 요소에 대한 가중치.</li>
 <li>희소 임베딩 구성 요소에 대한 가중치. 이러한 가중치는 하이브리드 검색 프로세스에서 임베딩의 밀도 및 희소 구성 요소의 중요성을 조정하는 데 사용됩니다. 기본값은 빈 사전으로, 이는 랭커가 미리 정의된 기본 설정으로 작동한다는 것을 의미합니다.</li>
 </ol></li>
 </ul></li>
@@ -209,7 +209,7 @@ documents = SimpleDirectoryReader(
 <li>"mmap.enabled"(bool): 컬렉션 수준에서 메모리 맵 저장소를 활성화할지 여부입니다.</li>
 </ul></li>
 <li><code translate="no">index_management (IndexManagement)</code>: 사용할 인덱스 관리 전략을 지정합니다. 기본값은 "create_if_not_exists"입니다.</li>
-<li><code translate="no">batch_size (int)</code>: 밀버스에 데이터를 삽입할 때 한 번에 처리할 문서 수를 설정합니다. 기본값은 DEFAULT_BATCH_SIZE입니다.</li>
+<li><code translate="no">batch_size (int)</code>: 밀버스에 데이터를 삽입할 때 한 번에 처리하는 문서 수를 설정합니다. 기본값은 DEFAULT_BATCH_SIZE입니다.</li>
 <li><code translate="no">consistency_level (str, optional)</code>: 새로 생성된 컬렉션에 사용할 일관성 수준입니다. 기본값은 "세션"입니다.</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create an index over the documents</span>

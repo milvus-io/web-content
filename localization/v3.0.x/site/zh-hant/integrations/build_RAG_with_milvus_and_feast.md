@@ -44,14 +44,14 @@ title: 使用 Milvus 和 Feast 建立 RAG
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Feast 可解決此流程中的幾個常見問題：</p>
+    </button></h1><p>Feast 解決了此流程中的幾個常見問題：</p>
 <ol>
 <li><strong>線上檢索：</strong>在推論時，LLM 經常需要存取並非現成可用的資料，而且需要從其他資料來源預先計算。<ul>
 <li>Feast 可以管理部署到各種線上商店（例如 Milvus、DynamoDB、Redis、Google Cloud Datastore）的資料，並確保必要的特徵在推論時一致<em>可用</em>，而且<em>是新計算的</em>。</li>
 </ul></li>
-<li><strong>向量搜尋：</strong>Feast 內建向量相似性搜尋支援，可輕鬆以宣告方式進行設定，讓使用者能專注於其應用程式。Milvus 提供強大且有效率的向量相似性搜尋功能。</li>
+<li><strong>向量搜尋：</strong>Feast 已建立向量相似性搜尋支援，可輕鬆以宣告方式進行設定，讓使用者能專注於其應用程式。Milvus 提供強大且有效率的向量相似性搜尋功能。</li>
 <li><strong>更豐富的結構化資料：</strong>除了向量搜尋外，使用者也可以查詢標準結構化欄位，以注入 LLM 上下文，獲得更好的使用者體驗。</li>
-<li><strong>特徵/上下文與版本管理：</strong>組織內的不同團隊通常無法跨專案和服務重複使用資料，導致應用程式邏輯重複。模型具有需要版本化的資料依賴性，例如在模型/提示版本上執行 A/B 測試時。<ul>
+<li><strong>特徵/上下文與版本管理：</strong>組織內的不同團隊往往無法跨專案與服務重複使用資料，造成應用程式邏輯重複。模型具有需要版本化的資料依賴性，例如在模型/提示版本上執行 A/B 測試時。<ul>
 <li>Feast 可讓您發現先前使用過的文件、功能並進行協作，還可讓資料集進行版本化。</li>
 </ul></li>
 </ol>
@@ -63,7 +63,7 @@ title: 使用 Milvus 和 Feast 建立 RAG
 <li>將文件注入 LLM 的上下文以回答問題</li>
 </ol>
 <div class="alert note">
-<p>本教學是基於<a href="https://github.com/feast-dev/feast/blob/master/examples/rag/milvus-quickstart.ipynb">Feast Repository</a> 的官方 Milvus 整合指南。雖然我們努力保持本教學最新，但如果您遇到任何差異，請參閱官方指南，並隨時在我們的資源庫中開啟一個問題，以進行任何必要的更新。</p>
+<p>本教學是基於<a href="https://github.com/feast-dev/feast/blob/master/examples/rag/milvus-quickstart.ipynb">Feast Repository</a> 的官方 Milvus 整合指南。雖然我們努力保持本教學最新，但如果您遇到任何差異，請參考官方指南，並隨時在我們的資源庫中開啟一個問題，以進行任何必要的更新。</p>
 </div>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,10 +80,25 @@ title: 使用 Milvus 和 Feast 建立 RAG
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies" class="common-anchor-header">依賴</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&#x27;feast[milvus]&#x27;</span> openai -U -q</span>
+    </button></h2><h3 id="Dependencies" class="common-anchor-header">依賴<button data-href="#Dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&#x27;feast[milvus]&#x27;</span> openai -U -q</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
+<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面頂端的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
 </div>
 <p>我們將使用 OpenAI 作為 LLM 提供者。您可以登入其官方網站，並將<a href="https://platform.openai.com/api-keys">OPENAI_API_KEY</a>準備為環境變數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -119,7 +134,22 @@ llm_client = OpenAI(
 │── feature_store.yaml     <span class="hljs-comment"># Configures Milvus and feature store settings</span>
 │── test_workflow.py       <span class="hljs-comment"># Example workflow for Feast operations</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Key-Configuration-Files" class="common-anchor-header">金鑰設定檔案</h3><h4 id="1-featurestoreyaml" class="common-anchor-header">1. feature_store.yaml</h4><p>此檔案設定功能商店基礎架構：</p>
+<h3 id="Key-Configuration-Files" class="common-anchor-header">金鑰設定檔案<button data-href="#Key-Configuration-Files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="1-featurestoreyaml" class="common-anchor-header">1. feature_store.yaml</h4><p>此檔案設定功能商店基礎架構：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">project:</span> <span class="hljs-string">rag</span>
 <span class="hljs-attr">provider:</span> <span class="hljs-string">local</span>
 <span class="hljs-attr">registry:</span> <span class="hljs-string">data/registry.db</span>
@@ -297,7 +327,7 @@ display(df.head())
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>現在我們將特徵載入 Milvus。這一步驟包括將離線商店中的特徵值序列化，並將它們寫入 Milvus。</p>
+    </button></h2><p>現在我們將特徵載入 Milvus。這一步驟包括序列化離線商店的特徵值，並將它們寫入 Milvus。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime
 <span class="hljs-keyword">from</span> feast <span class="hljs-keyword">import</span> FeatureStore
 <span class="hljs-keyword">import</span> warnings
@@ -419,7 +449,22 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="common-anchor-header">1.使用 PyTorch 和句子轉換器嵌入查詢</h3><p>在推理過程中（例如，當使用者提交聊天訊息時），我們需要嵌入輸入的文字。這可以視為輸入資料的特徵變換。在這個範例中，我們會使用 Hugging Face 的小型 Sentence Transformer 來做這個動作。</p>
+    </button></h2><h3 id="1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="common-anchor-header">1.使用 PyTorch 和句子轉換器嵌入查詢<button data-href="#1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在推論過程中（例如，當使用者提交聊天訊息時），我們需要嵌入輸入的文字。這可以視為輸入資料的特徵變換。在這個範例中，我們會使用 Hugging Face 的小型 Sentence Transformer 來做這個動作。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> feast <span class="hljs-keyword">import</span> FeatureStore
@@ -455,7 +500,22 @@ MODEL = <span class="hljs-string">&quot;sentence-transformers/all-MiniLM-L6-v2&q
     sentence_embeddings = F.normalize(sentence_embeddings, p=<span class="hljs-number">2</span>, dim=<span class="hljs-number">1</span>)
     <span class="hljs-keyword">return</span> sentence_embeddings
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2.擷取即時向量與資料以進行線上推理</h3><p>一旦查詢已轉換成嵌入，下一步就是從向量儲存擷取相關文件。在推論時，我們會利用向量相似性搜尋，找出儲存在線上特徵儲存庫中最相關的文件嵌入，使用<code translate="no">retrieve_online_documents_v2()</code> 。然後，這些特徵向量就可以送入 LLM 的上下文。</p>
+<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2.擷取即時向量與資料以進行線上推理<button data-href="#2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>一旦查詢已轉換成嵌入，下一步就是從向量儲存擷取相關文件。在推論時，我們會利用向量相似性搜尋，找出儲存在線上特徵儲存庫中最相關的文件嵌入，使用<code translate="no">retrieve_online_documents_v2()</code> 。然後，這些特徵向量就可以送入 LLM 的上下文。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;Which city has the largest population in New York?&quot;</span>
 
 tokenizer = AutoTokenizer.from_pretrained(TOKENIZER)
@@ -534,7 +594,22 @@ display(context_data)
   </tbody>
 </table>
 </div>
-<h3 id="3-Formatting-Retrieved-Documents-for-RAG-Context" class="common-anchor-header">3.為 RAG 上下文格式化擷取的文件</h3><p>擷取相關文件後，我們需要將資料格式化為結構化的上下文，以便在下游應用程式中有效使用。此步驟確保擷取的資訊是乾淨、有條理的，並可整合至 RAG 管道。</p>
+<h3 id="3-Formatting-Retrieved-Documents-for-RAG-Context" class="common-anchor-header">3.為 RAG 上下文格式化擷取的文件<button data-href="#3-Formatting-Retrieved-Documents-for-RAG-Context" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>擷取相關文件後，我們需要將資料格式化為結構化的上下文，以便在下游應用程式中有效使用。此步驟確保擷取的資訊是乾淨、有條理的，並可整合至 RAG 管道。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">format_documents</span>(<span class="hljs-params">context_df</span>):
     output_context = <span class="hljs-string">&quot;&quot;</span>
     unique_documents = context_df.drop_duplicates().apply(
@@ -561,7 +636,22 @@ New York City traces its origins to Fort Amsterdam and a trading post founded on
 Anchored by Wall Street in the Financial District of Lower Manhattan, New York City has been called both the world's premier financial and fintech center and the most economically powerful city in the world. As of 2022, the New York metropolitan area is the largest metropolitan economy in the world with a gross metropolitan product of over US$2.16 trillion. If the New York metropolitan area were its own country, it would have the tenth-largest economy in the world. The city is home to the world's two largest stock exchanges by market capitalization of their listed companies: the New York Stock Exchange and Nasdaq. New York City is an established safe haven for global investors. As of 2023, New York City is the most expensive city in the world for expatriates to live. New York City is home to the highest number of billionaires, individuals of ultra-high net worth (greater than US$30 million), and millionaires of any city in the world.}
 ****END DOCUMENT 0****
 </code></pre>
-<h3 id="4-Generating-Responses-Using-Retrieved-Context" class="common-anchor-header">4.使用擷取的上下文產生回應</h3><p>現在我們已經格式化了擷取的文件，可以將它們整合到結構化的提示中，以便產生回應。這一步驟可確保助手只依賴擷取的資訊，避免產生幻覺回應。</p>
+<h3 id="4-Generating-Responses-Using-Retrieved-Context" class="common-anchor-header">4.使用擷取的上下文產生回應<button data-href="#4-Generating-Responses-Using-Retrieved-Context" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>現在我們已經格式化了擷取的文件，可以將它們整合到結構化的提示中，以便產生回應。這個步驟可以確保助理僅依賴擷取的資訊，避免產生幻覺回應。</p>
 <pre><code translate="no" class="language-python">FULL_PROMPT = <span class="hljs-string">f&quot;&quot;&quot;
 You are an assistant for answering questions about states. You will be provided documentation from Wikipedia. Provide a conversational answer.
 If you don&#x27;t know the answer, just say &quot;I do not know.&quot; Don&#x27;t make up an answer.

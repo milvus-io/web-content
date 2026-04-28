@@ -38,7 +38,7 @@ ce_rf = CrossEncoderRerankFunction(
 <p><strong>参数</strong>：</p>
 <ul>
 <li><p><code translate="no">model_name</code> <em>(字符串）</em></p>
-<p>要使用的模型名称。可以指定任何可用的跨编码器模型名称，例如<code translate="no">cross-encoder/ms-marco-TinyBERT-L-2-v2</code>,<code translate="no">cross-encoder/ms-marco-MiniLM-L-2-v2</code> 等。如果不指定该参数，将使用空字符串。有关可用模型的列表，请参阅<a href="https://www.sbert.net/docs/pretrained_cross-encoders.html#">预训练交叉编码器</a>。</p></li>
+<p>要使用的模型名称。可以指定任何可用的 Cross-Encoder 模型名称，例如<code translate="no">cross-encoder/ms-marco-TinyBERT-L-2-v2</code>,<code translate="no">cross-encoder/ms-marco-MiniLM-L-2-v2</code> 等。如果不指定该参数，将使用空字符串。有关可用模型的列表，请参阅<a href="https://www.sbert.net/docs/pretrained_cross-encoders.html#">预训练交叉编码器</a>。</p></li>
 <li><p><code translate="no">device</code> <em>（字符串）</em></p>
 <p>用于运行模型的设备。可以为 CPU 指定<code translate="no">cpu</code> ，为第 n 个 GPU 设备指定<code translate="no">cuda:n</code> 。</p></li>
 </ul>

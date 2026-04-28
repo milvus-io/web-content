@@ -22,7 +22,7 @@ title: Recherche d'images avec PyTorch et Milvus
       </svg>
     </button></h1><p>Ce guide présente un exemple d'intégration de PyTorch et Milvus pour effectuer une recherche d'images à l'aide d'embeddings. PyTorch est un puissant framework d'apprentissage profond open-source largement utilisé pour construire et déployer des modèles d'apprentissage automatique. Dans cet exemple, nous exploiterons sa bibliothèque Torchvision et un modèle ResNet50 pré-entraîné pour générer des vecteurs de caractéristiques (embeddings) qui représentent le contenu des images. Ces embeddings seront stockés dans Milvus, une base de données vectorielle très performante, afin de permettre une recherche de similarité efficace. Le jeu de données utilisé est le jeu de données Impressionist-Classifier de <a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle</a>. En combinant les capacités d'apprentissage profond de PyTorch avec la fonctionnalité de recherche évolutive de Milvus, cet exemple montre comment construire un système de recherche d'images robuste et efficace.</p>
 <p>Commençons par le commencement !</p>
-<h2 id="Installing-the-requirements" class="common-anchor-header">Installer les exigences<button data-href="#Installing-the-requirements" class="anchor-icon" translate="no">
+<h2 id="Installing-the-requirements" class="common-anchor-header">Installation des exigences<button data-href="#Installing-the-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -295,5 +295,5 @@ plt.savefig(<span class="hljs-string">&#x27;search_result.png&#x27;</span>)
 <p>Le résultat de la recherche devrait ressembler à l'image suivante :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/integrate_with_pytorch.png" alt="Image search output" class="doc-image" id="image-search-output" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/integrate_with_pytorch.png" alt="Image search output" class="doc-image" id="image-search-output" />
    </span> <span class="img-wrapper"> <span>Résultat de la recherche d'images</span> </span></p>

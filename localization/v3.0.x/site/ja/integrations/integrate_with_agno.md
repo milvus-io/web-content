@@ -2,7 +2,7 @@
 id: integrate_with_agno.md
 title: MilvusとAgnoの統合
 summary: >-
-  Milvusのベクトルデータベースは、埋め込み情報として情報の効率的な保存と検索を可能にします。MilvusとAgnoを使用することで、Agentのワークフローにナレッジを簡単に統合することができます。このドキュメントは、MilvusとAgnoの統合の基本的な使い方を説明したものです。
+  Milvusのベクトルデータベースは、埋め込み情報として情報の効率的な保存と検索を可能にします。MilvusとAgnoを利用することで、Agentのワークフローにナレッジを簡単に統合することができます。このドキュメントは、MilvusとAgnoの統合の基本的な使い方を説明したものです。
 ---
 <h1 id="Integrate-Milvus-with-Agno" class="common-anchor-header">MilvusとAgnoの統合<button data-href="#Integrate-Milvus-with-Agno" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -26,7 +26,7 @@ summary: >-
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://docs.agno.com/introduction">Agno</a>（旧Phidata）は、マルチモーダルエージェントを構築するための軽量ライブラリです。テキスト、画像、音声、ビデオを理解し、様々なツールや知識ソースを活用して複雑なタスクを実行するマルチモーダルエージェントを作成することができます。Agnoは、マルチエージェントのオーケストレーションをサポートし、エージェントのチームが協力して問題を解決することを可能にします。また、エージェントと対話するための美しいエージェントUIを提供します。</p>
-<p>Milvusベクトルデータベースは、エンベッディングとして情報の効率的な保存と検索を可能にします。MilvusとAgnoを利用することで、お客様の知識をAgentのワークフローに簡単に統合することができます。このドキュメントは、MilvusとAgnoの統合の基本的な使い方を説明したものです。</p>
+<p>Milvusベクトルデータベースは、エンベッディングとして情報の効率的な保存と検索を可能にします。MilvusとAgnoを使用することで、お客様のナレッジをAgentのワークフローに簡単に統合することができます。このドキュメントは、MilvusとAgnoの統合の基本的な使い方を説明したものです。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +46,7 @@ summary: >-
 <pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus milvus-lite openai
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Google Colabを使用している場合、インストールした依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
+<p>Google Colabを使用している場合、インストールした依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があります（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
 </div>
 <p>この例では、LLMとしてOpenAIを使います。環境変数として<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を用意してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os

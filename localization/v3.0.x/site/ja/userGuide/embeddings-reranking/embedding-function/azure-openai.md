@@ -45,7 +45,7 @@ beta: Milvus 2.6.x
    </tr>
    <tr>
      <td><p>テキストエンベッディング-3-小</p></td>
-     <td><p>デフォルト：1,536（1536以下のディメンションサイズに変換可能）</p></td>
+     <td><p>デフォルト：1,536（1536以下のディメンションサイズに変更可能）</p></td>
      <td><p>8,191</p></td>
      <td><p>コスト重視でスケーラブルなセマンティック検索に最適-低価格で強力なパフォーマンスを提供。</p></td>
    </tr>
@@ -62,7 +62,7 @@ beta: Milvus 2.6.x
      <td><p>レガシーパイプラインや後方互換性を必要とするシナリオに適した前世代モデル。</p></td>
    </tr>
 </table>
-<p>第三世代の埋め込みモデル<strong>（text-embedding-3</strong>）は、<code translate="no">dim</code> パラメータによって埋め込みサイズを小さくすることができます。一般的に、埋め込みサイズが大きいと、計算、メモリ、ストレージの観点からコストが高くなります。次元数を調整できることで、全体的なコストとパフォーマンスをよりコントロールできるようになります。各モデルの詳細については、<a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard,standard-chat-completions#embeddings">埋め込みを</a>参照してください。</p>
+<p>第三世代の埋め込みモデル<strong>（text-embedding-3</strong>）は、<code translate="no">dim</code> パラメータによって埋め込みサイズを小さくすることができます。一般的に、埋め込みサイズが大きいと、計算、メモリ、ストレージの観点からコストが高くなります。次元数を調整できることで、全体的なコストとパフォーマンスをよりコントロールできるようになります。各モデルの詳細については、<a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard,standard-chat-completions#embeddings">エンベッディングを</a>参照してください。</p>
 <h2 id="Configure-credentials" class="common-anchor-header">認証情報の構成<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,7 +87,22 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>同じプロバイダのAPIキーが設定ファイルと環境変数の両方に存在する場合、milvusは常に<code translate="no">milvus.yaml</code> の値を使用し、環境変数は無視します。</p>
 </div>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">オプション 1: 設定ファイル (推奨 &amp; 優先度高)</h3><p><code translate="no">milvus.yaml</code>Milvusは起動時にAPIキーを読み込み、同じプロバイダの環境変数を上書きします。</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">オプション 1: 設定ファイル (推奨 &amp; 優先度高)<button data-href="#Option-1-Configuration-file-recommended--higher-priority" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">milvus.yaml</code>Milvusは起動時にAPIキーを読み込み、同じプロバイダの環境変数を上書きします。</p>
 <ol>
 <li><p>**の下にキーを宣言してください。<code translate="no">credential:</code></p>
 <p>APIキーは1つでも複数でもかまいません。それぞれに、後で参照するためのラベルを付けてください。</p>
@@ -98,7 +113,7 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>APIキーをここに記述することで、再起動後もAPIキーが保持され、ラベルを変更するだけでAPIキーを切り替えることができます。</p></li>
+<p>ここにAPIキーを記述することで、再起動後もAPIキーが保持され、ラベルを変更するだけでAPIキーを切り替えることができます。</p></li>
 <li><p><strong>MilvusにAzure OpenAIの呼び出しに使うキーを教える</strong></p>
 <p>同じファイルで、Azure OpenAIプロバイダーに使用したいラベルを指定する。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
@@ -111,7 +126,22 @@ beta: Milvus 2.6.x
 <button class="copy-code-btn"></button></code></pre>
 <p>これにより、MilvusがAzure OpenAIのembeddingsエンドポイントに送信するすべてのリクエストに特定のキーがバインドされます。</p></li>
 </ol>
-<h3 id="Option-2-Environment-variables" class="common-anchor-header">オプション 2: 環境変数</h3><p>Docker ComposeでMilvusを実行し、ファイルやイメージから秘密を守りたい場合にこの方法を使用します。</p>
+<h3 id="Option-2-Environment-variables" class="common-anchor-header">オプション 2: 環境変数<button data-href="#Option-2-Environment-variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Docker ComposeでMilvusを実行し、ファイルやイメージから秘密を守りたい場合にこの方法を使用します。</p>
 <p>Milvusは、<code translate="no">milvus.yaml</code> にプロバイダのキーが見つからない場合のみ、環境変数にフォールバックします。</p>
 <table>
    <tr>
@@ -157,13 +187,28 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>認証情報の設定が完了したら、以下の手順で埋め込み関数を定義し、使用します。</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">ステップ1: スキーマフィールドの定義</h3><p>埋め込み関数を使用するには、特定のスキーマを持つコレクションを作成します。このスキーマには、少なくとも3つの必要なフィールドが含まれていなければなりません：</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">ステップ1: スキーマフィールドの定義<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>埋め込み関数を使用するには、特定のスキーマを持つコレクションを作成します。このスキーマには、少なくとも3つの必要なフィールドが含まれていなければなりません：</p>
 <ul>
 <li><p>コレクション内の各エンティティを一意に識別するプライマリフィールド。</p></li>
 <li><p>埋め込む生データを格納するスカラーフィールド。</p></li>
 <li><p>スカラー・フィールドに対して関数が生成するベクトル埋め込みを格納するために予約されたベクトル・フィールド。</p></li>
 </ul>
-<p>次の例では、テキストデータを格納するためのスカラーフィールド<code translate="no">&quot;document&quot;</code> と、Functionモジュールによって生成される埋め込みデータを格納するためのベクトルフィールド<code translate="no">&quot;dense&quot;</code> を持つスキーマを定義しています。ベクトル次元(<code translate="no">dim</code>)は、選択した埋め込みモデルの出力に合わせて設定することを忘れないでください。</p>
+<p>以下の例では、テキストデータを格納するためのスカラーフィールド<code translate="no">&quot;document&quot;</code> と、Functionモジュールによって生成される埋め込みデータを格納するためのベクトルフィールド<code translate="no">&quot;dense&quot;</code> を持つスキーマを定義しています。ベクトル次元(<code translate="no">dim</code>)は、選択した埋め込みモデルの出力に合わせて設定することを忘れないでください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -184,7 +229,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1536</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">ステップ2：スキーマへの埋め込み関数の追加</h3><p>埋め込み関数を定義したら、コレクションスキーマに追加します。これにより、Milvusは指定された埋め込み関数を使用して、テキストデータからの埋め込みを処理・保存するようになります。</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">ステップ2：スキーマへの埋め込み関数の追加<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>埋め込み関数を定義したら、コレクションスキーマに追加します。これにより、Milvusは指定された埋め込み関数を使用して、テキストデータからの埋め込みを処理・保存するようになります。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function specifically for Azure OpenAI provider</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;azopenai&quot;</span>,                                <span class="hljs-comment"># Unique identifier for this embedding function</span>

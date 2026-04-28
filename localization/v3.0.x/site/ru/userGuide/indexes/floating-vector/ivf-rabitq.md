@@ -24,7 +24,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Индекс <strong>IVF_RABITQ</strong> - это алгоритм индексации <strong>на основе двоичного квантования</strong>, который квантует векторы FP32 в двоичное представление. Этот индекс обеспечивает исключительную эффективность хранения с коэффициентом сжатия 1 к 32, сохраняя при этом относительно хорошие показатели запоминания. Он поддерживает опциональное уточнение для достижения более высокого уровня запоминания ценой дополнительной памяти, что делает его универсальной заменой <a href="/docs/ru/ivf-sq8.md">IVF_SQ8</a> и <a href="/docs/ru/ivf-flat.md">IVF_FLAT</a> в сценариях с ограниченным объемом памяти.</p>
+    </button></h1><p>Индекс <strong>IVF_RABITQ</strong> - это алгоритм индексирования <strong>на основе двоичного квантования</strong>, который квантует векторы FP32 в двоичное представление. Этот индекс обеспечивает исключительную эффективность хранения с коэффициентом сжатия 1 к 32, сохраняя при этом относительно хорошие показатели запоминания. Он поддерживает опциональное уточнение для достижения более высокого уровня запоминания ценой дополнительной памяти, что делает его универсальной заменой <a href="/docs/ru/ivf-sq8.md">IVF_SQ8</a> и <a href="/docs/ru/ivf-flat.md">IVF_FLAT</a> в сценариях с ограниченным объемом памяти.</p>
 <h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,9 +41,39 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p><strong>IVF_RABITQ</strong> означает <strong>Inverted File with RaBitQ quantization</strong>, объединяющий две мощные техники для эффективного поиска и хранения векторов.</p>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p><strong>Inverted File (IVF)</strong> организует пространство векторов в управляемые регионы с помощью <a href="https://en.wikipedia.org/wiki/K-means_clustering">кластеризации k-means</a>. Каждый кластер представлен центроидом, который служит точкой отсчета для векторов внутри этого кластера. Такой подход к кластеризации сокращает пространство поиска, позволяя алгоритму сосредоточиться только на наиболее релевантных кластерах при обработке запроса.</p>
+<h3 id="IVF" class="common-anchor-header">IVF<button data-href="#IVF" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>Inverted File (IVF)</strong> организует пространство векторов в управляемые регионы с помощью <a href="https://en.wikipedia.org/wiki/K-means_clustering">кластеризации k-means</a>. Каждый кластер представлен центроидом, который служит точкой отсчета для векторов внутри этого кластера. Такой подход к кластеризации сокращает пространство поиска, позволяя алгоритму сосредоточиться только на наиболее релевантных кластерах при обработке запроса.</p>
 <p>Чтобы узнать больше о технических деталях IVF, обратитесь к разделу <a href="/docs/ru/ivf-flat.md">IVF_FLAT</a>.</p>
-<h3 id="RaBitQ" class="common-anchor-header">RaBitQ</h3><p><strong>RaBitQ</strong> - это современный метод бинарного квантования с теоретическими гарантиями, представленный в научной статье "RaBitQ: квантование высокоразмерных векторов с теоретическим ограничением ошибки для приближенного поиска ближайших соседей" Цзяньяна Гао и Ченга Лонга.</p>
+<h3 id="RaBitQ" class="common-anchor-header">RaBitQ<button data-href="#RaBitQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>RaBitQ</strong> - это современный метод бинарного квантования с теоретическими гарантиями, представленный в научной статье "RaBitQ: квантование высокоразмерных векторов с теоретическим ограничением ошибки для приближенного поиска ближайших соседей" Цзяньяна Гао и Ченга Лонга.</p>
 <p>RaBitQ представляет несколько инновационных концепций:</p>
 <p><strong>Кодирование угловой информации</strong>: В отличие от традиционного пространственного кодирования, RaBitQ кодирует угловую информацию через нормализацию вектора. В IVF_RABITQ векторы данных нормализуются относительно ближайшего центроида IVF, что повышает точность процесса квантования.</p>
 <p><strong>Теоретическая основа</strong>: Основная формула аппроксимации расстояния имеет вид:</p>
@@ -57,9 +87,24 @@ beta: Milvus 2.6.x
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">o~\tilde{\mathbf{o}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6813em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span> o</span></span></span></span></span></span></span></span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3.3634em;"><span class="pstrut" style="height:3em;"></span> ~ квантованный двоичный вектор, хранящийся в индексе</span></span></span></span></span></span></span></span> </li>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mo>⟨o~</mo></mover><mo separator="true">,</mo><mo stretchy="false">qr-co⟩\langle</mo></mrow><annotation encoding="application/x-tex">\tilde{\mathbf{o}}, \mathbf{q_r} - \mathbf{c_o} \rangle</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">⟨</span></span></span></span><span class="pstrut" style="height:3em;"></span> o<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3.3634em;"><span class="pstrut" style="height:3em;"></span> ~</span></span></span></span></span></span></span></span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span></span></span></span> q<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1611em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">r</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span> c</span></span></span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1611em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">o</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">⟩</span></span></span></span> представляет собой операцию точечного произведения.</li>
 </ul>
-<p><strong>Эффективность вычислений</strong>: Бинарная природа <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> o~\tilde{\mathbf{o}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6813em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span> o</span></span></span></span></span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3.3634em;"><span class="pstrut" style="height:3em;"></span> ~ делает вычисления расстояний чрезвычайно быстрыми, что особенно выгодно при использовании современных архитектур процессоров с выделенными инструкциями</span></span></span></span></span></span></span></span> <code translate="no">AVX-512 VPOPCNTDQ</code> на процессорах Intel Ice Lake+ или AMD Zen 4+.</p>
+<p><strong>Эффективность вычислений</strong>: Бинарная природа <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> o~\tilde{\mathbf{o}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6813em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span> o</span></span></span></span></span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3.3634em;"><span class="pstrut" style="height:3em;"></span> ~ делает вычисления расстояний чрезвычайно быстрыми, что особенно выгодно в современных архитектурах CPU с выделенными инструкциями</span></span></span></span></span></span></span></span> <code translate="no">AVX-512 VPOPCNTDQ</code> на процессорах Intel Ice Lake+ или AMD Zen 4+.</p>
 <p><strong>Алгоритмические усовершенствования</strong>: RaBitQ эффективно интегрируется с такими известными методами, как <a href="https://www.vldb.org/pvldb/vol9/p288-andre.pdf">подход<code translate="no">FastScan</code> </a> и <a href="https://github.com/facebookresearch/faiss/wiki/Pre--and-post-processing">случайные вращения</a>, что повышает производительность.</p>
-<h3 id="IVF-+-RaBitQ" class="common-anchor-header">ЭКО + RaBitQ</h3><p>Индекс <strong>IVF_RABITQ</strong> сочетает в себе эффективную кластеризацию IVF и передовое двоичное квантование RaBitQ:</p>
+<h3 id="IVF-+-RaBitQ" class="common-anchor-header">ЭКО + RaBitQ<button data-href="#IVF-+-RaBitQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Индекс <strong>IVF_RABITQ</strong> сочетает в себе эффективную кластеризацию IVF и передовое двоичное квантование RaBitQ:</p>
 <ol>
 <li><p><strong>Грубая фильтрация</strong>: IVF разбивает векторное пространство на кластеры, значительно сокращая область поиска за счет фокусировки на наиболее релевантных областях кластеров.</p></li>
 <li><p><strong>Бинарное квантование</strong>: Внутри каждого кластера RaBitQ сжимает векторы в двоичное представление, сохраняя при этом существенные отношения расстояний с помощью теоретических гарантий.</p></li>
@@ -165,7 +210,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>В этом разделе представлен обзор параметров, используемых для построения индекса и выполнения поиска по нему.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Параметры построения индекса</h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">params</code> при <a href="/docs/ru/ivf-rabitq.md#Build-index">построении индекса</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Параметры построения индекса<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">params</code> при <a href="/docs/ru/ivf-rabitq.md#Build-index">построении индекса</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -195,7 +255,22 @@ res = MilvusClient.search(
      <td><p>Перечисленные значения представлены в порядке возрастания частоты запоминания, уменьшения QPS и увеличения размера хранилища. <code translate="no">SQ8</code> рекомендуется в качестве отправной точки, обеспечивая хороший баланс между точностью и использованием ресурсов.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Параметры поиска, специфичные для индекса</h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">search_params.params</code> при <a href="/docs/ru/ivf-rabitq.md#Search-on-index">поиске по индексу</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Параметры поиска, специфичные для индекса<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">search_params.params</code> при <a href="/docs/ru/ivf-rabitq.md#Search-on-index">поиске по индексу</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -207,7 +282,7 @@ res = MilvusClient.search(
    <tr>
      <td><p>ЭКО</p></td>
      <td><p><code translate="no">nprobe</code></p></td>
-     <td><p>Количество кластеров для поиска кандидатов. Большие значения позволяют искать в большем количестве кластеров, что улучшает запоминание благодаря расширению области поиска, но ценой увеличения задержки запроса.</p></td>
+     <td><p>Количество кластеров для поиска кандидатов. Большие значения позволяют искать в большем количестве кластеров, что улучшает запоминание за счет расширения области поиска, но ценой увеличения задержки запроса.</p></td>
      <td><p><strong>Тип</strong>: Целое число<br><strong>Диапазон</strong>: [1, <em>nlist</em>].<br><strong>Значение по умолчанию</strong>: <code translate="no">8</code></p></td>
      <td><p>Увеличение этого значения улучшает запоминание, но может замедлить поиск. Установите значение <code translate="no">nprobe</code> пропорционально значению <code translate="no">nlist</code>, чтобы сбалансировать скорость и точность. В большинстве случаев мы рекомендуем устанавливать значение в этом диапазоне: [1, <em>nlist</em>].</p></td>
    </tr>

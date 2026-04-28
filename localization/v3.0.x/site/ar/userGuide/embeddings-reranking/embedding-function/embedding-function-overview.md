@@ -27,7 +27,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>تسمح لك وحدة الدالة في Milvus بتحويل البيانات النصية الخام إلى تضمينات متجهة عن طريق الاتصال تلقائيًا بموفري خدمة التضمين الخارجيين (مثل OpenAI و AWS Bedrock و Google Vertex AI، إلخ). باستخدام الوحدة النمطية Function، لم تعد بحاجة إلى التفاعل يدويًا مع واجهات برمجة تطبيقات التضمين - حيث تتولى ميلفوس العملية الكاملة لإرسال الطلبات إلى مقدمي الخدمات، واستلام التضمينات، وتخزينها في مجموعاتك. للبحث الدلالي، تحتاج إلى توفير بيانات استعلام أولية فقط، وليس متجه استعلام. ينشئ Milvus متجه الاستعلام بنفس النموذج الذي استخدمته في الاستيعاب، ويقارنه بالمتجهات المخزنة، ويعيد النتائج الأكثر صلة.</p>
+    </button></h1><p>تسمح لك وحدة الدالة في Milvus بتحويل البيانات النصية الخام إلى تضمينات متجهة عن طريق الاتصال تلقائيًا بموفري خدمة التضمين الخارجيين (مثل OpenAI و AWS Bedrock و Google Vertex AI، إلخ). باستخدام الوحدة النمطية Function، لم تعد بحاجة إلى التفاعل يدويًا مع واجهات برمجة تطبيقات التضمين - حيث يتعامل ميلفوس مع العملية الكاملة لإرسال الطلبات إلى مقدمي الخدمات، واستلام التضمينات، وتخزينها في مجموعاتك. للبحث الدلالي، تحتاج إلى توفير بيانات استعلام أولية فقط، وليس متجه استعلام. ينشئ Milvus متجه الاستعلام بنفس النموذج الذي استخدمته في الاستيعاب، ويقارنه بالمتجهات المخزنة، ويعيد النتائج الأكثر صلة.</p>
 <h2 id="Limits" class="common-anchor-header">الحدود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -96,7 +96,7 @@ beta: Milvus 2.6.x
    </tr>
    <tr>
      <td><p><a href="/docs/ar/bedrock.md">بيدروك</a></p></td>
-     <td><p>أمازون.تيتان-تضمين النص-ف2</p></td>
+     <td><p>أمازون.تيتان-تضمين-نص-ف2</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>زوج AK/SK</p></td>
    </tr>
@@ -131,7 +131,7 @@ beta: Milvus 2.6.x
      <td><p>مفتاح API اختياري</p></td>
    </tr>
 </table>
-<h2 id="How-it-works" class="common-anchor-header">كيف تعمل<button data-href="#How-it-works" class="anchor-icon" translate="no">
+<h2 id="How-it-works" class="common-anchor-header">كيف يعمل<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -157,7 +157,7 @@ beta: Milvus 2.6.x
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
    </span> <span class="img-wrapper"> <span>نظرة عامة على وظيفة التضمين</span> </span></p>
 <h2 id="Configure-credentials" class="common-anchor-header">تكوين بيانات الاعتماد<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -185,7 +185,7 @@ beta: Milvus 2.6.x
 <p>يوضح الرسم البياني التالي عملية تكوين بيانات الاعتماد عبر ملف تكوين Milvus (<code translate="no">milvus.yaml</code>) ثم استدعاء الوظيفة داخل Milvus.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
    </span> <span class="img-wrapper"> <span>تجاوز تكوين بيانات الاعتماد</span> </span></p>
 <h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">الخطوة 1: إضافة بيانات الاعتماد إلى ملف تكوين Milvus<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -607,7 +607,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>تعمل كلتا الطريقتين، لكن استخدام <code translate="no">milvus.yaml</code> هو النهج الموصى به لأنه يوفر إدارة مركزية لبيانات الاعتماد وتسمية متسقة لبيانات الاعتماد عبر جميع الموفرين. عند استخدام متغيرات البيئة، تختلف أسماء المتغيرات اعتمادًا على موفر خدمة التضمين، لذا راجع الصفحة المخصصة لكل موفر لفهم أسماء متغيرات البيئة المحددة المطلوبة (على سبيل المثال، <a href="/docs/ar/openai.md">OpenAI</a> أو <a href="/docs/ar/azure-openai.md">Azure OpenAI</a>).</p>
+    </button></h3><p>تعمل كلتا الطريقتين، ولكن استخدام <code translate="no">milvus.yaml</code> هو النهج الموصى به لأنه يوفر إدارة مركزية لبيانات الاعتماد وتسمية متسقة لبيانات الاعتماد عبر جميع الموفرين. عند استخدام متغيرات البيئة، تختلف أسماء المتغيرات اعتمادًا على موفر خدمة التضمين، لذا راجع الصفحة المخصصة لكل موفر لفهم أسماء متغيرات البيئة المحددة المطلوبة (على سبيل المثال، <a href="/docs/ar/openai.md">OpenAI</a> أو <a href="/docs/ar/azure-openai.md">Azure OpenAI</a>).</p>
 <h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">ماذا يحدث إذا لم أحدد معلمة بيانات الاعتماد في تعريف الدالة؟<button data-href="#What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

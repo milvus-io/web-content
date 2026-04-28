@@ -64,37 +64,37 @@ title: 在AnythingLLM中使用Milvus
 <li>打開AnythingLLM，點擊左下角的<strong>設置</strong>圖標<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_dashboard.png" alt="Open Settings" class="doc-image" id="open-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_dashboard.png" alt="Open Settings" class="doc-image" id="open-settings" />
    </span> <span class="img-wrapper"> <span>打開設置</span> </span></li>
 </ol>
 <ol start="2">
 <li><p>在左側菜單中，選擇<code translate="no">AI Providers</code> &gt;<code translate="no">Vector Database</code> <br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_config.png" alt="Select Vector Database" class="doc-image" id="select-vector-database" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_config.png" alt="Select Vector Database" class="doc-image" id="select-vector-database" />
    </span> <span class="img-wrapper"> <span>選擇向量資料庫</span> </span></p></li>
 <li><p>在向量資料庫提供者下拉選單中，選擇<strong>Milvus</strong>(或 Zilliz Cloud)<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_vectordb.png" alt="Choose Milvus" class="doc-image" id="choose-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_vectordb.png" alt="Choose Milvus" class="doc-image" id="choose-milvus" />
    </span> <span class="img-wrapper"> <span>選擇 Milvus</span> </span></p></li>
 <li><p>填入您的 Milvus 連線詳細資料（適用於本機 Milvus）。以下是一個範例：</p>
 <ul>
 <li><strong>Milvus DB 地址：</strong> <code translate="no">http://localhost:19530</code></li>
-<li><strong>Milvus 用戶名：</strong> <code translate="no">root</code></li>
+<li><strong>Milvus 使用者名稱</strong>：<code translate="no">root</code></li>
 <li><strong>Milvus 密碼</strong>：<code translate="no">Milvus</code>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_milvus.png" alt="Milvus Connection" class="doc-image" id="milvus-connection" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_milvus.png" alt="Milvus Connection" class="doc-image" id="milvus-connection" />
    </span> <span class="img-wrapper"> <span>Milvus 連線</span> </span></li>
 </ul>
 <blockquote>
-<p>如果使用 Zilliz Cloud，請輸入您的 Cluster Endpoint 和 API Token：</p>
-</blockquote>
-<p>
+<p>如果使用 Zilliz Cloud，請輸入您的 Cluster Endpoint 和 API Token：<br>
+
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_zilliz_cloud.png" alt="Zilliz Cloud Connection" class="doc-image" id="zilliz-cloud-connection" />
-   </span> <span class="img-wrapper"> <span>Zilliz Cloud 連線</span> </span></p></li>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_zilliz_cloud.png" alt="Zilliz Cloud Connection" class="doc-image" id="zilliz-cloud-connection" />
+   </span> <span class="img-wrapper"> <span>Zilliz Cloud 連線</span> </span></p>
+</blockquote></li>
 <li><p>按一下<strong>儲存變更</strong>以套用您的設定。</p></li>
 </ol>
 <hr>
@@ -117,7 +117,7 @@ title: 在AnythingLLM中使用Milvus
 <li><p>輸入您的工作區，然後按一下<strong>上傳</strong>圖示以開啟文件上傳對話框<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_upload_file.png" alt="Open Upload Dialog" class="doc-image" id="open-upload-dialog" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_upload_file.png" alt="Open Upload Dialog" class="doc-image" id="open-upload-dialog" />
    </span> <span class="img-wrapper"> <span>開啟上傳對話框</span> </span></p></li>
 <li><p>您可以上傳各種資料來源：</p>
 <ul>
@@ -126,17 +126,17 @@ title: 在AnythingLLM中使用Milvus
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_upload_interface.png" alt="Upload Documents" class="doc-image" id="upload-documents" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_upload_interface.png" alt="Upload Documents" class="doc-image" id="upload-documents" />
    </span> <span class="img-wrapper"> <span>上傳文件</span> </span></p></li>
-<li><p>上傳或取得內容後，按一下<strong>Move to Workspace</strong>可將文件或資料移動到目前的工作區中<br>
+<li><p>上傳或擷取後，按一下<strong>Move to Workspace</strong>可將文件或資料移到目前的工作區中<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_move_to_workspace.png" alt="Move to Workspace" class="doc-image" id="move-to-workspace" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_move_to_workspace.png" alt="Move to Workspace" class="doc-image" id="move-to-workspace" />
    </span> <span class="img-wrapper"> <span>移動到工作區</span> </span></p></li>
-<li><p>選擇文件或資料，點擊<strong>保存和嵌入</strong>。AnythingLLM 將自動分塊、嵌入並儲存您的內容到 Milvus 中。<br>
+<li><p>選擇文件或資料，然後點擊<strong>保存和嵌入</strong>。AnythingLLM 將自動分塊、嵌入並儲存您的內容到 Milvus 中。<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_save_and_embed.png" alt="Save and Embed" class="doc-image" id="save-and-embed" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_save_and_embed.png" alt="Save and Embed" class="doc-image" id="save-and-embed" />
    </span> <span class="img-wrapper"> <span>儲存和嵌入</span> </span></p></li>
 </ol>
 <hr>
@@ -156,10 +156,10 @@ title: 在AnythingLLM中使用Milvus
         ></path>
       </svg>
     </button></h2><ol>
-<li>回到工作區聊天介面並提出問題。AnythingLLM 將搜索您的 Milvus 向量資料庫中的相關內容，並使用 LLM 產生答案。<br>
+<li>回到工作區聊天介面並提出問題。AnythingLLM 將搜索您的 Milvus 向量資料庫中的相關內容，並使用 LLM 生成答案<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_chat.png" alt="Chat with Docs" class="doc-image" id="chat-with-docs" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_chat.png" alt="Chat with Docs" class="doc-image" id="chat-with-docs" />
    </span> <span class="img-wrapper"> <span>與文件聊天</span> </span></li>
 </ol>
 <hr>

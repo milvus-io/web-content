@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 中的<code translate="no">NGRAM</code> 索引是為了加速對<code translate="no">VARCHAR</code> 欄位或<code translate="no">JSON</code> 欄位內特定 JSON 路徑的<code translate="no">LIKE</code> 查詢而建立的。在建立索引之前，Milvus 會將文字分割成固定長度<em>n</em> 的短小、重疊子串，稱為<em>n-gram</em>。例如，當<em>n = 3</em> 時，單字<em>「Milvus」</em>會被分割成 3 個字元：<em>"Mil"、</em> <em>"ilv"、"</em> <em>lvu 「</em>和<em>」vus"。</em>這些 n-grams 會儲存在一個反向索引中，該索引會將每個 gram 對應到其出現的文件 ID。在查詢時，此索引允許 Milvus 快速將搜尋範圍縮小到一小組候選詞，從而大大加快了查詢的執行速度。</p>
+    </button></h1><p>Milvus 中的<code translate="no">NGRAM</code> 索引是為了加速對<code translate="no">VARCHAR</code> 欄位或<code translate="no">JSON</code> 欄位內特定 JSON 路徑的<code translate="no">LIKE</code> 查詢而建立的。在建立索引之前，Milvus 會將文字分割成固定長度<em>n</em> 的短小、重疊子串，稱為<em>n-gram</em>。例如，當<em>n = 3</em> 時，單字<em>「Milvus」</em>會被分割成 3 個字元：<em>"Mil"、</em> <em>"ilv"、"</em> <em>lvu 「</em>和<em>」vus"。</em>這些 n 個字元被儲存在一個反向索引中，該索引會將每個字元對應到其出現的文件 ID。在查詢時，此索引允許 Milvus 快速將搜尋範圍縮小到一小組候選詞，從而大大加快了查詢的執行速度。</p>
 <p>當您需要快速的前綴、後綴、下綴或通配符篩選時，請使用它，例如：</p>
 <ul>
 <li><p><code translate="no">name LIKE &quot;data%&quot;</code></p></li>
@@ -138,7 +138,7 @@ A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/accelerate-queries.png" alt="Accelerate Queries" class="doc-image" id="accelerate-queries" />
    </span> <span class="img-wrapper"> <span>加速查詢</span> </span></p>
 <ol>
-<li><p><strong>擷取查詢字詞：</strong>從<code translate="no">LIKE</code> 表達式中萃取不含通配符的連續子串 (例如<code translate="no">&quot;%database%&quot;</code> 變成<code translate="no">&quot;database&quot;</code>)。</p></li>
+<li><p><strong>擷取查詢詞：</strong>從<code translate="no">LIKE</code> 表達式中萃取不含通配符的連續子串 (例如<code translate="no">&quot;%database%&quot;</code> 變成<code translate="no">&quot;database&quot;</code>)。</p></li>
 <li><p><strong>分解查詢詞：</strong>根據查詢詞的長度 (<code translate="no">L</code>) 以及<code translate="no">min_gram</code> 和<code translate="no">max_gram</code> 的設定，將查詢詞分解為<em>n 個字元</em>。</p>
 <ul>
 <li><p>如果<code translate="no">L &lt; min_gram</code> ，則無法使用索引，查詢會退回到完整掃描。</p></li>
@@ -205,7 +205,7 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>此設定會為<code translate="no">text</code> 中的每個字串產生 2-gram 和 3-gram，並將它們儲存於反向索引中。</p>
+<p>此設定會為<code translate="no">text</code> 中的每個字串產生 2-gram 和 3-gram，並將它們儲存在反向索引中。</p>
 <h3 id="Example-2-Create-on-a-JSON-path" class="common-anchor-header">範例 2：在 JSON 路徑上製作<button data-href="#Example-2-Create-on-a-JSON-path" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

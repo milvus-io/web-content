@@ -115,7 +115,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">decay</code> (0.5): Il punteggio alla distanza della scala: questo parametro controlla il tasso di declino della rilevanza.</p></li>
 <li><p><code translate="no">scale</code> (10 giorni): Il periodo di tempo in cui la rilevanza scende al valore di decadimento: gli eventi a 10 giorni di distanza hanno il punteggio di rilevanza dimezzato (0,5).</p></li>
 </ul>
-<p>Come si può vedere dalla curva rettilinea, gli eventi a distanza di circa 16 giorni hanno una rilevanza esattamente pari a zero e non appaiono affatto nei risultati di ricerca. In questo modo si crea un chiaro confine che assicura che gli utenti vedano solo gli eventi imminenti rilevanti all'interno di una finestra temporale definita.</p>
+<p>Come si può vedere dalla curva rettilinea, gli eventi che si verificano a circa 16 giorni di distanza hanno una rilevanza esattamente pari a zero e non appaiono affatto nei risultati di ricerca. In questo modo si crea un chiaro confine che assicura che gli utenti vedano solo gli eventi imminenti rilevanti all'interno di una finestra temporale definita.</p>
 <p>Questo comportamento rispecchia il funzionamento tipico della pianificazione degli eventi: gli eventi imminenti sono i più rilevanti, quelli delle prossime settimane hanno un'importanza decrescente e quelli troppo lontani nel tempo (o già passati) non dovrebbero comparire affatto.</p>
 <h2 id="Formula" class="common-anchor-header">La formula<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -162,7 +162,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Il decadimento lineare può essere applicato sia alla ricerca vettoriale standard che alle operazioni di ricerca ibrida in Milvus. Di seguito sono riportati i principali frammenti di codice per implementare questa funzione.</p>
 <div class="alert note">
-<p>Prima di utilizzare le funzioni di decadimento, è necessario creare una collezione con campi numerici appropriati (come timestamp, distanze, ecc.) che saranno utilizzati per i calcoli di decadimento. Per esempi di lavoro completi, che includono l'impostazione della raccolta, la definizione dello schema e l'inserimento dei dati, consultare l'<a href="/docs/it/tutorial-implement-a-time-based-ranking-in-milvus.md">esercitazione</a> sul <a href="/docs/it/tutorial-implement-a-time-based-ranking-in-milvus.md">Decay Ranker</a>.</p>
+<p>Prima di utilizzare le funzioni di decadimento, è necessario creare una collezione con campi numerici appropriati (come timestamp, distanze, ecc.) che verranno utilizzati per i calcoli di decadimento. Per esempi di lavoro completi, che includono l'impostazione della raccolta, la definizione dello schema e l'inserimento dei dati, consultare l'<a href="/docs/it/tutorial-implement-a-time-based-ranking-in-milvus.md">esercitazione</a> sul <a href="/docs/it/tutorial-implement-a-time-based-ranking-in-milvus.md">Decay Ranker</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">Creare un ranker di decadimento<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
       <svg translate="no"

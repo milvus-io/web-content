@@ -48,7 +48,7 @@ summary: >-
   <span class="hljs-attr">maxMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment"># sets the maximum memory usage limit. When the memory usage exceeds initMemSize, Milvus will attempt to expand the memory pool.</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>La valeur par défaut <code translate="no">initMemSize</code> correspond généralement à la moitié de la mémoire du GPU au démarrage de Milvus, et la valeur par défaut <code translate="no">maxMemSize</code> correspond à la totalité de la mémoire du GPU. La taille du pool de mémoire GPU est initialement fixée à <code translate="no">initMemSize</code> et s'étend automatiquement à <code translate="no">maxMemSize</code> si nécessaire.</p>
-<p>Lorsqu'un index compatible avec le GPU est spécifié, Milvus charge les données de la collection cible dans la mémoire du GPU avant les recherches, de sorte que <code translate="no">maxMemSize</code> doit être au moins égal à la taille des données.</p>
+<p>Lorsqu'un index activé par le GPU est spécifié, Milvus charge les données de la collection cible dans la mémoire du GPU avant les recherches, de sorte que <code translate="no">maxMemSize</code> doit être au moins égal à la taille des données.</p>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -112,7 +112,7 @@ summary: >-
    <tr>
      <td><p><a href="/docs/fr/gpu-brute-force.md">GPU_BRUTE_FORCE</a></p></td>
      <td><p>GPU_BRUTE_FORCE est conçu pour les cas où un rappel extrêmement élevé est crucial, garantissant un rappel de 1 en comparant chaque requête avec tous les vecteurs de l'ensemble de données. Il ne nécessite que le type de métrique (<code translate="no">metric_type</code>) et le top-k (<code translate="no">limit</code>) comme paramètres de construction d'index et de recherche.</p></td>
-     <td><p>Il nécessite une mémoire égale à la taille des données d'origine.</p></td>
+     <td><p>Il nécessite une mémoire égale à la taille des données originales.</p></td>
    </tr>
 </table>
 <h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Configurer les paramètres Milvus pour le contrôle de la mémoire GPU<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">

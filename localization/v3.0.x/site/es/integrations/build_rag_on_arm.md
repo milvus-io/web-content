@@ -214,7 +214,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h3><p>El <a href="https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf">modelo Llama-3.1-8B</a> de Meta pertenece a la familia de modelos Llama 3.1 y es de uso libre para investigación y fines comerciales. Antes de utilizar el modelo, visite el <a href="https://llama.meta.com/llama-downloads/">sitio web</a> de Llama y rellene el formulario para solicitar acceso.</p>
-<p><a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a> es un proyecto C/C++ de código abierto que permite una inferencia LLM eficiente en una variedad de hardware, tanto localmente como en la nube. Puede alojar cómodamente un modelo Llama 3.1 utilizando <code translate="no">llama.cpp</code>.</p>
+<p><a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a> es un proyecto C/C++ de código abierto que permite una inferencia LLM eficiente en una gran variedad de hardware, tanto localmente como en la nube. Puede alojar cómodamente un modelo Llama 3.1 utilizando <code translate="no">llama.cpp</code>.</p>
 <h3 id="Download-and-build-llamacpp" class="common-anchor-header">Descarga y compila llama.cpp<button data-href="#Download-and-build-llamacpp" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

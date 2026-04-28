@@ -176,7 +176,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>종속성은 다른 프로그램이 작동하기 위해 의존하는 프로그램입니다. Milvus의 종속성에는 etcd(메타 데이터 저장), MinIO 또는 S3(개체 저장소), Pulsar(스냅샷 로그 관리) 등이 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/manage_dependencies.md#Manage-Dependencies">종속성 관리를</a> 참조하세요.</p>
+    </button></h2><p>종속성이란 다른 프로그램이 작동하기 위해 의존하는 프로그램입니다. Milvus의 종속성에는 etcd(메타 데이터 저장), MinIO 또는 S3(개체 저장소), Pulsar(스냅샷 로그 관리) 등이 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/manage_dependencies.md#Manage-Dependencies">종속성 관리를</a> 참조하세요.</p>
 <h2 id="Dynamic-schema" class="common-anchor-header">동적 스키마<button data-href="#Dynamic-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -391,7 +391,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MemoryBuffer는 메모리에 들어오는 쓰기를 일시적으로 버퍼링하고 주기적으로 클라우드 객체 스토리지로 플러시하는 Woodpecker의 경량 배포 모드입니다. 이 모드는 성능보다 단순성을 우선시하는 소규모 배포 또는 프로덕션 환경의 일괄 처리량이 많은 워크로드에 가장 적합합니다. 자세한 내용은 <a href="/docs/ko/woodpecker_architecture.md">딱따구리 아키텍처를</a> 참조하세요.</p>
+    </button></h2><p>MemoryBuffer는 메모리에 들어오는 쓰기를 일시적으로 버퍼링하고 주기적으로 클라우드 오브젝트 스토리지로 플러시하는 Woodpecker의 경량 배포 모드입니다. 이 모드는 성능보다 단순성을 우선시하는 소규모 배포 또는 프로덕션 환경의 일괄 처리량이 많은 워크로드에 가장 적합합니다. 자세한 내용은 <a href="/docs/ko/woodpecker_architecture.md">딱따구리 아키텍처를</a> 참조하세요.</p>
 <h2 id="Mmap" class="common-anchor-header">Mmap<button data-href="#Mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -679,7 +679,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>세그먼트는 삽입된 데이터를 저장하기 위해 자동으로 생성되는 데이터 파일입니다. 컬렉션에는 여러 세그먼트가 포함될 수 있으며, 각 세그먼트에는 수많은 엔티티가 포함될 수 있습니다. 벡터 유사도 검색 중에 Milvus는 각 세그먼트를 검사하여 검색 결과를 컴파일합니다.</p>
+    </button></h2><p>세그먼트는 삽입된 데이터를 저장하기 위해 자동으로 생성되는 데이터 파일입니다. 컬렉션에는 여러 세그먼트가 포함될 수 있으며, 각 세그먼트에는 수많은 엔티티가 포함될 수 있습니다. 벡터 유사도 검색을 수행하는 동안 Milvus는 각 세그먼트를 검사하여 검색 결과를 컴파일합니다.</p>
 <p>세그먼트에는 성장하는 세그먼트와 봉인된 세그먼트의 두 가지 유형이 있습니다. 성장하는 세그먼트는 특정 임계값이나 시간 제한에 도달할 때까지 계속해서 새로운 데이터를 수집하고, 그 후에는 봉인됩니다. 일단 봉인된 세그먼트는 더 이상 새 데이터를 받지 않고 오브젝트 스토리지로 전송됩니다. 한편, 들어오는 데이터는 새로 생성되는 세그먼트로 라우팅됩니다. 성장 중인 세그먼트에서 봉인된 세그먼트로의 전환은 미리 정의된 엔티티 제한에 도달하거나 성장 상태의 최대 허용 기간을 초과하면 트리거됩니다. 자세한 내용은 <a href="https://milvus.io/docs/replica.md#Design-Details">디자인 세부 정보를</a> 참조하세요.</p>
 <h2 id="Spark-Milvus-Connector" class="common-anchor-header">스파크-밀버스 커넥터<button data-href="#Spark-Milvus-Connector" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -696,7 +696,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/zilliztech/spark-milvus">Spark-Milvus Connector는</a> Apache Spark와 Milvus 간의 원활한 통합을 제공하여 Apache Spark의 데이터 처리 및 머신 러닝(ML) 기능과 Milvus의 벡터 데이터 저장 및 검색 기능을 결합합니다.</p>
+    </button></h2><p><a href="https://github.com/zilliztech/spark-milvus">Spark-Milvus 커넥터는</a> Apache Spark와 Milvus 간의 원활한 통합을 제공하여 Apache Spark의 데이터 처리 및 머신 러닝(ML) 기능과 Milvus의 벡터 데이터 저장 및 검색 기능을 결합합니다.</p>
 <h2 id="Shard" class="common-anchor-header">Shard<button data-href="#Shard" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -777,7 +777,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>V채널은 가상 채널을 의미합니다. 각 V채널은 컬렉션의 샤드를 나타냅니다. 각 컬렉션에는 데이터 삽입, 삭제, 업데이트를 기록하기 위한 V채널 그룹이 할당됩니다. V채널은 논리적으로 분리되어 있지만 스트리밍 서비스를 통해 물리적으로 리소스를 공유합니다. 자세한 내용은 <a href="/docs/ko/streaming_service.md">스트리밍 서비스를</a> 참조하세요.</p>
+    </button></h2><p>VChannel은 가상 채널을 의미합니다. 각 V채널은 컬렉션의 샤드를 나타냅니다. 각 컬렉션에는 데이터 삽입, 삭제, 업데이트를 기록하기 위한 V채널 그룹이 할당됩니다. V채널은 논리적으로 분리되어 있지만 스트리밍 서비스를 통해 물리적으로 리소스를 공유합니다. 자세한 내용은 <a href="/docs/ko/streaming_service.md">스트리밍 서비스를</a> 참조하세요.</p>
 <h2 id="Vector" class="common-anchor-header">벡터<button data-href="#Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

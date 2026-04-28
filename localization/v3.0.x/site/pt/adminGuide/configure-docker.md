@@ -289,7 +289,7 @@ Os dados são armazenados na pasta <code translate="no">/volumes</code> de acord
     </button></h2><ul>
 <li>Saiba como gerenciar as seguintes dependências do Milvus com o Docker Compose ou o Helm:<ul>
 <li><a href="/docs/pt/deploy_s3.md">Configurar o armazenamento de objetos com o Docker Compose ou o Helm</a></li>
-<li><a href="/docs/pt/deploy_etcd.md">Configurar o armazenamento de meta com o Docker Compose ou Helm</a></li>
+<li><a href="/docs/pt/deploy_etcd.md">Configurar o armazenamento de meta com o Docker Compose ou o Helm</a></li>
 <li><a href="/docs/pt/deploy_pulsar.md">Configurar o armazenamento de mensagens com o Docker Compose ou o Helm</a></li>
 </ul></li>
 </ul>

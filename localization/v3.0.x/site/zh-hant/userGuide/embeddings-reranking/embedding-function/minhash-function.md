@@ -83,7 +83,7 @@ beta: Milvus 3.0.x
 <ol>
 <li><p><strong>文本分析</strong>：文字由<a href="/docs/zh-hant/analyzer-overview.md">分析器</a>處理 (當<code translate="no">token_level</code> 是<code translate="no">&quot;word&quot;</code>)，或直接使用 (當<code translate="no">token_level</code> 是<code translate="no">&quot;char&quot;</code>)。詞彙層級的標記化應用在輸入欄位上設定的分析器，將文字分割成詞彙 - 例如，<code translate="no">&quot;milvus is vector db&quot;</code> 變成<code translate="no">[&quot;milvus&quot;, &quot;is&quot;, &quot;vector&quot;, &quot;db&quot;]</code> 。</p></li>
 <li><p><strong>分割</strong>：標記被分割成大小為<code translate="no">shingle_size</code> 的重疊 n-grams (shingles)。例如，在字詞層面上使用 3-grams 時，標記<code translate="no">[&quot;information&quot;, &quot;retrieval&quot;, &quot;is&quot;, &quot;a&quot;, &quot;field&quot;]</code> 就會變成<code translate="no">[&quot;information retrieval is&quot;, &quot;retrieval is a&quot;, &quot;is a field&quot;]</code> 之類的 shingles。</p></li>
-<li><p><strong>MinHash 簽名產生</strong>：多個散列函數 (H1, H2, ..., Hn, 其中 n =<code translate="no">num_hashes</code>) 應用於字串集。對於每個切細函數，會在所有銘牌中選取最小的切細值。這些最小值的集合形成 MinHash 簽署 - 一個固定長度的表示，近似原始文件的 Jaccard 相似度。</p></li>
+<li><p><strong>MinHash 簽名產生</strong>：多重散列函數 (H1, H2, ..., Hn, 其中 n =<code translate="no">num_hashes</code>) 應用於楔形集。對於每個切細函數，會在所有銘牌中選取最小的切細值。這些最小值的集合形成 MinHash 簽署 - 一個固定長度的表示，近似原始文件的 Jaccard 相似度。</p></li>
 <li><p><strong>二進位向量編碼</strong>：每個簽章值都是 32 位元的切細值，完整的簽章會打包成維度為<code translate="no">BINARY_VECTOR</code> 的<code translate="no">32 * num_hashes</code> 。</p></li>
 </ol>
 <h3 id="Document-ingestion" class="common-anchor-header">文件擷取<button data-href="#Document-ingestion" class="anchor-icon" translate="no">
@@ -402,7 +402,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>插入資料後，提供原始文字查詢，搜尋接近重複的文件。Milvus 會自動將您的查詢文字轉換成 MinHash 二進位向量，並使用估計的 Jaccard 相似度檢索最相似的文件。</p>
+    </button></h2><p>插入資料後，提供原始文字查詢，搜尋接近重複的文件。Milvus 會自動將您的查詢文字轉換成 MinHash 二進位向量，並使用估計的 Jaccard 相似度擷取最相似的文件。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {

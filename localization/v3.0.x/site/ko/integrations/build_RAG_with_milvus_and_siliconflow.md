@@ -24,7 +24,7 @@ title: Milvus와 SiliconFlow로 RAG 구축하기
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_siliconflow.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://siliconflow.cn/">SiliconFlow는</a> 확장 가능하고 표준화된 고성능 AI 인프라 플랫폼을 구축하기 위해 노력하고 있습니다. SiliconCloud는 서비스형 모델(MaaS) 플랫폼으로 설명되는 SiliconFlow의 대표 제품 중 하나입니다. 대규모 언어 모델(LLM) 및 임베딩 모델을 비롯한 다양한 AI 모델을 배포할 수 있는 포괄적인 환경을 제공합니다. SiliconCloud는 수많은 오픈 소스 모델을 통합하여 사용자가 광범위한 인프라 설정 없이도 이러한 리소스에 쉽게 액세스하고 활용할 수 있도록 지원합니다.</p>
+<p><a href="https://siliconflow.cn/">SiliconFlow는</a> 확장 가능하고 표준화된 고성능 AI 인프라 플랫폼을 구축하기 위해 최선을 다하고 있습니다. SiliconCloud는 서비스형 모델(MaaS) 플랫폼으로 설명되는 SiliconFlow의 대표 제품 중 하나입니다. 대규모 언어 모델(LLM) 및 임베딩 모델을 비롯한 다양한 AI 모델을 배포할 수 있는 포괄적인 환경을 제공합니다. SiliconCloud는 수많은 오픈 소스 모델을 통합하여 사용자가 광범위한 인프라 설정 없이도 이러한 리소스에 쉽게 액세스하고 활용할 수 있도록 지원합니다.</p>
 <p>이 튜토리얼에서는 Milvus와 SiliconFlow를 사용하여 RAG(검색 증강 생성) 파이프라인을 구축하는 방법을 보여드리겠습니다.</p>
 <h2 id="Preparation" class="common-anchor-header">준비 사항<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -97,7 +97,7 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-Embedding-Model" class="common-anchor-header">임베딩 모델 준비<button data-href="#Prepare-the-Embedding-Model" class="anchor-icon" translate="no">
+<h3 id="Prepare-the-Embedding-Model" class="common-anchor-header">임베딩 모델 준비하기<button data-href="#Prepare-the-Embedding-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -185,7 +185,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>지정된 파라미터로 새 컬렉션을 생성합니다.</p>
-<p>필드 정보를 지정하지 않으면 기본 키인 <code translate="no">id</code> 필드와 벡터 데이터를 저장할 <code translate="no">vector</code> 필드가 자동으로 생성됩니다. 예약된 JSON 필드는 스키마에 정의되지 않은 필드와 그 값을 저장하는 데 사용됩니다.</p>
+<p>필드 정보를 지정하지 않으면 기본 키로 <code translate="no">id</code> 필드와 벡터 데이터를 저장할 <code translate="no">vector</code> 필드가 자동으로 생성됩니다. 예약된 JSON 필드는 스키마에 정의되지 않은 필드와 그 값을 저장하는 데 사용됩니다.</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,

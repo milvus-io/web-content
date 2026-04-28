@@ -138,7 +138,7 @@ docs = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>استخدم التضمين الكثيف + دالة Milvus BM25 المدمجة لتجميع مثيل مخزن متجه الاسترجاع الهجين.</p>
+    </button></h3><p>استخدم التضمين الكثيف + الدالة المدمجة Milvus BM25 لتجميع مثيل مخزن متجه الاسترجاع الهجين.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, BM25BuiltInFunction
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
@@ -178,7 +178,7 @@ vectorstore = Milvus.from_documents(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يمكنك أن ترث الفئة <code translate="no">BaseSparseEmbedding</code> من <code translate="no">langchain_milvus.utils.sparse</code> ، وتنفيذ الطريقتين <code translate="no">embed_query</code> و <code translate="no">embed_documents</code> لتخصيص عملية التضمين المتناثر. يسمح لك هذا بتخصيص أي طريقة تضمين متناثرة بناءً على إحصائيات تردد المصطلح (مثل <a href="https://milvus.io/docs/embed-with-bm25.md#BM25">BM25</a>) أو الشبكات العصبية (مثل <a href="https://milvus.io/docs/embed-with-splade.md#SPLADE">SPADE</a>).</p>
+    </button></h3><p>يمكنك أن ترث الفئة <code translate="no">BaseSparseEmbedding</code> من <code translate="no">langchain_milvus.utils.sparse</code> ، وتنفيذ الطريقتين <code translate="no">embed_query</code> و <code translate="no">embed_documents</code> لتخصيص عملية التضمين المتناثر. يسمح لك ذلك بتخصيص أي طريقة تضمين متناثرة بناءً على إحصائيات تردد المصطلح (مثل <a href="https://milvus.io/docs/embed-with-bm25.md#BM25">BM25</a>) أو الشبكات العصبية (مثل <a href="https://milvus.io/docs/embed-with-splade.md#SPLADE">SPADE</a>).</p>
 <p>إليك مثال على ذلك:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Dict</span>, <span class="hljs-type">List</span>
 <span class="hljs-keyword">from</span> langchain_milvus.utils.sparse <span class="hljs-keyword">import</span> BaseSparseEmbedding
@@ -207,7 +207,7 @@ vectorstore = Milvus.from_documents(
             }
         ] * <span class="hljs-built_in">len</span>(texts)
 <button class="copy-code-btn"></button></code></pre>
-<p>لدينا فئة تجريبية <code translate="no">BM25SparseEmbedding</code> موروثة من <code translate="no">BaseSparseEmbedding</code> في <code translate="no">langchain_milvus.utils.sparse</code>. يمكنك تمريرها إلى قائمة تضمين التهيئة لمثيل مخزن متجه ميلفوس المتجه تمامًا مثل فئات التضمين الكثيفة الأخرى في لانجشين.</p>
+<p>لدينا فئة تجريبية <code translate="no">BM25SparseEmbedding</code> موروثة من <code translate="no">BaseSparseEmbedding</code> في <code translate="no">langchain_milvus.utils.sparse</code>. يمكنك تمريرها في قائمة تضمين التهيئة لمثيل مخزن متجه ميلفوس المتجه تمامًا مثل فئات التضمين الكثيفة الأخرى في لانجشين.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># BM25SparseEmbedding is inherited from BaseSparseEmbedding</span>
 <span class="hljs-keyword">from</span> langchain_milvus.utils.sparse <span class="hljs-keyword">import</span> BM25SparseEmbedding
 

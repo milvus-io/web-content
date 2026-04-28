@@ -39,7 +39,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>يجب أن يكون حقل الإخراج <code translate="no">BINARY_VECTOR</code> ببعد يفي <code translate="no">dim % 32 == 0</code> ، لأن كل توقيع MinHash هو قيمة تجزئة 32 بت.</p></li>
+<li><p>يجب أن يكون حقل الإخراج <code translate="no">BINARY_VECTOR</code> ببعد يفي <code translate="no">dim % 32 == 0</code> ، لأن كل توقيع MinHash عبارة عن قيمة تجزئة 32 بت.</p></li>
 <li><p>يجب أن يكون <code translate="no">dim</code> لحقل المتجه الثنائي يساوي <code translate="no">32 * num_hashes</code>. يؤدي عدم التطابق إلى حدوث خطأ.</p></li>
 <li><p>عند استخدام فهرس <code translate="no">MINHASH_LSH</code> مع مخرجات دالة MinHash، يجب تعيين <code translate="no">mh_element_bit_width</code> على <code translate="no">32</code>.</p></li>
 </ul>
@@ -120,7 +120,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h3><p>أثناء البحث، يمرّ نص الاستعلام عبر نفس خط الأنابيب المشترك لإنتاج متجه ثنائي. يُستخدم هذا المتجه لإجراء عملية بحث عن LSH في فهرس <code translate="no">MINHASH_LSH</code> ، والذي يحدد بسرعة الأزواج المرشحة التي من المحتمل أن تكون متشابهة. يتم بعد ذلك ترتيب المرشحين حسب تشابه جاكارد المقدر ويتم إرجاع أفضل النتائج.</p>
-<p>نظرًا لأن كلا المسارين يشتركان في نفس منطق التحويل، فإن المستندين اللذين يتداخل محتواهما بشكل كبير ينتج عنهما توقيعات MinHash متشابهة. وهذا يجعل الدالة فعّالة في العثور على التكرارات شبه المتشابهة حتى عندما تختلف المستندات في ترتيب الكلمات أو التنسيق أو الصياغة الثانوية.</p>
+<p>نظرًا لأن كلا المسارين يشتركان في نفس منطق التحويل، فإن المستندين اللذين يتداخل محتواهما بشكل كبير ينتج عنهما توقيعات MinHash متشابهة. هذا يجعل الدالة فعّالة في العثور على التكرارات شبه المتشابهة حتى عندما تختلف المستندات في ترتيب الكلمات أو التنسيق أو الصياغة الثانوية.</p>
 <p></details></p>
 <h2 id="Before-you-start" class="common-anchor-header">قبل البدء<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -268,7 +268,7 @@ schema.add_function(minhash_function)
      <td><p><code translate="no">hash_function</code></p></td>
      <td><p>ش</p></td>
      <td><p><code translate="no">"xxhash"</code></p></td>
-     <td><p>دالة التجزئة المراد استخدامها. الخيارات: </p><ul><li><p><code translate="no">"xxhash"</code> (سريع)</p></li><li><p><code translate="no">"sha1"</code> (أبطأ، مقاومة أعلى للتصادم).</p></li></ul></td>
+     <td><p>دالة التجزئة المراد استخدامها. خيارات: </p><ul><li><p><code translate="no">"xxhash"</code> (سريع)</p></li><li><p><code translate="no">"sha1"</code> (أبطأ، مقاومة أعلى للتصادم).</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">token_level</code></p></td>
@@ -369,7 +369,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بعد إعداد مجموعتك، أدخل بيانات نصية. ما عليك سوى توفير النص الخام - تقوم الدالة MinHash تلقائيًا بإنشاء المتجه الثنائي لكل مستند.</p>
+    </button></h2><p>بعد إعداد مجموعتك، أدخل بيانات نصية. تحتاج فقط إلى توفير النص الخام - تقوم الدالة MinHash تلقائيًا بإنشاء المتجه الثنائي لكل مستند.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.insert(
@@ -404,7 +404,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد إدراج البيانات، ابحث عن المستندات شبه المكررة من خلال توفير استعلامات نصية أولية. يقوم Milvus تلقائيًا بتحويل نص الاستعلام الخاص بك إلى متجه ثنائي MinHash ويسترجع المستندات الأكثر تشابهًا باستخدام تشابه Jaccard المقدر.</p>
+    </button></h2><p>بمجرد إدخال البيانات، ابحث عن المستندات شبه المكررة من خلال توفير استعلامات نصية أولية. يقوم Milvus تلقائيًا بتحويل نص الاستعلام الخاص بك إلى متجه ثنائي MinHash ويسترجع المستندات الأكثر تشابهًا باستخدام تشابه Jaccard المقدر.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {

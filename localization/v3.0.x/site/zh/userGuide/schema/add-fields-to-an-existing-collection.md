@@ -179,7 +179,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <button class="copy-code-btn"></button></code></pre>
 <p>预期行为：</p>
 <ul>
-<li><p><strong>现有实体的</strong>新字段为 NULL</p></li>
+<li><p><strong>现有实体的</strong>新字段将为 NULL</p></li>
 <li><p><strong>新实体</strong>可以有 NULL 或实际值</p></li>
 <li><p>由于内部 Schema 同步，<strong>字段可用性</strong>几乎立即发生，延迟极小</p></li>
 <li><p>短暂同步后<strong>可立即查询</strong></p></li>
@@ -553,7 +553,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
 <button class="copy-code-btn"></button></code></pre>
 <p>预期行为：</p>
 <ul>
-<li><p><strong>现有实体</strong>将为新的静态字段设置 NULL<code translate="no">extra_info</code></p></li>
+<li><p><strong>现有实体</strong>将为新静态字段设置 NULL<code translate="no">extra_info</code></p></li>
 <li><p><strong>新实体</strong>必须使用静态字段的数据类型 (<code translate="no">INT64</code>)</p></li>
 <li><p>保留<strong>原始动态字段键值</strong>，并可通过<code translate="no">$meta</code> 语法访问</p></li>
 <li><p>在正常查询中，<strong>静态字段会屏蔽动态字段键值</strong></p></li>
@@ -673,4 +673,4 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>新增字段几乎立即可用，但由于整个 Milvus 集群的内部 Schema 变化广播，可能会有短暂延迟。这种同步可确保在处理涉及新字段的查询之前，所有节点都知道 Schema 的更新。</p>
+    </button></h3><p>添加的字段几乎立即可用，但由于整个 Milvus 集群的内部 Schema 变化广播，可能会有短暂的延迟。这种同步可确保在处理涉及新字段的查询之前，所有节点都知道 Schema 的更新。</p>

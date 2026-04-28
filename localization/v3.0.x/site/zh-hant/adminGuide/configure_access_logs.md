@@ -46,7 +46,22 @@ title: 配置訪問日誌
 <li><strong>本機存取記錄檔的組態</strong>：用於在本機儲存記錄。</li>
 <li><strong>將本機存取記錄上傳至 MinIO 的組態</strong>：用於雲端儲存與備份。</li>
 </ul>
-<h3 id="Base-config" class="common-anchor-header">基本設定</h3><p>基本設定包括啟用存取日誌、定義日誌檔名或使用 stdout。</p>
+<h3 id="Base-config" class="common-anchor-header">基本設定<button data-href="#Base-config" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>基本設定包括啟用存取日誌、定義日誌檔名或使用 stdout。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -58,7 +73,22 @@ title: 配置訪問日誌
 <li><code translate="no">proxy.accessLog.enable</code>:是否啟用存取記錄功能。預設為<strong>false</strong>。</li>
 <li><code translate="no">proxy.accessLog.filename</code>:存取日誌檔案名稱。如果將此參數留空，存取日誌會列印到 stdout。</li>
 </ul>
-<h3 id="Config-for-local-access-log-files" class="common-anchor-header">配置本機存取日誌檔案</h3><p>設定存取日誌檔案的本機儲存，參數包括本機檔案路徑、檔案大小和輪換時間間隔：</p>
+<h3 id="Config-for-local-access-log-files" class="common-anchor-header">配置本機存取日誌檔案<button data-href="#Config-for-local-access-log-files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>設定存取日誌檔案的本機儲存，參數包括本機檔案路徑、檔案大小和輪換時間間隔：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -76,7 +106,22 @@ title: 配置訪問日誌
 <li><code translate="no">proxy.accessLog.rotatedTime</code>:允許輪換單一存取記錄檔的最大時間間隔 (以秒為單位)。當達到指定的時間間隔，就會觸發輪換程序，建立新的存取記錄檔，並封存先前的存取記錄檔。</li>
 <li><code translate="no">proxy.accessLog.maxBackups</code>:可保留的最大封存存取記錄檔數量。如果封存的存取日誌檔案數量超過此限制，則會刪除最舊的檔案。</li>
 </ul>
-<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">將本機存取記錄檔上傳至 MinIO 的設定</h3><p>啟用並設定將本機存取記錄檔上傳至 MinIO 的設定：</p>
+<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">將本機存取記錄檔上傳至 MinIO 的設定<button data-href="#Config-for-uploading-local-access-log-files-to-MinIO" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>啟用並設定將本機存取記錄檔上傳至 MinIO 的設定：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>

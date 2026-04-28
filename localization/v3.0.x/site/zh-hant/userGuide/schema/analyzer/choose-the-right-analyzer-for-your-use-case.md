@@ -40,10 +40,10 @@ summary: 注意事項
 <p>分析器以簡單的兩階段管道運作：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
    </span> <span class="img-wrapper"> <span>分析器工作流程</span> </span></p>
 <ol>
-<li><p><strong>標記化 (必要)：</strong>這個初始階段會套用<strong>標記化程式</strong>，將連續的文字串分割成離散、有意義的單位，稱為標記。標記化方法會因語言和內容類型的不同而有很大的差異。</p></li>
+<li><p><strong>標記化 (必要)：</strong>這個初始階段會套用<strong>標記器</strong>，將連續的文字串分解成稱為標記的離散、有意義的單位。標記化方法會因語言和內容類型的不同而有顯著差異。</p></li>
 <li><p><strong>標記篩選 (選用)：</strong>在標記化之後，會套用<strong>篩選器</strong>來修改、移除或精細化標記。這些作業可包括將所有標記轉換為小寫，移除常見的無意義的字詞 (例如停止字)，或將字詞還原為其字根形式 (字幹化)。</p></li>
 </ol>
 <p><strong>範例</strong>：</p>
@@ -51,7 +51,7 @@ summary: 注意事項
        1. Tokenization → [&quot;Hello&quot;, &quot;World&quot;, &quot;!&quot;]
        2. Lowercase &amp; Punctuation Filtering → [&quot;hello&quot;, &quot;world&quot;]
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Why-the-choice-of-analyzer-matters" class="common-anchor-header">為何分析器的選擇很重要<button data-href="#Why-the-choice-of-analyzer-matters" class="anchor-icon" translate="no">
+<h2 id="Why-the-choice-of-analyzer-matters" class="common-anchor-header">為什麼分析器的選擇很重要<button data-href="#Why-the-choice-of-analyzer-matters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -87,7 +87,7 @@ summary: 注意事項
      <td><p>標記化不足</p></td>
      <td><p>搜尋多字詞組的元件時，無法返回包含完整詞組的文件。</p></td>
      <td><p><code translate="no">"state-of-the-art"</code> →<code translate="no">['state-of-the-art']</code></p></td>
-     <td><p>帶有 <a href="/docs/zh-hant/whitespace-tokenizer.md"><code translate="no">whitespace</code></a>標記器</p></td>
+     <td><p>分析器與 <a href="/docs/zh-hant/whitespace-tokenizer.md"><code translate="no">whitespace</code></a>標記器</p></td>
      <td><p>使用 <a href="/docs/zh-hant/standard-tokenizer.md"><code translate="no">standard</code></a>tokenizer 來分割標點符號和空格；使用自訂<a href="/docs/zh-hant/regex-filter.md">regex</a>過濾器。</p></td>
    </tr>
    <tr>
@@ -214,7 +214,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>內建分析器是針對一般語言預先設定的解決方案。當預設標準分析器不適合時，它們是最簡單的入門方法。</p>
+    </button></h2><p>內建分析器是常用語言的預先設定解決方案。當預設標準分析器不適合時，它們是最簡單的入門方法。</p>
 <h3 id="Available-built-in-analyzers" class="common-anchor-header">可用的內建分析器<button data-href="#Available-built-in-analyzers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -245,7 +245,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
    </tr>
    <tr>
      <td><p><a href="/docs/zh-hant/english-analyzer.md"><code translate="no">english</code></a></p></td>
-     <td><p>專用於英語，可應用詞幹處理和停止詞移除，以達到更好的英語語意匹配。</p></td>
+     <td><p>專用於英語，可應用詞幹處理和停止詞移除，以達到更好的英語語義匹配。</p></td>
      <td><ul><li><p>標記器：<code translate="no">standard</code></p></li><li><p>過濾器：<code translate="no">lowercase</code>,<code translate="no">stemmer</code> 、<code translate="no">stop</code></p></li></ul></td>
      <td><p>建議使用於純英文內容，超過<code translate="no">standard</code> 。</p></td>
    </tr>
@@ -662,7 +662,7 @@ analyzer_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>適用於具有全面過濾功能的英文文字處理。您也可以使用內建的 <a href="/docs/zh-hant/english-analyzer.md"><code translate="no">english</code></a>分析器：</p>
+    </button></h3><p>用於具有全面過濾功能的英文文字處理。您也可以使用內建的 <a href="/docs/zh-hant/english-analyzer.md"><code translate="no">english</code></a>分析器：</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [

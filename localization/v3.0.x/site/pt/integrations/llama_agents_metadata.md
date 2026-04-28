@@ -70,7 +70,7 @@ title: 'Sistemas Multi-agentes com Mistral AI, Milvus e Llama-agents'
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
    </span> <span class="img-wrapper"> <span>image.png</span> </span></p>
 <h2 id="llama-agents" class="common-anchor-header">llama-agentes<button data-href="#llama-agents" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -112,7 +112,7 @@ title: 'Sistemas Multi-agentes com Mistral AI, Milvus e Llama-agents'
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
    </span> <span class="img-wrapper"> <span>image.png</span> </span></p>
 <h2 id="Mistral-AI" class="common-anchor-header">Mistral AI<button data-href="#Mistral-AI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -263,7 +263,7 @@ Settings.llm = Ollama(<span class="hljs-string">&quot;mistral-nemo&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/">Milvus</a> é um popular banco de dados vetorial de código aberto que alimenta aplicativos de IA com pesquisa de similaridade vetorial escalável e de alto desempenho.</p>
+    </button></h2><p><a href="https://milvus.io/">O Milvus</a> é um popular banco de dados vetorial de código aberto que alimenta aplicativos de IA com pesquisa de similaridade vetorial escalável e de alto desempenho.</p>
 <ul>
 <li>Definir o uri como um ficheiro local, por exemplo,<code translate="no">./milvus.db</code>, é o método mais conveniente, uma vez que utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
 <li>Se tiver uma grande escala de dados, digamos mais de um milhão de vectores, pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Nesta configuração, utilize o uri do servidor, por exemplo,<code translate="no">http://localhost:19530</code>, como o seu uri.</li>
@@ -377,8 +377,8 @@ Uber's total revenue for the year ended December 31, 2021 was $17,455 million.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>O Milvus</strong> suporta a <a href="https://zilliz.com/blog/json-metadata-filtering-in-milvus">filtragem de metadados</a>, uma técnica que permite refinar e restringir os resultados da pesquisa com base em atributos específicos ou etiquetas associadas aos seus dados. Isto é particularmente útil em cenários em que tem muitos dados e precisa de recuperar apenas o subconjunto relevante de dados que corresponde a determinados critérios.</p>
-<h2 id="Use-Cases-for-Metadata-Filtering" class="common-anchor-header">Casos de utilização para filtragem de metadados<button data-href="#Use-Cases-for-Metadata-Filtering" class="anchor-icon" translate="no">
+    </button></h2><p><strong>O Milvus</strong> suporta <a href="https://zilliz.com/blog/json-metadata-filtering-in-milvus">a filtragem de metadados</a>, uma técnica que permite refinar e restringir os resultados da pesquisa com base em atributos específicos ou etiquetas associadas aos seus dados. Isto é particularmente útil em cenários em que tem muitos dados e precisa de recuperar apenas o subconjunto relevante de dados que corresponde a determinados critérios.</p>
+<h2 id="Use-Cases-for-Metadata-Filtering" class="common-anchor-header">Casos de utilização da filtragem de metadados<button data-href="#Use-Cases-for-Metadata-Filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -579,7 +579,7 @@ Based on the provided context, which pertains to Lyft&#x27;s Risk Factors sectio
 <li><p><strong>Modelo de prompt</strong>: A classe PromptTemplate é utilizada para definir um modelo para extrair filtros de metadados da pergunta do utilizador. O modelo dá instruções ao modelo de linguagem para considerar nomes de empresas, anos e outros atributos relevantes.</p></li>
 <li><p><strong>LLM</strong>: Mistral Nemo é utilizado para gerar os filtros de metadados com base na pergunta do utilizador. O modelo é solicitado com a pergunta e o modelo para extrair os filtros relevantes.</p></li>
 <li><p><strong>Filtros de metadados</strong>: A resposta do LLM é analisada para criar um objeto <code translate="no">MetadataFilters</code>. Se não forem mencionados filtros específicos, é devolvido um objeto <code translate="no">MetadataFilters</code> vazio.</p></li>
-<li><p><strong>Motor de consulta filtrado</strong>: O método <code translate="no">index.as_query_engine(filters=metadata_filters)</code> cria um motor de consulta que aplica os filtros de metadados extraídos ao índice. Isto garante que apenas são recuperados os documentos que correspondem aos critérios de filtragem.</p></li>
+<li><p><strong>Motor de consulta filtrada</strong>: O método <code translate="no">index.as_query_engine(filters=metadata_filters)</code> cria um motor de consulta que aplica os filtros de metadados extraídos ao índice. Isto garante que apenas são recuperados os documentos que correspondem aos critérios de filtragem.</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core.prompts.base <span class="hljs-keyword">import</span> PromptTemplate
 
@@ -677,7 +677,7 @@ Uber's total revenue for the year ended December 31, 2021, is $17.455 billion.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>A pergunta que está a ser respondida abaixo é particularmente desafiadora porque requer a orquestração de vários serviços e agentes para fornecer uma resposta coerente e precisa. Isto envolve a coordenação de várias ferramentas e agentes para obter e processar informações de diferentes fontes, como dados financeiros de diferentes empresas.</p>
+    </button></h3><p>A pergunta que está a ser respondida abaixo é particularmente desafiante porque requer a orquestração de vários serviços e agentes para fornecer uma resposta coerente e precisa. Isto envolve a coordenação de várias ferramentas e agentes para obter e processar informações de diferentes fontes, como dados financeiros de diferentes empresas.</p>
 <h3 id="Whats-so-difficult-about-that" class="common-anchor-header">O que é que isso tem de tão difícil?<button data-href="#Whats-so-difficult-about-that" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

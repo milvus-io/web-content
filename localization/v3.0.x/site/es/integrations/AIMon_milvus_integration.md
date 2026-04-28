@@ -59,7 +59,7 @@ title: Mejore la calidad de recuperación de su solicitud de LLM con AIMon y Mil
         ></path>
       </svg>
     </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>Base de datos vectorial</em></h4><p>Para esta aplicación, utilizaremos <a href="https://milvus.io/">Milvus</a> para gestionar y buscar datos no estructurados a gran escala, como texto, imágenes y vídeos.</p>
-<h4 id="LLM-Framework" class="common-anchor-header"><em>Marco LLM</em></h4><p>LlamaIndex es un marco de orquestación de datos de código abierto que simplifica la creación de grandes aplicaciones de modelos lingüísticos (LLM) facilitando la integración de datos privados con LLM, lo que permite aplicaciones de IA generativa aumentada por contexto a través de una canalización de Recuperación-Generación Aumentada (RAG). Utilizaremos LlamaIndex para este tutorial ya que ofrece una buena cantidad de flexibilidad y mejores abstracciones de API de bajo nivel.</p>
+<h4 id="LLM-Framework" class="common-anchor-header"><em>Marco LLM</em></h4><p>LlamaIndex es un marco de orquestación de datos de código abierto que simplifica la creación de aplicaciones de modelos lingüísticos de gran tamaño (LLM) facilitando la integración de datos privados con LLM, lo que permite aplicaciones de IA generativa aumentada por contexto a través de una canalización de Recuperación-Generación Aumentada (RAG). Utilizaremos LlamaIndex para este tutorial ya que ofrece una buena cantidad de flexibilidad y mejores abstracciones de API de bajo nivel.</p>
 <h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>Evaluación de la calidad de los resultados LLM</em></h4><p><a href="https://www.aimon.ai">AIMon</a> ofrece modelos propios para juzgar alucinaciones, problemas de calidad de contexto, adherencia a instrucciones de los LLMs, calidad de recuperación y otras tareas de fiabilidad de los LLMs. Utilizaremos AIMon para juzgar la calidad de la aplicación LLM.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -81,7 +81,7 @@ title: Mejore la calidad de recuperación de su solicitud de LLM con AIMon y Mil
     </button></h1><ol>
 <li>Regístrate para obtener una <a href="https://docs.aimon.ai/quickstart">cuenta AIMon aquí</a>.</li>
 </ol>
-<p>Añade este secreto a los Secretos de Colab (el símbolo de la "llave" en el panel de la izquierda)</p>
+<p>Añade este secreto a los Secretos de Colab (el símbolo de la "llave" en el panel izquierdo)</p>
 <blockquote>
 <p>Si estás en otro entorno colab que no sea google, sustituye tú mismo el código relacionado con google colab</p>
 </blockquote>
@@ -532,7 +532,7 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
 <p>Debemos tener en cuenta dos componentes principales: La ingesta y las preguntas y respuestas basadas en RAG. El proceso de ingestión procesa las transcripciones del conjunto de datos del Banco de Reuniones y las almacena en la base de datos vectorial de Milvus. El proceso de preguntas y respuestas RAG procesa una consulta de usuario recuperando primero los documentos pertinentes del almacén vectorial. A continuación, estos documentos se utilizarán como documentos de base para que el LLM genere su respuesta. Aprovechamos AIMon para calcular la puntuación de calidad y supervisar continuamente la aplicación en cuanto a <a href="https://docs.aimon.ai/detectors/hallucination">alucinación</a>, , <a href="https://docs.aimon.ai/detectors/instruction_adherence">cumplimiento de las instrucciones</a> y <a href="https://docs.aimon.ai/checker-models/context_relevance">relevancia del contexto</a>. Se trata de las mismas tres métricas que utilizamos para definir la puntuación de <code translate="no">quality</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
    </span> <span class="img-wrapper"> <span>flujo de trabajo</span> </span></p>
 <p>A continuación se muestran algunas funciones útiles para preprocesar y calcular las incrustaciones de los documentos.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -614,7 +614,7 @@ llm = OpenAI(model=<span class="hljs-string">&quot;gpt-4o-mini&quot;</span>, tem
 
 query_engine = RetrieverQueryEngine.from_args(retriever, llm)
 <button class="copy-code-btn"></button></code></pre>
-<p>En este punto, el motor de consulta, el recuperador y el LLM han sido configurados. A continuación, configuramos AIMon para que nos ayude a medir las puntuaciones de calidad. Utilizamos el mismo decorador <code translate="no">@detect</code> que se creó en las celdas anteriores. El único código adicional en <code translate="no">ask_and_validate</code> es para ayudar a AIMon a interactuar con los "nodos" de documentos recuperados de LLamaIndex.</p>
+<p>En este punto, el motor de consulta, el recuperador y el LLM ya están configurados. A continuación, configuramos AIMon para que nos ayude a medir las puntuaciones de calidad. Utilizamos el mismo decorador <code translate="no">@detect</code> que se creó en las celdas anteriores. El único código adicional en <code translate="no">ask_and_validate</code> es para ayudar a AIMon a interactuar con los "nodos" de documentos recuperados de LLamaIndex.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> logging
 
 
@@ -947,7 +947,7 @@ avg_retrieval_rel_score_rr = statistics.mean(avg_retrieval_rel_scores_rr)
 <p>En resumen, como se muestra en la siguiente figura, demostramos lo siguiente:</p>
 <ul>
 <li>Cálculo de una puntuación de calidad utilizando una combinación ponderada de 3 métricas de calidad diferentes: puntuación de alucinación, puntuación de cumplimiento de instrucciones y puntuación de relevancia de recuperación.</li>
-<li>Establecimiento de una línea de base de calidad utilizando un enfoque de concordancia de cadenas de fuerza bruta para hacer coincidir documentos con una consulta y pasarla a un LLM.</li>
+<li>Establecimiento de una línea de base de calidad utilizando un enfoque de coincidencia de cadenas por fuerza bruta para hacer coincidir documentos con una consulta y pasarla a un LLM.</li>
 <li>Mejora de la calidad de referencia mediante una base de datos vectorial (en este caso, Milvus).</li>
 <li>Mejoramos aún más la puntuación de calidad utilizando el reordenador adaptable al dominio y de baja latencia de AIMon.</li>
 <li>También mostramos cómo la relevancia de la recuperación mejora significativamente añadiendo el re-ranker de AIMon.</li>

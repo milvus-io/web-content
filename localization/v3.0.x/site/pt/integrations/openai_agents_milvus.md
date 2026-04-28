@@ -53,7 +53,7 @@ title: 'Integração do Milvus com agentes OpenAI: Um Guia Passo-a-Passo'
 <p>Em combinação com Python, estas primitivas são suficientemente poderosas para expressar relações complexas entre ferramentas e agentes, e permitem-lhe construir aplicações do mundo real sem uma curva de aprendizagem acentuada. Além disso, o SDK vem com rastreamento integrado que permite visualizar e depurar seus fluxos agênticos, bem como avaliá-los e até mesmo ajustar modelos para sua aplicação.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/openai-agent.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openai-agent.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -128,7 +128,22 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 <li>Um campo de texto para armazenar o conteúdo do nosso documento</li>
 <li>Um campo vetorial esparso para armazenar os embeddings BM25</li>
 </ul>
-<h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Pesquisa de texto completo no Milvus 2.5</h3><ul>
+<h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Pesquisa de texto completo no Milvus 2.5<button data-href="#Full-Text-Search-in-Milvus-25" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Sistema unificado para pesquisa vetorial e por palavra-chave (APIs unificadas)</li>
 <li>Algoritmo esparso-BM25 incorporado (semelhante à utilização do Elasticsearch, mas baseado em vectores)</li>
 <li>Não é necessário gerar manualmente embeddings para pesquisa de palavras-chave</li>
@@ -214,7 +229,7 @@ schema.add_function(bm25_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Agora vamos criar a nossa coleção com os parâmetros de esquema e índice e, em seguida, carregar alguns dados de amostra sobre a recuperação de informação e o Milvus.</p>
+    </button></h2><p>Agora vamos criar a nossa coleção com o esquema e os parâmetros de índice, e depois carregar alguns dados de amostra sobre a recuperação de informação e o Milvus.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(field_name=<span class="hljs-string">&quot;sparse&quot;</span>, index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, metric_type=<span class="hljs-string">&quot;BM25&quot;</span>)
@@ -372,7 +387,7 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>De seguida, vamos criar uma ferramenta de função personalizada que o nosso agente pode utilizar para pesquisar na base de dados Milvus. Esta ferramenta irá:</p>
+    </button></h2><p>De seguida, criaremos uma ferramenta de função personalizada que o nosso agente pode utilizar para pesquisar na base de dados Milvus. Esta ferramenta irá:</p>
 <ol>
 <li>Aceitar um nome de coleção, texto de consulta e parâmetro de limite</li>
 <li>Executar uma pesquisa BM25 na coleção Milvus</li>

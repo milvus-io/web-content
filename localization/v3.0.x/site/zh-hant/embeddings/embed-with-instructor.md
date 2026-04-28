@@ -1,7 +1,7 @@
 ---
 id: embed-with-instructor.md
 order: 10
-summary: 本文說明如何使用 InstructorEmbeddingFunction 來使用 Instructor 嵌入模型編碼文件和查詢。
+summary: 本文說明如何使用 InstructorEmbeddingFunction 來使用 Instructor 嵌入模型來編碼文件和查詢。
 title: 教師
 ---
 <h1 id="Instructor" class="common-anchor-header">教師<button data-href="#Instructor" class="anchor-icon" translate="no">
@@ -19,8 +19,8 @@ title: 教師
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://instructor-embedding.github.io/">Instructor</a>是一個由指令調整的文字內嵌模型，只要提供任務指令，就可以產生適合任何任務（例如分類、檢索、聚類、文字評估等）和領域（例如科學、金融等）的文字內嵌，而不需要任何微調。</p>
-<p>Milvus 透過 InstructorEmbeddingFunction 類別與 Instructor 的嵌入模型整合。該類提供使用 Instructor 嵌入模型編碼文件和查詢的方法，並將嵌入返回為與 Milvus 索引相容的密集向量。</p>
+    </button></h1><p><a href="https://instructor-embedding.github.io/">Instructor</a>是一個由指令調整的文字內嵌模型，只要提供任務指令，就能產生適合任何任務（如分類、檢索、聚類、文字評估等）和領域（如科學、金融等）的文字內嵌，而不需要任何微調。</p>
+<p>Milvus 透過 InstructorEmbeddingFunction 類別與 Instructor 的嵌入模型整合。此類提供使用 Instructor 嵌入模型編碼文件和查詢的方法，並將嵌入返回為與 Milvus 索引相容的密集向量。</p>
 <p>要使用此功能，請安裝必要的相依性：</p>
 <pre><code translate="no" class="language-python">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>

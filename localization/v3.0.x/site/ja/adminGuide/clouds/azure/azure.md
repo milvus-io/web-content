@@ -241,7 +241,7 @@ az storage container create -n testmilvus --account-name milvustesting1
 helm repo update
 helm install -f values.yaml my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>先のコマンドで、Milvus Helmチャートのリポジトリをローカルに追加し、最新のチャートを取得するようにリポジトリを更新する。そしてMilvusインスタンスをインストールし、<strong>my-releaseと</strong>名付ける。</p>
+<p>前述のコマンドで、Milvus Helmチャートのリポジトリをローカルに追加し、最新のチャートを取得するようにリポジトリを更新する。そしてMilvusインスタンスをインストールし、<strong>my-releaseと</strong>名付ける。</p>
 <p>コンフィグ<code translate="no">service.type</code> 。これはMilvusインスタンスをレイヤ4ロードバランサー経由で公開することを示している。</p>
 <h2 id="Verify-the-deployment" class="common-anchor-header">デプロイの確認<button data-href="#Verify-the-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -294,6 +294,6 @@ helm install -f values.yaml my-release milvus/milvus
       </svg>
     </button></h2><p>Milvusを他のクラウドにデプロイする方法を学びたい場合は、次のリンクを参照してください：</p>
 <ul>
-<li><a href="/docs/ja/eks.md">Kubernetesを使ったAWSへのMilvusクラスタのデプロイ</a></li>
+<li><a href="/docs/ja/eks.md">Kubernetesを使ってAWS上にMilvusクラスタをデプロイする</a></li>
 <li><a href="/docs/ja/gcp.md">Kubernetesを使ってGCPにMilvusクラスタをデプロイする</a></li>
 </ul>

@@ -239,7 +239,7 @@ client.create_index(collection_name=<span class="hljs-string">&quot;product_cata
 client.load_collection(collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>Una vez cumplidos estos requisitos, puede utilizar las siguientes expresiones para filtrar la colección en función de los valores del campo JSON. Estas expresiones de filtrado aprovechan la sintaxis de ruta JSON específica y los operadores dedicados.</p>
+<p>Una vez cumplidos estos requisitos, puede utilizar las siguientes expresiones para filtrar su colección en función de los valores del campo JSON. Estas expresiones de filtrado aprovechan la sintaxis de ruta JSON específica y los operadores dedicados.</p>
 <h4 id="Filtering-with-JSON-path-syntax" class="common-anchor-header">Filtrado con sintaxis de ruta JSON</h4><p>Para consultar una clave específica, utilice la notación de corchetes para acceder a las claves JSON: <code translate="no">json_field_name[&quot;key&quot;]</code>. Para claves anidadas, encadénelas: <code translate="no">json_field_name[&quot;key1&quot;][&quot;key2&quot;]</code>.</p>
 <p>Para filtrar entidades en las que <code translate="no">category</code> es <code translate="no">&quot;electronics&quot;</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define filter expression</span>
@@ -334,7 +334,7 @@ res = client.search(
    </tr>
    <tr>
      <td><p>Trituración JSON</p></td>
-     <td><p>Aceleración general en muchas claves, flexible para consultas variadas</p></td>
+     <td><p>Aceleración general de muchas claves, flexible para consultas variadas</p></td>
      <td><p>No (no acelera valores dentro de matrices)</p></td>
      <td><p>Configuración de almacenamiento adicional, las matrices siguen necesitando un índice por clave</p></td>
    </tr>
@@ -383,7 +383,7 @@ res = client.search(
         ></path>
       </svg>
     </button></h3><p>Sí. Cada campo JSON está limitado a 65.536 bytes.</p>
-<h3 id="Does-a-JSON-field-support-setting-a-default-value" class="common-anchor-header">¿Soporta un campo JSON establecer un valor por defecto?<button data-href="#Does-a-JSON-field-support-setting-a-default-value" class="anchor-icon" translate="no">
+<h3 id="Does-a-JSON-field-support-setting-a-default-value" class="common-anchor-header">¿Admite un campo JSON un valor por defecto?<button data-href="#Does-a-JSON-field-support-setting-a-default-value" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

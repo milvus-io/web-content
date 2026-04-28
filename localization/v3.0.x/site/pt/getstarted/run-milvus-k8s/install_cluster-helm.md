@@ -122,7 +122,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Depois de instalar o Helm chart, você pode iniciar o Milvus no Kubernetes. Esta secção guia-o através da implementação de um cluster Milvus.</p>
+    </button></h3><p>Depois de instalar o Helm chart, você pode iniciar o Milvus no Kubernetes. Esta secção orienta-o na implementação de um cluster do Milvus.</p>
 <div class="alert note" id="standalone-deployment-note">
 <p><strong>Precisa de uma implementação autónoma?</strong></p>
 <p>Se preferir implantar o Milvus no modo autônomo (nó único) para desenvolvimento ou teste, use este comando:</p>
@@ -147,7 +147,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>O que este comando faz:</strong></p>
 <ul>
-<li>Usa <strong>o Woodpecker</strong> como a fila de mensagens (recomendado para manutenção reduzida)</li>
+<li>Usa o <strong>Woodpecker</strong> como a fila de mensagens (recomendado para manutenção reduzida)</li>
 <li>Habilita o novo componente <strong>Streaming Node</strong> para melhorar o desempenho</li>
 <li>Desabilita o antigo <strong>Nó de Índice</strong> (a funcionalidade agora é tratada pelo Nó de Dados)</li>
 <li>Desabilita o Pulsar para usar o Woodpecker</li>
@@ -157,7 +157,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <ul>
 <li><strong>Fila de Mensagens</strong>: <strong>O Woodpecker</strong> é agora recomendado (reduz a manutenção da infraestrutura em comparação com o Pulsar)</li>
 <li><strong>Novo componente</strong>: <strong>Streaming Node</strong> é introduzido e ativado por defeito</li>
-<li><strong>Componentes mesclados</strong>: O <strong>nó de índice</strong> e o <strong>nó de dados</strong> são combinados em um único <strong>nó de dados</strong></li>
+<li><strong>Componentes mesclados</strong>: O <strong>nó de índice</strong> e <strong>o nó de dados</strong> são combinados em um único <strong>nó de dados</strong></li>
 </ul>
 <p>Para obter detalhes completos da arquitetura, consulte a <a href="/docs/pt/architecture_overview.md">Visão geral da arquitetura</a>.</p>
 </div>
@@ -176,7 +176,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <div class="alert note">
 <p><strong>Notas importantes:</strong></p>
 <ul>
-<li><strong>Nomeação da versão</strong>: Use apenas letras, números e traços (não são permitidos pontos)</li>
+<li><strong>Nomeação de versões</strong>: Use apenas letras, números e traços (não são permitidos pontos)</li>
 <li><strong>Kubernetes v1.25+</strong>: se você encontrar problemas de PodDisruptionBudget, use esta solução alternativa:<pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> pulsar.bookkeeper.pdb.usePolicy=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsar.broker.pdb.usePolicy=<span class="hljs-literal">false</span> \
@@ -341,7 +341,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Se estiver num ambiente com restrições de rede, siga o procedimento nesta secção para iniciar um cluster Milvus.</p>
+    </button></h2><p>Se estiver num ambiente com restrições de rede, siga o procedimento desta secção para iniciar um cluster do Milvus.</p>
 <h3 id="1-Get-Milvus-manifest" class="common-anchor-header">1. Obter o manifesto do Milvus<button data-href="#1-Get-Milvus-manifest" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

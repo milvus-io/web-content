@@ -70,7 +70,7 @@ title: Milvus WebUI
     </button></h2><p>Milvus Web UI 提供以下功能：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 總覽</span> </span></p>
 <ul>
 <li><p><a href="#Home">首頁</a></p>
@@ -108,13 +108,13 @@ title: Milvus WebUI
     </button></h2><p>在首頁，您可以找到以下資訊：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-home.png" alt="Milvus Web UI Home" class="doc-image" id="milvus-web-ui-home" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-home.png" alt="Milvus Web UI Home" class="doc-image" id="milvus-web-ui-home" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 首頁</span> </span></p>
 <ul>
 <li><p><strong>系統資訊</strong>：檢視系統資訊，包括部署模式、部署中使用的映像，以及相關資訊。</p></li>
 <li><p><strong>元件資訊</strong>：檢視 Milvus 中元件的狀態和指標，包括查詢節點、資料節點、索引節點、協調器和代理的狀態和指標。</p></li>
-<li><p><strong>已連接的用戶端</strong>：檢視已連接的用戶端及其資訊，包括 SDK 類型和版本、使用者名稱及其存取記錄。</p></li>
-<li><p><strong>系統相依性</strong>：檢視 Milvus 依賴系統的狀態和指標，包括元儲存、訊息佇列和物件儲存的狀態和指標。</p></li>
+<li><p><strong>已連接的用戶端</strong>：檢視已連線的用戶端及其資訊，包括 SDK 類型和版本、使用者名稱及其存取記錄。</p></li>
+<li><p><strong>系統相依性</strong>：檢視 Milvus 的依賴系統的狀態和指標，包括元儲存、訊息佇列和物件儲存的狀態和指標。</p></li>
 </ul>
 <h2 id="Collections" class="common-anchor-header">收藏集<button data-href="#Collections" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -134,7 +134,7 @@ title: Milvus WebUI
     </button></h2><p>在集合頁面，您可以檢視 Milvus 目前的資料庫和集合清單，並檢查它們的詳細資料。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-collections.png" alt="Milvus Web UI Collections" class="doc-image" id="milvus-web-ui-collections" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-collections.png" alt="Milvus Web UI Collections" class="doc-image" id="milvus-web-ui-collections" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 收藏集</span> </span></p>
 <ul>
 <li><p><strong>資料庫</strong>：檢視目前在 Milvus 中的資料庫清單及其詳細資訊。</p></li>
@@ -142,7 +142,7 @@ title: Milvus WebUI
 <p>您可以點擊一個集合來查看其詳細資訊，包括欄位數量、分區、索引和其他詳細資訊。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 集合詳細資訊</span> </span></p></li>
 </ul>
 <h2 id="Query" class="common-anchor-header">查詢<button data-href="#Query" class="anchor-icon" translate="no">
@@ -162,7 +162,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 查詢頁面</span> </span></p>
 <ul>
 <li><p><strong>區段</strong>：檢視區段清單及其詳細資訊，包括區段 ID、對應的集合、狀態、大小等。</p></li>
@@ -187,7 +187,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-data.png" alt="Milvus Web UI Data Page" class="doc-image" id="milvus-web-ui-data-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-data.png" alt="Milvus Web UI Data Page" class="doc-image" id="milvus-web-ui-data-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 資料頁面</span> </span></p>
 <ul>
 <li><p><strong>區段</strong>：檢視資料節點/協調器的區段清單及其詳細資訊，包括區段 ID、對應的集合、狀態、大小等。</p></li>
@@ -210,12 +210,12 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-tasks.png" alt="Milvus Web UI Tasks Page" class="doc-image" id="milvus-web-ui-tasks-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-tasks.png" alt="Milvus Web UI Tasks Page" class="doc-image" id="milvus-web-ui-tasks-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 任務頁面</span> </span></p>
 <ul>
 <li><p><strong>任務</strong>：檢視在 Milvus 中執行的任務清單，包括任務類型、狀態和動作。</p>
 <ul>
-<li><p><strong>QueryCoord 任務</strong>：檢視所有 QueryCoord 排程工作，包括過去 15 分鐘內的 balancer、index/segment/channel/leader 檢查工作。</p></li>
+<li><p><strong>QueryCoord 任務</strong>：檢視所有 QueryCoord 排程器任務，包括過去 15 分鐘內的 balancer、index/segment/channel/leader 檢查器。</p></li>
 <li><p><strong>壓縮任務</strong>：檢視資料協調員在過去 15 分鐘內的所有壓縮任務。</p></li>
 <li><p><strong>索引建立任務</strong>：檢視資料協調員在過去 30 分鐘內的所有索引建立工作。</p></li>
 <li><p><strong>匯入任務</strong>：檢視資料協調員在過去 30 分鐘內的所有匯入工作。</p></li>
@@ -239,7 +239,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 慢速請求頁面</span> </span></p>
 <ul>
 <li><strong>慢速請求</strong>：慢速請求是指延遲時間超過設定中指定的<code translate="no">proxy.slowQuerySpanInSeconds</code> 值的搜尋或查詢。慢速請求清單顯示最近 15 分鐘內的所有慢速請求。</li>
@@ -261,7 +261,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-configurations.png" alt="Milvus Web UI Configurations Page" class="doc-image" id="milvus-web-ui-configurations-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-configurations.png" alt="Milvus Web UI Configurations Page" class="doc-image" id="milvus-web-ui-configurations-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 配置頁面</span> </span></p>
 <ul>
 <li><strong>配置</strong>：檢視 Milvus 執行時設定清單及其值。</li>

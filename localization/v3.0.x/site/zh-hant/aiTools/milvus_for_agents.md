@@ -154,7 +154,7 @@ summary: 瞭解 AI 代理如何使用 Milvus 作為向量資料庫，以進行 R
 <tr><td>游標</td><td><code translate="no">.cursor/rules/*.md</code></td><td><a href="https://docs.cursor.com/en/context/rules">設定專案規則</a></td></tr>
 <tr><td>GitHub Copilot</td><td><code translate="no">.github/copilot-instructions.md</code></td><td><a href="https://code.visualstudio.com/docs/copilot/copilot-customization#_custom-instructions">自訂指示</a></td></tr>
 <tr><td>克勞德程式碼</td><td><code translate="no">CLAUDE.md</code></td><td><a href="https://docs.anthropic.com/en/docs/claude-code/overview">克勞德程式碼文件</a></td></tr>
-<tr><td>JetBrains IDE</td><td><code translate="no">guidelines.md</code></td><td><a href="https://www.jetbrains.com/help/junie/customize-guidelines.html">自訂指引</a></td></tr>
+<tr><td>JetBrains IDE</td><td><code translate="no">guidelines.md</code></td><td><a href="https://www.jetbrains.com/help/junie/customize-guidelines.html">自訂指南</a></td></tr>
 <tr><td>Gemini CLI</td><td><code translate="no">GEMINI.md</code></td><td><a href="https://codelabs.developers.google.com/gemini-cli-hands-on">Gemini CLI 編碼實驗室</a></td></tr>
 <tr><td>VS 程式碼</td><td><code translate="no">.instructions.md</code></td><td><a href="https://code.visualstudio.com/docs/copilot/copilot-customization">配置 .instructions.md</a></td></tr>
 <tr><td>風帆</td><td><code translate="no">guidelines.md</code></td><td><a href="https://docs.windsurf.com/windsurf/customize">設定指引.md</a></td></tr>

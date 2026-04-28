@@ -75,7 +75,7 @@ summary: Pelajari cara mengonfigurasi tikv untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Jalur root tempat data disimpan dalam tikv    </td>
+      <td>        Jalur root di mana data disimpan dalam tikv    </td>
       <td>by-dev</td>
     </tr>
   </tbody>

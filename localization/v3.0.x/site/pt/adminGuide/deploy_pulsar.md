@@ -255,7 +255,7 @@ summary: >-
       securityProtocol: SASL_SSL    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>Após configurar as seções anteriores e salvar o arquivo <code translate="no">values.yaml</code>, execute o seguinte comando para instalar o Milvus que usa as configurações do Kafka.</li>
+<li>Depois de configurar as seções anteriores e salvar o arquivo <code translate="no">values.yaml</code>, execute o seguinte comando para instalar o Milvus que usa as configurações do Kafka.</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -277,7 +277,7 @@ summary: >-
     </button></h2><p>O Milvus standalone usa o RocksMQ como armazenamento de mensagens padrão. Para obter etapas detalhadas sobre como configurar o Milvus com o Helm, consulte <a href="/docs/pt/configure-helm.md">Configurar o Milvus com gráficos do Helm</a>. Para obter detalhes sobre os itens de configuração relacionados ao RocksMQ, consulte <a href="/docs/pt/configure_rocksmq.md">Configurações relacionadas ao RocksMQ</a>.</p>
 <ul>
 <li><p>Se você iniciar o Milvus com o RocksMQ e quiser alterar suas configurações, poderá executar <code translate="no">helm upgrade -f</code> com as configurações alteradas no seguinte arquivo YAML.</p></li>
-<li><p>Se você instalou o Milvus standalone usando o Helm com um armazenamento de mensagens diferente do RocksMQ e deseja alterá-lo de volta para o RocksMQ, execute <code translate="no">helm upgrade -f</code> com o seguinte arquivo YAML depois de ter liberado todas as coleções e parado o Milvus.</p></li>
+<li><p>Se tiver instalado o Milvus standalone usando o Helm com um armazenamento de mensagens diferente do RocksMQ e quiser alterá-lo de volta para o RocksMQ, execute <code translate="no">helm upgrade -f</code> com o seguinte arquivo YAML depois de ter liberado todas as coleções e parado o Milvus.</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+

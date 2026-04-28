@@ -322,6 +322,12 @@
             "children": []
           },
           {
+            "label": "创建外部 Collections",
+            "id": "create-an-external-collection.md",
+            "order": 2,
+            "children": []
+          },
+          {
             "label": "查看 Collections",
             "id": "view-collections.md",
             "order": 3,
@@ -474,15 +480,21 @@
             "children": []
           },
           {
-            "label": "可归零和默认",
+            "label": "可归零字段",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
           },
           {
+            "label": "默认值",
+            "id": "default-values.md",
+            "order": 14,
+            "children": []
+          },
+          {
             "label": "分析仪",
             "id": "analyzer",
-            "order": 14,
+            "order": 15,
             "children": [
               {
                 "label": "分析仪概述",
@@ -628,6 +640,12 @@
                     "id": "regex-filter.md",
                     "order": 10,
                     "children": []
+                  },
+                  {
+                    "label": "同义词",
+                    "id": "synonym-filter.md",
+                    "order": 11,
+                    "children": []
                   }
                 ]
               },
@@ -642,26 +660,32 @@
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
+              },
+              {
+                "label": "管理文件资源",
+                "id": "manage-file-resources.md",
+                "order": 6,
+                "children": []
               }
             ]
           },
           {
             "label": "更改 Collections 字段",
             "id": "alter-collection-field.md",
-            "order": 15,
+            "order": 16,
             "children": []
           },
           {
             "label": "为现有 Collections 添加字段",
             "id": "add-fields-to-an-existing-collection.md",
-            "order": 16,
+            "order": 17,
             "children": []
           },
           {
             "label": "最佳做法",
             "id": "best-practices",
             "isMenu": true,
-            "order": 17,
+            "order": 18,
             "children": [
               {
                 "label": "搜索数据模型设计",
@@ -997,15 +1021,21 @@
                 "children": []
               },
               {
+                "label": "结构数组操作符",
+                "id": "struct-array-operators.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "随机抽样",
                 "id": "random-sampling.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "几何操作符",
                 "id": "geometry-operators.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -1061,15 +1091,21 @@
         ]
       },
       {
-        "label": "Embeddings &amp; Rerankers",
+        "label": "功能与模型推理",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
         "children": [
           {
-            "label": "嵌入功能",
-            "id": "embedding-function",
+            "label": "BM25 功能",
+            "id": "bm25-function.md",
             "order": 0,
+            "children": []
+          },
+          {
+            "label": "基于模型的 Embeddings 功能",
+            "id": "embedding-function",
+            "order": 1,
             "isMenu": true,
             "children": [
               {
@@ -1141,9 +1177,15 @@
             ]
           },
           {
+            "label": "MinHash 函数",
+            "id": "minhash-function.md",
+            "order": 2,
+            "children": []
+          },
+          {
             "label": "Rerankers 功能",
             "id": "reranking",
-            "order": 1,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -1269,9 +1311,15 @@
             "children": []
           },
           {
+            "label": "强制合并压实",
+            "id": "force-merge.md",
+            "order": 2,
+            "children": []
+          },
+          {
             "label": "分层存储",
             "id": "tiered_storage",
-            "order": 2,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -1293,6 +1341,32 @@
                 "children": []
               }
             ]
+          }
+        ]
+      },
+      {
+        "label": "剪影",
+        "id": "snapshots",
+        "order": 11,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "概述",
+            "id": "snapshots.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "管理快照",
+            "id": "manage-snapshots.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "使用案例",
+            "id": "snapshot-use-cases.md",
+            "order": 2,
+            "children": []
           }
         ]
       }
@@ -1460,7 +1534,7 @@
                 "children": []
               },
               {
-                "label": "在 Azure 上部署",
+                "label": "Deploy on Azure",
                 "id": "azure.md",
                 "order": 3,
                 "children": []

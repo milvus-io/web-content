@@ -8,7 +8,7 @@ summary: >-
   berita tetap penting dari waktu ke waktu, peluruhan eksponensial menerapkan
   penalti yang tajam pada item yang berada di luar jangkauan ideal Anda, namun
   tetap membuat item yang jauh tetap dapat ditemukan. Pendekatan ini sangat
-  ideal jika Anda ingin sangat memprioritaskan kedekatan atau kemutakhiran,
+  ideal ketika Anda ingin sangat memprioritaskan kedekatan atau kemutakhiran
   tetapi tidak ingin sepenuhnya menghilangkan pilihan yang lebih jauh.
 beta: Milvus 2.6.x
 ---

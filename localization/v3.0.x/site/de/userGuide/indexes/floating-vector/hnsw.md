@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Der <strong>HNSW-Index</strong> ist ein <strong>graphbasierter</strong> Indizierungsalgorithmus, der die Leistung bei der Suche nach hochdimensionalen fließenden Vektoren verbessern kann. Er bietet eine <strong>hervorragende</strong> Suchgenauigkeit und eine <strong>geringe</strong> Latenzzeit, erfordert jedoch <strong>einen hohen</strong> Speicheraufwand, um seine hierarchische Graphenstruktur zu erhalten.</p>
+    </button></h1><p>Der <strong>HNSW-Index</strong> ist ein <strong>graphbasierter</strong> Indizierungsalgorithmus, der die Leistung bei der Suche nach hochdimensionalen fließenden Vektoren verbessern kann. Er bietet eine <strong>ausgezeichnete</strong> Suchgenauigkeit und eine <strong>geringe</strong> Latenzzeit, erfordert jedoch <strong>einen hohen</strong> Speicheraufwand, um seine hierarchische Graphenstruktur zu erhalten.</p>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,17 +44,17 @@ summary: >-
 <p>Und so funktioniert es:</p>
 <ol>
 <li><p><strong>Einstiegspunkt</strong>: Die Suche beginnt an einem festen Einstiegspunkt auf der obersten Ebene, der ein vorher festgelegter Knoten im Graphen ist.</p></li>
-<li><p><strong>Gierige Suche</strong>: Der Algorithmus bewegt sich gierig zum nächstgelegenen Nachbarn auf der aktuellen Ebene, bis er nicht mehr näher an den Abfragevektor herankommt. Die oberen Ebenen dienen der Navigation und fungieren als grober Filter, um potenzielle Einstiegspunkte für die feinere Suche auf den unteren Ebenen zu finden.</p></li>
+<li><p><strong>Gierige Suche</strong>: Der Algorithmus bewegt sich gierig zum nächsten Nachbarn auf der aktuellen Ebene, bis er nicht mehr näher an den Abfragevektor herankommt. Die oberen Ebenen dienen der Navigation und fungieren als grober Filter, um potenzielle Einstiegspunkte für die feinere Suche auf den unteren Ebenen zu finden.</p></li>
 <li><p><strong>Ebene absteigen</strong>: Sobald in der aktuellen Ebene ein <strong>lokales Minimum</strong> erreicht ist, springt der Algorithmus über eine zuvor hergestellte Verbindung in die untere Ebene und wiederholt die gierige Suche.</p></li>
 <li><p><strong>Letzte</strong> <strong>Verfeinerung</strong>: Dieser Prozess wird fortgesetzt, bis die unterste Ebene erreicht ist, wo in einem letzten Verfeinerungsschritt die nächsten Nachbarn ermittelt werden.</p></li>
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
    </span> <span class="img-wrapper"> <span>HNSW</span> </span></p>
 <p>Die Leistung von HNSW hängt von mehreren Schlüsselparametern ab, die sowohl die Struktur des Graphen als auch das Suchverhalten steuern. Dazu gehören:</p>
 <ul>
-<li><p><code translate="no">M</code>: Die maximale Anzahl von Kanten oder Verbindungen, die jeder Knoten im Graphen auf jeder Ebene der Hierarchie haben kann. Eine höhere <code translate="no">M</code> führt zu einem dichteren Graphen und erhöht die Auffindbarkeit und die Genauigkeit, da die Suche mehr Pfade zu erkunden hat, was aber auch mehr Speicherplatz verbraucht und die Einfügezeit aufgrund der zusätzlichen Verbindungen verlangsamt. Wie in der obigen Abbildung dargestellt, bedeutet <strong>M = 5</strong>, dass jeder Knoten im HNSW-Graphen direkt mit maximal 5 anderen Knoten verbunden ist. Dadurch entsteht eine mäßig dichte Graphenstruktur, bei der die Knoten über mehrere Pfade zu anderen Knoten gelangen.</p></li>
+<li><p><code translate="no">M</code>: Die maximale Anzahl von Kanten oder Verbindungen, die jeder Knoten im Graphen auf jeder Ebene der Hierarchie haben kann. Eine höhere <code translate="no">M</code> führt zu einem dichteren Graphen und erhöht die Auffindbarkeit und die Genauigkeit, da die Suche mehr Pfade zu erkunden hat, was aber auch mehr Speicherplatz verbraucht und die Einfügezeit aufgrund zusätzlicher Verbindungen verlangsamt. Wie in der obigen Abbildung dargestellt, bedeutet <strong>M = 5</strong>, dass jeder Knoten im HNSW-Graphen direkt mit maximal 5 anderen Knoten verbunden ist. Dadurch entsteht eine mäßig dichte Graphenstruktur, bei der die Knoten über mehrere Pfade zu anderen Knoten gelangen können.</p></li>
 <li><p><code translate="no">efConstruction</code>: Die Anzahl der Kandidaten, die bei der Indexerstellung berücksichtigt werden. Eine höhere <code translate="no">efConstruction</code> führt im Allgemeinen zu einer besseren Qualität des Graphen, erfordert aber mehr Zeit für die Erstellung.</p></li>
 <li><p><code translate="no">ef</code>: Die Anzahl der Nachbarn, die während einer Suche ausgewertet werden. Eine Erhöhung von <code translate="no">ef</code> verbessert die Wahrscheinlichkeit, die nächsten Nachbarn zu finden, verlangsamt aber den Suchprozess.</p></li>
 </ul>
@@ -157,7 +157,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Dieser Abschnitt gibt einen Überblick über die Parameter, die für den Aufbau eines Index und die Durchführung von Suchen im Index verwendet werden.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/hnsw.md#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/hnsw.md#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -169,7 +184,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">M</code></p></td>
      <td><p>Maximale Anzahl von Verbindungen （oder Kanten), die jeder Knoten im Graphen haben kann, einschließlich ausgehender und eingehender Kanten. Dieser Parameter wirkt sich direkt auf den Indexaufbau und die Suche aus.</p></td>
      <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [2, 2048]</p><p><strong>Standardwert</strong>: <code translate="no">30</code> (bis zu 30 ausgehende und 30 eingehende Kanten pro Knoten)</p></td>
-     <td><p>Eine größere <code translate="no">M</code> führt im Allgemeinen zu einer <strong>höheren Genauigkeit</strong>, <strong>erhöht</strong> jedoch <strong>den Speicher-Overhead</strong> und <strong>verlangsamt sowohl den Indexaufbau als auch die Suche</strong>. Erwägen Sie eine Erhöhung von <code translate="no">M</code> für Datensätze mit hoher Dimensionalität oder wenn eine hohe Wiederauffindbarkeit entscheidend ist.</p><p>Ziehen Sie eine Verringerung von <code translate="no">M</code> in Betracht, wenn die Speichernutzung und die Suchgeschwindigkeit im Vordergrund stehen.</p><p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs festzulegen: [5, 100].</p></td>
+     <td><p>Eine größere <code translate="no">M</code> führt im Allgemeinen zu einer <strong>höheren Genauigkeit</strong>, <strong>erhöht</strong> jedoch <strong>den Speicher-Overhead</strong> und <strong>verlangsamt sowohl den Indexaufbau als auch die Suche</strong>. Erwägen Sie eine Erhöhung von <code translate="no">M</code> für Datensätze mit hoher Dimensionalität oder wenn eine hohe Wiederauffindbarkeit entscheidend ist.</p><p>Ziehen Sie eine Verringerung von <code translate="no">M</code> in Betracht, wenn die Speichernutzung und die Suchgeschwindigkeit im Vordergrund stehen.</p><p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs zu wählen: [5, 100].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">efConstruction</code></p></td>
@@ -178,7 +193,22 @@ res = MilvusClient.search(
      <td><p>Ein höherer <code translate="no">efConstruction</code> führt normalerweise zu einem <strong>genaueren Index</strong>, da mehr potenzielle Verbindungen untersucht werden. Dies führt jedoch auch zu einer <strong>längeren Indizierungszeit und einem erhöhten Speicherverbrauch</strong> während der Erstellung. Erwägen Sie, <code translate="no">efConstruction</code> zu erhöhen, um die Genauigkeit zu verbessern, insbesondere in Szenarien, in denen die Indizierungszeit weniger kritisch ist.</p><p>Ziehen Sie eine Verringerung von <code translate="no">efConstruction</code> in Betracht, um den Indexaufbau zu beschleunigen, wenn Ressourcenbeschränkungen ein Problem darstellen.</p><p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs festzulegen: [50, 500].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/hnsw.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/hnsw.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>

@@ -2,14 +2,9 @@
 id: grouping-search.md
 title: Recherche groupée
 summary: >-
-  Une recherche de regroupement permet à Milvus de regrouper les résultats de la
-  recherche en fonction des valeurs d'un champ spécifié afin d'agréger les
-  données à un niveau supérieur. Par exemple, vous pouvez utiliser une recherche
-  ANN de base pour trouver des livres similaires à celui qui vous intéresse,
-  mais vous pouvez utiliser une recherche de regroupement pour trouver les
-  catégories de livres qui peuvent concerner les sujets abordés dans ce livre.
-  Cette rubrique décrit l'utilisation de la recherche par regroupement ainsi que
-  les principales considérations à prendre en compte.
+  La recherche par regroupement permet d'agréger les résultats de la recherche
+  ANN en fonction de la valeur d'un champ et de réduire le nombre d'entités en
+  double.
 ---
 <h1 id="Grouping-Search" class="common-anchor-header">Recherche groupée<button data-href="#Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,12 +38,12 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Lorsque des entités dans les résultats de recherche partagent la même valeur dans un champ scalaire, cela indique qu'elles sont similaires dans un attribut particulier, ce qui peut avoir un impact négatif sur les résultats de la recherche.</p>
-<p>Supposons qu'une collection stocke plusieurs documents (désignés par <strong>docId)</strong>. Pour conserver autant d'informations sémantiques que possible lors de la conversion des documents en vecteurs, chaque document est divisé en paragraphes (ou <strong>morceaux</strong>) plus petits et plus faciles à gérer, puis stocké en tant qu'entités distinctes. Même si le document est divisé en sections plus petites, les utilisateurs sont souvent intéressés par l'identification des documents les plus pertinents pour leurs besoins.</p>
+<p>Supposons qu'une collection stocke plusieurs documents (désignés par <strong>docId)</strong>. Pour conserver autant d'informations sémantiques que possible lors de la conversion des documents en vecteurs, chaque document est divisé en paragraphes (ou <strong>morceaux</strong>) plus petits et gérables, et stocké en tant qu'entités distinctes. Même si le document est divisé en sections plus petites, les utilisateurs sont souvent intéressés par l'identification des documents les plus pertinents pour leurs besoins.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" />
    </span> <span class="img-wrapper"> <span>Recherche d'annuaires</span> </span></p>
-<p>Lorsqu'une recherche par approximation du plus proche voisin (ANN) est effectuée sur une telle collection, les résultats de la recherche peuvent inclure plusieurs paragraphes du même document, ce qui peut entraîner l'oubli d'autres documents, ce qui peut ne pas correspondre au cas d'utilisation prévu.</p>
+<p>Lorsqu'on effectue une recherche par approximation du plus proche voisin (ANN) sur une telle collection, les résultats de la recherche peuvent inclure plusieurs paragraphes du même document, ce qui risque de faire passer à côté d'autres documents, ce qui n'est pas forcément conforme au cas d'utilisation prévu.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" />
@@ -376,7 +371,50 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><code translate="no">group_size</code>: Spécifie le nombre d'entités à renvoyer par groupe. Par exemple, le paramètre <code translate="no">group_size=2</code> signifie que chaque groupe (ou chaque <code translate="no">docId</code>) devrait idéalement renvoyer deux des paragraphes (ou <strong>morceaux</strong>) les plus similaires. Si <code translate="no">group_size</code> n'est pas défini, le système renvoie par défaut un résultat par groupe.</p></li>
 <li><p><code translate="no">strict_group_size</code>: Ce paramètre booléen détermine si le système doit appliquer strictement le décompte défini par <code translate="no">group_size</code>. Si <code translate="no">strict_group_size=True</code>, le système tentera d'inclure le nombre exact d'entités spécifié par <code translate="no">group_size</code> dans chaque groupe (par exemple, deux paragraphes), à moins qu'il n'y ait pas assez de données dans ce groupe. Par défaut (<code translate="no">strict_group_size=False</code>), le système donne la priorité au respect du nombre de groupes spécifié par le paramètre <code translate="no">limit</code>, plutôt que de s'assurer que chaque groupe contient des entités <code translate="no">group_size</code>. Cette approche est généralement plus efficace dans les cas où la distribution des données est inégale.</p></li>
 </ul>
-<p>Pour plus d'informations sur les paramètres, consultez la rubrique " <a href="https://docs.zilliz.com/reference/python/python/Vector-search">Recherche</a>".</p>
+<p>Pour plus de détails sur les paramètres, reportez-vous à la rubrique <a href="https://docs.zilliz.com/reference/python/python/Vector-search">recherche</a>.</p>
+<h2 id="Order-groups-by-a-scalar-field--Milvus-30x" class="common-anchor-header">Classer les groupes en fonction d'un champ scalaire<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Order-groups-by-a-scalar-field--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Vous pouvez combiner la recherche par regroupement avec <code translate="no">order_by_fields</code> pour ordonner les groupes en fonction d'un champ scalaire. Cette fonction est utile lorsque vous souhaitez obtenir des résultats différents d'un groupe à l'autre, mais que vous voulez que les groupes suivent un ordre pertinent pour l'entreprise, tel que le prix ou l'évaluation.</p>
+<p>L'exemple suivant regroupe les résultats de la recherche par <code translate="no">category</code>, renvoie jusqu'à trois entités par groupe et ordonne les groupes renvoyés par <code translate="no">price</code> du plus petit au plus grand.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
+    data=query_vectors,
+    anns_field=<span class="hljs-string">&quot;embedding&quot;</span>,
+    limit=<span class="hljs-number">20</span>,
+    group_by_field=<span class="hljs-string">&quot;category&quot;</span>,
+    group_size=<span class="hljs-number">3</span>,
+    strict_group_size=<span class="hljs-literal">True</span>,
+    output_fields=[<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>],
+<span class="highlighted-comment-line">    order_by_fields=[</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;field&quot;</span>: <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;order&quot;</span>: <span class="hljs-string">&quot;asc&quot;</span>}</span>
+<span class="highlighted-comment-line">    ],</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Dans la requête ci-dessus, <code translate="no">limit=20</code> signifie que Milvus sélectionne jusqu'à 20 groupes, et non 20 entités. Comme <code translate="no">group_size=3</code>, la liste des résultats plats peut contenir jusqu'à 60 entités au total.</p>
+<p>Lorsque vous utilisez <code translate="no">order_by_fields</code> avec <code translate="no">group_by_field</code>, Milvus ordonne les groupes en fonction de la valeur de champ scalaire spécifiée de l'entité supérieure de chaque groupe. Au sein de chaque groupe, les entités restent classées en fonction de leur score de similarité avec le vecteur de requête.</p>
 <h2 id="Considerations" class="common-anchor-header">Considérations<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

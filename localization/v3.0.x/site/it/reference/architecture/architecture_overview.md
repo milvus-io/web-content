@@ -108,7 +108,7 @@ title: Panoramica dell'architettura di Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Il Coordinator è il cervello di Milvus. In qualsiasi momento, nell'intero cluster è attivo esattamente un Coordinatore, responsabile di mantenere la topologia del cluster, di programmare tutti i tipi di attività e di garantire la coerenza a livello di cluster.</p>
+    </button></h3><p>Il Coordinator è il cervello di Milvus. In ogni momento, nell'intero cluster è attivo esattamente un Coordinatore, responsabile di mantenere la topologia del cluster, di programmare tutti i tipi di attività e di garantire la coerenza a livello di cluster.</p>
 <p>Di seguito sono elencati alcuni dei compiti gestiti dal <strong>Coordinatore</strong>:</p>
 <ul>
 <li><strong>Gestione DDL/DCL/TSO</strong>: Gestisce le richieste del linguaggio di definizione dei dati (DDL) e del linguaggio di controllo dei dati (DCL), come la creazione o l'eliminazione di collezioni, partizioni o indici, nonché la gestione di timestamp Oracle (TSO) e l'emissione di time ticker.</li>
@@ -211,7 +211,7 @@ title: Panoramica dell'architettura di Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Il meta storage memorizza le istantanee dei metadati, come gli schemi di raccolta e i checkpoint di consumo dei messaggi. La memorizzazione dei metadati richiede una disponibilità estremamente elevata, una forte coerenza e il supporto delle transazioni, quindi Milvus ha scelto etcd per il meta storage. Milvus utilizza etcd anche per la registrazione dei servizi e il controllo dello stato di salute.</p>
+    </button></h3><p>Il meta storage memorizza le istantanee dei metadati, come gli schemi di raccolta e i checkpoint di consumo dei messaggi. La memorizzazione dei metadati richiede una disponibilità estremamente elevata, una forte coerenza e il supporto delle transazioni, per cui Milvus ha scelto etcd per il meta storage. Milvus utilizza etcd anche per la registrazione dei servizi e il controllo dello stato di salute.</p>
 <h3 id="Object-storage" class="common-anchor-header">Archiviazione a oggetti<button data-href="#Object-storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

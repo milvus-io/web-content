@@ -35,7 +35,7 @@ title: RAG Agentico con Milvus y LangGraph
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/agentic_rag_with_langgraph_architecture.png" alt="Architecture of an agentic RAG system using LangGraph and Milvus" class="doc-image" id="architecture-of-an-agentic-rag-system-using-langgraph-and-milvus" />
    </span> <span class="img-wrapper"> <span>Arquitectura de un sistema RAG agéntico con LangGraph y Milvus</span> </span></p>
-<p><a href="https://langchain-ai.github.io/langgraph/">LangGraph</a> es una biblioteca para construir aplicaciones con múltiples actores y con estado con LLMs, construida sobre LangChain. <a href="https://milvus.io/">Milvus</a> es la base de datos vectorial de código abierto más avanzada del mundo, construida para potenciar la búsqueda de similitudes y las aplicaciones de IA.</p>
+<p><a href="https://langchain-ai.github.io/langgraph/">LangGraph</a> es una biblioteca para construir aplicaciones con múltiples actores y con estado con LLMs, construida sobre LangChain. <a href="https://milvus.io/">Milvus</a> es la base de datos vectorial de código abierto más avanzada del mundo, creada para potenciar la búsqueda de similitudes y las aplicaciones de IA.</p>
 <p>En este tutorial, vamos a construir un sistema RAG agentic que puede:</p>
 <ul>
 <li>Decidir si recuperar documentos o responder directamente a consultas simples.</li>

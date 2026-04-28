@@ -25,7 +25,7 @@ title: MilvusによるグラフRAG
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>大規模な言語モデルの広範な応用は、その応答の精度と関連性を向上させることの重要性を強調している。検索補強型生成（RAG）は、外部知識ベースでモデルを強化し、より多くの文脈情報を提供し、幻覚や知識不足のような問題を軽減します。しかし、単純なRAGパラダイムだけに頼ることには限界があり、特に複雑なエンティティ関係やマルチホップの質問を扱う場合には、モデルが正確な回答を提供するのに苦労することが多い。</p>
-<p>知識グラフ（KG）をRAGシステムに導入することは、新しい解決策を提供する。KGは、より正確な検索情報を提供し、RAGが複雑な質問応答タスクをよりよく処理するのを助ける、構造化された方法でエンティティとその関係を提示する。KG-RAGはまだ初期段階にあり、KGから実体と関係を効果的に検索する方法や、ベクトル類似性検索とグラフ構造を統合する方法についてのコンセンサスは得られていない。</p>
+<p>知識グラフ（KG）をRAGシステムに導入することは、新しい解決策を提供する。KGは実体とその関係を構造化された方法で提示し、より正確な検索情報を提供し、RAGが複雑な質問応答タスクをよりよく処理するのに役立つ。KG-RAGはまだ初期段階にあり、KGから実体と関係を効果的に検索する方法や、ベクトル類似性検索とグラフ構造を統合する方法についてのコンセンサスは得られていない。</p>
 <p>本ノートブックでは、このシナリオの性能を大幅に向上させるシンプルかつ強力なアプローチを紹介する。これは、多方向検索とその後の再ランク付けという単純なRAGパラダイムであるが、グラフRAGを論理的に実装し、マルチホップ問題の処理において最先端の性能を達成している。どのように実装されるか見てみましょう。</p>
 <p>
   <span class="img-wrapper">
@@ -118,7 +118,7 @@ embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-em
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>例として、ベルヌーイファミリーとオイラーの関係を紹介するナノデータセットを使用する。このナノデータセットには4つの文章とそれに対応するトリプレットのセットが含まれており、各トリプレットには主語、述語、目的語が含まれている。 実際には、独自のコーパスからトリプレットを抽出するためにどのようなアプローチを使用することもできる。</p>
+    </button></h3><p>例として、ベルヌーイファミリーとオイラーの関係を紹介するナノデータセットを使用する。このナノデータセットには4つの文章とそれに対応するトリプレットのセットが含まれており、各トリプレットには主語、述語、目的語が含まれている。 実際には、独自のコーパスからトリプレットを抽出するためにどのようなアプローチを使用してもよい。</p>
 <pre><code translate="no" class="language-python">nano_dataset = [
     {
         <span class="hljs-string">&quot;passage&quot;</span>: <span class="hljs-string">&quot;Jakob Bernoulli (1654–1705): Jakob was one of the earliest members of the Bernoulli family to gain prominence in mathematics. He made significant contributions to calculus, particularly in the development of the theory of probability. He is known for the Bernoulli numbers and the Bernoulli theorem, a precursor to the law of large numbers. He was the older brother of Johann Bernoulli, another influential mathematician, and the two had a complex relationship that involved both collaboration and rivalry.&quot;</span>,
@@ -247,7 +247,7 @@ create_milvus_collection(entity_col_name)
 create_milvus_collection(relation_col_name)
 create_milvus_collection(passage_col_name)
 <button class="copy-code-btn"></button></code></pre>
-<p>データをメタデータ情報とともにMilvusコレクションに挿入する。メタデータ情報には、通過ID、隣接エンティティまたは関係IDが含まれる。</p>
+<p>Milvusコレクション（エンティティコレクション、関係コレクション、パッセージコレクションを含む）にメタデータ情報とともにデータを挿入する。メタデータ情報には、通過ID、隣接エンティティまたは関係IDが含まれる。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">milvus_insert</span>(<span class="hljs-params">
     collection_name: <span class="hljs-built_in">str</span>,
     text_list: <span class="hljs-built_in">list</span>[<span class="hljs-built_in">str</span>],
@@ -451,7 +451,7 @@ relation_candidate_texts = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>この段階では、LLMの強力な自己注意メカニズムを利用して、関係候補をさらにフィルタリングし、洗練させる。一発勝負のプロンプトを採用し、クエリと関係の候補セットをプロンプトに組み込み、LLMにクエリへの回答を助ける可能性のある関係の候補を選択するよう指示する。クエリの中には複雑なものもあるため、LLMが思考プロセスを明確に表現できるように、思考の連鎖（Chain-of-Thought）アプローチを採用する。LLMの応答は、解析に便利なjson形式である。</p>
+    </button></h3><p>この段階では、LLMの強力な自己注意メカニズムを利用して、関係候補をさらにフィルタリングし、洗練させる。一発勝負のプロンプトを採用し、クエリと関係の候補セットをプロンプトに組み込み、LLMにクエリへの回答を助ける可能性のある関係の候補を選択するよう指示する。クエリの中には複雑なものもあるため、LLMが思考プロセスを明確に表現できるように、思考の連鎖（Chain-of-Thought）アプローチを採用する。LLMの応答は、解析に便利なjson形式であることを規定する。</p>
 <pre><code translate="no" class="language-python">query_prompt_one_shot_input = <span class="hljs-string">&quot;&quot;&quot;I will provide you with a list of relationship descriptions. Your task is to select 3 relationships that may be useful to answer the given question. Please return a JSON object containing your thought process and a list of the selected relationships in order of their relevance.
 
 Question:
@@ -600,4 +600,4 @@ Answer from naive RAG: I don't know. The retrieved context does not provide info
 
 Answer from our method: The son of Euler's teacher, Daniel Bernoulli, made major contributions to fluid dynamics, probability, and statistics. He is most famous for Bernoulli’s principle, which describes the behavior of fluid flow and is fundamental to the understanding of aerodynamics.
 </code></pre>
-<p>見てわかるように、素朴なRAGから検索されたパッセージは、真実のパッセージを見逃しており、間違った答えを導いています。 私たちの方法から検索されたパッセージは正しく、問題に対する正確な答えを得るのに役立ちます。</p>
+<p>見てわかるように、素朴なRAGメソッドから検索された文章は、真実の文章を見逃しており、間違った答えを導いています。 我々のメソッドから検索された文章は正しく、問題に対する正確な答えを得るのに役立ちます。</p>

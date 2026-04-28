@@ -26,7 +26,7 @@ title: DynamiqとMilvusをはじめよう
         ></path>
       </svg>
     </button></h1><p><a href="https://www.getdynamiq.ai/">Dynamiqは</a>、AIを搭載したアプリケーションの開発を効率化する強力なGen AIフレームワークです。検索拡張世代（RAG）と大規模言語モデル（LLM）エージェントを強力にサポートするDynamiqは、開発者が簡単かつ効率的にインテリジェントで動的なシステムを作成できるようにします。</p>
-<p>このチュートリアルでは、RAGワークフローのために作られた高性能ベクトルデータベースである<a href="https://milvus.io/">Milvusと</a>Dynamiqをシームレスに使用する方法を探ります。Milvusは、ベクトル埋め込みデータの効率的な保存、インデックス付け、検索に優れており、高速かつ正確なコンテキストデータへのアクセスを必要とするAIシステムにとって不可欠なコンポーネントとなっています。</p>
+<p>このチュートリアルでは、RAGワークフローのために作られた高性能ベクトルデータベースである<a href="https://milvus.io/">Milvusと</a>Dynamiqをシームレスに使用する方法を探ります。Milvusは、ベクトル埋め込みデータの効率的な保存、インデックス付け、検索に優れており、高速かつ正確なコンテキストデータへのアクセスを必要とするAIシステムに不可欠なコンポーネントとなっています。</p>
 <p>このステップバイステップガイドでは、2つのコアなRAGワークフローをカバーします：</p>
 <ul>
 <li><p><strong>ドキュメントインデキシングフロー</strong>：入力ファイル（PDFなど）を処理し、その内容をベクトル埋め込みデータに変換し、Milvusに格納する方法を学びます。Milvusの高性能なインデックス作成機能を活用することで、データを迅速に検索できる状態にします。</p></li>
@@ -104,7 +104,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
         ></path>
       </svg>
     </button></h2><p>このチュートリアルでは、Milvusをベクターデータベースとして文書をインデックス化するRAG（Retrieval-Augmented Generation）ワークフローを示します。このワークフローは、入力されたPDFファイルを受け取り、より小さな塊に処理し、OpenAIの埋め込みモデルを使用してベクトル埋め込みを生成し、効率的な検索のために埋め込みをMilvusコレクションに保存します。</p>
-<p>このワークフローが終了する頃には、セマンティック検索や質問応答のような将来のRAGタスクをサポートするスケーラブルで効率的なドキュメントインデキシングシステムを手に入れることができます。</p>
+<p>このワークフローが終了する頃には、セマンティック検索や質問応答のような将来のRAGタスクをサポートする、スケーラブルで効率的なドキュメントインデキシングシステムを手に入れることができます。</p>
 <h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">必要なライブラリのインポートとワークフローの初期化<button data-href="#Import-Required-Libraries-and-Initialize-Workflow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -252,13 +252,13 @@ milvus_writer_added = rag_wf.flow.add_nodes(vector_store)  <span class="hljs-com
 2024-11-19 22:14:05 - DEBUG - Successfully created an index on collection: my_milvus_collection
 </code></pre>
 <div class="alert note">
-<p>Milvusは2つのデプロイメントタイプを提供しています：</p>
+<p>Milvusは2つのデプロイメントタイプを提供し、異なるユースケースに対応します：</p>
 <ol>
 <li><strong>MilvusDeploymentType.FILE</strong></li>
 </ol>
 <ul>
 <li><strong>ローカルのプロトタイピングや</strong> <strong>小規模なデータ</strong>保存に最適です。</li>
-<li><code translate="no">uri</code> 、ローカルのファイルパス(例:<code translate="no">./milvus.db</code>)を設定することで、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteが</a>自動的に指定されたファイルにすべてのデータを保存します。</li>
+<li><code translate="no">uri</code> をローカルファイルパス(例:<code translate="no">./milvus.db</code>)に設定することで、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteを</a>活用することができ、指定されたファイルにすべてのデータが自動的に保存されます。</li>
 <li>これは<strong>迅速なセットアップと</strong> <strong>実験に</strong>便利なオプションです。</li>
 </ul>
 <ol start="2">

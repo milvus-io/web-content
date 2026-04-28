@@ -39,7 +39,7 @@ title: Coordenador HA
     </button></h2><p>Na versão 2.2.3, o Milvus implementa alta disponibilidade para os coordenadores, fazendo com que eles trabalhem no modo ativo-em espera, mitigando possíveis pontos únicos de falha (SPoFs) que podem resultar em indisponibilidade do serviço.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
    </span> <span class="img-wrapper"> <span>Coordenador HA</span> </span></p>
 <p>A figura acima ilustra a forma como os coordenadores funcionam no modo de espera ativa. Quando um par de coordenadores é iniciado, eles se registram no etcd usando seu ID de servidor e competem pela função ativa. O coordenador que conseguir alugar a função ativa do etcd começará a servir, e o outro coordenador do par permanecerá em espera, observando a função ativa e pronto a servir se o coordenador ativo morrer.</p>
 <h2 id="Enable-coordinator-HA" class="common-anchor-header">Habilitar o coordenador HA<button data-href="#Enable-coordinator-HA" class="anchor-icon" translate="no">
@@ -57,7 +57,22 @@ title: Coordenador HA
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="With-Helm" class="common-anchor-header">Com o Helm</h3><p>Para iniciar vários coordenadores e fazê-los trabalhar no modo ativo-em espera, você deve fazer as seguintes alterações no seu arquivo <code translate="no">values.yaml</code>.</p>
+    </button></h2><h3 id="With-Helm" class="common-anchor-header">Com o Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para iniciar vários coordenadores e fazê-los trabalhar no modo ativo-em espera, você deve fazer as seguintes alterações no seu arquivo <code translate="no">values.yaml</code>.</p>
 <ul>
 <li>Defina <code translate="no">xxxCoordinator.replicas</code> como <code translate="no">2</code>.</li>
 <li>Defina <code translate="no">xxxCoordinator.activeStandby.enabled</code> como <code translate="no">true</code>.</li>
@@ -79,7 +94,22 @@ title: Coordenador HA
   <span class="hljs-attr">activeStandby:</span>
     <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>  <span class="hljs-comment"># Set this to true to have RootCoordinators work in active-standby mode.</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="With-Docker" class="common-anchor-header">Com o Docker</h3><p>Para iniciar vários coordenadores e fazê-los trabalhar em modo de espera ativa, pode adicionar algumas definições ao ficheiro <code translate="no">docker-compose</code> que utiliza para iniciar o seu cluster Milvus.</p>
+<h3 id="With-Docker" class="common-anchor-header">Com o Docker<button data-href="#With-Docker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para iniciar vários coordenadores e fazê-los trabalhar em modo de espera ativa, pode adicionar algumas definições ao ficheiro <code translate="no">docker-compose</code> que utiliza para iniciar o seu cluster Milvus.</p>
 <p>O trecho de código a seguir usa o RootCoord como exemplo. Pode fazer o mesmo com coordenadores de outros tipos.</p>
 <pre><code translate="no" class="language-yaml">  <span class="hljs-attr">rootcoord:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
@@ -114,7 +144,22 @@ title: Coordenador HA
 <span class="hljs-comment">#      - &quot;pulsar&quot;</span>
 <span class="hljs-comment">#      - &quot;minio&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="With-MacLinux-shell" class="common-anchor-header">Com a shell Mac/Linux</h3><p>Para iniciar vários coordenadores e fazê-los funcionar em modo de espera ativa, pode</p>
+<h3 id="With-MacLinux-shell" class="common-anchor-header">Com a shell Mac/Linux<button data-href="#With-MacLinux-shell" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para iniciar vários coordenadores e fazê-los trabalhar em modo de espera ativa, pode</p>
 <ol>
 <li><p>Descarregar o código fonte do Milvus para o seu disco local, e <a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">iniciar um cluster Milvus a partir do código fonte</a> como se segue:</p>
 <pre><code translate="no" class="language-shell">sudo ./scripts/start_cluster.sh
@@ -170,7 +215,7 @@ root        17739   0.1 0.3 410289872   91792 s003  SN  6:01PM  0:00.30 ./bin/mi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A HA de coordenador é desativada por padrão. É possível ativar esse recurso manualmente alterando os seguintes itens no arquivo de configuração do Milvus.</p>
+    </button></h2><p>A HA do coordenador é desativada por padrão. É possível ativar esse recurso manualmente alterando os seguintes itens no arquivo de configuração do Milvus.</p>
 <ul>
 <li><a href="/docs/pt/configure_rootcoord.md#rootCoordactiveStandbyenabled">rootCoord.activeStandby.enabled</a></li>
 <li><a href="/docs/pt/configure_querycoord.md#queryCoordactiveStandbyenabled">queryCoord.activeStandby.enabled</a></li>
@@ -192,4 +237,4 @@ root        17739   0.1 0.3 410289872   91792 s003  SN  6:01PM  0:00.30 ./bin/mi
         ></path>
       </svg>
     </button></h2><p>Atualmente, não existe uma garantia de consistência forte entre o serviço ativo e o serviço em espera. Por conseguinte, o coordenador em espera necessita de recarregar os metadados ao assumir a função ativa.</p>
-<p>O Etcd liberta uma concessão apenas depois de a sessão atual ter expirado. O tempo limite da sessão é predefinido para 60 segundos. Por conseguinte, existe um intervalo de 60 segundos entre o momento em que o coordenador ativo morre e o momento em que o coordenador em espera assume a função ativa.</p>
+<p>O Etcd liberta uma concessão apenas depois de a sessão atual ter expirado. O tempo limite da sessão é predefinido para 60 segundos. Por conseguinte, existe um intervalo de 60 segundos entre o momento em que o coordenador ativo morre e o momento em que o coordenador em espera assume o papel ativo.</p>

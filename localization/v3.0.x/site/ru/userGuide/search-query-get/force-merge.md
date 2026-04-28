@@ -132,7 +132,7 @@ beta: Milvus 3.0.x
    <tr>
      <td><p><code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code></p></td>
      <td><p>100</p></td>
-     <td><p>Пороговое значение количества сегментов для выбора алгоритма. Когда количество сегментов превышает это значение, Milvus использует более быстрый жадный алгоритм для планирования слияния.</p><ul><li><p><strong>Стандартный алгоритм</strong> (используется, когда количество сегментов &lt;= <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): дает более оптимальные результаты слияния, но требует больше времени на вычисление.</p></li><li><p><strong>Жадный алгоритм</strong> (используется, когда количество сегментов &gt; <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): завершает планирование гораздо быстрее за счет чуть менее оптимальной группировки сегментов.</p></li></ul></td>
+     <td><p>Порог количества сегментов для выбора алгоритма. Когда количество сегментов превышает это значение, Milvus использует более быстрый жадный алгоритм для планирования слияния.</p><ul><li><p><strong>Стандартный алгоритм</strong> (используется, когда количество сегментов &lt;= <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): дает более оптимальные результаты слияния, но требует больше времени на вычисление.</p></li><li><p><strong>Жадный алгоритм</strong> (используется, когда количество сегментов &gt; <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): завершает планирование гораздо быстрее за счет чуть менее оптимальной группировки сегментов.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.datanodeMemoryFactor</code></p></td>
@@ -201,6 +201,7 @@ job_id = client.compact(
     target_size=max_int64
 )
 <button class="copy-code-btn"></button></code></pre>
+<p><a id="parameter-reference"></a></p>
 <h4 id="Parameter-reference" class="common-anchor-header">Ссылка на параметры</h4><p>В следующей таблице приведены пояснения к параметрам.</p>
 <table>
    <tr>
@@ -263,6 +264,7 @@ state = client.get_compaction_state(job_id)
 <li><p><strong>Учитывайте компромисс производительности.</strong> Уплотнение с принудительным слиянием - ресурсоемкая операция. Она считывает, объединяет и перезаписывает данные сегмента. Запланируйте ее на периоды с низким трафиком, чтобы минимизировать влияние на задержку запросов.</p></li>
 <li><p><strong>Следите за количеством сегментов до и после операции.</strong> Используйте <code translate="no">get_compaction_state()</code> и <code translate="no">list_persistent_segments</code>, чтобы убедиться, что в результате уплотнения сегментов стало меньше и они стали больше, как и ожидалось.</p></li>
 </ul>
+<p><a id="faq"></a></p>
 <h2 id="FAQ" class="common-anchor-header">ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

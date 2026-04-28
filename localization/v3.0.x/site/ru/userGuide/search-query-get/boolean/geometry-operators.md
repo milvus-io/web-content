@@ -24,7 +24,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>Milvus поддерживает набор операторов для пространственной фильтрации по полям <code translate="no">GEOMETRY</code>, которые необходимы для управления и анализа геометрических данных. Эти операторы позволяют извлекать сущности на основе геометрических отношений между объектами.</p>
-<p>Все операторы геометрии принимают два геометрических аргумента: имя поля <code translate="no">GEOMETRY</code>, определенное в схеме вашей коллекции, и целевой геометрический объект, представленный в формате <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text</a> (WKT).</p>
+<p>Все операторы геометрии принимают два геометрических аргумента: имя поля <code translate="no">GEOMETRY</code>, определенного в схеме вашей коллекции, и целевой геометрический объект, представленный в формате <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text</a> (WKT).</p>
 <h2 id="Use-syntax" class="common-anchor-header">Синтаксис использования<button data-href="#Use-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,7 +85,7 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p><code translate="no">ST_CONTAINS(A, B)</code> / <code translate="no">st_contains(A, B)</code></p></td>
-     <td><p>Возвращает TRUE, если геометрия A полностью содержит геометрию B, причем их внутренности имеют хотя бы одну общую точку.</p></td>
+     <td><p>Возвращает TRUE, если геометрия A полностью содержит геометрию B, а их внутренности имеют хотя бы одну общую точку.</p></td>
      <td><p>Содержит ли городская черта (A) определенный парк (B)?</p></td>
    </tr>
    <tr>

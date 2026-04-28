@@ -22,7 +22,10 @@ title: Índice com GPU
         ></path>
       </svg>
     </button></h1><p>Este guia descreve as etapas para criar um índice com suporte de GPU no Milvus, o que pode melhorar significativamente o desempenho da pesquisa em cenários de alto rendimento e alta recuperação. Para obter detalhes sobre os tipos de índices de GPU suportados pelo Milvus, consulte <a href="/docs/pt/gpu_index.md">Índice de GPU</a>.</p>
-<h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Configurar as definições do Milvus para controlo da memória da GPU<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
+<div class="alert warning">
+<p>Esta página foi descontinuada. Para obter a implementação mais recente, consulte <a href="/docs/pt/gpu-index-overview.md">Visão geral do índice de GPU</a></p>
+</div>
+<h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Configurar as definições do Milvus para o controlo da memória da GPU<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,7 +41,7 @@ title: Índice com GPU
         ></path>
       </svg>
     </button></h2><p>O Milvus usa um pool de memória gráfica global para alocar a memória da GPU.</p>
-<p>Ele suporta dois parâmetros <code translate="no">initMemSize</code> e <code translate="no">maxMemSize</code> no <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">arquivo de configuração do Milvus</a>. O tamanho do pool é inicialmente definido como <code translate="no">initMemSize</code>, e será automaticamente expandido para <code translate="no">maxMemSize</code> após exceder este limite.</p>
+<p>Ele suporta dois parâmetros <code translate="no">initMemSize</code> e <code translate="no">maxMemSize</code> no <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">arquivo de configuração do Milvus</a>. O tamanho do pool é inicialmente definido como <code translate="no">initMemSize</code>, e será automaticamente expandido para <code translate="no">maxMemSize</code> depois de exceder esse limite.</p>
 <p>O padrão <code translate="no">initMemSize</code> é 1/2 da memória da GPU disponível quando o Milvus inicia, e o padrão <code translate="no">maxMemSize</code> é igual a toda a memória da GPU disponível.</p>
 <p>Até o Milvus 2.4.1 (incluindo a versão 2.4.1), o Milvus usava um pool de memória GPU unificado. Para versões anteriores à 2.4.1 (incluindo a versão 2.4.1), era recomendado definir ambos os valores como 0.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">gpu:</span>
@@ -102,7 +105,7 @@ title: Índice com GPU
 <p>As opções possíveis para <strong>params</strong> incluem:</p>
 <ul>
 <li><p><strong>intermediate_graph_degree</strong><em>(int</em>): Afeta a recuperação e o tempo de construção ao determinar o grau do gráfico antes da poda. Os valores recomendados são <strong>32</strong> ou <strong>64</strong>.</p></li>
-<li><p><strong>graph_degree</strong><em>(int</em>): Afeta o desempenho da pesquisa e a recuperação ao definir o grau do gráfico após a poda. Normalmente, é metade do <strong>grau_do_gráfico_intermediário</strong>. Uma diferença maior entre esses dois graus resulta em um tempo de construção mais longo. O seu valor deve ser menor do que o valor de <strong>grau_do_grafo_intermédio</strong>.</p></li>
+<li><p><strong>graph_degree</strong><em>(int</em>): Afeta o desempenho da pesquisa e a recuperação ao definir o grau do gráfico após a poda. Normalmente, é metade do <strong>grau_do_gráfico_intermediário</strong>. Uma diferença maior entre esses dois graus resulta em um tempo de construção mais longo. O seu valor tem de ser inferior ao valor de <strong>grau_do_grafo_intermédio</strong>.</p></li>
 <li><p><strong>algoritmo_de_construção</strong><em>(string</em>): Seleciona o algoritmo de geração do grafo antes da poda. Opções possíveis:</p>
 <ul>
 <li><p><strong>IVF_PQ</strong>: Oferece maior qualidade mas tempo de construção mais lento.</p></li>

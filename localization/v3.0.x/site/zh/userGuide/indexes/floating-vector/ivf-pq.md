@@ -84,7 +84,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Ivf Pq 1</span> </span></p>
 <ol>
 <li><p><strong>维度分解</strong>：该算法首先将每个高维向量分解为<code translate="no">m</code> 大小相等的子向量。这种分解将原始的 D 维空间转换为<code translate="no">m</code> 不相交的子空间，其中每个子空间包含<em>D/m</em>维。参数<code translate="no">m</code> 控制分解的粒度，并直接影响压缩比。</p></li>
-<li><p><strong>子空间编码本生成</strong>：在每个子空间内，算法应用<a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means 聚类</a>来学习一组代表性向量（中心点）。这些中心点集合起来就形成了该子空间的编码本。每个编码本中的中心点数量由参数<code translate="no">nbits</code> 决定，其中每个编码本包含<sup>2</sup>个中心点。例如，如果<code translate="no">nbits = 8</code> ，每个编码本将包含 256 个中心点。每个中心点都有一个唯一的索引，索引位数为<code translate="no">nbits</code> 。</p></li>
+<li><p><strong>子空间编码本生成</strong>：在每个子空间内，算法应用<a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means 聚类</a>来学习一组代表性向量（中心点）。这些中心点集合起来就形成了该子空间的代码集。每个编码本中的中心点数量由参数<code translate="no">nbits</code> 决定，其中每个编码本包含<sup>2</sup>个中心点。例如，如果<code translate="no">nbits = 8</code> ，每个编码本将包含 256 个中心点。每个中心点都有一个唯一的索引，索引位数为<code translate="no">nbits</code> 。</p></li>
 <li><p><strong>向量</strong> <strong>量化</strong>：对于原始向量中的每个子向量，PQ 会使用特定的度量类型在相应的子空间内识别其最近的中心点。这一过程可有效地将每个子向量映射到编码本中与其最接近的代表向量。PQ 不存储完整的子向量坐标，只保留匹配中心点的索引。</p></li>
 <li><p><strong>压缩表示</strong>：最终的压缩表示由<code translate="no">m</code> 索引组成，每个子空间一个索引，统称为<strong>PQ 编码</strong>。这种编码方式将存储需求从<em>D × 32</em>位（假设为 32 位浮点数）减少到<em>m</em>×<em>nbits</em>位，在保留近似向量距离能力的同时实现了大幅压缩。</p></li>
 </ol>
@@ -294,7 +294,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>下表列出了在<code translate="no">search_params.params</code> 中<a href="/docs/zh/ivf-pq.md#Search-on-index">搜索索引</a>时可以配置的参数。</p>
+    </button></h3><p>下表列出了在<code translate="no">search_params.params</code> 中<a href="/docs/zh/ivf-pq.md#Search-on-index">对索引进行搜索</a>时可以配置的参数。</p>
 <table>
    <tr>
      <th></th>

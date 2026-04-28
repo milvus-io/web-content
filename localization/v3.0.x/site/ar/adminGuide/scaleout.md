@@ -43,14 +43,29 @@ title: توسيع نطاق مجموعة ميلفوس العنقودية
         ></path>
       </svg>
     </button></h2><p>يتضمن التوسع الأفقي التوسع للخارج والتوسع للداخل.</p>
-<h3 id="Scaling-out" class="common-anchor-header">التوسع للخارج</h3><p>يشير توسيع النطاق إلى زيادة عدد العقد في المجموعة. على عكس التوسع، لا يتطلب توسيع النطاق إلى الخارج تخصيص المزيد من الموارد لعقدة واحدة في المجموعة. بدلاً من ذلك، يعمل توسيع النطاق على توسيع الكتلة أفقياً عن طريق إضافة المزيد من العقد.</p>
+<h3 id="Scaling-out" class="common-anchor-header">التوسع للخارج<button data-href="#Scaling-out" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يشير توسيع النطاق إلى زيادة عدد العقد في المجموعة. على عكس التوسع، لا يتطلب توسيع النطاق إلى الخارج تخصيص المزيد من الموارد لعقدة واحدة في المجموعة. بدلاً من ذلك، يعمل توسيع النطاق على توسيع الكتلة أفقياً عن طريق إضافة المزيد من العقد.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
    </span> <span class="img-wrapper"> <span>توسيع النطاق</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>توسيع النطاق</span> </span></p>
 <p>وفقًا <a href="/docs/ar/architecture_overview.md">لبنية Milvus،</a> تتضمن العقد العاملة عديمة الحالة عقدة الاستعلام وعقدة البيانات وعقدة الفهرس والوكيل. لذلك، يمكنك توسيع نطاق هذه الأنواع من العقد لتناسب احتياجات عملك وسيناريوهات التطبيق. يمكنك إما توسيع نطاق مجموعة Milvus يدويًا أو تلقائيًا.</p>
 <p>بشكل عام، ستحتاج بشكل عام إلى توسيع نطاق مجموعة Milvus التي قمت بإنشائها إذا تم استخدامها بشكل مفرط. فيما يلي بعض المواقف النموذجية التي قد تحتاج فيها إلى توسيع نطاق مجموعة Milvus:</p>
@@ -61,7 +76,22 @@ title: توسيع نطاق مجموعة ميلفوس العنقودية
 <li>الحاجة إلى معالجة كميات هائلة من مجموعات البيانات الكبيرة.</li>
 <li>يجب ضمان التوافر العالي لخدمة Milvus.</li>
 </ul>
-<h3 id="Scaling-in" class="common-anchor-header">التوسع في</h3><p>يشير التوسع في إلى تقليل عدد العقد في المجموعة. بشكل عام، ستحتاج إلى التوسع في مجموعة ميلفوس التي قمت بإنشائها إذا كانت غير مستغلة بشكل كافٍ. فيما يلي بعض المواقف النموذجية التي تحتاج فيها إلى التوسع في مجموعة Milvus العنقودية:</p>
+<h3 id="Scaling-in" class="common-anchor-header">التوسع في<button data-href="#Scaling-in" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يشير التوسع في إلى تقليل عدد العقد في المجموعة. بشكل عام، ستحتاج إلى توسيع نطاق مجموعة ميلفوس التي قمت بإنشائها إذا كانت غير مستغلة بشكل كافٍ. فيما يلي بعض المواقف النموذجية التي تحتاج فيها إلى التوسع في مجموعة Milvus العنقودية:</p>
 <ul>
 <li>انخفاض استخدام وحدة المعالجة المركزية والذاكرة لفترة من الزمن.</li>
 <li>يصبح إنتاجية الاستعلام أقل.</li>
@@ -173,7 +203,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><p>إذا كنت مستعداً لنشر مجموعتك على السحابة</p>
 <ul>
 <li>تعرف على كيفية <a href="/docs/ar/eks.md">نشر Milvus على Amazon EKS باستخدام Terraform</a></li>
-<li>تعرف على كيفية <a href="/docs/ar/gcp.md">نشر مجموعة Milvus العنقودية على GCP باستخدام Kubernetes</a></li>
+<li>تعلم كيفية <a href="/docs/ar/gcp.md">نشر مجموعة ميلفوس العنقودية على GCP باستخدام Kubernetes</a></li>
 <li>تعرف على كيفية <a href="/docs/ar/azure.md">نشر ميلفوس على مايكروسوفت أزور باستخدام Kubernetes</a></li>
 </ul></li>
 <li><p>إذا كنت تبحث عن إرشادات حول كيفية تخصيص الموارد:</p>

@@ -54,12 +54,27 @@ title: تكوين ذاكرة التخزين المؤقت للقطع
 <ul>
 <li><p>بالنسبة لمثيلات Milvus المثبتة باستخدام مخططات Helm Charts</p>
 <p>أضف التكوين إلى الملف <code translate="no">values.yaml</code> ضمن القسم <code translate="no">config</code>. للحصول على التفاصيل، راجع <a href="/docs/ar/configure-helm.md">تكوين Milvus باستخدام مخططات Helm Charts</a>.</p></li>
-<li><p>لمثيلات Milvus المثبتة باستخدام Docker Compose</p>
+<li><p>بالنسبة لمثيلات Milvus المثبتة باستخدام Docker Compose</p>
 <p>أضف التكوين إلى الملف <code translate="no">milvus.yaml</code> الذي استخدمته لبدء تشغيل مثيل Milvus. للحصول على التفاصيل، راجع <a href="/docs/ar/configure-docker.md">تكوين Milvus باستخدام Docker Compose</a>.</p></li>
 <li><p>لمثيلات Milvus المثبتة باستخدام المشغل</p>
-<p>أضف التكوين إلى قسم <code translate="no">spec.components</code> في المورد المخصص <code translate="no">Milvus</code>. للحصول على التفاصيل، راجع <a href="/docs/ar/configure_operator.md">تكوين Milvus مع المشغل</a>.</p></li>
+<p>أضف التكوين إلى قسم <code translate="no">spec.components</code> في المورد المخصص <code translate="no">Milvus</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/configure_operator.md">تكوين Milvus مع المشغل</a>.</p></li>
 </ul>
-<h3 id="Configuration-options" class="common-anchor-header">خيارات التكوين</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
+<h3 id="Configuration-options" class="common-anchor-header">خيارات التكوين<button data-href="#Configuration-options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
     <span class="hljs-attr">cache:</span>
         <span class="hljs-attr">warmup:</span> <span class="hljs-string">async</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -70,8 +85,23 @@ title: تكوين ذاكرة التخزين المؤقت للقطع
 <li><code translate="no">disable</code>: لا يقوم Milvus بتحميل البيانات مسبقاً في ذاكرة التخزين المؤقت للذاكرة.</li>
 </ul>
 <p>لاحظ أن إعدادات ذاكرة التخزين المؤقت للقطع تنطبق أيضًا عند إدراج بيانات جديدة في المجموعات أو عند إعادة بناء فهارس المجموعة.</p>
-<h3 id="FAQ" class="common-anchor-header">الأسئلة الشائعة</h3><ul>
+<h3 id="FAQ" class="common-anchor-header">الأسئلة الشائعة<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>كيف يمكنني تحديد ما إذا كانت آلية ذاكرة التخزين المؤقت للقطع تعمل بشكل صحيح؟</strong></p>
-<p>ننصحك بالتحقق من زمن الاستجابة لطلب البحث أو الاستعلام بعد تحميل مجموعة. إذا كان زمن التأخير أعلى بكثير من المتوقع (على سبيل المثال، عدة ثوانٍ)، فقد يشير ذلك إلى أن آلية التخزين المؤقت للقطع لا تزال تعمل.</p>
+<p>ننصحك بالتحقق من زمن الاستجابة لطلب بحث أو استعلام بعد تحميل مجموعة. إذا كان زمن التأخير أعلى بكثير من المتوقع (على سبيل المثال، عدة ثوانٍ)، فقد يشير ذلك إلى أن آلية التخزين المؤقت للقطع لا تزال تعمل.</p>
 <p>إذا ظل زمن انتقال الاستعلام مرتفعًا لفترة طويلة. يمكنك التحقق من إنتاجية مخزن الكائنات للتأكد من أن ذاكرة التخزين المؤقت للقطع لا تزال تعمل. في الحالات العادية، ستولد ذاكرة التخزين المؤقت للقطع العاملة إنتاجية عالية على مخزن الكائنات. بدلاً من ذلك، يمكنك ببساطة تجربة ذاكرة التخزين المؤقت للقطع في الوضع <code translate="no">sync</code>.</p></li>
 </ul>

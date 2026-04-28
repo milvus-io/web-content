@@ -22,7 +22,7 @@ title: Ricerca a imbuto con Matryoshka Embeddings
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.6.x/assets/funnel-search.png' width='100%'></div>
+    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/funnel-search.png' width='100%'></div>
 Quando si costruiscono sistemi di ricerca vettoriale efficienti, una sfida fondamentale è la gestione dei costi di memorizzazione, mantenendo una latenza e un richiamo accettabili. I moderni modelli di embedding producono vettori con centinaia o migliaia di dimensioni, creando un significativo overhead di memorizzazione e calcolo per il vettore grezzo e l'indice.<p>Tradizionalmente, i requisiti di memorizzazione vengono ridotti applicando un metodo di quantizzazione o di riduzione della dimensionalità appena prima di costruire l'indice. Ad esempio, è possibile risparmiare memoria riducendo la precisione con la quantizzazione del prodotto (PQ) o il numero di dimensioni con l'analisi delle componenti principali (PCA). Questi metodi analizzano l'intero insieme di vettori per trovarne uno più compatto che mantenga le relazioni semantiche tra i vettori.</p>
 <p>Pur essendo efficaci, questi approcci standard riducono la precisione o la dimensionalità solo una volta e su un'unica scala. Ma cosa succederebbe se potessimo mantenere più livelli di dettaglio contemporaneamente, come una piramide di rappresentazioni sempre più precise?</p>
 <p>Ecco le Matryoshka embeddings. Questi costrutti intelligenti, che prendono il nome dalle matrioske russe (vedi illustrazione), incorporano più scale di rappresentazione all'interno di un singolo vettore. A differenza dei metodi tradizionali di post-elaborazione, le Matryoshka embeddings apprendono questa struttura multi-scala durante il processo di addestramento iniziale. Il risultato è notevole: non solo l'embedding completo cattura la semantica dell'input, ma ogni prefisso annidato del sottoinsieme (prima metà, primo quarto, ecc.) fornisce una rappresentazione coerente, anche se meno dettagliata.</p>
@@ -132,7 +132,7 @@ fields = [
 schema = CollectionSchema(fields=fields, enable_dynamic_field=<span class="hljs-literal">False</span>)
 client.create_collection(collection_name=collection_name, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus non supporta attualmente la ricerca su sottoinsiemi di incorporazioni, quindi dividiamo le incorporazioni in due parti: la testa rappresenta il sottoinsieme iniziale del vettore da indicizzare e cercare, mentre la coda è il resto. Il modello è stato addestrato per la ricerca di somiglianze a distanza coseno, quindi normalizziamo gli embeddings della testa. Tuttavia, per calcolare le somiglianze per sottoinsiemi più ampi in un secondo momento, è necessario memorizzare la norma dell'embedding della testa, in modo da poterla normalizzare prima di unirla alla coda.</p>
+<p>Milvus non supporta attualmente la ricerca su sottoinsiemi di incorporazioni, quindi dividiamo le incorporazioni in due parti: la testa rappresenta il sottoinsieme iniziale del vettore da indicizzare e cercare, mentre la coda è il resto. Il modello è stato addestrato per la ricerca di somiglianze a distanza coseno, quindi normalizziamo gli embeddings della testa. Tuttavia, per calcolare in seguito le somiglianze per sottoinsiemi più ampi, è necessario memorizzare la norma dell'embedding della testa, in modo da poterla normalizzare prima di unirla alla coda.</p>
 <p>Per eseguire la ricerca attraverso il primo 1/6 dell'incorporazione, dovremo creare un indice di ricerca vettoriale sul campo <code translate="no">head_embedding</code>. In seguito, confronteremo i risultati della "ricerca a imbuto" con una normale ricerca vettoriale, e quindi creeremo un indice di ricerca anche sull'intero embedding.</p>
 <p><em>È importante notare che utilizziamo la metrica di distanza <code translate="no">COSINE</code> anziché <code translate="no">IP</code>, perché altrimenti dovremmo tenere traccia delle norme di incorporamento, il che complicherebbe l'implementazione (questo avrà più senso una volta descritto l'algoritmo di ricerca a imbuto).</em></p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -242,7 +242,7 @@ The Ref
 Impact
 The House in Marsh Road
 </code></pre>
-<p>Come possiamo vedere, il richiamo ha sofferto come conseguenza del troncamento delle incorporazioni durante la ricerca. La ricerca a imbuto risolve questo problema con un trucco intelligente: possiamo usare il resto delle dimensioni dell'incorporamento per riordinare e sfoltire il nostro elenco di candidati e recuperare le prestazioni di recupero senza eseguire ulteriori costose ricerche vettoriali.</p>
+<p>Come possiamo vedere, il richiamo ha sofferto come conseguenza del troncamento delle incorporazioni durante la ricerca. La ricerca a imbuto risolve questo problema con un trucco intelligente: possiamo usare il resto delle dimensioni dell'embedding per riordinare e sfoltire il nostro elenco di candidati e recuperare le prestazioni di recupero senza eseguire ulteriori costose ricerche vettoriali.</p>
 <p>Per facilitare l'esposizione dell'algoritmo di ricerca funnel, convertiamo i risultati della ricerca Milvus per ogni query in un dataframe Pandas.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">hits_to_dataframe</span>(<span class="hljs-params">hits: pymilvus.client.abstract.Hits</span>) -&gt; pd.DataFrame:
     <span class="hljs-string">&quot;&quot;&quot;
@@ -259,7 +259,7 @@ The House in Marsh Road
 dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 <button class="copy-code-btn"></button></code></pre>
 <p>Ora, per eseguire la ricerca a imbuto, iteriamo sui sottoinsiemi sempre più grandi delle incorporazioni. Ad ogni iterazione, i candidati vengono classificati in base alle nuove somiglianze e viene eliminata una frazione di quelli classificati più in basso.</p>
-<p>Per fare un esempio concreto, dalla fase precedente abbiamo recuperato 128 candidati utilizzando 1/6 delle dimensioni dell'embedding e della query. Il primo passo per eseguire la ricerca a imbuto consiste nel ricalcolare le somiglianze tra le query e i candidati utilizzando <em>il primo 1/3 delle dimensioni</em>. Gli ultimi 64 candidati vengono eliminati. Poi si ripete il processo con <em>i primi 2/3 delle dimensioni</em> e poi con <em>tutte le dimensioni</em>, riducendo successivamente a 32 e 16 i candidati.</p>
+<p>Per fare un esempio concreto, dalla fase precedente abbiamo recuperato 128 candidati utilizzando 1/6 delle dimensioni dell'embedding e della query. Il primo passo per eseguire la ricerca a imbuto consiste nel ricalcolare le somiglianze tra le query e i candidati utilizzando <em>il primo 1/3 delle dimensioni</em>. Gli ultimi 64 candidati vengono eliminati. Quindi si ripete il processo con <em>i primi 2/3 delle dimensioni</em> e poi con <em>tutte le dimensioni</em>, riducendo successivamente a 32 e 16 i candidati.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># An optimized implementation would vectorize the calculation of similarity scores across rows (using a matrix)</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_score</span>(<span class="hljs-params">row, query_emb=<span class="hljs-literal">None</span>, dims=<span class="hljs-number">768</span></span>):
     emb = F.normalize(row[<span class="hljs-string">&quot;embedding&quot;</span>][:dims], dim=-<span class="hljs-number">1</span>)
@@ -322,7 +322,7 @@ A young couple with a kid look after a hotel during winter and the husband goes 
 12         Home Alone
 Name: title, dtype: object 
 </code></pre>
-<p>Siamo riusciti a ripristinare il richiamo senza eseguire ulteriori ricerche vettoriali! Qualitativamente, questi risultati sembrano avere un richiamo più elevato per "I predatori dell'arca perduta" e "Shining" rispetto alla ricerca vettoriale standard del tutorial <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Movie Search using Milvus and Sentence Transformers",</a> che utilizza un modello di incorporazione diverso. Tuttavia, non riesce a trovare "Ferris Bueller's Day Off", su cui torneremo più avanti nel quaderno. (Si veda l'articolo <a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learning</a> per ulteriori esperimenti quantitativi e benchmark).</p>
+<p>Siamo riusciti a ripristinare il richiamo senza eseguire ulteriori ricerche vettoriali! Qualitativamente, questi risultati sembrano avere un richiamo più elevato per "I predatori dell'arca perduta" e "Shining" rispetto alla ricerca vettoriale standard del tutorial <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Movie Search using Milvus and Sentence Transformers",</a> che utilizza un modello di incorporamento diverso. Tuttavia, non riesce a trovare "Ferris Bueller's Day Off", su cui torneremo più avanti nel quaderno. (Si veda il documento <a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learning</a> per ulteriori esperimenti quantitativi e benchmark).</p>
 <h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">Confronto tra la ricerca a imbuto e la ricerca regolare<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -382,7 +382,7 @@ Killing Ground
 Home Alone
 </code></pre>
 <p>Con l'eccezione dei risultati per "Un adolescente finge una malattia per non andare a scuola...", i risultati della ricerca a imbuto sono quasi identici a quelli della ricerca completa, anche se la ricerca a imbuto è stata eseguita su uno spazio di ricerca di 128 dimensioni contro le 768 della ricerca normale.</p>
-<h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">Indagine sul fallimento della ricerca a imbuto per Ferris Bueller's Day Off<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
+<h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">Analisi del fallimento della ricerca a imbuto per Ferris Bueller's Day Off<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -570,7 +570,7 @@ Leopard in the Snow
          Unfaithful
      Always a Bride 
 </code></pre>
-<p>Il richiamo è molto più scarso rispetto alla ricerca a imbuto o alla ricerca normale, come ci si aspettava (il modello di incorporazione è stato addestrato tramite apprendimento contrastivo sui prefissi delle dimensioni di incorporazione, non sui suffissi).</p>
+<p>Il richiamo è molto più scarso rispetto alla ricerca a imbuto o alla ricerca regolare, come ci si aspettava (il modello di incorporazione è stato addestrato tramite apprendimento contrastivo sui prefissi delle dimensioni di incorporazione, non sui suffissi).</p>
 <h2 id="Summary" class="common-anchor-header">Riassunto<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -587,7 +587,7 @@ Leopard in the Snow
         ></path>
       </svg>
     </button></h2><p>Ecco un confronto dei risultati della ricerca tra i vari metodi:</p>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.6.x/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
-<div style='margin: auto; width: 100%;'><img translate="no" src='/docs/v2.6.x/assets/results-ferris-buellers-day-off.png' width='100%'></div>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.6.x/assets/results-the-shining.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
+<div style='margin: auto; width: 100%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-ferris-buellers-day-off.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-the-shining.png' width='100%'></div>
 Abbiamo mostrato come utilizzare le Matryoshka embeddings con Milvus per eseguire un algoritmo di ricerca semantica più efficiente chiamato "funnel search". Abbiamo anche esplorato l'importanza delle fasi di reranking e pruning dell'algoritmo, nonché una modalità di fallimento quando l'elenco iniziale di candidati è troppo piccolo. Infine, abbiamo discusso di come l'ordine delle dimensioni sia importante quando si formano i sub-embeddings: deve essere nello stesso modo per il quale il modello è stato addestrato. O meglio, è solo perché il modello è stato addestrato in un certo modo che i prefissi delle incorporazioni sono significativi. Ora sapete come implementare le Matryoshka embeddings e la ricerca a imbuto per ridurre i costi di memorizzazione della ricerca semantica senza sacrificare troppo le prestazioni di recupero!

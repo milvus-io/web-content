@@ -85,7 +85,22 @@ beta: Milvus 2.6.x
      <td><p>Контейнерные рабочие процессы, быстрые тесты</p></td>
    </tr>
 </table>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Вариант 1: Файл конфигурации (рекомендуется и имеет более высокий приоритет)</h3><p>Milvus всегда будет отдавать предпочтение учетным данным, объявленным в <code translate="no">milvus.yaml</code>, а не любым переменным окружения для того же провайдера.</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Вариант 1: Файл конфигурации (рекомендуется и имеет более высокий приоритет)<button data-href="#Option-1-Configuration-file-recommended--higher-priority" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus всегда будет отдавать предпочтение учетным данным, объявленным в <code translate="no">milvus.yaml</code>, а не любым переменным окружения для того же провайдера.</p>
 <ol>
 <li><p>Base64-кодирование вашего JSON-ключа</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> credentials.json | jq . | <span class="hljs-built_in">base64</span>
@@ -110,7 +125,22 @@ beta: Milvus 2.6.x
 <p>Если впоследствии вам понадобится изменить ключи, просто обновите строку Base64 в разделе <code translate="no">credential_json</code> и перезапустите Milvus - никаких изменений в окружении или контейнерах не требуется.</p>
 <p></div></p></li>
 </ol>
-<h3 id="Option-2-Environment-variables" class="common-anchor-header">Вариант 2: Переменные окружения</h3><p>Используйте этот метод, если вы предпочитаете вводить секреты во время развертывания. Milvus переходит к использованию env-vars только в том случае, если в <code translate="no">milvus.yaml</code> нет подходящей записи.</p>
+<h3 id="Option-2-Environment-variables" class="common-anchor-header">Вариант 2: Переменные окружения<button data-href="#Option-2-Environment-variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Используйте этот метод, если вы предпочитаете вводить секреты во время развертывания. Milvus переходит к использованию env-vars только в том случае, если в <code translate="no">milvus.yaml</code> нет подходящей записи.</p>
 <div class="alert note">
 <p>Шаги настройки зависят от режима развертывания Milvus (автономный или распределенный кластер) и платформы оркестровки (Docker Compose или Kubernetes).</p>
 </div>
@@ -205,7 +235,7 @@ beta: Milvus 2.6.x
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 <li><p><strong>Примените конфигурацию Helm</strong></p>
-<p>Разверните обновленную конфигурацию на вашем кластере:</p>
+<p>Разверните обновленную конфигурацию на кластере:</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus milvus/milvus -f values.yaml -n &lt;your-milvus-namespace&gt;
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
@@ -225,8 +255,23 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После настройки Vertex AI выполните следующие шаги, чтобы определить и использовать функции встраивания.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Шаг 1: Определите поля схемы</h3><p>Чтобы использовать функцию встраивания, создайте коллекцию с определенной схемой. Эта схема должна включать как минимум три необходимых поля:</p>
+    </button></h2><p>После настройки Vertex AI выполните следующие шаги для определения и использования функций встраивания.</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Шаг 1: Определите поля схемы<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы использовать функцию встраивания, создайте коллекцию с определенной схемой. Эта схема должна включать как минимум три необходимых поля:</p>
 <ul>
 <li><p>Первичное поле, которое уникально идентифицирует каждую сущность в коллекции.</p></li>
 <li><p>Скалярное поле, в котором хранятся исходные данные для встраивания.</p></li>
@@ -246,7 +291,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the output dimension of the model and parameters</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Шаг 2: Добавьте функцию встраивания в схему</h3><p>Модуль Function в Milvus автоматически преобразует необработанные данные, хранящиеся в скалярном поле, во вкрапления и сохраняет их в явно определенном векторном поле.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Шаг 2: Добавьте функцию встраивания в схему<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Модуль Function в Milvus автоматически преобразует необработанные данные, хранящиеся в скалярном поле, во вкрапления и сохраняет их в явно определенном векторном поле.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define Vertex AI embedding function</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;vert_func&quot;</span>,                           <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -306,7 +366,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>Размерность выходных векторов эмбеддинга. Принимаются целые числа от 1 до 768. <strong>Примечание:</strong> Если указано, убедитесь, что размерность векторного поля в схеме соответствует этому значению.</p></td>
+     <td><p>Размерность выходных векторов эмбеддинга. Принимает целые числа от 1 до 768. <strong>Примечание:</strong> Если указано, убедитесь, что размерность векторного поля в схеме соответствует этому значению.</p></td>
      <td><p>Нет</p></td>
      <td><p><code translate="no">768</code></p></td>
    </tr>

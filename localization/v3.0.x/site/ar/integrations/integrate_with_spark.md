@@ -21,7 +21,7 @@ title: استخدام Apache Spark™ مع Milvus/Zilliz Cloud لخطوط أنا
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يوفر <a href="https://github.com/zilliztech/spark-milvus">موصّل Spark-Milvus Connector</a> تكامل Apache Spark وDatabricks مع Milvus وZilliz Cloud. وهو يربط بين ميزات معالجة البيانات الضخمة القوية في Apache Spark وميزات التعلم الآلي (ML) في Apache Spark مع قدرات البحث المتجه المتطورة في Milvus. يتيح هذا التكامل سير عمل مبسّط للبحث المدعوم بالذكاء الاصطناعي والتحليلات المتقدمة وتدريب تعلّم الآلة والإدارة الفعالة للبيانات المتجهة واسعة النطاق.</p>
+    </button></h1><p>يوفر <a href="https://github.com/zilliztech/spark-milvus">موصّل Spark-Milvus Connector</a> تكامل Apache Spark وDatabricks مع Milvus وZilliz Cloud. فهو يربط بين ميزات معالجة البيانات الضخمة القوية في Apache Spark وميزات التعلم الآلي (ML) في Apache Spark مع قدرات البحث المتجه المتطورة في Milvus. يتيح هذا التكامل سير عمل مبسّط للبحث المدعوم بالذكاء الاصطناعي والتحليلات المتقدمة وتدريب تعلّم الآلة والإدارة الفعالة للبيانات المتجهة واسعة النطاق.</p>
 <p>Apache Spark هي عبارة عن منصة معالجة بيانات موزعة مصممة للتعامل مع مجموعات البيانات الضخمة بحسابات عالية السرعة. عند إقرانها مع Milvus أو Zilliz Cloud، فإنها تفتح إمكانيات جديدة لحالات الاستخدام مثل البحث الدلالي وأنظمة التوصيات وتحليلات البيانات القائمة على الذكاء الاصطناعي.</p>
 <p>على سبيل المثال، يمكن ل Spark معالجة مجموعات البيانات الكبيرة على دفعات لإنشاء تضمينات عبر نماذج التعلم الآلي، ثم استخدام موصل Spark-Milvus لتخزين هذه التضمينات مباشرة في Milvus أو Zilliz Cloud. وبمجرد فهرستها، يمكن البحث عن هذه البيانات أو تحليلها بسرعة، مما يؤدي إلى إنشاء خط أنابيب قوي للذكاء الاصطناعي وسير عمل البيانات الضخمة.</p>
 <p>يدعم موصل Spark-Milvus مهام مثل الإدخال التكراري والجماعي للبيانات في Milvus، ومزامنة البيانات بين الأنظمة، والتحليلات المتقدمة على البيانات المتجهة المخزنة في Milvus. سيرشدك هذا الدليل إلى الخطوات اللازمة لتهيئة الرابط واستخدامه بفعالية لحالات الاستخدام مثل:</p>
@@ -45,7 +45,22 @@ title: استخدام Apache Spark™ مع Milvus/Zilliz Cloud لخطوط أنا
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Preparation" class="common-anchor-header">التحضير</h3><p>يدعم موصل Spark-Milvus Connector لغتي البرمجة Scala و Python. يمكن للمستخدمين استخدامه مع <strong>Pyspark</strong> أو <strong>Spark-shell</strong>. لتشغيل هذا العرض التوضيحي، قم بإعداد بيئة Spark التي تحتوي على تبعية Spark-Milvus Connector في الخطوات التالية:</p>
+    </button></h2><h3 id="Preparation" class="common-anchor-header">التحضير<button data-href="#Preparation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يدعم موصل Spark-Milvus Connector لغتي البرمجة Scala و Python. يمكن للمستخدمين استخدامه مع <strong>Pyspark</strong> أو <strong>Spark-shell</strong>. لتشغيل هذا العرض التوضيحي، قم بإعداد بيئة Spark التي تحتوي على تبعية Spark-Milvus Connector في الخطوات التالية:</p>
 <ol>
 <li><p>تثبيت أباتشي سبارك (الإصدار &gt;= 3.3.0)</p>
 <p>يمكنك تثبيت Apache Spark بالرجوع إلى <a href="https://spark.apache.org/docs/latest/">الوثائق الرسمية</a>.</p></li>
@@ -63,7 +78,22 @@ title: استخدام Apache Spark™ مع Milvus/Zilliz Cloud لخطوط أنا
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 </ol>
-<h3 id="Demo" class="common-anchor-header">عرض توضيحي</h3><p>في هذا العرض التوضيحي، نقوم بإنشاء نموذج Spark DataFrame مع بيانات متجهة ونكتبها إلى Milvus من خلال Spark-Milvus Connector. سيتم إنشاء مجموعة في Milvus تلقائيًا استنادًا إلى المخطط والخيارات المحددة.</p>
+<h3 id="Demo" class="common-anchor-header">عرض توضيحي<button data-href="#Demo" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في هذا العرض التوضيحي، نقوم بإنشاء نموذج Spark DataFrame مع بيانات متجهة ونكتبها إلى Milvus من خلال Spark-Milvus Connector. سيتم إنشاء مجموعة في Milvus تلقائيًا استنادًا إلى المخطط والخيارات المحددة.</p>
 <div class="multipleCode">
  <a href="#python">بايثون </a> <a href="#scala">سكالا</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pyspark.sql <span class="hljs-keyword">import</span> SparkSession
@@ -135,7 +165,22 @@ object Hello extends App {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Milvus-options" class="common-anchor-header">خيارات ملفوس</h3><p>في قسم <a href="#Quick-start">البداية السريعة،</a> عرضنا خيارات الإعداد أثناء العمليات مع ميلفوس. يتم تجريد هذه الخيارات كخيارات Milvus. يتم استخدامها لإنشاء اتصالات مع ميلفوس والتحكم في سلوكيات ميلفوس الأخرى. ليست كل الخيارات إلزامية.</p>
+    </button></h2><h3 id="Milvus-options" class="common-anchor-header">خيارات ملفوس<button data-href="#Milvus-options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في قسم <a href="#Quick-start">البداية السريعة،</a> عرضنا خيارات الإعداد أثناء العمليات مع ميلفوس. يتم تجريد هذه الخيارات كخيارات Milvus. يتم استخدامها لإنشاء اتصالات مع ميلفوس والتحكم في سلوكيات ميلفوس الأخرى. ليست كل الخيارات إلزامية.</p>
 <table>
 <thead>
 <tr><th>مفتاح الخيار</th><th>القيمة الافتراضية</th><th>الوصف</th></tr>
@@ -183,14 +228,59 @@ object Hello extends App {
 <li><code translate="no">milvusbinlog</code>: تنسيق بيانات Milvus لقراءة بيانات مدونة Milvus المدمجة.</li>
 <li><code translate="no">mjson</code>: تنسيق Milvus JSON لإدخال البيانات المجمعة في Milvus.</li>
 </ul>
-<h3 id="milvus" class="common-anchor-header">ميلفوس</h3><p>في <a href="#Quick-start">البداية السريعة،</a> نستخدم تنسيق <strong>milvus</strong> لكتابة بيانات نموذجية في مجموعة Milvus. تنسيق <strong>milvus</strong> هو تنسيق بيانات جديد يدعم كتابة بيانات Spark DataFrame بسلاسة في مجموعات Milvus. يتم تحقيق ذلك من خلال استدعاءات دفعية إلى واجهة برمجة التطبيقات Insert API الخاصة بـ Milvus SDK. في حالة عدم وجود مجموعة في Milvus، سيتم إنشاء مجموعة جديدة بناءً على مخطط إطار البيانات. ومع ذلك، قد لا تدعم المجموعة التي تم إنشاؤها تلقائيًا جميع ميزات مخطط المجموعة. لذلك، يوصى بإنشاء مجموعة عبر SDK أولاً ثم استخدام شرارة ميلفوس للكتابة. لمزيد من المعلومات، يرجى الرجوع إلى <a href="https://github.com/zilliztech/spark-milvus/blob/main/examples/src/main/scala/InsertDemo.scala">العرض التوضيحي</a>.</p>
-<h3 id="milvusbinlog" class="common-anchor-header">ميلفوسبينوغ</h3><p>تنسيق البيانات الجديد <strong>milvusbinlog</strong> مخصص لقراءة بيانات Milvus binlog المدمجة في Milvus. Binlog هو تنسيق تخزين البيانات الداخلية لـ Milvus استناداً إلى الباركيه. لسوء الحظ، لا يمكن قراءتها من قبل مكتبة باركيه عادية، لذلك قمنا بتنفيذ تنسيق البيانات الجديد هذا لمساعدة وظيفة Spark على قراءتها. لا يوصى باستخدام <strong>تنسيق milvusbinlog</strong> مباشرةً إلا إذا كنت على دراية بتفاصيل التخزين الداخلي لـ Milvus. نقترح استخدام دالة <a href="#MilvusUtils">MilvusUtils</a> التي سيتم تقديمها في القسم التالي.</p>
+<h3 id="milvus" class="common-anchor-header">ميلفوس<button data-href="#milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في <a href="#Quick-start">البداية السريعة،</a> نستخدم تنسيق <strong>milvus</strong> لكتابة بيانات نموذجية في مجموعة Milvus. تنسيق <strong>milvus</strong> هو تنسيق بيانات جديد يدعم كتابة بيانات Spark DataFrame بسلاسة في مجموعات Milvus. يتم تحقيق ذلك عن طريق الاستدعاءات المجمعة إلى واجهة برمجة التطبيقات Insert API الخاصة بـ Milvus SDK. في حالة عدم وجود مجموعة في Milvus، سيتم إنشاء مجموعة جديدة بناءً على مخطط إطار البيانات. ومع ذلك، قد لا تدعم المجموعة التي تم إنشاؤها تلقائيًا جميع ميزات مخطط المجموعة. لذلك، يوصى بإنشاء مجموعة عبر SDK أولاً ثم استخدام شرارة ميلفوس للكتابة. لمزيد من المعلومات، يرجى الرجوع إلى <a href="https://github.com/zilliztech/spark-milvus/blob/main/examples/src/main/scala/InsertDemo.scala">العرض التوضيحي</a>.</p>
+<h3 id="milvusbinlog" class="common-anchor-header">ميلفوسبينوغ<button data-href="#milvusbinlog" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تنسيق البيانات الجديد <strong>milvusbinlog</strong> مخصص لقراءة بيانات Milvus binlog المدمجة في Milvus. Binlog هو تنسيق تخزين البيانات الداخلية لـ Milvus استناداً إلى الباركيه. لسوء الحظ، لا يمكن قراءتها من قبل مكتبة باركيه عادية، لذلك قمنا بتنفيذ تنسيق البيانات الجديد هذا لمساعدة وظيفة Spark على قراءتها. لا يوصى باستخدام <strong>تنسيق milvusbinlog</strong> مباشرةً إلا إذا كنت على دراية بتفاصيل التخزين الداخلي لـ Milvus. نقترح استخدام دالة <a href="#MilvusUtils">MilvusUtils</a> التي سيتم تقديمها في القسم التالي.</p>
 <pre><code translate="no" class="language-scalar">val df = spark.read
   .format(&quot;milvusbinlog&quot;)
   .load(path)
   .withColumnRenamed(&quot;val&quot;, &quot;embedding&quot;)
 </code></pre>
-<h3 id="mjson" class="common-anchor-header">مجسون</h3><p>يوفر ميلفوس وظيفة <a href="https://milvus.io/docs/bulk_insert.md">بولكنسيرت</a> لتحسين أداء الكتابة عند العمل مع مجموعات البيانات الكبيرة. ومع ذلك، فإن تنسيق JSON المستخدم من قبل Milvus يختلف قليلاً عن تنسيق إخراج JSON الافتراضي الخاص بـ Spark. لحل هذه المشكلة، نقدم تنسيق بيانات <strong>mjson</strong> لتوليد بيانات تلبي متطلبات Milvus. فيما يلي مثال يوضح الفرق بين JSON-lines و <strong>mjson</strong>:</p>
+<h3 id="mjson" class="common-anchor-header">مجسون<button data-href="#mjson" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يوفر ميلفوس وظيفة <a href="https://milvus.io/docs/bulk_insert.md">بولكنسيرت</a> لتحسين أداء الكتابة عند العمل مع مجموعات البيانات الكبيرة. ومع ذلك، فإن تنسيق JSON الذي يستخدمه Milvus يختلف قليلاً عن تنسيق إخراج JSON الافتراضي الخاص بـ Spark. لحل هذه المشكلة، نقدم تنسيق بيانات <strong>mjson</strong> لتوليد بيانات تلبي متطلبات Milvus. فيما يلي مثال يوضح الفرق بين JSON-lines و <strong>mjson</strong>:</p>
 <ul>
 <li><p>JSON-lines:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;book_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">101</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;word_count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">13</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;book_intro&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">1.1</span><span class="hljs-punctuation">,</span> <span class="hljs-number">1.2</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">}</span>
@@ -228,10 +318,40 @@ object Hello extends App {
         ></path>
       </svg>
     </button></h2><p>يحتوي MilvusUtils على العديد من دوال الاستخدام المفيدة. وهي مدعومة حاليًا في سكالا فقط. المزيد من أمثلة الاستخدام في قسم <a href="#Advanced-Usage">الاستخدام المتقدم</a>.</p>
-<h3 id="MilvusUtilsreadMilvusCollection" class="common-anchor-header">MilvusUtils.readMilvusCollection</h3><p><strong>MilvusUtils.readMilvusCollection</strong> هي واجهة بسيطة لتحميل مجموعة Milvus كاملة في إطار بيانات Spark. وهي تغلف العديد من العمليات، بما في ذلك استدعاء Milvus SDK، وقراءة <strong>milvusbinlog</strong> وعمليات الاتحاد/الربط الشائعة.</p>
+<h3 id="MilvusUtilsreadMilvusCollection" class="common-anchor-header">MilvusUtils.readMilvusCollection<button data-href="#MilvusUtilsreadMilvusCollection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>MilvusUtils.readMilvusCollection</strong> هي واجهة بسيطة لتحميل مجموعة Milvus كاملة في إطار بيانات Spark. وهي تغلف العديد من العمليات، بما في ذلك استدعاء Milvus SDK، وقراءة <strong>milvusbinlog</strong> وعمليات الاتحاد/الربط الشائعة.</p>
 <pre><code translate="no" class="language-scala">val collectionDF = MilvusUtils.readMilvusCollection(spark, milvusOptions)
 </code></pre>
-<h3 id="MilvusUtilsbulkInsertFromSpark" class="common-anchor-header">MilvusUtils.bulkInsertFromSpark</h3><p>يوفر MilvusUtils<strong>.bulkInsertFertFromSpark</strong> طريقة ملائمة لاستيراد ملفات إخراج Spark إلى Milvus دفعة واحدة. وهي تلتف على واجهة برمجة تطبيقات <strong>Bullkinsert</strong> الخاصة بحزمة تطوير البرمجيات Milvus SDK.</p>
+<h3 id="MilvusUtilsbulkInsertFromSpark" class="common-anchor-header">MilvusUtils.bulkInsertFromSpark<button data-href="#MilvusUtilsbulkInsertFromSpark" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يوفر MilvusUtils<strong>.bulkInsertFertFromSpark</strong> طريقة ملائمة لاستيراد ملفات إخراج Spark إلى Milvus دفعة واحدة. وهي تلتف على واجهة برمجة تطبيقات <strong>Bullkinsert</strong> الخاصة بحزمة تطوير البرمجيات Milvus SDK.</p>
 <pre><code translate="no" class="language-scala">df.write.format(&quot;parquet&quot;).save(outputPath)
 MilvusUtils.bulkInsertFromSpark(spark, milvusOptions, outputPath, &quot;parquet&quot;)
 </code></pre>
@@ -251,7 +371,22 @@ MilvusUtils.bulkInsertFromSpark(spark, milvusOptions, outputPath, &quot;parquet&
         ></path>
       </svg>
     </button></h2><p>في هذا القسم، ستجد في هذا القسم أمثلة استخدام متقدمة لموصل Spark-Milvus لتحليل البيانات وترحيلها. لمزيد من العروض التوضيحية، انظر <a href="https://github.com/zilliztech/spark-milvus/tree/main/examples/src/main/scala">الأمثلة</a>.</p>
-<h3 id="MySQL---embedding---Milvus" class="common-anchor-header">MySQL -&gt; التضمين -&gt; ميلفوس</h3><p>في هذا العرض التوضيحي، سنقوم بما يلي</p>
+<h3 id="MySQL---embedding---Milvus" class="common-anchor-header">MySQL -&gt; التضمين -&gt; ميلفوس<button data-href="#MySQL---embedding---Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في هذا العرض التوضيحي، سنقوم بما يلي</p>
 <ol>
 <li>قراءة البيانات من MySQL من خلال موصل Spark-MySQL,</li>
 <li>توليد التضمين (باستخدام Word2Vec كمثال)، و</li>
@@ -333,7 +468,22 @@ object Mysql2MilvusDemo  extends App {
     .save()
 }
 </code></pre>
-<h3 id="Milvus---Transform---Milvus" class="common-anchor-header">ميلفوس -&gt; تحويل -&gt; ميلفوس</h3><p>في هذا العرض التوضيحي، سنقوم بما يلي</p>
+<h3 id="Milvus---Transform---Milvus" class="common-anchor-header">ميلفوس -&gt; تحويل -&gt; ميلفوس<button data-href="#Milvus---Transform---Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في هذا العرض التوضيحي، سنقوم بما يلي</p>
 <ol>
 <li>قراءة البيانات من مجموعة Milvus,</li>
 <li>تطبيق تحويل (باستخدام PCA كمثال)، و</li>
@@ -451,14 +601,29 @@ object TransformDemo extends App {
   MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, &quot;parquet&quot;)
 }
 </code></pre>
-<h3 id="Databricks---Zilliz-Cloud" class="common-anchor-header">داتابريكس -&gt; زيليز كلاود</h3><p>إذا كنت تستخدم Zilliz Cloud (خدمة Milvus المُدارة)، يمكنك الاستفادة من واجهة برمجة تطبيقات استيراد البيانات الملائمة. توفر Zilliz Cloud أدوات ووثائق شاملة لمساعدتك على نقل بياناتك بكفاءة من مصادر بيانات مختلفة، بما في ذلك Spark وDatabricks. ما عليك سوى إعداد دلو S3 كوسيط وفتح وصوله إلى حساب Zilliz Cloud الخاص بك. ستقوم واجهة برمجة تطبيقات استيراد البيانات في زيليز كلاود بتحميل دفعة كاملة من البيانات تلقائيًا من دلو S3 إلى مجموعة زيليز كلاود الخاصة بك.</p>
+<h3 id="Databricks---Zilliz-Cloud" class="common-anchor-header">داتابريكس -&gt; زيليز كلاود<button data-href="#Databricks---Zilliz-Cloud" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>إذا كنت تستخدم Zilliz Cloud (خدمة Milvus المُدارة)، يمكنك الاستفادة من واجهة برمجة تطبيقات استيراد البيانات الملائمة. توفر Zilliz Cloud أدوات ووثائق شاملة لمساعدتك على نقل بياناتك بكفاءة من مصادر بيانات مختلفة، بما في ذلك Spark وDatabricks. ما عليك سوى إعداد دلو S3 كوسيط وفتح وصوله إلى حساب Zilliz Cloud الخاص بك. ستقوم واجهة برمجة تطبيقات استيراد البيانات في زيليز كلاود بتحميل دفعة كاملة من البيانات تلقائيًا من دلو S3 إلى مجموعة زيليز كلاود الخاصة بك.</p>
 <p><strong>التحضيرات</strong></p>
 <ol>
 <li><p>قم بتحميل وقت تشغيل Spark عن طريق إضافة ملف جرة إلى مجموعة Databricks Cluster الخاصة بك.</p>
 <p>يمكنك تثبيت مكتبة بطرق مختلفة. تُظهر لقطة الشاشة هذه تحميل جرة من المحلية إلى الكتلة. لمزيد من المعلومات، راجع <a href="https://docs.databricks.com/en/libraries/cluster-libraries.html">مكتبات الكتلة</a> في وثائق Databricks.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
    </span> <span class="img-wrapper"> <span>تثبيت مكتبة داتابريكس</span> </span></p></li>
 <li><p>قم بإنشاء دلو S3 وقم بتكوينه كموقع تخزين خارجي لمجموعة مكتبات Databricks الخاصة بك.</p>
 <p>يتطلب بولكنسيرت تخزين البيانات المطلوبة في دلو مؤقت بحيث يمكن لزيليز كلاود استيراد البيانات دفعة واحدة. يمكنك إنشاء دلو S3 وتهيئته كموقع خارجي لـ داتابريكس. يرجى الرجوع إلى <a href="https://docs.databricks.com/en/sql/language-manual/sql-ref-external-locations.html">المواقع الخارجية</a> للحصول على التفاصيل.</p></li>
@@ -505,7 +670,7 @@ MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, &quot;mj
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لمساعدتك على البدء بسرعة في استخدام موصّل Spark-Milvus Connector، يمكنك الاطلاع على دفتر الملاحظات الذي يرشدك خلال أمثلة استيعاب البيانات المتدفقة والدفعية ل Spark إلى Milvus و Zilliz Cloud.</p>
+    </button></h2><p>لمساعدتك على البدء سريعًا في استخدام موصل Spark-Milvus Connector، يمكنك الاطلاع على دفتر الملاحظات الذي يرشدك خلال أمثلة استيعاب البيانات المتدفقة والدفعية ل Spark إلى Milvus و Zilliz Cloud.</p>
 <ul>
 <li><a href="https://zilliz.com/databricks_zilliz_demos">التدريب العملي على موصل Spark-Milvus Connector</a></li>
 </ul>

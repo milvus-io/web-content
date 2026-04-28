@@ -38,7 +38,7 @@ title: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans ce tutoriel, nous vous aiderons à construire un chatbot RAG (retrieval-augmented generation) qui répond à des questions sur un <a href="https://meetingbank.github.io/">ensemble de données d'une banque de réunions</a>.</p>
+    </button></h2><p>Dans ce tutoriel, nous vous aiderons à construire un chatbot de génération augmentée de recherche (RAG) qui répond aux questions sur un <a href="https://meetingbank.github.io/">ensemble de données de banques de réunions</a>.</p>
 <p>Dans ce tutoriel, vous apprendrez à :</p>
 <ul>
 <li>Construire une application LLM qui répond à la requête d'un utilisateur liée à l'ensemble de données de la banque de réunions.</li>
@@ -62,10 +62,10 @@ title: >-
       </svg>
     </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>Base de données vectorielle</em></h4><p>Pour cette application, nous utiliserons <a href="https://milvus.io/">Milvus</a> pour gérer et rechercher des données non structurées à grande échelle, telles que du texte, des images et des vidéos.</p>
 <h4 id="LLM-Framework" class="common-anchor-header"><em>Cadre LLM</em></h4><p>LlamaIndex est un cadre d'orchestration de données open-source qui simplifie la construction d'applications de grands modèles de langage (LLM) en facilitant l'intégration de données privées avec les LLM, permettant des applications d'IA générative augmentée par le contexte grâce à un pipeline de récupération et de génération augmentée (RAG). Nous utiliserons LlamaIndex pour ce tutoriel car il offre une bonne quantité de flexibilité et de meilleures abstractions API de bas niveau.</p>
-<h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>Évaluation de la qualité de sortie du LLM</em></h4><p><a href="https://www.aimon.ai">AIMon</a> offre des modèles de jugement propriétaires pour l'hallucination, les problèmes de qualité du contexte, l'adhésion aux instructions des LLM, la qualité de la récupération et d'autres tâches de fiabilité des LLM. Nous utiliserons AIMon pour évaluer la qualité de l'application LLM.</p>
+<h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>Évaluation de la qualité des sorties LLM</em></h4><p><a href="https://www.aimon.ai">AIMon</a> offre des modèles de jugement propriétaires pour l'hallucination, les problèmes de qualité du contexte, l'adhésion aux instructions des LLM, la qualité de la récupération et d'autres tâches de fiabilité des LLM. Nous utiliserons AIMon pour évaluer la qualité de l'application LLM.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
-<h1 id="Pre-requisites" class="common-anchor-header">Conditions préalables<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
+<h1 id="Pre-requisites" class="common-anchor-header">Pré-requis<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -85,7 +85,7 @@ title: >-
 </ol>
 <p>Ajoutez ce secret au Colab Secrets (le symbole "clé" sur le panneau de gauche).</p>
 <blockquote>
-<p>Si vous êtes dans un autre environnement que google colab, veuillez remplacer vous-même le code lié à google colab</p>
+<p>Si vous êtes dans un autre environnement que google colab, remplacez vous-même le code lié à google colab</p>
 </blockquote>
 <ul>
 <li>CLÉ AIMON_API</li>
@@ -534,7 +534,7 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
 <p>Il y a deux composants principaux dont nous devons être conscients : L'ingestion et les questions-réponses basées sur le RAG. Le pipeline d'ingestion traite les transcriptions de l'ensemble de données Meeting Bank et les stocke dans la base de données vectorielle Milvus. Le pipeline RAG Q&amp;A traite la requête d'un utilisateur en récupérant d'abord les documents pertinents dans la base de données vectorielle. Ces documents seront ensuite utilisés comme documents de base par le LLM pour générer sa réponse. Nous nous appuyons sur AIMon pour calculer le score de qualité et surveiller en permanence l'application pour l'<a href="https://docs.aimon.ai/detectors/hallucination">hallucination</a>, le <a href="https://docs.aimon.ai/detectors/instruction_adherence">respect des instructions</a> et la <a href="https://docs.aimon.ai/checker-models/context_relevance">pertinence du contexte</a>. Ce sont les mêmes 3 métriques que nous avons utilisées pour définir le score <code translate="no">quality</code> ci-dessus.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
    </span> <span class="img-wrapper"> <span>flux de travail</span> </span></p>
 <p>Vous trouverez ci-dessous quelques fonctions utilitaires permettant de prétraiter et de calculer les enchâssements de documents.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -841,7 +841,7 @@ avg_retrieval_rel_score_vdb = statistics.mean(avg_retrieval_rel_scores_vdb)
         ></path>
       </svg>
     </button></h1><p>Nous allons maintenant ajouter le <a href="https://docs.aimon.ai/retrieval#domain-adaptable-re-ranking">reclassement adaptable au domaine d'</a> AIMon en utilisant l'<a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">intégration de reclassement du post-processeur</a> LlamaIndex d'AIMon.</p>
-<p>Comme le montre la figure ci-dessous, le reclassement permet de faire remonter les documents les plus pertinents vers le haut en utilisant une fonction de correspondance Requête-Document plus avancée. La caractéristique unique de l'outil de reclassement d'AIMon est la possibilité de le personnaliser par domaine. De la même manière que pour un LLM, vous pouvez personnaliser la performance du re-ranking par domaine en utilisant le champ <code translate="no">task_definition</code>. Ce reranker de pointe fonctionne avec une latence ultra-faible de l'ordre de la seconde (pour un contexte de ~2k) et ses performances se classent dans le top 5 du classement de reranking de la MTEB.</p>
+<p>Comme le montre la figure ci-dessous, le reclassement permet de faire remonter les documents les plus pertinents vers le haut en utilisant une fonction de correspondance Requête-Document plus avancée. La caractéristique unique de l'outil de reclassement d'AIMon est la possibilité de le personnaliser par domaine. Comme vous le feriez pour un LLM, vous pouvez personnaliser les performances du reclassement par domaine en utilisant le champ <code translate="no">task_definition</code>. Ce reranker de pointe fonctionne avec une latence ultra-faible de l'ordre de la seconde (pour un contexte de ~2k) et ses performances se classent dans le top 5 du classement de reranking de la MTEB.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/devvratbhardwaj/images/refs/heads/main/AIMon_Reranker.svg" alt="Diagram depicting working of AIMon reranker"/></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Setup AIMon&#x27;s reranker</span>
 

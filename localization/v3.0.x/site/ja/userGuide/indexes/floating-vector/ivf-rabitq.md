@@ -20,7 +20,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>IVF_RABITQ</strong>インデックスは、FP32 ベクトルをバイナリ表現に量子化する<strong>バイナリ量子化ベースの</strong>インデックス作成アルゴリズムである。このインデックスは、比較的良好な想起率を維持しながら、1対32の圧縮率という優れた保存効率を提供します。また、ストレージを追加する代わりに、より高い想起率を実現するための絞り込み機能をオプションでサポートしており、メモリ制約のあるシナリオにおいて、<a href="/docs/ja/ivf-sq8.md">IVF_SQ8や</a> <a href="/docs/ja/ivf-flat.md">IVF_FLATに</a>代わる汎用性の高いインデックスとなっています。</p>
+    </button></h1><p><strong>IVF_RABITQ</strong>インデックスは、FP32 ベクトルをバイナリ表現に量子化する<strong>バイナリ量子化ベースの</strong>インデックス作成アルゴリズムである。このインデックスは、比較的良好な想起率を維持しながら、1対32の圧縮率という卓越した保存効率を提供します。また、ストレージを追加する代わりに、より高い想起率を実現するための絞り込み機能をオプションでサポートしており、メモリ制約のあるシナリオにおいて、<a href="/docs/ja/ivf-sq8.md">IVF_SQ8や</a> <a href="/docs/ja/ivf-flat.md">IVF_FLATに</a>代わる汎用性の高いインデックスとなっています。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,9 +37,39 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p><strong>IVF_RABITQは</strong> <strong>Inverted File with RaBitQ quantizationの</strong>略で、効率的なベクトル探索と保存のための2つの強力な手法を組み合わせたものです。</p>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p><strong>インバーテッド・ファイル（IVF）は</strong>、<a href="https://en.wikipedia.org/wiki/K-means_clustering">k-meansクラスタリングを用いて</a>ベクトル空間を管理しやすい領域に整理します。各クラスタはセントロイドで表され、そのクラスタ内のベクトルの参照点として機能します。このクラスタリング手法により、アルゴリズムがクエリ処理中に最も関連性の高いクラスタのみに焦点を当てることができるため、検索空間が縮小されます。</p>
+<h3 id="IVF" class="common-anchor-header">IVF<button data-href="#IVF" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>インバーテッド・ファイル（IVF）は</strong>、<a href="https://en.wikipedia.org/wiki/K-means_clustering">k-meansクラスタリングを用いて</a>ベクトル空間を管理しやすい領域に整理します。各クラスタはセントロイドで表され、そのクラスタ内のベクトルの参照点として機能します。このクラスタリング手法により、アルゴリズムがクエリ処理中に最も関連性の高いクラスタのみに焦点を当てることができるため、検索空間が縮小されます。</p>
 <p>IVFの技術的な詳細については、<a href="/docs/ja/ivf-flat.md">IVF_FLATを</a>参照してください。</p>
-<h3 id="RaBitQ" class="common-anchor-header">RaBitQ</h3><p><strong>RaBitQは</strong>、Jianyang GaoとCheng Longによる研究論文 "RaBitQ: Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search "で紹介された、理論的保証のある最先端のバイナリ量子化手法です。</p>
+<h3 id="RaBitQ" class="common-anchor-header">RaBitQ<button data-href="#RaBitQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>RaBitQは</strong>、Jianyang GaoとCheng Longによる研究論文 "RaBitQ: Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search "で紹介された、理論的保証のある最先端のバイナリ量子化手法です。</p>
 <p>RaBitQはいくつかの革新的な概念を導入している：</p>
 <p><strong>角度情報エンコーディング</strong>：従来の空間エンコーディングとは異なり、RaBitQはベクトルの正規化を通じて角度情報をエンコードする。IVF_RABITQでは、データベクトルは最も近いIVF重心に対して正規化され、量子化プロセスの精度が向上します。</p>
 <p><strong>理論的基礎</strong>核となる距離近似式は以下の通りである：</p>
@@ -55,7 +85,22 @@ beta: Milvus 2.6.x
 </ul>
 <p><strong>計算効率</strong>：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">o~tilde{mathbf{o}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6813em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span> o</span></span></span></span></span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3.3634em;"><span class="pstrut" style="height:3em;"></span> ~ の2進数の性質により、距離計算が非常に高速になり、特に Intel Ice Lake+ または AMD Zen 4+ プロセッサの専用</span></span></span></span></span></span></span></span> <code translate="no">AVX-512 VPOPCNTDQ</code> 命令を持つ最新の CPU アーキテクチャの恩恵を受けています。</p>
 <p><strong>アルゴリズムの強化</strong>RaBitQは、<a href="https://www.vldb.org/pvldb/vol9/p288-andre.pdf"><code translate="no">FastScan</code> アプローチや</a> <a href="https://github.com/facebookresearch/faiss/wiki/Pre--and-post-processing">ランダム回転の</a>ような確立された技術と効果的に統合し、パフォーマンスを向上させます。</p>
-<h3 id="IVF-+-RaBitQ" class="common-anchor-header">IVF + RaBitQ</h3><p><strong>IVF_RABITQ</strong>インデックスは、IVFの効率的なクラスタリングとRaBitQの高度なバイナリ量子化を組み合わせたものです：</p>
+<h3 id="IVF-+-RaBitQ" class="common-anchor-header">IVF + RaBitQ<button data-href="#IVF-+-RaBitQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>IVF_RABITQ</strong>インデックスは、IVFの効率的なクラスタリングとRaBitQの高度なバイナリ量子化を組み合わせたものです：</p>
 <ol>
 <li><p><strong>粗いフィルタリング</strong>：IVFはベクトル空間をクラスタに分割し、最も関連性の高いクラスタ領域に焦点を当てることで検索範囲を大幅に縮小します。</p></li>
 <li><p><strong>バイナリ量子化</strong>：各クラスタ内で、RaBitQは理論的保証により本質的な距離関係を保持しながら、ベクトルをバイナリ表現に圧縮します。</p></li>
@@ -121,7 +166,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>インデックスが構築され、エンティティが挿入されると、インデックス上で類似検索を実行できます。</p>
+    </button></h2><p>インデックスが構築され、エンティティが挿入されると、インデックスで類似検索を実行できます。</p>
 <pre><code translate="no" class="language-python">search_params = {
 <span class="highlighted-comment-line">    <span class="hljs-string">&quot;params&quot;</span>: {</span>
 <span class="highlighted-comment-line">        <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">128</span>, <span class="hljs-comment"># Number of clusters to search</span></span>
@@ -161,7 +206,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行するために使用されるパラメータの概要を説明します。</p>
-<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>次の表は、<a href="/docs/ja/ivf-rabitq.md#Build-index">インデックスを構築</a>する際に<code translate="no">params</code> で設定可能なパラメータの一覧です。</p>
+<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>次の表は、<a href="/docs/ja/ivf-rabitq.md#Build-index">インデックスを構築</a>する際に<code translate="no">params</code> で設定可能なパラメータの一覧です。</p>
 <table>
    <tr>
      <th></th>
@@ -180,7 +240,7 @@ res = MilvusClient.search(
    <tr>
      <td rowspan="3"><p>RaBitQ</p></td>
      <td><p><code translate="no">refine</code></p></td>
-     <td><p>refine処理を有効にし、refineされたデータを格納する。</p></td>
+     <td><p>絞り込み処理を有効にし、絞り込まれたデータを保存する。</p></td>
      <td><p><strong>タイプは</strong>ブール値<br><strong>範囲</strong>：[<code translate="no">true</code>,<code translate="no">false</code>]。<br><strong>デフォルト値</strong>：<code translate="no">false</code></p></td>
      <td><p>0.9以上の想起率が必要な場合、<code translate="no">true</code> に設定。絞り込みを有効にすると精度は向上するが、ストレージ要件とインデックス構築時間が増加する。</p></td>
    </tr>
@@ -191,7 +251,22 @@ res = MilvusClient.search(
      <td><p>リストされた値は、想起率の増加、QPSの減少、ストレージサイズの増加の順に表示される。<code translate="no">SQ8</code> が出発点として推奨され、精度とリソース使用量の良いバランスを提供する。</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>次の表は、<code translate="no">search_params.params</code> で<a href="/docs/ja/ivf-rabitq.md#Search-on-index">インデックス検索</a>時に設定できるパラメータの一覧です。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>次の表は、<code translate="no">search_params.params</code> で<a href="/docs/ja/ivf-rabitq.md#Search-on-index">インデックス検索</a>時に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th></th>
@@ -205,7 +280,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">nprobe</code></p></td>
      <td><p>候補を検索するクラスタ数。値を大きくすると、より多くのクラスタを検索できるようになり、検索範囲が広がることでリコールが向上しますが、その代償としてクエリの待ち時間が長くなります。</p></td>
      <td><p><strong>型</strong>：整数<br><strong>範囲</strong>：[1,<em>nlist］</em><br><strong>デフォルト値</strong>：<code translate="no">8</code></p></td>
-     <td><p>この値を大きくすると想起は向上するが、検索が遅くなる可能性がある。速度と精度のバランスをとるために、<code translate="no">nlist</code> に比例して<code translate="no">nprobe</code> を設定する。ほとんどの場合、この範囲内の値を設定することを推奨する：[1,<em>nlist</em>]。</p></td>
+     <td><p>この値を大きくすると想起は向上するが、検索が遅くなる可能性がある。速度と正確さのバランスをとるために、<code translate="no">nlist</code> に比例して<code translate="no">nprobe</code> を設定する。ほとんどの場合、この範囲内の値を設定することを推奨する：[1,<em>nlist</em>]。</p></td>
    </tr>
    <tr>
      <td rowspan="2"><p>RaBitQ</p></td>

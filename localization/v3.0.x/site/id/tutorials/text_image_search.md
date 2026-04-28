@@ -47,7 +47,22 @@ title: Pencarian Teks-ke-Gambar dengan Milvus
         ></path>
       </svg>
     </button></h2><p>Sebelum memulai, pastikan Anda sudah menyiapkan semua paket yang diperlukan dan data contoh.</p>
-<h3 id="Install-dependencies" class="common-anchor-header">Instal ketergantungan</h3><ul>
+<h3 id="Install-dependencies" class="common-anchor-header">Instal ketergantungan<button data-href="#Install-dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong>pymilvus&gt;=2.4.2</strong> untuk berinteraksi dengan basis data Milvus</li>
 <li><strong>clip</strong> untuk bekerja dengan model CLIP</li>
 <li><strong>pillow</strong> untuk pemrosesan gambar dan visualisasi</li>
@@ -58,11 +73,41 @@ title: Pencarian Teks-ke-Gambar dengan Milvus
 <div class="alert note">
 <p>Jika Anda menggunakan Google Colab, Anda mungkin perlu <strong>memulai ulang runtime</strong> (Arahkan ke menu "Runtime" di bagian atas antarmuka, dan pilih "Restart session" dari menu tarik-turun).</p>
 </div>
-<h3 id="Download-example-data" class="common-anchor-header">Mengunduh data contoh</h3><p>Kami akan menggunakan subset dari dataset <a href="https://www.image-net.org">ImageNet</a> (100 kelas, 10 gambar untuk setiap kelas) sebagai gambar contoh. Perintah berikut ini akan mengunduh data contoh dan mengekstraknya ke folder lokal <code translate="no">./images_folder</code>:</p>
+<h3 id="Download-example-data" class="common-anchor-header">Mengunduh data contoh<button data-href="#Download-example-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kami akan menggunakan subset dari dataset <a href="https://www.image-net.org">ImageNet</a> (100 kelas, 10 gambar untuk setiap kelas) sebagai gambar contoh. Perintah berikut ini akan mengunduh data contoh dan mengekstraknya ke folder lokal <code translate="no">./images_folder</code>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/towhee-io/examples/releases/download/data/reverse_image_search.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q reverse_image_search.zip -d images_folder</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-up-Milvus" class="common-anchor-header">Menyiapkan Milvus</h3><p>Sebelum melanjutkan, siapkan server Milvus Anda dan sambungkan dengan menggunakan URI Anda (dan secara opsional, token):</p>
+<h3 id="Set-up-Milvus" class="common-anchor-header">Menyiapkan Milvus<button data-href="#Set-up-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sebelum melanjutkan, siapkan server Milvus Anda dan sambungkan dengan menggunakan URI Anda (dan secara opsional, token):</p>
 <ul>
 <li><p><strong>Milvus Lite (Disarankan untuk kenyamanan)</strong>: Atur URI ke berkas lokal, seperti ./milvus.db. Ini secara otomatis memanfaatkan <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> untuk menyimpan semua data dalam satu berkas.</p></li>
 <li><p><strong>Docker atau Kubernetes (Untuk Data Berskala Besar)</strong>: Untuk menangani kumpulan data yang lebih besar, gunakan server Milvus yang lebih berkinerja dengan menggunakan <a href="https://milvus.io/docs/quickstart.md">Docker atau Kubernetes</a>. Dalam hal ini, gunakan URI server, seperti http://localhost:19530, untuk terhubung.</p></li>
@@ -88,7 +133,22 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;
         ></path>
       </svg>
     </button></h2><p>Sekarang setelah Anda memiliki dependensi dan data yang diperlukan, saatnya untuk menyiapkan ekstraktor fitur dan mulai bekerja dengan Milvus. Bagian ini akan memandu Anda melalui langkah-langkah penting dalam membangun sistem pencarian teks-ke-gambar. Terakhir, kami akan mendemonstrasikan cara mengambil dan memvisualisasikan gambar berdasarkan kueri teks.</p>
-<h3 id="Define-feature-extractors" class="common-anchor-header">Menentukan ekstraktor fitur</h3><p>Kita akan menggunakan model CLIP yang telah dilatih untuk menghasilkan penyematan gambar dan teks. Pada bagian ini, kita akan memuat varian <strong>ViT-B/32</strong> yang telah dilatih dari CLIP dan mendefinisikan fungsi-fungsi pembantu untuk menyandikan gambar dan teks:</p>
+<h3 id="Define-feature-extractors" class="common-anchor-header">Menentukan ekstraktor fitur<button data-href="#Define-feature-extractors" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kita akan menggunakan model CLIP yang telah dilatih untuk menghasilkan penyematan gambar dan teks. Pada bagian ini, kita akan memuat varian <strong>ViT-B/32</strong> yang telah dilatih dari CLIP dan mendefinisikan fungsi-fungsi pembantu untuk menyandikan gambar dan teks:</p>
 <ul>
 <li><code translate="no">encode_image(image_path)</code>: Memproses dan menyandikan gambar menjadi vektor fitur</li>
 <li><code translate="no">encode_text(text)</code>: Menyandikan kueri teks menjadi vektor fitur</li>
@@ -123,7 +183,22 @@ model.<span class="hljs-built_in">eval</span>()
     )  <span class="hljs-comment"># Normalize the text features</span>
     <span class="hljs-keyword">return</span> text_features.squeeze().tolist()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Data-Ingestion" class="common-anchor-header">Konsumsi Data</h3><p>Untuk mengaktifkan pencarian gambar semantik, pertama-tama kita perlu menghasilkan penyematan untuk semua gambar dan menyimpannya dalam basis data vektor untuk pengindeksan dan pengambilan yang efisien. Bagian ini memberikan panduan langkah demi langkah untuk memasukkan data gambar ke dalam Milvus.</p>
+<h3 id="Data-Ingestion" class="common-anchor-header">Konsumsi Data<button data-href="#Data-Ingestion" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk mengaktifkan pencarian gambar semantik, pertama-tama kita harus menghasilkan penyematan untuk semua gambar dan menyimpannya dalam basis data vektor untuk pengindeksan dan pengambilan yang efisien. Bagian ini memberikan panduan langkah demi langkah untuk memasukkan data gambar ke dalam Milvus.</p>
 <p><strong>1. Membuat Koleksi Milvus</strong></p>
 <p>Sebelum menyimpan penyematan gambar, Anda perlu membuat koleksi Milvus. Kode berikut ini menunjukkan cara membuat koleksi dalam mode penyiapan cepat dengan tipe metrik COSINE default. Koleksi ini mencakup bidang-bidang berikut ini:</p>
 <ul>
@@ -168,7 +243,22 @@ insert_result = milvus_client.insert(collection_name=collection_name, data=raw_d
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Inserted 1000 images into Milvus.
 </code></pre>
-<h3 id="Peform-a-Search" class="common-anchor-header">Melakukan Pencarian</h3><p>Sekarang, mari kita jalankan pencarian menggunakan contoh kueri teks. Ini akan mengambil gambar yang paling relevan berdasarkan kemiripan semantik dengan deskripsi teks yang diberikan.</p>
+<h3 id="Peform-a-Search" class="common-anchor-header">Melakukan Pencarian<button data-href="#Peform-a-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sekarang, mari kita jalankan pencarian menggunakan contoh kueri teks. Ini akan mengambil gambar yang paling relevan berdasarkan kemiripan semantik dengan deskripsi teks yang diberikan.</p>
 <pre><code translate="no" class="language-python">query_text = <span class="hljs-string">&quot;a white dog&quot;</span>
 query_embedding = encode_text(query_text)
 
@@ -209,5 +299,5 @@ Search results:
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/text_image_search_with_milvus_20_1.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_image_search_with_milvus_20_1.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>

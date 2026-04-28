@@ -43,7 +43,7 @@ summary: >-
     </button></h2><p>يجمع<strong>DISKANN</strong> بين تقنيتين رئيسيتين للبحث المتجه الفعال:</p>
 <ul>
 <li><p><strong>الرسم البياني Vamana Graph</strong> - فهرس <strong>قائم على القرص</strong> <strong>قائم على الرسم البياني</strong> يربط نقاط البيانات (أو المتجهات) للتنقل الفعال أثناء البحث.</p></li>
-<li><p><strong>تكميم المنتج (PQ)</strong> - طريقة ضغط <strong>داخل الذاكرة</strong> تقلل من حجم المتجهات، مما يتيح إجراء حسابات تقريبية سريعة للمسافة بين المتجهات.</p></li>
+<li><p><strong>تكميم المنتج (PQ)</strong> - طريقة ضغط <strong>في الذاكرة</strong> تقلل من حجم المتجهات، مما يتيح إجراء حسابات تقريبية سريعة للمسافة بين المتجهات.</p></li>
 </ul>
 <h3 id="Index-construction" class="common-anchor-header">بناء الفهرس<button data-href="#Index-construction" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -64,13 +64,13 @@ summary: >-
 <p>يوضح الشكل التالي كيف يتم بناء الرسم البياني لـ Vamana.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
    </span> <span class="img-wrapper"> <span>ديسكان</span> </span></p>
 <ol>
 <li><p><strong>الاتصالات العشوائية الأولية:</strong> يتم تمثيل كل نقطة بيانات (متجه) كعقدة في الرسم البياني. يتم توصيل هذه العقد في البداية بشكل عشوائي، مما يشكل شبكة كثيفة. وعادةً ما تبدأ العقدة بحوالي 500 حافة (أو وصلات) للاتصال الواسع.</p></li>
-<li><p><strong>التنقيح من أجل الكفاءة:</strong> يخضع الرسم البياني العشوائي الأولي لعملية تحسين لجعله أكثر كفاءة للبحث. ويتضمن ذلك خطوتين رئيسيتين:</p>
+<li><p><strong>التكرير من أجل الكفاءة:</strong> يخضع الرسم البياني العشوائي الأولي لعملية تحسين لجعله أكثر كفاءة للبحث. ويتضمن ذلك خطوتين رئيسيتين:</p>
 <ul>
-<li><p><strong>تشذيب الحواف الزائدة عن الحاجة:</strong> تستبعد الخوارزمية الاتصالات غير الضرورية بناءً على المسافات بين العقد. تعطي هذه الخطوة الأولوية للحواف الأعلى جودة.</p>
+<li><p><strong>تشذيب الحواف الزائدة عن الحاجة:</strong> تتجاهل الخوارزمية الاتصالات غير الضرورية بناءً على المسافات بين العقد. تعطي هذه الخطوة الأولوية للحواف الأعلى جودة.</p>
 <p>تقيد المعلمة <code translate="no">max_degree</code> الحد الأقصى لعدد الحواف لكل عقدة. يؤدي ارتفاع <code translate="no">max_degree</code> إلى رسم بياني أكثر كثافة، مما قد يؤدي إلى العثور على المزيد من الجيران ذوي الصلة (استدعاء أعلى) ولكن أيضًا زيادة استخدام الذاكرة ووقت البحث.</p></li>
 <li><p><strong>إضافة اختصارات استراتيجية:</strong> يقدم Vamana حوافًا بعيدة المدى، تربط بين نقاط البيانات المتباعدة في فضاء المتجه. تسمح هذه الاختصارات لعمليات البحث بالقفز بسرعة عبر الرسم البياني، متجاوزةً العقد الوسيطة ومسرّعةً عملية التنقل بشكل كبير.</p>
 <p>تحدد المعلمة <code translate="no">search_list_size</code> اتساع عملية تنقيح الرسم البياني. يؤدي ارتفاع <code translate="no">search_list_size</code> إلى توسيع نطاق البحث عن الجيران أثناء الإنشاء ويمكن أن يحسّن الدقة النهائية، ولكنه يزيد من وقت بناء الفهرس.</p></li>
@@ -102,18 +102,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>بمجرد إنشاء الفهرس (الرسم البياني Vamana على القرص ورموز PQ في الذاكرة)، يقوم DISKANN بإجراء عمليات بحث ANN على النحو التالي:</p>
+    </button></h3><p>بمجرد بناء الفهرس (الرسم البياني Vamana على القرص ورموز PQ في الذاكرة)، يقوم DISKANN بإجراء عمليات بحث ANN على النحو التالي:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
    </span> <span class="img-wrapper"> <span>ديسكان 2</span> </span></p>
 <ol>
 <li><p><strong>الاستعلام ونقطة الدخول:</strong> يتم توفير متجه استعلام لتحديد موقع أقرب جيرانه. يبدأ DISKANN من نقطة دخول مختارة في الرسم البياني لـ Vamana، وغالبًا ما تكون عقدة بالقرب من النقطة المركزية العالمية لمجموعة البيانات. يمثّل المتجه المركزي العالمي متوسط جميع المتجهات، مما يساعد على تقليل مسافة العبور عبر الرسم البياني للعثور على الجيران المطلوبين.</p></li>
 <li><p><strong>استكشاف الجوار:</strong> تجمع الخوارزمية الجيران المرشحين المحتملين (دوائر باللون الأحمر في الشكل) من حواف العقدة الحالية، مستفيدةً من رموز PQ في الذاكرة لتقريب المسافات بين هؤلاء المرشحين ومتجه الاستعلام. هؤلاء الجيران المرشحون المحتملون هم العقد المتصلة مباشرةً بنقطة الدخول المحددة من خلال الحواف في الرسم البياني ل Vamana.</p></li>
 <li><p><strong>اختيار العقد لحساب المسافة بدقة:</strong> من النتائج التقريبية، يتم اختيار مجموعة فرعية من الجيران الواعدين (الدوائر باللون الأخضر في الشكل) لإجراء تقييمات دقيقة للمسافة باستخدام متجهاتهم الأصلية غير المضغوطة. يتطلب ذلك قراءة البيانات من القرص، وهو ما قد يستغرق وقتًا طويلاً. يستخدم DISKANN معلمتين للتحكم في هذا التوازن الدقيق بين الدقة والسرعة:</p>
 <ul>
-<li><p><code translate="no">beam_width_ratio</code>: الحصة التي تتحكم في اتساع نطاق البحث، وتحدد عدد الجيران المرشحين الذين يتم اختيارهم بالتوازي لاستكشاف جيرانهم. يؤدي وجود <code translate="no">beam_width_ratio</code> أكبر إلى استكشاف أوسع، مما قد يؤدي إلى دقة أعلى ولكن أيضًا زيادة التكلفة الحسابية وإدخال/إخراج القرص. يتم تحديد عرض الشعاع، أو عدد العقد المختارة، باستخدام المعادلة: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
-<li><p><code translate="no">search_cache_budget_gb_ratio</code>: نسبة الذاكرة المخصصة للتخزين المؤقت لبيانات القرص التي يتم الوصول إليها بشكل متكرر. يساعد هذا التخزين المؤقت على تقليل عمليات الإدخال/الإخراج من القرص إلى الحد الأدنى، مما يجعل عمليات البحث المتكررة أسرع لأن البيانات موجودة بالفعل في الذاكرة.</p></li>
+<li><p><code translate="no">beam_width_ratio</code>: المعدل الذي يتحكم في اتساع نطاق البحث، ويحدد عدد الجيران المرشحين الذين يتم اختيارهم بالتوازي لاستكشاف جيرانهم. يؤدي وجود <code translate="no">beam_width_ratio</code> أكبر إلى استكشاف أوسع، مما قد يؤدي إلى دقة أعلى ولكن أيضًا زيادة التكلفة الحسابية وإدخال/إخراج القرص. يتم تحديد عرض الشعاع، أو عدد العقد المختارة، باستخدام المعادلة: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
+<li><p><code translate="no">search_cache_budget_gb_ratio</code>: نسبة الذاكرة المخصصة للتخزين المؤقت لبيانات القرص التي يتم الوصول إليها بشكل متكرر. يساعد هذا التخزين المؤقت على تقليل عمليات الإدخال/الإخراج من القرص، مما يجعل عمليات البحث المتكررة أسرع لأن البيانات موجودة بالفعل في الذاكرة.</p></li>
 </ul>
 <p>لمعرفة المزيد حول ضبط المعلمات، راجع <a href="/docs/ar/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">تكوينات DISKANN</a>.</p></li>
 <li><p><strong>الاستكشاف التكراري:</strong> يقوم البحث بشكل متكرر بتنقيح مجموعة المرشحين بشكل متكرر، مع إجراء تقييمات تقريبية (باستخدام PQ) بشكل متكرر متبوعة بفحوصات دقيقة (باستخدام المتجهات الأصلية من القرص) حتى يتم العثور على عدد كافٍ من الجيران.</p></li>
@@ -146,12 +146,12 @@ summary: >-
 </ol></li>
 <li><p><strong>تحسين التخزين لـ DISKANN</strong></p></li>
 </ol>
-<p>لضمان أفضل أداء مع DISKANN، يوصى بتخزين بيانات Milvus على محرك أقراص NVMe SSD سريع. إليك كيفية القيام بذلك لكل من عمليات نشر Milvus Standalone و Cluster:</p>
+<p>لضمان أفضل أداء مع DISKANN، يوصى بتخزين بيانات Milvus على محرك أقراص NVMe SSD سريع. فيما يلي كيفية القيام بذلك لكل من عمليات نشر Milvus Standalone و Cluster:</p>
 <ul>
 <li><p><strong>ميلفوس مستقل</strong></p>
 <ul>
 <li><p>قم بتركيب دليل بيانات Milvus على قرص NVMe SSD داخل حاوية Milvus. يمكنك القيام بذلك في الملف <code translate="no">docker-compose.yml</code> أو باستخدام أدوات إدارة الحاويات الأخرى.</p></li>
-<li><p>على سبيل المثال، إذا تم تركيب قرص NVMe SSD الخاص بك على <code translate="no">/mnt/nvme</code> ، يمكنك تحديث قسم <code translate="no">volumes</code>من <code translate="no">docker-compose.yml</code> الخاص بك على هذا النحو:</p></li>
+<li><p>على سبيل المثال، إذا كان قرص NVMe SSD الخاص بك مثبتًا على <code translate="no">/mnt/nvme</code> ، يمكنك تحديث قسم <code translate="no">volumes</code>من <code translate="no">docker-compose.yml</code> الخاص بك على النحو التالي:</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"> <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">/mnt/nvme/volumes/milvus:/var/lib/milvus</span>
@@ -205,7 +205,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>يسمح لك الضبط الدقيق لمعلمات DISKANN بتكييف سلوكها مع مجموعة البيانات الخاصة بك وعبء عمل البحث، وتحقيق التوازن الصحيح بين السرعة والدقة واستخدام الذاكرة.</p>
-<h3 id="Index-building-params" class="common-anchor-header">بارامترات بناء الفهرس<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+<h3 id="Index-building-params" class="common-anchor-header">معلمات بناء الفهرس<button data-href="#Index-building-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

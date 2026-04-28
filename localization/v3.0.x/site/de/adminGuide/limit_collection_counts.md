@@ -72,7 +72,7 @@ title: Begrenzung der Erfassungsanzahl festlegen
         <span class="hljs-attr">maxCollectionNumPerDB:</span> <span class="hljs-number">200000</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Wenn Sie nur <code translate="no">maxGeneralCapacity</code> einstellen, ohne auch <code translate="no">maxCollectionNum</code> und <code translate="no">maxCollectionNumPerDB</code> anzupassen, wird dies nicht wirksam. Alle drei Parameter müssen auf denselben oder einen höheren Wert eingestellt werden, um die Sammlungsgrenze zu erhöhen.</p>
+<p>Wenn Sie nur <code translate="no">maxGeneralCapacity</code> einstellen, ohne auch <code translate="no">maxCollectionNum</code> und <code translate="no">maxCollectionNumPerDB</code> zu ändern, wird dies nicht wirksam. Alle drei Parameter müssen auf denselben oder einen höheren Wert eingestellt werden, um die Sammlungsgrenze zu erhöhen.</p>
 </div>
 <h2 id="Calculating-the-number-of-collections" class="common-anchor-header">Berechnen der Anzahl der Sammlungen<button data-href="#Calculating-the-number-of-collections" class="anchor-icon" translate="no">
       <svg translate="no"

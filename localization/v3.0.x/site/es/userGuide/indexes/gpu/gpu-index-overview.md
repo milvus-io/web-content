@@ -47,7 +47,7 @@ summary: >-
   <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment"># set the initial memory pool size.</span>
   <span class="hljs-attr">maxMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment"># sets the maximum memory usage limit. When the memory usage exceeds initMemSize, Milvus will attempt to expand the memory pool.</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>El valor predeterminado <code translate="no">initMemSize</code> suele ser la mitad de la memoria de la GPU cuando se inicia Milvus, y <code translate="no">maxMemSize</code> es por defecto toda la memoria de la GPU. El tamaño de la reserva de memoria de la GPU se establece inicialmente en <code translate="no">initMemSize</code> y se ampliará automáticamente a <code translate="no">maxMemSize</code> cuando sea necesario.</p>
+<p>El valor por defecto <code translate="no">initMemSize</code> es normalmente la mitad de la memoria de la GPU cuando Milvus se inicia, y <code translate="no">maxMemSize</code> por defecto es toda la memoria de la GPU. El tamaño de la reserva de memoria de la GPU se establece inicialmente en <code translate="no">initMemSize</code> y se ampliará automáticamente a <code translate="no">maxMemSize</code> cuando sea necesario.</p>
 <p>Cuando se especifica un índice habilitado para GPU, Milvus carga los datos de la colección de destino en la memoria de la GPU antes de las búsquedas, por lo que <code translate="no">maxMemSize</code> debe ser al menos el tamaño de los datos.</p>
 <h2 id="Limits" class="common-anchor-header">Límites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

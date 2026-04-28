@@ -140,14 +140,15 @@ summary: Milvus의 시스템 구성에 대해 알아보세요.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus는 락스엠큐(RockDB 기반), 낫스엠큐(임베디드 낫스 서버), 펄사, 카프카의 네 가지 MQ를 지원합니다.</p>
+    </button></h3><p>Milvus는 락스엠큐(RockDB 기반), 펄서, 카프카, 우드페커의 네 가지 MQ를 지원합니다.</p>
 <p>mq.type 필드를 설정하여 mq를 변경할 수 있습니다.</p>
-<p>mq.type 필드를 기본값으로 설정하지 않은 경우, 이 파일에 여러 개의 mq를 구성하는 경우 우선순위를 활성화하는 것에 대한 참고 사항이 있습니다.</p>
+<p>mq.type 필드를 기본값으로 설정하지 않으면 이 파일에 여러 개의 mq를 구성하는 경우 우선순위를 활성화하는 것에 대한 참고 사항이 있습니다.</p>
 <ol>
-<li><p>독립형(로컬) 모드: rocksmq(기본값) &gt; natsmq &gt; Pulsar &gt; Kafka.</p></li>
-<li><p>클러스터 모드:  Pulsar(기본값) &gt; Kafka(클러스터 모드에서 rocksmq 및 natsmq는 지원되지 않음)</p></li>
+<li><p>독립형(로컬) 모드: rocksmq(기본값) &gt; Pulsar &gt; Kafka</p></li>
+<li><p>클러스터 모드:  Pulsar(기본값) &gt; Kafka(클러스터 모드에서 rocksmq는 지원되지 않음)</p></li>
+<li><p>딱따구리는 mq.type을 딱따구리로 설정하면 독립 실행형과 클러스터 모드 모두에서 사용할 수 있습니다.</p></li>
 </ol>
-<p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/configure_mq.md">mq 관련 구성을</a> 참조하세요.</p>
+<p>이 섹션의 각 매개변수에 대한 자세한 설명은 <a href="/docs/ko/configure_mq.md">mq 관련 구성을</a> 참조하세요.</p>
 <h3 id="pulsar" class="common-anchor-header"><code translate="no">pulsar</code><button data-href="#pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -163,7 +164,7 @@ summary: Milvus의 시스템 구성에 대해 알아보세요.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>최근 돌연변이 작업의 Milvus 로그, 출력 스트리밍 로그를 관리하고 로그 게시-구독 서비스를 제공하는 데 사용되는 pulsar의 관련 구성입니다.</p>
+    </button></h3><p>최근 돌연변이 작업의 Milvus 로그 관리, 스트리밍 로그 출력, 로그 게시-구독 서비스 제공에 사용되는 pulsar의 관련 설정입니다.</p>
 <p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/configure_pulsar.md">펄서 관련 구성을</a> 참조하세요.</p>
 <h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code><button data-href="#rocksmq" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -182,7 +183,7 @@ summary: Milvus의 시스템 구성에 대해 알아보세요.
       </svg>
     </button></h3><p>kafka를 활성화하려면 다음과 같이 pulsar 구성에 주석 처리해야 합니다.</p>
 <p>kafka:</p>
-<p>브로커리스트:</p>
+<p>브로커 목록: 로컬 호스트:9092</p>
 <p>sasl사용자 이름:</p>
 <p>saslPassword:</p>
 <p>saslMechanisms:</p>
@@ -200,24 +201,6 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 </code></pre>
 <p>readTimeout: 10</p>
 <p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/configure_rocksmq.md">rocksmq 관련 구성을</a> 참조하세요.</p>
-<h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code><button data-href="#natsmq" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>natsmq 구성.</p>
-<p>자세한 내용: https://docs.nats.io/running-a-nats-service/configuration</p>
-<p>이 섹션의 각 매개변수에 대한 자세한 설명은 <a href="/docs/ko/configure_natsmq.md">natsmq 관련 구성을</a> 참조하세요.</p>
 <h3 id="rootCoord" class="common-anchor-header"><code translate="no">rootCoord</code><button data-href="#rootCoord" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -233,7 +216,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>DDL(데이터 정의 언어) 및 DCL(데이터 제어 언어) 요청을 처리하는 데 사용되는 rootCoord 관련 구성</p>
+    </button></h3><p>DDL(데이터 정의 언어) 및 DCL(데이터 제어 언어) 요청을 처리하는 데 사용되는 rootCoord의 관련 구성</p>
 <p>이 섹션의 각 매개변수에 대한 자세한 설명은 <a href="/docs/ko/configure_rootcoord.md">rootCoord 관련 구성을</a> 참조하세요.</p>
 <h3 id="proxy" class="common-anchor-header"><code translate="no">proxy</code><button data-href="#proxy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -415,8 +398,25 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>프록시 tls 사용을 구성합니다.</p>
+    </button></h3><p>외부 tls를 구성합니다.</p>
 <p>이 섹션의 각 매개변수에 대한 자세한 설명은 <a href="/docs/ko/configure_tls.md">tls 관련 구성을</a> 참조하세요.</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code><button data-href="#internaltls" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>내부 tls를 구성합니다.</p>
+<p>이 섹션의 각 매개변수에 대한 자세한 설명은 <a href="/docs/ko/configure_internaltls.md">internaltls 관련 구성을</a> 참조하세요.</p>
 <h3 id="common" class="common-anchor-header"><code translate="no">common</code><button data-href="#common" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -502,3 +502,54 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>#밀버스는 사용 가능한 GPU 메모리의 절반을 자동으로 초기화합니다,</p>
 <p>#maxMemSize는 사용 가능한 GPU 메모리 전체를 초기화합니다.</p>
 <p>이 섹션의 각 매개변수에 대한 자세한 설명은 <a href="/docs/ko/configure_gpu.md">GPU 관련 구성을</a> 참조하세요.</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code><button data-href="#streamingNode" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>스트리밍 노드 서버와 관련된 모든 구성.</p>
+<p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/configure_streamingnode.md">스트리밍 노드 관련 구성을</a> 참조하세요.</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code><button data-href="#streaming" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>스트리밍 서비스와 관련된 모든 구성입니다.</p>
+<p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/configure_streaming.md">스트리밍 관련 구성을</a> 참조하세요.</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code><button data-href="#knowhere" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>knowhere 벡터 검색 엔진과 관련된 모든 구성</p>
+<p>이 섹션의 각 매개변수에 대한 자세한 설명은 위치정보 <a href="/docs/ko/configure_knowhere.md">관련 구성을</a> 참조하세요.</p>

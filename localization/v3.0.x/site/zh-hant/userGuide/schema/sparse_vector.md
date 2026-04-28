@@ -2,7 +2,7 @@
 id: sparse_vector.md
 title: 稀疏向量
 summary: >-
-  稀疏向量是捕捉資訊檢索和自然語言處理中表面層級詞彙匹配的重要方法。雖然密集向量在語意理解方面表現優異，但稀疏向量通常能提供更可預測的匹配結果，尤其是在搜尋特殊詞彙或文字識別符時。
+  稀疏向量是捕捉資訊檢索和自然語言處理中表面層級詞彙匹配的重要方法。雖然稠密向量在語意理解方面表現優異，但稀疏向量通常能提供更可預測的匹配結果，尤其是在搜尋特殊詞彙或文字識別符時。
 ---
 <h1 id="Sparse-Vector" class="common-anchor-header">稀疏向量<button data-href="#Sparse-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,17 +38,17 @@ summary: >-
     </button></h2><p>稀疏向量是一種特殊的高維向量，其中大多數元素為零，只有少數維度有非零值。如下圖所示，密集向量通常表示為連續陣列，其中每個位置都有一個值 (例如<code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>)。相反地，稀疏向量只儲存非零元素及其索引的維度，通常以<code translate="no">{ index: value}</code> 的鍵值對來表示 (例如<code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>)。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
    </span> <span class="img-wrapper"> <span>稀疏向量表示法</span> </span></p>
-<p>透過標記化和評分，可以將文件表示為字詞袋向量，其中每個維度對應於詞彙中的特定字詞。只有存在於文件中的詞彙才有非零值，這就是稀疏向量表示法。稀疏向量可以使用兩種方法產生：</p>
+<p>透過標記化和評分，文件可以表示為字詞袋向量，其中每個維度對應於詞彙中的特定字詞。只有存在於文件中的單字才有非零值，這就是稀疏向量表示法。稀疏向量可以使用兩種方法產生：</p>
 <ul>
-<li><p><strong>傳統的統計技術</strong>，例如<a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a>（<a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">Term</a>Frequency-Inverse Document Frequency）和<a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a>（<a href="https://en.wikipedia.org/wiki/Okapi_BM25">Best</a>Matching 25），會根據詞彙在語料庫中出現的頻率和重要性來分配權重。這些方法會計算簡單的統計資料，作為每個維度的分數，而每個維度代表一個標記。  Milvus 利用 BM25 方法提供內建的<strong>全文搜尋</strong>功能，可自動將文字轉換為稀疏向量，省去手動預處理的需要。這種方法非常適合基於關鍵字的搜尋，在這種情況下，精確度和精確匹配非常重要。如需詳細資訊，請參閱<a href="/docs/zh-hant/full-text-search.md">全文</a>檢索。</p></li>
+<li><p><strong>傳統的統計技術</strong>，例如<a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a>（<a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">Term</a>Frequency-Inverse Document Frequency）和<a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a>（<a href="https://en.wikipedia.org/wiki/Okapi_BM25">Best</a>Matching 25），會根據詞彙在語料庫中出現的頻率和重要性來分配權重。這些方法會計算簡單的統計資料，作為每個維度的分數，而每個維度代表一個標記。  Milvus 利用 BM25 方法提供內建的<strong>全文搜尋</strong>功能，可自動將文字轉換為稀疏向量，省去手動預處理的需要。這種方法非常適合以關鍵字為基礎的搜尋，在這種情況下，精確度和精確匹配非常重要。如需詳細資訊，請參閱<a href="/docs/zh-hant/full-text-search.md">全文</a>檢索。</p></li>
 <li><p><strong>神經稀疏嵌入模型</strong>是通過在大型資料集上進行訓練來生成稀疏表示的學習方法。它們通常是具有 Transformer 架構的深度學習模型，能夠根據語義上下文來擴充和衡量詞彙。Milvus 也支援由<a href="https://arxiv.org/abs/2109.10086">SPLADE</a> 等模型所產生的外部稀疏嵌入。詳情請參閱<a href="/docs/zh-hant/embeddings.md#Embedding-Overview">嵌入</a>。</include></p></li>
 </ul>
 <p>稀疏向量和原始文字可以儲存在 Milvus 中，以便進行有效的檢索。下圖概述了整個流程。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
    </span> <span class="img-wrapper"> <span>稀疏向量工作流程</span> </span></p>
 <div class="alert note">
 <p>除了稀疏向量，Milvus 也支援密集向量和二進位向量。密集向量是捕捉深層語意關係的理想選擇，而二進位向量則在快速相似性比較和內容重複刪除等情況下表現優異。如需詳細資訊，請參閱<a href="/docs/zh-hant/dense-vector.md">密集向量</a>和<a href="/docs/zh-hant/binary-vector.md">二進位向量</a>。</p>
@@ -68,7 +68,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在以下各節中，我們將示範如何儲存從 SPLADE 等已學習的稀疏嵌入模型中取得的向量。如果您正在尋找一些東西來補充以密集向量為基礎的語意搜尋，為了簡單起見，我們建議使用 BM25 進行<a href="/docs/zh-hant/full-text-search.md">Full Text Search</a>，而非 SPLADE。如果您已經執行品質評估，並決定使用 SPLADE，您可以參考<a href="/docs/zh-hant/embeddings.md#Embedding-Overview">Embeddings</a>如何使用 SPLADE 產生稀疏向量。</p>
+    </button></h2><p>在以下各節中，我們將示範如何儲存從 SPLADE 等已學習的稀疏嵌入模型中取得的向量。如果您正在尋找一些東西來補充以密集向量為基礎的語意搜尋，為了簡單起見，我們推薦使用 BM25 的<a href="/docs/zh-hant/full-text-search.md">Full Text Search</a>，而非 SPLADE。如果您已經執行品質評估，並決定使用 SPLADE，您可以參考<a href="/docs/zh-hant/embeddings.md#Embedding-Overview">Embeddings</a>如何使用 SPLADE 產生稀疏向量。</p>
 <p>Milvus 支援以下格式的稀疏向量輸入：</p>
 <ul>
 <li><p><strong>字典清單 (格式為<code translate="no">{dimension_index: value, ...}</code>)</strong></p>
@@ -125,7 +125,7 @@ sparse_vector = [
       </svg>
     </button></h3><p>要在 Milvus 中使用稀疏向量，您需要創建一個集合，其模式包括以下欄位：</p>
 <ul>
-<li><p>預留用於儲存稀疏向量的<code translate="no">SPARSE_FLOAT_VECTOR</code> 欄位，可從<code translate="no">VARCHAR</code> 欄位自動產生，或直接在輸入資料中提供。</p></li>
+<li><p>預留用於儲存稀疏向量的<code translate="no">SPARSE_FLOAT_VECTOR</code> 欄位，可從<code translate="no">VARCHAR</code> 欄位自動產生或直接在輸入資料中提供。</p></li>
 <li><p>通常，稀疏向量所代表的原始文字也會儲存在集合中。您可以使用<code translate="no">VARCHAR</code> 欄位來儲存原始文字。</p></li>
 </ul>
 <div class="multipleCode">
@@ -360,7 +360,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <li><p><a href="/docs/zh-hant/metric.md">度量類型</a>：不同欄位類型所支援的度量類型</p></li>
 <li><p><a href="/docs/zh-hant/full-text-search.md">全文檢索</a>：全文檢索的詳細教學</p></li>
 </ul>
-<h2 id="Create-Collection" class="common-anchor-header">建立集合<button data-href="#Create-Collection" class="anchor-icon" translate="no">
+<h2 id="Create-Collection" class="common-anchor-header">建立資料集<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

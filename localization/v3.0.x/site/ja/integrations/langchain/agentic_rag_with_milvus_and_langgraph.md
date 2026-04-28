@@ -2,7 +2,7 @@
 id: agentic_rag_with_milvus_and_langgraph.md
 summary: >-
   このガイドでは、LangGraphとmilvusを使った高度なRAG（Retrieval-Augmented
-  Generation）システムの構築方法を紹介します。単に情報を検索して生成する従来のRAGシステムとは異なり、エージェント型RAGシステムは、情報を検索するタイミング、関連性のない文書をどのように扱うか、より良い結果を得るためにクエリを書き換えるタイミングなどについて、インテリジェントな判断を行うことができます。
+  Generation）システムの構築方法を紹介します。単に情報を検索して生成する従来のRAGシステムとは異なり、エージェント型RAGシステムは、情報を検索するタイミング、無関係な文書をどのように扱うか、より良い結果を得るためにクエリを書き換えるタイミングなどについて、インテリジェントな判断を行うことができます。
 title: MilvusとLangGraphによるエージェント型RAG
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/langchain/agentic_rag_with_milvus_and_langgraph.ipynb" target="_parent">

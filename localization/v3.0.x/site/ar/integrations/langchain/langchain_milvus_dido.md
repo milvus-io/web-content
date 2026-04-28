@@ -85,7 +85,7 @@ title: دمج دالة تضمين النص في ميلفوس مع لانغتشي
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey_dev</span>
         <span class="hljs-comment"># url: https://api.openai.com/v1/embeddings   # (optional) custom url</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>للمزيد من طرق التكوين، يرجى الرجوع إلى <a href="https://milvus.io/docs/embedding-function-overview.md">وثائق وظيفة تضمين ميلفوس</a>.</p>
+<p>للمزيد من طرق التهيئة، يرجى الرجوع إلى <a href="https://milvus.io/docs/embedding-function-overview.md">وثائق وظيفة تضمين ميلفوس</a>.</p>
 <h3 id="Starting-the-Milvus-Service" class="common-anchor-header">بدء تشغيل خدمة Milvus<button data-href="#Starting-the-Milvus-Service" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

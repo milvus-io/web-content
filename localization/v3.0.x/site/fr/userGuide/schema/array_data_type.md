@@ -45,7 +45,7 @@ summary: >-
 <li><p><strong>Valeurs par défaut</strong>: Les champs ARRAY ne prennent pas en charge les valeurs par défaut. Toutefois, vous pouvez attribuer la valeur <code translate="no">True</code> à l'attribut <code translate="no">nullable</code> pour autoriser les valeurs nulles. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/nullable-and-default.md">Valeurs nulles et valeurs par défaut</a>.</p></li>
 <li><p><strong>Type de données :</strong> Tous les éléments d'un champ ARRAY doivent partager le même type de données, défini par le paramètre <code translate="no">element_type</code>. Lorsque <code translate="no">element_type</code> est défini sur <code translate="no">VARCHAR</code>, vous devez également spécifier <code translate="no">max_length</code> pour les éléments du tableau. Le paramètre <code translate="no">element_type</code> accepte tout type de données scalaires pris en charge par Milvus, à l'exception de <code translate="no">JSON</code>.</p></li>
 <li><p><strong>Capacité du tableau</strong>: Le nombre d'éléments d'un champ ARRAY doit être inférieur ou égal à la capacité maximale définie lors de la création du tableau, comme spécifié par <code translate="no">max_capacity</code>. La valeur doit être un nombre entier compris entre <strong>1</strong> et <strong>4096</strong>.</p></li>
-<li><p><strong>Traitement des chaînes de caractères</strong>: Les valeurs des chaînes de caractères dans les champs des tableaux sont stockées telles quelles, sans échappement sémantique ni conversion. Par exemple, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, et <code translate="no">&quot;a\&quot;b&quot;</code> sont enregistrées telles qu'elles ont été saisies, tandis que <code translate="no">'a'b'</code> et <code translate="no">&quot;a&quot;b&quot;</code> sont considérées comme des valeurs non valides.</p></li>
+<li><p><strong>Traitement des chaînes de caractères</strong>: Les chaînes de caractères contenues dans les champs des tableaux sont stockées telles quelles, sans échappement sémantique ni conversion. Par exemple, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, et <code translate="no">&quot;a\&quot;b&quot;</code> sont enregistrées telles qu'elles ont été saisies, tandis que <code translate="no">'a'b'</code> et <code translate="no">&quot;a&quot;b&quot;</code> sont considérées comme des valeurs non valides.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">Ajout d'un champ ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,7 +65,7 @@ summary: >-
     </button></h2><p>Pour utiliser les champs ARRAY dans Milvus, il faut définir le type de champ correspondant lors de la création du schéma de collection. Ce processus comprend</p>
 <ol>
 <li><p>Définir <code translate="no">datatype</code> comme étant le type de données ARRAY pris en charge, <code translate="no">ARRAY</code>.</p></li>
-<li><p>Utiliser le paramètre <code translate="no">element_type</code> pour spécifier le type de données des éléments du tableau. Tous les éléments d'un même tableau doivent être du même type de données.</p></li>
+<li><p>Utiliser le paramètre <code translate="no">element_type</code> pour spécifier le type de données des éléments du tableau. Tous les éléments d'un même tableau doivent avoir le même type de données.</p></li>
 <li><p>Le paramètre <code translate="no">max_capacity</code> permet de définir la capacité maximale du tableau, c'est-à-dire le nombre maximal d'éléments qu'il peut contenir.</p></li>
 </ol>
 <p>Voici comment définir un schéma de collection qui inclut des champs ARRAY :</p>
@@ -255,7 +255,7 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-index-params" class="common-anchor-header">Paramètres d'indexation<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">Définir les paramètres d'indexation<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -271,7 +271,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>L'indexation permet d'améliorer les performances de recherche et de requête. Dans Milvus, l'indexation est obligatoire pour les champs vectoriels mais facultative pour les champs scalaires.</p>
-<p>L'exemple suivant crée des index sur le champ vectoriel <code translate="no">embedding</code> et le champ ARRAY <code translate="no">tags</code>, tous deux utilisant le type d'index <code translate="no">AUTOINDEX</code>. Avec ce type, Milvus sélectionne automatiquement l'index le plus approprié en fonction du type de données. Vous pouvez également personnaliser le type d'index et les paramètres pour chaque champ. Pour plus de détails, reportez-vous à <a href="/docs/fr/index-explained.md">Index Explained</a>.</p>
+<p>L'exemple suivant crée des index sur le champ vectoriel <code translate="no">embedding</code> et le champ ARRAY <code translate="no">tags</code>, tous deux utilisant le type d'index <code translate="no">AUTOINDEX</code>. Avec ce type, Milvus sélectionne automatiquement l'index le plus approprié en fonction du type de données. Vous pouvez également personnaliser le type d'index et les paramètres pour chaque champ. Pour plus de détails, voir <a href="/docs/fr/index-explained.md">Index expliqué</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>

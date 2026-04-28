@@ -99,7 +99,7 @@ title: Compreensão de documentos com Mistral OCR e Milvus
 <li>Processar documentos (PDFs/imagens) através de URLs</li>
 <li>Extrair texto usando OCR</li>
 <li>Armazenar o texto e os embeddings vectoriais em Milvus</li>
-<li>Efetuar pesquisas semânticas na sua coleção de documentos</li>
+<li>Efetuar pesquisa semântica na sua coleção de documentos</li>
 </ol>
 <hr>
 <h2 id="Setup-and-Dependencies" class="common-anchor-header">Configuração e dependências<button data-href="#Setup-and-Dependencies" class="anchor-icon" translate="no">

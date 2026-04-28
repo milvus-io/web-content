@@ -27,7 +27,7 @@ title: Langfuse를 사용하여 RAG 품질 평가하기
 <p>이 빠른 시작에서는 Milvus Lite를 벡터 저장소로 사용하여 LlamaIndex 애플리케이션을 설정하는 방법을 보여드리겠습니다. 또한 Langfuse LlamaIndex 통합을 사용하여 애플리케이션을 추적하는 방법도 보여드리겠습니다.</p>
 <p><a href="https://github.com/langfuse/langfuse">Langfuse는</a> 팀이 LLM 애플리케이션을 공동으로 디버그, 분석 및 반복할 수 있도록 지원하는 오픈 소스 LLM 엔지니어링 플랫폼입니다. 모든 플랫폼 기능이 기본적으로 통합되어 개발 워크플로를 가속화합니다.</p>
 <p><a href="https://github.com/milvus-io/milvus-lite/">Milvus Lite는</a> 벡터 임베딩 및 유사성 검색을 통해 AI 애플리케이션을 지원하는 오픈 소스 벡터 데이터베이스인 Milvus의 경량 버전입니다.</p>
-<h2 id="Setup" class="common-anchor-header">설정<button data-href="#Setup" class="anchor-icon" translate="no">
+<h2 id="Setup" class="common-anchor-header">설치<button data-href="#Setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -128,7 +128,7 @@ response = index.as_query_engine().query(<span class="hljs-string">&quot;What di
 response = index.as_chat_engine().chat(<span class="hljs-string">&quot;What did he do growing up?&quot;</span>)
 <span class="hljs-built_in">print</span>(response)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Explore-traces-in-Langfuse" class="common-anchor-header">Langfuse에서 추적 탐색하기<button data-href="#Explore-traces-in-Langfuse" class="anchor-icon" translate="no">
+<h2 id="Explore-traces-in-Langfuse" class="common-anchor-header">Langfuse에서 추적 탐색<button data-href="#Explore-traces-in-Langfuse" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

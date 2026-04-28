@@ -41,14 +41,29 @@ title: Milvus 클러스터 확장
         ></path>
       </svg>
     </button></h2><p>수평적 스케일링에는 스케일 아웃과 스케일 인이 포함됩니다.</p>
-<h3 id="Scaling-out" class="common-anchor-header">스케일 아웃</h3><p>스케일 아웃은 클러스터의 노드 수를 늘리는 것을 말합니다. 스케일업과 달리 스케일아웃은 클러스터의 한 노드에 더 많은 리소스를 할당할 필요가 없습니다. 대신, 스케일 아웃은 노드를 더 추가하여 클러스터를 수평적으로 확장합니다.</p>
+<h3 id="Scaling-out" class="common-anchor-header">스케일 아웃<button data-href="#Scaling-out" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>스케일 아웃은 클러스터의 노드 수를 늘리는 것을 말합니다. 스케일업과 달리 스케일아웃은 클러스터의 한 노드에 더 많은 리소스를 할당할 필요가 없습니다. 대신, 스케일 아웃은 노드를 더 추가하여 클러스터를 수평적으로 확장합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
    </span> <span class="img-wrapper"> <span>스케일아웃</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>스케일업</span> </span></p>
 <p><a href="/docs/ko/architecture_overview.md">Milvus 아키텍처에</a> 따르면 상태 비저장 워커 노드에는 쿼리 노드, 데이터 노드, 인덱스 노드 및 프록시가 포함됩니다. 따라서 이러한 유형의 노드를 비즈니스 요구와 애플리케이션 시나리오에 맞게 스케일아웃할 수 있습니다. Milvus 클러스터는 수동 또는 자동으로 스케일아웃할 수 있습니다.</p>
 <p>일반적으로 Milvus 클러스터가 과도하게 사용되는 경우 생성한 클러스터를 스케일아웃해야 합니다. 다음은 Milvus 클러스터를 스케일아웃해야 할 수 있는 몇 가지 일반적인 상황입니다:</p>
@@ -57,9 +72,24 @@ title: Milvus 클러스터 확장
 <li>쿼리 처리량이 높아지는 경우.</li>
 <li>더 빠른 인덱싱 속도가 필요한 경우.</li>
 <li>대량의 대용량 데이터 세트를 처리해야 합니다.</li>
-<li>Milvus 서비스의 고가용성을 보장해야 합니다.</li>
+<li>Milvus 서비스의 고가용성이 보장되어야 합니다.</li>
 </ul>
-<h3 id="Scaling-in" class="common-anchor-header">스케일링 인</h3><p>스케일 인은 클러스터의 노드 수를 줄이는 것을 말합니다. 일반적으로 생성한 Milvus 클러스터의 활용도가 낮은 경우 스케일 인을 해야 합니다. 다음은 Milvus 클러스터에서 확장해야 하는 몇 가지 일반적인 상황입니다:</p>
+<h3 id="Scaling-in" class="common-anchor-header">스케일링 인<button data-href="#Scaling-in" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>스케일 인은 클러스터의 노드 수를 줄이는 것을 말합니다. 일반적으로 생성한 Milvus 클러스터의 활용도가 낮은 경우 스케일 인을 해야 합니다. 다음은 Milvus 클러스터에서 확장해야 하는 몇 가지 일반적인 상황입니다:</p>
 <ul>
 <li>일정 기간 동안 CPU 및 메모리 사용률이 낮습니다.</li>
 <li>쿼리 처리량이 낮아집니다.</li>
@@ -83,7 +113,7 @@ title: Milvus 클러스터 확장
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">kubectl get pods</code> 을 실행하여 생성한 Milvus 클러스터의 구성 요소 목록과 해당 구성 요소의 작동 상태를 확인합니다.</p>
+    </button></h2><p><code translate="no">kubectl get pods</code> 을 실행하여 생성한 Milvus 클러스터에서 구성 요소 목록과 해당 구성 요소의 작동 상태를 확인합니다.</p>
 <pre><code translate="no">NAME                                            READY   STATUS       RESTARTS   AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                               <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>      <span class="hljs-number">0</span>          <span class="hljs-number">1</span>m
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>datacoord<span class="hljs-number">-7</span>b5d84d8c6<span class="hljs-operator">-</span>rzjml    <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>      <span class="hljs-number">0</span>          <span class="hljs-number">1</span>m
@@ -168,7 +198,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <ul>
 <li><a href="/docs/ko/monitor.md">Kubernetes의 Prometheus Operator로 Milvus 모니터링</a> 배우기</li>
 </ul></li>
-<li><p>클라우드에 클러스터를 배포할 준비가 되셨다면:</p>
+<li><p>클라우드에 클러스터를 배포할 준비가 되었다면:</p>
 <ul>
 <li><a href="/docs/ko/eks.md">Terraform을 사용하여 Amazon EKS에 Milvus를 배포하는</a> 방법 알아보기</li>
 <li><a href="/docs/ko/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터를 배포하는</a> 방법 알아보기</li>

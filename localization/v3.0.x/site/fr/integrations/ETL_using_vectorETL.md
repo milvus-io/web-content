@@ -5,11 +5,11 @@ summary: >-
   Milvus à l'aide de [VectorETL] (https://github.com/ContextData/VectorETL), un
   cadre ETL léger conçu pour les bases de données vectorielles. VectorETL
   simplifie le processus d'extraction des données à partir de diverses sources,
-  leur transformation en encastrements vectoriels à l'aide de modèles d'IA et
-  leur stockage dans Milvus pour une récupération rapide et évolutive. À la fin
-  de ce tutoriel, vous disposerez d'un pipeline ETL fonctionnel qui vous
-  permettra d'intégrer et de gérer facilement des systèmes de recherche
-  vectorielle. Plongeons dans l'aventure !
+  les transforme en encastrements vectoriels à l'aide de modèles d'IA et les
+  stocke dans Milvus pour une récupération rapide et évolutive. À la fin de ce
+  tutoriel, vous disposerez d'un pipeline ETL fonctionnel qui vous permettra
+  d'intégrer et de gérer facilement des systèmes de recherche vectorielle.
+  Plongeons dans l'aventure !
 title: Chargement efficace des données dans Milvus avec VectorETL
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/ETL_using_vectorETL.ipynb" target="_parent">
@@ -49,7 +49,22 @@ title: Chargement efficace des données dans Milvus avec VectorETL
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependency-and-Environment" class="common-anchor-header">Dépendance et environnement</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade vector-etl pymilvus</span>
+    </button></h2><h3 id="Dependency-and-Environment" class="common-anchor-header">Dépendance et environnement<button data-href="#Dependency-and-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade vector-etl pymilvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong> (cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" dans le menu déroulant).</p>
@@ -77,7 +92,22 @@ os.environ[<span class="hljs-string">&quot;AWS_SECRET_ACCESS_KEY&quot;</span>] =
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Defining-the-Data-Source-Amazon-S3" class="common-anchor-header">Définition de la source de données (Amazon S3)</h3><p>Dans ce cas, nous extrayons des documents à partir d'un bac Amazon S3. VectorETL nous permet de spécifier le nom du panier, le chemin d'accès aux fichiers et le type de données avec lesquelles nous travaillons.</p>
+    </button></h2><h3 id="Defining-the-Data-Source-Amazon-S3" class="common-anchor-header">Définition de la source de données (Amazon S3)<button data-href="#Defining-the-Data-Source-Amazon-S3" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dans ce cas, nous extrayons des documents à partir d'un bac Amazon S3. VectorETL nous permet de spécifier le nom du panier, le chemin d'accès aux fichiers et le type de données avec lesquelles nous travaillons.</p>
 <pre><code translate="no" class="language-python">source = {
     <span class="hljs-string">&quot;source_data_type&quot;</span>: <span class="hljs-string">&quot;Amazon S3&quot;</span>,
     <span class="hljs-string">&quot;bucket_name&quot;</span>: <span class="hljs-string">&quot;my-bucket&quot;</span>,
@@ -87,14 +117,44 @@ os.environ[<span class="hljs-string">&quot;AWS_SECRET_ACCESS_KEY&quot;</span>] =
     <span class="hljs-string">&quot;aws_secret_access_key&quot;</span>: os.environ[<span class="hljs-string">&quot;AWS_SECRET_ACCESS_KEY&quot;</span>],
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Configuring-the-Embedding-Model-OpenAI" class="common-anchor-header">Configuration du modèle d'intégration (OpenAI)</h3><p>Une fois notre source de données configurée, nous devons définir le modèle d'intégration qui transformera nos données textuelles en intégrations vectorielles. Dans cet exemple, nous utilisons le modèle <code translate="no">text-embedding-ada-002</code> d'OpenAI.</p>
+<h3 id="Configuring-the-Embedding-Model-OpenAI" class="common-anchor-header">Configuration du modèle d'intégration (OpenAI)<button data-href="#Configuring-the-Embedding-Model-OpenAI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Une fois notre source de données configurée, nous devons définir le modèle d'intégration qui transformera nos données textuelles en intégrations vectorielles. Dans cet exemple, nous utilisons le modèle <code translate="no">text-embedding-ada-002</code> d'OpenAI.</p>
 <pre><code translate="no" class="language-python">embedding = {
     <span class="hljs-string">&quot;embedding_model&quot;</span>: <span class="hljs-string">&quot;OpenAI&quot;</span>,
     <span class="hljs-string">&quot;api_key&quot;</span>: os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>],
     <span class="hljs-string">&quot;model_name&quot;</span>: <span class="hljs-string">&quot;text-embedding-ada-002&quot;</span>,
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Setting-Up-Milvus-as-the-Target-Database" class="common-anchor-header">Configuration de Milvus comme base de données cible</h3><p>Nous devons stocker les embeddings générés dans Milvus. Ici, nous définissons nos paramètres de connexion Milvus à l'aide de Milvus Lite.</p>
+<h3 id="Setting-Up-Milvus-as-the-Target-Database" class="common-anchor-header">Configuration de Milvus comme base de données cible<button data-href="#Setting-Up-Milvus-as-the-Target-Database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nous devons stocker les embeddings générés dans Milvus. Ici, nous définissons nos paramètres de connexion Milvus à l'aide de Milvus Lite.</p>
 <pre><code translate="no" class="language-python">target = {
     <span class="hljs-string">&quot;target_database&quot;</span>: <span class="hljs-string">&quot;Milvus&quot;</span>,
     <span class="hljs-string">&quot;host&quot;</span>: <span class="hljs-string">&quot;./milvus.db&quot;</span>,  <span class="hljs-comment"># os.environ[&quot;ZILLIZ_CLOUD_PUBLIC_ENDPOINT&quot;] if using Zilliz Cloud</span>
@@ -111,10 +171,40 @@ os.environ[<span class="hljs-string">&quot;AWS_SECRET_ACCESS_KEY&quot;</span>] =
 <li><p>Si vous souhaitez utiliser <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, le service cloud entièrement géré pour Milvus, ajustez les adresses <code translate="no">host</code> et <code translate="no">api_key</code>, qui correspondent au <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">point de terminaison public et à la clé Api</a> dans Zilliz Cloud.</p></li>
 </ul>
 </div>
-<h3 id="Specifying-Columns-for-Embedding" class="common-anchor-header">Spécification des colonnes pour l'intégration</h3><p>Nous devons maintenant spécifier quelles colonnes de nos fichiers CSV doivent être converties en embeddings. Cela permet de s'assurer que seuls les champs de texte pertinents sont traités, optimisant ainsi l'efficacité et le stockage.</p>
+<h3 id="Specifying-Columns-for-Embedding" class="common-anchor-header">Spécification des colonnes pour l'intégration<button data-href="#Specifying-Columns-for-Embedding" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nous devons maintenant spécifier quelles colonnes de nos fichiers CSV doivent être converties en embeddings. Cela permet de s'assurer que seuls les champs de texte pertinents sont traités, optimisant ainsi l'efficacité et le stockage.</p>
 <pre><code translate="no" class="language-python">embed_columns = [<span class="hljs-string">&quot;col_1&quot;</span>, <span class="hljs-string">&quot;col_2&quot;</span>, <span class="hljs-string">&quot;col_3&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Creating-and-Executing-the-VectorETL-Pipeline" class="common-anchor-header">Création et exécution du pipeline VectorETL</h3><p>Une fois toutes les configurations en place, nous pouvons maintenant initialiser le pipeline ETL, configurer le flux de données et l'exécuter.</p>
+<h3 id="Creating-and-Executing-the-VectorETL-Pipeline" class="common-anchor-header">Création et exécution du pipeline VectorETL<button data-href="#Creating-and-Executing-the-VectorETL-Pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Une fois toutes les configurations en place, nous pouvons maintenant initialiser le pipeline ETL, configurer le flux de données et l'exécuter.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> vector_etl <span class="hljs-keyword">import</span> create_flow
 
 flow = create_flow()

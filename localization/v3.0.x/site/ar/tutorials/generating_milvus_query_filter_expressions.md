@@ -28,7 +28,7 @@ title: توليد تعبيرات تصفية استعلام ميلفوس باست
 <ul>
 <li><strong>المشغلات الأساسية</strong>: مشغلات المقارنة مثل <code translate="no">==</code> ، <code translate="no">!=</code> ، ، <code translate="no">&gt;</code> ، <code translate="no">&lt;</code> ، <code translate="no">&gt;=</code>, <code translate="no">&lt;=</code></li>
 <li><strong>المشغلات المنطقية</strong>: المشغلات المنطقية مثل <code translate="no">and</code> ، <code translate="no">or</code> ، ، <code translate="no">not</code> للشروط المعقدة</li>
-<li><strong>عمليات السلسلة</strong>: مطابقة الأنماط مع <code translate="no">like</code> ووظائف السلسلة الأخرى</li>
+<li><strong>عمليات السلسلة</strong>: مطابقة الأنماط مع <code translate="no">like</code> ودوال السلاسل الأخرى</li>
 <li><strong>عمليات المصفوفات</strong>: العمل مع حقول المصفوفات باستخدام <code translate="no">array_contains</code> ، <code translate="no">array_length</code> ، إلخ.</li>
 <li><strong>عمليات JSON</strong>: الاستعلام عن حقول JSON باستخدام الدوال المتخصصة</li>
 </ul>
@@ -200,14 +200,14 @@ client.insert(collection_name=collection_name, data=insert_data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تنشئ الشيفرة أعلاه مجموعة ميلفوس بالبنية التالية:</p>
+    </button></h2><p>ينشئ الرمز أعلاه مجموعة ميلفوس بالبنية التالية:</p>
 <ul>
 <li><strong>pk</strong>: حقل المفتاح الأساسي (VARCHAR)</li>
 <li><strong>الاسم</strong>: اسم المستخدم (VARCHAR)</li>
 <li><strong>العمر</strong>: عمر المستخدم (INT64)</li>
 <li><strong>المدينة</strong>: مدينة المستخدم (VARCHAR)</li>
 <li><strong>الهواية</strong>: هواية المستخدم (VARCHAR)</li>
-<li><strong>التضمين</strong>: التضمين المتجه (FLOAT_VECTOR، 1536 بُعدًا)</li>
+<li><strong>التضمين</strong>: تضمين متجه (FLOAT_VECTOR، 1536 بُعدًا)</li>
 </ul>
 <p>قمنا بإدراج 11 عينة من المستخدمين مع معلوماتهم الشخصية وإنشاء تضمينات لإمكانيات البحث الدلالي. يتم تحويل معلومات كل مستخدم إلى نص وصفي يلتقط اسمه وموقعه وعمره واهتماماته قبل تضمينها. دعونا نتحقق من أن مجموعتنا قد تم إنشاؤها بنجاح وتحتوي على البيانات المتوقعة من خلال الاستعلام عن بعض السجلات النموذجية.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

@@ -198,7 +198,7 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
-<p>اعتمادًا على اتصال الشبكة لديك، قد يستغرق تنزيل الصور لتثبيت Milvus بعض الوقت. بمجرد أن تصبح الحاويات المسماة <strong>milvus-standalone</strong> و <strong>milvus-minio</strong> و <strong>milvus-etcd</strong> جاهزة، يمكنك مشاهدة ما يلي</p>
+<p>اعتمادًا على اتصال الشبكة لديك، قد يستغرق تنزيل الصور لتثبيت Milvus بعض الوقت. بمجرد أن تصبح الحاويات المسماة <strong>milvus-standalone</strong> و <strong>milvus-minio</strong> و <strong>milvus-etcd</strong> جاهزة يمكنك مشاهدة ما يلي</p>
 <ul>
 <li><p>لا تعرض حاوية <strong>milvus-etcd</strong> أي منافذ للمضيف وتقوم بتعيين بياناتها إلى <strong>وحدات التخزين/etcd</strong> في المجلد الحالي.</p></li>
 <li><p>تخدم حاوية <strong>milvus-minio</strong> المنفذين <strong>9090</strong> <strong>و9091</strong> محليًا باستخدام بيانات اعتماد المصادقة الافتراضية وتعيّن بياناتها إلى <strong>وحدات التخزين/minio</strong> في المجلد الحالي.</p></li>

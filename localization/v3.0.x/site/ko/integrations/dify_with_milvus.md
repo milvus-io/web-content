@@ -38,10 +38,40 @@ title: Milvus로 Dify 배포하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Clone-the-Repository" class="common-anchor-header">리포지토리 복제</h3><p>Dify 소스 코드를 로컬 머신에 복제합니다:</p>
+    </button></h2><h3 id="Clone-the-Repository" class="common-anchor-header">리포지토리 복제<button data-href="#Clone-the-Repository" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dify 소스 코드를 로컬 머신에 복제합니다:</p>
 <pre><code translate="no" class="language-shell">git clone https://github.com/langgenius/dify.git
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-Environment-Configuration" class="common-anchor-header">환경 구성 준비</h3><p>Dify 소스 코드의 Docker 디렉토리로 이동합니다.</p>
+<h3 id="Prepare-Environment-Configuration" class="common-anchor-header">환경 구성 준비<button data-href="#Prepare-Environment-Configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dify 소스 코드의 Docker 디렉토리로 이동합니다.</p>
 <pre><code translate="no" class="language-shell">cd dify/docker
 <button class="copy-code-btn"></button></code></pre>
 <p>환경 구성 파일을 복사합니다.</p>
@@ -79,7 +109,22 @@ title: Milvus로 Dify 배포하기
         ></path>
       </svg>
     </button></h2><p>이 옵션은 Docker Compose를 사용하여 로컬 머신에서 Dify와 함께 Milvus 컨테이너를 실행합니다.</p>
-<h3 id="Configure-Environment-Variables" class="common-anchor-header">환경 변수 구성</h3><p><code translate="no">.env</code> 파일을 다음 Milvus 구성으로 편집합니다:</p>
+<h3 id="Configure-Environment-Variables" class="common-anchor-header">환경 변수 구성<button data-href="#Configure-Environment-Variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">.env</code> 파일을 다음 Milvus 구성으로 편집합니다:</p>
 <pre><code translate="no">VECTOR_STORE=milvus
 MILVUS_URI=http://host.docker.internal:19530
 MILVUS_TOKEN=
@@ -90,7 +135,22 @@ MILVUS_TOKEN=
 <li><code translate="no">MILVUS_TOKEN</code> 는 로컬 Milvus 배포를 위해 비워둘 수 있습니다.</li>
 </ul>
 </div>
-<h3 id="Start-the-Docker-Containers" class="common-anchor-header">Docker 컨테이너 시작</h3><p>Milvus 서비스를 포함하도록 <code translate="no">milvus</code> 프로필로 컨테이너를 시작합니다:</p>
+<h3 id="Start-the-Docker-Containers" class="common-anchor-header">Docker 컨테이너 시작<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 서비스를 포함하도록 <code translate="no">milvus</code> 프로필로 컨테이너를 시작합니다:</p>
 <pre><code translate="no" class="language-shell">docker compose --profile milvus up -d
 <button class="copy-code-btn"></button></code></pre>
 <p>이 명령은 <code translate="no">milvus-standalone</code>, <code translate="no">etcd</code>, <code translate="no">minio</code> 컨테이너와 함께 Dify 서비스를 시작합니다.</p>
@@ -110,7 +170,22 @@ MILVUS_TOKEN=
         ></path>
       </svg>
     </button></h2><p>이 옵션은 Dify를 Zilliz Cloud의 관리형 Milvus 서비스에 연결합니다.</p>
-<h3 id="Configure-Environment-Variables" class="common-anchor-header">환경 변수 구성</h3><p><code translate="no">.env</code> 파일을 질리즈 클라우드 연결 정보로 수정합니다:</p>
+<h3 id="Configure-Environment-Variables" class="common-anchor-header">환경 변수 구성<button data-href="#Configure-Environment-Variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">.env</code> 파일을 질리즈 클라우드 연결 정보로 수정합니다:</p>
 <pre><code translate="no"><span class="hljs-attr">VECTOR_STORE</span>=milvus
 <span class="hljs-attr">MILVUS_URI</span>=YOUR_ZILLIZ_CLOUD_ENDPOINT
 <span class="hljs-attr">MILVUS_TOKEN</span>=YOUR_ZILLIZ_CLOUD_API_KEY
@@ -121,7 +196,22 @@ MILVUS_TOKEN=
 <li><code translate="no">YOUR_ZILLIZ_CLOUD_API_KEY</code> 을 질리즈 클라우드의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">API 키로</a> 바꿉니다.</li>
 </ul>
 </div>
-<h3 id="Start-the-Docker-Containers" class="common-anchor-header">Docker 컨테이너 시작</h3><p>Milvus 프로파일 없이 Dify 컨테이너만 시작합니다:</p>
+<h3 id="Start-the-Docker-Containers" class="common-anchor-header">Docker 컨테이너 시작<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 프로파일 없이 Dify 컨테이너만 시작합니다:</p>
 <pre><code translate="no" class="language-shell">docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Accessing-Dify" class="common-anchor-header">Dify 접속하기<button data-href="#Accessing-Dify" class="anchor-icon" translate="no">
@@ -139,5 +229,20 @@ MILVUS_TOKEN=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Log-in-to-Dify" class="common-anchor-header">Dify에 로그인합니다.</h3><p>브라우저를 열고 Dify 설치 페이지로 이동하여 관리자 계정을 설정합니다:<code translate="no">http://localhost/install</code>, 이후 Dify 메인 페이지에 로그인하여 사용하세요.</p>
+    </button></h2><h3 id="Log-in-to-Dify" class="common-anchor-header">Dify에 로그인합니다.<button data-href="#Log-in-to-Dify" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>브라우저를 열고 Dify 설치 페이지로 이동하여 관리자 계정을 설정합니다:<code translate="no">http://localhost/install</code>, 이후 Dify 메인 페이지에 로그인하여 사용하세요.</p>
 <p>자세한 사용 방법과 안내는 <a href="https://docs.dify.ai/">Dify 문서를</a> 참조하세요.</p>

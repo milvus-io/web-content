@@ -37,7 +37,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvus 2.6부터 추가된 Woodpecker는 로깅 서비스로서 정렬 쓰기 및 복구 기능을 제공하는 선택적 WAL입니다.</li>
+<li>Milvus 2.6부터 추가된 Woodpecker는 로깅 서비스로서 순서대로 쓰기 및 복구 기능을 제공하는 선택적 WAL입니다.</li>
 <li>메시지 큐 선택 사항으로, Pulsar/Kafka와 유사하게 작동하며 구성을 통해 활성화할 수 있습니다.</li>
 <li>로컬 파일 시스템(<code translate="no">local</code>)과 객체 스토리지(<code translate="no">minio</code>/S3 호환)의 두 가지 스토리지 백엔드가 지원됩니다.</li>
 </ul>
@@ -131,7 +131,7 @@ beta: Milvus 2.6.x
 <li><code translate="no">woodpecker.storage</code>
 <ul>
 <li><strong>유형</strong>: MinIO/S3 호환 개체 스토리지(MinIO/S3/GCS/OSS 등)의 경우 <code translate="no">minio</code>, 로컬/공유 파일 시스템의 경우 <code translate="no">local</code>.</li>
-<li><strong>rootPath</strong>: 스토리지 백엔드의 루트 경로( <code translate="no">local</code>, <code translate="no">minio</code> 의 경우 버킷/접두사에 따라 경로가 지정됨).</li>
+<li><strong>rootPath</strong>: 스토리지 백엔드의 루트 경로( <code translate="no">local</code> 에 유효, <code translate="no">minio</code> 의 경우 버킷/접두사로 경로가 지정됨).</li>
 </ul></li>
 </ul>
 <h2 id="Deployment-modes" class="common-anchor-header">배포 모드<button data-href="#Deployment-modes" class="anchor-icon" translate="no">
@@ -256,7 +256,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>배포 후 문서에 따라 포트 포워딩하고 연결합니다. Woodpecker 매개변수를 조정하려면 <a href="/docs/ko/deploy_pulsar.md">메시지 저장소 구성에</a> 설명된 설정을 따르세요.</p>
-<h3 id="Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="common-anchor-header">Docker에서 Milvus 독립 실행형(저장소=로컬)에 대해 Woodpecker 사용 설정<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="anchor-icon" translate="no">
+<h3 id="Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="common-anchor-header">Docker에서 Milvus 독립 실행형(저장소=로컬)에 Woodpecker 사용 설정<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

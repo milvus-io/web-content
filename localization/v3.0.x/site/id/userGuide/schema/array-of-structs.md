@@ -1,14 +1,11 @@
 ---
 id: array-of-structs.md
-title: Array of StructsCompatible with Milvus 2.6.4+
+title: StructArray
 summary: >-
-  Bidang Array of Structs dalam sebuah entitas menyimpan sekumpulan elemen
-  Struct yang terurut. Setiap Struktur dalam Array memiliki skema yang telah
-  ditentukan sebelumnya yang sama, yang terdiri dari beberapa vektor dan bidang
-  skalar.
-beta: Milvus 2.6.4+
+  Gunakan bidang StructArray untuk menyimpan elemen Struct yang dipesan dengan
+  skema bersama bidang vektor dan skalar.
 ---
-<h1 id="Array-of-Structs" class="common-anchor-header">Array of Structs<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Array-of-Structs" class="anchor-icon" translate="no">
+<h1 id="StructArray" class="common-anchor-header">StructArray<button data-href="#StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +20,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Bidang Array of Structs dalam sebuah entitas menyimpan sekumpulan elemen Struct yang terurut. Setiap Struct dalam Array memiliki skema yang telah ditentukan sebelumnya, yang terdiri dari beberapa vektor dan bidang skalar.</p>
-<p>Berikut ini contoh entitas dari koleksi yang berisi bidang Array of Structs.</p>
+    </button></h1><p>Bidang Array of Structs, atau bidang StructArray, dalam sebuah entitas menyimpan sekumpulan elemen Struct yang terurut. Setiap Struct dalam Array memiliki skema yang telah ditentukan sebelumnya, yang terdiri dari beberapa vektor dan bidang skalar.</p>
+<p>Berikut ini contoh entitas dari koleksi yang berisi bidang StructArray.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     &#x27;id&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
     &#x27;title&#x27;<span class="hljs-punctuation">:</span> &#x27;Walden&#x27;<span class="hljs-punctuation">,</span>
@@ -46,7 +43,30 @@ beta: Milvus 2.6.4+
 <span class="highlighted-comment-line">    <span class="hljs-comment">// hightlight-end</span></span>
 <span class="highlighted-comment-line"><span class="hljs-punctuation">}</span></span>
 <span class="highlighted-comment-line"></span><button class="copy-code-btn"></button></code></pre>
-<p>Pada contoh di atas, bidang <code translate="no">chunks</code> adalah bidang Array of Structs, dan setiap elemen Struct berisi bidangnya sendiri, yaitu <code translate="no">text</code>, <code translate="no">text_vector</code>, dan <code translate="no">chapter</code>.</p>
+<p>Pada contoh di atas, bidang <code translate="no">chunks</code> adalah bidang StructArray, dan setiap elemen Struct berisi bidangnya sendiri, yaitu <code translate="no">text</code>, <code translate="no">text_vector</code>, dan <code translate="no">chapter</code>.</p>
+<h2 id="When-to-use" class="common-anchor-header">Kapan digunakan<button data-href="#When-to-use" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Aplikasi AI modern, mulai dari pengemudian otonom hingga pengambilan multimodal, semakin bergantung pada data yang bersarang dan heterogen. Model data datar tradisional sulit untuk merepresentasikan hubungan yang kompleks seperti<strong>"satu dokumen dengan banyak potongan beranotasi</strong>" atau<strong>"satu adegan mengemudi dengan beberapa manuver yang diamati</strong>". Di sinilah tipe data StructArray di Milvus bersinar.</p>
+<p>Untuk menentukan dengan cepat apakah bidang StructArray sesuai dengan skenario aplikasi Anda, pertimbangkan apakah:</p>
+<ul>
+<li><p>Data Anda berada dalam struktur hirarkis, seperti satu dokumen dengan banyak bagian yang dianotasi.</p></li>
+<li><p>Hasil pencarian harus berupa dokumen, bukan potongan-potongan, seperti pada contoh di atas.</p></li>
+<li><p>Hasil pencarian berisi entitas duplikat yang sangat banyak, dan Anda kesulitan untuk mendapatkan hasil akhir dengan menggunakan teknik seperti pengelompokan, deduplikasi, dan pengurutan ulang.</p></li>
+</ul>
+<p>Jika jawaban Anda untuk pertanyaan-pertanyaan di atas adalah ya, Anda harus menggunakan StructArray.</p>
 <h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,43 +84,51 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><ul>
 <li><p><strong>Tipe data</strong></p>
-<p>Saat Anda membuat koleksi, Anda dapat menggunakan tipe Struct sebagai tipe data untuk elemen dalam bidang Array. Namun, Anda tidak dapat menambahkan Array of Structs ke koleksi yang sudah ada, dan Milvus tidak mendukung penggunaan tipe Struct sebagai tipe data untuk bidang koleksi.</p>
-<p>Struktur dalam sebuah field Array memiliki skema yang sama, yang harus didefinisikan saat Anda membuat field Array.</p>
-<p>Skema Struct berisi vektor dan bidang skalar, seperti yang tercantum dalam tabel berikut:</p>
-<p><table>
-<tr>
-<th><p>Tipe Bidang</p></th>
-<th><p>Tipe Data</p></th>
-</tr>
-<tr>
-<td><p>Vektor</p></td>
-<td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-</tr>
-<tr>
-<td rowspan="5"><p>Skalar</p></td>
-<td><p><code translate="no">VARCHAR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">INT8/16/32/64</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">FLOAT</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">DOUBLE</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">BOOLEAN</code></p></td>
-</tr>
-</table></p>
-<p>Jaga agar jumlah bidang vektor baik di tingkat koleksi maupun di dalam gabungan Struktur tidak lebih dari atau sama dengan 10.</p></li>
-<li><p><strong>Dapat dinolkan &amp; nilai default</strong></p>
-<p>Bidang Array of Structs tidak dapat dinolkan dan tidak menerima nilai default apa pun.</p></li>
+<p>Ketika Anda membuat koleksi, Anda dapat menggunakan tipe Struct sebagai tipe data untuk elemen-elemen di dalam bidang Array. Namun, Anda tidak dapat menambahkan StructArray ke koleksi yang sudah ada, dan Milvus tidak mendukung penggunaan tipe Struct sebagai tipe data untuk field koleksi.</p>
+<p>Struct dalam sebuah field Array memiliki skema yang sama, yang harus didefinisikan saat Anda membuat field Array.</p>
+<p>Skema Struct berisi bidang vektor dan skalar, seperti yang tercantum di bawah ini:</p>
+<p><Grid columnSize="2" widthRatios="50,50"></p>
+<pre><code translate="no">  &lt;div&gt;
+
+      Applicable vector fields:
+
+      - `FLOAT_VECTOR`
+
+      - `FLOAT16_VECTOR`
+
+      - `BFLOAT16_VECTOR`
+
+      - `INT8_VECTOR`
+
+      - `BINARY_VECTOR`
+
+  &lt;/div&gt;
+
+  &lt;div&gt;
+
+      Applicable scalar fields:
+
+      - `VARCHAR`
+
+      - `INT8/16/32/64`
+
+      - `FLOAT`
+
+      - `DOUBLE`
+
+      - `BOOL`
+
+  &lt;/div&gt;
+</code></pre>
+<p></Grid></p>
+<p>Jaga agar jumlah bidang vektor baik di tingkat koleksi maupun di dalam gabungan Struct tidak lebih dari atau sama dengan 10.</p></li>
+<li><p><strong>Nilai yang dapat dinolkan &amp; nilai default</strong></p>
+<p>Bidang StructArray tidak dapat dinullkan dan tidak menerima nilai default apa pun.</p></li>
 <li><p><strong>Fungsi</strong></p>
-<p>Anda tidak dapat menggunakan fungsi untuk mendapatkan bidang vektor dari bidang skalar dalam Struct.</p></li>
+<p>Anda tidak dapat menggunakan fungsi untuk mendapatkan bidang vektor dari bidang skalar dalam sebuah Struct.</p></li>
 <li><p><strong>Jenis indeks &amp; jenis metrik</strong></p>
-<p>Semua bidang vektor dalam koleksi harus diindeks. Untuk mengindeks bidang vektor dalam larik bidang Struct, Milvus menggunakan daftar penyematan untuk mengatur penyematan vektor dalam setiap elemen Struct dan mengindeks seluruh daftar penyematan secara keseluruhan.</p>
-<p>Anda dapat menggunakan <code translate="no">AUTOINDEX</code> atau <code translate="no">HNSW</code> sebagai jenis indeks dan jenis metrik apa pun yang tercantum di bawah ini untuk membuat indeks untuk daftar penyematan dalam bidang Array of Structs.</p>
+<p>Semua bidang vektor dalam koleksi harus diindeks. Untuk mengindeks bidang vektor dalam sebuah bidang StructArray, Milvus menggunakan daftar penyematan untuk mengatur penyematan vektor dalam setiap elemen Struct dan mengindeks seluruh daftar penyematan secara keseluruhan.</p>
+<p>Anda dapat menggunakan <code translate="no">AUTOINDEX</code> atau <code translate="no">HNSW</code> sebagai tipe indeks dan tipe metrik apa pun yang tercantum di bawah ini untuk membuat indeks untuk daftar penyematan di dalam sebuah bidang StructArray.</p>
 <p><table>
 <tr>
 <th><p>Jenis indeks</p></th>
@@ -108,24 +136,25 @@ beta: Milvus 2.6.4+
 <th><p>Keterangan</p></th>
 </tr>
 <tr>
-<td rowspan="3"><p><code translate="no">AUTOINDEX</code> (atau <code translate="no">HNSW</code>)</p></td>
-<td><p><code translate="no">MAX_SIM_COSINE</code></p></td>
-<td rowspan="3"><p>Untuk daftar penyematan dengan tipe berikut ini:</p><ul><li>FLOAT_VECTOR</li></ul></td>
-</tr>
-<tr>
-<td><p><code translate="no">MAX_SIM_IP</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">MAX_SIM_L2</code></p></td>
+<td rowspan="3"><ul><li><p><code translate="no">AUTOINDEX</code></p></li><li><p><code translate="no">HNSW</code></p></li><li><p><code translate="no">IVF_FLAT</code></p></li><li><p><code translate="no">DISKANN</code></p></li></ul></td>
+<td rowspan="3"><ul><li><p><code translate="no">MAX_SIM_COSINE</code></p></li><li><p><code translate="no">MAX_SIM_IP</code></p></li><li><p><code translate="no">MAX_SIM_L2</code></p></li></ul></td>
+<td rowspan="3"><p>Untuk daftar penyematan dengan tipe berikut ini:</p><ul><li><p><code translate="no">FLOAT_VECTOR</code></p></li><li><p><code translate="no">FLOAT16_VECTOR</code></p></li><li><p><code translate="no">BFLOAT16_VECTOR</code></p></li><li><p><code translate="no">INT8_VECTOR</code></p></li><li><p><code translate="no">BINARY_VECTOR</code></p></li></ul></td>
 </tr>
 </table></p>
-<p>Bidang skalar dalam bidang Array of Structs tidak mendukung indeks.</p></li>
+<p>Untuk detail tentang bagaimana Milvus menghitung kemiripan antara kueri dan daftar penyematan, lihat <a href="/docs/id/metric.md#Maximum-similarity">Kemiripan Maksimum</a>.</p>
+<p>Bidang skalar dalam bidang StructArray mendukung jenis indeks berikut ini:</p>
+<ul>
+<li><p><code translate="no">INVERTED</code></p>
+<p>Ini biasanya berlaku untuk filter yang berbentuk string atau kategorikal, seperti <code translate="no">structA[color]</code> atau <code translate="no">structA[str_val]</code>. Untuk detailnya, lihat <a href="/docs/id/inverted.md">Terbalik</a>.</p></li>
+<li><p><code translate="no">STL_SORT</code></p>
+<p>Ini biasanya berlaku untuk akselerasi gaya rentang atau urutan pada nilai numerik, seperti <code translate="no">strctA[num_val]</code>. Untuk detailnya, lihat <a href="/docs/id/stl-sort.md">STL_SORT</a>.</p></li>
+</ul></li>
 <li><p><strong>Memasukkan data</strong></p>
-<p>Structs tidak mendukung upsert dalam mode penggabungan. Namun, Anda masih bisa melakukan upsert dalam mode timpa untuk memperbarui data di Structs. Untuk detail mengenai perbedaan antara upsert dalam mode penggabungan dan mode timpa, lihat <a href="/docs/id/upsert-entities.md#Overview">Upsert Entitas</a>.</p></li>
+<p>Struktur tidak mendukung upsert dalam mode penggabungan. Namun, Anda masih bisa melakukan upsert dalam mode timpa untuk memperbarui data di Structs. Untuk detail mengenai perbedaan antara upsert dalam mode penggabungan dan mode timpa, lihat <a href="/docs/id/upsert-entities.md#Overview">Upsert Entitas</a>.</p></li>
 <li><p><strong>Pemfilteran skalar</strong></p>
-<p>Anda tidak dapat menggunakan Array of Structs atau bidang apa pun di dalam elemen Struct dalam memfilter ekspresi di dalam pencarian dan kueri.</p></li>
+<p>Anda dapat menggunakan <strong>filter elemen</strong> dan <strong>operator dalam keluarga pencocokan</strong> untuk melakukan pemfilteran skalar terhadap subbidang skalar dalam bidang StructArray. Untuk detailnya, lihat Pemfilteran <a href="/docs/id/array-of-structs.md#Scalar-filtering-in-a-StructArray-field">skalar dalam bidang StructArray</a>.</p></li>
 </ul>
-<h2 id="Add-Array-of-Structs" class="common-anchor-header">Menambahkan Larik Struktur<button data-href="#Add-Array-of-Structs" class="anchor-icon" translate="no">
+<h2 id="Add-a-StructArray" class="common-anchor-header">Menambahkan StructArray<button data-href="#Add-a-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -140,15 +169,15 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk menggunakan Array of Structs di Milvus, Anda perlu mendefinisikan bidang array ketika membuat koleksi, dan mengatur tipe data untuk elemen-elemennya ke Struct. Prosesnya adalah sebagai berikut:</p>
+    </button></h2><p>Untuk menambahkan bidang StructArray di Milvus, Anda perlu mendefinisikan bidang array saat membuat koleksi, dan mengatur tipe data untuk elemen-elemennya ke Struct. Prosesnya adalah sebagai berikut:</p>
 <ol>
-<li><p>Tetapkan tipe data sebuah field ke <code translate="no">DataType.ARRAY</code> ketika menambahkan field sebagai field Array ke skema koleksi.</p></li>
-<li><p>Tetapkan atribut <code translate="no">element_type</code> field ke <code translate="no">DataType.STRUCT</code> untuk menjadikan field sebagai Array dari Struktur.</p></li>
-<li><p>Buat skema Struktur dan sertakan bidang yang diperlukan. Lalu, rujuk skema Struktur di atribut <code translate="no">struct_schema</code> bidang.</p></li>
+<li><p>Tetapkan tipe data dari sebuah field ke <code translate="no">DataType.ARRAY</code> ketika menambahkan field tersebut sebagai field Array ke skema koleksi.</p></li>
+<li><p>Tetapkan atribut <code translate="no">element_type</code> pada field ke <code translate="no">DataType.STRUCT</code> untuk menjadikan field sebagai Struct Array.</p></li>
+<li><p>Buat skema Struct dan sertakan bidang yang diperlukan. Lalu, rujuk skema Struct di atribut <code translate="no">struct_schema</code> field.</p></li>
 <li><p>Atur atribut <code translate="no">max_capacity</code> bidang ke nilai yang sesuai untuk menentukan jumlah maksimum Struktur yang dapat ditampung oleh setiap entitas dalam bidang ini.</p></li>
 <li><p><strong>(Opsional</strong>) Anda bisa menetapkan <code translate="no">mmap.enabled</code> untuk bidang apa pun dalam elemen Struct untuk menyeimbangkan data panas dan data dingin dalam Struct.</p></li>
 </ol>
-<p>Berikut ini cara mendefinisikan skema koleksi yang menyertakan Array of Structs:</p>
+<p>Berikut ini cara mendefinisikan skema koleksi yang menyertakan bidang StructArray:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -361,8 +390,8 @@ SCHEMA=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Baris yang disorot pada contoh kode di atas mengilustrasikan prosedur untuk menyertakan Array of Structs dalam skema koleksi.</p>
-<h2 id="Set-index-params" class="common-anchor-header">Tetapkan parameter indeks<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<p>Baris yang disorot pada contoh kode di atas mengilustrasikan cara menyertakan StructArray dalam skema koleksi.</p>
+<h2 id="Set-index-params" class="common-anchor-header">Menetapkan parameter indeks<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -378,8 +407,23 @@ SCHEMA=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h2><p>Pengindeksan wajib dilakukan untuk semua bidang vektor, termasuk bidang vektor di dalam koleksi dan bidang vektor yang didefinisikan di dalam elemen Struct.</p>
-<p>Parameter indeks yang berlaku bervariasi, tergantung jenis indeks yang digunakan. Untuk detail tentang parameter indeks yang berlaku, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks</a> dan halaman dokumentasi khusus untuk jenis indeks yang Anda pilih.</p>
-<p>Untuk mengindeks daftar sematan, Anda perlu menyetel jenis indeksnya ke <code translate="no">AUTOINDEX</code> atau <code translate="no">HNSW</code>, dan menggunakan <code translate="no">MAX_SIM_COSINE</code> sebagai jenis metrik untuk Milvus untuk mengukur kemiripan di antara daftar sematan.</p>
+<p>Parameter indeks yang berlaku bervariasi menurut jenis indeks. Untuk detail tentang parameter indeks yang berlaku, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks</a> dan dokumentasi untuk jenis indeks yang Anda pilih.</p>
+<h3 id="Index-an-embedding-list" class="common-anchor-header">Mengindeks daftar penyematan<button data-href="#Index-an-embedding-list" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk mengindeks daftar sematan, Anda perlu menyetel jenis indeksnya ke <code translate="no">AUTOINDEX</code> atau salah satu jenis indeks yang berlaku yang tercantum di atas, dan menggunakan jenis metrik yang terdaftar untuk Milvus untuk mengukur kesamaan di antara daftar sematan.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index parameters</span>
@@ -449,6 +493,48 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
   }
 ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h3 id="Index-a-scalar-struct-sub-field" class="common-anchor-header">Mengindeks sub-bidang struktur skalar<button data-href="#Index-a-scalar-struct-sub-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ketika Anda membuat indeks pada sub-bidang struktur skalar, Milvus sebenarnya membuat indeks pada <strong>tingkat elemen</strong>, bukan pada tingkat baris, untuk mempercepat pemfilteran skalar.</p>
+<p>Cuplikan kode berikut ini membuat indeks pada sub-bidang struktur skalar bernama <code translate="no">chunks[text]</code>.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">index_params.add_index(
+    field_name=<span class="hljs-string">&quot;chunks[text]&quot;</span>,
+    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;chunks[text]&quot;</span>)
+        .indexType(IndexParam.IndexType.INVERTED)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">indexParams.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;chunks[text]&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;INVERTED&quot;</span>
+})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">INDEX_PARAMS += <span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;chunks[text]&quot;,
+    &quot;indexName&quot;: &quot;chunks_text_vector_index&quot;,
+    &quot;indexType&quot;: &quot;INVERTED&quot;
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Create-a-collection" class="common-anchor-header">Membuat koleksi<button data-href="#Create-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -464,7 +550,7 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah skema dan indeks siap, Anda dapat membuat koleksi yang menyertakan bidang Array of Structs.</p>
+    </button></h2><p>Setelah skema dan indeks siap, Anda dapat membuat koleksi yang menyertakan bidang StructArray.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -473,14 +559,7 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
-<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
-
-<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
-        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
-        .build());
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -492,7 +571,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">createCollection</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;books&quot;</span>,
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
   <span class="hljs-attr">fields</span>: schema,
   <span class="hljs-attr">indexes</span>: indexParams,
 });
@@ -522,7 +601,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah membuat koleksi, Anda dapat menyisipkan data yang menyertakan Array of Structs sebagai berikut.</p>
+    </button></h2><p>Setelah membuat koleksi, Anda dapat menyisipkan data yang menyertakan array Structs sebagai berikut.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
@@ -721,7 +800,7 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
 client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h2 id="Vector-search-against-an-Array-of-Structs-field" class="common-anchor-header">Pencarian vektor terhadap bidang Array of Structs<button data-href="#Vector-search-against-an-Array-of-Structs-field" class="anchor-icon" translate="no">
+<h2 id="Vector-search-in-a-StructArray-field" class="common-anchor-header">Pencarian vektor dalam bidang StructArray<button data-href="#Vector-search-in-a-StructArray-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -736,10 +815,10 @@ client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda dapat melakukan pencarian vektor pada bidang vektor dari koleksi dan Array of Structs.</p>
-<p>Secara khusus, Anda harus menggabungkan nama bidang Array of Structs dan nama bidang vektor target di dalam elemen Struct sebagai nilai untuk parameter <code translate="no">anns_field</code> di dalam permintaan pencarian, dan menggunakan <code translate="no">EmbeddingList</code> untuk mengatur vektor kueri dengan rapi.</p>
+    </button></h2><p>Anda dapat melakukan pencarian vektor pada bidang vektor dari koleksi dan dalam StructArray.</p>
+<p>Secara khusus, Anda harus menggabungkan nama bidang StructArray dan nama bidang vektor target di dalam elemen Struct sebagai nilai untuk parameter <code translate="no">anns_field</code> di dalam permintaan pencarian, dan menggunakan <code translate="no">EmbeddingList</code> untuk mengatur vektor kueri dengan rapi.</p>
 <div class="alert note">
-<p>Milvus menyediakan <code translate="no">EmbeddingList</code> untuk membantu Anda mengatur vektor kueri untuk pencarian terhadap daftar sematan dalam Array of Structs dengan lebih rapi. Setiap <code translate="no">EmbeddingList</code> berisi setidaknya sebuah vektor penyematan dan mengharapkan sejumlah entitas topK sebagai balasannya.</p>
+<p>Milvus menyediakan <code translate="no">EmbeddingList</code> untuk membantu Anda mengatur vektor kueri untuk pencarian terhadap daftar penyisipan dalam StructArray dengan lebih rapi. Setiap <code translate="no">EmbeddingList</code> berisi setidaknya sebuah vektor embedding dan mengharapkan sejumlah entitas topK sebagai balasannya.</p>
 <p>Namun, <code translate="no">EmbeddingList</code> hanya dapat digunakan dalam permintaan <code translate="no">search()</code> tanpa pencarian rentang atau pengelompokan parameter pencarian, apalagi permintaan <code translate="no">search_iterator()</code>.</p>
 </div>
 <div class="multipleCode">
@@ -999,6 +1078,76 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>Pada contoh kode di atas, <code translate="no">embeddingList1</code> adalah daftar sematan satu vektor, sedangkan <code translate="no">embeddingList2</code> berisi dua vektor. Masing-masing memicu permintaan pencarian terpisah dan mengharapkan daftar entitas yang paling mirip.</p>
+<h2 id="Scalar-filtering-in-a-StructArray-field" class="common-anchor-header">Pemfilteran skalar dalam bidang StructArray<button data-href="#Scalar-filtering-in-a-StructArray-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Anda dapat menggunakan penyaring <strong>elemen</strong> dan <strong>operator dalam keluarga pencocokan</strong> untuk melakukan penyaringan skalar terhadap subbidang skalar dalam StructArray. Untuk detail dan contoh lebih lanjut mengenai dua jenis operator di atas, lihat Larik <a href="/docs/id/struct-array-operators.md">Operator Struktur.</a></p>
+<h3 id="Element-filters" class="common-anchor-header">Filter elemen<button data-href="#Element-filters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ini adalah filter tingkat entitas yang memeriksa apakah setidaknya satu elemen dalam bidang StructArray dari suatu entitas memenuhi predikat. Sebagai contoh, filter elemen berikut ini mengembalikan entitas yang mengandung setidaknya satu potongan yang dimulai dengan "Red" di sub-bidang <code translate="no">text</code>.</p>
+<pre><code translate="no" class="language-python">element_filter(chunks, $[text] LIKE <span class="hljs-string">&quot;Red%&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<p>Anda dapat menggunakan hampir semua operator perbandingan, rentang, dan aritmatika dalam predikat, yang dievaluasi per elemen, dan operator logika dapat digunakan untuk menggabungkan beberapa kondisi pada elemen yang sama. Untuk detailnya, lihat <a href="/docs/id/basic-operators.md">Operator Dasar</a>.</p>
+<p>Jika ada beberapa ekspresi pemfilteran skalar dalam pencarian yang difilter atau permintaan kueri, letakkan ekspresi pemfilteran elemen setelah semua ekspresi pemfilteran tingkat entitas, seperti yang ditunjukkan di bawah ini.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># correct</span>
+<span class="hljs-built_in">id</span> &gt; <span class="hljs-number">0</span> &amp;&amp; element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>)
+
+<span class="hljs-comment"># incorrect, resulting errors</span>
+element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; <span class="hljs-built_in">id</span> &gt; <span class="hljs-number">0</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Match-family-operators" class="common-anchor-header">Operator keluarga pencocokan<button data-href="#Match-family-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Operator keluarga pencocokan juga bekerja pada bidang StructArray. Alih-alih hanya memeriksa apakah sebuah elemen ada, Anda dapat menentukan berapa banyak elemen (atau proporsi) yang harus memenuhi predikat elemen.</p>
+<ul>
+<li><p><code translate="no">MATCH_ANY(chunks, $[text] LIKE &quot;Red%&quot;)</code></p>
+<p>Ini mengembalikan entitas yang mengandung setidaknya satu potongan yang dimulai dengan "Red" di sub-bidang <code translate="no">text</code>; secara semantik, ini setara dengan <code translate="no">element_filter</code>.</p></li>
+<li><p><code translate="no">MATCH_ALL(chunks, $[text] LIKE &quot;Red%&quot;)</code></p>
+<p>Ini mengembalikan entitas yang sub-bidang teksnya di semua potongan dimulai dengan "Merah".</p></li>
+<li><p><code translate="no">MATCH_LEAST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
+<p>Ini mengembalikan entitas yang berisi setidaknya potongan <code translate="no">k</code> yang dimulai dengan "Red" di sub-bidang <code translate="no">text</code>.</p></li>
+<li><p><code translate="no">MATCH_MOST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
+<p>Ini mengembalikan entitas yang berisi paling banyak potongan <code translate="no">k</code> yang dimulai dengan "Merah" di sub-bidang <code translate="no">text</code>.</p></li>
+<li><p><code translate="no">MATCH_EXACT(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
+<p>Ini mengembalikan entitas yang berisi potongan <code translate="no">k</code> yang dimulai dengan "Red" di sub-bidang <code translate="no">text</code>.</p></li>
+</ul>
 <h2 id="Next-steps" class="common-anchor-header">Langkah selanjutnya<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1014,4 +1163,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pengembangan tipe data Array of Structs merupakan kemajuan besar dalam kemampuan Milvus untuk menangani struktur data yang kompleks. Untuk lebih memahami kasus penggunaannya dan memaksimalkan fitur baru ini, Anda dianjurkan untuk membaca <a href="/docs/id/best-practices-for-array-of-structs.md">Desain Skema Menggunakan Array of Structs</a>.</p>
+    </button></h2><p>Pengembangan tipe data StructArray asli merupakan kemajuan besar dalam kemampuan Milvus untuk menangani struktur data yang kompleks. Untuk lebih memahami kasus penggunaannya dan memaksimalkan fitur baru ini, Anda dianjurkan untuk membaca <a href="/docs/id/best-practices-for-array-of-structs.md">Desain Skema Menggunakan Array of Structs</a>.</p>

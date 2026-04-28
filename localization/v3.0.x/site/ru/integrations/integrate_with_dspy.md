@@ -76,9 +76,9 @@ title: Интеграция Milvus с DSPy
     </button></h2><p>Существует множество компонентов, которые вносят свой вклад в построение конвейера LLM. Здесь мы опишем некоторые ключевые компоненты, чтобы обеспечить высокоуровневое понимание того, как работает DSPy.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
    </span> <span class="img-wrapper"> <span>Модули DSPy</span> </span></p>
-<p>Сигнатура: Сигнатуры в DSPy служат декларативными спецификациями, определяющими входное/выходное поведение модулей и направляющими языковую модель при выполнении задач. Модуль: Модули DSPy служат фундаментальными компонентами для программ, использующих языковые модели (ЯМ). Они абстрагируют различные техники подсказок, такие как цепочка мыслей или ReAct, и адаптируются для работы с любой сигнатурой DSPy. Благодаря обучаемым параметрам и способности обрабатывать входные данные и создавать выходные, эти модули можно объединять в более крупные программы, черпая вдохновение в модулях NN в PyTorch, но адаптируя их для применения LM. Оптимизатор: Оптимизаторы в DSPy точно настраивают параметры программ DSPy, такие как подсказки и веса LLM, чтобы максимизировать заданные метрики, такие как точность, повышая эффективность программы.</p>
+<p>Сигнатура: Сигнатуры в DSPy служат декларативными спецификациями, определяющими входное/выходное поведение модулей и направляющими языковую модель при выполнении задач. Модуль: Модули DSPy служат фундаментальными компонентами для программ, использующих языковые модели (ЯМ). Они абстрагируют различные техники подсказок, такие как цепочка мыслей или ReAct, и адаптируются для работы с любыми сигнатурами DSPy. Благодаря обучаемым параметрам и способности обрабатывать входные данные и создавать выходные, эти модули можно объединять в более крупные программы, черпая вдохновение в модулях NN в PyTorch, но адаптируя их для применения LM. Оптимизатор: Оптимизаторы в DSPy точно настраивают параметры программ DSPy, такие как подсказки и веса LLM, чтобы максимизировать заданные метрики, такие как точность, повышая эффективность программы.</p>
 <h2 id="Why-Milvus-in-DSPy" class="common-anchor-header">Почему Milvus в DSPy<button data-href="#Why-Milvus-in-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -111,13 +111,43 @@ title: Интеграция Milvus с DSPy
         ></path>
       </svg>
     </button></h2><p>Теперь давайте рассмотрим быстрый пример, демонстрирующий использование Milvus в DSPy для оптимизации RAG-приложений.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Предварительные условия</h3><p>Перед созданием приложения RAG установите DSPy и PyMilvus.</p>
+<h3 id="Prerequisites" class="common-anchor-header">Предварительные условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Перед созданием приложения RAG установите DSPy и PyMilvus.</p>
 <pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;dspy-ai[milvus]&quot;</span>
 $ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 Если вы используете Google Colab, для включения только что установленных зависимостей вам может потребоваться **перезапустить среду выполнения** (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</div>
-<h3 id="Loading-the-dataset" class="common-anchor-header">Загрузка набора данных</h3><p>В этом примере в качестве обучающего набора данных мы используем HotPotQA, коллекцию сложных пар "вопрос-ответ". Мы можем загрузить их через класс HotPotQA.</p>
+<h3 id="Loading-the-dataset" class="common-anchor-header">Загрузка набора данных<button data-href="#Loading-the-dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В этом примере мы используем HotPotQA, коллекцию сложных пар вопрос-ответ, в качестве обучающего набора данных. Мы можем загрузить их через класс HotPotQA.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.datasets <span class="hljs-keyword">import</span> HotPotQA
 
 <span class="hljs-comment"># Load the dataset.</span>
@@ -129,7 +159,22 @@ dataset = HotPotQA(
 trainset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.train]
 devset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.dev]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">Загрузка данных в векторную базу данных Milvus</h3><p>Загрузите контекстную информацию в коллекцию Milvus для векторного поиска. В этой коллекции должно быть поле <code translate="no">embedding</code> и поле <code translate="no">text</code>. В данном случае мы используем модель OpenAI <code translate="no">text-embedding-3-small</code> в качестве функции встраивания запроса по умолчанию.</p>
+<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">Загрузка данных в векторную базу данных Milvus<button data-href="#Ingest-data-into-the-Milvus-vector-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Загрузите контекстную информацию в коллекцию Milvus для векторного поиска. В этой коллекции должно быть поле <code translate="no">embedding</code> и поле <code translate="no">text</code>. В данном случае мы используем модель OpenAI <code translate="no">text-embedding-3-small</code> в качестве функции встраивания запроса по умолчанию.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> os
 
@@ -172,7 +217,22 @@ text = requests.get(
         ],
     )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-MilvusRM" class="common-anchor-header">Определите MilvusRM.</h3><p>Теперь вам нужно определить MilvusRM.</p>
+<h3 id="Define-MilvusRM" class="common-anchor-header">Определите MilvusRM.<button data-href="#Define-MilvusRM" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Теперь вам нужно определить MilvusRM.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.retrieve.milvus_rm <span class="hljs-keyword">import</span> MilvusRM
 <span class="hljs-keyword">import</span> dspy
 
@@ -185,7 +245,22 @@ retriever_model = MilvusRM(
 turbo = dspy.OpenAI(model=<span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>)
 dspy.settings.configure(lm=turbo)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Building-signatures" class="common-anchor-header">Построение сигнатур</h3><p>Теперь, когда мы загрузили данные, давайте начнем определять сигнатуры для подзадач нашего конвейера. Мы можем определить наши простые входные <code translate="no">question</code> и выходные <code translate="no">answer</code>, но поскольку мы строим конвейер RAG, мы будем получать контекстную информацию из Milvus. Поэтому давайте определим нашу сигнатуру как <code translate="no">context, question --&gt; answer</code>.</p>
+<h3 id="Building-signatures" class="common-anchor-header">Построение сигнатур<button data-href="#Building-signatures" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Теперь, когда мы загрузили данные, давайте начнем определять сигнатуры для подзадач нашего конвейера. Мы можем определить наши простые входные <code translate="no">question</code> и выходные <code translate="no">answer</code>, но поскольку мы строим конвейер RAG, мы будем получать контекстную информацию из Milvus. Поэтому давайте определим нашу сигнатуру как <code translate="no">context, question --&gt; answer</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">GenerateAnswer</span>(dspy.Signature):
     <span class="hljs-string">&quot;&quot;&quot;Answer questions with short factoid answers.&quot;&quot;&quot;</span>
 
@@ -194,7 +269,22 @@ dspy.settings.configure(lm=turbo)
     answer = dspy.OutputField(desc=<span class="hljs-string">&quot;often between 1 and 5 words&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Мы включаем краткие описания для полей <code translate="no">context</code> и <code translate="no">answer</code>, чтобы определить более четкие ориентиры того, что будет получать и генерировать модель.</p>
-<h3 id="Building-the-pipeline" class="common-anchor-header">Построение конвейера</h3><p>Теперь давайте определим конвейер RAG.</p>
+<h3 id="Building-the-pipeline" class="common-anchor-header">Построение конвейера<button data-href="#Building-the-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Теперь давайте определим конвейер RAG.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">RAG</span>(dspy.Module):
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, rm</span>):
         <span class="hljs-built_in">super</span>().__init__()
@@ -212,7 +302,22 @@ dspy.settings.configure(lm=turbo)
             context=[item.long_text <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> context], answer=prediction.answer
         )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Executing-the-pipeline-and-getting-the-results" class="common-anchor-header">Выполнение конвейера и получение результатов</h3><p>Теперь мы построили этот конвейер RAG. Давайте опробуем его и получим результаты.</p>
+<h3 id="Executing-the-pipeline-and-getting-the-results" class="common-anchor-header">Выполнение конвейера и получение результатов<button data-href="#Executing-the-pipeline-and-getting-the-results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Теперь мы построили этот конвейер RAG. Давайте опробуем его и получим результаты.</p>
 <pre><code translate="no" class="language-python">rag = RAG(retriever_model)
 <span class="hljs-built_in">print</span>(rag(<span class="hljs-string">&quot;who write At My Window&quot;</span>).answer)
 <button class="copy-code-btn"></button></code></pre>
@@ -230,7 +335,22 @@ metric = dspy.evaluate.answer_exact_match
 score = evaluate_on_hotpotqa(rag, metric=metric)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;rag:&quot;</span>, score)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optimizing-the-pipeline" class="common-anchor-header">Оптимизация конвейера</h3><p>После определения программы следующим шагом будет компиляция. Этот процесс обновляет параметры в каждом модуле для повышения производительности. Процесс компиляции зависит от трех важнейших факторов:</p>
+<h3 id="Optimizing-the-pipeline" class="common-anchor-header">Оптимизация конвейера<button data-href="#Optimizing-the-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>После определения программы следующим шагом будет компиляция. Этот процесс обновляет параметры в каждом модуле для повышения производительности. Процесс компиляции зависит от трех важнейших факторов:</p>
 <ul>
 <li>Обучающий набор: Для демонстрации мы будем использовать 20 примеров вопросов-ответов из нашего обучающего набора данных.</li>
 <li>Метрика проверки: Мы создадим простую метрику <code translate="no">validate_context_and_answer</code>. Эта метрика проверяет точность предсказанного ответа и гарантирует, что найденный контекст включает ответ.</li>

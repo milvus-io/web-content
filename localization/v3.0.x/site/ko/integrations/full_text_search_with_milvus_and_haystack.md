@@ -25,7 +25,7 @@ title: 밀버스 및 헤이스택을 사용한 전체 텍스트 검색
         ></path>
       </svg>
     </button></h1><p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">전체 텍스트 검색은</a> 텍스트의 특정 키워드나 구문을 일치시켜 문서를 검색하는 전통적인 방법입니다. 용어 빈도 등의 요소로 계산된 관련성 점수를 기반으로 결과의 순위를 매깁니다. 시맨틱 검색은 의미와 문맥을 이해하는 데 더 효과적이지만, 전체 텍스트 검색은 정확한 키워드 매칭에 탁월하므로 시맨틱 검색을 보완하는 데 유용합니다. BM25 알고리즘은 전체 텍스트 검색에서 순위를 매기는 데 널리 사용되며 검색 증강 세대(RAG)에서 핵심적인 역할을 합니다.</p>
-<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5에는</a> BM25를 사용한 기본 전체 텍스트 검색 기능이 도입되었습니다. 이 접근 방식은 텍스트를 BM25 점수를 나타내는 스파스 벡터로 변환합니다. 원시 텍스트를 입력하기만 하면 수동으로 스파스 임베딩을 생성할 필요 없이 Milvus가 자동으로 스파스 벡터를 생성하고 저장합니다.</p>
+<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5에는</a> BM25를 사용한 기본 전체 텍스트 검색 기능이 도입되었습니다. 이 접근 방식은 텍스트를 BM25 점수를 나타내는 스파스 벡터로 변환합니다. 원시 텍스트를 입력하기만 하면 Milvus가 자동으로 스파스 벡터를 생성하고 저장하므로 수동으로 스파스 임베딩을 생성할 필요가 없습니다.</p>
 <p><a href="https://haystack.deepset.ai/">Haystack은</a> 이제 이 Milvus 기능을 지원하므로 RAG 애플리케이션에 전체 텍스트 검색을 쉽게 추가할 수 있습니다. 전체 텍스트 검색과 고밀도 벡터 시맨틱 검색을 결합하여 시맨틱 이해와 키워드 매칭 정확도 모두에서 이점을 얻을 수 있는 하이브리드 접근 방식을 사용할 수 있습니다. 이 조합은 검색 정확도를 향상시키고 사용자에게 더 나은 결과를 제공합니다.</p>
 <p>이 튜토리얼에서는 Haystack과 Milvus를 사용해 애플리케이션에서 전체 텍스트 및 하이브리드 검색을 구현하는 방법을 보여드립니다.</p>
 <p>Milvus 벡터 저장소를 사용하려면 Milvus 서버 <code translate="no">URI</code> (또는 선택적으로 <code translate="no">TOKEN</code>)를 지정합니다. 밀버스 서버를 시작하려면 <a href="https://milvus.io/docs/install-overview.md">밀버스 설치 가이드를</a> 따라 밀버스 서버를 설정하거나 <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">Zilliz Cloud</a>(완전 관리형 밀버스)를 무료로 사용해 보세요.</p>
@@ -61,7 +61,22 @@ title: 밀버스 및 헤이스택을 사용한 전체 텍스트 검색
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-data" class="common-anchor-header">데이터 준비</h3><p>이 노트북에서 필요한 패키지를 가져옵니다. 그런 다음 몇 가지 샘플 문서를 준비합니다.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">데이터 준비<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이 노트북에서 필요한 패키지를 가져옵니다. 그런 다음 몇 가지 샘플 문서를 준비합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> haystack <span class="hljs-keyword">import</span> Pipeline
 <span class="hljs-keyword">from</span> haystack.components.embedders <span class="hljs-keyword">import</span> OpenAIDocumentEmbedder, OpenAITextEmbedder
 <span class="hljs-keyword">from</span> haystack.components.writers <span class="hljs-keyword">import</span> DocumentWriter
@@ -99,7 +114,22 @@ documents = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">인덱싱 파이프라인 만들기</h3><p>전체 텍스트 검색을 위해 Milvus MilvusDocumentStore는 <code translate="no">builtin_function</code> 매개변수를 허용합니다. 이 매개변수를 통해 Milvus 서버 측에서 BM25 알고리즘을 구현하는 <code translate="no">BM25BuiltInFunction</code> 의 인스턴스를 전달할 수 있습니다. 지정된 <code translate="no">builtin_function</code> 을 BM25 함수 인스턴스로 설정합니다. 예를 들어</p>
+    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">인덱싱 파이프라인 만들기<button data-href="#Create-the-indexing-Pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>전체 텍스트 검색을 위해 Milvus MilvusDocumentStore는 <code translate="no">builtin_function</code> 매개변수를 허용합니다. 이 매개변수를 통해 Milvus 서버 측에서 BM25 알고리즘을 구현하는 <code translate="no">BM25BuiltInFunction</code> 의 인스턴스를 전달할 수 있습니다. 지정된 <code translate="no">builtin_function</code> 을 BM25 함수 인스턴스로 설정합니다. 예를 들어</p>
 <pre><code translate="no" class="language-python">connection_args = {<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>}
 <span class="hljs-comment"># connection_args = {&quot;uri&quot;: YOUR_ZILLIZ_CLOUD_URI, &quot;token&quot;: Secret.from_env_var(&quot;ZILLIZ_CLOUD_API_KEY&quot;)}</span>
 
@@ -131,7 +161,22 @@ indexing_pipeline.run({<span class="hljs-string">&quot;writer&quot;</span>: {<sp
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'writer': {'documents_written': 3}}
 </code></pre>
-<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">검색 파이프라인 생성</h3><p><code translate="no">document_store</code> 을 감싸는 래퍼인 <code translate="no">MilvusSparseEmbeddingRetriever</code> 을 사용하여 Milvus 문서 저장소에서 문서를 검색하는 검색 파이프라인을 생성합니다.</p>
+<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">검색 파이프라인 생성<button data-href="#Create-the-retrieval-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">document_store</code> 을 감싸는 래퍼인 <code translate="no">MilvusSparseEmbeddingRetriever</code> 을 사용하여 Milvus 문서 저장소에서 문서를 검색하는 검색 파이프라인을 생성합니다.</p>
 <pre><code translate="no" class="language-python">retrieval_pipeline = Pipeline()
 retrieval_pipeline.add_component(
     <span class="hljs-string">&quot;retriever&quot;</span>, MilvusSparseEmbeddingRetriever(document_store=document_store)
@@ -160,7 +205,22 @@ retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">색인 파이프라인 생성</h3><p>하이브리드 검색에서는 BM25 함수를 사용하여 전체 텍스트 검색을 수행하고, 밀도 벡터 필드 <code translate="no">vector</code> 를 지정하여 시맨틱 검색을 수행합니다.</p>
+    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">색인 파이프라인 생성<button data-href="#Create-the-indexing-Pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>하이브리드 검색에서는 BM25 함수를 사용하여 전체 텍스트 검색을 수행하고, 밀도 벡터 필드 <code translate="no">vector</code> 를 지정하여 시맨틱 검색을 수행합니다.</p>
 <pre><code translate="no" class="language-python">document_store = MilvusDocumentStore(
     connection_args=connection_args,
     vector_field=<span class="hljs-string">&quot;vector&quot;</span>,  <span class="hljs-comment"># The dense vector field.</span>
@@ -192,7 +252,22 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
 
 Number of documents: 3
 </code></pre>
-<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">검색 파이프라인 만들기</h3><p><code translate="no">document_store</code> 을 포함하고 하이브리드 검색에 대한 매개변수를 수신하는 <code translate="no">MilvusHybridRetriever</code> 을 사용하여 Milvus 문서 저장소에서 문서를 검색하는 검색 파이프라인을 만듭니다.</p>
+<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">검색 파이프라인 만들기<button data-href="#Create-the-retrieval-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">document_store</code> 을 포함하고 하이브리드 검색에 대한 매개변수를 수신하는 <code translate="no">MilvusHybridRetriever</code> 을 사용하여 Milvus 문서 저장소에서 문서를 검색하는 검색 파이프라인을 만듭니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from pymilvus import WeightedRanker</span>
 retrieval_pipeline = Pipeline()
 retrieval_pipeline.add_component(<span class="hljs-string">&quot;dense_text_embedder&quot;</span>, OpenAITextEmbedder())
@@ -244,7 +319,7 @@ retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>분석기는 문장을 토큰으로 나누고 어간 및 중지 단어 제거와 같은 어휘 분석을 수행하여 전체 텍스트 검색에 필수적입니다. 분석기는 일반적으로 언어별로 다릅니다. <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">이 가이드를</a> 참조하여 Milvus의 분석기에 대해 자세히 알아볼 수 있습니다.</p>
+    </button></h2><p>분석기는 문장을 토큰으로 나누고 어간 및 중지 단어 제거와 같은 어휘 분석을 수행하여 전체 텍스트 검색에 필수적입니다. 분석기는 일반적으로 언어별로 다릅니다. <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">이 가이드를</a> 참조하여 Milvus의 분석기에 대해 자세히 알아보세요.</p>
 <p>Milvus는 두 가지 유형의 분석기를 지원합니다: <strong>기본 제공 분석</strong> 기와 <strong>사용자 지정 분석기입니다</strong>. 기본적으로 <code translate="no">BM25BuiltInFunction</code> 에서는 구두점으로 텍스트를 토큰화하는 가장 기본적인 분석기인 <a href="https://milvus.io/docs/standard-analyzer.md">표준 내장 분석기를</a> 사용합니다.</p>
 <p>다른 분석기를 사용하거나 분석기를 사용자 정의하려면 <code translate="no">BM25BuiltInFunction</code> 초기화에서 <code translate="no">analyzer_params</code> 매개 변수를 전달하면 됩니다.</p>
 <pre><code translate="no" class="language-python">analyzer_params_custom = {
@@ -321,7 +396,7 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
 </p>
 <p>이 다이어그램은 키워드 매칭을 위한 BM25와 시맨틱 검색을 위한 고밀도 벡터 검색을 결합한 하이브리드 검색 및 재랭크 프로세스를 보여줍니다. 두 방법의 결과가 병합되고 순위가 재조정된 후 LLM으로 전달되어 최종 답변을 생성합니다.</p>
 <p>하이브리드 검색은 정확도와 의미론적 이해의 균형을 유지하여 다양한 쿼리에 대한 정확도와 견고성을 향상시킵니다. BM25 전체 텍스트 검색과 벡터 검색으로 후보를 검색하여 의미론적, 문맥 인식, 정확한 검색을 모두 보장합니다.</p>
-<p>하이브리드 검색을 통해 최적화된 RAG 구현을 시도해 보겠습니다.</p>
+<p>하이브리드 검색으로 최적화된 RAG 구현을 시도해 보겠습니다.</p>
 <pre><code translate="no" class="language-python">prompt_template = <span class="hljs-string">&quot;&quot;&quot;Answer the following query based on the provided context. If the context does
                      not include an answer, reply with &#x27;I don&#x27;t know&#x27;.\n
                      Query: {{query}}

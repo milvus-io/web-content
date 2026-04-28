@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>El <strong>Servicio</strong> de Streaming es un concepto para el módulo del sistema de streaming interno de Milvus, construido alrededor del Registro de Escritura en Cabecera (WAL) para soportar varias funciones relacionadas con el streaming. Entre ellas se incluyen la ingesta/suscripción de datos de streaming, la recuperación ante fallos del estado del clúster, la conversión de datos de streaming en datos históricos y las consultas de datos crecientes. Desde el punto de vista arquitectónico, el servicio de streaming consta de tres componentes principales:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/streaming_distributed_arch.png" alt="Streaming Distributed Arc" class="doc-image" id="streaming-distributed-arc" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/streaming_distributed_arch.png" alt="Streaming Distributed Arc" class="doc-image" id="streaming-distributed-arc" />
    </span> <span class="img-wrapper"> <span>Arco distribuido de streaming</span> </span></p>
 <ul>
 <li><p><strong>Coordinador de Streaming</strong>: Un componente lógico en el nodo coordinador. Utiliza Etcd para el descubrimiento de servicios con el fin de localizar los nodos de streaming disponibles y se encarga de vincular la WAL a los nodos de streaming correspondientes. También registra el servicio para exponer la topología de distribución de WAL, permitiendo a los clientes de streaming conocer el nodo de streaming apropiado para un WAL dado.</p></li>
@@ -54,7 +54,7 @@ summary: >-
 <p>El orden de los mensajes en Milvus puede parecerse al siguiente:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/message_order.png" alt="Message Order" class="doc-image" id="message-order" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/message_order.png" alt="Message Order" class="doc-image" id="message-order" />
    </span> <span class="img-wrapper"> <span>Orden de mensajes</span> </span></p>
 <h2 id="WAL-Component" class="common-anchor-header">Componente WAL<button data-href="#WAL-Component" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -102,7 +102,7 @@ summary: >-
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/recovery_storage.png" alt="Recovery Storage" class="doc-image" id="recovery-storage" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/recovery_storage.png" alt="Recovery Storage" class="doc-image" id="recovery-storage" />
    </span> <span class="img-wrapper"> <span>Almacenamiento de recuperación</span> </span></p>
 <h2 id="Query-Delegator" class="common-anchor-header">Delegador de consultas<button data-href="#Query-Delegator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -140,7 +140,7 @@ summary: >-
     </button></h2><p>Al separar los nodos de computación del almacenamiento, Milvus puede transferir fácilmente WAL de un nodo de streaming a otro, consiguiendo una alta disponibilidad en el servicio de streaming.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/wal_lifetime.png" alt="wal lifetime" class="doc-image" id="wal-lifetime" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/wal_lifetime.png" alt="wal lifetime" class="doc-image" id="wal-lifetime" />
    </span> <span class="img-wrapper"> <span>Tiempo de vida de la WAL</span> </span></p>
 <h2 id="Wait-for-Ready" class="common-anchor-header">Espera de disponibilidad<button data-href="#Wait-for-Ready" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -160,5 +160,5 @@ summary: >-
     </button></h2><p>Cuando la WAL va a trasladarse a un nuevo nodo de streaming, el cliente se encontrará con que el antiguo nodo de streaming rechaza algunas peticiones. Mientras tanto, la WAL será recuperada en el nuevo nodo de streaming, el cliente esperará a que la wal en el nuevo nodo de streaming esté lista para servir.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/streaming_wait_for_ready.png" alt="wait for ready" class="doc-image" id="wait-for-ready" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/streaming_wait_for_ready.png" alt="wait for ready" class="doc-image" id="wait-for-ready" />
    </span> <span class="img-wrapper"> <span>esperar a que esté listo</span> </span></p>

@@ -73,7 +73,7 @@ MILVUS_PORT = <span class="hljs-string">&#x27;19530&#x27;</span>
 COHERE_API_KEY = <span class="hljs-string">&#x27;replace-this-with-the-cohere-api-key&#x27;</span>  <span class="hljs-comment"># API key obtained from Cohere</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Pour en savoir plus sur le modèle et l'ensemble de données utilisés sur cette page, reportez-vous à <a href="https://cohere.ai/">co:here</a> et <a href="https://rajpurkar.github.io/SQuAD-explorer/">SQuAD</a>.</p>
-<h2 id="Prepare-the-dataset" class="common-anchor-header">Préparer le jeu de données<button data-href="#Prepare-the-dataset" class="anchor-icon" translate="no">
+<h2 id="Prepare-the-dataset" class="common-anchor-header">Préparer l'ensemble de données<button data-href="#Prepare-the-dataset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

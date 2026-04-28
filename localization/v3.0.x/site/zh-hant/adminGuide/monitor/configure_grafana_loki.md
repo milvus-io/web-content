@@ -338,7 +338,7 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
    </span> <span class="img-wrapper"> <span>資料來源</span> </span></p>
 <h3 id="3-Query-Milvus-Logs" class="common-anchor-header">3.查詢 Milvus 日誌<button data-href="#3-Query-Milvus-Logs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -363,5 +363,5 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvuslog.jpg" alt="Query" class="doc-image" id="query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvuslog.jpg" alt="Query" class="doc-image" id="query" />
    </span> <span class="img-wrapper"> <span>查詢</span> </span></p>

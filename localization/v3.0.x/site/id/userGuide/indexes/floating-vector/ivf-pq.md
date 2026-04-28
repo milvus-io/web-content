@@ -59,7 +59,7 @@ summary: >-
 <p>Berikut cara kerjanya:</p>
 <ol>
 <li><p><strong>Pengelompokan:</strong> Kumpulan data vektor Anda dibagi ke dalam sejumlah klaster tertentu, menggunakan algoritme pengelompokan seperti k-means. Setiap klaster memiliki centroid (vektor representatif untuk klaster).</p></li>
-<li><p><strong>Penugasan:</strong> Setiap vektor ditugaskan ke klaster yang memiliki centroid paling dekat dengannya.</p></li>
+<li><p><strong>Penugasan:</strong> Setiap vektor ditugaskan ke klaster yang memiliki centroid yang paling dekat dengannya.</p></li>
 <li><p><strong>Indeks Terbalik:</strong> Sebuah indeks dibuat, memetakan setiap centroid klaster ke daftar vektor yang ditugaskan ke klaster tersebut.</p></li>
 <li><p><strong>Pencarian:</strong> Saat Anda mencari tetangga terdekat, algoritme pencarian membandingkan vektor kueri Anda dengan centroid klaster dan memilih klaster yang paling menjanjikan. Pencarian kemudian dipersempit menjadi vektor dalam klaster yang dipilih.</p></li>
 </ol>

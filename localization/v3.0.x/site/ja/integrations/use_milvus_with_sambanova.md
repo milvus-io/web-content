@@ -21,8 +21,8 @@ title: SambaNovaでMilvusを使う
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://sambanova.ai/">SambaNovaは</a>、高度なAIとディープラーニング機能の展開を加速する革新的なAIテクノロジープラットフォームです。SambaNovaは企業向けに設計されており、生成的AIを活用してパフォーマンスと効率を向上させることができます。SambaNova SuiteやDataScaleのような最先端のソリューションを提供することで、このプラットフォームは企業がデータから価値ある洞察を引き出すことを可能にし、業務改善を促進し、AIの展望における新たな機会を育成します。</p>
-<p><a href="https://github.com/sambanova/ai-starter-kit">SambaNova AIスターターキットは</a>、開発者や企業がSambaNovaでAI駆動型アプリケーションを展開するのを支援するために設計されたオープンソースリソースのコレクションです。これらのキットは、様々なAIユースケースの実装を容易にする実践的な例やガイドを提供し、ユーザーがSambaNovaの先進技術を活用することを容易にします。</p>
+    </button></h1><p><a href="https://sambanova.ai/">SambaNovaは</a>、高度なAIとディープラーニング機能の展開を加速する革新的なAIテクノロジープラットフォームです。SambaNovaは企業向けに設計されており、生成的なAIを活用してパフォーマンスと効率を向上させることができます。SambaNova SuiteやDataScaleのような最先端のソリューションを提供することで、このプラットフォームは、企業がデータから価値ある洞察を引き出すことを可能にし、業務改善を促進し、AIの展望における新たな機会を育成します。</p>
+<p><a href="https://github.com/sambanova/ai-starter-kit">SambaNova AIスターターキットは</a>、開発者や企業がSambaNovaでAI駆動型アプリケーションを展開するのを支援するために設計されたオープンソースリソースのコレクションです。これらのキットは、様々なAIユースケースの実装を容易にする実践的な例やガイドを提供し、ユーザーがSambaNovaの高度なテクノロジーを活用することを容易にします。</p>
 <p>このチュートリアルではSambaNova AIスターターキットのMilvusインテグレーションを活用し、RAG(Retrieval-Augmented Generation)に似たエンタープライズ知識検索システムを構築し、企業のプライベートドキュメントに基づいた検索と回答を行います。</p>
 <div class="alert note">
 <p>このチュートリアルは主に<a href="https://github.com/sambanova/ai-starter-kit/tree/main">SambaNova AI Starter Kitsの</a>公式ガイドを参照しています。もし、このチュートリアルに古い部分があるようでしたら、オフィシャルガイドに従うことを優先し、私たちに問題を作成してください。</p>
@@ -126,7 +126,7 @@ pip install -r requirements.txt
 <p>その後、ブラウザにユーザーインターフェースが表示される：<code translate="no">http://localhost:8501/</code></p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/sambanava_ui.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sambanava_ui.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

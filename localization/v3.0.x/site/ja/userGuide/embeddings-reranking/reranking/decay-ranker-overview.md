@@ -25,7 +25,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>昨日の記事が3年前の類似記事よりも上位に表示されるべきニュース検索</p></li>
 <li><p>車で30分かかる店よりも、5分以内の店を優先するレストラン検索。</p></li>
-<li><p>検索クエリとの類似性が多少低くても、トレンド商品を上位に表示するEコマース・プラットフォーム</p></li>
+<li><p>検索クエリとの類似度が多少低くても、トレンド商品を上位に表示するEコマース・プラットフォーム</p></li>
 </ul>
 <p>これらのシナリオはすべて、ベクトルの類似性と、時間、距離、人気などの他の数値要素とのバランスをとるという共通のニーズを共有している。</p>
 <p>Milvusのディケイランカーは、数値フィールドの値に基づいて検索順位を調整することで、このニーズに対応します。これにより、ベクトルの類似性とデータの「新鮮さ」、「近さ」、またはその他の数値的特性とのバランスをとることができ、より直感的で文脈に関連した検索体験を生み出すことができます。</p>
@@ -133,7 +133,7 @@ beta: Milvus 2.6.x
     </button></h3><p>最後に、Milvusは正規化された類似度スコアと減衰スコアを組み合わせ、最終的なランキングスコアを算出します：</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
-<p>ハイブリッド検索（複数のベクトルフィールドを組み合わせる）の場合、Milvusは検索リクエストの中から正規化類似度スコアの最大値を取ります：</p>
+<p>ハイブリッド検索（複数のベクトルフィールドを組み合わせる）の場合、Milvusは検索リクエストの中で正規化類似度スコアが最大のものを採用する：</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>例えば、ある研究論文がベクトル類似度で0.82、BM25ベースのテキスト検索で0.91のハイブリッド検索を行った場合、Milvusは減衰係数を適用する前に0.91を基本類似度スコアとして使用します。</p>
@@ -197,7 +197,7 @@ beta: Milvus 2.6.x
      <td><p>ペーパーD</p></td>
      <td><p>中-高</p></td>
      <td><p>0.76 (<code translate="no">COSINE</code>)</p></td>
-     <td><p>3週前</p></td>
+     <td><p>3週間前</p></td>
      <td><p>0.70</p></td>
      <td><p>0.53</p></td>
      <td>4</td>
@@ -253,7 +253,7 @@ beta: Milvus 2.6.x
 </table>
 <p>各ディケイ・ランカーのスコアの計算方法や具体的な衰退パターンに関する詳細情報は、専用のドキュメントを参照してください：</p>
 <ul>
-<li><p><a href="/docs/ja/gaussian-decay.md">ガウス減衰</a></p></li>
+<li><p><a href="/docs/ja/gaussian-decay.md">ガウス崩壊</a></p></li>
 <li><p><a href="/docs/ja/exponential-decay.md">指数関数的減衰</a></p></li>
 <li><p><a href="/docs/ja/linear-decay.md">線形減衰</a></p></li>
 </ul>
@@ -386,7 +386,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>はい</p></td>
-     <td><p>どの数学的ディケイランカーを適用するかを指定します。関連性低下の曲線形状を決定する。</p><p>適切な関数を選択するためのガイダ ンスについては、「<a href="/docs/ja/decay-ranker-overview.md#Choose-the-right-decay-ranker">適切なディケイランカーを選択する」</a>セクションを参照。</p></td>
+     <td><p>どの数学的ディケイランカーを適用するかを指定します。関連性低下の曲線形状を決定する。</p><p>適切な関数を選択するためのガイダ ンスについては、「<a href="/docs/ja/decay-ranker-overview.md#Choose-the-right-decay-ranker">適切なディケイランカーを選 択する</a>」のセクションを参照してください。</p></td>
      <td><p><code translate="no">"gauss"</code> <code translate="no">"exp"</code> または<code translate="no">"linear"</code></p></td>
    </tr>
    <tr>

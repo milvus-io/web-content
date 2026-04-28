@@ -451,7 +451,7 @@ relation_candidate_texts = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>In questa fase, utilizziamo il potente meccanismo di autoattenzione di LLM per filtrare e raffinare ulteriormente l'insieme di relazioni candidate. Utilizziamo una richiesta unica, incorporando la domanda e l'insieme di relazioni candidate nella richiesta, e istruiamo LLM a selezionare le relazioni potenziali che potrebbero aiutare a rispondere alla domanda. Dato che alcune domande possono essere complesse, adottiamo l'approccio della catena del pensiero, consentendo a LLM di articolare il suo processo di pensiero nella risposta. La risposta di LLM deve essere in formato json, per una comoda analisi.</p>
+    </button></h3><p>In questa fase, utilizziamo il potente meccanismo di autoattenzione di LLM per filtrare e raffinare ulteriormente l'insieme di relazioni candidate. Utilizziamo una richiesta unica, incorporando la domanda e l'insieme di relazioni candidate nella richiesta, e istruiamo LLM a selezionare le relazioni potenziali che potrebbero aiutare a rispondere alla domanda. Poiché alcune domande possono essere complesse, adottiamo l'approccio della catena del pensiero, consentendo a LLM di articolare il suo processo di pensiero nella risposta. La risposta di LLM deve essere in formato json, per una comoda analisi.</p>
 <pre><code translate="no" class="language-python">query_prompt_one_shot_input = <span class="hljs-string">&quot;&quot;&quot;I will provide you with a list of relationship descriptions. Your task is to select 3 relationships that may be useful to answer the given question. Please return a JSON object containing your thought process and a list of the selected relationships in order of their relevance.
 
 Question:
@@ -549,7 +549,7 @@ final_passage_ids = []
             final_passages.append(passages[passage_id])
 passages_from_our_method = final_passages[:final_top_k]
 <button class="copy-code-btn"></button></code></pre>
-<p>Possiamo confrontare i risultati con il metodo RAG ingenuo, che recupera i passaggi topK basati sulla query embedding direttamente dalla collezione di passaggi.</p>
+<p>Possiamo confrontare i risultati con il metodo RAG ingenuo, che recupera i passaggi topK basati sull'incorporazione della query direttamente dalla raccolta di passaggi.</p>
 <pre><code translate="no" class="language-python">naive_passage_res = milvus_client.search(
     collection_name=passage_col_name,
     data=[query_embedding],

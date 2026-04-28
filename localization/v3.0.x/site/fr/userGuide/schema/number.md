@@ -266,7 +266,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>L'indexation permet d'améliorer les performances de recherche et de requête. Dans Milvus, l'indexation est obligatoire pour les champs vectoriels mais facultative pour les champs scalaires.</p>
-<p>L'exemple suivant crée des index sur le champ vectoriel <code translate="no">embedding</code> et le champ scalaire <code translate="no">age</code>, tous deux utilisant le type d'index <code translate="no">AUTOINDEX</code>. Avec ce type, Milvus sélectionne automatiquement l'index le plus approprié en fonction du type de données. Vous pouvez également personnaliser le type d'index et les paramètres pour chaque champ. Pour plus de détails, voir <a href="/docs/fr/index-explained.md">Index expliqué</a>.</p>
+<p>L'exemple suivant crée des index sur le champ vectoriel <code translate="no">embedding</code> et le champ scalaire <code translate="no">age</code>, tous deux utilisant le type d'index <code translate="no">AUTOINDEX</code>. Avec ce type, Milvus sélectionne automatiquement l'index le plus approprié en fonction du type de données. Vous pouvez également personnaliser le type d'index et les paramètres pour chaque champ. Pour plus de détails, reportez-vous à la section <a href="/docs/fr/index-explained.md">Index expliqué</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -654,7 +654,7 @@ curl --request POST \
   &quot;outputFields&quot;: [&quot;age&quot;, &quot;price&quot;, &quot;pk&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour récupérer les entités où <code translate="no">age</code> a la valeur <code translate="no">18</code>, utilisez l'expression suivante. La valeur par défaut de <code translate="no">age</code> étant <code translate="no">18</code>, le résultat attendu devrait inclure les entités dont <code translate="no">age</code> est explicitement défini à <code translate="no">18</code> ou dont <code translate="no">age</code> est défini à null.</p>
+<p>Pour récupérer les entités où <code translate="no">age</code> a la valeur <code translate="no">18</code>, utilisez l'expression suivante. Comme la valeur par défaut de <code translate="no">age</code> est <code translate="no">18</code>, le résultat attendu devrait inclure les entités dont <code translate="no">age</code> est explicitement défini à <code translate="no">18</code> ou dont <code translate="no">age</code> est défini à null.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age == 18&#x27;</span>

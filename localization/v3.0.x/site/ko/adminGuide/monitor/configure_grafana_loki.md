@@ -43,7 +43,7 @@ summary: 이 항목에서는 Loki를 사용하여 로그를 수집하고 Grafana
       </svg>
     </button></h2><ul>
 <li><a href="/docs/ko/install_cluster-helm.md">K8에 Milvus 클러스터를 설치했습니다</a>.</li>
-<li><a href="https://helm.sh/docs/intro/install/">Helm과</a> <a href="https://kubernetes.io/docs/tasks/tools/">Kubectl을</a> 포함한 필요한 도구를 설치했습니다.</li>
+<li><a href="https://helm.sh/docs/intro/install/">Helm과</a> <a href="https://kubernetes.io/docs/tasks/tools/">Kubectl을</a> 비롯한 필요한 도구를 설치했습니다.</li>
 </ul>
 <h2 id="Deploy-Loki" class="common-anchor-header">Loki 배포<button data-href="#Deploy-Loki" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,7 +80,7 @@ summary: 이 항목에서는 Loki를 사용하여 로그를 수집하고 Grafana
 <pre><code translate="no">helm repo <span class="hljs-keyword">add</span> grafana https:<span class="hljs-comment">//grafana.github.io/helm-charts</span>
 helm repo update
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Configure-Object-Storage-for-Loki" class="common-anchor-header">2. 로키용 오브젝트 스토리지 구성<button data-href="#2-Configure-Object-Storage-for-Loki" class="anchor-icon" translate="no">
+<h3 id="2-Configure-Object-Storage-for-Loki" class="common-anchor-header">2. 로키를 위한 오브젝트 스토리지 구성<button data-href="#2-Configure-Object-Storage-for-Loki" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -338,7 +338,7 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
    </span> <span class="img-wrapper"> <span>데이터 소스</span> </span></p>
 <h3 id="3-Query-Milvus-Logs" class="common-anchor-header">3. Milvus 로그 쿼리<button data-href="#3-Query-Milvus-Logs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -363,5 +363,5 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvuslog.jpg" alt="Query" class="doc-image" id="query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvuslog.jpg" alt="Query" class="doc-image" id="query" />
    </span> <span class="img-wrapper"> <span>쿼리</span> </span></p>

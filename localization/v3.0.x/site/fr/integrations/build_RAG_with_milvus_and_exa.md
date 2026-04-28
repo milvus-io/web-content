@@ -29,7 +29,7 @@ title: Construire un agent RAG à double source avec Exa et Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Ce tutoriel montre comment construire un agent qui recherche à la fois sur <strong>le web public</strong> (via <a href="https://exa.ai/">Exa</a>) et dans <strong>une base de connaissances privée</strong> (via <a href="https://milvus.io/">Milvus</a>), puis synthétise une réponse unifiée. L'agent utilise les appels de fonction d'OpenAI pour décider automatiquement quelle source interroger en fonction de la question de l'utilisateur.</p>
+    </button></h1><p>Ce tutoriel montre comment construire un agent qui recherche à la fois sur <strong>le web public</strong> (via <a href="https://exa.ai/">Exa</a>) et dans <strong>une base de connaissances privée</strong> (via <a href="https://milvus.io/">Milvus</a>), puis synthétise une réponse unifiée. L'agent utilise l'appel de fonction d'OpenAI pour décider automatiquement quelle source interroger en fonction de la question de l'utilisateur.</p>
 <p><a href="https://exa.ai/">Exa</a> est une API de recherche conçue pour les applications d'IA, qui est fièrement alimentée par <a href="https://zilliz.com/cloud">Zilliz Cloud</a> (Milvus entièrement géré). Contrairement aux moteurs de recherche traditionnels basés sur des mots-clés, Exa prend en charge la recherche sémantique (neuronale) - vous décrivez ce que vous voulez en langage naturel et il comprend votre intention. Il permet également l'extraction de contenu, la mise en évidence et le filtrage par catégorie. <a href="https://milvus.io/">Milvus</a> est une base de données vectorielle open-source conçue pour une recherche de similarité évolutive. En les combinant avec un agent LLM, vous pouvez construire un système qui récupère à la fois des données propriétaires internes et des informations web actualisées dans un flux de travail unique.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,7 +73,7 @@ os.environ[&quot;OPENAI_API_KEY&quot;] = &quot;sk-***********&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Configurez les clients Exa, OpenAI et Milvus. Nous utilisons le modèle <code translate="no">text-embedding-3-small</code> d'OpenAI pour générer des embeddings vectoriels, et Milvus Lite pour le stockage local de vecteurs avec une infrastructure nulle.</p>
+    </button></h2><p>Configurez les clients Exa, OpenAI et Milvus. Nous utilisons le modèle <code translate="no">text-embedding-3-small</code> d'OpenAI pour générer des embeddings vectoriels, et Milvus Lite pour le stockage local des vecteurs avec une infrastructure nulle.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -678,7 +678,7 @@ In conclusion, Widget Pro appears to offer high throughput suitable for enterpri
       </svg>
     </button></h2><p>Dans ce tutoriel, nous avons construit un agent RAG à double source qui combine Milvus pour la recherche de connaissances privées et Exa pour la recherche publique sur le web. Les composants clés sont les suivants :</p>
 <ul>
-<li><strong>Milvus</strong> stocke et récupère les documents internes par le biais d'une recherche de similarité vectorielle, garantissant que les données propriétaires restent privées et consultables.</li>
+<li><strong>Milvus</strong> stocke et récupère des documents internes via une recherche de similarité vectorielle, garantissant que les données propriétaires restent privées et consultables.</li>
 <li><strong>Exa</strong> assure la recherche sémantique sur le web avec des fonctions telles que le filtrage par catégorie, l'extraction de contenu et la découverte d'articles similaires.</li>
 <li>L'<strong>appel de fonctions OpenAI</strong> permet au LLM d'acheminer automatiquement les requêtes vers la bonne source - ou les deux - en fonction de l'intention de la question.</li>
 </ul>

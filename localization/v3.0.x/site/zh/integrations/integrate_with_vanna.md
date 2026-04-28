@@ -199,7 +199,7 @@ Adding ddl: CREATE TABLE User (
     Email TEXT NOT NULL UNIQUE
 )
 </code></pre>
-<p>除了对 DDL 数据进行训练外，我们还可以对数据库的文档和 SQL 查询进行训练。</p>
+<p>除了对 DDL 数据进行训练，我们还可以对数据库的文档和 SQL 查询进行训练。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add documentation about your business terminology or definitions.</span>
 vn_milvus.train(
     documentation=<span class="hljs-string">&quot;ABC Corp specializes in cutting-edge technology solutions and innovation.&quot;</span>

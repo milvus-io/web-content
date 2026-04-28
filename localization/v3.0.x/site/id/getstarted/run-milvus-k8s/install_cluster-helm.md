@@ -360,7 +360,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
     </button></h3><p>Jalankan perintah berikut untuk mendapatkan manifes Milvus.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm template my-release zilliztech/milvus &gt; milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Perintah di atas membuat templat bagan untuk klaster Milvus dan menyimpan hasilnya ke berkas manifes bernama <code translate="no">milvus_manifest.yaml</code>. Dengan menggunakan manifes ini, Anda dapat menginstal klaster Milvus dengan komponen dan dependensinya dalam pod yang terpisah.</p>
+<p>Perintah di atas membuat templat bagan untuk klaster Milvus dan menyimpan hasilnya ke berkas manifes bernama <code translate="no">milvus_manifest.yaml</code>. Dengan menggunakan manifes ini, Anda dapat menginstal cluster Milvus dengan komponen dan dependensinya dalam pod yang terpisah.</p>
 <div class="alert note">
 <ul>
 <li>Untuk menginstal instans Milvus dalam mode mandiri di mana semua komponen Milvus berada dalam satu pod, Anda harus menjalankan <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> sebagai gantinya untuk merender templat bagan untuk instans Milvus dalam mode mandiri.</li>

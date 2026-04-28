@@ -1324,7 +1324,7 @@ summary: 了解如何为 Milvus 配置 queryCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        queryCoord 客户端可接收的每个 RPC 请求的最大大小，单位：字节      </td>
+      <td>        queryCoord 上的客户端可以接收的每个 RPC 请求的最大大小，单位：字节      </td>
       <td>536870912</td>
     </tr>
   </tbody>

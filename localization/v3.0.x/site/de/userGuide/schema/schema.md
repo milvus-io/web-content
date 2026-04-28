@@ -43,9 +43,9 @@ summary: >-
 <p>Ein Sammlungsschema hat einen Primärschlüssel, maximal vier Vektorfelder und mehrere skalare Felder. Das folgende Diagramm veranschaulicht, wie ein Artikel einer Liste von Schemafeldern zugeordnet werden kann.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
    </span> <span class="img-wrapper"> <span>Schema-Entwurf</span> </span></p>
-<p>Der Entwurf des Datenmodells eines Suchsystems umfasst die Analyse der Geschäftsanforderungen und die Abstraktion der Informationen in ein schemaexprimiertes Datenmodell. So muss beispielsweise die Suche nach einem Textstück "indiziert" werden, indem die wörtliche Zeichenkette durch "Einbettung" in einen Vektor umgewandelt wird und eine Vektorsuche ermöglicht wird. Neben dieser grundlegenden Anforderung kann die Speicherung weiterer Eigenschaften wie Zeitstempel der Veröffentlichung und Autor erforderlich sein. Mit diesen Metadaten kann die semantische Suche durch Filterung verfeinert werden, so dass nur Texte gefunden werden, die nach einem bestimmten Datum oder von einem bestimmten Autor veröffentlicht wurden. Sie können diese Skalare auch mit dem Haupttext abrufen, um das Suchergebnis in der Anwendung darzustellen. Jedem Element sollte ein eindeutiger Bezeichner zugewiesen werden, um diese Textstücke zu organisieren, ausgedrückt als Ganzzahl oder String. Diese Elemente sind für eine ausgefeilte Suchlogik unerlässlich.</p>
+<p>Der Entwurf des Datenmodells eines Suchsystems umfasst die Analyse der Geschäftsanforderungen und die Abstraktion der Informationen in ein schemaexprimiertes Datenmodell. So muss beispielsweise die Suche nach einem Textstück "indiziert" werden, indem die wörtliche Zeichenkette durch "Einbettung" in einen Vektor umgewandelt wird und eine Vektorsuche ermöglicht wird. Neben dieser grundlegenden Anforderung kann die Speicherung weiterer Eigenschaften wie Zeitstempel der Veröffentlichung und Autor erforderlich sein. Mit diesen Metadaten kann die semantische Suche durch Filterung verfeinert werden, so dass nur Texte gefunden werden, die nach einem bestimmten Datum oder von einem bestimmten Autor veröffentlicht wurden. Sie können diese Skalare auch mit dem Haupttext abrufen, um das Suchergebnis in der Anwendung darzustellen. Jedem Element sollte ein eindeutiger Bezeichner zugewiesen werden, um diese Textstücke zu organisieren, ausgedrückt als Ganzzahl oder String. Diese Elemente sind unerlässlich, um eine ausgefeilte Suchlogik zu erreichen.</p>
 <p>Lesen Sie <a href="/docs/de/schema-hands-on.md">Schema Design Hands-On</a>, um herauszufinden, wie Sie ein gut gestaltetes Schema erstellen.</p>
 <h2 id="Create-Schema​" class="common-anchor-header">Schema erstellen<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -230,7 +230,22 @@ export schema=&quot;{​
         ></path>
       </svg>
     </button></h2><p>In häufigen Fällen können Sie skalare Felder verwenden, um die Metadaten der in Milvus gespeicherten Vektoreinbettungen zu speichern und ANN-Suchen mit Metadatenfilterung durchzuführen, um die Korrektheit der Suchergebnisse zu verbessern. Milvus unterstützt mehrere skalare Feldtypen, einschließlich <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, Float, <strong>Double</strong>, <strong>Array</strong> und JSON.</p>
-<h3 id="Add-String-Fields​" class="common-anchor-header">String-Felder hinzufügen</h3><p>In Milvus können Sie VarChar-Felder verwenden, um Zeichenketten zu speichern. Weitere Informationen über das VarChar-Feld finden Sie unter <a href="/docs/de/string.md">String-Feld</a>.</p>
+<h3 id="Add-String-Fields​" class="common-anchor-header">String-Felder hinzufügen<button data-href="#Add-String-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In Milvus können Sie VarChar-Felder verwenden, um Zeichenketten zu speichern. Weitere Informationen über das VarChar-Feld finden Sie unter <a href="/docs/de/string.md">String-Feld</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -272,7 +287,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Number-Fields​" class="common-anchor-header">Zahlenfelder hinzufügen</h3><p>Die von Milvus unterstützten Zahlentypen sind <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, und <code translate="no">Double</code>. Weitere Informationen zu den Zahlenfeldern finden Sie unter <a href="/docs/de/number.md">Zahlenfeld</a>.</p>
+<h3 id="Add-Number-Fields​" class="common-anchor-header">Zahlenfelder hinzufügen<button data-href="#Add-Number-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Die von Milvus unterstützten Zahlentypen sind <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, und <code translate="no">Double</code>. Weitere Informationen zu den Zahlenfeldern finden Sie unter <a href="/docs/de/number.md">Zahlenfeld</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -309,7 +339,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Boolean-Fields​" class="common-anchor-header">Boolesche Felder hinzufügen</h3><p>Milvus unterstützt boolesche Felder. Die folgenden Codeschnipsel zeigen, wie man ein boolesches Feld hinzufügt.</p>
+<h3 id="Add-Boolean-Fields​" class="common-anchor-header">Boolesche Felder hinzufügen<button data-href="#Add-Boolean-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus unterstützt boolesche Felder. Die folgenden Codeschnipsel zeigen, wie man ein boolesches Feld hinzufügt.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -347,7 +392,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-JSON-fields​" class="common-anchor-header">JSON-Felder hinzufügen</h3><p>Ein JSON-Feld speichert in der Regel halb-strukturierte JSON-Daten. Weitere Informationen zu JSON-Feldern finden Sie unter <a href="/docs/de/use-json-fields.md">JSON-Feld</a>.</p>
+<h3 id="Add-JSON-fields​" class="common-anchor-header">JSON-Felder hinzufügen<button data-href="#Add-JSON-fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ein JSON-Feld speichert in der Regel halb-strukturierte JSON-Daten. Weitere Informationen zu JSON-Feldern finden Sie unter <a href="/docs/de/use-json-fields.md">JSON-Feld</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -386,7 +446,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Array-Fields​" class="common-anchor-header">Array-Felder hinzufügen</h3><p>Ein Array-Feld speichert eine Liste von Elementen. Die Datentypen aller Elemente in einem Array-Feld sollten gleich sein. Weitere Informationen zu Array-Feldern finden Sie unter <a href="/docs/de/array_data_type.md">Array-Feld</a>.</p>
+<h3 id="Add-Array-Fields​" class="common-anchor-header">Array-Felder hinzufügen<button data-href="#Add-Array-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ein Array-Feld speichert eine Liste von Elementen. Die Datentypen aller Elemente in einem Array-Feld sollten gleich sein. Weitere Informationen zu Array-Feldern finden Sie unter <a href="/docs/de/array_data_type.md">Array-Feld</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​

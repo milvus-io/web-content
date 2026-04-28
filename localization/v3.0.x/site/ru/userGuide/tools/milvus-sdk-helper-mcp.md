@@ -59,11 +59,11 @@ summary: '⚡️ Настройте один раз, повысьте эффек
      <th><p>MCP-помощник кода <strong>отключен</strong></p></th>
    </tr>
    <tr>
-     <td><p><img translate="no" width="400" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
-     <td><p><img translate="no" width="400"src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
+     <td><p><img translate="no" width="400" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
+     <td><p><img translate="no" width="400"src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
    </tr>
    <tr>
-     <td><p>Использование официально рекомендованного новейшего интерфейса MilvusClient для создания коллекции</p></td>
+     <td><p>Использование официально рекомендованного последнего интерфейса MilvusClient для создания коллекции</p></td>
      <td><p>Создание коллекции с помощью старого интерфейса ORM не рекомендуется.</p></td>
    </tr>
 </table>
@@ -101,7 +101,7 @@ summary: '⚡️ Настройте один раз, повысьте эффек
     </button></h2><p>Перейдите на: <code translate="no">Settings</code> -&gt; <code translate="no">Cursor Settings</code> -&gt; <code translate="no">Tools &amp; Intergrations</code> -&gt; <code translate="no">Add new global MCP server</code></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cursor-mcp-settings.png" alt="Cursor Mcp Settings" class="doc-image" id="cursor-mcp-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cursor-mcp-settings.png" alt="Cursor Mcp Settings" class="doc-image" id="cursor-mcp-settings" />
    </span> <span class="img-wrapper"> <span>Настройки Cursor Mcp</span> </span></p>
 <p>Рекомендуется вставить следующую конфигурацию в файл Cursor <code translate="no">~/.cursor/mcp.json</code>. Вы также можете установить конкретный проект, создав <code translate="no">.cursor/mcp.json</code> в папке проекта. Более подробная информация приведена в <a href="https://docs.cursor.com/context/model-context-protocol">документации по Cursor MCP</a>.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
@@ -248,7 +248,7 @@ summary: '⚡️ Настройте один раз, повысьте эффек
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cherry-studio-mcp-settings.png" alt="Cherry Studio Mcp Settings" class="doc-image" id="cherry-studio-mcp-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cherry-studio-mcp-settings.png" alt="Cherry Studio Mcp Settings" class="doc-image" id="cherry-studio-mcp-settings" />
    </span> <span class="img-wrapper"> <span>Настройки Cherry Studio Mcp</span> </span></p>
 <h2 id="Cline" class="common-anchor-header">Cline<button data-href="#Cline" class="anchor-icon" translate="no">
       <svg translate="no"

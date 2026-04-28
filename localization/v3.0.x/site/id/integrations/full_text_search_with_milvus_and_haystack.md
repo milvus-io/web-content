@@ -63,7 +63,22 @@ title: Pencarian teks lengkap dengan Milvus dan Haystack
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-data" class="common-anchor-header">Menyiapkan data</h3><p>Impor paket-paket yang diperlukan dalam buku catatan ini. Kemudian siapkan beberapa contoh dokumen.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">Menyiapkan data<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Impor paket-paket yang diperlukan dalam buku catatan ini. Kemudian siapkan beberapa contoh dokumen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> haystack <span class="hljs-keyword">import</span> Pipeline
 <span class="hljs-keyword">from</span> haystack.components.embedders <span class="hljs-keyword">import</span> OpenAIDocumentEmbedder, OpenAITextEmbedder
 <span class="hljs-keyword">from</span> haystack.components.writers <span class="hljs-keyword">import</span> DocumentWriter
@@ -101,7 +116,22 @@ documents = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">Membuat Pipeline pengindeksan</h3><p>Untuk pencarian teks lengkap, Milvus MilvusDocumentStore menerima parameter <code translate="no">builtin_function</code>. Melalui parameter ini, Anda dapat mengoper sebuah instance dari <code translate="no">BM25BuiltInFunction</code>, yang mengimplementasikan algoritme BM25 di sisi server Milvus. Tetapkan <code translate="no">builtin_function</code> yang ditentukan sebagai instance fungsi BM25. Sebagai contoh:</p>
+    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">Membuat Pipeline pengindeksan<button data-href="#Create-the-indexing-Pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk pencarian teks lengkap, Milvus MilvusDocumentStore menerima parameter <code translate="no">builtin_function</code>. Melalui parameter ini, Anda dapat mengoper sebuah instance dari <code translate="no">BM25BuiltInFunction</code>, yang mengimplementasikan algoritme BM25 di sisi server Milvus. Tetapkan <code translate="no">builtin_function</code> yang ditentukan sebagai instance fungsi BM25. Sebagai contoh:</p>
 <pre><code translate="no" class="language-python">connection_args = {<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>}
 <span class="hljs-comment"># connection_args = {&quot;uri&quot;: YOUR_ZILLIZ_CLOUD_URI, &quot;token&quot;: Secret.from_env_var(&quot;ZILLIZ_CLOUD_API_KEY&quot;)}</span>
 
@@ -133,7 +163,22 @@ indexing_pipeline.run({<span class="hljs-string">&quot;writer&quot;</span>: {<sp
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'writer': {'documents_written': 3}}
 </code></pre>
-<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">Membuat pipeline pengambilan</h3><p>Buat pipeline pengambilan yang mengambil dokumen dari penyimpanan dokumen Milvus menggunakan <code translate="no">MilvusSparseEmbeddingRetriever</code>, yang merupakan pembungkus dari <code translate="no">document_store</code>.</p>
+<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">Membuat pipeline pengambilan<button data-href="#Create-the-retrieval-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Buat pipeline pengambilan yang mengambil dokumen dari penyimpanan dokumen Milvus menggunakan <code translate="no">MilvusSparseEmbeddingRetriever</code>, yang merupakan pembungkus dari <code translate="no">document_store</code>.</p>
 <pre><code translate="no" class="language-python">retrieval_pipeline = Pipeline()
 retrieval_pipeline.add_component(
     <span class="hljs-string">&quot;retriever&quot;</span>, MilvusSparseEmbeddingRetriever(document_store=document_store)
@@ -162,7 +207,22 @@ retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">Membuat pipeline pengindeksan</h3><p>Dalam pencarian hibrida, kami menggunakan fungsi BM25 untuk melakukan pencarian teks lengkap, dan menentukan bidang vektor padat <code translate="no">vector</code>, untuk melakukan pencarian semantik.</p>
+    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">Membuat pipeline pengindeksan<button data-href="#Create-the-indexing-Pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dalam pencarian hibrida, kami menggunakan fungsi BM25 untuk melakukan pencarian teks lengkap, dan menentukan bidang vektor padat <code translate="no">vector</code>, untuk melakukan pencarian semantik.</p>
 <pre><code translate="no" class="language-python">document_store = MilvusDocumentStore(
     connection_args=connection_args,
     vector_field=<span class="hljs-string">&quot;vector&quot;</span>,  <span class="hljs-comment"># The dense vector field.</span>
@@ -194,7 +254,22 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
 
 Number of documents: 3
 </code></pre>
-<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">Membuat pipeline pengambilan</h3><p>Buat pipeline pengambilan yang mengambil dokumen dari penyimpanan dokumen Milvus menggunakan <code translate="no">MilvusHybridRetriever</code>, yang berisi <code translate="no">document_store</code> dan menerima parameter tentang pencarian hibrida.</p>
+<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">Membuat pipeline pengambilan<button data-href="#Create-the-retrieval-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Buat pipeline pengambilan yang mengambil dokumen dari penyimpanan dokumen Milvus menggunakan <code translate="no">MilvusHybridRetriever</code>, yang berisi <code translate="no">document_store</code> dan menerima parameter tentang pencarian hibrida.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from pymilvus import WeightedRanker</span>
 retrieval_pipeline = Pipeline()
 retrieval_pipeline.add_component(<span class="hljs-string">&quot;dense_text_embedder&quot;</span>, OpenAITextEmbedder())

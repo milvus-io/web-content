@@ -2,7 +2,7 @@
 id: bitmap.md
 title: ビットマップ
 summary: >-
-  ビットマップインデックスは、カーディナリティの低いスカラーフィールドのクエリ性能を向上させるために考案された効率的なインデックス作成手法である。カーディナリティとは、フィールド内の別個の値の数を指します。別個の要素の数が少ないフィールドは、カーディナリティが低いとみなされます。
+  ビットマップインデックスは、カーディナリティの低いスカラーフィールドのクエリ性能を向上させるために考案された効率的なインデックス作成手法である。カーディナリティとは、フィールド内の別個の値の数のことです。別個の要素の数が少ないフィールドは、カーディナリティが低いとみなされます。
 ---
 <h1 id="BITMAP" class="common-anchor-header">ビットマップ<button data-href="#BITMAP" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -36,12 +36,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>ビットマップという</strong>用語は、2つの単語を組み合わせたものである：<strong>ビットと</strong> <strong>マップ</strong>です。ビットはコンピュータにおけるデータの最小単位を表し、<strong>0か</strong> <strong>1の</strong>いずれかの値しか保持できない。マップとは、この文脈では、0と1にどのような値を割り当てるべきかに従ってデータを変換し、整理するプロセスを指す。</p>
-<p>ビットマップインデックスは、ビットマップとキーという2つの主要な構成要素からなる。キーはインデックスされたフィールドの一意な値を表す。各一意な値に対して、対応するビットマップがある。これらのビットマップの長さは、コレクション内のレコード数に等しい。ビットマップの各ビットは、コレクション内のレコードに対応する。レコード内のインデックス付きフィールドの値がキーと一致する場合、対応するビットは<strong>1に</strong>セットされ、そうでない場合は<strong>0に</strong>セットされる。</p>
+    </button></h2><p><strong>ビットマップという</strong>用語は、2つの単語を組み合わせたものである：<strong>ビットと</strong> <strong>マップ</strong>です。ビットはコンピュータにおけるデータの最小単位を表し、<strong>0か</strong> <strong>1の</strong>どちらかの値しか保持できない。この文脈でのマップとは、0と1にどのような値を割り当てるべきかに従ってデータを変換し、整理するプロセスを指す。</p>
+<p>ビットマップインデックスは、ビットマップとキーという2つの主要な構成要素からなる。キーはインデックスされたフィールドの一意な値を表す。各一意な値に対して、対応するビットマップが存在する。これらのビットマップの長さは、コレクション内のレコード数に等しい。ビットマップの各ビットは、コレクション内のレコードに対応する。レコード内のインデックス付きフィールドの値がキーと一致する場合、対応するビットは<strong>1に</strong>セットされ、そうでない場合は<strong>0に</strong>セットされる。</p>
 <p><strong>Categoryと</strong> <strong>Publicの</strong>フィールドを持つドキュメントのコレクションを考える。<strong>Tech</strong>カテゴリに分類され、<strong>Publicに</strong>公開されている文書を取得したい。この場合、ビットマップインデックスのキーは<strong>Techと</strong> <strong>Publicに</strong>なります。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" />
    </span> <span class="img-wrapper"> <span>ビットマップ</span> </span></p>
 <p>図に示すように、<strong>Categoryと</strong> <strong>Publicの</strong>ビットマップインデックスは以下のようになります：</p>
 <ul>
@@ -52,7 +52,7 @@ summary: >-
 <ul>
 <li><strong>技術</strong>AND<strong>公開</strong>：[1, 0, 0, 0, 0]</li>
 </ul>
-<p>結果として得られるビットマップ[1, 0, 0, 0, 0]は、最初の文書<strong>（ID</strong> <strong>1</strong>）のみが両方の基準を満たすことを示している。ビットマップインデックスと効率的なビット演算を使うことで、検索範囲を素早く絞り込むことができ、データセット全体をスキャンする必要がなくなる。</p>
+<p>結果として得られるビットマップ[1, 0, 0, 0, 0]は、最初の文書<strong>（ID</strong> <strong>1</strong>）のみが両方の基準を満たすことを示している。ビットマップインデックスと効率的なビット演算を使うことで、検索範囲をすばやく絞り込むことができ、データセット全体をスキャンする必要がなくなる。</p>
 <h2 id="Create-a-bitmap-index" class="common-anchor-header">ビットマップインデックスの作成<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

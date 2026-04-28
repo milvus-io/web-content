@@ -23,7 +23,7 @@ title: Обзор реранкеров
       </svg>
     </button></h1><p>В сфере информационного поиска и генеративного ИИ реранкер - это важный инструмент, который оптимизирует порядок результатов первоначального поиска. Реранкеры отличаются от традиционных <a href="/docs/ru/embeddings.md">моделей встраивания</a> тем, что принимают запрос и документ в качестве входных данных и напрямую возвращают оценку сходства вместо встраивания. Этот показатель указывает на релевантность запроса и документа.</p>
 <p>Реранкеры часто используются после первого этапа поиска, обычно выполняемого с помощью векторного метода приближенных ближайших соседей (ANN). Хотя поиск с помощью ANN эффективен для получения широкого набора потенциально релевантных результатов, он не всегда определяет приоритет результатов с точки зрения фактической семантической близости к запросу. В данном случае rerankers используется для оптимизации порядка результатов с помощью более глубокого контекстного анализа, часто с использованием передовых моделей машинного обучения, таких как BERT или другие модели на основе трансформеров. Таким образом, rerankers может значительно повысить точность и релевантность конечных результатов, предоставляемых пользователю.</p>
-<p>В библиотеку моделей PyMilvus интегрированы функции ранжирования для оптимизации порядка результатов, возвращаемых при первоначальном поиске. После того как вы получили ближайшие вложения из Milvus, вы можете использовать эти инструменты ранжирования для уточнения результатов поиска, чтобы повысить точность результатов поиска.</p>
+<p>В библиотеку моделей PyMilvus интегрированы функции rerank для оптимизации порядка результатов, возвращаемых при первоначальном поиске. После того как вы получили ближайшие вложения из Milvus, вы можете использовать эти инструменты ранжирования для уточнения результатов поиска, чтобы повысить точность результатов поиска.</p>
 <table>
 <thead>
 <tr><th>Функция ранжирования</th><th>API или открытый источник</th></tr>
@@ -118,7 +118,22 @@ bge_rf(query, documents)
 <li><code translate="no">doc_vector</code>: Векторные вкрапления, представляющие документ. Руководство по созданию вкраплений см. в разделе <a href="/docs/ru/embeddings.md">"Вкрапления"</a>.</li>
 <li><code translate="no">doc_text</code>: Текстовое содержимое документа.</li>
 </ul>
-<h3 id="Preparations" class="common-anchor-header">Подготовка</h3><p>Перед началом поиска сходства необходимо установить соединение с Milvus, создать коллекцию, подготовить и вставить данные в эту коллекцию. Следующий фрагмент кода иллюстрирует эти предварительные шаги.</p>
+<h3 id="Preparations" class="common-anchor-header">Подготовка<button data-href="#Preparations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Перед началом поиска сходства необходимо установить соединение с Milvus, создать коллекцию, подготовить и вставить данные в эту коллекцию. Следующий фрагмент кода иллюстрирует эти предварительные шаги.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -152,7 +167,22 @@ client.insert(collection_name=<span class="hljs-string">&quot;test_collection&qu
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># {&#x27;insert_count&#x27;: 4, &#x27;ids&#x27;: [0, 1, 2, 3]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Conduct-a-similarity-search" class="common-anchor-header">Проведение поиска по сходству</h3><p>После вставки данных выполните поиск сходства с помощью метода <code translate="no">search</code>.</p>
+<h3 id="Conduct-a-similarity-search" class="common-anchor-header">Проведение поиска по сходству<button data-href="#Conduct-a-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>После вставки данных выполните поиск сходства с помощью метода <code translate="no">search</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># search results based on our query</span>
 
 res = client.search(
@@ -174,7 +204,22 @@ doc_text: In <span class="hljs-number">1950</span>, Alan Turing published his se
 distance: <span class="hljs-number">0.5340118408203125</span>
 doc_text: The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, <span class="hljs-keyword">and</span> Cliff Shaw <span class="hljs-keyword">in</span> <span class="hljs-number">1955</span> marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-a-reranker-to-enhance-search-results" class="common-anchor-header">Использование реранкера для улучшения результатов поиска</h3><p>Затем улучшите релевантность результатов поиска с помощью шага ранжирования. В этом примере мы используем <code translate="no">CrossEncoderRerankFunction</code>, встроенный в PyMilvus, для ранжирования результатов с целью повышения точности.</p>
+<h3 id="Use-a-reranker-to-enhance-search-results" class="common-anchor-header">Использование реранкера для улучшения результатов поиска<button data-href="#Use-a-reranker-to-enhance-search-results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Затем улучшите релевантность результатов поиска с помощью шага ранжирования. В этом примере мы используем <code translate="no">CrossEncoderRerankFunction</code>, встроенный в PyMilvus, для ранжирования результатов с целью повышения точности.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># use reranker to rerank search results</span>
 
 <span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> CrossEncoderRerankFunction

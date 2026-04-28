@@ -90,7 +90,7 @@ title: Atualização do Milvus Standalone com Helm Chart
 </ul>
 <p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.15, tem de manter a sua escolha atual de filas de mensagens. Não é possível alternar entre diferentes sistemas de filas de mensagens durante a atualização. O suporte para a mudança de sistemas de filas de mensagens estará disponível em versões futuras.</p>
 <div class="alert note">
-Desde a versão 4.2.21 da carta Milvus Helm, introduzimos a carta pulsar-v3.x como dependência. Para compatibilidade com versões anteriores, actualize o Helm para a versão v3.14 ou posterior e certifique-se de que adiciona a opção <code translate="no">--reset-then-reuse-values</code> sempre que utilizar <code translate="no">helm upgrade</code>.</div>
+Desde a versão 4.2.21 da carta Milvus Helm, introduzimos a carta pulsar-v3.x como dependência. Para garantir a compatibilidade com versões anteriores, actualize o Helm para a versão v3.14 ou posterior e certifique-se de que adiciona a opção <code translate="no">--reset-then-reuse-values</code> sempre que utilizar <code translate="no">helm upgrade</code>.</div>
 <h2 id="Upgrade-process" class="common-anchor-header">Processo de atualização<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -127,7 +127,7 @@ helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 O repositório de gráficos do Milvus Helm em <code translate="no">https://milvus-io.github.io/milvus-helm/</code> foi arquivado. Use o novo repositório <code translate="no">https://zilliztech.github.io/milvus-helm/</code> para as versões de gráficos 4.0.31 e posteriores.</div>
-<p>Para verificar a compatibilidade da versão dos gráficos do Helm com as versões do Milvus:</p>
+<p>Para verificar a compatibilidade da versão do Helm Charts com as versões do Milvus:</p>
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
 <p>Este guia pressupõe que está a instalar a versão mais recente. Se precisar de instalar uma versão específica, especifique o parâmetro <code translate="no">--version</code> em conformidade.</p>

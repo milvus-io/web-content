@@ -26,10 +26,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>全文検索では</strong>、キーワードの完全一致を使用し、多くの場合BM25のようなアルゴリズムを活用して関連性によって文書をランク付けする。<strong>検索拡張生成（RAG）</strong>システムでは、この方法はAIが生成した応答を強化するために適切なテキストを検索する。</p>
+    </button></h1><p><strong>全文検索では</strong>、キーワードの完全一致を使用し、多くの場合、BM25のようなアルゴリズムを活用して、関連性によって文書をランク付けする。<strong>検索拡張生成（RAG）</strong>システムでは、この方法はAIが生成した応答を強化するために適切なテキストを検索する。</p>
 <p>一方、<strong>セマンティック検索は</strong>文脈の意味を解釈して、より広範な結果を提供する。この2つのアプローチを組み合わせることで、情報検索を向上させる<strong>ハイブリッド検索が</strong>実現する。</p>
 <p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus2.</a>5のSparse-BM25アプローチでは、生テキストは自動的にスパースベクトルに変換されます。これにより、手作業によるスパース埋め込み生成が不要になり、意味理解とキーワードの関連性のバランスをとったハイブリッド検索戦略が可能になります。</p>
-<p>このチュートリアルでは、LlamaIndexとMilvusを使って、全文検索とハイブリッド検索を使ったRAGシステムを構築する方法を学びます。まずは全文検索を単独で実装し、次にセマンティック検索を統合してより包括的な結果を得られるように拡張していきます。</p>
+<p>このチュートリアルでは、LlamaIndexとMilvusを使って、全文検索とハイブリッド検索を使ったRAGシステムを構築する方法を学びます。まずは全文検索を単独で実装し、次にセマンティック検索を統合することでより包括的な結果を得られるように拡張していきます。</p>
 <blockquote>
 <p>このチュートリアルを進める前に、<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文検索と</a> <a href="https://milvus.io/docs/integrate_with_llamaindex.md">LlamaIndexにおけるMilvusの基本的な使い方を</a>理解しておいてください。</p>
 </blockquote>
@@ -56,7 +56,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <blockquote>
-<p>Google Colabを使用している場合、<strong>ランタイムを再起動</strong>する必要があるかもしれません(インターフェースの上部にある "Runtime "メニューに移動し、ドロップダウンメニューから "Restart session "を選択してください)。</p>
+<p>Google Colabを使用している場合、<strong>ランタイムを再起動する</strong>必要があるかもしれません(インターフェースの上部にある "Runtime "メニューに移動し、ドロップダウンメニューから "Restart session "を選択してください)。</p>
 </blockquote>
 </div>
 <p><strong>アカウントの設定</strong></p>
@@ -121,7 +121,22 @@ write then, and probably still are: short stories. My stories were
 awful. They had hardly any plot, just characters with strong feelings,
 which I ...
 </code></pre>
-<h3 id="Full-Text-Search-with-BM25" class="common-anchor-header">BM25による全文検索</h3><p>LlamaIndex の<code translate="no">MilvusVectorStore</code> は全文検索をサポートしており、キーワードベースの効率的な検索が可能です。組み込み関数を<code translate="no">sparse_embedding_function</code> 、検索結果のランク付けにBM25スコアリングを適用します。</p>
+<h3 id="Full-Text-Search-with-BM25" class="common-anchor-header">BM25による全文検索<button data-href="#Full-Text-Search-with-BM25" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>LlamaIndex の<code translate="no">MilvusVectorStore</code> は全文検索をサポートしており、キーワードベースの効率的な検索が可能です。組み込み関数を<code translate="no">sparse_embedding_function</code> 、検索結果のランク付けにBM25スコアリングを適用します。</p>
 <p>このセクションでは、全文検索にBM25を使ったRAGシステムの実装方法を示す。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> VectorStoreIndex, StorageContext
 <span class="hljs-keyword">from</span> llama_index.vector_stores.milvus <span class="hljs-keyword">import</span> MilvusVectorStore
@@ -183,7 +198,22 @@ hiring too many people, and the relief felt when the company was acquired by Yah
     enable_match=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Hybrid-Search-with-Reranker" class="common-anchor-header">再ランカーによるハイブリッド検索</h3><p>ハイブリッド検索システムは、セマンティック検索と全文検索を組み合わせ、RAGシステムにおける検索パフォーマンスを最適化する。</p>
+<h3 id="Hybrid-Search-with-Reranker" class="common-anchor-header">再ランカーによるハイブリッド検索<button data-href="#Hybrid-Search-with-Reranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ハイブリッド検索システムは、セマンティック検索と全文検索を組み合わせ、RAGシステムにおける検索パフォーマンスを最適化する。</p>
 <p>以下の例では、セマンティック検索にOpenAIエンベッディングを使用し、全文検索にBM25を使用しています：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index over the documnts</span>
 vector_store = MilvusVectorStore(

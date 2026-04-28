@@ -46,7 +46,7 @@ summary: Pelajari cara mengonfigurasi msgChannel untuk Milvus.
     <tr>
       <td>
         <li>Awalan nama root dari saluran ketika saluran pesan dibuat.</li>      
-        <li>Disarankan untuk mengubah parameter ini sebelum memulai Milvus untuk pertama kalinya.</li>      
+        <li>Direkomendasikan untuk mengubah parameter ini sebelum memulai Milvus untuk pertama kalinya.</li>      
         <li>Untuk berbagi instans Pulsar di antara beberapa instans Milvus, pertimbangkan untuk mengubahnya menjadi sebuah nama, bukan nama default untuk setiap instans Milvus sebelum Anda memulainya.</li>      </td>
       <td>by-dev</td>
     </tr>

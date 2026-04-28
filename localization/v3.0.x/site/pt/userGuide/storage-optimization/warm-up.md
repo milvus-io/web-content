@@ -48,7 +48,7 @@ beta: Milvus 2.6.4+
 <li><p>Os índices vetoriais são essenciais para o desempenho da pesquisa e devem estar prontos imediatamente.</p></li>
 <li><p>A latência de início a frio após a reinicialização do QueryNode ou o carregamento de um novo segmento é inaceitável.</p></li>
 </ul>
-<p>Em contraste, o Warm Up <strong>não</strong> é <strong>recomendado</strong> para campos ou índices que são consultados com pouca frequência. A desativação do Warm Up reduz o tempo de carregamento do segmento e conserva o espaço do cache - ideal para campos vetoriais grandes ou campos escalares não críticos.</p>
+<p>Por outro lado, o Warm Up <strong>não</strong> é <strong>recomendado</strong> para campos ou índices que são consultados com pouca frequência. A desativação do Warm Up reduz o tempo de carregamento do segmento e conserva o espaço do cache - ideal para campos vetoriais grandes ou campos escalares não críticos.</p>
 <h2 id="Configuration-levels" class="common-anchor-header">Níveis de configuração<button data-href="#Configuration-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,7 +84,7 @@ beta: Milvus 2.6.4+
      <td><p>Médio</p></td>
    </tr>
    <tr>
-     <td><p>Agrupamento</p></td>
+     <td><p>Cluster</p></td>
      <td><p>Todas as colecções no cluster</p></td>
      <td><p><code translate="no">milvus.yaml</code> ficheiro de configuração</p></td>
      <td><p>Mais baixo (predefinição)</p></td>
@@ -268,7 +268,7 @@ client.create_collection(
    <tr>
      <td><p><code translate="no">warmup.vectorField</code></p></td>
      <td><p><code translate="no">sync</code> | <code translate="no">disable</code></p></td>
-     <td><p>Configuração de aquecimento para todos os campos vetoriais na coleção.</p></td>
+     <td><p>Configuração de aquecimento para todos os campos vetoriais da coleção.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">warmup.vectorIndex</code></p></td>
@@ -467,7 +467,7 @@ client.create_index(
    <tr>
      <td><p><code translate="no">disable</code></p></td>
      <td><p>Os dados não são carregados para o armazenamento local.</p></td>
-     <td><p>Os dados são obtidos a pedido do armazenamento de objectos e, em seguida, colocados em cache localmente com base na definição de mmap.</p></td>
+     <td><p>Os dados são obtidos a pedido a partir do armazenamento de objectos e, em seguida, colocados em cache localmente com base na definição de mmap.</p></td>
      <td><p>Os dados armazenados em cache local são apagados.</p></td>
    </tr>
 </table>
@@ -533,6 +533,6 @@ client.create_index(
 <ul>
 <li><p>Evite o uso excessivo de <code translate="no">sync</code>. O pré-carregamento de demasiados campos aumenta o tempo de carregamento e a pressão da cache.</p></li>
 <li><p>Comece de forma conservadora - active o Warm Up apenas para campos e índices que são frequentemente acedidos.</p></li>
-<li><p>Monitore a latência da consulta e as métricas do cache e, em seguida, expanda o pré-carregamento conforme necessário.</p></li>
+<li><p>Monitorize a latência da consulta e as métricas da cache e, em seguida, expanda o pré-carregamento conforme necessário.</p></li>
 <li><p>Para cargas de trabalho mistas, aplique <code translate="no">sync</code> a colecções sensíveis ao desempenho e <code translate="no">disable</code> a colecções orientadas para a capacidade.</p></li>
 </ul>

@@ -1,9 +1,9 @@
 ---
 id: agents_overview.md
-title: AGENTS.md for Milvus
+title: AGENTS.md untuk Milvus
 summary: >-
-  Rules and patterns for AI coding agents that generate, review, or debug Milvus
-  vector database code using PyMilvus.
+  Aturan dan pola untuk agen pengkodean AI yang menghasilkan, meninjau, atau
+  men-debug kode basis data vektor Milvus menggunakan PyMilvus.
 ---
 <h1 id="AGENTSmd--Milvus" class="common-anchor-header">AGENTS.md - Milvus<button data-href="#AGENTSmd--Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

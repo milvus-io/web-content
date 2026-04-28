@@ -83,7 +83,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>よりシンプルなセットアップの場合は <a href="/docs/ja/standard-analyzer.md"><code translate="no">standard</code></a><code translate="no">standard</code> アナライザを<a href="/docs/ja/standard-analyzer.md"></a>使う<a href="/docs/ja/standard-analyzer.md">ことも</a>できる。 <a href="/docs/ja/lowercase-filter.md"><code translate="no">lowercase</code></a><a href="/docs/ja/lowercase-filter.md"> フィルターを</a>組み合わせる。</p>
+<p>よりシンプルなセットアップの場合は <a href="/docs/ja/standard-analyzer.md"><code translate="no">standard</code></a><code translate="no">standard</code> アナライザを<a href="/docs/ja/standard-analyzer.md"></a>使う<a href="/docs/ja/standard-analyzer.md">ことも</a>できる。 <a href="/docs/ja/lowercase-filter.md"><code translate="no">lowercase</code></a><a href="/docs/ja/lowercase-filter.md"> フィルターを</a>組み合わせたアナライザーを使うこともできる。</p>
 </div>
 <p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義する際に<code translate="no">VARCHAR</code> フィールドに適用することができます。これにより、Milvusは指定されたアナライザを使用してそのフィールドのテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
 <h2 id="Examples" class="common-anchor-header">使用例<button data-href="#Examples" class="anchor-icon" translate="no">

@@ -38,7 +38,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>SASL/SSL 없이 Milvus와 Kafka를 시작하려면 Kafka와 Milvus 모두에 대한 인증 및 암호화를 비활성화하면 됩니다. 신뢰할 수 있는 환경에서만 사용하세요.</p>
-<h3 id="1-Start-a-Kafka-service-without-SASLSSL" class="common-anchor-header">1. SASL/SSL 없이 Kafka 서비스 시작하기</h3><p>다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 SASL/SSL 없이 Kafka 서비스를 시작할 수 있습니다:</p>
+<h3 id="1-Start-a-Kafka-service-without-SASLSSL" class="common-anchor-header">1. SASL/SSL 없이 Kafka 서비스 시작하기<button data-href="#1-Start-a-Kafka-service-without-SASLSSL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 SASL/SSL 없이 Kafka 서비스를 시작할 수 있습니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -61,10 +76,25 @@ summary: >-
       <span class="hljs-bullet">-</span> <span class="hljs-string">/var/run/docker.sock:/var/run/docker.sock</span>
     <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>그런 다음 다음 명령어로 Kafka 서비스를 시작할 수 있습니다:</p>
+<p>그런 다음 다음 명령으로 Kafka 서비스를 시작할 수 있습니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Milvus 시작 및 Kafka에 연결하기</h3><p>Kafka 서비스가 시작되면 Milvus를 시작하고 연결할 수 있습니다. 다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 Milvus를 시작하고 SASL/SSL 없이 Kafka에 연결할 수 있습니다:</p>
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Milvus 시작 및 Kafka에 연결하기<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kafka 서비스가 시작되면 Milvus를 시작하고 연결할 수 있습니다. 다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 Milvus를 시작하고 SASL/SSL 없이 Kafka에 연결할 수 있습니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -121,7 +151,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>SASL/PLAIN 인증으로 Kafka를 시작하려면 <code translate="no">kafka_server_jass.conf</code> 파일을 적절한 설정으로 추가해야 합니다.</p>
-<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN" class="common-anchor-header">1. SASL/PLAIN으로 Kafka 서비스 시작하기</h3><p>다음 <code translate="no">docker-compose.yaml</code> 파일과 <code translate="no">kafka_server_jaas.conf</code> 파일을 같은 디렉터리에 넣습니다.</p>
+<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN" class="common-anchor-header">1. SASL/PLAIN으로 Kafka 서비스 시작하기<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 <code translate="no">docker-compose.yaml</code> 파일과 <code translate="no">kafka_server_jaas.conf</code> 파일을 같은 디렉터리에 넣습니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -169,7 +214,22 @@ summary: >-
 <p>그런 다음 다음 명령어로 Kafka 서비스를 시작할 수 있습니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Milvus 시작 및 Kafka에 연결하기</h3><p>Kafka 서비스가 시작되면 Milvus를 시작하고 연결할 수 있습니다. 다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 Milvus를 시작하고 SASL/PLAIN으로 Kafka에 연결합니다:</p>
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Milvus 시작 및 Kafka에 연결하기<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kafka 서비스가 시작되면 Milvus를 시작하고 연결할 수 있습니다. 다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 Milvus를 시작하고 SASL/PLAIN으로 Kafka에 연결합니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -226,7 +286,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>SSL 인증으로 Kafka를 시작하려면 일부 인증서 파일을 가져오거나 자체 서명된 인증서를 생성해야 합니다. 이 예에서는 자체 서명된 인증서를 사용합니다.</p>
-<h3 id="1-Generate-Self-Signed-Certificates" class="common-anchor-header">1. 자체 서명 인증서 생성하기</h3><p><code translate="no">my_secrets</code> 라는 폴더를 만들고 <code translate="no">gen-ssl-certs.sh</code> 이라는 이름의 bash 스크립트를 추가한 다음 다음 내용을 붙여넣습니다:</p>
+<h3 id="1-Generate-Self-Signed-Certificates" class="common-anchor-header">1. 자체 서명 인증서 생성하기<button data-href="#1-Generate-Self-Signed-Certificates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">my_secrets</code> 라는 폴더를 만들고 <code translate="no">gen-ssl-certs.sh</code> 이라는 이름의 bash 스크립트를 추가한 다음 다음 내용을 붙여넣습니다:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment">#</span>
@@ -424,7 +499,22 @@ total 12
 -rw-rw-r-- 1 5.6K Feb 26 11:54 kafka_server.keystore.jks
 -rw-rw-r-- 1 1.4K Feb 26 11:54 kafka_server.truststore.jks
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-a-Kafka-service-with-SSL" class="common-anchor-header">2. SSL로 Kafka 서비스 시작하기</h3><p>다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 SSL로 Kafka 서비스를 시작합니다:</p>
+<h3 id="2-Start-a-Kafka-service-with-SSL" class="common-anchor-header">2. SSL로 Kafka 서비스 시작하기<button data-href="#2-Start-a-Kafka-service-with-SSL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 SSL로 Kafka 서비스를 시작합니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -466,7 +556,22 @@ total 12
 <p>그런 다음 다음 명령어로 Kafka 서비스를 시작합니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="common-anchor-header">3. Milvus를 시작하고 SSL로 Kafka에 연결하기</h3><p>Kafka 서비스가 시작되면 Milvus를 시작하고 연결할 수 있습니다. 다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 Milvus를 시작하고 SSL로 Kafka에 연결합니다:</p>
+<h3 id="3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="common-anchor-header">3. Milvus를 시작하고 SSL로 Kafka에 연결하기<button data-href="#3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kafka 서비스가 시작되면 Milvus를 시작하고 연결할 수 있습니다. 다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 Milvus를 시작하고 SSL로 Kafka에 연결합니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -524,7 +629,22 @@ total 12
         ></path>
       </svg>
     </button></h2><p>Milvus를 SASL/PLAIN 및 SSL로 Kafka에 연결하려면 <a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">SASL/PLAIN만으로 Mil</a> us를 Kafka에 연결하기 및 <a href="#Connect-Milus-to-Kafka-with-SSL-Alone">SSL만으로 Milus를 Kafka에 연결</a>하기의 단계를 반복해야 합니다.</p>
-<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="common-anchor-header">1. SASL/PLAIN 및 SSL로 Kafka 서비스 시작하기 1.</h3><p><a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">SASL/PLAIN만으로 Milus와 Kafka</a> 연결하기에서 설명한 <code translate="no">kafka_server_jass.conf</code> 파일과 <a href="#Connect-Milus-to-Kafka-with-SSL-Alone">SSL만으로 Milus와 Kafka 연결하기에서</a> 생성한 <code translate="no">my_secrets</code> 폴더를 사용하여 SASL/PLAIN 및 SSL로 Kafka 서비스를 시작합니다.</p>
+<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="common-anchor-header">1. SASL/PLAIN 및 SSL로 Kafka 서비스 시작하기 1.<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">SASL/PLAIN만으로 Milus와 Kafka</a> 연결하기에서 설명한 <code translate="no">kafka_server_jass.conf</code> 파일과 <a href="#Connect-Milus-to-Kafka-with-SSL-Alone">SSL만으로 Milus와 Kafka 연결하기에서</a> 생성한 <code translate="no">my_secrets</code> 폴더를 사용하여 SASL/PLAIN 및 SSL로 Kafka 서비스를 시작합니다.</p>
 <p>다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 SASL/PLAIN 및 SSL로 Kafka 서비스를 시작할 수 있습니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
@@ -578,7 +698,22 @@ total 12
 <p>그런 다음 다음 명령어로 Kafka 서비스를 시작합니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2. Milvus를 시작하고 SASL/PLAIN 및 SSL로 Kafka에 연결하기</h3><p>Kafka 서비스가 시작되면 Milvus를 시작하고 연결할 수 있습니다. 다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 Milvus를 시작하고 SASL/PLAIN 및 SSL로 Kafka에 연결합니다:</p>
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2. Milvus를 시작하고 SASL/PLAIN 및 SSL로 Kafka에 연결하기<button data-href="#2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kafka 서비스가 시작되면 Milvus를 시작하고 연결할 수 있습니다. 다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 Milvus를 시작하고 SASL/PLAIN 및 SSL로 Kafka에 연결합니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>

@@ -6,7 +6,7 @@ summary: >-
   SiliconFlow para mejorar la relevancia de las búsquedas mediante la
   reordenación semántica. Ofrece capacidades flexibles de fragmentación de
   documentos y admite una amplia gama de modelos de reordenación especializados
-  de diversos proveedores.
+  de varios proveedores.
 beta: Milvus 2.6.x
 ---
 <h1 id="SiliconFlow-Ranker" class="common-anchor-header">Clasificador SiliconFlow<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#SiliconFlow-Ranker" class="anchor-icon" translate="no">
@@ -146,7 +146,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
 <table>
    <tr>
      <th><p><strong>Parámetro</strong></p></th>
-     <th><p><strong>Obligatorio</strong></p></th>
+     <th><p><strong>¿Requerido?</strong></p></th>
      <th><p><strong>Descripción</strong></p></th>
      <th><p><strong>Valor / Ejemplo</strong></p></th>
    </tr>

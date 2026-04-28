@@ -38,7 +38,7 @@ title: 'MCP + ميلفوس: ربط الذكاء الاصطناعي بقواعد 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>بروتوكول سياق النموذج (MCP</strong> ) هو بروتوكول مفتوح يمكّن تطبيقات الذكاء الاصطناعي، مثل Claude وCursor، من التفاعل مع مصادر البيانات الخارجية والأدوات بسلاسة. سواءً كنت تقوم بإنشاء تطبيقات ذكاء اصطناعي مخصصة، أو دمج مهام سير عمل الذكاء الاصطناعي، أو تحسين واجهات الدردشة، يوفر بروتوكول سياق النموذج طريقة موحدة لربط النماذج اللغوية الكبيرة (LLMs) بالبيانات السياقية ذات الصلة.</p>
+    </button></h2><p><strong>بروتوكول سياق النموذج (MCP</strong> ) هو بروتوكول مفتوح يمكّن تطبيقات الذكاء الاصطناعي، مثل Claude وCursor، من التفاعل مع مصادر البيانات الخارجية والأدوات بسلاسة. سواءً كنت تقوم بإنشاء تطبيقات ذكاء اصطناعي مخصصة، أو دمج مهام سير عمل الذكاء الاصطناعي، أو تحسين واجهات الدردشة، يوفر بروتوكول سياق النموذج طريقة موحدة لربط نماذج اللغة الكبيرة (LLMs) بالبيانات السياقية ذات الصلة.</p>
 <p>يرشدك هذا البرنامج التعليمي خلال <strong>إعداد خادم MCP لـ Milvus،</strong> مما يسمح لتطبيقات الذكاء الاصطناعي بإجراء عمليات بحث متجهة وإدارة المجموعات واسترداد البيانات باستخدام <strong>أوامر اللغة الطبيعية - دون</strong>كتابة استعلامات قاعدة بيانات مخصصة.</p>
 <h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -162,7 +162,22 @@ title: 'MCP + ميلفوس: ربط الذكاء الاصطناعي بقواعد 
         ></path>
       </svg>
     </button></h2><p>يدعم<a href="https://docs.cursor.com/context/model-context-protocol">Cursor</a> أيضًا أدوات MCP من خلال ميزة الوكيل في Composer. يمكنك إضافة خادم Milvus MCP إلى Cursor بطريقتين:</p>
-<h3 id="Option-1-Using-Cursor-Settings-UI" class="common-anchor-header">الخيار 1: استخدام واجهة مستخدم إعدادات المؤشر</h3><ol>
+<h3 id="Option-1-Using-Cursor-Settings-UI" class="common-anchor-header">الخيار 1: استخدام واجهة مستخدم إعدادات المؤشر<button data-href="#Option-1-Using-Cursor-Settings-UI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>افتح <code translate="no">Cursor Settings</code> ← <code translate="no">Features</code> ← <code translate="no">MCP</code>.</li>
 <li>انقر <code translate="no">+ Add New MCP Server</code>.</li>
 <li>املأ:<ul>
@@ -173,7 +188,22 @@ title: 'MCP + ميلفوس: ربط الذكاء الاصطناعي بقواعد 
 <li>⚠️ نصيحة: استخدم <code translate="no">127.0.0.1</code> بدلاً من <code translate="no">localhost</code> لتجنب مشاكل دقة DNS المحتملة.</li>
 </ul></li>
 </ol>
-<h3 id="Option-2-Using-Project-specific-Configuration-Recommended" class="common-anchor-header">الخيار 2: استخدام التكوين الخاص بالمشروع (موصى به)</h3><ol>
+<h3 id="Option-2-Using-Project-specific-Configuration-Recommended" class="common-anchor-header">الخيار 2: استخدام التكوين الخاص بالمشروع (موصى به)<button data-href="#Option-2-Using-Project-specific-Configuration-Recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>قم بإنشاء ملف <code translate="no">.cursor/mcp.json</code> في <strong>الدليل الجذر للمشروع</strong>:</li>
 </ol>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
@@ -212,7 +242,22 @@ title: 'MCP + ميلفوس: ربط الذكاء الاصطناعي بقواعد 
         ></path>
       </svg>
     </button></h2><p>للتأكد من إعداد خادم MCP بشكل صحيح:</p>
-<h3 id="For-Cursor" class="common-anchor-header">بالنسبة للمؤشر</h3><ol>
+<h3 id="For-Cursor" class="common-anchor-header">بالنسبة للمؤشر<button data-href="#For-Cursor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>انتقل إلى <code translate="no">Cursor Settings</code> ← <code translate="no">Features</code> ← <code translate="no">MCP</code>.</li>
 <li>تأكد من ظهور <code translate="no">&quot;Milvus&quot;</code> في قائمة خوادم MCP.</li>
 <li>تحقق مما إذا كانت أدوات ملفوس (على سبيل المثال، <code translate="no">milvus_list_collections</code> ، <code translate="no">milvus_vector_search</code>) مدرجة.</li>
@@ -234,7 +279,22 @@ title: 'MCP + ميلفوس: ربط الذكاء الاصطناعي بقواعد 
         ></path>
       </svg>
     </button></h2><p>يوفر خادم MCP أدوات متعددة <strong>للبحث والاستعلام وإدارة بيانات المتجهات في ملفوس</strong>. لمزيد من التفاصيل، يرجى الرجوع إلى وثائق <a href="https://github.com/zilliztech/mcp-server-milvus">mcp-server-milvus</a>.</p>
-<h3 id="🔍-Search-and-Query-Tools" class="common-anchor-header">🔍 أدوات البحث والاستعلام</h3><ul>
+<h3 id="🔍-Search-and-Query-Tools" class="common-anchor-header">🔍 أدوات البحث والاستعلام<button data-href="#🔍-Search-and-Query-Tools" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-text-search</code></strong> ← البحث عن المستندات باستخدام البحث عن النص الكامل.</li>
 <li><strong><code translate="no">milvus-vector-search</code></strong> → إجراء بحث عن التشابه المتجه على مجموعة.</li>
 <li><strong><code translate="no">milvus-hybrid-search</code></strong> → إجراء بحث هجين يجمع بين تشابه المتجهات وتصفية السمات.</li>
@@ -242,7 +302,22 @@ title: 'MCP + ميلفوس: ربط الذكاء الاصطناعي بقواعد 
 <li><strong><code translate="no">milvus-query</code></strong> → الاستعلام عن المجموعة باستخدام تعبيرات التصفية.</li>
 <li><strong><code translate="no">milvus-count</code></strong> → عد الكيانات في مجموعة.</li>
 </ul>
-<h3 id="📁-Collection-Management" class="common-anchor-header">📁 إدارة المجموعات</h3><ul>
+<h3 id="📁-Collection-Management" class="common-anchor-header">📁 إدارة المجموعات<button data-href="#📁-Collection-Management" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-list-collections</code></strong> → سرد كافة المجموعات في قاعدة البيانات.</li>
 <li><strong><code translate="no">milvus-collection-info</code></strong> → الحصول على معلومات مفصلة حول مجموعة ما.</li>
 <li><strong><code translate="no">milvus-get-collection-stats</code></strong> → الحصول على إحصائيات حول مجموعة ما.</li>
@@ -252,14 +327,44 @@ title: 'MCP + ميلفوس: ربط الذكاء الاصطناعي بقواعد 
 <li><strong><code translate="no">milvus-get-query-segment-info</code></strong> → الحصول على معلومات حول مقاطع الاستعلام.</li>
 <li><strong><code translate="no">milvus-get-collection-loading-progress</code></strong> → الحصول على تقدم تحميل مجموعة.</li>
 </ul>
-<h3 id="📊-Data-Operations" class="common-anchor-header">📊 عمليات البيانات</h3><ul>
+<h3 id="📊-Data-Operations" class="common-anchor-header">📊 عمليات البيانات<button data-href="#📊-Data-Operations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-insert-data</code></strong> → إدراج البيانات في مجموعة.</li>
 <li><strong><code translate="no">milvus-bulk-insert</code></strong> → إدراج البيانات على دفعات للحصول على أداء أفضل.</li>
 <li><strong><code translate="no">milvus-upsert-data</code></strong> → إدراج البيانات في مجموعة (إدراج أو تحديث إذا كانت موجودة).</li>
 <li><strong><code translate="no">milvus-delete-entities</code></strong> → حذف كيانات من مجموعة استنادًا إلى تعبير مرشح.</li>
 <li><strong><code translate="no">milvus-create-dynamic-field</code></strong> → إضافة حقل ديناميكي إلى مجموعة موجودة.</li>
 </ul>
-<h3 id="⚙️-Index-Management" class="common-anchor-header">⚙️ إدارة الفهرس</h3><ul>
+<h3 id="⚙️-Index-Management" class="common-anchor-header">⚙️ إدارة الفهرس<button data-href="#⚙️-Index-Management" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-create-index</code></strong> → إنشاء فهرس على حقل متجه.</li>
 <li><strong><code translate="no">milvus-get-index-info</code></strong> → الحصول على معلومات حول الفهارس في مجموعة.</li>
 </ul>
@@ -316,7 +421,22 @@ title: 'MCP + ميلفوس: ربط الذكاء الاصطناعي بقواعد 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">استخدام سطح مكتب كلود</h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">مثال 1: سرد المجموعات</h4><pre><code translate="no">What are the collections <span class="hljs-selector-tag">I</span> have in my Milvus DB?
+    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">استخدام سطح مكتب كلود<button data-href="#Using-Claude-Desktop" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">مثال 1: سرد المجموعات</h4><pre><code translate="no">What are the collections <span class="hljs-selector-tag">I</span> have in my Milvus DB?
 <button class="copy-code-btn"></button></code></pre>
 <p>سيستخدم كلود بعد ذلك MCP للتحقق من هذه المعلومات على قاعدة بيانات ميلفوس.</p>
 <pre><code translate="no">I<span class="hljs-comment">&#x27;ll check what collections are available in your Milvus database.</span>
@@ -343,7 +463,22 @@ Here are the collections <span class="hljs-keyword">in</span> your Milvus databa
 Here are the documents I found that mention machine learning:
 [Results will appear here based <span class="hljs-keyword">on</span> your actual data]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Using-Cursor" class="common-anchor-header">استخدام المؤشر</h3><h4 id="Example-Creating-a-Collection" class="common-anchor-header">مثال: إنشاء مجموعة</h4><p>يمكنك أن تطلب من Cursor في Cursor's Composer:</p>
+<h3 id="Using-Cursor" class="common-anchor-header">استخدام المؤشر<button data-href="#Using-Cursor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-Creating-a-Collection" class="common-anchor-header">مثال: إنشاء مجموعة</h4><p>يمكنك أن تطلب من Cursor في Cursor's Composer:</p>
 <pre><code translate="no">Create a <span class="hljs-keyword">new</span> collection called <span class="hljs-string">&#x27;articles&#x27;</span> <span class="hljs-function"><span class="hljs-keyword">in</span> Milvus <span class="hljs-keyword">with</span> fields <span class="hljs-keyword">for</span> <span class="hljs-title">title</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-title">content</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-keyword">and</span> a vector <span class="hljs-title">field</span> (<span class="hljs-params"><span class="hljs-number">128</span> dimensions</span>)
 </span><button class="copy-code-btn"></button></code></pre>
 <p>سيستخدم المؤشر خادم MCP لتنفيذ هذه العملية:</p>
@@ -371,7 +506,22 @@ Collection <span class="hljs-comment">&#x27;articles&#x27; has been created succ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Common-Issues" class="common-anchor-header">المشكلات الشائعة</h3><h4 id="Connection-Errors" class="common-anchor-header">أخطاء الاتصال</h4><p>إذا رأيت أخطاء مثل "فشل الاتصال بخادم ميلفوس":</p>
+    </button></h2><h3 id="Common-Issues" class="common-anchor-header">المشكلات الشائعة<button data-href="#Common-Issues" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Connection-Errors" class="common-anchor-header">أخطاء الاتصال</h4><p>إذا رأيت أخطاء مثل "فشل الاتصال بخادم ميلفوس":</p>
 <ol>
 <li>تحقق من تشغيل مثيل Milvus الخاص بك: <code translate="no">docker ps</code> (إذا كنت تستخدم Docker)</li>
 <li>تحقق من صحة URI في التكوين الخاص بك</li>
@@ -391,7 +541,22 @@ Collection <span class="hljs-comment">&#x27;articles&#x27; has been created succ
 <li>تحقق من تشغيل خادم MCP بشكل صحيح</li>
 <li>اضغط على زر التحديث في إعدادات MCP (للمؤشر)</li>
 </ol>
-<h3 id="Getting-Help" class="common-anchor-header">الحصول على المساعدة</h3><p>إذا كنت لا تزال تواجه مشكلات:</p>
+<h3 id="Getting-Help" class="common-anchor-header">الحصول على المساعدة<button data-href="#Getting-Help" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>إذا كنت لا تزال تواجه مشكلات:</p>
 <ol>
 <li>تحقق من <a href="https://github.com/zilliztech/mcp-server-milvus/issues">مشكلات GitHub</a> بحثًا عن مشاكل مماثلة</li>
 <li>انضم إلى <a href="https://discord.gg/zilliz">مجتمع Zilliz Community Discord</a> للحصول على الدعم</li>

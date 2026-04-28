@@ -43,7 +43,22 @@ summary: >-
 <li><p><strong>Inverted File (IVF</strong>): Mengatur data ke dalam kelompok-kelompok, memungkinkan algoritme pencarian hanya berfokus pada subset vektor yang paling relevan.</p></li>
 <li><p><strong>Kuantisasi Skalar (SQ8</strong>): Mengompresi vektor ke bentuk yang lebih ringkas, secara drastis mengurangi penggunaan memori sekaligus mempertahankan presisi yang cukup untuk perhitungan kemiripan yang cepat.</p></li>
 </ul>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVF seperti membuat indeks dalam sebuah buku. Alih-alih memindai setiap halaman (atau, dalam kasus kami, setiap vektor), Anda mencari kata kunci tertentu (kelompok) dalam indeks untuk menemukan halaman (vektor) yang relevan dengan cepat. Dalam skenario kami, vektor dikelompokkan ke dalam kluster, dan algoritme akan mencari dalam beberapa kluster yang dekat dengan vektor kueri.</p>
+<h3 id="IVF" class="common-anchor-header">IVF<button data-href="#IVF" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>IVF seperti membuat indeks dalam sebuah buku. Alih-alih memindai setiap halaman (atau, dalam kasus kami, setiap vektor), Anda mencari kata kunci tertentu (kelompok) dalam indeks untuk menemukan halaman (vektor) yang relevan dengan cepat. Dalam skenario kami, vektor dikelompokkan ke dalam kluster, dan algoritme akan mencari dalam beberapa kluster yang dekat dengan vektor kueri.</p>
 <p>Berikut cara kerjanya:</p>
 <ol>
 <li><p><strong>Pengelompokan:</strong> Kumpulan data vektor Anda dibagi ke dalam sejumlah klaster tertentu, menggunakan algoritme pengelompokan seperti k-means. Setiap klaster memiliki centroid (vektor representatif untuk klaster).</p></li>
@@ -52,7 +67,22 @@ summary: >-
 <li><p><strong>Pencarian:</strong> Saat Anda mencari tetangga terdekat, algoritme pencarian membandingkan vektor kueri Anda dengan centroid klaster dan memilih klaster yang paling menjanjikan. Pencarian kemudian dipersempit menjadi vektor dalam klaster yang dipilih.</p></li>
 </ol>
 <p>Untuk mempelajari lebih lanjut tentang detail teknisnya, lihat <a href="/docs/id/ivf-flat.md">IVF_FLAT</a>.</p>
-<h3 id="SQ8" class="common-anchor-header">SQ8</h3><p>Kuantisasi Skalar (SQ) adalah teknik yang digunakan untuk mengurangi ukuran vektor berdimensi tinggi dengan mengganti nilainya dengan representasi yang lebih kecil dan lebih ringkas. Varian <strong>SQ8</strong> menggunakan bilangan bulat 8-bit, bukan bilangan floating point 32-bit yang biasa digunakan untuk menyimpan setiap nilai dimensi vektor. Hal ini sangat mengurangi jumlah memori yang diperlukan untuk menyimpan data.</p>
+<h3 id="SQ8" class="common-anchor-header">SQ8<button data-href="#SQ8" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kuantisasi Skalar (SQ) adalah teknik yang digunakan untuk mengurangi ukuran vektor berdimensi tinggi dengan mengganti nilainya dengan representasi yang lebih kecil dan lebih ringkas. Varian <strong>SQ8</strong> menggunakan bilangan bulat 8-bit, bukan bilangan floating point 32-bit yang biasa digunakan untuk menyimpan setiap nilai dimensi vektor. Hal ini sangat mengurangi jumlah memori yang diperlukan untuk menyimpan data.</p>
 <p>Berikut cara kerja SQ8:</p>
 <ol>
 <li><p><strong>Identifikasi Rentang:</strong> Pertama, identifikasi nilai minimum dan maksimum dalam vektor. Rentang ini mendefinisikan batas-batas untuk kuantisasi.</p></li>
@@ -64,9 +94,24 @@ summary: >-
 <p>Misalkan Anda memiliki nilai dimensi 1,2, dengan nilai minimum -1,7 dan nilai maksimum 2,3. Gambar berikut menunjukkan bagaimana SQ8 diterapkan untuk mengubah nilai float32 menjadi bilangan bulat int8.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ivf-sq8.png" alt="Ivf Sq8" class="doc-image" id="ivf-sq8" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ivf-sq8.png" alt="Ivf Sq8" class="doc-image" id="ivf-sq8" />
    </span> <span class="img-wrapper"> <span>Ivf Sq8</span> </span></p>
-<h3 id="IVF-+-SQ8" class="common-anchor-header">IVF + SQ8</h3><p>Indeks IVF_SQ8 menggabungkan IVF dan SQ8 untuk melakukan pencarian kemiripan secara efisien:</p>
+<h3 id="IVF-+-SQ8" class="common-anchor-header">IVF + SQ8<button data-href="#IVF-+-SQ8" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Indeks IVF_SQ8 menggabungkan IVF dan SQ8 untuk melakukan pencarian kemiripan secara efisien:</p>
 <ol>
 <li><p><strong>IVF mempersempit cakupan pencarian</strong>: Kumpulan data dibagi menjadi beberapa kluster, dan ketika kueri dikeluarkan, IVF pertama-tama membandingkan kueri dengan pusat kluster, memilih kluster yang paling relevan.</p></li>
 <li><p><strong>SQ8 mempercepat penghitungan jarak</strong>: Di dalam cluster yang dipilih, SQ8 memampatkan vektor menjadi bilangan bulat 8-bit, sehingga mengurangi penggunaan memori dan mempercepat perhitungan jarak.</p></li>
@@ -148,7 +193,7 @@ res = MilvusClient.search(
 <ul>
 <li><p><code translate="no">params</code>: Opsi konfigurasi tambahan untuk pencarian pada indeks.</p>
 <ul>
-<li><code translate="no">nprobe</code>: Jumlah cluster untuk mencari kandidat.</li>
+<li><code translate="no">nprobe</code>: Jumlah kluster untuk mencari kandidat.</li>
 </ul>
 <p>Untuk mempelajari lebih lanjut parameter pencarian yang tersedia untuk indeks <code translate="no">IVF_SQ8</code>, lihat Parameter <a href="/docs/id/ivf-sq8.md#share-PJhqdqNaNodKiexm6F1cD2IInbe">pencarian khusus indeks</a>.</p></li>
 </ul>
@@ -168,7 +213,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Bagian ini memberikan gambaran umum tentang parameter yang digunakan untuk membangun indeks dan melakukan pencarian pada indeks.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parameter pembangunan indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/ivf-sq8.md#share-X9Y9dTuhDohRRBxSvzBcXmIEnu4">membangun indeks.</a></p>
+<h3 id="Index-building-params" class="common-anchor-header">Parameter pembangunan indeks<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/ivf-sq8.md#share-X9Y9dTuhDohRRBxSvzBcXmIEnu4">membangun indeks.</a></p>
 <table>
    <tr>
      <th></th>
@@ -186,7 +246,22 @@ res = MilvusClient.search(
      <td><p>Nilai <code translate="no">nlist</code> yang lebih besar meningkatkan daya ingat dengan membuat klaster yang lebih halus, tetapi meningkatkan waktu pembuatan indeks. Optimalkan berdasarkan ukuran set data dan sumber daya yang tersedia. Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> saat melakukan <a href="/docs/id/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">pencarian di indeks</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> saat melakukan <a href="/docs/id/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">pencarian di indeks</a>.</p>
 <table>
    <tr>
      <th></th>

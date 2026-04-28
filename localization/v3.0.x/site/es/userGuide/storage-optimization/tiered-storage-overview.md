@@ -103,11 +103,11 @@ beta: Milvus 2.6.4+
    </span> <span class="img-wrapper"> <span>Flujo de trabajo de carga de Querynode</span> </span></p>
 <h4 id="Phase-1-Lazy-load" class="common-anchor-header">Fase 1: Carga perezosa</h4><p>En la inicialización, Milvus realiza una carga lenta, almacenando en caché sólo los metadatos a nivel de segmento, como las definiciones de esquema, la información de índice y las asignaciones de trozos.</p>
 <p>En esta fase no se almacenan en caché datos de campo reales ni archivos de índice. De este modo, las colecciones pueden consultarse casi inmediatamente después de iniciarse, con un consumo mínimo de memoria y disco.</p>
-<p>Dado que los datos de campo y los archivos de índice permanecen en almacenamiento remoto hasta que se accede a ellos por primera vez, la <em>primera consulta</em> puede experimentar una latencia adicional, ya que los datos necesarios deben obtenerse bajo demanda. Para mitigar este efecto en los campos o índices críticos, puede utilizar la estrategia <a href="/docs/es/tiered-storage-overview.md#Phase-2-Warm-up">Warm Up (Calentamiento</a> ) para precargarlos de forma proactiva antes de que el segmento pueda consultarse.</p>
+<p>Dado que los datos de campo y los archivos de índice permanecen en almacenamiento remoto hasta que se accede a ellos por primera vez, la <em>primera consulta</em> puede experimentar una latencia adicional, ya que los datos necesarios deben obtenerse bajo demanda. Para mitigar este efecto en los campos o índices críticos, puede utilizar la estrategia <a href="/docs/es/tiered-storage-overview.md#Phase-2-Warm-up">Warm Up</a> para precargarlos de forma proactiva antes de que el segmento sea consultable.</p>
 <p><strong>Configuración</strong></p>
 <p>Se aplica automáticamente cuando el almacenamiento por niveles está activado. No es necesaria ninguna configuración manual.</p>
 <h4 id="Phase-2-Warm-up" class="common-anchor-header">Fase 2: Calentamiento</h4><p>Para reducir la latencia de primer golpe introducida por <a href="/docs/es/tiered-storage-overview.md#Phase-1-Lazy-load">la carga lenta</a>, Milvus proporciona un mecanismo de <em>Calentamiento</em>.</p>
-<p>Antes de que un segmento sea consultable, Milvus puede recuperar y almacenar en caché de forma proactiva campos o índices específicos del almacenamiento de objetos, asegurando que la primera consulta alcance directamente los datos almacenados en caché en lugar de activar la carga bajo demanda.</p>
+<p>Antes de que un segmento sea consultable, Milvus puede obtener y almacenar en caché de forma proactiva campos o índices específicos del almacenamiento de objetos, asegurando que la primera consulta alcance directamente los datos almacenados en caché en lugar de activar la carga bajo demanda.</p>
 <p>Durante el calentamiento, los campos se precargarán a nivel de trozo, mientras que los índices se precargarán a nivel de segmento.</p>
 <p><strong>Configuración</strong></p>
 <p>El calentamiento puede configurarse en tres niveles:</p>
@@ -359,5 +359,5 @@ beta: Milvus 2.6.4+
     </button></h3><p>Las posibles causas son:</p>
 <ul>
 <li><p>Consultas frecuentes a datos fríos, que deben obtenerse del almacenamiento.</p></li>
-<li><p>Marcas de agua demasiado próximas entre sí, que provocan frecuentes desalojos sincrónicos.</p></li>
+<li><p>Marcas de agua colocadas demasiado cerca, lo que provoca frecuentes desalojos sincrónicos.</p></li>
 </ul>

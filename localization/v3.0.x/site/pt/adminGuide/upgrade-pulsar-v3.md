@@ -73,23 +73,38 @@ title: Atualizar a Pulsar em Milvus de V2 para V3
         ></path>
       </svg>
     </button></h2><p>Esta secção fornece os procedimentos detalhados para atualizar a Pulsar de V2 para V3 no Milvus.</p>
-<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">Persistir os dados não consumidos no Pulsar</h3><p>Neste passo, você precisa garantir que os dados existentes no Pulsar foram persistidos no serviço de armazenamento de objetos. Existem duas abordagens disponíveis, e você pode escolher a que melhor se adapta às suas necessidades.</p>
+<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">Persistir os dados não consumidos no Pulsar<button data-href="#Persist-data-not-consumed-in-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Neste passo, é necessário garantir que os dados existentes no Pulsar foram persistidos no serviço de armazenamento de objetos. Existem duas abordagens disponíveis, e você pode escolher a que melhor se adapta às suas necessidades.</p>
 <h4 id="Approach-1-Using-Attu" class="common-anchor-header">Abordagem 1: usando o Attu</h4><p>Se você tiver apenas um pequeno número de coleções em sua implantação Milvus em funcionamento com poucos segmentos, você pode usar o Attu para persistir os dados no serviço de armazenamento de objetos.</p>
 <ol>
 <li><p>Selecione todas as colecções em todas as suas bases de dados, aceda ao painel <code translate="no">Segments</code>, clique no botão <code translate="no">Flush</code> </p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
    </span> <span class="img-wrapper"> <span>Painel de segmentos de uma coleção</span> </span></p></li>
 <li><p>Em seguida, na janela pop-up, clique novamente em <code translate="no">Flush</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
    </span> <span class="img-wrapper"> <span>Aviso de descarga de dados no Attu</span> </span></p></li>
 <li><p>Em seguida, aguarde até que todos os estados de segmento persistente das colecções sejam <code translate="no">Flushed</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/view-data-peristent-process.png" alt="View data flush status in Attu" class="doc-image" id="view-data-flush-status-in-attu" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/view-data-peristent-process.png" alt="View data flush status in Attu" class="doc-image" id="view-data-flush-status-in-attu" />
    </span> <span class="img-wrapper"> <span>Exibir o status da descarga de dados no Attu</span> </span></p></li>
 </ol>
 <h4 id="Approach-2-Using-management-API" class="common-anchor-header">Abordagem 2: Utilizar a API de gestão</h4><ol>
@@ -140,7 +155,22 @@ title: Atualizar a Pulsar em Milvus de V2 para V3
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Parar o Milvus e excluir o Pulsar V2</h3><p>Nesta etapa, você precisa parar o pod do Milvus e excluir a implantação da Pulsar V2. Há duas seções separadas disponíveis:</p>
+<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Parar o Milvus e excluir o Pulsar V2<button data-href="#Stop-Milvus-and-delete-Pulsar-V2" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nesta etapa, você precisa parar o pod do Milvus e excluir a implantação da Pulsar V2. Há duas seções separadas disponíveis:</p>
 <ul>
 <li><p>Para utilizadores do Milvus Helm</p>
 <p>Se você instalou o Milvus usando o gráfico do Milvus Helm, vá para <a href="#Delete-Pulsar-V2-using-Helm">Excluir o Pulsar v2 usando o Helm</a>.</p></li>
@@ -293,10 +323,25 @@ milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">Iniciar o Pulsar V3 e o Milvus</h3><p>Nesta etapa, você precisa iniciar os pods Pulsar V3 e Milvus. Há duas seções separadas disponíveis:</p>
+<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">Iniciar o Pulsar V3 e o Milvus<button data-href="#Start-Pulsar-V3-and-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nesta etapa, você precisa iniciar os pods Pulsar V3 e Milvus. Há duas seções separadas disponíveis:</p>
 <ul>
 <li><p>Para o utilizador do Helm</p>
-<p>Se instalou o Milvus usando o gráfico do Milvus Helm, vá para <a href="#For-Helm-User">For Helm User</a>.</p></li>
+<p>Se instalou o Milvus usando a tabela do Milvus Helm, vá para <a href="#For-Helm-User">For Helm User</a>.</p></li>
 <li><p>Para utilizadores do Milvus Operator</p>
 <p>Se instalou o Milvus usando a carta Milvus Operator, vá para <a href="#For-Milvus-Operator-User">Para</a> o <a href="#For-Milvus-Operator-User">utilizador do Milvus Operator</a>.</p></li>
 </ul>

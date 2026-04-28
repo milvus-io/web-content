@@ -4,8 +4,8 @@ title: الإحماءCompatible with Milvus 2.6.4+
 summary: >-
   يكمل الإحماء التخزين المتدرج عن طريق التحميل المسبق للحقول أو الفهارس المحددة
   في ذاكرة التخزين المؤقت قبل أن يصبح المقطع قابلاً للاستعلام. يمكنك تكوين عملية
-  الإحماء على مستوى المجموعة أو المجموعة أو الحقل/الفهرس الفردي، مما يتيح تحكمًا
-  دقيقًا في زمن وصول الاستعلام الأول واستخدام الموارد.
+  الإحماء على مستوى المجموعة أو المجموعة أو الحقل/الفهرس الفردي، مما يسمح
+  بالتحكم الدقيق في زمن وصول الاستعلام الأول واستخدام الموارد.
 beta: Milvus 2.6.4+
 ---
 <h1 id="Warm-Up" class="common-anchor-header">الإحماء<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Warm-Up" class="anchor-icon" translate="no">

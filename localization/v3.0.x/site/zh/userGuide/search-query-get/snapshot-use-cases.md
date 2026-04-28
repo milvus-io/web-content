@@ -35,7 +35,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>快照是快速的时间点数据镜像，适用于快速回滚或测试（数天至数周）。同时，备份是单独存储的独立、完整副本，可用于长期灾难恢复（数周至数年），并能更好地防止整体存储故障。</p>
+    </button></h2><p>快照是快速的时间点数据镜像，适用于快速回滚或测试（数天至数周）。同时，备份是独立、完整的副本，可单独存储，用于长期灾难恢复（数周至数年），并能更好地防止整体存储故障。</p>
 <p>下表对快照和备份进行了比较。</p>
 <table>
    <tr>
@@ -85,7 +85,7 @@ beta: Milvus 3.0.x
 <div class="alert note">
 </div>
 <p>命名快照时，请使用清晰、描述性的名称，如<code translate="no">&quot;daily_backup_20240101&quot;</code> 或<code translate="no">&quot;v2.1_production_release&quot;</code> ，避免使用通用术语，如<code translate="no">&quot;backup1&quot;</code> 和<code translate="no">&quot;test&quot;</code> 。明智地使用快照名称，以区分不同版本、环境和阶段的快照。</p>
-<p>下面的代码示例假定您已经有一个名为<code translate="no">my_collection</code> 的 Collections。</p>
+<p>下面的代码示例假定您已经有一个名为<code translate="no">my_collection</code> 的 Collections 。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

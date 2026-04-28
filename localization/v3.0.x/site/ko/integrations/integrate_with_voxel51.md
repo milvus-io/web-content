@@ -195,7 +195,7 @@ milvus_index.delete()
         ></path>
       </svg>
     </button></h2><p>기본적으로 <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> 또는 <code translate="no">sort_by_similarity()</code> 을 호출하면 스클레인 백엔드가 사용됩니다.</p>
-<p>Milvus 백엔드를 사용하려면 선택적 백엔드 매개변수인 <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> 를 <code translate="no">&quot;milvus&quot;</code> 로 설정하면 됩니다:</p>
+<p>Milvus 백엔드를 사용하려면 선택적 백엔드 매개변수( <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> 를 <code translate="no">&quot;milvus&quot;</code> 로 설정하면 됩니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> fiftyone.brain <span class="hljs-keyword">as</span> fob
 
 fob.compute_similarity(..., backend=<span class="hljs-string">&quot;milvus&quot;</span>, ...)
@@ -421,7 +421,7 @@ dataset.list_brain_runs(
     supports_prompts=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>또는 <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.get_brain_info"><code translate="no">get_brain_info()</code></a> 을 사용하여 브레인 런의 구성에 대한 정보를 검색할 수 있습니다:</p>
+<p>또는 <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.get_brain_info"><code translate="no">get_brain_info()</code></a> 를 사용하여 브레인 런의 구성에 대한 정보를 검색할 수 있습니다:</p>
 <pre><code translate="no" class="language-python">info = dataset.get_brain_info(brain_key)
 <span class="hljs-built_in">print</span>(info)
 <button class="copy-code-btn"></button></code></pre>

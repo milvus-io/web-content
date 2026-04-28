@@ -26,13 +26,13 @@ title: MilvusとHaystackによる全文検索
       </svg>
     </button></h1><p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文検索は</a>、テキスト中の特定のキーワードやフレーズにマッチする文書を検索する伝統的な手法です。用語の頻度などから計算された関連性スコアに基づいて結果をランク付けする。セマンティック検索が意味や文脈を理解するのに優れているのに対し、全文検索は正確なキーワードマッチングに優れており、セマンティック検索を補完するのに有用である。BM25アルゴリズムは、フルテキスト検索におけるランキングに広く使用されており、RAG（Retrieval-Augmented Generation）において重要な役割を果たしている。</p>
 <p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5では</a>、BM25を使ったネイティブな全文検索機能を導入した。このアプローチはテキストをBM25スコアを表すスパースベクトルに変換します。生テキストを入力するだけで、Milvusは自動的にスパースベクトルを生成し保存します。</p>
-<p><a href="https://haystack.deepset.ai/">Haystackは</a>このMilvusの機能をサポートし、RAGアプリケーションに全文検索を簡単に追加できるようになりました。全文検索と密なベクトル意味検索を組み合わせることで、意味理解とキーワードマッチング精度の両方から恩恵を受けるハイブリッドアプローチを実現することができます。この組み合わせは検索精度を向上させ、より良い結果をユーザーに提供します。</p>
+<p><a href="https://haystack.deepset.ai/">Haystackは</a>このMilvusの機能をサポートし、RAGアプリケーションに全文検索を簡単に追加できるようになりました。全文検索と密ベクトル意味検索を組み合わせることで、意味理解とキーワードマッチング精度の両方から恩恵を受けるハイブリッドなアプローチを実現することができます。この組み合わせは検索精度を向上させ、より良い結果をユーザーに提供します。</p>
 <p>このチュートリアルでは、HaystackとMilvusを使用してアプリケーションにフルテキスト検索とハイブリッド検索を実装する方法を示します。</p>
 <p>Milvusベクターストアを使用するには、Milvusサーバを<code translate="no">URI</code> （オプションで<code translate="no">TOKEN</code> ）で指定します。Milvusサーバーを立ち上げるには、<a href="https://milvus.io/docs/install-overview.md">Milvusインストールガイドに</a>従うか、<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">Zilliz Cloud</a>(フルマネージドMilvus)を無料で<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">お試し</a>ください。</p>
 <div class="alert note">
 <ul>
 <li>全文検索は現在、Milvus Standalone、Milvus Distributed、Zilliz Cloudで利用可能です。詳細は support@zilliz.com までお問い合わせください。</li>
-<li>このチュートリアルを進める前に、<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文検索と</a>Haystack Milvus統合の<a href="https://github.com/milvus-io/milvus-haystack/blob/main/README.md">基本的</a>な使い方を理解してください。</li>
+<li>このチュートリアルを進める前に、<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文検索と</a>Haystack Milvus統合の<a href="https://github.com/milvus-io/milvus-haystack/blob/main/README.md">基本的</a>な使い方を理解していることを確認してください。</li>
 </ul>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -54,14 +54,29 @@ title: MilvusとHaystackによる全文検索
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade --quiet pymilvus milvus-haystack</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするには、<strong>ランタイムを再起動する</strong>必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
+<p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
 </div>
 <p>OpenAIのモデルを使います。<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を環境変数として用意してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-data" class="common-anchor-header">データの準備</h3><p>このノートブックで必要なパッケージをインポートします。次に、いくつかのサンプルドキュメントを用意します。</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">データの準備<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>このノートブックで必要なパッケージをインポートします。次に、いくつかのサンプルドキュメントを用意します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> haystack <span class="hljs-keyword">import</span> Pipeline
 <span class="hljs-keyword">from</span> haystack.components.embedders <span class="hljs-keyword">import</span> OpenAIDocumentEmbedder, OpenAITextEmbedder
 <span class="hljs-keyword">from</span> haystack.components.writers <span class="hljs-keyword">import</span> DocumentWriter
@@ -99,7 +114,22 @@ documents = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">インデックス作成パイプラインの作成</h3><p>全文検索 MilvusDocumentStore は<code translate="no">builtin_function</code> パラメータを受け付けます。このパラメータを通して、Milvusサーバ側でBM25アルゴリズムを実装している<code translate="no">BM25BuiltInFunction</code> のインスタンスを渡すことができます。BM25 関数のインスタンスとして指定された<code translate="no">builtin_function</code> を設定します。例えば</p>
+    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">インデックス作成パイプラインの作成<button data-href="#Create-the-indexing-Pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>全文検索 MilvusDocumentStore は<code translate="no">builtin_function</code> パラメータを受け付けます。このパラメータを通して、Milvusサーバ側でBM25アルゴリズムを実装している<code translate="no">BM25BuiltInFunction</code> のインスタンスを渡すことができます。BM25 関数のインスタンスとして指定された<code translate="no">builtin_function</code> を設定します。例えば</p>
 <pre><code translate="no" class="language-python">connection_args = {<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>}
 <span class="hljs-comment"># connection_args = {&quot;uri&quot;: YOUR_ZILLIZ_CLOUD_URI, &quot;token&quot;: Secret.from_env_var(&quot;ZILLIZ_CLOUD_API_KEY&quot;)}</span>
 
@@ -131,7 +161,22 @@ indexing_pipeline.run({<span class="hljs-string">&quot;writer&quot;</span>: {<sp
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'writer': {'documents_written': 3}}
 </code></pre>
-<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">検索パイプラインの作成</h3><p><code translate="no">document_store</code> のラッパーである<code translate="no">MilvusSparseEmbeddingRetriever</code> を使って、Milvus ドキュメントストアからドキュメントを検索する検索パイプラインを作成する。</p>
+<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">検索パイプラインの作成<button data-href="#Create-the-retrieval-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">document_store</code> のラッパーである<code translate="no">MilvusSparseEmbeddingRetriever</code> を使って、Milvus ドキュメントストアからドキュメントを検索する検索パイプラインを作成する。</p>
 <pre><code translate="no" class="language-python">retrieval_pipeline = Pipeline()
 retrieval_pipeline.add_component(
     <span class="hljs-string">&quot;retriever&quot;</span>, MilvusSparseEmbeddingRetriever(document_store=document_store)
@@ -160,7 +205,22 @@ retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">インデックス作成パイプラインの作成</h3><p>ハイブリッド検索では、BM25関数を用いて全文検索を行い、密なベクトル場<code translate="no">vector</code> を指定して意味検索を行う。</p>
+    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">インデックス作成パイプラインの作成<button data-href="#Create-the-indexing-Pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ハイブリッド検索では、BM25関数を用いて全文検索を行い、密なベクトル場<code translate="no">vector</code> を指定して意味検索を行う。</p>
 <pre><code translate="no" class="language-python">document_store = MilvusDocumentStore(
     connection_args=connection_args,
     vector_field=<span class="hljs-string">&quot;vector&quot;</span>,  <span class="hljs-comment"># The dense vector field.</span>
@@ -192,7 +252,22 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
 
 Number of documents: 3
 </code></pre>
-<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">検索パイプラインの作成</h3><p><code translate="no">document_store</code> を含み、ハイブリッド検索に関するパラメータを受け取る、<code translate="no">MilvusHybridRetriever</code> を使用して、Milvus ドキュメントストアからドキュメントを検索する検索パイプラインを作成する。</p>
+<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">検索パイプラインの作成<button data-href="#Create-the-retrieval-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">document_store</code> を含み、ハイブリッド検索に関するパラメータを受け取る、<code translate="no">MilvusHybridRetriever</code> を使用して、Milvus ドキュメントストアからドキュメントを検索する検索パイプラインを作成する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from pymilvus import WeightedRanker</span>
 retrieval_pipeline = Pipeline()
 retrieval_pipeline.add_component(<span class="hljs-string">&quot;dense_text_embedder&quot;</span>, OpenAITextEmbedder())
@@ -214,7 +289,7 @@ retrieval_pipeline.connect(<span class="hljs-string">&quot;dense_text_embedder.e
 🛤️ Connections
   - dense_text_embedder.embedding -&gt; retriever.query_embedding (List[float])
 </code></pre>
-<p><code translate="no">MilvusHybridRetriever</code> を使ってハイブリッド検索を行う場合、オプションでtopKとrerankerのパラメータを設定できる。これは自動的にベクトル埋め込みと組み込み関数を処理し、最後にリランカーを使って結果を絞り込む。検索プロセスの基本的な実装の詳細は、ユーザーには隠されている。</p>
+<p><code translate="no">MilvusHybridRetriever</code> を使ってハイブリッド検索を行う場合、オプションでtopKとrerankerのパラメータを設定できる。これは自動的にベクトル埋め込みと組み込み関数を処理し、最後にリランカーを使って結果を絞り込む。検索プロセスの基本的な実装の詳細は、ユーザーからは見えないようになっている。</p>
 <p>ハイブリッド検索の詳細については、<a href="https://milvus.io/docs/multi-vector-search.md#Hybrid-Search">ハイブリッド検索入門を</a>参照してください。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;Who likes swimming?&quot;</span>
 
@@ -320,7 +395,7 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
   </span>
 </p>
 <p>この図は、キーワードマッチングのためのBM25と意味検索のための密なベクトル検索を組み合わせたハイブリッド検索と再ランク付けのプロセスを示している。両方の方法からの結果はマージされ、再ランク付けされ、最終的な答えを生成するためにLLMに渡される。</p>
-<p>ハイブリッド検索は精度と意味理解のバランスをとり、多様なクエリに対する精度と頑健性を向上させる。BM25全文検索とベクトル検索で候補を検索し、セマンティックでコンテキストを考慮した正確な検索を実現します。</p>
+<p>ハイブリッド検索は精度と意味理解のバランスをとり、多様なクエリに対する精度と頑健性を向上させる。BM25全文検索とベクトル検索で候補を検索し、セマンティックでコンテキストを考慮した正確な検索を実現する。</p>
 <p>ハイブリッド検索で最適化されたRAGの実装を試してみよう。</p>
 <pre><code translate="no" class="language-python">prompt_template = <span class="hljs-string">&quot;&quot;&quot;Answer the following query based on the provided context. If the context does
                      not include an answer, reply with &#x27;I don&#x27;t know&#x27;.\n

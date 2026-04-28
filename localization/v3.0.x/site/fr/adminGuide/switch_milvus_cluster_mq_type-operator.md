@@ -91,7 +91,7 @@ title: Changement de type MQ pour le cluster Milvus
         ></path>
       </svg>
     </button></h3><p>La configuration par défaut de Milvus définit déjà le type de stockage Woodpecker sur MinIO, de sorte qu'aucune configuration supplémentaire n'est requise dans la plupart des cas.</p>
-<p>Toutefois, si vous avez précédemment personnalisé la configuration de Woodpecker, vous devez vous assurer que <code translate="no">woodpecker.storage.type</code> est défini sur <code translate="no">minio</code>. Mettez à jour la configuration de Milvus <strong>sans</strong> modifier la valeur <code translate="no">mqType</code>:</p>
+<p>Toutefois, si vous avez précédemment personnalisé la configuration de Woodpecker, vous devez vous assurer que <code translate="no">woodpecker.storage.type</code> est défini sur <code translate="no">minio</code>. Mettez à jour la configuration Milvus <strong>sans</strong> modifier la valeur <code translate="no">mqType</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">woodpecker:</span>
   <span class="hljs-attr">storage:</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">minio</span>

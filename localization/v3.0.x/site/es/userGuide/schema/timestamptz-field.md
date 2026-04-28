@@ -25,7 +25,7 @@ beta: Milvus 2.6.6+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Las aplicaciones que realizan un seguimiento del tiempo entre regiones, como los sistemas de comercio electrónico, las herramientas de colaboración o el registro distribuido, necesitan un manejo preciso de las marcas de tiempo con zonas horarias. El tipo de datos <code translate="no">TIMESTAMPTZ</code> en Milvus proporciona esta capacidad mediante el almacenamiento de marcas de tiempo con su zona horaria asociada.</p>
+    </button></h1><p>Las aplicaciones que realizan un seguimiento de la hora en distintas regiones, como los sistemas de comercio electrónico, las herramientas de colaboración o el registro distribuido, necesitan un manejo preciso de las marcas de tiempo con zonas horarias. El tipo de datos <code translate="no">TIMESTAMPTZ</code> en Milvus proporciona esta capacidad mediante el almacenamiento de marcas de tiempo con su zona horaria asociada.</p>
 <h2 id="What-is-a-TIMESTAMPTZ-field" class="common-anchor-header">¿Qué es un campo TIMESTAMPTZ?<button data-href="#What-is-a-TIMESTAMPTZ-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -228,7 +228,7 @@ client.load_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <h4 id="Query-with-timestamp-filtering" class="common-anchor-header">Consulta con filtrado de fecha y hora</h4><p>Utilice operadores aritméticos como <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;=</code>. Para obtener una lista completa de los operadores aritméticos disponibles en Milvus, consulte <a href="/docs/es/basic-operators.md#Arithmetic-Operators">Operadores aritméticos</a>.</p>
-<p>El ejemplo siguiente filtra entidades con marcas de tiempo (<code translate="no">tsz</code>) que no son iguales a <strong>2025-01-03T00:00:00+08:00</strong>:</p>
+<p>El siguiente ejemplo filtra entidades con marcas de tiempo (<code translate="no">tsz</code>) que no son iguales a <strong>2025-01-03T00:00:00+08:00</strong>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>

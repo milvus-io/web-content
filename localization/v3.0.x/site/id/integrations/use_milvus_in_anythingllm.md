@@ -4,9 +4,9 @@ summary: >-
   Panduan ini akan memandu Anda dalam mengonfigurasi Milvus sebagai basis data
   vektor di AnythingLLM, sehingga Anda dapat menyematkan, menyimpan, dan mencari
   dokumen Anda untuk pencarian dan obrolan cerdas.
-title: Gunakan Milvus di AnythingLLM
+title: Menggunakan Milvus di AnythingLLM
 ---
-<h1 id="Use-Milvus-in-AnythingLLM" class="common-anchor-header">Gunakan Milvus di AnythingLLM<button data-href="#Use-Milvus-in-AnythingLLM" class="anchor-icon" translate="no">
+<h1 id="Use-Milvus-in-AnythingLLM" class="common-anchor-header">Menggunakan Milvus di AnythingLLM<button data-href="#Use-Milvus-in-AnythingLLM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,19 +67,19 @@ title: Gunakan Milvus di AnythingLLM
 <li>Buka AnythingLLM dan klik ikon <strong>pengaturan</strong> di sudut kiri bawah<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_dashboard.png" alt="Open Settings" class="doc-image" id="open-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_dashboard.png" alt="Open Settings" class="doc-image" id="open-settings" />
    </span> <span class="img-wrapper"> <span>Buka Pengaturan</span> </span></li>
 </ol>
 <ol start="2">
 <li><p>Di menu sebelah kiri, pilih <code translate="no">AI Providers</code> &gt; <code translate="no">Vector Database</code> <br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_config.png" alt="Select Vector Database" class="doc-image" id="select-vector-database" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_config.png" alt="Select Vector Database" class="doc-image" id="select-vector-database" />
    </span> <span class="img-wrapper"> <span>Pilih Basis Data Vektor</span> </span></p></li>
 <li><p>Pada menu tarik-turun Penyedia Basis Data Vektor, pilih <strong>Milvus</strong> (atau Zilliz Cloud)<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_vectordb.png" alt="Choose Milvus" class="doc-image" id="choose-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_vectordb.png" alt="Choose Milvus" class="doc-image" id="choose-milvus" />
    </span> <span class="img-wrapper"> <span>Pilih Milvus</span> </span></p></li>
 <li><p>Isi detail koneksi Milvus Anda (untuk Milvus lokal). Berikut ini contohnya:</p>
 <ul>
@@ -88,16 +88,16 @@ title: Gunakan Milvus di AnythingLLM
 <li><strong>Kata Sandi Milvus</strong>: <code translate="no">Milvus</code>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_milvus.png" alt="Milvus Connection" class="doc-image" id="milvus-connection" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_milvus.png" alt="Milvus Connection" class="doc-image" id="milvus-connection" />
    </span> <span class="img-wrapper"> <span>Koneksi Milvus</span> </span></li>
 </ul>
 <blockquote>
-<p>Jika menggunakan Zilliz Cloud, masukkan Cluster Endpoint dan Token API Anda:</p>
-</blockquote>
-<p>
+<p>Jika menggunakan Zilliz Cloud, masukkan Cluster Endpoint dan Token API Anda:<br>
+
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_zilliz_cloud.png" alt="Zilliz Cloud Connection" class="doc-image" id="zilliz-cloud-connection" />
-   </span> <span class="img-wrapper"> <span>Koneksi Zilliz Cloud</span> </span></p></li>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_zilliz_cloud.png" alt="Zilliz Cloud Connection" class="doc-image" id="zilliz-cloud-connection" />
+   </span> <span class="img-wrapper"> <span>Koneksi Zilliz Cloud</span> </span></p>
+</blockquote></li>
 <li><p>Klik <strong>Simpan perubahan</strong> untuk menerapkan pengaturan Anda.</p></li>
 </ol>
 <hr>
@@ -120,7 +120,7 @@ title: Gunakan Milvus di AnythingLLM
 <li><p>Masuk ke ruang kerja Anda dan klik ikon <strong>unggah</strong> untuk membuka dialog unggah dokumen<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_upload_file.png" alt="Open Upload Dialog" class="doc-image" id="open-upload-dialog" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_upload_file.png" alt="Open Upload Dialog" class="doc-image" id="open-upload-dialog" />
    </span> <span class="img-wrapper"> <span>Buka Dialog Unggah</span> </span></p></li>
 <li><p>Anda dapat mengunggah berbagai macam sumber data:</p>
 <ul>
@@ -129,17 +129,17 @@ title: Gunakan Milvus di AnythingLLM
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_upload_interface.png" alt="Upload Documents" class="doc-image" id="upload-documents" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_upload_interface.png" alt="Upload Documents" class="doc-image" id="upload-documents" />
    </span> <span class="img-wrapper"> <span>Mengunggah Dokumen</span> </span></p></li>
 <li><p>Setelah mengunggah atau mengambil, klik <strong>Pindah ke Ruang Kerja</strong> untuk memindahkan dokumen atau data ke ruang kerja Anda saat ini<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_move_to_workspace.png" alt="Move to Workspace" class="doc-image" id="move-to-workspace" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_move_to_workspace.png" alt="Move to Workspace" class="doc-image" id="move-to-workspace" />
    </span> <span class="img-wrapper"> <span>Pindah ke Ruang Kerja</span> </span></p></li>
 <li><p>Pilih dokumen atau data dan klik <strong>Simpan dan Sematkan</strong>. AnythingLLM akan secara otomatis memotong, menyematkan, dan menyimpan konten Anda di Milvus<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_save_and_embed.png" alt="Save and Embed" class="doc-image" id="save-and-embed" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_save_and_embed.png" alt="Save and Embed" class="doc-image" id="save-and-embed" />
    </span> <span class="img-wrapper"> <span>Simpan dan Sematkan</span> </span></p></li>
 </ol>
 <hr>
@@ -162,7 +162,7 @@ title: Gunakan Milvus di AnythingLLM
 <li>Kembali ke antarmuka obrolan ruang kerja dan ajukan pertanyaan. AnythingLLM akan mencari basis data vektor Milvus Anda untuk konten yang relevan dan menggunakan LLM untuk menghasilkan jawaban<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_chat.png" alt="Chat with Docs" class="doc-image" id="chat-with-docs" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_chat.png" alt="Chat with Docs" class="doc-image" id="chat-with-docs" />
    </span> <span class="img-wrapper"> <span>Mengobrol dengan Dokumen</span> </span></li>
 </ol>
 <hr>

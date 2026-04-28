@@ -216,7 +216,7 @@ time.sleep(<span class="hljs-number">10</span>)
       </svg>
     </button></h2><p>모든 데이터가 Milvus 컬렉션에 삽입되면, 질문 문구를 가져와서 Cohere로 임베딩하고 컬렉션으로 검색하여 시스템에 질문할 수 있습니다.</p>
 <div class="alert note">
-<p>삽입 직후 데이터에 대한 검색은 색인되지 않은 데이터를 무차별 대입 방식으로 검색하기 때문에 약간 느릴 수 있습니다. 새 데이터가 자동으로 색인되면 검색 속도가 빨라집니다.</p>
+<p>삽입 직후 데이터에 대한 검색은 색인되지 않은 데이터를 무차별 대입 방식으로 검색하기 때문에 속도가 약간 느릴 수 있습니다. 새 데이터가 자동으로 색인되면 검색 속도가 빨라집니다.</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search the cluster for an answer to a question text</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">search</span>(<span class="hljs-params">text, top_k = <span class="hljs-number">5</span></span>):

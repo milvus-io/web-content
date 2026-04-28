@@ -44,17 +44,62 @@ summary: >-
 <li>Operator Prometheus untuk mengelola instance pemantauan Prometheus secara efektif.</li>
 <li>Kube-prometheus untuk menyediakan pemantauan cluster Kubernetes end-to-end yang mudah dioperasikan.</li>
 </ul>
-<h3 id="Metric-names" class="common-anchor-header">Nama metrik</h3><p>Nama metrik yang valid di Prometheus berisi tiga elemen: namespace, subsistem, dan nama. Ketiga elemen ini dihubungkan dengan "_".</p>
+<h3 id="Metric-names" class="common-anchor-header">Nama metrik<button data-href="#Metric-names" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nama metrik yang valid di Prometheus berisi tiga elemen: namespace, subsistem, dan nama. Ketiga elemen ini dihubungkan dengan "_".</p>
 <p>Ruang nama metrik Milvus yang dipantau oleh Prometheus adalah "milvus". Bergantung pada peran yang dimiliki metrik, subsistemnya haruslah salah satu dari delapan peran berikut ini: "rootcoord", "proxy", "querycoord", "querynode", "indexcoord", "indexnode", "datacoord", "datanode".</p>
 <p>Misalnya, metrik Milvus yang menghitung jumlah total vektor yang ditanyakan diberi nama <code translate="no">milvus_proxy_search_vectors_count</code>.</p>
-<h3 id="Metric-types" class="common-anchor-header">Jenis metrik</h3><p>Prometheus mendukung empat jenis metrik:</p>
+<h3 id="Metric-types" class="common-anchor-header">Jenis metrik<button data-href="#Metric-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Prometheus mendukung empat jenis metrik:</p>
 <ul>
 <li>Penghitung: jenis metrik kumulatif yang nilainya hanya dapat bertambah atau disetel ulang ke nol pada saat restart.</li>
 <li>Pengukur: jenis metrik yang nilainya bisa naik dan turun.</li>
 <li>Histogram: jenis metrik yang dihitung berdasarkan bucket yang dapat dikonfigurasi. Contoh umum adalah durasi permintaan.</li>
 <li>Ringkasan: jenis metrik yang mirip dengan histogram yang menghitung kuantil yang dapat dikonfigurasi selama jendela waktu geser.</li>
 </ul>
-<h3 id="Metric-labels" class="common-anchor-header">Label metrik</h3><p>Prometheus membedakan sampel dengan nama metrik yang sama dengan memberi label. Label adalah atribut tertentu dari sebuah metrik. Metrik dengan nama yang sama harus memiliki nilai yang sama untuk bidang <code translate="no">variable_labels</code>. Tabel berikut mencantumkan nama dan arti label umum metrik Milvus.</p>
+<h3 id="Metric-labels" class="common-anchor-header">Label metrik<button data-href="#Metric-labels" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Prometheus membedakan sampel dengan nama metrik yang sama dengan memberi label. Label adalah atribut tertentu dari sebuah metrik. Metrik dengan nama yang sama harus memiliki nilai yang sama untuk bidang <code translate="no">variable_labels</code>. Tabel berikut mencantumkan nama dan arti label umum metrik Milvus.</p>
 <table>
 <thead>
 <tr><th>Nama label</th><th>Definisi</th><th>Nilai</th></tr>
@@ -64,7 +109,7 @@ summary: >-
 <tr><td>"status"</td><td>Status operasi atau permintaan yang sedang diproses.</td><td>"meninggalkan", "sukses", atau "gagal".</td></tr>
 <tr><td>"tipe_query"</td><td>Jenis permintaan baca.</td><td>"cari" atau "kueri".</td></tr>
 <tr><td>"msg_type"</td><td>Jenis pesan.</td><td>"masukkan", "hapus", "cari", atau "kueri".</td></tr>
-<tr><td>"segment_state"</td><td>Status sebuah segmen.</td><td>"Disegel", "Tumbuh", "Memerah", "Pembilasan", "Menjatuhkan", atau "Mengimpor".</td></tr>
+<tr><td>"segment_state"</td><td>Status sebuah segmen.</td><td>"Disegel", "Tumbuh", "Memerah", "Pembilasan", "Jatuh", atau "Mengimpor".</td></tr>
 <tr><td>"cache_state"</td><td>Status objek yang di-cache.</td><td>"hit" atau "miss".</td></tr>
 <tr><td>"cache_name"</td><td>Nama objek yang ditembolok. Label ini digunakan bersama dengan label "cache_state".</td><td>Misalnya "CollectionID", "Schema", dll.</td></tr>
 <tr><td>"channel_name"</td><td>Topik fisik dalam penyimpanan pesan (Pulsar atau Kafka).</td><td>Contoh: "by-dev-rootcoord-dml_0", "by-dev-rootcoord-dml_255", dsb.</td></tr>

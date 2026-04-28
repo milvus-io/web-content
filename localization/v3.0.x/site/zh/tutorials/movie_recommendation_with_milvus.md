@@ -27,7 +27,7 @@ title: 用 Milvus 推荐电影
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/movie_recommendation_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>在本笔记本中，我们将探讨如何使用 OpenAI 生成电影描述的 Embeddings，并在 Milvus 中利用这些 Embeddings 来推荐符合您偏好的电影。为了增强搜索结果，我们将利用过滤功能来执行元数据搜索。本示例中使用的数据集来自 HuggingFace 数据集，包含 8000 多个电影条目，为电影推荐提供了丰富的选择。</p>
+<p>在本笔记本中，我们将探讨如何使用 OpenAI 生成电影描述的 Embeddings，并在 Milvus 中利用这些嵌入式描述来推荐符合您偏好的电影。为了增强搜索结果，我们将利用过滤功能来执行元数据搜索。本示例中使用的数据集来自 HuggingFace 数据集，包含 8000 多个电影条目，为电影推荐提供了丰富的选择。</p>
 <h2 id="Dependencies-and-Environment" class="common-anchor-header">依赖项和环境<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

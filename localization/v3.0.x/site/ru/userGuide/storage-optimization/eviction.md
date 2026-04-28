@@ -1,6 +1,6 @@
 ---
 id: eviction.md
-title: ВыселениеCompatible with Milvus 2.6.4+
+title: EvictionCompatible with Milvus 2.6.4+
 summary: >-
   Функция Eviction управляет ресурсами кэша каждого узла QueryNode в Milvus.
   Если эта функция включена, она автоматически удаляет кэшированные данные при
@@ -8,7 +8,7 @@ summary: >-
   производительность и предотвращая истощение памяти или диска.
 beta: Milvus 2.6.4+
 ---
-<h1 id="Eviction" class="common-anchor-header">Выселение<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Eviction" class="anchor-icon" translate="no">
+<h1 id="Eviction" class="common-anchor-header">Eviction<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Eviction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,7 +57,7 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p>Поведение</p></td>
-     <td><p>Операции запроса или поиска временно приостанавливаются, пока QueryNode освобождает место в кэше. Вытеснение продолжается до тех пор, пока использование не опустится ниже нижнего предела или не наступит таймаут. Если таймаут достигнут, а данных недостаточно, запрос или поиск может завершиться неудачей.</p></td>
+     <td><p>Операции запроса или поиска временно приостанавливаются, пока QueryNode освобождает место в кэше. Вытеснение продолжается до тех пор, пока использование не опустится ниже нижнего предела или не наступит тайм-аут. Если таймаут достигнут, а данных недостаточно, запрос или поиск может завершиться неудачей.</p></td>
      <td><p>Периодически запускается в фоновом режиме, проактивно вытесняя кэшированные данные, когда их использование превышает высокий водяной знак или когда срок действия данных истекает на основании TTL. Вытеснение продолжается до тех пор, пока использование не упадет ниже низкого уровня. Запросы не блокируются.</p></td>
    </tr>
    <tr>

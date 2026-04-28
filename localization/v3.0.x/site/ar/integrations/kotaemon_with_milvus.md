@@ -38,7 +38,22 @@ title: Kotaemon RAG مع ميلفوس
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Installation" class="common-anchor-header">التثبيت</h3><p>نوصي بتثبيت كوتايمون بهذه الطريقة:</p>
+    </button></h2><h3 id="Installation" class="common-anchor-header">التثبيت<button data-href="#Installation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>نوصي بتثبيت كوتايمون بهذه الطريقة:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">optional (setup <span class="hljs-built_in">env</span>)</span>
 conda create -n kotaemon python=3.10
 conda activate kotaemon
@@ -50,11 +65,56 @@ pip install -e &quot;libs/kotaemon[all]&quot;
 pip install -e &quot;libs/ktem&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>إلى جانب هذه الطريقة، هناك بعض الطرق الأخرى لتثبيت كوتايمون. يمكنك الرجوع إلى <a href="https://github.com/Cinnamon/kotaemon?tab=readme-ov-file#installation">الوثائق الرسمية</a> لمزيد من التفاصيل.</p>
-<h3 id="Set-Milvus-as-the-default-vector-storage" class="common-anchor-header">تعيين ميلفوس كمخزن المتجهات الافتراضي</h3><p>لتغيير وحدة تخزين المتجهات الافتراضية إلى ميلفوس، عليك تعديل الملف <code translate="no">flowsettings.py</code> بالتبديل <code translate="no">KH_VECTORSTORE</code> إلى:</p>
+<h3 id="Set-Milvus-as-the-default-vector-storage" class="common-anchor-header">تعيين ميلفوس كمخزن المتجهات الافتراضي<button data-href="#Set-Milvus-as-the-default-vector-storage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لتغيير وحدة تخزين المتجهات الافتراضية إلى ميلفوس، عليك تعديل الملف <code translate="no">flowsettings.py</code> بالتبديل <code translate="no">KH_VECTORSTORE</code> إلى:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-string">&quot;__type__&quot;</span>: <span class="hljs-string">&quot;kotaemon.storages.MilvusVectorStore&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Environment-Variables" class="common-anchor-header">تعيين متغيرات البيئة</h3><p>يمكنك تهيئة النماذج عبر الملف <code translate="no">.env</code> بالمعلومات اللازمة للاتصال بنماذج LLMs ونماذج التضمين. مثل OpenAI، Azure، Ollama، إلخ.</p>
-<h3 id="Run-Kotaemon" class="common-anchor-header">تشغيل كوتيمون</h3><p>بعد إعداد متغيرات البيئة وتغيير وحدة تخزين المتجهات، يمكنك تشغيل كوتايمون عن طريق تشغيل الأمر التالي:</p>
+<h3 id="Set-Environment-Variables" class="common-anchor-header">تعيين متغيرات البيئة<button data-href="#Set-Environment-Variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكنك تهيئة النماذج عبر الملف <code translate="no">.env</code> بالمعلومات اللازمة للاتصال بنماذج LLMs ونماذج التضمين. مثل OpenAI، Azure، Ollama، إلخ.</p>
+<h3 id="Run-Kotaemon" class="common-anchor-header">تشغيل كوتيمون<button data-href="#Run-Kotaemon" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد إعداد متغيرات البيئة وتغيير وحدة تخزين المتجهات، يمكنك تشغيل كوتايمون عن طريق تشغيل الأمر التالي:</p>
 <pre><code translate="no" class="language-shell">python app.py
 <button class="copy-code-btn"></button></code></pre>
 <p>اسم المستخدم / كلمة المرور الافتراضية هي: <code translate="no">admin</code> / <code translate="no">admin</code></p>
@@ -73,24 +133,69 @@ pip install -e &quot;libs/ktem&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Add-your-AI-models" class="common-anchor-header">1. أضف نماذج الذكاء الاصطناعي الخاصة بك</h3><p>
+    </button></h2><h3 id="1-Add-your-AI-models" class="common-anchor-header">1. أضف نماذج الذكاء الاصطناعي الخاصة بك<button data-href="#1-Add-your-AI-models" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/kotaemon_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
 <p>في علامة التبويب <code translate="no">Resources</code> ، يمكنك إضافة وتعيين نماذج LLM ونماذج التضمين الخاصة بك. يمكنك إضافة نماذج متعددة وتعيينها كنماذج نشطة أو غير نشطة. ما عليك سوى توفير واحد على الأقل. يمكنك أيضًا توفير نماذج متعددة للسماح بالتبديل بينها.</p>
-<h3 id="2-Upload-your-documents" class="common-anchor-header">2. قم بتحميل مستنداتك</h3><p>
+<h3 id="2-Upload-your-documents" class="common-anchor-header">2. قم بتحميل مستنداتك<button data-href="#2-Upload-your-documents" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/kotaemon_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
 <p>من أجل القيام بضمان الجودة على مستنداتك، تحتاج إلى تحميلها إلى التطبيق أولاً. انتقل إلى علامة التبويب <code translate="no">File Index</code> ، ويمكنك تحميل وإدارة مستنداتك المخصصة.</p>
 <p>بشكل افتراضي، يتم تخزين جميع بيانات التطبيق في المجلد <code translate="no">./ktem_app_data</code>. يتم تخزين بيانات قاعدة بيانات Milvus في <code translate="no">./ktem_app_data/user_data/vectorstore</code>. يمكنك نسخ هذا المجلد احتياطيًا أو نسخ هذا المجلد لنقل التثبيت إلى جهاز جديد.</p>
-<h3 id="3-Chat-with-your-documents" class="common-anchor-header">3. الدردشة مع مستنداتك</h3><p>
+<h3 id="3-Chat-with-your-documents" class="common-anchor-header">3. الدردشة مع مستنداتك<button data-href="#3-Chat-with-your-documents" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/kotaemon_3.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_3.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

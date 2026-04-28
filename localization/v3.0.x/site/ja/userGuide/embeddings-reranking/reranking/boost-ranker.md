@@ -73,7 +73,7 @@ beta: Milvus v2.6.2+
     </button></h2><p>次の図は、Boost Rankerの主なワークフローを示しています。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
    </span> <span class="img-wrapper"> <span>ブーストランカーのメカニズム</span> </span></p>
 <p>データを挿入すると、milvusはデータをセグメントに分散します。検索中、各セグメントは候補のセットを返し、Milvusはすべてのセグメントからこれらの候補をランク付けし、最終結果を生成します。検索リクエストにBoost Rankerが含まれている場合、Milvusは各セグメントからの候補結果にBoost Rankerを適用し、潜在的な精度の低下を防ぎ、リコールを向上させます。</p>
 <p>結果を確定する前に、Milvusはこれらの候補をBoost Rankerで以下のように処理します：</p>
@@ -263,7 +263,7 @@ beta: Milvus v2.6.2+
 <td><p><strong>0002</strong></p></td>
 </tr>
 </table></p></li>
-<li><p><strong>Boost Ranker (</strong><code translate="no">weight=0.5</code><strong>) で指定された重みを適用する</strong>。</p>
+<li><p><strong>Boost Ranker（</strong><code translate="no">weight=0.5</code><strong>）で指定された重みを適用する</strong>。</p>
 <p>前のステップで識別されたすべてのエンティティに、Boost Ranker で指定された重みが乗算され、ランクが変更される。</p>
 <p><table>
 <tr>
@@ -356,7 +356,7 @@ beta: Milvus v2.6.2+
 </tr>
 </table></p>
 <p><div class="alert note"></p>
-<p>重みは浮動小数点数で指定する。上記の例のように、スコアが小さいほど関連性が高い場合は、<strong>1より</strong>小さいウェイトを使用します。そうでない場合は、<strong>1より</strong>大きいウェイトを使用します。</p>
+<p>重みは浮動小数点数で指定する。上記の例のように、スコアが小さいほど関連性が高い場合は、<strong>1より</strong>小さいウェイトを使用します。それ以外の場合は、<strong>1より</strong>大きいウェイトを使用します。</p>
 <p></div></p></li>
 <li><p><strong>すべてのセグメントの候補を、重み付けされたスコアに基づいて集計し、結果を確定する。</strong></p>
 <p><table>
@@ -797,7 +797,7 @@ params.put(<span class="hljs-string">&quot;function_mode&quot;</span>,<span clas
    <tr>
      <td><p><code translate="no">params.boost_mode</code></p></td>
      <td><p>いいえ</p></td>
-     <td><p>指定した重みが、一致するエンティティのスコアにどのように影響するかを指定します。</p><p>指定可能な値は以下のとおりです：</p><ul><li><p><code translate="no">Multiply</code></p><p>重み付けされた値が、一致するエンティティの元のスコアに指定の重みを乗じた値と等しいことを示します。 </p><p>これが既定値です。</p></li><li><p><code translate="no">Sum</code></p><p>重み付けされた値が、一致するエンティティの元のスコアと指定された重みの合計に等しいことを示します。</p></li></ul></td>
+     <td><p>指定された重みが、一致するエンティティのスコアにどのように影響するかを指定します。</p><p>指定可能な値は以下のとおりです：</p><ul><li><p><code translate="no">Multiply</code></p><p>重み付けされた値が、一致するエンティティの元のスコアに指定の重みを乗じた値と等しいことを示します。 </p><p>これが既定値です。</p></li><li><p><code translate="no">Sum</code></p><p>重み付けされた値が、一致するエンティティの元のスコアと指定された重みの合計に等しいことを示します。</p></li></ul></td>
      <td><p><code translate="no">"Sum"</code></p></td>
    </tr>
    <tr>

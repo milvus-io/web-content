@@ -19,10 +19,10 @@ summary: 了解如何在 GKE 上部署 Milvus 群集。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 是雲端原生向量資料庫，可部署於各種雲端環境。本指南將教您如何在 Google Cloud Platform (GCP) 上設定 Milvus 的每個細節。</p>
+    </button></h1><p>Milvus 是雲端原生向量資料庫，可部署於各種雲端環境。本指南將教您在 Google Cloud Platform (GCP) 上設定 Milvus 的每個細節。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gcp-networking.png" alt="Deploy a Milvus cluster on GCP" class="doc-image" id="deploy-a-milvus-cluster-on-gcp" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gcp-networking.png" alt="Deploy a Milvus cluster on GCP" class="doc-image" id="deploy-a-milvus-cluster-on-gcp" />
    </span> <span class="img-wrapper"> <span>在 GCP 上部署 Milvus 叢集</span> </span></p>
 <h2 id="Before-you-start" class="common-anchor-header">開始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,7 +42,7 @@ summary: 了解如何在 GKE 上部署 Milvus 群集。
     </button></h2><p>要在 GCP 上部署 Milvus，請確保</p>
 <ul>
 <li><p>您的 GCP 帳戶中已存在專案。</p>
-<p>若要建立專案，請參閱<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">建立和管理專案</a>。本指南中使用的專案名稱是<strong>milvus-testing-nonprod</strong>。</p></li>
+<p>若要建立專案，請參閱<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">建立和管理專案</a>。本指南中使用的專案名稱為<strong>milvus-testing-nonprod</strong>。</p></li>
 <li><p>您已在本機安裝<a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>、<a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> 和<a href="https://helm.sh/docs/intro/install/">Helm</a>，或決定改用瀏覽器式<a href="https://cloud.google.com/shell">Cloud Shell</a>。</p></li>
 <li><p>您已使用 GCP 帳戶憑證<a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">初始化 gcloud CLI</a>。</p></li>
 </ul>
@@ -183,7 +183,7 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/access_key.jpg" alt="GCP Access keys for your user account" class="doc-image" id="gcp-access-keys-for-your-user-account" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/access_key.jpg" alt="GCP Access keys for your user account" class="doc-image" id="gcp-access-keys-for-your-user-account" />
    </span> <span class="img-wrapper"> <span>用戶帳戶的 GCP 存取金鑰</span> </span></p>
 <ul>
 <li>新增 values.yaml</li>
@@ -229,8 +229,8 @@ helm repo update
 helm install -f values.yaml my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>在前面的指令中，我們在本機新增 Milvus Helm 圖表的 repo，並更新 repo 以取得最新的圖表。然後，我們安裝一個 Milvus 實例，並命名為<strong>my-release</strong>。</p>
-<p>請注意配置<code translate="no">service.type</code> 的值，它表示我們希望透過 Layer-4 負載平衡器揭露 Milvus 的實例。</p>
-<p>如果您想透過第 7 層負載平衡器暴露您的 Milvus 實例，請<a href="/docs/zh-hant/gcp_layer7.md">閱讀這篇文章</a>。</p>
+<p>請注意配置<code translate="no">service.type</code> 的值，它表示我們希望透過 Layer-4 負載平衡器來揭露 Milvus 的實例。</p>
+<p>如果您想透過第 7 層負載平衡器揭露您的 Milvus 實例，請<a href="/docs/zh-hant/gcp_layer7.md">閱讀這篇文章</a>。</p>
 <h2 id="Verify-the-deployment" class="common-anchor-header">驗證部署<button data-href="#Verify-the-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

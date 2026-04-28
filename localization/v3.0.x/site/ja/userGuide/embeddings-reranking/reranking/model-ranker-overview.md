@@ -73,7 +73,7 @@ beta: Milvus 2.6.x
 <li><p>各文書は意味理解に基づく関連性スコアを受け取る</p></li>
 </ul></li>
 <li><p><strong>インテリジェントな並べ替え</strong>：文書がモデルによって生成された関連性スコアに基づいて並べ替えられる。</p></li>
-<li><p><strong>向上した結果</strong>：アプリケーションはベクトルの類似性だけでなく、意味的な関連性によってランク付けされた結果を受け取ります。</p></li>
+<li><p><strong>充実した結果</strong>：アプリケーションはベクトルの類似性だけでなく、意味的な関連性によってランク付けされた結果を受け取ります。</p></li>
 </ol>
 <h2 id="Choose-a-model-provider-for-your-needs" class="common-anchor-header">ニーズに合ったモデルプロバイダーを選択<button data-href="#Choose-a-model-provider-for-your-needs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -278,7 +278,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>いいえ</p></td>
-     <td><p>1バッチで処理する文書の最大数。値が大きいほどスループットは向上するが、より多くのメモリを必要とする。</p></td>
+     <td><p>1バッチで処理する文書の最大数。値が大きいほどスループットは向上しますが、より多くのメモリを必要とします。</p></td>
      <td><p><code translate="no">32</code> (デフォルト)</p></td>
    </tr>
 </table>

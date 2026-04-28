@@ -1,7 +1,7 @@
 ---
 id: disk_index.md
 related_key: disk_index
-summary: آلية فهرس الأقراص في ميلفوس.
+summary: آلية فهرسة الأقراص في Milvus للبحث المتجه المحسّن على القرص.
 title: الفهرسة على القرص
 ---
 <h1 id="On-disk-Index" class="common-anchor-header">الفهرسة على القرص<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
@@ -19,10 +19,10 @@ title: الفهرسة على القرص
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>تقدم هذه المقالة خوارزمية فهرسة على القرص باسم DiskANN. استنادًا إلى الرسوم البيانية Vamana، تعمل DiskANN على تشغيل عمليات بحث فعالة ضمن مجموعات البيانات الكبيرة.</p>
+    </button></h1><p>تقدم هذه المقالة خوارزمية الفهرسة على القرص DiskANN، وهي خوارزمية فهرسة على القرص لعمليات البحث المتجهة المحسّنة على القرص. استنادًا إلى الرسوم البيانية Vamana، يعمل DiskANN على تشغيل عمليات بحث متجهية فعالة على القرص ضمن مجموعات البيانات الكبيرة.</p>
 <p>لتحسين أداء الاستعلام، يمكنك <a href="/docs/ar/index-vector-fields.md">تحديد نوع فهرس</a> لكل حقل متجه.</p>
 <div class="alert note"> 
-يدعم الحقل المتجه حاليًا نوع فهرس واحد فقط. يقوم ميلفوس تلقائيًا بحذف الفهرس القديم عند تبديل نوع الفهرس.</div>
+يدعم الحقل المتجه حاليًا نوع فهرس واحد فقط. يقوم Milvus تلقائيًا بحذف الفهرس القديم عند تبديل نوع الفهرس.</div>
 <h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,12 +38,8 @@ title: الفهرسة على القرص
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لاستخدام DiskANN، لاحظ أن</p>
+    </button></h2><p>لاستخدام DiskANN في ملفوس، لاحظ ما يلي</p>
 <ul>
-<li>يتم تعطيل DiskANN افتراضيًا. إذا كنت تفضل الفهرس داخل الذاكرة على الفهرس على القرص، يُنصح بتعطيل هذه الميزة للحصول على أداء أفضل.<ul>
-<li>لتعطيلها، يمكنك تغيير <code translate="no">queryNode.enableDisk</code> إلى <code translate="no">false</code> في ملف تكوين ميلفوس الخاص بك.</li>
-<li>لتمكينها مرة أخرى، يمكنك تعيين <code translate="no">queryNode.enableDisk</code> إلى <code translate="no">true</code>.</li>
-</ul></li>
 <li>يعمل مثيل Milvus على Ubuntu 18.04.6 أو إصدار أحدث.</li>
 <li>يجب تثبيت مسار بيانات Milvus على محرك أقراص NVMe SSD للحصول على أداء كامل:<ul>
 <li>بالنسبة لمثيل Milvus Standalone، يجب أن يكون مسار البيانات هو <strong>/var/lib/milvus/data</strong> في الحاوية التي يعمل فيها المثيل.</li>
@@ -119,7 +115,7 @@ title: الفهرسة على القرص
 <span class="hljs-attr">DiskIndex:</span>
   <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
   <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
-  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">PQCodeBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
 <span class="hljs-string">...</span>
@@ -131,7 +127,7 @@ title: الفهرسة على القرص
 <tbody>
 <tr><td><code translate="no">MaxDegree</code></td><td>الدرجة القصوى للرسم البياني لفامانا. <br/> توفر القيمة الأكبر معدل استرجاع أعلى ولكنها تزيد من حجم الفهرس والوقت اللازم لبناء الفهرس.</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>حجم القائمة المرشحة. <br/> تزيد القيمة الأكبر من الوقت المستغرق في بناء الفهرس ولكنها توفر معدل استدعاء أعلى. <br/> اضبطه على قيمة أصغر من <code translate="no">MaxDegree</code> إلا إذا كنت بحاجة إلى تقليل وقت بناء الفهرس.</td><td>[1, int32_max]</td><td>100</td></tr>
-<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>الحد الأقصى لحجم رمز PQ. <br/> توفر القيمة الأكبر معدل استدعاء أعلى ولكنها تزيد من استخدام الذاكرة.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
+<tr><td><code translate="no">PQCodeBudgetGBRatio</code></td><td>الحد الأقصى لحجم رمز PQ. <br/> توفر القيمة الأكبر معدل استدعاء أعلى ولكنها تزيد من استخدام الذاكرة.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>نسبة أرقام العقد المخزنة مؤقتاً إلى البيانات الأولية. <br/> تؤدي القيمة الأكبر إلى تحسين أداء بناء الفهرس مع زيادة استخدام الذاكرة.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>النسبة بين الحد الأقصى لعدد طلبات الإدخال والإخراج لكل تكرار بحث ورقم وحدة المعالجة المركزية.</td><td>[1، الحد الأقصى (128 / رقم وحدة المعالجة المركزية، 16)]</td><td>4.0</td></tr>
 </tbody>

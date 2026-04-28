@@ -8,10 +8,10 @@ summary: >-
   condiciones de filtrado complejas en inglés sencillo, que luego se convierten
   a la sintaxis Milvus adecuada.
 title: >-
-  Generar Expresiones de Filtro de Consulta Milvus con Grandes Modelos de
+  Generación de Expresiones de Filtro de Consulta Milvus con Grandes Modelos de
   Lenguaje
 ---
-<h1 id="Generating-Milvus-Query-Filter-Expressions-with-Large-Language-Models" class="common-anchor-header">Generar Expresiones de Filtro de Consulta Milvus con Grandes Modelos de Lenguaje<button data-href="#Generating-Milvus-Query-Filter-Expressions-with-Large-Language-Models" class="anchor-icon" translate="no">
+<h1 id="Generating-Milvus-Query-Filter-Expressions-with-Large-Language-Models" class="common-anchor-header">Generación de Expresiones de Filtro de Consulta Milvus con Grandes Modelos de Lenguaje<button data-href="#Generating-Milvus-Query-Filter-Expressions-with-Large-Language-Models" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

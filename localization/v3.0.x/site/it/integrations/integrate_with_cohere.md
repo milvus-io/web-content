@@ -173,7 +173,7 @@ collection.load()
 <li>incorporare le domande originali e</li>
 <li>inserire i dati nella raccolta appena creata su Milvus.</li>
 </ul>
-<p>In questo esempio, i dati comprendono la domanda originale, l'incorporamento della domanda originale e la risposta alla domanda originale.</p>
+<p>In questo esempio, i dati comprendono la domanda originale, il suo incorporamento e la risposta alla domanda originale.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up a co:here client.</span>
 cohere_client = cohere.Client(COHERE_API_KEY)
 

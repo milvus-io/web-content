@@ -25,7 +25,7 @@ beta: Milvus 2.6.8+
       </svg>
     </button></h1><p>Penyorot di Milvus memberi keterangan pada istilah yang cocok di bidang teks dengan membungkusnya dengan tag yang dapat disesuaikan. Penyorotan membantu menjelaskan mengapa sebuah dokumen cocok, meningkatkan keterbacaan hasil, dan mendukung rendering yang kaya dalam aplikasi pencarian dan RAG.</p>
 <p>Penyorotan dijalankan sebagai langkah pasca-pemrosesan pada kumpulan hasil pencarian akhir. Hal ini tidak memengaruhi pengambilan kandidat, logika penyaringan, peringkat, atau penilaian.</p>
-<p>Penyorot menyediakan tiga dimensi kontrol yang independen:</p>
+<p>Penyorot memberikan tiga dimensi kontrol yang independen:</p>
 <ul>
 <li><p><strong>Istilah mana yang disorot</strong></p>
 <p>Anda dapat memilih dari mana istilah yang disorot berasal. Misalnya, menyorot istilah pencarian yang digunakan dalam <strong>pencarian teks lengkap BM25</strong>, atau istilah kueri yang ditentukan dalam <strong>ekspresi pemfilteran berbasis teks</strong> (seperti <code translate="no">TEXT_MATCH</code> kondisi).</p></li>
@@ -50,7 +50,7 @@ beta: Milvus 2.6.8+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Saat Anda melakukan pencarian teks lengkap BM25, Anda dapat menyorot <strong>istilah pencarian</strong> di hasil yang dikembalikan untuk membantu menjelaskan mengapa dokumen cocok dengan kueri. Untuk mempelajari lebih lanjut tentang pencarian teks lengkap BM25, lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p>
+    </button></h2><p>Saat Anda melakukan pencarian teks lengkap BM25, Anda dapat menyorot <strong>istilah pencarian</strong> di hasil yang dikembalikan untuk membantu menjelaskan mengapa sebuah dokumen cocok dengan kueri. Untuk mempelajari lebih lanjut tentang pencarian teks lengkap BM25, lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p>
 <p>Dalam skenario ini, istilah yang disorot berasal langsung dari istilah pencarian yang digunakan dalam pencarian teks lengkap BM25. Penyorot menggunakan istilah-istilah ini untuk membuat anotasi teks yang cocok pada hasil akhir.</p>
 <p>Asumsikan konten berikut ini disimpan dalam bidang teks:</p>
 <pre><code translate="no" class="language-plaintext">Milvus supports full text search. Use BM25 for keyword relevance. Filters can narrow results.

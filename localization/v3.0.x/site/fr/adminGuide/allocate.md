@@ -80,11 +80,11 @@ L'utilisation de Helm pour mettre à niveau les ressources entraînera l'exécut
     </button></h3><p>Vous devez définir les variables de ressources pour chaque composant Milvus si vous utilisez <code translate="no">--set</code> pour mettre à jour les configurations de ressources.</p>
 <div class="filter">
 <a href="#standalone">Milvus autonome Milvus</a> <a href="#cluster">cluster</a></div>
-<div class="table-wrapper filter-standalone" markdown="block">
+<div class="filter-standalone table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set standalone.resources.limits.cpu=2 --set standalone.resources.limits.memory=4Gi --set standalone.resources.requests.cpu=0.1 --set standalone.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<div class="table-wrapper filter-cluster" markdown="block">
+<div class="filter-cluster table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set dataNode.resources.limits.cpu=2 --set dataNode.resources.limits.memory=4Gi --set dataNode.resources.requests.cpu=0.1 --set dataNode.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
@@ -140,7 +140,7 @@ L'utilisation de Helm pour mettre à niveau les ressources entraînera l'exécut
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values -f resources.yaml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-Si <code translate="no">resources.limits</code> n'est pas spécifié, les pods consommeront toutes les ressources CPU et mémoire disponibles. Veillez donc à spécifier <code translate="no">resources.requests</code> et <code translate="no">resources.limits</code> pour éviter la surallocation des ressources lorsque d'autres tâches en cours d'exécution sur la même instance nécessitent une plus grande consommation de mémoire.</div>
+Si <code translate="no">resources.limits</code> n'est pas spécifié, les pods consommeront toutes les ressources CPU et mémoire disponibles. Veillez donc à spécifier <code translate="no">resources.requests</code> et <code translate="no">resources.limits</code> pour éviter la surallocation des ressources lorsque d'autres tâches en cours d'exécution sur la même instance nécessitent une consommation de mémoire plus importante.</div>
 <p>Consultez la <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/">documentation de Kubernetes</a> pour plus d'informations sur la gestion des ressources.</p>
 <h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

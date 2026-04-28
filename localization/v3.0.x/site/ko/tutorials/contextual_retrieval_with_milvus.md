@@ -49,7 +49,22 @@ title: Milvus를 사용한 문맥 검색
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">설치 종속성</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">설치 종속성<button data-href="#Install-Dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install tqdm</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install anthropic</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -91,7 +106,7 @@ title: Milvus를 사용한 문맥 검색
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 클래스는 필요에 따라 다양한 검색 모드 중에서 선택할 수 있도록 유연하게 설계되었습니다. 초기화 방법에서 옵션을 지정하여 문맥 검색, 하이브리드 검색(밀도 검색과 희소 검색 방법의 결합) 또는 향상된 결과를 위한 리랭커를 사용할지 여부를 결정할 수 있습니다.</p>
+    </button></h2><p>이 클래스는 필요에 따라 다양한 검색 모드 중에서 선택할 수 있도록 유연하게 설계되었습니다. 초기화 방법에서 옵션을 지정하여 문맥 검색, 하이브리드 검색(밀도 검색과 희소 검색 방법의 결합) 또는 향상된 결과를 위한 재랭커를 사용할지 여부를 결정할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> VoyageEmbeddingFunction
 <span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 <span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> CohereRerankFunction
@@ -503,7 +518,7 @@ Total queries: 248
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Voyage 임베딩으로 유망한 결과를 얻었으므로 이제 강력한 스파스 임베딩을 생성하는 BGE-M3 모델을 사용해 하이브리드 검색을 수행해 보겠습니다. 밀도 검색과 희소 검색의 결과를 상호 순위 융합(RRF) 방법을 사용하여 결합하여 하이브리드 결과를 생성합니다.</p>
+    </button></h2><p>Voyage 임베딩으로 유망한 결과를 얻었으므로 이제 강력한 스파스 임베딩을 생성하는 BGE-M3 모델을 사용해 하이브리드 검색을 수행해 보겠습니다. 밀도 검색과 희소 검색의 결과를 상호 순위 융합(RRF) 방법을 사용해 결합하여 하이브리드 결과를 생성합니다.</p>
 <pre><code translate="no" class="language-python">hybrid_retriever = MilvusContextualRetriever(
     uri=<span class="hljs-string">&quot;hybrid.db&quot;</span>,
     collection_name=<span class="hljs-string">&quot;hybrid&quot;</span>,

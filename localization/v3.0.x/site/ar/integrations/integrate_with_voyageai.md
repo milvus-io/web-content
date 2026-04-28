@@ -223,7 +223,7 @@ res = milvus_client.insert(collection_name=<span class="hljs-string">&quot;demo_
 
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&quot;insert_count&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>نحن الآن جاهزون للبحث في الصور. الاستعلام هنا عبارة عن سلسلة، ولكن يمكننا الاستعلام بالصور أيضًا. (راجع الوثائق الخاصة بواجهة برمجة التطبيقات متعددة الوسائط <a href="https://docs.voyageai.com/docs/multimodal-embeddings">هنا</a>). نستخدم matplotlib لإظهار صور النتائج.</p>
+<p>نحن الآن جاهزون للبحث في الصور. الاستعلام هنا عبارة عن سلسلة، ولكن يمكننا الاستعلام بالصور أيضًا. (راجع الوثائق الخاصة بواجهة برمجة التطبيقات متعددة الوسائط <a href="https://docs.voyageai.com/docs/multimodal-embeddings">هنا</a>). نستخدم matplotlib لإظهار الصور الناتجة.</p>
 <pre><code translate="no" class="language-python">queries = [[<span class="hljs-string">&quot;The consequences of a dictator&#x27;s peace&quot;</span>]]
 
 query_vectors = client.multimodal_embed(

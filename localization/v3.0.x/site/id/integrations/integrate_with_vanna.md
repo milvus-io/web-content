@@ -243,7 +243,7 @@ training_data
     <tr>
       <th>0</th>
       <td>595b185c-e6ad-47b0-98fd-0e93ef9b6a0a-sql</td>
-      <td>Apa saja detail dari pelanggan yang bernama Joh...</td>
+      <td>Apa saja detail dari pelanggan bernama Joh...</td>
       <td>SELECT * FROM Pelanggan WHERE Nama = 'John Doe'</td>
     </tr>
     <tr>

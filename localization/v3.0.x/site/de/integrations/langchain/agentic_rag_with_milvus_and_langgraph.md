@@ -36,7 +36,7 @@ title: Agentisches RAG mit Milvus und LangGraph
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/agentic_rag_with_langgraph_architecture.png" alt="Architecture of an agentic RAG system using LangGraph and Milvus" class="doc-image" id="architecture-of-an-agentic-rag-system-using-langgraph-and-milvus" />
    </span> <span class="img-wrapper"> <span>Architektur eines agentenbasierten RAG-Systems mit LangGraph und Milvus</span> </span></p>
-<p><a href="https://langchain-ai.github.io/langgraph/">LangGraph</a> ist eine Bibliothek zur Erstellung von zustandsbehafteten, Multi-Aktor-Anwendungen mit LLMs, die auf LangChain aufbaut. <a href="https://milvus.io/">Milvus</a> ist die weltweit fortschrittlichste Open-Source-Vektordatenbank, die für die Einbettung von Ähnlichkeitssuche und KI-Anwendungen entwickelt wurde.</p>
+<p><a href="https://langchain-ai.github.io/langgraph/">LangGraph</a> ist eine Bibliothek zur Erstellung von zustandsbehafteten, Multi-Aktor-Anwendungen mit LLMs, die auf LangChain aufbaut. <a href="https://milvus.io/">Milvus</a> ist die fortschrittlichste Open-Source-Vektordatenbank der Welt, die für die Einbettung von Ähnlichkeitssuche und KI-Anwendungen entwickelt wurde.</p>
 <p>In diesem Tutorial werden wir ein agentenbasiertes RAG-System aufbauen, das:</p>
 <ul>
 <li>entscheiden kann, ob es Dokumente abruft oder direkt auf einfache Abfragen antwortet</li>
@@ -85,7 +85,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wir verwenden den Langchain <a href="https://python.langchain.com/docs/integrations/document_loaders/web_base/">WebBaseLoader</a>, um Dokumente aus <a href="https://lilianweng.github.io/">Lilian Wengs Blogbeiträgen</a> zu laden und sie mit dem <a href="https://python.langchain.com/docs/how_to/recursive_text_splitter/">RecursiveCharacterTextSplitter</a> in Stücke zu zerlegen.</p>
+    </button></h2><p>Wir verwenden den Langchain <a href="https://python.langchain.com/docs/integrations/document_loaders/web_base/">WebBaseLoader</a>, um Dokumente aus den <a href="https://lilianweng.github.io/">Blogbeiträgen von Lilian Weng</a> zu laden und sie mit dem <a href="https://python.langchain.com/docs/how_to/recursive_text_splitter/">RecursiveCharacterTextSplitter</a> in Stücke zu zerlegen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_community.document_loaders <span class="hljs-keyword">import</span> WebBaseLoader
 <span class="hljs-keyword">from</span> langchain_text_splitters <span class="hljs-keyword">import</span> RecursiveCharacterTextSplitter
 
@@ -129,7 +129,7 @@ Total document chunks: 47
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jetzt werden wir einen Vektorspeicher mit Milvus erstellen, um unsere Dokumentenstücke zu indizieren und ein Retriever-Tool zu erstellen, das unser Agent verwenden kann.</p>
+    </button></h2><p>Nun erstellen wir einen Vektorspeicher mit Milvus, um unsere Dokumentenstücke zu indizieren und ein Retriever-Tool zu erstellen, das unser Agent verwenden kann.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 <span class="hljs-keyword">from</span> langchain.tools.retriever <span class="hljs-keyword">import</span> create_retriever_tool
@@ -687,4 +687,4 @@ content='To defend against potential risks in AI systems, we can employ human re
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In diesem Tutorial haben wir ein agentenbasiertes RAG-System mit LangGraph und Milvus entwickelt, das intelligent entscheiden kann, wann Informationen abgerufen werden müssen, die Relevanz von Dokumenten bewertet und Anfragen für bessere Ergebnisse umschreibt. Dieser Ansatz bietet erhebliche Vorteile gegenüber herkömmlichen RAG-Systemen, darunter eine bessere Benutzererfahrung durch intelligentes Routing, qualitativ hochwertigere Antworten durch die Bewertung von Dokumenten und eine verbesserte Suche durch das Umschreiben von Anfragen. Sie können dieses System weiter ausbauen, indem Sie eine ausgefeiltere Bewertungslogik hinzufügen, mehrere Abfragestrategien implementieren oder zusätzliche Tools und Datenquellen einbeziehen.</p>
+    </button></h2><p>In diesem Tutorial haben wir ein agentenbasiertes RAG-System auf Basis von LangGraph und Milvus entwickelt, das auf intelligente Weise entscheiden kann, wann Informationen abgerufen werden müssen, die Relevanz von Dokumenten bewertet und Anfragen für bessere Ergebnisse umschreibt. Dieser Ansatz bietet erhebliche Vorteile gegenüber herkömmlichen RAG-Systemen, darunter eine bessere Benutzererfahrung durch intelligentes Routing, qualitativ hochwertigere Antworten durch die Bewertung von Dokumenten und eine verbesserte Suche durch das Umschreiben von Anfragen. Sie können dieses System weiter ausbauen, indem Sie eine ausgefeiltere Bewertungslogik hinzufügen, mehrere Abfragestrategien implementieren oder zusätzliche Tools und Datenquellen einbeziehen.</p>

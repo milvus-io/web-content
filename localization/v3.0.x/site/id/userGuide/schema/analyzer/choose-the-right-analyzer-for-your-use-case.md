@@ -40,10 +40,10 @@ summary: Catatan
 <p>Penganalisis bekerja dalam pipa dua tahap yang sederhana:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
    </span> <span class="img-wrapper"> <span>Alur Kerja Penganalisis</span> </span></p>
 <ol>
-<li><p><strong>Tokenisasi (wajib):</strong> Tahap awal ini menerapkan <strong>tokenizer</strong> untuk memecah string teks yang berkelanjutan menjadi unit-unit diskrit dan bermakna yang disebut token. Metode tokenisasi dapat sangat bervariasi, tergantung pada bahasa dan jenis konten.</p></li>
+<li><p><strong>Tokenisasi (wajib):</strong> Tahap awal ini menerapkan <strong>tokenizer</strong> untuk memecah rangkaian teks yang berkelanjutan menjadi unit-unit yang terpisah dan bermakna yang disebut token. Metode tokenisasi dapat sangat bervariasi, tergantung pada bahasa dan jenis konten.</p></li>
 <li><p><strong>Penyaringan token (opsional):</strong> Setelah tokenisasi, <strong>filter</strong> diterapkan untuk memodifikasi, menghapus, atau menyaring token. Operasi ini dapat mencakup mengubah semua token menjadi huruf kecil, menghapus kata-kata umum yang tidak berarti (seperti stopwords), atau mengurangi kata-kata ke bentuk dasarnya (stemming).</p></li>
 </ol>
 <p><strong>Contoh</strong>:</p>
@@ -304,7 +304,7 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jika <a href="/docs/id/choose-the-right-analyzer-for-your-use-case.md#Available-built-in-analyzers">opsi bawaan</a> tidak memenuhi kebutuhan Anda, Anda dapat membuat penganalisis khusus dengan menggabungkan tokenizer dengan seperangkat filter. Hal ini memberikan Anda kendali penuh atas pipeline pemrosesan teks.</p>
+    </button></h2><p>Jika <a href="/docs/id/choose-the-right-analyzer-for-your-use-case.md#Available-built-in-analyzers">opsi bawaan</a> tidak memenuhi kebutuhan Anda, Anda dapat membuat penganalisis khusus dengan menggabungkan tokenizer dengan seperangkat filter. Hal ini memberi Anda kendali penuh atas pipeline pemrosesan teks.</p>
 <h3 id="Step-1-Select-the-tokenizer-based-on-language" class="common-anchor-header">Langkah 1: Pilih tokenizer berdasarkan bahasa<button data-href="#Step-1-Select-the-tokenizer-based-on-language" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -423,7 +423,7 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah <a href="/docs/id/choose-the-right-analyzer-for-your-use-case.md#Step-1-Select-the-tokenizer-based-on-language">memilih tokenizer</a>, terapkan filter berdasarkan persyaratan pencarian spesifik dan karakteristik konten.</p>
+    </button></h3><p>Setelah <a href="/docs/id/choose-the-right-analyzer-for-your-use-case.md#Step-1-Select-the-tokenizer-based-on-language">memilih tokenizer</a>, terapkan filter berdasarkan persyaratan pencarian spesifik dan karakteristik konten Anda.</p>
 <h4 id="Commonly-used-filters" class="common-anchor-header">Filter yang umum digunakan</h4><p>Filter ini penting untuk sebagian besar konfigurasi bahasa yang dipisahkan oleh ruang (Inggris, Prancis, Jerman, Spanyol, dll.) dan secara signifikan meningkatkan kualitas pencarian:</p>
 <table>
    <tr>
@@ -544,7 +544,7 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk membuat penganalisis khusus, Anda menentukan tokenizer dan daftar filter dalam kamus <code translate="no">analyzer_params</code>. Filter-filter diterapkan sesuai dengan urutan yang tercantum.</p>
+    </button></h3><p>Untuk membuat penganalisis khusus, Anda menentukan tokenizer dan daftar filter dalam kamus <code translate="no">analyzer_params</code>. Filter-filter tersebut diterapkan sesuai dengan urutan yang tercantum.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: A custom analyzer for technical content</span>
 analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;whitespace&quot;</span>,
@@ -710,7 +710,7 @@ analyzer_params = {
 }
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Untuk bahasa Mandarin Sederhana, <code translate="no">cnalphanumonly</code> menghapus semua token kecuali karakter Mandarin, teks alfanumerik, dan angka. Hal ini untuk mencegah tanda baca mempengaruhi kualitas pencarian.</p>
+<p>Untuk bahasa Mandarin Sederhana, <code translate="no">cnalphanumonly</code> menghapus semua token kecuali karakter Mandarin, teks alfanumerik, dan angka. Hal ini untuk mencegah tanda baca memengaruhi kualitas penelusuran.</p>
 </div>
 <h3 id="Japanese-content" class="common-anchor-header">Konten bahasa Jepang<button data-href="#Japanese-content" class="anchor-icon" translate="no">
       <svg translate="no"

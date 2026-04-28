@@ -2,7 +2,9 @@
 id: prerequisite-helm.md
 label: Install on Kubernetes
 related_key: Kubernetes
-summary: Conheça os preparativos necessários antes de instalar o Milvus com o Helm.
+summary: >-
+  Saiba quais são os preparativos necessários antes de instalar o Milvus com o
+  Helm.
 title: Requisitos para executar o Milvus no Kubernetes
 ---
 <h1 id="Requirements-for-running-Milvus-on-Kubernetes" class="common-anchor-header">Requisitos para executar o Milvus no Kubernetes<button data-href="#Requirements-for-running-Milvus-on-Kubernetes" class="anchor-icon" translate="no">
@@ -136,7 +138,7 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
       </svg>
     </button></h3><p>Você pode usar ferramentas como <a href="https://minikube.sigs.k8s.io/docs/">minikube</a>, <a href="https://kind.sigs.k8s.io/">kind</a> e <a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm</a> para configurar rapidamente um cluster Kubernetes localmente. O procedimento a seguir usa o minikube como exemplo.</p>
 <ol>
-<li>Baixar o minikube</li>
+<li>Descarregar o minikube</li>
 </ol>
 <p>Aceda à página <a href="https://minikube.sigs.k8s.io/docs/start/">Get Started</a>, verifique se cumpre as condições listadas na secção <strong>What you'll need</strong>, clique nos botões que descrevem a sua plataforma de destino e copie os comandos para transferir e instalar o binário.</p>
 <ol start="2">
@@ -174,5 +176,5 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
 <li><a href="/docs/pt/install_cluster-milvusoperator.md">Executar o Milvus em Kubernetes com o Milvus Operator</a></li>
 <li><a href="/docs/pt/install_cluster-helm.md">Executar o Milvus no Kubernetes com o Helm</a></li>
 </ul></li>
-<li><p>Consulte <a href="/docs/pt/system_configuration.md">Configuração do sistema</a> para obter os parâmetros que pode definir durante a instalação do Milvus.</p></li>
+<li><p>Veja <a href="/docs/pt/system_configuration.md">Configuração do Sistema</a> para parâmetros que pode definir durante a instalação do Milvus.</p></li>
 </ul>

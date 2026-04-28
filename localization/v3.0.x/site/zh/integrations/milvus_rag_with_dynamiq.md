@@ -67,7 +67,7 @@ title: 开始使用 Dynamiq 和 Milvus
     </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install dynamiq pymilvus milvus-lite</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重启运行时</strong>（点击屏幕上方的 "运行时 "菜单，从下拉菜单中选择 "重启会话"）。</p>
+<p>如果使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重启运行时</strong>（点击屏幕顶部的 "运行时 "菜单，从下拉菜单中选择 "重启会话"）。</p>
 </div>
 <h3 id="Configure-the-LLM-agent" class="common-anchor-header">配置 LLM Agent<button data-href="#Configure-the-LLM-agent" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -349,7 +349,7 @@ ResourceWarning: Enable tracemalloc to get the object allocation traceback
         ></path>
       </svg>
     </button></h2><p>在本教程中，我们将实现一个检索-增强生成（RAG）文档检索工作流。该工作流接收用户查询，为其生成向量嵌入，从 Milvus 向量数据库中检索最相关的文档，并使用大型语言模型（LLM）根据检索到的文档生成详细的、上下文感知的答案。</p>
-<p>通过遵循这一工作流程，您将创建一个用于语义搜索和问题解答的端到端解决方案，将基于向量的文档检索功能与 OpenAI 高级 LLMs 的能力结合起来。这种方法可利用文档数据库中存储的知识，对用户查询做出高效、智能的响应。</p>
+<p>通过遵循这一工作流程，您将为语义搜索和问题解答创建一个端到端解决方案，将基于向量的文档检索功能与 OpenAI 高级 LLMs 的能力结合起来。这种方法可利用文档数据库中存储的知识，对用户查询做出高效、智能的响应。</p>
 <h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">导入所需库并初始化工作流程<button data-href="#Import-Required-Libraries-and-Initialize-Workflow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

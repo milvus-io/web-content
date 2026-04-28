@@ -22,7 +22,7 @@ title: Интеграция Milvus с MindsDB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://docs.mindsdb.com/what-is-mindsdb">MindsDB</a> - это мощный инструмент для интеграции приложений искусственного интеллекта с различными корпоративными источниками данных. Он действует как механизм федеративных запросов, который вносит порядок в разрозненные данные, скрупулезно отвечая на запросы как структурированных, так и неструктурированных данных. Независимо от того, разбросаны ли ваши данные по SaaS-приложениям, базам или хранилищам данных, MindsDB может подключить и запросить их все, используя стандартный SQL. В MindsDB реализованы самые современные автономные системы RAG через базы знаний, поддержка сотен источников данных и гибкие возможности развертывания - от локальной разработки до облачных сред.</p>
+    </button></h1><p><a href="https://docs.mindsdb.com/what-is-mindsdb">MindsDB</a> - это мощный инструмент для интеграции приложений искусственного интеллекта с различными корпоративными источниками данных. Он действует как механизм федеративных запросов, который вносит порядок в разбросанные данные, тщательно отвечая на запросы как структурированных, так и неструктурированных данных. Независимо от того, разбросаны ли ваши данные по SaaS-приложениям, базам или хранилищам данных, MindsDB может подключить и запросить их все, используя стандартный SQL. В MindsDB реализованы самые современные автономные системы RAG через базы знаний, поддержка сотен источников данных и гибкие возможности развертывания - от локальной разработки до облачных сред.</p>
 <p>Это руководство демонстрирует, как интегрировать Milvus с MindsDB, позволяя вам использовать возможности MindsDB в области искусственного интеллекта с функциональностью векторной базы данных Milvus через SQL-подобные операции для управления и запроса векторных вкраплений.</p>
 <div class="alert note">
 <p>Это руководство в основном ссылается на официальную документацию по <a href="https://github.com/mindsdb/mindsdb/tree/main/mindsdb/integrations/handlers/milvus_handler">MindsDB Milvus Handler</a>. Если вы найдете в этом руководстве какие-либо устаревшие части, вы можете в приоритетном порядке следовать официальной документации и создать для нас проблему.</p>
@@ -102,7 +102,22 @@ title: Интеграция Milvus с MindsDB
         ></path>
       </svg>
     </button></h2><p>Прежде чем продолжить, убедитесь, что версия <code translate="no">pymilvus</code> совпадает с этой <a href="https://github.com/mindsdb/mindsdb/blob/main/mindsdb/integrations/handlers/milvus_handler/requirements.txt">версией</a>. Если вы обнаружите проблемы с совместимостью версий, вы можете откатить свою версию pymilvus или настроить ее в этом <a href="https://github.com/mindsdb/mindsdb/tree/main/mindsdb/integrations/handlers/milvus_handler">файле требований</a>.</p>
-<h3 id="Creating-connection" class="common-anchor-header">Создание соединения</h3><p>Для того чтобы воспользоваться этим обработчиком и подключиться к серверу Milvus в MindsDB, можно использовать следующий синтаксис:</p>
+<h3 id="Creating-connection" class="common-anchor-header">Создание соединения<button data-href="#Creating-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Для того чтобы воспользоваться этим обработчиком и подключиться к серверу Milvus в MindsDB, можно использовать следующий синтаксис:</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">CREATE</span> DATABASE milvus_datasource
 <span class="hljs-keyword">WITH</span>
   ENGINE <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;milvus&#x27;</span>,
@@ -120,15 +135,75 @@ title: Интеграция Milvus с MindsDB
 <li>Вы также можете использовать полностью управляемый Milvus в <a href="https://zilliz.com/cloud">Zilliz Cloud</a>. Просто установите <code translate="no">uri</code> и <code translate="no">token</code> в качестве <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">публичной конечной точки и ключа API</a> вашего экземпляра Zilliz Cloud.</li>
 </ul>
 </blockquote>
-<h3 id="Dropping-connection" class="common-anchor-header">Сброс соединения</h3><p>Чтобы сбросить соединение, используйте эту команду.</p>
+<h3 id="Dropping-connection" class="common-anchor-header">Сброс соединения<button data-href="#Dropping-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы сбросить соединение, используйте эту команду.</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">DROP</span> DATABASE milvus_datasource;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Creating-tables" class="common-anchor-header">Создание таблиц</h3><p>Чтобы вставить данные из уже существующей таблицы, используйте команду <code translate="no">CREATE</code></p>
+<h3 id="Creating-tables" class="common-anchor-header">Создание таблиц<button data-href="#Creating-tables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы вставить данные из уже существующей таблицы, используйте команду <code translate="no">CREATE</code></p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> milvus_datasource.test
 (<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> sqlitedb.test);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Dropping-collections" class="common-anchor-header">Сбрасывание коллекций</h3><p>Сброс коллекции не поддерживается</p>
-<h3 id="Querying-and-selecting" class="common-anchor-header">Запрос и выборка</h3><p>Чтобы запросить базу данных с помощью вектора поиска, можно использовать <code translate="no">search_vector</code> в предложении <code translate="no">WHERE</code>.</p>
+<h3 id="Dropping-collections" class="common-anchor-header">Сбрасывание коллекций<button data-href="#Dropping-collections" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Сброс коллекции не поддерживается</p>
+<h3 id="Querying-and-selecting" class="common-anchor-header">Запрос и выборка<button data-href="#Querying-and-selecting" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы запросить базу данных с помощью вектора поиска, можно использовать <code translate="no">search_vector</code> в предложении <code translate="no">WHERE</code>.</p>
 <p>Оговорки:</p>
 <ul>
 <li>Если вы опустите <code translate="no">LIMIT</code>, то будет использоваться <code translate="no">search_default_limit</code>, так как Milvus требует этого.</li>
@@ -146,7 +221,22 @@ LIMIT <span class="hljs-number">10</span>;
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> milvus_datasource.createtest
 <span class="hljs-keyword">WHERE</span> category <span class="hljs-operator">=</span> &quot;science&quot;;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Deleting-records" class="common-anchor-header">Удаление записей</h3><p>Вы можете удалять записи с помощью <code translate="no">DELETE</code>, как и в SQL.</p>
+<h3 id="Deleting-records" class="common-anchor-header">Удаление записей<button data-href="#Deleting-records" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Вы можете удалять записи с помощью <code translate="no">DELETE</code>, как и в SQL.</p>
 <p>Оговорки:</p>
 <ul>
 <li>Milvus поддерживает удаление сущностей только с четко определенными первичными ключами.</li>
@@ -155,10 +245,40 @@ LIMIT <span class="hljs-number">10</span>;
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> milvus_datasource.test
 <span class="hljs-keyword">WHERE</span> id <span class="hljs-keyword">IN</span> (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Inserting-records" class="common-anchor-header">Вставка записей</h3><p>Вы также можете вставлять отдельные строки, как показано ниже:</p>
+<h3 id="Inserting-records" class="common-anchor-header">Вставка записей<button data-href="#Inserting-records" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Вы также можете вставлять отдельные строки, как показано ниже:</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> milvus_test.testable (id,content,metadata,embeddings)
 <span class="hljs-keyword">VALUES</span> (&quot;id3&quot;, <span class="hljs-string">&#x27;this is a test&#x27;</span>, <span class="hljs-string">&#x27;{&quot;test&quot;: &quot;test&quot;}&#x27;</span>, <span class="hljs-string">&#x27;[1.0, 8.0, 9.0]&#x27;</span>);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Updating" class="common-anchor-header">Обновление</h3><p>Обновление записей не поддерживается Milvus API. Вы можете попробовать использовать комбинацию <code translate="no">DELETE</code> и <code translate="no">INSERT</code></p>
+<h3 id="Updating" class="common-anchor-header">Обновление<button data-href="#Updating" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Обновление записей не поддерживается Milvus API. Вы можете попробовать использовать комбинацию <code translate="no">DELETE</code> и <code translate="no">INSERT</code></p>
 <hr>
 <p>Для получения более подробной информации и примеров, пожалуйста, обратитесь к <a href="https://docs.mindsdb.com/what-is-mindsdb">официальной документации MindsDB</a>.</p>

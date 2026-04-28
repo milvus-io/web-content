@@ -268,7 +268,7 @@ schema.add_function(minhash_function)
      <td><p><code translate="no">hash_function</code></p></td>
      <td><p>str</p></td>
      <td><p><code translate="no">"xxhash"</code></p></td>
-     <td><p>Fonction de hachage à utiliser. Options : </p><ul><li><p><code translate="no">"xxhash"</code> (rapide)</p></li><li><p><code translate="no">"sha1"</code> (plus lent, meilleure résistance aux collisions).</p></li></ul></td>
+     <td><p>Fonction de hachage à utiliser. Options : </p><ul><li><p><code translate="no">"xxhash"</code> (rapide)</p></li><li><p><code translate="no">"sha1"</code> (plus lent, plus grande résistance aux collisions).</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">token_level</code></p></td>

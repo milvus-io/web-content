@@ -143,7 +143,7 @@ index_params.add_index(
 <ul>
 <li><p><code translate="no">index_type</code>: El tipo de índice a construir. En este ejemplo, establezca el valor <code translate="no">HNSW_PQ</code>.</p></li>
 <li><p><code translate="no">metric_type</code>: El método utilizado para calcular la distancia entre vectores. Los valores soportados incluyen <code translate="no">COSINE</code>, <code translate="no">L2</code>, y <code translate="no">IP</code>. Para más detalles, consulte <a href="/docs/es/metric.md">Tipos de métricas</a>.</p></li>
-<li><p><code translate="no">params</code>: Opciones de configuración adicionales para construir el índice. Para más detalles, consulte <a href="/docs/es/hnsw-pq.md#Index-building-params">Parámetros</a> de <a href="/docs/es/hnsw-pq.md#Index-building-params">construcción del índice</a>.</p></li>
+<li><p><code translate="no">params</code>: Opciones de configuración adicionales para construir el índice. Para más información, consulte <a href="/docs/es/hnsw-pq.md#Index-building-params">Parámetros de creación de índices</a>.</p></li>
 </ul>
 <p>Una vez configurados los parámetros del índice, puede crear el índice utilizando el método <code translate="no">create_index()</code> directamente o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Búsqueda en el índice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
@@ -234,7 +234,7 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">efConstruction</code></p></td>
-     <td><p>Número de vecinos candidatos considerados para la conexión durante la construcción del índice. Se evalúa un grupo mayor de candidatos para cada elemento nuevo, pero el número máximo de conexiones realmente establecidas sigue estando limitado por <code translate="no">M</code>.</p></td>
+     <td><p>Número de vecinos candidatos considerados para la conexión durante la construcción del índice. Se evalúa un conjunto mayor de candidatos para cada elemento nuevo, pero el número máximo de conexiones realmente establecidas sigue estando limitado por <code translate="no">M</code>.</p></td>
      <td><p><strong>Tipo</strong>: Entero <strong>Rango</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valor por defecto</strong>: <code translate="no">360</code></p></td>
      <td><p>Un <code translate="no">efConstruction</code> más alto suele dar como resultado un <strong>índice más preciso</strong>, ya que se exploran más conexiones potenciales. Sin embargo, esto también conlleva <strong>un mayor tiempo de indexación y un mayor uso de memoria</strong> durante la construcción. Considere aumentar <code translate="no">efConstruction</code> para mejorar la precisión, especialmente en escenarios en los que el tiempo de indexación es menos crítico.</p>
@@ -248,12 +248,12 @@ res = MilvusClient.search(
      <td><p><strong>Tipo</strong>: Entero <strong>Rango</strong>: [1, 65536]</p>
 <p><strong>Valor por defecto</strong>: Ninguno</p></td>
      <td><p>Un valor más alto de <code translate="no">m</code> puede mejorar la precisión, pero también aumenta la complejidad computacional y el uso de memoria. <code translate="no">m</code> debe ser un divisor de la dimensión del vector<em>(D</em>) para garantizar una descomposición adecuada. Un valor comúnmente recomendado es <em>m = D/2</em>.</p>
-<p>En la mayoría de los casos, se recomienda establecer un valor dentro de este rango: [D/8, D].</p></td>
+<p>En la mayoría de los casos, le recomendamos que establezca un valor dentro de este rango: [D/8, D].</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>El número de bits utilizados para representar el índice del centroide de cada subvector en la forma comprimida. Determina directamente el tamaño de cada libro de códigos. Cada libro de códigos contendrá centroides de <sup>2nbits</sup>. Por ejemplo, si <code translate="no">nbits</code> se establece en 8, cada subvector estará representado por un índice centroide de 8 bits. Esto permite<sup>28</sup> (256) centroides posibles en el libro de códigos para ese subvector.</p></td>
+     <td><p>El número de bits utilizados para representar el índice del centroide de cada subvector en la forma comprimida. Determina directamente el tamaño de cada libro de códigos. Cada libro de códigos contendrá centroides de <sup>2nbits</sup>. Por ejemplo, si <code translate="no">nbits</code> se establece en 8, cada subvector estará representado por un índice centroide de 8 bits. Esto permite<sup>28</sup> (256) centroides posibles en el libro de códigos para ese sub-vector.</p></td>
      <td><p><strong>Tipo</strong>: Entero <strong>Rango</strong>: [1, 24]</p>
 <p><strong>Valor por defecto</strong>: <code translate="no">8</code></p></td>
      <td><p>Un valor más alto de <code translate="no">nbits</code> permite libros de códigos más grandes, lo que potencialmente conduce a representaciones más precisas de los vectores originales. Sin embargo, también implica el uso de más bits para almacenar cada índice, lo que se traduce en una menor compresión. En la mayoría de los casos, se recomienda establecer un valor dentro de este rango: [1, 16].</p></td>
@@ -272,7 +272,7 @@ res = MilvusClient.search(
      <td><p>Determina la precisión de los datos utilizados durante el proceso de refinamiento. Esta precisión debe ser superior a la de los vectores comprimidos (como se establece en los parámetros <code translate="no">m</code> y <code translate="no">nbits</code> ).</p></td>
      <td><p><strong>Tipo</strong>: Cadena <strong>Rango</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p>
 <p><strong>Valor por defecto</strong>: Ninguno</p></td>
-     <td><p>Utilice <code translate="no">FP32</code> para obtener la máxima precisión con un mayor coste de memoria, o <code translate="no">SQ6</code>/<code translate="no">SQ8</code> para obtener una mejor compresión. <code translate="no">BF16</code> y <code translate="no">FP16</code> ofrecen una alternativa equilibrada.</p></td>
+     <td><p>Utilice <code translate="no">FP32</code> para obtener la máxima precisión con un mayor coste de memoria, o <code translate="no">SQ6</code>/<code translate="no">SQ8</code> para una mejor compresión. <code translate="no">BF16</code> y <code translate="no">FP16</code> ofrecen una alternativa equilibrada.</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">Parámetros de búsqueda específicos del índice<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">

@@ -333,14 +333,14 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000
       </svg>
     </button></h3><p>Setelah Grafana berjalan, Anda perlu menambahkan Loki sebagai sumber data untuk menanyakan log.</p>
 <ol>
-<li>Buka peramban web dan arahkan ke <code translate="no">127.0.0.1:3000</code>. Masuk menggunakan nama pengguna <code translate="no">admin</code> dan kata sandi yang telah Anda dapatkan sebelumnya.</li>
+<li>Buka peramban web dan arahkan ke <code translate="no">127.0.0.1:3000</code>. Masuk menggunakan nama pengguna <code translate="no">admin</code> dan kata sandi yang telah didapatkan sebelumnya.</li>
 <li>Pada menu sebelah kiri, pilih <strong>Sambungan</strong> &gt; <strong>Tambah sambungan baru</strong>.</li>
 <li>Pada halaman yang muncul, pilih <strong>Loki</strong> sebagai tipe sumber data. Anda dapat memasukkan <strong>loki</strong> pada kolom pencarian untuk menemukan sumber data.</li>
-<li>Di pengaturan sumber data Loki, tentukan <strong>Nama</strong> dan <strong>URL</strong>, lalu klik <strong>Simpan &amp; uji</strong>.</li>
+<li>Dalam pengaturan sumber data Loki, tentukan <strong>Nama</strong> dan <strong>URL</strong>, lalu klik <strong>Simpan &amp; uji</strong>.</li>
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
    </span> <span class="img-wrapper"> <span>Sumber Data</span> </span></p>
 <h3 id="3-Query-Milvus-Logs" class="common-anchor-header">3. Menanyakan Log Milvus<button data-href="#3-Query-Milvus-Logs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -365,5 +365,5 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvuslog.jpg" alt="Query" class="doc-image" id="query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvuslog.jpg" alt="Query" class="doc-image" id="query" />
    </span> <span class="img-wrapper"> <span>Kueri</span> </span></p>

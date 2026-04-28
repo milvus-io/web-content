@@ -44,7 +44,7 @@ openai_ef = model.dense.OpenAIEmbeddingFunction(
 <li><p><strong>维数</strong><em>（整数）</em></p>
 <p>输出嵌入结果的维数。仅支持<strong>text-embedding-3</strong>及更高版本的模型。</p></li>
 </ul>
-<p>要创建文档嵌入，请使用<strong>encode_documents()</strong>方法：</p>
+<p>要为文档创建嵌入式内容，请使用<strong>encode_documents()</strong>方法：</p>
 <pre><code translate="no" class="language-python">docs = [
     <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
     <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
@@ -68,7 +68,7 @@ docs_embeddings = openai_ef.encode_documents(docs)
        -<span class="hljs-number">5.76633997e-02</span>,  <span class="hljs-number">9.68257990e-03</span>,  <span class="hljs-number">4.62721288e-02</span>, -<span class="hljs-number">4.33261096e-02</span>])]
 Dim: <span class="hljs-number">512</span> (<span class="hljs-number">512</span>,)
 <button class="copy-code-btn"></button></code></pre>
-<p>要为查询创建嵌入信息，请使用<strong>encode_queries()</strong>方法：</p>
+<p>要为查询创建嵌入，请使用<strong>encode_queries()</strong>方法：</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>, 
            <span class="hljs-string">&quot;Where was Alan Turing born?&quot;</span>]
 

@@ -50,7 +50,7 @@ beta: Milvus 2.6.x
      <td><p>コスト重視でスケーラブルなセマンティック検索に最適-低価格で強力なパフォーマンスを提供。</p></td>
    </tr>
    <tr>
-     <td><p>テキスト埋め込み-3-ラージ</p></td>
+     <td><p>テキストエンベッディング-3-ラージ</p></td>
      <td><p>デフォルト：3,072（3,072以下のディメンションサイズに短縮可能）</p></td>
      <td><p>8,191</p></td>
      <td><p>検索精度の向上と、より豊富な意味表現を必要とするアプリケーションに最適。</p></td>
@@ -113,9 +113,9 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>APIキーをここに記述することで、再起動後もAPIキーが保持され、ラベルを変更するだけでAPIキーを切り替えることができます。</p></li>
+<p>ここにAPIキーを記述することで、再起動後もAPIキーが保持され、ラベルを変更するだけでAPIキーを切り替えることができます。</p></li>
 <li><p><strong>MilvusにOpenAIの呼び出しに使うキーを教える</strong></p>
-<p>同じファイルで、OpenAIプロバイダに使用したいラベルを指定します。</p>
+<p>同じファイルで、OpenAIプロバイダが使用するラベルを指定します。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
@@ -180,7 +180,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>認証情報の設定が完了したら、以下の手順で埋め込み関数を定義し、使用します。</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">ステップ1: スキーマフィールドの定義<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">ステップ1：スキーマフィールドの定義<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -201,7 +201,7 @@ beta: Milvus 2.6.x
 <li><p>埋め込む生データを格納するスカラーフィールド。</p></li>
 <li><p>スカラー・フィールドに対して関数が生成するベクトル埋め込みを格納するために予約されたベクトル・フィールド。</p></li>
 </ul>
-<p>次の例では、テキストデータを格納するためのスカラーフィールド<code translate="no">&quot;document&quot;</code> と、Functionモジュールによって生成される埋め込みデータを格納するためのベクトルフィールド<code translate="no">&quot;dense&quot;</code> を持つスキーマを定義しています。ベクトル次元(<code translate="no">dim</code>)は、選択した埋め込みモデルの出力に合わせて設定することを忘れないでください。</p>
+<p>次の例では、テキストデータを格納するためのスカラーフィールド<code translate="no">&quot;document&quot;</code> と、Functionモジュールによって生成される埋め込みデータを格納するためのベクトルフィールド<code translate="no">&quot;dense&quot;</code> を持つスキーマを定義しています。ベクトル次元(<code translate="no">dim</code>)は、選択した埋め込みモデルの出力に合うように設定することを忘れないでください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>

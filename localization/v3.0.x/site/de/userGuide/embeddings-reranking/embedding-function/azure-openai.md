@@ -64,7 +64,7 @@ beta: Milvus 2.6.x
      <td><p>Ein Modell der vorherigen Generation, das sich für ältere Pipelines oder Szenarien eignet, die Abwärtskompatibilität erfordern.</p></td>
    </tr>
 </table>
-<p>Die Einbettungsmodelle der dritten Generation<strong>(text-embedding-3</strong>) unterstützen die Verringerung der Größe der Einbettung über einen <code translate="no">dim</code> Parameter. In der Regel sind größere Einbettungen aus Sicht der Rechenleistung, des Speichers und der Speicherung teurer. Die Möglichkeit, die Anzahl der Dimensionen anzupassen, ermöglicht eine bessere Kontrolle über die Gesamtkosten und die Leistung. Weitere Einzelheiten zu den einzelnen Modellen finden Sie unter <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard,standard-chat-completions#embeddings">Einbettungen</a>.</p>
+<p>Die Einbettungsmodelle der dritten Generation<strong>(text-embedding-3</strong>) unterstützen die Verringerung der Größe der Einbettung über einen <code translate="no">dim</code> Parameter. Größere Einbettungen sind in der Regel teurer, was Rechen-, Speicher- und Ablagekapazität betrifft. Die Möglichkeit, die Anzahl der Dimensionen anzupassen, ermöglicht eine bessere Kontrolle über die Gesamtkosten und die Leistung. Weitere Einzelheiten zu den einzelnen Modellen finden Sie unter <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard,standard-chat-completions#embeddings">Einbettungen</a>.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">Konfigurieren der Anmeldeinformationen<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,10 +89,25 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>Wenn ein API-Schlüssel für denselben Anbieter sowohl in der Konfigurationsdatei als auch in einer Umgebungsvariablen vorhanden ist, verwendet Milvus immer den Wert in <code translate="no">milvus.yaml</code> und ignoriert die Umgebungsvariable.</p>
 </div>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Option 1: Konfigurationsdatei (empfohlen &amp; höhere Priorität)</h3><p>Bewahren Sie Ihre API-Schlüssel in <code translate="no">milvus.yaml</code> auf; Milvus liest sie beim Start und setzt jede Umgebungsvariable für denselben Anbieter außer Kraft.</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Option 1: Konfigurationsdatei (empfohlen &amp; höhere Priorität)<button data-href="#Option-1-Configuration-file-recommended--higher-priority" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Bewahren Sie Ihre API-Schlüssel in <code translate="no">milvus.yaml</code> auf; Milvus liest sie beim Start und setzt jede Umgebungsvariable für denselben Anbieter außer Kraft.</p>
 <ol>
 <li><p>**Deklarieren Sie Ihre Schlüssel unter <code translate="no">credential:</code></p>
-<p>Sie können einen oder mehrere API-Schlüssel auflisten - geben Sie jedem einen Namen, den Sie erfinden und später referenzieren werden.</p>
+<p>Sie können einen oder mehrere API-Schlüssel auflisten - geben Sie jedem einen Namen, den Sie selbst erfinden und später referenzieren werden.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">apikey_dev:</span>            <span class="hljs-comment"># dev environment</span>
@@ -113,7 +128,22 @@ beta: Milvus 2.6.x
 <button class="copy-code-btn"></button></code></pre>
 <p>Dies bindet einen bestimmten Schlüssel an jede Anfrage, die Milvus an den Azure OpenAI Embeddings Endpunkt sendet.</p></li>
 </ol>
-<h3 id="Option-2-Environment-variables" class="common-anchor-header">Option 2: Umgebungsvariablen</h3><p>Verwenden Sie diese Methode, wenn Sie Milvus mit Docker Compose ausführen und es vorziehen, Geheimnisse aus Dateien und Images herauszuhalten.</p>
+<h3 id="Option-2-Environment-variables" class="common-anchor-header">Option 2: Umgebungsvariablen<button data-href="#Option-2-Environment-variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Verwenden Sie diese Methode, wenn Sie Milvus mit Docker Compose ausführen und es vorziehen, Geheimnisse aus Dateien und Images herauszuhalten.</p>
 <p>Milvus greift nur dann auf die Umgebungsvariable zurück, wenn unter <code translate="no">milvus.yaml</code> kein Schlüssel für den Anbieter gefunden wird.</p>
 <table>
    <tr>
@@ -159,7 +189,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Sobald die Anmeldeinformationen konfiguriert sind, folgen Sie diesen Schritten, um Einbettungsfunktionen zu definieren und zu verwenden.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Schritt 1: Definieren Sie Schemafelder</h3><p>Um eine Einbettungsfunktion zu verwenden, erstellen Sie eine Sammlung mit einem bestimmten Schema. Dieses Schema muss mindestens drei notwendige Felder enthalten:</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Schritt 1: Definieren Sie Schemafelder<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um eine Einbettungsfunktion zu verwenden, erstellen Sie eine Sammlung mit einem bestimmten Schema. Dieses Schema muss mindestens drei notwendige Felder enthalten:</p>
 <ul>
 <li><p>Das Primärfeld, das jede Entität in einer Sammlung eindeutig identifiziert.</p></li>
 <li><p>Ein Skalarfeld, das die einzubettenden Rohdaten speichert.</p></li>
@@ -186,7 +231,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1536</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Schritt 2: Einbettungsfunktion zum Schema hinzufügen</h3><p>Sobald Sie Ihre Einbettungsfunktion definiert haben, fügen Sie sie zu Ihrem Sammelschema hinzu. Dies weist Milvus an, die angegebene Einbettungsfunktion zu verwenden, um Einbettungen aus Ihren Textdaten zu verarbeiten und zu speichern.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Schritt 2: Einbettungsfunktion zum Schema hinzufügen<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sobald Sie Ihre Einbettungsfunktion definiert haben, fügen Sie sie zu Ihrem Sammelschema hinzu. Dies weist Milvus an, die angegebene Einbettungsfunktion zu verwenden, um Einbettungen aus Ihren Textdaten zu verarbeiten und zu speichern.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function specifically for Azure OpenAI provider</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;azopenai&quot;</span>,                                <span class="hljs-comment"># Unique identifier for this embedding function</span>

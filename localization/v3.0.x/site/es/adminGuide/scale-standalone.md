@@ -195,7 +195,7 @@ $ docker <span class="hljs-built_in">rm</span> milvus-standalone
 <li><p>Asegúrese de que los datos persistentes estén disponibles y ejecute <code translate="no">docker compose</code> como se indica a continuación:</p>
 <pre><code translate="no" class="language-bash">docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Ejecute <code translate="no">docker stats milvus-standalone</code> para ver la CPU y la memoria asignadas a la instancia de Milvus después del escalado. La salida debe ser similar a la siguiente:</p>
+<li><p>Ejecute <code translate="no">docker stats milvus-standalone</code> para ver la CPU y la memoria asignadas a la instancia de Milvus después del escalado. La salida debería ser similar a la siguiente:</p>
 <pre><code translate="no" class="language-bash">CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT   MEM %     NET I/O       BLOCK I/O        PIDS
 7aea450f87ce   milvus-standalone   7.52%     210.9MiB / 4GiB     5.15%     1.05kB / 0B   610kB / 8.19kB   29
 <button class="copy-code-btn"></button></code></pre></li>

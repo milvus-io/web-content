@@ -2,7 +2,7 @@
 id: diskann.md
 title: DISKANN
 summary: >-
-  在資料集可能包含數十億甚至數萬億向量的大型場景中，標準的記憶體內索引方法 (例如 HNSW、IVF_FLAT)
+  在資料集可能包含數十億甚至數萬億向量的大型情境中，標準的記憶體索引方法 (例如 HNSW、IVF_FLAT)
   常常會因為記憶體的限制而無法跟上步伐。DISKANN 提供了一種基於磁碟的方法，可以在資料集大小超過可用 RAM
   時保持高搜尋準確性和速度，從而解決這些挑戰。
 ---
@@ -61,7 +61,7 @@ summary: >-
 <p>下圖顯示 Vamana 圖是如何建構的。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
    </span> <span class="img-wrapper"> <span>Diskann</span> </span></p>
 <ol>
 <li><p><strong>初始隨機連接：</strong>每個資料點 (向量) 在圖表中表示為一個節點。這些節點最初會隨機連接，形成密集的網路。通常，一個節點一開始會有約 500 條邊（或連結），以獲得廣泛的連線。</p></li>
@@ -102,14 +102,14 @@ summary: >-
     </button></h3><p>一旦建立索引（磁碟上的 Vamana 圖形和記憶體中的 PQ 代碼），DISKANN 就會執行 ANN 搜尋，如下所示：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
    </span> <span class="img-wrapper"> <span>Diskann 2</span> </span></p>
 <ol>
 <li><p><strong>查詢和入口點：</strong>提供查詢向量以找出其最近的鄰居。DISKANN 從 Vamana 圖形中選定的入口點開始，通常是資料集的全局中心點附近的節點。全局中心點代表所有向量的平均值，這有助於最小化圖形的遍歷距離，從而找到所需的鄰居。</p></li>
 <li><p><strong>鄰居探索：</strong>演算法會從目前節點的邊緣收集潛在的候選鄰居 (圖中紅色圓圈)，利用記憶體中的 PQ 代碼來近似這些候選鄰居與查詢向量之間的距離。這些潛在的候選鄰居是透過 Vamana 圖形中的邊緣直接連接到所選入口點的節點。</p></li>
 <li><p><strong>選擇節點進行精確距離計算：</strong>從近似結果中，選出最有希望的鄰居 (圖中綠色圓圈) 子集，使用其原始、未壓縮的向量進行精確距離評估。這需要從磁碟讀取資料，相當耗時。DISKANN 使用兩個參數來控制精確度和速度之間的微妙平衡：</p>
 <ul>
-<li><p><code translate="no">beam_width_ratio</code>:一個控制搜尋廣度的比率，它決定了有多少候選鄰居會被選出來並行探索它們的鄰居。<code translate="no">beam_width_ratio</code> 越大，探索的範圍就越廣，可能會帶來更高的精確度，但也會增加計算成本和磁碟 I/O。波束寬度或選取的節點數目，是使用公式決定的：<code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
+<li><p><code translate="no">beam_width_ratio</code>:一個控制搜尋廣度的比率，它決定了有多少候選鄰居會被選出來並行探索它們的鄰居。<code translate="no">beam_width_ratio</code> 越大，探索的範圍就越廣，可能會帶來更高的精確度，但也會增加計算成本和磁碟 I/O。波束寬度或選取的節點數量，是使用公式決定的：<code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
 <li><p><code translate="no">search_cache_budget_gb_ratio</code>:分配用於快取頻繁存取的磁碟資料的記憶體比例。這種快取有助於最小化磁碟 I/O，使重複搜尋更快，因為資料已經在記憶體中。</p></li>
 </ul>
 <p>要瞭解關於參數調整的更多資訊，請參閱<a href="/docs/zh-hant/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configs</a>。</p></li>
@@ -235,7 +235,7 @@ summary: >-
      <td><p>控制每個資料點在 Vamana 圖形中的最大連線（邊）數。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1, 512]</p>
 <p><strong>預設值</strong>：<code translate="no">56</code></p></td>
-     <td><p>較高的值會建立較密集的圖形，可能會增加召回率（找到更多相關結果），但也會增加記憶體使用量和建立時間。 
+     <td><p>較高的值會建立較密集的圖形，可能會增加召回率 (找到更多相關結果)，但也會增加記憶體使用量和建立時間。 
  在大多數情況下，我們建議您設定此範圍內的值：[10, 100].</p></td>
    </tr>
    <tr>
@@ -261,7 +261,7 @@ summary: >-
      <td><p><strong>類型</strong>：浮點<strong>範圍</strong>：(0.0, 0.25)</p>
 <p><strong>預設值</strong>：<code translate="no">0.125</code></p></td>
      <td><p>較高的比率會為 PQ 碼分配較大比例的記憶體，有效地儲存原始向量的更多資訊，從而獲得更精確的搜尋結果。較低的比率會減少記憶體使用量，但可能會犧牲精確度，因為較小的 PQ 代碼會保留較少的資訊。此方法適用於需要考慮記憶體限制的情況，有可能使大型資料集的索引成為可能。</p>
-<p>在大多數情況下，我們建議您在此範圍內設定值：(0.0625, 0.25] 。</p></td>
+<p>在大多數情況下，我們建議您設定此範圍內的值：(0.0625, 0.25] 。</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
@@ -303,7 +303,7 @@ summary: >-
    <tr>
      <td></td>
      <td><p><code translate="no">search_list</code></p></td>
-     <td><p>在搜尋作業期間，此參數會決定演算法在遍歷圖時所維護的候選池大小。較大的值會增加找到真正最近鄰居的機會 (較高的召回率)，但也會增加搜尋延遲。</p></td>
+     <td><p>在搜尋作業期間，此參數會決定演算法在遍歷圖時所維護的候選池大小。較大的值會增加找到真正近鄰的機會 (較高的召回率)，但也會增加搜尋延遲。</p></td>
      <td><p><strong>類型</strong>：整<strong>數</strong>整數<strong>範圍</strong>：[1、<em>int_max］</em></p>
 <p><strong>預設值</strong>：<code translate="no">100</code></p></td>
      <td><p>為了在效能與精確度之間取得良好的平衡，建議將此值設定為等於或稍大於您想要擷取的結果數量 (top_k)。</p></td>

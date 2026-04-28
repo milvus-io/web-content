@@ -23,7 +23,7 @@ title: Generazione Aumentata dal Recupero (RAG) con Milvus e LlamaIndex
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/rag_with_milvus_and_llamaindex.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Questa guida mostra come costruire un sistema di Retrieval-Augmented Generation (RAG) utilizzando LlamaIndex e Milvus.</p>
-<p>Il sistema RAG combina un sistema di recupero con un modello generativo per generare nuovo testo sulla base di un prompt dato. Il sistema recupera prima i documenti rilevanti da un corpus utilizzando Milvus e poi utilizza un modello generativo per generare nuovo testo sulla base dei documenti recuperati.</p>
+<p>Il sistema RAG combina un sistema di reperimento con un modello generativo per generare nuovo testo sulla base di un prompt dato. Il sistema recupera prima i documenti rilevanti da un corpus utilizzando Milvus e poi utilizza un modello generativo per generare nuovo testo sulla base dei documenti recuperati.</p>
 <p><a href="https://www.llamaindex.ai/">LlamaIndex</a> è un framework di dati semplice e flessibile per collegare fonti di dati personalizzate a grandi modelli linguistici (LLM). <a href="https://milvus.io/">Milvus</a> è il database vettoriale open-source più avanzato al mondo, costruito per alimentare le applicazioni di ricerca di similarità e di intelligenza artificiale.</p>
 <p>In questo quaderno mostreremo una rapida dimostrazione dell'uso di MilvusVectorStore.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Prima di iniziare<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
@@ -64,7 +64,7 @@ title: Generazione Aumentata dal Recupero (RAG) con Milvus e LlamaIndex
 <pre><code translate="no" class="language-python">$ pip install llama-index
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se si utilizza Google Colab, per abilitare le dipendenze appena installate potrebbe essere necessario <strong>riavviare il runtime</strong>. (Fare clic sul menu "Runtime" nella parte superiore dello schermo e selezionare "Restart session" dal menu a discesa).</p>
+<p>Se si utilizza Google Colab, per abilitare le dipendenze appena installate potrebbe essere necessario <strong>riavviare il runtime</strong>. (Fare clic sul menu "Runtime" nella parte superiore dello schermo e selezionare "Riavvia sessione" dal menu a discesa).</p>
 </div>
 <h3 id="Setup-OpenAI" class="common-anchor-header">Configurazione di OpenAI<button data-href="#Setup-OpenAI" class="anchor-icon" translate="no">
       <svg translate="no"

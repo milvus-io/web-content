@@ -45,7 +45,7 @@ summary: 了解如何為 Milvus 設定日誌。
   <tbody>
     <tr>
       <td>
-        <li>Milvus 日誌層級。選項：debug、info、warn、error、panal 及 fatal。 </li>      
+        <li>Milvus 日誌層級。選項：debug、info、warn、error、panic 及 fatal。 </li>      
         <li>建議在測試和開發環境中使用 debug 層級，在生產環境中使用 info 層級。</li>      </td>
       <td>資訊</td>
     </tr>

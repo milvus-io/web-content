@@ -23,7 +23,7 @@ title: Jina AI - Reranker
         ></path>
       </svg>
     </button></h1><p>Milvus supporta i <a href="https://jina.ai/reranker/">modelli di reranker di Jina AI</a> attraverso la classe JinaRerankFunction. Questa funzionalità consente di assegnare un punteggio alla rilevanza delle coppie query-documento in modo efficace.</p>
-<p>Per utilizzare questa funzione, installare le dipendenze necessarie:</p>
+<p>Per utilizzare questa funzionalità, installare le dipendenze necessarie:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

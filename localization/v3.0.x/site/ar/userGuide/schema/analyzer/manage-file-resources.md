@@ -191,7 +191,7 @@ client.add_file_resource(
     <span class="hljs-string">&quot;file_name&quot;</span>: <span class="hljs-string">&quot;chinese_terms.txt&quot;</span>,    <span class="hljs-comment"># filename only — Milvus uses this to identify the file inside the resource</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>تستخدم جميع معلمات المحلل الأربعة نفس الشكل؛ يختلف مفتاح المحلل المحيط فقط. للاطلاع على أمثلة ملموسة لكل محلل، انظر Jieba tokenizer، ومرشح الإيقاف، ومرشح فك التجميع، ومرشح المترادفات.</p>
+<p>تستخدم جميع معلمات المحلل الأربعة نفس الشكل؛ يختلف فقط مفتاح المحلل المحيط. للاطلاع على أمثلة ملموسة لكل محلل، انظر Jieba tokenizer، ومرشح الإيقاف، ومرشح فك التجميع، ومرشح المترادفات.</p>
 <p>أسماء المعلمات هي <code translate="no">resource_name</code> و <code translate="no">file_name</code> - وليس <code translate="no">name</code> و <code translate="no">file</code>. يؤدي استخدام <code translate="no">name</code> / <code translate="no">file</code> (أو <code translate="no">&quot;type&quot;: &quot;resource&quot;</code> بدلاً من <code translate="no">&quot;type&quot;: &quot;remote&quot;</code>) إلى رفع <code translate="no">MilvusException</code> في وقت إنشاء المحلل برسالة مثل <code translate="no">resource name of remote file ... must be set</code>.</p>
 <h2 id="List-file-resources" class="common-anchor-header">قائمة موارد الملف<button data-href="#List-file-resources" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -213,7 +213,7 @@ client.add_file_resource(
     <span class="hljs-built_in">print</span>(r.name, r.path)
 <span class="hljs-comment"># chinese_terms file/chinese_terms.txt</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">list_file_resources()</code> تُرجع قائمة من كائنات <code translate="no">FileResourceInfo</code> ، كل منها <code translate="no">.name</code> و <code translate="no">.path</code>. تُرجع المجموعة الفارغة <code translate="no">[]</code>. لا يوجد لكل مورد <code translate="no">get</code> ؛ <code translate="no">list_file_resources</code> هي واجهة برمجة التطبيقات الوحيدة للقراءة.</p>
+<p><code translate="no">list_file_resources()</code> تُرجع قائمة من <code translate="no">FileResourceInfo</code> كائنات ، كل منها <code translate="no">.name</code> و <code translate="no">.path</code>. تُرجع المجموعة الفارغة <code translate="no">[]</code>. لا يوجد لكل مورد <code translate="no">get</code> ؛ <code translate="no">list_file_resources</code> هي واجهة برمجة التطبيقات الوحيدة للقراءة.</p>
 <h2 id="Remove-a-file-resource" class="common-anchor-header">إزالة مورد ملف<button data-href="#Remove-a-file-resource" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

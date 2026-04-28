@@ -18,7 +18,7 @@ title: Knowhere
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>В этой теме рассказывается о Knowhere, основном механизме векторного исполнения Milvus.</p>
+    </button></h1><p>В этой теме рассказывается о Knowhere, основном механизме векторного исполнения в Milvus.</p>
 <h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,7 +34,7 @@ title: Knowhere
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Knowhere - это основной механизм выполнения векторов в Milvus, который включает в себя несколько библиотек поиска векторного сходства, включая <a href="https://github.com/facebookresearch/faiss">Faiss</a>, <a href="https://github.com/nmslib/hnswlib">Hnswlib</a> и <a href="https://github.com/spotify/annoy">Annoy</a>. Knowhere также разработана для поддержки гетерогенных вычислений. Она контролирует, на каком оборудовании (CPU или GPU) выполнять запросы на создание индекса и поиск. Именно так Knowhere получила свое название - знание того, где выполнять операции. В будущих релизах будут поддерживаться другие типы оборудования, включая DPU и TPU.</p>
+    </button></h2><p>Knowhere - это основной механизм выполнения векторов в Milvus, который включает в себя несколько библиотек поиска векторного сходства, включая <a href="https://github.com/facebookresearch/faiss">Faiss</a>, <a href="https://github.com/nmslib/hnswlib">Hnswlib</a> и <a href="https://github.com/spotify/annoy">Annoy</a>. Knowhere также разработан для поддержки гетерогенных вычислений. Она контролирует, на каком оборудовании (CPU или GPU) выполнять запросы на создание индекса и поиск. Именно так Knowhere получила свое название - знание того, где выполнять операции. В будущих релизах будут поддерживаться другие типы оборудования, включая DPU и TPU.</p>
 <h2 id="Knowhere-in-the-Milvus-architecture" class="common-anchor-header">Knowhere в архитектуре Milvus<button data-href="#Knowhere-in-the-Milvus-architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ title: Knowhere
     </button></h2><p>На рисунке ниже показано место Knowhere в архитектуре Milvus.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
    </span> <span class="img-wrapper"> <span>Knowhere</span> </span></p>
 <p>Самый нижний слой - это системное оборудование. Над ним располагаются сторонние индексные библиотеки. На верхнем уровне Knowhere взаимодействует с индексным узлом и узлом запросов через CGO, что позволяет пакетам Go вызывать код на C.</p>
 <h2 id="Knowhere-advantages" class="common-anchor-header">Преимущества Knowhere<button data-href="#Knowhere-advantages" class="anchor-icon" translate="no">
@@ -101,7 +101,7 @@ title: Knowhere
 <h4 id="DataObj-base-class" class="common-anchor-header"><code translate="no">DataObj</code>: базовый класс</h4><p><code translate="no">DataObj</code> является базовым классом всех структур данных в Knowhere. <code translate="no">Size()</code> - единственный виртуальный метод в <code translate="no">DataObj</code>. Класс Index наследуется от <code translate="no">DataObj</code> с полем "size_". Класс Index также имеет два виртуальных метода - <code translate="no">Serialize()</code> и <code translate="no">Load()</code>. Класс <code translate="no">VecIndex</code>, производный от <code translate="no">Index</code>, является виртуальным базовым классом для всех векторных индексов. <code translate="no">VecIndex</code> предоставляет методы, включая <code translate="no">Train()</code>, <code translate="no">Query()</code>, <code translate="no">GetStatistics()</code> и <code translate="no">ClearStatistics()</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
    </span> <span class="img-wrapper"> <span>базовый класс</span> </span></p>
 <p>Некоторые другие типы индексов перечислены справа на рисунке выше.</p>
 <ul>
@@ -111,20 +111,20 @@ title: Knowhere
 </ul>
 <h4 id="IDMAP-brute-force-search" class="common-anchor-header"><code translate="no">IDMAP</code>: грубый поиск</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
    </span> <span class="img-wrapper"> <span>IDMAP</span> </span></p>
 <p>Технически говоря, <code translate="no">IDMAP</code> не является индексом, а скорее используется для поиска методом перебора. При вводе векторов в базу данных не требуется ни обучения данных, ни построения индекса. Поиск будет осуществляться непосредственно по вставленным векторным данным.</p>
 <p>Однако для согласованности кода <code translate="no">IDMAP</code> также наследует от класса <code translate="no">VecIndex</code> со всеми его виртуальными интерфейсами. Использование <code translate="no">IDMAP</code> такое же, как и других индексов.</p>
 <h4 id="IVF-indices" class="common-anchor-header">ЭКО-индексы</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
    </span> <span class="img-wrapper"> <span>IVF</span> </span></p>
-<p>Индексы IVF (инвертированный файл) являются наиболее часто используемыми. Класс <code translate="no">IVF</code> является производным от <code translate="no">VecIndex</code> и <code translate="no">FaissBaseIndex</code>, далее расширяется до <code translate="no">IVFSQ</code> и <code translate="no">IVFPQ</code>. <code translate="no">GPUIVF</code> является производным от <code translate="no">GPUIndex</code> и <code translate="no">IVF</code>. Затем <code translate="no">GPUIVF</code> расширяется до <code translate="no">GPUIVFSQ</code> и <code translate="no">GPUIVFPQ</code>.</p>
-<p><code translate="no">IVFSQHybrid</code> является самостоятельно разработанным гибридным индексом. Грубый квантователь выполняется на GPU, а поиск в ведре - на CPU. Этот тип индекса позволяет уменьшить количество копий памяти между CPU и GPU, используя вычислительную мощность GPU. <code translate="no">IVFSQHybrid</code> имеет тот же коэффициент отзыва, что и <code translate="no">GPUIVFSQ</code>, но обладает лучшей производительностью.</p>
+<p>Индексы IVF (инвертированный файл) являются наиболее часто используемыми. Класс <code translate="no">IVF</code> является производным от <code translate="no">VecIndex</code> и <code translate="no">FaissBaseIndex</code> и далее расширяется до <code translate="no">IVFSQ</code> и <code translate="no">IVFPQ</code>. <code translate="no">GPUIVF</code> является производным от <code translate="no">GPUIndex</code> и <code translate="no">IVF</code>. Затем <code translate="no">GPUIVF</code> расширяется до <code translate="no">GPUIVFSQ</code> и <code translate="no">GPUIVFPQ</code>.</p>
+<p><code translate="no">IVFSQHybrid</code> является самостоятельно разработанным гибридным индексом. Грубый квантователь выполняется на GPU, а поиск в ведре - на CPU. Этот тип индекса позволяет уменьшить количество копий памяти между CPU и GPU за счет использования вычислительной мощности GPU. <code translate="no">IVFSQHybrid</code> имеет такой же коэффициент отзыва, как и <code translate="no">GPUIVFSQ</code>, но обладает лучшей производительностью.</p>
 <p>Структура базового класса для бинарных индексов относительно проще. <code translate="no">BinaryIDMAP</code> и <code translate="no">BinaryIVF</code> являются производными от <code translate="no">FaissBaseBinaryIndex</code> и <code translate="no">VecIndex</code>.</p>
 <h4 id="Third-party-indices" class="common-anchor-header">Сторонние индексы</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
    </span> <span class="img-wrapper"> <span>Сторонние индексы</span> </span></p>
 <p>В настоящее время, помимо Faiss, поддерживаются только два типа сторонних индексов: древовидный <code translate="no">Annoy</code> и графовый <code translate="no">HNSW</code>. Эти два распространенных и часто используемых сторонних индекса получены из <code translate="no">VecIndex</code>.</p>
 <h2 id="Adding-indices-to-Knowhere" class="common-anchor-header">Добавление индексов в Knowhere<button data-href="#Adding-indices-to-Knowhere" class="anchor-icon" translate="no">

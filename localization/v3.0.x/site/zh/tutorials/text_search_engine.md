@@ -29,11 +29,11 @@ title: 文本搜索引擎
 <li><a href="https://towhee.io/">Towhee</a></li>
 </ul>
 <p><br/></p>
-<p>Milvus 在自然语言处理（NLP）领域的一个主要应用是文本搜索引擎。它是一个伟大的工具，可以帮助用户找到他们正在寻找的信息。它甚至能让难以找到的信息浮出水面。文本搜索引擎将用户输入的关键字或语义与文本数据库进行比较，然后返回符合特定标准的结果。</p>
+<p>Milvus 在自然语言处理（NLP）领域的一个主要应用是文本搜索引擎。它是一个伟大的工具，可以帮助用户找到他们正在寻找的信息。它甚至能让难以找到的信息浮出水面。文本搜索引擎将用户输入的关键词或语义与文本数据库进行比较，然后返回符合特定标准的结果。</p>
 <p><br/></p>
 <p>在本教程中，您将学习如何构建文本搜索引擎。本教程使用 BERT 将文本转换为固定长度的向量。Milvus 用作向量数据库，用于存储和向量相似性搜索。然后使用 MySQL 将 Milvus 生成的向量 ID 映射到文本数据。</p>
 <p><br/></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/text_search_engine.png" alt="text_search_engine" class="doc-image" id="text_search_engine" />
-   </span> <span class="img-wrapper"> <span>文本搜索引擎</span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/text_search_engine_demo.png" alt="text_search_engine" class="doc-image" id="text_search_engine" /><span>text_search_engine</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_search_engine.png" alt="text_search_engine" class="doc-image" id="text_search_engine" />
+   </span> <span class="img-wrapper"> <span>文本搜索引擎</span> </span> <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_search_engine_demo.png" alt="text_search_engine" class="doc-image" id="text_search_engine" /><span>text_search_engine</span> </span></p>

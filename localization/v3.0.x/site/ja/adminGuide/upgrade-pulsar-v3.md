@@ -71,23 +71,38 @@ title: MilvusのパルサーをV2からV3にアップグレード
         ></path>
       </svg>
     </button></h2><p>このセクションでは、MilvusでPulsarをV2からV3にアップグレードする詳細手順を説明します。</p>
-<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">Pulsarで消費されなかったデータの永続化</h3><p>この手順では、Pulsar内の既存データがオブジェクト・ストレージ・サービスに永続化されていることを確認する必要があります。 2つのアプローチがあり、ニーズに合わせてお選びいただけます。</p>
+<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">Pulsarで消費されなかったデータの永続化<button data-href="#Persist-data-not-consumed-in-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>この手順では、Pulsar内の既存データがオブジェクト・ストレージ・サービスに永続化されていることを確認する必要があります。 2つのアプローチがあり、ニーズに合わせて選択することができます。</p>
 <h4 id="Approach-1-Using-Attu" class="common-anchor-header">アプローチ1：Attuを使う</h4><p>Milvusデプロイメントのコレクション数が少なく、セグメント数もそれほど多くない場合は、Attuを使用してデータをオブジェクト・ストレージ・サービスに永続化することができます。</p>
 <ol>
 <li><p>全てのデータベースで全てのコレクションを選択し、<code translate="no">Segments</code> パネルに入り、<code translate="no">Flush</code> ボタンをクリックします。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
    </span> <span class="img-wrapper"> <span>コレクションのセグメントパネル</span> </span></p></li>
 <li><p>ポップアップが表示されたら、<code translate="no">Flush</code> を再度クリックします。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
    </span> <span class="img-wrapper"> <span>Attuのデータフラッシュプロンプト</span> </span></p></li>
 <li><p>すべてのコレクションのPersistent Segment Stateが<code translate="no">Flushed</code> になるまで待ちます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/view-data-peristent-process.png" alt="View data flush status in Attu" class="doc-image" id="view-data-flush-status-in-attu" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/view-data-peristent-process.png" alt="View data flush status in Attu" class="doc-image" id="view-data-flush-status-in-attu" />
    </span> <span class="img-wrapper"> <span>Attuでデータフラッシュステータスを表示する</span> </span></p></li>
 </ol>
 <h4 id="Approach-2-Using-management-API" class="common-anchor-header">アプローチ 2: 管理 API を使用する</h4><ol>
@@ -129,7 +144,7 @@ title: MilvusのパルサーをV2からV3にアップグレード
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;flushed&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">}</span>​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>バックグランド<code translate="no">kubectl port-forward</code> プロセスを停止する。</p>
+<li><p>バックグランド<code translate="no">kubectl port-forward</code> プロセスを停止します。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">kill</span> <span class="hljs-string">$pid​</span>
 
 <button class="copy-code-btn"></button></code></pre>
@@ -138,7 +153,22 @@ title: MilvusのパルサーをV2からV3にアップグレード
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Milvusを停止し、Pulsar V2を削除する</h3><p>このステップでは、Milvusポッドを停止し、Pulsar V2デプロイメントを削除する必要があります。 利用可能なセクションは2つに分かれています：</p>
+<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Milvusを停止し、Pulsar V2を削除する<button data-href="#Stop-Milvus-and-delete-Pulsar-V2" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>このステップでは、Milvusポッドを停止し、Pulsar V2デプロイメントを削除する必要があります。 利用可能なセクションは2つに分かれています：</p>
 <ul>
 <li><p>Milvus Helmユーザの方へ</p>
 <p>Milvus Helmチャートを使ってMilvusをインストールした場合は、「<a href="#Delete-Pulsar-V2-using-Helm">Helmを使ってPulsar v2を削除する</a>」に進んでください。</p></li>
@@ -242,7 +272,7 @@ kubectl -n default get pvc -lapp=pulsar,release=my-release -o custom-columns=VOL
   <span class="hljs-string">components:​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>以下の内容を含む<code translate="no">patch.yaml</code> Fileを作成します。</p>
+<li><p>以下の内容を含む<code translate="no">patch.yaml</code> ファイルを作成します。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># a patch to retain etcd &amp; storage data and delete pulsar data while delete milvus​</span>
 <span class="hljs-string">spec:​</span>
   <span class="hljs-string">dependencies:​</span>
@@ -291,7 +321,22 @@ milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">Pulsar V3とmilvusの起動</h3><p>このステップでは、Pulsar V3とMilvusポッドを起動する必要があります。 利用可能なセクションは2つに分かれています：</p>
+<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">Pulsar V3とmilvusの起動<button data-href="#Start-Pulsar-V3-and-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>このステップでは、Pulsar V3とMilvusポッドを起動する必要があります。 利用可能なセクションは2つに分かれています：</p>
 <ul>
 <li><p>Helmユーザの場合</p>
 <p>Milvus Helmチャートを使ってMilvusをインストールした場合は、"<a href="#For-Helm-User">Helm User</a>"へ進んでください。</p></li>
@@ -396,7 +441,7 @@ my-release-pulsarv3-zookeeper-2               1/1     Running     0          4m2
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>すべてのポッドがスケジュールされ、<code translate="no">kubectl -n default get pods</code> 。</p>
-<p>すべてのポッドが起動するまで数分かかることがあります。</p>
+<p>すべてのポッドが起動するまで、数分かかるかもしれません。</p>
 <p>出力はこんな感じ。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">NAME</span>                                            <span class="hljs-string">READY</span>   <span class="hljs-string">STATUS</span>      <span class="hljs-string">RESTARTS</span>   <span class="hljs-string">AGE​</span>
 <span class="hljs-string">my-release-etcd-0</span>                               <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">65m​</span>

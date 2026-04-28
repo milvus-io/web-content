@@ -41,9 +41,39 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p><strong>IVF_RABITQ</strong> son las siglas de <strong>Inverted File with RaBitQ quantization (Archivo invertido con cuantificación RaBitQ</strong>), que combina dos potentes técnicas para la búsqueda y el almacenamiento eficientes de vectores.</p>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p>El<strong>Archivo Invertido (</strong> IVF<strong>)</strong> organiza el espacio vectorial en regiones manejables utilizando <a href="https://en.wikipedia.org/wiki/K-means_clustering">la agrupación k-means</a>. Cada clúster está representado por un centroide, que sirve como punto de referencia para los vectores dentro de ese clúster. Este enfoque de agrupación reduce el espacio de búsqueda al permitir que el algoritmo se centre sólo en los clusters más relevantes durante el procesamiento de la consulta.</p>
+<h3 id="IVF" class="common-anchor-header">IVF<button data-href="#IVF" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>El<strong>Archivo Invertido (</strong> IVF<strong>)</strong> organiza el espacio vectorial en regiones manejables utilizando <a href="https://en.wikipedia.org/wiki/K-means_clustering">la agrupación k-means</a>. Cada clúster está representado por un centroide, que sirve como punto de referencia para los vectores dentro de ese clúster. Este enfoque de agrupación reduce el espacio de búsqueda al permitir que el algoritmo se centre sólo en los clusters más relevantes durante el procesamiento de la consulta.</p>
 <p>Para obtener más información sobre los detalles técnicos de IVF, consulte <a href="/docs/es/ivf-flat.md">IVF_FLAT</a>.</p>
-<h3 id="RaBitQ" class="common-anchor-header">RaBitQ</h3><p><strong>RaBitQ</strong> es un método de cuantificación binaria de última generación con garantías teóricas, presentado en el artículo de investigación "RaBitQ: Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search" por Jianyang Gao y Cheng Long.</p>
+<h3 id="RaBitQ" class="common-anchor-header">RaBitQ<button data-href="#RaBitQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>RaBitQ</strong> es un método de cuantificación binaria de última generación con garantías teóricas, presentado en el artículo de investigación "RaBitQ: Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search" por Jianyang Gao y Cheng Long.</p>
 <p>RaBitQ introduce varios conceptos innovadores:</p>
 <p><strong>Codificación de información angular</strong>: A diferencia de la codificación espacial tradicional, RaBitQ codifica la información angular mediante la normalización de vectores. En IVF_RABITQ, los vectores de datos se normalizan con respecto a su centroide IVF más cercano, lo que mejora la precisión del proceso de cuantización.</p>
 <p><strong>Fundamento teórico</strong>: La fórmula de aproximación de distancia central es:</p>
@@ -59,7 +89,22 @@ beta: Milvus 2.6.x
 </ul>
 <p><strong>Eficiencia computacional</strong>: La naturaleza binaria de <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> o~\tilde{\mathbf{o}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6813em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span> o</span></span></span></span></span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3.3634em;"><span class="pstrut" style="height:3em;"></span> ~ hace que los cálculos de distancia sean extremadamente rápidos, beneficiándose especialmente de las modernas arquitecturas de CPU con instrucciones dedicadas</span></span></span></span></span></span></span></span> <code translate="no">AVX-512 VPOPCNTDQ</code> en procesadores Intel Ice Lake+ o AMD Zen 4+.</p>
 <p><strong>Mejoras algorítmicas</strong>: RaBitQ se integra eficazmente con técnicas establecidas como el <a href="https://www.vldb.org/pvldb/vol9/p288-andre.pdf">enfoque<code translate="no">FastScan</code> </a> y <a href="https://github.com/facebookresearch/faiss/wiki/Pre--and-post-processing">las rotaciones aleatorias</a> para mejorar el rendimiento.</p>
-<h3 id="IVF-+-RaBitQ" class="common-anchor-header">IVF + RaBitQ</h3><p>El índice <strong>IVF_RABITQ</strong> combina la agrupación eficiente de IVF con la cuantificación binaria avanzada de RaBitQ:</p>
+<h3 id="IVF-+-RaBitQ" class="common-anchor-header">IVF + RaBitQ<button data-href="#IVF-+-RaBitQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>El índice <strong>IVF_RABITQ</strong> combina la agrupación eficiente de IVF con la cuantificación binaria avanzada de RaBitQ:</p>
 <ol>
 <li><p><strong>Filtrado grueso</strong>: IVF particiona el espacio vectorial en clusters, reduciendo significativamente el ámbito de búsqueda al centrarse en las regiones de clusters más relevantes.</p></li>
 <li><p><strong>Cuantificación binaria</strong>: Dentro de cada clúster, RaBitQ comprime los vectores en representaciones binarias preservando las relaciones de distancia esenciales mediante garantías teóricas.</p></li>
@@ -109,7 +154,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>: El método utilizado para calcular la distancia entre vectores. Los valores soportados incluyen <code translate="no">COSINE</code>, <code translate="no">L2</code>, y <code translate="no">IP</code>. Para más detalles, consulte <a href="/docs/es/metric.md">Tipos de métricas</a>.</p></li>
 <li><p><code translate="no">params</code>: Opciones de configuración adicionales para construir el índice. Para más información, consulte <a href="/docs/es/ivf-rabitq.md#Index-building-params">Parámetros de creación de índices</a>.</p></li>
 </ul>
-<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando directamente el método <code translate="no">create_index()</code> o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
+<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando el método <code translate="no">create_index()</code> directamente o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Búsqueda en el índice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -165,7 +210,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Esta sección proporciona una visión general de los parámetros utilizados para construir un índice y realizar búsquedas en el índice.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parámetros de creación de índices</h3><p>La siguiente tabla enumera los parámetros que se pueden configurar en <code translate="no">params</code> cuando se <a href="/docs/es/ivf-rabitq.md#Build-index">construye un índice</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parámetros de creación de índices<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La siguiente tabla enumera los parámetros que se pueden configurar en <code translate="no">params</code> cuando se <a href="/docs/es/ivf-rabitq.md#Build-index">construye un índice</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -177,7 +237,7 @@ res = MilvusClient.search(
    <tr>
      <td><p>IVF</p></td>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>El número de clusters a crear usando el algoritmo k-means durante la construcción del índice. Cada cluster, representado por un centroide, almacena una lista de vectores. Aumentar este parámetro reduce el número de vectores en cada cluster, creando particiones más pequeñas y centradas.</p></td>
+     <td><p>El número de clusters a crear utilizando el algoritmo k-means durante la construcción del índice. Cada cluster, representado por un centroide, almacena una lista de vectores. Aumentar este parámetro reduce el número de vectores en cada cluster, creando particiones más pequeñas y centradas.</p></td>
      <td><p><strong>Tipo</strong>: Entero<br><strong>Rango</strong>: [1, 65536]<br><strong>Valor por defecto</strong>: <code translate="no">128</code></p></td>
      <td><p>Los valores mayores de <code translate="no">nlist</code> mejoran la recuperación al crear clusters más refinados, pero aumentan el tiempo de creación del índice. Optimice en función del tamaño del conjunto de datos y de los recursos disponibles. En la mayoría de los casos, se recomienda establecer un valor dentro de este intervalo: [32, 4096].</p></td>
    </tr>
@@ -195,7 +255,22 @@ res = MilvusClient.search(
      <td><p>Los valores de la lista se presentan en orden de aumento de la tasa de recuperación, disminución de QPS y aumento del tamaño de almacenamiento. Se recomienda <code translate="no">SQ8</code> como punto de partida, ya que ofrece un buen equilibrio entre precisión y uso de recursos.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parámetros de búsqueda específicos del índice</h3><p>En la tabla siguiente se enumeran los parámetros que pueden configurarse en <code translate="no">search_params.params</code> cuando se <a href="/docs/es/ivf-rabitq.md#Search-on-index">realizan búsquedas en el índice</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parámetros de búsqueda específicos del índice<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>En la tabla siguiente se enumeran los parámetros que pueden configurarse en <code translate="no">search_params.params</code> cuando se <a href="/docs/es/ivf-rabitq.md#Search-on-index">realizan búsquedas en el índice</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -216,7 +291,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">rbq_query_bits</code></p></td>
      <td><p>Establece si se aplica una cuantización escalar adicional a un vector de consulta. Si se establece en <code translate="no">0</code>, la consulta se utiliza sin cuantización. Si se establece en [1, 8], la consulta se preprocesa utilizando una cuantización escalar de n bits.</p></td>
      <td><p><strong>Tipo</strong> Entero<br><strong>Rango</strong>: [0, 8]<br><strong>Valor por defecto</strong>: <code translate="no">0</code></p></td>
-     <td><p>El valor por defecto <code translate="no">0</code> proporciona la máxima tasa de recuperación pero el rendimiento más lento. Se recomienda probar los valores <code translate="no">0</code>, <code translate="no">8</code>, y <code translate="no">6</code>, ya que proporcionan índices de recuperación similares, siendo <code translate="no">6</code> el más rápido. Utilice valores más pequeños para requisitos de recuperación más elevados.</p></td>
+     <td><p>El valor predeterminado <code translate="no">0</code> proporciona la máxima tasa de recuperación pero el rendimiento más lento. Se recomienda probar los valores <code translate="no">0</code>, <code translate="no">8</code>, y <code translate="no">6</code>, ya que proporcionan índices de recuperación similares, siendo <code translate="no">6</code> el más rápido. Utilice valores más pequeños para requisitos de recuperación más elevados.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">refine_k</code></p></td>

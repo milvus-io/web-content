@@ -45,7 +45,7 @@ summary: 'Erfahren Sie, wie Sie localStorage für Milvus konfigurieren.'
     <tr>
       <td>
         <li>Lokaler Pfad zu dem Ort, an dem die Vektordaten während einer Suche oder einer Abfrage gespeichert werden, um einen wiederholten Zugriff auf den MinIO- oder S3-Dienst zu vermeiden.</li>      
-        <li>Vorsicht! Wenn Sie diesen Parameter ändern, nachdem Sie Milvus eine Zeit lang verwendet haben, wird der Zugriff auf alte Daten beeinträchtigt.</li>      
+        <li>Vorsicht! Wenn Sie diesen Parameter ändern, nachdem Sie Milvus eine Zeit lang verwendet haben, hat dies Auswirkungen auf Ihren Zugriff auf alte Daten.</li>      
         <li>Es wird empfohlen, diesen Parameter zu ändern, bevor Sie Milvus zum ersten Mal starten.</li>      </td>
       <td>/var/lib/milvus/data/</td>
     </tr>

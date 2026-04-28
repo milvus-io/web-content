@@ -46,7 +46,22 @@ title: Configurar Logs de Acesso
 <li><strong>Configuração para ficheiros de registo de acesso local</strong>: Para armazenar os registos localmente.</li>
 <li><strong>Configuração para carregar os registos de acesso local para o MinIO</strong>: Para armazenamento e backup na nuvem.</li>
 </ul>
-<h3 id="Base-config" class="common-anchor-header">Configuração básica</h3><p>A configuração básica envolve a ativação dos registos de acesso e a definição do nome do ficheiro de registo ou a utilização de stdout.</p>
+<h3 id="Base-config" class="common-anchor-header">Configuração básica<button data-href="#Base-config" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>A configuração básica envolve a ativação dos registos de acesso e a definição do nome do ficheiro de registo ou a utilização de stdout.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -58,7 +73,22 @@ title: Configurar Logs de Acesso
 <li><code translate="no">proxy.accessLog.enable</code>: Se deve ativar a funcionalidade de registo de acesso. O padrão é <strong>falso</strong>.</li>
 <li><code translate="no">proxy.accessLog.filename</code>: O nome do ficheiro de registo de acesso. Se deixar este parâmetro vazio, os registos de acesso serão impressos no stdout.</li>
 </ul>
-<h3 id="Config-for-local-access-log-files" class="common-anchor-header">Configuração para ficheiros de registo de acesso local</h3><p>Configurar o armazenamento local para ficheiros de registo de acesso com parâmetros que incluem o caminho do ficheiro local, o tamanho do ficheiro e o intervalo de rotação:</p>
+<h3 id="Config-for-local-access-log-files" class="common-anchor-header">Configuração para ficheiros de registo de acesso local<button data-href="#Config-for-local-access-log-files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Configurar o armazenamento local para ficheiros de registo de acesso com parâmetros que incluem o caminho do ficheiro local, o tamanho do ficheiro e o intervalo de rotação:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -76,7 +106,22 @@ title: Configurar Logs de Acesso
 <li><code translate="no">proxy.accessLog.rotatedTime</code>: O intervalo de tempo máximo em segundos permitido para rodar um único ficheiro de registo de acesso. Ao atingir o intervalo de tempo especificado, é desencadeado um processo de rotação, resultando na criação de um novo ficheiro de registo de acesso e na selagem do anterior.</li>
 <li><code translate="no">proxy.accessLog.maxBackups</code>: O número máximo de ficheiros de registo de acesso selados que podem ser retidos. Se o número de ficheiros de registo de acesso selados exceder este limite, o mais antigo será apagado.</li>
 </ul>
-<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">Configuração para carregar ficheiros de registo de acesso local para o MinIO</h3><p>Ativar e configurar definições para carregar ficheiros de registo de acesso local para o MinIO:</p>
+<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">Configuração para carregar ficheiros de registo de acesso local para o MinIO<button data-href="#Config-for-uploading-local-access-log-files-to-MinIO" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ativar e configurar definições para carregar ficheiros de registo de acesso local para o MinIO:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>

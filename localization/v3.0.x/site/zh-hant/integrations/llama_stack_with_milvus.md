@@ -63,7 +63,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">準備環境</h3><p>由於我們需要使用 Together AI 作為 LLM 服務，因此必須先登入官方網站申請<a href="https://api.together.xyz/settings/api-keys">API key</a>，並將 API key<code translate="no">TOGETHER_API_KEY</code> 設定為環境變數。</p>
+    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">準備環境<button data-href="#Prepare-the-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>由於我們需要使用 Together AI 作為 LLM 服務，因此必須先登入官方網站申請<a href="https://api.together.xyz/settings/api-keys">API key</a>，並將 API key<code translate="no">TOGETHER_API_KEY</code> 設定為環境變數。</p>
 <p>克隆 Llama Stack 原始碼</p>
 <pre><code translate="no" class="language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/meta-llama/llama-stack.git
 $ <span class="hljs-built_in">cd</span> llama-stack
@@ -93,16 +108,31 @@ $ pip install -e .
 <li><p>遠端設定適合大量資料儲存。</p>
 <ul>
 <li>如果您有大量的資料，您可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上架設效能優異的 Milvus 伺服器。在此設定中，請使用伺服器 URI，例如<code translate="no">http://localhost:19530</code> ，作為您的<code translate="no">uri</code> 。預設的<code translate="no">token</code> 是<code translate="no">root:Milvus</code> 。</li>
-<li>如果您想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">雲端</a>服務），請調整<code translate="no">uri</code> 和<code translate="no">token</code> ，它們對應於 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint 和 API key</a>。</li>
+<li>如果您想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">雲端</a>服務），請調整<code translate="no">uri</code> 和<code translate="no">token</code> ，這兩個值對應 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint 和 API key</a>。</li>
 </ul></li>
 </ul>
-<h3 id="Build-distribution-from-the-template" class="common-anchor-header">從模板建立發行版</h3><p>執行下列指令建立發行版：</p>
+<h3 id="Build-distribution-from-the-template" class="common-anchor-header">從模板建立發行版<button data-href="#Build-distribution-from-the-template" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>執行下列指令建立發行版：</p>
 <pre><code translate="no" class="language-bash">$ llama stack build --template together --image-type conda
 <button class="copy-code-btn"></button></code></pre>
 <p>將產生檔案<code translate="no">~/.llama/distributions/together/together-run.yaml</code> 。然後，執行此指令啟動伺服器：</p>
 <pre><code translate="no" class="language-bash">$ llama stack run --image-type conda ~/.llama/distributions/together/together-run.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>如果一切順利，您應該會看到 Llama Stack 伺服器在 8321 連接埠成功執行。</p>
+<p>如果一切順利，您應該會看到 Llama Stack 伺服器成功在 8321 連接埠上執行。</p>
 <h2 id="Perform-RAG-from-client" class="common-anchor-header">從用戶端執行 RAG<button data-href="#Perform-RAG-from-client" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

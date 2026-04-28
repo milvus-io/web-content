@@ -220,7 +220,7 @@ summary: MilvusのqueryCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        バランスを取った後の、from-to ノード間のアンバランスな範囲の最大値      </td>
+      <td>        バランスをとった後の、from-to ノード間のアンバランスな範囲の最大値      </td>
       <td>1.3</td>
     </tr>
   </tbody>
@@ -394,7 +394,7 @@ summary: MilvusのqueryCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        クエリノード間でセグメントをバランスさせる際に使用するセグメント数の重み。      </td>
+      <td>        クエリノード間でセグメントのバランスをとる際に使用するセグメント数の重み。      </td>
       <td>0.1</td>
     </tr>
   </tbody>
@@ -802,7 +802,7 @@ summary: MilvusのqueryCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        100ms、クエリ・ノードへの健全性チェックRPCのタイムアウト      </td>
+      <td>        100ms、クエリ・ノードへのヘルスチェックRPCのタイムアウト      </td>
       <td>2000</td>
     </tr>
   </tbody>

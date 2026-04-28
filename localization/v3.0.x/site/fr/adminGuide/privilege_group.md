@@ -39,7 +39,7 @@ summary: >-
     </button></h2><p>Un groupe de privilèges se compose de plusieurs privilèges.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" />
    </span> <span class="img-wrapper"> <span>Illustration d'un groupe de privilèges</span> </span></p>
 <p>Comme le montre la figure ci-dessus, supposons que vous deviez accorder trois privilèges différents à un rôle.</p>
 <ul>
@@ -67,9 +67,24 @@ summary: >-
 <p>Les trois niveaux de groupes de privilèges intégrés n'ont pas de relation en cascade. La définition d'un groupe de privilèges au niveau de l'instance ne définit pas automatiquement les autorisations pour toutes les bases de données et collections de cette instance. Les privilèges au niveau de la base de données et de la collection doivent être définis manuellement.</p>
 </div>
 <p>Les tableaux suivants expliquent les privilèges inclus dans chacun des groupes de privilèges intégrés.</p>
-<h3 id="Collection-level" class="common-anchor-header">Niveau de collection</h3><ul>
+<h3 id="Collection-level" class="common-anchor-header">Niveau de collection<button data-href="#Collection-level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>CollectionReadOnly (COLL_RO)</strong>: inclut les privilèges de lecture des données de la collection.</p></li>
-<li><p><strong>CollectionReadWrite (COLL_RW)</strong>: comprend les privilèges de lecture et d'écriture des données de la collection.</p></li>
+<li><p><strong>CollectionReadWrite (COLL_RW)</strong>: inclut les privilèges de lecture et d'écriture des données de la collection.</p></li>
 <li><p><strong>CollectionAdmin (COLL_ADMIN)</strong>: comprend les privilèges de lecture et d'écriture des données de la collection et de gestion des collections.</p></li>
 </ul>
 <p>Le tableau ci-dessous répertorie les privilèges spécifiques inclus dans les trois groupes de privilèges intégrés au niveau de la collecte :</p>
@@ -243,8 +258,23 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h3 id="Database-level" class="common-anchor-header">Niveau de la base de données</h3><ul>
-<li><p><strong>DatabaseReadOnly (DB_RO)</strong>: comprend les privilèges de lecture des données de la base de données.</p></li>
+<h3 id="Database-level" class="common-anchor-header">Niveau de la base de données<button data-href="#Database-level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li><p><strong>DatabaseReadOnly (DB_RO)</strong>: inclut les privilèges de lecture des données de la base de données.</p></li>
 <li><p><strong>DatabaseReadWrite (DB_RW)</strong>: comprend les privilèges de lecture et d'écriture des données de la base de données.</p></li>
 <li><p><strong>DatabaseAdmin (DB_Admin)</strong>: privilèges de lecture et d'écriture des données de la base et de gestion des bases de données.</p></li>
 </ul>
@@ -287,7 +317,22 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h3 id="Cluster-level" class="common-anchor-header">Niveau du cluster</h3><ul>
+<h3 id="Cluster-level" class="common-anchor-header">Niveau du cluster<button data-href="#Cluster-level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>ClusterReadOnly (Cluster_RO)</strong>: inclut les privilèges de lecture des données d'instance.</p></li>
 <li><p><strong>ClusterReadWrite (Cluster_RW)</strong>: inclut des privilèges de lecture et d'écriture des données d'instance.</p></li>
 <li><p><strong>ClusterAdmin (Cluster_Admin)</strong>: privilèges permettant de lire et d'écrire des données d'instance et de gérer des instances.</p></li>
@@ -461,7 +506,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Vous pouvez créer un groupe de privilèges, puis ajouter des privilèges au groupe de privilèges.</p>
-<h3 id="Create-a-privilege-group" class="common-anchor-header">Création d'un groupe de privilèges</h3><p>L'exemple suivant montre comment créer un groupe de privilèges nommé <code translate="no">privilege_group_1</code>.</p>
+<h3 id="Create-a-privilege-group" class="common-anchor-header">Création d'un groupe de privilèges<button data-href="#Create-a-privilege-group" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>L'exemple suivant montre comment créer un groupe de privilèges nommé <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -493,7 +553,22 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">Ajouter des privilèges à un groupe de privilèges</h3><p>L'exemple suivant montre comment ajouter les privilèges <code translate="no">PrivilegeBackupRBAC</code> et <code translate="no">PrivilegeRestoreRBAC</code> au groupe de privilèges <code translate="no">privilege_group_1</code> qui vient d'être créé.</p>
+<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">Ajouter des privilèges à un groupe de privilèges<button data-href="#Add-privileges-to-a-privilege-group" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>L'exemple suivant montre comment ajouter les privilèges <code translate="no">PrivilegeBackupRBAC</code> et <code translate="no">PrivilegeRestoreRBAC</code> au groupe de privilèges <code translate="no">privilege_group_1</code> qui vient d'être créé.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -530,7 +605,22 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
     &quot;privileges&quot;:[&quot;Query&quot;, &quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">Supprimer des privilèges d'un groupe de privilèges</h3><p>L'exemple suivant montre comment supprimer le privilège <code translate="no">PrivilegeRestoreRBAC</code> du groupe de privilèges <code translate="no">privilege_group_1</code>.</p>
+<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">Supprimer des privilèges d'un groupe de privilèges<button data-href="#Remove-privileges-from-a-privilege-group" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>L'exemple suivant montre comment supprimer le privilège <code translate="no">PrivilegeRestoreRBAC</code> du groupe de privilèges <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -565,7 +655,22 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
     &quot;privileges&quot;:[&quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-privilege-groups" class="common-anchor-header">Répertorier les groupes de privilèges</h3><p>L'exemple suivant montre comment dresser la liste de tous les groupes de privilèges existants.</p>
+<h3 id="List-privilege-groups" class="common-anchor-header">Répertorier les groupes de privilèges<button data-href="#List-privilege-groups" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>L'exemple suivant montre comment dresser la liste de tous les groupes de privilèges existants.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -598,7 +703,22 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
 <p>Voici un exemple de résultat.</p>
 <pre><code translate="no" class="language-bash">PrivilegeGroupItem: &lt;privilege_group:privilege_group_1&gt;, &lt;privileges:(<span class="hljs-string">&#x27;Search&#x27;</span>, <span class="hljs-string">&#x27;Query&#x27;</span>)&gt;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-a-privilege-group" class="common-anchor-header">Supprimer un groupe de privilèges</h3><p>L'exemple suivant montre comment supprimer le groupe de privilèges <code translate="no">privilege_group_1</code>.</p>
+<h3 id="Drop-a-privilege-group" class="common-anchor-header">Supprimer un groupe de privilèges<button data-href="#Drop-a-privilege-group" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>L'exemple suivant montre comment supprimer le groupe de privilèges <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

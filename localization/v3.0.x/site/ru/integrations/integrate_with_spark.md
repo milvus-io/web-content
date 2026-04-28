@@ -48,7 +48,22 @@ title: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Preparation" class="common-anchor-header">Подготовка</h3><p>Spark-Milvus Connector поддерживает языки программирования Scala и Python. Пользователи могут использовать его с <strong>Pyspark</strong> или <strong>Spark-shell</strong>. Чтобы запустить эту демонстрацию, настройте среду Spark, содержащую зависимость Spark-Milvus Connector, выполнив следующие действия:</p>
+    </button></h2><h3 id="Preparation" class="common-anchor-header">Подготовка<button data-href="#Preparation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Spark-Milvus Connector поддерживает языки программирования Scala и Python. Пользователи могут использовать его с <strong>Pyspark</strong> или <strong>Spark-shell</strong>. Чтобы запустить эту демонстрацию, настройте среду Spark, содержащую зависимость Spark-Milvus Connector, выполнив следующие действия:</p>
 <ol>
 <li><p>Установите Apache Spark (версия &gt;= 3.3.0).</p>
 <p>Вы можете установить Apache Spark, обратившись к <a href="https://spark.apache.org/docs/latest/">официальной документации</a>.</p></li>
@@ -66,7 +81,22 @@ title: >-
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 </ol>
-<h3 id="Demo" class="common-anchor-header">Демонстрация</h3><p>В этой демонстрации мы создадим пример Spark DataFrame с векторными данными и запишем его в Milvus через Spark-Milvus Connector. Коллекция будет создана в Milvus автоматически на основе схемы и заданных параметров.</p>
+<h3 id="Demo" class="common-anchor-header">Демонстрация<button data-href="#Demo" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В этой демонстрации мы создадим пример Spark DataFrame с векторными данными и запишем его в Milvus через Spark-Milvus Connector. Коллекция будет создана в Milvus автоматически на основе схемы и заданных параметров.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#scala">Scala</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pyspark.sql <span class="hljs-keyword">import</span> SparkSession
@@ -138,7 +168,22 @@ object Hello extends App {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Milvus-options" class="common-anchor-header">Опции Milvus</h3><p>В разделе <a href="#Quick-start">"Быстрый старт</a> " мы показали установку опций при работе с Milvus. Эти опции абстрагированы как опции Milvus. Они используются для создания соединений с Milvus и управления другим поведением Milvus. Не все опции являются обязательными.</p>
+    </button></h2><h3 id="Milvus-options" class="common-anchor-header">Опции Milvus<button data-href="#Milvus-options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В разделе <a href="#Quick-start">"Быстрый старт</a> " мы показали установку опций при работе с Milvus. Эти опции абстрагированы как опции Milvus. Они используются для создания соединений с Milvus и управления другим поведением Milvus. Не все опции являются обязательными.</p>
 <table>
 <thead>
 <tr><th>Ключ опции</th><th>Значение по умолчанию</th><th>Описание</th></tr>
@@ -186,14 +231,59 @@ object Hello extends App {
 <li><code translate="no">milvusbinlog</code>: Формат данных Milvus для чтения встроенных данных бинлога Milvus.</li>
 <li><code translate="no">mjson</code>: Формат Milvus JSON для массового ввода данных в Milvus.</li>
 </ul>
-<h3 id="milvus" class="common-anchor-header">milvus</h3><p>В разделе <a href="#Quick-start">"Быстрый старт</a>" мы используем формат <strong>milvus</strong> для записи образцов данных в кластер Milvus. Формат <strong>milvus</strong> - это новый формат данных, который поддерживает беспрепятственную запись данных Spark DataFrame в коллекции Milvus. Это достигается с помощью пакетных вызовов Insert API в Milvus SDK. Если коллекция не существует в Milvus, новая коллекция будет создана на основе схемы Dataframe. Однако автоматически созданная коллекция может не поддерживать все возможности схемы коллекции. Поэтому рекомендуется сначала создать коллекцию через SDK, а затем использовать spark-milvus для записи. Для получения дополнительной информации обратитесь к <a href="https://github.com/zilliztech/spark-milvus/blob/main/examples/src/main/scala/InsertDemo.scala">демонстрации</a>.</p>
-<h3 id="milvusbinlog" class="common-anchor-header">milvusbinlog</h3><p>Новый формат данных <strong>milvusbinlog</strong> предназначен для чтения встроенных в Milvus данных binlog. Binlog - это внутренний формат хранения данных Milvus, основанный на parquet. К сожалению, он не может быть прочитан обычной библиотекой parquet, поэтому мы реализовали этот новый формат данных, чтобы помочь Spark job прочитать его. Не рекомендуется использовать <strong>milvusbinlog</strong> напрямую, если вы не знакомы с деталями внутреннего хранилища milvus. Мы предлагаем использовать функцию <a href="#MilvusUtils">MilvusUtils</a>, которая будет представлена в следующем разделе.</p>
+<h3 id="milvus" class="common-anchor-header">milvus<button data-href="#milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В разделе <a href="#Quick-start">"Быстрый старт</a>" мы используем формат <strong>milvus</strong> для записи образцов данных в кластер Milvus. Формат <strong>milvus</strong> - это новый формат данных, который поддерживает беспрепятственную запись данных Spark DataFrame в коллекции Milvus. Это достигается с помощью пакетных вызовов Insert API в Milvus SDK. Если коллекция не существует в Milvus, новая коллекция будет создана на основе схемы Dataframe. Однако автоматически созданная коллекция может не поддерживать все возможности схемы коллекции. Поэтому рекомендуется сначала создать коллекцию через SDK, а затем использовать spark-milvus для записи. Для получения дополнительной информации обратитесь к <a href="https://github.com/zilliztech/spark-milvus/blob/main/examples/src/main/scala/InsertDemo.scala">демонстрации</a>.</p>
+<h3 id="milvusbinlog" class="common-anchor-header">milvusbinlog<button data-href="#milvusbinlog" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Новый формат данных <strong>milvusbinlog</strong> предназначен для чтения встроенных в Milvus данных binlog. Binlog - это внутренний формат хранения данных Milvus, основанный на parquet. К сожалению, он не может быть прочитан обычной библиотекой parquet, поэтому мы реализовали этот новый формат данных, чтобы помочь Spark job прочитать его. Не рекомендуется использовать <strong>milvusbinlog</strong> напрямую, если вы не знакомы с деталями внутреннего хранилища milvus. Мы предлагаем использовать функцию <a href="#MilvusUtils">MilvusUtils</a>, которая будет представлена в следующем разделе.</p>
 <pre><code translate="no" class="language-scalar">val df = spark.read
   .format(&quot;milvusbinlog&quot;)
   .load(path)
   .withColumnRenamed(&quot;val&quot;, &quot;embedding&quot;)
 </code></pre>
-<h3 id="mjson" class="common-anchor-header">mjson</h3><p>Milvus предоставляет функциональность <a href="https://milvus.io/docs/bulk_insert.md">Bulkinsert</a> для повышения производительности записи при работе с большими наборами данных. Однако формат JSON, используемый Milvus, несколько отличается от формата JSON, используемого по умолчанию в Spark. Чтобы решить эту проблему, мы ввели формат данных <strong>mjson</strong> для генерации данных, соответствующих требованиям Milvus. Вот пример, показывающий разницу между JSON-lines и <strong>mjson</strong>:</p>
+<h3 id="mjson" class="common-anchor-header">mjson<button data-href="#mjson" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus предоставляет функциональность <a href="https://milvus.io/docs/bulk_insert.md">Bulkinsert</a> для повышения производительности записи при работе с большими наборами данных. Однако формат JSON, используемый Milvus, несколько отличается от формата JSON, используемого по умолчанию в Spark. Чтобы решить эту проблему, мы ввели формат данных <strong>mjson</strong> для генерации данных, соответствующих требованиям Milvus. Вот пример, показывающий разницу между JSON-lines и <strong>mjson</strong>:</p>
 <ul>
 <li><p>JSON-lines:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;book_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">101</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;word_count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">13</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;book_intro&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">1.1</span><span class="hljs-punctuation">,</span> <span class="hljs-number">1.2</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">}</span>
@@ -231,10 +321,40 @@ object Hello extends App {
         ></path>
       </svg>
     </button></h2><p>MilvusUtils содержит несколько полезных функций util. В настоящее время он поддерживается только в Scala. Примеры использования приведены в разделе <a href="#Advanced-Usage">Advanced Usage</a>.</p>
-<h3 id="MilvusUtilsreadMilvusCollection" class="common-anchor-header">MilvusUtils.readMilvusCollection</h3><p><strong>MilvusUtils.readMilvusCollection</strong> - это простой интерфейс для загрузки всей коллекции Milvus в Spark Dataframe. Он включает в себя различные операции, в том числе вызов Milvus SDK, чтение <strong>milvusbinlog</strong> и общие операции объединения/соединения.</p>
+<h3 id="MilvusUtilsreadMilvusCollection" class="common-anchor-header">MilvusUtils.readMilvusCollection<button data-href="#MilvusUtilsreadMilvusCollection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>MilvusUtils.readMilvusCollection</strong> - это простой интерфейс для загрузки всей коллекции Milvus в Spark Dataframe. Он включает в себя различные операции, в том числе вызов Milvus SDK, чтение <strong>milvusbinlog</strong> и общие операции объединения/соединения.</p>
 <pre><code translate="no" class="language-scala">val collectionDF = MilvusUtils.readMilvusCollection(spark, milvusOptions)
 </code></pre>
-<h3 id="MilvusUtilsbulkInsertFromSpark" class="common-anchor-header">MilvusUtils.bulkInsertFromSpark</h3><p><strong>MilvusUtils.bulkInsertFromSpark</strong> предоставляет удобный способ импортировать выходные файлы Spark в Milvus большой партией. Он оборачивает API <strong>Bullkinsert</strong> из Milvus SDK.</p>
+<h3 id="MilvusUtilsbulkInsertFromSpark" class="common-anchor-header">MilvusUtils.bulkInsertFromSpark<button data-href="#MilvusUtilsbulkInsertFromSpark" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>MilvusUtils.bulkInsertFromSpark</strong> предоставляет удобный способ импортировать выходные файлы Spark в Milvus большой партией. Он оборачивает API <strong>Bullkinsert</strong> из Milvus SDK.</p>
 <pre><code translate="no" class="language-scala">df.write.format(&quot;parquet&quot;).save(outputPath)
 MilvusUtils.bulkInsertFromSpark(spark, milvusOptions, outputPath, &quot;parquet&quot;)
 </code></pre>
@@ -254,7 +374,22 @@ MilvusUtils.bulkInsertFromSpark(spark, milvusOptions, outputPath, &quot;parquet&
         ></path>
       </svg>
     </button></h2><p>В этом разделе вы найдете примеры расширенного использования Spark-Milvus Connector для анализа и миграции данных. Дополнительные демонстрации смотрите в <a href="https://github.com/zilliztech/spark-milvus/tree/main/examples/src/main/scala">примерах</a>.</p>
-<h3 id="MySQL---embedding---Milvus" class="common-anchor-header">MySQL -&gt; встраивание -&gt; Milvus</h3><p>В этой демонстрации мы</p>
+<h3 id="MySQL---embedding---Milvus" class="common-anchor-header">MySQL -&gt; встраивание -&gt; Milvus<button data-href="#MySQL---embedding---Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В этой демонстрации мы</p>
 <ol>
 <li>Прочитаем данные из MySQL через Spark-MySQL Connector,</li>
 <li>генерировать встраивание (на примере Word2Vec) и</li>
@@ -336,7 +471,22 @@ object Mysql2MilvusDemo  extends App {
     .save()
 }
 </code></pre>
-<h3 id="Milvus---Transform---Milvus" class="common-anchor-header">Milvus -&gt; Transform -&gt; Milvus</h3><p>В этом демонстрационном примере мы</p>
+<h3 id="Milvus---Transform---Milvus" class="common-anchor-header">Milvus -&gt; Transform -&gt; Milvus<button data-href="#Milvus---Transform---Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В этом демонстрационном примере мы</p>
 <ol>
 <li>Считывать данные из коллекции Milvus,</li>
 <li>Применим трансформацию (на примере PCA) и</li>
@@ -454,14 +604,29 @@ object TransformDemo extends App {
   MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, &quot;parquet&quot;)
 }
 </code></pre>
-<h3 id="Databricks---Zilliz-Cloud" class="common-anchor-header">Databricks -&gt; Zilliz Cloud</h3><p>Если вы используете Zilliz Cloud (управляемый сервис Milvus), вы можете воспользоваться его удобным API импорта данных. Zilliz Cloud предоставляет исчерпывающие инструменты и документацию, чтобы помочь вам эффективно перемещать данные из различных источников данных, включая Spark и Databricks. Просто настройте ведро S3 в качестве посредника и откройте к нему доступ в своей учетной записи Zilliz Cloud. API импорта данных Zilliz Cloud автоматически загрузит всю партию данных из ведра S3 в ваш кластер Zilliz Cloud.</p>
+<h3 id="Databricks---Zilliz-Cloud" class="common-anchor-header">Databricks -&gt; Zilliz Cloud<button data-href="#Databricks---Zilliz-Cloud" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Если вы используете Zilliz Cloud (управляемый сервис Milvus), вы можете воспользоваться его удобным API импорта данных. Zilliz Cloud предоставляет исчерпывающие инструменты и документацию, чтобы помочь вам эффективно перемещать данные из различных источников данных, включая Spark и Databricks. Просто создайте ведро S3 в качестве посредника и откройте к нему доступ в своей учетной записи Zilliz Cloud. API импорта данных Zilliz Cloud автоматически загрузит всю партию данных из ведра S3 в ваш кластер Zilliz Cloud.</p>
 <p><strong>Подготовительные работы</strong></p>
 <ol>
 <li><p>Загрузите среду выполнения Spark, добавив jar-файл в кластер Databricks.</p>
 <p>Библиотеку можно установить разными способами. На этом скриншоте показана загрузка jar-файла из локальной сети в кластер. Дополнительные сведения см. в разделе <a href="https://docs.databricks.com/en/libraries/cluster-libraries.html">Кластерные библиотеки</a> в документации Databricks.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
    </span> <span class="img-wrapper"> <span>Установка библиотеки Databricks</span> </span></p></li>
 <li><p>Создайте ведро S3 и настройте его как внешнее хранилище для кластера Databricks.</p>
 <p>Для Bulkinsert требуется хранить данные во временном ведре, чтобы Zilliz Cloud мог импортировать их в пакетном режиме. Вы можете создать ведро S3 и настроить его как внешнее хранилище Databricks. Подробности см. в разделе <a href="https://docs.databricks.com/en/sql/language-manual/sql-ref-external-locations.html">Внешние местоположения</a>.</p></li>

@@ -70,7 +70,7 @@ summary: >-
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
      <td><p>Une plus grande distance COSINE indique une plus grande similarité.</p></td>
-     <td><p>Pour ne pas tenir compte des vector embeddings les plus similaires, il faut s'assurer que</p><p><code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>Pour ne pas tenir compte des enregistrements vectoriels les plus similaires, il faut s'assurer que</p><p><code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>

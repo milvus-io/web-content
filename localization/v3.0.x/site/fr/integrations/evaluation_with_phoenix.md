@@ -24,7 +24,7 @@ title: Évaluation avec Arize Pheonix
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/evaluation_with_phoenix.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Ce guide montre comment utiliser <a href="https://phoenix.arize.com/">Arize Pheonix</a> pour évaluer un pipeline de génération assistée par récupération (RAG) construit à partir de <a href="https://milvus.io/">Milvus</a>.</p>
 <p>Le système RAG combine un système de recherche avec un modèle génératif pour générer un nouveau texte basé sur une invite donnée. Le système récupère d'abord les documents pertinents d'un corpus à l'aide de Milvus, puis utilise un modèle génératif pour générer un nouveau texte basé sur les documents récupérés.</p>
-<p>Arize Pheonix est un cadre qui vous aide à évaluer vos pipelines RAG. Il existe des outils et des cadres existants qui vous aident à construire ces pipelines, mais il peut être difficile de les évaluer et de quantifier leur performance. C'est là qu'Arize Pheonix intervient.</p>
+<p>Arize Pheonix est un cadre qui vous aide à évaluer vos pipelines RAG. Il existe des outils et des cadres existants qui vous aident à construire ces pipelines, mais il peut être difficile de les évaluer et de quantifier leur performance. C'est là qu'Arize Pheonix entre en jeu.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -476,7 +476,7 @@ results_df.head()
       <td>Qu'est-ce qui doit être assuré avant d'exécuter la cov...</td>
       <td>[Couverture de code Avant de soumettre votre pull...</td>
       <td>Avant d'exécuter la couverture du code, il faut s'assur...</td>
-      <td>Avant d'exécuter la couverture du code, il faut s'assurer ...</td>
+      <td>Avant d'exécuter la couverture du code, vous devriez ...</td>
       <td>[Code coverage\nBefore submitting your pull ...</td>
       <td>[Code coverage\NBefore submitting your pull ...</td>
       <td>factuel</td>

@@ -174,7 +174,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>No</p></td>
-     <td><p>Poiché i servizi modello non possono elaborare tutti i dati in una sola volta, si imposta la dimensione del batch per l'accesso al servizio modello in più richieste.</p></td>
+     <td><p>Poiché i servizi modello non possono elaborare tutti i dati in una sola volta, si imposta la dimensione del batch per accedere al servizio modello in più richieste.</p></td>
      <td><p><code translate="no">128</code> (predefinito)</p></td>
    </tr>
    <tr>

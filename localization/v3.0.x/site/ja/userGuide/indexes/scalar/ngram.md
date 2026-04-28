@@ -48,7 +48,7 @@ summary: >-
       </svg>
     </button></h2><p>milvusは2段階のプロセスで<code translate="no">NGRAM</code> インデックスを実装します：</p>
 <ol>
-<li><p><strong>インデックスを構築する</strong>：各文書のn-gramを生成し、インジェスト時に転置インデックスを構築する。</p></li>
+<li><p><strong>インデックスを構築する</strong>：各文書に対してn-gramを生成し、インジェスト時に転置インデックスを構築する。</p></li>
 <li><p><strong>クエリーの高速化</strong>：インデックスを使用して小さな候補セットにフィルタリングし、完全一致を検証する。</p></li>
 </ol>
 <h3 id="Phase-1-Build-the-index" class="common-anchor-header">フェーズ1：インデックスの構築<button data-href="#Phase-1-Build-the-index" class="anchor-icon" translate="no">

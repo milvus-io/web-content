@@ -21,12 +21,12 @@ title: وضع حدود على عدد التحصيل
 <p>يوفر هذا الدليل إرشادات حول كيفية تعيين حدود لعدد المجموعات في مثيل Milvus.</p>
 <p>يختلف التكوين باختلاف طريقة تثبيت مثيل Milvus.</p>
 <ul>
-<li><p>بالنسبة لمثيلات Milvus المثبتة باستخدام مخططات Helm</p>
+<li><p>لمثيلات Milvus المثبتة باستخدام مخططات Helm</p>
 <p>أضف التكوين إلى الملف <code translate="no">values.yaml</code> ضمن القسم <code translate="no">config</code>. للحصول على التفاصيل، راجع <a href="/docs/ar/configure-helm.md">تكوين Milvus باستخدام مخططات Helm Charts</a>.</p></li>
 <li><p>لمثيلات Milvus المثبتة باستخدام Docker Compose</p>
 <p>أضف التكوين إلى الملف <code translate="no">milvus.yaml</code> الذي استخدمته لبدء تشغيل مثيل Milvus. للحصول على التفاصيل، راجع <a href="/docs/ar/configure-docker.md">تكوين Milvus باستخدام Docker Compose</a>.</p></li>
 <li><p>لمثيلات Milvus المثبتة باستخدام المشغل</p>
-<p>أضف التكوين إلى قسم <code translate="no">spec.components</code> في المورد المخصص <code translate="no">Milvus</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/configure_operator.md">تكوين Milvus مع المشغل</a>.</p></li>
+<p>أضف التكوين إلى قسم <code translate="no">spec.components</code> في المورد المخصص <code translate="no">Milvus</code>. للحصول على التفاصيل، راجع <a href="/docs/ar/configure_operator.md">تكوين Milvus مع المشغل</a>.</p></li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">خيارات التكوين<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

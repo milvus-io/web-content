@@ -41,9 +41,39 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p><strong>IVF_RABITQ</strong> adalah singkatan dari <strong>Inverted File dengan kuantisasi RaBitQ</strong>, yang menggabungkan dua teknik canggih untuk pencarian dan penyimpanan vektor yang efisien.</p>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p><strong>Inverted File (IVF)</strong> mengatur ruang vektor ke dalam wilayah yang dapat dikelola menggunakan pengelompokan <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means</a>. Setiap klaster diwakili oleh sebuah pusat, yang berfungsi sebagai titik referensi untuk vektor-vektor di dalam klaster tersebut. Pendekatan pengelompokan ini mengurangi ruang pencarian dengan memungkinkan algoritme untuk fokus hanya pada cluster yang paling relevan selama pemrosesan kueri.</p>
+<h3 id="IVF" class="common-anchor-header">IVF<button data-href="#IVF" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>Inverted File (IVF)</strong> mengatur ruang vektor ke dalam wilayah yang dapat dikelola menggunakan pengelompokan <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means</a>. Setiap klaster diwakili oleh sebuah centroid, yang berfungsi sebagai titik referensi untuk vektor-vektor di dalam klaster tersebut. Pendekatan pengelompokan ini mengurangi ruang pencarian dengan memungkinkan algoritme untuk fokus hanya pada cluster yang paling relevan selama pemrosesan kueri.</p>
 <p>Untuk mempelajari lebih lanjut tentang detail teknis IVF, lihat <a href="/docs/id/ivf-flat.md">IVF_FLAT</a>.</p>
-<h3 id="RaBitQ" class="common-anchor-header">RaBitQ</h3><p><strong>RaBitQ</strong> adalah metode kuantisasi biner mutakhir dengan jaminan teoretis, yang diperkenalkan dalam makalah penelitian "RaBitQ: Mengukur Vektor Dimensi Tinggi dengan Batas Kesalahan Teoretis untuk Perkiraan Pencarian Tetangga Terdekat" oleh Jianyang Gao dan Cheng Long.</p>
+<h3 id="RaBitQ" class="common-anchor-header">RaBitQ<button data-href="#RaBitQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>RaBitQ</strong> adalah metode kuantisasi biner mutakhir dengan jaminan teoretis, yang diperkenalkan dalam makalah penelitian "RaBitQ: Mengukur Vektor Dimensi Tinggi dengan Batas Kesalahan Teoretis untuk Perkiraan Pencarian Tetangga Terdekat" oleh Jianyang Gao dan Cheng Long.</p>
 <p>RaBitQ memperkenalkan beberapa konsep inovatif:</p>
 <p><strong>Pengkodean Informasi Sudut</strong>: Tidak seperti pengkodean spasial tradisional, RaBitQ mengkodekan informasi sudut melalui normalisasi vektor. Dalam IVF_RABITQ, vektor data dinormalisasi terhadap centroid IVF terdekat, sehingga meningkatkan ketepatan proses kuantisasi.</p>
 <p><strong>Landasan Teori</strong>: Rumus perkiraan jarak inti adalah:</p>
@@ -59,7 +89,22 @@ beta: Milvus 2.6.x
 </ul>
 <p><strong>Efisiensi Komputasi</strong>: Sifat biner dari <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> o~\tilde{\mathbf{o}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6813em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span> o</span></span></span></span></span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3.3634em;"><span class="pstrut" style="height:3em;"></span> ~ membuat perhitungan jarak menjadi sangat cepat, terutama diuntungkan oleh arsitektur CPU modern dengan instruksi</span></span></span></span></span></span></span></span> <code translate="no">AVX-512 VPOPCNTDQ</code> khusus pada prosesor Intel Ice Lake+ atau AMD Zen 4+.</p>
 <p><strong>Peningkatan Algoritmik</strong>: RaBitQ terintegrasi secara efektif dengan teknik-teknik yang sudah ada seperti <a href="https://www.vldb.org/pvldb/vol9/p288-andre.pdf">pendekatan<code translate="no">FastScan</code> </a> dan <a href="https://github.com/facebookresearch/faiss/wiki/Pre--and-post-processing">rotasi acak</a> untuk meningkatkan kinerja.</p>
-<h3 id="IVF-+-RaBitQ" class="common-anchor-header">IVF + RaBitQ</h3><p>Indeks <strong>IVF_RABITQ</strong> menggabungkan pengelompokan IVF yang efisien dengan kuantisasi biner tingkat lanjut RaBitQ:</p>
+<h3 id="IVF-+-RaBitQ" class="common-anchor-header">IVF + RaBitQ<button data-href="#IVF-+-RaBitQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Indeks <strong>IVF_RABITQ</strong> menggabungkan pengelompokan IVF yang efisien dengan kuantisasi biner tingkat lanjut RaBitQ:</p>
 <ol>
 <li><p><strong>Pemfilteran Kasar</strong>: IVF mempartisi ruang vektor menjadi beberapa klaster, secara signifikan mengurangi cakupan pencarian dengan berfokus pada wilayah klaster yang paling relevan.</p></li>
 <li><p><strong>Kuantisasi Biner</strong>: Di dalam setiap klaster, RaBitQ memampatkan vektor ke dalam representasi biner sambil mempertahankan hubungan jarak yang penting melalui jaminan teoritis.</p></li>
@@ -165,7 +210,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Bagian ini memberikan gambaran umum tentang parameter yang digunakan untuk membangun indeks dan melakukan pencarian pada indeks.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parameter pembangunan indeks</h3><p>Tabel berikut berisi daftar parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/ivf-rabitq.md#Build-index">membangun indeks.</a></p>
+<h3 id="Index-building-params" class="common-anchor-header">Parameter pembangunan indeks<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tabel berikut berisi daftar parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/ivf-rabitq.md#Build-index">membangun indeks.</a></p>
 <table>
    <tr>
      <th></th>
@@ -195,7 +255,22 @@ res = MilvusClient.search(
      <td><p>Nilai yang tercantum disajikan dalam urutan peningkatan tingkat pemanggilan, penurunan QPS, dan peningkatan ukuran penyimpanan. <code translate="no">SQ8</code> direkomendasikan sebagai titik awal, menawarkan keseimbangan yang baik antara akurasi dan penggunaan sumber daya.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> saat melakukan <a href="/docs/id/ivf-rabitq.md#Search-on-index">pencarian di indeks</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> saat melakukan <a href="/docs/id/ivf-rabitq.md#Search-on-index">pencarian di indeks</a>.</p>
 <table>
    <tr>
      <th></th>

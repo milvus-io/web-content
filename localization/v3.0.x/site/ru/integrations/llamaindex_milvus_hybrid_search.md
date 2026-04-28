@@ -30,7 +30,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Гибридный поиск использует сильные стороны семантического поиска и подбора ключевых слов для получения более точных и контекстно релевантных результатов. Сочетая преимущества семантического поиска и подбора ключевых слов, гибридный поиск особенно эффективен в сложных задачах поиска информации.</p>
+    </button></h1><p>Гибридный поиск использует сильные стороны семантического поиска и подбора ключевых слов для получения более точных и контекстуально релевантных результатов. Сочетая преимущества семантического поиска и подбора ключевых слов, гибридный поиск особенно эффективен в сложных информационно-поисковых задачах.</p>
 <p>В этом блокноте показано, как использовать Milvus для гибридного поиска в конвейерах <a href="https://www.llamaindex.ai/">LlamaIndex</a> RAG. Мы начнем с рекомендуемого по умолчанию гибридного поиска (семантический + BM25), а затем рассмотрим другие альтернативные методы разреженного встраивания и настройку гибридного реранкера.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Необходимые условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,7 +108,7 @@ which I ...
       </svg>
     </button></h2><p>В этом разделе показано, как выполнить гибридный поиск с помощью BM25. Для начала мы инициализируем <code translate="no">MilvusVectorStore</code> и создадим индекс для документов примера. В конфигурации по умолчанию используются:</p>
 <ul>
-<li>Плотные вкрапления из модели вкраплений по умолчанию (OpenAI's <code translate="no">text-embedding-ada-002</code>).</li>
+<li>Плотные вкрапления из модели вкрапления по умолчанию (OpenAI's <code translate="no">text-embedding-ada-002</code>).</li>
 <li>BM25 для полнотекстового поиска, если enable_sparse равно True</li>
 <li>RRFRanker с k=60 для объединения результатов, если включен гибридный поиск.</li>
 </ul>
@@ -134,7 +134,7 @@ Default sparse embedding function: BM25BuiltInFunction(input_field_names='text',
 <p>Вот более подробная информация об аргументах для настройки плотных и разреженных полей на сайте <code translate="no">MilvusVectorStore</code>:</p>
 <p><strong>плотное поле</strong></p>
 <ul>
-<li><code translate="no">enable_dense (bool)</code>: Булевский флаг для включения или отключения плотного встраивания. По умолчанию - True.</li>
+<li><code translate="no">enable_dense (bool)</code>: Булевский флаг для включения или отключения плотного встраивания. По умолчанию имеет значение True.</li>
 <li><code translate="no">dim (int, optional)</code>: Размерность векторов встраивания для коллекции.</li>
 <li><code translate="no">embedding_field (str, optional)</code>: : Имя поля плотного встраивания для коллекции, по умолчанию DEFAULT_EMBEDDING_KEY.</li>
 <li><code translate="no">index_config (dict, optional)</code>: Конфигурация, используемая для построения индекса плотного встраивания. По умолчанию - None.</li>
@@ -160,7 +160,22 @@ response = query_engine.query(<span class="hljs-string">&quot;What did the autho
 <pre><code translate="no">The author learned about retail, the importance of user feedback, and the significance of growth
 rate as the ultimate test of a startup at Viaweb.
 </code></pre>
-<h3 id="Customize-text-analyzer" class="common-anchor-header">Настройка анализатора текста</h3><p>Анализаторы играют важную роль в полнотекстовом поиске, разбивая предложения на лексемы и выполняя лексическую обработку, например, стемминг и удаление стоп-слов. Как правило, они зависят от конкретного языка. Для получения более подробной информации обратитесь к <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Руководству по анализаторам Milvus</a>.</p>
+<h3 id="Customize-text-analyzer" class="common-anchor-header">Настройка анализатора текста<button data-href="#Customize-text-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Анализаторы играют важную роль в полнотекстовом поиске, разбивая предложения на лексемы и выполняя лексическую обработку, например, стемминг и удаление стоп-слов. Как правило, они зависят от конкретного языка. Для получения более подробной информации обратитесь к <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Руководству по анализаторам Milvus</a>.</p>
 <p>Milvus поддерживает два типа анализаторов: <strong>Встроенные анализаторы</strong> и <strong>Пользовательские анализаторы</strong>. По умолчанию, если <code translate="no">enable_sparse</code> имеет значение True, <code translate="no">MilvusVectorStore</code> использует <code translate="no">BM25BuiltInFunction</code> с настройками по умолчанию, применяя стандартный встроенный анализатор, который токенизирует текст на основе пунктуации.</p>
 <p>Чтобы использовать другой анализатор или настроить существующий, вы можете указать значения аргумента <code translate="no">analyzer_params</code> при построении <code translate="no">BM25BuiltInFunction</code>. Затем задайте эту функцию в качестве <code translate="no">sparse_embedding_function</code> в <code translate="no">MilvusVectorStore</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.vector_stores.milvus.utils <span class="hljs-keyword">import</span> BM25BuiltInFunction
@@ -240,7 +255,22 @@ The author learned about retail, the importance of user feedback, the value of g
 startup, the significance of pricing strategy, the benefits of working on things that weren't
 prestigious, and the challenges and rewards of running a startup.
 </code></pre>
-<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">Настройка функции разреженного встраивания</h3><p>Вы также можете настроить функцию разреженного встраивания, если она наследует от <code translate="no">BaseSparseEmbeddingFunction</code>, включая следующие методы:</p>
+<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">Настройка функции разреженного встраивания<button data-href="#Customize-Sparse-Embedding-Function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Вы также можете настроить функцию разреженного встраивания, если она наследует от <code translate="no">BaseSparseEmbeddingFunction</code>, включая следующие методы:</p>
 <ul>
 <li><code translate="no">encode_queries</code>: Этот метод преобразует тексты в список разреженных вкраплений для запросов.</li>
 <li><code translate="no">encode_documents</code>: Этот метод преобразует текст в список разреженных вкраплений для документов.</li>

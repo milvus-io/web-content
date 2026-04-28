@@ -76,7 +76,7 @@ beta: Milvus v2.6.2+
     </button></h2><p>El siguiente diagrama ilustra el flujo de trabajo principal de los Boost Rankers.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
    </span> <span class="img-wrapper"> <span>Mecanismo de Boost Ranker</span> </span></p>
 <p>Cuando se insertan datos, Milvus los distribuye en segmentos. Durante una búsqueda, cada segmento devuelve un conjunto de candidatos, y Milvus clasifica estos candidatos de todos los segmentos para producir los resultados finales. Cuando una solicitud de búsqueda incluye un Boost Ranker, Milvus lo aplica a los resultados de los candidatos de cada segmento para evitar posibles pérdidas de precisión y mejorar la recuperación.</p>
 <p>Antes de finalizar los resultados, Milvus procesa estos candidatos con el Boost Ranker como sigue:</p>
@@ -444,7 +444,7 @@ beta: Milvus v2.6.2+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Antes de pasar un Boost Ranker como reranker de una petición de búsqueda, debes definir correctamente el Boost Ranker como una función reranking de la siguiente manera:</p>
+    </button></h3><p>Antes de pasar un Boost Ranker como reranker de una petición de búsqueda, debes definir correctamente el Boost Ranker como una función reranking como se indica a continuación:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType

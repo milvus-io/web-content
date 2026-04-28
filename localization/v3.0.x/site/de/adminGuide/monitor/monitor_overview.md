@@ -44,17 +44,62 @@ summary: >-
 <li>Prometheus-Operator zur effektiven Verwaltung von Prometheus-Überwachungsinstanzen.</li>
 <li>Kube-prometheus für eine einfach zu bedienende End-to-End-Überwachung von Kubernetes-Clustern.</li>
 </ul>
-<h3 id="Metric-names" class="common-anchor-header">Metrik-Namen</h3><p>Ein gültiger Metrikname in Prometheus enthält drei Elemente: Namespace, Subsystem und Name. Diese drei Elemente sind mit "_" verbunden.</p>
+<h3 id="Metric-names" class="common-anchor-header">Metrik-Namen<button data-href="#Metric-names" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ein gültiger Metrikname in Prometheus enthält drei Elemente: Namespace, Subsystem und Name. Diese drei Elemente sind mit "_" verbunden.</p>
 <p>Der Namespace der Milvus-Metriken, die von Prometheus überwacht werden, ist "milvus". Abhängig von der Rolle, zu der eine Metrik gehört, sollte ihr Subsystem eine der folgenden acht Rollen sein: "rootcoord", "proxy", "querycoord", "querynode", "indexcoord", "indexnode", "datacoord", "datanode".</p>
 <p>Die Milvus-Metrik, die die Gesamtzahl der abgefragten Vektoren berechnet, heißt zum Beispiel <code translate="no">milvus_proxy_search_vectors_count</code>.</p>
-<h3 id="Metric-types" class="common-anchor-header">Metrik-Typen</h3><p>Prometheus unterstützt vier Arten von Metriken:</p>
+<h3 id="Metric-types" class="common-anchor-header">Metrik-Typen<button data-href="#Metric-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Prometheus unterstützt vier Arten von Metriken:</p>
 <ul>
 <li>Zähler: ein Typ kumulativer Metriken, deren Wert nur bei einem Neustart erhöht oder auf Null zurückgesetzt werden kann.</li>
 <li>Gauge: ein Typ von Metriken, deren Wert entweder steigen oder fallen kann.</li>
 <li>Histogramm: eine Art von Metriken, die auf der Grundlage von konfigurierbaren Bereichen gezählt werden. Ein gängiges Beispiel ist die Anfragedauer.</li>
 <li>Zusammenfassung: Eine Art von Metrik, die dem Histogramm ähnelt und konfigurierbare Quantile über ein gleitendes Zeitfenster berechnet.</li>
 </ul>
-<h3 id="Metric-labels" class="common-anchor-header">Metrik-Bezeichnungen</h3><p>Prometheus unterscheidet Stichproben mit demselben Metriknamen, indem es sie beschriftet. Ein Label ist ein bestimmtes Attribut einer Metrik. Metriken mit demselben Namen müssen denselben Wert für das Feld <code translate="no">variable_labels</code> haben. In der folgenden Tabelle sind die Namen und Bedeutungen der gebräuchlichen Bezeichnungen von Milvus-Metriken aufgeführt.</p>
+<h3 id="Metric-labels" class="common-anchor-header">Metrik-Bezeichnungen<button data-href="#Metric-labels" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Prometheus unterscheidet Stichproben mit demselben Metriknamen, indem es sie beschriftet. Ein Label ist ein bestimmtes Attribut einer Metrik. Metriken mit demselben Namen müssen denselben Wert für das Feld <code translate="no">variable_labels</code> haben. In der folgenden Tabelle sind die Namen und Bedeutungen der gebräuchlichen Bezeichnungen von Milvus-Metriken aufgeführt.</p>
 <table>
 <thead>
 <tr><th>Name des Labels</th><th>Definition</th><th>Werte</th></tr>

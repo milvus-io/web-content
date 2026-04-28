@@ -80,11 +80,11 @@ Menggunakan Helm untuk meningkatkan sumber daya akan menyebabkan pod yang sedang
     </button></h3><p>Anda perlu mengatur variabel sumber daya untuk setiap komponen Milvus jika Anda menggunakan <code translate="no">--set</code> untuk memperbarui konfigurasi sumber daya.</p>
 <div class="filter">
 <a href="#standalone">Milvus</a> <a href="#cluster">klaster Milvus</a><a href="#standalone">mandiri</a> </div>
-<div class="table-wrapper filter-standalone" markdown="block">
+<div class="filter-standalone table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set standalone.resources.limits.cpu=2 --set standalone.resources.limits.memory=4Gi --set standalone.resources.requests.cpu=0.1 --set standalone.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<div class="table-wrapper filter-cluster" markdown="block">
+<div class="filter-cluster table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set dataNode.resources.limits.cpu=2 --set dataNode.resources.limits.memory=4Gi --set dataNode.resources.requests.cpu=0.1 --set dataNode.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>

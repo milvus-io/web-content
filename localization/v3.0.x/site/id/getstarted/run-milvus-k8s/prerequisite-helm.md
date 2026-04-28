@@ -138,7 +138,7 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
 <ol>
 <li>Unduh minikube</li>
 </ol>
-<p>Buka halaman <a href="https://minikube.sigs.k8s.io/docs/start/">Memulai</a>, periksa apakah Anda telah memenuhi persyaratan yang tercantum di bagian <strong>Apa yang Anda perlukan</strong>, klik tombol yang menggambarkan platform target Anda, dan salin perintah untuk mengunduh dan menginstal biner.</p>
+<p>Buka halaman <a href="https://minikube.sigs.k8s.io/docs/start/">Memulai</a>, periksa apakah Anda telah memenuhi persyaratan yang tercantum di bagian <strong>Apa yang Anda perlukan</strong>, klik tombol yang menjelaskan platform target Anda, dan salin perintah untuk mengunduh dan menginstal biner.</p>
 <ol start="2">
 <li>Memulai cluster K8s menggunakan minikube</li>
 </ol>

@@ -88,7 +88,22 @@ docs = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Hybrid-Search" class="common-anchor-header">混合搜索</h3><p>对于全文检索，Milvus VectorStore 接受一个<code translate="no">builtin_function</code> 参数。通过该参数，可以传入<code translate="no">BM25BuiltInFunction</code> 的实例。这与语义搜索不同，语义搜索通常将密集嵌入传入<code translate="no">VectorStore</code> 、</p>
+    </button></h2><h3 id="Hybrid-Search" class="common-anchor-header">混合搜索<button data-href="#Hybrid-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>对于全文检索，Milvus VectorStore 接受一个<code translate="no">builtin_function</code> 参数。通过该参数，可以传入<code translate="no">BM25BuiltInFunction</code> 的实例。这与语义搜索不同，语义搜索通常将密集嵌入传入<code translate="no">VectorStore</code> 、</p>
 <p>下面是一个在 Milvus 中使用 OpenAI dense embedding 进行语义搜索和 BM25 进行全文搜索的混合搜索的简单示例：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, BM25BuiltInFunction
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
@@ -109,8 +124,8 @@ vectorstore = Milvus.from_documents(
 <p>在上面的代码中，我们定义了<code translate="no">BM25BuiltInFunction</code> 的一个实例，并将其传递给<code translate="no">Milvus</code> 对象。<code translate="no">BM25BuiltInFunction</code> 是一个轻量级的封装类。 <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a>的轻量级封装类。</p>
 <p>您可以在<code translate="no">BM25BuiltInFunction</code> 的参数中指定该函数的输入和输出字段：</p>
 <ul>
-<li><code translate="no">input_field_names</code> (str)：输入字段的名称，默认为 。它表示此函数读取哪个字段作为输入。<code translate="no">text</code></li>
-<li><code translate="no">output_field_names</code> (str)：输出字段的名称，默认为 。它表示此函数将计算结果输出到哪个字段。<code translate="no">sparse</code></li>
+<li><code translate="no">input_field_names</code> (str)：输入字段的名称，默认为<code translate="no">text</code> 。它表示此函数读取哪个字段作为输入。</li>
+<li><code translate="no">output_field_names</code> (str)：输出字段的名称，默认为<code translate="no">sparse</code> 。它表示此函数将计算结果输出到哪个字段。</li>
 </ul>
 <p>请注意，在上述 Milvus 初始化参数中，我们也指定了<code translate="no">vector_field=[&quot;dense&quot;, &quot;sparse&quot;]</code> 。由于<code translate="no">sparse</code> 字段被当作由<code translate="no">BM25BuiltInFunction</code> 定义的输出字段，因此其他<code translate="no">dense</code> 字段将被自动分配给 OpenAIEmbeddings 的输出字段。</p>
 <p>在实践中，尤其是在组合多个 Embeddings 或函数时，我们建议明确指定每个函数的输入和输出字段，以避免歧义。</p>
@@ -141,9 +156,9 @@ vectorstore.vector_fields
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">['dense1', 'dense2', 'sparse']
 </code></pre>
-<p>在这个示例中，我们有三个向量字段。其中，<code translate="no">sparse</code> 作为<code translate="no">BM25BuiltInFunction</code> 的输出字段，而其他两个字段<code translate="no">dense1</code> 和<code translate="no">dense2</code> 则被自动指定为两个<code translate="no">OpenAIEmbeddings</code> 模型的输出字段（根据顺序）。</p>
+<p>在本例中，我们有三个向量字段。其中，<code translate="no">sparse</code> 作为<code translate="no">BM25BuiltInFunction</code> 的输出字段，而其他两个字段<code translate="no">dense1</code> 和<code translate="no">dense2</code> 则被自动指定为两个<code translate="no">OpenAIEmbeddings</code> 模型的输出字段（根据顺序）。</p>
 <p>这样，就可以定义多个向量场，并为其分配不同的嵌入或函数组合，从而实现混合搜索。</p>
-<p>执行混合搜索时，我们只需传入查询文本，并选择性地设置 topK 和 Reranker 参数。<code translate="no">vectorstore</code> 实例会自动处理向量嵌入和内置函数，最后使用 Reranker 精炼结果。搜索过程的底层实现细节对用户是隐藏的。</p>
+<p>执行混合搜索时，我们只需传入查询文本，并选择性地设置 topK 和 Reranker 参数。<code translate="no">vectorstore</code> 实例会自动处理向量嵌入和内置函数，最后使用 Reranker 对结果进行细化。搜索过程的底层实现细节对用户是隐藏的。</p>
 <pre><code translate="no" class="language-python">vectorstore.similarity_search(
     <span class="hljs-string">&quot;Do I like apples?&quot;</span>, k=<span class="hljs-number">1</span>
 )  <span class="hljs-comment"># , ranker_type=&quot;weighted&quot;, ranker_params={&quot;weights&quot;:[0.3, 0.3, 0.4]})</span>
@@ -151,7 +166,22 @@ vectorstore.vector_fields
 <pre><code translate="no">[Document(metadata={'category': 'fruit', 'pk': 454646931479251897}, page_content='I like this apple')]
 </code></pre>
 <p>有关混合搜索的更多信息，可以参考<a href="https://milvus.io/docs/multi-vector-search.md#Hybrid-Search">混合搜索介绍</a>和这篇<a href="https://milvus.io/docs/milvus_hybrid_search_retriever.md">LangChain Milvus 混合搜索教程</a>。</p>
-<h3 id="BM25-search-without-embedding" class="common-anchor-header">无嵌入的 BM25 搜索</h3><p>如果只想使用 BM25 函数执行全文搜索，而不想使用任何基于嵌入的语义搜索，可以将嵌入参数设置为<code translate="no">None</code> ，并只保留指定为 BM25 函数实例的<code translate="no">builtin_function</code> 。向量字段只有 "稀疏 "字段。例如</p>
+<h3 id="BM25-search-without-embedding" class="common-anchor-header">无嵌入的 BM25 搜索<button data-href="#BM25-search-without-embedding" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果只想使用 BM25 函数执行全文搜索，而不想使用任何基于嵌入的语义搜索，可以将嵌入参数设置为<code translate="no">None</code> ，并只保留指定为 BM25 函数实例的<code translate="no">builtin_function</code> 。向量字段只有 "稀疏 "字段。例如</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=<span class="hljs-literal">None</span>,
@@ -236,14 +266,29 @@ vectorstore = Milvus.from_documents(
     </button></h2><p>我们已经学习了如何在 LangChain 和 Milvus 中使用基本的 BM25 内置函数。下面让我们介绍使用混合检索和重排的优化 RAG 实现。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
 <p>该图显示了混合检索和重排过程，将用于关键词匹配的 BM25 和用于语义检索的向量搜索结合在一起。来自两种方法的结果经过合并、Rerankers 和传递给 LLM 生成最终答案。</p>
 <p>混合搜索兼顾了精确性和语义理解，提高了不同查询的准确性和稳健性。它通过 BM25 全文检索和向量搜索检索候选内容，同时确保语义、上下文感知和精确检索。</p>
 <p>让我们从一个例子开始。</p>
-<h3 id="Prepare-the-data" class="common-anchor-header">准备数据</h3><p>我们使用 Langchain WebBaseLoader 从网络源加载文档，并使用 RecursiveCharacterTextSplitter 将文档分割成块。</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">准备数据<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>我们使用 Langchain WebBaseLoader 从网络源加载文档，并使用 RecursiveCharacterTextSplitter 将文档分割成块。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bs4
 <span class="hljs-keyword">from</span> langchain_community.document_loaders <span class="hljs-keyword">import</span> WebBaseLoader
 <span class="hljs-keyword">from</span> langchain_text_splitters <span class="hljs-keyword">import</span> RecursiveCharacterTextSplitter
@@ -273,7 +318,22 @@ docs[<span class="hljs-number">1</span>]
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document(metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'}, page_content='Fig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning#\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.\nTask Decomposition#\nChain of thought (CoT; Wei et al. 2022) has become a standard prompting technique for enhancing model performance on complex tasks. The model is instructed to “think step by step” to utilize more test-time computation to decompose hard tasks into smaller and simpler steps. CoT transforms big tasks into multiple manageable tasks and shed lights into an interpretation of the model’s thinking process.\nTree of Thoughts (Yao et al. 2023) extends CoT by exploring multiple reasoning possibilities at each step. It first decomposes the problem into multiple thought steps and generates multiple thoughts per step, creating a tree structure. The search process can be BFS (breadth-first search) or DFS (depth-first search) with each state evaluated by a classifier (via a prompt) or majority vote.\nTask decomposition can be done (1) by LLM with simple prompting like &quot;Steps for XYZ.\\n1.&quot;, &quot;What are the subgoals for achieving XYZ?&quot;, (2) by using task-specific instructions; e.g. &quot;Write a story outline.&quot; for writing a novel, or (3) with human inputs.\nAnother quite distinct approach, LLM+P (Liu et al. 2023), involves relying on an external classical planner to do long-horizon planning. This approach utilizes the Planning Domain Definition Language (PDDL) as an intermediate interface to describe the planning problem. In this process, LLM (1) translates the problem into “Problem PDDL”, then (2) requests a classical planner to generate a PDDL plan based on an existing “Domain PDDL”, and finally (3) translates the PDDL plan back into natural language. Essentially, the planning step is outsourced to an external tool, assuming the availability of domain-specific PDDL and a suitable planner which is common in certain robotic setups but not in many other domains.\nSelf-Reflection#')
 </code></pre>
-<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">将文档加载到 Milvus 向量存储中</h3><p>如上介绍，我们将准备好的文档初始化并加载到 Milvus 向量存储中，其中包含两个向量字段：<code translate="no">dense</code> 用于 OpenAI 嵌入，<code translate="no">sparse</code> 用于 BM25 函数。</p>
+<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">将文档加载到 Milvus 向量存储中<button data-href="#Load-the-document-into-Milvus-vector-store" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如上介绍，我们将准备好的文档初始化并加载到 Milvus 向量存储中，其中包含两个向量字段：<code translate="no">dense</code> 用于 OpenAI 嵌入，<code translate="no">sparse</code> 用于 BM25 函数。</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=OpenAIEmbeddings(),
@@ -285,7 +345,22 @@ docs[<span class="hljs-number">1</span>]
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Build-RAG-chain" class="common-anchor-header">构建 RAG 链</h3><p>我们准备好 LLM 实例和提示，然后使用 LangChain 表达式语言将它们结合到 RAG 管道中。</p>
+<h3 id="Build-RAG-chain" class="common-anchor-header">构建 RAG 链<button data-href="#Build-RAG-chain" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>我们准备好 LLM 实例和提示，然后使用 LangChain 表达式语言将它们结合到 RAG 管道中。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnablePassthrough
 <span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate
 <span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser

@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>ANN 검색은 단일 쿼리에서 불러올 수 있는 엔티티 수에 최대 제한이 있으며, 기본 ANN 검색만으로는 대규모 검색 수요를 충족하지 못할 수 있습니다. topK가 16,384개를 초과하는 ANN 검색 요청의 경우 SearchIterator 사용을 고려하는 것이 좋습니다. 이 섹션에서는 SearchIterator를 사용하는 방법과 관련 고려 사항을 소개합니다.</p>
+    </button></h1><p>ANN 검색은 단일 쿼리에서 불러올 수 있는 엔티티 수에 최대 제한이 있으며, 기본 ANN 검색만으로는 대규모 검색에 대한 요구를 충족하지 못할 수 있습니다. topK가 16,384개를 초과하는 ANN 검색 요청의 경우 SearchIterator 사용을 고려하는 것이 좋습니다. 이 섹션에서는 SearchIterator를 사용하는 방법과 관련 고려 사항을 소개합니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +44,7 @@ summary: >-
 <li><p>SearchIterator의 <strong>next()</strong> 메서드를 루프에서 호출하여 페이지 매김 방식으로 검색 결과를 가져옵니다.</p></li>
 <li><p><strong>다음()</strong> 메서드가 빈 결과를 반환하면 이터레이터의 <strong>close()</strong> 메서드를 호출하여 루프를 종료합니다.</p></li>
 </ol>
-<h2 id="Create-SearchIterator" class="common-anchor-header">SearchIterator 생성<button data-href="#Create-SearchIterator" class="anchor-icon" translate="no">
+<h2 id="Create-SearchIterator" class="common-anchor-header">SearchIterator 만들기<button data-href="#Create-SearchIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

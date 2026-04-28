@@ -233,7 +233,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><ol>
 <li><p><strong>Configurer le</strong> préchauffage - Optimiser le préchargement pour vos modèles d'accès. Voir <a href="/docs/fr/warm-up.md">Warm Up</a>.</p></li>
-<li><p><strong>Régler l'éviction</strong> - Définir des filigranes et des TTL appropriés en fonction de vos contraintes en matière de ressources. Voir <a href="/docs/fr/eviction.md">Eviction</a>.</p></li>
+<li><p><strong>Régler l'éviction</strong> - Définir des filigranes et des TTL appropriés en fonction de vos contraintes de ressources. Voir <a href="/docs/fr/eviction.md">Eviction</a>.</p></li>
 <li><p><strong>Surveiller les performances</strong> - Suivre les taux d'accès au cache, la fréquence d'éviction et les schémas de latence des requêtes.</p></li>
 <li><p><strong>Itération de la configuration</strong> - Ajustez les paramètres en fonction des caractéristiques observées de la charge de travail.</p></li>
 </ol>

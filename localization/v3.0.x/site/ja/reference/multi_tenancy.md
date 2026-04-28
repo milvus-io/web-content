@@ -37,10 +37,25 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvusは4つのレベルでマルチテナンシーをサポートしています：<strong>データベース</strong>、<strong>コレクション</strong>、<strong>パーティション</strong>、<strong>パーティションキー</strong>です。</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">データベースレベルのマルチテナンシー</h3><p>データベースレベルのマルチテナンシーでは、各テナントは1つまたは複数のコレクションを含む対応する<a href="/docs/ja/manage_databases.md">データベースを</a>受け取ります。</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">データベースレベルのマルチテナンシー<button data-href="#Database-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>データベースレベルのマルチテナンシーでは、各テナントは1つまたは複数のコレクションを含む対応する<a href="/docs/ja/manage_databases.md">データベースを</a>受け取ります。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>データベースレベルのマルチテナンシー</span> </span></p>
 <ul>
 <li><p><strong>スケーラビリティ</strong>：データベースレベルのマルチテナント戦略は、デフォルトで最大64テナントをサポートします。</p></li>
@@ -48,21 +63,51 @@ summary: >-
 <li><p><strong>柔軟性</strong>：各データベースは異なるスキーマのコレクションを持つことができるため、柔軟性の高いデータ編成が可能で、各テナントは独自のデータスキーマを持つことができます。</p></li>
 <li><p><strong>その他</strong>このストラテジーはRBACにも対応しており、テナントごとのユーザーアクセスをきめ細かく制御できます。さらに、特定のテナントのデータを柔軟にロードまたはリリースして、ホットデータとコールドデータを効率的に管理できます。</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">コレクションレベルのマルチテナント</h3><p>コレクションレベルのマルチテナントでは、各テナントに<a href="/docs/ja/manage-collections.md">コレクションが</a>割り当てられるため、データを強力に分離できます。</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">コレクションレベルのマルチテナント<button data-href="#Collection-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>コレクションレベルのマルチテナントでは、各テナントに<a href="/docs/ja/manage-collections.md">コレクションが</a>割り当てられるため、データを強力に分離できます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>コレクションレベルのマルチテナント</span> </span></p>
 <ul>
 <li><p><strong>スケーラビリティ</strong>：クラスタはデフォルトで最大65,536のコレクションを保持できるため、この戦略ではクラスタ内で同じ数のテナントを収容できます。</p></li>
 <li><p><strong>データの分離</strong>：コレクションは互いに物理的に分離されています。このストラテジーは強力なデータ分離を提供します。</p></li>
 <li><p><strong>柔軟性</strong>：この戦略では、各コレクションが独自のスキーマを持つことができ、異なるデータスキーマを持つテナントに対応できます。</p></li>
-<li><p><strong>その他</strong>このストラテジーはRBACにも対応しており、テナントに対するきめ細かなアクセス制御が可能です。さらに、ホットデータとコールドデータを効果的に管理するために、特定のテナントに対して柔軟にデータをロードまたはリリースできます。</p></li>
+<li><p><strong>その他</strong>：このストラテジーはRBACにも対応しており、テナントに対するきめ細かなアクセス制御が可能です。さらに、ホットデータとコールドデータを効果的に管理するために、特定のテナントに対して柔軟にデータをロードまたはリリースできます。</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">パーティションレベルのマルチテナント</h3><p>パーティションレベルのマルチテナントでは、各テナントは共有コレクション内で手動で作成した<a href="/docs/ja/manage-partitions.md">パーティションに</a>割り当てられます。</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">パーティションレベルのマルチテナント<button data-href="#Partition-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>パーティションレベルのマルチテナントでは、各テナントは共有コレクション内で手動で作成した<a href="/docs/ja/manage-partitions.md">パーティションに</a>割り当てられます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>パーティションレベルのマルチテナント</span> </span></p>
 <ul>
 <li><p><strong>スケーラビリティ</strong>：コレクションごとに最大1,024のパーティションを保持でき、同じ数のテナントをコレクション内に配置できます。</p></li>
@@ -70,10 +115,25 @@ summary: >-
 <li><p><strong>柔軟性</strong>：この戦略では、すべてのテナントが同じデータスキーマを共有する必要があります。また、パーティションは手動で作成する必要がある。</p></li>
 <li><p><strong>その他</strong>パーティションレベルでのRBACはサポートされていない。テナントは個別に、または複数のパーティションにまたがってクエリを実行できるため、テナント・セグメントにまたがる集計クエリや分析を含むシナリオに適しています。さらに、特定のテナントのデータを柔軟にロードまたはリリースして、ホットデータとコールドデータを効率的に管理できます。</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">パーティションキーレベルのマルチテナント</h3><p>この戦略では、すべてのテナントが単一のコレクションとスキーマを共有しますが、各テナントのデータは<a href="/docs/ja/use-partition-key.md">パーティション・キーの</a>値に基づいて、物理的に分離された16のパーティションに自動的にルーティングされます。各物理パーティションには複数のテナントを含めることができますが、異なるテナントのデータは論理的に分離されたままです。</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">パーティションキーレベルのマルチテナント<button data-href="#Partition-key-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>この戦略では、すべてのテナントが単一のコレクションとスキーマを共有しますが、各テナントのデータは<a href="/docs/ja/use-partition-key.md">パーティション・キーの</a>値に基づいて、物理的に分離された16のパーティションに自動的にルーティングされます。各物理パーティションには複数のテナントを含めることができますが、異なるテナントのデータは論理的に分離されたままです。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>パーティション・キー・レベルのマルチ・テナント</span> </span></p>
 <ul>
 <li><p><strong>スケーラビリティ</strong>：パーティション・キー・レベルの戦略は、数百万テナントをサポートする最もスケーラブルなアプローチです。</p></li>
@@ -128,7 +188,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><strong>RBACサポート</strong></p></td>
-     <td><p>対応</p></td>
+     <td><p>あり</p></td>
      <td><p>あり</p></td>
      <td><p>なし</p></td>
      <td><p>いいえ</p></td>
@@ -166,7 +226,7 @@ summary: >-
 <li><p><strong>その他</strong></p>
 <ol>
 <li><p><strong>パフォーマンス：</strong>検索パフォーマンスは、インデックス、検索パラメータ、マシン構成など様々な要因によって決定されます。Milvusはパフォーマンスチューニングもサポートしています。マルチテナント戦略を選択する前に、実際のパフォーマンスをテストすることをお勧めします。</p></li>
-<li><p><strong>ホットデータとコールドデータの効果的な処理</strong>現在、データベースレベル、コレクションレベル、パーティションレベルのストラテジーはすべてホットデータとコールドデータの取り扱いをサポートしています。</p></li>
+<li><p><strong>ホットデータとコールドデータの効果的な処理</strong>現在、データベースレベル、コレクションレベル、パーティションレベルのストラテジーはすべてホットデータとコールドデータのハンドリングをサポートしています。</p></li>
 <li><p><strong>クロステナント検索</strong>：パーティション・レベルとパーティション・キー・レベルのストラテジーのみが、クロステナント検索をサポートしています。</p></li>
 </ol></li>
 </ol>

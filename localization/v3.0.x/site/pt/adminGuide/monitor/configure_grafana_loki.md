@@ -99,7 +99,7 @@ helm repo update
       </svg>
     </button></h3><p>Escolha uma das seguintes opções de armazenamento e crie um arquivo de configuração <code translate="no">loki.yaml</code>:</p>
 <ul>
-<li><p>Opção 1: Usando o MinIO para armazenamento</p>
+<li><p>Opção 1: Usando MinIO para armazenamento</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">loki:</span>
   <span class="hljs-attr">commonConfig:</span>
     <span class="hljs-attr">replication_factor:</span> <span class="hljs-number">1</span>
@@ -109,7 +109,7 @@ helm repo update
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Opção 2: usar o AWS S3 para armazenamento</p>
-<p>No exemplo a seguir, substitua <code translate="no">&lt;accessKey&gt;</code> e <code translate="no">&lt;keyId&gt;</code> pela sua própria chave de acesso e ID do S3, <code translate="no">s3.endpoint</code> pelo ponto de extremidade do S3 e <code translate="no">s3.region</code> pela região do S3.</p>
+<p>No exemplo a seguir, substitua <code translate="no">&lt;accessKey&gt;</code> e <code translate="no">&lt;keyId&gt;</code> por sua própria chave de acesso e ID do S3, <code translate="no">s3.endpoint</code> pelo ponto de extremidade do S3 e <code translate="no">s3.region</code> pela região do S3.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">loki:</span>
   <span class="hljs-attr">commonConfig:</span>
     <span class="hljs-attr">replication_factor:</span> <span class="hljs-number">1</span>
@@ -331,7 +331,7 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Quando o Grafana estiver em execução, você precisa adicionar o Loki como uma fonte de dados para consultar os logs.</p>
+    </button></h3><p>Quando o Grafana estiver em execução, você precisará adicionar o Loki como uma fonte de dados para consultar os logs.</p>
 <ol>
 <li>Abra um navegador da Web e navegue até <code translate="no">127.0.0.1:3000</code>. Faça login usando o nome de usuário <code translate="no">admin</code> e a senha obtida anteriormente.</li>
 <li>No menu do lado esquerdo, escolha <strong>Conexões</strong> &gt; <strong>Adicionar nova conexão</strong>.</li>
@@ -340,7 +340,7 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
    </span> <span class="img-wrapper"> <span>Fonte de dados</span> </span></p>
 <h3 id="3-Query-Milvus-Logs" class="common-anchor-header">3. Consultar registos do Milvus<button data-href="#3-Query-Milvus-Logs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -365,5 +365,5 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvuslog.jpg" alt="Query" class="doc-image" id="query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvuslog.jpg" alt="Query" class="doc-image" id="query" />
    </span> <span class="img-wrapper"> <span>Consultar</span> </span></p>

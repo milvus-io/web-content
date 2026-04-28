@@ -6,10 +6,10 @@ summary: >-
   similitud matemática, es decir, por la coincidencia de los vectores en un
   espacio de alta dimensión. A pesar de su eficacia, este enfoque suele pasar
   por alto la verdadera relevancia semántica. Considere la posibilidad de buscar
-  "mejores prácticas para la optimización de bases de datos": podría recibir
-  documentos con una alta similitud vectorial que mencionan estos términos con
-  frecuencia, pero que en realidad no proporcionan estrategias de optimización
-  prácticas.
+  "mejores prácticas para la optimización de bases de datos": es posible que
+  reciba documentos con una alta similitud vectorial que mencionen estos
+  términos con frecuencia, pero que en realidad no proporcionen estrategias de
+  optimización prácticas.
 beta: Milvus 2.6.x
 ---
 <h1 id="Model-Ranker-Overview" class="common-anchor-header">Visión general del clasificador de modelos<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
@@ -230,7 +230,7 @@ model_ranker = Function(
 <table>
    <tr>
      <th><p>Parámetro</p></th>
-     <th><p>¿Requerido?</p></th>
+     <th><p>¿Es necesario?</p></th>
      <th><p>Descripción</p></th>
      <th><p>Valor / Ejemplo</p></th>
    </tr>

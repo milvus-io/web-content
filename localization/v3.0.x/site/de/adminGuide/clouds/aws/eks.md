@@ -36,7 +36,7 @@ summary: 'Erfahren Sie, wie Sie einen Milvus-Cluster auf EKS einrichten'
         ></path>
       </svg>
     </button></h2><ul>
-<li>Sie haben AWS CLI auf Ihrem lokalen PC oder einer Amazon EC2 installiert, die Ihnen als Endpunkt für die in diesem Dokument beschriebenen Vorgänge dienen wird. Auf einem Amazon Linux 2 oder Amazon Linux 2023 sind die AWS CLI-Tools bereits installiert. So installieren Sie AWS CLi auf Ihrem lokalen PC. Siehe <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">AWS CLI installieren</a>.</li>
+<li>Sie haben AWS CLI auf Ihrem lokalen PC oder einer Amazon EC2 installiert, die Ihnen als Endpunkt für die in diesem Dokument beschriebenen Vorgänge dient. Auf einem Amazon Linux 2 oder Amazon Linux 2023 sind die AWS CLI-Tools bereits installiert. So installieren Sie AWS CLi auf Ihrem lokalen PC. Siehe <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">AWS CLI installieren</a>.</li>
 <li>Sie haben Kubernetes und die EKS-Tools auf dem bevorzugten Endgerät installiert, einschließlich:<ul>
 <li><a href="https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html"><code translate="no">kubectl</code></a></li>
 <li><a href="https://helm.sh/docs/intro/install/"><code translate="no">helm</code></a></li>
@@ -101,7 +101,22 @@ summary: 'Erfahren Sie, wie Sie einen Milvus-Cluster auf EKS einrichten'
         ></path>
       </svg>
     </button></h2><p>Sie können die erforderlichen AWS-Ressourcen, einschließlich eines AWS S3-Buckets und eines EKS-Clusters, entweder mit der AWS Management Console, AWS CLI oder IaC-Tools wie Terraform einrichten. In diesem Dokument wird die AWS CLI bevorzugt, um zu zeigen, wie die AWS-Ressourcen eingerichtet werden.</p>
-<h3 id="Create-an-Amazon-S3-Bucket" class="common-anchor-header">Erstellen eines Amazon S3-Buckets</h3><ul>
+<h3 id="Create-an-Amazon-S3-Bucket" class="common-anchor-header">Erstellen eines Amazon S3-Buckets<button data-href="#Create-an-Amazon-S3-Bucket" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Erstellen Sie einen AWS S3 Bucket.</p>
 <p>Lesen Sie die <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">Bucket-Namensregeln</a> und beachten Sie die Namensregeln bei der Benennung Ihres AWS S3-Buckets.</p>
 <pre><code translate="no" class="language-shell">milvus_bucket_name=&quot;milvus-bucket-$(openssl rand -hex 12)&quot;
@@ -156,7 +171,22 @@ aws iam create-policy --policy-name MilvusS3ReadWrite --policy-document file://m
 <pre><code translate="no" class="language-shell">aws iam attach-user-policy --user-name &lt;your-user-name&gt; --policy-arn &quot;arn:aws:iam::&lt;your-iam-account-id&gt;:policy/MilvusS3ReadWrite&quot;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Create-an-Amazon-EKS-Cluster" class="common-anchor-header">Erstellen Sie einen Amazon EKS Cluster</h3><ul>
+<h3 id="Create-an-Amazon-EKS-Cluster" class="common-anchor-header">Erstellen Sie einen Amazon EKS Cluster<button data-href="#Create-an-Amazon-EKS-Cluster" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Bereiten Sie eine Cluster-Konfigurationsdatei wie folgt vor und nennen Sie sie <code translate="no">eks_cluster.yaml</code>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">eksctl.io/v1alpha5</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">ClusterConfig</span>
@@ -241,7 +271,22 @@ kubectl get nodes -A -o wide
 <p>Setzen Sie die ursprüngliche gp2 StorageClass auf non-default.</p>
 <pre><code translate="no" class="language-shell">kubectl patch storageclass gp2 -p &#x27;{&quot;metadata&quot;: {&quot;annotations&quot;:{&quot;storageclass.kubernetes.io/is-default-class&quot;:&quot;false&quot;}}}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Install-AWS-LoadBalancer-Controller" class="common-anchor-header">Installieren Sie den AWS LoadBalancer Controller</h3><ul>
+<h3 id="Install-AWS-LoadBalancer-Controller" class="common-anchor-header">Installieren Sie den AWS LoadBalancer Controller<button data-href="#Install-AWS-LoadBalancer-Controller" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Fügen Sie Helm chars repo hinzu.</p>
 <pre><code translate="no" class="language-shell">helm repo add eks https://aws.github.io/eks-charts
 helm repo update
@@ -477,7 +522,7 @@ query after delete by expr=`pk in [&quot;0&quot; , &quot;1&quot;]` -&gt; result:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Falls Sie die Umgebung wiederherstellen müssen, indem Sie Milvus deinstallieren, den EKS-Cluster zerstören und die AWS S3-Buckets und die zugehörigen IAM-Richtlinien löschen.</p>
+    </button></h2><p>Falls Sie die Umgebung wiederherstellen müssen, indem Sie Milvus deinstallieren, den EKS-Cluster zerstören und die AWS S3-Buckets sowie die zugehörigen IAM-Richtlinien löschen.</p>
 <ul>
 <li><p>Deinstallieren Sie Milvus.</p>
 <pre><code translate="no" class="language-shell">helm uninstall milvus-demo -n milvus

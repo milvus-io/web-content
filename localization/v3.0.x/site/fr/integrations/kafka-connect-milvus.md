@@ -184,7 +184,22 @@ topics=topic_0
 <pre><code translate="no" class="language-shell">bin/kafka-console-producer.sh --topic topic_0 --bootstrap-server localhost:9092                        
 <span class="hljs-meta prompt_">&gt;</span><span class="language-bash">{<span class="hljs-string">&quot;id&quot;</span>: 0, <span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;The Reported Mortality Rate of Coronavirus Is Not Important&quot;</span>, <span class="hljs-string">&quot;title_vector&quot;</span>: [0.041732933, 0.013779674, -0.027564144, -0.013061441, 0.009748648, 0.00082446384, -0.00071647146, 0.048612226], <span class="hljs-string">&quot;link&quot;</span>: <span class="hljs-string">&quot;https://medium.com/swlh/the-reported-mortality-rate-of-coronavirus-is-not-important-369989c8d912&quot;</span>}</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Vérifier si l'entité a été insérée dans la collection dans Zilliz Cloud. Voici à quoi cela ressemble sur Zilliz Cloud si l'insertion a réussi :</p>
+<li><p>Vérifier si l'entité a été insérée dans la collection dans Zilliz Cloud. Voici ce que cela donne sur Zilliz Cloud si l'insertion a réussi :</p>
 <p><img translate="no" src="https://github.com/zilliztech/kafka-connect-milvus/raw/main/src/main/resources/images/insearted_entities.png" width="80%" /></p></li>
 </ol>
-<h3 id="Support" class="common-anchor-header">Support</h3><p>Si vous avez besoin d'aide ou si vous avez des questions concernant le connecteur Kafka Connect Milvus, n'hésitez pas à contacter le responsable du connecteur : <strong>Courriel :</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>
+<h3 id="Support" class="common-anchor-header">Support<button data-href="#Support" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Si vous avez besoin d'aide ou si vous avez des questions concernant le connecteur Kafka Connect Milvus, n'hésitez pas à contacter le responsable du connecteur : <strong>Courriel :</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>

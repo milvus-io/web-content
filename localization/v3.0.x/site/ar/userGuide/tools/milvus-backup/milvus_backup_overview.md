@@ -84,7 +84,7 @@ title: ميلفوس النسخ الاحتياطي
 <tbody>
 <tr><td>Milvus v2.2.x</td><td>لا يوجد</td><td>لا يوجد</td><td>لا</td><td>نعم</td><td>نعم</td></tr>
 <tr><td>ميلفوس v2.3.x</td><td>لا يوجد</td><td>لا</td><td>لا</td><td>نعم</td><td>نعم</td></tr>
-<tr><td>Milvus v2.4.x</td><td>لا يوجد</td><td>لا يوجد</td><td>لا</td><td>نعم نعم</td><td>نعم</td></tr>
+<tr><td>ميلفوس v2.4.x</td><td>لا يوجد</td><td>لا يوجد</td><td>لا</td><td>نعم نعم</td><td>نعم</td></tr>
 <tr><td>ميلفوس v2.5.x</td><td>لا يوجد</td><td>لا يوجد</td><td>لا يوجد</td><td>لا</td><td>لا</td></tr>
 <tr><td>ميلفوس v2.6.x</td><td>لا يوجد</td><td>لا يوجد</td><td>لا يوجد</td><td>لا يوجد</td><td>نعم</td></tr>
 </tbody>

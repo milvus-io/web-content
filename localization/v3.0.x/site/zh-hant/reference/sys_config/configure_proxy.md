@@ -102,7 +102,7 @@ summary: 學習如何設定 Milvus 的代理。
   </thead>
   <tbody>
     <tr>
-      <td>        當產生訊息時，proxy 的 timeTick 訊息串流可以緩衝的最大訊息數。      </td>
+      <td>        當產生訊息時，proxy 的 timeTick 訊息串流中可緩衝的最大訊息數。      </td>
       <td>512</td>
     </tr>
   </tbody>
@@ -247,7 +247,7 @@ summary: 學習如何設定 Milvus 的代理。
   </thead>
   <tbody>
     <tr>
-      <td>        在集合中建立時，向量的最大尺寸數。      </td>
+      <td>        在集合中建立向量時，向量的最大尺寸數。      </td>
       <td>32768</td>
     </tr>
   </tbody>
@@ -539,7 +539,7 @@ summary: 學習如何設定 Milvus 的代理。
   </thead>
   <tbody>
     <tr>
-      <td>        存取記錄檔案的名稱。如果將此參數留空，存取日誌會列印到 stdout。      </td>
+      <td>        存取記錄檔案的名稱。如果將此參數留空，存取記錄會列印到 stdout。      </td>
       <td></td>
     </tr>
   </tbody>

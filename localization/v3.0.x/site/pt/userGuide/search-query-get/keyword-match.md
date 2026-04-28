@@ -45,7 +45,7 @@ summary: >-
       </svg>
     </button></h2><p>O Milvus integra o <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> para alimentar o seu índice invertido subjacente e a pesquisa de texto baseada em termos. Para cada entrada de texto, Milvus indexa-o seguindo o procedimento:</p>
 <ol>
-<li><p><a href="/docs/pt/analyzer-overview.md">Analisador</a>: O analisador processa o texto de entrada, dividindo-o em palavras individuais, ou tokens, e aplicando filtros conforme necessário. Isto permite ao Milvus construir um índice baseado nestes tokens.</p></li>
+<li><p><a href="/docs/pt/analyzer-overview.md">Analisador</a>: O analisador processa o texto de entrada, transformando-o em palavras individuais, ou tokens, e aplicando filtros conforme necessário. Isto permite ao Milvus construir um índice baseado nestes tokens.</p></li>
 <li><p><a href="/docs/pt/index-explained.md">Indexação</a>: Após a análise do texto, o Milvus cria um índice invertido que mapeia cada token único para os documentos que o contêm.</p></li>
 </ol>
 <p>Quando um utilizador efectua uma correspondência de texto, o índice invertido é utilizado para recuperar rapidamente todos os documentos que contêm os termos. Isto é muito mais rápido do que analisar cada documento individualmente.</p>

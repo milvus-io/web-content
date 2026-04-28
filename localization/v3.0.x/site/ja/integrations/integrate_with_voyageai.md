@@ -20,7 +20,7 @@ summary: このページでは、VoyageAIのエンベッディングAPIを使っ
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/semantic_search_with_milvus_and_voyageai.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/semantic_search_with_milvus_and_voyageai.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>このガイドでは、Milvusベクトルデータベースと<a href="https://docs.voyageai.com/docs/embeddings">VoyageAIのEmbedding APIを</a>使用して、テキストをセマンティック検索する方法を紹介します。</p>
+<p>このガイドでは、Milvusベクトルデータベースと<a href="https://docs.voyageai.com/docs/embeddings">VoyageAIのEmbedding APIを</a>使用して、テキストのセマンティック検索を行う方法を紹介します。</p>
 <h2 id="Getting-started" class="common-anchor-header">はじめに<button data-href="#Getting-started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,7 +105,7 @@ res = milvus_client.insert(collection_name=<span class="hljs-string">&quot;demo_
 <p>引数として<code translate="no">MilvusClient</code> を指定する：</p>
 <ul>
 <li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> とするのが最も便利である。</li>
-<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
+<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、<code translate="no">http://localhost:19530</code> などのサーバ uri を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>使用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>
@@ -221,7 +221,7 @@ res = milvus_client.insert(collection_name=<span class="hljs-string">&quot;demo_
 
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&quot;insert_count&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>これで画像を検索する準備が整いました。ここでは、クエリは文字列ですが、画像でもクエリできます。(結果の画像を表示するにはmatplotlibを使います。</p>
+<p>これで画像を検索する準備ができました。ここでは、クエリは文字列ですが、画像でもクエリできます。(結果の画像はmatplotlibを使って表示します。</p>
 <pre><code translate="no" class="language-python">queries = [[<span class="hljs-string">&quot;The consequences of a dictator&#x27;s peace&quot;</span>]]
 
 query_vectors = client.multimodal_embed(

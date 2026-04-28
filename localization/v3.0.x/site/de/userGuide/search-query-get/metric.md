@@ -71,7 +71,7 @@ summary: >-
 <div class="alert note">
 <ul>
 <li><p>Für Vektorfelder des Typs <code translate="no">SPARSE\_FLOAT\_VECTOR</code> verwenden Sie den metrischen Typ <code translate="no">BM25</code> nur, wenn Sie eine Volltextsuche durchführen. Weitere Informationen finden Sie unter <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p></li>
-<li><p>Für Vektorfelder des Typs <code translate="no">BINARY_VECTOR</code> muss der Dimensionswert (<code translate="no">dim</code>) ein Vielfaches von 8 sein.</p></li>
+<li><p>Bei Vektorfeldern des Typs <code translate="no">BINARY_VECTOR</code> muss der Dimensionswert (<code translate="no">dim</code>) ein Vielfaches von 8 sein.</p></li>
 </ul>
 </div>
 <p>Die nachstehende Tabelle fasst die Eigenschaften der Ähnlichkeitsabstandswerte aller unterstützten metrischen Typen und ihren Wertebereich zusammen.</p>
@@ -118,7 +118,7 @@ summary: >-
    </tr>
 </table>
 <div class="alert note">
-<p>Um Vektorfelder in einem <a href="/docs/de/array-of-structs.md">Array of Structs-Feld</a> zu indizieren, sollten Sie <code translate="no">MAX_SIM</code> dem oben genannten Satz metrischer Typen vorangestellt werden, basierend auf den in diesen Feldern gespeicherten Vektoreinbettungen. Zum Beispiel,</p>
+<p>Um Vektorfelder in einem <a href="/docs/de/array-of-structs.md">Array of Structs-Feld</a> zu indizieren, sollten Sie <code translate="no">MAX_SIM</code> dem oben genannten Satz metrischer Typen voranstellen, basierend auf den in diesen Feldern gespeicherten Vektoreinbettungen. Zum Beispiel,</p>
 <ul>
 <li><p>Für ein Vektorfeld, das Vektoreinbettungen des Typs <code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code> oder <code translate="no">INT8_VECTOR</code> speichert, können Sie <code translate="no">MAX_SIM_COSINE</code>, <code translate="no">MAX_SIM_IP</code> oder <code translate="no">MAX_SIM_L2</code> als metrischen Typ verwenden.</p></li>
 <li><p>Für ein Vektorfeld, das Vektoreinbettungen des Typs <code translate="no">BINARY_VECTOR</code> speichert, können Sie <code translate="no">MAX_SIM_JACCADR</code> oder <code translate="no">MAX_SIM_HAMMING</code> als metrischen Typ verwenden.</p></li>
@@ -143,7 +143,7 @@ summary: >-
 <p>Die Formel für den euklidischen Abstand lautet wie folgt:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/euclidean-metric.png" alt="Euclidean Metric" class="doc-image" id="euclidean-metric" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/euclidean-metric.png" alt="Euclidean Metric" class="doc-image" id="euclidean-metric" />
    </span> <span class="img-wrapper"> <span>Euklidische Metrik</span> </span></p>
 <p>wobei <strong>a = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> und <strong>b = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong> zwei Punkte im n-dimensionalen euklidischen Raum sind.</p>
 <p>Es ist die am häufigsten verwendete Abstandsmetrik und ist sehr nützlich, wenn die Daten kontinuierlich sind.</p>
@@ -168,7 +168,7 @@ summary: >-
     </button></h2><p>Der IP-Abstand zwischen zwei Einbettungen ist wie folgt definiert:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IP-formula.png" alt="IP Formula" class="doc-image" id="ip-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IP-formula.png" alt="IP Formula" class="doc-image" id="ip-formula" />
    </span> <span class="img-wrapper"> <span>IP-Formel</span> </span></p>
 <p>IP ist nützlicher, wenn Sie nicht-normalisierte Daten vergleichen müssen oder wenn Sie sich für die Größe und den Winkel interessieren.</p>
 <div class="alert note">
@@ -177,12 +177,12 @@ summary: >-
 <p>Angenommen, X' ist von der Einbettung X normalisiert:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/normalize-formula.png" alt="Normalize Formula" class="doc-image" id="normalize-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalize-formula.png" alt="Normalize Formula" class="doc-image" id="normalize-formula" />
    </span> <span class="img-wrapper"> <span>Normalisierungsformel</span> </span></p>
 <p>Die Korrelation zwischen den beiden Einbettungen ist wie folgt:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/correlation-between-embeddings.png" alt="Correlation Between Embeddings" class="doc-image" id="correlation-between-embeddings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/correlation-between-embeddings.png" alt="Correlation Between Embeddings" class="doc-image" id="correlation-between-embeddings" />
    </span> <span class="img-wrapper"> <span>Korrelation zwischen Einbettungen</span> </span></p>
 <h2 id="Cosine-similarity" class="common-anchor-header">Kosinus-Ähnlichkeit<button data-href="#Cosine-similarity" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -203,7 +203,7 @@ summary: >-
 <p>Um die Cosinus-Ähnlichkeit zwischen zwei Gruppen von Vektoren <strong>A = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> und <strong>B = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong> zu berechnen, verwenden Sie die folgende Formel:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
    </span> <span class="img-wrapper"> <span>Kosinus-Ähnlichkeit</span> </span></p>
 <p>Die Kosinusähnlichkeit liegt immer im Intervall <strong>[-1, 1]</strong>. Zwei proportionale Vektoren haben beispielsweise eine Cosinus-Ähnlichkeit von <strong>1</strong>, zwei orthogonale Vektoren haben eine Ähnlichkeit von <strong>0</strong> und zwei entgegengesetzte Vektoren haben eine Ähnlichkeit von <strong>-1</strong>. Je größer der Cosinus ist, desto kleiner ist der Winkel zwischen den beiden Vektoren, was bedeutet, dass diese beiden Vektoren einander ähnlicher sind.</p>
 <p>Wenn man die Kosinusähnlichkeit von 1 subtrahiert, erhält man den Kosinusabstand zwischen zwei Vektoren.</p>
@@ -225,12 +225,12 @@ summary: >-
     </button></h2><p>Der JACCARD-Distanzkoeffizient misst die Ähnlichkeit zwischen zwei Stichprobenmengen und ist definiert als die Kardinalität der Schnittmenge der definierten Mengen geteilt durch die Kardinalität der Vereinigung dieser Mengen. Er kann nur auf endliche Stichprobenmengen angewendet werden.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
    </span> <span class="img-wrapper"> <span>Formel für den JACCARD-Ähnlichkeitskoeffizienten</span> </span></p>
 <p>Die JACCARD-Distanz misst die Unähnlichkeit zwischen Datensätzen und wird durch Subtraktion des JACCARD-Ähnlichkeitskoeffizienten von 1 ermittelt. Bei binären Variablen entspricht die JACCARD-Distanz dem Tanimoto-Koeffizienten.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
    </span> <span class="img-wrapper"> <span>JACCARD-Abstandsformel</span> </span></p>
 <h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -257,7 +257,7 @@ summary: >-
 <p>MHJACCARD misst, wie viele Positionen in zwei MinHash-Signaturen übereinstimmen. Je höher die Übereinstimmungsquote, desto ähnlicher sind die zugrunde liegenden Mengen.</p>
 <p>Milvus berichtet:</p>
 <ul>
-<li><strong>Abstand = 1 - geschätzte Ähnlichkeit (Übereinstimmungsverhältnis)</strong></li>
+<li><strong>Entfernung = 1 - geschätzte Ähnlichkeit (Übereinstimmungsverhältnis)</strong></li>
 </ul>
 <p>Der Abstandswert reicht von 0 bis 1:</p>
 <ul>

@@ -21,8 +21,8 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>RBAC（Role-Based Access Control）とは、ロールに基づくアクセス制御手法である。RBACを使用すると、ユーザーが実行できる操作をコレクション、データベース、およびインスタンス・レベルで細かく制御できるため、データ・セキュリティが強化されます。</p>
-<p>従来のユーザー・アクセス制御モデルとは異なり、RBAC では<strong>ロールの</strong>概念が導入されています。RBAC モデルでは、ロールに特権を付与し、そのロールをユーザに付与します。その後、ユーザーは特権を取得できる。</p>
-<p>RBACモデルは、アクセス制御管理の効率を向上させることができる。たとえば、複数のユーザーが同じ権限セットを必要とする場合、ユーザーごとに手動で権限を設定する必要はありません。代わりに、ロールを作成し、そのロールをユーザーに割り当てることができます。これらのユーザーの権限を調整したい場合は、ロールの権限を調整するだけで、このロールを持つすべてのユーザーに変更が適用されます。</p>
+<p>従来のユーザー・アクセス制御モデルとは異なり、RBAC には<strong>ロールの</strong>概念が導入されています。RBAC モデルでは、ロールに特権を付与し、そのロールをユーザに付与します。その後、ユーザーは特権を取得できる。</p>
+<p>RBACモデルは、アクセス制御管理の効率を向上させることができる。たとえば、複数のユーザーが同じ権限セットを必要とする場合、ユーザーごとに権限を手動で設定する必要はありません。代わりに、ロールを作成し、そのロールをユーザーに割り当てることができます。これらのユーザーの権限を調整したい場合は、ロールの権限を調整するだけで、このロールを持つすべてのユーザーに変更が適用されます。</p>
 <h2 id="RBAC-key-concepts" class="common-anchor-header">RBACの主な概念<button data-href="#RBAC-key-concepts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ summary: >-
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/users-roles-privileges.png" alt="Users Roles Privileges" class="doc-image" id="users-roles-privileges" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/users-roles-privileges.png" alt="Users Roles Privileges" class="doc-image" id="users-roles-privileges" />
    </span> <span class="img-wrapper"> <span>ユーザー ロール 特権</span> </span></p>
 <p>RBACモデルには4つの主要コンポーネントがあります。</p>
 <ul>

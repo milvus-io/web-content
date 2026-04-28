@@ -2,13 +2,8 @@
 id: grouping-search.md
 title: Pesquisa de agrupamento
 summary: >-
-  Uma pesquisa de agrupamento permite ao Milvus agrupar os resultados da
-  pesquisa pelos valores num campo específico para agregar dados a um nível
-  superior. Por exemplo, pode utilizar uma pesquisa ANN básica para encontrar
-  livros semelhantes ao livro em questão, mas pode utilizar uma pesquisa de
-  agrupamento para encontrar as categorias de livros que podem envolver os
-  tópicos discutidos nesse livro. Este tópico descreve como usar a Pesquisa de
-  agrupamento juntamente com as principais considerações.
+  Utilize a pesquisa de agrupamento para agregar resultados de pesquisa ANN por
+  um valor de campo e reduzir entidades duplicadas.
 ---
 <h1 id="Grouping-Search" class="common-anchor-header">Pesquisa de agrupamento<button data-href="#Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando as entidades nos resultados da pesquisa partilham o mesmo valor num campo escalar, isso indica que são semelhantes num determinado atributo, o que pode afetar negativamente os resultados da pesquisa.</p>
+    </button></h2><p>Quando as entidades nos resultados da pesquisa compartilham o mesmo valor em um campo escalar, isso indica que elas são semelhantes em um atributo específico, o que pode afetar negativamente os resultados da pesquisa.</p>
 <p>Suponha que uma coleção armazena vários documentos (denotados por <strong>docId</strong>). Para reter o máximo de informação semântica possível ao converter documentos em vectores, cada documento é dividido em parágrafos mais pequenos e geríveis (ou <strong>pedaços</strong>) e armazenado como entidades separadas. Apesar de o documento estar dividido em secções mais pequenas, os utilizadores continuam muitas vezes interessados em identificar quais os documentos mais relevantes para as suas necessidades.</p>
 <p>
   
@@ -56,7 +51,7 @@ summary: >-
 <ul>
 <li><p>Efetuar uma pesquisa ANN com base no vetor de consulta fornecido para encontrar todas as entidades mais semelhantes à consulta.</p></li>
 <li><p>Agrupa os resultados da pesquisa pelo endereço especificado <code translate="no">group_by_field</code>, como <code translate="no">docId</code>.</p></li>
-<li><p>Retorna os principais resultados de cada grupo, conforme definido pelo parâmetro <code translate="no">limit</code>, com a entidade mais semelhante de cada grupo.</p></li>
+<li><p>Retorna os principais resultados para cada grupo, conforme definido pelo parâmetro <code translate="no">limit</code>, com a entidade mais semelhante de cada grupo.</p></li>
 </ul>
 <div class="alert note">
 <p>Por padrão, a Pesquisa de agrupamento retorna apenas uma entidade por grupo. Se você quiser aumentar o número de resultados a serem retornados por grupo, poderá controlar isso com os parâmetros <code translate="no">group_size</code> e <code translate="no">strict_group_size</code>.</p>
@@ -229,7 +224,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;docId&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>No pedido acima, <code translate="no">limit=3</code> indica que o sistema retornará resultados de pesquisa de três grupos, com cada grupo contendo a única entidade mais semelhante ao vetor de consulta.</p>
+<p>No pedido acima, <code translate="no">limit=3</code> indica que o sistema devolverá resultados de pesquisa de três grupos, com cada grupo contendo a entidade mais semelhante ao vetor de consulta.</p>
 <h2 id="Configure-group-size" class="common-anchor-header">Configurar o tamanho do grupo<button data-href="#Configure-group-size" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -375,7 +370,50 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><code translate="no">group_size</code>: Especifica o número desejado de entidades a serem retornadas por grupo. Por exemplo, definir <code translate="no">group_size=2</code> significa que cada grupo (ou cada <code translate="no">docId</code>) deve idealmente retornar dois dos parágrafos (ou <strong>pedaços</strong>) mais semelhantes. Se <code translate="no">group_size</code> não for definido, o sistema retorna por padrão um resultado por grupo.</p></li>
 <li><p><code translate="no">strict_group_size</code>: Este parâmetro booleano controla se o sistema deve aplicar estritamente a contagem definida por <code translate="no">group_size</code>. Quando <code translate="no">strict_group_size=True</code>, o sistema tentará incluir o número exato de entidades especificadas por <code translate="no">group_size</code> em cada grupo (por exemplo, dois parágrafos), a menos que não haja dados suficientes nesse grupo. Por defeito (<code translate="no">strict_group_size=False</code>), o sistema dá prioridade ao número de grupos especificado pelo parâmetro <code translate="no">limit</code>, em vez de garantir que cada grupo contém entidades <code translate="no">group_size</code>. Esta abordagem é geralmente mais eficiente nos casos em que a distribuição de dados é desigual.</p></li>
 </ul>
-<p>Para obter detalhes adicionais sobre os parâmetros, consulte <a href="https://docs.zilliz.com/reference/python/python/Vector-search">pesquisa</a>.</p>
+<p>Para obter detalhes adicionais do parâmetro, consulte <a href="https://docs.zilliz.com/reference/python/python/Vector-search">pesquisa</a>.</p>
+<h2 id="Order-groups-by-a-scalar-field--Milvus-30x" class="common-anchor-header">Ordenar grupos por um campo escalar<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Order-groups-by-a-scalar-field--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Você pode combinar a Pesquisa de agrupamento com <code translate="no">order_by_fields</code> para ordenar grupos por um campo escalar. Isso é útil quando você deseja resultados diversos entre grupos, mas ainda quer que os grupos sigam uma ordem relevante para o negócio, como preço ou classificação.</p>
+<p>O exemplo a seguir agrupa os resultados da pesquisa por <code translate="no">category</code>, retorna até três entidades por grupo e ordena os grupos retornados por <code translate="no">price</code> de baixo para cima.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
+    data=query_vectors,
+    anns_field=<span class="hljs-string">&quot;embedding&quot;</span>,
+    limit=<span class="hljs-number">20</span>,
+    group_by_field=<span class="hljs-string">&quot;category&quot;</span>,
+    group_size=<span class="hljs-number">3</span>,
+    strict_group_size=<span class="hljs-literal">True</span>,
+    output_fields=[<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>],
+<span class="highlighted-comment-line">    order_by_fields=[</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;field&quot;</span>: <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;order&quot;</span>: <span class="hljs-string">&quot;asc&quot;</span>}</span>
+<span class="highlighted-comment-line">    ],</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Na solicitação acima, <code translate="no">limit=20</code> significa que Milvus seleciona até 20 grupos, não 20 entidades. Como <code translate="no">group_size=3</code>, a lista de resultados simples pode conter até 60 entidades no total.</p>
+<p>Quando você usa <code translate="no">order_by_fields</code> com <code translate="no">group_by_field</code>, Milvus ordena os grupos pelo valor do campo escalar especificado da entidade superior de cada grupo. Dentro de cada grupo, as entidades permanecem ordenadas por sua pontuação de similaridade com o vetor de consulta.</p>
 <h2 id="Considerations" class="common-anchor-header">Considerações<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -392,7 +430,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Indexação</strong>: Este recurso de agrupamento funciona apenas para coleções que são indexadas com estes tipos de índice: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HNSW</strong>, <strong>HNSW_PQ</strong>, <strong>HNSW_PRQ</strong>, <strong>HNSW_SQ</strong>, <strong>DISKANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
+<li><p><strong>Indexação</strong>: Este recurso de agrupamento funciona apenas para coleções que são indexadas com estes tipos de índices: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HNSW</strong>, <strong>HNSW_PQ</strong>, <strong>HNSW_PRQ</strong>, <strong>HNSW_SQ</strong>, <strong>DISKANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
 <li><p><strong>Número de grupos</strong>: O parâmetro <code translate="no">limit</code> controla o número de grupos dos quais os resultados da pesquisa são retornados, em vez do número específico de entidades em cada grupo. Definir um <code translate="no">limit</code> adequado ajuda a controlar a diversidade da pesquisa e o desempenho da consulta. A redução de <code translate="no">limit</code> pode reduzir os custos de computação se os dados forem densamente distribuídos ou se o desempenho for uma preocupação.</p></li>
 <li><p><strong>Entidades por grupo</strong>: O parâmetro <code translate="no">group_size</code> controla o número de entidades retornadas por grupo. Ajustar <code translate="no">group_size</code> com base no seu caso de uso pode aumentar a riqueza dos resultados da pesquisa. No entanto, se os dados forem distribuídos de forma desigual, alguns grupos podem retornar menos entidades do que o especificado por <code translate="no">group_size</code>, particularmente em cenários de dados limitados.</p></li>
 <li><p><strong>Tamanho rigoroso do grupo</strong>: Quando <code translate="no">strict_group_size=True</code>, o sistema tentará retornar o número especificado de entidades (<code translate="no">group_size</code>) para cada grupo, a menos que não haja dados suficientes nesse grupo. Essa configuração garante contagens consistentes de entidades por grupo, mas pode levar à degradação do desempenho com distribuição desigual de dados ou recursos limitados. Se não forem necessárias contagens rigorosas de entidades, a definição de <code translate="no">strict_group_size=False</code> pode melhorar a velocidade da consulta.</p></li>

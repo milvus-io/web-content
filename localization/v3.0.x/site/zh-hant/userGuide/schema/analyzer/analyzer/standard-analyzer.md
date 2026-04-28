@@ -113,7 +113,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
    <tr>
      <td><p><code translate="no">stop_words</code></p></td>
-     <td><p>一個包含停滯字清單的陣列，這些停滯字會從標記化中移除。預設為<code translate="no">_english_</code> ，這是一套內建的常見英文停止詞。</p></td>
+     <td><p>一個包含停滯字清單的陣列，停滯字會從標記化中移除。預設為<code translate="no">_english_</code> ，這是一套內建的常見英文停止詞。</p></td>
    </tr>
 </table>
 <p>自訂停止詞配置範例：</p>

@@ -2,7 +2,7 @@
 id: multi-language-analyzers.md
 title: 多語言分析器Compatible with Milvus 2.5.11+
 summary: >-
-  當 Milvus 執行文字分析時，它通常會在資料集中的整個文字欄位應用單一分析器。如果該分析器是針對英文而最佳化，它就很難處理其他語言
+  當 Milvus 執行文字分析時，它通常會在資料集中的整個文字欄位應用單一分析器。如果該分析器是針對英文最佳化，它就很難應付其他語言
   (例如中文、西班牙文或法文)
   所需的非常不同的標記化和字莖規則，導致召回率降低。舉例來說，搜尋西班牙文「teléfono」（意指「電話」）一詞時，以英文為重點的分析器可能會被絆倒：它可能會去掉重音，並且不應用西班牙文特定的字莖，導致相關結果被忽略。
 beta: Milvus 2.5.11+
@@ -62,7 +62,7 @@ beta: Milvus 2.5.11+
     </button></h2><p>下圖顯示在 Milvus 中配置和使用多語言分析器的工作流程：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/multi-language-analyzers-workflow.png" alt="Multi Language Analyzers Workflow" class="doc-image" id="multi-language-analyzers-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multi-language-analyzers-workflow.png" alt="Multi Language Analyzers Workflow" class="doc-image" id="multi-language-analyzers-workflow" />
    </span> <span class="img-wrapper"> <span>多語言分析器工作流程</span> </span></p>
 <ol>
 <li><p><strong>設定多語言分析器</strong>：</p>
@@ -242,7 +242,22 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
         ></path>
       </svg>
     </button></h2><p>建立支援多語言的集合需要設定特定欄位和索引：</p>
-<h3 id="Add-fields" class="common-anchor-header">新增欄位</h3><p>在這個步驟中，使用四個基本欄位定義資料集模式：</p>
+<h3 id="Add-fields" class="common-anchor-header">新增欄位<button data-href="#Add-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在這個步驟中，使用四個基本欄位定義資料集模式：</p>
 <ul>
 <li><p><strong>Primary Key Field</strong>(<code translate="no">id</code>)：集合中每個實體的唯一識別碼。設定<code translate="no">auto_id=True</code> 可以讓 Milvus 自動產生這些 ID。</p></li>
 <li><p><strong>語言指標欄位</strong>(<code translate="no">language</code>)：這個 VARCHAR 欄位對應於您<code translate="no">multi_analyzer_params</code> 中指定的<code translate="no">by_field</code> 。它儲存每個實體的語言識別碼，告訴 Milvus 要使用哪個分析器。</p></li>
@@ -450,7 +465,22 @@ schema.WithField(entity.NewField().
   &quot;dataType&quot;: &quot;SparseFloatVector&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-BM25-function" class="common-anchor-header">定義 BM25 函式</h3><p>定義 BM25 函式，從原始文字資料產生稀疏向量表示：</p>
+<h3 id="Define-BM25-function" class="common-anchor-header">定義 BM25 函式<button data-href="#Define-BM25-function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>定義 BM25 函式，從原始文字資料產生稀疏向量表示：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create the BM25 function</span>
@@ -511,7 +541,22 @@ schema.WithFunction(function.WithName(<span class="hljs-string">&quot;text_to_ve
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>這個函式會根據每個文字項的語言識別碼，自動套用適當的分析器。關於基於 BM25 的文字檢索的更多資訊，請參閱<a href="/docs/zh-hant/full-text-search.md">全文檢索</a>。</p>
-<h3 id="Configure-index-params" class="common-anchor-header">設定索引參數</h3><p>為了允許有效率的搜尋，請在稀疏向量場上建立索引：</p>
+<h3 id="Configure-index-params" class="common-anchor-header">設定索引參數<button data-href="#Configure-index-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>為了允許有效率的搜尋，請在稀疏向量場上建立索引：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Configure index parameters</span>
@@ -551,9 +596,24 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>索引透過組織稀疏向量以進行有效率的 BM25 相似性計算來改善搜尋效能。</p>
-<h3 id="Create-the-collection" class="common-anchor-header">建立集合</h3><p>最後的創建步驟會匯集您之前的所有配置：</p>
+<h3 id="Create-the-collection" class="common-anchor-header">建立集合<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>最後的創建步驟會匯集您之前的所有配置：</p>
 <ul>
-<li><p><code translate="no">collection_name=&quot;multilang_demo&quot;</code> 為您的集合命名，以供未來參考。</p></li>
+<li><p><code translate="no">collection_name=&quot;multilang_demo&quot;</code> 命名您的資料集，以供未來參考。</p></li>
 <li><p><code translate="no">schema=schema</code> 套用您定義的欄位結構和功能。</p></li>
 <li><p><code translate="no">index_params=index_params</code> 實作索引策略以進行有效率的搜尋。</p></li>
 </ul>
@@ -779,7 +839,7 @@ curl --request POST \
 <li><p>讀取每個文件的<code translate="no">language</code> 欄位</p></li>
 <li><p>將相對應的分析器套用至<code translate="no">text</code> 欄位</p></li>
 <li><p>透過 BM25 函式產生稀疏向量表示法</p></li>
-<li><p>儲存原始文字和產生的稀疏向量</p></li>
+<li><p>存儲原始文本和生成的稀疏向量</p></li>
 </ol>
 <div class="alert note">
 <p>您不需要直接提供稀疏向量；BM25 函式會根據您的文字和指定的分析器自動產生稀疏向量。</p>
@@ -799,7 +859,22 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Use-English-analyzer" class="common-anchor-header">使用英文分析器</h3><p>使用多語言分析器進行搜尋時，<code translate="no">search_params</code> 包含關鍵的設定：</p>
+    </button></h2><h3 id="Use-English-analyzer" class="common-anchor-header">使用英文分析器<button data-href="#Use-English-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>使用多語言分析器進行搜尋時，<code translate="no">search_params</code> 包含關鍵的設定：</p>
 <ul>
 <li><p><code translate="no">metric_type=&quot;BM25&quot;</code> 必須符合您的索引設定。</p></li>
 <li><p><code translate="no">analyzer_name=&quot;english&quot;</code> 指定哪個分析器應用於您的查詢文字。這與用於儲存文件的分析器無關。</p></li>
@@ -924,7 +999,22 @@ curl --request POST \
   &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-Chinese-analyzer" class="common-anchor-header">使用中文分析器</h3><p>本範例示範針對不同的查詢文字切換到中文分析器 (使用其別名<code translate="no">&quot;cn&quot;</code>)。所有其他參數保持不變，但現在使用特定於中文的標記化規則來處理查詢文字。</p>
+<h3 id="Use-Chinese-analyzer" class="common-anchor-header">使用中文分析器<button data-href="#Use-Chinese-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>本範例示範針對不同的查詢文字切換到中文分析器 (使用它的別名<code translate="no">&quot;cn&quot;</code>)。所有其他參數保持不變，但現在使用特定於中文的標記化規則來處理查詢文字。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params[<span class="hljs-string">&quot;analyzer_name&quot;</span>] = <span class="hljs-string">&quot;cn&quot;</span>

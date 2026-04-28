@@ -208,7 +208,7 @@ beta: Milvus 2.6.4+
 <ul>
 <li><p><code translate="no">frame_id</code> 현재 비디오 내의 특정 프레임을 식별합니다.</p></li>
 <li><p><code translate="no">plain_caption</code> 는 날씨, 도로 상태 등과 같은 주변 환경을 제외한 현재 프레임에 대한 설명이며 <code translate="no">plain_cap_vector</code> 는 해당 벡터 임베딩입니다.</p></li>
-<li><p><code translate="no">rich_caption</code> 는 주변 환경이 포함된 현재 프레임에 대한 설명이고 <code translate="no">rich_cap_vector</code> 는 해당 벡터 임베딩입니다.</p></li>
+<li><p><code translate="no">rich_caption</code> 는 주변 환경이 포함된 현재 프레임에 대한 설명이며 <code translate="no">rich_cap_vector</code> 는 해당 벡터 임베딩입니다.</p></li>
 <li><p><code translate="no">risk</code> 는 현재 프레임에서 에고 차량이 직면한 위험에 대한 설명이며 <code translate="no">risk_vector</code> 는 해당 벡터 임베딩입니다.</p></li>
 <li><p><code translate="no">road</code>, <code translate="no">weather</code>, <code translate="no">is_tunnel</code>, <code translate="no">has_pedestrain</code> 등과 같은 프레임의 다른 모든 속성...</p></li>
 </ul></li>

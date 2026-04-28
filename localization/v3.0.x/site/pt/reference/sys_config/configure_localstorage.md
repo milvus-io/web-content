@@ -45,7 +45,7 @@ summary: Saiba como configurar o localStorage para o Milvus.
     <tr>
       <td>
         <li>Caminho local para onde os dados do vetor são armazenados durante uma pesquisa ou uma consulta para evitar o acesso repetitivo ao serviço MinIO ou S3.</li>      
-        <li>Cuidado: A alteração deste parâmetro após a utilização do Milvus durante um período de tempo afectará o acesso a dados antigos.</li>      
+        <li>Cuidado: A alteração deste parâmetro depois de utilizar o Milvus durante um período de tempo afectará o acesso a dados antigos.</li>      
         <li>Recomenda-se que este parâmetro seja alterado antes de iniciar o Milvus pela primeira vez.</li>      </td>
       <td>/var/lib/milvus/data/</td>
     </tr>

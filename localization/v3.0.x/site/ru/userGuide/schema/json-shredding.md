@@ -186,7 +186,7 @@ beta: Milvus 2.6.2+
    </tr>
    <tr>
      <td><p><code translate="no">common.enabledJSONShredding</code></p></td>
-     <td><p>Управляет тем, включены ли процессы сборки и загрузки JSON-измельчения.</p></td>
+     <td><p>Контролирует, включены ли процессы сборки и загрузки JSON-измельчения.</p></td>
      <td><p>false</p></td>
      <td><p>Должно быть установлено значение <strong>true</strong>, чтобы активировать функцию.</p></td>
    </tr>

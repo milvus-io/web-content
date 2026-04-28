@@ -117,7 +117,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
    <tr>
      <td><p><code translate="no">stop_words</code></p></td>
-     <td><p>Un array contenente un elenco di stop words, che saranno rimosse dalla tokenizzazione. L'impostazione predefinita è <code translate="no">_english_</code>, un insieme di stop word inglesi comuni.</p></td>
+     <td><p>Un array contenente un elenco di stop word, che saranno rimosse dalla tokenizzazione. L'impostazione predefinita è <code translate="no">_english_</code>, un insieme di stop word inglesi comuni.</p></td>
    </tr>
 </table>
 <p>Esempio di configurazione di stop word personalizzate:</p>

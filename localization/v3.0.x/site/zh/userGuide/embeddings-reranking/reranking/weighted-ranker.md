@@ -2,7 +2,7 @@
 id: weighted-ranker.md
 title: 加权排名器
 summary: >-
-  加权排名器通过为每个搜索路径分配不同的重要性权重，智能地组合来自多个搜索路径的结果并确定优先级。与技艺高超的厨师平衡多种配料以制作完美菜肴的方式类似，加权排名器也会平衡不同的搜索结果，以提供最相关的综合结果。这种方法非常适合在多个向量场或模式中进行搜索，其中某些领域对最终排名的贡献应比其他领域更大。
+  加权排名器通过为每个搜索路径分配不同的重要性权重，智能地组合来自多个搜索路径的结果并确定其优先级。与技艺高超的厨师平衡多种配料以制作完美菜肴的方式类似，加权排名器也会平衡不同的搜索结果，以提供最相关的综合结果。这种方法非常适合在多个向量场或模式中进行搜索，其中某些领域对最终排名的贡献应比其他领域更大。
 ---
 <h1 id="Weighted-Ranker" class="common-anchor-header">加权排名器<button data-href="#Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>加权排名器通过为每个搜索路径分配不同的重要性权重，智能地组合来自多个搜索路径的结果并确定优先级。与技艺高超的厨师平衡多种配料以制作完美菜肴的方式类似，加权排名器也会平衡不同的搜索结果，以提供最相关的综合结果。这种方法非常适合在多个向量场或模式中进行搜索，其中某些场对最终排名的贡献应比其他场更大。</p>
+    </button></h1><p>加权排名器通过为每个搜索路径分配不同的重要性权重，智能地组合来自多个搜索路径的结果并确定其优先级。与技艺高超的厨师平衡多种配料以制作完美菜肴的方式类似，加权排名器也会平衡不同的搜索结果，以提供最相关的综合结果。这种方法非常适合在多个向量场或模式中进行搜索，其中某些场对最终排名的贡献应比其他场更大。</p>
 <h2 id="When-to-use-Weighted-Ranker" class="common-anchor-header">何时使用加权排名器<button data-href="#When-to-use-Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,9 +77,9 @@ summary: >-
     </button></h2><p>加权排名策略的主要工作流程如下：</p>
 <ol>
 <li><p><strong>Collections 搜索得分</strong>：收集向量搜索各路径的结果和分数（score_1、score_2）。</p></li>
-<li><p><strong>分数归一化</strong>：每次搜索可能会使用不同的相似度指标，从而导致不同的分数分布。例如，使用 "内积"（IP）作为相似度类型可能会导致分数范围为[-∞,+∞]，而使用 "欧氏距离"（L2）则会导致分数范围为[0,+∞]。由于不同搜索的得分范围各不相同，无法直接比较，因此有必要对每条搜索路径的得分进行归一化处理。通常，<code translate="no">arctan</code> 函数用于将分数转换为 [0, 1] 之间的范围（score_1_normalized, score_2_normalized）。分数越接近 1 表示相似度越高。</p></li>
-<li><p><strong>分配权重</strong>：根据分配给不同向量场的重要性，为归一化分数（score_1_normalized、score_2_normalized）分配权重（<strong>wi</strong>）。每条路径的权重范围应在 [0,1] 之间。由此得出的加权分数为 score_1_weighted 和 score_2_weighted。</p></li>
-<li><p><strong>合并分数</strong>：将加权分数（score_1_weighted、score_2_weighted）从高到低排序，得出一组最终分数（score_final）。</p></li>
+<li><p><strong>分数归一化</strong>：每次搜索可能会使用不同的相似度指标，从而导致不同的分数分布。例如，使用 "内积"（IP）作为相似度类型可能会产生[-∞,+∞]的分数，而使用 "欧氏距离"（L2）则会产生[0,+∞]的分数。由于不同搜索的得分范围各不相同，无法直接比较，因此有必要对每条搜索路径的得分进行归一化处理。通常，<code translate="no">arctan</code> 函数用于将分数转换为 [0, 1] 之间的范围（score_1_normalized, score_2_normalized）。分数越接近 1 表示相似度越高。</p></li>
+<li><p><strong>分配权重</strong>：根据分配给不同向量场的重要性，为归一化分数（score_1_normalized，score_2_normalized）分配权重（<strong>wi</strong>）。每条路径的权重范围应在 [0,1] 之间。由此得出的加权分数为 score_1_weighted 和 score_2_weighted。</p></li>
+<li><p><strong>合并分数</strong>：将加权分数（score_1_weighted、score_2_weighted）从高到低排序，得出最终分数集（score_final）。</p></li>
 </ol>
 <p>
   

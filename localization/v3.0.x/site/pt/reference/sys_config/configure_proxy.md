@@ -423,7 +423,7 @@ summary: Saiba como configurar o proxy para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        se o proxy deve utilizar a chave de partição para a coleção      </td>
+      <td>        Se o proxy deve utilizar a chave de partição para a coleção      </td>
       <td>false</td>
     </tr>
   </tbody>

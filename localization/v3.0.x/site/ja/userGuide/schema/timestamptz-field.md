@@ -21,7 +21,7 @@ beta: Milvus 2.6.6+
         ></path>
       </svg>
     </button></h1><p>電子商取引システム、コラボレーションツール、分散ロギングなど、地域をまたいで時間を追跡するアプリケーションでは、タイムゾーンを持つタイムスタンプを正確に扱う必要があります。Milvusの<code translate="no">TIMESTAMPTZ</code> データ型は、タイムスタンプを関連するタイムゾーンと共に保存することで、この機能を提供します。</p>
-<h2 id="What-is-a-TIMESTAMPTZ-field" class="common-anchor-header">TIMESTAMPTZフィールドとは何ですか？<button data-href="#What-is-a-TIMESTAMPTZ-field" class="anchor-icon" translate="no">
+<h2 id="What-is-a-TIMESTAMPTZ-field" class="common-anchor-header">TIMESTAMPTZフィールドとは？<button data-href="#What-is-a-TIMESTAMPTZ-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -322,7 +322,7 @@ res = client.search(
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>コレクションに2つ以上のベクトル・フィールドがある場合、タイムスタンプ・フィルタリングとのハイブリッド検索操作を実行できる。詳細は<a href="/docs/ja/multi-vector-search.md">Multi-Vector Hybrid Searchを</a>参照してください。</p>
+<p>コレクションに2つ以上のベクトル・フィールドがある場合、タイムスタンプ・フィルタリングとのハイブリッド検索操作を実行できる。詳細については、<a href="/docs/ja/multi-vector-search.md">Multi-Vector Hybrid Searchを</a>参照してください。</p>
 </div>
 <h2 id="Advanced-usage" class="common-anchor-header">高度な使用法<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"

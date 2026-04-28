@@ -43,7 +43,7 @@ bge_rf = BGERerankFunction(
 <li><p><code translate="no">device</code> <em>(string</em>)</p>
 <p>Opsional. Perangkat yang akan digunakan untuk menjalankan model. Jika tidak ditentukan, model akan dijalankan pada CPU. Anda dapat menentukan <code translate="no">cpu</code> untuk CPU dan <code translate="no">cuda:n</code> untuk perangkat GPU ke-n.</p></li>
 </ul>
-<p>Kemudian, gunakan kode berikut untuk memberi peringkat ulang dokumen berdasarkan kueri:</p>
+<p>Kemudian, gunakan kode berikut untuk memberi peringkat dokumen berdasarkan kueri:</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>
 
 documents = [

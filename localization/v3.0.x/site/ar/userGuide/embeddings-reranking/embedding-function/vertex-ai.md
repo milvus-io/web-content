@@ -84,7 +84,22 @@ beta: Milvus 2.6.x
      <td><p>سير عمل الحاوية والاختبارات السريعة</p></td>
    </tr>
 </table>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">الخيار 1: ملف التكوين (موصى به وأولوية أعلى)</h3><p>سيفضل Milvus دائمًا بيانات الاعتماد المعلنة في <code translate="no">milvus.yaml</code> على أي متغيرات بيئة لنفس الموفر.</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">الخيار 1: ملف التكوين (موصى به وأولوية أعلى)<button data-href="#Option-1-Configuration-file-recommended--higher-priority" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>سيفضل Milvus دائمًا بيانات الاعتماد المعلنة في <code translate="no">milvus.yaml</code> على أي متغيرات بيئة لنفس الموفر.</p>
 <ol>
 <li><p>Base64-encode مفتاح JSON الخاص بك</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> credentials.json | jq . | <span class="hljs-built_in">base64</span>
@@ -109,7 +124,22 @@ beta: Milvus 2.6.x
 <p>إذا احتجت لاحقًا إلى تدوير المفاتيح، فما عليك سوى تحديث سلسلة Base64 ضمن <code translate="no">credential_json</code> وإعادة تشغيل Milvus - لا يلزم إجراء تغييرات على بيئتك أو حاوياتك.</p>
 <p></div></p></li>
 </ol>
-<h3 id="Option-2-Environment-variables" class="common-anchor-header">الخيار 2: متغيرات البيئة</h3><p>استخدم هذه الطريقة عندما تفضل حقن الأسرار في وقت النشر. يعود Milvus إلى متغيرات البيئة فقط في حالة عدم وجود إدخال مطابق في <code translate="no">milvus.yaml</code>.</p>
+<h3 id="Option-2-Environment-variables" class="common-anchor-header">الخيار 2: متغيرات البيئة<button data-href="#Option-2-Environment-variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>استخدم هذه الطريقة عندما تفضل حقن الأسرار في وقت النشر. يعود Milvus إلى متغيرات البيئة فقط في حالة عدم وجود إدخال مطابق في <code translate="no">milvus.yaml</code>.</p>
 <div class="alert note">
 <p>تعتمد خطوات التهيئة على وضع نشر Milvus الخاص بك (مستقل مقابل الكتلة الموزعة) ومنصة التنسيق (Docker Compose مقابل Kubernetes).</p>
 </div>
@@ -117,7 +147,7 @@ beta: Milvus 2.6.x
  <a href="#docker">Docker Compose</a> <a href="#helm">Helm</a></div>
 <div class="filter-docker">
 <div class="alert note">
-<p>للحصول على ملف تهيئة ميلفوس<strong>(docker-compose.yaml</strong>)، راجع <a href="/docs/ar/configure-docker.md#Download-an-installation-file">تنزيل ملف التثبيت</a>.</p>
+<p>للحصول على ملف تهيئة Milvus<strong>(docker-compose.yaml</strong>)، راجع <a href="/docs/ar/configure-docker.md#Download-an-installation-file">تنزيل ملف التثبيت</a>.</p>
 </div>
 <ol>
 <li><p><strong>قم بتركيب مفتاحك في الحاوية</strong></p>
@@ -154,7 +184,7 @@ beta: Milvus 2.6.x
 </div>
 <ol>
 <li><p><strong>إنشاء سر Kubernetes</strong></p>
-<p>قم بتنفيذ ذلك على جهاز التحكم الخاص بك (حيث تم تكوين <strong>kubectl</strong> ):</p>
+<p>نفّذ هذا الأمر على جهاز التحكم الخاص بك (حيث تم تكوين <strong>kubectl</strong> ):</p>
 <pre><code translate="no" class="language-bash">kubectl create secret generic vertex-ai-secret \
   --from-file=credentials.json=/path/to/your/credentials.json \
   -n &lt;your-milvus-namespace&gt;
@@ -225,7 +255,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>بمجرد تكوين Vertex AI، اتبع هذه الخطوات لتعريف دوال التضمين واستخدامها.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">الخطوة 1: تحديد حقول المخطط</h3><p>لاستخدام دالة التضمين، قم بإنشاء مجموعة بمخطط محدد. يجب أن يتضمن هذا المخطط ثلاثة حقول ضرورية على الأقل:</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">الخطوة 1: تحديد حقول المخطط<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لاستخدام دالة التضمين، قم بإنشاء مجموعة بمخطط محدد. يجب أن يتضمن هذا المخطط ثلاثة حقول ضرورية على الأقل:</p>
 <ul>
 <li><p>الحقل الأساسي الذي يحدد بشكل فريد كل كيان في المجموعة.</p></li>
 <li><p>حقل قياسي يخزن البيانات الأولية المراد تضمينها.</p></li>
@@ -245,7 +290,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the output dimension of the model and parameters</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">الخطوة 2: إضافة دالة التضمين إلى المخطط</h3><p>تقوم الوحدة النمطية الدالة في ميلفوس تلقائيًا بتحويل البيانات الخام المخزنة في الحقل القياسي إلى تضمينات وتخزينها في الحقل المتجه المحدد صراحةً.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">الخطوة 2: إضافة دالة التضمين إلى المخطط<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تقوم الوحدة النمطية الدالة في ميلفوس تلقائيًا بتحويل البيانات الخام المخزنة في الحقل القياسي إلى تضمينات وتخزينها في الحقل المتجه المحدد صراحةً.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define Vertex AI embedding function</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;vert_func&quot;</span>,                           <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -271,7 +331,7 @@ schema.add_function(text_embedding_function)
      <th><p><strong>المعلمة</strong></p></th>
      <th><p><strong>الوصف</strong></p></th>
      <th><p><strong>مطلوبة؟</strong></p></th>
-     <th><p><strong>مثال القيمة</strong></p></th>
+     <th><p><strong>قيمة المثال</strong></p></th>
    </tr>
    <tr>
      <td><p><code translate="no">provider</code></p></td>
@@ -305,7 +365,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>بُعد ناقلات تضمين الإخراج. يقبل الأعداد الصحيحة بين 1 و768. <strong>ملاحظة:</strong> إذا تم تحديدها، تأكد من أن بُعد حقل المتجه في المخطط يطابق هذه القيمة.</p></td>
+     <td><p>بُعد متجهات تضمين الإخراج. يقبل الأعداد الصحيحة بين 1 و768. <strong>ملاحظة:</strong> إذا تم تحديدها، تأكد من أن بُعد حقل المتجه في المخطط يطابق هذه القيمة.</p></td>
      <td><p>لا يوجد</p></td>
      <td><p><code translate="no">768</code></p></td>
    </tr>

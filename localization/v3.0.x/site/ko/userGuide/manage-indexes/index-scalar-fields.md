@@ -20,6 +20,9 @@ title: 스칼라 필드 인덱스
         ></path>
       </svg>
     </button></h1><p>Milvus에서 스칼라 인덱스는 기존 데이터베이스 인덱스와 유사하게 특정 비벡터 필드 값을 기준으로 메타필터링 속도를 높이는 데 사용됩니다. 이 가이드에서는 정수, 문자열 등과 같은 필드에 대한 스칼라 인덱스를 만들고 구성하는 방법을 안내합니다.</p>
+<div class="alert warning">
+<p>이 페이지는 더 이상 사용되지 않습니다. 최신 구현에 대해서는 <a href="/docs/ko/bitmap.md">BITMAP</a>, <a href="/docs/ko/inverted.md">INVERTED</a>, <a href="/docs/ko/ngram.md">NGRAM</a>, <a href="/docs/ko/rtree.md">RTREE</a> <a href="/docs/ko/stl-sort.md">STL_SORT</a> 등을 참조하세요.</p>
+</div>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">스칼라 인덱싱의 유형<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +40,7 @@ title: 스칼라 필드 인덱스
       </svg>
     </button></h2><ul>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">자동 인덱싱</a></strong>: Milvus는 스칼라 필드의 데이터 유형에 따라 인덱스 유형을 자동으로 결정합니다. 특정 인덱스 유형을 제어할 필요가 없는 경우에 적합합니다.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">사용자 지정 인덱싱</a></strong>: 반전 인덱스와 같은 정확한 인덱스 유형을 지정합니다. 이렇게 하면 인덱스 유형 선택을 더 세밀하게 제어할 수 있습니다.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">사용자 지정 인덱싱</a></strong>: 반전 인덱스 또는 <a href="/docs/ko/bitmap.md">비트맵 인덱스와</a> 같은 정확한 인덱스 유형을 지정합니다. 이렇게 하면 인덱스 유형 선택을 더 세밀하게 제어할 수 있습니다.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">자동 인덱싱<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -55,7 +58,7 @@ title: 스칼라 필드 인덱스
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>자동 인덱싱을 사용하려면 <strong>인덱스 유형</strong> 매개변수를 생략하세요. <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>에서 인덱스 유형 매개변수를 생략하면 Milvus가 스칼라 필드 유형에 따라 인덱스 유형을 유추할 수 있습니다.</p>
+<p>자동 인덱싱을 사용하려면 <strong>인덱스 유형</strong> 매개변수( <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>에서 인덱스 유형 매개변수를 생략하면 Milvus가 스칼라 필드 유형을 기반으로 인덱스 유형을 유추할 수 있습니다.</p>
 </div>
 <div class="language-java">
 <p>자동 인덱싱을 사용하려면, 에서 <strong>indexType</strong> 매개변수를 생략하세요. <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>에서 인덱스 유형 매개변수를 생략하여 Milvus가 스칼라 필드 유형을 기반으로 인덱스 유형을 유추할 수 있도록 합니다.</p>
@@ -191,7 +194,8 @@ client.createIndex(createIndexReq);
 <p>사용자 지정 인덱싱의 경우 유효한 값은 다음과 같습니다:</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (권장) 반전 인덱스는 토큰화된 모든 단어가 알파벳순으로 정렬된 용어 사전으로 구성됩니다. 자세한 내용은 <a href="/docs/ko/scalar_index.md">스칼라 인덱스를</a> 참조하세요.</p></li>
-<li><p><strong>STL_SORT</strong>: 표준 템플릿 라이브러리 정렬 알고리즘을 사용하여 스칼라 필드를 정렬합니다. 숫자 필드(예: INT8, INT16, INT32, INT64, FLOAT, DOUBLE)만 지원합니다.</p></li>
+<li><p><strong>비트맵</strong>: 필드에 있는 모든 고유 값의 비트맵을 저장하는 인덱스 유형입니다. 자세한 내용은 <a href="/docs/ko/bitmap.md">비트맵을</a> 참조하세요.</p></li>
+<li><p><strong>STL_SORT</strong>: 표준 템플릿 라이브러리 정렬 알고리즘을 사용하여 스칼라 필드를 정렬합니다. 숫자 필드만 지원합니다(예: INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>트라이</strong>: 빠른 접두사 검색 및 검색을 위한 트리 데이터 구조입니다. VARCHAR 필드를 지원합니다.</p></li>
 </ul></li>
 <li><p><strong>index_name</strong><em>(문자열</em>)</p>
@@ -242,7 +246,7 @@ client.createIndex(createIndexReq);
 </ul></li>
 </ul>
 </div>
-<h2 id="Verifying-the-result" class="common-anchor-header">결과 확인하기<button data-href="#Verifying-the-result" class="anchor-icon" translate="no">
+<h2 id="Verifying-the-result" class="common-anchor-header">결과 확인<button data-href="#Verifying-the-result" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -304,21 +308,3 @@ System.out.println(indexNames);
 <span class="hljs-comment">//     &quot;inverted_index&quot;</span>
 <span class="hljs-comment">// ]   </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">제한<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li>현재 스칼라 인덱싱은 INT8, INT16, INT32, INT64, FLOAT, DOUBLE, BOOL, VARCHAR 및 ARRAY 데이터 타입을 지원하지만 JSON 데이터 타입은 지원하지 않습니다.</li>
-</ul>

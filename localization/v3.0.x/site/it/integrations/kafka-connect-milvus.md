@@ -145,7 +145,7 @@ title: >-
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>decomprimere il file <code translate="no">zilliz-kafka-connect-milvus-xxx.zip</code> scaricato al passo 1.</p></li>
+<li><p>decomprimere il file <code translate="no">zilliz-kafka-connect-milvus-xxx.zip</code> scaricato nel passo 1.</p></li>
 <li><p>copiare le directory <code translate="no">zilliz-kafka-connect-milvus</code> nella directory <code translate="no">libs</code> della propria installazione di Kafka.</p></li>
 <li><p>modificare il file <code translate="no">connect-standalone.properties</code> nella directory <code translate="no">config</code> dell'installazione di Kafka.</p>
 <pre><code translate="no" class="language-properties">key.converter.schemas.enable=false
@@ -187,4 +187,19 @@ topics=topic_0
 <li><p>Verificare se l'entità è stata inserita nella raccolta in Zilliz Cloud. Ecco come appare su Zilliz Cloud se l'inserimento è riuscito:</p>
 <p><img translate="no" src="https://github.com/zilliztech/kafka-connect-milvus/raw/main/src/main/resources/images/insearted_entities.png" width="80%" /></p></li>
 </ol>
-<h3 id="Support" class="common-anchor-header">Assistenza</h3><p>Se avete bisogno di assistenza o avete domande sul connettore Kafka Connect Milvus, non esitate a contattare il manutentore del connettore: <strong>Email:</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>
+<h3 id="Support" class="common-anchor-header">Assistenza<button data-href="#Support" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Se avete bisogno di assistenza o avete domande sul connettore Kafka Connect Milvus, non esitate a contattare il manutentore del connettore: <strong>Email:</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>

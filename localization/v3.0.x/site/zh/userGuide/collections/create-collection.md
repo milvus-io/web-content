@@ -517,7 +517,22 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>您可以为要创建的 Collection 设置属性，使其适合您的服务。适用的属性如下。</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">设置分片数</h3><p>分片是 Collections 的水平切片，每个分片对应一个数据输入通道。默认情况下，每个 Collections 都有一个分区。您可以在创建 Collections 时指定分片数量，以便更好地适应数据量和工作负载。</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">设置分片数<button data-href="#Set-Shard-Number" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>分片是集合的水平切片，每个分片对应一个数据输入通道。默认情况下，每个 Collections 都有一个分区。您可以在创建 Collections 时指定分片数量，以便更好地适应数据量和工作负载。</p>
 <p>作为一般指导原则，在设置分片数量时应考虑以下几点：</p>
 <ul>
 <li><strong>数据大小：</strong>通常的做法是每 2 亿个实体设置一个分区。也可以根据总数据量进行估算，例如，计划插入的数据量每 100 GB 就增加一个分区。</li>
@@ -571,7 +586,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">启用 mmap</h3><p>Milvus 默认在所有 Collections 上启用 mmap，允许 Milvus 将原始字段数据映射到内存中，而不是完全加载它们。这样可以减少内存占用，提高 Collections 的容量。有关 mmap 的详细信息，请参阅<a href="/docs/zh/mmap.md">使用 mmap</a>。</p>
+<h3 id="Enable-mmap" class="common-anchor-header">启用 mmap<button data-href="#Enable-mmap" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 默认在所有 Collections 上启用 mmap，允许 Milvus 将原始字段数据映射到内存中，而不是完全加载它们。这样可以减少内存占用，提高 Collections 的容量。有关 mmap 的详细信息，请参阅<a href="/docs/zh/mmap.md">使用 mmap</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#plaintext">纯文本</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap</span>
@@ -624,7 +654,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Collection-TTL" class="common-anchor-header">设置 Collections TTL</h3><p>如果需要在特定时间段内删除 Collections 中的数据，可以考虑以秒为单位设置其 Time-To-Live (TTL)。一旦 TTL 超时，Milvus 就会删除 Collection 中的实体。删除是异步的，这表明在删除完成之前，搜索和查询仍然可以进行。</p>
+<h3 id="Set-Collection-TTL" class="common-anchor-header">设置 Collections TTL<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果需要在特定时间段内删除 Collections 中的数据，可以考虑以秒为单位设置其 Time-To-Live (TTL)。一旦 TTL 超时，Milvus 就会删除 Collection 中的实体。删除是异步的，这表明在删除完成之前，搜索和查询仍然可以进行。</p>
 <p>下面的代码片段将 TTL 设置为一天（86400 秒）。建议至少将 TTL 设置为几天。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -680,7 +725,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Consistency-Level" class="common-anchor-header">设置一致性级别</h3><p>创建 Collections 时，可以为集合中的搜索和查询设置一致性级别。您还可以在特定搜索或查询过程中更改 Collections 的一致性级别。</p>
+<h3 id="Set-Consistency-Level" class="common-anchor-header">设置一致性级别<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>创建 Collections 时，可以为集合中的搜索和查询设置一致性级别。您还可以在特定搜索或查询过程中更改 Collections 的一致性级别。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With consistency level</span>
@@ -734,5 +794,20 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>有关一致性级别的更多信息，请参阅<a href="/docs/zh/tune_consistency.md">一致性</a>级别。</p>
-<h3 id="Enable-Dynamic-Field" class="common-anchor-header">启用动态字段</h3><p>Collections 中的动态字段是一个保留的 JavaScript Object Notation (JSON) 字段，名为<strong>$meta</strong>。启用该字段后，Milvus 会将每个实体中携带的所有非 Schema 定义字段及其值作为键值对保存在保留字段中。</p>
+<h3 id="Enable-Dynamic-Field" class="common-anchor-header">启用动态字段<button data-href="#Enable-Dynamic-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Collections 中的动态字段是一个保留的 JavaScript Object Notation (JSON) 字段，名为<strong>$meta</strong>。启用该字段后，Milvus 会将每个实体中携带的所有非 Schema 定义字段及其值作为键值对保存在保留字段中。</p>
 <p>有关如何使用动态字段的详细信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">动态字段</a>。</p>

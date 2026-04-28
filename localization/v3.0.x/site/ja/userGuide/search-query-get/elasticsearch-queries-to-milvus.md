@@ -590,7 +590,7 @@ res = client.query(
 <li><p>提供されたクエリベクトルを使った、<code translate="no">vector</code> フィールドに対するkNN検索。</p></li>
 </ul>
 <p>各検索エンジンは最大50のトップマッチを提供し、それらはRRFによって再ランク付けされ、最終的にトップ10の結果が返される。</p>
-<p>Milvusでは、複数のベクトルフィールドにまたがる検索を組み合わせ、再ランク付け戦略を適用し、組み合わせたリストからトップKの結果を取得することで、同様のハイブリッド検索を実現することができます。MilvusはRRFと重み付きリランカー戦略の両方をサポートしています。詳細は<a href="/docs/ja/weighted-ranker.md">リランキングを</a>参照。</p>
+<p>Milvusでは、複数のベクターフィールドの検索を組み合わせ、再ランク付け戦略を適用し、組み合わせたリストからトップKの結果を取得することで、同様のハイブリッド検索を実現することができます。MilvusはRRFと重み付きリランカー戦略の両方をサポートしています。詳細は<a href="/docs/ja/weighted-ranker.md">リランキングを</a>参照。</p>
 <p>以下は上記のElasticsearchの例をMilvusで非厳格に等価化したものです。</p>
 <pre><code translate="no" class="language-python">search_params_dense = {
     <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">1.25</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3.5</span>]],

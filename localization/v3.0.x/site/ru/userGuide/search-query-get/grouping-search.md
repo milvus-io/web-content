@@ -2,13 +2,8 @@
 id: grouping-search.md
 title: Группировочный поиск
 summary: >-
-  Группировочный поиск позволяет Milvus группировать результаты поиска по
-  значениям в указанном поле, чтобы собрать данные на более высоком уровне.
-  Например, вы можете использовать базовый поиск ANN, чтобы найти книги, похожие
-  на ту, которую вы рассматриваете, но вы можете использовать группирующий
-  поиск, чтобы найти категории книг, которые могут быть связаны с темами,
-  обсуждаемыми в этой книге. В этой теме описывается, как использовать
-  группирующий поиск, а также основные моменты.
+  Используйте группирующий поиск, чтобы объединить результаты поиска ANN по
+  значению поля и уменьшить количество дублирующихся сущностей.
 ---
 <h1 id="Grouping-Search" class="common-anchor-header">Группировочный поиск<button data-href="#Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -376,6 +371,49 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><code translate="no">strict_group_size</code>: Этот булевский параметр управляет тем, должна ли система строго придерживаться подсчета, заданного <code translate="no">group_size</code>. Если задан <code translate="no">strict_group_size=True</code>, система попытается включить в каждую группу точное количество сущностей, заданное <code translate="no">group_size</code> (например, два абзаца), если только в этой группе не будет достаточно данных. По умолчанию (<code translate="no">strict_group_size=False</code>), системе приоритетнее удовлетворить количество групп, заданное параметром <code translate="no">limit</code>, чем гарантировать, что каждая группа содержит сущности <code translate="no">group_size</code>. Такой подход обычно более эффективен в случаях, когда распределение данных неравномерно.</p></li>
 </ul>
 <p>Дополнительные сведения о параметре см. в разделе <a href="https://docs.zilliz.com/reference/python/python/Vector-search">Поиск</a>.</p>
+<h2 id="Order-groups-by-a-scalar-field--Milvus-30x" class="common-anchor-header">Упорядочивание групп по скалярному полю<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Order-groups-by-a-scalar-field--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Вы можете объединить поиск по группировке с <code translate="no">order_by_fields</code>, чтобы упорядочить группы по скалярному полю. Это удобно, когда вы хотите получить разнообразные результаты по группам, но при этом хотите, чтобы группы следовали какому-то важному для бизнеса порядку, например по цене или рейтингу.</p>
+<p>Следующий пример группирует результаты поиска по <code translate="no">category</code>, возвращает до трех объектов в группу и упорядочивает полученные группы по <code translate="no">price</code> от низкого к высокому.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
+    data=query_vectors,
+    anns_field=<span class="hljs-string">&quot;embedding&quot;</span>,
+    limit=<span class="hljs-number">20</span>,
+    group_by_field=<span class="hljs-string">&quot;category&quot;</span>,
+    group_size=<span class="hljs-number">3</span>,
+    strict_group_size=<span class="hljs-literal">True</span>,
+    output_fields=[<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>],
+<span class="highlighted-comment-line">    order_by_fields=[</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;field&quot;</span>: <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;order&quot;</span>: <span class="hljs-string">&quot;asc&quot;</span>}</span>
+<span class="highlighted-comment-line">    ],</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>В приведенном выше запросе <code translate="no">limit=20</code> означает, что Milvus выбирает до 20 групп, а не 20 сущностей. Поскольку <code translate="no">group_size=3</code>, плоский список результатов может содержать до 60 сущностей в целом.</p>
+<p>Когда вы используете <code translate="no">order_by_fields</code> с <code translate="no">group_by_field</code>, Milvus упорядочивает группы по указанному значению скалярного поля верхней сущности каждой группы. Внутри каждой группы сущности остаются упорядоченными по их сходству с вектором запроса.</p>
 <h2 id="Considerations" class="common-anchor-header">Соображения<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

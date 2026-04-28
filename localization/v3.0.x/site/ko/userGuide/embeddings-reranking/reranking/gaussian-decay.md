@@ -44,7 +44,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>가우스 감쇠는 특히 다음과 같은 경우에 효과적입니다:</p>
+    </button></h2><p>가우시안 감쇠는 특히 다음과 같은 경우에 효과적입니다:</p>
 <table>
    <tr>
      <th><p>사용 사례</p></th>
@@ -64,7 +64,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>제품 목록</p></td>
      <td><p>목표 근처에 가격이 책정된 품목</p></td>
-     <td><p>가격이 목표에서 벗어남에 따라 관련성 감소 완만하게 감소</p></td>
+     <td><p>가격이 목표에서 벗어남에 따라 관련성 점진적 감소</p></td>
    </tr>
    <tr>
      <td><p>전문가 매칭</p></td>
@@ -88,7 +88,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>가우시안 감쇠는 이상적인 지점으로부터 거리가 멀어질수록 관련성이 점차 감소하는 부드러운 종 모양의 곡선을 만듭니다. 수학자 칼 프리드리히 가우스의 이름을 딴 이 분포는 자연과 통계에서 자주 나타나기 때문에 인간의 지각에 매우 직관적으로 느껴집니다.</p>
+    </button></h2><p>가우시안 감쇠는 이상적인 지점에서 거리가 멀어질수록 관련성이 점차 감소하는 부드러운 종 모양의 곡선을 만듭니다. 수학자 칼 프리드리히 가우스의 이름을 딴 이 분포는 자연과 통계에서 자주 나타나기 때문에 인간의 지각에 매우 직관적으로 느껴집니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gaussian-decay.png" alt="Gaussian Decay" class="doc-image" id="gaussian-decay" />
@@ -100,7 +100,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">scale</code> (±2km): 정확히 2km 떨어진 레스토랑의 관련성 점수가 절반(0.5)으로 떨어지는 거리로, 관련성이 감쇠 값으로 떨어집니다.</p></li>
 <li><p><code translate="no">decay</code> (0.5): 척도 거리에서의 점수 - 이 매개변수는 기본적으로 거리에 따라 점수가 얼마나 빨리 감소하는지를 제어합니다.</p></li>
 </ul>
-<p>곡선에서 볼 수 있듯이 2km를 초과하는 레스토랑은 관련성이 계속 감소하지만 0에 도달하지는 않습니다. 4~5km 떨어진 레스토랑도 최소한의 관련성은 유지되므로, 비록 순위는 낮지만 훌륭하지만 멀리 떨어져 있는 레스토랑도 여전히 결과에 표시될 수 있습니다.</p>
+<p>곡선에서 볼 수 있듯이 2km 이상 떨어진 레스토랑은 관련성이 계속 감소하지만 0점에 도달하지는 않습니다. 4~5km 떨어진 레스토랑도 최소한의 관련성은 유지되므로, 비록 순위는 낮지만 훌륭하지만 멀리 떨어져 있는 레스토랑도 여전히 결과에 표시될 수 있습니다.</p>
 <p>이 동작은 사람들이 자연스럽게 거리 관련성에 대해 생각하는 방식, 즉 가까운 곳을 선호하지만 예외적인 옵션을 위해 더 먼 곳도 기꺼이 여행하는 방식을 모방한 것입니다.</p>
 <h2 id="Formula" class="common-anchor-header">공식<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -129,7 +129,7 @@ beta: Milvus 2.6.x
 <li><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2σ22\sigma^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">2σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span></span></span></span></span></span></span></span> 2로 나누고, 이는 스케일 및 감쇠 매개변수에서 계산됩니다.</p></li>
 <li><p>음의 지수를 취하여 0과 1 사이의 값을 얻습니다: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>exp</mi><mo>(</mo><mi>-값</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\exp(-값)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">exp</span><span class="mord">(</span><span class="mord mathnormal">-값</span><span class="mclose">)</span></span></span></span></p></li>
 </ol>
-<p> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">σ2\sigma^{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> 2 계산은 스케일과 감쇠 매개변수를 가우스 분포의 표준편차 제곱으로 변환합니다. 이것이 함수에 특징적인 종 모양을 부여합니다.</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">σ2\sigma^{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> 2 계산은 스케일과 감쇠 매개변수를 가우스 분포의 표준편차 제곱으로 변환합니다. 이것이 함수에 특징적인 종 모양을 부여합니다.</p>
 <h2 id="Use-Gaussian-decay" class="common-anchor-header">가우스 감쇠 사용<button data-href="#Use-Gaussian-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

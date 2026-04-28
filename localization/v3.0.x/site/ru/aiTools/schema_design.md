@@ -2,7 +2,7 @@
 id: schema_design.md
 title: 'Промпт: Milvus Schema Design'
 summary: >-
-  Правила для помощников ИИ по кодированию для разработки правильных схем
+  Правила для помощников по кодированию ИИ для разработки правильных схем
   коллекций Milvus.
 ---
 <h1 id="Schema-Design" class="common-anchor-header">Проектирование схем<button data-href="#Schema-Design" class="anchor-icon" translate="no">

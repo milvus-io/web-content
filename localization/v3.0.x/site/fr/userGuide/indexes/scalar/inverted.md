@@ -70,7 +70,7 @@ summary: >-
 <p>Par exemple, la valeur <strong>"électronique"</strong> correspond aux ID <strong>1</strong> et <strong>3</strong>, tandis que <strong>"livres"</strong> correspond aux ID <strong>2</strong> et <strong>5</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
    </span> <span class="img-wrapper"> <span>Fonctionnement de l'index inversé</span> </span></p>
 <p>Lorsque vous filtrez pour une valeur spécifique (par exemple, <code translate="no">category == &quot;electronics&quot;</code>), Milvus recherche simplement le terme dans l'index et récupère directement les ID correspondants. Cela évite de parcourir l'ensemble des données et permet un filtrage rapide, en particulier pour les valeurs catégorielles ou répétées.</p>
 <p>Les index INVERTED prennent en charge tous les types de champs scalaires, tels que <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong> et <strong>ARRAY</strong>. Toutefois, les paramètres d'indexation d'un champ JSON sont légèrement différents de ceux des champs scalaires ordinaires.</p>
@@ -192,7 +192,7 @@ client.create_index(
     </button></h2><ul>
 <li><p><strong>Créez des index après avoir chargé les données</strong>: Créez des index sur des collections qui contiennent déjà des données afin d'améliorer les performances.</p></li>
 <li><p><strong>Utilisez des noms d'index descriptifs</strong>: Choisissez des noms qui indiquent clairement le champ et l'objectif</p></li>
-<li><p><strong>Contrôler les performances des index</strong>: Vérifiez les performances des requêtes avant et après la création d'index.</p></li>
+<li><p><strong>Contrôler les performances des index</strong>: Vérifiez les performances des requêtes avant et après la création des index.</p></li>
 <li><p><strong>Tenez compte de vos modèles de requête</strong>: Créez des index sur les champs que vous filtrez fréquemment</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Prochaines étapes<button data-href="#Next-steps" class="anchor-icon" translate="no">

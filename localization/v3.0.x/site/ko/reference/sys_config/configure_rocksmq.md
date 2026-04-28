@@ -66,7 +66,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
         <li>Milvus가 RocksMQ에서 데이터를 저장하는 키의 접두사입니다.</li>      
         <li>주의: 일정 기간 Milvus를 사용한 후 이 파라미터를 변경하면 이전 데이터에 대한 액세스에 영향을 미칩니다.</li>      
         <li>Milvus를 처음 시작하기 전에 이 파라미터를 변경하는 것이 좋습니다.</li>      
-        <li>etcd 서비스가 이미 존재하는 경우 Milvus의 루트 키 접두사를 식별하기 쉽게 설정하세요.</li>      </td>
+        <li>etcd 서비스가 이미 존재하는 경우 Milvus의 식별하기 쉬운 루트 키 접두사를 설정하세요.</li>      </td>
       <td>/var/lib/milvus/rdb_data</td>
     </tr>
   </tbody>

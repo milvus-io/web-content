@@ -51,10 +51,40 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Sebelum mengonfigurasi Milvus dengan fungsi TEI, Anda harus memiliki layanan TEI yang sedang berjalan. Milvus mendukung dua pendekatan untuk penerapan TEI:</p>
-<h3 id="Standard-deployment-external" class="common-anchor-header">Penerapan standar (eksternal)</h3><p>Anda dapat menggunakan TEI sebagai layanan mandiri menggunakan metode resmi dari Hugging Face. Pendekatan ini memberi Anda fleksibilitas dan kontrol maksimum atas layanan TEI Anda.</p>
+<h3 id="Standard-deployment-external" class="common-anchor-header">Penerapan standar (eksternal)<button data-href="#Standard-deployment-external" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Anda dapat menggunakan TEI sebagai layanan mandiri menggunakan metode resmi dari Hugging Face. Pendekatan ini memberi Anda fleksibilitas dan kontrol maksimum atas layanan TEI Anda.</p>
 <p>Untuk petunjuk terperinci tentang penerapan TEI menggunakan Docker atau metode lain, lihat <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour#deploy">dokumentasi resmi Inferensi Penyematan Teks Hugging Face</a>.</p>
 <p>Setelah penerapan, catatlah titik akhir layanan TEI Anda (misalnya, <code translate="no">http://localhost:8080</code>) karena Anda akan memerlukannya saat <a href="/docs/id/hugging-face-tei.md#Use-embedding-function-">menggunakan fungsi TEI di Milvus</a>.</p>
-<h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Penerapan Milvus Helm Chart (terintegrasi)</h3><p>Untuk lingkungan Kubernetes, Milvus menawarkan opsi penerapan terintegrasi melalui Helm chart. Ini menyederhanakan proses dengan menerapkan dan mengonfigurasi TEI bersama Milvus.</p>
+<h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Penerapan Milvus Helm Chart (terintegrasi)<button data-href="#Milvus-Helm-Chart-deployment-integrated" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk lingkungan Kubernetes, Milvus menawarkan opsi penerapan terintegrasi melalui Helm chart. Ini menyederhanakan proses dengan menerapkan dan mengonfigurasi TEI bersama Milvus.</p>
 <p>Untuk mengaktifkan TEI dalam penerapan Helm Milvus Anda:</p>
 <ol>
 <li><p>Konfigurasikan <strong>values.yaml</strong> untuk mengaktifkan TEI:</p>
@@ -140,7 +170,22 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
         ></path>
       </svg>
     </button></h2><p>Setelah layanan TEI dikonfigurasi, ikuti langkah-langkah berikut ini untuk mendefinisikan dan menggunakan fungsi penyematan.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Langkah 1: Tentukan bidang skema</h3><p>Untuk menggunakan fungsi penyematan, buat koleksi dengan skema tertentu. Skema ini harus menyertakan setidaknya tiga bidang yang diperlukan:</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Langkah 1: Tentukan bidang skema<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk menggunakan fungsi penyematan, buat koleksi dengan skema tertentu. Skema ini harus menyertakan setidaknya tiga bidang yang diperlukan:</p>
 <ul>
 <li><p>Bidang utama yang secara unik mengidentifikasi setiap entitas dalam koleksi.</p></li>
 <li><p>Bidang skalar yang menyimpan data mentah yang akan disematkan.</p></li>
@@ -161,7 +206,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to exactly match the TEI model&#x27;s output dimension</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Langkah 2: Menambahkan fungsi embedding ke skema</h3><p>Modul Function di Milvus secara otomatis mengubah data mentah yang disimpan dalam bidang skalar menjadi embedding dan menyimpannya ke dalam bidang vektor yang didefinisikan secara eksplisit.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Langkah 2: Menambahkan fungsi embedding ke skema<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Modul Function di Milvus secara otomatis mengubah data mentah yang disimpan dalam bidang skalar menjadi embedding dan menyimpannya ke dalam bidang vektor yang didefinisikan secara eksplisit.</p>
 <p>Contoh di bawah ini menambahkan modul Function (<code translate="no">tei_func</code>) yang mengubah bidang skalar <code translate="no">&quot;document&quot;</code> menjadi embedding, menyimpan vektor yang dihasilkan dalam bidang vektor <code translate="no">&quot;dense_vector&quot;</code> yang telah didefinisikan sebelumnya.</p>
 <p>Setelah Anda mendefinisikan fungsi penyisipan Anda, tambahkan fungsi tersebut ke skema koleksi Anda. Ini menginstruksikan Milvus untuk menggunakan fungsi penyematan yang ditentukan untuk memproses dan menyimpan penyematan dari data teks Anda.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define TEI embedding function</span>

@@ -20,11 +20,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>資訊檢索系統（也稱為搜尋引擎）對於各種 AI 應用程式而言是不可或缺的，例如檢索增量生成 (RAG)、視覺搜尋和產品推薦。這些系統的核心是精心設計的資料模型，用以組織、索引和擷取資訊。</p>
+    </button></h1><p>資訊檢索系統（也稱為搜尋引擎）對於各種人工智慧（AI）應用而言是不可或缺的，例如檢索增強世代（Retrieval-augmented generation，RAG）、視覺搜尋和產品推薦。這些系統的核心是精心設計的資料模型，用以組織、索引和擷取資訊。</p>
 <p>Milvus 可讓您透過集合模式指定搜尋資料模型，組織非結構化資料、其密集或稀疏向量表示法，以及結構化的元資料。無論您處理的是文字、影像或其他資料類型，這份實務指南將協助您了解並應用關鍵的模式概念，以便在實務中設計搜尋資料模型。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
    </span> <span class="img-wrapper"> <span>資料模型剖析</span> </span></p>
 <h2 id="Data-Model" class="common-anchor-header">資料模型<button data-href="#Data-Model" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,7 +70,7 @@ summary: >-
 <li><p><strong>搜尋方法：</strong>根據使用者將執行的查詢類型，選擇適當的搜尋技術。不同的方法可達到不同的目的，而且通常可以結合使用，以獲得更強大的結果：</p>
 <ul>
 <li><p><strong>語意搜尋</strong>：使用密集向量相似性來尋找意義相似的項目，適用於文字或影像等非結構化資料。</p></li>
-<li><p><strong>全文搜尋</strong>：使用關鍵字比對來補充語意搜尋。  全文檢索可利用詞彙分析，避免將長字分割成零碎的詞組，在檢索過程中掌握特殊詞彙。</p></li>
+<li><p><strong>全文搜尋</strong>：使用關鍵字比對來補充語意搜尋。  全文檢索可利用詞彙分析，避免將長字分割成零碎的詞組，在檢索時可掌握特殊詞彙。</p></li>
 <li><p><strong>元資料篩選</strong>：在向量搜尋之上，應用日期範圍、類別或標籤等限制條件。</p></li>
 </ul></li>
 </ul>

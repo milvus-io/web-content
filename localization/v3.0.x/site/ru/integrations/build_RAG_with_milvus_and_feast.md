@@ -51,10 +51,10 @@ title: Построение RAG с помощью Milvus и Feast
       </svg>
     </button></h1><p>Feast решает несколько общих проблем в этом потоке:</p>
 <ol>
-<li><strong>Онлайн-поиск:</strong> Во время вывода LLM часто требуется доступ к данным, которые не всегда доступны и должны быть предварительно вычислены из других источников данных.<ul>
+<li><strong>Онлайн-поиск:</strong> Во время выводов LLM часто требуется доступ к данным, которые не всегда доступны и должны быть предварительно вычислены из других источников данных.<ul>
 <li>Feast управляет развертыванием в различных онлайн-хранилищах (например, Milvus, DynamoDB, Redis, Google Cloud Datastore) и обеспечивает постоянный <em>доступ к</em> необходимым функциям и <em>их свежее вычисление</em> во время вывода.</li>
 </ul></li>
-<li><strong>Векторный поиск:</strong> В Feast встроена поддержка векторного поиска сходства, который легко настраивается декларативно, чтобы пользователи могли сосредоточиться на своем приложении. Milvus предоставляет мощные и эффективные возможности векторного поиска по сходству.</li>
+<li><strong>Векторный поиск:</strong> В Feast встроена поддержка векторного поиска сходства, которая легко настраивается декларативно, чтобы пользователи могли сосредоточиться на своем приложении. Milvus предоставляет мощные и эффективные возможности векторного поиска по сходству.</li>
 <li><strong>Более богатые структурированные данные:</strong> Наряду с векторным поиском, пользователи могут запрашивать стандартные структурированные поля для введения в контекст LLM для улучшения пользовательского опыта.</li>
 <li><strong>Функциональность/контекст и версионность:</strong> Различные команды в организации часто не могут повторно использовать данные в разных проектах и сервисах, что приводит к дублированию логики приложений. Модели имеют зависимости от данных, которые должны быть версионированы, например, при проведении A/B-тестов на версиях модели/предложения.<ul>
 <li>Feast позволяет находить и совместно использовать ранее использованные документы, функции и версионировать наборы данных.</li>
@@ -64,7 +64,7 @@ title: Построение RAG с помощью Milvus и Feast
 <ol>
 <li>Развернем локальное хранилище функций с <strong>автономным хранилищем файлов Parquet</strong> и <strong>онлайн-хранилищем Milvus</strong>.</li>
 <li>Записывать/материализовывать данные (т. е. значения признаков) из офлайн-хранилища (файл parquet) в онлайн-хранилище (Milvus).</li>
-<li>Подача признаков с помощью Feast SDK с возможностями векторного поиска Milvus.</li>
+<li>Выдача признаков с помощью Feast SDK с возможностями векторного поиска Milvus.</li>
 <li>Внесите документ в контекст LLM, чтобы ответить на вопросы.</li>
 </ol>
 <div class="alert note">
@@ -85,7 +85,22 @@ title: Построение RAG с помощью Milvus и Feast
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies" class="common-anchor-header">Зависимости</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&#x27;feast[milvus]&#x27;</span> openai -U -q</span>
+    </button></h2><h3 id="Dependencies" class="common-anchor-header">Зависимости<button data-href="#Dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&#x27;feast[milvus]&#x27;</span> openai -U -q</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Если вы используете Google Colab, то для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
@@ -124,7 +139,22 @@ llm_client = OpenAI(
 │── feature_store.yaml     <span class="hljs-comment"># Configures Milvus and feature store settings</span>
 │── test_workflow.py       <span class="hljs-comment"># Example workflow for Feast operations</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Key-Configuration-Files" class="common-anchor-header">Файлы конфигурации ключей</h3><h4 id="1-featurestoreyaml" class="common-anchor-header">1. feature_store.yaml</h4><p>Этот файл настраивает инфраструктуру хранилища функций:</p>
+<h3 id="Key-Configuration-Files" class="common-anchor-header">Файлы конфигурации ключей<button data-href="#Key-Configuration-Files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="1-featurestoreyaml" class="common-anchor-header">1. feature_store.yaml</h4><p>Этот файл настраивает инфраструктуру хранилища функций:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">project:</span> <span class="hljs-string">rag</span>
 <span class="hljs-attr">provider:</span> <span class="hljs-string">local</span>
 <span class="hljs-attr">registry:</span> <span class="hljs-string">data/registry.db</span>
@@ -424,7 +454,22 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="common-anchor-header">1. Встраивание запроса с помощью PyTorch и трансформаторов предложений</h3><p>Во время вывода (например, когда пользователь отправляет сообщение в чат) нам нужно внедрить входной текст. Это можно представить как преобразование входных данных. В этом примере мы будем использовать небольшой трансформатор предложений из Hugging Face.</p>
+    </button></h2><h3 id="1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="common-anchor-header">1. Встраивание запроса с помощью PyTorch и трансформаторов предложений<button data-href="#1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Во время вывода (например, когда пользователь отправляет сообщение в чат) нам нужно встроить входной текст. Это можно представить как преобразование входных данных. В этом примере мы будем использовать небольшой трансформатор предложений из Hugging Face.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> feast <span class="hljs-keyword">import</span> FeatureStore
@@ -460,7 +505,22 @@ MODEL = <span class="hljs-string">&quot;sentence-transformers/all-MiniLM-L6-v2&q
     sentence_embeddings = F.normalize(sentence_embeddings, p=<span class="hljs-number">2</span>, dim=<span class="hljs-number">1</span>)
     <span class="hljs-keyword">return</span> sentence_embeddings
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2. Получение векторов и данных в реальном времени для интерактивного вывода</h3><p>После преобразования запроса во вставку следующим шагом будет извлечение соответствующих документов из хранилища векторов. Во время вывода мы используем поиск векторного сходства, чтобы найти наиболее релевантные вкрапления документов, хранящиеся в онлайн-магазине признаков, используя <code translate="no">retrieve_online_documents_v2()</code>. Затем эти векторы признаков могут быть введены в контекст LLM.</p>
+<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2. Получение векторов и данных в реальном времени для интерактивного вывода<button data-href="#2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>После преобразования запроса во вставку следующим шагом будет извлечение соответствующих документов из хранилища векторов. Во время вывода мы используем поиск векторного сходства, чтобы найти наиболее релевантные вкрапления документов, хранящиеся в онлайн-магазине признаков, используя <code translate="no">retrieve_online_documents_v2()</code>. Затем эти векторы признаков могут быть введены в контекст LLM.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;Which city has the largest population in New York?&quot;</span>
 
 tokenizer = AutoTokenizer.from_pretrained(TOKENIZER)
@@ -539,7 +599,22 @@ display(context_data)
   </tbody>
 </table>
 </div>
-<h3 id="3-Formatting-Retrieved-Documents-for-RAG-Context" class="common-anchor-header">3. Форматирование полученных документов для контекста RAG</h3><p>После извлечения релевантных документов нам необходимо отформатировать данные в структурированный контекст, который может быть эффективно использован в последующих приложениях. Этот шаг гарантирует, что извлеченная информация чиста, организована и готова к интеграции в конвейер RAG.</p>
+<h3 id="3-Formatting-Retrieved-Documents-for-RAG-Context" class="common-anchor-header">3. Форматирование полученных документов для контекста RAG<button data-href="#3-Formatting-Retrieved-Documents-for-RAG-Context" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>После извлечения релевантных документов нам необходимо отформатировать данные в структурированный контекст, который может быть эффективно использован в последующих приложениях. Этот шаг гарантирует, что извлеченная информация чиста, организована и готова к интеграции в конвейер RAG.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">format_documents</span>(<span class="hljs-params">context_df</span>):
     output_context = <span class="hljs-string">&quot;&quot;</span>
     unique_documents = context_df.drop_duplicates().apply(
@@ -566,7 +641,22 @@ New York City traces its origins to Fort Amsterdam and a trading post founded on
 Anchored by Wall Street in the Financial District of Lower Manhattan, New York City has been called both the world's premier financial and fintech center and the most economically powerful city in the world. As of 2022, the New York metropolitan area is the largest metropolitan economy in the world with a gross metropolitan product of over US$2.16 trillion. If the New York metropolitan area were its own country, it would have the tenth-largest economy in the world. The city is home to the world's two largest stock exchanges by market capitalization of their listed companies: the New York Stock Exchange and Nasdaq. New York City is an established safe haven for global investors. As of 2023, New York City is the most expensive city in the world for expatriates to live. New York City is home to the highest number of billionaires, individuals of ultra-high net worth (greater than US$30 million), and millionaires of any city in the world.}
 ****END DOCUMENT 0****
 </code></pre>
-<h3 id="4-Generating-Responses-Using-Retrieved-Context" class="common-anchor-header">4. Формирование ответов на основе извлеченного контекста</h3><p>Теперь, когда мы отформатировали извлеченные документы, мы можем интегрировать их в структурированную подсказку для генерации ответа. Этот шаг гарантирует, что помощник будет опираться только на полученную информацию и избежит галлюцинаций в ответах.</p>
+<h3 id="4-Generating-Responses-Using-Retrieved-Context" class="common-anchor-header">4. Формирование ответов на основе извлеченного контекста<button data-href="#4-Generating-Responses-Using-Retrieved-Context" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Теперь, когда мы отформатировали извлеченные документы, мы можем интегрировать их в структурированную подсказку для генерации ответа. Этот шаг гарантирует, что помощник будет опираться только на полученную информацию и избежит галлюцинаций в ответах.</p>
 <pre><code translate="no" class="language-python">FULL_PROMPT = <span class="hljs-string">f&quot;&quot;&quot;
 You are an assistant for answering questions about states. You will be provided documentation from Wikipedia. Provide a conversational answer.
 If you don&#x27;t know the answer, just say &quot;I do not know.&quot; Don&#x27;t make up an answer.

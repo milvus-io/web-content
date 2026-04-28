@@ -241,7 +241,7 @@ summary: 了解如何为 Milvus 配置代理。
     </button></h2><table id="proxy.maxDimension">
   <thead>
     <tr>
-      <th class="width80">描述</th>
+      <th class="width80">说明</th>
       <th class="width20">默认值</th> 
     </tr>
   </thead>
@@ -568,7 +568,7 @@ summary: 了解如何为 Milvus 配置代理。
   </thead>
   <tbody>
     <tr>
-      <td>        单个访问日志文件允许的最大大小。如果日志文件大小达到此限制，将触发一个轮转进程。该过程会封存当前访问日志文件，创建新的日志文件，并清除原始日志文件的内容。单位：MB：MB。      </td>
+      <td>        单个访问日志文件允许的最大大小。如果日志文件大小达到此限制，将触发一个轮转进程。该过程会封存当前的访问日志文件，创建新的日志文件，并清除原始日志文件的内容。单位：MB：MB。      </td>
       <td>64</td>
     </tr>
   </tbody>

@@ -39,7 +39,7 @@ beta: Milvus 2.6.x
     </button></h2><ul>
 <li>Milvus 2.6より、Woodpeckerはロギングサービスとして順序付き書き込みとリカバリを提供するオプションのWALです。</li>
 <li>メッセージキューの選択肢として、Pulsar/Kafkaと同様の動作をし、設定により有効にすることができます。</li>
-<li>つのストレージ・バックエンドがサポートされています：ローカル・ファイル・システム（<code translate="no">local</code> ）とオブジェクト・ストレージ（<code translate="no">minio</code>/S3互換）。</li>
+<li>つのストレージ・バックエンドがサポートされている：ローカル・ファイル・システム（<code translate="no">local</code> ）とオブジェクト・ストレージ（<code translate="no">minio</code>/S3互換）。</li>
 </ul>
 <h2 id="Quick-start" class="common-anchor-header">クイック・スタート<button data-href="#Quick-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,7 +60,7 @@ beta: Milvus 2.6.x
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">woodpecker</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>注意: 実行中のクラスタの<code translate="no">mq.type</code> を切り替えるには、アップグレード操作が必要です。アップグレード手順を注意深く実行し、本番環境に切り替える前に新しいクラスタで検証してください。</p>
+<p>注意：実行中のクラスタに対して<code translate="no">mq.type</code> を切り替えるには、アップグレード操作が必要です。アップグレード手順に注意深く従い、本番環境に切り替える前に新しいクラスタで検証してください。</p>
 <h2 id="Configuration" class="common-anchor-header">構成<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -351,7 +351,7 @@ docker restart milvus-standalone
 </ul></li>
 <li>クライアント/アプリケーション側<ul>
 <li>より大きなバッチサイズと、より多くの同時ライター/クライアントを使用する。</li>
-<li>リフレッシュ/インデックス構築のタイミングを制御し（トリガーがかかる前にバッチアップする）、小さな書き込みが頻発しないようにする。</li>
+<li>リフレッシュ/インデックス構築のタイミングを制御し（トリガー前にバッチアップ）、頻繁な小さな書き込みを避ける。</li>
 </ul></li>
 </ul>
 <p>バッチ挿入デモ</p>
@@ -411,7 +411,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Woodpeckerは、スループット、コスト、レイテンシのトレードオフを考慮したオブジェクトストレージ用に設計されたクラウドネイティブのWALです。現在サポートされている軽量組み込みモードは、コストとスループットの最適化を優先しており、ほとんどのシナリオでは、個々の書き込み要求に対して低レイテンシを要求するのではなく、一定時間内にデータを書き込む必要があるだけだからです。そのため、Woodpeckerはバッチ書き込みを採用しており、ローカルファイルシステムストレージバックエンドではデフォルトで10ms、MinIOライクストレージバックエンドでは200msの間隔で書き込みを行います。低速の書き込み操作では、最大レイテンシはインターバル時間＋フラッシュ時間に等しくなります。</p>
+    </button></h2><p>Woodpeckerは、スループット、コスト、レイテンシのトレードオフを考慮したオブジェクトストレージ用に設計されたクラウドネイティブのWALです。現在サポートされている軽量組み込みモードでは、コストとスループットの最適化を優先しています。ほとんどのシナリオでは、個々の書き込み要求に対して低レイテンシを要求するのではなく、一定時間内にデータを書き込む必要があるだけだからです。そのため、Woodpeckerはバッチ書き込みを採用しており、ローカルファイルシステムストレージバックエンドではデフォルトで10ms、MinIOライクストレージバックエンドでは200msの間隔で書き込みを行います。低速の書き込み操作では、最大レイテンシはインターバル時間＋フラッシュ時間に等しくなります。</p>
 <p>バッチ挿入は、時間間隔だけでなく、バッチサイズ（デフォルトは2MB）によってもトリガーされることに注意。</p>
 <p>アーキテクチャ、展開モード（MemoryBuffer / QuorumBuffer）、パフォーマンスの詳細については、<a href="/docs/ja/woodpecker_architecture.md">Woodpeckerアーキテクチャを</a>参照してください。</p>
 <p>パラメータの詳細については、Woodpecker<a href="https://github.com/zilliztech/woodpecker">GitHub</a>リポジトリを参照してください。</p>

@@ -1008,7 +1008,7 @@ summary: Imparare a configurare i comuni per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        tipo di filtro bloom, supporta BasicBloomFilter e BlockedBloomFilter      </td>
+      <td>        Tipo di filtro bloom, supporta BasicBloomFilter e BlockedBloomFilter      </td>
       <td>FiltroBloomBloomBloomBloomBloomBloomBloomBloomBloomFilter</td>
     </tr>
   </tbody>
@@ -1124,7 +1124,7 @@ summary: Imparare a configurare i comuni per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        se true, esegue la compattazione del clustering e il potenziamento dei segmenti sul campo chiave della partizione      </td>
+      <td>        se vero, esegue la compattazione del clustering e il prune dei segmenti sul campo chiave della partizione      </td>
       <td>falso</td>
     </tr>
   </tbody>

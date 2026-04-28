@@ -47,7 +47,7 @@ summary: >-
 <p>Das folgende Diagramm zeigt, wie binäre Vektoren das Vorhandensein von Schlüsselwörtern in Textinhalten darstellen. In diesem Beispiel wird ein 10-dimensionaler Binärvektor verwendet, um zwei verschiedene Texte<strong>(Text 1</strong> und <strong>Text 2</strong>) darzustellen, wobei jede Dimension einem Wort des Vokabulars entspricht: 1 bedeutet, dass das Wort im Text vorhanden ist, während 0 sein Fehlen anzeigt.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
    </span> <span class="img-wrapper"> <span>Binärer Vektor</span> </span></p>
 <p>Binäre Vektoren haben die folgenden Eigenschaften:</p>
 <ul>
@@ -60,7 +60,7 @@ summary: >-
 <p>Nach der binären Vektorisierung können die Daten in Milvus zur Verwaltung und zum Abruf der Vektoren gespeichert werden. Das folgende Diagramm zeigt den grundlegenden Prozess.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
    </span> <span class="img-wrapper"> <span>Binäre Vektoren verwenden</span> </span></p>
 <div class="alert note">
 <p>Obwohl sich binäre Vektoren in bestimmten Szenarien hervorragend eignen, sind sie in ihrer Aussagekraft eingeschränkt, so dass es schwierig ist, komplexe semantische Beziehungen zu erfassen. Daher werden binäre Vektoren in realen Szenarien oft zusammen mit anderen Vektortypen verwendet, um ein Gleichgewicht zwischen Effizienz und Ausdruckskraft herzustellen. Weitere Informationen finden Sie unter <a href="/docs/de/dense-vector.md">Dense Vector</a> und <a href="/docs/de/sparse_vector.md">Sparse Vector</a>.</p>
@@ -80,10 +80,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Vektorfeld hinzufügen</h3><p>Um binäre Vektoren in Milvus zu verwenden, definieren Sie zunächst ein Vektorfeld zum Speichern von binären Vektoren, wenn Sie eine Sammlung erstellen. Dieser Prozess beinhaltet:</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Vektorfeld hinzufügen<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um binäre Vektoren in Milvus zu verwenden, definieren Sie zunächst ein Vektorfeld zum Speichern von binären Vektoren, wenn Sie eine Sammlung erstellen. Dieser Prozess beinhaltet:</p>
 <ol>
 <li><p>Einstellung von <code translate="no">datatype</code> auf den unterstützten binären Vektordatentyp, d.h. <code translate="no">BINARY_VECTOR</code>.</p></li>
-<li><p>Angeben der Dimensionen des Vektors mit dem Parameter <code translate="no">dim</code>. Beachten Sie, dass <code translate="no">dim</code> ein Vielfaches von 8 sein muss, da binäre Vektoren beim Einfügen in ein Byte-Array umgewandelt werden müssen. Alle 8 booleschen Werte (0 oder 1) werden in 1 Byte gepackt. Wenn zum Beispiel <code translate="no">dim=128</code> verwendet wird, ist ein 16-Byte-Array für das Einfügen erforderlich.</p></li>
+<li><p>Angeben der Dimensionen des Vektors mit dem Parameter <code translate="no">dim</code>. Beachten Sie, dass <code translate="no">dim</code> ein Vielfaches von 8 sein muss, da binäre Vektoren beim Einfügen in ein Byte-Array umgewandelt werden müssen. Alle 8 booleschen Werte (0 oder 1) werden in 1 Byte gepackt. Wenn zum Beispiel <code translate="no">dim=128</code> verwendet wird, ist ein 16-Byte-Array zum Einfügen erforderlich.</p></li>
 </ol>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -198,7 +213,22 @@ schema.WithField(entity.NewField().
 
 <button class="copy-code-btn"></button></code></pre>
 <p>In diesem Beispiel wird ein Vektorfeld mit dem Namen <code translate="no">binary_vector</code> zum Speichern von binären Vektoren hinzugefügt. Der Datentyp dieses Feldes ist <code translate="no">BINARY_VECTOR</code>, mit einer Dimension von 128.</p>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Setzen von Indexparametern für das Vektorfeld</h3><p>Um die Suche zu beschleunigen, muss ein Index für das binäre Vektorfeld erstellt werden. Die Indexierung kann die Abfrageeffizienz von großen Vektordaten erheblich verbessern.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Setzen von Indexparametern für das Vektorfeld<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um die Suche zu beschleunigen, muss ein Index für das binäre Vektorfeld erstellt werden. Die Indexierung kann die Abfrageeffizienz von großen Vektordaten erheblich verbessern.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -244,9 +274,24 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Im obigen Beispiel wird ein Index mit dem Namen <code translate="no">binary_vector_index</code> für das Feld <code translate="no">binary_vector</code> erstellt, wobei der Indextyp <code translate="no">AUTOINDEX</code> verwendet wird. <code translate="no">metric_type</code> ist auf <code translate="no">HAMMING</code> gesetzt, was anzeigt, dass die Hamming-Distanz für die Ähnlichkeitsmessung verwendet wird.</p>
-<p>Milvus bietet verschiedene Indexarten für eine bessere Vektorsuche. AUTOINDEX ist ein spezieller Indextyp, der entwickelt wurde, um die Lernkurve der Vektorsuche zu glätten. Sie können aus einer Vielzahl von Index-Typen wählen. Einzelheiten finden Sie unter <a href="/docs/de/index-explained.md">Index erklärt</a>.</p>
+<p>Milvus bietet verschiedene Indexarten für eine bessere Vektorsuche. AUTOINDEX ist ein spezieller Indextyp, der entwickelt wurde, um die Lernkurve der Vektorsuche zu glätten. Sie können aus einer Vielzahl von Index-Typen wählen. Details finden Sie unter <a href="/docs/de/index-explained.md">Index erklärt</a>.</p>
 <p>Außerdem unterstützt Milvus andere Ähnlichkeitsmetriken für binäre Vektoren. Weitere Informationen finden Sie unter <a href="/docs/de/metric.md">Metrik-Typen</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">Sammlung erstellen</h3><p>Sobald die Einstellungen für binäre Vektoren und Indizes abgeschlossen sind, erstellen Sie eine Sammlung, die binäre Vektoren enthält. Das folgende Beispiel verwendet die Methode <code translate="no">create_collection</code>, um eine Sammlung mit dem Namen <code translate="no">my_collection</code> zu erstellen.</p>
+<h3 id="Create-collection" class="common-anchor-header">Sammlung erstellen<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sobald die Einstellungen für binäre Vektoren und Indizes abgeschlossen sind, erstellen Sie eine Sammlung, die binäre Vektoren enthält. Das folgende Beispiel verwendet die Methode <code translate="no">create_collection</code>, um eine Sammlung mit dem Namen <code translate="no">my_collection</code> zu erstellen.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -299,7 +344,22 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Daten einfügen</h3><p>Nachdem Sie die Sammlung erstellt haben, fügen Sie mit der Methode <code translate="no">insert</code> Daten hinzu, die binäre Vektoren enthalten. Beachten Sie, dass binäre Vektoren in Form eines Byte-Arrays bereitgestellt werden sollten, wobei jedes Byte für 8 boolesche Werte steht.</p>
+<h3 id="Insert-data" class="common-anchor-header">Daten einfügen<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nachdem Sie die Sammlung erstellt haben, fügen Sie mit der Methode <code translate="no">insert</code> Daten hinzu, die binäre Vektoren enthalten. Beachten Sie, dass binäre Vektoren in Form eines Byte-Arrays bereitgestellt werden sollten, wobei jedes Byte für 8 boolesche Werte steht.</p>
 <p>Für einen 128-dimensionalen Binärvektor ist beispielsweise ein 16-Byte-Array erforderlich (da 128 Bits ÷ 8 Bits/Byte = 16 Bytes). Im Folgenden finden Sie einen Beispielcode zum Einfügen von Daten:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -394,7 +454,22 @@ client.<span class="hljs-title function_">insert</span>({
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Ähnlichkeitssuche durchführen</h3><p>Die Ähnlichkeitssuche ist eine der Hauptfunktionen von Milvus, die es Ihnen ermöglicht, schnell Daten zu finden, die einem Abfragevektor am ähnlichsten sind, basierend auf dem Abstand zwischen den Vektoren. Um eine Ähnlichkeitssuche mit binären Vektoren durchzuführen, bereiten Sie den Abfragevektor und die Suchparameter vor und rufen dann die Methode <code translate="no">search</code> auf.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">Ähnlichkeitssuche durchführen<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Die Ähnlichkeitssuche ist eine der Hauptfunktionen von Milvus, die es Ihnen ermöglicht, schnell Daten zu finden, die einem Abfragevektor am ähnlichsten sind, basierend auf dem Abstand zwischen den Vektoren. Um eine Ähnlichkeitssuche mit binären Vektoren durchzuführen, bereiten Sie den Abfragevektor und die Suchparameter vor und rufen dann die Methode <code translate="no">search</code> auf.</p>
 <p>Während der Suchoperationen müssen die binären Vektoren auch in Form eines Byte-Arrays bereitgestellt werden. Stellen Sie sicher, dass die Dimensionalität des Abfragevektors mit der bei der Definition von <code translate="no">dim</code> angegebenen Dimension übereinstimmt und dass alle 8 booleschen Werte in 1 Byte konvertiert werden.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

@@ -1,6 +1,6 @@
 ---
 id: agents_overview.md
-title: Milvus 的 AGENTS.md
+title: 適用於 Milvus 的 AGENTS.md
 summary: 使用 PyMilvus 生成、審查或調試 Milvus 向量資料庫代碼的人工智能編碼代理的規則和模式。
 ---
 <h1 id="AGENTSmd--Milvus" class="common-anchor-header">AGENTS.md - Milvus<button data-href="#AGENTSmd--Milvus" class="anchor-icon" translate="no">

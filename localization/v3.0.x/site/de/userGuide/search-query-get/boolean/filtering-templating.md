@@ -8,7 +8,7 @@ summary: >-
   einen Mechanismus zur Schablonierung von Filterausdrücken ein, der die
   Effizienz verbessern soll, indem er die Zeit für das Parsen komplexer
   Ausdrücke reduziert. Auf dieser Seite wird die Verwendung von
-  Filterausdrucksvorlagen bei Such-, Abfrage- und Löschvorgängen erläutert.
+  Filterausdruckvorlagen bei Such-, Abfrage- und Löschvorgängen erläutert.
 ---
 <h1 id="Filter-Templating" class="common-anchor-header">Filter-Vorlagen<button data-href="#Filter-Templating" class="anchor-icon" translate="no">
       <svg translate="no"

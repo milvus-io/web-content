@@ -25,7 +25,7 @@ title: 向量可視化
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>在這個範例中，我們將展示如何使用<a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE</a> 將 Milvus 中的嵌入（向量）可視化。</p>
-<p>減維技術，例如 t-SNE，對於在二維或三維空間可視化複雜的高維資料，同時保留局部結構，是非常有價值的。這有助於模式識別、增強對特徵關係的理解，並方便解釋機器學習模型的結果。此外，t-SNE 還能透過視覺上的聚類結果比較來協助演算法評估，簡化對非專業觀眾的資料呈現，並透過低維表示來降低計算成本。透過這些應用，t-SNE 不僅有助於深入瞭解資料集，還能支援更明智的決策過程。</p>
+<p>減維技術，例如 t-SNE，對於在二維或三維空間可視化複雜的高維資料，同時保留局部結構，是非常有價值的。這有助於模式識別、增強對特徵關係的理解，並方便解釋機器學習模型的結果。此外，t-SNE 還能透過直觀地比較聚類結果來協助演算法評估，簡化非專業觀眾的資料呈現，並透過低維表示來降低計算成本。透過這些應用，t-SNE 不僅有助於深入瞭解資料集，還能支援更明智的決策過程。</p>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

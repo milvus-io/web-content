@@ -36,7 +36,7 @@ summary: 了解 Milvus 的时间同步系统。
       </svg>
     </button></h2><p>Milvus 中的事件一般可分为两类：</p>
 <ul>
-<li><p>数据定义语言（DDL）事件：创建/删除 Collections、创建/删除分区等。</p></li>
+<li><p>数据定义语言 (DDL) 事件：创建/删除 Collections、创建/删除分区等。</p></li>
 <li><p>数据操作语言（DML）事件：插入、搜索等。</p></li>
 </ul>
 <p>任何事件，不管是 DDL 还是 DML 事件，都标有时间戳，可以表明事件发生的时间。</p>
@@ -61,9 +61,9 @@ summary: 了解 Milvus 的时间同步系统。
 <li><p>一个空的 Collections<code translate="no">C0</code> at<code translate="no">t2</code>.</p></li>
 <li><p>数据<code translate="no">A1</code> ，网址<code translate="no">t7</code> 。</p></li>
 <li><p>数据<code translate="no">A1</code> 和<code translate="no">A2</code> 均位于<code translate="no">t12</code> 。</p></li>
-<li><p>只有数据<code translate="no">A2</code> at<code translate="no">t17</code> （因为数据<code translate="no">A1</code> 在此之前已从 Collections 中删除）。</p></li>
+<li><p>只有数据<code translate="no">A2</code> at<code translate="no">t17</code> （因为在此之前数据<code translate="no">A1</code> 已从 Collections 中删除）。</p></li>
 </ul>
-<p>当只有一个节点时，这种理想情况很容易实现。然而，Milvus 是一个分布式向量数据库，为了确保不同节点中的所有 DML 和 DDL 操作都能保持有序，Milvus 需要解决以下两个问题：</p>
+<p>当只有一个节点时，这种理想情况很容易实现。但是，Milvus 是一个分布式向量数据库，为了确保不同节点中的所有 DML 和 DDL 操作都能保持有序，Milvus 需要解决以下两个问题：</p>
 <ol>
 <li><p>上面例子中的两个用户如果在不同的节点上，他们的时间时钟是不同的。例如，如果用户 2 比用户 1 晚 24 小时，那么用户 1 的所有操作都要到第二天才能被用户 2 看到。</p></li>
 <li><p>可能存在网络延迟。如果用户 2 在<code translate="no">t17</code> 对 Collections<code translate="no">C0</code> 进行搜索，Milvus 应该能保证<code translate="no">t17</code> 之前的所有操作都被成功处理并完成。如果<code translate="no">t15</code> 上的删除操作因网络延迟而延迟，那么用户 2 在<code translate="no">t17</code> 上进行搜索时，很有可能仍能看到本应删除的数据<code translate="no">A1</code> 。</p></li>
@@ -89,7 +89,7 @@ summary: 了解 Milvus 的时间同步系统。
 <p>TSO 时间戳是一种<code translate="no">uint64</code> 值，由物理部分和逻辑部分组成。下图展示了时间戳的格式。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
    </span> <span class="img-wrapper"> <span>TSO_Timestamp</span>. </span></p>
 <p>如图所示，开头的 46 位是物理部分，即以毫秒为单位的 UTC 时间。最后 18 位是逻辑部分。</p>
 <h2 id="Time-synchronization-system-timetick" class="common-anchor-header">时间同步系统（timetick）<button data-href="#Time-synchronization-system-timetick" class="anchor-icon" translate="no">
@@ -114,19 +114,19 @@ summary: 了解 Milvus 的时间同步系统。
   <code translate="no">MsgStream</code> 是消息队列的封装器，在 Milvus 2.0 中默认为 Pulsar。</div>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
    </span> <span class="img-wrapper"> <span>timesync_proxy_insert_msg</span> </span></p>
 <p>一般原则是，在<code translate="no">MsgStream</code> 中，来自同一代理的<code translate="no">InsertMsgs</code> 的时间戳必须是递增的。但是，来自不同代理的<code translate="no">InsertMsgs</code> 的时间戳却没有这样的规则。</p>
 <p>下图是<code translate="no">InsertMsgs</code> 在<code translate="no">MsgStream</code> 中的示例。该代码段包含五个<code translate="no">InsertMsgs</code> ，其中三个来自<code translate="no">Proxy1</code> ，其余来自<code translate="no">Proxy2</code> 。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
    </span> <span class="img-wrapper"> <span>msgstream</span> </span></p>
 <p>来自<code translate="no">Proxy1</code> 的三个<code translate="no">InsertMsgs</code> 的时间戳是递增的，来自<code translate="no">Proxy2</code> 的两个<code translate="no">InsertMsgs</code> 的时间戳也是递增的。但是，<code translate="no">Proxy1</code> 和<code translate="no">Proxy2</code> <code translate="no">InsertMsgs</code> 之间没有特定的顺序。</p>
-<p>一种可能的情况是，当从<code translate="no">Proxy2</code> 读取时间戳为<code translate="no">110</code> 的信息时，Milvus 发现从<code translate="no">Proxy1</code> 读取时间戳为<code translate="no">80</code> 的信息仍在<code translate="no">MsgStream</code> 中。因此，Milvus 引入了一个时间同步系统 timetick，以确保从<code translate="no">MsgStream</code> 读取信息时，必须消耗掉所有时间戳值较小的信息。</p>
+<p>一种可能的情况是，当从<code translate="no">Proxy2</code> 读取时间戳为<code translate="no">110</code> 的信息时，Milvus 发现从<code translate="no">Proxy1</code> 读取时间戳为<code translate="no">80</code> 的信息仍在<code translate="no">MsgStream</code> 中。因此，Milvus 引入了时间同步系统 timetick，以确保从<code translate="no">MsgStream</code> 读取信息时，必须消耗掉所有时间戳值较小的信息。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
    </span> <span class="img-wrapper"> <span>时间同步</span> </span></p>
 <p>如上图所示、</p>
 <ul>
@@ -137,9 +137,9 @@ summary: 了解 Milvus 的时间同步系统。
 <p>下图是<code translate="no">Msgstream</code> 插入时间刻度的示例。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
    </span> <span class="img-wrapper"> <span>时间戳</span> </span></p>
-<p><code translate="no">MsgStream</code> 根据时间刻度分批处理报文，以确保输出的报文符合时间戳的要求。在上例中，除了来自 的 外，它将在 处消耗所有记录，因为它在最新的 TimeTick 之后。<code translate="no">Proxy2</code> <code translate="no">InsertMsgs</code> <code translate="no">Timestamp: 120</code> </p>
+<p><code translate="no">MsgStream</code> 根据时间刻度分批处理报文，以确保输出的报文符合时间戳的要求。在上例中，除了来自<code translate="no">Proxy2</code> 的<code translate="no">InsertMsgs</code> 外，它将在<code translate="no">Timestamp: 120</code> 处消耗所有记录，因为它在最新的 TimeTick 之后。</p>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,5 +157,5 @@ summary: 了解 Milvus 的时间同步系统。
       </svg>
     </button></h2><ul>
 <li>了解<a href="/docs/zh/timestamp.md">时间戳</a>的概念。</li>
-<li>了解 Milvus 的<a href="/docs/zh/data_processing.md">数据处理工作流程</a>。</li>
+<li>了解 Milvus 中的<a href="/docs/zh/data_processing.md">数据处理工作流程</a>。</li>
 </ul>

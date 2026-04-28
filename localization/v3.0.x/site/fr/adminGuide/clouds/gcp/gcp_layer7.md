@@ -21,16 +21,46 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Comparé à un équilibreur de charge de couche 4, un équilibreur de charge de couche 7 offre des capacités d'équilibrage de charge et de mise en cache intelligentes et constitue un excellent choix pour les services natifs du nuage.</p>
+    </button></h1><p>Comparé à un équilibreur de charge de couche 4, un équilibreur de charge de couche 7 offre des capacités intelligentes d'équilibrage de charge et de mise en cache et constitue un excellent choix pour les services natifs du nuage.</p>
 <p>Ce guide vous guide dans la configuration d'un équilibreur de charge de couche 7 pour un cluster Milvus fonctionnant déjà derrière un équilibreur de charge de couche 4.</p>
-<h3 id="Before-your-start" class="common-anchor-header">Avant de commencer</h3><ul>
+<h3 id="Before-your-start" class="common-anchor-header">Avant de commencer<button data-href="#Before-your-start" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Un projet existe déjà dans votre compte GCP.</p>
 <p>Pour créer un projet, reportez-vous à la section <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Création et gestion de projets</a>. Le nom du projet utilisé dans ce guide est <strong>milvus-testing-nonprod</strong>.</p></li>
 <li><p>Vous avez installé localement <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> et <a href="https://helm.sh/docs/intro/install/">Helm</a>, ou vous avez décidé d'utiliser le <a href="https://cloud.google.com/shell">Cloud Shell</a> basé sur le navigateur à la place.</p></li>
 <li><p>Vous avez <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">initialisé le CLI gcloud</a> avec les informations d'identification de votre compte GCP.</p></li>
 <li><p>Vous avez <a href="/docs/fr/gcp.md">déployé un cluster Milvus derrière un équilibreur de charge de couche 4 sur GCP</a>.</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Modifier les configurations Milvus</h3><p>Ce guide suppose que vous avez déjà <a href="/docs/fr/gcp.md">déployé un cluster Milvus derrière un équilibreur de charge de couche 4 sur GCP</a>.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Modifier les configurations Milvus<button data-href="#Tweak-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ce guide suppose que vous avez déjà <a href="/docs/fr/gcp.md">déployé un cluster Milvus derrière un équilibreur de charge de couche 4 sur GCP</a>.</p>
 <p>Avant de configurer un équilibreur de charge de couche 7 pour ce cluster Milvus, exécutez la commande suivante pour supprimer l'équilibreur de charge de couche 4.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
@@ -44,7 +74,22 @@ summary: >-
       security:
         tlsMode: 1
 </span><button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">Configurer un point d'extrémité de contrôle de santé</h3><p>Pour assurer la disponibilité du service, l'équilibrage de charge de couche 7 sur GCP nécessite de sonder les conditions de santé du service backend. Par conséquent, nous devons configurer un BackendConfig pour envelopper le point final de contrôle de santé et associer le BackendConfig au service Milvus par le biais d'annotations.</p>
+<h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">Configurer un point d'extrémité de contrôle de santé<button data-href="#Set-up-a-health-check-endpoint" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour assurer la disponibilité du service, l'équilibrage de charge de couche 7 sur GCP nécessite de sonder les conditions de santé du service backend. Par conséquent, nous devons configurer un BackendConfig pour envelopper le point final de contrôle de santé et associer le BackendConfig au service Milvus par le biais d'annotations.</p>
 <p>L'extrait suivant représente les paramètres de BackendConfig. Enregistrez-le sous <code translate="no">backendconfig.yaml</code> pour une utilisation ultérieure.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">cloud.google.com/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">BackendConfig</span>
@@ -73,10 +118,25 @@ summary: >-
 <li><p>Pour ce qui est de la deuxième annotation, Milvus ne propose que le bilan de santé,</p>
 <p>Milvus n'offre que le point d'extrémité du bilan de santé via gRPC et HTTP/1. Nous devons configurer un BackendConfig pour envelopper le point d'extrémité du bilan de santé et l'associer au service Milvus afin que l'équilibreur de charge Layer-7 interroge ce point d'extrémité pour connaître l'état de santé de Milvus.</p></li>
 <li><p>Quant à la troisième annotation,</p>
-<p>Elle demande la création d'un groupe de points d'extrémité du réseau (NEG) après la création d'une entrée. Lorsque les NEG sont utilisés avec l'entrée GKE, le contrôleur d'entrée facilite la création de tous les aspects de l'équilibreur de charge. Cela inclut la création de l'adresse IP virtuelle, des règles de transfert, des contrôles de santé, des règles de pare-feu, etc. Pour plus de détails, consultez la <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing">documentation de Google Cloud</a>.</p></li>
+<p>Elle demande la création d'un groupe de points d'extrémité du réseau (NEG) après la création d'une entrée. Lorsque les NEG sont utilisés avec l'entrée GKE, le contrôleur d'entrée facilite la création de tous les aspects de l'équilibreur de charge. Cela inclut la création de l'adresse IP virtuelle, des règles de transfert, des contrôles de santé, des règles de pare-feu, etc. Pour plus d'informations, consultez la <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing">documentation de Google Cloud</a>.</p></li>
 </ul>
 </div>
-<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Préparer les certificats TLS</h3><p>Le protocole TLS nécessite des certificats pour fonctionner. <strong>Il existe deux façons de créer des certificats, à savoir les certificats autogérés et les certificats gérés par Google.</strong></p>
+<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Préparer les certificats TLS<button data-href="#Prepare-TLS-certificates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le protocole TLS nécessite des certificats pour fonctionner. <strong>Il existe deux façons de créer des certificats, à savoir les certificats autogérés et les certificats gérés par Google.</strong></p>
 <p>Ce guide utilise <strong>my-release.milvus.io</strong> comme nom de domaine pour accéder à notre service Milvus.</p>
 <h4 id="Create-self-managed-certificates" class="common-anchor-header">Créer des certificats autogérés</h4><p>Exécutez les commandes suivantes pour créer un certificat.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Generates a tls.key.</span>
@@ -116,7 +176,22 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
     status: Provisioning
 <button class="copy-code-btn"></button></code></pre>
 <p>Une fois que <strong>certificateStatus</strong> devient <strong>actif</strong>, vous êtes prêt à configurer l'équilibreur de charge.</p>
-<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Créer un Ingress pour générer un équilibreur de charge de couche 7</h3><p>Créez un fichier YAML avec l'un des extraits suivants.</p>
+<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Créer un Ingress pour générer un équilibreur de charge de couche 7<button data-href="#Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Créez un fichier YAML avec l'un des extraits suivants.</p>
 <ul>
 <li><p>Utilisation de certificats autogérés</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>

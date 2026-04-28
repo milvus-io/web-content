@@ -31,7 +31,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Dieses Notizbuch veranschaulicht die Verwendung des Milvus-Vektorspeichers in LlamaIndex und konzentriert sich dabei auf die Möglichkeiten der Metadatenfilterung. Sie werden lernen, wie man Dokumente mit Metadaten indiziert, Vektorsuchen mit den in LlamaIndex eingebauten Metadatenfiltern durchführt und die nativen Filterausdrücke von Milvus auf den Vektorspeicher anwendet.</p>
-<p>Am Ende dieses Notebooks werden Sie wissen, wie Sie die Filterfunktionen von Milvus nutzen können, um die Suchergebnisse auf der Grundlage von Dokument-Metadaten einzugrenzen.</p>
+<p>Am Ende dieses Notebooks werden Sie verstehen, wie Sie die Filterfunktionen von Milvus nutzen können, um die Suchergebnisse auf der Grundlage von Dokument-Metadaten einzugrenzen.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -181,7 +181,22 @@ result_nodes = retriever.retrieve(<span class="hljs-string">&quot;Books about li
 Life
 {'author': 'Keith Richards', 'genre': 'Memoir', 'year': 2010}
 </code></pre>
-<h3 id="Multiple-Metdata-Filters" class="common-anchor-header">Mehrere Metadaten-Filter</h3><p>Sie können auch mehrere Metadatenfilter kombinieren, um komplexere Abfragen zu erstellen. LlamaIndex unterstützt sowohl <code translate="no">AND</code> als auch <code translate="no">OR</code> Bedingungen, um Filter zu kombinieren. Dies ermöglicht eine präzisere und flexiblere Abfrage von Dokumenten auf der Grundlage ihrer Metadatenattribute.</p>
+<h3 id="Multiple-Metdata-Filters" class="common-anchor-header">Mehrere Metadaten-Filter<button data-href="#Multiple-Metdata-Filters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sie können auch mehrere Metadatenfilter kombinieren, um komplexere Abfragen zu erstellen. LlamaIndex unterstützt sowohl <code translate="no">AND</code> als auch <code translate="no">OR</code> Bedingungen, um Filter zu kombinieren. Dies ermöglicht eine präzisere und flexiblere Abfrage von Dokumenten auf der Grundlage ihrer Metadatenattribute.</p>
 <p><strong>Bedingung <code translate="no">AND</code></strong></p>
 <p>Probieren Sie ein Beispiel aus, bei dem nach Büchern gefiltert wird, die zwischen 1979 und 2010 veröffentlicht wurden (insbesondere, wenn 1979 &lt; Jahr ≤ 2010):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core.vector_stores <span class="hljs-keyword">import</span> FilterCondition

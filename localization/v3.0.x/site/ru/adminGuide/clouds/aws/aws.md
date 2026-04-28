@@ -40,11 +40,41 @@ summary: 'Узнайте, как развернуть кластер Milvus на
       </svg>
     </button></h2><p>В этом разделе описывается, как использовать Terraform для создания кластера Milvus.</p>
 <p><a href="https://www.terraform.io/">Terraform</a> - это программный инструмент "инфраструктура как код" (IaC). С помощью Terraform вы можете создавать инфраструктуру, используя декларативные файлы конфигурации.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Необходимые условия</h3><ul>
+<h3 id="Prerequisites" class="common-anchor-header">Необходимые условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Установите и настройте <a href="https://www.terraform.io/downloads.html">Terraform</a></p></li>
 <li><p>Установка и настройка <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html">AWS CLI</a></p></li>
 </ul>
-<h3 id="Prepare-configuration" class="common-anchor-header">Подготовьте конфигурацию</h3><p>Шаблонные файлы конфигурации можно скачать на <a href="https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view">Google Drive</a>.</p>
+<h3 id="Prepare-configuration" class="common-anchor-header">Подготовьте конфигурацию<button data-href="#Prepare-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Шаблонные файлы конфигурации можно скачать на <a href="https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view">Google Drive</a>.</p>
 <ul>
 <li><p><code translate="no">main.tf</code></p>
 <p>Этот файл содержит конфигурацию для инициализации кластера Milvus.</p></li>
@@ -56,7 +86,7 @@ summary: 'Узнайте, как развернуть кластер Milvus на
 <h4 id="Prepare-variablestf" class="common-anchor-header">Подготовка переменных.tf</h4><p>В этом разделе описывается конфигурация, которую содержит файл <code translate="no">variables.tf</code>.</p>
 <ul>
 <li><p>Количество узлов</p>
-<p>В следующем шаблоне объявлена переменная <code translate="no">index_count</code>, используемая для установки количества узлов индекса.</p>
+<p>В следующем шаблоне объявляется переменная <code translate="no">index_count</code>, используемая для установки количества узлов индекса.</p>
   <div class="alert note">Значение <code translate="no">index_count</code> должно быть больше или равно единице.</div>
 <pre><code translate="no" class="language-variables.tf">variable &quot;index_count&quot; {
   description = &quot;Amount of index instances to run&quot;
@@ -65,7 +95,7 @@ summary: 'Узнайте, как развернуть кластер Milvus на
 }
 </code></pre></li>
 <li><p>Тип экземпляра для типа узла</p>
-<p>Следующий шаблон объявляет переменную <code translate="no">index_ec2_type</code>, используемую для задания <a href="https://aws.amazon.com/ec2/instance-types/">типа экземпляра</a> для индексных узлов.</p>
+<p>В следующем шаблоне объявляется переменная <code translate="no">index_ec2_type</code>, используемая для задания <a href="https://aws.amazon.com/ec2/instance-types/">типа экземпляра</a> для индексных узлов.</p>
 <pre><code translate="no" class="language-variables.tf">variable &quot;index_ec2_type&quot; {
   description = &quot;Which server type&quot;
   type        = string
@@ -201,7 +231,22 @@ resource &quot;aws_route_table_association&quot; &quot;cluster_subnet_add_gatewa
 }
 </code></pre></li>
 </ul>
-<h3 id="Apply-the-configuration" class="common-anchor-header">Применение конфигурации</h3><ol>
+<h3 id="Apply-the-configuration" class="common-anchor-header">Применение конфигурации<button data-href="#Apply-the-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li><p>Откройте терминал и перейдите в папку, в которой хранится <code translate="no">main.tf</code>.</p></li>
 <li><p>Чтобы инициализировать конфигурацию, выполните команду <code translate="no">terraform init</code>.</p></li>
 <li><p>Чтобы применить конфигурацию, запустите <code translate="no">terraform apply</code> и введите <code translate="no">yes</code>, когда появится запрос.</p></li>
@@ -224,13 +269,58 @@ resource &quot;aws_route_table_association&quot; &quot;cluster_subnet_add_gatewa
       </svg>
     </button></h2><p>В этом разделе описывается, как с помощью Ansible запустить созданный вами кластер Milvus.</p>
 <p><a href="https://www.ansible.com/overview/how-ansible-works">Ansible</a> - это инструмент управления конфигурацией, используемый для автоматизации предоставления облака и управления конфигурацией.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Необходимые условия</h3><ul>
+<h3 id="Prerequisites" class="common-anchor-header">Необходимые условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Установлен<a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible Controller</a>.</li>
 </ul>
-<h3 id="Download-Ansible-Milvus-node-deployment-Playbook" class="common-anchor-header">Загрузите учебник Ansible Milvus node deployment Playbook</h3><p>Клонируйте репозиторий Milvus с GitHub, чтобы загрузить учебник Ansible Milvus node deployment Playbook.</p>
+<h3 id="Download-Ansible-Milvus-node-deployment-Playbook" class="common-anchor-header">Загрузите учебник Ansible Milvus node deployment Playbook<button data-href="#Download-Ansible-Milvus-node-deployment-Playbook" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Клонируйте репозиторий Milvus с GitHub, чтобы загрузить учебник Ansible Milvus node deployment Playbook.</p>
 <pre><code translate="no">git <span class="hljs-built_in">clone</span> https://github.com/milvus-io/milvus.git
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Configure-installation-files" class="common-anchor-header">Настройте файлы установки</h3><p>Файлы <code translate="no">inventory.ini</code> и <code translate="no">ansible.cfg</code> используются для управления переменными окружения и методами проверки входа в систему в плейбуке Ansible. В файле <code translate="no">inventory.ini</code> секция <code translate="no">dockernodes</code> определяет все серверы движков docker. Секция <code translate="no">ansible.cfg</code> определяет все серверы координаторов Milvus. В секции <code translate="no">node</code> определены все серверы узлов Milvus.</p>
+<h3 id="Configure-installation-files" class="common-anchor-header">Настройте файлы установки<button data-href="#Configure-installation-files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Файлы <code translate="no">inventory.ini</code> и <code translate="no">ansible.cfg</code> используются для управления переменными окружения и методами проверки входа в систему в плейбуке Ansible. В файле <code translate="no">inventory.ini</code> секция <code translate="no">dockernodes</code> определяет все серверы движков docker. Секция <code translate="no">ansible.cfg</code> определяет все серверы координаторов Milvus. В секции <code translate="no">node</code> определены все серверы узлов Milvus.</p>
 <p>Укажите локальный путь к Playbook и настройте файлы установки.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> ./milvus/deployments/docker/cluster-distributed-deployment</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -313,7 +403,22 @@ INDEX_COORD_ADDRESS= {{coords_ip}}:31000
   <span class="hljs-attr">roles:</span>
     <span class="hljs-bullet">-</span> <span class="hljs-string">docker-installation</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Test-Ansible-connectivity" class="common-anchor-header">Проверка подключения к Ansible</h3><p>Проверьте подключение к Ansible.</p>
+<h3 id="Test-Ansible-connectivity" class="common-anchor-header">Проверка подключения к Ansible<button data-href="#Test-Ansible-connectivity" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Проверьте подключение к Ansible.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible all -m ping</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Добавьте в команду <code translate="no">-i</code>, чтобы указать путь к файлу инвентаризации, если вы не указали его в <code translate="no">ansible.cfg</code>, иначе Ansible использует <code translate="no">/etc/ansible/hosts</code>.</p>
@@ -338,13 +443,43 @@ dockernode02 | <span class="hljs-function"><span class="hljs-params">SUCCESS</sp
     <span class="hljs-string">&quot;ping&quot;</span>: <span class="hljs-string">&quot;pong&quot;</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Check-the-Playbook-Syntax" class="common-anchor-header">Проверка синтаксиса плейбука</h3><p>Проверьте синтаксис Playbook.</p>
+<h3 id="Check-the-Playbook-Syntax" class="common-anchor-header">Проверка синтаксиса плейбука<button data-href="#Check-the-Playbook-Syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Проверьте синтаксис Playbook.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible-playbook deploy-docker.yml --syntax-check</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Обычно терминал выдает следующее сообщение:</p>
 <pre><code translate="no"><span class="hljs-section">playbook: deploy-docker.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Install-Docker" class="common-anchor-header">Установить Docker</h3><p>Установите Docker с помощью Playbook.</p>
+<h3 id="Install-Docker" class="common-anchor-header">Установить Docker<button data-href="#Install-Docker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Установите Docker с помощью Playbook.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible-playbook deploy-docker.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Если Docker успешно установлен на трех хостах, терминал выдает следующее сообщение:</p>
@@ -369,7 +504,22 @@ dockernode01               : ok=10   changed=1    unreachable=0    failed=0    s
 dockernode02               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 dockernode03               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 </span><button class="copy-code-btn"></button></code></pre>
-<h3 id="Verify-the-installation" class="common-anchor-header">Проверить установку</h3><p>Войдите на три хоста с помощью SSH-ключа и проверьте установку на хостах.</p>
+<h3 id="Verify-the-installation" class="common-anchor-header">Проверить установку<button data-href="#Verify-the-installation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Войдите на три хоста с помощью SSH-ключа и проверьте установку на хостах.</p>
 <ul>
 <li>Для корневого хоста:</li>
 </ul>
@@ -386,13 +536,43 @@ dockernode03               : ok=10   changed=1    unreachable=0    failed=0    s
 <p>Проверьте состояние работы контейнеров.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Check-the-Syntax" class="common-anchor-header">Проверьте синтаксис</h3><p>Проверьте синтаксис <code translate="no">deploy-milvus.yml</code>.</p>
+<h3 id="Check-the-Syntax" class="common-anchor-header">Проверьте синтаксис<button data-href="#Check-the-Syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Проверьте синтаксис <code translate="no">deploy-milvus.yml</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible-playbook deploy-milvus.yml --syntax-check</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Обычно терминал выдает следующее:</p>
 <pre><code translate="no"><span class="hljs-section">playbook: deploy-milvus.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Milvus-container" class="common-anchor-header">Создать контейнер Milvus</h3><p>Задачи по созданию контейнера Milvus определены в <code translate="no">deploy-milvus.yml</code>.</p>
+<h3 id="Create-Milvus-container" class="common-anchor-header">Создать контейнер Milvus<button data-href="#Create-Milvus-container" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Задачи по созданию контейнера Milvus определены в <code translate="no">deploy-milvus.yml</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible-playbook deploy-milvus.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Терминал возвращается:</p>

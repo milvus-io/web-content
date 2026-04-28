@@ -46,7 +46,7 @@ summary: Apprenez à connaître les limites de l'utilisation de Milvus.
 <tr><td>Partition</td><td>255 caractères</td></tr>
 </tbody>
 </table>
-<h2 id="Naming-rules" class="common-anchor-header">Règles de dénomination<button data-href="#Naming-rules" class="anchor-icon" translate="no">
+<h2 id="Naming-rules" class="common-anchor-header">Règles d'attribution des noms<button data-href="#Naming-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -223,7 +223,7 @@ summary: Apprenez à connaître les limites de l'utilisation de Milvus.
 <tr><td><code translate="no">nq</code> (nombre de demandes de recherche)</td><td>16,384</td></tr>
 </tbody>
 </table>
-<h2 id="Index-limits-on-different-search-types" class="common-anchor-header">Limites de l'index pour différents types de recherche<button data-href="#Index-limits-on-different-search-types" class="anchor-icon" translate="no">
+<h2 id="Index-limits-on-different-search-types" class="common-anchor-header">Limites d'index pour différents types de recherche<button data-href="#Index-limits-on-different-search-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -90,7 +90,7 @@ summary: >-
 </ol>
 <p>有關參數調整與最佳化的詳細資訊，請參閱<a href="/docs/zh-hant/ivf-pq.md#Index-params">Index params</a>。</p>
 <div class="alert note">
-<p>考慮一個使用 32 位元浮點數的<em>D = 128</em>維向量。在 PQ 參數<em>m = 64</em>(子向量) 和<em>nbits = 8</em>(因此每個子空間<em>k =</em><sup>28</sup> <em>= 256 個</em>中心點) 的情況下，我們可以比較儲存需求：</p>
+<p>考慮一個使用 32 位元浮點數的<em>D = 128</em>維向量。在 PQ 參數<em>m = 64</em>(子向量) 和<em>nbits = 8</em>(因此<em>k =</em><sup>28</sup> <em>=</em>每子空間<em> 256 個</em>中心點) 的情況下，我們可以比較儲存需求：</p>
 <ul>
 <li><p>原始向量：128 維 × 32 位元 = 4,096 位元</p></li>
 <li><p>PQ 壓縮向量：64 個子向量 × 8 位元 = 512 位元</p></li>

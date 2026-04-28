@@ -352,7 +352,7 @@ retriever.invoke(<span class="hljs-string">&quot;Stealing from the bank is a cri
         ></path>
       </svg>
     </button></h3><p>Cuando se crea una aplicación de recuperación, a menudo hay que crearla pensando en varios usuarios. Esto significa que puede estar almacenando datos no sólo para un usuario, sino para muchos usuarios diferentes, y no deberían poder ver los datos de los demás.</p>
-<p>Milvus recomienda utilizar <a href="https://milvus.io/docs/multi_tenancy.md#Partition-key-based-multi-tenancy">partition_key</a> para implementar multi-tenancy, aquí hay un ejemplo.</p>
+<p>Milvus recomienda usar <a href="https://milvus.io/docs/multi_tenancy.md#Partition-key-based-multi-tenancy">partition_key</a> para implementar multi-tenancy, aquí hay un ejemplo.</p>
 <blockquote>
 <p>La característica de Partition key ahora no está disponible en Milvus Lite, si desea utilizarla, necesita iniciar el servidor Milvus desde <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker o kubernetes</a>.</p>
 </blockquote>

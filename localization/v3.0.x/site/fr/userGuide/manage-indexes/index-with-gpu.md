@@ -22,6 +22,9 @@ title: Index avec GPU
         ></path>
       </svg>
     </button></h1><p>Ce guide décrit les étapes pour construire un index avec la prise en charge du GPU dans Milvus, ce qui peut améliorer de manière significative les performances de recherche dans les scénarios à haut débit et à fort rappel. Pour plus de détails sur les types d'index GPU pris en charge par Milvus, voir <a href="/docs/fr/gpu_index.md">Index GPU</a>.</p>
+<div class="alert warning">
+<p>Cette page est obsolète. Pour la dernière mise en œuvre, voir <a href="/docs/fr/gpu-index-overview.md">Aperçu de l'index GPU</a>.</p>
+</div>
 <h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Configurer les paramètres Milvus pour le contrôle de la mémoire GPU<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -265,7 +268,7 @@ collection.search(
 <ul>
 <li><p>Pour <strong>GPU_IVF_FLAT</strong>, la valeur maximale de la <strong>limite</strong> est de 1024.</p></li>
 <li><p>Pour <strong>GPU_IVF_PQ</strong> et <strong>GPU_CAGRA</strong>, la valeur maximale de la <strong>limite</strong> est de 1024.</p></li>
-<li><p>Bien qu'il n'y ait pas de <strong>limite</strong> définie pour <strong>GPU_BRUTE_FORCE</strong>, il est recommandé de ne pas dépasser 4096 pour éviter les problèmes de performance.</p></li>
+<li><p>Bien qu'il n'y ait pas de <strong>limite</strong> fixée pour <strong>GPU_BRUTE_FORCE</strong>, il est recommandé de ne pas dépasser 4096 pour éviter les problèmes de performance.</p></li>
 <li><p>Actuellement, les index GPU ne prennent pas en charge la distance COSINE. Si la distance COSINE est requise, les données doivent d'abord être normalisées, puis la distance du produit intérieur (IP) peut être utilisée comme substitut.</p></li>
 <li><p>La protection OOM du chargement pour les index GPU n'est pas entièrement prise en charge, une trop grande quantité de données peut entraîner le blocage du QueryNode.</p></li>
 <li><p>Les index GPU ne prennent pas en charge les fonctions de recherche telles que la <a href="https://milvus.io/docs/single-vector-search.md#Range-search">recherche par plage</a> et la <a href="https://milvus.io/docs/single-vector-search.md#Grouping-searchh">recherche par groupement</a>.</p></li>
@@ -289,5 +292,5 @@ collection.search(
 <li><p><strong>Quand est-il approprié d'utiliser un index GPU ?</strong></p>
 <p>Un index GPU est particulièrement utile dans les situations qui requièrent un débit élevé ou une forte mémorisation. Par exemple, lorsqu'il s'agit de lots importants, le débit de l'indexation GPU peut être jusqu'à 100 fois supérieur à celui de l'indexation CPU. Dans les scénarios avec des lots plus petits, les index GPU surpassent toujours de manière significative les index CPU en termes de performance. En outre, s'il est nécessaire d'insérer rapidement des données, l'intégration d'un GPU peut accélérer considérablement le processus de construction des index.</p></li>
 <li><p><strong>Dans quels scénarios les index GPU tels que CAGRA, GPU_IVF_PQ, GPU_IVF_FLAT et GPU_BRUTE_FORCE sont-ils les plus adaptés ?</strong></p>
-<p>Les index CAGRA sont idéaux pour les scénarios qui exigent des performances accrues, mais au prix d'une plus grande consommation de mémoire. Pour les environnements où la conservation de la mémoire est une priorité, l'index <strong>GPU_IVF_PQ</strong> peut aider à minimiser les besoins en stockage, bien qu'il s'accompagne d'une plus grande perte de précision. L'index <strong>GPU_IVF_FLAT</strong> constitue une option équilibrée, offrant un compromis entre les performances et l'utilisation de la mémoire. Enfin, l'index <strong>GPU_BRUTE_FORCE</strong> est conçu pour des opérations de recherche exhaustive, garantissant un taux de rappel de 1 en effectuant des recherches transversales.</p></li>
+<p>Les index CAGRA sont idéaux pour les scénarios qui exigent des performances accrues, mais au prix d'une plus grande consommation de mémoire. Pour les environnements où la conservation de la mémoire est une priorité, l'index <strong>GPU_IVF_PQ</strong> peut aider à minimiser les besoins en stockage, bien qu'il s'accompagne d'une plus grande perte de précision. L'index <strong>GPU_IVF_FLAT</strong> est une option équilibrée, offrant un compromis entre les performances et l'utilisation de la mémoire. Enfin, l'index <strong>GPU_BRUTE_FORCE</strong> est conçu pour des opérations de recherche exhaustive, garantissant un taux de rappel de 1 en effectuant des recherches transversales.</p></li>
 </ul>

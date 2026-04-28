@@ -3,8 +3,8 @@ id: prepare-source-data.md
 order: 0
 title: Подготовка исходных данных
 summary: >-
-  На этой странице рассказывается о том, что следует учесть перед тем, как
-  начать массово вставлять данные в свою коллекцию.
+  На этой странице рассказывается о том, что следует учесть, прежде чем начать
+  массово вставлять данные в свою коллекцию.
 ---
 <h1 id="Prepare-Source-Data" class="common-anchor-header">Подготовка исходных данных<button data-href="#Prepare-Source-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,10 +37,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Целевая коллекция требует сопоставления исходных данных с ее схемой. На диаграмме ниже показано, как приемлемые исходные данные сопоставляются со схемой целевой коллекции.</p>
+    </button></h2><p>Целевая коллекция требует сопоставления исходных данных с ее схемой. На диаграмме ниже показано, как допустимые исходные данные сопоставляются со схемой целевой коллекции.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
    </span> <span class="img-wrapper"> <span>Сопоставление данных со схемой</span> </span></p>
 <p>Вам следует внимательно изучить свои данные и в соответствии с ними разработать схему целевой коллекции.</p>
 <p>Если взять в качестве примера данные JSON на приведенной выше диаграмме, то в списке строк есть две сущности, каждая строка имеет шесть полей. Схема коллекции выборочно включает четыре: <strong>id</strong>, <strong>vector</strong>, <strong>scalar_1</strong> и <strong>scalar_2</strong>.</p>

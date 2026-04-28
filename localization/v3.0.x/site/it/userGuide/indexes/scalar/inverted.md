@@ -45,7 +45,7 @@ summary: >-
 <li><p><strong>Filtrare il contenuto del testo</strong>: Eseguire ricerche efficienti sui campi <code translate="no">VARCHAR</code> </p></li>
 <li><p><strong>Interrogare i valori dei campi JSON</strong>: Filtrare su chiavi specifiche all'interno di strutture JSON</p></li>
 </ul>
-<p><strong>Vantaggi in termini di prestazioni</strong>: gli indici INVERTED possono ridurre il tempo di interrogazione da secondi a millisecondi su grandi insiemi di dati, eliminando la necessità di eseguire scansioni dell'intero insieme.</p>
+<p><strong>Vantaggi in termini di prestazioni</strong>: gli indici INVERTED possono ridurre i tempi di interrogazione da secondi a millisecondi su grandi insiemi di dati, eliminando la necessità di eseguire scansioni dell'intero insieme.</p>
 <h2 id="How-INVERTED-indexes-work" class="common-anchor-header">Come funzionano gli indici INVERTED<button data-href="#How-INVERTED-indexes-work" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,16 +61,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un <strong>indice INVERTED</strong> in Milvus mappa ogni valore univoco del campo (termine) all'insieme degli ID dei documenti in cui si trova quel valore. Questa struttura consente di effettuare ricerche rapide per campi con valori ripetuti o categorici.</p>
+    </button></h2><p>Un <strong>indice INVERTED</strong> in Milvus mappa ogni valore univoco del campo (termine) all'insieme degli ID dei documenti in cui si trova quel valore. Questa struttura consente una rapida ricerca di campi con valori ripetuti o categorici.</p>
 <p>Come mostrato nel diagramma, il processo funziona in due fasi:</p>
 <ol>
 <li><p><strong>Mappatura in avanti (ID → Termine):</strong> Ogni ID del documento punta al valore del campo che contiene.</p></li>
 <li><p><strong>Mappatura inversa (Termine → ID):</strong> Milvus raccoglie i termini unici e costruisce una mappatura inversa da ogni termine a tutti gli ID che lo contengono.</p></li>
 </ol>
-<p>Per esempio, il valore <strong>"elettronica"</strong> corrisponde agli ID <strong>1</strong> e <strong>3</strong>, mentre <strong>"libri"</strong> corrisponde agli ID <strong>2</strong> e <strong>5</strong>.</p>
+<p>Ad esempio, il valore <strong>"elettronica"</strong> corrisponde agli ID <strong>1</strong> e <strong>3</strong>, mentre <strong>"libri"</strong> corrisponde agli ID <strong>2</strong> e <strong>5</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
    </span> <span class="img-wrapper"> <span>Come funziona l'indice inverso</span> </span></p>
 <p>Quando si filtra per un valore specifico (ad esempio, <code translate="no">category == &quot;electronics&quot;</code>), Milvus cerca semplicemente il termine nell'indice e recupera direttamente gli ID corrispondenti. Questo evita la scansione dell'intero set di dati e consente un filtraggio rapido, soprattutto per i valori categorici o ripetuti.</p>
 <p>Gli indici INVERTED supportano tutti i tipi di campi scalari, come <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong> e <strong>ARRAY</strong>. Tuttavia, i parametri dell'indice per indicizzare un campo JSON sono leggermente diversi dai normali campi scalari.</p>
@@ -212,5 +212,5 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p>Conoscere <a href="/docs/it/index-explained.md">altri tipi di indici</a></p></li>
-<li><p>Vedere <a href="/docs/it/json-indexing.md">Indicizzazione JSON</a> per scenari avanzati di indicizzazione JSON</p></li>
+<li><p>Vedere <a href="/docs/it/json-indexing.md">Indicizzazione JSON</a> per scenari di indicizzazione JSON avanzati</p></li>
 </ul>

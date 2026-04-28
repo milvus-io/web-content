@@ -21,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>No Milvus, <code translate="no">VARCHAR</code> é o tipo de dados utilizado para armazenar dados de cadeia.</p>
-<p>Quando define um campo <code translate="no">VARCHAR</code>, são obrigatórios dois parâmetros:</p>
+<p>Quando se define um campo <code translate="no">VARCHAR</code>, são obrigatórios dois parâmetros:</p>
 <ul>
 <li><p>Definir o <code translate="no">datatype</code> como <code translate="no">DataType.VARCHAR</code>.</p></li>
 <li><p>Especifique o parâmetro <code translate="no">max_length</code>, que define o número máximo de bytes que o campo <code translate="no">VARCHAR</code> pode armazenar. O intervalo válido para <code translate="no">max_length</code> é de 1 a 65.535.</p></li>

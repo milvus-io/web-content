@@ -39,16 +39,46 @@ summary: IVF_SQ8 索引是一種基於量化的索引演算法，專為解決大
 <li><p><strong>反向檔案 (IVF)：</strong>將資料組織成叢集，使搜尋演算法僅能專注於最相關的向量子集。</p></li>
 <li><p><strong>標量量化 (SQ8)：</strong>將向量壓縮成更精簡的形式，大幅降低記憶體使用量，同時維持足夠的精確度以進行快速相似性計算。</p></li>
 </ul>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVF 就像是在書本中建立索引。您不需要掃描每一頁 (或在我們的情況中，掃描每一個向量)，而是在索引中查找特定的關鍵字（叢集），以快速找到相關的頁面 (向量)。在我們的情況中，向量會被歸類為叢集，演算法會在幾個與查詢向量接近的叢集內進行搜尋。</p>
+<h3 id="IVF" class="common-anchor-header">IVF<button data-href="#IVF" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>IVF 就像是在書本中建立索引。您不需要掃描每一頁 (或在我們的情況中，掃描每一個向量)，而是在索引中查找特定的關鍵字（群組），以快速找到相關的頁面 (向量)。在我們的情況中，向量會被歸類為叢集，演算法會在幾個與查詢向量接近的叢集內進行搜尋。</p>
 <p>以下是其運作方式：</p>
 <ol>
 <li><p><strong>聚類：</strong>使用 k-means 之類的聚類演算法，將向量資料集分為指定數量的叢集。每個叢集都有一個中心點（叢集的代表向量）。</p></li>
 <li><p><strong>分派：</strong>每個向量會被分派到其中心點最接近的叢集。</p></li>
 <li><p><strong>反向索引：</strong>建立一個索引，將每個群集的中心點對應到分配給該群集的向量清單。</p></li>
-<li><p><strong>搜尋：</strong>搜尋最近鄰居時，搜尋演算法會比較您的查詢向量與群集中心點，並選擇最有希望的群集。然後將搜尋範圍縮小到這些選定叢集中的向量。</p></li>
+<li><p><strong>搜尋：</strong>搜尋最近鄰居時，搜尋演算法會比較您的查詢向量與群集中心點，並選擇最有希望的群集。然後將搜尋範圍縮小到這些選定群集中的向量。</p></li>
 </ol>
 <p>要瞭解更多技術細節，請參閱<a href="/docs/zh-hant/ivf-flat.md">IVF_FLAT</a>。</p>
-<h3 id="SQ8" class="common-anchor-header">SQ8</h3><p>標量量化 (Scalar Quantization, SQ) 是一種用更小、更緊湊的表示來取代高維向量的值，從而縮小其大小的技術。<strong>SQ8</strong>變體使用 8 位元整數取代典型的 32 位元浮點數來儲存向量的每個維度值。這大大降低了儲存資料所需的記憶體數量。</p>
+<h3 id="SQ8" class="common-anchor-header">SQ8<button data-href="#SQ8" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>標量量化 (Scalar Quantization, SQ) 是一種用更小、更緊湊的表示來取代高維向量的值，從而縮小其大小的技術。<strong>SQ8</strong>變體使用 8 位元整數取代典型的 32 位元浮點數來儲存向量的每個維度值。這大大降低了儲存資料所需的記憶體數量。</p>
 <p>以下是 SQ8 的運作方式：</p>
 <ol>
 <li><p><strong>範圍識別：</strong>首先，識別向量內的最小值和最大值。此範圍定義了量化的邊界。</p></li>
@@ -60,9 +90,24 @@ summary: IVF_SQ8 索引是一種基於量化的索引演算法，專為解決大
 <p>假設您有一個尺寸值為 1.2，最小值為 -1.7，最大值為 2.3。下圖顯示如何應用 SQ8 將 float32 值轉換為 int8 整數。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ivf-sq8.png" alt="Ivf Sq8" class="doc-image" id="ivf-sq8" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ivf-sq8.png" alt="Ivf Sq8" class="doc-image" id="ivf-sq8" />
    </span> <span class="img-wrapper"> <span>Ivf Sq8</span> </span></p>
-<h3 id="IVF-+-SQ8" class="common-anchor-header">IVF + SQ8</h3><p>IVF_SQ8 索引結合了 IVF 和 SQ8 來有效率地執行相似性搜尋：</p>
+<h3 id="IVF-+-SQ8" class="common-anchor-header">IVF + SQ8<button data-href="#IVF-+-SQ8" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>IVF_SQ8 索引結合了 IVF 和 SQ8 來有效率地執行相似性搜尋：</p>
 <ol>
 <li><p><strong>IVF 縮小搜尋範圍</strong>：資料集被分成叢集，當發出查詢時，IVF 會先比較查詢與叢集中心點，選擇最相關的叢集。</p></li>
 <li><p><strong>SQ8 加速距離計算</strong>：在選定的叢集內，SQ8 會將向量壓縮為 8 位元整數，以減少記憶體使用量並加速距離計算。</p></li>
@@ -164,7 +209,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>本節概述用於建立索引和在索引上執行搜尋的參數。</p>
-<h3 id="Index-building-params" class="common-anchor-header">索引建立參數</h3><p>下表列出了<a href="/docs/zh-hant/ivf-sq8.md#share-X9Y9dTuhDohRRBxSvzBcXmIEnu4">建立索引</a>時可以在<code translate="no">params</code> 中設定的參數。</p>
+<h3 id="Index-building-params" class="common-anchor-header">索引建立參數<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下表列出了<a href="/docs/zh-hant/ivf-sq8.md#share-X9Y9dTuhDohRRBxSvzBcXmIEnu4">建立索引</a>時可以在<code translate="no">params</code> 中設定的參數。</p>
 <table>
    <tr>
      <th></th>
@@ -182,7 +242,22 @@ res = MilvusClient.search(
      <td><p>較大的<code translate="no">nlist</code> 值會透過建立更精細的叢集來改善回復率，但會增加索引建立時間。根據資料集大小和可用資源進行最佳化。 在大多數情況下，我們建議您設定此範圍內的值：[32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數</h3><p>下表列出<a href="/docs/zh-hant/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">在索引上搜尋時</a>，可在<code translate="no">search_params.params</code> 中設定的參數。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下表列出<a href="/docs/zh-hant/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">在索引上搜尋時</a>，可在<code translate="no">search_params.params</code> 中設定的參數。</p>
 <table>
    <tr>
      <th></th>

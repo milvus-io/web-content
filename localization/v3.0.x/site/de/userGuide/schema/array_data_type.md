@@ -271,7 +271,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>Die Indizierung trägt zur Verbesserung der Such- und Abfrageleistung bei. In Milvus ist die Indexierung für Vektorfelder obligatorisch, für skalare Felder jedoch optional.</p>
-<p>Das folgende Beispiel erstellt Indizes für das Vektorfeld <code translate="no">embedding</code> und das ARRAY-Feld <code translate="no">tags</code>, die beide den Indextyp <code translate="no">AUTOINDEX</code> verwenden. Bei diesem Typ wählt Milvus automatisch den am besten geeigneten Index auf der Grundlage des Datentyps aus. Sie können auch den Indextyp und die Parameter für jedes Feld anpassen. Einzelheiten finden Sie unter <a href="/docs/de/index-explained.md">Index erklärt</a>.</p>
+<p>Das folgende Beispiel erstellt Indizes für das Vektorfeld <code translate="no">embedding</code> und das ARRAY-Feld <code translate="no">tags</code>, die beide den Indextyp <code translate="no">AUTOINDEX</code> verwenden. Bei diesem Typ wählt Milvus automatisch den am besten geeigneten Index auf der Grundlage des Datentyps aus. Sie können auch den Indextyp und die Parameter für jedes Feld anpassen. Details finden Sie unter <a href="/docs/de/index-explained.md">Index erklärt</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -697,7 +697,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Zusätzlich zur grundlegenden skalaren Feldfilterung können Sie die Vektorsuche mit skalaren Feldfiltern kombinieren. Der folgende Code zeigt zum Beispiel, wie man einen Skalarfeldfilter zu einer Vektorsuche hinzufügt:</p>
+    </button></h2><p>Zusätzlich zur grundlegenden skalaren Feldfilterung können Sie die Suche nach Vektorähnlichkeit mit skalaren Feldfiltern kombinieren. Der folgende Code zeigt zum Beispiel, wie man einen Skalarfeldfilter zu einer Vektorsuche hinzufügt:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags[0] == &quot;pop&quot;&#x27;</span>
@@ -788,4 +788,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Darüber hinaus unterstützt Milvus erweiterte Array-Filter-Operatoren wie <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code> und <code translate="no">ARRAY_LENGTH</code>, um die Abfragemöglichkeiten weiter zu verbessern. Weitere Details finden Sie unter <a href="/docs/de/array-operators.md">ARRAY-Operatoren</a>.</p>
+<p>Darüber hinaus unterstützt Milvus fortgeschrittene Array-Filteroperatoren wie <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code> und <code translate="no">ARRAY_LENGTH</code>, um die Abfragemöglichkeiten weiter zu verbessern. Weitere Details finden Sie unter <a href="/docs/de/array-operators.md">ARRAY-Operatoren</a>.</p>

@@ -93,7 +93,7 @@ title: 产品常见问题
     <span class="hljs-attr">serverMaxRecvSize:</span> <span class="hljs-number">67108864</span> <span class="hljs-comment"># The maximum size of each RPC request that the proxy can receive, unit: byte</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>默认情况下，每个 RPC 请求的最大大小为 64MB。因此，输入向量（包括其维度数据和元数据）的总大小必须小于此限制，以确保成功执行。</p>
-<h4 id="How-can-I-get-all-the-unique-value-of-a-given-scalar-field-from-a-collection" class="common-anchor-header">如何从 Collections 中获取给定标量字段的所有唯一值？</h4><p>目前还没有直接的方法来实现这一目标。作为一种变通方法，我们建议使用查询迭代器检索特定字段的所有值，然后手动执行重复数据删除。我们计划在 Milvus 2.6 中添加对该功能的直接支持。使用 query_iterator 的示例：</p>
+<h4 id="How-can-I-get-all-the-unique-value-of-a-given-scalar-field-from-a-collection" class="common-anchor-header">如何从 Collections 中获取给定标量字段的所有唯一值？</h4><p>目前还没有直接的方法来实现这一目标。作为一种变通方法，我们建议使用查询迭代器获取特定字段的所有值，然后手动执行重复数据删除。我们计划在 Milvus 2.6 中添加对该功能的直接支持。使用 query_iterator 的示例：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># set up iterator</span>
 iterator = client.query_iterator(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,

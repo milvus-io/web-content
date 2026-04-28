@@ -98,7 +98,7 @@ go build
     </button></h2><p>ثم يمكنك بدء تشغيل خادم API على النحو التالي:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup server
 <button class="copy-code-btn"></button></code></pre>
-<p>يستمع خادم API على المنفذ 8080 افتراضيًا. يمكنك تغييره عن طريق تشغيله باستخدام العلامة <code translate="no">-p</code>. لبدء استماع خادم واجهة برمجة التطبيقات على المنفذ 443، قم بما يلي:</p>
+<p>يستمع خادم API على المنفذ 8080 بشكل افتراضي. يمكنك تغييره عن طريق تشغيله باستخدام العلامة <code translate="no">-p</code>. لبدء استماع خادم واجهة برمجة التطبيقات على المنفذ 443، قم بما يلي:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup server -p 443
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكنك الوصول إلى واجهة مستخدم Swagger UI باستخدام http://localhost:<port>/api/v1/docs/index.html.</p>

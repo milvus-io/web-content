@@ -41,16 +41,46 @@ summary: >-
 <li><p><strong>반전 파일(IVF)</strong>: 데이터를 클러스터로 구성하여 검색 알고리즘이 가장 관련성이 높은 벡터의 하위 집합에만 집중할 수 있도록 합니다.</p></li>
 <li><p><strong>스칼라 양자화(SQ8</strong>): 벡터를 보다 컴팩트한 형태로 압축하여 메모리 사용량을 대폭 줄이면서도 빠른 유사도 계산을 위한 충분한 정밀도를 유지합니다.</p></li>
 </ul>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVF는 책에서 색인을 만드는 것과 같습니다. 모든 페이지(이 경우에는 모든 벡터)를 스캔하는 대신 색인에서 특정 키워드(클러스터)를 조회하여 관련 페이지(벡터)를 빠르게 찾습니다. 이 시나리오에서는 벡터가 클러스터로 그룹화되고 알고리즘이 쿼리 벡터에 가까운 몇 개의 클러스터 내에서 검색합니다.</p>
+<h3 id="IVF" class="common-anchor-header">IVF<button data-href="#IVF" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>IVF는 책에서 색인을 만드는 것과 같습니다. 모든 페이지(이 경우에는 모든 벡터)를 스캔하는 대신 색인에서 특정 키워드(클러스터)를 조회하여 관련 페이지(벡터)를 빠르게 찾습니다. 이 시나리오에서는 벡터가 클러스터로 그룹화되고 알고리즘이 쿼리 벡터에 가까운 몇 개의 클러스터 내에서 검색합니다.</p>
 <p>작동 방식은 다음과 같습니다:</p>
 <ol>
 <li><p><strong>클러스터링:</strong> 벡터 데이터 세트는 k-평균과 같은 클러스터링 알고리즘을 사용하여 지정된 수의 클러스터로 나뉩니다. 각 클러스터에는 중심(클러스터의 대표 벡터)이 있습니다.</p></li>
 <li><p><strong>할당:</strong> 각 벡터는 중심이 가장 가까운 클러스터에 할당됩니다.</p></li>
 <li><p><strong>반전 인덱스:</strong> 각 클러스터 중심을 해당 클러스터에 할당된 벡터 목록에 매핑하는 인덱스가 생성됩니다.</p></li>
-<li><p><strong>검색:</strong> 가장 가까운 이웃을 검색할 때 검색 알고리즘은 쿼리 벡터와 클러스터 중심을 비교하여 가장 가능성이 높은 클러스터를 선택합니다. 그런 다음 선택한 클러스터 내의 벡터로 검색 범위가 좁혀집니다.</p></li>
+<li><p><strong>검색:</strong> 가장 가까운 이웃을 검색할 때 검색 알고리즘이 쿼리 벡터와 클러스터 중심을 비교하여 가장 가능성이 높은 클러스터를 선택합니다. 그런 다음 선택한 클러스터 내의 벡터로 검색 범위가 좁혀집니다.</p></li>
 </ol>
 <p>기술적 세부 사항에 대해 자세히 알아보려면 <a href="/docs/ko/ivf-flat.md">IVF_FLAT을</a> 참조하세요.</p>
-<h3 id="SQ8" class="common-anchor-header">SQ8</h3><p>스칼라 양자화(SQ)는 고차원 벡터의 값을 더 작고 간결한 표현으로 대체하여 크기를 줄이는 데 사용되는 기술입니다. <strong>SQ8</strong> 변형은 벡터의 각 차원 값을 저장할 때 일반적인 32비트 부동 소수점 숫자 대신 8비트 정수를 사용합니다. 따라서 데이터를 저장하는 데 필요한 메모리 양이 크게 줄어듭니다.</p>
+<h3 id="SQ8" class="common-anchor-header">SQ8<button data-href="#SQ8" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>스칼라 양자화(SQ)는 고차원 벡터의 값을 더 작고 간결한 표현으로 대체하여 크기를 줄이는 데 사용되는 기술입니다. <strong>SQ8</strong> 변형은 벡터의 각 차원 값을 저장할 때 일반적인 32비트 부동 소수점 숫자 대신 8비트 정수를 사용합니다. 따라서 데이터를 저장하는 데 필요한 메모리 양이 크게 줄어듭니다.</p>
 <p>SQ8의 작동 방식은 다음과 같습니다:</p>
 <ol>
 <li><p><strong>범위 식별:</strong> 먼저 벡터 내의 최소값과 최대값을 식별합니다. 이 범위는 양자화의 범위를 정의합니다.</p></li>
@@ -62,9 +92,24 @@ summary: >-
 <p>차원 값이 1.2이고 최소값이 -1.7, 최대값이 2.3이라고 가정합니다. 다음 그림은 SQ8을 적용하여 float32 값을 int8 정수로 변환하는 방법을 보여줍니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ivf-sq8.png" alt="Ivf Sq8" class="doc-image" id="ivf-sq8" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ivf-sq8.png" alt="Ivf Sq8" class="doc-image" id="ivf-sq8" />
    </span> <span class="img-wrapper"> <span>IVF Sq8</span> </span></p>
-<h3 id="IVF-+-SQ8" class="common-anchor-header">IVF + SQ8</h3><p>IVF_SQ8 인덱스는 IVF와 SQ8을 결합하여 유사도 검색을 효율적으로 수행합니다:</p>
+<h3 id="IVF-+-SQ8" class="common-anchor-header">IVF + SQ8<button data-href="#IVF-+-SQ8" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>IVF_SQ8 인덱스는 IVF와 SQ8을 결합하여 유사도 검색을 효율적으로 수행합니다:</p>
 <ol>
 <li><p><strong>IVF는 검색 범위를 좁힙니다</strong>: 데이터 세트는 클러스터로 나뉘며, 쿼리가 실행되면 IVF는 먼저 쿼리를 클러스터 중심과 비교하여 가장 관련성이 높은 클러스터를 선택합니다.</p></li>
 <li><p><strong>SQ8은 거리 계산 속도를 높입니다</strong>: 선택한 클러스터 내에서 SQ8은 벡터를 8비트 정수로 압축하여 메모리 사용량을 줄이고 거리 계산을 가속화합니다.</p></li>
@@ -109,7 +154,7 @@ index_params.add_index(
 <ul>
 <li><code translate="no">nlist</code>: 인덱스 구축 중에 k-평균 알고리즘을 사용하여 생성할 클러스터 수입니다.</li>
 </ul>
-<p><code translate="no">IVF_SQ8</code> 인덱스에 사용할 수 있는 구축 파라미터에 대해 자세히 알아보려면 <a href="/docs/ko/ivf-sq8.md#share-BwprdWFCjoMBtMxorO0cWrUPnjb">인덱스 구축 파라미터를</a> 참조하세요.</p></li>
+<p><code translate="no">IVF_SQ8</code> 인덱스에 사용할 수 있는 더 많은 구축 매개변수에 대해 알아보려면 <a href="/docs/ko/ivf-sq8.md#share-BwprdWFCjoMBtMxorO0cWrUPnjb">인덱스 구축</a> 매개변수를 참조하세요.</p></li>
 </ul>
 <p>인덱스 파라미터가 구성되면 <code translate="no">create_index()</code> 메서드를 직접 사용하거나 <code translate="no">create_collection</code> 메서드에서 인덱스 파라미터를 전달하여 인덱스를 생성할 수 있습니다. 자세한 내용은 <a href="/docs/ko/create-collection.md">컬렉션 만들기를</a> 참조하세요.</p>
 <h2 id="Search-on-index" class="common-anchor-header">인덱스에서 검색<button data-href="#Search-on-index" class="anchor-icon" translate="no">
@@ -166,7 +211,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>이 섹션에서는 인덱스를 구축하고 인덱스에서 검색을 수행하는 데 사용되는 매개변수에 대한 개요를 제공합니다.</p>
-<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수</h3><p>다음 표에는 <a href="/docs/ko/ivf-sq8.md#share-X9Y9dTuhDohRRBxSvzBcXmIEnu4">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 표에는 <a href="/docs/ko/ivf-sq8.md#share-X9Y9dTuhDohRRBxSvzBcXmIEnu4">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th></th>
@@ -184,7 +244,22 @@ res = MilvusClient.search(
      <td><p><code translate="no">nlist</code> 값이 클수록 더 세분화된 클러스터를 생성하여 정확도가 향상되지만 인덱스 구축 시간이 늘어납니다. 데이터 세트 크기와 사용 가능한 리소스에 따라 최적화합니다. 대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수</h3><p>다음 표에는 <a href="/docs/ko/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">인덱스에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 표에는 <a href="/docs/ko/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">인덱스에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th></th>

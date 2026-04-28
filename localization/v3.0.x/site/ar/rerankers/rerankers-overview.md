@@ -22,7 +22,7 @@ title: نظرة عامة على أدوات إعادة الترتيب
         ></path>
       </svg>
     </button></h1><p>في مجال استرجاع المعلومات والذكاء الاصطناعي التوليدي، تُعد أداة إعادة التصنيف أداة أساسية تعمل على تحسين ترتيب النتائج من عمليات البحث الأولية. تختلف أدوات إعادة التصنيف عن <a href="/docs/ar/embeddings.md">نماذج التضمين</a> التقليدية من خلال أخذ استعلام ومستند كمدخلات وإرجاع درجة تشابه مباشرةً بدلاً من التضمينات. تشير هذه الدرجة إلى الصلة بين الاستعلام المدخل والمستند.</p>
-<p>وغالبًا ما يتم استخدام أدوات إعادة التصنيف بعد المرحلة الأولى من الاسترجاع، وعادةً ما يتم ذلك من خلال تقنيات الجار القريب المتجه (ANN). في حين أن عمليات البحث باستخدام ANN فعّالة في جلب مجموعة واسعة من النتائج المحتملة ذات الصلة، إلا أنها قد لا تعطي دائمًا الأولوية للنتائج من حيث القرب الدلالي الفعلي من الاستعلام. وهنا، تُستخدم أدوات إعادة الترتيب لتحسين ترتيب النتائج باستخدام تحليلات سياقية أعمق، وغالبًا ما تستفيد من نماذج التعلم الآلي المتقدمة مثل BERT أو النماذج الأخرى القائمة على المحولات. من خلال القيام بذلك، يمكن لـ rerankers تحسين دقة وملاءمة النتائج النهائية المقدمة للمستخدم بشكل كبير.</p>
+<p>وغالبًا ما يتم استخدام أدوات إعادة التصنيف بعد المرحلة الأولى من الاسترجاع، وعادةً ما يتم ذلك عن طريق تقنيات الجار القريب المتجه (ANN). في حين أن عمليات البحث باستخدام ANN فعّالة في جلب مجموعة واسعة من النتائج المحتملة ذات الصلة، إلا أنها قد لا تعطي دائمًا الأولوية للنتائج من حيث القرب الدلالي الفعلي من الاستعلام. وهنا، تُستخدم أدوات إعادة الترتيب لتحسين ترتيب النتائج باستخدام تحليلات سياقية أعمق، وغالبًا ما تستفيد من نماذج التعلم الآلي المتقدمة مثل BERT أو النماذج الأخرى القائمة على المحولات. من خلال القيام بذلك، يمكن لـ rerankers تحسين دقة وملاءمة النتائج النهائية المقدمة للمستخدم بشكل كبير.</p>
 <p>تدمج مكتبة نماذج PyMilvus وظائف إعادة الترتيب لتحسين ترتيب النتائج التي يتم إرجاعها من عمليات البحث الأولية. بعد استرداد أقرب التضمينات من Milvus، يمكنك الاستفادة من أدوات إعادة الترتيب هذه لتحسين نتائج البحث لتحسين دقة نتائج البحث.</p>
 <table>
 <thead>
@@ -118,7 +118,22 @@ bge_rf(query, documents)
 <li><code translate="no">doc_vector</code>: التضمينات المتجهة التي تمثل المستند. للحصول على إرشادات حول إنشاء التضمينات، راجع <a href="/docs/ar/embeddings.md">التضمينات</a>.</li>
 <li><code translate="no">doc_text</code>: المحتوى النصي للمستند.</li>
 </ul>
-<h3 id="Preparations" class="common-anchor-header">التحضيرات</h3><p>قبل بدء البحث عن التشابه، تحتاج إلى إنشاء اتصال مع ميلفوس وإنشاء مجموعة وإعداد البيانات وإدراجها في تلك المجموعة. يوضح مقتطف الكود التالي هذه الخطوات التمهيدية.</p>
+<h3 id="Preparations" class="common-anchor-header">التحضيرات<button data-href="#Preparations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قبل بدء البحث عن التشابه، تحتاج إلى إنشاء اتصال مع ميلفوس، وإنشاء مجموعة، وإعداد البيانات وإدراجها في تلك المجموعة. يوضح مقتطف الكود التالي هذه الخطوات التمهيدية.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -152,7 +167,22 @@ client.insert(collection_name=<span class="hljs-string">&quot;test_collection&qu
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># {&#x27;insert_count&#x27;: 4, &#x27;ids&#x27;: [0, 1, 2, 3]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Conduct-a-similarity-search" class="common-anchor-header">إجراء بحث تشابه</h3><p>بعد إدراج البيانات، قم بإجراء عمليات البحث عن التشابه باستخدام الطريقة <code translate="no">search</code>.</p>
+<h3 id="Conduct-a-similarity-search" class="common-anchor-header">إجراء بحث تشابه<button data-href="#Conduct-a-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد إدراج البيانات، قم بإجراء عمليات البحث عن التشابه باستخدام الطريقة <code translate="no">search</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># search results based on our query</span>
 
 res = client.search(
@@ -174,7 +204,22 @@ doc_text: In <span class="hljs-number">1950</span>, Alan Turing published his se
 distance: <span class="hljs-number">0.5340118408203125</span>
 doc_text: The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, <span class="hljs-keyword">and</span> Cliff Shaw <span class="hljs-keyword">in</span> <span class="hljs-number">1955</span> marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-a-reranker-to-enhance-search-results" class="common-anchor-header">استخدم أداة إعادة الترتيب لتحسين نتائج البحث</h3><p>بعد ذلك، قم بتحسين ملاءمة نتائج البحث من خلال خطوة إعادة الترتيب. في هذا المثال، نستخدم في هذا المثال <code translate="no">CrossEncoderRerankFunction</code> المدمج في PyMilvus لإعادة ترتيب النتائج لتحسين الدقة.</p>
+<h3 id="Use-a-reranker-to-enhance-search-results" class="common-anchor-header">استخدم أداة إعادة الترتيب لتحسين نتائج البحث<button data-href="#Use-a-reranker-to-enhance-search-results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد ذلك، قم بتحسين ملاءمة نتائج البحث من خلال خطوة إعادة الترتيب. في هذا المثال، نستخدم في هذا المثال <code translate="no">CrossEncoderRerankFunction</code> المدمج في PyMilvus لإعادة ترتيب النتائج لتحسين الدقة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># use reranker to rerank search results</span>
 
 <span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> CrossEncoderRerankFunction

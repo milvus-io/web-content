@@ -22,7 +22,7 @@ summary: Imparare a distribuire un cluster Milvus su GKE.
     </button></h1><p>Milvus è un database vettoriale cloud-native e può essere distribuito su vari ambienti cloud. Questa guida illustra tutti i dettagli della configurazione di Milvus su Google Cloud Platform (GCP).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gcp-networking.png" alt="Deploy a Milvus cluster on GCP" class="doc-image" id="deploy-a-milvus-cluster-on-gcp" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gcp-networking.png" alt="Deploy a Milvus cluster on GCP" class="doc-image" id="deploy-a-milvus-cluster-on-gcp" />
    </span> <span class="img-wrapper"> <span>Distribuzione di un cluster Milvus su GCP</span> </span></p>
 <h2 id="Before-you-start" class="common-anchor-header">Prima di iniziare<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -134,7 +134,7 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In questa guida, utilizzeremo il servizio Google Kubernetes Engine (GKE) per effettuare il provisioning di un cluster Kubernetes con due nodi nella zona <strong>us-west1-a</strong>. Ogni nodo è una macchina virtuale <strong>e2-standard-4</strong> Compute Engine che esegue l'immagine <strong>COS_CONTAINERD</strong>.</p>
+    </button></h2><p>In questa guida utilizzeremo il servizio Google Kubernetes Engine (GKE) per eseguire il provisioning di un cluster Kubernetes con due nodi nella zona <strong>us-west1-a</strong>. Ogni nodo è una macchina virtuale <strong>e2-standard-4</strong> Compute Engine che esegue l'immagine <strong>COS_CONTAINERD</strong>.</p>
 <div class="alert note">
 <p>Si consiglia di utilizzare macchine con una memoria minima di 16 GB per garantire la stabilità del servizio.</p>
 </div>
@@ -179,11 +179,11 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
 <pre><code translate="no" class="language-bash">gcloud storage buckets create gs://milvus-testing-nonprod --project=milvus-testing-nonprod --default-storage-class=STANDARD --location=us-west1 --uniform-bucket-level-access
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Generare la chiave d'accesso utente e la chiave segreta, andando alla pagina di archiviazione del progetto. Nella barra laterale sinistra della dashboard, fare clic su Google Cloud Storage e poi su Impostazioni. Selezionare la scheda INTEROPERABILITÀ. Se non è già stata attivata, fare clic su Accesso interoperabile. Fare quindi clic sul pulsante CREA UNA CHIAVE per creare.</li>
+<li>Generare la chiave d'accesso utente e la chiave segreta, andando alla pagina di archiviazione del progetto. Nella barra laterale sinistra della dashboard, fare clic su Google Cloud Storage e poi su Impostazioni. Selezionare la scheda INTEROPERABILITÀ. Se non è ancora stata attivata, fare clic su Accesso interoperabile. Fare quindi clic sul pulsante CREA UNA CHIAVE per creare.</li>
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/access_key.jpg" alt="GCP Access keys for your user account" class="doc-image" id="gcp-access-keys-for-your-user-account" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/access_key.jpg" alt="GCP Access keys for your user account" class="doc-image" id="gcp-access-keys-for-your-user-account" />
    </span> <span class="img-wrapper"> <span>Chiavi di accesso GCP per l'account utente</span> </span></p>
 <ul>
 <li>Aggiungere values.yaml</li>

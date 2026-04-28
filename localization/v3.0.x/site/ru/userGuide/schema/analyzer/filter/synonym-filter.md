@@ -23,7 +23,7 @@ summary: >-
     </button></h1><p>Фильтр <code translate="no">synonym</code> переписывает лексемы в соответствии со словарем синонимов, чтобы при поиске совпадали родственные термины. Он поддерживает два режима работы и два способа предоставления словаря:</p>
 <ul>
 <li><p><strong>Режимы работы</strong> - режим <code translate="no">expand</code> сохраняет исходную лексему и выдает дополнительные синонимы к ней; режим нормализации (<code translate="no">expand: false</code>) переписывает лексемы в каноническую форму.</p></li>
-<li><p><strong>Источники словарей</strong> - небольшие словари могут быть встроены в конфигурацию фильтра через массив <code translate="no">synonyms</code>; большие словари должны храниться в виде <a href="/docs/ru/manage-file-resources.md">файлового ресурса</a> и ссылаться на него через <code translate="no">synonyms_file</code>.</p></li>
+<li><p><strong>Источники словарей</strong> - небольшие словари могут быть встроены в конфигурацию фильтра через массив <code translate="no">synonyms</code>; большие словари должны храниться как <a href="/docs/ru/manage-file-resources.md">файловый ресурс</a> и ссылаться на него через <code translate="no">synonyms_file</code>.</p></li>
 </ul>
 <h2 id="Dictionary-format" class="common-anchor-header">Формат словаря<button data-href="#Dictionary-format" class="anchor-icon" translate="no">
       <svg translate="no"

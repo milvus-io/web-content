@@ -22,7 +22,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>As métricas de semelhança são utilizadas para medir as semelhanças entre vectores. A escolha de uma métrica de distância apropriada ajuda a melhorar significativamente o desempenho da classificação e do agrupamento.</p>
-<p>Atualmente, o Milvus suporta estes tipos de métricas de semelhança: Distância euclidiana (<code translate="no">L2</code>), Inner Product (<code translate="no">IP</code>), Cosine Similarity (<code translate="no">COSINE</code>), <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code>, e <code translate="no">BM25</code> (especificamente concebida para pesquisa de texto completo em vectores esparsos).</p>
+<p>Atualmente, o Milvus suporta estes tipos de métricas de semelhança: Distância euclidiana (<code translate="no">L2</code>), Inner Product (<code translate="no">IP</code>), Cosine Similarity (<code translate="no">COSINE</code>), <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code>, e <code translate="no">BM25</code> (especificamente concebido para pesquisa de texto completo em vectores esparsos).</p>
 <p>A tabela abaixo resume o mapeamento entre os diferentes tipos de campos e os tipos de métricas correspondentes.</p>
 <table>
    <tr>
@@ -71,7 +71,7 @@ summary: >-
 <div class="alert note">
 <ul>
 <li><p>Para campos vectoriais do tipo <code translate="no">SPARSE\_FLOAT\_VECTOR</code>, utilize o tipo métrico <code translate="no">BM25</code> apenas quando efetuar a pesquisa de texto integral. Para mais informações, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto integral</a>.</p></li>
-<li><p>Para campos vectoriais do tipo <code translate="no">BINARY_VECTOR</code>, o valor da dimensão (<code translate="no">dim</code>) tem de ser um múltiplo de 8.</p></li>
+<li><p>Para campos vetoriais do tipo <code translate="no">BINARY_VECTOR</code>, o valor da dimensão (<code translate="no">dim</code>) deve ser um múltiplo de 8.</p></li>
 </ul>
 </div>
 <p>A tabela abaixo resume as caraterísticas dos valores de distância de similaridade de todos os tipos de métrica suportados e o seu intervalo de valores.</p>
@@ -121,7 +121,7 @@ summary: >-
 <p>Para indexar campos de vetor em um campo <a href="/docs/pt/array-of-structs.md">Array of Structs</a>, você deve prefixar <code translate="no">MAX_SIM</code> ao conjunto de tipos de métrica mencionados acima, com base nas incorporações de vetor armazenadas nesses campos. Por exemplo,</p>
 <ul>
 <li><p>Para um campo vetorial que armazena incorporações vectoriais do tipo <code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, ou <code translate="no">INT8_VECTOR</code>, pode utilizar <code translate="no">MAX_SIM_COSINE</code>, <code translate="no">MAX_SIM_IP</code>, ou <code translate="no">MAX_SIM_L2</code> como tipo métrico.</p></li>
-<li><p>Para um campo de vectores que armazena incrustações vectoriais do tipo <code translate="no">BINARY_VECTOR</code>, pode utilizar <code translate="no">MAX_SIM_JACCADR</code> ou <code translate="no">MAX_SIM_HAMMING</code> como tipo métrico.</p></li>
+<li><p>Para um campo de vectores que armazene incrustações vectoriais do tipo <code translate="no">BINARY_VECTOR</code>, pode utilizar <code translate="no">MAX_SIM_JACCADR</code> ou <code translate="no">MAX_SIM_HAMMING</code> como tipo métrico.</p></li>
 </ul>
 </div>
 <h2 id="Euclidean-distance-L2" class="common-anchor-header">Distância euclidiana (L2)<button data-href="#Euclidean-distance-L2" class="anchor-icon" translate="no">
@@ -140,10 +140,10 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Essencialmente, a distância euclidiana mede o comprimento de um segmento que liga 2 pontos.</p>
-<p>A fórmula para a distância euclidiana é a seguinte:</p>
+<p>A fórmula da distância euclidiana é a seguinte:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/euclidean-metric.png" alt="Euclidean Metric" class="doc-image" id="euclidean-metric" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/euclidean-metric.png" alt="Euclidean Metric" class="doc-image" id="euclidean-metric" />
    </span> <span class="img-wrapper"> <span>Métrica Euclidiana</span> </span></p>
 <p>em que <strong>a = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> e <strong>b = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong> são dois pontos num espaço euclidiano n-dimensional.</p>
 <p>É a métrica de distância mais comummente utilizada e é muito útil quando os dados são contínuos.</p>
@@ -168,7 +168,7 @@ summary: >-
     </button></h2><p>A distância IP entre dois embeddings é definida da seguinte forma:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IP-formula.png" alt="IP Formula" class="doc-image" id="ip-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IP-formula.png" alt="IP Formula" class="doc-image" id="ip-formula" />
    </span> <span class="img-wrapper"> <span>Fórmula IP</span> </span></p>
 <p>O IP é mais útil se precisar de comparar dados não normalizados ou quando se preocupa com a magnitude e o ângulo.</p>
 <div class="alert note">
@@ -177,12 +177,12 @@ summary: >-
 <p>Suponha que X' seja normalizado a partir da incorporação X:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/normalize-formula.png" alt="Normalize Formula" class="doc-image" id="normalize-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalize-formula.png" alt="Normalize Formula" class="doc-image" id="normalize-formula" />
    </span> <span class="img-wrapper"> <span>Fórmula de normalização</span> </span></p>
 <p>A correlação entre os dois embeddings é a seguinte:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/correlation-between-embeddings.png" alt="Correlation Between Embeddings" class="doc-image" id="correlation-between-embeddings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/correlation-between-embeddings.png" alt="Correlation Between Embeddings" class="doc-image" id="correlation-between-embeddings" />
    </span> <span class="img-wrapper"> <span>Correlação entre os embeddings</span> </span></p>
 <h2 id="Cosine-similarity" class="common-anchor-header">Similaridade de cosseno<button data-href="#Cosine-similarity" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -203,10 +203,10 @@ summary: >-
 <p>Para calcular a semelhança de cosseno entre dois conjuntos de vectores <strong>A = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> e <strong>B = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong>, utilize a seguinte fórmula:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
    </span> <span class="img-wrapper"> <span>Similaridade de cosseno</span> </span></p>
 <p>A semelhança de cosseno está sempre no intervalo <strong>[-1, 1]</strong>. Por exemplo, dois vectores proporcionais têm uma semelhança de cosseno de <strong>1</strong>, dois vectores ortogonais têm uma semelhança de <strong>0</strong> e dois vectores opostos têm uma semelhança de <strong>-1</strong>. Quanto maior for o cosseno, menor é o ângulo entre os dois vectores, indicando que estes dois vectores são mais semelhantes entre si.</p>
-<p>Subtraindo a semelhança de cosseno de 1, obtém-se a distância de cosseno entre dois vectores.</p>
+<p>Ao subtrair a semelhança de cosseno de 1, obtém-se a distância de cosseno entre dois vectores.</p>
 <h2 id="JACCARD-distance" class="common-anchor-header">Distância JACCARD<button data-href="#JACCARD-distance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,12 +225,12 @@ summary: >-
     </button></h2><p>O coeficiente de distância JACCARD mede a semelhança entre dois conjuntos de amostras e é definido como a cardinalidade da intersecção dos conjuntos definidos dividida pela cardinalidade da união dos mesmos. Só pode ser aplicado a conjuntos de amostras finitos.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
    </span> <span class="img-wrapper"> <span>Fórmula do coeficiente de similaridade JACCARD</span> </span></p>
 <p>A distância JACCARD mede a dissemelhança entre conjuntos de dados e é obtida subtraindo o coeficiente de semelhança JACCARD de 1. Para variáveis binárias, a distância JACCARD é equivalente ao coeficiente de Tanimoto.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
    </span> <span class="img-wrapper"> <span>Fórmula da distância JACCARD</span> </span></p>
 <h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
       <svg translate="no"

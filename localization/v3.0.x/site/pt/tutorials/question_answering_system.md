@@ -32,13 +32,13 @@ title: Sistema de resposta a perguntas
 <p></br></p>
 <p>O sistema de resposta a perguntas é uma aplicação comum do mundo real que pertence ao domínio do processamento de linguagem natural. Os sistemas de QA típicos incluem sistemas de atendimento ao cliente em linha, chatbots de QA, entre outros. A maioria dos sistemas de resposta a perguntas pode ser classificada como: generativo ou de recuperação, de rodada única ou de rodada múltipla, de domínio aberto ou sistemas de resposta a perguntas específicas.</p>
 <p></br></p>
-<p>Neste tutorial, aprenderá a construir um sistema de QA que pode ligar novas perguntas do utilizador a respostas massivas previamente armazenadas na base de dados de vectores. Para criar um chatbot deste tipo, prepare o seu próprio conjunto de dados de perguntas e respostas correspondentes. Guarde as perguntas e respostas em MySQL, uma base de dados relacional. Em seguida, utilize o BERT, o modelo de aprendizagem automática (ML) para processamento de linguagem natural (NLP), para converter as perguntas em vectores. Estes vectores de perguntas são armazenados e indexados no Milvus.  Quando os utilizadores introduzem uma nova pergunta, esta é igualmente convertida num vetor pelo modelo BERT e o Milvus procura o vetor de perguntas mais semelhante a este novo vetor. O sistema de GQ devolve a resposta correspondente às perguntas mais semelhantes.</p>
+<p>Neste tutorial, aprenderá a construir um sistema de QA que pode ligar novas perguntas de utilizadores a respostas massivas previamente armazenadas na base de dados de vectores. Para criar um chatbot deste tipo, prepare o seu próprio conjunto de dados de perguntas e respostas correspondentes. Guarde as perguntas e respostas em MySQL, uma base de dados relacional. Em seguida, utilize o BERT, o modelo de aprendizagem automática (ML) para processamento de linguagem natural (NLP), para converter as perguntas em vectores. Estes vectores de perguntas são armazenados e indexados no Milvus.  Quando os utilizadores introduzem uma nova pergunta, esta é igualmente convertida num vetor pelo modelo BERT e o Milvus procura o vetor de perguntas mais semelhante a este novo vetor. O sistema de GQ devolve a resposta correspondente às perguntas mais semelhantes.</p>
 <p></br></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/qa_chatbot.png" alt="QA_Chatbot" class="doc-image" id="qa_chatbot" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/qa_chatbot.png" alt="QA_Chatbot" class="doc-image" id="qa_chatbot" />
    </span> <span class="img-wrapper"> <span>QA_Chatbot</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/qa_chatbot_demo.png" alt="QA_chatbot_demo" class="doc-image" id="qa_chatbot_demo" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/qa_chatbot_demo.png" alt="QA_chatbot_demo" class="doc-image" id="qa_chatbot_demo" />
    </span> <span class="img-wrapper"> <span>QA_chatbot_demo</span> </span></p>

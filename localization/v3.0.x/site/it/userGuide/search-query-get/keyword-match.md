@@ -6,7 +6,7 @@ summary: >-
   in base a termini specifici. Questa funzione è utilizzata principalmente per
   la ricerca filtrata per soddisfare condizioni specifiche e può incorporare un
   filtro scalare per affinare i risultati della query, consentendo ricerche di
-  somiglianza all'interno di vettori che soddisfano criteri scalari.
+  similarità all'interno di vettori che soddisfano criteri scalari.
 ---
 <h1 id="Text-Match" class="common-anchor-header">Corrispondenza del testo<button data-href="#Text-Match" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +52,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" />
    </span> <span class="img-wrapper"> <span>Corrispondenza di parole chiave</span> </span></p>
-<h2 id="Enable-text-match" class="common-anchor-header">Abilitazione della corrispondenza di testo<button data-href="#Enable-text-match" class="anchor-icon" translate="no">
+<h2 id="Enable-text-match" class="common-anchor-header">Abilitazione della corrispondenza testuale<button data-href="#Enable-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,7 +67,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La corrispondenza testuale funziona sul tipo di campo <a href="/docs/it/string.md"><code translate="no">VARCHAR</code></a> che è essenzialmente il tipo di dati stringa di Milvus. Per abilitare la corrispondenza con il testo, impostare <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code> su <code translate="no">True</code> e poi configurare facoltativamente un <a href="/docs/it/analyzer-overview.md">analizzatore</a> per l'analisi del testo quando si definisce lo schema della raccolta.</p>
+    </button></h2><p>La corrispondenza testuale funziona sul tipo di campo <a href="/docs/it/string.md"><code translate="no">VARCHAR</code></a> che è essenzialmente il tipo di dati stringa di Milvus. Per abilitare la corrispondenza con il testo, impostare sia <code translate="no">enable_analyzer</code> che <code translate="no">enable_match</code> su <code translate="no">True</code> e configurare facoltativamente un <a href="/docs/it/analyzer-overview.md">analizzatore</a> per l'analisi del testo quando si definisce lo schema della raccolta.</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Impostare <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -83,7 +83,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Per abilitare la corrispondenza del testo per uno specifico campo <code translate="no">VARCHAR</code>, impostare entrambi i parametri <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code> su <code translate="no">True</code> quando si definisce lo schema del campo. Ciò indica a Milvus di tokenizzare il testo e di creare un indice invertito per il campo specificato, consentendo corrispondenze di testo rapide ed efficienti.</p>
+    </button></h3><p>Per abilitare la corrispondenza del testo per un campo specifico <code translate="no">VARCHAR</code>, impostare entrambi i parametri <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code> su <code translate="no">True</code> quando si definisce lo schema del campo. Ciò indica a Milvus di tokenizzare il testo e di creare un indice invertito per il campo specificato, consentendo corrispondenze di testo rapide ed efficienti.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -219,7 +219,7 @@ schema.WithField(entity.NewField().
       </svg>
     </button></h3><p>Le prestazioni e l'accuratezza della corrispondenza delle parole chiave dipendono dall'analizzatore selezionato. Diversi analizzatori sono adatti a varie lingue e strutture di testo, quindi la scelta di quello giusto può avere un impatto significativo sui risultati della ricerca per il vostro caso d'uso specifico.</p>
 <p>Per impostazione predefinita, Milvus utilizza l'analizzatore <code translate="no">standard</code>, che tokenizza il testo in base agli spazi bianchi e alla punteggiatura, rimuove i token più lunghi di 40 caratteri e converte il testo in minuscolo. Non sono necessari parametri aggiuntivi per applicare questa impostazione predefinita. Per ulteriori informazioni, consultare <a href="/docs/it/standard-analyzer.md">Standard</a>.</p>
-<p>Nei casi in cui sia necessario un analizzatore diverso, è possibile configurarne uno usando il parametro <code translate="no">analyzer_params</code>. Ad esempio, per applicare l'analizzatore <code translate="no">english</code> per l'elaborazione del testo inglese:</p>
+<p>Nei casi in cui sia necessario un analizzatore diverso, è possibile configurarne uno utilizzando il parametro <code translate="no">analyzer_params</code>. Ad esempio, per applicare l'analizzatore <code translate="no">english</code> per l'elaborazione del testo inglese:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -305,7 +305,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus offre anche altri analizzatori adatti a diversi linguaggi e scenari. Per maggiori dettagli, consultare la sezione <a href="/docs/it/analyzer-overview.md">Panoramica degli analizzatori</a>.</p>
+<p>Milvus fornisce anche altri analizzatori adatti a diversi linguaggi e scenari. Per maggiori dettagli, consultare la sezione <a href="/docs/it/analyzer-overview.md">Panoramica degli analizzatori</a>.</p>
 <h2 id="Use-text-match" class="common-anchor-header">Utilizzare la corrispondenza del testo<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -39,7 +39,7 @@ title: Mencadangkan dan Memulihkan dalam Satu Instance
     </button></h2><p>Diagram di bawah ini mengilustrasikan proses pencadangan dan pemulihan dalam satu instans Milvus.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/single-instance-backup-and-restore.png" alt="single-instance-backup-and-restore.png" class="doc-image" id="single-instance-backup-and-restore.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/single-instance-backup-and-restore.png" alt="single-instance-backup-and-restore.png" class="doc-image" id="single-instance-backup-and-restore.png" />
    </span> <span class="img-wrapper"> <span>pencadangan-dan-pemulihan-dalam-satu-instansi.png</span> </span></p>
 <p>Asumsikan kita memiliki sebuah instans Milvus, <code translate="no">milvus_A</code>, menggunakan sebuah bucket bernama<code translate="no">bucket_A</code> untuk penyimpanan data. Dalam contoh ini, tujuan kita adalah menyelesaikan tugas-tugas berikut:</p>
 <ol>
@@ -62,7 +62,7 @@ title: Mencadangkan dan Memulihkan dalam Satu Instance
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Pastikan alat <strong>milvus-backup</strong> sudah terpasang.</p></li>
+<li><p>Pastikan alat <strong>milvus-backup</strong> telah diinstal.</p></li>
 <li><p>Biasakan diri Anda dengan mengonfigurasi pengaturan penyimpanan objek Milvus. Untuk detailnya, lihat <a href="https://milvus.io/docs/deploy_s3.md">Penyimpanan Objek</a>.</p></li>
 </ul>
 <h2 id="Back-up-the-collection" class="common-anchor-header">Mencadangkan koleksi<button data-href="#Back-up-the-collection" class="anchor-icon" translate="no">
@@ -80,7 +80,22 @@ title: Mencadangkan dan Memulihkan dalam Satu Instance
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">Langkah 1: Siapkan konfigurasi</h3><p>Masuk ke direktori proyek milvus-backup dan buat direktori bernama <code translate="no">configs</code>:</p>
+    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">Langkah 1: Siapkan konfigurasi<button data-href="#Step-1-Prepare-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Masuk ke direktori proyek milvus-backup dan buat direktori bernama <code translate="no">configs</code>:</p>
 <pre><code translate="no" class="language-shell">mkdir configs
 cd configs
 <button class="copy-code-btn"></button></code></pre>
@@ -93,7 +108,22 @@ cd configs
 ├── milvus-backup
 └── README.md
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">Langkah 2: Edit file konfigurasi</h3><p>Ubah file backup.yaml untuk mengatur konfigurasi yang sesuai untuk<code translate="no">milvus_A</code>. Di bawah ini adalah contoh konfigurasi penyimpanan:</p>
+<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">Langkah 2: Edit file konfigurasi<button data-href="#Step-2-Edit-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ubah file backup.yaml untuk mengatur konfigurasi yang sesuai untuk<code translate="no">milvus_A</code>. Di bawah ini adalah contoh konfigurasi penyimpanan:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Related configuration of minio, which is responsible for data persistence for Milvus.</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-comment"># cloudProvider: &quot;minio&quot; # deprecated use storageType instead</span>
@@ -117,7 +147,22 @@ cd configs
   <span class="hljs-attr">backupBucketName:</span> <span class="hljs-string">&quot;bucket_A&quot;</span> <span class="hljs-comment"># Bucket name to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
   <span class="hljs-attr">backupRootPath:</span> <span class="hljs-string">&quot;backup&quot;</span> <span class="hljs-comment"># Rootpath to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Create-backup" class="common-anchor-header">Langkah 3: Buat cadangan</h3><p>Setelah backup.yaml disimpan, buat cadangan bernama <code translate="no">my_backup</code>:</p>
+<h3 id="Step-3-Create-backup" class="common-anchor-header">Langkah 3: Buat cadangan<button data-href="#Step-3-Create-backup" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Setelah backup.yaml disimpan, buat cadangan bernama <code translate="no">my_backup</code>:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup create -c coll -n my_backup
 <button class="copy-code-btn"></button></code></pre>
 <p>Perintah ini membuat cadangan <code translate="no">bucket_A/backup/my_backup</code> dalam penyimpanan objek <code translate="no">milvus_A</code>.</p>

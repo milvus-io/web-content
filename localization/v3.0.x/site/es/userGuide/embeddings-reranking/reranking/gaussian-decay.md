@@ -105,7 +105,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">scale</code> (±2 km): La distancia a la que la relevancia cae hasta el valor de decaimiento: los restaurantes situados a exactamente 2 kilómetros de distancia ven reducida a la mitad su puntuación de relevancia (0,5).</p></li>
 <li><p><code translate="no">decay</code> (0.5): La puntuación a la distancia de escala: este parámetro controla esencialmente la rapidez con la que las puntuaciones disminuyen con la distancia.</p></li>
 </ul>
-<p>Como se puede ver en la curva, la relevancia de los restaurantes situados a más de 2 km sigue disminuyendo, pero nunca llega a cero. Incluso los restaurantes situados a 4-5 kilómetros conservan una relevancia mínima, lo que permite que restaurantes excelentes pero lejanos sigan apareciendo en los resultados (aunque con una clasificación inferior).</p>
+<p>Como se puede ver en la curva, los restaurantes situados a más de 2 km siguen disminuyendo en relevancia, pero nunca llegan a cero. Incluso los restaurantes situados a 4-5 kilómetros conservan una relevancia mínima, lo que permite que restaurantes excelentes pero lejanos sigan apareciendo en los resultados (aunque con una clasificación inferior).</p>
 <p>Este comportamiento imita la forma en que la gente piensa de forma natural sobre la relevancia de la distancia: se prefieren los lugares cercanos, pero estamos dispuestos a viajar más lejos para encontrar opciones excepcionales.</p>
 <h2 id="Formula" class="common-anchor-header">Fórmula<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"

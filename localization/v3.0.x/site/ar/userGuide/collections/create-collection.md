@@ -519,11 +519,26 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>يمكنك تعيين خصائص للمجموعة المراد إنشاؤها لجعلها ملائمة لخدمتك. الخصائص القابلة للتطبيق هي كالتالي.</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">تعيين رقم الشريحة</h3><p>الأجزاء هي شرائح أفقية للمجموعة، وكل جزء يتوافق مع قناة إدخال بيانات. بشكل افتراضي، تحتوي كل مجموعة على شريحة واحدة. يمكنك تحديد عدد الأجزاء عند إنشاء مجموعة لتتناسب بشكل أفضل مع حجم البيانات وعبء العمل.</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">تعيين رقم الشريحة<button data-href="#Set-Shard-Number" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>الأجزاء هي شرائح أفقية للمجموعة، وكل جزء يتوافق مع قناة إدخال بيانات. بشكل افتراضي، تحتوي كل مجموعة على شريحة واحدة. يمكنك تحديد عدد الأجزاء عند إنشاء مجموعة لتتناسب بشكل أفضل مع حجم البيانات وعبء العمل.</p>
 <p>وكمبدأ توجيهي عام، ضع في اعتبارك ما يلي عند تحديد عدد الأجزاء:</p>
 <ul>
 <li><strong>حجم البيانات:</strong> من الممارسات الشائعة أن يكون هناك جزء واحد لكل 200 مليون كيان. يمكنك أيضًا التقدير بناءً على إجمالي حجم البيانات، على سبيل المثال، إضافة جزء واحد لكل 100 جيجابايت من البيانات التي تخطط لإدراجها.</li>
-<li><strong>استخدام عقدة الدفق:</strong> إذا كان مثيل Milvus الخاص بك يحتوي على عقد دفق متعددة، يوصى باستخدام أجزاء متعددة. يضمن هذا توزيع عبء عمل إدراج البيانات على جميع عقد الدفق المتاحة، مما يمنع البعض من أن يكون خاملاً بينما يكون البعض الآخر مثقلًا.</li>
+<li><strong>استخدام عقدة الدفق:</strong> إذا كان مثيل Milvus الخاص بك يحتوي على عقد دفق متعددة، يوصى باستخدام أجزاء متعددة. هذا يضمن توزيع عبء عمل إدراج البيانات على جميع عقد الدفق المتاحة، مما يمنع البعض من أن يكون خاملاً بينما يكون البعض الآخر مثقلًا.</li>
 </ul>
 <p>يوضح مقتطف الشيفرة التالي كيفية تعيين رقم الجزء عند إنشاء مجموعة.</p>
 <div class="multipleCode">
@@ -573,7 +588,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">تمكين mmap</h3><p>يتيح Milvus تمكين mmap على جميع المجموعات بشكل افتراضي، مما يسمح لـ Milvus بتعيين بيانات الحقل الخام في الذاكرة بدلاً من تحميلها بالكامل. هذا يقلل من آثار أقدام الذاكرة ويزيد من سعة المجموعة. للحصول على تفاصيل حول mmap، راجع <a href="/docs/ar/mmap.md">استخدام mmap</a>.</p>
+<h3 id="Enable-mmap" class="common-anchor-header">تمكين mmap<button data-href="#Enable-mmap" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يتيح Milvus تمكين mmap على جميع المجموعات بشكل افتراضي، مما يسمح لـ Milvus بتعيين بيانات الحقل الخام في الذاكرة بدلاً من تحميلها بالكامل. هذا يقلل من آثار أقدام الذاكرة ويزيد من سعة المجموعة. للحصول على تفاصيل حول mmap، راجع <a href="/docs/ar/mmap.md">استخدام mmap</a>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#plaintext">نص عادي</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap</span>
@@ -626,7 +656,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Collection-TTL" class="common-anchor-header">تعيين TTL للمجموعة</h3><p>إذا كانت البيانات الموجودة في مجموعة تحتاج إلى إسقاطها لفترة محددة، ففكر في تعيين وقت التشغيل (TTL) بالثواني. بمجرد انتهاء مدة TTL، يحذف Milvus الكيانات في المجموعة. يكون الحذف غير متزامن، مما يشير إلى أن عمليات البحث والاستعلامات لا تزال ممكنة قبل اكتمال الحذف.</p>
+<h3 id="Set-Collection-TTL" class="common-anchor-header">تعيين TTL للمجموعة<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>إذا كانت البيانات الموجودة في مجموعة تحتاج إلى إسقاطها لفترة محددة، ففكر في تعيين وقت التشغيل (TTL) بالثواني. بمجرد انتهاء مدة TTL، يحذف Milvus الكيانات في المجموعة. يكون الحذف غير متزامن، مما يشير إلى أن عمليات البحث والاستعلامات لا تزال ممكنة قبل اكتمال الحذف.</p>
 <p>يقوم مقتطف الكود التالي بتعيين TTL إلى يوم واحد (86400 ثانية). يُنصح بتعيين TTL إلى يومين كحد أدنى.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
@@ -682,7 +727,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Consistency-Level" class="common-anchor-header">تعيين مستوى الاتساق</h3><p>عند إنشاء مجموعة، يمكنك تعيين مستوى الاتساق لعمليات البحث والاستعلامات في المجموعة. يمكنك أيضًا تغيير مستوى تناسق المجموعة أثناء بحث أو استعلام معين.</p>
+<h3 id="Set-Consistency-Level" class="common-anchor-header">تعيين مستوى الاتساق<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>عند إنشاء مجموعة، يمكنك تعيين مستوى الاتساق لعمليات البحث والاستعلامات في المجموعة. يمكنك أيضًا تغيير مستوى تناسق المجموعة أثناء بحث أو استعلام معين.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With consistency level</span>
@@ -736,5 +796,20 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>لمعرفة المزيد عن مستويات الاتساق، راجع <a href="/docs/ar/tune_consistency.md">مستوى الاتساق</a>.</p>
-<h3 id="Enable-Dynamic-Field" class="common-anchor-header">تمكين الحقل الديناميكي</h3><p>الحقل الديناميكي في المجموعة هو حقل تدوين كائنات جافا سكريبت (JSON) محجوز باسم <strong>$meta</strong>. بمجرد تمكين هذا الحقل، يحفظ Milvus جميع الحقول غير المعرفة من قبل النظام الأساسي التي يحملها كل كيان وقيمها كأزواج قيمة مفتاح في الحقل المحجوز.</p>
+<h3 id="Enable-Dynamic-Field" class="common-anchor-header">تمكين الحقل الديناميكي<button data-href="#Enable-Dynamic-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>الحقل الديناميكي في المجموعة هو حقل تدوين كائنات جافا سكريبت (JSON) محجوز باسم <strong>$meta</strong>. بمجرد تمكين هذا الحقل، يحفظ Milvus جميع الحقول غير المعرفة من قبل النظام الأساسي التي يحملها كل كيان وقيمها كأزواج قيمة مفتاح في الحقل المحجوز.</p>
 <p>للحصول على تفاصيل حول كيفية استخدام الحقل الديناميكي، راجع <a href="/docs/ar/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>

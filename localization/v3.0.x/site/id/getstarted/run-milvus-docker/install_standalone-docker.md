@@ -71,7 +71,7 @@ title: Menjalankan Milvus di Docker (Linux)
 </ul>
 <p>Selalu unduh skrip terbaru untuk memastikan Anda mendapatkan konfigurasi dan peningkatan arsitektur terbaru.</p>
 <p>Jika Anda ingin menggunakan <a href="https://milvus.io/docs/milvus_backup_overview.md">Cadangan</a> dalam mode penerapan mandiri, disarankan untuk menggunakan metode penerapan <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
-<p>Jika Anda mengalami masalah dalam menarik citra, hubungi kami di <a href="mailto:community@zilliz.com">community@zilliz.com</a> dengan detail tentang masalahnya, dan kami akan memberikan dukungan yang diperlukan.</p>
+<p>Jika Anda mengalami masalah dalam menarik citra, hubungi kami di <a href="mailto:community@zilliz.com">community@zilliz.com</a> dengan detail tentang masalahnya, dan kami akan menyediakan dukungan yang diperlukan.</p>
 </div>
 <p>Setelah menjalankan skrip instalasi:</p>
 <ul>

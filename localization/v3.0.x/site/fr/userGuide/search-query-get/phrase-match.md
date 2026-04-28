@@ -1,6 +1,6 @@
 ---
 id: phrase-match.md
-title: Correspondance de phrasesCompatible with Milvus 2.6.x
+title: Correspondance de phrasesCompatible with Milvus 2.5.17+
 summary: >-
   La correspondance des phrases vous permet de rechercher des documents
   contenant les termes de votre requête sous la forme d'une phrase exacte. Par
@@ -9,9 +9,9 @@ summary: >-
   machine learning" correspond à un texte tel que "...typical robotics machine
   learning models...", où les mots "robotics", "machine" et "learning"
   apparaissent dans l'ordre, sans aucun autre mot entre eux.
-beta: Milvus 2.6.x
+beta: Milvus 2.5.17+
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">Correspondance de phrases<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">Correspondance de phrases<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -46,7 +46,7 @@ beta: Milvus 2.6.x
     </button></h2><p>Alimentée par la bibliothèque du moteur de recherche <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, la correspondance de phrases fonctionne en analysant les informations relatives à la position des mots dans les documents. Le diagramme ci-dessous illustre le processus :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
    </span> <span class="img-wrapper"> <span>Flux de travail de la correspondance de phrases</span> </span></p>
 <ol>
 <li><p><strong>Tokenisation des documents</strong>: Lorsque vous insérez des documents dans Milvus, le texte est divisé en tokens (mots ou termes individuels) à l'aide d'un analyseur, les informations de position étant enregistrées pour chaque token. Par exemple, <strong>doc_1</strong> est tokenisé en <strong>["machine" (pos=0), "learning" (pos=1), "boosts" (pos=2), "efficiency" (pos=3)]</strong>. Pour plus d'informations sur les analyseurs, reportez-vous à la section <a href="/docs/fr/analyzer-overview.md">Vue d'ensemble des analyseurs</a>.</p></li>
@@ -237,7 +237,7 @@ schema.add_field(
    </tr>
    <tr>
      <td><p>4</p></td>
-     <td><p>"La machine améliore rapidement les performances du modèle pour un apprentissage continu"</p></td>
+     <td><p>"La machine améliore rapidement les performances du modèle pour l'apprentissage continu"</p></td>
    </tr>
    <tr>
      <td><p>5</p></td>
@@ -297,7 +297,7 @@ result = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Dans les opérations de recherche, <strong>PHRASE_MATCH</strong> est utilisé pour filtrer les documents avant d'appliquer le classement par similarité vectorielle. Cette approche en deux étapes permet d'abord de restreindre l'ensemble des candidats par la correspondance textuelle, puis de reclasser ces candidats sur la base de l'intégration vectorielle.</p>
+    </button></h3><p>Dans les opérations de recherche, <strong>PHRASE_MATCH</strong> est utilisé pour filtrer les documents avant d'appliquer le classement par similarité vectorielle. Cette approche en deux étapes permet d'abord de restreindre l'ensemble des candidats par la correspondance textuelle, puis de reclasser ces candidats sur la base de l'intégration des vecteurs.</p>
 <h4 id="Example-slop--1" class="common-anchor-header">Exemple : slop = 1</h4><p>Le filtre est appliqué aux documents qui contiennent l'expression <strong>"machine à apprendre"</strong> avec une légère flexibilité.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
 filter_slop1 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>

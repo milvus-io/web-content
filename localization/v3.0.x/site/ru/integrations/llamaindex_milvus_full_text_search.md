@@ -31,7 +31,7 @@ summary: >-
       </svg>
     </button></h1><p><strong>Полнотекстовый поиск</strong> использует точное соответствие ключевых слов, часто применяя алгоритмы типа BM25 для ранжирования документов по релевантности. В системах <strong>Retrieval-Augmented Generation (RAG)</strong> этот метод позволяет извлекать релевантный текст для улучшения ответов, генерируемых ИИ.</p>
 <p>В то же время <strong>семантический поиск</strong> интерпретирует контекстное значение для получения более широких результатов. Сочетание обоих подходов позволяет создать <strong>гибридный поиск</strong>, который улучшает поиск информации - особенно в тех случаях, когда одного метода недостаточно.</p>
-<p>Благодаря подходу Sparse-BM25 в <a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a> необработанный текст автоматически преобразуется в разреженные векторы. Это устраняет необходимость в ручном создании разреженных вкраплений и позволяет использовать гибридную стратегию поиска, которая позволяет сбалансировать семантическое понимание и релевантность ключевых слов.</p>
+<p>Благодаря подходу Sparse-BM25 в <a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a> необработанный текст автоматически преобразуется в разреженные векторы. Это устраняет необходимость в ручном генерировании разреженных вкраплений и позволяет использовать гибридную стратегию поиска, которая позволяет сбалансировать семантическое понимание и релевантность ключевых слов.</p>
 <p>В этом руководстве вы узнаете, как использовать LlamaIndex и Milvus для создания системы RAG с использованием полнотекстового и гибридного поиска. Мы начнем с реализации только полнотекстового поиска, а затем расширим его, интегрировав семантический поиск для получения более полных результатов.</p>
 <blockquote>
 <p>Прежде чем приступить к этому уроку, убедитесь, что вы знакомы с <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">полнотекстовым поиском</a> и <a href="https://milvus.io/docs/integrate_with_llamaindex.md">основами использования Milvus в LlamaIndex</a>.</p>
@@ -70,12 +70,12 @@ openai.api_key = <span class="hljs-string">&quot;sk-&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Чтобы использовать векторное хранилище Milvus, укажите свой сервер Milvus <code translate="no">URI</code> (и, по желанию, <code translate="no">TOKEN</code>). Запустить сервер Milvus можно, следуя <a href="https://milvus.io/docs/install-overview.md">руководству по установке Milvus</a> или просто бесплатно попробовав <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">Zilliz Cloud</a>.</p>
 <blockquote>
-<p>Полнотекстовый поиск в настоящее время поддерживается в Milvus Standalone, Milvus Distributed и Zilliz Cloud, но пока не поддерживается в Milvus Lite (планируется к внедрению в будущем). За дополнительной информацией обращайтесь по адресу support@zilliz.com.</p>
+<p>Полнотекстовый поиск в настоящее время поддерживается в Milvus Standalone, Milvus Distributed и Zilliz Cloud, но еще не поддерживается в Milvus Lite (планируется к внедрению в будущем). За дополнительной информацией обращайтесь по адресу support@zilliz.com.</p>
 </blockquote>
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = &quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Загрузить примеры данных</strong></p>
+<p><strong>Загрузка примеров данных</strong></p>
 <p>Выполните следующие команды, чтобы загрузить примеры документов в каталог "data/paul_graham":</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">&#x27;data/paul_graham/&#x27;</span></span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-variable">$wget</span> <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt&#x27;</span> -O <span class="hljs-string">&#x27;data/paul_graham/paul_graham_essay.txt&#x27;</span></span>
@@ -124,7 +124,22 @@ write then, and probably still are: short stories. My stories were
 awful. They had hardly any plot, just characters with strong feelings,
 which I ...
 </code></pre>
-<h3 id="Full-Text-Search-with-BM25" class="common-anchor-header">Полнотекстовый поиск с BM25</h3><p>LlamaIndex's <code translate="no">MilvusVectorStore</code> поддерживает полнотекстовый поиск, обеспечивая эффективное извлечение информации на основе ключевых слов. Используя встроенную функцию <code translate="no">sparse_embedding_function</code>, он применяет скоринг BM25 для ранжирования результатов поиска.</p>
+<h3 id="Full-Text-Search-with-BM25" class="common-anchor-header">Полнотекстовый поиск с BM25<button data-href="#Full-Text-Search-with-BM25" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>LlamaIndex's <code translate="no">MilvusVectorStore</code> поддерживает полнотекстовый поиск, обеспечивая эффективное извлечение информации на основе ключевых слов. Используя встроенную функцию <code translate="no">sparse_embedding_function</code>, он применяет скоринг BM25 для ранжирования результатов поиска.</p>
 <p>В этом разделе мы покажем, как реализовать RAG-систему, использующую BM25 для полнотекстового поиска.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> VectorStoreIndex, StorageContext
 <span class="hljs-keyword">from</span> llama_index.vector_stores.milvus <span class="hljs-keyword">import</span> MilvusVectorStore
@@ -186,7 +201,22 @@ hiring too many people, and the relief felt when the company was acquired by Yah
     enable_match=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Hybrid-Search-with-Reranker" class="common-anchor-header">Гибридный поиск с реранкером</h3><p>Гибридная система поиска сочетает в себе семантический и полнотекстовый поиск, оптимизируя производительность поиска в системе RAG.</p>
+<h3 id="Hybrid-Search-with-Reranker" class="common-anchor-header">Гибридный поиск с реранкером<button data-href="#Hybrid-Search-with-Reranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Гибридная система поиска сочетает в себе семантический и полнотекстовый поиск, оптимизируя производительность поиска в системе RAG.</p>
 <p>В следующем примере используется вставка OpenAI для семантического поиска и BM25 для полнотекстового поиска:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index over the documnts</span>
 vector_store = MilvusVectorStore(

@@ -39,7 +39,7 @@ cohere_rf = CohereRerankFunction(
 <p><strong>Parameter</strong></p>
 <ul>
 <li><p><code translate="no">model_name</code> <em>(string</em>)</p>
-<p>Nama model yang akan digunakan. Anda dapat menentukan salah satu nama model perangking Cohere yang tersedia, misalnya, <code translate="no">rerank-english-v3.0</code>, <code translate="no">rerank-multilingual-v3.0</code>, dsb. Jika Anda membiarkan parameter ini tidak ditentukan, <code translate="no">rerank-english-v2.0</code> akan digunakan. Untuk daftar model yang tersedia, lihat <a href="https://docs.cohere.com/docs/rerank-2">Rerangking</a>.</p></li>
+<p>Nama model yang akan digunakan. Anda dapat menentukan salah satu nama model perangking Cohere yang tersedia, misalnya, <code translate="no">rerank-english-v3.0</code>, <code translate="no">rerank-multilingual-v3.0</code>, dsb. Jika Anda membiarkan parameter ini tidak ditentukan, <code translate="no">rerank-english-v2.0</code> akan digunakan. Untuk daftar model yang tersedia, lihat <a href="https://docs.cohere.com/docs/rerank-2">Perangkingan ulang</a>.</p></li>
 <li><p><code translate="no">api_key</code> <em>(string</em>)</p>
 <p>Kunci API untuk mengakses API Cohere. Untuk informasi tentang cara membuat kunci API, lihat <a href="https://dashboard.cohere.com/api-keys">Dasbor Cohere</a>.</p></li>
 </ul>

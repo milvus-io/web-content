@@ -24,7 +24,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>Milvus unterstützt eine Reihe von Operatoren für die räumliche Filterung von <code translate="no">GEOMETRY</code> Feldern, die für die Verwaltung und Analyse von Geometriedaten unerlässlich sind. Mit diesen Operatoren können Sie Entitäten auf der Grundlage der geometrischen Beziehungen zwischen Objekten abrufen.</p>
-<p>Alle Geometrieoperatoren funktionieren mit zwei geometrischen Argumenten: dem Namen des Feldes <code translate="no">GEOMETRY</code>, das in Ihrem Sammlungsschema definiert ist, und einem geometrischen Zielobjekt, das im Format <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text</a> (WKT) dargestellt ist.</p>
+<p>Alle Geometrieoperatoren funktionieren, indem sie zwei geometrische Argumente annehmen: den Namen des Feldes <code translate="no">GEOMETRY</code>, das in Ihrem Sammlungsschema definiert ist, und ein geometrisches Zielobjekt, das im <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known-Text-Format</a> (WKT) dargestellt ist.</p>
 <h2 id="Use-syntax" class="common-anchor-header">Syntax verwenden<button data-href="#Use-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -239,7 +239,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der Operator <code translate="no">ST_TOUCHES</code> gibt <code translate="no">TRUE</code> zurück, wenn sich die Grenzen zweier Geometrien berühren, ihre Innenräume sich aber nicht überschneiden. Dies ist nützlich, um Nachbarschaften zu erkennen.</p>
+    </button></h2><p>Der Operator <code translate="no">ST_TOUCHES</code> gibt <code translate="no">TRUE</code> zurück, wenn sich die Grenzen zweier Geometrien berühren, aber ihre Innenräume sich nicht schneiden. Dies ist nützlich, um Nachbarschaften zu erkennen.</p>
 <p><strong>Beispiel</strong></p>
 <p>Wenn Sie eine Karte mit Grundstücken haben und alle Grundstücke finden möchten, die direkt an einen öffentlichen Park grenzen, ohne dass es zu Überschneidungen kommt.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries that only touch a line string at their boundaries.</span>

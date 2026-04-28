@@ -6,7 +6,7 @@ summary: >-
   linguaggio naturale. Questo approccio rende più accessibile l'interrogazione
   dei database vettoriali, consentendo agli utenti di esprimere condizioni di
   filtraggio complesse in inglese semplice, che vengono poi convertite nella
-  sintassi corretta di Milvus.
+  corretta sintassi di Milvus.
 title: >-
   Generazione di espressioni di filtro per le query Milvus con i Large Language
   Models
@@ -250,7 +250,7 @@ result = client.query(
     </button></h2><p>Per aiutare il modello linguistico di grandi dimensioni a comprendere meglio la sintassi delle espressioni di filtro di Milvus, dobbiamo fornirgli la documentazione ufficiale pertinente. Utilizzeremo la libreria <code translate="no">docling</code> per raccogliere diverse pagine chiave dal sito ufficiale di Milvus.</p>
 <p>Queste pagine contengono informazioni dettagliate su:</p>
 <ul>
-<li><strong>Operatori booleani</strong>: <code translate="no">and</code>, <code translate="no">or</code>, <code translate="no">not</code> per condizioni logiche complesse</li>
+<li><strong>Operatori booleani</strong>: <code translate="no">and</code>, <code translate="no">or</code>, <code translate="no">not</code> per le condizioni logiche complesse</li>
 <li><strong>Operatori di base</strong>: Operatori di confronto come <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, <code translate="no">&lt;=</code></li>
 <li><strong>Modelli di filtraggio</strong>: Modelli e sintassi di filtraggio avanzati</li>
 <li><strong>Corrispondenza di stringhe</strong>: Corrispondenza di pattern con <code translate="no">like</code> e altre operazioni sulle stringhe</li>
@@ -289,7 +289,7 @@ docs = [
         ></path>
       </svg>
     </button></h2><p>Ora che abbiamo il contesto della documentazione, impostiamo il sistema LLM per generare espressioni di filtro. Creeremo un prompt strutturato che combina la documentazione scraped con le query dell'utente per produrre espressioni di filtro Milvus sintatticamente corrette.</p>
-<p>Il nostro sistema di generazione dei filtri utilizza un prompt accuratamente realizzato che:</p>
+<p>Il nostro sistema di generazione di filtri utilizza un prompt accuratamente realizzato che:</p>
 <ol>
 <li><strong>Fornisce un contesto</strong>: Include la documentazione completa di Milvus come materiale di riferimento.</li>
 <li><strong>Imposta vincoli</strong>: Assicura che l'LLM utilizzi solo la sintassi e le caratteristiche documentate.</li>

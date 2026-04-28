@@ -90,7 +90,7 @@ title: 即時配置 Milvus
 <span class="hljs-meta prompt_"># </span><span class="language-bash">or</span> 
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">birdwatcher -olc <span class="hljs-string">&quot;#connect --etcd 127.0.0.1:2379 --rootPath=by-dev,remove config-etcd --key by-dev/config/proxy/minPasswordLength&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<p>然後您可以檢查配置，如下所示：</p>
+<p>然後，您可以檢查配置，如下所示：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">etcdctl get by-dev/config/proxy/minPasswordLength</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="View-configurations" class="common-anchor-header">查看配置<button data-href="#View-configurations" class="anchor-icon" translate="no">
@@ -160,7 +160,7 @@ QueryCoord-1(ip:port) &gt; configuration  # List the configuration of the node
 <tr><td>quotaAndLimits.limitWriting.memProtection.dataNodeMemoryHighWaterLevel</td><td>0.95</td></tr>
 <tr><td>quotaAndLimits.limitWriting.memProtection.queryNodeMemoryLowWaterLevel</td><td>0.85</td></tr>
 <tr><td>quotaAndLimits.limitWriting.memProtection.queryNodeMemoryHighWaterLevel 0.95</td><td>0.95</td></tr>
-<tr><td>quotaAndLimits.limitWriting.diskProtection.enabled</td><td>TRUE</td></tr>
+<tr><td>quotaAndLimits.limitWriting.diskProtection.enabled</td><td>啟用</td></tr>
 <tr><td>quotaAndLimits.limitWriting.diskProtection.diskQuota</td><td>+INF</td></tr>
 <tr><td>quotaAndLimits.limitReading.forceDeny</td><td>FALSE</td></tr>
 <tr><td>quotaAndLimits.limitReading.queueProtection.enabled</td><td>FALSE</td></tr>

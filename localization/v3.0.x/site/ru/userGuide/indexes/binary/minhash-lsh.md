@@ -2,11 +2,8 @@
 id: minhash-lsh.md
 title: MINHASH_LSH
 summary: >-
-  Эффективная дедупликация и поиск сходства очень важны для больших наборов
-  данных машинного обучения, особенно для таких задач, как очистка обучающих
-  корпораций для больших языковых моделей (LLM). При работе с миллионами или
-  миллиардами документов традиционное точное соответствие становится слишком
-  медленным и дорогостоящим.
+  Использование индексов MinHash LSH для ускорения обнаружения близких
+  дубликатов и поиска сходства по Жаккарду в больших текстовых массивах данных.
 ---
 <h1 id="MINHASHLSH" class="common-anchor-header">MINHASH_LSH<button data-href="#MINHASHLSH" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -62,7 +59,7 @@ summary: >-
       </svg>
     </button></h3><p>Сходство Жаккара измеряет степень совпадения двух множеств A и B, формально определяемую как:</p>
 <p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>J</mi><mo stretchy="false">(</mo><mi>A</mi><mo separator="true">,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mo>∩</mo><mi>B</mi><mi mathvariant="normal">∣</mi></mrow><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mo>∪</mo><mi>B</mi><mi mathvariant="normal">∣</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">J(A, B) = \frac{|A \cap B|}{|A \cup B|}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∪</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord">∣</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∩</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord">∣</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<p>Где его значение варьируется от 0 (полностью несовпадающие) до 1 (идентичные).</p>
+<p>Где его значение варьируется от 0 (полностью не совпадающие) до 1 (идентичные).</p>
 <p>Однако точное вычисление сходства Жаккара между всеми парами документов в больших наборах данных требует больших затрат времени и памяти - O<strong>(n²</strong> ), если <strong>n</strong> велико. Это делает его невыполнимым для таких случаев, как очистка учебных корпусов LLM или анализ документов в веб-масштабе.</p>
 <h3 id="MinHash-signatures-Approximate-Jaccard-similarity" class="common-anchor-header">Подписи MinHash: Приблизительное сходство по Жаккарду<button data-href="#MinHash-signatures-Approximate-Jaccard-similarity" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -87,15 +84,15 @@ summary: >-
 <ol>
 <li><p><strong>Шингование</strong>: Преобразование документов в наборы перекрывающихся последовательностей лексем (шинглов).</p></li>
 <li><p><strong>Хеширование</strong>: применение нескольких независимых хеш-функций к каждому шинглу.</p></li>
-<li><p><strong>Выбор минимума</strong>: Для каждой хэш-функции записываем <strong>минимальное</strong> значение хэша для всех шинглов.</p></li>
+<li><p><strong>Выбор минимума</strong>: Для каждой хэш-функции записываем <strong>минимальное</strong> значение хэша по всем шинглам.</p></li>
 </ol>
-<p>Весь процесс показан на рисунке ниже:</p>
+<p>Весь процесс показан ниже:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
    </span> <span class="img-wrapper"> <span>Рабочий процесс Minhash</span> </span></p>
 <div class="alert note">
-<p>Количество используемых хэш-функций определяет размерность подписи MinHash. Более высокая размерность обеспечивает более высокую точность аппроксимации, но при этом требует больших затрат на хранение и вычисления.</p>
+<p>Количество используемых хэш-функций определяет размерность подписи MinHash. Более высокая размерность обеспечивает более высокую точность аппроксимации, но за счет увеличения объема памяти и вычислений.</p>
 </div>
 <h3 id="LSH-for-MinHash" class="common-anchor-header">LSH для MinHash<button data-href="#LSH-for-MinHash" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -128,7 +125,7 @@ summary: >-
 <p>Почему это работает?</p>
 <p>С математической точки зрения, если две подписи имеют сходство по Жаккарду <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> s,</p>
 <ul>
-<li><p>Вероятность того, что они идентичны в одной строке (хэш-позиции), равна <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> s.</p></li>
+<li><p>Вероятность того, что они совпадают в одной строке (хэш-позиции), равна <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> s.</p></li>
 <li><p>Вероятность того, что они совпадают во всех <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">rr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> r строках диапазона, равна <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">srs^r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6644em;"></span></span></span></span> s <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> r</span></span></span></span></span></span></span></span></span></p></li>
 <li><p>Вероятность того, что они совпадают <strong>хотя бы</strong> в <strong>одной полосе</strong>, равна <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>1-</mo><mo stretchy="false">(</mo><msup><mi>1-sr</mi></msup><msup><mo stretchy="false">)</mo><mi>b1</mi></msup></mrow><annotation encoding="application/x-tex">- (1 - s^r)^b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span></span></span></span> 1 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">(1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0991em;vertical-align:-0.25em;"></span> s</span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> r</span></span></span></span></span></span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mclose"><span class="mclose">)</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> b</p></li>
 </ul>
@@ -137,17 +134,17 @@ summary: >-
 <p>Рассмотрим три документа со 128-мерными подписями MinHash:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
    </span> <span class="img-wrapper"> <span>Lsh Workflow 1</span> </span></p>
 <p>Сначала LSH делит 128-мерную подпись на 32 диапазона по 4 последовательных значения в каждом:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
    </span> <span class="img-wrapper"> <span>Lsh Workflow 2</span> </span></p>
 <p>Затем каждая полоса хэшируется в различные ведра с помощью хэш-функции. Пары документов, разделяющие бакеты, выбираются в качестве кандидатов на сходство. В приведенном ниже примере документы A и B выбраны в качестве кандидатов на сходство, поскольку их результаты хэширования совпадают в <strong>полосе 0</strong>:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
    </span> <span class="img-wrapper"> <span>Lsh Workflow 3</span> </span></p>
 <div class="alert note">
 <p>Количество полос контролируется параметром <code translate="no">mh_lsh_band</code>. Дополнительные сведения см. в разделе <a href="/docs/ru/minhash-lsh.md#Index-building-params">Параметры построения индексов</a>.</p>
@@ -193,7 +190,10 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>Процесс дедупликации на основе MinHash LSH позволяет Milvus эффективно выявлять и отфильтровывать почти дублирующиеся текстовые или структурированные записи перед их вставкой в коллекцию.</p>
-<p><img translate="no" src="/docs/v2.6.x/assets/deduplication-workflow.png" alt="Deduplication Workflow" width="600"></p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/it9wwbcfwhft0rbwosacgltzneb.png" alt="It9wwbcfwhft0rbwosacgltzneb" class="doc-image" id="it9wwbcfwhft0rbwosacgltzneb" />
+   </span> <span class="img-wrapper"> <span>It9wwbcfwhft0rbwosacgltzneb</span> </span></p>
 <ol>
 <li><p><strong>Разбивка и предварительная обработка</strong>: Разделение входящих текстовых или структурированных данных (например, записей, полей) на фрагменты; нормализация текста (удаление строчных букв, знаков препинания) и удаление стоп-слов по мере необходимости.</p></li>
 <li><p><strong>Построение характеристик</strong>: Построение набора маркеров, используемых для MinHash (например, шинглов из текста; конкатенированных маркеров полей для структурированных данных).</p></li>
@@ -218,7 +218,14 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Перед использованием MinHash LSH в Milvus необходимо сначала сгенерировать <strong>сигнатуры MinHash</strong>. Эти компактные двоичные сигнатуры аппроксимируют сходство Жаккара между наборами и необходимы для поиска в Milvus на основе <code translate="no">MHJACCARD</code>.</p>
-<h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">Выбор метода генерации сигнатур MinHash<button data-href="#Choose-a-method-to-generate-MinHash-signatures" class="anchor-icon" translate="no">
+<div class="alert note">
+<p>Вы можете подготовить сигнатуры MinHash для индекса <code translate="no">MINHASH_LSH</code> двумя способами:</p>
+<ul>
+<li><p>Сгенерировать сигнатуры самостоятельно с помощью внешних инструментов и вставить их в поле BINARY_VECTOR, или</p></li>
+<li><p>Использовать встроенную функцию MinHash для автоматической генерации совместимых двоичных векторов из текста. О сквозном рабочем процессе и параметрах настройки функции MinHash см. в разделе <a href="/docs/ru/minhash-function.md">Функция MinHash</a>.</p></li>
+</ul>
+</div>
+<h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">Выбор метода генерации подписей MinHash<button data-href="#Choose-a-method-to-generate-MinHash-signatures" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -235,9 +242,9 @@ summary: >-
       </svg>
     </button></h3><p>В зависимости от объема работы вы можете выбрать:</p>
 <ul>
-<li><p>Использовать Python's <a href="https://ekzhu.github.io/datasketch/"><code translate="no">datasketch</code></a> для простоты (рекомендуется для создания прототипов)</p></li>
+<li><p>Использовать метод Python <a href="https://ekzhu.github.io/datasketch/"><code translate="no">datasketch</code></a> для простоты (рекомендуется для создания прототипов)</p></li>
 <li><p>Использовать распределенные инструменты (например, Spark, Ray) для работы с большими массивами данных</p></li>
-<li><p>Реализовать пользовательскую логику (NumPy, C++ и т. д.), если важна настройка производительности.</p></li>
+<li><p>Реализовать собственную логику (NumPy, C++ и т. д.), если важна настройка производительности.</p></li>
 </ul>
 <p>В этом руководстве мы используем <code translate="no">datasketch</code> для простоты и совместимости с входным форматом Milvus.</p>
 <h3 id="Install-required-libraries" class="common-anchor-header">Установите необходимые библиотеки<button data-href="#Install-required-libraries" class="anchor-icon" translate="no">
@@ -691,8 +698,8 @@ refined_results = client.search(
    <tr>
      <td><p><code translate="no">refine_k</code></p></td>
      <td><p>Количество кандидатов, которые необходимо получить перед уточнением по Жаккарду. Эффективно только в том случае, если <code translate="no">mh_search_with_jaccard</code> - <code translate="no">true</code>.</p></td>
-     <td><p><em>[top_k</em>, *top_k * 10*].</p></td>
-     <td><p>Устанавливается в 2-5 раз больше желаемого <em>top_k</em> для хорошего баланса отзыв-производительность. Более высокие значения улучшают отзыв, но увеличивают стоимость вычислений.</p></td>
+     <td><p><em>[top_k</em>, <em>top_k &amp;ast; 10</em>]</p></td>
+     <td><p>Установите значение 2-5x от желаемого <em>top_k</em> для хорошего баланса отзыв-производительность. Более высокие значения улучшают отзыв, но увеличивают стоимость вычислений.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mh_lsh_batch_search</code></p></td>

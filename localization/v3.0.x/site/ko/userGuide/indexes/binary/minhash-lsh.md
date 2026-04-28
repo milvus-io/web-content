@@ -1,9 +1,7 @@
 ---
 id: minhash-lsh.md
 title: MINHASH_LSH
-summary: >-
-  효율적인 중복 제거와 유사도 검색은 대규모 머신 러닝 데이터 세트, 특히 대규모 언어 모델(LLM)을 위한 학습 코퍼라 정리와 같은 작업에서
-  매우 중요합니다. 수백만 또는 수십억 개의 문서를 처리할 때 기존의 정확한 일치 검색은 너무 느리고 비용이 많이 듭니다.
+summary: 대규모 텍스트 데이터 세트에서 MinHash LSH 인덱스를 사용하여 중복에 가까운 검색 및 Jaccard 유사성 검색 속도를 높입니다.
 ---
 <h1 id="MINHASHLSH" class="common-anchor-header">MINHASH_LSH<button data-href="#MINHASHLSH" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -26,7 +24,7 @@ summary: >-
 <li><p><a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a>: 문서 유사성을 추정하기 위해 압축 서명(또는 "지문")을 빠르게 생성합니다.</p></li>
 <li><p><a href="https://en.wikipedia.org/wiki/Locality-sensitive_hashing">LSH(지역 민감 해싱)</a>: MinHash 서명을 기반으로 유사한 문서 그룹을 빠르게 찾습니다.</p></li>
 </ul>
-<p>이 가이드에서는 Milvus에서 MINHASH_LSH를 사용하기 위한 개념, 전제 조건, 설정, 모범 사례를 안내합니다.</p>
+<p>이 가이드에서는 Milvus에서 MINHASH_LSH를 사용하기 위한 개념, 전제 조건, 설정 및 모범 사례를 안내합니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,10 +87,10 @@ summary: >-
 <p>아래 그림에서 전체 프로세스를 확인할 수 있습니다:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
    </span> <span class="img-wrapper"> <span>민해시 워크플로</span> </span></p>
 <div class="alert note">
-<p>사용되는 해시 함수의 수에 따라 MinHash 서명의 차원이 결정됩니다. 차원이 높을수록 근사치 정확도가 높아지지만 저장 공간과 계산량이 증가합니다.</p>
+<p>사용되는 해시 함수의 수에 따라 MinHash 서명의 차원이 결정됩니다. 차원이 높을수록 근사치 정확도가 높아지지만, 저장 공간과 계산량이 증가합니다.</p>
 </div>
 <h3 id="LSH-for-MinHash" class="common-anchor-header">MinHash용 LSH<button data-href="#LSH-for-MinHash" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -129,22 +127,22 @@ summary: >-
 <li><p>밴드의 모든 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">rr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> r 행에서 일치할 확률은 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">srs^r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6644em;"></span></span></span></span> s <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> r입니다.</span></span></span></span></span></span></span></span></span></p></li>
 <li><p><strong>적어도 하나의 밴드에서</strong> 일치할 확률은 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1-</mn><mo stretchy="false">(</mo><msup><mi>1-sr</mi></msup><msup><mo stretchy="false">)</mo><mi>b1</mi></msup></mrow><annotation encoding="application/x-tex">- (1 - s^r)^b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span></span></span></span> 1 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">(1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0991em;vertical-align:-0.25em;"></span> s</span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> r</span></span></span></span></span></span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mclose"><span class="mclose">)</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> b</p></li>
 </ul>
-<p>자세한 내용은 <a href="https://en.wikipedia.org/wiki/Locality-sensitive_hashing">위치 정보</a>에 <a href="https://en.wikipedia.org/wiki/Locality-sensitive_hashing">민감한 해싱을</a> 참조하세요.</p>
+<p>자세한 내용은 <a href="https://en.wikipedia.org/wiki/Locality-sensitive_hashing">지역 민감 해싱을</a> 참조하세요.</p>
 </div>
 <p>128차원 MinHash 서명이 있는 세 개의 문서를 예로 들어 보겠습니다:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
    </span> <span class="img-wrapper"> <span>LSH 워크플로 1</span> </span></p>
 <p>먼저, LSH는 128차원 서명을 각각 4개의 연속된 값으로 구성된 32개의 밴드로 나눕니다:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
    </span> <span class="img-wrapper"> <span>Lsh 워크플로우 2</span> </span></p>
 <p>그런 다음 해시 함수를 사용해 각 밴드를 서로 다른 버킷으로 해시합니다. 버킷을 공유하는 문서 쌍이 유사성 후보로 선택됩니다. 아래 예에서 문서 A와 문서 B는 해시 결과가 <strong>밴드 0에서</strong> 충돌하므로 유사도 후보로 선택됩니다:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
    </span> <span class="img-wrapper"> <span>Lsh 워크플로 3</span> </span></p>
 <div class="alert note">
 <p>밴드 수는 <code translate="no">mh_lsh_band</code> 매개변수에 의해 제어됩니다. 자세한 내용은 <a href="/docs/ko/minhash-lsh.md#Index-building-params">색인 구축 매개변수를</a> 참조하세요.</p>
@@ -190,9 +188,12 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>MinHash LSH로 구동되는 중복 제거 프로세스를 통해 Milvus는 컬렉션에 삽입하기 전에 중복에 가까운 텍스트 또는 구조화된 레코드를 효율적으로 식별하고 필터링할 수 있습니다.</p>
-<p><img translate="no" src="/docs/v2.6.x/assets/deduplication-workflow.png" alt="Deduplication Workflow" width="600"></p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/it9wwbcfwhft0rbwosacgltzneb.png" alt="It9wwbcfwhft0rbwosacgltzneb" class="doc-image" id="it9wwbcfwhft0rbwosacgltzneb" />
+   </span> <span class="img-wrapper"> <span>IT9wwbcfwhft0rbwosacgltzneb</span> </span></p>
 <ol>
-<li><p><strong>청크 및 전처리</strong>: 들어오는 텍스트 데이터나 구조화된 데이터(예: 레코드, 필드)를 청크로 분할하고, 텍스트를 정규화하고(소문자, 구두점 제거), 필요에 따라 중지어를 제거합니다.</p></li>
+<li><p><strong>청크 및 전처리</strong>: 들어오는 텍스트 데이터 또는 구조화된 데이터(예: 레코드, 필드)를 청크로 분할하고, 텍스트를 정규화하고(소문자, 구두점 제거), 필요에 따라 중단어를 제거합니다.</p></li>
 <li><p><strong>기능 구성</strong>: MinHash에 사용되는 토큰 집합을 구축합니다(예: 텍스트의 대상포진, 구조화된 데이터의 연결된 필드 토큰).</p></li>
 <li><p><strong>MinHash 서명 생성</strong>: 각 청크 또는 레코드에 대한 MinHash 서명을 계산합니다.</p></li>
 <li><p><strong>바이너리 벡터 변환</strong>: 서명을 Milvus와 호환되는 바이너리 벡터로 변환합니다.</p></li>
@@ -214,8 +215,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus에서 MinHash LSH를 사용하기 전에 먼저 <strong>MinHash 서명을</strong> 생성해야 합니다. 이 간결한 바이너리 서명은 세트 간의 Jaccard 유사성을 대략적으로 나타내며 Milvus의 <code translate="no">MHJACCARD</code> 기반 검색에 필요합니다.</p>
-<h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">MinHash 서명을 생성하는 방법 선택하기<button data-href="#Choose-a-method-to-generate-MinHash-signatures" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus에서 MinHash LSH를 사용하기 전에 먼저 <strong>MinHash 서명을</strong> 생성해야 합니다. 이러한 간결한 바이너리 서명은 세트 간의 Jaccard 유사성을 대략적으로 나타내며 Milvus의 <code translate="no">MHJACCARD</code> 기반 검색에 필요합니다.</p>
+<div class="alert note">
+<p><code translate="no">MINHASH_LSH</code> 인덱스에 대한 MinHash 서명은 두 가지 방법으로 준비할 수 있습니다:</p>
+<ul>
+<li><p>외부 도구를 사용하여 직접 서명을 생성하고 BINARY_VECTOR 필드에 삽입하거나, 또는</p></li>
+<li><p>내장된 MinHash 함수를 사용하여 텍스트에서 호환 가능한 바이너리 벡터를 자동으로 생성합니다. MinHash 함수의 엔드투엔드 워크플로 및 구성 옵션은 <a href="/docs/ko/minhash-function.md">MinHash 함수를</a> 참조하세요.</p></li>
+</ul>
+</div>
+<h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">MinHash 서명 생성 방법 선택하기<button data-href="#Choose-a-method-to-generate-MinHash-signatures" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -230,7 +238,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>워크로드에 따라 선택할 수 있습니다:</p>
+    </button></h3><p>워크로드에 따라 다음을 선택할 수 있습니다:</p>
 <ul>
 <li><p>Python의 <a href="https://ekzhu.github.io/datasketch/"><code translate="no">datasketch</code></a> 사용(프로토타이핑에 권장)</p></li>
 <li><p>대규모 데이터 세트에 분산 도구(예: Spark, Ray) 사용</p></li>
@@ -506,7 +514,7 @@ client.flush(<span class="hljs-string">&quot;minhash_demo&quot;</span>)
       </svg>
     </button></h3><p>Milvus는 MinHash LSH를 사용하여 두 가지 유사성 검색 모드를 지원합니다:</p>
 <ul>
-<li><p><strong>근사 검색</strong> - MinHash 서명과 LSH만을 사용하여 빠르고 확률적인 결과를 제공합니다.</p></li>
+<li><p><strong>근사 검색</strong> - 빠르고 확률적인 결과를 위해 MinHash 서명과 LSH만 사용합니다.</p></li>
 <li><p><strong>정밀 검색</strong> - 정확도 향상을 위해 원본 토큰 세트를 사용하여 Jaccard 유사성을 다시 계산합니다.</p></li>
 </ul>
 <h4 id="51-Prepare-the-query" class="common-anchor-header">5.1 쿼리 준비</h4><p>유사도 검색을 수행하려면 쿼리 문서에 대한 MinHash 서명을 생성합니다. 이 서명은 데이터 삽입 시 사용된 것과 동일한 차원 및 인코딩 형식과 일치해야 합니다.</p>
@@ -653,7 +661,7 @@ refined_results = client.search(
      <td><p><code translate="no">mh_lsh_bloom_false_positive_prob</code></p></td>
      <td><p>LSH 버킷 최적화에 사용되는 블룸 필터의 오탐 확률입니다.</p></td>
      <td><p>[0.001, 0.1]</p></td>
-     <td><p>균형 잡힌 메모리 사용량과 정확도를 위해 <code translate="no">0.01</code> 을 사용하세요. 값이 낮을수록 (<code translate="no">0.001</code>) 오탐은 감소하지만 메모리가 증가합니다. 값이 높을수록(<code translate="no">0.05</code>) 메모리는 절약되지만 정확도가 떨어질 수 있습니다.</p></td>
+     <td><p>균형 잡힌 메모리 사용량과 정확도를 위해 <code translate="no">0.01</code> 을 사용하세요. 값이 낮을수록 (<code translate="no">0.001</code>) 오탐 확률은 감소하지만 메모리가 증가합니다. 값이 높을수록(<code translate="no">0.05</code>) 메모리는 절약되지만 정확도가 떨어질 수 있습니다.</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
@@ -688,7 +696,7 @@ refined_results = client.search(
    <tr>
      <td><p><code translate="no">refine_k</code></p></td>
      <td><p>Jaccard 정제 전에 검색할 후보자 수입니다. <code translate="no">mh_search_with_jaccard</code> 이 <code translate="no">true</code> 일 때만 유효합니다.</p></td>
-     <td><p>[<em>top_k</em>, *top_k * 10*]</p></td>
+     <td><p><em>[TOP_K</em>, <em>TOP_K &amp;AST; 10</em>]</p></td>
      <td><p>리콜과 성능의 균형을 맞추기 위해 원하는 <em>top_k의</em> 2~5배로 설정합니다. 값이 클수록 리콜 성능이 향상되지만 계산 비용이 증가합니다.</p></td>
    </tr>
    <tr>

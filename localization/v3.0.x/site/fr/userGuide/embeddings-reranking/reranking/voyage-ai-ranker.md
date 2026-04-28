@@ -27,7 +27,7 @@ beta: Milvus 2.6.x
     </button></h1><p>Voyage AI Ranker s'appuie sur les rerankers spécialisés <a href="https://www.voyageai.com/">de Voyage AI</a> pour améliorer la pertinence des recherches grâce au reranking sémantique. Il offre des capacités de reclassement de haute performance optimisées pour les applications de recherche et de génération augmentée de données (RAG).</p>
 <p>Voyage AI Ranker est particulièrement utile pour les applications qui requièrent</p>
 <ul>
-<li><p>une compréhension sémantique avancée avec des modèles spécifiquement entraînés pour les tâches de reclassement</p></li>
+<li><p>Une compréhension sémantique avancée avec des modèles spécifiquement entraînés pour les tâches de reranking</p></li>
 <li><p>Un traitement haute performance avec une inférence optimisée pour les charges de travail de production</p></li>
 <li><p>Des contrôles de troncature flexibles pour gérer différentes longueurs de documents</p></li>
 <li><p>Des performances finement ajustées à travers différentes variantes de modèles (rerank-2, rerank-lite, etc.).</p></li>

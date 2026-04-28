@@ -184,7 +184,7 @@ my_rag = RAG(openai_client=openai_client, milvus_client=milvus_client)
 <div class="alert note">
 <p>Was das Argument von <code translate="no">MilvusClient</code> betrifft:</p>
 <ul>
-<li>Die Einstellung von <code translate="no">uri</code> als lokale Datei, z.B.<code translate="no">./milvus.db</code>, ist die bequemste Methode, da sie automatisch <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> verwendet, um alle Daten in dieser Datei zu speichern.</li>
+<li>Die Einstellung von <code translate="no">uri</code> als lokale Datei, z.B.<code translate="no">./milvus.db</code>, ist die bequemste Methode, da sie automatisch <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> nutzt, um alle Daten in dieser Datei zu speichern.</li>
 <li>Wenn Sie große Datenmengen haben, können Sie einen leistungsfähigeren Milvus-Server auf <a href="https://milvus.io/docs/quickstart.md">Docker oder Kubernetes</a> einrichten. Bei dieser Einrichtung verwenden Sie bitte die Server-Uri, z. B.<code translate="no">http://localhost:19530</code>, als <code translate="no">uri</code>.</li>
 <li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Service für Milvus, verwenden möchten, passen Sie <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">öffentlichen Endpunkt und dem Api-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
 </ul>
@@ -361,7 +361,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
 <li><strong>Laufzeitausnahmen</strong>: Erfassen Sie kritische Probleme wie Ratenbeschränkung.</li>
 <li><strong>Abgerufene Dokumente</strong>: Analysieren Sie den Abruf von Dokumenten, die Bewertung und die Reihenfolge.</li>
 </ul>
-<p>Durch die Nutzung des Tracing von Phoenix können Sie <strong>Engpässe identifizieren</strong>, <strong>Ressourcen optimieren</strong> und <strong>die Zuverlässigkeit des Systems</strong> über verschiedene Frameworks und Sprachen hinweg <strong>sicherstellen</strong>.</p>
+<p>Durch die Nutzung des Phoenix-Tracing können Sie <strong>Engpässe identifizieren</strong>, <strong>Ressourcen optimieren</strong> und <strong>die Systemzuverlässigkeit</strong> über verschiedene Frameworks und Sprachen hinweg <strong>sicherstellen</strong>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> phoenix <span class="hljs-keyword">as</span> px
 <span class="hljs-keyword">from</span> phoenix.trace.openai <span class="hljs-keyword">import</span> OpenAIInstrumentor
 
@@ -464,7 +464,7 @@ results_df.head()
       <td>Welche Programmiersprache wird zum Schreiben von...</td>
       <td>[CMake &amp; Conan\n\nDie Algorithmenbibliothek von Mil...</td>
       <td>Mit welcher Programmiersprache wird Knowher...</td>
-      <td>Die Programmiersprache, mit der Knowher...</td>
+      <td>Welche Programmiersprache wird zum Schreiben von Knowher...</td>
       <td>[CMake &amp; Conan\n\nDie Algorithmus-Bibliothek von Mil...</td>
       <td>[CMake &amp; Conan\n\nDie Algorithmus-Bibliothek von Mil...</td>
       <td>faktisch</td>
@@ -476,7 +476,7 @@ results_df.head()
       <th>2</th>
       <td>Was sollte vor der Durchführung der Code Coverage...</td>
       <td>[Codeabdeckung\n\nVor dem Einreichen Ihrer Pull ...</td>
-      <td>Bevor die Codeabdeckung durchgeführt wird, sollte sie...</td>
+      <td>Bevor die Codeabdeckung ausgeführt wird, sollte sie...</td>
       <td>Bevor Sie Code Coverage durchführen, sollten Sie ...</td>
       <td>[Codeabdeckung\n\nBevor Sie Ihre Pull-Datei einreichen ...</td>
       <td>[Codeabdeckung\n\nBefore submitting your pull ...</td>

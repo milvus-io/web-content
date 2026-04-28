@@ -38,17 +38,17 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>في خط أنابيب بيانات الذكاء الاصطناعي النموذجي، قد يكون المستخدمون قد قاموا بالفعل بتخزين بياناتهم في Parquet أو بتنسيقات أخرى على نظام التخزين الخاص بهم، مثل AWS S3. لجعل Milvus يستهلك هذه البيانات المخزنة خارجيًا، يحتاج المستخدمون عادةً إلى استيرادها إلى وحدة تخزين Milvus الخاصة باستخدام خطوط أنابيب الاستخراج والتحويل والتحميل (ETL).</p>
-<p>يؤدي سير عمل إحضار بياناتك إلى ميلفوس إلى إنشاء بيانات زائدة عن الحاجة يصعب مزامنتها ويضيف إلى عبء الصيانة الهندسية لضمان اتساق البيانات.</p>
+<p>يؤدي سير عمل إحضار البيانات إلى ميلفوس هذا إلى إنشاء بيانات زائدة عن الحاجة يصعب مزامنتها ويضيف إلى عبء الصيانة الهندسية لضمان اتساق البيانات.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/yqxwwpq3vheya4b8398cwopnnyn.png" alt="Yqxwwpq3vheya4b8398cwopnnyn" class="doc-image" id="yqxwwpq3vheya4b8398cwopnnyn" />
-   </span> <span class="img-wrapper"> <span>Yqxwwwwpq3vheya4b8398cwopnnyn</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" />
+   </span> <span class="img-wrapper"> <span>إحضار البيانات لحساب سير العمل</span> </span></p>
 <p>لحل هذه المشكلات، تقدم Milvus مجموعات خارجية تتيح لك الوصول إلى بياناتك المخزنة خارجيًا من Milvus دون القلق بشأن مزامنة البيانات وخطوط أنابيب ETL.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/q6f4wtcd2h3pnkbnmxncw3urn3f.png" alt="Q6f4wtcd2h3pnkbnmxncw3urn3f" class="doc-image" id="q6f4wtcd2h3pnkbnmxncw3urn3f" />
-   </span> <span class="img-wrapper"> <span>Q6f4wtcd2h3pnknkbnmxncncw3urn3f</span> </span></p>
-<p>بمجرد إنشائها، يمكن للمجموعة الخارجية الوصول إلى بياناتك مباشرةً والاحتفاظ بها في نفس المكان الذي تخزنها فيه. في الخلفية، ينشئ Milvus ملفات البيان لتسجيل التعيينات بين البيانات الوصفية لـ Milvus والصفوف في ملفات البيانات الخارجية. بعد أن تصبح ملفات البيان جاهزة، يمكنك إنشاء فهارس في المجموعة الخارجية كما تفعل في أي مجموعة مُدارة.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" />
+   </span> <span class="img-wrapper"> <span>جلب الحوسبة إلى سير عمل البيانات</span> </span></p>
+<p>بمجرد إنشائها، يمكن للمجموعة الخارجية الوصول إلى بياناتك مباشرةً والاحتفاظ بها في نفس المكان الذي تخزنها فيه. في الخلفية، ينشئ Milvus ملفات البيان لتسجيل التعيينات بين بيانات Milvus الوصفية والصفوف في ملفات البيانات الخارجية. بعد أن تصبح ملفات البيان جاهزة، يمكنك إنشاء فهارس في المجموعة الخارجية كما تفعل في أي مجموعة مُدارة.</p>
 <p>عندما تتغير بياناتك، يؤدي تشغيل تحديث البيانات الوصفية يدويًا في الثانية إلى تحديث البيانات الوصفية يدويًا، مما يجعل Milvus محدثًا دائمًا.</p>
 <h2 id="Limits--restrictions" class="common-anchor-header">الحدود والقيود<button data-href="#Limits--restrictions" class="anchor-icon" translate="no">
       <svg translate="no"

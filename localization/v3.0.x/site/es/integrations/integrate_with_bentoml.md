@@ -147,7 +147,7 @@ city_chunks = []
         sentences=texts,
     )
 <button class="copy-code-btn"></button></code></pre>
-<p>Ahora, tenemos que emparejar los embeddings y los trozos de texto. Como la lista de incrustaciones y la lista de frases deben coincidir por índice, podemos <code translate="no">enumerate</code> a través de cualquiera de las listas para emparejarlas.</p>
+<p>Ahora, tenemos que emparejar los embeddings y los trozos de texto. Dado que la lista de incrustaciones y la lista de frases deben coincidir por índice, podemos <code translate="no">enumerate</code> a través de cualquiera de las listas para hacerlas coincidir.</p>
 <pre><code translate="no" class="language-python">entries = []
 <span class="hljs-keyword">for</span> city_dict <span class="hljs-keyword">in</span> city_chunks:
     <span class="hljs-comment"># No need for the embeddings list if get_embeddings already returns a list of lists</span>

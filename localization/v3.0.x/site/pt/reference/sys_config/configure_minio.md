@@ -103,7 +103,7 @@ summary: Saiba como configurar o minio para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
@@ -333,7 +333,7 @@ summary: Saiba como configurar o minio para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor predefinido</th> 
+      <th class="width20">Valor por defeito</th> 
     </tr>
   </thead>
   <tbody>
@@ -346,7 +346,7 @@ summary: Saiba como configurar o minio para o Milvus.
         <li>Pode utilizar "aliyun" para outro fornecedor de serviços de computação em nuvem que utilize um balde de estilo de anfitrião virtual</li>      
         <li>Pode utilizar "gcpnative" para o fornecedor Google Cloud Platform. Usa credenciais de conta de serviço</li>      
         <li>para autenticação.</li>      
-        <li>Quando o useIAM está ativado, apenas "aws", "gcp" e "aliyun" são suportados por enquanto</li>      </td>
+        <li>Quando o useIAM está ativado, apenas "aws", "gcp", "aliyun" são suportados por agora</li>      </td>
       <td>aws</td>
     </tr>
   </tbody>

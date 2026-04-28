@@ -53,7 +53,7 @@ title: Knowhere
     </button></h2><p>Gambar di bawah ini mengilustrasikan posisi Knowhere dalam arsitektur Milvus.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
    </span> <span class="img-wrapper"> <span>Knowhere</span> </span></p>
 <p>Lapisan paling bawah adalah perangkat keras sistem. Di atasnya terdapat pustaka indeks pihak ketiga. Pada lapisan paling atas, Knowhere berinteraksi dengan simpul indeks dan simpul kueri melalui CGO, yang memungkinkan paket Go memanggil kode C.</p>
 <h2 id="Knowhere-advantages" class="common-anchor-header">Keunggulan Knowhere<button data-href="#Knowhere-advantages" class="anchor-icon" translate="no">
@@ -73,7 +73,7 @@ title: Knowhere
       </svg>
     </button></h2><p>Berikut ini adalah keunggulan Knowhere dibandingkan Faiss.</p>
 <h4 id="Support-for-BitsetView" class="common-anchor-header">Dukungan untuk BitsetView</h4><p>Milvus memperkenalkan mekanisme bitset untuk merealisasikan "penghapusan lunak". Vektor yang dihapus secara lunak masih ada dalam database tetapi tidak akan dihitung selama pencarian atau kueri kemiripan vektor.</p>
-<p>Setiap bit dalam bitset berhubungan dengan vektor yang diindeks. Jika sebuah vektor ditandai sebagai "1" dalam bitset, itu berarti vektor ini dihapus secara lunak dan tidak akan dilibatkan selama pencarian vektor. Parameter bitset diterapkan pada semua API kueri indeks Faiss yang terbuka di Knowhere, termasuk indeks CPU dan GPU.</p>
+<p>Setiap bit dalam bitset berhubungan dengan vektor yang diindeks. Jika sebuah vektor ditandai sebagai "1" dalam bitset, itu berarti vektor ini telah dihapus dan tidak akan dilibatkan selama pencarian vektor. Parameter bitset diterapkan pada semua API kueri indeks Faiss yang terbuka di Knowhere, termasuk indeks CPU dan GPU.</p>
 <p>Untuk informasi lebih lanjut tentang mekanisme bitset, lihat <a href="/docs/id/bitset.md">bitset</a>.</p>
 <h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">Dukungan untuk beberapa metrik kemiripan untuk mengindeks vektor biner</h4><p>Knowhere mendukung <a href="/docs/id/metric.md#Hamming-distance">Hamming</a>, <a href="/docs/id/metric.md#Jaccard-distance">Jaccard</a>, <a href="/docs/id/metric.md#Tanimoto-distance">Tanimoto</a>, <a href="/docs/id/metric.md#Superstructure">Superstruktur</a>, dan <a href="/docs/id/metric.md#Substructure">Substruktur</a>. Jaccard dan Tanimoto dapat digunakan untuk mengukur kemiripan antara dua set sampel, sedangkan Superstruktur dan Substruktur dapat digunakan untuk mengukur kemiripan struktur kimia.</p>
 <h4 id="Support-for-AVX512-instruction-set" class="common-anchor-header">Dukungan untuk set instruksi AVX512</h4><p>Selain <a href="https://en.wikipedia.org/wiki/AArch64">AArch64</a>, <a href="https://en.wikipedia.org/wiki/SSE4#SSE4.2">SSE4.2</a> dan <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions">AVX2</a>, set instruksi yang telah didukung oleh Faiss, Knowhere juga mendukung <a href="https://en.wikipedia.org/wiki/AVX-512">AVX512</a>, yang dapat <a href="https://milvus.io/blog/milvus-performance-AVX-512-vs-AVX2.md">meningkatkan kinerja pembuatan indeks dan kueri sebesar 20% hingga 30%</a> dibandingkan dengan AVX2.</p>
@@ -96,12 +96,12 @@ title: Knowhere
         ></path>
       </svg>
     </button></h2><p>Komputasi dalam Milvus terutama melibatkan operasi vektor dan skalar. Knowhere hanya menangani operasi pengindeksan vektor.</p>
-<p>Indeks adalah struktur data yang terpisah dari data vektor aslinya. Secara umum, pengindeksan membutuhkan empat langkah: membuat indeks, melatih data, menyisipkan data, dan membangun indeks. Dalam beberapa aplikasi AI, pelatihan dataset dipisahkan dari pencarian vektor. Data dari dataset pertama-tama dilatih dan kemudian dimasukkan ke dalam basis data vektor seperti Milvus untuk pencarian kemiripan. Sebagai contoh, dataset terbuka sift1M dan sift1B membedakan data untuk pelatihan dan data untuk pengujian.</p>
+<p>Indeks adalah struktur data yang terpisah dari data vektor aslinya. Secara umum, pengindeksan membutuhkan empat langkah: membuat indeks, melatih data, memasukkan data, dan membangun indeks. Dalam beberapa aplikasi AI, pelatihan dataset dipisahkan dari pencarian vektor. Data dari dataset pertama-tama dilatih dan kemudian dimasukkan ke dalam basis data vektor seperti Milvus untuk pencarian kemiripan. Sebagai contoh, dataset terbuka sift1M dan sift1B membedakan data untuk pelatihan dan data untuk pengujian.</p>
 <p>Namun, di Knowhere, data untuk pelatihan dan pencarian adalah sama. Knowhere melatih semua data dalam sebuah <a href="https://milvus.io/blog/deep-dive-1-milvus-architecture-overview.md#Segments">segmen</a> dan kemudian memasukkan semua data yang telah dilatih dan membuat indeks untuk data tersebut.</p>
 <h4 id="DataObj-base-class" class="common-anchor-header"><code translate="no">DataObj</code>: kelas dasar</h4><p><code translate="no">DataObj</code> adalah kelas dasar dari semua struktur data di Knowhere. <code translate="no">Size()</code> adalah satu-satunya metode virtual di <code translate="no">DataObj</code>. Kelas Index diwarisi dari <code translate="no">DataObj</code> dengan sebuah field bernama "size_". Kelas Index juga memiliki dua metode virtual - <code translate="no">Serialize()</code> dan <code translate="no">Load()</code>. Kelas <code translate="no">VecIndex</code> yang diturunkan dari <code translate="no">Index</code> adalah kelas dasar virtual untuk semua indeks vektor. <code translate="no">VecIndex</code> menyediakan metode termasuk <code translate="no">Train()</code>, <code translate="no">Query()</code>, <code translate="no">GetStatistics()</code>, dan <code translate="no">ClearStatistics()</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
    </span> <span class="img-wrapper"> <span>kelas dasar</span> </span></p>
 <p>Beberapa jenis indeks lainnya tercantum di sebelah kanan pada gambar di atas.</p>
 <ul>
@@ -111,20 +111,20 @@ title: Knowhere
 </ul>
 <h4 id="IDMAP-brute-force-search" class="common-anchor-header"><code translate="no">IDMAP</code>: pencarian secara kasar (brute-force)</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
    </span> <span class="img-wrapper"> <span>IDMAP</span> </span></p>
 <p>Secara teknis, <code translate="no">IDMAP</code> bukanlah sebuah indeks, melainkan digunakan untuk pencarian brute-force. Ketika vektor dimasukkan ke dalam basis data, tidak diperlukan pelatihan data atau pembuatan indeks. Pencarian akan dilakukan secara langsung pada data vektor yang dimasukkan.</p>
 <p>Namun, untuk konsistensi kode, <code translate="no">IDMAP</code> juga mewarisi kelas <code translate="no">VecIndex</code> dengan semua antarmuka virtualnya. Penggunaan <code translate="no">IDMAP</code> sama dengan indeks lainnya.</p>
 <h4 id="IVF-indices" class="common-anchor-header">Indeks IVF</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
    </span> <span class="img-wrapper"> <span>IVF</span> </span></p>
 <p>Indeks IVF (inverted file) adalah indeks yang paling sering digunakan. Kelas <code translate="no">IVF</code> berasal dari <code translate="no">VecIndex</code> dan <code translate="no">FaissBaseIndex</code>, dan selanjutnya meluas ke <code translate="no">IVFSQ</code> dan <code translate="no">IVFPQ</code>. <code translate="no">GPUIVF</code> berasal dari <code translate="no">GPUIndex</code> dan <code translate="no">IVF</code>. Kemudian <code translate="no">GPUIVF</code> diperluas lebih lanjut menjadi <code translate="no">GPUIVFSQ</code> dan <code translate="no">GPUIVFPQ</code>.</p>
 <p><code translate="no">IVFSQHybrid</code> adalah indeks hibrida yang dikembangkan sendiri. Kuantizer kasar dieksekusi di GPU sementara pencarian di bucket di CPU. Jenis indeks ini dapat mengurangi terjadinya penyalinan memori antara CPU dan GPU dengan memanfaatkan daya komputasi GPU. <code translate="no">IVFSQHybrid</code> memiliki tingkat recall yang sama dengan <code translate="no">GPUIVFSQ</code> tetapi hadir dengan kinerja yang lebih baik.</p>
 <p>Struktur kelas dasar untuk indeks biner relatif lebih sederhana. <code translate="no">BinaryIDMAP</code> dan <code translate="no">BinaryIVF</code> diturunkan dari <code translate="no">FaissBaseBinaryIndex</code> dan <code translate="no">VecIndex</code>.</p>
 <h4 id="Third-party-indices" class="common-anchor-header">Indeks pihak ketiga</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
    </span> <span class="img-wrapper"> <span>indeks pihak ketiga</span> </span></p>
 <p>Saat ini, hanya ada dua jenis indeks pihak ketiga yang didukung selain Faiss: indeks berbasis pohon <code translate="no">Annoy</code>, dan indeks berbasis grafik <code translate="no">HNSW</code>. Kedua indeks pihak ketiga yang umum dan sering digunakan ini berasal dari <code translate="no">VecIndex</code>.</p>
 <h2 id="Adding-indices-to-Knowhere" class="common-anchor-header">Menambahkan indeks ke Knowhere<button data-href="#Adding-indices-to-Knowhere" class="anchor-icon" translate="no">

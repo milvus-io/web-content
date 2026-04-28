@@ -39,7 +39,7 @@ summary: >-
     </button></h2><p>Группа привилегий состоит из нескольких привилегий.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" />
    </span> <span class="img-wrapper"> <span>Иллюстрация группы привилегий</span> </span></p>
 <p>Как показано на рисунке выше, предположим, что вам нужно предоставить три различные привилегии для роли.</p>
 <ul>
@@ -67,7 +67,22 @@ summary: >-
 <p>Три уровня встроенных групп привилегий не имеют каскадной зависимости. Установка группы привилегий на уровне экземпляра не приводит к автоматическому установлению разрешений для всех баз данных и коллекций под этим экземпляром. Привилегии на уровне баз данных и коллекций необходимо устанавливать вручную.</p>
 </div>
 <p>В следующих таблицах описаны привилегии, включенные в каждую из встроенных групп привилегий.</p>
-<h3 id="Collection-level" class="common-anchor-header">Уровень коллекции</h3><ul>
+<h3 id="Collection-level" class="common-anchor-header">Уровень коллекции<button data-href="#Collection-level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>CollectionReadOnly (COLL_RO)</strong>: включает привилегии на чтение данных коллекции</p></li>
 <li><p><strong>CollectionReadWrite (COLL_RW)</strong>: включает привилегии на чтение и запись данных коллекции</p></li>
 <li><p><strong>CollectionAdmin (COLL_ADMIN)</strong>: включает привилегии на чтение и запись данных коллекции и управление коллекциями.</p></li>
@@ -243,7 +258,22 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h3 id="Database-level" class="common-anchor-header">Уровень базы данных</h3><ul>
+<h3 id="Database-level" class="common-anchor-header">Уровень базы данных<button data-href="#Database-level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>DatabaseReadOnly (DB_RO)</strong>: включает привилегии на чтение данных базы данных</p></li>
 <li><p><strong>DatabaseReadWrite (DB_RW)</strong>: включает привилегии на чтение и запись данных базы данных</p></li>
 <li><p><strong>DatabaseAdmin (DB_Admin)</strong>: включает привилегии на чтение и запись данных базы данных и управление базами данных.</p></li>
@@ -287,7 +317,22 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h3 id="Cluster-level" class="common-anchor-header">Уровень кластера</h3><ul>
+<h3 id="Cluster-level" class="common-anchor-header">Уровень кластера<button data-href="#Cluster-level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>ClusterReadOnly (Cluster_RO)</strong>: включает привилегии на чтение данных экземпляра</p></li>
 <li><p><strong>ClusterReadWrite (Cluster_RW)</strong>: включает привилегии на чтение и запись данных экземпляра</p></li>
 <li><p><strong>ClusterAdmin (Cluster_Admin)</strong>: включает привилегии для чтения и записи данных экземпляра и управления экземплярами.</p></li>
@@ -461,7 +506,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Вы можете создать группу привилегий, а затем добавить привилегии в группу привилегий.</p>
-<h3 id="Create-a-privilege-group" class="common-anchor-header">Создание группы привилегий</h3><p>В следующем примере показано, как создать группу привилегий с именем <code translate="no">privilege_group_1</code>.</p>
+<h3 id="Create-a-privilege-group" class="common-anchor-header">Создание группы привилегий<button data-href="#Create-a-privilege-group" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В следующем примере показано, как создать группу привилегий с именем <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -493,7 +553,22 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">Добавление привилегий в группу привилегий</h3><p>В следующем примере показано, как добавить привилегии <code translate="no">PrivilegeBackupRBAC</code> и <code translate="no">PrivilegeRestoreRBAC</code> в только что созданную группу привилегий <code translate="no">privilege_group_1</code>.</p>
+<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">Добавление привилегий в группу привилегий<button data-href="#Add-privileges-to-a-privilege-group" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В следующем примере показано, как добавить привилегии <code translate="no">PrivilegeBackupRBAC</code> и <code translate="no">PrivilegeRestoreRBAC</code> в только что созданную группу привилегий <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -530,7 +605,22 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
     &quot;privileges&quot;:[&quot;Query&quot;, &quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">Удаление привилегий из группы привилегий</h3><p>В следующем примере показано, как удалить привилегию <code translate="no">PrivilegeRestoreRBAC</code> из группы привилегий <code translate="no">privilege_group_1</code>.</p>
+<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">Удаление привилегий из группы привилегий<button data-href="#Remove-privileges-from-a-privilege-group" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В следующем примере показано, как удалить привилегию <code translate="no">PrivilegeRestoreRBAC</code> из группы привилегий <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -565,7 +655,22 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
     &quot;privileges&quot;:[&quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-privilege-groups" class="common-anchor-header">Список групп привилегий</h3><p>Следующий пример демонстрирует, как перечислить все существующие группы привилегий.</p>
+<h3 id="List-privilege-groups" class="common-anchor-header">Список групп привилегий<button data-href="#List-privilege-groups" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Следующий пример демонстрирует, как перечислить все существующие группы привилегий.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -598,7 +703,22 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
 <p>Ниже приведен пример вывода.</p>
 <pre><code translate="no" class="language-bash">PrivilegeGroupItem: &lt;privilege_group:privilege_group_1&gt;, &lt;privileges:(<span class="hljs-string">&#x27;Search&#x27;</span>, <span class="hljs-string">&#x27;Query&#x27;</span>)&gt;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-a-privilege-group" class="common-anchor-header">Сбросить группу привилегий</h3><p>В следующем примере показано, как удалить группу привилегий <code translate="no">privilege_group_1</code>.</p>
+<h3 id="Drop-a-privilege-group" class="common-anchor-header">Сбросить группу привилегий<button data-href="#Drop-a-privilege-group" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В следующем примере показано, как удалить группу привилегий <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

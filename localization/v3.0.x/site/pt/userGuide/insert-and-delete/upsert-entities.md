@@ -114,9 +114,9 @@ summary: >-
 <li><p>Se você fizer upsert com <code translate="no">partial_update</code> ativado, o comportamento padrão será <strong>mesclar</strong>. Isso significa que o valor do campo dinâmico será mesclado com todos os campos não definidos pelo esquema incluídos na solicitação e seus valores.</p>
 <p>Por exemplo, se os dados incluídos na solicitação forem <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>, os pares de valores chave no campo dinâmico da entidade de destino se tornarão <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> após a inserção.</p></li>
 </ul></li>
-<li><p><strong>Inserir um campo JSON.</strong></p>
+<li><p><strong>Fazer upsert de um campo JSON.</strong></p>
 <p>Suponha que a coleção de exemplo tenha um campo JSON definido por esquema chamado <code translate="no">extras</code>, e os pares de valores chave nesse campo JSON de uma entidade sejam semelhantes a <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>Quando você insere o campo <code translate="no">extras</code> de uma entidade com dados JSON modificados, observe que o campo JSON é tratado como um todo e não é possível atualizar chaves individuais seletivamente. Por outras palavras, o campo JSON <strong>NÃO</strong> suporta upsert no modo <strong>de fusão</strong>.</p></li>
+<p>Quando você insere o campo <code translate="no">extras</code> de uma entidade com dados JSON modificados, observe que o campo JSON é tratado como um todo e você não pode atualizar chaves individuais seletivamente. Por outras palavras, o campo JSON <strong>NÃO</strong> suporta upsert no modo <strong>de fusão</strong>.</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">Limites e restrições<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"

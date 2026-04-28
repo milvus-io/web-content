@@ -58,7 +58,7 @@ helm install ingress-nginx ingress-nginx/ingress-nginx \
 <pre><code translate="no" class="language-bash">kubectl --namespace <span class="hljs-variable">$NAMESPACE</span> get services -o wide -w ingress-nginx-controller
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Configurar um FQDN para o controlador de entrada.</li>
+<li>Configurar um FQDN para o seu controlador de entrada.</li>
 </ul>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Public IP address of your ingress controller</span>
 IP=<span class="hljs-string">&quot;MY_EXTERNAL_IP&quot;</span>

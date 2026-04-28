@@ -5,7 +5,7 @@ summary: >-
   Anthropic pour résoudre le problème de l'isolation sémantique des morceaux,
   qui se pose dans les solutions actuelles de génération améliorée de recherche
   (RAG). Dans le paradigme pratique actuel de la RAG, les documents sont divisés
-  en plusieurs morceaux, et une base de données vectorielle est utilisée pour
+  en plusieurs morceaux et une base de données vectorielle est utilisée pour
   rechercher la requête, en récupérant les morceaux les plus pertinents. Un LLM
   répond ensuite à la requête en utilisant ces morceaux récupérés. Toutefois, ce
   processus de découpage peut entraîner la perte d'informations contextuelles,
@@ -32,7 +32,7 @@ title: Récupération contextuelle avec Milvus
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/refs/heads/master/pics/contextual_retrieval_with_milvus.png" alt="image" class="doc-image" id="image" />
-    La </span><a href="https://www.anthropic.com/news/contextual-retrieval">recherche contextuelle d'</a> <span class="img-wrapper"> <span>images</span> </span>est une méthode de recherche avancée proposée par Anthropic pour résoudre le problème de l'isolation sémantique des morceaux, qui se pose dans les solutions actuelles de génération améliorée de recherche (RAG). Dans le paradigme pratique actuel de la RAG, les documents sont divisés en plusieurs morceaux, et une base de données vectorielle est utilisée pour rechercher la requête, en récupérant les morceaux les plus pertinents. Un LLM répond ensuite à la requête en utilisant ces morceaux récupérés. Toutefois, ce processus de découpage peut entraîner la perte d'informations contextuelles, ce qui rend difficile la détermination de la pertinence par l'utilisateur.</p>
+    La </span><a href="https://www.anthropic.com/news/contextual-retrieval">recherche contextuelle d'</a> <span class="img-wrapper"> <span>images</span> </span>est une méthode de recherche avancée proposée par Anthropic pour résoudre le problème de l'isolation sémantique des morceaux, qui se pose dans les solutions actuelles de génération améliorée de recherche (RAG). Dans le paradigme pratique actuel de la RAG, les documents sont divisés en plusieurs morceaux et une base de données vectorielle est utilisée pour rechercher la requête, en récupérant les morceaux les plus pertinents. Un LLM répond ensuite à la requête en utilisant ces morceaux récupérés. Toutefois, ce processus de découpage peut entraîner la perte d'informations contextuelles, ce qui rend difficile la détermination de la pertinence par l'utilisateur.</p>
 <p>La recherche contextuelle améliore les systèmes de recherche traditionnels en ajoutant un contexte pertinent à chaque fragment de document avant l'intégration ou l'indexation, ce qui augmente la précision et réduit les erreurs de recherche. Combinée à des techniques telles que la recherche hybride et le reranking, elle améliore les systèmes RAG (Retrieval-Augmented Generation), en particulier pour les grandes bases de connaissances. En outre, elle offre une solution rentable lorsqu'elle est associée à une mise en cache rapide, réduisant de manière significative la latence et les coûts opérationnels, les morceaux contextualisés coûtant environ 1,02 dollar par million de jetons de document. Il s'agit donc d'une approche évolutive et efficace pour le traitement de grandes bases de connaissances. La solution d'Anthropic présente deux aspects intéressants :</p>
 <ul>
 <li><code translate="no">Document Enhancement</code>: La réécriture des requêtes est une technique cruciale dans la recherche d'information moderne, qui utilise souvent des informations auxiliaires pour rendre la requête plus informative. De même, pour obtenir de meilleures performances dans RAG, le prétraitement des documents avec un LLM (par exemple, le nettoyage de la source de données, le complément des informations perdues, le résumé, etc. En d'autres termes, cette étape de prétraitement aide à rapprocher les documents des requêtes en termes de pertinence.</li>
@@ -54,7 +54,22 @@ title: Récupération contextuelle avec Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Installer les dépendances</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Installer les dépendances<button data-href="#Install-Dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install tqdm</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install anthropic</span>
 <button class="copy-code-btn"></button></code></pre>

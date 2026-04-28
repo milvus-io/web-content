@@ -19,7 +19,10 @@ title: Indeks dalam memori
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Topik ini berisi daftar berbagai jenis indeks dalam memori yang didukung Milvus, skenario yang paling sesuai, dan parameter yang dapat dikonfigurasikan oleh pengguna untuk mendapatkan performa pencarian yang lebih baik. Untuk indeks dalam disk, lihat <strong><a href="/docs/id/disk_index.md">Indeks Dalam Disk</a></strong>.</p>
+    </button></h1><div class="alert warning">
+<p>Halaman ini sudah tidak digunakan lagi. Untuk konten terbaru, silakan lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks.</a></p>
+</div>
+<p>Topik ini berisi daftar berbagai jenis indeks dalam memori yang didukung Milvus, skenario yang paling sesuai, dan parameter yang dapat dikonfigurasikan oleh pengguna untuk mendapatkan kinerja pencarian yang lebih baik. Untuk indeks dalam disk, lihat <strong><a href="/docs/id/disk_index.md">Indeks Dalam Disk</a></strong>.</p>
 <p>Pengindeksan adalah proses pengorganisasian data secara efisien, dan ini memainkan peran utama dalam membuat pencarian kemiripan menjadi berguna dengan mempercepat kueri yang memakan waktu secara dramatis pada kumpulan data yang besar.</p>
 <p>Untuk meningkatkan kinerja kueri, Anda dapat <a href="/docs/id/index-vector-fields.md">menentukan jenis indeks</a> untuk setiap bidang vektor.</p>
 <div class="alert note">
@@ -76,7 +79,7 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
         ></path>
       </svg>
     </button></h3><p>Untuk penyematan floating-point 128 dimensi (vektor), penyimpanan yang digunakan adalah 128 * ukuran float = 512 byte. Dan <a href="/docs/id/metric.md">metrik jarak</a> yang digunakan untuk penyematan float-point adalah jarak Euclidean (<code translate="no">L2</code>) dan Inner product (<code translate="no">IP</code>).</p>
-<p>Jenis-jenis indeks ini termasuk <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, dan <code translate="no">SCANN</code> untuk pencarian ANN berbasis CPU.</p>
+<p>Jenis-jenis indeks ini termasuk <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, dan <code translate="no">SCANN</code> untuk pencarian ANN berbasis CPU.</p>
 </div>
 <div class="filter-binary">
 <h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Indeks untuk penyematan biner<button data-href="#Indexes-for-binary-embeddings" class="anchor-icon" translate="no">
@@ -98,7 +101,7 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 <p>Jenis indeks ini termasuk <code translate="no">BIN_FLAT</code> dan <code translate="no">BIN_IVF_FLAT</code>.</p>
 </div>
 <div class="filter-sparse">
-<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Indeks untuk sematan jarang<button data-href="#Indexes-for-sparse-embeddings" class="anchor-icon" translate="no">
+<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Indeks untuk penyematan yang jarang<button data-href="#Indexes-for-sparse-embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -113,8 +116,11 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Metrik jarak yang didukung untuk sematan jarang adalah <code translate="no">IP</code> saja.</p>
-<p>Jenis indeks ini meliputi <code translate="no">SPARSE_INVERTED_INDEX</code> dan <code translate="no">SPARSE_WAND</code>.</p>
+    </button></h3><p>Indeks untuk sematan jarang hanya mendukung metrik <code translate="no">IP</code> dan <code translate="no">BM25</code> (untuk pencarian teks lengkap).</p>
+<p>Jenis indeks yang didukung untuk sematan jarang: <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
+<div class="alert note">
+<p>Mulai Milvus 2.5.4 dan seterusnya, <code translate="no">SPARSE_WAND</code> sudah tidak digunakan lagi. Sebagai gantinya, disarankan untuk menggunakan <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> untuk kesetaraan sambil mempertahankan kompatibilitas. Untuk informasi lebih lanjut, lihat <a href="/docs/id/sparse_vector.md#Set-index-params-for-vector-field">Vektor</a> Jarang.</p>
+</div>
 </div>
 <div class="filter-floating table-wrapper">
 <table id="floating">
@@ -138,7 +144,7 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
   </tr>
   <tr>
     <td>IVF_FLAT</td>
-    <td>Indeks berbasis kuantisasi</td>
+    <td>N/A</td>
     <td>
       <ul>
         <li>Kueri berkecepatan tinggi</li>
@@ -151,7 +157,7 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
     <td>Indeks berbasis kuantisasi</td>
     <td>
       <ul>
-        <li>Kueri kecepatan tinggi</li>
+        <li>Kueri berkecepatan sangat tinggi</li>
         <li>Sumber daya memori terbatas</li>
         <li>Menerima kompromi kecil dalam tingkat pemanggilan kembali</li>
       </ul>
@@ -162,9 +168,9 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
     <td>Indeks berbasis kuantisasi</td>
     <td>
       <ul>
-        <li>Kueri berkecepatan sangat tinggi</li>
+        <li>Kueri berkecepatan tinggi</li>
         <li>Sumber daya memori terbatas</li>
-        <li>Menerima kompromi substansial dalam tingkat pemanggilan kembali</li>
+        <li>Menerima kompromi kecil dalam tingkat pemanggilan kembali</li>
       </ul>
     </td>
   </tr>
@@ -176,6 +182,40 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
         <li>Kueri berkecepatan sangat tinggi</li>
         <li>Membutuhkan tingkat pemanggilan setinggi mungkin</li>
         <li>Sumber daya memori yang besar</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>HNSW_SQ</td>
+    <td>Indeks berbasis kuantisasi</td>
+    <td>
+      <ul>
+        <li>Kueri berkecepatan sangat tinggi</li>
+        <li>Sumber daya memori terbatas</li>
+        <li>Menerima kompromi kecil dalam tingkat pemanggilan kembali</li>
+      </ul>
+    </td>
+  </tr>
+    <tr>
+    <td>HNSW_PQ</td>
+    <td>Indeks berbasis kuantisasi</td>
+    <td>
+      <ul>
+        <li>Kueri kecepatan sedang</li>
+        <li>Sumber daya memori yang sangat terbatas</li>
+        <li>Menerima kompromi kecil dalam tingkat pemanggilan kembali</li>
+      </ul>
+    </td>
+  </tr>
+    </tr>
+    <tr>
+    <td>HNSW_PRQ</td>
+    <td>Indeks berbasis kuantisasi</td>
+    <td>
+      <ul>
+        <li>Kueri kecepatan sedang</li>
+        <li>Sumber daya memori yang sangat terbatas</li>
+        <li>Menerima kompromi kecil dalam tingkat pemanggilan kembali</li>
       </ul>
     </td>
   </tr>
@@ -242,14 +282,6 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
       <li>Membutuhkan tingkat penarikan 100%.</li>
     </ul></td>
   </tr>
-  <tr>
-    <td>SPARSE_WAND</td>
-    <td>Indeks terbalik</td>
-    <td><ul>
-      <li>Algoritma<a href="https://dl.acm.org/doi/10.1145/956863.956944">lemah dan</a> dipercepat</li>
-      <li>Dapat memperoleh peningkatan kecepatan yang signifikan dengan hanya mengorbankan sedikit recall.</li>
-    </ul></td>
-  </tr>
 </tbody>
 </table>
 </div>
@@ -269,8 +301,8 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk aplikasi pencarian kemiripan vektor yang membutuhkan akurasi sempurna dan bergantung pada kumpulan data yang relatif kecil (skala jutaan), indeks FLAT adalah pilihan yang baik. FLAT tidak memampatkan vektor, dan merupakan satu-satunya indeks yang dapat menjamin hasil pencarian yang tepat. Hasil dari FLAT juga dapat digunakan sebagai titik perbandingan untuk hasil yang dihasilkan oleh indeks lain yang memiliki recall kurang dari 100%.</p>
-<p>FLAT akurat karena menggunakan pendekatan yang menyeluruh dalam melakukan pencarian, yang berarti untuk setiap kueri, input target dibandingkan dengan setiap kumpulan vektor dalam kumpulan data. Hal ini membuat FLAT menjadi indeks paling lambat dalam daftar kami, dan tidak cocok untuk melakukan kueri data vektor yang sangat besar. Tidak ada parameter yang diperlukan untuk indeks FLAT di Milvus, dan untuk menggunakannya tidak memerlukan pelatihan data.</p>
+    </button></h3><p>Untuk aplikasi pencarian kemiripan vektor yang membutuhkan akurasi sempurna dan bergantung pada set data yang relatif kecil (skala jutaan), indeks FLAT adalah pilihan yang baik. FLAT tidak memampatkan vektor, dan merupakan satu-satunya indeks yang dapat menjamin hasil pencarian yang tepat. Hasil dari FLAT juga dapat digunakan sebagai titik perbandingan untuk hasil yang dihasilkan oleh indeks lain yang memiliki recall kurang dari 100%.</p>
+<p>FLAT akurat karena menggunakan pendekatan yang menyeluruh dalam melakukan pencarian, yang berarti untuk setiap kueri, input target dibandingkan dengan setiap kumpulan vektor dalam kumpulan data. Hal ini membuat FLAT menjadi indeks paling lambat dalam daftar kami, dan tidak cocok untuk melakukan kueri data vektor yang sangat besar. Tidak ada parameter yang diperlukan untuk indeks FLAT di Milvus, dan menggunakannya tidak memerlukan pembangunan indeks tambahan.</p>
 <ul>
 <li><p>Parameter pencarian</p>
 <table>
@@ -417,7 +449,7 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 <tbody>
 <tr><td><code translate="no">nlist</code></td><td>Jumlah unit cluster</td><td>[1, 65536]</td></tr>
 <tr><td><code translate="no">m</code></td><td>Jumlah faktor kuantisasi produk</td><td><code translate="no">dim mod m == 0</code></td></tr>
-<tr><td><code translate="no">nbits</code></td><td>[Opsional] Jumlah bit tempat penyimpanan setiap vektor dimensi rendah.</td><td>[1, 64] (8 secara default)</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>[Opsional] Jumlah bit tempat penyimpanan setiap vektor dimensi rendah.</td><td>[1, 24] (8 secara default)</td></tr>
 </tbody>
 </table>
 </li>
@@ -522,21 +554,156 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 <li><p>Parameter pembangunan indeks</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Deskripsi</th><th>Rentang</th></tr>
+<tr><th>Parameter</th><th>Deskripsi</th><th>Rentang</th><th>Nilai Default</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M mendefinisikan jumlah maksimum koneksi keluar dalam grafik. M yang lebih tinggi mengarah ke akurasi/waktu_jalan yang lebih tinggi pada ef/efKonstruksi yang tetap.</td><td>[2, 2048]</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction mengontrol kecepatan pencarian indeks/pertukaran kecepatan pembangunan. Meningkatkan parameter efConstruction dapat meningkatkan kualitas indeks, tetapi juga cenderung memperpanjang waktu pengindeksan.</td><td>[1, int_max]</td></tr>
+<tr><td><code translate="no">M</code></td><td>M mendefinisikan jumlah maksimum koneksi keluar dalam grafik. M yang lebih tinggi akan menghasilkan akurasi/waktu_jalan yang lebih tinggi pada ef/efKonstruksi yang tetap.</td><td>[2, 2048]</td><td>Tidak ada</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction mengontrol kecepatan pencarian indeks/pertukaran kecepatan pembangunan. Meningkatkan parameter efConstruction dapat meningkatkan kualitas indeks, tetapi juga cenderung memperpanjang waktu pengindeksan.</td><td>[1, int_max]</td><td>Tidak ada</td></tr>
 </tbody>
 </table>
 </li>
 <li><p>Parameter pencarian</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Deskripsi</th><th>Range</th></tr>
+<tr><th>Parameter</th><th>Deskripsi</th><th>Rentang</th><th>Nilai Default</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter yang mengendalikan pertukaran waktu kueri/akurasi. <code translate="no">ef</code> yang lebih tinggi menghasilkan pencarian yang lebih akurat tetapi lebih lambat.</td><td>[<code translate="no">top_k</code>, int_max]</td></tr>
+<tr><td><code translate="no">ef</code></td><td>Parameter yang mengendalikan pertukaran waktu kueri/akurasi. <code translate="no">ef</code> yang lebih tinggi akan menghasilkan pencarian yang lebih akurat namun lebih lambat.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Tidak ada</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ<button data-href="#HNSWSQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kuantisasi Skalar (SQ) adalah teknik yang digunakan untuk mendiskritkan data floating-point menjadi sekumpulan nilai yang terbatas berdasarkan besarnya. Sebagai contoh, <strong>SQ6</strong> merepresentasikan kuantisasi ke dalam (2^6 = 64) nilai diskrit, di mana setiap angka floating-point dikodekan menggunakan 6 bit. Demikian pula, <strong>SQ8</strong> mengkuantisasi data menjadi (2^8 = 256) nilai diskrit, dengan setiap angka floating-point diwakili oleh 8 bit. Kuantisasi ini mengurangi jejak memori sekaligus mempertahankan struktur data yang penting untuk pemrosesan yang efisien.</p>
+<p>Dikombinasikan dengan SQ, HNSW_SQ menawarkan pertukaran yang dapat dikontrol antara ukuran indeks dan akurasi, sambil mempertahankan kinerja query-per-detik (QPS) yang tinggi. Dibandingkan dengan HNSW standar, ini menghasilkan peningkatan yang tidak terlalu besar dalam waktu pembangunan indeks.</p>
+<ul>
+<li><p>Parameter pembangunan indeks</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Deskripsi</th><th>Rentang</th><th>Nilai Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>M mendefinisikan jumlah maksimum koneksi keluar dalam grafik. M yang lebih tinggi akan menghasilkan akurasi/waktu_jalan yang lebih tinggi pada ef/efKonstruksi yang tetap.</td><td>[2, 2048]</td><td>Tidak ada</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction mengontrol kecepatan pencarian indeks/pertukaran kecepatan pembangunan. Meningkatkan parameter efConstruction dapat meningkatkan kualitas indeks, tetapi juga cenderung memperpanjang waktu pengindeksan.</td><td>[1, int_max]</td><td>Tidak ada</td></tr>
+<tr><td><code translate="no">sq_type</code></td><td>Tipe kuantizer skalar.</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
+<tr><td><code translate="no">refine</code></td><td>Apakah data yang disempurnakan dicadangkan selama pembangunan indeks.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>Tipe data dari indeks yang disempurnakan.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Tidak ada</td></tr>
+</tbody>
+</table>
+</li>
+<li><p>Parameter pencarian</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Deskripsi</th><th>Rentang</th><th>Nilai Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>Parameter yang mengendalikan pertukaran waktu kueri/akurasi. <code translate="no">ef</code> yang lebih tinggi akan menghasilkan pencarian yang lebih akurat namun lebih lambat.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Tidak ada</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>Faktor pembesaran dari refine dibandingkan dengan <em>k</em>.</td><td>[1, <em>float_max</em>] (1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ<button data-href="#HNSWPQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ide dasar dari PQ adalah membagi vektor menjadi <code translate="no">m</code> sub-vektor, yang masing-masing akan menemukan <em>2^{nbits}</em> centroid berdasarkan kmeans, dan setiap sub-vektor akan memilih centroid terdekat sebagai perkiraan sub-vektor. Kemudian kita mencatat semua centroid, sehingga setiap subvektor dapat dikodekan sebagai <code translate="no">nbits</code>, dan vektor mengambang dengan panjang <code translate="no">dim</code> dapat dikodekan sebagai <em>m ⋅ n bit</em>.</p>
+<p>Dikombinasikan dengan PQ, HNSW_PQ menawarkan pertukaran yang dapat dikontrol antara ukuran indeks dan akurasi, tetapi memiliki nilai QPS yang lebih rendah dan tingkat penarikan yang lebih tinggi daripada HNSW_SQ untuk tingkat kompresi yang sama. Dibandingkan dengan HNSW_SQ, dibutuhkan waktu lebih lama untuk membangun indeks.</p>
+<ul>
+<li><p>Parameter pembangunan indeks</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Deskripsi</th><th>Rentang</th><th>Nilai Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>M mendefinisikan jumlah maksimum koneksi keluar dalam grafik. M yang lebih tinggi akan menghasilkan akurasi/waktu_jalan yang lebih tinggi pada ef/efKonstruksi yang tetap.</td><td>[2, 2048]</td><td>Tidak ada</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction mengontrol kecepatan pencarian indeks/pertukaran kecepatan pembangunan. Meningkatkan parameter efConstruction dapat meningkatkan kualitas indeks, tetapi juga cenderung memperpanjang waktu pengindeksan.</td><td>[1, int_max]</td><td>Tidak ada</td></tr>
+<tr><td><code translate="no">m</code></td><td>Jumlah kelompok sub-vektor untuk membagi vektor.</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>Jumlah bit yang dikuantisasi ke dalam setiap kelompok sub-vektor.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Apakah data yang disempurnakan dicadangkan selama pembangunan indeks.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>Tipe data dari indeks penghalusan.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Tidak ada</td></tr>
+</tbody>
+</table>
+</li>
+<li><p>Parameter pencarian</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Deskripsi</th><th>Rentang</th><th>Nilai Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>Parameter yang mengendalikan pertukaran waktu kueri/akurasi. <code translate="no">ef</code> yang lebih tinggi akan menghasilkan pencarian yang lebih akurat namun lebih lambat.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Tidak ada</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>Faktor pembesaran dari refine dibandingkan dengan <em>k</em>.</td><td>[1, <em>float_max</em>] (1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ<button data-href="#HNSWPRQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>PRQ mirip dengan PQ, dan juga membagi vektor ke dalam kelompok-kelompok <code translate="no">m</code>. Setiap sub-vektor akan dikodekan sebagai <code translate="no">nbits</code>. Setelah menyelesaikan kuantisasi pq, ia akan menghitung sisa antara vektor dan vektor terkuantisasi pq, dan menerapkan kuantisasi pq ke vektor sisa. Sebanyak <code translate="no">nrq</code> kuantisasi pq lengkap akan dilakukan, sehingga vektor mengambang dengan panjang <code translate="no">dim</code> akan dikodekan sebagai <em>m ⋅ nbit ⋅ nrq</em> bit.</p>
+<p>Dikombinasikan dengan Product Residual Quantizer (PRQ), HNSW_PRQ menawarkan pertukaran yang dapat dikontrol lebih tinggi antara ukuran indeks dan akurasi. Memiliki nilai QPS yang hampir setara dan tingkat recall yang lebih tinggi daripada HNSW_PQ untuk tingkat kompresi yang sama. Dibandingkan dengan HNSW_PQ, waktu untuk membangun indeks dapat meningkat beberapa kali lipat.</p>
+<ul>
+<li><p>Parameter pembangunan indeks</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Deskripsi</th><th>Rentang</th><th>Nilai Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>M mendefinisikan jumlah maksimum koneksi keluar dalam grafik. M yang lebih tinggi akan menghasilkan akurasi/waktu_jalan yang lebih tinggi pada ef/efKonstruksi yang tetap.</td><td>[2, 2048]</td><td>Tidak ada</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction mengontrol kecepatan pencarian indeks/pertukaran kecepatan pembangunan. Meningkatkan parameter efConstruction dapat meningkatkan kualitas indeks, tetapi juga cenderung memperpanjang waktu pengindeksan.</td><td>[1, int_max]</td><td>Tidak ada</td></tr>
+<tr><td><code translate="no">m</code></td><td>Jumlah kelompok sub-vektor untuk membagi vektor.</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>Jumlah bit yang dikuantisasi ke dalam setiap kelompok sub-vektor.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">nrq</code></td><td>Jumlah subkuantisasi sisa.</td><td>[1, 16]</td><td>2</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Apakah data yang disempurnakan dicadangkan selama pembangunan indeks.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>Tipe data dari indeks penghalusan.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Tidak ada</td></tr>
+</tbody>
+</table>
+</li>
+<li><p>Parameter pencarian</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Deskripsi</th><th>Rentang</th><th>Nilai Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>Parameter yang mengendalikan pertukaran waktu kueri/akurasi. <code translate="no">ef</code> yang lebih tinggi akan menghasilkan pencarian yang lebih akurat namun lebih lambat.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Tidak ada</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>Faktor pembesaran dari refine dibandingkan dengan <em>k</em>.</td><td>[1, <em>float_max</em>] (1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -559,8 +726,8 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
         ></path>
       </svg>
     </button></h3><p>Indeks ini persis sama dengan FLAT kecuali bahwa ini hanya dapat digunakan untuk penyematan biner.</p>
-<p>Untuk aplikasi pencarian kemiripan vektor yang membutuhkan akurasi sempurna dan bergantung pada kumpulan data yang relatif kecil (skala jutaan), indeks BIN_FLAT adalah pilihan yang baik. BIN_FLAT tidak memampatkan vektor, dan merupakan satu-satunya indeks yang dapat menjamin hasil pencarian yang tepat. Hasil dari BIN_FLAT juga dapat digunakan sebagai titik perbandingan untuk hasil yang dihasilkan oleh indeks lain yang memiliki recall kurang dari 100%.</p>
-<p>BIN_FLAT akurat karena menggunakan pendekatan menyeluruh untuk pencarian, yang berarti untuk setiap kueri, input target dibandingkan dengan vektor dalam kumpulan data. Hal ini membuat BIN_FLAT menjadi indeks paling lambat dalam daftar kami, dan tidak cocok untuk kueri data vektor yang sangat besar. Tidak ada parameter untuk indeks BIN_FLAT di Milvus, dan menggunakannya tidak memerlukan pelatihan data atau penyimpanan tambahan.</p>
+<p>Untuk aplikasi pencarian kemiripan vektor yang membutuhkan akurasi sempurna dan bergantung pada dataset yang relatif kecil (skala jutaan), indeks BIN_FLAT adalah pilihan yang baik. BIN_FLAT tidak memampatkan vektor, dan merupakan satu-satunya indeks yang dapat menjamin hasil pencarian yang tepat. Hasil dari BIN_FLAT juga dapat digunakan sebagai titik perbandingan untuk hasil yang dihasilkan oleh indeks lain yang memiliki recall kurang dari 100%.</p>
+<p>BIN_FLAT akurat karena menggunakan pendekatan menyeluruh untuk pencarian, yang berarti untuk setiap kueri, input target dibandingkan dengan vektor dalam kumpulan data. Hal ini membuat BIN_FLAT menjadi indeks paling lambat dalam daftar kami, dan kurang cocok untuk kueri data vektor yang sangat besar. Tidak ada parameter untuk indeks BIN_FLAT di Milvus, dan menggunakannya tidak memerlukan pelatihan data atau penyimpanan tambahan.</p>
 <ul>
 <li><p>Parameter pencarian</p>
 <table>
@@ -649,56 +816,22 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 <li><p>Parameter pembuatan indeks</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Deskripsi</th><th>Rentang</th></tr>
+<tr><th>Parameter</th><th>Deskripsi</th><th>Range</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>Proporsi nilai vektor kecil yang dikecualikan selama proses pengindeksan. Opsi ini memungkinkan penyempurnaan proses pengindeksan, membuat keseimbangan antara efisiensi dan akurasi dengan mengabaikan nilai-nilai kecil saat membangun indeks.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>Algoritme yang digunakan untuk membangun dan menanyakan indeks. Untuk detailnya, lihat <a href="/docs/id/sparse_vector.md#Set-index-params-for-vector-field">Vektor Jarang</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (default), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">bm25_k1</code></td><td>Mengontrol saturasi frekuensi istilah. Nilai yang lebih tinggi meningkatkan pentingnya frekuensi istilah dalam pemeringkatan dokumen.</td><td>[1.2, 2.0]</td></tr>
+<tr><td><code translate="no">bm25_b</code></td><td>Mengontrol sejauh mana panjang dokumen dinormalisasi. Nilai defaultnya adalah 0,75.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
+  <div class="alert note">
+<p>Parameter <code translate="no">drop_ratio_build</code> sudah tidak digunakan lagi sejak Milvus v2.5.4, yang masih dapat diterima selama pembuatan indeks, tetapi tidak lagi memiliki efek aktual pada indeks.</p>
+  </div>
 </li>
 <li><p>Parameter pencarian</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Deskripsi</th><th>Rentang</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>Proporsi nilai vektor kecil yang dikecualikan selama proses pencarian. Opsi ini memungkinkan penyempurnaan proses pencarian dengan menentukan rasio nilai terkecil dalam vektor kueri yang akan diabaikan. Opsi ini membantu menyeimbangkan ketepatan dan kinerja pencarian. Semakin kecil nilai yang ditetapkan untuk <code translate="no">drop_ratio_search</code>, semakin sedikit nilai kecil ini berkontribusi pada skor akhir. Dengan mengabaikan beberapa nilai kecil, kinerja pencarian dapat ditingkatkan dengan dampak minimal pada akurasi.</td><td>[0, 1]</td></tr>
-</tbody>
-</table>
-</li>
-</ul>
-<h3 id="SPARSEWAND" class="common-anchor-header">SPARSE_WAND<button data-href="#SPARSEWAND" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Indeks ini memiliki kemiripan dengan <code translate="no">SPARSE_INVERTED_INDEX</code>, namun menggunakan algoritma <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> untuk mengurangi jumlah evaluasi jarak IP secara penuh selama proses pencarian.</p>
-<p>Berdasarkan pengujian kami, <code translate="no">SPARSE_WAND</code> secara umum mengungguli metode-metode lain dalam hal kecepatan. Namun, kinerjanya bisa memburuk dengan cepat seiring dengan meningkatnya kepadatan vektor. Untuk mengatasi masalah ini, memperkenalkan <code translate="no">drop_ratio_search</code> yang bukan nol dapat meningkatkan kinerja secara signifikan dengan hanya mengalami sedikit penurunan akurasi. Untuk informasi lebih lanjut, lihat <a href="/docs/id/sparse_vector.md">Vektor</a> Jarang.</p>
-<ul>
-<li><p>Parameter pembuatan indeks</p>
-<table>
-<thead>
-<tr><th>Parameter</th><th>Deskripsi</th><th>Rentang</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>Proporsi nilai vektor kecil yang dikecualikan selama proses pengindeksan. Opsi ini memungkinkan penyempurnaan proses pengindeksan, membuat keseimbangan antara efisiensi dan akurasi dengan mengabaikan nilai-nilai kecil saat membangun indeks.</td><td>[0, 1]</td></tr>
-</tbody>
-</table>
-</li>
-<li><p>Parameter pencarian</p>
-<table>
-<thead>
-<tr><th>Parameter</th><th>Deskripsi</th><th>Rentang</th></tr>
+<tr><th>Parameter</th><th>Deskripsi</th><th>Range</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">drop_ratio_search</code></td><td>Proporsi nilai vektor kecil yang dikecualikan selama proses pencarian. Opsi ini memungkinkan penyempurnaan proses pencarian dengan menentukan rasio nilai terkecil dalam vektor kueri yang akan diabaikan. Opsi ini membantu menyeimbangkan ketepatan dan kinerja pencarian. Semakin kecil nilai yang ditetapkan untuk <code translate="no">drop_ratio_search</code>, semakin sedikit nilai kecil ini berkontribusi pada skor akhir. Dengan mengabaikan beberapa nilai kecil, kinerja pencarian dapat ditingkatkan dengan dampak minimal pada akurasi.</td><td>[0, 1]</td></tr>

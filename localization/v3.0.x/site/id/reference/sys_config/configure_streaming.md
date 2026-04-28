@@ -106,7 +106,7 @@ summary: Pelajari cara mengonfigurasi streaming untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Pengganda backoff pemicu tugas keseimbangan, 2 secara default      </td>
+      <td>        Pengali dari backoff pemicu tugas keseimbangan, 2 secara default      </td>
       <td>2</td>
     </tr>
   </tbody>

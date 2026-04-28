@@ -37,18 +37,18 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dalam pipeline data AI pada umumnya, pengguna mungkin sudah menyimpan data mereka dalam format Parquet atau format lain di sistem penyimpanan mereka, seperti AWS S3. Untuk membuat Milvus mengonsumsi data yang disimpan secara eksternal ini, pengguna biasanya perlu mengimpornya ke dalam penyimpanan Milvus sendiri menggunakan pipeline Extract-Transform-Load (ETL).</p>
+    </button></h2><p>Dalam pipeline data AI pada umumnya, pengguna mungkin telah menyimpan data mereka dalam format Parquet atau format lain di sistem penyimpanan mereka, seperti AWS S3. Untuk membuat Milvus mengonsumsi data yang disimpan secara eksternal ini, pengguna biasanya perlu mengimpornya ke dalam penyimpanan Milvus sendiri menggunakan pipeline Extract-Transform-Load (ETL).</p>
 <p>Alur kerja membawa data Anda ke Milvus ini menciptakan data yang berlebihan yang sulit untuk disinkronkan dan menambah beban pemeliharaan teknik untuk memastikan konsistensi data.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/yqxwwpq3vheya4b8398cwopnnyn.png" alt="Yqxwwpq3vheya4b8398cwopnnyn" class="doc-image" id="yqxwwpq3vheya4b8398cwopnnyn" />
-   </span> <span class="img-wrapper"> <span>Yqxwwpq3vheya4b8398cwopnnyn</span> </span></p>
-<p>Untuk mengatasi masalah ini, Milvus menyediakan koleksi eksternal yang memungkinkan Anda mengakses data yang disimpan secara eksternal dari Milvus tanpa perlu mengkhawatirkan sinkronisasi data dan jalur ETL.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" />
+   </span> <span class="img-wrapper"> <span>Membawa data untuk menghitung alur kerja</span> </span></p>
+<p>Untuk mengatasi masalah ini, Milvus menyediakan koleksi eksternal yang memungkinkan Anda mengakses data yang tersimpan secara eksternal dari Milvus tanpa perlu mengkhawatirkan sinkronisasi data dan jalur ETL.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/q6f4wtcd2h3pnkbnmxncw3urn3f.png" alt="Q6f4wtcd2h3pnkbnmxncw3urn3f" class="doc-image" id="q6f4wtcd2h3pnkbnmxncw3urn3f" />
-   </span> <span class="img-wrapper"> <span>Q6f4wtcd2h3pnkbnmxncw3urn3f</span> </span></p>
-<p>Setelah dibuat, koleksi eksternal dapat mengakses data Anda secara langsung dan menyimpannya di tempat yang sama dengan tempat Anda menyimpannya. Di latar belakang, Milvus membuat file manifes untuk merekam pemetaan antara metadata Milvus dan baris dalam file data eksternal. Setelah file manifes siap, Anda dapat membuat indeks di koleksi eksternal seperti yang Anda lakukan pada koleksi terkelola lainnya.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" />
+   </span> <span class="img-wrapper"> <span>Menghadirkan komputasi ke alur kerja data</span> </span></p>
+<p>Setelah dibuat, koleksi eksternal dapat mengakses data Anda secara langsung dan menyimpannya di tempat yang sama dengan tempat Anda menyimpannya. Di latar belakang, Milvus membuat file manifes untuk mencatat pemetaan antara metadata Milvus dan baris dalam file data eksternal. Setelah file manifes siap, Anda dapat membuat indeks di koleksi eksternal seperti yang Anda lakukan pada koleksi terkelola lainnya.</p>
 <p>Ketika data Anda berubah, pemicu penyegaran sub-detik secara manual akan memperbarui metadata, sehingga Milvus selalu diperbarui.</p>
 <h2 id="Limits--restrictions" class="common-anchor-header">Batasan &amp; larangan<button data-href="#Limits--restrictions" class="anchor-icon" translate="no">
       <svg translate="no"

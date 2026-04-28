@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L'algorithme Hierarchical Navigable Small World (HNSW) construit un graphe multicouche, un peu comme une carte avec différents niveaux de zoom. La <strong>couche inférieure</strong> contient tous les points de données, tandis que les <strong>couches supérieures</strong> sont constituées d'un sous-ensemble de points de données échantillonnés dans la couche inférieure.</p>
+    </button></h2><p>L'algorithme Hierarchical Navigable Small World (HNSW) construit un graphe multicouche, un peu comme une carte avec différents niveaux de zoom. La <strong>couche inférieure</strong> contient tous les points de données, tandis que les <strong>couches supérieures</strong> sont constituées d'un sous-ensemble de points de données échantillonnés à partir de la couche inférieure.</p>
 <p>Dans cette hiérarchie, chaque couche contient des nœuds représentant des points de données, reliés par des arêtes qui indiquent leur proximité. Les couches supérieures permettent des sauts à longue distance pour se rapprocher rapidement de la cible, tandis que les couches inférieures permettent une recherche fine pour obtenir les résultats les plus précis.</p>
 <p>Voici comment cela fonctionne :</p>
 <ol>
@@ -50,7 +50,7 @@ summary: >-
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
    </span> <span class="img-wrapper"> <span>HNSW</span> </span></p>
 <p>Les performances de HNSW dépendent de plusieurs paramètres clés qui contrôlent à la fois la structure du graphe et le comportement de recherche. Ces paramètres sont les suivants :</p>
 <ul>
@@ -157,7 +157,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Cette section donne un aperçu des paramètres utilisés pour construire un index et effectuer des recherches sur l'index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index</h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés sur <code translate="no">params</code> lors de la <a href="/docs/fr/hnsw.md#Build-index">création d'un index</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés sur <code translate="no">params</code> lors de la <a href="/docs/fr/hnsw.md#Build-index">création d'un index</a>.</p>
 <table>
    <tr>
      <th><p>Paramètre</p></th>
@@ -169,7 +184,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">M</code></p></td>
      <td><p>Nombre maximal de connexions （ou d'arêtes) que chaque nœud peut avoir dans le graphe, y compris les arêtes sortantes et entrantes. Ce paramètre affecte directement la construction de l'index et la recherche.</p></td>
      <td><p><strong>Type</strong>: Integer (nombre entier) <strong>Plage</strong>: [2, 2048]</p><p><strong>Valeur par défaut</strong>: <code translate="no">30</code> (jusqu'à 30 arêtes sortantes et 30 arêtes entrantes par nœud)</p></td>
-     <td><p>Une valeur plus élevée de <code translate="no">M</code> conduit généralement à une <strong>plus grande précision</strong>, mais <strong>augmente la charge de mémoire</strong> et <strong>ralentit à la fois la construction de l'index et la recherche</strong>. Envisagez d'augmenter <code translate="no">M</code> pour les ensembles de données à haute dimensionnalité ou lorsqu'un rappel élevé est crucial.</p><p>Pensez à diminuer <code translate="no">M</code> lorsque l'utilisation de la mémoire et la vitesse de recherche sont des préoccupations majeures.</p><p>Dans la plupart des cas, nous vous recommandons de fixer une valeur comprise dans cette fourchette : [5, 100].</p></td>
+     <td><p>Une valeur plus élevée de <code translate="no">M</code> conduit généralement à une <strong>plus grande précision</strong>, mais <strong>augmente la charge de mémoire</strong> et <strong>ralentit à la fois la construction de l'index et la recherche</strong>. Envisagez d'augmenter <code translate="no">M</code> pour les ensembles de données à haute dimensionnalité ou lorsqu'un rappel élevé est crucial.</p><p>Pensez à diminuer <code translate="no">M</code> lorsque l'utilisation de la mémoire et la vitesse de recherche sont des préoccupations majeures.</p><p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette fourchette : [5, 100].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">efConstruction</code></p></td>
@@ -178,7 +193,22 @@ res = MilvusClient.search(
      <td><p>Une valeur plus élevée de <code translate="no">efConstruction</code> se traduit généralement par un <strong>index plus précis</strong>, étant donné que davantage de connexions potentielles sont explorées. Cependant, cela entraîne également un <strong>allongement du temps d'indexation et une augmentation de l'utilisation de la mémoire</strong> pendant la construction. Envisagez d'augmenter <code translate="no">efConstruction</code> pour améliorer la précision, en particulier dans les scénarios où le temps d'indexation est moins critique.</p><p>Pensez à diminuer <code translate="no">efConstruction</code> pour accélérer la construction de l'index lorsque les ressources sont limitées.</p><p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette fourchette : [50, 500].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques à l'index</h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés dans <code translate="no">search_params.params</code> lors d'une <a href="/docs/fr/hnsw.md#Search-on-index">recherche dans l'index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques à l'index<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés dans <code translate="no">search_params.params</code> lors d'une <a href="/docs/fr/hnsw.md#Search-on-index">recherche dans l'index</a>.</p>
 <table>
    <tr>
      <th><p>Paramètre</p></th>
@@ -190,6 +220,6 @@ res = MilvusClient.search(
      <td><p><code translate="no">ef</code></p></td>
      <td><p>Contrôle l'étendue de la recherche lors de l'extraction des plus proches voisins. Il détermine le nombre de nœuds visités et évalués en tant que voisins les plus proches potentiels.  Ce paramètre n'affecte que le processus de recherche et s'applique exclusivement à la couche inférieure du graphe.</p></td>
      <td><p><strong>Type</strong>: Entier <strong>Portée</strong>: [1, <em>int_max</em>]</p><p><strong>Valeur par défaut</strong>: <em>limit</em> (TopK plus proches voisins à retourner)</p></td>
-     <td><p>Une valeur plus élevée de <code translate="no">ef</code> permet généralement d'<strong>améliorer la précision de la recherche</strong>, car davantage de voisins potentiels sont pris en compte. Toutefois, cela <strong>augmente</strong> également <strong>le temps de recherche</strong>. Envisagez d'augmenter <code translate="no">ef</code> lorsqu'il est essentiel d'obtenir un rappel élevé et que la vitesse de recherche est moins importante.</p><p>Pensez à diminuer <code translate="no">ef</code> pour privilégier les recherches plus rapides, en particulier dans les scénarios où une légère réduction de la précision est acceptable.</p><p>Dans la plupart des cas, nous vous recommandons de fixer une valeur comprise dans cette fourchette : [K, 10K].</p></td>
+     <td><p>Une valeur plus élevée de <code translate="no">ef</code> permet généralement d'<strong>améliorer la précision de la recherche</strong>, car davantage de voisins potentiels sont pris en compte. Cependant, cela <strong>augmente</strong> également <strong>le temps de recherche</strong>. Envisagez d'augmenter <code translate="no">ef</code> lorsqu'il est essentiel d'obtenir un rappel élevé et que la vitesse de recherche est moins importante.</p><p>Pensez à diminuer <code translate="no">ef</code> pour privilégier les recherches plus rapides, en particulier dans les scénarios où une légère réduction de la précision est acceptable.</p><p>Dans la plupart des cas, nous vous recommandons de fixer une valeur comprise dans cette fourchette : [K, 10K].</p></td>
    </tr>
 </table>

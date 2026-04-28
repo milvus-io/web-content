@@ -558,7 +558,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
 <ul>
 <li><p><strong>Vorhandene Entitäten</strong> werden NULL für das neue statische Feld haben <code translate="no">extra_info</code></p></li>
 <li><p><strong>Neue Entitäten</strong> müssen den Datentyp des statischen Feldes verwenden (<code translate="no">INT64</code>)</p></li>
-<li><p>Die<strong>ursprünglichen Schlüsselwerte des dynamischen Feldes</strong> bleiben erhalten und sind über die <code translate="no">$meta</code> Syntax zugänglich.</p></li>
+<li><p>Die<strong>ursprünglichen Schlüsselwerte des dynamischen Feldes</strong> bleiben erhalten und sind über die Syntax <code translate="no">$meta</code> zugänglich.</p></li>
 <li><p><strong>Das statische Feld maskiert den Schlüssel des dynamischen Feldes</strong> in normalen Abfragen.</p></li>
 </ul>
 <p><strong>Zugriff auf sowohl statische als auch dynamische Werte:</strong></p>

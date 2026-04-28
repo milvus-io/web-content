@@ -46,7 +46,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>지오메트리 필드는 기하학적 데이터를 저장하는 Milvus의 스키마 정의 데이터 유형(<code translate="no">DataType.GEOMETRY</code>)입니다. 기하학 필드로 작업할 때는 데이터 삽입과 쿼리 모두에 사용되는 사람이 읽을 수 있는 표현인 <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT(잘 알려진 텍스트)</a> 형식을 사용하여 데이터와 상호 작용합니다. 내부적으로 Milvus는 효율적인 저장 및 처리를 위해 WKT를 <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">잘 알려진 바이너리(WKB)</a> 로 변환하지만, 사용자가 직접 WKB를 처리할 필요는 없습니다.</p>
+    </button></h2><p>지오메트리 필드는 기하학적 데이터를 저장하는 Milvus의 스키마 정의 데이터 유형(<code translate="no">DataType.GEOMETRY</code>)입니다. 기하학 필드로 작업할 때는 데이터 삽입과 쿼리 모두에 사용되는 사람이 읽을 수 있는 표현인 <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">잘 알려진 텍스트(WKT)</a> 형식을 사용하여 데이터와 상호 작용합니다. 내부적으로 Milvus는 효율적인 저장 및 처리를 위해 WKT를 <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">잘 알려진 바이너리(WKB)</a> 로 변환하지만, 사용자가 직접 WKB를 처리할 필요는 없습니다.</p>
 <p><code translate="no">GEOMETRY</code> 데이터 유형은 다음과 같은 기하학적 객체를 지원합니다:</p>
 <ul>
 <li><p><strong>포인트</strong>: <code translate="no">POINT (x y)</code>; 예: <code translate="no">POINT (13.403683 52.520711)</code>, 여기서 <code translate="no">x</code> = 경도, <code translate="no">y</code> = 위도</p></li>

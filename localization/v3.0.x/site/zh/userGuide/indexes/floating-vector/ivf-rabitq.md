@@ -38,9 +38,39 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p><strong>IVF_RABITQ</strong>是<strong>反转文件与 RaBitQ 量化的缩写</strong>，它结合了高效向量搜索和存储的两种强大技术。</p>
-<h3 id="IVF" class="common-anchor-header">反转文件</h3><p><strong>反转文件（IVF）</strong>使用<a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means 聚类</a>将向量空间组织成易于管理的区域。每个聚类都有一个中心点，作为该聚类内向量的参考点。这种聚类方法允许算法在查询处理过程中只关注最相关的聚类，从而减少了搜索空间。</p>
+<h3 id="IVF" class="common-anchor-header">反转文件<button data-href="#IVF" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>反转文件（IVF）</strong>使用<a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means 聚类</a>将向量空间组织成易于管理的区域。每个聚类都有一个中心点，作为该聚类内向量的参考点。这种聚类方法允许算法在查询处理过程中只关注最相关的聚类，从而减少了搜索空间。</p>
 <p>要了解有关 IVF 技术细节的更多信息，请参阅<a href="/docs/zh/ivf-flat.md">IVF_FLAT</a>。</p>
-<h3 id="RaBitQ" class="common-anchor-header">RaBitQ</h3><p><strong>RaBitQ</strong>是一种具有理论保证的最先进的二进制量化方法，由高建阳和龙成的研究论文《RaBitQ: Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search》介绍。</p>
+<h3 id="RaBitQ" class="common-anchor-header">RaBitQ<button data-href="#RaBitQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>RaBitQ</strong>是一种具有理论保证的最先进的二进制量化方法，在高建阳和龙成的研究论文《RaBitQ: Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search》中作了介绍。</p>
 <p>RaBitQ 引入了几个创新概念：</p>
 <p><strong>角度信息编码</strong>：与传统的空间编码不同，RaBitQ 通过向量归一化对角度信息进行编码。在 IVF_RABITQ 中，数据向量根据其最近的 IVF 中心点进行归一化，从而提高了量化过程的精度。</p>
 <p><strong>理论基础</strong>：核心距离近似公式为</p>
@@ -56,11 +86,26 @@ beta: Milvus 2.6.x
 </ul>
 <p><strong>计算效率</strong>：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">o~\tilde{\mathbf{o}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6813em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span> o</span></span></span></span></span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3.3634em;"><span class="pstrut" style="height:3em;"></span> ~ 的二进制性质使得距离计算速度极快，尤其受益于英特尔 Ice Lake+ 或 AMD Zen 4+ 处理器上带有专用</span></span></span></span></span></span></span></span> <code translate="no">AVX-512 VPOPCNTDQ</code> 指令的现代 CPU 架构。</p>
 <p><strong>算法增强</strong>：RaBitQ 与<a href="https://www.vldb.org/pvldb/vol9/p288-andre.pdf"><code translate="no">FastScan</code> 方法</a>和<a href="https://github.com/facebookresearch/faiss/wiki/Pre--and-post-processing">随机旋转</a>等成熟技术有效整合，提高了性能。</p>
-<h3 id="IVF-+-RaBitQ" class="common-anchor-header">IVF + RaBitQ</h3><p><strong>IVF_RABITQ</strong>索引将 IVF 的高效聚类与 RaBitQ 先进的二进制量化相结合：</p>
+<h3 id="IVF-+-RaBitQ" class="common-anchor-header">IVF + RaBitQ<button data-href="#IVF-+-RaBitQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>IVF_RABITQ</strong>索引将 IVF 的高效聚类与 RaBitQ 先进的二进制量化相结合：</p>
 <ol>
 <li><p><strong>粗过滤</strong>：IVF 将向量空间划分为若干簇，通过聚焦于最相关的簇区域，大大缩小了搜索范围。</p></li>
 <li><p><strong>二进制量化</strong>：在每个簇内，RaBitQ 将向量压缩为二进制表示，同时通过理论保证保留基本的距离关系。</p></li>
-<li><p><strong>可选细化</strong>：启用后，索引会使用更高精度格式（SQ6、SQ8、FP16、BF16 或 FP32）存储额外的精炼数据，以提高召回率，但存储空间会增加。</p></li>
+<li><p><strong>可选细化</strong>：启用后，索引会使用更高精度的格式（SQ6、SQ8、FP16、BF16 或 FP32）存储额外的精炼数据，以提高召回率，但存储空间会增加。</p></li>
 </ol>
 <p>Milvus 使用以下 FAISS 工厂字符串实现 IVF_RABITQ：</p>
 <ul>
@@ -162,7 +207,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>本节概述了用于建立索引和在索引上执行搜索的参数。</p>
-<h3 id="Index-building-params" class="common-anchor-header">索引建立参数</h3><p>下表列出了<a href="/docs/zh/ivf-rabitq.md#Build-index">建立索引</a>时可在<code translate="no">params</code> 中配置的参数。</p>
+<h3 id="Index-building-params" class="common-anchor-header">索引建立参数<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下表列出了<a href="/docs/zh/ivf-rabitq.md#Build-index">建立索引</a>时可在<code translate="no">params</code> 中配置的参数。</p>
 <table>
    <tr>
      <th></th>
@@ -192,7 +252,22 @@ res = MilvusClient.search(
      <td><p>所列值按召回率递增、QPS 递减和存储容量递增的顺序排列。建议将<code translate="no">SQ8</code> 作为起点，在准确性和资源使用之间取得良好平衡。</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">特定索引搜索参数</h3><p>下表列出了<a href="/docs/zh/ivf-rabitq.md#Search-on-index">在索引上搜索</a>时可在<code translate="no">search_params.params</code> 中配置的参数。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">特定索引搜索参数<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下表列出了<a href="/docs/zh/ivf-rabitq.md#Search-on-index">在索引上搜索</a>时可在<code translate="no">search_params.params</code> 中配置的参数。</p>
 <table>
    <tr>
      <th></th>

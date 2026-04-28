@@ -203,6 +203,7 @@ job_id = client.compact(
     target_size=max_int64
 )
 <button class="copy-code-btn"></button></code></pre>
+<p><a id="parameter-reference"></a></p>
 <h4 id="Parameter-reference" class="common-anchor-header">Parameter reference</h4><p>The following table explains the parameters.</p>
 <table>
    <tr>
@@ -265,6 +266,7 @@ state = client.get_compaction_state(job_id)
 <li><p><strong>Consider the performance trade-off.</strong> Force Merge compaction is a resource-intensive operation. It reads, merges, and rewrites segment data. Schedule it during low-traffic periods to minimize impact on query latency.</p></li>
 <li><p><strong>Monitor segment count before and after.</strong> Use <code translate="no">get_compaction_state()</code> and <code translate="no">list_persistent_segments</code> to verify that the compaction produced fewer, larger segments as expected.</p></li>
 </ul>
+<p><a id="faq"></a></p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

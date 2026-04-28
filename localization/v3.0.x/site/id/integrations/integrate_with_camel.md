@@ -165,7 +165,7 @@ vector_retriever = VectorRetriever(
     </button></h2><p>Pada bagian ini kita akan menjalankan <code translate="no">AutoRetriever</code> dengan pengaturan default. Ini menggunakan <code translate="no">OpenAIEmbedding</code> sebagai model penyematan default dan <code translate="no">Milvus</code> sebagai penyimpanan vektor default.</p>
 <p>Yang perlu Anda lakukan adalah:</p>
 <ul>
-<li>Tetapkan jalur masukan konten, yang dapat berupa jalur lokal atau url jarak jauh</li>
+<li>Tetapkan jalur input konten, yang dapat berupa jalur lokal atau url jarak jauh</li>
 <li>Tetapkan url jarak jauh dan kunci api untuk Milvus</li>
 <li>Berikan kueri</li>
 </ul>

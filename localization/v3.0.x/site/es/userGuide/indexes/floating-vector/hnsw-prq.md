@@ -86,7 +86,7 @@ summary: >-
 <li><p><strong>Cuantización del producto (PQ)</strong></p>
 <p>En esta fase, el vector original se divide en subvectores más pequeños, y cada subvector se asigna a su centroide más cercano en un libro de códigos aprendido. Esta asignación reduce significativamente el tamaño de los datos, pero introduce algunos errores de redondeo, ya que cada subvector se aproxima a un único centroide. Para más información, consulte <a href="/docs/es/ivf-pq.md#PQ">IVF_PQ</a>.</p></li>
 <li><p><strong>Cuantificación residual (RQ)</strong></p>
-<p>Tras la etapa PQ, la RQ cuantiza el residuo (la diferencia entre el vector original y su aproximación basada en PQ) utilizando libros de códigos adicionales. Como este residuo suele ser mucho más pequeño, puede codificarse con mayor precisión sin un gran aumento del almacenamiento.</p>
+<p>Después de la etapa PQ, RQ cuantiza el residuo (la diferencia entre el vector original y su aproximación basada en PQ) utilizando libros de códigos adicionales. Como este residuo suele ser mucho más pequeño, puede codificarse con mayor precisión sin un gran aumento del almacenamiento.</p>
 <p>El parámetro <code translate="no">nrq</code> determina cuántas veces se cuantifica iterativamente este residuo, lo que permite ajustar con precisión el equilibrio entre eficacia y precisión de la compresión.</p></li>
 <li><p><strong>Representación final de la compresión</strong></p>
 <p>Una vez que RQ termina de cuantizar el residuo, los códigos enteros de PQ y RQ se combinan en un único índice comprimido. Al capturar detalles refinados que PQ por sí solo podría pasar por alto, RQ mejora la precisión sin causar un aumento significativo en el almacenamiento. Esta sinergia entre PQ y RQ es lo que define a PRQ.</p></li>
@@ -265,7 +265,7 @@ res = MilvusClient.search(
      <td><p><strong>Tipo</strong>: Entero <strong>Rango</strong>: [1, 65536]</p>
 <p><strong>Valor por defecto</strong>: Ninguno</p></td>
      <td><p>Un valor más alto de <code translate="no">m</code> puede mejorar la precisión, pero también aumenta la complejidad computacional y el uso de memoria. <code translate="no">m</code> debe ser un divisor de la dimensión del vector<em>(D</em>) para garantizar una descomposición adecuada. Un valor comúnmente recomendado es <em>m = D/2</em>.</p>
-<p>En la mayoría de los casos, se recomienda establecer un valor dentro de este rango: [D/8, D].</p></td>
+<p>En la mayoría de los casos, le recomendamos que establezca un valor dentro de este rango: [D/8, D].</p></td>
    </tr>
    <tr>
      <td></td>
@@ -297,7 +297,7 @@ res = MilvusClient.search(
      <td><p>Determina la precisión de los datos utilizados durante el proceso de refinamiento. Esta precisión debe ser superior a la de los vectores comprimidos (como se establece en los parámetros <code translate="no">m</code> y <code translate="no">nbits</code> ).</p></td>
      <td><p><strong>Tipo</strong>: Cadena <strong>Rango</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p>
 <p><strong>Valor por defecto</strong>: Ninguno</p></td>
-     <td><p>Utilice <code translate="no">FP32</code> para obtener la máxima precisión con un mayor coste de memoria, o <code translate="no">SQ6</code>/<code translate="no">SQ8</code> para una mejor compresión. <code translate="no">BF16</code> y <code translate="no">FP16</code> ofrecen una alternativa equilibrada.</p></td>
+     <td><p>Utilice <code translate="no">FP32</code> para obtener la máxima precisión con un mayor coste de memoria, o <code translate="no">SQ6</code>/<code translate="no">SQ8</code> para obtener una mejor compresión. <code translate="no">BF16</code> y <code translate="no">FP16</code> ofrecen una alternativa equilibrada.</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">Parámetros de búsqueda específicos del índice<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">

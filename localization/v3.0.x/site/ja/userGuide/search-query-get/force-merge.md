@@ -96,7 +96,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下の設定パラメータはForce Mergeの動作を制御します。Milvus設定ファイルまたは環境変数で設定してください。</p>
+    </button></h3><p>以下の設定パラメータは強制併合の動作を制御します。Milvus設定ファイルまたは環境変数で設定してください。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">dataCoord:</span>
   <span class="hljs-attr">segment:</span>
     <span class="hljs-attr">maxSize:</span> <span class="hljs-number">512</span>         <span class="hljs-comment"># Default segment max size (MB).</span>
@@ -125,7 +125,7 @@ beta: Milvus 3.0.x
    <tr>
      <td><p><code translate="no">dataCoord.segment.maxSize</code></p></td>
      <td><p>512</p></td>
-     <td><p>デフォルトのセグメント最大サイズ(MB)。<code translate="no">target_size</code> が 0 または省略された場合にターゲットとして使用される。また、明示的な<code translate="no">target_size</code> の最小許容値としても機能する。</p></td>
+     <td><p>デフォルトのセグメント最大サイズ(MB)。<code translate="no">target_size</code> が 0 または省略されたときにターゲットとして使用される。また、明示的な<code translate="no">target_size</code> の最小許容値としても機能する。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code></p></td>
@@ -199,6 +199,7 @@ job_id = client.compact(
     target_size=max_int64
 )
 <button class="copy-code-btn"></button></code></pre>
+<p><a id="parameter-reference"></a></p>
 <h4 id="Parameter-reference" class="common-anchor-header">パラメータ参照</h4><p>以下の表は、パラメータについて説明したものです。</p>
 <table>
    <tr>
@@ -261,6 +262,7 @@ state = client.get_compaction_state(job_id)
 <li><p><strong>パフォーマンスのトレードオフを考慮してください。</strong>強制マージコンパクションはリソースを大量に消費します。セグメントデータを読み取り、マージし、書き換えます。クエリーレイテンシーへの影響を最小にするため、トラフィックの少ない時間帯にスケジュールしてください。</p></li>
 <li><p><strong>その前後でセグメント数を監視する。</strong> <code translate="no">get_compaction_state()</code> および<code translate="no">list_persistent_segments</code> を使用して、コンパクションによって予想よりも少ない、より大きなセグメントが生成されたことを確認します。</p></li>
 </ul>
+<p><a id="faq"></a></p>
 <h2 id="FAQ" class="common-anchor-header">よくある質問<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -321,7 +323,7 @@ state = client.get_compaction_state(job_id)
    </tr>
    <tr>
      <td><p>中分割の挙動</p></td>
-     <td><p>永久にスタックする可能性あり（例えば、2つの60%セグメントを合法的に1つの120%セグメントにすることはできない）</p></td>
+     <td><p>永久にスタックする可能性あり(例えば、2つの60%セグメントを1つの120%セグメントに合法的にすることはできない)</p></td>
      <td><p>リパック＋分割が機能。「60%でスタック」パターンはない</p></td>
    </tr>
    <tr>
@@ -341,7 +343,7 @@ state = client.get_compaction_state(job_id)
    </tr>
    <tr>
      <td><p>典型的な使用例</p></td>
-     <td><p>書き込み/削除後の毎日の高負荷クリーンアップ</p></td>
+     <td><p>書き込み/削除後の毎日の高回転クリーンアップ</p></td>
      <td><p>ベンチマーク準備、検索最適化、負荷並列アライメント</p></td>
    </tr>
    <tr>

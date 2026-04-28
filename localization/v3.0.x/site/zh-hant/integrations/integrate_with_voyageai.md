@@ -42,7 +42,7 @@ summary: 本頁討論向量資料庫與 VoyageAI 的嵌入式 API 的整合。
 <pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動運行時間</strong>。(點選螢幕上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
+<p>如果您使用的是 Google Colab，為了啟用剛安裝的依賴項目，您可能需要<strong>重新啟動運行時間</strong>。(點選螢幕上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
 </div>
 <p>有了這些，我們就可以產生 embeddings 並使用向量資料庫來進行語意搜尋了。</p>
 <h2 id="Searching-book-titles-with-VoyageAI--Milvus" class="common-anchor-header">使用 VoyageAI 和 Milvus 搜尋書名<button data-href="#Searching-book-titles-with-VoyageAI--Milvus" class="anchor-icon" translate="no">

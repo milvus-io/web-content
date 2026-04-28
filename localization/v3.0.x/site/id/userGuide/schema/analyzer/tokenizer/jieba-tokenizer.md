@@ -178,7 +178,97 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
-<p>Setelah mendefinisikan <code translate="no">analyzer_params</code>, Anda dapat menerapkannya ke bidang <code translate="no">VARCHAR</code> saat mendefinisikan skema koleksi. Hal ini memungkinkan Milvus untuk memproses teks dalam bidang tersebut menggunakan penganalisis yang ditentukan untuk tokenisasi dan pemfilteran yang efisien. Untuk detailnya, lihat <a href="/docs/id/analyzer-overview.md#Example-use">Contoh penggunaan</a>.</p>
+<p>Untuk memuat kosakata khusus yang besar dari file eksternal alih-alih memasukkannya melalui <code translate="no">dict</code>, lihat <a href="/docs/id/jieba-tokenizer.md#Custom-configuration-with-a-dictionary-file">Konfigurasi khusus dengan file kamus</a> di bawah ini.</p>
+<p>Setelah mendefinisikan <code translate="no">analyzer_params</code>, Anda dapat menerapkannya ke bidang <code translate="no">VARCHAR</code> ketika mendefinisikan skema koleksi. Hal ini memungkinkan Milvus untuk memproses teks dalam bidang tersebut menggunakan penganalisis yang ditentukan untuk tokenisasi dan pemfilteran yang efisien. Untuk detailnya, lihat <a href="/docs/id/analyzer-overview.md#Example-use">Contoh penggunaan</a>.</p>
+<h3 id="Custom-configuration-with-a-dictionary-file--Milvus-30x" class="common-anchor-header">Konfigurasi khusus dengan file kamus<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Custom-configuration-with-a-dictionary-file--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk kosakata khusus yang besar - glosarium domain, terminologi produk, atau daftar kata benda yang tepat - simpan kata-kata tersebut dalam sebuah file dan daftarkan file tersebut sebagai sumber daya file jarak jauh, lalu rujuk dari tokenisasi melalui parameter <code translate="no">extra_dict_file</code>. Penganalisis memuat kata-kata ini ke dalam kosakata di atas kamus bawaan.</p>
+<p>File tersebut berupa teks UTF-8 biasa dengan satu istilah per baris. Sebagai contoh:</p>
+<pre><code translate="no" class="language-plaintext">结巴分词器
+向量数据库
+<button class="copy-code-btn"></button></code></pre>
+<p>Unggah berkas ke penyimpanan objek yang dikonfigurasikan untuk digunakan oleh klaster Milvus Anda, lalu daftarkan:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="hljs-comment"># Register the uploaded file under a name you&#x27;ll reference from analyzer configs.</span>
+client.add_file_resource(
+    name=<span class="hljs-string">&quot;zh_terms&quot;</span>,
+    path=<span class="hljs-string">&quot;file/zh_terms.txt&quot;</span>,    <span class="hljs-comment"># full S3 object key, including the rootPath prefix</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Rujuk sumber daya yang didaftarkan di tokenizer melalui <code translate="no">extra_dict_file</code>:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">analyzer_params = {
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: {
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+        <span class="hljs-string">&quot;dict&quot;</span>: [<span class="hljs-string">&quot;_default_&quot;</span>],             <span class="hljs-comment"># keep the built-in dictionary</span>
+        <span class="hljs-string">&quot;mode&quot;</span>: <span class="hljs-string">&quot;exact&quot;</span>,
+        <span class="hljs-string">&quot;hmm&quot;</span>: <span class="hljs-literal">False</span>,
+        <span class="hljs-string">&quot;extra_dict_file&quot;</span>: {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;remote&quot;</span>,
+            <span class="hljs-string">&quot;resource_name&quot;</span>: <span class="hljs-string">&quot;zh_terms&quot;</span>,
+            <span class="hljs-string">&quot;file_name&quot;</span>: <span class="hljs-string">&quot;zh_terms.txt&quot;</span>,
+        },
+    },
+}
+
+client.run_analyzer([<span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>], analyzer_params)
+<span class="hljs-comment"># → [[&#x27;milvus&#x27;, &#x27;结巴&#x27;, &#x27;分词器&#x27;, &#x27;中文&#x27;, &#x27;测试&#x27;]]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Parameter <code translate="no">extra_dict_file</code> menerima objek dengan bidang-bidang berikut:</p>
+<table>
+   <tr>
+     <th><p>Bidang</p></th>
+     <th><p>Deskripsi</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">type</code></p></td>
+     <td><p>Jenis sumber daya. Gunakan <code translate="no">"remote"</code> untuk berkas yang didaftarkan melalui <code translate="no">add_file_resource</code>. Untuk varian <code translate="no">"local"</code> yang digunakan dalam penerapan yang dihosting sendiri, lihat <a href="/docs/id/manage-file-resources.md">Mengelola Sumber Daya File</a>.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">resource_name</code></p></td>
+     <td><p>Nama yang digunakan saat file didaftarkan dengan <code translate="no">add_file_resource</code>.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">file_name</code></p></td>
+     <td><p>Bagian nama file dari jalur penyimpanan objek sumber daya yang terdaftar (misalnya, <code translate="no">"zh_terms.txt"</code> jika sumber daya terdaftar dengan <code translate="no">path="file/zh_terms.txt"</code>).</p></td>
+   </tr>
+</table>
+<p>Kata-kata yang ditambahkan melalui <code translate="no">extra_dict_file</code> digabungkan dengan kamus bawaan, sehingga algoritme segmentasi jieba melihatnya di samping entri yang sudah ada. Apakah ada istilah tertentu yang muncul sebagai token mandiri tergantung pada pemilihan DAG berbobot probabilitas jieba - istilah khusus yang panjang seperti <code translate="no">向量数据库</code> masih dapat dipecah menjadi <code translate="no">向量</code> + <code translate="no">数据库</code> jika entri yang lebih pendek tersebut memiliki frekuensi yang lebih tinggi dalam kamus bawaan.</p>
 <h2 id="Examples" class="common-anchor-header">Contoh<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -242,7 +332,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verifikasi menggunakan <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Verification-using-runanalyzer--Milvus-2511+" class="anchor-icon" translate="no">
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verifikasi menggunakan <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

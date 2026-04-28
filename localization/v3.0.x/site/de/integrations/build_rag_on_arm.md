@@ -166,7 +166,7 @@ text_lines = []
 embedding_model = HuggingFaceEmbeddings(model_name=<span class="hljs-string">&quot;all-MiniLM-L6-v2&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Iterieren Sie durch die Textzeilen, erstellen Sie Einbettungen und fügen Sie die Daten dann in Milvus ein.</p>
-<p>Hier ist ein neues Feld <code translate="no">text</code>, das ein nicht definiertes Feld im Sammlungsschema ist. Es wird automatisch zu dem reservierten dynamischen JSON-Feld hinzugefügt, das auf hoher Ebene als normales Feld behandelt werden kann.</p>
+<p>Hier ist ein neues Feld <code translate="no">text</code>, das ein nicht definiertes Feld im Sammlungsschema ist. Es wird automatisch dem reservierten dynamischen JSON-Feld hinzugefügt, das auf hoher Ebene als normales Feld behandelt werden kann.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
@@ -303,7 +303,7 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
 </code></pre>
 <p>Sie können auch die Parameter des gestarteten LLM anpassen, um ihn an Ihre Serverhardware anzupassen und eine optimale Leistung zu erzielen. Weitere Informationen zu den Parametern finden Sie unter dem Befehl <code translate="no">llama-server --help</code>.</p>
 <p>Wenn Sie Schwierigkeiten haben, diesen Schritt auszuführen, können Sie weitere Informationen in den <a href="https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama-cpu/llama-chatbot/">offiziellen Dokumenten</a> nachlesen.</p>
-<p>Sie haben den LLM-Dienst auf Ihrer Arm-basierten CPU gestartet. Als nächstes interagieren wir direkt mit dem Dienst, indem wir das OpenAI SDK verwenden.</p>
+<p>Sie haben den LLM-Dienst auf Ihrer Arm-basierten CPU gestartet. Als nächstes interagieren wir direkt mit dem Dienst unter Verwendung des OpenAI SDK.</p>
 <h2 id="Online-RAG" class="common-anchor-header">Online RAG<button data-href="#Online-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

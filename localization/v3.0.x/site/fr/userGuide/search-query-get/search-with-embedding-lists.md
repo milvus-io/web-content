@@ -86,7 +86,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/late-interaction.png" alt="Late Interaction" class="doc-image" id="late-interaction" />
    </span> <span class="img-wrapper"> <span>Interaction tardive</span> </span></p>
-<p>Comme le montre le diagramme ci-dessus, la requête contient deux tokens, à savoir <code translate="no">machine</code> et <code translate="no">learning</code>, et le document dans la fenêtre contient quatre tokens : <code translate="no">neural</code> <code translate="no">network</code> , <code translate="no">python</code> et <code translate="no">tutorial</code>. Une fois que ces jetons sont vectorisés, l'intégration vectorielle de chaque jeton de la requête est comparée à celle du document afin d'obtenir une liste de scores de similarité. Les scores les plus élevés de chaque liste sont ensuite additionnés pour obtenir le score final. Le processus de détermination du score final d'un document est connu sous le nom de similarité maximale<strong>(MAX_SIM</strong>). Pour plus d'informations sur la similitude maximale, voir <a href="/docs/fr/metric.md#Maximum-similarity">Similitude maximale</a>.</p>
+<p>Comme le montre le diagramme ci-dessus, la requête contient deux tokens, à savoir <code translate="no">machine</code> et <code translate="no">learning</code>, et le document dans la fenêtre contient quatre tokens : <code translate="no">neural</code> <code translate="no">network</code> , <code translate="no">python</code> et <code translate="no">tutorial</code>. Une fois que ces jetons sont vectorisés, l'intégration vectorielle de chaque jeton de la requête est comparée à celle du document afin d'obtenir une liste de scores de similarité. Les scores les plus élevés de chaque liste sont ensuite additionnés pour obtenir le score final. Le processus de détermination du score final d'un document est connu sous le nom de similarité maximale<strong>(MAX_SIM</strong>). Pour plus de détails sur la similitude maximale, voir <a href="/docs/fr/metric.md#Maximum-similarity">Similitude maximale</a>.</p>
 <div class="alert note">
 <p>Lors de la mise en œuvre d'un système de recherche de texte de type ColBERT dans Milvus, vous n'êtes pas limité à la division des documents en tokens.</p>
 <p>Au lieu de cela, vous pouvez diviser les documents en segments de toute taille appropriée, incorporer chaque segment pour créer une liste d'incorporation et stocker le document avec ses segments incorporés dans une entité.</p>
@@ -305,7 +305,7 @@ client.create_collection(
     data=data
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-6-Search-within-the-Cohere-dataset" class="common-anchor-header">Étape 6 : Recherche dans le jeu de données Cohere<button data-href="#Step-6-Search-within-the-Cohere-dataset" class="anchor-icon" translate="no">
+<h3 id="Step-6-Search-within-the-Cohere-dataset" class="common-anchor-header">Étape 6 : Recherche dans l'ensemble de données Cohere<button data-href="#Step-6-Search-within-the-Cohere-dataset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -457,7 +457,7 @@ df = ds[<span class="hljs-string">&#x27;test&#x27;</span>].to_pandas()
      <td><p>Le numéro de page de la page actuelle du document.</p></td>
    </tr>
 </table>
-<h3 id="Step-3-Generate-embeddings-for-the-page-images" class="common-anchor-header">Étape 3 : Générer des embeddings pour les images de page<button data-href="#Step-3-Generate-embeddings-for-the-page-images" class="anchor-icon" translate="no">
+<h3 id="Step-3-Generate-embeddings-for-the-page-images" class="common-anchor-header">Étape 3 : Génération d'enchâssements pour les images de page<button data-href="#Step-3-Generate-embeddings-for-the-page-images" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

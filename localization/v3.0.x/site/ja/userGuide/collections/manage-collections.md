@@ -39,7 +39,7 @@ summary: >-
 <p>次の図は、8 つの列と 6 つのエンティティを持つコレクションを示しています。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/collection-explained.png" alt="Collection Explained" class="doc-image" id="collection-explained" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/collection-explained.png" alt="Collection Explained" class="doc-image" id="collection-explained" />
    </span> <span class="img-wrapper"> <span>コレクションの説明</span> </span></p>
 <h2 id="Schema-and-Fields" class="common-anchor-header">スキーマとフィールド<button data-href="#Schema-and-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -238,7 +238,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusがコレクション作成時にフィールドを導出するための関数を設定できます。たとえば、全文検索関数は、ユーザ定義関数を使用して、特定のvarcharフィールドからスパースベクトルフィールドを導出します。全文検索の詳細については、<a href="/docs/ja/full-text-search.md">全文検索を</a>参照してください。</p>
+    </button></h2><p>Milvusがコレクション作成時にフィールドを導出するための関数を設定できます。たとえば、全文検索関数はユーザ定義関数を使用して、特定のvarcharフィールドからスパースベクトルフィールドを導出します。全文検索の詳細については、<a href="/docs/ja/full-text-search.md">全文検索を</a>参照してください。</p>
 <h2 id="Consistency-Level" class="common-anchor-header">一貫性レベル<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -254,5 +254,5 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>分散データベースシステムでは通常、整合性レベルを使用してデータノードやレプリカ間のデータの同一性を定義します。コ レ ク シ ョ ン を作成す る 際や、 コ レ ク シ ョ ン内で類似性検索を実行する際に、 個別の一貫性レベルを設定できます。適用可能な一貫性レベルは、<strong>Strong</strong>、<strong>Bounded Staleness</strong>、<strong>Session</strong>、および<strong>Eventually</strong>です。</p>
+    </button></h2><p>分散データベースシステムでは通常、整合性レベルを使用してデータノードやレプリカ間のデータの同一性を定義します。コ レ ク シ ョ ンの作成時や、 コ レ ク シ ョ ン内の類似検索の実行時に、 個別の一貫性レベルを設定で き ます。適用可能な一貫性レベルは、<strong>Strong</strong>、<strong>Bounded Staleness</strong>、<strong>Session</strong>、および<strong>Eventually</strong>です。</p>
 <p>これらの一貫性レベルの詳細については、<a href="/docs/ja/tune_consistency.md">一貫性</a>レベルを参照してください。</p>

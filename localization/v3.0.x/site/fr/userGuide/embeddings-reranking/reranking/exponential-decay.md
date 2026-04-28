@@ -28,13 +28,13 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La décroissance exponentielle crée une chute initiale brutale suivie d'une longue traîne dans vos résultats de recherche. À l'instar d'un cycle de nouvelles de dernière heure où la pertinence diminue rapidement au début mais où certaines histoires conservent leur importance au fil du temps, la décroissance exponentielle applique une pénalité brutale aux éléments situés juste au-delà de votre fourchette idéale, tout en permettant de découvrir des éléments éloignés. Cette approche est idéale lorsque vous souhaitez donner la priorité à la proximité ou à la récence sans pour autant éliminer complètement les options plus éloignées.</p>
+    </button></h1><p>La décroissance exponentielle crée une chute initiale brutale suivie d'une longue traîne dans vos résultats de recherche. À l'instar d'un cycle de nouvelles de dernière heure où la pertinence diminue rapidement au début mais où certaines histoires conservent leur importance au fil du temps, la décroissance exponentielle applique une pénalité brutale aux éléments situés juste au-delà de votre fourchette idéale, tout en permettant de découvrir des éléments éloignés. Cette approche est idéale lorsque vous souhaitez donner la priorité à la proximité ou à la récence, mais que vous ne voulez pas éliminer complètement les options plus éloignées.</p>
 <p>Contrairement à d'autres fonctions de désintégration :</p>
 <ul>
 <li><p>La désintégration gaussienne crée un déclin plus progressif, en forme de cloche</p></li>
 <li><p>La décroissance linéaire diminue à un rythme constant jusqu'à atteindre exactement zéro.</p></li>
 </ul>
-<p>La décroissance exponentielle "concentre" de manière unique la pénalité, en appliquant la plus grande partie de la réduction de pertinence au début tout en maintenant une longue queue de pertinence minimale mais non nulle.</p>
+<p>La décroissance exponentielle "concentre" de manière unique la pénalité, en appliquant la plus grande partie de la réduction de pertinence au début, tout en maintenant une longue queue de pertinence minimale mais non nulle.</p>
 <h2 id="When-to-use-exponential-decay" class="common-anchor-header">Quand utiliser la décroissance exponentielle ?<button data-href="#When-to-use-exponential-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

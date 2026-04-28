@@ -46,7 +46,7 @@ beta: Milvus v2.5.15+
     </button></h2><p>Устройство <code translate="no">language_identifier</code> выполняет ряд шагов для обработки текстовой строки, и этот процесс очень важен для пользователей, чтобы понять, как правильно его настроить.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
    </span> <span class="img-wrapper"> <span>Рабочий процесс обнаружения языка</span> </span></p>
 <ol>
 <li><p><strong>Вход:</strong> Рабочий процесс начинается с ввода текстовой строки.</p></li>
@@ -371,5 +371,5 @@ result_fr = client.run_analyzer(<span class="hljs-string">&quot;Café français 
     </button></h2><ul>
 <li><p><strong>Один язык на поле:</strong> Работает с полем как с единой, однородной единицей текста. Он предназначен для работы с разными языками в разных записях данных, например, одна запись содержит английское предложение, а другая - французское.</p></li>
 <li><p><strong>Нет строк со смешанными языками:</strong> Он <strong>не</strong> предназначен для обработки одной строки, содержащей текст на нескольких языках. Например, одно поле <code translate="no">VARCHAR</code>, содержащее английское предложение и японскую фразу в кавычках, будет обработано как один язык.</p></li>
-<li><p><strong>Обработка доминирующего языка:</strong> В смешанных языковых сценариях механизм обнаружения, скорее всего, определит доминирующий язык, и соответствующий анализатор будет применен ко всему тексту. Это приведет к плохой токенизации или ее отсутствию для встроенного иностранного текста.</p></li>
+<li><p><strong>Обработка доминирующего языка:</strong> В смешанных языковых сценариях механизм обнаружения, скорее всего, определит доминирующий язык, и соответствующий анализатор будет применен ко всему тексту. Это приведет к некачественной токенизации или ее отсутствию для встроенного иностранного текста.</p></li>
 </ul>

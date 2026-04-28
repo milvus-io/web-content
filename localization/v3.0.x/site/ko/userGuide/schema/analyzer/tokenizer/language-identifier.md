@@ -42,7 +42,7 @@ beta: Milvus v2.5.15+
     </button></h2><p><code translate="no">language_identifier</code> 에서는 텍스트 문자열을 처리하는 일련의 단계를 수행하며, 사용자가 이를 올바르게 구성하는 방법을 이해하는 데 중요한 워크플로우입니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
    </span> <span class="img-wrapper"> <span>언어 감지 워크플로</span> </span></p>
 <ol>
 <li><p><strong>입력:</strong> 워크플로는 텍스트 문자열을 입력하는 것으로 시작됩니다.</p></li>
@@ -182,7 +182,7 @@ beta: Milvus v2.5.15+
         ></path>
       </svg>
     </button></h3><p>Milvus에서 <code translate="no">language_identifier</code> 토큰화기를 사용하려면 다음 주요 구성 요소가 포함된 사전을 만드세요:</p>
-<p><strong>필수 구성 요소:</strong></p>
+<p><strong>필수 구성 요소</strong></p>
 <ul>
 <li><p><code translate="no">analyzers</code> config set - 모든 분석기 구성이 포함된 사전으로, 반드시 포함되어야 합니다:</p>
 <ul>

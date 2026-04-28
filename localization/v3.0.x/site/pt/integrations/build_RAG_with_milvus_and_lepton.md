@@ -89,7 +89,7 @@ os.environ[<span class="hljs-string">&quot;LEPTONAI_TOKEN&quot;</span>] = <span 
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Carregamos todos os ficheiros markdown da pasta <code translate="no">milvus_docs/en/faq</code>. Para cada documento, utilizamos simplesmente "#" para separar o conteúdo do ficheiro, o que permite separar aproximadamente o conteúdo de cada parte principal do ficheiro markdown.</p>
+<p>Carregamos todos os ficheiros markdown da pasta <code translate="no">milvus_docs/en/faq</code>. Para cada documento, utilizamos simplesmente "#" para separar o conteúdo do ficheiro, o que pode separar aproximadamente o conteúdo de cada parte principal do ficheiro markdown.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -266,7 +266,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
     </button></h3><p>Vamos especificar uma pergunta frequente sobre o Milvus.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pesquise a pergunta na coleção e obtenha as 3 melhores correspondências semânticas.</p>
+<p>Pesquise a pergunta na coleção e obtenha as 3 principais correspondências semânticas.</p>
 <pre><code translate="no" class="language-python">search_res = milvus_client.search(
     collection_name=collection_name,
     data=embedding_model.encode_queries(
@@ -334,7 +334,7 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 &lt;/question&gt;
 &quot;&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilizar o modelo <code translate="no">mistral-7b</code> fornecido pelo Lepton AI para gerar uma resposta com base nos avisos.</p>
+<p>Utilize o modelo <code translate="no">mistral-7b</code> fornecido pelo Lepton AI para gerar uma resposta com base nos avisos.</p>
 <pre><code translate="no" class="language-python">response = lepton_client.chat.completions.create(
     model=<span class="hljs-string">&quot;mistral-7b&quot;</span>,
     messages=[

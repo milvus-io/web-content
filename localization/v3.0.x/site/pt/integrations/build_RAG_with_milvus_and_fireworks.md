@@ -61,7 +61,7 @@ title: Criar RAG com Milvus e Fireworks AI
     </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus milvus-lite openai requests tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ser necessário <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
 </div>
 <p>O Fireworks AI ativa a API de estilo OpenAI. Pode iniciar sessão no seu sítio Web oficial e preparar a <a href="https://docs.fireworks.ai/getting-started/introduction">chave api</a> <code translate="no">FIREWORKS_API_KEY</code> como variável de ambiente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -180,7 +180,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <div class="alert note">
 <p>Quanto ao argumento de <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>Definir o <code translate="no">uri</code> como um ficheiro local, por exemplo,<code translate="no">./milvus.db</code>, é o método mais conveniente, pois utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
+<li>Definir o <code translate="no">uri</code> como um ficheiro local, por exemplo<code translate="no">./milvus.db</code>, é o método mais conveniente, pois utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
 <li>Se tiver uma grande escala de dados, pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">docker ou kubernetes</a>. Nesta configuração, utilize o uri do servidor, por exemplo,<code translate="no">http://localhost:19530</code>, como o seu <code translate="no">uri</code>.</li>
 <li>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste os endereços <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">chave Api</a> no Zilliz Cloud.</li>
 </ul>
@@ -350,4 +350,4 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 
 Additionally, when data is inserted, it is first loaded into a message queue, and then written to persistent storage as incremental logs by the data node. The `flush()` function can be used to force the data node to write all data in the message queue to persistent storage immediately.
 </code></pre>
-<p>Ótimo! Construímos com êxito um pipeline RAG com o Milvus e o Fireworks AI.</p>
+<p>Ótimo! Criámos com êxito um pipeline RAG com o Milvus e o Fireworks AI.</p>

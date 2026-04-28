@@ -103,7 +103,7 @@ index_params.add_index(
    </tr>
    <tr>
      <td><p><code translate="no">json_cast_function</code></p></td>
-     <td><p><strong>(Необязательно)</strong> Преобразование исходных значений ключа в целевой тип во время индексации. Эта настройка требуется только в том случае, если значения ключей хранятся в неправильном формате и вы хотите преобразовать тип данных во время индексирования.</p><p>Список доступных функций приведения приведен <a href="/docs/ru/json-indexing.md#Supported-cast-functions">ниже</a> в разделе <a href="/docs/ru/json-indexing.md#Supported-cast-functions">Поддерживаемые функции приведения</a>.</p></td>
+     <td><p><strong>(Необязательно)</strong> Преобразование исходных значений ключа в целевой тип во время индексирования. Эта настройка требуется только в том случае, если значения ключей хранятся в неправильном формате и вы хотите преобразовать тип данных во время индексирования.</p><p>Список доступных функций приведения приведен <a href="/docs/ru/json-indexing.md#Supported-cast-functions">ниже</a> в разделе <a href="/docs/ru/json-indexing.md#Supported-cast-functions">Поддерживаемые функции приведения</a>.</p></td>
      <td><p><code translate="no">"STRING_TO_DOUBLE"</code></p></td>
    </tr>
 </table>
@@ -284,7 +284,7 @@ index_params = MilvusClient.prepare_index_params()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Создайте индекс для поля <code translate="no">category</code>, чтобы обеспечить быструю фильтрацию по категориям товаров:</p>
+    </button></h3><p>Создайте индекс по полю <code translate="no">category</code>, чтобы обеспечить быструю фильтрацию по категориям товаров:</p>
 <pre><code translate="no" class="language-python">index_params.add_index(
     field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
 <span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, <span class="hljs-comment"># Must be set to AUTOINDEX or INVERTED for JSON path indexing</span></span>

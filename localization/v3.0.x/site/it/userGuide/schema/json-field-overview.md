@@ -107,7 +107,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>Interrogazione</p></td>
-     <td><p>Interrogare usando il nome del campo o la chiave di destinazione all'interno del campo JSON: <code translate="no">metadata["key"]</code>.</p></td>
+     <td><p>Interrogare utilizzando il nome del campo o la chiave di destinazione all'interno del campo JSON: <code translate="no">metadata["key"]</code>.</p></td>
      <td><p>Interrogare direttamente utilizzando la chiave dinamica del campo: <code translate="no">"dynamic_key"</code> o tramite <code translate="no">$meta</code>: <code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
@@ -336,7 +336,7 @@ res = client.search(
      <td><p>Triturazione JSON</p></td>
      <td><p>Accelerazione generale su molte chiavi, flessibile per query diverse</p></td>
      <td><p>No (non accelera i valori all'interno degli array)</p></td>
-     <td><p>Configurazione extra dello storage, gli array necessitano ancora di un indice per chiave</p></td>
+     <td><p>Configurazione extra dello storage, gli array hanno ancora bisogno di un indice per chiave</p></td>
    </tr>
    <tr>
      <td><p>Indice NGRAM</p></td>
@@ -345,7 +345,7 @@ res = client.search(
      <td><p>Non per i filtri numerici/di intervallo</p></td>
    </tr>
 </table>
-<p><strong>Suggerimento:</strong> è possibile combinare questi approcci, ad esempio utilizzare la triturazione JSON per accelerare le query, l'indicizzazione JSON per le chiavi degli array ad alta frequenza e l'indicizzazione NGRAM per la ricerca flessibile nel testo.</p>
+<p><strong>Suggerimento:</strong> È possibile combinare questi approcci, ad esempio utilizzare la triturazione JSON per accelerare le query, l'indicizzazione JSON per le chiavi degli array ad alta frequenza e l'indicizzazione NGRAM per la ricerca flessibile nel testo.</p>
 <p>Per i dettagli sull'implementazione, consultare:</p>
 <ul>
 <li><p><a href="/docs/it/json-indexing.md">Indicizzazione JSON</a></p></li>

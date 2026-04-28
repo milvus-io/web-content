@@ -29,7 +29,7 @@ title: Funções assíncronas na integração LangChain Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/langchain_milvus_async.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>Este tutorial explora como aproveitar as funções assíncronas no <a href="https://github.com/langchain-ai/langchain-milvus">langchain-milvus</a> para criar aplicativos de alto desempenho. Usando métodos assíncronos, você pode melhorar significativamente o rendimento e a capacidade de resposta de sua aplicação, especialmente ao lidar com recuperação em larga escala. Quer esteja a construir um sistema de recomendação em tempo real, a implementar a pesquisa semântica na sua aplicação ou a criar um pipeline RAG (Retrieval-Augmented Generation), as operações assíncronas podem ajudá-lo a lidar com pedidos concorrentes de forma mais eficiente. O banco de dados vetorial de alto desempenho Milvus, combinado com as poderosas abstrações LLM do LangChain, pode fornecer uma base robusta para a criação de aplicativos de IA escalonáveis.</p>
+<p>Este tutorial explora como aproveitar as funções assíncronas no <a href="https://github.com/langchain-ai/langchain-milvus">langchain-milvus</a> para criar aplicativos de alto desempenho. Usando métodos assíncronos, você pode melhorar significativamente o rendimento e a capacidade de resposta de sua aplicação, especialmente ao lidar com recuperação em grande escala. Quer esteja a construir um sistema de recomendação em tempo real, a implementar a pesquisa semântica na sua aplicação ou a criar um pipeline RAG (Retrieval-Augmented Generation), as operações assíncronas podem ajudá-lo a lidar com pedidos concorrentes de forma mais eficiente. O banco de dados vetorial de alto desempenho Milvus, combinado com as poderosas abstrações LLM do LangChain, pode fornecer uma base robusta para a criação de aplicativos de IA escalonáveis.</p>
 <h2 id="Async-API-Overview" class="common-anchor-header">Visão geral da API assíncrona<button data-href="#Async-API-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +46,22 @@ title: Funções assíncronas na integração LangChain Milvus
         ></path>
       </svg>
     </button></h2><p>O langchain-milvus fornece suporte abrangente a operações assíncronas, melhorando significativamente o desempenho em cenários simultâneos de grande escala. A API assíncrona mantém um design de interface consistente com a API de sincronização.</p>
-<h3 id="Core-Async-Functions" class="common-anchor-header">Funções assíncronas principais</h3><p>Para usar operações assíncronas em langchain-milvus, simplesmente adicione um prefixo <code translate="no">a</code> aos nomes dos métodos. Isso permite uma melhor utilização dos recursos e um melhor rendimento ao lidar com pedidos de recuperação simultâneos.</p>
+<h3 id="Core-Async-Functions" class="common-anchor-header">Funções assíncronas principais<button data-href="#Core-Async-Functions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para usar operações assíncronas em langchain-milvus, simplesmente adicione um prefixo <code translate="no">a</code> aos nomes dos métodos. Isso permite uma melhor utilização dos recursos e um melhor rendimento ao lidar com pedidos de recuperação simultâneos.</p>
 <table>
 <thead>
 <tr><th>Tipo de operação</th><th>Método síncrono</th><th>Método assíncrono</th><th>Descrição</th></tr>
@@ -69,7 +84,22 @@ title: Funções assíncronas na integração LangChain Milvus
 </tbody>
 </table>
 <p>Para obter informações mais detalhadas sobre estas funções, consulte a <a href="https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html#milvus">Referência da API</a>.</p>
-<h3 id="Performance-Benefits" class="common-anchor-header">Benefícios de desempenho</h3><p>As operações assíncronas proporcionam melhorias significativas de desempenho ao lidar com grandes volumes de pedidos simultâneos, particularmente adequadas para:</p>
+<h3 id="Performance-Benefits" class="common-anchor-header">Benefícios de desempenho<button data-href="#Performance-Benefits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>As operações assíncronas proporcionam melhorias significativas de desempenho ao lidar com grandes volumes de pedidos simultâneos, particularmente adequadas para:</p>
 <ul>
 <li>Processamento de documentos em lote</li>
 <li>Cenários de pesquisa de alta simultaneidade</li>
@@ -135,7 +165,22 @@ nest_asyncio.apply()
 <span class="hljs-comment"># Define the Milvus URI</span>
 URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Setting-up-Test-Functions" class="common-anchor-header">Configurando funções de teste</h3><p>Vamos criar funções auxiliares para gerar dados de teste:</p>
+<h3 id="Setting-up-Test-Functions" class="common-anchor-header">Configurando funções de teste<button data-href="#Setting-up-Test-Functions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Vamos criar funções auxiliares para gerar dados de teste:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">random_id</span>():
     <span class="hljs-string">&quot;&quot;&quot;Generate a random string ID&quot;&quot;&quot;</span>
     random_num_str = <span class="hljs-string">&quot;&quot;</span>
@@ -161,7 +206,22 @@ URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
         docs.append(doc)
     <span class="hljs-keyword">return</span> docs
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Initialize-the-Vector-Store" class="common-anchor-header">Inicializar o armazenamento de vetores</h3><p>Antes de podermos executar nossos testes de desempenho, precisamos configurar um armazenamento de vetores Milvus limpo. Essa função garante que começaremos com uma nova coleção para cada teste, eliminando qualquer interferência de dados anteriores:</p>
+<h3 id="Initialize-the-Vector-Store" class="common-anchor-header">Inicializar o armazenamento de vetores<button data-href="#Initialize-the-Vector-Store" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Antes de podermos executar nossos testes de desempenho, precisamos configurar um armazenamento de vetores Milvus limpo. Essa função garante que começaremos com uma nova coleção para cada teste, eliminando qualquer interferência de dados anteriores:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_vector_store</span>():
     <span class="hljs-string">&quot;&quot;&quot;Initialize and return a fresh vector store for testing&quot;&quot;&quot;</span>
     <span class="hljs-keyword">return</span> Milvus(
@@ -172,7 +232,22 @@ URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
         drop_old=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Always start with a fresh collection</span>
     )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Async-vs-Sync-Add-Documents" class="common-anchor-header">Async vs Sync: Adicionar documentos</h3><p>Agora vamos comparar o desempenho da adição síncrona e assíncrona de documentos. Essas funções nos ajudarão a medir o quanto as operações assíncronas podem ser mais rápidas ao adicionar vários documentos ao repositório de vetores. A versão assíncrona cria tarefas para cada adição de documento e as executa simultaneamente, enquanto a versão sincronizada processa os documentos um a um:</p>
+<h3 id="Async-vs-Sync-Add-Documents" class="common-anchor-header">Async vs Sync: Adicionar documentos<button data-href="#Async-vs-Sync-Add-Documents" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Agora vamos comparar o desempenho da adição síncrona e assíncrona de documentos. Essas funções nos ajudarão a medir o quanto as operações assíncronas podem ser mais rápidas ao adicionar vários documentos ao repositório de vetores. A versão assíncrona cria tarefas para cada adição de documento e as executa simultaneamente, enquanto a versão sincronizada processa os documentos um a um:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">async_add</span>(<span class="hljs-params">milvus_store, num_adding</span>):
     <span class="hljs-string">&quot;&quot;&quot;Add documents asynchronously and measure the time&quot;&quot;&quot;</span>
     docs = generate_test_documents(num_adding)
@@ -236,7 +311,22 @@ Async add for 100 documents took 2.77 seconds
 Sync add for 10 documents took 5.36 seconds
 Sync add for 100 documents took 65.60 seconds
 </code></pre>
-<h3 id="Async-vs-Sync-Search" class="common-anchor-header">Assíncrono vs Sincrono: Pesquisa</h3><p>Para a comparação do desempenho da pesquisa, precisaremos primeiro preencher o armazenamento de vetores. As funções a seguir nos ajudarão a medir o desempenho da pesquisa criando várias consultas de pesquisa simultâneas e comparando o tempo de execução entre as abordagens síncrona e assíncrona:</p>
+<h3 id="Async-vs-Sync-Search" class="common-anchor-header">Assíncrono vs Sincrono: Pesquisa<button data-href="#Async-vs-Sync-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para a comparação do desempenho da pesquisa, precisaremos primeiro preencher o armazenamento de vetores. As funções a seguir nos ajudarão a medir o desempenho da pesquisa criando várias consultas de pesquisa simultâneas e comparando o tempo de execução entre as abordagens síncrona e assíncrona:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">populate_vector_store</span>(<span class="hljs-params">milvus_store, num_docs=<span class="hljs-number">1000</span></span>):
     <span class="hljs-string">&quot;&quot;&quot;Populate the vector store with test documents&quot;&quot;&quot;</span>
     docs = generate_test_documents(num_docs)
@@ -296,7 +386,22 @@ Async search for 100 queries took 3.72 seconds
 Sync search for 10 queries took 6.07 seconds
 Sync search for 100 queries took 54.22 seconds
 </code></pre>
-<h3 id="Async-vs-Sync-Delete" class="common-anchor-header">Assíncrona vs. Síncrona: Apagar</h3><p>As operações de eliminação são outro aspeto crítico em que as operações assíncronas podem proporcionar melhorias significativas no desempenho. Vamos criar funções para medir a diferença de desempenho entre operações de exclusão síncronas e assíncronas. Esses testes ajudarão a demonstrar como as operações assíncronas podem lidar com exclusões em lote de forma mais eficiente:</p>
+<h3 id="Async-vs-Sync-Delete" class="common-anchor-header">Assíncrono vs Sincrono: Apagar<button data-href="#Async-vs-Sync-Delete" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>As operações de eliminação são outro aspeto crítico em que as operações assíncronas podem proporcionar melhorias significativas no desempenho. Vamos criar funções para medir a diferença de desempenho entre operações de exclusão síncronas e assíncronas. Esses testes ajudarão a demonstrar como as operações assíncronas podem lidar com exclusões em lote de forma mais eficiente:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">async_delete</span>(<span class="hljs-params">milvus_store, num_deleting</span>):
     <span class="hljs-string">&quot;&quot;&quot;Delete documents asynchronously and measure the time&quot;&quot;&quot;</span>
     start_time = time.time()

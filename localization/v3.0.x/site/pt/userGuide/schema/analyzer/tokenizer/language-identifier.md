@@ -46,7 +46,7 @@ beta: Milvus v2.5.15+
     </button></h2><p>O <code translate="no">language_identifier</code> executa uma série de passos para processar uma cadeia de texto, um fluxo de trabalho que é fundamental para que os utilizadores compreendam como configurá-lo corretamente.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
    </span> <span class="img-wrapper"> <span>Fluxo de trabalho de deteção de idioma</span> </span></p>
 <ol>
 <li><p><strong>Entrada:</strong> O fluxo de trabalho começa com uma cadeia de texto como entrada.</p></li>
@@ -145,7 +145,7 @@ beta: Milvus v2.5.15+
    <tr>
      <td><p><code translate="no">English</code></p></td>
      <td><p><code translate="no">type: english</code></p></td>
-     <td><p>Tokenização de inglês padrão com filtragem de palavras-chave e palavras de paragem.</p></td>
+     <td><p>Tokenização do inglês padrão com filtragem de palavras-chave e stop-word.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">Mandarin</code> (via whatlang) ou <code translate="no">Chinese</code> (via lingua)</p></td>
@@ -167,7 +167,7 @@ beta: Milvus v2.5.15+
 <ul>
 <li><p><strong>A correspondência é fundamental:</strong> O nome do seu analisador <strong>deve corresponder exatamente ao</strong> idioma de saída do motor de deteção. Por exemplo, se estiver a utilizar <code translate="no">whatlang</code>, a chave para o texto chinês deve ser <code translate="no">Mandarin</code>.</p></li>
 <li><p><strong>Práticas recomendadas:</strong> A tabela acima fornece as configurações recomendadas para alguns idiomas comuns, mas não é uma lista exaustiva. Para obter um guia mais abrangente sobre a escolha de analisadores, consulte <a href="/docs/pt/choose-the-right-analyzer-for-your-use-case.md">Escolha o analisador certo para o seu caso de uso</a>.</p></li>
-<li><p><strong>Saída do detetor</strong>: Para obter uma lista completa dos nomes de idiomas retornados pelos mecanismos de deteção, consulte a <a href="https://github.com/greyblake/whatlang-rs">tabela de idiomas suportados pelo Whatlang</a> e a <a href="https://github.com/pemistahl/lingua-rs">lista de idiomas suportados pelo Lingua</a>.</p></li>
+<li><p><strong>Saída do detetor</strong>: Para obter uma lista completa de nomes de idiomas retornados pelos mecanismos de deteção, consulte a <a href="https://github.com/greyblake/whatlang-rs">tabela de idiomas suportados pelo Whatlang</a> e a <a href="https://github.com/pemistahl/lingua-rs">lista de idiomas suportados pelo Lingua</a>.</p></li>
 </ul>
 </div>
 <h3 id="Step-2-Define-analyzerparams" class="common-anchor-header">Etapa 2: Definir analyzer_params<button data-href="#Step-2-Define-analyzerparams" class="anchor-icon" translate="no">
@@ -316,7 +316,7 @@ result_cn = client.run_analyzer(<span class="hljs-string">&quot;Milvus向量数�
 <span class="hljs-comment"># Output: </span>
 <span class="hljs-comment"># Chinese: [&#x27;Milvus&#x27;, &#x27;向量&#x27;, &#x27;数据&#x27;, &#x27;据库&#x27;, &#x27;数据库&#x27;, &#x27;专&#x27;, &#x27;为&#x27;, &#x27;大规&#x27;, &#x27;规模&#x27;, &#x27;大规模&#x27;, &#x27;应用&#x27;, &#x27;而&#x27;, &#x27;设计&#x27;]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="European-languages-with-accent-normalization" class="common-anchor-header">Idiomas europeus com normalização de acentos<button data-href="#European-languages-with-accent-normalization" class="anchor-icon" translate="no">
+<h3 id="European-languages-with-accent-normalization" class="common-anchor-header">Línguas europeias com normalização de acentos<button data-href="#European-languages-with-accent-normalization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -50,7 +50,7 @@ beta: Milvus 2.6.x
     </button></h2><p>Sebelum mengimplementasikan SiliconFlow Ranker di Milvus, pastikan Anda memiliki:</p>
 <ul>
 <li><p>Koleksi Milvus dengan bidang <code translate="no">VARCHAR</code> yang berisi teks yang akan diperingkat ulang</p></li>
-<li><p>Kunci API SiliconFlow yang valid dengan akses ke model perankingan ulang. Mendaftarlah di <a href="https://www.siliconflow.com/">platform SiliconFlow</a> untuk mendapatkan kredensial API Anda. Anda dapat memilih salah satu:</p>
+<li><p>Kunci API SiliconFlow yang valid dengan akses ke model perangkingan ulang. Mendaftarlah di <a href="https://www.siliconflow.com/">platform SiliconFlow</a> untuk mendapatkan kredensial API Anda. Anda dapat memilih salah satu:</p>
 <ul>
 <li><p>Mengatur variabel lingkungan <code translate="no">SILICONFLOW_API_KEY</code>, atau</p></li>
 <li><p>Tentukan kunci API secara langsung dalam konfigurasi pemeringkat</p></li>

@@ -118,7 +118,7 @@ beta: Milvus 2.6.x
 <li><code translate="no">woodpecker.meta</code>
 <ul>
 <li><strong>Tipo</strong>: Actualmente sólo se soporta <code translate="no">etcd</code>. Reutiliza el mismo etcd que Milvus para almacenar metadatos ligeros.</li>
-<li><strong>prefijo</strong>: El prefijo clave para los metadatos. Por defecto: <code translate="no">woodpecker</code>.</li>
+<li><strong>prefijo</strong>: El prefijo de la clave para los metadatos. Por defecto: <code translate="no">woodpecker</code>.</li>
 </ul></li>
 <li><code translate="no">woodpecker.client</code>
 <ul>
@@ -351,7 +351,7 @@ docker restart milvus-standalone
 </ul></li>
 <li>Lado cliente/aplicación<ul>
 <li>Utilizar lotes de mayor tamaño y más escritores/clientes simultáneos.</li>
-<li>Controle los tiempos de refresco y creación de índices (acumule los lotes antes de activarlos) para evitar pequeñas escrituras frecuentes.</li>
+<li>Controle los tiempos de refresco y creación de índices (acumule los lotes antes de activarlos) para evitar escrituras pequeñas frecuentes.</li>
 </ul></li>
 </ul>
 <p>Demostración de inserción por lotes</p>

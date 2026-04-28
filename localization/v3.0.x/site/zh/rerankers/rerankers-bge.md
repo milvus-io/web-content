@@ -1,7 +1,7 @@
 ---
 id: rerankers-bge.md
 order: 2
-summary: Milvus 通过`BGERerankFunction`类支持 BGE reranker 模型。该功能可让您有效地对查询-文档对的相关性进行评分。
+summary: Milvus 通过`BGERerankFunction`类支持 BGE Reranker 模型。通过该功能，您可以有效地对查询-文档对的相关性进行评分。
 title: BGE
 ---
 <h1 id="BGE" class="common-anchor-header">BGE<button data-href="#BGE" class="anchor-icon" translate="no">

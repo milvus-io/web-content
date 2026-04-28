@@ -160,7 +160,7 @@ kubectl scale sts <span class="hljs-operator">&lt;</span>etcd<span class="hljs-o
         ></path>
       </svg>
     </button></h3><p>Quando tutti i pod si bloccano, provate a copiare il file <code translate="no">/bitnami/etcd/data/member/snap/db</code>. Usate <code translate="no">https://github.com/etcd-io/bbolt</code> per modificare i dati del database.</p>
-<p>Tutti i metadati di Milvus sono conservati nel secchio <code translate="no">key</code>. Eseguire il backup dei dati in questo bucket ed eseguire i seguenti comandi. Si noti che i dati del prefisso nel file <code translate="no">by-dev/meta/session</code> non richiedono un backup.</p>
+<p>Tutti i metadati di Milvus sono conservati nel bucket <code translate="no">key</code>. Eseguire il backup dei dati in questo bucket ed eseguire i seguenti comandi. Si noti che i dati del prefisso nel file <code translate="no">by-dev/meta/session</code> non richiedono un backup.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">0</span>
 <span class="hljs-comment"># delete the pvc for etcd-0, etcd-1, etcd-2</span>
 kubectl kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">1</span>

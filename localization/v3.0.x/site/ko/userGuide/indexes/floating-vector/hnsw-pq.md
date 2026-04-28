@@ -224,14 +224,14 @@ res = MilvusClient.search(
      <td><p>나가는 에지와 들어오는 에지를 모두 포함하여 그래프에서 각 노드가 가질 수 있는 최대 연결(또는 에지) 수입니다. 이 매개변수는 인덱스 구성과 검색 모두에 직접적인 영향을 줍니다.</p></td>
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [2, 2048]</p>
 <p><strong>기본값</strong>: <code translate="no">30</code> (노드당 최대 30개의 나가는 에지와 30개의 들어오는 에지)</p></td>
-     <td><p><code translate="no">M</code> 이 클수록 일반적으로 <strong>정확도는 높아지지만</strong> <strong>메모리 오버헤드가 증가하고</strong> <strong>인덱스 구축과 검색 속도가 모두 느려집니다</strong>. 차원이 높은 데이터 세트나 높은 리콜이 중요한 경우 <code translate="no">M</code> 을 늘리는 것을 고려하세요.</p>
-<p>메모리 사용량과 검색 속도가 주요 관심사인 경우 <code translate="no">M</code> 을 줄이는 것을 고려하세요.</p>
+     <td><p><code translate="no">M</code> 이 클수록 일반적으로 <strong>정확도는 높아지지만</strong> <strong>메모리 오버헤드가 증가하고</strong> <strong>인덱스 구축과 검색 속도가 모두 느려집니다</strong>. 차원이 높거나 높은 리콜이 중요한 데이터 세트의 경우 <code translate="no">M</code> 을 늘리는 것을 고려하세요.</p>
+<p>메모리 사용량과 검색 속도가 주요 관심사인 경우 <code translate="no">M</code> 을 낮추는 것이 좋습니다.</p>
 <p>대부분의 경우, 이 범위 내에서 값을 설정하는 것이 좋습니다: [5, 100].</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">efConstruction</code></p></td>
-     <td><p>인덱스 구성 중에 연결을 위해 고려되는 후보 이웃의 수. 새 요소마다 더 큰 후보 풀이 평가되지만 실제로 설정되는 최대 연결 수는 여전히 <code translate="no">M</code> 으로 제한됩니다.</p></td>
+     <td><p>인덱스 구성 중에 연결을 위해 고려되는 후보 이웃의 수. 새 요소마다 더 많은 후보 풀이 평가되지만 실제로 설정되는 최대 연결 수는 여전히 <code translate="no">M</code> 으로 제한됩니다.</p></td>
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [1, <em>int_max</em>]</p>
 <p><strong>기본값입니다</strong>: <code translate="no">360</code></p></td>
      <td><p><code translate="no">efConstruction</code> 이 높을수록 일반적으로 더 많은 잠재적 연결이 탐색되므로 <strong>더 정확한 인덱스가</strong> 생성됩니다. 하지만 색인 <strong>시간이 길어지고</strong> 색인 구축 중 <strong>메모리 사용량이 증가</strong> 합니다. 특히 색인 시간이 덜 중요한 시나리오에서는 정확도를 높이려면 <code translate="no">efConstruction</code> 을 늘리는 것이 좋습니다.</p>
@@ -250,7 +250,7 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>각 하위 벡터의 중심 인덱스를 압축된 형태로 표현하는 데 사용되는 비트 수입니다. 각 코드북의 크기를 직접 결정합니다. 각 코드북에는 <sup>2n비트의</sup> 중심이 포함됩니다. 예를 들어 <code translate="no">nbits</code> 을 8로 설정하면 각 하위 벡터는 8비트 중심 인덱스로 표시됩니다. 따라서 해당 하위 벡터에 대해 코드북에<sup>28개</sup> (256개)의 구심점이 가능합니다.</p></td>
+     <td><p>각 하위 벡터의 중심 인덱스를 압축된 형태로 표현하는 데 사용되는 비트 수입니다. 각 코드북의 크기를 직접 결정합니다. 각 코드북에는 <sup>2n비트의</sup> 중심이 포함됩니다. 예를 들어 <code translate="no">nbits</code> 을 8로 설정하면 각 하위 벡터는 8비트 중심 인덱스로 표시됩니다. 따라서 해당 하위 벡터의 코드북에는<sup>28개</sup> (256개)의 가능한 중심이 있습니다.</p></td>
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [1, 24]</p>
 <p><strong>기본값입니다</strong>: <code translate="no">8</code></p></td>
      <td><p><code translate="no">nbits</code> 값이 클수록 코드북의 크기가 커져 원본 벡터를 더 정확하게 표현할 수 있습니다. 하지만 각 인덱스를 저장하는 데 더 많은 비트를 사용하므로 압축률이 떨어집니다. 대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [1, 16].</p></td>
@@ -269,7 +269,7 @@ res = MilvusClient.search(
      <td><p>세분화 과정에서 사용되는 데이터의 정밀도를 결정합니다. 이 정밀도는 압축 벡터( <code translate="no">m</code> 및 <code translate="no">nbits</code> 매개변수에 의해 설정된 대로)보다 높아야 합니다.</p></td>
      <td><p><strong>Type</strong>: 문자열 <strong>범위</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]입니다.</p>
 <p><strong>기본값</strong>: None</p></td>
-     <td><p>더 높은 메모리 비용으로 정밀도를 최대화하려면 <code translate="no">FP32</code>, 더 나은 압축을 위해서는 <code translate="no">SQ6</code>/<code translate="no">SQ8</code> 을 사용하세요. <code translate="no">BF16</code> 과 <code translate="no">FP16</code> 은 균형 잡힌 대안을 제공합니다.</p></td>
+     <td><p>더 높은 메모리 비용으로 정밀도를 최대화하려면 <code translate="no">FP32</code>, 더 나은 압축을 위해서는 <code translate="no">SQ6</code>/<code translate="no">SQ8</code> 를 사용하세요. <code translate="no">BF16</code> 와 <code translate="no">FP16</code> 는 균형 잡힌 대안을 제공합니다.</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
@@ -304,13 +304,13 @@ res = MilvusClient.search(
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [1, <em>int_max</em>]</p>
 <p><strong>기본값</strong>: <em>limit</em> (반환할 가장 가까운 이웃 TopK)</p></td>
      <td><p><code translate="no">ef</code> 이 클수록 일반적으로 더 많은 잠재적 이웃을 고려하므로 <strong>검색 정확도가 높아</strong> 집니다. 그러나 <strong>검색 시간도 증가</strong>합니다. 높은 회상률을 달성하는 것이 중요하고 검색 속도가 덜 중요한 경우에는 <code translate="no">ef</code> 을 늘리는 것이 좋습니다.</p>
-<p>특히 약간의 정확도 감소를 감수할 수 있는 시나리오에서는 <code translate="no">ef</code> 을 줄여 검색 속도를 우선시하는 것이 좋습니다.</p>
+<p>특히 약간의 정확도 저하를 감수할 수 있는 시나리오에서는 <code translate="no">ef</code> 을 줄여 검색 속도를 우선시하는 것이 좋습니다.</p>
 <p>대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [K, 10K].</p></td>
    </tr>
    <tr>
      <td><p>PQ</p></td>
      <td><p><code translate="no">refine_k</code></p></td>
-     <td><p>요청된 상위 K 결과와 비교하여 구체화(순위 재조정) 단계에서 추가로 검토하는 후보자 수를 제어하는 배율입니다.</p></td>
+     <td><p>요청된 상위 K 결과와 비교하여 정제(순위 재조정) 단계에서 추가로 검토할 후보자 수를 제어하는 배율 계수입니다.</p></td>
      <td><p><strong>유형</strong>: 실수 <strong>범위</strong>: [1, <em>float_max</em>)</p>
 <p><strong>기본값</strong>: 1</p></td>
      <td><p><code translate="no">refine_k</code> 값이 클수록 검색 회수율과 정확도가 향상되지만 검색 시간과 리소스 사용량도 증가합니다. 값이 1이면 구체화 프로세스에서 초기 상위 K 결과만 고려한다는 의미입니다.</p></td>

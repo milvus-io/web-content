@@ -20,10 +20,10 @@ title: 使用 Matryoshka 嵌入式進行漏斗搜尋
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.6.x/assets/funnel-search.png' width='100%'></div>
-在建立有效率的向量搜尋系統時，一個主要的挑戰是管理儲存成本，同時維持可接受的延遲和召回率。現代嵌入模型會輸出數百或數千維的向量，為原始向量和索引帶來大量的儲存和計算開銷。<p>傳統上，我們會在建立索引之前，先應用量化或降維方法來降低儲存需求。例如，我們可以使用積量化 (Product Quantization, PQ) 降低精確度，或使用主成分分析 (Principal Component Analysis, PCA) 降低維數，以節省儲存空間。這些方法會分析整個向量集，找出更精簡的向量集，以維持向量之間的語意關係。</p>
+    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/funnel-search.png' width='100%'></div>
+在建立有效率的向量搜尋系統時，一個主要的挑戰是管理儲存成本，同時維持可接受的延遲和召回率。現代嵌入模型會輸出數百或數千維的向量，為原始向量和索引帶來大量的儲存和計算開銷。<p>傳統上，我們會在建立索引之前先應用量化或降維方法來降低儲存需求。例如，我們可以使用積量化 (Product Quantization, PQ) 降低精確度，或使用主成分分析 (Principal Component Analysis, PCA) 降低維數，以節省儲存空間。這些方法會分析整個向量集，找出更精簡的向量集，以維持向量之間的語意關係。</p>
 <p>這些標準方法雖然有效，但只減少一次精確度或維度，而且是在單一尺度上。但如果我們可以同時維持多層的細節，就像金字塔般越來越精確的表達方式，那又會如何呢？</p>
-<p>進入 Matryoshka 嵌入式。以俄羅斯嵌套娃娃命名 (見插圖)，這些聰明的結構將多層表徵嵌入單一向量中。與傳統的後處理方法不同，Matryoshka 內嵌會在初始訓練過程中學習這種多尺度結構。其結果非常顯著：完整的嵌入不僅能捕捉輸入的語意，而且每個嵌套的子集前綴（前半部分、前四分之一等）都能提供連貫的表達，即使不那麼詳細。</p>
+<p>進入 Matryoshka 內嵌。以俄羅斯嵌套娃娃命名 (見插圖)，這些聰明的結構將多層表徵嵌入單一向量中。與傳統的後處理方法不同，Matryoshka 內嵌會在初始訓練過程中學習這種多尺度結構。其結果非常顯著：完整的嵌入不僅能捕捉輸入的語意，而且每個嵌套的子集前綴（前半部分、前四分之一等）都能提供連貫的表達，即使不那麼詳細。</p>
 <p>在本筆記簿中，我們將探討如何使用 Matryoshka 內嵌與 Milvus 來進行語意搜尋。我們說明一種稱為「漏斗搜尋」（funnel search）的演算法，它可以讓我們在嵌入維度的一小部分子集上執行相似性搜尋，而不會大幅降低召回率。</p>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -130,7 +130,7 @@ fields = [
 schema = CollectionSchema(fields=fields, enable_dynamic_field=<span class="hljs-literal">False</span>)
 client.create_collection(collection_name=collection_name, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus 目前不支援對嵌入式子集進行搜尋，因此我們將嵌入式分成兩部分：頭部代表向量的初始子集，用於索引和搜尋，尾部則是其餘部分。模型是針對余弦距離相似性搜尋所訓練的，因此我們將頭部的內嵌歸一化。然而，為了稍後計算較大子集的相似性，我們需要儲存頭部內嵌的規範，因此我們可以在連接至尾部之前將其非規範化。</p>
+<p>Milvus 目前不支援對嵌入式子集進行搜尋，因此我們將嵌入式分成兩部分：頭部代表向量的初始子集，用於索引和搜尋，尾部則是其餘部分。這個模型是針對余弦距離相似性搜尋所訓練的，因此我們將頭部的內嵌歸一化。然而，為了稍後計算較大子集的相似性，我們需要儲存頭部內嵌的規範，因此我們可以在連接至尾部之前將其非規範化。</p>
 <p>若要透過前 1/6 的嵌入執行搜尋，我們需要在<code translate="no">head_embedding</code> 領域上建立向量搜尋索引。稍後，我們將比較「漏斗搜尋」與一般向量搜尋的結果，因此也會在完整的內嵌上建立搜尋索引。</p>
 <p><em>重要的是，我們使用的是<code translate="no">COSINE</code> 而不是<code translate="no">IP</code> 距離公制，因為否則我們就需要追蹤內嵌規範，這會使實作變得複雜 (這在介紹漏斗搜尋演算法後會更有意義)。</em></p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -176,7 +176,7 @@ client.create_index(collection_name, index_params)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>現在讓我們使用 Matryoshka 內嵌維度的前 1/6 執行「漏斗搜尋」。我心目中有三部電影可供檢索，並製作了自己的劇情摘要，以便查詢資料庫。我們嵌入查詢，然後在<code translate="no">head_embedding</code> 欄位上執行向量搜尋，擷取 128 個結果候選。</p>
+    </button></h2><p>現在讓我們使用 Matryoshka 內嵌維度的前 1/6 執行「漏斗搜尋」。我心目中有三部電影可供檢索，並製作了自己的劇情摘要以查詢資料庫。我們嵌入查詢，然後在<code translate="no">head_embedding</code> 欄位上執行向量搜尋，擷取 128 個結果候選。</p>
 <pre><code translate="no" class="language-python">queries = [
     <span class="hljs-string">&quot;An archaeologist searches for ancient artifacts while fighting Nazis.&quot;</span>,
     <span class="hljs-string">&quot;A teenager fakes illness to get off school and have adventures with two friends.&quot;</span>,
@@ -241,7 +241,7 @@ Impact
 The House in Marsh Road
 </code></pre>
 <p>我們可以看到，由於在搜尋過程中截斷了嵌入式，因此召回率受到了影響。Funnel search（漏斗搜尋）用一個巧妙的技巧解決了這個問題：我們可以使用嵌入維度的剩餘部分來重新排序和修剪我們的候選清單來恢復檢索效能，而不需要執行任何額外的昂貴向量搜尋。</p>
-<p>為了方便說明漏斗搜尋演算法，我們將每項查詢的 Milvus 搜尋命中率轉換成 Pandas 資料框架。</p>
+<p>為了方便說明漏斗搜尋演算法，我們將每個查詢的 Milvus 搜尋命中率轉換成 Pandas 資料框架。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">hits_to_dataframe</span>(<span class="hljs-params">hits: pymilvus.client.abstract.Hits</span>) -&gt; pd.DataFrame:
     <span class="hljs-string">&quot;&quot;&quot;
     Convert a Milvus search result to a Pandas dataframe. This function is specific to our data schema.
@@ -256,7 +256,7 @@ The House in Marsh Road
 
 dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 <button class="copy-code-btn"></button></code></pre>
-<p>現在，為了執行漏斗搜尋，我們迭代越來越大的嵌入子集。每次迭代時，我們都會根據新的相似度重新排列候選項，並刪除排名最低的部分。</p>
+<p>現在，為了執行漏斗搜尋，我們迭代越來越大的嵌入子集。每次迭代時，我們都會根據新的相似度重新排序，並刪除排名最低的部分。</p>
 <p>為了具體說明這一點，在上一步中，我們使用 1/6 的嵌入和查詢維度擷取了 128 個候選人。執行漏斗搜尋的第一步是使用<em>前 1/3 的維度</em>重新計算查詢與候選人之間的相似度。最下面的 64 個候選人會被剪枝。然後，我們使用<em>前 2/3 的維度</em>重複此過程，再使用<em>所有的維度</em>，連續剪枝到 32 和 16 個候選人。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># An optimized implementation would vectorize the calculation of similarity scores across rows (using a matrix)</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_score</span>(<span class="hljs-params">row, query_emb=<span class="hljs-literal">None</span>, dims=<span class="hljs-number">768</span></span>):
@@ -431,7 +431,7 @@ res = client.search(
 <pre><code translate="no">Query: A teenager fakes illness to get off school and have adventures with two friends.
 Row 228: Ferris Bueller's Day Off
 </code></pre>
-<p>我們看到問題出在初始候選清單不夠大，或者說，在最高粒度的層級上，想要的命中與查詢的相似度不夠高。將它從<code translate="no">128</code> 改為<code translate="no">256</code> 的結果是成功檢索。<em>我們應該形成一個經驗規則來設定保留集上的候選人數，以經驗來評估召回率與延遲之間的權衡。</em></p>
+<p>我們看到問題出在初始候選清單不夠大，或者說，在最高粒度的層級上，想要的命中與查詢的相似度不夠高。將<code translate="no">128</code> 改為<code translate="no">256</code> 的結果是成功檢索。<em>我們應該形成一個經驗法則來設定保留集上的候選數，以經驗來評估召回率與延遲之間的權衡。</em></p>
 <pre><code translate="no" class="language-python">dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 
 dfs_results = [
@@ -568,7 +568,7 @@ Leopard in the Snow
          Unfaithful
      Always a Bride 
 </code></pre>
-<p>Recall 比預期的漏斗搜尋或一般搜尋要差得多 (嵌入模型是透過對比學習來訓練嵌入維度的前綴，而不是後綴)。</p>
+<p>Recall 比預期中的漏斗搜尋或一般搜尋要差得多 (嵌入模型是透過嵌入維度的前綴而非後綴的對比學習來訓練的)。</p>
 <h2 id="Summary" class="common-anchor-header">總結<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -585,7 +585,7 @@ Leopard in the Snow
         ></path>
       </svg>
     </button></h2><p>以下是不同方法的搜尋結果比較：</p>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.6.x/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
-<div style='margin: auto; width: 100%;'><img translate="no" src='/docs/v2.6.x/assets/results-ferris-buellers-day-off.png' width='100%'></div>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.6.x/assets/results-the-shining.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
+<div style='margin: auto; width: 100%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-ferris-buellers-day-off.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-the-shining.png' width='100%'></div>
 我們展示了如何使用 Matryoshka 嵌入與 Milvus 來執行更有效率的語意搜尋演算法，稱為「漏斗搜尋」。我們也探討了演算法中重排序 (reranking) 與剪枝 (pruning) 步驟的重要性，以及當初始候選名單過小時的失敗模式。最後，我們討論了在形成子嵌套時，維度的順序是如何重要的 - 它必須與模型被訓練的方式相同。或者說，正因為模型是以某種方式訓練出來的，嵌入的前綴才會有意義。現在您知道如何實作 Matryoshka 嵌入和漏斗搜尋，以降低語意搜尋的儲存成本，而不會犧牲太多的檢索效能！

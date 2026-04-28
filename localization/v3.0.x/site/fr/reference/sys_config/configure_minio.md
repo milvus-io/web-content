@@ -2,7 +2,7 @@
 id: configure_minio.md
 related_key: configure
 group: system_configuration.md
-summary: Apprenez à configurer minio pour Milvus.
+summary: Découvrez comment configurer minio pour Milvus.
 ---
 <h1 id="minio-related-Configurations" class="common-anchor-header">Configurations liées à Minio<button data-href="#minio-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -437,7 +437,7 @@ summary: Apprenez à configurer minio pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Niveau de journalisation pour le journal du sdk d'aws. Niveaux pris en charge : off, fatal, error, warn, info, debug, trace     </td>
+      <td>        Niveau de journal pour le journal du sdk d'aws. Niveaux pris en charge : off, fatal, error, warn, info, debug, trace     </td>
       <td>fatal</td>
     </tr>
   </tbody>

@@ -40,11 +40,41 @@ summary: Pelajari cara menggunakan cluster Milvus di AWS EC2.
       </svg>
     </button></h2><p>Bagian ini menjelaskan cara menggunakan Terraform untuk menyediakan cluster Milvus.</p>
 <p><a href="https://www.terraform.io/">Terraform</a> adalah alat perangkat lunak infrastruktur sebagai kode (IaC). Dengan Terraform, Anda dapat menyediakan infrastruktur dengan menggunakan file konfigurasi deklaratif.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Prasyarat</h3><ul>
+<h3 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Menginstal dan mengonfigurasi <a href="https://www.terraform.io/downloads.html">Terraform</a></p></li>
 <li><p>Menginstal dan mengonfigurasi <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html">AWS CLI</a></p></li>
 </ul>
-<h3 id="Prepare-configuration" class="common-anchor-header">Siapkan konfigurasi</h3><p>Anda dapat mengunduh file konfigurasi template di <a href="https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view">Google Drive</a>.</p>
+<h3 id="Prepare-configuration" class="common-anchor-header">Siapkan konfigurasi<button data-href="#Prepare-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Anda dapat mengunduh file konfigurasi template di <a href="https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view">Google Drive</a>.</p>
 <ul>
 <li><p><code translate="no">main.tf</code></p>
 <p>File ini berisi konfigurasi untuk penyediaan cluster Milvus.</p></li>
@@ -201,7 +231,22 @@ resource &quot;aws_route_table_association&quot; &quot;cluster_subnet_add_gatewa
 }
 </code></pre></li>
 </ul>
-<h3 id="Apply-the-configuration" class="common-anchor-header">Menerapkan konfigurasi</h3><ol>
+<h3 id="Apply-the-configuration" class="common-anchor-header">Menerapkan konfigurasi<button data-href="#Apply-the-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li><p>Buka terminal dan arahkan ke folder yang menyimpan <code translate="no">main.tf</code>.</p></li>
 <li><p>Untuk menginisialisasi konfigurasi, jalankan <code translate="no">terraform init</code>.</p></li>
 <li><p>Untuk menerapkan konfigurasi, jalankan <code translate="no">terraform apply</code> dan masukkan <code translate="no">yes</code> saat diminta.</p></li>
@@ -224,13 +269,58 @@ resource &quot;aws_route_table_association&quot; &quot;cluster_subnet_add_gatewa
       </svg>
     </button></h2><p>Bagian ini menjelaskan cara menggunakan Ansible untuk memulai cluster Milvus yang telah Anda sediakan.</p>
 <p><a href="https://www.ansible.com/overview/how-ansible-works">Ansible</a> adalah alat manajemen konfigurasi yang digunakan untuk mengotomatiskan penyediaan cloud dan manajemen konfigurasi.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Prasyarat</h3><ul>
+<h3 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Pengontrol Ansible</a> telah diinstal.</li>
 </ul>
-<h3 id="Download-Ansible-Milvus-node-deployment-Playbook" class="common-anchor-header">Unduh Panduan Penyebaran Node Ansible Milvus</h3><p>Kloning repositori Milvus dari GitHub untuk mengunduh Playbook penyebaran node Ansible Milvus.</p>
+<h3 id="Download-Ansible-Milvus-node-deployment-Playbook" class="common-anchor-header">Unduh Panduan Penyebaran Node Ansible Milvus<button data-href="#Download-Ansible-Milvus-node-deployment-Playbook" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kloning repositori Milvus dari GitHub untuk mengunduh Playbook penyebaran node Ansible Milvus.</p>
 <pre><code translate="no">git <span class="hljs-built_in">clone</span> https://github.com/milvus-io/milvus.git
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Configure-installation-files" class="common-anchor-header">Mengonfigurasi file instalasi</h3><p>File <code translate="no">inventory.ini</code> dan <code translate="no">ansible.cfg</code> digunakan untuk mengontrol variabel lingkungan dan metode verifikasi masuk di Ansible playbook. Dalam berkas <code translate="no">inventory.ini</code>, bagian <code translate="no">dockernodes</code> mendefinisikan semua server mesin docker. Bagian <code translate="no">ansible.cfg</code> mendefinisikan semua server koordinator Milvus. Bagian <code translate="no">node</code> mendefinisikan semua server dari simpul Milvus.</p>
+<h3 id="Configure-installation-files" class="common-anchor-header">Mengonfigurasi file instalasi<button data-href="#Configure-installation-files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>File <code translate="no">inventory.ini</code> dan <code translate="no">ansible.cfg</code> digunakan untuk mengontrol variabel lingkungan dan metode verifikasi masuk di Ansible playbook. Dalam berkas <code translate="no">inventory.ini</code>, bagian <code translate="no">dockernodes</code> mendefinisikan semua server mesin docker. Bagian <code translate="no">ansible.cfg</code> mendefinisikan semua server koordinator Milvus. Bagian <code translate="no">node</code> mendefinisikan semua server dari simpul Milvus.</p>
 <p>Masukkan jalur lokal ke Playbook dan konfigurasikan berkas instalasi.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> ./milvus/deployments/docker/cluster-distributed-deployment</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -313,10 +403,25 @@ INDEX_COORD_ADDRESS= {{coords_ip}}:31000
   <span class="hljs-attr">roles:</span>
     <span class="hljs-bullet">-</span> <span class="hljs-string">docker-installation</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Test-Ansible-connectivity" class="common-anchor-header">Menguji konektivitas Ansible</h3><p>Uji konektivitas ke Ansible.</p>
+<h3 id="Test-Ansible-connectivity" class="common-anchor-header">Menguji konektivitas Ansible<button data-href="#Test-Ansible-connectivity" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Uji konektivitas ke Ansible.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible all -m ping</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Tambahkan <code translate="no">-i</code> pada perintah untuk menentukan jalur ke berkas inventori jika Anda tidak menentukannya di <code translate="no">ansible.cfg</code>, jika tidak, Ansible menggunakan <code translate="no">/etc/ansible/hosts</code>.</p>
+<p>Tambahkan <code translate="no">-i</code> dalam perintah untuk menentukan jalur ke berkas inventori jika Anda tidak menentukannya di <code translate="no">ansible.cfg</code>, jika tidak, Ansible menggunakan <code translate="no">/etc/ansible/hosts</code>.</p>
 <p>Terminal kembali sebagai berikut:</p>
 <pre><code translate="no">dockernode01 | <span class="hljs-function"><span class="hljs-params">SUCCESS</span> =&gt;</span> {
 <span class="hljs-string">&quot;changed&quot;</span>: <span class="hljs-literal">false</span>,
@@ -338,13 +443,43 @@ dockernode02 | <span class="hljs-function"><span class="hljs-params">SUCCESS</sp
     <span class="hljs-string">&quot;ping&quot;</span>: <span class="hljs-string">&quot;pong&quot;</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Check-the-Playbook-Syntax" class="common-anchor-header">Periksa Sintaks Playbook</h3><p>Periksa sintaks Playbook.</p>
+<h3 id="Check-the-Playbook-Syntax" class="common-anchor-header">Periksa Sintaks Playbook<button data-href="#Check-the-Playbook-Syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Periksa sintaks Playbook.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible-playbook deploy-docker.yml --syntax-check</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Biasanya, terminal akan kembali sebagai berikut:</p>
 <pre><code translate="no"><span class="hljs-section">playbook: deploy-docker.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Install-Docker" class="common-anchor-header">Instal Docker</h3><p>Instal Docker dengan Playbook.</p>
+<h3 id="Install-Docker" class="common-anchor-header">Instal Docker<button data-href="#Install-Docker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Instal Docker dengan Playbook.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible-playbook deploy-docker.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Jika Docker berhasil diinstal pada ketiga hos, terminal akan menampilkan tampilan berikut:</p>
@@ -369,7 +504,22 @@ dockernode01               : ok=10   changed=1    unreachable=0    failed=0    s
 dockernode02               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 dockernode03               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 </span><button class="copy-code-btn"></button></code></pre>
-<h3 id="Verify-the-installation" class="common-anchor-header">Verifikasi penginstalan</h3><p>Masuk ke tiga hos dengan kunci SSH, dan verifikasi penginstalan pada hos.</p>
+<h3 id="Verify-the-installation" class="common-anchor-header">Verifikasi penginstalan<button data-href="#Verify-the-installation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Masuk ke tiga hos dengan kunci SSH, dan verifikasi penginstalan pada hos.</p>
 <ul>
 <li>Untuk hos root:</li>
 </ul>
@@ -386,13 +536,43 @@ dockernode03               : ok=10   changed=1    unreachable=0    failed=0    s
 <p>Periksa status kontainer yang sedang berjalan.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Check-the-Syntax" class="common-anchor-header">Periksa Sintaks</h3><p>Periksa sintaks <code translate="no">deploy-milvus.yml</code>.</p>
+<h3 id="Check-the-Syntax" class="common-anchor-header">Periksa Sintaks<button data-href="#Check-the-Syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Periksa sintaks <code translate="no">deploy-milvus.yml</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible-playbook deploy-milvus.yml --syntax-check</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Biasanya, terminal akan menampilkan hasil sebagai berikut:</p>
 <pre><code translate="no"><span class="hljs-section">playbook: deploy-milvus.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Milvus-container" class="common-anchor-header">Membuat kontainer Milvus</h3><p>Tugas untuk membuat kontainer Milvus didefinisikan di <code translate="no">deploy-milvus.yml</code>.</p>
+<h3 id="Create-Milvus-container" class="common-anchor-header">Membuat kontainer Milvus<button data-href="#Create-Milvus-container" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tugas untuk membuat kontainer Milvus didefinisikan di <code translate="no">deploy-milvus.yml</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible-playbook deploy-milvus.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Terminal kembali:</p>

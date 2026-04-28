@@ -26,7 +26,7 @@ title: بناء RAG مع Milvus و SiliconFlow
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_siliconflow.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>تلتزم شركة<a href="https://siliconflow.cn/">SiliconFlow</a> ببناء منصة ذكاء اصطناعي قابلة للتطوير وموحدة وعالية الأداء، وتُعد SiliconCloud أحد العروض الرئيسية من SiliconFlow، والتي توصف بأنها منصة نموذج كخدمة (MaaS). وهي توفر بيئة شاملة لنشر نماذج الذكاء الاصطناعي المختلفة، بما في ذلك النماذج اللغوية الكبيرة ونماذج التضمين. تجمع سيليكون كلاود العديد من النماذج مفتوحة المصدر، مما يتيح للمستخدمين الوصول إلى هذه الموارد والاستفادة منها بسهولة دون الحاجة إلى إعداد بنية تحتية واسعة النطاق.</p>
+<p>تلتزم شركة<a href="https://siliconflow.cn/">SiliconFlow</a> ببناء منصة ذكاء اصطناعي قابلة للتطوير وموحدة وعالية الأداء للذكاء الاصطناعي. SiliconCloud هي إحدى العروض الرئيسية من SiliconFlow، والتي توصف بأنها منصة نموذج كخدمة (MaaS). وهي توفر بيئة شاملة لنشر نماذج الذكاء الاصطناعي المختلفة، بما في ذلك النماذج اللغوية الكبيرة ونماذج التضمين. تجمع سيليكون كلاود العديد من النماذج مفتوحة المصدر، مما يتيح للمستخدمين الوصول إلى هذه الموارد والاستفادة منها بسهولة دون الحاجة إلى إعداد بنية تحتية واسعة النطاق.</p>
 <p>في هذا البرنامج التعليمي، سنوضح لك في هذا البرنامج التعليمي كيفية إنشاء خط أنابيب RAG (استرجاع-توليد معزز) باستخدام Milvus و SiliconFlow.</p>
 <h2 id="Preparation" class="common-anchor-header">الإعداد<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -273,7 +273,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>],  <span class="hljs-comment"># Return the text field</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>لنلقِ نظرة على نتائج البحث عن الاستعلام</p>
+<p>دعونا نلقي نظرة على نتائج البحث عن الاستعلام</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 
 retrieved_lines_with_distances = [

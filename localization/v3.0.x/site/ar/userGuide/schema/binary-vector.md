@@ -45,7 +45,7 @@ summary: >-
 <p>يوضح الرسم البياني أدناه كيف تمثل المتجهات الثنائية وجود كلمات رئيسية في محتوى النص. في هذا المثال، يتم استخدام متجه ثنائي مكون من 10 أبعاد لتمثيل نصين مختلفين<strong>(النص 1</strong> <strong>والنص 2</strong>)، حيث يتوافق كل بُعد مع كلمة في المفردات: 1 يشير إلى وجود الكلمة في النص، بينما يشير 0 إلى غيابها.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
    </span> <span class="img-wrapper"> <span>المتجه الثنائي</span> </span></p>
 <p>تتميز المتجهات الثنائية بالخصائص التالية:</p>
 <ul>
@@ -54,11 +54,11 @@ summary: >-
 <li><p><strong>طول ثابت:</strong> يظل طول المتجه ثابتًا بغض النظر عن طول النص الأصلي، مما يجعل الفهرسة والاسترجاع أسهل.</p></li>
 <li><p><strong>بسيط وبديهي:</strong> يعكس مباشرةً وجود الكلمات الرئيسية، مما يجعله مناسبًا لبعض مهام الاسترجاع المتخصصة.</p></li>
 </ul>
-<p>يمكن إنشاء المتجهات الثنائية من خلال طرق مختلفة. في معالجة النصوص، يمكن استخدام المفردات المحددة مسبقًا لتعيين البتات المقابلة بناءً على وجود الكلمات. بالنسبة لمعالجة الصور، يمكن لخوارزميات التجزئة الإدراكية (مثل <a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>) توليد ميزات ثنائية للصور. في تطبيقات التعلّم الآلي، يمكن تحويل مخرجات النماذج إلى ثنائية للحصول على تمثيلات متجهات ثنائية.</p>
+<p>يمكن إنشاء المتجهات الثنائية من خلال طرق مختلفة. في معالجة النصوص، يمكن استخدام المفردات المحددة مسبقًا لتعيين البتات المقابلة بناءً على وجود الكلمات. بالنسبة لمعالجة الصور، يمكن لخوارزميات التجزئة الإدراكية (مثل <a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>) توليد ميزات ثنائية للصور. في تطبيقات التعلّم الآلي، يمكن جعل مخرجات النموذج ثنائية للحصول على تمثيلات متجهات ثنائية.</p>
 <p>بعد تحويلها إلى متجهات ثنائية، يمكن تخزين البيانات في ميلفوس للإدارة واسترجاع المتجهات. يوضح الرسم البياني أدناه العملية الأساسية.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
    </span> <span class="img-wrapper"> <span>استخدام المتجهات الثنائية</span> </span></p>
 <div class="alert note">
 <p>على الرغم من أن المتجهات الثنائية تتفوق في سيناريوهات محددة، إلا أن لها قيودًا في قدرتها التعبيرية، مما يجعل من الصعب التقاط العلاقات الدلالية المعقدة. لذلك، في سيناريوهات العالم الحقيقي، غالبًا ما تُستخدم المتجهات الثنائية جنبًا إلى جنب مع أنواع المتجهات الأخرى لتحقيق التوازن بين الكفاءة والتعبير. لمزيد من المعلومات، راجع <a href="/docs/ar/dense-vector.md">المتجهات الكثيفة</a> والمتجهات <a href="/docs/ar/sparse_vector.md">المتفرقة</a>.</p>
@@ -78,7 +78,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">إضافة حقل متجه</h3><p>لاستخدام المتجهات الثنائية في ميلفوس، قم أولاً بتعريف حقل متجه لتخزين المتجهات الثنائية عند إنشاء مجموعة. تتضمن هذه العملية:</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">إضافة حقل متجه<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لاستخدام المتجهات الثنائية في ميلفوس، قم أولاً بتعريف حقل متجه لتخزين المتجهات الثنائية عند إنشاء مجموعة. تتضمن هذه العملية:</p>
 <ol>
 <li><p>تعيين <code translate="no">datatype</code> إلى نوع بيانات المتجه الثنائي المدعوم، أي <code translate="no">BINARY_VECTOR</code>.</p></li>
 <li><p>تحديد أبعاد المتجه باستخدام المعلمة <code translate="no">dim</code>. لاحظ أنه يجب أن يكون <code translate="no">dim</code> من مضاعفات العدد 8 حيث يجب تحويل المتجهات الثنائية إلى مصفوفة بايت عند الإدراج. سيتم تعبئة كل 8 قيم منطقية (0 أو 1) في بايت واحد. على سبيل المثال، إذا كان <code translate="no">dim=128</code> ، يلزم وجود مصفوفة 16 بايت للإدراج.</p></li>
@@ -196,7 +211,22 @@ schema.WithField(entity.NewField().
 
 <button class="copy-code-btn"></button></code></pre>
 <p>في هذا المثال، تمت إضافة حقل متجه باسم <code translate="no">binary_vector</code> لتخزين المتجهات الثنائية. نوع بيانات هذا الحقل هو <code translate="no">BINARY_VECTOR</code> ، ببعد 128.</p>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">تعيين بارامترات الفهرس لحقل المتجه</h3><p>لتسريع عمليات البحث، يجب إنشاء فهرس لحقل المتجه الثنائي. يمكن للفهرسة تحسين كفاءة استرجاع البيانات المتجهة واسعة النطاق بشكل كبير.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">تعيين بارامترات الفهرس لحقل المتجه<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لتسريع عمليات البحث، يجب إنشاء فهرس لحقل المتجه الثنائي. يمكن للفهرسة تحسين كفاءة استرجاع البيانات المتجهة واسعة النطاق بشكل كبير.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -244,7 +274,22 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <p>في المثال أعلاه، يتم إنشاء فهرس باسم <code translate="no">binary_vector_index</code> للحقل <code translate="no">binary_vector</code> ، باستخدام نوع الفهرس <code translate="no">AUTOINDEX</code>. تم تعيين <code translate="no">metric_type</code> على <code translate="no">HAMMING</code> ، مما يشير إلى استخدام مسافة هامينج لقياس التشابه.</p>
 <p>يوفر Milvus أنواعًا مختلفة من الفهارس للحصول على تجربة بحث متجهية أفضل. AUTOINDEX هو نوع فهرس خاص مصمم لتسهيل منحنى تعلم البحث المتجه. هناك الكثير من أنواع الفهارس المتاحة لتختار من بينها. لمزيد من التفاصيل، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a>.</p>
 <p>بالإضافة إلى ذلك، يدعم ميلفوس مقاييس تشابه أخرى للمتجهات الثنائية. لمزيد من المعلومات، راجع <a href="/docs/ar/metric.md">أنواع المقاييس</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">إنشاء مجموعة</h3><p>بمجرد اكتمال إعدادات المتجه الثنائي والفهرس، قم بإنشاء مجموعة تحتوي على متجهات ثنائية. يستخدم المثال أدناه طريقة <code translate="no">create_collection</code> لإنشاء مجموعة باسم <code translate="no">my_collection</code>.</p>
+<h3 id="Create-collection" class="common-anchor-header">إنشاء مجموعة<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بمجرد اكتمال إعدادات المتجه الثنائي والفهرس، قم بإنشاء مجموعة تحتوي على متجهات ثنائية. يستخدم المثال أدناه طريقة <code translate="no">create_collection</code> لإنشاء مجموعة باسم <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -297,7 +342,22 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">إدراج البيانات</h3><p>بعد إنشاء المجموعة، استخدم الطريقة <code translate="no">insert</code> لإضافة بيانات تحتوي على متجهات ثنائية. لاحظ أنه يجب توفير المتجهات الثنائية على شكل مصفوفة بايت، حيث يمثل كل بايت 8 قيم منطقية.</p>
+<h3 id="Insert-data" class="common-anchor-header">إدراج البيانات<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد إنشاء المجموعة، استخدم الطريقة <code translate="no">insert</code> لإضافة بيانات تحتوي على متجهات ثنائية. لاحظ أنه يجب توفير المتجهات الثنائية على شكل مصفوفة بايت، حيث يمثل كل بايت 8 قيم منطقية.</p>
 <p>على سبيل المثال، بالنسبة إلى متجه ثنائي مكون من 128 بُعدًا، يلزم توفير مصفوفة من 16 بايت (بما أن 128 بت ÷ 8 بت/بايت = 16 بايت). فيما يلي مثال على شيفرة لإدخال البيانات:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -392,8 +452,23 @@ client.<span class="hljs-title function_">insert</span>({
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">إجراء بحث التشابه</h3><p>البحث عن التشابه هو أحد الميزات الأساسية في ميلفوس، مما يسمح لك بالعثور بسرعة على البيانات الأكثر تشابهًا مع متجه الاستعلام بناءً على المسافة بين المتجهات. لإجراء بحث تشابه باستخدام متجهات ثنائية، قم بإعداد متجه الاستعلام ومعلمات البحث، ثم قم باستدعاء الطريقة <code translate="no">search</code>.</p>
-<p>أثناء عمليات البحث، يجب أيضًا توفير المتجهات الثنائية في شكل مصفوفة بايت. تأكد من أن أبعاد متجه الاستعلام تتطابق مع البعد المحدد عند تحديد <code translate="no">dim</code> وأن كل 8 قيم منطقية يتم تحويلها إلى بايت واحد.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">إجراء بحث التشابه<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>البحث عن التشابه هو أحد الميزات الأساسية في ميلفوس، مما يسمح لك بالعثور بسرعة على البيانات الأكثر تشابهًا مع متجه الاستعلام بناءً على المسافة بين المتجهات. لإجراء بحث تشابه باستخدام متجهات ثنائية، قم بإعداد متجه الاستعلام ومعلمات البحث، ثم قم باستدعاء الطريقة <code translate="no">search</code>.</p>
+<p>أثناء عمليات البحث، يجب أيضًا توفير المتجهات الثنائية في شكل مصفوفة بايت. تأكد من أن بُعد متجه الاستعلام يطابق البعد المحدد عند تحديد <code translate="no">dim</code> وأن كل 8 قيم منطقية يتم تحويلها إلى بايت واحد.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {

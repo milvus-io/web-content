@@ -51,10 +51,40 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Antes de configurar Milvus con la función TEI, necesita tener un servicio TEI en ejecución. Milvus soporta dos enfoques para el despliegue TEI:</p>
-<h3 id="Standard-deployment-external" class="common-anchor-header">Despliegue estándar (externo)</h3><p>Puede desplegar TEI como un servicio independiente utilizando los métodos oficiales de Hugging Face. Este enfoque le da la máxima flexibilidad y control sobre su servicio TEI.</p>
+<h3 id="Standard-deployment-external" class="common-anchor-header">Despliegue estándar (externo)<button data-href="#Standard-deployment-external" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Puede desplegar TEI como un servicio independiente utilizando los métodos oficiales de Hugging Face. Este enfoque le da la máxima flexibilidad y control sobre su servicio TEI.</p>
 <p>Para obtener instrucciones detalladas sobre el despliegue de TEI utilizando Docker u otros métodos, consulte la <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour#deploy">documentación oficial de Hugging Face Text Embeddings Inference</a>.</p>
 <p>Después del despliegue, tome nota de su punto final del servicio TEI (por ejemplo, <code translate="no">http://localhost:8080</code>) ya que lo necesitará cuando <a href="/docs/es/hugging-face-tei.md#Use-embedding-function-">utilice la función TEI en Milvus</a>.</p>
-<h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Despliegue de Milvus Helm Chart (integrado)</h3><p>Para entornos Kubernetes, Milvus ofrece una opción de despliegue integrado a través de su carta Helm. Esto simplifica el proceso desplegando y configurando TEI junto con Milvus.</p>
+<h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Despliegue de Milvus Helm Chart (integrado)<button data-href="#Milvus-Helm-Chart-deployment-integrated" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para entornos Kubernetes, Milvus ofrece una opción de despliegue integrado a través de su carta Helm. Esto simplifica el proceso desplegando y configurando TEI junto con Milvus.</p>
 <p>Para habilitar TEI en su despliegue Milvus Helm:</p>
 <ol>
 <li><p>Configure <strong>values.yaml</strong> para habilitar TEI:</p>
@@ -140,7 +170,22 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
         ></path>
       </svg>
     </button></h2><p>Una vez configurado el servicio TEI, siga estos pasos para definir y utilizar las funciones de incrustación.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Paso 1: Definir campos de esquema</h3><p>Para utilizar una función de incrustación, cree una colección con un esquema específico. Este esquema debe incluir al menos tres campos necesarios:</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Paso 1: Definir campos de esquema<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para utilizar una función de incrustación, cree una colección con un esquema específico. Este esquema debe incluir al menos tres campos necesarios:</p>
 <ul>
 <li><p>El campo primario que identifica de forma única a cada entidad de una colección.</p></li>
 <li><p>Un campo escalar que almacena los datos brutos que se van a incrustar.</p></li>
@@ -161,7 +206,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to exactly match the TEI model&#x27;s output dimension</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Paso 2: Añadir la función de incrustación al esquema</h3><p>El módulo Function de Milvus convierte automáticamente los datos brutos almacenados en un campo escalar en incrustaciones y los almacena en el campo vectorial definido explícitamente.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Paso 2: Añadir la función de incrustación al esquema<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>El módulo Function de Milvus convierte automáticamente los datos brutos almacenados en un campo escalar en incrustaciones y los almacena en el campo vectorial definido explícitamente.</p>
 <p>El ejemplo siguiente añade un módulo Function (<code translate="no">tei_func</code>) que convierte el campo escalar <code translate="no">&quot;document&quot;</code> en incrustaciones, almacenando los vectores resultantes en el campo vectorial <code translate="no">&quot;dense_vector&quot;</code> definido anteriormente.</p>
 <p>Una vez que haya definido su función de incrustación, añádala a su esquema de colección. Esto indica a Milvus que utilice la función de incrustación especificada para procesar y almacenar las incrustaciones de sus datos de texto.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define TEI embedding function</span>

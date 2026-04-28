@@ -26,7 +26,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus prend en charge des opérateurs avancés pour l'interrogation et le filtrage des champs JSON, ce qui les rend parfaits pour la gestion de données complexes et structurées. Ces opérateurs permettent d'effectuer des requêtes très efficaces dans les documents JSON, ce qui permet d'extraire des entités en fonction d'éléments, de valeurs ou de conditions spécifiques dans les champs JSON. Cette section vous guidera dans l'utilisation des opérateurs spécifiques à JSON dans Milvus, en fournissant des exemples pratiques pour illustrer leur fonctionnalité.</p>
+    </button></h1><p>Milvus prend en charge des opérateurs avancés pour l'interrogation et le filtrage des champs JSON, ce qui les rend parfaits pour la gestion de données complexes et structurées. Ces opérateurs permettent d'effectuer des requêtes très efficaces dans les documents JSON et d'extraire des entités en fonction d'éléments, de valeurs ou de conditions spécifiques dans les champs JSON. Cette section vous guidera dans l'utilisation des opérateurs spécifiques à JSON dans Milvus, en fournissant des exemples pratiques pour illustrer leur fonctionnalité.</p>
 <div class="alert note">
 <p>Les champs JSON ne peuvent pas traiter les structures complexes imbriquées et traitent toutes les structures imbriquées comme des chaînes simples. Par conséquent, lorsque vous travaillez avec des champs JSON, il est conseillé d'éviter une imbrication trop profonde et de veiller à ce que vos structures de données soient aussi plates que possible pour des performances optimales.</p>
 </div>
@@ -91,7 +91,7 @@ summary: >-
       </svg>
     </button></h2><p>L'opérateur <code translate="no">json_contains_all</code> garantit que tous les éléments d'une expression JSON spécifiée sont présents dans le champ cible. Il est particulièrement utile lorsque vous devez faire correspondre plusieurs valeurs dans un tableau JSON.</p>
 <p><strong>Exemple</strong></p>
-<p>Si vous voulez trouver tous les produits qui ont les balises <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code>, et <code translate="no">&quot;new&quot;</code>, vous pouvez utiliser l'opérateur <code translate="no">json_contains_all</code>.</p>
+<p>Si vous voulez trouver tous les produits qui ont les étiquettes <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code>, et <code translate="no">&quot;new&quot;</code>, vous pouvez utiliser l'opérateur <code translate="no">json_contains_all</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;, &quot;discount&quot;]}</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_contains_all(product[&quot;tags&quot;], [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

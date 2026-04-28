@@ -430,7 +430,7 @@ res = client.query(
 )
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus no admite comodines en sus condiciones de filtrado. Sin embargo, puede utilizar el operador <code translate="no">like</code> para conseguir un efecto similar, como se indica a continuación:</p>
+<p>Milvus no admite comodines en sus condiciones de filtrado. Sin embargo, puede utilizar el operador <code translate="no">like</code> para conseguir un efecto similar como se indica a continuación:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;user like &quot;ki%&quot; AND user like &quot;%y&quot;&#x27;</span>,
@@ -532,7 +532,7 @@ res = client.query(
 )
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus, como base de datos especializada en vectores, utiliza tipos de índice para optimizar las búsquedas de vectores. Normalmente, da prioridad a la búsqueda aproximada del vecino más cercano (kNN) para datos vectoriales de alta dimensión. Aunque la búsqueda kNN de fuerza bruta con el tipo de índice FLAT ofrece resultados precisos, consume mucho tiempo y recursos. Por el contrario, la búsqueda RNA con AUTOINDEX u otros tipos de índice equilibra velocidad y precisión, ofreciendo un rendimiento significativamente más rápido y más eficiente en recursos que kNN.</p>
+<p>Milvus, como base de datos especializada en vectores, utiliza tipos de índice para optimizar las búsquedas de vectores. Normalmente, da prioridad a la búsqueda aproximada del vecino más cercano (kNN) para datos vectoriales de alta dimensión. Aunque la búsqueda kNN de fuerza bruta con el tipo de índice FLAT ofrece resultados precisos, consume mucho tiempo y recursos. Por el contrario, la búsqueda RNA con AUTOINDEX u otros tipos de índice equilibra la velocidad y la precisión, ofreciendo un rendimiento significativamente más rápido y más eficiente en recursos que kNN.</p>
 <p>Una equivalencia similar a la consulta vectorial anterior en Mlivus es la siguiente:</p>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,

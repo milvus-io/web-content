@@ -23,14 +23,44 @@ summary: >-
       </svg>
     </button></h1><p>По сравнению с балансировщиком нагрузки уровня 4, балансировщик нагрузки уровня 7 предлагает интеллектуальную балансировку нагрузки и возможности кэширования и является отличным выбором для облачных нативных сервисов.</p>
 <p>В этом руководстве вы узнаете, как настроить балансировщик нагрузки уровня 7 для кластера Milvus, уже работающего за балансировщиком нагрузки уровня 4.</p>
-<h3 id="Before-your-start" class="common-anchor-header">Перед началом работы</h3><ul>
+<h3 id="Before-your-start" class="common-anchor-header">Перед началом работы<button data-href="#Before-your-start" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>В вашей учетной записи GCP уже существует проект.</p>
 <p>Чтобы создать проект, обратитесь к разделу <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Создание и управление проектами</a>. Название проекта, используемого в этом руководстве, - <strong>milvus-testing-nonprod</strong>.</p></li>
 <li><p>Вы локально установили <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> и <a href="https://helm.sh/docs/intro/install/">Helm</a> или решили использовать браузерную <a href="https://cloud.google.com/shell">оболочку Cloud Shell</a>.</p></li>
 <li><p>Вы <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">инициализировали gcloud CLI</a> с помощью учетных данных учетной записи GCP.</p></li>
 <li><p>Вы <a href="/docs/ru/gcp.md">развернули кластер Milvus за балансировщиком нагрузки Layer-4 на GCP</a>.</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Настройка конфигураций Milvus</h3><p>Это руководство предполагает, что вы уже <a href="/docs/ru/gcp.md">развернули кластер Milvus за балансировщиком нагрузки Layer-4 на GCP</a>.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Настройка конфигураций Milvus<button data-href="#Tweak-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Это руководство предполагает, что вы уже <a href="/docs/ru/gcp.md">развернули кластер Milvus за балансировщиком нагрузки Layer-4 на GCP</a>.</p>
 <p>Перед настройкой балансировщика нагрузки Layer-7 для этого кластера Milvus выполните следующую команду, чтобы удалить балансировщик нагрузки Layer-4.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
@@ -44,7 +74,22 @@ summary: >-
       security:
         tlsMode: 1
 </span><button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">Настройка конечной точки проверки работоспособности</h3><p>Чтобы обеспечить доступность сервиса, балансировка нагрузки Layer-7 на GCP требует проверки состояния здоровья внутреннего сервиса. Поэтому нам нужно создать BackendConfig, чтобы обернуть конечную точку проверки состояния здоровья, и связать BackendConfig с сервисом Milvus с помощью аннотаций.</p>
+<h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">Настройка конечной точки проверки работоспособности<button data-href="#Set-up-a-health-check-endpoint" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы обеспечить доступность сервиса, балансировка нагрузки Layer-7 на GCP требует проверки состояния здоровья внутреннего сервиса. Поэтому нам нужно создать BackendConfig, чтобы обернуть конечную точку проверки состояния здоровья, и связать BackendConfig с сервисом Milvus с помощью аннотаций.</p>
 <p>Следующий фрагмент представляет собой настройки BackendConfig. Сохраните его как <code translate="no">backendconfig.yaml</code> для последующего использования.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">cloud.google.com/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">BackendConfig</span>
@@ -76,7 +121,22 @@ summary: >-
 <p>В ней предлагается создать группу конечных точек сети (NEG) после создания ингресса. Когда NEG используются с GKE Ingress, контроллер Ingress облегчает создание всех аспектов балансировщика нагрузки. Сюда входит создание виртуального IP-адреса, правил переадресации, проверок работоспособности, правил брандмауэра и т. д. Подробности см. в <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing">документах Google Cloud</a>.</p></li>
 </ul>
 </div>
-<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Подготовьте сертификаты TLS</h3><p>Для работы TLS требуются сертификаты. <strong>Существует два способа создания сертификатов: самоуправляемый и управляемый Google.</strong></p>
+<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Подготовьте сертификаты TLS<button data-href="#Prepare-TLS-certificates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Для работы TLS требуются сертификаты. <strong>Существует два способа создания сертификатов: самоуправляемый и управляемый Google.</strong></p>
 <p>В этом руководстве используется <strong>my-release.milvus.io</strong> в качестве доменного имени для доступа к нашему сервису Milvus.</p>
 <h4 id="Create-self-managed-certificates" class="common-anchor-header">Создание самоуправляемых сертификатов</h4><p>Выполните следующие команды для создания сертификата.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Generates a tls.key.</span>
@@ -116,7 +176,22 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
     status: Provisioning
 <button class="copy-code-btn"></button></code></pre>
 <p>Как только <strong>certificateStatus</strong> станет <strong>активным</strong>, вы будете готовы к настройке балансировщика нагрузки.</p>
-<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Создание ингресса для генерации балансировщика нагрузки уровня 7</h3><p>Создайте YAML-файл с одним из следующих фрагментов.</p>
+<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Создание ингресса для генерации балансировщика нагрузки уровня 7<button data-href="#Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Создайте YAML-файл с одним из следующих фрагментов.</p>
 <ul>
 <li><p>Использование самоуправляемых сертификатов</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>

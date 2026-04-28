@@ -62,7 +62,7 @@ title: Eseguire Milvus Lite a livello locale
 <li>Ubuntu &gt;= 20.04 (x86_64 e arm64)</li>
 <li>MacOS &gt;= 11.0 (Apple Silicon M1/M2 e x86_64)</li>
 </ul>
-<p>Si noti che Milvus Lite è adatto solo per casi di ricerca vettoriale su piccola scala. Per i casi di utilizzo su larga scala, si consiglia di utilizzare <a href="https://milvus.io/docs/install-overview.md#Milvus-Standalone">Milvus Standalone</a> o <a href="https://milvus.io/docs/install-overview.md#Milvus-Distributed">Milvus Distributed</a>. Si può anche considerare Milvus completamente gestito su <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
+<p>Si noti che Milvus Lite è adatto solo per casi di ricerca vettoriale su piccola scala. Per i casi di utilizzo su larga scala, si consiglia di utilizzare <a href="https://milvus.io/docs/install-overview.md#Milvus-Standalone">Milvus Standalone</a> o <a href="https://milvus.io/docs/install-overview.md#Milvus-Distributed">Milvus Distributed</a>. Si può anche prendere in considerazione Milvus completamente gestito su <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
 <h2 id="Set-up-Milvus-Lite" class="common-anchor-header">Configurazione di Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -415,7 +415,7 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus Lite supporta solo il tipo di indice <a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>. Utilizza il tipo FLAT indipendentemente dal tipo di indice specificato nella raccolta.</p>
+    </button></h3><p>Milvus Lite supporta solo il tipo di indice <a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>. Utilizza il tipo FLAT indipendentemente dal tipo di indice specificato nella collezione.</p>
 <h3 id="Search-Features" class="common-anchor-header">Caratteristiche della ricerca<button data-href="#Search-Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

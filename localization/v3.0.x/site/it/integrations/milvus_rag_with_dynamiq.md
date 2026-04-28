@@ -3,10 +3,10 @@ id: milvus_rag_with_dynamiq.md
 summary: >-
   In questo tutorial, esploreremo come utilizzare senza problemi Dynamiq con
   Milvus, il database vettoriale ad alte prestazioni costruito appositamente per
-  i flussi di lavoro RAG. Milvus eccelle nell'archiviazione, nell'indicizzazione
-  e nel recupero efficiente di embeddings vettoriali, rendendolo un componente
-  indispensabile per i sistemi di intelligenza artificiale che richiedono un
-  accesso rapido e preciso ai dati contestuali.
+  i flussi di lavoro RAG. Milvus eccelle per l'archiviazione, l'indicizzazione e
+  il recupero efficiente delle incorporazioni vettoriali, rendendolo un
+  componente indispensabile per i sistemi di intelligenza artificiale che
+  richiedono un accesso rapido e preciso ai dati contestuali.
 title: Come iniziare con Dynamiq e Milvus
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_rag_with_dynamiq.ipynb" target="_parent">
@@ -282,7 +282,7 @@ milvus_writer_added = rag_wf.flow.add_nodes(vector_store)  <span class="hljs-com
 </ul>
 <p><strong>Zilliz Cloud (Servizio gestito)</strong></p>
 <ul>
-<li>Per un'esperienza Milvus completamente gestita e basata sul cloud, utilizzare <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</li>
+<li>Per un'esperienza Milvus completamente gestita e basata sul cloud, utilizzate <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</li>
 <li>Impostare <code translate="no">uri</code> e <code translate="no">token</code> in base all'<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">endpoint pubblico e alla chiave API</a> forniti nella console di Zilliz Cloud.</li>
 </ul></li>
 </ul>

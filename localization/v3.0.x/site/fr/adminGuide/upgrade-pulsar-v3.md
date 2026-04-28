@@ -2,8 +2,8 @@
 id: upgrade-pulsar-v3.md
 related_key: upgrade pulsar v3
 summary: >-
-  Découvrez comment mettre à niveau Pulsar de V2 à V3 dans Milvus afin
-  d'utiliser la dernière version de Milvus v2.5.x.
+  Apprenez à mettre à jour Pulsar de V2 à V3 dans Milvus afin d'utiliser la
+  dernière version de Milvus v2.5.x.
 title: Faire passer le Pulsar de Milvus de V2 à V3
 ---
 <h1 id="Upgrading-Pulsar-​" class="common-anchor-header">Mise à jour de Pulsar<button data-href="#Upgrading-Pulsar-​" class="anchor-icon" translate="no">
@@ -73,23 +73,38 @@ title: Faire passer le Pulsar de Milvus de V2 à V3
         ></path>
       </svg>
     </button></h2><p>Cette section présente les procédures détaillées de mise à niveau de Pulsar de V2 à V3 dans Milvus.</p>
-<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">Persistance des données non consommées dans Pulsar</h3><p>Dans cette étape, vous devez vous assurer que les données existantes dans Pulsar ont été persistées dans le service de stockage d'objets. Deux approches sont disponibles et vous pouvez choisir celle qui convient à vos besoins.</p>
+<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">Persistance des données non consommées dans Pulsar<button data-href="#Persist-data-not-consumed-in-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dans cette étape, vous devez vous assurer que les données existantes dans Pulsar ont été persistées dans le service de stockage d'objets. Deux approches sont disponibles et vous pouvez choisir celle qui convient à vos besoins.</p>
 <h4 id="Approach-1-Using-Attu" class="common-anchor-header">Approche 1 : Utilisation d'Attu</h4><p>Si vous n'avez qu'un petit nombre de collections dans votre déploiement Milvus fonctionnel avec peu de segments, vous pouvez utiliser Attu pour persister les données vers le service de stockage d'objets.</p>
 <ol>
 <li><p>Sélectionnez chaque collection dans toutes vos bases de données, accédez au panneau <code translate="no">Segments</code> et cliquez sur le bouton <code translate="no">Flush</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
    </span> <span class="img-wrapper"> <span>Panneau de segment d'une collection</span> </span></p></li>
 <li><p>Puis, dans la fenêtre contextuelle, cliquez à nouveau sur <code translate="no">Flush</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
    </span> <span class="img-wrapper"> <span>Invite de vidange des données dans Attu</span> </span></p></li>
 <li><p>Attendez ensuite que les états de segmentation persistants de toutes les collections soient <code translate="no">Flushed</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/view-data-peristent-process.png" alt="View data flush status in Attu" class="doc-image" id="view-data-flush-status-in-attu" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/view-data-peristent-process.png" alt="View data flush status in Attu" class="doc-image" id="view-data-flush-status-in-attu" />
    </span> <span class="img-wrapper"> <span>Voir l'état de vidange des données dans Attu</span> </span></p></li>
 </ol>
 <h4 id="Approach-2-Using-management-API" class="common-anchor-header">Approche 2 : Utilisation de l'API de gestion</h4><ol>
@@ -123,7 +138,7 @@ title: Faire passer le Pulsar de Milvus de V2 à V3
 }<span class="hljs-string">​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Check All segments flushed.</p>
+<li><p>Vérifier que tous les segments ont été vidés.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> flushing_segments.json|  curl -X GET 127.0.0.1:9091/api/v1/persist/state -d @/dev/stdin ​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -140,7 +155,22 @@ title: Faire passer le Pulsar de Milvus de V2 à V3
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Arrêter Milvus et supprimer Pulsar V2</h3><p>Dans cette étape, vous devez arrêter le pod Milvus et supprimer le déploiement de Pulsar V2. Deux sections distinctes sont disponibles :</p>
+<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Arrêter Milvus et supprimer Pulsar V2<button data-href="#Stop-Milvus-and-delete-Pulsar-V2" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dans cette étape, vous devez arrêter le pod Milvus et supprimer le déploiement de Pulsar V2. Deux sections distinctes sont disponibles :</p>
 <ul>
 <li><p>Pour les utilisateurs de Milvus Helm</p>
 <p>Si vous avez installé Milvus à l'aide de la carte Milvus Helm, allez à <a href="#Delete-Pulsar-V2-using-Helm">Supprimer Pulsar v2 à l'aide de Helm</a>.</p></li>
@@ -276,7 +306,7 @@ kubectl -n default get milvus my-release​
 kubectl -n default delete milvus my-release --<span class="hljs-built_in">wait</span>=<span class="hljs-literal">true</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Résultat : Notez que cela peut prendre quelques minutes pour que Milvus s'arrête de manière gracieuse et que l'opérateur supprime les volumes de pulsar.</p>
+<p>Résultat : Notez que cela peut prendre quelques minutes pour que milvus s'arrête de manière gracieuse et que l'opérateur supprime les volumes de pulsar.</p>
 <pre><code translate="no" class="language-bash">milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted​
 NAME         MODE      STATUS     UPDATED   AGE​
 my-release   cluster   Deleting   True      41m​
@@ -293,7 +323,22 @@ milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">Démarrer Pulsar V3 et Milvus</h3><p>Dans cette étape, vous devez démarrer les pods Pulsar V3 et Milvus. Deux sections distinctes sont disponibles :</p>
+<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">Démarrer Pulsar V3 et Milvus<button data-href="#Start-Pulsar-V3-and-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dans cette étape, vous devez démarrer les pods Pulsar V3 et Milvus. Deux sections distinctes sont disponibles :</p>
 <ul>
 <li><p>Pour l'utilisateur Helm</p>
 <p>Si vous avez installé Milvus à l'aide de la carte Milvus Helm, passez à <a href="#For-Helm-User">For Helm User</a>.</p></li>

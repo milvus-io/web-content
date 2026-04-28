@@ -295,7 +295,7 @@ df
     <tr>
       <th>0</th>
       <td>什麼是硬體需求規格？</td>
-      <td>[Hardware Requirements/n（硬體需求規格）：下列規格...</td>
+      <td>[Hardware Requirements/n（硬體需求規格）以下為硬體需求規格...</td>
       <td>硬體需求規格(Hardware Requirements Specification)</td>
       <td>如果您想建立 Milvus 並從來源執行，您需要...</td>
     </tr>

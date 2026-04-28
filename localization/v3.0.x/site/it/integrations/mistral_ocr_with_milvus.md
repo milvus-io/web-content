@@ -192,7 +192,7 @@ COLLECTION_NAME = <span class="hljs-string">&quot;document_ocr&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ora creiamo una raccolta Milvus per memorizzare i dati dei nostri documenti. La raccolta avrà i seguenti campi:</p>
+    </button></h2><p>Ora creiamo una collezione Milvus per memorizzare i dati dei nostri documenti. La raccolta avrà i seguenti campi:</p>
 <ul>
 <li><code translate="no">id</code>: Chiave primaria (generata automaticamente)</li>
 <li><code translate="no">url</code>: URL di origine del documento</li>
@@ -658,4 +658,4 @@ Content: | Model | Answer |
 <li>Memorizzare sia il testo che i vettori in Milvus</li>
 <li>Eseguire ricerche semantiche su tutti i documenti elaborati</li>
 </ol>
-<p>Questo approccio permette di ottenere potenti capacità di comprensione dei documenti che vanno oltre la semplice corrispondenza delle parole chiave, consentendo agli utenti di trovare informazioni basate sul significato piuttosto che su corrispondenze testuali esatte.</p>
+<p>Questo approccio consente di ottenere potenti capacità di comprensione dei documenti che vanno oltre la semplice corrispondenza delle parole chiave, permettendo agli utenti di trovare informazioni basate sul significato piuttosto che su corrispondenze testuali esatte.</p>

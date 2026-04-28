@@ -377,7 +377,7 @@ beta: Milvus 2.6.2+
 <p>如果构建或加载过程失败，可以通过设置<code translate="no">common.enabledJSONShredding=false</code> 快速禁用该功能。要清除任何剩余任务，请使用<a href="/docs/zh/birdwatcher_usage_guides.md">Birdwatcher</a> 中的<code translate="no">remove stats-task &lt;task_id&gt;</code> 命令。如果查询失败，可设置<code translate="no">common.usingjsonShreddingForQuery=false</code> 恢复到原始查询路径，绕过粉碎数据。</p></li>
 <li><p><strong>如何在 JSON 切碎和 JSON 索引之间进行选择？</strong></p>
 <ul>
-<li><p><strong>JSON 切碎</strong>非常适合文档中频繁出现的键，尤其是复杂的 JSON 结构。它结合了列式存储和反转索引的优点，非常适合查询许多不同键的重读取场景。不过，对于非常小的 JSON 文档，不建议使用这种方法，因为性能提升微乎其微。键值占 JSON 文档总大小的比例越小，粉碎带来的性能优化效果就越好。</p></li>
+<li><p>JSON<strong>切碎</strong>非常适合文档中频繁出现的键，尤其是复杂的 JSON 结构。它结合了列式存储和反转索引的优点，非常适合查询许多不同键的重读取场景。不过，对于非常小的 JSON 文档，不建议使用这种方法，因为性能提升微乎其微。键值占 JSON 文档总大小的比例越小，粉碎带来的性能优化效果就越好。</p></li>
 <li><p><strong>JSON 索引</strong>更适合对基于特定键值的查询进行有针对性的优化，而且存储开销更低。它适用于较简单的 JSON 结构。请注意，JSON 切碎不包括对数组内部键的查询，因此需要 JSON 索引来加速这些查询。</p></li>
 </ul>
 <p>有关详情，请参阅<a href="/docs/zh/json-field-overview.md#Next-Accelerate-JSON-queries">JSON 字段概述</a>。</p></li>

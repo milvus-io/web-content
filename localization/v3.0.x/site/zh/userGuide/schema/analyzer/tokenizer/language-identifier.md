@@ -3,7 +3,7 @@ id: language-identifier.md
 title: 语言识别器Compatible with Milvus v2.5.15+
 summary: >-
   语言识别器（language_identifier）是一个专门的标记器，旨在通过自动语言分析过程来增强 Milvus
-  的文本搜索功能。它的主要功能是检测文本字段的语言，然后动态应用最适合该语言的预配置分析器。这对于处理多种语言的应用程序来说尤为重要，因为它消除了根据每次输入手动分配语言的需要。
+  的文本搜索功能。它的主要功能是检测文本字段的语言，然后动态应用最适合该语言的预配置分析器。这对于处理多种语言的应用程序来说尤为重要，因为它消除了按输入手动分配语言的需要。
 beta: Milvus v2.5.15+
 ---
 <h1 id="Language-Identifier" class="common-anchor-header">语言识别器<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.5.15+</span><button data-href="#Language-Identifier" class="anchor-icon" translate="no">
@@ -41,7 +41,7 @@ beta: Milvus v2.5.15+
     </button></h2><p><code translate="no">language_identifier</code> 执行一系列步骤来处理文本字符串，这个工作流程对于用户了解如何正确配置至关重要。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
    </span> <span class="img-wrapper"> <span>语言检测工作流程</span> </span></p>
 <ol>
 <li><p><strong>输入：</strong>工作流程以文本字符串作为输入开始。</p></li>
@@ -97,7 +97,7 @@ beta: Milvus v2.5.15+
      <td><p>精度比速度更重要的应用</p></td>
    </tr>
 </table>
-<p>一个重要的考虑因素是引擎的命名约定。虽然两个引擎都以英文返回语言名称，但它们对某些语言使用不同的术语（例如，<code translate="no">whatlang</code> 返回<code translate="no">Mandarin</code> ，而<code translate="no">lingua</code> 返回<code translate="no">Chinese</code> ）。分析仪的关键字必须与所选检测引擎返回的名称完全匹配。</p>
+<p>一个重要的考虑因素是引擎的命名约定。虽然两个引擎都以英文返回语言名称，但它们对某些语言使用了不同的术语（例如，<code translate="no">whatlang</code> 返回<code translate="no">Mandarin</code> ，而<code translate="no">lingua</code> 返回<code translate="no">Chinese</code> ）。分析仪的关键字必须与所选检测引擎返回的名称完全匹配。</p>
 <h2 id="Configuration" class="common-anchor-header">配置<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -196,7 +196,7 @@ beta: Milvus v2.5.15+
 <p><strong>可选组件：</strong></p>
 <ul>
 <li><p><code translate="no">identifier</code> - 指定要使用的语言检测引擎（<code translate="no">whatlang</code> 或<code translate="no">lingua</code> ）。如果未指定，默认为<code translate="no">whatlang</code> </p></li>
-<li><p><code translate="no">mapping</code> - 为您的分析器创建自定义别名，允许您使用描述性名称，而不是检测引擎的精确输出格式。</p></li>
+<li><p><code translate="no">mapping</code> - 为您的分析器创建自定义别名，允许您使用描述性名称，而不是检测引擎的准确输出格式。</p></li>
 </ul>
 <p>标记器的工作原理是首先检测输入文本的语言，然后从配置中选择合适的分析器。如果检测失败或没有匹配的分析器，它会自动返回到<code translate="no">default</code> 分析器。</p>
 <h4 id="Recommended-Direct-name-matching" class="common-anchor-header">推荐使用：直接名称匹配</h4><p>分析器名称应与所选语言检测引擎的输出完全匹配。这种方法比较简单，可以避免潜在的混淆。</p>
@@ -366,5 +366,5 @@ result_fr = client.run_analyzer(<span class="hljs-string">&quot;Café français 
     </button></h2><ul>
 <li><p><strong>每个字段使用一种语言：</strong>它将字段作为单一、同质的文本单元进行操作符。其设计目的是处理不同数据记录中的不同语言，例如一条记录包含英语句子，而另一条记录包含法语句子。</p></li>
 <li><p><strong>无混合语言字符串：</strong>它<strong>不能</strong>处理包含多种语言文本的单一字符串。例如，包含英语句子和日语短语的<code translate="no">VARCHAR</code> 字段将作为单一语言处理。</p></li>
-<li><p><strong>主导语言处理：</strong>在混合语言场景中，检测引擎可能会识别主要语言，并将相应的分析器应用于整个文本。这将导致嵌入的外文文本标记化效果不佳或没有标记化。</p></li>
+<li><p><strong>主导语言处理：</strong>在混合语言情况下，检测引擎可能会识别主要语言，并将相应的分析器应用于整个文本。这将导致嵌入的外文文本标记化效果不佳或没有标记化。</p></li>
 </ul>

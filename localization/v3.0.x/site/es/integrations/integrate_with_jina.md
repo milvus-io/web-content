@@ -71,7 +71,7 @@ Las incrustaciones de última generación de Jina AI ofrecen un rendimiento de p
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Las incrustaciones Jina se han integrado en la biblioteca de modelos PyMilvus. A continuación, mostraremos ejemplos de código para mostrar cómo utilizar las incrustaciones de Jina en acción.</p>
+    </button></h2><p>Las incrustaciones Jina se han integrado en la biblioteca de modelos PyMilvus. Ahora, mostraremos ejemplos de código para mostrar cómo utilizar las incrustaciones de Jina en acción.</p>
 <p>Antes de empezar, necesitamos instalar la librería de modelos para PyMilvus.</p>
 <pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite
 $ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
@@ -94,7 +94,7 @@ $ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>El modelo de incrustación principal de Jina AI destaca en la comprensión de texto detallado, por lo que es ideal para la búsqueda semántica, la clasificación de contenidos, el análisis avanzado de sentimientos, el resumen de texto y los sistemas de recomendación personalizados.</p>
+    </button></h2><p>El modelo de incrustación principal de Jina AI destaca en la comprensión de texto detallado, por lo que resulta ideal para la búsqueda semántica, la clasificación de contenidos, el análisis avanzado de sentimientos, el resumen de textos y los sistemas de recomendación personalizados.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>

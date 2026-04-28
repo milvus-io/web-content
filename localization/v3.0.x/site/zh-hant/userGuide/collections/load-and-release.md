@@ -291,7 +291,7 @@ Not support yet
 <button class="copy-code-btn"></button></code></pre>
 <p>如果您選擇載入特定欄位，值得注意的是，只有包含在<code translate="no">load_fields</code> 中的欄位才能在搜尋和查詢中作為篩選器和輸出欄位使用。您應該始終在<code translate="no">load_fields</code> 中包含主要欄位和至少一個向量欄位的名稱。</p>
 <p>您也可以使用<code translate="no">skip_load_dynamic_field</code> 來決定是否載入動態欄位。動態欄位是一個保留的 JSON 欄位，名為<strong>$meta</strong>，並將所有非模式定義的欄位及其值儲存在鍵值對中。載入動態欄位時，欄位中的所有鍵都會載入，並可用於篩選和輸出。如果動態欄位中的所有鍵都不參與元資料篩選和輸出，請將<code translate="no">skip_load_dynamic_field</code> 設為<code translate="no">True</code> 。</p>
-<p>若要在集合載入後載入更多欄位，需要先釋放集合，以避免因索引變更而提示可能的錯誤。</p>
+<p>若要在集合載入後載入更多欄位，需要先釋放集合，以避免因索引變更而可能提示的錯誤。</p>
 <h2 id="Release-Collection" class="common-anchor-header">釋放集合<button data-href="#Release-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

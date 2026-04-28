@@ -95,7 +95,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>Milvusは、極限のクエリー速度と最小限のメモリー使用量を要求するシナリオのために、<code translate="no">SQ4U</code> 、4ビット統一スカラー量子化を導入しています。これは、各次元の浮動小数点値を<strong>4ビットの</strong>符号なし整数に圧縮する、積極的なスカラー量子化です。</p>
-<p>SQ4Uの "U "はUniformの略です。通常、各次元ごとに最小値と最大値を個別に計算する（Per-Dimension Quantization）非一様スカラー量子化とは異なり、SQ4Uは<strong>グローバルな一様量子化</strong>ストラテジーを強制します：</p>
+<p>SQ4Uの "U "はUniformの略です。通常、各次元ごとに最小値と最大値を個別に計算する（Per-Dimension Quantization）非均一なスカラー量子化とは異なり、SQ4Uでは<strong>Global Uniform Quantization</strong>ストラテジーを強制します：</p>
 <ol>
 <li><p><strong>グローバル統計</strong>：グローバル統計：システムは、ベクトルの<strong>すべての次元</strong>（またはベクトルセグメント全体）に適用される<strong>単一の</strong>最小値<code translate="no">vmin</code> と<strong>単一の</strong>値域<code translate="no">vdiff</code> を計算します。</p></li>
 <li><p><strong>一様マッピング</strong>：グローバルな値域は、16 の等しい区間に分割されます。ベクトル内のすべての浮動小数点値は、どの次元に属するかに関係なく、これらの共有パラメータを使用して 4 ビット整数（0 ～ 15）にマッピングされます。</p></li>
@@ -126,7 +126,7 @@ summary: >-
       </svg>
     </button></h3><p>HNSW_SQはHNSWとSQの長所を組み合わせ、効率的な近似最近傍探索を可能にします。その仕組みは以下の通りである：</p>
 <ol>
-<li><p><strong>データ圧縮：</strong>SQは<code translate="no">sq_type</code> （例えばSQ6やSQ8）を使用してベクトルを圧縮し、メモリ使用量を削減します。この圧縮は精度を低下させる可能性があるが、システムがより大きなデータセットを扱うことを可能にする。</p></li>
+<li><p><strong>データ圧縮：</strong>SQは<code translate="no">sq_type</code> （例えばSQ6やSQ8）を使用してベクトルを圧縮し、メモリ使用量を削減します。この圧縮は精度を低下させるかもしれないが、システムがより大きなデータセットを扱うことを可能にする。</p></li>
 <li><p><strong>グラフの構築：</strong>圧縮されたベクトルはHNSWグラフの構築に使用される。データが圧縮されているため、結果として得られるグラフはより小さく、より高速に検索できる。</p></li>
 <li><p><strong>候補の検索：</strong>クエリーベクトルが提供されると、アルゴリズムは圧縮されたデータを使用して、HNSWグラフから近隣候補のプールを素早く特定します。</p></li>
 <li><p><strong>(オプション）結果の絞り込み：</strong>最初の候補結果は、以下のパラメータに基づいて、より精度を高めるために改良することができる：</p>
@@ -305,7 +305,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>次の表は、<a href="/docs/ja/hnsw-sq.md#share-DeFldzMQQoc2W4x2YiIcYUbqnne">インデックスを検索する</a>際に<code translate="no">search_params.params</code> で設定できるパラメータの一覧です。</p>
+    </button></h3><p>次の表は、<a href="/docs/ja/hnsw-sq.md#share-DeFldzMQQoc2W4x2YiIcYUbqnne">インデックスを検索する</a>際に<code translate="no">search_params.params</code> で設定可能なパラメータの一覧です。</p>
 <table>
    <tr>
      <th></th>
@@ -318,14 +318,14 @@ res = MilvusClient.search(
      <td><p>HNSW</p></td>
      <td><p><code translate="no">ef</code></p></td>
      <td><p>最近傍検索時の検索の幅を制御します。どれだけのノードが最近傍候補として訪問され、評価されるかを決定します。 </p><p>このパラメータは検索プロセスのみに影響し、グラフの最下層にのみ適用される。</p></td>
-     <td><p><strong>型を</strong>指定します：整数</p><p><strong>範囲</strong>: [1, int_max[1,<em>int_max］</em></p><p><strong>デフォルト値</strong>:<em>limit</em>(TopK nearest neighbors to return)</p></td>
-     <td><p><code translate="no">ef</code> を大きくすると、より多くの近傍候補が考慮されるため、一般的に<strong>検索精度が高く</strong>なります。しかし、これは<strong>検索時間を増加させます</strong>。</p><p>高い想起率を達成することが重要であり、検索速度があまり気にならない場合は、<code translate="no">ef</code> を増やすことを検討してください。</p><p>特に精度が多少低下しても構わないようなシナリオでは、<code translate="no">ef</code> を減らして、より高速な検索を優先させることを検討してください。</p><p>ほとんどの場合、この範囲内の値を設定することをお勧めします：[K, 10K]。</p></td>
+     <td><p><strong>型は</strong>整数</p><p><strong>範囲</strong>: [1, int_max[1,<em>int_max］</em></p><p><strong>デフォルト値</strong>:<em>limit</em>(TopK nearest neighbors to return)</p></td>
+     <td><p><code translate="no">ef</code> を大きくすると、より多くの近傍候補が考慮されるため、一般的に<strong>検索精度が高く</strong>なります。しかし、これは<strong>検索時間を増加させます</strong>。</p><p>高い想起率を達成することが重要であり、検索速度があまり気にならない場合は、<code translate="no">ef</code> を増やすことを検討する。</p><p>特に精度が多少低下しても構わないようなシナリオでは、<code translate="no">ef</code> を減らして、より高速な検索を優先させることを検討してください。</p><p>ほとんどの場合、この範囲内の値を設定することをお勧めします：[K, 10K]。</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">refine_k</code></p></td>
      <td><p>要求された上位K個の結果に対して、絞り込み段階でどれだけの余分な候補を調べるかを制御する倍率。</p></td>
      <td><p><strong>タイプ</strong>Float</p><p><strong>範囲</strong>：[1,<em>float_max</em>)</p><p><strong>デフォルト値</strong>: 1</p></td>
-     <td><p><code translate="no">refine_k</code> の値を高くすると、再現率と精度が向上するが、検索時間とリソースの使用量も増加する。1の値は、絞り込み処理が最初の上位K個の結果のみを考慮することを意味する。</p></td>
+     <td><p><code translate="no">refine_k</code> の値を大きくすると、再現率と精度が向上するが、検索時間とリソースの使用量も増加する。1の値は、絞り込み処理が最初の上位K個の結果のみを考慮することを意味する。</p></td>
    </tr>
 </table>

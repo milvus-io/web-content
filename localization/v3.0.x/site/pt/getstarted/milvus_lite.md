@@ -360,7 +360,7 @@ res = client.delete(
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a></td><td>A obtenção do estado do carregamento não é suportada.</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/refresh_load.md">refresh_load()</a></td><td>Não é possível carregar os dados não carregados de uma coleção carregada.</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/refresh_load.md">refresh_load()</a></td><td>Não é suportado o carregamento dos dados não carregados de uma coleção carregada.</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/close.md">close()</a></td><td>Y</td></tr>
 </tbody>
 </table>
@@ -556,7 +556,7 @@ optional arguments:
 <li><a href="/docs/pt/azure.md">Microsoft Azure</a></li>
 </ul></li>
 <li><p>Explore <a href="/docs/pt/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para backups de dados do Milvus.</p></li>
-<li><p>Explore o <a href="/docs/pt/birdwatcher_overview.md">Birdwatcher</a>, uma ferramenta de código aberto para depurar o Milvus e actualizações de configuração dinâmica.</p></li>
+<li><p>Explore o <a href="/docs/pt/birdwatcher_overview.md">Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e actualizações de configuração dinâmica.</p></li>
 <li><p>Explore <a href="https://github.com/zilliztech/attu">o Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
 <li><p><a href="/docs/pt/monitor.md">Monitore o Milvus com o Prometheus</a>.</p></li>
 </ul>

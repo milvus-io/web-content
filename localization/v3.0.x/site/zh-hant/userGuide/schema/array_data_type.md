@@ -41,8 +41,8 @@ summary: ARRAY 欄位儲存相同資料類型元素的有序集合。以下是 A
       </svg>
     </button></h2><ul>
 <li><p><strong>預設值</strong>：ARRAY 欄位不支援預設值。但是，您可以將<code translate="no">nullable</code> 屬性設定為<code translate="no">True</code> ，以允許空值。詳情請參閱<a href="/docs/zh-hant/nullable-and-default.md">Nullable &amp; Default</a>。</p></li>
-<li><p><strong>資料類型：</strong>ARRAY 欄位中的所有元素必須共用相同的資料類型，該資料類型由<code translate="no">element_type</code> 參數定義。當<code translate="no">element_type</code> 設定為<code translate="no">VARCHAR</code> 時，必須同時指定陣列元素的<code translate="no">max_length</code> 。<code translate="no">element_type</code> 接受 Milvus 支援的任何標量資料類型，但<code translate="no">JSON</code> 除外。</p></li>
-<li><p><strong>陣列容量</strong>：ARRAY 欄位中的元素數量必須小於或等於陣列建立時所定義的最大容量，如<code translate="no">max_capacity</code> 所指定。該值應為<strong>1</strong>至<strong>4096 範圍</strong>內的整數。</p></li>
+<li><p><strong>資料類型：</strong>ARRAY 欄位中的所有元素必須共用相同的資料類型，此類型由<code translate="no">element_type</code> 參數定義。當<code translate="no">element_type</code> 設定為<code translate="no">VARCHAR</code> 時，必須同時指定陣列元素的<code translate="no">max_length</code> 。<code translate="no">element_type</code> 接受 Milvus 支援的任何標量資料類型，但<code translate="no">JSON</code> 除外。</p></li>
+<li><p><strong>陣列容量</strong>：ARRAY 欄位中元素的數量必須小於或等於陣列建立時所定義的最大容量，如<code translate="no">max_capacity</code> 所指定。該值應為<strong>1</strong>至<strong>4096 範圍</strong>內的整數。</p></li>
 <li><p><strong>字串處理</strong>：Array 欄位中的字串值會以原樣儲存，不會進行語意轉換或轉換。例如，<code translate="no">'a&quot;b'</code>,<code translate="no">&quot;a'b&quot;</code>,<code translate="no">'a\'b'</code>, 和<code translate="no">&quot;a\&quot;b&quot;</code> 會以輸入的方式儲存，而<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 則視為無效值。</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">新增 ARRAY 欄位<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
@@ -68,7 +68,7 @@ summary: ARRAY 欄位儲存相同資料類型元素的有序集合。以下是 A
 </ol>
 <p>以下是如何定義包含 ARRAY 欄位的集合模式：</p>
 <div class="alert note">
-<p>如果您在定義模式時設定<code translate="no">enable_dynamic_fields=True</code> ，Milvus 允許您插入事先未定義的標量欄位。但是，這可能會增加查詢和管理的複雜性，潛在地影響性能。如需詳細資訊，請參閱<a href="/docs/zh-hant/enable-dynamic-field.md">動態欄位</a>。</p>
+<p>如果在定義模式時設定<code translate="no">enable_dynamic_fields=True</code> ，Milvus 允許你插入事先沒有定義的標量欄位。但是，這可能會增加查詢和管理的複雜性，潛在地影響性能。如需詳細資訊，請參閱<a href="/docs/zh-hant/enable-dynamic-field.md">動態欄位</a>。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -695,7 +695,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>除了基本的標量欄位篩選外，您還可以結合向量相似性搜尋與標量欄位篩選。例如，以下程式碼顯示如何在向量搜尋中加入標量欄位篩選器：</p>
+    </button></h2><p>除了基本的標量欄位篩選外，您也可以結合向量相似性搜尋與標量欄位篩選。例如，以下程式碼顯示如何在向量搜尋中加入標量欄位篩選器：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags[0] == &quot;pop&quot;&#x27;</span>

@@ -1,6 +1,6 @@
 ---
 id: phrase-match.md
-title: Concordancia de frasesCompatible with Milvus 2.6.x
+title: Concordancia de frasesCompatible with Milvus 2.5.17+
 summary: >-
   La concordancia de frases permite buscar documentos que contengan los términos
   de la consulta como una frase exacta. Por defecto, las palabras deben aparecer
@@ -9,9 +9,9 @@ summary: >-
   "...modelos típicos de aprendizaje automático de robótica...", donde las
   palabras "robótica", "máquina" y "aprendizaje" aparecen en secuencia sin
   ninguna otra palabra entre ellas.
-beta: Milvus 2.6.x
+beta: Milvus 2.5.17+
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">Concordancia de frases<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">Concordancia de frases<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -46,7 +46,7 @@ beta: Milvus 2.6.x
     </button></h2><p>Gracias a la biblioteca del motor de búsqueda <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, la concordancia de frases funciona analizando la información posicional de las palabras dentro de los documentos. El diagrama siguiente ilustra el proceso:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
    </span> <span class="img-wrapper"> <span>Flujo de trabajo de la concordancia de frases</span> </span></p>
 <ol>
 <li><p><strong>Tokenización de documentos</strong>: Cuando inserta documentos en Milvus, el texto se divide en tokens (palabras o términos individuales) utilizando un analizador, con información posicional registrada para cada token. Por ejemplo, <strong>doc_1</strong> se tokeniza en <strong>["máquina" (pos=0), "aprendizaje" (pos=1), "potencia" (pos=2), "eficiencia" (pos=3)]</strong>. Para obtener más información sobre los analizadores, consulte <a href="/docs/es/analyzer-overview.md">Visión general de los analizadores</a>.</p></li>
@@ -59,7 +59,7 @@ beta: Milvus 2.6.x
 </ul></li>
 <li><p><strong>slop = 2</strong> permite hasta dos posiciones de flexibilidad o reordenación entre los tokens coincidentes.</p>
 <ul>
-<li><p>Esto permite invertir el orden ("<strong>learning machine")</strong> o dejar un pequeño espacio entre los tokens.</p></li>
+<li><p>Esto permite invertir el orden ("<strong>learning machine")</strong> o dejar un pequeño espacio entre las palabras.</p></li>
 <li><p>En consecuencia, <strong>doc_1</strong>, <strong>doc_2</strong> (<strong>"aprendizaje"</strong> en <strong>pos=0</strong>, <strong>"máquina"</strong> en <strong>pos=1</strong>) y <strong>doc_3</strong> (<strong>"aprendizaje"</strong> en <strong>pos=1</strong>, <strong>"máquina"</strong> en <strong>pos=2</strong>) coinciden.</p></li>
 </ul></li>
 </ul></li>
@@ -199,7 +199,7 @@ schema.add_field(
 <ul>
 <li><p><code translate="no">0</code> (por defecto): Coincide sólo con frases exactas. Ejemplo: Un filtro para <strong>"machine learning"</strong> coincidirá exactamente con <strong>"machine learning"</strong>, pero no con <strong>"machine boosts learning"</strong> o <strong>"learning machine".</strong></p></li>
 <li><p><code translate="no">1</code>: Permite pequeñas variaciones, como un término adicional o un pequeño cambio de posición. Ejemplo: Un filtro para <strong>"machine learning</strong> " coincidirá con <strong>"machine boosts learning"</strong> (un token entre <strong>"machine"</strong> y <strong>"learning")</strong> pero no con " <strong>learning machine"</strong> (términos invertidos).</p></li>
-<li><p><code translate="no">2</code>: Permite una mayor flexibilidad, incluido el orden inverso de los términos o hasta dos tokens entre ellos. Ejemplo: Un filtro para <strong>"machine learning"</strong> coincidirá con <strong>"learning machine"</strong> (términos invertidos) o <strong>"machine quickly boosts learning"</strong> (dos tokens entre <strong>"machine"</strong> y <strong>"learning")</strong>.</p></li>
+<li><p><code translate="no">2</code>: Permite una mayor flexibilidad, incluido el orden invertido de los términos o hasta dos tokens entre ellos. Ejemplo: Un filtro para <strong>"machine learning"</strong> coincidirá con <strong>"learning machine"</strong> (términos invertidos) o <strong>"machine quickly boosts learning"</strong> (dos tokens entre <strong>"machine"</strong> y <strong>"learning")</strong>.</p></li>
 </ul></li>
 </ul>
 <h3 id="Example-dataset" class="common-anchor-header">Ejemplo de conjunto de datos<button data-href="#Example-dataset" class="anchor-icon" translate="no">
@@ -229,7 +229,7 @@ schema.add_field(
    </tr>
    <tr>
      <td><p>2</p></td>
-     <td><p>"El aprendizaje automático es vital para el progreso moderno de la IA"</p></td>
+     <td><p>"El aprendizaje automático es vital para el progreso de la IA moderna"</p></td>
    </tr>
    <tr>
      <td><p>3</p></td>
@@ -328,7 +328,7 @@ result_slop1 = client.search(
    </tr>
    <tr>
      <td><p>5</p></td>
-     <td><p>"El aprendizaje de algoritmos de máquina avanzados amplía las capacidades de la IA"</p></td>
+     <td><p>"El aprendizaje de algoritmos avanzados de máquinas amplía las capacidades de la IA"</p></td>
    </tr>
 </table>
 <h4 id="Example-slop--2" class="common-anchor-header">Ejemplo: slop = 2</h4><p>Este ejemplo permite un slop de 2, lo que significa que se permiten hasta dos tokens adicionales (o términos invertidos) entre las palabras <strong>"máquina"</strong> y <strong>"aprendizaje".</strong></p>

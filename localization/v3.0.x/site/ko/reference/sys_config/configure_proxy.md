@@ -2,7 +2,7 @@
 id: configure_proxy.md
 related_key: configure
 group: system_configuration.md
-summary: Milvus용 프록시를 구성하는 방법을 알아보세요.
+summary: Milvus의 프록시를 구성하는 방법을 알아보세요.
 ---
 <h1 id="proxy-related-Configurations" class="common-anchor-header">프록시 관련 구성<button data-href="#proxy-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,7 +73,7 @@ summary: Milvus용 프록시를 구성하는 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        ms, 컴포넌트 상태 확인을 수행할 간격      </td>
+      <td>        ms, 컴포넌트 상태 검사를 수행할 간격      </td>
       <td>3000</td>
     </tr>
   </tbody>
@@ -1119,7 +1119,7 @@ summary: Milvus용 프록시를 구성하는 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        프록시가 보낼 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
+      <td>        프록시가 전송할 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
       <td>268435456</td>
     </tr>
   </tbody>

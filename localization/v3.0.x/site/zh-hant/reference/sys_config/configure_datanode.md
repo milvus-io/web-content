@@ -278,7 +278,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        緩衝區未清空時，同步處理區段的週期。      </td>
+      <td>        如果緩衝區未清空，則同步處理區段的週期。      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -892,7 +892,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        叢集壓縮的記憶體緩衝區比率。大於臨界值的資料會被沖到儲存區。      </td>
+      <td>        叢集壓縮的記憶體緩衝比率。大於臨界值的資料會被沖到儲存區。      </td>
       <td>0.3</td>
     </tr>
   </tbody>
@@ -1008,7 +1008,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        dataNode 的 TCP/IP 位址。如果未指定，則使用第一個可單點傳送的位址      </td>
+      <td>        dataNode 的 TCP/IP 位址。若未指定，則使用第一個可單點傳送的位址      </td>
       <td></td>
     </tr>
   </tbody>

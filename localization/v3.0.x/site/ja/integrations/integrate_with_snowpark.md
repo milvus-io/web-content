@@ -51,15 +51,45 @@ title: Milvus on Snowparkコンテナサービス
         ></path>
       </svg>
     </button></h2><p>以下では、Milvusの機能とSPCSでのMilvusの使用方法を設定とコードを通して理解していただきます。</p>
-<h3 id="1-Obtain-account-information" class="common-anchor-header">1.アカウント情報の取得</h3><p>SPCSクライアントをダウンロードします：<a href="https://docs.snowflake.com/en/user-guide/snowsql-install-config">SnowSQLをダウンロード</a>し、アカウントにログインする。</p>
+<h3 id="1-Obtain-account-information" class="common-anchor-header">1.アカウント情報の取得<button data-href="#1-Obtain-account-information" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>SPCSクライアントをダウンロードします：<a href="https://docs.snowflake.com/en/user-guide/snowsql-install-config">SnowSQLをダウンロード</a>し、アカウントにログインする。</p>
 <pre><code translate="no" class="language-shell">snowsql -a ${instance_name} -u ${user_name}
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">${instance_name}</code> のルールは<code translate="no">${org_name}-${acct_name}</code> です。関連情報は、<a href="http://app.snowflake.com/sn">app.snowflake.com</a>にログインし、個人アカウント情報を確認することで取得できます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/snowflake-01.png" alt="Snowflake account information" class="doc-image" id="snowflake-account-information" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-01.png" alt="Snowflake account information" class="doc-image" id="snowflake-account-information" />
    </span> <span class="img-wrapper"> <span>スノーフレークのアカウント情報</span> </span></p>
-<h3 id="2-Configure-Role-and-privileges" class="common-anchor-header">2.役割と権限の設定</h3><p>OAUTH 連携を設定する。</p>
+<h3 id="2-Configure-Role-and-privileges" class="common-anchor-header">2.役割と権限の設定<button data-href="#2-Configure-Role-and-privileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>OAUTH 連携を設定する。</p>
 <pre><code translate="no" class="language-sql">USE ROLE ACCOUNTADMIN;
 <span class="hljs-keyword">CREATE</span> SECURITY INTEGRATION SNOWSERVICES_INGRESS_OAUTH
   TYPE<span class="hljs-operator">=</span>oauth
@@ -69,7 +99,7 @@ title: Milvus on Snowparkコンテナサービス
 USE ROLE ACCOUNTADMIN;
 <span class="hljs-keyword">GRANT</span> BIND SERVICE ENDPOINT <span class="hljs-keyword">ON</span> ACCOUNT <span class="hljs-keyword">TO</span> ROLE SYSADMIN;
 <button class="copy-code-btn"></button></code></pre>
-<p>サービス用のロールを作成します。ここでの<code translate="no">${PASSWORD}</code> の部分は、デモが実行されるときにユーザーで置き換える必要があることに注意してください。</p>
+<p>サービス用のロールを作成します。ここでの<code translate="no">${PASSWORD}</code> の部分は、デモの際にユーザーで置き換える必要があることに注意してください。</p>
 <pre><code translate="no" class="language-sql">USE ROLE SECURITYADMIN;
 <span class="hljs-keyword">CREATE</span> ROLE MILVUS_ROLE;
 
@@ -83,7 +113,22 @@ USE ROLE USERADMIN;
 USE ROLE SECURITYADMIN;
 <span class="hljs-keyword">GRANT</span> ROLE MILVUS_ROLE <span class="hljs-keyword">TO</span> <span class="hljs-keyword">USER</span> milvus_user;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Create-data-storage-configuration" class="common-anchor-header">3.データストレージ構成の作成</h3><ul>
+<h3 id="3-Create-data-storage-configuration" class="common-anchor-header">3.データストレージ構成の作成<button data-href="#3-Create-data-storage-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>ウェアハウスとデータベースを作成します。</p>
 <pre><code translate="no" class="language-sql">USE ROLE SYSADMIN;
 <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">OR</span> REPLACE WAREHOUSE MILVUS_WAREHOUSE <span class="hljs-keyword">WITH</span>
@@ -123,7 +168,22 @@ ENABLED<span class="hljs-operator">=</span><span class="hljs-literal">TRUE</span
 <span class="hljs-keyword">GRANT</span> USAGE <span class="hljs-keyword">ON</span> INTEGRATION allow_all_eai <span class="hljs-keyword">TO</span> ROLE SYSADMIN;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="4-Create-images" class="common-anchor-header">4.イメージの作成</h3><p>Milvusで使用するイメージはローカルでビルドし、ユーザがアップロードする必要があります。関連するイメージの設定については、<a href="https://github.com/dald001/milvus_on_spcs">こちらのレポを</a>参照してください。コードをクローンした後、プロジェクトのルートディレクトリに移動し、イメージをビルドする準備をします。</p>
+<h3 id="4-Create-images" class="common-anchor-header">4.イメージの作成<button data-href="#4-Create-images" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvusで使用するイメージはローカルでビルドし、ユーザがアップロードする必要があります。関連するイメージの設定については、<a href="https://github.com/dald001/milvus_on_spcs">こちらのレポを</a>参照してください。コードをクローンした後、プロジェクトのルートディレクトリに移動し、イメージをビルドする準備をします。</p>
 <ul>
 <li><p>ローカルでイメージをビルドする</p>
 <p>ローカルシェルを開き、イメージのビルドを開始します。</p>
@@ -152,7 +212,22 @@ $</span><span class="language-bash">{instance_name}.registry.snowflakecomputing.
 docker push ${instance_name}.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/jupyter
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="5-Create-and-start-services" class="common-anchor-header">5.サービスの作成と起動</h3><p>SnowSQLシェルに戻りましょう。</p>
+<h3 id="5-Create-and-start-services" class="common-anchor-header">5.サービスの作成と起動<button data-href="#5-Create-and-start-services" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>SnowSQLシェルに戻りましょう。</p>
 <ul>
 <li>計算プールの作成</li>
 </ul>
@@ -174,7 +249,7 @@ docker push ${instance_name}.registry.snowflakecomputing.com/milvus_demo/public/
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/snowflake-02.png" alt="Compute pool status" class="doc-image" id="compute-pool-status" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-02.png" alt="Compute pool status" class="doc-image" id="compute-pool-status" />
    </span> <span class="img-wrapper"> <span>コンピュートプールのステータス</span> </span></p>
 <ul>
 <li>specファイルのアップロード</li>
@@ -219,7 +294,7 @@ USE SCHEMA PUBLIC;
 <p>サービスの開始時に問題が発生した場合は、<code translate="no">CALL SYSTEM$GET_SERVICE_STATUS('milvus');</code> からサービス情報を参照できます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/snowflake-03.png" alt="Service status" class="doc-image" id="service-status" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-03.png" alt="Service status" class="doc-image" id="service-status" />
    </span> <span class="img-wrapper"> <span>サービスのステータス</span> </span></p>
 <p>詳細は、<code translate="no">CALL SYSTEM$GET_SERVICE_LOGS('milvus', '0', 'milvus', 10);</code> から確認できます。</p>
 <h2 id="Use-Notebook" class="common-anchor-header">ノートブックの使用<button data-href="#Use-Notebook" class="anchor-icon" translate="no">
@@ -248,12 +323,12 @@ USE SCHEMA PUBLIC;
 <p><code translate="no">ingress_url</code> の部分を記録し、ブラウザを開き、<code translate="no">ingress_url</code> を入力し、milvus_user アカウントを使用してウェブサイトにログインします。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/snowflake-04.png" alt="Obtain the ingress URL" class="doc-image" id="obtain-the-ingress-url" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-04.png" alt="Obtain the ingress URL" class="doc-image" id="obtain-the-ingress-url" />
    </span> <span class="img-wrapper"> <span>イングレスURLの取得</span> </span></p>
 <p><code translate="no">ingress_url</code> からノートブックを開き、ページ上の<code translate="no">TestMilvus.ipynb</code> ファイルをダブルクリックして、Milvusを試してみる。コードブロックの最初の部分を選択し、[<strong>実行]</strong>ボタンをクリックして、接続の確立と埋め込み関数の初期化を開始します。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/snowflake-05.png" alt="Run TestMilvus.ipynb in the notebook" class="doc-image" id="run-testmilvus.ipynb-in-the-notebook" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-05.png" alt="Run TestMilvus.ipynb in the notebook" class="doc-image" id="run-testmilvus.ipynb-in-the-notebook" />
    </span> <span class="img-wrapper"> <span>ノートブックでTestMilvus.ipynbを実行する</span> </span>。</p>
 <p>接続を確立したら、引き続き<strong>RUNを</strong>クリックします。エンベッディング処理後、テキストがベクトルデータに変換され、milvusに挿入されます。</p>
 <pre><code translate="no" class="language-python">docs = [
@@ -265,7 +340,7 @@ USE SCHEMA PUBLIC;
 <p>次に、テキストをクエリーとして使用する：「誰がAI研究を始めたのか？"というテキストをクエリとして使用し、埋め込み処理後にクエリを実行し、最後に最も関連性の高い結果を取得して表示します。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
    </span> <span class="img-wrapper"> <span>最も関連性の高い結果を取得・表示</span> </span></p>
 <p>Milvusクライアントの使い方については、<a href="/docs/ja/quickstart.md">Milvus Docを</a>ご参照ください。</p>
 <h2 id="7-Clean-up" class="common-anchor-header">7.クリーンアップ<button data-href="#7-Clean-up" class="anchor-icon" translate="no">

@@ -107,7 +107,7 @@ which I ...
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bagian ini menunjukkan cara melakukan pencarian gabungan menggunakan BM25. Untuk memulai, kita akan menginisialisasi <code translate="no">MilvusVectorStore</code> dan membuat indeks untuk dokumen contoh. Konfigurasi default yang digunakan:</p>
+    </button></h2><p>Bagian ini menunjukkan bagaimana melakukan pencarian gabungan menggunakan BM25. Untuk memulai, kita akan menginisialisasi <code translate="no">MilvusVectorStore</code> dan membuat indeks untuk dokumen contoh. Konfigurasi default yang digunakan:</p>
 <ul>
 <li>Penyematan padat dari model penyematan default ( <code translate="no">text-embedding-ada-002</code> milik OpenAI)</li>
 <li>BM25 untuk pencarian teks lengkap jika enable_sparse bernilai True</li>
@@ -161,7 +161,22 @@ response = query_engine.query(<span class="hljs-string">&quot;What did the autho
 <pre><code translate="no">The author learned about retail, the importance of user feedback, and the significance of growth
 rate as the ultimate test of a startup at Viaweb.
 </code></pre>
-<h3 id="Customize-text-analyzer" class="common-anchor-header">Menyesuaikan penganalisis teks</h3><p>Penganalisis memainkan peran penting dalam pencarian teks lengkap dengan memecah kalimat menjadi token dan melakukan pemrosesan leksikal, seperti stemming dan penghilangan kata berimbuhan. Penganalisis biasanya bersifat spesifik untuk bahasa tertentu. Untuk lebih jelasnya, lihat <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Panduan Penganalisis Milvus</a>.</p>
+<h3 id="Customize-text-analyzer" class="common-anchor-header">Menyesuaikan penganalisis teks<button data-href="#Customize-text-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Penganalisis memainkan peran penting dalam pencarian teks lengkap dengan memecah kalimat menjadi token dan melakukan pemrosesan leksikal, seperti stemming dan penghilangan kata berimbuhan. Penganalisis biasanya bersifat spesifik untuk bahasa tertentu. Untuk lebih jelasnya, lihat <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Panduan Penganalisis Milvus</a>.</p>
 <p>Milvus mendukung dua jenis penganalisis: <strong>Penganalisis bawaan</strong> dan <strong>Penganalisis Khusus</strong>. Secara default, jika <code translate="no">enable_sparse</code> diatur ke True, <code translate="no">MilvusVectorStore</code> menggunakan <code translate="no">BM25BuiltInFunction</code> dengan konfigurasi default, menggunakan penganalisis bawaan standar yang menandai teks berdasarkan tanda baca.</p>
 <p>Untuk menggunakan penganalisis yang berbeda atau menyesuaikan yang sudah ada, Anda dapat memberikan nilai pada argumen <code translate="no">analyzer_params</code> saat membuat <code translate="no">BM25BuiltInFunction</code>. Kemudian, tetapkan fungsi ini sebagai <code translate="no">sparse_embedding_function</code> di <code translate="no">MilvusVectorStore</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.vector_stores.milvus.utils <span class="hljs-keyword">import</span> BM25BuiltInFunction
@@ -241,7 +256,22 @@ The author learned about retail, the importance of user feedback, the value of g
 startup, the significance of pricing strategy, the benefits of working on things that weren't
 prestigious, and the challenges and rewards of running a startup.
 </code></pre>
-<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">Menyesuaikan Fungsi Penyematan Jarang</h3><p>Anda juga dapat menyesuaikan fungsi sematan jarang selama fungsi tersebut diwarisi dari <code translate="no">BaseSparseEmbeddingFunction</code>, termasuk metode berikut ini:</p>
+<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">Menyesuaikan Fungsi Penyematan Jarang<button data-href="#Customize-Sparse-Embedding-Function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Anda juga dapat menyesuaikan fungsi sematan jarang selama fungsi tersebut diwarisi dari <code translate="no">BaseSparseEmbeddingFunction</code>, termasuk metode berikut ini:</p>
 <ul>
 <li><code translate="no">encode_queries</code>: Metode ini mengubah teks menjadi daftar sematan jarang untuk kueri.</li>
 <li><code translate="no">encode_documents</code>: Metode ini mengubah teks menjadi daftar sematan jarang untuk dokumen.</li>
@@ -296,7 +326,7 @@ prestigious, and the challenges and rewards of running a startup.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus mendukung dua jenis <a href="https://milvus.io/docs/weighted-ranker.md">strategi perankingan ulang</a>: Reciprocal Rank Fusion (RRF) dan Penilaian Tertimbang. Pemeringkat default dalam pencarian hybrid <code translate="no">MilvusVectorStore</code> adalah RRF dengan k=60. Untuk menyesuaikan pemeringkat hibrida, ubah parameter berikut ini:</p>
+    </button></h2><p>Milvus mendukung dua jenis <a href="https://milvus.io/docs/weighted-ranker.md">strategi reranking</a>: Reciprocal Rank Fusion (RRF) dan Penilaian Tertimbang. Pemeringkat default dalam pencarian hybrid <code translate="no">MilvusVectorStore</code> adalah RRF dengan k=60. Untuk menyesuaikan pemeringkat hibrida, ubah parameter berikut ini:</p>
 <ul>
 <li><code translate="no">hybrid_ranker (str)</code>: Menentukan jenis pemeringkat yang digunakan dalam kueri penelusuran hibrida. Saat ini hanya mendukung ["RRFRanker", "WeightedRanker"]. Defaultnya adalah "RRFRanker".</li>
 <li><code translate="no">hybrid_ranker_params (dict, optional)</code>: Parameter konfigurasi untuk pemeringkat hibrida. Struktur kamus ini tergantung pada pemeringkat spesifik yang digunakan:<ul>

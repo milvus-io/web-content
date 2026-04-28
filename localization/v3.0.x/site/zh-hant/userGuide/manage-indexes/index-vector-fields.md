@@ -20,6 +20,9 @@ title: 索引向量欄位
         ></path>
       </svg>
     </button></h1><p>本指南將教您如何在集合中的向量欄位上建立和管理索引的基本操作。</p>
+<div class="alert warning">
+<p>本頁已被廢棄。如需最新的實作，請參閱<a href="/docs/zh-hant/ivf-flat.md">IVF_FLAT</a>、<a href="/docs/zh-hant/hnsw.md">HNSW</a> 等。</p>
+</div>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,10 +85,19 @@ title: 索引向量欄位
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky"><ul><li>Sparse_inverted_index</li><li>SPARSE_WAND</li></ul></td>
+    <td class="tg-0pky">稀疏反演索引</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td class="tg-0pky">BM25</td>
+    <td class="tg-0pky">sparse_inverted_index</td>
   </tr>
 </tbody>
 </table>
+<div class="alert note">
+<p>從 Milvus 2.5.4 起，<code translate="no">SPARSE_WAND</code> 已經被廢棄。取而代之，建議使用<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 以達到等效，同時保持相容性。如需詳細資訊，請參閱<a href="/docs/zh-hant/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>。</p>
+</div>
 </div>
 <p>建議為向量欄位和經常被存取的標量欄位建立索引。</p>
 <h2 id="Preparations" class="common-anchor-header">準備工作<button data-href="#Preparations" class="anchor-icon" translate="no">
@@ -354,7 +366,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">indexType</code></td>
-      <td>用於排列特定欄位資料的演算法名稱。有關適用的演算法，請參閱「<a href="https://milvus.io/docs/index.md">記憶體內索引</a>」和<a href="https://milvus.io/docs/disk_index.md">「磁碟上索引</a>」。</td>
+      <td>用來排列特定欄位資料的演算法名稱。有關適用的演算法，請參閱「<a href="https://milvus.io/docs/index.md">記憶體內索引</a>」和<a href="https://milvus.io/docs/disk_index.md">「磁碟上索引</a>」。</td>
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>

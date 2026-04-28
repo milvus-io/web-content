@@ -118,7 +118,7 @@ data = response.json()
         file_path = os.path.join(save_dir, item[<span class="hljs-string">&quot;name&quot;</span>])
         urllib.request.urlretrieve(file_url, file_path)
 <button class="copy-code-btn"></button></code></pre>
-<p>次に、持っている各ファイルを処理します。</p>
+<p>次に、持っているファイルをそれぞれ処理します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># please upload your data directory under this file&#x27;s folder</span>
 cities = os.listdir(<span class="hljs-string">&quot;city_data&quot;</span>)
 <span class="hljs-comment"># store chunked text for each of the cities in a list of dicts</span>
@@ -190,7 +190,7 @@ milvus_client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot
 <p><code translate="no">MilvusClient</code> の引数については、次のとおりです：</p>
 <ul>
 <li><code translate="no">uri</code> の引数をローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利な方法です。</li>
-<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、<code translate="no">http://localhost:19530</code> などのサーバ uri を<code translate="no">uri</code> として使用してください。</li>
+<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>

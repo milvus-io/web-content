@@ -37,9 +37,9 @@ title: 하나의 인스턴스에서 백업 및 복원
     </button></h2><p>아래 다이어그램은 단일 Milvus 인스턴스 내의 백업 및 복원 프로세스를 보여줍니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/single-instance-backup-and-restore.png" alt="single-instance-backup-and-restore.png" class="doc-image" id="single-instance-backup-and-restore.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/single-instance-backup-and-restore.png" alt="single-instance-backup-and-restore.png" class="doc-image" id="single-instance-backup-and-restore.png" />
    </span> <span class="img-wrapper"> <span>단일 인스턴스 백업 및 복원.png</span> </span></p>
-<p><code translate="no">bucket_A</code> 이라는 버킷을 데이터 저장소로 사용하는 Milvus 인스턴스( <code translate="no">milvus_A</code>)가 있다고 가정합니다. 이 예제에서는 다음 작업을 완료하는 것이 목표입니다:</p>
+<p>데이터 저장소로<code translate="no">bucket_A</code> 이라는 버킷을 사용하는 Milvus 인스턴스( <code translate="no">milvus_A</code>)가 있다고 가정합니다. 이 예제에서는 다음 작업을 완료하는 것이 목표입니다:</p>
 <ol>
 <li><p><code translate="no">bucket_A</code> 에서 컬렉션 coll에 대한 백업(<code translate="no">my_backup</code>)을 만듭니다.</p></li>
 <li><p>백업에서 복원하고 복원된 컬렉션의 이름을 <code translate="no">coll_bak</code> 으로 지정합니다.</p></li>
@@ -78,7 +78,22 @@ title: 하나의 인스턴스에서 백업 및 복원
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">1단계: 구성 준비</h3><p>밀버스 백업 프로젝트의 디렉터리로 이동하여 <code translate="no">configs</code> 이라는 디렉터리를 만듭니다:</p>
+    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">1단계: 구성 준비<button data-href="#Step-1-Prepare-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>milvus-backup 프로젝트의 디렉토리로 이동하여 <code translate="no">configs</code> 라는 이름의 디렉토리를 만듭니다:</p>
 <pre><code translate="no" class="language-shell">mkdir configs
 cd configs
 <button class="copy-code-btn"></button></code></pre>
@@ -91,7 +106,22 @@ cd configs
 ├── milvus-backup
 └── README.md
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">2단계: 구성 파일 편집</h3><p><code translate="no">milvus_A</code> 에 적절한 구성을 설정하도록 backup.yaml 파일을 수정합니다. 아래는 샘플 스토리지 구성입니다:</p>
+<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">2단계: 구성 파일 편집<button data-href="#Step-2-Edit-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">milvus_A</code> 에 적절한 구성을 설정하도록 backup.yaml 파일을 수정합니다. 아래는 샘플 스토리지 구성입니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Related configuration of minio, which is responsible for data persistence for Milvus.</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-comment"># cloudProvider: &quot;minio&quot; # deprecated use storageType instead</span>
@@ -115,7 +145,22 @@ cd configs
   <span class="hljs-attr">backupBucketName:</span> <span class="hljs-string">&quot;bucket_A&quot;</span> <span class="hljs-comment"># Bucket name to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
   <span class="hljs-attr">backupRootPath:</span> <span class="hljs-string">&quot;backup&quot;</span> <span class="hljs-comment"># Rootpath to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Create-backup" class="common-anchor-header">3단계: 백업 만들기</h3><p>backup.yaml이 저장되면 <code translate="no">my_backup</code> 이라는 이름의 백업을 만듭니다:</p>
+<h3 id="Step-3-Create-backup" class="common-anchor-header">3단계: 백업 만들기<button data-href="#Step-3-Create-backup" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>backup.yaml이 저장되면 <code translate="no">my_backup</code> 이라는 이름의 백업을 만듭니다:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup create -c coll -n my_backup
 <button class="copy-code-btn"></button></code></pre>
 <p>이 명령은 <code translate="no">milvus_A</code> 의 오브젝트 스토리지에 <code translate="no">bucket_A/backup/my_backup</code> 백업을 생성합니다.</p>

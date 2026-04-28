@@ -40,13 +40,28 @@ title: アクセスログの設定
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ニーズに合わせて3つの設定オプションから選択します：</p>
+    </button></h2><p>ニーズに応じて3つの設定オプションから選択します：</p>
 <ul>
 <li><strong>基本設定</strong>：基本設定: 一般的な目的。</li>
 <li><strong>ローカルアクセスログファイル用設定</strong>：ログをローカルに保存します。</li>
 <li><strong>ローカルアクセスログをMinIOにアップロードするための設定</strong>：クラウドストレージおよびバックアップ用。</li>
 </ul>
-<h3 id="Base-config" class="common-anchor-header">基本設定</h3><p>基本設定では、アクセスログを有効にし、ログのファイル名を定義するか、標準出力を使用します。</p>
+<h3 id="Base-config" class="common-anchor-header">基本設定<button data-href="#Base-config" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>基本設定では、アクセスログを有効にし、ログのファイル名を定義するか、標準出力を使用します。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -58,7 +73,22 @@ title: アクセスログの設定
 <li><code translate="no">proxy.accessLog.enable</code>:アクセスログ機能を有効にするかどうか。デフォルトは<strong>false</strong>。</li>
 <li><code translate="no">proxy.accessLog.filename</code>:アクセスログのファイル名。このパラメータを空にすると、アクセスログは標準出力に出力されます。</li>
 </ul>
-<h3 id="Config-for-local-access-log-files" class="common-anchor-header">ローカルアクセスログファイルの設定</h3><p>ローカルファイルパス、ファイルサイズ、ローテーション間隔などのパラメータを使用して、アクセスログファイルのローカルストレージを設定します：</p>
+<h3 id="Config-for-local-access-log-files" class="common-anchor-header">ローカルアクセスログファイルの設定<button data-href="#Config-for-local-access-log-files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ローカルファイルパス、ファイルサイズ、ローテーション間隔などのパラメータを使用して、アクセスログファイルのローカルストレージを設定します：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -76,7 +106,22 @@ title: アクセスログの設定
 <li><code translate="no">proxy.accessLog.rotatedTime</code>:1つのアクセス・ログ・ファイルをローテーションするために許容される最大時間間隔を秒単位で指定します。指定された時間間隔に達すると、ローテーション処理がトリガーされ、新しいアクセスログファイルが作成され、前のアクセスログファイルが封印されます。</li>
 <li><code translate="no">proxy.accessLog.maxBackups</code>:封印されたアクセスログファイルの最大保持数。封印されたアクセスログファイルの数がこの上限を超えると、最も古いアクセスログファイルが削除されます。</li>
 </ul>
-<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">ローカルアクセスログファイルのMinIOへのアップロード設定</h3><p>ローカルアクセスログファイルをMinIOにアップロードする設定を有効にして構成します：</p>
+<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">ローカルアクセスログファイルのMinIOへのアップロード設定<button data-href="#Config-for-uploading-local-access-log-files-to-MinIO" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ローカルアクセスログファイルをMinIOにアップロードする設定を有効にして構成します：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -167,7 +212,7 @@ title: アクセスログの設定
 <tr><td><code translate="no">$collection_name</code></td><td>対象のMilvusコレクション名</td></tr>
 <tr><td><code translate="no">$partition_name</code></td><td>対象のMilvusパーティション名</td></tr>
 <tr><td><code translate="no">$time_cost</code></td><td>アクセス完了までの時間</td></tr>
-<tr><td><code translate="no">$time_now</code></td><td>アクセスログが出力された時刻 (通常<code translate="no">$time_end</code> と同じ)</td></tr>
+<tr><td><code translate="no">$time_now</code></td><td>アクセスログが出力された時間 (通常<code translate="no">$time_end</code> と同じ)</td></tr>
 <tr><td><code translate="no">$time_start</code></td><td>アクセス開始時刻</td></tr>
 <tr><td><code translate="no">$time_end</code></td><td>アクセス終了時刻</td></tr>
 <tr><td><code translate="no">$sdk_version</code></td><td>ユーザが使用したMilvus SDKのバージョン</td></tr>

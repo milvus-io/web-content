@@ -20,7 +20,7 @@ title: Milvus와 MindsDB 통합
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://docs.mindsdb.com/what-is-mindsdb">MindsDB는</a> AI 애플리케이션과 다양한 엔터프라이즈 데이터 소스를 통합하기 위한 강력한 도구입니다. 이는 정형 데이터와 비정형 데이터 모두에 대한 쿼리에 꼼꼼하게 답변하면서 데이터 확산에 질서를 부여하는 연합 쿼리 엔진의 역할을 합니다. 데이터가 SaaS 애플리케이션, 데이터베이스, 데이터 웨어하우스 등 어디에 흩어져 있든, MindsDB는 표준 SQL을 사용해 모든 데이터를 연결하고 쿼리할 수 있습니다. 지식 베이스를 통한 최첨단 자율 RAG 시스템이 특징이며, 수백 개의 데이터 소스를 지원하고, 로컬 개발부터 클라우드 환경까지 유연한 배포 옵션을 제공합니다.</p>
+    </button></h1><p><a href="https://docs.mindsdb.com/what-is-mindsdb">MindsDB는</a> AI 애플리케이션과 다양한 엔터프라이즈 데이터 소스를 통합하기 위한 강력한 도구입니다. 이 도구는 정형 데이터와 비정형 데이터 모두에 대한 쿼리에 꼼꼼하게 답변하면서 데이터 확산에 질서를 부여하는 연합 쿼리 엔진 역할을 합니다. 데이터가 SaaS 애플리케이션, 데이터베이스, 데이터 웨어하우스 등 어디에 흩어져 있든, MindsDB는 표준 SQL을 사용해 모든 데이터를 연결하고 쿼리할 수 있습니다. 지식 베이스를 통해 최첨단 자율 RAG 시스템을 갖추고 수백 개의 데이터 소스를 지원하며 로컬 개발부터 클라우드 환경까지 유연한 배포 옵션을 제공합니다.</p>
 <p>이 튜토리얼에서는 Milvus와 MindsDB를 통합하는 방법을 보여줌으로써, 벡터 임베딩을 관리하고 쿼리하기 위한 SQL과 유사한 작업을 통해 Milvus의 벡터 데이터베이스 기능과 함께 MindsDB의 AI 기능을 활용할 수 있도록 합니다.</p>
 <div class="alert note">
 <p>이 튜토리얼은 주로 <a href="https://github.com/mindsdb/mindsdb/tree/main/mindsdb/integrations/handlers/milvus_handler">MindsDB Milvus 핸들러의</a> 공식 문서를 참조합니다. 이 튜토리얼에서 오래된 부분을 발견하면 공식 문서를 우선적으로 따르고 이슈를 생성해 주세요.</p>
@@ -65,7 +65,7 @@ title: Milvus와 MindsDB 통합
 <p>연결을 설정하기 위한 선택적 인수는 다음과 같습니다:</p>
 <p><code translate="no">SELECT</code> 쿼리에 사용됩니다:</p>
 <ul>
-<li><code translate="no">search_default_limit</code>선택 문에서 전달할 기본 제한(기본값=100)</li>
+<li><code translate="no">search_default_limit</code>선택 문에 전달할 기본 제한(기본값=100)</li>
 <li><code translate="no">search_metric_type</code>: 검색에 사용되는 메트릭 유형(기본값="L2")</li>
 <li><code translate="no">search_ignore_growing</code>유사성 검색 중 증가하는 세그먼트를 무시할지 여부(기본값=False)</li>
 <li><code translate="no">search_params</code> <code translate="no">search_metric_type</code> (기본값={"nprobe": 10})</li>
@@ -81,7 +81,7 @@ title: Milvus와 MindsDB 통합
 <li><code translate="no">create_schema_description</code>생성된 스키마에 대한 설명(기본값='')</li>
 <li><code translate="no">create_alias</code>: 생성된 스키마의 별칭(기본값='default')</li>
 <li><code translate="no">create_index_params</code>: 임베딩 열에 생성된 인덱스의 매개변수 (기본값={})</li>
-<li><code translate="no">create_index_metric_type</code>인덱스 생성에 사용되는 메트릭(기본값='L2')</li>
+<li><code translate="no">create_index_metric_type</code>인덱스 생성에 사용된 메트릭(기본값='L2')</li>
 <li><code translate="no">create_index_type</code>index: 인덱스 유형(기본값='AUTOINDEX')</li>
 </ul>
 <h2 id="Usage" class="common-anchor-header">사용법<button data-href="#Usage" class="anchor-icon" translate="no">
@@ -100,7 +100,22 @@ title: Milvus와 MindsDB 통합
         ></path>
       </svg>
     </button></h2><p>계속하기 전에 <code translate="no">pymilvus</code> 버전이 이 <a href="https://github.com/mindsdb/mindsdb/blob/main/mindsdb/integrations/handlers/milvus_handler/requirements.txt">고정된 버전과</a> 동일한지 확인하세요. 버전 호환성에 문제가 있는 경우 pymilvus 버전을 롤백하거나 이 <a href="https://github.com/mindsdb/mindsdb/tree/main/mindsdb/integrations/handlers/milvus_handler">요구 사항 파일에서</a> 사용자 정의할 수 있습니다.</p>
-<h3 id="Creating-connection" class="common-anchor-header">연결 만들기</h3><p>이 핸들러를 사용하여 MindsDB의 Milvus 서버에 연결하려면 다음 구문을 사용할 수 있습니다:</p>
+<h3 id="Creating-connection" class="common-anchor-header">연결 만들기<button data-href="#Creating-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이 핸들러를 사용하여 MindsDB의 Milvus 서버에 연결하려면 다음 구문을 사용할 수 있습니다:</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">CREATE</span> DATABASE milvus_datasource
 <span class="hljs-keyword">WITH</span>
   ENGINE <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;milvus&#x27;</span>,
@@ -118,15 +133,75 @@ title: Milvus와 MindsDB 통합
 <li><a href="https://zilliz.com/cloud">질리즈 클라우드에서</a> 완전 관리형 Milvus를 사용할 수도 있습니다. <code translate="no">uri</code> 및 <code translate="no">token</code> 을 질리즈 클라우드 인스턴스의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">퍼블릭 엔드포인트와 API 키로</a> 설정하기만 하면 됩니다.</li>
 </ul>
 </blockquote>
-<h3 id="Dropping-connection" class="common-anchor-header">연결 끊기</h3><p>연결을 삭제하려면 다음 명령을 사용합니다.</p>
+<h3 id="Dropping-connection" class="common-anchor-header">연결 끊기<button data-href="#Dropping-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>연결을 삭제하려면 다음 명령을 사용합니다.</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">DROP</span> DATABASE milvus_datasource;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Creating-tables" class="common-anchor-header">테이블 생성</h3><p>기존 테이블에서 데이터를 삽입하려면 다음을 사용합니다. <code translate="no">CREATE</code></p>
+<h3 id="Creating-tables" class="common-anchor-header">테이블 생성<button data-href="#Creating-tables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>기존 테이블에서 데이터를 삽입하려면 다음을 사용합니다. <code translate="no">CREATE</code></p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> milvus_datasource.test
 (<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> sqlitedb.test);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Dropping-collections" class="common-anchor-header">컬렉션 삭제</h3><p>컬렉션 삭제는 지원되지 않습니다.</p>
-<h3 id="Querying-and-selecting" class="common-anchor-header">쿼리 및 선택</h3><p>검색 벡터를 사용하여 데이터베이스를 쿼리하려면 <code translate="no">WHERE</code> 절에 <code translate="no">search_vector</code> 을 사용하면 됩니다.</p>
+<h3 id="Dropping-collections" class="common-anchor-header">컬렉션 삭제<button data-href="#Dropping-collections" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>컬렉션 삭제는 지원되지 않습니다.</p>
+<h3 id="Querying-and-selecting" class="common-anchor-header">쿼리 및 선택<button data-href="#Querying-and-selecting" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>검색 벡터를 사용하여 데이터베이스를 쿼리하려면 <code translate="no">WHERE</code> 절에 <code translate="no">search_vector</code> 을 사용하면 됩니다.</p>
 <p>주의:</p>
 <ul>
 <li><code translate="no">LIMIT</code> 을 생략하는 경우 Milvus에서 요구하므로 <code translate="no">search_default_limit</code> 이 사용됩니다.</li>
@@ -144,7 +219,22 @@ LIMIT <span class="hljs-number">10</span>;
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> milvus_datasource.createtest
 <span class="hljs-keyword">WHERE</span> category <span class="hljs-operator">=</span> &quot;science&quot;;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Deleting-records" class="common-anchor-header">레코드 삭제하기</h3><p>SQL에서와 마찬가지로 <code translate="no">DELETE</code> 을 사용하여 항목을 삭제할 수 있습니다.</p>
+<h3 id="Deleting-records" class="common-anchor-header">레코드 삭제하기<button data-href="#Deleting-records" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>SQL에서와 마찬가지로 <code translate="no">DELETE</code> 을 사용하여 항목을 삭제할 수 있습니다.</p>
 <p>주의:</p>
 <ul>
 <li>Milvus는 명확하게 지정된 기본 키가 있는 엔티티 삭제만 지원합니다.</li>
@@ -153,10 +243,40 @@ LIMIT <span class="hljs-number">10</span>;
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> milvus_datasource.test
 <span class="hljs-keyword">WHERE</span> id <span class="hljs-keyword">IN</span> (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Inserting-records" class="common-anchor-header">레코드 삽입</h3><p>다음과 같이 개별 행을 삽입할 수도 있습니다:</p>
+<h3 id="Inserting-records" class="common-anchor-header">레코드 삽입<button data-href="#Inserting-records" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음과 같이 개별 행을 삽입할 수도 있습니다:</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> milvus_test.testable (id,content,metadata,embeddings)
 <span class="hljs-keyword">VALUES</span> (&quot;id3&quot;, <span class="hljs-string">&#x27;this is a test&#x27;</span>, <span class="hljs-string">&#x27;{&quot;test&quot;: &quot;test&quot;}&#x27;</span>, <span class="hljs-string">&#x27;[1.0, 8.0, 9.0]&#x27;</span>);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Updating" class="common-anchor-header">업데이트</h3><p>Milvus API에서는 레코드 업데이트가 지원되지 않습니다. <code translate="no">DELETE</code> 와 <code translate="no">INSERT</code></p>
+<h3 id="Updating" class="common-anchor-header">업데이트<button data-href="#Updating" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus API에서는 레코드 업데이트가 지원되지 않습니다. <code translate="no">DELETE</code> 와 <code translate="no">INSERT</code></p>
 <hr>
 <p>자세한 내용 및 예제는 <a href="https://docs.mindsdb.com/what-is-mindsdb">MindsDB 공식 문서를</a> 참조하세요.</p>

@@ -2,13 +2,13 @@
 id: build_rag_on_arm.md
 summary: >-
   このチュートリアルでは、Armベースのインフラ上でRAG（Retrieval-Augmented
-  Generation）アプリケーションを構築する方法を学びます。ベクトルストレージには、フルマネージドMilvusベクトルデータベースであるZilliz
+  Generation）アプリケーションを構築する方法を学びます。ベクターストレージには、フルマネージドMilvusベクターデータベースであるZilliz
   Cloudを利用します。Zilliz
   Cloudは、AWS、GCP、Azureなどの主要なクラウドで利用できる。このデモでは、ArmマシンとAWS上にデプロイされたZilliz
   Cloudを使用している。LLMについては、llama.cppを使用してAWSのArmベースのサーバーCPU上でLlama-3.1-8Bモデルを使用しています。
-title: ArmアーキテクチャでRAGを構築
+title: ArmアーキテクチャでRAGを構築する
 ---
-<h1 id="Build-RAG-on-Arm-Architecture" class="common-anchor-header">ArmアーキテクチャでRAGを構築<button data-href="#Build-RAG-on-Arm-Architecture" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-on-Arm-Architecture" class="common-anchor-header">ArmアーキテクチャでRAGを構築する<button data-href="#Build-RAG-on-Arm-Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,7 +24,7 @@ title: ArmアーキテクチャでRAGを構築
         ></path>
       </svg>
     </button></h1><p><a href="https://www.arm.com/">Arm</a>CPUは、従来の機械学習（ML）や人工知能（AI）のユースケースを含め、幅広いアプリケーションで幅広く利用されています。</p>
-<p>このチュートリアルでは、Armベースのインフラストラクチャ上でRAG（Retrieval-Augmented Generation）アプリケーションを構築する方法を学びます。ベクトル・ストレージには、フルマネージドMilvusベクトル・データベースである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用します。Zilliz Cloudは、AWS、GCP、Azureなどの主要なクラウドで利用できる。このデモでは、ArmマシンとAWS上にデプロイされたZilliz Cloudを使用している。LLMについては、AWSのArmベースのサーバCPU上で<code translate="no">llama.cpp</code> を用いて<code translate="no">Llama-3.1-8B</code> 。</p>
+<p>このチュートリアルでは、Armベースのインフラストラクチャ上でRAG（Retrieval-Augmented Generation）アプリケーションを構築する方法を学びます。ベクトル・ストレージには、フルマネージドMilvusベクトル・データベースである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用します。Zilliz Cloudは、AWS、GCP、Azureなどの主要なクラウドで利用できる。このデモでは、ArmマシンとAWS上にデプロイされたZilliz Cloudを使用している。LLMについては、AWSのArmベースのサーバーCPU上で<code translate="no">llama.cpp</code> を用いて<code translate="no">Llama-3.1-8B</code> 。</p>
 <h2 id="Prerequisite" class="common-anchor-header">前提条件<button data-href="#Prerequisite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ title: ArmアーキテクチャでRAGを構築
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>この例を実行するには、<a href="https://aws.amazon.com/ec2/graviton/">AWS Graviton</a> を使用することを推奨します。<a href="https://aws.amazon.com/ec2/graviton/">AWS Graviton</a> は、Arm ベースのサーバー上で ML ワークロードを実行するためのコスト効率の良い方法を提供します。このノートブックは、Ubuntu 22.04 LTS システムの AWS Graviton3<code translate="no">c7g.2xlarge</code> インスタンスでテストされています。</p>
+    </button></h2><p>この例を実行するには、<a href="https://aws.amazon.com/ec2/graviton/">AWS Graviton</a> を使用することを推奨します。<a href="https://aws.amazon.com/ec2/graviton/">AWS Graviton</a> は、Arm ベースのサーバー上で ML ワークロードを実行するコスト効率の良い方法を提供します。このノートブックは、Ubuntu 22.04 LTS システムの AWS Graviton3<code translate="no">c7g.2xlarge</code> インスタンスでテストされています。</p>
 <p>この例を実行するには、少なくとも4つのコアと8GBのRAMが必要です。ディスクストレージは少なくとも32GBまで設定してください。同じかそれ以上のスペックのインスタンスを使用することを推奨する。</p>
 <p>インスタンスを起動したら、インスタンスに接続し、以下のコマンドを実行して環境を準備します。</p>
 <p>サーバに python をインストールする：</p>
@@ -132,7 +132,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>フォルダ<code translate="no">milvus_docs/en/faq</code> からすべてのマークダウン・ファイルをロードする。各ドキュメントについて、単に "# "を使ってファイル内のコンテンツを区切るだけで、マークダウン・ファイルの各主要部分のコンテンツを大まかに区切ることができる。</p>
+<p>すべてのマークダウン・ファイルをフォルダ<code translate="no">milvus_docs/en/faq</code> からロードする。各ドキュメントについて、単に "# "を使ってファイル内のコンテンツを区切るだけで、マークダウン・ファイルの各主要部分のコンテンツを大まかに区切ることができる。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -242,7 +242,7 @@ $ <span class="hljs-built_in">sudo</span> apt install build-essential -y
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">cd</span> llama.cpp
 $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>help コマンドを実行して、<code translate="no">llama.cpp</code> が正しくビルドされたことを確認する：</p>
+<p>helpコマンドを実行して、<code translate="no">llama.cpp</code> が正しくビルドされたことを確認する：</p>
 <pre><code translate="no" class="language-bash">$ ./llama-cli -h
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">llama.cpp</code> が正しくビルドされていれば、help オプションが表示されます。出力スニペットは次のようになります：</p>

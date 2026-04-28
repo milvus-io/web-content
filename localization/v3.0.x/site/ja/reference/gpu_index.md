@@ -23,7 +23,7 @@ title: GPUインデックス
 <p>GPUインデックスを使用すると、CPUインデックスを使用した場合と比較して、必ずしもレイテンシが減少するとは限らないことに注意することが重要です。スループットを完全に最大化したいのであれば、極めて高いリクエスト・プレッシャーか、大量のクエリ・ベクターが必要になります。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
    </span> <span class="img-wrapper"> <span>パフォーマンス</span> </span></p>
 <p>MilvusのGPUサポートはNvidia<a href="https://rapids.ai/">RAPIDS</a>チームによって提供されています。以下は現在MilvusがサポートしているGPUインデックスタイプです。</p>
 <h2 id="GPUCAGRA" class="common-anchor-header">GPU_CAGRA<button data-href="#GPUCAGRA" class="anchor-icon" translate="no">
@@ -66,7 +66,7 @@ title: GPUインデックス
 <tr><td><code translate="no">itopk_size</code></td><td>検索中に保持される中間結果のサイズを決定する。この値を大きくすると、検索パフォーマンスを犠牲にしてでも検索結果を改善することができる。少なくとも最終的な top-k (limit) 値に等しくなければならず、通常は 2 のべき乗 (例: 16, 32, 64, 128) である。</td><td>空</td></tr>
 <tr><td><code translate="no">search_width</code></td><td>検索中に CAGRA グラフに入る点の数を指定する。この値を大きくすると、想起率は向上するが、検索性能に影響を与える可能性がある（例：1, 2, 4, 8, 16, 32）。</td><td>空</td></tr>
 <tr><td><code translate="no">min_iterations</code> /<code translate="no">max_iterations</code></td><td>検索の反復処理を制御する。デフォルトでは<code translate="no">0</code> に設定されており、CAGRA は<code translate="no">itopk_size</code> と<code translate="no">search_width</code> に基づいて自動的に反復回数を決定する。これらの値を手動で調整することで、性能と精度のバランスをとることができます。</td><td><code translate="no">0</code></td></tr>
-<tr><td><code translate="no">team_size</code></td><td>GPU でのメトリック距離計算に使用する CUDA スレッド数を指定します。一般的な値は2のべき乗から32までです（例：2、4、8、16、32）。これは検索性能に軽微な影響を与えます。デフォルト値は<code translate="no">0</code> で、milvus はベクトル次元に基づいて自動的に<code translate="no">team_size</code> を選択します。</td><td><code translate="no">0</code></td></tr>
+<tr><td><code translate="no">team_size</code></td><td>GPU でのメトリック距離計算に使用する CUDA スレッド数を指定します。一般的な値は2の累乗から32までです（例：2、4、8、16、32）。これは検索性能に軽微な影響を与えます。デフォルト値は<code translate="no">0</code> で、milvus はベクトル次元に基づいて自動的に<code translate="no">team_size</code> を選択します。</td><td><code translate="no">0</code></td></tr>
 <tr><td><code translate="no">ef</code></td><td>クエリ時間と精度のトレードオフを指定します。<code translate="no">ef</code> の値を高くすると、検索精度は高くなりますが、検索速度は遅くなります。<br/>インデックス作成時に<code translate="no">adapt_for_cpu</code> を<code translate="no">true</code> に設定した場合、このパラメータは必須となります。</td><td><code translate="no">[top_k, int_max]</code></td></tr>
 </tbody>
 </table>
@@ -155,7 +155,7 @@ title: GPUインデックス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">PQ</code> (積量子化）は、元の高次元ベクトル空間を の低次元ベクトル空間のデカルト積に一様に分解し、分解された低次元ベクトル空間を量子化します。積量子化により、対象ベクトルと全ユニットの中心との距離を計算する代わりに、対象ベクトルと各低次元空間のクラスタリング中心との距離を計算することが可能となり、アルゴリズムの時間的複雑性と空間的複雑性を大幅に削減することができる。<code translate="no">m</code> </p>
+    </button></h2><p><code translate="no">PQ</code> (積量子化）は、元の高次元ベクトル空間を<code translate="no">m</code> の低次元ベクトル空間のデカルト積に一様に分解し、分解された低次元ベクトル空間を量子化します。積量子化により、対象ベクトルと全ユニットの中心との距離を計算する代わりに、対象ベクトルと各低次元空間のクラスタリング中心との距離を計算することが可能となり、アルゴリズムの時間的複雑性と空間的複雑性を大幅に削減することができる。</p>
 <p>IVF_PQ は，ベクトルの積を量子化する前にIVFインデックスクラスタリングを行います．そのインデックスファイルはIVF_SQ8よりもさらに小さいが、ベクトル探索時の精度が低下する。</p>
 <div class="alert note">
 <p>インデックス作成パラメータと検索パラメータはMilvus分布によって異なります。まずMilvusディストリビューションを選択してください。</p>
@@ -231,7 +231,7 @@ title: GPUインデックス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>現在、Milvusは効率的な検索操作のために、全てのインデックスをGPUメモリにロードします。ロードできるデータ量はGPUメモリのサイズに依存します：</p>
+    </button></h2><p>現在、Milvusは効率的な検索操作のために、すべてのインデックスをGPUメモリにロードします。ロードできるデータ量はGPUメモリのサイズに依存します：</p>
 <ul>
 <li><strong>GPU_CAGRA</strong>: メモリ使用量は元のベクトルデータの約 1.8 倍。</li>
 <li><strong>GPU_IVF_FLAT</strong>および<strong>GPU_BRUTE_FORCE</strong>：元データのサイズに等しいメモリを必要とします。</li>

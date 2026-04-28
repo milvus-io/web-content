@@ -1,6 +1,8 @@
 ---
 id: cross-bucket-backup-and-restore.md
-summary: 本主题详细介绍了从一个 Milvus 实例备份一个 Collections 并将其还原到另一个实例的过程
+summary: >-
+  This topic details the process of backing up a collection from one Milvus
+  instance and restoring it to another
 title: 跨存储桶在实例间迁移
 ---
 <h1 id="Migrate-Between-Instances-Across-Buckets" class="common-anchor-header">跨存储桶在实例间迁移<button data-href="#Migrate-Between-Instances-Across-Buckets" class="anchor-icon" translate="no">
@@ -37,7 +39,7 @@ title: 跨存储桶在实例间迁移
     </button></h2><p>下图说明了在同一对象存储中使用不同存储桶进行备份和恢复的过程。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cross-bucket-backup-and-restore.png" alt="cross-bucket-backup-and-restore.png" class="doc-image" id="cross-bucket-backup-and-restore.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cross-bucket-backup-and-restore.png" alt="cross-bucket-backup-and-restore.png" class="doc-image" id="cross-bucket-backup-and-restore.png" />
    </span> <span class="img-wrapper"> <span>跨存储桶备份和恢复.png</span> </span></p>
 <p>假设我们有两个 Milvus 实例，<code translate="no">milvus_A</code> 和<code translate="no">milvus_B</code> ，它们都使用默认的 MinIO 存储引擎进行对象存储。这些实例在同一对象存储中使用不同的存储桶 bucket_A 和<code translate="no">bucket_B</code> 。在这个示例中，我们的目标是完成以下任务：</p>
 <ol>
@@ -78,7 +80,22 @@ title: 跨存储桶在实例间迁移
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">步骤 1：准备配置</h3><p>进入 milvus-backup 项目目录，创建名为 configs 的目录：</p>
+    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">步骤 1：准备配置<button data-href="#Step-1-Prepare-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>进入 milvus-backup 项目目录，创建名为 configs 的目录：</p>
 <pre><code translate="no" class="language-shell">mkdir configs
 cd configs
 <button class="copy-code-btn"></button></code></pre>
@@ -91,7 +108,22 @@ cd configs
 ├── milvus-backup
 └── README.md
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">第 2 步：编辑配置文件</h3><p>修改 backup.yaml 文件，为<code translate="no">milvus_A</code> 设置适当的配置：</p>
+<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">第 2 步：编辑配置文件<button data-href="#Step-2-Edit-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>修改 backup.yaml 文件，为<code translate="no">milvus_A</code> 设置适当的配置：</p>
 <ul>
 <li><p>连接配置</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
@@ -138,7 +170,22 @@ cd configs
 <li><p><code translate="no">minio.backupBucketName</code>:<code translate="no">milvus_B</code> 中用于备份存储的存储桶名称。在本例中，<code translate="no">milvus_A</code> 和<code translate="no">milvus_B</code> 使用不同的存储桶。因此，设置为<code translate="no">bucket_B</code>.</p></li>
 <li><p><code translate="no">minio.backupRootPath</code>:指定用于在<code translate="no">milvus_B</code> 中存储备份文件的存储桶内的根路径。在本例中，设置为<code translate="no">backup</code> 。</p></li>
 </ul>
-<h3 id="Step-3-Create-backup" class="common-anchor-header">第 3 步：创建备份</h3><p>保存 backup.yaml 后，创建名为<code translate="no">my_backup</code> 的备份：</p>
+<h3 id="Step-3-Create-backup" class="common-anchor-header">第 3 步：创建备份<button data-href="#Step-3-Create-backup" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>保存 backup.yaml 后，创建名为<code translate="no">my_backup</code> 的备份：</p>
 <pre><code translate="no" class="language-shell">./milvus-backup create -c coll -n my_backup
 <button class="copy-code-btn"></button></code></pre>
 <p>此命令在对象存储中为 Collections coll 创建备份<code translate="no">bucket_B/backup/my_backup</code> 。</p>
@@ -157,7 +204,22 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Configure-restoration-settings" class="common-anchor-header">步骤 1：配置恢复设置</h3><p>重复步骤 2，修改配置以还原到<code translate="no">milvus_B</code> ，确保<code translate="no">minio.bucketName</code> 设置为<code translate="no">bucket_B</code> 。</p>
+    </button></h2><h3 id="Step-1-Configure-restoration-settings" class="common-anchor-header">步骤 1：配置恢复设置<button data-href="#Step-1-Configure-restoration-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>重复步骤 2，修改配置以还原到<code translate="no">milvus_B</code> ，确保<code translate="no">minio.bucketName</code> 设置为<code translate="no">bucket_B</code> 。</p>
 <p>下面是一个配置示例：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
@@ -195,7 +257,22 @@ cd configs
   <span class="hljs-attr">backupRootPath:</span> <span class="hljs-string">&quot;backup&quot;</span> <span class="hljs-comment"># Rootpath to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Restore-backup" class="common-anchor-header">步骤 2：恢复备份</h3><p>将备份还原到<code translate="no">milvus_B</code> ：</p>
+<h3 id="Step-2-Restore-backup" class="common-anchor-header">步骤 2：恢复备份<button data-href="#Step-2-Restore-backup" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>将备份还原到<code translate="no">milvus_B</code> ：</p>
 <pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak
 <button class="copy-code-btn"></button></code></pre>
 <p>此命令将备份还原到<code translate="no">milvus_B</code> 中名为<code translate="no">coll_bak</code> 的新 Collections 中，数据存储在<code translate="no">bucket_B/files/insert_log/[ID of new collection]</code> 中。</p>

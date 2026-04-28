@@ -184,7 +184,7 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h3><p>Wenn Ihr JSON-Feldschlüssel Werte in einem falschen Format enthält (z. B. Zahlen, die als Strings gespeichert sind), können Sie eine Cast-Funktion an das Argument <code translate="no">json_cast_function</code> übergeben, um diese Werte zum Zeitpunkt der Indexierung zu konvertieren.</p>
-<p>Bei Cast-Funktionen wird die Groß-/Kleinschreibung nicht berücksichtigt. Die folgenden Funktionen werden unterstützt:</p>
+<p>Bei Cast-Funktionen wird die Groß- und Kleinschreibung nicht berücksichtigt. Die folgenden Funktionen werden unterstützt:</p>
 <table>
    <tr>
      <th><p>Cast-Funktion</p></th>

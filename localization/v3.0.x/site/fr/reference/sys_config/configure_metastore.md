@@ -66,7 +66,7 @@ summary: Découvrez comment configurer le metastore pour Milvus.
     </button></h2><table id="metastore.snapshot.ttl">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description de la valeur par défaut : etcd, Valeurs valides : [etcd, tikv</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>

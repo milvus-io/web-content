@@ -27,9 +27,9 @@ title: 画像の重複排除
 <li><p>ResNet-50</p></li>
 <li><p><a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwjm8-KEjtj7AhVPcGwGHapPB40QFnoECAgQAQ&amp;url=https%3A%2F%2Ftowhee.io%2F&amp;usg=AOvVaw37IzMMiyxGtj82K7O4fInn">Towhee</a></p></li>
 </ul>
-<p>近年、ユーザー生成コンテンツが爆発的に増加している。人々は撮った写真を即座にソーシャルメディアにアップロードすることができる。しかし、そのような画像データが氾濫しているため、重複したコンテンツが多く見受けられる。ユーザーエクスペリエンスを向上させるためには、このような重複画像を削除しなければならない。画像重複排除システムは、データベース内の画像を1枚ずつ比較して重複画像を除外するという手作業から解放してくれる。まったく同じ画像を選び出すことは、まったく複雑な作業ではない。しかし、画像を拡大したり、トリミングしたり、明るさやグレースケールを調整したりすることもある。画像重複除去システムは、このような類似画像を識別し、それらも除去する必要があります。</p>
-<p>このチュートリアルでは、画像重複排除システムの構築方法を学びます。このチュートリアルでは、ResNet-50 モデルを使って画像の特徴を抽出し、それをベクトルに変換します。そして、これらの画像ベクトルをMilvusベクトルデータベースに保存し、Milvusでもベクトルの類似検索を行います。</p>
+<p>近年、ユーザー生成コンテンツが爆発的に増加している。人々は撮った写真を即座にソーシャルメディアにアップロードできる。しかし、そのような画像データが氾濫しているため、重複したコンテンツが多く見受けられる。ユーザーエクスペリエンスを向上させるためには、このような重複画像を削除しなければならない。画像重複排除システムは、データベース内の画像を1枚ずつ比較して重複画像を除外するという手作業から解放してくれる。まったく同じ画像を選び出すことは、まったく複雑な作業ではない。しかし、画像を拡大したり、トリミングしたり、明るさやグレースケールを調整したりすることもある。画像重複除去システムは、このような類似画像を識別し、それらも除去する必要があります。</p>
+<p>このチュートリアルでは、画像重複排除システムの構築方法を学びます。このチュートリアルでは、ResNet-50 モデルを使って画像の特徴を抽出し、それをベクトルに変換します。そして、これらの画像ベクトルをMilvusベクトルデータベースに格納し、Milvusでベクトルの類似検索も行います。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
    </span> <span class="img-wrapper"> <span>画像複製ワークフロー</span> </span></p>

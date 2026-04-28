@@ -2,7 +2,7 @@
 id: integrate_with_agno.md
 title: Intégrer Milvus avec Agno
 summary: >-
-  La base de données vectorielle Milvus permet de stocker et d'extraire
+  La base de données vectorielles Milvus permet de stocker et d'extraire
   efficacement des informations sous forme d'enchâssements. Avec Milvus et Agno,
   vous pouvez facilement intégrer vos connaissances dans les flux de travail de
   vos agents. Ce document est un guide de base sur l'utilisation de
@@ -87,9 +87,9 @@ vector_db = Milvus(
 <div class="alert note">
 <p>Voici comment définir l'uri et le token :</p>
 <ul>
-<li>Si vous n'avez besoin d'une base de données vectorielle locale que pour des données à petite échelle ou pour le prototypage, définir l'uri comme un fichier local, par exemple<code translate="no">./milvus.db</code>, est la méthode la plus pratique, car elle utilise automatiquement <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> pour stocker toutes les données dans ce fichier.</li>
+<li>Si vous n'avez besoin d'une base de données vectorielle locale que pour les données à petite échelle ou le prototypage, définir l'uri comme un fichier local, par exemple<code translate="no">./milvus.db</code>, est la méthode la plus pratique, car elle utilise automatiquement <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> pour stocker toutes les données dans ce fichier.</li>
 <li>Si vous disposez de données à grande échelle, par exemple plus d'un million de vecteurs, vous pouvez configurer un serveur Milvus plus performant sur <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Dans cette configuration, veuillez utiliser l'adresse et le port du serveur comme uri, par exemple<code translate="no">http://localhost:19530</code>. Si vous activez la fonction d'authentification sur Milvus, utilisez "<your_username>:<your_password>" comme jeton, sinon ne définissez pas le jeton.</li>
-<li>Si vous utilisez <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, le service en nuage entièrement géré pour Milvus, ajustez les valeurs <code translate="no">uri</code> et <code translate="no">token</code>, qui correspondent au <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">point de terminaison public et à la clé API</a> dans Zilliz Cloud.</li>
+<li>Si vous utilisez <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, le service en nuage entièrement géré pour Milvus, ajustez <code translate="no">uri</code> et <code translate="no">token</code>, qui correspondent au <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">point de terminaison public et à la clé API</a> dans Zilliz Cloud.</li>
 </ul>
 </div>
 <h2 id="Load-data" class="common-anchor-header">Charger les données<button data-href="#Load-data" class="anchor-icon" translate="no">

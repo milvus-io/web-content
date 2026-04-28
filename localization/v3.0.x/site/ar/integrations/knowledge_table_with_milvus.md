@@ -3,7 +3,7 @@ id: knowledge_table_with_milvus.md
 summary: >-
   بشكل افتراضي، يستخدم جدول المعرفة قاعدة بيانات Milvus لتخزين البيانات
   المستخرجة واسترجاعها. يسمح ذلك للمستخدمين بالبحث عن البيانات وتصفيتها وتحليلها
-  بسهولة باستخدام الميزات القوية لـ Milvus. سنعرض في هذا البرنامج التعليمي كيفية
+  بسهولة باستخدام الميزات القوية لـ Milvus. سنوضح في هذا البرنامج التعليمي كيفية
   البدء باستخدام جدول المعرفة و Milvus.
 title: جدول المعرفة مع ميلفوس
 ---
@@ -76,10 +76,10 @@ title: جدول المعرفة مع ميلفوس
         ></path>
       </svg>
     </button></h2><p>ستجد الملف <code translate="no">.env.example</code> في الدليل الجذر للمشروع. انسخ هذا الملف إلى <code translate="no">.env</code> واملأ متغيرات البيئة المطلوبة.</p>
-<p>بالنسبة لميلفوس، يجب عليك تعيين متغيرات البيئة <code translate="no">MILVUS_DB_URI</code> و <code translate="no">MILVUS_DB_TOKEN</code>. إليك بعض النصائح</p>
+<p>بالنسبة لميلفوس، يجب عليك تعيين متغيرات البيئة <code translate="no">MILVUS_DB_URI</code> و <code translate="no">MILVUS_DB_TOKEN</code>. إليك بعض النصائح:</p>
 <blockquote>
 <ul>
-<li>إن تعيين <code translate="no">MILVUS_DB_URI</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هو الطريقة الأكثر ملاءمة، حيث أنه يستخدم تلقائيًا ملف <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
+<li>إن تعيين <code translate="no">MILVUS_DB_URI</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هي الطريقة الأكثر ملاءمة، حيث أنها تستخدم تلقائيًا ملف <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
 <li>إذا كان لديك حجم كبير من البيانات، على سبيل المثال أكثر من مليون ناقل، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">Docker أو Kubernetes</a>. في هذا الإعداد، يُرجى استخدام عنوان الخادم والمنفذ كـ uri، على سبيل المثال<code translate="no">http://localhost:19530</code>. إذا قمت بتمكين ميزة المصادقة على Milvus، استخدم "<your_username>:<your_password>" كرمز مميز، وإلا فلا تقم بتعيين الرمز المميز.</li>
 <li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، فاضبط <code translate="no">MILVUS_DB_URI</code> و <code translate="no">MILVUS_DB_TOKEN</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في Zilliz Cloud.</li>
 </ul>
@@ -137,7 +137,7 @@ title: جدول المعرفة مع ميلفوس
     </button></h2><p>يمكن الوصول إلى الواجهة الأمامية على <code translate="no">http://localhost:3000</code> ، ويمكن الوصول إلى الواجهة الخلفية على <code translate="no">http://localhost:8000</code>.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/knowlege_table.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/knowlege_table.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

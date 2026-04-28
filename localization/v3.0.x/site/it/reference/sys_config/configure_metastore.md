@@ -43,7 +43,7 @@ summary: Imparare a configurare il metastore per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Valore predefinito: etcd, Valori validi: [etcd, tikv]     </td>
+      <td>        Valore predefinito: etcd, Valori validi: [etcd, tikv].      </td>
       <td>etcd</td>
     </tr>
   </tbody>

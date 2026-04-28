@@ -21,7 +21,7 @@ title: Visão geral do CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus-CDC é uma ferramenta de fácil utilização que pode capturar e sincronizar dados incrementais em instâncias Milvus. Garante a fiabilidade dos dados empresariais ao transferi-los sem problemas entre as instâncias de origem e de destino, permitindo uma cópia de segurança incremental fácil e a recuperação de desastres.</p>
+    </button></h1><p>Milvus-CDC é uma ferramenta de fácil utilização que pode capturar e sincronizar dados incrementais em instâncias Milvus. Garante a fiabilidade dos dados empresariais, transferindo-os sem problemas entre as instâncias de origem e de destino, permitindo uma cópia de segurança incremental fácil e a recuperação de desastres.</p>
 <h2 id="Key-capabilities" class="common-anchor-header">Principais recursos<button data-href="#Key-capabilities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +61,7 @@ title: Visão geral do CDC
     </button></h2><p>O Milvus-CDC adopta uma arquitetura com dois componentes principais - um servidor HTTP que gere as tarefas e os metadados, e <strong>o corelib</strong> que sincroniza a execução das tarefas com um leitor que obtém os dados da instância Milvus de origem e um escritor que envia os dados processados para a instância Milvus de destino.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
    </span> <span class="img-wrapper"> <span>milvus-cdc-arquitetura</span> </span></p>
 <p>No diagrama anterior,</p>
 <ul>
@@ -92,7 +92,7 @@ title: Visão geral do CDC
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
    </span> <span class="img-wrapper"> <span>Milvus-cdc-workflow</span> </span></p>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

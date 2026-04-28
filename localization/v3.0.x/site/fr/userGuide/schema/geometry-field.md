@@ -28,7 +28,7 @@ beta: Milvus 2.6.4+
     </button></h1><p>Lors de la création d'applications telles que les systèmes d'information géographique (SIG), les outils de cartographie ou les services basés sur la localisation, il est souvent nécessaire de stocker et d'interroger des données géométriques. Le type de données <code translate="no">GEOMETRY</code> de Milvus résout ce problème en fournissant un moyen natif de stocker et d'interroger des données géométriques flexibles.</p>
 <p>Utilisez un champ GEOMETRY lorsque vous devez combiner la similarité vectorielle avec des contraintes spatiales, par exemple :</p>
 <ul>
-<li><p>Service de localisation (LBS) : "trouver des points d'intérêt similaires <strong>dans</strong> ce pâté de maisons".</p></li>
+<li><p>Service de localisation (LBS) : "trouver des points d'intérêt similaires à <strong>l'intérieur de</strong> ce pâté de maisons".</p></li>
 <li><p>Recherche multimodale : recherche multimodale : "trouver des photos similaires <strong>dans un rayon de 1 km</strong> autour de ce point".</p></li>
 <li><p>Cartes et logistique : "actifs <strong>à l'intérieur d'</strong> une région" ou "itinéraires <strong>croisant</strong> un chemin".</p></li>
 </ul>

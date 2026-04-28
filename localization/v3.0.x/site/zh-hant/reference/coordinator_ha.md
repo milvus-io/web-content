@@ -37,7 +37,7 @@ title: 協調器 HA
     </button></h2><p>在 2.2.3 版中，Milvus 為協調器實現了高可用性，使其在主動-備用模式下工作，減少可能導致服務不可用的單點故障 (SpoF)。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
    </span> <span class="img-wrapper"> <span>協調器 HA</span> </span></p>
 <p>上圖說明了協調器如何在主動待命模式下工作。當一對協調器啟動時，它們會使用自己的伺服器 ID 向 etcd 註冊，並競爭主動角色。成功從 etcd 租用主動角色的協調器將開始提供服務，而這對協調器中的另一個協調器將維持待命，觀察主動角色，並準備在主動協調器死亡時提供服務。</p>
 <h2 id="Enable-coordinator-HA" class="common-anchor-header">啟用協調器 HA<button data-href="#Enable-coordinator-HA" class="anchor-icon" translate="no">
@@ -55,7 +55,22 @@ title: 協調器 HA
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="With-Helm" class="common-anchor-header">使用 Helm</h3><p>若要啟動多個協調器，並讓它們以主動待命模式運作，您應該對<code translate="no">values.yaml</code> 檔案做以下變更。</p>
+    </button></h2><h3 id="With-Helm" class="common-anchor-header">使用 Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>若要啟動多個協調器，並讓它們以主動待命模式運作，您應該對<code translate="no">values.yaml</code> 檔案做以下變更。</p>
 <ul>
 <li>將<code translate="no">xxxCoordinator.replicas</code> 設為<code translate="no">2</code> 。</li>
 <li>將<code translate="no">xxxCoordinator.activeStandby.enabled</code> 設為<code translate="no">true</code> 。</li>
@@ -77,7 +92,22 @@ title: 協調器 HA
   <span class="hljs-attr">activeStandby:</span>
     <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>  <span class="hljs-comment"># Set this to true to have RootCoordinators work in active-standby mode.</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="With-Docker" class="common-anchor-header">使用 Docker</h3><p>要啟動多個協調器，並讓它們以主動待命模式運作，您可以在用來啟動 Milvus 叢集的<code translate="no">docker-compose</code> 檔案中加入一些定義。</p>
+<h3 id="With-Docker" class="common-anchor-header">使用 Docker<button data-href="#With-Docker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要啟動多個協調器，並讓它們以主動待命模式運作，您可以在用來啟動 Milvus 叢集的<code translate="no">docker-compose</code> 檔案中加入一些定義。</p>
 <p>以下的程式碼片段以 RootCoord 為例。您也可以對其他類型的協調器做同樣的動作。</p>
 <pre><code translate="no" class="language-yaml">  <span class="hljs-attr">rootcoord:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
@@ -112,7 +142,22 @@ title: 協調器 HA
 <span class="hljs-comment">#      - &quot;pulsar&quot;</span>
 <span class="hljs-comment">#      - &quot;minio&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="With-MacLinux-shell" class="common-anchor-header">使用 Mac/Linux shell</h3><p>要啟動多個協調器，並讓它們以主動待命模式工作，您可以</p>
+<h3 id="With-MacLinux-shell" class="common-anchor-header">使用 Mac/Linux shell<button data-href="#With-MacLinux-shell" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要啟動多個協調器，並讓它們以主動待命模式工作，您可以</p>
 <ol>
 <li><p>下載 Milvus 原始碼到您的本機磁碟機，<a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">然後從原始碼啟動一個 Milvus 叢集</a>，如下所示：</p>
 <pre><code translate="no" class="language-shell">sudo ./scripts/start_cluster.sh

@@ -39,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Bidang JSON adalah bidang yang ditentukan oleh skema di Milvus yang menyimpan data nilai-kunci terstruktur. Nilai-nilai tersebut dapat berupa string, angka, boolean, array, atau objek bersarang.</p>
-<p>Berikut adalah contoh tampilan field JSON dalam dokumen:</p>
+<p>Berikut ini contoh tampilan field JSON dalam sebuah dokumen:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;metadata&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;electronics&quot;</span><span class="hljs-punctuation">,</span>
@@ -1126,7 +1126,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
         ></path>
       </svg>
     </button></h3><p>Milvus menyimpan semua nilai numerik yang diindeks sebagai nilai ganda.</p>
-<p>Jika nilai numerik melebihi <strong>2^53</strong>, maka nilai tersebut akan kehilangan presisi. Hilangnya presisi ini dapat menyebabkan kueri filter tidak dapat mencocokkan nilai di luar rentang dengan tepat.</p>
+<p>Jika nilai numerik melebihi <strong>2^53</strong>, maka nilai tersebut akan kehilangan presisi. Hilangnya presisi ini dapat mengakibatkan kueri filter tidak dapat mencocokkan nilai di luar rentang dengan tepat.</p>
 <h3 id="Can-I-create-multiple-indexes-on-the-same-JSON-path-with-different-cast-types" class="common-anchor-header">Dapatkah saya membuat beberapa indeks pada jalur JSON yang sama dengan jenis cast yang berbeda?<button data-href="#Can-I-create-multiple-indexes-on-the-same-JSON-path-with-different-cast-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1174,4 +1174,4 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Jika ekspresi filter Anda menggunakan jenis yang berbeda dari indeks <code translate="no">json_cast_type</code>, sistem <strong>tidak</strong> akan <strong>menggunakan indeks</strong>, dan mungkin akan kembali ke pemindaian brute-force yang lebih lambat-jika data memungkinkan. Untuk performa terbaik, selalu selaraskan ekspresi filter Anda dengan tipe cast indeks.</p>
+    </button></h3><p>Jika ekspresi filter Anda menggunakan jenis yang berbeda dari indeks <code translate="no">json_cast_type</code>, sistem <strong>tidak</strong> akan <strong>menggunakan indeks</strong>, dan mungkin akan kembali ke pemindaian brute-force yang lebih lambat-jika data memungkinkan. Untuk performa terbaik, selalu selaraskan ekspresi filter Anda dengan jenis cast indeks.</p>

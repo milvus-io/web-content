@@ -39,14 +39,14 @@ beta: Milvus 3.0.x
 <p>这种将数据导入 Milvus 的工作流程会产生难以同步的冗余数据，并增加确保数据一致性的工程维护负担。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/yqxwwpq3vheya4b8398cwopnnyn.png" alt="Yqxwwpq3vheya4b8398cwopnnyn" class="doc-image" id="yqxwwpq3vheya4b8398cwopnnyn" />
-   </span> <span class="img-wrapper"> <span>Yqxwwpq3vheya4b8398cwopnnyn</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" />
+   </span> <span class="img-wrapper"> <span>将数据引入计算工作流程</span> </span></p>
 <p>为了解决这些问题，Milvus 提供外部 Collections，让您从 Milvus 访问外部存储的数据，而无需担心数据同步和 ETL 管道。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/q6f4wtcd2h3pnkbnmxncw3urn3f.png" alt="Q6f4wtcd2h3pnkbnmxncw3urn3f" class="doc-image" id="q6f4wtcd2h3pnkbnmxncw3urn3f" />
-   </span> <span class="img-wrapper"> <span>Q6f4wtcd2h3pnkbnmxncw3urn3f</span> </span></p>
-<p>一旦创建，外部 Collections 可以直接访问您的数据，并将其保存在您存储数据的相同位置。在后台，Milvus 会创建清单文件，记录 Milvus 元数据与外部数据文件中的行之间的映射关系。清单文件准备就绪后，你可以像在任何管理 Collections 中一样，在外部 Collections 中创建索引。</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" />
+   </span> <span class="img-wrapper"> <span>将计算带入数据工作流</span> </span></p>
+<p>外部 Collections 创建后，可直接访问您的数据，并将其保存在您存储数据的相同位置。在后台，Milvus 会创建清单文件，记录 Milvus 元数据与外部数据文件中的行之间的映射关系。清单文件准备就绪后，你可以像在任何管理 Collections 中一样，在外部 Collections 中创建索引。</p>
 <p>当数据发生变化时，手动触发次秒级刷新即可更新元数据，使 Milvus 始终保持最新状态。</p>
 <h2 id="Limits--restrictions" class="common-anchor-header">限制和约束<button data-href="#Limits--restrictions" class="anchor-icon" translate="no">
       <svg translate="no"

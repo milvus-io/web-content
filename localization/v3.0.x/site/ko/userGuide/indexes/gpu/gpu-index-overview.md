@@ -1,7 +1,7 @@
 ---
 id: gpu-index-overview.md
 title: GPU 인덱스 개요
-summary: Milvus에서 GPU를 지원하는 인덱스를 구축하면 처리량이 많고 호출 횟수가 많은 시나리오에서 검색 성능을 크게 향상시킬 수 있습니다.
+summary: Milvus에서 GPU를 지원하는 인덱스를 구축하면 처리량이 많고 호출 빈도가 높은 시나리오에서 검색 성능을 크게 향상시킬 수 있습니다.
 ---
 <h1 id="GPU-Index-Overview" class="common-anchor-header">GPU 인덱스 개요<button data-href="#GPU-Index-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -64,7 +64,7 @@ summary: Milvus에서 GPU를 지원하는 인덱스를 구축하면 처리량이
     </button></h2><ul>
 <li><p><code translate="no">GPU_IVF_FLAT</code> 의 경우 <code translate="no">limit</code> 의 최대값은 1,024입니다.</p></li>
 <li><p><code translate="no">GPU_IVF_PQ</code> 및 <code translate="no">GPU_CAGRA</code> 의 경우 <code translate="no">limit</code> 의 최대값은 1,024입니다.</p></li>
-<li><p><code translate="no">GPU_BRUTE_FORCE</code> 의 경우 <code translate="no">limit</code> 이 설정되어 있지 않지만 잠재적인 성능 문제를 방지하기 위해 4,096을 초과하지 않는 것이 좋습니다.</p></li>
+<li><p><code translate="no">GPU_BRUTE_FORCE</code> 의 경우 <code translate="no">limit</code> 는 설정되어 있지 않지만 잠재적인 성능 문제를 방지하기 위해 4,096을 초과하지 않는 것이 좋습니다.</p></li>
 <li><p>현재 GPU 인덱스는 <code translate="no">COSINE</code> 거리를 지원하지 않습니다. <code translate="no">COSINE</code> 거리가 필요한 경우 먼저 데이터를 정규화한 다음 내부 곱(IP) 거리를 대체로 사용할 수 있습니다.</p></li>
 <li><p>GPU 인덱스에 대한 로드 OOM 보호는 완전히 지원되지 않으며, 너무 많은 데이터는 쿼리 노드 충돌을 일으킬 수 있습니다.</p></li>
 <li><p>GPU 인덱스는 <a href="/docs/ko/range-search.md">범위 검색</a> 및 <a href="/docs/ko/grouping-search.md">그룹 검색과</a> 같은 검색 기능을 지원하지 않습니다.</p></li>
@@ -159,5 +159,5 @@ summary: Milvus에서 GPU를 지원하는 인덱스를 구축하면 처리량이
 <li><p><strong>GPU 인덱스는 언제 사용하는 것이 적절하나요?</strong></p>
 <p>GPU 인덱스는 높은 처리량이나 높은 리콜이 필요한 상황에서 특히 유용합니다. 예를 들어, 대규모 배치를 처리할 때 GPU 인덱싱의 처리량은 CPU 인덱싱의 처리량을 100배까지 능가할 수 있습니다. 배치 규모가 작은 시나리오에서는 여전히 성능 면에서 GPU 인덱싱이 CPU 인덱싱을 크게 앞섭니다. 또한, 빠른 데이터 삽입이 요구되는 경우, GPU를 통합하면 인덱스 구축 프로세스의 속도를 크게 높일 수 있습니다.</p></li>
 <li><p><strong>GPU_CAGRA, GPU_IVF_PQ, GPU_IVF_FLAT, GPU_BRUTE_FORCE와 같은 GPU 인덱스는 어떤 시나리오에 가장 적합할까요?</strong></p>
-<p><code translate="no">GPU_CAGRA</code> 인덱스는 더 많은 메모리를 사용하지만 향상된 성능을 요구하는 시나리오에 이상적입니다. 메모리 절약이 우선 순위인 환경에서는 <code translate="no">GPU_IVF_PQ</code> 인덱스를 사용하면 스토리지 요구 사항을 최소화할 수 있지만 정밀도 손실이 더 큽니다. <code translate="no">GPU_IVF_FLAT</code> 인덱스는 성능과 메모리 사용량 사이에서 절충점을 제공하는 균형 잡힌 옵션입니다. 마지막으로 <code translate="no">GPU_BRUTE_FORCE</code> 인덱스는 철저한 검색 작업을 위해 설계되어 순회 검색을 수행하여 1의 검색 회수율을 보장합니다.</p></li>
+<p><code translate="no">GPU_CAGRA</code> 인덱스는 더 많은 메모리를 사용하지만 향상된 성능을 요구하는 시나리오에 이상적입니다. 메모리 절약을 우선시하는 환경의 경우 <code translate="no">GPU_IVF_PQ</code> 인덱스를 사용하면 스토리지 요구 사항을 최소화할 수 있지만 정밀도 손실이 더 큽니다. <code translate="no">GPU_IVF_FLAT</code> 인덱스는 성능과 메모리 사용량 사이에서 절충점을 제공하는 균형 잡힌 옵션입니다. 마지막으로 <code translate="no">GPU_BRUTE_FORCE</code> 인덱스는 철저한 검색 작업을 위해 설계되어 순회 검색을 수행하여 1의 검색 회수율을 보장합니다.</p></li>
 </ul>

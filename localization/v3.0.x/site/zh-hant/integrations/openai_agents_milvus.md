@@ -26,7 +26,7 @@ title: Milvus 與 OpenAI Agents 的整合：逐步指南
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本手冊將介紹如何透過 Function Calling 建立一個可以使用自然語言查詢 Milvus 的 Agents。我們將結合 OpenAI 的 Agents 架構與 Milvus 強大的向量搜尋功能，創造出優質的搜尋體驗。</p>
+    </button></h1><p>本手冊展示如何透過 Function Calling 建立一個可以使用自然語言查詢 Milvus 的 Agents。我們將結合 OpenAI 的 Agents 架構與 Milvus 強大的向量搜尋功能，創造出優質的搜尋體驗。</p>
 <h2 id="OpenAI-Agents" class="common-anchor-header">OpenAI Agents<button data-href="#OpenAI-Agents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +42,7 @@ title: Milvus 與 OpenAI Agents 的整合：逐步指南
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>OpenAI Agents SDK 可讓您以輕量、易用且抽象程度極低的套件，建立代理式 AI 應用程式。這是他們之前代理實驗 Swarm 的生產就緒升級版。Agents SDK 有一套非常小的基元：</p>
+    </button></h2><p>OpenAI Agents SDK 可讓您以輕量、易用且抽象程度極低的套件，建立代理式 AI 應用程式。這是他們之前代理實驗 Swarm 的生產就緒升級版。Agents SDK 有一組非常小的基元：</p>
 <ul>
 <li>代理 (Agents)，也就是配備了指令與工具的 LLM。</li>
 <li>交接 (Handoffs)，可讓代理委派其他代理執行特定任務</li>
@@ -51,7 +51,7 @@ title: Milvus 與 OpenAI Agents 的整合：逐步指南
 <p>結合 Python，這些基元功能強大，足以表達工具與代理之間的複雜關係，讓您不需經過艱辛的學習就能建立真實世界的應用程式。此外，SDK 還內建追蹤功能，讓您可視化和除錯您的代理流程，以及評估它們，甚至針對您的應用程式微調模型。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/openai-agent.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openai-agent.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -120,13 +120,28 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>現在我們將連線到 Milvus 實例，並為我們的集合建立一個模式。這個模式將定義我們的資料結構，包括</p>
+    </button></h2><p>現在我們將連線至 Milvus 實例，並為我們的集合建立一個模式。這個模式將定義我們的資料結構，包括</p>
 <ul>
 <li>一個 ID 欄位作為主索引鍵</li>
 <li>一個文字欄位來儲存我們的文件內容</li>
 <li>儲存 BM25 內嵌的稀疏向量欄位</li>
 </ul>
-<h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Milvus 2.5 中的全文檢索</h3><ul>
+<h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Milvus 2.5 中的全文檢索<button data-href="#Full-Text-Search-in-Milvus-25" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>向量與關鍵字搜尋的統一系統 (統一 API)</li>
 <li>內建稀疏 BM25 演算法 (類似 Elasticsearch 的使用，但以向量為基礎)</li>
 <li>不需要手動產生關鍵字搜尋的 embeddings</li>
@@ -147,7 +162,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在執行本範例之前，請務必安裝 Milvus 並使用 Docker 啟動它，請參閱我們的說明文件 - https://milvus.io/docs/install_standalone-docker.md。</p>
+    </button></h2><p>在執行本範例之前，請確認安裝 Milvus 並使用 Docker 啟動它，請參閱我們的說明文件 - https://milvus.io/docs/install_standalone-docker.md。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FunctionType, MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)

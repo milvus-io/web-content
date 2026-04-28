@@ -26,7 +26,7 @@ title: Utilização da pesquisa de texto integral com LangChain e Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/full_text_search_with_langchain.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">A pesquisa de texto integral</a> é um método tradicional de recuperação de documentos através da correspondência de palavras-chave ou frases específicas no texto. Classifica os resultados com base em pontuações de relevância calculadas a partir de factores como a frequência de termos. Enquanto a pesquisa semântica é melhor na compreensão do significado e do contexto, a pesquisa de texto integral é excelente na correspondência exacta de palavras-chave, o que a torna um complemento útil da pesquisa semântica. O algoritmo BM25 é amplamente utilizado para a classificação na pesquisa de texto integral e desempenha um papel fundamental na Retrieval-Augmented Generation (RAG).</p>
+<p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">A pesquisa de texto integral</a> é um método tradicional de recuperação de documentos através da correspondência de palavras-chave ou frases específicas no texto. Classifica os resultados com base em pontuações de relevância calculadas a partir de factores como a frequência de termos. Enquanto a pesquisa semântica é melhor na compreensão do significado e do contexto, a pesquisa em texto integral é excelente na correspondência exacta de palavras-chave, o que a torna um complemento útil da pesquisa semântica. O algoritmo BM25 é amplamente utilizado para a classificação na pesquisa de texto integral e desempenha um papel fundamental na Retrieval-Augmented Generation (RAG).</p>
 <p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">O Milvus 2.5</a> introduz capacidades nativas de pesquisa de texto integral utilizando o BM25. Esta abordagem converte o texto em vectores esparsos que representam as pontuações BM25. Basta introduzir o texto em bruto e o Milvus gera e armazena automaticamente os vectores esparsos, sem necessidade de geração manual de incorporação esparsa.</p>
 <p>A integração da LangChain com o Milvus também introduziu esta funcionalidade, simplificando o processo de incorporação da pesquisa de texto integral nas aplicações RAG. Combinando a pesquisa de texto integral com a pesquisa semântica com vectores densos, é possível obter uma abordagem híbrida que aproveita o contexto semântico das incorporações densas e a relevância precisa das palavras-chave da correspondência de palavras. Esta integração melhora a precisão, a relevância e a experiência do utilizador dos sistemas de pesquisa.</p>
 <p>Este tutorial mostrará como utilizar o LangChain e o Milvus para implementar a pesquisa de texto integral na sua aplicação.</p>
@@ -55,7 +55,7 @@ title: Utilização da pesquisa de texto integral com LangChain e Milvus
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 <span class="hljs-comment">#langchain-voyageai</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ser necessário <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
 </div>
 <p>Vamos utilizar os modelos do OpenAI. Deve preparar as variáveis de ambiente <code translate="no">OPENAI_API_KEY</code> do <a href="https://platform.openai.com/docs/quickstart">OpenAI</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -90,7 +90,22 @@ docs = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Hybrid-Search" class="common-anchor-header">Pesquisa híbrida</h3><p>Para a pesquisa de texto completo, o Milvus VectorStore aceita um parâmetro <code translate="no">builtin_function</code>. Através deste parâmetro, pode passar uma instância do <code translate="no">BM25BuiltInFunction</code>. Isto é diferente da pesquisa semântica, que normalmente passa embeddings densos para o <code translate="no">VectorStore</code>,</p>
+    </button></h2><h3 id="Hybrid-Search" class="common-anchor-header">Pesquisa híbrida<button data-href="#Hybrid-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para a pesquisa de texto completo, o Milvus VectorStore aceita um parâmetro <code translate="no">builtin_function</code>. Através deste parâmetro, pode passar uma instância do <code translate="no">BM25BuiltInFunction</code>. Isto é diferente da pesquisa semântica, que normalmente passa embeddings densos para o <code translate="no">VectorStore</code>,</p>
 <p>Eis um exemplo simples de pesquisa híbrida no Milvus com a incorporação densa do OpenAI para a pesquisa semântica e o BM25 para a pesquisa de texto integral:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, BM25BuiltInFunction
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
@@ -153,7 +168,22 @@ vectorstore.vector_fields
 <pre><code translate="no">[Document(metadata={'category': 'fruit', 'pk': 454646931479251897}, page_content='I like this apple')]
 </code></pre>
 <p>Para mais informações sobre a pesquisa híbrida, pode consultar a <a href="https://milvus.io/docs/multi-vector-search.md#Hybrid-Search">introdução à pesquisa híbrida</a> e este <a href="https://milvus.io/docs/milvus_hybrid_search_retriever.md">tutorial de pesquisa híbrida LangChain Milvus</a>.</p>
-<h3 id="BM25-search-without-embedding" class="common-anchor-header">Pesquisa BM25 sem incorporação</h3><p>Se pretender efetuar apenas a pesquisa de texto integral com a função BM25 sem utilizar qualquer pesquisa semântica baseada na incorporação, pode definir o parâmetro de incorporação para <code translate="no">None</code> e manter apenas o <code translate="no">builtin_function</code> especificado como a instância da função BM25. O campo vetorial tem apenas um campo "esparso". Por exemplo:</p>
+<h3 id="BM25-search-without-embedding" class="common-anchor-header">Pesquisa BM25 sem incorporação<button data-href="#BM25-search-without-embedding" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Se pretender efetuar apenas a pesquisa de texto integral com a função BM25 sem utilizar qualquer pesquisa semântica baseada na incorporação, pode definir o parâmetro de incorporação para <code translate="no">None</code> e manter apenas o <code translate="no">builtin_function</code> especificado como a instância da função BM25. O campo vetorial tem apenas um campo "esparso". Por exemplo:</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=<span class="hljs-literal">None</span>,
@@ -238,14 +268,29 @@ vectorstore = Milvus.from_documents(
     </button></h2><p>Aprendemos a utilizar a função básica integrada BM25 em LangChain e Milvus. Vamos apresentar uma implementação optimizada do RAG com pesquisa híbrida e reanálise.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
 <p>Este diagrama mostra o processo Hybrid Retrieve &amp; Reranking, combinando BM25 para correspondência de palavras-chave e pesquisa vetorial para recuperação semântica. Os resultados de ambos os métodos são fundidos, reavaliados e passados para um LLM para gerar a resposta final.</p>
 <p>A pesquisa híbrida equilibra a precisão e a compreensão semântica, melhorando a exatidão e a robustez para diversas consultas. Recupera candidatos com a pesquisa de texto completo BM25 e a pesquisa vetorial, assegurando uma recuperação semântica, contextualizada e precisa.</p>
 <p>Vamos começar com um exemplo.</p>
-<h3 id="Prepare-the-data" class="common-anchor-header">Preparar os dados</h3><p>Utilizamos o Langchain WebBaseLoader para carregar documentos a partir de fontes Web e dividi-los em partes utilizando o RecursiveCharacterTextSplitter.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">Preparar os dados<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Utilizamos o Langchain WebBaseLoader para carregar documentos a partir de fontes Web e dividi-los em partes utilizando o RecursiveCharacterTextSplitter.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bs4
 <span class="hljs-keyword">from</span> langchain_community.document_loaders <span class="hljs-keyword">import</span> WebBaseLoader
 <span class="hljs-keyword">from</span> langchain_text_splitters <span class="hljs-keyword">import</span> RecursiveCharacterTextSplitter
@@ -275,7 +320,22 @@ docs[<span class="hljs-number">1</span>]
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document(metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'}, page_content='Fig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning#\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.\nTask Decomposition#\nChain of thought (CoT; Wei et al. 2022) has become a standard prompting technique for enhancing model performance on complex tasks. The model is instructed to “think step by step” to utilize more test-time computation to decompose hard tasks into smaller and simpler steps. CoT transforms big tasks into multiple manageable tasks and shed lights into an interpretation of the model’s thinking process.\nTree of Thoughts (Yao et al. 2023) extends CoT by exploring multiple reasoning possibilities at each step. It first decomposes the problem into multiple thought steps and generates multiple thoughts per step, creating a tree structure. The search process can be BFS (breadth-first search) or DFS (depth-first search) with each state evaluated by a classifier (via a prompt) or majority vote.\nTask decomposition can be done (1) by LLM with simple prompting like &quot;Steps for XYZ.\\n1.&quot;, &quot;What are the subgoals for achieving XYZ?&quot;, (2) by using task-specific instructions; e.g. &quot;Write a story outline.&quot; for writing a novel, or (3) with human inputs.\nAnother quite distinct approach, LLM+P (Liu et al. 2023), involves relying on an external classical planner to do long-horizon planning. This approach utilizes the Planning Domain Definition Language (PDDL) as an intermediate interface to describe the planning problem. In this process, LLM (1) translates the problem into “Problem PDDL”, then (2) requests a classical planner to generate a PDDL plan based on an existing “Domain PDDL”, and finally (3) translates the PDDL plan back into natural language. Essentially, the planning step is outsourced to an external tool, assuming the availability of domain-specific PDDL and a suitable planner which is common in certain robotic setups but not in many other domains.\nSelf-Reflection#')
 </code></pre>
-<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">Carregar o documento no armazenamento vetorial Milvus</h3><p>Tal como na introdução acima, inicializamos e carregamos os documentos preparados para o armazenamento vetorial Milvus, que contém dois campos vectoriais: <code translate="no">dense</code> é para a incorporação OpenAI e <code translate="no">sparse</code> é para a função BM25.</p>
+<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">Carregar o documento no armazenamento vetorial Milvus<button data-href="#Load-the-document-into-Milvus-vector-store" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tal como na introdução acima, inicializamos e carregamos os documentos preparados para o armazenamento vetorial Milvus, que contém dois campos vectoriais: <code translate="no">dense</code> é para a incorporação OpenAI e <code translate="no">sparse</code> é para a função BM25.</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=OpenAIEmbeddings(),
@@ -287,7 +347,22 @@ docs[<span class="hljs-number">1</span>]
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Build-RAG-chain" class="common-anchor-header">Construir a cadeia RAG</h3><p>Preparamos a instância LLM e o prompt e, em seguida, combinamo-los num pipeline RAG utilizando a linguagem de expressão LangChain.</p>
+<h3 id="Build-RAG-chain" class="common-anchor-header">Construir a cadeia RAG<button data-href="#Build-RAG-chain" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Preparamos a instância LLM e o prompt e, em seguida, combinamo-los num pipeline RAG utilizando a linguagem de expressão LangChain.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnablePassthrough
 <span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate
 <span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser

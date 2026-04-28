@@ -41,7 +41,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Après l'initialisation d'une instance Milvus, un utilisateur racine est automatiquement généré pour l'authentification lors de la première connexion à Milvus. Le nom d'utilisateur de l'utilisateur racine est <code translate="no">root</code> et le mot de passe est <code translate="no">Milvus</code>. Le rôle par défaut de l'utilisateur racine est <code translate="no">admin</code>, qui a accès à toutes les ressources. Pour garantir la sécurité des données, veuillez conserver les informations d'identification de l'utilisateur racine afin d'éviter tout accès non autorisé.</p>
-<p>Pour les opérations quotidiennes, nous recommandons de créer des utilisateurs au lieu d'utiliser l'utilisateur racine.</p>
+<p>Pour les opérations quotidiennes, nous recommandons de créer des utilisateurs plutôt que d'utiliser l'utilisateur racine.</p>
 <h3 id="Create-a-user" class="common-anchor-header">Créer un utilisateur<button data-href="#Create-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

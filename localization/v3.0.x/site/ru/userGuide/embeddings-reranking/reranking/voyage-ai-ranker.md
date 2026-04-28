@@ -186,7 +186,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">credential</code></p></td>
      <td><p>Нет</p></td>
-     <td><p>Учетные данные для аутентификации при доступе к службам Voyage AI API. Если не указано, система будет искать переменную окружения <code translate="no">VOYAGE_API_KEY</code>.</p></td>
+     <td><p>Учетные данные для доступа к службам Voyage AI API. Если не указано, система будет искать переменную окружения <code translate="no">VOYAGE_API_KEY</code>.</p></td>
      <td><p><em>"your-voyage-api-key"</em></p></td>
    </tr>
 </table>

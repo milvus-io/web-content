@@ -21,9 +21,9 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Snapshot adalah gambar titik waktu dari koleksi Milvus, ideal untuk pengembalian cepat, pembuatan versi, dan pengujian. Snapshot menangkap status koleksi pada stempel waktu tertentu dan hanya menyimpan metadata dan file manifes, seperti skema, indeks, dan file data vektor (binlog), untuk penyimpanan dan pemulihan yang efisien.</p>
+    </button></h1><p>Snapshot adalah gambar titik waktu dari koleksi Milvus, ideal untuk pengembalian cepat, pembuatan versi, dan pengujian. Snapshot menangkap status koleksi pada stempel waktu tertentu dan hanya menyimpan file metadata dan manifes, seperti skema, indeks, dan file data vektor (binlog), untuk penyimpanan dan pemulihan yang efisien.</p>
 <div class="alert note">
-<p>Snapshot adalah gambar data yang cepat dan langsung pada waktunya, cocok untuk pengembalian cepat atau pengujian<strong>(beberapa hari hingga beberapa minggu)</strong>. Sementara itu, cadangan adalah salinan lengkap yang independen dan disimpan secara terpisah untuk pemulihan bencana jangka panjang<strong>(berminggu-minggu hingga bertahun-tahun)</strong> dan untuk perlindungan yang lebih baik terhadap kegagalan penyimpanan total.</p>
+<p>Snapshot adalah gambar data yang cepat dan langsung pada waktunya, cocok untuk pengembalian cepat atau pengujian<strong>(beberapa hari hingga beberapa minggu)</strong>. Sementara itu, cadangan adalah salinan lengkap yang independen yang disimpan secara terpisah untuk pemulihan bencana jangka panjang<strong>(berminggu-minggu hingga bertahun-tahun)</strong> dan untuk perlindungan yang lebih baik terhadap kegagalan penyimpanan total.</p>
 <p>Untuk membuat cadangan, lihat Cadangan <a href="/docs/id/milvus_backup_overview.md">Milvus</a>.</p>
 </div>
 <h2 id="Snapshot-anatomy" class="common-anchor-header">Anatomi snapshot<button data-href="#Snapshot-anatomy" class="anchor-icon" translate="no">
@@ -53,7 +53,7 @@ beta: Milvus 3.0.x
 <li><p><strong>Data segmen</strong></p>
 <p>Menangkap file data vektor (binlog), log penghapusan (deltalog), dan file indeks.</p></li>
 </ul>
-<p>Di antara informasi di atas, Milvus menghasilkan berkas manifes Apache Avro untuk setiap segmen dan menyimpan metadata snapshot, deskripsi koleksi, informasi indeks, dan jalur ke berkas manifes dalam berkas JSON. Diagram berikut ini mengilustrasikan struktur folder snapshot.</p>
+<p>Di antara informasi di atas, Milvus menghasilkan berkas manifes Apache Avro untuk setiap segmen dan menyimpan metadata snapshot, deskripsi koleksi, informasi indeks, dan jalur ke berkas manifes dalam berkas JSON. Diagram berikut menggambarkan struktur folder snapshot.</p>
 <pre><code translate="no" class="language-text">snapshots/{collection_id}/
 ├── metadata/
 │   └── {snapshot_id}.json         # Snapshot metadata (JSON format)
@@ -84,7 +84,7 @@ beta: Milvus 3.0.x
 <ul>
 <li>Menghapus snapshot lama secara teratur untuk menghemat penyimpanan.</li>
 <li>Gunakan nama dan deskripsi deskriptif untuk referensi di masa mendatang.</li>
-<li>Selalu verifikasi pembuatan snapshot dan hasil pemulihan.</li>
+<li>Selalu memverifikasi pembuatan snapshot dan hasil pemulihan.</li>
 <li>Lacak stempel waktu pembuatan snapshot, penggunaan penyimpanan, dan ID pekerjaan pemulihan untuk pemantauan dan pemecahan masalah.</li>
 </ul>
 <h2 id="Limits-and-restrictions" class="common-anchor-header">Batasan dan larangan<button data-href="#Limits-and-restrictions" class="anchor-icon" translate="no">
@@ -126,5 +126,5 @@ beta: Milvus 3.0.x
     </button></h2><ul>
 <li><a href="/docs/id/manage-snapshots.md">Mengelola Snapshot</a> - membuat, membuat daftar, memulihkan, dan menghapus snapshot.</li>
 <li><a href="/docs/id/snapshot-use-cases.md">Kasus Penggunaan Snapshot</a> - pola dan alur kerja umum.</li>
-<li>Pencadangan<a href="/docs/id/milvus_backup_overview.md">Milvus</a> - pencadangan dan pemulihan jangka panjang di seluruh cluster.</li>
+<li>Cadangan<a href="/docs/id/milvus_backup_overview.md">Milvus</a> - pencadangan dan pemulihan jangka panjang di seluruh cluster.</li>
 </ul>

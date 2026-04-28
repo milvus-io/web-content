@@ -24,7 +24,7 @@ summary: >-
 <p>Milvusでは、非構造化データ、密または疎なベクトル表現、構造化メタデータを整理し、コレクションスキーマを通して検索データモデルを指定することができます。テキスト、画像、その他のデータタイプのいずれを扱う場合でも、このハンズオンガイドは、検索データモデルを実際に設計するための主要なスキーマの概念を理解し、適用するのに役立ちます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
    </span> <span class="img-wrapper"> <span>データモデルの解剖</span> </span></p>
 <h2 id="Data-Model" class="common-anchor-header">データモデル<button data-href="#Data-Model" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,7 +70,7 @@ summary: >-
 <li><p><strong>検索手法：</strong>ユーザーが実行するクエリのタイプに沿った適切な検索テクニックを選択する。異なる検索手法は異なる目的を持ち、組み合わせることでより強力な検索結果を得ることができます：</p>
 <ul>
 <li><p><strong>セマンティック検索</strong>：類似した意味を持つアイテムを見つけるために密なベクトル類似性を使用し、テキストや画像のような非構造化データに最適です。</p></li>
-<li><p><strong>全文検索</strong>：セマンティック検索をキーワードマッチで補完。  全文検索では、語彙解析を利用することで、長い単語を断片的なトークンに分割することを避け、検索時に特殊な用語を把握することができる。</p></li>
+<li><p><strong>全文検索</strong>：セマンティック検索をキーワードマッチで補完。  全文検索では、語彙解析を利用して長い単語を断片的なトークンに分割することを避け、検索時に特殊な用語を把握することができる。</p></li>
 <li><p><strong>メタデータのフィルタリング</strong>：ベクトル検索の上に、日付範囲、カテゴリー、タグなどの制約を適用する。</p></li>
 </ul></li>
 </ul>
@@ -117,7 +117,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでは、データモデルはコレクションスキーマで表現されます。コレクションスキーマ内で適切なフィールドを設計することは、効果的な検索を可能にする鍵です。各フィールドはコレクションに格納された特定のデータタイプを定義し、検索プロセスにおいて明確な役割を果たします。Milvusは<strong>ベクトルフィールドと</strong> <strong>スカラーフィールドの</strong>2種類のフィールドをサポートしています。</p>
+    </button></h2><p>Milvusでは、データモデルはコレクションスキーマで表現されます。コレクションスキーマ内で適切なフィールドを設計することは、効果的な検索を可能にする鍵です。各フィールドはコレクションに格納されたデータの特定のタイプを定義し、検索プロセスにおいて明確な役割を果たします。Milvusは<strong>ベクトルフィールドと</strong> <strong>スカラーフィールドの</strong>2種類のフィールドをサポートしています。</p>
 <p>ベクターと補助的なスカラーフィールドを含むフィールドのスキーマにデータモデルをマッピングすることができます。各フィールドがデータモデルの属性と相関していることを確認し、特にベクトルタイプ（denseまたはspase）とその次元に注意してください。</p>
 <h3 id="Vector-Field" class="common-anchor-header">ベクトル・フィールド<button data-href="#Vector-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -184,7 +184,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>主キーフィールドは、コレクション内の各エンティティを一意に識別するため、スキーマの基本要素です。主キーの定義は必須である。これは整数型または文字列型のスカラー・フィールドで、<code translate="no">is_primary=True</code> としてマークされなければならない。オプションで、プライマリ・キーに<code translate="no">auto_id</code> を有効にすることができます。プライマリ・キーには、データがコレクションに取り込まれるにつれてモノリシックに増加する整数番号が自動的に割り当てられます。</p>
+    </button></h3><p>主キーフィールドは、コレクション内の各エンティティを一意に識別するため、スキーマの基本的な構成要素です。主キーの定義は必須である。これは整数型または文字列型のスカラー・フィールドで、<code translate="no">is_primary=True</code> としてマークされなければならない。オプションで、プライマリ・キーに<code translate="no">auto_id</code> を有効にすることができます。プライマリ・キーには、データがコレクションに取り込まれるにつれてモノリシックに増加する整数番号が自動的に割り当てられます。</p>
 <p>詳細については、<a href="/docs/ja/primary-field.md">プライマリフィールドとAutoIDを</a>参照してください。</p>
 <h3 id="Partitioning" class="common-anchor-header">パーティショニング<button data-href="#Partitioning" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -31,7 +31,7 @@ beta: Milvus 2.6.x
 <p>Ao contrário de outras funções de decaimento:</p>
 <ul>
 <li><p>O decaimento gaussiano segue uma curva em forma de sino que se aproxima gradualmente, mas nunca chega a zero</p></li>
-<li><p>O decaimento exponencial mantém uma cauda longa de relevância mínima que se estende indefinidamente</p></li>
+<li><p>O decaimento exponencial mantém uma longa cauda de relevância mínima que se estende indefinidamente</p></li>
 </ul>
 <p>O decaimento linear cria exclusivamente um ponto final definitivo, tornando-o particularmente eficaz para aplicações com limites naturais ou prazos.</p>
 <h2 id="When-to-use-linear-decay" class="common-anchor-header">Quando utilizar o decaimento linear<button data-href="#When-to-use-linear-decay" class="anchor-icon" translate="no">

@@ -25,7 +25,7 @@ title: 使用 Milvus 和 Haystack 的檢索-擴充世代 (RAG)
         ></path>
       </svg>
     </button></h1><p>本指南展示了如何使用 Haystack 和 Milvus 建立一個檢索-增強生成 (RAG) 系統。</p>
-<p>RAG 系統結合了檢索系統與生成模型，可根據給定的提示生成新的文字。該系統首先使用 Milvus 從語料庫中檢索相關文件，然後根據檢索到的文件使用生成模型生成新文本。</p>
+<p>RAG 系統結合了檢索系統與生成模型，可根據給定的提示產生新的文字。該系統首先使用 Milvus 從語料庫中檢索相關文件，然後根據檢索到的文件使用生成模型生成新文本。</p>
 <p><a href="https://haystack.deepset.ai/">Haystack</a>是 deepset 開放源碼的 Python 框架，用於使用大型語言模型 (LLM) 建立自訂應用程式。<a href="https://milvus.io/">Milvus</a>是世界上最先進的開放原始碼向量資料庫，用於嵌入相似性搜尋和人工智能應用程式。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -40,7 +40,7 @@ summary: >-
     </button></h2><p>Milvus 使用 Collections 来组织向量嵌入及其元数据，而 Collections 中的每一行都代表一个实体。如下左图所示，向量字段存储向量嵌入，标量字段存储其元数据。当你在某些字段上创建了索引并加载了 Collections 后，Milvus 会将创建的索引和字段原始数据加载到内存中。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/mmap-illustrated.png" alt="Mmap Illustrated" class="doc-image" id="mmap-illustrated" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/mmap-illustrated.png" alt="Mmap Illustrated" class="doc-image" id="mmap-illustrated" />
    </span> <span class="img-wrapper"> <span>Mmap 图解</span> </span></p>
 <p>Milvus 是内存密集型数据库系统，可用内存大小决定了 Collection 的容量。如果数据量超过内存容量，就无法将包含大量数据的字段加载到内存中，而人工智能驱动的应用程序通常就是这种情况。</p>
 <p>为了解决此类问题，Milvus 引入了 mmap 来平衡 Collections 中冷热数据的加载。如上右图所示，你可以配置 Milvus 对某些字段中的原始数据进行内存映射，而不是将它们完全加载到内存中。这样，你就可以直接获得字段的内存访问权限，而不必担心内存问题，并扩展了 Collections 的容量。</p>
@@ -62,7 +62,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus 在全局、字段、索引和 Collections 层面提供分层 mmap 设置，其中索引和字段层级优先于 Collections 层级，而 Collections 层级优先于全局层级。</p>
-<h3 id="Global-mmap-settings" class="common-anchor-header">全局 mmap 设置</h3><p>集群级设置是全局设置，优先级最低。Milvus 在<code translate="no">milvus.yaml</code> 中提供了多个 mmap 相关设置。这些设置将适用于群集中的所有 Collections。</p>
+<h3 id="Global-mmap-settings" class="common-anchor-header">全局 mmap 设置<button data-href="#Global-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>集群级设置是全局设置，优先级最低。Milvus 在<code translate="no">milvus.yaml</code> 中提供了多个 mmap 相关设置。这些设置将适用于群集中的所有 Collections。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">mmap:</span>
@@ -108,7 +123,22 @@ summary: >-
 </table>
 <p>要将上述设置应用到你的 Milvus 集群，请按照《<a href="/docs/zh/configure-helm.md#Configure-Milvus-via-configuration-file">使用 Helm 配置 Milvus</a>》和《<a href="/docs/zh/configure_operator.md">使用 Milvus 操作符</a> <a href="/docs/zh/configure-helm.md#Configure-Milvus-via-configuration-file">配置</a> <a href="/docs/zh/configure_operator.md">Milvus</a>》中的步骤<a href="/docs/zh/configure_operator.md">操作</a>。</p>
 <p>有时，全局 mmap 设置在面对特定用例时不够灵活。要将备用设置应用于特定 Collections 或其索引，可以考虑配置特定于某个 Collections、某个字段或某个索引的 mmap。在对 mmap 设置的更改生效前，需要释放并加载 Collections。</p>
-<h3 id="Field-specific-mmap-settings" class="common-anchor-header">特定字段的 mmap 设置</h3><p>要配置特定于字段的 mmap，需要在添加字段时包含<code translate="no">mmap_enabled</code> 参数。通过将该参数设置为<code translate="no">True</code> ，可以在特定字段上启用 mmap。</p>
+<h3 id="Field-specific-mmap-settings" class="common-anchor-header">特定字段的 mmap 设置<button data-href="#Field-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要配置特定于字段的 mmap，需要在添加字段时包含<code translate="no">mmap_enabled</code> 参数。通过将该参数设置为<code translate="no">True</code> ，可以在特定字段上启用 mmap。</p>
 <p>下面的示例演示了如何在添加字段时配置特定于字段的 mmap。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -298,7 +328,22 @@ curl --request POST \
 <p>考虑为存储大量数据的字段启用 mmap。标量字段和向量字段都支持。</p>
 </div>
 <p>然后，可以使用上述创建的 Schema 创建一个 Collection。收到加载 Collections 的请求后，Milvus 会使用内存映射将<strong>doc_chunk</strong>字段的原始数据映射到内存中。</p>
-<h3 id="Index-specific-mmap-settings" class="common-anchor-header">特定索引的内存映射设置</h3><p>要配置特定于索引的毫米映射，需要在添加索引时在索引参数中包含<code translate="no">mmap.enable</code> 属性。通过将该属性设置为<code translate="no">true</code> ，可以在该特定索引上启用 mmap。</p>
+<h3 id="Index-specific-mmap-settings" class="common-anchor-header">特定索引的内存映射设置<button data-href="#Index-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要配置特定于索引的毫米映射，需要在添加索引时在索引参数中包含<code translate="no">mmap.enable</code> 属性。通过将该属性设置为<code translate="no">true</code> ，可以在该特定索引上启用 mmap。</p>
 <p>下面的示例演示了如何在添加索引时配置特定于索引的 mmap。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -401,7 +446,22 @@ curl --request POST \
 <p>这适用于向量和标量字段的索引。</p>
 </div>
 <p>然后就可以在一个 Collection 中引用索引参数。收到加载 Collection 的请求后，Milvus 会将<strong>标题字段</strong>的索引内存映射到内存中。</p>
-<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">特定集合的毫米映射设置</h3><p>要配置整个 Collections 的 mmap 策略，需要在创建 Collections 的请求中包含<code translate="no">mmap.enabled</code> 属性。通过将此属性设置为<code translate="no">true</code> ，可以为某个 Collection 启用 mmap。</p>
+<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">特定集合的毫米映射设置<button data-href="#Collection-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要配置整个 Collections 的 mmap 策略，需要在创建 Collections 的请求中包含<code translate="no">mmap.enabled</code> 属性。通过将此属性设置为<code translate="no">true</code> ，可以为某个 Collection 启用 mmap。</p>
 <p>下面的示例演示了如何在创建名为<strong>my_collection</strong>的 Collection 时启用 mmap。收到加载 Collection 的请求后，Milvus 会将所有字段的原始数据内存映射到内存中。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

@@ -25,7 +25,7 @@ title: ジーナAI - エンベッド
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>次に、<code translate="no">JinaEmbeddingFunction</code> をインスタンス化する：</p>
+<p>そして、<code translate="no">JinaEmbeddingFunction</code> をインスタンス化する：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_ef = JinaEmbeddingFunction(
@@ -53,7 +53,7 @@ jina_ef = JinaEmbeddingFunction(
 <li><p><code translate="no">dimensions</code> <em>(int</em>)</p>
 <p>埋め込み結果の次元数。デフォルトは1024です。埋め込みモデルv3以降でのみサポートされる。</p></li>
 <li><p><code translate="no">late_chunking</code> <em>(bool</em>)</p>
-<p>このパラメータは、<a href="https://arxiv.org/abs/2409.04701">Jina AIが先月導入した</a>新しいチャンキング手法を、文の一括エンコーディングに使用するかどうかを制御する。デフォルトは<code translate="no">False</code> 。<code translate="no">True</code> に設定すると、Jina AI APIは入力フィールドのすべての文章を連結し、1つの文字列としてモデルに与えます。内部的には、モデルはこの長く連結された文字列を埋め込み、その後チャンキングを行い、入力リストのサイズに一致する埋め込みリストを返す。</p></li>
+<p>このパラメータは、<a href="https://arxiv.org/abs/2409.04701">Jina AIが先月導入した</a>新しいチャンキング手法を、文の一括エンコーディングに使用するかどうかを制御する。デフォルトは<code translate="no">False</code> 。<code translate="no">True</code> に設定すると、Jina AI APIは入力フィールドの全ての文章を連結し、一つの文字列としてモデルに送り込む。内部的には、モデルはこの長く連結された文字列を埋め込み、その後後期チャンキングを行い、入力リストのサイズに一致する埋め込みリストを返す。</p></li>
 </ul>
 <p>ドキュメントの埋め込みを作成するには、<code translate="no">encode_documents()</code> メソッドを使います。このメソッドは、検索や推薦タスクのための文書のインデックス付けのような、非対称検索タスクにおける文書の埋め込み用に設計されている。このメソッドはタスクとして<code translate="no">retrieval.passage</code> 。</p>
 <pre><code translate="no" class="language-python:">

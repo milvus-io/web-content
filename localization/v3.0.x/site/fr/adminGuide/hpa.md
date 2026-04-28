@@ -2,8 +2,8 @@
 id: hpa.md
 related_key: scale Milvus cluster with HPA
 summary: >-
-  Découvrez comment configurer Horizontal Pod Autoscaling (HPA) pour faire
-  évoluer dynamiquement un cluster Milvus.
+  Apprenez à configurer Horizontal Pod Autoscaling (HPA) pour faire évoluer
+  dynamiquement un cluster Milvus.
 title: Configurer la mise à l'échelle horizontale des pods (HPA) pour Milvus
 ---
 <h1 id="Configure-Horizontal-Pod-Autoscaling-HPA-for-Milvus" class="common-anchor-header">Configurer la mise à l'échelle horizontale des pods (HPA) pour Milvus<button data-href="#Configure-Horizontal-Pod-Autoscaling-HPA-for-Milvus" class="anchor-icon" translate="no">

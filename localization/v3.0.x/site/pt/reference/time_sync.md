@@ -66,7 +66,7 @@ summary: Saiba mais sobre o sistema de sincronização de tempo em Milvus.
 <p>Este cenário ideal pode ser facilmente alcançado quando existe apenas um único nó. No entanto, o Milvus é uma base de dados vetorial distribuída e, para garantir que todas as operações DML e DDL em nós diferentes são mantidas em ordem, o Milvus tem de resolver os dois problemas seguintes:</p>
 <ol>
 <li><p>O relógio de tempo é diferente para os dois utilizadores no exemplo acima se eles estiverem em nós diferentes. Por exemplo, se o utilizador 2 estiver 24 horas atrasado em relação ao utilizador 1, todas as operações do utilizador 1 só serão visíveis para o utilizador 2 no dia seguinte.</p></li>
-<li><p>Pode haver latência de rede. Se o utilizador 2 efetuar uma pesquisa na coleção <code translate="no">C0</code> em <code translate="no">t17</code>, o Milvus deve poder garantir que todas as operações antes de <code translate="no">t17</code> são processadas e concluídas com êxito. Se a operação de eliminação em <code translate="no">t15</code> for atrasada devido à latência da rede, é muito provável que o utilizador 2 ainda possa ver os dados supostamente eliminados em <code translate="no">A1</code> quando efetuar uma pesquisa em <code translate="no">t17</code>.</p></li>
+<li><p>Pode haver latência de rede. Se o utilizador 2 efetuar uma pesquisa na coleção <code translate="no">C0</code> em <code translate="no">t17</code>, o Milvus deve ser capaz de garantir que todas as operações antes de <code translate="no">t17</code> são processadas e concluídas com sucesso. Se a operação de eliminação em <code translate="no">t15</code> for atrasada devido à latência da rede, é muito provável que o utilizador 2 ainda possa ver os dados supostamente eliminados em <code translate="no">A1</code> quando efetuar uma pesquisa em <code translate="no">t17</code>.</p></li>
 </ol>
 <p>Por conseguinte, o Milvus adopta um sistema de sincronização do tempo (timetick) para resolver os problemas.</p>
 <h2 id="Timestamp-oracle-TSO" class="common-anchor-header">Oráculo de carimbo de data/hora (TSO)<button data-href="#Timestamp-oracle-TSO" class="anchor-icon" translate="no">
@@ -89,7 +89,7 @@ summary: Saiba mais sobre o sistema de sincronização de tempo em Milvus.
 <p>Um carimbo de data/hora TSO é um tipo de <code translate="no">uint64</code> valor que é composto por uma parte física e uma parte lógica. A figura seguinte mostra o formato de um carimbo de data/hora.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
    </span> <span class="img-wrapper"> <span>TSO_Timestamp</span>. </span></p>
 <p>Como ilustrado, os 46 bits no início são a parte física, nomeadamente a hora UTC em milissegundos. Os últimos 18 bits são a parte lógica.</p>
 <h2 id="Time-synchronization-system-timetick" class="common-anchor-header">Sistema de sincronização do tempo (timetick)<button data-href="#Time-synchronization-system-timetick" class="anchor-icon" translate="no">
@@ -111,24 +111,24 @@ summary: Saiba mais sobre o sistema de sincronização de tempo em Milvus.
 <p>Quando o proxy recebe um pedido de inserção de dados do SDK, divide as mensagens de inserção em diferentes fluxos de mensagens (<code translate="no">MsgStream</code>) de acordo com o valor hash das chaves primárias.</p>
 <p>A cada mensagem de inserção (<code translate="no">InsertMsg</code>) é atribuído um carimbo de data/hora antes de ser enviada para o <code translate="no">MsgStream</code>.</p>
 <div class="alert note">
-  <code translate="no">MsgStream</code> é um wrapper da fila de mensagens, que é Pulsar por defeito no Milvus 2.0.</div>
+  <code translate="no">MsgStream</code> é um invólucro da fila de mensagens, que é Pulsar por defeito no Milvus 2.0.</div>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
    </span> <span class="img-wrapper"> <span>timesync_proxy_insert_msg</span> </span></p>
-<p>Um princípio geral é que no <code translate="no">MsgStream</code>, os timestamps do<code translate="no">InsertMsgs</code> do mesmo proxy devem ser incrementais. No entanto, não existe essa regra para os <code translate="no">InsertMsgs</code> de diferentes proxies.</p>
+<p>Um princípio geral é que no <code translate="no">MsgStream</code>, os timestamps do<code translate="no">InsertMsgs</code> do mesmo proxy devem ser incrementais. No entanto, não existe tal regra para os <code translate="no">InsertMsgs</code> de diferentes proxies.</p>
 <p>A figura seguinte é um exemplo de <code translate="no">InsertMsgs</code> num <code translate="no">MsgStream</code>. O snippet contém cinco <code translate="no">InsertMsgs</code>, três dos quais são de <code translate="no">Proxy1</code> e os restantes de <code translate="no">Proxy2</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
    </span> <span class="img-wrapper"> <span>fluxo de mensagens</span> </span></p>
 <p>Os carimbos de data/hora dos três <code translate="no">InsertMsgs</code> de <code translate="no">Proxy1</code> são incrementais, tal como os dois <code translate="no">InsertMsgs</code> de <code translate="no">Proxy2</code>. No entanto, não existe uma ordem específica entre <code translate="no">Proxy1</code> e <code translate="no">Proxy2</code> <code translate="no">InsertMsgs</code> .</p>
 <p>Um cenário possível é que, ao ler uma mensagem com carimbo de data/hora <code translate="no">110</code> de <code translate="no">Proxy2</code>, Milvus descobre que a mensagem com carimbo de data/hora <code translate="no">80</code> de <code translate="no">Proxy1</code> ainda está em <code translate="no">MsgStream</code>. Portanto, Milvus introduz um sistema de sincronização de tempo, timetick, para garantir que, ao ler uma mensagem de <code translate="no">MsgStream</code>, todas as mensagens com valores de carimbo de data/hora menores devem ser consumidas.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
    </span> <span class="img-wrapper"> <span>sincronização de tempo</span> </span></p>
-<p>Como mostra a figura acima,</p>
+<p>Como mostrado na figura acima,</p>
 <ul>
 <li><p>Cada proxy reporta periodicamente (a cada 200 ms por padrão) o maior valor de timestamp do último <code translate="no">InsertMsg</code> no <code translate="no">MsgStream</code>para o root coord.</p></li>
 <li><p>A coord raiz identifica o valor mínimo de timestamp neste <code translate="no">Msgstream</code>, independentemente do proxy a que pertence o <code translate="no">InsertMsgs</code>. Em seguida, a coord de raiz insere este carimbo de data/hora mínimo em <code translate="no">Msgstream</code>. Este carimbo de data/hora é também designado por timetick.</p></li>
@@ -137,7 +137,7 @@ summary: Saiba mais sobre o sistema de sincronização de tempo em Milvus.
 <p>A figura seguinte é um exemplo do sítio <code translate="no">Msgstream</code> com um timetick inserido.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
    </span> <span class="img-wrapper"> <span>marca de tempo</span> </span></p>
 <p><code translate="no">MsgStream</code> processa as mensagens em lotes de acordo com o tique de tempo para garantir que as mensagens de saída cumprem os requisitos do carimbo de data/hora. No exemplo acima, consumirá todos os registos, exceto <code translate="no">InsertMsgs</code> de <code translate="no">Proxy2</code> em <code translate="no">Timestamp: 120</code>, uma vez que é posterior ao último TimeTick.</p>
 <h2 id="Whats-next" class="common-anchor-header">O que vem a seguir<button data-href="#Whats-next" class="anchor-icon" translate="no">

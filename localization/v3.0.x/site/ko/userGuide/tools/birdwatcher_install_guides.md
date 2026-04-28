@@ -78,7 +78,22 @@ https://github.com/milvus-io/birdwatcher/releases/download/latest/birdwatcher_&l
         ></path>
       </svg>
     </button></h2><p>헬름 <a href="/docs/ko/install_standalone-helm.md">차트</a> 또는 밀버스 <a href="/docs/ko/install_standalone-operator.md">오퍼레이터를</a> 사용하여 밀버스 스탠드얼론을 설치했거나 <a href="/docs/ko/install_cluster-helm.md">헬름 차트</a> 또는 밀버스 <a href="/docs/ko/install_cluster-milvusoperator.md">오퍼레이터를</a> <a href="/docs/ko/install_cluster-helm.md">사용하여</a> 밀버스 클러스터를 설치한 경우, Birdwatcher를 Kubernetes 파드로 설치하는 것이 좋습니다.</p>
-<h3 id="Prepare-deploymentyml" class="common-anchor-header">배포.yml 준비</h3><pre><code translate="no" class="language-yml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">apps/v1</span>
+<h3 id="Prepare-deploymentyml" class="common-anchor-header">배포.yml 준비<button data-href="#Prepare-deploymentyml" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">apps/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Deployment</span>
 <span class="hljs-attr">metadata:</span>
   <span class="hljs-attr">name:</span> <span class="hljs-string">birdwatcher</span>
@@ -113,6 +128,21 @@ docker build -t milvusdb/birdwatcher .
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<h3 id="Apply-deploymentyml" class="common-anchor-header">deployment.yml 적용</h3><p>위의 YAML을 파일에 저장하고 이름을 <code translate="no">deployment.yml</code> 으로 지정한 후 다음 명령을 실행합니다.</p>
+<h3 id="Apply-deploymentyml" class="common-anchor-header">deployment.yml 적용<button data-href="#Apply-deploymentyml" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>위의 YAML을 파일에 저장하고 이름을 <code translate="no">deployment.yml</code> 으로 지정한 후 다음 명령을 실행합니다.</p>
 <pre><code translate="no" class="language-shell">kubectl apply -f deployment.yml
 <button class="copy-code-btn"></button></code></pre>

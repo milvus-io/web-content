@@ -2,9 +2,9 @@
 id: hpa.md
 related_key: scale Milvus cluster with HPA
 summary: Milvusクラスタを動的にスケールするHPA(Horizontal Pod Autoscaling)の設定方法をご紹介します。
-title: Milvusの水平ポッドオートスケーリング(HPA)の設定
+title: MilvusのHPA（Horizontal Pod Autoscaling）の設定
 ---
-<h1 id="Configure-Horizontal-Pod-Autoscaling-HPA-for-Milvus" class="common-anchor-header">Milvusの水平ポッドオートスケーリング(HPA)の設定<button data-href="#Configure-Horizontal-Pod-Autoscaling-HPA-for-Milvus" class="anchor-icon" translate="no">
+<h1 id="Configure-Horizontal-Pod-Autoscaling-HPA-for-Milvus" class="common-anchor-header">MilvusのHPA（Horizontal Pod Autoscaling）の設定<button data-href="#Configure-Horizontal-Pod-Autoscaling-HPA-for-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,7 +94,7 @@ title: Milvusの水平ポッドオートスケーリング(HPA)の設定
       <span class="hljs-attr">replicas:</span> <span class="hljs-number">-1</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>HPAリソースを定義</strong>します：</p>
-<p>HPA リソースを定義: 目的のコンポーネントのデプロイメントをターゲットとする HPA リソースを作成します。以下は<code translate="no">proxy</code> コンポーネントの例です：</p>
+<p>HPA リソースを定義: 目的のコンポーネントのデプロイメントをターゲットとするHPA リソースを作成します。以下は<code translate="no">proxy</code> コンポーネントの例です：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">autoscaling/v2</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">HorizontalPodAutoscaler</span>
 <span class="hljs-attr">metadata:</span>
@@ -132,7 +132,7 @@ title: Milvusの水平ポッドオートスケーリング(HPA)の設定
           <span class="hljs-attr">value:</span> <span class="hljs-number">1</span>
           <span class="hljs-attr">periodSeconds:</span> <span class="hljs-number">60</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">metadata.name</code> および<code translate="no">spec.scaleTargetRef.name</code> の<code translate="no">my-release</code> を、実際の Milvus クラスタ名 (例:<code translate="no">&lt;your-release-name&gt;-milvus-proxy-hpa</code> および<code translate="no">&lt;your-release-name&gt;-milvus-proxy</code>) に置き換えてください。</p></li>
+<p><code translate="no">metadata.name</code> および<code translate="no">spec.scaleTargetRef.name</code> の<code translate="no">my-release</code> を実際の Milvus クラスタ名 (例:<code translate="no">&lt;your-release-name&gt;-milvus-proxy-hpa</code> および<code translate="no">&lt;your-release-name&gt;-milvus-proxy</code>) に置き換えてください。</p></li>
 <li><p><strong>HPA構成を適用</strong>します：</p>
 <p>以下のコマンドを使用してHPAリソースをデプロイします：</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f hpa.yaml
@@ -148,7 +148,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 </ol>
 <ul>
 <li><code translate="no">scaleTargetRef</code>:スケーリングする配置を指定します(たとえば、<code translate="no">my-release-milvus-proxy</code>)。</li>
-<li><code translate="no">minReplicas</code> および : スケーリング範囲を設定します（この例では 2～10 Pods）。<code translate="no">maxReplicas</code></li>
+<li><code translate="no">minReplicas</code> および<code translate="no">maxReplicas</code>: スケーリング範囲を設定します（この例では 2～10 Pods）。</li>
 <li><code translate="no">metrics</code>:CPU とメモリの使用率に基づいてスケーリングを設定し、平均使用率 60% を目標にします。</li>
 </ul>
 <h2 id="Conclusion" class="common-anchor-header">結論<button data-href="#Conclusion" class="anchor-icon" translate="no">

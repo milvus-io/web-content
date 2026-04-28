@@ -65,7 +65,7 @@ title: Mengganti Jenis MQ untuk Milvus Standalone
 <li>Pantau log untuk memverifikasi peralihan telah berhasil dilakukan.</li>
 </ol>
 <div class="alert note">
-<p>Sebelum beralih, pastikan bahwa MQ target tidak mengandung topik dengan nama yang sama dengan yang digunakan oleh instans Milvus saat ini. Hal ini terutama penting jika layanan MQ target sebelumnya telah digunakan oleh instans Milvus lain, karena nama topik yang bertentangan dapat menyebabkan perilaku yang tidak diharapkan.</p>
+<p>Sebelum beralih, pastikan bahwa MQ target tidak mengandung topik dengan nama yang sama dengan yang digunakan oleh instans Milvus saat ini. Hal ini terutama penting jika layanan MQ target sebelumnya telah digunakan oleh instans Milvus lain, karena nama topik yang saling bertentangan dapat menyebabkan perilaku yang tidak diharapkan.</p>
 </div>
 <h2 id="Switch-from-RocksMQ-to-Woodpecker-Local-Storage" class="common-anchor-header">Beralih dari RocksMQ ke Woodpecker (Penyimpanan Lokal)<button data-href="#Switch-from-RocksMQ-to-Woodpecker-Local-Storage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -190,7 +190,7 @@ successfully updated mq.type configuration <span class="hljs-keyword">in</span> 
       </svg>
     </button></h2><p>Prosedur ini berlaku untuk penerapan <strong>Milvus Standalone Docker Compose</strong>.</p>
 <div class="alert note">
-<p>Mulai dari Milvus v2.6, <code translate="no">docker-compose.yaml</code> default sudah mendeklarasikan <code translate="no">mqType</code> sebagai Woodpecker. Kecuali Anda telah memodifikasi konfigurasi default atau memutakhirkan dari v2.5, prosedur ini mungkin tidak diperlukan.</p>
+<p>Mulai dari Milvus v2.6, <code translate="no">docker-compose.yaml</code> default sudah mendeklarasikan <code translate="no">mqType</code> sebagai Woodpecker. Kecuali jika Anda telah memodifikasi konfigurasi default atau memutakhirkan dari v2.5, prosedur ini mungkin tidak diperlukan.</p>
 </div>
 <h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">Langkah 1: Verifikasi bahwa instans Milvus telah berjalan<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
       <svg translate="no"

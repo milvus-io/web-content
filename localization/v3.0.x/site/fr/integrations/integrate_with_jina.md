@@ -39,7 +39,7 @@ title: Intégrer Milvus à Jina
         ></path>
       </svg>
     </button></h2><p>Jina AI, fondée en 2020 à Berlin, est une entreprise pionnière en matière d'IA qui vise à révolutionner l'avenir de l'intelligence artificielle grâce à sa fondation de recherche. Spécialisée dans l'IA multimodale, Jina AI vise à permettre aux entreprises et aux développeurs d'exploiter la puissance des données multimodales pour créer de la valeur et réduire les coûts grâce à sa suite intégrée de composants, notamment les embeddings, les rerankers, les prompt ops et l'infrastructure de base.<br>
-Les embeddings de pointe de Jina AI se targuent d'une performance de premier plan, avec un modèle de longueur de jeton 8192 idéal pour une représentation complète des données. Offrant une prise en charge multilingue et une intégration transparente avec des plateformes de premier plan telles qu'OpenAI, ces embeddings facilitent les applications multilingues.</p>
+Les embeddings de pointe de Jina AI se targuent d'une performance de premier plan, avec un modèle de longueur de jeton 8192 idéal pour une représentation complète des données. Offrant une prise en charge multilingue et une intégration transparente avec des plates-formes de premier plan telles qu'OpenAI, ces algorithmes facilitent les applications multilingues.</p>
 <h2 id="Milvus-and-Jina-AIs-Embedding" class="common-anchor-header">Intégration de Milvus et de Jina AI<button data-href="#Milvus-and-Jina-AIs-Embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

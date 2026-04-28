@@ -147,7 +147,7 @@ summary: 'Узнайте, как настроить minio для Milvus.'
         <li>Переменная окружения: MINIO_SECRET_ACCESS_KEY или minio.secretAccessKey</li>      
         <li>minio.accessKeyID и minio.secretAccessKey вместе используются для аутентификации личности при доступе к сервису MinIO или S3.</li>      
         <li>Эта конфигурация должна быть установлена идентично переменной окружения MINIO_SECRET_ACCESS_KEY, которая необходима для запуска MinIO или S3.</li>      
-        <li>Значение по умолчанию применяется к сервису MinIO или S3, запущенному с помощью файла docker-compose.yml по умолчанию.</li>      </td>
+        <li>Значение по умолчанию применяется к сервису MinIO или S3, запущенному с помощью стандартного файла docker-compose.yml.</li>      </td>
       <td>minioadmin</td>
     </tr>
   </tbody>

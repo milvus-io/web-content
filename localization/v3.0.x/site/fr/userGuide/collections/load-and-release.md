@@ -219,7 +219,7 @@ curl --request POST \
 <div class="alert note">
 <p>Le chargement partiel de collections est actuellement en version bêta et n'est pas recommandé pour une utilisation en production.</p>
 </div>
-<p>L'extrait de code suivant suppose que vous avez créé une collection nommée <strong>my_collection</strong>, et qu'il y a deux champs nommés <strong>my_id</strong> et <strong>my_vector</strong> dans la collection.</p>
+<p>L'extrait de code suivant suppose que vous avez créé une collection nommée <strong>my_collection</strong> et que la collection contient deux champs nommés <strong>my_id</strong> et <strong>my_vector</strong>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_collection(

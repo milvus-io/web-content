@@ -2,7 +2,7 @@
 id: install-node.md
 label: Install Node.js SDK
 related_key: SDK
-summary: Pelajari cara memasang SDK Node.js dari Milvus.
+summary: Pelajari cara menginstal SDK Node.js dari Milvus.
 title: Menginstal Milvus Nodejs SDK
 ---
 <h1 id="Install-Milvus-Nodejs-SDK" class="common-anchor-header">Menginstal Milvus Nodejs SDK<button data-href="#Install-Milvus-Nodejs-SDK" class="anchor-icon" translate="no">

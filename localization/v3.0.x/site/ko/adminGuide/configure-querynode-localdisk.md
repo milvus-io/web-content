@@ -1,10 +1,10 @@
 ---
 id: configure-querynode-localdisk.md
-title: 로컬 디스크로 Milvus QueryNode 구성하기
+title: 로컬 디스크로 Milvus 쿼리 노드 구성하기
 related_key: 'querynode, query node, local disk'
 summary: 로컬 디스크를 사용하도록 Milvus QueryNode를 구성하는 방법을 알아보세요.
 ---
-<h1 id="Configure-Milvus-QueryNode-with-Local-Disk" class="common-anchor-header">로컬 디스크로 Milvus QueryNode 구성하기<button data-href="#Configure-Milvus-QueryNode-with-Local-Disk" class="anchor-icon" translate="no">
+<h1 id="Configure-Milvus-QueryNode-with-Local-Disk" class="common-anchor-header">로컬 디스크로 Milvus 쿼리 노드 구성하기<button data-href="#Configure-Milvus-QueryNode-with-Local-Disk" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,7 +76,22 @@ nvme1n1     259:1    0 250.0G  0 disk
         ></path>
       </svg>
     </button></h2><p>밀버스 디스트리뷰션의 쿼리노드가 NVMe 디스크 스토리지를 사용하도록 구성하려면, 대상 쿠버네티스 클러스터의 워커 노드가 컨테이너와 이미지를 NVMe 디스크에 저장하도록 구성해야 합니다. 이 절차는 클라우드 제공자에 따라 다릅니다.</p>
-<h3 id="AWS" class="common-anchor-header">AWS</h3><p>Amazon EKS를 사용하는 경우, 노드 그룹에 대한 구성 설정을 지정할 수 있는 시작 템플릿으로 관리형 노드를 사용자 정의할 수 있습니다. 다음은 Amazon EKS 클러스터의 작업자 노드에 NVMe 디스크를 마운트하는 방법의 예입니다:</p>
+<h3 id="AWS" class="common-anchor-header">AWS<button data-href="#AWS" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Amazon EKS를 사용하는 경우, 노드 그룹에 대한 구성 설정을 지정할 수 있는 시작 템플릿으로 관리형 노드를 사용자 정의할 수 있습니다. 다음은 Amazon EKS 클러스터의 작업자 노드에 NVMe 디스크를 마운트하는 방법의 예입니다:</p>
 <pre><code translate="no" class="language-bash">MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary=<span class="hljs-string">&quot;==MYBOUNDARY==&quot;</span>
 
@@ -105,14 +120,44 @@ Content-Type: text/x-shellscript; charset=<span class="hljs-string">&quot;us-asc
 <p>위의 예에서는 NVMe 디스크가 <code translate="no">/dev/nvme1n1</code> 이라고 가정합니다. 특정 구성에 맞게 스크립트를 수정해야 합니다.</p>
 </div>
 <p>자세한 내용은 <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html#launch-template-user-data">시작 템플릿으로 관리형 노드 사용자 지정하기를</a> 참조하세요.</p>
-<h3 id="GCP" class="common-anchor-header">GCP</h3><p>GKE(Google 쿠버네티스 엔진) 클러스터에서 로컬 SSD 스토리지를 프로비저닝하고 클러스터의 노드에 연결된 로컬 SSD 지원 임시 스토리지에서 데이터를 사용하도록 워크로드를 구성하려면 다음 명령을 실행하세요:</p>
+<h3 id="GCP" class="common-anchor-header">GCP<button data-href="#GCP" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>GKE(Google 쿠버네티스 엔진) 클러스터에서 로컬 SSD 스토리지를 프로비저닝하고 클러스터의 노드에 연결된 로컬 SSD 지원 임시 스토리지에서 데이터를 사용하도록 워크로드를 구성하려면 다음 명령을 실행하세요:</p>
 <pre><code translate="no" class="language-bash">gcloud container node-pools create <span class="hljs-variable">${POOL_NAME}</span> \
     --cluster=<span class="hljs-variable">${CLUSTER_NAME}</span> \
     --ephemeral-storage-local-ssd count=<span class="hljs-variable">${NUMBER_OF_DISKS}</span> \
     --machine-type=<span class="hljs-variable">${MACHINE_TYPE}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>자세한 내용은 <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/local-ssd">GKE에서 로컬 SSD 스토리지 프로비저닝을</a> 참조한다.</p>
-<h3 id="Azure" class="common-anchor-header">Azure</h3><p>로컬 NVMe 디스크 스토리지로 VMSS(가상 머신 스케일 세트)를 만들려면 VM 인스턴스에 사용자 지정 데이터를 전달해야 합니다. 다음은 VMSS의 VM 인스턴스에 NVMe 디스크를 연결하는 방법의 예시입니다:</p>
+<h3 id="Azure" class="common-anchor-header">Azure<button data-href="#Azure" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>로컬 NVMe 디스크 스토리지로 VMSS(가상 머신 스케일 세트)를 만들려면 VM 인스턴스에 사용자 지정 데이터를 전달해야 합니다. 다음은 VMSS의 VM 인스턴스에 NVMe 디스크를 연결하는 방법의 예시입니다:</p>
 <pre><code translate="no" class="language-bash">mdadm -Cv /dev/md0 -l0 -n2 /dev/nvme0n1 /dev/nvme1n1
 mdadm -Ds &gt; /etc/mdadm/mdadm.conf 
 update-initramfs -u
@@ -125,7 +170,22 @@ mount -a
 <div class="alert note">
 <p>위의 예에서는 NVMe 디스크가 <code translate="no">/dev/nvme0n1</code> 및 <code translate="no">/dev/nvme1n1</code> 이라고 가정합니다. 특정 구성에 맞게 스크립트를 수정해야 합니다.</p>
 </div>
-<h3 id="Alibaba-Cloud--TecentCloud" class="common-anchor-header">알리바바 클라우드 및 테센트 클라우드</h3><p>로컬 SSD 볼륨을 사용하는 노드 풀을 만들려면 사용자 지정 데이터를 전달해야 합니다. 다음은 사용자 지정 데이터의 예시입니다.</p>
+<h3 id="Alibaba-Cloud--TecentCloud" class="common-anchor-header">알리바바 클라우드 및 테센트 클라우드<button data-href="#Alibaba-Cloud--TecentCloud" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>로컬 SSD 볼륨을 사용하는 노드 풀을 만들려면 사용자 지정 데이터를 전달해야 합니다. 다음은 사용자 지정 데이터의 예시입니다.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nvme init start...&quot;</span>
 mkfs.xfs /dev/nvme0n1
@@ -146,7 +206,22 @@ mount -a
 <div class="alert note">
 <p>위 예제에서는 NVMe 디스크가 <code translate="no">/dev/nvme0n1</code> 이라고 가정합니다. 특정 구성에 맞게 스크립트를 수정해야 합니다.</p>
 </div>
-<h3 id="Your-own-IDC" class="common-anchor-header">자체 IDC</h3><p>자체 IDC를 실행 중이고 컨테이너에서 기본적으로 새로 마운트된 NVMe 디스크의 파일 시스템을 사용하도록 컨테이너를 구성하려는 경우 다음 단계를 따르세요:</p>
+<h3 id="Your-own-IDC" class="common-anchor-header">자체 IDC<button data-href="#Your-own-IDC" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>자체 IDC를 실행 중이고 컨테이너에서 기본적으로 새로 마운트된 NVMe 디스크의 파일 시스템을 사용하도록 컨테이너를 구성하려는 경우 다음 단계를 따르세요:</p>
 <ul>
 <li><p><strong>NVMe 디스크를 마운트한다.</strong></p>
 <p>NVMe 디스크가 호스트 머신에 제대로 마운트되었는지 확인합니다. 원하는 디렉터리에 마운트할 수 있습니다. 예를 들어 <code translate="no">/mnt/nvme</code> 에 마운트하는 경우, 제대로 설정되었는지 확인하고 <code translate="no">lsblk</code> 또는 <code translate="no">df -h</code> 을 실행하여 <code translate="no">/mnt/nvme</code> 에서 디스크를 사용할 수 있는지 확인합니다.</p></li>
@@ -265,9 +340,39 @@ IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=100.0%
         ></path>
       </svg>
     </button></h2><p>확인 결과가 만족스러우면 다음 단계에 따라 Milvus Distributed를 배포할 수 있습니다:</p>
-<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">헬름을 사용하여 밀버스 디스트리뷰티드 배포를 위한 팁</h3><p>쿼리노드 파드는 기본적으로 NVMe 디스크를 EmptyDir 볼륨으로 사용한다. 최적의 성능을 보장하기 위해 NVMe 디스크를 QueryNode 파드 내의 <code translate="no">/var/lib/milvus/data</code> 에 마운트하는 것이 좋다.</p>
+<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">헬름을 사용하여 밀버스 디스트리뷰티드 배포를 위한 팁<button data-href="#Tips-for-deploying-Milvus-Distributed-using-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>쿼리노드 파드는 기본적으로 NVMe 디스크를 EmptyDir 볼륨으로 사용한다. 최적의 성능을 보장하려면 NVMe 디스크를 쿼리노드 파드 내의 <code translate="no">/var/lib/milvus/data</code> 에 마운트하는 것이 좋다.</p>
 <p>헬름을 사용하여 밀버스 디스트리뷰션을 배포하는 방법에 대한 자세한 내용은 <a href="/docs/ko/install_cluster-helm.md">헬름으로 쿠버네티스에서 밀버스 실행하기를</a> 참조한다.</p>
-<h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">밀버스 오퍼레이터를 사용하여 밀버스 디스트리뷰티드 배포를 위한 팁</h3><p>밀버스 오퍼레이터는 NVMe 디스크를 EmptyDir 볼륨으로 사용하도록 쿼리노드 파드를 자동으로 구성한다. <code translate="no">MilvusCluster</code> 사용자 정의 리소스에 다음 구성을 추가하는 것이 좋습니다:</p>
+<h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">밀버스 오퍼레이터를 사용하여 밀버스 디스트리뷰티드 배포를 위한 팁<button data-href="#Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>밀버스 오퍼레이터는 NVMe 디스크를 EmptyDir 볼륨으로 사용하도록 쿼리노드 파드를 자동으로 구성한다. <code translate="no">MilvusCluster</code> 사용자 정의 리소스에 다음 구성을 추가하는 것이 좋습니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>

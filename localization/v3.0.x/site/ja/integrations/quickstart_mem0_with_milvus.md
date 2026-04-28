@@ -1,7 +1,7 @@
 ---
 id: quickstart_mem0_with_milvus.md
 summary: >-
-  このチュートリアルでは、効率的な記憶と検索を可能にする高性能なオープンソースのベクトル・データベースであるMilvusを使用して、Mem0のメモリ管理に不可欠な操作（メモリ履歴の追加、検索、更新、検索、削除、追跡）について説明します。このハンズオン入門では、Mem0とMilvusを使用してパーソナライズされたAIインタラクションを構築するのに役立つ、基礎的なメモリ操作について説明します。
+  このチュートリアルでは、効率的な記憶と検索を可能にする高性能なオープンソースのベクトル・データベースであるMilvusを使用した、Mem0のメモリ管理に不可欠な操作（メモリの追加、検索、更新、検索、削除、履歴の追跡）について説明します。このハンズオン入門では、Mem0とMilvusを使用してパーソナライズされたAIインタラクションを構築するのに役立つ、基礎的なメモリ操作について説明します。
 title: Mem0とMilvusを使い始める
 ---
 <h1 id="Getting-Started-with-Mem0-and-Milvus" class="common-anchor-header">Mem0とMilvusを使い始める<button data-href="#Getting-Started-with-Mem0-and-Milvus" class="anchor-icon" translate="no">
@@ -105,7 +105,7 @@ m = Memory.from_config(config)
 <ul>
 <li>小規模なデータやプロトタイピングのためにローカルのベクターデータベースが必要なだけであれば、uriをローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利な方法です。</li>
 <li>もし、100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合は、トークンとして "<your_username>:<your_password>" を使用します。そうでない場合は、トークンを設定しないでください。</li>
-<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>ご利用の場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public EndpointとAPI keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
+<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Milvus Cloud</a>をご利用の場合は、Milvus Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public EndpointとAPI Keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </blockquote>
 </div>
@@ -255,7 +255,7 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">search</code> 関数を使って、ユーザーに最も関連性の高いメモリーを検索することができます。</p>
+    </button></h3><p><code translate="no">search</code> 関数を使うと、そのユーザーに最も関連するメモリーを検索することができる。</p>
 <p>まずアリスのメモリーを追加します。</p>
 <pre><code translate="no" class="language-python">new_mem = m.add(
     <span class="hljs-string">&quot;I have a linear algebra midterm exam on November 20&quot;</span>,
@@ -281,7 +281,7 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'updated_at': None,
    'user_id': 'alice'}]}
 </code></pre>
-<p><code translate="no">search</code> <code translate="no">query</code> 、 。デフォルトでは メトリックを類似性検索に使っているので、 が小さいほど類似性が高いことに注意してください。<code translate="no">user_id</code> <code translate="no">L2</code> <code translate="no">score</code> </p>
+<p><code translate="no">search</code> <code translate="no">query</code> 、 。デフォルトでは メトリックを類似性検索に使っているので、 が小さいほど類似性が高いことを意味することに注意してください。<code translate="no">user_id</code> <code translate="no">L2</code> <code translate="no">score</code> </p>
 <pre><code translate="no" class="language-python">m.search(query=<span class="hljs-string">&quot;What are Alice&#x27;s hobbies&quot;</span>, user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'results': [{'id': '77162018-663b-4dfa-88b1-4f029d6136ab',

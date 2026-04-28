@@ -85,7 +85,7 @@ beta: Milvus 2.6.x
      <td><p>Chave da API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/pt/azure-openai.md">OpenAI do Azure</a></p></td>
+     <td><p><a href="/docs/pt/azure-openai.md">Azure OpenAI</a></p></td>
      <td><p>Baseado na implementação</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Chave de API</p></td>
@@ -159,7 +159,7 @@ beta: Milvus 2.6.x
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
    </span> <span class="img-wrapper"> <span>Visão geral da função de incorporação</span> </span></p>
 <h2 id="Configure-credentials" class="common-anchor-header">Configurar credenciais<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -187,7 +187,7 @@ beta: Milvus 2.6.x
 <p>O diagrama a seguir mostra o processo de configuração de credenciais por meio do arquivo de configuração do Milvus (<code translate="no">milvus.yaml</code>) e, em seguida, a chamada da Função no Milvus.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
    </span> <span class="img-wrapper"> <span>Estouro de configuração de credenciais</span> </span></p>
 <h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Etapa 1: adicionar credenciais ao arquivo de configuração do Milvus<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -293,11 +293,11 @@ beta: Milvus 2.6.x
       </svg>
     </button></h3><p>Para utilizar uma função de incorporação, crie uma coleção com um esquema específico. Este esquema deve incluir pelo menos três campos necessários:</p>
 <ul>
-<li><p>O <strong>campo primário</strong> que identifica de forma única cada entidade numa coleção.</p></li>
+<li><p>O <strong>campo primário</strong> que identifica de forma exclusiva cada entidade numa coleção.</p></li>
 <li><p>Um <strong>campo escalar</strong> que armazena os dados brutos a serem incorporados.</p></li>
 <li><p>Um <strong>campo vetorial</strong> reservado para armazenar as incorporações vectoriais que a função irá gerar para o campo escalar.</p></li>
 </ul>
-<p>O exemplo seguinte define um esquema com um campo escalar <code translate="no">&quot;document&quot;</code> para armazenar dados textuais e um campo vetorial <code translate="no">&quot;dense&quot;</code> para armazenar as incorporações a serem geradas pelo módulo Function. Não se esqueça de definir a dimensão do vetor (<code translate="no">dim</code>) para corresponder ao resultado do modelo de incorporação escolhido.</p>
+<p>O exemplo seguinte define um esquema com um campo escalar <code translate="no">&quot;document&quot;</code> para armazenar dados textuais e um campo vetorial <code translate="no">&quot;dense&quot;</code> para armazenar incrustações a serem geradas pelo módulo Function. Não se esqueça de definir a dimensão do vetor (<code translate="no">dim</code>) para corresponder ao resultado do modelo de incorporação escolhido.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
@@ -404,7 +404,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">params</code></p></td>
-     <td><p>Dicionário que contém as configurações de incorporação. Nota: Os parâmetros em <code translate="no">params</code> variam consoante os fornecedores de modelos de incorporação.</p></td>
+     <td><p>Dicionário que contém configurações de incorporação. Nota: Os parâmetros em <code translate="no">params</code> variam consoante os fornecedores de modelos de incorporação.</p></td>
      <td><p><code translate="no">{...}</code></p></td>
    </tr>
    <tr>
@@ -628,7 +628,7 @@ results = client.search(
     </button></h3><p>O Milvus segue esta ordem de resolução de credenciais:</p>
 <ol>
 <li>Primeiro, ele procura a credencial padrão configurada para esse provedor no arquivo <code translate="no">milvus.yaml</code> </li>
-<li>Se não existir nenhuma credencial padrão em milvus.yaml, ele recorre às variáveis de ambiente (se configuradas)</li>
+<li>Se não houver nenhuma credencial padrão em milvus.yaml, ele recorre às variáveis de ambiente (se configuradas)</li>
 <li>Se nem as credenciais <code translate="no">milvus.yaml</code> nem as variáveis de ambiente estiverem configuradas, o Milvus apresentará um erro</li>
 </ol>
 <h3 id="How-can-I-verify-that-embeddings-are-being-generated-correctly" class="common-anchor-header">Como posso verificar se os embeddings estão a ser gerados corretamente?<button data-href="#How-can-I-verify-that-embeddings-are-being-generated-correctly" class="anchor-icon" translate="no">

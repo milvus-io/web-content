@@ -277,7 +277,7 @@ Creating milvus-standalone ... done​
     </button></h3><p>Depois de instalar o Docker Desktop no Windows, poderá encontrar o erro <code translate="no">Docker Engine stopped</code> se o seu computador não estiver configurado corretamente. Nesse caso, pode ser necessário fazer as seguintes verificações.</p>
 <ol>
 <li><p>Verificar se a virtualização está activada.</p>
-<p>Pode verificar se a virtualização está activada consultando o separador <strong>Desempenho</strong> no <strong>Gestor de Tarefas</strong>.</p>
+<p>Pode verificar se a virtualização está activada consultando o separador <strong>Desempenho</strong> no Gestor <strong>de Tarefas</strong>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />
@@ -329,7 +329,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
       </svg>
     </button></h3><p>Se encontrou problemas relacionados com a WSL enquanto executava o Milvus a partir da WSL 2, poderá ter de verificar se configurou o Docker Desktop para utilizar o motor baseado na WSL 2 da seguinte forma.</p>
 <ol>
-<li><p>Certifique-se de que a opção "Utilizar o motor baseado na WSL 2" está selecionada em <strong>Definições</strong> &gt; <strong>Geral</strong>. </p>
+<li><p>Certifique-se de que a opção "Usar o mecanismo baseado na WSL 2" está marcada em <strong>Configurações</strong> &gt; <strong>Geral</strong>. </p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" />

@@ -109,7 +109,7 @@ beta: Milvus 2.6.x
 </ul>
 <p>从以下两种方法中选择一种--配置文件在裸机和虚拟机上更易于维护，而环境变量方法适合容器工作流。</p>
 <div class="alert note">
-<p>如果同一提供商的 API 密钥同时存在于配置文件和环境变量中，Milvus 将始终使用<code translate="no">milvus.yaml</code> 中的值，而忽略环境变量。</p>
+<p>如果同一提供商的 API 密钥同时出现在配置文件和环境变量中，Milvus 将始终使用<code translate="no">milvus.yaml</code> 中的值，而忽略环境变量。</p>
 </div>
 <h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">选项 1：配置文件（推荐且优先级更高）<button data-href="#Option-1-Configuration-file-recommended--higher-priority" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -221,11 +221,11 @@ beta: Milvus 2.6.x
       </svg>
     </button></h3><p>要使用嵌入函数，请创建一个具有特定 Schema 的 Collections。此 Schema 必须至少包含三个必要字段：</p>
 <ul>
-<li><p>唯一标识 Collections 中每个实体的主字段。</p></li>
+<li><p>主字段，用于唯一标识 Collections 中的每个实体。</p></li>
 <li><p>标量字段，用于存储要嵌入的原始数据。</p></li>
 <li><p>一个向量字段，用于存储函数将为标量字段生成的向量嵌入。</p></li>
 </ul>
-<p>下面的示例定义了一个 Schema 模式，其中一个标量字段<code translate="no">&quot;document&quot;</code> 用于存储文本数据，一个向量字段<code translate="no">&quot;dense&quot;</code> 用于存储将由函数模块生成的嵌入。切记设置向量维数 (<code translate="no">dim</code>) 以匹配所选嵌入模型的输出。</p>
+<p>下面的示例定义了一个 Schema 模式，其中一个标量字段<code translate="no">&quot;document&quot;</code> 用于存储文本数据，一个向量字段<code translate="no">&quot;dense&quot;</code> 用于存储将由函数模块生成的嵌入。切记要设置向量维数 (<code translate="no">dim</code>) 以匹配所选嵌入模型的输出。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>

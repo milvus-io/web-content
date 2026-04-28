@@ -47,7 +47,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus fornece pesquisa de texto completo com o algoritmo de relevância BM25, uma função de pontuação amplamente adoptada em sistemas de recuperação de informação, e o Milvus integra-o no fluxo de trabalho de pesquisa para fornecer resultados de texto precisos e classificados por relevância.</p>
+    </button></h2><p>O Milvus fornece pesquisa de texto completo com base no algoritmo de relevância BM25, uma função de pontuação amplamente adoptada em sistemas de recuperação de informação, e o Milvus integra-o no fluxo de trabalho de pesquisa para fornecer resultados de texto precisos e classificados por relevância.</p>
 <p>A pesquisa de texto completo em Milvus segue o fluxo de trabalho abaixo:</p>
 <ol>
 <li><p><strong>Entrada de texto em bruto</strong>: Insere documentos de texto ou fornece uma consulta utilizando texto simples, sem necessidade de modelos de incorporação.</p></li>
@@ -455,7 +455,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>O algoritmo utilizado para construir e consultar o índice. Valores válidos:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (predefinição): Processamento optimizado de consultas Document-at-a-Time (DAAT) utilizando o algoritmo MaxScore. O MaxScore proporciona um melhor desempenho para valores <em>k</em> elevados ou consultas com muitos termos, ignorando termos e documentos que provavelmente terão um impacto mínimo. Consegue-o dividindo os termos em grupos essenciais e não essenciais com base nas suas pontuações máximas de impacto, concentrando-se nos termos que podem contribuir para os resultados do top-k.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Processamento optimizado de consultas DAAT utilizando o algoritmo WAND. O WAND avalia menos documentos atingidos, aproveitando as pontuações de impacto máximo para ignorar documentos não competitivos, mas tem uma sobrecarga mais elevada por hit. Isso torna o WAND mais eficiente para consultas com valores <em>k</em> pequenos ou consultas curtas, em que pular é mais viável.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Processamento de consultas Basic Term-at-a-Time (TAAT). Embora seja mais lento em comparação com <code translate="no">DAAT_MAXSCORE</code> e <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> oferece uma vantagem única. Ao contrário dos algoritmos DAAT, que utilizam pontuações de impacto máximo armazenadas em cache que permanecem estáticas independentemente das alterações ao parâmetro de coleção global (avgdl), o <code translate="no">TAAT_NAIVE</code> adapta-se dinamicamente a essas alterações.</p></li></ul></td>
+     <td><p>O algoritmo utilizado para construir e consultar o índice. Valores válidos:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (predefinição): Processamento optimizado de consultas Document-at-a-Time (DAAT) utilizando o algoritmo MaxScore. O MaxScore proporciona um melhor desempenho para valores <em>k</em> elevados ou consultas com muitos termos, ignorando termos e documentos que provavelmente terão um impacto mínimo. Consegue-o dividindo os termos em grupos essenciais e não essenciais com base nas suas pontuações máximas de impacto, concentrando-se nos termos que podem contribuir para os resultados do top-k.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Processamento optimizado de consultas DAAT utilizando o algoritmo WAND. O WAND avalia menos documentos atingidos, aproveitando as pontuações de impacto máximo para ignorar documentos não competitivos, mas tem uma sobrecarga mais elevada por hit. Isso faz com que o WAND seja mais eficiente para consultas com valores <em>k</em> pequenos ou consultas curtas, em que a omissão é mais viável.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Processamento de consultas Basic Term-at-a-Time (TAAT). Embora seja mais lento em comparação com <code translate="no">DAAT_MAXSCORE</code> e <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> oferece uma vantagem única. Ao contrário dos algoritmos DAAT, que utilizam pontuações de impacto máximo armazenadas em cache que permanecem estáticas independentemente das alterações ao parâmetro de coleção global (avgdl), o <code translate="no">TAAT_NAIVE</code> adapta-se dinamicamente a essas alterações.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -696,7 +696,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>Proporção de termos de baixa importância a ignorar durante a pesquisa. Para obter detalhes, consulte <a href="/docs/pt/sparse_vector.md">Vetor esparso</a>.</p></td>
+     <td><p>Proporção de termos de baixa importância a serem ignorados durante a pesquisa. Para obter detalhes, consulte <a href="/docs/pt/sparse_vector.md">Vetor esparso</a>.</p></td>
    </tr>
    <tr>
      <td></td>
@@ -712,7 +712,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">output_fields</code></p></td>
-     <td><p>Lista de nomes de campos a devolver nos resultados da pesquisa. Suporta todos os campos <strong>, exceto o campo de vetor esparso</strong> que contém as incorporações geradas por BM25. Os campos de saída comuns incluem o campo de chave primária (por exemplo, <code translate="no">id</code>) e o campo de texto original (por exemplo, <code translate="no">text</code>). Para obter mais informações, consulte Perguntas <a href="/docs/pt/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">frequentes</a>.</p></td>
+     <td><p>Lista de nomes de campos a devolver nos resultados da pesquisa. Suporta todos os campos <strong>, exceto o campo do vetor esparso</strong> que contém as incorporações geradas por BM25. Os campos de saída comuns incluem o campo de chave primária (por exemplo, <code translate="no">id</code>) e o campo de texto original (por exemplo, <code translate="no">text</code>). Para obter mais informações, consulte Perguntas <a href="/docs/pt/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">frequentes</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>

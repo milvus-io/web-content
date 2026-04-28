@@ -39,7 +39,7 @@ title: Milvus als Vektorspeicher verwenden
     </button></h2><p>Sie müssen <code translate="no">langchain-milvus</code> und andere notwendige Abhängigkeiten installieren.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU langchain-milvus milvus-lite langchain-openai</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Die neueste Version von pymilvus kommt mit einer lokalen Vektordatenbank Milvus Lite, die sich gut für Prototypen eignet. Wenn Sie große Datenmengen haben, z. B. mehr als eine Million Dokumente, empfehlen wir, einen leistungsfähigeren Milvus-Server auf <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Docker oder Kubernetes</a> einzurichten.</p>
+<p>Die neueste Version von pymilvus wird mit einer lokalen Vektordatenbank Milvus Lite geliefert, die sich gut für Prototypen eignet. Wenn Sie große Datenmengen haben, z. B. mehr als eine Million Dokumente, empfehlen wir, einen leistungsfähigeren Milvus-Server auf <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Docker oder Kubernetes</a> einzurichten.</p>
 <h2 id="Initialization" class="common-anchor-header">Initialisierung<button data-href="#Initialization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -292,7 +292,7 @@ I0000 00:00:1761298048.354308 7886403 fork_posix.cc:71] Other threads are curren
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">* [SIM=0.893776] The weather forecast for tomorrow is cloudy and overcast, with a high of 62 degrees. [{'source': 'news', 'pk': 'dbf6560a-1487-4a6e-8797-245d57874f5b'}]
 </code></pre>
-<p>Eine vollständige Liste aller Suchoptionen, die bei Verwendung des <code translate="no">Milvus</code> Vektorspeichers zur Verfügung stehen, finden Sie in der <a href="https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html">API-Referenz</a>.</p>
+<p>Eine vollständige Liste aller Suchoptionen, die bei der Verwendung des <code translate="no">Milvus</code> Vektorspeichers zur Verfügung stehen, finden Sie in der <a href="https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html">API-Referenz</a>.</p>
 <h3 id="Query-by-turning-into-retriever" class="common-anchor-header">Abfrage durch Umwandlung in Retriever<button data-href="#Query-by-turning-into-retriever" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -351,7 +351,7 @@ retriever.invoke(<span class="hljs-string">&quot;Stealing from the bank is a cri
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Wenn Sie eine Retrieval-Applikation entwickeln, müssen Sie sie oft mit Blick auf mehrere Benutzer erstellen. Das bedeutet, dass Sie möglicherweise nicht nur Daten für einen Benutzer, sondern für viele verschiedene Benutzer speichern, und diese sollten nicht in der Lage sein, die Daten des jeweils anderen zu sehen.</p>
+    </button></h3><p>Wenn Sie eine Retrieval-Applikation entwickeln, müssen Sie sie oft für mehrere Benutzer erstellen. Das bedeutet, dass Sie möglicherweise nicht nur Daten für einen Benutzer, sondern für viele verschiedene Benutzer speichern, und diese sollten nicht in der Lage sein, die Daten des jeweils anderen zu sehen.</p>
 <p>Milvus empfiehlt die Verwendung von <a href="https://milvus.io/docs/multi_tenancy.md#Partition-key-based-multi-tenancy">partition_key</a>, um Multi-Tenancy zu implementieren, hier ist ein Beispiel.</p>
 <blockquote>
 <p>Die Funktion des Partitionsschlüssels ist jetzt nicht in Milvus Lite verfügbar, wenn Sie sie nutzen wollen, müssen Sie den Milvus-Server von <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Docker oder Kubernetes</a> aus starten.</p>

@@ -73,23 +73,38 @@ title: Улучшите Пульсар в Мильвусе с V2 до V3
         ></path>
       </svg>
     </button></h2><p>В этом разделе подробно описаны процедуры обновления Pulsar с V2 до V3 в Milvus.</p>
-<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">Сохранение данных, не использованных в Pulsar</h3><p>На этом этапе необходимо убедиться, что существующие данные в Pulsar были сохранены в службе хранения объектов. Существует два подхода, и вы можете выбрать тот, который соответствует вашим потребностям.</p>
+<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">Сохранение данных, не потребляемых в Pulsar<button data-href="#Persist-data-not-consumed-in-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>На этом этапе необходимо убедиться, что существующие данные в Pulsar были сохранены в службе хранения объектов. Существует два подхода, и вы можете выбрать тот, который соответствует вашим потребностям.</p>
 <h4 id="Approach-1-Using-Attu" class="common-anchor-header">Подход 1: использование Attu</h4><p>Если в вашем рабочем развертывании Milvus имеется лишь небольшое количество коллекций с небольшим количеством сегментов, вы можете использовать Attu для сохранения данных в службе хранения объектов.</p>
 <ol>
 <li><p>Выберите все коллекции во всех базах данных, перейдите на панель <code translate="no">Segments</code>, нажмите кнопку <code translate="no">Flush</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
    </span> <span class="img-wrapper"> <span>Панель сегментов коллекции</span> </span></p></li>
 <li><p>Затем во всплывающем окне снова нажмите кнопку <code translate="no">Flush</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
    </span> <span class="img-wrapper"> <span>Запрос на промывку данных в Attu</span> </span></p></li>
 <li><p>Затем подождите, пока все состояния постоянных сегментов коллекций не станут <code translate="no">Flushed</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/view-data-peristent-process.png" alt="View data flush status in Attu" class="doc-image" id="view-data-flush-status-in-attu" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/view-data-peristent-process.png" alt="View data flush status in Attu" class="doc-image" id="view-data-flush-status-in-attu" />
    </span> <span class="img-wrapper"> <span>Просмотр состояния промывки данных в Attu</span> </span></p></li>
 </ol>
 <h4 id="Approach-2-Using-management-API" class="common-anchor-header">Подход 2: Использование API управления</h4><ol>
@@ -140,7 +155,22 @@ title: Улучшите Пульсар в Мильвусе с V2 до V3
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Остановка Milvus и удаление Pulsar V2</h3><p>На этом шаге вам нужно остановить Milvus pod и удалить развертывание Pulsar V2. Здесь есть два отдельных раздела:</p>
+<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Остановка Milvus и удаление Pulsar V2<button data-href="#Stop-Milvus-and-delete-Pulsar-V2" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>На этом шаге вам нужно остановить Milvus pod и удалить развертывание Pulsar V2. Здесь есть два отдельных раздела:</p>
 <ul>
 <li><p>Для пользователей Milvus Helm</p>
 <p>Если вы установили Milvus с помощью схемы Milvus Helm, перейдите к разделу <a href="#Delete-Pulsar-V2-using-Helm">"Удаление Pulsar v2 с помощью Helm</a>".</p></li>
@@ -293,7 +323,22 @@ milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">Запуск Pulsar V3 и Milvus</h3><p>На этом шаге необходимо запустить капсулы Pulsar V3 и Milvus. Здесь есть два отдельных раздела:</p>
+<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">Запуск Pulsar V3 и Milvus<button data-href="#Start-Pulsar-V3-and-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>На этом шаге необходимо запустить капсулы Pulsar V3 и Milvus. Здесь есть два отдельных раздела:</p>
 <ul>
 <li><p>Для пользователя Helm</p>
 <p>Если вы установили Milvus с помощью схемы Milvus Helm, перейдите к разделу <a href="#For-Helm-User">For Helm User</a>.</p></li>
@@ -365,7 +410,7 @@ my-release-pulsarv3-zookeeper-2               1/1     Running     0          4m2
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <h4 id="Start-Pulsar-V3-and-using-Milvus-Operator" class="common-anchor-header">Запуск Pulsar V3 и использование Milvus Operator</h4><ol>
-<li><p>Отредактируйте <code translate="no">milvus.yaml</code>, сохраненный на предыдущем шаге.</p>
+<li><p>Отредактируйте файл <code translate="no">milvus.yaml</code>, сохраненный на предыдущем шаге.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change the followings fields:​</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1​</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus​</span>
@@ -398,7 +443,7 @@ my-release-pulsarv3-zookeeper-2               1/1     Running     0          4m2
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Проверьте, все ли капсулы были запланированы и запущены с помощью <code translate="no">kubectl -n default get pods</code>. </p>
-<p>Запуск всех стручков может занять несколько минут.</p>
+<p>Запуск всех подсистем может занять несколько минут.</p>
 <p>Выходные данные выглядят следующим образом.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">NAME</span>                                            <span class="hljs-string">READY</span>   <span class="hljs-string">STATUS</span>      <span class="hljs-string">RESTARTS</span>   <span class="hljs-string">AGE​</span>
 <span class="hljs-string">my-release-etcd-0</span>                               <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">65m​</span>

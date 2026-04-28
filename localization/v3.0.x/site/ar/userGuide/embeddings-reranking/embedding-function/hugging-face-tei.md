@@ -50,10 +50,40 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>قبل تكوين Milvus مع وظيفة TEI، يجب أن يكون لديك خدمة TEI قيد التشغيل. يدعم ميلفوس طريقتين لنشر TEI:</p>
-<h3 id="Standard-deployment-external" class="common-anchor-header">النشر القياسي (خارجي)</h3><p>يمكنك نشر TEI كخدمة مستقلة باستخدام الطرق الرسمية من Hugging Face. يمنحك هذا الأسلوب أقصى قدر من المرونة والتحكم في خدمة TEI الخاصة بك.</p>
+<h3 id="Standard-deployment-external" class="common-anchor-header">النشر القياسي (خارجي)<button data-href="#Standard-deployment-external" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكنك نشر TEI كخدمة مستقلة باستخدام الطرق الرسمية من Hugging Face. يمنحك هذا الأسلوب أقصى قدر من المرونة والتحكم في خدمة TEI الخاصة بك.</p>
 <p>للحصول على إرشادات مفصلة حول نشر TEI باستخدام Docker أو طرق أخرى، راجع <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour#deploy">الوثائق الرسمية لـ Hugging Face Text Embedddings Inference</a>.</p>
 <p>بعد النشر، قم بتدوين نقطة نهاية خدمة TEI الخاصة بك (على سبيل المثال، <code translate="no">http://localhost:8080</code>) حيث ستحتاج إليها عند <a href="/docs/ar/hugging-face-tei.md#Use-embedding-function-">استخدام وظيفة TEI في Milvus</a>.</p>
-<h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">نشر مخطط Milvus Helm البياني (متكامل)</h3><p>بالنسبة لبيئات Kubernetes، تقدم Milvus خيار النشر المتكامل من خلال مخطط Helm. هذا يبسط العملية عن طريق نشر وتكوين TEI جنبًا إلى جنب مع Milvus.</p>
+<h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">نشر مخطط Milvus Helm البياني (متكامل)<button data-href="#Milvus-Helm-Chart-deployment-integrated" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بالنسبة لبيئات Kubernetes، تقدم Milvus خيار النشر المتكامل من خلال مخطط Helm. هذا يبسط العملية من خلال نشر وتكوين TEI جنبًا إلى جنب مع Milvus.</p>
 <p>لتمكين TEI في نشر Milvus Helm الخاص بك:</p>
 <ol>
 <li><p>تكوين <strong>القيم.yaml</strong> لتمكين TEI:</p>
@@ -108,7 +138,7 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
     </button></h2><p>بعد نشر خدمة TEI الخاصة بك، ستحتاج إلى توفير نقطة النهاية الخاصة بها عند تحديد دالة تضمين TEI. في معظم الحالات، لا يلزم إجراء أي تكوين إضافي حيث يتم تمكين TEI افتراضيًا في Milvus.</p>
 <p>ومع ذلك، إذا تم نشر خدمة TEI الخاصة بك مع مصادقة مفتاح واجهة برمجة التطبيقات (<code translate="no">--api-key</code> )، فستحتاج إلى تكوين Milvus لاستخدام هذا المفتاح:</p>
 <ol>
-<li><p><strong>حدد مفاتيح واجهة برمجة التطبيقات في قسم <code translate="no">credential</code>:</strong></p>
+<li><p><strong>تحديد مفاتيح واجهة برمجة التطبيقات في قسم <code translate="no">credential</code>:</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">tei_key:</span>  <span class="hljs-comment"># You can use any label name</span>
@@ -139,7 +169,22 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
         ></path>
       </svg>
     </button></h2><p>بمجرد تكوين خدمة TEI، اتبع هذه الخطوات لتعريف دوال التضمين واستخدامها.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">الخطوة 1: تحديد حقول المخطط</h3><p>لاستخدام دالة التضمين، قم بإنشاء مجموعة بمخطط محدد. يجب أن يتضمن هذا المخطط ثلاثة حقول ضرورية على الأقل:</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">الخطوة 1: تحديد حقول المخطط<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لاستخدام دالة التضمين، قم بإنشاء مجموعة بمخطط محدد. يجب أن يتضمن هذا المخطط ثلاثة حقول ضرورية على الأقل:</p>
 <ul>
 <li><p>الحقل الأساسي الذي يحدد بشكل فريد كل كيان في المجموعة.</p></li>
 <li><p>حقل قياسي يخزن البيانات الأولية المراد تضمينها.</p></li>
@@ -160,7 +205,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to exactly match the TEI model&#x27;s output dimension</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">الخطوة 2: إضافة دالة التضمين إلى المخطط</h3><p>تقوم الوحدة النمطية الدالة في ميلفوس تلقائيًا بتحويل البيانات الأولية المخزنة في حقل قياسي إلى تضمينات وتخزينها في حقل المتجه المحدد صراحة.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">الخطوة 2: إضافة دالة التضمين إلى المخطط<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تقوم الوحدة النمطية الدالة في ميلفوس تلقائيًا بتحويل البيانات الأولية المخزنة في حقل قياسي إلى تضمينات وتخزينها في حقل المتجه المحدد صراحة.</p>
 <p>يضيف المثال أدناه وحدة الدالة (<code translate="no">tei_func</code>) التي تقوم بتحويل الحقل القياسي <code translate="no">&quot;document&quot;</code> إلى تضمينات، وتخزين المتجهات الناتجة في الحقل المتجه <code translate="no">&quot;dense_vector&quot;</code> المحدد مسبقًا.</p>
 <p>بمجرد تعريف دالة التضمين الخاصة بك، قم بإضافتها إلى مخطط مجموعتك. هذا يوجه ميلفوس لاستخدام دالة التضمين المحددة لمعالجة التضمينات وتخزينها من بياناتك النصية.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define TEI embedding function</span>

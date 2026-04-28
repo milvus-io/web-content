@@ -77,7 +77,7 @@ summary: Découvrez comment configurer le journal pour Milvus.
     <tr>
       <td>
         <li>Chemin racine des fichiers journaux.</li>      
-        <li>La valeur par défaut est vide, ce qui indique que les fichiers journaux sont envoyés vers la sortie standard (stdout) et l'erreur standard (stderr).</li>      
+        <li>La valeur par défaut est vide, ce qui signifie que les fichiers journaux sont envoyés vers la sortie standard (stdout) et l'erreur standard (stderr).</li>      
         <li>Si ce paramètre est défini sur un chemin local valide, Milvus écrit et stocke les fichiers journaux dans ce chemin.</li>      
         <li>Définissez ce paramètre comme le chemin que vous avez le droit d'écrire.</li>      </td>
       <td></td>

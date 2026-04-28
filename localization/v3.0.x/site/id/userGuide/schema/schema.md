@@ -42,7 +42,7 @@ summary: >-
 <p>Skema koleksi memiliki kunci utama, maksimal empat bidang vektor, dan beberapa bidang skalar. Diagram berikut ini mengilustrasikan cara memetakan artikel ke daftar ruas skema.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
    </span> <span class="img-wrapper"> <span>Rancangan skema</span> </span></p>
 <p>Desain model data dari sistem pencarian melibatkan analisis kebutuhan bisnis dan abstraksi informasi ke dalam model data yang diekspresikan dengan skema. Misalnya, pencarian sepotong teks harus "diindeks" dengan mengubah string literal menjadi vektor melalui "penyematan" dan memungkinkan pencarian vektor. Di luar persyaratan penting ini, menyimpan properti lain seperti stempel waktu publikasi dan penulis mungkin diperlukan. Metadata ini memungkinkan pencarian semantik disempurnakan melalui penyaringan, yang hanya mengembalikan teks yang diterbitkan setelah tanggal tertentu atau oleh penulis tertentu. Anda juga dapat mengambil skalar ini dengan teks utama untuk merender hasil pencarian dalam aplikasi. Masing-masing harus diberi pengenal unik untuk mengatur potongan-potongan teks ini, yang dinyatakan sebagai bilangan bulat atau string. Elemen-elemen ini sangat penting untuk mencapai logika pencarian yang canggih.</p>
 <p>Lihat Panduan <a href="/docs/id/schema-hands-on.md">Praktis Desain Skema</a> untuk mengetahui cara membuat skema yang dirancang dengan baik.</p>
@@ -207,7 +207,7 @@ export schema=&quot;{​
 <li><p><code translate="no">FLOAT16_VECTOR</code></p>
 <p>Bidang vektor jenis ini menyimpan daftar angka mengambang setengah presisi 16-bit dan biasanya berlaku untuk skenario pembelajaran mendalam atau komputasi berbasis GPU yang dibatasi memori atau bandwidth.</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
-<p>Bidang vektor jenis ini menyimpan daftar angka floating-point 16-bit yang memiliki presisi yang lebih rendah namun memiliki rentang eksponen yang sama dengan Float32. Jenis data ini biasanya digunakan dalam skenario pembelajaran mendalam, karena mengurangi penggunaan memori tanpa memengaruhi akurasi secara signifikan.</p></li>
+<p>Bidang vektor jenis ini menyimpan daftar angka floating-point 16-bit yang memiliki presisi lebih rendah namun memiliki rentang eksponen yang sama dengan Float32. Jenis data ini biasanya digunakan dalam skenario pembelajaran mendalam, karena mengurangi penggunaan memori tanpa memengaruhi akurasi secara signifikan.</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
 <p>Bidang vektor jenis ini menyimpan daftar 0 dan 1. Mereka berfungsi sebagai fitur ringkas untuk merepresentasikan data dalam pemrosesan gambar dan skenario pengambilan informasi.</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
@@ -229,7 +229,22 @@ export schema=&quot;{​
         ></path>
       </svg>
     </button></h2><p>Dalam kasus yang umum, Anda dapat menggunakan bidang skalar untuk menyimpan metadata dari sematan vektor yang disimpan di Milvus, dan melakukan pencarian JST dengan pemfilteran metadata untuk meningkatkan ketepatan hasil pencarian. Milvus mendukung berbagai jenis bidang skalar, termasuk <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, Float, <strong>Double</strong>, <strong>Array</strong>, dan JSON.</p>
-<h3 id="Add-String-Fields​" class="common-anchor-header">Menambahkan Bidang String</h3><p>Di Milvus, Anda dapat menggunakan field VarChar untuk menyimpan string. Untuk mengetahui lebih lanjut mengenai bidang VarChar, lihat <a href="/docs/id/string.md">Bidang String</a>.</p>
+<h3 id="Add-String-Fields​" class="common-anchor-header">Menambahkan Bidang String<button data-href="#Add-String-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Di Milvus, Anda dapat menggunakan field VarChar untuk menyimpan string. Untuk mengetahui lebih lanjut mengenai bidang VarChar, lihat <a href="/docs/id/string.md">Bidang String</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -271,7 +286,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Number-Fields​" class="common-anchor-header">Menambahkan Bidang Angka</h3><p>Jenis-jenis angka yang didukung oleh Milvus adalah <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, dan <code translate="no">Double</code>. Untuk informasi lebih lanjut tentang bidang angka, lihat <a href="/docs/id/number.md">Bidang Angka</a>.</p>
+<h3 id="Add-Number-Fields​" class="common-anchor-header">Menambahkan Bidang Angka<button data-href="#Add-Number-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jenis-jenis angka yang didukung oleh Milvus adalah <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, dan <code translate="no">Double</code>. Untuk informasi lebih lanjut tentang bidang angka, lihat <a href="/docs/id/number.md">Bidang Angka</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -308,7 +338,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Boolean-Fields​" class="common-anchor-header">Menambahkan Bidang Boolean</h3><p>Milvus mendukung field boolean. Cuplikan kode berikut ini mendemonstrasikan bagaimana cara menambahkan field boolean.</p>
+<h3 id="Add-Boolean-Fields​" class="common-anchor-header">Menambahkan Bidang Boolean<button data-href="#Add-Boolean-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus mendukung field boolean. Cuplikan kode berikut ini mendemonstrasikan bagaimana cara menambahkan field boolean.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -346,7 +391,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-JSON-fields​" class="common-anchor-header">Menambahkan bidang JSON</h3><p>Bidang JSON biasanya menyimpan data JSON setengah terstruktur. Untuk mengetahui lebih lanjut tentang bidang JSON, lihat <a href="/docs/id/use-json-fields.md">Bidang JSON</a>.</p>
+<h3 id="Add-JSON-fields​" class="common-anchor-header">Menambahkan bidang JSON<button data-href="#Add-JSON-fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Bidang JSON biasanya menyimpan data JSON setengah terstruktur. Untuk mengetahui lebih lanjut tentang bidang JSON, lihat <a href="/docs/id/use-json-fields.md">Bidang JSON</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -385,7 +445,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Array-Fields​" class="common-anchor-header">Menambahkan Bidang Array</h3><p>Bidang array menyimpan daftar elemen. Tipe data dari semua elemen di dalam bidang array harus sama. Untuk informasi lebih lanjut tentang bidang array, lihat <a href="/docs/id/array_data_type.md">Bidang Array</a>.</p>
+<h3 id="Add-Array-Fields​" class="common-anchor-header">Menambahkan Bidang Array<button data-href="#Add-Array-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Bidang larik menyimpan daftar elemen. Tipe data dari semua elemen di dalam bidang array harus sama. Untuk informasi lebih lanjut tentang bidang array, lihat <a href="/docs/id/array_data_type.md">Bidang Array</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​

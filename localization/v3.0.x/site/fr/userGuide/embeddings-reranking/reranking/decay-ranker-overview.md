@@ -255,7 +255,7 @@ beta: Milvus 2.6.x
      <td><p>Dans un outil de recherche d'événements, les événements au-delà d'une fenêtre future de deux semaines n'apparaissent tout simplement pas.</p></td>
    </tr>
 </table>
-<p>Pour obtenir des informations détaillées sur la manière dont chaque outil de classement calcule les scores et les modèles de déclin spécifiques, reportez-vous à la documentation correspondante :</p>
+<p>Pour obtenir des informations détaillées sur la manière dont chaque classificateur de décroissance calcule les scores et les modèles de décroissance spécifiques, reportez-vous à la documentation correspondante :</p>
 <ul>
 <li><p><a href="/docs/fr/gaussian-decay.md">Décroissance gaussienne</a></p></li>
 <li><p><a href="/docs/fr/exponential-decay.md">Décroissance exponentielle</a></p></li>
@@ -402,7 +402,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.scale</code></p></td>
      <td><p>Oui</p></td>
-     <td><p>Distance ou temps à partir duquel la pertinence chute jusqu'à la valeur <code translate="no">decay</code>. Contrôle la vitesse à laquelle la pertinence diminue.</p><p>Dans le cas d'un déclin basé sur le temps, l'unité de temps doit correspondre à vos données de collecte.</p><p>Des valeurs plus élevées entraînent une baisse plus progressive de la pertinence ; des valeurs plus faibles entraînent une baisse plus marquée.</p></td>
+     <td><p>Distance ou temps à partir duquel la pertinence chute jusqu'à la valeur <code translate="no">decay</code>. Contrôle la vitesse à laquelle la pertinence diminue.</p><p>Dans le cas d'un déclin basé sur le temps, l'unité de temps doit correspondre à vos données de collecte.</p><p>Des valeurs plus élevées entraînent une baisse plus progressive de la pertinence ; des valeurs plus faibles entraînent une baisse plus importante.</p></td>
      <td><ul><li><p>Pour le temps : période en secondes (par exemple, <code translate="no">7 * 24 * 60 * 60</code> pendant 7 jours).</p></li><li><p>Pour la distance : mètres (par exemple, <code translate="no">5000</code> pour 5 km).</p></li></ul></td>
    </tr>
    <tr>
@@ -414,7 +414,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.decay</code></p></td>
      <td><p>Non</p></td>
-     <td><p>Valeur du score à la distance <code translate="no">scale</code>, contrôle l'inclinaison de la courbe. Des valeurs plus faibles créent des courbes de déclin plus raides ; des valeurs plus élevées créent des courbes de déclin plus progressives.</p><p>Doit être compris entre 0 et 1.</p></td>
+     <td><p>Valeur du score à la distance <code translate="no">scale</code>, contrôle l'inclinaison de la courbe. Les valeurs inférieures créent des courbes de déclin plus raides ; les valeurs supérieures créent des courbes de déclin plus progressives.</p><p>Doit être compris entre 0 et 1.</p></td>
      <td><p><code translate="no">0.5</code> (par défaut)</p></td>
    </tr>
 </table>

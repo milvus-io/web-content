@@ -24,9 +24,9 @@ title: LangChain 및 Milvus에서 전체 텍스트 검색 사용하기
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/full_text_search_with_langchain.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">전체 텍스트 검색은</a> 텍스트의 특정 키워드나 구문을 일치시켜 문서를 검색하는 전통적인 방법입니다. 이는 용어 빈도 등의 요소로 계산된 관련성 점수를 기반으로 결과의 순위를 매깁니다. 시맨틱 검색은 의미와 문맥을 이해하는 데 더 효과적이지만, 전체 텍스트 검색은 정확한 키워드 매칭에 탁월하므로 시맨틱 검색을 보완하는 데 유용합니다. BM25 알고리즘은 전체 텍스트 검색에서 순위를 매기는 데 널리 사용되며 검색 증강 세대(RAG)에서 핵심적인 역할을 합니다.</p>
+<p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">전체 텍스트 검색은</a> 텍스트의 특정 키워드나 구문을 일치시켜 문서를 검색하는 전통적인 방법입니다. 이는 용어 빈도 등의 요소에서 계산된 관련성 점수를 기반으로 결과의 순위를 매깁니다. 시맨틱 검색은 의미와 문맥을 이해하는 데 더 효과적이지만, 전체 텍스트 검색은 정확한 키워드 매칭에 탁월하므로 시맨틱 검색을 보완하는 데 유용합니다. BM25 알고리즘은 전체 텍스트 검색에서 순위를 매기는 데 널리 사용되며 검색 증강 세대(RAG)에서 핵심적인 역할을 합니다.</p>
 <p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5에는</a> BM25를 사용한 기본 전체 텍스트 검색 기능이 도입되었습니다. 이 접근 방식은 텍스트를 BM25 점수를 나타내는 스파스 벡터로 변환합니다. 원시 텍스트를 입력하기만 하면 Milvus가 자동으로 스파스 벡터를 생성하고 저장하므로 수동으로 스파스 임베딩을 생성할 필요가 없습니다.</p>
-<p>LangChain과 Milvus의 통합으로 이 기능도 도입되어 전체 텍스트 검색을 RAG 애플리케이션에 통합하는 프로세스가 간소화되었습니다. 전체 텍스트 검색과 고밀도 벡터를 사용한 시맨틱 검색을 결합함으로써, 고밀도 임베딩의 시맨틱 컨텍스트와 단어 매칭의 정확한 키워드 관련성을 모두 활용하는 하이브리드 접근 방식을 달성할 수 있습니다. 이러한 통합은 검색 시스템의 정확성, 연관성 및 사용자 경험을 향상시킵니다.</p>
+<p>LangChain과 Milvus의 통합으로 이 기능도 도입되어 전체 텍스트 검색을 RAG 애플리케이션에 통합하는 프로세스가 간소화되었습니다. 전체 텍스트 검색과 고밀도 벡터를 사용한 시맨틱 검색을 결합함으로써, 고밀도 임베딩의 시맨틱 컨텍스트와 단어 매칭의 정확한 키워드 관련성을 모두 활용하는 하이브리드 접근 방식을 달성할 수 있습니다. 이러한 통합은 검색 시스템의 정확도, 연관성 및 사용자 경험을 향상시킵니다.</p>
 <p>이 튜토리얼에서는 애플리케이션에서 전체 텍스트 검색을 구현하기 위해 LangChain과 Milvus를 사용하는 방법을 보여드립니다.</p>
 <div class="alert note">
 <ul>
@@ -60,7 +60,7 @@ title: LangChain 및 Milvus에서 전체 텍스트 검색 사용하기
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus 서버 <code translate="no">URI</code> (및 선택적으로 <code translate="no">TOKEN</code>)를 지정합니다. Milvus 서버를 설치하고 시작하는 방법은 이 <a href="https://milvus.io/docs/install_standalone-docker-compose.md">가이드를</a> 따르세요.</p>
+<p>Milvus 서버 <code translate="no">URI</code> (및 선택적으로 <code translate="no">TOKEN</code>)를 지정합니다. 이 <a href="https://milvus.io/docs/install_standalone-docker-compose.md">가이드에</a> 따라 Milvus 서버를 설치하고 시작하는 방법을 확인하세요.</p>
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -88,7 +88,22 @@ docs = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Hybrid-Search" class="common-anchor-header">하이브리드 검색</h3><p>전체 텍스트 검색을 위해 Milvus VectorStore는 <code translate="no">builtin_function</code> 파라미터를 허용합니다. 이 매개변수를 통해 <code translate="no">BM25BuiltInFunction</code> 의 인스턴스를 전달할 수 있습니다. 이는 일반적으로 밀도가 높은 임베딩을 <code translate="no">VectorStore</code> 으로 전달하는 시맨틱 검색과는 다릅니다,</p>
+    </button></h2><h3 id="Hybrid-Search" class="common-anchor-header">하이브리드 검색<button data-href="#Hybrid-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>전체 텍스트 검색을 위해 Milvus VectorStore는 <code translate="no">builtin_function</code> 파라미터를 허용합니다. 이 매개변수를 통해 <code translate="no">BM25BuiltInFunction</code> 의 인스턴스를 전달할 수 있습니다. 이는 일반적으로 밀도가 높은 임베딩을 <code translate="no">VectorStore</code> 으로 전달하는 시맨틱 검색과는 다릅니다,</p>
 <p>다음은 시맨틱 검색을 위한 OpenAI 고밀도 임베딩과 전체 텍스트 검색을 위한 BM25를 사용한 Milvus의 간단한 하이브리드 검색 예시입니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, BM25BuiltInFunction
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
@@ -113,8 +128,8 @@ vectorstore = Milvus.from_documents(
 <li><code translate="no">output_field_names</code> (str): 출력 필드의 이름, 기본값은 <code translate="no">sparse</code> 입니다. 이 함수가 계산된 결과를 출력할 필드를 나타냅니다.</li>
 </ul>
 <p>위에서 언급한 Milvus 초기화 매개변수에서는 <code translate="no">vector_field=[&quot;dense&quot;, &quot;sparse&quot;]</code> 도 지정합니다. <code translate="no">sparse</code> 필드는 <code translate="no">BM25BuiltInFunction</code> 에 정의된 출력 필드로 간주되므로 다른 <code translate="no">dense</code> 필드는 OpenAIEmbedding의 출력 필드에 자동으로 할당됩니다.</p>
-<p>실제로, 특히 여러 임베딩이나 함수를 결합할 때는 모호성을 피하기 위해 각 함수에 대한 입력 및 출력 필드를 명시적으로 지정하는 것이 좋습니다.</p>
-<p>다음 예시에서는 <code translate="no">BM25BuiltInFunction</code> 의 입력 및 출력 필드를 명시적으로 지정하여 내장 함수가 어떤 필드를 위한 것인지 명확히 합니다.</p>
+<p>실제로, 특히 여러 임베딩 또는 함수를 결합할 때는 모호성을 피하기 위해 각 함수에 대한 입력 및 출력 필드를 명시적으로 지정하는 것이 좋습니다.</p>
+<p>다음 예시에서는 <code translate="no">BM25BuiltInFunction</code> 의 입력 및 출력 필드를 명시적으로 지정하여 내장 함수가 어떤 필드를 위한 것인지 명확히 했습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from langchain_voyageai import VoyageAIEmbeddings</span>
 
 embedding1 = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-ada-002&quot;</span>)
@@ -151,7 +166,22 @@ vectorstore.vector_fields
 <pre><code translate="no">[Document(metadata={'category': 'fruit', 'pk': 454646931479251897}, page_content='I like this apple')]
 </code></pre>
 <p>하이브리드 검색에 대한 자세한 내용은 <a href="https://milvus.io/docs/multi-vector-search.md#Hybrid-Search">하이브리드 검색 소개</a> 및 이 <a href="https://milvus.io/docs/milvus_hybrid_search_retriever.md">LangChain Milvus 하이브리드 검색 튜토리얼을</a> 참조하세요.</p>
-<h3 id="BM25-search-without-embedding" class="common-anchor-header">임베딩 없이 BM25 검색</h3><p>임베딩 기반 시맨틱 검색을 사용하지 않고 BM25 함수로만 전체 텍스트 검색을 수행하려면 임베딩 파라미터를 <code translate="no">None</code> 로 설정하고 BM25 함수 인스턴스로 지정된 <code translate="no">builtin_function</code> 만 유지하면 됩니다. 벡터 필드에는 "스파스" 필드만 있습니다. 예를 들어</p>
+<h3 id="BM25-search-without-embedding" class="common-anchor-header">임베딩 없이 BM25 검색<button data-href="#BM25-search-without-embedding" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>임베딩 기반 시맨틱 검색을 사용하지 않고 BM25 함수로만 전체 텍스트 검색을 수행하려면 임베딩 파라미터를 <code translate="no">None</code> 로 설정하고 BM25 함수 인스턴스로 지정된 <code translate="no">builtin_function</code> 만 유지하면 됩니다. 벡터 필드에는 "스파스" 필드만 있습니다. 예를 들어</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=<span class="hljs-literal">None</span>,
@@ -236,14 +266,29 @@ vectorstore = Milvus.from_documents(
     </button></h2><p>지금까지 랭체인과 밀버스에서 기본 BM25 빌트인 기능을 사용하는 방법을 알아보았습니다. 이번에는 하이브리드 검색과 재랭킹을 통해 최적화된 RAG 구현을 소개하겠습니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
 <p>이 다이어그램은 키워드 매칭을 위한 BM25와 시맨틱 검색을 위한 벡터 검색을 결합한 하이브리드 검색 및 재랭크 프로세스를 보여줍니다. 두 방법의 결과를 병합하고 순위를 재조정하여 LLM으로 전달하여 최종 답변을 생성합니다.</p>
 <p>하이브리드 검색은 정확도와 의미론적 이해의 균형을 유지하여 다양한 쿼리에 대한 정확도와 견고성을 향상시킵니다. BM25 전체 텍스트 검색과 벡터 검색으로 후보를 검색하여 의미론적, 문맥 인식, 정확한 검색을 모두 보장합니다.</p>
 <p>예제를 통해 시작해 보겠습니다.</p>
-<h3 id="Prepare-the-data" class="common-anchor-header">데이터 준비</h3><p>Langchain WebBaseLoader를 사용해 웹 소스에서 문서를 로드하고 RecursiveCharacterTextSplitter를 사용해 청크로 분할합니다.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">데이터 준비<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Langchain WebBaseLoader를 사용해 웹 소스에서 문서를 로드하고 RecursiveCharacterTextSplitter를 사용해 청크로 분할합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bs4
 <span class="hljs-keyword">from</span> langchain_community.document_loaders <span class="hljs-keyword">import</span> WebBaseLoader
 <span class="hljs-keyword">from</span> langchain_text_splitters <span class="hljs-keyword">import</span> RecursiveCharacterTextSplitter
@@ -273,7 +318,22 @@ docs[<span class="hljs-number">1</span>]
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document(metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'}, page_content='Fig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning#\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.\nTask Decomposition#\nChain of thought (CoT; Wei et al. 2022) has become a standard prompting technique for enhancing model performance on complex tasks. The model is instructed to “think step by step” to utilize more test-time computation to decompose hard tasks into smaller and simpler steps. CoT transforms big tasks into multiple manageable tasks and shed lights into an interpretation of the model’s thinking process.\nTree of Thoughts (Yao et al. 2023) extends CoT by exploring multiple reasoning possibilities at each step. It first decomposes the problem into multiple thought steps and generates multiple thoughts per step, creating a tree structure. The search process can be BFS (breadth-first search) or DFS (depth-first search) with each state evaluated by a classifier (via a prompt) or majority vote.\nTask decomposition can be done (1) by LLM with simple prompting like &quot;Steps for XYZ.\\n1.&quot;, &quot;What are the subgoals for achieving XYZ?&quot;, (2) by using task-specific instructions; e.g. &quot;Write a story outline.&quot; for writing a novel, or (3) with human inputs.\nAnother quite distinct approach, LLM+P (Liu et al. 2023), involves relying on an external classical planner to do long-horizon planning. This approach utilizes the Planning Domain Definition Language (PDDL) as an intermediate interface to describe the planning problem. In this process, LLM (1) translates the problem into “Problem PDDL”, then (2) requests a classical planner to generate a PDDL plan based on an existing “Domain PDDL”, and finally (3) translates the PDDL plan back into natural language. Essentially, the planning step is outsourced to an external tool, assuming the availability of domain-specific PDDL and a suitable planner which is common in certain robotic setups but not in many other domains.\nSelf-Reflection#')
 </code></pre>
-<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">밀버스 벡터 저장소에 문서 로드</h3><p>위에서 소개한 것처럼 준비된 문서를 초기화하여 Milvus 벡터 스토어에 로드합니다. <code translate="no">dense</code> 은 OpenAI 임베딩용, <code translate="no">sparse</code> 은 BM25 함수용 벡터 필드 두 개가 포함되어 있습니다.</p>
+<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">밀버스 벡터 저장소에 문서 로드<button data-href="#Load-the-document-into-Milvus-vector-store" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>위에서 소개한 것처럼 준비된 문서를 초기화하여 Milvus 벡터 스토어에 로드합니다. <code translate="no">dense</code> 은 OpenAI 임베딩용, <code translate="no">sparse</code> 은 BM25 함수용 벡터 필드 두 개가 포함되어 있습니다.</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=OpenAIEmbeddings(),
@@ -285,7 +345,22 @@ docs[<span class="hljs-number">1</span>]
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Build-RAG-chain" class="common-anchor-header">RAG 체인 구축</h3><p>LLM 인스턴스와 프롬프트를 준비한 다음 LangChain 표현 언어를 사용하여 RAG 파이프라인으로 결합합니다.</p>
+<h3 id="Build-RAG-chain" class="common-anchor-header">RAG 체인 구축<button data-href="#Build-RAG-chain" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>LLM 인스턴스와 프롬프트를 준비한 다음 LangChain 표현 언어를 사용하여 RAG 파이프라인으로 결합합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnablePassthrough
 <span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate
 <span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser
@@ -341,4 +416,4 @@ res
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'PAL (Program-aided Language models) and PoT (Program of Thoughts prompting) are approaches that involve using language models to generate programming language statements to solve natural language reasoning problems. This method offloads the solution step to a runtime, such as a Python interpreter, allowing for complex computation and reasoning to be handled externally. PAL and PoT rely on language models with strong coding skills to effectively generate and execute these programming statements.'
 </code></pre>
-<p>축하합니다! Milvus와 LangChain으로 구동되는 하이브리드(밀도 벡터 + 스파스 bm25 함수) 검색 RAG 체인을 구축하셨습니다.</p>
+<p>축하합니다! Milvus와 LangChain으로 하이브리드(밀도 벡터 + 스파스 bm25 함수) 검색 RAG 체인을 구축하셨습니다.</p>

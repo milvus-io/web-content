@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/semantic_search_with_milvus_and_voyageai.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/semantic_search_with_milvus_and_voyageai.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>Esta guía muestra cómo <a href="https://docs.voyageai.com/docs/embeddings">la API de incrustación de</a> VoyageAI puede utilizarse con la base de datos vectorial Milvus para realizar búsquedas semánticas en texto.</p>
+<p>Esta guía muestra cómo <a href="https://docs.voyageai.com/docs/embeddings">la API de incrustación de Voy</a> ageAI puede utilizarse con la base de datos vectorial Milvus para realizar búsquedas semánticas en texto.</p>
 <h2 id="Getting-started" class="common-anchor-header">Para empezar<button data-href="#Getting-started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -223,7 +223,7 @@ res = milvus_client.insert(collection_name=<span class="hljs-string">&quot;demo_
 
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&quot;insert_count&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>Ahora estamos listos para buscar las imágenes. Aquí, la consulta es una cadena, pero también podemos hacer consultas con imágenes. (Utilizamos matplotlib para mostrar las imágenes resultantes.</p>
+<p>Ahora estamos listos para buscar las imágenes. En este caso, la consulta es una cadena, pero también podemos realizar consultas con imágenes. (Utilizamos matplotlib para mostrar las imágenes resultantes.</p>
 <pre><code translate="no" class="language-python">queries = [[<span class="hljs-string">&quot;The consequences of a dictator&#x27;s peace&quot;</span>]]
 
 query_vectors = client.multimodal_embed(

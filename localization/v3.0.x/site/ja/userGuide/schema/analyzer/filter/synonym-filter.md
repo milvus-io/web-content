@@ -184,7 +184,7 @@ analyzer_params = {
     }],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>完全なワークフロー（アップロード、登録、リスト、削除）および<code translate="no">&quot;type&quot;: &quot;local&quot;</code> の代替形式については、「ファイル・リソースの管理」を参照してください。</p>
+<p>完全なワークフロー（アップロード、登録、一覧、削除）および<code translate="no">&quot;type&quot;: &quot;local&quot;</code> の代替形式については、「ファイル・リソースの管理」を参照してください。</p>
 <h2 id="Examples" class="common-anchor-header">例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -160,7 +160,7 @@ beta: Milvus 2.6.x
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
    </span> <span class="img-wrapper"> <span>Présentation de la fonction d'intégration</span> </span></p>
 <h2 id="Configure-credentials" class="common-anchor-header">Configuration des informations d'identification<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -188,7 +188,7 @@ beta: Milvus 2.6.x
 <p>Le diagramme suivant illustre le processus de configuration des informations d'identification via le fichier de configuration Milvus (<code translate="no">milvus.yaml</code>), puis l'appel de la fonction dans Milvus.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
    </span> <span class="img-wrapper"> <span>Débordement de la configuration des informations d'identification</span> </span></p>
 <h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Étape 1 : Ajouter les informations d'identification au fichier de configuration Milvus<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -554,7 +554,7 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Après l'insertion des données, effectuez une recherche sémantique à l'aide du texte brut de la requête. Milvus convertit automatiquement votre requête en un vecteur d'intégration, récupère les documents pertinents sur la base de la similarité et renvoie les meilleurs résultats.</p>
+    </button></h3><p>Après l'insertion des données, effectuez une recherche sémantique à l'aide du texte brut de la requête. Milvus convertit automatiquement votre requête en un vecteur d'intégration, récupère les documents pertinents en fonction de leur similarité et renvoie les résultats les plus pertinents.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Perform semantic search</span>

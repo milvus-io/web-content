@@ -49,7 +49,7 @@ title: DeepEval을 사용한 평가
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-*****************&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Define-the-RAG-pipeline" class="common-anchor-header">RAG 파이프라인 정의<button data-href="#Define-the-RAG-pipeline" class="anchor-icon" translate="no">
+<h2 id="Define-the-RAG-pipeline" class="common-anchor-header">RAG 파이프라인 정의하기<button data-href="#Define-the-RAG-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -40,7 +40,7 @@ title: Milvus Standalone mit RPM/DEB-Paket installieren
       </svg>
     </button></h2><ul>
 <li>Sie haben bereits libstdc++ 8.5.0 oder eine neuere Version installiert.</li>
-<li><a href="/docs/de/prerequisite-docker.md">Prüfen Sie</a> vor der Installation<a href="/docs/de/prerequisite-docker.md">die Anforderungen an Hardware und Software</a>.</li>
+<li><a href="/docs/de/prerequisite-docker.md">Überprüfen Sie</a> vor der Installation<a href="/docs/de/prerequisite-docker.md">die Anforderungen an Hardware und Software</a>.</li>
 </ul>
 <h2 id="Download-the-RPMDEB-Package" class="common-anchor-header">Herunterladen des RPM/DEB-Pakets<button data-href="#Download-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -2,12 +2,9 @@
 id: minhash-lsh.md
 title: MINHASH_LSH
 summary: >-
-  La déduplication et la recherche de similarités efficaces sont essentielles
-  pour les ensembles de données d'apprentissage automatique à grande échelle, en
-  particulier pour les tâches telles que le nettoyage des corpus d'entraînement
-  pour les grands modèles de langage (LLM). Lorsqu'il s'agit de millions ou de
-  milliards de documents, la correspondance exacte traditionnelle devient trop
-  lente et trop coûteuse.
+  Utiliser les index MinHash LSH pour accélérer la détection des quasi-doublons
+  et la recherche de similitudes Jaccard sur de grands ensembles de données
+  textuelles.
 ---
 <h1 id="MINHASHLSH" class="common-anchor-header">MINHASH_LSH<button data-href="#MINHASHLSH" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -93,7 +90,7 @@ summary: >-
 <p>L'ensemble du processus est illustré ci-dessous :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
    </span> <span class="img-wrapper"> <span>Flux de travail Minhash</span> </span></p>
 <div class="alert note">
 <p>Le nombre de fonctions de hachage utilisées détermine la dimensionnalité de la signature MinHash. Des dimensions plus élevées permettent une meilleure précision d'approximation, au prix d'une augmentation de l'espace de stockage et des calculs.</p>
@@ -121,7 +118,7 @@ summary: >-
 <p>Une signature MinHash <em>à n dimensions</em> est divisée en <em>b</em> bandes. Chaque bande contient <em>r</em> valeurs de hachage consécutives, de sorte que la longueur totale de la signature est égale à : <em>n = b × r.</em></p>
 <p>Par exemple, si vous avez une signature MinHash à 128 dimensions<em>(n = 128</em>) et que vous la divisez en 32 bandes<em>(b = 32</em>), chaque bande contient 4 valeurs de hachage<em>(r = 4</em>).</p></li>
 <li><p><strong>Hachage au niveau de la bande :</strong></p>
-<p>Après la segmentation, chaque bande est traitée indépendamment à l'aide d'une fonction de hachage standard afin de l'affecter à un panier. Si deux signatures produisent la même valeur de hachage dans une bande - c'est-à-dire qu'elles appartiennent au même panier -, elles sont considérées comme des correspondances potentielles.</p></li>
+<p>Après la segmentation, chaque bande est traitée indépendamment à l'aide d'une fonction de hachage standard afin de l'affecter à un panier. Si deux signatures produisent la même valeur de hachage dans une bande - c'est-à-dire qu'elles tombent dans le même panier - elles sont considérées comme des correspondances potentielles.</p></li>
 <li><p><strong>Sélection des candidats :</strong></p>
 <p>Les paires qui entrent en conflit dans au moins une bande sont sélectionnées en tant que candidats à la similarité.</p></li>
 </ol>
@@ -138,17 +135,17 @@ summary: >-
 <p>Considérons trois documents avec des signatures MinHash à 128 dimensions :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
    </span> <span class="img-wrapper"> <span>Flux de travail Lsh 1</span> </span></p>
 <p>Tout d'abord, LSH divise la signature à 128 dimensions en 32 bandes de 4 valeurs consécutives chacune :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
    </span> <span class="img-wrapper"> <span>Lsh Workflow 2</span> </span></p>
 <p>Ensuite, chaque bande est hachée en différents groupes à l'aide d'une fonction de hachage. Les paires de documents partageant les mêmes groupes sont sélectionnées comme candidats à la similarité. Dans l'exemple ci-dessous, le document A et le document B sont sélectionnés comme candidats à la similarité, car leurs résultats de hachage coïncident dans la <strong>bande 0</strong>:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
    </span> <span class="img-wrapper"> <span>Flux de travail Lsh 3</span> </span></p>
 <div class="alert note">
 <p>Le nombre de bandes est contrôlé par le paramètre <code translate="no">mh_lsh_band</code>. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/minhash-lsh.md#Index-building-params">Paramètres de construction d'index</a>.</p>
@@ -193,10 +190,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Le processus de déduplication optimisé par MinHash LSH permet à Milvus d'identifier et de filtrer efficacement les enregistrements textuels ou structurés presque en double avant de les insérer dans la collection.</p>
-<p><img translate="no" src="/docs/v2.6.x/assets/deduplication-workflow.png" alt="Deduplication Workflow" width="600"></p>
+    </button></h3><p>Le processus de déduplication optimisé par MinHash LSH permet à Milvus d'identifier et de filtrer efficacement les enregistrements textuels ou structurés quasiment en double avant de les insérer dans la collection.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/it9wwbcfwhft0rbwosacgltzneb.png" alt="It9wwbcfwhft0rbwosacgltzneb" class="doc-image" id="it9wwbcfwhft0rbwosacgltzneb" />
+   </span> <span class="img-wrapper"> <span>It9wwbcfwhft0rbwosacgltzneb</span> </span></p>
 <ol>
-<li><p><strong>Découpage et prétraitement</strong>: Diviser les données textuelles entrantes ou les données structurées (par exemple, les enregistrements, les champs) en morceaux ; normaliser le texte (mise en minuscules, suppression de la ponctuation) et supprimer les mots d'arrêt si nécessaire.</p></li>
+<li><p><strong>Découpage et prétraitement</strong>: Diviser les données textuelles entrantes ou les données structurées (par exemple, les enregistrements, les champs) en morceaux ; normaliser le texte (minuscules, suppression de la ponctuation), et supprimer les mots d'arrêt si nécessaire.</p></li>
 <li><p><strong>Construction des caractéristiques</strong>: Construire l'ensemble de jetons utilisé pour MinHash (par exemple, des bardeaux à partir du texte ; des jetons de champs concaténés pour les données structurées).</p></li>
 <li><p><strong>Génération de signatures MinHash</strong>: Calculer les signatures MinHash pour chaque morceau ou enregistrement.</p></li>
 <li><p><strong>Conversion en vecteur binaire</strong>: Conversion de la signature en un vecteur binaire compatible avec Milvus.</p></li>
@@ -219,6 +219,13 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Avant d'utiliser MinHash LSH dans Milvus, vous devez d'abord générer des <strong>signatures MinHash</strong>. Ces signatures binaires compactes représentent approximativement la similarité Jaccard entre les ensembles et sont nécessaires pour la recherche basée sur <code translate="no">MHJACCARD</code> dans Milvus.</p>
+<div class="alert note">
+<p>Vous pouvez préparer les signatures MinHash pour l'index <code translate="no">MINHASH_LSH</code> de deux manières :</p>
+<ul>
+<li><p>Générer vous-même les signatures à l'aide d'outils externes et les insérer dans un champ BINARY_VECTOR, ou</p></li>
+<li><p>Utiliser la fonction MinHash intégrée pour générer automatiquement des vecteurs binaires compatibles à partir d'un texte. Pour connaître le flux de travail de bout en bout et les options de configuration de la fonction MinHash, voir <a href="/docs/fr/minhash-function.md">Fonction MinHash</a>.</p></li>
+</ul>
+</div>
 <h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">Choisir une méthode pour générer des signatures MinHash<button data-href="#Choose-a-method-to-generate-MinHash-signatures" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -236,8 +243,8 @@ summary: >-
       </svg>
     </button></h3><p>En fonction de votre charge de travail, vous pouvez choisir :</p>
 <ul>
-<li><p>Utiliser la méthode Python <a href="https://ekzhu.github.io/datasketch/"><code translate="no">datasketch</code></a> de Python pour plus de simplicité (recommandé pour le prototypage)</p></li>
-<li><p>Utiliser des outils distribués (par exemple, Spark, Ray) pour les ensembles de données à grande échelle.</p></li>
+<li><p>Utiliser la méthode Python <a href="https://ekzhu.github.io/datasketch/"><code translate="no">datasketch</code></a> pour plus de simplicité (recommandé pour le prototypage)</p></li>
+<li><p>utiliser des outils distribués (par exemple, Spark, Ray) pour les ensembles de données à grande échelle</p></li>
 <li><p>Mettre en œuvre une logique personnalisée (NumPy, C++, etc.) si l'optimisation des performances est essentielle.</p></li>
 </ul>
 <p>Dans ce guide, nous utilisons <code translate="no">datasketch</code> pour des raisons de simplicité et de compatibilité avec le format d'entrée Milvus.</p>
@@ -625,7 +632,7 @@ refined_results = client.search(
 <table>
    <tr>
      <th><p>Paramètre</p></th>
-     <th><p>Description des paramètres</p></th>
+     <th><p>Description de l'index</p></th>
      <th><p>Plage de valeurs</p></th>
      <th><p>Suggestion de réglage</p></th>
    </tr>
@@ -692,7 +699,7 @@ refined_results = client.search(
    <tr>
      <td><p><code translate="no">refine_k</code></p></td>
      <td><p>Nombre de candidats à récupérer avant l'affinage Jaccard. Uniquement efficace lorsque <code translate="no">mh_search_with_jaccard</code> est <code translate="no">true</code>.</p></td>
-     <td><p><em>[top_k</em>, *top_k * 10*]</p></td>
+     <td><p><em>[top_k</em>, <em>top_k &amp;ast ; 10</em>]</p></td>
      <td><p>Fixé à 2-5x le <em>top_k</em> souhaité pour un bon équilibre rappel-performance. Des valeurs plus élevées améliorent le rappel mais augmentent le coût de calcul.</p></td>
    </tr>
    <tr>

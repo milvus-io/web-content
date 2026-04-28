@@ -25,7 +25,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>El<strong>calentamiento</strong> complementa el almacenamiento por niveles precargando campos o índices seleccionados en la caché antes de que un segmento pueda consultarse. Puede configurar el calentamiento a nivel de clúster, colección o campo/índice individual, lo que permite un control detallado sobre la latencia de la primera consulta y el uso de recursos.</p>
-<h2 id="Why-warm-up" class="common-anchor-header">¿Por qué calentar?<button data-href="#Why-warm-up" class="anchor-icon" translate="no">
+<h2 id="Why-warm-up" class="common-anchor-header">Por qué el calentamiento<button data-href="#Why-warm-up" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

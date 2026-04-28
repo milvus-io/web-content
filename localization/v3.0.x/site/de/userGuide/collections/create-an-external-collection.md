@@ -38,17 +38,17 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>In einer typischen KI-Datenpipeline haben Benutzer ihre Daten möglicherweise bereits in Parquet- oder anderen Formaten auf ihrem Speichersystem, wie AWS S3, gespeichert. Damit Milvus diese extern gespeicherten Daten nutzen kann, müssen die Benutzer sie in der Regel mithilfe von ETL-Pipelines (Extract-Transform-Load) in den Milvus-eigenen Speicher importieren.</p>
-<p>Dieser Bring-your-data-to-Milvus-Workflow erzeugt redundante Daten, die nur schwer zu synchronisieren sind, und erhöht den technischen Wartungsaufwand zur Sicherstellung der Datenkonsistenz.</p>
+<p>Dieser Bring-your-data-to-Milvus-Workflow erzeugt redundante Daten, die schwer zu synchronisieren sind, und erhöht den technischen Wartungsaufwand zur Gewährleistung der Datenkonsistenz.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/yqxwwpq3vheya4b8398cwopnnyn.png" alt="Yqxwwpq3vheya4b8398cwopnnyn" class="doc-image" id="yqxwwpq3vheya4b8398cwopnnyn" />
-   </span> <span class="img-wrapper"> <span>Yqxwwpq3vheya4b8398cwopnnyn</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" />
+   </span> <span class="img-wrapper"> <span>Bringen Sie Daten zum Compute-Workflow</span> </span></p>
 <p>Um diese Probleme zu lösen, bietet Milvus externe Sammlungen, mit denen Sie von Milvus aus auf Ihre extern gespeicherten Daten zugreifen können, ohne sich um die Datensynchronisation und ETL-Pipelines kümmern zu müssen.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/q6f4wtcd2h3pnkbnmxncw3urn3f.png" alt="Q6f4wtcd2h3pnkbnmxncw3urn3f" class="doc-image" id="q6f4wtcd2h3pnkbnmxncw3urn3f" />
-   </span> <span class="img-wrapper"> <span>Q6f4wtcd2h3pnkbnmxncw3urn3f</span> </span></p>
-<p>Einmal erstellt, kann eine externe Sammlung direkt auf Ihre Daten zugreifen und sie an demselben Ort aufbewahren, an dem Sie sie speichern. Im Hintergrund erstellt Milvus Manifestdateien, um die Zuordnungen zwischen den Milvus-Metadaten und den Zeilen in externen Datendateien aufzuzeichnen. Nachdem die Manifestdateien fertig sind, können Sie in der externen Sammlung Indizes erstellen, wie Sie es in jeder verwalteten Sammlung tun würden.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" />
+   </span> <span class="img-wrapper"> <span>Bringen Sie Datenverarbeitung in den Daten-Workflow</span> </span></p>
+<p>Sobald eine externe Sammlung erstellt wurde, können Sie direkt auf Ihre Daten zugreifen und sie an demselben Ort aufbewahren, an dem Sie sie speichern. Im Hintergrund erstellt Milvus Manifestdateien, um die Mappings zwischen den Milvus-Metadaten und den Zeilen in den externen Datendateien aufzuzeichnen. Nachdem die Manifestdateien fertig sind, können Sie in der externen Sammlung Indizes erstellen, wie Sie es in jeder verwalteten Sammlung tun würden.</p>
 <p>Wenn sich Ihre Daten ändern, werden die Metadaten durch das manuelle Auslösen einer sekundengenauen Aktualisierung aktualisiert, so dass Milvus immer auf dem neuesten Stand ist.</p>
 <h2 id="Limits--restrictions" class="common-anchor-header">Limits und Einschränkungen<button data-href="#Limits--restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,7 +65,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Da Milvus keine Rohdaten speichert, sondern nur eine Zuordnung zwischen den Metadaten und den Rohdaten aufrechterhält, sind externe Sammlungen schreibgeschützt. Das bedeutet, dass Sie auf der Milvus-Seite keine Daten einfügen, hochladen, löschen, importieren, flushen und verdichten können.</p>
+    </button></h2><p>Da Milvus keine Rohdaten speichert, sondern nur ein Mapping zwischen den Metadaten und den Rohdaten unterhält, sind externe Sammlungen schreibgeschützt. Das bedeutet, dass Sie auf der Milvus-Seite keine Daten einfügen, hochladen, löschen, importieren, flushen und verdichten können.</p>
 <p>Im Vergleich zu verwalteten Sammlungen haben externe Sammlungen die folgenden Einschränkungen:</p>
 <ul>
 <li><p>Sie können den Primärschlüssel und seine AutoID-Attribute nicht festlegen.</p></li>
@@ -311,7 +311,7 @@ schema := entity.NewSchema().
 <p>In diesem Fall sollte der Bucket-Eigentümer eine IAM-Rolle erstellen, die</p>
 <ul>
 <li><p><code translate="no">AmazonS3FullAccess</code> oder eine feiner abgestufte Richtlinie für den Bucket-Zugriff anfügt.</p></li>
-<li><p>Fügen Sie eine selbst definierte <code translate="no">sts:ExternalId</code> in das Bedingungsfeld der Vertrauensrichtlinie der Rolle ein.</p></li>
+<li><p>Fügt eine selbst definierte <code translate="no">sts:ExternalId</code> in das Bedingungsfeld der Vertrauensrichtlinie der Rolle ein.</p></li>
 </ul>
 <p>Dann sollte der Bucket-Besitzer Ihnen den ARN der IAM-Rolle und die externe ID mitteilen, damit Sie <code translate="no">sts:AssumeRole</code> mit diesen Werten aufrufen können, um die IAM-Rolle zu übernehmen.</p>
 <p>Nachfolgend finden Sie ein Beispiel für eine Berechtigungsrichtlinie, die der IAM-Rolle mit den zulässigen Berechtigungen zugeordnet wird. Sie können diese an Ihre Anforderungen anpassen.</p>

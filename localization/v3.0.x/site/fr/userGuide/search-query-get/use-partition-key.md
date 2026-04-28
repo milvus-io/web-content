@@ -5,7 +5,7 @@ summary: >-
   La clé de partition est une solution d'optimisation de la recherche basée sur
   les partitions. En désignant un champ scalaire spécifique comme clé de
   partition et en spécifiant des conditions de filtrage basées sur la clé de
-  partition pendant la recherche, l'étendue de la recherche peut être réduite à
+  partition pendant la recherche, la portée de la recherche peut être réduite à
   plusieurs partitions, améliorant ainsi l'efficacité de la recherche. Cet
   article présente l'utilisation de la clé de partition et les considérations
   qui s'y rapportent.
@@ -45,7 +45,7 @@ summary: >-
 <p>Milvus introduit la clé de partition pour vous permettre de réutiliser les partitions dans la séparation des données afin de dépasser la limite du nombre de partitions que vous pouvez créer dans une collection. Lors de la création d'une collection, vous pouvez utiliser un champ scalaire comme clé de partition. Une fois la collection prête, Milvus crée le nombre spécifié de partitions dans la collection. Lors de la réception d'une entité insérée, Milvus calcule une valeur de hachage à l'aide de la valeur de la clé de partition de l'entité, exécute une opération modulo basée sur la valeur de hachage et la propriété <code translate="no">partitions_num</code> de la collection pour obtenir l'ID de la partition cible et stocke l'entité dans la partition cible.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-vs-partition-key.png" alt="Partition Vs Partition Key" class="doc-image" id="partition-vs-partition-key" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-vs-partition-key.png" alt="Partition Vs Partition Key" class="doc-image" id="partition-vs-partition-key" />
    </span> <span class="img-wrapper"> <span>Partition Vs Clé de partition</span> </span></p>
 <p>La figure suivante illustre la manière dont Milvus traite les demandes de recherche dans une collection avec ou sans l'activation de la fonction Clé de partition.</p>
 <ul>
@@ -54,7 +54,7 @@ summary: >-
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/with-and-without-partition-key.png" alt="With And Without Partition Key" class="doc-image" id="with-and-without-partition-key" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/with-and-without-partition-key.png" alt="With And Without Partition Key" class="doc-image" id="with-and-without-partition-key" />
    </span> <span class="img-wrapper"> <span>Avec et sans clé de partition</span> </span></p>
 <h2 id="Use-Partition-Key" class="common-anchor-header">Utilisation de la clé de partition<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -77,7 +77,22 @@ summary: >-
 <li><p><a href="/docs/fr/use-partition-key.md#Set-Partition-Numbers">définir le nombre de partitions à créer</a> (facultatif), et</p></li>
 <li><p><a href="/docs/fr/use-partition-key.md#Create-Filtering-Condition">créer une condition de filtrage basée sur la clé de partition</a>.</p></li>
 </ul>
-<h3 id="Set-Partition-Key" class="common-anchor-header">Définir la clé de partition</h3><p>Pour désigner un champ scalaire comme clé de partition, vous devez définir son attribut <code translate="no">is_partition_key</code> à <code translate="no">true</code> lorsque vous ajoutez le champ scalaire.</p>
+<h3 id="Set-Partition-Key" class="common-anchor-header">Définir la clé de partition<button data-href="#Set-Partition-Key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour désigner un champ scalaire comme clé de partition, vous devez définir son attribut <code translate="no">is_partition_key</code> à <code translate="no">true</code> lorsque vous ajoutez le champ scalaire.</p>
 <div class="alert note">
 <p>Lorsque vous définissez un champ scalaire comme clé de partition, les valeurs du champ ne peuvent pas être vides ou nulles.</p>
 </div>
@@ -227,7 +242,22 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Partition-Numbers" class="common-anchor-header">Définir les numéros de partition</h3><p>Lorsque vous désignez un champ scalaire dans une collection comme clé de partition, Milvus crée automatiquement 16 partitions dans la collection. Lors de la réception d'une entité, Milvus choisit une partition en fonction de la valeur de la clé de partition de cette entité et stocke l'entité dans la partition, ce qui fait que certaines ou toutes les partitions contiennent des entités ayant des valeurs de clé de partition différentes.</p>
+<h3 id="Set-Partition-Numbers" class="common-anchor-header">Définir les numéros de partition<button data-href="#Set-Partition-Numbers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Lorsque vous désignez un champ scalaire dans une collection comme clé de partition, Milvus crée automatiquement 16 partitions dans la collection. Lors de la réception d'une entité, Milvus choisit une partition en fonction de la valeur de la clé de partition de cette entité et stocke l'entité dans la partition, ce qui fait que certaines ou toutes les partitions contiennent des entités ayant des valeurs de clé de partition différentes.</p>
 <p>Vous pouvez également déterminer le nombre de partitions à créer avec la collection. Ceci n'est valable que si vous avez un champ scalaire désigné comme clé de partition.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -277,7 +307,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Filtering-Condition" class="common-anchor-header">Créer une condition de filtrage</h3><p>Lorsque vous effectuez des recherches ANN dans une collection avec la fonctionnalité Clé de partition activée, vous devez inclure une expression de filtrage impliquant la clé de partition dans la demande de recherche. Dans l'expression de filtrage, vous pouvez restreindre la valeur de la clé de partition dans une plage spécifique afin que Milvus limite l'étendue de la recherche aux partitions correspondantes.</p>
+<h3 id="Create-Filtering-Condition" class="common-anchor-header">Créer une condition de filtrage<button data-href="#Create-Filtering-Condition" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Lorsque vous effectuez des recherches ANN dans une collection avec la fonctionnalité Clé de partition activée, vous devez inclure une expression de filtrage impliquant la clé de partition dans la demande de recherche. Dans l'expression de filtrage, vous pouvez restreindre la valeur de la clé de partition dans une plage spécifique afin que Milvus limite l'étendue de la recherche aux partitions correspondantes.</p>
 <p>Lors des opérations de suppression, il est conseillé d'inclure une expression de filtrage qui spécifie une seule clé de partition afin d'obtenir une suppression plus efficace. Cette approche limite l'opération de suppression à une partition particulière, ce qui réduit l'amplification de l'écriture pendant le compactage et conserve les ressources pour le compactage et l'indexation.</p>
 <p>Les exemples suivants illustrent le filtrage basé sur la clé de partition en fonction d'une valeur de clé de partition spécifique et d'un ensemble de valeurs de clés de partition.</p>
 <div class="multipleCode">
@@ -333,14 +378,29 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
     </button></h2><p>Dans le scénario multi-tenant, vous pouvez désigner le champ scalaire lié aux identités des locataires comme clé de partition et créer un filtre basé sur une valeur spécifique dans ce champ scalaire. Pour améliorer encore les performances de recherche dans des scénarios similaires, Milvus introduit la fonction d'isolation de la clé de partition.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" />
    </span> <span class="img-wrapper"> <span>Isolation de la clé de partition</span> </span></p>
 <p>Comme le montre la figure ci-dessus, Milvus regroupe les entités en fonction de la valeur de la clé de partition et crée un index distinct pour chacun de ces groupes. Lorsqu'il reçoit une demande de recherche, Milvus localise l'index en fonction de la valeur de la clé de partition spécifiée dans la condition de filtrage et limite la portée de la recherche aux entités incluses dans l'index, ce qui évite d'analyser des entités non pertinentes pendant la recherche et améliore considérablement les performances de la recherche.</p>
 <p>Une fois que vous avez activé l'isolation de la clé de partition, vous devez inclure une seule valeur spécifique dans le filtre basé sur la clé de partition afin que Milvus puisse restreindre la portée de la recherche dans les entités incluses dans l'index qui correspondent.</p>
 <div class="alert note">
 <p>Actuellement, la fonction d'isolation des clés de partition ne s'applique qu'aux recherches dont le type d'index est défini sur HNSW.</p>
 </div>
-<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">Activer l'isolation des clés de partition</h3><p>Les exemples de code suivants montrent comment activer l'isolation des clés de partition.</p>
+<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">Activer l'isolation des clés de partition<button data-href="#Enable-Partition-Key-Isolation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Les exemples de code suivants montrent comment activer l'isolation des clés de partition.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(

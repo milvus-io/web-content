@@ -111,7 +111,7 @@ res = milvus_client.insert(collection_name=<span class="hljs-string">&quot;demo_
 <li>Jika Anda ingin menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang dikelola sepenuhnya untuk Milvus, sesuaikan <code translate="no">uri</code> dan <code translate="no">token</code>, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">kunci Public Endpoint dan Api</a> di Zilliz Cloud.</li>
 </ul>
 </div>
-<p>Dengan semua data dalam basis data vektor Milvus, kita sekarang dapat melakukan pencarian semantik dengan membuat penyematan vektor untuk kueri dan melakukan pencarian vektor.</p>
+<p>Dengan semua data dalam basis data vektor Milvus, kita sekarang dapat melakukan pencarian semantik dengan menghasilkan penyematan vektor untuk kueri dan melakukan pencarian vektor.</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded?&quot;</span>]
 
 query_vectors = voyage_client.embed(

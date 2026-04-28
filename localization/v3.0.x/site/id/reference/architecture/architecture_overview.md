@@ -56,7 +56,7 @@ title: Gambaran Umum Arsitektur Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus mengikuti prinsip disagregasi bidang data dan bidang kontrol, yang terdiri dari empat lapisan utama yang saling independen dalam hal skalabilitas dan pemulihan bencana. Arsitektur penyimpanan bersama dengan lapisan penyimpanan dan komputasi yang terpilah sepenuhnya ini memungkinkan penskalaan horizontal node komputasi sambil menerapkan Woodpecker sebagai lapisan WAL tanpa disk untuk meningkatkan elastisitas dan mengurangi biaya operasional.</p>
+    </button></h2><p>Milvus mengikuti prinsip pemilahan bidang data dan bidang kontrol, yang terdiri dari empat lapisan utama yang saling independen dalam hal skalabilitas dan pemulihan bencana. Arsitektur penyimpanan bersama dengan lapisan penyimpanan dan komputasi yang terpilah sepenuhnya ini memungkinkan penskalaan horizontal node komputasi sambil menerapkan Woodpecker sebagai lapisan WAL tanpa disk untuk meningkatkan elastisitas dan mengurangi biaya operasional.</p>
 <p>Dengan memisahkan pemrosesan aliran menjadi Streaming Node dan pemrosesan batch menjadi Query Node dan Data Node, Milvus mencapai kinerja tinggi sekaligus memenuhi persyaratan pemrosesan waktu nyata secara bersamaan.</p>
 <h2 id="Detailed-Layer-Architecture" class="common-anchor-header">Arsitektur Lapisan Terperinci<button data-href="#Detailed-Layer-Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -114,7 +114,7 @@ title: Gambaran Umum Arsitektur Milvus
 <li><strong>Manajemen DDL/DCL/TSO</strong>: Menangani permintaan bahasa definisi data (DDL) dan bahasa kontrol data (DCL), seperti membuat atau menghapus koleksi, partisi, atau indeks, serta mengelola cap waktu Oracle (TSO) dan penerbitan penanda waktu.</li>
 <li><strong>Manajemen Layanan Streaming</strong>: Mengikat Write-Ahead Log (WAL) dengan Streaming Node dan menyediakan penemuan layanan untuk layanan streaming.</li>
 <li><strong>Manajemen Kueri</strong>: Mengelola topologi dan penyeimbangan beban untuk Query Node, serta menyediakan dan mengelola tampilan kueri yang disajikan untuk memandu perutean kueri.</li>
-<li><strong>Manajemen Data Historis</strong>: Mendistribusikan tugas-tugas offline seperti pemadatan dan pembuatan indeks ke Data Node, dan mengelola topologi segmen dan tampilan data.</li>
+<li><strong>Manajemen Data Historis</strong>: Mendistribusikan tugas-tugas offline seperti pemadatan dan pembuatan indeks ke Node Data, dan mengelola topologi segmen dan tampilan data.</li>
 </ul>
 <h3 id="Layer-3-Worker-Nodes" class="common-anchor-header">Lapisan 3: Simpul Pekerja<button data-href="#Layer-3-Worker-Nodes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -211,7 +211,7 @@ title: Gambaran Umum Arsitektur Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Penyimpanan meta menyimpan snapshot dari metadata seperti skema koleksi, dan pos pemeriksaan konsumsi pesan. Menyimpan metadata menuntut ketersediaan yang sangat tinggi, konsistensi yang kuat, dan dukungan transaksi, sehingga Milvus memilih etcd untuk meta store. Milvus juga menggunakan etcd untuk registrasi layanan dan pemeriksaan kesehatan.</p>
+    </button></h3><p>Penyimpanan meta menyimpan snapshot dari metadata seperti skema koleksi, dan pos pemeriksaan konsumsi pesan. Menyimpan metadata membutuhkan ketersediaan yang sangat tinggi, konsistensi yang kuat, dan dukungan transaksi, sehingga Milvus memilih etcd untuk meta store. Milvus juga menggunakan etcd untuk registrasi layanan dan pemeriksaan kesehatan.</p>
 <h3 id="Object-storage" class="common-anchor-header">Penyimpanan objek<button data-href="#Object-storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

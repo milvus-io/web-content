@@ -73,7 +73,7 @@ title: Milvus WebUI
     </button></h2><p>Milvus Web UI bietet die folgenden Funktionen:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI Übersicht</span> </span></p>
 <ul>
 <li><p><a href="#Home">Startseite</a></p>
@@ -91,7 +91,7 @@ title: Milvus WebUI
 <li><p><a href="#Configurations">Konfigurationen</a></p>
 <p>Sie können die Liste der Milvus-Konfigurationen und deren Werte anzeigen.</p></li>
 <li><p><a href="#Tools">Werkzeuge</a></p>
-<p>Sie können von der Web-UI aus auf die beiden eingebauten Tools, pprof und Milvus-Datenvisualisierung, zugreifen.</p></li>
+<p>Sie können über die Web-UI auf die beiden integrierten Tools pprof und Milvus-Datenvisualisierung zugreifen.</p></li>
 </ul>
 <h2 id="Home" class="common-anchor-header">Startseite<button data-href="#Home" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -111,7 +111,7 @@ title: Milvus WebUI
     </button></h2><p>Auf der Home-Seite finden Sie die folgenden Informationen:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-home.png" alt="Milvus Web UI Home" class="doc-image" id="milvus-web-ui-home" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-home.png" alt="Milvus Web UI Home" class="doc-image" id="milvus-web-ui-home" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI Startseite</span> </span></p>
 <ul>
 <li><p><strong>System-Informationen</strong>: Zeigen Sie Systeminformationen an, einschließlich Informationen über den Bereitstellungsmodus, das bei der Bereitstellung verwendete Image und zugehörige Informationen.</p></li>
@@ -137,15 +137,15 @@ title: Milvus WebUI
     </button></h2><p>Auf der Seite Sammlungen können Sie die Liste der Datenbanken und Sammlungen, die sich derzeit in Milvus befinden, einsehen und deren Details überprüfen.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-collections.png" alt="Milvus Web UI Collections" class="doc-image" id="milvus-web-ui-collections" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-collections.png" alt="Milvus Web UI Collections" class="doc-image" id="milvus-web-ui-collections" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI Sammlungen</span> </span></p>
 <ul>
-<li><p><strong>Datenbank</strong>: Zeigen Sie die Liste der derzeit in Milvus vorhandenen Datenbanken und deren Details an.</p></li>
+<li><p><strong>Datenbank</strong>: Zeigen Sie die Liste der derzeit in Milvus befindlichen Datenbanken und deren Details an.</p></li>
 <li><p><strong>Sammlungen</strong>: Zeigen Sie die Liste der Sammlungen in jeder Datenbank und deren Details an.</p>
 <p>Sie können auf eine Sammlung klicken, um ihre Details zu sehen, einschließlich der Anzahl der Felder, Partitionen, Indizes und anderer Informationen im Detail.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI Sammlungsdetails</span> </span></p></li>
 </ul>
 <h2 id="Query" class="common-anchor-header">Abfrage<button data-href="#Query" class="anchor-icon" translate="no">
@@ -165,7 +165,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI Abfrage Seite</span> </span></p>
 <ul>
 <li><p><strong>Segmente</strong>: Zeigen Sie die Liste der Segmente und ihre Details an, einschließlich der Segment-ID, der entsprechenden Sammlung, des Status, der Größe usw.</p></li>
@@ -190,7 +190,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-data.png" alt="Milvus Web UI Data Page" class="doc-image" id="milvus-web-ui-data-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-data.png" alt="Milvus Web UI Data Page" class="doc-image" id="milvus-web-ui-data-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI Daten Seite</span> </span></p>
 <ul>
 <li><p><strong>Segmente</strong>: Zeigen Sie die Liste der Segmente aus den Datenknoten/Koordinatoren und deren Details an, einschließlich der Segment-ID, der entsprechenden Sammlung, des Status, der Größe usw.</p></li>
@@ -213,7 +213,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-tasks.png" alt="Milvus Web UI Tasks Page" class="doc-image" id="milvus-web-ui-tasks-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-tasks.png" alt="Milvus Web UI Tasks Page" class="doc-image" id="milvus-web-ui-tasks-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI Aufgaben Seite</span> </span></p>
 <ul>
 <li><p><strong>Aufgaben</strong>: Zeigen Sie die Liste der in Milvus laufenden Aufgaben an, einschließlich des Aufgabentyps, des Status und der Aktionen.</p>
@@ -242,10 +242,10 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI Seite Langsame Anfragen</span> </span></p>
 <ul>
-<li><strong>Langsame Anfragen</strong>: Eine langsame Anfrage ist eine Suche oder eine Abfrage, deren Latenzzeit länger ist als der in der Konfiguration angegebene Wert von <code translate="no">proxy.slowQuerySpanInSeconds</code>. Die Liste der langsamen Anfragen zeigt alle langsamen Anfragen der letzten 15 Minuten an.</li>
+<li><strong>Langsame Anfragen</strong>: Eine langsame Anfrage ist eine Suche oder eine Abfrage mit einer Latenzzeit, die länger ist als der in der Konfiguration angegebene Wert von <code translate="no">proxy.slowQuerySpanInSeconds</code>. Die Liste der langsamen Anfragen zeigt alle langsamen Anfragen der letzten 15 Minuten an.</li>
 </ul>
 <h2 id="Configurations" class="common-anchor-header">Konfigurationen<button data-href="#Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -264,7 +264,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-configurations.png" alt="Milvus Web UI Configurations Page" class="doc-image" id="milvus-web-ui-configurations-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-configurations.png" alt="Milvus Web UI Configurations Page" class="doc-image" id="milvus-web-ui-configurations-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI Konfigurationen Seite</span> </span></p>
 <ul>
 <li><strong>Konfigurationen</strong>: Zeigt die Liste der Milvus-Laufzeitkonfigurationen und deren Werte an.</li>

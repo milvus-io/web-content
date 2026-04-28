@@ -20,10 +20,10 @@ title: GPU 索引
         ></path>
       </svg>
     </button></h1><p>Milvus 支持各种 GPU 索引类型，以加快搜索性能和效率，尤其是在高吞吐量和高调用场景中。本主题概述了 Milvus 支持的 GPU 索引类型、适合的使用案例和性能特点。有关使用 GPU 建立索引的信息，请参阅《<a href="/docs/zh/index-with-gpu.md">使用 GPU 建立索引</a>》。</p>
-<p>值得注意的是，与使用 CPU 索引相比，使用 GPU 索引并不一定能减少延迟。如果想充分发挥吞吐量，就需要极高的请求压力或大量的查询向量。</p>
+<p>值得注意的是，与使用 CPU 索引相比，使用 GPU 索引并不一定能减少延迟。如果想完全最大化吞吐量，则需要极高的请求压力或大量的查询向量。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
    </span> <span class="img-wrapper"> <span>性能</span> </span></p>
 <p>Milvus 的 GPU 支持由 Nvidia<a href="https://rapids.ai/">RAPIDS</a>团队贡献。以下是 Milvus 目前支持的 GPU 索引类型。</p>
 <h2 id="GPUCAGRA" class="common-anchor-header">GPU_CAGRA<button data-href="#GPUCAGRA" class="anchor-icon" translate="no">
@@ -103,7 +103,7 @@ title: GPU 索引
     </button></h2><p>与<a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> 类似，GPU_IVF_<a href="https://milvus.io/docs/index.md#IVF_FLAT">FLAT</a> 也是将向量数据划分为<code translate="no">nlist</code> 聚类单元，然后比较目标输入向量与每个聚类中心之间的距离。根据系统设置查询的簇数（<code translate="no">nprobe</code> ），相似性搜索结果仅根据目标输入与最相似簇中向量的比较结果返回--大大缩短了查询时间。</p>
 <p>通过调整<code translate="no">nprobe</code> ，可以在特定情况下找到准确性和速度之间的理想平衡。<a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT 性能测试</a>结果表明，随着目标输入向量数 (<code translate="no">nq</code>) 和要搜索的簇数 (<code translate="no">nprobe</code>) 的增加，查询时间也会急剧增加。</p>
 <p>GPU_IVF_FLAT 是最基本的 IVF 索引，每个单元中存储的编码数据与原始数据一致。</p>
-<p>在进行搜索时要注意，针对 GPU_IVF_FLAT 索引的 Collections 进行任何搜索时，都可以将 top-K 设置为最多 256。</p>
+<p>在进行搜索时，请注意针对 GPU_IVF_FLAT 索引的 Collections 的任何搜索，都可以将 top-K 设置为最多 256。</p>
 <ul>
 <li><p>索引建立参数</p>
 <table>
@@ -155,10 +155,10 @@ title: GPU 索引
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">PQ</code> (乘积量化）将原始高维向量空间均匀分解为 低维向量空间的笛卡尔乘积，然后对分解后的低维向量空间进行量化。乘积量化不需要计算目标向量与所有单元中心的距离，而是能够计算目标向量与每个低维空间聚类中心的距离，大大降低了算法的时间复杂度和空间复杂度。<code translate="no">m</code> </p>
+    </button></h2><p><code translate="no">PQ</code> (乘积量化）将原始高维向量空间均匀分解为<code translate="no">m</code> 低维向量空间的笛卡尔乘积，然后对分解后的低维向量空间进行量化。乘积量化无需计算目标向量与所有单元中心之间的距离，而是能够计算目标向量与每个低维空间聚类中心之间的距离，大大降低了算法的时间复杂度和空间复杂度。</p>
 <p>IVF_PQ 先进行 IVF 索引聚类，然后再对向量的乘积进行量化。其索引文件比 IVF_SQ8 更小，但在搜索向量时也会造成精度损失。</p>
 <div class="alert note">
-<p>索引建立参数和搜索参数随 Milvus Distributed 分布而异。请先选择 Milvus Distributed。</p>
+<p>索引建立参数和搜索参数随 Milvus Distributed 分布而异。请先选择您的 Milvus Distributed。</p>
 <p>在进行搜索时，请注意针对 GPU_IVF_FLAT 索引 Collections 的任何搜索都可以将 top-K 设置为 8192。</p>
 </div>
 <ul>

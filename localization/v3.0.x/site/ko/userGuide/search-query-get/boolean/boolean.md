@@ -45,13 +45,58 @@ summary: >-
 <li><p><strong>논리 연산자</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> 은 여러 조건을 복잡한 표현식으로 결합합니다.</p></li>
 <li><p><strong>IS NULL 및 IS NOT NULL 연산자</strong>: <code translate="no">IS NULL</code> 및 <code translate="no">IS NOT NULL</code> 연산자는 null 값(데이터 부재) 포함 여부에 따라 필드를 필터링하는 데 사용됩니다. 자세한 내용은 <a href="/docs/ko/basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators">기본 연산자를</a> 참조하세요.</p></li>
 </ul>
-<h3 id="Example-Filtering-by-Color" class="common-anchor-header">예제: 색상으로 필터링하기</h3><p>스칼라 필드 <code translate="no">color</code> 에서 기본 색상(빨강, 녹색 또는 파랑)을 가진 엔티티를 찾으려면 다음 필터 표현식을 사용합니다:</p>
+<h3 id="Example-Filtering-by-Color" class="common-anchor-header">예제: 색상으로 필터링하기<button data-href="#Example-Filtering-by-Color" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>스칼라 필드 <code translate="no">color</code> 에서 기본 색상(빨강, 녹색 또는 파랑)을 가진 엔티티를 찾으려면 다음 필터 표현식을 사용합니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">예시: JSON 필드 필터링</h3><p>Milvus에서는 JSON 필드에서 키를 참조할 수 있습니다. 예를 들어 키가 <code translate="no">price</code> 및 <code translate="no">model</code> 인 JSON 필드 <code translate="no">product</code> 가 있고 특정 모델과 가격이 1,850보다 낮은 제품을 찾고자 하는 경우 다음 필터 표현식을 사용합니다:</p>
+<h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">예시: JSON 필드 필터링<button data-href="#Example-Filtering-JSON-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus에서는 JSON 필드에서 키를 참조할 수 있습니다. 예를 들어 키가 <code translate="no">price</code> 및 <code translate="no">model</code> 인 JSON 필드 <code translate="no">product</code> 가 있고 특정 모델과 가격이 1,850보다 낮은 제품을 찾고자 하는 경우 다음 필터 표현식을 사용합니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;product[&quot;model&quot;] == &quot;JSN-087&quot; AND product[&quot;price&quot;] &lt; 1850&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">예시: 배열 필드 필터링</h3><p>2000년 이후 관측소에서 보고한 평균 기온 기록이 포함된 배열 필드 <code translate="no">history_temperatures</code> 가 있고 2009년(10번째 기록 )의 기온이 23°C를 초과하는 관측소를 찾으려면 이 표현식을 사용하세요:</p>
+<h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">예시: 배열 필드 필터링<button data-href="#Example-Filtering-Array-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>2000년 이후 관측소에서 보고한 평균 기온 기록이 포함된 배열 필드 <code translate="no">history_temperatures</code> 가 있고 2009년(10번째 기록 )의 기온이 23°C를 초과하는 관측소를 찾으려면 이 표현식을 사용하세요:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;history_temperatures[10] &gt; 23&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>이러한 기본 연산자에 대한 자세한 내용은 <a href="/docs/ko/basic-operators.md">기본 연산자를</a> 참조하세요.</p>
@@ -71,8 +116,23 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>한중일 문자를 사용하여 필터링하는 경우 더 큰 문자 집합과 인코딩 차이로 인해 처리가 더 복잡해질 수 있습니다. 이로 인해 특히 <code translate="no">IN</code> 연산자의 경우 성능이 느려질 수 있습니다.</p>
-<p>Milvus는 한중일 문자로 작업할 때 성능을 최적화하기 위해 필터 표현식 템플릿을 도입했습니다. 필터 표현식에서 동적 값을 분리함으로써 쿼리 엔진이 매개변수 삽입을 보다 효율적으로 처리합니다.</p>
-<h3 id="Example" class="common-anchor-header">예제</h3><p>'北京'(베이징) 또는 '上海'(상하이)에 거주하는 25세 이상의 개인을 찾으려면 다음 템플릿 표현식을 사용합니다:</p>
+<p>밀버스는 한중일 문자로 작업할 때 성능을 최적화하기 위해 필터 표현식 템플릿을 도입했습니다. 필터 표현식에서 동적 값을 분리함으로써 쿼리 엔진이 매개변수 삽입을 보다 효율적으로 처리합니다.</p>
+<h3 id="Example" class="common-anchor-header">예제<button data-href="#Example" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>'北京'(베이징) 또는 '上海'(상하이)에 거주하는 25세 이상의 개인을 찾으려면 다음 템플릿 표현식을 사용합니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 AND city IN [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>성능을 향상시키려면 이 변형을 매개변수와 함께 사용합니다:</p>
@@ -96,7 +156,22 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
         ></path>
       </svg>
     </button></h2><p>Milvus는 JSON, ARRAY, VARCHAR 필드와 같은 특정 데이터 유형에 대한 고급 필터링 연산자를 제공합니다.</p>
-<h3 id="JSON-field-specific-operators" class="common-anchor-header">JSON 필드별 연산자</h3><p>Milvus는 JSON 필드 쿼리를 위한 고급 연산자를 제공하여 복잡한 JSON 구조 내에서 정밀한 필터링을 가능하게 합니다:</p>
+<h3 id="JSON-field-specific-operators" class="common-anchor-header">JSON 필드별 연산자<button data-href="#JSON-field-specific-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus는 JSON 필드 쿼리를 위한 고급 연산자를 제공하여 복잡한 JSON 구조 내에서 정밀한 필터링을 가능하게 합니다:</p>
 <p><code translate="no">JSON_CONTAINS(identifier, jsonExpr)</code>: 필드에 JSON 표현식이 존재하는지 확인합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains(tags, &quot;sale&quot;)&#x27;</span>
@@ -110,7 +185,22 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>JSON 연산자에 대한 자세한 내용은 <a href="/docs/ko/json-operators.md">JSON 연산자를</a> 참조하세요.</p>
-<h3 id="ARRAY-field-specific-operators" class="common-anchor-header">배열 필드별 연산자</h3><p>Milvus는 배열 데이터를 세밀하게 제어할 수 있는 <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_LENGTH</code> 와 같은 배열 필드에 대한 고급 필터링 연산자를 제공합니다:</p>
+<h3 id="ARRAY-field-specific-operators" class="common-anchor-header">배열 필드별 연산자<button data-href="#ARRAY-field-specific-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus는 배열 데이터를 세밀하게 제어할 수 있는 <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_LENGTH</code> 와 같은 배열 필드에 대한 고급 필터링 연산자를 제공합니다:</p>
 <p><code translate="no">ARRAY_CONTAINS</code>: 특정 요소를 포함하는 엔티티를 필터링합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -124,7 +214,22 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>배열 연산자에 대한 자세한 내용은 <a href="/docs/ko/array-operators.md">배열 연산자를</a> 참조하십시오.</p>
-<h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">VARCHAR 필드 전용 연산자</h3><p>Milvus는 VARCHAR 필드에 대한 정확한 텍스트 기반 검색을 위한 특수 연산자를 제공합니다:</p>
+<h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">VARCHAR 필드 전용 연산자<button data-href="#VARCHAR-field-specific-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus는 VARCHAR 필드에 대한 정확한 텍스트 기반 검색을 위한 특수 연산자를 제공합니다:</p>
 <h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> 연산자</h4><p><code translate="no">TEXT_MATCH</code> 연산자를 사용하면 특정 쿼리 용어를 기반으로 정확한 문서 검색이 가능합니다. 특히 스칼라 필터와 벡터 유사도 검색을 결합한 필터링된 검색에 유용합니다. 시맨틱 검색과 달리, 텍스트 일치는 정확한 용어 발생에 초점을 맞춥니다.</p>
 <p>Milvus는 Tantivy를 사용해 역 인덱싱과 용어 기반 텍스트 검색을 지원합니다. 프로세스에는 다음이 포함됩니다:</p>
 <ol>

@@ -54,7 +54,7 @@ summary: >-
 <p>以下のワークフローは、アナライザーがテキストを処理する方法を示しています。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/analyzer-process-workflow.png" alt="Analyzer Process Workflow" class="doc-image" id="analyzer-process-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/analyzer-process-workflow.png" alt="Analyzer Process Workflow" class="doc-image" id="analyzer-process-workflow" />
    </span> <span class="img-wrapper"> <span>アナライザー・プロセスのワークフロー</span> </span></p>
 <h2 id="Analyzer-types" class="common-anchor-header">アナライザの種類<button data-href="#Analyzer-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,7 +82,22 @@ summary: >-
 <li>検索とクエリのパフォーマンスを最適化するには、テキストデータの言語に合ったアナライザを選択してください。たとえば、<code translate="no">standard</code> アナライザは多機能ですが、中国語、日本語、韓国語など、独特の文法構造を持つ言語には最適でない場合があります。そのような場合は、次のような言語固有の解析器を使用します。 <a href="/docs/ja/chinese-analyzer.md"><code translate="no">chinese</code></a>のような言語固有の解析器を使うか、特殊なトークナイザーを備えたカスタム解析器（たとえば <a href="/docs/ja/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/ja/icu-tokenizer.md"><code translate="no">icu</code></a>など）やフィルタを備えたカスタム解析器を使用することを強くお勧めします。</li>
 </ul>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">ビルトイン分析器</h3><p>Milvusのビルトインアナライザーには、特定のトークナイザーとフィルターがあらかじめ設定されており、これらのコンポーネントを自分で定義することなく、すぐに使用することができます。各ビルトイン分析器は、予め設定されたトークナイザーとフィルタを含むテンプレートとして機能し、カスタマイズのためのオプションパラメータが用意されています。</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">ビルトイン分析器<button data-href="#Built-in-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvusのビルトインアナライザーには、特定のトークナイザーとフィルターがあらかじめ設定されており、これらのコンポーネントを自分で定義することなく、すぐに使用することができます。各ビルトイン分析器は、予め設定されたトークナイザーとフィルタを含むテンプレートとして機能し、カスタマイズのためのオプションパラメータが用意されています。</p>
 <p>たとえば、<code translate="no">standard</code> 組み込みアナライザを使用するには、<code translate="no">standard</code> という名前を<code translate="no">type</code> と指定し、オプションで<code translate="no">stop_words</code> など、このアナライザ・タイプに固有の追加設定を含めるだけです：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -218,11 +233,26 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvusは以下のビルトインアナライザを提供しており、それぞれ特定のテキスト処理ニーズに合わせて設計されています：</p>
 <ul>
-<li><p><code translate="no">standard</code>:標準的なトークン化と小文字フィルタリングを適用した、汎用的なテキスト処理に適しています。</p></li>
+<li><p><code translate="no">standard</code>:標準的なトークン化と小文字フィルタリングを適用する汎用テキスト処理に適しています。</p></li>
 <li><p><code translate="no">english</code>:英語のストップワードに対応し、英語テキストに最適化されています。</p></li>
 <li><p><code translate="no">chinese</code>:中国語のテキスト処理に特化し、中国語の言語構造に適応したトークン化を含む。</p></li>
 </ul>
-<h3 id="Custom-analyzer" class="common-anchor-header">カスタムアナライザー</h3><p>より高度なテキスト処理のために、Milvusのカスタムアナライザーでは、<strong>トークナイザーと</strong> <strong>フィルターの</strong>両方を指定することで、独自のテキスト処理パイプラインを構築することができます。この設定は、精密な制御が必要な特殊なユースケースに最適です。</p>
+<h3 id="Custom-analyzer" class="common-anchor-header">カスタムアナライザー<button data-href="#Custom-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>より高度なテキスト処理のために、Milvusのカスタムアナライザーでは、<strong>トークナイザーと</strong> <strong>フィルターの</strong>両方を指定することで、独自のテキスト処理パイプラインを構築することができます。この設定は、精密な制御が必要な特殊なユースケースに最適です。</p>
 <h4 id="Tokenizer" class="common-anchor-header">トークナイザー</h4><p><strong>トークナイザーは</strong>カスタムアナライザーに<strong>必須の</strong>コンポーネントで、入力テキストを個別の単位（<strong>トークン</strong>）に分解することでアナライザーパイプラインを開始します。トークン化は、トークナイザーのタイプに応じて、空白や句読点による分割など、特定のルールに従います。この処理により、各単語や語句をより正確かつ独立に扱うことができます。</p>
 <p>たとえば、トークナイザーはテキスト<code translate="no">&quot;Vector Database Built for Scale&quot;</code> を個別のトークンに変換します：</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
@@ -247,10 +277,10 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Filter" class="common-anchor-header">フィルター</h4><p><strong>フィルタは</strong>、トークナイザによって生成されたトークンに作用する<strong>オプションの</strong>コンポーネントで、必要に応じて変換や精製を行います。たとえば、トークン化された用語<code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> に<code translate="no">lowercase</code> フィルタを適用すると、次のようになります：</p>
+<h4 id="Filter" class="common-anchor-header">フィルター</h4><p><strong>フィルタは</strong>、トークナイザによって生成されたトークンに作用し、必要に応じて変換または改良する<strong>オプションの</strong>コンポーネントです。たとえば、トークン化された用語<code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> に<code translate="no">lowercase</code> フィルタを適用すると、次のようになります：</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
-<p>カスタム・アナライザーのフィルターは、構成のニーズに応じて、<strong>組み込み</strong>または<strong>カスタムの</strong>いずれかになります。</p>
+<p>カスタム・アナライザーのフィルターは、設定のニーズに応じて、<strong>組み込み</strong>または<strong>カスタムの</strong>いずれかになります。</p>
 <ul>
 <li><p><strong>組み込みフィルター</strong>：Milvusによって事前に設定されており、最小限のセットアップで済みます。これらのフィルタは、名前を指定することですぐに使用することができます。以下のフィルタは直接使用できるように組み込まれています：</p>
 <ul>
@@ -364,7 +394,22 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 </ul></li>
 </ul>
 <p>これらの構成をコレクションに組み込む前に、<code translate="no">run_analyzer</code> メソッドを使用して各分析器を検証する。</p>
-<h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">ステップ 1: MilvusClient の初期化とスキーマの作成</h3><p>Milvusクライアントのセットアップと新しいスキーマの作成から始めます。</p>
+<h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">ステップ 1: MilvusClient の初期化とスキーマの作成<button data-href="#Step-1-Initialize-MilvusClient-and-create-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvusクライアントのセットアップと新しいスキーマの作成から始めます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -424,7 +469,22 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">ステップ2: アナライザ設定の定義と検証</h3><ol>
+<h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">ステップ2: アナライザ設定の定義と検証<button data-href="#Step-2-Define-and-verify-analyzer-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li><p><strong>ビルトインアナライザ(</strong><code translate="no">english</code><strong>)の設定と検証を</strong><strong>行います</strong>：</p>
 <ul>
 <li><p><strong>構成：</strong>組み込み英語アナライザーのアナライザー・パラメーターを定義する。</p></li>
@@ -591,7 +651,22 @@ result, err := client.RunAnalyzer(ctx, option)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">ステップ3：スキーマにフィールドを追加する</h3><p>アナライザーの設定を確認したら、スキーマのフィールドに追加します：</p>
+<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">ステップ3：スキーマにフィールドを追加する<button data-href="#Step-3-Add-fields-to-the-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>アナライザーの設定を確認したら、スキーマのフィールドに追加します：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add VARCHAR field &#x27;title_en&#x27; using the built-in analyzer configuration</span>
@@ -696,7 +771,22 @@ schema.addField(AddFieldReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">ステップ 4: インデックス・パラメーターを準備し、コレクションを作成する。</h3><div class="multipleCode">
+<h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">ステップ 4: インデックス・パラメーターを準備し、コレクションを作成する。<button data-href="#Step-4-Prepare-index-parameters-and-create-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up index parameters for the vector field</span>
 index_params = client.prepare_index_params()

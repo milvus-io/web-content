@@ -89,7 +89,7 @@ summary: Pelajari tentang sistem sinkronisasi waktu di Milvus.
 <p>Stempel waktu TSO adalah jenis nilai <code translate="no">uint64</code> yang terdiri dari bagian fisik dan bagian logis. Gambar di bawah ini menunjukkan format stempel waktu.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
    </span> <span class="img-wrapper"> <span>TSO_Timestamp</span>. </span></p>
 <p>Seperti yang diilustrasikan, 46 bit di awal adalah bagian fisik, yaitu waktu UTC dalam milidetik. 18 bit terakhir adalah bagian logis.</p>
 <h2 id="Time-synchronization-system-timetick" class="common-anchor-header">Sistem sinkronisasi waktu (timetick)<button data-href="#Time-synchronization-system-timetick" class="anchor-icon" translate="no">
@@ -114,19 +114,19 @@ summary: Pelajari tentang sistem sinkronisasi waktu di Milvus.
   <code translate="no">MsgStream</code> adalah pembungkus dari antrian pesan, yang secara default adalah Pulsar di Milvus 2.0.</div>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
    </span> <span class="img-wrapper"> <span>timesync_proxy_insert_msg</span> </span></p>
 <p>Satu prinsip umum adalah bahwa dalam <code translate="no">MsgStream</code>, penanda waktu dari<code translate="no">InsertMsgs</code> dari proxy yang sama harus bersifat inkremental. Namun, tidak ada aturan seperti itu untuk <code translate="no">InsertMsgs</code> dari proxy yang berbeda.</p>
 <p>Gambar berikut ini adalah contoh <code translate="no">InsertMsgs</code> dalam <code translate="no">MsgStream</code>. Cuplikan ini berisi lima <code translate="no">InsertMsgs</code>, tiga di antaranya berasal dari <code translate="no">Proxy1</code> dan sisanya dari <code translate="no">Proxy2</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
    </span> <span class="img-wrapper"> <span>msgstream</span> </span></p>
 <p>Stempel waktu dari tiga <code translate="no">InsertMsgs</code> dari <code translate="no">Proxy1</code> bersifat inkremental, begitu juga dengan dua <code translate="no">InsertMsgs</code> dari <code translate="no">Proxy2</code>. Namun, tidak ada urutan tertentu di antara <code translate="no">Proxy1</code> dan <code translate="no">Proxy2</code> <code translate="no">InsertMsgs</code> .</p>
 <p>Salah satu skenario yang mungkin terjadi adalah ketika membaca pesan dengan timestamp <code translate="no">110</code> dari <code translate="no">Proxy2</code>, Milvus menemukan bahwa pesan dengan timestamp <code translate="no">80</code> dari <code translate="no">Proxy1</code> masih berada di dalam <code translate="no">MsgStream</code>. Oleh karena itu, Milvus memperkenalkan sistem sinkronisasi waktu, timetick, untuk memastikan bahwa ketika membaca pesan dari <code translate="no">MsgStream</code>, semua pesan dengan nilai timestamp yang lebih kecil harus dikonsumsi.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
    </span> <span class="img-wrapper"> <span>time_synchronization</span> </span></p>
 <p>Seperti yang ditunjukkan pada gambar di atas,</p>
 <ul>
@@ -137,7 +137,7 @@ summary: Pelajari tentang sistem sinkronisasi waktu di Milvus.
 <p>Gambar berikut ini adalah contoh dari <code translate="no">Msgstream</code> dengan timetick yang disisipkan.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
    </span> <span class="img-wrapper"> <span>timetick</span> </span></p>
 <p><code translate="no">MsgStream</code> memproses pesan dalam batch sesuai dengan tanda waktu untuk memastikan bahwa pesan keluaran memenuhi persyaratan cap waktu. Pada contoh di atas, ini akan mengkonsumsi semua catatan kecuali <code translate="no">InsertMsgs</code> dari <code translate="no">Proxy2</code> di <code translate="no">Timestamp: 120</code> karena ini adalah setelah TimeTick terbaru.</p>
 <h2 id="Whats-next" class="common-anchor-header">Apa selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">

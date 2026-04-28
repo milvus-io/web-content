@@ -2,7 +2,7 @@
 id: json-field-overview.md
 title: JSONフィールドの概要
 summary: >-
-  商品カタログ、コンテンツ管理システム、ユーザー嗜好エンジンのようなアプリケーションを構築する場合、多くの場合、ベクトル埋め込みと一緒に柔軟なメタデータを保存する必要があります。商品の属性はカテゴリーによって異なり、ユーザーの嗜好は時間とともに変化し、ドキュメントのプロパティは複雑な入れ子構造を持っています。MilvusのJSONフィールドは、パフォーマンスを犠牲にすることなく、柔軟な構造化データの保存とクエリを可能にすることで、この課題を解決します。
+  商品カタログ、コンテンツ管理システム、ユーザー嗜好エンジンのようなアプリケーションを構築する場合、多くの場合、ベクトル埋め込みと一緒に柔軟なメタデータを保存する必要があります。商品の属性はカテゴリによって異なり、ユーザの嗜好は時間とともに変化し、ドキュメントのプロパティは複雑な入れ子構造を持っています。MilvusのJSONフィールドは、パフォーマンスを犠牲にすることなく、柔軟な構造化データの保存とクエリを可能にすることで、この課題を解決します。
 ---
 <h1 id="JSON-Field-Overview" class="common-anchor-header">JSONフィールドの概要<button data-href="#JSON-Field-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,7 +60,7 @@ summary: >-
 <div class="alert note">
 <p><strong>命名規則：</strong>JSONキーには、文字、数字、アンダースコアのみを使用する。特殊文字、スペース、ドットは、クエリで解析の問題を引き起こす可能性があるため、避けてください。</p>
 </div>
-<h2 id="JSON-field-vs-dynamic-field" class="common-anchor-header">JSONフィールドとダイナミック・フィールドの違い<button data-href="#JSON-field-vs-dynamic-field" class="anchor-icon" translate="no">
+<h2 id="JSON-field-vs-dynamic-field" class="common-anchor-header">JSONフィールド vs. ダイナミックフィールド<button data-href="#JSON-field-vs-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -86,7 +86,7 @@ summary: >-
    <tr>
      <td><p>スキーマ定義</p></td>
      <td><p>コレクション・スキーマで、<code translate="no">DataType.JSON</code> 型で明示的に宣言する必要があるスカラー・フィールド。</p></td>
-     <td><p>宣言されていないフィールドを自動的に格納する非表示の JSON フィールド（<code translate="no">$meta</code> ）。</p></td>
+     <td><p>宣言されていないフィールドを自動的に格納する非表示のJSONフィールド（<code translate="no">$meta</code> ）。</p></td>
    </tr>
    <tr>
      <td><p>使用例</p></td>
@@ -101,7 +101,7 @@ summary: >-
    <tr>
      <td><p>クエリ</p></td>
      <td><p>JSONフィールド内のフィールド名またはターゲット・キーを使用してクエリ：<code translate="no">metadata["key"]</code> 。</p></td>
-     <td><p>ダイナミック・フィールド・キーを使って直接クエリする：<code translate="no">"dynamic_key"</code> または<code translate="no">$meta</code> 経由：<code translate="no">$meta["dynamic_key"]</code></p></td>
+     <td><p>ダイナミック・フィールドのキーを使って直接クエリーする：<code translate="no">"dynamic_key"</code> または<code translate="no">$meta</code> を経由して：<code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">基本的な操作<button data-href="#Basic-operations" class="anchor-icon" translate="no">
@@ -119,7 +119,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JSONフィールドを使用するための基本的なワークフローは、スキーマでJSONフィールドを定義し、データを挿入し、特定のフィルター式を使用してデータをクエリすることです。</p>
+    </button></h2><p>JSONフィールドを使用する基本的なワークフローは、スキーマでフィールドを定義し、データを挿入し、特定のフィルター式を使用してデータをクエリすることです。</p>
 <h3 id="Define-a-JSON-field" class="common-anchor-header">JSONフィールドの定義<button data-href="#Define-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -215,7 +215,7 @@ client.insert(collection_name=<span class="hljs-string">&quot;product_catalog&qu
     </button></h3><p>JSON フィールドでフィルタリング操作を実行する前に、以下を確認してください：</p>
 <ul>
 <li><p>各ベクトル・フィールドにインデックスが作成されている。</p></li>
-<li><p>コレクションがメモリにロードされている。</p></li>
+<li><p>コレクションがメモリにロードされていること。</p></li>
 </ul>
 <p><details></p>
 <p><summary>コードを表示する</summary></p>
@@ -341,7 +341,7 @@ res = client.search(
 <p><strong>ヒント：</strong>これらのアプローチを組み合わせることができます。例えば、JSONシュレッダーを使用して広範なクエリを高速化し、JSONインデックスを高頻度の配列キーに使用し、NGRAMインデックスを使用して柔軟なテキスト検索を行うことができます。</p>
 <p>実装の詳細については、以下を参照してください：</p>
 <ul>
-<li><p><a href="/docs/ja/json-indexing.md">JSONインデックス作成</a></p></li>
+<li><p><a href="/docs/ja/json-indexing.md">JSON インデキシング</a></p></li>
 <li><p><a href="/docs/ja/json-shredding.md">JSONシュレッディング</a></p></li>
 <li><p><a href="/docs/ja/ngram.md">NGRAM</a></p></li>
 </ul>

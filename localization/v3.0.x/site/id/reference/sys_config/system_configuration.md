@@ -140,12 +140,13 @@ Pada rilis saat ini, semua parameter hanya berlaku setelah dikonfigurasi pada sa
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus mendukung empat MQ: rocksmq (berbasis RockDB), natsmq (embedded nats-server), Pulsar, dan Kafka.</p>
+    </button></h3><p>Milvus mendukung empat MQ: rocksmq (berdasarkan RockDB), Pulsar, Kafka, dan Woodpecker.</p>
 <p>Anda dapat mengubah mq Anda dengan mengatur bidang mq.type.</p>
 <p>Jika Anda tidak mengatur bidang mq.type sebagai default, ada catatan tentang mengaktifkan prioritas jika kita mengkonfigurasi beberapa mq dalam berkas ini.</p>
 <ol>
-<li><p>mode standalone (lokal): rocksmq (default) &gt; natsmq &gt; Pulsar &gt; Kafka</p></li>
-<li><p>mode cluster:  Pulsar(default) &gt; Kafka (rocksmq dan natsmq tidak didukung dalam mode cluster)</p></li>
+<li><p>mode standalone (lokal): rocksmq (default) &gt; Pulsar &gt; Kafka</p></li>
+<li><p>mode cluster:  Pulsar(default) &gt; Kafka (rocksmq tidak didukung dalam mode cluster)</p></li>
+<li><p>Woodpecker dapat digunakan baik dalam mode mandiri maupun klaster dengan mengatur mq.type ke woodpecker.</p></li>
 </ol>
 <p>Lihat <a href="/docs/id/configure_mq.md">Konfigurasi terkait mq</a> untuk penjelasan rinci untuk setiap parameter pada bagian ini.</p>
 <h3 id="pulsar" class="common-anchor-header"><code translate="no">pulsar</code><button data-href="#pulsar" class="anchor-icon" translate="no">
@@ -163,7 +164,7 @@ Pada rilis saat ini, semua parameter hanya berlaku setelah dikonfigurasi pada sa
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Konfigurasi terkait pulsar, digunakan untuk mengelola log Milvus dari operasi mutasi terkini, log streaming keluaran, dan menyediakan layanan berlangganan-publikasi log.</p>
+    </button></h3><p>Konfigurasi terkait pulsar, digunakan untuk mengelola log Milvus dari operasi mutasi terkini, mengeluarkan log streaming, dan menyediakan layanan langganan-publikasi log.</p>
 <p>Lihat <a href="/docs/id/configure_pulsar.md">Konfigurasi terkait pulsar</a> untuk penjelasan rinci untuk setiap parameter pada bagian ini.</p>
 <h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code><button data-href="#rocksmq" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -182,9 +183,9 @@ Pada rilis saat ini, semua parameter hanya berlaku setelah dikonfigurasi pada sa
       </svg>
     </button></h3><p>Jika Anda ingin mengaktifkan kafka, Anda perlu mengomentari konfigurasi pulsar</p>
 <p>kafka:</p>
-<p>brokerList:</p>
+<p>brokerList: localhost:9092</p>
 <p>saslUsername:</p>
-<p>saslKata Sandi:</p>
+<p>saslKata sandi:</p>
 <p>saslMechanisms:</p>
 <p>securityProtocol:</p>
 <p>ssl:</p>
@@ -199,25 +200,7 @@ tlsCaCert:  # file or directory path to CA certificate(s) for verifying the brok
 tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_ssl_cert(), if any
 </code></pre>
 <p>readTimeout: 10</p>
-<p>Lihat <a href="/docs/id/configure_rocksmq.md">Konfigurasi terkait rocksmq</a> untuk penjelasan mendetail untuk setiap parameter dalam bagian ini.</p>
-<h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code><button data-href="#natsmq" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>konfigurasi natsmq.</p>
-<p>detail lebih lanjut: https://docs.nats.io/running-a-nats-service/configuration</p>
-<p>Lihat <a href="/docs/id/configure_natsmq.md">Konfigurasi terkait natsmq</a> untuk penjelasan mendetail untuk setiap parameter pada bagian ini.</p>
+<p>Lihat <a href="/docs/id/configure_rocksmq.md">Konfigurasi terkait rocksmq</a> untuk penjelasan rinci untuk setiap parameter di bagian ini.</p>
 <h3 id="rootCoord" class="common-anchor-header"><code translate="no">rootCoord</code><button data-href="#rootCoord" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -233,7 +216,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Konfigurasi terkait rootCoord, digunakan untuk menangani permintaan bahasa definisi data (DDL) dan bahasa kontrol data (DCL)</p>
+    </button></h3><p>Konfigurasi terkait rootCoord, yang digunakan untuk menangani permintaan bahasa definisi data (DDL) dan bahasa kontrol data (DCL)</p>
 <p>Lihat <a href="/docs/id/configure_rootcoord.md">Konfigurasi terkait rootCoord</a> untuk penjelasan rinci untuk setiap parameter di bagian ini.</p>
 <h3 id="proxy" class="common-anchor-header"><code translate="no">proxy</code><button data-href="#proxy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -415,8 +398,25 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Mengonfigurasi pengaktifan tls proxy.</p>
-<p>Lihat <a href="/docs/id/configure_tls.md">Konfigurasi terkait tls</a> untuk penjelasan rinci untuk setiap parameter di bagian ini.</p>
+    </button></h3><p>Mengkonfigurasi tls eksternal.</p>
+<p>Lihat <a href="/docs/id/configure_tls.md">Konfigurasi terkait tls</a> untuk penjelasan rinci untuk setiap parameter pada bagian ini.</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code><button data-href="#internaltls" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Mengonfigurasi tls internal.</p>
+<p>Lihat <a href="/docs/id/configure_internaltls.md">Konfigurasi terkait tls internal</a> untuk penjelasan rinci untuk setiap parameter di bagian ini.</p>
 <h3 id="common" class="common-anchor-header"><code translate="no">common</code><button data-href="#common" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -495,10 +495,61 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>#Saat menggunakan pengindeksan GPU, Milvus akan menggunakan kumpulan memori untuk menghindari alokasi dan deallokasi memori yang sering terjadi.</p>
+    </button></h3><p>#Saat menggunakan pengindeksan GPU, Milvus akan menggunakan kumpulan memori untuk menghindari alokasi dan de-alokasi memori yang sering terjadi.</p>
 <p>#Di sini, Anda dapat mengatur ukuran memori yang ditempati oleh pool memori, dengan satuan MB.</p>
 <p>#Perhatikan bahwa ada kemungkinan Milvus mengalami crash ketika permintaan memori aktual melebihi nilai yang ditetapkan oleh maxMemSize.</p>
 <p>#Jika initMemSize dan MaxMemSize keduanya bernilai nol,</p>
 <p>#milvus akan secara otomatis menginisialisasi setengah dari memori GPU yang tersedia,</p>
 <p>#maxMemSize akan menginisialisasi seluruh memori GPU yang tersedia.</p>
-<p>Lihat <a href="/docs/id/configure_gpu.md">Konfigurasi terkait GPU</a> untuk penjelasan rinci untuk setiap parameter pada bagian ini.</p>
+<p>Lihat <a href="/docs/id/configure_gpu.md">Konfigurasi terkait GPU</a> untuk penjelasan rinci untuk setiap parameter di bagian ini.</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code><button data-href="#streamingNode" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Konfigurasi apa pun yang terkait dengan server node streaming.</p>
+<p>Lihat <a href="/docs/id/configure_streamingnode.md">Konfigurasi terkait streamingNode</a> untuk penjelasan rinci untuk setiap parameter di bagian ini.</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code><button data-href="#streaming" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Konfigurasi apa pun yang terkait dengan layanan streaming.</p>
+<p>Lihat <a href="/docs/id/configure_streaming.md">Konfigurasi terkait streaming</a> untuk penjelasan rinci untuk setiap parameter di bagian ini.</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code><button data-href="#knowhere" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Konfigurasi apa pun yang terkait dengan mesin pencari vektor knowhere</p>
+<p>Lihat <a href="/docs/id/configure_knowhere.md">Konfigurasi terkait knowhere</a> untuk penjelasan rinci untuk setiap parameter di bagian ini.</p>

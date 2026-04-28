@@ -20,10 +20,10 @@ title: فهرس وحدة معالجة الرسومات
         ></path>
       </svg>
     </button></h1><p>يدعم Milvus أنواع فهرس GPU المختلفة لتسريع أداء البحث وكفاءته، خاصةً في سيناريوهات الإنتاجية العالية والاستدعاء العالي. يقدم هذا الموضوع نظرة عامة على أنواع فهارس GPU التي تدعمها Milvus، وحالات الاستخدام المناسبة لها، وخصائص الأداء. للحصول على معلومات حول إنشاء الفهارس باستخدام وحدة معالجة الرسومات، راجع <a href="/docs/ar/index-with-gpu.md">الفهرسة باستخدام وحدة معالجة الرسومات</a>.</p>
-<p>من المهم ملاحظة أن استخدام فهرس GPU قد لا يقلل بالضرورة من زمن الاستجابة مقارنة باستخدام فهرس وحدة المعالجة المركزية. إذا كنت ترغب في زيادة الإنتاجية إلى أقصى حد، فستحتاج إلى ضغط طلب مرتفع للغاية أو عدد كبير من ناقلات الاستعلام.</p>
+<p>من المهم ملاحظة أن استخدام فهرس GPU قد لا يقلل بالضرورة من زمن الاستجابة مقارنة باستخدام فهرس وحدة المعالجة المركزية. إذا كنت ترغب في زيادة الإنتاجية إلى أقصى حد، فستحتاج إلى ضغط طلب مرتفع للغاية أو عدد كبير من متجهات الاستعلام.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
    </span> <span class="img-wrapper"> <span>الأداء</span> </span></p>
 <p>يساهم فريق Nvidia <a href="https://rapids.ai/">RAPIDS</a> في دعم وحدة معالجة الرسومات في ميلفوس. فيما يلي أنواع فهرس GPU المدعومة حاليًا من قبل Milvus.</p>
 <h2 id="GPUCAGRA" class="common-anchor-header">GPU_CAGRA<button data-href="#GPUCAGRA" class="anchor-icon" translate="no">
@@ -156,7 +156,7 @@ title: فهرس وحدة معالجة الرسومات
         ></path>
       </svg>
     </button></h2><p><code translate="no">PQ</code> (التكميم الكمي للمنتج) تحلل بشكل موحد الفضاء المتجه الأصلي عالي الأبعاد إلى نواتج ديكارتية من <code translate="no">m</code> مساحات متجهة منخفضة الأبعاد، ثم تقوم بتكميم المساحات المتجهة منخفضة الأبعاد المتحللة. وبدلاً من حساب المسافات بين المتجه الهدف ومركز جميع الوحدات، يتيح التكميم الكمي للمنتج حساب المسافات بين المتجه الهدف ومركز التجميع لكل فضاء منخفض الأبعاد ويقلل بشكل كبير من تعقيد الوقت وتعقيد المساحة للخوارزمية.</p>
-<p>يقوم IVF_PQ بإجراء تجميع فهرس IVF قبل تكميم حاصل ضرب المتجهات. ملف الفهرس الخاص به أصغر من IVF_SQ8، لكنه يتسبب أيضًا في فقدان الدقة أثناء البحث عن المتجهات.</p>
+<p>يقوم IVF_PQ بتنفيذ تجميع فهرس IVF قبل تكميم حاصل ضرب المتجهات. يكون ملف الفهرس الخاص بها أصغر من IVF_SQ8، لكنه يتسبب أيضًا في فقدان الدقة أثناء البحث عن المتجهات.</p>
 <div class="alert note">
 <p>تختلف معلمات بناء الفهرس ومعلمات البحث باختلاف توزيع Milvus. حدد توزيع ميلفوس الخاص بك أولاً.</p>
 <p>عند إجراء عمليات البحث، لاحظ أنه يمكنك تعيين أعلى K حتى 8192 لأي بحث مقابل مجموعة مفهرسة GPU_IVF_FLAT.</p>
@@ -170,7 +170,7 @@ title: فهرس وحدة معالجة الرسومات
 <tbody>
 <tr><td><code translate="no">nlist</code></td><td>عدد وحدات المجموعة</td><td>[1, 65536]</td><td><code translate="no">128</code></td></tr>
 <tr><td><code translate="no">m</code></td><td>عدد عوامل تكميم المنتج,</td><td><code translate="no">dim mod m or = 0</code></td><td><code translate="no">0</code></td></tr>
-<tr><td><code translate="no">nbits</code></td><td>[اختياري] عدد وحدات البت التي يتم تخزين كل متجه منخفض الأبعاد فيها.</td><td>[1, 16]</td><td><code translate="no">8</code></td></tr>
+<tr><td><code translate="no">nbits</code></td><td>[اختياري] عدد البتات التي يتم تخزين كل متجه منخفض الأبعاد فيها.</td><td>[1, 16]</td><td><code translate="no">8</code></td></tr>
 <tr><td><code translate="no">cache_dataset_on_device</code></td><td>يقرر ما إذا كان سيتم تخزين مجموعة البيانات الأصلية مؤقتًا في ذاكرة وحدة معالجة الرسومات. القيم الممكنة:</br><code translate="no">“true”</code>: تخزين مجموعة البيانات الأصلية مؤقتًا لتحسين الاستدعاء من خلال تحسين نتائج البحث.</br> <code translate="no">“false”</code>: عدم تخزين مجموعة البيانات الأصلية مؤقتًا لحفظ ذاكرة وحدة معالجة الرسومات.</td><td><code translate="no">&quot;true&quot;</code> <code translate="no">&quot;false&quot;</code></td><td><code translate="no">&quot;false&quot;</code></td></tr>
 </tbody>
 </table>

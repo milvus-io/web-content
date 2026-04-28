@@ -4,11 +4,11 @@ title: Construire RAG avec LlamaIndex et Milvus Async API
 related_key: LlamaIndex
 summary: >-
   Ce tutoriel montre comment utiliser LlamaIndex avec Milvus pour construire un
-  pipeline de traitement de documents asynchrone pour RAG. LlamaIndex fournit un
-  moyen de traiter les documents et de les stocker dans une base de données
-  vectorielle comme Milvus. En exploitant l'API asynchrone de LlamaIndex et la
-  bibliothèque client Python de Milvus, nous pouvons augmenter le débit du
-  pipeline pour traiter et indexer efficacement de grands volumes de données.
+  pipeline de traitement de documents asynchrone pour RAG. LlamaIndex permet de
+  traiter des documents et de les stocker dans une base de données vectorielle
+  comme Milvus. En exploitant l'API asynchrone de LlamaIndex et la bibliothèque
+  client Python de Milvus, nous pouvons augmenter le débit du pipeline pour
+  traiter et indexer efficacement de grands volumes de données.
 ---
 <h1 id="RAG-with-Milvus-and-LlamaIndex-Async-API" class="common-anchor-header">RAG avec Milvus et LlamaIndex Async API<button data-href="#RAG-with-Milvus-and-LlamaIndex-Async-API" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -32,7 +32,7 @@ summary: >-
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>Ce tutoriel montre comment utiliser <a href="https://www.llamaindex.ai/">LlamaIndex</a> avec <a href="https://milvus.io/">Milvus</a> pour construire un pipeline de traitement de documents asynchrone pour RAG. LlamaIndex fournit un moyen de traiter les documents et de les stocker dans une base de données vectorielle comme Milvus. En exploitant l'API asynchrone de LlamaIndex et la bibliothèque client Python de Milvus, nous pouvons augmenter le débit du pipeline pour traiter et indexer efficacement de grands volumes de données.</p>
-<p>Dans ce tutoriel, nous allons d'abord présenter l'utilisation des méthodes asynchrones pour construire un RAG avec LlamaIndex et Milvus à partir d'un niveau élevé, puis nous introduirons l'utilisation des méthodes de bas niveau et la comparaison de performance entre synchrone et asynchrone.</p>
+<p>Dans ce tutoriel, nous allons d'abord présenter l'utilisation des méthodes asynchrones pour construire un RAG avec LlamaIndex et Milvus à partir d'un niveau élevé, puis nous présenterons l'utilisation des méthodes de bas niveau et la comparaison de performance entre synchrone et asynchrone.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Avant de commencer<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

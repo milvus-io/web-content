@@ -1,8 +1,8 @@
 ---
 id: coordinator_ha.md
 summary: >-
-  Imparare a conoscere la motivazione e la procedura per i coordinatori Milvus
-  che lavorano in standby attivo.
+  Imparare la motivazione e la procedura per i coordinatori Milvus che lavorano
+  in standby attivo.
 title: Coordinatore HA
 ---
 <h1 id="Coordinator-HA" class="common-anchor-header">Coordinatore HA<button data-href="#Coordinator-HA" class="anchor-icon" translate="no">
@@ -39,7 +39,7 @@ title: Coordinatore HA
     </button></h2><p>Nella versione 2.2.3, Milvus implementa l'alta disponibilità per i coordinatori per farli lavorare in modalità active-standby, mitigando i possibili single point of failure (SPoF) che possono causare l'indisponibilità del servizio.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
    </span> <span class="img-wrapper"> <span>Coordinatore HA</span> </span></p>
 <p>La figura precedente illustra il funzionamento dei coordinatori in modalità active-standby. Quando una coppia di coordinatori si avvia, si registra con etcd utilizzando il proprio ID server e compete per il ruolo attivo. Il coordinatore che riesce ad affittare il ruolo attivo da etcd inizierà a servire, mentre l'altro coordinatore della coppia rimarrà in standby, controllando il ruolo attivo e pronto a servire se il coordinatore attivo muore.</p>
 <h2 id="Enable-coordinator-HA" class="common-anchor-header">Abilitare il coordinatore HA<button data-href="#Enable-coordinator-HA" class="anchor-icon" translate="no">
@@ -57,7 +57,22 @@ title: Coordinatore HA
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="With-Helm" class="common-anchor-header">Con Helm</h3><p>Per avviare più coordinatori e farli lavorare in modalità active-standby, occorre apportare le seguenti modifiche al file <code translate="no">values.yaml</code>.</p>
+    </button></h2><h3 id="With-Helm" class="common-anchor-header">Con Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per avviare più coordinatori e farli lavorare in modalità active-standby, occorre apportare le seguenti modifiche al file <code translate="no">values.yaml</code>.</p>
 <ul>
 <li>Impostare <code translate="no">xxxCoordinator.replicas</code> su <code translate="no">2</code>.</li>
 <li>Impostare <code translate="no">xxxCoordinator.activeStandby.enabled</code> su <code translate="no">true</code>.</li>
@@ -79,7 +94,22 @@ title: Coordinatore HA
   <span class="hljs-attr">activeStandby:</span>
     <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>  <span class="hljs-comment"># Set this to true to have RootCoordinators work in active-standby mode.</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="With-Docker" class="common-anchor-header">Con Docker</h3><p>Per avviare più coordinatori e farli lavorare in modalità active-standby, si possono aggiungere alcune definizioni al file <code translate="no">docker-compose</code> che si usa per avviare il cluster Milvus.</p>
+<h3 id="With-Docker" class="common-anchor-header">Con Docker<button data-href="#With-Docker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per avviare più coordinatori e farli lavorare in modalità active-standby, si possono aggiungere alcune definizioni al file <code translate="no">docker-compose</code> che si usa per avviare il cluster Milvus.</p>
 <p>Il seguente frammento di codice utilizza RootCoord come esempio. È possibile fare lo stesso per i coordinatori di altro tipo.</p>
 <pre><code translate="no" class="language-yaml">  <span class="hljs-attr">rootcoord:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
@@ -114,7 +144,22 @@ title: Coordinatore HA
 <span class="hljs-comment">#      - &quot;pulsar&quot;</span>
 <span class="hljs-comment">#      - &quot;minio&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="With-MacLinux-shell" class="common-anchor-header">Con la shell Mac/Linux</h3><p>Per avviare più coordinatori e farli lavorare in modalità active-standby, è possibile</p>
+<h3 id="With-MacLinux-shell" class="common-anchor-header">Con la shell Mac/Linux<button data-href="#With-MacLinux-shell" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per avviare più coordinatori e farli lavorare in modalità active-standby, è possibile</p>
 <ol>
 <li><p>Scaricare il codice sorgente di Milvus sul disco locale e <a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">avviare un cluster Milvus dal codice sorgente</a> come segue:</p>
 <pre><code translate="no" class="language-shell">sudo ./scripts/start_cluster.sh

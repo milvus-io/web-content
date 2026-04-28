@@ -31,7 +31,7 @@ title: Erste Schritte mit Mem0 und Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/quickstart_mem0_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://mem0.ai/">Mem0</a> ist eine intelligente Speicherschicht für KI-Anwendungen, die personalisierte und effiziente Interaktionen ermöglicht, indem sie Benutzerpräferenzen speichert und sich kontinuierlich anpasst. Mem0 ist ideal für Chatbots und KI-gesteuerte Tools und schafft nahtlose, kontextbezogene Erlebnisse.</p>
+<p><a href="https://mem0.ai/">Mem0</a> ist eine intelligente Speicherebene für KI-Anwendungen, die personalisierte und effiziente Interaktionen ermöglicht, indem sie Benutzerpräferenzen speichert und sich im Laufe der Zeit kontinuierlich anpasst. Mem0 ist ideal für Chatbots und KI-gesteuerte Tools und schafft nahtlose, kontextbezogene Erlebnisse.</p>
 <p>In diesem Tutorial werden wir die grundlegenden Mem0-Speicherverwaltungsvorgänge - Hinzufügen, Abrufen, Aktualisieren, Suchen, Löschen und Verfolgen des Speicherverlaufs - unter Verwendung von <a href="https://milvus.io/">Milvus</a>, einer leistungsstarken Open-Source-Vektordatenbank, die eine effiziente Speicherung und Abfrage ermöglicht, behandeln. Diese praktische Einführung führt Sie durch die grundlegenden Speicheroperationen und hilft Ihnen, personalisierte KI-Interaktionen mit Mem0 und Milvus zu erstellen.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,7 +66,7 @@ title: Erste Schritte mit Mem0 und Milvus
     </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install mem0ai pymilvus milvus-lite</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Sitzung neu starten" aus dem Dropdown-Menü).</p>
+<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Laufzeitumgebung neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Laufzeit" am oberen Rand des Bildschirms und wählen Sie "Sitzung neu starten" aus dem Dropdown-Menü).</p>
 </blockquote>
 <h3 id="Configure-Mem0-with-Milvus" class="common-anchor-header">Mem0 mit Milvus konfigurieren<button data-href="#Configure-Mem0-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -201,7 +201,7 @@ m.update(memory_id=memory_id, data=<span class="hljs-string">&quot;Likes to play
         ></path>
       </svg>
     </button></h3><p>Mit der Funktion <code translate="no">get_all</code> können wir alle eingefügten Speicher anzeigen oder nach <code translate="no">user_id</code> in Milvus filtern.</p>
-<p>Wie wir sehen, hat sich die Erinnerung von "Ich arbeite daran, meine Tennisfähigkeiten zu verbessern" in "Ich spiele am Wochenende gerne Tennis" geändert.</p>
+<p>Wie wir sehen, hat sich die Erinnerung von "Arbeitet an der Verbesserung der Tenniskenntnisse" zu "Spielt an den Wochenenden gerne Tennis" geändert.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get all memory for the user Alice</span>
 m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>

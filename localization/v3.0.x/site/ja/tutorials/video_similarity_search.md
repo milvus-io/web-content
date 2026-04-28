@@ -32,9 +32,9 @@ title: ビデオ類似検索
 <p><br/></p>
 <p>今日、人々は気に入った映画やビデオを見た後、簡単にスクリーンショットを撮り、様々なソーシャルネットワーキングプラットフォームに投稿して感想を共有することができる。フォロワーがスクリーンショットを見たとき、投稿に映画名が明記されていなければ、それがどの映画なのかを見分けるのは本当に難しい。映画の名前を知るために、人々は動画類似検索システムを利用することができる。このシステムを使うことで、ユーザーは画像をアップロードし、アップロードされた画像に似たキーフレームを含む動画や映画を取得することができる。</p>
 <p><br/></p>
-<p>このチュートリアルでは、動画類似検索システムを構築する方法を学びます。このチュートリアルでは、Tumblrにある約100のアニメーションGIFを使ってシステムを構築します。しかし、自分で動画データセットを用意することもできる。このシステムでは、まずOpenCVを使って動画のキーフレームを抽出し、ResNet-50を使って各キーフレームの特徴ベクトルを取得します。全てのベクトルはMilvusに保存され検索され、類似したベクトルのIDが返される。そして、そのIDをMySQLに格納されている対応する動画に対応付ける。</p>
+<p>このチュートリアルでは、動画類似検索システムを構築する方法を学びます。このチュートリアルでは、Tumblrにある約100のアニメーションGIFを使ってシステムを構築します。しかし、自分で動画データセットを用意することもできる。システムはまずOpenCVを使って動画のキーフレームを抽出し、ResNet-50を使って各キーフレームの特徴ベクトルを取得します。全てのベクトルはMilvusに保存され検索され、類似したベクトルのIDが返される。そして、そのIDをMySQLに格納されている対応する動画に対応付ける。</p>
 <p><br/></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/video_search.png" alt="video_search" class="doc-image" id="video_search" />
-   </span> <span class="img-wrapper"> <span>video_search</span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/video_search_demo.gif" alt="video_search_demo" class="doc-image" id="video_search_demo" /><span>video_search_demo</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/video_search.png" alt="video_search" class="doc-image" id="video_search" />
+   </span> <span class="img-wrapper"> <span>video_search</span> </span> <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/video_search_demo.gif" alt="video_search_demo" class="doc-image" id="video_search_demo" /><span>video_search_demo</span> </span></p>

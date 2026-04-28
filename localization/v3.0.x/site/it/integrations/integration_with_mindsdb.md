@@ -22,7 +22,7 @@ title: Integrare Milvus con MindsDB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://docs.mindsdb.com/what-is-mindsdb">MindsDB</a> è uno strumento potente per integrare le applicazioni di intelligenza artificiale con diverse fonti di dati aziendali. Funziona come un motore di interrogazione federato che mette ordine nella dispersione dei dati e risponde meticolosamente alle interrogazioni su dati strutturati e non strutturati. Che i dati siano sparsi in applicazioni SaaS, database o data warehouse, MindsDB è in grado di collegarli e interrogarli tutti utilizzando SQL standard. È dotato di sistemi RAG autonomi all'avanguardia attraverso le Knowledge Bases, supporta centinaia di fonti di dati e offre opzioni di distribuzione flessibili, dallo sviluppo locale agli ambienti cloud.</p>
+    </button></h1><p><a href="https://docs.mindsdb.com/what-is-mindsdb">MindsDB</a> è un potente strumento per integrare le applicazioni di intelligenza artificiale con diverse fonti di dati aziendali. Funziona come un motore di interrogazione federato che mette ordine nella dispersione dei dati, rispondendo meticolosamente alle interrogazioni su dati strutturati e non strutturati. Che i dati siano sparsi in applicazioni SaaS, database o data warehouse, MindsDB è in grado di collegarli e interrogarli tutti utilizzando SQL standard. È dotato di sistemi RAG autonomi all'avanguardia attraverso le Knowledge Bases, supporta centinaia di fonti di dati e offre opzioni di distribuzione flessibili, dallo sviluppo locale agli ambienti cloud.</p>
 <p>Questo tutorial mostra come integrare Milvus con MindsDB, consentendo di sfruttare le capacità di intelligenza artificiale di MindsDB con le funzionalità del database vettoriale di Milvus attraverso operazioni simili a SQL per la gestione e l'interrogazione di embeddings vettoriali.</p>
 <div class="alert note">
 <p>Questo tutorial fa riferimento principalmente alla documentazione ufficiale di <a href="https://github.com/mindsdb/mindsdb/tree/main/mindsdb/integrations/handlers/milvus_handler">MindsDB Milvus Handler</a>. Se trovate parti non aggiornate in questo tutorial, potete seguire prioritariamente la documentazione ufficiale e creare un problema per noi.</p>
@@ -102,7 +102,22 @@ title: Integrare Milvus con MindsDB
         ></path>
       </svg>
     </button></h2><p>Prima di continuare, assicurarsi che la versione di <code translate="no">pymilvus</code> sia uguale a questa <a href="https://github.com/mindsdb/mindsdb/blob/main/mindsdb/integrations/handlers/milvus_handler/requirements.txt">versione appuntata</a>. Se si riscontrano problemi di compatibilità tra le versioni, è possibile ripristinare la versione di pymilvus o personalizzarla in questo <a href="https://github.com/mindsdb/mindsdb/tree/main/mindsdb/integrations/handlers/milvus_handler">file di requisiti</a>.</p>
-<h3 id="Creating-connection" class="common-anchor-header">Creazione della connessione</h3><p>Per utilizzare questo gestore e connettersi a un server Milvus in MindsDB, si può usare la seguente sintassi:</p>
+<h3 id="Creating-connection" class="common-anchor-header">Creazione della connessione<button data-href="#Creating-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per utilizzare questo gestore e connettersi a un server Milvus in MindsDB, si può usare la seguente sintassi:</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">CREATE</span> DATABASE milvus_datasource
 <span class="hljs-keyword">WITH</span>
   ENGINE <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;milvus&#x27;</span>,
@@ -120,15 +135,75 @@ title: Integrare Milvus con MindsDB
 <li>È anche possibile utilizzare Milvus completamente gestito su <a href="https://zilliz.com/cloud">Zilliz Cloud</a>. È sufficiente impostare <code translate="no">uri</code> e <code translate="no">token</code> con l'<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">endpoint pubblico e la chiave API</a> della propria istanza Zilliz Cloud.</li>
 </ul>
 </blockquote>
-<h3 id="Dropping-connection" class="common-anchor-header">Interruzione della connessione</h3><p>Per interrompere la connessione, utilizzare questo comando</p>
+<h3 id="Dropping-connection" class="common-anchor-header">Interruzione della connessione<button data-href="#Dropping-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per interrompere la connessione, utilizzare questo comando</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">DROP</span> DATABASE milvus_datasource;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Creating-tables" class="common-anchor-header">Creare tabelle</h3><p>Per inserire dati da una tabella preesistente, utilizzare il comando <code translate="no">CREATE</code></p>
+<h3 id="Creating-tables" class="common-anchor-header">Creazione di tabelle<button data-href="#Creating-tables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per inserire dati da una tabella preesistente, utilizzare il comando <code translate="no">CREATE</code></p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> milvus_datasource.test
 (<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> sqlitedb.test);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Dropping-collections" class="common-anchor-header">Eliminazione di collezioni</h3><p>L'eliminazione di una collezione non è supportata</p>
-<h3 id="Querying-and-selecting" class="common-anchor-header">Interrogazione e selezione</h3><p>Per interrogare il database usando un vettore di ricerca, si può usare <code translate="no">search_vector</code> nella clausola <code translate="no">WHERE</code>.</p>
+<h3 id="Dropping-collections" class="common-anchor-header">Eliminazione di collezioni<button data-href="#Dropping-collections" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>L'eliminazione di una collezione non è supportata</p>
+<h3 id="Querying-and-selecting" class="common-anchor-header">Interrogazione e selezione<button data-href="#Querying-and-selecting" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per interrogare il database usando un vettore di ricerca, si può usare <code translate="no">search_vector</code> nella clausola <code translate="no">WHERE</code>.</p>
 <p>Avvertenze:</p>
 <ul>
 <li>Se si omette <code translate="no">LIMIT</code>, viene utilizzato <code translate="no">search_default_limit</code>, poiché Milvus lo richiede.</li>
@@ -146,7 +221,22 @@ LIMIT <span class="hljs-number">10</span>;
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> milvus_datasource.createtest
 <span class="hljs-keyword">WHERE</span> category <span class="hljs-operator">=</span> &quot;science&quot;;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Deleting-records" class="common-anchor-header">Eliminazione di record</h3><p>È possibile cancellare le voci utilizzando <code translate="no">DELETE</code> proprio come in SQL.</p>
+<h3 id="Deleting-records" class="common-anchor-header">Eliminazione di record<button data-href="#Deleting-records" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>È possibile cancellare le voci utilizzando <code translate="no">DELETE</code> proprio come in SQL.</p>
 <p>Avvertenze:</p>
 <ul>
 <li>Milvus supporta solo l'eliminazione di entità con chiavi primarie chiaramente specificate.</li>
@@ -155,10 +245,40 @@ LIMIT <span class="hljs-number">10</span>;
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> milvus_datasource.test
 <span class="hljs-keyword">WHERE</span> id <span class="hljs-keyword">IN</span> (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Inserting-records" class="common-anchor-header">Inserimento di record</h3><p>È possibile inserire anche singole righe come in questo caso:</p>
+<h3 id="Inserting-records" class="common-anchor-header">Inserimento di record<button data-href="#Inserting-records" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>È possibile inserire anche singole righe come in questo caso:</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> milvus_test.testable (id,content,metadata,embeddings)
 <span class="hljs-keyword">VALUES</span> (&quot;id3&quot;, <span class="hljs-string">&#x27;this is a test&#x27;</span>, <span class="hljs-string">&#x27;{&quot;test&quot;: &quot;test&quot;}&#x27;</span>, <span class="hljs-string">&#x27;[1.0, 8.0, 9.0]&#x27;</span>);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Updating" class="common-anchor-header">Aggiornamento</h3><p>L'aggiornamento dei record non è supportato dall'API Milvus. Si può provare a usare una combinazione di <code translate="no">DELETE</code> e <code translate="no">INSERT</code></p>
+<h3 id="Updating" class="common-anchor-header">Aggiornamento<button data-href="#Updating" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>L'aggiornamento dei record non è supportato dall'API Milvus. Si può provare a utilizzare una combinazione di <code translate="no">DELETE</code> e <code translate="no">INSERT</code></p>
 <hr>
 <p>Per ulteriori dettagli ed esempi, consultare la <a href="https://docs.mindsdb.com/what-is-mindsdb">documentazione ufficiale</a> di <a href="https://docs.mindsdb.com/what-is-mindsdb">MindsDB</a>.</p>

@@ -39,10 +39,25 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus prend en charge le multi-tenant à quatre niveaux : <strong>Base de données</strong>, <strong>Collection</strong>, <strong>Partition</strong> et <strong>Clé de partition</strong>.</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Multi-tenance au niveau de la base de données</h3><p>Avec la location multiple au niveau de la base de données, chaque locataire reçoit une <a href="/docs/fr/manage_databases.md">base de données</a> correspondante contenant une ou plusieurs collections.</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Multi-tenance au niveau de la base de données<button data-href="#Database-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Avec la location multiple au niveau de la base de données, chaque locataire reçoit une <a href="/docs/fr/manage_databases.md">base de données</a> correspondante contenant une ou plusieurs collections.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>Multi-tenance au niveau de la base de données</span> </span></p>
 <ul>
 <li><p><strong>Évolutivité</strong>: La stratégie de multi-location au niveau de la base de données prend en charge un maximum de 64 locataires par défaut.</p></li>
@@ -50,10 +65,25 @@ summary: >-
 <li><p><strong>Flexibilité</strong>: Chaque base de données peut avoir des collections avec des schémas différents, offrant une organisation des données très flexible et permettant à chaque locataire d'avoir son propre schéma de données.</p></li>
 <li><p><strong>Autres</strong>: Cette stratégie prend également en charge le RBAC, ce qui permet de contrôler finement l'accès des utilisateurs par locataire. En outre, vous pouvez charger ou libérer des données de manière flexible pour des locataires spécifiques afin de gérer efficacement les données chaudes et froides.</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Multi-tenance au niveau de la collection</h3><p>Avec la multi-location au niveau de la collection, chaque locataire se voit attribuer une <a href="/docs/fr/manage-collections.md">collection</a>, ce qui permet d'isoler fortement les données.</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Multi-tenance au niveau de la collection<button data-href="#Collection-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Avec la multi-location au niveau de la collection, chaque locataire se voit attribuer une <a href="/docs/fr/manage-collections.md">collection</a>, ce qui permet d'isoler fortement les données.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>Multi-tenance au niveau de la collection</span> </span></p>
 <ul>
 <li><p><strong>Évolutivité</strong>: Étant donné qu'un cluster peut contenir jusqu'à 65 536 collections par défaut, cette stratégie peut s'adapter au même nombre de locataires au sein du cluster.</p></li>
@@ -61,10 +91,25 @@ summary: >-
 <li><p><strong>Flexibilité</strong>: Cette stratégie permet à chaque collection d'avoir son propre schéma, ce qui permet d'accueillir des locataires ayant des schémas de données différents.</p></li>
 <li><p><strong>Autres</strong>: Cette stratégie prend également en charge le RBAC, ce qui permet un contrôle d'accès granulaire sur les locataires. En outre, vous pouvez charger ou libérer des données de manière flexible pour des locataires spécifiques afin de gérer efficacement les données chaudes et froides.</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multi-tenance au niveau des partitions</h3><p>Dans la multi-location au niveau des partitions, chaque locataire est assigné à une <a href="/docs/fr/manage-partitions.md">partition</a> créée manuellement au sein d'une collection partagée.</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multi-tenance au niveau des partitions<button data-href="#Partition-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dans la multi-location au niveau des partitions, chaque locataire est assigné à une <a href="/docs/fr/manage-partitions.md">partition</a> créée manuellement au sein d'une collection partagée.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>Multi-locations au niveau des partitions</span> </span></p>
 <ul>
 <li><p><strong>Évolutivité</strong>: Une collection peut contenir jusqu'à 1 024 partitions par collection, ce qui permet d'avoir le même nombre de locataires.</p></li>
@@ -72,10 +117,25 @@ summary: >-
 <li><p><strong>Flexibilité</strong>: Cette stratégie exige que tous les locataires partagent le même schéma de données. De plus, les partitions doivent être créées manuellement.</p></li>
 <li><p><strong>Autres</strong>: Le RBAC n'est pas pris en charge au niveau des partitions. Les locataires peuvent être interrogés individuellement ou à travers plusieurs partitions, ce qui rend cette approche bien adaptée aux scénarios impliquant des requêtes agrégées ou des analyses à travers des segments de locataires. En outre, vous pouvez charger ou libérer des données de manière flexible pour des locataires spécifiques afin de gérer efficacement les données chaudes et froides.</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Multi-location au niveau de la clé de partition</h3><p>Avec cette stratégie, tous les locataires partagent une collection et un schéma uniques, mais les données de chaque locataire sont automatiquement acheminées vers 16 partitions physiquement isolées en fonction de la valeur de <a href="/docs/fr/use-partition-key.md">la clé de partition</a>. Bien que chaque partition physique puisse contenir plusieurs locataires, les données des différents locataires restent logiquement séparées.</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Multi-location au niveau de la clé de partition<button data-href="#Partition-key-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Avec cette stratégie, tous les locataires partagent une collection et un schéma uniques, mais les données de chaque locataire sont automatiquement acheminées vers 16 partitions physiquement isolées en fonction de la valeur de <a href="/docs/fr/use-partition-key.md">la clé de partition</a>. Bien que chaque partition physique puisse contenir plusieurs locataires, les données des différents locataires restent logiquement séparées.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>Niveau de la clé de partition Multi-locataires</span> </span></p>
 <ul>
 <li><p><strong>Évolutivité</strong>: La stratégie au niveau de la clé de partition offre l'approche la plus évolutive, prenant en charge des millions de locataires.</p></li>

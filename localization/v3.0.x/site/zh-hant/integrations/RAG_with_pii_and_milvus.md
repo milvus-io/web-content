@@ -55,7 +55,7 @@ title: 使用 Milvus + PII Masker 建立 RAG
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/HydroXai/pii-masker-v1.git</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> pii-masker-v1/pii-masker</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>從<code translate="no">https://huggingface.co/hydroxai/pii_model_weight</code> 下載模型，並將其中的檔案取代：<code translate="no">pii-masker/output_model/deberta3base_1024/</code></p>
+<p>從<code translate="no">https://huggingface.co/hydroxai/pii_model_weight</code> 下載模型，並用其中的檔案取代：<code translate="no">pii-masker/output_model/deberta3base_1024/</code></p>
 <h3 id="Dependencies-and-Environment" class="common-anchor-header">依賴與環境<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -298,7 +298,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
     </button></h3><p>讓我們指定一個關於文件的問題。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;What was the office address of Hiroshi&#x27;s partner from Munich?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在集合中搜尋問題，並擷取語義上 top-1 的匹配項目。</p>
+<p>在集合中搜尋問題，並擷取語義上 Top-1 的匹配項目。</p>
 <pre><code translate="no" class="language-python">search_res = milvus_client.search(
     collection_name=collection_name,
     data=[

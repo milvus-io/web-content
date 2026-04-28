@@ -19,7 +19,10 @@ title: 使用 GPU 建立索引
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南概述了在 Milvus 中使用 GPU 支援建立索引的步驟，這可以顯著改善高吞吐量和高召回情境下的搜尋效能。有關 Milvus 支援的 GPU 索引類型的詳細資訊，請參閱<a href="/docs/zh-hant/gpu_index.md">GPU 索引</a>。</p>
+    </button></h1><p>本指南概述了在 Milvus 中使用 GPU 支援建立索引的步驟，GPU 支援可顯著改善高吞吐量和高召回情境中的搜尋效能。有關 Milvus 支援的 GPU 索引類型的詳細資訊，請參閱<a href="/docs/zh-hant/gpu_index.md">GPU 索引</a>。</p>
+<div class="alert warning">
+<p>此頁面已被廢棄。如需最新實作，請參閱<a href="/docs/zh-hant/gpu-index-overview.md">GPU 索引總覽</a>。</p>
+</div>
 <h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">為 GPU 記憶體控制配置 Milvus 設定<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -99,7 +102,7 @@ title: 使用 GPU 建立索引
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>params</strong>的可能選項包括</p>
 <ul>
-<li><p><strong>intermediate_graph_degree</strong><em>(int</em>)：透過在剪枝之前確定圖形的程度來影響召回和建立時間。建議值為<strong>32</strong>或<strong>64</strong>。</p></li>
+<li><p><strong>intermediate_graph_degree</strong><em>(int</em>)：透過在剪枝之前確定圖形的程度來影響召回率和建立時間。建議值為<strong>32</strong>或<strong>64</strong>。</p></li>
 <li><p><strong>graph_degree</strong><em>(int</em>)：透過設定剪枝後的圖形程度來影響搜尋效能和召回率。通常，它是<strong>intermediate_graph_degree 的</strong>一半。這兩個程度之間的差異越大，建立時間就越長。它的值必須小於<strong>intermediate_graph_degree</strong> 的值。</p></li>
 <li><p><strong>build_algo</strong><em>(字串</em>)：選擇剪枝前的圖形生成演算法。可能的選項：</p>
 <ul>
@@ -208,7 +211,7 @@ collection.create_index(
 <li><p><strong>itopk_size</strong>：決定搜尋過程中保留的中間結果大小。較大的值可能會提高召回率，但卻會犧牲搜尋效能。它應該至少等於最終 top-k<strong>(限制</strong>) 值，通常是 2 的幂次 (例如 16、32、64、128)。</p></li>
 <li><p><strong>search_width</strong>：指定搜尋期間進入 CAGRA 圖形的入口點數量。增加此值可提高召回率，但可能會影響搜尋效能。</p></li>
 <li><p><strong>min_iterations</strong>/<strong>max</strong><strong>_</strong> <strong>iterations</strong>：這些參數控制搜尋的迭代程序。預設值為<strong>0</strong>，CAGRA 會根據<strong>itopk_size</strong>和<strong>search_width</strong> 自動決定迭代次數。手動調整這些值有助於平衡效能與精確度。</p></li>
-<li><p><strong>team_size</strong>：指定用於計算 GPU 公制距離的 CUDA 線程數目。常見的值是 2 的幂數，最高為 32 (例如 2、4、8、16、32)。它對搜尋效能影響不大。預設值是<strong>0</strong>，Milvus 會根據向量的維度自動選擇<strong>team_size</strong>。</p></li>
+<li><p><strong>team_size</strong>：指定用於計算 GPU 公制距離的 CUDA 線程數目。常見的值是 2 的幂次，最高為 32 (例如 2、4、8、16、32)。它對搜尋效能影響不大。預設值是<strong>0</strong>，Milvus 會根據向量的維度自動選擇<strong>team_size</strong>。</p></li>
 </ul></li>
 <li><p><strong>GPU_IVF_FLAT</strong>或<strong>GPU_IVF_PQ</strong>索引</p>
 <pre><code translate="no" class="language-python">search_params = {
@@ -261,10 +264,10 @@ collection.search(
       </svg>
     </button></h2><p>使用 GPU 索引時，請注意某些限制：</p>
 <ul>
-<li><p>對於<strong>GPU_IVF_FLAT</strong>，<strong>limit</strong>的最大值為 1024。</p></li>
+<li><p>對於<strong>GPU_IVF_FLAT</strong>，<strong>limit</strong>的最大值是 1024。</p></li>
 <li><p>對於<strong>GPU_IVF_PQ</strong>和<strong>GPU_CAGRA</strong>，<strong>limit</strong>的最大值為 1024。</p></li>
 <li><p>雖然<strong>GPU_BRUTE_FORCE</strong> 沒有設定<strong>限制</strong>，但建議不要超過 4096，以避免潛在的效能問題。</p></li>
-<li><p>目前，GPU 索引不支援 COSINE 距離。如果需要 COSINE 距離，應該先將資料規格化，然後再使用內積 (IP) 距離來替代。</p></li>
+<li><p>目前，GPU 索引不支援 COSINE 距離。如果需要 COSINE 距離，應該先將資料規範化，然後再使用內積 (IP) 距離來替代。</p></li>
 <li><p>不完全支援 GPU 索引的載入 OOM 保護，太多資料可能會導致 QueryNode 當機。</p></li>
 <li><p>GPU 索引不支援<a href="https://milvus.io/docs/single-vector-search.md#Range-search">範圍</a>搜尋及<a href="https://milvus.io/docs/single-vector-search.md#Grouping-searchh">群組搜尋等</a>搜尋功能。</p></li>
 </ul>
@@ -287,5 +290,5 @@ collection.search(
 <li><p><strong>何時適合使用 GPU 索引？</strong></p>
 <p>GPU 索引特別適用於需要高吞吐量或高召回率的情況。例如，在處理大量批次時，GPU 索引的吞吐量可比 CPU 索引高出 100 倍之多。在批次較小的情況下，GPU 索引在效能上仍遠遠優於 CPU 索引。此外，如果需要快速插入資料，整合 GPU 可大幅加快建立索引的過程。</p></li>
 <li><p><strong>GPU 索引（如 CAGRA、GPU_IVF_PQ、GPU_IVF_FLAT 和 GPU_BRUTE_FORCE）最適合哪些應用場合？</strong></p>
-<p>CAGRA 索引非常適合需要增強效能的應用環境，儘管其代價是消耗更多的記憶體。對於以節省記憶體為優先考量的環境，<strong>GPU_IVF_PQ</strong>索引可幫助將儲存需求降至最低，儘管這會帶來較高的精確度損失。<strong>GPU_IVF_FLAT</strong>索引是一個平衡的選擇，提供效能與記憶體使用量之間的折衷方案。最後，<strong>GPU_BRUTE_FORCE</strong>索引專為窮盡搜尋作業而設計，透過執行遍歷搜尋，保證召回率為 1。</p></li>
+<p>CAGRA 索引非常適合需要增強效能的應用環境，儘管其代價是消耗更多的記憶體。對於以節省記憶體為優先考量的環境，<strong>GPU_IVF_PQ</strong>索引可幫助將儲存需求降至最低，儘管這會帶來較高的精確度損失。<strong>GPU_IVF_FLAT</strong>索引是一個平衡的選擇，提供效能與記憶體使用量之間的折衷方案。最後，<strong>GPU_BRUTE_FORCE</strong>索引專為窮盡搜尋作業而設計，透過執行遍歷搜尋來保證召回率為 1。</p></li>
 </ul>

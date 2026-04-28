@@ -133,7 +133,7 @@ summary: >-
 <li><p><strong>Compressão de dados:</strong> O SQ comprime os vectores utilizando o <code translate="no">sq_type</code> (por exemplo, SQ6 ou SQ8), o que reduz a utilização de memória. Esta compressão pode diminuir a precisão, mas permite que o sistema lide com conjuntos de dados maiores.</p></li>
 <li><p><strong>Construção de gráficos:</strong> Os vectores comprimidos são utilizados para construir um gráfico HNSW. Como os dados são comprimidos, o gráfico resultante é mais pequeno e mais rápido de pesquisar.</p></li>
 <li><p><strong>Recuperação de candidatos:</strong> Quando é fornecido um vetor de consulta, o algoritmo utiliza os dados comprimidos para identificar rapidamente um conjunto de vizinhos candidatos a partir do gráfico HNSW.</p></li>
-<li><p><strong>(Opcional) Refinamento de resultados:</strong> Os resultados iniciais dos candidatos podem ser refinados para uma melhor precisão, com base nos seguintes parâmetros:</p>
+<li><p><strong>(Opcional) Refinamento de resultados:</strong> Os resultados candidatos iniciais podem ser refinados para uma melhor precisão, com base nos seguintes parâmetros:</p>
 <ul>
 <li><p><code translate="no">refine</code>: Controla se esta etapa de refinamento está activada. Quando definido para <code translate="no">true</code>, o sistema recalcula as distâncias utilizando representações de maior precisão ou não comprimidas.</p></li>
 <li><p><code translate="no">refine_type</code>: Especifica o nível de precisão dos dados utilizados durante o refinamento (por exemplo, SQ6, SQ8, BF16). Uma escolha de maior precisão, como <code translate="no">FP32</code>, pode produzir resultados mais exactos, mas requer mais memória. Isto deve exceder a precisão do conjunto de dados comprimido original em <code translate="no">sq_type</code>.</p></li>
@@ -198,7 +198,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de o índice ser construído e as entidades serem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
+    </button></h2><p>Depois de o índice ser criado e as entidades serem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;ef&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Parameter controlling query time/accuracy trade-off</span>
@@ -277,7 +277,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">sq_type</code></p></td>
      <td><p>Especifica o método de quantização escalar para comprimir vectores. Cada opção oferece um equilíbrio diferente entre compressão e precisão:</p><ul><li><p><code translate="no">SQ4U</code>: Codifica vectores utilizando quantização uniforme de 4 bits. Este modo oferece a maior velocidade e compressão.</p></li><li><p><code translate="no">SQ6</code>: Codifica vectores utilizando números inteiros de 6 bits.</p></li><li><p><code translate="no">SQ8</code>: Codifica vectores utilizando números inteiros de 8 bits.</p></li><li><p><code translate="no">BF16</code>: Usa o formato Bfloat16.</p></li><li><p><code translate="no">FP16</code>: Utiliza o formato padrão de ponto flutuante de 16 bits.</p></li></ul></td>
      <td><p><strong>Tipo</strong>: String</p><p><strong>Range</strong>: [ <code translate="no">SQ4U</code>, <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code> ]</p><p><strong>Valor por defeito</strong>: <code translate="no">SQ8</code></p></td>
-     <td><p>A escolha de <code translate="no">sq_type</code> depende das necessidades específicas da aplicação. <code translate="no">SQ4U</code> é escolhido para máxima velocidade e eficiência de memória. <code translate="no">SQ6</code> ou <code translate="no">SQ8</code> podem ser adequados para um desempenho equilibrado. Por outro lado, se a precisão for primordial, <code translate="no">BF16</code> ou <code translate="no">FP16</code> podem ser preferidos.</p></td>
+     <td><p>A escolha de <code translate="no">sq_type</code> depende das necessidades específicas da aplicação. <code translate="no">SQ4U</code> é escolhido para máxima velocidade e eficiência de memória. <code translate="no">SQ6</code> ou <code translate="no">SQ8</code> podem ser adequados para um desempenho equilibrado. Por outro lado, se a precisão for fundamental, <code translate="no">BF16</code> ou <code translate="no">FP16</code> podem ser preferidos.</p></td>
    </tr>
    <tr>
      <td></td>

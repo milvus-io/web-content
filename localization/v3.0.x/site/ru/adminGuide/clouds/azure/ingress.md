@@ -148,7 +148,7 @@ helm install cert-manager jetstack/cert-manager \
         ></path>
       </svg>
     </button></h2><p>обратитесь к <a href="https://milvus.io/docs/azure.md">Azure</a>, обратите внимание на значение config <code translate="no">service.type</code>, его нужно изменить на <code translate="no">ClusterIP</code>.</p>
-<h2 id="Create-Milvus-ingress-route" class="common-anchor-header">Создайте ингресс-маршрут Milvus<button data-href="#Create-Milvus-ingress-route" class="anchor-icon" translate="no">
+<h2 id="Create-Milvus-ingress-route" class="common-anchor-header">Создайте маршрут Milvus ingress<button data-href="#Create-Milvus-ingress-route" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -2,7 +2,7 @@
 id: multi-language-analyzers.md
 title: 多言語アナライザCompatible with Milvus 2.5.11+
 summary: >-
-  Milvusがテキスト分析を行う場合、通常、コレクション内のテキストフィールド全体に単一の分析器を適用します。その分析ツールが英語用に最適化されている場合、中国語、スペイン語、フランス語など、他の言語で必要とされる非常に異なるトークン化やステミングのルールと格闘することになり、結果として想起率が低下します。たとえば、スペイン語の「teléfono」（「電話」を意味する）を検索すると、英語に特化したアナライザはつまずきます。
+  Milvusがテキスト分析を行う場合、通常、コレクション内のテキストフィールド全体に単一の分析器を適用します。その分析器が英語用に最適化されている場合、中国語、スペイン語、フランス語など、他の言語で必要とされる非常に異なるトークン化やステミングのルールと格闘することになり、その結果、想起率が低下します。たとえば、スペイン語の「teléfono」（「電話」を意味する）を検索すると、英語に特化したアナライザはつまずきます。
   アクセントが削除され、スペイン語固有のステミングが適用されないため、関連する結果が見落とされる可能性があります。
 beta: Milvus 2.5.11+
 ---
@@ -22,7 +22,7 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h1><p>Milvusがテキスト分析を行う場合、通常、コレクション内のテキストフィールド全体に単一のアナライザーを適用します。そのアナライザーが英語用に最適化されている場合、中国語、スペイン語、フランス語など、他の言語で必要とされる非常に異なるトークン化やステミングのルールと格闘することになり、結果として想起率が低下します。たとえば、スペイン語の<em>「teléfono」</em>（<em>「電話」の</em>意味）を検索する場合、英語に特化したアナライザでは、アクセント記号が削除され、スペイン語固有のステミングが適用されないため、関連する結果が見落とされてしまいます。</p>
-<p>多言語アナライザは、テキストフィールドに対して複数のアナライザを単一のコレクションに設定できるようにすることで、この問題を解決します。このようにして、テキストフィールドに多言語ドキュメントを保存することができ、Milvusはドキュメントごとに適切な言語ルールに従ってテキストを分析します。</p>
+<p>多言語アナライザは、テキストフィールドに対して複数のアナライザを単一のコレクションに設定できるようにすることで、この問題を解決します。このようにして、テキストフィールドに多言語のドキュメントを保存することができ、Milvusはドキュメントごとに適切な言語ルールに従ってテキストを分析します。</p>
 <h2 id="Limits" class="common-anchor-header">制限事項<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +61,7 @@ beta: Milvus 2.5.11+
     </button></h2><p>以下の図は、Milvusで多言語アナライザを設定・使用する際のワークフローを示しています：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/multi-language-analyzers-workflow.png" alt="Multi Language Analyzers Workflow" class="doc-image" id="multi-language-analyzers-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multi-language-analyzers-workflow.png" alt="Multi Language Analyzers Workflow" class="doc-image" id="multi-language-analyzers-workflow" />
    </span> <span class="img-wrapper"> <span>多言語アナライザーのワークフロー</span> </span></p>
 <ol>
 <li><p><strong>多言語アナライザの設定</strong></p>
@@ -107,7 +107,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">multi_analyzer_params</code> 、Milvusが各エンティティに適切な解析器を選択する方法を決定する単一のJSONオブジェクトです：</p>
+    </button></h2><p><code translate="no">multi_analyzer_params</code> 、Milvusが各エンティティに適切なアナライザーを選択する方法を決定する1つのJSONオブジェクトです：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">multi_analyzer_params = {
@@ -211,10 +211,10 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
    <tr>
      <td><p><code translate="no">by_field</code></p></td>
      <td><p>はい</p></td>
-     <td><p>Milvusが適用すべき言語(つまり分析器名)を文書ごとに格納するフィールドの名前。</p></td>
+     <td><p>Milvusが適用すべき言語(つまり、分析器名)を文書ごとに格納するフィールドの名前。</p></td>
      <td><ul>
 <li><p>コレクションで定義された<code translate="no">VARCHAR</code> フィールドでなければならない。</p></li>
-<li><p>すべての行の値は、<code translate="no">analyzers</code> にリストされている分析器名(またはエイリアス)のいずれかと正確に一致する必要がある。</p></li>
+<li><p>すべての行の値は、<code translate="no">analyzers</code> に列挙されているアナライザ名(またはエイリアス)のいずれかと正確に一致する必要がある。</p></li>
 <li><p>行の値が見つからない場合、Milvusは自動的に<code translate="no">default</code> アナライザを適用します。</p></li>
 </ul></td>
    </tr>
@@ -241,7 +241,22 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
         ></path>
       </svg>
     </button></h2><p>多言語をサポートするコレクションを作成するには、特定のフィールドとインデックスを設定する必要があります：</p>
-<h3 id="Add-fields" class="common-anchor-header">フィールドの追加</h3><p>このステップでは、4つの必須フィールドを持つコレクションスキーマを定義します：</p>
+<h3 id="Add-fields" class="common-anchor-header">フィールドの追加<button data-href="#Add-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>このステップでは、4つの必須フィールドを持つコレクションスキーマを定義します：</p>
 <ul>
 <li><p><strong>主キーフィールド</strong>(<code translate="no">id</code>)：コレクション内の各エンティティの一意な識別子。<code translate="no">auto_id=True</code> を設定すると、milvusがこれらのIDを自動的に生成します。</p></li>
 <li><p><strong>言語インジケータフィールド</strong>(<code translate="no">language</code>)：この VARCHAR フィールドは、<code translate="no">multi_analyzer_params</code> で指定された<code translate="no">by_field</code> に対応します。各エンティティの言語識別子が格納され、Milvusにどのアナライザを使用するかを伝えます。</p></li>
@@ -449,7 +464,22 @@ schema.WithField(entity.NewField().
   &quot;dataType&quot;: &quot;SparseFloatVector&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-BM25-function" class="common-anchor-header">BM25関数の定義</h3><p>生のテキストデータからスパースベクトル表現を生成するBM25関数を定義します：</p>
+<h3 id="Define-BM25-function" class="common-anchor-header">BM25関数の定義<button data-href="#Define-BM25-function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>生のテキストデータからスパースベクトル表現を生成するBM25関数を定義します：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create the BM25 function</span>
@@ -510,7 +540,22 @@ schema.WithFunction(function.WithName(<span class="hljs-string">&quot;text_to_ve
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>この関数は、言語識別子に基づいて、各テキスト項目に適切なアナライザを自動的に適用します。BM25 ベースのテキスト検索の詳細については、「<a href="/docs/ja/full-text-search.md">全文検索</a>」を参照してください。</p>
-<h3 id="Configure-index-params" class="common-anchor-header">インデックス・パラメータの構成</h3><p>効率的な検索を可能にするために、疎なベクトル・フィールドにインデックスを作成します：</p>
+<h3 id="Configure-index-params" class="common-anchor-header">インデックス・パラメータの構成<button data-href="#Configure-index-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>効率的な検索を可能にするために、疎なベクトル・フィールドにインデックスを作成します：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Configure index parameters</span>
@@ -550,7 +595,22 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>インデックスは、効率的な BM25 類似性計算のためにスパース・ベクトルを整理することで、検索パフォーマンスを向上させます。</p>
-<h3 id="Create-the-collection" class="common-anchor-header">コレクションの作成</h3><p>この最後の作成ステップでは、これまでのすべての設定をまとめます：</p>
+<h3 id="Create-the-collection" class="common-anchor-header">コレクションの作成<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>この最後の作成ステップでは、これまでのすべての設定をまとめます：</p>
 <ul>
 <li><p><code translate="no">collection_name=&quot;multilang_demo&quot;</code> コレクションに名前を付けます。</p></li>
 <li><p><code translate="no">schema=schema</code> 定義したフィールド構造と機能を適用します。</p></li>
@@ -798,7 +858,22 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Use-English-analyzer" class="common-anchor-header">英語の解析器を使用する</h3><p>多言語分析器を使用して検索を行う場合、<code translate="no">search_params</code> は重要な設定を含んでいます：</p>
+    </button></h2><h3 id="Use-English-analyzer" class="common-anchor-header">英語の解析器を使用する<button data-href="#Use-English-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>多言語分析器を使用して検索を行う場合、<code translate="no">search_params</code> は重要な設定を含んでいます：</p>
 <ul>
 <li><p><code translate="no">metric_type=&quot;BM25&quot;</code> は、インデックスの設定と一致していなければなりません。</p></li>
 <li><p><code translate="no">analyzer_name=&quot;english&quot;</code> は、クエリ・テキストに適用する分析器を指定します。これは、保存された文書に使用される解析器とは無関係です。</p></li>
@@ -923,7 +998,22 @@ curl --request POST \
   &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-Chinese-analyzer" class="common-anchor-header">中国語アナライザを使用する</h3><p>この例では、異なるクエリ・テキストに対して、中国語アナライザ（そのエイリアス<code translate="no">&quot;cn&quot;</code> を使用）に切り替えることを示します。他のパラメータはすべて同じですが、中国語固有のトークン化ルールを使用してクエリ・テキストが処理されます。</p>
+<h3 id="Use-Chinese-analyzer" class="common-anchor-header">中国語アナライザを使う<button data-href="#Use-Chinese-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>この例では、異なるクエリ・テキストに対して、中国語アナライザ（そのエイリアス<code translate="no">&quot;cn&quot;</code> を使用）に切り替えることを示します。他のパラメータはすべて同じですが、中国語固有のトークン化ルールを使用してクエリ・テキストが処理されます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params[<span class="hljs-string">&quot;analyzer_name&quot;</span>] = <span class="hljs-string">&quot;cn&quot;</span>

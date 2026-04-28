@@ -36,8 +36,8 @@ title: MCP + Milvus：连接人工智能与向量数据库
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>模型上下文协议（MCP）</strong>是一种开放式协议，可使人工智能应用程序（如 Claude 和 Cursor）与外部数据源和工具进行无缝交互。无论您是要构建自定义 AI 应用程序、集成 AI 工作流，还是要增强聊天界面，MCP 都能提供一种标准化的方式，将大型语言模型 (LLM) 与相关上下文数据连接起来。</p>
-<p>本教程将指导您<strong>为 Milvus 设置 MCP 服务器</strong>，让人工智能应用能够使用<strong>自然语言命令</strong>执行向量搜索、管理 Collections 和检索数据，<strong>而无需</strong>编写自定义数据库查询。</p>
+    </button></h2><p><strong>模型上下文协议（MCP）</strong>是一种开放式协议，可使人工智能应用程序（如 Claude 和 Cursor）与外部数据源和工具进行无缝交互。无论您是要构建自定义 AI 应用程序、集成 AI 工作流，还是要增强聊天界面，MCP 都提供了一种将大型语言模型 (LLM) 与相关上下文数据连接起来的标准化方法。</p>
+<p>本教程将指导您<strong>为 Milvus 设置 MCP 服务器</strong>，使人工智能应用能够使用<strong>自然语言命令</strong>执行向量搜索、管理 Collections 和检索数据，<strong>而无需</strong>编写自定义数据库查询。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -160,7 +160,22 @@ title: MCP + Milvus：连接人工智能与向量数据库
         ></path>
       </svg>
     </button></h2><p><a href="https://docs.cursor.com/context/model-context-protocol">Cursor</a>还通过 Composer 中的 Agents 功能支持 MCP 工具。您可以通过两种方式将 Milvus MCP 服务器添加到 Cursor：</p>
-<h3 id="Option-1-Using-Cursor-Settings-UI" class="common-anchor-header">选项 1：使用 Cursor 设置用户界面</h3><ol>
+<h3 id="Option-1-Using-Cursor-Settings-UI" class="common-anchor-header">选项 1：使用 Cursor 设置用户界面<button data-href="#Option-1-Using-Cursor-Settings-UI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>打开<code translate="no">Cursor Settings</code> →<code translate="no">Features</code> →<code translate="no">MCP</code> 。</li>
 <li>单击<code translate="no">+ Add New MCP Server</code> 。</li>
 <li>填写：<ul>
@@ -171,7 +186,22 @@ title: MCP + Milvus：连接人工智能与向量数据库
 <li>⚠️ 提示：使用<code translate="no">127.0.0.1</code> 而不是<code translate="no">localhost</code> ，以避免潜在的 DNS 解析问题。</li>
 </ul></li>
 </ol>
-<h3 id="Option-2-Using-Project-specific-Configuration-Recommended" class="common-anchor-header">选项 2：使用特定于项目的配置（推荐）</h3><ol>
+<h3 id="Option-2-Using-Project-specific-Configuration-Recommended" class="common-anchor-header">选项 2：使用特定于项目的配置（推荐）<button data-href="#Option-2-Using-Project-specific-Configuration-Recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>在<strong>项目根目录</strong>下创建<code translate="no">.cursor/mcp.json</code> 文件：</li>
 </ol>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
@@ -210,7 +240,22 @@ title: MCP + Milvus：连接人工智能与向量数据库
         ></path>
       </svg>
     </button></h2><p>确保 MCP 服务器设置正确：</p>
-<h3 id="For-Cursor" class="common-anchor-header">对于光标</h3><ol>
+<h3 id="For-Cursor" class="common-anchor-header">对于光标<button data-href="#For-Cursor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>转到<code translate="no">Cursor Settings</code> →<code translate="no">Features</code> →<code translate="no">MCP</code> 。</li>
 <li>确认<code translate="no">&quot;Milvus&quot;</code> 出现在 MCP 服务器列表中。</li>
 <li>检查是否列出了 Milvus 工具（如<code translate="no">milvus_list_collections</code>,<code translate="no">milvus_vector_search</code> ）。</li>
@@ -232,7 +277,22 @@ title: MCP + Milvus：连接人工智能与向量数据库
         ></path>
       </svg>
     </button></h2><p>该 MCP 服务器提供多种工具，用于<strong>搜索、查询和管理 Milvus 中的向量数据</strong>。有关详细信息，请参阅<a href="https://github.com/zilliztech/mcp-server-milvus">mcp-server-milvus</a>文档。</p>
-<h3 id="🔍-Search-and-Query-Tools" class="common-anchor-header">搜索和查询工具</h3><ul>
+<h3 id="🔍-Search-and-Query-Tools" class="common-anchor-header">搜索和查询工具<button data-href="#🔍-Search-and-Query-Tools" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-text-search</code></strong>→ 使用全文检索搜索文档。</li>
 <li><strong><code translate="no">milvus-vector-search</code></strong>→ 在 Collections 上执行向量相似性搜索。</li>
 <li><strong><code translate="no">milvus-hybrid-search</code></strong>→ 结合向量相似性和属性过滤执行混合搜索。</li>
@@ -240,24 +300,69 @@ title: MCP + Milvus：连接人工智能与向量数据库
 <li><strong><code translate="no">milvus-query</code></strong>→ 使用过滤表达式查询 Collections。</li>
 <li><strong><code translate="no">milvus-count</code></strong>→ 对集合中的实体进行计数。</li>
 </ul>
-<h3 id="📁-Collection-Management" class="common-anchor-header">📁 Collections 管理</h3><ul>
+<h3 id="📁-Collection-Management" class="common-anchor-header">📁 Collections 管理<button data-href="#📁-Collection-Management" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-list-collections</code></strong>→ 列出数据库中的所有 Collections。</li>
 <li><strong><code translate="no">milvus-collection-info</code></strong>→ 获取有关某个 Collection 的详细信息。</li>
-<li><strong><code translate="no">milvus-get-collection-stats</code></strong>→ 获取有关 Collections 的统计数据。</li>
+<li><strong><code translate="no">milvus-get-collection-stats</code></strong>→ 获取有关 Collections 的统计信息。</li>
 <li><strong><code translate="no">milvus-create-collection</code></strong>→ 使用指定的 Schema 创建新 Collection。</li>
 <li><strong><code translate="no">milvus-load-collection</code></strong>→ 将 Collections 加载到内存中，以便搜索和查询。</li>
 <li><strong><code translate="no">milvus-release-collection</code></strong>→ 从内存中释放一个 Collection。</li>
 <li><strong><code translate="no">milvus-get-query-segment-info</code></strong>→ 获取有关查询段的信息。</li>
 <li><strong><code translate="no">milvus-get-collection-loading-progress</code></strong>→ 获取 Collections 的加载进度。</li>
 </ul>
-<h3 id="📊-Data-Operations" class="common-anchor-header">数据操作符</h3><ul>
+<h3 id="📊-Data-Operations" class="common-anchor-header">数据操作符<button data-href="#📊-Data-Operations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-insert-data</code></strong>→ 将数据插入 Collections。</li>
 <li><strong><code translate="no">milvus-bulk-insert</code></strong>→ 分批插入数据以提高性能。</li>
 <li><strong><code translate="no">milvus-upsert-data</code></strong>→ 向上插入数据到 Collections 中（如果存在，则插入或更新）。</li>
 <li><strong><code translate="no">milvus-delete-entities</code></strong>→ 根据过滤表达式从 Collections 中删除实体。</li>
 <li><strong><code translate="no">milvus-create-dynamic-field</code></strong>→ 向现有 Collections 添加动态字段。</li>
 </ul>
-<h3 id="⚙️-Index-Management" class="common-anchor-header">⚙️ 索引管理</h3><ul>
+<h3 id="⚙️-Index-Management" class="common-anchor-header">⚙️ 索引管理<button data-href="#⚙️-Index-Management" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-create-index</code></strong>→ 在向量字段上创建索引。</li>
 <li><strong><code translate="no">milvus-get-index-info</code></strong>→ 获取集合中的索引信息。</li>
 </ul>
@@ -314,7 +419,22 @@ title: MCP + Milvus：连接人工智能与向量数据库
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">使用克劳德桌面</h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">示例 1：列出 Collection</h4><pre><code translate="no">What are the collections <span class="hljs-selector-tag">I</span> have in my Milvus DB?
+    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">使用克劳德桌面<button data-href="#Using-Claude-Desktop" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">示例 1：列出 Collection</h4><pre><code translate="no">What are the collections <span class="hljs-selector-tag">I</span> have in my Milvus DB?
 <button class="copy-code-btn"></button></code></pre>
 <p>Claude 将使用 MCP 在我们的 Milvus DB 上检查这些信息。</p>
 <pre><code translate="no">I<span class="hljs-comment">&#x27;ll check what collections are available in your Milvus database.</span>
@@ -341,7 +461,22 @@ Here are the collections <span class="hljs-keyword">in</span> your Milvus databa
 Here are the documents I found that mention machine learning:
 [Results will appear here based <span class="hljs-keyword">on</span> your actual data]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Using-Cursor" class="common-anchor-header">使用光标</h3><h4 id="Example-Creating-a-Collection" class="common-anchor-header">示例：创建 Collections</h4><p>在 Cursor 的 Composer 中，你可以询问：</p>
+<h3 id="Using-Cursor" class="common-anchor-header">使用光标<button data-href="#Using-Cursor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-Creating-a-Collection" class="common-anchor-header">示例：创建 Collections</h4><p>在 Cursor 的 Composer 中，你可以询问：</p>
 <pre><code translate="no">Create a <span class="hljs-keyword">new</span> collection called <span class="hljs-string">&#x27;articles&#x27;</span> <span class="hljs-function"><span class="hljs-keyword">in</span> Milvus <span class="hljs-keyword">with</span> fields <span class="hljs-keyword">for</span> <span class="hljs-title">title</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-title">content</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-keyword">and</span> a vector <span class="hljs-title">field</span> (<span class="hljs-params"><span class="hljs-number">128</span> dimensions</span>)
 </span><button class="copy-code-btn"></button></code></pre>
 <p>Cursor 将使用 MCP 服务器执行此操作：</p>
@@ -369,7 +504,22 @@ Collection <span class="hljs-comment">&#x27;articles&#x27; has been created succ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Common-Issues" class="common-anchor-header">常见问题</h3><h4 id="Connection-Errors" class="common-anchor-header">连接错误</h4><p>如果看到类似 "连接 Milvus 服务器失败 "的错误：</p>
+    </button></h2><h3 id="Common-Issues" class="common-anchor-header">常见问题<button data-href="#Common-Issues" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Connection-Errors" class="common-anchor-header">连接错误</h4><p>如果看到类似 "连接 Milvus 服务器失败 "的错误：</p>
 <ol>
 <li>验证你的 Milvus 实例是否正在运行：<code translate="no">docker ps</code> （如果使用 Docker）</li>
 <li>检查配置中的 URI 是否正确</li>
@@ -389,7 +539,22 @@ Collection <span class="hljs-comment">&#x27;articles&#x27; has been created succ
 <li>确认 MCP 服务器运行正常</li>
 <li>按下 MCP 设置中的刷新按钮（适用于 Cursor）</li>
 </ol>
-<h3 id="Getting-Help" class="common-anchor-header">获取帮助</h3><p>如果您继续遇到问题：</p>
+<h3 id="Getting-Help" class="common-anchor-header">获取帮助<button data-href="#Getting-Help" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果您继续遇到问题：</p>
 <ol>
 <li>查看<a href="https://github.com/zilliztech/mcp-server-milvus/issues">GitHub Issues</a>中的类似问题</li>
 <li>加入<a href="https://discord.gg/zilliz">Zilliz 社区 Discord</a>寻求支持</li>

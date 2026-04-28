@@ -6,10 +6,9 @@ summary: >-
   capacités de recherche de texte de Milvus en automatisant le processus
   d'analyse linguistique. Sa fonction principale est de détecter la langue d'un
   champ de texte, puis d'appliquer dynamiquement un analyseur préconfiguré qui
-  convient le mieux à cette langue. Cette fonction est particulièrement
-  précieuse pour les applications qui traitent une variété de langues, car elle
-  élimine la nécessité d'une affectation manuelle de la langue pour chaque
-  entrée.
+  convient le mieux à cette langue. Cette fonction est particulièrement utile
+  pour les applications qui traitent une variété de langues, car elle élimine la
+  nécessité d'une affectation manuelle de la langue pour chaque entrée.
 beta: Milvus v2.5.15+
 ---
 <h1 id="Language-Identifier" class="common-anchor-header">Identificateur de langue<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.5.15+</span><button data-href="#Language-Identifier" class="anchor-icon" translate="no">
@@ -47,14 +46,14 @@ beta: Milvus v2.5.15+
     </button></h2><p>Le site <code translate="no">language_identifier</code> exécute une série d'étapes pour traiter une chaîne de texte, un flux de travail qui est essentiel pour que les utilisateurs comprennent comment le configurer correctement.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
    </span> <span class="img-wrapper"> <span>Flux de travail de la détection de la langue</span> </span></p>
 <ol>
 <li><p><strong>Entrée :</strong> Le flux de travail commence par une chaîne de texte en entrée.</p></li>
 <li><p><strong>Détection de la langue :</strong> Cette chaîne est d'abord transmise à un moteur de détection de la langue, qui tente d'identifier la langue. Milvus prend en charge deux moteurs : <strong>whatlang</strong> et <strong>lingua</strong>.</p></li>
 <li><p><strong>Sélection de l'analyseur :</strong></p>
 <ul>
-<li><p><strong>Succès :</strong> Si la langue est détectée avec succès, le système vérifie si le nom de la langue détectée a un analyseur correspondant configuré dans votre dictionnaire <code translate="no">analyzers</code>. Si une correspondance est trouvée, le système applique l'analyseur spécifié au texte d'entrée. Par exemple, un texte détecté en "mandarin" serait acheminé vers un tokenizer <code translate="no">jieba</code>.</p></li>
+<li><p><strong>Succès :</strong> Si la langue est détectée avec succès, le système vérifie si le nom de la langue détectée a un analyseur correspondant configuré dans votre dictionnaire <code translate="no">analyzers</code>. Si une correspondance est trouvée, le système applique l'analyseur spécifié au texte d'entrée. Par exemple, un texte détecté en "mandarin" sera acheminé vers un tokenizer <code translate="no">jieba</code>.</p></li>
 <li><p><strong>Repli :</strong> Si la détection échoue, ou si une langue est détectée avec succès mais que vous n'avez pas fourni d'analyseur spécifique, le système utilise un <strong>analyseur par défaut</strong> préconfiguré. Il s'agit là d'un point de clarification crucial : l'analyseur <code translate="no">default</code> est une solution de repli à la fois en cas d'échec de la détection et en l'absence d'analyseur correspondant.</p></li>
 </ul></li>
 </ol>
@@ -136,7 +135,7 @@ beta: Milvus v2.5.15+
         ></path>
       </svg>
     </button></h3><p>L'essentiel de la configuration de <code translate="no">language_identifier</code> consiste à adapter vos analyseurs aux langues spécifiques que vous envisagez de prendre en charge. Le système fonctionne en associant la langue détectée à l'analyseur approprié, cette étape est donc cruciale pour un traitement précis du texte.</p>
-<p>Vous trouverez ci-dessous une correspondance recommandée entre les langues et les analyseurs Milvus appropriés. Ce tableau sert de passerelle entre la sortie du moteur de détection de la langue et l'outil le mieux adapté.</p>
+<p>Vous trouverez ci-dessous une correspondance recommandée entre les langues et les analyseurs Milvus appropriés. Ce tableau sert de passerelle entre la sortie du moteur de détection de la langue et l'outil le mieux adapté à la tâche.</p>
 <table>
    <tr>
      <th><p>Langue (sortie du détecteur)</p></th>

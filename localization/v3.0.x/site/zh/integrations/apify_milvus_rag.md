@@ -130,7 +130,7 @@ Enter YOUR MILVUS_TOKEN··········
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>接下来，我们将在 Apify Python SDK 中使用网站内容抓取器。我们先定义 actor_id 和 run_input，然后指定要保存到向量数据库的信息。</p>
+    </button></h2><p>接下来，我们将在 Apify Python SDK 中使用网站内容爬虫。我们先定义 actor_id 和 run_input，然后指定要保存到向量数据库的信息。</p>
 <p><code translate="no">actor_id=&quot;apify/website-content-crawler&quot;</code> 是网站内容爬虫的标识符。爬虫的行为可以通过 run_input 参数完全控制（详情请查看<a href="https://apify.com/apify/website-content-crawler/input-schema">输入页面</a>）。在本例中，我们将抓取不需要 JavaScript 渲染的 Milvus 文档。因此，我们设置<code translate="no">crawlerType=cheerio</code> ，定义<code translate="no">startUrls</code> ，并通过设置<code translate="no">maxCrawlPages=10</code> 来限制抓取页面的数量。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> apify_client <span class="hljs-keyword">import</span> ApifyClient
 
@@ -145,7 +145,7 @@ run_input = {
 
 actor_call = client.actor(actor_id).call(run_input=run_input)
 <button class="copy-code-btn"></button></code></pre>
-<p>网站内容抓取程序将彻底抓取网站，直到达到<code translate="no">maxCrawlPages</code> 预先设定的限制。抓取的数据将存储在 Apify 平台的<code translate="no">Dataset</code> 中。要访问和分析这些数据，可以使用<code translate="no">defaultDatasetId</code></p>
+<p>网站内容抓取程序将彻底抓取网站，直到达到<code translate="no">maxCrawlPages</code> 所设定的预定义限制。抓取的数据将存储在 Apify 平台的<code translate="no">Dataset</code> 中。要访问和分析这些数据，可以使用<code translate="no">defaultDatasetId</code></p>
 <pre><code translate="no" class="language-python">dataset_id = actor_call[<span class="hljs-string">&quot;defaultDatasetId&quot;</span>]
 dataset_id
 <button class="copy-code-btn"></button></code></pre>

@@ -26,7 +26,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Reciprocal Rank Fusion (RRF) Ranker ist eine Reranking-Strategie für die Milvus-Hybridsuche, die die Ergebnisse aus mehreren Vektorsuchpfaden auf der Grundlage ihrer Rangpositionen und nicht ihrer rohen Ähnlichkeitswerte ausgleicht. Wie bei einem Sportturnier, bei dem die Rangfolge der Spieler und nicht die individuellen Statistiken berücksichtigt werden, kombiniert RRF Ranker die Suchergebnisse auf der Grundlage der Rangfolge der einzelnen Elemente in den verschiedenen Suchpfaden und erstellt so eine faire und ausgewogene endgültige Rangfolge.</p>
+    </button></h1><p>Reciprocal Rank Fusion (RRF) Ranker ist eine Reranking-Strategie für die Milvus-Hybridsuche, die Ergebnisse aus mehreren Vektorsuchpfaden auf der Grundlage ihrer Rangpositionen und nicht ihrer rohen Ähnlichkeitswerte ausbalanciert. Wie bei einem Sportturnier, bei dem die Rangfolge der Spieler und nicht die individuellen Statistiken berücksichtigt werden, kombiniert RRF Ranker die Suchergebnisse auf der Grundlage der Rangfolge der einzelnen Elemente in den verschiedenen Suchpfaden und erstellt so eine faire und ausgewogene endgültige Rangfolge.</p>
 <h2 id="When-to-use-RRF-Ranker" class="common-anchor-header">Wann sollte RRF Ranker verwendet werden?<button data-href="#When-to-use-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -70,7 +70,7 @@ summary: >-
      <td><p>Erzeugt konsensfähige Rankings, wenn verschiedene Systeme unvergleichbare Bewertungsmethoden verwenden</p></td>
    </tr>
 </table>
-<p>Wenn Ihre hybride Suchanwendung einen demokratischen Ausgleich mehrerer Suchpfade erfordert, ohne explizite Gewichtungen zu vergeben, ist RRF Ranker die ideale Wahl.</p>
+<p>Wenn Ihre hybride Suchanwendung eine demokratische Abwägung mehrerer Suchpfade erfordert, ohne explizite Gewichtungen zu vergeben, ist RRF Ranker die ideale Wahl.</p>
 <h2 id="Mechanism-of-RRF-Ranker" class="common-anchor-header">Mechanismus des RRF Ranker<button data-href="#Mechanism-of-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,7 +90,7 @@ summary: >-
 <ol>
 <li><p><strong>Sammeln von Suchrankings</strong>: Sammeln der Rangfolgen der Ergebnisse aus jedem Pfad der Vektorsuche (Rang_1, Rang_2).</p></li>
 <li><p><strong>Ranglisten zusammenführen</strong>: Konvertieren Sie die Rankings aus jedem Pfad (rank_rrf_1, rank_rrf_2) gemäß einer Formel.</p>
-<p>Die Berechnungsformel beinhaltet <em>N</em>, das die Anzahl der Abrufe darstellt. <em>ranki</em><em>(d</em>) ist die Rangposition des Dokuments <em>d</em>, die vom <em>i(ten)</em> Abrufer erzeugt wurde. <em>k</em> ist ein Glättungsparameter, der normalerweise auf 60 gesetzt wird.</p></li>
+<p>Die Berechnungsformel beinhaltet <em>N</em>, das die Anzahl der Abrufe darstellt. <em>ranki</em><em>(d</em>) ist die Rangposition des Dokuments <em>d</em>, die vom <em>i(ten)</em> Retriever erzeugt wurde. <em>k</em> ist ein Glättungsparameter, der normalerweise auf 60 gesetzt wird.</p></li>
 <li><p><strong>Aggregierte Rankings</strong>: Neueinstufung der Suchergebnisse auf der Grundlage der kombinierten Rankings, um die endgültigen Ergebnisse zu erhalten.</p></li>
 </ol>
 <p>
@@ -357,7 +357,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Der Typ der aufzurufenden Funktion; verwenden Sie <code translate="no">RERANK</code>, um eine Ranglistenstrategie anzugeben.</p></td>
+     <td><p>Der Typ der aufzurufenden Funktion; verwenden Sie <code translate="no">RERANK</code>, um eine Rangordnungsstrategie anzugeben.</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>

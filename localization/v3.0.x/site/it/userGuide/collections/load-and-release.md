@@ -3,7 +3,7 @@ id: load-and-release.md
 title: Caricare e rilasciare
 summary: >-
   Il caricamento di una raccolta è il prerequisito per eseguire ricerche di
-  somiglianza e query nelle raccolte. Questa pagina si concentra sulle procedure
+  similarità e query nelle raccolte. Questa pagina si concentra sulle procedure
   di caricamento e rilascio di una raccolta.
 ---
 <h1 id="Load--Release" class="common-anchor-header">Caricare e rilasciare<button data-href="#Load--Release" class="anchor-icon" translate="no">
@@ -215,7 +215,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus può caricare solo i campi coinvolti nelle ricerche e nelle query, riducendo l'uso della memoria e migliorando le prestazioni della ricerca.</p>
+    </button></h2><p>Milvus può caricare solo i campi coinvolti nelle ricerche e nelle query, riducendo l'utilizzo della memoria e migliorando le prestazioni della ricerca.</p>
 <div class="alert note">
 <p>Il caricamento parziale delle collezioni è attualmente in fase beta e non è consigliato per l'uso in produzione.</p>
 </div>
@@ -295,7 +295,7 @@ Not support yet
 <p>Se si sceglie di caricare campi specifici, è bene notare che solo i campi inclusi in <code translate="no">load_fields</code> possono essere usati come filtri e campi di output nelle ricerche e nelle query. Si dovrebbero sempre includere i nomi del campo primario e di almeno un campo vettore in <code translate="no">load_fields</code>.</p>
 <p>È possibile utilizzare <code translate="no">skip_load_dynamic_field</code> anche per determinare se caricare il campo dinamico. Il campo dinamico è un campo JSON riservato, chiamato <strong>$meta</strong>, che salva tutti i campi non definiti dallo schema e i loro valori in coppie chiave-valore. Quando si carica il campo dinamico, tutte le chiavi dei campi sono caricate e disponibili per il filtraggio e l'output. Se tutte le chiavi del campo dinamico non sono coinvolte nel filtraggio e nell'output dei metadati, impostare <code translate="no">skip_load_dynamic_field</code> su <code translate="no">True</code>.</p>
 <p>Per caricare altri campi dopo il caricamento della raccolta, è necessario rilasciare prima la raccolta per evitare possibili errori dovuti alle modifiche dell'indice.</p>
-<h2 id="Release-Collection" class="common-anchor-header">Rilascio della raccolta<button data-href="#Release-Collection" class="anchor-icon" translate="no">
+<h2 id="Release-Collection" class="common-anchor-header">Rilasciare la raccolta<button data-href="#Release-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

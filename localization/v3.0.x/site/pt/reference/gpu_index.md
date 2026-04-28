@@ -23,7 +23,7 @@ title: Índice GPU
 <p>É importante observar que o uso de um índice de GPU pode não reduzir necessariamente a latência em comparação com o uso de um índice de CPU. Se você quiser maximizar totalmente a taxa de transferência, precisará de uma pressão de solicitação extremamente alta ou de um grande número de vetores de consulta.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
    </span> <span class="img-wrapper"> <span>desempenho</span> </span></p>
 <p>O suporte GPU do Milvus é contribuído pela equipa Nvidia <a href="https://rapids.ai/">RAPIDS</a>. A seguir estão os tipos de índices GPU atualmente suportados pelo Milvus.</p>
 <h2 id="GPUCAGRA" class="common-anchor-header">GPU_CAGRA<button data-href="#GPUCAGRA" class="anchor-icon" translate="no">
@@ -52,8 +52,8 @@ title: Índice GPU
 <tr><td><code translate="no">intermediate_graph_degree</code></td><td>Afecta a recuperação e o tempo de construção ao determinar o grau do gráfico antes da poda. Os valores recomendados são <code translate="no">32</code> ou <code translate="no">64</code>.</td><td><code translate="no">128</code></td></tr>
 <tr><td><code translate="no">graph_degree</code></td><td>Afeta o desempenho da pesquisa e a recuperação ao definir o grau do gráfico após a poda. Uma diferença maior entre esses dois graus resulta em um tempo de construção mais longo. O seu valor tem de ser inferior ao valor de <strong>intermediate_graph_degree</strong>.</td><td><code translate="no">64</code></td></tr>
 <tr><td><code translate="no">build_algo</code></td><td>Seleciona o algoritmo de geração do grafo antes da poda. Valores possíveis:</br><code translate="no">IVF_PQ</code>: Oferece uma qualidade superior mas um tempo de construção mais lento.</br> <code translate="no">NN_DESCENT</code> Oferece uma construção mais rápida com uma recuperação potencialmente inferior.</td><td><code translate="no">IVF_PQ</code></td></tr>
-<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decide se o conjunto de dados original deve ser armazenado em cache na memória da GPU. Valores possíveis:</br><code translate="no">“true”</code>: Armazena em cache o conjunto de dados original para melhorar a recuperação ao refinar os resultados da pesquisa.</br> <code translate="no">“false”</code> Valores possíveis: : Não armazena em cache o conjunto de dados original para economizar memória da GPU.</td><td><code translate="no">“false”</code></td></tr>
-<tr><td><code translate="no">adapt_for_cpu</code></td><td>Decide se a GPU deve ser usada para construção de índice e a CPU para pesquisa. <br/>A definição deste parâmetro para <code translate="no">true</code> requer a presença do parâmetro <code translate="no">ef</code> nos pedidos de pesquisa.</td><td><code translate="no">“false”</code></td></tr>
+<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decide se o conjunto de dados original deve ser armazenado em cache na memória da GPU. Valores possíveis:</br><code translate="no">“true”</code>: Armazena em cache o conjunto de dados original para melhorar a recuperação, refinando os resultados da pesquisa.</br> <code translate="no">“false”</code> Valores possíveis: : Não armazena em cache o conjunto de dados original para economizar memória da GPU.</td><td><code translate="no">“false”</code></td></tr>
+<tr><td><code translate="no">adapt_for_cpu</code></td><td>Decide se a GPU deve ser usada para construção de índice e a CPU para pesquisa. <br/>Definir este parâmetro para <code translate="no">true</code> requer a presença do parâmetro <code translate="no">ef</code> nos pedidos de pesquisa.</td><td><code translate="no">“false”</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -155,11 +155,11 @@ title: Índice GPU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">PQ</code> (Product Quantization) decompõe uniformemente o espaço vetorial de alta dimensão original em produtos cartesianos de <code translate="no">m</code> espaços vetoriais de baixa dimensão e, em seguida, quantifica os espaços vetoriais de baixa dimensão decompostos. Em vez de calcular as distâncias entre o vetor-alvo e o centro de todas as unidades, a quantização do produto permite o cálculo das distâncias entre o vetor-alvo e o centro de agrupamento de cada espaço de baixa dimensão e reduz consideravelmente a complexidade temporal e espacial do algoritmo.</p>
-<p>O IVF_PQ efectua o agrupamento de índices IVF antes de quantificar o produto de vectores. O seu ficheiro de índice é ainda mais pequeno do que o IVF_SQ8, mas também causa uma perda de precisão durante a pesquisa de vectores.</p>
+    </button></h2><p><code translate="no">PQ</code> (Quantização de produto) decompõe uniformemente o espaço vetorial de alta dimensão original em produtos cartesianos de <code translate="no">m</code> espaços vetoriais de baixa dimensão e, em seguida, quantifica os espaços vetoriais de baixa dimensão decompostos. Em vez de calcular as distâncias entre o vetor-alvo e o centro de todas as unidades, a quantização do produto permite o cálculo das distâncias entre o vetor-alvo e o centro de agrupamento de cada espaço de baixa dimensão e reduz consideravelmente a complexidade temporal e espacial do algoritmo.</p>
+<p>O IVF_PQ executa o agrupamento de índices IVF antes de quantificar o produto de vectores. O seu ficheiro de índice é ainda mais pequeno do que o IVF_SQ8, mas também causa uma perda de precisão durante a pesquisa de vectores.</p>
 <div class="alert note">
 <p>Os parâmetros de construção do índice e os parâmetros de pesquisa variam consoante a distribuição Milvus. Selecione primeiro a sua distribuição Milvus.</p>
-<p>Ao efetuar pesquisas, tenha em atenção que pode definir o top-K até 8192 para qualquer pesquisa numa coleção indexada por GPU_IVF_FLAT.</p>
+<p>Ao efetuar pesquisas, note que pode definir o top-K até 8192 para qualquer pesquisa numa coleção indexada por GPU_IVF_FLAT.</p>
 </div>
 <ul>
 <li><p>Parâmetros de construção de índices</p>

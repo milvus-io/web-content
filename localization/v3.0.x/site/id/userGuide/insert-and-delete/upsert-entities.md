@@ -139,7 +139,7 @@ summary: >-
 <li><p>Koleksi target harus dimuat dan tersedia untuk kueri.</p></li>
 <li><p>Semua bidang yang ditentukan dalam permintaan harus ada dalam skema koleksi target.</p></li>
 <li><p>Nilai semua field yang ditentukan dalam permintaan harus sesuai dengan tipe data yang ditentukan dalam skema.</p></li>
-<li><p>Untuk setiap field yang diturunkan dari fungsi lain yang menggunakan fungsi, Milvus akan menghapus field turunan selama upsert untuk memungkinkan penghitungan ulang.</p></li>
+<li><p>Untuk setiap field yang berasal dari fungsi lain yang menggunakan fungsi, Milvus akan menghapus field turunan selama upsert untuk memungkinkan penghitungan ulang.</p></li>
 </ul>
 <h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">Meng-upsert entitas-entitas dalam sebuah koleksi<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"

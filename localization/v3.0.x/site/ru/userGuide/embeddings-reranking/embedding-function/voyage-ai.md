@@ -61,7 +61,7 @@ beta: Milvus 2.6.x
      <td><p>voyage-3-lite</p></td>
      <td><p>512</p></td>
      <td><p>32,000</p></td>
-     <td><p>Оптимизирована по задержке и стоимости. Подробности см. в <a href="https://blog.voyageai.com/2024/09/18/voyage-3/">блоге</a>.</p></td>
+     <td><p>Оптимизирована по задержкам и стоимости. Подробности см. в <a href="https://blog.voyageai.com/2024/09/18/voyage-3/">блоге</a>.</p></td>
    </tr>
    <tr>
      <td><p>voyage-code-3</p></td>

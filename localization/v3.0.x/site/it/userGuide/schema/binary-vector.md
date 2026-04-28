@@ -29,7 +29,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>I vettori binari sono una forma speciale di rappresentazione dei dati che converte i tradizionali vettori in virgola mobile ad alta dimensione in vettori binari contenenti solo 0 e 1. Questa trasformazione non solo comprime le dimensioni del vettore, ma riduce anche i costi di archiviazione e di calcolo, mantenendo le informazioni semantiche. Questa trasformazione non solo comprime le dimensioni del vettore, ma riduce anche i costi di archiviazione e di calcolo, mantenendo le informazioni semantiche. Quando la precisione per le caratteristiche non critiche non è essenziale, i vettori binari possono effettivamente mantenere la maggior parte dell'integrità e dell'utilità dei vettori originali in virgola mobile.</p>
-<p>I vettori binari hanno un'ampia gamma di applicazioni, in particolare in situazioni in cui l'efficienza computazionale e l'ottimizzazione della memorizzazione sono fondamentali. Nei sistemi di intelligenza artificiale su larga scala, come i motori di ricerca o i sistemi di raccomandazione, l'elaborazione in tempo reale di enormi quantità di dati è fondamentale. Riducendo le dimensioni dei vettori, i vettori binari aiutano a ridurre la latenza e i costi di calcolo senza sacrificare in modo significativo la precisione. Inoltre, i vettori binari sono utili in ambienti con risorse limitate, come i dispositivi mobili e i sistemi embedded, dove la memoria e la potenza di elaborazione sono limitate. Grazie all'uso dei vettori binari, è possibile implementare complesse funzioni di intelligenza artificiale in questi ambienti limitati, mantenendo alte le prestazioni.</p>
+<p>I vettori binari hanno un'ampia gamma di applicazioni, in particolare in situazioni in cui l'efficienza computazionale e l'ottimizzazione della memorizzazione sono fondamentali. Nei sistemi di intelligenza artificiale su larga scala, come i motori di ricerca o i sistemi di raccomandazione, l'elaborazione in tempo reale di enormi quantità di dati è fondamentale. Riducendo le dimensioni dei vettori, i vettori binari contribuiscono a ridurre la latenza e i costi di calcolo senza sacrificare significativamente la precisione. Inoltre, i vettori binari sono utili in ambienti con risorse limitate, come i dispositivi mobili e i sistemi embedded, dove la memoria e la potenza di elaborazione sono limitate. Grazie all'uso dei vettori binari, è possibile implementare complesse funzioni di intelligenza artificiale in questi ambienti limitati, mantenendo alte le prestazioni.</p>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,7 +49,7 @@ summary: >-
 <p>Il diagramma seguente mostra come i vettori binari rappresentano la presenza di parole chiave nel contenuto del testo. In questo esempio, un vettore binario a 10 dimensioni viene utilizzato per rappresentare due testi diversi<strong>(Testo 1</strong> e <strong>Testo 2</strong>), dove ogni dimensione corrisponde a una parola del vocabolario: 1 indica la presenza della parola nel testo, mentre 0 indica la sua assenza.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
    </span> <span class="img-wrapper"> <span>Vettore binario</span> </span></p>
 <p>I vettori binari hanno le seguenti caratteristiche:</p>
 <ul>
@@ -62,7 +62,7 @@ summary: >-
 <p>Dopo la vettorizzazione binaria, i dati possono essere archiviati in Milvus per la gestione e il recupero dei vettori. Il diagramma seguente mostra il processo di base.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
    </span> <span class="img-wrapper"> <span>Utilizzare il vettore binario</span> </span></p>
 <div class="alert note">
 <p>Sebbene i vettori binari siano eccellenti in scenari specifici, hanno dei limiti nella loro capacità espressiva, rendendo difficile catturare relazioni semantiche complesse. Pertanto, negli scenari reali, i vettori binari sono spesso utilizzati insieme ad altri tipi di vettori per bilanciare efficienza ed espressività. Per ulteriori informazioni, consultare <a href="/docs/it/dense-vector.md">Vettori densi</a> e <a href="/docs/it/sparse_vector.md">vettori sparsi</a>.</p>
@@ -82,7 +82,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Aggiungere un campo vettoriale</h3><p>Per utilizzare i vettori binari in Milvus, occorre innanzitutto definire un campo vettoriale per memorizzare i vettori binari quando si crea una collezione. Questo processo comprende:</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Aggiungere un campo vettoriale<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per utilizzare i vettori binari in Milvus, occorre innanzitutto definire un campo vettoriale per memorizzare i vettori binari quando si crea una collezione. Questo processo comprende:</p>
 <ol>
 <li><p>Impostare <code translate="no">datatype</code> sul tipo di dati vettoriali binari supportati, cioè <code translate="no">BINARY_VECTOR</code>.</p></li>
 <li><p>Specificare le dimensioni del vettore usando il parametro <code translate="no">dim</code>. Si noti che <code translate="no">dim</code> deve essere un multiplo di 8, poiché i vettori binari devono essere convertiti in array di byte al momento dell'inserimento. Ogni 8 valori booleani (0 o 1) saranno impacchettati in 1 byte. Ad esempio, se <code translate="no">dim=128</code>, per l'inserimento è necessario un array di 16 byte.</p></li>
@@ -200,7 +215,22 @@ schema.WithField(entity.NewField().
 
 <button class="copy-code-btn"></button></code></pre>
 <p>In questo esempio, viene aggiunto un campo vettoriale chiamato <code translate="no">binary_vector</code> per memorizzare vettori binari. Il tipo di dati di questo campo è <code translate="no">BINARY_VECTOR</code>, con una dimensione di 128.</p>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Impostare i parametri dell'indice per il campo vettoriale</h3><p>Per velocizzare le ricerche, è necessario creare un indice per il campo vettoriale binario. L'indicizzazione può migliorare significativamente l'efficienza di recupero dei dati vettoriali su larga scala.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Impostare i parametri dell'indice per il campo vettoriale<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per velocizzare le ricerche, è necessario creare un indice per il campo vettoriale binario. L'indicizzazione può migliorare significativamente l'efficienza di recupero dei dati vettoriali su larga scala.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -248,7 +278,22 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <p>Nell'esempio precedente, viene creato un indice chiamato <code translate="no">binary_vector_index</code> per il campo <code translate="no">binary_vector</code>, utilizzando il tipo di indice <code translate="no">AUTOINDEX</code>. L'indice <code translate="no">metric_type</code> è impostato su <code translate="no">HAMMING</code>, a indicare che la distanza di Hamming è utilizzata per la misurazione della similarità.</p>
 <p>Milvus offre diversi tipi di indice per una migliore esperienza di ricerca vettoriale. AUTOINDEX è un tipo di indice speciale progettato per attenuare la curva di apprendimento della ricerca vettoriale. Sono disponibili molti tipi di indice tra cui scegliere. Per maggiori dettagli, consultare la sezione <a href="/docs/it/index-explained.md">Indice spiegato</a>.</p>
 <p>Inoltre, Milvus supporta altre metriche di similarità per vettori binari. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/metric.md">Tipi di metriche</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">Creare la raccolta</h3><p>Una volta completate le impostazioni dei vettori binari e degli indici, creare una collezione che contenga vettori binari. L'esempio seguente utilizza il metodo <code translate="no">create_collection</code> per creare un insieme chiamato <code translate="no">my_collection</code>.</p>
+<h3 id="Create-collection" class="common-anchor-header">Creare la raccolta<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Una volta completate le impostazioni dei vettori binari e degli indici, creare una collezione che contenga vettori binari. L'esempio seguente utilizza il metodo <code translate="no">create_collection</code> per creare un insieme chiamato <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -301,7 +346,22 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Inserire i dati</h3><p>Dopo aver creato la collezione, utilizzare il metodo <code translate="no">insert</code> per aggiungere dati contenenti vettori binari. Si noti che i vettori binari devono essere forniti sotto forma di array di byte, dove ogni byte rappresenta 8 valori booleani.</p>
+<h3 id="Insert-data" class="common-anchor-header">Inserire i dati<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dopo aver creato la collezione, utilizzare il metodo <code translate="no">insert</code> per aggiungere dati contenenti vettori binari. Si noti che i vettori binari devono essere forniti sotto forma di array di byte, dove ogni byte rappresenta 8 valori booleani.</p>
 <p>Ad esempio, per un vettore binario di 128 dimensioni, è necessario un array di 16 byte (poiché 128 bit ÷ 8 bit/byte = 16 byte). Di seguito è riportato un esempio di codice per l'inserimento di dati:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -396,7 +456,22 @@ client.<span class="hljs-title function_">insert</span>({
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Eseguire la ricerca di similarità</h3><p>La ricerca per similarità è una delle caratteristiche principali di Milvus, che consente di trovare rapidamente i dati più simili a un vettore di interrogazione in base alla distanza tra i vettori. Per eseguire una ricerca di similarità utilizzando vettori binari, preparare il vettore di interrogazione e i parametri di ricerca, quindi chiamare il metodo <code translate="no">search</code>.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">Eseguire la ricerca di similarità<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La ricerca per similarità è una delle caratteristiche principali di Milvus, che consente di trovare rapidamente i dati più simili a un vettore di interrogazione in base alla distanza tra i vettori. Per eseguire una ricerca di similarità utilizzando vettori binari, preparare il vettore di interrogazione e i parametri di ricerca, quindi chiamare il metodo <code translate="no">search</code>.</p>
 <p>Durante le operazioni di ricerca, i vettori binari devono essere forniti anche sotto forma di array di byte. Assicurarsi che la dimensione del vettore di interrogazione corrisponda a quella specificata nella definizione di <code translate="no">dim</code> e che ogni 8 valori booleani siano convertiti in 1 byte.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

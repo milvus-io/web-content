@@ -246,7 +246,7 @@ summary: 了解如何为 Milvus 配置常用功能。
   </thead>
   <tbody>
     <tr>
-      <td>        毫秒，表示在有界一致性情况下需要减去请求到达时间的间隔（毫秒）。      </td>
+      <td>        毫秒，表示在有界一致性情况下需要减去请求到达时间的时间间隔（毫秒）。      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -1009,7 +1009,7 @@ summary: 了解如何为 Milvus 配置常用功能。
   <tbody>
     <tr>
       <td>        bloom 过滤器类型，支持 BasicBloomFilter 和 BlockedBloomFilter      </td>
-      <td>阻塞式 BloomFilter</td>
+      <td>阻塞开花过滤器</td>
     </tr>
   </tbody>
 </table>

@@ -23,11 +23,11 @@ title: Pesquisa em funil com embeddings Matryoshka
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.6.x/assets/funnel-search.png' width='100%'></div>
+    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/funnel-search.png' width='100%'></div>
 Ao criar sistemas de pesquisa vetorial eficientes, um dos principais desafios é gerir os custos de armazenamento, mantendo uma latência e uma recuperação aceitáveis. Os modelos de incorporação modernos produzem vectores com centenas ou milhares de dimensões, criando um armazenamento significativo e uma sobrecarga computacional para o vetor bruto e o índice.<p>Tradicionalmente, os requisitos de armazenamento são reduzidos através da aplicação de um método de quantização ou de redução da dimensionalidade imediatamente antes da construção do índice. Por exemplo, podemos poupar armazenamento reduzindo a precisão utilizando a Quantização de Produtos (PQ) ou o número de dimensões utilizando a Análise de Componentes Principais (PCA). Estes métodos analisam todo o conjunto de vectores para encontrar um conjunto mais compacto que mantenha as relações semânticas entre os vectores.</p>
 <p>Embora eficazes, estas abordagens padrão reduzem a precisão ou a dimensionalidade apenas uma vez e numa única escala. Mas e se pudéssemos manter várias camadas de pormenor em simultâneo, como uma pirâmide de representações cada vez mais precisas?</p>
 <p>Eis os embeddings Matryoshka. Com o nome das bonecas russas (ver ilustração), estas construções inteligentes incorporam várias escalas de representação num único vetor. Ao contrário dos métodos tradicionais de pós-processamento, os encaixes Matryoshka aprendem esta estrutura multi-escala durante o processo de formação inicial. O resultado é notável: não só a incorporação completa capta a semântica da entrada, como cada prefixo de subconjunto aninhado (primeira metade, primeiro quarto, etc.) fornece uma representação coerente, embora menos pormenorizada.</p>
-<p>Neste caderno, examinamos a forma de utilizar as incrustações Matryoshka com o Milvus para a pesquisa semântica. Ilustramos um algoritmo chamado "pesquisa em funil" que nos permite efetuar pesquisas por semelhança num pequeno subconjunto das nossas dimensões de incorporação sem uma queda drástica na recuperação.</p>
+<p>Neste caderno, examinamos como usar as incrustações Matryoshka com o Milvus para pesquisa semântica. Ilustramos um algoritmo chamado "pesquisa em funil" que nos permite efetuar pesquisas por semelhança num pequeno subconjunto das nossas dimensões de incorporação sem uma queda drástica na recuperação.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparação<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,7 +90,7 @@ Ao criar sistemas de pesquisa vetorial eficientes, um dos principais desafios é
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">&lt;All keys matched successfully&gt;
 </code></pre>
-<h2 id="Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="common-anchor-header">Carregar o conjunto de dados, incorporar itens e criar uma base de dados de vectores<button data-href="#Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="anchor-icon" translate="no">
+<h2 id="Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="common-anchor-header">Carregar o conjunto de dados, incorporar itens e construir uma base de dados de vectores<button data-href="#Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -134,7 +134,7 @@ schema = CollectionSchema(fields=fields, enable_dynamic_field=<span class="hljs-
 client.create_collection(collection_name=collection_name, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
 <p>Atualmente, o Milvus não suporta a pesquisa em subconjuntos de sequências, pelo que dividimos as sequências em duas partes: a cabeça representa o subconjunto inicial do vetor a indexar e pesquisar, e a cauda é o restante. O modelo é treinado para a pesquisa de semelhança de distância de cosseno, por isso normalizamos os embeddings da cabeça. No entanto, para calcular semelhanças para subconjuntos maiores mais tarde, precisamos armazenar a norma da incorporação da cabeça, para que possamos desnormalizá-la antes de juntar à cauda.</p>
-<p>Para efetuar a pesquisa através do primeiro 1/6 da incorporação, teremos de criar um índice de pesquisa vetorial sobre o campo <code translate="no">head_embedding</code>. Mais tarde, compararemos os resultados da "pesquisa em funil" com uma pesquisa vetorial normal e, assim, criaremos também um índice de pesquisa sobre a incorporação completa.</p>
+<p>Para efetuar a pesquisa através do primeiro 1/6 da incorporação, teremos de criar um índice de pesquisa vetorial sobre o campo <code translate="no">head_embedding</code>. Mais tarde, compararemos os resultados da "pesquisa em funil" com uma pesquisa vetorial normal e, por isso, criaremos também um índice de pesquisa sobre a incorporação completa.</p>
 <p><em>É importante notar que utilizamos a métrica de distância <code translate="no">COSINE</code> em vez da métrica de distância <code translate="no">IP</code>, porque, de outro modo, teríamos de registar as normas de incorporação, o que complicaria a implementação (isto fará mais sentido quando o algoritmo de pesquisa em funil for descrito).</em></p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 index_params.add_index(
@@ -339,7 +339,7 @@ Name: title, dtype: object
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vamos comparar os resultados da nossa pesquisa em funil com uma pesquisa vetorial padrão <em>no mesmo conjunto de dados com o mesmo modelo de incorporação</em>. Realizamos uma pesquisa nos embeddings completos.</p>
+    </button></h2><p>Vamos comparar os resultados da nossa pesquisa em funil com uma pesquisa vetorial normal <em>no mesmo conjunto de dados com o mesmo modelo de incorporação</em>. Realizamos uma pesquisa nos embeddings completos.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search on entire embeddings</span>
 res = client.search(
     collection_name=collection_name,
@@ -398,7 +398,7 @@ Home Alone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Por que é que a pesquisa de funil não conseguiu recuperar o filme Ferris Bueller's Day Off? Vamos examinar se ele estava ou não na lista original de candidatos ou se foi filtrado por engano.</p>
+    </button></h2><p>Por que é que a pesquisa de funil não conseguiu recuperar o filme Ferris Bueller's Day Off? Vamos examinar se ele estava ou não na lista de candidatos original ou se foi filtrado por engano.</p>
 <pre><code translate="no" class="language-python">queries2 = [
     <span class="hljs-string">&quot;A teenager fakes illness to get off school and have adventures with two friends.&quot;</span>
 ]
@@ -434,7 +434,7 @@ res = client.search(
 <pre><code translate="no">Query: A teenager fakes illness to get off school and have adventures with two friends.
 Row 228: Ferris Bueller's Day Off
 </code></pre>
-<p>Vemos que o problema é que a lista inicial de candidatos não era suficientemente grande, ou melhor, o resultado desejado não é suficientemente semelhante à consulta no nível mais alto de granularidade. Alterá-la de <code translate="no">128</code> para <code translate="no">256</code> resulta numa recuperação bem sucedida. <em>Devemos criar uma regra geral para definir o número de candidatos num conjunto retido para avaliar empiricamente o compromisso entre a recuperação e a latência.</em></p>
+<p>Vemos que o problema era que a lista inicial de candidatos não era suficientemente grande, ou melhor, o resultado desejado não é suficientemente semelhante à consulta no nível mais alto de granularidade. Alterá-la de <code translate="no">128</code> para <code translate="no">256</code> resulta numa recuperação bem sucedida. <em>Devemos criar uma regra geral para definir o número de candidatos num conjunto retido para avaliar empiricamente o compromisso entre a recuperação e a latência.</em></p>
 <pre><code translate="no" class="language-python">dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 
 dfs_results = [
@@ -588,7 +588,7 @@ Leopard in the Snow
         ></path>
       </svg>
     </button></h2><p>Aqui está uma comparação dos nossos resultados de pesquisa entre métodos:</p>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.6.x/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
-<div style='margin: auto; width: 100%;'><img translate="no" src='/docs/v2.6.x/assets/results-ferris-buellers-day-off.png' width='100%'></div>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.6.x/assets/results-the-shining.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
+<div style='margin: auto; width: 100%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-ferris-buellers-day-off.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-the-shining.png' width='100%'></div>
 Mostrámos como utilizar as incrustações Matryoshka com o Milvus para realizar um algoritmo de pesquisa semântica mais eficiente chamado "pesquisa em funil". Explorámos também a importância dos passos de reordenação e poda do algoritmo, bem como um modo de falha quando a lista inicial de candidatos é demasiado pequena. Finalmente, discutimos como a ordem das dimensões é importante na formação de sub-embeddings - deve ser da mesma forma para a qual o modelo foi treinado. Ou melhor, é apenas porque o modelo foi treinado de uma determinada forma que os prefixos dos embeddings são significativos. Agora já sabe como implementar as incrustações Matryoshka e a pesquisa em funil para reduzir os custos de armazenamento da pesquisa semântica sem sacrificar demasiado o desempenho da recuperação!

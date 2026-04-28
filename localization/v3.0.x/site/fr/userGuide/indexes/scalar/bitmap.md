@@ -45,7 +45,7 @@ summary: >-
 <p>Considérons une collection de documents avec des champs <strong>Catégorie</strong> et <strong>Public</strong>. Nous voulons retrouver les documents qui appartiennent à la catégorie <strong>Tech</strong> et qui sont ouverts au <strong>public</strong>. Dans ce cas, les clés de nos index bitmap sont <strong>Tech</strong> et <strong>Public</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" />
    </span> <span class="img-wrapper"> <span>Bitmap</span> </span></p>
 <p>Comme le montre la figure, les index bitmap pour <strong>Catégorie</strong> et <strong>Public</strong> sont les suivants :</p>
 <ul>

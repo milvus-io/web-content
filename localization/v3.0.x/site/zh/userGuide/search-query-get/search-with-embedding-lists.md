@@ -38,7 +38,7 @@ summary: >-
       </svg>
     </button></h2><p>在构建文本检索系统时，您可能需要将文档分割成块，并将每个块及其嵌入作为一个实体存储在向量数据库中，以确保精确度和准确性，尤其是对于长文档而言，全文嵌入可能会削弱语义特异性或超出模型输入限制。</p>
 <p>不过，以块为单位存储数据会导致以块为单位的搜索结果，这意味着检索最初识别的是相关<em>片段</em>，而不是连贯的<em>文档</em>。为了解决这个问题，你应该执行额外的搜索后处理。</p>
-<p>ColBERT（arXiv:<a href="https://arxiv.org/abs/2004.12832">2004.12832</a>）是一个文本-文本检索系统，它通过 BERT 上的上下文化后期交互提供高效的段落搜索。它能对查询和文档进行独立的标记化编码，并计算它们的相似性。</p>
+<p>ColBERT（arXiv:<a href="https://arxiv.org/abs/2004.12832">2004.12832</a>）是一个文本-文本检索系统，它通过 BERT 上的上下文化后期交互提供高效和有效的段落搜索。它能对查询和文档进行独立的标记化编码，并计算它们的相似性。</p>
 <h3 id="Token-wise-encoding" class="common-anchor-header">令牌编码<button data-href="#Token-wise-encoding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -20,7 +20,7 @@ summary: Saiba como configurar o tikv para o Milvus.
         ></path>
       </svg>
     </button></h1><p>Configuração relacionada do tikv, usada para armazenar metadados do Milvus.</p>
-<p>Observe que quando o TiKV é ativado para o metastore, ainda é necessário ter o etcd para a descoberta do serviço.</p>
+<p>Observe que quando o TiKV é ativado para o metastore, ainda é necessário ter o etcd para a descoberta de serviços.</p>
 <p>O TiKV é uma boa opção quando o tamanho dos metadados requer uma melhor escalabilidade horizontal.</p>
 <h2 id="tikvendpoints" class="common-anchor-header"><code translate="no">tikv.endpoints</code><button data-href="#tikvendpoints" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,12 +70,12 @@ summary: Saiba como configurar o tikv para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor predefinido</th> 
+      <th class="width20">Valor por defeito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        O caminho da raiz onde os dados são armazenados no tikv    </td>
+      <td>        O caminho raiz onde os dados são armazenados no tikv    </td>
       <td>por-dev</td>
     </tr>
   </tbody>

@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이진 벡터는 기존의 고차원 부동소수점 벡터를 0과 1만 포함하는 이진 벡터로 변환하는 특별한 형태의 데이터 표현입니다. 이러한 변환은 벡터의 크기를 압축할 뿐만 아니라 의미 정보를 유지하면서 저장 및 계산 비용을 줄여줍니다. 중요하지 않은 특징에 대한 정밀도가 필수적이지 않은 경우, 이진 벡터는 원래 부동소수점 벡터의 무결성과 유용성 대부분을 효과적으로 유지할 수 있습니다.</p>
+    </button></h1><p>이진 벡터는 기존의 고차원 부동소수점 벡터를 0과 1만 포함하는 이진 벡터로 변환하는 특수한 형태의 데이터 표현입니다. 이러한 변환은 벡터의 크기를 압축할 뿐만 아니라 의미 정보를 유지하면서 저장 및 계산 비용을 줄여줍니다. 중요하지 않은 특징에 대한 정밀도가 필수적이지 않은 경우, 이진 벡터는 원래 부동소수점 벡터의 무결성과 유용성 대부분을 효과적으로 유지할 수 있습니다.</p>
 <p>바이너리 벡터는 특히 계산 효율성과 스토리지 최적화가 중요한 상황에서 폭넓게 활용될 수 있습니다. 검색 엔진이나 추천 시스템과 같은 대규모 AI 시스템에서는 방대한 양의 데이터를 실시간으로 처리하는 것이 핵심입니다. 바이너리 벡터는 벡터의 크기를 줄임으로써 정확도를 크게 떨어뜨리지 않으면서 지연 시간과 계산 비용을 낮추는 데 도움이 됩니다. 또한 바이너리 벡터는 메모리와 처리 능력이 제한된 모바일 디바이스나 임베디드 시스템과 같은 리소스 제약이 있는 환경에서 유용합니다. 바이너리 벡터를 사용하면 이러한 제한된 환경에서도 고성능을 유지하면서 복잡한 AI 기능을 구현할 수 있습니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,10 +39,10 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>바이너리 벡터는 이미지, 텍스트, 오디오 등 복잡한 객체를 고정 길이의 이진 값으로 인코딩하는 방법입니다. Milvus에서 바이너리 벡터는 일반적으로 비트 배열 또는 바이트 배열로 표현됩니다. 예를 들어 8차원 바이너리 벡터는 <code translate="no">[1, 0, 1, 1, 0, 0, 1, 0]</code> 로 표현할 수 있습니다.</p>
-<p>아래 다이어그램은 이진 벡터가 텍스트 콘텐츠에서 키워드의 존재를 나타내는 방법을 보여줍니다. 이 예에서는 10차원 이진 벡터를 사용하여 두 개의 서로 다른 텍스트<strong>(텍스트 1과</strong> <strong>텍스트 2</strong>)를 표현하는데, 각 차원은 어휘의 단어에 해당하며, 1은 텍스트에 해당 단어가 있음을 나타내고 0은 해당 단어가 없음을 나타냅니다.</p>
+<p>아래 다이어그램은 이진 벡터가 텍스트 콘텐츠에서 키워드의 존재를 나타내는 방법을 보여줍니다. 이 예에서는 10차원 이진 벡터가 두 개의 서로 다른 텍스트<strong>(텍스트 1과</strong> <strong>텍스트 2</strong>)를 표현하는 데 사용되며, 각 차원은 어휘의 단어에 해당합니다(1은 텍스트에 단어가 있음을 나타내고 0은 단어가 없음을 나타냅니다).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
    </span> <span class="img-wrapper"> <span>이진 벡터</span> </span></p>
 <p>이진 벡터에는 다음과 같은 특징이 있습니다:</p>
 <ul>
@@ -55,7 +55,7 @@ summary: >-
 <p>이진 벡터화 후에는 데이터를 Milvus에 저장하여 관리 및 벡터 검색을 수행할 수 있습니다. 아래 다이어그램은 기본 프로세스를 보여줍니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
    </span> <span class="img-wrapper"> <span>바이너리 벡터 사용</span> </span></p>
 <div class="alert note">
 <p>이진 벡터는 특정 시나리오에서는 탁월하지만, 표현 능력에 한계가 있어 복잡한 의미 관계를 포착하기 어렵습니다. 따라서 실제 시나리오에서는 효율성과 표현력의 균형을 맞추기 위해 이진 벡터를 다른 벡터 유형과 함께 사용하는 경우가 많습니다. 자세한 내용은 <a href="/docs/ko/dense-vector.md">고밀도 벡터</a> 및 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p>
@@ -75,7 +75,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">벡터 필드 추가</h3><p>Milvus에서 이진 벡터를 사용하려면 먼저 컬렉션을 만들 때 이진 벡터를 저장할 벡터 필드를 정의합니다. 이 과정에는 다음이 포함됩니다:</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">벡터 필드 추가<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus에서 이진 벡터를 사용하려면 먼저 컬렉션을 만들 때 이진 벡터를 저장할 벡터 필드를 정의합니다. 이 과정에는 다음이 포함됩니다:</p>
 <ol>
 <li><p><code translate="no">datatype</code> 을 지원되는 바이너리 벡터 데이터 유형(예: <code translate="no">BINARY_VECTOR</code> 으로 설정합니다.</p></li>
 <li><p><code translate="no">dim</code> 매개변수를 사용하여 벡터의 차원을 지정합니다. 삽입할 때 바이너리 벡터를 바이트 배열로 변환해야 하므로 <code translate="no">dim</code> 은 8의 배수여야 한다는 점에 유의하세요. 8개의 부울 값(0 또는 1)은 모두 1바이트로 패킹됩니다. 예를 들어 <code translate="no">dim=128</code> 의 경우 삽입하려면 16바이트 배열이 필요합니다.</p></li>
@@ -192,8 +207,23 @@ schema.WithField(entity.NewField().
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예에서는 바이너리 벡터를 저장하기 위해 <code translate="no">binary_vector</code> 이라는 이름의 벡터 필드가 추가되었습니다. 이 필드의 데이터 유형은 <code translate="no">BINARY_VECTOR</code> 이며, 차원은 128입니다.</p>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">벡터 필드에 대한 인덱스 매개변수 설정</h3><p>검색 속도를 높이려면 바이너리 벡터 필드에 대한 인덱스를 만들어야 합니다. 인덱싱은 대규모 벡터 데이터의 검색 효율성을 크게 향상시킬 수 있습니다.</p>
+<p>이 예에서는 바이너리 벡터를 저장하기 위해 <code translate="no">binary_vector</code> 이라는 벡터 필드가 추가되었습니다. 이 필드의 데이터 유형은 <code translate="no">BINARY_VECTOR</code> 이며, 차원은 128입니다.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">벡터 필드에 대한 인덱스 매개변수 설정<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>검색 속도를 높이려면 바이너리 벡터 필드에 대한 인덱스를 만들어야 합니다. 인덱싱은 대규모 벡터 데이터의 검색 효율성을 크게 향상시킬 수 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -240,8 +270,23 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>위의 예에서는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 <code translate="no">binary_vector</code> 필드에 대해 <code translate="no">binary_vector_index</code> 라는 이름의 인덱스가 생성됩니다. <code translate="no">metric_type</code> 은 <code translate="no">HAMMING</code> 으로 설정되어 유사도 측정에 해밍 거리가 사용되었음을 나타냅니다.</p>
 <p>밀버스는 더 나은 벡터 검색 환경을 위해 다양한 인덱스 유형을 제공합니다. 자동 인덱스는 벡터 검색의 학습 곡선을 원활하게 하기 위해 고안된 특수 인덱스 유형입니다. 다양한 인덱스 유형 중에서 선택할 수 있습니다. 자세한 내용은 <a href="/docs/ko/index-explained.md">색인 설명을</a> 참조하세요.</p>
-<p>또한 Milvus는 이진 벡터에 대한 다른 유사성 메트릭도 지원합니다. 자세한 내용은 <a href="/docs/ko/metric.md">메트릭 유형을</a> 참조하세요.</p>
-<h3 id="Create-collection" class="common-anchor-header">컬렉션 만들기</h3><p>바이너리 벡터 및 인덱스 설정이 완료되면 바이너리 벡터를 포함하는 컬렉션을 만듭니다. 아래 예제에서는 <code translate="no">create_collection</code> 메서드를 사용하여 <code translate="no">my_collection</code> 이라는 이름의 컬렉션을 생성합니다.</p>
+<p>또한 Milvus는 바이너리 벡터에 대한 다른 유사성 메트릭도 지원합니다. 자세한 내용은 <a href="/docs/ko/metric.md">메트릭 유형을</a> 참조하세요.</p>
+<h3 id="Create-collection" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>바이너리 벡터 및 인덱스 설정이 완료되면 바이너리 벡터를 포함하는 컬렉션을 만듭니다. 아래 예제에서는 <code translate="no">create_collection</code> 메서드를 사용하여 <code translate="no">my_collection</code> 이라는 이름의 컬렉션을 생성합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -294,7 +339,22 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">데이터 삽입</h3><p>컬렉션을 만든 후 <code translate="no">insert</code> 메서드를 사용하여 바이너리 벡터가 포함된 데이터를 추가합니다. 바이너리 벡터는 각 바이트가 8개의 부울 값을 나타내는 바이트 배열 형태로 제공되어야 합니다.</p>
+<h3 id="Insert-data" class="common-anchor-header">데이터 삽입<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>컬렉션을 만든 후 <code translate="no">insert</code> 메서드를 사용하여 바이너리 벡터가 포함된 데이터를 추가합니다. 바이너리 벡터는 각 바이트가 8개의 부울 값을 나타내는 바이트 배열 형태로 제공되어야 합니다.</p>
 <p>예를 들어 128차원 바이너리 벡터의 경우 16바이트 배열이 필요합니다(128비트 ÷ 8비트/바이트 = 16바이트이므로). 다음은 데이터를 삽입하는 예제 코드입니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -389,7 +449,22 @@ client.<span class="hljs-title function_">insert</span>({
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">유사도 검색 수행</h3><p>유사도 검색은 밀버스의 핵심 기능 중 하나로, 벡터 사이의 거리를 기준으로 쿼리 벡터와 가장 유사한 데이터를 빠르게 찾을 수 있습니다. 이진 벡터를 사용하여 유사도 검색을 수행하려면 쿼리 벡터와 검색 매개변수를 준비한 다음 <code translate="no">search</code> 메서드를 호출합니다.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">유사도 검색 수행<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>유사도 검색은 밀버스의 핵심 기능 중 하나로, 벡터 사이의 거리를 기준으로 쿼리 벡터와 가장 유사한 데이터를 빠르게 찾을 수 있습니다. 이진 벡터를 사용하여 유사도 검색을 수행하려면 쿼리 벡터와 검색 매개변수를 준비한 다음 <code translate="no">search</code> 메서드를 호출합니다.</p>
 <p>검색 작업 중에는 바이너리 벡터도 바이트 배열 형태로 제공해야 합니다. 쿼리 벡터의 차원이 <code translate="no">dim</code> 을 정의할 때 지정한 차원과 일치하는지, 8개의 부울 값이 모두 1바이트로 변환되는지 확인합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

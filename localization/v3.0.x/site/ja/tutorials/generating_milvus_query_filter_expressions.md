@@ -206,7 +206,7 @@ client.insert(collection_name=collection_name, data=insert_data)
 <li><strong>趣味</strong>：ユーザーの趣味 (VARCHAR)</li>
 <li><strong>埋め込み</strong>：ベクトル埋め込み (FLOAT_VECTOR, 1536次元)</li>
 </ul>
-<p>11人のサンプルユーザを個人情報と一緒に挿入し、セマンティック検索機能のための埋め込みを生成した。各ユーザの情報は、埋め込まれる前に、名前、場所、年齢、興味を捕らえた記述的なテキストに変換されます。いくつかのサンプルレコードをクエリすることで、コレクションが正常に作成され、期待されるデータが含まれていることを検証してみましょう。</p>
+<p>11人のサンプルユーザを個人情報と一緒に挿入し、セマンティック検索機能のための埋め込みを生成した。各ユーザの情報は、埋め込む前に、名前、場所、年齢、興味を捕らえた記述的なテキストに変換されます。いくつかのサンプルレコードをクエリすることで、コレクションが正常に作成され、期待されるデータが含まれていることを確認してみましょう。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
@@ -425,4 +425,4 @@ search_results = client.search(
 <li>ロンドン、東京、トロントに住んでいる</li>
 <li>クエリのセマンティックコンテキストにマッチしている</li>
 </ul>
-<p>このアプローチは、構造化されたフィルタリングの精度と自然言語入力の柔軟性を組み合わせることで、特定のクエリ構文に慣れていないユーザでもベクトルデータベースをより利用しやすくしている。</p>
+<p>このアプローチは、構造化フィルタリングの精度と自然言語入力の柔軟性を組み合わせることで、特定のクエリ構文に慣れていないユーザでもベクトルデータベースをより利用しやすくしている。</p>

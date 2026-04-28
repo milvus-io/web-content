@@ -41,13 +41,13 @@ summary: >-
     </button></h2><p>Milvus stocke les entités entrantes dans des segments au sein d'une collection et scelle un segment lorsqu'il est plein. Dans ce cas, un nouveau segment est créé pour accueillir les entités supplémentaires. Par conséquent, les entités sont réparties arbitrairement entre les segments. Cette répartition oblige Milvus à rechercher plusieurs segments pour trouver les voisins les plus proches d'un vecteur de requête donné.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/without-clustering-compaction.png" alt="Without Clustering Compaction" class="doc-image" id="without-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/without-clustering-compaction.png" alt="Without Clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Sans compactage de regroupement</span> </span></p>
 <p>Si Milvus peut répartir les entités entre les segments en fonction des valeurs d'un champ spécifique, l'étendue de la recherche peut être limitée à un segment, ce qui améliore les performances de la recherche.</p>
-<p>Le<strong>compactage par regroupement</strong> est une fonctionnalité de Milvus qui redistribue les entités entre les segments d'une collection en fonction des valeurs d'un champ scalaire. Pour activer cette fonctionnalité, vous devez d'abord sélectionner un champ scalaire comme <strong>clé de clustering</strong>. Cela permet à Milvus de redistribuer les entités dans un segment lorsque leurs valeurs de clé de clustering se situent dans une plage spécifique. Lorsque vous déclenchez un compactage de clustering, Milvus génère/met à jour un index global appelé <strong>PartitionStats</strong>, qui enregistre la relation de mappage entre les segments et les valeurs de clé de clustering.</p>
+<p>Le<strong>compactage par regroupement</strong> est une fonctionnalité de Milvus qui redistribue les entités entre les segments d'une collection en fonction des valeurs d'un champ scalaire. Pour activer cette fonctionnalité, vous devez d'abord sélectionner un champ scalaire comme <strong>clé de clustering</strong>. Cela permet à Milvus de redistribuer les entités dans un segment lorsque leurs valeurs de clé de clustering se situent dans une plage spécifique. Lorsque vous déclenchez un compactage par clustering, Milvus génère/met à jour un index global appelé <strong>PartitionStats</strong>, qui enregistre la relation de mappage entre les segments et les valeurs de clé de clustering.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Compaction de clustering</span> </span></p>
 <p>En utilisant <strong>PartitionStats</strong> comme référence, Milvus peut élaguer les données non pertinentes lors de la réception d'une requête de recherche qui comporte une valeur de clé de clustering et limiter la portée de la recherche aux segments correspondant à la valeur, ce qui améliore les performances de la recherche. Pour plus de détails sur l'amélioration des performances, reportez-vous à la section <a href="/docs/fr/clustering-compaction.md#Benchmark-Test">Tests de référence</a>.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Utiliser le compactage de clustering<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
@@ -66,7 +66,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>La fonction de compactage en grappes de Milvus est hautement configurable. Vous pouvez choisir de la déclencher manuellement ou de la configurer pour qu'elle soit déclenchée automatiquement à intervalles réguliers par Milvus. Pour activer le compactage de clustering, procédez comme suit :</p>
-<h3 id="Global-Configuration" class="common-anchor-header">Configuration globale</h3><p>Vous devez modifier votre fichier de configuration Milvus comme indiqué ci-dessous.</p>
+<h3 id="Global-Configuration" class="common-anchor-header">Configuration globale<button data-href="#Global-Configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Vous devez modifier votre fichier de configuration Milvus comme indiqué ci-dessous.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">dataCoord:</span>
   <span class="hljs-attr">compaction:</span>
     <span class="hljs-attr">clustering:</span>
@@ -163,7 +178,22 @@ summary: >-
    </tr>
 </table>
 <p>Pour appliquer les modifications ci-dessus à votre cluster Milvus, veuillez suivre les étapes des sections <a href="/docs/fr/configure-helm.md#Configure-Milvus-via-configuration-file">Configurer Milvus avec Helm</a> et <a href="/docs/fr/configure_operator.md">Configurer Milvus avec Milvus Operators</a>.</p>
-<h3 id="Collection-Configuration" class="common-anchor-header">Configuration de la collecte</h3><p>Pour compacter le clustering dans une collection spécifique, vous devez sélectionner un champ scalaire de la collection comme clé de clustering.</p>
+<h3 id="Collection-Configuration" class="common-anchor-header">Configuration de la collecte<button data-href="#Collection-Configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour compacter le clustering dans une collection spécifique, vous devez sélectionner un champ scalaire de la collection comme clé de clustering.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -276,7 +306,22 @@ client.createCollection(requestCreate);
 <div class="alert note">
 <p>Vous pouvez utiliser les champs scalaires des types de données suivants comme clé de clustering : <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, <code translate="no">Double</code>, et <code translate="no">VarChar</code>.</p>
 </div>
-<h3 id="Trigger-Clustering-Compaction" class="common-anchor-header">Déclencher le compactage de la mise en grappe</h3><p>Si vous avez activé le compactage automatique du clustering, Milvus déclenche automatiquement le compactage à l'intervalle spécifié. Vous pouvez également déclencher manuellement le compactage comme suit :</p>
+<h3 id="Trigger-Clustering-Compaction" class="common-anchor-header">Déclencher le compactage de la mise en grappe<button data-href="#Trigger-Clustering-Compaction" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Si vous avez activé le compactage automatique du clustering, Milvus déclenche automatiquement le compactage à l'intervalle spécifié. Vous pouvez également déclencher manuellement le compactage comme suit :</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># trigger a manual compaction</span>

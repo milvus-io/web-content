@@ -26,7 +26,7 @@ title: Milvus를 사용한 텍스트-이미지 검색
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>텍스트-이미지 검색은 사용자가 자연어 텍스트 설명을 사용해 이미지를 검색할 수 있는 고급 기술입니다. 사전 학습된 멀티모달 모델을 활용하여 텍스트와 이미지를 모두 공유 의미 공간의 임베딩으로 변환하여 유사성 기반 비교를 가능하게 합니다.</p>
+    </button></h1><p>텍스트-이미지 검색은 사용자가 자연어 텍스트 설명을 사용해 이미지를 검색할 수 있는 고급 기술입니다. 사전 학습된 멀티모달 모델을 활용하여 텍스트와 이미지를 공유 의미 공간의 임베딩으로 변환하여 유사성 기반 비교를 가능하게 합니다.</p>
 <p>이 튜토리얼에서는 OpenAI의 CLIP(대조 언어-이미지 사전 학습) 모델과 Milvus를 사용하여 텍스트 기반 이미지 검색을 구현하는 방법을 살펴봅니다. CLIP으로 이미지 임베딩을 생성하고 Milvus에 저장한 후 효율적인 유사도 검색을 수행해 보겠습니다.</p>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,7 +44,22 @@ title: Milvus를 사용한 텍스트-이미지 검색
         ></path>
       </svg>
     </button></h2><p>시작하기 전에 필요한 모든 패키지와 예제 데이터가 준비되어 있는지 확인하세요.</p>
-<h3 id="Install-dependencies" class="common-anchor-header">종속성 설치</h3><ul>
+<h3 id="Install-dependencies" class="common-anchor-header">종속성 설치<button data-href="#Install-dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Milvus 데이터베이스와 상호 작용하기 위한<strong>pymilvus&gt;=2.4.2</strong> </li>
 <li>CLIP 모델 작업을 위한<strong>clip</strong> </li>
 <li>이미지 처리 및 시각화를 위한<strong>pillow</strong> </li>
@@ -55,11 +70,41 @@ title: Milvus를 사용한 텍스트-이미지 검색
 <div class="alert note">
 <p>Google Colab을 사용하는 경우 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(인터페이스 상단의 "런타임" 메뉴로 이동한 후 드롭다운 메뉴에서 "세션 다시 시작"을 선택합니다).</p>
 </div>
-<h3 id="Download-example-data" class="common-anchor-header">예제 데이터 다운로드</h3><p><a href="https://www.image-net.org">이미지넷</a> 데이터 세트의 하위 집합(100개 클래스, 각 클래스당 10개 이미지)을 예제 이미지로 사용합니다. 다음 명령은 예제 데이터를 다운로드하여 로컬 폴더 <code translate="no">./images_folder</code> 에 추출합니다:</p>
+<h3 id="Download-example-data" class="common-anchor-header">예제 데이터 다운로드<button data-href="#Download-example-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="https://www.image-net.org">이미지넷</a> 데이터 세트의 하위 집합(100개 클래스, 각 클래스당 10개 이미지)을 예제 이미지로 사용합니다. 다음 명령은 예제 데이터를 다운로드하여 로컬 폴더 <code translate="no">./images_folder</code> 에 추출합니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/towhee-io/examples/releases/download/data/reverse_image_search.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q reverse_image_search.zip -d images_folder</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-up-Milvus" class="common-anchor-header">Milvus 설정</h3><p>계속 진행하기 전에 Milvus 서버를 설정하고 URI(선택 사항, 토큰)를 사용하여 연결합니다:</p>
+<h3 id="Set-up-Milvus" class="common-anchor-header">Milvus 설정<button data-href="#Set-up-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>계속 진행하기 전에 Milvus 서버를 설정하고 URI(선택 사항, 토큰)를 사용하여 연결합니다:</p>
 <ul>
 <li><p><strong>Milvus Lite(편의상 권장)</strong>: ./milvus.db와 같은 로컬 파일로 URI를 설정합니다. 이렇게 하면 <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하여 모든 데이터를 단일 파일에 저장합니다.</p></li>
 <li><p><strong>Docker 또는 Kubernetes(대규모 데이터의 경우)</strong>: 대규모 데이터 세트를 처리하려면 <a href="https://milvus.io/docs/quickstart.md">Docker 또는 Kubernetes를</a> 사용하여 더 성능이 뛰어난 Milvus 서버를 배포하세요. 이 경우 http://localhost:19530 같은 서버 URI를 사용하여 연결하세요.</p></li>
@@ -84,8 +129,23 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이제 필요한 종속성과 데이터가 준비되었으므로 이제 특징 추출기를 설정하고 Milvus로 작업을 시작할 차례입니다. 이 섹션에서는 텍스트-이미지 검색 시스템을 구축하는 주요 단계를 안내합니다. 마지막으로 텍스트 쿼리를 기반으로 이미지를 검색하고 시각화하는 방법을 시연해 보겠습니다.</p>
-<h3 id="Define-feature-extractors" class="common-anchor-header">특징 추출기 정의하기</h3><p>사전 학습된 CLIP 모델을 사용하여 이미지와 텍스트 임베딩을 생성합니다. 이 섹션에서는 사전 학습된 CLIP의 <strong>ViT-B/32</strong> 변형을 로드하고 이미지와 텍스트 인코딩을 위한 헬퍼 함수를 정의합니다:</p>
+    </button></h2><p>이제 필요한 종속성과 데이터를 준비했으니, 이제 특징 추출기를 설정하고 Milvus로 작업을 시작할 차례입니다. 이 섹션에서는 텍스트-이미지 검색 시스템을 구축하는 주요 단계를 안내합니다. 마지막으로 텍스트 쿼리를 기반으로 이미지를 검색하고 시각화하는 방법을 시연해 보겠습니다.</p>
+<h3 id="Define-feature-extractors" class="common-anchor-header">특징 추출기 정의하기<button data-href="#Define-feature-extractors" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>사전 학습된 CLIP 모델을 사용하여 이미지와 텍스트 임베딩을 생성합니다. 이 섹션에서는 사전 학습된 CLIP의 <strong>ViT-B/32</strong> 변형을 로드하고 이미지와 텍스트 인코딩을 위한 헬퍼 함수를 정의합니다:</p>
 <ul>
 <li><code translate="no">encode_image(image_path)</code>: 이미지를 특징 벡터로 처리하고 인코딩합니다.</li>
 <li><code translate="no">encode_text(text)</code>: 텍스트 쿼리를 특징 벡터로 인코딩</li>
@@ -120,7 +180,22 @@ model.<span class="hljs-built_in">eval</span>()
     )  <span class="hljs-comment"># Normalize the text features</span>
     <span class="hljs-keyword">return</span> text_features.squeeze().tolist()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Data-Ingestion" class="common-anchor-header">데이터 수집</h3><p>시맨틱 이미지 검색을 활성화하려면 먼저 모든 이미지에 대한 임베딩을 생성하고 효율적인 색인 및 검색을 위해 이를 벡터 데이터베이스에 저장해야 합니다. 이 섹션에서는 Milvus로 이미지 데이터를 수집하는 단계별 가이드를 제공합니다.</p>
+<h3 id="Data-Ingestion" class="common-anchor-header">데이터 수집<button data-href="#Data-Ingestion" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>시맨틱 이미지 검색을 활성화하려면 먼저 모든 이미지에 대한 임베딩을 생성하고 효율적인 색인 및 검색을 위해 이를 벡터 데이터베이스에 저장해야 합니다. 이 섹션에서는 Milvus로 이미지 데이터를 수집하는 단계별 가이드를 제공합니다.</p>
 <p><strong>1. Milvus 컬렉션 생성</strong></p>
 <p>이미지 임베딩을 저장하기 전에 Milvus 컬렉션을 생성해야 합니다. 다음 코드는 기본 COSINE 메트릭 유형으로 빠른 설정 모드에서 컬렉션을 생성하는 방법을 보여줍니다. 컬렉션에는 다음 필드가 포함됩니다:</p>
 <ul>
@@ -165,7 +240,22 @@ insert_result = milvus_client.insert(collection_name=collection_name, data=raw_d
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Inserted 1000 images into Milvus.
 </code></pre>
-<h3 id="Peform-a-Search" class="common-anchor-header">검색 수행</h3><p>이제 예제 텍스트 쿼리를 사용하여 검색을 실행해 보겠습니다. 이렇게 하면 주어진 텍스트 설명과의 의미적 유사성을 기준으로 가장 관련성이 높은 이미지가 검색됩니다.</p>
+<h3 id="Peform-a-Search" class="common-anchor-header">검색 수행<button data-href="#Peform-a-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이제 예제 텍스트 쿼리를 사용하여 검색을 실행해 보겠습니다. 이렇게 하면 주어진 텍스트 설명과의 의미적 유사성을 기준으로 가장 관련성이 높은 이미지가 검색됩니다.</p>
 <pre><code translate="no" class="language-python">query_text = <span class="hljs-string">&quot;a white dog&quot;</span>
 query_embedding = encode_text(query_text)
 
@@ -206,5 +296,5 @@ Search results:
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/text_image_search_with_milvus_20_1.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_image_search_with_milvus_20_1.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>

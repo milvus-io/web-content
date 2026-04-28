@@ -4,7 +4,7 @@ title: Boost RankerCompatible with Milvus v2.6.2+
 summary: >-
   Em vez de se basear apenas na semelhança semântica calculada com base em
   distâncias vectoriais, os Boost Rankers permitem-lhe influenciar os resultados
-  da pesquisa de uma forma significativa. É ideal para ajustar rapidamente os
+  da pesquisa de forma significativa. É ideal para ajustar rapidamente os
   resultados da pesquisa utilizando a filtragem de metadados.
 beta: Milvus v2.6.2+
 ---
@@ -54,7 +54,7 @@ beta: Milvus v2.6.2+
    </tr>
    <tr>
      <td><p>Classificação inferior estratégica de conteúdos</p></td>
-     <td><ul><li><p>Reduzir a proeminência de itens com pouco inventário sem os remover completamente</p></li><li><p>Diminuir a classificação de conteúdos com termos potencialmente censuráveis sem censura</p></li><li><p>Desvalorização de documentação mais antiga, mantendo-a acessível em pesquisas técnicas</p></li><li><p>Reduzir subtilmente a visibilidade dos produtos da concorrência nas pesquisas de mercado</p></li><li><p>Diminuir a relevância do conteúdo com indicações de qualidade inferior (tais como problemas de formatação, comprimento mais curto, etc.)</p></li></ul></td>
+     <td><ul><li><p>Reduzir a proeminência de itens com pouco inventário sem os remover completamente</p></li><li><p>Diminuir a classificação de conteúdos com termos potencialmente censuráveis sem censura</p></li><li><p>Desvalorizar documentação mais antiga, mantendo-a acessível em pesquisas técnicas</p></li><li><p>Reduzir subtilmente a visibilidade dos produtos da concorrência nas pesquisas de mercado</p></li><li><p>Diminuir a relevância do conteúdo com indicações de qualidade inferior (tais como problemas de formatação, comprimento mais curto, etc.)</p></li></ul></td>
    </tr>
 </table>
 <p>Também é possível combinar vários Boost Rankers para implementar uma estratégia de classificação mais dinâmica e robusta baseada no peso.</p>
@@ -76,7 +76,7 @@ beta: Milvus v2.6.2+
     </button></h2><p>O diagrama seguinte ilustra o fluxo de trabalho principal dos Boost Rankers.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
    </span> <span class="img-wrapper"> <span>Mecanismo do Boost Ranker</span> </span></p>
 <p>Quando insere dados, Milvus distribui-os por segmentos. Durante uma pesquisa, cada segmento retorna um conjunto de candidatos, e Milvus classifica esses candidatos de todos os segmentos para produzir os resultados finais. Quando uma solicitação de pesquisa inclui um Boost Ranker, Milvus aplica-o aos resultados do candidato de cada segmento para evitar a perda potencial de precisão e melhorar a recuperação.</p>
 <p>Antes de finalizar os resultados, Milvus processa esses candidatos com o Boost Ranker da seguinte forma:</p>
@@ -87,7 +87,7 @@ beta: Milvus v2.6.2+
 <div class="alert note">
 <p>Não é possível usar o Boost Ranker como o classificador em uma pesquisa híbrida de vários vetores. No entanto, é possível usá-lo como classificador em qualquer um de seus sub-solicitações (<code translate="no">AnnSearchRequest</code>).</p>
 </div>
-<h2 id="Examples-of-Boost-Ranker" class="common-anchor-header">Exemplos do Boost Ranker<button data-href="#Examples-of-Boost-Ranker" class="anchor-icon" translate="no">
+<h2 id="Examples-of-Boost-Ranker" class="common-anchor-header">Exemplos de Boost Ranker<button data-href="#Examples-of-Boost-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -782,7 +782,7 @@ params.put(<span class="hljs-string">&quot;function_mode&quot;</span>,<span clas
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Especificamente, existem dois Boost Rankers: um aplica um peso fixo a todas as entidades encontradas, enquanto o outro atribui um peso aleatório a elas. Em seguida, fazemos referência a esses dois classificadores em um <strong>FunctionScore</strong>, que também define como os pesos influenciam as pontuações das entidades encontradas.</p>
+<p>Especificamente, há dois Boost Rankers: um aplica um peso fixo a todas as entidades encontradas, enquanto o outro atribui um peso aleatório a elas. Em seguida, fazemos referência a esses dois classificadores em um <strong>FunctionScore</strong>, que também define como os pesos influenciam as pontuações das entidades encontradas.</p>
 <p>A tabela seguinte lista os parâmetros necessários para criar uma instância <strong>FunctionScore</strong>.</p>
 <table>
    <tr>
@@ -794,7 +794,7 @@ params.put(<span class="hljs-string">&quot;function_mode&quot;</span>,<span clas
    <tr>
      <td><p><code translate="no">functions</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>Especifica os nomes dos classificadores de destino em uma lista.</p></td>
+     <td><p>Especifica os nomes dos classificadores de destino numa lista.</p></td>
      <td><p><code translate="no">["fix_weight_ranker", "random_weight_ranker"]</code></p></td>
    </tr>
    <tr>

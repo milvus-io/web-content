@@ -115,7 +115,7 @@ connections.connect(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
 <div class="alert note">
 <blockquote>
 <ul>
-<li>如果你只需要一个本地向量数据库，用于小规模数据或原型设计，那么将 uri 设置为本地文件，如<code translate="no">./milvus.db</code> ，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储到这个文件中。</li>
+<li>如果你只需要一个本地向量数据库，用于小规模数据或原型设计，那么将 uri 设置为本地文件，例如<code translate="no">./milvus.db</code> ，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储到这个文件中。</li>
 <li>如果你有大规模数据，比如超过一百万个向量，你可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器地址和端口作为 uri，例如<code translate="no">http://localhost:19530</code> 。如果在 Milvus 上启用了身份验证功能，请使用 "<your_username>:<your_password>" 作为令牌，否则不要设置令牌。</li>
 <li>如果您使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">公共端点和 API 密钥</a>相对应。</li>
 </ul>

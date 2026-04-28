@@ -489,4 +489,4 @@ result = client.run_analyzer(sample_text, analyzer_params)
 <p><strong>Erwartete Ausgabe:</strong></p>
 <pre><code translate="no" class="language-plaintext">[&#x27;東京&#x27;, &#x27;スカイ&#x27;, &#x27;ツリー&#x27;, &#x27;最寄り駅&#x27;, &#x27;とう&#x27;, &#x27;きょう&#x27;, &#x27;スカイ&#x27;, &#x27;ツリー&#x27;, &#x27;駅&#x27;]
 <button class="copy-code-btn"></button></code></pre>
-<p>Ohne <code translate="no">japanese_stop_tags</code> würde die Ausgabe Partikel wie <code translate="no">の</code> (Possessiv), <code translate="no">は</code> (Themenmarkierung) und <code translate="no">です</code> (Kopula) enthalten.</p>
+<p>Ohne <code translate="no">japanese_stop_tags</code> würde die Ausgabe Partikel wie <code translate="no">の</code> (Possessiv), <code translate="no">は</code> (Themenmarker) und <code translate="no">です</code> (Kopula) enthalten.</p>

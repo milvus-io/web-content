@@ -61,7 +61,7 @@ summary: >-
 <p>다음 그림은 Vamana 그래프가 어떻게 구성되는지 보여줍니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
    </span> <span class="img-wrapper"> <span>디스크</span> </span></p>
 <ol>
 <li><p><strong>초기 무작위 연결:</strong> 각 데이터 포인트(벡터)는 그래프에서 하나의 노드로 표시됩니다. 이러한 노드는 처음에 무작위로 연결되어 밀도가 높은 네트워크를 형성합니다. 일반적으로 노드는 광범위한 연결을 위해 약 500개의 에지(또는 연결)로 시작합니다.</p></li>
@@ -69,7 +69,7 @@ summary: >-
 <ul>
 <li><p><strong>중복 에지 정리:</strong> 알고리즘은 노드 간의 거리를 기준으로 불필요한 연결을 삭제합니다. 이 단계에서는 더 높은 품질의 에지를 우선시합니다.</p>
 <p><code translate="no">max_degree</code> 매개변수는 노드당 최대 에지 수를 제한합니다. <code translate="no">max_degree</code> 값이 높을수록 그래프가 더 조밀해져 관련성이 높은 이웃을 더 많이 찾을 수 있지만(리콜률이 높음), 메모리 사용량과 검색 시간이 늘어납니다.</p></li>
-<li><p><strong>전략적 단축키 추가:</strong> Vamana는 벡터 공간에서 멀리 떨어져 있는 데이터 포인트를 연결하는 장거리 에지를 도입했습니다. 이러한 단축키를 사용하면 그래프에서 중간 노드를 우회하여 검색을 빠르게 이동하고 탐색 속도를 크게 높일 수 있습니다.</p>
+<li><p><strong>전략적 단축키 추가:</strong> Vamana는 벡터 공간에서 멀리 떨어져 있는 데이터 포인트를 연결하는 장거리 에지를 도입했습니다. 이러한 바로가기를 사용하면 그래프에서 중간 노드를 우회하여 검색을 빠르게 이동하고 탐색 속도를 크게 높일 수 있습니다.</p>
 <p><code translate="no">search_list_size</code> 매개변수는 그래프 세분화 프로세스의 폭을 결정합니다. <code translate="no">search_list_size</code> 값이 높을수록 구성 중 이웃 검색이 확장되어 최종 정확도가 향상되지만 인덱스 구축 시간이 늘어납니다.</p></li>
 </ul></li>
 </ol>
@@ -102,7 +102,7 @@ summary: >-
     </button></h3><p>인덱스(디스크의 Vamana 그래프와 메모리의 PQ 코드)가 구축되면 DISKANN은 다음과 같이 ANN 검색을 수행합니다:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
    </span> <span class="img-wrapper"> <span>Diskann 2</span> </span></p>
 <ol>
 <li><p><strong>쿼리 및 진입점:</strong> 가장 가까운 이웃을 찾기 위한 쿼리 벡터가 제공됩니다. DISKANN은 Vamana 그래프에서 선택한 진입점(대개 데이터 세트의 글로벌 중심점 근처의 노드)에서 시작합니다. 글로벌 중심은 모든 벡터의 평균을 나타내므로 그래프를 통과하는 거리를 최소화하여 원하는 이웃을 찾는 데 도움이 됩니다.</p></li>
@@ -185,7 +185,7 @@ summary: >-
     <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.1</span> <span class="hljs-comment"># Ratio of cached node numbers to raw data</span>
     <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>매개변수 설명에 대한 자세한 내용은 <a href="/docs/ko/diskann.md#DISKANN-params">DISKANN</a> 매개변수를 참조하세요.</p>
+<p>매개변수 설명에 대한 자세한 내용은 <a href="/docs/ko/diskann.md#DISKANN-params">DISKANN 매개</a>변수를 참조하세요.</p>
 <h2 id="DISKANN-params" class="common-anchor-header">DISKANN 매개변수<button data-href="#DISKANN-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -260,7 +260,7 @@ summary: >-
      <td><p>압축되지 않은 데이터의 크기와 비교하여 PQ 코드(데이터 포인트의 압축된 표현)의 크기를 제어합니다.</p></td>
      <td><p><strong>유형</strong>: 실수 <strong>범위</strong>: (0.0, 0.25]</p>
 <p><strong>기본값입니다</strong>: <code translate="no">0.125</code></p></td>
-     <td><p>비율이 높을수록 PQ 코드에 더 많은 메모리를 할당하여 원본 벡터에 대한 더 많은 정보를 효과적으로 저장함으로써 더 정확한 검색 결과를 얻을 수 있습니다. 하지만 더 많은 메모리가 필요하므로 대규모 데이터 세트를 처리할 수 있는 용량이 제한됩니다. 비율이 낮으면 메모리 사용량이 줄어들지만, 더 작은 PQ 코드가 더 적은 정보를 보유하므로 정확도가 떨어질 수 있습니다. 이 접근 방식은 메모리 제약이 우려되는 시나리오에 적합하며 잠재적으로 더 큰 데이터 세트의 색인화를 가능하게 합니다.</p>
+     <td><p>비율이 높을수록 PQ 코드에 더 많은 메모리를 할당하여 원본 벡터에 대한 더 많은 정보를 효과적으로 저장함으로써 더 정확한 검색 결과를 얻을 수 있습니다. 하지만 더 많은 메모리가 필요하므로 대용량 데이터 세트를 처리할 수 있는 용량이 제한됩니다. 비율이 낮을수록 메모리 사용량은 줄어들지만 더 작은 PQ 코드가 더 적은 정보를 보유하므로 정확도가 떨어질 가능성이 있습니다. 이 접근 방식은 메모리 제약이 우려되는 시나리오에 적합하며 잠재적으로 더 큰 데이터 세트의 색인화를 가능하게 합니다.</p>
 <p>대부분의 경우 다음 범위 내에서 값을 설정하는 것이 좋습니다: [0.0625, 0.25].</p></td>
    </tr>
 </table>

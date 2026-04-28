@@ -34,7 +34,7 @@ summary: '⚡️ Einmal konfigurieren, Effizienz für immer steigern!'
         ></path>
       </svg>
     </button></h1><p>⚡️ Einmal konfigurieren, Effizienz für immer steigern!</p>
-<p>Sind Sie immer noch frustriert von veralteten Ergebnissen des LLM? Sind Sie es leid, dass der LLM veraltete Inhalte ausgibt, selbst nachdem die Versionen aktualisiert wurden? Versuchen Sie dieses mcp, um das Problem der Informationsverzögerung bei der Entwicklung von Milvus-bezogenem Code ein für alle Mal zu lösen!</p>
+<p>Sind Sie immer noch frustriert von veralteten Ergebnissen des LLM? Sind Sie es leid, dass der LLM veraltete Inhalte ausgibt, auch wenn die Versionen aktualisiert wurden? Versuchen Sie dieses mcp, um das Problem der Informationsverzögerung bei der Entwicklung von Milvus-bezogenem Code ein für alle Mal zu lösen!</p>
 <p>Der offizielle Milvus SDK Code Helper ist jetzt online - finden Sie einfach die entsprechende AI IDE, konfigurieren Sie sie einmal, und lassen Sie AI <strong>offiziell empfohlenen</strong> Milvus-Code für Sie schreiben. Verabschieden Sie sich vollständig von veralteten Frameworks!</p>
 <p>➡️ Jetzt springen: <a href="#Quickstart">QuickStart</a></p>
 <h1 id="Effect-display" class="common-anchor-header">Effekt-Anzeige<button data-href="#Effect-display" class="anchor-icon" translate="no">
@@ -59,8 +59,8 @@ summary: '⚡️ Einmal konfigurieren, Effizienz für immer steigern!'
      <th><p>MCP-Code-Helfer <strong>deaktiviert</strong></p></th>
    </tr>
    <tr>
-     <td><p><img translate="no" width="400" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
-     <td><p><img translate="no" width="400"src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
+     <td><p><img translate="no" width="400" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
+     <td><p><img translate="no" width="400"src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
    </tr>
    <tr>
      <td><p>Verwenden Sie die offiziell empfohlene neueste MilvusClient-Schnittstelle zum Erstellen einer Collection</p></td>
@@ -101,7 +101,7 @@ summary: '⚡️ Einmal konfigurieren, Effizienz für immer steigern!'
     </button></h2><p>Gehen Sie zu: <code translate="no">Settings</code> -&gt; <code translate="no">Cursor Settings</code> -&gt; <code translate="no">Tools &amp; Intergrations</code> -&gt; <code translate="no">Add new global MCP server</code></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cursor-mcp-settings.png" alt="Cursor Mcp Settings" class="doc-image" id="cursor-mcp-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cursor-mcp-settings.png" alt="Cursor Mcp Settings" class="doc-image" id="cursor-mcp-settings" />
    </span> <span class="img-wrapper"> <span>Cursor Mcp Einstellungen</span> </span></p>
 <p>Es wird empfohlen, die folgende Konfiguration in Ihre Cursor <code translate="no">~/.cursor/mcp.json</code> Datei einzufügen. Sie können auch ein bestimmtes Projekt installieren, indem Sie <code translate="no">.cursor/mcp.json</code> in Ihrem Projektordner erstellen. Weitere Informationen finden Sie in den <a href="https://docs.cursor.com/context/model-context-protocol">Cursor MCP-Dokumenten</a>.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
@@ -248,7 +248,7 @@ summary: '⚡️ Einmal konfigurieren, Effizienz für immer steigern!'
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cherry-studio-mcp-settings.png" alt="Cherry Studio Mcp Settings" class="doc-image" id="cherry-studio-mcp-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cherry-studio-mcp-settings.png" alt="Cherry Studio Mcp Settings" class="doc-image" id="cherry-studio-mcp-settings" />
    </span> <span class="img-wrapper"> <span>Cherry Studio Mcp Einstellungen</span> </span></p>
 <h2 id="Cline" class="common-anchor-header">Cline<button data-href="#Cline" class="anchor-icon" translate="no">
       <svg translate="no"

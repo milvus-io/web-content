@@ -67,7 +67,7 @@ title: MemGPT с интеграцией Milvus
         ></path>
       </svg>
     </button></h2><p>Чтобы передать внешние данные в чатбот MemGPT, нам сначала нужно создать источник данных.</p>
-<p>Для загрузки исследовательской работы MemGPT мы будем использовать <code translate="no">curl</code> (вы также можете просто загрузить PDF-файл из браузера):</p>
+<p>Для загрузки исследовательской работы MemGPT мы используем <code translate="no">curl</code> (вы также можете просто загрузить PDF-файл из браузера):</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">we<span class="hljs-string">&#x27;re saving the file as &quot;memgpt_research_paper.pdf&quot;</span></span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-string">curl -L -o memgpt_research_paper.pdf https://arxiv.org/pdf/2310.08560.pdf</span></span>
 <button class="copy-code-btn"></button></code></pre>

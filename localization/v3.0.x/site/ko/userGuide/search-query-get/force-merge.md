@@ -199,6 +199,7 @@ job_id = client.compact(
     target_size=max_int64
 )
 <button class="copy-code-btn"></button></code></pre>
+<p><a id="parameter-reference"></a></p>
 <h4 id="Parameter-reference" class="common-anchor-header">매개변수 참조</h4><p>다음 표에서는 매개변수에 대해 설명합니다.</p>
 <table>
    <tr>
@@ -261,6 +262,7 @@ state = client.get_compaction_state(job_id)
 <li><p><strong>성능 절충안을 고려하세요.</strong> 강제 병합 압축은 리소스 집약적인 작업입니다. 세그먼트 데이터를 읽고, 병합하고, 다시 씁니다. 쿼리 지연 시간에 미치는 영향을 최소화하려면 트래픽이 적은 시간대에 예약하세요.</p></li>
 <li><p><strong>이전과 이후의 세그먼트 수를 모니터링합니다.</strong> <code translate="no">get_compaction_state()</code> 및 <code translate="no">list_persistent_segments</code> 을 사용하여 압축이 예상대로 더 적은 수의 더 큰 세그먼트를 생성했는지 확인합니다.</p></li>
 </ul>
+<p><a id="faq"></a></p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -54,7 +54,7 @@ title: 使用 Helm Charts 配置 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>直接<a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">下載</a> <code translate="no">values.yaml</code> 或使用以下命令。</p>
+    </button></h3><p>直接<a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">下載</a> <code translate="no">values.yaml</code> 或使用以下命令。</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">修改配置文件<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
@@ -72,7 +72,7 @@ title: 使用 Helm Charts 配置 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>通過調整<code translate="no">values.yaml</code> 中的相應參數，配置您的 Milvus 實例，以適應您的應用場景。</p>
+    </button></h3><p>通過調整<code translate="no">values.yaml</code> 中的相應參數，配置您的 Milvus 實例，以適合您的應用場景。</p>
 <p>具體來說，在<code translate="no">values.yaml</code> 中搜索<code translate="no">extraConfigFiles</code> ，並將您的配置放入此部分，如下所示：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Extra configs for milvus.yaml</span>
 <span class="hljs-comment"># If set, this config will merge into milvus.yaml</span>
@@ -126,7 +126,6 @@ title: 使用 Helm Charts 配置 Milvus
             <li><a href="/docs/zh-hant/configure_indexcoord.md">索引坐標</a></li>
             <li><a href="/docs/zh-hant/configure_metastore.md">元存儲</a></li>
             <li><a href="/docs/zh-hant/configure_mq.md">訊息佇列</a></li>
-            <li><a href="/docs/zh-hant/configure_natsmq.md">訊息佇列</a></li>
             <li><a href="/docs/zh-hant/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/zh-hant/configure_trace.md">追蹤</a></li>
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md">配額與限制</a></li>

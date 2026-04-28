@@ -301,7 +301,7 @@ df
     </tr>
     <tr>
       <th>1</th>
-      <td>用什么编程语言来编写Milvus...</td>
+      <td>用什么编程语言编写Milvus...</td>
       <td>[CMake &amp; Conan\n\nMilvus 的算法库...</td>
       <td>编写 Knowherus 的编程语言是什么？</td>
       <td>用来编写知乎的编程语言...</td>

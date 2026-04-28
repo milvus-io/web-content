@@ -291,7 +291,7 @@ The Docker for Windows Service service is starting.​
 The Docker for Windows Service service was started successfully.​
 
 </code></pre></li>
-<li><p>Vérifiez si WSL a été correctement installé.</p>
+<li><p>Vérifiez si WSL a été installé correctement.</p>
 <p>Vous pouvez exécuter la commande suivante pour installer ou mettre à jour la commande WSL 2.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
 Checking for updates.​
@@ -340,7 +340,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
    </span> <span class="img-wrapper"> <span>Sélectionnez les distributions WSL 2 dans les paramètres de Docker Desktop.</span> </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Comment puis-je traiter les erreurs liées au volume qui s'affichent au démarrage de Milvus et qui se lisent <code translate="no">Read config failed</code>?<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Comment puis-je traiter les erreurs liées au volume qui s'affichent lors du démarrage de Milvus et qui se lisent <code translate="no">Read config failed</code>?<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

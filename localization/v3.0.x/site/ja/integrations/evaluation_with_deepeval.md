@@ -431,4 +431,4 @@ result = evaluate(
 Evaluating 3 test case(s) in parallel: |██████████|100% (3/3) [Time Taken: 00:11,  3.97s/test case]
 </code></pre>
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">テストが終了しました<span style="color: #05f58d; text-decoration-color: #05f58d">！</span>Confident AIで評価結果を見るには、<span style="color: #008000; text-decoration-color: #008000">'deepeval login'</span>を実行する。 
-‼️ 注意: 代わりに Confident AI 上で直接、deepeval のすべてのメトリクスに対する評価を実行することもできます。</pre>
+‼️ 注意：代わりにConfident AI上で直接deepevalの全メトリクスの評価を実行することもできます。</pre>

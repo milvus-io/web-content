@@ -636,7 +636,7 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
       <td>
         <li>啟用記憶體映射 (mmap) 以最佳化處理成長中的原始資料。 </li>      
         <li>啟用此功能後，與新增或修改資料相關的記憶體開銷將大幅降低。 </li>      
-        <li>不過，此最佳化的代價可能是略微降低受影響資料段的查詢延遲。</li>      </td>
+        <li>然而，此最佳化的代價可能是略微降低受影響資料段的查詢延遲。</li>      </td>
       <td>錯誤</td>
     </tr>
   </tbody>
@@ -752,7 +752,7 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        開始執行 lazyload 搜尋與擷取之前的最大等待逾時長度 (以毫秒為單位)      </td>
+      <td>        開始執行 lazyload 搜尋與擷取之前的最大等待逾時長度 (毫秒)      </td>
       <td>30000</td>
     </tr>
   </tbody>
@@ -868,7 +868,7 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        偷懶載入的最大驅逐次數，預設為 1 </td>
+      <td>        偷懶載入的最大驅逐次數，預設值為 1 </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -929,7 +929,7 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
       <td>
         <li>maxReadConcurrentRatio 是讀取任務（搜尋任務和查詢任務）的並發比率。</li>      
         <li>最大讀取並發率為 hardware.GetCPUNum * maxReadConcurrentRatio 的值。</li>      
-        <li>預設值為 2.0，這表示最大讀取並發率是 hardware.GetCPUNum * 2 的值。</li>      
+        <li>預設值為 2.0，表示最大讀取並發度為 hardware.GetCPUNum * 2 的值。</li>      
         <li>最大讀取並發度必須大於或等於 1，且小於或等於 hardware.GetCPUNum * 100。</li>      
         <li>(0, 100]</li>      </td>
       <td>1</td>

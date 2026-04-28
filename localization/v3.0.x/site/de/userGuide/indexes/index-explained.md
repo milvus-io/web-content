@@ -135,7 +135,7 @@ summary: >-
 <p>IVF-Indextypen ermöglichen es Milvus, Vektoren durch eine auf dem Zentroid basierende Partitionierung in Bereiche zu gruppieren. Im Allgemeinen kann man davon ausgehen, dass alle Vektoren in einem Bucket wahrscheinlich nahe am Abfragevektor liegen, wenn der Bucket-Schwerpunkt nahe am Abfragevektor liegt. Ausgehend von dieser Prämisse scannt Milvus nur die Vektoreinbettungen in denjenigen Buckets, deren Zentroide sich in der Nähe des Abfragevektors befinden, anstatt den gesamten Datensatz zu untersuchen. Diese Strategie senkt die Rechenkosten und gewährleistet gleichzeitig eine akzeptable Genauigkeit.</p>
 <p>Diese Art der Indexdatenstruktur ist ideal für große Datensätze, die einen schnellen Durchsatz erfordern.</p></li>
 <li><p><strong>Graphenbasierte Struktur</strong></p>
-<p>Eine graphenbasierte Datenstruktur für die Vektorsuche, wie z. B. Hierarchical Navigable Small World<a href="https://arxiv.org/abs/1603.09320">(HNSW</a>), konstruiert einen mehrschichtigen Graphen, bei dem jeder Vektor mit seinen nächsten Nachbarn verbunden ist. Abfragen navigieren durch diese Hierarchie, wobei sie von groben oberen Schichten ausgehen und durch niedrigere Schichten wechseln, was eine effiziente Suchkomplexität in logarithmischer Zeit ermöglicht.</p>
+<p>Eine graphenbasierte Datenstruktur für die Vektorsuche, wie z. B. Hierarchical Navigable Small World<a href="https://arxiv.org/abs/1603.09320">(HNSW</a>), konstruiert einen mehrschichtigen Graphen, bei dem jeder Vektor mit seinen nächsten Nachbarn verbunden ist. Abfragen navigieren durch diese Hierarchie, wobei sie von groben oberen Schichten ausgehen und durch die unteren Schichten wechseln, was eine effiziente Suchkomplexität in logarithmischer Zeit ermöglicht.</p>
 <p>Diese Art von Indexdatenstruktur eignet sich hervorragend für hochdimensionale Räume und Szenarien, die Abfragen mit geringer Latenz erfordern.</p></li>
 </ul>
 <h3 id="Quantization" class="common-anchor-header">Quantisierung<button data-href="#Quantization" class="anchor-icon" translate="no">
@@ -155,7 +155,7 @@ summary: >-
       </svg>
     </button></h3><p>Die Quantisierung reduziert den Speicherplatzbedarf und die Rechenkosten durch eine gröbere Darstellung:</p>
 <ul>
-<li><p><strong>Skalare Quantisierung</strong> (z. B. <strong>SQ8</strong>) ermöglicht Milvus die Komprimierung jeder Vektordimension in ein einziges Byte (8-Bit), wodurch der Speicherbedarf im Vergleich zu 32-Bit-Fließkommazahlen um 75 % gesenkt wird und gleichzeitig eine angemessene Genauigkeit erhalten bleibt.</p></li>
+<li><p><strong>Die Skalarquantisierung</strong> (z. B. <strong>SQ8</strong>) ermöglicht Milvus die Komprimierung jeder Vektordimension in ein einziges Byte (8-Bit), wodurch der Speicherbedarf im Vergleich zu 32-Bit-Fließkommazahlen um 75 % reduziert wird, wobei eine angemessene Genauigkeit erhalten bleibt.</p></li>
 <li><p><strong>Die Produktquantisierung</strong><strong>(PQ</strong>) ermöglicht es Milvus, Vektoren in Untervektoren aufzuteilen und sie mit Hilfe von Codebuch-basiertem Clustering zu kodieren. Auf diese Weise werden höhere Kompressionsraten (z. B. 4-32x) auf Kosten einer geringfügig verringerten Wiederauffindbarkeit erreicht, was es für Umgebungen mit begrenztem Speicherplatz geeignet macht.</p></li>
 </ul>
 <h3 id="Refiner" class="common-anchor-header">Verfeinerungsprogramm<button data-href="#Refiner" class="anchor-icon" translate="no">
@@ -455,7 +455,7 @@ summary: >-
 <p>Die Quantisierung reduziert die Vektorgröße. Beispielsweise führt die Verwendung von PQ mit 8 Unterquantisierern (8 Byte pro Vektor) zu einer drastischen Kompression. Der von den komprimierten Vektoreinbettungen verbrauchte Speicher kann wie folgt berechnet werden:</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8 MB
 <button class="copy-code-btn"></button></code></pre>
-<p>Im Vergleich zu den unkomprimierten Vektoreinbettungen wird eine 64-fache Komprimierungsrate erreicht, und der vom Index-Typ <strong>HNSWPQ</strong> verwendete Gesamtspeicher beträgt <strong>128 MB (Graph) + 8 MB (komprimierter Vektor) = 136 MB</strong>.</p></li>
+<p>Im Vergleich zu den unkomprimierten Vektoreinbettungen wird eine 64-fache Komprimierungsrate erreicht, und der Gesamtspeicherverbrauch des Index-Typs <strong>HNSWPQ</strong> würde <strong>128 MB (Graph) + 8 MB (komprimierter Vektor) = 136 MB</strong> betragen.</p></li>
 <li><p><strong>Berechnen Sie den Verfeinerungs-Overhead.</strong></p>
 <p>Bei der Verfeinerung, z. B. bei der Neueinordnung mit Rohvektoren, werden vorübergehend hochpräzise Daten in den Speicher geladen. Für eine Suche, die die 10 besten Ergebnisse mit einer Expansionsrate von 5 abruft, kann der Verfeinerungs-Overhead wie folgt geschätzt werden:</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates

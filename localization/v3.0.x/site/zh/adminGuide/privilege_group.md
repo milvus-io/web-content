@@ -37,7 +37,7 @@ summary: 为了简化授予权限的流程，建议将多个权限合并为一�
     </button></h2><p>特权组由多个特权组成。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" />
    </span> <span class="img-wrapper"> <span>特权组示例</span> </span></p>
 <p>如上图所示，假设需要向一个角色授予三种不同的权限。</p>
 <ul>
@@ -65,7 +65,22 @@ summary: 为了简化授予权限的流程，建议将多个权限合并为一�
 <p>内置特权组的三个级别没有级联关系。在实例级别设置特权组不会自动为该实例下的所有数据库和 Collections 设置权限。数据库和集合级别的权限需要手动设置。</p>
 </div>
 <p>下表解释了每个内置权限组所包含的权限。</p>
-<h3 id="Collection-level" class="common-anchor-header">Collection 级别</h3><ul>
+<h3 id="Collection-level" class="common-anchor-header">Collection 级别<button data-href="#Collection-level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>CollectionReadOnly (COLL_RO)</strong>：包括读取集合数据的权限</p></li>
 <li><p><strong>CollectionReadWrite (COLL_RW)</strong>：包括读取和写入收集数据的权限</p></li>
 <li><p><strong>CollectionAdmin (COLL_ADMIN)</strong>：包括读写收集数据和管理收集的权限。</p></li>
@@ -241,7 +256,22 @@ summary: 为了简化授予权限的流程，建议将多个权限合并为一�
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h3 id="Database-level" class="common-anchor-header">数据库级别</h3><ul>
+<h3 id="Database-level" class="common-anchor-header">数据库级别<button data-href="#Database-level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>只读数据库 (DB_RO)</strong>：包括读取数据库数据的权限</p></li>
 <li><p><strong>数据库读写 (DB_RW)</strong>：包括读取和写入数据库数据的权限</p></li>
 <li><p><strong>数据库管理 (DB_Admin)</strong>：包括读写数据库数据和管理数据库的权限。</p></li>
@@ -285,7 +315,22 @@ summary: 为了简化授予权限的流程，建议将多个权限合并为一�
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h3 id="Cluster-level" class="common-anchor-header">群集级别</h3><ul>
+<h3 id="Cluster-level" class="common-anchor-header">群集级别<button data-href="#Cluster-level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>只读群集 (Cluster_RO)</strong>：包括读取实例数据的权限</p></li>
 <li><p><strong>群集读写 (Cluster_RW)</strong>：包括读取和写入实例数据的权限</p></li>
 <li><p><strong>ClusterAdmin (Cluster_Admin)</strong>：包括读写实例数据和管理实例的权限。</p></li>
@@ -459,7 +504,22 @@ summary: 为了简化授予权限的流程，建议将多个权限合并为一�
         ></path>
       </svg>
     </button></h2><p>可以创建特权组，然后向特权组添加特权。</p>
-<h3 id="Create-a-privilege-group" class="common-anchor-header">创建权限组</h3><p>下面的示例演示了如何创建名为<code translate="no">privilege_group_1</code> 的特权组。</p>
+<h3 id="Create-a-privilege-group" class="common-anchor-header">创建权限组<button data-href="#Create-a-privilege-group" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下面的示例演示了如何创建名为<code translate="no">privilege_group_1</code> 的特权组。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -491,7 +551,22 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">向特权组添加权限</h3><p>下面的示例演示了如何将<code translate="no">PrivilegeBackupRBAC</code> 和<code translate="no">PrivilegeRestoreRBAC</code> 添加到刚刚创建的特权组<code translate="no">privilege_group_1</code> 中。</p>
+<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">向特权组添加权限<button data-href="#Add-privileges-to-a-privilege-group" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下面的示例演示了如何将<code translate="no">PrivilegeBackupRBAC</code> 和<code translate="no">PrivilegeRestoreRBAC</code> 添加到刚刚创建的特权组<code translate="no">privilege_group_1</code> 中。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -528,7 +603,22 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
     &quot;privileges&quot;:[&quot;Query&quot;, &quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">从权限组中删除权限</h3><p>下面的示例演示了如何从权限组<code translate="no">privilege_group_1</code> 中移除权限<code translate="no">PrivilegeRestoreRBAC</code> 。</p>
+<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">从权限组中删除权限<button data-href="#Remove-privileges-from-a-privilege-group" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下面的示例演示了如何从权限组<code translate="no">privilege_group_1</code> 中移除权限<code translate="no">PrivilegeRestoreRBAC</code> 。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -563,7 +653,22 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
     &quot;privileges&quot;:[&quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-privilege-groups" class="common-anchor-header">列出特权组</h3><p>下面的示例演示了如何列出所有现有特权组。</p>
+<h3 id="List-privilege-groups" class="common-anchor-header">列出特权组<button data-href="#List-privilege-groups" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下面的示例演示了如何列出所有现有特权组。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -596,7 +701,22 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
 <p>下面是一个输出示例。</p>
 <pre><code translate="no" class="language-bash">PrivilegeGroupItem: &lt;privilege_group:privilege_group_1&gt;, &lt;privileges:(<span class="hljs-string">&#x27;Search&#x27;</span>, <span class="hljs-string">&#x27;Query&#x27;</span>)&gt;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-a-privilege-group" class="common-anchor-header">删除权限组</h3><p>下面的示例演示了如何删除<code translate="no">privilege_group_1</code> 特权组。</p>
+<h3 id="Drop-a-privilege-group" class="common-anchor-header">删除权限组<button data-href="#Drop-a-privilege-group" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下面的示例演示了如何删除<code translate="no">privilege_group_1</code> 特权组。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

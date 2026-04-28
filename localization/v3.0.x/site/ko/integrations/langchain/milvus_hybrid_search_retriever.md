@@ -30,7 +30,7 @@ title: Milvus 하이브리드 검색 리트리버
 <p>LangChain Milvus 통합은 하이브리드 검색을 구현하는 유연한 방법을 제공하며, 임의의 수의 벡터 필드와 사용자 정의 밀도 또는 희소 임베딩 모델을 지원하여 다양한 하이브리드 검색 사용 시나리오에 유연하게 적응할 수 있으며 동시에 LangChain의 다른 기능과 호환됩니다.</p>
 <p>이 튜토리얼에서는 가장 일반적인 밀도 + 스파스 사례부터 시작하여 여러 가지 일반적인 하이브리드 검색 사용 방식을 소개합니다.</p>
 <div class="alert note">
-<p>Milvus와 LangChain을 사용한 하이브리드 검색의 또 다른 구현인 <a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever는</a> <strong>곧</strong> 더 이상 <strong>사용되지 않을</strong> 예정입니다. 이 문서의 접근 방식이 더 유연하고 LangChain과 호환되므로 하이브리드 검색을 구현할 때는 이 접근 방식을 사용하시기 바랍니다.</p>
+<p>Milvus와 LangChain을 사용한 하이브리드 검색의 또 다른 구현인 <a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever는</a> <strong>곧</strong> 더 이상 <strong>사용되지 않을</strong> 예정입니다. 이 문서의 접근 방식이 더 유연하고 LangChain과 호환되므로 하이브리드 검색을 구현할 때 이 접근 방식을 사용하시기 바랍니다.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -378,7 +378,7 @@ vectorstore.similarity_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RAG 시나리오에서 가장 널리 사용되는 하이브리드 검색 방식은 밀도 검색 + 희소 검색이며, 그 다음이 재랭크입니다. 다음 예제에서는 간단한 엔드투엔드 코드를 보여줍니다.</p>
+    </button></h2><p>RAG 시나리오에서 하이브리드 검색에 가장 널리 사용되는 접근 방식은 밀도 + 희소 검색이며, 그 다음이 재랭크입니다. 다음 예제에서는 간단한 엔드투엔드 코드를 보여줍니다.</p>
 <h3 id="Prepare-the-data" class="common-anchor-header">데이터 준비<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -523,4 +523,4 @@ res
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'PAL (Program-aided Language models) and PoT (Program of Thoughts prompting) are approaches that involve using language models to generate programming language statements to solve natural language reasoning problems. This method offloads the solution step to a runtime, such as a Python interpreter, allowing for complex computation and reasoning to be handled externally. PAL and PoT rely on language models with strong coding skills to effectively perform these tasks.'
 </code></pre>
-<p>축하합니다! Milvus와 LangChain으로 구동되는 하이브리드(밀도 벡터 + 스파스 bm25 함수) 검색 RAG 체인을 구축하셨습니다.</p>
+<p>축하합니다! Milvus와 LangChain으로 하이브리드(밀도 벡터 + 스파스 bm25 함수) 검색 RAG 체인을 구축하셨습니다.</p>

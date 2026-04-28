@@ -162,7 +162,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
    </tr>
    <tr>
      <td><p><code translate="no">dict</code></p></td>
-     <td><p>분석기가 어휘 소스로 로드할 사전 목록입니다. 기본 제공 옵션:</p><ul><li><p><code translate="no">"_default_"</code>: 엔진에 내장된 중국어 간체 사전을 로드합니다. 자세한 내용은 <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt를</a> 참조하세요.</p></li><li><p><code translate="no">"_extend_default_"</code>: <code translate="no">"_default_"</code> 의 모든 항목과 추가 중국어 번체 보충 자료를 로드합니다. 자세한 내용은 <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big을</a> 참조하세요.</p><p>기본 제공 사전과 사용자 지정 사전을 원하는 만큼 혼합할 수도 있습니다. 예: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li></ul></td>
+     <td><p>분석기가 어휘 소스로 로드할 사전 목록입니다. 기본 제공 옵션:</p><ul><li><p><code translate="no">"_default_"</code>: 엔진에 내장된 중국어 간체 사전을 로드합니다. 자세한 내용은 <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt를</a> 참조하세요.</p></li><li><p><code translate="no">"_extend_default_"</code>: <code translate="no">"_default_"</code> 의 모든 항목과 추가 중국어 번체 보충 자료를 로드합니다. 자세한 내용은 <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big을</a> 참조하세요.</p><p>기본 제공 사전과 사용자 지정 사전을 얼마든지 혼합할 수도 있습니다. 예: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li></ul></td>
      <td><p><code translate="no">["_default_"]</code></p></td>
    </tr>
    <tr>
@@ -176,7 +176,97 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
-<p><code translate="no">analyzer_params</code> 을 정의한 후 컬렉션 스키마를 정의할 때 <code translate="no">VARCHAR</code> 필드에 적용할 수 있습니다. 이렇게 하면 Milvus가 지정된 분석기를 사용하여 해당 필드의 텍스트를 처리하여 효율적인 토큰화 및 필터링을 수행할 수 있습니다. 자세한 내용은 <a href="/docs/ko/analyzer-overview.md#Example-use">사용 예시를</a> 참조하세요.</p>
+<p><code translate="no">dict</code> 을 통해 인라이닝하는 대신 외부 파일에서 대용량 사용자 정의 어휘를 로드하려면 아래의 <a href="/docs/ko/jieba-tokenizer.md#Custom-configuration-with-a-dictionary-file">사전 파일을 사용한 사용자 정의 구성을</a> 참조하세요.</p>
+<p><code translate="no">analyzer_params</code> 을 정의한 후 컬렉션 스키마를 정의할 때 <code translate="no">VARCHAR</code> 필드에 적용할 수 있습니다. 이렇게 하면 Milvus가 효율적인 토큰화 및 필터링을 위해 지정된 분석기를 사용하여 해당 필드의 텍스트를 처리할 수 있습니다. 자세한 내용은 <a href="/docs/ko/analyzer-overview.md#Example-use">사용 예시를</a> 참조하세요.</p>
+<h3 id="Custom-configuration-with-a-dictionary-file--Milvus-30x" class="common-anchor-header">사전 파일을 사용한 사용자 지정 구성<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Custom-configuration-with-a-dictionary-file--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>도메인 용어집, 제품 용어집 또는 고유 명사 목록과 같은 대규모 사용자 정의 어휘의 경우, 단어를 파일에 저장하고 파일을 원격 파일 리소스로 등록한 다음 <code translate="no">extra_dict_file</code> 매개 변수를 통해 토큰화기에서 해당 파일을 참조하세요. 분석기는 이러한 단어를 기본 제공 사전 위에 있는 어휘집에 로드합니다.</p>
+<p>파일은 한 줄에 하나의 용어가 포함된 일반 UTF-8 텍스트입니다. 예를 들어</p>
+<pre><code translate="no" class="language-plaintext">结巴分词器
+向量数据库
+<button class="copy-code-btn"></button></code></pre>
+<p>Milvus 클러스터가 사용하도록 구성된 개체 저장소에 파일을 업로드한 다음 등록합니다:</p>
+<div class="multipleCode">
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="hljs-comment"># Register the uploaded file under a name you&#x27;ll reference from analyzer configs.</span>
+client.add_file_resource(
+    name=<span class="hljs-string">&quot;zh_terms&quot;</span>,
+    path=<span class="hljs-string">&quot;file/zh_terms.txt&quot;</span>,    <span class="hljs-comment"># full S3 object key, including the rootPath prefix</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">extra_dict_file</code> 을 통해 토큰화기에서 등록된 리소스를 참조합니다:</p>
+<div class="multipleCode">
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">노드JS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">analyzer_params = {
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: {
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+        <span class="hljs-string">&quot;dict&quot;</span>: [<span class="hljs-string">&quot;_default_&quot;</span>],             <span class="hljs-comment"># keep the built-in dictionary</span>
+        <span class="hljs-string">&quot;mode&quot;</span>: <span class="hljs-string">&quot;exact&quot;</span>,
+        <span class="hljs-string">&quot;hmm&quot;</span>: <span class="hljs-literal">False</span>,
+        <span class="hljs-string">&quot;extra_dict_file&quot;</span>: {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;remote&quot;</span>,
+            <span class="hljs-string">&quot;resource_name&quot;</span>: <span class="hljs-string">&quot;zh_terms&quot;</span>,
+            <span class="hljs-string">&quot;file_name&quot;</span>: <span class="hljs-string">&quot;zh_terms.txt&quot;</span>,
+        },
+    },
+}
+
+client.run_analyzer([<span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>], analyzer_params)
+<span class="hljs-comment"># → [[&#x27;milvus&#x27;, &#x27;结巴&#x27;, &#x27;分词器&#x27;, &#x27;中文&#x27;, &#x27;测试&#x27;]]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">extra_dict_file</code> 파라미터는 다음과 같은 필드를 가진 객체를 허용합니다:</p>
+<table>
+   <tr>
+     <th><p>필드</p></th>
+     <th><p>설명</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">type</code></p></td>
+     <td><p>리소스 유형. <code translate="no">add_file_resource</code> 을 통해 등록된 파일의 경우 <code translate="no">"remote"</code> 을 사용합니다. 자체 호스팅 배포에 사용되는 <code translate="no">"local"</code> 변형에 대해서는 <a href="/docs/ko/manage-file-resources.md">파일 리소스 관리를</a> 참조하세요.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">resource_name</code></p></td>
+     <td><p>파일이 <code translate="no">add_file_resource</code> 에 등록될 때 사용된 이름입니다.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">file_name</code></p></td>
+     <td><p>등록된 리소스의 객체 저장소 경로 중 파일 이름 부분(예: 리소스가 <code translate="no">path="file/zh_terms.txt"</code> 에 등록된 경우 <code translate="no">"zh_terms.txt"</code> )입니다.</p></td>
+   </tr>
+</table>
+<p><code translate="no">extra_dict_file</code> 을 통해 추가된 단어는 기본 제공 사전과 병합되므로 jieba의 세분화 알고리즘은 기존 항목과 함께 해당 단어를 보게 됩니다. 특정 용어가 독립형 토큰으로 표시되는지 여부는 jieba의 확률 가중치 DAG 선택에 따라 달라집니다. <code translate="no">向量数据库</code> 같은 긴 사용자 정의 용어는 기본 제공 사전에서 더 짧은 항목의 빈도가 더 높은 경우 <code translate="no">向量</code> + <code translate="no">数据库</code> 로 분할될 수 있습니다.</p>
 <h2 id="Examples" class="common-anchor-header">예제<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -240,7 +330,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">다음을 사용하여 확인 <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Verification-using-runanalyzer--Milvus-2511+" class="anchor-icon" translate="no">
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">다음을 사용하여 확인 <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

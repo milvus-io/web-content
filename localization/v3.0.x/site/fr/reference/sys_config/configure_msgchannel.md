@@ -103,7 +103,7 @@ summary: Découvrez comment configurer msgChannel pour Milvus.
     </button></h2><table id="msgChannel.chanNamePrefix.rootCoordStatistics">
   <thead>
     <tr>
-      <th class="width80">Description</th>
+      <th class="width80">Description du paramètre</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>

@@ -79,7 +79,7 @@ title: RPM/DEBパッケージによるMilvusスタンドアロンのインスト
         ></path>
       </svg>
     </button></h2><p>RPM/DEBパッケージをインストールするには、お使いのシステムのパッケージマネージャを使用します。</p>
-<p>RPM ベースのシステム（CentOS、Fedora、RHEL など）の場合、<code translate="no">yum</code> コマンドを使用してパッケージをインストールします。</p>
+<p>RPM ベースのシステム（CentOS、Fedora、RHEL など）の場合は、<code translate="no">yum</code> コマンドを使用してパッケージをインストールします。</p>
 <pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.9-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -211,7 +211,7 @@ dpkg -l | grep milvus
 </ul></li>
 <li><p><a href="/docs/ja/milvus-webui.md">Milvusの</a>観測と管理のための直感的なWebインターフェースである<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>ご覧ください。</p></li>
 <li><p><a href="/docs/ja/milvus_backup_overview.md">Milvus</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
-<li><p>Milvusのデバッグとダイナミックな設定更新のためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherを</a>ご覧ください。</p></li>
+<li><p>Milvusのデバッグとダイナミックなコンフィギュレーション更新のためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherを</a>ご覧ください。</p></li>
 <li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://github.com/zilliztech/attu">Attuを</a>ご紹介します。</p></li>
 <li><p><a href="/docs/ja/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
 </ul>

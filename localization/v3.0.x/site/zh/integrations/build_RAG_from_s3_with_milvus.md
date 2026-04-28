@@ -1,7 +1,7 @@
 ---
 id: build_RAG_from_s3_with_milvus.md
 summary: >-
-  本教程将指导您使用 Milvus 和亚马逊 S3 构建检索增强生成（RAG）管道。您将学习如何高效地从 S3
+  本教程将指导您使用 Milvus 和亚马逊 S3 构建一个检索增强生成（RAG）管道。您将学习如何高效地从 S3
   文件桶中加载文档，将其分割成易于管理的块，并将其向量嵌入存储在 Milvus 中，以便进行快速、可扩展的检索。为了简化这一过程，我们将使用
   LangChain 作为工具，从 S3 加载数据并将其存储到 Milvus 中。
 title: 构建 RAG 管道：将数据从 S3 载入 Milvus

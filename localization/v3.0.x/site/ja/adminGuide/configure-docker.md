@@ -41,7 +41,7 @@ title: Docker ComposeでMilvusを設定する
     </button></h2><p><code translate="no">milvus.yaml</code> を直接ダウンロードするか、以下のコマンドで<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.6.15/configs/milvus.yaml">ダウンロード</a>します。</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v2.6.15/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Modify-the-configuration-file" class="common-anchor-header">設定ファイルの変更<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
+<h2 id="Modify-the-configuration-file" class="common-anchor-header">設定ファイルの修正<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

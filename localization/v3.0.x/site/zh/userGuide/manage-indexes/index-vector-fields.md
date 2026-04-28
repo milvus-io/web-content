@@ -19,8 +19,11 @@ title: 索引向量字段
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南将向您介绍在 Collections 中创建和管理向量字段索引的基本操作。</p>
-<h2 id="Overview" class="common-anchor-header">索引概述<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>本指南将指导您完成在 Collections 中创建和管理向量字段索引的基本操作。</p>
+<div class="alert warning">
+<p>本页已被弃用。有关最新实现，请参阅<a href="/docs/zh/ivf-flat.md">IVF_FLAT</a>、<a href="/docs/zh/hnsw.md">HNSW</a> 等。</p>
+</div>
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -82,10 +85,19 @@ title: 索引向量字段
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky"><ul><li>稀疏反转索引</li><li>SPARSE_WAND</li></ul></td>
+    <td class="tg-0pky">稀疏反转索引</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td class="tg-0pky">BM25</td>
+    <td class="tg-0pky">稀疏_反转索引</td>
   </tr>
 </tbody>
 </table>
+<div class="alert note">
+<p>从 Milvus 2.5.4 起，<code translate="no">SPARSE_WAND</code> 已被弃用。建议在保持兼容性的前提下，使用<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 来实现等价。更多信息，请参阅<a href="/docs/zh/sparse_vector.md#Set-index-params-for-vector-field">稀疏向量</a>。</p>
+</div>
 </div>
 <p>建议为经常访问的向量场和标量场创建索引。</p>
 <h2 id="Preparations" class="common-anchor-header">准备工作<button data-href="#Preparations" class="anchor-icon" translate="no">
@@ -362,7 +374,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">extraParams</code></td>
-      <td>额外的索引参数。有关详情，请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>和<a href="https://milvus.io/docs/disk_index.md">磁盘索引</a>。</td>
+      <td>额外的索引参数。有关详细信息，请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>和<a href="https://milvus.io/docs/disk_index.md">磁盘索引</a>。</td>
     </tr>
   </tbody>
 </table>

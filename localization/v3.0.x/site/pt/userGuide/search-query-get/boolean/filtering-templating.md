@@ -50,7 +50,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <p>O uso de modelos de expressão de filtro no Milvus tem várias vantagens importantes:</p>
 <ul>
 <li><p><strong>Redução do tempo de análise</strong>: Ao substituir expressões de filtro grandes ou complexas por placeholders, o sistema gasta menos tempo analisando e processando o filtro.</p></li>
-<li><p><strong>Melhoria do desempenho da consulta</strong>: Com a redução da sobrecarga de análise, o desempenho da consulta melhora, levando a QPS mais altos e tempos de resposta mais rápidos.</p></li>
+<li><p><strong>Melhoria do desempenho da consulta</strong>: Com a redução da sobrecarga de análise, o desempenho da consulta melhora, levando a um QPS mais alto e a tempos de resposta mais rápidos.</p></li>
 <li><p><strong>Escalabilidade</strong>: À medida que os conjuntos de dados crescem e as expressões de filtro se tornam mais complexas, a criação de modelos garante que o desempenho permaneça eficiente e escalável.</p></li>
 </ul>
 <h2 id="Search-Operations" class="common-anchor-header">Operações de pesquisa<button data-href="#Search-Operations" class="anchor-icon" translate="no">
@@ -123,7 +123,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Também é possível utilizar modelos de expressão de filtro em operações de eliminação. Semelhante à pesquisa e consulta, a expressão <code translate="no">filter</code> define as condições e a expressão <code translate="no">filter_params</code> fornece os valores dinâmicos para os espaços reservados.</p>
+    </button></h2><p>Também é possível utilizar modelos de expressão de filtro em operações de eliminação. De forma semelhante à pesquisa e consulta, a expressão <code translate="no">filter</code> define as condições e a expressão <code translate="no">filter_params</code> fornece os valores dinâmicos para os espaços reservados.</p>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; {age} AND city IN {city}&quot;</span>
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 res = client.delete(

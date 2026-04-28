@@ -90,7 +90,7 @@ Loaded 74 passages and 13 documents from memgpt_research_paper
         ></path>
       </svg>
     </button></h2><p>既然我們已經建立了這個資料來源，就可以隨時將它附加到 MemGPT 聊天機上。</p>
-<p>讓我們使用<code translate="no">memgpt_doc</code> 角色（但您也可以使用任何角色）建立一個新的聊天機器人：</p>
+<p>讓我們使用<code translate="no">memgpt_doc</code> 角色建立一個新的聊天機器人（但您也可以使用任何角色）：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">reminder: `memgpt run --persona memgpt_doc` will create a new MemGPT agent using the `memgpt_doc` persona</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">memgpt run --persona memgpt_doc</span>
 <button class="copy-code-btn"></button></code></pre>

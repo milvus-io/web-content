@@ -131,10 +131,10 @@ title: استخدام Milvus في DocsGPT
       </svg>
     </button></h2><p>قم بتشغيل: <code translate="no">./setup.sh</code></p>
 <p>ثم انتقل إلى http://localhost:5173/.</p>
-<p>يمكنك اللعب بواجهة المستخدم وطرح أسئلة حول المستندات الخاصة بك.</p>
+<p>يمكنك التلاعب بواجهة المستخدم وطرح أسئلة حول المستندات الخاصة بك.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
    </span> <span class="img-wrapper"> <span>النص البديل</span> </span></p>
 <p>إذا كنت تريد إيقاف الخدمات، قم بتشغيل:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose down</span>

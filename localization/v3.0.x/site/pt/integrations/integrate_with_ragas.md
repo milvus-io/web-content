@@ -310,7 +310,7 @@ df
     </tr>
     <tr>
       <th>2</th>
-      <td>O que deve ser assegurado antes de executar a cobertura de...</td>
+      <td>O que deve ser garantido antes de executar a cobertura de...</td>
       <td>[Cobertura de código\n\nAntes de submeter o seu pull ...</td>
       <td>Antes de executar a cobertura de código, deve ser...</td>
       <td>Antes de executar a cobertura de código, deve ser ...</td>

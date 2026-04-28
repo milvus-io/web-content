@@ -3,7 +3,7 @@ id: use-json-fields.md
 title: JSON 필드
 summary: >-
   Milvus를 사용하면 JSON 데이터 유형을 사용하여 단일 필드 내에 구조화된 데이터를 저장하고 색인할 수 있습니다. 이를 통해 중첩
-  속성이 있는 유연한 스키마를 구현하는 동시에 JSON 인덱싱을 통해 효율적인 필터링이 가능합니다.
+  속성이 있는 유연한 스키마를 구현하는 동시에 JSON 인덱싱을 통해 효율적인 필터링을 할 수 있습니다.
 ---
 <h1 id="JSON-Field" class="common-anchor-header">JSON 필드<button data-href="#JSON-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -496,7 +496,7 @@ curl --request POST \
      <td><p>높음</p></td>
    </tr>
 </table>
-<p>¹ <em>배열을 LHS로</em> 표시하면 예를 들어 필터 표현식의 왼쪽이 JSON 배열임을 의미합니다:</p>
+<p>¹ <em>배열이 LHS인</em> 경우 예를 들어 필터 표현식의 왼쪽이 JSON 배열임을 의미합니다:</p>
 <pre><code translate="no" class="language-plaintext">metadata[&quot;tags&quot;] == [&quot;clearance&quot;, &quot;summer_sale&quot;]
 json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 <button class="copy-code-btn"></button></code></pre>
@@ -569,7 +569,7 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
    </tr>
    <tr>
      <td><p><code translate="no">array_bool</code></p></td>
-     <td><p>부울의 배열</p></td>
+     <td><p>부울 배열</p></td>
      <td><p><code translate="no">[true, false, true]</code></p></td>
    </tr>
    <tr>
@@ -804,7 +804,7 @@ metadata[&quot;supplier&quot;][&quot;country&quot;] = &quot;USA&quot;
 <p>값에 맞는 첫 번째 유형이 인덱싱에 사용됩니다.</p>
 <p>즉, 추론된 유형은 항상 <strong>이 네 가지 중 하나가</strong> 됩니다.</p>
 <p>유형 추론은 <strong>문서별로</strong> 수행되므로 동일한 경로가 문서마다 다른 유형으로 추론될 수 있습니다.</p>
-<p>유형 추론 후, 평활화된 데이터는 내부적으로 예를 들어 추론된 유형을 가진 용어로 표현됩니다:</p>
+<p>유형 추론 후 평활화된 데이터는 내부적으로 예를 들어 추론된 유형을 가진 용어로 표현됩니다:</p>
 <pre><code translate="no" class="language-plaintext">(&quot;category&quot;, Text, &quot;electronics&quot;)
 (&quot;price&quot;, Double, 99.99)
 (&quot;supplier.country&quot;, Text, &quot;USA&quot;)

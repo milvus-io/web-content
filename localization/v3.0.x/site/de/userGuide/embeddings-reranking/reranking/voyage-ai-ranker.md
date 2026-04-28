@@ -180,13 +180,13 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">truncation</code></p></td>
      <td><p>Nein</p></td>
-     <td><p>Ob die Eingabe gekürzt werden soll, um die "Kontextlängenbegrenzung" für die Abfrage und die Dokumente zu erfüllen.</p><ul><li><p>Wenn <code translate="no">True</code>, werden die Abfrage und die Dokumente so gekürzt, dass sie in die Kontextlängenbegrenzung passen, bevor sie vom Reranker-Modell verarbeitet werden.</p></li><li><p>Wenn <code translate="no">False</code>, wird ein Fehler ausgelöst, wenn die Abfrage 8.000 Token für <code translate="no">rerank-2.5</code> und <code translate="no">rerank-2.5-lite</code>; 4.000 Token für <code translate="no">rerank-2</code>; 2.000 Token <code translate="no">rerank-2-lite</code> und <code translate="no">rerank-1</code>; und 1.000 Token für <code translate="no">rerank-lite-1</code> überschreitet, oder die Summe der Anzahl der Token in der Abfrage und der Anzahl der Token in einem einzelnen Dokument 16.000 für <code translate="no">rerank-2</code>; 8.000 für <code translate="no">rerank-2-lite</code> und <code translate="no">rerank-1</code>; und 4.000 für <code translate="no">rerank-lite-1</code> überschreitet.</p></li></ul></td>
+     <td><p>Ob die Eingabe gekürzt werden soll, um die "Kontextlängenbegrenzung" für die Abfrage und die Dokumente zu erfüllen.</p><ul><li><p>Wenn <code translate="no">True</code>, werden die Abfrage und die Dokumente so gekürzt, dass sie in die Kontextlängenbegrenzung passen, bevor sie vom Reranker-Modell verarbeitet werden.</p></li><li><p>Wenn <code translate="no">False</code>, wird ein Fehler ausgelöst, wenn die Abfrage 8.000 Token für <code translate="no">rerank-2.5</code> und <code translate="no">rerank-2.5-lite</code>; 4.000 Token für <code translate="no">rerank-2</code>; 2.000 Token <code translate="no">rerank-2-lite</code> und <code translate="no">rerank-1</code>; und 1.000 Token für <code translate="no">rerank-lite-1</code> überschreitet, oder die Summe der Anzahl der Token in der Abfrage und der Anzahl der Token in einem einzelnen Dokument 16.000 für <code translate="no">rerank-2</code>; 8.000 für <code translate="no">rerank-2-lite</code> und <code translate="no">rerank-1</code>; und 4.000 für <code translate="no">rerank-lite-1</code> übersteigt.</p></li></ul></td>
      <td><p><code translate="no">True</code> (Standard) oder <code translate="no">False</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">credential</code></p></td>
      <td><p>Keine</p></td>
-     <td><p>Authentifizierungsnachweis für den Zugriff auf die Voyage AI API-Dienste. Wenn nicht angegeben, sucht das System nach der Umgebungsvariablen <code translate="no">VOYAGE_API_KEY</code>.</p></td>
+     <td><p>Authentifizierungsnachweis für den Zugriff auf Voyage AI API-Dienste. Wenn nicht angegeben, sucht das System nach der Umgebungsvariablen <code translate="no">VOYAGE_API_KEY</code>.</p></td>
      <td><p><em>"ihr-voyage-api-schlüssel"</em></p></td>
    </tr>
 </table>

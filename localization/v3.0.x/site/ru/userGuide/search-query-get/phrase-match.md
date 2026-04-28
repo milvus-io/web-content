@@ -1,6 +1,6 @@
 ---
 id: phrase-match.md
-title: Сопоставление фразCompatible with Milvus 2.6.x
+title: Сопоставление фразCompatible with Milvus 2.5.17+
 summary: >-
   Фразовое соответствие позволяет искать документы, содержащие термины запроса в
   виде точной фразы. По умолчанию слова должны располагаться в том же порядке и
@@ -8,9 +8,9 @@ summary: >-
   learning" соответствует тексту типа "...typical robotics machine learning
   models...", где слова "robotics", "machine" и "learning" идут в одном порядке
   и между ними нет других слов.
-beta: Milvus 2.6.x
+beta: Milvus 2.5.17+
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">Сопоставление фраз<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">Сопоставление фраз<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,7 +26,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h1><p>Фразовое соответствие позволяет искать документы, содержащие термины запроса в виде точной фразы. По умолчанию слова должны располагаться в том же порядке и непосредственно рядом друг с другом. Например, запрос <strong>"robotics machine learning"</strong> соответствует тексту типа <em>"...typical robotics machine learning models...",</em> где слова <strong>"robotics",</strong> <strong>"machine"</strong> и <strong>"learning"</strong> встречаются в той же последовательности и без других слов между ними.</p>
-<p>Однако в реальных условиях строгое сопоставление фраз может оказаться слишком жестким. Вы можете захотеть подобрать текст типа <em>"...модели машинного обучения, широко применяемые в робототехнике...".</em> Здесь присутствуют одни и те же ключевые слова, но не рядом и не в оригинальном порядке. Чтобы справиться с этим, фразовое соответствие поддерживает параметр <code translate="no">slop</code>, который обеспечивает гибкость. Значение <code translate="no">slop</code> определяет, сколько позиционных сдвигов допускается между терминами во фразе. Например, при значении <code translate="no">slop</code>, равном 1, запрос <strong>"машинное обучение"</strong> может соответствовать тексту типа <em>"...машинное глубокое обучение...",</em> где одно слово (<strong>"глубокое")</strong> разделяет исходные термины.</p>
+<p>Однако в реальных условиях строгое сопоставление фраз может быть слишком жестким. Вы можете захотеть подобрать текст типа <em>"...модели машинного обучения, широко применяемые в робототехнике...".</em> Здесь присутствуют одни и те же ключевые слова, но не рядом и не в оригинальном порядке. Чтобы справиться с этим, фразовое соответствие поддерживает параметр <code translate="no">slop</code>, который обеспечивает гибкость. Значение <code translate="no">slop</code> определяет, сколько позиционных сдвигов допускается между терминами во фразе. Например, при значении <code translate="no">slop</code>, равном 1, запрос <strong>"машинное обучение"</strong> может соответствовать тексту типа <em>"...машинное глубокое обучение...",</em> где одно слово (<strong>"глубокое")</strong> разделяет исходные термины.</p>
 <h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +45,7 @@ beta: Milvus 2.6.x
     </button></h2><p>Работает на основе библиотеки поисковой системы <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, а совпадение фраз происходит путем анализа позиционной информации слов в документах. Диаграмма ниже иллюстрирует процесс:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
    </span> <span class="img-wrapper"> <span>Рабочий процесс поиска по фразе</span> </span></p>
 <ol>
 <li><p><strong>Токенизация документов</strong>: Когда вы вставляете документы в Milvus, текст разбивается на токены (отдельные слова или термины) с помощью анализатора, при этом для каждого токена записывается позиционная информация. Например, <strong>doc_1</strong> разбивается на лексемы <strong>["machine" (pos=0), "learning" (pos=1), "boosts" (pos=2), "efficiency" (pos=3)]</strong>. Дополнительную информацию об анализаторах см. в разделе <a href="/docs/ru/analyzer-overview.md">Обзор анализаторов</a>.</p></li>
@@ -296,7 +296,7 @@ result = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>В операциях поиска <strong>PHRASE_MATCH</strong> используется для фильтрации документов перед применением ранжирования по векторному сходству. Этот двухэтапный подход сначала сужает набор кандидатов путем текстового соответствия, а затем переранжирует их на основе векторных вкраплений.</p>
+    </button></h3><p>В операциях поиска <strong>PHRASE_MATCH</strong> используется для фильтрации документов перед применением ранжирования по векторному сходству. Этот двухэтапный подход сначала сужает набор кандидатов путем текстового совпадения, а затем переранжирует их на основе векторных вкраплений.</p>
 <h4 id="Example-slop--1" class="common-anchor-header">Пример: slop = 1</h4><p>Здесь мы допускаем значение slop = 1. Фильтр применяется к документам, содержащим фразу <strong>"обучающая машина"</strong>, с небольшой гибкостью.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
 filter_slop1 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>

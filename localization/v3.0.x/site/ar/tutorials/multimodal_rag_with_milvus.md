@@ -1,9 +1,9 @@
 ---
 id: multimodal_rag_with_milvus.md
 summary: RAG متعدد الوسائط مع ميلفوس
-title: RAG متعدد الوسائط مع Milvus
+title: تعدد الوسائط RAG مع ميلفوس
 ---
-<h1 id="Multimodal-RAG-with-Milvus" class="common-anchor-header">RAG متعدد الوسائط مع Milvus<button data-href="#Multimodal-RAG-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Multimodal-RAG-with-Milvus" class="common-anchor-header">تعدد الوسائط RAG مع ميلفوس<button data-href="#Multimodal-RAG-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,11 +18,13 @@ title: RAG متعدد الوسائط مع Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p>إذا كنت ترغب في تجربة التأثير النهائي لهذا البرنامج التعليمي، يمكنك الانتقال مباشرةً إلى <a href="https://demos.milvus.io/multimodal-image-search/">العرض التوضيحي عبر الإنترنت</a>.</p>
+<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
-<p>يعرض هذا البرنامج التعليمي نظام RAG متعدد الوسائط المدعوم من Milvus ونموذج <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">BGE المرئي</a> ونموذج الاسترجاع المركب <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. باستخدام هذا النظام، يمكن للمستخدمين تحميل صورة وتحرير تعليمات نصية، والتي تتم معالجتها بواسطة نموذج الاسترجاع المركب من BGE للبحث عن الصور المرشحة. ثم يعمل نظام GPT-4o بعد ذلك كمُعيد تنقيح للصور، حيث يقوم باختيار الصورة الأنسب وتقديم الأساس المنطقي وراء الاختيار. يُتيح هذا المزيج القوي تجربة بحث سلسة وبديهية عن الصور، مستفيداً من Milvus للاسترجاع الفعّال، ونموذج BGE لمعالجة الصور ومطابقتها بدقة، وGPT-4o لإعادة الترتيب المتقدم.</p>
+<p>يستعرض هذا البرنامج التعليمي نظام RAG متعدد الوسائط المدعوم من Milvus، <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">ونموذج BGE المرئي،</a> و <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. باستخدام هذا النظام، يمكن للمستخدمين تحميل صورة وتحرير تعليمات نصية، والتي تتم معالجتها بواسطة نموذج الاسترجاع المركب من BGE للبحث عن الصور المرشحة. ثم يعمل نظام GPT-4o بعد ذلك كمُعيد تنقيح للصور، حيث يقوم باختيار الصورة الأنسب وتقديم الأساس المنطقي وراء الاختيار. يُتيح هذا المزيج القوي تجربة بحث سلسة وبديهية عن الصور، مستفيداً من Milvus للاسترجاع الفعّال، ونموذج BGE لمعالجة الصور ومطابقتها بدقة، وGPT-4o لإعادة الترتيب المتقدم.</p>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus.png" width="100%" /></p>
 <h2 id="Preparation" class="common-anchor-header">الإعداد<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,8 +80,8 @@ title: RAG متعدد الوسائط مع Milvus
       </svg>
     </button></h3><p>سيقوم الأمر التالي بتنزيل بيانات المثال واستخراجها إلى مجلد محلي "./images_folder" بما في ذلك:</p>
 <ul>
-<li><p><strong>الصور</strong>: مجموعة فرعية من <a href="https://github.com/hyp1231/AmazonReviews2023">مراجعات أمازون 2023</a> تحتوي على ما يقرب من 900 صورة من فئات "الأجهزة" و"الهواتف_الجوّالة_والإكسسوارات" و"الإلكترونيات".</p></li>
-<li><p><strong>leopard.jpg</strong>: مثال على صورة استعلام.</p></li>
+<li><strong>الصور</strong>: مجموعة فرعية من <a href="https://github.com/hyp1231/AmazonReviews2023">مراجعات أمازون 2023</a> على أنها تحتوي على ما يقرب من 900 صورة من فئات "الأجهزة" و"الهواتف_الجوّالة_والإكسسوارات" و"الإلكترونيات".</li>
+<li><strong>leopard.jpg</strong>: مثال على صورة استعلام.</li>
 </ul>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/bootcamp/releases/download/data/amazon_reviews_2023_subset.tar.gz</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">tar -xzf amazon_reviews_2023_subset.tar.gz</span>
@@ -105,7 +107,7 @@ title: RAG متعدد الوسائط مع Milvus
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>2. بناء المشفر</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
-<span class="hljs-keyword">from</span> FlagEmbedding.visual.modeling <span class="hljs-keyword">import</span> Visualized_BGE
+<span class="hljs-keyword">from</span> visual_bge.modeling <span class="hljs-keyword">import</span> Visualized_BGE
 
 
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">Encoder</span>:
@@ -233,7 +235,15 @@ milvus_client.insert(
     data=[{<span class="hljs-string">&quot;image_path&quot;</span>: k, <span class="hljs-string">&quot;vector&quot;</span>: v} <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> image_dict.items()],
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">{'insert_count': 900,
+<pre><code translate="no">DEBUG:pymilvus.milvus_client.milvus_client:Created new connection using: 7f33daeed99a4d8e8a5e28d47673ecc8
+DEBUG:pymilvus.milvus_client.milvus_client:Successfully created collection: multimodal_rag_demo
+DEBUG:pymilvus.milvus_client.milvus_client:Successfully created an index on collection: multimodal_rag_demo
+
+
+
+
+
+{'insert_count': 900,
  'ids': [451537887696781312, 451537887696781313, ..., 451537887696782211],
  'cost': 0}
 </code></pre>
@@ -541,4 +551,4 @@ best_img.show()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لمعرفة كيفية بدء عرض توضيحي عبر الإنترنت باستخدام هذا البرنامج التعليمي، يرجى الرجوع إلى <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus">مثال التطبيق</a>.</p>
+    </button></h3><p>لمعرفة كيفية بدء عرض توضيحي عبر الإنترنت باستخدام هذا البرنامج التعليمي، يرجى الرجوع إلى <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/multimodal_rag_with_milvus">مثال التطبيق</a>.</p>

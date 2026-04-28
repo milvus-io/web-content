@@ -78,7 +78,7 @@ response = requests.get(url)
         ></path>
       </svg>
     </button></h2><p>在本节中，我们将设置自定义 RAG 管道，以<code translate="no">VectorRetriever</code> 为例。我们将把<code translate="no">OpenAIEmbedding</code> 设置为嵌入模型，把<code translate="no">MilvusStorage</code> 设置为其存储空间。</p>
-<p>要设置 OpenAI 嵌入，我们需要设置<code translate="no">OPENAI_API_KEY</code> 。</p>
+<p>要设置 OpenAI 嵌入，我们需要在下面的<code translate="no">OPENAI_API_KEY</code> 中进行设置。</p>
 <pre><code translate="no" class="language-python">os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>导入并设置嵌入实例：</p>
@@ -163,7 +163,7 @@ vector_retriever = VectorRetriever(
     </button></h2><p>在本节中，我们将使用默认设置运行<code translate="no">AutoRetriever</code> 。它使用<code translate="no">OpenAIEmbedding</code> 作为默认嵌入模型，使用<code translate="no">Milvus</code> 作为默认向量存储。</p>
 <p>您需要做的是</p>
 <ul>
-<li>设置内容输入路径，可以是本地路径或远程网址</li>
+<li>设置内容输入路径，可以是本地路径或远程 URL</li>
 <li>为 Milvus 设置远程 url 和 api 密钥</li>
 <li>提供查询</li>
 </ul>
@@ -214,7 +214,7 @@ Retrieved Context:
         ></path>
       </svg>
     </button></h2><p>在本节中，我们将展示如何将<code translate="no">AutoRetriever</code> 与一个<code translate="no">ChatAgent</code> 结合起来。</p>
-<p>让我们设置一个 Agents 函数，在此函数中，我们可以通过向该代理提供查询来获取响应。</p>
+<p>让我们设置一个 Agents 函数，在该函数中，我们可以通过向该代理提供查询来获取响应。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.agents <span class="hljs-keyword">import</span> ChatAgent
 <span class="hljs-keyword">from</span> camel.messages <span class="hljs-keyword">import</span> BaseMessage
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> RoleType

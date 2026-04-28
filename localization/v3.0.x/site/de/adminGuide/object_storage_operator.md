@@ -42,7 +42,22 @@ summary: 'Erfahren Sie, wie Sie Objektspeicher mit Milvus Operator konfigurieren
         ></path>
       </svg>
     </button></h2><p>Ein Milvus-Cluster verwendet MinIO oder S3 als Objektspeicher, um große Dateien wie Indexdateien und binäre Protokolle aufzubewahren. Fügen Sie die erforderlichen Felder unter <code translate="no">spec.dependencies.storage</code> hinzu, um den Objektspeicher zu konfigurieren. Mögliche Optionen sind <code translate="no">external</code> und <code translate="no">inCluster</code>.</p>
-<h3 id="Internal-object-storage" class="common-anchor-header">Interner Objektspeicher</h3><p>Standardmäßig setzt Milvus Operator eine clusterinterne MinIO für Milvus ein. Im Folgenden wird anhand einer Beispielkonfiguration gezeigt, wie diese MinIO als interner Objektspeicher verwendet werden kann.</p>
+<h3 id="Internal-object-storage" class="common-anchor-header">Interner Objektspeicher<button data-href="#Internal-object-storage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Standardmäßig setzt Milvus Operator eine clusterinterne MinIO für Milvus ein. Im Folgenden wird anhand einer Beispielkonfiguration gezeigt, wie diese MinIO als interner Objektspeicher verwendet werden kann.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -70,10 +85,25 @@ summary: 'Erfahren Sie, wie Sie Objektspeicher mit Milvus Operator konfigurieren
 <li><code translate="no">Delete</code> gibt an, dass der In-Cluster-Objektspeicher gelöscht wird, wenn Sie Ihre Milvus-Instanz stoppen.</li>
 <li><code translate="no">Retain</code> gibt an, dass der In-Cluster-Objektspeicher als Abhängigkeitsdienst für spätere Starts Ihrer Milvus-Instanz beibehalten wird.</li>
 </ul></li>
-<li><p>Das Feld <code translate="no">pvcDeletion</code> gibt an, ob der PVC (Persistent Volume Claim) gelöscht werden soll, wenn der In-Cluster-MINIO gelöscht wird.</p></li>
+<li><p>Das Feld <code translate="no">pvcDeletion</code> gibt an, ob der PVC (Persistent Volume Claim) gelöscht werden soll, wenn der clusterinterne MinIO gelöscht wird.</p></li>
 </ul>
 <p>Die Felder unter <code translate="no">inCluster.values</code> sind die gleichen wie die in Milvus Helm Chart, und Sie finden sie <a href="https://github.com/milvus-io/milvus-helm/blob/master/charts/minio/values.yaml">hier</a>.</p>
-<h3 id="External-object-storage" class="common-anchor-header">Externer Objektspeicher</h3><p>Die Verwendung von <code translate="no">external</code> in der Vorlage YAML-Datei weist auf die Verwendung eines externen Objektspeicherdienstes hin. Um einen externen Objektspeicher zu verwenden, müssen Sie die Felder unter <code translate="no">spec.dependencies.storage</code> und <code translate="no">spec.config.minio</code> in der Milvus CRD richtig einstellen.</p>
+<h3 id="External-object-storage" class="common-anchor-header">Externer Objektspeicher<button data-href="#External-object-storage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Die Verwendung von <code translate="no">external</code> in der Vorlage YAML-Datei weist auf die Verwendung eines externen Objektspeicherdienstes hin. Um einen externen Objektspeicher zu verwenden, müssen Sie die Felder unter <code translate="no">spec.dependencies.storage</code> und <code translate="no">spec.config.minio</code> in der Milvus CRD richtig einstellen.</p>
 <h4 id="Use-Amazon-Web-Service-AWS-S3-as-external-object-storage" class="common-anchor-header">Verwenden Sie Amazon Web Service (AWS) S3 als externen Objektspeicher</h4><ul>
 <li><p>Konfigurieren Sie den AWS S3-Zugriff durch AK/SK</p>
 <p>Auf einen S3-Bucket kann in der Regel mit einem Paar aus einem Zugriffsschlüssel und einem Zugriffsgeheimnisschlüssel zugegriffen werden. Sie können ein <code translate="no">Secret</code> Objekt erstellen, um sie in Ihrer Kubernetes wie folgt zu speichern:</p>
@@ -87,7 +117,7 @@ summary: 'Erfahren Sie, wie Sie Objektspeicher mit Milvus Operator konfigurieren
   <span class="hljs-attr">accesskey:</span> <span class="hljs-string">&lt;my-access-key&gt;</span>
   <span class="hljs-attr">secretkey:</span> <span class="hljs-string">&lt;my-secret-key&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dann können Sie einen AWS S3-Bucket als externen Objektspeicher konfigurieren:</p>
+<p>Anschließend können Sie einen AWS S3-Bucket als externen Objektspeicher konfigurieren:</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-comment"># # change the &lt;parameters&gt; to match your environment</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -125,7 +155,7 @@ summary: 'Erfahren Sie, wie Sie Objektspeicher mit Milvus Operator konfigurieren
   <span class="hljs-attr">annotations:</span>
     <span class="hljs-attr">eks.amazonaws.com/role-arn:</span> <span class="hljs-string">&lt;my-role-arn&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Wenn Sie alles vorbereitet haben, verweisen Sie in der YAML-Vorlagendatei auf das obige <code translate="no">ServiceAccount</code> und setzen <code translate="no">spec.config.minio.useIAM</code> auf <code translate="no">true</code>, um AssumeRole zu aktivieren.</p>
+<p>Sobald alles eingerichtet ist, verweisen Sie in der YAML-Vorlagendatei auf das obige <code translate="no">ServiceAccount</code> und setzen <code translate="no">spec.config.minio.useIAM</code> auf <code translate="no">true</code>, um AssumeRole zu aktivieren.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -153,7 +183,7 @@ summary: 'Erfahren Sie, wie Sie Objektspeicher mit Milvus Operator konfigurieren
 <h4 id="Use-Google-Cloud-Storage-GCS-as-external-object-storage" class="common-anchor-header">Google Cloud Storage (GCS) als externen Objektspeicher verwenden</h4><p>AWS S3 Objektspeicher ist nicht die einzige Wahl. Sie können auch den Objektspeicherdienst von anderen öffentlichen Cloud-Anbietern, wie Google Cloud, verwenden.</p>
 <ul>
 <li><p>Konfigurieren des GCS-Zugriffs durch AK/SK</p>
-<p>Die Konfiguration ist größtenteils ähnlich wie bei der Verwendung von AWS S3. Sie müssen immer noch ein <code translate="no">Secret</code> Objekt erstellen, um Ihre Anmeldeinformationen in Ihrer Kubernetes zu speichern.</p>
+<p>Die Konfiguration ist größtenteils ähnlich wie bei der Verwendung von AWS S3. Sie müssen immer noch ein <code translate="no">Secret</code> Objekt erstellen, um Ihre Anmeldedaten in Ihrer Kubernetes zu speichern.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-comment"># # change the &lt;parameters&gt; to match your environment</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Secret</span>

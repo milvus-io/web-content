@@ -45,7 +45,7 @@ summary: Saiba como configurar o streaming para o Milvus.
   <tbody>
     <tr>
       <td>
-        <li>O intervalo de ativação da tarefa de equilíbrio em segundo plano, 1 min por predefinição. </li>      
+        <li>O intervalo de ativação da tarefa de balanço em segundo plano, 1 min por defeito. </li>      
         <li>É possível defini-lo como uma cadeia de duração, como 30s ou 1m30s, ver time.ParseDuration</li>      </td>
       <td>1m</td>
     </tr>

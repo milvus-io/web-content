@@ -154,7 +154,7 @@ beta: Milvus 2.6.4+
 <ul>
 <li><p>查詢延遲容忍度高</p></li>
 <li><p>工作負載涉及大量資料集或許多區段</p></li>
-<li><p>容量和吞吐量優先於回應能力</p></li>
+<li><p>容量和吞吐量優先於反應速度</p></li>
 </ul>
 <p><strong>建議配置</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
@@ -208,11 +208,11 @@ beta: Milvus 2.6.4+
 </ul>
 <p><strong>建議策略</strong></p>
 <ul>
-<li><p><strong>將即時組態</strong>套用至延遲敏感的資料集中</p></li>
+<li><p>對延遲敏感的資料集應用<strong>即時組態</strong></p></li>
 <li><p><strong>將離線配置</strong>套用於分析或歸檔資料集</p></li>
 <li><p>針對每種工作負載類型獨立調整 evictableMemoryCacheRatio、cacheTtl 和 watermark 比率</p></li>
 </ul>
-<p><strong>理據</strong></p>
+<p><strong>理由</strong></p>
 <p>結合組態可精細控制資源分配。</p>
 <p>關鍵資料集可維持低延遲保證，而次級資料集則可處理更多區段和資料量。</p>
 <h2 id="Additional-tuning-tips" class="common-anchor-header">其他調整提示<button data-href="#Additional-tuning-tips" class="anchor-icon" translate="no">

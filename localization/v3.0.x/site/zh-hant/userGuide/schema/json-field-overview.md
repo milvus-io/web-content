@@ -172,7 +172,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>集合建立後，在指定的 JSON 欄位中插入包含結構化 JSON 物件的實體。您的資料格式應為字典清單。</p>
+    </button></h3><p>建立資料集後，在指定的 JSON 欄位中插入包含結構化 JSON 物件的實體。您的資料格式應為字典清單。</p>
 <pre><code translate="no" class="language-python">entities = [
     {
         <span class="hljs-string">&quot;product_id&quot;</span>: <span class="hljs-number">1</span>,
@@ -265,7 +265,7 @@ res = client.search(
 <ul>
 <li><p><code translate="no">json_contains(identifier, expr)</code>:檢查 JSON 陣列中是否存在特定元素或子陣列</p></li>
 <li><p><code translate="no">json_contains_all(identifier, expr)</code>:確保指定的 JSON 表達式的所有元素都存在於欄位中</p></li>
-<li><p><code translate="no">json_contains_any(identifier, expr)</code>:過濾至少有一個 JSON 表達式成員存在於欄位中的實體</p></li>
+<li><p><code translate="no">json_contains_any(identifier, expr)</code>:篩選至少有一個 JSON 表達式成員存在於欄位中的實體</p></li>
 </ul>
 <p>尋找在<code translate="no">tags</code> 鍵下有<code translate="no">&quot;summer_sale&quot;</code> 值的產品：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define filter expression</span>
@@ -334,13 +334,13 @@ res = client.search(
    </tr>
    <tr>
      <td><p>NGRAM 索引</p></td>
-     <td><p>通配符搜尋、文字欄位中的子串匹配</p></td>
+     <td><p>通配符搜尋、文字欄位中的子串比對</p></td>
      <td><p>不適用</p></td>
      <td><p>不適用於數值/範圍篩選器</p></td>
    </tr>
 </table>
 <p><strong>提示：</strong>您可以結合這些方法--例如，使用 JSON 切碎來加速廣泛的查詢，使用 JSON 索引來處理高頻陣列鍵，使用 NGRAM 索引來處理彈性的文字搜尋。</p>
-<p>如需實施細節，請參閱：</p>
+<p>有關實作細節，請參閱：</p>
 <ul>
 <li><p><a href="/docs/zh-hant/json-indexing.md">JSON 索引</a></p></li>
 <li><p><a href="/docs/zh-hant/json-shredding.md">JSON 切碎</a></p></li>
@@ -392,7 +392,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>不，JSON 欄位不支援預設值。但是，您可以在定義欄位時設定<code translate="no">nullable=True</code> ，以允許空項目。</p>
+    </button></h3><p>不，JSON 欄位不支援預設值。但是，您可以在定義字段時設定<code translate="no">nullable=True</code> ，以允許空項目。</p>
 <p>詳情請參閱<a href="/docs/zh-hant/nullable-and-default.md">Nullable &amp; Default</a>。</p>
 <h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">JSON 欄位鍵有任何命名慣例嗎？<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -411,7 +411,7 @@ res = client.search(
       </svg>
     </button></h3><p>有，以確保與查詢和索引的相容性：</p>
 <ul>
-<li><p>在 JSON 鍵中只使用字母、數字和底線。</p></li>
+<li><p>在 JSON 鍵中只能使用字母、數字和底線。</p></li>
 <li><p>避免使用特殊字符、空格或點 (<code translate="no">.</code>,<code translate="no">/</code>, 等等)。</p></li>
 <li><p>不相容的鍵可能會在篩選表達式中造成解析問題。</p></li>
 </ul>

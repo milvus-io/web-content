@@ -62,7 +62,7 @@ title: 使用 Milvus 和 LlamaIndex 的檢索增強世代 (RAG)
 <pre><code translate="no" class="language-python">$ pip install llama-index
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果您使用 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時間</strong>。(按一下螢幕上方的「Runtime」功能表，然後從下拉式功能表中選擇「Restart session」）。</p>
+<p>如果您使用 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時間</strong>。(按一下螢幕上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
 </div>
 <h3 id="Setup-OpenAI" class="common-anchor-header">設定 OpenAI<button data-href="#Setup-OpenAI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -185,7 +185,7 @@ documents = SimpleDirectoryReader(
 <h4 id="sparse-field" class="common-anchor-header">稀疏欄位</h4><ul>
 <li><code translate="no">enable_sparse (bool)</code>:用來啟用或停用 sparse embedding 的布林標記。預設為 False。</li>
 <li><code translate="no">sparse_embedding_field (str)</code>:sparse embedding 欄位的名稱，預設為 DEFAULT_SPARSE_EMBEDDING_KEY。</li>
-<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>:如果 enable_sparse 為 True，則應該提供此物件來轉換文字為稀疏嵌入。若為 None，則採用預設的稀疏嵌入函數 (BGEM3SparseEmbeddingFunction)。</li>
+<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>:如果 enable_sparse 為 True，則應該提供此物件來轉換文字為稀疏內嵌。若為 None，則採用預設的稀疏嵌入函數 (BGEM3SparseEmbeddingFunction)。</li>
 <li><code translate="no">sparse_index_config (dict, optional)</code>:用來建立稀疏嵌入索引的設定。預設為 None。</li>
 </ul>
 <h4 id="hybrid-ranker" class="common-anchor-header">混合排序器</h4><ul>

@@ -322,6 +322,12 @@
             "children": []
           },
           {
+            "label": "Eine externe Sammlung erstellen",
+            "id": "create-an-external-collection.md",
+            "order": 2,
+            "children": []
+          },
+          {
             "label": "Sammlungen ansehen",
             "id": "view-collections.md",
             "order": 3,
@@ -474,15 +480,21 @@
             "children": []
           },
           {
-            "label": "Nullbar &amp; Standard",
+            "label": "Nullbare Felder",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
           },
           {
+            "label": "Standardwerte",
+            "id": "default-values.md",
+            "order": 14,
+            "children": []
+          },
+          {
             "label": "Analyzer",
             "id": "analyzer",
-            "order": 14,
+            "order": 15,
             "children": [
               {
                 "label": "Analyzer Übersicht",
@@ -628,6 +640,12 @@
                     "id": "regex-filter.md",
                     "order": 10,
                     "children": []
+                  },
+                  {
+                    "label": "Synonym",
+                    "id": "synonym-filter.md",
+                    "order": 11,
+                    "children": []
                   }
                 ]
               },
@@ -642,26 +660,32 @@
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
+              },
+              {
+                "label": "Dateiressourcen verwalten",
+                "id": "manage-file-resources.md",
+                "order": 6,
+                "children": []
               }
             ]
           },
           {
             "label": "Sammlungsfeld ändern",
             "id": "alter-collection-field.md",
-            "order": 15,
+            "order": 16,
             "children": []
           },
           {
             "label": "Felder zu einer bestehenden Sammlung hinzufügen",
             "id": "add-fields-to-an-existing-collection.md",
-            "order": 16,
+            "order": 17,
             "children": []
           },
           {
             "label": "Bewährte Praktiken",
             "id": "best-practices",
             "isMenu": true,
-            "order": 17,
+            "order": 18,
             "children": [
               {
                 "label": "Datenmodellentwurf für die Suche",
@@ -997,15 +1021,21 @@
                 "children": []
               },
               {
+                "label": "StructArray-Operatoren",
+                "id": "struct-array-operators.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "Zufallsstichproben",
                 "id": "random-sampling.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "Geometrie-Operatoren",
                 "id": "geometry-operators.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -1061,15 +1091,21 @@
         ]
       },
       {
-        "label": "Einbettungen &amp; Reranking",
+        "label": "Funktion und Modellinferenz",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
         "children": [
           {
-            "label": "Einbettungsfunktion",
-            "id": "embedding-function",
+            "label": "BM25 Funktion",
+            "id": "bm25-function.md",
             "order": 0,
+            "children": []
+          },
+          {
+            "label": "Modellbasierte Einbettungsfunktionen",
+            "id": "embedding-function",
+            "order": 1,
             "isMenu": true,
             "children": [
               {
@@ -1141,9 +1177,15 @@
             ]
           },
           {
-            "label": "Funktion der Neubewertung",
+            "label": "MinHash-Funktion",
+            "id": "minhash-function.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Rerank-Funktionen",
             "id": "reranking",
-            "order": 1,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -1269,9 +1311,15 @@
             "children": []
           },
           {
+            "label": "Zusammenführen erzwingen Verdichtung",
+            "id": "force-merge.md",
+            "order": 2,
+            "children": []
+          },
+          {
             "label": "Gestaffelte Lagerung",
             "id": "tiered_storage",
-            "order": 2,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -1293,6 +1341,32 @@
                 "children": []
               }
             ]
+          }
+        ]
+      },
+      {
+        "label": "Schnappschüsse",
+        "id": "snapshots",
+        "order": 11,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Übersicht",
+            "id": "snapshots.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Schnappschüsse verwalten",
+            "id": "manage-snapshots.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Anwendungsfälle",
+            "id": "snapshot-use-cases.md",
+            "order": 2,
+            "children": []
           }
         ]
       }
@@ -1816,7 +1890,7 @@
             "children": []
           },
           {
-            "label": "RBAC einschalten",
+            "label": "RBAC aktivieren",
             "id": "rbac",
             "order": 1,
             "isMenu": true,
@@ -1931,7 +2005,7 @@
             "children": []
           },
           {
-            "label": "Befehle",
+            "label": "Commands",
             "id": "milvus_backup_cli.md",
             "order": 1,
             "children": []

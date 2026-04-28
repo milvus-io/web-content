@@ -90,7 +90,7 @@ Eseguite il comando seguente per scaricare il file docker-compose.yml.</p>
       </svg>
     </button></h2><p>Si può accedere a OneAPI all'indirizzo <code translate="no">ip:3001</code>. Il nome utente predefinito è root e la password è 123456. È possibile modificare la password dopo l'accesso.<br>
 Utilizzando il modello di OpenAI come esempio, fare clic sulla scheda "Canale" e selezionare il modello di chat e il modello di incorporamento in "Modelli".<br>
-Inserire la <a href="https://platform.openai.com/docs/quickstart">chiave API OpenAI</a> nella sezione "Segreti".<br>
+Inserire la <a href="https://platform.openai.com/docs/quickstart">chiave API</a> di <a href="https://platform.openai.com/docs/quickstart">OpenAI</a> nella sezione "Segreti".<br>
 Per l'utilizzo di modelli diversi da OpenAI e per ulteriori informazioni, consultare <a href="https://doc.fastgpt.in/docs/development/one-api/">One API</a>.</p>
 <h2 id="Setting-Tokens" class="common-anchor-header">Impostazione dei token<button data-href="#Setting-Tokens" class="anchor-icon" translate="no">
       <svg translate="no"

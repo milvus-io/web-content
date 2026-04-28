@@ -41,9 +41,39 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p><strong>IVF_RABITQ</strong> signifie <strong>Inverted File with RaBitQ quantization (fichier inversé avec quantification RaBitQ)</strong>, combinant deux techniques puissantes pour une recherche vectorielle et un stockage efficaces.</p>
-<h3 id="IVF" class="common-anchor-header">FIV</h3><p>Le<strong>fichier inversé (IVF)</strong> organise l'espace vectoriel en régions gérables à l'aide du <a href="https://en.wikipedia.org/wiki/K-means_clustering">regroupement par k-moyennes</a>. Chaque groupe est représenté par un centroïde, qui sert de point de référence pour les vecteurs de ce groupe. Cette approche de regroupement réduit l'espace de recherche en permettant à l'algorithme de se concentrer uniquement sur les groupes les plus pertinents lors du traitement de la requête.</p>
+<h3 id="IVF" class="common-anchor-header">FIV<button data-href="#IVF" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le<strong>fichier inversé (IVF)</strong> organise l'espace vectoriel en régions gérables à l'aide du <a href="https://en.wikipedia.org/wiki/K-means_clustering">regroupement par k-moyennes</a>. Chaque groupe est représenté par un centroïde, qui sert de point de référence pour les vecteurs de ce groupe. Cette approche de regroupement réduit l'espace de recherche en permettant à l'algorithme de se concentrer uniquement sur les groupes les plus pertinents lors du traitement de la requête.</p>
 <p>Pour en savoir plus sur les détails techniques de l'IVF, reportez-vous à <a href="/docs/fr/ivf-flat.md">IVF_FLAT</a>.</p>
-<h3 id="RaBitQ" class="common-anchor-header">RaBitQ</h3><p><strong>RaBitQ</strong> est une méthode de quantification binaire de pointe avec des garanties théoriques, introduite dans l'article de recherche "RaBitQ : Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search" par Jianyang Gao et Cheng Long.</p>
+<h3 id="RaBitQ" class="common-anchor-header">RaBitQ<button data-href="#RaBitQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>RaBitQ</strong> est une méthode de quantification binaire de pointe avec des garanties théoriques, introduite dans l'article de recherche "RaBitQ : Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search" par Jianyang Gao et Cheng Long.</p>
 <p>RaBitQ introduit plusieurs concepts innovants :</p>
 <p><strong>Encodage de l'information angulaire</strong>: Contrairement au codage spatial traditionnel, RaBitQ code l'information angulaire par normalisation vectorielle. Dans IVF_RABITQ, les vecteurs de données sont normalisés par rapport à leur centroïde IVF le plus proche, ce qui améliore la précision du processus de quantification.</p>
 <p><strong>Fondement théorique</strong>: La formule de base de l'approximation de la distance est la suivante</p>
@@ -55,14 +85,29 @@ beta: Milvus 2.6.x
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">co\mathbf{c_o}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5944em;vertical-align:-0.15em;"></span></span></span></span> c<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1611em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">o</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> est le vecteur centroïde IVF le plus proche de <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> or\mathbf{o_r}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5944em;vertical-align:-0.15em;"></span></span></span></span> o <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1611em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">r</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></li>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo stretchy="false">(</mo><msub><mi mathvariant="bold">or</mi></msub><mo separator="true">,</mo><msub><mi mathvariant="bold">co</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">C(\mathbf{o_r}, \mathbf{c_o})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span></span></span></span> C<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mopen">(</span><span class="mord"><span class="mord mathbf">o</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist-s">r</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>,<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.1667em;"></span> c</span></span></span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1611em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">o</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> ) et <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mn>C1</mn></msub><mo stretchy="false">(</mo><msub><mi mathvariant="bold">or</mi></msub><mo separator="true">,</mo><msub><mi mathvariant="bold">co</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">C_1(\mathbf{o_r}, \mathbf{c_o})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span></span></span></span> C <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">1</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathbf">(o</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist-s">r</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.1667em;"></span> c</span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1611em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">o</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> ) sont des constantes précalculées.</li>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">o~\tilde{\mathbf{o}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6813em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span> o</span></span></span></span></span></span></span></span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3.3634em;"><span class="pstrut" style="height:3em;"></span> ~ est le vecteur binaire quantifié stocké dans l'index</span></span></span></span></span></span></span></span> </li>
-<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mo>⟨o~</mo></mover><mo separator="true">,</mo><mo stretchy="false">qr-co⟩\langle</mo></mrow><annotation encoding="application/x-tex">\tilde{\mathbf{o}}, \mathbf{q_r} - \mathbf{c_o} \rangle</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">⟨</span></span></span></span><span class="pstrut" style="height:3em;"></span> o<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3.3634em;"><span class="pstrut" style="height:3em;"></span> ~</span></span></span></span></span></span></span></span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span></span></span></span> q<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1611em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">r</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span> c</span></span></span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1611em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">o</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">⟩</span></span></span></span> représente l'opération de point-produit</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mo>⟨o~</mo></mover><mo separator="true">,</mo><mo stretchy="false">qr-co⟩\langle</mo></mrow><annotation encoding="application/x-tex">\tilde{\mathbf{o}}, \mathbf{q_r} - \mathbf{c_o} \rangle</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">⟨</span></span></span></span><span class="pstrut" style="height:3em;"></span> o<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3.3634em;"><span class="pstrut" style="height:3em;"></span> ~</span></span></span></span></span></span></span></span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span></span></span></span> q<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1611em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">r</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span> c</span></span></span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1611em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">o</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">⟩</span></span></span></span> représente l'opération du produit par points.</li>
 </ul>
 <p><strong>Efficacité du calcul</strong>: La nature binaire de <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> o~\tilde{\mathbf{o}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6813em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span> o</span></span></span></span></span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3.3634em;"><span class="pstrut" style="height:3em;"></span> ~ rend les calculs de distance extrêmement rapides, bénéficiant notamment des architectures CPU modernes avec des instructions</span></span></span></span></span></span></span></span> <code translate="no">AVX-512 VPOPCNTDQ</code> dédiées sur les processeurs Intel Ice Lake+ ou AMD Zen 4+.</p>
 <p><strong>Améliorations algorithmiques</strong>: RaBitQ s'intègre efficacement aux techniques établies telles que l'<a href="https://www.vldb.org/pvldb/vol9/p288-andre.pdf">approche<code translate="no">FastScan</code> </a> et les <a href="https://github.com/facebookresearch/faiss/wiki/Pre--and-post-processing">rotations aléatoires</a> pour améliorer les performances.</p>
-<h3 id="IVF-+-RaBitQ" class="common-anchor-header">IVF + RaBitQ</h3><p>L'indice <strong>IVF_RABITQ</strong> combine le clustering efficace d'IVF avec la quantification binaire avancée de RaBitQ :</p>
+<h3 id="IVF-+-RaBitQ" class="common-anchor-header">IVF + RaBitQ<button data-href="#IVF-+-RaBitQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>L'indice <strong>IVF_RABITQ</strong> combine le clustering efficace d'IVF avec la quantification binaire avancée de RaBitQ :</p>
 <ol>
 <li><p><strong>Filtrage grossier</strong>: IVF partitionne l'espace vectoriel en clusters, réduisant ainsi de manière significative l'étendue de la recherche en se concentrant sur les régions de clusters les plus pertinentes.</p></li>
-<li><p><strong>Quantification binaire</strong>: Au sein de chaque grappe, RaBitQ compresse les vecteurs en représentations binaires tout en préservant les relations de distance essentielles grâce à des garanties théoriques.</p></li>
+<li><p><strong>Quantification binaire</strong>: Au sein de chaque groupe, RaBitQ compresse les vecteurs en représentations binaires tout en préservant les relations de distance essentielles grâce à des garanties théoriques.</p></li>
 <li><p><strong>Raffinement optionnel</strong>: Lorsqu'il est activé, l'index stocke des données affinées supplémentaires en utilisant des formats de précision supérieure (SQ6, SQ8, FP16, BF16 ou FP32) pour améliorer les taux de rappel au prix d'une augmentation de l'espace de stockage.</p></li>
 </ol>
 <p>Milvus met en œuvre IVF_RABITQ à l'aide des chaînes d'usine FAISS suivantes :</p>
@@ -165,7 +210,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Cette section donne un aperçu des paramètres utilisés pour construire un index et effectuer des recherches sur l'index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index</h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés dans <code translate="no">params</code> lors de la <a href="/docs/fr/ivf-rabitq.md#Build-index">construction d'un index</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés dans <code translate="no">params</code> lors de la <a href="/docs/fr/ivf-rabitq.md#Build-index">construction d'un index</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -195,7 +255,22 @@ res = MilvusClient.search(
      <td><p>Les valeurs énumérées sont présentées dans l'ordre suivant : taux de rappel croissant, QPS décroissant et taille de stockage croissante. <code translate="no">SQ8</code> est recommandé comme point de départ, car il offre un bon équilibre entre la précision et l'utilisation des ressources.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques à l'index</h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés à l'adresse <code translate="no">search_params.params</code> lors d'une <a href="/docs/fr/ivf-rabitq.md#Search-on-index">recherche dans l'index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques à l'index<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés à l'adresse <code translate="no">search_params.params</code> lors d'une <a href="/docs/fr/ivf-rabitq.md#Search-on-index">recherche dans l'index</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -214,7 +289,7 @@ res = MilvusClient.search(
    <tr>
      <td rowspan="2"><p>RaBitQ</p></td>
      <td><p><code translate="no">rbq_query_bits</code></p></td>
-     <td><p>Définit si une quantification scalaire supplémentaire d'un vecteur de requête est appliquée. Si la valeur est <code translate="no">0</code>, la requête est utilisée sans quantification. Si la valeur est comprise entre [1 et 8], la requête est prétraitée à l'aide d'une quantification scalaire sur n bits.</p></td>
+     <td><p>Définit si une quantification scalaire supplémentaire d'un vecteur de requête est appliquée. Si la valeur est <code translate="no">0</code>, la requête est utilisée sans quantification. Si la valeur est comprise entre [1, 8], la requête est prétraitée à l'aide d'une quantification scalaire sur n bits.</p></td>
      <td><p><strong>Type</strong>: Entier<br><strong>Plage de valeurs</strong>: [0, 8]<br><strong>Valeur par défaut</strong>: <code translate="no">0</code></p></td>
      <td><p>La valeur par défaut de <code translate="no">0</code> offre un taux de rappel maximal mais des performances plus lentes. Nous recommandons de tester les valeurs <code translate="no">0</code>, <code translate="no">8</code>, et <code translate="no">6</code>, car elles fournissent des taux de rappel similaires, <code translate="no">6</code> étant la plus rapide. Utilisez des valeurs plus petites pour des exigences de rappel plus élevées.</p></td>
    </tr>

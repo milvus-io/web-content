@@ -47,7 +47,7 @@ beta: Milvus 2.6.x
    </tr>
    <tr>
      <td><p>text-embedding-v3</p></td>
-     <td><p>1.024 (por defecto), 768 o 512</p></td>
+     <td><p>1.024 (predeterminado), 768 o 512</p></td>
      <td><p>8,192</p></td>
      <td><p>Chino, inglés, español, francés, portugués, indonesio, japonés, coreano, alemán, ruso y más de 50 idiomas.</p></td>
    </tr>
@@ -200,7 +200,7 @@ beta: Milvus 2.6.x
     </button></h3><p>Para utilizar una función de incrustación, cree una colección con un esquema específico. Este esquema debe incluir al menos tres campos necesarios:</p>
 <ul>
 <li><p>El campo primario que identifica de forma única a cada entidad de una colección.</p></li>
-<li><p>Un campo escalar que almacene los datos brutos que se van a incrustar.</p></li>
+<li><p>Un campo escalar que almacena los datos brutos que se van a incrustar.</p></li>
 <li><p>Un campo vectorial reservado para almacenar las incrustaciones vectoriales que la función generará para el campo escalar.</p></li>
 </ul>
 <p>El siguiente ejemplo define un esquema con un campo escalar <code translate="no">&quot;document&quot;</code> para almacenar datos textuales y un campo vectorial <code translate="no">&quot;dense&quot;</code> para almacenar las incrustaciones que generará el módulo Función. Recuerde ajustar la dimensión del vector (<code translate="no">dim</code>) para que coincida con la salida del modelo de incrustación elegido.</p>

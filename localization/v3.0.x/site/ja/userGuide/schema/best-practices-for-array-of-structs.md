@@ -205,7 +205,7 @@ beta: Milvus 2.6.4+
 <li><p><code translate="no">captions</code> は Struct の配列で、各 Struct は以下のフィールドを持つ：</p>
 <ul>
 <li><p><code translate="no">frame_id</code> は、現在のビデオ内の特定のフレームを識別します。</p></li>
-<li><p><code translate="no">plain_caption</code> は、天候や道路状況などの周囲環境を含まない現在のフレームの説明であり、<code translate="no">plain_cap_vector</code> は、それに対応するベクトル埋め込みです。</p></li>
+<li><p><code translate="no">plain_caption</code> は、天候や道路状況などの周囲環境を含まない現在のフレームの説明であり、<code translate="no">plain_cap_vector</code> はその対応するベクトル埋め込みです。</p></li>
 <li><p><code translate="no">rich_caption</code> は周囲環境を含む現在のフレームの説明であり、<code translate="no">rich_cap_vector</code> はその対応するベクトル埋め込みである。</p></li>
 <li><p><code translate="no">risk</code> は現在のフレームで自車両が直面するリスクの記述であり、<code translate="no">risk_vector</code> はその対応するベクトル埋め込みである。</p></li>
 <li><p><code translate="no">road</code>,<code translate="no">weather</code>,<code translate="no">is_tunnel</code>,<code translate="no">has_pedestrain</code>, etc...のようなフレームの他のすべての属性。</p></li>

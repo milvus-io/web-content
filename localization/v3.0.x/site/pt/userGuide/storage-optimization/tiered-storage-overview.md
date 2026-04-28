@@ -6,8 +6,8 @@ summary: >-
   carregue todos os campos de dados e índices de um segmento na inicialização,
   mesmo os dados que podem nunca ser acedidos. Isso garante a disponibilidade
   imediata dos dados, mas muitas vezes leva ao desperdício de recursos,
-  incluindo alto uso de memória, atividade pesada em disco e sobrecarga
-  significativa de E/S, especialmente ao lidar com conjuntos de dados em grande
+  incluindo alto uso de memória, atividade pesada de disco e sobrecarga
+  significativa de E/S, especialmente ao lidar com conjuntos de dados de grande
   escala.
 beta: Milvus 2.6.4+
 ---
@@ -232,7 +232,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h3><ol>
-<li><p><strong>Configure</strong> o<strong>Warm Up</strong> - otimize o pré-carregamento para seus padrões de acesso. Consulte <a href="/docs/pt/warm-up.md">Aquecimento</a>.</p></li>
+<li><p><strong>Configure</strong> o<strong>Warm Up</strong> - otimize o pré-carregamento para seus padrões de acesso. Consulte <a href="/docs/pt/warm-up.md">Warm Up</a>.</p></li>
 <li><p><strong>Ajuste o Eviction</strong> - Defina marcas d'água e TTL apropriados para suas restrições de recursos. Consulte <a href="/docs/pt/eviction.md">Evicção</a>.</p></li>
 <li><p><strong>Monitorar o desempenho</strong> - Acompanhe as taxas de acerto do cache, a frequência de despejo e os padrões de latência de consulta.</p></li>
 <li><p><strong>Iterar a configuração</strong> - Ajuste as configurações com base nas caraterísticas observadas da carga de trabalho.</p></li>

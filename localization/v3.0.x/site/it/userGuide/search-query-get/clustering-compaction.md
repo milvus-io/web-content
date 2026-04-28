@@ -41,13 +41,13 @@ summary: >-
     </button></h2><p>Milvus memorizza le entità in arrivo in segmenti all'interno di una raccolta e chiude un segmento quando è pieno. In tal caso, viene creato un nuovo segmento per accogliere altre entità. Di conseguenza, le entità sono distribuite arbitrariamente tra i segmenti. Questa distribuzione richiede che Milvus cerchi in più segmenti per trovare i vicini più vicini a un determinato vettore di query.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/without-clustering-compaction.png" alt="Without Clustering Compaction" class="doc-image" id="without-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/without-clustering-compaction.png" alt="Without Clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Senza compattazione del clustering</span> </span></p>
 <p>Se Milvus può distribuire le entità tra i segmenti in base ai valori di un campo specifico, l'ambito di ricerca può essere limitato all'interno di un segmento, migliorando così le prestazioni di ricerca.</p>
-<p><strong>Clustering Compaction</strong> è una funzione di Milvus che ridistribuisce le entità tra i segmenti di una raccolta in base ai valori di un campo scalare. Per attivare questa funzione, è necessario selezionare un campo scalare come <strong>chiave di raggruppamento</strong>. Questo permette a Milvus di ridistribuire le entità in un segmento quando i valori della chiave di clustering rientrano in un intervallo specifico. Quando si attiva una compattazione di clustering, Milvus genera/aggiorna un indice globale chiamato <strong>PartitionStats</strong>, che registra la relazione di mappatura tra i segmenti e i valori delle chiavi di clustering.</p>
+<p><strong>Clustering Compaction</strong> è una funzione di Milvus che ridistribuisce le entità tra i segmenti di una raccolta in base ai valori di un campo scalare. Per attivare questa funzione, è necessario selezionare un campo scalare come <strong>chiave di raggruppamento</strong>. Ciò consente a Milvus di ridistribuire le entità in un segmento quando i valori della chiave di clustering rientrano in un intervallo specifico. Quando si attiva una compattazione di clustering, Milvus genera/aggiorna un indice globale chiamato <strong>PartitionStats</strong>, che registra la relazione di mappatura tra i segmenti e i valori delle chiavi di clustering.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Compattazione del clustering</span> </span></p>
 <p>Utilizzando <strong>PartitionStats</strong> come riferimento, Milvus può sfrondare i dati irrilevanti quando riceve una richiesta di ricerca/query che contiene un valore di chiave di clustering e restringe l'ambito di ricerca all'interno dei segmenti che corrispondono al valore, migliorando così le prestazioni di ricerca. Per maggiori dettagli sul miglioramento delle prestazioni, consultare i <a href="/docs/it/clustering-compaction.md#Benchmark-Test">test di benchmark</a>.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Utilizzare la compattazione del clustering<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
@@ -66,7 +66,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>La funzione Clustering Compaction di Milvus è altamente configurabile. Si può scegliere di attivarla manualmente o di impostarla in modo che venga attivata automaticamente da Milvus a intervalli. Per abilitare la compattazione del clustering, procedere come segue:</p>
-<h3 id="Global-Configuration" class="common-anchor-header">Configurazione globale</h3><p>È necessario modificare il file di configurazione di Milvus come indicato di seguito.</p>
+<h3 id="Global-Configuration" class="common-anchor-header">Configurazione globale<button data-href="#Global-Configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>È necessario modificare il file di configurazione di Milvus come indicato di seguito.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">dataCoord:</span>
   <span class="hljs-attr">compaction:</span>
     <span class="hljs-attr">clustering:</span>
@@ -163,7 +178,22 @@ summary: >-
    </tr>
 </table>
 <p>Per applicare le modifiche di cui sopra al vostro cluster Milvus, seguite i passaggi in <a href="/docs/it/configure-helm.md#Configure-Milvus-via-configuration-file">Configurazione di Milvus con Helm</a> e <a href="/docs/it/configure_operator.md">Configurazione di Milvus con Milvus Operators</a>.</p>
-<h3 id="Collection-Configuration" class="common-anchor-header">Configurazione della raccolta</h3><p>Per la compattazione del cluster in una raccolta specifica, è necessario selezionare un campo scalare della raccolta come chiave di clustering.</p>
+<h3 id="Collection-Configuration" class="common-anchor-header">Configurazione della raccolta<button data-href="#Collection-Configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per la compattazione del cluster in una raccolta specifica, è necessario selezionare un campo scalare della raccolta come chiave di clustering.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -276,7 +306,22 @@ client.createCollection(requestCreate);
 <div class="alert note">
 <p>È possibile utilizzare i campi scalari dei seguenti tipi di dati come chiave di clustering: <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, <code translate="no">Double</code>, e <code translate="no">VarChar</code>.</p>
 </div>
-<h3 id="Trigger-Clustering-Compaction" class="common-anchor-header">Attivare la compattazione del clustering</h3><p>Se è stata attivata la compattazione automatica del clustering, Milvus attiva automaticamente la compattazione all'intervallo specificato. In alternativa, è possibile attivare manualmente la compattazione come segue:</p>
+<h3 id="Trigger-Clustering-Compaction" class="common-anchor-header">Attivare la compattazione del clustering<button data-href="#Trigger-Clustering-Compaction" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Se è stata attivata la compattazione automatica del clustering, Milvus attiva automaticamente la compattazione all'intervallo specificato. In alternativa, è possibile attivare manualmente la compattazione come segue:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># trigger a manual compaction</span>
@@ -337,7 +382,7 @@ System.out.println(stateResp.getState());
         ></path>
       </svg>
     </button></h2><p>Il volume dei dati e i modelli di query determinano il miglioramento delle prestazioni che la compattazione del cluster può apportare. Un test di benchmark interno dimostra che la compattazione del clustering produce un miglioramento fino a 25 volte delle query al secondo (QPS).</p>
-<p>Il test di benchmark è stato eseguito su una raccolta contenente entità di un dataset LAION da 20 milioni e 768 dimensioni, con il campo <code translate="no">key</code> designato come chiave di clustering. Dopo l'attivazione della compattazione del clustering nella raccolta, vengono inviate ricerche simultanee finché l'utilizzo della CPU non raggiunge un livello elevato.</p>
+<p>Il test di benchmark è stato eseguito su una raccolta contenente entità di un dataset LAION da 20 milioni e 768 dimensioni, con il campo <code translate="no">key</code> designato come chiave di clustering. Dopo l'attivazione della compattazione del clustering nella raccolta, vengono inviate ricerche simultanee fino a quando l'utilizzo della CPU raggiunge un livello elevato.</p>
 <table>
    <tr>
      <th rowspan="2"><p>Filtro di ricerca</p></th>
@@ -403,7 +448,7 @@ System.out.println(stateResp.getState());
      <td><p>431.41</p></td>
    </tr>
 </table>
-<p>Man mano che l'intervallo di ricerca si restringe nei filtri di ricerca, il rapporto di eliminazione aumenta. Ciò significa che un maggior numero di entità viene saltato durante il processo di ricerca. Confrontando le statistiche della prima e dell'ultima riga, si può notare che le ricerche senza compattazione del clustering richiedono la scansione dell'intera collezione. D'altra parte, le ricerche con la compattazione dei cluster utilizzando una chiave specifica possono ottenere un miglioramento fino a 25 volte.</p>
+<p>Quando l'intervallo di ricerca si restringe nei filtri di ricerca, il rapporto di eliminazione aumenta. Ciò significa che un maggior numero di entità viene saltato durante il processo di ricerca. Confrontando le statistiche della prima e dell'ultima riga, si può notare che le ricerche senza compattazione del clustering richiedono la scansione dell'intera collezione. D'altra parte, le ricerche con la compattazione del clustering utilizzando una chiave specifica possono ottenere un miglioramento fino a 25 volte.</p>
 <h2 id="Best-Practices" class="common-anchor-header">Le migliori pratiche<button data-href="#Best-Practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

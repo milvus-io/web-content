@@ -42,17 +42,62 @@ summary: 了解如何在 Milvus 中使用 Prometheus 和 Grafana 进行监控和
 <li>Prometheus 操作符，用于有效管理 Prometheus 监控实例。</li>
 <li>Kube-prometheus 用于提供易于操作的端到端 Kubernetes 集群监控。</li>
 </ul>
-<h3 id="Metric-names" class="common-anchor-header">度量名称</h3><p>Prometheus 中有效的度量名称包含三个元素：命名空间、子系统和名称。这三个元素用"_"连接。</p>
-<p>Prometheus 监控的 Milvus 度量的命名空间是 "milvus"。根据度量指标所属的角色，其子系统应为以下八个角色之一："根节点"、"代理"、"查询节点"、"查询节点"、"索引节点"、"索引节点"、"数据节点"、"数据节点"。</p>
+<h3 id="Metric-names" class="common-anchor-header">度量名称<button data-href="#Metric-names" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Prometheus 中有效的度量名称包含三个元素：命名空间、子系统和名称。这三个元素用"_"连接。</p>
+<p>Prometheus 监控的 Milvus 度量的命名空间是 "milvus"。根据度量所属的角色，其子系统应为以下八个角色之一："根节点"、"代理"、"查询节点"、"查询节点"、"索引节点"、"索引节点"、"数据节点"、"数据节点"。</p>
 <p>例如，计算查询向量总数的 Milvus 度量名为<code translate="no">milvus_proxy_search_vectors_count</code> 。</p>
-<h3 id="Metric-types" class="common-anchor-header">度量类型</h3><p>Prometheus 支持四种度量类型：</p>
+<h3 id="Metric-types" class="common-anchor-header">度量类型<button data-href="#Metric-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Prometheus 支持四种度量类型：</p>
 <ul>
-<li>计数器：一种累积度量类型，其值只能在重启时增加或重置为零。</li>
+<li>计数器：一种累计度量类型，其值只能增加或在重启时重置为零。</li>
 <li>仪表：一种度量类型，其值可以上升或下降。</li>
 <li>直方图：一种根据可配置的桶进行计数的指标类型。常见的例子是请求持续时间。</li>
 <li>摘要：与直方图类似的一种度量类型，可在滑动时间窗口内计算可配置的量化值。</li>
 </ul>
-<h3 id="Metric-labels" class="common-anchor-header">指标标签</h3><p>Prometheus 通过标签来区分具有相同度量名称的样本。标签是度量指标的特定属性。具有相同名称的度量值必须具有相同的<code translate="no">variable_labels</code> 字段值。下表列出了 Milvus 度量常见标签的名称和含义。</p>
+<h3 id="Metric-labels" class="common-anchor-header">指标标签<button data-href="#Metric-labels" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Prometheus 通过标签来区分具有相同度量名称的样本。标签是度量指标的特定属性。具有相同名称的度量值必须具有相同的<code translate="no">variable_labels</code> 字段值。下表列出了 Milvus 度量常见标签的名称和含义。</p>
 <table>
 <thead>
 <tr><th>标签名称</th><th>定义</th><th>值</th></tr>
@@ -86,7 +131,7 @@ summary: 了解如何在 Milvus 中使用 Prometheus 和 Grafana 进行监控和
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://grafana.com/docs/grafana/latest/introduction/">Grafana</a>是一个开源的可视化堆栈，可以连接所有数据源。通过调出指标，它可以帮助用户理解、分析和监控海量数据。</p>
+    </button></h2><p><a href="https://grafana.com/docs/grafana/latest/introduction/">Grafana</a>是一个开源的可视化堆栈，可以连接所有数据源。通过调用指标，它可以帮助用户理解、分析和监控海量数据。</p>
 <p>Milvus 使用 Grafana 的可定制仪表盘进行指标可视化。</p>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

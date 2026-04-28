@@ -2,8 +2,8 @@
 id: cohere-ranker.md
 title: 搜索排名器Compatible with Milvus 2.6.x
 summary: >-
-  Cohere Ranker 利用 Cohere 强大的 Rerankers 模型，通过语义 Reranking 增强搜索相关性。它提供企业级
-  Reranker 功能，具有强大的 API 基础设施和优化的性能，适用于生产环境。
+  Cohere Ranker 利用 Cohere 强大的 Rerankers 模型，通过语义 Reranking 增强搜索相关性。它通过强大的 API
+  基础设施和优化的性能为生产环境提供企业级 Reranker 功能。
 beta: Milvus 2.6.x
 ---
 <h1 id="Cohere-Ranker" class="common-anchor-header">搜索排名器<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Cohere-Ranker" class="anchor-icon" translate="no">

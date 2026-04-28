@@ -6,7 +6,7 @@ summary: >-
   RBAC. È possibile iniziare creando utenti e ruoli, quindi assegnare privilegi
   o gruppi di privilegi ai ruoli e infine gestire il controllo degli accessi
   assegnando ruoli agli utenti. Questo metodo garantisce l'efficienza e la
-  sicurezza della gestione degli accessi. Questa pagina spiega come creare
+  sicurezza della gestione degli accessi. Questa pagina illustra come creare
   utenti e ruoli in Milvus.
 ---
 <h1 id="Create-Users--Roles" class="common-anchor-header">Creare utenti e ruoli<button data-href="#Create-Users--Roles" class="anchor-icon" translate="no">

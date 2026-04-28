@@ -37,25 +37,25 @@ title: معالجة البيانات
     </button></h2><p>يمكنك اختيار عدد الأجزاء التي تستخدمها مجموعة ما في ميلفوس - كل جزء يعيّن إلى قناة افتراضية<em>(vchannel</em>). كما هو موضح أدناه، يقوم Milvus بعد ذلك بتعيين كل <em>قناة افتراضية</em> إلى قناة فعلية<em>(pchannel</em>)، وترتبط كل <em>قناة pchannel</em> بعقدة تدفق محددة.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/pvchannel_wal.png" alt="VChannel PChannel and StreamingNode" class="doc-image" id="vchannel-pchannel-and-streamingnode" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/pvchannel_wal.png" alt="VChannel PChannel and StreamingNode" class="doc-image" id="vchannel-pchannel-and-streamingnode" />
    </span> <span class="img-wrapper"> <span>قناة VChannel PCChannel وعقدة البث PCNode</span> </span></p>
 <p>بعد التحقق من البيانات، يقوم الوكيل بتقسيم الرسالة المكتوبة إلى حزم بيانات مختلفة من الأجزاء وفقًا لقواعد توجيه الأجزاء المحددة.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/channels_1.png" alt="Channels 1" class="doc-image" id="channels-1" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_1.png" alt="Channels 1" class="doc-image" id="channels-1" />
    </span> <span class="img-wrapper"> <span>القنوات 1</span> </span></p>
 <p>ثم يتم إرسال البيانات المكتوبة لجزء واحد<em>(قناة vchannel</em>) إلى عقدة التدفق المقابلة لـ <em>pchannel</em>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/written_data_flow.png" alt="write flow" class="doc-image" id="write-flow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/written_data_flow.png" alt="write flow" class="doc-image" id="write-flow" />
    </span> <span class="img-wrapper"> <span>تدفق الكتابة</span> </span></p>
-<p>تقوم عقدة الدفق بتعيين أوراكل الطابع الزمني (TSO) لكل حزمة بيانات لإنشاء ترتيب إجمالي للعمليات. تقوم بإجراء فحوصات الاتساق على الحمولة قبل كتابتها في سجل الكتابة المسبق الأساسي (WAL). بمجرد أن يتم الالتزام بالبيانات بشكل دائم في WAL، يتم ضمان عدم ضياعها - حتى في حالة حدوث عطل، يمكن لعقدة الدفق إعادة تشغيل WAL لاستعادة جميع العمليات المعلقة بالكامل.</p>
+<p>تقوم عقدة الدفق بتعيين أوراكل الطابع الزمني (TSO) لكل حزمة بيانات لإنشاء ترتيب إجمالي للعمليات. تقوم بإجراء عمليات التحقق من الاتساق على الحمولة قبل كتابتها في سجل الكتابة المسبق الأساسي (WAL). بمجرد أن يتم الالتزام بالبيانات بشكل دائم في WAL، يتم ضمان عدم ضياعها - حتى في حالة حدوث عطل، يمكن لعقدة الدفق إعادة تشغيل WAL لاستعادة جميع العمليات المعلقة بالكامل.</p>
 <p>وفي الوقت نفسه، تقوم StreamingNode أيضًا بتقطيع إدخالات WAL الملتزم بها بشكل غير متزامن إلى مقاطع منفصلة. هناك نوعان من المقاطع:</p>
 <ul>
 <li><strong>المقطع المتزايد</strong>: أي بيانات لم يتم إدخالها مسبقًا في مخزن الكائنات.</li>
 <li>المقطع<strong>المختوم</strong>: جميع البيانات التي تم حفظها في مخزن الكائن، وتكون بيانات المقطع المختوم غير قابلة للتغيير.</li>
 </ul>
-<p>يسمى الانتقال من مقطع متزايد إلى مقطع مغلق بالتدفق. تقوم عقدة الدفق بتشغيل التدفق بمجرد أن تستوعب وتكتب جميع إدخالات WAL المتاحة لهذا المقطع - أي عندما لا يكون هناك المزيد من السجلات المعلقة في سجل الكتابة الأمامي الأساسي - وعندها يتم إنهاء المقطع وجعله محسّنًا للقراءة.</p>
+<p>يسمى الانتقال من مقطع متزايد إلى مقطع مغلق بالتدفق. تقوم عقدة التدفق بتشغيل التدفق بمجرد أن تستوعب وتكتب جميع إدخالات WAL المتاحة لهذا المقطع - أي عندما لا يكون هناك المزيد من السجلات المعلقة في سجل الكتابة الأمامي الأساسي - وعندها يتم إنهاء المقطع وجعله محسّنًا للقراءة.</p>
 <h2 id="Index-building" class="common-anchor-header">بناء الفهرس<button data-href="#Index-building" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,7 +74,7 @@ title: معالجة البيانات
     </button></h2><p>يتم بناء الفهرس بواسطة عقدة البيانات. لتجنب بناء الفهرس المتكرر لتحديثات البيانات، يتم تقسيم المجموعة في ميلفوس إلى شرائح لكل منها فهرسها الخاص.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/index_building.png" alt="Index building" class="doc-image" id="index-building" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/index_building.png" alt="Index building" class="doc-image" id="index-building" />
    </span> <span class="img-wrapper"> <span>بناء الفهرس</span> </span></p>
 <p>يدعم Milvus بناء الفهرس لكل حقل متجه وحقل قياسي وحقل أساسي. يتفاعل كل من مدخلات ومخرجات بناء الفهرس مع تخزين الكائنات: تقوم عقدة البيانات بتحميل لقطات السجل للفهرسة من مقطع (موجود في وحدة تخزين الكائنات) إلى الذاكرة، ثم تقوم بإلغاء تسلسل البيانات والبيانات الوصفية المقابلة لبناء الفهرس، ثم تقوم بتسلسل الفهرس عند اكتمال بناء الفهرس، ثم تقوم بكتابته مرة أخرى إلى وحدة تخزين الكائنات.</p>
 <p>يتضمن بناء الفهرس بشكل أساسي عمليات متجهة ومصفوفة، وبالتالي فهو يتطلب عمليات حسابية وذاكرة مكثفة. لا يمكن فهرسة المتجهات بكفاءة باستخدام الفهارس التقليدية القائمة على الأشجار بسبب طبيعتها عالية الأبعاد، ولكن يمكن فهرستها بتقنيات أكثر نضجًا في هذا الموضوع، مثل الفهارس القائمة على المجموعات أو الرسم البياني. وبغض النظر عن نوعها، يتضمن بناء الفهرس عمليات حسابية تكرارية ضخمة للمتجهات واسعة النطاق، مثل Kmeans أو اجتياز الرسم البياني.</p>
@@ -98,7 +98,7 @@ title: معالجة البيانات
     </button></h2><p>يشير الاستعلام عن البيانات إلى عملية البحث في مجموعة محددة عن عدد <em>k</em> من المتجهات الأقرب إلى متجه مستهدف أو عن <em>جميع</em> المتجهات ضمن نطاق مسافة محددة إلى المتجه. يتم إرجاع المتجهات مع المفتاح الأساسي والحقول المقابلة لها.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
    </span> <span class="img-wrapper"> <span>استعلام البيانات</span> </span></p>
 <p>تنقسم المجموعة في ميلفوس إلى قطاعات متعددة؛ تقوم عقدة التدفق بتحميل قطاعات متزايدة وتحتفظ بالبيانات في الوقت الفعلي، بينما تقوم عقد الاستعلام بتحميل قطاعات مغلقة.</p>
 <p>عند وصول طلب استعلام/بحث، يقوم الوكيل ببث الطلب إلى جميع عقد الدفق المسؤولة عن الأجزاء ذات الصلة للبحث المتزامن.</p>
@@ -107,7 +107,7 @@ title: معالجة البيانات
 <p>أخيرًا، يجمع الوكيل جميع نتائج الأجزاء ويدمجها في النتيجة النهائية ويعيدها إلى العميل.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/handoff.png" alt="Handoff" class="doc-image" id="handoff" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/handoff.png" alt="Handoff" class="doc-image" id="handoff" />
    </span> <span class="img-wrapper"> <span>التسليم</span> </span></p>
 <p>عندما يتم مسح الجزء المتنامي على عقدة تدفق إلى جزء مغلق - أو عندما تكمل عقدة البيانات عملية ضغط - يبدأ المنسق عملية تسليم لتحويل تلك البيانات المتنامية إلى بيانات تاريخية. ثم يقوم المنسق بعد ذلك بتوزيع المقاطع المختومة بالتساوي على جميع عقد الاستعلام، وموازنة استخدام الذاكرة، والنفقات الزائدة لوحدة المعالجة المركزية، وعدد المقاطع، وإصدار أي مقطع زائد عن الحاجة.</p>
 <h2 id="Whats-next" class="common-anchor-header">ما التالي<button data-href="#Whats-next" class="anchor-icon" translate="no">

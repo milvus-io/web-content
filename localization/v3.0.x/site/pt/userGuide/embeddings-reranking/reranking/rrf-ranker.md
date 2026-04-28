@@ -89,7 +89,7 @@ summary: >-
     </button></h2><p>O fluxo de trabalho principal da estratégia do RRFRanker é o seguinte:</p>
 <ol>
 <li><p><strong>Recolher os rankings de pesquisa</strong>: Recolhe as classificações dos resultados de cada caminho da pesquisa vetorial (rank_1, rank_2).</p></li>
-<li><p><strong>Fundir classificações</strong>: Converter as classificações de cada caminho (rank_rrf_1, rank_rrf_2) de acordo com uma fórmula.</p>
+<li><p><strong>Fundir classificações</strong>: Converte as classificações de cada caminho (rank_rrf_1, rank_rrf_2) de acordo com uma fórmula.</p>
 <p>A fórmula de cálculo envolve <em>N</em>, que representa o número de recuperações. <em>ranki</em><em>(d</em>) é a posição de classificação do documento <em>d</em> gerada pelo <em>i(th)</em> retriever. <em>k</em> é um parâmetro de suavização normalmente definido como 60.</p></li>
 <li><p><strong>Agregação de classificações</strong>: Classifica novamente os resultados da pesquisa com base nas classificações combinadas para produzir os resultados finais.</p></li>
 </ol>

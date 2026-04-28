@@ -201,6 +201,7 @@ job_id = client.compact(
     target_size=max_int64
 )
 <button class="copy-code-btn"></button></code></pre>
+<p><a id="parameter-reference"></a></p>
 <h4 id="Parameter-reference" class="common-anchor-header">Riferimento ai parametri</h4><p>La tabella seguente spiega i parametri.</p>
 <table>
    <tr>
@@ -263,6 +264,7 @@ state = client.get_compaction_state(job_id)
 <li><p><strong>Considerare il compromesso delle prestazioni.</strong> La compattazione Force Merge è un'operazione che richiede molte risorse. Legge, unisce e riscrive i dati del segmento. Programmarla in periodi di basso traffico per ridurre al minimo l'impatto sulla latenza delle query.</p></li>
 <li><p><strong>Monitorare il conteggio dei segmenti prima e dopo.</strong> Utilizzare <code translate="no">get_compaction_state()</code> e <code translate="no">list_persistent_segments</code> per verificare che la compattazione abbia prodotto un numero inferiore di segmenti più grandi, come previsto.</p></li>
 </ul>
+<p><a id="faq"></a></p>
 <h2 id="FAQ" class="common-anchor-header">DOMANDE FREQUENTI<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -282,7 +284,7 @@ state = client.get_compaction_state(job_id)
 <p>Questi due tipi di operazioni di compattazione hanno scopi diversi.</p>
 <ul>
 <li><p>La compattazione standard (targetSize=0 o omesso) è un percorso di pulizia incrementale e di massimo sforzo.</p></li>
-<li><p>La fusione forzata (targetSize&gt;0) è un percorso di reimpacchettamento a livello di raccolta per produrre un numero inferiore di segmenti più grandi e vicini all'obiettivo.</p></li>
+<li><p>La fusione forzata (targetSize&gt;0) è un percorso di riconfezionamento a livello di raccolta per produrre un numero inferiore di segmenti più grandi e vicini all'obiettivo.</p></li>
 </ul>
 <p>La differenza fondamentale è la forma del merge: la compattazione standard è effettivamente m → 1 per task, mentre il force merge è m → n tra gli input raggruppati. Questo è il motivo per cui il force merge può risolvere layout di segmenti che la compattazione standard non può risolvere. La tabella seguente mette a confronto i due tipi di operazioni.</p>
 <table>
@@ -360,6 +362,6 @@ state = client.get_compaction_state(job_id)
 <p><strong>In che modo la fusione forzata è diversa dalla compattazione a grappolo?</strong></p>
 <p>La<a href="/docs/it/clustering-compaction.md">compattazione del clustering</a> (<code translate="no">is_clustering=True</code>) riorganizza i dati all'interno dei segmenti in base a una chiave di clustering per migliorare la selezione della ricerca. Force Merge (<code translate="no">target_size=N</code>) ottimizza le dimensioni dei segmenti senza modificare la distribuzione dei dati. I due sistemi hanno scopi diversi e possono essere usati insieme: eseguite prima la compattazione del clustering per organizzare i dati, quindi Force Merge per consolidare i segmenti risultanti.</p>
 <p><strong>È possibile eseguire Force Merge su una raccolta che viene interrogata?</strong></p>
-<p>Sì. Force Merge viene eseguito in modo asincrono e non blocca le query. Tuttavia, consuma risorse DataNode e I/O del disco, quindi la latenza delle query potrebbe aumentare durante la compattazione. Per ottenere i migliori risultati, pianificare Force Merge in periodi di basso traffico.</p>
+<p>Sì. Force Merge viene eseguito in modo asincrono e non blocca le query. Tuttavia, consuma risorse DataNode e I/O del disco, quindi la latenza delle query può aumentare durante la compattazione. Per ottenere i migliori risultati, pianificare Force Merge in periodi di basso traffico.</p>
 <p><strong>Cosa succede se si imposta un target_size inferiore a maxSize?</strong></p>
 <p>La richiesta viene rifiutata con un errore. La dimensione di destinazione deve essere maggiore o uguale alla dimensione configurata <code translate="no">dataCoord.segment.maxSize</code>.</p>

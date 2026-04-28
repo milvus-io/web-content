@@ -89,12 +89,12 @@ title: Überblick über die Milvus-Bereitstellungsoptionen
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die Auswahl eines Bereitstellungsmodus hängt in der Regel vom Entwicklungsstadium Ihrer Anwendung ab:</p>
+    </button></h2><p>Die Wahl des Bereitstellungsmodus hängt in der Regel von der Entwicklungsphase Ihrer Anwendung ab:</p>
 <ul>
 <li><p><strong>Für schnelles Prototyping</strong></p>
-<p>Wenn Sie schnell etwas als Prototyp oder zu Lernzwecken erstellen möchten, wie z. B. Retrieval Augmented Generation (RAG)-Demos, KI-Chatbots, multimodale Suche, ist Milvus Lite selbst oder eine Kombination aus Milvus Lite und Milvus Standalone geeignet. Sie können Milvus Lite in Notebooks für Rapid Prototyping verwenden und verschiedene Ansätze wie z. B. verschiedene Chunking-Strategien in RAG erkunden. Möglicherweise möchten Sie die mit Milvus Lite erstellte Anwendung in einem kleinen Produktionsmaßstab einsetzen, um echte Benutzer zu bedienen oder die Idee an größeren Datensätzen zu validieren, z. B. an mehr als ein paar Millionen Vektoren. Milvus Standalone ist dafür geeignet. Die Anwendungslogik für Milvus Lite kann weiterhin gemeinsam genutzt werden, da alle Milvus-Implementierungen dieselbe clientseitige API haben. Die in Milvus Lite gespeicherten Daten können auch mit einem Befehlszeilentool auf Milvus Standalone portiert werden.</p></li>
+<p>Wenn Sie schnell etwas als Prototyp oder zu Lernzwecken erstellen möchten, wie z. B. Retrieval Augmented Generation (RAG)-Demos, KI-Chatbots, multimodale Suche, ist Milvus Lite selbst oder eine Kombination aus Milvus Lite und Milvus Standalone geeignet. Sie können Milvus Lite in Notebooks für Rapid Prototyping verwenden und verschiedene Ansätze wie z. B. verschiedene Chunking-Strategien in RAG untersuchen. Möglicherweise möchten Sie die mit Milvus Lite erstellte Anwendung in einem kleinen Produktionsmaßstab einsetzen, um echte Benutzer zu bedienen oder die Idee an größeren Datensätzen zu validieren, z. B. an mehr als ein paar Millionen Vektoren. Milvus Standalone ist dafür geeignet. Die Anwendungslogik für Milvus Lite kann weiterhin gemeinsam genutzt werden, da alle Milvus-Implementierungen dieselbe clientseitige API haben. Die in Milvus Lite gespeicherten Daten können auch mit einem Befehlszeilentool auf Milvus Standalone portiert werden.</p></li>
 <li><p><strong>Produktionseinsatz in kleinem Maßstab</strong></p>
-<p>Für die frühe Produktionsphase, wenn das Projekt noch auf der Suche nach der Anpassung an den Produktmarkt ist und Agilität wichtiger ist als Skalierbarkeit, ist Milvus Standalone die beste Wahl. Es kann bei ausreichenden Maschinenressourcen bis zu 100 Mio. Vektoren skalieren und erfordert dabei viel weniger DevOps als die Wartung eines K8s-Clusters.</p></li>
+<p>Für die frühe Produktionsphase, wenn das Projekt noch auf der Suche nach der Anpassung an den Produktmarkt ist und Agilität wichtiger ist als Skalierbarkeit, ist Milvus Standalone die beste Wahl. Sie kann bei ausreichenden Maschinenressourcen bis zu 100 Mio. Vektoren skalieren und erfordert dabei viel weniger DevOps als die Wartung eines K8s-Clusters.</p></li>
 <li><p><strong>Groß angelegte Produktionsimplementierung</strong></p>
 <p>Wenn Ihr Unternehmen schnell wächst und die Datenmenge die Kapazität eines einzelnen Servers übersteigt, ist es an der Zeit, Milvus Distributed in Betracht zu ziehen. Sie können Milvus Standalone weiterhin für die Entwicklungs- oder Staging-Umgebung verwenden und den K8s-Cluster betreiben, auf dem Milvus Distributed läuft. Damit können Sie mehrere Milliarden Vektoren verwalten und die Knotengröße flexibel an Ihre Arbeitslast anpassen, z. B. an Fälle mit hohem Leseaufkommen und seltenen Schreibvorgängen oder mit hohem Schreibaufkommen und geringem Leseaufkommen.</p></li>
 <li><p><strong>Lokale Suche auf Edge-Geräten</strong></p>
@@ -104,11 +104,11 @@ title: Überblick über die Milvus-Bereitstellungsoptionen
 <ul>
 <li><strong>Milvus Lite</strong> wird für kleinere Datensätze mit bis zu einigen Millionen Vektoren empfohlen.</li>
 <li><strong>Milvus Standalone</strong> ist für mittelgroße Datensätze geeignet, die bis zu 100 Millionen Vektoren umfassen.</li>
-<li><strong>Milvus Distributed</strong> ist für große Bereitstellungen konzipiert und kann Datensätze von 100 Millionen bis zu mehreren Milliarden Vektoren verarbeiten.</li>
+<li><strong>Milvus Distributed</strong> ist für große Bereitstellungen konzipiert und kann Datensätze von 100 Millionen bis hin zu mehreren Milliarden Vektoren verarbeiten.</li>
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" />
    </span> <span class="img-wrapper"> <span>Wählen Sie die Einsatzoption für Ihren Anwendungsfall</span> </span></p>
 <h2 id="Comparison-on-functionalities" class="common-anchor-header">Vergleich der Funktionalitäten<button data-href="#Comparison-on-functionalities" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -135,6 +135,6 @@ title: Überblick über die Milvus-Bereitstellungsoptionen
 <tr><td>Suchmöglichkeiten</td><td>Vektorsuche (ANN-Suche)<br/>Metadatenfilterung<br/>Bereichssuche<br/>Skalarabfrage<br/>Entitäten nach Primärschlüssel abrufen<br/>Hybride Suche</td><td>Vektorsuche (ANN-Suche)<br/>Metadatenfilterung<br/>Bereichssuche<br/>Skalarabfrage<br/>Einträge nach Primärschlüssel abrufen<br/>Hybride Suche</td><td>Vektorsuche (ANN-Suche)<br/>Metadatenfilterung<br/>Bereichssuche<br/>Skalarabfrage<br/>Einträge nach Primärschlüssel abrufen<br/>Hybride Suche</td></tr>
 <tr><td>CRUD-Vorgänge</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
 <tr><td>Erweiterte Datenverwaltung</td><td>NICHT ZUTREFFEND</td><td>Zugriffskontrolle<br/>Partition<br/>Partitionsschlüssel</td><td>Zugriffskontrolle<br/>Partition<br/>Partitionsschlüssel<br/>Physische Ressourcengruppierung</td></tr>
-<tr><td>Konsistenz-Ebenen</td><td>Stark</td><td>Stark<br/>Bounded Staleness<br/>Session<br/>Eventual</td><td>Stark<br/>Begrenzte Staleness<br/>Sitzung<br/>Eventuell</td></tr>
+<tr><td>Konsistenz-Ebenen</td><td>Stark</td><td>Stark<br/>Bounded Staleness<br/>Session<br/>Eventual</td><td>Stark<br/>Eingeschränkte Staleness<br/>Sitzung<br/>Eventuell</td></tr>
 </tbody>
 </table>

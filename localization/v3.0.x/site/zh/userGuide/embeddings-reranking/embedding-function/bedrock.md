@@ -66,7 +66,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 必须知道你的 Bedrock 访问凭证，然后才能请求嵌入。Milvus 提供两种配置凭据的方法：</p>
+    </button></h2><p>Milvus 必须知道你的 Bedrock 访问凭据，然后才能请求嵌入。Milvus 提供两种配置凭据的方法：</p>
 <ul>
 <li><p><strong>配置文件（推荐）：</strong>将凭据存储在<code translate="no">milvus.yaml</code> 中，以便每次重启和节点都能自动获取。</p></li>
 <li><p><strong>环境变量：</strong>在部署时注入凭据--最适合 Docker Compose。</p></li>
@@ -75,7 +75,22 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>如果配置文件和环境变量中同时存在同一提供商的凭据，Milvus 将始终使用<code translate="no">milvus.yaml</code> 中的值，而忽略环境变量。</p>
 </div>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">选项 1：配置文件（推荐且优先级更高）</h3><p>将凭据保存在<code translate="no">milvus.yaml</code> 中；Milvus 会在启动时读取它们，并覆盖同一提供商的任何环境变量。</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">选项 1：配置文件（推荐且优先级更高）<button data-href="#Option-1-Configuration-file-recommended--higher-priority" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>将凭据保存在<code translate="no">milvus.yaml</code> 中；Milvus 会在启动时读取它们，并覆盖同一提供商的任何环境变量。</p>
 <ol>
 <li><p>**在以下位置声明你的证书<code translate="no">credential:</code></p>
 <p>你可以列出一个或多个凭据--给每个凭据贴上你自创的标签，稍后再引用。</p>
@@ -99,7 +114,22 @@ beta: Milvus 2.6.x
 <button class="copy-code-btn"></button></code></pre>
 <p>这样，Milvus 向 Bedrock 嵌入服务发送的每个请求都会绑定一个特定的凭据。</p></li>
 </ol>
-<h3 id="Option-2-Environment-variable" class="common-anchor-header">方案 2：环境变量</h3><p>当你使用 Docker Compose 运行 Milvus，并希望不对文件和映像保密时，请使用这种方法。</p>
+<h3 id="Option-2-Environment-variable" class="common-anchor-header">方案 2：环境变量<button data-href="#Option-2-Environment-variable" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>当你使用 Docker Compose 运行 Milvus，并希望不对文件和映像保密时，请使用这种方法。</p>
 <p>只有在<code translate="no">milvus.yaml</code> 中找不到提供者的凭据时，Milvus 才会使用环境变量。</p>
 <table>
    <tr>
@@ -145,7 +175,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>配置凭证后，请按照以下步骤定义和使用嵌入函数。</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">步骤 1：定义 Schema 字段</h3><p>要使用嵌入函数，请创建一个具有特定 Schema 的 Collections。此 Schema 必须至少包含三个必要字段：</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">步骤 1：定义 Schema 字段<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要使用嵌入函数，请创建一个具有特定 Schema 的 Collections。此 Schema 必须至少包含三个必要字段：</p>
 <ul>
 <li><p>主字段，用于唯一标识 Collections 中的每个实体。</p></li>
 <li><p>标量字段，用于存储要嵌入的原始数据。</p></li>
@@ -172,7 +217,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-function-to-schema" class="common-anchor-header">第 2 步：向 Schema 添加函数</h3><p>Milvus 中的 Function 模块会自动将标量字段中存储的原始数据转换为嵌入数据，并将其存储到明确定义的向量字段中。</p>
+<h3 id="Step-2-Add-function-to-schema" class="common-anchor-header">第 2 步：向 Schema 添加函数<button data-href="#Step-2-Add-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 中的 Function 模块会自动将标量字段中存储的原始数据转换为嵌入数据，并将其存储到明确定义的向量字段中。</p>
 <p>下面的示例添加了一个 Function 模块 (<code translate="no">bedrk</code>)，该模块将标量域<code translate="no">&quot;document&quot;</code> 转换为嵌入，将得到的向量存储到之前定义的<code translate="no">&quot;dense&quot;</code> 向量域中。</p>
 <p>定义好嵌入函数后，将其添加到 Collections Schema 中。这将指示 Milvus 使用指定的嵌入函数来处理和存储文本数据中的嵌入。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function specifically for OpenAI provider</span>

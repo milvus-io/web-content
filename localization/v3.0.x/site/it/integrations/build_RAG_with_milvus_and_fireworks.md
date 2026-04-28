@@ -88,7 +88,7 @@ os.environ[<span class="hljs-string">&quot;FIREWORKS_API_KEY&quot;</span>] = <sp
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Carichiamo tutti i file markdown dalla cartella <code translate="no">milvus_docs/en/faq</code>. Per ogni documento, utilizziamo semplicemente "# " per separare il contenuto del file, in modo da separare approssimativamente il contenuto di ogni parte principale del file markdown.</p>
+<p>Carichiamo tutti i file markdown dalla cartella <code translate="no">milvus_docs/en/faq</code>. Per ogni documento, usiamo semplicemente "# " per separare il contenuto del file, che può separare approssimativamente il contenuto di ogni parte principale del file markdown.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -190,7 +190,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>Creare una nuova raccolta con i parametri specificati.</p>
-<p>Se non si specifica alcun campo, Milvus creerà automaticamente un campo predefinito <code translate="no">id</code> per la chiave primaria e un campo <code translate="no">vector</code> per memorizzare i dati vettoriali. Un campo JSON riservato è usato per memorizzare campi non definiti dalla mappa e i loro valori.</p>
+<p>Se non si specifica alcun campo, Milvus creerà automaticamente un campo predefinito <code translate="no">id</code> per la chiave primaria e un campo <code translate="no">vector</code> per memorizzare i dati vettoriali. Un campo JSON riservato viene utilizzato per memorizzare campi non definiti dalla mappa e i loro valori.</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,

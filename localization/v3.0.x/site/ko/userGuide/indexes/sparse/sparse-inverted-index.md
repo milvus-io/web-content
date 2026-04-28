@@ -3,7 +3,7 @@ id: sparse-inverted-index.md
 title: SPARSE_INVERTED_INDEX
 summary: >-
   SPARSE_INVERTED_INDEX 인덱스는 밀버스에서 스파스 벡터를 효율적으로 저장하고 검색하기 위해 사용하는 인덱스 유형입니다. 이
-  인덱스 유형은 반전 인덱싱의 원리를 활용하여 희소 데이터를 위한 매우 효율적인 검색 구조를 만듭니다.
+  인덱스 유형은 역 인덱싱의 원리를 활용하여 희소 데이터에 대한 매우 효율적인 검색 구조를 만듭니다.
 ---
 <h1 id="SPARSEINVERTEDINDEX" class="common-anchor-header">SPARSE_INVERTED_INDEX<button data-href="#SPARSEINVERTEDINDEX" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -168,6 +168,6 @@ res = MilvusClient.search(
      <td><p><code translate="no">drop_ratio_search</code></p></td>
      <td><p>검색 시 무시할 가장 작은 값의 비율로, 노이즈를 줄이는 데 도움이 됩니다.</p></td>
      <td><p>0.0에서 1.0 사이의 분수(예: 0.2는 가장 작은 20%의 값을 무시합니다.)</p></td>
-     <td><p>쿼리 벡터의 희소성과 노이즈 수준에 따라 이 매개변수를 조정합니다.</p><p>이 매개변수는 검색 중에 삭제되는 크기가 작은 값의 비율을 제어합니다. 이 값을 증가시키면(예를 들어 <code translate="no">0.2</code>) 노이즈를 줄이고 더 중요한 구성 요소에 검색을 집중할 수 있어 정확도와 효율성이 향상될 수 있습니다. 그러나 더 많은 값을 삭제하면 관련성이 있을 수 있는 신호가 제외되어 정확도가 떨어질 수도 있습니다. 워크로드에 맞게 정확도와 정확도의 균형을 맞추는 값을 선택하세요.</p></td>
+     <td><p>쿼리 벡터의 희소성과 노이즈 수준에 따라 이 매개변수를 조정합니다.</p><p>이 매개변수는 검색 중에 삭제되는 크기가 작은 값의 비율을 제어합니다. 이 값을 증가시키면(예: <code translate="no">0.2</code>) 노이즈를 줄이고 더 중요한 구성 요소에 검색을 집중할 수 있어 정확도와 효율성이 향상될 수 있습니다. 그러나 더 많은 값을 삭제하면 관련성이 있을 수 있는 신호가 제외되어 정확도가 떨어질 수도 있습니다. 워크로드에 맞게 정확도와 정확도의 균형을 맞추는 값을 선택하세요.</p></td>
    </tr>
 </table>

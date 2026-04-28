@@ -97,7 +97,7 @@ milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
 <p>È anche possibile accedere alla Milvus WebUI all'indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> per saperne di più sulla propria istanza Milvus. Per ulteriori informazioni, consultare <a href="/docs/it/milvus-webui.md">Milvus WebUI</a>.</p>
-<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facoltativo) Aggiornare le configurazioni di Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Opzionale) Aggiornare le configurazioni di Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

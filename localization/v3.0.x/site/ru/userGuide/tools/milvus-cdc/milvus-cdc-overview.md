@@ -61,8 +61,8 @@ title: Обзор CDC
     </button></h2><p>Milvus-CDC использует архитектуру с двумя основными компонентами - HTTP-сервером, который управляет задачами и метаданными, и <strong>corelib</strong>, который синхронизирует выполнение задач с читателем, получающим данные из исходного экземпляра Milvus, и писателем, отправляющим обработанные данные в целевой экземпляр Milvus.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
-   </span> <span class="img-wrapper"> <span>Архитектура milvus-cdc-архитектуры</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
+   </span> <span class="img-wrapper"> <span>milvus-cdc-архитектура</span> </span></p>
 <p>На предыдущей диаграмме,</p>
 <ul>
 <li><p><strong>HTTP-сервер</strong>: Обрабатывает запросы пользователей, выполняет задачи и поддерживает метаданные. Он служит плоскостью управления для оркестровки задач в системе Milvus-CDC.</p></li>
@@ -92,7 +92,7 @@ title: Обзор CDC
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
    </span> <span class="img-wrapper"> <span>milvus-cdc-workflow</span> </span></p>
 <h2 id="Limits" class="common-anchor-header">Лимиты<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

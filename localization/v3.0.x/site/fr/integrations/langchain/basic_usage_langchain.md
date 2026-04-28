@@ -39,7 +39,7 @@ title: Utiliser Milvus comme magasin de vecteurs
     </button></h2><p>Vous devrez installer <code translate="no">langchain-milvus</code> et les autres dépendances nécessaires.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU langchain-milvus milvus-lite langchain-openai</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>La dernière version de pymilvus est livrée avec une base de données vectorielle locale Milvus Lite, bonne pour le prototypage. Si vous avez des données à grande échelle, comme plus d'un million de documents, nous vous recommandons d'installer un serveur Milvus plus performant sur <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker ou kubernetes</a>.</p>
+<p>La dernière version de pymilvus est livrée avec une base de données vectorielles locale Milvus Lite, bonne pour le prototypage. Si vous avez des données à grande échelle, comme plus d'un million de documents, nous vous recommandons d'installer un serveur Milvus plus performant sur <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker ou kubernetes</a>.</p>
 <h2 id="Initialization" class="common-anchor-header">Initialisation<button data-href="#Initialization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

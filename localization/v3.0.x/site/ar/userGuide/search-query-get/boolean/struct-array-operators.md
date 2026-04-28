@@ -44,7 +44,7 @@ beta: Milvus 3.0.x
     </button></h2><p>استخدم مرشحات العناصر عندما تحتاج إلى التحقق مما إذا كان الكيان يحتوي على القيم التي تطابق مسندًا معينًا في حقل StructArray الخاص به.</p>
 <pre><code translate="no" class="language-python">element_filter(chunks, $[text] LIKE <span class="hljs-string">&quot;Red%&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>كما هو موضح في تعبير عامل تصفية العناصر أعلاه، يُرجع عامل تصفية العناصر الكيانات التي تحتوي على قطعة واحدة على الأقل تبدأ بـ "أحمر" في الحقل الفرعي <code translate="no">text</code>. المعلمة الأولى هي اسم حقل StructArray، بينما المعلمة الثانية هي المسند الذي ينطبق على الحقل الفرعي Struct.</p>
+<p>كما هو موضح في تعبير عامل تصفية العناصر أعلاه، يُرجع عامل تصفية العناصر الكيانات التي تحتوي على قطعة واحدة على الأقل تبدأ بـ "أحمر" في الحقل الفرعي <code translate="no">text</code>. المعلمة الأولى هي اسم الحقل StructArray، بينما المعلمة الثانية هي المسند الذي ينطبق على الحقل الفرعي Struct.</p>
 <p>يمكنك استخدام عوامل المقارنة، والنطاق، والعوامل الحسابية لبناء الشرط، والعوامل المنطقية لربط شروط متعددة، كما هو موضح في <a href="/docs/ar/basic-operators.md">العوامل الأساسية</a>.</p>
 <p>ومع ذلك، عندما تقوم ببناء تعبير مرشح يجمع بين مسند على مستوى الكيان وعامل تصفية عنصر، يجب عليك دائمًا وضع عامل تصفية العنصر في النهاية، كما هو موضح في المثال التالي.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># correct</span>
@@ -70,7 +70,7 @@ element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; 
       </svg>
     </button></h2><p>يعمل عاملا عائلة المطابقة على حقل StructArray أيضًا. بدلًا من التحقق ببساطة من وجود عنصر ما، يمكنك تحديد عدد العناصر (أو النسبة) التي يجب أن تستوفي مسند العنصر.</p>
 <ul>
-<li><p><a href="/docs/ar/struct-array-operators.md#MATCHANY"><code translate="no">MATCH_ANY(identifier, predicate)</code></a>: إرجاع الكيانات التي تحتوي على جزء واحد على الأقل يبدأ بـ "أحمر" في الحقل الفرعي <code translate="no">text</code> ؛ من الناحية الدلالية، هذا يعادل <code translate="no">element_filter</code>.</p></li>
+<li><p><a href="/docs/ar/struct-array-operators.md#MATCHANY"><code translate="no">MATCH_ANY(identifier, predicate)</code></a>: تُرجع الكيانات التي تحتوي على جزء واحد على الأقل يبدأ بـ "أحمر" في الحقل الفرعي <code translate="no">text</code> ؛ من الناحية الدلالية، هذا يعادل <code translate="no">element_filter</code>.</p></li>
 <li><p><a href="/docs/ar/struct-array-operators.md#MATCHALL"><code translate="no">MATCH_ALL(identifier, predicate)</code></a>: تُرجع الكيانات التي تبدأ حقولها الفرعية النصية في جميع القطع ب "أحمر".</p></li>
 <li><p><a href="/docs/ar/struct-array-operators.md#MATCHLEAST"><code translate="no">MATCH_LEAST(identifier, predicate, k)</code></a>: تُرجع الكيانات التي تحتوي على الأقل على <code translate="no">k</code> قطع تبدأ ب "أحمر" في الحقل الفرعي <code translate="no">text</code>.</p></li>
 <li><p><a href="/docs/ar/struct-array-operators.md#MATCHMOST"><code translate="no">MATCH_MOST(identifier, predicate, k)</code></a>: تُرجع الكيانات التي تحتوي على <code translate="no">k</code> على الأكثر على أجزاء تبدأ ب "أحمر" في الحقل الفرعي <code translate="no">text</code>.</p></li>
@@ -91,7 +91,7 @@ element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يتم تقييم هذا المشغّل على أنه صواب إذا كان عنصر <strong>واحد على الأقل</strong> في المصفوفة يستوفي المسند، مما يشير إلى أن المكافئ الهيكلي للمنطق <code translate="no">OR</code> عبر جميع عناصر المصفوفة.</p>
+    </button></h3><p>يُقيّم هذا المشغل على أنه صواب إذا كان عنصر <strong>واحد على الأقل</strong> في المصفوفة يستوفي المسند، مما يشير إلى أن المكافئ الهيكلي للمنطق <code translate="no">OR</code> عبر جميع عناصر المصفوفة.</p>
 <p>مشغّلا MATCH_ANY ومرشحات العناصر متماثلان من الناحية الدلالية، ويمكنك استخدامهما بالتبادل. عندما تحتاج إلى التعبير عن المنطق <code translate="no">count(matches) &gt;= 1</code> ، يجب عليك استخدامهما.</p>
 <p><strong>مثال:</strong></p>
 <p>يقوم المثال التالي بإرجاع الكيانات التي يبدأ أي جزء من المستند فيها بحرف "أحمر".</p>

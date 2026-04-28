@@ -198,7 +198,7 @@ num_replicas = <span class="hljs-number">1</span>
 <span class="hljs-comment"># Succeeded in moving 1 replica(s) of c from __default_resource_group to rg.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>리소스 그룹 삭제.</p>
-<p>쿼리 노드가 없는 리소스 그룹(<code translate="no">limits.node_num = 0</code>)은 언제든지 삭제할 수 있습니다. 이 가이드에서 리소스 그룹 <code translate="no">rg</code> 에는 이제 쿼리 노드가 하나 있습니다. 먼저 리소스 그룹의 <code translate="no">limits.node_num</code> 구성을 0으로 변경해야 합니다.</p>
+<p>쿼리 노드가 없는 리소스 그룹(<code translate="no">limits.node_num = 0</code>)은 언제든지 삭제할 수 있습니다. 이 가이드에서 리소스 그룹 <code translate="no">rg</code> 에는 이제 하나의 쿼리 노드가 있습니다. 먼저 리소스 그룹의 <code translate="no">limits.node_num</code> 구성을 0으로 변경해야 합니다.</p>
 <pre><code translate="no" class="language-python">resource_group = <span class="hljs-string">&quot;rg
 try:
     milvus_client.update_resource_groups({

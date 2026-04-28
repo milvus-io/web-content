@@ -42,7 +42,7 @@ summary: >-
 <p>Bagan berikut ini menunjukkan koleksi dengan delapan kolom dan enam entitas.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/collection-explained.png" alt="Collection Explained" class="doc-image" id="collection-explained" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/collection-explained.png" alt="Collection Explained" class="doc-image" id="collection-explained" />
    </span> <span class="img-wrapper"> <span>Koleksi Dijelaskan</span> </span></p>
 <h2 id="Schema-and-Fields" class="common-anchor-header">Skema dan Field<button data-href="#Schema-and-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,7 +59,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ketika mendeskripsikan sebuah objek, kita biasanya menyebutkan atribut-atributnya, seperti ukuran, berat, dan posisi. Anda dapat menggunakan atribut-atribut ini sebagai field dalam koleksi. Setiap field memiliki berbagai properti yang membatasi, seperti tipe data dan dimensi field vektor. Anda dapat membentuk skema koleksi dengan membuat bidang dan menentukan urutannya. Untuk tipe data yang mungkin diterapkan, lihat <a href="/docs/id/schema.md">Penjelasan Skema</a>.</p>
+    </button></h2><p>Ketika mendeskripsikan sebuah objek, kita biasanya menyebutkan atribut-atributnya, seperti ukuran, berat, dan posisi. Anda dapat menggunakan atribut-atribut ini sebagai field dalam koleksi. Setiap field memiliki berbagai properti yang membatasi, seperti tipe data dan dimensi field vektor. Anda dapat membentuk skema koleksi dengan membuat bidang dan menentukan urutannya. Untuk kemungkinan tipe data yang dapat diterapkan, lihat <a href="/docs/id/schema.md">Penjelasan Skema</a>.</p>
 <p>Anda harus menyertakan semua bidang yang ditentukan skema dalam entitas yang akan disisipkan. Untuk membuat beberapa di antaranya opsional, pertimbangkan untuk mengaktifkan bidang dinamis. Untuk detailnya, lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a>.</p>
 <ul>
 <li><p><strong>Membuatnya dapat dinolkan atau menetapkan nilai default</strong></p>
@@ -135,7 +135,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Memuat koleksi adalah prasyarat untuk melakukan pencarian kesamaan dan kueri dalam koleksi. Ketika Anda memuat koleksi, Milvus memuat semua berkas indeks dan data mentah di setiap bidang ke dalam memori untuk respons cepat terhadap pencarian dan kueri.</p>
+    </button></h2><p>Memuat koleksi adalah prasyarat untuk melakukan pencarian kesamaan dan kueri dalam koleksi. Ketika Anda memuat koleksi, Milvus memuat semua file indeks dan data mentah di setiap bidang ke dalam memori untuk respons cepat terhadap pencarian dan kueri.</p>
 <p>Pencarian dan kueri adalah operasi yang memakan banyak memori. Untuk menghemat biaya, Anda disarankan untuk melepaskan koleksi yang sedang tidak digunakan.</p>
 <p>Untuk detail lebih lanjut, lihat <a href="/docs/id/load-and-release.md">Memuat &amp; Melepaskan</a>.</p>
 <h2 id="Search-and-Query" class="common-anchor-header">Pencarian dan Kueri<button data-href="#Search-and-Query" class="anchor-icon" translate="no">
@@ -156,7 +156,7 @@ summary: >-
     </button></h2><p>Setelah Anda membuat indeks dan memuat koleksi, Anda dapat memulai pencarian kemiripan dengan memasukkan satu atau beberapa vektor kueri. Misalnya, ketika menerima representasi vektor kueri Anda yang dibawa dalam permintaan pencarian, Milvus menggunakan jenis metrik yang ditentukan untuk mengukur kemiripan antara vektor kueri dan vektor yang ada di koleksi target sebelum mengembalikan vektor yang secara semantik mirip dengan kueri.</p>
 <p>Anda juga dapat menyertakan pemfilteran metadata dalam penelusuran dan kueri untuk meningkatkan relevansi hasil. Perhatikan bahwa, kondisi pemfilteran metadata bersifat wajib dalam kueri, tetapi opsional dalam penelusuran.</p>
 <p>Untuk detail tentang jenis metrik yang berlaku, lihat <a href="/docs/id/metric.md">Jenis Metrik</a>.</p>
-<p>Untuk informasi lebih lanjut tentang pencarian dan kueri, lihat artikel di bab Pencarian &amp; Perangkingan, di antaranya, fitur dasar:</p>
+<p>Untuk informasi lebih lanjut tentang pencarian dan kueri, lihat artikel di bab Pencarian &amp; Perangkingan, di antaranya, fitur-fitur dasar:</p>
 <ul>
 <li><p><a href="/docs/id/single-vector-search.md">Pencarian ANN Dasar</a></p></li>
 <li><p><a href="/docs/id/filtered-search.md">Pencarian yang Difilter</a></p></li>

@@ -52,7 +52,7 @@ beta: Milvus v2.6.2+
    </tr>
    <tr>
      <td><p>전략적 콘텐츠 순위 하향 조정</p></td>
-     <td><ul><li><p>인벤토리가 낮은 항목의 순위를 완전히 제거하지 않고 눈에 잘 띄지 않게 하기</p></li><li><p>검열 없이 불쾌감을 줄 수 있는 용어가 포함된 콘텐츠의 순위를 낮추기</p></li><li><p>기술 검색에서는 계속 액세스할 수 있도록 하면서 오래된 문서의 등급을 낮추기</p></li><li><p>마켓플레이스 검색에서 경쟁사 제품의 가시성을 미묘하게 낮추기</p></li><li><p>품질이 낮은 콘텐츠의 관련성 감소(서식 문제, 짧은 길이 등)</p></li></ul></td>
+     <td><ul><li><p>인벤토리가 낮은 항목의 순위를 완전히 제거하지 않고 눈에 잘 띄지 않게 하기</p></li><li><p>검열 없이 불쾌감을 줄 수 있는 용어가 포함된 콘텐츠의 순위를 낮추기</p></li><li><p>기술 검색에서 접근성을 유지하면서 오래된 문서의 등급을 낮추기</p></li><li><p>마켓플레이스 검색에서 경쟁사 제품의 가시성을 미묘하게 낮추기</p></li><li><p>품질이 낮은 콘텐츠의 관련성 감소(서식 문제, 짧은 길이 등)</p></li></ul></td>
    </tr>
 </table>
 <p>여러 개의 부스트 랭커를 결합하여 보다 역동적이고 강력한 가중치 기반 순위 전략을 구현할 수도 있습니다.</p>
@@ -74,12 +74,12 @@ beta: Milvus v2.6.2+
     </button></h2><p>다음 다이어그램은 부스트 랭커의 주요 워크플로우를 보여줍니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
    </span> <span class="img-wrapper"> <span>부스트 랭커 메커니즘</span> </span></p>
 <p>사용자가 데이터를 입력하면 Milvus는 데이터를 세그먼트에 분산시킵니다. 검색이 진행되는 동안 각 세그먼트는 후보 세트를 반환하고, Milvus는 모든 세그먼트에서 이러한 후보의 순위를 매겨 최종 결과를 생성합니다. 검색 요청에 부스트 랭커가 포함된 경우, Milvus는 각 세그먼트의 후보 결과에 이를 적용하여 잠재적인 정확도 손실을 방지하고 리콜률을 향상시킵니다.</p>
 <p>결과를 최종 확정하기 전에 Milvus는 다음과 같이 부스트 랭커로 이러한 후보를 처리합니다:</p>
 <ol>
-<li><p>부스트 랭커에 지정된 선택적 필터링 표현식을 적용하여 표현식과 일치하는 엔티티를 식별합니다.</p></li>
+<li><p>부스트 랭커에 지정된 선택적 필터링 식을 적용하여 식과 일치하는 엔티티를 식별합니다.</p></li>
 <li><p>부스트 랭커에 지정된 가중치를 적용하여 식별된 엔티티의 점수를 부스트합니다.</p></li>
 </ol>
 <div class="alert note">
@@ -504,7 +504,7 @@ ranker = Function(
    <tr>
      <td><p><code translate="no">name</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>이 함수의 고유 식별자</p></td>
+     <td><p>이 함수에 대한 고유 식별자</p></td>
      <td><p><code translate="no">"boost"</code></p></td>
    </tr>
    <tr>

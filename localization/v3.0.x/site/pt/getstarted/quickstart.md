@@ -37,13 +37,13 @@ title: Início rápido
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Neste guia, utilizamos o Milvus Lite, uma biblioteca Python incluída em <code translate="no">pymilvus</code> que pode ser incorporada na aplicação cliente. O Milvus também suporta a implantação no <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> e no <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> para casos de uso de produção.</p>
+    </button></h2><p>Neste guia, utilizamos o Milvus Lite, uma biblioteca python incluída em <code translate="no">pymilvus</code> que pode ser incorporada na aplicação cliente. O Milvus também suporta a implantação no <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> e no <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> para casos de uso de produção.</p>
 <p>Antes de começar, certifique-se de ter o Python 3.8+ disponível no ambiente local. Instale <code translate="no">pymilvus</code> que contém a biblioteca do cliente python e o Milvus Lite:</p>
 <pre><code translate="no" class="language-python">$ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <blockquote>
-<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong>. (Clique no menu "Runtime" (Tempo de execução) na parte superior do ecrã e selecione "Restart session" (Reiniciar sessão) no menu pendente).</p>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong>. (Clique no menu "Runtime" (Tempo de execução) na parte superior do ecrã e selecione "Restart session" (Reiniciar sessão) no menu pendente).</p>
 </blockquote>
 </div>
 <h2 id="Set-Up-Vector-Database" class="common-anchor-header">Configurar a base de dados vetorial<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
@@ -81,7 +81,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>No Milvus, precisamos de uma coleção para armazenar os vectores e os metadados associados. Pode pensar nela como uma tabela nas bases de dados SQL tradicionais. Ao criar uma coleção, pode definir parâmetros de esquema e de índice para configurar as especificações do vetor, como a dimensionalidade, os tipos de índice e as métricas distantes. Existem também conceitos complexos para otimizar o índice para o desempenho da pesquisa vetorial. Por enquanto, vamos nos concentrar apenas no básico e usar o padrão para tudo o que for possível. No mínimo, você só precisa definir o nome da coleção e a dimensão do campo vetorial da coleção.</p>
+    </button></h2><p>No Milvus, precisamos de uma coleção para armazenar os vectores e os metadados associados. Pode pensar nela como uma tabela nas bases de dados SQL tradicionais. Ao criar uma coleção, pode definir parâmetros de esquema e de índice para configurar as especificações do vetor, como a dimensionalidade, os tipos de índice e as métricas distantes. Existem também conceitos complexos para otimizar o índice para o desempenho da pesquisa vetorial. Por enquanto, vamos nos concentrar apenas no básico e usar o padrão para tudo o que for possível. No mínimo, só é necessário definir o nome da coleção e a dimensão do campo vetorial da coleção.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>):
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
@@ -93,7 +93,7 @@ client.create_collection(
 <ul>
 <li>A chave primária e os campos vectoriais utilizam os seus nomes predefinidos ("id" e "vetor").</li>
 <li>O tipo de métrica (definição da distância vetorial) é definido com o seu valor predefinido<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">(COSINE</a>).</li>
-<li>O campo da chave primária aceita números inteiros e não é incrementado automaticamente (nomeadamente, não utiliza <a href="https://milvus.io/docs/schema.md">a funcionalidade de auto-id</a>). Em alternativa, pode definir formalmente o esquema da coleção seguindo esta <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">instrução</a>.</li>
+<li>O campo da chave primária aceita números inteiros e não é incrementado automaticamente (ou seja, não utiliza <a href="https://milvus.io/docs/schema.md">a funcionalidade de auto-id</a>). Em alternativa, pode definir formalmente o esquema da coleção seguindo esta <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">instrução</a>.</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">Preparar os dados<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
       <svg translate="no"

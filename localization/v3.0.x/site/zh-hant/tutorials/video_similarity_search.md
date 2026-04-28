@@ -30,11 +30,11 @@ title: 視訊相似性搜尋
 <li><a href="https://towhee.io/">Towhee</a></li>
 </ul>
 <p><br/></p>
-<p>如今，人們在觀看自己喜歡的電影或影片後，可以輕鬆地截取螢幕畫面，並透過張貼在各種社群網路平台來分享自己的想法。當追隨者看到螢幕截圖時，如果影片名稱沒有在貼文中清楚說明，他們可能真的很難分辨出是哪一部電影。為了找出電影名稱，人們可以利用視訊相似性搜尋系統。透過使用該系統，使用者可以上傳一張圖片，然後獲得包含與上傳圖片相似的關鍵畫面的影片或電影。</p>
+<p>如今，人們在觀看自己喜歡的電影或影片後，可以輕鬆地截取螢幕畫面，並透過張貼在各種社群網路平台來分享自己的想法。當追隨者看到截圖時，如果貼文中沒有明確地寫出電影名稱，他們真的很難分辨出是哪一部電影。為了找出電影名稱，人們可以利用視訊相似性搜尋系統。透過使用該系統，使用者可以上傳一張圖片，然後獲得包含與上傳圖片相似的關鍵畫面的影片或電影。</p>
 <p><br/></p>
 <p>在本教程中，您將學習如何建立視訊相似性搜尋系統。本教學使用 Tumblr 上大約 100 個動畫 gif 來建立系統。不過，您也可以準備自己的視訊資料集。本系統首先使用 OpenCV 擷取影片中的關鍵畫面，然後再使用 ResNet-50 取得每個關鍵畫面的特徵向量。所有向量都會儲存在 Milvus 中並進行搜尋，Milvus 會返回相似向量的 ID。然後將 ID 對應到 MySQL 中儲存的對應視訊。</p>
 <p><br/></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/video_search.png" alt="video_search" class="doc-image" id="video_search" />
-   </span> <span class="img-wrapper"> <span>videoo_search</span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/video_search_demo.gif" alt="video_search_demo" class="doc-image" id="video_search_demo" /><span>video_search_demo</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/video_search.png" alt="video_search" class="doc-image" id="video_search" />
+   </span> <span class="img-wrapper"> <span>videoo_search</span> </span> <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/video_search_demo.gif" alt="video_search_demo" class="doc-image" id="video_search_demo" /><span>video_search_demo</span> </span></p>

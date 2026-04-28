@@ -694,7 +694,7 @@ indexOpt2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">Utiliser les fonctions JSON cast pour la conversion de type<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h4><p>Si votre clé de champ JSON contient des valeurs dans un format incorrect (par exemple, des nombres stockés sous forme de chaînes), vous pouvez utiliser des fonctions cast pour convertir les valeurs pendant l'indexation.</p>
+<h4 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">Utiliser les fonctions JSON cast pour la conversion de type<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h4><p>Si votre clé de champ JSON contient des valeurs dans un format incorrect (par exemple, des nombres stockés sous forme de chaînes), vous pouvez utiliser des fonctions cast pour convertir les valeurs lors de l'indexation.</p>
 <h5 id="Supported-cast-functions" class="common-anchor-header">Fonctions de conversion prises en charge</h5><p>Les fonctions de conversion ne sont pas sensibles à la casse. Les types suivants sont pris en charge :</p>
 <table>
    <tr>
@@ -767,7 +767,7 @@ indexOpt3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
 <div class="alert note">
 <ul>
 <li><p>Le paramètre <code translate="no">json_cast_type</code> est obligatoire et doit être identique au type de sortie de la fonction de conversion.</p></li>
-<li><p>Si la conversion échoue (par exemple, une chaîne non numérique), la valeur est ignorée et n'est pas indexée.</p></li>
+<li><p>Si la conversion échoue (par exemple, chaîne non numérique), la valeur est ignorée et n'est pas indexée.</p></li>
 </ul>
 </div>
 <h3 id="JSON-flat-indexing--Milvus-26x" class="common-anchor-header">Indexation plate JSON<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#JSON-flat-indexing--Milvus-26x" class="anchor-icon" translate="no">
@@ -859,7 +859,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Après avoir défini les paramètres de l'index, vous pouvez les appliquer à la collection à l'aide de <code translate="no">create_index()</code>:</p>
+    </button></h3><p>Après avoir défini les paramètres de l'index, vous pouvez les appliquer à la collection en utilisant <code translate="no">create_index()</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_index(
@@ -972,7 +972,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <p>Se référer à <a href="/docs/fr/create-collection.md#Optional-Set-Index-Parameters">Définir les paramètres de l'index</a></p></li>
 <li><p><strong>Charger la collection</strong></p>
 <p>Voir <a href="/docs/fr/load-and-release.md">Charger et libérer</a></p></li>
-<li><p><strong>Effectuer des recherches ou des requêtes à l'aide de filtres de chemin JSON</strong></p>
+<li><p><strong>Effectuer une recherche ou une requête à l'aide de filtres de chemin JSON</strong></p>
 <p>Voir <a href="/docs/fr/filtered-search.md">Recherche filtrée</a> et <a href="/docs/fr/json-operators.md">opérateurs JSON</a></p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">

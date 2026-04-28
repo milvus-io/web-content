@@ -34,7 +34,7 @@ title: RAG agenziale con Milvus e LangGraph
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/agentic_rag_with_langgraph_architecture.png" alt="Architecture of an agentic RAG system using LangGraph and Milvus" class="doc-image" id="architecture-of-an-agentic-rag-system-using-langgraph-and-milvus" />
-   </span> <span class="img-wrapper"> <span>Architettura di un sistema RAG agenziale con LangGraph e Milvus</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Architettura di un sistema RAG agenziale che utilizza LangGraph e Milvus</span> </span></p>
 <p><a href="https://langchain-ai.github.io/langgraph/">LangGraph</a> è una libreria per la costruzione di applicazioni stateful e multi-attore con LLM, costruita sopra LangChain. <a href="https://milvus.io/">Milvus</a> è il database vettoriale open-source più avanzato al mondo, costruito per alimentare la ricerca di similarità e le applicazioni di intelligenza artificiale.</p>
 <p>In questo tutorial, costruiremo un sistema agenziale RAG in grado di:</p>
 <ul>
@@ -113,7 +113,7 @@ doc_splits = text_splitter.split_documents(docs_list)
 
 Total document chunks: 47
 </code></pre>
-<h2 id="Create-a-retriever-tool-with-Milvus" class="common-anchor-header">Creare uno strumento di retriever con Milvus<button data-href="#Create-a-retriever-tool-with-Milvus" class="anchor-icon" translate="no">
+<h2 id="Create-a-retriever-tool-with-Milvus" class="common-anchor-header">Creare uno strumento retriever con Milvus<button data-href="#Create-a-retriever-tool-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -1,7 +1,7 @@
 ---
 id: timestamp.md
 title: 在 Milvus 的時間戳
-summary: 了解時間戳的概念，以及 Milvus 向量資料庫中四個主要的時間戳相關參數。
+summary: 了解時間戳的概念以及 Milvus 向量資料庫中四個主要的時間戳相關參數。
 ---
 <h1 id="Timestamp" class="common-anchor-header">時間戳<button data-href="#Timestamp" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -34,7 +34,7 @@ summary: 了解時間戳的概念，以及 Milvus 向量資料庫中四個主要
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 是一個向量資料庫，可以搜尋和查詢從非結構化資料轉換過來的向量。當進行資料處理語言 (DML) 作業時，包括<a href="https://milvus.io/docs/v2.1.x/data_processing.md">資料插入和刪除</a>，Milvus 會為作業中涉及的實體指定時間戳。因此，Milvus 中的所有實體都有時間戳屬性。而在同一 DML 操作中的實體批次共享相同的時間戳值。</p>
+    </button></h2><p>Milvus 是一個向量資料庫，可以搜尋和查詢從非結構化資料轉換過來的向量。當進行資料處理語言 (DML) 作業時，包括<a href="https://milvus.io/docs/v2.1.x/data_processing.md">資料插入和刪除</a>，Milvus 會為作業所涉及的實體指定時間戳。因此，Milvus 中的所有實體都有時間戳屬性。而在同一 DML 操作中的實體批次共享相同的時間戳值。</p>
 <h2 id="Timestamp-parameters" class="common-anchor-header">時間戳參數<button data-href="#Timestamp-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -73,7 +73,7 @@ summary: 了解時間戳的概念，以及 Milvus 向量資料庫中四個主要
         ></path>
       </svg>
     </button></h3><p><code translate="no">Guarantee_timestamp</code> 是一種時間戳，用來確保在進行向量相似性搜尋或查詢時，在<code translate="no">Guarantee_timestamp</code> 之前由 DML 作業更新的所有資料都是可見的。例如，如果您在下午 3 點插入一批資料，在下午 5 點插入另一批資料，而在向量相似性搜尋時，<code translate="no">Guarantee_timestamp</code> 的值設定為下午 6 點。這表示分別在下午 3 點和下午 5 點插入的兩批資料應參與搜尋。</p>
-<p>如果沒有設定<code translate="no">Guarantee_timestamp</code> ，Milvus 會自動以提出搜尋請求的時間點。因此，搜尋是在資料檢視上進行，所有資料更新都是在搜尋之前透過 DML 作業完成。</p>
+<p>如果沒有設定<code translate="no">Guarantee_timestamp</code> ，Milvus 會自動以提出搜尋請求的時間點。因此，搜尋是在資料檢視上進行，所有資料更新都是在搜尋之前透過 DML 作業進行。</p>
 <p>為了省去您在 Milvus 內理解<a href="https://github.com/milvus-io/milvus/blob/master/docs/design_docs/20211214-milvus_hybrid_ts.md">TSO</a>的麻煩，作為用戶，您不需要直接配置<code translate="no">Guarantee_timestamp</code> 參數。您只需要選擇<a href="https://milvus.io/docs/v2.1.x/consistency.md">一致性等級</a>，Milvus 會自動為您處理<code translate="no">Guarantee_timestamp</code> 參數。每個一致性等級對應某個<code translate="no">Guarantee_timestamp</code> 值。</p>
 <p>
   

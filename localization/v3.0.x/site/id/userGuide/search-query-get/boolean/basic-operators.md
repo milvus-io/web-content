@@ -301,7 +301,7 @@ summary: >-
     </button></h3><p>Untuk melakukan pencocokan <strong>infix</strong>, di mana pola dapat muncul di mana saja dalam string, Anda dapat menempatkan simbol <code translate="no">%</code> di awal dan akhir pola. Misalnya, untuk menemukan semua produk yang <code translate="no">name</code> -nya mengandung kata "Pro":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%Pro%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Ini akan mencocokkan semua produk yang namanya mengandung substring "Pro", seperti "Produk", "ProLine", atau "SuperPro".</p>
+<p>Ini akan mencocokkan semua produk yang namanya mengandung substring "Pro", seperti "Product", "ProLine", atau "SuperPro".</p>
 <h2 id="Arithmetic-Operators" class="common-anchor-header">Operator Aritmatika<button data-href="#Arithmetic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -541,7 +541,7 @@ summary: >-
 <div class="alert note">
 <p>Jika beberapa elemen dalam objek JSON bernilai null (misalnya kunci individual), bidang tersebut masih dianggap non-null. Sebagai contoh, <code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> tidak dianggap sebagai null, meskipun key <code translate="no">category</code> adalah null.</p>
 </div>
-<p>Untuk mengilustrasikan lebih lanjut bagaimana Milvus menangani field JSON dengan nilai null, perhatikan contoh data berikut ini dengan field JSON <code translate="no">metadata</code>:</p>
+<p>Untuk menggambarkan lebih lanjut bagaimana Milvus menangani field JSON dengan nilai null, perhatikan contoh data berikut ini dengan field JSON <code translate="no">metadata</code>:</p>
 <pre><code translate="no" class="language-python">data = [
   {
       <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>},
@@ -575,7 +575,7 @@ summary: >-
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Contoh 2: Mengambil entitas yang metadatanya tidak nol</strong></p>
-<p>Untuk menemukan entitas di mana bidang <code translate="no">metadata</code> tidak bernilai null:</p>
+<p>Untuk menemukan entitas yang bidang <code translate="no">metadata</code> tidak bernilai null:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>

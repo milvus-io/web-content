@@ -68,7 +68,7 @@ vector_store = Milvus(
     connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Compartmentalize-the-data-with-Milvus-Collections" class="common-anchor-header">使用 Milvus Collections 对数据进行分隔<button data-href="#Compartmentalize-the-data-with-Milvus-Collections" class="anchor-icon" translate="no">
+<h3 id="Compartmentalize-the-data-with-Milvus-Collections" class="common-anchor-header">用 Milvus Collections 对数据进行分隔<button data-href="#Compartmentalize-the-data-with-Milvus-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

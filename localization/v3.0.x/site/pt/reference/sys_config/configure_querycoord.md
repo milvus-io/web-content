@@ -75,7 +75,7 @@ summary: Saiba como configurar o queryCoord para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Altera o valor para controlar se deve balancear automaticamente o uso de memória entre os nós de consulta, distribuindo as operações de carregamento e liberação de segmentos uniformemente.      </td>
+      <td>        Altera o valor para controlar se é necessário equilibrar automaticamente o uso da memória entre os nós de consulta, distribuindo as operações de carregamento e liberação de segmentos uniformemente.      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -191,7 +191,7 @@ summary: Saiba como configurar o queryCoord para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        o menor valor para a extensão desequilibrada entre os nós de origem e destino ao efetuar o equilíbrio      </td>
+      <td>        o menor valor para a extensão não equilibrada entre nós de origem e destino ao efetuar o equilíbrio      </td>
       <td>0.05</td>
     </tr>
   </tbody>
@@ -1150,7 +1150,7 @@ summary: Saiba como configurar o queryCoord para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        a duração do segmento de exclusão de condutas limpas que é utilizado para filtrar dados inválidos, em segundos      </td>
+      <td>        a duração do segmento de exclusão de condutas limpas utilizado para filtrar dados inválidos, em segundos      </td>
       <td>60</td>
     </tr>
   </tbody>

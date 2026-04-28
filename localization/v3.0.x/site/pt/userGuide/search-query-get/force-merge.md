@@ -201,6 +201,7 @@ job_id = client.compact(
     target_size=max_int64
 )
 <button class="copy-code-btn"></button></code></pre>
+<p><a id="parameter-reference"></a></p>
 <h4 id="Parameter-reference" class="common-anchor-header">Referência dos parâmetros</h4><p>A tabela seguinte explica os parâmetros.</p>
 <table>
    <tr>
@@ -263,6 +264,7 @@ state = client.get_compaction_state(job_id)
 <li><p><strong>Considere a troca de desempenho.</strong> A compactação Force Merge é uma operação que consome muitos recursos. Ela lê, mescla e reescreve os dados do segmento. Programe-a durante períodos de baixo tráfego para minimizar o impacto na latência da consulta.</p></li>
 <li><p><strong>Monitore a contagem de segmentos antes e depois.</strong> Use <code translate="no">get_compaction_state()</code> e <code translate="no">list_persistent_segments</code> para verificar se a compactação produziu menos segmentos maiores, conforme esperado.</p></li>
 </ul>
+<p><a id="faq"></a></p>
 <h2 id="FAQ" class="common-anchor-header">PERGUNTAS FREQUENTES<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -281,7 +283,7 @@ state = client.get_compaction_state(job_id)
     </button></h2><p><strong>Qual é a diferença entre Force Merge e compactação padrão?</strong></p>
 <p>Esses dois tipos de operações de compactação têm finalidades diferentes.</p>
 <ul>
-<li><p>A compactação padrão (targetSize=0 ou omitida) é um caminho de limpeza incremental e de melhor esforço.</p></li>
+<li><p>A compactação padrão (targetSize=0 ou omitido) é um caminho de limpeza incremental e de melhor esforço.</p></li>
 <li><p>Force merge (targetSize&gt;0) é um caminho de reempacotamento no nível da coleção para produzir menos segmentos, maiores e próximos ao alvo.</p></li>
 </ul>
 <p>A diferença chave é a forma da mesclagem: a compactação padrão é efetivamente m → 1 por tarefa, enquanto a mesclagem forçada é m → n através de entradas agrupadas. É por isso que o force merge pode resolver layouts de segmentos que a compactação padrão não pode. A tabela a seguir compara os dois tipos de operações.</p>

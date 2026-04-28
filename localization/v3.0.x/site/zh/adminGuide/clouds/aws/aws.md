@@ -40,11 +40,41 @@ summary: 了解如何在 AWS EC2 上部署 Milvus 集群。
       </svg>
     </button></h2><p>本节介绍如何使用 Terraform 配置 Milvus 群集。</p>
 <p><a href="https://www.terraform.io/">Terraform</a>是一种基础设施即代码（IaC）软件工具。使用 Terraform，你可以通过声明式配置文件来配置基础设施。</p>
-<h3 id="Prerequisites" class="common-anchor-header">前提条件</h3><ul>
+<h3 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>安装和配置<a href="https://www.terraform.io/downloads.html">Terraform</a></p></li>
 <li><p>安装和配置<a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html">AWS CLI</a></p></li>
 </ul>
-<h3 id="Prepare-configuration" class="common-anchor-header">准备配置</h3><p>你可以从<a href="https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view">Google Drive</a> 下载模板配置文件。</p>
+<h3 id="Prepare-configuration" class="common-anchor-header">准备配置<button data-href="#Prepare-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>你可以从<a href="https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view">Google Drive</a> 下载模板配置文件。</p>
 <ul>
 <li><p><code translate="no">main.tf</code></p>
 <p>该文件包含用于配置 Milvus 集群的配置。</p></li>
@@ -56,7 +86,7 @@ summary: 了解如何在 AWS EC2 上部署 Milvus 集群。
 <h4 id="Prepare-variablestf" class="common-anchor-header">准备变量.tf</h4><p>本节介绍<code translate="no">variables.tf</code> 文件包含的配置。</p>
 <ul>
 <li><p>节点数</p>
-<p>下面的模板声明了一个<code translate="no">index_count</code> 变量，用于设置索引节点数。</p>
+<p>以下模板声明了一个<code translate="no">index_count</code> 变量，用于设置索引节点数。</p>
   <div class="alert note"><code translate="no">index_count</code> 的值必须大于或等于 1。</div>
 <pre><code translate="no" class="language-variables.tf">variable &quot;index_count&quot; {
   description = &quot;Amount of index instances to run&quot;
@@ -201,7 +231,22 @@ resource &quot;aws_route_table_association&quot; &quot;cluster_subnet_add_gatewa
 }
 </code></pre></li>
 </ul>
-<h3 id="Apply-the-configuration" class="common-anchor-header">应用配置</h3><ol>
+<h3 id="Apply-the-configuration" class="common-anchor-header">应用配置<button data-href="#Apply-the-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li><p>打开终端并导航到存储<code translate="no">main.tf</code> 的文件夹。</p></li>
 <li><p>要初始化配置，请运行<code translate="no">terraform init</code> 。</p></li>
 <li><p>要应用配置，请运行<code translate="no">terraform apply</code> 并在出现提示时输入<code translate="no">yes</code> 。</p></li>
@@ -224,13 +269,58 @@ resource &quot;aws_route_table_association&quot; &quot;cluster_subnet_add_gatewa
       </svg>
     </button></h2><p>本节介绍如何使用 Ansible 启动已配置的 Milvus 群集。</p>
 <p><a href="https://www.ansible.com/overview/how-ansible-works">Ansible</a>是一个配置管理工具，用于自动化云供应和配置管理。</p>
-<h3 id="Prerequisites" class="common-anchor-header">前提条件</h3><ul>
+<h3 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>已安装<a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible 控制器</a>。</li>
 </ul>
-<h3 id="Download-Ansible-Milvus-node-deployment-Playbook" class="common-anchor-header">下载 Ansible Milvus 节点部署手册</h3><p>从 GitHub 克隆 Milvus 存储库，下载 Ansible Milvus 节点部署手册。</p>
+<h3 id="Download-Ansible-Milvus-node-deployment-Playbook" class="common-anchor-header">下载 Ansible Milvus 节点部署手册<button data-href="#Download-Ansible-Milvus-node-deployment-Playbook" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>从 GitHub 克隆 Milvus 存储库，下载 Ansible Milvus 节点部署手册。</p>
 <pre><code translate="no">git <span class="hljs-built_in">clone</span> https://github.com/milvus-io/milvus.git
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Configure-installation-files" class="common-anchor-header">配置安装文件</h3><p><code translate="no">inventory.ini</code> 和<code translate="no">ansible.cfg</code> 文件用于控制 Ansible playbook 中的环境变量和登录验证方法。在<code translate="no">inventory.ini</code> 文件中，<code translate="no">dockernodes</code> 部分定义了 docker 引擎的所有服务器。<code translate="no">ansible.cfg</code> 部分定义了 Milvus 协调器的所有服务器。<code translate="no">node</code> 部分定义了 Milvus 节点的所有服务器。</p>
+<h3 id="Configure-installation-files" class="common-anchor-header">配置安装文件<button data-href="#Configure-installation-files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">inventory.ini</code> 和<code translate="no">ansible.cfg</code> 文件用于控制 Ansible playbook 中的环境变量和登录验证方法。在<code translate="no">inventory.ini</code> 文件中，<code translate="no">dockernodes</code> 部分定义了 docker 引擎的所有服务器。<code translate="no">ansible.cfg</code> 部分定义了 Milvus 协调器的所有服务器。<code translate="no">node</code> 部分定义了 Milvus 节点的所有服务器。</p>
 <p>输入 Playbook 的本地路径并配置安装文件。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> ./milvus/deployments/docker/cluster-distributed-deployment</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -313,7 +403,22 @@ INDEX_COORD_ADDRESS= {{coords_ip}}:31000
   <span class="hljs-attr">roles:</span>
     <span class="hljs-bullet">-</span> <span class="hljs-string">docker-installation</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Test-Ansible-connectivity" class="common-anchor-header">测试 Ansible 的连接性</h3><p>测试与 Ansible 的连接。</p>
+<h3 id="Test-Ansible-connectivity" class="common-anchor-header">测试 Ansible 的连接性<button data-href="#Test-Ansible-connectivity" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>测试与 Ansible 的连接。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible all -m ping</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>如果在<code translate="no">ansible.cfg</code> 中没有指定清单文件的路径，请在命令中添加<code translate="no">-i</code> ，否则 Ansible 会使用<code translate="no">/etc/ansible/hosts</code> 。</p>
@@ -338,13 +443,43 @@ dockernode02 | <span class="hljs-function"><span class="hljs-params">SUCCESS</sp
     <span class="hljs-string">&quot;ping&quot;</span>: <span class="hljs-string">&quot;pong&quot;</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Check-the-Playbook-Syntax" class="common-anchor-header">检查 Playbook 语法</h3><p>检查 Playbook 的语法。</p>
+<h3 id="Check-the-Playbook-Syntax" class="common-anchor-header">检查 Playbook 语法<button data-href="#Check-the-Playbook-Syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>检查 Playbook 的语法。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible-playbook deploy-docker.yml --syntax-check</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>通常，终端返回如下内容：</p>
 <pre><code translate="no"><span class="hljs-section">playbook: deploy-docker.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Install-Docker" class="common-anchor-header">安装 Docker</h3><p>使用 Playbook 安装 Docker。</p>
+<h3 id="Install-Docker" class="common-anchor-header">安装 Docker<button data-href="#Install-Docker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>使用 Playbook 安装 Docker。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible-playbook deploy-docker.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>如果在三台主机上成功安装了 Docker，终端会返回如下信息：</p>
@@ -369,7 +504,22 @@ dockernode01               : ok=10   changed=1    unreachable=0    failed=0    s
 dockernode02               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 dockernode03               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 </span><button class="copy-code-btn"></button></code></pre>
-<h3 id="Verify-the-installation" class="common-anchor-header">验证安装</h3><p>使用 SSH 密钥登录三台主机，并验证主机上的安装。</p>
+<h3 id="Verify-the-installation" class="common-anchor-header">验证安装<button data-href="#Verify-the-installation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>使用 SSH 密钥登录三台主机，并验证主机上的安装。</p>
 <ul>
 <li>对于根主机</li>
 </ul>
@@ -386,13 +536,43 @@ dockernode03               : ok=10   changed=1    unreachable=0    failed=0    s
 <p>检查容器的运行状态。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Check-the-Syntax" class="common-anchor-header">检查语法</h3><p>检查<code translate="no">deploy-milvus.yml</code> 的语法。</p>
+<h3 id="Check-the-Syntax" class="common-anchor-header">检查语法<button data-href="#Check-the-Syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>检查<code translate="no">deploy-milvus.yml</code> 的语法。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible-playbook deploy-milvus.yml --syntax-check</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>通常，终端返回如下信息：</p>
 <pre><code translate="no"><span class="hljs-section">playbook: deploy-milvus.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Milvus-container" class="common-anchor-header">创建 Milvus 容器</h3><p>创建 Milvus 容器的任务在<code translate="no">deploy-milvus.yml</code> 中定义。</p>
+<h3 id="Create-Milvus-container" class="common-anchor-header">创建 Milvus 容器<button data-href="#Create-Milvus-container" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>创建 Milvus 容器的任务在<code translate="no">deploy-milvus.yml</code> 中定义。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible-playbook deploy-milvus.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>终端返回</p>

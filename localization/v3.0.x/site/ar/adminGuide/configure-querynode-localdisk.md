@@ -55,7 +55,7 @@ summary: تعرف على كيفية تهيئة Milvus QueryNode لاستخدام
 <tr><td style="text-align:center">سحابة تينسنت</td><td style="text-align:center">سلسلة IT5</td></tr>
 </tbody>
 </table>
-<p>توفر أنواع الأجهزة هذه تخزين قرص NVMe. يمكنك استخدام الأمر <code translate="no">lsblk</code> في مثيلات هذه الأنواع من الأجهزة للتحقق مما إذا كانت تحتوي على وحدة تخزين قرص NVMe. إذا كان لديهم ذلك، يمكنك المتابعة إلى الخطوة التالية.</p>
+<p>توفر أنواع الأجهزة هذه تخزين قرص NVMe. يمكنك استخدام الأمر <code translate="no">lsblk</code> على مثيلات هذه الأنواع من الأجهزة للتحقق مما إذا كانت تحتوي على وحدة تخزين قرص NVMe. إذا كان لديهم ذلك، يمكنك المتابعة إلى الخطوة التالية.</p>
 <pre><code translate="no" class="language-bash">$ lsblk | grep nvme
 nvme0n1     259:0    0 250.0G  0 disk 
 nvme1n1     259:1    0 250.0G  0 disk 
@@ -76,7 +76,22 @@ nvme1n1     259:1    0 250.0G  0 disk
         ></path>
       </svg>
     </button></h2><p>لتهيئة QueryNode من Milvus Distributed لاستخدام تخزين قرص NVMe، تحتاج إلى تكوين العقد العاملة لمجموعات Kubernetes المستهدفة لتخزين الحاويات والصور على قرص NVMe. يختلف الإجراء الخاص بذلك اعتمادًا على موفري السحابة.</p>
-<h3 id="AWS" class="common-anchor-header">AWS</h3><p>عند استخدام Amazon EKS، يمكنك تخصيص العُقد المُدارة باستخدام قوالب التشغيل، حيث يمكنك تحديد إعدادات التكوين لمجموعات العقد الخاصة بك. فيما يلي مثال على كيفية تركيب قرص NVMe على العقد العاملة في مجموعة Amazon EKS الخاصة بك:</p>
+<h3 id="AWS" class="common-anchor-header">AWS<button data-href="#AWS" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>عند استخدام Amazon EKS، يمكنك تخصيص العُقد المُدارة باستخدام قوالب التشغيل، حيث يمكنك تحديد إعدادات التكوين لمجموعات العقد الخاصة بك. فيما يلي مثال على كيفية تركيب قرص NVMe على العقد العاملة في مجموعة Amazon EKS الخاصة بك:</p>
 <pre><code translate="no" class="language-bash">MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary=<span class="hljs-string">&quot;==MYBOUNDARY==&quot;</span>
 
@@ -105,14 +120,44 @@ Content-Type: text/x-shellscript; charset=<span class="hljs-string">&quot;us-asc
 <p>في المثال أعلاه، نفترض أن قرص NVMe هو <code translate="no">/dev/nvme1n1</code>. تحتاج إلى تعديل البرنامج النصي ليتوافق مع التكوين الخاص بك.</p>
 </div>
 <p>للحصول على التفاصيل، راجع <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html#launch-template-user-data">تخصيص العقد المدارة باستخدام قوالب التشغيل</a>.</p>
-<h3 id="GCP" class="common-anchor-header">GCP</h3><p>لتوفير تخزين محلي SSD على مجموعات محرك Google Kubernetes Engine (GKE)، وتكوين أحمال العمل لاستهلاك البيانات من التخزين المؤقت المدعوم بـ SSD المحلي المدعوم بـ SSD والمتصل بالعقد في مجموعتك، قم بتشغيل الأمر التالي:</p>
+<h3 id="GCP" class="common-anchor-header">GCP<button data-href="#GCP" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لتوفير تخزين محلي SSD على مجموعات محرك Google Kubernetes Engine (GKE)، وتكوين أحمال العمل لاستهلاك البيانات من التخزين المؤقت المدعوم بـ SSD المحلي المدعوم بـ SSD والمتصل بالعقد في مجموعتك، قم بتشغيل الأمر التالي:</p>
 <pre><code translate="no" class="language-bash">gcloud container node-pools create <span class="hljs-variable">${POOL_NAME}</span> \
     --cluster=<span class="hljs-variable">${CLUSTER_NAME}</span> \
     --ephemeral-storage-local-ssd count=<span class="hljs-variable">${NUMBER_OF_DISKS}</span> \
     --machine-type=<span class="hljs-variable">${MACHINE_TYPE}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>لمزيد من التفاصيل، راجع <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/local-ssd">توفير تخزين SSD محلي على GKE</a>.</p>
-<h3 id="Azure" class="common-anchor-header">أزور</h3><p>لإنشاء مجموعة مقياس آلة افتراضية (VMSS) مع وحدة تخزين أقراص NVMe محلية، تحتاج إلى تمرير بيانات مخصصة إلى مثيلات الآلة الافتراضية. فيما يلي مثال على كيفية إرفاق قرص NVMe بمثيلات الآلة الافتراضية في VMSS:</p>
+<h3 id="Azure" class="common-anchor-header">أزور<button data-href="#Azure" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لإنشاء مجموعة مقياس آلة افتراضية (VMSS) مع وحدة تخزين أقراص NVMe محلية، تحتاج إلى تمرير بيانات مخصصة إلى مثيلات الآلة الافتراضية. فيما يلي مثال على كيفية إرفاق قرص NVMe بمثيلات الآلة الافتراضية في VMSS:</p>
 <pre><code translate="no" class="language-bash">mdadm -Cv /dev/md0 -l0 -n2 /dev/nvme0n1 /dev/nvme1n1
 mdadm -Ds &gt; /etc/mdadm/mdadm.conf 
 update-initramfs -u
@@ -125,7 +170,22 @@ mount -a
 <div class="alert note">
 <p>في المثال أعلاه، نفترض أن أقراص NVMe هي <code translate="no">/dev/nvme0n1</code> و <code translate="no">/dev/nvme1n1</code>. تحتاج إلى تعديل البرنامج النصي لمطابقة التكوين الخاص بك.</p>
 </div>
-<h3 id="Alibaba-Cloud--TecentCloud" class="common-anchor-header">علي بابا كلاود وتيسنت كلاود</h3><p>لإنشاء تجمع عقدة يستخدم وحدات تخزين SSD محلية، نحتاج إلى تمرير بيانات مخصصة. فيما يلي مثال على البيانات المخصصة.</p>
+<h3 id="Alibaba-Cloud--TecentCloud" class="common-anchor-header">علي بابا كلاود وتيسنت كلاود<button data-href="#Alibaba-Cloud--TecentCloud" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لإنشاء تجمع عقدة يستخدم وحدات تخزين SSD محلية، نحتاج إلى تمرير بيانات مخصصة. فيما يلي مثال على البيانات المخصصة.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nvme init start...&quot;</span>
 mkfs.xfs /dev/nvme0n1
@@ -146,7 +206,22 @@ mount -a
 <div class="alert note">
 <p>في المثال أعلاه، نفترض أن قرص NVMe هو <code translate="no">/dev/nvme0n1</code>. تحتاج إلى تعديل البرنامج النصي لمطابقة التكوين الخاص بك.</p>
 </div>
-<h3 id="Your-own-IDC" class="common-anchor-header">IDC الخاص بك</h3><p>إذا كنت تقوم بتشغيل IDC الخاص بك وتريد تكوين الحاويات الخاصة بك لاستخدام نظام الملفات على قرص NVMe المثبت حديثًا بشكل افتراضي في الحاوية (Contirond)، فاتبع الخطوات التالية:</p>
+<h3 id="Your-own-IDC" class="common-anchor-header">IDC الخاص بك<button data-href="#Your-own-IDC" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>إذا كنت تقوم بتشغيل IDC الخاص بك وتريد تكوين الحاويات الخاصة بك لاستخدام نظام الملفات على قرص NVMe المثبت حديثًا بشكل افتراضي في الحاوية (Contirond)، فاتبع الخطوات التالية:</p>
 <ul>
 <li><p><strong>قم بتركيب أقراص NVMe.</strong></p>
 <p>تأكد من تركيب قرص NVMe بشكل صحيح على جهازك المضيف. يمكنك تحميله إلى دليل من اختيارك. على سبيل المثال، إذا قمت بتحميله على <code translate="no">/mnt/nvme</code> ، فتأكد من إعداده بشكل صحيح ويمكنك رؤية القرص متاحًا على <code translate="no">/mnt/nvme</code> عن طريق تشغيل <code translate="no">lsblk</code> أو <code translate="no">df -h</code>.</p></li>
@@ -155,7 +230,7 @@ mount -a
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /mnt/nvme/containerd /mnt/nvme/containerd/state
 <span class="hljs-built_in">sudo</span> vim /etc/containerd/config.toml
 <button class="copy-code-btn"></button></code></pre>
-<p>حدد موقع قسم <code translate="no">[plugins.&quot;io.containerd.grpc.v1.cri&quot;.containerd]</code> ، وقم بتعديل إعدادات <code translate="no">snapshotter</code> و <code translate="no">root</code> على النحو التالي ：</p>
+<p>حدد موقع القسم <code translate="no">[plugins.&quot;io.containerd.grpc.v1.cri&quot;.containerd]</code> ، وقم بتعديل الإعدادات <code translate="no">snapshotter</code> و <code translate="no">root</code> على النحو التالي ：</p>
 <pre><code translate="no" class="language-toml"><span class="hljs-section">[plugins.&quot;io.containerd.grpc.v1.cri&quot;.containerd]</span>
 <span class="hljs-attr">snapshotter</span> = <span class="hljs-string">&quot;overlayfs&quot;</span>
 <span class="hljs-attr">root</span> = <span class="hljs-string">&quot;/mnt/nvme/containerd&quot;</span>
@@ -265,9 +340,39 @@ IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=100.0%
         ></path>
       </svg>
     </button></h2><p>بمجرد أن تكون نتائج التحقق مرضية، يمكنك نشر Milvus Distributed بالخطوات التالية:</p>
-<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">نصائح لنشر Milvus Distributed باستخدام Helm</h3><p>تستخدم كبسولة QueryNode أقراص NVMe كوحدات تخزين EmptyDir بشكل افتراضي. يُنصح بتحميل أقراص NVMe على <code translate="no">/var/lib/milvus/data</code> داخل كبسولات QueryNode لضمان الأداء الأمثل.</p>
+<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">نصائح لنشر Milvus Distributed باستخدام Helm<button data-href="#Tips-for-deploying-Milvus-Distributed-using-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تستخدم كبسولة QueryNode أقراص NVMe كوحدات تخزين EmptyDir بشكل افتراضي. يُنصح بتحميل أقراص NVMe على <code translate="no">/var/lib/milvus/data</code> داخل كبسولات QueryNode لضمان الأداء الأمثل.</p>
 <p>للحصول على تفاصيل حول كيفية نشر Milvus Distributed باستخدام Helm، راجع <a href="/docs/ar/install_cluster-helm.md">تشغيل Milvus في Kubernetes باستخدام Helm</a>.</p>
-<h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">نصائح لنشر ميلفوس الموزع باستخدام مشغل ميلفوس</h3><p>يقوم مشغل Milvus تلقائيًا بتكوين جراب QueryNode تلقائيًا لاستخدام أقراص NVMe كوحدات تخزين EmptyDir. يُنصح بإضافة التكوينات التالية إلى المورد المخصص <code translate="no">MilvusCluster</code>:</p>
+<h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">نصائح لنشر ميلفوس الموزع باستخدام مشغل ميلفوس<button data-href="#Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يقوم مشغل Milvus تلقائيًا بتكوين جراب QueryNode تلقائيًا لاستخدام أقراص NVMe كوحدات تخزين EmptyDir. يُنصح بإضافة التكوينات التالية إلى المورد المخصص <code translate="no">MilvusCluster</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>

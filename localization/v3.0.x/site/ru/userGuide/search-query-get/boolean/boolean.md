@@ -49,13 +49,58 @@ summary: >-
 <li><p><strong>Логические операторы</strong>: <code translate="no">AND</code>, <code translate="no">OR</code> и <code translate="no">NOT</code> объединяют несколько условий в сложные выражения.</p></li>
 <li><p><strong>Операторы IS NULL и IS NOT NULL</strong>: Операторы <code translate="no">IS NULL</code> и <code translate="no">IS NOT NULL</code> используются для фильтрации полей на основе того, содержат ли они нулевое значение (отсутствие данных). Подробнее см. в разделе <a href="/docs/ru/basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators">Основные операторы</a>.</p></li>
 </ul>
-<h3 id="Example-Filtering-by-Color" class="common-anchor-header">Пример: Фильтрация по цвету</h3><p>Чтобы найти сущности с первичными цветами (красным, зеленым или синим) в скалярном поле <code translate="no">color</code>, используйте следующее выражение фильтрации:</p>
+<h3 id="Example-Filtering-by-Color" class="common-anchor-header">Пример: Фильтрация по цвету<button data-href="#Example-Filtering-by-Color" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы найти сущности с первичными цветами (красным, зеленым или синим) в скалярном поле <code translate="no">color</code>, используйте следующее выражение фильтрации:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">Пример: Фильтрация полей JSON</h3><p>Milvus позволяет ссылаться на ключи в полях JSON. Например, если у вас есть JSON-поле <code translate="no">product</code> с ключами <code translate="no">price</code> и <code translate="no">model</code>, и вы хотите найти товары с определенной моделью и ценой ниже 1 850, используйте следующее выражение фильтра:</p>
+<h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">Пример: Фильтрация полей JSON<button data-href="#Example-Filtering-JSON-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus позволяет ссылаться на ключи в полях JSON. Например, если у вас есть JSON-поле <code translate="no">product</code> с ключами <code translate="no">price</code> и <code translate="no">model</code>, и вы хотите найти товары с определенной моделью и ценой ниже 1 850, используйте следующее выражение фильтра:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;product[&quot;model&quot;] == &quot;JSN-087&quot; AND product[&quot;price&quot;] &lt; 1850&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">Пример: Фильтрация полей массива</h3><p>Если у вас есть поле массива <code translate="no">history_temperatures</code>, содержащее записи о средних температурах, зарегистрированных обсерваториями с 2000 года, и вы хотите найти обсерватории, в которых температура в 2009 году (10-я запись) превысила 23 °C, используйте это выражение:</p>
+<h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">Пример: Фильтрация полей массива<button data-href="#Example-Filtering-Array-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Если у вас есть поле массива <code translate="no">history_temperatures</code>, содержащее записи о средних температурах, зарегистрированных обсерваториями с 2000 года, и вы хотите найти обсерватории, в которых температура в 2009 году (10-я запись) превысила 23 °C, используйте это выражение:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;history_temperatures[10] &gt; 23&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Дополнительные сведения об этих базовых операторах см. в разделе <a href="/docs/ru/basic-operators.md">Базовые операторы</a>.</p>
@@ -76,7 +121,22 @@ summary: >-
       </svg>
     </button></h2><p>При фильтрации с использованием символов CJK обработка может быть более сложной из-за большего набора символов и различий в кодировке. Это может привести к снижению производительности, особенно при использовании оператора <code translate="no">IN</code>.</p>
 <p>Milvus вводит шаблонизацию выражений фильтрации для оптимизации производительности при работе с символами CJK. Отделяя динамические значения от выражения фильтра, механизм запросов более эффективно обрабатывает вставку параметров.</p>
-<h3 id="Example" class="common-anchor-header">Пример</h3><p>Чтобы найти людей старше 25 лет, проживающих в "北京" (Пекин) или "上海" (Шанхай), используйте следующее шаблонное выражение:</p>
+<h3 id="Example" class="common-anchor-header">Пример<button data-href="#Example" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы найти людей старше 25 лет, проживающих в "北京" (Пекин) или "上海" (Шанхай), используйте следующее шаблонное выражение:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 AND city IN [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Чтобы повысить производительность, используйте эту вариацию с параметрами:</p>
@@ -100,7 +160,22 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
         ></path>
       </svg>
     </button></h2><p>Milvus предоставляет расширенные операторы фильтрации для определенных типов данных, таких как поля JSON, ARRAY и VARCHAR.</p>
-<h3 id="JSON-field-specific-operators" class="common-anchor-header">Операторы, специфичные для полей JSON</h3><p>Milvus предлагает расширенные операторы для запросов к полям JSON, обеспечивая точную фильтрацию в сложных структурах JSON:</p>
+<h3 id="JSON-field-specific-operators" class="common-anchor-header">Операторы, специфичные для полей JSON<button data-href="#JSON-field-specific-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus предлагает расширенные операторы для запросов к полям JSON, обеспечивая точную фильтрацию в сложных структурах JSON:</p>
 <p><code translate="no">JSON_CONTAINS(identifier, jsonExpr)</code>: Проверяет, существует ли выражение JSON в поле.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains(tags, &quot;sale&quot;)&#x27;</span>
@@ -114,7 +189,22 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Более подробную информацию об операторах JSON см. в разделе <a href="/docs/ru/json-operators.md">Операторы JSON</a>.</p>
-<h3 id="ARRAY-field-specific-operators" class="common-anchor-header">Операторы, специфичные для полей ARRAY</h3><p>Milvus предоставляет расширенные операторы фильтрации для полей массивов, таких как <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, и <code translate="no">ARRAY_LENGTH</code>, которые позволяют осуществлять тонкий контроль над данными массива:</p>
+<h3 id="ARRAY-field-specific-operators" class="common-anchor-header">Операторы, специфичные для полей ARRAY<button data-href="#ARRAY-field-specific-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus предоставляет расширенные операторы фильтрации для полей массивов, таких как <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, и <code translate="no">ARRAY_LENGTH</code>, которые позволяют осуществлять тонкий контроль над данными массива:</p>
 <p><code translate="no">ARRAY_CONTAINS</code>: : Фильтрует сущности, содержащие определенный элемент.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -128,7 +218,22 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Более подробную информацию об операторах массивов см. в разделе <a href="/docs/ru/array-operators.md">Операторы ARRAY</a>.</p>
-<h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">Операторы, специфичные для полей VARCHAR</h3><p>Milvus предоставляет специализированные операторы для точного текстового поиска по полям VARCHAR:</p>
+<h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">Операторы, специфичные для полей VARCHAR<button data-href="#VARCHAR-field-specific-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus предоставляет специализированные операторы для точного текстового поиска по полям VARCHAR:</p>
 <h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> оператор</h4><p>Оператор <code translate="no">TEXT_MATCH</code> позволяет осуществлять точный поиск документов на основе определенных терминов запроса. Он особенно полезен для фильтрованного поиска, сочетающего скалярные фильтры с поиском по векторному сходству. В отличие от семантического поиска, Text Match фокусируется на точных вхождениях терминов.</p>
 <p>Milvus использует Tantivy для поддержки инвертированного индексирования и текстового поиска по терминам. Процесс включает в себя:</p>
 <ol>

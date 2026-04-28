@@ -60,21 +60,21 @@ summary: >-
 <p>下图显示了 Vamana 图的构建过程。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
    </span> <span class="img-wrapper"> <span>Diskann</span> </span></p>
 <ol>
 <li><p><strong>初始随机连接：</strong>每个数据点（向量）在图中表示为一个节点。这些节点最初是随机连接的，形成一个密集的网络。通常情况下，一个节点开始时会有大约 500 条边（或连接），以实现广泛的连接。</p></li>
 <li><p><strong>细化以提高效率：</strong>初始随机图需要经过优化过程，以提高搜索效率。这包括两个关键步骤：</p>
 <ul>
-<li><p><strong>修剪多余的边：</strong>算法根据节点之间的距离丢弃不必要的连接。这一步优先处理质量较高的边。</p>
+<li><p><strong>修剪多余的边：</strong>算法会根据节点之间的距离丢弃不必要的连接。这一步优先处理质量较高的边。</p>
 <p><code translate="no">max_degree</code> 参数限制了每个节点的最大边数。<code translate="no">max_degree</code> 越高，图的密度越大，有可能找到更多相关的邻居（召回率更高），但也会增加内存使用量和搜索时间。</p></li>
-<li><p><strong>添加战略捷径：</strong>Vamana 引入了长距离边，将向量空间中相距甚远的数据点连接起来。这些捷径允许搜索在图中快速跳转，绕过中间节点，大大加快了导航速度。</p>
+<li><p><strong>添加战略捷径：</strong>Vamana 引入了长程边，将向量空间中相距甚远的数据点连接起来。这些捷径允许搜索在图中快速跳转，绕过中间节点，大大加快了导航速度。</p>
 <p><code translate="no">search_list_size</code> 参数决定了图细化过程的广度。较高的<code translate="no">search_list_size</code> 可以在构建过程中扩展对邻接节点的搜索，从而提高最终准确性，但会增加索引构建时间。</p></li>
 </ul></li>
 </ol>
 <p>要了解有关参数调整的更多信息，请参阅<a href="/docs/zh/diskann.md#DISKANN-params">DISKANN params</a>。</p>
 <h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANN 使用<strong>PQ</strong>将高维向量压缩成较小的表示<strong>（PQ 代码</strong>），并将其存储在内存中，以便快速计算近似距离。</p>
-<p><code translate="no">pq_code_budget_gb_ratio</code> 参数用于管理存储这些 PQ 代码的内存占用。它表示向量的总大小（千兆字节）与分配用于存储 PQ 代码的空间之间的比率。您可以通过以下公式计算实际的 PQ 代码预算（以千兆字节为单位）：</p>
+<p><code translate="no">pq_code_budget_gb_ratio</code> 参数用于管理存储这些 PQ 代码的内存占用。它表示向量总大小（千兆字节）与分配用于存储 PQ 代码的空间之间的比率。您可以通过以下公式计算实际的 PQ 代码预算（以千兆字节为单位）：</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio
 <button class="copy-code-btn"></button></code></pre>
 <p>其中</p>
@@ -101,7 +101,7 @@ summary: >-
     </button></h3><p>建立索引（磁盘上的 Vamana 图和内存中的 PQ 代码）后，DISKANN 将执行 ANN 搜索，具体过程如下：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
    </span> <span class="img-wrapper"> <span>Diskann 2</span> </span></p>
 <ol>
 <li><p><strong>查询和入口点：</strong>提供一个查询向量以定位其最近的邻居。DISKANN 从 Vamana 图中选定的入口点开始，通常是数据集全球中心点附近的一个节点。全局中心点代表所有向量的平均值，这有助于最小化图中的遍历距离，从而找到所需的邻居。</p></li>
@@ -259,7 +259,7 @@ summary: >-
      <td><p>控制 PQ 代码（数据点的压缩表示）相对于未压缩数据的大小。</p></td>
      <td><p><strong>类型</strong>：浮点<strong>范围</strong>：（0.0, 0.25］</p>
 <p><strong>默认值</strong>：<code translate="no">0.125</code></p></td>
-     <td><p>比率越高，搜索结果越精确，因为 PQ 代码分配的内存比例越大，有效存储的原始向量信息越多。然而，这需要更多内存，限制了处理大型数据集的能力。 较低的比率可减少内存使用量，但可能会牺牲精确度，因为较小的 PQ 代码保留的信息较少。这种方法适用于内存受限的情况，有可能实现对大型数据集的索引。</p>
+     <td><p>比率越大，搜索结果越精确，因为 PQ 代码分配的内存比例越大，有效存储的原始向量信息越多。然而，这需要更多内存，限制了处理大型数据集的能力。 较低的比率可减少内存使用量，但可能会牺牲精确度，因为较小的 PQ 代码保留的信息较少。这种方法适用于内存受限的情况，有可能实现对大型数据集的索引。</p>
 <p>在大多数情况下，我们建议在此范围内设置一个值：（0.0625, 0.25］</p></td>
    </tr>
 </table>
@@ -297,7 +297,7 @@ summary: >-
      <td><p>通过确定相对于可用 CPU 内核数的最大并行磁盘 I/O 请求数，控制搜索过程中的并行程度。</p></td>
      <td><p><strong>类型</strong>：浮点<strong>范围</strong>：[1，max(128 / CPU 核数，16)</p>
 <p><strong>默认值</strong>：<code translate="no">4.0</code></p></td>
-     <td><p>数值越大，并行性越高，这可以加快拥有强大 CPU 和 SSD 的系统的搜索速度。在大多数情况下，我们建议在此范围内设置值：[1.0, 4.0].</p></td>
+     <td><p>数值越大，并行性越强，这可以加快使用强大 CPU 和 SSD 的系统的搜索速度。在大多数情况下，我们建议在此范围内设置值：[1.0, 4.0].</p></td>
    </tr>
    <tr>
      <td></td>

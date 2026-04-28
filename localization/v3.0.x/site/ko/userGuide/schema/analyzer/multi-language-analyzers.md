@@ -23,7 +23,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus는 텍스트 분석을 수행할 때 일반적으로 컬렉션의 전체 텍스트 필드에 단일 분석기를 적용합니다. 해당 분석기가 영어에 최적화된 경우 중국어, 스페인어 또는 프랑스어와 같은 다른 언어에서 요구하는 매우 다른 토큰화 및 어간 규칙에 어려움을 겪게 되며, 그 결과 리콜률이 낮아지게 됩니다. 예를 들어, 스페인어 단어 <em>"teléfono</em> "( <em>'전화'라는</em> 뜻)를 검색하면 영어 중심의 분석기가 악센트를 삭제하고 스페인어 전용 어간을 적용하지 않아 관련 결과를 간과할 수 있습니다.</p>
+    </button></h1><p>Milvus는 텍스트 분석을 수행할 때 일반적으로 컬렉션의 전체 텍스트 필드에 단일 분석기를 적용합니다. 해당 분석기가 영어에 최적화된 경우 중국어, 스페인어 또는 프랑스어와 같은 다른 언어에서 요구하는 토큰화 및 어간 규칙이 매우 달라서 리콜률이 낮아질 수 있습니다. 예를 들어, 스페인어 단어 <em>"teléfono</em> "( <em>'전화'라는</em> 뜻)를 검색하면 영어 중심의 분석기가 악센트를 삭제하고 스페인어 전용 어간을 적용하지 않아 관련 결과를 간과할 수 있습니다.</p>
 <p>다국어 분석기는 단일 컬렉션에서 텍스트 필드에 대해 여러 분석기를 구성할 수 있도록 함으로써 이 문제를 해결합니다. 이렇게 하면 텍스트 필드에 다국어 문서를 저장할 수 있으며, Milvus는 각 문서에 적합한 언어 규칙에 따라 텍스트를 분석합니다.</p>
 <h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,7 +63,7 @@ beta: Milvus 2.5.11+
     </button></h2><p>다음 다이어그램은 Milvus에서 다중 언어 분석기를 구성하고 사용하는 워크플로우를 보여줍니다:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/multi-language-analyzers-workflow.png" alt="Multi Language Analyzers Workflow" class="doc-image" id="multi-language-analyzers-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multi-language-analyzers-workflow.png" alt="Multi Language Analyzers Workflow" class="doc-image" id="multi-language-analyzers-workflow" />
    </span> <span class="img-wrapper"> <span>다중 언어 분석기 워크플로</span> </span></p>
 <ol>
 <li><p><strong>다중 언어 분석기를 구성합니다</strong>:</p>
@@ -243,7 +243,22 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
         ></path>
       </svg>
     </button></h2><p>다국어를 지원하는 컬렉션을 만들려면 특정 필드와 인덱스를 구성해야 합니다:</p>
-<h3 id="Add-fields" class="common-anchor-header">필드 추가</h3><p>이 단계에서는 네 가지 필수 필드로 컬렉션 스키마를 정의합니다:</p>
+<h3 id="Add-fields" class="common-anchor-header">필드 추가<button data-href="#Add-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이 단계에서는 네 가지 필수 필드로 컬렉션 스키마를 정의합니다:</p>
 <ul>
 <li><p><strong>기본 키 필드</strong> (<code translate="no">id</code>): 컬렉션의 각 엔티티에 대한 고유 식별자입니다. <code translate="no">auto_id=True</code> 을 설정하면 Milvus에서 이러한 ID를 자동으로 생성할 수 있습니다.</p></li>
 <li><p><strong>언어 표시기 필드</strong> (<code translate="no">language</code>): 이 VARCHAR 필드는 <code translate="no">multi_analyzer_params</code> 에 지정된 <code translate="no">by_field</code> 에 해당합니다. 이 필드에는 각 엔티티의 언어 식별자가 저장되어 Milvus가 어떤 분석기를 사용할지 알려줍니다.</p></li>
@@ -451,7 +466,22 @@ schema.WithField(entity.NewField().
   &quot;dataType&quot;: &quot;SparseFloatVector&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-BM25-function" class="common-anchor-header">BM25 함수 정의</h3><p>원시 텍스트 데이터에서 스파스 벡터 표현을 생성하는 BM25 함수를 정의합니다:</p>
+<h3 id="Define-BM25-function" class="common-anchor-header">BM25 함수 정의<button data-href="#Define-BM25-function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>원시 텍스트 데이터에서 스파스 벡터 표현을 생성하는 BM25 함수를 정의합니다:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create the BM25 function</span>
@@ -512,7 +542,22 @@ schema.WithFunction(function.WithName(<span class="hljs-string">&quot;text_to_ve
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>이 함수는 언어 식별자에 따라 각 텍스트 항목에 적절한 분석기를 자동으로 적용합니다. BM25 기반 텍스트 검색에 대한 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
-<h3 id="Configure-index-params" class="common-anchor-header">색인 매개변수 구성</h3><p>효율적인 검색을 위해 스파스 벡터 필드에 인덱스를 생성합니다:</p>
+<h3 id="Configure-index-params" class="common-anchor-header">색인 매개변수 구성<button data-href="#Configure-index-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>효율적인 검색을 위해 스파스 벡터 필드에 인덱스를 생성합니다:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Configure index parameters</span>
@@ -552,7 +597,22 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>이 인덱스는 효율적인 BM25 유사도 계산을 위해 스파스 벡터를 구성하여 검색 성능을 향상시킵니다.</p>
-<h3 id="Create-the-collection" class="common-anchor-header">컬렉션 만들기</h3><p>이 마지막 생성 단계에서는 이전의 모든 구성을 통합합니다:</p>
+<h3 id="Create-the-collection" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이 마지막 생성 단계에서는 이전의 모든 구성을 통합합니다:</p>
 <ul>
 <li><p><code translate="no">collection_name=&quot;multilang_demo&quot;</code> 나중에 참조할 수 있도록 컬렉션의 이름을 지정합니다.</p></li>
 <li><p><code translate="no">schema=schema</code> 정의한 필드 구조와 기능을 적용합니다.</p></li>
@@ -800,7 +860,22 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Use-English-analyzer" class="common-anchor-header">영어 분석기 사용</h3><p>다국어 분석기로 검색할 때 <code translate="no">search_params</code> 에는 중요한 구성이 포함되어 있습니다:</p>
+    </button></h2><h3 id="Use-English-analyzer" class="common-anchor-header">영어 분석기 사용<button data-href="#Use-English-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다국어 분석기로 검색할 때 <code translate="no">search_params</code> 에는 중요한 구성이 포함되어 있습니다:</p>
 <ul>
 <li><p><code translate="no">metric_type=&quot;BM25&quot;</code> 색인 구성과 일치해야 합니다.</p></li>
 <li><p><code translate="no">analyzer_name=&quot;english&quot;</code> 쿼리 텍스트에 적용할 분석기를 지정합니다. 이는 저장된 문서에 사용되는 분석기와는 독립적입니다.</p></li>
@@ -925,7 +1000,22 @@ curl --request POST \
   &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-Chinese-analyzer" class="common-anchor-header">중국어 분석기 사용</h3><p>이 예는 다른 쿼리 텍스트에 대해 중국어 분석기(별칭 <code translate="no">&quot;cn&quot;</code>)로 전환하는 것을 보여줍니다. 다른 모든 매개 변수는 동일하게 유지되지만 이제 쿼리 텍스트는 중국어 전용 토큰화 규칙을 사용하여 처리됩니다.</p>
+<h3 id="Use-Chinese-analyzer" class="common-anchor-header">중국어 분석기 사용<button data-href="#Use-Chinese-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이 예는 다른 쿼리 텍스트에 대해 중국어 분석기(별칭 <code translate="no">&quot;cn&quot;</code>)로 전환하는 것을 보여줍니다. 다른 모든 매개 변수는 동일하게 유지되지만 이제 쿼리 텍스트는 중국어 전용 토큰화 규칙을 사용하여 처리됩니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params[<span class="hljs-string">&quot;analyzer_name&quot;</span>] = <span class="hljs-string">&quot;cn&quot;</span>

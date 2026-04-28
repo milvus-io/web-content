@@ -1,7 +1,7 @@
 ---
 id: default-values.md
 title: 기본값
-summary: 엔터티 삽입 시 누락된 값을 채우도록 스칼라 필드에 기본값을 설정합니다.
+summary: 엔티티 삽입 시 누락된 값을 채우도록 스칼라 필드에 기본값을 설정합니다.
 ---
 <h1 id="Default-Values" class="common-anchor-header">기본값<button data-href="#Default-Values" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,7 +19,7 @@ summary: 엔터티 삽입 시 누락된 값을 채우도록 스칼라 필드에 
         ></path>
       </svg>
     </button></h1><p>Milvus에서는 스칼라 필드(기본 필드 제외)에 대한 기본값을 설정할 수 있습니다. 필드에 기본값이 설정되어 있는 경우, 삽입 중에 데이터가 제공되지 않으면 Milvus는 자동으로 이 값을 적용합니다.</p>
-<p>기본값은 기존 기본값 설정을 유지하여 다른 데이터베이스 시스템에서 Milvus로 데이터 마이그레이션을 간소화합니다. 또한 삽입 시 값이 불확실한 필드에도 기본값을 사용할 수 있습니다.</p>
+<p>기본값은 기존 기본값 설정을 유지하여 다른 데이터베이스 시스템에서 Milvus로 데이터 마이그레이션을 간소화합니다. 또한 삽입 시 값이 불확실한 필드에 기본값을 사용할 수도 있습니다.</p>
 <h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -278,6 +278,6 @@ Query results (status == &#x27;active&#x27;):
 <ul>
 <li><p>필드에 NULL이 아닌 기본값이 있는 경우 <code translate="no">nullable</code> 활성화 여부에 관계없이 해당 값이 사용됩니다.</p></li>
 <li><p><code translate="no">nullable=True</code> 이지만 기본값이 설정되지 않은 경우 필드에 NULL이 저장됩니다.</p></li>
-<li><p><code translate="no">nullable=False</code> 에 기본값이 설정되어 있지 않은 경우 오류와 함께 삽입이 실패합니다.</p></li>
+<li><p><code translate="no">nullable=False</code> 에 기본값이 설정되지 않은 경우 오류와 함께 삽입이 실패합니다.</p></li>
 <li><p>NULL이 아닌 필드에 NULL 기본값을 설정하면 유효하지 않으며 오류가 발생합니다.</p></li>
 </ul>

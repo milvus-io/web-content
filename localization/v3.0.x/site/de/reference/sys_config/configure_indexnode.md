@@ -217,7 +217,7 @@ summary: 'Erfahren Sie, wie Sie indexNode für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        Die maximale Größe jeder RPC-Anfrage, die die Clients auf indexNode empfangen können, Einheit: Byte    </td>
+      <td>        Die maximale Größe jedes RPC-Requests, den die Clients auf indexNode empfangen können, Einheit: Byte    </td>
       <td>536870912</td>
     </tr>
   </tbody>

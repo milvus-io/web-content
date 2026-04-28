@@ -153,7 +153,7 @@ beta: Milvus 2.6.x
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
    </span> <span class="img-wrapper"> <span>嵌入功能概述</span> </span></p>
 <h2 id="Configure-credentials" class="common-anchor-header">配置憑證<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -181,7 +181,7 @@ beta: Milvus 2.6.x
 <p>下圖顯示透過 Milvus 配置檔案 (<code translate="no">milvus.yaml</code>) 配置憑證，然後在 Milvus 內呼叫 Function 的流程。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
    </span> <span class="img-wrapper"> <span>憑證配置溢出</span> </span></p>
 <h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">步驟 1：將憑證新增至 Milvus 配置檔案<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -198,7 +198,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在您的<code translate="no">milvus.yaml</code> 檔案中，編輯<code translate="no">credential</code> 區塊，為您需要存取的每個提供者加入條目：</p>
+    </button></h3><p>在您的<code translate="no">milvus.yaml</code> 檔案中，編輯<code translate="no">credential</code> 區塊，為您需要存取的每個提供者加入項目：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml credential store section</span>
 <span class="hljs-comment"># This section defines all your authentication credentials for external embedding providers</span>
 <span class="hljs-comment"># Each credential gets a unique name (e.g., aksk1, apikey1) that you&#x27;ll reference elsewhere</span>
@@ -393,7 +393,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
-     <td><p>向量欄位用於儲存已產生的嵌入。目前，此參數只接受一個欄位名稱。</p></td>
+     <td><p>向量欄位，用於儲存已產生的嵌入。目前，此參數只接受一個欄位名稱。</p></td>
      <td><p><code translate="no">["dense"]</code></p></td>
    </tr>
    <tr>
@@ -413,7 +413,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">credential</code></p></td>
-     <td><p><code translate="no">milvus.yaml</code> 的頂層<code translate="no">credential:</code> 區段中定義的憑證的標籤。 </p><ul><li><p>提供時，Milvus 會擷取匹配的金鑰對或 API 令牌，並在伺服器端簽署請求。</p></li><li><p>如果省略 (<code translate="no">None</code>)，Milvus 會回退到<code translate="no">milvus.yaml</code> 中為目標模型提供者明確配置的憑證。</p></li><li><p>如果標籤未知或參考的金鑰遺失，則呼叫失敗。</p></li></ul></td>
+     <td><p><code translate="no">milvus.yaml</code> 的頂層<code translate="no">credential:</code> 部分定義的憑證的標籤。 </p><ul><li><p>提供時，Milvus 會擷取匹配的金鑰對或 API 令牌，並在伺服器端簽署請求。</p></li><li><p>當省略 (<code translate="no">None</code>) 時，Milvus 會回退到<code translate="no">milvus.yaml</code> 中為目標模型提供者明確設定的憑證。</p></li><li><p>如果標籤不明或參考的金鑰遺失，則呼叫失敗。</p></li></ul></td>
      <td><p><code translate="no">"apikey1"</code></p></td>
    </tr>
    <tr>
@@ -621,9 +621,9 @@ results = client.search(
       </svg>
     </button></h3><p>Milvus 遵循此憑證解析順序：</p>
 <ol>
-<li>首先，它會尋找<code translate="no">milvus.yaml</code> 檔案中為該提供者設定的預設憑證。</li>
+<li>首先，它會在<code translate="no">milvus.yaml</code> 檔案中尋找為該提供者設定的預設憑證。</li>
 <li>如果在 milvus.yaml 中不存在默认凭据，它将返回到环境变量（如果已配置）。</li>
-<li>如果<code translate="no">milvus.yaml</code> 認證或環境變數都沒有設定，Milvus 會產生錯誤。</li>
+<li>如果<code translate="no">milvus.yaml</code> 認證和環境變數都沒有設定，Milvus 會產生錯誤。</li>
 </ol>
 <h3 id="How-can-I-verify-that-embeddings-are-being-generated-correctly" class="common-anchor-header">我如何驗證嵌入是否正確產生？<button data-href="#How-can-I-verify-that-embeddings-are-being-generated-correctly" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -661,7 +661,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>可以，您可以使用預先計算好的查詢向量來代替原始文字進行相似性搜尋。雖然 Function 模組會自動將原始文字查詢轉換成嵌入式資料，但您也可以在搜尋作業中直接提供向量資料給<code translate="no">data</code> 參數。<strong>注意</strong>：您所提供的查詢向量的尺寸大小，必須與您的 Function 模組所產生的向量嵌入的尺寸大小一致。</p>
+    </button></h3><p>可以，您可以使用預先計算好的查詢向量來取代原始文字進行相似性搜尋。雖然 Function 模組會自動將原始文字查詢轉換成嵌入式資料，但您也可以在搜尋作業中直接提供向量資料給<code translate="no">data</code> 參數。<strong>注意</strong>：您所提供的查詢向量的尺寸大小，必須與您的 Function 模組所產生的向量嵌入的尺寸大小一致。</p>
 <p><strong>範例</strong>：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

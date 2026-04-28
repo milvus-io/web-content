@@ -3,7 +3,7 @@ id: generating_milvus_query_filter_expressions.md
 summary: >-
   In diesem Tutorial wird gezeigt, wie man Large Language Models (LLMs)
   verwendet, um automatisch Milvus-Filterausdrücke aus natürlichsprachlichen
-  Abfragen zu erzeugen. Dieser Ansatz macht die Abfrage von Vektordatenbanken
+  Abfragen zu generieren. Dieser Ansatz macht die Abfrage von Vektordatenbanken
   zugänglicher, da Benutzer komplexe Filterbedingungen in einfachem Englisch
   ausdrücken können, die dann in die richtige Milvus-Syntax umgewandelt werden.
 title: Generierung von Milvus-Abfragefilterausdrücken mit großen Sprachmodellen
@@ -94,7 +94,7 @@ openai.api_key = api_key
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Lassen Sie uns nun eine Milvus-Beispielsammlung mit Benutzerdaten erstellen. Diese Sammlung wird sowohl skalare Felder (für die Filterung) als auch Vektoreinbettungen (für die semantische Suche) enthalten. Wir werden OpenAIs Text-Einbettungsmodell verwenden, um Vektordarstellungen von Benutzerinformationen zu erzeugen.</p>
+    </button></h2><p>Lassen Sie uns nun eine Milvus-Beispielsammlung mit Benutzerdaten erstellen. Diese Sammlung wird sowohl skalare Felder (für die Filterung) als auch Vektoreinbettungen (für die semantische Suche) enthalten. Wir werden das Texteinbettungsmodell von OpenAI verwenden, um Vektordarstellungen von Benutzerinformationen zu erzeugen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, FieldSchema, CollectionSchema, DataType
 <span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
@@ -244,7 +244,7 @@ result = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Damit das große Sprachmodell die Syntax der Milvus-Filterausdrücke besser verstehen kann, müssen wir es mit der entsprechenden offiziellen Dokumentation versorgen. Wir werden die Bibliothek <code translate="no">docling</code> verwenden, um mehrere Schlüsselseiten von der offiziellen Milvus-Website zu scrapen.</p>
+    </button></h2><p>Damit das große Sprachmodell die Syntax der Milvus-Filterausdrücke besser verstehen kann, müssen wir es mit der entsprechenden offiziellen Dokumentation versorgen. Wir werden die Bibliothek <code translate="no">docling</code> verwenden, um mehrere Schlüsselseiten von der offiziellen Milvus-Website abzurufen.</p>
 <p>Diese Seiten enthalten detaillierte Informationen über:</p>
 <ul>
 <li><strong>Boolesche Operatoren</strong>: <code translate="no">and</code>, <code translate="no">or</code>, <code translate="no">not</code> für komplexe logische Bedingungen</li>
@@ -351,7 +351,7 @@ filter_expr = generate_filter_expr(user_query)
 <li>Abgleich mehrerer Städte mit dem Operator <code translate="no">in</code> </li>
 <li>Korrekte Feldreferenzierung und Syntax</li>
 </ul>
-<p>Dies demonstriert die Stärke der Bereitstellung eines umfassenden Dokumentationskontextes, um die LLM-Filtergenerierung anzuleiten.</p>
+<p>Dies demonstriert die Stärke der Bereitstellung eines umfassenden Dokumentationskontextes, um die LLM-Filtergenerierung zu leiten.</p>
 <h2 id="Test-the-Generated-Filter" class="common-anchor-header">Testen Sie den generierten Filter<button data-href="#Test-the-Generated-Filter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -426,6 +426,6 @@ search_results = client.search(
 <ul>
 <li>älter als 30 Jahre sind</li>
 <li>in London, Tokio oder Toronto leben</li>
-<li>mit dem semantischen Kontext der Suchanfrage übereinstimmen</li>
+<li>mit dem semantischen Kontext der Anfrage übereinstimmen</li>
 </ul>
 <p>Dieser Ansatz kombiniert die Präzision strukturierter Filter mit der Flexibilität natürlichsprachlicher Eingaben und macht Vektordatenbanken auch für Nutzer zugänglich, die mit der spezifischen Abfragesyntax nicht vertraut sind.</p>

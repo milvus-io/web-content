@@ -29,7 +29,7 @@ title: Konfigurieren Sie Milvus mit Milvus Operator
 <li>Private Ressourcenkonfigurationen</li>
 </ul>
 <div class="alert note">
-Private Ressourcenkonfigurationen überschreiben globale Ressourcenkonfigurationen. Wenn Sie die Ressourcen global konfigurieren und gleichzeitig die private Ressource einer bestimmten Komponente angeben, wird die Komponente priorisiert und reagiert zuerst auf die privaten Konfigurationen.</div>
+Private Ressourcenkonfigurationen überschreiben die globalen Ressourcenkonfigurationen. Wenn Sie die Ressourcen global konfigurieren und gleichzeitig die private Ressource einer bestimmten Komponente angeben, wird die Komponente priorisiert und reagiert zuerst auf die privaten Konfigurationen.</div>
 <h2 id="Configure-global-resources" class="common-anchor-header">Globale Ressourcen konfigurieren<button data-href="#Configure-global-resources" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -135,7 +135,7 @@ Die Cluster-Ressourcen werden entsprechend der Konfigurationsdatei aktualisiert,
 </ul>
 <div class="alert note">
 Außerdem gibt es bei der Konfiguration des Proxys ein zusätzliches Feld namens "serviceType". Dieses Feld definiert den Typ des Dienstes, den Milvus im K8s-Cluster bereitstellt.</div>
-<p>Um Ressourcen für eine bestimmte Komponente zu konfigurieren, fügen Sie zuerst den Komponentennamen in das Feld unter <code translate="no">spec.componets</code> ein und konfigurieren Sie dann die privaten Ressourcen.</p>
+<p>Um die Ressourcen für eine bestimmte Komponente zu konfigurieren, fügen Sie zunächst den Komponentennamen in das Feld unter <code translate="no">spec.componets</code> ein und konfigurieren dann die privaten Ressourcen.</p>
 <div class="filter">
 <a href="#component">Komponenten oder Abhängigkeiten</a> <a href="#purpose">Konfigurationszwecke</a> </div>
 <div class="filter-component table-wrapper">
@@ -174,9 +174,8 @@ Außerdem gibt es bei der Konfiguration des Proxys ein zusätzliches Feld namens
             <li><a href="/docs/de/configure_indexcoord.md">Index-Koordinate</a></li>
             <li><a href="/docs/de/configure_metastore.md">Metaspeicher</a></li>
             <li><a href="/docs/de/configure_mq.md">Nachrichten-Warteschlange</a></li>
-            <li><a href="/docs/de/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/de/configure_tikv.md">Tikv</a></li>
-            <li><a href="/docs/de/configure_trace.md">Trace</a></li>
+            <li><a href="/docs/de/configure_trace.md">Verfolgung</a></li>
             <li><a href="/docs/de/configure_quotaandlimits.md">Quoten und Limits</a></li>
         </ul>
     </td>

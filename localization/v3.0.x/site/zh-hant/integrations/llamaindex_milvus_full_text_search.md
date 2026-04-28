@@ -122,7 +122,22 @@ write then, and probably still are: short stories. My stories were
 awful. They had hardly any plot, just characters with strong feelings,
 which I ...
 </code></pre>
-<h3 id="Full-Text-Search-with-BM25" class="common-anchor-header">使用 BM25 進行全文檢索</h3><p>LlamaIndex 的<code translate="no">MilvusVectorStore</code> 支援全文檢索，可實現高效率的關鍵字檢索。透過使用內建函式作為<code translate="no">sparse_embedding_function</code> ，它會應用 BM25 計分來對搜尋結果進行排序。</p>
+<h3 id="Full-Text-Search-with-BM25" class="common-anchor-header">使用 BM25 進行全文檢索<button data-href="#Full-Text-Search-with-BM25" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>LlamaIndex 的<code translate="no">MilvusVectorStore</code> 支援全文檢索，可實現高效率的關鍵字檢索。透過使用內建函式作為<code translate="no">sparse_embedding_function</code> ，它會應用 BM25 計分來對搜尋結果進行排序。</p>
 <p>在本節中，我們將示範如何使用 BM25 實作一個 RAG 系統來進行全文檢索。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> VectorStoreIndex, StorageContext
 <span class="hljs-keyword">from</span> llama_index.vector_stores.milvus <span class="hljs-keyword">import</span> MilvusVectorStore
@@ -154,7 +169,7 @@ index = VectorStoreIndex.from_documents(documents, storage_context=storage_conte
 <li><code translate="no">input_field_names (str)</code>:輸入文字欄位（預設：「文字」）。它表示 BM25 演算法應用於哪個文字欄位。如果使用不同文字欄位名稱的自己的集合，請變更此項。</li>
 <li><code translate="no">output_field_names (str)</code>:儲存此 BM25 函式輸出的欄位（預設值："sparse_embedding"）。</li>
 </ul>
-<p>一旦向量儲存設定完成，您就可以使用 Milvus 以「sparse」或「text_search」查詢模式執行全文檢索查詢：</p>
+<p>一旦向量儲存設定完成，您就可以使用 Milvus 以「sparse」或「text_search」的查詢模式執行全文檢索查詢：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> textwrap
 
 query_engine = index.as_query_engine(
@@ -169,7 +184,7 @@ and software usability, and the significance of being the &quot;entry level&quot
 Additionally, they discovered the accidental success of making Viaweb inexpensive, the challenges of
 hiring too many people, and the relief felt when the company was acquired by Yahoo.
 </code></pre>
-<h4 id="Customize-text-analyzer" class="common-anchor-header">自訂文字分析器</h4><p>分析器在全文檢索中扮演重要的角色，可將句子分割成字元，並執行詞彙處理，例如刪除字莖和停頓字。它們通常是特定於語言的。如需詳細資訊，請參閱<a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Milvus 分析器指南</a>。</p>
+<h4 id="Customize-text-analyzer" class="common-anchor-header">自訂文字分析器</h4><p>分析器在全文檢索中扮演重要的角色，可將句子分割成字元，並執行詞彙處理，例如刪除字莖和停止字詞。它們通常是特定於語言的。如需詳細資訊，請參閱<a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Milvus 分析器指南</a>。</p>
 <p>Milvus 支援兩種類型的分析器：<strong>內建分析器</strong>和<strong>自訂分析器</strong>。預設情況下，<code translate="no">BM25BuiltInFunction</code> 使用標準的內建分析器，它會根據標點符號來標記文字。</p>
 <p>若要使用不同的分析器或自訂現有的分析器，您可以傳值給<code translate="no">analyzer_params</code> 參數：</p>
 <pre><code translate="no" class="language-python">bm25_function = BM25BuiltInFunction(
@@ -184,7 +199,22 @@ hiring too many people, and the relief felt when the company was acquired by Yah
     enable_match=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Hybrid-Search-with-Reranker" class="common-anchor-header">混合搜尋與 Reranker</h3><p>混合搜尋系統結合語意搜尋與全文搜尋，可優化 RAG 系統的檢索效能。</p>
+<h3 id="Hybrid-Search-with-Reranker" class="common-anchor-header">混合搜尋與 Reranker<button data-href="#Hybrid-Search-with-Reranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>混合搜尋系統結合語意搜尋與全文搜尋，可優化 RAG 系統的檢索效能。</p>
 <p>以下範例使用 OpenAI embedding 進行語意搜尋，並使用 BM25 進行全文檢索：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index over the documnts</span>
 vector_store = MilvusVectorStore(
@@ -213,7 +243,7 @@ index = VectorStoreIndex.from_documents(
 <li><code translate="no">sparse_embedding</code>:使用 BM25BuiltInFunction 計算的 Sparse embeddings，用於全文搜尋。</li>
 </ul>
 <p>此外，我們使用「RRFRanker」及其預設參數應用了重排策略。若要自訂 reranker，您可以依照<a href="https://milvus.io/docs/weighted-ranker.md">Milvus Reranking 指南</a>設定<code translate="no">hybrid_ranker</code> 和<code translate="no">hybrid_ranker_params</code> 。</p>
-<p>現在，讓我們使用範例查詢來測試 RAG 系統：</p>
+<p>現在，讓我們用一個範例查詢來測試 RAG 系統：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query</span>
 query_engine = index.as_query_engine(
     vector_store_query_mode=<span class="hljs-string">&quot;hybrid&quot;</span>, similarity_top_k=<span class="hljs-number">5</span>

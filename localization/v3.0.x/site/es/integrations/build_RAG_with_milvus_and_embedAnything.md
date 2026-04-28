@@ -244,7 +244,7 @@ Successfully inserted 12 embeddings.
     docs = [(res[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;text&quot;</span>], res[<span class="hljs-string">&quot;distance&quot;</span>]) <span class="hljs-keyword">for</span> res <span class="hljs-keyword">in</span> search_res[<span class="hljs-number">0</span>]]
     <span class="hljs-keyword">return</span> docs
 <button class="copy-code-btn"></button></code></pre>
-<p>Definir una función para generar una respuesta utilizando los documentos recuperados en la canalización RAG.</p>
+<p>Definir una función para generar una respuesta utilizando los documentos recuperados en el canal RAG.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_rag_response</span>(<span class="hljs-params">question</span>):
     retrieved_docs = retrieve_documents(question)
     context = <span class="hljs-string">&quot;\n&quot;</span>.join([<span class="hljs-string">f&quot;Text: <span class="hljs-subst">{doc[<span class="hljs-number">0</span>]}</span>\n&quot;</span> <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> retrieved_docs])

@@ -143,7 +143,7 @@ city_chunks = []
         sentences=texts,
     )
 <button class="copy-code-btn"></button></code></pre>
-<p>現在，我們需要匹配 embeddings 和文字塊。由於嵌入式清單和句子清單應該依索引匹配，因此我們可以透過<code translate="no">enumerate</code> 任一清單進行匹配。</p>
+<p>現在，我們需要匹配 embeddings 和文字塊。由於嵌入式清單和句子清單應該依索引匹配，因此我們可以透過<code translate="no">enumerate</code> 任一清單來進行匹配。</p>
 <pre><code translate="no" class="language-python">entries = []
 <span class="hljs-keyword">for</span> city_dict <span class="hljs-keyword">in</span> city_chunks:
     <span class="hljs-comment"># No need for the embeddings list if get_embeddings already returns a list of lists</span>
@@ -175,7 +175,7 @@ city_chunks = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>準備好嵌入和資料後，我們就可以將向量連同 metadata 插入 Milvus Lite，以便稍後進行向量搜尋。本節的第一步是連線到 Milvus Lite 來啟動一個用戶端。我們只要匯入<code translate="no">MilvusClient</code> 模組，並初始化一個連線到 Milvus Lite 向量資料庫的 Milvus Lite 用戶端。維度大小來自嵌入模型的大小，例如 Sentence Transformer 模型<code translate="no">all-MiniLM-L6-v2</code> 產生 384 維度的向量。</p>
+    </button></h2><p>準備好嵌入和資料後，我們就可以將向量連同 metadata 插入 Milvus Lite，以便稍後進行向量搜尋。本節的第一步是連線到 Milvus Lite 來啟動一個用戶端。我們只要匯入<code translate="no">MilvusClient</code> 模組，並初始化一個連線到 Milvus Lite 向量資料庫的 Milvus Lite 用戶端。維度大小來自嵌入模型的大小，例如句子轉換模型<code translate="no">all-MiniLM-L6-v2</code> 產生 384 維度的向量。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 COLLECTION_NAME = <span class="hljs-string">&quot;Bento_Milvus_RAG&quot;</span>  <span class="hljs-comment"># random name for your collection</span>
@@ -316,7 +316,7 @@ llm_client = bentoml.SyncHTTPClient(BENTO_LLM_END_POINT, token=BENTO_API_TOKEN)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>現在我們準備提出問題。這個函式簡單地接收一個問題，然後進行 RAG，從背景資訊中產生相關的上下文。接著，我們將上下文和問題傳給 dorag() 並得到結果。</p>
+    </button></h2><p>現在我們準備提出一個問題。這個函式簡單地接收一個問題，然後進行 RAG，從背景資訊中產生相關的上下文。接著，我們將上下文和問題傳給 dorag() 並得到結果。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;What state is Cambridge in?&quot;</span>
 
 
@@ -345,4 +345,4 @@ context = ask_a_question(question=question)
 <p>執行 RAG</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(dorag(question=question, context=context))
 <button class="copy-code-btn"></button></code></pre>
-<p>對於問劍橋在哪個州的範例問題，我們可以從 BentoML 列印整個回應。但是，如果我們花點時間來解析它，它看起來就會比較美觀，而且應該會告訴我們劍橋位於麻薩諸塞州。</p>
+<p>對於問劍橋在哪個州的範例問題，我們可以從 BentoML 列印整個回應。但是，如果我們花點時間來解析它，它看起來就會比較美觀，而且它應該會告訴我們劍橋位於麻薩諸塞州。</p>

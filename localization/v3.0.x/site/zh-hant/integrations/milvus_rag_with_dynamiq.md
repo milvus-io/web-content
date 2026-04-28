@@ -1,7 +1,7 @@
 ---
 id: milvus_rag_with_dynamiq.md
 summary: >-
-  在本教程中，我們將探討如何將 Dynamiq 與 Milvus 無縫配合使用，Milvus 是專為 RAG 工作流程打造的高性能向量資料庫。Milvus
+  在本教程中，我們將探討如何將 Dynamiq 與 Milvus 無縫搭配使用，Milvus 是專為 RAG 工作流程打造的高性能向量資料庫。Milvus
   擅長於向量嵌入的高效儲存、索引和擷取，使其成為需要快速精確存取上下文資料的 AI 系統不可或缺的元件。
 title: 開始使用 Dynamiq 和 Milvus
 ---
@@ -259,7 +259,7 @@ milvus_writer_added = rag_wf.flow.add_nodes(vector_store)  <span class="hljs-com
 </ol>
 <ul>
 <li><strong>本地原型</strong>或<strong>小規模資料</strong>儲存的理想選擇。</li>
-<li>將<code translate="no">uri</code> 設定為本機檔案路徑 (例如<code translate="no">./milvus.db</code>) 以利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>，它會自動將所有資料儲存到指定的檔案中。</li>
+<li>將<code translate="no">uri</code> 設定為本機檔案路徑 (例如：<code translate="no">./milvus.db</code>) 以利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>，它會自動將所有資料儲存到指定的檔案中。</li>
 <li>這是<strong>快速設定</strong>和<strong>實驗的</strong>方便選項。</li>
 </ul>
 <ol start="2">

@@ -43,7 +43,22 @@ summary: >-
 <li><p><strong>File invertito (IVF)</strong>: Organizza i dati in cluster, consentendo all'algoritmo di ricerca di concentrarsi solo sui sottoinsiemi di vettori più rilevanti.</p></li>
 <li><p><strong>Quantizzazione scalare (SQ8)</strong>: Comprime i vettori in una forma più compatta, riducendo drasticamente l'uso della memoria e mantenendo una precisione sufficiente per un rapido calcolo della similarità.</p></li>
 </ul>
-<h3 id="IVF" class="common-anchor-header">FIV</h3><p>L'IVF è come la creazione di un indice in un libro. Invece di esaminare ogni pagina (o, nel nostro caso, ogni vettore), si cercano parole chiave specifiche (cluster) nell'indice per trovare rapidamente le pagine (vettori) pertinenti. Nel nostro scenario, i vettori sono raggruppati in cluster e l'algoritmo cercherà all'interno di alcuni cluster che sono vicini al vettore della query.</p>
+<h3 id="IVF" class="common-anchor-header">FIV<button data-href="#IVF" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>L'IVF è come la creazione di un indice in un libro. Invece di esaminare ogni pagina (o, nel nostro caso, ogni vettore), si cercano parole chiave specifiche (cluster) nell'indice per trovare rapidamente le pagine (vettori) pertinenti. Nel nostro scenario, i vettori sono raggruppati in cluster e l'algoritmo cercherà all'interno di alcuni cluster che sono vicini al vettore della query.</p>
 <p>Ecco come funziona:</p>
 <ol>
 <li><p><strong>Raggruppamento:</strong> Il set di dati vettoriali viene suddiviso in un numero specifico di cluster, utilizzando un algoritmo di clustering come k-means. Ogni cluster ha un centroide (un vettore rappresentativo del cluster).</p></li>
@@ -52,7 +67,22 @@ summary: >-
 <li><p><strong>Ricerca:</strong> Quando si cercano i vicini, l'algoritmo di ricerca confronta il vettore della query con i centroidi dei cluster e seleziona i cluster più promettenti. La ricerca viene quindi ristretta ai vettori all'interno dei cluster selezionati.</p></li>
 </ol>
 <p>Per saperne di più sui dettagli tecnici, consultare <a href="/docs/it/ivf-flat.md">IVF_FLAT</a>.</p>
-<h3 id="SQ8" class="common-anchor-header">SQ8</h3><p>La quantizzazione scalare (SQ) è una tecnica utilizzata per ridurre le dimensioni dei vettori ad alta dimensionalità sostituendo i loro valori con rappresentazioni più piccole e compatte. La variante <strong>SQ8</strong> utilizza numeri interi a 8 bit invece dei tipici numeri in virgola mobile a 32 bit per memorizzare ogni valore di dimensione di un vettore. Questo riduce notevolmente la quantità di memoria necessaria per memorizzare i dati.</p>
+<h3 id="SQ8" class="common-anchor-header">SQ8<button data-href="#SQ8" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La quantizzazione scalare (SQ) è una tecnica utilizzata per ridurre le dimensioni dei vettori ad alta dimensionalità sostituendo i loro valori con rappresentazioni più piccole e compatte. La variante <strong>SQ8</strong> utilizza numeri interi a 8 bit invece dei tipici numeri in virgola mobile a 32 bit per memorizzare ogni valore di dimensione di un vettore. Questo riduce notevolmente la quantità di memoria necessaria per memorizzare i dati.</p>
 <p>Ecco come funziona SQ8:</p>
 <ol>
 <li><p><strong>Identificazione dell'intervallo:</strong> Innanzitutto, si identificano i valori minimi e massimi all'interno del vettore. Questo intervallo definisce i limiti per la quantizzazione.</p></li>
@@ -61,12 +91,27 @@ summary: >-
 <p>Questo assicura che tutti i valori siano mappati in modo proporzionale all'interno di un intervallo standardizzato, preparandoli per la compressione.</p></li>
 <li><p><strong>Compressione a 8 bit:</strong> Moltiplicare il valore normalizzato per 255 (il valore massimo per un intero a 8 bit) e arrotondare il risultato al numero intero più vicino. In questo modo si comprime ogni valore in una rappresentazione a 8 bit.</p></li>
 </ol>
-<p>Supponiamo di avere un valore di dimensione pari a 1,2, con un valore minimo di -1,7 e un valore massimo di 2,3. La figura seguente mostra come SQ8 viene applicato per convertire un valore float32 in un intero int8.</p>
+<p>Supponiamo di avere un valore di dimensione di 1,2, con un valore minimo di -1,7 e un valore massimo di 2,3. La figura seguente mostra come SQ8 viene applicato per convertire un valore float32 in un intero int8.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ivf-sq8.png" alt="Ivf Sq8" class="doc-image" id="ivf-sq8" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ivf-sq8.png" alt="Ivf Sq8" class="doc-image" id="ivf-sq8" />
    </span> <span class="img-wrapper"> <span>FIV + SQ8</span> </span></p>
-<h3 id="IVF-+-SQ8" class="common-anchor-header">FIV + SQ8</h3><p>L'indice IVF_SQ8 combina IVF e SQ8 per eseguire in modo efficiente le ricerche di similarità:</p>
+<h3 id="IVF-+-SQ8" class="common-anchor-header">FIV + SQ8<button data-href="#IVF-+-SQ8" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>L'indice IVF_SQ8 combina IVF e SQ8 per eseguire in modo efficiente le ricerche di similarità:</p>
 <ol>
 <li><p><strong>IVF restringe l'ambito di ricerca</strong>: Il set di dati viene suddiviso in cluster e quando viene emessa una query, IVF confronta prima la query con i centroidi dei cluster, selezionando i cluster più rilevanti.</p></li>
 <li><p><strong>SQ8 accelera il calcolo delle distanze</strong>: All'interno dei cluster selezionati, SQ8 comprime i vettori in numeri interi a 8 bit, riducendo l'uso della memoria e accelerando il calcolo delle distanze.</p></li>
@@ -168,7 +213,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Questa sezione fornisce una panoramica dei parametri utilizzati per la creazione di un indice e per l'esecuzione di ricerche sull'indice.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parametri di costruzione dell'indice</h3><p>La tabella seguente elenca i parametri che possono essere configurati in <code translate="no">params</code> quando si <a href="/docs/it/ivf-sq8.md#share-X9Y9dTuhDohRRBxSvzBcXmIEnu4">costruisce un indice</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parametri di costruzione dell'indice<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La tabella seguente elenca i parametri che possono essere configurati in <code translate="no">params</code> quando si <a href="/docs/it/ivf-sq8.md#share-X9Y9dTuhDohRRBxSvzBcXmIEnu4">costruisce un indice</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -186,7 +246,22 @@ res = MilvusClient.search(
      <td><p>Valori maggiori di <code translate="no">nlist</code> migliorano il richiamo creando cluster più raffinati, ma aumentano il tempo di costruzione dell'indice. Ottimizzare in base alle dimensioni del set di dati e alle risorse disponibili. Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parametri di ricerca specifici per l'indice</h3><p>La tabella seguente elenca i parametri che possono essere configurati in <code translate="no">search_params.params</code> durante la <a href="/docs/it/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">ricerca sull'indice</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parametri di ricerca specifici per l'indice<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La tabella seguente elenca i parametri che possono essere configurati in <code translate="no">search_params.params</code> durante la <a href="/docs/it/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">ricerca sull'indice</a>.</p>
 <table>
    <tr>
      <th></th>

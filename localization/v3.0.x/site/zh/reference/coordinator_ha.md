@@ -37,7 +37,7 @@ title: 协调器 HA
     </button></h2><p>在 2.2.3 版中，Milvus 为协调器实现了高可用性，使其在主动-备用模式下工作，减轻了可能导致服务不可用的单点故障（SpoF）。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
    </span> <span class="img-wrapper"> <span>协调器 HA</span> </span></p>
 <p>上图说明了协调器如何在主动-备用模式下工作。当一对协调器启动时，它们会使用自己的服务器 ID 向 etcd 注册，并竞争主动角色。成功从 etcd 租用主动角色的协调器将开始提供服务，而这对协调器中的其他协调器将保持待机状态，观察主动角色，并随时准备在主动协调器死亡时提供服务。</p>
 <h2 id="Enable-coordinator-HA" class="common-anchor-header">启用协调器 HA<button data-href="#Enable-coordinator-HA" class="anchor-icon" translate="no">
@@ -55,7 +55,22 @@ title: 协调器 HA
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="With-Helm" class="common-anchor-header">使用 Helm</h3><p>要启动多个协调器并让它们以主动-备用模式工作，应在<code translate="no">values.yaml</code> 文件中做出以下更改。</p>
+    </button></h2><h3 id="With-Helm" class="common-anchor-header">使用 Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要启动多个协调器并让它们以主动-备用模式工作，应在<code translate="no">values.yaml</code> 文件中做出以下更改。</p>
 <ul>
 <li>将<code translate="no">xxxCoordinator.replicas</code> 设置为<code translate="no">2</code> 。</li>
 <li>将<code translate="no">xxxCoordinator.activeStandby.enabled</code> 设置为<code translate="no">true</code> 。</li>
@@ -77,7 +92,22 @@ title: 协调器 HA
   <span class="hljs-attr">activeStandby:</span>
     <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>  <span class="hljs-comment"># Set this to true to have RootCoordinators work in active-standby mode.</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="With-Docker" class="common-anchor-header">使用 Docker</h3><p>要启动多个协调器并让它们在主动-备用模式下工作，可以在用于启动 Milvus 集群的<code translate="no">docker-compose</code> 文件中添加一些定义。</p>
+<h3 id="With-Docker" class="common-anchor-header">使用 Docker<button data-href="#With-Docker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要启动多个协调器并让它们在主动-备用模式下工作，可以在用于启动 Milvus 集群的<code translate="no">docker-compose</code> 文件中添加一些定义。</p>
 <p>下面的代码片段以 RootCoord 为例。其他类型的协调器也可以这样做。</p>
 <pre><code translate="no" class="language-yaml">  <span class="hljs-attr">rootcoord:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
@@ -112,7 +142,22 @@ title: 协调器 HA
 <span class="hljs-comment">#      - &quot;pulsar&quot;</span>
 <span class="hljs-comment">#      - &quot;minio&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="With-MacLinux-shell" class="common-anchor-header">使用 Mac/Linux shell</h3><p>要启动多个协调器，并让它们以活动-待机模式工作，你可以</p>
+<h3 id="With-MacLinux-shell" class="common-anchor-header">使用 Mac/Linux shell<button data-href="#With-MacLinux-shell" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要启动多个协调器，并让它们以活动-待机模式工作，你可以</p>
 <ol>
 <li><p>下载 Milvus 源代码到本地硬盘，然后按如下方法<a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">从源代码启动 Milvus 集群</a>：</p>
 <pre><code translate="no" class="language-shell">sudo ./scripts/start_cluster.sh

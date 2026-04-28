@@ -43,9 +43,9 @@ summary: >-
 <p>Uno schema di raccolta ha una chiave primaria, un massimo di quattro campi vettoriali e diversi campi scalari. Il diagramma seguente illustra come mappare un articolo in un elenco di campi dello schema.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
    </span> <span class="img-wrapper"> <span>Progettazione dello schema</span> </span></p>
-<p>La progettazione del modello di dati di un sistema di ricerca comporta l'analisi delle esigenze aziendali e l'astrazione delle informazioni in un modello di dati espresso in forma di schema. Ad esempio, la ricerca di un testo deve essere "indicizzata" convertendo la stringa letterale in un vettore attraverso l'"embedding" e consentendo la ricerca vettoriale. Oltre a questo requisito essenziale, può essere necessario memorizzare altre proprietà, come la data di pubblicazione e l'autore. Questi metadati consentono di affinare le ricerche semantiche attraverso un filtro, restituendo solo i testi pubblicati dopo una data specifica o da un particolare autore. È anche possibile recuperare questi scalari con il testo principale per rendere il risultato della ricerca nell'applicazione. A ciascuno di essi deve essere assegnato un identificatore unico per organizzare questi pezzi di testo, espresso come un numero intero o una stringa. Questi elementi sono essenziali per ottenere una logica di ricerca sofisticata.</p>
+<p>La progettazione del modello di dati di un sistema di ricerca comporta l'analisi delle esigenze aziendali e l'astrazione delle informazioni in un modello di dati espresso in forma di schema. Ad esempio, la ricerca di un testo deve essere "indicizzata" convertendo la stringa letterale in un vettore attraverso l'"embedding" e consentendo la ricerca vettoriale. Oltre a questo requisito essenziale, può essere necessario memorizzare altre proprietà, come la data di pubblicazione e l'autore. Questi metadati consentono di affinare le ricerche semantiche attraverso un filtro, restituendo solo i testi pubblicati dopo una data specifica o da un particolare autore. È anche possibile recuperare questi scalari con il testo principale per rendere il risultato della ricerca nell'applicazione. A ciascuno di essi deve essere assegnato un identificatore univoco per organizzare questi pezzi di testo, espresso come un numero intero o una stringa. Questi elementi sono essenziali per ottenere una logica di ricerca sofisticata.</p>
 <p>Fare riferimento a <a href="/docs/it/schema-hands-on.md">Schema Design Hands-On</a> per capire come creare uno schema ben progettato.</p>
 <h2 id="Create-Schema​" class="common-anchor-header">Creare uno schema<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -203,7 +203,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<p>Il parametro <code translate="no">dim</code> nei frammenti di codice sopra riportati indica la dimensionalità degli embeddings vettoriali da contenere nel campo vettoriale. Il valore <code translate="no">FLOAT_VECTOR</code> indica che il campo vettoriale contiene un elenco di numeri fluttuanti a 32 bit, che di solito vengono utilizzati per rappresentare gli antilogaritmi.Inoltre, Milvus supporta anche i seguenti tipi di incorporazioni vettoriali.</p>
+<p>Il parametro <code translate="no">dim</code> nei frammenti di codice sopra riportati indica la dimensionalità degli embeddings vettoriali da contenere nel campo vettoriale. Il valore <code translate="no">FLOAT_VECTOR</code> indica che il campo vettoriale contiene un elenco di numeri fluttuanti a 32 bit, che di solito vengono usati per rappresentare gli antilogaritmi.Inoltre, Milvus supporta anche i seguenti tipi di incorporazioni vettoriali.</p>
 <ul>
 <li><p><code translate="no">FLOAT16_VECTOR</code></p>
 <p>Un campo vettoriale di questo tipo contiene un elenco di numeri flottanti a mezza precisione a 16 bit e di solito si applica a scenari di deep learning o di calcolo basato su GPU con limitazioni di memoria o di larghezza di banda.</p></li>
@@ -230,7 +230,22 @@ export schema=&quot;{​
         ></path>
       </svg>
     </button></h2><p>Nei casi più comuni, è possibile utilizzare campi scalari per memorizzare i metadati delle incorporazioni vettoriali memorizzate in Milvus e condurre ricerche ANN con filtraggio dei metadati per migliorare la correttezza dei risultati della ricerca. Milvus supporta diversi tipi di campi scalari, tra cui <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, Float, <strong>Double</strong>, <strong>Array</strong> e JSON.</p>
-<h3 id="Add-String-Fields​" class="common-anchor-header">Aggiungere campi stringa</h3><p>In Milvus è possibile utilizzare campi VarChar per memorizzare stringhe. Per ulteriori informazioni sul campo VarChar, consultare <a href="/docs/it/string.md">Campo stringa</a>.</p>
+<h3 id="Add-String-Fields​" class="common-anchor-header">Aggiungere campi stringa<button data-href="#Add-String-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In Milvus è possibile utilizzare campi VarChar per memorizzare stringhe. Per ulteriori informazioni sul campo VarChar, consultare <a href="/docs/it/string.md">Campo stringa</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -272,7 +287,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Number-Fields​" class="common-anchor-header">Aggiungere campi numerici</h3><p>I tipi di numeri supportati da Milvus sono <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code> e <code translate="no">Double</code>. Per ulteriori informazioni sui campi numerici, consultare <a href="/docs/it/number.md">Campo numerico</a>.</p>
+<h3 id="Add-Number-Fields​" class="common-anchor-header">Aggiungere campi numerici<button data-href="#Add-Number-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>I tipi di numeri supportati da Milvus sono <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code> e <code translate="no">Double</code>. Per ulteriori informazioni sui campi numerici, consultare <a href="/docs/it/number.md">Campo numerico</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -309,7 +339,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Boolean-Fields​" class="common-anchor-header">Aggiungere campi booleani</h3><p>Milvus supporta i campi booleani. I seguenti frammenti di codice mostrano come aggiungere un campo booleano.</p>
+<h3 id="Add-Boolean-Fields​" class="common-anchor-header">Aggiungere campi booleani<button data-href="#Add-Boolean-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus supporta i campi booleani. I seguenti frammenti di codice mostrano come aggiungere un campo booleano.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -347,7 +392,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-JSON-fields​" class="common-anchor-header">Aggiungere campi JSON</h3><p>Un campo JSON di solito memorizza dati JSON semistrutturati. Per maggiori informazioni sui campi JSON, fare riferimento a <a href="/docs/it/use-json-fields.md">Campo JSON</a>.</p>
+<h3 id="Add-JSON-fields​" class="common-anchor-header">Aggiungere campi JSON<button data-href="#Add-JSON-fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Un campo JSON di solito memorizza dati JSON semistrutturati. Per ulteriori informazioni sui campi JSON, consultare <a href="/docs/it/use-json-fields.md">Campo JSON</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -386,7 +446,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Array-Fields​" class="common-anchor-header">Aggiungere campi array</h3><p>Un campo array memorizza un elenco di elementi. I tipi di dati di tutti gli elementi di un campo array devono essere gli stessi. Per ulteriori informazioni sui campi array, consultare <a href="/docs/it/array_data_type.md">Campo array</a>.</p>
+<h3 id="Add-Array-Fields​" class="common-anchor-header">Aggiungere campi array<button data-href="#Add-Array-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Un campo array memorizza un elenco di elementi. I tipi di dati di tutti gli elementi di un campo array devono essere gli stessi. Per ulteriori informazioni sui campi array, consultare <a href="/docs/it/array_data_type.md">Campo array</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​

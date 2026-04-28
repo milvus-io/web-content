@@ -55,7 +55,7 @@ title: Recuperador de pesquisa híbrida Milvus
 <div class="alert note">
 <p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
 </div>
-<p>Vamos utilizar os modelos do OpenAI. Deve preparar as variáveis de ambiente <code translate="no">OPENAI_API_KEY</code> do <a href="https://platform.openai.com/docs/quickstart">OpenAI</a>.</p>
+<p>Iremos utilizar os modelos do OpenAI. Deve preparar as variáveis de ambiente <code translate="no">OPENAI_API_KEY</code> do <a href="https://platform.openai.com/docs/quickstart">OpenAI</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
@@ -64,7 +64,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Prepare alguns documentos de exemplo, que são resumos de histórias de ficção categorizados por tema ou género.</p>
+<p>Prepare alguns documentos de exemplo, que são resumos de histórias fictícias categorizadas por tema ou género.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
 docs = [
@@ -162,7 +162,7 @@ vectorstore = Milvus.from_documents(
 <li>Quando utilizar <code translate="no">BM25BuiltInFunction</code>, tenha em atenção que a pesquisa de texto integral está disponível no Milvus Standalone e no Milvus Distributed, mas não no Milvus Lite, embora esteja prevista a sua inclusão no futuro. Também estará disponível no Zilliz Cloud (Milvus totalmente gerido) em breve. Entre em contacto com <a href="mailto:support@zilliz.com">support@zilliz.com</a> para obter mais informações.</li>
 </ul>
 </div>
-<p>No código acima, definimos uma instância de <code translate="no">BM25BuiltInFunction</code> e passamos para o objeto <code translate="no">Milvus</code>. <code translate="no">BM25BuiltInFunction</code> é uma classe de wrapper leve para <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> em Milvus. Podemos utilizá-la com <code translate="no">OpenAIEmbeddings</code> para inicializar uma instância do armazenamento vetorial Milvus de pesquisa híbrida densa + esparsa.</p>
+<p>No código acima, definimos uma instância de <code translate="no">BM25BuiltInFunction</code> e a passamos para o objeto <code translate="no">Milvus</code>. <code translate="no">BM25BuiltInFunction</code> é uma classe de wrapper leve para <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> em Milvus. Podemos utilizá-la com <code translate="no">OpenAIEmbeddings</code> para inicializar uma instância de armazenamento de vectores Milvus de pesquisa híbrida densa + esparsa.</p>
 <p><code translate="no">BM25BuiltInFunction</code> O Milvus não requer que o cliente passe corpus ou treino, todos são processados automaticamente no servidor Milvus, pelo que os utilizadores não precisam de se preocupar com qualquer vocabulário e corpus. Além disso, os utilizadores também podem personalizar o <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">analisador</a> para implementar o processamento de texto personalizado no BM25.</p>
 <p>Para mais informações sobre <code translate="no">BM25BuiltInFunction</code>, consulte <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Full-Text-Search</a> e <a href="https://milvus.io/docs/full_text_search_with_langchain.md">Using Full-Text Search with LangChain and Milvus</a>.</p>
 <h3 id="Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="common-anchor-header">Opção 2: Utilizar a incorporação esparsa densa e personalizada da LangChain<button data-href="#Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="anchor-icon" translate="no">
@@ -364,7 +364,7 @@ vectorstore.similarity_search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(metadata={'category': 'Heist/Thriller', 'pk': 454646931479252186}, page_content=&quot;In 'The Memory Thief' by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;)]
 </code></pre>
-<p>Se não passar quaisquer parâmetros sobre a classificação, a estratégia de classificação média ponderada é utilizada por defeito.</p>
+<p>Se não passar quaisquer parâmetros sobre a classificação, a estratégia de classificação média ponderada é utilizada por predefinição.</p>
 <h2 id="Using-Hybrid-Search-and-Reranking-in-RAG" class="common-anchor-header">Utilizar a pesquisa híbrida e a reclassificação no RAG<button data-href="#Using-Hybrid-Search-and-Reranking-in-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

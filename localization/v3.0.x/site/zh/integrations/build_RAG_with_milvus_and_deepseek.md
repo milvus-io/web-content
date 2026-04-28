@@ -20,7 +20,7 @@ title: 利用 Milvus 和 DeepSeek 构建 RAG
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_deepseek.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_deepseek.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p><a href="https://www.deepseek.com/">DeepSeek</a>使开发人员能够利用高性能语言模型构建和扩展人工智能应用。它为强大的推理和检索任务提供高效的推理、灵活的 API 和先进的专家混合物（MoE）架构。</p>
+<p><a href="https://www.deepseek.com/">DeepSeek</a>使开发人员能够利用高性能语言模型构建和扩展人工智能应用。它提供高效的推理、灵活的应用程序接口（API）和先进的专家混合物（MoE）架构，适用于强大的推理和检索任务。</p>
 <p>在本教程中，我们将向您展示如何使用 Milvus 和 DeepSeek 构建检索增强生成（RAG）管道。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -261,7 +261,7 @@ Creating embeddings: 100%|██████████| 72/72 [00:00&lt;00:00,
     </button></h3><p>让我们指定一个关于 Milvus 的常见问题。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在 Collections 中搜索该问题，并检索语义前 3 个匹配项。</p>
+<p>在 Collections 中搜索该问题并检索语义前 3 个匹配项。</p>
 <pre><code translate="no" class="language-python">search_res = milvus_client.search(
     collection_name=collection_name,
     data=embedding_model.encode_queries(

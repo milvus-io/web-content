@@ -203,7 +203,7 @@ fob.compute_similarity(..., backend=<span class="hljs-string">&quot;milvus&quot;
 <p>بدلاً من ذلك، يمكنك تهيئة FiftyOne بشكل دائم لاستخدام الواجهة الخلفية لـ Milvus عن طريق تعيين متغير البيئة التالي</p>
 <pre><code translate="no" class="language-shell">export FIFTYONE_BRAIN_DEFAULT_SIMILARITY_BACKEND=milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>أو عن طريق تعيين المعلمة <code translate="no">default_similarity_backend</code> من <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">تكوين الدماغ</a> الموجود في <code translate="no">~/.fiftyone/brain_config.json</code>:</p>
+<p>أو عن طريق تعيين المعلمة <code translate="no">default_similarity_backend</code> في <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">تكوين الدماغ</a> الموجود في <code translate="no">~/.fiftyone/brain_config.json</code>:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;default_similarity_backend&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;milvus&quot;</span>
 <span class="hljs-punctuation">}</span>

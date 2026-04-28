@@ -54,7 +54,7 @@ title: Настройка Milvus с помощью Helm Charts
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">Загрузите файл</a> <code translate="no">values.yaml</code> напрямую или с помощью следующей команды.</p>
+    </button></h3><p><a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">Загрузите файл</a> <code translate="no">values.yaml</code> напрямую или с помощью следующей команды.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">Изменение файла конфигурации<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
@@ -72,7 +72,7 @@ title: Настройка Milvus с помощью Helm Charts
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Настройте экземпляр Milvus в соответствии с вашими сценариями применения, изменив соответствующие параметры в файле <code translate="no">values.yaml</code>.</p>
+    </button></h3><p>Настройте экземпляр Milvus в соответствии с вашими сценариями применения, изменив соответствующие параметры в <code translate="no">values.yaml</code>.</p>
 <p>В частности, найдите <code translate="no">extraConfigFiles</code> в <code translate="no">values.yaml</code> и поместите свои конфигурации в этот раздел следующим образом:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Extra configs for milvus.yaml</span>
 <span class="hljs-comment"># If set, this config will merge into milvus.yaml</span>
@@ -126,7 +126,6 @@ title: Настройка Milvus с помощью Helm Charts
             <li><a href="/docs/ru/configure_indexcoord.md">Индексный коорд</a></li>
             <li><a href="/docs/ru/configure_metastore.md">Метахранилище</a></li>
             <li><a href="/docs/ru/configure_mq.md">Очередь сообщений</a></li>
-            <li><a href="/docs/ru/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/ru/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/ru/configure_trace.md">Трассировка</a></li>
             <li><a href="/docs/ru/configure_quotaandlimits.md">Квоты и лимиты</a></li>
@@ -161,7 +160,7 @@ title: Настройка Milvus с помощью Helm Charts
     </td>
   </tr>
   <tr>
-    <td>Данные и метаданные</td>
+    <td>Данные и мета</td>
     <td>
         <ul>
             <li><a href="/docs/ru/configure_common.md#commonretentionDuration"><code translate="no">common.retentionDuration</code></a></li>

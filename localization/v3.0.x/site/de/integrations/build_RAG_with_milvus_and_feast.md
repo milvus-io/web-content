@@ -33,7 +33,7 @@ title: RAG mit Milvus und Feast aufbauen
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>In diesem Tutorial werden wir eine Retrieval-Augmented Generation (RAG) Pipeline mit <a href="https://github.com/feast-dev/feast">Feast</a> und <a href="https://milvus.io/">Milvus</a> aufbauen. Feast ist ein Open-Source-Feature-Store, der die Feature-Verwaltung für maschinelles Lernen vereinfacht und eine effiziente Speicherung und Abfrage strukturierter Daten sowohl für das Training als auch für Echtzeit-Inferenzen ermöglicht. Milvus ist eine hochleistungsfähige Vektordatenbank, die für eine schnelle Ähnlichkeitssuche entwickelt wurde und sich daher ideal für das Auffinden relevanter Dokumente in RAG-Workflows eignet.</p>
-<p>Im Wesentlichen werden wir Feast verwenden, um Dokumente und strukturierte Daten (d. h. Merkmale) in den Kontext eines LLM (Large Language Model) einzubringen, um eine RAG-Anwendung (Retrieval Augmented Generation) mit Milvus als Online-Vektor-Datenbank zu betreiben.</p>
+<p>Im Wesentlichen werden wir Feast verwenden, um Dokumente und strukturierte Daten (d.h. Merkmale) in den Kontext eines LLM (Large Language Model) einzubringen, um eine RAG-Anwendung (Retrieval Augmented Generation) mit Milvus als Online-Vektor-Datenbank zu betreiben.</p>
 <h1 id="Why-Feast" class="common-anchor-header">Warum Feast?<button data-href="#Why-Feast" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,9 +62,9 @@ title: RAG mit Milvus und Feast aufbauen
 </ol>
 <p>Wir werden:</p>
 <ol>
-<li>Einen lokalen Feature-Speicher mit einem <strong>Offline-Speicher in Form einer Parquet-Datei</strong> und einem <strong>Online-Speicher in Milvus</strong> einrichten.</li>
+<li>Einen lokalen Feature Store mit einem <strong>Offline-Speicher für Parquet-Dateien</strong> und einem <strong>Online-Speicher für Milvus</strong> einrichten.</li>
 <li>Schreiben/Materialisieren der Daten (d.h. der Feature-Werte) aus dem Offline-Speicher (einer Parquet-Datei) in den Online-Speicher (Milvus).</li>
-<li>Servieren der Merkmale mit dem Feast SDK und den Vektorsuchfunktionen von Milvus</li>
+<li>Bereitstellung der Merkmale mit Hilfe des Feast SDK und der Vektorsuchfunktionen von Milvus</li>
 <li>Einfügen des Dokuments in den Kontext des LLM, um Fragen zu beantworten</li>
 </ol>
 <div class="alert note">
@@ -85,10 +85,25 @@ title: RAG mit Milvus und Feast aufbauen
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies" class="common-anchor-header">Abhängigkeiten</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&#x27;feast[milvus]&#x27;</span> openai -U -q</span>
+    </button></h2><h3 id="Dependencies" class="common-anchor-header">Abhängigkeiten<button data-href="#Dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&#x27;feast[milvus]&#x27;</span> openai -U -q</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü Runtime" am oberen Rand des Bildschirms und wählen Sie Sitzung neu starten" aus dem Dropdown-Menü).</p>
+<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
 </div>
 <p>Wir werden OpenAI als unseren LLM-Anbieter verwenden. Sie können sich auf der offiziellen Website anmelden und den <a href="https://platform.openai.com/api-keys">OPENAI_API_KEY</a> als Umgebungsvariable vorbereiten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -124,7 +139,22 @@ llm_client = OpenAI(
 │── feature_store.yaml     <span class="hljs-comment"># Configures Milvus and feature store settings</span>
 │── test_workflow.py       <span class="hljs-comment"># Example workflow for Feast operations</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Key-Configuration-Files" class="common-anchor-header">Schlüsselkonfigurationsdateien</h3><h4 id="1-featurestoreyaml" class="common-anchor-header">1. feature_store.yaml</h4><p>Diese Datei konfiguriert die Infrastruktur des Feature Stores:</p>
+<h3 id="Key-Configuration-Files" class="common-anchor-header">Schlüsselkonfigurationsdateien<button data-href="#Key-Configuration-Files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="1-featurestoreyaml" class="common-anchor-header">1. feature_store.yaml</h4><p>Diese Datei konfiguriert die Infrastruktur des Feature Stores:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">project:</span> <span class="hljs-string">rag</span>
 <span class="hljs-attr">provider:</span> <span class="hljs-string">local</span>
 <span class="hljs-attr">registry:</span> <span class="hljs-string">data/registry.db</span>
@@ -158,7 +188,7 @@ llm_client = OpenAI(
 <li>Vorberechnete Einbettungen (384-dimensionale Vektoren)</li>
 <li>Zugehörige Metadaten wie Städtenamen und Bundesländer</li>
 </ul>
-<p>Diese Dateien arbeiten zusammen, um einen Merkmalspeicher zu erstellen, der die Vektorsuchfunktionen von Milvus mit der Merkmalsverwaltung von Feast kombiniert und so eine effiziente Suche nach relevanten Stadtinformationen für unsere RAG-Anwendung ermöglicht.</p>
+<p>Diese Dateien arbeiten zusammen, um einen Merkmalspeicher zu erstellen, der die Vektorsuchfunktionen von Milvus mit dem Merkmalsmanagement von Feast kombiniert und so ein effizientes Abrufen relevanter Stadtinformationen für unsere RAG-Anwendung ermöglicht.</p>
 <h2 id="Inspect-the-Data" class="common-anchor-header">Prüfen der Daten<button data-href="#Inspect-the-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -382,7 +412,7 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
       <td>New York, oft auch New York City oder einfach...</td>
       <td>New York, New York</td>
       <td>0.052114</td>
-      <td>New York, oft auch New York City oder einfach...</td>
+      <td>New York, oft auch New York City oder einfach nur...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -424,7 +454,22 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="common-anchor-header">1. Einbettung einer Abfrage mit PyTorch und Satztransformatoren</h3><p>Während der Inferenz (z.B. wenn ein Benutzer eine Chat-Nachricht absendet) müssen wir den Eingabetext einbetten. Dies kann man sich als eine Merkmalstransformation der Eingabedaten vorstellen. In diesem Beispiel werden wir dies mit einem kleinen Sentence Transformer von Hugging Face tun.</p>
+    </button></h2><h3 id="1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="common-anchor-header">1. Einbettung einer Abfrage mit PyTorch und Satztransformatoren<button data-href="#1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Während der Inferenz (z.B. wenn ein Benutzer eine Chat-Nachricht absendet) müssen wir den Eingabetext einbetten. Dies kann man sich als eine Merkmalstransformation der Eingabedaten vorstellen. In diesem Beispiel werden wir dies mit einem kleinen Sentence Transformer von Hugging Face tun.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> feast <span class="hljs-keyword">import</span> FeatureStore
@@ -460,7 +505,22 @@ MODEL = <span class="hljs-string">&quot;sentence-transformers/all-MiniLM-L6-v2&q
     sentence_embeddings = F.normalize(sentence_embeddings, p=<span class="hljs-number">2</span>, dim=<span class="hljs-number">1</span>)
     <span class="hljs-keyword">return</span> sentence_embeddings
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2. Abrufen von Echtzeit-Vektoren und Daten für die Online-Inferenz</h3><p>Sobald die Anfrage in eine Einbettung umgewandelt wurde, besteht der nächste Schritt darin, relevante Dokumente aus dem Vektorspeicher abzurufen. Zum Zeitpunkt der Inferenz nutzen wir die Vektorähnlichkeitssuche, um die relevantesten Dokumenteneinbettungen zu finden, die im Online-Feature-Store gespeichert sind, und zwar unter <code translate="no">retrieve_online_documents_v2()</code>. Diese Merkmalsvektoren können dann in den Kontext des LLM eingespeist werden.</p>
+<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2. Abrufen von Echtzeit-Vektoren und Daten für die Online-Inferenz<button data-href="#2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sobald die Anfrage in eine Einbettung umgewandelt wurde, besteht der nächste Schritt darin, relevante Dokumente aus dem Vektorspeicher abzurufen. Zum Zeitpunkt der Inferenz nutzen wir die Vektorähnlichkeitssuche, um die relevantesten Dokumenteneinbettungen zu finden, die im Online-Feature-Store gespeichert sind, und zwar unter <code translate="no">retrieve_online_documents_v2()</code>. Diese Merkmalsvektoren können dann in den Kontext des LLM eingespeist werden.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;Which city has the largest population in New York?&quot;</span>
 
 tokenizer = AutoTokenizer.from_pretrained(TOKENIZER)
@@ -539,7 +599,22 @@ display(context_data)
   </tbody>
 </table>
 </div>
-<h3 id="3-Formatting-Retrieved-Documents-for-RAG-Context" class="common-anchor-header">3. Formatierung der abgerufenen Dokumente für den RAG-Kontext</h3><p>Nach dem Abrufen relevanter Dokumente müssen wir die Daten in einen strukturierten Kontext formatieren, der in nachgelagerten Anwendungen effizient genutzt werden kann. Dieser Schritt stellt sicher, dass die extrahierten Informationen sauber, organisiert und bereit für die Integration in die RAG-Pipeline sind.</p>
+<h3 id="3-Formatting-Retrieved-Documents-for-RAG-Context" class="common-anchor-header">3. Formatierung der abgerufenen Dokumente für den RAG-Kontext<button data-href="#3-Formatting-Retrieved-Documents-for-RAG-Context" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nach dem Abrufen relevanter Dokumente müssen wir die Daten in einen strukturierten Kontext formatieren, der in nachgelagerten Anwendungen effizient genutzt werden kann. Dieser Schritt stellt sicher, dass die extrahierten Informationen sauber, organisiert und bereit für die Integration in die RAG-Pipeline sind.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">format_documents</span>(<span class="hljs-params">context_df</span>):
     output_context = <span class="hljs-string">&quot;&quot;</span>
     unique_documents = context_df.drop_duplicates().apply(
@@ -566,7 +641,22 @@ New York City traces its origins to Fort Amsterdam and a trading post founded on
 Anchored by Wall Street in the Financial District of Lower Manhattan, New York City has been called both the world's premier financial and fintech center and the most economically powerful city in the world. As of 2022, the New York metropolitan area is the largest metropolitan economy in the world with a gross metropolitan product of over US$2.16 trillion. If the New York metropolitan area were its own country, it would have the tenth-largest economy in the world. The city is home to the world's two largest stock exchanges by market capitalization of their listed companies: the New York Stock Exchange and Nasdaq. New York City is an established safe haven for global investors. As of 2023, New York City is the most expensive city in the world for expatriates to live. New York City is home to the highest number of billionaires, individuals of ultra-high net worth (greater than US$30 million), and millionaires of any city in the world.}
 ****END DOCUMENT 0****
 </code></pre>
-<h3 id="4-Generating-Responses-Using-Retrieved-Context" class="common-anchor-header">4. Generierung von Antworten unter Verwendung des abgerufenen Kontexts</h3><p>Nachdem wir nun die abgerufenen Dokumente formatiert haben, können wir sie in eine strukturierte Eingabeaufforderung für die Generierung von Antworten integrieren. Dieser Schritt stellt sicher, dass sich der Assistent nur auf die abgerufenen Informationen stützt und keine falschen Antworten erzeugt.</p>
+<h3 id="4-Generating-Responses-Using-Retrieved-Context" class="common-anchor-header">4. Generierung von Antworten unter Verwendung des abgerufenen Kontexts<button data-href="#4-Generating-Responses-Using-Retrieved-Context" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nachdem wir nun die abgerufenen Dokumente formatiert haben, können wir sie in eine strukturierte Eingabeaufforderung für die Generierung von Antworten integrieren. Dieser Schritt stellt sicher, dass sich der Assistent nur auf die abgerufenen Informationen stützt und keine falschen Antworten erzeugt.</p>
 <pre><code translate="no" class="language-python">FULL_PROMPT = <span class="hljs-string">f&quot;&quot;&quot;
 You are an assistant for answering questions about states. You will be provided documentation from Wikipedia. Provide a conversational answer.
 If you don&#x27;t know the answer, just say &quot;I do not know.&quot; Don&#x27;t make up an answer.

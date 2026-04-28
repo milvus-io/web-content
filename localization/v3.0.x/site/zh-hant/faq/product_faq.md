@@ -20,7 +20,7 @@ title: 產品常見問題
       </svg>
     </button></h1><h4 id="How-much-does-Milvus-cost" class="common-anchor-header">Milvus 的成本是多少？</h4><p>Milvus 是一個 100% 免費的開源專案。</p>
 <p>當使用 Milvus 作生產或發行用途時，請遵守<a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>。</p>
-<p>Milvus 背後的公司 Zilliz 也提供完全管理雲端版本的平台，給那些不想建立和維護自己的分散式實例的人。<a href="https://zilliz.com/cloud">Zilliz Cloud</a>會自動維護資料的可靠性，並允許使用者只需為他們所使用的付費。</p>
+<p>Milvus 背後的公司 Zilliz 也提供完全管理雲端版本的平台，給那些不想建立和維護自己的分散式實例的人。<a href="https://zilliz.com/cloud">Zilliz Cloud</a>可自動維護資料的可靠性，並允許使用者只需為他們所使用的資料付費。</p>
 <h4 id="Does-Milvus-support-non-x86-architectures" class="common-anchor-header">Milvus 支援非 x86 架構嗎？</h4><p>是的，Milvus 同時支援 x86 和 ARM 架構。ARM64 支援透過多種部署選項提供，包括 Docker 映像檔、RPM/DEB 套件和 Milvus Lite。</p>
 <p>對於 x86 平台，您的 CPU 應支援下列其中一種指令集，以獲得最佳效能：SSE4.2、AVX、AVX2、AVX512。對於 ARM 平台，Milvus 可以在基於 ARM64 的處理器上執行，包括 Apple M1/M2 晶片和其他 ARM64 系統。</p>
 <h4 id="Where-does-Milvus-store-data" class="common-anchor-header">Milvus 在哪裡儲存資料？</h4><p>Milvus 處理兩種類型的資料，插入資料和元資料。</p>
@@ -44,7 +44,7 @@ title: 產品常見問題
 <h4 id="How-are-the-FLAT-and-IVFFLAT-indexes-different" class="common-anchor-header">FLAT 和 IVF_FLAT 索引有什麼不同？</h4><p>IVF_FLAT 索引將向量空間分為列表簇。在預設的列表值為 16,384 時，Milvus 會比較目標向量與所有 16,384 個簇的中心點之間的距離，以回傳探針最近的簇。接著，Milvus 會比較目標向量和選取的叢集中向量之間的距離，以得到最近的向量。與 IVF_FLAT 不同，FLAT 直接比較目標向量與其他向量之間的距離。</p>
 <p>當向量的總數大約等於 nlist 時，IVF_FLAT 和 FLAT 在計算需求和搜尋效能上的距離不大。然而，當向量的數量超過 nlist 的兩倍以上時，IVF_FLAT 就開始展現出效能優勢。</p>
 <p>更多資訊請參閱<a href="/docs/zh-hant/index.md">向量索引</a>。</p>
-<h4 id="How-does-Milvus-flush-data" class="common-anchor-header">Milvus 如何刷新資料？</h4><p>當插入的資料被攝取到訊息佇列時，Milvus 會返回成功。然而，資料尚未刷新到磁碟。然後 Milvus 的資料節點會將訊息佇列中的資料以增量日誌的方式寫入持久性儲存空間。如果呼叫<code translate="no">flush()</code> ，資料節點就會被強制立即將訊息佇列中的所有資料寫入持久性儲存空間。</p>
+<h4 id="How-does-Milvus-flush-data" class="common-anchor-header">Milvus 如何刷新資料？</h4><p>當插入的資料被攝取到訊息佇列時，Milvus 會返回成功。然而，資料尚未刷新到磁碟。然後 Milvus 的資料節點會將訊息佇列中的資料以增量日誌的方式寫入持久性儲存空間。如果呼叫<code translate="no">flush()</code> ，資料節點會被強制立即將訊息佇列中的所有資料寫入持久性儲存空間。</p>
 <h4 id="What-is-normalization-Why-is-normalization-needed" class="common-anchor-header">什麼是規範化？為什麼需要規範化？</h4><p>規範化是指轉換向量使其規範等於 1 的過程。如果使用內積來計算向量相似性，向量就必須歸一化。歸一化之後，內積等於余弦相似度。</p>
 <p>更多資訊請參閱<a href="https://en.wikipedia.org/wiki/Unit_vector">維基百科</a>。</p>
 <h4 id="Why-do-Euclidean-distance-L2-and-inner-product-IP-return-different-results" class="common-anchor-header">為什麼 Euclidean distance (L2) 和 inner product (IP) 會傳回不同的結果？</h4><p>對於規範化向量，歐氏距離 (L2) 在數學上等於內乘積 (IP)。如果這些相似度指標返回不同的結果，請檢查您的向量是否已歸一化</p>
@@ -69,7 +69,7 @@ title: 產品常見問題
 <h4 id="How-does-Milvus-handle-vector-data-types-and-precision" class="common-anchor-header">Milvus 如何處理向量資料類型和精確度？</h4><p>Milvus 支援二進位、Float32、Float16 和 BFloat16 向量類型。</p>
 <ul>
 <li>二進位向量：以 0 和 1 的序列儲存二進位資料，用於影像處理和資訊檢索。</li>
-<li>Float32 向量：預設的儲存精確度約為十進位的 7 位數。即使是 Float64 值，也是以 Float32 精度儲存，可能會在檢索時造成精確度損失。</li>
+<li>Float32 向量：預設的儲存精確度約為十進位的 7 位數。即使是 Float64 值，也是以 Float32 精度儲存，可能會在檢索時造成精確度的損失。</li>
 <li>Float16 和 BFloat16 向量：提供較低的精確度和記憶體使用量。Float16 適用於頻寬和儲存空間有限的應用程式，而 BFloat16 則平衡了範圍和效率，常用於深度學習，以降低計算需求，而不會顯著影響精確度。</li>
 </ul>
 <h4 id="Does-Milvus-support-specifying-default-values-for-scalar-or-vector-fields" class="common-anchor-header">Milvus 是否支援指定標量或向量欄位的預設值？</h4><p>目前，Milvus 2.4.x 不支援指定標量或向量欄位的預設值。此功能將在未來的版本中提供。</p>
@@ -80,7 +80,7 @@ title: 產品常見問題
 </ul>
 <h4 id="Can-I-see-inserted-deleted-or-upserted-data-immediately-after-the-operation-without-waiting-for-a-flush" class="common-anchor-header">我可以在操作後立即看到插入、刪除或上插的資料而不需要等待刷新嗎？</h4><p>可以，在 Milvus 中，由於其儲存-運算分解架構，資料可讀性與刷新作業沒有直接關聯。您可以使用一致性層級管理資料的可讀性。</p>
 <p>選擇一致性等級時，請考慮一致性與效能之間的權衡。對於需要立即可見性的作業，請使用「強」一致性層級。若要加快寫入速度，請優先使用較弱的一致性 (資料可能無法立即可見)。如需詳細資訊，請參閱<a href="/docs/zh-hant/tune_consistency.md">一致性</a>。</p>
-<h4 id="After-enabling-the-partition-key-feature-what-is-the-default-value-of-numpartitions-in-Milvus-and-why" class="common-anchor-header">啟用分割區金鑰功能後，Milvus 中<code translate="no">num_partitions</code> 的預設值是多少，為什麼？</h4><p>啟用分割區金鑰功能後，Milvus 中<code translate="no">num_partitions</code> 的預設值設定為<code translate="no">16</code> 。 選擇此預設值是基於穩定性和效能原因。您可以根據需要調整<code translate="no">num_partitions</code> 值，方法是在<code translate="no">create_collection</code> 函式中指定該值。</p>
+<h4 id="After-enabling-the-partition-key-feature-what-is-the-default-value-of-numpartitions-in-Milvus-and-why" class="common-anchor-header">啟用分割區金鑰功能後，Milvus 中<code translate="no">num_partitions</code> 的預設值是多少，為什麼？</h4><p>啟用磁碟分割按鍵功能後，Milvus 中<code translate="no">num_partitions</code> 的預設值設定為<code translate="no">16</code> 。選擇此預設值是基於穩定性和效能原因。您可以根據需要調整<code translate="no">num_partitions</code> 值，方法是在<code translate="no">create_collection</code> 函式中指定該值。</p>
 <h4 id="Is-there-a-maximum-length-limit-for-scalar-filtering-expressions" class="common-anchor-header">標量篩選表達式有最大長度限制嗎？</h4><p>有，標量過濾表達式的最大長度受 RPC 傳輸限制的約束，該限制在<code translate="no">milvus.yaml</code> 配置檔中定義。具體來說，該限制由代理部分下的<code translate="no">serverMaxRecvSize</code> 參數設定：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">grpc:</span>
@@ -93,7 +93,7 @@ title: 產品常見問題
     <span class="hljs-attr">serverMaxRecvSize:</span> <span class="hljs-number">67108864</span> <span class="hljs-comment"># The maximum size of each RPC request that the proxy can receive, unit: byte</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>預設情況下，每個 RPC 請求的最大大小為 64MB。因此，輸入向量的總大小（包括其尺寸資料和元資料）必須小於此限制，才能確保成功執行。</p>
-<h4 id="How-can-I-get-all-the-unique-value-of-a-given-scalar-field-from-a-collection" class="common-anchor-header">如何從集合中取得指定標量欄位的所有唯一值？</h4><p>目前，沒有直接的方法可以達成此目的。我們建議使用 query_iterator 來擷取特定欄位的所有值，然後再手動執行重複資料刪除。我們計劃在 Milvus 2.6 中增加對這個功能的直接支援。使用 query_iterator 的範例：</p>
+<h4 id="How-can-I-get-all-the-unique-value-of-a-given-scalar-field-from-a-collection" class="common-anchor-header">如何從集合中取得指定標量欄位的所有唯一值？</h4><p>目前，沒有直接的方法可以達成此目的。我們建議使用 query_iterator 來擷取特定欄位的所有值，然後再手動執行重複資料刪除。我們計劃在 Milvus 2.6 中增加對這項功能的直接支援。使用 query_iterator 的範例：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># set up iterator</span>
 iterator = client.query_iterator(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,

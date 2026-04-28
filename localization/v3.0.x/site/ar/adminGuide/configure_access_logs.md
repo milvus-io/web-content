@@ -21,7 +21,7 @@ title: تكوين سجلات الوصول
 <p>يوفر هذا الدليل إرشادات مفصلة حول تكوين سجلات الوصول في ملفوس.</p>
 <p>يعتمد تكوين سجلات الوصول على طريقة تثبيت ميلفوس:</p>
 <ul>
-<li><strong>تثبيت Helm</strong>: التهيئة في <code translate="no">values.yaml</code>. لمزيد من المعلومات، راجع <a href="/docs/ar/configure-helm.md">تكوين Milvus مع مخططات Helm</a>.</li>
+<li><strong>تثبيت Helm</strong>: التكوين في <code translate="no">values.yaml</code>. لمزيد من المعلومات، راجع <a href="/docs/ar/configure-helm.md">تكوين Milvus مع مخططات Helm</a>.</li>
 <li><strong>تثبيت Docker</strong>: التهيئة في <code translate="no">milvus.yaml</code>. للمزيد من المعلومات، راجع <a href="/docs/ar/configure-docker.md">تكوين Milvus مع Docker Compose</a>.</li>
 <li><strong>تثبيت المشغل</strong>: تعديل <code translate="no">spec.components</code> في ملف التكوين. لمزيد من المعلومات، راجع <a href="/docs/ar/configure_operator.md">تكوين Milvus مع مشغل Milvus</a>.</li>
 </ul>
@@ -46,7 +46,22 @@ title: تكوين سجلات الوصول
 <li><strong>التكوين لملفات سجلات الوصول المحلية</strong>: لتخزين السجلات محلياً.</li>
 <li><strong>تكوين لتحميل سجلات الوصول المحلية إلى MinIO</strong>: للتخزين السحابي والنسخ الاحتياطي.</li>
 </ul>
-<h3 id="Base-config" class="common-anchor-header">التكوين الأساسي</h3><p>يتضمن التكوين الأساسي تمكين سجلات الوصول وتحديد اسم ملف السجل أو استخدام stdout.</p>
+<h3 id="Base-config" class="common-anchor-header">التكوين الأساسي<button data-href="#Base-config" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يتضمن التكوين الأساسي تمكين سجلات الوصول وتحديد اسم ملف السجل أو استخدام stdout.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -58,7 +73,22 @@ title: تكوين سجلات الوصول
 <li><code translate="no">proxy.accessLog.enable</code>: ما إذا كنت تريد تمكين ميزة سجل الوصول. الإعداد الافتراضي إلى <strong>خطأ</strong>.</li>
 <li><code translate="no">proxy.accessLog.filename</code>: اسم ملف سجل الوصول. إذا تركت هذه المعلمة فارغة، ستتم طباعة سجلات الوصول إلى stdout.</li>
 </ul>
-<h3 id="Config-for-local-access-log-files" class="common-anchor-header">تكوين ملفات سجلات الوصول المحلية</h3><p>تكوين التخزين المحلي لملفات سجلات الوصول مع معلمات تتضمن مسار الملف المحلي، وحجم الملف، والفاصل الزمني للتناوب:</p>
+<h3 id="Config-for-local-access-log-files" class="common-anchor-header">تكوين ملفات سجلات الوصول المحلية<button data-href="#Config-for-local-access-log-files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تكوين التخزين المحلي لملفات سجلات الوصول مع معلمات تتضمن مسار الملف المحلي، وحجم الملف، والفاصل الزمني للتناوب:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -76,7 +106,22 @@ title: تكوين سجلات الوصول
 <li><code translate="no">proxy.accessLog.rotatedTime</code>: الحد الأقصى للفاصل الزمني بالثواني المسموح به لتدوير ملف سجل وصول واحد. عند الوصول إلى الفاصل الزمني المحدد، يتم تشغيل عملية تدوير، مما يؤدي إلى إنشاء ملف سجل وصول جديد وإغلاق الملف السابق.</li>
 <li><code translate="no">proxy.accessLog.maxBackups</code>: الحد الأقصى لعدد ملفات سجلات الوصول المختومة التي يمكن الاحتفاظ بها. إذا تجاوز عدد ملفات سجلات الوصول المختومة هذا الحد، فسيتم حذف أقدمها.</li>
 </ul>
-<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">تكوين لتحميل ملفات سجل الوصول المحلي إلى MinIO</h3><p>قم بتمكين الإعدادات وتكوينها لتحميل ملفات سجل الوصول المحلي إلى MinIO:</p>
+<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">تكوين لتحميل ملفات سجل الوصول المحلي إلى MinIO<button data-href="#Config-for-uploading-local-access-log-files-to-MinIO" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قم بتمكين الإعدادات وتكوينها لتحميل ملفات سجل الوصول المحلي إلى MinIO:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>

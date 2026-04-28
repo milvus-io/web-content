@@ -195,7 +195,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">"false"</code></p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Параметры поиска, специфичные для индекса<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+<h3 id="Index-specific-search-params" class="common-anchor-header">Специфические для индекса параметры поиска<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

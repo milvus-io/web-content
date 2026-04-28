@@ -95,7 +95,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 os.environ[<span class="hljs-string">&quot;AWS_SECRET_ACCESS_KEY&quot;</span>] = <span class="hljs-string">&quot;your-aws-secret-access-key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li><strong>S3 Bucket y Documento</strong>: Especifique el nombre del bucket y el nombre del documento como argumentos de la clase <code translate="no">S3FileLoader</code>.</li>
+<li><strong>S3 Bucket y Document</strong>: Especifique el nombre del bucket y el nombre del documento como argumentos de la clase <code translate="no">S3FileLoader</code>.</li>
 </ol>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_community.document_loaders <span class="hljs-keyword">import</span> S3FileLoader
 
@@ -176,8 +176,8 @@ vectorstore = Milvus.from_documents(
 <p>Para el <code translate="no">connection_args</code>:</p>
 <ul>
 <li><p>Establecer el <code translate="no">uri</code> como un archivo local, por ejemplo<code translate="no">./milvus.db</code>, es el método más conveniente, ya que utiliza automáticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> para almacenar todos los datos en este archivo.</p></li>
-<li><p>Si tiene una gran escala de datos, puede configurar un servidor Milvus más eficiente en <a href="https://milvus.io/docs/quickstart.md">docker o kubernetes</a>. En esta configuración, por favor utilice la uri del servidor, por ejemplo<code translate="no">http://localhost:19530</code>, como su <code translate="no">uri</code>.</p></li>
-<li><p>Si desea utilizar <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, el servicio en la nube totalmente gestionado para Milvus, por favor ajuste los <code translate="no">uri</code> y <code translate="no">token</code>, que corresponden al <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint y a la Api key</a> en Zilliz Cloud.</p></li>
+<li><p>Si tiene una gran escala de datos, puede configurar un servidor Milvus de mayor rendimiento en <a href="https://milvus.io/docs/quickstart.md">docker o kubernetes</a>. En esta configuración, por favor utilice la uri del servidor, por ejemplo<code translate="no">http://localhost:19530</code>, como su <code translate="no">uri</code>.</p></li>
+<li><p>Si desea utilizar <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, el servicio en la nube totalmente gestionado para Milvus, por favor ajuste el <code translate="no">uri</code> y <code translate="no">token</code>, que corresponden al <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint y a la Api key</a> en Zilliz Cloud.</p></li>
 </ul>
 </div>
 <p>Busque los documentos en el almacén vectorial de Milvus utilizando una pregunta de consulta de prueba. Echemos un vistazo al primer documento.</p>

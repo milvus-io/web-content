@@ -28,7 +28,7 @@ title: بناء RAG مع Milvus و Crawl4AI
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_crawl4ai.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>يوفّر<a href="https://crawl4ai.com/mkdocs/">Crawl4AI</a> زحفًا فائق السرعة وجاهزًا للذكاء الاصطناعي على الويب من أجل الآلات ذات المسؤولية المحدودة. وهو مفتوح المصدر ومحسّن لـ RAG، ويسهّل عملية الكشط مع الاستخراج المتقدم والأداء في الوقت الحقيقي.</p>
+<p>يوفّر<a href="https://crawl4ai.com/mkdocs/">Crawl4AI</a> زحفًا فائق السرعة وجاهزًا للذكاء الاصطناعي على الويب لـ LLMs. وهو مفتوح المصدر ومحسّن لـ RAG، ويسهّل عملية الكشط مع الاستخراج المتقدم والأداء في الوقت الحقيقي.</p>
 <p>في هذا البرنامج التعليمي، سنوضح لك في هذا البرنامج التعليمي كيفية إنشاء خط أنابيب استرجاع-مُعزَّز (RAG) باستخدام Milvus و Crawl4AI. يدمج خط الأنابيب بين Crawl4AI لتصفح بيانات الويب، وMilvus لتخزين المتجهات، وOpenAI لتوليد استجابات ثاقبة مدركة للسياق.</p>
 <h2 id="Preparation" class="common-anchor-header">الإعداد<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"

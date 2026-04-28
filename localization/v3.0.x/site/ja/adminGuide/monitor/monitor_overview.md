@@ -42,17 +42,62 @@ summary: PrometheusとGrafanaがMilvusでどのようにモニタリングとア
 <li>Prometheus監視インスタンスを効率的に管理するPrometheusオペレータ。</li>
 <li>Kube-prometheus: Kubernetesクラスタの監視をエンドツーエンドで簡単に操作できます。</li>
 </ul>
-<h3 id="Metric-names" class="common-anchor-header">メトリック名</h3><p>Prometheusで有効なメトリック名は、namespace、subsystem、nameの3つの要素を含んでいます。これら3つの要素は"_"で結ばれています。</p>
+<h3 id="Metric-names" class="common-anchor-header">メトリック名<button data-href="#Metric-names" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Prometheusで有効なメトリック名は、namespace、subsystem、nameの3つの要素を含んでいます。これら3つの要素は"_"で結ばれています。</p>
 <p>Prometheusが監視するMilvusメトリックの名前空間は "milvus "です。メトリクスが属する役割に応じて、そのサブシステムは以下の8つの役割のいずれかになります：「rootcoord"、"proxy"、"querycoord"、"querynode"、"indexcoord"、"indexnode"、"datacoord"、"datanode"。</p>
 <p>例えば、クエリされたベクトルの総数を計算するMilvusメトリックの名前は<code translate="no">milvus_proxy_search_vectors_count</code> 。</p>
-<h3 id="Metric-types" class="common-anchor-header">メトリックの種類</h3><p>Prometheus は、4 種類のメトリックをサポートしています：</p>
+<h3 id="Metric-types" class="common-anchor-header">メトリックの種類<button data-href="#Metric-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Prometheus は、4 種類のメトリックをサポートしています：</p>
 <ul>
 <li>カウンタ： 累積メトリクスの一種で、値が増加するか、再起動時にゼロにリセットされます。</li>
 <li>Gauge ： メ ト リ ッ ク の タ イ プで、 値が上向 く こ と も 下向 く こ と も で き ます。</li>
 <li>ヒストグラム：構成可能なバケットに基づいてカウントされるメトリクスのタイプ。一般的な例は、リクエストの持続時間です。</li>
 <li>サマリー（Summary）： ヒストグラムに似たメトリクスの一種で、スライディングする時間ウィンドウにわたって構成可能な分量を計算します。</li>
 </ul>
-<h3 id="Metric-labels" class="common-anchor-header">メトリクス・ラベル</h3><p>プロメテウスは、同じメトリック名のサンプルにラベルを付けて区別します。ラベルはメトリックの特定の属性です。同じ名前のメトリクスは、<code translate="no">variable_labels</code> フィールドに同じ値を持つ必要があります。以下の表は、Milvus メトリックの一般的なラベルの名前と意味を示しています。</p>
+<h3 id="Metric-labels" class="common-anchor-header">メトリクス・ラベル<button data-href="#Metric-labels" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>プロメテウスは、同じメトリック名のサンプルにラベルを付けて区別します。ラベルはメトリックの特定の属性です。同じ名前のメトリクスは、<code translate="no">variable_labels</code> フィールドに同じ値を持つ必要があります。以下の表は、Milvus メトリックの一般的なラベルの名前と意味を示しています。</p>
 <table>
 <thead>
 <tr><th>ラベル名</th><th>定義</th><th>値</th></tr>

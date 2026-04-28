@@ -55,7 +55,7 @@ title: Milvus 架構概述
         ></path>
       </svg>
     </button></h2><p>Milvus 遵循資料平面與控制平面分解的原則，包含四個主要層級，在可擴充性及災難復原方面相互獨立。這種共用儲存架構具有完全分解的儲存層與運算層，可讓運算節點進行水平擴充，同時將 Woodpecker 實作為零磁碟 WAL 層，以增加彈性並降低作業開銷。</p>
-<p>透過將串流處理分離為串流節點 (Streaming Node)，並將批次處理分離為查詢節點 (Query Node) 和資料節點 (Data Node)，Milvus 可在滿足即時處理需求的同時達到高效能。</p>
+<p>透過將串流處理分離為串流節點 (Streaming Node)，以及將批處理分離為查詢節點 (Query Node) 和資料節點 (Data Node)，Milvus 可在滿足即時處理需求的同時達到高效能。</p>
 <h2 id="Detailed-Layer-Architecture" class="common-anchor-header">詳細的層架構<button data-href="#Detailed-Layer-Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -243,7 +243,7 @@ title: Milvus 架構概述
       </svg>
     </button></h3><p>Write-Ahead Log (WAL) 儲存是分散式系統中資料耐久性與一致性的基礎。在提交任何變更之前，首先會將其記錄在日誌中，以確保在發生故障時，可以準確地恢復到之前的位置。</p>
 <p>常見的 WAL 實作包括 Kafka、Pulsar 和 Woodpecker。與傳統基於磁碟的解決方案不同，Woodpecker 採用雲原生、零磁碟設計，直接寫入物件儲存。這種方法可以毫不費力地根據您的需求進行擴展，並透過消除管理本機磁碟的開銷來簡化作業。</p>
-<p>透過提前記錄每次寫入作業，WAL 層可保證可靠的全系統復原與一致性機制 - 無論您的分散式環境如何複雜。</p>
+<p>透過提前記錄每次寫入作業，WAL 層可保證可靠、全系統的復原與一致性機制 - 無論您的分散式環境有多複雜。</p>
 <h2 id="Data-Flow-and-API-Categories" class="common-anchor-header">資料流程與 API 類別<button data-href="#Data-Flow-and-API-Categories" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -288,10 +288,10 @@ title: Milvus 架構概述
     </button></h3><ol>
 <li>用戶端透過 SDK/RESTful API 發送搜尋請求</li>
 <li>負載平衡器將請求路由至存取層中可用的代理伺服器</li>
-<li>代理使用路由快取記憶體決定目標節點；只有在快取記憶體不可用時才聯絡協調器</li>
+<li>代理使用路由快取來決定目標節點；只有在快取不可用時才聯絡協調器</li>
 <li>代理將請求轉發至適當的串流節點，然後與查詢節點協調進行密封資料搜尋，同時在本機執行成長中的資料搜尋</li>
 <li>查詢節點依需要從物件儲存載入封存區段，並執行區段層級搜尋</li>
-<li>搜尋結果進行多層次還原：查詢節點還原多個區段的結果，串流節點還原查詢節點的結果，代理還原所有串流節點的結果，然後再返回用戶端</li>
+<li>搜尋結果進行多層次還原：查詢節點還原多個區段的結果，串流節點還原查詢節點的結果，代理還原所有串流節點的結果，然後返回用戶端</li>
 </ol>
 <h3 id="Example-Data-Flow-Data-Insertion" class="common-anchor-header">資料流程範例：資料插入<button data-href="#Example-Data-Flow-Data-Insertion" class="anchor-icon" translate="no">
       <svg translate="no"

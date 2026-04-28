@@ -53,7 +53,7 @@ title: 安装支持 GPU 的 Milvus 的要求
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>用于 GPU 设备的英伟达<a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#linux-distributions">™</a>（NVIDIA®）驱动程序必须安装在某个<a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#linux-distributions">受支持的 Linux 发行版</a>上，并已按照<a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">本指南</a>安装了英伟达™（NVIDIA®）容器工具包。</p>
+    </button></h2><p>您的 GPU 设备的 NVIDIA 驱动程序必须安装在<a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#linux-distributions">受支持的 Linux 发行版</a>中，并已按照<a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">本指南</a>安装了 NVIDIA Container Toolkit。</p>
 <p>对于 Ubuntu 22.04 用户，可以使用以下命令安装驱动程序和容器工具包：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt install --no-install-recommends nvidia-headless-545 nvidia-utils-545</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -106,7 +106,22 @@ version:        545.29.06
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">如何在本地启动 K8s 集群进行测试？</h3><p>你可以使用<a href="https://minikube.sigs.k8s.io/docs/">minikube</a>、<a href="https://kind.sigs.k8s.io/">kind</a> 和<a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm</a> 等工具在本地快速建立 Kubernetes 集群。下面的步骤以 minikube 为例。</p>
+    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">如何在本地启动 K8s 集群进行测试？<button data-href="#How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>你可以使用<a href="https://minikube.sigs.k8s.io/docs/">minikube</a>、<a href="https://kind.sigs.k8s.io/">kind</a> 和<a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm</a> 等工具在本地快速建立 Kubernetes 集群。下面的步骤以 minikube 为例。</p>
 <ol>
 <li>下载 minikube</li>
 </ol>
@@ -125,7 +140,22 @@ version:        545.29.06
 <div class="alert note">
 <p>确保可以通过<code translate="no">kubectl</code> 访问 K8s 群集。如果本地未安装<code translate="no">kubectl</code> ，请参阅在<a href="https://minikube.sigs.k8s.io/docs/handbook/kubectl/">minikube 内使用 kubectl</a>。</p>
 </div>
-<h3 id="How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes" class="common-anchor-header">如何使用 GPU 工作节点启动 K8s 群集？</h3><p>如果你喜欢使用支持 GPU 的工作节点，可以按照以下步骤创建一个带有 GPU 工作节点的 K8s 集群。我们建议在带有 GPU 工作节点的 K8s 集群上安装 Milvus，并使用默认配置的存储类。</p>
+<h3 id="How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes" class="common-anchor-header">如何使用 GPU 工作节点启动 K8s 群集？<button data-href="#How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果你更喜欢使用支持 GPU 的工作节点，可以按照以下步骤创建一个带有 GPU 工作节点的 K8s 集群。我们建议在带有 GPU 工作节点的 K8s 集群上安装 Milvus，并使用默认配置的存储类。</p>
 <ol>
 <li>准备 GPU 工作节点</li>
 </ol>

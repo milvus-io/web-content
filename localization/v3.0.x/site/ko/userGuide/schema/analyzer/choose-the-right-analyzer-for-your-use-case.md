@@ -40,7 +40,7 @@ summary: 참고
 <p>분석기는 간단한 2단계 파이프라인으로 작동합니다:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
    </span> <span class="img-wrapper"> <span>분석기 워크플로</span> </span></p>
 <ol>
 <li><p><strong>토큰화(필수):</strong> 이 초기 단계에서는 <strong>토큰화기를</strong> 적용하여 연속적인 텍스트 문자열을 토큰이라는 의미 있는 개별 단위로 분리합니다. 토큰화 방법은 언어와 콘텐츠 유형에 따라 크게 달라질 수 있습니다.</p></li>
@@ -727,7 +727,7 @@ analyzer_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>일본어 사전 및 필터와 함께 <code translate="no">lindera</code> 토큰화기를 사용하여 구두점을 정리하고 토큰 길이를 조절하세요:</p>
+    </button></h3><p>일본어 사전 및 필터가 포함된 <code translate="no">lindera</code> 토큰화기를 사용하여 구두점을 정리하고 토큰 길이를 조절하세요:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>,

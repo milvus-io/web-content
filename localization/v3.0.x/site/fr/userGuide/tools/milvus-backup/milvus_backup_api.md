@@ -98,7 +98,7 @@ go build
     </button></h2><p>Vous pouvez ensuite démarrer le serveur API comme suit :</p>
 <pre><code translate="no" class="language-shell">./milvus-backup server
 <button class="copy-code-btn"></button></code></pre>
-<p>Par défaut, le serveur API écoute sur le port 8080. Vous pouvez le modifier en l'exécutant avec l'option <code translate="no">-p</code>. Pour démarrer le serveur API qui écoute sur le port 443, procédez comme suit :</p>
+<p>Par défaut, le serveur API écoute sur le port 8080. Vous pouvez le modifier en l'exécutant avec l'indicateur <code translate="no">-p</code>. Pour démarrer le serveur API qui écoute sur le port 443, procédez comme suit :</p>
 <pre><code translate="no" class="language-shell">./milvus-backup server -p 443
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous pouvez accéder à l'interface utilisateur Swagger en utilisant http://localhost :<port>/api/v1/docs/index.html.</p>

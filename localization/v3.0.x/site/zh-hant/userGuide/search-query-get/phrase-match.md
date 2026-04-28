@@ -1,11 +1,11 @@
 ---
 id: phrase-match.md
-title: 短語匹配Compatible with Milvus 2.6.x
+title: 短語匹配Compatible with Milvus 2.5.17+
 summary: >-
-  短語匹配可讓您搜尋包含完全相同的查詢字詞的文件。預設情況下，詞彙必須以相同順序出現，並且彼此直接相鄰。例如，查詢「機器人機器學習」會匹配類似「...典型的機器人機器學習模型...」的文字，其中「機器人」、「機器」和「學習」依序出現，而它們之間沒有其他字詞。
-beta: Milvus 2.6.x
+  短語匹配可讓您搜尋包含完全相同的查詢字詞的文件。預設情況下，詞彙必須以相同順序出現，且彼此直接相鄰。例如，查詢「機器人機器學習」會匹配類似「...典型的機器人機器學習模型...」的文字，其中「機器人」、「機器」和「學習」依序出現，而它們之間沒有其他字詞。
+beta: Milvus 2.5.17+
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">短語匹配<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">短語匹配<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,16 +40,16 @@ beta: Milvus 2.6.x
     </button></h2><p>短語匹配由<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>搜尋引擎函式庫提供，透過分析字詞在文件中的位置資訊來運作。下圖說明流程：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
    </span> <span class="img-wrapper"> <span>短語匹配工作流程</span> </span></p>
 <ol>
-<li><p><strong>文件標記化</strong>：當您插入文件到 Milvus 時，文本會使用分析器分割成標記（單個單詞或術語），並記錄每個標記的位置資訊。例如，<strong>doc_1</strong>被標記為<strong>["machine" (pos=0), "learning" (pos=1), "boosts" (pos=2), "efficiency" (pos=3)]</strong> 。有關分析器的詳細資訊，請參閱<a href="/docs/zh-hant/analyzer-overview.md">分析器概述</a>。</p></li>
+<li><p><strong>文件標記化</strong>：當您插入文件到 Milvus，文本會使用分析器分割成標記（單獨的字或詞），每個標記的位置信息都會被記錄下來。例如，<strong>doc_1</strong>被標記為<strong>["machine" (pos=0), "learning" (pos=1), "boosts" (pos=2), "efficiency" (pos=3)]</strong> 。有關分析器的詳細資訊，請參閱<a href="/docs/zh-hant/analyzer-overview.md">分析器概述</a>。</p></li>
 <li><p><strong>反向索引建立</strong>：Milvus 會建立反向索引，將每個符記映射到它出現的文件，以及符記在這些文件中的位置。</p></li>
 <li><p><strong>詞組匹配</strong>：當執行詞組查詢時，Milvus 在倒排索引中查找每個標記，並檢查它們的位置，以確定它們是否以正確的順序和相近程度出現。<code translate="no">slop</code> 參數控制匹配標記之間允許的最大位置數目：</p>
 <ul>
 <li><p><strong>slop = 0</strong>表示符號必須<strong>以完全相同的順序</strong>出現<strong>，並且緊鄰</strong>（即中間沒有額外的字）。</p>
 <ul>
-<li>在範例中，只有<strong>doc_1</strong>(<strong>"machine 「</strong>在<strong>pos=0</strong>，<strong>」learning "</strong>在<strong>pos=1</strong>)完全符合。</li>
+<li>在範例中，只有<strong>doc_1</strong>(<strong>「機器 」</strong>在<strong>位置=0</strong>，<strong>「學習 」</strong>在<strong>位置=1</strong>) 完全匹配。</li>
 </ul></li>
 <li><p><strong>slop = 2</strong>允許匹配字元之間最多兩個位置的彈性或重新排列。</p>
 <ul>
@@ -164,7 +164,7 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦您在收集模式中啟用了<code translate="no">VARCHAR</code> 欄位的匹配，您就可以使用<code translate="no">PHRASE_MATCH</code> 表達式執行短語匹配。</p>
+    </button></h2><p>一旦您在收集模式中為<code translate="no">VARCHAR</code> 欄位啟用匹配，您可以使用<code translate="no">PHRASE_MATCH</code> 表達式執行短語匹配。</p>
 <div class="alert note">
 <p><code translate="no">PHRASE_MATCH</code> 表達式不區分大小寫。您可以使用<code translate="no">PHRASE_MATCH</code> 或<code translate="no">phrase_match</code> 。</p>
 </div>
@@ -189,7 +189,7 @@ schema.add_field(
 <ul>
 <li><p><code translate="no">field_name</code><strong>:</strong>執行短語匹配的<code translate="no">VARCHAR</code> 欄位名稱。</p></li>
 <li><p><code translate="no">phrase</code><strong>:</strong>要搜尋的精確短語。</p></li>
-<li><p><code translate="no">slop</code> (可選）<strong>：</strong>一個整數，指定允許匹配字元的最大位置數。</p>
+<li><p><code translate="no">slop</code> (可選）<strong>：</strong>一個整數，指定允許在匹配字元中的最大位置數。</p>
 <ul>
 <li><p><code translate="no">0</code> (預設)：僅匹配精確短語。範例：<strong>"machine learning 「</strong>過濾器會完全匹配<strong>」machine learning「</strong>，但不會匹配<strong>」machine boosts learning 「</strong>或<strong>」learning machine"。</strong></p></li>
 <li><p><code translate="no">1</code>:允許輕微的變更，例如一個額外的詞彙或位置的輕微移動。例如：<strong>機器學習 「篩選</strong>條件會匹配<strong>」machine boosts learning"</strong>（<strong>"machine 「</strong>和<strong>」learning</strong> <strong>「</strong>之間有一個符號<strong>）</strong>，但不匹配<strong>」learning machine"</strong>（<strong>詞</strong>彙相反）。</p></li>
@@ -275,7 +275,7 @@ result = client.query(
      <td><p>「機器學習提升了大規模資料分析的效率」</p></td>
    </tr>
 </table>
-<p>只有文件 1 以指定的順序包含精確詞組<strong>"machine learning"，</strong>且沒有額外的標記。</p>
+<p>只有文件 1 以指定的順序包含精確短語<strong>"machine learning"，</strong>且沒有額外的標記。</p>
 <h3 id="Search-with-phrase-match" class="common-anchor-header">使用短語匹配進行搜尋<button data-href="#Search-with-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -291,7 +291,7 @@ result = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在搜尋作業中，<strong>PHRASE_MATCH</strong>用於在應用向量相似性排序之前篩選文件。這種兩步驟的方法首先透過文字匹配縮小候選集的範圍，然後再根據向量內嵌對這些候選項目重新排序。</p>
+    </button></h3><p>在搜尋作業中，<strong>PHRASE_MATCH</strong>用於在應用向量相似性排序之前篩選文件。這種兩步驟的方法首先透過文字匹配縮小候選集的範圍，然後再根據向量內嵌對這些候選集重新排序。</p>
 <h4 id="Example-slop--1" class="common-anchor-header">範例：斜率 = 1</h4><p>在此，我們允許 slop 為 1。此過<strong>濾器</strong>適用於包含短語<strong>「學習機器」</strong>的文件，略有彈性。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
 filter_slop1 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>

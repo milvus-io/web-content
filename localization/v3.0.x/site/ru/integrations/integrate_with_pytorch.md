@@ -67,7 +67,7 @@ gdown.download(url, output)
     zip_ref.extractall(<span class="hljs-string">&quot;./paintings&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Размер набора данных составляет 2,35 ГБ, а время, затраченное на его загрузку, зависит от состояния вашей сети.</p>
+<p>Размер набора данных составляет 2,35 ГБ, и время, затраченное на его загрузку, зависит от состояния вашей сети.</p>
 </div>
 <h2 id="Global-Arguments" class="common-anchor-header">Глобальные аргументы<button data-href="#Global-Arguments" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -295,5 +295,5 @@ plt.savefig(<span class="hljs-string">&#x27;search_result.png&#x27;</span>)
 <p>Результат поиска должен быть похож на следующий:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/integrate_with_pytorch.png" alt="Image search output" class="doc-image" id="image-search-output" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/integrate_with_pytorch.png" alt="Image search output" class="doc-image" id="image-search-output" />
    </span> <span class="img-wrapper"> <span>Результат поиска изображений</span> </span></p>

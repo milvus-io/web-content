@@ -87,7 +87,7 @@ metadata:
 EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Установите федеративные идентификационные полномочия между идентификатором и эмитентом и субъектом учетной записи службы.</li>
+<li>Установите федеративные учетные данные между идентификатором и эмитентом и субъектом учетной записи службы.</li>
 </ul>
 <pre><code translate="no" class="language-bash">az identity federated-credential create \
   --name <span class="hljs-string">&quot;kubernetes-federated-credential&quot;</span> \

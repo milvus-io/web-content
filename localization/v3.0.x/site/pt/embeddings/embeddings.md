@@ -43,7 +43,7 @@ title: Visão geral da incorporação
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/MistralAIEmbeddingFunction/MistralAIEmbeddingFunction.md">IA Mistral</a></td><td>Densa</td><td>API</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/NomicEmbeddingFunction/NomicEmbeddingFunction.md">Nomic</a></td><td>Densa</td><td>API</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/Model2VecEmbeddingFunction/Model2VecEmbeddingFunction.md">mGTE</a></td><td>Híbrida</td><td>De fonte aberta</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/Model2VecEmbeddingFunction/Model2VecEmbeddingFunction.md">Modelo2Vec</a></td><td>Híbrido</td><td>Com código aberto</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/Model2VecEmbeddingFunction/Model2VecEmbeddingFunction.md">Modelo2Vec</a></td><td>Híbrido</td><td>De fonte aberta</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/GeminiEmbeddingFunction/GeminiEmbeddingFunction.md">Gemini</a></td><td>Híbrido</td><td>Privado</td></tr>
 </tbody>
 </table>
@@ -95,7 +95,7 @@ embeddings = ef.encode_documents(docs)
       dtype=float32)]
 Dim: <span class="hljs-number">384</span> (<span class="hljs-number">384</span>,)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Example-2-Generate-dense-and-sparse-vectors-in-one-call-with-BGE-M3-model" class="common-anchor-header">Exemplo 2: Gerar vectores densos e esparsos numa única chamada com o modelo BGE M3<button data-href="#Example-2-Generate-dense-and-sparse-vectors-in-one-call-with-BGE-M3-model" class="anchor-icon" translate="no">
+<h2 id="Example-2-Generate-dense-and-sparse-vectors-in-one-call-with-BGE-M3-model" class="common-anchor-header">Exemplo 2: Gerar vectores densos e esparsos numa chamada com o modelo BGE M3<button data-href="#Example-2-Generate-dense-and-sparse-vectors-in-one-call-with-BGE-M3-model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

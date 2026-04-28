@@ -85,7 +85,7 @@ beta: Milvus 2.6.x
      <td><p>embed-multilingual-v2.0</p></td>
      <td><p>768</p></td>
      <td><p>256</p></td>
-     <td><p>Fornece classificação multilingue e suporte para incorporação. <a href="https://docs.cohere.com/docs/supported-languages">Veja os idiomas suportados aqui</a>.</p></td>
+     <td><p>Fornece classificação multilíngüe e suporte a incorporação. <a href="https://docs.cohere.com/docs/supported-languages">Veja os idiomas suportados aqui</a>.</p></td>
    </tr>
 </table>
 <p>Para obter detalhes, consulte <a href="https://docs.cohere.com/docs/cohere-embed">os modelos de incorporação do Cohere</a>.</p>
@@ -104,7 +104,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus precisa saber sua chave de API do Cohere para poder solicitar incorporações. O Milvus fornece dois métodos para configurar as credenciais:</p>
+    </button></h2><p>O Milvus precisa saber sua chave de API do Cohere antes de poder solicitar incorporações. O Milvus fornece dois métodos para configurar as credenciais:</p>
 <ul>
 <li><p><strong>Arquivo de configuração (recomendado):</strong> Armazene a chave de API em <code translate="no">milvus.yaml</code> para que cada reinicialização e nó a pegue automaticamente.</p></li>
 <li><p><strong>Variáveis de ambiente:</strong> Injetar a chave no momento da implantação - ideal para o Docker Compose.</p></li>
@@ -189,7 +189,7 @@ beta: Milvus 2.6.x
     <span class="hljs-comment"># Set the environment variable pointing to the OpenAI API key inside the container</span>
     <span class="hljs-attr">MILVUSAI_COHERE_API_KEY:</span> <span class="hljs-string">&lt;MILVUSAI_COHERE_API_KEY&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>O bloco <code translate="no">environment:</code> injeta a chave apenas no contêiner do Milvus, deixando o sistema operacional do host intocado. Para obter detalhes, consulte <a href="/docs/pt/configure-docker.md#Configure-Milvus-with-Docker-Compose">Configurar o Milvus com o Docker Compose</a>.</p>
+<p>O bloco <code translate="no">environment:</code> injeta a chave apenas no contêiner do Milvus, deixando o sistema operacional do host intacto. Para obter detalhes, consulte <a href="/docs/pt/configure-docker.md#Configure-Milvus-with-Docker-Compose">Configurar o Milvus com o Docker Compose</a>.</p>
 <h2 id="Use-embedding-function" class="common-anchor-header">Usar a função de incorporação<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

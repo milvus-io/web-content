@@ -110,7 +110,7 @@ title: Construire RAG avec Milvus et Crawl4AI
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">Préparer le LLM et le modèle d'intégration<button data-href="#Prepare-the-LLM-and-Embedding-Model" class="anchor-icon" translate="no">
+<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">Préparation du LLM et du modèle d'intégration<button data-href="#Prepare-the-LLM-and-Embedding-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

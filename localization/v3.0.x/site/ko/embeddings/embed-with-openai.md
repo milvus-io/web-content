@@ -42,7 +42,7 @@ openai_ef = model.dense.OpenAIEmbeddingFunction(
 <li><p><strong>base_url</strong><em>(문자열</em>)</p>
 <p>OpenAI API에 액세스하기 위한 기본 URL입니다. 기본값은 <strong>https://api.openai.com/v1</strong> 입니다. 그러나 다른 모델 제공업체의 호환 가능한 API 엔드포인트 또는 로컬 vLLM 인스턴스(예: http: <strong>//localhost:8080/v1</strong>)에 액세스하는 경우 여기에 URL을 지정할 수 있습니다.</p></li>
 <li><p><strong>차원</strong><em>(int</em>)</p>
-<p>결과 출력 임베딩에 있어야 하는 차원 수입니다. <strong>텍스트 임베딩 3</strong> 이상 모델에서만 지원됩니다.</p></li>
+<p>결과 출력 임베딩에 포함되어야 하는 차원 수입니다. <strong>텍스트 임베딩 3</strong> 이상 모델에서만 지원됩니다.</p></li>
 </ul>
 <p>문서에 대한 임베딩을 만들려면 <strong>encode_documents()</strong> 메서드를 사용합니다:</p>
 <pre><code translate="no" class="language-python">docs = [

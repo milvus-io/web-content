@@ -43,7 +43,7 @@ summary: >-
     </button></h2><p>Un vecteur peu dense est un vecteur spécial à haute dimension dans lequel la plupart des éléments sont nuls et seules quelques dimensions ont des valeurs non nulles. Comme le montre le diagramme ci-dessous, les vecteurs denses sont généralement représentés sous la forme de tableaux continus où chaque position a une valeur (par exemple, <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). En revanche, les vecteurs épars ne stockent que les éléments non nuls et leurs indices de dimension, souvent représentés sous forme de paires clé-valeur de <code translate="no">{ index: value}</code> (par exemple, <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
    </span> <span class="img-wrapper"> <span>Représentation vectorielle éparse</span> </span></p>
 <p>Avec la tokenisation et la notation, les documents peuvent être représentés comme des vecteurs de sacs de mots, où chaque dimension correspond à un mot spécifique du vocabulaire. Seuls les mots présents dans le document ont des valeurs non nulles, ce qui crée une représentation vectorielle éparse. Les vecteurs épars peuvent être générés à l'aide de deux approches :</p>
 <ul>
@@ -53,7 +53,7 @@ summary: >-
 <p>Les vecteurs épars et le texte original peuvent être stockés dans Milvus pour une récupération efficace. Le diagramme ci-dessous décrit le processus global.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
    </span> <span class="img-wrapper"> <span>Flux de travail des vecteurs épars</span> </span></p>
 <div class="alert note">
 <p>Outre les vecteurs épars, Milvus prend également en charge les vecteurs denses et les vecteurs binaires. Les vecteurs denses sont idéaux pour capturer des relations sémantiques profondes, tandis que les vecteurs binaires excellent dans des scénarios tels que les comparaisons rapides de similarité et la déduplication de contenu. Pour plus d'informations, voir <a href="/docs/fr/dense-vector.md">Vecteur dense</a> et <a href="/docs/fr/binary-vector.md">Vecteur binaire</a>.</p>

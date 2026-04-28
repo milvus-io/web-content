@@ -202,7 +202,7 @@ beta: Milvus 2.6.x
 <pre><code translate="no" class="language-bash">kubectl get pods
 kubectl get milvus my-release -o yaml | grep -A2 status
 <button class="copy-code-btn"></button></code></pre>
-<p>После готовности вы должны увидеть стручки, похожие на:</p>
+<p>Когда все будет готово, вы должны увидеть стручки, похожие на эти:</p>
 <pre><code translate="no">NAME                                               READY   STATUS    RESTARTS   AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                  <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">17</span>m
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                  <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">17</span>m
@@ -346,7 +346,7 @@ docker restart milvus-standalone
 </ul></li>
 <li>Ручки дятла<ul>
 <li>Увеличьте <code translate="no">logstore.segmentSyncPolicy.maxFlushSize</code> и <code translate="no">maxFlushThreads</code> для больших объемов флеша и более высокого параллелизма.</li>
-<li>Настройте <code translate="no">maxInterval</code> в соответствии с характеристиками носителя (обменяйте задержку на пропускную способность при более длительной агрегации).</li>
+<li>Настройте <code translate="no">maxInterval</code> в соответствии с характеристиками носителя (в обмен на латентность и пропускную способность при более длительной агрегации).</li>
 <li>Для объектных хранилищ следует увеличить <code translate="no">segmentRollingPolicy.maxSize</code>, чтобы уменьшить переключение сегментов.</li>
 </ul></li>
 <li>Сторона клиента/приложения<ul>

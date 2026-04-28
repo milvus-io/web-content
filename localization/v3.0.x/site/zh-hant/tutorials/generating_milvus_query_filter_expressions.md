@@ -266,7 +266,7 @@ docs = [
 <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> docs[:<span class="hljs-number">3</span>]:
     <span class="hljs-built_in">print</span>(doc.document.export_to_markdown())
 <button class="copy-code-btn"></button></code></pre>
-<p>文件搜刮提供 Milvus 過濾語法的全面涵蓋。此知識庫可讓我們的 LLM 瞭解篩選表達式建構的細微差異，包括正確的運算符使用、欄位參照以及複雜的條件組合。</p>
+<p>文件搜刮提供 Milvus 過濾語法的全面涵蓋。這個知識庫可讓我們的 LLM 瞭解篩選表達式建構的細微差異，包括正確的運算符使用、欄位參照以及複雜的條件組合。</p>
 <h2 id="LLM-Powered-Filter-Generation" class="common-anchor-header">由 LLM 驅動的篩選程式產生<button data-href="#LLM-Powered-Filter-Generation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

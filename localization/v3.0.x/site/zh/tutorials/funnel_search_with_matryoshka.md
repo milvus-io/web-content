@@ -20,10 +20,10 @@ title: 使用 Matryoshka 嵌入进行漏斗搜索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.6.x/assets/funnel-search.png' width='100%'></div>
-在构建高效的向量搜索系统时，一个关键的挑战是管理存储成本，同时保持可接受的延迟和召回率。现代嵌入模型输出的向量有成百上千个维度，这给原始向量和索引带来了巨大的存储和计算开销。<p>传统方法是在建立索引前应用量化或降维方法来降低存储需求。例如，我们可以使用乘积量化（PQ）降低精度，或使用主成分分析（PCA）降低维数，从而节省存储空间。这些方法会对整个向量集进行分析，以找到一个能保持向量间语义关系的更紧凑的向量集。</p>
-<p>这些标准方法虽然有效，但只能在单一尺度上降低一次精度或维度。但是，如果我们能同时保持多层细节，就像一座精确度越来越高的金字塔呢？</p>
-<p>这就是 Matryoshka Embeddings。这些巧妙的构造以俄罗斯嵌套娃娃命名（见插图），将多级表示嵌入到单个向量中。与传统的后处理方法不同，Matryoshka 嵌入在初始训练过程中就能学习这种多尺度结构。结果非常显著：不仅完整的 Embeddings 能够捕捉输入语义，而且每个嵌套的子集前缀（前半部分、前四分之一等）都提供了一个连贯的、即使不那么详细的表示。</p>
+    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/funnel-search.png' width='100%'></div>
+在构建高效的向量搜索系统时，一个关键的挑战是管理存储成本，同时保持可接受的延迟和召回率。现代 Embeddings 模型输出的向量有成百上千个维度，这给原始向量和索引带来了巨大的存储和计算开销。<p>传统方法是在建立索引前应用量化或降维方法来降低存储需求。例如，我们可以使用乘积量化（PQ）降低精度，或使用主成分分析（PCA）降低维数，从而节省存储空间。这些方法会对整个向量集进行分析，以找到一个能保持向量间语义关系的更紧凑的向量集。</p>
+<p>这些标准方法虽然有效，但只能在单一尺度上降低一次精度或维度。但是，如果我们能同时保持多层细节，就像一个精确度越来越高的表征金字塔呢？</p>
+<p>这就是 Matryoshka Embeddings。这些巧妙的结构以俄罗斯嵌套娃娃命名（见插图），将多级表示嵌入到单个向量中。与传统的后处理方法不同，Matryoshka 嵌入在初始训练过程中就能学习这种多尺度结构。结果非常显著：不仅完整的 Embeddings 能够捕捉输入语义，而且每个嵌套的子集前缀（前半部分、前四分之一等）都提供了一个连贯的、即使不那么详细的表示。</p>
 <p>在本笔记本中，我们将研究如何将 Matryoshka 嵌入与 Milvus 一起用于语义搜索。我们展示了一种名为 "漏斗搜索 "的算法，它允许我们在嵌入维度的一小部分子集上执行相似性搜索，而不会导致召回率急剧下降。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -257,7 +257,7 @@ The House in Marsh Road
 dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 <button class="copy-code-btn"></button></code></pre>
 <p>现在，为了执行漏斗搜索，我们对嵌入的越来越大的子集进行迭代。在每次迭代中，我们都会根据新的相似度对候选项进行重新排序，并删除部分排序最低的候选项。</p>
-<p>具体来说，在上一步中，我们使用 1/6 的嵌入维度和查询维度检索到 128 个候选项。执行漏斗搜索的第一步是使用<em>前 1/3 维度</em>重新计算查询和候选项之间的相似度。我们会剪切掉最下面的 64 个候选项。然后，我们使用<em>前 2/3 个维度</em>重复这一过程，然后使用<em>所有维度</em>，依次剪切到 32 个和 16 个候选<em>维度</em>。</p>
+<p>具体来说，在上一步中，我们使用 1/6 的嵌入维度和查询维度检索到 128 个候选项。执行漏斗搜索的第一步是使用<em>前 1/3 维度</em>重新计算查询和候选项之间的相似度。我们会剪切掉最下面的 64 个候选项。然后，我们使用<em>前 2/3 维度</em>重复这一过程，然后使用<em>所有维度</em>，依次剪切到 32 和 16 个候选<em>维度</em>。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># An optimized implementation would vectorize the calculation of similarity scores across rows (using a matrix)</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_score</span>(<span class="hljs-params">row, query_emb=<span class="hljs-literal">None</span>, dims=<span class="hljs-number">768</span></span>):
     emb = F.normalize(row[<span class="hljs-string">&quot;embedding&quot;</span>][:dims], dim=-<span class="hljs-number">1</span>)
@@ -336,7 +336,7 @@ Name: title, dtype: object
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>让我们比较一下我们的漏斗搜索和标准向量搜索<em>在相同数据集上使用相同嵌入模型</em>的结果。我们对全嵌入进行搜索。</p>
+    </button></h2><p>让我们来比较一下我们的漏斗搜索和标准向量搜索<em>在相同嵌入模型的相同数据集上的</em>结果。我们对全嵌入进行搜索。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search on entire embeddings</span>
 res = client.search(
     collection_name=collection_name,
@@ -431,7 +431,7 @@ res = client.search(
 <pre><code translate="no">Query: A teenager fakes illness to get off school and have adventures with two friends.
 Row 228: Ferris Bueller's Day Off
 </code></pre>
-<p>我们发现，问题在于初始候选列表不够大，或者说，在最高粒度级别上，所需的点击与查询不够相似。把它从<code translate="no">128</code> 改为<code translate="no">256</code> ，结果检索成功。<em>我们应该形成一条经验法则，即通过经验评估召回率和延迟之间的权衡，来设定保留集上的候选项数量。</em></p>
+<p>我们发现，问题在于初始候选列表不够大，或者说，在最高粒度级别上，所需的点击与查询不够相似。将其从<code translate="no">128</code> 改为<code translate="no">256</code> 后，检索成功了。<em>我们应该形成一条经验法则，即通过经验评估召回率和延迟之间的权衡，来设定保留集上的候选项数量。</em></p>
 <pre><code translate="no" class="language-python">dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 
 dfs_results = [
@@ -584,8 +584,8 @@ Leopard in the Snow
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>下面是各种方法的搜索结果对比：</p>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.6.x/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
-<div style='margin: auto; width: 100%;'><img translate="no" src='/docs/v2.6.x/assets/results-ferris-buellers-day-off.png' width='100%'></div>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.6.x/assets/results-the-shining.png' width='100%'></div>
+    </button></h2><p>以下是各种方法的搜索结果对比：</p>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
+<div style='margin: auto; width: 100%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-ferris-buellers-day-off.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-the-shining.png' width='100%'></div>
 我们展示了如何使用 Matryoshka 嵌入和 Milvus 来执行一种更高效的语义搜索算法，即 "漏斗搜索"。我们还探讨了该算法的 Rerankers 和剪枝步骤的重要性，以及当初始候选列表太小时的失败模式。最后，我们讨论了在形成子嵌入时，维度的顺序是如何重要的--它必须与模型训练时的顺序一致。或者说，只有因为模型是以某种方式训练的，嵌入的前缀才有意义。现在你知道如何实现 Matryoshka 嵌入和漏斗搜索，以降低语义搜索的存储成本，同时又不会牺牲太多检索性能了吧！

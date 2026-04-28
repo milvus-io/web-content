@@ -356,7 +356,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
      <td><p>Sì</p></td>
-     <td><p>Il tipo di Funzione da invocare; utilizzare <code translate="no">RERANK</code> per specificare una strategia di reranking</p></td>
+     <td><p>Il tipo di Funzione da invocare; usare <code translate="no">RERANK</code> per specificare una strategia di reranking</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>

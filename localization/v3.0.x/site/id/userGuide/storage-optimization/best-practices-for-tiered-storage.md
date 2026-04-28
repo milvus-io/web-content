@@ -74,7 +74,7 @@ beta: Milvus 2.6.4+
    <tr>
      <td><p>Menangani data berskala besar secara efisien</p></td>
      <td><p>Memuat sesuai permintaan</p></td>
-     <td><p>Beban Malas + Beban Parsial</p></td>
+     <td><p>Beban Malas + Beban Sebagian</p></td>
    </tr>
    <tr>
      <td><p>Menjaga stabilitas jangka panjang</p></td>

@@ -20,7 +20,7 @@ title: واجهة مستخدم ويب ميلفوس
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus Web UI هي أداة إدارة رسومية ل Milvus. وهي تعزز إمكانية مراقبة النظام بواجهة بسيطة وبديهية. يمكنك استخدام واجهة مستخدم الويب Milvus Web UI لمراقبة الإحصائيات والمقاييس الخاصة بمكونات وتبعيات Milvus، والتحقق من تفاصيل قاعدة البيانات والتجميع، وسرد تكوينات Milvus التفصيلية.</p>
+    </button></h1><p>Milvus Web UI هي أداة إدارة رسومية ل Milvus. وهي تعزز إمكانية مراقبة النظام بواجهة بسيطة وبديهية. يمكنك استخدام واجهة مستخدم ويب Milvus Web UI لمراقبة الإحصائيات والمقاييس الخاصة بمكونات وتبعيات Milvus، والتحقق من تفاصيل قاعدة البيانات والتجميع، وسرد تكوينات Milvus التفصيلية.</p>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +37,7 @@ title: واجهة مستخدم ويب ميلفوس
         ></path>
       </svg>
     </button></h2><p>تختلف واجهة مستخدم الويب Milvus Web UI عن Birdwatcher و Attu في أنها أداة مدمجة لتوفير إمكانية مراقبة النظام بشكل عام مع واجهة بسيطة وبديهية.</p>
-<p>الجدول التالي يقارن بين ميزات واجهة مستخدم ميلفوس ويب وواجهة مستخدم بيردواتشر/أتو:</p>
+<p>يقارن الجدول التالي بين ميزات واجهة مستخدم ميلفوس ويب وواجهة مستخدم بيردواتشر/أتو:</p>
 <table>
 <thead>
 <tr><th>الميزة</th><th>واجهة مستخدم ميلفوس ويب</th><th>مراقب الطيور</th><th>أتو</th></tr>
@@ -48,7 +48,7 @@ title: واجهة مستخدم ويب ميلفوس
 <tr><td>التثبيت</td><td>مدمج</td><td>أداة مستقلة</td><td>أداة مستقلة</td></tr>
 <tr><td>التبعيات</td><td>ميلفوس</td><td>ميلفوس / إلخd</td><td>ميلفوس</td></tr>
 <tr><td>الوظائف الأساسية</td><td>بيئة وقت التشغيل، وتفاصيل قاعدة البيانات/المجموعة، والشرائح، والقنوات، والمهام، وطلبات الاستعلام البطيئة</td><td>فحص البيانات الوصفية وتنفيذ واجهة برمجة تطبيقات ميلفوس</td><td>إدارة قاعدة البيانات والمهام التشغيلية</td></tr>
-<tr><td>متوفر منذ</td><td>v2.5.0</td><td>v2.0.0</td><td>v0.1.8</td></tr>
+<tr><td>متوفرة منذ</td><td>v2.5.0</td><td>v2.0.0</td><td>v0.1.8</td></tr>
 </tbody>
 </table>
 <p>اعتبارًا من الإصدار 2.5.0، يمكنك الوصول إلى واجهة مستخدم Milvus Web UI باستخدام عنوان URL التالي على مثيل Milvus قيد التشغيل:</p>
@@ -72,7 +72,7 @@ title: واجهة مستخدم ويب ميلفوس
     </button></h2><p>توفر واجهة مستخدم ويب Milvus Web UI الميزات التالية:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
    </span> <span class="img-wrapper"> <span>نظرة عامة على واجهة مستخدم ويب ميلفوس ويب</span> </span></p>
 <ul>
 <li><p><a href="#Home">الصفحة الرئيسية</a></p>
@@ -110,7 +110,7 @@ title: واجهة مستخدم ويب ميلفوس
     </button></h2><p>في الصفحة الرئيسية، يمكنك العثور على المعلومات التالية:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-home.png" alt="Milvus Web UI Home" class="doc-image" id="milvus-web-ui-home" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-home.png" alt="Milvus Web UI Home" class="doc-image" id="milvus-web-ui-home" />
    </span> <span class="img-wrapper"> <span>الصفحة الرئيسية لواجهة مستخدم الويب ميلفوس ويب</span> </span></p>
 <ul>
 <li><p><strong>معلومات النظام</strong>: عرض معلومات النظام، بما في ذلك معلومات حول وضع النشر والصورة المستخدمة في النشر والمعلومات ذات الصلة.</p></li>
@@ -136,7 +136,7 @@ title: واجهة مستخدم ويب ميلفوس
     </button></h2><p>في صفحة المجموعات، يمكنك عرض قائمة قواعد البيانات والمجموعات الموجودة حاليًا في Milvus والتحقق من تفاصيلها.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-collections.png" alt="Milvus Web UI Collections" class="doc-image" id="milvus-web-ui-collections" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-collections.png" alt="Milvus Web UI Collections" class="doc-image" id="milvus-web-ui-collections" />
    </span> <span class="img-wrapper"> <span>مجموعات واجهة مستخدم ويب ميلفوس ويب</span> </span></p>
 <ul>
 <li><p><strong>قواعد البيانات</strong>: عرض قائمة قواعد البيانات الموجودة حاليًا في Milvus وتفاصيلها.</p></li>
@@ -144,7 +144,7 @@ title: واجهة مستخدم ويب ميلفوس
 <p>يمكنك النقر على مجموعة لعرض تفاصيلها، بما في ذلك عدد الحقول والأقسام والفهارس وغيرها من المعلومات بالتفصيل.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
    </span> <span class="img-wrapper"> <span>تفاصيل مجموعة واجهة مستخدم الويب Milvus Web UI</span> </span></p></li>
 </ul>
 <h2 id="Query" class="common-anchor-header">استعلام<button data-href="#Query" class="anchor-icon" translate="no">
@@ -164,10 +164,10 @@ title: واجهة مستخدم ويب ميلفوس
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
    </span> <span class="img-wrapper"> <span>صفحة استعلام واجهة مستخدم ويب ميلفوس ويب</span> </span></p>
 <ul>
-<li><p><strong>الشرائح</strong>: عرض قائمة المقاطع وتفاصيلها، بما في ذلك معرّف المقطع والمجموعة المقابلة والحالة والحجم وما إلى ذلك.</p></li>
+<li><p><strong>الشرائح</strong>: عرض قائمة المقاطع وتفاصيلها، بما في ذلك معرف المقطع والمجموعة المقابلة والحالة والحجم وما إلى ذلك.</p></li>
 <li><p><strong>القنوات</strong>: عرض قائمة القنوات وتفاصيلها، بما في ذلك اسم القناة والمجموعات المقابلة لها، إلخ.</p></li>
 <li><p><strong>النسخ المتماثلة</strong>: عرض قائمة بالنسخ المتماثلة وتفاصيلها، بما في ذلك معرف النسخة المتماثلة والمجموعة المقابلة لها، إلخ.</p></li>
 <li><p><strong>مجموعات الموارد</strong>: عرض قائمة مجموعات الموارد وتفاصيلها، بما في ذلك اسم مجموعة الموارد وعدد عقد الاستعلام في المجموعة وتكويناتها، إلخ.</p></li>
@@ -189,7 +189,7 @@ title: واجهة مستخدم ويب ميلفوس
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-data.png" alt="Milvus Web UI Data Page" class="doc-image" id="milvus-web-ui-data-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-data.png" alt="Milvus Web UI Data Page" class="doc-image" id="milvus-web-ui-data-page" />
    </span> <span class="img-wrapper"> <span>صفحة بيانات واجهة مستخدم ويب ميلفوس ويب</span> </span></p>
 <ul>
 <li><p><strong>الشرائح</strong>: عرض قائمة المقاطع من عقد/منسقي البيانات وتفاصيلها، بما في ذلك معرف المقطع، والمجموعة المقابلة، والحالة، والحجم، وما إلى ذلك.</p></li>
@@ -212,7 +212,7 @@ title: واجهة مستخدم ويب ميلفوس
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-tasks.png" alt="Milvus Web UI Tasks Page" class="doc-image" id="milvus-web-ui-tasks-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-tasks.png" alt="Milvus Web UI Tasks Page" class="doc-image" id="milvus-web-ui-tasks-page" />
    </span> <span class="img-wrapper"> <span>صفحة مهام واجهة مستخدم ويب ميلفوس ويب</span> </span></p>
 <ul>
 <li><p><strong>المهام</strong>: عرض قائمة المهام التي تعمل في ملفوس، بما في ذلك نوع المهمة وحالتها وإجراءاتها.</p>
@@ -241,8 +241,8 @@ title: واجهة مستخدم ويب ميلفوس
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
-   </span> <span class="img-wrapper"> <span>صفحة الطلبات البطيئة لواجهة مستخدم الويب Milvus Web UI</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
+   </span> <span class="img-wrapper"> <span>صفحة الطلبات البطيئة لواجهة مستخدم الويب ميلفوس ويب</span> </span></p>
 <ul>
 <li><strong>الطلبات البطيئة</strong>: الطلب البطيء هو طلب بحث أو استعلام له زمن انتقال أطول من قيمة <code translate="no">proxy.slowQuerySpanInSeconds</code> المحددة في التكوين. تعرض قائمة الطلبات البطيئة جميع الطلبات البطيئة في آخر 15 دقيقة.</li>
 </ul>
@@ -263,7 +263,7 @@ title: واجهة مستخدم ويب ميلفوس
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-configurations.png" alt="Milvus Web UI Configurations Page" class="doc-image" id="milvus-web-ui-configurations-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-configurations.png" alt="Milvus Web UI Configurations Page" class="doc-image" id="milvus-web-ui-configurations-page" />
    </span> <span class="img-wrapper"> <span>صفحة تكوينات واجهة مستخدم ويب ميلفوس ويب</span> </span></p>
 <ul>
 <li><strong>التكوينات</strong>: عرض قائمة تكوينات وقت تشغيل Milvus وقيمها.</li>

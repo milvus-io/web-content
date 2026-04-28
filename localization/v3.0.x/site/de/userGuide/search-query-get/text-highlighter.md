@@ -377,7 +377,7 @@ results = client.search(
       </svg>
     </button></h3><p>Dieses Beispiel zeigt, wie Begriffe hervorgehoben werden können, die mit einem <code translate="no">TEXT_MATCH</code> Filter übereinstimmen.</p>
 <ul>
-<li><p>Die BM25-Volltextsuche verwendet <code translate="no">&quot;test&quot;</code> als Abfragebegriff</p></li>
+<li><p>Die BM25-Volltextsuche verwendet <code translate="no">&quot;test&quot;</code> als Suchbegriff</p></li>
 <li><p>Der Parameter <code translate="no">queries</code> fügt <code translate="no">&quot;my doc&quot;</code> zur Hervorhebungsliste hinzu.</p></li>
 <li><p>Der Hervorhebungsfilter umschließt alle übereinstimmenden Begriffe (<code translate="no">&quot;my&quot;</code>, <code translate="no">&quot;test&quot;</code>, <code translate="no">&quot;doc&quot;</code>) mit <code translate="no">{</code> und <code translate="no">}</code></p></li>
 </ul>
@@ -430,7 +430,7 @@ results = client.search(
     </button></h3><p>In diesem Beispiel sucht die Abfrage nach <code translate="no">&quot;Milvus&quot;</code> und gibt Hervorhebungsfragmente mit den folgenden Einstellungen zurück:</p>
 <ul>
 <li><p><code translate="no">fragment_offset</code> Behält bis zu 20 Zeichen vor der ersten hervorgehobenen Spanne als führenden Kontext bei (Standard ist 0).</p></li>
-<li><p><code translate="no">fragment_size</code> Begrenzt jedes Fragment auf etwa 60 Zeichen (Standard ist 100).</p></li>
+<li><p><code translate="no">fragment_size</code> begrenzt jedes Fragment auf etwa 60 Zeichen (Standard ist 100).</p></li>
 <li><p><code translate="no">num_of_fragments</code> begrenzt die Anzahl der zurückgegebenen Fragmente pro Textwert (Standardwert ist 5).</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="highlighted-comment-line">highlighter = LexicalHighlighter(</span>

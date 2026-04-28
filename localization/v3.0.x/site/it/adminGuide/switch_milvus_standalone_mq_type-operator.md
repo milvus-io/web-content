@@ -65,7 +65,7 @@ title: Cambio del tipo di MQ per Milvus Standalone
 <li>Monitorare i registri per verificare che il passaggio sia stato completato correttamente.</li>
 </ol>
 <div class="alert note">
-<p>Prima di effettuare il passaggio, assicurarsi che l'MQ di destinazione non contenga argomenti con gli stessi nomi di quelli utilizzati dall'istanza Milvus corrente. Questo è particolarmente importante se il servizio MQ di destinazione è stato usato in precedenza da un'altra istanza Milvus, poiché i nomi degli argomenti in conflitto possono causare un comportamento inaspettato.</p>
+<p>Prima di effettuare il passaggio, assicurarsi che l'MQ di destinazione non contenga argomenti con gli stessi nomi di quelli utilizzati dall'istanza Milvus corrente. Questo è particolarmente importante se il servizio MQ di destinazione è stato usato in precedenza da un'altra istanza Milvus, in quanto i nomi degli argomenti in conflitto possono causare un comportamento inaspettato.</p>
 </div>
 <h2 id="Switch-from-RocksMQ-to-Woodpecker-Local-Storage" class="common-anchor-header">Passare da RocksMQ a Woodpecker (archiviazione locale)<button data-href="#Switch-from-RocksMQ-to-Woodpecker-Local-Storage" class="anchor-icon" translate="no">
       <svg translate="no"

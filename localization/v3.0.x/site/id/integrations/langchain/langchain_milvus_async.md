@@ -46,7 +46,22 @@ title: Fungsi Asinkron dalam Integrasi LangChain Milvus
         ></path>
       </svg>
     </button></h2><p>langchain-milvus menyediakan dukungan operasi asinkron yang komprehensif, yang secara signifikan meningkatkan kinerja dalam skenario konkuren berskala besar. API asinkronisasi mempertahankan desain antarmuka yang konsisten dengan API sinkronisasi.</p>
-<h3 id="Core-Async-Functions" class="common-anchor-header">Fungsi Asinkronisasi Inti</h3><p>Untuk menggunakan operasi asinkronisasi di langchain-milvus, cukup tambahkan awalan <code translate="no">a</code> pada nama metode. Hal ini memungkinkan pemanfaatan sumber daya yang lebih baik dan peningkatan throughput saat menangani permintaan pengambilan secara bersamaan.</p>
+<h3 id="Core-Async-Functions" class="common-anchor-header">Fungsi Asinkronisasi Inti<button data-href="#Core-Async-Functions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk menggunakan operasi asinkronisasi di langchain-milvus, cukup tambahkan awalan <code translate="no">a</code> pada nama metode. Hal ini memungkinkan pemanfaatan sumber daya yang lebih baik dan peningkatan throughput saat menangani permintaan pengambilan secara bersamaan.</p>
 <table>
 <thead>
 <tr><th>Jenis Operasi</th><th>Metode Sinkronisasi</th><th>Metode Asinkronisasi</th><th>Deskripsi</th></tr>
@@ -69,7 +84,22 @@ title: Fungsi Asinkron dalam Integrasi LangChain Milvus
 </tbody>
 </table>
 <p>Untuk informasi lebih rinci tentang fungsi-fungsi ini, silakan lihat <a href="https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html#milvus">Referensi API</a>.</p>
-<h3 id="Performance-Benefits" class="common-anchor-header">Manfaat Kinerja</h3><p>Operasi asinkronisasi memberikan peningkatan kinerja yang signifikan ketika menangani volume besar permintaan bersamaan, terutama cocok untuk:</p>
+<h3 id="Performance-Benefits" class="common-anchor-header">Manfaat Kinerja<button data-href="#Performance-Benefits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Operasi asinkronisasi memberikan peningkatan kinerja yang signifikan ketika menangani volume besar permintaan bersamaan, terutama cocok untuk:</p>
 <ul>
 <li>Pemrosesan dokumen batch</li>
 <li>Skenario pencarian konkurensi tinggi</li>
@@ -135,7 +165,22 @@ nest_asyncio.apply()
 <span class="hljs-comment"># Define the Milvus URI</span>
 URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Setting-up-Test-Functions" class="common-anchor-header">Menyiapkan Fungsi Uji Coba</h3><p>Mari kita buat fungsi-fungsi pembantu untuk menghasilkan data uji:</p>
+<h3 id="Setting-up-Test-Functions" class="common-anchor-header">Menyiapkan Fungsi Uji Coba<button data-href="#Setting-up-Test-Functions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Mari kita buat fungsi-fungsi pembantu untuk menghasilkan data uji:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">random_id</span>():
     <span class="hljs-string">&quot;&quot;&quot;Generate a random string ID&quot;&quot;&quot;</span>
     random_num_str = <span class="hljs-string">&quot;&quot;</span>
@@ -161,7 +206,22 @@ URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
         docs.append(doc)
     <span class="hljs-keyword">return</span> docs
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Initialize-the-Vector-Store" class="common-anchor-header">Menginisialisasi Penyimpanan Vektor</h3><p>Sebelum kita dapat menjalankan uji performa, kita perlu menyiapkan penyimpanan vektor Milvus yang bersih. Fungsi ini memastikan kita memulai dengan koleksi yang baru untuk setiap pengujian, menghilangkan gangguan dari data sebelumnya:</p>
+<h3 id="Initialize-the-Vector-Store" class="common-anchor-header">Menginisialisasi Penyimpanan Vektor<button data-href="#Initialize-the-Vector-Store" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sebelum kita dapat menjalankan uji performa, kita perlu menyiapkan penyimpanan vektor Milvus yang bersih. Fungsi ini memastikan kita memulai dengan koleksi yang baru untuk setiap pengujian, menghilangkan gangguan dari data sebelumnya:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_vector_store</span>():
     <span class="hljs-string">&quot;&quot;&quot;Initialize and return a fresh vector store for testing&quot;&quot;&quot;</span>
     <span class="hljs-keyword">return</span> Milvus(
@@ -172,7 +232,22 @@ URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
         drop_old=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Always start with a fresh collection</span>
     )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Async-vs-Sync-Add-Documents" class="common-anchor-header">Asinkronisasi vs Sinkronisasi: Menambahkan Dokumen</h3><p>Sekarang mari kita bandingkan kinerja penambahan dokumen sinkron vs asinkron. Fungsi-fungsi ini akan membantu kita mengukur seberapa cepat operasi asinkron ketika menambahkan beberapa dokumen ke penyimpanan vektor. Versi asinkron membuat tugas untuk setiap penambahan dokumen dan menjalankannya secara bersamaan, sedangkan versi sinkron memproses dokumen satu per satu:</p>
+<h3 id="Async-vs-Sync-Add-Documents" class="common-anchor-header">Asinkronisasi vs Sinkronisasi: Menambahkan Dokumen<button data-href="#Async-vs-Sync-Add-Documents" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sekarang mari kita bandingkan kinerja penambahan dokumen sinkron vs asinkron. Fungsi-fungsi ini akan membantu kita mengukur seberapa cepat operasi asinkron ketika menambahkan beberapa dokumen ke penyimpanan vektor. Versi asinkron membuat tugas untuk setiap penambahan dokumen dan menjalankannya secara bersamaan, sedangkan versi sinkron memproses dokumen satu per satu:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">async_add</span>(<span class="hljs-params">milvus_store, num_adding</span>):
     <span class="hljs-string">&quot;&quot;&quot;Add documents asynchronously and measure the time&quot;&quot;&quot;</span>
     docs = generate_test_documents(num_adding)
@@ -236,7 +311,22 @@ Async add for 100 documents took 2.77 seconds
 Sync add for 10 documents took 5.36 seconds
 Sync add for 100 documents took 65.60 seconds
 </code></pre>
-<h3 id="Async-vs-Sync-Search" class="common-anchor-header">Asinkronisasi vs Sinkronisasi: Pencarian</h3><p>Untuk perbandingan performa pencarian, kita perlu mengisi penyimpanan vektor terlebih dahulu. Fungsi berikut ini akan membantu kita mengukur performa pencarian dengan membuat beberapa kueri pencarian secara bersamaan dan membandingkan waktu eksekusi antara pendekatan sinkron dan asinkron:</p>
+<h3 id="Async-vs-Sync-Search" class="common-anchor-header">Asinkronisasi vs Sinkronisasi: Pencarian<button data-href="#Async-vs-Sync-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk perbandingan performa pencarian, kita perlu mengisi penyimpanan vektor terlebih dahulu. Fungsi berikut ini akan membantu kita mengukur performa pencarian dengan membuat beberapa kueri pencarian secara bersamaan dan membandingkan waktu eksekusi antara pendekatan sinkron dan asinkron:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">populate_vector_store</span>(<span class="hljs-params">milvus_store, num_docs=<span class="hljs-number">1000</span></span>):
     <span class="hljs-string">&quot;&quot;&quot;Populate the vector store with test documents&quot;&quot;&quot;</span>
     docs = generate_test_documents(num_docs)
@@ -266,7 +356,7 @@ Sync add for 100 documents took 65.60 seconds
     end_time = time.time()
     <span class="hljs-keyword">return</span> end_time - start_time
 <button class="copy-code-btn"></button></code></pre>
-<p>Sekarang mari kita jalankan pengujian kinerja pencarian yang komprehensif untuk melihat bagaimana skala operasi asinkron dibandingkan dengan operasi sinkron. Kami akan menguji dengan volume kueri yang berbeda untuk menunjukkan manfaat kinerja operasi asinkron, terutama seiring dengan meningkatnya jumlah operasi bersamaan:</p>
+<p>Sekarang mari kita jalankan pengujian performa pencarian yang komprehensif untuk melihat bagaimana skala operasi asinkron dibandingkan dengan operasi sinkron. Kami akan menguji dengan volume kueri yang berbeda untuk menunjukkan manfaat kinerja operasi asinkron, terutama saat jumlah operasi bersamaan meningkat:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Initialize and populate the vector store</span>
 milvus_store = init_vector_store()
 populate_vector_store(milvus_store, <span class="hljs-number">1000</span>)
@@ -296,7 +386,22 @@ Async search for 100 queries took 3.72 seconds
 Sync search for 10 queries took 6.07 seconds
 Sync search for 100 queries took 54.22 seconds
 </code></pre>
-<h3 id="Async-vs-Sync-Delete" class="common-anchor-header">Asinkronisasi vs Sinkronisasi: Menghapus</h3><p>Operasi hapus adalah aspek penting lainnya di mana operasi asinkronisasi dapat memberikan peningkatan kinerja yang signifikan. Mari kita buat fungsi untuk mengukur perbedaan kinerja antara operasi penghapusan sinkron dan asinkron. Tes ini akan membantu menunjukkan bagaimana operasi asinkronisasi dapat menangani penghapusan batch dengan lebih efisien:</p>
+<h3 id="Async-vs-Sync-Delete" class="common-anchor-header">Asinkronisasi vs Sinkronisasi: Menghapus<button data-href="#Async-vs-Sync-Delete" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Operasi hapus adalah aspek penting lainnya di mana operasi asinkronisasi dapat memberikan peningkatan kinerja yang signifikan. Mari kita buat fungsi untuk mengukur perbedaan kinerja antara operasi penghapusan sinkron dan asinkron. Tes ini akan membantu menunjukkan bagaimana operasi asinkronisasi dapat menangani penghapusan batch dengan lebih efisien:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">async_delete</span>(<span class="hljs-params">milvus_store, num_deleting</span>):
     <span class="hljs-string">&quot;&quot;&quot;Delete documents asynchronously and measure the time&quot;&quot;&quot;</span>
     start_time = time.time()
@@ -373,7 +478,7 @@ Sync delete for 100 operations took 29.21 seconds
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Tutorial ini mendemonstrasikan keuntungan performa yang signifikan dari penggunaan operasi asinkron dengan LangChain dan Milvus. Kami membandingkan versi sinkron dan asinkron dari operasi tambah, cari, dan hapus, yang menunjukkan bagaimana operasi asinkron dapat memberikan peningkatan kecepatan yang substansial, terutama untuk operasi batch yang besar.</p>
+    </button></h2><p>Tutorial ini mendemonstrasikan keuntungan performa yang signifikan dari penggunaan operasi asinkron dengan LangChain dan Milvus. Kami membandingkan versi sinkron dan asinkron dari operasi tambah, cari, dan hapus, menunjukkan bagaimana operasi asinkron dapat memberikan peningkatan kecepatan yang substansial, terutama untuk operasi batch yang besar.</p>
 <p>Kesimpulan utama:</p>
 <ol>
 <li>Operasi asinkron memberikan manfaat paling besar ketika melakukan banyak operasi individual yang dapat berjalan secara paralel</li>

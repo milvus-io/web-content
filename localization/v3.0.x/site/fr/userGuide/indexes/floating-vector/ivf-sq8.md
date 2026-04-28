@@ -44,30 +44,75 @@ summary: >-
 <li><p><strong>Fichier inversé (IVF</strong>) : Il organise les données en grappes, ce qui permet à l'algorithme de recherche de se concentrer uniquement sur les sous-ensembles de vecteurs les plus pertinents.</p></li>
 <li><p><strong>Quantification scalaire (SQ8</strong>) : Compresse les vecteurs sous une forme plus compacte, ce qui réduit considérablement l'utilisation de la mémoire tout en conservant une précision suffisante pour des calculs de similarité rapides.</p></li>
 </ul>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p>Le FVI est comparable à la création d'un index dans un livre. Au lieu de parcourir chaque page (ou, dans notre cas, chaque vecteur), vous recherchez des mots-clés spécifiques (clusters) dans l'index pour trouver rapidement les pages (vecteurs) pertinentes. Dans notre scénario, les vecteurs sont regroupés en grappes et l'algorithme recherche dans quelques grappes proches du vecteur de la requête.</p>
+<h3 id="IVF" class="common-anchor-header">IVF<button data-href="#IVF" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le FVI est comparable à la création d'un index dans un livre. Au lieu de parcourir chaque page (ou, dans notre cas, chaque vecteur), vous recherchez des mots-clés spécifiques (clusters) dans l'index pour trouver rapidement les pages (vecteurs) pertinentes. Dans notre scénario, les vecteurs sont regroupés en grappes et l'algorithme recherche dans quelques grappes proches du vecteur de la requête.</p>
 <p>Voici comment cela fonctionne :</p>
 <ol>
 <li><p><strong>Regroupement :</strong> Votre ensemble de données vectorielles est divisé en un nombre déterminé de grappes, à l'aide d'un algorithme de regroupement tel que les k-moyennes. Chaque grappe possède un centroïde (vecteur représentatif de la grappe).</p></li>
 <li><p><strong>Affectation :</strong> Chaque vecteur est affecté à la grappe dont le centroïde est le plus proche.</p></li>
 <li><p><strong>Index inversé :</strong> Un index est créé, mettant en correspondance chaque centroïde de grappe avec la liste des vecteurs assignés à cette grappe.</p></li>
-<li><p><strong>Recherche :</strong> Lorsque vous recherchez les voisins les plus proches, l'algorithme de recherche compare le vecteur de votre requête aux centroïdes des clusters et sélectionne le(s) cluster(s) le(s) plus prometteur(s). La recherche est alors limitée aux vecteurs contenus dans les grappes sélectionnées.</p></li>
+<li><p><strong>Recherche :</strong> Lorsque vous recherchez les voisins les plus proches, l'algorithme de recherche compare le vecteur de votre requête aux centroïdes des clusters et sélectionne le(s) cluster(s) le(s) plus prometteur(s). La recherche est ensuite limitée aux vecteurs contenus dans les grappes sélectionnées.</p></li>
 </ol>
 <p>Pour en savoir plus sur les détails techniques, reportez-vous à <a href="/docs/fr/ivf-flat.md">IVF_FLAT</a>.</p>
-<h3 id="SQ8" class="common-anchor-header">SQ8</h3><p>La quantification scalaire (SQ) est une technique utilisée pour réduire la taille des vecteurs à haute dimension en remplaçant leurs valeurs par des représentations plus petites et plus compactes. La variante <strong>SQ8</strong> utilise des entiers de 8 bits au lieu des nombres à virgule flottante typiques de 32 bits pour stocker chaque valeur dimensionnelle d'un vecteur. Cela permet de réduire considérablement la quantité de mémoire nécessaire pour stocker les données.</p>
+<h3 id="SQ8" class="common-anchor-header">SQ8<button data-href="#SQ8" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La quantification scalaire (SQ) est une technique utilisée pour réduire la taille des vecteurs à haute dimension en remplaçant leurs valeurs par des représentations plus petites et plus compactes. La variante <strong>SQ8</strong> utilise des entiers de 8 bits au lieu des nombres à virgule flottante typiques de 32 bits pour stocker chaque valeur dimensionnelle d'un vecteur. Cela permet de réduire considérablement la quantité de mémoire nécessaire pour stocker les données.</p>
 <p>Voici comment fonctionne la variante SQ8 :</p>
 <ol>
 <li><p><strong>Identification de la plage :</strong> Il faut d'abord identifier les valeurs minimales et maximales du vecteur. Cette plage définit les limites de la quantification.</p></li>
 <li><p><strong>Normalisation :</strong> Normaliser les valeurs du vecteur dans une fourchette comprise entre 0 et 1 à l'aide de la formule :</p>
 <p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>normalized_value</mtext><mo>=</mo><mfrac><mrow><mtext>value</mtext><mo>−</mo><mtext>min</mtext></mrow><mrow><mtext>max</mtext><mo>−</mo><mtext>min</mtext></mrow></mfrac></mrow><annotation encoding="application/x-tex">\text{normalized\_value} = \frac{\text{value} - \text{min}}{\text{max} - \text{min}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0044em;vertical-align:-0.31em;"></span><span class="mord text"><span class="mord">normalized_value</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1408em;vertical-align:-0.7693em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">max</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord text"><span class="mord">min</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">value</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord text"><span class="mord">min</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<p>Cela permet de s'assurer que toutes les valeurs sont réparties proportionnellement dans une plage normalisée, ce qui les prépare à la compression.</p></li>
+<p>Cela permet de s'assurer que toutes les valeurs sont mises en correspondance de manière proportionnelle dans une plage normalisée, les préparant ainsi à la compression.</p></li>
 <li><p><strong>Compression 8 bits :</strong> Multiplier la valeur normalisée par 255 (la valeur maximale pour un entier de 8 bits) et arrondir le résultat à l'entier le plus proche. Cela permet de compresser chaque valeur en une représentation de 8 bits.</p></li>
 </ol>
 <p>Supposons que vous ayez une valeur dimensionnelle de 1,2, avec une valeur minimale de -1,7 et une valeur maximale de 2,3. La figure suivante montre comment SQ8 est appliqué pour convertir une valeur float32 en un entier int8.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ivf-sq8.png" alt="Ivf Sq8" class="doc-image" id="ivf-sq8" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ivf-sq8.png" alt="Ivf Sq8" class="doc-image" id="ivf-sq8" />
    </span> <span class="img-wrapper"> <span>Ivf Sq8</span> </span></p>
-<h3 id="IVF-+-SQ8" class="common-anchor-header">IVF + SQ8</h3><p>L'index IVF_SQ8 combine IVF et SQ8 pour effectuer efficacement des recherches de similarité :</p>
+<h3 id="IVF-+-SQ8" class="common-anchor-header">IVF + SQ8<button data-href="#IVF-+-SQ8" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>L'index IVF_SQ8 combine IVF et SQ8 pour effectuer efficacement des recherches de similarité :</p>
 <ol>
 <li><p><strong>IVF réduit l'étendue de la recherche</strong>: L'ensemble de données est divisé en grappes, et lorsqu'une requête est émise, IVF compare d'abord la requête aux centroïdes de la grappe, en sélectionnant les grappes les plus pertinentes.</p></li>
 <li><p><strong>SQ8 accélère les calculs de distance</strong>: Au sein des grappes sélectionnées, SQ8 compresse les vecteurs en entiers de 8 bits, ce qui réduit l'utilisation de la mémoire et accélère les calculs de distance.</p></li>
@@ -169,7 +214,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Cette section présente une vue d'ensemble des paramètres utilisés pour construire un index et effectuer des recherches sur l'index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index</h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés sur <code translate="no">params</code> lors de la <a href="/docs/fr/ivf-sq8.md#share-X9Y9dTuhDohRRBxSvzBcXmIEnu4">création d'un index</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés sur <code translate="no">params</code> lors de la <a href="/docs/fr/ivf-sq8.md#share-X9Y9dTuhDohRRBxSvzBcXmIEnu4">création d'un index</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -184,10 +244,25 @@ res = MilvusClient.search(
      <td><p>Le nombre de grappes à créer à l'aide de l'algorithme k-means pendant la construction de l'index.</p></td>
      <td><p><strong>Type</strong>: Entier <strong>Plage</strong>: [1, 65536]</p>
 <p><strong>Valeur par défaut</strong>: <code translate="no">128</code></p></td>
-     <td><p>Les valeurs élevées de <code translate="no">nlist</code> améliorent le rappel en créant des grappes plus fines, mais augmentent le temps de construction de l'index. Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette plage : [32, 4096].</p></td>
+     <td><p>Les valeurs plus élevées de <code translate="no">nlist</code> améliorent le rappel en créant des grappes plus fines, mais augmentent le temps de construction de l'index. Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette plage : [32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques à l'index</h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés dans <code translate="no">search_params.params</code> lors d'une <a href="/docs/fr/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">recherche sur l'index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques à l'index<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés dans <code translate="no">search_params.params</code> lors d'une <a href="/docs/fr/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">recherche sur l'index</a>.</p>
 <table>
    <tr>
      <th></th>

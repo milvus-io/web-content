@@ -23,7 +23,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Google Cloud <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-text-embeddings">Vertex AI</a> ist ein Hochleistungsdienst, der speziell für Texteinbettungsmodelle entwickelt wurde. In diesem Leitfaden wird erklärt, wie Google Cloud Vertex AI mit Milvus für die effiziente Erzeugung von Texteinbettungen verwendet wird.</p>
+    </button></h1><p>Google Cloud <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-text-embeddings">Vertex AI</a> ist ein Hochleistungsdienst, der speziell für Texteinbettungsmodelle entwickelt wurde. In dieser Anleitung wird erklärt, wie Google Cloud Vertex AI mit Milvus für eine effiziente Erzeugung von Texteinbettungen verwendet wird.</p>
 <p>Vertex AI unterstützt verschiedene Einbettungsmodelle für unterschiedliche Anwendungsfälle:</p>
 <ul>
 <li><p>gemini-embedding-001 (State-of-the-Art-Leistung bei englischen, mehrsprachigen und Code-Aufgaben)</p></li>
@@ -85,7 +85,22 @@ beta: Milvus 2.6.x
      <td><p>Container-Workflows, schnelle Tests</p></td>
    </tr>
 </table>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Option 1: Konfigurationsdatei (empfohlen &amp; höhere Priorität)</h3><p>Milvus wird immer die in <code translate="no">milvus.yaml</code> deklarierten Anmeldeinformationen gegenüber Umgebungsvariablen für denselben Anbieter bevorzugen.</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Option 1: Konfigurationsdatei (empfohlen &amp; höhere Priorität)<button data-href="#Option-1-Configuration-file-recommended--higher-priority" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus wird immer die in <code translate="no">milvus.yaml</code> deklarierten Anmeldeinformationen gegenüber Umgebungsvariablen für denselben Anbieter bevorzugen.</p>
 <ol>
 <li><p>Base64-Kodierung Ihres JSON-Schlüssels</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> credentials.json | jq . | <span class="hljs-built_in">base64</span>
@@ -110,7 +125,22 @@ beta: Milvus 2.6.x
 <p>Wenn Sie später Schlüssel austauschen müssen, aktualisieren Sie einfach die Base64-Zeichenfolge unter <code translate="no">credential_json</code> und starten Sie Milvus neu - es sind keine Änderungen an Ihrer Umgebung oder Ihren Containern erforderlich.</p>
 <p></div></p></li>
 </ol>
-<h3 id="Option-2-Environment-variables" class="common-anchor-header">Option 2: Umgebungsvariablen</h3><p>Verwenden Sie diese Methode, wenn Sie es vorziehen, Geheimnisse zum Zeitpunkt der Bereitstellung zu injizieren. Milvus greift nur dann auf env-vars zurück, wenn kein passender Eintrag in <code translate="no">milvus.yaml</code> existiert.</p>
+<h3 id="Option-2-Environment-variables" class="common-anchor-header">Option 2: Umgebungsvariablen<button data-href="#Option-2-Environment-variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Verwenden Sie diese Methode, wenn Sie es vorziehen, Geheimnisse zum Zeitpunkt der Bereitstellung zu injizieren. Milvus greift nur dann auf env-vars zurück, wenn kein passender Eintrag in <code translate="no">milvus.yaml</code> existiert.</p>
 <div class="alert note">
 <p>Die Konfigurationsschritte hängen von Ihrem Milvus-Bereitstellungsmodus (Standalone vs. verteilter Cluster) und der Orchestrierungsplattform (Docker Compose vs. Kubernetes) ab.</p>
 </div>
@@ -226,7 +256,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Sobald Vertex AI konfiguriert ist, folgen Sie diesen Schritten, um Einbettungsfunktionen zu definieren und zu verwenden.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Schritt 1: Definieren Sie Schemafelder</h3><p>Um eine Einbettungsfunktion zu verwenden, erstellen Sie eine Sammlung mit einem bestimmten Schema. Dieses Schema muss mindestens drei notwendige Felder enthalten:</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Schritt 1: Definieren Sie Schemafelder<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um eine Einbettungsfunktion zu verwenden, erstellen Sie eine Sammlung mit einem bestimmten Schema. Dieses Schema muss mindestens drei notwendige Felder enthalten:</p>
 <ul>
 <li><p>Das Primärfeld, das jede Entität in einer Sammlung eindeutig identifiziert.</p></li>
 <li><p>Ein Skalarfeld, das die einzubettenden Rohdaten speichert.</p></li>
@@ -246,7 +291,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the output dimension of the model and parameters</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Schritt 2: Einbettungsfunktion zum Schema hinzufügen</h3><p>Das Funktionsmodul in Milvus wandelt automatisch Rohdaten, die in einem Skalarfeld gespeichert sind, in Einbettungen um und speichert sie in dem explizit definierten Vektorfeld.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Schritt 2: Einbettungsfunktion zum Schema hinzufügen<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Das Funktionsmodul in Milvus wandelt automatisch Rohdaten, die in einem Skalarfeld gespeichert sind, in Einbettungen um und speichert sie in dem explizit definierten Vektorfeld.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define Vertex AI embedding function</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;vert_func&quot;</span>,                           <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -326,4 +386,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nachdem Sie die Einbettungsfunktion konfiguriert haben, finden Sie in der <a href="/docs/de/embeddings.md">Funktionsübersicht</a> weitere Anleitungen zur Indexkonfiguration, Beispiele für das Einfügen von Daten und semantische Suchvorgänge.</p>
+    </button></h2><p>Nachdem Sie die Einbettungsfunktion konfiguriert haben, finden Sie in der <a href="/docs/de/embeddings.md">Funktionsübersicht</a> weitere Hinweise zur Indexkonfiguration, Beispiele für das Einfügen von Daten und semantische Suchvorgänge.</p>

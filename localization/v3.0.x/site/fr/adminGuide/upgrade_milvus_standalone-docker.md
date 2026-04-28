@@ -60,7 +60,7 @@ title: Mise à niveau de Milvus Standalone avec Docker Compose
 <li><strong>Nouveaux composants</strong>: Introduction d'un nœud de streaming pour un meilleur traitement des données</li>
 <li><strong>Suppression de composants</strong>: <code translate="no">indexNode</code> supprimé et consolidé</li>
 </ul>
-<p>Ce processus de mise à niveau garantit une migration correcte vers la nouvelle architecture. Pour plus d'informations sur les modifications de l'architecture, voir l'<a href="/docs/fr/architecture_overview.md">aperçu de l'architecture Milvus</a>.</p>
+<p>Ce processus de mise à niveau garantit une migration correcte vers la nouvelle architecture. Pour plus d'informations sur les modifications de l'architecture, voir la <a href="/docs/fr/architecture_overview.md">présentation de l'architecture Milvus</a>.</p>
 <h3 id="Requirements" class="common-anchor-header">Exigences<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -83,7 +83,7 @@ title: Mise à niveau de Milvus Standalone avec Docker Compose
 </ul>
 <p><strong>Exigences de compatibilité :</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 <strong>n'est pas compatible</strong> avec v2.6.15. Les mises à niveau directes à partir des versions candidates ne sont pas prises en charge.</li>
+<li>Milvus v2.6.0-rc1 <strong>n'</strong> est <strong>pas compatible</strong> avec v2.6.15. Les mises à niveau directes à partir des versions candidates ne sont pas prises en charge.</li>
 <li>Si vous utilisez actuellement la version 2.6.0-rc1 et que vous devez préserver vos données, veuillez vous référer à <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">ce guide de la communauté</a> pour obtenir de l'aide à la migration.</li>
 <li>Vous <strong>devez</strong> effectuer une mise à niveau vers la version 2.5.16 ou une version ultérieure avant d'effectuer une mise à niveau vers la version 2.6.15.</li>
 </ul>

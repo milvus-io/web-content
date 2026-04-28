@@ -30,7 +30,7 @@ title: Milvus Hybrid Search Retriever
 <p>Questo diagramma illustra lo scenario di ricerca ibrida più comune, ovvero la ricerca ibrida densa + rada. In questo caso, i candidati vengono recuperati utilizzando sia la similarità semantica dei vettori sia la corrispondenza precisa delle parole chiave. I risultati di questi metodi vengono uniti, riclassificati e passati a un LLM per generare la risposta finale. Questo approccio bilancia precisione e comprensione semantica, rendendolo molto efficace per diversi scenari di interrogazione.</p>
 <p>Oltre alla ricerca ibrida densa + rada, le strategie ibride possono anche combinare più modelli vettoriali densi. Ad esempio, un modello vettoriale denso potrebbe essere specializzato nella cattura delle sfumature semantiche, mentre un altro si concentra sulle incorporazioni contestuali o sulle rappresentazioni specifiche del dominio. Unendo i risultati di questi modelli e riclassificandoli, questo tipo di ricerca ibrida garantisce un processo di recupero più sfumato e consapevole del contesto.</p>
 <p>L'integrazione di LangChain Milvus offre un modo flessibile di implementare la ricerca ibrida, supportando un numero qualsiasi di campi vettoriali e di modelli di incorporamento densi o sparsi personalizzati, il che consente a LangChain Milvus di adattarsi in modo flessibile a vari scenari di utilizzo della ricerca ibrida e allo stesso tempo di essere compatibile con le altre funzionalità di LangChain.</p>
-<p>In questo tutorial, inizieremo con il caso più comune di dense + sparse, per poi introdurre una serie di approcci generali all'uso della ricerca ibrida.</p>
+<p>In questo tutorial, inizieremo con il caso più comune di ricerca densa + rada, per poi introdurre una serie di approcci generali di ricerca ibrida.</p>
 <div class="alert note">
 <p>Il <a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever</a>, un'altra implementazione della ricerca ibrida con Milvus e LangChain, <strong>sta per essere deprecato</strong>. Per implementare la ricerca ibrida, utilizzare l'approccio descritto in questo documento, che è più flessibile e compatibile con LangChain.</p>
 </div>
@@ -125,7 +125,7 @@ docs = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Option-1Recommended-dense-embedding-+-Milvus-BM25-built-in-function" class="common-anchor-header">Opzione 1 (consigliata): incorporazione densa + funzione incorporata Milvus BM25<button data-href="#Option-1Recommended-dense-embedding-+-Milvus-BM25-built-in-function" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Option-1Recommended-dense-embedding-+-Milvus-BM25-built-in-function" class="common-anchor-header">Opzione 1 (consigliata): incorporazione densa + funzione incorporata di Milvus BM25<button data-href="#Option-1Recommended-dense-embedding-+-Milvus-BM25-built-in-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -180,7 +180,7 @@ vectorstore = Milvus.from_documents(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>È possibile ereditare la classe <code translate="no">BaseSparseEmbedding</code> da <code translate="no">langchain_milvus.utils.sparse</code> e implementare i metodi <code translate="no">embed_query</code> e <code translate="no">embed_documents</code> per personalizzare il processo di incorporazione rada. Ciò consente di personalizzare qualsiasi metodo di incorporazione rada sia basato su statistiche di frequenza dei termini (ad esempio <a href="https://milvus.io/docs/embed-with-bm25.md#BM25">BM25</a>) sia su reti neurali (ad esempio <a href="https://milvus.io/docs/embed-with-splade.md#SPLADE">SPADE</a>).</p>
+    </button></h3><p>È possibile ereditare la classe <code translate="no">BaseSparseEmbedding</code> da <code translate="no">langchain_milvus.utils.sparse</code> e implementare i metodi <code translate="no">embed_query</code> e <code translate="no">embed_documents</code> per personalizzare il processo di incorporazione rada. Ciò consente di personalizzare qualsiasi metodo di sparse embedding sia basato su statistiche di frequenza dei termini (ad esempio, <a href="https://milvus.io/docs/embed-with-bm25.md#BM25">BM25</a>) sia su reti neurali (ad esempio, <a href="https://milvus.io/docs/embed-with-splade.md#SPLADE">SPADE</a>).</p>
 <p>Ecco un esempio:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Dict</span>, <span class="hljs-type">List</span>
 <span class="hljs-keyword">from</span> langchain_milvus.utils.sparse <span class="hljs-keyword">import</span> BaseSparseEmbedding
@@ -247,7 +247,7 @@ vectorstore = Milvus.from_documents(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando si inizializza l'archivio vettoriale di Milvus, è possibile passare l'elenco degli embeddings (e in futuro anche l'elenco delle funzioni integrate) per implementare il reperimento a più vie e quindi classificare i candidati. Ecco un esempio:</p>
+    </button></h2><p>Quando si inizializza l'archivio vettoriale di Milvus, è possibile passare l'elenco degli embeddings (e in futuro anche l'elenco delle funzioni integrate) per implementare il reperimento a più vie, e quindi classificare i candidati. Ecco un esempio:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from langchain_voyageai import VoyageAIEmbeddings</span>
 
 embedding1 = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-ada-002&quot;</span>)
@@ -380,7 +380,7 @@ vectorstore.similarity_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nello scenario di RAG, l'approccio più diffuso per la ricerca ibrida è il recupero denso + rado, seguito dal reranking. L'esempio seguente mostra un codice end-to-end semplice.</p>
+    </button></h2><p>Nello scenario di RAG, l'approccio più diffuso per la ricerca ibrida è il dense + sparse retrieval, seguito dal reranking. L'esempio seguente mostra un codice end-to-end semplice.</p>
 <h3 id="Prepare-the-data" class="common-anchor-header">Preparare i dati<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -469,7 +469,7 @@ docs[<span class="hljs-number">1</span>]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Prepariamo l'istanza LLM e il prompt, quindi li combiniamo in una pipeline RAG usando il LangChain Expression Language.</p>
+    </button></h3><p>Prepariamo l'istanza LLM e il prompt, quindi li combiniamo in una pipeline RAG utilizzando il linguaggio LangChain Expression.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnablePassthrough
 <span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate
 <span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser

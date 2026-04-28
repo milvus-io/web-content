@@ -483,7 +483,7 @@ summary: Saiba como configurar o dataCoord para o Milvus.
     <tr>
       <td>
         <li>O número máximo de ficheiros binlog (que é igual ao número do ficheiro binlog da chave primária) para um segmento, </li>      
-        <li>o segmento será fechado se o número de ficheiros binlog atingir o valor máximo.</li>      </td>
+        <li>o segmento será encerrado se o número de ficheiros binlog atingir o valor máximo.</li>      </td>
       <td>32</td>
     </tr>
   </tbody>
@@ -1049,7 +1049,7 @@ summary: Saiba como configurar o dataCoord para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        O limiar do rácio de um segmento para desencadear uma única compactação, predefinido como 0,2   </td>
+      <td>        O limite do rácio de um segmento para desencadear uma única compactação, predefinido como 0,2   </td>
       <td>0.2</td>
     </tr>
   </tbody>
@@ -1252,7 +1252,7 @@ summary: Saiba como configurar o dataCoord para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        O intervalo mínimo entre execuções de compactação de clustering de uma coleção, para evitar a compactação redundante      </td>
+      <td>        O intervalo mínimo entre execuções de compactação de clustering de uma coleção, para evitar compactação redundante      </td>
       <td>3600</td>
     </tr>
   </tbody>
@@ -1803,7 +1803,7 @@ summary: Saiba como configurar o dataCoord para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        o intervalo de verificação do equilíbrio automático configurado      </td>
+      <td>        o intervalo de verificação do saldo automático configurado      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1977,7 +1977,7 @@ summary: Saiba como configurar o dataCoord para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        O intervalo para verificar a importação, medido em segundos, é definido como uma frequência baixa para o verificador de importação.      </td>
+      <td>        O intervalo para verificar a importação, medido em segundos, está definido para uma frequência baixa para o verificador de importação.      </td>
       <td>120</td>
     </tr>
   </tbody>

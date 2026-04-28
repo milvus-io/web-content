@@ -2,8 +2,7 @@
 id: json-indexing.md
 title: JSONインデックス
 summary: >-
-  JSONフィールドはMilvusに構造化メタデータを保存する柔軟な方法を提供します。インデックスを作成しない場合、JSONフィールドに対するクエリはフルコレクションスキャンを必要とし、データセットが大きくなるにつれて遅くなります。JSON
-  インデックスは、JSON データ内にインデックスを作成することで、高速な検索を可能にします。
+  JSONフィールドはMilvusに構造化メタデータを保存する柔軟な方法を提供します。インデックスを作成しない場合、JSONフィールドに対するクエリはフルコレクションスキャンを必要とし、データセットが大きくなるにつれて遅くなります。JSONインデックスは、JSONデータ内にインデックスを作成することで、高速な検索を可能にします。
 ---
 <h1 id="JSON-Indexing" class="common-anchor-header">JSONインデックス<button data-href="#JSON-Indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>JSONフィールドはMilvusに構造化メタデータを保存する柔軟な方法を提供します。インデックスを作成しない場合、JSONフィールドに対するクエリはフルコレクションスキャンを必要とし、データセットが大きくなるにつれて遅くなります。JSONインデックスは、JSONデータ内にインデックスを作成することで、高速な検索を可能にします。</p>
+    </button></h1><p>JSONフィールドはMilvusに構造化メタデータを保存する柔軟な方法を提供します。インデックスを作成しない場合、JSONフィールドに対するクエリはフルコレクションスキャンを必要とし、データセットが大きくなるにつれて時間がかかります。JSONインデックスは、JSONデータ内にインデックスを作成することで、高速な検索を可能にします。</p>
 <p>JSON インデックスは次のような場合に最適です：</p>
 <ul>
 <li><p>一貫した既知のキーを持つ構造化スキーマ</p></li>
@@ -85,7 +84,7 @@ index_params.add_index(
    </tr>
    <tr>
      <td><p><code translate="no">index_name</code></p></td>
-     <td><p>このインデックスの一意識別子。</p></td>
+     <td><p>このインデックスの一意の識別子。</p></td>
      <td><p><code translate="no">"category_index"</code></p></td>
    </tr>
    <tr>
@@ -195,7 +194,7 @@ index_params.add_index(
    </tr>
 </table>
 <div class="alert note">
-<p>変換に失敗した場合（例：非数値文字列）、値はスキップされ、インデックスは作成されない。</p>
+<p>変換に失敗した場合（例えば、数値でない文字列）、値はスキップされ、インデックスは作成されない。</p>
 </div>
 <h2 id="Create-JSON-indexes" class="common-anchor-header">JSON インデックスの作成<button data-href="#Create-JSON-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -365,7 +364,7 @@ index_params.add_index(
       </svg>
     </button></h3><p>JSONオブジェクト全体をインデックス化し、その中の任意のフィールドに対するクエリを可能にする。<code translate="no">json_cast_type=&quot;JSON&quot;</code> を使用すると、システムは自動的に以下の処理を行います：</p>
 <ul>
-<li><p><strong>JSON構造をフラットにする</strong>：入れ子になったオブジェクトは、効率的なインデックス作成のためにフラット・パスに変換される。</p></li>
+<li><p><strong>JSON構造をフラットにする</strong>：入れ子になったオブジェクトは、効率的なインデックス作成のためにフラットパスに変換される。</p></li>
 <li><p><strong>データ型を推測する</strong>：各値は、その内容に基づいて、数値、文字列、ブーリアン、または日付に自動的に分類される。</p></li>
 <li><p><strong>包括的なカバレッジを作成</strong>：オブジェクト内のすべてのキーとネストされたパスが検索可能になります。</p></li>
 </ul>

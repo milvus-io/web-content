@@ -238,7 +238,7 @@ summary: 'Erfahren Sie, wie Sie minio für Milvus konfigurieren.'
         <li>Name des Buckets, in dem Milvus Daten in MinIO oder S3 speichert.</li>      
         <li>Milvus 2.0.0 unterstützt nicht die Speicherung von Daten in mehreren Buckets.</li>      
         <li>Der Bucket mit diesem Namen wird erstellt, wenn er nicht existiert. Wenn der Bucket bereits existiert und zugänglich ist, wird er direkt verwendet. Andernfalls wird ein Fehler ausgegeben.</li>      
-        <li>Um eine MinIO-Instanz auf mehrere Milvus-Instanzen aufzuteilen, sollten Sie diesen Wert für jede Milvus-Instanz auf einen anderen Wert ändern, bevor Sie sie starten. Einzelheiten finden Sie in den FAQs zum Betrieb.</li>      
+        <li>Wenn Sie eine MinIO-Instanz für mehrere Milvus-Instanzen freigeben möchten, sollten Sie diesen Wert für jede Milvus-Instanz auf einen anderen Wert ändern, bevor Sie sie starten. Einzelheiten finden Sie in den FAQs zum Betrieb.</li>      
         <li>Die Daten werden im lokalen Docker gespeichert, wenn Docker verwendet wird, um den MinIO-Dienst lokal zu starten. Stellen Sie sicher, dass ausreichend Speicherplatz vorhanden ist.</li>      
         <li>Ein Bucket-Name ist in einer MinIO- oder S3-Instanz global eindeutig.</li>      </td>
       <td>a-bucket</td>
@@ -273,7 +273,7 @@ summary: 'Erfahren Sie, wie Sie minio für Milvus konfigurieren.'
         <li>Wurzelpräfix des Schlüssels, in dem Milvus Daten in MinIO oder S3 speichert.</li>      
         <li>Es wird empfohlen, diesen Parameter zu ändern, bevor Sie Milvus zum ersten Mal starten.</li>      
         <li>Wenn Sie eine MinIO-Instanz für mehrere Milvus-Instanzen freigeben möchten, sollten Sie diesen Wert für jede Milvus-Instanz ändern, bevor Sie sie starten. Einzelheiten finden Sie in den FAQs zum Betrieb.</li>      
-        <li>Legen Sie ein einfach zu identifizierendes Root-Schlüsselpräfix für Milvus fest, wenn der etcd-Dienst bereits existiert.</li>      
+        <li>Legen Sie ein einfach zu identifizierendes Root-Key-Präfix für Milvus fest, wenn der etcd-Dienst bereits existiert.</li>      
         <li>Das Ändern dieses Wertes für eine bereits laufende Milvus-Instanz kann zu Fehlern beim Lesen von Legacy-Daten führen.</li>      </td>
       <td>Dateien</td>
     </tr>
@@ -344,7 +344,7 @@ summary: 'Erfahren Sie, wie Sie minio für Milvus konfigurieren.'
         <li>Sie können "aws" für andere Cloud-Anbieter verwenden, die S3 API mit Signatur v4 unterstützen, z.B.: minio</li>      
         <li>Sie können "gcp" für andere Cloud-Anbieter verwenden, die S3-API mit Signatur v2 unterstützen.</li>      
         <li>Sie können "aliyun" verwenden, wenn ein anderer Cloud-Anbieter einen Bucket im Stil eines virtuellen Hosts verwendet.</li>      
-        <li>Sie können "gcpnative" für den Google Cloud Platform-Anbieter verwenden. Verwendet die Anmeldedaten des Dienstkontos</li>      
+        <li>Sie können "gcpnative" für den Google Cloud Platform-Anbieter verwenden. Verwendet Dienstkonto-Anmeldeinformationen</li>      
         <li>für die Authentifizierung.</li>      
         <li>Wenn useIAM aktiviert ist, werden derzeit nur "aws", "gcp" und "aliyun" unterstützt</li>      </td>
       <td>aws</td>
@@ -555,7 +555,7 @@ summary: 'Erfahren Sie, wie Sie minio für Milvus konfigurieren.'
     <tr>
       <td>
         <li>Die maximale Anzahl von Objekten, die pro Batch in minio ListObjects rpc angefordert werden, </li>      
-        <li>0 bedeutet, dass der Oss-Client standardmäßig verwendet wird, verringern Sie diese Konfigration, wenn ListObjects timeout</li>      </td>
+        <li>0 bedeutet, dass standardmäßig der OSS-Client verwendet wird, verringern Sie diese Konfigration, wenn ListObjects timeout</li>      </td>
       <td>0</td>
     </tr>
   </tbody>

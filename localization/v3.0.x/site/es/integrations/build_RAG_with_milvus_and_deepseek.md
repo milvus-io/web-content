@@ -59,7 +59,7 @@ title: Construir RAG con Milvus y DeepSeek
 <blockquote>
 <p>Si está utilizando Google Colab, para habilitar las dependencias que acaba de instalar, puede que tenga que <strong>reiniciar el tiempo de ejecución</strong> (haga clic en el menú "Runtime" en la parte superior de la pantalla, y seleccione "Reiniciar sesión" en el menú desplegable).</p>
 </blockquote>
-<p>DeepSeek habilita la API de estilo OpenAI. Puedes acceder a su web oficial y preparar la <a href="https://platform.deepseek.com/api_keys">clave api</a> <code translate="no">DEEPSEEK_API_KEY</code> como variable de entorno.</p>
+<p>DeepSeek habilita la API estilo OpenAI. Puedes acceder a su web oficial y preparar la <a href="https://platform.deepseek.com/api_keys">clave api</a> <code translate="no">DEEPSEEK_API_KEY</code> como variable de entorno.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;DEEPSEEK_API_KEY&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>

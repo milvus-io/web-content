@@ -19,7 +19,7 @@ summary: 'Milvus는 별칭 관리 기능을 제공합니다. 이 페이지에서
         ></path>
       </svg>
     </button></h1><p>Milvus에서 별칭은 컬렉션의 변경 가능한 보조 이름입니다. 별칭을 사용하면 애플리케이션 코드를 수정하지 않고도 컬렉션 간에 동적으로 전환할 수 있는 추상화 계층을 제공합니다. 이는 원활한 데이터 업데이트, A/B 테스트 및 기타 운영 작업을 위해 프로덕션 환경에서 특히 유용합니다.</p>
-<p>이 페이지에서는 컬렉션 별칭을 만들고, 나열하고, 재할당하고, 삭제하는 방법을 설명합니다.</p>
+<p>이 페이지에서는 컬렉션 별칭을 만들고, 나열하고, 재할당하고, 삭제하는 방법을 보여줍니다.</p>
 <h2 id="Why-Use-an-Alias" class="common-anchor-header">별칭을 사용하는 이유<button data-href="#Why-Use-an-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

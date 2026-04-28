@@ -46,7 +46,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當您建立 JSON 索引時，您需要指定</p>
+    </button></h2><p>當您建立 JSON 索引時，您必須指定</p>
 <ul>
 <li><p><strong>JSON 路徑</strong>：您想要索引的資料的確切位置</p></li>
 <li><p><strong>資料鑄造類型</strong>：如何解釋和儲存索引值</p></li>
@@ -128,7 +128,7 @@ index_params.add_index(
    </tr>
    <tr>
      <td><p><code translate="no">BOOL</code> /<code translate="no">bool</code></p></td>
-     <td><p>用於索引布林值，可讓查詢過濾真假條件。</p></td>
+     <td><p>用於索引布林值，使查詢可以篩選真/假條件。</p></td>
      <td><p><code translate="no">true</code>,<code translate="no">false</code></p></td>
    </tr>
    <tr>
@@ -292,7 +292,7 @@ index_params = MilvusClient.prepare_index_params()
 <span class="highlighted-comment-line">    }</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Index-a-nested-key" class="common-anchor-header">範例 2：為嵌套關鍵字建立索引<button data-href="#Example-2-Index-a-nested-key" class="anchor-icon" translate="no">
+<h3 id="Example-2-Index-a-nested-key" class="common-anchor-header">範例 2：為巢狀關鍵字建立索引<button data-href="#Example-2-Index-a-nested-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -478,7 +478,7 @@ MilvusClient.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>不可以，每個 JSON key 只支援一個索引。您必須選擇符合您資料的單一<code translate="no">json_cast_type</code> 。但是，您可以在整個 JSON 物件上建立索引，也可以在該物件中的巢狀關鍵上建立索引。</p>
+    </button></h3><p>不可以，每個 JSON key 只支援一個索引。您必須選擇符合您資料的單一<code translate="no">json_cast_type</code> 。不過，您可以在整個 JSON 物件上建立索引，也可以在該物件中的巢狀關鍵上建立索引。</p>
 <h3 id="Does-a-JSON-field-support-setting-a-default-value" class="common-anchor-header">JSON 欄位是否支援設定預設值？<button data-href="#Does-a-JSON-field-support-setting-a-default-value" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -496,7 +496,7 @@ res = client.delete(
         ></path>
       </svg>
     </button></h2><p>Todos los datos almacenados en Milvus Lite se pueden exportar y cargar fácilmente en otros tipos de despliegue de Milvus, como Milvus Standalone en Docker, Milvus Distributed en K8s, o Milvus totalmente gestionado en <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
-<p>Milvus Lite proporciona una herramienta de línea de comandos que puede volcar datos en un archivo json, que puede ser importado en <a href="https://github.com/milvus-io/milvus">milvus</a> y <a href="https://zilliz.com/cloud">Zilliz Cloud</a>(el servicio de nube totalmente gestionado para Milvus). El comando milvus-lite se instalará junto con el paquete python milvus-lite.</p>
+<p>Milvus Lite proporciona una herramienta de línea de comandos que puede volcar datos en un archivo json, que se puede importar en <a href="https://github.com/milvus-io/milvus">milvus</a> y <a href="https://zilliz.com/cloud">Zilliz Cloud</a>(el servicio en la nube totalmente gestionado para Milvus). El comando milvus-lite se instalará junto con el paquete python milvus-lite.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Install</span>
 pip install -U &quot;pymilvus[bulk_writer]&quot;
 

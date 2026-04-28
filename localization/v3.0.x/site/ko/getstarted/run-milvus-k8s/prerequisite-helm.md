@@ -70,7 +70,7 @@ title: Kubernetes에서 Milvus를 실행하기 위한 요구 사항
 <tr><th>운영 체제</th><th>소프트웨어</th><th>참고</th></tr>
 </thead>
 <tbody>
-<tr><td>Linux 플랫폼</td><td><ul><li>쿠버네티스 1.16 이상</li><li>kubectl</li><li>헬름 3.0.0 이상</li><li>미니큐브(Milvus 스탠드얼론용)</li><li>도커 19.03 이상(밀버스 독립형용)</li></ul></td><td>자세한 내용은 <a href="https://helm.sh/docs/">헬름 문서를</a> 참조한다.</td></tr>
+<tr><td>Linux 플랫폼</td><td><ul><li>쿠버네티스 1.16 이상</li><li>kubectl</li><li>헬름 3.0.0 이상</li><li>미니큐브(Milvus 스탠드얼론용)</li><li>Docker 19.03 이상(Milvus 독립형용)</li></ul></td><td>자세한 내용은 <a href="https://helm.sh/docs/">헬름 문서를</a> 참조한다.</td></tr>
 </tbody>
 </table>
 <table>

@@ -41,7 +41,7 @@ title: Tingkatkan kualitas pencarian Aplikasi LLM Anda dengan AIMon dan Milvus
 <ul>
 <li>Membangun aplikasi LLM yang menjawab pertanyaan pengguna yang terkait dengan dataset bank rapat.</li>
 <li>Mendefinisikan dan mengukur kualitas aplikasi LLM Anda.</li>
-<li>Meningkatkan kualitas aplikasi Anda menggunakan 2 pendekatan tambahan: DB vektor menggunakan pencarian hybrid dan perangkingan ulang yang canggih.</li>
+<li>Meningkatkan kualitas aplikasi Anda menggunakan 2 pendekatan tambahan: DB vektor menggunakan pencarian hybrid dan perangking ulang yang canggih.</li>
 </ul>
 <h2 id="Tech-Stack" class="common-anchor-header">Tumpukan Teknologi<button data-href="#Tech-Stack" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -532,7 +532,7 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
 <p>Ada dua komponen utama yang perlu kita perhatikan: Ingestion dan Tanya Jawab berbasis RAG. Pipeline ingestion memproses transkrip dari dataset Meeting Bank dan menyimpannya dalam database Milvus Vector. Pipeline RAG Q&amp;A memproses pertanyaan pengguna dengan terlebih dahulu mengambil dokumen yang relevan dari penyimpanan vektor. Dokumen-dokumen ini kemudian akan digunakan sebagai dokumen dasar bagi LLM untuk menghasilkan responsnya. Kami memanfaatkan AIMon untuk menghitung skor kualitas dan terus memantau aplikasi untuk <a href="https://docs.aimon.ai/detectors/hallucination">halusinasi</a>, <a href="https://docs.aimon.ai/detectors/instruction_adherence">kepatuhan terhadap instruksi</a>, dan <a href="https://docs.aimon.ai/checker-models/context_relevance">relevansi konteks</a>. Ini adalah 3 metrik yang sama yang kami gunakan untuk menentukan skor <code translate="no">quality</code> di atas.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
    </span> <span class="img-wrapper"> <span>alur kerja</span> </span></p>
 <p>Di bawah ini adalah beberapa fungsi utilitas untuk melakukan pra-pemrosesan dan menghitung penyematan untuk dokumen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json

@@ -126,7 +126,7 @@ beta: Milvus 2.6.4+
      <td><p>bool</p></td>
      <td><p><code translate="no">true</code>/<code translate="no">false</code></p></td>
      <td><p>Ejecuta el desalojo de forma asíncrona en segundo plano. Requiere <code translate="no">evictionEnabled: true</code>. Por defecto <code translate="no">false</code>.</p></td>
-     <td><p>Utilice <code translate="no">true</code> para un rendimiento de consulta más fluido; reduce la frecuencia de desalojo sincronizado.</p></td>
+     <td><p>Utilice <code translate="no">true</code> para un rendimiento de consulta más fluido; reduce la frecuencia de desalojo sincrónico.</p></td>
    </tr>
 </table>
 <h2 id="Configure-watermarks" class="common-anchor-header">Configurar marcas de agua<button data-href="#Configure-watermarks" class="anchor-icon" translate="no">

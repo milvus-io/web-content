@@ -23,7 +23,7 @@ summary: >-
 <p>Milvus 允许您通过 Collect schema 指定搜索数据模型，组织非结构化数据、它们的密集或稀疏向量表示以及结构化元数据。无论您处理的是文本、图像还是其他数据类型，本实践指南都将帮助您理解和应用关键的 Schema 概念，在实践中设计搜索数据模型。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
    </span> <span class="img-wrapper"> <span>数据模型剖析</span> </span></p>
 <h2 id="Data-Model" class="common-anchor-header">数据模型<button data-href="#Data-Model" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,10 +66,10 @@ summary: >-
 <li><p>根据结构化元数据（如出版日期、标签、评级）过滤项目</p></li>
 <li><p>在混合查询中结合多种标准（例如，在视觉搜索中，同时考虑图像及其标题的语义相似性）</p></li>
 </ul></li>
-<li><p><strong>搜索方法：</strong>根据用户将执行的查询类型选择适当的搜索技术。不同的方法服务于不同的目的，通常可以结合使用以获得更强大的结果：</p>
+<li><p><strong>搜索方法：</strong>根据用户将执行的查询类型选择适当的搜索技术。不同的方法有不同的目的，通常可以结合使用以获得更强大的结果：</p>
 <ul>
 <li><p><strong>语义搜索</strong>：使用密集向量相似性来查找具有相似含义的项目，非常适合文本或图像等非结构化数据。</p></li>
-<li><p><strong>全文搜索</strong>：用关键字匹配补充语义搜索。  全文搜索可以利用词法分析，避免将长词分解成零散的标记，在检索过程中抓住特殊术语。</p></li>
+<li><p><strong>全文搜索</strong>：用关键字匹配补充语义搜索。  全文搜索可利用词法分析，避免将长词分解成零散的标记，从而在检索过程中抓住特殊术语。</p></li>
 <li><p><strong>元数据过滤</strong>：在向量搜索的基础上，应用日期范围、类别或标签等约束条件。</p></li>
 </ul></li>
 </ul>
@@ -100,7 +100,7 @@ summary: >-
 <li><p>结构化信息，如作者详细信息 -&gt; json</p></li>
 </ul></li>
 </ul>
-<p>明确定义这些元素可确保数据的一致性、搜索结果的准确性以及与下游应用逻辑集成的便捷性。</p>
+<p>这些元素的明确定义可确保数据的一致性、搜索结果的准确性以及与下游应用逻辑集成的便捷性。</p>
 <h2 id="Schema-Design" class="common-anchor-header">Schema 设计<button data-href="#Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -251,7 +251,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本节中，我们将概述上图所示多媒体文档搜索应用程序的 Schema 设计和代码示例。该 Schema 设计用于管理包含文章的数据集，文章数据映射到以下字段：</p>
+    </button></h2><p>在本节中，我们将概述上图所示多媒体文档搜索应用程序的 Schema 设计和代码示例。该 Schema 设计用于管理包含文章的数据集，数据映射到以下字段：</p>
 <table>
    <tr>
      <th><p><strong>字段</strong></p></th>
@@ -545,7 +545,7 @@ schema.addField(AddFieldReq.builder()
 <ul>
 <li><p>主键：<code translate="no">article_id</code> 用作主键，可自动为输入实体分配主键。</p></li>
 <li><p>Partition Key：<code translate="no">timestamp</code> 被指定为分区键，允许通过分区进行过滤。这可能是</p></li>
-<li><p>文本分析器：文本分析器应用于 2 个字符串字段<code translate="no">title</code> 和<code translate="no">text</code> ，以分别支持文本匹配和全文搜索。</p></li>
+<li><p>文本分析器：文本分析器应用于 2 个字符串字段<code translate="no">title</code> 和<code translate="no">text</code> ，分别支持文本匹配和全文搜索。</p></li>
 </ul>
 <h3 id="Optional-Add-functions" class="common-anchor-header">(可选）添加功能<button data-href="#Optional-Add-functions" class="anchor-icon" translate="no">
       <svg translate="no"

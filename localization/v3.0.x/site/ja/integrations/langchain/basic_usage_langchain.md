@@ -318,7 +318,7 @@ retriever.invoke(<span class="hljs-string">&quot;Stealing from the bank is a cri
 
 [Document(metadata={'source': 'news', 'pk': '2818c051-5a1a-44cb-9deb-aaaac709f616'}, page_content='Robbers broke into the city bank and stole $1 million in cash.')]
 </code></pre>
-<h2 id="Usage-for-Retrieval-Augmented-Generation" class="common-anchor-header">リトリーバー化した生成の使い方<button data-href="#Usage-for-Retrieval-Augmented-Generation" class="anchor-icon" translate="no">
+<h2 id="Usage-for-Retrieval-Augmented-Generation" class="common-anchor-header">検索機能付き生成の使い方<button data-href="#Usage-for-Retrieval-Augmented-Generation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

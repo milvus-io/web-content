@@ -146,7 +146,7 @@ Default sparse embedding function: BM25BuiltInFunction(input_field_names='text',
 <li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>:enable_sparse が True の場合、テキストをスパース埋め込みに変換するためにこのオブジェクトを提供する必要があります。Noneの場合、デフォルトのスパース埋め込み関数(BM25BuiltInFunction)が使用されるか、組み込み関数のない既存のコレクションではBGEM3SparseEmbeddingが使用される。</li>
 <li><code translate="no">sparse_index_config (dict, optional)</code>:スパース埋め込みインデックスの構築に使用される設定。デフォルトはNoneです。</li>
 </ul>
-<p>クエリの段階でハイブリッド検索を有効にするには、<code translate="no">vector_store_query_mode</code> を "hybrid "に設定します。これにより、セマンティック検索とフルテキスト検索の両方からの検索結果が結合され、再ランク付けされる。サンプルクエリでテストしてみよう：「著者はViawebで何を学びましたか？</p>
+<p>クエリの段階でハイブリッド検索を有効にするには、<code translate="no">vector_store_query_mode</code> を "hybrid "に設定します。これにより、セマンティック検索とフルテキスト検索の両方からの検索結果が結合され、再ランク付けされる。サンプルクエリでテストしてみよう：「著者はViawebで何を学んだのか？</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> textwrap
 
 query_engine = index.as_query_engine(
@@ -158,7 +158,22 @@ response = query_engine.query(<span class="hljs-string">&quot;What did the autho
 <pre><code translate="no">The author learned about retail, the importance of user feedback, and the significance of growth
 rate as the ultimate test of a startup at Viaweb.
 </code></pre>
-<h3 id="Customize-text-analyzer" class="common-anchor-header">テキストアナライザーをカスタマイズする</h3><p>アナライザーは、文章をトークンに分割し、ステミングやストップワード除去などの語彙処理を行うことで、全文検索において重要な役割を果たします。アナライザは通常、言語固有です。詳細は<a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Milvus Analyzer Guideを</a>ご参照ください。</p>
+<h3 id="Customize-text-analyzer" class="common-anchor-header">テキストアナライザーをカスタマイズする<button data-href="#Customize-text-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>アナライザーは、文章をトークンに分割し、ステミングやストップワード除去などの語彙処理を行うことで、全文検索において重要な役割を果たします。アナライザは通常、言語固有です。詳細は<a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Milvus Analyzer Guideを</a>ご参照ください。</p>
 <p>Milvusは2種類のアナライザをサポートしています：<strong>ビルトイン アナライザと</strong> <strong>カスタム アナライザ</strong>です。デフォルトでは、<code translate="no">enable_sparse</code> が True に設定されている場合、<code translate="no">MilvusVectorStore</code> はデフォルト設定の<code translate="no">BM25BuiltInFunction</code> を利用し、句読点に基づいてテキストをトークン化する標準の組み込みアナライザを採用します。</p>
 <p>別の解析器を使用したり、既存の解析器をカスタマイズしたりするには、<code translate="no">BM25BuiltInFunction</code> を構築する際に<code translate="no">analyzer_params</code> 引数に値を指定します。その後、この関数を<code translate="no">MilvusVectorStore</code> の<code translate="no">sparse_embedding_function</code> として設定します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.vector_stores.milvus.utils <span class="hljs-keyword">import</span> BM25BuiltInFunction
@@ -238,12 +253,27 @@ The author learned about retail, the importance of user feedback, the value of g
 startup, the significance of pricing strategy, the benefits of working on things that weren't
 prestigious, and the challenges and rewards of running a startup.
 </code></pre>
-<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">スパース埋め込み関数のカスタマイズ</h3><p>以下のメソッドを含む<code translate="no">BaseSparseEmbeddingFunction</code> を継承する限り、スパース埋め込み関数をカスタマイズすることもできます：</p>
+<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">スパース埋め込み関数のカスタマイズ<button data-href="#Customize-Sparse-Embedding-Function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下のメソッドを含む<code translate="no">BaseSparseEmbeddingFunction</code> を継承する限り、スパース埋め込み関数をカスタマイズすることもできます：</p>
 <ul>
 <li><code translate="no">encode_queries</code>:このメソッドは、テキストをクエリ用のスパース埋め込みリストに変換します。</li>
 <li><code translate="no">encode_documents</code>:このメソッドは、テキストを文書用のスパース埋め込みリストに変換します。</li>
 </ul>
-<p>各メソッドの出力は、辞書のリストであるスパース埋込みの形式に従う必要があります。各辞書は，次元を表すキー（整数）と，その次元における埋込みの大きさを表す対応する値（浮動小数点数）を持つ必要があります（例えば，{1: 0.5, 2: 0.3}）．</p>
+<p>各メソッドの出力は、辞書のリストであるスパース埋込みの形式に従う必要があります。各辞書は，次元を表すキー（整数）と，その次元における埋込みの大きさを表す対応する値（浮動小数点数）を持つ必要があります（例：{1: 0.5, 2: 0.3}）．</p>
 <p>例えば、BGE-M3を使ったカスタムスパース埋め込み関数の実装です：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> FlagEmbedding <span class="hljs-keyword">import</span> BGEM3FlagModel
 <span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>
@@ -300,7 +330,7 @@ prestigious, and the challenges and rewards of running a startup.
 <li>RRFRanker "の場合、以下を含むべきである：<ul>
 <li>"k"(int)：k」（int）：RRF（Reciprocal Rank Fusion）で使用されるパラメータ。この値はRRFアルゴリズムの一部としてランクスコアを計算するために使用され、複数のランキング戦略を1つのスコアにまとめ、検索の関連性を向上させます。デフォルト値は60です。</li>
 </ul></li>
-<li>WeightedRanker "には、次のようなものが期待される：<ul>
+<li>WeightedRanker "には、次のような値を指定します：<ul>
 <li>"weights"（floatのリスト）：2つの重みのリスト：<ol>
 <li>密な埋め込みコンポーネントの重み。</li>
 <li>これらの重みは，ハイブリッド検索処理において，埋め込み成分の密な成分と疎な成分の重要度のバランスをとるために用いられます．デフォルトの重みは[1.0, 1.0]です。</li>

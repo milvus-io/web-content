@@ -65,19 +65,19 @@ title: AnythingLLMでMilvusを使う
 <li>AnythingLLMを開き、左下の<strong>設定</strong>アイコンをクリックします。<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_dashboard.png" alt="Open Settings" class="doc-image" id="open-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_dashboard.png" alt="Open Settings" class="doc-image" id="open-settings" />
    </span> <span class="img-wrapper"> <span>設定を開く</span> </span></li>
 </ol>
 <ol start="2">
 <li><p>左のメニューで、<code translate="no">AI Providers</code> &gt;<code translate="no">Vector Database</code> を選択します。  <br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_config.png" alt="Select Vector Database" class="doc-image" id="select-vector-database" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_config.png" alt="Select Vector Database" class="doc-image" id="select-vector-database" />
    </span> <span class="img-wrapper"> <span>ベクターデータベースを選択</span> </span></p></li>
 <li><p>Vector Database Providerドロップダウンで、<strong>Milvus</strong>（またはZilliz Cloud）を選択します。<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_vectordb.png" alt="Choose Milvus" class="doc-image" id="choose-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_vectordb.png" alt="Choose Milvus" class="doc-image" id="choose-milvus" />
    </span> <span class="img-wrapper"> <span>Milvusを選択します。</span> </span></p></li>
 <li><p>Milvus接続の詳細を入力します（ローカルMilvusの場合）。以下はその例です：</p>
 <ul>
@@ -86,16 +86,16 @@ title: AnythingLLMでMilvusを使う
 <li><strong>Milvusパスワード：</strong> <code translate="no">Milvus</code>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_milvus.png" alt="Milvus Connection" class="doc-image" id="milvus-connection" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_milvus.png" alt="Milvus Connection" class="doc-image" id="milvus-connection" />
    </span> <span class="img-wrapper"> <span>Milvus接続</span> </span></li>
 </ul>
 <blockquote>
-<p>Zilliz Cloudをご利用の場合は、代わりにCluster EndpointとAPI Tokenを入力してください：</p>
-</blockquote>
-<p>
+<p>Zilliz Cloudをご利用の場合は、代わりにCluster EndpointとAPI Tokenを入力してください：<br>
+
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_zilliz_cloud.png" alt="Zilliz Cloud Connection" class="doc-image" id="zilliz-cloud-connection" />
-   </span> <span class="img-wrapper"> <span>Zillizクラウド接続</span> </span></p></li>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_zilliz_cloud.png" alt="Zilliz Cloud Connection" class="doc-image" id="zilliz-cloud-connection" />
+   </span> <span class="img-wrapper"> <span>Zillizクラウド接続</span> </span></p>
+</blockquote></li>
 <li><p><strong>Save changes]</strong>をクリックして設定を適用します。</p></li>
 </ol>
 <hr>
@@ -118,7 +118,7 @@ title: AnythingLLMでMilvusを使う
 <li><p>ワークスペースを入力し、<strong>アップロードアイコンを</strong>クリックしてドキュメントのアップロードダイアログを開きます。<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_upload_file.png" alt="Open Upload Dialog" class="doc-image" id="open-upload-dialog" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_upload_file.png" alt="Open Upload Dialog" class="doc-image" id="open-upload-dialog" />
    </span> <span class="img-wrapper"> <span>アップロードダイアログを開く</span> </span></p></li>
 <li><p>さまざまなデータ・ソースをアップロードできます：</p>
 <ul>
@@ -127,17 +127,17 @@ title: AnythingLLMでMilvusを使う
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_upload_interface.png" alt="Upload Documents" class="doc-image" id="upload-documents" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_upload_interface.png" alt="Upload Documents" class="doc-image" id="upload-documents" />
    </span> <span class="img-wrapper"> <span>ドキュメントのアップロード</span> </span></p></li>
 <li><p>アップロードまたは取得後、[<strong>ワークスペースに移動]</strong>をクリックして、ドキュメントまたはデータを現在のワークスペースに移動します。<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_move_to_workspace.png" alt="Move to Workspace" class="doc-image" id="move-to-workspace" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_move_to_workspace.png" alt="Move to Workspace" class="doc-image" id="move-to-workspace" />
    </span> <span class="img-wrapper"> <span>ワークスペースに移動</span> </span></p></li>
 <li><p>ドキュメントまたはデータを選択し、[<strong>保存して埋め込む</strong>] をクリックします。AnythingLLMが自動的にコンテンツをチャンクし、埋め込み、Milvusに保存します。<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_save_and_embed.png" alt="Save and Embed" class="doc-image" id="save-and-embed" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_save_and_embed.png" alt="Save and Embed" class="doc-image" id="save-and-embed" />
    </span> <span class="img-wrapper"> <span>保存して埋め込む</span> </span></p></li>
 </ol>
 <hr>
@@ -160,7 +160,7 @@ title: AnythingLLMでMilvusを使う
 <li>ワークスペースのチャットインターフェイスに戻り、質問をします。AnythingLLMはMilvusベクターデータベースから関連するコンテンツを検索し、LLMを使って回答を生成します。<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_chat.png" alt="Chat with Docs" class="doc-image" id="chat-with-docs" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_chat.png" alt="Chat with Docs" class="doc-image" id="chat-with-docs" />
    </span> <span class="img-wrapper"> <span>ドキュメントとチャット</span> </span></li>
 </ol>
 <hr>

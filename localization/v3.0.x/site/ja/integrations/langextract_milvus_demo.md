@@ -25,8 +25,8 @@ title: LangExtract + Milvusインテグレーション
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>このガイドでは、<a href="https://github.com/google/langextract">LangExtractと</a> <a href="https://milvus.io/">Milvusを</a>使用してインテリジェントな文書処理・検索システムを構築する方法を説明します。</p>
-<p>LangExtractは大規模言語モデル(LLM)を使用して、構造化されていないテキスト文書から正確なソースグラウンディングで構造化された情報を抽出するPythonライブラリです。このシステムは、LangExtractの抽出機能とmilvusのベクトルストレージを組み合わせることで、意味的類似検索と正確なメタデータフィルタリングの両方を可能にします。</p>
-<p>この統合は、コンテンツ管理、セマンティック検索、ナレッジディスカバリー、抽出されたドキュメント属性に基づく推薦システムの構築に特に有効です。</p>
+<p>LangExtractは大規模言語モデル(LLM)を使用して、構造化されていないテキスト文書から正確なソースグラウンディングで構造化された情報を抽出するPythonライブラリです。このシステムは、LangExtractの抽出機能とmilvusのベクトルストレージを組み合わせ、意味的類似検索と正確なメタデータフィルタリングの両方を可能にします。</p>
+<p>この統合は、コンテンツ管理、セマンティック検索、ナレッジディスカバリー、抽出されたドキュメント属性に基づく推薦システムの構築において特に有用です。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +46,7 @@ title: LangExtract + Milvusインテグレーション
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus milvus-lite langextract google-genai requests tqdm pandas</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
+<p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするには、<strong>ランタイムを再起動する</strong>必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
 </div>
 <p>この例では、LLMとしてGeminiを使用します。<a href="https://aistudio.google.com/app/apikey">api key</a> <code translate="no">GEMINI_API_KEY</code> を環境変数として用意してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -119,7 +119,7 @@ EMBEDDING_DIM = <span class="hljs-number">3072</span>  <span class="hljs-comment
 <div class="alert note">
 <p>引数として<code translate="no">MilvusClient</code> を指定します：</p>
 <ul>
-<li><code translate="no">./milvus.db</code> のように<code translate="no">uri</code> をローカルファイルとして設定するのが最も便利な方法であり、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite を</a>自動的に利用してすべてのデータをこのファイルに保存することができます。</li>
+<li><code translate="no">./milvus.db</code> のように<code translate="no">uri</code> をローカルファイルとして設定するのが最も便利な方法であり、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite を</a>利用して自動的にすべてのデータをこのファイルに保存することができます。</li>
 <li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>

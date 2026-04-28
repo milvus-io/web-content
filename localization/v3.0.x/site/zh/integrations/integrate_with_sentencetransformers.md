@@ -89,7 +89,7 @@ collection_name = <span class="hljs-string">&quot;movie_embeddings&quot;</span>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;./sentence_transformers_example.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>创建数据 Schema。这将指定构成元素的字段，包括向量 Embeddings 的维度。</li>
+<li>创建数据 Schema。这将指定组成元素的字段，包括向量 Embeddings 的维度。</li>
 </ol>
 <pre><code translate="no" class="language-python">fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>),

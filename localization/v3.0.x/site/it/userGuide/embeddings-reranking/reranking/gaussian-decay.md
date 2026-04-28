@@ -54,7 +54,7 @@ beta: Milvus 2.6.x
    <tr>
      <th><p>Caso d'uso</p></th>
      <th><p>Esempio</p></th>
-     <th><p>Perché la gaussiana funziona bene</p></th>
+     <th><p>Perché il decadimento gaussiano funziona bene</p></th>
    </tr>
    <tr>
      <td><p>Ricerche basate sulla posizione</p></td>
@@ -77,7 +77,7 @@ beta: Milvus 2.6.x
      <td><p>Valutazione equilibrata della rilevanza dell'esperienza</p></td>
    </tr>
 </table>
-<p>Se la vostra applicazione richiede una sensazione naturale di rilevanza decrescente, senza penalizzazioni severe o limiti rigidi, il decadimento gaussiano è probabilmente la scelta migliore.</p>
+<p>Se la vostra applicazione richiede una sensazione naturale di rilevanza decrescente, senza penalizzazioni severe o cutoff rigidi, il decadimento gaussiano è probabilmente la scelta migliore.</p>
 <h2 id="Bell-curve-principle" class="common-anchor-header">Principio della curva a campana<button data-href="#Bell-curve-principle" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

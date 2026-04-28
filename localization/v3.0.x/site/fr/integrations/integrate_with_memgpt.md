@@ -22,7 +22,7 @@ title: MemGPT avec intégration Milvus
         ></path>
       </svg>
     </button></h1><p><a href="https://memgpt.readme.io/docs/index">MemGPT</a> facilite la création et le déploiement d'agents LLM avec état. Avec l'intégration Milvus, vous pouvez construire des agents avec des connexions à des sources de données externes (RAG).</p>
-<p>Dans cet exemple, nous allons utiliser MemGPT pour dialoguer avec une source de données personnalisée stockée dans Milvus.</p>
+<p>Dans cet exemple, nous allons utiliser MemGPT pour dialoguer avec une source de données personnalisée qui est stockée dans Milvus.</p>
 <h2 id="Configuration" class="common-anchor-header">Configuration de l'application<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ title: MemGPT avec intégration Milvus
         ></path>
       </svg>
     </button></h2><p>Pour exécuter MemGPT, vous devez vous assurer que la version de Python est &gt;= 3.10.</p>
-<p>Pour activer le backend Milvus, assurez-vous d'installer les dépendances requises avec :</p>
+<p>Pour activer le backend Milvus, assurez-vous d'installer les dépendances nécessaires avec :</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&#x27;pymemgpt[milvus]&#x27;</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous pouvez configurer la connexion Milvus via la commande</p>
@@ -49,7 +49,7 @@ title: MemGPT avec intégration Milvus
 ? Select storage backend for archival data: milvus
 ? Enter the Milvus connection URI (Default: ~/.memgpt/milvus.db): ~/.memgpt/milvus.db
 <button class="copy-code-btn"></button></code></pre>
-<p>Il suffit de définir l'URI sur le chemin du fichier local, par exemple <code translate="no">~/.memgpt/milvus.db</code>, ce qui invoquera automatiquement l'instance de service Milvus locale par le biais de Milvus Lite.</p>
+<p>Il vous suffit de définir l'URI sur le chemin du fichier local, par exemple <code translate="no">~/.memgpt/milvus.db</code>, ce qui invoquera automatiquement l'instance de service Milvus locale par le biais de Milvus Lite.</p>
 <p>Si vous disposez de données à grande échelle, comme plus d'un million de documents, nous vous recommandons de configurer un serveur Milvus plus performant sur <a href="https://milvus.io/docs/quickstart.md">docker ou kubenetes</a>. Dans ce cas, votre URI doit être l'URI du serveur, par exemple <code translate="no">http://localhost:19530</code>.</p>
 <h2 id="Creating-an-external-data-source" class="common-anchor-header">Création d'une source de données externe<button data-href="#Creating-an-external-data-source" class="anchor-icon" translate="no">
       <svg translate="no"

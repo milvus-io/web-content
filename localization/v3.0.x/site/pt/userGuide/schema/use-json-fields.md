@@ -505,7 +505,7 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 <p><strong>Utilize o índice de caminho JSON quando:</strong></p>
 <ul>
 <li><p>Sabe antecipadamente as teclas de atalho a consultar.</p></li>
-<li><p>Você precisa filtrar onde o lado esquerdo é uma matriz.</p></li>
+<li><p>É necessário filtrar onde o lado esquerdo é uma matriz.</p></li>
 <li><p>Você deseja minimizar o uso do disco.</p></li>
 </ul>
 <p><strong>Utilize o índice plano JSON quando:</strong></p>
@@ -543,7 +543,7 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 <li><p><strong>Tipo de conversão JSON</strong> (<code translate="no">json_cast_type</code>): O tipo de dados que o Milvus deve utilizar ao interpretar e indexar o valor no caminho especificado.</p>
 <ul>
 <li><p>Este tipo deve corresponder ao tipo de dados real do campo que está a ser indexado. Se pretender converter o tipo de dados para outro durante a indexação, considere <a href="/docs/pt/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">a utilização de uma função cast</a>.</p></li>
-<li><p>Para obter uma lista completa, consulte <a href="/docs/pt/use-json-fields.md#Supported-JSON-cast-types">abaixo</a>.</p></li>
+<li><p>Para obter uma lista completa, veja <a href="/docs/pt/use-json-fields.md#Supported-JSON-cast-types">abaixo</a>.</p></li>
 </ul></li>
 </ul>
 <h4 id="Supported-JSON-cast-types" class="common-anchor-header">Tipos de conversão JSON suportados</h4><p>Os tipos de conversão não diferenciam maiúsculas de minúsculas. São suportados os seguintes tipos:</p>

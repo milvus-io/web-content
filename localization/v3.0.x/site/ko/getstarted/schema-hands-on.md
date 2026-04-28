@@ -24,7 +24,7 @@ summary: >-
 <p>Milvus를 사용하면 수집 스키마를 통해 검색 데이터 모델을 지정하여 비정형 데이터, 조밀하거나 희박한 벡터 표현, 구조화된 메타데이터를 구성할 수 있습니다. 이 실습 가이드는 텍스트, 이미지 또는 기타 데이터 유형으로 작업하는 경우, 핵심 스키마 개념을 이해하고 실제로 검색 데이터 모델을 설계하는 데 적용하는 데 도움이 될 것입니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
    </span> <span class="img-wrapper"> <span>데이터 모델 해부학</span> </span></p>
 <h2 id="Data-Model" class="common-anchor-header">데이터 모델<button data-href="#Data-Model" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -67,7 +67,7 @@ summary: >-
 <li><p>구조화된 메타데이터(예: 게시 날짜, 태그, 평점)를 기준으로 항목 필터링하기</p></li>
 <li><p>하이브리드 쿼리에서 여러 기준 결합(예: 시각적 검색에서 이미지와 캡션의 의미적 유사성 고려)</p></li>
 </ul></li>
-<li><p><strong>검색 방법:</strong> 사용자가 수행할 쿼리 유형에 맞는 적절한 검색 기술을 선택하세요. 각 검색 방법은 목적에 따라 다르며, 종종 더 강력한 결과를 위해 결합할 수 있습니다:</p>
+<li><p><strong>검색 방법:</strong> 사용자가 수행할 쿼리 유형에 맞는 적절한 검색 기술을 선택하세요. 검색 방법마다 목적이 다르며 종종 더 강력한 결과를 얻기 위해 결합할 수 있습니다:</p>
 <ul>
 <li><p><strong>시맨틱 검색</strong>: 고밀도 벡터 유사성을 사용하여 비슷한 의미를 가진 항목을 찾는 방법으로 텍스트나 이미지 같은 비정형 데이터에 이상적입니다.</p></li>
 <li><p><strong>전체 텍스트 검색</strong>: 키워드 매칭으로 시맨틱 검색을 보완합니다.  전체 텍스트 검색은 어휘 분석을 활용하여 긴 단어를 조각난 토큰으로 나누지 않고 검색 중에 특수 용어를 파악할 수 있습니다.</p></li>
@@ -117,7 +117,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus에서 데이터 모델은 컬렉션 스키마를 통해 표현됩니다. 컬렉션 스키마 내에서 올바른 필드를 설계하는 것은 효과적인 검색을 가능하게 하는 핵심입니다. 각 필드는 컬렉션에 저장된 특정 유형의 데이터를 정의하며 검색 프로세스에서 고유한 역할을 합니다. 상위 수준에서 Milvus는 <strong>벡터 필드</strong> 와 <strong>스칼라 필드라는</strong> 두 가지 주요 유형의 필드를 지원합니다.</p>
+    </button></h2><p>Milvus에서 데이터 모델은 컬렉션 스키마를 통해 표현됩니다. 컬렉션 스키마 내에서 올바른 필드를 설계하는 것은 효과적인 검색을 가능하게 하는 핵심입니다. 각 필드는 컬렉션에 저장된 특정 유형의 데이터를 정의하며 검색 프로세스에서 고유한 역할을 수행합니다. 상위 수준에서 Milvus는 <strong>벡터 필드</strong> 와 <strong>스칼라 필드라는</strong> 두 가지 주요 유형의 필드를 지원합니다.</p>
 <p>이제 데이터 모델을 벡터 및 보조 스칼라 필드를 포함한 필드 스키마에 매핑할 수 있습니다. 각 필드가 데이터 모델의 속성과 연관되어 있는지 확인하고, 특히 벡터 유형(밀도 또는 스페이스) 및 차원에 주의하세요.</p>
 <h3 id="Vector-Field" class="common-anchor-header">벡터 필드<button data-href="#Vector-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -201,7 +201,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>검색 속도를 높이려면 선택적으로 파티셔닝을 켤 수 있습니다. 파티셔닝을 위해 특정 스칼라 필드를 지정하고 검색 중에 이 필드를 기반으로 필터링 기준을 지정하면 검색 범위를 관련 파티션으로만 효과적으로 제한할 수 있습니다. 이 방법은 검색 도메인을 줄임으로써 검색 작업의 효율성을 크게 향상시킵니다.</p>
+    </button></h3><p>검색 속도를 높이려면 선택적으로 파티셔닝을 켤 수 있습니다. 파티셔닝을 위해 특정 스칼라 필드를 지정하고 검색 중에 이 필드를 기준으로 필터링 기준을 지정하면 검색 범위를 관련 파티션으로만 효과적으로 제한할 수 있습니다. 이 방법은 검색 도메인을 줄임으로써 검색 작업의 효율성을 크게 향상시킵니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p>
 <h3 id="Analyzer" class="common-anchor-header">분석기<button data-href="#Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -265,7 +265,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>article_id (<code translate="no">INT64</code>)</p></td>
-     <td><p>활성화된 상태에서 자동 생성 <code translate="no">auto_id</code></p></td>
+     <td><p>활성화 시 자동 생성 <code translate="no">auto_id</code></p></td>
      <td><p><a href="/docs/ko/get-and-scalar-query.md">Get을 사용하여 쿼리</a></p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>

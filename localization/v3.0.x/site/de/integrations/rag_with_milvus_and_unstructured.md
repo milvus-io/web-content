@@ -67,7 +67,7 @@ title: Erstellen Sie eine RAG mit Milvus und Unstructured
 <li>Für bestimmte Formate (z.B. PDF): <code translate="no">pip install &quot;unstructured[pdf]&quot;</code></li>
 <li>Weitere Installationsoptionen finden Sie in der <a href="https://docs.unstructured.io/open-source/installation/full-installation">Unstructured-Dokumentation</a></li>
 </ul>
-<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
+<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Laufzeitumgebung neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Laufzeit" am oberen Rand des Bildschirms und wählen Sie "Sitzung neu starten" aus dem Dropdown-Menü).</p>
 <p>Wir werden in diesem Beispiel OpenAI als LLM verwenden. Sie sollten den <a href="https://platform.openai.com/docs/quickstart">Api-Schlüssel</a> <code translate="no">OPENAI_API_KEY</code> als Umgebungsvariable vorbereiten.</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -203,7 +203,7 @@ elements = partition(
     chunking_strategy=<span class="hljs-string">&quot;by_title&quot;</span>,
 )  <span class="hljs-comment"># Replace with the path to your PDF file</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Schauen wir uns die partitionierten Elemente der PDF-Datei an. Jedes Element repräsentiert einen Teil des Inhalts, der durch den Partitionierungsprozess von Unstructured extrahiert wurde.</p>
+<p>Schauen wir uns die partitionierten Elemente der PDF-Datei an. Jedes Element steht für einen Teil des Inhalts, der durch den Partitionierungsprozess von Unstructured extrahiert wurde.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> element <span class="hljs-keyword">in</span> elements:
     <span class="hljs-built_in">print</span>(element)
     <span class="hljs-keyword">break</span>

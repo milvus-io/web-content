@@ -27,17 +27,62 @@ title: Hybride Suche mit Milvus
 <ul>
 <li>Dichtes Retrieval: Nutzt den semantischen Kontext, um die Bedeutung hinter den Abfragen zu verstehen.</li>
 <li>Sparse Retrieval: Konzentriert sich auf den Abgleich von Schlüsselwörtern, um Ergebnisse auf der Grundlage bestimmter Begriffe zu finden, was einer Volltextsuche entspricht.</li>
-<li>Hybrides Retrieval: Kombiniert sowohl Dense- als auch Sparse-Ansätze und erfasst den vollständigen Kontext und spezifische Schlüsselwörter für umfassende Suchergebnisse.</li>
+<li>Hybrides Retrieval: Kombiniert sowohl Dense- als auch Sparse-Ansätze und erfasst den gesamten Kontext und spezifische Schlüsselwörter für umfassende Suchergebnisse.</li>
 </ul>
 <p>Durch die Integration dieser Methoden gleicht die Milvus-Hybridsuche semantische und lexikalische Ähnlichkeiten aus und verbessert so die Gesamtrelevanz der Suchergebnisse. Dieses Notebook führt durch den Prozess der Einrichtung und Verwendung dieser Suchstrategien und zeigt ihre Effektivität in verschiedenen Suchszenarien auf.</p>
-<h3 id="Dependencies-and-Environment" class="common-anchor-header">Abhängigkeiten und Umgebung</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+<h3 id="Dependencies-and-Environment" class="common-anchor-header">Abhängigkeiten und Umgebung<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Download-Dataset" class="common-anchor-header">Datensatz herunterladen</h3><p>Um die Suche zu demonstrieren, benötigen wir einen Korpus von Dokumenten. Wir verwenden das Quora Duplicate Questions Dataset und legen es im lokalen Verzeichnis ab.</p>
+<h3 id="Download-Dataset" class="common-anchor-header">Datensatz herunterladen<button data-href="#Download-Dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um die Suche zu demonstrieren, benötigen wir einen Korpus von Dokumenten. Wir verwenden das Quora Duplicate Questions Dataset und legen es im lokalen Verzeichnis ab.</p>
 <p>Quelle des Datensatzes: <a href="https://www.quora.com/q/quoradata/First-Quora-Dataset-Release-Question-Pairs">Erste Veröffentlichung des Quora-Datensatzes: Frage-Paare</a></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Run this cell to download the dataset</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget http://qim.fs.quoracdn.net/quora_duplicate_questions.tsv</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Load-and-Prepare-Data" class="common-anchor-header">Laden und Aufbereiten der Daten</h3><p>Wir werden den Datensatz laden und einen kleinen Korpus für die Suche vorbereiten.</p>
+<h3 id="Load-and-Prepare-Data" class="common-anchor-header">Laden und Aufbereiten der Daten<button data-href="#Load-and-Prepare-Data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Wir werden den Datensatz laden und einen kleinen Korpus für die Suche vorbereiten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 file_path = <span class="hljs-string">&quot;quora_duplicate_questions.tsv&quot;</span>
@@ -57,7 +102,22 @@ docs = <span class="hljs-built_in">list</span>(questions)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">What is the strongest Kevlar cord?
 </code></pre>
-<h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">BGE-M3 Modell für Einbettungen verwenden</h3><p>Das BGE-M3-Modell kann Texte als dichte und spärliche Vektoren einbetten.</p>
+<h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">BGE-M3 Modell für Einbettungen verwenden<button data-href="#Use-BGE-M3-Model-for-Embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Das BGE-M3-Modell kann Texte als dichte und spärliche Vektoren einbetten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 
 ef = BGEM3EmbeddingFunction(use_fp16=<span class="hljs-literal">False</span>, device=<span class="hljs-string">&quot;cpu&quot;</span>)
@@ -69,7 +129,22 @@ docs_embeddings = ef(docs)
 <pre><code translate="no">Fetching 30 files: 100%|██████████| 30/30 [00:00&lt;00:00, 302473.85it/s]
 Inference Embeddings: 100%|██████████| 32/32 [01:59&lt;00:00,  3.74s/it]
 </code></pre>
-<h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">Milvus-Sammlung und -Index einrichten</h3><p>Wir werden die Milvus-Sammlung einrichten und Indizes für die Vektorfelder erstellen.</p>
+<h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">Milvus-Sammlung und -Index einrichten<button data-href="#Setup-Milvus-Collection-and-Index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Wir werden die Milvus-Sammlung einrichten und Indizes für die Vektorfelder erstellen.</p>
 <div class="alert alert-info">
 <ul>
 <li>Die Uri als lokale Datei zu setzen, z.B. "./milvus.db", ist die bequemste Methode, da sie automatisch <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> nutzt, um alle Daten in dieser Datei zu speichern.</li>
@@ -117,7 +192,22 @@ dense_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span cl
 col.create_index(<span class="hljs-string">&quot;dense_vector&quot;</span>, dense_index)
 col.load()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-Data-into-Milvus-Collection" class="common-anchor-header">Daten in die Milvus-Sammlung einfügen</h3><p>Fügen Sie Dokumente und ihre Einbettungen in die Sammlung ein.</p>
+<h3 id="Insert-Data-into-Milvus-Collection" class="common-anchor-header">Daten in die Milvus-Sammlung einfügen<button data-href="#Insert-Data-into-Milvus-Collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Fügen Sie Dokumente und ihre Einbettungen in die Sammlung ein.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># For efficiency, we insert 50 records in each small batch</span>
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(docs), <span class="hljs-number">50</span>):
     batched_entities = [
@@ -130,7 +220,22 @@ col.load()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Number of entities inserted: 502
 </code></pre>
-<h3 id="Enter-Your-Search-Query" class="common-anchor-header">Geben Sie Ihre Suchabfrage ein</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Enter your search query</span>
+<h3 id="Enter-Your-Search-Query" class="common-anchor-header">Geben Sie Ihre Suchabfrage ein<button data-href="#Enter-Your-Search-Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Enter your search query</span>
 query = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;Enter your search query: &quot;</span>)
 <span class="hljs-built_in">print</span>(query)
 
@@ -140,7 +245,22 @@ query_embeddings = ef([query])
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">How to start learning programming?
 </code></pre>
-<h3 id="Run-the-Search" class="common-anchor-header">Starten Sie die Suche</h3><p>Wir werden zunächst einige hilfreiche Funktionen vorbereiten, um die Suche auszuführen:</p>
+<h3 id="Run-the-Search" class="common-anchor-header">Starten Sie die Suche<button data-href="#Run-the-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Wir werden zunächst einige hilfreiche Funktionen vorbereiten, um die Suche auszuführen:</p>
 <ul>
 <li><code translate="no">dense_search</code>: nur im dichten Vektorfeld suchen</li>
 <li><code translate="no">sparse_search</code>: nur im spärlichen Vektorfeld suchen</li>
@@ -212,7 +332,22 @@ hybrid_results = hybrid_search(
     dense_weight=<span class="hljs-number">1.0</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Display-Search-Results" class="common-anchor-header">Suchergebnisse anzeigen</h3><p>Um die Ergebnisse der Dense-, Sparse- und Hybrid-Suche anzuzeigen, benötigen wir einige Hilfsprogramme zur Formatierung der Ergebnisse.</p>
+<h3 id="Display-Search-Results" class="common-anchor-header">Suchergebnisse anzeigen<button data-href="#Display-Search-Results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um die Ergebnisse der Dense-, Sparse- und Hybrid-Suche anzuzeigen, benötigen wir einige Hilfsmittel, um die Ergebnisse zu formatieren.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">doc_text_formatting</span>(<span class="hljs-params">ef, query, docs</span>):
     tokenizer = ef.model.tokenizer
     query_tokens_ids = tokenizer.encode(query, return_offsets_mapping=<span class="hljs-literal">True</span>)
@@ -309,6 +444,21 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p><span style='color:red'>Wie</span> erstelle ich eine neue Shell in einem neuen Terminal mit<span style='color:red'> C-Programmierung</span> (Linux-Terminal)<span style='color:red'>?</span></p>
 <p>Welches Unternehmen ist in Hyderabad besser<span style='color:red'> zu gründen</span><span style='color:red'>?</span></p>
 <p>Welches Unternehmen ist ein guter<span style='color:red'> Start</span> in Hyderabad<span style='color:red'>?</span></p>
-<p>Welche Mathematik braucht ein völliger Neuling<span style='color:red'>, um</span> Algorithmen für die<span style='color:red'> Computerprogrammierung</span> zu verstehen<span style='color:red'>?</span> Welche Bücher über Algorithmen sind für einen absoluten Anfänger geeignet<span style='color:red'>?</span></p>
+<p>Welche Mathematik braucht ein absoluter Neuling<span style='color:red'>, um</span> Algorithmen für die<span style='color:red'> Computerprogrammierung</span> zu verstehen<span style='color:red'>?</span> Welche Bücher über Algorithmen sind für einen absoluten Anfänger geeignet<span style='color:red'>?</span></p>
 <p><span style='color:red'>Wie</span> kann man das Leben so gestalten, dass es zu einem passt, und wie kann man verhindern, dass das Leben einen geistig und emotional <span style='color:red'>missbraucht</span><span style='color:red'>?</span></p>
-<h3 id="Quick-Deploy" class="common-anchor-header">Schnell einsatzbereit</h3><p>Um zu erfahren, wie man mit diesem Tutorial eine Online-Demo startet, sehen Sie sich bitte <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus">die Beispielanwendung</a> an.</p>
+<h3 id="Quick-Deploy" class="common-anchor-header">Schnell einsatzbereit<button data-href="#Quick-Deploy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um zu erfahren, wie man mit diesem Tutorial eine Online-Demo startet, sehen Sie sich bitte <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus">die Beispielanwendung</a> an.</p>

@@ -95,7 +95,7 @@ summary: >-
 <pre><code translate="no" class="language-bash">CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O       BLOCK I/O         PIDS
 917da667f2ff   milvus-standalone   6.10%     171.8MiB / 3.886GiB   4.32%     1.57kB / 0B   1.01GB / 1.79MB   31
 <button class="copy-code-btn"></button></code></pre>
-<p>コマンドの出力で、Milvusインスタンスの現在のリソース使用量を確認できます。</p></li>
+<p>コマンド出力で、Milvusインスタンスの現在のリソース使用量を確認できます。</p></li>
 <li><p>コンテナを停止し、削除する。</p>
 <pre><code translate="no" class="language-bash">$ docker stop milvus-standalone
 $ docker <span class="hljs-built_in">rm</span> milvus-standalone

@@ -124,7 +124,7 @@ res = MilvusClient.search(
 <p><strong>Comportamento</strong></p>
 <ul>
 <li><p>Quando <code translate="no">load.adapt_for_cpu</code> è impostato su <code translate="no">true</code>, Milvus converte l'indice <strong>GPU_CAGRA</strong> in un formato eseguibile dalla CPU (simile a HNSW) durante il caricamento.</p></li>
-<li><p>Le operazioni di ricerca successive vengono eseguite sulla CPU, anche se l'indice è stato originariamente creato per la GPU.</p></li>
+<li><p>Le operazioni di ricerca successive vengono eseguite sulla CPU, anche se l'indice è stato originariamente costruito per la GPU.</p></li>
 <li><p>Se omesso o falso, l'indice rimane su GPU e le ricerche vengono eseguite su GPU.</p></li>
 </ul>
 <div class="alert note">
@@ -175,7 +175,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">graph_degree</code></p></td>
-     <td><p>Influisce sulle prestazioni della ricerca e sul richiamo impostando il grado del grafo dopo la potatura. Una differenza maggiore tra questi due gradi comporta un tempo di costruzione più lungo. Il suo valore deve essere inferiore al valore di <code translate="no">intermediate_graph_degree</code>.</p></td>
+     <td><p>Influisce sulle prestazioni di ricerca e sul richiamo impostando il grado del grafo dopo la potatura. Una differenza maggiore tra questi due gradi comporta un tempo di costruzione più lungo. Il suo valore deve essere inferiore al valore di <code translate="no">intermediate_graph_degree</code>.</p></td>
      <td><p><code translate="no">64</code></p></td>
    </tr>
    <tr>

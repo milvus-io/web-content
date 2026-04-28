@@ -36,7 +36,22 @@ title: Skalenabhängigkeiten
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">Erhöhen Sie die Ressourcen pro MinIO-Pod</h3><p>Bei MinIO, einem von Milvus verwendeten Objektspeichersystem, können die CPU- und Speicherressourcen für jeden Pod erhöht werden.</p>
+    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">Erhöhen Sie die Ressourcen pro MinIO-Pod<button data-href="#Increase-resources-per-MinIO-pod" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Bei MinIO, einem von Milvus verwendeten Objektspeichersystem, können die CPU- und Speicherressourcen für jeden Pod erhöht werden.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">resources:</span>
@@ -47,8 +62,23 @@ title: Skalenabhängigkeiten
 <p>Nachdem Sie die Datei gespeichert haben, wenden Sie die Änderungen mit dem folgenden Befehl an:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Sie können die Festplattenkapazität für den MioIO-Cluster auch erhöhen, indem Sie den Wert von <code translate="no">spec.resources.requests.storage</code> für jeden MioIO Persistent Volume Claim (PVC) manuell ändern. Beachten Sie, dass Ihre Standardspeicherklasse eine Volume-Erweiterung ermöglichen sollte.</p>
-<h3 id="Add-an-extra-MinIO-server-pool-Recommended" class="common-anchor-header">Fügen Sie einen zusätzlichen MinIO-Serverpool hinzu (empfohlen)</h3><p>Wir empfehlen Ihnen, einen zusätzlichen MioIO-Server-Pool für Ihre Milvus-Instanz hinzuzufügen.</p>
+<p>Sie können auch die Festplattenkapazität für den MioIO-Cluster erhöhen, indem Sie den Wert von <code translate="no">spec.resources.requests.storage</code> für jeden MioIO Persistent Volume Claim (PVC) manuell ändern. Beachten Sie, dass Ihre Standardspeicherklasse eine Volume-Erweiterung ermöglichen sollte.</p>
+<h3 id="Add-an-extra-MinIO-server-pool-Recommended" class="common-anchor-header">Fügen Sie einen zusätzlichen MinIO-Serverpool hinzu (empfohlen)<button data-href="#Add-an-extra-MinIO-server-pool-Recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Wir empfehlen Ihnen, einen zusätzlichen MioIO-Server-Pool für Ihre Milvus-Instanz hinzuzufügen.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yam;</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">zones:</span> <span class="hljs-number">2</span>
@@ -85,7 +115,22 @@ title: Skalenabhängigkeiten
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resource-per-Kafka-broker-pod" class="common-anchor-header">Erhöhung der Ressourcen pro Kafka-Broker-Pod</h3><p>Erhöhen Sie die Kapazität des Kafka-Brokers, indem Sie die CPU- und Speicherressourcen für jeden Broker-Pod anpassen.</p>
+    </button></h2><h3 id="Increase-resource-per-Kafka-broker-pod" class="common-anchor-header">Erhöhung der Ressourcen pro Kafka-Broker-Pod<button data-href="#Increase-resource-per-Kafka-broker-pod" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Erhöhen Sie die Kapazität des Kafka-Brokers, indem Sie die CPU- und Speicherressourcen für jeden Broker-Pod anpassen.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">kafka:</span>
   <span class="hljs-attr">resources:</span>
@@ -201,7 +246,22 @@ title: Skalenabhängigkeiten
         <span class="hljs-attr">size:</span> <span class="hljs-string">20Gi</span>
         <span class="hljs-attr">storageClassName:</span> <span class="hljs-string">gp3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-an-extra-Pulsar-broker-pod" class="common-anchor-header">Hinzufügen eines zusätzlichen Pulsar-Broker-Pods</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+<h3 id="Add-an-extra-Pulsar-broker-pod" class="common-anchor-header">Hinzufügen eines zusätzlichen Pulsar-Broker-Pods<button data-href="#Add-an-extra-Pulsar-broker-pod" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">broker:</span>
     <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">3</span>
@@ -209,7 +269,22 @@ title: Skalenabhängigkeiten
 <p>Nachdem Sie die Datei gespeichert haben, wenden Sie die Änderungen mit dem folgenden Befehl an:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-an-extra-Pulsar-bookie-pod-Recommended" class="common-anchor-header">Hinzufügen eines zusätzlichen Pulsar-Bookie-Pods (empfohlen)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+<h3 id="Add-an-extra-Pulsar-bookie-pod-Recommended" class="common-anchor-header">Hinzufügen eines zusätzlichen Pulsar-Bookie-Pods (empfohlen)<button data-href="#Add-an-extra-Pulsar-bookie-pod-Recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">bookkeeper:</span>
     <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">3</span>
@@ -232,7 +307,22 @@ title: Skalenabhängigkeiten
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resources-per-etcd-pod-recommended" class="common-anchor-header">Erhöhen Sie die Ressourcen pro etcd-Pod (empfohlen)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+    </button></h2><h3 id="Increase-resources-per-etcd-pod-recommended" class="common-anchor-header">Erhöhen Sie die Ressourcen pro etcd-Pod (empfohlen)<button data-href="#Increase-resources-per-etcd-pod-recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">etcd:</span>
   <span class="hljs-attr">resources:</span>
      <span class="hljs-attr">limits:</span>
@@ -242,7 +332,22 @@ title: Skalenabhängigkeiten
 <p>Nachdem Sie die Datei gespeichert haben, wenden Sie die Änderungen mit dem folgenden Befehl an:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-extra-etcd-pods" class="common-anchor-header">Zusätzliche etcd-Pods hinzufügen</h3><p>Die Gesamtzahl der etcd-Pods sollte eine ungerade Zahl sein.</p>
+<h3 id="Add-extra-etcd-pods" class="common-anchor-header">Zusätzliche etcd-Pods hinzufügen<button data-href="#Add-extra-etcd-pods" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Die Gesamtzahl der etcd-Pods sollte eine ungerade Zahl sein.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">etcd:</span>
   <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">5</span>

@@ -43,7 +43,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Batas waktu menonton saluran (dalam detik). Pembaruan datanode tickler kemajuan menonton akan mengatur ulang timer batas waktu.      </td>
+      <td>        Batas waktu menonton saluran (dalam detik). Pembaruan datanode tickler kemajuan menonton akan mengatur ulang waktu batas waktu.      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -726,7 +726,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
     <tr>
       <td>
         <li>Alihkan nilai untuk mengontrol apakah akan mengaktifkan pemadatan segmen otomatis selama data coord menempatkan dan menggabungkan segmen yang dapat dipadatkan di latar belakang.</li>      
-        <li>Konfigurasi ini hanya berlaku jika dataCoord.enableCompaction disetel sebagai true.</li>      </td>
+        <li>Konfigurasi ini hanya berlaku jika dataCoord.enableCompaction ditetapkan sebagai true.</li>      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -933,7 +933,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Ukuran minimum dalam byte untuk memicu pemicu Pemadatan LevelNol secara paksa, standarnya adalah 8MB   </td>
+      <td>        Ukuran minimum dalam byte untuk memicu pemicu Pemadatan LevelNol secara paksa, nilai standarnya adalah 8MB   </td>
       <td>8388608</td>
     </tr>
   </tbody>
@@ -1890,7 +1890,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Untuk mencegah pembuatan segmen kecil, kami akan mengelompokkan ulang file yang diimpor. Parameter ini mewakili jumlah ukuran file di setiap grup (setiap ImportTask).      </td>
+      <td>        Untuk mencegah pembuatan segmen kecil, kami akan mengelompokkan ulang file yang diimpor. Parameter ini mewakili jumlah ukuran file dalam setiap grup (setiap ImportTask).      </td>
       <td>6144</td>
     </tr>
   </tbody>

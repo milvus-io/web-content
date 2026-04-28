@@ -70,7 +70,7 @@ title: 'Multiagentensysteme mit Mistral AI, Milvus und Llama-Agenten'
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
    </span> <span class="img-wrapper"> <span>bild.png</span> </span></p>
 <h2 id="llama-agents" class="common-anchor-header">Lama-Agenten<button data-href="#llama-agents" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -87,7 +87,7 @@ title: 'Multiagentensysteme mit Mistral AI, Milvus und Llama-Agenten'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">llama-agents</code> macht es möglich, Agenten als Microservices zu betreiben. Das macht es möglich, Dienste nach oben und unten zu skalieren.</p>
+    </button></h2><p><code translate="no">llama-agents</code> macht es möglich, Agenten als Microservices zu betreiben. Das ermöglicht die Skalierung von Diensten nach oben und unten.</p>
 <h2 id="llama-index" class="common-anchor-header">lama-index<button data-href="#llama-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -107,12 +107,12 @@ title: 'Multiagentensysteme mit Mistral AI, Milvus und Llama-Agenten'
 <ul>
 <li>Datenkonnektoren nehmen Ihre vorhandenen Daten aus ihrer nativen Quelle und ihrem Format auf.</li>
 <li>Datenindizes strukturieren Ihre Daten in Zwischenrepräsentationen, die für LLMs einfach und performant zu nutzen sind.</li>
-<li>Engines bieten natürlichsprachlichen Zugang zu Ihren Daten.</li>
-<li>Agenten sind LLM-gestützte Wissensarbeiter, die durch Tools erweitert werden, von einfachen Hilfsfunktionen bis hin zu API-Integrationen und mehr.</li>
+<li>Engines bieten einen natürlichsprachlichen Zugang zu Ihren Daten.</li>
+<li>Agenten sind LLM-gestützte Wissensarbeiter, die durch Tools erweitert werden, von einfachen Hilfsfunktionen bis zu API-Integrationen und mehr.</li>
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
    </span> <span class="img-wrapper"> <span>bild.png</span> </span></p>
 <h2 id="Mistral-AI" class="common-anchor-header">Mistral KI<button data-href="#Mistral-AI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -527,7 +527,7 @@ Based on the provided context, which pertains to Lyft&#x27;s Risk Factors sectio
 - Operational factors like competition in ride-hailing services, unpredictability in results of operations, and uncertainty about market growth for ridesharing and related services.
 - Risks related to attracting and retaining qualified drivers and riders.
 <button class="copy-code-btn"></button></code></pre>
-<p>In diesem Beispiel liefert das System fälschlicherweise Informationen über Lyft statt über Uber, was zu einer irreführenden Antwort führt. Es beginnt mit der Aussage, dass es die Informationen nicht hat, und fährt dann immer weiter fort.</p>
+<p>In diesem Beispiel liefert das System fälschlicherweise Informationen über Lyft statt über Uber, was zu einer irreführenden Antwort führt. Es beginnt mit der Aussage, dass es die Informationen nicht hat, fährt dann aber immer weiter fort.</p>
 <h2 id="Using-an-Agent-to-Extract-Metadata-Filters" class="common-anchor-header">Verwendung eines Agenten zur Extraktion von Metadatenfiltern<button data-href="#Using-an-Agent-to-Extract-Metadata-Filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -543,7 +543,7 @@ Based on the provided context, which pertains to Lyft&#x27;s Risk Factors sectio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um dieses Problem zu lösen, können wir einen Agenten einsetzen, der automatisch Metadatenfilter aus der Frage des Benutzers extrahiert und diese während des Beantwortungsprozesses anwendet. Dadurch wird sichergestellt, dass das System die richtigen und relevanten Informationen abruft.</p>
+    </button></h2><p>Um dieses Problem zu lösen, können wir einen Agenten einsetzen, der automatisch Metadatenfilter aus der Frage des Benutzers extrahiert und sie während des Beantwortungsprozesses anwendet. Dadurch wird sichergestellt, dass das System die richtigen und relevanten Informationen abruft.</p>
 <h2 id="Code-Example" class="common-anchor-header">Code-Beispiel<button data-href="#Code-Example" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -559,7 +559,7 @@ Based on the provided context, which pertains to Lyft&#x27;s Risk Factors sectio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Das folgende Code-Beispiel zeigt, wie eine gefilterte Abfrage-Engine mit Hilfe eines Agenten erstellt wird, der Metadatenfilter aus der Frage des Benutzers extrahiert:</p>
+    </button></h2><p>Das folgende Code-Beispiel zeigt, wie eine gefilterte Abfrage-Engine mithilfe eines Agenten erstellt wird, der Metadatenfilter aus der Frage des Benutzers extrahiert:</p>
 <h3 id="Explanation" class="common-anchor-header">Erläuterung<button data-href="#Explanation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -677,7 +677,7 @@ Uber's total revenue for the year ended December 31, 2021, is $17.455 billion.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Die Frage, die wir im Folgenden beantworten wollen, ist besonders anspruchsvoll, weil sie die Orchestrierung mehrerer Dienste und Agenten erfordert, um eine kohärente und genaue Antwort zu geben. Dazu müssen verschiedene Tools und Agenten koordiniert werden, um Informationen aus unterschiedlichen Quellen abzurufen und zu verarbeiten, z. B. Finanzdaten von verschiedenen Unternehmen.</p>
+    </button></h3><p>Die Frage, die im Folgenden beantwortet werden soll, ist besonders anspruchsvoll, weil sie die Orchestrierung mehrerer Dienste und Agenten erfordert, um eine kohärente und genaue Antwort zu geben. Dazu müssen verschiedene Tools und Agenten koordiniert werden, um Informationen aus unterschiedlichen Quellen abzurufen und zu verarbeiten, z. B. Finanzdaten von verschiedenen Unternehmen.</p>
 <h3 id="Whats-so-difficult-about-that" class="common-anchor-header">Was ist daran so schwierig?<button data-href="#Whats-so-difficult-about-that" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

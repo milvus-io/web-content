@@ -262,7 +262,7 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
         ></path>
       </svg>
     </button></h3><p>Мы можем использовать функцию <code translate="no">search</code> для поиска наиболее связанного с пользователем воспоминания.</p>
-<p>Давайте начнем с добавления еще одной памяти для Алисы.</p>
+<p>Для начала добавим еще одну память для Алисы.</p>
 <pre><code translate="no" class="language-python">new_mem = m.add(
     <span class="hljs-string">&quot;I have a linear algebra midterm exam on November 20&quot;</span>,
     user_id=<span class="hljs-string">&quot;alice&quot;</span>,

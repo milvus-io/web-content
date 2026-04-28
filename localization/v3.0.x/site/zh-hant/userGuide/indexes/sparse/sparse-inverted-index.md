@@ -94,7 +94,7 @@ res = MilvusClient.search(
     limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>要瞭解<code translate="no">SPARSE_INVERTED_INDEX</code> 索引可用的更多搜尋參數，請參閱<a href="/docs/zh-hant/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">特定</a>於<a href="/docs/zh-hant/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">索引</a>的搜尋參數。</p>
+<p>要瞭解<code translate="no">SPARSE_INVERTED_INDEX</code> 索引可用的更多搜尋參數，請參閱<a href="/docs/zh-hant/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">特定於索引的搜尋參數</a>。</p>
 <h2 id="Index-params" class="common-anchor-header">索引參數<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

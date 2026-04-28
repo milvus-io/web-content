@@ -325,7 +325,7 @@ LLM Response: SELECT Phone FROM Customer WHERE Name = 'John Doe'
   </tbody>
 </table>
 </div>
-<p>Hier ist eine komplexere Frage. Die Informationen über den Namen der Herstellerfirma befinden sich in den Dokumentdaten, bei denen es sich um Hintergrundinformationen handelt. Die generierte SQL-Abfrage ruft die Kundeninformationen auf der Grundlage des spezifischen Namens des Fertigungsunternehmens ab.</p>
+<p>Hier ist eine komplexere Frage. Die Informationen über den Namen des Fertigungsunternehmens befinden sich in den Dokumentdaten, bei denen es sich um Hintergrundinformationen handelt. Die generierte SQL-Abfrage ruft die Kundeninformationen auf der Grundlage des spezifischen Namens des Fertigungsunternehmens ab.</p>
 <pre><code translate="no" class="language-python">sql = vn_milvus.generate_sql(<span class="hljs-string">&quot;which customer works for a manufacturing corporation?&quot;</span>)
 vn_milvus.run_sql(sql)
 <button class="copy-code-btn"></button></code></pre>

@@ -42,11 +42,11 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scann.png" alt="Scann" class="doc-image" id="scann" />
    </span> <span class="img-wrapper"> <span>掃描</span> </span></p>
 <ol>
-<li><p><strong>分割</strong>：將資料集分割成群組。此方法可縮窄搜尋空間，只專注於相關的資料子集，而非掃描整個資料集，從而節省時間和處理資源。ScaNN 通常使用聚類演算法 (例如<a href="https://zilliz.com/blog/k-means-clustering">k-means</a>) 來識別叢集，這可讓它更有效率地執行相似性搜尋。</p></li>
-<li><p><strong>量化</strong>：ScaNN 在分割後會應用一種稱為<a href="https://arxiv.org/abs/1908.10396">異向向量量化</a>的量化程序。傳統的量化著重於最小化原始向量與壓縮向量之間的整體距離，這對於<a href="https://papers.nips.cc/paper/5329-asymmetric-lsh-alsh-for-sublinear-time-maximum-inner-product-search-mips.pdf">最大內乘積搜尋 (Maximum Inner Product Search, MIPS)</a> 等任務並不理想，因為在這些任務中，相似性是由向量的內乘積而非直接距離決定。各向異性量化會優先保留向量之間的平行分量，或對計算精確內乘最重要的部分。此方法可讓 ScaNN 謹慎地將壓縮向量與查詢對齊，以維持高 MIPS 精確度，從而實現更快速、更精確的類似性搜尋。</p></li>
-<li><p><strong>重新排序</strong>：重新排序階段是最後一步，ScaNN 在此階段會微調分割與量化階段的搜尋結果。重新排序將精確的內乘積計算應用於頂部的候選向量，確保最終結果高度精確。重新排序在高速推薦引擎或圖片搜尋應用中至關重要，在這些應用中，最初的篩選和聚類可作為粗略的層次，而最後的階段則可確保只向使用者傳回最相關的結果。</p></li>
+<li><p><strong>分割</strong>：將資料集分割成群組。這種方法只會集中在相關的資料子集，而不會掃描整個資料集，因此可以縮小搜尋空間，節省時間和處理資源。ScaNN 通常使用聚類演算法 (例如<a href="https://zilliz.com/blog/k-means-clustering">k-means</a>) 來識別叢集，這可讓它更有效率地執行相似性搜尋。</p></li>
+<li><p><strong>量化</strong>：ScaNN 在分割後會應用一種稱為<a href="https://arxiv.org/abs/1908.10396">異向向量量化</a>的量化程序。傳統的量化著重於最小化原始向量與壓縮向量之間的整體距離，這對於<a href="https://papers.nips.cc/paper/5329-asymmetric-lsh-alsh-for-sublinear-time-maximum-inner-product-search-mips.pdf">最大內乘積搜尋 (Maximum Inner Product Search, MIPS)</a> 等任務並不理想，因為在這些任務中，相似性是由向量的內乘積而非直接距離決定的。各向異性量化會優先保留向量之間的平行分量，或對計算精確內乘最重要的部分。此方法可讓 ScaNN 謹慎地將壓縮向量與查詢對齊，以維持高 MIPS 精確度，從而實現更快速、更精確的類似性搜尋。</p></li>
+<li><p><strong>重新排序</strong>：重新排序階段是最後一步，ScaNN 在此階段會微調分割與量化階段的搜尋結果。重新排序會將精確的內積計算應用於頂部的候選向量，確保最終結果高度精確。重新排序在高速推薦引擎或圖片搜尋應用中至關重要，在這些應用中，最初的篩選和聚類可作為粗略的層次，而最後的階段則可確保只向使用者傳回最相關的結果。</p></li>
 </ol>
-<p><code translate="no">SCANN</code> 的效能由兩個關鍵參數控制，讓您可以微調速度與精確度之間的平衡：</p>
+<p><code translate="no">SCANN</code> 的性能由兩個關鍵參數控制，可讓您微調速度與精確度之間的平衡：</p>
 <ul>
 <li><p><code translate="no">with_raw_data</code>:控制原始向量資料是否與量化表示同時儲存。啟用此參數可提高重新排序時的精確度，但會增加儲存需求。</p></li>
 <li><p><code translate="no">reorder_k</code>:決定在最後重新排序階段精煉多少候選人。較高的值會提高精確度，但會增加搜尋延遲。</p></li>
@@ -213,7 +213,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">reorder_k</code></p></td>
      <td><p>控制在重新排序階段精煉的候選向量數量。此參數決定使用更精確的相似度計算，重新評估初始分割和量化階段的頂尖候選向量數量。</p></td>
      <td><p><strong>類型</strong>：整數</p><p><strong>範圍：</strong>[1、<em>int_max］</em></p><p><strong>預設值</strong>：無</p></td>
-     <td><p>較大的<code translate="no">reorder_k</code> 通常會帶來<strong>較高的搜尋準確度</strong>，因為在最後的精煉階段會考慮更多的候選人。不過，這也會因為額外的計算而<strong>增加搜尋時間</strong>。</p><p>當達到高召回率是關鍵，而搜尋速度較不重要時，請考慮增加<code translate="no">reorder_k</code> 。一個好的起點是 2-5 倍您所期望的<code translate="no">limit</code> (返回的 TopK 結果)。</p><p>考慮降低<code translate="no">reorder_k</code> 以優先加快搜尋速度，尤其是在可以接受精確度稍微降低的情況下。</p><p>在大多數情況下，我們建議您設定此範圍內的值：[<em>limit</em>,<em>limit</em>* 5].</p></td>
+     <td><p>較大的<code translate="no">reorder_k</code> 通常會帶來<strong>較高的搜尋準確度</strong>，因為在最後的精煉階段會考慮更多的候選人。不過，這也會因為額外的計算而<strong>增加搜尋時間</strong>。</p><p>當達到高召回率是關鍵，而搜尋速度較不重要時，請考慮增加<code translate="no">reorder_k</code> 。一個好的起點是 2-5 倍您所期望的<code translate="no">limit</code> (返回的 TopK 結果)。</p><p>考慮降低<code translate="no">reorder_k</code> ，以優先加快搜尋速度，尤其是在可以接受精確度稍微降低的情況下。</p><p>在大多數情況下，我們建議您設定此範圍內的值：[<em>limit</em>,<em>limit</em>* 5].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">nprobe</code></p></td>

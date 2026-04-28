@@ -206,7 +206,7 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p><code translate="no">num_entry_points</code></p></td>
-     <td><p>Jumlah titik masuk kandidat untuk mengoptimalkan pemilihan titik masuk pencarian.</p></td>
+     <td><p>Jumlah kandidat titik masuk untuk mengoptimalkan pemilihan titik masuk pencarian.</p></td>
      <td><p><strong>Tipe</strong> Bilangan bulat</p><p><strong>Rentang</strong>: [0, 1000]</p><p><strong>Nilai default</strong>: <code translate="no">100</code></p></td>
      <td><p>Nilai yang tinggi dapat mengurangi waktu pencarian dengan memulai pencarian dari titik masuk yang lebih dekat.</p><p>Tetapkan nilai yang lebih tinggi untuk segmen besar (misalnya untuk vektor 10M dan di atasnya gunakan nilai 1000).</p></td>
    </tr>
@@ -220,7 +220,7 @@ beta: Milvus 2.6.4+
      <td><p><code translate="no">disk_pq_code_budget_gb_ratio</code></p></td>
      <td><p>Mengontrol ukuran kode PQ dari vektor presisi tinggi yang disimpan dalam indeks (digunakan untuk pemeringkatan ulang), dibandingkan dengan ukuran data yang tidak dikompresi.</p></td>
      <td><p><strong>Tipe</strong> Mengapung</p><p><strong>Rentang</strong>: [0, 0.25]</p><p><strong>Nilai default</strong>: <code translate="no">0.25</code></p></td>
-     <td><p>Dengan nilai default 0,25, vektor akan dikuantisasi menjadi 25% dari ukuran aslinya (kompresi 4×), sehingga mengurangi jejak disk dengan dampak akurasi yang relatif minimal.</p><p>Tetapkan nilai 0 untuk menyimpan vektor presisi penuh dalam indeks disk untuk pemeringkatan ulang. Nilai yang lebih besar menawarkan tingkat penemuan kembali yang lebih tinggi tetapi meningkatkan penggunaan disk.</p></td>
+     <td><p>Dengan nilai default 0,25, vektor akan dikuantisasi menjadi 25% dari ukuran aslinya (kompresi 4×), sehingga mengurangi jejak disk dengan dampak akurasi yang relatif minimal.</p><p>Tetapkan nilai 0 untuk menyimpan vektor presisi penuh dalam indeks disk untuk pemeringkatan ulang. Nilai yang lebih besar menawarkan tingkat pemanggilan kembali yang lebih tinggi tetapi meningkatkan penggunaan disk.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">pq_cache_size</code></p></td>

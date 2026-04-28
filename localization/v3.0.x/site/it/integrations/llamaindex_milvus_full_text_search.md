@@ -31,10 +31,10 @@ summary: >-
       </svg>
     </button></h1><p>La<strong>ricerca full-text</strong> utilizza la corrispondenza esatta delle parole chiave, spesso sfruttando algoritmi come BM25 per classificare i documenti in base alla rilevanza. Nei sistemi <strong>RAG (Retrieval-Augmented Generation)</strong>, questo metodo recupera il testo pertinente per migliorare le risposte generate dall'intelligenza artificiale.</p>
 <p>Nel frattempo, la <strong>ricerca semantica</strong> interpreta il significato contestuale per fornire risultati più ampi. La combinazione di entrambi gli approcci crea una <strong>ricerca ibrida</strong> che migliora il reperimento delle informazioni, soprattutto nei casi in cui un singolo metodo è insufficiente.</p>
-<p>Con l'approccio Sparse-BM25 di <a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a>, il testo grezzo viene convertito automaticamente in vettori sparsi. Questo elimina la necessità di generare manualmente l'embedding sparse e consente una strategia di ricerca ibrida che bilancia la comprensione semantica con la pertinenza delle parole chiave.</p>
+<p>Con l'approccio Sparse-BM25 di <a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a>, il testo grezzo viene convertito automaticamente in vettori sparsi. In questo modo si elimina la necessità di generare manualmente l'embedding sparse e si ottiene una strategia di ricerca ibrida che bilancia la comprensione semantica con la pertinenza delle parole chiave.</p>
 <p>In questo tutorial imparerete a usare LlamaIndex e Milvus per costruire un sistema RAG usando la ricerca full-text e la ricerca ibrida. Inizieremo con l'implementazione della sola ricerca full-text e poi la miglioreremo integrando la ricerca semantica per ottenere risultati più completi.</p>
 <blockquote>
-<p>Prima di procedere con questa esercitazione, assicuratevi di conoscere la <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">ricerca full-text</a> e le <a href="https://milvus.io/docs/integrate_with_llamaindex.md">basi dell'uso di Milvus in LlamaIndex</a>.</p>
+<p>Prima di procedere con questa esercitazione, assicuratevi di avere familiarità con la <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">ricerca full-text</a> e con le <a href="https://milvus.io/docs/integrate_with_llamaindex.md">basi dell'uso di Milvus in LlamaIndex</a>.</p>
 </blockquote>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -124,8 +124,23 @@ write then, and probably still are: short stories. My stories were
 awful. They had hardly any plot, just characters with strong feelings,
 which I ...
 </code></pre>
-<h3 id="Full-Text-Search-with-BM25" class="common-anchor-header">Ricerca a tutto testo con BM25</h3><p><code translate="no">MilvusVectorStore</code> di LlamaIndex supporta la ricerca full-text, consentendo un efficiente recupero basato su parole chiave. Utilizzando una funzione integrata come <code translate="no">sparse_embedding_function</code>, applica il punteggio BM25 per classificare i risultati della ricerca.</p>
-<p>In questa sezione, dimostreremo come implementare un sistema RAG utilizzando BM25 per la ricerca full-text.</p>
+<h3 id="Full-Text-Search-with-BM25" class="common-anchor-header">Ricerca a tutto testo con BM25<button data-href="#Full-Text-Search-with-BM25" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">MilvusVectorStore</code> di LlamaIndex supporta la ricerca full-text, consentendo un efficiente recupero basato su parole chiave. Utilizzando una funzione integrata come <code translate="no">sparse_embedding_function</code>, applica il punteggio BM25 per classificare i risultati della ricerca.</p>
+<p>In questa sezione verrà mostrato come implementare un sistema RAG utilizzando BM25 per la ricerca full-text.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> VectorStoreIndex, StorageContext
 <span class="hljs-keyword">from</span> llama_index.vector_stores.milvus <span class="hljs-keyword">import</span> MilvusVectorStore
 <span class="hljs-keyword">from</span> llama_index.vector_stores.milvus.utils <span class="hljs-keyword">import</span> BM25BuiltInFunction
@@ -186,7 +201,22 @@ hiring too many people, and the relief felt when the company was acquired by Yah
     enable_match=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Hybrid-Search-with-Reranker" class="common-anchor-header">Ricerca ibrida con Reranker</h3><p>Un sistema di ricerca ibrido combina la ricerca semantica e la ricerca full-text, ottimizzando le prestazioni di recupero in un sistema RAG.</p>
+<h3 id="Hybrid-Search-with-Reranker" class="common-anchor-header">Ricerca ibrida con Reranker<button data-href="#Hybrid-Search-with-Reranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Un sistema di ricerca ibrido combina la ricerca semantica e la ricerca full-text, ottimizzando le prestazioni di recupero in un sistema RAG.</p>
 <p>L'esempio seguente utilizza l'embedding OpenAI per la ricerca semantica e BM25 per la ricerca full-text:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index over the documnts</span>
 vector_store = MilvusVectorStore(

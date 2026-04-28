@@ -416,9 +416,24 @@ curl --request POST \
       </svg>
     </button></h2><p>Milvus memungkinkan Anda menggunakan <strong>pengindeksan jalur JSON</strong> untuk membuat indeks pada kunci tertentu di dalam bidang dinamis. Ini dapat berupa nilai skalar atau nilai bersarang dalam objek JSON.</p>
 <div class="alert note">
-<p>Mengindeks kunci bidang dinamis bersifat <strong>opsional</strong>. Anda masih dapat melakukan kueri atau memfilter berdasarkan kunci bidang dinamis tanpa indeks, namun hal ini dapat mengakibatkan kinerja yang lebih lambat karena pencarian secara brute force.</p>
+<p>Mengindeks kunci bidang dinamis bersifat <strong>opsional</strong>. Anda masih dapat melakukan kueri atau memfilter berdasarkan kunci bidang dinamis tanpa indeks, namun hal ini dapat mengakibatkan kinerja yang lebih lambat karena pencarian secara paksa.</p>
 </div>
-<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">Sintaks pengindeksan jalur JSON</h3><p>Untuk membuat indeks jalur JSON, tentukan:</p>
+<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">Sintaks pengindeksan jalur JSON<button data-href="#JSON-path-indexing-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk membuat indeks jalur JSON, tentukan:</p>
 <ul>
 <li><p><strong>Jalur JSON</strong> (<code translate="no">json_path</code>): Jalur ke kunci atau bidang bersarang di dalam objek JSON yang ingin Anda indeks.</p>
 <ul>
@@ -431,7 +446,22 @@ curl --request POST \
 <li><p>Untuk daftar lengkapnya, lihat <a href="/docs/id/use-json-fields.md#Supported-JSON-cast-types">Jenis cast JSON yang didukung</a>.</p></li>
 </ul></li>
 </ul>
-<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">Menggunakan jalur JSON untuk mengindeks kunci bidang dinamis</h3><p>Karena bidang dinamis adalah bidang JSON, Anda dapat mengindeks kunci apa pun di dalamnya menggunakan sintaksis jalur JSON. Ini berfungsi baik untuk nilai skalar sederhana maupun struktur bertingkat yang kompleks.</p>
+<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">Menggunakan jalur JSON untuk mengindeks kunci bidang dinamis<button data-href="#Use-JSON-path-to-index-dynamic-field-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Karena bidang dinamis adalah bidang JSON, Anda dapat mengindeks kunci apa pun di dalamnya menggunakan sintaksis jalur JSON. Ini berfungsi baik untuk nilai skalar sederhana maupun struktur bertingkat yang kompleks.</p>
 <p><strong>Contoh jalur JSON:</strong></p>
 <ul>
 <li><p>Untuk kunci sederhana: <code translate="no">overview</code>, <code translate="no">words</code></p></li>
@@ -635,7 +665,22 @@ indexOpt4 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">Gunakan fungsi cast JSON untuk konversi tipe<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h3><p>Jika kunci bidang dinamis berisi nilai dalam format yang salah, (misalnya angka yang disimpan sebagai string), Anda dapat menggunakan fungsi cast untuk mengonversinya:</p>
+<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">Gunakan fungsi cast JSON untuk konversi tipe<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span><button data-href="#Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jika kunci bidang dinamis berisi nilai dalam format yang salah, (misalnya angka yang disimpan sebagai string), Anda dapat menggunakan fungsi cast untuk mengonversinya:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Convert a string to double before indexing</span>
@@ -698,7 +743,22 @@ indexOpt5 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
 <li><p>Untuk detail tentang parameter fungsi cast, lihat <a href="/docs/id/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">Bidang JSON</a>.</p></li>
 </ul>
 </div>
-<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">Menerapkan indeks ke koleksi</h3><p>Setelah mendefinisikan parameter indeks, Anda dapat menerapkannya ke koleksi menggunakan <code translate="no">create_index()</code>:</p>
+<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">Menerapkan indeks ke koleksi<button data-href="#Apply-indexes-to-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Setelah mendefinisikan parameter indeks, Anda dapat menerapkannya ke koleksi menggunakan <code translate="no">create_index()</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_index(
@@ -954,19 +1014,79 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">Kapan saya harus mendefinisikan bidang secara eksplisit di dalam skema alih-alih menggunakan kunci bidang dinamis?</h3><p>Anda harus mendefinisikan bidang secara eksplisit dalam skema alih-alih menggunakan kunci bidang dinamis bila:</p>
+    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">Kapan saya harus mendefinisikan bidang secara eksplisit di dalam skema alih-alih menggunakan kunci bidang dinamis?<button data-href="#When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Anda harus mendefinisikan bidang secara eksplisit dalam skema alih-alih menggunakan kunci bidang dinamis bila:</p>
 <ul>
 <li><p><strong>Field tersebut sering disertakan dalam output_fields</strong>: Hanya field yang didefinisikan secara eksplisit yang dijamin dapat diambil secara efisien melalui <code translate="no">output_fields</code>. Kunci bidang dinamis tidak dioptimalkan untuk pengambilan frekuensi tinggi dan dapat menimbulkan biaya tambahan kinerja.</p></li>
 <li><p><strong>Bidang ini sering diakses atau disaring</strong>: Meskipun pengindeksan kunci bidang dinamis dapat memberikan kinerja pemfilteran yang serupa dengan bidang skema tetap, bidang yang didefinisikan secara eksplisit menawarkan struktur yang lebih jelas dan pemeliharaan yang lebih baik.</p></li>
 <li><p><strong>Anda memerlukan kontrol penuh atas perilaku bidang</strong>: Field eksplisit mendukung batasan tingkat skema, validasi, dan pengetikan yang lebih jelas, yang berguna untuk mengelola integritas dan konsistensi data.</p></li>
-<li><p><strong>Anda ingin menghindari inkonsistensi pengindeksan</strong>: Data dalam kunci bidang dinamis lebih rentan terhadap ketidakkonsistenan jenis atau struktur. Menggunakan skema tetap membantu memastikan kualitas data, terutama jika Anda berencana menggunakan pengindeksan atau casting.</p></li>
+<li><p><strong>Anda ingin menghindari inkonsistensi pengindeksan</strong>: Data dalam kunci bidang dinamis lebih rentan terhadap ketidakkonsistenan dalam jenis atau struktur. Menggunakan skema tetap membantu memastikan kualitas data, terutama jika Anda berencana menggunakan pengindeksan atau casting.</p></li>
 </ul>
-<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">Dapatkah saya membuat beberapa indeks pada kunci bidang dinamis yang sama dengan tipe data yang berbeda?</h3><p>Tidak, Anda <strong>hanya</strong> dapat membuat <strong>satu indeks per jalur JSON</strong>. Meskipun kunci bidang dinamis berisi nilai tipe campuran (misalnya, beberapa string dan beberapa angka), Anda harus memilih satu <code translate="no">json_cast_type</code> saat mengindeks jalur tersebut. Beberapa indeks pada kunci yang sama dengan jenis yang berbeda tidak didukung saat ini.</p>
-<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">Ketika mengindeks kunci bidang dinamis, bagaimana jika casting data gagal?</h3><p>Jika Anda telah membuat indeks pada kunci bidang dinamis dan casting data gagal-misalnya, nilai yang dimaksudkan untuk di-cast ke <code translate="no">double</code> adalah string non-numerik seperti <code translate="no">&quot;abc&quot;</code>-nilai spesifik tersebut akan <strong>dilewati secara diam-diam selama pembuatan indeks</strong>. Nilai tersebut tidak akan muncul dalam indeks dan oleh karena itu <strong>tidak akan dikembalikan dalam hasil pencarian atau kueri berbasis filter</strong> yang mengandalkan indeks.</p>
+<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">Dapatkah saya membuat beberapa indeks pada kunci bidang dinamis yang sama dengan tipe data yang berbeda?<button data-href="#Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tidak, Anda <strong>hanya</strong> dapat membuat <strong>satu indeks per jalur JSON</strong>. Meskipun kunci bidang dinamis berisi nilai tipe campuran (misalnya, beberapa string dan beberapa angka), Anda harus memilih satu <code translate="no">json_cast_type</code> saat mengindeks jalur tersebut. Beberapa indeks pada kunci yang sama dengan jenis yang berbeda tidak didukung saat ini.</p>
+<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">Ketika mengindeks kunci bidang dinamis, bagaimana jika casting data gagal?<button data-href="#When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jika Anda telah membuat indeks pada kunci bidang dinamis dan casting data gagal-misalnya, nilai yang dimaksudkan untuk di-cast ke <code translate="no">double</code> adalah string non-numerik seperti <code translate="no">&quot;abc&quot;</code>-nilai spesifik tersebut akan <strong>dilewati secara diam-diam selama pembuatan indeks</strong>. Nilai tersebut tidak akan muncul dalam indeks dan oleh karena itu <strong>tidak akan dikembalikan dalam hasil pencarian atau kueri berbasis filter</strong> yang mengandalkan indeks.</p>
 <p>Ini memiliki beberapa implikasi penting:</p>
 <ul>
 <li><p><strong>Tidak ada fallback ke pemindaian penuh</strong>: Jika sebagian besar entitas berhasil diindeks, kueri penyaringan akan bergantung sepenuhnya pada indeks. Entitas yang gagal diindeks akan dikecualikan dari kumpulan hasil, meskipun secara logika cocok dengan kondisi filter.</p></li>
 <li><p><strong>Risiko akurasi pencarian</strong>: Pada set data besar yang kualitas datanya tidak konsisten (terutama pada kunci bidang dinamis), perilaku ini dapat menyebabkan hasil yang tidak diharapkan. Sangat penting untuk memastikan pemformatan data yang konsisten dan valid sebelum mengindeks.</p></li>
 <li><p><strong>Gunakan fungsi cast dengan hati-hati</strong>: Jika Anda menggunakan <code translate="no">json_cast_function</code> untuk mengonversi string menjadi angka selama pengindeksan, pastikan nilai string dapat dikonversi dengan baik. Ketidaksesuaian antara <code translate="no">json_cast_type</code> dan jenis yang dikonversi akan mengakibatkan kesalahan atau entri yang dilewati.</p></li>
 </ul>
-<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">Apa yang terjadi jika kueri saya menggunakan tipe data yang berbeda dari tipe cast yang diindeks?</h3><p>Jika kueri Anda membandingkan kunci bidang dinamis menggunakan <strong>tipe data yang berbeda</strong> dari yang digunakan dalam indeks (misalnya, kueri dengan perbandingan string saat indeks di-cast ke <code translate="no">double</code>), sistem <strong>tidak</strong> akan <strong>menggunakan indeks tersebut</strong>, dan mungkin kembali ke pemindaian penuh <em>hanya jika memungkinkan</em>. Untuk performa dan akurasi terbaik, pastikan jenis kueri Anda sesuai dengan <code translate="no">json_cast_type</code> yang digunakan selama pembuatan indeks.</p>
+<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">Apa yang terjadi jika kueri saya menggunakan tipe data yang berbeda dari tipe cast yang diindeks?<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jika kueri Anda membandingkan kunci bidang dinamis menggunakan <strong>tipe data yang berbeda</strong> dari yang digunakan dalam indeks (misalnya, kueri dengan perbandingan string saat indeks di-cast ke <code translate="no">double</code>), sistem <strong>tidak</strong> akan <strong>menggunakan indeks tersebut</strong>, dan mungkin kembali ke pemindaian penuh <em>hanya jika memungkinkan</em>. Untuk performa dan akurasi terbaik, pastikan jenis kueri Anda sesuai dengan <code translate="no">json_cast_type</code> yang digunakan selama pembuatan indeks.</p>

@@ -1,10 +1,10 @@
 ---
 id: object_storage_operator.md
-title: Mengkonfigurasi Penyimpanan Objek dengan Operator Milvus
+title: Mengonfigurasi Penyimpanan Objek dengan Operator Milvus
 related_key: 'minio, s3, storage, etcd, pulsar'
 summary: Pelajari cara mengonfigurasi penyimpanan objek dengan Milvus Operator.
 ---
-<h1 id="Configure-Object-Storage-with-Milvus-Operator" class="common-anchor-header">Mengkonfigurasi Penyimpanan Objek dengan Operator Milvus<button data-href="#Configure-Object-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
+<h1 id="Configure-Object-Storage-with-Milvus-Operator" class="common-anchor-header">Mengonfigurasi Penyimpanan Objek dengan Operator Milvus<button data-href="#Configure-Object-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,7 +42,22 @@ summary: Pelajari cara mengonfigurasi penyimpanan objek dengan Milvus Operator.
         ></path>
       </svg>
     </button></h2><p>Milvus cluster menggunakan MinIO atau S3 sebagai penyimpanan objek untuk menyimpan berkas-berkas berskala besar, seperti berkas indeks dan log biner. Tambahkan bidang yang diperlukan di bawah <code translate="no">spec.dependencies.storage</code> untuk mengonfigurasi penyimpanan objek, opsi yang memungkinkan adalah <code translate="no">external</code> dan <code translate="no">inCluster</code>.</p>
-<h3 id="Internal-object-storage" class="common-anchor-header">Penyimpanan objek internal</h3><p>Secara default, Operator Milvus menggunakan MinIO dalam cluster untuk Milvus. Berikut ini adalah contoh konfigurasi untuk mendemonstrasikan bagaimana menggunakan MinIO ini sebagai penyimpanan objek internal.</p>
+<h3 id="Internal-object-storage" class="common-anchor-header">Penyimpanan objek internal<button data-href="#Internal-object-storage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Secara default, Operator Milvus menggunakan MinIO dalam cluster untuk Milvus. Berikut ini adalah contoh konfigurasi untuk mendemonstrasikan bagaimana menggunakan MinIO ini sebagai penyimpanan objek internal.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -67,13 +82,28 @@ summary: Pelajari cara mengonfigurasi penyimpanan objek dengan Milvus Operator.
 <ul>
 <li><p>Kolom <code translate="no">deletionPolicy</code> menentukan kebijakan penghapusan MinIO dalam cluster. Secara default adalah <code translate="no">Delete</code> dan memiliki <code translate="no">Retain</code> sebagai opsi alternatif.</p>
 <ul>
-<li><code translate="no">Delete</code> mengindikasikan bahwa penyimpanan objek dalam klaster akan dihapus ketika Anda menghentikan instans Milvus.</li>
+<li><code translate="no">Delete</code> mengindikasikan bahwa penyimpanan objek dalam klaster akan dihapus saat Anda menghentikan instans Milvus.</li>
 <li><code translate="no">Retain</code> mengindikasikan bahwa penyimpanan objek dalam cluster dipertahankan sebagai layanan ketergantungan untuk startup berikutnya dari instans Milvus Anda.</li>
 </ul></li>
 <li><p>Kolom <code translate="no">pvcDeletion</code> menentukan apakah akan menghapus PVC (Persistent Volume Claim) ketika MinIO dalam cluster dihapus.</p></li>
 </ul>
 <p>Kolom di bawah <code translate="no">inCluster.values</code> sama dengan yang ada di Milvus Helm Chart, dan Anda dapat menemukannya <a href="https://github.com/milvus-io/milvus-helm/blob/master/charts/minio/values.yaml">di sini</a>.</p>
-<h3 id="External-object-storage" class="common-anchor-header">Penyimpanan objek eksternal</h3><p>Menggunakan <code translate="no">external</code> dalam file YAML template menunjukkan penggunaan layanan penyimpanan objek eksternal. Untuk menggunakan penyimpanan objek eksternal, Anda perlu mengatur bidang dengan benar di bawah <code translate="no">spec.dependencies.storage</code> dan <code translate="no">spec.config.minio</code> di Milvus CRD.</p>
+<h3 id="External-object-storage" class="common-anchor-header">Penyimpanan objek eksternal<button data-href="#External-object-storage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Menggunakan <code translate="no">external</code> dalam file YAML template menunjukkan penggunaan layanan penyimpanan objek eksternal. Untuk menggunakan penyimpanan objek eksternal, Anda perlu mengatur bidang dengan benar di bawah <code translate="no">spec.dependencies.storage</code> dan <code translate="no">spec.config.minio</code> di Milvus CRD.</p>
 <h4 id="Use-Amazon-Web-Service-AWS-S3-as-external-object-storage" class="common-anchor-header">Menggunakan Amazon Web Service (AWS) S3 sebagai penyimpanan objek eksternal</h4><ul>
 <li><p>Mengonfigurasi Akses AWS S3 dengan AK/SK</p>
 <p>Bucket S3 biasanya dapat diakses dengan sepasang kunci akses dan kunci rahasia akses. Anda dapat membuat objek <code translate="no">Secret</code> untuk menyimpannya di Kubernetes Anda sebagai berikut:</p>

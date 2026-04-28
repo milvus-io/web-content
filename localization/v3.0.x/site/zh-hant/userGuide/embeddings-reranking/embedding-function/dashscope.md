@@ -104,7 +104,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h3><p>將您的 API 金鑰保留在<code translate="no">milvus.yaml</code> ；Milvus 會在啟動時讀取它們，並覆寫相同提供者的任何環境變數。</p>
 <ol>
-<li><p>**在下列位置宣告您的金鑰<code translate="no">credential:</code></p>
+<li><p>**在以下位置宣告您的金鑰<code translate="no">credential:</code></p>
 <p>您可以列出一個或多個 API 金鑰 - 給每個金鑰一個您自創的標籤，稍後可以參考。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>

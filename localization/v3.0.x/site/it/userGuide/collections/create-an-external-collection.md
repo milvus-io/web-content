@@ -38,17 +38,17 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>In una tipica pipeline di dati AI, gli utenti potrebbero aver già memorizzato i loro dati in Parquet o in altri formati sul loro sistema di archiviazione, come AWS S3. Per far sì che Milvus utilizzi questi dati archiviati esternamente, gli utenti di solito devono importarli nello storage di Milvus utilizzando pipeline ETL (Extract-Transform-Load).</p>
-<p>Questo flusso di lavoro "porta i tuoi dati a Milvus" crea dati ridondanti, difficili da sincronizzare, e aumenta l'onere di manutenzione tecnica per garantire la coerenza dei dati.</p>
+<p>Questo flusso di lavoro "porta i tuoi dati a Milvus" crea dati ridondanti difficili da sincronizzare e aumenta il carico di manutenzione tecnica per garantire la coerenza dei dati.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/yqxwwpq3vheya4b8398cwopnnyn.png" alt="Yqxwwpq3vheya4b8398cwopnnyn" class="doc-image" id="yqxwwpq3vheya4b8398cwopnnyn" />
-   </span> <span class="img-wrapper"> <span>Yqxwwpq3vheya4b8398cwopnnyn</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" />
+   </span> <span class="img-wrapper"> <span>Flusso di lavoro "porta i dati al calcolo</span> </span></p>
 <p>Per risolvere questi problemi, Milvus offre collezioni esterne che consentono di accedere ai dati archiviati esternamente da Milvus senza preoccuparsi della sincronizzazione dei dati e delle pipeline ETL.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/q6f4wtcd2h3pnkbnmxncw3urn3f.png" alt="Q6f4wtcd2h3pnkbnmxncw3urn3f" class="doc-image" id="q6f4wtcd2h3pnkbnmxncw3urn3f" />
-   </span> <span class="img-wrapper"> <span>Q6f4wtcd2h3pnkbnmxncw3urn3f</span> </span></p>
-<p>Una volta creata, una raccolta esterna può accedere direttamente ai vostri dati e conservarli nello stesso luogo in cui li avete memorizzati. In background, Milvus crea file manifest per registrare le mappature tra i metadati Milvus e le righe dei file di dati esterni. Dopo che i file manifest sono pronti, è possibile creare indici nella collezione esterna come in qualsiasi altra collezione gestita.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" />
+   </span> <span class="img-wrapper"> <span>Portare il calcolo nel flusso di lavoro dei dati</span> </span></p>
+<p>Una volta creata, una collezione esterna può accedere direttamente ai vostri dati e conservarli nello stesso luogo in cui li avete memorizzati. In background, Milvus crea file manifest per registrare le mappature tra i metadati Milvus e le righe dei file di dati esterni. Una volta che i file manifest sono pronti, è possibile creare indici nella raccolta esterna come in qualsiasi altra raccolta gestita.</p>
 <p>Quando i dati cambiano, l'attivazione manuale di un aggiornamento al secondo aggiorna i metadati, mantenendo Milvus sempre aggiornato.</p>
 <h2 id="Limits--restrictions" class="common-anchor-header">Limiti e restrizioni<button data-href="#Limits--restrictions" class="anchor-icon" translate="no">
       <svg translate="no"

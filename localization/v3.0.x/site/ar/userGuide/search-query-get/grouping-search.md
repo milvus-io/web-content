@@ -2,12 +2,8 @@
 id: grouping-search.md
 title: تجميع البحث
 summary: >-
-  يسمح بحث التجميع لميلفوس بتجميع نتائج البحث حسب القيم الموجودة في حقل محدد
-  لتجميع البيانات على مستوى أعلى. على سبيل المثال، يمكنك استخدام بحث التجميع
-  الأساسي للعثور على الكتب المشابهة للكتاب الذي بين يديك، ولكن يمكنك استخدام بحث
-  التجميع للعثور على فئات الكتب التي قد تتضمن المواضيع التي تمت مناقشتها في ذلك
-  الكتاب. يصف هذا الموضوع كيفية استخدام بحث التجميع إلى جانب الاعتبارات
-  الرئيسية.
+  استخدم تجميع البحث لتجميع نتائج بحث ANN حسب قيمة الحقل وتقليل الكيانات
+  المكررة.
 ---
 <h1 id="Grouping-Search" class="common-anchor-header">تجميع البحث<button data-href="#Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +37,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>عندما تشترك الكيانات في نتائج البحث في نفس القيمة في حقل قياسي، فإن هذا يشير إلى أنها متشابهة في سمة معينة، مما قد يؤثر سلبًا على نتائج البحث.</p>
-<p>افترض أن المجموعة تخزن مستندات متعددة (يُشار إليها بـ <strong>docId</strong>). للاحتفاظ بأكبر قدر ممكن من المعلومات الدلالية عند تحويل المستندات إلى متجهات، يتم تقسيم كل مستند إلى فقرات (أو <strong>أجزاء</strong>) أصغر يمكن التحكم فيها وتخزينها ككيانات منفصلة. على الرغم من تقسيم المستند إلى أقسام أصغر، إلا أن المستخدمين غالبًا ما يظلون مهتمين بتحديد المستندات الأكثر صلة باحتياجاتهم.</p>
+<p>افترض أن مجموعة تخزن مستندات متعددة (يُشار إليها بـ <strong>docId</strong>). للاحتفاظ بأكبر قدر ممكن من المعلومات الدلالية عند تحويل المستندات إلى متجهات، يتم تقسيم كل مستند إلى فقرات (أو <strong>أجزاء</strong>) أصغر يمكن التحكم فيها وتخزينها ككيانات منفصلة. على الرغم من تقسيم المستند إلى أقسام أصغر، إلا أن المستخدمين غالبًا ما يظلون مهتمين بتحديد المستندات الأكثر صلة باحتياجاتهم.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" />
@@ -51,7 +47,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" />
    </span> <span class="img-wrapper"> <span>تجميع البحث</span> </span></p>
-<p>لتحسين تنوّع نتائج البحث، يمكنك إضافة المعلمة <code translate="no">group_by_field</code> في طلب البحث لتمكين تجميع البحث. كما هو موضح في الرسم البياني، يمكنك تعيين <code translate="no">group_by_field</code> إلى <code translate="no">docId</code>. عند تلقي هذا الطلب، سيقوم ميلفوس بـ</p>
+<p>لتحسين تنوّع نتائج البحث، يمكنك إضافة المعلمة <code translate="no">group_by_field</code> في طلب البحث لتمكين تجميع البحث. كما هو موضح في الرسم التخطيطي، يمكنك تعيين <code translate="no">group_by_field</code> إلى <code translate="no">docId</code>. عند تلقي هذا الطلب، سيقوم ميلفوس بـ</p>
 <ul>
 <li><p>إجراء بحث ANN استنادًا إلى متجه الاستعلام المقدم للعثور على جميع الكيانات الأكثر تشابهًا مع الاستعلام.</p></li>
 <li><p>تجميع نتائج البحث حسب <code translate="no">group_by_field</code> المحدد، مثل <code translate="no">docId</code>.</p></li>
@@ -375,6 +371,49 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><code translate="no">strict_group_size</code>: تتحكم هذه المعلمة المنطقية فيما إذا كان يجب على النظام فرض العدد الذي تم تعيينه بواسطة <code translate="no">group_size</code>. عند <code translate="no">strict_group_size=True</code> ، سيحاول النظام تضمين العدد الدقيق للكيانات المحددة بواسطة <code translate="no">group_size</code> في كل مجموعة (على سبيل المثال، فقرتان)، ما لم تكن هناك بيانات كافية في تلك المجموعة. بشكل افتراضي (<code translate="no">strict_group_size=False</code>)، يعطي النظام الأولوية لتلبية عدد المجموعات المحددة بواسطة المعلمة <code translate="no">limit</code> ، بدلاً من ضمان احتواء كل مجموعة على <code translate="no">group_size</code> كيانات. هذا النهج أكثر كفاءة بشكل عام في الحالات التي يكون فيها توزيع البيانات غير متساوٍ.</p></li>
 </ul>
 <p>للحصول على تفاصيل المعلمة الإضافية، راجع <a href="https://docs.zilliz.com/reference/python/python/Vector-search">البحث</a>.</p>
+<h2 id="Order-groups-by-a-scalar-field--Milvus-30x" class="common-anchor-header">ترتيب المجموعات حسب حقل قياسي<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Order-groups-by-a-scalar-field--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>يمكنك دمج بحث التجميع مع <code translate="no">order_by_fields</code> لترتيب المجموعات حسب حقل قياسي. يكون هذا مفيدًا عندما تريد نتائج متنوعة عبر المجموعات، ولكنك لا تزال تريد أن تتبع المجموعات ترتيبًا ذا صلة بالعمل مثل السعر أو التصنيف.</p>
+<p>يقوم المثال التالي بتجميع نتائج البحث حسب <code translate="no">category</code> ، وإرجاع ما يصل إلى ثلاثة كيانات لكل مجموعة، وترتيب المجموعات التي تم إرجاعها حسب <code translate="no">price</code> من الأقل إلى الأعلى.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
+    data=query_vectors,
+    anns_field=<span class="hljs-string">&quot;embedding&quot;</span>,
+    limit=<span class="hljs-number">20</span>,
+    group_by_field=<span class="hljs-string">&quot;category&quot;</span>,
+    group_size=<span class="hljs-number">3</span>,
+    strict_group_size=<span class="hljs-literal">True</span>,
+    output_fields=[<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>],
+<span class="highlighted-comment-line">    order_by_fields=[</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;field&quot;</span>: <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;order&quot;</span>: <span class="hljs-string">&quot;asc&quot;</span>}</span>
+<span class="highlighted-comment-line">    ],</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>في الطلب أعلاه، <code translate="no">limit=20</code> يعني أن ميلفوس يختار ما يصل إلى 20 مجموعة، وليس 20 كيانًا. لأن <code translate="no">group_size=3</code> ، يمكن أن تحتوي قائمة النتائج المسطحة على ما يصل إلى 60 كيانًا في المجموع.</p>
+<p>عند استخدام <code translate="no">order_by_fields</code> مع <code translate="no">group_by_field</code> ، يقوم Milvus بترتيب المجموعات حسب قيمة الحقل القياسي المحدد للكيان الأعلى لكل مجموعة. داخل كل مجموعة، تظل الكيانات مرتبة حسب درجة تشابهها مع متجه الاستعلام.</p>
 <h2 id="Considerations" class="common-anchor-header">الاعتبارات<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -391,7 +430,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>الفهرسة</strong>: تعمل ميزة التجميع هذه فقط مع المجموعات المفهرسة بأنواع الفهارس هذه: <strong>مسطحة،</strong> ivf_flat، <strong>ivf_flat،</strong><strong>ivf_sq8،</strong> <strong>hnsw،</strong> <strong>hnsw_pq،</strong> <strong>hnsw_prq،</strong> <strong>hnsw_prq، hnsw_sq،</strong> <strong>diskann،</strong> <strong>sparse_inverted_index</strong>.</p></li>
+<li><p><strong>الفهرسة</strong>: تعمل ميزة التجميع هذه فقط مع المجموعات المفهرسة بأنواع الفهارس هذه: <strong>flat</strong>, ivf_flat, <strong>ivf_flat</strong>, <strong>ivf_sq8</strong>, <strong>hnsw</strong>, <strong>hnsw_pq</strong>, <strong>hnsw_prq</strong>, <strong>hnsw_sq</strong>, <strong>diskann</strong>, <strong>sparse_inverted_index</strong>.</p></li>
 <li><p><strong>عدد المجموعات</strong>: تتحكم المعلمة <code translate="no">limit</code> في عدد المجموعات التي يتم إرجاع نتائج البحث منها، بدلاً من العدد المحدد للكيانات داخل كل مجموعة. يساعد تعيين <code translate="no">limit</code> المناسب في التحكم في تنوع البحث وأداء الاستعلام. يمكن أن يؤدي تقليل <code translate="no">limit</code> إلى تقليل تكاليف الحوسبة إذا كانت البيانات موزعة بكثافة أو إذا كان الأداء مصدر قلق.</p></li>
 <li><p><strong>الكيانات لكل مجموعة</strong>: تتحكم المعلمة <code translate="no">group_size</code> في عدد الكيانات التي يتم إرجاعها لكل مجموعة. يمكن أن يؤدي ضبط <code translate="no">group_size</code> بناءً على حالة الاستخدام إلى زيادة ثراء نتائج البحث. ومع ذلك، إذا كانت البيانات موزعة بشكل غير متساوٍ، فقد تقوم بعض المجموعات بإرجاع عدد كيانات أقل من المحدد بواسطة <code translate="no">group_size</code> ، خاصة في سيناريوهات البيانات المحدودة.</p></li>
 <li><p><strong>حجم المجموعة الصارم</strong>: عند <code translate="no">strict_group_size=True</code> ، سيحاول النظام إرجاع العدد المحدد من الكيانات (<code translate="no">group_size</code>) لكل مجموعة، ما لم تكن هناك بيانات كافية في تلك المجموعة. يضمن هذا الإعداد عدد كيانات متناسق لكل مجموعة ولكنه قد يؤدي إلى تدهور الأداء مع التوزيع غير المتكافئ للبيانات أو الموارد المحدودة. إذا لم يكن عدد الكيانات الصارم مطلوبًا، يمكن أن يؤدي الإعداد <code translate="no">strict_group_size=False</code> إلى تحسين سرعة الاستعلام.</p></li>

@@ -40,23 +40,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>El término <strong>mapa de bits</strong> combina dos palabras: <strong>Bit</strong> y <strong>Mapa</strong>. Un bit representa la unidad más pequeña de datos en un ordenador, que sólo puede contener un valor de <strong>0</strong> ó <strong>1</strong>. Un mapa, en este contexto, se refiere al proceso de transformación y organización de los datos según el valor que deba asignarse a 0 y 1.</p>
+    </button></h2><p>El término <strong>mapa de bits</strong> combina dos palabras: <strong>Bit</strong> y <strong>Mapa</strong>. Un bit representa la unidad más pequeña de datos en un ordenador, que sólo puede contener un valor de <strong>0</strong> ó <strong>1</strong>. Un mapa, en este contexto, hace referencia al proceso de transformación y organización de los datos en función del valor que debe asignarse a 0 y 1.</p>
 <p>Un índice de mapa de bits consta de dos componentes principales: mapas de bits y claves. Las claves representan los valores únicos del campo indexado. A cada valor único le corresponde un mapa de bits. La longitud de estos mapas de bits es igual al número de registros de la colección. Cada bit del mapa de bits corresponde a un registro de la colección. Si el valor del campo indexado de un registro coincide con la clave, el bit correspondiente se pone a <strong>1</strong>; en caso contrario, se pone a <strong>0</strong>.</p>
 <p>Consideremos una colección de documentos con los campos <strong>Categoría</strong> y <strong>Público</strong>. Queremos recuperar los documentos que pertenecen a la categoría <strong>Técnica</strong> y están abiertos al <strong>Público</strong>. En este caso, las claves de nuestros índices bitmap son <strong>Tech</strong> y <strong>Public</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" />
    </span> <span class="img-wrapper"> <span>Mapa de bits</span> </span></p>
 <p>Como se muestra en la figura, los índices de mapa de bits para <strong>Categoría</strong> y <strong>Público</strong> son:</p>
 <ul>
 <li><p><strong>Tech</strong>: [1, 0, 1, 0, 0], lo que indica que sólo el primer y el tercer documento pertenecen a la categoría <strong>Tech</strong>.</p></li>
 <li><p><strong>Público</strong>: [1, 0, 0, 1, 0], que muestra que sólo los documentos 1º y 4º están abiertos al <strong>Público</strong>.</p></li>
 </ul>
-<p>Para encontrar los documentos que cumplen ambos criterios, realizamos una operación AND a nivel de bits en estos dos mapas de bits:</p>
+<p>Para encontrar los documentos que coinciden con ambos criterios, realizamos una operación AND a nivel de bits en estos dos mapas de bits:</p>
 <ul>
 <li><strong>Tech</strong> AND <strong>Public</strong>: [1, 0, 0, 0, 0]</li>
 </ul>
-<p>El mapa de bits resultante [1, 0, 0, 0, 0] indica que sólo el primer documento<strong>(ID</strong> <strong>1</strong>) cumple ambos criterios. Utilizando índices de mapa de bits y operaciones bit a bit eficientes, podemos limitar rápidamente el ámbito de búsqueda, eliminando la necesidad de escanear todo el conjunto de datos.</p>
+<p>El mapa de bits resultante [1, 0, 0, 0, 0] indica que sólo el primer documento<strong>(ID</strong> <strong>1</strong>) cumple ambos criterios. Utilizando índices de mapa de bits y operaciones bit a bit eficientes, podemos acotar rápidamente el ámbito de búsqueda, eliminando la necesidad de escanear todo el conjunto de datos.</p>
 <h2 id="Create-a-bitmap-index" class="common-anchor-header">Crear un índice de mapa de bits<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

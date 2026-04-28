@@ -275,7 +275,7 @@ summary: 'Hier erfahren Sie, wie Sie Common für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        Sekunden. Er erzwingt das Beenden des Servers, wenn der Graceful-Stop-Prozess nicht innerhalb dieser Zeit abgeschlossen wird.      </td>
+      <td>        Sekunden. Er erzwingt das Beenden des Servers, wenn der Graceful Stop-Prozess nicht innerhalb dieser Zeit abgeschlossen wird.      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -396,7 +396,7 @@ summary: 'Hier erfahren Sie, wie Sie Common für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        Standardpasswort für den Benutzer root. Die maximale Länge beträgt 72 Zeichen, und es sind doppelte Anführungszeichen erforderlich.      </td>
+      <td>        Standardkennwort für den Benutzer root. Die maximale Länge beträgt 72 Zeichen, und es sind doppelte Anführungszeichen erforderlich.      </td>
       <td>Milvus</td>
     </tr>
   </tbody>

@@ -262,13 +262,13 @@ beta: Milvus 2.6.4+
      <td><p><code translate="no">search_list</code></p></td>
      <td><p>Au cours d'une opération de recherche, ce paramètre détermine la taille du groupe de candidats que l'algorithme maintient lorsqu'il parcourt le graphe. Une valeur plus élevée augmente les chances de trouver les vrais voisins les plus proches (rappel plus élevé), mais augmente également la latence de la recherche.</p></td>
      <td><p><strong>Type</strong>: Entier</p><p><strong>Plage de valeurs</strong>: [topk, int32_max]</p><p><strong>Valeur par défaut</strong>: <code translate="no">16</code></p></td>
-     <td><p>Pour un bon équilibre entre les performances et la précision, il est recommandé de définir cette valeur comme étant égale ou légèrement supérieure au nombre de résultats que vous souhaitez récupérer (top_k).</p></td>
+     <td><p>Pour un bon équilibre entre les performances et la précision, il est recommandé de fixer cette valeur à un niveau égal ou légèrement supérieur au nombre de résultats que vous souhaitez récupérer (top_k).</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">beamwidth</code></p></td>
      <td><p>Contrôle le degré de parallélisme pendant la recherche en déterminant le nombre maximal de demandes d'E/S parallèles sur disque pour lire les nœuds d'index.</p></td>
      <td><p><strong>Type</strong>: Entier</p><p><strong>Plage de valeurs</strong>: [1, 16]</p><p><strong>Valeur par défaut</strong>: <code translate="no">8</code></p></td>
-     <td><p>Des valeurs plus élevées augmentent le parallélisme, ce qui peut accélérer la recherche sur les systèmes dotés de CPU et de SSD puissants. Toutefois, une valeur trop élevée peut entraîner une contention excessive des ressources.</p><p>Dans la plupart des cas, nous vous recommandons de définir une valeur de 2.</p></td>
+     <td><p>Des valeurs plus élevées augmentent le parallélisme, ce qui peut accélérer la recherche sur les systèmes dotés de CPU et de SSD puissants. Cependant, une valeur trop élevée peut entraîner une contention excessive des ressources.</p><p>Dans la plupart des cas, nous vous recommandons de définir une valeur de 2.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">vectors_beamwidth</code></p></td>
@@ -278,7 +278,7 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p><code translate="no">pq_read_page_cache_size</code></p></td>
-     <td><p>Taille du cache de lecture PQ en DRAM par fil de recherche (octets). Elle met en cache les pages de données fréquemment consultées contenant des vecteurs PQ (ignorée en mode performance et applicable uniquement lorsque rearrange est vrai).</p><p>La mémoire cache de lecture PQ est réutilisée dans tous les segments AISAQ.</p></td>
+     <td><p>Taille du cache de lecture PQ en DRAM par fil de recherche (octets). Elle met en cache les pages de données fréquemment consultées contenant des vecteurs PQ (ignorée en mode performance et applicable uniquement lorsque le réarrangement est vrai).</p><p>La mémoire cache de lecture PQ est réutilisée dans tous les segments AISAQ.</p></td>
      <td><p><strong>Type</strong>: Entier</p><p><strong>Plage de valeurs</strong>: [0, 33554432]</p><p><strong>Valeur par défaut</strong>: <code translate="no">5242880 (5MiB)</code></p></td>
      <td><p>Un cache plus important améliore les performances des requêtes mais augmente l'utilisation de la DRAM.</p><p>Les valeurs recommandées sont de 2 Mio pour les petits segments (1 M de vecteurs), 5 Mio pour les segments moyens (50 M de vecteurs) et 10 Mio pour les grands segments (250 M de vecteurs).</p></td>
    </tr>

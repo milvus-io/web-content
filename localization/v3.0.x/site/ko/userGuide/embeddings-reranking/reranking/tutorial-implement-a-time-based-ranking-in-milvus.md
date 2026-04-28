@@ -45,7 +45,7 @@ beta: Milvus 2.6.x
 <li><p><strong>지수</strong> (<code translate="no">exp</code>): 최근 콘텐츠를 강하게 강조하기 위해 더 날카로운 초기 드롭오프를 생성합니다.</p></li>
 <li><p><strong>선형</strong> (<code translate="no">linear</code>): 예측 가능하고 이해하기 쉬운 직선형 감쇠를 제공합니다.</p></li>
 </ul>
-<p>각 랭커는 다양한 사용 사례에 적합하도록 서로 다른 특성을 가지고 있습니다. 자세한 내용은 <a href="/docs/ko/decay-ranker-overview.md">디케이 랭커 개요를</a> 참조하세요.</p>
+<p>각 랭킹러는 다양한 사용 사례에 적합하도록 서로 다른 특성을 가지고 있습니다. 자세한 내용은 <a href="/docs/ko/decay-ranker-overview.md">디케이 랭커 개요를</a> 참조하세요.</p>
 <h2 id="Build-a-time-aware-search-system" class="common-anchor-header">시간 인식 검색 시스템 구축<button data-href="#Build-a-time-aware-search-system" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

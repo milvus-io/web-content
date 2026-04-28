@@ -527,7 +527,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
     </button></h2><p>بعد إدراج الكيانات، استخدم الأسلوب <code translate="no">query</code> لاسترداد الكيانات التي تطابق تعبيرات التصفية المحددة.</p>
 <p>لاسترداد الكيانات التي يتطابق فيها <code translate="no">varchar_field1</code> مع السلسلة <code translate="no">&quot;Product A&quot;</code>:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter `varchar_field1` with value &quot;Product A&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>
 
@@ -663,7 +663,7 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <p>لاسترداد الكيانات حيث <code translate="no">varchar_field1</code> له القيمة <code translate="no">&quot;Unknown&quot;</code> ، استخدم التعبير التالي أدناه. نظرًا لأن القيمة الافتراضية لـ <code translate="no">varchar_field1</code> هي <code translate="no">&quot;Unknown&quot;</code> ، يجب أن تتضمن النتيجة المتوقعة كيانات ذات <code translate="no">varchar_field1</code> تم تعيينها صراحةً إلى <code translate="no">&quot;Unknown&quot;</code> أو مع تعيين <code translate="no">varchar_field1</code> إلى لا شيء.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter entities with `varchar_field1` with value `Unknown`</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Unknown&quot;&#x27;</span>
 

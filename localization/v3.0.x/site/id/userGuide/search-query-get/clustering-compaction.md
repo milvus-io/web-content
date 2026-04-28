@@ -41,15 +41,15 @@ summary: >-
     </button></h2><p>Milvus menyimpan entitas yang masuk dalam segmen di dalam koleksi dan menutup segmen jika sudah penuh. Jika hal ini terjadi, sebuah segmen baru dibuat untuk mengakomodasi entitas tambahan. Akibatnya, entitas didistribusikan secara acak di seluruh segmen. Distribusi ini mengharuskan Milvus untuk mencari beberapa segmen untuk menemukan tetangga terdekat dengan vektor kueri yang diberikan.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/without-clustering-compaction.png" alt="Without Clustering Compaction" class="doc-image" id="without-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/without-clustering-compaction.png" alt="Without Clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Tanpa Pemadatan Clustering</span> </span></p>
 <p>Jika Milvus dapat mendistribusikan entitas di antara segmen berdasarkan nilai di bidang tertentu, cakupan pencarian dapat dibatasi dalam satu segmen, sehingga meningkatkan kinerja pencarian.</p>
 <p><strong>Pemadatan Clustering</strong> adalah fitur di Milvus yang mendistribusikan kembali entitas di antara segmen dalam koleksi berdasarkan nilai dalam bidang skalar. Untuk mengaktifkan fitur ini, pertama-tama Anda harus memilih sebuah bidang skalar sebagai <strong>kunci pengelompokan</strong>. Hal ini memungkinkan Milvus untuk mendistribusikan ulang entitas ke dalam segmen ketika nilai kunci pengelompokannya berada dalam rentang tertentu. Ketika Anda memicu pemadatan pengelompokan, Milvus membuat/memperbaharui indeks global yang disebut <strong>PartitionStats</strong>, yang mencatat hubungan pemetaan antara segmen dan nilai kunci pengelompokan.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Pemadatan Pengelompokan</span> </span></p>
-<p>Dengan menggunakan <strong>PartitionStats</strong> sebagai referensi, Milvus dapat memangkas data yang tidak relevan setelah menerima permintaan pencarian/kueri yang membawa nilai kunci pengelompokan dan membatasi cakupan pencarian di dalam segmen yang memetakan nilai tersebut, sehingga meningkatkan kinerja pencarian. Untuk detail tentang peningkatan kinerja, lihat <a href="/docs/id/clustering-compaction.md#Benchmark-Test">Tes tolok ukur</a>.</p>
+<p>Dengan menggunakan <strong>PartitionStats</strong> sebagai referensi, Milvus dapat memangkas data yang tidak relevan setelah menerima permintaan pencarian/kueri yang membawa nilai kunci pengelompokan dan membatasi cakupan pencarian di dalam segmen yang dipetakan ke nilai tersebut, sehingga meningkatkan kinerja pencarian. Untuk detail tentang peningkatan kinerja, lihat <a href="/docs/id/clustering-compaction.md#Benchmark-Test">Tes tolok ukur</a>.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Gunakan Pemadatan Pengelompokan<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,7 +66,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Fitur Pemadatan Klaster di Milvus sangat mudah dikonfigurasi. Anda dapat memilih untuk memicunya secara manual atau mengaturnya untuk dipicu secara otomatis pada interval tertentu oleh Milvus. Untuk mengaktifkan pemadatan pengelompokan, lakukan hal berikut:</p>
-<h3 id="Global-Configuration" class="common-anchor-header">Konfigurasi Global</h3><p>Anda perlu memodifikasi file konfigurasi Milvus Anda seperti yang ditunjukkan di bawah ini.</p>
+<h3 id="Global-Configuration" class="common-anchor-header">Konfigurasi Global<button data-href="#Global-Configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Anda perlu memodifikasi file konfigurasi Milvus Anda seperti yang ditunjukkan di bawah ini.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">dataCoord:</span>
   <span class="hljs-attr">compaction:</span>
     <span class="hljs-attr">clustering:</span>
@@ -163,7 +178,22 @@ summary: >-
    </tr>
 </table>
 <p>Untuk menerapkan perubahan di atas pada kluster Milvus Anda, silakan ikuti langkah-langkah di <a href="/docs/id/configure-helm.md#Configure-Milvus-via-configuration-file">Konfigurasi Milvus dengan Helm</a> dan <a href="/docs/id/configure_operator.md">Konfigurasi Milvus dengan Operator Milvus</a>.</p>
-<h3 id="Collection-Configuration" class="common-anchor-header">Konfigurasi Koleksi</h3><p>Untuk pemadatan cluster dalam koleksi tertentu, Anda harus memilih bidang skalar dari koleksi sebagai kunci clustering.</p>
+<h3 id="Collection-Configuration" class="common-anchor-header">Konfigurasi Koleksi<button data-href="#Collection-Configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk pemadatan cluster dalam koleksi tertentu, Anda harus memilih bidang skalar dari koleksi sebagai kunci clustering.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -276,7 +306,22 @@ client.createCollection(requestCreate);
 <div class="alert note">
 <p>Anda dapat menggunakan bidang skalar dari tipe data berikut ini sebagai kunci pengelompokan: <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, <code translate="no">Double</code>, dan <code translate="no">VarChar</code>.</p>
 </div>
-<h3 id="Trigger-Clustering-Compaction" class="common-anchor-header">Memicu Pemadatan Pengelompokan</h3><p>Jika Anda telah mengaktifkan pemadatan pengelompokan otomatis, Milvus secara otomatis memicu pemadatan pada interval yang ditentukan. Sebagai alternatif, Anda dapat memicu pemadatan secara manual sebagai berikut:</p>
+<h3 id="Trigger-Clustering-Compaction" class="common-anchor-header">Memicu Pemadatan Pengelompokan<button data-href="#Trigger-Clustering-Compaction" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jika Anda telah mengaktifkan pemadatan pengelompokan otomatis, Milvus secara otomatis memicu pemadatan pada interval yang ditentukan. Sebagai alternatif, Anda dapat memicu pemadatan secara manual sebagai berikut:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># trigger a manual compaction</span>

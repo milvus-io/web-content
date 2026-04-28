@@ -140,7 +140,7 @@ summary: Milvus 텍스트 분석기가 런타임에 로드할 수 있는 외부 
   <span class="hljs-attr">rootPath:</span> <span class="hljs-string">file</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">rootPath</code> 을 접두사로 사용하여 <code translate="no">chinese_terms.txt</code> 이라는 이름의 파일을 업로드하면 <code translate="no">s3://milvus-bucket/file/chinese_terms.txt</code> 에 오브젝트가 배치됩니다.</p>
-<p>2단계에서 <code translate="no">add_file_resource</code> 에 전달할 <code translate="no">path</code> 인수는 <strong>rootPath 접두사를 포함한 전체 오브젝트 키입니다</strong> (위 예의 경우 <code translate="no">path=&quot;file/chinese_terms.txt&quot;</code>). 접두사가 없는 경로(예: <code translate="no">&quot;chinese_terms.txt&quot;</code>)는 <code translate="no">file resource path not exist</code> 오류와 함께 거부됩니다.</p>
+<p>2단계에서 <code translate="no">add_file_resource</code> 에 전달할 <code translate="no">path</code> 인수는 <strong>rootPath 접두사를 포함한 전체 오브젝트 키입니다</strong> (위의 예의 경우 <code translate="no">path=&quot;file/chinese_terms.txt&quot;</code>). 접두사가 없는 경로(예: <code translate="no">&quot;chinese_terms.txt&quot;</code>)는 <code translate="no">file resource path not exist</code> 오류와 함께 거부됩니다.</p>
 <h3 id="Step-2-Register-the-file-with-addfileresource" class="common-anchor-header">2단계. 파일을 등록합니다. <code translate="no">add_file_resource</code><button data-href="#Step-2-Register-the-file-with-addfileresource" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -165,7 +165,7 @@ client.add_file_resource(
     path=<span class="hljs-string">&quot;file/chinese_terms.txt&quot;</span>,       <span class="hljs-comment"># full S3 object key, including the rootPath prefix</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">add_file_resource</code> 는 동기적으로 유효성을 검사합니다. Milvus가 구성된 객체 저장소에 객체가 <code translate="no">path</code> 에 있는지 확인한 후에만 호출이 반환됩니다. 객체가 없는 경우 <code translate="no">MilvusException(code=65535, &quot;file resource path not exist&quot;)</code> - 파일을 먼저 업로드한 다음 다시 시도합니다.</p>
+<p><code translate="no">add_file_resource</code> 는 동기적으로 유효성을 검사합니다. Milvus가 구성된 개체 저장소의 <code translate="no">path</code> 에 개체가 존재하는지 확인한 후에만 호출이 반환됩니다. 객체가 없는 경우 <code translate="no">MilvusException(code=65535, &quot;file resource path not exist&quot;)</code> - 파일을 먼저 업로드한 다음 다시 시도합니다.</p>
 <p>호출이 무효화됩니다. 동일한 <code translate="no">name</code> 및 <code translate="no">path</code> 으로 <code translate="no">add_file_resource</code> 을 두 번 호출해도 중복이 생성되지 않습니다.</p>
 <h3 id="Step-3-Reference-the-file-resource-from-an-analyzer" class="common-anchor-header">3단계. 분석기에서 파일 리소스 참조하기<button data-href="#Step-3-Reference-the-file-resource-from-an-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -270,7 +270,7 @@ client.add_file_resource(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>클러스터 전체 가용성은 즉각적으로 제공되지 않습니다.</strong> <code translate="no">add_file_resource</code> 이 반환되면 Milvus는 파일을 필요로 하는 모든 구성 요소에 파일을 동기화합니다. 이 짧은 기간 동안, 아직 동기화되지 않은 노드에서는 리소스를 참조하는 컬렉션이 생성되지 않을 수 있습니다. 일반적인 해결 방법은 몇 초 후에 만들기 호출을 다시 시도하는 것입니다.</p></li>
+<li><p><strong>클러스터 전체가 즉시 사용 가능하지 않습니다.</strong> <code translate="no">add_file_resource</code> 이 반환되면 Milvus는 파일을 필요로 하는 모든 구성 요소에 파일을 동기화합니다. 이 짧은 기간 동안, 아직 동기화되지 않은 노드에서는 리소스를 참조하는 컬렉션이 생성되지 않을 수 있습니다. 일반적인 해결 방법은 몇 초 후에 만들기 호출을 다시 시도하는 것입니다.</p></li>
 <li><p><strong>리소스에 종속된 컬렉션이 없는 경우에만 제거하세요.</strong> <code translate="no">remove_file_resource</code> 을 호출하기 전에 분석기 구성이 리소스를 참조하는 모든 컬렉션을 삭제하거나 변경하여 파일을 찾지 못하는 분석기 조회를 방지하세요.</p></li>
 <li><p><code translate="no">list_file_resources()</code> 은 <code translate="no">name</code> 및 <code translate="no">path</code> 을 반환하며 크기, 체크섬, 업로드 시간 또는 기타<strong>메타데이터가</strong> 없습니다. 필요한 경우 고유한 명명 규칙을 사용하여 사전 버전을 추적하세요.</p></li>
 </ul>

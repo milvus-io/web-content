@@ -62,7 +62,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
   <span class="hljs-attr">&quot;registry-mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">Milvusをインストールして実行するにはDockerを使うしかないのでしょうか？</h4><p>DockerはMilvusの効率的なデプロイ方法ですが、唯一の方法ではありません。ソースコードからMilvusをデプロイすることもできます。これにはUbuntu (18.04以上) または CentOS (7以上) が必要です。詳しくは<a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">Milvusをソースコードからビルドするを</a>ご覧ください。</p>
+<h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">Milvusをインストールし、実行する唯一の方法はDockerですか？</h4><p>DockerはMilvusの効率的なデプロイ方法ですが、唯一の方法ではありません。ソースコードからMilvusをデプロイすることもできます。これにはUbuntu (18.04以上) または CentOS (7以上) が必要です。詳しくは<a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">Milvusをソースコードからビルドするを</a>ご覧ください。</p>
 <h4 id="What-are-the-main-factors-affecting-recall" class="common-anchor-header">再現率に影響を与える主な要因は何ですか?</h4><p>検索結果は主にインデックスタイプと検索パラメータに影響されます。</p>
 <p>FLATインデックスの場合、Milvusはコレクション内を網羅的にスキャンし、100%の検索結果を返します。</p>
 <p>IVFインデックスでは、nprobeパラメータがコレクション内の検索範囲を決定します。nprobeを増加させると、検索されるベクトルの割合が増加し、リコールが増加しますが、クエリ性能は低下します。</p>
@@ -70,7 +70,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <p>詳細については、<a href="https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">ベクトル・インデックスを</a>参照してください。</p>
 <h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">設定ファイルを変更しても反映されません。</h4><p>Milvusは実行中の設定ファイルの変更をサポートしていません。設定ファイルの変更を有効にするには、Milvus Dockerを再起動する必要があります。</p>
 <h4 id="How-do-I-know-if-Milvus-has-started-successfully" class="common-anchor-header">Milvusが正常に起動したかどうかはどのように確認できますか？</h4><p>Docker Composeを使用してMilvusを起動した場合、<code translate="no">docker ps</code> 、実行中のDockerコンテナ数を確認し、Milvusのサービスが正常に起動したかどうかを確認してください。</p>
-<p>Milvusスタンドアロンの場合、少なくとも3つのDockerコンテナが動作していることが確認できるはずです。1つはMilvusサービス、残りの2つはetcd管理とストレージサービスです。詳細については、<a href="/docs/ja/install_standalone-docker.md">Milvusスタンドアロンのインストールを</a>参照してください。</p>
+<p>Milvusスタンドアロンの場合、少なくとも3つのDockerコンテナが稼働していることが確認できるはずです。1つはMilvusサービス、残りの2つはetcd管理とストレージサービスです。詳細については、<a href="/docs/ja/install_standalone-docker.md">Milvusスタンドアロンのインストールを</a>参照してください。</p>
 <h4 id="Why-is-the-time-in-the-log-files-different-from-the-system-time" class="common-anchor-header">ログファイルの時刻がシステム時刻と異なるのはなぜですか？</h4><p>時間の違いは通常、ホストマシンが協定世界時(UTC)を使用していないことが原因です。</p>
 <p>Dockerイメージ内のログファイルはデフォルトでUTCを使用しています。ホストマシンがUTCを使用していない場合、この問題が発生する可能性があります。</p>
 <h4 id="How-do-I-know-if-my-CPU-supports-Milvus" class="common-anchor-header">自分のCPUがMilvusに対応しているかどうかは、どうすれば分かりますか？</h4><p>Milvusの演算処理は、CPUがSIMD(Single Instruction, Multiple Data)拡張命令セットをサポートしているかどうかに依存します。お使いのCPUがSIMD拡張命令セットに対応しているかどうかは、Milvusのインデックス構築およびベクトル類似検索において非常に重要です。CPUが以下のSIMD命令セットの少なくとも1つをサポートしていることを確認してください：</p>
@@ -90,7 +90,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">Windowsにpymilvusをインストールする際にエラーが発生しました。どうすればよいでしょうか。</h4><p>以下のコマンドでpymilvusを最新版にアップデートしてください。</p>
 <pre><code translate="no" class="language-shell">pip install --upgrade pymilvus
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">Milvusはインターネットに接続していない状態でもインストールできますか？</h4><p>オフライン環境でMilvusをインストールすることができます。詳しくは<a href="/docs/ja/install_offline-helm.md">Milvusのオフラインインストールを</a>ご参照ください。</p>
+<h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">インターネットに接続されていない環境でもMilvusをインストールできますか？</h4><p>オフライン環境でMilvusをインストールすることができます。詳しくは<a href="/docs/ja/install_offline-helm.md">Milvusのオフラインインストールを</a>ご参照ください。</p>
 <h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">Milvusが生成したログはどこにありますか?</h4><p>Milvusのログはデフォルトでstout(標準出力)とstderr(標準エラー)に出力されますが、本番環境ではログを永続ボリュームにリダイレクトすることを強く推奨します。そのためには、<strong>milvus.yamlの</strong> <code translate="no">log.file.rootPath</code> 。また、milvusを<code translate="no">milvus-helm</code> チャートでデプロイする場合、<code translate="no">--set log.persistence.enabled=true</code> を使ってログの永続化を有効にする必要があります。</p>
 <p>設定を変更していない場合は、kubectl logs<pod-name> または docker logs CONTAINER を使ってもログを見つけることができます。</p>
 <h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">セグメントにデータを挿入する前にインデックスを作成できますか？</h4><p>はい、できます。しかし、各セグメントにインデックスを作成する前に、256MBを超えない範囲でまとめてデータを挿入することをお勧めします。</p>
@@ -105,7 +105,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <p>PyMilvus は以下のコマンドでアップグレードできます：</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Why-am-I-getting-fewer-results-than-the-limit-I-set-in-my-searchquery" class="common-anchor-header">検索/クエリで設定した<code translate="no">limit</code> より少ない結果しか得られないのはなぜですか？</h4><p>指定した<code translate="no">limit</code> より少ない結果しか得られない理由はいくつかあります：</p>
+<h4 id="Why-am-I-getting-fewer-results-than-the-limit-I-set-in-my-searchquery" class="common-anchor-header">検索/クエリで設定した<code translate="no">limit</code> よりも少ない結果しか得られないのはなぜですか？</h4><p>指定した<code translate="no">limit</code> より少ない結果しか得られない理由はいくつかあります：</p>
 <ul>
 <li><p><strong>データが限られている</strong>：限られたデータ： コレクションには、要求した制限を満たすのに十分なエンティティがない可能性があります。コレクション内のエンティティの総数が制限を下回ると、当然、結果の数も少なくなります。</p></li>
 <li><p><strong>主キーの重複</strong>：Milvusは、検索中に主キーの重複に遭遇した場合、特定のエンティティを優先します。この動作は検索タイプによって異なります：</p></li>

@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>HNSW_SQ</strong>将层次导航小世界（HNSW）图与标量量化（SQ）相结合，创建了一种先进的向量索引方法，提供了可控的大小与精度权衡。与标准<a href="/docs/zh/hnsw.md">HNSW</a> 相比，这种索引类型在索引构建时间略有增加的同时，仍能保持较高的查询处理速度。</p>
+    </button></h1><p><strong>HNSW_SQ</strong>将层次导航小世界（HNSW）图与标量量化（SQ）相结合，创建了一种先进的向量索引方法，提供了可控的大小与精度权衡。与标准<a href="/docs/zh/hnsw.md">HNSW</a> 相比，这种索引类型保持了较高的查询处理速度，同时索引构建时间略有增加。</p>
 <h2 id="Overview" class="common-anchor-header">概览<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,7 +52,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>HNSW 构建了一个多层图，其中每个节点都对应数据集中的一个向量。在这个图中，节点根据其相似性进行连接，从而实现数据空间的快速遍历。分层结构允许搜索算法缩小候选邻域的范围，从而大大加快了高维空间的搜索过程。</p>
+    </button></h3><p>HNSW 构建了一个多层图，其中每个节点都对应数据集中的一个向量。在这个图中，节点根据其相似性进行连接，从而实现数据空间的快速遍历。分层结构允许搜索算法缩小候选邻居的范围，从而大大加快了高维空间的搜索过程。</p>
 <p>更多信息，请参阅<a href="/docs/zh/hnsw.md">HNSW</a>。</p>
 <h3 id="SQ" class="common-anchor-header">SQ<button data-href="#SQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -97,7 +97,7 @@ summary: >-
     </button></h3><p>针对要求极高查询速度和最小内存占用的应用场景，Milvus 推出了<code translate="no">SQ4U</code> ，一种 4 位统一标量量化。这是一种积极的标量量化形式，可将每个维度的浮点数值压缩为<strong>4 位</strong>无符号整数。</p>
 <p>SQ4U 中的 "U "代表 Uniform（统一）。非统一标量量化通常会为每个维度独立计算最小值和最大值（按维度量化），而 SQ4U 则不同，它执行的是<strong>全局统一量化</strong>策略：</p>
 <ol>
-<li><p><strong>全局统计</strong>：系统计算适用于向量<strong>所有维度</strong>（或整个向量段）的<strong>单一</strong>最小值<code translate="no">vmin</code> 和<strong>单一</strong>值范围<code translate="no">vdiff</code> 。</p></li>
+<li><p><strong>全局统计</strong>：系统会计算适用于向量<strong>所有维度</strong>（或整个向量段）的<strong>单一</strong>最小值<code translate="no">vmin</code> 和<strong>单一</strong>值范围<code translate="no">vdiff</code> 。</p></li>
 <li><p><strong>统一映射</strong>：全局值范围分为 16 个相等的区间。向量中的每个浮点数值，无论属于哪个维度，都使用这些共享参数映射为 4 位整数（0-15）。</p></li>
 </ol>
 <p><strong>性能优势</strong></p>

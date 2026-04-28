@@ -75,7 +75,7 @@ summary: >-
 <li><p>في وقت الاستعلام، يستخدم Milvus <strong>بحثًا ثنائيًا</strong><a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">(std::Lower_bound</a> و <a href="https://en.cppreference.com/w/cpp/algorithm/upper_bound.html">std::upper_bound</a>) على المصفوفة المصنفة.</p></li>
 <li><p>بالنسبة للتساوي، يعثر ميلفوس بسرعة على جميع القيم المطابقة.</p></li>
 <li><p>بالنسبة للنطاقات، يحدد Milvus موقعي البداية والنهاية ويعيد جميع القيم بينهما.</p></li>
-<li><p>يتم تمرير معرفات الكيانات المطابقة إلى منفذ الاستعلام لتجميع النتائج النهائية.</p></li>
+<li><p>يتم تمرير معرفات الكيانات المتطابقة إلى منفذ الاستعلام لتجميع النتائج النهائية.</p></li>
 </ul></li>
 </ol>
 <p>وهذا يقلل من تعقيد الاستعلام من <strong>O(n)</strong> (مسح كامل) إلى <strong>O(log n + m)</strong>، حيث <em>m</em> هو عدد مرات التطابق.</p>

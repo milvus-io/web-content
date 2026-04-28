@@ -40,11 +40,41 @@ summary: 'Erfahren Sie, wie Sie einen Milvus-Cluster auf AWS EC2 bereitstellen.'
       </svg>
     </button></h2><p>Dieser Abschnitt beschreibt, wie Sie Terraform zur Bereitstellung eines Milvus-Clusters verwenden.</p>
 <p><a href="https://www.terraform.io/">Terraform</a> ist ein Infrastructure as Code (IaC) Software-Tool. Mit Terraform können Sie Infrastrukturen mit Hilfe von deklarativen Konfigurationsdateien bereitstellen.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Voraussetzungen</h3><ul>
+<h3 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><a href="https://www.terraform.io/downloads.html">Terraform</a> installieren und konfigurieren</p></li>
 <li><p><a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html">AWS CLI</a> installieren und konfigurieren</p></li>
 </ul>
-<h3 id="Prepare-configuration" class="common-anchor-header">Konfiguration vorbereiten</h3><p>Sie können Vorlagenkonfigurationsdateien bei <a href="https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view">Google Drive</a> herunterladen.</p>
+<h3 id="Prepare-configuration" class="common-anchor-header">Konfiguration vorbereiten<button data-href="#Prepare-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sie können Vorlagenkonfigurationsdateien bei <a href="https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view">Google Drive</a> herunterladen.</p>
 <ul>
 <li><p><code translate="no">main.tf</code></p>
 <p>Diese Datei enthält die Konfiguration für die Bereitstellung eines Milvus-Clusters.</p></li>
@@ -97,7 +127,7 @@ variable &quot;my_ip&quot; {
 }
 </code></pre></li>
 <li><p>Sicherheitsgruppe</p>
-<p>Die folgende Vorlage deklariert eine Sicherheitsgruppe, die eingehenden Datenverkehr aus dem CIDR-Adressbereich zulässt, der durch <code translate="no">my_ip</code> repräsentiert wird und in <code translate="no">variables.tf</code> deklariert ist.</p>
+<p>Die folgende Vorlage deklariert eine Sicherheitsgruppe, die eingehenden Datenverkehr aus dem CIDR-Adressbereich zulässt, der durch <code translate="no">my_ip</code> repräsentiert und in <code translate="no">variables.tf</code> deklariert wird.</p>
 <pre><code translate="no" class="language-main.tf">resource &quot;aws_security_group&quot; &quot;cluster_sg&quot; {
   name        = &quot;cluster_sg&quot;
   description = &quot;Allows only me to access&quot;
@@ -201,7 +231,22 @@ resource &quot;aws_route_table_association&quot; &quot;cluster_subnet_add_gatewa
 }
 </code></pre></li>
 </ul>
-<h3 id="Apply-the-configuration" class="common-anchor-header">Anwenden der Konfiguration</h3><ol>
+<h3 id="Apply-the-configuration" class="common-anchor-header">Anwenden der Konfiguration<button data-href="#Apply-the-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li><p>Öffnen Sie ein Terminal und navigieren Sie zu dem Ordner, in dem <code translate="no">main.tf</code> gespeichert ist.</p></li>
 <li><p>Um die Konfiguration zu initialisieren, führen Sie <code translate="no">terraform init</code> aus.</p></li>
 <li><p>Um die Konfiguration anzuwenden, führen Sie <code translate="no">terraform apply</code> aus und geben Sie <code translate="no">yes</code> ein, wenn Sie dazu aufgefordert werden.</p></li>
@@ -224,13 +269,58 @@ resource &quot;aws_route_table_association&quot; &quot;cluster_subnet_add_gatewa
       </svg>
     </button></h2><p>In diesem Abschnitt wird beschrieben, wie Sie Ansible verwenden, um den Milvus-Cluster zu starten, den Sie bereitgestellt haben.</p>
 <p><a href="https://www.ansible.com/overview/how-ansible-works">Ansible</a> ist ein Konfigurationsmanagement-Tool, das zur Automatisierung der Cloud-Bereitstellung und des Konfigurationsmanagements verwendet wird.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Voraussetzungen</h3><ul>
+<h3 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible Controller</a> ist installiert.</li>
 </ul>
-<h3 id="Download-Ansible-Milvus-node-deployment-Playbook" class="common-anchor-header">Download Ansible Milvus-Knotenbereitstellung Playbook</h3><p>Klonen Sie das Milvus-Repository von GitHub, um das Ansible Milvus Node Deployment Playbook herunterzuladen.</p>
+<h3 id="Download-Ansible-Milvus-node-deployment-Playbook" class="common-anchor-header">Download Ansible Milvus-Knotenbereitstellung Playbook<button data-href="#Download-Ansible-Milvus-node-deployment-Playbook" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Klonen Sie das Milvus-Repository von GitHub, um das Ansible Milvus Node Deployment Playbook herunterzuladen.</p>
 <pre><code translate="no">git <span class="hljs-built_in">clone</span> https://github.com/milvus-io/milvus.git
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Configure-installation-files" class="common-anchor-header">Konfigurieren Sie die Installationsdateien</h3><p>Die Dateien <code translate="no">inventory.ini</code> und <code translate="no">ansible.cfg</code> werden verwendet, um die Umgebungsvariablen und die Verifizierungsmethoden für die Anmeldung im Ansible-Playbook zu steuern. In der Datei <code translate="no">inventory.ini</code> werden im Abschnitt <code translate="no">dockernodes</code> alle Server der Docker-Engines definiert. Der Abschnitt <code translate="no">ansible.cfg</code> definiert alle Server der Milvus-Koordinatoren. Der Abschnitt <code translate="no">node</code> definiert alle Server der Milvus-Knoten.</p>
+<h3 id="Configure-installation-files" class="common-anchor-header">Konfigurieren Sie die Installationsdateien<button data-href="#Configure-installation-files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Die Dateien <code translate="no">inventory.ini</code> und <code translate="no">ansible.cfg</code> werden verwendet, um die Umgebungsvariablen und die Verifizierungsmethoden für die Anmeldung im Ansible-Playbook zu steuern. In der Datei <code translate="no">inventory.ini</code> werden im Abschnitt <code translate="no">dockernodes</code> alle Server der Docker-Engines definiert. Der Abschnitt <code translate="no">ansible.cfg</code> definiert alle Server der Milvus-Koordinatoren. Der Abschnitt <code translate="no">node</code> definiert alle Server der Milvus-Knoten.</p>
 <p>Geben Sie den lokalen Pfad zum Playbook ein und konfigurieren Sie die Installationsdateien.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> ./milvus/deployments/docker/cluster-distributed-deployment</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -313,10 +403,25 @@ INDEX_COORD_ADDRESS= {{coords_ip}}:31000
   <span class="hljs-attr">roles:</span>
     <span class="hljs-bullet">-</span> <span class="hljs-string">docker-installation</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Test-Ansible-connectivity" class="common-anchor-header">Testen der Konnektivität von Ansible</h3><p>Testen Sie die Konnektivität zu Ansible.</p>
+<h3 id="Test-Ansible-connectivity" class="common-anchor-header">Testen der Konnektivität von Ansible<button data-href="#Test-Ansible-connectivity" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Testen Sie die Konnektivität zu Ansible.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible all -m ping</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Fügen Sie <code translate="no">-i</code> in den Befehl ein, um den Pfad zur Inventarisierungsdatei anzugeben, wenn Sie ihn nicht in <code translate="no">ansible.cfg</code> angegeben haben, ansonsten verwendet Ansible <code translate="no">/etc/ansible/hosts</code>.</p>
+<p>Fügen Sie <code translate="no">-i</code> in den Befehl ein, um den Pfad zur Inventarisierungsdatei anzugeben, wenn Sie ihn nicht in <code translate="no">ansible.cfg</code> angegeben haben. Andernfalls verwendet Ansible <code translate="no">/etc/ansible/hosts</code>.</p>
 <p>Das Terminal gibt die folgende Meldung aus:</p>
 <pre><code translate="no">dockernode01 | <span class="hljs-function"><span class="hljs-params">SUCCESS</span> =&gt;</span> {
 <span class="hljs-string">&quot;changed&quot;</span>: <span class="hljs-literal">false</span>,
@@ -338,13 +443,43 @@ dockernode02 | <span class="hljs-function"><span class="hljs-params">SUCCESS</sp
     <span class="hljs-string">&quot;ping&quot;</span>: <span class="hljs-string">&quot;pong&quot;</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Check-the-Playbook-Syntax" class="common-anchor-header">Überprüfen Sie die Syntax des Playbooks</h3><p>Überprüfen Sie die Syntax des Playbooks.</p>
+<h3 id="Check-the-Playbook-Syntax" class="common-anchor-header">Überprüfen Sie die Syntax des Playbooks<button data-href="#Check-the-Playbook-Syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Überprüfen Sie die Syntax des Playbooks.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible-playbook deploy-docker.yml --syntax-check</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Normalerweise gibt das Terminal Folgendes zurück:</p>
 <pre><code translate="no"><span class="hljs-section">playbook: deploy-docker.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Install-Docker" class="common-anchor-header">Docker installieren</h3><p>Installieren Sie Docker mit dem Playbook.</p>
+<h3 id="Install-Docker" class="common-anchor-header">Docker installieren<button data-href="#Install-Docker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Installieren Sie Docker mit dem Playbook.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible-playbook deploy-docker.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Wenn Docker erfolgreich auf den drei Hosts installiert wurde, gibt das Terminal Folgendes zurück:</p>
@@ -369,7 +504,22 @@ dockernode01               : ok=10   changed=1    unreachable=0    failed=0    s
 dockernode02               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 dockernode03               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 </span><button class="copy-code-btn"></button></code></pre>
-<h3 id="Verify-the-installation" class="common-anchor-header">Überprüfen Sie die Installation</h3><p>Melden Sie sich bei den drei Hosts mit dem SSH-Schlüssel an, und überprüfen Sie die Installation auf den Hosts.</p>
+<h3 id="Verify-the-installation" class="common-anchor-header">Überprüfen Sie die Installation<button data-href="#Verify-the-installation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Melden Sie sich bei den drei Hosts mit dem SSH-Schlüssel an, und überprüfen Sie die Installation auf den Hosts.</p>
 <ul>
 <li>Für Root-Hosts:</li>
 </ul>
@@ -386,13 +536,43 @@ dockernode03               : ok=10   changed=1    unreachable=0    failed=0    s
 <p>Überprüfen Sie den Laufstatus der Container.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Check-the-Syntax" class="common-anchor-header">Überprüfen Sie die Syntax</h3><p>Überprüfen Sie die Syntax von <code translate="no">deploy-milvus.yml</code>.</p>
+<h3 id="Check-the-Syntax" class="common-anchor-header">Überprüfen Sie die Syntax<button data-href="#Check-the-Syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Überprüfen Sie die Syntax von <code translate="no">deploy-milvus.yml</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible-playbook deploy-milvus.yml --syntax-check</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Normalerweise gibt das Terminal folgendes zurück:</p>
 <pre><code translate="no"><span class="hljs-section">playbook: deploy-milvus.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Milvus-container" class="common-anchor-header">Milvus-Container erstellen</h3><p>Die Aufgaben zum Erstellen von Milvus-Containern sind in <code translate="no">deploy-milvus.yml</code> definiert.</p>
+<h3 id="Create-Milvus-container" class="common-anchor-header">Milvus-Container erstellen<button data-href="#Create-Milvus-container" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Die Aufgaben zum Erstellen von Milvus-Containern sind in <code translate="no">deploy-milvus.yml</code> definiert.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible-playbook deploy-milvus.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Das Terminal gibt zurück:</p>

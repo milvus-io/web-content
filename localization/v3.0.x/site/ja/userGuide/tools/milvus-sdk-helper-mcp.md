@@ -52,15 +52,15 @@ summary: ⚡️ 一度設定すれば、いつまでも効率アップ！
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>次の図は、Milvus SDKコードヘルパーを使用した場合と使用しなかった場合のコード生成の効果を比較したものです。Milvus SDKコードヘルパーを使用しない場合、記述されたコードは古いORM SDKアプローチに従いますが、これはもはや推奨されません。以下はコードヘルパーMCPの有無によるコードスクリーンショットの比較です：</p>
+    </button></h1><p>次の図は、Milvus SDKコードヘルパーを使用した場合と使用しなかった場合のコード生成の効果を比較したものです。Milvus SDKコードヘルパーを使用しない場合、書かれたコードは古いORM SDKのアプローチに従いますが、これはもはや推奨されません。以下はコードヘルパーMCPの有無によるコードスクリーンショットの比較です：</p>
 <table>
    <tr>
      <th><p>MCPコードヘルパー<strong>有効</strong></p></th>
      <th><p>MCPコードヘルパー<strong>無効</strong></p></th>
    </tr>
    <tr>
-     <td><p><img translate="no" width="400" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
-     <td><p><img translate="no" width="400"src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
+     <td><p><img translate="no" width="400" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
+     <td><p><img translate="no" width="400"src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
    </tr>
    <tr>
      <td><p>公式に推奨されている最新のMilvusClientインタフェースを使用してCollectionを作成する</p></td>
@@ -101,7 +101,7 @@ summary: ⚡️ 一度設定すれば、いつまでも効率アップ！
     </button></h2><p>にアクセスしてください： <code translate="no">Settings</code> -&gt;<code translate="no">Cursor Settings</code> -&gt;<code translate="no">Tools &amp; Intergrations</code> -&gt;<code translate="no">Add new global MCP server</code></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cursor-mcp-settings.png" alt="Cursor Mcp Settings" class="doc-image" id="cursor-mcp-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cursor-mcp-settings.png" alt="Cursor Mcp Settings" class="doc-image" id="cursor-mcp-settings" />
    </span> <span class="img-wrapper"> <span>カーソルMcp設定</span> </span></p>
 <p>以下の設定を Cursor<code translate="no">~/.cursor/mcp.json</code> ファイルに貼り付けることをお勧めします。プロジェクトフォルダに<code translate="no">.cursor/mcp.json</code> を作成して、特定のプロジェクトをインストールすることもできます。詳細は<a href="https://docs.cursor.com/context/model-context-protocol">Cursor MCP ドキュメントを</a>参照してください。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
@@ -248,7 +248,7 @@ summary: ⚡️ 一度設定すれば、いつまでも効率アップ！
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cherry-studio-mcp-settings.png" alt="Cherry Studio Mcp Settings" class="doc-image" id="cherry-studio-mcp-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cherry-studio-mcp-settings.png" alt="Cherry Studio Mcp Settings" class="doc-image" id="cherry-studio-mcp-settings" />
    </span> <span class="img-wrapper"> <span>Cherry Studio Mcpの設定</span> </span></p>
 <h2 id="Cline" class="common-anchor-header">Cline<button data-href="#Cline" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -298,7 +298,7 @@ summary: ⚡️ 一度設定すれば、いつまでも効率アップ！
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Cmd/Ctrl Shift Pを押すか、Augmentパネルのハンバーガーメニューを開きます。</p></li>
+<li><p>Cmd/Ctrl Shift Pを押すか、Augmentパネルのハンバーガー・メニューを開きます。</p></li>
 <li><p>設定の編集を選択</p></li>
 <li><p>詳細設定]で、[settings.jsonの編集]をクリックします。</p></li>
 <li><p><code translate="no">augment.advanced</code> オブジェクトの<code translate="no">mcpServers</code> 配列にサーバー設定を追加します：</p></li>

@@ -41,7 +41,7 @@ title: تشغيل Milvus مع دعم وحدة معالجة الرسومات با
 <li><a href="/docs/ar/prerequisite-gpu.md">تحقق من متطلبات الأجهزة والبرامج</a> قبل التثبيت.</li>
 </ul>
 <div class="alert note">
-<p>إذا واجهت أي مشاكل في سحب الصورة، اتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل عن المشكلة، وسنقدم لك الدعم اللازم.</p>
+<p>إذا واجهتك أي مشاكل في سحب الصورة، اتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل عن المشكلة، وسنقدم لك الدعم اللازم.</p>
 </div>
 <h2 id="Install-Milvus" class="common-anchor-header">تثبيت Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

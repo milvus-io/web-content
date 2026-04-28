@@ -1,7 +1,7 @@
 ---
 id: disk_index.md
 related_key: disk_index
-summary: Milvus 中的磁碟索引機制。
+summary: Milvus 用於磁碟最佳化向量搜尋的磁碟索引機制。
 title: 磁碟上索引
 ---
 <h1 id="On-disk-Index" class="common-anchor-header">磁碟上索引<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
@@ -19,7 +19,7 @@ title: 磁碟上索引
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本文介紹一種名為 DiskANN 的磁碟索引演算法。DiskANN 基於 Vamana 圖形，能夠在大型資料集中進行高效率的搜尋。</p>
+    </button></h1><p>本文將介紹 DiskANN，一種用於磁碟最佳化向量搜尋的磁碟上索引演算法。DiskANN 以 Vamana 圖形為基礎，在大型資料集中提供高效率的磁碟上向量搜尋。</p>
 <p>為了改善查詢效能，您可以為每個向量欄位<a href="/docs/zh-hant/index-vector-fields.md">指定索引類型</a>。</p>
 <div class="alert note"> 
 目前，一個向量欄位只支援一種索引類型。切換索引類型時，Milvus 會自動刪除舊索引。</div>
@@ -38,12 +38,8 @@ title: 磁碟上索引
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要使用 DiskANN，請注意</p>
+    </button></h2><p>要在 Milvus 中使用 DiskANN，請注意</p>
 <ul>
-<li>DiskANN 預設為停用。如果您偏好記憶體索引而非磁碟索引，建議您停用此功能以獲得更好的效能。<ul>
-<li>若要停用此功能，您可以在 milvus 配置文件中將<code translate="no">queryNode.enableDisk</code> 改為<code translate="no">false</code> 。</li>
-<li>若要再次啟用，您可以將<code translate="no">queryNode.enableDisk</code> 設為<code translate="no">true</code> 。</li>
-</ul></li>
 <li>Milvus 實例在 Ubuntu 18.04.6 或更新版本上執行。</li>
 <li>Milvus 資料路徑應掛載至 NVMe SSD，以獲得完整效能：<ul>
 <li>對於 Milvus 獨立實例，資料路徑應該是實例執行所在容器中的<strong>/var/lib/milvus/data</strong>。</li>
@@ -94,7 +90,7 @@ title: 磁碟上索引
 <tr><th>參數</th><th>說明</th><th>範圍</th><th>預設值</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">search_list</code></td><td>候選清單的大小，較大的大小提供較高的召回率，但效能會降低。</td><td>[topk, int32_max] (最大值)</td><td>16</td></tr>
+<tr><td><code translate="no">search_list</code></td><td>候選名單的大小，較大的大小提供較高的召回率，但效能會降低。</td><td>[topk, int32_max] (最大值)</td><td>16</td></tr>
 </tbody>
 </table>
 </li>
@@ -119,7 +115,7 @@ title: 磁碟上索引
 <span class="hljs-attr">DiskIndex:</span>
   <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
   <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
-  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">PQCodeBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
 <span class="hljs-string">...</span>
@@ -129,9 +125,9 @@ title: 磁碟上索引
 <tr><th>參數</th><th>說明</th><th>值範圍</th><th>預設值</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">MaxDegree</code></td><td>Vamana 圖形的最大度數。 <br/> 較大值可提供較高的召回率，但會增加索引的大小和建立索引的時間。</td><td>[1, 512]</td><td>56</td></tr>
+<tr><td><code translate="no">MaxDegree</code></td><td>Vamana 圖形的最大度數。 <br/> 值越大，召回率越高，但會增加索引的大小和建立索引的時間。</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>候選清單的大小。 <br/> 較大值會增加建立索引所花費的時間，但可提供較高的召回率。 <br/> 除非您需要減少建立索引的時間，否則請將它設定為小於<code translate="no">MaxDegree</code> 的值。</td><td>[1, int32_max］</td><td>100</td></tr>
-<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>PQ 代碼的大小限制。 <br/> 較大值可提供較高的召回率，但會增加記憶體使用量。</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
+<tr><td><code translate="no">PQCodeBudgetGBRatio</code></td><td>PQ 代碼的大小限制。 <br/> 較大值可提供較高的召回率，但會增加記憶體使用量。</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>快取節點數與原始資料的比率。 <br/> 較大值可改善索引建立效能，但會增加記憶體使用量。</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>每次搜索迭代的最大 IO 請求數目與 CPU 數目之間的比率。</td><td>[1，max(128 / CPU 數目，16)] 4.0</td><td>4.0</td></tr>
 </tbody>

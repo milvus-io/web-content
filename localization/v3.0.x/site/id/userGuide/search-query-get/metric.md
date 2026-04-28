@@ -143,7 +143,7 @@ summary: >-
 <p>Rumus untuk jarak Euclidean adalah sebagai berikut:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/euclidean-metric.png" alt="Euclidean Metric" class="doc-image" id="euclidean-metric" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/euclidean-metric.png" alt="Euclidean Metric" class="doc-image" id="euclidean-metric" />
    </span> <span class="img-wrapper"> <span>Metrik Euclidean</span> </span></p>
 <p>di mana <strong>a = (<sub>a0</sub>, <sub>a1</sub>, ...,<sub>an-1</sub>)</strong> dan <strong>b = (<sub>b0</sub>, <sub>b1</sub>, ..., <sub>bn-1</sub>)</strong> adalah dua titik dalam ruang Euclidean n-dimensi.</p>
 <p>Ini adalah metrik jarak yang paling umum digunakan dan sangat berguna ketika datanya kontinu.</p>
@@ -168,7 +168,7 @@ summary: >-
     </button></h2><p>Jarak IP antara dua penyematan didefinisikan sebagai berikut:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IP-formula.png" alt="IP Formula" class="doc-image" id="ip-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IP-formula.png" alt="IP Formula" class="doc-image" id="ip-formula" />
    </span> <span class="img-wrapper"> <span>Rumus IP</span> </span></p>
 <p>IP lebih berguna jika Anda perlu membandingkan data yang tidak dinormalisasi atau ketika Anda peduli dengan besaran dan sudut.</p>
 <div class="alert note">
@@ -177,12 +177,12 @@ summary: >-
 <p>Misalkan X' dinormalisasi dari penyematan X:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/normalize-formula.png" alt="Normalize Formula" class="doc-image" id="normalize-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalize-formula.png" alt="Normalize Formula" class="doc-image" id="normalize-formula" />
    </span> <span class="img-wrapper"> <span>Rumus Normalisasi</span> </span></p>
 <p>Korelasi antara kedua embedding adalah sebagai berikut:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/correlation-between-embeddings.png" alt="Correlation Between Embeddings" class="doc-image" id="correlation-between-embeddings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/correlation-between-embeddings.png" alt="Correlation Between Embeddings" class="doc-image" id="correlation-between-embeddings" />
    </span> <span class="img-wrapper"> <span>Korelasi Antara Penyematan</span> </span></p>
 <h2 id="Cosine-similarity" class="common-anchor-header">Kesamaan kosinus<button data-href="#Cosine-similarity" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -203,7 +203,7 @@ summary: >-
 <p>Untuk menghitung kemiripan kosinus antara dua set vektor <strong>A = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> dan <strong>B = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong>, gunakan rumus berikut:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
    </span> <span class="img-wrapper"> <span>Kesamaan Kosinus</span> </span></p>
 <p>Kesamaan kosinus selalu berada dalam interval <strong>[-1, 1]</strong>. Sebagai contoh, dua vektor proporsional memiliki kemiripan kosinus <strong>1</strong>, dua vektor ortogonal memiliki kemiripan <strong>0</strong>, dan dua vektor yang berlawanan memiliki kemiripan <strong>-1</strong>. Semakin besar kosinus, semakin kecil sudut antara dua vektor tersebut, yang mengindikasikan bahwa dua vektor tersebut semakin mirip satu sama lain.</p>
 <p>Dengan mengurangkan kemiripan kosinusnya dari 1, Anda bisa mendapatkan jarak kosinus antara dua vektor.</p>
@@ -222,15 +222,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Koefisien jarak JACCARD mengukur kemiripan antara dua set sampel dan didefinisikan sebagai kardinalitas perpotongan set yang ditentukan dibagi dengan kardinalitas gabungan keduanya. Ini hanya dapat diterapkan pada set sampel yang terbatas.</p>
+    </button></h2><p>Koefisien jarak JACCARD mengukur kemiripan antara dua set sampel dan didefinisikan sebagai kardinalitas perpotongan set yang ditentukan dibagi dengan kardinalitas penyatuannya. Koefisien ini hanya dapat diterapkan pada set sampel yang terbatas.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
    </span> <span class="img-wrapper"> <span>Rumus Koefisien Kemiripan JACCARD</span> </span></p>
 <p>Jarak JACCARD mengukur ketidaksamaan antara kumpulan data dan diperoleh dengan mengurangi koefisien kemiripan JACCARD dari 1. Untuk variabel biner, jarak JACCARD setara dengan koefisien Tanimoto.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
    </span> <span class="img-wrapper"> <span>Rumus Jarak JACCARD</span> </span></p>
 <h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -247,7 +247,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>MinHash Jaccard</strong> (<code translate="no">MHJACCARD</code>) adalah jenis metrik yang digunakan untuk pencarian kemiripan yang efisien dan mendekati pada set yang besar-seperti set kata dokumen, set tag pengguna, atau set k-mer genom. Alih-alih membandingkan set mentah secara langsung, MHJACCARD membandingkan <strong>tanda tangan MinHash</strong>, yang merupakan representasi ringkas yang dirancang untuk memperkirakan kemiripan Jaccard secara efisien.</p>
+    </button></h2><p><strong>MinHash Jaccard</strong> (<code translate="no">MHJACCARD</code>) adalah jenis metrik yang digunakan untuk pencarian kemiripan yang efisien dan mendekati pada kumpulan besar - seperti kumpulan kata dokumen, kumpulan tag pengguna, atau kumpulan k-mer genom. Alih-alih membandingkan set mentah secara langsung, MHJACCARD membandingkan <strong>tanda tangan MinHash</strong>, yang merupakan representasi ringkas yang dirancang untuk memperkirakan kemiripan Jaccard secara efisien.</p>
 <p>Pendekatan ini secara signifikan lebih cepat daripada menghitung kemiripan Jaccard yang tepat dan sangat berguna dalam skenario berskala besar atau berdimensi tinggi.</p>
 <p><strong>Jenis vektor yang berlaku</strong></p>
 <ul>
@@ -301,7 +301,7 @@ summary: >-
     </button></h2><p>BM25 adalah metode pengukuran relevansi teks yang banyak digunakan, yang dirancang khusus untuk <a href="/docs/id/full-text-search.md">pencarian teks lengkap</a>. Metode ini menggabungkan tiga faktor kunci berikut:</p>
 <ul>
 <li><p><strong>Frekuensi Istilah (TF):</strong> Mengukur seberapa sering sebuah istilah muncul dalam sebuah dokumen. Meskipun frekuensi yang lebih tinggi sering kali mengindikasikan kepentingan yang lebih besar, BM25 menggunakan parameter saturasi <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">k1k_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span></span></span></span> k <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">1</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> untuk mencegah istilah yang terlalu sering muncul mendominasi skor relevansi.</p></li>
-<li><p><strong>Frekuensi Dokumen Terbalik (Inverse Document Frequency, IDF):</strong> Mencerminkan pentingnya sebuah istilah di seluruh korpus. Istilah yang muncul di lebih sedikit dokumen menerima nilai IDF yang lebih tinggi, yang mengindikasikan kontribusi yang lebih besar terhadap relevansi.</p></li>
+<li><p><strong>Frekuensi Dokumen Terbalik (Inverse Document Frequency/IDF):</strong> Mencerminkan pentingnya sebuah istilah di seluruh korpus. Istilah yang muncul di lebih sedikit dokumen menerima nilai IDF yang lebih tinggi, yang mengindikasikan kontribusi yang lebih besar terhadap relevansi.</p></li>
 <li><p><strong>Normalisasi Panjang Dokumen:</strong> Dokumen yang lebih panjang cenderung mendapat nilai lebih tinggi karena mengandung lebih banyak istilah. BM25 mengurangi bias ini dengan menormalkan panjang dokumen, dengan parameter <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">bb</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span></span></span></span> b yang mengontrol kekuatan normalisasi ini.</p></li>
 </ul>
 <p>Penilaian BM25 dihitung sebagai berikut:</p>

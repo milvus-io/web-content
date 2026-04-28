@@ -168,7 +168,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">queries</code></p></td>
      <td><p>是</p></td>
-     <td><p>Rerankers 模型用于计算相关性分数的查询字符串列表。查询字符串的数量必须与搜索操作中的查询数量完全匹配（即使使用查询向量代替文本），否则将报错。</p></td>
+     <td><p>Rerankers 模型用于计算相关性得分的查询字符串列表。查询字符串的数量必须与搜索操作中的查询数量完全匹配（即使使用查询向量代替文本），否则将报错。</p></td>
      <td><p><em>["搜索查询"]</em></p></td>
    </tr>
    <tr>

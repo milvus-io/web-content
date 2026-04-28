@@ -48,7 +48,7 @@ title: 認證用戶訪問
 <span class="hljs-attr">common:</span>
 <span class="hljs-string">...</span>
   <span class="hljs-attr">security:</span>
-    <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">false</span>
+    <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">true</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 </div>
@@ -64,7 +64,7 @@ title: 認證用戶訪問
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-operator">
-<p>要啟用認證，請在<code translate="no">Milvus</code> CRD 中設定<code translate="no">spec.common.security.authorizationEnabled</code> 為<code translate="no">true</code> 。關於 Milvus CRD 的更多資訊，請參考<a href="https://milvus.io/docs/configure_operator.md?tab=component">使用 Milvus Operator 配置 Milvus</a>。</p>
+<p>要啟用認證，請在<code translate="no">Milvus</code> CRD 中設定<code translate="no">spec.config.common.security.authorizationEnabled</code> 為<code translate="no">true</code> 。關於 Milvus CRD 的更多資訊，請參考<a href="https://milvus.io/docs/configure_operator.md?tab=component">使用 Milvus Operator 配置 Milvus</a>。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

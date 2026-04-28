@@ -39,7 +39,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>للتصفية على حقل <code translate="no">GEOMETRY</code> ، استخدم مشغل هندسي في تعبير:</p>
+    </button></h2><p>للتصفية على حقل <code translate="no">GEOMETRY</code> ، استخدم عامل الهندسة في تعبير:</p>
 <ul>
 <li><p>عام: <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
 <li><p>قائم على المسافة: <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
@@ -105,11 +105,11 @@ beta: Milvus 2.6.4+
    <tr>
      <td><p><code translate="no">ST_TOUCHES(A, B)</code> / <code translate="no">st_touches(A, B)</code></p></td>
      <td><p>تُرجع TRUE إذا كانت قطعتا الأرض (أ) و(ب) تشتركان في حدود مشتركة ولكن لا تتقاطع تصميماتهما الداخلية.</p></td>
-     <td><p>هل تشترك قطعتا أرض متجاورتان (أ و ب) في حدود مشتركة؟</p></td>
+     <td><p>هل هناك قطعتا أرض متجاورتان (أ و ب) تشتركان في حدود مشتركة؟</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">ST_WITHIN(A, B)</code> / <code translate="no">st_within(A, B)</code></p></td>
-     <td><p>تُرجع TRUE إذا كان الشكلان الهندسيان (أ) و(ب) متضمنين بالكامل داخل الشكل الهندسي (ب)، مع وجود نقطة واحدة مشتركة على الأقل بين تصميميهما الداخليين. إنه معكوس <code translate="no">ST_Contains(B, A)</code>.</p></td>
+     <td><p>ترجع TRUE إذا كان الشكلان الهندسيان (أ) و(ب) متضمنين بالكامل داخل الشكل الهندسي (ب)، مع وجود نقطة واحدة مشتركة على الأقل بين تصميميهما الداخليين. إنه معكوس <code translate="no">ST_Contains(B, A)</code>.</p></td>
      <td><p>هل توجد نقطة محددة (أ) ضمن نصف قطر بحث محدد (ب)؟</p></td>
    </tr>
    <tr>
@@ -154,7 +154,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يقوم المشغّل <code translate="no">ST_CONTAINS</code> بإرجاع TRUE إذا كانت الهندسة الأولى تحتوي بالكامل على الهندسة الثانية. هذا مفيد لإيجاد نقاط داخل مضلع، أو مضلعات أصغر داخل مضلع أكبر.</p>
+    </button></h2><p>يقوم المشغل <code translate="no">ST_CONTAINS</code> بإرجاع TRUE إذا كان الشكل الهندسي الأول يحتوي بالكامل على الشكل الهندسي الثاني. هذا مفيد لإيجاد نقاط داخل مضلع، أو مضلعات أصغر داخل مضلع أكبر.</p>
 <p><strong>مثال</strong></p>
 <p>تخيّل أن لديك مجموعة من أحياء المدينة وتريد العثور على نقطة معيّنة ذات أهمية، مثل مطعم، تقع ضمن حدود منطقة معيّنة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries completely within a specific polygon.</span>
@@ -196,7 +196,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يقوم المشغّل <code translate="no">ST_INTERSECTS</code> بإرجاع <code translate="no">TRUE</code> إذا كان هناك أي نقطة مشتركة بين شكلين هندسيين في حدودهما أو داخلهما. هذا هو مشغل للأغراض العامة للكشف عن أي شكل من أشكال التداخل المكاني.</p>
+    </button></h2><p>يقوم المشغّل <code translate="no">ST_INTERSECTS</code> بإرجاع <code translate="no">TRUE</code> إذا كان هناك أي نقطة مشتركة بين أي شكلين هندسيين في حدودهما أو داخلهما. هذا هو مشغل للأغراض العامة للكشف عن أي شكل من أشكال التداخل المكاني.</p>
 <p><strong>مثال</strong></p>
 <p>إذا كان لديك مجموعة من الطرق وترغب في العثور على جميع الطرق التي تتقاطع أو تلامس سلسلة خطية محددة تمثل طريقًا جديدًا مقترحًا، يمكنك استخدام <code translate="no">ST_INTERSECTS</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries that intersect with a specific line string.</span>
@@ -238,7 +238,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يقوم المشغل <code translate="no">ST_TOUCHES</code> بإرجاع <code translate="no">TRUE</code> إذا تلامست حدود منطقتين جغرافيتين ولكن لم تتقاطع حدودهما الداخلية. هذا مفيد للكشف عن التجاورات.</p>
+    </button></h2><p>يقوم المشغل <code translate="no">ST_TOUCHES</code> بإرجاع <code translate="no">TRUE</code> إذا تلامست حدود منطقتين هندسيتين ولكن لم تتقاطع حدودهما الداخلية. هذا مفيد للكشف عن التجاورات.</p>
 <p><strong>مثال</strong></p>
 <p>إذا كانت لديك خريطة لطرود العقارات وتريد العثور على جميع الطرود المجاورة مباشرةً لحديقة عامة دون أي تداخل.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries that only touch a line string at their boundaries.</span>

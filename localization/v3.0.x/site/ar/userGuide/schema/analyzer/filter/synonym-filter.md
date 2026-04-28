@@ -186,7 +186,7 @@ analyzer_params = {
     }],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>راجع إدارة موارد الملفات للاطلاع على سير العمل الكامل (التحميل، التسجيل، الإدراج، الإزالة) وللاطلاع على النموذج البديل <code translate="no">&quot;type&quot;: &quot;local&quot;</code>.</p>
+<p>انظر إدارة موارد الملفات للاطلاع على سير العمل الكامل (التحميل، التسجيل، الإدراج، الإزالة) وللاطلاع على النموذج البديل <code translate="no">&quot;type&quot;: &quot;local&quot;</code>.</p>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

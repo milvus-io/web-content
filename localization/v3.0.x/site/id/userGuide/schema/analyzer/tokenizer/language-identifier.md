@@ -46,7 +46,7 @@ beta: Milvus v2.5.15+
     </button></h2><p><code translate="no">language_identifier</code> melakukan serangkaian langkah untuk memproses string teks, sebuah alur kerja yang sangat penting bagi pengguna untuk memahami cara mengonfigurasinya dengan benar.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
    </span> <span class="img-wrapper"> <span>Alur Kerja Deteksi Bahasa</span> </span></p>
 <ol>
 <li><p><strong>Masukan:</strong> Alur kerja dimulai dengan string teks sebagai masukan.</p></li>
@@ -135,7 +135,7 @@ beta: Milvus v2.5.15+
         ></path>
       </svg>
     </button></h3><p>Inti dari pengaturan <code translate="no">language_identifier</code> adalah menyesuaikan penganalisis Anda dengan bahasa tertentu yang Anda rencanakan untuk didukung. Sistem bekerja dengan mencocokkan bahasa yang terdeteksi dengan penganalisis yang tepat, sehingga langkah ini sangat penting untuk pemrosesan teks yang akurat.</p>
-<p>Di bawah ini adalah pemetaan bahasa yang direkomendasikan ke penganalisis Milvus yang sesuai. Tabel ini berfungsi sebagai jembatan antara output mesin pendeteksi bahasa dan alat terbaik untuk pekerjaan tersebut.</p>
+<p>Di bawah ini adalah pemetaan bahasa yang direkomendasikan ke penganalisis Milvus yang sesuai. Tabel ini berfungsi sebagai jembatan antara keluaran mesin pendeteksi bahasa dan alat terbaik untuk pekerjaan tersebut.</p>
 <table>
    <tr>
      <th><p>Bahasa (Keluaran Detektor)</p></th>
@@ -165,7 +165,7 @@ beta: Milvus v2.5.15+
 </table>
 <div class="alert note">
 <ul>
-<li><p><strong>Pencocokan adalah Kuncinya:</strong> Nama penganalisis Anda <strong>harus sama persis</strong> dengan keluaran bahasa mesin pendeteksi. Misalnya, jika Anda menggunakan <code translate="no">whatlang</code>, kunci untuk teks bahasa Mandarin harus <code translate="no">Mandarin</code>.</p></li>
+<li><p><strong>Pencocokan adalah Kuncinya:</strong> Nama penganalisis Anda <strong>harus sama persis</strong> dengan keluaran bahasa dari mesin pendeteksi. Misalnya, jika Anda menggunakan <code translate="no">whatlang</code>, kunci untuk teks bahasa Mandarin harus <code translate="no">Mandarin</code>.</p></li>
 <li><p><strong>Praktik terbaik:</strong> Tabel di atas menyediakan konfigurasi yang direkomendasikan untuk beberapa bahasa yang umum, tetapi ini bukan daftar yang lengkap. Untuk panduan yang lebih komprehensif dalam memilih penganalisis, lihat <a href="/docs/id/choose-the-right-analyzer-for-your-use-case.md">Memilih Penganalisis yang Tepat untuk Kasus Penggunaan Anda</a>.</p></li>
 <li><p><strong>Keluaran detektor</strong>: Untuk daftar lengkap nama bahasa yang dikembalikan oleh mesin pendeteksi, lihat <a href="https://github.com/greyblake/whatlang-rs">tabel bahasa yang didukung Whatlang</a> dan <a href="https://github.com/pemistahl/lingua-rs">daftar bahasa yang didukung Lingua</a>.</p></li>
 </ul>
@@ -370,6 +370,6 @@ result_fr = client.run_analyzer(<span class="hljs-string">&quot;Café français 
       </svg>
     </button></h2><ul>
 <li><p><strong>Bahasa tunggal per bidang:</strong> Fitur ini beroperasi pada sebuah bidang sebagai satu unit teks yang homogen. Fitur ini dirancang untuk menangani bahasa yang berbeda di berbagai catatan data yang berbeda, seperti satu catatan yang berisi kalimat bahasa Inggris dan catatan berikutnya berisi kalimat bahasa Prancis.</p></li>
-<li><p><strong>Tidak ada string bahasa campuran:</strong> <strong>Tidak</strong> dirancang untuk menangani string tunggal yang berisi teks dari berbagai bahasa. Sebagai contoh, satu bidang <code translate="no">VARCHAR</code> yang berisi kalimat bahasa Inggris dan frasa bahasa Jepang yang dikutip akan diproses sebagai satu bahasa.</p></li>
+<li><p><strong>Tidak ada string bahasa campuran:</strong> <strong>Tidak</strong> dirancang untuk menangani satu string yang berisi teks dari berbagai bahasa. Sebagai contoh, satu bidang <code translate="no">VARCHAR</code> yang berisi kalimat bahasa Inggris dan frasa bahasa Jepang yang dikutip akan diproses sebagai satu bahasa.</p></li>
 <li><p><strong>Pemrosesan bahasa dominan:</strong> Dalam skenario bahasa campuran, mesin pendeteksi kemungkinan akan mengidentifikasi bahasa yang dominan, dan penganalisis yang sesuai akan diterapkan ke seluruh teks. Hal ini akan menghasilkan tokenisasi yang buruk atau tidak ada sama sekali untuk teks asing yang disematkan.</p></li>
 </ul>

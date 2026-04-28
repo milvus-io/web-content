@@ -44,7 +44,7 @@ summary: Imparate a configurare knowhere per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Quando si abilita questa configurazione, i parametri dell'indice definiti di seguito saranno popolati automaticamente come parametri dell'indice, senza richiedere l'inserimento da parte dell'utente.      </td>
+      <td>        Se si attiva questa configurazione, i parametri dell'indice definiti di seguito saranno popolati automaticamente come parametri dell'indice, senza richiedere l'inserimento da parte dell'utente.      </td>
       <td>vero</td>
     </tr>
   </tbody>

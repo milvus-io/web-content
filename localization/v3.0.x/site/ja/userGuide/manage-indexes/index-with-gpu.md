@@ -19,8 +19,11 @@ title: GPUによるインデックス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このガイドでは、MilvusでGPUをサポートしたインデックスを構築する手順の概要を説明します。MilvusがサポートするGPUインデックスの種類については、<a href="/docs/ja/gpu_index.md">GPUインデックスを</a>ご参照ください。</p>
-<h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">GPUメモリ制御のためのMilvus設定の構成<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
+    </button></h1><p>このガイドでは、MilvusでGPUをサポートしたインデックスを構築する手順の概要を説明します。MilvusがサポートするGPUインデックスの種類については<a href="/docs/ja/gpu_index.md">GPUインデックスを</a>ご参照ください。</p>
+<div class="alert warning">
+<p>このページは非推奨です。最新の実装については、<a href="/docs/ja/gpu-index-overview.md">GPU Index Overviewを</a>参照してください。</p>
+</div>
+<h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">GPUメモリ制御のためのMilvusの設定<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,9 +39,9 @@ title: GPUによるインデックス
         ></path>
       </svg>
     </button></h2><p>MilvusはGPUメモリを割り当てるためにグローバルグラフィックメモリプールを使用します。</p>
-<p><a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">Milvus設定</a>ファイルで<code translate="no">initMemSize</code> と<code translate="no">maxMemSize</code> の2つのパラメータをサポートしています。プールサイズは最初は<code translate="no">initMemSize</code> に設定され、この制限を超えると自動的に<code translate="no">maxMemSize</code> に拡張されます。</p>
+<p><a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">Milvus設定</a>ファイルで<code translate="no">initMemSize</code> と<code translate="no">maxMemSize</code> の2つのパラメータをサポートしています。プールサイズは初期値として<code translate="no">initMemSize</code> に設定され、この制限を超えると自動的に<code translate="no">maxMemSize</code> に拡張されます。</p>
 <p>デフォルトの<code translate="no">initMemSize</code> は Milvus 起動時に利用可能な GPU メモリの 1/2 で、デフォルトの<code translate="no">maxMemSize</code> は利用可能なすべての GPU メモリと等しくなります。</p>
-<p>Milvus 2.4.1（バージョン2.4.1を含む）までは、Milvusは統合GPUメモリプールを使用していました。2.4.1以前のバージョン（バージョン2.4.1を含む）では、両方の値を0に設定することが推奨されていました。</p>
+<p>Milvus 2.4.1（バージョン2.4.1を含む）までは、Milvusは統一されたGPUメモリプールを使用していました。2.4.1以前のバージョン（バージョン2.4.1を含む）では、両方の値を0に設定することが推奨されていました。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">gpu:</span>
   <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment">#set the initial memory pool size.</span>
   <span class="hljs-attr">maxMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment">#maxMemSize sets the maximum memory usage limit. When the memory usage exceed initMemSize, Milvus will attempt to expand the memory pool. </span>
@@ -82,7 +85,7 @@ title: GPUによるインデックス
     </button></h3><p>GPU インデックスパラメータを設定する際に、<strong>index_type</strong>、<strong>metric_type</strong>、<strong>params</strong> を定義します：</p>
 <ul>
 <li><p><strong>index_type</strong><em>(文字列</em>)：index_type (string): ベクトル探索を加速するために使用するインデックスのタイプ。有効なオプションは<strong>GPU_CAGRA</strong>、<strong>GPU_IVF_FLAT</strong>、<strong>GPU_IVF_PQ</strong>、<strong>GPU_BRUTE_FORCE</strong>です。</p></li>
-<li><p><strong>metric_type</strong><em>（文字列</em>）：ベクトルの類似度を測定するために使用するメトリクスのタイプ。有効なオプションは<strong>IP</strong>と<strong>L2</strong> です。</p></li>
+<li><p><strong>metric_type</strong><em>（文字列</em>）：ベクトルの類似度を測定するために使用されるメトリクスのタイプ。有効なオプションは<strong>IP</strong>と<strong>L2</strong> です。</p></li>
 <li><p><strong>params</strong><em>(dict</em>)：インデックス固有の構築パラメータ。このパラメータに有効なオプションは、インデックスの種類に依存します。</p></li>
 </ul>
 <p>以下は、異なるインデックス・タイプの構成例です：</p>
@@ -285,7 +288,7 @@ collection.search(
       </svg>
     </button></h2><ul>
 <li><p><strong>GPUインデックスはどのような場合に利用するのが適切ですか？</strong></p>
-<p>GPUインデックスは、高スループットや高リコールが要求される状況で特に有益です。例えば、大きなバッチを扱う場合、GPUインデックスのスループットはCPUインデックスのそれを100倍も上回ることができます。より小さなバッチを扱うシナリオでは、GPUインデックスが性能の点でCPUインデックスを大きく上回ることに変わりはありません。さらに、迅速なデータ挿入が必要な場合、GPUを組み込むことで、インデックスの構築プロセスを大幅にスピードアップすることができます。</p></li>
+<p>GPUインデックスは、高スループットや高リコールが要求される状況で特に有益です。例えば、大きなバッチを扱う場合、GPUインデックスのスループットはCPUインデックスのそれを100倍も上回ることができます。より小さなバッチを扱うシナリオでは、GPUインデックスがCPUインデックスを性能面で大きく上回ることに変わりはありません。さらに、迅速なデータ挿入が必要な場合、GPUを組み込むことで、インデックスの構築プロセスを大幅にスピードアップすることができます。</p></li>
 <li><p><strong>CAGRA、GPU_IVF_PQ、GPU_IVF_FLAT、GPU_BRUTE_FORCE などの GPU インデックスは、どのようなシナリオに最適ですか？</strong></p>
 <p>CAGRA インデックスは、より多くのメモリを消費する代償はあるものの、より高いパフォーマンスを要求するシナリオに最適です。メモリの節約が優先される環境では、<strong>GPU_IVF_PQ</strong>インデックスはストレージ要件を最小化するのに役立ちますが、これは精度の高い損失を伴います。<strong>GPU_IVF_FLAT</strong>インデックスはバランスの取れたオプションとして機能し、性能とメモリ使用量の妥協点を提供します。最後に、<strong>GPU_BRUTE_FORCE</strong>インデックスは、網羅的検索操作のために設計されており、トラバーサル検索を実行することで、1の再現率を保証します。</p></li>
 </ul>

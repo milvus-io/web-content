@@ -304,7 +304,7 @@ df
     <tr>
       <th>1</th>
       <td>¿Cuál es el lenguaje de programación utilizado...</td>
-      <td>[CMake &amp; Conan\nLa biblioteca de algoritmos de Mil...</td>
+      <td>[CMake &amp; Conan\n\nLa biblioteca de algoritmos de Mil...</td>
       <td>El lenguaje de programación utilizado para escribir Knowher...</td>
       <td>¿Cuál es el lenguaje de programación utilizado...</td>
     </tr>

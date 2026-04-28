@@ -46,7 +46,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>GEOMETRY 字段是 Milvus 中一种 Schema 定义的数据类型 (<code translate="no">DataType.GEOMETRY</code>) ，用于存储几何数据。在处理几何字段时，您可以使用 "<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">已知文本"（WKT）</a>格式与数据交互，这是一种用于插入数据和查询的人类可读表示法。在内部，Milvus 将 WKT 转换为<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">已知二进制 (WKB)</a>，以实现高效存储和处理，但您不需要直接处理 WKB。</p>
+    </button></h2><p>GEOMETRY 字段是 Milvus 中一种 Schema 定义的数据类型 (<code translate="no">DataType.GEOMETRY</code>) ，用于存储几何数据。在处理几何字段时，您可以使用 "<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">已知文本"（WKT）</a>格式与数据交互，这是一种用于插入数据和查询的人类可读表示法。在内部，Milvus 会将 WKT 转换为<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">已知二进制 (WKB)</a>，以提高存储和处理效率，但您不需要直接处理 WKB。</p>
 <p><code translate="no">GEOMETRY</code> 数据类型支持以下几何对象：</p>
 <ul>
 <li><p><strong>点</strong>：<code translate="no">POINT (x y)</code> ；例如，<code translate="no">POINT (13.403683 52.520711)</code> ，其中<code translate="no">x</code> = 经度，<code translate="no">y</code> = 纬度</p></li>

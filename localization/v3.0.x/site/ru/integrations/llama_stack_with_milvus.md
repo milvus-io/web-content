@@ -65,7 +65,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">Подготовьте среду</h3><p>Поскольку нам нужно использовать Together AI в качестве LLM-сервиса, мы должны сначала войти на официальный сайт, чтобы подать заявку на получение <a href="https://api.together.xyz/settings/api-keys">API-ключа</a>, и установить API-ключ <code translate="no">TOGETHER_API_KEY</code> в качестве переменной окружения.</p>
+    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">Подготовьте окружение<button data-href="#Prepare-the-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Поскольку нам нужно использовать Together AI в качестве LLM-сервиса, мы должны сначала войти на официальный сайт, чтобы подать заявку на получение <a href="https://api.together.xyz/settings/api-keys">API-ключа</a>, и установить API-ключ <code translate="no">TOGETHER_API_KEY</code> в качестве переменной окружения.</p>
 <p>Клонирование исходного кода Llama Stack</p>
 <pre><code translate="no" class="language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/meta-llama/llama-stack.git
 $ <span class="hljs-built_in">cd</span> llama-stack
@@ -98,7 +113,22 @@ $ pip install -e .
 <li>Если вы хотите использовать <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, полностью управляемый облачный сервис для Milvus, измените <code translate="no">uri</code> и <code translate="no">token</code>, которые соответствуют <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">публичной конечной точке и ключу API</a> в Zilliz Cloud.</li>
 </ul></li>
 </ul>
-<h3 id="Build-distribution-from-the-template" class="common-anchor-header">Сборка дистрибутива из шаблона</h3><p>Выполните следующую команду для сборки дистрибутива:</p>
+<h3 id="Build-distribution-from-the-template" class="common-anchor-header">Сборка дистрибутива из шаблона<button data-href="#Build-distribution-from-the-template" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Выполните следующую команду для сборки дистрибутива:</p>
 <pre><code translate="no" class="language-bash">$ llama stack build --template together --image-type conda
 <button class="copy-code-btn"></button></code></pre>
 <p>Будет создан файл по адресу <code translate="no">~/.llama/distributions/together/together-run.yaml</code>. Затем выполните эту команду, чтобы запустить сервер:</p>

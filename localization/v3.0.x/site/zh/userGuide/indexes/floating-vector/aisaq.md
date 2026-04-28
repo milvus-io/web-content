@@ -3,7 +3,7 @@ id: aisaq.md
 title: AISAQCompatible with Milvus 2.6.4+
 summary: >-
   AISAQ 是一种基于磁盘的向量索引，它对 DISKANN 进行了扩展，可以处理十亿规模的数据集，而不会超出内存限制。与将压缩向量保存在内存中的
-  DISKANN 不同，AISAQ 将所有数据保存在磁盘上，并提供两种模式来平衡性能和存储成本。
+  DISKANN 不同，AISAQ 将所有数据保存在磁盘上，提供两种模式以平衡性能和存储成本。
 beta: Milvus 2.6.4+
 ---
 <h1 id="AISAQ" class="common-anchor-header">AISAQ<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#AISAQ" class="anchor-icon" translate="no">
@@ -217,7 +217,7 @@ beta: Milvus 2.6.4+
      <td><p><code translate="no">disk_pq_code_budget_gb_ratio</code></p></td>
      <td><p>与未压缩数据的大小相比，控制存储在索引中（用于重新排序）的高精度向量的 PQ 代码的大小。</p></td>
      <td><p><strong>类型</strong>：浮点数</p><p><strong>范围</strong>： [0, 0.25[0, 0.25]</p><p><strong>默认值</strong>：<code translate="no">0.25</code></p></td>
-     <td><p>默认值为 0.25 时，向量将被量化为原始大小的 25%（4 倍压缩），从而减少磁盘占用空间，但对精度的影响相对较小。</p><p>设置值为 0 时，将在磁盘索引中存储全精度向量，以便重新排序。数值越大，召回率越高，但会增加磁盘使用量。</p></td>
+     <td><p>默认值为 0.25 时，向量将被量化为原始大小的 25%（4 倍压缩），从而减少磁盘占用空间，而对精度的影响相对较小。</p><p>设置值为 0 时，将在磁盘索引中存储全精度向量，以便重新排序。数值越大，召回率越高，但会增加磁盘使用量。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">pq_cache_size</code></p></td>
@@ -259,7 +259,7 @@ beta: Milvus 2.6.4+
      <td><p><code translate="no">search_list</code></p></td>
      <td><p>在搜索操作中，该参数决定算法在遍历图时所维护的候选池的大小。数值越大，找到真正近邻的几率越大（召回率更高），但也会增加搜索延迟。</p></td>
      <td><p><strong>类型</strong>： 整数整数</p><p><strong>范围</strong>[topk，int32_max］</p><p><strong>默认值</strong>：<code translate="no">16</code></p></td>
-     <td><p>为在性能和准确性之间取得良好平衡，建议将此值设置为等于或略大于要检索的结果数（top_k）。</p></td>
+     <td><p>为了在性能和准确性之间取得良好平衡，建议将此值设置为等于或略大于要检索的结果数（top_k）。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">beamwidth</code></p></td>
@@ -275,7 +275,7 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p><code translate="no">pq_read_page_cache_size</code></p></td>
-     <td><p>每个搜索线程在 DRAM 中的 PQ 读缓存大小（字节）。它可以缓存包含 PQ 向量的频繁访问数据页（在性能模式下被忽略，仅在重排为 true 时适用）。</p><p>PQ 读缓存内存在所有 AISAQ 段中重复使用。</p></td>
+     <td><p>每个搜索线程在 DRAM 中的 PQ 读缓存大小（字节）。它可缓存包含 PQ 向量的频繁访问数据页（在性能模式下被忽略，仅在重排为 true 时适用）。</p><p>PQ 读缓存内存在所有 AISAQ 段中重复使用。</p></td>
      <td><p><strong>类型</strong>：整数</p><p><strong>范围</strong>： [0, 33554432[0, 33554432]</p><p><strong>默认值</strong>：<code translate="no">5242880 (5MiB)</code></p></td>
      <td><p>缓存越大，查询性能越好，但会增加 DRAM 占用。</p><p>推荐值范围为：小型数据段（1 M 向量）2 MiB，中型数据段（50 M 向量）5 MiB，大型数据段（250 M 向量）10 MiB。</p></td>
    </tr>

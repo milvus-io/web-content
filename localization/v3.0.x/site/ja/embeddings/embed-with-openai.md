@@ -1,7 +1,7 @@
 ---
 id: embed-with-openai.md
 order: 2
-summary: MilvusはOpenAIEmbeddingFunctionクラスを介してOpenAIのモデルと統合されます。
+summary: MilvusはOpenAIEmbeddingFunctionクラスを介してOpenAIのモデルと統合します。
 title: OpenAI
 ---
 <h1 id="OpenAI" class="common-anchor-header">OpenAI<button data-href="#OpenAI" class="anchor-icon" translate="no">

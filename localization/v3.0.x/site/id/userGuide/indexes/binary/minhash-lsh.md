@@ -2,11 +2,8 @@
 id: minhash-lsh.md
 title: MINHASH_LSH
 summary: >-
-  Deduplikasi yang efisien dan pencarian kemiripan sangat penting untuk dataset
-  pembelajaran mesin berskala besar, terutama untuk tugas-tugas seperti
-  membersihkan korpus pelatihan untuk Model Bahasa Besar (LLM). Ketika berurusan
-  dengan jutaan atau miliaran dokumen, pencocokan tepat tradisional menjadi
-  terlalu lambat dan mahal.
+  Gunakan indeks MinHash LSH untuk mempercepat deteksi nyaris duplikat dan
+  pencarian kemiripan Jaccard pada kumpulan data teks yang besar.
 ---
 <h1 id="MINHASHLSH" class="common-anchor-header">MINHASH_LSH<button data-href="#MINHASHLSH" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -89,10 +86,10 @@ summary: >-
 <li><p><strong>Hashing</strong>: Menerapkan beberapa fungsi hash independen ke setiap sirap</p></li>
 <li><p><strong>Seleksi Min</strong>: Untuk setiap fungsi hash, catat nilai hash <strong>minimum</strong> di semua sirap</p></li>
 </ol>
-<p>Anda dapat melihat seluruh proses yang diilustrasikan di bawah ini:</p>
+<p>Anda dapat melihat keseluruhan proses yang diilustrasikan di bawah ini:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
    </span> <span class="img-wrapper"> <span>Alur Kerja Minhash</span> </span></p>
 <div class="alert note">
 <p>Jumlah fungsi hash yang digunakan menentukan dimensi tanda tangan MinHash. Dimensi yang lebih tinggi memberikan akurasi perkiraan yang lebih baik, dengan biaya penyimpanan dan komputasi yang lebih besar.</p>
@@ -120,7 +117,7 @@ summary: >-
 <p>Tanda tangan MinHash <em>n-dimensi</em> dibagi menjadi <em>b</em> band. Setiap pita berisi <em>r</em> nilai hash yang berurutan, sehingga total panjang tanda tangan memenuhi: <em>n = b × r</em>.</p>
 <p>Sebagai contoh, jika Anda memiliki tanda tangan MinHash 128 dimensi<em>(n = 128)</em> dan membaginya menjadi 32 band<em>(b = 32)</em>, maka setiap band berisi 4 nilai hash<em>(r = 4)</em>.</p></li>
 <li><p><strong>Hash tingkat band:</strong></p>
-<p>Setelah segmentasi, setiap pita diproses secara independen menggunakan fungsi hash standar untuk menetapkannya ke dalam sebuah ember. Jika dua tanda tangan menghasilkan nilai hash yang sama dalam sebuah band-yaitu, mereka masuk ke dalam ember yang sama-mereka dianggap sebagai pasangan yang potensial.</p></li>
+<p>Setelah segmentasi, setiap pita diproses secara independen menggunakan fungsi hash standar untuk menetapkannya ke dalam sebuah bucket. Jika dua tanda tangan menghasilkan nilai hash yang sama dalam sebuah band-yaitu, mereka masuk ke dalam ember yang sama-mereka dianggap sebagai pasangan yang potensial.</p></li>
 <li><p><strong>Pemilihan kandidat:</strong></p>
 <p>Pasangan yang bertabrakan dalam setidaknya satu pita dipilih sebagai kandidat kemiripan.</p></li>
 </ol>
@@ -137,17 +134,17 @@ summary: >-
 <p>Pertimbangkan tiga dokumen dengan tanda tangan MinHash 128 dimensi:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
    </span> <span class="img-wrapper"> <span>Alur Kerja Lsh 1</span> </span></p>
 <p>Pertama, LSH membagi tanda tangan 128 dimensi menjadi 32 band yang masing-masing terdiri dari 4 nilai yang berurutan:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
    </span> <span class="img-wrapper"> <span>Alur Kerja Lsh 2</span> </span></p>
 <p>Kemudian, setiap band di-hash ke dalam ember yang berbeda menggunakan fungsi hash. Pasangan dokumen yang berbagi ember dipilih sebagai kandidat kemiripan. Pada contoh di bawah ini, Dokumen A dan Dokumen B dipilih sebagai kandidat kemiripan karena hasil hash mereka bertabrakan di <strong>Band 0</strong>:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
    </span> <span class="img-wrapper"> <span>Alur Kerja Lsh 3</span> </span></p>
 <div class="alert note">
 <p>Jumlah pita dikontrol oleh parameter <code translate="no">mh_lsh_band</code>. Untuk informasi lebih lanjut, lihat <a href="/docs/id/minhash-lsh.md#Index-building-params">Parameter pembuatan indeks</a>.</p>
@@ -193,13 +190,16 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>Proses deduplikasi yang didukung oleh MinHash LSH memungkinkan Milvus untuk secara efisien mengidentifikasi dan menyaring teks yang hampir duplikat atau catatan terstruktur sebelum memasukkannya ke dalam koleksi.</p>
-<p><img translate="no" src="/docs/v2.6.x/assets/deduplication-workflow.png" alt="Deduplication Workflow" width="600"></p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/it9wwbcfwhft0rbwosacgltzneb.png" alt="It9wwbcfwhft0rbwosacgltzneb" class="doc-image" id="it9wwbcfwhft0rbwosacgltzneb" />
+   </span> <span class="img-wrapper"> <span>It9wwbcfwhft0rbwosacgltzneb</span> </span></p>
 <ol>
-<li><p><strong>Potongan &amp; proses awal</strong>: Pisahkan data teks yang masuk atau data terstruktur (misalnya, catatan, bidang) menjadi potongan-potongan; menormalkan teks (huruf kecil, penghapusan tanda baca), dan menghapus kata henti sesuai kebutuhan.</p></li>
+<li><p><strong>Memotong &amp; memproses sebelumnya</strong>: Pisahkan data teks yang masuk atau data terstruktur (misalnya, catatan, bidang) menjadi beberapa bagian; menormalkan teks (huruf kecil, penghapusan tanda baca), dan menghapus kata henti sesuai kebutuhan.</p></li>
 <li><p><strong>Konstruksi fitur</strong>: Membangun set token yang digunakan untuk MinHash (misalnya, shingles dari teks; token bidang gabungan untuk data terstruktur).</p></li>
 <li><p><strong>Pembuatan tanda tangan MinHash</strong>: Menghitung tanda tangan MinHash untuk setiap potongan atau catatan.</p></li>
 <li><p><strong>Konversi vektor biner</strong>: Mengonversi tanda tangan menjadi vektor biner yang kompatibel dengan Milvus.</p></li>
-<li><p><strong>Cari sebelum memasukkan</strong>: Gunakan indeks MinHash LSH untuk mencari koleksi target untuk mencari duplikat yang hampir sama dari item yang masuk.</p></li>
+<li><p><strong>Pencarian sebelum memasukkan</strong>: Gunakan indeks MinHash LSH untuk mencari koleksi target untuk mencari duplikat yang hampir sama dari item yang masuk.</p></li>
 <li><p><strong>Sisipkan &amp; simpan</strong>: Sisipkan hanya item unik ke dalam koleksi. Item-item tersebut akan dapat dicari untuk pemeriksaan dedup di masa mendatang.</p></li>
 </ol>
 <h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -217,8 +217,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sebelum menggunakan MinHash LSH di Milvus, Anda harus membuat <strong>tanda tangan MinHash</strong> terlebih dahulu. Tanda tangan biner ringkas ini mendekati kemiripan Jaccard antar set dan diperlukan untuk pencarian berbasis <code translate="no">MHJACCARD</code> di Milvus.</p>
-<h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">Pilih metode untuk menghasilkan tanda tangan MinHash<button data-href="#Choose-a-method-to-generate-MinHash-signatures" class="anchor-icon" translate="no">
+    </button></h2><p>Sebelum menggunakan MinHash LSH di Milvus, Anda harus membuat <strong>tanda tangan MinHash</strong> terlebih dahulu. Tanda tangan biner ringkas ini mendekati kemiripan Jaccard antara set dan diperlukan untuk pencarian berbasis <code translate="no">MHJACCARD</code> di Milvus.</p>
+<div class="alert note">
+<p>Anda dapat menyiapkan tanda tangan MinHash untuk indeks <code translate="no">MINHASH_LSH</code> dengan dua cara:</p>
+<ul>
+<li><p>Membuat tanda tangan sendiri menggunakan alat bantu eksternal dan memasukkannya ke dalam bidang BINARY_VECTOR, atau</p></li>
+<li><p>Gunakan fungsi MinHash bawaan untuk secara otomatis menghasilkan vektor biner yang kompatibel dari teks. Untuk alur kerja ujung ke ujung dan opsi konfigurasi fungsi MinHash, lihat <a href="/docs/id/minhash-function.md">Fungsi MinHash</a>.</p></li>
+</ul>
+</div>
+<h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">Memilih metode untuk menghasilkan tanda tangan MinHash<button data-href="#Choose-a-method-to-generate-MinHash-signatures" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -235,8 +242,8 @@ summary: >-
       </svg>
     </button></h3><p>Tergantung pada beban kerja Anda, Anda dapat memilih:</p>
 <ul>
-<li><p>Menggunakan Python <a href="https://ekzhu.github.io/datasketch/"><code translate="no">datasketch</code></a> untuk kesederhanaan (direkomendasikan untuk pembuatan prototipe)</p></li>
-<li><p>Menggunakan alat terdistribusi (misalnya, Spark, Ray) untuk dataset berskala besar</p></li>
+<li><p>Menggunakan Python <a href="https://ekzhu.github.io/datasketch/"><code translate="no">datasketch</code></a> untuk kesederhanaan (disarankan untuk pembuatan prototipe)</p></li>
+<li><p>Menggunakan alat terdistribusi (misalnya, Spark, Ray) untuk set data berskala besar</p></li>
 <li><p>Menerapkan logika khusus (NumPy, C++, dll.) jika penyetelan kinerja sangat penting</p></li>
 </ul>
 <p>Dalam panduan ini, kami menggunakan <code translate="no">datasketch</code> untuk kesederhanaan dan kompatibilitas dengan format input Milvus.</p>
@@ -416,7 +423,7 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Buat indeks <code translate="no">MINHASH_LSH</code> dengan penyempurnaan Jaccard diaktifkan:</p>
+    </button></h3><p>Bangun indeks <code translate="no">MINHASH_LSH</code> dengan penyempurnaan Jaccard diaktifkan:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -526,7 +533,7 @@ query_sig = generate_minhash_signature(query_text)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="52-Approximate-search-LSH-only" class="common-anchor-header">5.2 Pencarian perkiraan (khusus LSH)</h4><p>Pencarian ini cepat dan terukur, tetapi mungkin melewatkan kecocokan yang dekat atau menyertakan positif palsu:</p>
+<h4 id="52-Approximate-search-LSH-only" class="common-anchor-header">5.2 Pencarian perkiraan (khusus LSH)</h4><p>Pencarian ini cepat dan terukur, tetapi mungkin melewatkan kecocokan yang dekat atau termasuk positif palsu:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="highlighted-comment-line">search_params={</span>
@@ -691,8 +698,8 @@ refined_results = client.search(
    <tr>
      <td><p><code translate="no">refine_k</code></p></td>
      <td><p>Jumlah kandidat yang harus diambil sebelum perbaikan Jaccard. Hanya efektif jika <code translate="no">mh_search_with_jaccard</code> adalah <code translate="no">true</code>.</p></td>
-     <td><p><em>[top_k</em>, *top_k * 10*]</p></td>
-     <td><p>Setel ke 2-5x <em>top_k</em> yang diinginkan untuk keseimbangan performa-penarikan yang baik. Nilai yang lebih tinggi meningkatkan penarikan tetapi meningkatkan biaya komputasi.</p></td>
+     <td><p><em>[top_k</em>, <em>top_k &amp;ast; 10</em>]</p></td>
+     <td><p>Setel ke 2-5x <em>top_k</em> yang diinginkan untuk mendapatkan keseimbangan performa-penarikan yang baik. Nilai yang lebih tinggi meningkatkan penarikan tetapi meningkatkan biaya komputasi.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mh_lsh_batch_search</code></p></td>

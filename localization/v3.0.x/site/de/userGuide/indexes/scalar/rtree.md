@@ -25,7 +25,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>Der Index <code translate="no">RTREE</code> ist eine baumbasierte Datenstruktur, die die Abfrage von <code translate="no">GEOMETRY</code> Feldern in Milvus beschleunigt. Wenn Ihre Sammlung geometrische Objekte wie Punkte, Linien oder Polygone im <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-known text (WKT)-F</a> ormat speichert und Sie die räumliche Filterung beschleunigen möchten, ist <code translate="no">RTREE</code> eine ideale Wahl.</p>
-<h2 id="How-it-works" class="common-anchor-header">Wie das funktioniert<button data-href="#How-it-works" class="anchor-icon" translate="no">
+<h2 id="How-it-works" class="common-anchor-header">Wie es funktioniert<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -58,12 +58,12 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><ol>
 <li><p><strong>Erstellen Sie Blattknoten:</strong> Berechnen Sie für jedes Geometrieobjekt sein <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">Minimum Bounding Rectangle</a> (MBR), d. h. das kleinste Rechteck, das das Objekt vollständig enthält, und speichern Sie es als Blattknoten.</p></li>
-<li><p><strong>Gruppieren in größere Boxen:</strong> Fassen Sie nahe gelegene Blattknoten zusammen und umhüllen Sie jede Gruppe mit einem neuen MBR, indem Sie interne Knoten bilden. Beispiel: Gruppe <strong>B</strong> enthält <strong>D</strong> und <strong>E</strong>; Gruppe <strong>C</strong> enthält <strong>F</strong> und <strong>G</strong>.</p></li>
+<li><p><strong>Gruppieren in größere Boxen:</strong> Fassen Sie nahe gelegene Blattknoten zusammen und umhüllen Sie jede Gruppe mit einem neuen MBR, so dass interne Knoten entstehen. Beispiel: Gruppe <strong>B</strong> enthält <strong>D</strong> und <strong>E</strong>; Gruppe <strong>C</strong> enthält <strong>F</strong> und <strong>G</strong>.</p></li>
 <li><p><strong>Fügen Sie den Wurzelknoten hinzu:</strong> Fügen Sie einen Wurzelknoten hinzu, dessen MBR alle internen Gruppen umfasst, so dass eine in der Höhe ausgeglichene Baumstruktur entsteht.</p></li>
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-retree-works.png" alt="How Retree Works" class="doc-image" id="how-retree-works" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-retree-works.png" alt="How Retree Works" class="doc-image" id="how-retree-works" />
    </span> <span class="img-wrapper"> <span>So funktioniert Retree</span> </span></p>
 <h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">Phase 2: Abfragen beschleunigen<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,7 +82,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><ol>
 <li><p><strong>Bilden Sie den Abfrage-MBR:</strong> Berechnen Sie den MBR für Ihre Abfragegeometrie.</p></li>
-<li><p><strong>Beschneiden Sie Zweige:</strong> Vergleichen Sie, beginnend bei der Wurzel, den Abfrage-MBR mit jedem internen Knoten. Überspringen Sie alle Zweige, deren MBR sich nicht mit dem Abfrage-MBR überschneidet.</p></li>
+<li><p><strong>Beschneiden Sie Zweige:</strong> Vergleichen Sie, beginnend bei der Wurzel, den Abfrage-MBR mit jedem internen Knoten. Überspringen Sie alle Zweige, deren MBR sich nicht mit dem MBR der Abfrage schneiden.</p></li>
 <li><p><strong>Kandidaten sammeln:</strong> Steigen Sie in die sich schneidenden Zweige hinab, um mögliche Blattknoten zu sammeln.</p></li>
 <li><p><strong>Exakte Übereinstimmung:</strong> Führen Sie für jeden Kandidaten ein exaktes räumliches Prädikat durch, um echte Übereinstimmungen zu ermitteln.</p></li>
 </ol>

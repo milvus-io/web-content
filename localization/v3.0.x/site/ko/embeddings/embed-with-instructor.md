@@ -25,7 +25,7 @@ title: Instructor
 <pre><code translate="no" class="language-python">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>그런 다음 강사 임베딩 함수를 인스턴스화합니다:</p>
+<p>그런 다음, 강사 임베딩 함수를 인스턴스화합니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> InstructorEmbeddingFunction
 
 ef = InstructorEmbeddingFunction(

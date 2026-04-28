@@ -1,6 +1,6 @@
 ---
 id: multi-storage-backup-and-restore.md
-summary: 이 주제에서는 한 Milvus 인스턴스에서 컬렉션을 백업하고 다른 인스턴스로 복원하는 프로세스에 대해 자세히 설명합니다.
+summary: 이 항목에서는 한 Milvus 인스턴스에서 컬렉션을 백업하고 다른 인스턴스로 복원하는 프로세스에 대해 자세히 설명합니다.
 title: S3 환경 전반의 인스턴스 간 마이그레이션
 ---
 <h1 id="Migrate-Between-Instances-Across-S3-Environments" class="common-anchor-header">S3 환경 전반의 인스턴스 간 마이그레이션<button data-href="#Migrate-Between-Instances-Across-S3-Environments" class="anchor-icon" translate="no">
@@ -18,7 +18,7 @@ title: S3 환경 전반의 인스턴스 간 마이그레이션
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 주제에서는 각 인스턴스가 서로 다른 오브젝트 스토리지를 사용하여 한 Milvus 인스턴스에서 컬렉션을 백업하고 다른 인스턴스로 복원하는 프로세스에 대해 자세히 설명합니다.</p>
+    </button></h1><p>이 주제에서는 각 인스턴스가 서로 다른 오브젝트 스토리지를 사용하여 한 Milvus 인스턴스에서 컬렉션을 백업하고 다른 인스턴스로 복원하는 프로세스를 자세히 설명합니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +37,7 @@ title: S3 환경 전반의 인스턴스 간 마이그레이션
     </button></h2><p>아래 다이어그램은 서로 다른 오브젝트 스토리지를 사용하는 백업 및 복원 프로세스를 보여줍니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/multi-storage-backup-and-restore.png" alt="multi-storage-backup-and-restore.png" class="doc-image" id="multi-storage-backup-and-restore.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multi-storage-backup-and-restore.png" alt="multi-storage-backup-and-restore.png" class="doc-image" id="multi-storage-backup-and-restore.png" />
    </span> <span class="img-wrapper"> <span>다중 스토리지 백업 및 복원.png</span> </span></p>
 <p>서로 다른 오브젝트 스토리지를 사용하는 <code translate="no">milvus_A</code> 및 <code translate="no">milvus_B</code> 이라는 두 개의 Milvus 인스턴스가 있다고 가정합니다. 이 예제에서는 다음 작업을 완료하는 것이 목표입니다:</p>
 <ol>
@@ -79,7 +79,22 @@ title: S3 환경 전반의 인스턴스 간 마이그레이션
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">1단계: 구성 준비</h3><p>milvus-backup 프로젝트의 디렉토리로 이동하여 configs라는 이름의 디렉토리를 만듭니다:</p>
+    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">1단계: 구성 준비<button data-href="#Step-1-Prepare-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>milvus-backup 프로젝트의 디렉토리로 이동하여 configs라는 이름의 디렉토리를 만듭니다:</p>
 <pre><code translate="no" class="language-shell">mkdir configs
 cd configs
 <button class="copy-code-btn"></button></code></pre>
@@ -92,7 +107,22 @@ cd configs
 ├── milvus-backup
 └── README.md
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">2단계: 구성 파일 편집</h3><p><code translate="no">backup.yaml</code> 파일을 수정하여 milvus_A에 적합한 구성을 설정합니다:</p>
+<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">2단계: 구성 파일 편집<button data-href="#Step-2-Edit-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">backup.yaml</code> 파일을 수정하여 milvus_A에 적합한 구성을 설정합니다:</p>
 <ul>
 <li><p>연결 구성</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
@@ -139,7 +169,22 @@ cd configs
 <li><p><code translate="no">minio.backupBucketName</code>: 백업 스토리지에 사용되는 버킷의 이름입니다. 이 예에서는 <code translate="no">bucket_A</code> 로 설정합니다.</p></li>
 <li><p><code translate="no">minio.backupRootPath</code>: 백업 파일을 저장하기 위해 지정된 버킷 내 루트 경로 <code translate="no">milvus_B</code>. 이 예에서는 <code translate="no">backup</code> 으로 설정합니다.</p></li>
 </ul>
-<h3 id="Step-3-Create-backup" class="common-anchor-header">3단계: 백업 만들기</h3><p>backup.yaml이 저장되면 <code translate="no">my_backup</code> 이라는 이름의 백업을 만듭니다:</p>
+<h3 id="Step-3-Create-backup" class="common-anchor-header">3단계: 백업 만들기<button data-href="#Step-3-Create-backup" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>backup.yaml이 저장되면 <code translate="no">my_backup</code> 이라는 이름의 백업을 만듭니다:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup create -c coll -n my_backup
 <button class="copy-code-btn"></button></code></pre>
 <p>이 명령은 <code translate="no">milvus_A</code> 의 오브젝트 스토리지에 <code translate="no">bucket_A/backup/my_backup</code> 백업을 생성합니다.</p>
@@ -202,7 +247,22 @@ mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Configure-restoration-settings" class="common-anchor-header">1단계: 복원 설정 구성</h3><p>2단계를 반복하여 <code translate="no">milvus_B</code> 로 복원하기 위한 구성을 수정하고 <code translate="no">minio.bucketName</code> 이 <code translate="no">bucket_B</code> 로 설정되었는지 확인합니다.</p>
+    </button></h2><h3 id="Step-1-Configure-restoration-settings" class="common-anchor-header">1단계: 복원 설정 구성<button data-href="#Step-1-Configure-restoration-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>2단계를 반복하여 <code translate="no">milvus_B</code> 로 복원하기 위한 구성을 수정하고 <code translate="no">minio.bucketName</code> 이 <code translate="no">bucket_B</code> 로 설정되었는지 확인합니다.</p>
 <p>다음은 샘플 구성입니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
 <span class="hljs-attr">milvus:</span>
@@ -238,7 +298,22 @@ mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
   <span class="hljs-attr">backupBucketName:</span> <span class="hljs-string">&quot;bucket_B&quot;</span> <span class="hljs-comment"># Bucket name to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
   <span class="hljs-attr">backupRootPath:</span> <span class="hljs-string">&quot;backup&quot;</span> <span class="hljs-comment"># Rootpath to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Restore-from-the-backup" class="common-anchor-header">2단계: 백업에서 복원</h3><p>백업을 <code translate="no">milvus_B</code> 으로 복원합니다:</p>
+<h3 id="Step-2-Restore-from-the-backup" class="common-anchor-header">2단계: 백업에서 복원<button data-href="#Step-2-Restore-from-the-backup" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>백업을 <code translate="no">milvus_B</code> 으로 복원합니다:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak
 <button class="copy-code-btn"></button></code></pre>
 <p>이 명령은 백업을<code translate="no">milvus_B</code> 의 coll_bak이라는 새 컬렉션으로 복원하고 <code translate="no">milvus_B</code> 의 오브젝트 스토리지 내 <code translate="no">bucket_B/files/insert_log/[ID of new collection]</code> 에 데이터를 저장합니다.</p>

@@ -133,7 +133,7 @@ summary: >-
   </a>
 </div>
 </div>
-<h3 id="Use-in-different-environments" class="common-anchor-header">Digunakan di lingkungan yang berbeda<button data-href="#Use-in-different-environments" class="anchor-icon" translate="no">
+<h3 id="Use-in-different-environments" class="common-anchor-header">Penggunaan di lingkungan yang berbeda<button data-href="#Use-in-different-environments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

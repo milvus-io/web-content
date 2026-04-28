@@ -63,7 +63,7 @@ title: Construire RAG avec Milvus et SiliconFlow
 <div class="alert note">
 <p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong> (cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" dans le menu déroulant).</p>
 </div>
-<p>SiliconFlow active l'API de type OpenAI. Vous pouvez vous connecter à son site officiel et préparer la <a href="https://docs.siliconflow.cn/quickstart">clé api</a> <code translate="no">SILICON_FLOW_API_KEY</code> en tant que variable d'environnement.</p>
+<p>SiliconFlow active l'API de type OpenAI. Vous pouvez vous connecter à son site officiel et préparer la <a href="https://docs.siliconflow.cn/quickstart">clé api</a> <code translate="no">SILICON_FLOW_API_KEY</code> comme variable d'environnement.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;SILICON_FLOW_API_KEY&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>

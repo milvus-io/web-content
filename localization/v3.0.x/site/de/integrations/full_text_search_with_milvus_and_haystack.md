@@ -33,7 +33,7 @@ title: Volltextsuche mit Milvus und Haystack
 <p>Um den Milvus-Vektorspeicher zu verwenden, geben Sie Ihren Milvus-Server <code translate="no">URI</code> (und optional mit <code translate="no">TOKEN</code>) an. Um einen Milvus-Server zu starten, können Sie einen Milvus-Server einrichten, indem Sie die <a href="https://milvus.io/docs/install-overview.md">Milvus-Installationsanleitung</a> befolgen oder einfach <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">Zilliz Cloud</a>(voll verwaltetes Milvus) kostenlos <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">ausprobieren</a>.</p>
 <div class="alert note">
 <ul>
-<li>Die Volltextsuche ist derzeit in Milvus Standalone, Milvus Distributed und Zilliz Cloud verfügbar, obwohl sie in Milvus Lite noch nicht unterstützt wird (diese Funktion ist für eine zukünftige Implementierung geplant). Wenden Sie sich an support@zilliz.com für weitere Informationen.</li>
+<li>Die Volltextsuche ist derzeit in Milvus Standalone, Milvus Distributed und Zilliz Cloud verfügbar, obwohl sie in Milvus Lite noch nicht unterstützt wird (diese Funktion ist für eine zukünftige Implementierung geplant). Wenden Sie sich für weitere Informationen an support@zilliz.com.</li>
 <li>Bevor Sie mit diesem Tutorial fortfahren, stellen Sie sicher, dass Sie ein grundlegendes Verständnis der <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Volltextsuche</a> und der <a href="https://github.com/milvus-io/milvus-haystack/blob/main/README.md">grundlegenden Nutzung</a> der Haystack Milvus Integration haben.</li>
 </ul>
 </div>
@@ -63,7 +63,22 @@ title: Volltextsuche mit Milvus und Haystack
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-data" class="common-anchor-header">Bereiten Sie die Daten vor</h3><p>Importieren Sie die notwendigen Pakete in dieses Notebook. Bereiten Sie dann einige Beispieldokumente vor.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">Bereiten Sie die Daten vor<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Importieren Sie die notwendigen Pakete in dieses Notebook. Bereiten Sie dann einige Beispieldokumente vor.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> haystack <span class="hljs-keyword">import</span> Pipeline
 <span class="hljs-keyword">from</span> haystack.components.embedders <span class="hljs-keyword">import</span> OpenAIDocumentEmbedder, OpenAITextEmbedder
 <span class="hljs-keyword">from</span> haystack.components.writers <span class="hljs-keyword">import</span> DocumentWriter
@@ -85,7 +100,7 @@ documents = [
     Document(content=<span class="hljs-string">&quot;Charlie likes white dogs&quot;</span>, meta={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;pets&quot;</span>}),
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>Die Integration der Volltextsuche in ein RAG-System schafft ein Gleichgewicht zwischen semantischer Suche und präzisem und vorhersagbarem schlagwortbasiertem Retrieval. Sie können sich auch dafür entscheiden, nur die Volltextsuche zu verwenden, obwohl es empfehlenswert ist, die Volltextsuche mit der semantischen Suche zu kombinieren, um bessere Suchergebnisse zu erzielen. Zu Demonstrationszwecken zeigen wir hier die Volltextsuche allein und die hybride Suche.</p>
+<p>Die Integration der Volltextsuche in ein RAG-System schafft ein Gleichgewicht zwischen semantischer Suche und präzisem und vorhersagbarem stichwortbasiertem Retrieval. Sie können sich auch dafür entscheiden, nur die Volltextsuche zu verwenden, obwohl es empfehlenswert ist, die Volltextsuche mit der semantischen Suche zu kombinieren, um bessere Suchergebnisse zu erzielen. Zu Demonstrationszwecken zeigen wir hier die Volltextsuche allein und die hybride Suche.</p>
 <h2 id="BM25-search-without-embedding" class="common-anchor-header">BM25-Suche ohne Einbettung<button data-href="#BM25-search-without-embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -101,7 +116,22 @@ documents = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">Erstellen der Indizierungspipeline</h3><p>Für die Volltextsuche akzeptiert Milvus MilvusDocumentStore einen <code translate="no">builtin_function</code> Parameter. Über diesen Parameter können Sie eine Instanz von <code translate="no">BM25BuiltInFunction</code> übergeben, die den BM25-Algorithmus auf der Milvus-Server-Seite implementiert. Setzen Sie die als BM25-Funktionsinstanz angegebene <code translate="no">builtin_function</code>. Ein Beispiel:</p>
+    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">Erstellen der Indizierungspipeline<button data-href="#Create-the-indexing-Pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Für die Volltextsuche akzeptiert Milvus MilvusDocumentStore einen <code translate="no">builtin_function</code> Parameter. Über diesen Parameter können Sie eine Instanz von <code translate="no">BM25BuiltInFunction</code> übergeben, die den BM25-Algorithmus auf der Milvus-Server-Seite implementiert. Setzen Sie die als BM25-Funktionsinstanz angegebene <code translate="no">builtin_function</code>. Ein Beispiel:</p>
 <pre><code translate="no" class="language-python">connection_args = {<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>}
 <span class="hljs-comment"># connection_args = {&quot;uri&quot;: YOUR_ZILLIZ_CLOUD_URI, &quot;token&quot;: Secret.from_env_var(&quot;ZILLIZ_CLOUD_API_KEY&quot;)}</span>
 
@@ -133,7 +163,22 @@ indexing_pipeline.run({<span class="hljs-string">&quot;writer&quot;</span>: {<sp
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'writer': {'documents_written': 3}}
 </code></pre>
-<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">Erstellen Sie die Abruf-Pipeline</h3><p>Erstellen Sie eine Retrieval-Pipeline, die Dokumente aus dem Milvus-Dokumentenspeicher abruft, indem Sie <code translate="no">MilvusSparseEmbeddingRetriever</code> verwenden, das ein Wrapper um <code translate="no">document_store</code> ist.</p>
+<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">Erstellen Sie die Abruf-Pipeline<button data-href="#Create-the-retrieval-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Erstellen Sie eine Retrieval-Pipeline, die Dokumente aus dem Milvus-Dokumentenspeicher abruft, indem Sie <code translate="no">MilvusSparseEmbeddingRetriever</code> verwenden, das ein Wrapper um <code translate="no">document_store</code> ist.</p>
 <pre><code translate="no" class="language-python">retrieval_pipeline = Pipeline()
 retrieval_pipeline.add_component(
     <span class="hljs-string">&quot;retriever&quot;</span>, MilvusSparseEmbeddingRetriever(document_store=document_store)
@@ -162,7 +207,22 @@ retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">Erstellen der Indizierungspipeline</h3><p>Bei der hybriden Suche verwenden wir die Funktion BM25, um eine Volltextsuche durchzuführen, und geben das dichte Vektorfeld <code translate="no">vector</code> an, um eine semantische Suche durchzuführen.</p>
+    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">Erstellen der Indizierungspipeline<button data-href="#Create-the-indexing-Pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Bei der hybriden Suche verwenden wir die Funktion BM25, um eine Volltextsuche durchzuführen, und geben das dichte Vektorfeld <code translate="no">vector</code> an, um eine semantische Suche durchzuführen.</p>
 <pre><code translate="no" class="language-python">document_store = MilvusDocumentStore(
     connection_args=connection_args,
     vector_field=<span class="hljs-string">&quot;vector&quot;</span>,  <span class="hljs-comment"># The dense vector field.</span>
@@ -194,7 +254,22 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
 
 Number of documents: 3
 </code></pre>
-<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">Erstellen Sie die Abruf-Pipeline</h3><p>Erstellen Sie eine Retrieval-Pipeline, die Dokumente aus dem Milvus-Dokumentenspeicher abruft, indem sie <code translate="no">MilvusHybridRetriever</code> verwendet, die <code translate="no">document_store</code> enthält und Parameter für die hybride Suche empfängt.</p>
+<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">Erstellen Sie die Abruf-Pipeline<button data-href="#Create-the-retrieval-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Erstellen Sie eine Retrieval-Pipeline, die Dokumente aus dem Milvus-Dokumentenspeicher abruft, indem sie <code translate="no">MilvusHybridRetriever</code> verwendet, die <code translate="no">document_store</code> enthält und Parameter für die hybride Suche empfängt.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from pymilvus import WeightedRanker</span>
 retrieval_pipeline = Pipeline()
 retrieval_pipeline.add_component(<span class="hljs-string">&quot;dense_text_embedder&quot;</span>, OpenAITextEmbedder())

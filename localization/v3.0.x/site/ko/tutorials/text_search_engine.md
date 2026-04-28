@@ -29,11 +29,11 @@ title: 텍스트 검색 엔진
 <li><a href="https://towhee.io/">Towhee</a></li>
 </ul>
 <p><br/></p>
-<p>자연어 처리(NLP) 분야에서 Milvus의 주요 응용 분야 중 하나는 텍스트 검색 엔진입니다. 사용자가 원하는 정보를 찾는 데 도움을 줄 수 있는 훌륭한 도구입니다. 심지어 찾기 어려운 정보도 찾아낼 수 있습니다. 텍스트 검색 엔진은 사용자가 입력한 키워드나 의미를 텍스트 데이터베이스와 비교한 다음 특정 기준을 충족하는 결과를 반환합니다.</p>
+<p>자연어 처리(NLP) 분야에서 Milvus의 주요 응용 분야 중 하나는 텍스트 검색 엔진입니다. 사용자가 원하는 정보를 찾는 데 도움이 되는 훌륭한 도구입니다. 심지어 찾기 어려운 정보도 찾아낼 수 있습니다. 텍스트 검색 엔진은 사용자가 입력한 키워드나 의미를 텍스트 데이터베이스와 비교한 다음 특정 기준을 충족하는 결과를 반환합니다.</p>
 <p><br/></p>
 <p>이 튜토리얼에서는 텍스트 검색 엔진을 구축하는 방법을 배웁니다. 이 튜토리얼에서는 BERT를 사용하여 텍스트를 고정 길이 벡터로 변환합니다. Milvus는 저장 및 벡터 유사도 검색을 위한 벡터 데이터베이스로 사용됩니다. 그런 다음 MySQL을 사용하여 Milvus에서 생성된 벡터 ID를 텍스트 데이터에 매핑합니다.</p>
 <p><br/></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/text_search_engine.png" alt="text_search_engine" class="doc-image" id="text_search_engine" />
-   </span> <span class="img-wrapper"> <span>text_search_engine</span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/text_search_engine_demo.png" alt="text_search_engine" class="doc-image" id="text_search_engine" /><span>text_search_engine</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_search_engine.png" alt="text_search_engine" class="doc-image" id="text_search_engine" />
+   </span> <span class="img-wrapper"> <span>text_search_engine</span> </span> <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_search_engine_demo.png" alt="text_search_engine" class="doc-image" id="text_search_engine" /><span>text_search_engine</span> </span></p>

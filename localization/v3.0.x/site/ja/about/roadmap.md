@@ -183,7 +183,7 @@ summary: Milvusは、AIアプリケーションを強化するために構築さ
       </svg>
     </button></h3><h4 id="🔹-UDF--Distributed-Computing-Ecosystem" class="common-anchor-header">🔹<strong>UDFと分散コンピューティングのエコシステム</strong></h4><ul>
 <li><p><strong>ユーザー定義関数(UDF)の</strong>サポートにより、開発者は検索や計算のワークフローにカスタムロジックを組み込むことができる。</p></li>
-<li><p><strong>Ray Dataset / Daftとの</strong>深い統合により、UDFの分散実行とマルチモーダルなデータ処理が可能。</p></li>
+<li><p><strong>Ray Dataset / Daftとの</strong>深い統合により、UDFの分散実行とマルチモーダルなデータ処理を実現。</p></li>
 </ul>
 <h4 id="🔹-Scalar-Query--Local-Format-Evolution" class="common-anchor-header"><strong>スカラークエリーとローカルフォーマットの進化</strong></h4><ul>
 <li><p>スカラーフィールドのフィルタリングと集計のパフォーマンスを最適化。</p></li>
@@ -205,7 +205,7 @@ summary: Milvusは、AIアプリケーションを強化するために構築さ
 <li><p><strong>グローバルインデックスの構築を</strong>改善し、<strong>分散検索のパフォーマンスを</strong>確保します。</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-V10" class="common-anchor-header"><strong>ベクターレイク V1.0</strong></h4><ul>
-<li><p><strong>Ray / Daft / PyTorchとの</strong>深い統合により、分散UDFとコンテキストエンジニアリングのユースケースをサポート。</p></li>
+<li><p><strong>Ray / Daft / PyTorchと</strong>深く統合し、分散UDFとコンテキストエンジニアリングのユースケースをサポート。</p></li>
 <li><p><strong>RAG (Retrieval-Augmented Generation)の</strong> <strong>デモとIcebergテーブルからのインポートを</strong>提供。</p></li>
 </ul>
 <h2 id="🤝-Co-Building-the-Future-of-Milvus" class="common-anchor-header">🤝 Milvusの未来の共同構築<button data-href="#🤝-Co-Building-the-Future-of-Milvus" class="anchor-icon" translate="no">

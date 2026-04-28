@@ -100,7 +100,22 @@ title: 整合 Milvus 與 MindsDB
         ></path>
       </svg>
     </button></h2><p>繼續之前，請確認<code translate="no">pymilvus</code> 版本與此<a href="https://github.com/mindsdb/mindsdb/blob/main/mindsdb/integrations/handlers/milvus_handler/requirements.txt">pinned 版本</a>相同。如果您發現任何版本相容性問題，您可以回滾您的 pymilvus 版本，或在此<a href="https://github.com/mindsdb/mindsdb/tree/main/mindsdb/integrations/handlers/milvus_handler">需求檔案</a>中自訂。</p>
-<h3 id="Creating-connection" class="common-anchor-header">建立連線</h3><p>為了使用此處理器並連接到MindsDB中的Milvus伺服器，可以使用以下語法：</p>
+<h3 id="Creating-connection" class="common-anchor-header">建立連線<button data-href="#Creating-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>為了使用此處理器並連接到MindsDB中的Milvus伺服器，可以使用以下語法：</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">CREATE</span> DATABASE milvus_datasource
 <span class="hljs-keyword">WITH</span>
   ENGINE <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;milvus&#x27;</span>,
@@ -118,15 +133,75 @@ title: 整合 Milvus 與 MindsDB
 <li>您也可以在<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上使用完全管理的 Milvus。只需將<code translate="no">uri</code> 和<code translate="no">token</code> 設定為 Zilliz Cloud 實例的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">公共端點和 API 金鑰</a>。</li>
 </ul>
 </blockquote>
-<h3 id="Dropping-connection" class="common-anchor-header">放棄連線</h3><p>若要放棄連線，請使用此指令</p>
+<h3 id="Dropping-connection" class="common-anchor-header">放棄連線<button data-href="#Dropping-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>若要放棄連線，請使用此指令</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">DROP</span> DATABASE milvus_datasource;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Creating-tables" class="common-anchor-header">建立表格</h3><p>若要從預先存在的資料表插入資料，請使用<code translate="no">CREATE</code></p>
+<h3 id="Creating-tables" class="common-anchor-header">建立資料表<button data-href="#Creating-tables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>若要從預先存在的資料表插入資料，請使用<code translate="no">CREATE</code></p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> milvus_datasource.test
 (<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> sqlitedb.test);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Dropping-collections" class="common-anchor-header">丟棄集合</h3><p>不支援刪除集合</p>
-<h3 id="Querying-and-selecting" class="common-anchor-header">查詢和選擇</h3><p>要使用搜尋向量查詢資料庫，可以在<code translate="no">WHERE</code> 子句中使用<code translate="no">search_vector</code> </p>
+<h3 id="Dropping-collections" class="common-anchor-header">丟棄集合<button data-href="#Dropping-collections" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>不支援刪除集合</p>
+<h3 id="Querying-and-selecting" class="common-anchor-header">查詢和選擇<button data-href="#Querying-and-selecting" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要使用搜尋向量查詢資料庫，可以在<code translate="no">WHERE</code> 子句中使用<code translate="no">search_vector</code> 。</p>
 <p>注意事項：</p>
 <ul>
 <li>如果省略<code translate="no">LIMIT</code> ，會使用<code translate="no">search_default_limit</code> ，因為 Milvus 需要它</li>
@@ -144,7 +219,22 @@ LIMIT <span class="hljs-number">10</span>;
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> milvus_datasource.createtest
 <span class="hljs-keyword">WHERE</span> category <span class="hljs-operator">=</span> &quot;science&quot;;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Deleting-records" class="common-anchor-header">刪除記錄</h3><p>您可以使用<code translate="no">DELETE</code> 刪除詞條，就像在 SQL 中一樣。</p>
+<h3 id="Deleting-records" class="common-anchor-header">刪除記錄<button data-href="#Deleting-records" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您可以使用<code translate="no">DELETE</code> 刪除詞條，就像在 SQL 中一樣。</p>
 <p>注意事項：</p>
 <ul>
 <li>Milvus 只支援刪除具有明確指定主鍵的實體。</li>
@@ -153,10 +243,40 @@ LIMIT <span class="hljs-number">10</span>;
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> milvus_datasource.test
 <span class="hljs-keyword">WHERE</span> id <span class="hljs-keyword">IN</span> (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Inserting-records" class="common-anchor-header">插入記錄</h3><p>您也可以像這樣插入單獨的記錄：</p>
+<h3 id="Inserting-records" class="common-anchor-header">插入記錄<button data-href="#Inserting-records" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您也可以像這樣插入單獨的記錄：</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> milvus_test.testable (id,content,metadata,embeddings)
 <span class="hljs-keyword">VALUES</span> (&quot;id3&quot;, <span class="hljs-string">&#x27;this is a test&#x27;</span>, <span class="hljs-string">&#x27;{&quot;test&quot;: &quot;test&quot;}&#x27;</span>, <span class="hljs-string">&#x27;[1.0, 8.0, 9.0]&#x27;</span>);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Updating" class="common-anchor-header">更新</h3><p>Milvus API 不支援更新記錄。您可以嘗試使用<code translate="no">DELETE</code> 和<code translate="no">INSERT</code></p>
+<h3 id="Updating" class="common-anchor-header">更新<button data-href="#Updating" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus API 不支援更新記錄。您可以嘗試使用<code translate="no">DELETE</code> 和<code translate="no">INSERT</code></p>
 <hr>
 <p>更多的細節和例子，請參考<a href="https://docs.mindsdb.com/what-is-mindsdb">MindsDB官方文檔</a>。</p>

@@ -64,7 +64,7 @@ summary: >-
 <li><p><strong>Pesquisar</strong>: <code translate="no">RETRIEVAL_QUERY</code></p></li>
 </ul>
 <p>Pode substituir esta definição especificando explicitamente um parâmetro <code translate="no">task</code> (por exemplo, <code translate="no">SEMANTIC_SIMILARITY</code>, <code translate="no">CLASSIFICATION</code>, <code translate="no">CLUSTERING</code>).</p>
-<h2 id="Configure-credentials" class="common-anchor-header">Configurar as credenciais<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
+<h2 id="Configure-credentials" class="common-anchor-header">Configurar credenciais<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -152,7 +152,7 @@ summary: >-
      <td><p>Torna a chave Gemini disponível dentro de cada contêiner Milvus (ignorada quando uma chave para Gemini existe em milvus.yaml)</p></td>
    </tr>
 </table>
-<p>No seu arquivo <strong>docker-compose.yaml</strong>, defina a variável de ambiente <code translate="no">MILVUS_GEMINI_API_KEY</code>.</p>
+<p>No seu ficheiro <strong>docker-compose.yaml</strong>, defina a variável de ambiente <code translate="no">MILVUS_GEMINI_API_KEY</code>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml (standalone service section)</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-comment"># ... other configurations ...</span>
@@ -161,7 +161,7 @@ summary: >-
     <span class="hljs-comment"># Set the environment variable pointing to the Gemini API key inside the container</span>
     <span class="hljs-attr">MILVUS_GEMINI_API_KEY:</span> <span class="hljs-string">&lt;YOUR_GEMINI_API_KEY&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>O bloco <code translate="no">environment:</code> injeta a chave apenas no contêiner Milvus, deixando o sistema operacional do host intocado. Para obter detalhes, consulte <a href="http://configure-docker.md#Configure-Milvus-with-Docker-Compose">Configurar o Milvus com o Docker Compose</a>.</p>
+<p>O bloco <code translate="no">environment:</code> injeta a chave apenas no contêiner do Milvus, deixando o sistema operacional do host intocado. Para obter detalhes, consulte <a href="http://configure-docker.md#Configure-Milvus-with-Docker-Compose">Configurar o Milvus com o Docker Compose</a>.</p>
 <h2 id="Step-1-Create-a-collection-with-a-text-embedding-function" class="common-anchor-header">Etapa 1: criar uma coleção com uma função de incorporação de texto<button data-href="#Step-1-Create-a-collection-with-a-text-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -195,7 +195,7 @@ summary: >-
     </button></h3><p>Para usar uma função de incorporação, crie uma coleção com um esquema específico. Este esquema deve incluir pelo menos três campos necessários:</p>
 <ul>
 <li><p>O campo primário que identifica de forma única cada entidade numa coleção.</p></li>
-<li><p>Um campo <code translate="no">VARCHAR</code> que armazena os dados brutos a serem incorporados.</p></li>
+<li><p>Um campo <code translate="no">VARCHAR</code> que armazena dados brutos a serem incorporados.</p></li>
 <li><p>Um campo vetorial reservado para armazenar as incorporações vectoriais densas que a função de incorporação de texto irá gerar para o campo <code translate="no">VARCHAR</code>.</p></li>
 </ul>
 <p>O exemplo seguinte define um esquema com um campo escalar <code translate="no">&quot;document&quot;</code> para armazenar dados textuais e um campo vetorial <code translate="no">&quot;dense&quot;</code> para armazenar embeddings a serem gerados pelo módulo Function. Não se esqueça de definir a dimensão do vetor (<code translate="no">dim</code>) para corresponder ao resultado do modelo de incorporação escolhido.</p>
@@ -260,7 +260,7 @@ schema.add_function(text_embedding_function)
 <p><strong>Tipos de tarefa suportados para o parâmetro de tarefa:</strong></p>
 <ul>
 <li><p><code translate="no">RETRIEVAL_DOCUMENT</code> - Optimiza os embeddings para indexação de documentos (predefinição para inserir/upsert).</p></li>
-<li><p><code translate="no">RETRIEVAL_QUERY</code> - Otimiza embeddings para recuperação de consulta (padrão para pesquisa).</p></li>
+<li><p><code translate="no">RETRIEVAL_QUERY</code> - Optimiza os embeddings para recuperação de consultas (predefinição para pesquisa).</p></li>
 <li><p><code translate="no">SEMANTIC_SIMILARITY</code> - Optimiza os embeddings para medir a semelhança de texto.</p></li>
 <li><p><code translate="no">CLASSIFICATION</code> - Optimiza os embeddings para classificação de texto.</p></li>
 <li><p><code translate="no">CLUSTERING</code> - Optimiza as incorporações para agrupamento.</p></li>

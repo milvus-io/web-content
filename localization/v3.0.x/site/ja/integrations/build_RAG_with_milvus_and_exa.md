@@ -26,7 +26,7 @@ title: ExaとmilvusによるデュアルソースRAGエージェントの構築
         ></path>
       </svg>
     </button></h1><p>このチュートリアルでは、（<a href="https://exa.ai/">Exaを介して</a>）<strong>パブリックウェブと</strong>（<a href="https://milvus.io/">Milvusを介して</a>）<strong>プライベートナレッジベースの</strong>両方を検索し、統一された答えを合成するエージェントを構築する方法を示します。このエージェントは、OpenAIの関数呼び出しを使って、ユーザの質問に基づいて、どのソースに問い合わせるかを自動的に決定します。</p>
-<p><a href="https://exa.ai/">Exaは</a>AIアプリケーションのために設計された検索APIであり、<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvusのフルマネージド）によって提供されている。従来のキーワードベースの検索エンジンとは異なり、Exaはセマンティック（ニューラル）検索をサポートしている。また、コンテンツ抽出、ハイライト、カテゴリーベースのフィルタリングも提供する。<a href="https://milvus.io/">Milvusは</a>、スケーラブルな類似検索のために構築されたオープンソースのベクトルデータベースである。これらをLLMエージェントと組み合わせることで、単一のワークフローで、社内の独自データと最新のウェブ情報の両方を取得するシステムを構築することができます。</p>
+<p><a href="https://exa.ai/">Exaは</a>AIアプリケーションのために設計された検索APIであり、<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvusのフルマネージド）によって提供されている。従来のキーワードベースの検索エンジンとは異なり、Exaはセマンティック（ニューラル）検索をサポートしている。また、コンテンツ抽出、ハイライト、カテゴリーベースのフィルタリングも提供する。<a href="https://milvus.io/">Milvusは</a>、スケーラブルな類似検索のために構築されたオープンソースのベクトルデータベースである。これらをLLMエージェントと組み合わせることで、単一のワークフローで、社内の独自データと最新のウェブ情報の両方を検索するシステムを構築することができます。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,7 +69,7 @@ os.environ[&quot;OPENAI_API_KEY&quot;] = &quot;sk-***********&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Exa、OpenAI、milvusのクライアントを設定する。OpenAIの<code translate="no">text-embedding-3-small</code> 、Milvus Liteを使用する。</p>
+    </button></h2><p>Exa、OpenAI、milvusのクライアントを設定する。ベクトル埋め込み生成にはOpenAIの<code translate="no">text-embedding-3-small</code> 、ローカルベクトルストレージにはMilvus Liteを使う。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -87,7 +87,7 @@ COLLECTION = <span class="hljs-string">&quot;private_kb&quot;</span>
 <p><code translate="no">MilvusVectorAdapter</code> と<code translate="no">MilvusClient</code> の引数について：</p>
 <ul>
 <li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利な方法である。</li>
-<li>100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合は、トークンに "<your_username>:<your_password>" を使用します。そうでない場合は、トークンを設定しないでください。</li>
+<li>100万ベクトルを超えるような大規模なデータをお持ちの場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合は、トークンに "<your_username>:<your_password>" を使用します。そうでない場合は、トークンを設定しないでください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、<code translate="no">uri</code> と<code translate="no">token</code> をZilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応させてください。</li>
 </ul>
 </div>
@@ -674,7 +674,7 @@ In conclusion, Widget Pro appears to offer high throughput suitable for enterpri
       </svg>
     </button></h2><p>このチュートリアルでは、プライベートな知識検索のためのMilvusとパブリックなウェブ検索のためのExaを組み合わせたデュアルソースのRAGエージェントを構築した。主なコンポーネントは以下の通りです：</p>
 <ul>
-<li><strong>Milvusは</strong>ベクトル類似性検索によって内部文書を保存し検索する。</li>
+<li><strong>Milvusは</strong>ベクトル類似性検索によって内部文書を保存し、検索する。</li>
 <li><strong>Exaは</strong>、カテゴリフィルタリング、コンテンツ抽出、類似記事発見などの機能を備えたセマンティックウェブ検索を提供する。</li>
 <li><strong>OpenAIの関数呼び出しにより</strong>、LLMは質問の意図に基づいて、クエリを自動的に適切なソース（またはその両方）にルーティングすることができます。</li>
 </ul>

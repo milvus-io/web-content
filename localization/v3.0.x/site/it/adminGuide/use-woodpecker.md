@@ -350,8 +350,8 @@ docker restart milvus-standalone
 <li>Per l'archiviazione degli oggetti, considerare l'aumento di <code translate="no">segmentRollingPolicy.maxSize</code> per ridurre gli scambi di segmento.</li>
 </ul></li>
 <li>Lato client/applicazione<ul>
-<li>Usare batch di dimensioni maggiori e un numero maggiore di scrittori/clienti simultanei.</li>
-<li>Controllare la tempistica di aggiornamento e creazione dell'indice (batch up prima dell'attivazione) per evitare frequenti scritture di piccole dimensioni.</li>
+<li>Usare batch di dimensioni maggiori e più scrittori/clienti simultanei.</li>
+<li>Controllare la tempistica di aggiornamento e creazione dell'indice (batch up prima dell'attivazione) per evitare frequenti piccole scritture.</li>
 </ul></li>
 </ul>
 <p>Dimostrazione dell'inserimento in batch</p>

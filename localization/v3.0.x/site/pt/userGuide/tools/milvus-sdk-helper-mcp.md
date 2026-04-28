@@ -34,7 +34,7 @@ summary: '⚡️ Configure uma vez, aumente a eficiência para sempre!'
         ></path>
       </svg>
     </button></h1><p>⚡️ Configure uma vez, aumente a eficiência para sempre!</p>
-<p>Ainda frustrado com resultados desatualizados do LLM? Cansado de ver o LLM a produzir conteúdo obsoleto mesmo depois de as versões serem actualizadas? Experimente este mcp para resolver o problema do atraso de informação ao desenvolver código relacionado com o Milvus de uma vez por todas!</p>
+<p>Ainda frustrado com resultados desatualizados do LLM? Cansado de ver o LLM a produzir conteúdo obsoleto mesmo depois das versões serem actualizadas? Experimente este mcp para resolver o problema do atraso de informação ao desenvolver código relacionado com o Milvus de uma vez por todas!</p>
 <p>O Milvus official SDK Code Helper está agora online - basta encontrar o AI IDE correspondente, configurá-lo uma vez e deixar que o AI escreva código Milvus <strong>oficialmente recomendado</strong> para si. Diga adeus a frameworks desactualizadas completamente!</p>
 <p>➡️ Jump agora: <a href="#Quickstart">Início rápido</a></p>
 <h1 id="Effect-display" class="common-anchor-header">Visualização de efeitos<button data-href="#Effect-display" class="anchor-icon" translate="no">
@@ -59,8 +59,8 @@ summary: '⚡️ Configure uma vez, aumente a eficiência para sempre!'
      <th><p>Ajuda de código MCP <strong>desactivada</strong></p></th>
    </tr>
    <tr>
-     <td><p><img translate="no" width="400" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
-     <td><p><img translate="no" width="400"src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
+     <td><p><img translate="no" width="400" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
+     <td><p><img translate="no" width="400"src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
    </tr>
    <tr>
      <td><p>Utilizar a última interface MilvusClient oficialmente recomendada para criar uma coleção</p></td>
@@ -101,7 +101,7 @@ summary: '⚡️ Configure uma vez, aumente a eficiência para sempre!'
     </button></h2><p>Aceda a: <code translate="no">Settings</code> -&gt; <code translate="no">Cursor Settings</code> -&gt; <code translate="no">Tools &amp; Intergrations</code> -&gt; <code translate="no">Add new global MCP server</code></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cursor-mcp-settings.png" alt="Cursor Mcp Settings" class="doc-image" id="cursor-mcp-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cursor-mcp-settings.png" alt="Cursor Mcp Settings" class="doc-image" id="cursor-mcp-settings" />
    </span> <span class="img-wrapper"> <span>Configurações do Cursor Mcp</span> </span></p>
 <p>A abordagem recomendada é colar a seguinte configuração no seu ficheiro Cursor <code translate="no">~/.cursor/mcp.json</code>. Também pode instalar um projeto específico criando <code translate="no">.cursor/mcp.json</code> na pasta do seu projeto. Consulte <a href="https://docs.cursor.com/context/model-context-protocol">os documentos do Cursor MCP</a> para mais informações.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
@@ -248,7 +248,7 @@ summary: '⚡️ Configure uma vez, aumente a eficiência para sempre!'
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cherry-studio-mcp-settings.png" alt="Cherry Studio Mcp Settings" class="doc-image" id="cherry-studio-mcp-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cherry-studio-mcp-settings.png" alt="Cherry Studio Mcp Settings" class="doc-image" id="cherry-studio-mcp-settings" />
    </span> <span class="img-wrapper"> <span>Configurações do Cherry Studio Mcp</span> </span></p>
 <h2 id="Cline" class="common-anchor-header">Cline<button data-href="#Cline" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -298,7 +298,7 @@ summary: '⚡️ Configure uma vez, aumente a eficiência para sempre!'
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Prima Cmd/Ctrl Shift P ou aceda ao menu de hambúrguer no painel Ampliação</p></li>
+<li><p>Pressione Cmd/Ctrl Shift P ou vá para o menu de hambúrguer no painel Ampliação</p></li>
 <li><p>Selecione Editar configurações</p></li>
 <li><p>Em Avançado, clique em Editar em settings.json</p></li>
 <li><p>Adicione a configuração do servidor à matriz <code translate="no">mcpServers</code> no objeto <code translate="no">augment.advanced</code>:</p></li>

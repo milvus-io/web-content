@@ -44,17 +44,62 @@ summary: >-
 <li>Operador do Prometheus para gerenciar efetivamente as instâncias de monitoramento do Prometheus.</li>
 <li>Kube-prometheus para fornecer monitoramento de cluster Kubernetes de ponta a ponta fácil de operar.</li>
 </ul>
-<h3 id="Metric-names" class="common-anchor-header">Nomes de métricas</h3><p>Um nome de métrica válido no Prometheus contém três elementos: namespace, subsistema e nome. Esses três elementos são conectados com "_".</p>
+<h3 id="Metric-names" class="common-anchor-header">Nomes de métricas<button data-href="#Metric-names" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um nome de métrica válido no Prometheus contém três elementos: namespace, subsistema e nome. Esses três elementos são conectados com "_".</p>
 <p>O namespace das métricas do Milvus monitoradas pelo Prometheus é "milvus". Dependendo da função a que uma métrica pertence, o seu subsistema deve ser uma das oito funções seguintes: "rootcoord", "proxy", "querycoord", "querynode", "indexcoord", "indexnode", "datacoord", "datanode".</p>
 <p>Por exemplo, a métrica Milvus que calcula o número total de vectores consultados tem o nome de <code translate="no">milvus_proxy_search_vectors_count</code>.</p>
-<h3 id="Metric-types" class="common-anchor-header">Tipos de métricas</h3><p>O Prometheus suporta quatro tipos de métricas:</p>
+<h3 id="Metric-types" class="common-anchor-header">Tipos de métricas<button data-href="#Metric-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O Prometheus suporta quatro tipos de métricas:</p>
 <ul>
 <li>Contador: um tipo de métrica cumulativa cujo valor só pode aumentar ou ser redefinido para zero após a reinicialização.</li>
 <li>Gauge: um tipo de métrica cujo valor pode subir ou descer.</li>
 <li>Histograma: um tipo de métrica que é contada com base em intervalos configuráveis. Um exemplo comum é a duração do pedido.</li>
 <li>Resumo: um tipo de métrica semelhante ao histograma que calcula os quantis configuráveis numa janela de tempo deslizante.</li>
 </ul>
-<h3 id="Metric-labels" class="common-anchor-header">Rótulos de métricas</h3><p>O Prometheus diferencia amostras com o mesmo nome de métrica rotulando-as. Um rótulo é um determinado atributo de uma métrica. As métricas com o mesmo nome devem ter o mesmo valor para o campo <code translate="no">variable_labels</code>. A tabela a seguir lista os nomes e os significados dos rótulos comuns das métricas do Milvus.</p>
+<h3 id="Metric-labels" class="common-anchor-header">Rótulos de métricas<button data-href="#Metric-labels" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O Prometheus diferencia amostras com o mesmo nome de métrica rotulando-as. Um rótulo é um determinado atributo de uma métrica. As métricas com o mesmo nome devem ter o mesmo valor para o campo <code translate="no">variable_labels</code>. A tabela a seguir lista os nomes e os significados dos rótulos comuns das métricas do Milvus.</p>
 <table>
 <thead>
 <tr><th>Nome da etiqueta</th><th>Definição</th><th>Valores</th></tr>

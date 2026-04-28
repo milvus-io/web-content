@@ -3,9 +3,9 @@ id: prerequisite-gpu.md
 label: GPU requirements
 related_key: GPU
 summary: Milvus with GPU를 설치하기 전에 필요한 준비 사항을 알아보세요.
-title: GPU가 있는 Milvus 설치 요구 사항
+title: GPU가 포함된 Milvus 설치 요구 사항
 ---
-<h1 id="Requirements-for-Installing-Milvus-with-GPU" class="common-anchor-header">GPU가 있는 Milvus 설치 요구 사항<button data-href="#Requirements-for-Installing-Milvus-with-GPU" class="anchor-icon" translate="no">
+<h1 id="Requirements-for-Installing-Milvus-with-GPU" class="common-anchor-header">GPU가 포함된 Milvus 설치 요구 사항<button data-href="#Requirements-for-Installing-Milvus-with-GPU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,7 +80,7 @@ version:        545.29.06
       </svg>
     </button></h2><p>Linux 플랫폼에서 Kubernetes 클러스터를 실행하는 것이 좋습니다.</p>
 <ul>
-<li>kubectl은 쿠버네티스용 커맨드-라인 도구이다. 클러스터의 사소한 버전 차이가 하나 이내의 kubectl 버전을 사용한다. 최신 버전의 kubectl을 사용하면 예기치 않은 문제를 방지하는 데 도움이 된다.</li>
+<li>kubectl은 쿠버네티스용 커맨드-라인 도구이다. 클러스터의 사소한 버전 차이가 하나 이내인 kubectl 버전을 사용한다. 최신 버전의 kubectl을 사용하면 예기치 않은 문제를 방지하는 데 도움이 된다.</li>
 <li>미니큐브는 쿠버네티스 클러스터를 로컬로 실행할 때 필요합니다. 미니큐브는 종속성으로 도커를 필요로 합니다. 헬름을 사용하여 밀버스를 설치하기 전에 도커를 설치해야 한다. 자세한 내용은 <a href="https://docs.docker.com/get-docker">Docker 설치를</a> 참조한다.</li>
 </ul>
 <table>
@@ -106,7 +106,22 @@ version:        545.29.06
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">테스트 목적으로 로컬에서 K8s 클러스터를 시작하려면 어떻게 해야 하나요?</h3><p><a href="https://minikube.sigs.k8s.io/docs/">미니큐브</a>, <a href="https://kind.sigs.k8s.io/">kind</a>, <a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm과</a> 같은 도구를 사용하여 로컬에서 빠르게 쿠버네티스 클러스터를 설정할 수 있다. 다음 절차에서는 미니큐브를 예로 들어 설명합니다.</p>
+    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">테스트 목적으로 로컬에서 K8s 클러스터를 시작하려면 어떻게 해야 하나요?<button data-href="#How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="https://minikube.sigs.k8s.io/docs/">미니큐브</a>, <a href="https://kind.sigs.k8s.io/">kind</a>, <a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm과</a> 같은 도구를 사용하여 로컬에서 빠르게 쿠버네티스 클러스터를 설정할 수 있다. 다음 절차에서는 미니큐브를 예로 들어 설명합니다.</p>
 <ol>
 <li>미니큐브 다운로드</li>
 </ol>
@@ -125,7 +140,22 @@ version:        545.29.06
 <div class="alert note">
 <p><code translate="no">kubectl</code> 을 통해 K8s 클러스터에 액세스할 수 있는지 확인합니다. 로컬에 <code translate="no">kubectl</code> 를 설치하지 않은 경우, <a href="https://minikube.sigs.k8s.io/docs/handbook/kubectl/">미니큐브 내에서 kubectl 사용을</a> 참조하세요.</p>
 </div>
-<h3 id="How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes" class="common-anchor-header">GPU 워커 노드로 K8s 클러스터를 시작하려면 어떻게 해야 하나요?</h3><p>GPU 지원 워커 노드를 사용하려는 경우, 아래 단계에 따라 GPU 워커 노드가 있는 K8s 클러스터를 생성할 수 있다. GPU 워커 노드가 있는 K8s 클러스터에 Milvus를 설치하고 프로비저닝된 기본 스토리지 클래스를 사용하는 것이 좋습니다.</p>
+<h3 id="How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes" class="common-anchor-header">GPU 워커 노드로 K8s 클러스터를 시작하려면 어떻게 해야 하나요?<button data-href="#How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>GPU 지원 워커 노드를 사용하려는 경우, 아래 단계에 따라 GPU 워커 노드가 있는 K8s 클러스터를 생성할 수 있다. GPU 워커 노드가 있는 K8s 클러스터에 Milvus를 설치하고 프로비저닝된 기본 스토리지 클래스를 사용하는 것이 좋습니다.</p>
 <ol>
 <li>GPU 워커 노드 준비</li>
 </ol>

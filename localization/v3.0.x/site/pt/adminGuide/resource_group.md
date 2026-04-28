@@ -296,7 +296,7 @@ scale_to(<span class="hljs-number">5</span>)
 <span class="hljs-comment"># rg1 has 3 nodes, rg2 has 1 node, __default_resource_group has 1 node.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Escala de cluster para dentro</p>
-<p>Da mesma forma, podemos estabelecer regras de escalonamento que dão prioridade à seleção de QueryNodes do grupo de recursos <strong>__pending_nodes</strong>. Esta informação pode ser obtida através da API <code translate="no">describe_resource_group</code>. Atingindo o objetivo de escalonar o grupo de recursos especificado.</p>
+<p>De forma semelhante, podemos estabelecer regras de escalonamento que dão prioridade à seleção de QueryNodes do grupo de recursos <strong>__pending_nodes</strong>. Esta informação pode ser obtida através da API <code translate="no">describe_resource_group</code>. Atingindo o objetivo de escalonar o grupo de recursos especificado.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 from 3 nodes into 2 nodes</span>
 milvus_client.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(

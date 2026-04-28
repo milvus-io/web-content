@@ -657,7 +657,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Keistimewaan hanya-baca tingkat koleksi      </td>
+      <td>        Hak istimewa hanya-baca tingkat koleksi      </td>
       <td>Query, Search, IndexDetail, GetFlushState, GetLoadState, GetLoadingProgress, HasPartition, ShowPartitions, DescribeCollection, DescribeAlias, GetStatistics, ListAlias</td>
     </tr>
   </tbody>
@@ -744,7 +744,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Nilai ttl saat sesi memberikan sewa untuk mendaftarkan layanan      </td>
+      <td>        nilai ttl saat sesi memberikan sewa untuk mendaftarkan layanan      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -1037,7 +1037,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        tingkat positif palsu maksimum untuk filter bloom     </td>
+      <td>        tingkat positif palsu maksimum untuk filter mekar     </td>
       <td>0.001</td>
     </tr>
   </tbody>

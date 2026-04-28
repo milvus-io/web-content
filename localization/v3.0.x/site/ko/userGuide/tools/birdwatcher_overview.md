@@ -1,9 +1,9 @@
 ---
 id: birdwatcher_overview.md
 summary: 'Birdwatcher는 Milvus 2.x용 디버그 도구로, etcd에 연결하여 Milvus 시스템의 상태를 검사합니다.'
-title: 버드워처
+title: Birdwatcher
 ---
-<h1 id="Birdwatcher" class="common-anchor-header">버드워처<button data-href="#Birdwatcher" class="anchor-icon" translate="no">
+<h1 id="Birdwatcher" class="common-anchor-header">Birdwatcher<button data-href="#Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,7 +55,7 @@ title: 버드워처
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/birdwatcher_overview.png" alt="Birdwatcher architecture" class="doc-image" id="birdwatcher-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/birdwatcher_overview.png" alt="Birdwatcher architecture" class="doc-image" id="birdwatcher-architecture" />
    </span> <span class="img-wrapper"> <span>버드워처 아키텍처</span> </span></p>
 <h2 id="Latest-release" class="common-anchor-header">최신 릴리스<button data-href="#Latest-release" class="anchor-icon" translate="no">
       <svg translate="no"

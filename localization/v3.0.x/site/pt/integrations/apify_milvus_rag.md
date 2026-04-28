@@ -199,7 +199,7 @@ item[<span class="hljs-number">0</span>].get(<span class="hljs-string">&quot;tex
     </button></h1><p>De seguida, vamos definir o pipeline de recuperação-aumentado utilizando Langchain. O pipeline funciona em duas fases:</p>
 <ul>
 <li>Vectorstore (Milvus): A Langchain recupera documentos relevantes do Milvus fazendo corresponder os embeddings da consulta com os embeddings dos documentos armazenados.</li>
-<li>Resposta LLM: Os documentos recuperados fornecem contexto para o LLM (por exemplo, GPT-4) para gerar uma resposta informada.</li>
+<li>Resposta LLM: Os documentos recuperados fornecem o contexto para que o LLM (por exemplo, GPT-4) gere uma resposta informada.</li>
 </ul>
 <p>Para mais pormenores sobre a cadeia RAG, consulte a <a href="https://python.langchain.com/v0.2/docs/tutorials/rag/">documentação da Langchain</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser

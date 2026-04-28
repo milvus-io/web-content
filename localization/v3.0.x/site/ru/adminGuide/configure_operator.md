@@ -29,7 +29,7 @@ title: Настройка Milvus с помощью Milvus Operator
 <li>Конфигурации частных ресурсов</li>
 </ul>
 <div class="alert note">
-Конфигурации частных ресурсов будут перезаписывать конфигурации глобальных ресурсов. Если вы настраиваете ресурсы глобально и одновременно указываете частный ресурс определенного компонента, компонент будет отдавать приоритет и отвечать на частные конфигурации в первую очередь.</div>
+Конфигурации частных ресурсов будут перезаписывать конфигурации глобальных ресурсов. Если вы настроите ресурсы глобально и одновременно укажете частный ресурс определенного компонента, компонент будет отдавать приоритет и отвечать на частные конфигурации в первую очередь.</div>
 <h2 id="Configure-global-resources" class="common-anchor-header">Настройка глобальных ресурсов<button data-href="#Configure-global-resources" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -135,7 +135,7 @@ title: Настройка Milvus с помощью Milvus Operator
 </ul>
 <div class="alert note">
 Кроме того, при настройке прокси есть дополнительное поле `serviceType`. Это поле определяет тип сервиса, который Milvus предоставляет в кластере K8s.</div>
-<p>Чтобы настроить ресурсы для конкретного компонента, сначала добавьте имя компонента в поле <code translate="no">spec.componets</code>, а затем настройте его частные ресурсы.</p>
+<p>Чтобы настроить ресурсы для конкретного компонента, сначала добавьте имя компонента в поле <code translate="no">spec.componets</code>, а затем настройте его личные ресурсы.</p>
 <div class="filter">
 <a href="#component">Компоненты или зависимости</a> <a href="#purpose">Цели конфигурации</a> </div>
 <div class="filter-component table-wrapper">
@@ -174,7 +174,6 @@ title: Настройка Milvus с помощью Milvus Operator
             <li><a href="/docs/ru/configure_indexcoord.md">Индексный коорд</a></li>
             <li><a href="/docs/ru/configure_metastore.md">Метахранилище</a></li>
             <li><a href="/docs/ru/configure_mq.md">Очередь сообщений</a></li>
-            <li><a href="/docs/ru/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/ru/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/ru/configure_trace.md">Трассировка</a></li>
             <li><a href="/docs/ru/configure_quotaandlimits.md">Квоты и лимиты</a></li>

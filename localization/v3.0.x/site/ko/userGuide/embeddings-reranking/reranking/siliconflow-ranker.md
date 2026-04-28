@@ -21,7 +21,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>SiliconFlow Ranker는 <a href="https://www.siliconflow.com/">SiliconFlow의</a> 포괄적인 재랭크 모델을 활용하여 시맨틱 재랭크를 통해 검색 관련성을 향상시킵니다. 유연한 문서 청킹 기능을 제공하며 다양한 제공업체의 전문화된 다양한 리랭크 모델을 지원합니다.</p>
+    </button></h1><p>SiliconFlow Ranker는 <a href="https://www.siliconflow.com/">SiliconFlow의</a> 포괄적인 재랭크 모델을 활용하여 시맨틱 재랭크를 통해 검색 관련성을 향상시킵니다. 유연한 문서 청킹 기능을 제공하며 다양한 제공업체의 전문화된 다양한 재랭크 모델을 지원합니다.</p>
 <p>SiliconFlow Ranker는 특히 필요한 애플리케이션에 유용합니다:</p>
 <ul>
 <li><p>긴 문서 처리를 위한 구성 가능한 오버랩을 통한 고급 문서 청킹 기능</p></li>
@@ -150,7 +150,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">reranker</code></p></td>
      <td><p>예</p></td>
-     <td><p>모델 순위 재지정을 사용하려면 <code translate="no">"model"</code> 로 설정해야 합니다.</p></td>
+     <td><p>모델 순위 재지정을 사용하려면 <code translate="no">"model"</code> 으로 설정해야 합니다.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>

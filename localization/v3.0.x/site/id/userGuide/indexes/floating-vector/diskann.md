@@ -64,7 +64,7 @@ summary: >-
 <p>Gambar berikut ini menunjukkan bagaimana graf Vamana dibangun.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
    </span> <span class="img-wrapper"> <span>Diskann</span> </span></p>
 <ol>
 <li><p><strong>Koneksi-koneksi acak awal:</strong> Setiap titik data (vektor) direpresentasikan sebagai sebuah simpul dalam graf. Node-node ini pada awalnya terhubung secara acak, membentuk sebuah jaringan yang padat. Biasanya, sebuah simpul dimulai dengan sekitar 500 sisi (atau koneksi) untuk konektivitas yang luas.</p></li>
@@ -86,7 +86,7 @@ summary: >-
 <li><p><code translate="no">vec_field_size_gb</code> adalah ukuran total vektor (dalam gigabyte).</p></li>
 <li><p><code translate="no">pq_code_budget_gb_ratio</code> adalah rasio yang ditentukan pengguna, yang mewakili sebagian kecil dari total ukuran data yang dicadangkan untuk kode PQ. Parameter ini memungkinkan pertukaran antara akurasi pencarian dan sumber daya memori. Untuk informasi lebih lanjut tentang penyetelan parameter, lihat <a href="/docs/id/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">konfigurasi DISKANN</a>.</p></li>
 </ul>
-<p>Untuk rincian teknis tentang metode PQ yang mendasari, lihat <a href="/docs/id/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
+<p>Untuk detail teknis tentang metode PQ yang mendasari, lihat <a href="/docs/id/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
 <h3 id="Search-process" class="common-anchor-header">Proses pencarian<button data-href="#Search-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,7 +105,7 @@ summary: >-
     </button></h3><p>Setelah indeks (grafik Vamana pada disk dan kode PQ dalam memori) dibangun, DISKANN melakukan pencarian ANN sebagai berikut:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
    </span> <span class="img-wrapper"> <span>Diskann 2</span> </span></p>
 <ol>
 <li><p><strong>Kueri dan titik masuk:</strong> Sebuah vektor kueri disediakan untuk menemukan tetangga terdekat. DISKANN dimulai dari titik masuk yang dipilih dalam grafik Vamana, biasanya sebuah simpul di dekat pusat global dataset. Pusat global mewakili rata-rata dari semua vektor, yang membantu meminimalkan jarak penjelajahan melalui graf untuk menemukan tetangga yang diinginkan.</p></li>
@@ -113,7 +113,7 @@ summary: >-
 <li><p><strong>Memilih node untuk perhitungan jarak yang akurat:</strong> Dari hasil perkiraan, subset dari tetangga yang paling menjanjikan (lingkaran berwarna hijau pada gambar) dipilih untuk evaluasi jarak yang tepat menggunakan vektor aslinya yang tidak dikompresi. Hal ini membutuhkan pembacaan data dari disk, yang dapat memakan waktu. DISKANN menggunakan dua parameter untuk mengontrol keseimbangan antara akurasi dan kecepatan:</p>
 <ul>
 <li><p><code translate="no">beam_width_ratio</code>: Rasio yang mengontrol luasnya pencarian, menentukan berapa banyak kandidat tetangga yang dipilih secara paralel untuk mengeksplorasi tetangga mereka. <code translate="no">beam_width_ratio</code> yang lebih besar menghasilkan eksplorasi yang lebih luas, yang berpotensi menghasilkan akurasi yang lebih tinggi tetapi juga meningkatkan biaya komputasi dan I/O disk. Lebar berkas, atau jumlah node yang dipilih, ditentukan dengan menggunakan rumus: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
-<li><p><code translate="no">search_cache_budget_gb_ratio</code>: Proporsi memori yang dialokasikan untuk caching data disk yang sering diakses. Caching ini membantu meminimalkan I/O disk, sehingga pencarian berulang menjadi lebih cepat karena data sudah ada di dalam memori.</p></li>
+<li><p><code translate="no">search_cache_budget_gb_ratio</code>: Proporsi memori yang dialokasikan untuk menyimpan data disk yang sering diakses. Caching ini membantu meminimalkan I/O disk, sehingga pencarian berulang menjadi lebih cepat karena data sudah ada di dalam memori.</p></li>
 </ul>
 <p>Untuk mempelajari lebih lanjut tentang penyetelan parameter, lihat <a href="/docs/id/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">konfigurasi DISKANN</a>.</p></li>
 <li><p><strong>Eksplorasi berulang:</strong> Pencarian secara iteratif menyempurnakan himpunan kandidat, berulang kali melakukan evaluasi perkiraan (menggunakan PQ) diikuti dengan pemeriksaan yang tepat (menggunakan vektor asli dari disk) hingga jumlah tetangga yang cukup ditemukan.</p></li>
@@ -238,7 +238,7 @@ summary: >-
      <td><p>Mengontrol jumlah maksimum koneksi (sisi) yang dapat dimiliki setiap titik data dalam grafik Vamana.</p></td>
      <td><p><strong>Jenis</strong>: <strong>Rentang</strong> Bilangan Bulat: [1, 512]</p>
 <p><strong>Nilai default</strong>: <code translate="no">56</code></p></td>
-     <td><p>Nilai yang lebih tinggi akan membuat grafik yang lebih padat, berpotensi meningkatkan pemanggilan kembali (menemukan hasil yang lebih relevan) tetapi juga meningkatkan penggunaan memori dan waktu pembuatan. 
+     <td><p>Nilai yang lebih tinggi akan membuat grafik yang lebih padat, berpotensi meningkatkan pemanggilan (menemukan hasil yang lebih relevan) tetapi juga meningkatkan penggunaan memori dan waktu pembuatan. 
  Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [10, 100].</p></td>
    </tr>
    <tr>

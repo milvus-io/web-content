@@ -162,7 +162,7 @@ collection.load()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本例中，我们将使用<code translate="no">torch</code> 及其模型中心提供的 ResNet50 模型。为了获得 Embeddings，我们要去掉最后的分类层，这样模型就能为我们提供 2048 维的 embeddings。在<code translate="no">torch</code> 上找到的所有视觉模型都使用了与我们这里相同的预处理。</p>
+    </button></h2><p>在本例中，我们将使用<code translate="no">torch</code> 及其模型中心提供的 ResNet50 模型。为了获得 Embeddings，我们要去掉最后的分类层，这样模型就能提供 2048 个维度的 embeddings。在<code translate="no">torch</code> 上找到的所有视觉模型都使用了与我们这里相同的预处理。</p>
 <p>在接下来的几个步骤中，我们将</p>
 <ol>
 <li><p>加载数据。</p>
@@ -293,5 +293,5 @@ plt.savefig(<span class="hljs-string">&#x27;search_result.png&#x27;</span>)
 <p>搜索结果图像应与下图类似：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/integrate_with_pytorch.png" alt="Image search output" class="doc-image" id="image-search-output" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/integrate_with_pytorch.png" alt="Image search output" class="doc-image" id="image-search-output" />
    </span> <span class="img-wrapper"> <span>图像搜索输出</span> </span></p>

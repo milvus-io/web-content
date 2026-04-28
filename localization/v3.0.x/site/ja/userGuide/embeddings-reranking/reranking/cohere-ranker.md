@@ -24,9 +24,9 @@ beta: Milvus 2.6.x
     </button></h1><p>Cohere Ranker は、<a href="https://cohere.com/">Cohere の</a>強力なリランク・モデルを活用し、セマンティック・リランキングによって検索の関連性を高めます。Cohere Ranker は、堅牢な API インフラストラクチャと本番環境に最適化されたパフォーマンスにより、エンタープライズグレードのリランキング機能を提供します。</p>
 <p>Cohere Ranker は、以下を必要とするアプリケーションに最適です：</p>
 <ul>
-<li><p>最先端のリランク・モデルによる高品質な意味理解</p></li>
+<li><p>最先端のリランク・モデルによる高品質のセマンティック理解</p></li>
 <li><p>本番ワークロードに対応するエンタープライズグレードの信頼性と拡張性</p></li>
-<li><p>多様なコンテンツタイプに対応する多言語リランキング機能</p></li>
+<li><p>多様なコンテンツ・タイプに対応する多言語リランク機能</p></li>
 <li><p>レート制限とエラー処理を組み込んだ一貫した API パフォーマンス</p></li>
 </ul>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -47,7 +47,7 @@ beta: Milvus 2.6.x
     </button></h2><p>Milvus に Cohere Ranker を実装する前に、以下を確認してください：</p>
 <ul>
 <li><p>リランキング対象のテキストを含む、<code translate="no">VARCHAR</code> フィールドを持つ Milvus コレクション。</p></li>
-<li><p>リランキングモデルにアクセスできる有効な Cohere API キー。<a href="https://dashboard.cohere.com/">Cohere のプラットフォームに</a>サインアップし、API 認証情報を取得します。以下のいずれかを実行します：</p>
+<li><p>リランキングモデルにアクセスできる有効な Cohere API キー。<a href="https://dashboard.cohere.com/">Cohere のプラットフォームに</a>サインアップし、API 認証情報を取得します。次のいずれかを実行します：</p>
 <ul>
 <li><p><code translate="no">COHERE_API_KEY</code> 環境変数を設定する。</p></li>
 <li><p><a href="/docs/ja/cohere-ranker.md#Create-a-Cohere-ranker-function">ランカー設定の</a> <code translate="no">credential</code> で API キーを直接指定する。</p></li>

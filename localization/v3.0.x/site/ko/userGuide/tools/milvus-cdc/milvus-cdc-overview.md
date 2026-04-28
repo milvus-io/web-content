@@ -59,7 +59,7 @@ title: CDC 개요
     </button></h2><p>Milvus-CDC는 작업과 메타데이터를 관리하는 HTTP 서버와 소스 Milvus 인스턴스에서 데이터를 가져오는 리더와 처리된 데이터를 대상 Milvus 인스턴스로 전송하는 라이터로 작업 실행을 동기화하는 <strong>코어리브의</strong> 두 가지 주요 구성 요소로 구성된 아키텍처를 채택하고 있습니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
    </span> <span class="img-wrapper"> <span>MILVUS-CDC-아키텍처</span> </span></p>
 <p>앞의 다이어그램에서</p>
 <ul>
@@ -90,7 +90,7 @@ title: CDC 개요
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
    </span> <span class="img-wrapper"> <span>MILVUS-CDC-워크플로우</span> </span></p>
 <h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -109,7 +109,7 @@ title: CDC 개요
       </svg>
     </button></h2><ul>
 <li><p><strong>증분 데이터 동기화</strong>: 현재 Milvus-CDC는 증분 데이터만 동기화하도록 설계되어 있습니다. 비즈니스에 전체 데이터 백업이 필요한 경우 <a href="https://milvus.io/community">당사에</a> 문의하여 도움을 받으시기 바랍니다.</p></li>
-<li><p><strong>동기화 범위</strong>: 현재 Milvus-CDC는 클러스터 수준에서 데이터를 동기화할 수 있습니다. 향후 릴리스에서 컬렉션 수준의 데이터 동기화 지원을 추가하기 위해 노력 중입니다.</p></li>
+<li><p><strong>동기화 범위</strong>: 현재 Milvus-CDC는 클러스터 수준에서 데이터를 동기화할 수 있습니다. 향후 릴리스에서 컬렉션 수준의 데이터 동기화 지원을 추가하기 위해 노력하고 있습니다.</p></li>
 <li><p><strong>지원되는 API 요청</strong>: Milvus-CDC는 현재 다음과 같은 API 요청을 지원합니다. 향후 릴리스에서 추가 요청에 대한 지원을 확대할 계획입니다:</p>
 <ul>
 <li><p>컬렉션 생성/삭제</p></li>

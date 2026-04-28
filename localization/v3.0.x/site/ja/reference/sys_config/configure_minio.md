@@ -407,7 +407,7 @@ summary: Milvus用のminioの設定方法について説明します。
   <tbody>
     <tr>
       <td>
-        <li>useIAM が true かつ cloudProvider が "aws" の場合に、IAM ロールの認証情報を取得するためのカスタムエンドポイント。</li>      
+        <li>useIAMがtrueでcloudProviderが "aws "の場合に、IAMロールの認証情報を取得するためのカスタムエンドポイント。</li>      
         <li>AWS デフォルトのエンドポイントを使いたい場合は空白のままにしておきます。</li>      </td>
       <td></td>
     </tr>
@@ -554,7 +554,7 @@ summary: Milvus用のminioの設定方法について説明します。
   <tbody>
     <tr>
       <td>
-        <li>minio ListObjects rpc でバッチごとにリクエストされるオブジェクトの最大数、 </li>      
+        <li>minio ListObjects rpcでバッチごとにリクエストされるオブジェクトの最大数、 </li>      
         <li>0 は、デフォルトで oss クライアントを使用することを意味する。</li>      </td>
       <td>0</td>
     </tr>

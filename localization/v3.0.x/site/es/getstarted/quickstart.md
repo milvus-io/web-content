@@ -81,7 +81,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En Milvus, necesitamos una colección para almacenar vectores y sus metadatos asociados. Puede pensar en ella como en una tabla de las bases de datos SQL tradicionales. Al crear una colección, puede definir parámetros de esquema e índice para configurar las especificaciones del vector, como la dimensionalidad, los tipos de índice y las métricas distantes. También existen conceptos complejos para optimizar el índice para el rendimiento de la búsqueda vectorial. Por ahora, centrémonos en lo básico y utilicemos por defecto para todo lo posible. Como mínimo, sólo necesitas establecer el nombre de la colección y la dimensión del campo vectorial de la colección.</p>
+    </button></h2><p>En Milvus, necesitamos una colección para almacenar vectores y sus metadatos asociados. Puede pensar en ella como en una tabla de las bases de datos SQL tradicionales. Al crear una colección, puede definir parámetros de esquema e índice para configurar las especificaciones del vector, como la dimensionalidad, los tipos de índice y las métricas distantes. También hay conceptos complejos para optimizar el índice para el rendimiento de la búsqueda vectorial. Por ahora, centrémonos en lo básico y utilicemos por defecto para todo lo posible. Como mínimo, sólo necesitas establecer el nombre de la colección y la dimensión del campo vectorial de la colección.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>):
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
@@ -93,7 +93,7 @@ client.create_collection(
 <ul>
 <li>La clave primaria y los campos vectoriales utilizan sus nombres por defecto ("id" y "vector").</li>
 <li>El tipo de métrica (definición de distancia vectorial) se establece en su valor por defecto<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">(COSINE</a>).</li>
-<li>El campo de clave primaria acepta números enteros y no se incrementa automáticamente (es decir, no utiliza <a href="https://milvus.io/docs/schema.md">la función auto-id</a>) Alternativamente, puede definir formalmente el esquema de la colección siguiendo esta <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">instrucción</a>.</li>
+<li>El campo de clave primaria acepta enteros y no se incrementa automáticamente (es decir, no utiliza <a href="https://milvus.io/docs/schema.md">la función auto-id</a>) Alternativamente, puede definir formalmente el esquema de la colección siguiendo esta <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">instrucción</a>.</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">Preparar los datos<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
       <svg translate="no"

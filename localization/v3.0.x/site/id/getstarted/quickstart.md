@@ -93,7 +93,7 @@ client.create_collection(
 <ul>
 <li>Kunci utama dan bidang vektor menggunakan nama defaultnya ("id" dan "vektor").</li>
 <li>Jenis metrik (definisi jarak vektor) diatur ke nilai default<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">(COSINE</a>).</li>
-<li>Bidang kunci utama menerima bilangan bulat dan tidak secara otomatis bertambah (yaitu tidak menggunakan <a href="https://milvus.io/docs/schema.md">fitur auto-id</a>) Sebagai alternatif, Anda dapat mendefinisikan skema koleksi secara formal dengan mengikuti <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">instruksi</a> berikut.</li>
+<li>Field kunci utama menerima bilangan bulat dan tidak secara otomatis bertambah (yaitu tidak menggunakan <a href="https://milvus.io/docs/schema.md">fitur auto-id</a>) Sebagai alternatif, Anda dapat mendefinisikan skema koleksi secara formal dengan mengikuti <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">instruksi</a> ini.</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">Menyiapkan Data<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
       <svg translate="no"

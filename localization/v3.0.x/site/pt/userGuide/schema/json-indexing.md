@@ -161,12 +161,12 @@ index_params.add_index(
    </tr>
    <tr>
      <td><p><code translate="no">JSON</code> / <code translate="no">json</code></p></td>
-     <td><p>Objectos ou sub-objectos JSON inteiros com inferência automática de tipo e nivelamento.</p><p>A indexação de objectos JSON inteiros aumenta o tamanho do índice. Para cenários com muitas chaves, considere a <a href="/docs/pt/json-shredding.md">fragmentação de JSON</a>.</p></td>
+     <td><p>Objectos JSON inteiros ou sub-objectos com inferência automática de tipo e nivelamento.</p><p>A indexação de objectos JSON inteiros aumenta o tamanho do índice. Para cenários com muitas chaves, considere a <a href="/docs/pt/json-shredding.md">fragmentação de JSON</a>.</p></td>
      <td><p>Qualquer objeto JSON</p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>As matrizes devem conter elementos do mesmo tipo para uma indexação ideal. Para obter mais informações, consulte <a href="/docs/pt/array_data_type.md">Campo de matriz</a>.</p>
+<p>As matrizes devem conter elementos do mesmo tipo para uma indexação ideal. Para obter mais informações, consulte <a href="/docs/pt/array_data_type.md">Array Field</a>.</p>
 </div>
 <h3 id="Supported-cast-functions" class="common-anchor-header">Funções de conversão suportadas<button data-href="#Supported-cast-functions" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -73,7 +73,7 @@ title: Milvus WebUI
     </button></h2><p>Milvus Web UI menyediakan fitur-fitur berikut ini:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
    </span> <span class="img-wrapper"> <span>Gambaran umum Milvus Web UI</span> </span></p>
 <ul>
 <li><p><a href="#Home">Beranda</a></p>
@@ -111,7 +111,7 @@ title: Milvus WebUI
     </button></h2><p>Pada halaman Beranda, Anda dapat menemukan informasi berikut:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-home.png" alt="Milvus Web UI Home" class="doc-image" id="milvus-web-ui-home" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-home.png" alt="Milvus Web UI Home" class="doc-image" id="milvus-web-ui-home" />
    </span> <span class="img-wrapper"> <span>Beranda UI Web Milvus</span> </span></p>
 <ul>
 <li><p><strong>Informasi sistem</strong>: Melihat informasi sistem, termasuk informasi tentang mode penerapan, gambar yang digunakan dalam penerapan, dan informasi terkait.</p></li>
@@ -137,7 +137,7 @@ title: Milvus WebUI
     </button></h2><p>Pada halaman Koleksi, Anda dapat melihat daftar basis data dan koleksi yang ada di Milvus saat ini dan memeriksa detailnya.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-collections.png" alt="Milvus Web UI Collections" class="doc-image" id="milvus-web-ui-collections" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-collections.png" alt="Milvus Web UI Collections" class="doc-image" id="milvus-web-ui-collections" />
    </span> <span class="img-wrapper"> <span>Koleksi UI Web Milvus</span> </span></p>
 <ul>
 <li><p><strong>Database</strong>: Melihat daftar database yang saat ini ada di Milvus dan detailnya.</p></li>
@@ -145,7 +145,7 @@ title: Milvus WebUI
 <p>Anda dapat mengklik sebuah koleksi untuk melihat detailnya, termasuk jumlah field, partisi, indeks, dan informasi lainnya secara rinci.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
    </span> <span class="img-wrapper"> <span>Detail Koleksi UI Web Milvus</span> </span></p></li>
 </ul>
 <h2 id="Query" class="common-anchor-header">Query<button data-href="#Query" class="anchor-icon" translate="no">
@@ -165,7 +165,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
    </span> <span class="img-wrapper"> <span>Halaman Kueri Milvus Web UI</span> </span></p>
 <ul>
 <li><p><strong>Segmen</strong>: Melihat daftar segmen dan detailnya, termasuk ID segmen, koleksi yang sesuai, status, ukuran, dll.</p></li>
@@ -190,7 +190,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-data.png" alt="Milvus Web UI Data Page" class="doc-image" id="milvus-web-ui-data-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-data.png" alt="Milvus Web UI Data Page" class="doc-image" id="milvus-web-ui-data-page" />
    </span> <span class="img-wrapper"> <span>Halaman Data UI Web Milvus</span> </span></p>
 <ul>
 <li><p><strong>Segmen</strong>: Melihat daftar segmen dari node/koordinator data dan detailnya, termasuk ID segmen, koleksi yang sesuai, status, ukuran, dll.</p></li>
@@ -213,7 +213,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-tasks.png" alt="Milvus Web UI Tasks Page" class="doc-image" id="milvus-web-ui-tasks-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-tasks.png" alt="Milvus Web UI Tasks Page" class="doc-image" id="milvus-web-ui-tasks-page" />
    </span> <span class="img-wrapper"> <span>Halaman Tugas UI Web Milvus</span> </span></p>
 <ul>
 <li><p><strong>Tugas</strong>: Melihat daftar tugas yang sedang berjalan di Milvus, termasuk jenis tugas, status, dan tindakan.</p>
@@ -242,7 +242,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
    </span> <span class="img-wrapper"> <span>Halaman Permintaan Lambat UI Web Milvus</span> </span></p>
 <ul>
 <li><strong>Permintaan lambat</strong>: Permintaan lambat adalah pencarian atau kueri yang memiliki latensi lebih lama dari nilai <code translate="no">proxy.slowQuerySpanInSeconds</code> yang ditentukan dalam konfigurasi. Daftar permintaan lambat menampilkan semua permintaan lambat dalam 15 menit terakhir.</li>
@@ -264,7 +264,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-configurations.png" alt="Milvus Web UI Configurations Page" class="doc-image" id="milvus-web-ui-configurations-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-configurations.png" alt="Milvus Web UI Configurations Page" class="doc-image" id="milvus-web-ui-configurations-page" />
    </span> <span class="img-wrapper"> <span>Halaman Konfigurasi UI Web Milvus</span> </span></p>
 <ul>
 <li><strong>Konfigurasi</strong>: Melihat daftar konfigurasi runtime Milvus dan nilainya.</li>

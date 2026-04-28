@@ -53,7 +53,7 @@ summary: >-
       </svg>
     </button></h2><p>يقوم ميلفوس بتنفيذ فهرس <code translate="no">NGRAM</code> في عملية من مرحلتين:</p>
 <ol>
-<li><p><strong>بناء الفهرس</strong>: توليد ن-غرامات لكل مستند وبناء فهرس مقلوب أثناء الاستيعاب.</p></li>
+<li><p><strong>بناء الفهرس</strong>: إنشاء ن-غرامات لكل مستند وبناء فهرس مقلوب أثناء الاستيعاب.</p></li>
 <li><p><strong>تسريع الاستعلامات</strong>: استخدام الفهرس للتصفية إلى مجموعة مرشحة صغيرة، ثم التحقق من التطابق التام.</p></li>
 </ol>
 <h3 id="Phase-1-Build-the-index" class="common-anchor-header">المرحلة 1: بناء الفهرس<button data-href="#Phase-1-Build-the-index" class="anchor-icon" translate="no">
@@ -142,7 +142,7 @@ A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists
    </span> <span class="img-wrapper"> <span>تسريع الاستعلامات</span> </span></p>
 <ol>
 <li><p><strong>استخراج مصطلح الاستعلام:</strong> يتم استخراج السلسلة الفرعية المتجاورة بدون أحرف البدل من التعبير <code translate="no">LIKE</code> (على سبيل المثال، <code translate="no">&quot;%database%&quot;</code> يصبح <code translate="no">&quot;database&quot;</code>).</p></li>
-<li><p><strong>تفكيك مصطلح الاستعلام:</strong> يتم تحليل مصطلح الاستعلام إلى <em>ن-غرامات</em> بناءً على طوله (<code translate="no">L</code>) والإعدادات <code translate="no">min_gram</code> و <code translate="no">max_gram</code>.</p>
+<li><p><strong>تفكيك مصطلح الاستعلام:</strong> يتحلل مصطلح الاستعلام إلى <em>n-غرامات</em> بناءً على طوله (<code translate="no">L</code>) والإعدادات <code translate="no">min_gram</code> و <code translate="no">max_gram</code>.</p>
 <ul>
 <li><p>إذا كان <code translate="no">L &lt; min_gram</code> ، لا يمكن استخدام الفهرس، ويعود الاستعلام إلى المسح الكامل.</p></li>
 <li><p>إذا كان <code translate="no">min_gram ≤ L ≤ max_gram</code> ، يتم التعامل مع مصطلح الاستعلام بأكمله على أنه n-gram واحد، ولا يلزم إجراء مزيد من التحلل.</p></li>

@@ -57,7 +57,7 @@ title: 使用 AIMon 和 Milvus 改善您的 LLM 申請的檢索品質
         ></path>
       </svg>
     </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>向量資料庫</em></h4><p>在此應用程式中，我們將使用<a href="https://milvus.io/">Milvus</a>來管理和搜尋大型非結構化資料，例如文字、影像和視訊。</p>
-<h4 id="LLM-Framework" class="common-anchor-header"><em>LLM 架構</em></h4><p>LlamaIndex 是一個開放原始碼的資料協調框架，可簡化大型語言模型 (LLM) 應用程式的建立，方法是促進私人資料與 LLM 的整合，透過檢索-增強生成 (RAG) 管道實現情境增強的生成式 AI 應用程式。由於 LlamaIndex 具備良好的靈活性和更佳的低階 API 抽象，因此我們將在本教學中使用 LlamaIndex。</p>
+<h4 id="LLM-Framework" class="common-anchor-header"><em>LLM 架構</em></h4><p>LlamaIndex 是一個開放原始碼的資料協調框架，可簡化大型語言模型 (LLM) 應用程式的建立，方法是促進私人資料與 LLM 的整合，透過檢索-增強生成 (RAG) 管道實現情境增強的生成式 AI 應用程式。由於 LlamaIndex 具備良好的彈性與較佳的低階 API 抽象，因此我們將在本教學中使用 LlamaIndex。</p>
 <h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>LLM 輸出品質評估</em></h4><p><a href="https://www.aimon.ai">AIMon</a>提供專屬的判斷模型，用於判斷幻覺、上下文品質問題、LLM 的 Instruction Adherence、Retrieval Quality 及其他 LLM 可靠性任務。我們將使用 AIMon 來判斷 LLM 應用程式的品質。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -185,7 +185,7 @@ oai_client = OpenAI(api_key=openai_key)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>我們將使用<a href="https://meetingbank.github.io/">MeetingBank</a>資料集，這是一個基準資料集，由美國 6 個主要城市的市議會所建立，以補充現有的資料集。它包含 1,366 個會議，超過 3,579 小時的視訊，以及文字記錄、會議記錄 PDF 文件、議程和其他元資料。</p>
+    </button></h1><p>我們將使用<a href="https://meetingbank.github.io/">MeetingBank</a>資料集，這是一個基準資料集，由美國 6 個主要城市的市議會所建立，以補充現有的資料集。它包含 1,366 個會議，超過 3,579 小時的視訊，以及文字記錄、會議記錄的 PDF 文件、議程和其他元資料。</p>
 <p>為了本次練習，我們建立了一個較小的資料集。您可<a href="https://drive.google.com/drive/folders/1v3vJahKtadi_r-8VJAsDd2eaiSRenmsa?usp=drive_link">在此</a>找到。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Delete the dataset folder if it already exists</span>
 
@@ -435,7 +435,7 @@ detect = Detect(
       </svg>
     </button></h1><p>在這第一個簡單的方法中，我們會使用 Levenshtein Distance 來將文件與給定的查詢進行匹配。具有最佳匹配度的前 3 個文件將傳送至 LLM 作為回答的上下文。</p>
 <p><strong>注意：這個單元將需要大約 3 分鐘來執行。</strong></p>
-<p>等待期間請享用您最喜愛的飲料:)</p>
+<p>等待期間請享用您最喜愛的飲料 :)</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> fuzzywuzzy <span class="hljs-keyword">import</span> process
 <span class="hljs-keyword">import</span> time
 
@@ -530,7 +530,7 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
 <p>我們需要注意兩個主要元件：擷取和基於 RAG 的問與答。擷取管道會處理來自 Meeting Bank 資料集的謄本，並將其儲存在 Milvus 向量資料庫中。RAG Q&amp;A 管道會先從向量資料庫中擷取相關文件，以處理使用者的查詢。然後，這些文件將作為 LLM 的基礎文件，以產生其回應。我們利用 AIMon 來計算品質分數，並持續監控應用程式的<a href="https://docs.aimon.ai/detectors/hallucination">幻覺</a>、<a href="https://docs.aimon.ai/detectors/instruction_adherence">指示遵循</a>、<a href="https://docs.aimon.ai/checker-models/context_relevance">上下文相關性</a>。這些都是我們用來定義上述<code translate="no">quality</code> 分數的 3 個相同指標。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
    </span> <span class="img-wrapper"> <span>工作流程</span> </span></p>
 <p>以下是一些預先處理和計算文件嵌入度的實用功能。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -945,7 +945,7 @@ avg_retrieval_rel_score_rr = statistics.mean(avg_retrieval_rel_scores_rr)
 <p>總而言之，如下圖所示，我們展示了以下情況：</p>
 <ul>
 <li>使用 3 種不同品質指標的加權組合計算品質分數：幻覺分數、指示依循分數和檢索相關性分數。</li>
-<li>使用蠻力字串比對的方式建立品質基線，將文件與查詢進行比對，並傳送給 LLM。</li>
+<li>使用蠻力字串比對方法建立品質基線，將文件與查詢進行比對，並傳送給 LLM。</li>
 <li>使用向量資料庫改善基線品質 (在此我們使用 Milvus)</li>
 <li>使用 AIMon 的低延遲、可適應領域的重新排序器，進一步改善品質分數。</li>
 <li>我們也展示了加入 AIMon 的 re-reranker 後，檢索相關性如何顯著改善。</li>
@@ -1035,4 +1035,4 @@ df_scores
   </tbody>
 </table>
 <p>上表總結了我們的結果。您的實際數字會因各種因素而異，例如 LLM 回應品質的變化、VectorDB 中最近鄰搜索的效能等。</p>
-<p>總之，如下圖所示，我們評估了您的 LLM 應用程式的品質分數、RAG 相關性和指令遵循能力。我們使用 AIMon 的 re-reranker 來改善應用程式的整體品質，以及從您的 RAG 擷取文件的平均相關性。</p>
+<p>總而言之，如下圖所示，我們評估了您的 LLM 應用程式的品質分數、RAG 相關性和指令遵循能力。我們使用 AIMon 的 re-reranker 來改善應用程式的整體品質，以及從您的 RAG 擷取文件的平均相關性。</p>

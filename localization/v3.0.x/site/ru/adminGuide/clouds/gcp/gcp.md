@@ -22,7 +22,7 @@ summary: 'Узнайте, как развернуть кластер Milvus на
     </button></h1><p>Milvus - это облачная векторная база данных, которая может быть развернута в различных облачных средах. В этом руководстве вы узнаете все подробности о настройке Milvus на Google Cloud Platform (GCP).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gcp-networking.png" alt="Deploy a Milvus cluster on GCP" class="doc-image" id="deploy-a-milvus-cluster-on-gcp" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gcp-networking.png" alt="Deploy a Milvus cluster on GCP" class="doc-image" id="deploy-a-milvus-cluster-on-gcp" />
    </span> <span class="img-wrapper"> <span>Развертывание кластера Milvus на GCP</span> </span></p>
 <h2 id="Before-you-start" class="common-anchor-header">Прежде чем начать<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,7 +43,7 @@ summary: 'Узнайте, как развернуть кластер Milvus на
 <ul>
 <li><p>В вашем аккаунте GCP уже существует проект.</p>
 <p>Чтобы создать проект, обратитесь к разделу <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Создание и управление проектами</a>. Имя проекта, используемого в этом руководстве, - <strong>milvus-testing-nonprod</strong>.</p></li>
-<li><p>Вы локально установили <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> и <a href="https://helm.sh/docs/intro/install/">Helm</a> или решили использовать браузерную <a href="https://cloud.google.com/shell">Cloud Shell</a>.</p></li>
+<li><p>Вы локально установили <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> и <a href="https://helm.sh/docs/intro/install/">Helm</a> или решили использовать браузерную <a href="https://cloud.google.com/shell">оболочку Cloud Shell</a>.</p></li>
 <li><p>Вы <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">инициализировали gcloud CLI</a> с помощью учетных данных учетной записи GCP.</p></li>
 </ul>
 <h2 id="Set-up-the-network" class="common-anchor-header">Настройка сети<button data-href="#Set-up-the-network" class="anchor-icon" translate="no">
@@ -183,7 +183,7 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/access_key.jpg" alt="GCP Access keys for your user account" class="doc-image" id="gcp-access-keys-for-your-user-account" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/access_key.jpg" alt="GCP Access keys for your user account" class="doc-image" id="gcp-access-keys-for-your-user-account" />
    </span> <span class="img-wrapper"> <span>Ключи доступа к GCP для вашей учетной записи пользователя</span> </span></p>
 <ul>
 <li>Добавьте файл values.yaml</li>

@@ -26,7 +26,7 @@ title: >-
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/apify_milvus_rag.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
 <p>يشرح هذا البرنامج التعليمي كيفية الزحف إلى مواقع الويب باستخدام برنامج Apify لزحف محتوى مواقع الويب وحفظ البيانات في قاعدة بيانات Milvus/Zilliz المتجهة لاستخدامها لاحقًا للإجابة عن الأسئلة.</p>
 <p><a href="https://apify.com/">Apify</a> عبارة عن منصة تجريف واستخراج البيانات من الويب تقدم سوقًا للتطبيقات مع أكثر من ألفي أداة سحابية جاهزة، تُعرف باسم Actors. هذه الأدوات مثالية لحالات الاستخدام مثل استخراج البيانات المهيكلة من مواقع التجارة الإلكترونية، ووسائل التواصل الاجتماعي، ومحركات البحث، والخرائط على الإنترنت، وغيرها.</p>
-<p>على سبيل المثال، يمكن لـ "ممثل <a href="https://apify.com/apify/website-content-crawler">زاحف محتوى الموقع الإلكتروني</a> " الزحف بعمق إلى مواقع الويب، وتنظيف HTML الخاص بها عن طريق إزالة ملفات تعريف الارتباط أو التذييل أو التنقل، ثم تحويل HTML إلى Markdown.</p>
+<p>على سبيل المثال، يمكن لـ "ممثل <a href="https://apify.com/apify/website-content-crawler">زاحف محتوى الموقع الإلكتروني</a> " الزحف بعمق إلى مواقع الويب وتنظيف HTML الخاص بها عن طريق إزالة ملفات تعريف الارتباط أو التذييل أو التنقل، ثم تحويل HTML إلى Markdown.</p>
 <p>يسهّل تكامل Apify لـ Milvus/Zilliz تحميل البيانات من الويب إلى قاعدة بيانات المتجهات.</p>
 <h1 id="Before-you-begin" class="common-anchor-header">قبل أن تبدأ<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,7 +108,7 @@ Enter YOUR OPENAI_API_KEY··········
       </svg>
     </button></h2><p>تحتاج إلى URI والرمز المميز لـ Milvus/Zilliz لإعداد العميل.</p>
 <ul>
-<li>إذا كان لديك خادم Milvus منشور ذاتيًا على <a href="https://milvus.io/docs/quickstart.md">Docker أو Kubernetes،</a> استخدم عنوان الخادم والمنفذ كـ URI الخاص بك، على سبيل المثال<code translate="no">http://localhost:19530</code>. إذا قمت بتمكين ميزة المصادقة على Milvus، استخدم "<your_username>:<your_password>" كرمز مميز، وإلا فاترك الرمز المميز كسلسلة فارغة.</li>
+<li>إذا كان لديك خادم Milvus منشور ذاتيًا على <a href="https://milvus.io/docs/quickstart.md">Docker أو Kubernetes،</a> استخدم عنوان الخادم والمنفذ كـ URI الخاص بك، على سبيل المثال<code translate="no">http://localhost:19530</code>. إذا قمت بتمكين ميزة المصادقة على Milvus، فاستخدم "<your_username>:<your_password>" كرمز مميز، وإلا فاترك الرمز المميز كسلسلة فارغة.</li>
 <li>إذا كنت تستخدم <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، فاضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">نقطة النهاية العامة ومفتاح واجهة برمجة التطبيقات</a> في Zilliz Cloud.</li>
 </ul>
 <p>لاحظ أن المجموعة لا تحتاج إلى أن تكون موجودة مسبقًا. سيتم إنشاؤها تلقائيًا عند تحميل البيانات إلى قاعدة البيانات.</p>
@@ -162,7 +162,7 @@ item[<span class="hljs-number">0</span>].get(<span class="hljs-string">&quot;tex
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'The High-Performance Vector Database Built for Scale\nStart running Milvus in seconds\nfrom pymilvus import MilvusClient client = MilvusClient(&quot;milvus_demo.db&quot;) client.create_collection( collection_name=&quot;demo_collection&quot;, dimension=5 )\nDeployment Options to Match Your Unique Journey\nMilvus Lite\nLightweight, easy to start\nVectorDB-as-a-library runs in notebooks/ laptops with a pip install\nBest for learning and prototyping\nMilvus Standalone\nRobust, single-machine deployment\nComplete vector database for production or testing\nIdeal for datasets with up to millions of vectors\nMilvus Distributed\nScalable, enterprise-grade solution\nHighly reliable and distributed vector database with comprehensive toolkit\nScale horizontally to handle billions of vectors\nZilliz Cloud\nFully managed with minimal operations\nAvailable in both serverless and dedicated cluster\nSaaS and BYOC options for different security and compliance requirements\nTry Free\nLearn more about different Milvus deployment models\nLoved by GenAI developers\nBased on our research, Milvus was selected as the vector database of choice (over Chroma and Pinecone). Milvus is an open-source vector database designed specifically for similarity search on massive datasets of high-dimensional vectors.\nWith its focus on efficient vector similarity search, Milvus empowers you to build robust and scalable image retrieval systems. Whether you’re managing a personal photo library or developing a commercial image search application, Milvus offers a powerful foundation for unlocking the hidden potential within your image collections.\nBhargav Mankad\nSenior Solution Architect\nMilvus is a powerful vector database tailored for processing and searching extensive vector data. It stands out for its high performance and scalability, rendering it perfect for machine learning, deep learning, similarity search tasks, and recommendation systems.\nIgor Gorbenko\nBig Data Architect\nStart building your GenAI app now\nGuided with notebooks developed by us and our community\nRAG\nTry Now\nImage Search\nTry Now\nMultimodal Search\nTry Now\nUnstructured Data Meetups\nJoin a Community of Passionate Developers and Engineers Dedicated to Gen AI.\nRSVP now\nWhy Developers Prefer Milvus for Vector Databases\nScale as needed\nElastic scaling to tens of billions of vectors with distributed architecture.\nBlazing fast\nRetrieve data quickly and accurately with Global Index, regardless of scale.\nReusable Code\nWrite once, and deploy with one line of code into the production environment.\nFeature-rich\nMetadata filtering, hybrid search, multi-vector and more.\nWant to learn more about Milvus? View our documentation\nJoin the community of developers building GenAI apps with Milvus, now with over 25 million downloads\nGet Milvus Updates\nSubscribe to get updates on the latest Milvus releases, tutorials and training from Zilliz, the creator and key maintainer of Milvus.'
 </code></pre>
-<p>لتحميل البيانات إلى قاعدة بيانات Milvus، نستخدم <a href="https://apify.com/apify/milvus-integration">تكامل Apify Milvus</a>. أولاً، نحتاج إلى إعداد المعلمة لقاعدة بيانات Milvus. بعد ذلك، نحدد الحقول (<code translate="no">datasetFields</code>) التي نريد تخزينها في قاعدة البيانات. في المثال أدناه، نقوم بحفظ الحقل <code translate="no">text</code> و <code translate="no">metadata.title</code>.</p>
+<p>لتحميل البيانات إلى قاعدة بيانات Milvus، نستخدم <a href="https://apify.com/apify/milvus-integration">تكامل Apify Milvus</a>. أولاً، نحتاج إلى إعداد المعلمة لقاعدة بيانات Milvus. بعد ذلك، نختار الحقول (<code translate="no">datasetFields</code>) التي نريد تخزينها في قاعدة البيانات. في المثال أدناه، نقوم بحفظ الحقل <code translate="no">text</code> و <code translate="no">metadata.title</code>.</p>
 <pre><code translate="no" class="language-python">milvus_integration_inputs = {
     <span class="hljs-string">&quot;milvusUri&quot;</span>: os.getenv(<span class="hljs-string">&quot;MILVUS_URI&quot;</span>),
     <span class="hljs-string">&quot;milvusToken&quot;</span>: os.getenv(<span class="hljs-string">&quot;MILVUS_TOKEN&quot;</span>),
@@ -179,7 +179,7 @@ item[<span class="hljs-number">0</span>].get(<span class="hljs-string">&quot;tex
     run_input=milvus_integration_inputs
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>يتم الآن تخزين جميع البيانات التي تم كشطها في قاعدة بيانات ميلفوس وهي جاهزة للاسترجاع والإجابة عن الأسئلة</p>
+<p>يتم الآن تخزين جميع البيانات التي تم كشطها في قاعدة بيانات ميلفوس وهي جاهزة للاسترجاع والإجابة على الأسئلة</p>
 <h1 id="Retrieval-and-LLM-generative-pipeline" class="common-anchor-header">الاسترجاع وخط أنابيب توليد LLM<button data-href="#Retrieval-and-LLM-generative-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -239,7 +239,7 @@ rag_chain = (
     | StrOutputParser()
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>بمجرد حصولنا على البيانات في قاعدة البيانات، يمكننا البدء في طرح الأسئلة</p>
+<p>بمجرد أن نحصل على البيانات في قاعدة البيانات، يمكننا البدء في طرح الأسئلة</p>
 <hr>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;What is Milvus database?&quot;</span>
 

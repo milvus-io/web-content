@@ -37,19 +37,19 @@ title: Elaborazione dei dati
     </button></h2><p>È possibile scegliere il numero di shard utilizzati da una collezione in Milvus: ogni shard corrisponde a un canale virtuale<em>(vchannel</em>). Come illustrato di seguito, Milvus assegna ogni <em>vchannel</em> a un canale fisico<em>(pchannel</em>) e ogni <em>pchannel</em> è legato a uno specifico Streaming Node.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/pvchannel_wal.png" alt="VChannel PChannel and StreamingNode" class="doc-image" id="vchannel-pchannel-and-streamingnode" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/pvchannel_wal.png" alt="VChannel PChannel and StreamingNode" class="doc-image" id="vchannel-pchannel-and-streamingnode" />
    </span> <span class="img-wrapper"> <span>Canale v Canale p e nodo di streaming</span> </span></p>
 <p>Dopo la verifica dei dati, il proxy divide il messaggio scritto in vari pacchetti di dati di shard secondo le regole di instradamento degli shard specificate.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/channels_1.png" alt="Channels 1" class="doc-image" id="channels-1" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_1.png" alt="Channels 1" class="doc-image" id="channels-1" />
    </span> <span class="img-wrapper"> <span>Canali 1</span> </span></p>
 <p>Quindi i dati scritti di uno shard<em>(vchannel</em>) vengono inviati al corrispondente Streaming Node di <em>pchannel</em>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/written_data_flow.png" alt="write flow" class="doc-image" id="write-flow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/written_data_flow.png" alt="write flow" class="doc-image" id="write-flow" />
    </span> <span class="img-wrapper"> <span>flusso di scrittura</span> </span></p>
-<p>Il nodo di streaming assegna un Timestamp Oracle (TSO) a ogni pacchetto di dati per stabilire un ordine totale delle operazioni. Esegue controlli di coerenza sul payload prima di scriverlo nel log di scrittura (WAL) sottostante. Una volta che i dati sono impegnati in modo duraturo nel WAL, è garantito che non vadano persi: anche in caso di crash, lo Streaming Node può riprodurre il WAL per recuperare completamente tutte le operazioni in sospeso.</p>
+<p>Il nodo di streaming assegna un Timestamp Oracle (TSO) a ogni pacchetto di dati per stabilire un ordine totale delle operazioni. Esegue controlli di consistenza sul payload prima di scriverlo nel log di scrittura sottostante (WAL). Una volta che i dati sono impegnati in modo duraturo nel WAL, è garantito che non vadano persi: anche in caso di crash, lo Streaming Node può riprodurre il WAL per recuperare completamente tutte le operazioni in sospeso.</p>
 <p>Nel frattempo, lo StreamingNode taglia in modo asincrono le voci del WAL impegnate in segmenti discreti. Esistono due tipi di segmento:</p>
 <ul>
 <li><strong>Segmento in crescita</strong>: tutti i dati che non sono stati inseriti nell'object storage.</li>
@@ -74,7 +74,7 @@ title: Elaborazione dei dati
     </button></h2><p>La costruzione dell'indice viene eseguita dal nodo dati. Per evitare la creazione frequente di indici per gli aggiornamenti dei dati, una raccolta in Milvus è ulteriormente suddivisa in segmenti, ciascuno con il proprio indice.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/index_building.png" alt="Index building" class="doc-image" id="index-building" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/index_building.png" alt="Index building" class="doc-image" id="index-building" />
    </span> <span class="img-wrapper"> <span>Costruzione dell'indice</span> </span></p>
 <p>Milvus supporta la costruzione di indici per ogni campo vettoriale, scalare e primario. Sia l'input che l'output della costruzione dell'indice sono collegati alla memorizzazione degli oggetti: Il nodo dati carica le istantanee del registro da indicizzare da un segmento (che si trova nella memoria degli oggetti) alla memoria, deserializza i dati e i metadati corrispondenti per costruire l'indice, serializza l'indice al termine della costruzione e lo scrive nuovamente nella memoria degli oggetti.</p>
 <p>La costruzione dell'indice coinvolge principalmente operazioni vettoriali e matriciali e quindi richiede molto calcolo e memoria. I vettori non possono essere indicizzati in modo efficiente con i tradizionali indici ad albero, a causa della loro natura altamente dimensionale, ma possono essere indicizzati con tecniche più mature in questo campo, come gli indici a grafo o a cluster. Indipendentemente dal tipo, la costruzione di un indice comporta calcoli iterativi massicci per vettori di grandi dimensioni, come Kmeans o graph traverse.</p>
@@ -98,16 +98,16 @@ title: Elaborazione dei dati
     </button></h2><p>L'interrogazione dei dati si riferisce al processo di ricerca in una collezione specifica del numero <em>k</em> di vettori più vicini a un vettore di destinazione o di <em>tutti i</em> vettori entro un intervallo di distanza specificato dal vettore. I vettori vengono restituiti insieme alla loro chiave primaria e ai campi corrispondenti.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
    </span> <span class="img-wrapper"> <span>Interrogazione dei dati</span> </span></p>
 <p>Una collezione in Milvus è suddivisa in più segmenti; lo Streaming Node carica segmenti crescenti e mantiene i dati in tempo reale, mentre i Query Nodes caricano segmenti sigillati.</p>
-<p>Quando arriva una richiesta di interrogazione/ricerca, il proxy trasmette la richiesta a tutti gli Streaming Node responsabili dei relativi shard per la ricerca simultanea.</p>
+<p>Quando arriva una richiesta di interrogazione/ricerca, il proxy la trasmette a tutti i nodi di streaming responsabili dei relativi shard per una ricerca simultanea.</p>
 <p>Quando arriva una richiesta di interrogazione, il proxy richiede simultaneamente ai nodi di streaming che detengono gli shard corrispondenti di eseguire la ricerca.</p>
-<p>Ciascun nodo di streaming genera un piano di interrogazione, ricerca i propri dati locali in crescita e contatta simultaneamente i nodi di interrogazione remoti per recuperare i risultati storici, quindi li aggrega in un unico risultato dello shard.</p>
+<p>Ogni Streaming Node genera un piano di interrogazione, ricerca i propri dati locali in crescita e contatta simultaneamente i Query Node remoti per recuperare i risultati storici, quindi li aggrega in un unico risultato dello shard.</p>
 <p>Infine, il proxy raccoglie tutti i risultati degli shard, li unisce nel risultato finale e lo restituisce al cliente.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/handoff.png" alt="Handoff" class="doc-image" id="handoff" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/handoff.png" alt="Handoff" class="doc-image" id="handoff" />
    </span> <span class="img-wrapper"> <span>Handoff</span> </span></p>
 <p>Quando il segmento in crescita su un nodo di streaming viene scaricato in un segmento sigillato o quando un nodo dati completa una compattazione, il coordinatore avvia un'operazione di handoff per convertire i dati in crescita in dati storici. Il coordinatore distribuisce quindi in modo uniforme i segmenti sigillati su tutti i nodi di query, bilanciando l'uso della memoria, il sovraccarico della CPU e il numero di segmenti, e rilascia qualsiasi segmento ridondante.</p>
 <h2 id="Whats-next" class="common-anchor-header">Cosa succede dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">

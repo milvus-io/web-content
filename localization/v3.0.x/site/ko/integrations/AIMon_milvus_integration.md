@@ -56,7 +56,7 @@ title: AIMon 및 Milvus로 LLM 애플리케이션의 검색 품질 향상
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>벡터 데이터베이스</em></h4><p>이 애플리케이션에서는 텍스트, 이미지, 동영상과 같은 대규모 비정형 데이터를 관리하고 검색하는 데 <a href="https://milvus.io/">Milvus를</a> 사용합니다.</p>
+    </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>벡터 데이터베이스</em></h4><p>이 애플리케이션에서는 텍스트, 이미지, 동영상과 같은 대규모 비정형 데이터를 관리하고 검색하기 위해 <a href="https://milvus.io/">Milvus를</a> 사용합니다.</p>
 <h4 id="LLM-Framework" class="common-anchor-header"><em>LLM 프레임워크</em></h4><p>LlamaIndex는 오픈 소스 데이터 오케스트레이션 프레임워크로, 개인 데이터와 LLM의 통합을 용이하게 하여 대규모 언어 모델(LLM) 애플리케이션 구축을 간소화하고 검색 증강 생성(RAG) 파이프라인을 통해 문맥 증강 생성 AI 애플리케이션을 가능하게 합니다. 이 튜토리얼에서는 유연성이 뛰어나고 더 나은 하위 수준 API 추상화를 제공하는 LlamaIndex를 사용하겠습니다.</p>
 <h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>LLM 출력 품질 평가</em></h4><p><a href="https://www.aimon.ai">AIMon은</a> 환각, 컨텍스트 품질 문제, LLM의 명령어 준수, 검색 품질 및 기타 LLM 신뢰성 작업에 대한 독점적인 판정 모델을 제공합니다. 저희는 AIMon을 사용하여 LLM 애플리케이션의 품질을 판단합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
@@ -87,7 +87,7 @@ title: AIMon 및 Milvus로 LLM 애플리케이션의 검색 품질 향상
 <li>AIMON_API_KEY</li>
 </ul>
 <ol start="2">
-<li><a href="https://platform.openai.com/docs/overview">여기에서 OpenAI 계정을</a> 등록하고 Colab 비밀키에 다음 키를 추가합니다:</li>
+<li><a href="https://platform.openai.com/docs/overview">여기에서 OpenAI 계정에</a> 가입하고 Colab 비밀키에 다음 키를 추가합니다:</li>
 </ol>
 <ul>
 <li>OPENAI_API_KEY</li>
@@ -510,7 +510,7 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Average retrieval relevance score for brute force approach: 14.31772340191865
 </code></pre>
-<p>이것은 <strong>기본</strong> LLM 앱 품질 점수입니다. 환각 점수 등 AIMon이 계산한 개별 지표도 AIMon <a href="https://www.app.aimon.ai/llmapps?source=sidebar&amp;stage=production">UI에서</a> 확인할 수 있습니다.</p>
+<p>이것은 <strong>기본</strong> LLM 앱 품질 점수입니다. 환각 점수 등과 같은 개별 지표는 AIMon <a href="https://www.app.aimon.ai/llmapps?source=sidebar&amp;stage=production">UI에서 AI</a>Mon이 계산한 결과도 확인할 수 있습니다.</p>
 <h1 id="2-Use-a-VectorDB-Milvus-for-document-retrieval" class="common-anchor-header">2. 문서 검색에 벡터DB(Milvus) 사용<button data-href="#2-Use-a-VectorDB-Milvus-for-document-retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -526,11 +526,11 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이제 벡터 DB를 추가하여 품질 점수를 개선합니다. 이는 이전 방식에 비해 쿼리 지연 시간 개선에도 도움이 될 것입니다.</p>
+    </button></h1><p>이제 벡터 DB를 추가하여 품질 점수를 개선합니다. 이는 이전 방식에 비해 쿼리 지연 시간을 개선하는 데에도 도움이 될 것입니다.</p>
 <p>우리가 알아야 할 두 가지 주요 구성 요소가 있습니다: 수집과 RAG 기반 Q&amp;A입니다. 수집 파이프라인은 미팅 뱅크 데이터 세트의 트랜스크립트를 처리하여 Milvus 벡터 데이터베이스에 저장합니다. RAG Q&amp;A 파이프라인은 먼저 벡터 스토어에서 관련 문서를 검색하여 사용자 쿼리를 처리합니다. 그런 다음 이 문서들은 LLM이 답변을 생성하기 위한 근거 문서로 사용됩니다. AIMon을 활용하여 품질 점수를 계산하고, 애플리케이션에 대한 <a href="https://docs.aimon.ai/detectors/hallucination">환각</a>, , <a href="https://docs.aimon.ai/detectors/instruction_adherence">지침 준수</a>, <a href="https://docs.aimon.ai/checker-models/context_relevance">문맥 관련성을</a> 지속적으로 모니터링합니다. 이는 위의 <code translate="no">quality</code> 점수를 정의하는 데 사용한 것과 동일한 3가지 지표입니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
    </span> <span class="img-wrapper"> <span>워크플로</span> </span></p>
 <p>다음은 문서 임베딩을 전처리하고 계산하는 몇 가지 유틸리티 함수입니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -837,7 +837,7 @@ avg_retrieval_rel_score_vdb = statistics.mean(avg_retrieval_rel_scores_vdb)
         ></path>
       </svg>
     </button></h1><p>이제 AIMon의 LlamaIndex <a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">포스트프로세서 리랭크 통합을</a> 사용하여 AIMon의 <a href="https://docs.aimon.ai/retrieval#domain-adaptable-re-ranking">도메인 적응형 리랭커를</a> 추가하겠습니다.</p>
-<p>아래 그림과 같이 리랭크는 고급 쿼리-문서 매칭 기능을 사용하여 가장 관련성이 높은 문서를 상위로 끌어올리는 데 도움이 됩니다. AIMon의 리랭크 기능은 도메인별로 사용자 지정할 수 있다는 점이 가장 큰 특징입니다. 엔지니어가 LLM에 메시지를 표시하는 것과 마찬가지로 <code translate="no">task_definition</code> 필드를 사용하여 도메인별로 리랭크 성능을 사용자 지정할 수 있습니다. 이 최신 리랭커는 1초 미만의 매우 짧은 지연 시간(~2k 컨텍스트의 경우)으로 실행되며 MTEB 리랭킹 리더보드에서 상위 5위 안에 드는 성능을 자랑합니다.</p>
+<p>아래 그림과 같이 리랭크는 고급 쿼리-문서 매칭 기능을 사용하여 가장 관련성이 높은 문서를 상위로 끌어올리는 데 도움이 됩니다. AIMon의 리랭크 기능은 도메인별로 사용자 지정할 수 있다는 점이 가장 큰 특징입니다. 엔지니어가 LLM에 메시지를 표시하는 것과 유사하게 <code translate="no">task_definition</code> 필드를 사용하여 도메인별로 리랭크 성능을 사용자 지정할 수 있습니다. 이 최신 리랭커는 1초 미만의 매우 짧은 지연 시간(~2k 컨텍스트의 경우)으로 실행되며 MTEB 리랭킹 리더보드에서 상위 5위 안에 드는 성능을 자랑합니다.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/devvratbhardwaj/images/refs/heads/main/AIMon_Reranker.svg" alt="Diagram depicting working of AIMon reranker"/></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Setup AIMon&#x27;s reranker</span>
 

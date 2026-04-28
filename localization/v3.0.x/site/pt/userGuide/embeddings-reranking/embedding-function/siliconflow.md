@@ -55,7 +55,7 @@ beta: Milvus 2.6.x
      <td><p>BAAI/bge-large-en-v1.5</p></td>
      <td><p>1,024</p></td>
      <td><p>512</p></td>
-     <td><p>Um modelo de incorporação de texto em inglês de grandes dimensões, que faz parte da série BGE (BAAI General Embedding).</p></td>
+     <td><p>Um modelo grande de incorporação de texto em inglês, que faz parte da série BGE (BAAI General Embedding).</p></td>
    </tr>
    <tr>
      <td><p>netease-youdao/bce-embedding-base_v1</p></td>
@@ -126,7 +126,7 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>Colocar as chaves da API aqui torna-as persistentes através de reinicializações e permite-lhe mudar de chave apenas mudando uma etiqueta.</p></li>
+<p>Colocar as chaves da API aqui torna-as persistentes através de reinicializações e permite-lhe mudar de chave apenas alterando uma etiqueta.</p></li>
 <li><p><strong>Diga ao Milvus qual chave usar para chamadas de serviço</strong></p>
 <p>No mesmo ficheiro, aponte o fornecedor SiliconFlow para a etiqueta que pretende utilizar.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
@@ -154,7 +154,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h3><p>Utilize este método quando executar o Milvus com o Docker Compose e preferir manter os segredos fora dos ficheiros e imagens.</p>
-<p>O Milvus recorre à variável de ambiente apenas se não for encontrada nenhuma chave para o fornecedor em <code translate="no">milvus.yaml</code>.</p>
+<p>O Milvus recorre à variável de ambiente apenas se nenhuma chave para o provedor for encontrada em <code translate="no">milvus.yaml</code>.</p>
 <table>
    <tr>
      <th><p>Variável</p></th>
@@ -176,7 +176,7 @@ beta: Milvus 2.6.x
     <span class="hljs-comment"># Set the environment variable pointing to the SiliconFlow API key inside the container</span>
     <span class="hljs-attr">MILVUSAI_SILICONFLOW_API_KEY:</span> <span class="hljs-string">&lt;MILVUSAI_SILICONFLOW_API_KEY&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>O bloco <code translate="no">environment:</code> injecta a chave apenas no contentor do Milvus, deixando o seu SO anfitrião intacto. Para obter detalhes, consulte <a href="/docs/pt/configure-docker.md#Configure-Milvus-with-Docker-Compose">Configurar o Milvus com o Docker Compose</a>.</p>
+<p>O bloco <code translate="no">environment:</code> injecta a chave apenas no contentor Milvus, deixando o seu SO anfitrião intacto. Para obter detalhes, consulte <a href="/docs/pt/configure-docker.md#Configure-Milvus-with-Docker-Compose">Configurar o Milvus com o Docker Compose</a>.</p>
 <h2 id="Use-embedding-function" class="common-anchor-header">Usar a função de incorporação<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -41,7 +41,7 @@ gemini_ef = model.dense.GeminiEmbeddingFunction(
 <li><p><strong>config</strong><em>（type.EmbedContentConfig</em>）嵌入模型的可选配置。</p>
 <ul>
 <li><strong>output_dimensionality</strong>可以指定输出嵌入的数量。</li>
-<li>可以指定<strong>task_type</strong>，以便为特定任务生成优化的嵌入模型，从而节省时间和成本并提高性能。仅支持<strong>gemini-embedding-exp-03-07</strong>模型。</li>
+<li>可以指定<strong>task_type（任务类型</strong>），以便为特定任务生成优化的嵌入模型，从而节省时间和成本并提高性能。仅支持<strong>gemini-embedding-exp-03-07</strong>模型。</li>
 </ul></li>
 </ul>
 <table>

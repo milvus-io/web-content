@@ -21,20 +21,80 @@ summary: AWS의 Layer-7 로드 밸런서 뒤에 Milvus 클러스터를 배포하
       </svg>
     </button></h1><p>레이어 4 로드 밸런서와 비교할 때, 레이어 7 로드 밸런서는 스마트한 로드 밸런싱 및 캐싱 기능을 제공하며 클라우드 네이티브 서비스에 적합한 선택입니다.</p>
 <p>이 가이드에서는 이미 레이어 4 로드 밸런서 뒤에서 실행 중인 Milvus 클러스터를 위한 레이어 7 로드 밸런서 설정 방법을 안내합니다.</p>
-<h3 id="Before-your-start" class="common-anchor-header">시작하기 전</h3><ul>
+<h3 id="Before-your-start" class="common-anchor-header">시작하기 전<button data-href="#Before-your-start" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><a href="/docs/ko/eks.md">AWS의 레이어 4 로드 밸런서 뒤에 Milvus 클러스터를 배포했습니다</a>.</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Milvus 구성 조정</h3><p>이 가이드에서는 <a href="/docs/ko/eks.md">AWS의 Layer-4 로드 밸런서 뒤에 Milvus 클러스터를</a> 이미 <a href="/docs/ko/eks.md">배포했다고</a> 가정합니다.</p>
-<p>이 Milvus 클러스터에 대해 Layer-7 로드 밸런서를 설정하기 전에 다음 명령을 실행하여 Layer-4 로드 밸런서를 제거하세요.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Milvus 구성 조정<button data-href="#Tweak-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이 가이드에서는 <a href="/docs/ko/eks.md">AWS의 Layer-4 로드 밸런서 뒤에 Milvus 클러스터를</a> 이미 <a href="/docs/ko/eks.md">배포했다고</a> 가정합니다.</p>
+<p>이 Milvus 클러스터에 대해 레이어 7 로드 밸런서를 설정하기 전에 다음 명령을 실행하여 레이어 4 로드 밸런서를 제거하세요.</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-TLS-certificates" class="common-anchor-header">TLS 인증서 준비</h3><p>TLS가 작동하려면 인증서가 필요합니다. <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">ACM을</a> 사용하여 인증서를 관리하고 있으므로 기존 인증서를 ACM으로 가져와야 합니다. <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate-api-cli.html#import-certificate-api">인증서 가져오기를</a> 참조하세요. 다음은 예시입니다.</p>
+<h3 id="Prepare-TLS-certificates" class="common-anchor-header">TLS 인증서 준비<button data-href="#Prepare-TLS-certificates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>TLS가 작동하려면 인증서가 필요합니다. <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">ACM을</a> 사용하여 인증서를 관리하고 있으므로 기존 인증서를 ACM으로 가져와야 합니다. <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate-api-cli.html#import-certificate-api">인증서 가져오기를</a> 참조하세요. 다음은 예시입니다.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># If the import-certificate command is successful, it returns the arn of the imported certificate.</span>
 aws acm import-certificate --certificate fileb://Certificate.pem \
       --certificate-chain fileb://CertificateChain.pem \
       --private-key fileb://PrivateKey.pem  
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">인그레스를 생성하여 레이어 7 로드 밸런서 생성하기</h3><p>다음과 같이 인그레스 파일을 준비하고 이름을 <code translate="no">ingress.yaml</code> 으로 지정합니다. <strong>인증서 arn과 호스트를 자신의 인증서로 바꾸세요.</strong></p>
+<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">인그레스를 생성하여 레이어 7 로드 밸런서 생성하기<button data-href="#Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음과 같이 인그레스 파일을 준비하고 이름을 <code translate="no">ingress.yaml</code> 으로 지정합니다. <strong>인증서 arn과 호스트를 자신의 인증서로 바꾸세요.</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
 <span class="hljs-attr">metadata:</span>

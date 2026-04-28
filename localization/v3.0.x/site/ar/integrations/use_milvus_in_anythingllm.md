@@ -1,8 +1,9 @@
 ---
 id: use_milvus_in_anythingllm.md
 summary: >-
-  سيرشدك هذا الدليل خلال تهيئة Milvus كقاعدة بيانات المتجهات في AnythingLLLM،
-  مما يتيح لك تضمين مستنداتك وتخزينها والبحث فيها لاسترجاعها والدردشة الذكية.
+  سيرشدك هذا الدليل إلى كيفية تكوين Milvus كقاعدة بيانات المتجهات في
+  AnythingLLLM، مما يتيح لك تضمين مستنداتك وتخزينها والبحث فيها لاسترجاعها
+  والدردشة الذكية.
 title: استخدام Milvus في AnythingLLLM
 ---
 <h1 id="Use-Milvus-in-AnythingLLM" class="common-anchor-header">استخدام Milvus في AnythingLLLM<button data-href="#Use-Milvus-in-AnythingLLM" class="anchor-icon" translate="no">
@@ -66,19 +67,19 @@ title: استخدام Milvus في AnythingLLLM
 <li>افتح AnythingLLLM وانقر على أيقونة <strong>الإعدادات</strong> في الزاوية اليسرى السفلى<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_dashboard.png" alt="Open Settings" class="doc-image" id="open-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_dashboard.png" alt="Open Settings" class="doc-image" id="open-settings" />
    </span> <span class="img-wrapper"> <span>افتح الإعدادات</span> </span></li>
 </ol>
 <ol start="2">
 <li><p>في القائمة اليسرى، حدد <code translate="no">AI Providers</code> &gt; <code translate="no">Vector Database</code> <br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_config.png" alt="Select Vector Database" class="doc-image" id="select-vector-database" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_config.png" alt="Select Vector Database" class="doc-image" id="select-vector-database" />
    </span> <span class="img-wrapper"> <span>حدد قاعدة بيانات المتجهات</span> </span></p></li>
 <li><p>في القائمة المنسدلة موفر قاعدة بيانات المتجهات، حدد <strong>ميلفوس</strong> (أو زيليز كلاود)<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_vectordb.png" alt="Choose Milvus" class="doc-image" id="choose-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_vectordb.png" alt="Choose Milvus" class="doc-image" id="choose-milvus" />
    </span> <span class="img-wrapper"> <span>اختر ميلفوس</span> </span></p></li>
 <li><p>املأ تفاصيل اتصال Milvus الخاص بك (لـ Milvus المحلي). إليك مثال على ذلك</p>
 <ul>
@@ -87,16 +88,16 @@ title: استخدام Milvus في AnythingLLLM
 <li><strong>كلمة مرور ميلفوس</strong>: <code translate="no">Milvus</code>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_milvus.png" alt="Milvus Connection" class="doc-image" id="milvus-connection" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_milvus.png" alt="Milvus Connection" class="doc-image" id="milvus-connection" />
    </span> <span class="img-wrapper"> <span>اتصال ميلفوس</span> </span></li>
 </ul>
 <blockquote>
-<p>إذا كنت تستخدم Zilliz Cloud، أدخل نقطة نهاية المجموعة ورمز API بدلاً من ذلك:</p>
-</blockquote>
-<p>
+<p>إذا كنت تستخدم Zilliz Cloud، أدخل نقطة نهاية المجموعة ورمز API بدلاً من ذلك:<br>
+
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_zilliz_cloud.png" alt="Zilliz Cloud Connection" class="doc-image" id="zilliz-cloud-connection" />
-   </span> <span class="img-wrapper"> <span>اتصال زيليز كلاود</span> </span></p></li>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_zilliz_cloud.png" alt="Zilliz Cloud Connection" class="doc-image" id="zilliz-cloud-connection" />
+   </span> <span class="img-wrapper"> <span>اتصال زيليز كلاود</span> </span></p>
+</blockquote></li>
 <li><p>انقر على <strong>حفظ التغييرات</strong> لتطبيق إعداداتك.</p></li>
 </ol>
 <hr>
@@ -119,7 +120,7 @@ title: استخدام Milvus في AnythingLLLM
 <li><p>أدخل مساحة العمل الخاصة بك وانقر على أيقونة <strong>التحميل</strong> لفتح مربع حوار تحميل المستندات<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_upload_file.png" alt="Open Upload Dialog" class="doc-image" id="open-upload-dialog" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_upload_file.png" alt="Open Upload Dialog" class="doc-image" id="open-upload-dialog" />
    </span> <span class="img-wrapper"> <span>افتح مربع حوار التحميل</span> </span></p></li>
 <li><p>يمكنك تحميل مجموعة متنوعة من مصادر البيانات:</p>
 <ul>
@@ -128,17 +129,17 @@ title: استخدام Milvus في AnythingLLLM
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_upload_interface.png" alt="Upload Documents" class="doc-image" id="upload-documents" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_upload_interface.png" alt="Upload Documents" class="doc-image" id="upload-documents" />
    </span> <span class="img-wrapper"> <span>تحميل المستندات</span> </span></p></li>
 <li><p>بعد الرفع أو الجلب، انقر على <strong>نقل إلى مساحة العمل</strong> لنقل المستند أو البيانات إلى مساحة العمل الحالية<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_move_to_workspace.png" alt="Move to Workspace" class="doc-image" id="move-to-workspace" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_move_to_workspace.png" alt="Move to Workspace" class="doc-image" id="move-to-workspace" />
    </span> <span class="img-wrapper"> <span>نقل إلى مساحة العمل</span> </span></p></li>
 <li><p>حدد المستند أو البيانات وانقر على <strong>حفظ وتضمين</strong>. سيقوم برنامج AnythingLLLM تلقائيًا بتقطيع المحتوى الخاص بك وتضمينه وتخزينه في ملفوس<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_save_and_embed.png" alt="Save and Embed" class="doc-image" id="save-and-embed" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_save_and_embed.png" alt="Save and Embed" class="doc-image" id="save-and-embed" />
    </span> <span class="img-wrapper"> <span>الحفظ والتضمين</span> </span></p></li>
 </ol>
 <hr>
@@ -158,10 +159,10 @@ title: استخدام Milvus في AnythingLLLM
         ></path>
       </svg>
     </button></h2><ol>
-<li>العودة إلى واجهة الدردشة في مساحة العمل وطرح الأسئلة. سيقوم AnythingLLLLM بالبحث في قاعدة بيانات Milvus vector الخاصة بك عن المحتوى ذي الصلة واستخدام LLM لإنشاء الإجابات<br>
+<li>ارجع إلى واجهة دردشة مساحة العمل واطرح الأسئلة. سيقوم AnythingLLLLM بالبحث في قاعدة بيانات Milvus vector الخاصة بك عن المحتوى ذي الصلة واستخدام LLM لإنشاء الإجابات<br>
 
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_chat.png" alt="Chat with Docs" class="doc-image" id="chat-with-docs" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/anythingllm_chat.png" alt="Chat with Docs" class="doc-image" id="chat-with-docs" />
    </span> <span class="img-wrapper"> <span>الدردشة مع المستندات</span> </span></li>
 </ol>
 <hr>

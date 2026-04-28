@@ -85,7 +85,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>من أجل إعداد أبسط، يمكنك اختيار استخدام المُحلِّل <a href="/docs/ar/standard-analyzer.md"><code translate="no">standard</code></a> <a href="/docs/ar/standard-analyzer.md">المحلّل،</a> والذي يجمع بين أداة الترميز <code translate="no">standard</code> مع أداة التصفية <a href="/docs/ar/lowercase-filter.md"><code translate="no">lowercase</code></a> مع <a href="/docs/ar/lowercase-filter.md"> الفلتر</a>.</p>
+<p>لإعدادٍ أبسط، يمكنك اختيار استخدام المُحلِّل <a href="/docs/ar/standard-analyzer.md"><code translate="no">standard</code></a> <a href="/docs/ar/standard-analyzer.md">المحلّل،</a> والذي يجمع بين أداة الترميز <code translate="no">standard</code> مع أداة التصفية <a href="/docs/ar/lowercase-filter.md"><code translate="no">lowercase</code></a> مع <a href="/docs/ar/lowercase-filter.md"> الفلتر</a>.</p>
 </div>
 <p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح هذا لميلفوس بمعالجة النص في هذا الحقل باستخدام المحلل المحدد لترميز وتصفية فعالة. لمزيد من التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md#Example-use">مثال الاستخدام</a>.</p>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">

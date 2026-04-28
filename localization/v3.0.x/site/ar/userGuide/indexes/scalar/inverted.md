@@ -41,7 +41,7 @@ summary: >-
     </button></h2><p>استخدم الفهارس المقلوبة عندما تحتاج إلى:</p>
 <ul>
 <li><p><strong>التصفية حسب قيم محددة</strong>: البحث عن جميع السجلات التي يساوي فيها حقل ما قيمة محددة (على سبيل المثال، <code translate="no">category == &quot;electronics&quot;</code>)</p></li>
-<li><p><strong>تصفية المحتوى النصي</strong>: إجراء عمليات بحث فعالة على حقول <code translate="no">VARCHAR</code> </p></li>
+<li><p><strong>تصفية المحتوى النصي</strong>: إجراء عمليات بحث فعالة على <code translate="no">VARCHAR</code> الحقول</p></li>
 <li><p><strong>الاستعلام عن قيم حقول JSON</strong>: تصفية على مفاتيح محددة داخل هياكل JSON</p></li>
 </ul>
 <p><strong>فائدة الأداء</strong>: يمكن للفهارس INVERTED تقليل وقت الاستعلام من ثوانٍ إلى أجزاء من الثانية على مجموعات البيانات الكبيرة من خلال إلغاء الحاجة إلى عمليات مسح المجموعة الكاملة.</p>
@@ -69,7 +69,7 @@ summary: >-
 <p>على سبيل المثال، يتم تعيين القيمة <strong>"إلكترونيات"</strong> إلى المعرفين <strong>1</strong> <strong>و3،</strong> بينما يتم تعيين <strong>"كتب"</strong> إلى المعرفين <strong>2</strong> <strong>و5</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
    </span> <span class="img-wrapper"> <span>كيف يعمل الفهرس المعكوس</span> </span></p>
 <p>عندما تقوم بالتصفية بحثًا عن قيمة معينة (على سبيل المثال، <code translate="no">category == &quot;electronics&quot;</code>)، يبحث Milvus ببساطة عن المصطلح في الفهرس ويسترجع المعرفات المطابقة مباشرة. هذا يتجنب مسح مجموعة البيانات الكاملة ويتيح التصفية السريعة، خاصةً للقيم الفئوية أو المتكررة.</p>
 <p>تدعم الفهارس INVERTED جميع أنواع الحقول القياسية، مثل <strong>BOOL</strong> و <strong>INT8</strong> و <strong>INT16</strong> و <strong>INT16</strong> و <strong>INT32</strong> و <strong>INT64</strong> و <strong>FLOAT و FLOAT</strong> و <strong>DOUBLE</strong> و <strong>VARCHAR</strong> و <strong>JSON</strong> و <strong>ARRAY</strong>. ومع ذلك، فإن معلمات الفهرس لفهرسة حقل JSON تختلف قليلاً عن الحقول العددية العادية.</p>
@@ -165,7 +165,7 @@ client.create_index(
 <div class="alert note">
 <ul>
 <li><p>في الإصدار <strong>2.6.3 أو الإصدار 2.6.3</strong> أو الإصدار الأقدم، يجب عليك تحرير المجموعة قبل إسقاط فهرس قياسي.</p></li>
-<li><p>بدءًا من الإصدار <strong>2.6.4</strong> أو الإصدار الأحدث، يمكنك إسقاط فهرس تعدادي مباشرةً بمجرد عدم الحاجة إليه - لا حاجة لتحرير المجموعة أولاً.</p></li>
+<li><p>اعتبارًا من الإصدار <strong>2.6.4</strong> أو الإصدار الأحدث، يمكنك إسقاط فهرس تعدادي مباشرةً بمجرد عدم الحاجة إليه - لا حاجة لتحرير المجموعة أولاً.</p></li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python">client.drop_index(

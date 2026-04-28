@@ -122,7 +122,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Esta secção fornece uma visão geral dos parâmetros utilizados para criar um índice e efetuar pesquisas no índice.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parâmetros de construção do índice</h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">params</code> ao <a href="/docs/pt/bin-ivf-flat.md#Index-building-params">construir um índice</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parâmetros de construção do índice<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">params</code> ao <a href="/docs/pt/bin-ivf-flat.md#Index-building-params">construir um índice</a>.</p>
 <table>
    <tr>
      <th><p>Parâmetro</p></th>
@@ -132,13 +147,28 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>O número de clusters a criar utilizando o algoritmo k-means durante a construção do índice. Cada cluster, representado por um centróide, armazena uma lista de vectores. Aumentar este parâmetro reduz o número de vectores em cada cluster, criando partições mais pequenas e mais focadas.</p></td>
+     <td><p>O número de clusters a criar utilizando o algoritmo k-means durante a construção do índice. Cada cluster, representado por um centróide, armazena uma lista de vectores. O aumento deste parâmetro reduz o número de vectores em cada cluster, criando partições mais pequenas e mais focadas.</p></td>
      <td><p><strong>Tipo</strong>: Integer <strong>Intervalo</strong>: [1, 65536]</p>
 <p><strong>Valor padrão</strong>: <code translate="no">128</code></p></td>
      <td><p>Valores maiores <code translate="no">nlist</code> melhoram a recuperação, criando clusters mais refinados, mas aumentam o tempo de construção do índice. Optimize com base no tamanho do conjunto de dados e nos recursos disponíveis. Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parâmetros de pesquisa específicos do índice</h3><p>A tabela a seguir lista os parâmetros que podem ser configurados em <code translate="no">search_params.params</code> ao <a href="/docs/pt/bin-ivf-flat.md#Search-on-index">pesquisar no índice</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parâmetros de pesquisa específicos do índice<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>A tabela a seguir lista os parâmetros que podem ser configurados em <code translate="no">search_params.params</code> ao <a href="/docs/pt/bin-ivf-flat.md#Search-on-index">pesquisar no índice</a>.</p>
 <table>
    <tr>
      <th><p>Parâmetro</p></th>

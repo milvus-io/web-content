@@ -159,7 +159,7 @@ beta: Milvus 2.6.x
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
    </span> <span class="img-wrapper"> <span>Descripción general de la función de incrustación</span> </span></p>
 <h2 id="Configure-credentials" class="common-anchor-header">Configurar credenciales<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -182,12 +182,12 @@ beta: Milvus 2.6.x
 <li><p><strong>Archivo de configuración</strong> (<code translate="no">milvus.yaml</code>):</p>
 <p>El ejemplo de este tema muestra la <strong>configuración recomendada</strong> utilizando <code translate="no">milvus.yaml</code>.</p></li>
 <li><p><strong>Variables de entorno</strong>:</p>
-<p>Para obtener detalles sobre la configuración de credenciales mediante variables de entorno, consulte la documentación del proveedor del servicio de incrustación (por ejemplo, <a href="/docs/es/openai.md">OpenAI</a> o <a href="/docs/es/azure-openai.md">Azure OpenAI</a>).</p></li>
+<p>Para obtener más información sobre la configuración de credenciales mediante variables de entorno, consulte la documentación del proveedor del servicio de incrustación (por ejemplo, <a href="/docs/es/openai.md">OpenAI</a> o <a href="/docs/es/azure-openai.md">Azure OpenAI</a>).</p></li>
 </ul>
 <p>El siguiente diagrama muestra el proceso de configuración de credenciales a través del archivo de configuración de Milvus (<code translate="no">milvus.yaml</code>) y luego llamando a la Función dentro de Milvus.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
    </span> <span class="img-wrapper"> <span>Desbordamiento de configuración de credenciales</span> </span></p>
 <h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Paso 1: Agregar credenciales al archivo de configuración de Milvus<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -294,7 +294,7 @@ beta: Milvus 2.6.x
     </button></h3><p>Para utilizar una función de incrustación, cree una colección con un esquema específico. Este esquema debe incluir al menos tres campos necesarios:</p>
 <ul>
 <li><p>El <strong>campo primario</strong> que identifica de forma única a cada entidad de una colección.</p></li>
-<li><p>Un <strong>campo escalar</strong> que almacene los datos brutos que se van a incrustar.</p></li>
+<li><p>Un <strong>campo escalar</strong> que almacena los datos brutos que se van a incrustar.</p></li>
 <li><p>Un <strong>campo vectorial</strong> reservado para almacenar las incrustaciones vectoriales que la función generará para el campo escalar.</p></li>
 </ul>
 <p>El siguiente ejemplo define un esquema con un campo escalar <code translate="no">&quot;document&quot;</code> para almacenar datos textuales y un campo vectorial <code translate="no">&quot;dense&quot;</code> para almacenar las incrustaciones que generará el módulo Función. Recuerde ajustar la dimensión del vector (<code translate="no">dim</code>) para que coincida con la salida del modelo de incrustación elegido.</p>
@@ -667,7 +667,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sí, puede utilizar vectores de consulta precalculados en lugar de texto sin procesar para la búsqueda de similitudes. Aunque el módulo Function convierte automáticamente las consultas de texto sin procesar en incrustaciones, también puede proporcionar directamente datos vectoriales al parámetro <code translate="no">data</code> en su operación de búsqueda. <strong>Nota</strong>: El tamaño del vector de consulta proporcionado debe coincidir con el tamaño de las incrustaciones vectoriales generadas por el módulo Function.</p>
+    </button></h3><p>Sí, puede utilizar vectores de consulta precalculados en lugar de texto sin procesar para la búsqueda de similitudes. Aunque el módulo Function convierte automáticamente las consultas de texto sin procesar en incrustaciones, también puede proporcionar directamente datos vectoriales al parámetro <code translate="no">data</code> en su operación de búsqueda. <strong>Nota</strong>: el tamaño del vector de consulta proporcionado debe coincidir con el tamaño de las incrustaciones vectoriales generadas por el módulo Function.</p>
 <p><strong>Ejemplo</strong></p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

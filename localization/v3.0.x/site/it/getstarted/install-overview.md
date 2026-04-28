@@ -103,11 +103,11 @@ title: Panoramica delle opzioni di distribuzione di Milvus
 <ul>
 <li><strong>Milvus Lite</strong> è consigliato per insiemi di dati più piccoli, fino a pochi milioni di vettori.</li>
 <li><strong>Milvus Standalone</strong> è adatto a insiemi di dati di medie dimensioni, fino a 100 milioni di vettori.</li>
-<li><strong>Milvus Distributed</strong> è progettato per implementazioni su larga scala, in grado di gestire insiemi di dati da 100 milioni a decine di miliardi di vettori.</li>
+<li><strong>Milvus Distributed</strong> è progettato per distribuzioni su larga scala, in grado di gestire insiemi di dati da 100 milioni a decine di miliardi di vettori.</li>
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" />
    </span> <span class="img-wrapper"> <span>Selezionare l'opzione di distribuzione per il proprio caso d'uso</span> </span></p>
 <h2 id="Comparison-on-functionalities" class="common-anchor-header">Confronto sulle funzionalità<button data-href="#Comparison-on-functionalities" class="anchor-icon" translate="no">
       <svg translate="no"

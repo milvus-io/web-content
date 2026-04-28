@@ -104,7 +104,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Milvus は、埋め込みを要求する前に Cohere API キーを知る必要があります。Milvusは、クレデンシャルを設定するための2つの方法を提供します：</p>
 <ul>
-<li><p><strong>設定ファイル（推奨）：</strong> <code translate="no">milvus.yaml</code> に API キーを保存し、再起動やノードが自動的に API キーを取得するようにします。</p></li>
+<li><p><strong>設定ファイル（推奨）：</strong> <code translate="no">milvus.yaml</code> に API キーを保存し、再起動するたびにノードが自動的に API キーを取得するようにします。</p></li>
 <li><p><strong>環境変数：</strong>Docker Composeに最適です。</p></li>
 </ul>
 <p>コンフィギュレーション・ファイルはベアメタルやVMでメンテナンスしやすく、env-varルートはコンテナのワークフローに適している。</p>
@@ -137,9 +137,9 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>APIキーをここに記述することで、再起動後もAPIキーが保持され、ラベルを変更するだけでAPIキーを切り替えることができます。</p></li>
+<p>ここにAPIキーを記述することで、再起動後もAPIキーが保持され、ラベルを変更するだけでAPIキーを切り替えることができます。</p></li>
 <li><p><strong>MilvusにOpenAIの呼び出しに使うキーを教える</strong></p>
-<p>同じファイルで、Cohere プロバイダーに使用したいラベルを指定します。</p>
+<p>同じファイルで、Cohereプロバイダーに使用したいラベルを指定します。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>

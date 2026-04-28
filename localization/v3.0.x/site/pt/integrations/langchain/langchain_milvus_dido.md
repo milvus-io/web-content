@@ -29,7 +29,7 @@ title: Integração da função de incorporação de texto do Milvus com a LangC
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/langchain_milvus_dido.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>Este guia demonstra como usar a <strong>função de incorporação de texto</strong> do Milvus 2.6 (também conhecida como Data In Data Out) com LangChain. Esta funcionalidade permite que o servidor Milvus converta automaticamente texto em bruto em embeddings vectoriais, simplificando o código do lado do cliente e centralizando a gestão de chaves API.</p>
+<p>Este guia demonstra como usar a <strong>função de incorporação</strong> de texto do Milvus 2.6 (também conhecida como Data In Data Out) com LangChain. Esta funcionalidade permite que o servidor Milvus converta automaticamente texto em bruto em embeddings vectoriais, simplificando o código do lado do cliente e centralizando a gestão de chaves API.</p>
 <p><a href="https://milvus.io/">O Milvus</a> é o banco de dados vetorial de código aberto mais avançado do mundo, criado especificamente para oferecer suporte à pesquisa de similaridade de incorporação e aplicativos de IA. <a href="https://www.langchain.com/">LangChain</a> é uma estrutura para o desenvolvimento de aplicações alimentadas por modelos de linguagem de grande dimensão (LLMs). Ao integrar a função de incorporação de texto do Milvus, pode obter uma solução de pesquisa vetorial mais simples e eficiente nas suas aplicações LangChain.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -250,7 +250,7 @@ vector_store = Milvus(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Este é o caso de utilização mais simples, confiando completamente no servidor Milvus para gerar as incorporações. O cliente não necessita de qualquer função de incorporação.</p>
+    </button></h3><p>Este é o caso de utilização mais simples, confiando completamente no servidor Milvus para gerar as incorporações. O cliente não precisa de qualquer função de incorporação.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus
 <span class="hljs-keyword">from</span> langchain_milvus.function <span class="hljs-keyword">import</span> TextEmbeddingBuiltInFunction
 <span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document

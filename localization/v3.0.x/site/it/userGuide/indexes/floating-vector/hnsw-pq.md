@@ -146,7 +146,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>: Il metodo utilizzato per calcolare la distanza tra i vettori. I valori supportati sono <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code>. Per maggiori dettagli, consultare <a href="/docs/it/metric.md">Tipi di metriche</a>.</p></li>
 <li><p><code translate="no">params</code>: Opzioni di configurazione aggiuntive per la costruzione dell'indice. Per i dettagli, fare riferimento a <a href="/docs/it/hnsw-pq.md#Index-building-params">Parametri di costruzione dell'indice</a>.</p></li>
 </ul>
-<p>Una volta configurati i parametri dell'indice, si può creare l'indice usando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
+<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice utilizzando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Ricerca nell'indice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,7 +225,7 @@ res = MilvusClient.search(
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">M</code></p></td>
-     <td><p>Numero massimo di connessioni (o bordi) che ogni nodo può avere nel grafo, compresi i bordi in uscita e in entrata. Questo parametro influisce direttamente sulla costruzione dell'indice e sulla ricerca.</p></td>
+     <td><p>Numero massimo di connessioni (o bordi) che ogni nodo può avere nel grafo, compresi i bordi in uscita e in entrata. Questo parametro influisce direttamente sia sulla costruzione dell'indice che sulla ricerca.</p></td>
      <td><p><strong>Tipo</strong>: <strong>Intervallo</strong>: [2, 2048]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">30</code> (fino a 30 bordi uscenti e 30 bordi entranti per nodo)</p></td>
      <td><p>Un valore maggiore di <code translate="no">M</code> porta generalmente a una <strong>maggiore accuratezza</strong>, ma <strong>aumenta l'overhead di memoria</strong> e <strong>rallenta sia la costruzione dell'indice che la ricerca</strong>. Considerare di aumentare <code translate="no">M</code> per i set di dati con elevata dimensionalità o quando è fondamentale un richiamo elevato.</p>

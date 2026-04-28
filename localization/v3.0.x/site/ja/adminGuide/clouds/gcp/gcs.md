@@ -1,10 +1,10 @@
 ---
 id: gcs.md
-title: ワークロードIDによるGCSアクセスの構成
+title: ワークロードアイデンティティによるGCSアクセスの設定
 related_key: 'gcs, storage, workload identity, iam'
 summary: Workload Identityを使用したgcsの設定方法について説明します。
 ---
-<h1 id="Configure-GCS-Access-by-Workload-Identity" class="common-anchor-header">ワークロードIDによるGCSアクセスの構成<button data-href="#Configure-GCS-Access-by-Workload-Identity" class="anchor-icon" translate="no">
+<h1 id="Configure-GCS-Access-by-Workload-Identity" class="common-anchor-header">ワークロードアイデンティティによるGCSアクセスの設定<button data-href="#Configure-GCS-Access-by-Workload-Identity" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

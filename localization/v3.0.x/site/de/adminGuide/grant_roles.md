@@ -3,8 +3,8 @@ id: grant_roles.md
 title: Rollen an Benutzer vergeben
 summary: >-
   Nachdem Sie eine Rolle erstellt und der Rolle Rechte zugewiesen haben, können
-  Sie die Rolle Benutzern zuweisen, damit diese auf Ressourcen zugreifen und
-  Aktionen durchführen können, die durch die Rolle definiert sind. Sie können
+  Sie die Rolle an Benutzer vergeben, damit diese auf Ressourcen zugreifen und
+  Aktionen ausführen können, die durch die Rolle definiert sind. Sie können
   einem Benutzer mehrere Rollen zuweisen oder eine Rolle an mehrere Benutzer
   vergeben. In diesem Handbuch wird beschrieben, wie Sie Benutzern Rollen
   zuweisen.
@@ -169,7 +169,7 @@ client.describe_user(user_name=<span class="hljs-string">&quot;user_1&quot;</spa
     &quot;userName&quot;: &quot;user_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Nachfolgend finden Sie eine Beispielausgabe.</p>
+<p>Nachfolgend finden Sie ein Beispiel für die Ausgabe.</p>
 <pre><code translate="no" class="language-bash">{<span class="hljs-string">&#x27;user_name&#x27;</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>, <span class="hljs-string">&#x27;roles&#x27;</span>: <span class="hljs-string">&#x27;role_a&#x27;</span>}
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Revoke-a-role" class="common-anchor-header">Eine Rolle widerrufen<button data-href="#Revoke-a-role" class="anchor-icon" translate="no">

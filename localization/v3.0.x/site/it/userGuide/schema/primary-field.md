@@ -387,7 +387,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
         ></path>
       </svg>
     </button></h2><p>Se è necessario controllare gli ID manualmente, disabilitare AutoID e fornire i propri valori.</p>
-<h3 id="Step-1-Create-a-collection-without-AutoID" class="common-anchor-header">Passo 1: Creare un insieme senza AutoID<button data-href="#Step-1-Create-a-collection-without-AutoID" class="anchor-icon" translate="no">
+<h3 id="Step-1-Create-a-collection-without-AutoID" class="common-anchor-header">Passo 1: creare un insieme senza AutoID<button data-href="#Step-1-Create-a-collection-without-AutoID" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

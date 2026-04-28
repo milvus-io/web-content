@@ -146,7 +146,7 @@ summary: Saiba como configurar o msgChannel para o Milvus.
         <li>Prefixo do sub-nome do canal de mensagens onde o root coord publica mensagens DML (Data Manipulation Language).</li>      
         <li>O prefixo completo do nome do canal é ${msgChannel.chanNamePrefix.cluster}-${msgChannel.chanNamePrefix.rootCoordDml}</li>      
         <li>Cuidado: Alterar este parâmetro depois de utilizar o Milvus durante um período de tempo irá afetar o acesso a dados antigos.</li>      
-        <li>Recomenda-se a alteração deste parâmetro antes de iniciar o Milvus pela primeira vez.</li>      </td>
+        <li>Recomenda-se que este parâmetro seja alterado antes de iniciar o Milvus pela primeira vez.</li>      </td>
       <td>rootcoord-dml</td>
     </tr>
   </tbody>
@@ -276,7 +276,7 @@ summary: Saiba como configurar o msgChannel para o Milvus.
     <tr>
       <td>
         <li>Prefixo do nome da subscrição da coordenada de dados.</li>      
-        <li>Atenção: A alteração deste parâmetro após um período de utilização do Milvus afectará o acesso aos dados antigos.</li>      
+        <li>Cuidado: A alteração deste parâmetro após um período de utilização do Milvus afectará o acesso aos dados antigos.</li>      
         <li>Recomenda-se que este parâmetro seja alterado antes de iniciar o Milvus pela primeira vez.</li>      </td>
       <td>dataCoord</td>
     </tr>
@@ -308,8 +308,8 @@ summary: Saiba como configurar o msgChannel para o Milvus.
     <tr>
       <td>
         <li>Prefixo do nome da subscrição do nó de dados.</li>      
-        <li>Cuidado: A alteração deste parâmetro após um período de utilização do Milvus afectará o acesso aos dados antigos.</li>      
-        <li>Recomenda-se a alteração deste parâmetro antes de iniciar o Milvus pela primeira vez.</li>      </td>
+        <li>Atenção: A alteração deste parâmetro após um período de utilização do Milvus afectará o acesso aos dados antigos.</li>      
+        <li>Recomenda-se que este parâmetro seja alterado antes de iniciar o Milvus pela primeira vez.</li>      </td>
       <td>dataNode</td>
     </tr>
   </tbody>

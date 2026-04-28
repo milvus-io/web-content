@@ -322,6 +322,12 @@
             "children": []
           },
           {
+            "label": "Creare una raccolta esterna",
+            "id": "create-an-external-collection.md",
+            "order": 2,
+            "children": []
+          },
+          {
             "label": "Visualizza le collezioni",
             "id": "view-collections.md",
             "order": 3,
@@ -474,15 +480,21 @@
             "children": []
           },
           {
-            "label": "Nullabile e predefinito",
+            "label": "Campi nulli",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
           },
           {
+            "label": "Valori predefiniti",
+            "id": "default-values.md",
+            "order": 14,
+            "children": []
+          },
+          {
             "label": "Analizzatore",
             "id": "analyzer",
-            "order": 14,
+            "order": 15,
             "children": [
               {
                 "label": "Panoramica dell'analizzatore",
@@ -600,7 +612,7 @@
                     "children": []
                   },
                   {
-                    "label": "Stop",
+                    "label": "Fermarsi",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -628,6 +640,12 @@
                     "id": "regex-filter.md",
                     "order": 10,
                     "children": []
+                  },
+                  {
+                    "label": "Sinonimo",
+                    "id": "synonym-filter.md",
+                    "order": 11,
+                    "children": []
                   }
                 ]
               },
@@ -642,26 +660,32 @@
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
+              },
+              {
+                "label": "Gestire le risorse dei file",
+                "id": "manage-file-resources.md",
+                "order": 6,
+                "children": []
               }
             ]
           },
           {
             "label": "Alterare il campo di raccolta",
             "id": "alter-collection-field.md",
-            "order": 15,
+            "order": 16,
             "children": []
           },
           {
             "label": "Aggiungere campi a una raccolta esistente",
             "id": "add-fields-to-an-existing-collection.md",
-            "order": 16,
+            "order": 17,
             "children": []
           },
           {
             "label": "Migliori pratiche",
             "id": "best-practices",
             "isMenu": true,
-            "order": 17,
+            "order": 18,
             "children": [
               {
                 "label": "Progettazione del modello di dati per la ricerca",
@@ -717,7 +741,7 @@
             "children": []
           },
           {
-            "label": "Indici vettoriali fluttuanti",
+            "label": "Indici vettoriali flottanti",
             "id": "floating-vector-indexes",
             "order": 1,
             "isMenu": true,
@@ -997,15 +1021,21 @@
                 "children": []
               },
               {
+                "label": "Operatori di StructArray",
+                "id": "struct-array-operators.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "Campionamento casuale",
                 "id": "random-sampling.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "Operatori della geometria",
                 "id": "geometry-operators.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -1061,15 +1091,21 @@
         ]
       },
       {
-        "label": "Incorporazione e riclassificazione",
+        "label": "Funzione e inferenza del modello",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
         "children": [
           {
-            "label": "Funzione di incorporazione",
-            "id": "embedding-function",
+            "label": "BM25 Funzione",
+            "id": "bm25-function.md",
             "order": 0,
+            "children": []
+          },
+          {
+            "label": "Funzioni di incorporamento basate sul modello",
+            "id": "embedding-function",
+            "order": 1,
             "isMenu": true,
             "children": [
               {
@@ -1141,9 +1177,15 @@
             ]
           },
           {
-            "label": "Funzione di reranking",
+            "label": "Funzione MinHash",
+            "id": "minhash-function.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Funzioni di reranking",
             "id": "reranking",
-            "order": 1,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -1269,9 +1311,15 @@
             "children": []
           },
           {
+            "label": "Forza la compattazione Merge",
+            "id": "force-merge.md",
+            "order": 2,
+            "children": []
+          },
+          {
             "label": "Stoccaggio a più livelli",
             "id": "tiered_storage",
-            "order": 2,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -1295,11 +1343,37 @@
             ]
           }
         ]
+      },
+      {
+        "label": "Istantanee",
+        "id": "snapshots",
+        "order": 11,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Panoramica",
+            "id": "snapshots.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Gestire le istantanee",
+            "id": "manage-snapshots.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Casi d'uso",
+            "id": "snapshot-use-cases.md",
+            "order": 2,
+            "children": []
+          }
+        ]
       }
     ]
   },
   {
-    "label": "Importazione dei dati",
+    "label": "Data Import",
     "id": "data_import",
     "order": 5,
     "isMenu": true,
@@ -1367,7 +1441,7 @@
             "children": []
           },
           {
-            "label": "Gasdotto RAG",
+            "label": "Condotto RAG",
             "id": "rag_pipeline.md",
             "order": 5,
             "children": []
@@ -1410,7 +1484,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "In loco",
+            "label": "On Premises",
             "id": "on_premises",
             "order": 0,
             "isMenu": true,
@@ -1564,7 +1638,7 @@
             "children": []
           },
           {
-            "label": "QueryNode che usa il disco locale",
+            "label": "QueryNode Using Local Disk",
             "id": "configure-querynode-localdisk.md",
             "order": 5,
             "children": []
@@ -2860,7 +2934,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con le matrici Matryoshka",
+        "label": "Ricerca a imbuto con matrioske embeddings",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

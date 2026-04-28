@@ -64,7 +64,7 @@ summary: >-
 <p>На следующем рисунке показано, как строится граф Vamana.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
    </span> <span class="img-wrapper"> <span>Diskann</span> </span></p>
 <ol>
 <li><p><strong>Начальные случайные соединения:</strong> Каждая точка данных (вектор) представлена в виде узла в графе. Изначально эти узлы соединяются случайным образом, образуя плотную сеть. Обычно узел начинает иметь около 500 ребер (или связей) для обеспечения широкой связности.</p></li>
@@ -105,7 +105,7 @@ summary: >-
     </button></h3><p>После того как индекс (граф Vamana на диске и коды PQ в памяти) построен, DISKANN выполняет поиск ANN следующим образом:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
    </span> <span class="img-wrapper"> <span>Дисканн 2</span> </span></p>
 <ol>
 <li><p><strong>Запрос и точка входа:</strong> Вектор запроса задается для поиска ближайших соседей. DISKANN начинает работу с выбранной точки входа в граф Вамана, часто это узел, расположенный вблизи глобального центроида набора данных. Глобальный центроид представляет собой среднее значение всех векторов, что позволяет минимизировать расстояние обхода графа для поиска нужных соседей.</p></li>

@@ -502,7 +502,7 @@ curl --request POST \
 <pre><code translate="no" class="language-plaintext">metadata[&quot;tags&quot;] == [&quot;clearance&quot;, &quot;summer_sale&quot;]
 json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 <button class="copy-code-btn"></button></code></pre>
-<p>En estos casos, <code translate="no">metadata[&quot;tags&quot;]</code> es una matriz. La indexación plana JSON no acelera este tipo de filtros - utilice en su lugar un índice de ruta JSON con un tipo de molde de array.</p>
+<p>En estos casos, <code translate="no">metadata[&quot;tags&quot;]</code> es una matriz. La indexación plana JSON no acelera este tipo de filtros - utilice en su lugar un índice de ruta JSON con un tipo de molde de matriz.</p>
 <p><strong>Utilice el índice de ruta JSON cuando:</strong></p>
 <ul>
 <li><p>Conoce de antemano las teclas de acceso rápido que debe consultar.</p></li>
@@ -588,7 +588,7 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 <div class="alert note">
 <p>Las matrices deben contener elementos del mismo tipo para una indexación óptima. Para más información, consulte <a href="/docs/es/array_data_type.md">Campo de array</a>.</p>
 </div>
-<h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">Ejemplo: Creación de índices de rutas JSON</h4><p>Utilizando la estructura JSON <code translate="no">metadata</code> de nuestra introducción, aquí tienes ejemplos de cómo crear índices en diferentes rutas JSON:</p>
+<h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">Ejemplo: Creación de índices de rutas JSON</h4><p>Usando la estructura JSON <code translate="no">metadata</code> de nuestra introducción, aquí hay ejemplos de cómo crear índices en diferentes rutas JSON:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Index the category field as a string</span>

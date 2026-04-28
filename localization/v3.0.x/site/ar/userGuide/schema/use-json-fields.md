@@ -78,7 +78,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لاستخدام حقل JSON، قم بتعريفه بشكل صريح في مخطط المجموعة من خلال تحديد <code translate="no">DataType</code> كـ <code translate="no">JSON</code>.</p>
+    </button></h2><p>لاستخدام حقل JSON، قم بتعريفه بشكل صريح في مخطط المجموعة من خلال تحديد <code translate="no">DataType</code> ك <code translate="no">JSON</code>.</p>
 <p>يقوم المثال أدناه بإنشاء مجموعة بمخططها الذي يحتوي على هذه الحقول:</p>
 <ul>
 <li><p>المفتاح الأساسي (<code translate="no">product_id</code>)</p></li>
@@ -497,7 +497,7 @@ curl --request POST \
      <td><p>أعلى</p></td>
    </tr>
 </table>
-<p>¹ <em>المصفوفات كـ LHS</em> يعني أن الجانب الأيسر من تعبير المرشح هو مصفوفة JSON، على سبيل المثال:</p>
+<p>¹ <em>المصفوفات كـ LHS</em> تعني أن الطرف الأيسر من تعبير المرشح هو مصفوفة JSON، على سبيل المثال:</p>
 <pre><code translate="no" class="language-plaintext">metadata[&quot;tags&quot;] == [&quot;clearance&quot;, &quot;summer_sale&quot;]
 json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 <button class="copy-code-btn"></button></code></pre>
@@ -693,7 +693,7 @@ indexOpt2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">استخدم دوال JSON cast لتحويل النوع<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h4><p>إذا كان مفتاح حقل JSON الخاص بك يحتوي على قيم بتنسيق غير صحيح (على سبيل المثال، الأرقام المخزنة كسلاسل)، يمكنك استخدام دوال الإرسال لتحويل القيم أثناء الفهرسة.</p>
+<h4 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">استخدم دالات JSON cast لتحويل النوع<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h4><p>إذا كان مفتاح حقل JSON الخاص بك يحتوي على قيم بتنسيق غير صحيح (على سبيل المثال، الأرقام المخزنة كسلاسل)، يمكنك استخدام دوال الإرسال لتحويل القيم أثناء الفهرسة.</p>
 <h5 id="Supported-cast-functions" class="common-anchor-header">دوال الإرسال المدعومة</h5><p>دوال الإرسال غير حساسة لحالة الأحرف. الأنواع التالية مدعومة:</p>
 <table>
    <tr>
@@ -765,7 +765,7 @@ indexOpt3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>معلمة <code translate="no">json_cast_type</code> إلزامية ويجب أن تكون نفس نوع مخرجات الدالة المصبوبة.</p></li>
+<li><p>المعلمة <code translate="no">json_cast_type</code> إلزامية ويجب أن تكون نفس نوع مخرجات الدالة المصبوبة.</p></li>
 <li><p>إذا فشل التحويل (على سبيل المثال، سلسلة غير رقمية)، يتم تخطي القيمة ولا تتم فهرستها.</p></li>
 </ul>
 </div>
@@ -799,7 +799,7 @@ indexOpt3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
 metadata[&quot;price&quot;] = 99.99
 metadata[&quot;supplier&quot;][&quot;country&quot;] = &quot;USA&quot;
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>استنتاج الأنواع تلقائيًا</strong> - لكل قيمة، يحدد ميلفوس نوعها بالترتيب التالي:</p>
+<li><p><strong>استنتاج الأنواع تلقائيًا</strong> - لكل قيمة، يحدد Milvus نوعها بالترتيب التالي:</p>
 <pre><code translate="no" class="language-plaintext">unsigned integer → signed integer → floating-point → string
 <button class="copy-code-btn"></button></code></pre>
 <p>يتم استخدام النوع الأول الذي يناسب القيمة للفهرسة.</p>
@@ -1157,7 +1157,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يمكن أن تؤدي الأنواع غير المتسقة عبر الكيانات إلى <strong>فهرسة جزئية</strong>. على سبيل المثال، إذا تم تخزين <code translate="no">metadata[&quot;price&quot;]</code> كرقم (<code translate="no">99.99</code>) وسلسلة (<code translate="no">&quot;99.99&quot;</code>)، وتم تعريف الفهرس بـ <code translate="no">json_cast_type=&quot;double&quot;</code> ، سيتم فهرسة القيم الرقمية فقط. سيتم تخطي إدخالات شكل السلسلة ولن تظهر في نتائج التصفية.</p>
+    </button></h3><p>يمكن أن تؤدي الأنواع غير المتسقة عبر الكيانات إلى <strong>فهرسة جزئية</strong>. على سبيل المثال، إذا تم تخزين <code translate="no">metadata[&quot;price&quot;]</code> على شكل رقم (<code translate="no">99.99</code>) وسلسلة (<code translate="no">&quot;99.99&quot;</code>)، وتم تعريف الفهرس بـ <code translate="no">json_cast_type=&quot;double&quot;</code> ، سيتم فهرسة القيم الرقمية فقط. سيتم تخطي إدخالات شكل السلسلة ولن تظهر في نتائج التصفية.</p>
 <h3 id="Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="common-anchor-header">هل يمكنني استخدام فلاتر بنوع مختلف عن نوع المصبوب المفهرس؟<button data-href="#Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

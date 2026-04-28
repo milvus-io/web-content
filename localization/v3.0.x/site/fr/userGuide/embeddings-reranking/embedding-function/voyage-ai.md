@@ -171,7 +171,7 @@ beta: Milvus 2.6.x
 <table>
    <tr>
      <th><p>Variable</p></th>
-     <th><p>Obligatoire</p></th>
+     <th><p>Nécessaire</p></th>
      <th><p>Description de la variable</p></th>
    </tr>
    <tr>

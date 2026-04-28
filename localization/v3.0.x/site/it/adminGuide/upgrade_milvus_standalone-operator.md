@@ -145,7 +145,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
     </button></h3><h4 id="21-Upgrade-to-v2516" class="common-anchor-header">2.1 Aggiornamento alla versione 2.5.16</h4><div class="alert-note">
 <p>Saltate questo passaggio se la vostra installazione standalone sta già eseguendo la versione 2.5.16 o superiore.</p>
 </div>
-<p>Creare un file di configurazione <code translate="no">milvusupgrade.yaml</code> per aggiornare alla v2.5.16:</p>
+<p>Create un file di configurazione <code translate="no">milvusupgrade.yaml</code> per aggiornare alla v2.5.16:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -193,4 +193,4 @@ kubectl get pods
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>Per ulteriore supporto, consultare la <a href="https://milvus.io/docs">documentazione Milvus</a> o il <a href="https://github.com/milvus-io/milvus/discussions">forum della comunità</a>.</p>
+<p>Per ulteriore assistenza, consultare la <a href="https://milvus.io/docs">documentazione Milvus</a> o il <a href="https://github.com/milvus-io/milvus/discussions">forum della comunità</a>.</p>

@@ -92,19 +92,64 @@ milvus_client = ClientMilvus(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Defining-necessary-variables" class="common-anchor-header">Определение необходимых переменных</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Define collection name</span>
+    </button></h2><h3 id="Defining-necessary-variables" class="common-anchor-header">Определение необходимых переменных<button data-href="#Defining-necessary-variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Define collection name</span>
 COLLECTION_NAME=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span> <span class="hljs-comment"># take your own collection name</span>
 
 <span class="hljs-comment"># Define vector dimension size</span>
 DIMENSION=<span class="hljs-number">1536</span> <span class="hljs-comment"># decide by the model you use</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-schema" class="common-anchor-header">Добавить схему</h3><p>Прежде чем вставлять данные в базу данных Milvus Lite, нам нужно сначала определить поле данных, которое здесь называется схемой. С помощью создания объекта <code translate="no">CollectionSchema</code> и добавления поля данных через <code translate="no">add_field()</code> мы можем управлять типом данных и их характеристиками. Этот шаг является обязательным перед вставкой любых данных в Milvus.</p>
+<h3 id="Add-schema" class="common-anchor-header">Добавить схему<button data-href="#Add-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Прежде чем вставлять данные в базу данных Milvus Lite, нам нужно сначала определить поле данных, которое здесь называется схемой. С помощью создания объекта <code translate="no">CollectionSchema</code> и добавления поля данных через <code translate="no">add_field()</code> мы можем управлять типом данных и их характеристиками. Этот шаг является обязательным перед вставкой любых данных в Milvus.</p>
 <pre><code translate="no" class="language-python">schema = milvus_client.create_schema(auto_id=<span class="hljs-literal">True</span>) <span class="hljs-comment"># Enable id matching</span>
 
 schema = milvus_client.add_field(schema=schema, field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 schema = milvus_client.add_field(schema=schema, field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=DIMENSION)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-index" class="common-anchor-header">Создание индекса</h3><p>Для каждой схемы лучше иметь индекс, чтобы запросы были более эффективными. Чтобы создать индекс, нам сначала нужен объект <code translate="no">index_params</code>, а затем мы добавляем данные индекса на этот объект <code translate="no">IndexParams</code>.</p>
+<h3 id="Create-index" class="common-anchor-header">Создание индекса<button data-href="#Create-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Для каждой схемы лучше иметь индекс, чтобы запросы были более эффективными. Чтобы создать индекс, нам сначала нужен объект <code translate="no">index_params</code>, а затем мы добавляем данные индекса на этот объект <code translate="no">IndexParams</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Start to indexing data field</span>
 index_params = milvus_client.prepare_index_params()
 index_params = milvus_client.add_index(
@@ -115,7 +160,22 @@ index_params = milvus_client.add_index(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Этот метод является тонкой оберткой вокруг официальной реализации Milvus<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md">(официальная документация</a>).</p>
-<h3 id="Create-collection" class="common-anchor-header">Создание коллекции</h3><p>После определения всех полей данных и их индексации нам нужно создать коллекцию базы данных, чтобы мы могли быстро и точно получить доступ к нашим данным. Следует отметить, что мы инициализировали <code translate="no">enable_dynamic_field</code> значением true, чтобы вы могли свободно загружать любые данные. Издержки заключаются в том, что запросы к данным могут быть неэффективными.</p>
+<h3 id="Create-collection" class="common-anchor-header">Создание коллекции<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>После определения всех полей данных и их индексации нам нужно создать коллекцию базы данных, чтобы мы могли быстро и точно получить доступ к нашим данным. Следует отметить, что мы инициализировали <code translate="no">enable_dynamic_field</code> значением true, чтобы вы могли свободно загружать любые данные. Издержки заключаются в том, что запросы к данным могут быть неэффективными.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection</span>
 milvus_client.create_collection(
     collection_name=COLLECTION_NAME,
@@ -179,7 +239,22 @@ res = milvus_client.search(
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&#x27;answer&#x27;</span>])
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&#x27;matches&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Rules" class="common-anchor-header">Правила</h3><p>В предыдущем примере рассматривался каждый документ в нашем индексе. Однако иногда может быть полезно получить только документы, удовлетворяющие некоторым заданным условиям (например, <code translate="no">filename=harry-potter.pdf</code>). В <code translate="no">whyhow_rbr</code> через Milvus Lite это можно сделать с помощью настройки параметров поиска.</p>
+<h3 id="Rules" class="common-anchor-header">Правила<button data-href="#Rules" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В предыдущем примере рассматривался каждый документ в нашем индексе. Однако иногда может быть полезно получить только документы, удовлетворяющие некоторым заданным условиям (например, <code translate="no">filename=harry-potter.pdf</code>). В <code translate="no">whyhow_rbr</code> через Milvus Lite это можно сделать с помощью настройки параметров поиска.</p>
 <p>Правило может управлять следующими атрибутами метаданных</p>
 <ul>
 <li><code translate="no">filename</code> имя файла</li>
@@ -210,7 +285,22 @@ res = milvus_client.search(
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&#x27;matches&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
 <p>В этом примере мы сначала создаем раздел, в котором хранятся pdf-файлы, связанные с Гарри Поттером, и через поиск в этом разделе мы можем получить самую прямую информацию. Кроме того, мы применяем номера страниц в качестве фильтра, чтобы указать точную страницу, по которой мы хотим выполнить поиск. Помните, что параметр filer должен соответствовать <a href="https://milvus.io/docs/boolean.md">правилу boolean</a>.</p>
-<h3 id="Clean-up" class="common-anchor-header">Очистка</h3><p>Наконец, после выполнения всех инструкций вы можете очистить базу данных, вызвав команду <code translate="no">drop_collection()</code>.</p>
+<h3 id="Clean-up" class="common-anchor-header">Очистка<button data-href="#Clean-up" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Наконец, после выполнения всех инструкций вы можете очистить базу данных, вызвав команду <code translate="no">drop_collection()</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Clean up</span>
 milvus_client.drop_collection(
     collection_name=COLLECTION_NAME

@@ -25,7 +25,7 @@ title: MilvusとLlamaIndexによる検索拡張生成(RAG)
 <p>このガイドでは、LlamaIndexとMilvusを使ったRAG（Retrieval-Augmented Generation）システムの構築方法を説明する。</p>
 <p>RAGシステムは検索システムと生成モデルを組み合わせ、与えられたプロンプトに基づいて新しいテキストを生成する。システムはまずMilvusを使ってコーパスから関連文書を検索し、次に生成モデルを使って検索された文書に基づいて新しいテキストを生成する。</p>
 <p><a href="https://www.llamaindex.ai/">LlamaIndexは</a>、カスタムデータソースを大規模言語モデル（LLM）に接続するためのシンプルで柔軟なデータフレームワークである。<a href="https://milvus.io/">Milvusは</a>世界で最も先進的なオープンソースのベクトル・データベースであり、埋め込み類似検索やAIアプリケーションのために構築されている。</p>
-<p>このノートブックでは、MilvusVectorStoreの簡単なデモをお見せします。</p>
+<p>このノートブックでは、MilvusVectorStoreの簡単なデモを紹介します。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">始める前に<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -327,7 +327,7 @@ res = query_engine.query(<span class="hljs-string">&quot;What challenges did the
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">The disease posed challenges related to the adverse impact on the business and operations, including reduced demand for Mobility offerings globally, affecting travel behavior and demand. Additionally, the pandemic led to driver supply constraints, impacted by concerns regarding COVID-19, with uncertainties about when supply levels would return to normal. The rise of the Omicron variant further affected travel, resulting in advisories and restrictions that could adversely impact both driver supply and consumer demand for Mobility offerings.
 </code></pre>
-<p>こ こ で フ ァ イ ル<code translate="no">paul_graham_essay.txt</code> か ら 文書を取得す る と 、 別の結果が得 ら れます。</p>
+<p>今度はファイル<code translate="no">paul_graham_essay.txt</code> から取得すると、異なる結果が得られます。</p>
 <pre><code translate="no" class="language-python">filters = MetadataFilters(
     filters=[ExactMatchFilter(key=<span class="hljs-string">&quot;file_name&quot;</span>, value=<span class="hljs-string">&quot;paul_graham_essay.txt&quot;</span>)]
 )

@@ -173,7 +173,7 @@ summary: >-
       </svg>
     </button></h3><p>La quantizzazione è intrinsecamente soggetta a perdite. Per mantenere il tasso di richiamo, la quantizzazione produce costantemente un numero di candidati top-K superiore al necessario, consentendo ai raffinatori di utilizzare una maggiore precisione per selezionare ulteriormente i risultati top-K da questi candidati, migliorando il tasso di richiamo.</p>
 <p>Ad esempio, il raffinatore FP32 opera sui risultati di ricerca restituiti dalla quantizzazione ricalcolando le distanze utilizzando la precisione FP32 anziché i valori quantizzati.</p>
-<p>Ciò è fondamentale per le applicazioni che richiedono un compromesso tra efficienza della ricerca e precisione, come la ricerca semantica o i sistemi di raccomandazione, in cui piccole variazioni di distanza hanno un impatto significativo sulla qualità dei risultati.</p>
+<p>Ciò è fondamentale per le applicazioni che richiedono un compromesso tra efficienza della ricerca e precisione, come la ricerca semantica o i sistemi di raccomandazione, dove piccole variazioni di distanza hanno un impatto significativo sulla qualità dei risultati.</p>
 <h3 id="Summary" class="common-anchor-header">Sintesi<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -296,7 +296,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La tabella seguente è una matrice decisionale a cui fare riferimento per la scelta del tipo di indice più appropriato.</p>
+    </button></h3><p>La seguente tabella è una matrice decisionale a cui fare riferimento per la scelta del tipo di indice più appropriato.</p>
 <table>
    <tr>
      <th><p>Scenario</p></th>
@@ -376,7 +376,7 @@ summary: >-
 <pre><code translate="no" class="language-plaintext">2,000 clusters × 128 dimensions × 4 bytes = 1.0 MB
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Calcolo della memoria utilizzata dalle assegnazioni ai cluster.</strong></p>
-<p>Ciascuna incorporazione vettoriale viene assegnata a un cluster e memorizzata come ID intero. Per 2.000 cluster è sufficiente un numero intero di 2 byte. L'utilizzo della memoria può essere calcolato come segue:</p>
+<p>Ogni incorporazione vettoriale viene assegnata a un cluster e memorizzata come ID intero. Per 2.000 cluster è sufficiente un numero intero di 2 byte. L'utilizzo della memoria può essere calcolato come segue:</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 2 bytes = 2.0 MB
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Calcolare la compressione causata dalla quantizzazione.</strong></p>
@@ -402,7 +402,7 @@ summary: >-
 <td><p>11,0 MB</p></td>
 </tr>
 <tr>
-<td><p>FIV-PQ + 10% di raffinazione grezza</p></td>
+<td><p>FIV-PQ + 10% di affinamento grezzo</p></td>
 <td><p>1,0 MB + 2,0 MB + 8,0 MB + 51,2 MB</p></td>
 <td><p>62,2 MB</p></td>
 </tr>

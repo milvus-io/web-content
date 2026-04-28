@@ -20,7 +20,7 @@ title: Milvus WebUI
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus Web UI는 Milvus를 위한 그래픽 관리 도구입니다. 간단하고 직관적인 인터페이스로 시스템 관찰성을 향상시킵니다. Milvus Web UI를 사용하여 Milvus의 구성 요소 및 종속성에 대한 통계와 메트릭을 관찰하고, 데이터베이스 및 수집 세부 정보를 확인하고, 자세한 Milvus 구성을 나열할 수 있습니다.</p>
+    </button></h1><p>Milvus Web UI는 Milvus를 위한 그래픽 관리 도구입니다. 간단하고 직관적인 인터페이스로 시스템 관찰성을 향상시킵니다. Milvus Web UI를 사용하여 Milvus의 구성 요소 및 종속성에 대한 통계 및 메트릭을 관찰하고, 데이터베이스 및 수집 세부 정보를 확인하고, 자세한 Milvus 구성을 나열할 수 있습니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,7 +72,7 @@ title: Milvus WebUI
     </button></h2><p>Milvus 웹 UI는 다음과 같은 기능을 제공합니다:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
    </span> <span class="img-wrapper"> <span>Milvus 웹 UI 개요</span> </span></p>
 <ul>
 <li><p><a href="#Home">홈</a></p>
@@ -86,7 +86,7 @@ title: Milvus WebUI
 <li><p><a href="#Tasks">작업</a></p>
 <p>쿼리 코디네이터 스케줄러 작업, 압축 작업, 인덱스 구축 작업, 가져오기 작업, 데이터 동기화 작업 등 Milvus에서 실행 중인 작업 목록을 확인할 수 있습니다.</p></li>
 <li><p><a href="#Slow-requests">느린 요청</a></p>
-<p>요청 유형, 요청 기간, 요청 매개변수를 포함하여 Milvus에서 느린 요청 목록을 볼 수 있습니다.</p></li>
+<p>요청 유형, 요청 기간, 요청 매개변수를 포함한 Milvus의 느린 요청 목록을 볼 수 있습니다.</p></li>
 <li><p><a href="#Configurations">구성</a></p>
 <p>Milvus 구성 목록과 해당 값을 볼 수 있습니다.</p></li>
 <li><p><a href="#Tools">도구</a></p>
@@ -110,7 +110,7 @@ title: Milvus WebUI
     </button></h2><p>홈 페이지에서는 다음과 같은 정보를 확인할 수 있습니다:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-home.png" alt="Milvus Web UI Home" class="doc-image" id="milvus-web-ui-home" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-home.png" alt="Milvus Web UI Home" class="doc-image" id="milvus-web-ui-home" />
    </span> <span class="img-wrapper"> <span>Milvus 웹 UI 홈</span> </span></p>
 <ul>
 <li><p><strong>시스템 정보</strong>: 배포 모드, 배포에 사용된 이미지 및 관련 정보를 포함한 시스템 정보를 볼 수 있습니다.</p></li>
@@ -136,7 +136,7 @@ title: Milvus WebUI
     </button></h2><p>컬렉션 페이지에서는 현재 Milvus에 있는 데이터베이스 및 컬렉션 목록을 보고 세부 정보를 확인할 수 있습니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-collections.png" alt="Milvus Web UI Collections" class="doc-image" id="milvus-web-ui-collections" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-collections.png" alt="Milvus Web UI Collections" class="doc-image" id="milvus-web-ui-collections" />
    </span> <span class="img-wrapper"> <span>Milvus 웹 UI 컬렉션</span> </span></p>
 <ul>
 <li><p><strong>데이터베이스</strong>: 현재 Milvus에 있는 데이터베이스 목록과 세부 정보를 확인할 수 있습니다.</p></li>
@@ -144,7 +144,7 @@ title: Milvus WebUI
 <p>컬렉션을 클릭하면 필드 수, 파티션, 인덱스 및 기타 정보를 포함한 세부 정보를 자세히 볼 수 있습니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
    </span> <span class="img-wrapper"> <span>Milvus 웹 UI 컬렉션 세부 정보</span> </span></p></li>
 </ul>
 <h2 id="Query" class="common-anchor-header">쿼리<button data-href="#Query" class="anchor-icon" translate="no">
@@ -164,7 +164,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
    </span> <span class="img-wrapper"> <span>Milvus 웹 UI 쿼리 페이지</span> </span></p>
 <ul>
 <li><p><strong>세그먼트</strong>: 세그먼트 ID, 해당 컬렉션, 상태, 크기 등 세그먼트 목록과 세부 정보를 볼 수 있습니다.</p></li>
@@ -189,7 +189,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-data.png" alt="Milvus Web UI Data Page" class="doc-image" id="milvus-web-ui-data-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-data.png" alt="Milvus Web UI Data Page" class="doc-image" id="milvus-web-ui-data-page" />
    </span> <span class="img-wrapper"> <span>Milvus 웹 UI 데이터 페이지</span> </span></p>
 <ul>
 <li><p><strong>세그먼트</strong>: 데이터 노드/코디네이터의 세그먼트 목록과 세그먼트 ID, 해당 컬렉션, 상태, 크기 등 세부 정보를 볼 수 있습니다.</p></li>
@@ -212,7 +212,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-tasks.png" alt="Milvus Web UI Tasks Page" class="doc-image" id="milvus-web-ui-tasks-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-tasks.png" alt="Milvus Web UI Tasks Page" class="doc-image" id="milvus-web-ui-tasks-page" />
    </span> <span class="img-wrapper"> <span>Milvus 웹 UI 작업 페이지</span> </span></p>
 <ul>
 <li><p><strong>작업</strong>: 작업 유형, 상태 및 작업을 포함하여 Milvus에서 실행 중인 작업 목록을 볼 수 있습니다.</p>
@@ -241,7 +241,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
    </span> <span class="img-wrapper"> <span>Milvus 웹 UI 느린 요청 페이지</span> </span></p>
 <ul>
 <li><strong>느린 요청</strong>: 느린 요청은 구성에 지정된 <code translate="no">proxy.slowQuerySpanInSeconds</code> 값보다 지연 시간이 긴 검색 또는 쿼리입니다. 느린 요청 목록에는 지난 15분 동안의 모든 느린 요청이 표시됩니다.</li>
@@ -263,7 +263,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-configurations.png" alt="Milvus Web UI Configurations Page" class="doc-image" id="milvus-web-ui-configurations-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-configurations.png" alt="Milvus Web UI Configurations Page" class="doc-image" id="milvus-web-ui-configurations-page" />
    </span> <span class="img-wrapper"> <span>Milvus 웹 UI 구성 페이지</span> </span></p>
 <ul>
 <li><strong>구성</strong>: Milvus 런타임 구성 목록과 해당 값을 볼 수 있습니다.</li>

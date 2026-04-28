@@ -35,7 +35,7 @@ voyage_ef = VoyageEmbeddingFunction(
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>パラメータ</strong></p>
 <ul>
-<li><code translate="no">model_name</code> (string) エンコードに使用する Voyage モデルの名前。例えば、 、 などです。このパラメータを指定しない場合、 が使用されます。利用可能なモデルのリストについては、<code translate="no">voyage-3-lite</code> <code translate="no">voyage-finance-2</code> <code translate="no">voyage-3</code> <a href="https://docs.voyageai.com/docs/embeddings">Voyage公式ドキュメントを</a>参照してください。</li>
+<li><code translate="no">model_name</code> (string) エンコードに使用する Voyage モデルの名前。例えば、<code translate="no">voyage-3-lite</code> 、<code translate="no">voyage-finance-2</code> などです。このパラメータを指定しない場合、<code translate="no">voyage-3</code> が使用されます。利用可能なモデルのリストについては、<a href="https://docs.voyageai.com/docs/embeddings">Voyageの公式ドキュメントを</a>参照してください。</li>
 <li><code translate="no">api_key</code> (文字列） Voyage APIにアクセスするためのAPIキー。APIキーの作成方法については<a href="https://docs.voyageai.com/docs/api-key-and-installation">APIキーとPythonクライアントを</a>参照してください。</li>
 </ul>
 <p>ドキュメントの埋め込みを作成するには、<code translate="no">encode_documents()</code> メソッドを使用します：</p>

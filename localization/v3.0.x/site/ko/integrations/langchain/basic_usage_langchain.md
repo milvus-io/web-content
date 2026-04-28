@@ -116,7 +116,7 @@ vector_store_saved = Milvus.from_documents(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>벡터 저장소를 만든 후에는 다양한 항목을 추가하고 삭제하여 벡터 저장소와 상호 작용할 수 있습니다.</p>
+    </button></h2><p>벡터 스토어를 만든 후에는 다양한 항목을 추가하고 삭제하여 벡터 스토어와 상호 작용할 수 있습니다.</p>
 <h3 id="Add-items-to-vector-store" class="common-anchor-header">벡터 스토어에 항목 추가하기<button data-href="#Add-items-to-vector-store" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -290,7 +290,7 @@ I0000 00:00:1761298048.354308 7886403 fork_posix.cc:71] Other threads are curren
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">* [SIM=0.893776] The weather forecast for tomorrow is cloudy and overcast, with a high of 62 degrees. [{'source': 'news', 'pk': 'dbf6560a-1487-4a6e-8797-245d57874f5b'}]
 </code></pre>
-<p><code translate="no">Milvus</code> 벡터 저장소를 사용할 때 사용할 수 있는 모든 검색 옵션의 전체 목록을 보려면 <a href="https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html">API 참조를 참조하세요</a>.</p>
+<p><code translate="no">Milvus</code> 벡터 스토어를 사용할 때 사용할 수 있는 모든 검색 옵션의 전체 목록을 보려면 <a href="https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html">API 참조를 참조하세요</a>.</p>
 <h3 id="Query-by-turning-into-retriever" class="common-anchor-header">리트리버로 전환하여 쿼리하기<button data-href="#Query-by-turning-into-retriever" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

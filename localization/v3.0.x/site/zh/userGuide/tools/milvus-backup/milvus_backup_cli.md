@@ -69,7 +69,7 @@ go build
 </pre>
 <p>由于 Milvus Backup 无法将数据备份到本地路径，因此在定制配置文件时要确保 Minio 设置正确。</p>
 <div class="alert note">
-<p>默认 Minio 文件桶的名称随安装 Milvus 的方式而不同。更改 Minio 设置时，请参阅下表。</p>
+<p>默认 Minio 文件桶的名称因安装 Milvus 的方式而异。更改 Minio 设置时，请参阅下表。</p>
 <table>
 <thead>
 <tr><th>字段</th><th>Docker Compose</th><th>Helm / Milvus 操作符</th></tr>
@@ -177,4 +177,4 @@ mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
     </button></h2><p>还原完成后，您可以通过对已还原的 Collections 编制索引来验证已还原的数据，方法如下：</p>
 <pre><code translate="no" class="language-shell">python example/verify_data.py
 <button class="copy-code-btn"></button></code></pre>
-<p>请注意，上述脚本假定您在运行<code translate="no">restore</code> 命令时使用了<code translate="no">-s</code> 标志，且后缀设置为<code translate="no">-recover</code> 。请根据需要对脚本进行必要的修改。</p>
+<p>请注意，上述脚本假定您已运行带有<code translate="no">-s</code> 标志的<code translate="no">restore</code> 命令，且后缀设置为<code translate="no">-recover</code> 。请根据需要对脚本进行必要的修改。</p>

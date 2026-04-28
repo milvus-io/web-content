@@ -48,7 +48,7 @@ summary: >-
 <li>Usamos o <code translate="no">all-MiniLM-L6-v2</code> padrão como modelo de incorporação.</li>
 </ul>
 <div class="alert note">
-<p>Este tutorial refere-se principalmente ao guia de instalação oficial da <a href="https://llama-stack.readthedocs.io/en/latest/index.html">documentação do Llama Stack</a>. Se encontrar alguma parte desatualizada neste tutorial, pode dar prioridade a seguir o guia oficial e criar um problema para nós.</p>
+<p>Este tutorial refere-se principalmente ao guia de instalação oficial da <a href="https://llama-stack.readthedocs.io/en/latest/index.html">documentação do Llama Stack</a>. Se encontrar alguma parte desactualizada neste tutorial, pode dar prioridade a seguir o guia oficial e criar um problema para nós.</p>
 </div>
 <h2 id="Start-Llama-Stack-Server" class="common-anchor-header">Iniciar o servidor Llama Stack<button data-href="#Start-Llama-Stack-Server" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,7 +65,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">Preparar o ambiente</h3><p>Como precisamos usar o Together AI como o serviço LLM, devemos primeiro fazer login no site oficial para solicitar uma <a href="https://api.together.xyz/settings/api-keys">chave de API</a> e definir a chave de API <code translate="no">TOGETHER_API_KEY</code> como uma variável de ambiente.</p>
+    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">Preparar o ambiente<button data-href="#Prepare-the-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Como precisamos usar o Together AI como o serviço LLM, devemos primeiro fazer login no site oficial para solicitar uma <a href="https://api.together.xyz/settings/api-keys">chave de API</a> e definir a chave de API <code translate="no">TOGETHER_API_KEY</code> como uma variável de ambiente.</p>
 <p>Clonar o código-fonte do Llama Stack</p>
 <pre><code translate="no" class="language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/meta-llama/llama-stack.git
 $ <span class="hljs-built_in">cd</span> llama-stack
@@ -98,7 +113,22 @@ $ pip install -e .
 <li>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Ponto de extremidade público e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">chave da API</a> no Zilliz Cloud.</li>
 </ul></li>
 </ul>
-<h3 id="Build-distribution-from-the-template" class="common-anchor-header">Criar a distribuição a partir do modelo</h3><p>Execute o seguinte comando para construir a distribuição:</p>
+<h3 id="Build-distribution-from-the-template" class="common-anchor-header">Criar a distribuição a partir do modelo<button data-href="#Build-distribution-from-the-template" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Execute o seguinte comando para construir a distribuição:</p>
 <pre><code translate="no" class="language-bash">$ llama stack build --template together --image-type conda
 <button class="copy-code-btn"></button></code></pre>
 <p>Será gerado um ficheiro em <code translate="no">~/.llama/distributions/together/together-run.yaml</code>. De seguida, execute este comando para iniciar o servidor:</p>

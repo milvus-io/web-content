@@ -58,7 +58,7 @@ go build
       </svg>
     </button></h2><p>下載<a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/master/configs/backup.yaml">範例組態檔案</a>，並依您的需求進行調整。</p>
 <p>然後在已下載或已建立的 Milvus Backup 二進位檔旁邊建立一個資料夾，將資料夾名稱為<code translate="no">configs</code> ，並將設定檔放在<code translate="no">configs</code> 資料夾內。</p>
-<p>您的資料夾結構應該與下面相似：</p>
+<p>您的資料夾結構應與以下相似：</p>
 <pre>
   <code translate="no">
   workspace
@@ -138,7 +138,7 @@ go build
         ></path>
       </svg>
     </button></h2><div class="tab-wrapper"></div>
-<p>請注意，針對 Milvus 實例執行 Milvus Backup 通常不會影響實例的執行。在備份或還原時，您的 Milvus 實例是完全正常的。</p>
+<p>請注意，針對 Milvus 實例執行 Milvus Backup 通常不會影響實例的運行。在備份或還原時，您的 Milvus 實例是完全正常的。</p>
 <p>執行以下指令建立備份。如有必要，請變更<code translate="no">collection_names</code> 和<code translate="no">backup_name</code> 。</p>
 <pre><code translate="no" class="language-shell">curl --location --request POST &#x27;http://localhost:8080/api/v1/create&#x27; \
 --header &#x27;Content-Type: application/json&#x27; \

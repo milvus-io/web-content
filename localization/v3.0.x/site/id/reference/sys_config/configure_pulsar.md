@@ -170,7 +170,7 @@ summary: Pelajari cara mengonfigurasi pulsar untuk Milvus.
     <tr>
       <td>
         <li>Pulsar dapat disediakan untuk penyewa tertentu dengan kapasitas yang sesuai yang dialokasikan untuk penyewa.</li>      
-        <li>Untuk berbagi instance Pulsar di antara beberapa instance Milvus, Anda dapat mengubahnya menjadi penyewa Pulsar, bukan penyewa default untuk setiap instance Milvus sebelum Anda memulainya. Namun, jika Anda tidak menginginkan multi-tenancy Pulsar, Anda disarankan untuk mengubah msgChannel.chanNamePrefix.cluster ke nilai yang berbeda.</li>      </td>
+        <li>Untuk membagi instance Pulsar di antara beberapa instance Milvus, Anda dapat mengubahnya menjadi penyewa Pulsar, bukan penyewa default untuk setiap instance Milvus sebelum Anda memulainya. Namun, jika Anda tidak menginginkan multi-tenancy Pulsar, Anda disarankan untuk mengubah msgChannel.chanNamePrefix.cluster ke nilai yang berbeda.</li>      </td>
       <td>public</td>
     </tr>
   </tbody>

@@ -390,7 +390,22 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Sie können eine oder mehrere Partitionen separat laden oder freigeben.</p>
-<h3 id="Load-Partitions" class="common-anchor-header">Partitionen laden</h3><p>Sie können bestimmte Partitionen separat in eine Sammlung laden. Es ist zu beachten, dass der Ladestatus einer Sammlung ungeladen bleibt, wenn eine ungeladene Partition in der Sammlung vorhanden ist.</p>
+<h3 id="Load-Partitions" class="common-anchor-header">Partitionen laden<button data-href="#Load-Partitions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sie können bestimmte Partitionen separat in eine Sammlung laden. Es ist zu beachten, dass der Ladestatus einer Sammlung ungeladen bleibt, wenn eine ungeladene Partition in der Sammlung vorhanden ist.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_partitions(
@@ -502,7 +517,22 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Release-Partitions" class="common-anchor-header">Partitionen freigeben</h3><p>Sie können auch bestimmte Partitionen freigeben.</p>
+<h3 id="Release-Partitions" class="common-anchor-header">Partitionen freigeben<button data-href="#Release-Partitions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sie können auch bestimmte Partitionen freigeben.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.release_partitions(
@@ -622,13 +652,43 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Insert-and-Delete-Entities" class="common-anchor-header">Einfügen und Löschen von Entitäten</h3><p>Sie können Einfüge-, Upsert- und Löschvorgänge in bestimmten Bereichen durchführen. Details finden Sie unter</p>
+    </button></h2><h3 id="Insert-and-Delete-Entities" class="common-anchor-header">Einfügen und Löschen von Entitäten<button data-href="#Insert-and-Delete-Entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sie können Einfüge-, Upsert- und Löschvorgänge in bestimmten Bereichen durchführen. Details finden Sie unter</p>
 <ul>
 <li><p><a href="/docs/de/insert-update-delete.md#Insert-Entities-into-a-Partition">Einfügen von Entitäten in eine Partition</a></p></li>
 <li><p><a href="/docs/de/upsert-entities.md#Upsert-Entities-in-a-Partition">Einfügen von Entitäten in eine Partition</a></p></li>
 <li><p><a href="/docs/de/delete-entities.md#Delete-Entities-from-Partitions">Entitäten aus dem Bereich löschen</a></p></li>
 </ul>
-<h3 id="Search-and-Query" class="common-anchor-header">Suche und Abfrage</h3><p>Sie können Suchen und Abfragen innerhalb bestimmter Partitionen durchführen. Für Details, siehe</p>
+<h3 id="Search-and-Query" class="common-anchor-header">Suche und Abfrage<button data-href="#Search-and-Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sie können Suchen und Abfragen innerhalb bestimmter Partitionen durchführen. Für Details, siehe</p>
 <ul>
 <li><p><a href="/docs/de/single-vector-search.md#ANN-Search-in-Partition">Durchführen von ANN-Suchen innerhalb von Partitionen</a></p></li>
 <li><p><a href="/docs/de/get-and-scalar-query.md#Queries-in-Partitions">Durchführen von Metadaten-Filterung innerhalb von Partitionen</a></p></li>

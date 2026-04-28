@@ -52,7 +52,7 @@ beta: Milvus 2.6.4+
 <li><p><code translate="no">'{wkt}'</code> é a representação WKT da geometria a consultar.</p></li>
 <li><p><code translate="no">distance</code> é o limiar específico para <code translate="no">ST_DWITHIN</code>.</p></li>
 </ul>
-<p>Para saber mais sobre os campos <code translate="no">GEOMETRY</code> no Milvus, consulte <a href="/docs/pt/geometry-field.md">Campo Geométrico</a>.</p>
+<p>Para saber mais sobre os campos <code translate="no">GEOMETRY</code> em Milvus, consulte <a href="/docs/pt/geometry-field.md">Campo Geométrico</a>.</p>
 <h2 id="Supported-geometry-operators" class="common-anchor-header">Operadores de geometria suportados<button data-href="#Supported-geometry-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,7 +80,7 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p><code translate="no">ST_EQUALS(A, B)</code> / <code translate="no">st_equals(A, B)</code></p></td>
-     <td><p>Devolve TRUE se duas geometrias forem espacialmente idênticas, o que significa que têm o mesmo conjunto de pontos e dimensão.</p></td>
+     <td><p>Devolve VERDADEIRO se duas geometrias forem espacialmente idênticas, o que significa que têm o mesmo conjunto de pontos e dimensão.</p></td>
      <td><p>Duas geometrias (A e B) são exatamente iguais no espaço?</p></td>
    </tr>
    <tr>
@@ -100,7 +100,7 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p><code translate="no">ST_OVERLAPS(A, B)</code> / <code translate="no">st_overlaps(A, B)</code></p></td>
-     <td><p>Devolve VERDADEIRO se as geometrias A e B tiverem a mesma dimensão, se sobrepuserem parcialmente e nenhuma delas contiver totalmente a outra.</p></td>
+     <td><p>Devolve VERDADEIRO se as geometrias A e B tiverem a mesma dimensão, se sobrepuserem parcialmente e nenhuma contiver totalmente a outra.</p></td>
      <td><p>Duas parcelas de terreno (A e B) sobrepõem-se?</p></td>
    </tr>
    <tr>
@@ -136,7 +136,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>O operador <code translate="no">ST_EQUALS</code> devolve TRUE se duas geometrias forem espacialmente idênticas, o que significa que têm o mesmo conjunto de pontos e dimensão. Isto é útil para verificar se dois objectos geométricos armazenados representam exatamente a mesma localização e forma.</p>
 <p><strong>Exemplo</strong></p>
-<p>Suponha que pretende verificar se uma geometria armazenada (como um ponto ou polígono) é exatamente igual a uma geometria de destino. Por exemplo, é possível comparar um ponto armazenado com um ponto de interesse específico.</p>
+<p>Suponha que pretende verificar se uma geometria armazenada (como um ponto ou um polígono) é exatamente igual a uma geometria de destino. Por exemplo, é possível comparar um ponto armazenado com um ponto de interesse específico.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to check if a geometry matches a specific point</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_EQUALS(geo_field, &#x27;POINT(10 20)&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -157,7 +157,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>O operador <code translate="no">ST_CONTAINS</code> devolve TRUE se a primeira geometria contiver completamente a segunda geometria. Isto é útil para encontrar pontos dentro de um polígono, ou polígonos mais pequenos dentro de um polígono maior.</p>
 <p><strong>Exemplo</strong></p>
-<p>Imagine que tem uma coleção de distritos de uma cidade e quer encontrar um ponto de interesse específico, como um restaurante, que se situa dentro dos limites de um determinado distrito.</p>
+<p>Imagine que tem uma coleção de bairros de uma cidade e quer encontrar um ponto de interesse específico, como um restaurante, que se situa dentro dos limites de um determinado bairro.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries completely within a specific polygon.</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_CONTAINS(geo_field, &#x27;POLYGON ((0 0, 10 0, 10 10, 0 10, 0 0))&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

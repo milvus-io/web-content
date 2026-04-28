@@ -3,9 +3,9 @@ id: integrate_with_bentoml.md
 summary: >-
   이 가이드에서는 Milvus 벡터 데이터베이스와 함께 BentoCloud에서 오픈 소스 임베딩 모델과 대규모 언어 모델을 사용하여 검색 증강
   생성(RAG) 애플리케이션을 구축하는 방법을 설명합니다.
-title: Milvus와 BentoML을 사용한 검색 증강 세대(RAG)
+title: 검색 증강 세대(RAG)와 Milvus 및 BentoML
 ---
-<h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="common-anchor-header">Milvus와 BentoML을 사용한 검색 증강 세대(RAG)<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="anchor-icon" translate="no">
+<h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="common-anchor-header">검색 증강 세대(RAG)와 Milvus 및 BentoML<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

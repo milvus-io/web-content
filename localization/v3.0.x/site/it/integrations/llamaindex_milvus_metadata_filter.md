@@ -166,7 +166,7 @@ filters = MetadataFilters(
     ]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Recupero dall'archivio vettoriale con i filtri</strong></p>
+<p><strong>Recupero da un archivio vettoriale con filtri</strong></p>
 <pre><code translate="no" class="language-python">retriever = index.as_retriever(filters=filters, similarity_top_k=<span class="hljs-number">5</span>)
 result_nodes = retriever.retrieve(<span class="hljs-string">&quot;Books about life&quot;</span>)
 <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> result_nodes:
@@ -181,7 +181,22 @@ result_nodes = retriever.retrieve(<span class="hljs-string">&quot;Books about li
 Life
 {'author': 'Keith Richards', 'genre': 'Memoir', 'year': 2010}
 </code></pre>
-<h3 id="Multiple-Metdata-Filters" class="common-anchor-header">Filtri multipli per i metadati</h3><p>È anche possibile combinare più filtri di metadati per creare query più complesse. LlamaIndex supporta sia le condizioni <code translate="no">AND</code> che <code translate="no">OR</code> per combinare i filtri. Ciò consente di recuperare in modo più preciso e flessibile i documenti in base ai loro attributi di metadati.</p>
+<h3 id="Multiple-Metdata-Filters" class="common-anchor-header">Filtri multipli per i metadati<button data-href="#Multiple-Metdata-Filters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>È anche possibile combinare più filtri di metadati per creare query più complesse. LlamaIndex supporta sia le condizioni <code translate="no">AND</code> che <code translate="no">OR</code> per combinare i filtri. Ciò consente di recuperare in modo più preciso e flessibile i documenti in base ai loro attributi di metadati.</p>
 <p><strong>Condizione <code translate="no">AND</code></strong></p>
 <p>Proviamo a fare un esempio di filtro per i libri pubblicati tra il 1979 e il 2010 (in particolare, dove 1979 &lt; anno ≤ 2010):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core.vector_stores <span class="hljs-keyword">import</span> FilterCondition

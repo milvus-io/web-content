@@ -408,7 +408,7 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Sie können auch eine Sammlung ohne Index-Parameter erstellen und diese nachträglich hinzufügen. In diesem Fall lädt Milvus die Sammlung bei ihrer Erstellung nicht. .</p>
-<p>Der folgende Codeschnipsel zeigt, wie man eine Sammlung ohne Index erstellt, wobei der Ladestatus der Sammlung bei der Erstellung ungeladen bleibt.</p>
+<p>Der folgende Codeschnipsel demonstriert, wie man eine Sammlung ohne Index erstellt, wobei der Ladestatus der Sammlung bei der Erstellung ungeladen bleibt.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
@@ -521,7 +521,22 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Sie können Eigenschaften für die zu erstellende Sammlung festlegen, damit sie in Ihren Dienst passt. Die anwendbaren Eigenschaften sind wie folgt.</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">Shard-Nummer festlegen</h3><p>Shards sind horizontale Abschnitte einer Sammlung, und jeder Shard entspricht einem Dateneingabekanal. Standardmäßig hat jede Sammlung einen Shard. Sie können die Anzahl der Scherben beim Erstellen einer Sammlung angeben, um sie besser an Ihr Datenvolumen und Ihre Arbeitslast anzupassen.</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">Shard-Nummer festlegen<button data-href="#Set-Shard-Number" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Shards sind horizontale Abschnitte einer Sammlung, und jeder Shard entspricht einem Dateneingabekanal. Standardmäßig hat jede Sammlung einen Shard. Sie können die Anzahl der Scherben beim Erstellen einer Sammlung angeben, um sie besser an Ihr Datenvolumen und Ihre Arbeitslast anzupassen.</p>
 <p>Als allgemeine Richtlinie sollten Sie bei der Festlegung der Anzahl der Scherben Folgendes berücksichtigen:</p>
 <ul>
 <li><strong>Die Datengröße:</strong> In der Regel wird ein Shard für jeweils 200 Millionen Entitäten verwendet. Sie können auch eine Schätzung auf der Grundlage der Gesamtdatengröße vornehmen, z. B. ein Shard pro 100 GB Daten, die Sie einfügen möchten.</li>
@@ -575,7 +590,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">Aktivieren von mmap</h3><p>Milvus aktiviert mmap standardmäßig für alle Sammlungen, so dass Milvus die rohen Felddaten in den Speicher mappen kann, anstatt sie vollständig zu laden. Dies reduziert den Speicherbedarf und erhöht die Kapazität der Sammlung. Einzelheiten zu mmap finden Sie unter <a href="/docs/de/mmap.md">mmap verwenden</a>.</p>
+<h3 id="Enable-mmap" class="common-anchor-header">Aktivieren von mmap<button data-href="#Enable-mmap" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus aktiviert mmap standardmäßig für alle Sammlungen, so dass Milvus die rohen Felddaten in den Speicher mappen kann, anstatt sie vollständig zu laden. Dies reduziert den Speicherbedarf und erhöht die Kapazität der Sammlung. Einzelheiten zu mmap finden Sie unter <a href="/docs/de/mmap.md">mmap verwenden</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#plaintext">Klartext</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap</span>
@@ -628,7 +658,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Collection-TTL" class="common-anchor-header">TTL für Sammlungen festlegen</h3><p>Wenn die Daten in einer Sammlung für eine bestimmte Zeitspanne gelöscht werden müssen, sollten Sie ihre Time-To-Live (TTL) in Sekunden festlegen. Sobald die TTL abläuft, löscht Milvus die Entitäten in der Sammlung. Die Löschung erfolgt asynchron, was bedeutet, dass Suchen und Abfragen noch möglich sind, bevor die Löschung abgeschlossen ist.</p>
+<h3 id="Set-Collection-TTL" class="common-anchor-header">TTL für Sammlungen festlegen<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Wenn die Daten in einer Sammlung für eine bestimmte Zeitspanne gelöscht werden müssen, sollten Sie ihre Time-To-Live (TTL) in Sekunden festlegen. Sobald die TTL abläuft, löscht Milvus die Entitäten in der Sammlung. Die Löschung erfolgt asynchron, was bedeutet, dass Suchen und Abfragen noch möglich sind, bevor die Löschung abgeschlossen ist.</p>
 <p>Das folgende Codeschnipsel setzt die TTL auf einen Tag (86400 Sekunden). Es wird empfohlen, die TTL auf mindestens ein paar Tage einzustellen.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -684,7 +729,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Consistency-Level" class="common-anchor-header">Konsistenzlevel festlegen</h3><p>Bei der Erstellung einer Sammlung können Sie die Konsistenzstufe für Suchen und Abfragen in der Sammlung festlegen. Sie können auch die Konsistenzstufe der Sammlung während einer bestimmten Suche oder Abfrage ändern.</p>
+<h3 id="Set-Consistency-Level" class="common-anchor-header">Konsistenzlevel festlegen<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Bei der Erstellung einer Sammlung können Sie die Konsistenzstufe für Suchen und Abfragen in der Sammlung festlegen. Sie können auch die Konsistenzstufe der Sammlung während einer bestimmten Suche oder Abfrage ändern.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With consistency level</span>
@@ -738,5 +798,20 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Weitere Informationen zu Konsistenzstufen finden Sie unter <a href="/docs/de/tune_consistency.md">Konsistenzstufe</a>.</p>
-<h3 id="Enable-Dynamic-Field" class="common-anchor-header">Dynamisches Feld aktivieren</h3><p>Das dynamische Feld in einer Sammlung ist ein reserviertes JavaScript Object Notation (JSON)-Feld namens <strong>$meta</strong>. Sobald Sie dieses Feld aktiviert haben, speichert Milvus alle nicht schema-definierten Felder, die in jeder Entität enthalten sind, und ihre Werte als Schlüssel-Wert-Paare in dem reservierten Feld.</p>
+<h3 id="Enable-Dynamic-Field" class="common-anchor-header">Dynamisches Feld aktivieren<button data-href="#Enable-Dynamic-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Das dynamische Feld in einer Sammlung ist ein reserviertes JavaScript Object Notation (JSON)-Feld namens <strong>$meta</strong>. Sobald Sie dieses Feld aktiviert haben, speichert Milvus alle nicht schema-definierten Felder, die in jeder Entität enthalten sind, und ihre Werte als Schlüssel-Wert-Paare in dem reservierten Feld.</p>
 <p>Einzelheiten zur Verwendung des dynamischen Feldes finden Sie unter <a href="/docs/de/enable-dynamic-field.md">Dynamisches Feld</a>.</p>

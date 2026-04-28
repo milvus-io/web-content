@@ -5,7 +5,7 @@ summary: >-
   de um conjunto de dados de manchetes de notícias, utilizaremos o Milvus para
   calcular eficientemente as distâncias entre embeddings para ajudar o HDBSCAN
   no agrupamento e, em seguida, visualizaremos os resultados para análise usando
-  o método UMAP. Este notebook é uma adaptação do Milvus do artigo de Dylan
+  o método UMAP. Este caderno é uma adaptação do Milvus do artigo de Dylan
   Castillo.
 title: Agrupamento HDBSCAN com Milvus
 ---
@@ -245,7 +245,7 @@ hdb = h.fit(dist_metric)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Já agrupámos os dados utilizando o HDBSCAN e podemos obter as etiquetas para cada ponto de dados. No entanto, usando algumas técnicas de visualização, podemos obter a imagem completa dos clusters para uma análise intuitiva. Agora vamos utilizar o UMAP para visualizar os clusters. O UMAP é um método eficiente utilizado para a redução da dimensionalidade, preservando a estrutura dos dados de alta dimensão enquanto os projecta num espaço de menor dimensão para visualização ou análise posterior. Aqui, mais uma vez, iteramos os pontos de dados e obtemos o id e o texto dos dados originais, depois utilizamos o ploty para representar os pontos de dados com estas metainformações numa figura e utilizamos cores diferentes para representar os diferentes clusters.</p>
+    </button></h2><p>Já agrupámos os dados utilizando o HDBSCAN e podemos obter as etiquetas para cada ponto de dados. No entanto, usando algumas técnicas de visualização, podemos obter a imagem completa dos clusters para uma análise intuitiva. Agora vamos utilizar o UMAP para visualizar os clusters. O UMAP é um método eficiente utilizado para a redução da dimensionalidade, preservando a estrutura de dados de elevada dimensão enquanto os projecta num espaço de dimensão inferior para visualização ou análise posterior. Aqui, mais uma vez, iteramos os pontos de dados e obtemos o id e o texto dos dados originais, depois utilizamos o ploty para representar os pontos de dados com estas metainformações numa figura e utilizamos cores diferentes para representar os diferentes clusters.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> plotly.io <span class="hljs-keyword">as</span> pio
 
 pio.renderers.default = <span class="hljs-string">&quot;notebook&quot;</span>

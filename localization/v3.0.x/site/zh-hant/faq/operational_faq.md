@@ -42,12 +42,12 @@ Node(s) querynode
         ID: 2        Version: 2.4.0        Address: 10.0.0.5:19530
         ID: 3        Version: 2.4.0        Address: 10.0.0.6:19530
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="What-parameters-can-be-adjusted-if-query-node-memory-usage-is-unbalanced" class="common-anchor-header">如果查詢節點記憶體使用不平衡，可以調整哪些參數？</h4><p>有時候，查詢節點的記憶體用量會有所不同，因為有些作為委託人的節點會使用較多的 RAM。如果委託人的記憶體較多，請調整 queryCoord.delegatorMemoryOverloadFactor，以將封存的區段卸載到其他節點，並降低 RAM 使用量。</p>
+<h4 id="What-parameters-can-be-adjusted-if-query-node-memory-usage-is-unbalanced" class="common-anchor-header">如果查詢節點記憶體使用不平衡，可以調整哪些參數？</h4><p>有時候，查詢節點的記憶體用量會有所不同，因為有些節點作為委託人會使用較多的 RAM。如果委託人的記憶體較多，請調整 queryCoord.delegatorMemoryOverloadFactor，以將封存的區段卸載到其他節點，並降低 RAM 使用量。</p>
 <ul>
 <li>預設值為 0.1。</li>
 <li>增加此值 (例如，增加到 0.3 或更高) 會使系統從超載的 delegator 卸載更多封存區段到其他 QueryNodes，幫助平衡記憶體使用。您也可以嘗試將值增加到 1，這表示不會在 delegator 節點中載入封存區段。</li>
 </ul>
-<p>如果您不想重新啟動群集，您可以使用 birdwatcher 修改 milvus 配置：</p>
+<p>如果您不想重新啟動集群，您可以使用 birdwatcher 修改 milvus 配置：</p>
 <pre><code translate="no">.<span class="hljs-operator">/</span>birdwatcher
 Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">connect</span> <span class="hljs-comment">--etcd &lt;your-etcd-ip&gt;:2379 --auto</span>
 
@@ -68,7 +68,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <p>對於 IVF 索引，nprobe 參數決定在資料集中的搜尋範圍。增加 nprobe 會增加搜尋向量的比例和召回率，但會降低查詢效能。</p>
 <p>對於 HNSW 索引，ef 參數決定圖搜尋的寬度。增加 ef 會增加在圖表上搜尋的點數量和召回率，但會降低查詢效能。</p>
 <p>如需詳細資訊，請參閱<a href="https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">向量索引</a>。</p>
-<h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">為什麼我對配置檔案的變更沒有生效？</h4><p>Milvus 不支援在執行時修改組態檔案。您必須重新啟動 Milvus Docker，配置檔案的變更才會生效。</p>
+<h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">為什麼我對配置檔案的變更沒有生效？</h4><p>Milvus 不支援在執行期間修改組態檔案。您必須重新啟動 Milvus Docker，配置檔案的變更才會生效。</p>
 <h4 id="How-do-I-know-if-Milvus-has-started-successfully" class="common-anchor-header">我如何知道 Milvus 是否成功啟動？</h4><p>如果 Milvus 是使用 Docker Compose 啟動，請執行<code translate="no">docker ps</code> 觀察有多少 Docker 容器正在執行，並檢查 Milvus 服務是否正確啟動。</p>
 <p>對於 Milvus 獨立版本，您應該至少可以觀察到三個執行中的 Docker 容器，其中一個是 Milvus 服務，另外兩個是 etcd 管理和儲存服務。如需詳細資訊，請參閱<a href="/docs/zh-hant/install_standalone-docker.md">安裝 Milvus standalone</a>。</p>
 <h4 id="Why-is-the-time-in-the-log-files-different-from-the-system-time" class="common-anchor-header">為什麼日誌檔中的時間與系統時間不同？</h4><p>時間不同通常是因為主機不使用 Coordinated Universal Time (UTC)。</p>
@@ -83,7 +83,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <p>執行 lscpu 指令檢查您的 CPU 是否支援上述 SIMD 指令集：</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>lscpu |<span class="hljs-params"> grep -e sse4_2 -e avx -e avx2 -e avx512
 </span><button class="copy-code-btn"></button></code></pre>
-<h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">為什麼 Milvus 在啟動時返回<code translate="no">illegal instruction</code> ？</h4><p>Milvus 要求您的 CPU 支援 SIMD 指令集：SSE4.2、AVX、AVX2 或 AVX512。CPU 必須至少支援其中之一，以確保 Milvus 正常運作。在啟動時返回<code translate="no">illegal instruction</code> 錯誤，表示您的 CPU 不支援上述四種指令集中的任何一種。</p>
+<h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">為什麼 Milvus 在啟動時返回<code translate="no">illegal instruction</code> ？</h4><p>Milvus 要求您的 CPU 支援 SIMD 指令集：SSE4.2、AVX、AVX2 或 AVX512。CPU 必須至少支援其中之一，以確保 Milvus 正常運作。在啟動時回傳<code translate="no">illegal instruction</code> 錯誤，表示您的 CPU 不支援上述四種指令集中的任何一種。</p>
 <p>請參閱<a href="/docs/zh-hant/prerequisite-docker.md">CPU 對 SIMD 指令集的支援</a>。</p>
 <h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">我可以在 Windows 上安裝 Milvus 嗎？</h4><p>可以，您可以從原始碼或二進位套件編譯在 Windows 上安裝 Milvus。</p>
 <p>請參閱<a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">在 Windows 上執行 Milvus</a>了解如何在 Windows 上安裝 Milvus。</p>
@@ -93,14 +93,14 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">我可以在斷線時部署Milvus嗎？</h4><p>是的，您可以在離線環境下安裝 Milvus。更多資訊請參閱<a href="/docs/zh-hant/install_offline-helm.md">離線安裝 Milvus</a>。</p>
 <h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">我在哪裡可以找到 Milvus 產生的日誌？</h4><p>Milvus 日誌預設列印到 stout (標準輸出) 和 stderr (標準錯誤)，然而我們強烈建議在生產中重定向您的日誌到一個持久卷。要這樣做，請更新<strong>milvus.yaml</strong> 中的<code translate="no">log.file.rootPath</code> 。如果您使用<code translate="no">milvus-helm</code> 圖表部署 Milvus，您也需要先透過<code translate="no">--set log.persistence.enabled=true</code> 啟用日誌持久化。</p>
 <p>如果你沒有變更設定，使用 kubectl logs<pod-name> 或 docker logs CONTAINER 也可以幫你找到日誌。</p>
-<h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">我可以在插入資料之前，先為一個區段建立索引嗎？</h4><p>可以。但我們建議您在為每個區段建立索引之前，先分批插入資料，每批不應超過 256 MB。</p>
+<h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">我可以在插入資料之前先為一個區段建立索引嗎？</h4><p>可以。但我們建議您在為每個區段建立索引之前，先分批插入資料，每批不應超過 256 MB。</p>
 <h4 id="Can-I-share-an-etcd-instance-among-multiple-Milvus-instances" class="common-anchor-header">我可以在多個 Milvus 實體中共用一個 etcd 實體嗎？</h4><p>是的，您可以在多個 Milvus 實例中共用一個 etcd 實例。要做到這一點，您需要在啟動每個 Milvus 實例之前，將<code translate="no">etcd.rootPath</code> 改為每個實例配置文件中的單獨值。</p>
 <h4 id="Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances" class="common-anchor-header">我可以在多個 Milvus 實例中共用一個 Pulsar 實例嗎？</h4><p>是的，您可以在多個 Milvus 實例之間共享一個 Pulsar 實例。要這樣做，你可以</p>
 <ul>
 <li>如果在你的 Pulsar 实例上启用了多租户，考虑为每个 Milvus 实例分配一个单独的租户或命名空间。要做到這一點，您需要在啟動 Milvus 實例之前，將其配置檔中的<code translate="no">pulsar.tenant</code> 或<code translate="no">pulsar.namespace</code> 改為每個實例的唯一值。</li>
 <li>如果您不打算在 Pulsar 實例上啟用多租戶功能，請考慮在啟動 Milvus 實例之前，將配置檔案中的<code translate="no">msgChannel.chanNamePrefix.cluster</code> 變更為每個實例的唯一值。</li>
 </ul>
-<h4 id="Can-I-share-a-MinIO-instance-among-multiple-Milvus-instances" class="common-anchor-header">我可以在多個 Milvus 實例中共用一個 MinIO 實例嗎？</h4><p>是的，您可以在多個 Milvus 實體之間共用一個 MinIO 實體。要做到這一點，您需要在啟動每個 Milvus 實例之前，將<code translate="no">minio.rootPath</code> 改為每個 Milvus 實例在配置文件中的唯一值。</p>
+<h4 id="Can-I-share-a-MinIO-instance-among-multiple-Milvus-instances" class="common-anchor-header">我可以在多個 Milvus 實例中共用一個 MinIO 實例嗎？</h4><p>是的，您可以在多個 Milvus 實體之間共用一個 MinIO 實體。要做到這一點，您需要在啟動每個 Milvus 實例之前，將<code translate="no">minio.rootPath</code> 改為每個 Milvus 實例配置文件中的唯一值。</p>
 <h4 id="How-do-I-handle-the-error-message-pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345" class="common-anchor-header">如何處理<code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code> 錯誤訊息？</h4><p>錯誤訊息<code translate="no">Illegal uri [example.db]</code> 表示您嘗試使用早期版本的 PyMilvus 連線到 Milvus Lite，而早期版本的 PyMilvus 並不支援此連線類型。要解決這個問題，請將你的 PyMilvus 安裝升級到至少 2.4.2 版，它包含了對連線到 Milvus Lite 的支援。</p>
 <p>您可以使用下列指令升級 PyMilvus：</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
@@ -108,9 +108,9 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <h4 id="Why-am-I-getting-fewer-results-than-the-limit-I-set-in-my-searchquery" class="common-anchor-header">為什麼我得到的結果少於我在搜尋/查詢中設定的<code translate="no">limit</code> ？</h4><p>有幾個原因可能會導致您收到的結果比您指定的<code translate="no">limit</code> 少：</p>
 <ul>
 <li><p><strong>資料有限</strong>：資料集中可能沒有足夠的實體來滿足您所要求的限制。如果集合中的實體總數少於限制，您自然會收到較少的結果。</p></li>
-<li><p><strong>重複的主鍵</strong>：Milvus 在搜尋期間遇到重複的主索引鍵時，會優先處理特定的實體。此行為依據搜尋類型而有所不同：</p></li>
+<li><p><strong>重複的主鍵</strong>：Milvus 在搜尋過程中遇到重複的主索引鍵時，會優先處理特定的實體。此行為依據搜尋類型而有所不同：</p></li>
 <li><p><strong>查詢 (完全匹配)：</strong>Milvus 選擇具有匹配 PK 的最新實體。 ANN 搜尋：Milvus 選擇相似度得分最高的實體，即使實體共享相同的 PK。 如果您的集合有許多重複的主索引鍵，此優先順序可能會導致比限制更少的唯一結果。</p></li>
-<li><p><strong>匹配不足</strong>：您的搜尋篩選表達式可能過於嚴格，導致符合相似性臨界值的實體較少。如果為搜尋設定的條件限制性過高，就不會有足夠的實體符合，導致結果比預期的少。</p></li>
+<li><p><strong>匹配不足</strong>：您的搜尋篩選表達式可能過於嚴格，導致符合相似性臨界值的實體較少。如果為搜尋設定的條件限制性過高，將沒有足夠的實體符合，導致結果少於預期。</p></li>
 </ul>
 <h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>.這是什麼原因造成的，該如何解決？</h4><p>當您嘗試在 Windows 平台上使用 Milvus Lite 時，會發生此錯誤。Milvus Lite主要是為Linux環境設計，對Windows可能沒有本機支援。</p>
 <p>解決方法是使用 Linux 環境：</p>
@@ -127,7 +127,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <p>要了解並處理這些錯誤：</p>
 <ul>
 <li>瞭解<code translate="no">len(str)</code> 在 Python 中代表字元數，而不是以位元組表示的大小。</li>
-<li>對於以字串為基礎的資料類型，例如 VARCHAR 和 JSON，使用<code translate="no">len(bytes(str, encoding='utf-8'))</code> 來決定實際大小（以位元組為單位元組），也就是 Milvus 使用的 "max-length"。</li>
+<li>對於以字串為基礎的資料類型，例如 VARCHAR 和 JSON，使用<code translate="no">len(bytes(str, encoding='utf-8'))</code> 來決定實際大小 (位元組)，這也是 Milvus 使用 "max-length" 的原因。</li>
 </ul>
 <p>Python 中的範例：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Python Example: result of len() str cannot be used as &quot;max-length&quot; in Milvus </span>
@@ -137,7 +137,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(<span class="hljs-built_in">bytes</span>(s, <span class="hljs-string">&quot;utf-8&quot;</span>)) <span class="hljs-comment"># Size in bytes of s, max-length in Milvus.</span>
 <span class="hljs-number">18</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code>.這是什麼原因造成的，該如何解決？</h4><p>這個錯誤表示您嘗試使用不支援的早期版本 pymilvus 連線到 Milvus Lite。要解決這個問題，請將您的 pymilvus 安裝升級到至少 2.4.2 版本。這個版本支援連線到 Milvus Lite。要升級，請使用下列指令：</p>
+<h4 id="pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code>.這是什麼原因造成的，該如何解決？</h4><p>這個錯誤表示您嘗試使用不支援的早期版本 pymilvus 連線到 Milvus Lite。要解決這個問題，請將您的 pymilvus 安裝升級到至少 2.4.2 版本。這個版本支援連線到 Milvus Lite。要升級，請使用以下指令：</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Still-have-questions" class="common-anchor-header">還有問題嗎？</h4><p>您可以</p>

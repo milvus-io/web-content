@@ -69,12 +69,12 @@ title: Voraussetzungen für die Installation von Milvus Standalone
 <tr><th>Betriebssytem</th><th>Software</th><th>Hinweis</th></tr>
 </thead>
 <tbody>
-<tr><td>macOS 10.14 oder höher</td><td>Docker-Schreibtisch</td><td>Stellen Sie die virtuelle Maschine (VM) von Docker so ein, dass sie mindestens 2 virtuelle CPUs (vCPUs) und 8 GB anfänglichen Speicher verwendet. Andernfalls kann die Installation fehlschlagen. <br/>Weitere Informationen finden Sie unter <a href="https://docs.docker.com/desktop/mac/install/">Installieren von Docker Desktop auf Mac</a>.</td></tr>
+<tr><td>macOS 10.14 oder höher</td><td>Docker-Schreibtisch</td><td>Stellen Sie die virtuelle Maschine (VM) von Docker so ein, dass sie mindestens 2 virtuelle CPUs (vCPUs) und 8 GB Anfangsspeicher verwendet. Andernfalls kann die Installation fehlschlagen. <br/>Weitere Informationen finden Sie unter <a href="https://docs.docker.com/desktop/mac/install/">Installieren von Docker Desktop auf Mac</a>.</td></tr>
 <tr><td>Linux-Plattformen</td><td><ul><li>Docker 19.03 oder höher</li><li>Docker Compose 1.25.1 oder höher</li></ul></td><td>Weitere Informationen finden Sie unter <a href="https://docs.docker.com/engine/install/">Docker-Engine installieren</a> und <a href="https://docs.docker.com/compose/install/">Docker Compose installieren</a>.</td></tr>
 <tr><td>Windows mit aktivierter WSL 2</td><td>Docker-Arbeitsplatz</td><td>Wir empfehlen, Quellcode und andere Daten, die in Linux-Containern gebunden sind, im Linux-Dateisystem statt im Windows-Dateisystem zu speichern.<br/>Weitere Informationen finden Sie unter <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">Installieren von Docker Desktop unter Windows mit WSL 2-Backend</a>.</td></tr>
 </tbody>
 </table>
-<p>Die folgenden Abhängigkeiten werden automatisch beschafft und konfiguriert, wenn Milvus Standalone mithilfe des Docker-Skripts oder der Docker Compose-Konfiguration installiert wird:</p>
+<p>Die folgenden Abhängigkeiten werden automatisch beschafft und konfiguriert, wenn Milvus Standalone mit dem Docker-Skript oder der Docker Compose-Konfiguration installiert wird:</p>
 <table>
 <thead>
 <tr><th>Software</th><th>Version</th><th>Hinweis</th></tr>

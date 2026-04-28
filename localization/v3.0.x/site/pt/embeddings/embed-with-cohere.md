@@ -40,11 +40,11 @@ cohere_ef = CohereEmbeddingFunction(
 <p><strong>Parâmetros</strong>:</p>
 <ul>
 <li><p><code translate="no">model_name</code> <em>(string</em>)</p>
-<p>O nome do modelo de incorporação Cohere a ser usado para codificação. Pode especificar qualquer um dos nomes de modelos de incorporação Cohere disponíveis, por exemplo, <code translate="no">embed-english-v3.0</code>, <code translate="no">embed-multilingual-v3.0</code>, etc. Se este parâmetro não for especificado, será utilizado <code translate="no">embed-english-light-v3.0</code>. Para obter uma lista dos modelos disponíveis, consulte <a href="https://docs.cohere.com/docs/models#embed">Incorporar</a>.</p></li>
+<p>O nome do modelo de incorporação Cohere a utilizar para a codificação. Pode especificar qualquer um dos nomes de modelos de incorporação Cohere disponíveis, por exemplo, <code translate="no">embed-english-v3.0</code>, <code translate="no">embed-multilingual-v3.0</code>, etc. Se este parâmetro não for especificado, será utilizado <code translate="no">embed-english-light-v3.0</code>. Para obter uma lista dos modelos disponíveis, consulte <a href="https://docs.cohere.com/docs/models#embed">Incorporar</a>.</p></li>
 <li><p><code translate="no">api_key</code> <em>(cadeia de caracteres</em>)</p>
 <p>A chave da API para acessar a API do Cohere.</p></li>
 <li><p><code translate="no">input_type</code> <em>(string</em>)</p>
-<p>O tipo de entrada passado para o modelo. Necessário para incorporar modelos v3 e superiores.</p>
+<p>O tipo de entrada passado para o modelo. Necessário para modelos de incorporação v3 e superiores.</p>
 <ul>
 <li><code translate="no">&quot;search_document&quot;</code>: Usado para embeddings armazenados em um banco de dados vetorial para casos de uso de pesquisa.</li>
 <li><code translate="no">&quot;search_query&quot;</code>: Utilizado para incorporações de consultas de pesquisa executadas numa base de dados vetorial para encontrar documentos relevantes.</li>

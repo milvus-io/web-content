@@ -1,9 +1,7 @@
 ---
 id: minhash-lsh.md
 title: MINHASH_LSH
-summary: >-
-  効率的な重複排除と類似検索は、大規模な機械学習データセット、特に大規模言語モデル（Large Language Models:
-  LLM）の学習コーパスのクリーニングのようなタスクにとって重要である。数百万、数十億のドキュメントを扱う場合、従来の完全マッチングでは時間とコストがかかりすぎる。
+summary: MinHash LSHインデックスを使用して、大規模なテキストデータセットの重複検出とJaccard類似性検索を高速化する。
 ---
 <h1 id="MINHASHLSH" class="common-anchor-header">MINHASH_LSH<button data-href="#MINHASHLSH" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +18,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>効率的な重複排除と類似検索は、大規模な機械学習データセット、特に大規模言語モデル(LLM)の学習コーパスのクリーニングのようなタスクにとって重要である。数百万、数十億のドキュメントを扱う場合、従来の完全マッチングでは時間とコストがかかりすぎる。</p>
+    </button></h1><p>効率的な重複排除と類似検索は、大規模な機械学習データセット、特に大規模言語モデル(LLM)の学習コーパスのクリーニングのようなタスクにとって重要である。数百万から数十億のドキュメントを扱う場合、従来の完全マッチングでは時間とコストがかかりすぎる。</p>
 <p>Milvusの<strong>MINHASH_LSH</strong>インデックスは、2つの強力な技術を組み合わせることで、高速でスケーラブルかつ正確な近似重複排除を可能にします：</p>
 <ul>
 <li><p><a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a>：MinHash：文書の類似性を推定するためのコンパクトなシグネチャ（または「フィンガープリント」）を素早く生成する。</p></li>
@@ -89,7 +87,7 @@ summary: >-
 <p>全プロセスを以下に示します：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
    </span> <span class="img-wrapper"> <span>Minhashワークフロー</span> </span></p>
 <div class="alert note">
 <p>使用するハッシュ関数の数によって、MinHash署名の次元が決まります。次元数が高いほど近似精度が向上しますが、ストレージと計算量が増加します。</p>
@@ -115,7 +113,7 @@ summary: >-
 <ol>
 <li><p><strong>署名のセグメンテーション：</strong></p>
 <p><em>n次元の</em>MinHash署名は<em>b個の</em>バンドに分割される。各バンドには<em>r個の</em>連続したハッシュ値が含まれるため、署名の長さは<em>n = b × rを</em>満たす。</p>
-<p>たとえば、128次元のMinHash署名<em>（n = 128</em>）を32のバンド<em>（b = 32</em>）に分割する場合、各バンドには4つのハッシュ値<em>（r = 4</em>）が含まれる。</p></li>
+<p>たとえば、128次元のMinHash署名<em>（n = 128）が</em>あり、それを32のバンド<em>（b = 32</em>）に分割する場合、各バンドには4つのハッシュ値<em>（r = 4</em>）が含まれます。</p></li>
 <li><p><strong>バンドレベルのハッシュ：</strong></p>
 <p>セグメンテーション後、各バンドは標準的なハッシュ関数を使用して独立に処理され、バケツに割り当てられる。バンド内で2つの署名が同じハッシュ値を生成する場合、つまり同じバケツに入る場合、それらは一致する可能性があるとみなされる。</p></li>
 <li><p><strong>候補の選択：</strong></p>
@@ -127,24 +125,24 @@ summary: >-
 <ul>
 <li><p>それらが1つの行（ハッシュ位置）で同一である確率は<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span>sである。</p></li>
 <li><p>バンドのすべての行（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">rr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span>r）で一致する確率は<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">srs^r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6644em;"></span></span></span></span>s<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> r</span></span></span></span></span></span></span></span></span></p></li>
-<li><p><strong>少なくとも1つのバンドで</strong>一致する確率は<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1-</mn><mo stretchy="false">(</mo><msup><mi>1-sr</mi></msup><msup><mo stretchy="false">)</mo><mi>b1</mi></msup></mrow><annotation encoding="application/x-tex">- (1 - s^r)^b</annotation></semantics></math></span></span>である<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span> 1</span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">(1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0991em;vertical-align:-0.25em;"></span> s</span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> r</span></span></span></span></span></span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mclose"><span class="mclose">)</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> b</p></li>
+<li><p><strong>少なくとも1つのバンドで</strong>一致する確率は、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1-</mn><mo stretchy="false">(</mo><mn>1-</mn><msup><mi>sr</mi></msup><msup><mo stretchy="false">)</mo><mi>b1</mi></msup></mrow><annotation encoding="application/x-tex">- (1 - s^r)^b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span></span></span></span>1<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">(1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0991em;vertical-align:-0.25em;"></span> s</span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> r</span></span></span></span></span></span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mclose"><span class="mclose">)</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> bである。</p></li>
 </ul>
 <p>詳細については、<a href="https://en.wikipedia.org/wiki/Locality-sensitive_hashing">Locality-sensitive hashingを</a>参照のこと。</p>
 </div>
 <p>128次元のMinHash署名を持つ3つのドキュメントを考える：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
-   </span> <span class="img-wrapper"> <span>Lshワークフロー1</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
+   </span> <span class="img-wrapper"> <span>LSHワークフロー1</span> </span></p>
 <p>まず、LSHは128次元の署名を、それぞれ連続する4つの値からなる32のバンドに分割する：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
    </span> <span class="img-wrapper"> <span>Lshワークフロー2</span> </span></p>
 <p>次に、各バンドはハッシュ関数を使用して異なるバケットにハッシュ化される。バケットを共有する文書ペアが類似候補として選択される。以下の例では、文書Aと文書Bは<strong>バンド</strong>0でハッシュ結果が衝突するため、類似候補として選択される：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
    </span> <span class="img-wrapper"> <span>Lsh ワークフロー 3</span> </span></p>
 <div class="alert note">
 <p>バンドの数は<code translate="no">mh_lsh_band</code> パラメータによって制御される。詳細については、<a href="/docs/ja/minhash-lsh.md#Index-building-params">インデックス作成パラメータを</a>参照。</p>
@@ -189,10 +187,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>MinHash LSHを使用した重複排除プロセスにより、Milvusはコレクションに挿入する前に、重複しそうなテキストまたは構造化レコードを効率的に識別し、フィルタリングすることができます。</p>
-<p><img translate="no" src="/docs/v2.6.x/assets/deduplication-workflow.png" alt="Deduplication Workflow" width="600"></p>
+    </button></h3><p>MinHash LSHによる重複排除プロセスにより、Milvusはコレクションに挿入する前に、重複しそうなテキストまたは構造化レコードを効率的に識別し、フィルタリングすることができます。</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/it9wwbcfwhft0rbwosacgltzneb.png" alt="It9wwbcfwhft0rbwosacgltzneb" class="doc-image" id="it9wwbcfwhft0rbwosacgltzneb" />
+   </span> <span class="img-wrapper"> <span>It9wwbcfwhft0rbwosacgltzneb</span> </span></p>
 <ol>
-<li><p><strong>チャンクと前処理</strong>入力されたテキストデータまたは構造化データ（レコード、フィールドなど）をチャンクに分割し、テキストを正規化（小文字化、句読点の除去）し、必要に応じてストップワードを除去する。</p></li>
+<li><p><strong>チャンクと前処理</strong>：入力されたテキストデータまたは構造化データ（レコード、フィールドなど）をチャンクに分割し、テキストを正規化（小文字化、句読点の除去）し、必要に応じてストップワードを除去する。</p></li>
 <li><p><strong>フィーチャーの構築</strong>：MinHashに使用されるトークンセットを構築します（テキストからのシング ル、構造化データの連結フィールドトークンなど）。</p></li>
 <li><p><strong>MinHash署名の生成</strong>：各チャンクまたはレコードのMinHashシグネチャを計算します。</p></li>
 <li><p><strong>バイナリベクトル変換</strong>：署名をMilvusと互換性のあるバイナリベクトルに変換します。</p></li>
@@ -215,6 +216,13 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>MilvusでMinHash LSHを使用する前に、まず<strong>MinHashシグネチャを</strong>生成する必要があります。このコンパクトなバイナリ署名は、集合間のJaccard類似度を近似し、Milvusの<code translate="no">MHJACCARD</code>-ベースの検索に必要です。</p>
+<div class="alert note">
+<p><code translate="no">MINHASH_LSH</code> インデックス用のMinHash署名は、2つの方法で準備できます：</p>
+<ul>
+<li><p>外部ツールを使用して自分で署名を生成し、BINARY_VECTORフィールドに挿入する。</p></li>
+<li><p>組み込みのMinHash関数を使用して、テキストから互換性のあるバイナリベクトルを自動生成する。MinHash関数のエンドツーエンドのワークフローおよび構成オプションについては、「<a href="/docs/ja/minhash-function.md">MinHash関数</a>」を参照してください。</p></li>
+</ul>
+</div>
 <h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">MinHashシグネチャの生成方法の選択<button data-href="#Choose-a-method-to-generate-MinHash-signatures" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -230,7 +238,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>作業負荷に応じて、以下の方法を選択できます：</p>
+    </button></h3><p>作業負荷に応じて、以下を選択できます：</p>
 <ul>
 <li><p>Pythonの <a href="https://ekzhu.github.io/datasketch/"><code translate="no">datasketch</code></a>を使用する（プロトタイピングに推奨）。</p></li>
 <li><p>大規模データセットには分散ツール（Spark、Rayなど）を使用する。</p></li>
@@ -300,7 +308,7 @@ HASH_BIT_WIDTH = <span class="hljs-number">64</span>
         ></path>
       </svg>
     </button></h3><p>デフォルトでは、MilvusはMinHashシグネチャとLSHインデックスのみを使用して近似近傍を検索します。これは高速ですが、偽陽性を返したり、近い一致を見逃す可能性があります。</p>
-<p><strong>正確なJaccard類似度を</strong>求める場合、Milvusはオリジナルのトークンセットを使用した絞り込み検索をサポートしています。これを有効にするには</p>
+<p><strong>正確なJaccard類似度を</strong>求める場合、Milvusはオリジナルのトークンセットを使用した絞り込み検索をサポートします。これを有効にするには</p>
 <ul>
 <li><p>トークンセットを別の<code translate="no">VARCHAR</code> フィールドとして保存する。</p></li>
 <li><p><a href="/docs/ja/minhash-lsh.md#Build-index-parameters-and-create-collection">インデックスパラメータを作成する</a>際に<code translate="no">&quot;with_raw_data&quot;: True</code> を設定する。</p></li>
@@ -629,7 +637,7 @@ refined_results = client.search(
      <td><p><code translate="no">mh_element_bit_width</code></p></td>
      <td><p>MinHash署名の各ハッシュ値のビット幅。8で割り切れる値でなければならない。</p></td>
      <td><p>8, 16, 32, 64</p></td>
-     <td><p>パフォーマンスと精度のバランスをとるには<code translate="no">32</code> 。より大きなデータセットでより高い精度を得るには、<code translate="no">64</code> を使用する。精度の低下を許容してメモリを節約するには、<code translate="no">16</code> を使用する。</p></td>
+     <td><p>パフォーマンスと精度のバランスをとるには、<code translate="no">32</code> 。より大きなデータセットでより高い精度を得るには、<code translate="no">64</code> を使用する。精度の低下を許容してメモリを節約するには、<code translate="no">16</code> を使用する。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mh_lsh_band</code></p></td>
@@ -653,7 +661,7 @@ refined_results = client.search(
      <td><p><code translate="no">mh_lsh_bloom_false_positive_prob</code></p></td>
      <td><p>LSHバケット最適化で使用するブルームフィルターの誤検出確率。</p></td>
      <td><p>[0.001, 0.1]</p></td>
-     <td><p>メモリ使用量と精度のバランスをとるために<code translate="no">0.01</code> を使用。低い値(<code translate="no">0.001</code>)は誤検出を減らすが、メモリを増加させる。高い値 (<code translate="no">0.05</code>) はメモリを節約しますが、精度が低下する可能性があります。</p></td>
+     <td><p>メモリ使用量と精度のバランスをとるために<code translate="no">0.01</code> を使用。低い値 (<code translate="no">0.001</code>) は誤検出を減らすが、メモリを増やす。高い値 (<code translate="no">0.05</code>) はメモリを節約しますが、精度が低下する可能性があります。</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
@@ -687,14 +695,14 @@ refined_results = client.search(
    </tr>
    <tr>
      <td><p><code translate="no">refine_k</code></p></td>
-     <td><p>Jaccard refinement の前に検索する候補の数。<code translate="no">mh_search_with_jaccard</code> が<code translate="no">true</code> のときのみ有効。</p></td>
-     <td><p>[<em>top_k</em>, *top_k * 10*]。</p></td>
-     <td><p>良好な想起-性能バランスを得るために、希望する<em>top_k</em>の 2-5 倍に設定する。値を大きくすると再現率は向上するが、計算コストは増加する。</p></td>
+     <td><p>Jaccard絞り込みの前に検索する候補の数。<code translate="no">mh_search_with_jaccard</code> が<code translate="no">true</code> のときのみ有効。</p></td>
+     <td><p>[<em>top_k</em>,<em>top_k &amp;ast; 10</em>] 。</p></td>
+     <td><p>リコールと性能のバランスをとるために、希望する<em>top_k</em>の2～5倍に設定する。値を大きくすると再現率は向上するが、計算コストは増加する。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mh_lsh_batch_search</code></p></td>
      <td><p>複数の同時クエリに対してバッチ最適化を有効にするかどうか。</p></td>
      <td><p>true, false</p></td>
-     <td><p>スループットを向上させるため、複数のクエリを同時に検索する場合は<code translate="no">true</code> を使用する。メモリのオーバーヘッドを削減するために、単一クエリのシナリオでは<code translate="no">false</code> を使用します。</p></td>
+     <td><p>複数のクエリを同時に検索する場合に<code translate="no">true</code> を使用し、スループットを向上させる。メモリのオーバーヘッドを削減するために、単一クエリのシナリオでは<code translate="no">false</code> を使用します。</p></td>
    </tr>
 </table>

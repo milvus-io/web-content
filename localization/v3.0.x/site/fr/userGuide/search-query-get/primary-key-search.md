@@ -24,7 +24,7 @@ beta: Milvus 2.6.9+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Lorsque vous effectuez des recherches de similarité, il vous est toujours demandé de fournir un ou plusieurs vecteurs d'interrogation, même si ces vecteurs sont déjà présents dans la collection cible. Pour éviter de récupérer les vecteurs avant la recherche, vous pouvez utiliser des clés primaires.</p>
+    </button></h1><p>Lorsque vous effectuez des recherches de similarité, il vous est toujours demandé de fournir un ou plusieurs vecteurs d'interrogation, même si les vecteurs d'interrogation sont déjà présents dans la collection cible. Pour éviter de récupérer les vecteurs avant la recherche, vous pouvez utiliser des clés primaires.</p>
 <h2 id="Overview" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +42,7 @@ beta: Milvus 2.6.9+
       </svg>
     </button></h2><p>Sur les plateformes de commerce électronique, les utilisateurs peuvent saisir un mot-clé afin d'obtenir les produits qui y correspondent. Lorsque l'utilisateur consulte la page détaillée d'un produit, la plateforme affiche également une liste de produits similaires au bas de la page pour les utilisateurs qui souhaitent les comparer.</p>
 <p>Les recommandations sont triées en fonction de leur similitude avec le mot-clé ou le produit actuel. Pour ce faire, les développeurs de la plate-forme doivent récupérer la représentation vectorielle du mot-clé ou du produit actuel auprès de Milvus avant la recherche de similarité proprement dite, ce qui augmente les allers-retours entre la plate-forme et Milvus et entraîne la transmission d'un grand nombre de flottants à haute dimension sur le réseau.</p>
-<p>Pour simplifier la logique d'interaction entre vos applications et Milvus, réduire le nombre d'allers-retours et éviter de transmettre de grandes quantités de valeurs flottantes à haute dimension sur le réseau, envisagez d'utiliser des recherches par clé primaire.</p>
+<p>Pour simplifier la logique d'interaction entre vos applications et Milvus, réduire le nombre d'allers-retours et éviter de transmettre de grandes quantités de valeurs à virgule flottante à haute dimension sur le réseau, envisagez d'utiliser des recherches par clé primaire.</p>
 <p>Dans une recherche par clé primaire, il n'est pas nécessaire de fournir des vecteurs d'interrogation. En revanche, il vous est demandé de fournir les clés primaires (<code translate="no">ids</code>) des entités qui contiennent les vecteurs d'interrogation.</p>
 <h2 id="Limits--restrictions" class="common-anchor-header">Limites et restrictions<button data-href="#Limits--restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,10 +61,10 @@ beta: Milvus 2.6.9+
       </svg>
     </button></h2><ul>
 <li><p>Les recherches utilisant des clés primaires s'appliquent à tous les types de données vectorielles, à l'exception des champs vectoriels peu denses dérivés des champs VarChar, comme dans les fonctions BM25.</p></li>
-<li><p>Vous pouvez utiliser des clés primaires à la place des vecteurs d'interrogation dans les recherches filtrées, les recherches par plage et les recherches par regroupement, éventuellement avec une pagination activée. Toutefois, cette fonctionnalité ne s'applique pas aux recherches hybrides et aux itérateurs de recherche.</p></li>
+<li><p>Vous pouvez utiliser des clés primaires à la place des vecteurs d'interrogation dans les recherches filtrées, les recherches par plage et les recherches par groupement, éventuellement avec une pagination activée. Toutefois, cette fonctionnalité ne s'applique pas aux recherches hybrides et aux itérateurs de recherche.</p></li>
 <li><p>Pour les recherches de similarité impliquant des listes d'intégration, vous devez toujours récupérer les vecteurs de requête, les organiser en listes d'intégration et exécuter les recherches.</p></li>
 <li><p>Vous ne pouvez pas utiliser de clés primaires à la place des vecteurs de requête dans les API RESTful.</p></li>
-<li><p>En cas de clés primaires inexistantes ou au format incorrect, Milvus affichera des erreurs.</p></li>
+<li><p>Pour toute clé primaire inexistante ou au format incorrect, Milvus affichera des erreurs.</p></li>
 <li><p>Les clés primaires et les vecteurs de requête s'excluent mutuellement. Fournir les deux entraîne également des erreurs.</p></li>
 </ul>
 <h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">

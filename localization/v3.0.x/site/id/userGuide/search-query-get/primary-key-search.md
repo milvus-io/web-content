@@ -23,7 +23,7 @@ beta: Milvus 2.6.9+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Ketika melakukan pencarian kemiripan, Anda selalu diminta untuk memberikan satu atau lebih vektor kueri, bahkan jika vektor kueri sudah ada di koleksi target. Untuk menghindari pengambilan vektor sebelum pencarian, Anda dapat menggunakan kunci primer sebagai gantinya.</p>
+    </button></h1><p>Ketika melakukan pencarian kemiripan, Anda selalu diminta untuk menyediakan satu atau lebih vektor kueri, bahkan jika vektor kueri sudah ada di koleksi target. Untuk menghindari pengambilan vektor sebelum pencarian, Anda dapat menggunakan kunci primer sebagai gantinya.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,7 +60,7 @@ beta: Milvus 2.6.9+
       </svg>
     </button></h2><ul>
 <li><p>Pencarian menggunakan kunci primer berlaku untuk semua tipe data vektor, kecuali bidang vektor jarang yang berasal dari bidang VarChar, seperti pada fungsi BM25.</p></li>
-<li><p>Anda dapat menggunakan kunci primer sebagai pengganti vektor kueri dalam pencarian yang difilter, rentang, dan pengelompokan, secara opsional dengan pagination yang diaktifkan. Namun, fitur ini tidak berlaku untuk pencarian hibrida dan iterator pencarian.</p></li>
+<li><p>Anda dapat menggunakan kunci primer sebagai pengganti vektor kueri dalam pencarian yang difilter, rentang, dan pengelompokan, secara opsional dengan pagination diaktifkan. Namun, fitur ini tidak berlaku untuk pencarian hibrida dan iterator pencarian.</p></li>
 <li><p>Untuk pencarian kemiripan yang melibatkan daftar sematan, Anda masih perlu mengambil vektor kueri, mengaturnya ke dalam daftar sematan, dan menjalankan pencarian.</p></li>
 <li><p>Anda tidak dapat menggunakan kunci primer sebagai pengganti vektor kueri di API RESTful.</p></li>
 <li><p>Untuk primary key yang tidak ada atau dalam format yang salah, Milvus akan memunculkan kesalahan.</p></li>

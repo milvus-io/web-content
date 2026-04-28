@@ -51,7 +51,7 @@ beta: Milvus 2.6.8+
         ></path>
       </svg>
     </button></h2><p>Quando si esegue una ricerca full text in BM25, è possibile evidenziare i <strong>termini di ricerca</strong> nei risultati restituiti per spiegare perché un documento corrisponde alla query. Per ulteriori informazioni sulla ricerca full text in BM25, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca full text</a>.</p>
-<p>In questo scenario, i termini evidenziati provengono direttamente dai termini di ricerca utilizzati nella ricerca a testo pieno di BM25. L'evidenziatore utilizza questi termini per annotare il testo corrispondente nel risultato finale.</p>
+<p>In questo scenario, i termini evidenziati provengono direttamente dai termini di ricerca utilizzati nella ricerca a testo completo di BM25. L'evidenziatore utilizza questi termini per annotare il testo corrispondente nel risultato finale.</p>
 <p>Si supponga che il seguente contenuto sia memorizzato in un campo di testo:</p>
 <pre><code translate="no" class="language-plaintext">Milvus supports full text search. Use BM25 for keyword relevance. Filters can narrow results.
 <button class="copy-code-btn"></button></code></pre>

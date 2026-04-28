@@ -44,10 +44,10 @@ summary: >-
     </button></h2><p>Milvus использует коллекции для организации векторных вкраплений и их метаданных, и каждая строка в коллекции представляет собой объект. Как показано на левом рисунке ниже, в поле vector хранятся векторные вкрапления, а в полях scalar - их метаданные. Когда вы создали индексы по определенным полям и загрузили коллекцию, Milvus загружает созданные индексы и исходные данные полей в память.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/mmap-illustrated.png" alt="Mmap Illustrated" class="doc-image" id="mmap-illustrated" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/mmap-illustrated.png" alt="Mmap Illustrated" class="doc-image" id="mmap-illustrated" />
    </span> <span class="img-wrapper"> <span>Иллюстрация Mmap</span> </span></p>
 <p>Milvus - это система баз данных, занимающая много памяти, и объем доступной памяти определяет емкость коллекции. Загрузка в память полей, содержащих большой объем данных, невозможна, если размер данных превышает объем памяти, что обычно бывает в приложениях, управляемых искусственным интеллектом.</p>
-<p>Для решения подобных проблем Milvus вводит mmap для балансировки загрузки "горячих" и "холодных" данных в коллекции. Как показано на правом рисунке выше, вы можете настроить Milvus на отображение в памяти исходных данных в определенных полях вместо их полной загрузки в память. Таким образом, можно получить прямой доступ к полям, не беспокоясь о проблемах с памятью, и расширить емкость коллекции.</p>
+<p>Чтобы решить эту проблему, Milvus вводит mmap для балансировки загрузки "горячих" и "холодных" данных в коллекции. Как показано на правом рисунке выше, вы можете настроить Milvus на отображение в памяти исходных данных в определенных полях вместо их полной загрузки в память. Таким образом, можно получить прямой доступ к полям, не беспокоясь о проблемах с памятью, и расширить емкость коллекции.</p>
 <p>Сравнивая процедуры размещения данных на левом и правом рисунках, можно заметить, что на левом рисунке использование памяти гораздо выше, чем на правом. При включенной функции mmap данные, которые должны были быть загружены в память, выгружаются на жесткий диск и кэшируются в страничном кэше операционной системы, что уменьшает занимаемую память. Однако сбои при попадании в кэш могут привести к снижению производительности. Подробности см. в <a href="https://en.wikipedia.org/wiki/Mmap">этой статье</a>.</p>
 <p>При настройке mmap на Milvus всегда нужно придерживаться одного принципа: Всегда держите часто используемые данные и индексы полностью загруженными в память и используйте mmap для оставшихся полей.</p>
 <h2 id="Use-mmap-in-Milvus" class="common-anchor-header">Использование mmap в Milvus<button data-href="#Use-mmap-in-Milvus" class="anchor-icon" translate="no">
@@ -66,7 +66,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus предоставляет иерархические настройки mmap на глобальном, полевом, индексном и коллекционном уровнях, где индексный и полевой уровни имеют приоритет над коллекционным, а коллекционный - над глобальным.</p>
-<h3 id="Global-mmap-settings" class="common-anchor-header">Глобальные настройки mmap</h3><p>Настройка на уровне кластера является глобальной и имеет наименьший приоритет. Milvus предоставляет несколько настроек, связанных с mmap, в разделе <code translate="no">milvus.yaml</code>. Эти настройки будут применяться ко всем коллекциям в кластере.</p>
+<h3 id="Global-mmap-settings" class="common-anchor-header">Глобальные настройки mmap<button data-href="#Global-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Настройка на уровне кластера является глобальной и имеет наименьший приоритет. Milvus предоставляет несколько настроек, связанных с mmap, в разделе <code translate="no">milvus.yaml</code>. Эти настройки будут применяться ко всем коллекциям в кластере.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">mmap:</span>
@@ -112,7 +127,22 @@ summary: >-
 </table>
 <p>Чтобы применить вышеуказанные настройки к вашему кластеру Milvus, выполните действия, описанные в разделах <a href="/docs/ru/configure-helm.md#Configure-Milvus-via-configuration-file">"Настройка Milvus с помощью Helm"</a> и <a href="/docs/ru/configure_operator.md">"Настройка Milvus с помощью Milvus Operators</a>".</p>
 <p>Иногда глобальные настройки mmap не являются гибкими при решении конкретных задач. Чтобы применить альтернативные настройки к конкретной коллекции или ее индексам, рассмотрите возможность настройки mmap для коллекции, поля или индекса. Чтобы изменения настроек mmap вступили в силу, необходимо выпустить и загрузить коллекцию.</p>
-<h3 id="Field-specific-mmap-settings" class="common-anchor-header">Настройки mmap для конкретного поля</h3><p>Чтобы настроить mmap для конкретного поля, необходимо включить параметр <code translate="no">mmap_enabled</code> при добавлении поля. Вы можете включить mmap для этого конкретного поля, установив для этого параметра значение <code translate="no">True</code>.</p>
+<h3 id="Field-specific-mmap-settings" class="common-anchor-header">Настройки mmap для конкретного поля<button data-href="#Field-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы настроить mmap для конкретного поля, необходимо включить параметр <code translate="no">mmap_enabled</code> при добавлении поля. Вы можете включить mmap для этого конкретного поля, установив для этого параметра значение <code translate="no">True</code>.</p>
 <p>В следующем примере показано, как настроить mmap для конкретного поля при добавлении поля.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -302,7 +332,22 @@ curl --request POST \
 <p>Рассмотрите возможность включения mmap для полей, в которых хранятся данные большого объема. Поддерживаются как скалярные, так и векторные поля.</p>
 </div>
 <p>Затем вы можете создать коллекцию, используя созданную выше схему. При получении запроса на загрузку коллекции Milvus использует memory-map для размещения в памяти исходных данных поля <strong>doc_chunk</strong>.</p>
-<h3 id="Index-specific-mmap-settings" class="common-anchor-header">Настройки mmap для конкретного индекса</h3><p>Чтобы настроить mmap для конкретного индекса, необходимо включить свойство <code translate="no">mmap.enable</code> в параметры индекса при добавлении индекса. Вы можете включить mmap для этого конкретного индекса, установив для свойства значение <code translate="no">true</code>.</p>
+<h3 id="Index-specific-mmap-settings" class="common-anchor-header">Настройки mmap для конкретного индекса<button data-href="#Index-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы настроить mmap для конкретного индекса, необходимо включить свойство <code translate="no">mmap.enable</code> в параметры индекса при добавлении индекса. Вы можете включить mmap для этого конкретного индекса, установив для свойства значение <code translate="no">true</code>.</p>
 <p>В следующем примере показано, как настроить mmap для конкретного индекса при добавлении индекса.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -405,7 +450,22 @@ curl --request POST \
 <p>Это относится к индексам как векторных, так и скалярных полей.</p>
 </div>
 <p>Затем вы можете ссылаться на параметры индекса в коллекции. При получении запроса на загрузку коллекции Milvus заносит в память индекс поля <strong>title</strong>.</p>
-<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">Настройки mmap для конкретной коллекции</h3><p>Чтобы настроить стратегию mmap для всей коллекции, необходимо включить свойство <code translate="no">mmap.enabled</code> в запрос на создание коллекции. Вы можете включить mmap для коллекции, установив для этого свойства значение <code translate="no">true</code>.</p>
+<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">Настройки mmap для конкретной коллекции<button data-href="#Collection-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы настроить стратегию mmap для всей коллекции, необходимо включить свойство <code translate="no">mmap.enabled</code> в запрос на создание коллекции. Вы можете включить mmap для коллекции, установив для этого свойства значение <code translate="no">true</code>.</p>
 <p>Следующий пример демонстрирует, как включить mmap в коллекции с именем <strong>my_collection</strong> при ее создании. Получив запрос на загрузку коллекции, Milvus отображает в памяти исходные данные всех полей.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

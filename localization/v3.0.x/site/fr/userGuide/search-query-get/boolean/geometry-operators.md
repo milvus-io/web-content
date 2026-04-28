@@ -70,7 +70,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>Le tableau suivant répertorie les opérateurs géométriques disponibles dans Milvus.</p>
 <div class="alert note">
-<p>Les noms des opérateurs doivent être <strong>en majuscules</strong> ou en <strong>minuscules</strong>. Ne mélangez pas les majuscules et les minuscules dans un même nom d'opérateur.</p>
+<p>Les noms des opérateurs doivent être en <strong>majuscules</strong> ou en <strong>minuscules</strong>. Ne mélangez pas les majuscules et les minuscules dans un même nom d'opérateur.</p>
 </div>
 <table>
    <tr>
@@ -178,7 +178,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>L'opérateur <code translate="no">ST_CROSSES</code> renvoie <code translate="no">TRUE</code> si l'intersection de deux géométries forme une géométrie de dimension inférieure à celle des géométries d'origine. Cela s'applique typiquement à une ligne traversant un polygone ou une autre ligne.</p>
 <p><strong>Exemple</strong></p>
-<p>Vous souhaitez trouver tous les sentiers de randonnée (chaînes de lignes) qui traversent une ligne de démarcation spécifique (une autre chaîne de lignes) ou qui entrent dans une zone protégée (polygone).</p>
+<p>Vous souhaitez trouver tous les sentiers de randonnée (chaînes de lignes) qui traversent une ligne de démarcation spécifique (une autre chaîne de lignes) ou qui pénètrent dans une zone protégée (polygone).</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries that cross a line string.</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_CROSSES(geo_field, &#x27;LINESTRING(5 0, 5 10)&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

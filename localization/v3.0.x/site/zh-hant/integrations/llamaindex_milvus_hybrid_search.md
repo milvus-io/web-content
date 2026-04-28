@@ -157,7 +157,22 @@ response = query_engine.query(<span class="hljs-string">&quot;What did the autho
 <pre><code translate="no">The author learned about retail, the importance of user feedback, and the significance of growth
 rate as the ultimate test of a startup at Viaweb.
 </code></pre>
-<h3 id="Customize-text-analyzer" class="common-anchor-header">自訂文字分析器</h3><p>分析器在全文檢索中扮演重要的角色，可將句子分割成標記，並執行詞彙處理，例如刪除字莖和停止詞。它們通常針對特定語言。如需詳細資訊，請參閱<a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Milvus 分析器指南</a>。</p>
+<h3 id="Customize-text-analyzer" class="common-anchor-header">自訂文字分析器<button data-href="#Customize-text-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>分析器在全文檢索中扮演重要的角色，可將句子分割成標記，並執行詞彙處理，例如刪除字莖和停止詞。它們通常針對特定語言。如需詳細資訊，請參閱<a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Milvus 分析器指南</a>。</p>
 <p>Milvus 支援兩種類型的分析器：<strong>內建分析器</strong>和<strong>自訂分析器</strong>。預設情況下，如果<code translate="no">enable_sparse</code> 設為 True，<code translate="no">MilvusVectorStore</code> 會利用<code translate="no">BM25BuiltInFunction</code> 的預設設定，採用標準的內建分析器，根據標點符號來標記文字。</p>
 <p>若要使用不同的分析器或自訂現有的分析器，您可以在建立<code translate="no">BM25BuiltInFunction</code> 時提供<code translate="no">analyzer_params</code> 參數值。然後，在<code translate="no">MilvusVectorStore</code> 中將此函式設定為<code translate="no">sparse_embedding_function</code> 。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.vector_stores.milvus.utils <span class="hljs-keyword">import</span> BM25BuiltInFunction
@@ -237,7 +252,22 @@ The author learned about retail, the importance of user feedback, the value of g
 startup, the significance of pricing strategy, the benefits of working on things that weren't
 prestigious, and the challenges and rewards of running a startup.
 </code></pre>
-<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">自訂稀疏嵌入功能</h3><p>您也可以自訂 sparse embedding 函數，只要它繼承自<code translate="no">BaseSparseEmbeddingFunction</code> ，包括下列方法：</p>
+<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">自訂稀疏嵌入功能<button data-href="#Customize-Sparse-Embedding-Function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您也可以自訂 sparse embedding 函數，只要它繼承自<code translate="no">BaseSparseEmbeddingFunction</code> ，包括下列方法：</p>
 <ul>
 <li><code translate="no">encode_queries</code>:此方法可將文字轉換成稀疏嵌入的查詢清單。</li>
 <li><code translate="no">encode_documents</code>:此方法將文字轉換為文件的稀疏內嵌清單。</li>

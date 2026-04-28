@@ -241,7 +241,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un champ dans une collection Milvus est équivalent à une colonne de table dans un SGBDR. Les champs peuvent être soit des champs scalaires pour les données structurées (par exemple, des nombres, des chaînes), soit des champs vectoriels pour les vecteurs d'intégration.</p>
+    </button></h2><p>Un champ dans une collection Milvus est équivalent à une colonne de table dans un SGBDR. Les champs peuvent être soit des champs scalaires pour les données structurées (par exemple, des nombres, des chaînes), soit des champs vectoriels pour l'intégration de vecteurs.</p>
 <h2 id="Filter" class="common-anchor-header">Filtre<button data-href="#Filter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -337,7 +337,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere</a> est le moteur d'exécution vectorielle central de Milvus qui intègre plusieurs bibliothèques de recherche de similarité vectorielle, notamment Faiss, Hnswlib et Annoy. Knowhere est également conçu pour prendre en charge l'informatique hétérogène. Il contrôle sur quel matériel (CPU ou GPU) exécuter la construction de l'index et les requêtes de recherche. C'est ainsi que Knowhere tire son nom : savoir où exécuter les opérations.</p>
+    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere</a> est le moteur d'exécution vectoriel central de Milvus qui intègre plusieurs bibliothèques de recherche de similarité vectorielle, notamment Faiss, Hnswlib et Annoy. Knowhere est également conçu pour prendre en charge l'informatique hétérogène. Il contrôle sur quel matériel (CPU ou GPU) exécuter la construction de l'index et les requêtes de recherche. C'est ainsi que Knowhere tire son nom : savoir où exécuter les opérations.</p>
 <!-- ## Log broker
 <p>The <a href="https://milvus.io/docs/four_layers.md#Log-broker">log broker</a> is a publish-subscribe system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. --></p>
 <h2 id="Log-snapshot" class="common-anchor-header">Instantané de journal<button data-href="#Log-snapshot" class="anchor-icon" translate="no">
@@ -809,7 +809,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le stockage WAL (Write-Ahead Log) est le fondement de la durabilité et de la cohérence des données dans les systèmes distribués. Avant qu'une modification ne soit validée, elle est d'abord enregistrée dans un journal, ce qui garantit qu'en cas de panne, vous pouvez reprendre exactement là où vous vous étiez arrêté. Milvus utilise Woodpecker comme système de stockage WAL, qui prend en charge les modes MemoryBuffer et QuorumBuffer. Pour plus d'informations, voir <a href="/docs/fr/woodpecker_architecture.md">Architecture Woodpecker</a>.</p>
+    </button></h2><p>Le stockage WAL (Write-Ahead Log) est le fondement de la durabilité et de la cohérence des données dans les systèmes distribués. Avant qu'une modification ne soit validée, elle est d'abord enregistrée dans un journal, ce qui garantit qu'en cas de défaillance, vous pouvez reprendre exactement là où vous vous étiez arrêté. Milvus utilise Woodpecker comme système de stockage WAL, qui prend en charge les modes MemoryBuffer et QuorumBuffer. Pour plus d'informations, voir <a href="/docs/fr/woodpecker_architecture.md">Architecture Woodpecker</a>.</p>
 <h2 id="Woodpecker" class="common-anchor-header">Woodpecker<button data-href="#Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

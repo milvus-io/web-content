@@ -41,17 +41,32 @@ title: Milvusクラスタのスケール
         ></path>
       </svg>
     </button></h2><p>水平スケーリングには、スケールアウトとスケールインがあります。</p>
-<h3 id="Scaling-out" class="common-anchor-header">スケールアウト</h3><p>スケールアウトとは、クラスタ内のノード数を増やすことを指します。スケールアップとは異なり、スケールアウトではクラスタ内の1つのノードにより多くのリソースを割り当てる必要はありません。その代わりに、スケールアウトではノードを追加することでクラスタを水平方向に拡張します。</p>
+<h3 id="Scaling-out" class="common-anchor-header">スケールアウト<button data-href="#Scaling-out" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>スケールアウトとは、クラスタ内のノード数を増やすことを指します。スケールアップとは異なり、スケールアウトではクラスタ内の1つのノードにより多くのリソースを割り当てる必要はありません。その代わりに、スケールアウトではノードを追加することでクラスタを水平方向に拡張します。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
    </span> <span class="img-wrapper"> <span>スケールアウト</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>スケールアップ</span> </span></p>
 <p><a href="/docs/ja/architecture_overview.md">Milvusアーキテクチャに</a>よると、ステートレスワーカーノードにはクエリノード、データノード、インデックスノード、プロキシが含まれます。したがって、ビジネスニーズやアプリケーションシナリオに合わせて、これらのタイプのノードをスケールアウトすることができます。Milvusクラスタは手動または自動でスケールアウトすることができます。</p>
-<p>一般的に、作成したMilvusクラスタが過剰に使用されている場合はスケールアウトする必要があります。以下はMilvusクラスタのスケールアウトが必要となる典型的な状況です：</p>
+<p>一般的に、作成したMilvusクラスタが過度に使用されている場合はスケールアウトする必要があります。以下はMilvusクラスタのスケールアウトが必要となる典型的な状況です：</p>
 <ul>
 <li>CPUとメモリの使用率が一定期間高い。</li>
 <li>クエリのスループットが高くなった。</li>
@@ -59,7 +74,22 @@ title: Milvusクラスタのスケール
 <li>大量の大規模データセットを処理する必要がある。</li>
 <li>Milvusサービスの高い可用性を確保する必要がある。</li>
 </ul>
-<h3 id="Scaling-in" class="common-anchor-header">スケールイン</h3><p>スケールインとは、クラスタ内のノード数を減らすことを指します。一般的に、作成したMilvusクラスタが十分に使用されていない場合、スケールインする必要があります。以下はMilvusクラスタのスケールインが必要な典型的な状況です：</p>
+<h3 id="Scaling-in" class="common-anchor-header">スケールイン<button data-href="#Scaling-in" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>スケールインとは、クラスタ内のノード数を減らすことを指します。一般的に、作成したMilvusクラスタが十分に使用されていない場合、スケールインする必要があります。以下はMilvusクラスタのスケールインが必要な典型的な状況です：</p>
 <ul>
 <li>CPUとメモリの使用率が一定期間低い。</li>
 <li>クエリのスループットが低下している。</li>
@@ -67,7 +97,7 @@ title: Milvusクラスタのスケール
 <li>処理するデータセットのサイズが小さい。</li>
 </ul>
 <div class="alert note">
-ワーカーノード数を極端に減らすことは推奨しない。例えば、クラスタ内に5つのデータノードがある場合、サービスの可用性を確保するために一度に1つのデータノードを減らすことを推奨します。最初にスケールインを試みてサービスが利用可能であれば、データノードの数をさらに減らし続けることができます。</div>
+ワーカーノード数を極端に減らすことは推奨しない。例えば、クラスタ内に5つのデータノードがある場合、サービスの可用性を確保するために一度に1つのデータノードを減らすことを推奨します。最初にスケールインを試みてサービスが利用可能であれば、データノードの数をさらに減らしていくことができます。</div>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -83,7 +113,7 @@ title: Milvusクラスタのスケール
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">kubectl get pods</code> を実行し、作成したMilvusクラスタ内のコンポーネントとその作業ステータスのリストを取得します。</p>
+    </button></h2><p><code translate="no">kubectl get pods</code> を実行して、作成したMilvusクラスタ内のコンポーネントとその作業ステータスのリストを取得します。</p>
 <pre><code translate="no">NAME                                            READY   STATUS       RESTARTS   AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                               <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>      <span class="hljs-number">0</span>          <span class="hljs-number">1</span>m
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>datacoord<span class="hljs-number">-7</span>b5d84d8c6<span class="hljs-operator">-</span>rzjml    <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>      <span class="hljs-number">0</span>          <span class="hljs-number">1</span>m

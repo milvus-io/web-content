@@ -71,23 +71,38 @@ title: Milvus의 Pulsar를 V2에서 V3로 업그레이드하기
         ></path>
       </svg>
     </button></h2><p>이 섹션에서는 Milvus에서 Pulsar를 V2에서 V3로 업그레이드하는 자세한 절차를 설명합니다.</p>
-<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">Pulsar에서 소비되지 않는 데이터 유지</h3><p>이 단계에서는 Pulsar의 기존 데이터가 오브젝트 스토리지 서비스에 보존되어 있는지 확인해야 합니다. 두 가지 접근 방식을 사용할 수 있으며, 필요에 맞는 방식을 선택할 수 있습니다.</p>
+<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">Pulsar에서 소비되지 않는 데이터 유지<button data-href="#Persist-data-not-consumed-in-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이 단계에서는 Pulsar의 기존 데이터가 오브젝트 스토리지 서비스에 보존되어 있는지 확인해야 합니다. 두 가지 접근 방식을 사용할 수 있으며, 필요에 맞는 방식을 선택할 수 있습니다.</p>
 <h4 id="Approach-1-Using-Attu" class="common-anchor-header">접근 방식 1: Attu 사용</h4><p>작동 중인 Milvus 배포에 세그먼트 수가 많지 않은 적은 수의 컬렉션만 있는 경우, Attu를 사용하여 데이터를 객체 스토리지 서비스에 지속시킬 수 있습니다.</p>
 <ol>
 <li><p>모든 데이터베이스에서 모든 컬렉션을 선택하고 <code translate="no">Segments</code> 패널로 이동하여 <code translate="no">Flush</code> 버튼을 클릭합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
    </span> <span class="img-wrapper"> <span>컬렉션의 세그먼트 패널</span> </span></p></li>
 <li><p>그런 다음 팝업이 나타나면 <code translate="no">Flush</code> 을 다시 클릭합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
    </span> <span class="img-wrapper"> <span>Attu의 데이터 플러시 프롬프트</span> </span></p></li>
 <li><p>그런 다음 모든 컬렉션의 영구 세그먼트 상태가 <code translate="no">Flushed</code> 이 될 때까지 기다립니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/view-data-peristent-process.png" alt="View data flush status in Attu" class="doc-image" id="view-data-flush-status-in-attu" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/view-data-peristent-process.png" alt="View data flush status in Attu" class="doc-image" id="view-data-flush-status-in-attu" />
    </span> <span class="img-wrapper"> <span>Attu에서 데이터 플러시 상태 보기</span> </span></p></li>
 </ol>
 <h4 id="Approach-2-Using-management-API" class="common-anchor-header">접근 방식 2: 관리 API 사용</h4><ol>
@@ -103,7 +118,7 @@ title: Milvus의 Pulsar를 V2에서 V3로 업그레이드하기
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">pid=8116​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>삽입된 모든 데이터를 펄서에서 오젝트 스토리지로 보존하는 작업을 트리거합니다.</p>
+<li><p>삽입된 모든 데이터를 Pulsar에서 Ojbect Storage로 보존하는 작업을 트리거합니다.</p>
 <pre><code translate="no" class="language-bash">curl 127.0.0.1:9091/api/v1/collections \​
 |curl 127.0.0.1:9091/api/v1/persist -d @/dev/stdin\​
 |jq <span class="hljs-string">&#x27;.flush_coll_segIDs&#x27;</span>| jq <span class="hljs-string">&#x27;[.[] | .data[]]&#x27;</span> | jq <span class="hljs-string">&#x27;{segmentIDs: (.)}&#x27;</span> \​
@@ -138,7 +153,22 @@ title: Milvus의 Pulsar를 V2에서 V3로 업그레이드하기
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Milvus를 중지하고 Pulsar V2를 삭제합니다.</h3><p>이 단계에서는 Milvus 파드를 중지하고 Pulsar V2 배포를 삭제해야 합니다. 두 가지 섹션이 있습니다:</p>
+<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Milvus를 중지하고 Pulsar V2를 삭제합니다.<button data-href="#Stop-Milvus-and-delete-Pulsar-V2" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이 단계에서는 Milvus 파드를 중지하고 Pulsar V2 배포를 삭제해야 합니다. 두 가지 섹션이 있습니다:</p>
 <ul>
 <li><p>밀버스 헬름 사용자의 경우</p>
 <p>Milvus 헬름 차트를 사용하여 Milvus를 설치한 경우, <a href="#Delete-Pulsar-V2-using-Helm">헬름을 사용하여 Pulsar v2 삭제로</a> 이동합니다.</p></li>
@@ -187,7 +217,7 @@ kubectl -n default get pvc -lapp=pulsar,release=my-release -o custom-columns=VOL
 <span class="hljs-string">pvc-2da33f64-c053-42b9-bb72-c5d50779aa0a​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><code translate="no">pulsar-pvcs.txt</code> 의 PVC 목록이 모두 Pulsar에 대한 것인지 확인합니다. 오류가 없는 것을 확인했다면 PVC를 삭제합니다.</p>
+<li><p><code translate="no">pulsar-pvcs.txt</code> 의 PVC 목록이 모두 Pulsar용인지 확인합니다. 오류가 없는 것을 확인했다면 PVC를 삭제합니다.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> pulsar-pvcs.txt |xargs -I {} kubectl -n default delete pvc {} --<span class="hljs-built_in">wait</span>=<span class="hljs-literal">false</span>​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -291,7 +321,22 @@ milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">Pulsar V3 및 Milvus 시작</h3><p>이 단계에서는 Pulsar V3와 Milvus 파드를 시작해야 합니다. 두 개의 별도 섹션을 사용할 수 있습니다:</p>
+<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">Pulsar V3 및 Milvus 시작<button data-href="#Start-Pulsar-V3-and-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이 단계에서는 Pulsar V3와 Milvus 파드를 시작해야 합니다. 두 개의 별도 섹션을 사용할 수 있습니다:</p>
 <ul>
 <li><p>헬름 사용자의 경우</p>
 <p>밀버스 헬름 차트를 사용하여 밀버스를 설치한 경우, <a href="#For-Helm-User">헬름 사용자의</a> 경우로 이동합니다.</p></li>

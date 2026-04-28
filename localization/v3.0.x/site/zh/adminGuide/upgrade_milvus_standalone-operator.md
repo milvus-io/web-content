@@ -60,7 +60,7 @@ title: 使用 Milvus Operator 升级 Milvus Standalone
 <li><strong>新组件</strong>：引入流节点，增强数据处理能力</li>
 <li><strong>删除组件</strong>：删除并合并<code translate="no">indexNode</code> </li>
 </ul>
-<p>此升级过程可确保向新架构的正常迁移。有关架构变化的更多信息，请参阅<a href="/docs/zh/architecture_overview.md">Milvus 架构概述</a>。</p>
+<p>此升级过程可确保向新架构的适当迁移。有关架构变化的更多信息，请参阅<a href="/docs/zh/architecture_overview.md">Milvus 架构概述</a>。</p>
 <h3 id="Requirements" class="common-anchor-header">系统要求<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -127,7 +127,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <p>验证操作符升级：</p>
 <pre><code translate="no" class="language-bash">kubectl -n milvus-operator get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Upgrade-your-Milvus-standalone" class="common-anchor-header">步骤 2：升级 Milvus 单机版<button data-href="#Step-2-Upgrade-your-Milvus-standalone" class="anchor-icon" translate="no">
+<h3 id="Step-2-Upgrade-your-Milvus-standalone" class="common-anchor-header">第 2 步：升级 Milvus 单机版<button data-href="#Step-2-Upgrade-your-Milvus-standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

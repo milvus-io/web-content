@@ -48,13 +48,58 @@ summary: >-
 <li><p><strong>Operadores lógicos</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, e <code translate="no">NOT</code> combinam várias condições em expressões complexas.</p></li>
 <li><p><strong>Operadores IS NULL e IS NOT NULL</strong>: Os operadores <code translate="no">IS NULL</code> e <code translate="no">IS NOT NULL</code> são utilizados para filtrar campos com base no facto de conterem ou não um valor nulo (ausência de dados). Para obter detalhes, consulte <a href="/docs/pt/basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators">Operadores básicos</a>.</p></li>
 </ul>
-<h3 id="Example-Filtering-by-Color" class="common-anchor-header">Exemplo: Filtragem por cor</h3><p>Para encontrar entidades com cores primárias (vermelho, verde ou azul) em um campo escalar <code translate="no">color</code>, use a seguinte expressão de filtro:</p>
+<h3 id="Example-Filtering-by-Color" class="common-anchor-header">Exemplo: Filtragem por cor<button data-href="#Example-Filtering-by-Color" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para encontrar entidades com cores primárias (vermelho, verde ou azul) em um campo escalar <code translate="no">color</code>, use a seguinte expressão de filtro:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">Exemplo: Filtragem de campos JSON</h3><p>Milvus permite referenciar chaves em campos JSON. Por exemplo, se tiver um campo JSON <code translate="no">product</code> com as chaves <code translate="no">price</code> e <code translate="no">model</code>, e quiser encontrar produtos com um modelo específico e um preço inferior a 1.850, utilize esta expressão de filtro:</p>
+<h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">Exemplo: Filtragem de campos JSON<button data-href="#Example-Filtering-JSON-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus permite referenciar chaves em campos JSON. Por exemplo, se tiver um campo JSON <code translate="no">product</code> com as chaves <code translate="no">price</code> e <code translate="no">model</code>, e quiser encontrar produtos com um modelo específico e um preço inferior a 1.850, utilize esta expressão de filtro:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;product[&quot;model&quot;] == &quot;JSN-087&quot; AND product[&quot;price&quot;] &lt; 1850&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">Exemplo: Filtragem de campos de matriz</h3><p>Se tiver um campo de matriz <code translate="no">history_temperatures</code> que contenha os registos das temperaturas médias comunicadas pelos observatórios desde o ano 2000 e pretender encontrar observatórios em que a temperatura em 2009 (o 10.º registo) seja superior a 23°C, utilize esta expressão:</p>
+<h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">Exemplo: Filtragem de campos de matriz<button data-href="#Example-Filtering-Array-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Se tiver um campo de matriz <code translate="no">history_temperatures</code> que contenha os registos das temperaturas médias comunicadas pelos observatórios desde o ano 2000 e pretender encontrar observatórios em que a temperatura em 2009 (o 10.º registo) seja superior a 23°C, utilize esta expressão:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;history_temperatures[10] &gt; 23&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Para obter mais informações sobre estes operadores básicos, consulte <a href="/docs/pt/basic-operators.md">Operadores básicos</a>.</p>
@@ -75,7 +120,22 @@ summary: >-
       </svg>
     </button></h2><p>Ao filtrar utilizando caracteres CJK, o processamento pode ser mais complexo devido aos seus conjuntos de caracteres maiores e às diferenças de codificação. Isto pode resultar num desempenho mais lento, especialmente com o operador <code translate="no">IN</code>.</p>
 <p>O Milvus introduz modelos de expressão de filtro para otimizar o desempenho quando se trabalha com caracteres CJK. Ao separar os valores dinâmicos da expressão de filtro, o motor de consulta lida com a inserção de parâmetros de forma mais eficiente.</p>
-<h3 id="Example" class="common-anchor-header">Exemplo</h3><p>Para encontrar indivíduos com mais de 25 anos que vivem em "北京" (Pequim) ou "上海" (Xangai), use a seguinte expressão de modelo:</p>
+<h3 id="Example" class="common-anchor-header">Exemplo<button data-href="#Example" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para encontrar indivíduos com mais de 25 anos que vivem em "北京" (Pequim) ou "上海" (Xangai), use a seguinte expressão de modelo:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 AND city IN [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Para melhorar o desempenho, use esta variação com parâmetros:</p>
@@ -99,7 +159,22 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
         ></path>
       </svg>
     </button></h2><p>O Milvus fornece operadores de filtragem avançados para tipos de dados específicos, como campos JSON, ARRAY e VARCHAR.</p>
-<h3 id="JSON-field-specific-operators" class="common-anchor-header">Operadores específicos do campo JSON</h3><p>O Milvus oferece operadores avançados para consulta de campos JSON, permitindo uma filtragem precisa dentro de estruturas JSON complexas:</p>
+<h3 id="JSON-field-specific-operators" class="common-anchor-header">Operadores específicos do campo JSON<button data-href="#JSON-field-specific-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O Milvus oferece operadores avançados para consulta de campos JSON, permitindo uma filtragem precisa dentro de estruturas JSON complexas:</p>
 <p><code translate="no">JSON_CONTAINS(identifier, jsonExpr)</code>: Verifica se existe uma expressão JSON no campo.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains(tags, &quot;sale&quot;)&#x27;</span>
@@ -113,7 +188,22 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Para obter mais detalhes sobre os operadores JSON, consulte <a href="/docs/pt/json-operators.md">Operadores JSON</a>.</p>
-<h3 id="ARRAY-field-specific-operators" class="common-anchor-header">Operadores específicos do campo ARRAY</h3><p>O Milvus fornece operadores de filtragem avançados para campos de matriz, tais como <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, e <code translate="no">ARRAY_LENGTH</code>, que permitem um controlo fino sobre os dados da matriz:</p>
+<h3 id="ARRAY-field-specific-operators" class="common-anchor-header">Operadores específicos do campo ARRAY<button data-href="#ARRAY-field-specific-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O Milvus fornece operadores de filtragem avançados para campos de matriz, tais como <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, e <code translate="no">ARRAY_LENGTH</code>, que permitem um controlo fino sobre os dados da matriz:</p>
 <p><code translate="no">ARRAY_CONTAINS</code>: Filtra entidades que contêm um elemento específico.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -127,8 +217,23 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Para obter mais detalhes sobre os operadores de matriz, consulte <a href="/docs/pt/array-operators.md">Operadores</a> de matriz.</p>
-<h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">Operadores específicos do campo VARCHAR</h3><p>Milvus fornece operadores especializados para pesquisas precisas baseadas em texto em campos VARCHAR:</p>
-<h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> operador</h4><p>O operador <code translate="no">TEXT_MATCH</code> permite a recuperação precisa de documentos com base em termos de consulta específicos. É particularmente útil para pesquisas filtradas que combinam filtros escalares com pesquisas de semelhanças vectoriais. Ao contrário das pesquisas semânticas, a correspondência de texto centra-se nas ocorrências exactas de termos.</p>
+<h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">Operadores específicos do campo VARCHAR<button data-href="#VARCHAR-field-specific-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus fornece operadores especializados para pesquisas precisas baseadas em texto em campos VARCHAR:</p>
+<h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> operador</h4><p>O operador <code translate="no">TEXT_MATCH</code> permite a recuperação precisa de documentos com base em termos de consulta específicos. É particularmente útil para pesquisas filtradas que combinam filtros escalares com pesquisas de semelhança vetorial. Ao contrário das pesquisas semânticas, a correspondência de texto centra-se nas ocorrências exactas de termos.</p>
 <p>O Milvus utiliza o Tantivy para suportar a indexação invertida e a pesquisa de texto baseada em termos. O processo envolve:</p>
 <ol>
 <li><p><strong>Analisador</strong>: Tokeniza e processa o texto de entrada.</p></li>

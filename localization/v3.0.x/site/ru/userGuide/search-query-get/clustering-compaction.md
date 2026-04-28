@@ -41,13 +41,13 @@ summary: >-
     </button></h2><p>Milvus хранит входящие сущности в сегментах коллекции и уплотняет сегмент, когда он переполнен. Если это происходит, создается новый сегмент для размещения дополнительных сущностей. В результате сущности произвольно распределяются по сегментам. Такое распределение требует от Milvus поиска в нескольких сегментах ближайших соседей для заданного вектора запроса.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/without-clustering-compaction.png" alt="Without Clustering Compaction" class="doc-image" id="without-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/without-clustering-compaction.png" alt="Without Clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Без уплотнения кластеризации</span> </span></p>
 <p>Если Milvus может распределить сущности между сегментами на основе значений в определенном поле, область поиска может быть ограничена одним сегментом, что повышает производительность поиска.</p>
 <p><strong>Clustering Compaction</strong> - это функция в Milvus, которая перераспределяет сущности между сегментами в коллекции на основе значений в скалярном поле. Чтобы включить эту функцию, сначала нужно выбрать скалярное поле в качестве <strong>ключа кластеризации</strong>. Это позволит Milvus перераспределять сущности в сегмент, если значения их ключа кластеризации попадают в определенный диапазон. Когда вы запускаете уплотнение кластеризации, Milvus генерирует/обновляет глобальный индекс <strong>PartitionStats</strong>, который записывает отношения сопоставления между сегментами и значениями ключей кластеризации.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Компактизация кластеризации</span> </span></p>
 <p>Используя <strong>PartitionStats</strong> в качестве ссылки, Milvus может отсеивать нерелевантные данные при получении запроса на поиск/запрос, содержащего значение ключа кластеризации, и ограничивать область поиска сегментами, сопоставленными с этим значением, тем самым повышая производительность поиска. Подробнее об улучшении производительности см. в разделе <a href="/docs/ru/clustering-compaction.md#Benchmark-Test">"Бенчмарк-тесты</a>".</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Использование уплотнения кластеров<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
@@ -66,7 +66,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Функция Clustering Compaction в Milvus является очень настраиваемой. Вы можете запустить ее вручную или настроить ее автоматическое включение через определенные промежутки времени с помощью Milvus. Чтобы включить уплотнение кластеров, выполните следующие действия:</p>
-<h3 id="Global-Configuration" class="common-anchor-header">Глобальная конфигурация</h3><p>Вам необходимо изменить конфигурационный файл Milvus, как показано ниже.</p>
+<h3 id="Global-Configuration" class="common-anchor-header">Глобальная конфигурация<button data-href="#Global-Configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Вам нужно изменить файл конфигурации Milvus, как показано ниже.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">dataCoord:</span>
   <span class="hljs-attr">compaction:</span>
     <span class="hljs-attr">clustering:</span>
@@ -163,7 +178,22 @@ summary: >-
    </tr>
 </table>
 <p>Чтобы применить вышеуказанные изменения к кластеру Milvus, выполните шаги в разделах <a href="/docs/ru/configure-helm.md#Configure-Milvus-via-configuration-file">Настройка Milvus с помощью Helm</a> и <a href="/docs/ru/configure_operator.md">Настройка Milvus с помощью Milvus Operators</a>.</p>
-<h3 id="Collection-Configuration" class="common-anchor-header">Конфигурация коллекции</h3><p>Для уплотнения кластера в определенной коллекции необходимо выбрать скалярное поле из коллекции в качестве ключа кластеризации.</p>
+<h3 id="Collection-Configuration" class="common-anchor-header">Конфигурация коллекции<button data-href="#Collection-Configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Для уплотнения кластера в определенной коллекции необходимо выбрать скалярное поле из коллекции в качестве ключа кластеризации.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -276,7 +306,22 @@ client.createCollection(requestCreate);
 <div class="alert note">
 <p>В качестве ключа кластеризации можно использовать скалярные поля следующих типов данных: <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, <code translate="no">Double</code> и <code translate="no">VarChar</code>.</p>
 </div>
-<h3 id="Trigger-Clustering-Compaction" class="common-anchor-header">Запуск уплотнения кластеризации</h3><p>Если вы включили автоматическое уплотнение кластеризации, Milvus автоматически запускает уплотнение через указанный интервал времени. В качестве альтернативы вы можете вручную запустить уплотнение следующим образом:</p>
+<h3 id="Trigger-Clustering-Compaction" class="common-anchor-header">Запуск уплотнения кластеризации<button data-href="#Trigger-Clustering-Compaction" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Если вы включили автоматическое уплотнение кластеризации, Milvus автоматически запускает уплотнение через указанный интервал времени. В качестве альтернативы вы можете вручную запустить уплотнение следующим образом:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># trigger a manual compaction</span>

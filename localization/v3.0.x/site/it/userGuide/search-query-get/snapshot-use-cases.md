@@ -64,7 +64,7 @@ beta: Milvus 3.0.x
      <td><p>Impatto minimo</p></td>
    </tr>
 </table>
-<p>La creazione di un'istantanea richiede in genere millisecondi, mentre il suo ripristino richiede da secondi a minuti, a seconda del volume dei dati.</p>
+<p>La creazione di un'istantanea richiede in genere millisecondi, mentre il suo ripristino richiede da secondi a minuti, a seconda del volume di dati.</p>
 <p>Per ulteriori dettagli sui limiti e le restrizioni delle istantanee e sul loro impatto sul sistema, consultare la sezione <a href="/docs/it/snapshots.md">Istantanee</a>.</p>
 <h3 id="Create-snapshots" class="common-anchor-header">Creare le istantanee<button data-href="#Create-snapshots" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -133,7 +133,7 @@ err = client.CreateSnapshot(context.Background(), createOpt)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Restore-snapshots" class="common-anchor-header">Ripristino delle istantanee<button data-href="#Restore-snapshots" class="anchor-icon" translate="no">
+<h3 id="Restore-snapshots" class="common-anchor-header">Ripristinare le istantanee<button data-href="#Restore-snapshots" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

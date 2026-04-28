@@ -48,7 +48,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p><strong>Instalar dependências</strong></p>
-<p>Antes de começar, certifique-se de que tem as seguintes dependências instaladas:</p>
+<p>Antes de começar, certifique-se de ter as seguintes dependências instaladas:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-index-vector-stores-milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-index-embeddings-openai</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-index-llms-openai</span>
@@ -160,9 +160,24 @@ response = query_engine.query(<span class="hljs-string">&quot;What did the autho
 <pre><code translate="no">The author learned about retail, the importance of user feedback, and the significance of growth
 rate as the ultimate test of a startup at Viaweb.
 </code></pre>
-<h3 id="Customize-text-analyzer" class="common-anchor-header">Personalizar o analisador de texto</h3><p>Os analisadores desempenham um papel vital na pesquisa de texto integral, dividindo as frases em tokens e efectuando o processamento lexical, tal como a remoção de palavras-chave e de palavras de paragem. Normalmente, são específicos do idioma. Para mais pormenores, consulte o <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Milvus Analyzer Guide</a>.</p>
+<h3 id="Customize-text-analyzer" class="common-anchor-header">Personalizar o analisador de texto<button data-href="#Customize-text-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Os analisadores desempenham um papel vital na pesquisa de texto integral, dividindo as frases em tokens e efectuando o processamento lexical, tal como a remoção de palavras-chave e de palavras de paragem. Normalmente, são específicos do idioma. Para mais pormenores, consulte o <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Milvus Analyzer Guide</a>.</p>
 <p>O Milvus suporta dois tipos de analisadores: <strong>Analisadores incorporados</strong> e <strong>Analisadores personalizados</strong>. Por padrão, se <code translate="no">enable_sparse</code> estiver definido como True, <code translate="no">MilvusVectorStore</code> utiliza o <code translate="no">BM25BuiltInFunction</code> com configurações padrão, empregando o analisador incorporado padrão que tokeniza o texto com base na pontuação.</p>
-<p>Para usar um analisador diferente ou personalizar o existente, você pode fornecer valores para o argumento <code translate="no">analyzer_params</code> ao criar o <code translate="no">BM25BuiltInFunction</code>. Em seguida, defina essa função como <code translate="no">sparse_embedding_function</code> em <code translate="no">MilvusVectorStore</code>.</p>
+<p>Para usar um analisador diferente ou personalizar o existente, você pode fornecer valores para o argumento <code translate="no">analyzer_params</code> ao construir o <code translate="no">BM25BuiltInFunction</code>. Em seguida, defina essa função como <code translate="no">sparse_embedding_function</code> em <code translate="no">MilvusVectorStore</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.vector_stores.milvus.utils <span class="hljs-keyword">import</span> BM25BuiltInFunction
 
 bm25_function = BM25BuiltInFunction(
@@ -240,7 +255,22 @@ The author learned about retail, the importance of user feedback, the value of g
 startup, the significance of pricing strategy, the benefits of working on things that weren't
 prestigious, and the challenges and rewards of running a startup.
 </code></pre>
-<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">Personalizar a função de incorporação esparsa</h3><p>Você também pode personalizar a função de incorporação esparsa, desde que ela herde de <code translate="no">BaseSparseEmbeddingFunction</code>, incluindo os seguintes métodos:</p>
+<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">Personalizar a função de incorporação esparsa<button data-href="#Customize-Sparse-Embedding-Function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Você também pode personalizar a função de incorporação esparsa, desde que ela herde de <code translate="no">BaseSparseEmbeddingFunction</code>, incluindo os seguintes métodos:</p>
 <ul>
 <li><code translate="no">encode_queries</code>: Este método converte os textos em uma lista de embeddings esparsos para consultas.</li>
 <li><code translate="no">encode_documents</code>: Este método converte o texto numa lista de embeddings esparsos para documentos.</li>

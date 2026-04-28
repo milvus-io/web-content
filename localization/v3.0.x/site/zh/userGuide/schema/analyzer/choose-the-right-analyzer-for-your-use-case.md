@@ -40,7 +40,7 @@ summary: 说明
 <p>分析器通过一个简单的两阶段管道工作：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
    </span> <span class="img-wrapper"> <span>分析器工作流程</span> </span></p>
 <ol>
 <li><p><strong>标记化（必需）：</strong>初始阶段应用<strong>标记化器</strong>，将连续的文本字符串分解成离散的、有意义的单元（称为标记）。标记化方法会因语言和内容类型的不同而有很大差异。</p></li>
@@ -51,7 +51,7 @@ summary: 说明
        1. Tokenization → [&quot;Hello&quot;, &quot;World&quot;, &quot;!&quot;]
        2. Lowercase &amp; Punctuation Filtering → [&quot;hello&quot;, &quot;world&quot;]
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Why-the-choice-of-analyzer-matters" class="common-anchor-header">为什么选择分析器很重要<button data-href="#Why-the-choice-of-analyzer-matters" class="anchor-icon" translate="no">
+<h2 id="Why-the-choice-of-analyzer-matters" class="common-anchor-header">为什么分析器的选择很重要<button data-href="#Why-the-choice-of-analyzer-matters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -73,7 +73,7 @@ summary: 说明
      <th><p>问题</p></th>
      <th><p>症状</p></th>
      <th><p>示例（输入和输出）</p></th>
-     <th><p>原因（坏分析仪）</p></th>
+     <th><p>原因（不良分析仪）</p></th>
      <th><p>解决方案（好的分析仪）</p></th>
    </tr>
    <tr>
@@ -189,7 +189,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
    </tr>
    <tr>
      <td><p>多语种或未知语言</p></td>
-     <td><p>否</p></td>
+     <td><p>❌ 否</p></td>
      <td><p><code translate="no">standard</code> 分析仪缺乏处理不同字符集和标记化规则所需的特定语言逻辑。</p></td>
      <td><p>使用带有 <a href="/docs/zh/icu-tokenizer.md"><code translate="no">icu</code></a>标记化器进行单编码标记化。 </p><p>或者，考虑配置<a href="/docs/zh/multi-language-analyzers.md">多语言分析器</a>或<a href="/docs/zh/language-identifier.md">语言标识符</a>，以便更精确地处理多语言内容。</p></td>
    </tr>
@@ -304,7 +304,7 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>当<a href="/docs/zh/choose-the-right-analyzer-for-your-use-case.md#Available-built-in-analyzers">内置选项</a>无法满足您的需求时，您可以通过将标记符与一组过滤器相结合来创建自定义分析器。这样就可以完全控制文本处理管道。</p>
+    </button></h2><p>当<a href="/docs/zh/choose-the-right-analyzer-for-your-use-case.md#Available-built-in-analyzers">内置选项</a>无法满足您的需求时，您可以将标记符与一组过滤器结合起来，创建自定义分析器。这样就可以完全控制文本处理管道。</p>
 <h3 id="Step-1-Select-the-tokenizer-based-on-language" class="common-anchor-header">第 1 步：根据语言选择标记符<button data-href="#Step-1-Select-the-tokenizer-based-on-language" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -407,7 +407,7 @@ schema.add_field(
 <li><p>您不需要<a href="/docs/zh/multi-language-analyzers.md">多语言分析器</a>或<a href="/docs/zh/language-identifier.md">语言识别器</a>的开销。</p></li>
 <li><p>内容以一种语言为主，偶尔出现对整体意义影响不大的外来词（例如，英文文本中偶尔出现日文或法文的品牌名称或技术术语）。</p></li>
 </ul>
-<p><strong>其他方法</strong>：要更精确地处理多语言内容，可考虑使用多语言分析器或语言识别器。详情请参阅<a href="/docs/zh/multi-language-analyzers.md">多语言分析器</a>或<a href="/docs/zh/language-identifier.md">语言标识符</a>。</p>
+<p><strong>其他方法</strong>：要更精确地处理多语言内容，可考虑使用多语言分析器或语言标识符。详情请参阅<a href="/docs/zh/multi-language-analyzers.md">多语言分析器</a>或<a href="/docs/zh/language-identifier.md">语言标识符</a>。</p>
 <h3 id="Step-2-Add-filters-for-precision" class="common-anchor-header">第 2 步：添加过滤器以提高精确度<button data-href="#Step-2-Add-filters-for-precision" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -624,7 +624,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>使用带有小写转换、特定语言词干和停止词去除功能的<code translate="no">standard</code> 标记器。通过修改<code translate="no">language</code> 和<code translate="no">stop_words</code> 参数，此配置也适用于其他欧洲语言。</p>
+    </button></h3><p>使用带有小写转换、特定语言词干和停止词去除功能的<code translate="no">standard</code> 标记符号器。通过修改<code translate="no">language</code> 和<code translate="no">stop_words</code> 参数，此配置也适用于其他欧洲语言。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># French example</span>
 analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
@@ -824,5 +824,5 @@ analyzer_params = {
 <li><p><strong>文本匹配</strong></p>
 <p>文本匹配操作根据您的分析器输出在查询和索引内容之间执行精确的标记匹配。有关实施细节，请参阅<a href="/docs/zh/keyword-match.md">文本匹配</a>。</p></li>
 <li><p><strong>短语匹配</strong></p>
-<p>短语匹配要求对多词表达式进行一致的标记化，以保持短语的边界和含义。有关实施细节，请参阅<a href="/docs/zh/phrase-match.md">短语匹配</a>。</p></li>
+<p>短语匹配要求对多词表达式进行一致的标记化，以保持短语的边界和含义。有关实施详情，请参阅<a href="/docs/zh/phrase-match.md">短语匹配</a>。</p></li>
 </ul>

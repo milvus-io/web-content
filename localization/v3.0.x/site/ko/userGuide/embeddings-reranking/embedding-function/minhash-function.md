@@ -19,7 +19,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>MinHash 함</strong> 수는 원시 텍스트를 <strong>이진 벡터로</strong> 변환하여 문서 간의 <a href="https://en.wikipedia.org/wiki/Jaccard_index">Jaccard 유사성을</a> 대략적으로 계산합니다. 텍스트 슁글과 다중 해시 함수를 적용하여 고정 길이의 서명 벡터를 생성함으로써 대규모로 빠르게 중복에 가까운 문서를 감지하고 중복 제거를 수행할 수 있습니다.</p>
+    </button></h1><p><strong>MinHash 함수는</strong> 원시 텍스트를 <strong>이진 벡터로</strong> 변환하여 문서 간의 <a href="https://en.wikipedia.org/wiki/Jaccard_index">Jaccard 유사성을</a> 대략적으로 계산합니다. 텍스트 슁글과 다중 해시 함수를 적용하여 고정 길이의 서명 벡터를 생성함으로써 대규모로 빠르게 중복에 가까운 문서를 감지하고 중복 제거를 수행할 수 있습니다.</p>
 <p>내장된 기능인 MinHash는 Milvus 내에서 실행되며 외부 모델 추론이나 전처리가 필요하지 않습니다. 원시 텍스트를 삽입하기만 하면 Milvus가 MinHash 서명 벡터를 자동으로 생성합니다.</p>
 <h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,7 +37,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>출력 필드는 <code translate="no">dim % 32 == 0</code> 을 만족하는 치수를 가진 <code translate="no">BINARY_VECTOR</code> 이어야 합니다. 각 MinHash 서명은 32비트 해시 값이기 때문입니다.</p></li>
+<li><p>출력 필드는 <code translate="no">dim % 32 == 0</code> 을 만족하는 치수를 가진 <code translate="no">BINARY_VECTOR</code> 여야 합니다. 각 MinHash 서명은 32비트 해시 값이기 때문입니다.</p></li>
 <li><p>이진 벡터 필드의 <code translate="no">dim</code> 은 <code translate="no">32 * num_hashes</code> 과 같아야 합니다. 불일치하면 오류가 발생합니다.</p></li>
 <li><p>MinHash 함수 출력으로 <code translate="no">MINHASH_LSH</code> 인덱스를 사용하는 경우 <code translate="no">mh_element_bit_width</code> 을 <code translate="no">32</code> 으로 설정해야 합니다.</p></li>
 </ul>

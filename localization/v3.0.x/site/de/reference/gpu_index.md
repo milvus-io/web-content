@@ -23,7 +23,7 @@ title: GPU-Index
 <p>Es ist wichtig zu beachten, dass die Verwendung eines GPU-Index nicht unbedingt die Latenzzeit im Vergleich zu einem CPU-Index reduziert. Wenn Sie den Durchsatz vollständig maximieren möchten, benötigen Sie einen extrem hohen Anfragedruck oder eine große Anzahl von Abfragevektoren.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
    </span> <span class="img-wrapper"> <span>Leistung</span> </span></p>
 <p>Die GPU-Unterstützung von Milvus wird vom Nvidia <a href="https://rapids.ai/">RAPIDS-Team</a> beigesteuert. Im Folgenden sind die GPU-Indextypen aufgeführt, die derzeit von Milvus unterstützt werden.</p>
 <h2 id="GPUCAGRA" class="common-anchor-header">GPU_CAGRA<button data-href="#GPUCAGRA" class="anchor-icon" translate="no">
@@ -156,10 +156,10 @@ title: GPU-Index
         ></path>
       </svg>
     </button></h2><p><code translate="no">PQ</code> (Produktquantisierung) zerlegt den ursprünglichen hochdimensionalen Vektorraum gleichmäßig in kartesische Produkte von <code translate="no">m</code> niedrigdimensionalen Vektorräumen und quantisiert dann die zerlegten niedrigdimensionalen Vektorräume. Anstatt die Abstände zwischen dem Zielvektor und dem Zentrum aller Einheiten zu berechnen, ermöglicht die Produktquantisierung die Berechnung der Abstände zwischen dem Zielvektor und dem Clustering-Zentrum jedes niedrigdimensionalen Raums und reduziert die Zeit- und Raumkomplexität des Algorithmus erheblich.</p>
-<p>IVF_PQ führt das IVF-Index-Clustering durch, bevor das Produkt der Vektoren quantisiert wird. Seine Indexdatei ist noch kleiner als die von IVF_SQ8, aber auch hier kommt es zu einem Verlust an Genauigkeit bei der Suche nach Vektoren.</p>
+<p>IVF_PQ führt das IVF-Index-Clustering durch, bevor das Produkt der Vektoren quantisiert wird. Seine Indexdatei ist sogar noch kleiner als IVF_SQ8, aber auch hier kommt es zu einem Verlust an Genauigkeit bei der Suche nach Vektoren.</p>
 <div class="alert note">
 <p>Die Parameter für die Indexerstellung und die Suchparameter variieren je nach Milvus-Verteilung. Wählen Sie zunächst Ihre Milvus-Distribution aus.</p>
-<p>Beachten Sie bei der Durchführung von Suchvorgängen, dass Sie bei jeder Suche gegen eine GPU_IVF_FLAT-indizierte Sammlung den Top-K-Wert auf bis zu 8192 einstellen können.</p>
+<p>Beachten Sie bei der Durchführung von Suchvorgängen, dass Sie den Top-K-Wert für jede Suche gegen eine GPU_IVF_FLAT-indizierte Sammlung auf bis zu 8192 einstellen können.</p>
 </div>
 <ul>
 <li><p>Parameter für den Indexaufbau</p>
@@ -214,7 +214,7 @@ title: GPU-Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>GPU_BRUTE_FORCE ist auf Fälle zugeschnitten, in denen eine extrem hohe Trefferquote entscheidend ist. Sie garantiert eine Trefferquote von 1, indem sie jede Abfrage mit allen Vektoren im Datensatz vergleicht. Es benötigt nur den metrischen Typ (<code translate="no">metric_type</code>) und Top-k (<code translate="no">limit</code>) als Indexaufbau- und Suchparameter.</p>
+    </button></h2><p>GPU_BRUTE_FORCE ist auf Fälle zugeschnitten, in denen eine extrem hohe Trefferquote entscheidend ist. Sie garantiert eine Trefferquote von 1, indem sie jede Abfrage mit allen Vektoren des Datensatzes vergleicht. Es benötigt nur den metrischen Typ (<code translate="no">metric_type</code>) und Top-k (<code translate="no">limit</code>) als Indexaufbau- und Suchparameter.</p>
 <p>Für GPU_BRUTE_FORCE sind keine zusätzlichen Indexerstellungs- oder Suchparameter erforderlich.</p>
 <h2 id="Conclusion" class="common-anchor-header">Schlussfolgerung<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"

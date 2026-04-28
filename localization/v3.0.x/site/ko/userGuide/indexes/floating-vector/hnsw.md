@@ -43,11 +43,11 @@ summary: >-
 <li><p><strong>진입 지점</strong>: 검색은 그래프에서 미리 결정된 노드인 최상위 레이어의 고정된 진입점에서 시작됩니다.</p></li>
 <li><p><strong>탐욕스러운 검색</strong>: 알고리즘은 쿼리 벡터에 더 이상 가까워질 수 없을 때까지 현재 레이어에서 가장 가까운 이웃으로 욕심스럽게 이동합니다. 상위 레이어는 탐색 목적으로 사용되며, 하위 레이어에서 더 세밀한 검색을 위한 잠재적 진입점을 찾기 위한 거친 필터 역할을 합니다.</p></li>
 <li><p><strong>레이어 하강</strong>: 현재 레이어에서 <strong>로컬 최소값에</strong> 도달하면 알고리즘은 미리 설정된 연결을 사용하여 하위 레이어로 점프 다운하여 탐욕스러운 검색을 반복합니다.</p></li>
-<li><p><strong>최종</strong> <strong>다듬기</strong>: 이 프로세스는 최하위 레이어에 도달할 때까지 계속되며, 최종 세분화 단계에서는 가장 가까운 이웃을 식별합니다.</p></li>
+<li><p><strong>최종</strong> <strong>다듬기</strong>: 이 프로세스는 최하위 계층에 도달할 때까지 계속되며, 최종 세분화 단계에서는 가장 가까운 이웃을 식별합니다.</p></li>
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
    </span> <span class="img-wrapper"> <span>HNSW</span> </span></p>
 <p>HNSW의 성능은 그래프의 구조와 검색 동작을 모두 제어하는 몇 가지 주요 매개변수에 따라 달라집니다. 여기에는 다음이 포함됩니다:</p>
 <ul>
@@ -99,7 +99,7 @@ index_params.add_index(
 </ul>
 <p><code translate="no">HNSW</code> 인덱스에 사용할 수 있는 더 많은 구축 파라미터에 대해 알아보려면 <a href="/docs/ko/hnsw.md#Index-building-params">인덱스 구축 파라미터를</a> 참조하세요.</p></li>
 </ul>
-<p>인덱스 파라미터가 구성되면 <code translate="no">create_index()</code> 메서드를 직접 사용하거나 <code translate="no">create_collection</code> 메서드에서 인덱스 파라미터를 전달하여 인덱스를 생성할 수 있습니다. 자세한 내용은 <a href="/docs/ko/create-collection.md">컬렉션 만들기를</a> 참조하세요.</p>
+<p>인덱스 파라미터를 구성한 후에는 <code translate="no">create_index()</code> 메서드를 직접 사용하거나 <code translate="no">create_collection</code> 메서드에서 인덱스 파라미터를 전달하여 인덱스를 생성할 수 있습니다. 자세한 내용은 <a href="/docs/ko/create-collection.md">컬렉션 만들기를</a> 참조하세요.</p>
 <h2 id="Search-on-index" class="common-anchor-header">인덱스에서 검색<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -154,7 +154,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>이 섹션에서는 인덱스를 만들고 인덱스에서 검색을 수행하는 데 사용되는 매개변수에 대한 개요를 제공합니다.</p>
-<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수</h3><p>다음 표에는 <a href="/docs/ko/hnsw.md#Build-index">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 표에는 <a href="/docs/ko/hnsw.md#Build-index">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th><p>파라미터</p></th>
@@ -166,7 +181,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">M</code></p></td>
      <td><p>나가는 에지와 들어오는 에지를 모두 포함하여 각 노드가 그래프에서 가질 수 있는 최대 연결(또는 에지) 수입니다. 이 매개변수는 인덱스 구성과 검색 모두에 직접적인 영향을 줍니다.</p></td>
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [2, 2048]</p><p><strong>기본값</strong>: <code translate="no">30</code> (노드당 최대 30개의 나가는 에지와 30개의 들어오는 에지)</p></td>
-     <td><p><code translate="no">M</code> 이 클수록 일반적으로 <strong>정확도는 높아지지만</strong> <strong>메모리 오버헤드가 증가하고</strong> <strong>인덱스 구축과 검색 속도가 느려집니다</strong>. 차원이 높은 데이터 세트나 높은 리콜이 중요한 경우 <code translate="no">M</code> 값을 늘리는 것을 고려하세요.</p><p>메모리 사용량과 검색 속도가 주요 관심사인 경우 <code translate="no">M</code> 을 낮추는 것이 좋습니다.</p><p>대부분의 경우, 이 범위 내에서 값을 설정하는 것이 좋습니다: [5, 100].</p></td>
+     <td><p><code translate="no">M</code> 값이 클수록 일반적으로 <strong>정확도는 높아지지만</strong> <strong>메모리 오버헤드가 증가하고</strong> <strong>인덱스 구축과 검색 속도가 느려집니다</strong>. 차원이 높은 데이터 세트나 높은 리콜이 중요한 경우 <code translate="no">M</code> 값을 늘리는 것을 고려하세요.</p><p>메모리 사용량과 검색 속도가 주요 관심사인 경우 <code translate="no">M</code> 을 낮추는 것이 좋습니다.</p><p>대부분의 경우, 이 범위 내에서 값을 설정하는 것이 좋습니다: [5, 100].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">efConstruction</code></p></td>
@@ -175,7 +190,22 @@ res = MilvusClient.search(
      <td><p><code translate="no">efConstruction</code> 이 높을수록 일반적으로 더 많은 잠재적 연결이 탐색되므로 <strong>더 정확한 인덱스가</strong> 생성됩니다. 하지만 <strong>인덱싱 시간이 길어지고</strong> 구성 중에 <strong>메모리 사용량이 증가합니다</strong>. 특히 인덱싱 시간이 덜 중요한 시나리오에서는 정확도를 높이려면 <code translate="no">efConstruction</code> 을 늘리는 것이 좋습니다.</p><p>리소스 제약이 우려되는 경우 인덱스 구축 속도를 높이려면 <code translate="no">efConstruction</code> 을 줄이는 것을 고려하세요.</p><p>대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [50, 500].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수</h3><p>다음 표에는 <a href="/docs/ko/hnsw.md#Search-on-index">색인에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 표에는 <a href="/docs/ko/hnsw.md#Search-on-index">색인에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th><p>파라미터</p></th>
@@ -185,7 +215,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>가장 가까운 이웃 검색 중 검색 범위를 제어합니다. 얼마나 많은 노드를 방문하고 잠재적인 가장 가까운 이웃으로 평가할지 결정합니다.  이 매개변수는 검색 프로세스에만 영향을 미치며 그래프의 맨 아래 레이어에만 적용됩니다.</p></td>
+     <td><p>가장 가까운 이웃을 검색하는 동안 검색 범위를 제어합니다. 얼마나 많은 노드를 방문하고 잠재적인 가장 가까운 이웃으로 평가할지 결정합니다.  이 매개변수는 검색 프로세스에만 영향을 미치며 그래프의 맨 아래 레이어에만 적용됩니다.</p></td>
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [1, <em>int_max</em>]</p><p><strong>기본값</strong>: <em>limit</em> (반환할 가장 가까운 이웃 TopK)</p></td>
      <td><p><code translate="no">ef</code> 이 클수록 일반적으로 더 많은 잠재적 이웃을 고려하므로 <strong>검색 정확도가 높아</strong> 집니다. 그러나 <strong>검색 시간도 늘어납니다</strong>. 높은 회상률을 달성하는 것이 중요하고 검색 속도는 크게 신경 쓰지 않는 경우 <code translate="no">ef</code> 을 늘리는 것을 고려하세요.</p><p>특히 약간의 정확도 감소를 감수할 수 있는 시나리오에서는 <code translate="no">ef</code> 을 줄여 검색 속도를 우선시하는 것이 좋습니다.</p><p>대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [K, 10K].</p></td>
    </tr>

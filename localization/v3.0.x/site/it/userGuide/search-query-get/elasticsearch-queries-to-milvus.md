@@ -8,10 +8,9 @@ summary: >-
   scarse prestazioni in tempo reale, la gestione inefficiente degli shard, un
   design non cloud-native e un'eccessiva richiesta di risorse. Come database
   vettoriale cloud-nativo, Milvus supera questi problemi grazie alla
-  disgiunzione tra archiviazione ed elaborazione, all'indicizzazione efficiente
-  per i dati ad alta dimensionalità e alla perfetta integrazione con le
-  infrastrutture moderne. Offre prestazioni e scalabilità superiori per i
-  carichi di lavoro AI.
+  disgiunzione tra archiviazione e calcolo, all'indicizzazione efficiente per i
+  dati ad alta dimensionalità e alla perfetta integrazione con le infrastrutture
+  moderne. Offre prestazioni e scalabilità superiori per i carichi di lavoro AI.
 ---
 <h1 id="Elasticsearch-Queries-to-Milvus" class="common-anchor-header">Query Elasticsearch a Milvus<button data-href="#Elasticsearch-Queries-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,7 +45,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>In Elasticsearch, le operazioni nel contesto della query generano punteggi di rilevanza, mentre quelle nel contesto del filtro non lo fanno. Allo stesso modo, le ricerche di Milvus producono punteggi di similarità, mentre le sue query simili a filtri non lo fanno. Quando si migra la base di codice da Elasticsearch a Milvus, il principio chiave è la conversione dei campi utilizzati nel contesto di query di Elasticsearch in campi vettoriali per consentire la generazione di punteggi di similarità.</p>
-<p>La tabella seguente illustra alcuni modelli di query di Elasticsearch e i loro corrispondenti equivalenti in Milvus.</p>
+<p>La tabella seguente illustra alcuni modelli di query Elasticsearch e i loro corrispondenti equivalenti in Milvus.</p>
 <table>
    <tr>
      <th><p>Query Elasticsearch</p></th>
@@ -160,7 +159,7 @@ summary: >-
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;message&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Nell'esempio precedente, <code translate="no">message_sparse</code> è un campo vettoriale rado derivato da un campo VarChar denominato <code translate="no">message</code>. Milvus utilizza il modello di incorporamento BM25 per convertire i valori del campo <code translate="no">message</code> in incorporazioni vettoriali sparse e li memorizza nel campo <code translate="no">message_sparse</code>. Alla ricezione della richiesta di ricerca, Milvus incorpora il payload della query in testo semplice utilizzando lo stesso modello BM25 ed esegue una ricerca vettoriale rada e restituisce i campi <code translate="no">id</code> e <code translate="no">message</code> specificati nel parametro <code translate="no">output_fields</code> insieme ai punteggi di similarità corrispondenti.</p>
+<p>Nell'esempio precedente, <code translate="no">message_sparse</code> è un campo vettoriale rado derivato da un campo VarChar denominato <code translate="no">message</code>. Milvus utilizza il modello di incorporamento BM25 per convertire i valori del campo <code translate="no">message</code> in incorporazioni vettoriali rade e li memorizza nel campo <code translate="no">message_sparse</code>. Alla ricezione della richiesta di ricerca, Milvus incorpora il payload della query in testo semplice utilizzando lo stesso modello BM25 ed esegue una ricerca vettoriale rada e restituisce i campi <code translate="no">id</code> e <code translate="no">message</code> specificati nel parametro <code translate="no">output_fields</code> insieme ai punteggi di similarità corrispondenti.</p>
 <p>Per utilizzare questa funzionalità, è necessario abilitare l'analizzatore sul campo <code translate="no">message</code> e definire una funzione per ricavare il campo <code translate="no">message_sparse</code> da esso. Per istruzioni dettagliate sull'abilitazione dell'analizzatore e sulla creazione della funzione derivata in Milvus, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca a testo completo</a>.</p>
 <h2 id="Term-level-queries" class="common-anchor-header">Query a livello di termine<button data-href="#Term-level-queries" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -594,7 +593,7 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <p>In questo esempio, RRF combina i risultati di due retrievers:</p>
 <ul>
-<li><p>Una ricerca standard basata sui termini per i documenti che contengono il termine <code translate="no">&quot;shoes&quot;</code> nel campo <code translate="no">text</code>.</p></li>
+<li><p>Una ricerca standard basata sui termini per i documenti contenenti il termine <code translate="no">&quot;shoes&quot;</code> nel campo <code translate="no">text</code>.</p></li>
 <li><p>Una ricerca kNN sul campo <code translate="no">vector</code> utilizzando il vettore di query fornito.</p></li>
 </ul>
 <p>Ciascun retriever contribuisce con un massimo di 50 top match, che vengono riclassificati da RRF e i 10 risultati finali vengono restituiti.</p>
@@ -651,4 +650,4 @@ res = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In questo articolo abbiamo affrontato le conversioni di query tipiche di Elasticsearch nei loro equivalenti di Milvus, comprese le query a livello di termine, le query booleane, le query full-text e le query vettoriali. Se avete altre domande sulla conversione di altre query Elasticsearch, non esitate a contattarci.</p>
+    </button></h2><p>In questo articolo abbiamo affrontato la conversione di query tipiche di Elasticsearch nei loro equivalenti di Milvus, comprese le query a livello di termine, le query booleane, le query full-text e le query vettoriali. Se avete altre domande sulla conversione di altre query Elasticsearch, non esitate a contattarci.</p>

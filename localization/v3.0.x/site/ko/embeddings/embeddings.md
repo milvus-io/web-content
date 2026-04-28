@@ -19,7 +19,7 @@ title: 임베딩 개요
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>임베딩은 비슷한 의미의 데이터를 서로 가깝게 배치해 데이터를 고차원 공간에 매핑하는 머신 러닝 개념입니다. 일반적으로 BERT 또는 다른 Transformer 제품군의 심층 신경망인 임베딩 모델은 텍스트, 이미지 및 기타 데이터 유형의 의미를 벡터로 알려진 일련의 숫자로 효과적으로 나타낼 수 있습니다. 이 모델의 주요 특징은 고차원 공간에서 벡터 사이의 수학적 거리가 원본 텍스트나 이미지의 의미론적 유사성을 나타낼 수 있다는 것입니다. 이 속성은 Google이나 Bing과 같은 웹 검색 엔진, 이커머스 사이트의 제품 검색 및 추천, 그리고 최근 인기를 끌고 있는 제너레이티브 AI의 검색 증강 생성(RAG) 패러다임 등 다양한 정보 검색 애플리케이션에 활용되고 있습니다.</p>
+    </button></h1><p>임베딩은 비슷한 의미의 데이터를 서로 가깝게 배치해 데이터를 고차원 공간에 매핑하는 머신 러닝 개념입니다. 일반적으로 BERT 또는 다른 Transformer 제품군의 심층 신경망인 임베딩 모델은 텍스트, 이미지 및 기타 데이터 유형의 의미를 벡터라는 일련의 숫자로 효과적으로 나타낼 수 있습니다. 이 모델의 주요 특징은 고차원 공간에서 벡터 사이의 수학적 거리가 원본 텍스트나 이미지의 의미론적 유사성을 나타낼 수 있다는 것입니다. 이 속성은 Google이나 Bing과 같은 웹 검색 엔진, 이커머스 사이트의 제품 검색 및 추천, 그리고 최근 인기를 끌고 있는 제너레이티브 AI의 검색 증강 생성(RAG) 패러다임 등 다양한 정보 검색 애플리케이션에 활용되고 있습니다.</p>
 <p>임베딩에는 크게 두 가지 범주가 있으며, 각각 다른 유형의 벡터를 생성합니다:</p>
 <ul>
 <li><p><strong>고밀도 임베딩</strong>: 대부분의 임베딩 모델은 정보를 수백에서 수천 차원의 부동 소수점 벡터로 표현합니다. 대부분의 차원이 0이 아닌 값을 갖기 때문에 이러한 결과를 "고밀도" 벡터라고 합니다. 예를 들어, 널리 사용되는 오픈 소스 임베딩 모델인 BAAI/bge-base-en-v1.5는 768개의 부동 소수점 숫자(768차원 부동 소수점 벡터)로 이루어진 벡터를 출력합니다.</p></li>
@@ -47,7 +47,7 @@ title: 임베딩 개요
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/GeminiEmbeddingFunction/GeminiEmbeddingFunction.md">Gemini</a></td><td>하이브리드</td><td>비공개</td></tr>
 </tbody>
 </table>
-<h2 id="Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="common-anchor-header">예제 1: 기본 임베딩 함수를 사용하여 밀도 벡터 생성하기<button data-href="#Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="anchor-icon" translate="no">
+<h2 id="Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="common-anchor-header">예제 1: 기본 임베딩 함수를 사용하여 고밀도 벡터 생성하기<button data-href="#Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,7 +65,7 @@ title: 임베딩 개요
     </button></h2><p>Milvus에서 임베딩 함수를 사용하려면 먼저 임베딩 생성을 위한 모든 유틸리티를 래핑하는 <code translate="no">model</code> 서브패키지와 함께 PyMilvus 클라이언트 라이브러리를 설치하세요.</p>
 <pre><code translate="no" class="language-python">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">model</code> 서브 패키지는 <a href="https://milvus.io/docs/embed-with-openai.md">OpenAI</a>, <a href="https://milvus.io/docs/embed-with-sentence-transform.md">Sentence Transformers</a>, <a href="https://milvus.io/docs/embed-with-bgm-m3.md">BGE M3부터</a> <a href="https://milvus.io/docs/embed-with-splade.md">SPLADE</a> 사전 훈련 모델까지 다양한 임베딩 모델을 지원합니다. 단순화를 위해 이 예제에서는 <strong>전체 MiniLM-L6-v2</strong> 문장 트랜스포머 모델인 <code translate="no">DefaultEmbeddingFunction</code> 을 사용하며, 이 모델은 약 70MB로 처음 사용할 때 다운로드됩니다:</p>
+<p><code translate="no">model</code> 서브 패키지는 <a href="https://milvus.io/docs/embed-with-openai.md">OpenAI</a>, <a href="https://milvus.io/docs/embed-with-sentence-transform.md">Sentence Transformers</a>, <a href="https://milvus.io/docs/embed-with-bgm-m3.md">BGE M3</a>, <a href="https://milvus.io/docs/embed-with-splade.md">SPLADE</a> 사전 훈련 모델 등 다양한 임베딩 모델을 지원합니다. 단순화를 위해 이 예제에서는 <strong>전체 MiniLM-L6-v2</strong> 문장 트랜스포머 모델인 <code translate="no">DefaultEmbeddingFunction</code> 을 사용하며, 이 모델은 약 70MB로 처음 사용할 때 다운로드됩니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
 
 <span class="hljs-comment"># This will download &quot;all-MiniLM-L6-v2&quot;, a light weight model.</span>
@@ -95,7 +95,7 @@ embeddings = ef.encode_documents(docs)
       dtype=float32)]
 Dim: <span class="hljs-number">384</span> (<span class="hljs-number">384</span>,)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Example-2-Generate-dense-and-sparse-vectors-in-one-call-with-BGE-M3-model" class="common-anchor-header">예제 2: BGE M3 모델을 사용하여 한 번의 호출로 고밀도 및 스파스 벡터 생성하기<button data-href="#Example-2-Generate-dense-and-sparse-vectors-in-one-call-with-BGE-M3-model" class="anchor-icon" translate="no">
+<h2 id="Example-2-Generate-dense-and-sparse-vectors-in-one-call-with-BGE-M3-model" class="common-anchor-header">예 2: BGE M3 모델을 사용하여 한 번의 호출로 고밀도 및 스파스 벡터 생성하기<button data-href="#Example-2-Generate-dense-and-sparse-vectors-in-one-call-with-BGE-M3-model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

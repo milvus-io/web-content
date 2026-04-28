@@ -127,7 +127,7 @@ beta: Milvus 2.6.4+
    <tr>
      <td><p><code translate="no">disable</code></p></td>
      <td><p>Vorladen überspringen. Das Segment wird schneller abfragbar, aber die erste Abfrage kann ein bedarfsgesteuertes Laden auslösen.</p></td>
-     <td><p>Geeignet für seltene Zugriffe oder große Daten wie rohe Vektorfelder oder unkritische skalare Felder.</p></td>
+     <td><p>Geeignet für seltene Zugriffe oder große Daten wie rohe Vektorfelder oder unkritische Skalarfelder.</p></td>
    </tr>
 </table>
 <p><strong>Beispiel YAML</strong>:</p>

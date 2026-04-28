@@ -86,7 +86,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>El repositorio de Milvus Helm Charts en <code translate="no">https://github.com/milvus-io/milvus-helm</code> ha sido archivado. Ahora usamos el nuevo repositorio en <code translate="no">https://github.com/zilliztech/milvus-helm</code>. El repositorio archivado todavía está disponible para gráficos hasta la versión 4.0.31, pero utilice el nuevo repositorio para versiones posteriores.</p>
+<p>El repositorio de Milvus Helm Charts en <code translate="no">https://github.com/milvus-io/milvus-helm</code> ha sido archivado. Ahora usamos el nuevo repositorio en <code translate="no">https://github.com/zilliztech/milvus-helm</code>. El repositorio archivado aún está disponible para gráficos hasta la versión 4.0.31, pero utilice el nuevo repositorio para versiones posteriores.</p>
 </div>
 <p>A continuación, obtenga los gráficos Milvus del repositorio de la siguiente manera:</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update

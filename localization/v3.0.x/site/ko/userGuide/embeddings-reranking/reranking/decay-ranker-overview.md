@@ -89,7 +89,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h3><p>먼저, Milvus는 일관된 비교를 위해 벡터 유사도 점수를 계산하고 정규화합니다:</p>
 <ul>
-<li><p><strong>L2</strong> 및 <strong>JACCARD</strong> 거리 메트릭의 경우(값이 낮을수록 유사성이 높음을 나타냄):</p>
+<li><p><strong>L2</strong> 및 <strong>JACCARD</strong> 거리 메트릭(값이 낮을수록 유사성이 높음을 나타냄)의 경우:</p>
 <pre><code translate="no" class="language-plaintext">normalized_score = 1.0 - (2 × arctan(score))/π
 <button class="copy-code-btn"></button></code></pre>
 <p>거리를 0-1 사이의 유사도 점수로 변환하며, 점수가 높을수록 더 좋습니다.</p></li>
@@ -134,7 +134,7 @@ beta: Milvus 2.6.x
     </button></h3><p>마지막으로 Milvus는 정규화된 유사도 점수와 감쇠 점수를 결합하여 최종 순위 점수를 산출합니다:</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
-<p>하이브리드 검색(여러 벡터 필드를 결합)의 경우, Milvus는 검색 요청 중 최대 정규화된 유사성 점수를 취합니다:</p>
+<p>하이브리드 검색(여러 벡터 필드를 결합)의 경우, Milvus는 검색 요청 중 정규화된 최대 유사도 점수를 취합니다:</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>예를 들어, 하이브리드 검색에서 연구 논문이 벡터 유사성에서 0.82점, BM25 기반 텍스트 검색에서 0.91점을 받은 경우, Milvus는 0.91점을 기본 유사성 점수로 사용한 후 감쇠 계수를 적용합니다.</p>
@@ -275,7 +275,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>디케이 랭커는 Milvus의 표준 벡터 검색과 하이브리드 검색 작업 모두에 적용할 수 있습니다. 다음은 이 기능을 구현하기 위한 주요 코드 스니펫입니다.</p>
 <div class="alert note">
-<p>감쇠 함수를 사용하기 전에 먼저 감쇠 계산에 사용할 적절한 숫자 필드(타임스탬프, 거리 등)가 포함된 컬렉션을 만들어야 합니다. 컬렉션 설정, 스키마 정의 및 데이터 삽입을 포함한 전체 작업 예제는 <a href="/docs/ko/tutorial-implement-a-time-based-ranking-in-milvus.md">튜토리얼을</a> 참조하세요: <a href="/docs/ko/tutorial-implement-a-time-based-ranking-in-milvus.md">밀버스에서 시간 기반 랭킹 구현하기를</a> 참조하세요.</p>
+<p>감쇠 함수를 사용하기 전에 먼저 감쇠 계산에 사용할 적절한 숫자 필드(타임스탬프, 거리 등)가 있는 컬렉션을 만들어야 합니다. 컬렉션 설정, 스키마 정의 및 데이터 삽입을 포함한 전체 작업 예제는 <a href="/docs/ko/tutorial-implement-a-time-based-ranking-in-milvus.md">튜토리얼을</a> 참조하세요: <a href="/docs/ko/tutorial-implement-a-time-based-ranking-in-milvus.md">밀버스에서 시간 기반 랭킹 구현하기를</a> 참조하세요.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">감쇠 순위 생성하기<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -386,7 +386,7 @@ decay_ranker = Function(
    </tr>
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
-     <td><p>예</p></td>
+     <td><p>Yes</p></td>
      <td><p>적용할 수학적 감쇠 순위자를 지정합니다. 관련성 감소의 곡선 모양을 결정합니다.</p><p>적절한 기능을 선택하는 방법에 대한 지침은 <a href="/docs/ko/decay-ranker-overview.md#Choose-the-right-decay-ranker">올바른 감쇠 순위 선택</a> 섹션을 참조하세요.</p></td>
      <td><p><code translate="no">"gauss"</code>, <code translate="no">"exp"</code>, 또는 <code translate="no">"linear"</code></p></td>
    </tr>

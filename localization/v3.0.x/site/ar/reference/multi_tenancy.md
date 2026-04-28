@@ -38,10 +38,25 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>يدعم ميلفوس الإيجار المتعدد على أربعة مستويات: <strong>قاعدة البيانات</strong> <strong>والمجموعة</strong> <strong>والتقسيم</strong> <strong>ومفتاح التقسيم ومفتاح التقسيم</strong>.</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">الإيجار المتعدد على مستوى قاعدة البيانات</h3><p>من خلال الإيجار المتعدد على مستوى قاعدة البيانات، يتلقى كل مستأجر <a href="/docs/ar/manage_databases.md">قاعدة بيانات</a> مطابقة تحتوي على مجموعة واحدة أو أكثر.</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">الإيجار المتعدد على مستوى قاعدة البيانات<button data-href="#Database-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>من خلال الإيجار المتعدد على مستوى قاعدة البيانات، يتلقى كل مستأجر <a href="/docs/ar/manage_databases.md">قاعدة بيانات</a> مطابقة تحتوي على مجموعة واحدة أو أكثر.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>الإيجار المتعدد على مستوى قاعدة البيانات</span> </span></p>
 <ul>
 <li><p><strong>قابلية التوسع</strong>: تدعم استراتيجية الإيجار المتعدد على مستوى قاعدة البيانات 64 مستأجراً كحد أقصى افتراضياً.</p></li>
@@ -49,10 +64,25 @@ summary: >-
 <li><p><strong>المرونة</strong>: يمكن أن تحتوي كل قاعدة بيانات على مجموعات بمخططات مختلفة، مما يوفر تنظيمًا مرنًا للغاية للبيانات ويسمح لكل مستأجر أن يكون لكل مستأجر مخطط بيانات خاص به.</p></li>
 <li><p><strong>أخرى</strong>: تدعم هذه الاستراتيجية أيضًا نظام RBAC، مما يتيح التحكم الدقيق في وصول المستخدم لكل مستأجر. بالإضافة إلى ذلك، يمكنك تحميل البيانات أو إصدارها بمرونة لمستأجرين محددين لإدارة البيانات الساخنة والباردة بفعالية.</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">الإيجار المتعدد على مستوى المجموعة</h3><p>من خلال الإيجار المتعدد على مستوى المجموعة، يتم تعيين <a href="/docs/ar/manage-collections.md">مجموعة</a> لكل مستأجر، مما يوفر عزلاً قوياً للبيانات.</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">الإيجار المتعدد على مستوى المجموعة<button data-href="#Collection-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>من خلال الإيجار المتعدد على مستوى المجموعة، يتم تعيين <a href="/docs/ar/manage-collections.md">مجموعة</a> لكل مستأجر، مما يوفر عزلاً قوياً للبيانات.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>الإيجار المتعدد على مستوى المجموعة</span> </span></p>
 <ul>
 <li><p><strong>قابلية التوسع</strong>: نظرًا لأن المجموعة يمكن أن تستوعب ما يصل إلى 65,536 مجموعة بشكل افتراضي، يمكن لهذه الاستراتيجية أن تستوعب نفس عدد المستأجرين داخل المجموعة.</p></li>
@@ -60,21 +90,51 @@ summary: >-
 <li><p><strong>المرونة</strong>: تسمح هذه الاستراتيجية بأن يكون لكل مجموعة مخططها الخاص، مما يستوعب المستأجرين الذين لديهم مخططات بيانات مختلفة.</p></li>
 <li><p><strong>أخرى</strong>: تدعم هذه الاستراتيجية أيضًا نظام RBAC، مما يسمح بالتحكم الدقيق في الوصول إلى المستأجرين. بالإضافة إلى ذلك، يمكنك تحميل البيانات أو إصدارها بمرونة لمستأجرين محددين لإدارة البيانات الساخنة والباردة بفعالية.</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">الإيجار المتعدد على مستوى القسم</h3><p>في الإيجار المتعدد على مستوى القسم، يتم تعيين كل مستأجر إلى <a href="/docs/ar/manage-partitions.md">قسم</a> تم إنشاؤه يدوياً ضمن مجموعة مشتركة.</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">الإيجار المتعدد على مستوى القسم<button data-href="#Partition-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في الإيجار المتعدد على مستوى القسم، يتم تعيين كل مستأجر إلى <a href="/docs/ar/manage-partitions.md">قسم</a> تم إنشاؤه يدوياً ضمن مجموعة مشتركة.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>الإيجار المتعدد على مستوى القسم</span> </span></p>
 <ul>
-<li><p><strong>قابلية التوسع</strong>: يمكن للمجموعة أن تستوعب ما يصل إلى 1,024 قسماً لكل مجموعة، مما يسمح بنفس عدد المستأجرين داخلها.</p></li>
+<li><p><strong>قابلية التوسع</strong>: يمكن أن تحتوي المجموعة على ما يصل إلى 1,024 قسماً لكل مجموعة، مما يسمح بنفس عدد المستأجرين داخلها.</p></li>
 <li><p><strong>عزل البيانات</strong>: يتم فصل بيانات كل مستأجر فعليًا عن طريق الأقسام.</p></li>
 <li><p><strong>المرونة</strong>: تتطلب هذه الاستراتيجية مشاركة جميع المستأجرين نفس مخطط البيانات. ويجب إنشاء الأقسام يدوياً.</p></li>
 <li><p><strong>أخرى</strong>: لا يتم دعم RBAC على مستوى الأقسام. يمكن الاستعلام عن المستأجرين إما بشكل فردي أو عبر أقسام متعددة، مما يجعل هذا النهج مناسبًا تمامًا للسيناريوهات التي تتضمن استعلامات مجمعة أو تحليلات عبر شرائح المستأجرين. بالإضافة إلى ذلك، يمكنك تحميل البيانات أو تحريرها بمرونة لمستأجرين محددين لإدارة البيانات الساخنة والباردة بفعالية.</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">الإيجار المتعدد على مستوى مفتاح التقسيم</h3><p>باستخدام هذه الاستراتيجية، يشترك جميع المستأجرين في مجموعة واحدة ومخطط واحد، ولكن يتم توجيه بيانات كل مستأجر تلقائيًا إلى 16 قسمًا معزولًا فعليًا استنادًا إلى قيمة <a href="/docs/ar/use-partition-key.md">مفتاح القسم</a>. على الرغم من أن كل قسم فعلي يمكن أن يحتوي على مستأجرين متعددين، إلا أن البيانات من مستأجرين مختلفين تظل منفصلة منطقياً.</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">الإيجار المتعدد على مستوى مفتاح التقسيم<button data-href="#Partition-key-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>باستخدام هذه الاستراتيجية، يشترك جميع المستأجرين في مجموعة واحدة ومخطط واحد، ولكن يتم توجيه بيانات كل مستأجر تلقائيًا إلى 16 قسمًا معزولًا فعليًا استنادًا إلى قيمة <a href="/docs/ar/use-partition-key.md">مفتاح القسم</a>. على الرغم من أن كل قسم فعلي يمكن أن يحتوي على مستأجرين متعددين، إلا أن البيانات من مستأجرين مختلفين تظل منفصلة منطقياً.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>مستوى مفتاح التقسيم متعدد المستأجرين</span> </span></p>
 <ul>
 <li><p><strong>قابلية التوسع</strong>: توفر استراتيجية مستوى مفتاح التقسيم الطريقة الأكثر قابلية للتوسع، حيث تدعم ملايين المستأجرين.</p></li>
@@ -156,7 +216,7 @@ summary: >-
      <td><p>لا، غير مدعومة حالياً لاستراتيجية مستوى مفتاح التقسيم.</p></td>
    </tr>
 </table>
-<p>هناك العديد من العوامل التي يجب مراعاتها عند اختيار استراتيجية تعدد الإيجارات في ميلفوس.</p>
+<p>هناك العديد من العوامل التي يجب مراعاتها عند اختيار استراتيجية الإيجار المتعدد في ميلفوس.</p>
 <ol>
 <li><p><strong>قابلية التوسع:</strong> مفتاح التقسيم &gt; القسم &gt; القسم &gt; المجموعة &gt; قاعدة البيانات</p>
 <p>إذا كنت تتوقع دعم عدد كبير جدًا من المستأجرين (ملايين أو أكثر)، فاستخدم استراتيجية مستوى مفتاح التقسيم.</p></li>

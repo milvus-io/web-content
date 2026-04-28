@@ -77,7 +77,7 @@ title: Docker Composeを使用したGPUサポート付きMilvusの実行
     </button></h3><p>ダウンロード <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>をダウンロードし、docker-compose.ymlとして手動または以下のコマンドで保存します。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>YAMLファイル内のスタンドアロンサービスの環境変数に、以下のように変更を加える必要があります：</p>
+<p>YAMLファイル内のスタンドアロンサービスの環境変数に以下のように変更を加える必要があります：</p>
 <ul>
 <li>特定の GPU デバイスを Milvus に割り当てるには、<code translate="no">standalone</code> サービスの定義で<code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> フィールドを探し、その値を目的の GPU の ID に置き換えます。NVIDIA GPUディスプレイドライバに含まれる<code translate="no">nvidia-smi</code> ツールを使用して、GPUデバイスのIDを決定することができます。Milvusは複数のGPUデバイスをサポートしています。</li>
 </ul>

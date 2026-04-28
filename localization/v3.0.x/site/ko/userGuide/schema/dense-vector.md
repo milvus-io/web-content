@@ -42,7 +42,7 @@ summary: >-
     </button></h2><p>고밀도 벡터는 일반적으로 <code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code> 과 같이 고정된 길이의 부동 소수점 숫자 배열로 표현됩니다. 이러한 벡터의 차원은 일반적으로 128, 256, 768 또는 1024와 같이 수백 개에서 수천 개까지 다양합니다. 각 차원은 객체의 특정 의미적 특징을 포착하여 유사도 계산을 통해 다양한 시나리오에 적용할 수 있습니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" />
    </span> <span class="img-wrapper"> <span>고밀도 벡터</span> </span></p>
 <p>위 이미지는 2D 공간에서 고밀도 벡터의 표현을 보여줍니다. 실제 애플리케이션에서 고밀도 벡터는 훨씬 더 높은 차원을 갖는 경우가 많지만, 이 2D 그림은 몇 가지 핵심 개념을 효과적으로 전달합니다:</p>
 <ul>
@@ -68,7 +68,7 @@ summary: >-
 <p>데이터가 벡터화되면 Milvus에 저장하여 관리 및 벡터 검색을 할 수 있습니다. 아래 다이어그램은 기본 프로세스를 보여줍니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>고밀도 벡터 사용</span> </span></p>
 <div class="alert note">
 <p>밀도 벡터 외에도 Milvus는 스파스 벡터와 바이너리 벡터도 지원합니다. 스파스 벡터는 키워드 검색 및 용어 매칭과 같이 특정 용어에 기반한 정확한 매칭에 적합하며, 바이너리 벡터는 이미지 패턴 매칭 및 특정 해싱 애플리케이션과 같이 이진화된 데이터를 효율적으로 처리하는 데 일반적으로 사용됩니다. 자세한 내용은 <a href="/docs/ko/binary-vector.md">이진 벡터</a> 및 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p>
@@ -88,7 +88,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">벡터 필드 추가</h3><p>밀버스에서 고밀도 벡터를 사용하려면 먼저 컬렉션을 만들 때 고밀도 벡터를 저장할 벡터 필드를 정의합니다. 이 과정에는 다음이 포함됩니다:</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">벡터 필드 추가<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>밀버스에서 고밀도 벡터를 사용하려면 먼저 컬렉션을 만들 때 고밀도 벡터를 저장할 벡터 필드를 정의합니다. 이 과정에는 다음이 포함됩니다:</p>
 <ol>
 <li><p><code translate="no">datatype</code> 을 지원되는 고밀도 벡터 데이터 유형으로 설정합니다. 지원되는 고밀도 벡터 데이터 유형은 데이터 유형을 참조하세요.</p></li>
 <li><p><code translate="no">dim</code> 매개변수를 사용하여 고밀도 벡터의 차원을 지정합니다.</p></li>
@@ -228,7 +243,22 @@ schema.WithField(entity.NewField().
      <td><p>각 차원의 개별 요소가 8비트 정수(int8)이고 각 요소의 범위가 -128에서 127 사이인 벡터를 저장합니다. 양자화된 딥 러닝 모델(예: ResNet, EfficientNet)을 위해 설계된 INT8_VECTOR는 정밀도 손실을 최소화하면서 모델 크기를 줄이고 추론 속도를 높입니다.<br><strong>참고</strong>: 이 벡터 유형은 HNSW 인덱스에만 지원됩니다.</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">벡터 필드에 대한 인덱스 매개변수 설정</h3><p>시맨틱 검색을 가속화하려면 벡터 필드에 대한 인덱스를 생성해야 합니다. 인덱싱은 대규모 벡터 데이터의 검색 효율성을 크게 향상시킬 수 있습니다.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">벡터 필드에 대한 인덱스 매개변수 설정<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>시맨틱 검색을 가속화하려면 벡터 필드에 대한 인덱스를 생성해야 합니다. 인덱싱은 대규모 벡터 데이터의 검색 효율성을 크게 향상시킬 수 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -275,7 +305,22 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <p>위의 예에서는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 <code translate="no">dense_vector</code> 필드에 대해 <code translate="no">dense_vector_index</code> 라는 이름의 인덱스가 생성됩니다. <code translate="no">metric_type</code> 은 <code translate="no">IP</code> 으로 설정되어 내적 곱이 거리 메트릭으로 사용됨을 나타냅니다.</p>
 <p>Milvus는 더 나은 벡터 검색 환경을 위해 다양한 인덱스 유형을 제공합니다. 자동 인덱스는 벡터 검색의 학습 곡선을 원활하게 하기 위해 고안된 특수 인덱스 유형입니다. 다양한 인덱스 유형 중에서 선택할 수 있습니다. 자세한 내용은 xxx를 참조하세요.</p>
 <p>Milvus는 다른 메트릭 유형도 지원합니다. 자세한 내용은 <a href="/docs/ko/metric.md">메트릭 유형을</a> 참조하세요.</p>
-<h3 id="Create-collection" class="common-anchor-header">컬렉션 만들기</h3><p>밀도 벡터 및 인덱스 매개변수 설정이 완료되면 밀도 벡터를 포함하는 컬렉션을 만들 수 있습니다. 아래 예제에서는 <code translate="no">create_collection</code> 메서드를 사용하여 <code translate="no">my_collection</code> 이라는 이름의 컬렉션을 생성합니다.</p>
+<h3 id="Create-collection" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>밀도 벡터 및 인덱스 매개변수 설정이 완료되면 밀도 벡터를 포함하는 컬렉션을 만들 수 있습니다. 아래 예제에서는 <code translate="no">create_collection</code> 메서드를 사용하여 <code translate="no">my_collection</code> 이라는 이름의 컬렉션을 생성합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -329,7 +374,22 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">데이터 삽입</h3><p>컬렉션을 만든 후 <code translate="no">insert</code> 메서드를 사용하여 고밀도 벡터가 포함된 데이터를 추가합니다. 삽입되는 고밀도 벡터의 차원이 고밀도 벡터 필드를 추가할 때 정의한 <code translate="no">dim</code> 값과 일치하는지 확인합니다.</p>
+<h3 id="Insert-data" class="common-anchor-header">데이터 삽입<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>컬렉션을 만든 후 <code translate="no">insert</code> 메서드를 사용하여 고밀도 벡터가 포함된 데이터를 추가합니다. 삽입되는 고밀도 벡터의 차원이 고밀도 벡터 필드를 추가할 때 정의한 <code translate="no">dim</code> 값과 일치하는지 확인합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -392,7 +452,22 @@ client.<span class="hljs-title function_">insert</span>({
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572531&quot;,&quot;453577185629572532&quot;]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">유사도 검색 수행</h3><p>밀도 벡터 기반의 시맨틱 검색은 밀버스의 핵심 기능 중 하나로, 벡터 사이의 거리를 기반으로 쿼리 벡터와 가장 유사한 데이터를 빠르게 찾을 수 있습니다. 유사도 검색을 수행하려면 쿼리 벡터와 검색 파라미터를 준비한 다음 <code translate="no">search</code> 메서드를 호출합니다.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">유사도 검색 수행<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>밀도 벡터 기반의 시맨틱 검색은 밀버스의 핵심 기능 중 하나로, 벡터 사이의 거리를 기반으로 쿼리 벡터와 가장 유사한 데이터를 빠르게 찾을 수 있습니다. 유사도 검색을 수행하려면 쿼리 벡터와 검색 파라미터를 준비한 다음 <code translate="no">search</code> 메서드를 호출합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {

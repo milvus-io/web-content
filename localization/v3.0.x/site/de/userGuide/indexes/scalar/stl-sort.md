@@ -75,7 +75,7 @@ summary: >-
 <ul>
 <li><p>Zur Abfragezeit verwendet Milvus eine <strong>binäre Suche</strong><a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">(std::lower_bound</a> und <a href="https://en.cppreference.com/w/cpp/algorithm/upper_bound.html">std::upper_bound</a>) für das sortierte Array.</p></li>
 <li><p>Bei Gleichheit findet Milvus schnell alle übereinstimmenden Werte.</p></li>
-<li><p>Bei Bereichen findet Milvus die Start- und Endposition und gibt alle Werte dazwischen zurück.</p></li>
+<li><p>Bei Bereichen findet Milvus die Start- und Endpositionen und gibt alle Werte dazwischen zurück.</p></li>
 <li><p>Die übereinstimmenden Entitäts-IDs werden zur endgültigen Zusammenstellung der Ergebnisse an den Abfrageexecutor weitergeleitet.</p></li>
 </ul></li>
 </ol>

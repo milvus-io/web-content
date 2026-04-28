@@ -103,7 +103,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>
 </ul>
 </div>
 <p>Definiremos una clase MilvusColbertRetriever para envolver el cliente Milvus para la recuperación de datos multivector. La implementación aplana las incrustaciones ColBERT y las inserta en una colección, donde cada fila representa una incrustación individual de la lista de incrustaciones ColBERT. También registra el doc_id y el seq_id para rastrear el origen de cada incrustación.</p>
-<p>Al buscar con una lista de incrustaciones ColBERT, se realizarán varias búsquedas, una por cada incrustación ColBERT. Los doc_ids recuperados se deduplicarán. Se realizará un proceso de reordenación en el que se obtendrán las incrustaciones completas para cada doc_id y se calculará la puntuación MaxSim para obtener los resultados finales ordenados.</p>
+<p>Al buscar con una lista de incrustaciones ColBERT, se realizarán varias búsquedas, una por cada incrustación ColBERT. Los doc_ids recuperados se deduplicarán. Se llevará a cabo un proceso de reordenación en el que se obtendrán las incrustaciones completas para cada doc_id y se calculará la puntuación MaxSim para obtener los resultados finales ordenados.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MilvusColbertRetriever</span>:
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, milvus_client, collection_name, dim=<span class="hljs-number">128</span></span>):
         <span class="hljs-comment"># Initialize the retriever with a Milvus client, collection name, and dimensionality of the vector embeddings.</span>
@@ -336,4 +336,4 @@ retriever.create_index()
 <pre><code translate="no">./pages/page_5.png
 ./pages/page_7.png
 </code></pre>
-<p>Por último, recuperamos el nombre de la página original. Con ColPali, podemos recuperar documentos multimodales sin necesidad de recurrir a complejas técnicas de procesamiento para extraer texto e imágenes de los documentos. Al aprovechar grandes modelos de visión, se puede analizar más información, como tablas y figuras, sin una pérdida significativa de información.</p>
+<p>Por último, recuperamos el nombre de la página original. Con ColPali, podemos recuperar documentos multimodales sin necesidad de recurrir a complejas técnicas de procesamiento para extraer texto e imágenes de los documentos. Al aprovechar grandes modelos de visión, se puede analizar más información, como tablas y figuras, sin pérdida significativa de información.</p>

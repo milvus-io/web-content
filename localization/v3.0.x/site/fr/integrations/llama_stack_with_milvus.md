@@ -65,7 +65,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">Préparer l'environnement</h3><p>Comme nous devons utiliser Together AI comme service LLM, nous devons d'abord nous connecter au site web officiel pour demander une <a href="https://api.together.xyz/settings/api-keys">clé API</a> et définir la clé API <code translate="no">TOGETHER_API_KEY</code> comme variable d'environnement.</p>
+    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">Préparer l'environnement<button data-href="#Prepare-the-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Comme nous devons utiliser Together AI comme service LLM, nous devons d'abord nous connecter au site web officiel pour demander une <a href="https://api.together.xyz/settings/api-keys">clé API</a> et définir la clé API <code translate="no">TOGETHER_API_KEY</code> comme variable d'environnement.</p>
 <p>Cloner le code source de Llama Stack</p>
 <pre><code translate="no" class="language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/meta-llama/llama-stack.git
 $ <span class="hljs-built_in">cd</span> llama-stack
@@ -76,7 +91,7 @@ $ conda activate stack
 
 $ pip install -e .
 <button class="copy-code-btn"></button></code></pre>
-<p>Modifiez le contenu de <code translate="no">llama_stack/llama_stack/template/together/run.yaml</code>, en remplaçant la section vector_io par la configuration Milvus appropriée. Par exemple, ajoutez :</p>
+<p>Modifiez le contenu de <code translate="no">llama_stack/llama_stack/template/together/run.yaml</code>, en remplaçant la section vector_io par la configuration Milvus appropriée. Par exemple, ajouter :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">vector_io:</span>
 <span class="hljs-bullet">-</span> <span class="hljs-attr">provider_id:</span> <span class="hljs-string">milvus</span>
   <span class="hljs-attr">provider_type:</span> <span class="hljs-string">inline::milvus</span>
@@ -98,7 +113,22 @@ $ pip install -e .
 <li>Si vous souhaitez utiliser <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, le service cloud entièrement géré pour Milvus, ajustez les adresses <code translate="no">uri</code> et <code translate="no">token</code>, qui correspondent au <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">point de terminaison public et à la clé API</a> dans Zilliz Cloud.</li>
 </ul></li>
 </ul>
-<h3 id="Build-distribution-from-the-template" class="common-anchor-header">Construire la distribution à partir du modèle</h3><p>Exécutez la commande suivante pour créer la distribution :</p>
+<h3 id="Build-distribution-from-the-template" class="common-anchor-header">Construire la distribution à partir du modèle<button data-href="#Build-distribution-from-the-template" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Exécutez la commande suivante pour créer la distribution :</p>
 <pre><code translate="no" class="language-bash">$ llama stack build --template together --image-type conda
 <button class="copy-code-btn"></button></code></pre>
 <p>Un fichier sera généré à l'adresse <code translate="no">~/.llama/distributions/together/together-run.yaml</code>. Ensuite, exécutez cette commande pour démarrer le serveur :</p>

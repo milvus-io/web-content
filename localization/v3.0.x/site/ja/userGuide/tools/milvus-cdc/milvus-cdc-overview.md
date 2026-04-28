@@ -59,12 +59,12 @@ title: CDCの概要
     </button></h2><p>Milvus-CDCは、タスクとメタデータを管理するHTTPサーバと、ソースMilvusインスタンスからデータを取得するリーダと処理したデータをターゲットMilvusインスタンスに送信するライタとタスク実行を同期する<strong>corelibの</strong>2つの主要コンポーネントからなるアーキテクチャを採用しています。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
    </span> <span class="img-wrapper"> <span>milvus-cdc-アーキテクチャ</span> </span></p>
 <p>先の図では</p>
 <ul>
 <li><p><strong>HTTPサーバ</strong>：ユーザーリクエストを処理し、タスクを実行し、メタデータを管理する。Milvus-CDCシステム内のタスクオーケストレーションのコントロールプレーンとして機能する。</p></li>
-<li><p><strong>Corelib</strong>：タスクの実際の同期を担当する。ソースMilvusのetcdとメッセージキュー(MQ)から情報を取得するリーダコンポーネントと、MQからのメッセージをMilvusシステム用のAPIパラメータに変換し、これらのリクエストをターゲットMilvusに送信して同期プロセスを完了させるライタコンポーネントが含まれる。</p></li>
+<li><p><strong>Corelib</strong>：タスクの実際の同期を担当する。ソースMilvusのetcdおよびメッセージキュー(MQ)から情報を取得するリーダコンポーネントと、MQからのメッセージをMilvusシステム用のAPIパラメータに変換し、これらのリクエストをターゲットMilvusに送信して同期プロセスを完了させるライタコンポーネントが含まれる。</p></li>
 </ul>
 <h2 id="Workflow" class="common-anchor-header">ワークフロー<button data-href="#Workflow" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,7 +90,7 @@ title: CDCの概要
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
    </span> <span class="img-wrapper"> <span>milvus-cdc-ワークフロー</span> </span></p>
 <h2 id="Limits" class="common-anchor-header">リミット<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

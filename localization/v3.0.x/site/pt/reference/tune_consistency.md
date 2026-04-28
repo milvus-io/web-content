@@ -6,7 +6,7 @@ summary: >-
   consistência para garantir que cada nó ou réplica possa acessar os mesmos
   dados durante as operações de leitura e gravação. Atualmente, os níveis de
   consistência suportados incluem Strong, Bounded, Eventually e Session, sendo
-  que Bounded é o nível de consistência padrão utilizado.
+  Bounded o nível de consistência padrão utilizado.
 ---
 <h1 id="Consistency-Level" class="common-anchor-header">Nível de consistência<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus é um sistema que separa o armazenamento e a computação. Neste sistema, <strong>os DataNodes</strong> são responsáveis pela persistência dos dados e, em última análise, armazenam-nos no armazenamento de objectos distribuídos, como o MinIO/S3. <strong>Os QueryNodes</strong> tratam de tarefas computacionais como a Pesquisa. Estas tarefas envolvem o processamento de <strong>dados em lote</strong> e <strong>de dados em fluxo contínuo</strong>. Em termos simples, os dados em lote podem ser entendidos como dados que já foram armazenados no armazenamento de objectos, enquanto os dados de fluxo contínuo se referem a dados que ainda não foram armazenados no armazenamento de objectos. Devido à latência da rede, os QueryNodes muitas vezes não possuem os dados de streaming mais recentes. Sem salvaguardas adicionais, a execução da Pesquisa diretamente nos dados de fluxo contínuo pode resultar na perda de muitos pontos de dados não confirmados, afectando a precisão dos resultados da pesquisa.</p>
+    </button></h2><p>Milvus é um sistema que separa o armazenamento e a computação. Neste sistema, <strong>os DataNodes</strong> são responsáveis pela persistência dos dados e, em última análise, armazenam-nos no armazenamento de objectos distribuído, como o MinIO/S3. <strong>Os QueryNodes</strong> tratam de tarefas computacionais como a Pesquisa. Estas tarefas envolvem o processamento de <strong>dados em lote</strong> e <strong>de dados em fluxo contínuo</strong>. Em termos simples, os dados em lote podem ser entendidos como dados que já foram armazenados no armazenamento de objectos, enquanto os dados de fluxo contínuo se referem a dados que ainda não foram armazenados no armazenamento de objectos. Devido à latência da rede, os QueryNodes muitas vezes não possuem os dados de streaming mais recentes. Sem salvaguardas adicionais, a execução da Pesquisa diretamente nos dados de fluxo contínuo pode resultar na perda de muitos pontos de dados não confirmados, afectando a precisão dos resultados da pesquisa.</p>
 <p>O Milvus Commercial Edition é um sistema que separa o armazenamento e a computação. Neste sistema, os DataNodes são responsáveis pela persistência dos dados e, em última análise, armazenam-nos em armazenamento de objectos distribuídos, como o MinIO/S3. Os QueryNodes tratam de tarefas computacionais como a Pesquisa. Estas tarefas envolvem o processamento de dados em lote e de dados em fluxo contínuo. Em termos simples, os dados em lote podem ser entendidos como dados que já foram armazenados no armazenamento de objectos, enquanto os dados de fluxo contínuo se referem a dados que ainda não foram armazenados no armazenamento de objectos. Devido à latência da rede, os QueryNodes muitas vezes não possuem os dados de streaming mais recentes. Sem salvaguardas adicionais, a execução da Pesquisa diretamente nos dados de fluxo contínuo pode resultar na perda de muitos pontos de dados não confirmados, afectando a precisão dos resultados da pesquisa.</p>
 <p>
   
@@ -60,10 +60,10 @@ summary: >-
 <p>O Milvus fornece quatro tipos de níveis de consistência com diferentes GuaranteeTs.</p>
 <ul>
 <li><p><strong>Forte</strong></p>
-<p>O carimbo de data/hora mais recente é utilizado como GuaranteeTs e os QueryNodes têm de esperar até que o ServiceTime cumpra os GuaranteeTs antes de executarem os pedidos de pesquisa.</p></li>
+<p>O carimbo de data/hora mais recente é utilizado como GuaranteeTs e os QueryNodes têm de aguardar que o ServiceTime cumpra os GuaranteeTs antes de executarem os pedidos de pesquisa.</p></li>
 <li><p><strong>Eventual</strong></p>
 <p>O GuaranteeTs é definido para um valor extremamente pequeno, como 1, para evitar verificações de consistência, de modo a que os QueryNodes possam executar imediatamente pedidos de Pesquisa em todos os dados do lote.</p></li>
-<li><p><strong>Staleness limitado</strong></p>
+<li><p><strong>Estabilidade limitada</strong></p>
 <p>O GuranteeTs é definido para um ponto de tempo anterior ao último carimbo de data/hora para que os QueryNodes executem pesquisas com uma tolerância de determinada perda de dados.</p></li>
 <li><p><strong>Sessão</strong></p>
 <p>O último ponto temporal em que o cliente insere dados é utilizado como GuaranteeTs para que os QueryNodes possam efetuar pesquisas em todos os dados inseridos pelo cliente.</p></li>

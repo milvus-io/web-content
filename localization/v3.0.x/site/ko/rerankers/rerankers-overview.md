@@ -1,7 +1,7 @@
 ---
 id: rerankers-overview.md
 order: 1
-summary: 파이밀버스 모델 라이브러리는 재랭크 함수를 통합하여 초기 검색에서 반환되는 결과의 순서를 최적화합니다.
+summary: 파이밀버스 모델 라이브러리는 재순위 함수를 통합하여 초기 검색에서 반환되는 결과의 순서를 최적화합니다.
 title: 리랭커 개요
 ---
 <h1 id="Rerankers-Overview" class="common-anchor-header">리랭커 개요<button data-href="#Rerankers-Overview" class="anchor-icon" translate="no">
@@ -116,7 +116,22 @@ bge_rf(query, documents)
 <li><code translate="no">doc_vector</code>: 문서를 나타내는 벡터 임베딩. 임베딩 생성에 대한 지침은 <a href="/docs/ko/embeddings.md">임베딩을</a> 참조하세요.</li>
 <li><code translate="no">doc_text</code>: 문서의 텍스트 콘텐츠입니다.</li>
 </ul>
-<h3 id="Preparations" class="common-anchor-header">준비 사항</h3><p>유사도 검색을 시작하기 전에 Milvus와 연결을 설정하고 컬렉션을 생성한 다음 해당 컬렉션에 데이터를 준비하여 삽입해야 합니다. 다음 코드 스니펫은 이러한 사전 단계를 설명합니다.</p>
+<h3 id="Preparations" class="common-anchor-header">준비 사항<button data-href="#Preparations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>유사도 검색을 시작하기 전에 Milvus와 연결을 설정하고 컬렉션을 생성한 다음 해당 컬렉션에 데이터를 준비하여 삽입해야 합니다. 다음 코드 스니펫은 이러한 사전 단계를 설명합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -150,7 +165,22 @@ client.insert(collection_name=<span class="hljs-string">&quot;test_collection&qu
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># {&#x27;insert_count&#x27;: 4, &#x27;ids&#x27;: [0, 1, 2, 3]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Conduct-a-similarity-search" class="common-anchor-header">유사도 검색 수행</h3><p>데이터를 삽입한 후 <code translate="no">search</code> 메서드를 사용하여 유사도 검색을 수행합니다.</p>
+<h3 id="Conduct-a-similarity-search" class="common-anchor-header">유사도 검색 수행<button data-href="#Conduct-a-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>데이터를 삽입한 후 <code translate="no">search</code> 메서드를 사용하여 유사도 검색을 수행합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># search results based on our query</span>
 
 res = client.search(
@@ -172,7 +202,22 @@ doc_text: In <span class="hljs-number">1950</span>, Alan Turing published his se
 distance: <span class="hljs-number">0.5340118408203125</span>
 doc_text: The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, <span class="hljs-keyword">and</span> Cliff Shaw <span class="hljs-keyword">in</span> <span class="hljs-number">1955</span> marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-a-reranker-to-enhance-search-results" class="common-anchor-header">재랭커를 사용하여 검색 결과 개선하기</h3><p>그런 다음 재랭크 단계를 통해 검색 결과의 관련성을 개선합니다. 이 예에서는 PyMilvus에 내장된 <code translate="no">CrossEncoderRerankFunction</code> 을 사용하여 정확도를 높이기 위해 결과의 순위를 다시 매깁니다.</p>
+<h3 id="Use-a-reranker-to-enhance-search-results" class="common-anchor-header">재랭커를 사용하여 검색 결과 개선하기<button data-href="#Use-a-reranker-to-enhance-search-results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>그런 다음 재랭크 단계를 통해 검색 결과의 관련성을 개선합니다. 이 예에서는 PyMilvus에 내장된 <code translate="no">CrossEncoderRerankFunction</code> 을 사용하여 정확도를 높이기 위해 결과의 순위를 다시 매깁니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># use reranker to rerank search results</span>
 
 <span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> CrossEncoderRerankFunction
@@ -198,7 +243,7 @@ reranked_results = ce_rf(
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;score: <span class="hljs-subst">{result.score}</span>&#x27;</span>)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;doc_text: <span class="hljs-subst">{result.text}</span>&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>예상 결과는 다음과 비슷합니다:</p>
+<p>예상되는 결과는 다음과 비슷합니다:</p>
 <pre><code translate="no" class="language-python">score: <span class="hljs-number">6.250532627105713</span>
 doc_text: The Dartmouth Conference <span class="hljs-keyword">in</span> <span class="hljs-number">1956</span> <span class="hljs-keyword">is</span> considered the birthplace of artificial intelligence <span class="hljs-keyword">as</span> a field; here, John McCarthy <span class="hljs-keyword">and</span> others coined the term <span class="hljs-string">&#x27;artificial intelligence&#x27;</span> <span class="hljs-keyword">and</span> laid out its basic goals.
 score: -<span class="hljs-number">2.9546022415161133</span>

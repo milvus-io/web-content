@@ -29,7 +29,7 @@ beta: Milvus 2.6.x
 <li><p>Comprensión semántica avanzada con modelos específicamente entrenados para tareas de reordenación.</p></li>
 <li><p>Procesamiento de alto rendimiento con inferencia optimizada para cargas de trabajo de producción</p></li>
 <li><p>Controles de truncamiento flexibles para manejar documentos de distintas longitudes</p></li>
-<li><p>Rendimiento ajustado a diferentes variantes del modelo (rerank-2, rerank-lite, etc.)</p></li>
+<li><p>Rendimiento ajustado a distintas variantes del modelo (rerank-2, rerank-lite, etc.)</p></li>
 </ul>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"

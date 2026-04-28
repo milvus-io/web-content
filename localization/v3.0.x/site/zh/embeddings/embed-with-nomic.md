@@ -20,7 +20,7 @@ title: 诺米客
         ></path>
       </svg>
     </button></h1><p><a href="https://atlas.nomic.ai/">Nomic</a>模型是由 Nomic AI 开发的一系列高级文本和图像嵌入解决方案，旨在将各种形式的数据转换为密集的数字向量，以捕捉其语义。</p>
-<p>Milvus 通过 NomicEmbeddingFunction 类与 Nomic 的嵌入模型集成。该类提供使用 Nomic 嵌入模型对文档和查询进行编码的方法，并将嵌入结果返回为与 Milvus 索引兼容的密集向量。要使用该功能，请从<a href="https://atlas.nomic.ai/">Nomic Atlas</a> 获取一个 API 密钥。</p>
+<p>Milvus 通过 NomicEmbeddingFunction 类与 Nomic 的嵌入模型集成。该类提供使用 Nomic 嵌入模型对文档和查询进行编码的方法，并将嵌入结果返回为与 Milvus 索引兼容的密集向量。要使用该功能，请从<a href="https://atlas.nomic.ai/">Nomic Atlas</a> 获取 API 密钥。</p>
 <p>要使用该功能，请安装必要的依赖项：</p>
 <pre><code translate="no" class="language-python">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>

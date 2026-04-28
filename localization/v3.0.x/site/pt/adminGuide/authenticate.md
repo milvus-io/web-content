@@ -48,7 +48,7 @@ title: Autenticar o acesso do utilizador
 <span class="hljs-attr">common:</span>
 <span class="hljs-string">...</span>
   <span class="hljs-attr">security:</span>
-    <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">false</span>
+    <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">true</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 </div>
@@ -64,7 +64,7 @@ title: Autenticar o acesso do utilizador
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-operator">
-<p>Para ativar a autenticação, defina <code translate="no">spec.common.security.authorizationEnabled</code> como <code translate="no">true</code> no CRD <code translate="no">Milvus</code>. Para obter mais informações sobre o CRD do Milvus, consulte <a href="https://milvus.io/docs/configure_operator.md?tab=component">Configurar o Milvus com o Milvus Operator</a>.</p>
+<p>Para ativar a autenticação, defina <code translate="no">spec.config.common.security.authorizationEnabled</code> como <code translate="no">true</code> no CRD <code translate="no">Milvus</code>. Para obter mais informações sobre o CRD do Milvus, consulte <a href="https://milvus.io/docs/configure_operator.md?tab=component">Configurar o Milvus com o Milvus Operator</a>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -266,12 +266,12 @@ client.list_users()
         ></path>
       </svg>
     </button></h2><ul>
-<li>Talvez você também queira aprender como:<ul>
+<li>Você também pode querer aprender como:<ul>
 <li><a href="/docs/pt/scaleout.md">Dimensionar um cluster Milvus</a></li>
 </ul></li>
 <li>Se estiver pronto para implantar seu cluster em nuvens:<ul>
-<li>Saiba como implantar <a href="/docs/pt/eks.md">o Milvus no Amazon EKS com o Terraform</a></li>
+<li>Saiba como <a href="/docs/pt/eks.md">implantar o Milvus no Amazon EKS com o Terraform</a></li>
 <li>Saiba como implantar <a href="/docs/pt/gcp.md">o Milvus Cluster no GCP com Kubernetes</a></li>
-<li>Saiba como <a href="/docs/pt/azure.md">implantar o Milvus no Microsoft Azure com o Kubernetes</a></li>
+<li>Saiba como implantar <a href="/docs/pt/azure.md">o Milvus no Microsoft Azure com o Kubernetes</a></li>
 </ul></li>
 </ul>

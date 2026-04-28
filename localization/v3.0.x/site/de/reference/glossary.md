@@ -144,7 +144,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus verwendet zwei Arten von Kanälen, <a href="#pchannel">PChannel</a> und <a href="#vchannel">VChannel</a>, als Teil seiner Streaming-Service-Architektur. Jeder PChannel entspricht einem von <a href="/docs/de/woodpecker_architecture.md">Woodpecker</a> verwalteten WAL-Stream, während jeder VChannel einem Shard in einer Sammlung entspricht. Der Streaming Service verwaltet diese Kanäle, um die Datenkonsistenz und die Fehlerbehebung zu gewährleisten.</p>
+    </button></h2><p>Milvus verwendet zwei Arten von Kanälen, <a href="#pchannel">PChannel</a> und <a href="#vchannel">VChannel</a>, als Teil seiner Streaming-Service-Architektur. Jeder PChannel entspricht einem von <a href="/docs/de/woodpecker_architecture.md">Woodpecker</a> verwalteten WAL-Stream, während jeder VChannel einem Shard in einer Sammlung entspricht. Der Streaming-Dienst verwaltet diese Kanäle, um die Datenkonsistenz und die Fehlerbehebung zu gewährleisten.</p>
 <h2 id="Collection" class="common-anchor-header">Sammlung<button data-href="#Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -337,7 +337,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere</a> ist die zentrale Vektorausführungsmaschine von Milvus, die mehrere Bibliotheken für die Suche nach Vektorähnlichkeit enthält, darunter Faiss, Hnswlib und Annoy. Knowhere ist auch für die Unterstützung von heterogenem Computing ausgelegt. Sie steuert, auf welcher Hardware (CPU oder GPU) die Indexerstellung und Suchanfragen ausgeführt werden sollen. Daher kommt auch der Name Knowhere - Knowhere weiß, wo die Operationen ausgeführt werden sollen.</p>
+    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere</a> ist die zentrale Vektorausführungsmaschine von Milvus, die mehrere Bibliotheken für die Suche nach Vektorähnlichkeit enthält, darunter Faiss, Hnswlib und Annoy. Knowhere ist auch für die Unterstützung von heterogenem Computing ausgelegt. Sie steuert, auf welcher Hardware (CPU oder GPU) die Indexerstellung und Suchanfragen ausgeführt werden sollen. Daher hat Knowhere auch seinen Namen - es weiß, wo die Operationen ausgeführt werden sollen.</p>
 <!-- ## Log broker
 <p>The <a href="https://milvus.io/docs/four_layers.md#Log-broker">log broker</a> is a publish-subscribe system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. --></p>
 <h2 id="Log-snapshot" class="common-anchor-header">Log-Snapshot<button data-href="#Log-snapshot" class="anchor-icon" translate="no">
@@ -647,7 +647,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Das Schema ist die Metainformation, die den Datentyp und die Dateneigenschaften definiert. Jede Sammlung hat ihr eigenes Sammlungsschema, das alle Felder einer Sammlung, die automatische ID (Primärschlüssel), die Zuweisungsaktivierung und die Sammlungsbeschreibung definiert. Feldschemata sind ebenfalls in Sammlungsschemata enthalten, die den Namen, den Datentyp und andere Eigenschaften eines Felds definieren. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/schema.md#Manage-Schema">Schema verwalten</a>.</p>
+    </button></h2><p>Das Schema ist die Metainformation, die den Datentyp und die Dateneigenschaften definiert. Jede Sammlung hat ihr eigenes Sammlungsschema, in dem alle Felder einer Sammlung, die automatische ID (Primärschlüssel), die Zuordnungsaktivierung und die Sammlungsbeschreibung definiert sind. Feldschemata sind ebenfalls in Sammlungsschemata enthalten, die den Namen, den Datentyp und andere Eigenschaften eines Felds definieren. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/schema.md#Manage-Schema">Schema verwalten</a>.</p>
 <h2 id="Search" class="common-anchor-header">Suche<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -679,7 +679,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ein Segment ist eine automatisch erstellte Datendatei, die eingefügte Daten speichert. Eine Sammlung kann mehrere Segmente enthalten, und jedes Segment kann zahlreiche Entitäten enthalten. Während einer Vektorähnlichkeitssuche untersucht Milvus jedes Segment, um die Suchergebnisse zusammenzustellen.</p>
+    </button></h2><p>Ein Segment ist eine automatisch erstellte Datendatei, die eingefügte Daten speichert. Eine Sammlung kann mehrere Segmente enthalten, und jedes Segment kann zahlreiche Entitäten enthalten. Während einer vektoriellen Ähnlichkeitssuche untersucht Milvus jedes Segment, um die Suchergebnisse zusammenzustellen.</p>
 <p>Es gibt zwei Arten von Segmenten: wachsende und versiegelte. Ein wachsendes Segment sammelt so lange neue Daten, bis es einen bestimmten Schwellenwert oder ein Zeitlimit erreicht hat und dann versiegelt wird. Danach wird es versiegelt. Sobald ein Segment versiegelt ist, nimmt es keine neuen Daten mehr an und wird in den Objektspeicher übertragen. In der Zwischenzeit werden die eingehenden Daten an ein neues wachsendes Segment weitergeleitet. Der Übergang von einem wachsenden zu einem versiegelten Segment wird entweder durch Erreichen der vordefinierten Entitätsgrenze oder durch Überschreiten der maximal zulässigen Dauer im wachsenden Zustand ausgelöst. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/replica.md#Design-Details">Design Details</a>.</p>
 <h2 id="Spark-Milvus-Connector" class="common-anchor-header">Spark-Milvus-Konnektor<button data-href="#Spark-Milvus-Connector" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -745,7 +745,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der Streaming Service ist ein Konzept für das interne Streaming-Systemmodul von Milvus, das auf dem Write-Ahead Log (WAL) aufbaut, um verschiedene Streaming-bezogene Funktionen zu unterstützen. Dazu gehören die Aufnahme/Abonnierung von Streaming-Daten, die Wiederherstellung des Cluster-Zustands im Fehlerfall, die Umwandlung von Streaming-Daten in historische Daten und die Abfrage wachsender Daten. Der Dienst besteht aus den Komponenten Streaming Coordinator, Streaming Node Cluster und Streaming Client. Weitere Informationen finden Sie unter <a href="/docs/de/streaming_service.md">Streaming Service</a>.</p>
+    </button></h2><p>Der Streaming Service ist ein Konzept für das interne Streaming-Systemmodul von Milvus, das auf dem Write-Ahead Log (WAL) aufbaut, um verschiedene Streaming-bezogene Funktionen zu unterstützen. Dazu gehören die Aufnahme/Abonnierung von Streaming-Daten, die Wiederherstellung des Cluster-Status im Fehlerfall, die Umwandlung von Streaming-Daten in historische Daten und die Abfrage wachsender Daten. Der Dienst besteht aus den Komponenten Streaming Coordinator, Streaming Node Cluster und Streaming Client. Weitere Informationen finden Sie unter <a href="/docs/de/streaming_service.md">Streaming Service</a>.</p>
 <h2 id="Unstructured-data" class="common-anchor-header">Unstrukturierte Daten<button data-href="#Unstructured-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -761,7 +761,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Unstrukturierte Daten, einschließlich Bilder, Video, Audio und natürliche Sprache, sind Informationen, die keinem vordefinierten Modell oder einer vordefinierten Art der Organisation folgen. Dieser Datentyp macht etwa 80 % der weltweiten Daten aus und kann mit verschiedenen Modellen der künstlichen Intelligenz (KI) und ML in Vektoren umgewandelt werden.</p>
+    </button></h2><p>Unstrukturierte Daten, einschließlich Bilder, Video, Audio und natürliche Sprache, sind Informationen, die keinem vordefinierten Modell oder einer vordefinierten Art der Organisation folgen. Dieser Datentyp macht etwa 80 % der weltweiten Daten aus und kann mithilfe verschiedener Modelle für künstliche Intelligenz (KI) und ML in Vektoren umgewandelt werden.</p>
 <h2 id="VChannel" class="common-anchor-header">VChannel<button data-href="#VChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

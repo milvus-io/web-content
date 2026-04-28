@@ -48,7 +48,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p><strong>Gaussiano</strong> (<code translate="no">gauss</code>): Una curva a campana che fornisce un decadimento dolce e graduale.</p></li>
 <li><p><strong>Esponenziale</strong> (<code translate="no">exp</code>): Crea un calo iniziale più netto per enfatizzare fortemente i contenuti recenti.</p></li>
-<li><p><strong>Lineare</strong> (<code translate="no">linear</code>): Un decadimento rettilineo, prevedibile e facile da capire.</p></li>
+<li><p><strong>Lineare</strong> (<code translate="no">linear</code>): Decadimento rettilineo, prevedibile e facile da capire.</p></li>
 </ul>
 <p>Ogni classificatore ha caratteristiche diverse che lo rendono adatto a vari casi d'uso. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/decay-ranker-overview.md">Panoramica dei ranker di decadimento</a>.</p>
 <h2 id="Build-a-time-aware-search-system" class="common-anchor-header">Costruire un sistema di ricerca consapevole del tempo<button data-href="#Build-a-time-aware-search-system" class="anchor-icon" translate="no">
@@ -321,7 +321,7 @@ linear_ranker = Function(
 <button class="copy-code-btn"></button></code></pre>
 <p>Nel codice precedente:</p>
 <ul>
-<li><p><code translate="no">reranker</code>: Impostato su <code translate="no">decay</code> per le funzioni di decadimento basate sul tempo</p></li>
+<li><p><code translate="no">reranker</code>: Impostato su <code translate="no">decay</code> per le funzioni di decadimento basato sul tempo</p></li>
 <li><p><code translate="no">function</code>: Il tipo di funzione di decadimento (gauss, exp, o lineare)</p></li>
 <li><p><code translate="no">origin</code>: Il punto di riferimento (di solito l'ora corrente)</p></li>
 <li><p><code translate="no">offset</code>: Il periodo durante il quale i documenti mantengono la piena rilevanza</p></li>

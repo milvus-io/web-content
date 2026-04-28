@@ -89,7 +89,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><p>AISAQ offre due modalità di funzionamento per rispondere a due casi d'uso distinti:</p>
 <p>Modalità Performance: ottimizzata per applicazioni che richiedono una bassa latenza e un elevato throughput su scala, come la ricerca semantica online.</p>
-<p>Modalità Scale: ottimizzata per applicazioni con vincoli di latenza più rilassati, come la ricerca semantica RAG e offline, consentendo al contempo un'espansione economicamente efficiente dei set di dati su scala ultraelevata.</p>
+<p>Modalità Scale: ottimizzata per applicazioni con vincoli di latenza più rilassati, come la ricerca semantica RAG e offline, consentendo al contempo un'espansione economica dei set di dati su scala ultraelevata.</p>
 <h4 id="AISAQ-performance-mode" class="common-anchor-header">Modalità AISAQ-performance</h4><p><strong>AISAQ-performance</strong> consente di ottenere un "ingombro DRAM vicino allo zero" spostando i dati PQ dalla memoria al disco e mantenendo un basso IOPS grazie alla colocazione e alla ridondanza dei dati.</p>
 <ul>
 <li><p>Il vettore grezzo di ogni nodo, l'elenco dei bordi e i dati PQ dei suoi vicini sono memorizzati insieme su disco.</p></li>
@@ -188,7 +188,7 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p><code translate="no">search_list_size</code></p></td>
-     <td><p>Durante la costruzione dell'indice, questo parametro definisce la dimensione del pool di candidati utilizzato per la ricerca dei vicini più prossimi per ogni nodo. Per ogni nodo aggiunto al grafo, l'algoritmo mantiene un elenco dei migliori candidati trovati fino a quel momento. La ricerca dei vicini si ferma quando questo elenco non può più essere migliorato. Da questa lista finale di candidati, vengono selezionati i nodi di massimo grado per formare i bordi finali.</p></td>
+     <td><p>Durante la costruzione dell'indice, questo parametro definisce la dimensione del pool di candidati utilizzato per la ricerca dei vicini più prossimi per ogni nodo. Per ogni nodo aggiunto al grafo, l'algoritmo mantiene un elenco dei migliori candidati trovati fino a quel momento. La ricerca dei vicini si ferma quando questo elenco non può più essere migliorato. Da questa lista finale di candidati, i nodi con il grado massimo più alto vengono selezionati per formare i bordi finali.</p></td>
      <td><p><strong>Tipo</strong>: Intero</p><p><strong>Intervallo</strong>: [1, 512]</p><p><strong>Valore predefinito</strong>: <code translate="no">100</code></p></td>
      <td><p>Una dimensione maggiore di search_list_size aumenta la probabilità di trovare i veri vicini per ogni nodo, il che può portare a un grafo di qualità superiore e a migliori prestazioni di ricerca (recall). Tuttavia, ciò ha il costo di un tempo di creazione dell'indice significativamente più lungo. Dovrebbe essere sempre impostato su un valore maggiore o uguale a max_degree.</p></td>
    </tr>

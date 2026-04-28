@@ -28,7 +28,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>本筆記本說明如何在 LlamaIndex 中使用 Milvus 向量資料庫，重點在於元資料篩選功能。您將學習如何使用元資料索引文件、使用 LlamaIndex 的內建元資料篩選器執行向量搜尋，以及將 Milvus 的原生篩選表達式套用至向量儲存。</p>
-<p>在本筆記簿結束時，您將瞭解如何利用 Milvus 的過濾功能，根據文件元資料縮小搜尋結果的範圍。</p>
+<p>在本筆記簿結束時，您將瞭解如何利用 Milvus 的篩選功能，縮小基於文件元資料的搜尋結果。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,7 +178,22 @@ result_nodes = retriever.retrieve(<span class="hljs-string">&quot;Books about li
 Life
 {'author': 'Keith Richards', 'genre': 'Memoir', 'year': 2010}
 </code></pre>
-<h3 id="Multiple-Metdata-Filters" class="common-anchor-header">多重元資料篩選器</h3><p>您也可以結合多重元資料篩選器來建立更複雜的查詢。LlamaIndex 支援<code translate="no">AND</code> 和<code translate="no">OR</code> 兩種條件來組合篩選條件。這可根據文件的元資料屬性，更精確、更靈活地檢索文件。</p>
+<h3 id="Multiple-Metdata-Filters" class="common-anchor-header">多重元資料篩選器<button data-href="#Multiple-Metdata-Filters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您也可以結合多重元資料篩選器來建立更複雜的查詢。LlamaIndex 支援<code translate="no">AND</code> 和<code translate="no">OR</code> 兩種條件來組合篩選條件。這可根據文件的元資料屬性，更精確、更靈活地檢索文件。</p>
 <p><strong>條件<code translate="no">AND</code></strong></p>
 <p>試舉例篩選 1979 年至 2010 年間出版的書籍 (具體來說，1979 &lt; 年份 ≤ 2010)：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core.vector_stores <span class="hljs-keyword">import</span> FilterCondition
@@ -252,8 +267,8 @@ Life: A User's Manual
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>除了內建的篩選功能外，您也可以使用<code translate="no">string_expr</code> 關鍵字參數來使用 Milvus 原生的篩選表達式。這允許您在搜尋作業中直接傳送特定的篩選表達式給 Milvus，從而擴展到標準的元資料篩選之外，以存取 Milvus 的進階篩選功能。</p>
-<p>Milvus 提供強大而靈活的篩選選項，可讓您精確地查詢向量資料：</p>
+    </button></h2><p>除了內建的篩選功能外，您也可以使用<code translate="no">string_expr</code> 關鍵字參數來使用 Milvus 原生的篩選表達式。這允許您在搜尋作業中直接傳遞特定的篩選表達式給 Milvus，從而擴展到標準的元資料篩選之外，以存取 Milvus 的進階篩選功能。</p>
+<p>Milvus 提供強大而靈活的篩選選項，讓您能精確地查詢向量資料：</p>
 <ul>
 <li>基本運算符號：比較運算符、範圍篩選、算術運算符和邏輯運算符</li>
 <li>篩選表達範本：常見篩選情況的預定義模式</li>

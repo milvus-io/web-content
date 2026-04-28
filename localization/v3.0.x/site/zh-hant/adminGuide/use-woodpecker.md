@@ -414,4 +414,4 @@ batch_count = <span class="hljs-number">2000</span>
     </button></h2><p>Woodpecker 是專為物件儲存而設計的雲原生 WAL，可在吞吐量、成本和延遲之間進行權衡。目前支援的輕量級嵌入式模式優先優化成本和吞吐量，因為大多數情況只要求在一定時間內寫入資料，而不是要求個別寫入請求的低延遲。因此，Woodpecker 採用分批寫入，本機檔案系統儲存後端預設間隔為 10 毫秒，類似 MinIO 的儲存後端預設間隔為 200 毫秒。在慢速寫入作業期間，最大延遲等於間隔時間加上刷新時間。</p>
 <p>請注意，批次插入不僅會由時間間隔觸發，也會由預設為 2MB 的批次大小觸發。</p>
 <p>有關架構、部署模式 (MemoryBuffer / QuorumBuffer) 和效能的詳細資訊，請參閱<a href="/docs/zh-hant/woodpecker_architecture.md">Woodpecker Architecture</a>。</p>
-<p>如需瞭解更多參數詳情，請參閱 Woodpecker<a href="https://github.com/zilliztech/woodpecker">GitHub 套件庫</a>。</p>
+<p>更多參數詳情，請參閱 Woodpecker<a href="https://github.com/zilliztech/woodpecker">GitHub 套件庫</a>。</p>

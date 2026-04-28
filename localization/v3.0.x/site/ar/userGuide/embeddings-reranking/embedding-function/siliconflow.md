@@ -96,7 +96,7 @@ beta: Milvus 2.6.x
 </ul>
 <p>اختر إحدى الطريقتين أدناه - من الأسهل الحفاظ على ملف التهيئة على الأجهزة العارية والأجهزة الافتراضية، بينما يناسب مسار env-var سير عمل الحاوية.</p>
 <div class="alert note">
-<p>إذا كان مفتاح واجهة برمجة التطبيقات لنفس الموفر موجودًا في كل من ملف التكوين ومتغير البيئة، يستخدم Milvus دائمًا القيمة في <code translate="no">milvus.yaml</code> ويتجاهل متغير البيئة.</p>
+<p>إذا كان مفتاح واجهة برمجة التطبيقات لنفس الموفر موجودًا في كل من ملف التكوين ومتغير البيئة، يستخدم ميلفوس دائمًا القيمة في <code translate="no">milvus.yaml</code> ويتجاهل متغير البيئة.</p>
 </div>
 <h3 id="Option-1-Configuration-file" class="common-anchor-header">الخيار 1: ملف التكوين<button data-href="#Option-1-Configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -116,7 +116,7 @@ beta: Milvus 2.6.x
     </button></h3><p>احتفظ بمفاتيح واجهة برمجة التطبيقات الخاصة بك في <code translate="no">milvus.yaml</code> ؛ يقرأها Milvus عند بدء التشغيل ويتجاوز أي متغير بيئة لنفس الموفر.</p>
 <ol>
 <li><p>**أعلن مفاتيحك تحت <code translate="no">credential:</code></p>
-<p>يمكنك إدراج مفتاح واحد أو أكثر من مفاتيح واجهة برمجة التطبيقات - أعطِ كل مفتاح تسمية تخترعها وستشير إليها لاحقًا.</p>
+<p>يمكنك سرد مفتاح واحد أو أكثر من مفاتيح واجهة برمجة التطبيقات - أعطِ كل مفتاح تسمية تخترعها وستشير إليها لاحقًا.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">apikey_dev:</span>            <span class="hljs-comment"># dev environment</span>
@@ -134,7 +134,7 @@ beta: Milvus 2.6.x
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey_dev</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-comment"># url: https://api.siliconflow.cn/v1/embeddings   # (optional) custom url</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>هذا يربط مفتاحًا محددًا بكل طلب يرسله Milvus إلى نقطة نهاية تضمينات OpenAI.</p></li>
+<p>هذا يربط مفتاحًا محددًا لكل طلب يرسله Milvus إلى نقطة نهاية تضمينات OpenAI.</p></li>
 </ol>
 <h3 id="Option-2-Environment-variable" class="common-anchor-header">الخيار 2: متغير البيئة<button data-href="#Option-2-Environment-variable" class="anchor-icon" translate="no">
       <svg translate="no"

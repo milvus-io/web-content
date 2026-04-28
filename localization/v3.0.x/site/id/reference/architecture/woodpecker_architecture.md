@@ -3,8 +3,8 @@ id: woodpecker_architecture.md
 title: Woodpecker
 summary: >-
   Woodpecker adalah sistem WAL cloud-native di Milvus 2.6. Dengan arsitektur
-  tanpa disk dan dua mode penerapan, sistem ini memberikan throughput yang
-  tinggi, biaya operasional yang rendah, dan skalabilitas tanpa batas pada
+  tanpa disk dan dua mode penyebaran, sistem ini memberikan throughput tinggi,
+  overhead operasional yang rendah, dan skalabilitas tanpa batas pada
   penyimpanan objek.
 ---
 <h1 id="Woodpecker" class="common-anchor-header">Woodpecker<button data-href="#Woodpecker" class="anchor-icon" translate="no">
@@ -52,7 +52,7 @@ summary: >-
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_layers.png" alt="woodpecker layers" class="doc-image" id="woodpecker-layers" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/woodpecker_layers.png" alt="woodpecker layers" class="doc-image" id="woodpecker-layers" />
    </span> <span class="img-wrapper"> <span>lapisan pelatuk</span> </span></p>
 <h2 id="Architecture-components" class="common-anchor-header">Komponen arsitektur<button data-href="#Architecture-components" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -92,17 +92,47 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Woodpecker menawarkan dua mode penerapan yang sesuai dengan kebutuhan spesifik Anda:</p>
-<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - Ringan dan bebas perawatan</h3><p>Mode MemoryBuffer menyediakan opsi penerapan yang sederhana dan ringan di mana klien tertanam Woodpecker untuk sementara menyangga penulisan yang masuk di memori dan secara berkala membuangnya ke layanan penyimpanan objek cloud. Dalam mode ini, buffer memori disematkan langsung ke dalam klien, sehingga memungkinkan pengelompokan yang efisien sebelum dibuang ke S3. Metadata dikelola menggunakan <strong>etcd</strong> untuk memastikan konsistensi dan koordinasi. Mode ini paling cocok untuk beban kerja batch-berat dalam penerapan skala kecil atau lingkungan produksi yang memprioritaskan kesederhanaan di atas kinerja, terutama ketika latensi tulis yang rendah tidak terlalu penting. Latensi tulis dalam mode ini umumnya antara 200-500 ms.</p>
+<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - Ringan dan bebas perawatan<button data-href="#MemoryBuffer---Lightweight-and-maintenance-free" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Mode MemoryBuffer menyediakan opsi penerapan yang sederhana dan ringan di mana klien tertanam Woodpecker untuk sementara menyangga penulisan yang masuk di memori dan secara berkala membuangnya ke layanan penyimpanan objek cloud. Dalam mode ini, buffer memori disematkan langsung ke dalam klien, sehingga memungkinkan pengelompokan yang efisien sebelum dibuang ke S3. Metadata dikelola menggunakan <strong>etcd</strong> untuk memastikan konsistensi dan koordinasi. Mode ini paling cocok untuk beban kerja batch-berat dalam penerapan skala kecil atau lingkungan produksi yang memprioritaskan kesederhanaan di atas kinerja, terutama ketika latensi tulis yang rendah tidak terlalu penting. Latensi tulis dalam mode ini umumnya antara 200-500 ms.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
    </span> <span class="img-wrapper"> <span>penerapan mode memori</span> </span>pelatuk</p>
-<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - Dioptimalkan untuk latensi rendah, daya tahan tinggi</h3><p>Mode QuorumBuffer dirancang untuk beban kerja baca/tulis frekuensi tinggi yang peka terhadap latensi dan membutuhkan respons waktu nyata serta toleransi kesalahan yang kuat. Dalam mode ini, klien Woodpecker berinteraksi dengan sistem kuorum tiga replika untuk menyediakan buffer tulis berkecepatan tinggi, memastikan konsistensi yang kuat dan ketersediaan yang tinggi melalui konsensus terdistribusi.</p>
+<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - Dioptimalkan untuk latensi rendah, daya tahan tinggi<button data-href="#QuorumBuffer---Optimized-for-low-latency-high-durability" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Mode QuorumBuffer dirancang untuk beban kerja baca/tulis frekuensi tinggi yang peka terhadap latensi dan membutuhkan respons waktu nyata serta toleransi kesalahan yang kuat. Dalam mode ini, klien Woodpecker berinteraksi dengan sistem kuorum tiga replika untuk menyediakan buffer tulis berkecepatan tinggi, memastikan konsistensi yang kuat dan ketersediaan yang tinggi melalui konsensus terdistribusi.</p>
 <p>Penulisan dianggap berhasil setelah klien berhasil mereplikasi data ke setidaknya dua dari tiga node kuorum, biasanya selesai dalam milidetik satu digit, setelah itu data secara asinkron dibuang ke penyimpanan objek awan untuk daya tahan jangka panjang. Arsitektur ini meminimalkan status on-node, menghilangkan kebutuhan volume disk lokal yang besar, dan menghindari perbaikan anti-entropi yang rumit yang sering kali diperlukan dalam sistem berbasis kuorum tradisional.</p>
 <p>Hasilnya adalah lapisan WAL yang ramping dan kuat yang ideal untuk lingkungan produksi yang sangat penting di mana konsistensi, ketersediaan, dan pemulihan yang cepat sangat penting.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_quorumbuffer_mode_deployment.png" alt="woodpecker quorum mode deployment" class="doc-image" id="woodpecker-quorum-mode-deployment" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/woodpecker_quorumbuffer_mode_deployment.png" alt="woodpecker quorum mode deployment" class="doc-image" id="woodpecker-quorum-mode-deployment" />
    </span> <span class="img-wrapper"> <span>penerapan mode kuorum pelatuk</span> </span></p>
 <h2 id="Performance-benchmarks" class="common-anchor-header">Tolok ukur kinerja<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -136,7 +166,22 @@ summary: >-
 <li>Amazon S3 (instance EC2 tunggal): hingga 1,1 GB/s</li>
 </ul>
 <p>Hebatnya, Woodpecker secara konsisten mencapai 60-80% dari throughput maksimum yang dimungkinkan untuk setiap backend - tingkat efisiensi yang luar biasa untuk middleware.</p>
-<h3 id="Key-performance-insights" class="common-anchor-header">Wawasan kinerja utama</h3><ul>
+<h3 id="Key-performance-insights" class="common-anchor-header">Wawasan kinerja utama<button data-href="#Key-performance-insights" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Mode Sistem File Lokal: Woodpecker mencapai 450 MB/s - 3,5 kali lebih cepat daripada Kafka dan 4,2 kali lebih cepat daripada Pulsar - dengan latensi sangat rendah hanya 1,8 ms, sehingga ideal untuk penerapan node tunggal berkinerja tinggi.</li>
 <li>Mode Penyimpanan Cloud (S3): Saat menulis langsung ke S3, Woodpecker mencapai 750 MB/s (sekitar 68% dari batas teoretis S3), 5,8× lebih tinggi daripada Kafka dan 7× lebih tinggi daripada Pulsar. Meskipun latensi lebih tinggi (166 ms), pengaturan ini memberikan throughput yang luar biasa untuk beban kerja yang berorientasi pada batch.</li>
 <li>Mode Penyimpanan Objek (MinIO): Bahkan dengan MinIO, Woodpecker mencapai 71 MB/s-sekitar 65% dari kapasitas MinIO. Performa ini sebanding dengan Kafka dan Pulsar tetapi dengan kebutuhan sumber daya yang jauh lebih rendah.</li>

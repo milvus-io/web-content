@@ -38,7 +38,22 @@ title: Kotaemon RAG com Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Installation" class="common-anchor-header">Instalação do kotaemon</h3><p>Recomendamos a instalação do kotaemon desta forma:</p>
+    </button></h2><h3 id="Installation" class="common-anchor-header">Instalação do kotaemon<button data-href="#Installation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Recomendamos a instalação do kotaemon desta forma:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">optional (setup <span class="hljs-built_in">env</span>)</span>
 conda create -n kotaemon python=3.10
 conda activate kotaemon
@@ -50,11 +65,56 @@ pip install -e &quot;libs/kotaemon[all]&quot;
 pip install -e &quot;libs/ktem&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>Além desta forma, existem outras maneiras de instalar o kotaemon. Pode consultar a <a href="https://github.com/Cinnamon/kotaemon?tab=readme-ov-file#installation">documentação oficial</a> para obter mais detalhes.</p>
-<h3 id="Set-Milvus-as-the-default-vector-storage" class="common-anchor-header">Definir o Milvus como o armazenamento de vectores predefinido</h3><p>Para alterar o armazenamento de vectores por defeito para Milvus, tem de modificar o ficheiro <code translate="no">flowsettings.py</code> mudando <code translate="no">KH_VECTORSTORE</code> para:</p>
+<h3 id="Set-Milvus-as-the-default-vector-storage" class="common-anchor-header">Definir o Milvus como o armazenamento de vectores predefinido<button data-href="#Set-Milvus-as-the-default-vector-storage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para alterar o armazenamento de vectores por defeito para Milvus, tem de modificar o ficheiro <code translate="no">flowsettings.py</code> mudando <code translate="no">KH_VECTORSTORE</code> para:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-string">&quot;__type__&quot;</span>: <span class="hljs-string">&quot;kotaemon.storages.MilvusVectorStore&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Environment-Variables" class="common-anchor-header">Set Environment Variables (Definir variáveis de ambiente)</h3><p>pode configurar os modelos através do ficheiro <code translate="no">.env</code> com as informações necessárias para ligar aos LLM e aos modelos de incorporação, por exemplo, OpenAI, Azure, Ollama, etc.</p>
-<h3 id="Run-Kotaemon" class="common-anchor-header">Executar o Kotaemon</h3><p>Depois de configurar as variáveis de ambiente e alterar o armazenamento de vectores, pode executar o kotaemon através do seguinte comando:</p>
+<h3 id="Set-Environment-Variables" class="common-anchor-header">Set Environment Variables (Definir variáveis de ambiente)<button data-href="#Set-Environment-Variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>pode configurar os modelos através do ficheiro <code translate="no">.env</code> com as informações necessárias para ligar aos LLM e aos modelos de incorporação, por exemplo, OpenAI, Azure, Ollama, etc.</p>
+<h3 id="Run-Kotaemon" class="common-anchor-header">Executar o Kotaemon<button data-href="#Run-Kotaemon" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Depois de configurar as variáveis de ambiente e alterar o armazenamento de vectores, pode executar o kotaemon através do seguinte comando:</p>
 <pre><code translate="no" class="language-shell">python app.py
 <button class="copy-code-btn"></button></code></pre>
 <p>O nome de utilizador/palavra-passe predefinidos são: <code translate="no">admin</code> / <code translate="no">admin</code></p>
@@ -73,24 +133,69 @@ pip install -e &quot;libs/ktem&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Add-your-AI-models" class="common-anchor-header">1. Adicione os seus modelos de IA</h3><p>
+    </button></h2><h3 id="1-Add-your-AI-models" class="common-anchor-header">1. Adicione os seus modelos de IA<button data-href="#1-Add-your-AI-models" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/kotaemon_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
 <p>No separador <code translate="no">Resources</code>, pode adicionar e definir os seus LLM e modelos de incorporação. Pode adicionar vários modelos e defini-los como activos ou inactivos. Só precisa de fornecer pelo menos um. Também pode fornecer vários modelos para permitir a alternância entre eles.</p>
-<h3 id="2-Upload-your-documents" class="common-anchor-header">2. Carregue os seus documentos</h3><p>
+<h3 id="2-Upload-your-documents" class="common-anchor-header">2. Carregue os seus documentos<button data-href="#2-Upload-your-documents" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/kotaemon_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
 <p>Para efetuar o controlo de qualidade dos seus documentos, é necessário carregá-los primeiro na aplicação. Navegue até ao separador <code translate="no">File Index</code> e pode carregar e gerir os seus documentos personalizados.</p>
 <p>Por defeito, todos os dados da aplicação são armazenados na pasta <code translate="no">./ktem_app_data</code>. Os dados da base de dados Milvus são armazenados em <code translate="no">./ktem_app_data/user_data/vectorstore</code>. Pode fazer uma cópia de segurança ou copiar esta pasta para mover a sua instalação para uma nova máquina.</p>
-<h3 id="3-Chat-with-your-documents" class="common-anchor-header">3. Conversar com os seus documentos</h3><p>
+<h3 id="3-Chat-with-your-documents" class="common-anchor-header">3. Conversar com os seus documentos<button data-href="#3-Chat-with-your-documents" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/kotaemon_3.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_3.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

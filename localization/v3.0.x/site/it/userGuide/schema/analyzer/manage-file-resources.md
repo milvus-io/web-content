@@ -74,7 +74,7 @@ summary: >-
    <tr>
      <td><p><strong>Remoto</strong></p></td>
      <td><p>Nel negozio di oggetti (MinIO / S3 / GCS / Azure) che il cluster Milvus è già configurato per utilizzare</p></td>
-     <td><p>Milvus, tramite le API client <code translate="no">add_file_resource</code> / <code translate="no">remove_file_resource</code> / <code translate="no">list_file_resources</code> </p></td>
+     <td><p>Milvus, attraverso le API client <code translate="no">add_file_resource</code> / <code translate="no">remove_file_resource</code> / <code translate="no">list_file_resources</code> </p></td>
      <td><p>Consigliato per la maggior parte delle implementazioni.</p></td>
    </tr>
    <tr>
@@ -254,7 +254,7 @@ client.add_file_resource(
     <span class="hljs-string">&quot;path&quot;</span>: <span class="hljs-string">&quot;/var/lib/milvus/dicts/chinese_terms.txt&quot;</span>,
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Le risorse di file locali sono valide solo nelle distribuzioni in cui si controllano i filesystem dei DataNode, dei QueryNode e degli StreamingNode - tipicamente Milvus auto-ospitato su bare-metal o su un cluster Kubernetes in cui è possibile aggiungere un volume di mount. Il file deve esistere esattamente nello stesso percorso assoluto su ogni componente, altrimenti alcuni nodi non riescono a caricare l'analizzatore.</p>
+<p>Le risorse di file locali sono valide solo nelle distribuzioni in cui si controllano i filesystem dei DataNode, dei QueryNode e degli StreamingNode - tipicamente Milvus auto-ospitato su bare-metal o su un cluster Kubernetes dove è possibile aggiungere un volume di mount. Il file deve esistere esattamente nello stesso percorso assoluto su ogni componente, altrimenti alcuni nodi non riescono a caricare l'analizzatore.</p>
 <p>Il file viene aperto alla prima creazione dell'analizzatore. Se il percorso non esiste a quel punto, la creazione dell'analizzatore fallisce con <code translate="no">MilvusException(code=2000, &quot;IOError: No such file or directory&quot;)</code>.</p>
 <h2 id="Considerations" class="common-anchor-header">Considerazioni<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -272,7 +272,7 @@ client.add_file_resource(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>La disponibilità dell'intero cluster non è istantanea.</strong> Dopo il ritorno di <code translate="no">add_file_resource</code>, Milvus sincronizza il file con tutti i componenti che ne hanno bisogno. Durante questa breve finestra, una raccolta che fa riferimento alla risorsa potrebbe non essere creata sui nodi che non hanno ancora effettuato la sincronizzazione. La soluzione tipica è quella di riprovare la chiamata di creazione dopo qualche secondo.</p></li>
+<li><p><strong>La disponibilità dell'intero cluster non è istantanea.</strong> Dopo il ritorno di <code translate="no">add_file_resource</code>, Milvus sincronizza il file con tutti i componenti che ne hanno bisogno. Durante questa breve finestra, una raccolta che fa riferimento alla risorsa potrebbe non essere creata sui nodi che non hanno ancora effettuato la sincronizzazione. La soluzione tipica consiste nel riprovare la chiamata di creazione dopo alcuni secondi.</p></li>
 <li><p><strong>Rimuovere solo quando nessuna collezione dipende dalla risorsa.</strong> Eliminare o modificare qualsiasi raccolta la cui configurazione dell'analizzatore faccia riferimento alla risorsa prima di chiamare <code translate="no">remove_file_resource</code>, per evitare che le ricerche dell'analizzatore non trovino il file.</p></li>
 <li><p><strong>Solo metadati.</strong> <code translate="no">list_file_resources()</code> restituisce <code translate="no">name</code> e <code translate="no">path</code>, senza dimensioni, checksum, tempo di caricamento o altri metadati. Tenere traccia delle versioni dei dizionari con una propria convenzione di denominazione, se necessario.</p></li>
 </ul>

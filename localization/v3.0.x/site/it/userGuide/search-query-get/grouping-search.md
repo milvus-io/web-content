@@ -2,13 +2,8 @@
 id: grouping-search.md
 title: Ricerca per raggruppamento
 summary: >-
-  Una ricerca per raggruppamento consente a Milvus di raggruppare i risultati
-  della ricerca in base ai valori di un campo specifico per aggregare i dati a
-  un livello superiore. Ad esempio, è possibile utilizzare una ricerca RNA di
-  base per trovare libri simili a quello in questione, ma è possibile utilizzare
-  una ricerca di raggruppamento per trovare le categorie di libri che possono
-  riguardare gli argomenti trattati in quel libro. Questo argomento descrive
-  come utilizzare la ricerca per raggruppamento e le considerazioni principali.
+  Utilizzare la ricerca per raggruppamento per aggregare i risultati della
+  ricerca RNA in base al valore di un campo e ridurre le entità duplicate.
 ---
 <h1 id="Grouping-Search" class="common-anchor-header">Ricerca per raggruppamento<button data-href="#Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -376,6 +371,49 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><code translate="no">strict_group_size</code>: Questo parametro booleano controlla se il sistema deve applicare rigorosamente il conteggio impostato da <code translate="no">group_size</code>. Se <code translate="no">strict_group_size=True</code>, il sistema cercherà di includere il numero esatto di entità specificato da <code translate="no">group_size</code> in ogni gruppo (ad esempio, due paragrafi), a meno che non ci siano abbastanza dati in quel gruppo. Per impostazione predefinita (<code translate="no">strict_group_size=False</code>), il sistema dà la priorità al raggiungimento del numero di gruppi specificato dal parametro <code translate="no">limit</code>, piuttosto che assicurarsi che ogni gruppo contenga le entità di <code translate="no">group_size</code>. Questo approccio è generalmente più efficiente nei casi in cui la distribuzione dei dati non è uniforme.</p></li>
 </ul>
 <p>Per ulteriori dettagli sui parametri, consultare la sezione <a href="https://docs.zilliz.com/reference/python/python/Vector-search">Ricerca</a>.</p>
+<h2 id="Order-groups-by-a-scalar-field--Milvus-30x" class="common-anchor-header">Ordinare i gruppi in base a un campo scalare<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Order-groups-by-a-scalar-field--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>È possibile combinare la ricerca per gruppi con <code translate="no">order_by_fields</code> per ordinare i gruppi in base a un campo scalare. Ciò è utile quando si vogliono ottenere risultati diversi tra i gruppi, ma si desidera che i gruppi seguano un ordine rilevante per l'azienda, come il prezzo o la valutazione.</p>
+<p>L'esempio seguente raggruppa i risultati della ricerca per <code translate="no">category</code>, restituisce fino a tre entità per gruppo e ordina i gruppi restituiti per <code translate="no">price</code> dal più basso al più alto.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
+    data=query_vectors,
+    anns_field=<span class="hljs-string">&quot;embedding&quot;</span>,
+    limit=<span class="hljs-number">20</span>,
+    group_by_field=<span class="hljs-string">&quot;category&quot;</span>,
+    group_size=<span class="hljs-number">3</span>,
+    strict_group_size=<span class="hljs-literal">True</span>,
+    output_fields=[<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>],
+<span class="highlighted-comment-line">    order_by_fields=[</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;field&quot;</span>: <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;order&quot;</span>: <span class="hljs-string">&quot;asc&quot;</span>}</span>
+<span class="highlighted-comment-line">    ],</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Nella richiesta precedente, <code translate="no">limit=20</code> significa che Milvus seleziona fino a 20 gruppi, non 20 entità. Poiché <code translate="no">group_size=3</code>, l'elenco piatto dei risultati può contenere fino a 60 entità in totale.</p>
+<p>Quando si usa <code translate="no">order_by_fields</code> con <code translate="no">group_by_field</code>, Milvus ordina i gruppi in base al valore del campo scalare specificato dell'entità principale di ciascun gruppo. All'interno di ogni gruppo, le entità rimangono ordinate in base al loro punteggio di somiglianza con il vettore della query.</p>
 <h2 id="Considerations" class="common-anchor-header">Considerazioni<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -392,7 +430,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Indicizzazione</strong>: Questa funzione di raggruppamento funziona solo per le raccolte indicizzate con questi tipi di indice: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HNSW</strong>, <strong>HNSW_PQ</strong>, <strong>HNSW_PRQ</strong>, <strong>HNSW_SQ</strong>, <strong>DISKANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
+<li><p><strong>Indicizzazione</strong>: Questa funzione di raggruppamento funziona solo per le collezioni indicizzate con questi tipi di indice: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HNSW</strong>, <strong>HNSW_PQ</strong>, <strong>HNSW_PRQ</strong>, <strong>HNSW_SQ</strong>, <strong>DISKANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
 <li><p><strong>Numero di gruppi</strong>: Il parametro <code translate="no">limit</code> controlla il numero di gruppi da cui vengono restituiti i risultati della ricerca, piuttosto che il numero specifico di entità all'interno di ciascun gruppo. L'impostazione di un <code translate="no">limit</code> appropriato aiuta a controllare la diversità della ricerca e le prestazioni della query. Ridurre <code translate="no">limit</code> può ridurre i costi di calcolo se i dati sono distribuiti densamente o se le prestazioni sono un problema.</p></li>
 <li><p><strong>Entità per gruppo</strong>: Il parametro <code translate="no">group_size</code> controlla il numero di entità restituite per gruppo. La regolazione di <code translate="no">group_size</code> in base al caso d'uso può aumentare la ricchezza dei risultati della ricerca. Tuttavia, se i dati sono distribuiti in modo non uniforme, alcuni gruppi possono restituire un numero di entità inferiore a quello specificato da <code translate="no">group_size</code>, in particolare in scenari di dati limitati.</p></li>
 <li><p><strong>Dimensione rigida del gruppo</strong>: Quando si utilizza <code translate="no">strict_group_size=True</code>, il sistema cercherà di restituire il numero di entità specificato (<code translate="no">group_size</code>) per ogni gruppo, a meno che non ci siano abbastanza dati in quel gruppo. Questa impostazione garantisce un conteggio coerente delle entità per gruppo, ma può comportare un calo delle prestazioni in caso di distribuzione non uniforme dei dati o di risorse limitate. Se non è necessario un conteggio rigoroso delle entità, l'impostazione di <code translate="no">strict_group_size=False</code> può migliorare la velocità delle query.</p></li>

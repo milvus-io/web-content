@@ -1,6 +1,6 @@
 ---
 id: integrate_with_dspy.md
-summary: このガイドでは、DSPyのレトリーバーモジュールの1つであるMilvusRMを使用してRAGプログラムを最適化する方法を説明します。
+summary: このガイドでは、DSPyのレトリーバーモジュールの1つであるMilvusRMを使用して、RAGプログラムを最適化する方法を説明します。
 title: MilvusとDSPyの連携
 ---
 <h1 id="Integrate-Milvus-with-DSPy" class="common-anchor-header">MilvusとDSPyの連携<button data-href="#Integrate-Milvus-with-DSPy" class="anchor-icon" translate="no">
@@ -35,7 +35,7 @@ title: MilvusとDSPyの連携
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DSPyはスタンフォードNLPグループによって発表された、言語モデル内のプロンプトとウェイトを最適化するための画期的なプログラムフレームワークです。従来のプロンプトエンジニアリング技術が手作業で作成し、微調整することに依存していたのとは異なり、DSPyは学習ベースのアプローチを採用しています。DSPyは、クエリと回答の例を同化することで、特定のタスクに合わせて最適化されたプロンプトを動的に生成します。この革新的な手法により、パイプライン全体のシームレスな再組み立てが可能になり、手作業による継続的なプロンプトの調整が不要になります。DSPyのPythonicシンタックスは、様々なコンポーザブルで宣言的なモジュールを提供し、LLMのインストラクションを簡素化します。</p>
+    </button></h2><p>DSPyはスタンフォードNLPグループによって発表された、言語モデル内のプロンプトとウェイトを最適化するための画期的なプログラムフレームワークです。DSPyは、手作業での作成と微調整に依存する従来のプロンプトエンジニアリング技術とは異なり、学習ベースのアプローチを採用しています。DSPyは、クエリと回答の例を同化することで、特定のタスクに合わせて最適化されたプロンプトを動的に生成します。この革新的な手法により、パイプライン全体のシームレスな再組み立てが可能になり、手作業による継続的なプロンプトの調整が不要になります。DSPyのPythonicシンタックスは、様々な合成可能で宣言的なモジュールを提供し、LLMのインストラクションを簡素化します。</p>
 <h2 id="Benefits-of-using-DSPy" class="common-anchor-header">DSPyを使用するメリット<button data-href="#Benefits-of-using-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,7 +74,7 @@ title: MilvusとDSPyの連携
     </button></h2><p>LLMパイプラインを構築するために貢献するコンポーネントは数多くあります。ここでは、DSPyがどのように動作するかを高レベルで理解するために、いくつかの主要なコンポーネントについて説明します。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
    </span> <span class="img-wrapper"> <span>DSPyモジュール</span> </span></p>
 <p>シグネチャ：DSPyのシグネチャは宣言的な仕様として機能し、モジュールの入出力動作の概要を示し、タスク実行における言語モデルの指針となる。 モジュール：DSPyのモジュールは、言語モデル（LM）を活用したプログラムの基本コンポーネントとして機能します。連鎖思考やReActのような様々なプロンプト技術を抽象化し、あらゆるDSPyシグネチャを扱うことができます。学習可能なパラメータと、入力を処理して出力を生成する機能を持つこれらのモジュールは、PyTorchのNNモジュールからヒントを得つつ、LMアプリケーション向けに調整された、より大きなプログラムを形成するために組み合わせることができます。 オプティマイザ：DSPyのオプティマイザは、プロンプトやLLMの重みなど、DSPyプログラムのパラメータを微調整し、精度などの指定されたメトリクスを最大化することで、プログラムの効率を高めます。</p>
 <h2 id="Why-Milvus-in-DSPy" class="common-anchor-header">DSPyでmilvusを使う理由<button data-href="#Why-Milvus-in-DSPy" class="anchor-icon" translate="no">
@@ -109,13 +109,43 @@ title: MilvusとDSPyの連携
         ></path>
       </svg>
     </button></h2><p>それでは、RAGアプリケーションを最適化するためにDSPyでMilvusを活用する方法を簡単な例で説明します。</p>
-<h3 id="Prerequisites" class="common-anchor-header">前提条件</h3><p>RAGアプリをビルドする前に、DSPyとPyMilvusをインストールしてください。</p>
+<h3 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>RAGアプリをビルドする前に、DSPyとPyMilvusをインストールしてください。</p>
 <pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;dspy-ai[milvus]&quot;</span>
 $ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、**ランタイムを再起動**する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</div>
-<h3 id="Loading-the-dataset" class="common-anchor-header">データセットのロード</h3><p>この例では、複雑な質問と回答のペアのコレクションであるHotPotQAをトレーニングデータセットとして使用します。HotPotQAクラスを通して読み込むことができます。</p>
+<h3 id="Loading-the-dataset" class="common-anchor-header">データセットのロード<button data-href="#Loading-the-dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>この例では複雑な質問と答えのペアのコレクションであるHotPotQAをトレーニングデータセットとして使用します。HotPotQAクラスを通して読み込むことができます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.datasets <span class="hljs-keyword">import</span> HotPotQA
 
 <span class="hljs-comment"># Load the dataset.</span>
@@ -127,7 +157,22 @@ dataset = HotPotQA(
 trainset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.train]
 devset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.dev]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">Milvusベクトルデータベースにデータを取り込む</h3><p>ベクトル検索のためにコンテキスト情報をmilvusコレクションに取り込む。このコレクションには<code translate="no">embedding</code> フィールドと<code translate="no">text</code> フィールドが必要です。この場合、デフォルトのクエリ埋め込み関数としてOpenAIの<code translate="no">text-embedding-3-small</code> モデルを使用する。</p>
+<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">Milvusベクトルデータベースにデータを取り込む<button data-href="#Ingest-data-into-the-Milvus-vector-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ベクトル検索のためにコンテキスト情報をmilvusコレクションに取り込む。このコレクションには<code translate="no">embedding</code> フィールドと<code translate="no">text</code> フィールドが必要です。この場合、デフォルトのクエリ埋め込み関数としてOpenAIの<code translate="no">text-embedding-3-small</code> モデルを使用する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> os
 
@@ -170,7 +215,22 @@ text = requests.get(
         ],
     )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-MilvusRM" class="common-anchor-header">MilvusRMの定義</h3><p>次にMilvusRMを定義します。</p>
+<h3 id="Define-MilvusRM" class="common-anchor-header">MilvusRMの定義<button data-href="#Define-MilvusRM" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>次にMilvusRMを定義します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.retrieve.milvus_rm <span class="hljs-keyword">import</span> MilvusRM
 <span class="hljs-keyword">import</span> dspy
 
@@ -183,7 +243,22 @@ retriever_model = MilvusRM(
 turbo = dspy.OpenAI(model=<span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>)
 dspy.settings.configure(lm=turbo)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Building-signatures" class="common-anchor-header">シグネチャの構築</h3><p>データをロードしたので、パイプラインのサブタスクのシグネチャを定義する。単純な入力<code translate="no">question</code> と出力<code translate="no">answer</code> を識別することができますが、RAGパイプラインを構築しているため、Milvusからコンテキスト情報を取得します。そこで、シグネチャを<code translate="no">context, question --&gt; answer</code> と定義します。</p>
+<h3 id="Building-signatures" class="common-anchor-header">シグネチャの構築<button data-href="#Building-signatures" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>データをロードしたので、パイプラインのサブタスクのシグネチャを定義する。単純な入力<code translate="no">question</code> と出力<code translate="no">answer</code> を識別することができますが、RAGパイプラインを構築しているため、Milvusからコンテキスト情報を取得します。そこで、シグネチャを<code translate="no">context, question --&gt; answer</code> と定義します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">GenerateAnswer</span>(dspy.Signature):
     <span class="hljs-string">&quot;&quot;&quot;Answer questions with short factoid answers.&quot;&quot;&quot;</span>
 
@@ -192,7 +267,22 @@ dspy.settings.configure(lm=turbo)
     answer = dspy.OutputField(desc=<span class="hljs-string">&quot;often between 1 and 5 words&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">context</code> 、<code translate="no">answer</code> のフィールドには、モデルが何を受け取り、何を生成すべきかの明確なガイドラインを定義するための短い説明を記述する。</p>
-<h3 id="Building-the-pipeline" class="common-anchor-header">パイプラインの構築</h3><p>では、RAGパイプラインを定義しよう。</p>
+<h3 id="Building-the-pipeline" class="common-anchor-header">パイプラインの構築<button data-href="#Building-the-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>では、RAGパイプラインを定義しよう。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">RAG</span>(dspy.Module):
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, rm</span>):
         <span class="hljs-built_in">super</span>().__init__()
@@ -210,7 +300,22 @@ dspy.settings.configure(lm=turbo)
             context=[item.long_text <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> context], answer=prediction.answer
         )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Executing-the-pipeline-and-getting-the-results" class="common-anchor-header">パイプラインの実行と結果の取得</h3><p>さて、RAGパイプラインを構築しました。試しに結果を出してみましょう。</p>
+<h3 id="Executing-the-pipeline-and-getting-the-results" class="common-anchor-header">パイプラインの実行と結果の取得<button data-href="#Executing-the-pipeline-and-getting-the-results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>さて、RAGパイプラインを構築しました。試しに結果を出してみましょう。</p>
 <pre><code translate="no" class="language-python">rag = RAG(retriever_model)
 <span class="hljs-built_in">print</span>(rag(<span class="hljs-string">&quot;who write At My Window&quot;</span>).answer)
 <button class="copy-code-btn"></button></code></pre>
@@ -228,7 +333,22 @@ metric = dspy.evaluate.answer_exact_match
 score = evaluate_on_hotpotqa(rag, metric=metric)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;rag:&quot;</span>, score)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optimizing-the-pipeline" class="common-anchor-header">パイプラインの最適化</h3><p>このプログラムを定義したら、次はコンパイルだ。このプロセスでは、パフォーマンスを向上させるために、各モジュール内のパラメータを更新する。コンパイルのプロセスは3つの重要な要素に依存する：</p>
+<h3 id="Optimizing-the-pipeline" class="common-anchor-header">パイプラインの最適化<button data-href="#Optimizing-the-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>このプログラムを定義したら、次はコンパイルだ。このプロセスでは、パフォーマンスを向上させるために、各モジュール内のパラメータを更新する。コンパイルのプロセスは3つの重要な要素に依存する：</p>
 <ul>
 <li>トレーニングセット：トレーニングセット：トレーニングデータセットから20の質問と回答の例をこのデモに利用する。</li>
 <li>検証メトリック：単純な<code translate="no">validate_context_and_answer</code> メトリックを確立します。このメトリックは、予測された答えの正確さを検証し、検索されたコンテキストに答えが含まれていることを確認します。</li>
@@ -257,7 +377,7 @@ score = evaluate_on_hotpotqa(compiled_rag, metric=metric)
 <span class="hljs-built_in">print</span>(score)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;compile_rag:&quot;</span>, score)
 <button class="copy-code-btn"></button></code></pre>
-<p>Ragasスコアは以前の値50.0から52.0に上昇し、解答品質の向上を示しています。</p>
+<p>Ragasスコアは以前の値50.0から52.0に上昇し、回答の質が向上していることを示しています。</p>
 <h2 id="Summary" class="common-anchor-header">まとめ<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

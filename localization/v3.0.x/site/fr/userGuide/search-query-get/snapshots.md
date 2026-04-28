@@ -85,7 +85,7 @@ beta: Milvus 3.0.x
 <li>Supprimer régulièrement les anciens clichés pour économiser de l'espace de stockage.</li>
 <li>d'utiliser des noms et des descriptions descriptifs pour toute référence ultérieure</li>
 <li>Toujours vérifier les résultats de la création et de la restauration des instantanés.</li>
-<li>Suivre les horodatages de création des instantanés, l'utilisation de l'espace de stockage et les identifiants des tâches de restauration à des fins de surveillance et de dépannage.</li>
+<li>Suivre les horodatages de création des instantanés, l'utilisation du stockage et les identifiants des tâches de restauration à des fins de surveillance et de dépannage.</li>
 </ul>
 <h2 id="Limits-and-restrictions" class="common-anchor-header">Limites et restrictions<button data-href="#Limits-and-restrictions" class="anchor-icon" translate="no">
       <svg translate="no"

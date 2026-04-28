@@ -216,7 +216,7 @@ curl --request POST \
 <div class="alert note">
 <p>部分 Collections 加载目前还处于测试阶段，不建议在生产中使用。</p>
 </div>
-<p>以下代码片段假定您创建了一个名为<strong>my_collection</strong> 的 Collection，且 Collection 中有两个名为<strong>my_id</strong>和<strong>my_vector 的</strong>字段。</p>
+<p>以下代码片段假定您创建了名为<strong>my_collection</strong> 的 Collection，且 Collection 中有名为<strong>my_id</strong>和<strong>my_vector 的</strong>两个字段。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_collection(

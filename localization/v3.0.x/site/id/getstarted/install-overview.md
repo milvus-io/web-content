@@ -91,7 +91,7 @@ title: Gambaran Umum Opsi Penerapan Milvus
     </button></h2><p>Pemilihan mode penyebaran biasanya tergantung pada tahap pengembangan aplikasi Anda:</p>
 <ul>
 <li><p><strong>Untuk Pembuatan Prototipe Cepat</strong></p>
-<p>Jika Anda ingin membuat sesuatu dengan cepat sebagai prototipe atau untuk tujuan pembelajaran, seperti demo Retrieval Augmented Generation (RAG), chatbot AI, pencarian multi-modalitas, Milvus Lite itu sendiri atau kombinasi dari Milvus Lite dan Milvus Standalone sangat cocok. Anda dapat menggunakan Milvus Lite di notebook untuk membuat prototipe cepat dan mengeksplorasi berbagai pendekatan seperti strategi chunking yang berbeda di RAG. Anda mungkin ingin menggunakan aplikasi yang dibuat dengan Milvus Lite dalam produksi skala kecil untuk melayani pengguna yang sebenarnya, atau memvalidasi ide pada dataset yang lebih besar, misalnya lebih dari beberapa juta vektor. Milvus Standalone adalah pilihan yang tepat. Logika aplikasi untuk Milvus Lite masih dapat digunakan bersama karena semua penggunaan Milvus memiliki API sisi klien yang sama. Data yang disimpan di Milvus Lite juga dapat dipindahkan ke Milvus Standalone dengan alat baris perintah.</p></li>
+<p>Jika Anda ingin membuat sesuatu dengan cepat sebagai prototipe atau untuk tujuan pembelajaran, seperti demo Retrieval Augmented Generation (RAG), chatbot AI, pencarian multi-modalitas, Milvus Lite itu sendiri atau kombinasi dari Milvus Lite dan Milvus Standalone sangat cocok. Anda dapat menggunakan Milvus Lite di notebook untuk membuat prototipe cepat dan mengeksplorasi berbagai pendekatan seperti strategi chunking yang berbeda di RAG. Anda mungkin ingin menggunakan aplikasi yang dibuat dengan Milvus Lite dalam produksi skala kecil untuk melayani pengguna yang sesungguhnya, atau memvalidasi ide pada dataset yang lebih besar, misalnya lebih dari beberapa juta vektor. Milvus Standalone adalah pilihan yang tepat. Logika aplikasi untuk Milvus Lite masih dapat digunakan bersama karena semua penggunaan Milvus memiliki API sisi klien yang sama. Data yang disimpan di Milvus Lite juga dapat dipindahkan ke Milvus Standalone dengan alat baris perintah.</p></li>
 <li><p><strong>Penerapan Produksi Skala Kecil</strong></p>
 <p>Untuk produksi tahap awal, ketika proyek masih mencari kesesuaian produk dengan pasar dan kelincahan lebih penting daripada skalabilitas, Milvus Standalone adalah pilihan terbaik. Milvus Standalone masih dapat menskalakan hingga 100 juta vektor dengan sumber daya mesin yang cukup, namun membutuhkan lebih sedikit DevOps dibandingkan dengan mempertahankan cluster K8.</p></li>
 <li><p><strong>Penerapan Produksi Skala Besar</strong></p>
@@ -107,7 +107,7 @@ title: Gambaran Umum Opsi Penerapan Milvus
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" />
    </span> <span class="img-wrapper"> <span>Pilih opsi penerapan untuk kasus penggunaan Anda</span> </span></p>
 <h2 id="Comparison-on-functionalities" class="common-anchor-header">Perbandingan fungsionalitas<button data-href="#Comparison-on-functionalities" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -62,7 +62,7 @@ beta: Milvus 2.6.4+
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-retree-works.png" alt="How Retree Works" class="doc-image" id="how-retree-works" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-retree-works.png" alt="How Retree Works" class="doc-image" id="how-retree-works" />
    </span> <span class="img-wrapper"> <span>Cómo funciona Retree</span> </span></p>
 <h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">Fase 2: Acelerar las consultas<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"

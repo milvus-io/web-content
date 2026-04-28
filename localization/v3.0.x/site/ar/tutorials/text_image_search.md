@@ -46,7 +46,22 @@ title: البحث من نص إلى صورة باستخدام ميلفوس
         ></path>
       </svg>
     </button></h2><p>قبل البدء، تأكد من أن جميع الحزم المطلوبة وبيانات الأمثلة جاهزة.</p>
-<h3 id="Install-dependencies" class="common-anchor-header">تثبيت التبعيات</h3><ul>
+<h3 id="Install-dependencies" class="common-anchor-header">تثبيت التبعيات<button data-href="#Install-dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong>pymilvus&gt;=2.4.2</strong> للتفاعل مع قاعدة بيانات Milvus</li>
 <li><strong>مقطع</strong> للعمل مع نموذج CLIP</li>
 <li><strong>وسادة</strong> لمعالجة الصور وتصورها</li>
@@ -57,11 +72,41 @@ title: البحث من نص إلى صورة باستخدام ميلفوس
 <div class="alert note">
 <p>إذا كنت تستخدم Google Colab، فقد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انتقل إلى قائمة "وقت التشغيل" في أعلى الواجهة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
 </div>
-<h3 id="Download-example-data" class="common-anchor-header">تنزيل مثال على البيانات</h3><p>سنستخدم مجموعة فرعية من مجموعة بيانات <a href="https://www.image-net.org">ImageNet</a> (100 فئة، 10 صور لكل فئة) كمثال على الصور. سيقوم الأمر التالي بتنزيل بيانات المثال واستخراجها إلى المجلد المحلي <code translate="no">./images_folder</code>:</p>
+<h3 id="Download-example-data" class="common-anchor-header">تنزيل مثال على البيانات<button data-href="#Download-example-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>سنستخدم مجموعة فرعية من مجموعة بيانات <a href="https://www.image-net.org">ImageNet</a> (100 فئة، 10 صور لكل فئة) كمثال على الصور. سيقوم الأمر التالي بتنزيل بيانات المثال واستخراجها إلى المجلد المحلي <code translate="no">./images_folder</code>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/towhee-io/examples/releases/download/data/reverse_image_search.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q reverse_image_search.zip -d images_folder</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-up-Milvus" class="common-anchor-header">إعداد ميلفوس</h3><p>قبل المتابعة، قم بإعداد خادم Milvus والاتصال باستخدام URI الخاص بك (واختيارياً، رمز مميز):</p>
+<h3 id="Set-up-Milvus" class="common-anchor-header">إعداد ميلفوس<button data-href="#Set-up-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قبل المتابعة، قم بإعداد خادم Milvus والاتصال باستخدام URI الخاص بك (واختيارياً، رمز مميز):</p>
 <ul>
 <li><p><strong>ميلفوس لايت (موصى به للراحة)</strong>: قم بتعيين URI إلى ملف محلي، مثل ./milvus.db. هذا يستفيد تلقائيًا من <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في ملف واحد.</p></li>
 <li><p><strong>Docker أو Kubernetes (للبيانات كبيرة الحجم)</strong>: للتعامل مع مجموعات بيانات أكبر، قم بنشر خادم Milvus أكثر أداءً باستخدام <a href="https://milvus.io/docs/quickstart.md">Docker أو Kubernetes</a>. في هذه الحالة، استخدم URI الخادم، مثل http://localhost:19530، للاتصال.</p></li>
@@ -87,12 +132,27 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;
         ></path>
       </svg>
     </button></h2><p>الآن بعد أن أصبحت لديك التبعيات والبيانات اللازمة، حان الوقت لإعداد مستخرجات الميزات وبدء العمل مع ميلفوس. سيرشدك هذا القسم إلى الخطوات الرئيسية لبناء نظام بحث من نص إلى صورة. أخيرًا، سنشرح كيفية استرداد الصور وتصورها بناءً على استعلامات نصية.</p>
-<h3 id="Define-feature-extractors" class="common-anchor-header">تحديد مستخرجات الميزات</h3><p>سنستخدم نموذج CLIP المدرّب مسبقًا لإنشاء تضمينات الصور والنصوص. في هذا القسم، سنقوم بتحميل متغير <strong>ViT-B/32</strong> المدرب مسبقًا من CLIP وتحديد الدوال المساعدة لترميز الصور والنصوص:</p>
+<h3 id="Define-feature-extractors" class="common-anchor-header">تحديد مستخرجات الميزات<button data-href="#Define-feature-extractors" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>سنستخدم نموذج CLIP المدرّب مسبقًا لإنشاء تضمينات الصور والنصوص. في هذا القسم، سنقوم بتحميل متغير <strong>ViT-B/32</strong> المدرب مسبقًا من CLIP وتحديد الدوال المساعدة لترميز الصور والنصوص:</p>
 <ul>
 <li><code translate="no">encode_image(image_path)</code>: معالجة الصور وترميزها إلى متجهات ميزات</li>
 <li><code translate="no">encode_text(text)</code>: ترميز الاستعلامات النصية إلى متجهات ميزات</li>
 </ul>
-<p>تعمل كلتا الدالتين على تطبيع ميزات الإخراج لضمان اتساق المقارنات من خلال تحويل المتجهات إلى وحدة الطول، وهو أمر ضروري لحسابات دقيقة لتشابه جيب التمام.</p>
+<p>تقوم كلتا الدالتين بتطبيع ميزات الإخراج لضمان اتساق المقارنات من خلال تحويل المتجهات إلى وحدة الطول، وهو أمر ضروري لحسابات دقيقة لتشابه جيب التمام.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> clip
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 
@@ -122,7 +182,22 @@ model.<span class="hljs-built_in">eval</span>()
     )  <span class="hljs-comment"># Normalize the text features</span>
     <span class="hljs-keyword">return</span> text_features.squeeze().tolist()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Data-Ingestion" class="common-anchor-header">استيعاب البيانات</h3><p>لتمكين البحث الدلالي عن الصور، نحتاج أولاً إلى إنشاء تضمينات لجميع الصور وتخزينها في قاعدة بيانات متجهة للفهرسة والاسترجاع بكفاءة. يقدّم هذا القسم دليلًا تفصيليًا لإدخال بيانات الصور في ملفوس.</p>
+<h3 id="Data-Ingestion" class="common-anchor-header">استيعاب البيانات<button data-href="#Data-Ingestion" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لتمكين البحث الدلالي عن الصور، نحتاج أولاً إلى إنشاء تضمينات لجميع الصور وتخزينها في قاعدة بيانات متجهة للفهرسة والاسترجاع بكفاءة. يقدّم هذا القسم دليلًا تفصيليًا لإدخال بيانات الصور في ملفوس.</p>
 <p><strong>1. إنشاء مجموعة ميلفوس</strong></p>
 <p>قبل تخزين تضمينات الصور، تحتاج إلى إنشاء مجموعة ميلفوس. يوضح الرمز التالي كيفية إنشاء مجموعة في وضع الإعداد السريع بنوع مقياس كوسين الافتراضي. تتضمن المجموعة الحقول التالية:</p>
 <ul>
@@ -167,7 +242,22 @@ insert_result = milvus_client.insert(collection_name=collection_name, data=raw_d
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Inserted 1000 images into Milvus.
 </code></pre>
-<h3 id="Peform-a-Search" class="common-anchor-header">إجراء بحث</h3><p>الآن، دعنا نجري بحثًا باستخدام مثال استعلام نصي. سيؤدي ذلك إلى استرداد الصور الأكثر صلة بناءً على تشابهها الدلالي مع الوصف النصي المحدد.</p>
+<h3 id="Peform-a-Search" class="common-anchor-header">إجراء بحث<button data-href="#Peform-a-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>الآن، دعنا نجري بحثًا باستخدام مثال استعلام نصي. سيؤدي ذلك إلى استرداد الصور الأكثر صلة بناءً على تشابهها الدلالي مع الوصف النصي المحدد.</p>
 <pre><code translate="no" class="language-python">query_text = <span class="hljs-string">&quot;a white dog&quot;</span>
 query_embedding = encode_text(query_text)
 
@@ -208,5 +298,5 @@ Search results:
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/text_image_search_with_milvus_20_1.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_image_search_with_milvus_20_1.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>

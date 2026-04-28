@@ -35,7 +35,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Las instantáneas son imágenes puntuales y rápidas de los datos, adecuadas para realizar reversiones rápidas o pruebas (de días a semanas). Al mismo tiempo, las copias de seguridad son copias independientes y completas que se almacenan por separado para la recuperación de desastres a largo plazo (de semanas a años) y para una mejor protección contra fallos totales de almacenamiento.</p>
+    </button></h2><p>Las instantáneas son imágenes rápidas y puntuales de los datos, adecuadas para realizar reversiones o pruebas rápidas (de días a semanas). Al mismo tiempo, las copias de seguridad son copias independientes y completas que se almacenan por separado para la recuperación de desastres a largo plazo (de semanas a años) y para una mejor protección contra fallos totales de almacenamiento.</p>
 <p>En la tabla siguiente se comparan las instantáneas y las copias de seguridad.</p>
 <table>
    <tr>
@@ -227,7 +227,7 @@ err := client.DropSnapshot(context.Background(), dropOpt)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Las instantáneas permiten un procesamiento de datos offline eficiente al proporcionar fuentes de datos estables y consistentes para cargas de trabajo analíticas. Puede acceder directamente a los datos de instantáneas almacenados en el almacenamiento de objetos con Spark u otros marcos de procesamiento de big data sin afectar al clúster activo de Milvus.</p>
+    </button></h2><p>Las instantáneas permiten un procesamiento eficiente de datos fuera de línea, proporcionando fuentes de datos estables y consistentes para cargas de trabajo analíticas. Puede acceder directamente a los datos de instantáneas almacenados en el almacenamiento de objetos con Spark u otros marcos de procesamiento de big data sin afectar al clúster activo de Milvus.</p>
 <p>El siguiente código asume que ha creado una instantánea llamada <code translate="no">&quot;analytics_snapshot_20260321&quot;</code>, la ha almacenado en un cubo de almacenamiento de objetos y ha obtenido las credenciales de acceso al almacenamiento de objetos.</p>
 <h3 id="Step-1-Get-snapshot-metadata" class="common-anchor-header">Paso 1: Obtener los metadatos de la instantánea<button data-href="#Step-1-Get-snapshot-metadata" class="anchor-icon" translate="no">
       <svg translate="no"

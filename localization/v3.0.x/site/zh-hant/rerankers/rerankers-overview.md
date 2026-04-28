@@ -20,7 +20,7 @@ title: 重排器概述
         ></path>
       </svg>
     </button></h1><p>在資訊檢索和生成式人工智慧領域中，Reranker 是優化初始搜尋結果順序的重要工具。Reranker 與傳統的<a href="/docs/zh-hant/embeddings.md">嵌入模型</a>不同，它將查詢和文件作為輸入，並直接返回相似性分數，而不是嵌入。此分數表示輸入查詢與文件之間的相關性。</p>
-<p>Reranker 通常在第一階段的檢索之後使用，通常是透過向量近似近鄰 (ANN) 技術完成。雖然 ANN 搜尋能夠有效率地取得廣泛的潛在相關結果集，但它們不一定會依據實際語意與查詢的接近程度來排列結果的優先順序。在此，reerankers 使用更深入的上下文分析來優化結果順序，通常會利用先進的機器學習模型，例如 BERT 或其他以 Transformer 為基礎的模型。如此一來，rerankers 就能大幅提升呈現給使用者的最終結果的準確性與相關性。</p>
+<p>Reranker 通常在第一階段的檢索之後使用，通常是透過向量近似近鄰 (ANN) 技術完成。雖然 ANN 搜尋能夠有效率地取得廣泛的潛在相關結果集，但它們不一定會依據與查詢的實際語意親近程度來排列結果的優先順序。在此，reerankers 會使用更深入的情境分析來優化結果順序，通常會利用先進的機器學習模型，例如 BERT 或其他以 Transformer 為基礎的模型。如此一來，rerankers 就能大幅提升呈現給使用者的最終結果的準確性與相關性。</p>
 <p>PyMilvus 模型函式庫整合了 rerank 功能，以最佳化初始搜尋所返回結果的順序。當您從 Milvus 擷取最接近的 embedings 之後，您可以利用這些 reranking 工具來優化搜尋結果，以提高搜尋結果的精確度。</p>
 <table>
 <thead>
@@ -37,7 +37,7 @@ title: 重排器概述
 <div class="alert note">
 <ul>
 <li><p>使用開放原始碼的 reranker 之前，請確認已下載並安裝所有必要的相依性與模型。</p></li>
-<li><p>對於以 API 為基礎的 rerankers，請向提供者取得 API 金鑰，並將其設定在適當的環境變數或參數中。</p></li>
+<li><p>對於以 API 為基礎的 reranker，請向提供者取得 API 金鑰，並將其設定在適當的環境變數或參數中。</p></li>
 </ul>
 </div>
 <h2 id="Example-1-Use-BGE-rerank-function-to-rerank-documents-according-to-a-query" class="common-anchor-header">範例 1：使用 BGE rerank 函式根據查詢對文件進行排序<button data-href="#Example-1-Use-BGE-rerank-function-to-rerank-documents-according-to-a-query" class="anchor-icon" translate="no">
@@ -113,10 +113,25 @@ bge_rf(query, documents)
 <p><strong>資料集元件</strong>：</p>
 <ul>
 <li><code translate="no">doc_id</code>:每個文件的唯一識別碼。</li>
-<li><code translate="no">doc_vector</code>:代表文件的向量嵌入。關於產生內嵌的指引，請參閱<a href="/docs/zh-hant/embeddings.md">Embeddings</a>。</li>
+<li><code translate="no">doc_vector</code>:代表文件的向量嵌入。關於產生嵌入的指引，請參閱<a href="/docs/zh-hant/embeddings.md">Embeddings</a>。</li>
 <li><code translate="no">doc_text</code>:文件的文字內容。</li>
 </ul>
-<h3 id="Preparations" class="common-anchor-header">準備工作</h3><p>在啟動相似性搜尋之前，您需要與 Milvus 建立連線、建立資料集、準備資料並將資料插入該資料集中。下面的程式碼片段說明了這些初步步驟。</p>
+<h3 id="Preparations" class="common-anchor-header">準備工作<button data-href="#Preparations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在啟動相似性搜尋之前，您需要與 Milvus 建立連線、建立資料集、準備資料並將資料插入該資料集中。下面的程式碼片段說明了這些初步步驟。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -150,7 +165,22 @@ client.insert(collection_name=<span class="hljs-string">&quot;test_collection&qu
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># {&#x27;insert_count&#x27;: 4, &#x27;ids&#x27;: [0, 1, 2, 3]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Conduct-a-similarity-search" class="common-anchor-header">執行相似性搜尋</h3><p>插入資料後，使用<code translate="no">search</code> 方法執行相似性搜尋。</p>
+<h3 id="Conduct-a-similarity-search" class="common-anchor-header">執行相似性搜尋<button data-href="#Conduct-a-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>插入資料後，使用<code translate="no">search</code> 方法執行相似性搜尋。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># search results based on our query</span>
 
 res = client.search(
@@ -172,7 +202,22 @@ doc_text: In <span class="hljs-number">1950</span>, Alan Turing published his se
 distance: <span class="hljs-number">0.5340118408203125</span>
 doc_text: The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, <span class="hljs-keyword">and</span> Cliff Shaw <span class="hljs-keyword">in</span> <span class="hljs-number">1955</span> marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-a-reranker-to-enhance-search-results" class="common-anchor-header">使用 reranker 來強化搜尋結果</h3><p>然後，使用 reranking 步驟改善搜尋結果的相關性。在這個範例中，我們使用 PyMilvus 內建的<code translate="no">CrossEncoderRerankFunction</code> 來重新排列結果，以提高精確度。</p>
+<h3 id="Use-a-reranker-to-enhance-search-results" class="common-anchor-header">使用 reranker 來強化搜尋結果<button data-href="#Use-a-reranker-to-enhance-search-results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>然後，使用 reranking 步驟改善搜尋結果的相關性。在這個範例中，我們使用 PyMilvus 內建的<code translate="no">CrossEncoderRerankFunction</code> 來重新排列結果，以提高準確度。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># use reranker to rerank search results</span>
 
 <span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> CrossEncoderRerankFunction

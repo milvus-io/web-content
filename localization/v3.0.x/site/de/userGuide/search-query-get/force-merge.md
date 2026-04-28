@@ -40,7 +40,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md">Standardverdichtung</a> hält die Segmentgrößen durch die Zusammenführung von mehreren Segmenten in der Nähe der konfigurierten <code translate="no">maxSize</code>, aber es können immer noch mittelgroße Fragmente zurückbleiben, die nicht weiter zusammengeführt werden können, ohne die Grenzen zu überschreiten. Wenn eine Sammlung beispielsweise fünf 2-MB-Segmente hat und <code translate="no">maxSize</code> 3 MB beträgt, würde das Zusammenführen von zwei beliebigen Segmenten den Grenzwert überschreiten, sodass die Standardkompaktierung die Segmentanzahl nicht weiter reduzieren kann und das fragmentierte Layout bestehen bleibt.</p>
+    </button></h2><p>Die <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md">Standardverdichtung</a> hält die Segmentgrößen durch die Zusammenführung von mehreren Segmenten in der Nähe der konfigurierten <code translate="no">maxSize</code>, aber es können immer noch mittelgroße Fragmente zurückbleiben, die nicht weiter zusammengeführt werden können, ohne die Grenzen zu überschreiten. Wenn eine Sammlung beispielsweise aus fünf 2-MB-Segmenten besteht und <code translate="no">maxSize</code> 3 MB beträgt, würde das Zusammenführen von zwei beliebigen Segmenten den Grenzwert überschreiten, so dass die Standardkompaktierung die Segmentanzahl nicht weiter reduzieren kann und das fragmentierte Layout bestehen bleibt.</p>
 <p>Force merge fügt einen <code translate="no">target_size</code> Parameter hinzu und unterstützt die Reorganisation von Segmenten in Richtung der gewünschten Größe innerhalb einer engen Toleranz, wenn möglich. Wenn die angegebene <code translate="no">target_size</code> 4 MB beträgt, können die fünf kleinen 2 MB-Segmente in weniger größere Segmente zusammengeführt werden (siehe unten). Auf diese Weise wird die Anzahl der überzähligen Segmente reduziert, es werden Ziele unterstützt, die größer sind als die Standardeinstellungen von <code translate="no">maxSize</code>, und wenn das Ziel sehr groß ist, kann das System eine praktische Ausgabegröße und Segmentanzahl für die aktuelle Hardware und QueryNode-Topologie wählen.</p>
 <p>Um zu verstehen, welche Verdichtungsmethode zu verwenden ist, siehe <a href="#faq">FAQ</a>.</p>
 <p>
@@ -201,6 +201,7 @@ job_id = client.compact(
     target_size=max_int64
 )
 <button class="copy-code-btn"></button></code></pre>
+<p><a id="parameter-reference"></a></p>
 <h4 id="Parameter-reference" class="common-anchor-header">Parameter-Referenz</h4><p>In der folgenden Tabelle werden die Parameter erläutert.</p>
 <table>
    <tr>
@@ -263,6 +264,7 @@ state = client.get_compaction_state(job_id)
 <li><p><strong>Berücksichtigen Sie den Kompromiss bei der Leistung.</strong> Force Merge Verdichtung ist ein ressourcenintensiver Vorgang. Es werden Segmentdaten gelesen, zusammengeführt und neu geschrieben. Planen Sie ihn in Zeiten mit geringem Datenverkehr, um die Auswirkungen auf die Abfragelatenz zu minimieren.</p></li>
 <li><p><strong>Überwachen Sie die Segmentanzahl vorher und nachher.</strong> Verwenden Sie <code translate="no">get_compaction_state()</code> und <code translate="no">list_persistent_segments</code>, um zu überprüfen, ob die Verdichtung wie erwartet weniger und größere Segmente erzeugt hat.</p></li>
 </ul>
+<p><a id="faq"></a></p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -282,7 +284,7 @@ state = client.get_compaction_state(job_id)
 <p>Diese beiden Arten von Verdichtungsoperationen dienen unterschiedlichen Zwecken.</p>
 <ul>
 <li><p>Bei der Standardverdichtung (targetSize=0 oder weggelassen) handelt es sich um einen inkrementellen Bereinigungspfad nach bestem Wissen und Gewissen.</p></li>
-<li><p>Zusammenführen erzwingen (targetSize&gt;0) ist ein Umpackungspfad auf Sammlungsebene, um weniger, größere, zielnahe Segmente zu erzeugen.</p></li>
+<li><p>Die erzwungene Zusammenführung (targetSize&gt;0) ist ein Umpackungspfad auf Sammlungsebene, der weniger, größere und zielnahe Segmente erzeugt.</p></li>
 </ul>
 <p>Der Hauptunterschied ist die Form der Zusammenführung: Die Standardverdichtung ist effektiv m → 1 pro Aufgabe, während die erzwungene Zusammenführung m → n über gruppierte Eingaben ist. Aus diesem Grund kann die erzwungene Zusammenführung Segment-Layouts lösen, die mit der Standardverdichtung nicht möglich sind. In der folgenden Tabelle werden die beiden Arten von Operationen miteinander verglichen.</p>
 <table>

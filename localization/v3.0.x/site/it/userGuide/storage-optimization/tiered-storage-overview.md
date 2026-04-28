@@ -27,11 +27,11 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>In Milvus, la modalità tradizionale <em>full-load</em> richiede che ogni QueryNode carichi tutti i campi dati e gli indici di un <a href="/docs/it/glossary.md#Segment">segmento</a> al momento dell'inizializzazione, anche quelli a cui non si accede mai. Questo garantisce la disponibilità immediata dei dati, ma spesso comporta uno spreco di risorse, tra cui un elevato utilizzo della memoria, un'intensa attività su disco e un significativo overhead di I/O, soprattutto quando si gestiscono insiemi di dati di grandi dimensioni.</p>
-<p>Lo<em>storage a livelli</em> affronta questa sfida disaccoppiando la cache dei dati dal caricamento dei segmenti. Invece di caricare tutti i dati in una sola volta, il QueryNode carica inizialmente solo <em>metadati</em> leggeri e preleva o elimina dinamicamente i dati del campo su richiesta. Questo riduce significativamente i tempi di caricamento, ottimizza l'utilizzo delle risorse locali e consente ai QueryNode di elaborare set di dati che superano di gran lunga la loro memoria fisica o la capacità del disco.</p>
+<p>Lo<em>storage a livelli</em> affronta questa sfida disaccoppiando la cache dei dati dal caricamento dei segmenti. Invece di caricare tutti i dati in una sola volta, il QueryNode carica inizialmente solo i <em>metadati</em> leggeri e preleva o elimina dinamicamente i dati del campo su richiesta. Questo riduce significativamente il tempo di caricamento, ottimizza l'utilizzo delle risorse locali e consente ai QueryNode di elaborare set di dati che superano di gran lunga la loro memoria fisica o la capacità del disco.</p>
 <p>Considerate la possibilità di attivare l'archiviazione a livelli in scenari quali:</p>
 <ul>
 <li><p>Collezioni che superano la memoria disponibile o la capacità NVMe di un singolo QueryNode</p></li>
-<li><p>Carichi di lavoro analitici o batch in cui la velocità di caricamento è più importante della latenza della prima interrogazione.</p></li>
+<li><p>Carichi di lavoro analitici o batch in cui la rapidità di caricamento è più importante della latenza di prima interrogazione</p></li>
 <li><p>Carichi di lavoro misti che possono tollerare occasionali mancanze della cache per i dati a cui si accede meno frequentemente.</p></li>
 </ul>
 <div class="alert note">
@@ -103,7 +103,7 @@ beta: Milvus 2.6.4+
    </span> <span class="img-wrapper"> <span>Flusso di lavoro del caricamento del querynode</span> </span></p>
 <h4 id="Phase-1-Lazy-load" class="common-anchor-header">Fase 1: Caricamento pigro</h4><p>All'inizializzazione, Milvus esegue un caricamento pigro, mettendo in cache solo i metadati a livello di segmento, come le definizioni di schema, le informazioni sugli indici e le mappature dei chunk.</p>
 <p>In questa fase non vengono memorizzati nella cache i dati dei campi o i file degli indici. Questo permette alle collezioni di diventare interrogabili quasi immediatamente dopo l'avvio, mantenendo il consumo di memoria e di disco al minimo.</p>
-<p>Poiché i dati di campo e i file di indice rimangono nello storage remoto fino al primo accesso, la <em>prima query</em> può presentare una latenza aggiuntiva, poiché i dati necessari devono essere recuperati su richiesta. Per mitigare questo effetto per i campi o gli indici critici, è possibile utilizzare la strategia <a href="/docs/it/tiered-storage-overview.md#Phase-2-Warm-up">Warm Up</a> per precaricarli in modo proattivo prima che il segmento diventi interrogabile.</p>
+<p>Poiché i dati di campo e i file di indice rimangono nello storage remoto fino al primo accesso, la <em>prima query</em> può presentare una latenza aggiuntiva, poiché i dati necessari devono essere recuperati su richiesta. Per attenuare questo effetto per i campi o gli indici critici, è possibile utilizzare la strategia <a href="/docs/it/tiered-storage-overview.md#Phase-2-Warm-up">Warm Up</a> per precaricarli in modo proattivo prima che il segmento diventi interrogabile.</p>
 <p><strong>Configurazione</strong></p>
 <p>Si applica automaticamente quando si abilita l'archiviazione a livelli. Non è necessaria alcuna impostazione manuale.</p>
 <h4 id="Phase-2-Warm-up" class="common-anchor-header">Fase 2: riscaldamento</h4><p>Per ridurre la latenza di primo impatto introdotta dal <a href="/docs/it/tiered-storage-overview.md#Phase-1-Lazy-load">caricamento pigro</a>, Milvus offre un meccanismo di <em>riscaldamento</em>.</p>
@@ -129,7 +129,7 @@ beta: Milvus 2.6.4+
 <p>Lo svuotamento è regolato dai seguenti elementi configurabili:</p>
 <ul>
 <li><p><strong>Filigrane</strong>: Definizione di soglie di memoria o di disco che attivano e interrompono lo svuotamento.</p></li>
-<li><p><strong>TTL della cache</strong>: rimuove i dati stantii presenti nella cache dopo una durata definita di inattività.</p></li>
+<li><p><strong>TTL della cache</strong>: rimuove i dati stantii presenti nella cache dopo un determinato periodo di inattività.</p></li>
 </ul>
 <p><strong>Configurazione</strong></p>
 <p>Abilitare e sintonizzare i parametri di eviction in <strong>milvus.yaml</strong>. Per una configurazione dettagliata, vedere <a href="/docs/it/eviction.md">Eviction</a>.</p>

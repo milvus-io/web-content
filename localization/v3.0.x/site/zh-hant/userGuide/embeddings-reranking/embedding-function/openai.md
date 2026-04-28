@@ -62,7 +62,7 @@ beta: Milvus 2.6.x
      <td><p>前一代模型適合傳統管道或需要向後相容性的情況。</p></td>
    </tr>
 </table>
-<p>第三代嵌入模型<strong>(text-embedding-3</strong>) 支援透過<code translate="no">dim</code> 參數減少嵌入的大小。從運算、記憶體和儲存的角度來看，較大的嵌入通常較昂貴。能夠調整維度的數量，就能更有效地控制整體成本和效能。有關每個模型的詳細資訊，請參閱<a href="https://platform.openai.com/docs/guides/embeddings#embedding-models">嵌入模型</a>與<a href="https://openai.com/blog/new-embedding-models-and-api-updates">OpenAI 公告部落格文章</a>。</p>
+<p>第三代嵌入模型<strong>(text-embedding-3</strong>) 支援透過<code translate="no">dim</code> 參數減少嵌入的大小。一般而言，從運算、記憶體和儲存的角度來看，較大的嵌入會比較昂貴。能夠調整維度的數量，可以更有效地控制整體成本和效能。有關每個模型的詳細資訊，請參閱<a href="https://platform.openai.com/docs/guides/embeddings#embedding-models">嵌入模型</a>與<a href="https://openai.com/blog/new-embedding-models-and-api-updates">OpenAI 公告部落格文章</a>。</p>
 <h2 id="Configure-credentials" class="common-anchor-header">配置憑證<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -104,7 +104,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h3><p>將您的 API 金鑰保留在<code translate="no">milvus.yaml</code> ；Milvus 會在啟動時讀取它們，並覆寫相同提供者的任何環境變數。</p>
 <ol>
-<li><p>**在下列位置宣告您的金鑰<code translate="no">credential:</code></p>
+<li><p>**在以下位置宣告您的金鑰<code translate="no">credential:</code></p>
 <p>您可以列出一個或多個 API 金鑰 - 給每個金鑰一個您自創的標籤，稍後可以參考。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
@@ -151,7 +151,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p><code translate="no">MILVUSAI_OPENAI_API_KEY</code></p></td>
      <td><p>是</p></td>
-     <td><p>讓每個 Milvus 容器都可以使用 OpenAI 的金鑰<em>(當<code translate="no">milvus.yaml</code> 有 OpenAI 的金鑰時忽略</em>)</p></td>
+     <td><p>讓每個 Milvus 容器都可以使用 OpenAI 金鑰<em>(當<code translate="no">milvus.yaml</code> 有 OpenAI 金鑰時忽略</em>)</p></td>
    </tr>
 </table>
 <p>在你的<strong>docker-compose.yaml</strong>檔案中，設定<code translate="no">MILVUSAI_OPENAI_API_KEY</code> 環境變數。</p>

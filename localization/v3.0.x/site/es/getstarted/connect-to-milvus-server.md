@@ -228,7 +228,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
 <div class="alert note">
 <ul>
 <li><p>Para los SDK enumerados anteriormente, este tiempo de espera sólo se utiliza al establecer conexiones y no sirve como tiempo de espera predeterminado para otras operaciones de la API.</p></li>
-<li><p>Para la API RESTful, <code translate="no">Request-Timeout</code> es un plazo por solicitud en segundos (a diferencia de <code translate="no">rpcDeadlineMs</code> de Java y <code translate="no">timeout</code> de Node.js , que están en milisegundos), así que inclúyalo en cada llamada que necesite un plazo.</p></li>
+<li><p>Para la API RESTful, <code translate="no">Request-Timeout</code> es un plazo por petición en segundos (a diferencia de <code translate="no">rpcDeadlineMs</code> de Java y <code translate="no">timeout</code> de Node.js , que están en milisegundos), así que inclúyalo en cada llamada que necesite un plazo.</p></li>
 </ul>
 </div>
 <h2 id="Connect-to-a-specific-database" class="common-anchor-header">Conectarse a una base de datos específica<button data-href="#Connect-to-a-specific-database" class="anchor-icon" translate="no">

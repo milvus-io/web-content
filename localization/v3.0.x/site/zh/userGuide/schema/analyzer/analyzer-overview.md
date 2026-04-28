@@ -45,8 +45,8 @@ summary: >-
       </svg>
     </button></h2><p>Milvus 的分析器由一个<strong>标记化器</strong>和<strong>零个或多个</strong>过滤器组成。</p>
 <ul>
-<li><p><strong>标记化器</strong>：标记器将输入文本分解为称为标记的离散单元。根据标记符类型的不同，这些标记符可以是单词或短语。</p></li>
-<li><p><strong>过滤器</strong>：可以对标记符进行过滤，进一步细化标记符，例如，将标记符变成小写或删除常用词。</p></li>
+<li><p><strong>标记化器</strong>：标记化器将输入文本分解为称为标记的离散单元。根据标记符类型的不同，这些标记符可以是单词或短语。</p></li>
+<li><p><strong>过滤器</strong>：可以对标记符进行过滤，进一步细化标记符，例如，使其小写或删除常用词。</p></li>
 </ul>
 <div class="alert note">
 <p>标记符仅支持 UTF-8 格式。未来版本将增加对其他格式的支持。</p>
@@ -54,7 +54,7 @@ summary: >-
 <p>下面的工作流程显示了分析器如何处理文本。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/analyzer-process-workflow.png" alt="Analyzer Process Workflow" class="doc-image" id="analyzer-process-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/analyzer-process-workflow.png" alt="Analyzer Process Workflow" class="doc-image" id="analyzer-process-workflow" />
    </span> <span class="img-wrapper"> <span>分析器处理工作流程</span> </span></p>
 <h2 id="Analyzer-types" class="common-anchor-header">分析器类型<button data-href="#Analyzer-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,8 +73,8 @@ summary: >-
       </svg>
     </button></h2><p>Milvus 提供两种类型的分析器，以满足不同的文本处理需求：</p>
 <ul>
-<li><p><strong>内置分析器</strong>：这些是预定义配置，只需最少的设置即可完成常见的文本处理任务。内置分析器不需要复杂的配置，是通用搜索的理想选择。</p></li>
-<li><p><strong>自定义分析器</strong>：对于更高级的需求，自定义分析器允许你通过指定标记器和零个或多个过滤器来定义自己的配置。这种自定义级别对于需要精确控制文本处理的特殊用例尤其有用。</p></li>
+<li><p><strong>内置分析器</strong>：这些是预定义配置，只需最少的设置即可完成常见的文本处理任务。内置分析器无需复杂配置，是通用搜索的理想选择。</p></li>
+<li><p><strong>自定义分析器</strong>：对于更高级的要求，自定义分析器允许你通过指定标记器和零个或多个过滤器来定义自己的配置。这种自定义级别对于需要精确控制文本处理的特殊用例尤其有用。</p></li>
 </ul>
 <div class="alert note">
 <ul>
@@ -82,7 +82,22 @@ summary: >-
 <li>为获得最佳搜索和查询性能，请选择与文本数据语言相匹配的分析器。例如，虽然<code translate="no">standard</code> 分析器用途广泛，但对于具有独特语法结构的语言（如中文、日文或韩文）来说，它可能不是最佳选择。在这种情况下，使用特定语言的分析器，如 <a href="/docs/zh/chinese-analyzer.md"><code translate="no">chinese</code></a>或带有专门标记符号化器的自定义分析器（如 <a href="/docs/zh/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/zh/icu-tokenizer.md"><code translate="no">icu</code></a>）和过滤器的定制分析器，以确保准确的标记化和更好的搜索结果。</li>
 </ul>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">内置分析器</h3><p>Milvus 的内置分析器预先配置了特定的标记化器和过滤器，使您可以立即使用，而无需自己定义这些组件。每个内置分析器都是一个模板，包括预设的标记器和过滤器，以及用于自定义的可选参数。</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">内置分析器<button data-href="#Built-in-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 的内置分析器预先配置了特定的标记化器和过滤器，使您可以立即使用，而无需自己定义这些组件。每个内置分析器都是一个模板，包括预设的标记器和过滤器，以及用于自定义的可选参数。</p>
 <p>例如，要使用<code translate="no">standard</code> 内置分析器，只需将其名称<code translate="no">standard</code> 指定为<code translate="no">type</code> ，并可选择包含该分析器类型特有的额外配置，如<code translate="no">stop_words</code> ：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -222,7 +237,22 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <li><p><code translate="no">english</code>:针对英语文本进行了优化，支持英语停止词。</p></li>
 <li><p><code translate="no">chinese</code>:专门用于处理中文文本，包括针对中文语言结构的标记化。</p></li>
 </ul>
-<h3 id="Custom-analyzer" class="common-anchor-header">自定义分析器</h3><p>对于更高级的文本处理，Milvus 中的自定义分析器允许您通过指定<strong>标记化器</strong>和<strong>过滤器</strong>来构建定制的文本处理管道。这种设置非常适合需要精确控制的特殊用例。</p>
+<h3 id="Custom-analyzer" class="common-anchor-header">自定义分析器<button data-href="#Custom-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>对于更高级的文本处理，Milvus 中的自定义分析器允许您通过指定<strong>标记符号化器</strong>和<strong>过滤器</strong>来建立一个定制的文本处理管道。这种设置非常适合需要精确控制的特殊用例。</p>
 <h4 id="Tokenizer" class="common-anchor-header">标记器</h4><p><strong>标记化器</strong>是自定义分析器的<strong>必备</strong>组件，它通过将输入文本分解为离散单元或<strong>标记来</strong>启动分析器管道。标记化遵循特定的规则，例如根据标记化器的类型用空白或标点符号分割。这一过程可以更精确、更独立地处理每个单词或短语。</p>
 <p>例如，标记化器会将文本<code translate="no">&quot;Vector Database Built for Scale&quot;</code> 转换为单独的标记：</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
@@ -247,7 +277,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Filter" class="common-anchor-header">过滤器</h4><p><strong>过滤器</strong>是<strong>可选</strong>组件，用于处理标记化器生成的标记，并根据需要对其进行转换或细化。例如，在对标记化术语<code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> 应用<code translate="no">lowercase</code> 过滤器后，结果可能是：</p>
+<h4 id="Filter" class="common-anchor-header">过滤器</h4><p><strong>过滤器</strong>是<strong>可选</strong>组件，用于处理标记化器生成的标记，根据需要对其进行转换或细化。例如，在对标记化术语<code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> 应用<code translate="no">lowercase</code> 过滤器后，结果可能是：</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p>自定义分析器中的过滤器可以是<strong>内置的</strong>，也可以是<strong>自定义的</strong>，具体取决于配置需求。</p>
@@ -364,7 +394,22 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 </ul></li>
 </ul>
 <p>在将这些配置并入 Collections 之前，你将使用<code translate="no">run_analyzer</code> 方法验证每个分析器。</p>
-<h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">步骤 1：初始化 MilvusClient 并创建 Schema</h3><p>首先设置 Milvus 客户端并创建新模式。</p>
+<h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">步骤 1：初始化 MilvusClient 并创建 Schema<button data-href="#Step-1-Initialize-MilvusClient-and-create-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>首先设置 Milvus 客户端并创建新模式。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -424,7 +469,22 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">第 2 步：定义并验证分析器配置</h3><ol>
+<h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">第 2 步：定义并验证分析器配置<button data-href="#Step-2-Define-and-verify-analyzer-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li><p><strong>配置并验证内置分析器</strong>(<code translate="no">english</code>)<strong>：</strong></p>
 <ul>
 <li><p><strong>配置：</strong>为内置英文分析器定义分析器参数。</p></li>
@@ -591,7 +651,22 @@ result, err := client.RunAnalyzer(ctx, option)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">第 3 步：向 Schema 添加字段</h3><p>验证分析器配置后，将其添加到 Schema 字段中：</p>
+<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">第 3 步：向 Schema 添加字段<button data-href="#Step-3-Add-fields-to-the-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>验证分析器配置后，将其添加到 Schema 字段中：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add VARCHAR field &#x27;title_en&#x27; using the built-in analyzer configuration</span>
@@ -696,7 +771,22 @@ schema.addField(AddFieldReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">第 4 步：准备索引参数并创建 Collections</h3><div class="multipleCode">
+<h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">第 4 步：准备索引参数并创建 Collections<button data-href="#Step-4-Prepare-index-parameters-and-create-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up index parameters for the vector field</span>
 index_params = client.prepare_index_params()
@@ -771,7 +861,7 @@ err = client.CreateCollection(ctx,
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>配置分析器后，您可以集成 Milvus 提供的文本检索功能。详情请看</p>
+    </button></h2><p>配置分析器后，您就可以集成 Milvus 提供的文本检索功能。详情请看</p>
 <ul>
 <li><p><a href="/docs/zh/full-text-search.md">全文检索</a></p></li>
 <li><p><a href="/docs/zh/keyword-match.md">文本匹配</a></p></li>

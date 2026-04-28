@@ -93,7 +93,7 @@ title: 设定收集数量限制
 <p>例如，假设您已经创建了<strong>100 个</strong>Collection，其中<strong>60 个</strong>Collection 有<strong>2</strong>个分块和<strong>4 个</strong>分区，其余<strong>40 个</strong>Collection 有<strong>1 个</strong>分块和<strong>12 个</strong>分区。收集单元总数（计算公式为<code translate="no">shards × partitions</code> ）可按如下方式确定：</p>
 <pre><code translate="no">60 (collections) x 2 (shards) x 4 (partitions) + 40 (collections) x 1 (shard) x 12 (partitions) = 960
 <button class="copy-code-btn"></button></code></pre>
-<p>在本例中，计算出的 960 个 Collections 单元总数代表了当前的使用情况。<code translate="no">maxGeneralCapacity</code> 定义了实例可支持的最大 Collections 单位数，默认设置为<code translate="no">65536</code> 。这意味着实例最多可容纳 65,536 个 Collections 单元。如果总数超过此限制，系统将显示以下错误信息：</p>
+<p>在本例中，计算得出的 960 个 Collections 单元总数代表了当前的使用情况。<code translate="no">maxGeneralCapacity</code> 定义了实例可支持的最大 Collections 单位数，默认设置为<code translate="no">65536</code> 。这意味着实例最多可容纳 65,536 个 Collections 单元。如果总数超过此限制，系统将显示以下错误信息：</p>
 <pre><code translate="no" class="language-shell">failed checking constraint: sum_collections(parition*shard) exceeding the max general capacity:
 <button class="copy-code-btn"></button></code></pre>
 <p>为避免出现此错误，可以减少现有或新收集中的分片或分区数量，删除某些收集，或通过同时修改<code translate="no">maxGeneralCapacity</code> 、<code translate="no">maxCollectionNum</code> 和<code translate="no">maxCollectionNumPerDB</code> 来增加收集限制。</p>

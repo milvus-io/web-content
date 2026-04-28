@@ -75,7 +75,7 @@ Creating milvus-standalone ... done
 </ul>
 <p>请务必下载最新的 Docker Compose 配置，以确保与 v2.6.15 功能兼容。</p>
 <ul>
-<li><p>如果运行上述命令失败，请检查您的系统是否已安装 Docker Compose V1。如果是这种情况，建议您根据<a href="https://docs.docker.com/compose/">本页面</a>的说明迁移到 Docker Compose V2。</p></li>
+<li><p>如果运行上述命令失败，请检查您的系统是否安装了 Docker Compose V1。如果是这种情况，建议您根据<a href="https://docs.docker.com/compose/">本页面</a>的说明迁移到 Docker Compose V2。</p></li>
 <li><p>如果您在拉取镜像时遇到任何问题，请通过<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，并提供有关问题的详细信息，我们将为您提供必要的支持。</p></li>
 </ul>
 </div>

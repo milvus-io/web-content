@@ -52,7 +52,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>HNSW 构建了一个多层图，其中每个节点都对应数据集中的一个向量。在这个图中，节点根据其相似性进行连接，从而实现数据空间的快速遍历。分层结构允许搜索算法缩小候选邻居的范围，从而大大加快了高维空间的搜索过程。</p>
+    </button></h3><p>HNSW 构建了一个多层图，其中每个节点都对应数据集中的一个向量。在该图中，节点根据其相似性进行连接，从而实现在数据空间中的快速遍历。分层结构允许搜索算法缩小候选邻居的范围，从而大大加快了高维空间的搜索过程。</p>
 <p>更多信息，请参阅<a href="/docs/zh/hnsw.md">HNSW</a>。</p>
 <h3 id="PQ" class="common-anchor-header">PQ<button data-href="#PQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,12 +90,12 @@ summary: >-
 <ol>
 <li><p><strong>数据压缩</strong>：PQ 会将每个向量分割成多个子向量，并使用中心编码本对其进行量化，中心编码本由<code translate="no">m</code> （子向量数）和<code translate="no">nbits</code> （每个子向量的比特数）等参数控制。</p></li>
 <li><p><strong>图形构建</strong>：压缩后的向量将用于构建 HNSW 图。由于向量是以压缩的形式存储的，因此生成的图通常更小，所需的内存更少，遍历速度更快，从而大大加快了候选检索步骤。</p></li>
-<li><p><strong>候选检索</strong>：当执行查询时，算法会使用 HNSW 图中的压缩数据来有效地识别候选邻居池。这种基于图的查找大大减少了必须考虑的向量数量，与暴力搜索相比，提高了查询延迟。</p></li>
+<li><p><strong>候选检索</strong>：当执行查询时，算法会使用 HNSW 图中的压缩数据来高效地识别候选邻居池。这种基于图的查找大大减少了必须考虑的向量数量，与暴力搜索相比，提高了查询延迟。</p></li>
 <li><p><strong>(可选）结果完善</strong>：可根据以下参数对初始候选结果进行细化，以提高准确性：</p>
 <ul>
 <li><p><code translate="no">refine</code>:控制是否激活该细化步骤。当设置为<code translate="no">true</code> 时，系统会使用更高精度或非压缩表示法重新计算距离。</p></li>
 <li><p><code translate="no">refine_type</code>:指定细化过程中使用的数据精度级别（如 SQ6、SQ8、BF16）。选择更高精度的数据，如<code translate="no">FP32</code> ，可以得到更精确的结果，但需要更多内存。这必须比原始压缩数据集的精度高<code translate="no">sq_type</code> 。</p></li>
-<li><p><code translate="no">refine_k</code>:放大系数。例如，如果您的前<em>k</em>值是 100，而<code translate="no">refine_k</code> 是 2，系统就会对前 200 个候选项重新排序，并返回最好的 100 个，从而提高整体准确性。</p></li>
+<li><p><code translate="no">refine_k</code>:放大系数。例如，如果您的前<em>k</em>值为 100，而<code translate="no">refine_k</code> 为 2，系统会对前 200 个候选项重新排序，并返回最佳的 100 个，从而提高整体准确性。</p></li>
 </ul></li>
 </ol>
 <p>有关参数和有效值的完整列表，请参阅<a href="/docs/zh/hnsw-sq.md#Index-params">索引参数</a>。</p>
@@ -260,7 +260,7 @@ res = MilvusClient.search(
      <td><p>布尔标志，用于控制搜索过程中是否应用细化步骤。细化包括通过计算查询向量和候选向量之间的精确距离，对初始结果进行重新排序。</p></td>
      <td><p><strong>类型</strong>：布尔布尔<strong>范围</strong>：[<code translate="no">true</code>,<code translate="no">false</code>]</p>
 <p><strong>默认值</strong>：<code translate="no">false</code></p></td>
-     <td><p>如果需要高精确度，并且可以忍受稍慢的搜索时间，则设置为<code translate="no">true</code> 。如果速度是首要考虑因素，并且可以接受在精确度上稍有妥协，则使用<code translate="no">false</code> 。</p></td>
+     <td><p>如果需要高精确度，并且可以忍受稍慢的搜索时间，则设置为<code translate="no">true</code> 。如果速度是首要考虑因素，并且可以接受在精确度上略有妥协，则使用<code translate="no">false</code> 。</p></td>
    </tr>
    <tr>
      <td></td>

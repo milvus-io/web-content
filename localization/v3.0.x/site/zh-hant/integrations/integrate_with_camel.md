@@ -23,7 +23,7 @@ title: 使用 Milvus 和 Camel 的檢索-擴充世代 (RAG)
 <p>本指南展示了如何使用 CAMEL 和 Milvus 建立一個檢索-增強生成 (RAG) 系統。</p>
 <p>RAG 系統結合了檢索系統與生成模型，可根據給定的提示生成新的文字。該系統首先使用 Milvus 從語料庫中檢索相關文件，然後根據檢索到的文件使用生成模型生成新文本。</p>
 <p><a href="https://www.camel-ai.org/">CAMEL</a>是一個多重代理框架。<a href="https://milvus.io/">Milvus</a>是世界上最先進的開放原始碼向量資料庫，專門用於嵌入相似性搜尋和人工智能應用程式。</p>
-<p>在本筆記簿中，我們展示了 CAMEL Retrieve 模組在自訂和自動兩種方式中的用法。我們也將展示如何結合<code translate="no">AutoRetriever</code> 與<code translate="no">ChatAgent</code> ，並透過<code translate="no">Function Calling</code> 進一步結合<code translate="no">AutoRetriever</code> 與<code translate="no">RolePlaying</code> 。</p>
+<p>在本筆記簿中，我們展示了 CAMEL Retrieve 模組在自訂方式和自動方式中的使用。我們也將展示如何結合<code translate="no">AutoRetriever</code> 與<code translate="no">ChatAgent</code> ，並透過<code translate="no">Function Calling</code> 進一步結合<code translate="no">AutoRetriever</code> 與<code translate="no">RolePlaying</code> 。</p>
 <p>包括四個主要部分：</p>
 <ul>
 <li>自訂 RAG</li>

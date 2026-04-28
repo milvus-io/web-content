@@ -26,7 +26,7 @@ title: MilvusとFireworks AIでRAGを構築する
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_fireworks.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://fireworks.ai/">Fireworks AIは</a>、生成AI推論プラットフォームであり、業界をリードするスピードと、モデルの実行とカスタマイズのためのプロダクションレディネスを提供します。 Fireworks AIは、サーバーレスモデル、オンデマンドデプロイメント、微調整機能を含む、様々な生成AIサービスを提供します。大規模言語モデル（LLM）やエンベッディングモデルなど、さまざまなAIモデルをデプロイするための包括的な環境を提供する。Fireworks AIは多数のモデルを集約しているため、ユーザーは大規模なインフラストラクチャのセットアップを行うことなく、これらのリソースに簡単にアクセスして利用することができます。</p>
+<p><a href="https://fireworks.ai/">Fireworks AIは</a>、生成AI推論プラットフォームであり、業界をリードするスピードと、モデルの実行とカスタマイズのためのプロダクションレディネスを提供します。 Fireworks AIは、サーバーレスモデル、オンデマンドデプロイメント、微調整機能を含む、様々な生成AIサービスを提供します。大規模言語モデル（LLM）やエンベッディングモデルなど、さまざまなAIモデルをデプロイするための包括的な環境を提供する。Fireworks AIは多数のモデルを集約しているため、ユーザーは大規模なインフラを構築することなく、これらのリソースに簡単にアクセスして利用することができます。</p>
 <p>このチュートリアルでは、MilvusとFireworks AIを使ったRAG（Retrieval-Augmented Generation）パイプラインの構築方法をご紹介します。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -181,7 +181,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <p><code translate="no">MilvusClient</code> の引数については、次のとおりです：</p>
 <ul>
 <li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> とするのが最も便利な方法です。</li>
-<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、<code translate="no">http://localhost:19530</code> などのサーバ uri を<code translate="no">uri</code> として使用してください。</li>
+<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>
@@ -214,7 +214,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
         ></path>
       </svg>
     </button></h3><p>テキスト行を繰り返し、エンベッディングを作成し、milvusにデータを挿入します。</p>
-<p>ここに新しいフィールド<code translate="no">text</code> 、コレクションスキーマで定義されていないフィールドです。これは、予約されたJSONダイナミックフィールドに自動的に追加され、高レベルでは通常のフィールドとして扱うことができます。</p>
+<p>ここに新しいフィールド<code translate="no">text</code> 、コレクションスキーマで定義されていないフィールドがあります。これは予約されたJSONダイナミックフィールドに自動的に追加され、高レベルでは通常のフィールドとして扱うことができる。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []

@@ -25,7 +25,7 @@ beta: Milvus 2.6.2+
 <p>JSON 파쇄는 대부분의 JSON 쿼리 시나리오에 효과적입니다. 성능 이점은 다음과 같은 경우에 더욱 두드러집니다:</p>
 <ul>
 <li><p>더<strong>크고 복잡한 JSON 문서</strong> - 문서 크기가 커질수록 성능이 크게 향상됩니다.</p></li>
-<li><p><strong>읽기가 많은 워크로드</strong> - JSON 키에 대한 필터링, 정렬 또는 검색이 잦은 경우</p></li>
+<li><p><strong>읽기가 많은 워크로드</strong> - JSON 키에 대한 필터링, 정렬 또는 검색이 빈번한 경우</p></li>
 <li><p><strong>혼합 쿼리 패턴</strong> - 서로 다른 JSON 키에 대한 쿼리는 하이브리드 스토리지 접근 방식의 이점을 누릴 수 있습니다.</p></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">작동 방식<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -158,7 +158,7 @@ beta: Milvus 2.6.2+
   <span class="hljs-attr">enabledJSONShredding:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Indicates whether to enable JSON key stats build and load processes</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>이 기능을 활성화하면 Milvus는 수집 즉시 별도의 수동 개입 없이 JSON 데이터를 분석하고 재구조화하기 시작합니다.</p>
+<p>이 기능을 활성화하면 Milvus는 수집 즉시 별도의 수동 개입 없이 JSON 데이터를 분석하고 재구성하기 시작합니다.</p>
 <h2 id="Parameter-tuning" class="common-anchor-header">매개변수 튜닝<button data-href="#Parameter-tuning" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -198,7 +198,7 @@ beta: Milvus 2.6.2+
      <td><p><code translate="no">queryNode.mmap.jsonShredding</code></p></td>
      <td><p>Milvus가 조각화된 데이터를 로드할 때 mmap을 사용할지 여부를 결정합니다.</p><p>자세한 내용은 <a href="/docs/ko/mmap.md">mmap 사용을</a> 참조하세요.</p></td>
      <td><p>true</p></td>
-     <td><p>이 설정은 일반적으로 성능에 최적화되어 있습니다. 시스템에 특정 메모리 관리가 필요하거나 제약이 있는 경우에만 조정하세요.</p></td>
+     <td><p>이 설정은 일반적으로 성능에 최적화되어 있습니다. 시스템에 특정 메모리 관리가 필요하거나 제약이 있는 경우에만 이 설정을 조정하세요.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.jsonShreddingMaxColumns</code></p></td>

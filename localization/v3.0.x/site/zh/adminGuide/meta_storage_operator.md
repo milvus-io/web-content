@@ -19,7 +19,7 @@ summary: 了解如何使用 Milvus Operator 配置元存储。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 使用 etcd 来存储元数据。本主题介绍如何在使用 Milvus Operator 安装 Milvus 时配置元存储依赖关系。有关详细信息，请参阅 Milvus Operator 存储库中的<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/meta-storage.md">配置 Milvus Operator 的元存储</a>。</p>
+    </button></h1><p>Milvus 使用 etcd 来存储元数据。本主题介绍如何在使用 Milvus Operator 安装 Milvus 时配置元存储依赖关系。有关详细信息，请参阅 Milvus Operator 存储库中的<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/meta-storage.md">使用 Milvus Operator 配置元存储</a>。</p>
 <p>本主题假设您已部署 Milvus Operator。</p>
 <div class="alert note">有关详细信息，请参阅<a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">部署 Milvus Operator</a>。 </div>
 <p>您需要指定使用 Milvus Operator 启动 Milvus 群集的配置文件。</p>
@@ -42,13 +42,28 @@ summary: 了解如何使用 Milvus Operator 配置元存储。
         ></path>
       </svg>
     </button></h2><p>在<code translate="no">spec.dependencies.etcd</code> 下添加配置 etcd 的必填字段。</p>
-<p><code translate="no">etcd</code> 支持 和 。<code translate="no">external</code> <code translate="no">inCluster</code></p>
+<p><code translate="no">etcd</code> 支持<code translate="no">external</code> 和<code translate="no">inCluster</code> 。</p>
 <p>用于配置外部 etcd 服务的字段包括</p>
 <ul>
 <li><code translate="no">external</code>:<code translate="no">true</code> 值表示 Milvus 使用外部 etcd 服务。</li>
 <li><code translate="no">endpoints</code>:etcd 的端点。</li>
 </ul>
-<h3 id="External-etcd" class="common-anchor-header">外部 etcd</h3><h4 id="Example" class="common-anchor-header">示例</h4><p>下面的示例配置了外部 etcd 服务。</p>
+<h3 id="External-etcd" class="common-anchor-header">外部 etcd<button data-href="#External-etcd" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example" class="common-anchor-header">示例</h4><p>下面的示例配置了外部 etcd 服务。</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
   <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
@@ -66,7 +81,22 @@ summary: 了解如何使用 Milvus Operator 配置元存储。
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Internal-etcd" class="common-anchor-header">内部 etcd</h3><p><code translate="no">inCluster</code> 表示当 milvus 集群启动时，etcd 服务会在集群中自动启动。</p>
+<h3 id="Internal-etcd" class="common-anchor-header">内部 etcd<button data-href="#Internal-etcd" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">inCluster</code> 表示当 milvus 集群启动时，etcd 服务会在集群中自动启动。</p>
 <h4 id="Example" class="common-anchor-header">示例</h4><p>下面的示例配置了内部 etcd 服务。</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -113,5 +143,5 @@ summary: 了解如何使用 Milvus Operator 配置元存储。
     </button></h2><p>了解如何使用 Milvus Operator 配置其他 Milvus 依赖项：</p>
 <ul>
 <li><a href="/docs/zh/object_storage_operator.md">使用 Milvus Operator 配置对象存储</a></li>
-<li><a href="/docs/zh/message_storage_operator.md">使用 Milvus Operator 配置消息存储器</a></li>
+<li><a href="/docs/zh/message_storage_operator.md">使用 Milvus Operator 配置消息存储</a></li>
 </ul>

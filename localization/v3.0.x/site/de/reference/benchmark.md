@@ -30,7 +30,7 @@ title: Milvus 2.2 Benchmark-Testbericht
     <ul>
       <li>Eine 2,5-fache Reduzierung der Suchlatenz</li>
       <li>Eine 4,5-fache Steigerung der QPS</li>
-      <li>Ähnlichkeitssuche im Milliardenmaßstab mit geringen Leistungseinbußen</li>
+      <li>Ähnlichkeitssuche im Milliardenmaßstab mit geringer Leistungsverschlechterung</li>
       <li>Lineare Skalierbarkeit bei Verwendung mehrerer Replikate</li>
     </ul>
     <p>Einzelheiten finden Sie in <a href="https://zilliz.com/resources/whitepaper/milvus-performance-benchmark">diesem Whitepaper</a> und dem <a href="https://github.com/zilliztech/VectorDBBench">zugehörigen Benchmark-Testcode</a>. </p>
@@ -121,8 +121,23 @@ title: Milvus 2.2 Benchmark-Testbericht
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Alle Tests werden in den folgenden Umgebungen durchgeführt.</p>
-<h3 id="Hardware-environment" class="common-anchor-header">Hardware-Umgebung</h3><table>
+    </button></h2><p>Alle Tests werden unter den folgenden Bedingungen durchgeführt.</p>
+<h3 id="Hardware-environment" class="common-anchor-header">Hardware-Umgebung<button data-href="#Hardware-environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th>Hardware</th><th>Spezifikation</th></tr>
 </thead>
@@ -132,7 +147,22 @@ title: Milvus 2.2 Benchmark-Testbericht
 <tr><td>SSD</td><td>SATA 6 Gbit/s</td></tr>
 </tbody>
 </table>
-<h3 id="Software-environment" class="common-anchor-header">Software-Umgebung</h3><table>
+<h3 id="Software-environment" class="common-anchor-header">Software-Umgebung<button data-href="#Software-environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th>Software</th><th>Version</th></tr>
 </thead>
@@ -141,14 +171,44 @@ title: Milvus 2.2 Benchmark-Testbericht
 <tr><td>Milvus GO SDK</td><td>v2.2.0</td></tr>
 </tbody>
 </table>
-<h3 id="Deployment-scheme" class="common-anchor-header">Bereitstellungsschema</h3><ul>
+<h3 id="Deployment-scheme" class="common-anchor-header">Bereitstellungsschema<button data-href="#Deployment-scheme" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Milvus-Instanzen (Standalone oder Cluster) werden über <a href="https://milvus.io/docs/install_standalone-helm.md">Helm</a> auf einem Kubernetes-Cluster basierend auf physischen oder virtuellen Maschinen bereitgestellt.</li>
 <li>Verschiedene Tests unterscheiden sich lediglich in der Anzahl der CPU-Kerne, der Größe des Speichers und der Anzahl der Replikate (Worker Nodes), was nur für Milvus-Cluster gilt.</li>
 <li>Nicht spezifizierte Konfigurationen sind mit den <a href="https://github.com/milvus-io/milvus-helm/blob/master/charts/milvus/values.yaml">Standardkonfigurationen</a> identisch.</li>
 <li>Milvus-Abhängigkeiten (MinIO, Pulsar und Etcd) speichern Daten auf der lokalen SSD in jedem Knoten.</li>
 <li>Suchanfragen werden über das Milvus <a href="https://github.com/milvus-io/milvus-sdk-go/tree/master/tests">GO SDK</a> an die Milvus-Instanzen gesendet.</li>
 </ul>
-<h3 id="Data-sets" class="common-anchor-header">Datensätze</h3><p>Der Test verwendet den Open-Source-Datensatz SIFT (128 Dimensionen) von <a href="https://github.com/erikbern/ann-benchmarks/#data-sets">ANN-Benchmarks</a>.</p>
+<h3 id="Data-sets" class="common-anchor-header">Datensätze<button data-href="#Data-sets" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Der Test verwendet den Open-Source-Datensatz SIFT (128 Dimensionen) von <a href="https://github.com/erikbern/ann-benchmarks/#data-sets">ANN-Benchmarks</a>.</p>
 <h2 id="Test-pipeline" class="common-anchor-header">Test-Pipeline<button data-href="#Test-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -187,7 +247,22 @@ title: Milvus 2.2 Benchmark-Testbericht
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Milvus-220-vs-Milvus-210" class="common-anchor-header">Milvus 2.2.0 vs. Milvus 2.1.0</h3><h4 id="Cluster" class="common-anchor-header">Cluster</h4><p><details>
+    </button></h2><h3 id="Milvus-220-vs-Milvus-210" class="common-anchor-header">Milvus 2.2.0 vs. Milvus 2.1.0<button data-href="#Milvus-220-vs-Milvus-210" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Cluster" class="common-anchor-header">Cluster</h4><p><details>
 <summary><b>Serverkonfigurationen (Cluster)</b></summary><code translate="no">yaml queryNode: replicas: 1 resources: limits: cpu: &quot;12.0&quot; memory: 8Gi requests: cpu: &quot;12.0&quot; memory: 8Gi</code></details></p>
 <p><strong>Suchleistung</strong></p>
 <table>
@@ -201,7 +276,7 @@ title: Milvus 2.2 Benchmark-Testbericht
 </table>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cluster_search_performance_210_vs_220.png" alt="Cluster search performance" class="doc-image" id="cluster-search-performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cluster_search_performance_210_vs_220.png" alt="Cluster search performance" class="doc-image" id="cluster-search-performance" />
    </span> <span class="img-wrapper"> <span>Leistung der Clustersuche</span> </span></p>
 <h4 id="Standalone" class="common-anchor-header">Eigenständig</h4><p><details>
 <summary><b>Serverkonfigurationen (Standalone)</b></summary><code translate="no">yaml standalone: replicas: 1 resources: limits: cpu: &quot;12.0&quot; memory: 16Gi requests: cpu: &quot;12.0&quot; memory: 16Gi</code></details></p>
@@ -217,9 +292,24 @@ title: Milvus 2.2 Benchmark-Testbericht
 </table>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/standalone_search_performance_210_vs_220.png" alt="Standalone search performance" class="doc-image" id="standalone-search-performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/standalone_search_performance_210_vs_220.png" alt="Standalone search performance" class="doc-image" id="standalone-search-performance" />
    </span> <span class="img-wrapper"> <span>Eigenständige Suchleistung</span> </span></p>
-<h3 id="Milvus-220-Scale-up" class="common-anchor-header">Milvus 2.2.0 Hochskalierung</h3><p>Erweitern Sie die CPU-Kerne in einem Querynode, um die Fähigkeit zur Skalierung zu prüfen.</p>
+<h3 id="Milvus-220-Scale-up" class="common-anchor-header">Milvus 2.2.0 Hochskalierung<button data-href="#Milvus-220-Scale-up" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Erweitern Sie die CPU-Kerne in einem Querynode, um die Fähigkeit zur Skalierung zu prüfen.</p>
 <p><details>
 <summary><b>Server-Konfigurationen (Cluster)</b></summary><code translate="no">yaml queryNode: replicas: 1 resources: limits: cpu: &quot;8.0&quot; /&quot;12.0&quot; /&quot;16.0&quot; /&quot;32.0&quot; memory: 8Gi requests: cpu: &quot;8.0&quot; /&quot;12.0&quot; /&quot;16.0&quot; /&quot;32.0&quot; memory: 8Gi</code></details></p>
 <p><strong>Suchleistung</strong></p>
@@ -236,9 +326,24 @@ title: Milvus 2.2 Benchmark-Testbericht
 </table>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/search_performance_by_querynode_cpu_cores.png" alt="Search performance by Querynode CPU cores" class="doc-image" id="search-performance-by-querynode-cpu-cores" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/search_performance_by_querynode_cpu_cores.png" alt="Search performance by Querynode CPU cores" class="doc-image" id="search-performance-by-querynode-cpu-cores" />
    </span> <span class="img-wrapper"> <span>Suchleistung nach Querynode CPU-Kernen</span> </span></p>
-<h3 id="Milvus-220-Scale-out" class="common-anchor-header">Milvus 2.2.0 Ausdehnung</h3><p>Erweitern Sie weitere Replikate mit mehr Querynodes, um die Fähigkeit zur Skalierung zu prüfen.</p>
+<h3 id="Milvus-220-Scale-out" class="common-anchor-header">Milvus 2.2.0 Ausdehnung<button data-href="#Milvus-220-Scale-out" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Erweitern Sie weitere Replikate mit mehr Querynodes, um die Fähigkeit zur Skalierung zu prüfen.</p>
 <div class="alert note">
 <p>Hinweis: Die Anzahl der Querynodes entspricht der <code translate="no">replica_number</code> beim Laden der Sammlung.</p>
 </div>
@@ -257,7 +362,7 @@ title: Milvus 2.2 Benchmark-Testbericht
 </table>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/search_performance_by_querynode_replicas.png" alt="Search performance by Querynode replicas" class="doc-image" id="search-performance-by-querynode-replicas" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/search_performance_by_querynode_replicas.png" alt="Search performance by Querynode replicas" class="doc-image" id="search-performance-by-querynode-replicas" />
    </span> <span class="img-wrapper"> <span>Suchleistung nach Querynode-Replikaten</span> </span></p>
 <h2 id="Whats-next" class="common-anchor-header">Wie geht es weiter?<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

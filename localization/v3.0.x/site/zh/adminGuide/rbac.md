@@ -40,7 +40,7 @@ summary: >-
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/users-roles-privileges.png" alt="Users Roles Privileges" class="doc-image" id="users-roles-privileges" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/users-roles-privileges.png" alt="Users Roles Privileges" class="doc-image" id="users-roles-privileges" />
    </span> <span class="img-wrapper"> <span>用户 角色 权限</span> </span></p>
 <p>RBAC 模型有四个主要组成部分。</p>
 <ul>

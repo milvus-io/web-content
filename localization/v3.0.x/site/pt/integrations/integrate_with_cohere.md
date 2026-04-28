@@ -62,7 +62,7 @@ title: Resposta a perguntas utilizando Milvus e Cohere
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Aqui podemos encontrar os parâmetros utilizados nos snippets seguintes. Alguns deles precisam de ser alterados para se adaptarem ao seu ambiente. Ao lado de cada um, há uma descrição do que se trata.</p>
+    </button></h2><p>Aqui podemos encontrar os parâmetros utilizados nos snippets seguintes. Alguns deles precisam de ser alterados para se adaptarem ao seu ambiente. Ao lado de cada um há uma descrição do que se trata.</p>
 <pre><code translate="no" class="language-python">FILE = <span class="hljs-string">&#x27;https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v2.0.json&#x27;</span>  <span class="hljs-comment"># The SQuAD dataset url</span>
 COLLECTION_NAME = <span class="hljs-string">&#x27;question_answering_db&#x27;</span>  <span class="hljs-comment"># Collection name</span>
 DIMENSION = <span class="hljs-number">1024</span>  <span class="hljs-comment"># Embeddings size, cohere embeddings default to 4096 with the large model</span>
@@ -125,7 +125,7 @@ simplified_records = simplified_records.sample(n=<span class="hljs-built_in">min
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Esta secção trata do Milvus e da configuração da base de dados para este caso de utilização. No Milvus, temos de criar uma coleção e indexá-la.</p>
+    </button></h2><p>Esta secção trata do Milvus e da configuração da base de dados para este caso de utilização. No Milvus, precisamos de criar uma coleção e indexá-la.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus Database</span>
 connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
 
@@ -215,7 +215,7 @@ time.sleep(<span class="hljs-number">10</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de todos os dados terem sido inseridos na coleção Milvus, podemos fazer perguntas ao sistema pegando na nossa frase de pergunta, incorporando-a com o Cohere e pesquisando na coleção.</p>
+    </button></h2><p>Depois de todos os dados terem sido inseridos na coleção Milvus, podemos fazer perguntas ao sistema pegando na nossa frase de pergunta, incorporando-a com o Cohere e pesquisando com a coleção.</p>
 <div class="alert note">
 <p>As pesquisas efectuadas em dados logo após a inserção podem ser um pouco mais lentas, uma vez que a pesquisa em dados não indexados é feita de forma bruta. Quando os novos dados forem indexados automaticamente, as pesquisas serão mais rápidas.</p>
 </div>

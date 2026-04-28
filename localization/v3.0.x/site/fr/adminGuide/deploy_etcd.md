@@ -35,7 +35,22 @@ summary: Apprenez à configurer le méta stockage pour Milvus avec Docker Compos
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Configure-etcd" class="common-anchor-header">1. Configurer etcd</h3><p>Pour configurer etcd avec Docker Compose, fournissez vos valeurs pour la section <code translate="no">etcd</code> dans le fichier <code translate="no">milvus.yaml</code> sur le chemin milvus/configs.</p>
+    </button></h2><h3 id="1-Configure-etcd" class="common-anchor-header">1. Configurer etcd<button data-href="#1-Configure-etcd" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour configurer etcd avec Docker Compose, fournissez vos valeurs pour la section <code translate="no">etcd</code> dans le fichier <code translate="no">milvus.yaml</code> sur le chemin milvus/configs.</p>
 <pre><code translate="no"><span class="hljs-attr">etcd:</span>
   <span class="hljs-attr">endpoints:</span>
     <span class="hljs-bullet">-</span> <span class="hljs-string">localhost:2379</span>
@@ -60,7 +75,22 @@ summary: Apprenez à configurer le méta stockage pour Milvus avec Docker Compos
     <span class="hljs-attr">dir:</span> <span class="hljs-string">default.etcd</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Voir <a href="/docs/fr/configure_etcd.md">Configurations liées à etcd</a> pour plus d'informations.</p>
-<h3 id="2-Run-Milvus" class="common-anchor-header">2. Exécuter Milvus</h3><p>Exécutez la commande suivante pour démarrer Milvus qui utilise les configurations etcd.</p>
+<h3 id="2-Run-Milvus" class="common-anchor-header">2. Exécuter Milvus<button data-href="#2-Run-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Exécutez la commande suivante pour démarrer Milvus qui utilise les configurations etcd.</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">Les configurations ne prennent effet qu'après le démarrage de Milvus. Voir <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Démarrer Milvus</a> pour plus d'informations.</div>
@@ -79,7 +109,7 @@ summary: Apprenez à configurer le méta stockage pour Milvus avec Docker Compos
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour les clusters Milvus sur K8s, vous pouvez configurer etcd dans la même commande que celle qui démarre Milvus. Vous pouvez également configurer etcd à l'aide du fichier <code translate="no">values.yml</code> dans le chemin /charts/milvus du référentiel <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> avant de démarrer Milvus.</p>
+    </button></h2><p>Pour les clusters Milvus sur K8s, vous pouvez configurer etcd dans la même commande que celle qui démarre Milvus. Vous pouvez également configurer etcd à l'aide du fichier <code translate="no">values.yml</code> sur le chemin /charts/milvus dans le référentiel <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> avant de démarrer Milvus.</p>
 <p>Le tableau suivant répertorie les clés de configuration de etcd dans le fichier YAML.</p>
 <table>
 <thead>
@@ -91,7 +121,22 @@ summary: Apprenez à configurer le méta stockage pour Milvus avec Docker Compos
 <tr><td><code translate="no">externalEtcd.endpoints</code></td><td>Le point d'accès à etcd.</td><td></td></tr>
 </tbody>
 </table>
-<h3 id="Using-the-YAML-file" class="common-anchor-header">Utilisation du fichier YAML</h3><ol>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">Utilisation du fichier YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>Configurez la section <code translate="no">etcd</code> en utilisant vos valeurs dans le fichier <code translate="no">values.yaml</code>.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">etcd:</span>
@@ -111,7 +156,22 @@ summary: Apprenez à configurer le méta stockage pour Milvus avec Docker Compos
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Using-a-command" class="common-anchor-header">Utilisation d'une commande</h3><p>Pour installer Milvus et configurer etcd, exécutez la commande suivante en utilisant vos valeurs.</p>
+<h3 id="Using-a-command" class="common-anchor-header">Utilisation d'une commande<button data-href="#Using-a-command" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour installer Milvus et configurer etcd, exécutez la commande suivante en utilisant vos valeurs.</p>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus --set cluster.enabled=true --set etcd.enabled=false --set externaletcd.enabled=true --set externalEtcd.endpoints={&lt;your_etcd_IP&gt;:2379}
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">

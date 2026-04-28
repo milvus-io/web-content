@@ -4,7 +4,7 @@ order: 7
 summary: >-
   이 문서에서는 Voyage 모델을 사용하여 문서와 쿼리를 인코딩하기 위해 VoyageEmbeddingFunction을 사용하는 방법을
   설명합니다.
-title: 보이저 임베드
+title: Voyage 포함
 ---
 <h1 id="Voyage" class="common-anchor-header">Voyage<button data-href="#Voyage" class="anchor-icon" translate="no">
       <svg translate="no"

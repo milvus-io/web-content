@@ -112,7 +112,7 @@ title: Использование Milvus в DocsGPT
 <p>Для сервисов <code translate="no">MILVUS_URI</code> и <code translate="no">MILVUS_TOKEN</code> вы можете использовать либо полностью управляемый сервис <a href="https://zilliz.com/cloud">Zilliz Cloud</a>(рекомендуется), либо запущенный вручную сервис Milvus.</p>
 <ul>
 <li><p>Для полностью управляемого сервиса Zillz Cloud: Мы рекомендуем использовать сервис Zilliz Cloud. Вы можете зарегистрировать бесплатную пробную учетную запись на <a href="https://zilliz.com/cloud">Zilliz Cloud</a>. После этого вы получите адреса <code translate="no">MILVUS_URI</code> и <code translate="no">MILVUS_TOKEN</code>, которые соответствуют <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">публичной конечной точке и ключу API</a>.</p></li>
-<li><p>Для запуска сервиса Milvus вручную: Если вы хотите настроить сервис Milvus, вы можете следовать <a href="https://milvus.io/docs/install_standalone-docker-compose.md">официальной документации Milvus</a> для настройки сервера Milvus, а затем получить <code translate="no">MILVUS_URI</code> и <code translate="no">MILVUS_TOKEN</code> с сервера. Файлы <code translate="no">MILVUS_URI</code> и <code translate="no">MILVUS_TOKEN</code> должны быть в формате <code translate="no">http://&lt;your_server_ip&gt;:19530</code> и <code translate="no">&lt;your_username&gt;:&lt;your_password&gt;</code> соответственно.</p></li>
+<li><p>Для запуска сервиса Milvus вручную: Если вы хотите настроить службу Milvus, вы можете следовать <a href="https://milvus.io/docs/install_standalone-docker-compose.md">официальной документации Milvus</a> для настройки сервера Milvus, а затем получить <code translate="no">MILVUS_URI</code> и <code translate="no">MILVUS_TOKEN</code> с сервера. Файлы <code translate="no">MILVUS_URI</code> и <code translate="no">MILVUS_TOKEN</code> должны быть в формате <code translate="no">http://&lt;your_server_ip&gt;:19530</code> и <code translate="no">&lt;your_username&gt;:&lt;your_password&gt;</code> соответственно.</p></li>
 </ul>
 <h2 id="Start-the-services" class="common-anchor-header">Запустите службы<button data-href="#Start-the-services" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -134,9 +134,9 @@ title: Использование Milvus в DocsGPT
 <p>Вы можете поиграть с пользовательским интерфейсом и задать вопросы о ваших документах.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
    </span> <span class="img-wrapper"> <span>текст alt</span> </span></p>
-<p>Если вы хотите остановить сервисы, выполните:</p>
+<p>Если вы хотите остановить службы, выполните:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose down</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Для получения более подробной информации и более сложных настроек, пожалуйста, обратитесь к официальной документации <a href="https://github.com/arc53/DocsGPT">DocsGPT</a>.</p>

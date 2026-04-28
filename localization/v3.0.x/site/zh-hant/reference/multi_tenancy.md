@@ -36,10 +36,25 @@ summary: 在 Milvus 中，多租户意味着多个客户或团队（称为租户
         ></path>
       </svg>
     </button></h2><p>Milvus 支援四個層級的多租戶：<strong>資料庫</strong>、<strong>資料集</strong>、<strong>分區</strong>和<strong>分區鑰匙</strong>。</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">資料庫層級多租戶</h3><p>使用資料庫級多租戶，每個租戶都會收到一個對應的<a href="/docs/zh-hant/manage_databases.md">資料庫</a>，其中包含一個或多個集合。</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">資料庫層級多租戶<button data-href="#Database-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>使用資料庫層級多租戶，每個租戶都會收到一個對應的<a href="/docs/zh-hant/manage_databases.md">資料庫</a>，其中包含一個或多個集合。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>資料庫層級多租戶</span> </span></p>
 <ul>
 <li><p><strong>可擴展性</strong>：資料庫層級多租戶策略預設最多支援 64 個租戶。</p></li>
@@ -47,10 +62,25 @@ summary: 在 Milvus 中，多租户意味着多个客户或团队（称为租户
 <li><p><strong>彈性</strong>：每個資料庫都可以擁有不同模式的集合，提供高度彈性的資料組織，並允許每個租戶擁有自己的資料模式。</p></li>
 <li><p><strong>其他</strong>：此策略也支援 RBAC，可針對每個租戶的使用者存取進行精細控制。此外，您可以彈性載入或釋放特定租戶的資料，以有效管理冷熱資料。</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">集合層級多重租用</h3><p>使用集合層級多租戶功能，每個租戶都會被指派一個<a href="/docs/zh-hant/manage-collections.md">集合</a>，提供強大的資料隔離功能。</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">集合層級多重租用<button data-href="#Collection-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>使用集合層級多租戶功能，每個租戶都會被指派一個<a href="/docs/zh-hant/manage-collections.md">集合</a>，提供強大的資料隔離功能。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>集合層級多租戶</span> </span></p>
 <ul>
 <li><p><strong>可擴充性</strong>：由於群集預設最多可容納 65,536 個集合，因此此策略可在群集中容納相同數量的租戶。</p></li>
@@ -58,10 +88,25 @@ summary: 在 Milvus 中，多租户意味着多个客户或团队（称为租户
 <li><p><strong>彈性</strong>：此策略允許每個集合擁有自己的模式，可容納不同資料模式的租戶。</p></li>
 <li><p><strong>其他</strong>：此策略也支援 RBAC，允許對租戶進行細粒度存取控制。此外，您可以彈性載入或釋放特定租戶的資料，以有效管理冷熱資料。</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">分割層級多重租用</h3><p>在磁碟分割層級多重租用中，每個租戶都會被指派到共用集合中手動建立的<a href="/docs/zh-hant/manage-partitions.md">磁碟分割</a>。</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">分割層級多重租用<button data-href="#Partition-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在磁碟分割層級多重租用中，每個租戶都會被指派到共用集合中手動建立的<a href="/docs/zh-hant/manage-partitions.md">磁碟分割</a>。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>分割層級多重租用</span> </span></p>
 <ul>
 <li><p><strong>可擴充性</strong>：每個集合最多可容納 1,024 個分割區，讓其中的租戶數目相同。</p></li>
@@ -69,10 +114,25 @@ summary: 在 Milvus 中，多租户意味着多个客户或团队（称为租户
 <li><p><strong>彈性</strong>：此策略要求所有租戶共用相同的資料模式。而且需要手動建立分區。</p></li>
 <li><p><strong>其他</strong>：分區層級不支援 RBAC。租戶可以單獨或跨多個分區進行查詢，這使得此方法非常適合涉及跨租戶區段的聚合查詢或分析的場景。此外，您可以彈性載入或釋放特定租戶的資料，以有效管理冷熱資料。</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">分區鑰匙層級多租戶</h3><p>使用此策略，所有租戶共用單一集合和模式，但每個租戶的資料會根據<a href="/docs/zh-hant/use-partition-key.md">分割區金鑰值</a>自動路由至 16 個實體隔離的分割區。雖然每個實體磁碟分割可包含多個租戶，但不同租戶的資料在邏輯上仍是分開的。</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">分區鑰匙層級多租戶<button data-href="#Partition-key-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>使用此策略時，所有租戶共用單一集合和模式，但每個租戶的資料會根據<a href="/docs/zh-hant/use-partition-key.md">分割區金鑰值</a>自動路由至 16 個實體隔離的分割區。雖然每個實體磁碟分割可包含多個租戶，但不同租戶的資料在邏輯上仍是分開的。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>分割區金鑰層級多租戶</span> </span></p>
 <ul>
 <li><p><strong>可擴充性</strong>：磁碟分割金鑰層級策略提供最具擴充能力的方法，可支援數百萬個租戶。</p></li>

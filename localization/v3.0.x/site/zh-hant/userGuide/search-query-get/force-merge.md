@@ -199,6 +199,7 @@ job_id = client.compact(
     target_size=max_int64
 )
 <button class="copy-code-btn"></button></code></pre>
+<p><a id="parameter-reference"></a></p>
 <h4 id="Parameter-reference" class="common-anchor-header">參數參考</h4><p>下表說明參數。</p>
 <table>
    <tr>
@@ -261,6 +262,7 @@ state = client.get_compaction_state(job_id)
 <li><p><strong>考慮效能權衡。</strong>強制合併壓縮是一項資源密集的作業。它會讀取、合併和重寫區段資料。將其排程在低流量時段，以盡量減少對查詢延遲的影響。</p></li>
 <li><p><strong>監控之前和之後的網段數量。</strong>使用<code translate="no">get_compaction_state()</code> 和<code translate="no">list_persistent_segments</code> 來驗證壓縮是否如預期產生較少、較大的分段。</p></li>
 </ul>
+<p><a id="faq"></a></p>
 <h2 id="FAQ" class="common-anchor-header">常見問題<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -312,7 +314,7 @@ state = client.get_compaction_state(job_id)
    <tr>
      <td><p>安全上限</p></td>
      <td><p>僅配置上限</p></td>
-     <td><p>maxSafeSize = min(QueryNode mem, DataNode mem) / memory_factor（單機非池：進一步減半）</p></td>
+     <td><p>maxSafeSize = min(QueryNode mem, DataNode mem) / memory_factor（獨立非池：進一步減半）</p></td>
    </tr>
    <tr>
      <td><p>合併形狀</p></td>
@@ -356,7 +358,7 @@ state = client.get_compaction_state(job_id)
 <li><p>當您明確地想要將資料集重整為符合搜尋和載入行為的較少、較大的區段時，請選擇強制合併。</p></li>
 </ul>
 <p><strong>強制合併與聚類壓縮有何不同？</strong></p>
-<p><a href="/docs/zh-hant/clustering-compaction.md">聚類壓縮</a>(<code translate="no">is_clustering=True</code>) 基於聚類鍵重組區段內的資料，以改善搜尋剪枝。強制合併 (<code translate="no">target_size=N</code>) 在不改變資料分佈的情況下優化區段大小。它們有不同的目的，但可以一起使用 - 先執行聚類壓縮來組織資料，然後再執行強制合併來合併所產生的區段。</p>
+<p><a href="/docs/zh-hant/clustering-compaction.md">聚類壓縮</a>(<code translate="no">is_clustering=True</code>) 根據聚類關鍵字在區段內重新組織資料，以改善搜尋剪枝。強制合併 (<code translate="no">target_size=N</code>) 在不改變資料分佈的情況下優化區段大小。它們有不同的目的，但可以一起使用 - 先執行聚類壓縮來組織資料，然後再執行強制合併來合併所產生的區段。</p>
 <p><strong>我可以在正在查詢的資料集中執行強制合併嗎？</strong></p>
 <p>可以。強制合併以非同步方式執行，不會阻塞查詢。但是，它會消耗 DataNode 和磁碟 I/O 資源，因此在壓縮期間，查詢延遲可能會增加。請安排在低流量時段進行強制合併，以獲得最佳結果。</p>
 <p><strong>如果我設定的 target_size 小於 maxSize，會發生什麼情況？</strong></p>

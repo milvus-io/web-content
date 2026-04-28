@@ -51,7 +51,7 @@ title: Uso della ricerca full-text con LangChain e Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Prima di eseguire questo quaderno, assicuratevi di aver installato le seguenti dipendenze:</p>
+    </button></h2><p>Prima di eseguire questo notebook, assicurarsi di avere installato le seguenti dipendenze:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 <span class="hljs-comment">#langchain-voyageai</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -90,7 +90,22 @@ docs = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Hybrid-Search" class="common-anchor-header">Ricerca ibrida</h3><p>Per la ricerca full-text Milvus VectorStore accetta un parametro <code translate="no">builtin_function</code>. Attraverso questo parametro, si può passare un'istanza di <code translate="no">BM25BuiltInFunction</code>. Questo è diverso dalla ricerca semantica, che di solito passa embeddings densi a <code translate="no">VectorStore</code>,</p>
+    </button></h2><h3 id="Hybrid-Search" class="common-anchor-header">Ricerca ibrida<button data-href="#Hybrid-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per la ricerca full-text Milvus VectorStore accetta un parametro <code translate="no">builtin_function</code>. Attraverso questo parametro, è possibile passare un'istanza di <code translate="no">BM25BuiltInFunction</code>. Questo è diverso dalla ricerca semantica, che di solito passa embeddings densi a <code translate="no">VectorStore</code>,</p>
 <p>Ecco un semplice esempio di ricerca ibrida in Milvus con OpenAI dense embedding per la ricerca semantica e BM25 per la ricerca full-text:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, BM25BuiltInFunction
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
@@ -114,7 +129,7 @@ vectorstore = Milvus.from_documents(
 <li><code translate="no">input_field_names</code> (str): Il nome del campo di input, predefinito è <code translate="no">text</code>. Indica quale campo la funzione legge come input.</li>
 <li><code translate="no">output_field_names</code> (str): Il nome del campo di uscita, predefinito è <code translate="no">sparse</code>. Indica il campo in cui la funzione invia il risultato calcolato.</li>
 </ul>
-<p>Si noti che nei parametri di inizializzazione di Milvus menzionati sopra, si specifica anche <code translate="no">vector_field=[&quot;dense&quot;, &quot;sparse&quot;]</code>. Poiché il campo <code translate="no">sparse</code> viene preso come campo di uscita definito da <code translate="no">BM25BuiltInFunction</code>, l'altro campo <code translate="no">dense</code> verrà automaticamente assegnato al campo di uscita di OpenAIEmbeddings.</p>
+<p>Si noti che nei parametri di inizializzazione di Milvus menzionati sopra, si specifica anche <code translate="no">vector_field=[&quot;dense&quot;, &quot;sparse&quot;]</code>. Poiché il campo <code translate="no">sparse</code> viene preso come campo di output definito da <code translate="no">BM25BuiltInFunction</code>, l'altro campo <code translate="no">dense</code> verrà automaticamente assegnato al campo di output di OpenAIEmbeddings.</p>
 <p>In pratica, soprattutto quando si combinano più embeddings o funzioni, si consiglia di specificare esplicitamente i campi di ingresso e di uscita per ogni funzione, per evitare ambiguità.</p>
 <p>Nell'esempio seguente, specifichiamo esplicitamente i campi di ingresso e di uscita di <code translate="no">BM25BuiltInFunction</code>, rendendo chiaro a quale campo si riferisce la funzione incorporata.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from langchain_voyageai import VoyageAIEmbeddings</span>
@@ -153,7 +168,22 @@ vectorstore.vector_fields
 <pre><code translate="no">[Document(metadata={'category': 'fruit', 'pk': 454646931479251897}, page_content='I like this apple')]
 </code></pre>
 <p>Per ulteriori informazioni sulla ricerca ibrida, è possibile consultare l'<a href="https://milvus.io/docs/multi-vector-search.md#Hybrid-Search">introduzione alla ricerca ibrida</a> e questo <a href="https://milvus.io/docs/milvus_hybrid_search_retriever.md">tutorial sulla ricerca ibrida di LangChain Milvus</a>.</p>
-<h3 id="BM25-search-without-embedding" class="common-anchor-header">Ricerca BM25 senza incorporazione</h3><p>Se si desidera eseguire solo la ricerca full-text con la funzione BM25 senza utilizzare alcuna ricerca semantica basata sull'embedding, è possibile impostare il parametro embedding su <code translate="no">None</code> e mantenere solo il <code translate="no">builtin_function</code> specificato come istanza della funzione BM25. Il campo vettoriale ha solo un campo "sparse". Ad esempio:</p>
+<h3 id="BM25-search-without-embedding" class="common-anchor-header">Ricerca BM25 senza incorporazione<button data-href="#BM25-search-without-embedding" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Se si desidera eseguire solo la ricerca full-text con la funzione BM25 senza utilizzare alcuna ricerca semantica basata sull'embedding, è possibile impostare il parametro embedding su <code translate="no">None</code> e mantenere solo il <code translate="no">builtin_function</code> specificato come istanza della funzione BM25. Il campo vettoriale ha solo un campo "sparse". Ad esempio:</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=<span class="hljs-literal">None</span>,
@@ -238,14 +268,29 @@ vectorstore = Milvus.from_documents(
     </button></h2><p>Abbiamo imparato a usare la funzione di base di BM25 in LangChain e Milvus. Introduciamo un'implementazione ottimizzata di RAG con ricerca ibrida e reranking.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
 <p>Questo diagramma mostra il processo di Hybrid Retrieve &amp; Reranking, che combina BM25 per la corrispondenza delle parole chiave e la ricerca vettoriale per il recupero semantico. I risultati di entrambi i metodi vengono uniti, riclassificati e passati a un LLM per generare la risposta finale.</p>
 <p>La ricerca ibrida bilancia la precisione e la comprensione semantica, migliorando l'accuratezza e la robustezza per query diverse. Recupera i candidati con la ricerca full-text e la ricerca vettoriale di BM25, garantendo un recupero semantico, consapevole del contesto e accurato.</p>
 <p>Cominciamo con un esempio.</p>
-<h3 id="Prepare-the-data" class="common-anchor-header">Preparare i dati</h3><p>Utilizziamo Langchain WebBaseLoader per caricare i documenti da fonti web e dividerli in parti utilizzando RecursiveCharacterTextSplitter.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">Preparare i dati<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Utilizziamo Langchain WebBaseLoader per caricare i documenti da fonti web e dividerli in parti utilizzando RecursiveCharacterTextSplitter.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bs4
 <span class="hljs-keyword">from</span> langchain_community.document_loaders <span class="hljs-keyword">import</span> WebBaseLoader
 <span class="hljs-keyword">from</span> langchain_text_splitters <span class="hljs-keyword">import</span> RecursiveCharacterTextSplitter
@@ -275,7 +320,22 @@ docs[<span class="hljs-number">1</span>]
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document(metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'}, page_content='Fig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning#\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.\nTask Decomposition#\nChain of thought (CoT; Wei et al. 2022) has become a standard prompting technique for enhancing model performance on complex tasks. The model is instructed to “think step by step” to utilize more test-time computation to decompose hard tasks into smaller and simpler steps. CoT transforms big tasks into multiple manageable tasks and shed lights into an interpretation of the model’s thinking process.\nTree of Thoughts (Yao et al. 2023) extends CoT by exploring multiple reasoning possibilities at each step. It first decomposes the problem into multiple thought steps and generates multiple thoughts per step, creating a tree structure. The search process can be BFS (breadth-first search) or DFS (depth-first search) with each state evaluated by a classifier (via a prompt) or majority vote.\nTask decomposition can be done (1) by LLM with simple prompting like &quot;Steps for XYZ.\\n1.&quot;, &quot;What are the subgoals for achieving XYZ?&quot;, (2) by using task-specific instructions; e.g. &quot;Write a story outline.&quot; for writing a novel, or (3) with human inputs.\nAnother quite distinct approach, LLM+P (Liu et al. 2023), involves relying on an external classical planner to do long-horizon planning. This approach utilizes the Planning Domain Definition Language (PDDL) as an intermediate interface to describe the planning problem. In this process, LLM (1) translates the problem into “Problem PDDL”, then (2) requests a classical planner to generate a PDDL plan based on an existing “Domain PDDL”, and finally (3) translates the PDDL plan back into natural language. Essentially, the planning step is outsourced to an external tool, assuming the availability of domain-specific PDDL and a suitable planner which is common in certain robotic setups but not in many other domains.\nSelf-Reflection#')
 </code></pre>
-<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">Caricare il documento nell'archivio vettoriale Milvus</h3><p>Come nell'introduzione precedente, inizializziamo e carichiamo i documenti preparati nell'archivio vettoriale Milvus, che contiene due campi vettoriali: <code translate="no">dense</code> è per l'incorporamento OpenAI e <code translate="no">sparse</code> è per la funzione BM25.</p>
+<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">Caricare il documento nell'archivio vettoriale Milvus<button data-href="#Load-the-document-into-Milvus-vector-store" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Come nell'introduzione precedente, inizializziamo e carichiamo i documenti preparati nell'archivio vettoriale Milvus, che contiene due campi vettoriali: <code translate="no">dense</code> è per l'incorporamento OpenAI e <code translate="no">sparse</code> è per la funzione BM25.</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=OpenAIEmbeddings(),
@@ -287,7 +347,22 @@ docs[<span class="hljs-number">1</span>]
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Build-RAG-chain" class="common-anchor-header">Costruire la catena RAG</h3><p>Prepariamo l'istanza LLM e il prompt, quindi li combiniamo in una pipeline RAG usando il LangChain Expression Language.</p>
+<h3 id="Build-RAG-chain" class="common-anchor-header">Costruire la catena RAG<button data-href="#Build-RAG-chain" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Prepariamo l'istanza LLM e il prompt, quindi li combiniamo in una pipeline RAG usando il LangChain Expression Language.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnablePassthrough
 <span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate
 <span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser

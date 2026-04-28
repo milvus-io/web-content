@@ -165,7 +165,7 @@ index_params.add_index(
 <div class="alert note">
 <p>数组应包含相同类型的元素，以优化索引。有关详细信息，请参阅<a href="/docs/zh/array_data_type.md">数组字段</a>。</p>
 </div>
-<h3 id="Supported-cast-functions" class="common-anchor-header">支持的铸入函数<button data-href="#Supported-cast-functions" class="anchor-icon" translate="no">
+<h3 id="Supported-cast-functions" class="common-anchor-header">支持的投影函数<button data-href="#Supported-cast-functions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -366,7 +366,7 @@ index_params.add_index(
     </button></h3><p>索引整个 JSON 对象，以便对其中的任何字段进行查询。使用<code translate="no">json_cast_type=&quot;JSON&quot;</code> 时，系统会自动</p>
 <ul>
 <li><p><strong>使 JSON 结构扁平化</strong>：将嵌套对象转换为扁平路径，以实现高效索引</p></li>
-<li><p><strong>推断数据类型</strong>：根据每个值的内容自动将其归类为数值、字符串、布尔值或日期值</p></li>
+<li><p><strong>推断数据类型</strong>：根据每个值的内容自动将其归类为数字、字符串、布尔或日期</p></li>
 <li><p><strong>创建全面的覆盖范围</strong>：对象中的所有键和嵌套路径均可搜索</p></li>
 </ul>
 <p>对于上述<a href="/docs/zh/json-indexing.md#Sample-JSON-structure">示例 JSON 结构</a>，可对整个<code translate="no">metadata</code> 对象进行索引：</p>

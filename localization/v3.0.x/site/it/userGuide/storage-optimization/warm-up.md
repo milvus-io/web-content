@@ -474,7 +474,7 @@ client.create_index(
 <p><strong>Interazione con mmap:</strong></p>
 <table>
    <tr>
-     <th><p><strong>Impostazione del riscaldamento</strong></p></th>
+     <th><p><strong>Impostazione di riscaldamento</strong></p></th>
      <th><p><strong>Mmap abilitata</strong></p></th>
      <th><p><strong>Posizione dei dati</strong></p></th>
    </tr>

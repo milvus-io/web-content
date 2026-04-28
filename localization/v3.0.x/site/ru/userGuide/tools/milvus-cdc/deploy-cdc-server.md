@@ -62,12 +62,42 @@ title: Развертывание сервера CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Obtain-the-Milvus-CDC-config-file" class="common-anchor-header">Получите файл конфигурации Milvus-CDC</h3><p>Клонируйте <a href="https://github.com/zilliztech/milvus-cdc">репозиторий Milvus-CDC</a> и перейдите в каталог <code translate="no">milvus-cdc/server/configs</code>, чтобы получить доступ к файлу конфигурации <code translate="no">cdc.yaml</code>.</p>
+    </button></h2><h3 id="Obtain-the-Milvus-CDC-config-file" class="common-anchor-header">Получите файл конфигурации Milvus-CDC<button data-href="#Obtain-the-Milvus-CDC-config-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Клонируйте <a href="https://github.com/zilliztech/milvus-cdc">репозиторий Milvus-CDC</a> и перейдите в каталог <code translate="no">milvus-cdc/server/configs</code>, чтобы получить доступ к файлу конфигурации <code translate="no">cdc.yaml</code>.</p>
 <pre><code translate="no" class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/milvus-cdc.git
 
 <span class="hljs-built_in">cd</span> milvus-cdc/server/configs
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Edit-the-config-file" class="common-anchor-header">Отредактируйте файл конфигурации</h3><p>В каталоге <code translate="no">milvus-cdc/server/configs</code> измените файл <code translate="no">cdc.yaml</code>, чтобы настроить конфигурации, связанные с метахранилищем Milvus-CDC и деталями подключения исходного Milvus.</p>
+<h3 id="Edit-the-config-file" class="common-anchor-header">Отредактируйте файл конфигурации<button data-href="#Edit-the-config-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В каталоге <code translate="no">milvus-cdc/server/configs</code> измените файл <code translate="no">cdc.yaml</code>, чтобы настроить конфигурации, связанные с метахранилищем Milvus-CDC и деталями подключения исходного Milvus.</p>
 <ul>
 <li><p><strong>Конфигурация метахранилища</strong>:</p>
 <ul>
@@ -128,7 +158,22 @@ title: Развертывание сервера CDC
 <span class="hljs-comment">#  kafka:</span>
 <span class="hljs-comment">#    address: 127.0.0.1:9092</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">Компиляция сервера Milvus-CDC</h3><p>После сохранения файла <code translate="no">cdc.yaml</code> перейдите в каталог <code translate="no">milvus-cdc</code> и выполните одну из следующих команд для компиляции сервера:</p>
+<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">Компиляция сервера Milvus-CDC<button data-href="#Compile-the-Milvus-CDC-server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Сохранив файл <code translate="no">cdc.yaml</code>, перейдите в каталог <code translate="no">milvus-cdc</code> и выполните одну из следующих команд для компиляции сервера:</p>
 <ul>
 <li><p>Для бинарного файла:</p>
 <pre><code translate="no" class="language-bash">make build
@@ -138,7 +183,22 @@ title: Развертывание сервера CDC
 <button class="copy-code-btn"></button></code></pre>
 <p>Для образа Docker смонтируйте скомпилированный файл на <code translate="no">/app/server/configs/cdc.yaml</code> внутри контейнера.</p></li>
 </ul>
-<h3 id="Start-the-server" class="common-anchor-header">Запустите сервер</h3><ul>
+<h3 id="Start-the-server" class="common-anchor-header">Запустите сервер<button data-href="#Start-the-server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Использование двоичного файла</p>
 <p>Перейдите в каталог с бинарным файлом <code translate="no">milvus-cdc</code> и в каталог <code translate="no">configs</code> с файлом <code translate="no">cdc.yaml</code>, а затем запустите сервер:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># dir tree</span>

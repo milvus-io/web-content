@@ -49,10 +49,40 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Milvus에 TEI 기능을 구성하기 전에 TEI 서비스가 실행 중이어야 합니다. Milvus는 TEI 배포를 위해 두 가지 접근 방식을 지원합니다:</p>
-<h3 id="Standard-deployment-external" class="common-anchor-header">표준 배포(외부)</h3><p>Hugging Face의 공식 방법을 사용하여 독립형 서비스로 TEI를 배포할 수 있습니다. 이 접근 방식을 사용하면 TEI 서비스를 최대한 유연하게 제어할 수 있습니다.</p>
+<h3 id="Standard-deployment-external" class="common-anchor-header">표준 배포(외부)<button data-href="#Standard-deployment-external" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Hugging Face의 공식 방법을 사용하여 독립형 서비스로 TEI를 배포할 수 있습니다. 이 접근 방식을 사용하면 TEI 서비스를 최대한 유연하게 제어할 수 있습니다.</p>
 <p>Docker 또는 기타 방법을 사용하여 TEI를 배포하는 방법에 대한 자세한 지침은 <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour#deploy">Hugging Face 텍스트 임베딩 추론 공식 문서를</a> 참조하세요.</p>
 <p>배포 후에는 <a href="/docs/ko/hugging-face-tei.md#Use-embedding-function-">Milvus에서 TEI 기능을 사용할</a> 때 필요하므로 TEI 서비스 엔드포인트(예: <code translate="no">http://localhost:8080</code>)를 기록해 두세요.</p>
-<h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Milvus 헬름 차트 배포(통합)</h3><p>쿠버네티스 환경의 경우, Milvus는 헬름 차트를 통해 통합 배포 옵션을 제공합니다. 이렇게 하면 Milvus와 함께 TEI를 배포하고 구성하여 프로세스를 간소화할 수 있습니다.</p>
+<h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Milvus 헬름 차트 배포(통합)<button data-href="#Milvus-Helm-Chart-deployment-integrated" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>쿠버네티스 환경의 경우, Milvus는 헬름 차트를 통해 통합 배포 옵션을 제공합니다. 이렇게 하면 Milvus와 함께 TEI를 배포하고 구성하여 프로세스를 간소화할 수 있습니다.</p>
 <p>밀버스 헬름 배포에서 TEI를 활성화하려면 다음과 같이 하세요:</p>
 <ol>
 <li><p>TEI를 사용하도록 <strong>values.yaml을</strong> 구성한다:</p>
@@ -138,7 +168,22 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
         ></path>
       </svg>
     </button></h2><p>TEI 서비스가 구성되면 다음 단계에 따라 임베딩 함수를 정의하고 사용하세요.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">1단계: 스키마 필드 정의</h3><p>임베딩 함수를 사용하려면 특정 스키마로 컬렉션을 만듭니다. 이 스키마에는 최소 3개의 필수 필드가 포함되어야 합니다:</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">1단계: 스키마 필드 정의<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>임베딩 함수를 사용하려면 특정 스키마로 컬렉션을 만듭니다. 이 스키마에는 최소 3개의 필수 필드가 포함되어야 합니다:</p>
 <ul>
 <li><p>컬렉션의 각 엔티티를 고유하게 식별하는 기본 필드.</p></li>
 <li><p>임베드할 원시 데이터를 저장하는 스칼라 필드.</p></li>
@@ -159,7 +204,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to exactly match the TEI model&#x27;s output dimension</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">2단계: 스키마에 임베딩 함수 추가하기</h3><p>Milvus의 함수 모듈은 스칼라 필드에 저장된 원시 데이터를 임베딩으로 자동 변환하여 명시적으로 정의된 벡터 필드에 저장합니다.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">2단계: 스키마에 임베딩 함수 추가하기<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus의 함수 모듈은 스칼라 필드에 저장된 원시 데이터를 임베딩으로 자동 변환하여 명시적으로 정의된 벡터 필드에 저장합니다.</p>
 <p>아래 예는 스칼라 필드 <code translate="no">&quot;document&quot;</code> 를 임베딩으로 변환하여 결과 벡터를 앞서 정의한 <code translate="no">&quot;dense_vector&quot;</code> 벡터 필드에 저장하는 함수 모듈(<code translate="no">tei_func</code>)을 추가한 것입니다.</p>
 <p>임베딩 함수를 정의한 후에는 컬렉션 스키마에 추가합니다. 이렇게 하면 Milvus가 지정된 임베딩 함수를 사용하여 텍스트 데이터의 임베딩을 처리하고 저장하도록 지시합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define TEI embedding function</span>

@@ -2,7 +2,7 @@
 id: configure_rocksmq.md
 related_key: configure
 group: system_configuration.md
-summary: Pelajari cara mengkonfigurasi rocksmq untuk Milvus.
+summary: Pelajari cara mengonfigurasi rocksmq untuk Milvus.
 ---
 <h1 id="rocksmq-related-Configurations" class="common-anchor-header">Konfigurasi terkait rocksmq<button data-href="#rocksmq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,7 +153,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
   </thead>
   <tbody>
     <tr>
-      <td>        Waktu retensi maksimum pesan yang di-acked di RocksMQ. Pesan yang di-acked di RocksMQ akan disimpan selama jangka waktu yang ditentukan dan kemudian dihapus. Unit: Menit.      </td>
+      <td>        Waktu retensi maksimum pesan yang di-acked di RocksMQ. Pesan yang di-acked di RocksMQ akan dipertahankan selama jangka waktu yang ditentukan dan kemudian dihapus. Unit: Menit.      </td>
       <td>4320</td>
     </tr>
   </tbody>

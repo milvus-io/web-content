@@ -236,13 +236,13 @@ display(concatenated_image)
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <pre><code translate="no">'results'
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/results.png" alt="Results" class="doc-image" id="results" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results.png" alt="Results" class="doc-image" id="results" />
    </span> <span class="img-wrapper"> <span>Результаты</span> </span></p>
 <p>Мы видим, что большинство изображений относятся к той же категории, что и поисковое изображение - афганская борзая. Это означает, что мы нашли изображения, схожие с поисковым изображением.</p>
 <h2 id="Quick-Deploy" class="common-anchor-header">Быстрое развертывание<button data-href="#Quick-Deploy" class="anchor-icon" translate="no">

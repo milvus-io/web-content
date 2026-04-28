@@ -40,9 +40,9 @@ summary: >-
 <p>コレクション・スキーマには、プライマリ・キー、最大4つのベクトル・フィールド、およびいくつかのスカラー・フィールドがあります。以下の図は、アーティクルをスキーマフィールドのリストにマッピングする方法を示しています。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
    </span> <span class="img-wrapper"> <span>スキーマの設計</span> </span></p>
-<p>検索システムのデータモデル設計には、ビジネスニーズを分析し、情報をスキーマで表現されたデータモデルに抽象化することが含まれます。例えば、テキストの一部を検索するには、"埋め込み "によってリテラル文字列をベクトルに変換し、ベクトル検索を可能にすることによって、"インデックス化 "されなければならない。この必須要件以外にも、出版物のタイムスタンプや著者などのプロパティを格納することが必要な場合がある。このメタデータにより、フィルタリングによってセマンティック検索を絞り込むことができ、特定の日付以降に出版されたテキストや、特定の著者によるテキストだけを返すことができる。アプリケーションで検索結果をレンダリングするために、メインテキストと一緒にこれらのスカラーを取得することもできます。これらのテキスト片を整理するために、それぞれに整数または文字列で表される一意の識別子を割り当てる必要があります。これらの要素は洗練された検索ロジックを実現するために不可欠です。</p>
+<p>検索システムのデータモデル設計は、ビジネスニーズを分析し、情報をスキーマで表現されたデータモデルに抽象化することを含む。例えば、テキストの一部を検索するには、"埋め込み "によってリテラル文字列をベクトルに変換し、ベクトル検索を可能にすることによって、"インデックス化 "されなければならない。この必須要件以外にも、出版物のタイムスタンプや著者などのプロパティを格納することが必要な場合がある。このメタデータにより、フィルタリングによってセマンティック検索を絞り込むことができ、特定の日付以降に出版されたテキストや、特定の著者によるテキストだけを返すことができる。アプリケーションで検索結果をレンダリングするために、メインテキストとともにこれらのスカラーを取得することもできます。これらのテキスト片を整理するために、それぞれに整数または文字列で表される一意の識別子を割り当てる必要があります。これらの要素は洗練された検索ロジックを実現するために不可欠です。</p>
 <p><a href="/docs/ja/schema-hands-on.md">スキーマ設計ハンズオンを</a>参照して、よく設計されたスキーマの作り方を把握してください。</p>
 <h2 id="Create-Schema​" class="common-anchor-header">スキーマの作成<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,7 +59,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>次のコード・スニペットは、スキーマの作成方法を示している。</p>
+    </button></h2><p>以下のコード・スニペットは、スキーマの作成方法を示している。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -200,7 +200,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<p>上記のコード・スニペットの<code translate="no">dim</code> パラメータは、ベクトル・フィールドに保持されるベクトル埋込みの次元を示します。また、<code translate="no">FLOAT_VECTOR</code> の値は、ベクトルフィールドが32ビット浮動小数点数のリストを保持することを示します。これは通常、反比例の表現に使用されます。さらに、milvusは以下のタイプのベクトル埋め込みもサポートしています。</p>
+<p>上記のコード・スニペット中の<code translate="no">dim</code> パラメータは、ベクトル・フィールドに保持されるベクトル埋込みの次元を示します。また、<code translate="no">FLOAT_VECTOR</code> の値は、ベクトルフィールドが32ビット浮動小数点数のリストを保持することを示します。これは通常、反比例の表現に使用されます。さらに、milvusは以下のタイプのベクトル埋め込みもサポートしています。</p>
 <ul>
 <li><p><code translate="no">FLOAT16_VECTOR</code></p>
 <p>このタイプのベクトルフィールドは、16ビットの半精度浮動小数点数のリストを保持し、通常、メモリや帯域幅が制限されたディープラーニングやGPUベースのコンピューティングシナリオに適用されます。</p></li>
@@ -226,8 +226,23 @@ export schema=&quot;{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一般的なケースでは、Milvusに格納されたベクトル埋め込みデータのメタデータを格納するためにスカラーフィールドを使用し、検索結果の正しさを向上させるためにメタデータフィルタリングによるANN検索を行うことができます。Milvusは<strong>VarChar</strong>、<strong>Boolean</strong>、<strong>Int</strong>、Float、<strong>Double</strong>、<strong>Array</strong>、JSONなど複数のスカラーフィールドをサポートしています。</p>
-<h3 id="Add-String-Fields​" class="common-anchor-header">文字列フィールドの追加</h3><p>Milvusでは、VarCharフィールドを使って文字列を格納することができます。VarCharフィールドの詳細については、<a href="/docs/ja/string.md">文字列フィールドを</a>参照してください。</p>
+    </button></h2><p>一般的なケースでは、Milvusに格納されたベクトル埋め込みデータのメタデータを格納するためにスカラーフィールドを使用し、検索結果の正しさを向上させるためにメタデータフィルタリングを使用してANN検索を行うことができます。Milvusは<strong>VarChar</strong>、<strong>Boolean</strong>、<strong>Int</strong>、Float、<strong>Double</strong>、<strong>Array</strong>、JSONなど複数のスカラーフィールドをサポートしています。</p>
+<h3 id="Add-String-Fields​" class="common-anchor-header">文字列フィールドの追加<button data-href="#Add-String-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvusでは、VarCharフィールドを使って文字列を格納することができます。VarCharフィールドの詳細については、<a href="/docs/ja/string.md">文字列フィールドを</a>参照してください。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -269,7 +284,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Number-Fields​" class="common-anchor-header">数値フィールドの追加</h3><p>Milvusがサポートする数値の種類は<code translate="no">Int8</code>,<code translate="no">Int16</code>,<code translate="no">Int32</code>,<code translate="no">Int64</code>,<code translate="no">Float</code>,<code translate="no">Double</code> です。数値フィールドの詳細については、<a href="/docs/ja/number.md">数値フィールドを</a>参照してください。</p>
+<h3 id="Add-Number-Fields​" class="common-anchor-header">数値フィールドの追加<button data-href="#Add-Number-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvusがサポートする数値のタイプは<code translate="no">Int8</code>,<code translate="no">Int16</code>,<code translate="no">Int32</code>,<code translate="no">Int64</code>,<code translate="no">Float</code>,<code translate="no">Double</code> です。数値フィールドの詳細については、<a href="/docs/ja/number.md">数値フィールドを</a>参照してください。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -306,7 +336,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Boolean-Fields​" class="common-anchor-header">ブール値フィールドの追加</h3><p>Milvusはブール型フィールドをサポートしています。以下のコード・スニペットは、ブーリアン・フィールドの追加方法を示しています。</p>
+<h3 id="Add-Boolean-Fields​" class="common-anchor-header">ブール値フィールドの追加<button data-href="#Add-Boolean-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvusはブール型フィールドをサポートしています。以下のコード・スニペットは、ブーリアン・フィールドの追加方法を示しています。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -344,7 +389,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-JSON-fields​" class="common-anchor-header">JSONフィールドの追加</h3><p>JSONフィールドは通常、半構造化JSONデータを格納します。JSONフィールドの詳細については、<a href="/docs/ja/use-json-fields.md">JSONフィールドを</a>参照してください。</p>
+<h3 id="Add-JSON-fields​" class="common-anchor-header">JSONフィールドの追加<button data-href="#Add-JSON-fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>JSONフィールドは通常、半構造化JSONデータを格納します。JSONフィールドの詳細については、<a href="/docs/ja/use-json-fields.md">JSONフィールドを</a>参照してください。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -383,7 +443,22 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Array-Fields​" class="common-anchor-header">配列フィールドの追加</h3><p>配列フィールドは要素のリストを格納します。配列フィールドのすべての要素のデータ型は同じでなければなりません。配列フィールドの詳細については、<a href="/docs/ja/array_data_type.md">配列フィールドを</a>参照してください。</p>
+<h3 id="Add-Array-Fields​" class="common-anchor-header">配列フィールドの追加<button data-href="#Add-Array-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>配列フィールドは要素のリストを格納します。配列フィールドのすべての要素のデータ型は同じでなければなりません。配列フィールドの詳細については、<a href="/docs/ja/array_data_type.md">配列フィールドを</a>参照してください。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​

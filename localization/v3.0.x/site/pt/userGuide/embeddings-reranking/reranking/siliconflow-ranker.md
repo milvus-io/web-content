@@ -142,7 +142,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Os parâmetros seguintes são específicos do classificador SiliconFlow:</p>
+    </button></h3><p>Os parâmetros seguintes são específicos do classificador do SiliconFlow:</p>
 <table>
    <tr>
      <th><p><strong>Parâmetro</strong></p></th>
@@ -171,7 +171,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">queries</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>Lista de cadeias de caracteres de consulta utilizadas pelo modelo de classificação para calcular as pontuações de relevância. O número de cadeias de consulta tem de corresponder exatamente ao número de consultas na sua operação de pesquisa (mesmo quando utiliza vectores de consulta em vez de texto), caso contrário será comunicado um erro.</p></td>
+     <td><p>Lista de cadeias de caracteres de consulta utilizadas pelo modelo de classificação para calcular as pontuações de relevância. O número de cadeias de consulta deve corresponder exatamente ao número de consultas na sua operação de pesquisa (mesmo quando utiliza vectores de consulta em vez de texto), caso contrário será comunicado um erro.</p></td>
      <td><p><em>["consulta de pesquisa"]</em></p></td>
    </tr>
    <tr>
@@ -195,7 +195,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">credential</code></p></td>
      <td><p>Não</p></td>
-     <td><p>Credencial de autenticação para aceder aos serviços da API do SiliconFlow. Se não for especificado, o sistema procurará a variável de ambiente <code translate="no">SILICONFLOW_API_KEY</code>.</p></td>
+     <td><p>Credencial de autenticação para aceder aos serviços da API do SiliconFlow. Se não for especificada, o sistema procurará a variável de ambiente <code translate="no">SILICONFLOW_API_KEY</code>.</p></td>
      <td><p><em>"your-siliconflow-api-key"</em></p></td>
    </tr>
 </table>

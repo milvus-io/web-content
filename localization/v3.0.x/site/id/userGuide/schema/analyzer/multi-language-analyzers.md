@@ -47,7 +47,7 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Fitur ini hanya berfungsi dengan pengambilan teks berbasis BM25 dan vektor jarang. Untuk informasi lebih lanjut, lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p></li>
+<li><p>Fitur ini hanya bekerja dengan pengambilan teks berbasis BM25 dan vektor jarang. Untuk informasi lebih lanjut, lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p></li>
 <li><p>Setiap dokumen dalam satu koleksi hanya dapat menggunakan satu penganalisis, yang ditentukan oleh nilai bidang pengenal bahasanya.</p></li>
 <li><p>Kinerja dapat bervariasi, tergantung pada kompleksitas penganalisis dan ukuran data teks Anda.</p></li>
 </ul>
@@ -69,7 +69,7 @@ beta: Milvus 2.5.11+
     </button></h2><p>Diagram berikut ini menunjukkan alur kerja untuk mengonfigurasi dan menggunakan penganalisis multi-bahasa di Milvus:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/multi-language-analyzers-workflow.png" alt="Multi Language Analyzers Workflow" class="doc-image" id="multi-language-analyzers-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multi-language-analyzers-workflow.png" alt="Multi Language Analyzers Workflow" class="doc-image" id="multi-language-analyzers-workflow" />
    </span> <span class="img-wrapper"> <span>Alur Kerja Penganalisis Multi Bahasa</span> </span></p>
 <ol>
 <li><p><strong>Mengonfigurasi Penganalisis Multi-bahasa</strong>:</p>
@@ -249,9 +249,24 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
         ></path>
       </svg>
     </button></h2><p>Membuat koleksi dengan dukungan multi-bahasa memerlukan konfigurasi bidang dan indeks tertentu:</p>
-<h3 id="Add-fields" class="common-anchor-header">Menambahkan bidang</h3><p>Pada langkah ini, tentukan skema koleksi dengan empat bidang penting:</p>
+<h3 id="Add-fields" class="common-anchor-header">Menambahkan bidang<button data-href="#Add-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pada langkah ini, tentukan skema koleksi dengan empat bidang penting:</p>
 <ul>
-<li><p><strong>Bidang Kunci Utama</strong> (<code translate="no">id</code>): Pengenal unik untuk setiap entitas di dalam koleksi. Dengan mengatur <code translate="no">auto_id=True</code>, Milvus dapat secara otomatis menghasilkan ID ini.</p></li>
+<li><p><strong>Bidang Kunci Utama</strong> (<code translate="no">id</code>): Pengenal unik untuk setiap entitas dalam koleksi. Dengan mengatur <code translate="no">auto_id=True</code>, Milvus dapat secara otomatis menghasilkan ID ini.</p></li>
 <li><p><strong>Bidang Indikator Bahasa</strong> (<code translate="no">language</code>): Bidang VARIABEL ini sesuai dengan <code translate="no">by_field</code> yang ditentukan dalam <code translate="no">multi_analyzer_params</code> Anda. Field ini menyimpan pengenal bahasa untuk setiap entitas, yang memberi tahu Milvus penganalisis mana yang akan digunakan.</p></li>
 <li><p><strong>Bidang Konten Teks</strong> (<code translate="no">text</code>): Bidang VARCHAR ini menyimpan data teks aktual yang ingin Anda analisis dan cari. Pengaturan <code translate="no">enable_analyzer=True</code> sangat penting karena mengaktifkan kemampuan analisis teks untuk bidang ini. Konfigurasi <code translate="no">multi_analyzer_params</code> dilampirkan secara langsung ke bidang ini, membangun hubungan antara data teks Anda dan penganalisis khusus bahasa.</p></li>
 <li><p><strong>Bidang Vektor</strong> (<code translate="no">sparse</code>): Bidang ini akan menyimpan vektor-vektor jarang yang dihasilkan oleh fungsi BM25. Vektor-vektor ini mewakili bentuk data teks Anda yang dapat dianalisis dan merupakan apa yang sebenarnya dicari oleh Milvus.</p></li>
@@ -457,7 +472,22 @@ schema.WithField(entity.NewField().
   &quot;dataType&quot;: &quot;SparseFloatVector&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-BM25-function" class="common-anchor-header">Mendefinisikan fungsi BM25</h3><p>Definisikan fungsi BM25 untuk menghasilkan representasi vektor yang jarang dari data teks mentah Anda:</p>
+<h3 id="Define-BM25-function" class="common-anchor-header">Mendefinisikan fungsi BM25<button data-href="#Define-BM25-function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Definisikan fungsi BM25 untuk menghasilkan representasi vektor yang jarang dari data teks mentah Anda:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create the BM25 function</span>
@@ -518,7 +548,22 @@ schema.WithFunction(function.WithName(<span class="hljs-string">&quot;text_to_ve
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Fungsi ini secara otomatis menerapkan penganalisis yang sesuai untuk setiap entri teks berdasarkan pengenal bahasanya. Untuk informasi lebih lanjut tentang pencarian teks berbasis BM25, lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p>
-<h3 id="Configure-index-params" class="common-anchor-header">Mengonfigurasi parameter indeks</h3><p>Untuk memungkinkan pencarian yang efisien, buat indeks pada bidang vektor yang jarang:</p>
+<h3 id="Configure-index-params" class="common-anchor-header">Mengonfigurasi parameter indeks<button data-href="#Configure-index-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk memungkinkan pencarian yang efisien, buat indeks pada bidang vektor yang jarang:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Configure index parameters</span>
@@ -558,10 +603,25 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Indeks meningkatkan kinerja pencarian dengan mengatur vektor yang jarang untuk penghitungan kemiripan BM25 yang efisien.</p>
-<h3 id="Create-the-collection" class="common-anchor-header">Membuat koleksi</h3><p>Langkah pembuatan terakhir ini menyatukan semua konfigurasi Anda sebelumnya:</p>
+<h3 id="Create-the-collection" class="common-anchor-header">Membuat koleksi<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Langkah pembuatan terakhir ini menyatukan semua konfigurasi Anda sebelumnya:</p>
 <ul>
 <li><p><code translate="no">collection_name=&quot;multilang_demo&quot;</code> menamai koleksi Anda untuk referensi di masa mendatang.</p></li>
-<li><p><code translate="no">schema=schema</code> menerapkan struktur bidang dan fungsi yang Anda tetapkan.</p></li>
+<li><p><code translate="no">schema=schema</code> menerapkan struktur dan fungsi bidang yang telah Anda tetapkan.</p></li>
 <li><p><code translate="no">index_params=index_params</code> menerapkan strategi pengindeksan untuk pencarian yang efisien.</p></li>
 </ul>
 <div class="multipleCode">
@@ -806,7 +866,22 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Use-English-analyzer" class="common-anchor-header">Gunakan penganalisis bahasa Inggris</h3><p>Ketika mencari dengan penganalisis multi-bahasa, <code translate="no">search_params</code> berisi konfigurasi penting:</p>
+    </button></h2><h3 id="Use-English-analyzer" class="common-anchor-header">Gunakan penganalisis bahasa Inggris<button data-href="#Use-English-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ketika mencari dengan penganalisis multi-bahasa, <code translate="no">search_params</code> berisi konfigurasi penting:</p>
 <ul>
 <li><p><code translate="no">metric_type=&quot;BM25&quot;</code> harus sesuai dengan konfigurasi indeks Anda.</p></li>
 <li><p><code translate="no">analyzer_name=&quot;english&quot;</code> menentukan penganalisis mana yang akan diterapkan pada teks kueri Anda. Ini tidak bergantung pada penganalisis yang digunakan pada dokumen yang disimpan.</p></li>
@@ -931,7 +1006,22 @@ curl --request POST \
   &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-Chinese-analyzer" class="common-anchor-header">Gunakan penganalisis bahasa Mandarin</h3><p>Contoh ini mendemonstrasikan peralihan ke penganalisis bahasa Mandarin (menggunakan alias <code translate="no">&quot;cn&quot;</code>) untuk teks kueri yang berbeda. Semua parameter lainnya tetap sama, tetapi sekarang teks kueri diproses menggunakan aturan tokenisasi khusus bahasa Mandarin.</p>
+<h3 id="Use-Chinese-analyzer" class="common-anchor-header">Gunakan penganalisis bahasa Mandarin<button data-href="#Use-Chinese-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Contoh ini mendemonstrasikan peralihan ke penganalisis bahasa Mandarin (menggunakan alias <code translate="no">&quot;cn&quot;</code>) untuk teks kueri yang berbeda. Semua parameter lainnya tetap sama, tetapi sekarang teks kueri diproses menggunakan aturan tokenisasi khusus bahasa Mandarin.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params[<span class="hljs-string">&quot;analyzer_name&quot;</span>] = <span class="hljs-string">&quot;cn&quot;</span>

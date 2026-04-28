@@ -386,7 +386,7 @@ summary: 瞭解如何為 Milvus 配置 etcd。
   </thead>
   <tbody>
     <tr>
-      <td>        Etcd 操作超時（以毫秒為單位      </td>
+      <td>        Etcd 操作超時（毫秒      </td>
       <td>10000</td>
     </tr>
   </tbody>

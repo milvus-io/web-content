@@ -26,7 +26,7 @@ title: قم بترقية بولسار في ميلفوس من V2 إلى V3
 <p>إذا كنت تفضل استخدام Pulsar V2 مع Milvus v2.5.x، اقرأ <a href="/docs/ar/use-pulsar-v2.md">استخدام Pulsar V2 مع Milvus v2.5.x</a>.</p>
 <div class="alert note">
 <ol>
-<li><p>تتطلب عملية الترقية انقطاعًا قصيرًا للخدمة (عادةً ما يستغرق الأمر من بضع دقائق إلى أكثر من عشر دقائق، اعتمادًا على كمية البيانات).</p></li>
+<li><p>تتطلب عملية الترقية انقطاعاً وجيزاً للخدمة (عادةً ما يستغرق الأمر من بضع دقائق إلى أكثر من عشر دقائق، حسب كمية البيانات).</p></li>
 <li><p>قبل العملية، تحتاج إلى إيقاف جميع العملاء قيد التشغيل من كتابة البيانات إلى ميلفوس. وإلا فقد تُفقد البيانات المكتوبة.</p></li>
 <li><p>تفترض هذه المقالة أن Milvus مثبت في مساحة الاسم <code translate="no">default</code> واسمه <code translate="no">my-release</code>. يرجى تغيير المعلمات إلى مساحة الاسم واسم الإصدار الخاص بك أثناء تنفيذ الأوامر المنسوخة من هذه الصفحة.</p></li>
 <li><p>تأكد من أن بيئة العمل الخاصة بك لديها أذونات ضمن مساحة الاسم المذكورة أعلاه في مجموعة Kubernetes وتم تثبيت الأوامر التالية.</p>
@@ -73,23 +73,38 @@ title: قم بترقية بولسار في ميلفوس من V2 إلى V3
         ></path>
       </svg>
     </button></h2><p>يقدم هذا القسم الإجراءات التفصيلية لترقية بولسار من V2 إلى V3 في ميلفوس.</p>
-<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">استمرار البيانات غير المستهلكة في بولسار</h3><p>في هذه الخطوة، تحتاج في هذه الخطوة إلى التأكد من استمرار البيانات الموجودة في بولسار إلى خدمة تخزين الكائنات. هناك طريقتان متاحتان، ويمكنك اختيار الطريقة التي تناسب احتياجاتك.</p>
+<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">استمرار البيانات غير المستهلكة في بولسار<button data-href="#Persist-data-not-consumed-in-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في هذه الخطوة، تحتاج في هذه الخطوة إلى التأكد من استمرار البيانات الموجودة في بولسار إلى خدمة تخزين الكائنات. هناك طريقتان متاحتان، ويمكنك اختيار الطريقة التي تناسب احتياجاتك.</p>
 <h4 id="Approach-1-Using-Attu" class="common-anchor-header">النهج 1: استخدام أتو</h4><p>إذا لم يكن لديك سوى عدد قليل من المجموعات في عملية نشر Milvus العاملة الخاصة بك مع عدم وجود العديد من الشرائح، يمكنك استخدام Attu لاستمرار البيانات إلى خدمة تخزين الكائنات.</p>
 <ol>
 <li><p>حدد كل مجموعة في جميع قواعد البيانات الخاصة بك، وادخل إلى لوحة <code translate="no">Segments</code> ، وانقر فوق الزر <code translate="no">Flush</code> </p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
    </span> <span class="img-wrapper"> <span>لوحة شريحة من مجموعة</span> </span></p></li>
 <li><p>ثم عند النافذة المنبثقة، انقر فوق <code translate="no">Flush</code> مرة أخرى.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
    </span> <span class="img-wrapper"> <span>مطالبة تدفق البيانات في أتو</span> </span></p></li>
 <li><p>ثم انتظر حتى تصبح جميع حالات الشرائح الثابتة للمجموعات <code translate="no">Flushed</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/view-data-peristent-process.png" alt="View data flush status in Attu" class="doc-image" id="view-data-flush-status-in-attu" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/view-data-peristent-process.png" alt="View data flush status in Attu" class="doc-image" id="view-data-flush-status-in-attu" />
    </span> <span class="img-wrapper"> <span>عرض حالة تدفق البيانات في أتو</span> </span></p></li>
 </ol>
 <h4 id="Approach-2-Using-management-API" class="common-anchor-header">النهج 2: استخدام واجهة برمجة تطبيقات الإدارة</h4><ol>
@@ -140,7 +155,22 @@ title: قم بترقية بولسار في ميلفوس من V2 إلى V3
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">أوقف Milvus واحذف Pulsar V2</h3><p>في هذه الخطوة، تحتاج إلى إيقاف جراب Milvus وحذف نشر Pulsar V2. هناك قسمان منفصلان متاحان:</p>
+<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">أوقف Milvus واحذف Pulsar V2<button data-href="#Stop-Milvus-and-delete-Pulsar-V2" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في هذه الخطوة، تحتاج إلى إيقاف جراب Milvus وحذف نشر Pulsar V2. هناك قسمان منفصلان متاحان:</p>
 <ul>
 <li><p>لمستخدمي Milvus Helm</p>
 <p>إذا كنت قد قمت بتثبيت Milvus باستخدام مخطط Milvus Helm، انتقل إلى <a href="#Delete-Pulsar-V2-using-Helm">حذف Pulsar v2 باستخدام Helm</a>.</p></li>
@@ -293,12 +323,27 @@ milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">بدء تشغيل بولسار V3 وميلفوس</h3><p>في هذه الخطوة، تحتاج في هذه الخطوة إلى بدء تشغيل مجلدات Pulsar V3 و Milvus. هناك قسمان منفصلان متاحان:</p>
+<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">بدء تشغيل بولسار V3 وميلفوس<button data-href="#Start-Pulsar-V3-and-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في هذه الخطوة، تحتاج في هذه الخطوة إلى بدء تشغيل مجلدات Pulsar V3 و Milvus. هناك قسمان منفصلان متاحان:</p>
 <ul>
 <li><p>لمستخدم Helm</p>
 <p>إذا كنت قد قمت بتثبيت Milvus باستخدام مخطط Milvus Helm، انتقل إلى لمستخدمي <a href="#For-Helm-User">Milvus Helm</a>.</p></li>
 <li><p>لمستخدمي مشغل ميلفوس</p>
-<p>إذا كنت قد قمت بتثبيت Milvus باستخدام مشغل Milvus، انتقل إلى لمستخدم <a href="#For-Milvus-Operator-User">مشغل Mil</a>vus.</p></li>
+<p>إذا كنت قد قمت بتثبيت Milvus باستخدام مشغل Milvus، انتقل إلى لمستخدم <a href="#For-Milvus-Operator-User">مشغل Milvus</a>.</p></li>
 </ul>
 <h4 id="Start-Pulsar-V3-and-using-Helm" class="common-anchor-header">بدء تشغيل Pulsar V3 واستخدام Helm</h4><ol>
 <li><p>قم بتحرير <code translate="no">values.yaml</code> المحفوظ في الخطوة السابقة.</p>

@@ -45,9 +45,9 @@ summary: >-
 <p>На следующем рисунке показано, как это работает:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF-FLAT-workflow.png" alt="IVF FLAT Workflow" class="doc-image" id="ivf-flat-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF-FLAT-workflow.png" alt="IVF FLAT Workflow" class="doc-image" id="ivf-flat-workflow" />
    </span> <span class="img-wrapper"> <span>Рабочий процесс ЭКО FLAT</span> </span></p>
-<p>Этот метод индексирования ускоряет процесс поиска, но имеет потенциальный недостаток: кандидат, найденный как ближайший к вкраплению запроса, может оказаться не совсем ближайшим. Это может произойти, если ближайший к запросу эмбеддинг находится в кластере, отличном от кластера, выбранного на основе ближайшего центроида (см. визуализацию ниже).</p>
+<p>Этот метод индексирования ускоряет процесс поиска, но имеет потенциальный недостаток: кандидат, найденный как ближайший к вкраплению запроса, может оказаться не совсем ближайшим. Это может произойти, если ближайший к запросу эмбеддинг находится в кластере, отличном от того, который был выбран на основе ближайшего центроида (см. визуализацию ниже).</p>
 <p>Для решения этой проблемы <strong>IVF_FLAT</strong> предоставляет два гиперпараметра, которые мы можем настраивать:</p>
 <ul>
 <li><p><code translate="no">nlist</code>: Определяет количество разделов, которые необходимо создать с помощью алгоритма k-means.</p></li>
@@ -56,7 +56,7 @@ summary: >-
 <p>Теперь, если мы установим значение <code translate="no">nprobe</code> равным 3, а не 1, мы получим следующий результат:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF-FLAT-workflow-2.png" alt="IVF FLAT Workflow 2" class="doc-image" id="ivf-flat-workflow-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF-FLAT-workflow-2.png" alt="IVF FLAT Workflow 2" class="doc-image" id="ivf-flat-workflow-2" />
    </span> <span class="img-wrapper"> <span>ЭКО FLAT Workflow 2</span> </span></p>
 <p>Увеличив значение <code translate="no">nprobe</code>, вы можете включить в поиск больше разделов, что поможет не пропустить ближайшее к запросу вложение, даже если оно находится в другом разделе. Однако за это приходится платить увеличением времени поиска, поскольку необходимо оценить больше кандидатов. Дополнительные сведения о настройке параметров индекса см. в разделе <a href="/docs/ru/ivf-flat.md#Index-params">Параметры индекса</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Построение индекса<button data-href="#Build-index" class="anchor-icon" translate="no">
@@ -155,7 +155,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>В этом разделе представлен обзор параметров, используемых для построения индекса и выполнения поиска по нему.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Параметры построения индекса</h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">params</code> при <a href="/docs/ru/ivf-flat.md#Build-index">построении индекса</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Параметры построения индекса<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">params</code> при <a href="/docs/ru/ivf-flat.md#Build-index">построении индекса</a>.</p>
 <table>
    <tr>
      <th><p>Параметр</p></th>
@@ -170,7 +185,22 @@ res = MilvusClient.search(
      <td><p>Большие значения <code translate="no">nlist</code> улучшают отзыв за счет создания более точных кластеров, но увеличивают время построения индекса. Оптимизируйте значение в зависимости от размера набора данных и доступных ресурсов. В большинстве случаев мы рекомендуем устанавливать значение в этом диапазоне: [32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Параметры поиска, специфичные для индекса</h3><p>В следующей таблице перечислены параметры, которые можно настроить в <code translate="no">search_params.params</code> при <a href="/docs/ru/ivf-flat.md#Search-on-index">поиске по индексу</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Параметры поиска, специфичные для индекса<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В следующей таблице перечислены параметры, которые можно настроить в <code translate="no">search_params.params</code> при <a href="/docs/ru/ivf-flat.md#Search-on-index">поиске по индексу</a>.</p>
 <table>
    <tr>
      <th><p>Параметр</p></th>
@@ -180,7 +210,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">nprobe</code></p></td>
-     <td><p>Количество кластеров для поиска кандидатов. При больших значениях можно искать в большем количестве кластеров, что улучшает запоминание за счет расширения области поиска, но ценой увеличения задержки запроса.</p></td>
+     <td><p>Количество кластеров для поиска кандидатов. При больших значениях можно искать в большем количестве кластеров, что улучшает запоминание благодаря расширению области поиска, но ценой увеличения задержки запроса.</p></td>
      <td><p><strong>Тип</strong>: Integer <strong>Диапазон</strong>: [1, <em>nlist</em>].</p><p><strong>Значение по умолчанию</strong>: <code translate="no">8</code></p></td>
      <td><p>Увеличение этого значения улучшает отзыв, но может замедлить поиск. Установите значение <code translate="no">nprobe</code> пропорционально значению <code translate="no">nlist</code>, чтобы сбалансировать скорость и точность.</p><p>В большинстве случаев мы рекомендуем устанавливать значение в этом диапазоне: [1, nlist].</p></td>
    </tr>

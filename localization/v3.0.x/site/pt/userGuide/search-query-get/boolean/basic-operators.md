@@ -205,9 +205,9 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><p><code translate="no">IN</code>: Utilizados para fazer corresponder valores dentro de um conjunto ou intervalo específico.</p></li>
-<li><p><code translate="no">LIKE</code>: Usado para corresponder a um padrão (principalmente para campos de texto).  O Milvus permite-lhe criar um índice <code translate="no">NGRAM</code> em campos VARCHAR ou JSON para acelerar as consultas de texto. Para obter detalhes, consulte <a href="/docs/pt/ngram.md">NGRAM</a>.</p></li>
+<li><p><code translate="no">LIKE</code>: Usado para corresponder a um padrão (principalmente para campos de texto).  Milvus permite-lhe construir um índice <code translate="no">NGRAM</code> em campos VARCHAR ou JSON para acelerar as consultas de texto. Para obter detalhes, consulte <a href="/docs/pt/ngram.md">NGRAM</a>.</p></li>
 </ul>
-<h3 id="Example-1-Using-IN-to-Match-Multiple-Values" class="common-anchor-header">Exemplo 1: Usando <code translate="no">IN</code> para corresponder a vários valores<button data-href="#Example-1-Using-IN-to-Match-Multiple-Values" class="anchor-icon" translate="no">
+<h3 id="Example-1-Using-IN-to-Match-Multiple-Values" class="common-anchor-header">Exemplo 1: Usando <code translate="no">IN</code> para combinar vários valores<button data-href="#Example-1-Using-IN-to-Match-Multiple-Values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -243,7 +243,7 @@ summary: >-
       </svg>
     </button></h3><p>O operador <code translate="no">LIKE</code> é utilizado para correspondência de padrões em campos de cadeia de caracteres. Ele pode corresponder substrings em diferentes posições dentro do texto: como um <strong>prefixo</strong>, <strong>infixo</strong> ou <strong>sufixo</strong>. O operador <code translate="no">LIKE</code> utiliza o símbolo <code translate="no">%</code> como um wildcard, que pode corresponder a qualquer número de caracteres (incluindo zero).</p>
 <div class="alert note">
-<p>Na maioria dos casos, a correspondência de <strong>infixo</strong> ou <strong>sufixo</strong> é significativamente mais lenta do que a correspondência de prefixo. Use-os com cuidado se o desempenho for crítico.</p>
+<p>Na maioria dos casos, a correspondência de <strong>infixo</strong> ou <strong>sufixo</strong> é significativamente mais lenta do que a correspondência de prefixo. Utilize-os com cuidado se o desempenho for crítico.</p>
 </div>
 <h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Correspondência de prefixo (começa com)<button data-href="#Prefix-Match-Starts-With" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -629,7 +629,7 @@ summary: >-
 ]
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Exemplo 1: Recuperar entidades onde as etiquetas são nulas</strong></p>
-<p>Para obter entidades em que o campo <code translate="no">tags</code> está em falta ou explicitamente definido como <code translate="no">None</code>:</p>
+<p>Para recuperar entidades em que o campo <code translate="no">tags</code> está em falta ou explicitamente definido como <code translate="no">None</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -638,7 +638,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Exemplo 2: Recuperar entidades onde tags não é nulo</strong></p>
+<p><strong>Exemplo 2: Recuperar entidades em que as etiquetas não são nulas</strong></p>
 <p>Para recuperar entidades onde o campo <code translate="no">tags</code> não é nulo:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
 

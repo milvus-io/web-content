@@ -89,7 +89,7 @@ title: Construir RAG com Milvus e Crawl4AI
 [32m[COMPLETE] ● ✅ Crawling test passed![0m
 [0m
 </code></pre>
-<h3 id="Setting-Up-OpenAI-API-Key" class="common-anchor-header">Configurar a chave da API do OpenAI<button data-href="#Setting-Up-OpenAI-API-Key" class="anchor-icon" translate="no">
+<h3 id="Setting-Up-OpenAI-API-Key" class="common-anchor-header">Configurar a chave de API do OpenAI<button data-href="#Setting-Up-OpenAI-API-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -369,7 +369,7 @@ Processing sections: 100%|██████████| 18/18 [00:09&lt;00:00,
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Vamos especificar uma pergunta de consulta sobre o site que acabámos de rastrear.</p>
+    </button></h3><p>Vamos especificar uma pergunta de consulta sobre o sítio Web que acabámos de rastrear.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;What are the main components of autonomous agents?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Pesquise a pergunta na coleção e recupere as 3 principais correspondências semânticas.</p>

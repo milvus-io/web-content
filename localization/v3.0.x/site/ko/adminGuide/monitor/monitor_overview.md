@@ -42,17 +42,62 @@ summary: Milvus에서 Prometheus와 Grafana가 모니터링 및 알림 서비스
 <li>Prometheus 모니터링 인스턴스를 효과적으로 관리하기 위한 Prometheus 운영자.</li>
 <li>엔드투엔드 Kubernetes 클러스터 모니터링을 쉽게 운영할 수 있는 Kube-prometheus.</li>
 </ul>
-<h3 id="Metric-names" class="common-anchor-header">메트릭 이름</h3><p>Prometheus의 유효한 메트릭 이름에는 네임스페이스, 서브시스템, 이름이라는 세 가지 요소가 포함됩니다. 이 세 가지 요소는 "_"로 연결됩니다.</p>
-<p>Prometheus에서 모니터링하는 Milvus 메트릭의 네임스페이스는 "milvus"입니다. 메트릭이 속한 역할에 따라 해당 하위 시스템은 다음 8가지 역할 중 하나에 속해야 합니다: "rootcoord", "프록시", "쿼리코드", "쿼리노드", "인덱스코드", "인덱스노드", "데이터코드", "데이터노드".</p>
-<p>예를 들어 쿼리된 벡터의 총 수를 계산하는 Milvus 메트릭의 이름은 <code translate="no">milvus_proxy_search_vectors_count</code> 입니다.</p>
-<h3 id="Metric-types" class="common-anchor-header">메트릭 유형</h3><p>Prometheus는 네 가지 유형의 메트릭을 지원합니다:</p>
+<h3 id="Metric-names" class="common-anchor-header">메트릭 이름<button data-href="#Metric-names" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Prometheus의 유효한 메트릭 이름에는 네임스페이스, 서브시스템, 이름이라는 세 가지 요소가 포함됩니다. 이 세 가지 요소는 "_"로 연결됩니다.</p>
+<p>Prometheus에서 모니터링하는 Milvus 메트릭의 네임스페이스는 "milvus"입니다. 메트릭이 속한 역할에 따라 하위 시스템은 다음 8가지 역할 중 하나에 속해야 합니다: "rootcoord", "프록시", "쿼리코드", "쿼리노드", "인덱스코드", "인덱스노드", "데이터코드", "데이터노드".</p>
+<p>예를 들어, 쿼리된 벡터의 총 수를 계산하는 Milvus 메트릭의 이름은 <code translate="no">milvus_proxy_search_vectors_count</code> 입니다.</p>
+<h3 id="Metric-types" class="common-anchor-header">메트릭 유형<button data-href="#Metric-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Prometheus는 네 가지 유형의 메트릭을 지원합니다:</p>
 <ul>
 <li>카운터: 재시작 시에만 값이 증가하거나 0으로 초기화될 수 있는 누적 메트릭 유형입니다.</li>
 <li>게이지: 값이 올라가거나 내려갈 수 있는 메트릭 유형입니다.</li>
 <li>히스토그램: 구성 가능한 버킷을 기준으로 카운트되는 메트릭 유형입니다. 일반적인 예로는 요청 지속 시간이 있습니다.</li>
 <li>요약: 히스토그램과 유사한 메트릭 유형으로 슬라이딩 시간 창에 대해 구성 가능한 사분위수를 계산합니다.</li>
 </ul>
-<h3 id="Metric-labels" class="common-anchor-header">메트릭 레이블</h3><p>Prometheus는 동일한 메트릭 이름을 가진 샘플에 레이블을 지정하여 구분합니다. 레이블은 메트릭의 특정 속성입니다. 이름이 같은 메트릭은 <code translate="no">variable_labels</code> 필드에 대해 동일한 값을 가져야 합니다. 다음 표에는 Milvus 메트릭의 일반적인 레이블의 이름과 의미가 나와 있습니다.</p>
+<h3 id="Metric-labels" class="common-anchor-header">메트릭 레이블<button data-href="#Metric-labels" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Prometheus는 동일한 메트릭 이름을 가진 샘플에 레이블을 지정하여 구분합니다. 레이블은 메트릭의 특정 속성입니다. 이름이 같은 메트릭은 <code translate="no">variable_labels</code> 필드에 대해 동일한 값을 가져야 합니다. 다음 표에는 Milvus 메트릭의 일반적인 레이블의 이름과 의미가 나와 있습니다.</p>
 <table>
 <thead>
 <tr><th>레이블 이름</th><th>정의</th><th>값</th></tr>
@@ -103,7 +148,7 @@ summary: Milvus에서 Prometheus와 Grafana가 모니터링 및 알림 서비스
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>모니터링 및 알림의 기본 워크플로우에 대해 알아본 후 다음을 학습하세요:</p>
+    </button></h2><p>모니터링 및 알림의 기본 워크플로우에 대해 학습한 후에는 다음을 학습하세요:</p>
 <ul>
 <li><a href="/docs/ko/monitor.md">모니터링 서비스 배포하기</a></li>
 <li><a href="/docs/ko/visualize.md">Milvus 메트릭 시각화하기</a></li>

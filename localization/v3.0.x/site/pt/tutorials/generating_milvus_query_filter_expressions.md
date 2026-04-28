@@ -1,7 +1,7 @@
 ---
 id: generating_milvus_query_filter_expressions.md
 summary: >-
-  Neste tutorial, demonstraremos como utilizar Modelos de Linguagem Grandes
+  Neste tutorial, vamos demonstrar como utilizar Modelos de Linguagem Grandes
   (LLMs) para gerar automaticamente expressões de filtragem Milvus a partir de
   consultas em linguagem natural. Esta abordagem torna a consulta de bases de
   dados vectoriais mais acessível, permitindo que os utilizadores expressem

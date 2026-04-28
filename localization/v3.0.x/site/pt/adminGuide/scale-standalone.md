@@ -135,7 +135,7 @@ $ docker <span class="hljs-built_in">rm</span> milvus-standalone
 7aea450f87ce   milvus-standalone   7.52%     210.9MiB / 4GiB     5.15%     1.05kB / 0B   610kB / 8.19kB   29
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Scale-instances-deployed-using-Docker-Compose" class="common-anchor-header">Escalar instâncias implantadas usando o Docker Compose<button data-href="#Scale-instances-deployed-using-Docker-Compose" class="anchor-icon" translate="no">
+<h2 id="Scale-instances-deployed-using-Docker-Compose" class="common-anchor-header">Dimensionar instâncias implantadas usando o Docker Compose<button data-href="#Scale-instances-deployed-using-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -153,7 +153,7 @@ $ docker <span class="hljs-built_in">rm</span> milvus-standalone
     </button></h2><p>Para dimensionar uma instância do Milvus em execução no momento, é necessário parar a instância, remover a pilha de contêineres e reimplantar a instância com novas configurações e dados persistentes.</p>
 <p>O procedimento específico é o seguinte:</p>
 <ol>
-<li><p>Execute <code translate="no">docker stats milvus-standalone</code> para ver a CPU e a memória alocadas para a instância do Milvus. A saída deve ser semelhante à seguinte:</p>
+<li><p>Execute <code translate="no">docker stats milvus-standalone</code> para visualizar a CPU e a memória alocadas para a instância do Milvus. A saída deve ser semelhante à seguinte:</p>
 <pre><code translate="no" class="language-bash">CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O       BLOCK I/O         PIDS
 917da667f2ff   milvus-standalone   6.10%     171.8MiB / 3.886GiB   4.32%     1.57kB / 0B   1.01GB / 1.79MB   31
 <button class="copy-code-btn"></button></code></pre>

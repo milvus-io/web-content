@@ -44,7 +44,22 @@ title: Uso de NLWeb con Milvus
         ></path>
       </svg>
     </button></h2><p>NLWeb puede configurarse para utilizar Milvus como motor de recuperación. A continuación encontrará una guía sobre cómo configurar y utilizar NLWeb con Milvus.</p>
-<h3 id="Installation" class="common-anchor-header">Instalación</h3><p>Clone el repositorio y configure su entorno:</p>
+<h3 id="Installation" class="common-anchor-header">Instalación<button data-href="#Installation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Clone el repositorio y configure su entorno:</p>
 <pre><code translate="no" class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/microsoft/NLWeb
 <span class="hljs-built_in">cd</span> NLWeb
 python -m venv .venv
@@ -53,7 +68,22 @@ python -m venv .venv
 pip install -r requirements.txt
 pip install pymilvus  <span class="hljs-comment"># Add Milvus Python client</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Configuring-Milvus" class="common-anchor-header">Configuración de Milvus</h3><p>Para utilizar <strong>Milvus</strong>, actualice su configuración.</p>
+<h3 id="Configuring-Milvus" class="common-anchor-header">Configuración de Milvus<button data-href="#Configuring-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para utilizar <strong>Milvus</strong>, actualice su configuración.</p>
 <h4 id="Update-config-files-in-codeconfig" class="common-anchor-header">Actualice los archivos de configuración en <code translate="no">code/config</code></h4><p>Abra el archivo <code translate="no">config_retrieval.yaml</code> y añada la configuración de Milvus:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">preferred_endpoint:</span> <span class="hljs-string">milvus_local</span>
 
@@ -65,12 +95,42 @@ pip install pymilvus  <span class="hljs-comment"># Add Milvus Python client</spa
     <span class="hljs-comment"># Specify the database type</span>
     <span class="hljs-attr">db_type:</span> <span class="hljs-string">milvus</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Loading-Data" class="common-anchor-header">Cargar datos</h3><p>Una vez configurado, cargue su contenido utilizando fuentes RSS.</p>
+<h3 id="Loading-Data" class="common-anchor-header">Cargar datos<button data-href="#Loading-Data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Una vez configurado, cargue su contenido utilizando fuentes RSS.</p>
 <p>Desde el directorio <code translate="no">code</code>:</p>
 <pre><code translate="no" class="language-bash">python -m tools.db_load https://feeds.libsyn.com/121695/rss Behind-the-Tech
 <button class="copy-code-btn"></button></code></pre>
 <p>Esto incorporará el contenido a su colección Milvus, almacenando tanto los datos de texto como las incrustaciones vectoriales.</p>
-<h3 id="Running-the-Server" class="common-anchor-header">Ejecutar el servidor</h3><p>Para iniciar NLWeb, desde el directorio <code translate="no">code</code>, ejecute:</p>
+<h3 id="Running-the-Server" class="common-anchor-header">Ejecutar el servidor<button data-href="#Running-the-Server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para iniciar NLWeb, desde el directorio <code translate="no">code</code>, ejecute:</p>
 <pre><code translate="no" class="language-bash">python app-file.py
 <button class="copy-code-btn"></button></code></pre>
 <p>Ahora puede consultar su contenido mediante lenguaje natural utilizando la interfaz de usuario web en http://localhost:8000/ o directamente a través de la API REST compatible con MCP.</p>

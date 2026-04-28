@@ -187,7 +187,7 @@ beta: Milvus 2.6.4+
      <td><p><code translate="no">search_list_size</code></p></td>
      <td><p>在索引建構期間，此參數會定義為每個節點搜尋最近鄰居時所使用的候選池大小。對於新增到圖表中的每個節點，演算法會維護一個 search_list_size 最佳候選人清單。當這份清單無法再改善時，鄰居搜尋就會停止。從這個最終候選人資料庫中，選出最高 max_degree 節點來組成最終邊。</p></td>
      <td><p><strong>類型</strong>：整數</p><p><strong>範圍：</strong>[1, 512]</p><p><strong>預設值</strong>：<code translate="no">100</code></p></td>
-     <td><p>較大的 search_list_size 會增加為每個節點找到真正最近鄰居的可能性，這可能會導致更高品質的圖、以及更好的搜尋效能 (回復率)。不過，這也是以大幅延長索引建立時間為代價。它應該永遠設定為大於或等於 max_degree 的值。</p></td>
+     <td><p>較大的 search_list_size 會增加找到每個節點的真正最近鄰居的可能性，這可能會導致更高品質的圖、以及更好的搜尋效能 (回復率)。不過，這也是以大幅延長索引建立時間為代價。它應該永遠設定為大於或等於 max_degree 的值。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">inline_pq</code></p></td>
@@ -275,7 +275,7 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p><code translate="no">pq_read_page_cache_size</code></p></td>
-     <td><p>每個搜尋線程以 DRAM 為單位的 PQ 讀取快取大小 (位元組)。它會快取包含 PQ 向量的頻繁存取資料頁 (在效能模式中會忽略，僅在 rearrange 為 true 時適用)。</p><p>PQ 讀取快取記憶體在所有 AISAQ 區段中重複使用。</p></td>
+     <td><p>每個搜尋線程以 DRAM 為單位的 PQ 讀取快取大小 (位元組)。它會快取包含 PQ 向量的頻繁存取資料頁 (在效能模式中會被忽略，僅在 rearrange 為 true 時適用)。</p><p>PQ 讀取快取記憶體在所有 AISAQ 區段中重複使用。</p></td>
      <td><p><strong>類型</strong>：整數</p><p><strong>範圍：</strong>[0, 33554432]</p><p><strong>預設值</strong>：<code translate="no">5242880 (5MiB)</code></p></td>
      <td><p>較大的快取記憶體可改善查詢效能，但會增加 DRAM 使用量。</p><p>建議值範圍：小區段 (1 M向量) 為 2 MiB，中區段 (50 M向量) 為 5 MiB，大區段 (250 M向量) 為 10 MiB。</p></td>
    </tr>

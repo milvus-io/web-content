@@ -278,7 +278,7 @@ milvus_writer_added = rag_wf.flow.add_nodes(vector_store)  <span class="hljs-com
 <li>Si l'authentification est activée :</li>
 <li>Fournir <code translate="no">&lt;your_username&gt;:&lt;your_password&gt;</code> comme <code translate="no">token</code>.</li>
 <li>Si l'authentification est désactivée :</li>
-<li>Ne pas paramétrer <code translate="no">token</code>.</li>
+<li>Ne pas configurer <code translate="no">token</code>.</li>
 </ul>
 <p><strong>Zilliz Cloud (service géré)</strong></p>
 <ul>

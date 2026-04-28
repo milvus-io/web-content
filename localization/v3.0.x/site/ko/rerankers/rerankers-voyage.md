@@ -2,7 +2,7 @@
 id: rerankers-voyage.md
 order: 5
 summary: >-
-  Milvus는 `VoyageRerankFunction` 클래스를 통해 Voyage 재랭커 모델을 지원합니다. 이 기능을 사용하면 쿼리-문서
+  Milvus는 `VoyageRerankFunction` 클래스를 통해 Voyage 리랭커 모델을 지원합니다. 이 기능을 사용하면 쿼리-문서
   쌍의 관련성을 효과적으로 점수화할 수 있습니다.
 title: 랭커 항해
 ---
@@ -42,7 +42,7 @@ voyage_rf = VoyageRerankFunction(
 <li><p><code translate="no">api_key</code> <em>(문자열</em>)</p>
 <p>Voyage API에 액세스하기 위한 API 키입니다. API 키를 생성하는 방법에 대한 자세한 내용은 <a href="https://docs.voyageai.com/docs/api-key-and-installation">API 키 및 파이썬 클라이언트를</a> 참조하세요.</p></li>
 </ul>
-<p>그런 다음 다음 코드를 사용하여 쿼리를 기반으로 문서의 순위를 재조정합니다:</p>
+<p>그런 다음 다음 코드를 사용하여 쿼리를 기반으로 문서의 순위를 다시 지정합니다:</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>
 
 documents = [

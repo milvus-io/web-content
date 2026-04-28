@@ -106,7 +106,7 @@ summary: >-
 <li><p><strong>Preelaborazione della query</strong></p>
 <ul>
 <li><p>Il vettore di query viene scomposto in <code translate="no">m</code> sottovettori, che corrispondono alla struttura di decomposizione originale di PQ.</p></li>
-<li><p>Per ogni sottovettore della query e il suo codebook corrispondente (contenente i centroidi a 2 <sup>bit</sup> ), si calcolano e si memorizzano le distanze da tutti i centroidi.</p></li>
+<li><p>Per ogni sottovettore della query e il suo codebook corrispondente (contenente i centroidi a 2 <sup>bit</sup> ), vengono calcolate e memorizzate le distanze da tutti i centroidi.</p></li>
 <li><p>Questo genera <code translate="no">m</code> tabelle di ricerca, dove ogni tabella contiene distanze a <sup>2nbits</sup>.</p></li>
 </ul></li>
 <li><p><strong>Approssimazione della distanza</strong></p>
@@ -182,7 +182,7 @@ index_params.add_index(
 </ul>
 <p>Per conoscere i parametri di costruzione disponibili per l'indice <code translate="no">IVF_PQ</code>, fare riferimento a <a href="/docs/it/ivf-pq.md#Index-building-params">Parametri di costruzione dell'indice</a>.</p></li>
 </ul>
-<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice usando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
+<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice utilizzando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Ricerca nell'indice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

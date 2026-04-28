@@ -81,7 +81,7 @@ title: Melhorar a qualidade de recuperação da sua candidatura LLM com AIMon e 
     </button></h1><ol>
 <li>Registar uma <a href="https://docs.aimon.ai/quickstart">conta AIMon aqui</a>.</li>
 </ol>
-<p>Adicionar este segredo aos Segredos do Colab (o símbolo de "chave" no painel da esquerda)</p>
+<p>Adicionar este segredo aos segredos do Colab (o símbolo de "chave" no painel da esquerda)</p>
 <blockquote>
 <p>Se estiver noutro ambiente que não seja o do Google Colab, substitua você mesmo o código relacionado com o Google Colab</p>
 </blockquote>
@@ -512,7 +512,7 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Average retrieval relevance score for brute force approach: 14.31772340191865
 </code></pre>
-<p>Esta é uma pontuação de qualidade de <strong>base</strong> da aplicação LLM. Também pode ver as métricas individuais, como as pontuações de alucinação, etc., calculadas pelo AIMon na <a href="https://www.app.aimon.ai/llmapps?source=sidebar&amp;stage=production">interface de utilizador do AIMon</a></p>
+<p>Esta é uma pontuação de qualidade de <strong>base</strong> da aplicação LLM. Também pode ver as métricas individuais, como as pontuações de alucinação, etc., calculadas pelo AIMon na <a href="https://www.app.aimon.ai/llmapps?source=sidebar&amp;stage=production">IU do AIMon</a></p>
 <h1 id="2-Use-a-VectorDB-Milvus-for-document-retrieval" class="common-anchor-header">2. Utilizar um VectorDB (Milvus) para a recuperação de documentos<button data-href="#2-Use-a-VectorDB-Milvus-for-document-retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -532,7 +532,7 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
 <p>Há dois componentes principais a que temos de estar atentos: A ingestão e as perguntas e respostas baseadas em RAG. O pipeline de ingestão processa as transcrições do conjunto de dados do Meeting Bank e armazena-as na base de dados Milvus Vetor. O pipeline RAG Q&amp;A processa uma consulta do utilizador, recuperando primeiro os documentos relevantes do armazenamento vetorial. Estes documentos serão depois utilizados como documentos de base para o LLM gerar a sua resposta. Utilizamos o AIMon para calcular a pontuação de qualidade e monitorizar continuamente a aplicação em termos de <a href="https://docs.aimon.ai/detectors/hallucination">alucinação</a>, <a href="https://docs.aimon.ai/detectors/instruction_adherence">adesão às instruções</a> e <a href="https://docs.aimon.ai/checker-models/context_relevance">relevância do contexto</a>. Estas são as mesmas 3 métricas que utilizámos para definir a pontuação <code translate="no">quality</code> acima.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
    </span> <span class="img-wrapper"> <span>fluxo de trabalho</span> </span></p>
 <p>Abaixo estão algumas funções utilitárias para pré-processar e calcular embeddings para documentos.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -822,7 +822,7 @@ avg_retrieval_rel_score_vdb = statistics.mean(avg_retrieval_rel_scores_vdb)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Repare que o índice de qualidade global de todas as consultas melhorou depois de utilizar um sistema de controlo de qualidade baseado em RAG.</p>
+    </button></h2><p>Repare que o índice de qualidade global de todas as consultas melhorou depois de utilizar um sistema de GQ baseado em RAG.</p>
 <h1 id="3-Add-Re-ranking-to-your-retrieval" class="common-anchor-header">3. Adicionar a reclassificação à sua recuperação<button data-href="#3-Add-Re-ranking-to-your-retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -43,7 +43,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h2><p>Aplikasi AI modern, mulai dari pengemudian otonom hingga pengambilan multimodal, semakin bergantung pada data yang tersusun dan heterogen. Model data datar tradisional kesulitan untuk merepresentasikan hubungan yang kompleks seperti<strong>"satu dokumen dengan banyak potongan yang dianotasi</strong>" atau<strong>"satu adegan mengemudi dengan beberapa manuver yang diamati</strong>". Di sinilah tipe data Array of Structs di Milvus bersinar.</p>
-<p>Array of Structs memungkinkan Anda untuk menyimpan sekumpulan elemen terstruktur yang terurut, di mana setiap Struct berisi kombinasi bidang skalar dan penyematan vektornya sendiri. Hal ini membuatnya ideal untuk:</p>
+<p>Array of Structs memungkinkan Anda untuk menyimpan sekumpulan elemen terstruktur yang terurut, di mana setiap Struct berisi kombinasi bidang skalar dan penyematan vektornya sendiri. Ini membuatnya ideal untuk:</p>
 <ul>
 <li><p><strong>Data hirarkis</strong>: Entitas induk dengan beberapa catatan anak, seperti buku dengan banyak potongan teks, atau video dengan banyak bingkai beranotasi.</p></li>
 <li><p><strong>Penyematan multimodal</strong>: Setiap Struct dapat menampung beberapa vektor, seperti penyematan teks plus penyematan gambar, di samping metadata.</p></li>
@@ -212,7 +212,7 @@ beta: Milvus 2.6.4+
 <li><p><code translate="no">frame_id</code> mengidentifikasi bingkai tertentu dalam video saat ini.</p></li>
 <li><p><code translate="no">plain_caption</code> adalah deskripsi frame saat ini tanpa lingkungan sekitar, seperti cuaca, kondisi jalan, dll., dan <code translate="no">plain_cap_vector</code> adalah penyematan vektor yang sesuai.</p></li>
 <li><p><code translate="no">rich_caption</code> adalah deskripsi bingkai saat ini dengan lingkungan sekitar, dan <code translate="no">rich_cap_vector</code> adalah penyematan vektor yang sesuai.</p></li>
-<li><p><code translate="no">risk</code> adalah deskripsi risiko yang dihadapi kendaraan ego pada frame saat ini, dan <code translate="no">risk_vector</code> adalah embeddings vektor yang sesuai, dan</p></li>
+<li><p><code translate="no">risk</code> adalah deskripsi risiko yang dihadapi kendaraan ego pada frame saat ini, dan <code translate="no">risk_vector</code> adalah vektor embeddings yang sesuai, dan</p></li>
 <li><p>Semua atribut lain dari frame, seperti <code translate="no">road</code>, <code translate="no">weather</code>, <code translate="no">is_tunnel</code>, <code translate="no">has_pedestrain</code>, dll...</p></li>
 </ul></li>
 <li><p><code translate="no">traffic_lights</code> adalah badan JSON yang berisi semua sinyal lampu lalu lintas yang diidentifikasi dalam bingkai saat ini.</p></li>

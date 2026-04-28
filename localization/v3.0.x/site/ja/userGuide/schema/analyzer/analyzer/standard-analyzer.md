@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">standard</code> アナライザーはMilvusのデフォルトアナライザーで、アナライザーが指定されていない場合は自動的にテキストフィールドに適用されます。文法に基づいたトークン化を使用するため、ほとんどの言語に有効です。</p>
+    </button></h1><p><code translate="no">standard</code> アナライザーはMilvusのデフォルトアナライザーで、アナライザーが指定されていない場合は自動的にテキストフィールドに適用されます。文法ベースのトークン化を使用するため、ほとんどの言語に有効です。</p>
 <div class="alert note">
 <p><code translate="no">standard</code> アナライザーは単語の境界を区切り文字（スペースや句読点など）に依存する言語に適しています。しかし、中国語、日本語、韓国語のような言語は、辞書ベースのトークン化を必要とします。このような場合は、次のような言語固有の解析器を使用します。 <a href="/docs/ja/chinese-analyzer.md"><code translate="no">chinese</code></a>のような言語固有の解析器や、特殊なトークン化器を持つカスタム解析器（たとえば <a href="/docs/ja/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/ja/icu-tokenizer.md"><code translate="no">icu</code></a>など）とフィルタを備えたカスタム解析器を使用することを強くお勧めします。</p>
 </div>
@@ -138,7 +138,7 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義するときに、それらを<code translate="no">VARCHAR</code> フィールドに適用することができます。これにより、Milvusは指定されたアナライザを使用してフィールド内のテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
+<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義するときに、<code translate="no">VARCHAR</code> フィールドに適用できます。これにより、Milvusは指定されたアナライザを使用してフィールド内のテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
 <h2 id="Examples" class="common-anchor-header">使用例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

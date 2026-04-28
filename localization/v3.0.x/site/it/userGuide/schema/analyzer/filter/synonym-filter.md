@@ -146,7 +146,7 @@ summary: >-
      <td><p>falso</p></td>
    </tr>
 </table>
-<p>È possibile specificare <code translate="no">synonyms</code>, <code translate="no">synonyms_file</code>, o entrambi. Quando entrambi sono presenti, il filtro fonde le due fonti. Il filtro opera sui token prodotti dal tokenizer; deve quindi essere combinato con un tokenizer come quello <a href="/docs/it/standard-tokenizer.md">standard</a>.</p>
+<p>Si può specificare <code translate="no">synonyms</code>, <code translate="no">synonyms_file</code>, o entrambi. Quando entrambi sono presenti, il filtro fonde le due fonti. Il filtro opera sui token prodotti dal tokenizer; deve quindi essere combinato con un tokenizer come quello <a href="/docs/it/standard-tokenizer.md">standard</a>.</p>
 <h3 id="External-dictionary-file" class="common-anchor-header">File dizionario esterno<button data-href="#External-dictionary-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

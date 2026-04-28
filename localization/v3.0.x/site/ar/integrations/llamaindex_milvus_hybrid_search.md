@@ -144,7 +144,7 @@ Default sparse embedding function: BM25BuiltInFunction(input_field_names='text',
 <ul>
 <li><code translate="no">enable_sparse (bool)</code>: علامة منطقية لتمكين أو تعطيل التضمين المتناثر. الإعداد الافتراضي إلى خطأ.</li>
 <li><code translate="no">sparse_embedding_field (str)</code>: اسم حقل التضمين المتناثر، افتراضيًا إلى DEFAULT_SPARSE_EMBEDDING_KEY.</li>
-<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>: إذا كان enable_sparse صحيحًا، فيجب توفير هذا الكائن لتحويل النص إلى تضمين متناثر. إذا كان لا يوجد، فسيتم استخدام دالة التضمين المتناثر الافتراضية (BM25BuiltInFunction)، أو استخدام BGEM3SparseEmbedding في حالة عدم وجود دالة تضمين متناثر في المجموعة الحالية بدون دوال مدمجة.</li>
+<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>: إذا كان enable_sparse صحيحًا، فيجب توفير هذا الكائن لتحويل النص إلى تضمين متناثر. إذا كان لا يوجد، فسيتم استخدام دالة التضمين المتناثر الافتراضية (BM25BuiltInFunction)، أو استخدام BGEM3SparseEmbedding في حالة عدم وجود دالة (BGEM3SparseEmbedding) نظرًا لوجود مجموعة موجودة بدون دوال مدمجة.</li>
 <li><code translate="no">sparse_index_config (dict, optional)</code>: التكوين المستخدم لبناء فهرس التضمين المتناثر. الإعداد الافتراضي إلى لا شيء.</li>
 </ul>
 <p>لتمكين البحث الهجين أثناء مرحلة الاستعلام، اضبط <code translate="no">vector_store_query_mode</code> على "هجين". سيؤدي ذلك إلى دمج نتائج البحث وإعادة ترتيبها من كل من البحث الدلالي والبحث بالنص الكامل. دعنا نختبر باستخدام نموذج استعلام: "ما الذي تعلمه المؤلف في Viaweb؟</p>
@@ -159,8 +159,23 @@ response = query_engine.query(<span class="hljs-string">&quot;What did the autho
 <pre><code translate="no">The author learned about retail, the importance of user feedback, and the significance of growth
 rate as the ultimate test of a startup at Viaweb.
 </code></pre>
-<h3 id="Customize-text-analyzer" class="common-anchor-header">تخصيص محلل النص</h3><p>تلعب المحللات دورًا حيويًا في البحث في النص الكامل من خلال تقسيم الجمل إلى رموز وإجراء معالجة معجمية، مثل الجذعية وإزالة كلمات التوقف. وهي عادةً ما تكون خاصة باللغة. لمزيد من التفاصيل، راجع <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">دليل محلل ميلفوس</a>.</p>
-<p>يدعم ميلفوس نوعين من المحللات: <strong>المحللات المدمجة</strong> <strong>والمحللات المخصصة</strong>. بشكل افتراضي، إذا تم تعيين <code translate="no">enable_sparse</code> على صواب، فإن <code translate="no">MilvusVectorStore</code> يستخدم <code translate="no">BM25BuiltInFunction</code> مع التكوينات الافتراضية، ويستخدم المحلل المدمج القياسي الذي يقوم بترميز النص بناءً على علامات الترقيم.</p>
+<h3 id="Customize-text-analyzer" class="common-anchor-header">تخصيص محلل النص<button data-href="#Customize-text-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تلعب المحللات دورًا حيويًا في البحث في النص الكامل من خلال تقسيم الجمل إلى رموز وإجراء معالجة معجمية، مثل الجذعية وإزالة كلمات التوقف. وهي عادةً ما تكون خاصة باللغة. لمزيد من التفاصيل، راجع <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">دليل محلل ميلفوس</a>.</p>
+<p>يدعم ميلفوس نوعين من المحللات: <strong>المحللات المدمجة</strong> <strong>والمحللات المخصصة</strong>. بشكل افتراضي، إذا تم تعيين <code translate="no">enable_sparse</code> إلى صواب، فإن <code translate="no">MilvusVectorStore</code> يستخدم <code translate="no">BM25BuiltInFunction</code> مع التكوينات الافتراضية، ويستخدم المحلل المدمج القياسي الذي يقوم بترميز النص بناءً على علامات الترقيم.</p>
 <p>لاستخدام محلل مختلف أو تخصيص المحلل الموجود، يمكنك توفير قيم للوسيطة <code translate="no">analyzer_params</code> عند إنشاء <code translate="no">BM25BuiltInFunction</code>. ثم قم بتعيين هذه الدالة على أنها <code translate="no">sparse_embedding_function</code> في <code translate="no">MilvusVectorStore</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.vector_stores.milvus.utils <span class="hljs-keyword">import</span> BM25BuiltInFunction
 
@@ -239,7 +254,22 @@ The author learned about retail, the importance of user feedback, the value of g
 startup, the significance of pricing strategy, the benefits of working on things that weren't
 prestigious, and the challenges and rewards of running a startup.
 </code></pre>
-<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">تخصيص وظيفة التضمين المتناثر</h3><p>يمكنك أيضًا تخصيص دالة التضمين المتناثر طالما أنها ترث من <code translate="no">BaseSparseEmbeddingFunction</code> ، بما في ذلك الطرق التالية:</p>
+<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">تخصيص وظيفة التضمين المتناثر<button data-href="#Customize-Sparse-Embedding-Function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكنك أيضًا تخصيص دالة التضمين المتناثر طالما أنها ترث من <code translate="no">BaseSparseEmbeddingFunction</code> ، بما في ذلك الطرق التالية:</p>
 <ul>
 <li><code translate="no">encode_queries</code>: تقوم هذه الطريقة بتحويل النصوص إلى قائمة تضمينات متناثرة للاستعلامات.</li>
 <li><code translate="no">encode_documents</code>: تقوم هذه الطريقة بتحويل النص إلى قائمة من التضمينات المتفرقة للمستندات.</li>

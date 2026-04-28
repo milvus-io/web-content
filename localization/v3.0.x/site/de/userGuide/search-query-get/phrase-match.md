@@ -1,6 +1,6 @@
 ---
 id: phrase-match.md
-title: PhrasensucheCompatible with Milvus 2.6.x
+title: PhrasensucheCompatible with Milvus 2.5.17+
 summary: >-
   Mit der Phrasenübereinstimmung können Sie nach Dokumenten suchen, die Ihre
   Suchbegriffe als exakte Phrase enthalten. Standardmäßig müssen die Wörter in
@@ -9,9 +9,9 @@ summary: >-
   "...typische Robotik, maschinelle Lernmodelle...", in dem die Wörter
   "Robotik", "Maschine" und "Lernen" nacheinander und ohne andere Wörter
   dazwischen erscheinen.
-beta: Milvus 2.6.x
+beta: Milvus 2.5.17+
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">Phrasensuche<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">Phrasensuche<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -27,7 +27,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h1><p>Mit der Phrasenübereinstimmung können Sie nach Dokumenten suchen, die Ihre Suchbegriffe als exakte Phrase enthalten. Standardmäßig müssen die Wörter in der gleichen Reihenfolge und in unmittelbarer Nähe zueinander erscheinen. Eine Abfrage nach <strong>"Robotik, maschinelles Lernen"</strong> passt beispielsweise zu Text wie <em>"...typische Robotik, maschinelle Lernmodelle...",</em> in dem die Wörter <strong>"Robotik",</strong> <strong>"Maschine"</strong> und <strong>"Lernen"</strong> nacheinander und ohne andere Wörter dazwischen erscheinen.</p>
-<p>In realen Szenarien kann ein strenger Phrasenabgleich jedoch zu starr sein. Sie möchten vielleicht Text wie <em>"...maschinelle Lernmodelle, die in der Robotik weit verbreitet sind..."</em> abgleichen. Hier sind die gleichen Schlüsselwörter vorhanden, aber nicht nebeneinander oder in der ursprünglichen Reihenfolge. Um damit umzugehen, unterstützt die Phrasenübereinstimmung einen <code translate="no">slop</code> -Parameter, der für Flexibilität sorgt. Der Wert <code translate="no">slop</code> legt fest, wie viele Positionsverschiebungen zwischen den Begriffen in der Phrase zulässig sind. Bei einem Wert von <code translate="no">slop</code> von 1 kann zum Beispiel eine Abfrage nach <strong>"machine learning"</strong> mit Text wie <em>"...machine deep learning..."</em> übereinstimmen <em>,</em> wobei die ursprünglichen Begriffe durch ein Wort (<strong>"deep")</strong> getrennt sind.</p>
+<p>In realen Szenarien kann ein strenger Phrasenabgleich jedoch zu starr sein. Sie möchten vielleicht Text wie <em>"...maschinelle Lernmodelle, die in der Robotik weit verbreitet sind..."</em> abgleichen. Hier sind die gleichen Schlüsselwörter vorhanden, aber nicht nebeneinander oder in der ursprünglichen Reihenfolge. Um damit umzugehen, unterstützt die Phrasenübereinstimmung einen <code translate="no">slop</code> -Parameter, der für Flexibilität sorgt. Der Wert <code translate="no">slop</code> legt fest, wie viele Positionsverschiebungen zwischen den Begriffen in der Phrase zulässig sind. Bei einem Wert von <code translate="no">slop</code> von 1 kann beispielsweise eine Abfrage nach <strong>"machine learning"</strong> mit Text wie <em>"...machine deep learning..."</em> übereinstimmen <em>,</em> wobei die ursprünglichen Begriffe durch ein Wort (<strong>"deep")</strong> getrennt sind.</p>
 <h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,10 +43,10 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die von der <a href="https://github.com/quickwit-oss/tantivy">Tantivy-Suchmaschinenbibliothek</a> unterstützte Phrasenübereinstimmung funktioniert durch Analyse der Positionsinformationen von Wörtern in Dokumenten. Das folgende Diagramm veranschaulicht den Prozess:</p>
+    </button></h2><p>Die von der <a href="https://github.com/quickwit-oss/tantivy">Tantivy-Suchmaschinenbibliothek</a> unterstützte Phrasenübereinstimmung funktioniert durch die Analyse der Positionsinformationen von Wörtern in Dokumenten. Das folgende Diagramm veranschaulicht den Prozess:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
    </span> <span class="img-wrapper"> <span>Phrase Match Arbeitsablauf</span> </span></p>
 <ol>
 <li><p><strong>Tokenisierung von Dokumenten</strong>: Wenn Sie Dokumente in Milvus einfügen, wird der Text mithilfe eines Analysators in Token (einzelne Wörter oder Begriffe) aufgeteilt, wobei für jedes Token Positionsinformationen aufgezeichnet werden. Zum Beispiel wird <strong>doc_1</strong> in <strong>["machine" (pos=0), "learning" (pos=1), "boosts" (pos=2), "efficiency" (pos=3)]</strong> tokenisiert. Weitere Informationen zu Analyzern finden Sie unter <a href="/docs/de/analyzer-overview.md">Analyzer-Übersicht</a>.</p></li>
@@ -414,7 +414,7 @@ result_slop2 = client.search(
       </svg>
     </button></h2><ul>
 <li><p>Die Aktivierung des Phrasenabgleichs für ein Feld löst die Erstellung eines invertierten Indexes aus, der Speicherressourcen verbraucht. Berücksichtigen Sie die Auswirkungen auf den Speicherplatz, wenn Sie sich für die Aktivierung dieser Funktion entscheiden, da diese je nach Textgröße, eindeutigen Token und dem verwendeten Analysator variieren.</p></li>
-<li><p>Sobald Sie einen Analyzer in Ihrem Schema definiert haben, werden seine Einstellungen für diese Sammlung dauerhaft. Wenn Sie entscheiden, dass ein anderer Analyzer Ihren Anforderungen besser entspricht, können Sie die bestehende Sammlung löschen und eine neue mit der gewünschten Analyzer-Konfiguration erstellen.</p></li>
+<li><p>Sobald Sie einen Analyzer in Ihrem Schema definiert haben, werden seine Einstellungen für diese Sammlung dauerhaft. Wenn Sie entscheiden, dass ein anderes Analyseprogramm besser zu Ihren Anforderungen passt, können Sie die bestehende Sammlung löschen und eine neue Sammlung mit der gewünschten Analysekonfiguration erstellen.</p></li>
 <li><p>Die Leistung der Phrasenübereinstimmung hängt davon ab, wie der Text tokenisiert wird. Bevor Sie einen Analyzer auf Ihre gesamte Sammlung anwenden, sollten Sie die Methode <code translate="no">run_analyzer</code> verwenden, um die Tokenisierungsausgabe zu überprüfen. Weitere Informationen finden Sie unter <a href="/docs/de/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">Analyzer-Übersicht</a>.</p></li>
 <li><p>Escape-Regeln in <code translate="no">filter</code> Ausdrücken:</p>
 <ul>

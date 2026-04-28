@@ -449,7 +449,7 @@ curl --request POST \
 <li><p><strong>JSON flat index</strong> - indiziert ein ganzes JSON-Objekt (oder einen Teilbaum) mit automatischer Typisierung.</p></li>
 </ul>
 <div class="alert note">
-<p>Die Indizierung von JSON-Feldern ist <strong>optional</strong>. Sie können auch ohne Index nach JSON-Pfaden abfragen oder filtern, aber dies kann zu einer langsameren Leistung aufgrund der Brute-Force-Suche führen.</p>
+<p>Die Indizierung von JSON-Feldern ist <strong>optional</strong>. Sie können auch ohne Index nach JSON-Pfaden abfragen oder filtern, aber dies kann zu einer langsameren Leistung aufgrund einer Brute-Force-Suche führen.</p>
 </div>
 <h3 id="Choose-between-path-index-and-flat-index--Milvus-26x" class="common-anchor-header">Wählen Sie zwischen Pfadindex und flachem Index<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Choose-between-path-index-and-flat-index--Milvus-26x" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -532,7 +532,7 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
       </svg>
     </button></h3><p>Um einen JSON-Pfadindex zu erstellen, geben Sie an:</p>
 <ul>
-<li><p><strong>JSON path</strong> (<code translate="no">json_path</code>): Der Pfad zu dem Schlüssel oder dem verschachtelten Feld in Ihrem JSON-Objekt, das Sie indizieren möchten.</p>
+<li><p><strong>JSON path</strong> (<code translate="no">json_path</code>): Der Pfad zu dem Schlüssel oder dem verschachtelten Feld innerhalb Ihres JSON-Objekts, das Sie indizieren möchten.</p>
 <ul>
 <li><p>Beispiel:</p>
 <ul>
@@ -695,7 +695,7 @@ indexOpt2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">Verwenden Sie JSON-Cast-Funktionen für die Typkonvertierung<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h4><p>Wenn Ihr JSON-Feldschlüssel Werte in einem falschen Format enthält (z. B. Zahlen, die als Strings gespeichert sind), können Sie Cast-Funktionen verwenden, um Werte während der Indizierung zu konvertieren.</p>
-<h5 id="Supported-cast-functions" class="common-anchor-header">Unterstützte Cast-Funktionen</h5><p>Bei Cast-Funktionen wird die Groß-/Kleinschreibung nicht berücksichtigt. Die folgenden Typen werden unterstützt:</p>
+<h5 id="Supported-cast-functions" class="common-anchor-header">Unterstützte Cast-Funktionen</h5><p>Bei Cast-Funktionen wird die Groß- und Kleinschreibung nicht berücksichtigt. Die folgenden Typen werden unterstützt:</p>
 <table>
    <tr>
      <th><p>Cast-Funktion</p></th>
@@ -805,7 +805,7 @@ metadata[&quot;supplier&quot;][&quot;country&quot;] = &quot;USA&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>Der erste Typ, der auf den Wert passt, wird für die Indizierung verwendet.</p>
 <p>Das bedeutet, dass der ermittelte Typ immer <strong>einer dieser vier</strong> ist.</p>
-<p>Die Typisierung wird <strong>für jedes Dokument</strong> durchgeführt, so dass ein und derselbe Pfad in verschiedenen Dokumenten unterschiedliche abgeleitete Typen haben kann.</p>
+<p>Die Typisierung wird <strong>pro Dokument</strong> durchgeführt, so dass ein und derselbe Pfad in verschiedenen Dokumenten unterschiedliche abgeleitete Typen haben kann.</p>
 <p>Nach der Typisierung werden die reduzierten Daten intern als Terme mit ihren abgeleiteten Typen dargestellt, zum Beispiel:</p>
 <pre><code translate="no" class="language-plaintext">(&quot;category&quot;, Text, &quot;electronics&quot;)
 (&quot;price&quot;, Double, 99.99)
@@ -1108,7 +1108,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p><strong>String-Indizierung</strong>:</p>
 <p>Wenn ein Index <code translate="no">json_cast_type=&quot;varchar&quot;</code> verwendet, profitieren nur String-Filterbedingungen von dem Index; andere Typen können auf einen Brute-Force-Scan zurückfallen.</p></li>
 <li><p><strong>Boolesche Indizierung</strong>:</p>
-<p>Die boolesche Indizierung verhält sich ähnlich wie die String-Indizierung, wobei der Index nur dann verwendet wird, wenn die Bedingung strikt wahr oder falsch ist.</p></li>
+<p>Die boolesche Indizierung verhält sich ähnlich wie die Zeichenkettenindizierung, wobei der Index nur dann verwendet wird, wenn die Bedingung strikt wahr oder falsch ist.</p></li>
 </ul>
 <h3 id="What-about-numeric-precision-when-indexing-JSON-fields" class="common-anchor-header">Was ist mit der numerischen Präzision bei der Indizierung von JSON-Feldern?<button data-href="#What-about-numeric-precision-when-indexing-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"

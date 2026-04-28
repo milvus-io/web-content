@@ -57,7 +57,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>O Jaeger é uma plataforma de rastreamento distribuída lançada como código aberto pela <a href="http://uber.github.io/">Uber Technologies</a>.</p>
-<h3 id="1-Installing-the-Jaeger-Operator-on-Kubernetes" class="common-anchor-header">1. Instalando o operador do Jaeger no Kubernetes</h3><p>Para instalar o operador, execute:</p>
+<h3 id="1-Installing-the-Jaeger-Operator-on-Kubernetes" class="common-anchor-header">1. Instalando o operador do Jaeger no Kubernetes<button data-href="#1-Installing-the-Jaeger-Operator-on-Kubernetes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para instalar o operador, execute:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl create namespace observability</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/download/v1.62.0/jaeger-operator.yaml -n observability</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -67,7 +82,22 @@ summary: >-
 NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 jaeger-operator   1         1         1            1           48s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Deploy-Jaeger" class="common-anchor-header">2. Implantar o Jaeger</h3><p>A maneira mais simples possível de criar uma instância do Jaeger é criando um arquivo YAML como o exemplo a seguir. Isso instalará a estratégia AllInOne padrão, que implanta a imagem <strong>all-in-one</strong> (combinando <strong>jaeger-agent</strong>, <strong>jaeger-collector</strong>, <strong>jaeger-query</strong> e Jaeger UI) em um único pod, usando <strong>o armazenamento na memória</strong> por padrão.</p>
+<h3 id="2-Deploy-Jaeger" class="common-anchor-header">2. Implantar o Jaeger<button data-href="#2-Deploy-Jaeger" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>A maneira mais simples possível de criar uma instância do Jaeger é criando um arquivo YAML como o exemplo a seguir. Isso instalará a estratégia AllInOne padrão, que implanta a imagem <strong>all-in-one</strong> (combinando <strong>jaeger-agent</strong>, <strong>jaeger-collector</strong>, <strong>jaeger-query</strong> e Jaeger UI) em um único pod, usando <strong>o armazenamento na memória</strong> por padrão.</p>
 <p>Se você quiser armazenar traços por um longo tempo, consulte <a href="https://www.jaegertracing.io/docs/1.62/operator/#production-strategy">production-strategy</a>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">jaegertracing.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Jaeger</span>
@@ -137,12 +167,12 @@ NAME           CLASS    HOSTS   ADDRESS         PORTS   AGE
 jaeger-query   &lt;none&gt;   *       192.168.122.34  80      14m
 <button class="copy-code-btn"></button></code></pre>
 <p>Quando o ingresso estiver disponível, você poderá acessar a interface do usuário do Jaeger navegando até <code translate="no">http://${ADDRESS}</code>. Substitua <code translate="no">${ADDRESS}</code> pelo endereço IP real do ingress.</p>
-<p>A seguinte captura de ecrã mostra a interface do utilizador do Jaeger com os traços do Milvus durante uma operação de pesquisa e uma operação de recolha de carga:</p>
+<p>A seguinte captura de ecrã mostra a interface do utilizador do Jaeger com os vestígios do Milvus durante uma operação de pesquisa e uma operação de recolha de carga:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/jaeger-trace-search.PNG" alt="Trace Search Request" class="doc-image" id="trace-search-request" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-search.PNG" alt="Trace Search Request" class="doc-image" id="trace-search-request" />
    </span> <span class="img-wrapper"> <span>Pedido de pesquisa de traços</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/jaeger-trace-load.png" alt="Trace Load Collection Request" class="doc-image" id="trace-load-collection-request" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-load.png" alt="Trace Load Collection Request" class="doc-image" id="trace-load-collection-request" />
    </span> <span class="img-wrapper"> <span>Pedido de recolha de carga de traços</span> </span></p>

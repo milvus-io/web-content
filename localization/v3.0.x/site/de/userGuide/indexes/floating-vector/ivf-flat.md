@@ -39,13 +39,13 @@ summary: >-
       </svg>
     </button></h2><p>Der Begriff <strong>IVF_FLAT</strong> steht für <strong>Inverted File Flat</strong>, was den zweistufigen Ansatz für die Indizierung und Suche nach Fließkomma-Vektoren umschreibt:</p>
 <ul>
-<li><p><strong>Inverted File (IVF):</strong> Bezieht sich auf das Clustering des Vektorraums in handhabbare Regionen unter Verwendung von <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means clustering</a>. Jeder Cluster wird durch einen <strong>Zentroid</strong> repräsentiert, der als Referenzpunkt für die Vektoren innerhalb des Clusters dient.</p></li>
+<li><p><strong>Inverted File (IVF):</strong> Bezieht sich auf das Clustern des Vektorraums in überschaubare Regionen mittels <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means Clustering</a>. Jeder Cluster wird durch einen <strong>Zentroid</strong> repräsentiert, der als Referenzpunkt für die Vektoren innerhalb des Clusters dient.</p></li>
 <li><p><strong>Flach:</strong> Gibt an, dass die Vektoren innerhalb jedes Clusters in ihrer ursprünglichen Form (flache Struktur) gespeichert werden, ohne Komprimierung oder Quantisierung, um präzise Abstandsberechnungen zu ermöglichen.</p></li>
 </ul>
 <p>Die folgende Abbildung zeigt, wie dies funktioniert:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF-FLAT-workflow.png" alt="IVF FLAT Workflow" class="doc-image" id="ivf-flat-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF-FLAT-workflow.png" alt="IVF FLAT Workflow" class="doc-image" id="ivf-flat-workflow" />
    </span> <span class="img-wrapper"> <span>IVF FLAT Arbeitsablauf</span> </span></p>
 <p>Diese Indizierungsmethode beschleunigt den Suchprozess, hat aber einen potenziellen Nachteil: Der Kandidat, der als der nächstgelegene zur Einbettung der Anfrage gefunden wurde, ist möglicherweise nicht der exakt nächstgelegene. Dies kann der Fall sein, wenn die nächstgelegene Einbettung zur Abfrageeinbettung in einem anderen Cluster liegt als demjenigen, der auf der Grundlage des nächstgelegenen Schwerpunkts ausgewählt wurde (siehe Visualisierung unten).</p>
 <p>Um dieses Problem zu lösen, bietet <strong>IVF_FLAT</strong> zwei Hyperparameter, die wir einstellen können:</p>
@@ -56,7 +56,7 @@ summary: >-
 <p>Wenn wir nun <code translate="no">nprobe</code> auf 3 statt auf 1 setzen, erhalten wir das folgende Ergebnis:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF-FLAT-workflow-2.png" alt="IVF FLAT Workflow 2" class="doc-image" id="ivf-flat-workflow-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF-FLAT-workflow-2.png" alt="IVF FLAT Workflow 2" class="doc-image" id="ivf-flat-workflow-2" />
    </span> <span class="img-wrapper"> <span>IVF FLAT Workflow 2</span> </span></p>
 <p>Wenn Sie den Wert <code translate="no">nprobe</code> erhöhen, können Sie mehr Partitionen in die Suche einbeziehen, was dazu beitragen kann, dass die der Abfrage am nächsten liegende Einbettung nicht übersehen wird, selbst wenn sie sich in einer anderen Partition befindet. Dies hat jedoch den Nachteil, dass sich die Suchzeit erhöht, da mehr Kandidaten evaluiert werden müssen. Weitere Informationen zur Einstellung der Indexparameter finden Sie unter <a href="/docs/de/ivf-flat.md#Index-params">Indexparameter</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Index erstellen<button data-href="#Build-index" class="anchor-icon" translate="no">
@@ -154,8 +154,23 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dieser Abschnitt gibt einen Überblick über die Parameter, die für den Aufbau eines Index und die Durchführung von Suchen im Index verwendet werden.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/ivf-flat.md#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
+    </button></h2><p>Dieser Abschnitt bietet einen Überblick über die Parameter, die für den Aufbau eines Index und die Durchführung von Suchen im Index verwendet werden.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/ivf-flat.md#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -170,7 +185,22 @@ res = MilvusClient.search(
      <td><p>Größere <code translate="no">nlist</code> Werte verbessern die Wiederauffindbarkeit durch die Erstellung von feineren Clustern, erhöhen aber die Indexerstellungszeit. Optimieren Sie den Wert anhand der Größe des Datensatzes und der verfügbaren Ressourcen. In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs festzulegen: [32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/ivf-flat.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/ivf-flat.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -180,7 +210,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">nprobe</code></p></td>
-     <td><p>Die Anzahl der Cluster, in denen nach Kandidaten gesucht wird. Höhere Werte erlauben es, mehr Cluster zu durchsuchen, was die Wiederauffindbarkeit durch Erweiterung des Suchbereichs verbessert, allerdings auf Kosten einer erhöhten Abfragelatenz.</p></td>
+     <td><p>Die Anzahl der Cluster, in denen nach Kandidaten gesucht wird. Höhere Werte erlauben es, mehr Cluster zu durchsuchen, was die Wiederauffindbarkeit durch Erweiterung des Suchbereichs verbessert, jedoch auf Kosten einer erhöhten Abfragelatenz.</p></td>
      <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, <em>nlist</em>]</p><p><strong>Standardwert</strong>: <code translate="no">8</code></p></td>
      <td><p>Eine Erhöhung dieses Wertes verbessert die Auffindbarkeit, kann aber die Suche verlangsamen. Stellen Sie <code translate="no">nprobe</code> proportional zu <code translate="no">nlist</code> ein, um Geschwindigkeit und Genauigkeit auszugleichen.</p><p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs einzustellen: [1, nlist].</p></td>
    </tr>

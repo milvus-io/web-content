@@ -56,7 +56,7 @@ index_params.add_index(
 <p>在此配置中</p>
 <ul>
 <li><p><code translate="no">index_type</code>:要建立的索引类型。在本例中，将值设为<code translate="no">BIN_IVF_FLAT</code> 。</p></li>
-<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。二进制 Embeddings 的支持值包括<code translate="no">HAMMING</code> （默认）和<code translate="no">JACCARD</code> 。有关详情，请参阅 "<a href="/docs/zh/metric.md">度量类型</a>"。</p></li>
+<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的二进制 Embeddings 值包括<code translate="no">HAMMING</code> （默认）和<code translate="no">JACCARD</code> 。有关详情，请参阅 "<a href="/docs/zh/metric.md">度量类型</a>"。</p></li>
 <li><p><code translate="no">params</code>:用于构建索引的其他配置选项。</p>
 <ul>
 <li><code translate="no">nlist</code>:划分数据集的簇数。</li>
@@ -118,7 +118,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>本节概述了用于建立索引和在索引上执行搜索的参数。</p>
-<h3 id="Index-building-params" class="common-anchor-header">索引建立参数</h3><p>下表列出了<a href="/docs/zh/bin-ivf-flat.md#Index-building-params">建立索引</a>时可在<code translate="no">params</code> 中配置的参数。</p>
+<h3 id="Index-building-params" class="common-anchor-header">索引建立参数<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下表列出了<a href="/docs/zh/bin-ivf-flat.md#Index-building-params">建立索引</a>时可在<code translate="no">params</code> 中配置的参数。</p>
 <table>
    <tr>
      <th><p>参数</p></th>
@@ -134,7 +149,22 @@ res = MilvusClient.search(
      <td><p><code translate="no">nlist</code> 值越大，通过创建更精细的簇来提高召回率，但会增加索引构建时间。根据数据集大小和可用资源进行优化。 在大多数情况下，我们建议在此范围内设置值：[32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">特定于索引的搜索参数</h3><p>下表列出了<a href="/docs/zh/bin-ivf-flat.md#Search-on-index">在索引上搜索</a>时可在<code translate="no">search_params.params</code> 中配置的参数。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">特定于索引的搜索参数<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下表列出了<a href="/docs/zh/bin-ivf-flat.md#Search-on-index">在索引上搜索</a>时可在<code translate="no">search_params.params</code> 中配置的参数。</p>
 <table>
    <tr>
      <th><p>参数</p></th>
@@ -147,7 +177,7 @@ res = MilvusClient.search(
      <td><p>搜索候选集群的集群数。 数值越大，搜索的集群数越多，搜索范围越大，召回率越高，但代价是查询延迟增加。</p></td>
      <td><p><strong>类型</strong>： 整数整数[1，<em>nlist］</em></p>
 <p><strong>默认值</strong>：<code translate="no">8</code></p></td>
-     <td><p>增加该值可提高召回率，但可能会减慢搜索速度。设置<code translate="no">nprobe</code> 与<code translate="no">nlist</code> 成比例，以平衡速度和准确性。</p>
+     <td><p>增加该值可提高召回率，但可能会减慢搜索速度。将<code translate="no">nprobe</code> 设置为与<code translate="no">nlist</code> 成比例，以平衡速度和准确性。</p>
 <p>在大多数情况下，我们建议您在此范围内设置一个值：[1，nlist]。</p></td>
    </tr>
 </table>

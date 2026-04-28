@@ -42,7 +42,7 @@ summary: >-
     </button></h2><p>Vektor jarang adalah vektor berdimensi tinggi khusus yang sebagian besar elemennya bernilai nol, dan hanya beberapa dimensi yang memiliki nilai bukan nol. Seperti yang ditunjukkan pada diagram di bawah ini, vektor padat biasanya direpresentasikan sebagai larik kontinu di mana setiap posisi memiliki nilai (misalnya, <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). Sebaliknya, vektor jarang hanya menyimpan elemen non-nol dan indeks dimensinya, yang sering direpresentasikan sebagai pasangan kunci-nilai dari <code translate="no">{ index: value}</code> (misalnya, <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
    </span> <span class="img-wrapper"> <span>Representasi Vektor Jarang</span> </span></p>
 <p>Dengan tokenisasi dan penilaian, dokumen dapat direpresentasikan sebagai vektor kantong kata, di mana setiap dimensi berhubungan dengan kata tertentu dalam kosakata. Hanya kata-kata yang ada di dalam dokumen yang memiliki nilai bukan nol, sehingga menciptakan representasi vektor yang jarang. Vektor jarang dapat dihasilkan dengan menggunakan dua pendekatan:</p>
 <ul>
@@ -52,7 +52,7 @@ summary: >-
 <p>Vektor-vektor jarang dan teks asli dapat disimpan di Milvus untuk pengambilan yang efisien. Diagram di bawah ini menguraikan keseluruhan proses.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
    </span> <span class="img-wrapper"> <span>Alur Kerja Vektor Jarang</span> </span></p>
 <div class="alert note">
 <p>Selain vektor jarang, Milvus juga mendukung vektor padat dan vektor biner. Vektor padat ideal untuk menangkap hubungan semantik yang dalam, sementara vektor biner unggul dalam skenario seperti perbandingan kemiripan cepat dan deduplikasi konten. Untuk informasi lebih lanjut, lihat <a href="/docs/id/dense-vector.md">Vektor Padat</a> dan <a href="/docs/id/binary-vector.md">Vektor Biner</a>.</p>
@@ -358,7 +358,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Contoh ini menggunakan tipe indeks <code translate="no">SPARSE_INVERTED_INDEX</code> dengan <code translate="no">IP</code> sebagai metrik. Untuk lebih jelasnya, lihat sumber-sumber berikut ini:</p>
+<p>Contoh ini menggunakan tipe indeks <code translate="no">SPARSE_INVERTED_INDEX</code> dengan <code translate="no">IP</code> sebagai metriknya. Untuk lebih jelasnya, lihat sumber-sumber berikut ini:</p>
 <ul>
 <li><p><a href="/docs/id/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>: Penjelasan indeks dan parameternya</p></li>
 <li><p><a href="/docs/id/metric.md">Jenis Metrik</a>: Jenis metrik yang didukung untuk berbagai jenis bidang</p></li>

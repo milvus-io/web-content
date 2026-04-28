@@ -80,7 +80,7 @@ title: 헬름 차트로 밀버스 스탠드얼론 업그레이드하기
 <ul>
 <li>헬름 버전 &gt;= 3.14.0</li>
 <li>Kubernetes 버전 &gt;= 1.20.0</li>
-<li>헬름 차트를 통해 배포된 Milvus 독립형</li>
+<li>헬름 차트를 통해 배포된 밀버스 독립형</li>
 </ul>
 <p><strong>호환성 요구 사항:</strong></p>
 <ul>

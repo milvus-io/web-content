@@ -57,7 +57,7 @@ title: Memutakhirkan Milvus Standalone dengan Helm Chart
     </button></h3><p>Peningkatan dari Milvus 2.5.x ke 2.6.15 melibatkan perubahan arsitektur yang signifikan:</p>
 <ul>
 <li><strong>Konsolidasi koordinator</strong>: Koordinator-koordinator lama yang terpisah (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) telah dikonsolidasikan menjadi satu <code translate="no">mixCoord</code></li>
-<li><strong>Komponen baru</strong>: Pengenalan Streaming Node untuk pemrosesan data yang ditingkatkan</li>
+<li><strong>Komponen baru</strong>: Pengenalan Streaming Node untuk pemrosesan data yang disempurnakan</li>
 <li><strong>Penghapusan komponen</strong>: <code translate="no">indexNode</code> telah dihapus dan dikonsolidasikan</li>
 </ul>
 <p>Proses peningkatan ini memastikan migrasi yang tepat ke arsitektur baru. Untuk informasi lebih lanjut tentang perubahan arsitektur, lihat <a href="/docs/id/architecture_overview.md">Tinjauan Arsitektur Milvus</a>.</p>
@@ -88,7 +88,7 @@ title: Memutakhirkan Milvus Standalone dengan Helm Chart
 <li>Jika Anda saat ini menjalankan v2.6.0-rc1 dan perlu mempertahankan data Anda, silakan lihat <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">panduan komunitas ini</a> untuk bantuan migrasi.</li>
 <li>Anda <strong>harus</strong> meng-upgrade ke v2.5.16 atau yang lebih baru sebelum meng-upgrade ke v2.6.15.</li>
 </ul>
-<p><strong>Keterbatasan Antrian Pesan</strong>: Ketika meningkatkan ke Milvus v2.6.15, anda harus mempertahankan pilihan antrean pesan anda saat ini. Beralih di antara sistem antrian pesan yang berbeda selama upgrade tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.</p>
+<p><strong>Keterbatasan Antrian Pesan</strong>: Ketika meningkatkan ke Milvus v2.6.15, anda harus mempertahankan pilihan antrean pesan anda saat ini. Beralih di antara sistem antrean pesan yang berbeda selama upgrade tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.</p>
 <div class="alert note">
 Sejak grafik Milvus Helm versi 4.2.21, kami memperkenalkan grafik pulsar-v3.x sebagai ketergantungan. Untuk kompatibilitas ke belakang, silakan upgrade Helm Anda ke versi v3.14 atau versi yang lebih baru, dan pastikan untuk menambahkan opsi <code translate="no">--reset-then-reuse-values</code> setiap kali Anda menggunakan <code translate="no">helm upgrade</code>.</div>
 <h2 id="Upgrade-process" class="common-anchor-header">Proses peningkatan<button data-href="#Upgrade-process" class="anchor-icon" translate="no">

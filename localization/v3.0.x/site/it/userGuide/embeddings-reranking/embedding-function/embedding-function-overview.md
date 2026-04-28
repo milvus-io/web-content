@@ -46,8 +46,8 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Qualsiasi campo di input incorporato dal modulo Function deve sempre contenere un valore; se viene fornito un null, il modulo lancia un errore.</p></li>
-<li><p>Il modulo Function elabora solo i campi definiti esplicitamente nello schema della collezione; non genera incorporazioni per campi dinamici.</p></li>
+<li><p>Qualsiasi campo di input che il modulo Function incorpora deve sempre contenere un valore; se viene fornito un null, il modulo lancia un errore.</p></li>
+<li><p>Il modulo Function elabora solo i campi definiti esplicitamente nello schema della collezione; non genera incorporazioni per i campi dinamici.</p></li>
 <li><p>I campi di input da incorporare devono essere del tipo <code translate="no">VARCHAR</code>.</p></li>
 <li><p>Il modulo Function può incorporare un campo di input in:</p>
 <ul>
@@ -159,7 +159,7 @@ beta: Milvus 2.6.x
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
    </span> <span class="img-wrapper"> <span>Panoramica delle funzioni di incorporamento</span> </span></p>
 <h2 id="Configure-credentials" class="common-anchor-header">Configurazione delle credenziali<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -180,14 +180,14 @@ beta: Milvus 2.6.x
 <p>Milvus consente di fornire le credenziali del servizio di embedding in due modi:</p>
 <ul>
 <li><p><strong>File di configurazione</strong> (<code translate="no">milvus.yaml</code>):</p>
-<p>L'esempio di questo argomento dimostra la <strong>configurazione consigliata</strong> utilizzando <code translate="no">milvus.yaml</code>.</p></li>
+<p>L'esempio di questo argomento mostra la <strong>configurazione consigliata</strong> utilizzando <code translate="no">milvus.yaml</code>.</p></li>
 <li><p><strong>Variabili d'ambiente</strong>:</p>
 <p>Per informazioni dettagliate sulla configurazione delle credenziali tramite variabili d'ambiente, consultare la documentazione del fornitore del servizio di embedding (ad esempio, <a href="/docs/it/openai.md">OpenAI</a> o <a href="/docs/it/azure-openai.md">Azure OpenAI</a>).</p></li>
 </ul>
 <p>Il diagramma seguente mostra il processo di configurazione delle credenziali tramite il file di configurazione di Milvus (<code translate="no">milvus.yaml</code>) e quindi il richiamo della Funzione all'interno di Milvus.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
    </span> <span class="img-wrapper"> <span>Overflow della configurazione delle credenziali</span> </span></p>
 <h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Passo 1: Aggiungere le credenziali al file di configurazione di Milvus<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -424,7 +424,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>Il numero di dimensioni per gli embeddings in uscita. Per i modelli di terza generazione di OpenAI, è possibile accorciare il vettore completo per ridurre i costi e la latenza senza una perdita significativa di informazioni semantiche. Per ulteriori informazioni, consultare il <a href="https://openai.com/blog/new-embedding-models-and-api-updates">post di annuncio di OpenAI</a>.</p><p><strong>Nota:</strong> se si accorcia la dimensione del vettore, assicurarsi che il valore <code translate="no">dim</code> specificato nel metodo <code translate="no">add_field</code> dello schema per il campo vettoriale corrisponda alla dimensione finale della funzione di incorporamento.</p></td>
+     <td><p>Il numero di dimensioni per gli embeddings di output. Per i modelli di terza generazione di OpenAI, è possibile accorciare il vettore completo per ridurre i costi e la latenza senza una perdita significativa di informazioni semantiche. Per ulteriori informazioni, consultare il <a href="https://openai.com/blog/new-embedding-models-and-api-updates">post di annuncio di OpenAI</a>.</p><p><strong>Nota:</strong> se si accorcia la dimensione del vettore, assicurarsi che il valore <code translate="no">dim</code> specificato nel metodo <code translate="no">add_field</code> dello schema per il campo vettoriale corrisponda alla dimensione finale della funzione di incorporamento.</p></td>
      <td><p><code translate="no">"1536"</code></p></td>
    </tr>
    <tr>
@@ -434,7 +434,7 @@ schema.add_function(text_embedding_function)
    </tr>
 </table>
 <div class="alert note">
-<p>Per le raccolte con più campi scalari che richiedono la conversione da testo a vettore, aggiungere funzioni separate allo schema della raccolta, assicurandosi che ogni funzione abbia un nome e un valore <code translate="no">output_field_names</code> unici.</p>
+<p>Per le raccolte con più campi scalari che richiedono la conversione da testo a vettore, aggiungere funzioni separate allo schema della raccolta, assicurandosi che ogni funzione abbia un nome unico e un valore <code translate="no">output_field_names</code>.</p>
 </div>
 <h3 id="Step-3-Configure-index" class="common-anchor-header">Passo 3: Configurare l'indice<button data-href="#Step-3-Configure-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -648,7 +648,7 @@ results = client.search(
       </svg>
     </button></h3><p>È possibile verificare</p>
 <ol>
-<li>interrogando la collezione dopo l'inserimento per vedere se il campo vettoriale contiene dei dati</li>
+<li>interrogando la collezione dopo l'inserimento per vedere se il campo vettoriale contiene dati</li>
 <li>verificando che la lunghezza del campo vettoriale corrisponda alle dimensioni previste</li>
 <li>Eseguendo una semplice ricerca di similarità per verificare che le incorporazioni producano risultati significativi.</li>
 </ol>
@@ -667,7 +667,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sì, è possibile utilizzare vettori di query precalcolati invece di testo grezzo per la ricerca di similarità. Mentre il modulo Function converte automaticamente le query di testo grezzo in embeddings, è possibile fornire direttamente i dati vettoriali al parametro <code translate="no">data</code> nelle operazioni di ricerca. <strong>Nota</strong>: la dimensione del vettore di query fornito deve essere coerente con la dimensione delle incorporazioni vettoriali generate dal modulo Function.</p>
+    </button></h3><p>Sì, è possibile utilizzare vettori di query precalcolati invece di testo grezzo per la ricerca di similarità. Mentre il modulo Function converte automaticamente le query di testo grezzo in embedding, è possibile fornire direttamente i dati vettoriali al parametro <code translate="no">data</code> nelle operazioni di ricerca. <strong>Nota</strong>: la dimensione del vettore di query fornito deve essere coerente con la dimensione delle incorporazioni vettoriali generate dal modulo Function.</p>
 <p><strong>Esempio</strong>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

@@ -1,7 +1,7 @@
 ---
 id: array_data_type.md
 title: 配列フィールド
-summary: ARRAYフィールドは、同じデータ型の要素の順序付きセットを格納します。ARRAYフィールドがどのようにデータを格納するかの例を以下に示す：
+summary: ARRAYフィールドは、同じデータ型の要素の順序付けられたセットを格納します。ARRAYフィールドがどのようにデータを格納するかの例を以下に示す：
 ---
 <h1 id="Array-Field" class="common-anchor-header">配列フィールド<button data-href="#Array-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -269,7 +269,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>インデックスは検索とクエリのパフォーマンス向上に役立ちます。Milvusでは、インデックス作成はベクトルフィールドでは必須ですが、スカラーフィールドではオプションです。</p>
-<p>以下の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、ベクトル・フィールド<code translate="no">embedding</code> と ARRAY フィールド<code translate="no">tags</code> にインデックスを作成しています。このタイプでは、Milvusはデータ型に基づいて自動的に最適なインデックスを選択します。また、各フィールドのインデックスタイプとパラメータをカスタマイズすることもできます。詳細については、「<a href="/docs/ja/index-explained.md">インデックスの説明</a>」を参照してください。</p>
+<p>以下の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、ベクトル・フィールド<code translate="no">embedding</code> と ARRAY フィールド<code translate="no">tags</code> にインデックスを作成しています。このタイプでは、Milvusはデータ型に基づいて自動的に最適なインデックスを選択します。また、各フィールドのインデックスタイプとパラメータをカスタマイズすることもできます。詳しくは「<a href="/docs/ja/index-explained.md">インデックスの説明</a>」をご参照ください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>

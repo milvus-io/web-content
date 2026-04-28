@@ -52,7 +52,7 @@ cohere_ef = CohereEmbeddingFunction(
 <li><code translate="no">&quot;clustering&quot;</code>: Digunakan untuk penyematan yang dijalankan melalui algoritma pengelompokan.</li>
 </ul></li>
 <li><p><code translate="no">embedding_types</code> <em>(Daftar [str]</em>)</p>
-<p>Jenis sematan yang ingin Anda dapatkan kembali. Tidak diperlukan dan nilai standarnya adalah None, yang mengembalikan jenis respons Embed Floats. Saat ini, Anda hanya dapat menentukan satu nilai untuk parameter ini. Nilai yang mungkin:</p>
+<p>Jenis sematan yang ingin Anda dapatkan kembali. Tidak diperlukan dan nilai defaultnya adalah None, yang mengembalikan jenis respons Embed Floats. Saat ini, Anda hanya dapat menentukan satu nilai untuk parameter ini. Nilai yang mungkin:</p>
 <ul>
 <li><code translate="no">&quot;float&quot;</code>: Gunakan ini bila Anda ingin mendapatkan kembali penyematan mengambang default. Berlaku untuk semua model.</li>
 <li><code translate="no">&quot;binary&quot;</code>: Gunakan ini bila Anda ingin mendapatkan kembali penyematan biner yang ditandatangani. Hanya berlaku untuk model v3.</li>

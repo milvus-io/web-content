@@ -59,7 +59,22 @@ title: Configuration du cache de morceaux
 <li><p>Pour les instances Milvus installées à l'aide de Operator</p>
 <p>Ajouter la configuration à la section <code translate="no">spec.components</code> de la ressource personnalisée <code translate="no">Milvus</code>. Pour plus de détails, voir <a href="/docs/fr/configure_operator.md">Configurer Milvus avec Operator</a>.</p></li>
 </ul>
-<h3 id="Configuration-options" class="common-anchor-header">Options de configuration</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
+<h3 id="Configuration-options" class="common-anchor-header">Options de configuration<button data-href="#Configuration-options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
     <span class="hljs-attr">cache:</span>
         <span class="hljs-attr">warmup:</span> <span class="hljs-string">async</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -70,7 +85,22 @@ title: Configuration du cache de morceaux
 <li><code translate="no">disable</code>: Milvus ne précharge pas les données dans le cache mémoire.</li>
 </ul>
 <p>Notez que les paramètres du cache de morceaux s'appliquent également lorsque de nouvelles données sont insérées dans les collections ou que les index des collections sont reconstruits.</p>
-<h3 id="FAQ" class="common-anchor-header">FAQ</h3><ul>
+<h3 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>Comment puis-je déterminer si le mécanisme de cache de morceaux fonctionne correctement ?</strong></p>
 <p>Il est conseillé de vérifier la latence d'une recherche ou d'une requête après le chargement d'une collection. Si le temps de latence est beaucoup plus long que prévu (par exemple, plusieurs secondes), cela peut indiquer que le mécanisme de cache par morceaux fonctionne encore.</p>
 <p>Si la latence de la requête reste élevée pendant une longue période. Vous pouvez vérifier le débit du stockage d'objets pour vous assurer que le cache de morceaux fonctionne toujours. Dans des cas normaux, le cache de morceaux qui fonctionne génère un débit élevé sur le stockage d'objets. Vous pouvez également essayer le cache de morceaux en mode <code translate="no">sync</code>.</p></li>

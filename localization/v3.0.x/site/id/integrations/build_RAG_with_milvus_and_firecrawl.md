@@ -3,7 +3,7 @@ id: build_RAG_with_milvus_and_firecrawl.md
 summary: >-
   Dalam tutorial ini, kami akan menunjukkan kepada Anda cara membuat pipeline
   Retrieval-Augmented Generation (RAG) menggunakan Milvus dan Firecrawl.
-  Pipeline ini mengintegrasikan Firecrawl untuk pengikisan data web, Milvus
+  Pipeline ini mengintegrasikan Firecrawl untuk penggalian data web, Milvus
   untuk penyimpanan vektor, dan OpenAI untuk menghasilkan respons yang
   berwawasan dan sesuai dengan konteks.
 title: Membangun RAG dengan Milvus dan Firecrawl

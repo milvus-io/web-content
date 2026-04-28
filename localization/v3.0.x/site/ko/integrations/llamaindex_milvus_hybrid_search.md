@@ -143,7 +143,7 @@ Default sparse embedding function: BM25BuiltInFunction(input_field_names='text',
 <ul>
 <li><code translate="no">enable_sparse (bool)</code>: 스파스 임베딩을 활성화 또는 비활성화하는 부울 플래그입니다. 기본값은 False입니다.</li>
 <li><code translate="no">sparse_embedding_field (str)</code>: 스파스 임베딩 필드의 이름, 기본값은 DEFAULT_SPARSE_EMBEDDING_KEY입니다.</li>
-<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>: enable_sparse가 True인 경우, 텍스트를 스파스 임베딩으로 변환하려면 이 객체를 제공해야 합니다. None이면 기본 스파스 임베딩 함수(BM25BuiltInFunction)가 사용되거나, 내장 함수가 없는 기존 컬렉션의 경우 BGEM3SparseEmbedding을 사용합니다.</li>
+<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>: enable_sparse가 True인 경우 텍스트를 스파스 임베딩으로 변환하려면 이 객체를 제공해야 합니다. None이면 기본 스파스 임베딩 함수(BM25BuiltInFunction)가 사용되거나, 내장 함수가 없는 기존 컬렉션의 경우 BGEM3SparseEmbedding을 사용합니다.</li>
 <li><code translate="no">sparse_index_config (dict, optional)</code>: 스파스 임베딩 인덱스를 구축하는 데 사용되는 구성입니다. 기본값은 없음입니다.</li>
 </ul>
 <p>쿼리 단계에서 하이브리드 검색을 사용하려면 <code translate="no">vector_store_query_mode</code> 을 "hybrid"로 설정합니다. 그러면 시맨틱 검색과 전체 텍스트 검색 모두에서 검색 결과가 결합되고 순위가 재조정됩니다. 샘플 쿼리로 테스트해 보겠습니다: "작성자는 Viaweb에서 무엇을 배웠나요?":</p>
@@ -158,8 +158,23 @@ response = query_engine.query(<span class="hljs-string">&quot;What did the autho
 <pre><code translate="no">The author learned about retail, the importance of user feedback, and the significance of growth
 rate as the ultimate test of a startup at Viaweb.
 </code></pre>
-<h3 id="Customize-text-analyzer" class="common-anchor-header">텍스트 분석기 사용자 지정</h3><p>분석기는 문장을 토큰으로 나누고 어간 및 중단어 제거와 같은 어휘 처리를 수행함으로써 전체 텍스트 검색에서 중요한 역할을 합니다. 일반적으로 언어에 따라 다릅니다. 자세한 내용은 <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Milvus 분석기 가이드를</a> 참조하세요.</p>
-<p>Milvus는 두 가지 유형의 분석기를 지원합니다: <strong>기본 제공 분석</strong> 기와 <strong>사용자 정의 분석기입니다</strong>. 기본적으로 <code translate="no">enable_sparse</code> 이 True로 설정된 경우 <code translate="no">MilvusVectorStore</code> 은 구두점을 기준으로 텍스트를 토큰화하는 표준 기본 제공 분석기를 사용하는 기본 구성의 <code translate="no">BM25BuiltInFunction</code> 을 사용합니다.</p>
+<h3 id="Customize-text-analyzer" class="common-anchor-header">텍스트 분석기 사용자 지정<button data-href="#Customize-text-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>분석기는 문장을 토큰으로 나누고 어간 및 중단어 제거와 같은 어휘 처리를 수행함으로써 전체 텍스트 검색에서 중요한 역할을 합니다. 일반적으로 언어에 따라 다릅니다. 자세한 내용은 <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Milvus 분석기 가이드를</a> 참조하세요.</p>
+<p>Milvus는 두 가지 유형의 분석기를 지원합니다: <strong>기본 제공 분석</strong> 기와 <strong>사용자 정의 분석기입니다</strong>. 기본적으로 <code translate="no">enable_sparse</code> 이 True로 설정되어 있으면 <code translate="no">MilvusVectorStore</code> 은 구두점을 기준으로 텍스트를 토큰화하는 표준 기본 제공 분석기를 사용하는 기본 구성의 <code translate="no">BM25BuiltInFunction</code> 을 사용합니다.</p>
 <p>다른 분석기를 사용하거나 기존 분석기를 사용자 정의하려면 <code translate="no">BM25BuiltInFunction</code> 을 작성할 때 <code translate="no">analyzer_params</code> 인수에 값을 제공한 다음 <code translate="no">MilvusVectorStore</code> 에서 이 함수를 <code translate="no">sparse_embedding_function</code> 으로 설정하면 됩니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.vector_stores.milvus.utils <span class="hljs-keyword">import</span> BM25BuiltInFunction
 
@@ -238,7 +253,22 @@ The author learned about retail, the importance of user feedback, the value of g
 startup, the significance of pricing strategy, the benefits of working on things that weren't
 prestigious, and the challenges and rewards of running a startup.
 </code></pre>
-<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">스파스 임베딩 기능 사용자 지정</h3><p>다음 방법을 포함하여 <code translate="no">BaseSparseEmbeddingFunction</code> 에서 상속하는 한 스파스 임베딩 함수를 사용자 정의할 수도 있습니다:</p>
+<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">스파스 임베딩 기능 사용자 지정<button data-href="#Customize-Sparse-Embedding-Function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 방법을 포함하여 <code translate="no">BaseSparseEmbeddingFunction</code> 에서 상속하는 한 스파스 임베딩 함수를 사용자 정의할 수도 있습니다:</p>
 <ul>
 <li><code translate="no">encode_queries</code>: 이 메서드는 텍스트를 쿼리에 대한 스파스 임베딩 목록으로 변환합니다.</li>
 <li><code translate="no">encode_documents</code>: 이 메서드는 텍스트를 문서에 대한 스파스 임베딩 목록으로 변환합니다.</li>

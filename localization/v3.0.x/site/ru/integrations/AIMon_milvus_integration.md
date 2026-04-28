@@ -350,7 +350,7 @@ queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_
 <p>LLM Application Quality Score - это комбинация 3 отдельных метрик качества от AIMon:</p>
 <ol>
 <li><strong>Оценка галлюцинаций</strong> (hall_score): проверяет, насколько сгенерированный текст обоснован в предоставленном контексте. Показатель, близкий к 1,0, означает сильные признаки галлюцинации, а показатель, близкий к 0,0, - низкие признаки галлюцинации. Таким образом, мы будем использовать (1.0-hall_score) при вычислении итогового балла качества.</li>
-<li><strong>Оценка соблюдения инструкций</strong> (ia_score): проверяет, все ли предоставленные явные инструкции были соблюдены LLM. Чем выше показатель ia_score, тем лучше соблюдаются инструкции. Чем ниже показатель, тем хуже соблюдение инструкций.</li>
+<li><strong>Оценка соблюдения инструкций</strong> (ia_score): проверяет, все ли предоставленные явные инструкции были соблюдены LLM. Чем выше ia_score, тем лучше соблюдаются инструкции. Чем ниже показатель, тем хуже соблюдение инструкций.</li>
 <li><strong>Оценка релевантности поиска</strong> (rr_score): проверяет, насколько найденные документы релевантны запросу. Показатель ближе к 100,0 означает идеальную релевантность документа запросу, а показатель ближе к 0,0 - низкую релевантность документа запросу.</li>
 </ol>
 <p><code translate="no">quality_score = 0.35 * (1.0 - hall_score) + 0.35 * ia_score + 0.3 * rr_score</code></p>
@@ -514,7 +514,7 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Average retrieval relevance score for brute force approach: 14.31772340191865
 </code></pre>
-<p>Это <strong>базовая</strong> оценка качества приложения LLM. Вы также можете увидеть отдельные метрики, такие как оценки галлюцинаций и т.д., вычисленные AIMon в <a href="https://www.app.aimon.ai/llmapps?source=sidebar&amp;stage=production">пользовательском интерфейсе AIMon</a>.</p>
+<p>Это <strong>базовая</strong> оценка качества приложения LLM. Вы также можете просмотреть отдельные метрики, такие как оценки галлюцинаций и т.д., вычисленные AIMon в <a href="https://www.app.aimon.ai/llmapps?source=sidebar&amp;stage=production">пользовательском интерфейсе AIMon</a>.</p>
 <h1 id="2-Use-a-VectorDB-Milvus-for-document-retrieval" class="common-anchor-header">2. Использование VectorDB (Milvus) для поиска документов<button data-href="#2-Use-a-VectorDB-Milvus-for-document-retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -534,7 +534,7 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
 <p>Есть два основных компонента, о которых мы должны знать: Всасывание и вопросы и ответы на основе RAG. Конвейер ввода обрабатывает стенограммы из набора данных Meeting Bank и сохраняет их в векторной базе данных Milvus. Конвейер RAG Q&amp;A обрабатывает запрос пользователя, сначала извлекая соответствующие документы из векторного хранилища. Затем эти документы используются в качестве основы для LLM при создании ответа. Мы используем AIMon для расчета оценки качества и постоянного мониторинга приложения на предмет <a href="https://docs.aimon.ai/detectors/hallucination">галлюцинаций</a>, <a href="https://docs.aimon.ai/detectors/instruction_adherence">соблюдения инструкций</a> и <a href="https://docs.aimon.ai/checker-models/context_relevance">релевантности контекста</a>. Это те же 3 метрики, которые мы использовали для определения оценки <code translate="no">quality</code> выше.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
    </span> <span class="img-wrapper"> <span>рабочий процесс</span> </span></p>
 <p>Ниже приведены полезные функции для предварительной обработки и вычисления вкраплений для документов.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -595,7 +595,7 @@ index = VectorStoreIndex.from_documents(
 
 Execution time: 38.74 seconds
 </code></pre>
-<p>Теперь, когда индекс VectorDB настроен, мы будем использовать его для ответа на запросы пользователей. В следующих ячейках мы создадим ретривер, настроим LLM и построим механизм запросов LLamaIndex, который будет взаимодействовать с ретривером и LLM для ответа на вопросы пользователя.</p>
+<p>Теперь, когда индекс VectorDB настроен, мы будем использовать его для ответа на запросы пользователей. В следующих ячейках мы создадим ретривер, настроим LLM и создадим механизм запросов LLamaIndex, который будет взаимодействовать с ретривером и LLM для ответа на вопросы пользователя.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core.retrievers <span class="hljs-keyword">import</span> VectorIndexRetriever
 <span class="hljs-keyword">from</span> llama_index.core.query_engine <span class="hljs-keyword">import</span> RetrieverQueryEngine
 

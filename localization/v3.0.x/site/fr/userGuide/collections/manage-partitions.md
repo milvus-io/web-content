@@ -390,7 +390,22 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Vous pouvez charger ou libérer séparément une ou plusieurs partitions.</p>
-<h3 id="Load-Partitions" class="common-anchor-header">Charger des partitions</h3><p>Vous pouvez charger séparément des partitions spécifiques dans une collection. Il convient de noter que l'état de chargement d'une collection reste inchangé s'il existe une partition non chargée dans la collection.</p>
+<h3 id="Load-Partitions" class="common-anchor-header">Charger des partitions<button data-href="#Load-Partitions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Vous pouvez charger séparément des partitions spécifiques dans une collection. Il convient de noter que l'état de chargement d'une collection reste inchangé s'il existe une partition non chargée dans la collection.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_partitions(
@@ -502,7 +517,22 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Release-Partitions" class="common-anchor-header">Libération de partitions</h3><p>Vous pouvez également libérer des partitions spécifiques.</p>
+<h3 id="Release-Partitions" class="common-anchor-header">Libération de partitions<button data-href="#Release-Partitions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Vous pouvez également libérer des partitions spécifiques.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.release_partitions(
@@ -622,13 +652,43 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Insert-and-Delete-Entities" class="common-anchor-header">Insérer et supprimer des entités</h3><p>Vous pouvez effectuer des opérations d'insertion, d'upsert et de suppression dans des opérations spécifiques. Pour plus de détails, voir</p>
+    </button></h2><h3 id="Insert-and-Delete-Entities" class="common-anchor-header">Insérer et supprimer des entités<button data-href="#Insert-and-Delete-Entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Vous pouvez effectuer des opérations d'insertion, d'upsert et de suppression dans des opérations spécifiques. Pour plus de détails, voir</p>
 <ul>
 <li><p><a href="/docs/fr/insert-update-delete.md#Insert-Entities-into-a-Partition">Insérer des entités dans une partition</a></p></li>
 <li><p><a href="/docs/fr/upsert-entities.md#Upsert-Entities-in-a-Partition">Insertion d'entités dans une partition</a></p></li>
 <li><p><a href="/docs/fr/delete-entities.md#Delete-Entities-from-Partitions">Supprimer des entités d'une partition</a></p></li>
 </ul>
-<h3 id="Search-and-Query" class="common-anchor-header">Recherche et interrogation</h3><p>Vous pouvez effectuer des recherches et des requêtes dans des partitions spécifiques. Pour plus d'informations, reportez-vous à la section</p>
+<h3 id="Search-and-Query" class="common-anchor-header">Recherche et interrogation<button data-href="#Search-and-Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Vous pouvez effectuer des recherches et des requêtes dans des partitions spécifiques. Pour plus d'informations, reportez-vous à la section</p>
 <ul>
 <li><p><a href="/docs/fr/single-vector-search.md#ANN-Search-in-Partition">Effectuer des recherches ANN dans les partitions</a></p></li>
 <li><p><a href="/docs/fr/get-and-scalar-query.md#Queries-in-Partitions">Filtrage des métadonnées dans les partitions</a></p></li>
@@ -648,7 +708,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous pouvez supprimer des partitions qui ne sont plus nécessaires. Avant d'abandonner une partition, assurez-vous que la partition a été libérée.</p>
+    </button></h2><p>Vous pouvez supprimer des partitions qui ne sont plus nécessaires. Avant d'abandonner une partition, assurez-vous qu'elle a été libérée.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.release_partitions(

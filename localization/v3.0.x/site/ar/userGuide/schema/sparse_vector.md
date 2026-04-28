@@ -41,7 +41,7 @@ summary: >-
     </button></h2><p>المتجه المتفرّق هو متجه خاص عالي الأبعاد حيث تكون معظم عناصره صفرية، وبعض أبعاده فقط ذات قيم غير صفرية. كما هو موضح في الرسم البياني أدناه، عادةً ما يتم تمثيل المتجهات الكثيفة كمصفوفات متصلة حيث يكون لكل موضع قيمة (على سبيل المثال، <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). في المقابل، تخزن المتجهات المتفرقة العناصر غير الصفرية فقط ومؤشراتها للبعد، وغالبًا ما يتم تمثيلها كأزواج قيمة مفتاح <code translate="no">{ index: value}</code> (على سبيل المثال، <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
    </span> <span class="img-wrapper"> <span>تمثيل المتجهات المتفرقة</span> </span></p>
 <p>من خلال الترميز والتسجيل، يمكن تمثيل المستندات كمتجهات كيس من الكلمات، حيث يتوافق كل بُعد مع كلمة معينة في المفردات. فقط الكلمات الموجودة في المستند لها قيم غير صفرية، مما يؤدي إلى إنشاء تمثيل متجه متناثر. يمكن إنشاء متجهات متفرقة باستخدام طريقتين:</p>
 <ul>
@@ -51,7 +51,7 @@ summary: >-
 <p>يمكن تخزين المتجهات المتفرقة والنص الأصلي في ميلفوس لاسترجاعها بكفاءة. يوضّح الرسم البياني أدناه العملية الشاملة.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
    </span> <span class="img-wrapper"> <span>سير عمل المتجهات المتفرقة</span> </span></p>
 <div class="alert note">
 <p>بالإضافة إلى المتجهات المتناثرة، يدعم ميلفوس أيضًا المتجهات الكثيفة والمتجهات الثنائية. تُعد المتجهات الكثيفة مثالية لالتقاط العلاقات الدلالية العميقة، بينما تتفوق المتجهات الثنائية في سيناريوهات مثل مقارنات التشابه السريعة وإلغاء تكرار المحتوى. لمزيد من المعلومات، راجع المتجهات <a href="/docs/ar/dense-vector.md">الكثيفة</a> والمتجهات <a href="/docs/ar/binary-vector.md">الثنائية</a>.</p>
@@ -439,7 +439,7 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يجب عليك توفير البيانات لجميع الحقول المحددة أثناء إنشاء المجموعة، باستثناء الحقول التي يتم إنشاؤها تلقائيًا (مثل المفتاح الأساسي مع تمكين <code translate="no">auto_id</code> ). إذا كنت تستخدم دالة BM25 المدمجة لتوليد المتجهات المتفرقة تلقائيًا، فيجب عليك أيضًا حذف حقل المتجه المتناثر عند إدراج البيانات.</p>
+    </button></h2><p>يجب عليك توفير بيانات لجميع الحقول المحددة أثناء إنشاء المجموعة، باستثناء الحقول التي يتم إنشاؤها تلقائيًا (مثل المفتاح الأساسي مع تمكين <code translate="no">auto_id</code> ). إذا كنت تستخدم دالة BM25 المدمجة لتوليد المتجهات المتفرقة تلقائيًا، فيجب عليك أيضًا حذف حقل المتجه المتناثر عند إدراج البيانات.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [

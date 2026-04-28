@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>インデックスはデータの上に構築される付加的な構造である。その内部構造は、使用する近似最近傍探索アルゴリズムに依存する。インデックスは検索を高速化しますが、検索中の前処理時間、スペース、RAMが追加されます。さらに、インデックスを使用すると一般的に想起率が低下する（その影響は無視できるほど小さいが、それでも重要である）。そこでこの記事では、インデックスを使用するコストを最小化しつつ、メリットを最大化する方法について説明する。</p>
+    </button></h1><p>インデックスはデータの上に構築される付加的な構造である。その内部構造は、使用する近似最近傍探索アルゴリズムに依存する。インデックスは検索を高速化しますが、検索中の前処理時間、スペース、RAMが追加されます。さらに、インデックスを使用すると一般的に想起率が低下する（その影響は無視できるほど小さいが、それでも重要である）。そこでこの記事では、インデックスを使用するコストを最小化しつつ、メリットを最大化する方法を説明する。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -147,7 +147,7 @@ summary: >-
       </svg>
     </button></h3><p>量子化は、より粗い表現によってメモリフットプリントと計算コストを削減します：</p>
 <ul>
-<li><p><strong>スカラー量子化</strong>（<strong>SQ8など</strong>）により、milvusは各ベクトル次元を1バイト（8ビット）に圧縮することができ、適切な精度を保ちながら32ビット浮動小数点数と比較してメモリ使用量を75%削減することができます。</p></li>
+<li><p><strong>スカラー量子化</strong>（<strong>SQ8など</strong>）により、milvusは各ベクトル次元を1バイト（8ビット）に圧縮し、32ビット浮動小数点数と比較してメモリ使用量を75%削減することができます。</p></li>
 <li><p><strong>積量子化</strong><strong>(PQ</strong>)は、Milvusがベクトルをサブベクトルに分割し、コードブックベースのクラスタリングを用いて符号化することを可能にします。これにより、高い圧縮率（例：4～32倍）が達成され、その代償として再現性がわずかに低下するため、メモリに制約のある環境に適しています。</p></li>
 </ul>
 <h3 id="Refiner" class="common-anchor-header">リファイナー<button data-href="#Refiner" class="anchor-icon" translate="no">
@@ -167,7 +167,7 @@ summary: >-
       </svg>
     </button></h3><p>量子化は本質的に損失が大きい。リコール率を維持するために、量子化は一貫して必要以上のトップK候補を生成するため、リファイナーはより高い精度を使用してこれらの候補からトップK結果をさらに選択し、リコール率を向上させることができます。</p>
 <p>例えば、FP32リファイナーは、量子化によって返された検索結果候補に対して、量子化された値ではなくFP32の精度を用いて距離を再計算する操作を行います。</p>
-<p>これは、セマンティック検索や推薦システムなど、検索効率と精度のトレードオフを必要とするアプリケーションにおいて重要であり、わずかな距離の変動が結果の品質に大きく影響する。</p>
+<p>これは、セマンティック検索や推薦システムなど、検索効率と精度のトレードオフが必要なアプリケーションにおいて重要であり、わずかな距離の変動が結果の品質に大きく影響する。</p>
 <h3 id="Summary" class="common-anchor-header">まとめ<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -366,7 +366,7 @@ summary: >-
     </button></h3><p>IVFインデックスは、データをクラスタに分割することで、メモリ効率と検索性能のバランスをとっています。以下は、IVF バリアントを使用してインデックスを作成した 128 次元ベクトル 100 万個が使用するメモリの内訳です。</p>
 <ol>
 <li><p><strong>セントロイドが使用するメモリを計算します。</strong></p>
-<p>IVFシリーズのインデックスタイプにより、Milvusはセントロイドベースのパーティショニングを使用してベクトルをバケットにクラスタ化することができます。各セントロイドは生のベクトル埋め込みにおけるインデックスに含まれます。ベクトルを2,000のクラスタに分割すると、メモリ使用量は以下のように計算できます：</p>
+<p>IVFシリーズのインデックスタイプにより、Milvusはセントロイドベースのパーティショニングを使用して、ベクトルをバケットにクラスタ化することができます。各セントロイドは生のベクトル埋め込みにおけるインデックスに含まれます。ベクトルを2,000のクラスタに分割すると、メモリ使用量は以下のように計算できます：</p>
 <pre><code translate="no" class="language-plaintext">2,000 clusters × 128 dimensions × 4 bytes = 1.0 MB
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>クラスタ割り当てによって使用されるメモリを計算します。</strong></p>
@@ -417,7 +417,7 @@ summary: >-
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Graph-based-index-memory-usage" class="common-anchor-header">グラフベースインデックスのメモリ使用量<button data-href="#Graph-based-index-memory-usage" class="anchor-icon" translate="no">
+<h3 id="Graph-based-index-memory-usage" class="common-anchor-header">グラフベースのインデックスのメモリ使用量<button data-href="#Graph-based-index-memory-usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

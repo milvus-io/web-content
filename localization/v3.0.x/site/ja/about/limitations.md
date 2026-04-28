@@ -152,7 +152,7 @@ summary: Milvus使用中の制限について学ぶ。
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>プロパティ</th><th>限界値</th></tr>
+<tr><th>プロパティ</th><th>リミット</th></tr>
 </thead>
 <tbody>
 <tr><td>次元数</td><td>32,768</td></tr>

@@ -114,7 +114,7 @@ milvus_client = MilvusClient(<span class="hljs-string">&quot;milvus_twelvelabs_d
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Successfully connected to Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>يقوم هذا الرمز بإنشاء مثيل عميل Milvus جديد يقوم بتخزين جميع البيانات في ملف باسم milvus_twelvelvelabs_demo.db. هذا النهج القائم على الملفات مثالي لأغراض التطوير والاختبار.</p>
+<p>ينشئ هذا الرمز مثيل عميل Milvus جديدًا يقوم بتخزين جميع البيانات في ملف باسم milvus_twelvelvelabs_demo.db. هذا النهج القائم على الملفات مثالي لأغراض التطوير والاختبار.</p>
 <h2 id="Creating-a-Milvus-Collection-for-Video-Embeddings" class="common-anchor-header">إنشاء مجموعة ميلفوس لتضمين الفيديو<button data-href="#Creating-a-Milvus-Collection-for-Video-Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -263,7 +263,7 @@ embeddings, task_result = generate_embedding(video_url)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Embedding vector (first 5 values): <span class="hljs-subst">{emb[<span class="hljs-string">&#x27;embedding&#x27;</span>][:<span class="hljs-number">5</span>]}</span>&quot;</span>)
     <span class="hljs-built_in">print</span>()
 <button class="copy-code-btn"></button></code></pre>
-<p>يسمح لك هذا التطبيق بإنشاء تضمينات لأي عنوان URL للفيديو باستخدام واجهة برمجة تطبيقات Twelve Labs Embeding API. تعالج الدالة gener_embedding العملية بأكملها، بدءًا من إنشاء المهمة إلى استرداد النتائج. تقوم بإرجاع قائمة من القواميس، يحتوي كل منها على متجه التضمين مع بياناته الوصفية (النطاق الزمني والنطاق).تذكر أن تتعامل مع الأخطاء المحتملة، مثل مشاكل الشبكة أو حدود واجهة برمجة التطبيقات، في بيئة الإنتاج. قد ترغب أيضًا في تنفيذ عمليات إعادة المحاولة أو معالجة أخطاء أكثر قوة بناءً على حالة الاستخدام الخاصة بك.</p>
+<p>يتيح لك هذا التطبيق إنشاء تضمينات لأي عنوان URL للفيديو باستخدام واجهة برمجة تطبيقات Twelve Labs Embeding API. تعالج الدالة gener_embedding العملية بأكملها، بدءًا من إنشاء المهمة إلى استرداد النتائج. تقوم بإرجاع قائمة من القواميس، يحتوي كل منها على متجه التضمين مع بياناته الوصفية (النطاق الزمني والنطاق).تذكر أن تتعامل مع الأخطاء المحتملة، مثل مشاكل الشبكة أو حدود واجهة برمجة التطبيقات، في بيئة الإنتاج. قد ترغب أيضًا في تنفيذ عمليات إعادة المحاولة أو معالجة أخطاء أكثر قوة بناءً على حالة الاستخدام الخاصة بك.</p>
 <h2 id="Inserting-Embeddings-into-Milvus" class="common-anchor-header">إدراج التضمينات في ميلفوس<button data-href="#Inserting-Embeddings-into-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -442,7 +442,7 @@ search_results = perform_similarity_search(milvus_client, collection_name, query
         ></path>
       </svg>
     </button></h2><p>دعونا نواجه الأمر، يمكن أن تسوء الأمور، وعندما تسوء، يجب أن نكون مستعدين. <strong>تنفيذ معالجة قوية للأخطاء أمر بالغ الأهمية</strong>. يجب أن <a href="https://softwareengineering.stackexchange.com/questions/64180/good-use-of-try-catch-blocks">نغلف مكالمات واجهة برمجة التطبيقات وعمليات قاعدة البيانات في كتل "حاول إلا"</a>، مع توفير رسائل خطأ مفيدة للمستخدمين عند فشل شيء ما. بالنسبة للمشكلات المتعلقة بالشبكة، يمكن أن يساعد <a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/implement-retries-exponential-backoff">تنفيذ عمليات إعادة المحاولة مع إعادة التشغيل الأسية</a> في التعامل مع مواطن الخلل المؤقتة بأمان.</p>
-<p><strong>أما بالنسبة للتسجيل، فهو أفضل صديق لنا لتصحيح الأخطاء والمراقبة</strong>. يجب أن نستخدم <a href="https://blog.sentry.io/logging-in-python-a-developers-guide/">وحدة تسجيل Python</a> لتتبع الأحداث المهمة والأخطاء ومقاييس الأداء في تطبيقنا. لنقم بإعداد مستويات سجلات مختلفة - DEBUG للتطوير، و INFO للتشغيل العام، و ERROR للمشاكل الحرجة. ولا تنسَ تنفيذ تدوير السجل لإدارة أحجام الملفات. مع وجود السجل المناسب، سنتمكن من تحديد المشكلات وحلها بسرعة، مما يضمن تشغيل تطبيق البحث عن الفيديو بسلاسة حتى مع زيادة حجمه.</p>
+<p><strong>أما بالنسبة للتسجيل، فهو أفضل صديق لنا لتصحيح الأخطاء والمراقبة</strong>. يجب أن نستخدم <a href="https://blog.sentry.io/logging-in-python-a-developers-guide/">وحدة تسجيل Python</a> لتتبع الأحداث المهمة والأخطاء ومقاييس الأداء في تطبيقنا. لنقم بإعداد مستويات سجلات مختلفة - DEBUG للتطوير، و INFO للتشغيل العام، و ERROR للمشاكل الحرجة. ولا تنسَ تنفيذ تدوير السجل لإدارة أحجام الملفات. مع وجود التسجيل المناسب، سنتمكن من تحديد المشكلات وحلها بسرعة، مما يضمن تشغيل تطبيق البحث عن الفيديو بسلاسة حتى مع زيادة حجمه.</p>
 <h2 id="Conclusion" class="common-anchor-header">خاتمة<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

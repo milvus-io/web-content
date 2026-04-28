@@ -154,7 +154,7 @@ beta: Milvus 2.6.x
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
    </span> <span class="img-wrapper"> <span>임베딩 기능 개요</span> </span></p>
 <h2 id="Configure-credentials" class="common-anchor-header">자격 증명 구성<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -182,7 +182,7 @@ beta: Milvus 2.6.x
 <p>다음 다이어그램은 Milvus 구성 파일(<code translate="no">milvus.yaml</code>)을 통해 자격 증명을 구성한 다음 Milvus 내에서 함수를 호출하는 과정을 보여줍니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
    </span> <span class="img-wrapper"> <span>자격 증명 구성 오버플로</span> </span></p>
 <h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">1단계: Milvus 구성 파일에 자격 증명 추가하기<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -604,7 +604,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>두 가지 방법 모두 작동하지만, 중앙 집중식 자격 증명 관리와 모든 공급업체에서 일관된 자격 증명 이름을 제공하기 때문에 <code translate="no">milvus.yaml</code> 을 사용하는 것이 권장됩니다. 환경 변수를 사용하는 경우 임베딩 서비스 제공업체에 따라 변수 이름이 다르므로 각 제공업체의 전용 페이지를 참조하여 필요한 특정 환경 변수 이름(예: <a href="/docs/ko/openai.md">OpenAI</a> 또는 <a href="/docs/ko/azure-openai.md">Azure OpenAI</a>)을 파악하세요.</p>
+    </button></h3><p>두 가지 방법 모두 작동하지만, 중앙 집중식 자격증명 관리와 모든 공급업체에서 일관된 자격증명 이름을 제공하기 때문에 <code translate="no">milvus.yaml</code> 을 사용하는 것이 권장됩니다. 환경 변수를 사용하는 경우 임베딩 서비스 제공업체에 따라 변수 이름이 다르므로 각 제공업체의 전용 페이지를 참조하여 필요한 특정 환경 변수 이름(예: <a href="/docs/ko/openai.md">OpenAI</a> 또는 <a href="/docs/ko/azure-openai.md">Azure OpenAI</a>)을 파악하세요.</p>
 <h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">함수 정의에 자격 증명 매개변수를 지정하지 않으면 어떻게 되나요?<button data-href="#What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

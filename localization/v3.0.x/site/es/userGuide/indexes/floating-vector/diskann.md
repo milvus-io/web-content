@@ -65,7 +65,7 @@ summary: >-
 <p>La siguiente figura muestra cómo se construye un grafo Vamana.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
    </span> <span class="img-wrapper"> <span>Diskann</span> </span></p>
 <ol>
 <li><p><strong>Conexiones aleatorias iniciales:</strong> Cada punto de datos (vector) se representa como un nodo en el grafo. Estos nodos se conectan inicialmente de forma aleatoria, formando una red densa. Normalmente, un nodo comienza con unas 500 aristas (o conexiones) para una conectividad amplia.</p></li>
@@ -106,7 +106,7 @@ summary: >-
     </button></h3><p>Una vez construido el índice (el gráfico Vamana en disco y los códigos PQ en memoria), DISKANN realiza las búsquedas RNA de la siguiente manera:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
    </span> <span class="img-wrapper"> <span>Diskann 2</span> </span></p>
 <ol>
 <li><p><strong>Consulta y punto de entrada:</strong> Se proporciona un vector de consulta para localizar a sus vecinos más cercanos. DISKANN parte de un punto de entrada seleccionado en el gráfico Vamana, a menudo un nodo cercano al centroide global del conjunto de datos. El centroide global representa la media de todos los vectores, lo que ayuda a minimizar la distancia transversal a través del grafo para encontrar los vecinos deseados.</p></li>
@@ -248,7 +248,7 @@ summary: >-
      <td><p>Durante la construcción del índice, este parámetro define el tamaño del grupo de candidatos utilizado cuando se buscan los vecinos más cercanos para cada nodo. Para cada nodo que se añade al grafo, el algoritmo mantiene una lista de los <code translate="no">search_list_size</code> mejores candidatos encontrados hasta el momento. La búsqueda de vecinos se detiene cuando esta lista ya no puede mejorarse. De esta lista final de candidatos, se seleccionan los mejores <code translate="no">max_degree</code> nodos para formar las aristas finales.</p></td>
      <td><p><strong>Tipo</strong>: Entero <strong>Rango</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valor por defecto</strong>: <code translate="no">100</code></p></td>
-     <td><p>Un valor mayor de <code translate="no">search_list_size</code> aumenta la probabilidad de encontrar los verdaderos vecinos más cercanos de cada nodo, lo que puede dar lugar a un gráfico de mayor calidad y un mejor rendimiento de la búsqueda (recall). Sin embargo, esto tiene el coste de un tiempo de construcción del índice significativamente mayor. Debe fijarse siempre en un valor mayor o igual que <code translate="no">max_degree</code>.</p></td>
+     <td><p>Un valor mayor de <code translate="no">search_list_size</code> aumenta la probabilidad de encontrar los verdaderos vecinos más cercanos de cada nodo, lo que puede dar lugar a un gráfico de mayor calidad y a un mejor rendimiento de la búsqueda (recall). Sin embargo, esto tiene el coste de un tiempo de construcción del índice significativamente mayor. Debe fijarse siempre en un valor mayor o igual que <code translate="no">max_degree</code>.</p></td>
    </tr>
    <tr>
      <td></td>

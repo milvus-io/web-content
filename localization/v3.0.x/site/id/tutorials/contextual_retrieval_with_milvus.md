@@ -33,7 +33,7 @@ title: Pengambilan Kontekstual dengan Milvus
   
    <span class="img-wrapper"> <img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/refs/heads/master/pics/contextual_retrieval_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span><a href="https://www.anthropic.com/news/contextual-retrieval">Pengambilan Kontekstual</a> <span class="img-wrapper"> <span>gambar</span> </span>adalah metode pengambilan lanjutan yang diusulkan oleh Anthropic untuk mengatasi masalah isolasi semantik dari potongan-potongan, yang muncul dalam solusi Retrieval-Augmented Generation (RAG) saat ini. Dalam paradigma RAG praktis saat ini, dokumen dibagi menjadi beberapa bagian, dan basis data vektor digunakan untuk mencari kueri, mengambil bagian yang paling relevan. LLM kemudian merespons kueri menggunakan potongan-potongan yang diambil ini. Namun, proses pemotongan ini dapat mengakibatkan hilangnya informasi kontekstual, sehingga menyulitkan retriever untuk menentukan relevansi.</p>
-<p>Contextual Retrieval meningkatkan sistem pencarian tradisional dengan menambahkan konteks yang relevan pada setiap potongan dokumen sebelum disematkan atau diindeks, sehingga meningkatkan akurasi dan mengurangi kesalahan pencarian. Dikombinasikan dengan teknik seperti pengambilan hibrida dan pemeringkatan ulang, hal ini meningkatkan sistem Retrieval-Augmented Generation (RAG), terutama untuk basis pengetahuan yang besar. Selain itu, ia menawarkan solusi yang hemat biaya jika dipasangkan dengan cache yang cepat, yang secara signifikan mengurangi latensi dan biaya operasional, dengan potongan yang dikontekstualisasikan dengan biaya sekitar $ 1,02 per juta token dokumen. Hal ini menjadikannya pendekatan yang terukur dan efisien untuk menangani basis pengetahuan yang besar. Solusi Anthropic menunjukkan dua aspek yang mendalam:</p>
+<p>Contextual Retrieval meningkatkan sistem pencarian tradisional dengan menambahkan konteks yang relevan ke setiap potongan dokumen sebelum disematkan atau diindeks, meningkatkan akurasi dan mengurangi kesalahan pencarian. Dikombinasikan dengan teknik seperti pengambilan hibrida dan pemeringkatan ulang, hal ini meningkatkan sistem Retrieval-Augmented Generation (RAG), terutama untuk basis pengetahuan yang besar. Selain itu, ia menawarkan solusi yang hemat biaya jika dipasangkan dengan cache yang cepat, yang secara signifikan mengurangi latensi dan biaya operasional, dengan potongan yang dikontekstualisasikan dengan biaya sekitar $ 1,02 per juta token dokumen. Hal ini menjadikannya pendekatan yang terukur dan efisien untuk menangani basis pengetahuan yang besar. Solusi Anthropic menunjukkan dua aspek yang mendalam:</p>
 <ul>
 <li><code translate="no">Document Enhancement</code>: Penulisan ulang kueri adalah teknik penting dalam pencarian informasi modern, yang sering kali menggunakan informasi tambahan untuk membuat kueri menjadi lebih informatif. Demikian pula, untuk mencapai kinerja yang lebih baik dalam RAG, prapemrosesan dokumen dengan LLM (misalnya, membersihkan sumber data, melengkapi informasi yang hilang, meringkas, dll.) sebelum pengindeksan dapat secara signifikan meningkatkan peluang untuk mengambil dokumen yang relevan. Dengan kata lain, langkah prapemrosesan ini membantu mendekatkan dokumen ke kueri dalam hal relevansi.</li>
 <li><code translate="no">Low-Cost Processing by Caching Long Context</code>: Salah satu kekhawatiran umum ketika menggunakan LLM untuk memproses dokumen adalah biaya. KVCache adalah solusi populer yang memungkinkan penggunaan kembali hasil antara untuk konteks sebelumnya yang sama. Meskipun sebagian besar vendor LLM yang dihosting membuat fitur ini transparan bagi pengguna, Anthropic memberikan kontrol kepada pengguna atas proses caching. Ketika terjadi pemanggilan cache, sebagian besar komputasi dapat disimpan (hal ini biasa terjadi ketika konteks yang panjang tetap sama, tetapi instruksi untuk setiap kueri berubah). Untuk lebih jelasnya, klik <a href="https://www.anthropic.com/news/prompt-caching">di sini</a>.</li>
@@ -54,7 +54,22 @@ title: Pengambilan Kontekstual dengan Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Instal Ketergantungan</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Instal Ketergantungan<button data-href="#Install-Dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install tqdm</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install anthropic</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -466,7 +481,7 @@ cohere_rf = CohereRerankFunction(api_key=<span class="hljs-string">&quot;your-co
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pengambilan standar hanya menggunakan sematan padat untuk mengambil dokumen terkait. Dalam percobaan ini, kita akan menggunakan Pass@5 untuk mereproduksi hasil dari repo asli.</p>
+    </button></h2><p>Pengambilan standar hanya menggunakan sematan padat untuk mengambil dokumen terkait. Dalam percobaan ini, kita akan menggunakan Pass@5 untuk mereproduksi hasil dari repositori asli.</p>
 <pre><code translate="no" class="language-python">standard_retriever = MilvusContextualRetriever(
     uri=<span class="hljs-string">&quot;standard.db&quot;</span>, collection_name=<span class="hljs-string">&quot;standard&quot;</span>, dense_embedding_function=dense_ef
 )
@@ -618,4 +633,4 @@ Pass@5: 90.91%
 Total Score: 0.9090821812596005
 Total queries: 248
 </code></pre>
-<p>Kami telah mendemonstrasikan beberapa metode untuk meningkatkan kinerja pengambilan. Dengan desain yang lebih ad-hoc yang disesuaikan dengan skenario, pengambilan kontekstual menunjukkan potensi yang signifikan untuk melakukan prapemrosesan dokumen dengan biaya rendah, sehingga menghasilkan sistem RAG yang lebih baik.</p>
+<p>Kami telah mendemonstrasikan beberapa metode untuk meningkatkan kinerja pengambilan. Dengan desain yang lebih ad-hoc yang disesuaikan dengan skenario, pengambilan kontekstual menunjukkan potensi yang signifikan untuk melakukan prapemrosesan dokumen dengan biaya rendah, yang mengarah ke sistem RAG yang lebih baik.</p>

@@ -258,7 +258,7 @@ client.create_index(
 <ul>
 <li><p>Apenas o valor em <code translate="no">json_field[&quot;body&quot;]</code> é indexado.</p></li>
 <li><p>O valor é convertido para <code translate="no">VARCHAR</code> antes da tokenização do n-grama.</p></li>
-<li><p>Milvus gera substrings de comprimento 2 a 4 e armazena-os no índice invertido.</p></li>
+<li><p>O Milvus gera substrings de comprimento 2 a 4 e armazena-as no índice invertido.</p></li>
 </ul>
 <p>Para obter mais informações sobre como indexar um campo JSON, consulte <a href="/docs/pt/json-indexing.md">Indexação JSON</a>.</p>
 <h2 id="Queries-accelerated-by-NGRAM" class="common-anchor-header">Consultas aceleradas por NGRAM<button data-href="#Queries-accelerated-by-NGRAM" class="anchor-icon" translate="no">
@@ -369,7 +369,7 @@ client.create_index(
 <ul>
 <li><p>Comece com <code translate="no">min_gram=2</code>, <code translate="no">max_gram=3</code>.</p></li>
 <li><p>Defina <code translate="no">min_gram</code> como o literal mais curto que espera que os utilizadores escrevam.</p></li>
-<li><p>Defina <code translate="no">max_gram</code> próximo do comprimento típico de substrings significativas; um <code translate="no">max_gram</code> maior melhora a filtragem, mas aumenta o espaço.</p></li>
+<li><p>Defina <code translate="no">max_gram</code> próximo do comprimento típico de substrings significativas; <code translate="no">max_gram</code> maior melhora a filtragem mas aumenta o espaço.</p></li>
 </ul></li>
 <li><p><strong>Evitar gramas de baixa seletividade</strong></p>
 <p>Padrões altamente repetitivos (por exemplo, <code translate="no">&quot;aaaaaa&quot;</code>) fornecem filtragem fraca e podem produzir ganhos limitados.</p></li>

@@ -36,7 +36,7 @@ title: Installare Birdwatcher
       </svg>
     </button></h2><p>Se avete installato Milvus Standalone <a href="/docs/it/install_standalone-docker.md">usando docker</a>, vi conviene scaricare e installare il binario compilato, installare Birdwatcher come un comune modulo Go o compilare Birdwatcher dal sorgente.</p>
 <ul>
-<li><p>Installarlo come modulo comune di Go.</p>
+<li><p>Installarlo come modulo Go comune.</p>
 <pre><code translate="no" class="language-shell">git clone https://github.com/milvus-io/birdwatcher.git
 cd birdwatcher
 go install github.com/milvus-io/birdwatcher
@@ -78,7 +78,22 @@ https://github.com/milvus-io/birdwatcher/releases/download/latest/birdwatcher_&l
         ></path>
       </svg>
     </button></h2><p>Se avete installato Milvus Standalone <a href="/docs/it/install_standalone-helm.md">usando i grafici Helm</a> o <a href="/docs/it/install_standalone-operator.md">Milvus Operator</a> o Milvus Cluster <a href="/docs/it/install_cluster-helm.md">usando i grafici Helm</a> o <a href="/docs/it/install_cluster-milvusoperator.md">Milvus Operator</a>, vi consigliamo di installare Birdwatcher come pod Kubernetes.</p>
-<h3 id="Prepare-deploymentyml" class="common-anchor-header">Preparare il file deployment.yml</h3><pre><code translate="no" class="language-yml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">apps/v1</span>
+<h3 id="Prepare-deploymentyml" class="common-anchor-header">Preparare il file deployment.yml<button data-href="#Prepare-deploymentyml" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">apps/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Deployment</span>
 <span class="hljs-attr">metadata:</span>
   <span class="hljs-attr">name:</span> <span class="hljs-string">birdwatcher</span>
@@ -113,6 +128,21 @@ docker build -t milvusdb/birdwatcher .
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<h3 id="Apply-deploymentyml" class="common-anchor-header">Applicare deployment.yml</h3><p>Salvare il file YAML di cui sopra in un file con il nome <code translate="no">deployment.yml</code> ed eseguire il seguente comando</p>
+<h3 id="Apply-deploymentyml" class="common-anchor-header">Applicare deployment.yml<button data-href="#Apply-deploymentyml" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Salvare il file YAML di cui sopra in un file con il nome <code translate="no">deployment.yml</code> ed eseguire il seguente comando</p>
 <pre><code translate="no" class="language-shell">kubectl apply -f deployment.yml
 <button class="copy-code-btn"></button></code></pre>

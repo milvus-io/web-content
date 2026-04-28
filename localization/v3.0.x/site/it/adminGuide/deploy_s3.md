@@ -36,7 +36,22 @@ summary: Imparate a configurare lo storage S3 per Milvus con Docker Compose o He
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Configure-S3" class="common-anchor-header">1. Configurare S3</h3><p><a href="https://min.io/product/overview">MinIO</a> è compatibile con S3. Per configurare S3 con Docker Compose, fornire i valori della sezione <code translate="no">minio</code> nel file <code translate="no">milvus.yaml</code> nel percorso milvus/configs.</p>
+    </button></h2><h3 id="1-Configure-S3" class="common-anchor-header">1. Configurare S3<button data-href="#1-Configure-S3" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="https://min.io/product/overview">MinIO</a> è compatibile con S3. Per configurare S3 con Docker Compose, fornire i valori della sezione <code translate="no">minio</code> nel file <code translate="no">milvus.yaml</code> nel percorso milvus/configs.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">minio:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;your_s3_endpoint&gt;</span>
   <span class="hljs-attr">port:</span> <span class="hljs-string">&lt;your_s3_port&gt;</span>
@@ -46,8 +61,38 @@ summary: Imparate a configurare lo storage S3 per Milvus con Docker Compose o He
   <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Per ulteriori informazioni, vedere <a href="/docs/it/configure_minio.md">Configurazioni MinIO/S3</a>.</p>
-<h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2. Affinare docker-compose.yaml</h3><p>Si rimuova anche la variabile d'ambiente <code translate="no">MINIO_ADDRESS</code> per il servizio milvus all'indirizzo <code translate="no">docker-compose.yaml</code>. Per impostazione predefinita, milvus utilizzerà Minio locale invece di S3 esterno.</p>
-<h3 id="3-Run-Milvus" class="common-anchor-header">3. Eseguire Milvus</h3><p>Eseguire il seguente comando per avviare Milvus che utilizza le configurazioni S3.</p>
+<h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2. Affinare docker-compose.yaml<button data-href="#2-Refine-docker-composeyaml" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Si rimuova anche la variabile d'ambiente <code translate="no">MINIO_ADDRESS</code> per il servizio milvus all'indirizzo <code translate="no">docker-compose.yaml</code>. Per impostazione predefinita, milvus utilizzerà Minio locale invece di S3 esterno.</p>
+<h3 id="3-Run-Milvus" class="common-anchor-header">3. Eseguire Milvus<button data-href="#3-Run-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Eseguire il seguente comando per avviare Milvus che utilizza le configurazioni S3.</p>
 <pre><code translate="no" class="language-shell">docker compose up
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">Le configurazioni diventano effettive solo dopo l'avvio di Milvus. Per ulteriori informazioni, vedere <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Avvio di Milvus</a>.</div>
@@ -84,7 +129,22 @@ summary: Imparate a configurare lo storage S3 per Milvus con Docker Compose o He
 <tr><td><code translate="no">externalS3.useSSL</code></td><td>Se utilizzare SSL durante la connessione</td><td>I valori sono predefiniti a <code translate="no">false</code></td></tr>
 </tbody>
 </table>
-<h3 id="Using-the-YAML-file" class="common-anchor-header">Utilizzo del file YAML</h3><ol>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">Utilizzo del file YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>Configurare la sezione <code translate="no">minio</code> nel file <code translate="no">values.yaml</code>.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">minio:</span>
@@ -107,7 +167,22 @@ summary: Imparate a configurare lo storage S3 per Milvus con Docker Compose o He
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Using-a-command" class="common-anchor-header">Utilizzo di un comando</h3><p>Per installare Milvus e configurare S3, eseguire il seguente comando utilizzando i valori impostati.</p>
+<h3 id="Using-a-command" class="common-anchor-header">Utilizzo di un comando<button data-href="#Using-a-command" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per installare Milvus e configurare S3, eseguire il seguente comando utilizzando i valori impostati.</p>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus --set cluster.enabled=true  --set minio.enabled=false --set externalS3.enabled=true --set externalS3.host=&lt;your_s3_endpoint&gt; --set externalS3.port=&lt;your_s3_port&gt; --set externalS3.accessKey=&lt;your_s3_access_key_id&gt; --set externalS3.secretKey=&lt;your_s3_secret_key&gt; --set externalS3.bucketName=&lt;your_bucket_name&gt;
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Cosa succede dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">

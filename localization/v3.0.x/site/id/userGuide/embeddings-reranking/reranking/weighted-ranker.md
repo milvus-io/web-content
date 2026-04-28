@@ -4,12 +4,12 @@ title: Pemeringkat Tertimbang
 summary: >-
   Weighted Ranker secara cerdas menggabungkan dan memprioritaskan hasil dari
   beberapa jalur pencarian dengan memberikan bobot kepentingan yang berbeda
-  untuk masing-masing. Mirip dengan cara koki yang terampil menyeimbangkan
-  berbagai bahan untuk menciptakan hidangan yang sempurna, Weighted Ranker
-  menyeimbangkan hasil pencarian yang berbeda untuk memberikan hasil gabungan
-  yang paling relevan. Pendekatan ini sangat ideal ketika mencari di beberapa
-  bidang vektor atau modalitas di mana bidang tertentu harus berkontribusi lebih
-  signifikan terhadap peringkat akhir daripada yang lain.
+  untuk masing-masing. Mirip dengan bagaimana seorang koki yang terampil
+  menyeimbangkan berbagai bahan untuk menciptakan hidangan yang sempurna,
+  Weighted Ranker menyeimbangkan hasil pencarian yang berbeda untuk memberikan
+  hasil gabungan yang paling relevan. Pendekatan ini sangat ideal ketika mencari
+  di beberapa bidang vektor atau modalitas di mana bidang tertentu harus
+  berkontribusi lebih signifikan terhadap peringkat akhir daripada yang lain.
 ---
 <h1 id="Weighted-Ranker" class="common-anchor-header">Pemeringkat Tertimbang<button data-href="#Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -84,7 +84,7 @@ summary: >-
     </button></h2><p>Alur kerja utama dari strategi WeightedRanker adalah sebagai berikut:</p>
 <ol>
 <li><p><strong>Kumpulkan Skor Pencarian</strong>: Kumpulkan hasil dan skor dari setiap jalur pencarian vektor (skor_1, skor_2).</p></li>
-<li><p><strong>Normalisasi Skor</strong>: Setiap pencarian dapat menggunakan metrik kemiripan yang berbeda, sehingga menghasilkan distribusi skor yang bervariasi. Misalnya, menggunakan Inner Product (IP) sebagai tipe kemiripan dapat menghasilkan skor mulai dari [-∞, +∞], sementara menggunakan jarak Euclidean (L2) menghasilkan skor mulai dari [0, +∞]. Karena rentang skor dari pencarian yang berbeda bervariasi dan tidak dapat dibandingkan secara langsung, maka perlu dilakukan normalisasi skor dari setiap jalur pencarian. Biasanya, fungsi <code translate="no">arctan</code> digunakan untuk mengubah skor menjadi rentang antara [0, 1] (skor_1_normalized, skor_2_normalized). Skor yang lebih dekat ke 1 menunjukkan kemiripan yang lebih tinggi.</p></li>
+<li><p><strong>Normalisasi Skor</strong>: Setiap pencarian dapat menggunakan metrik kemiripan yang berbeda, menghasilkan distribusi skor yang bervariasi. Misalnya, menggunakan Inner Product (IP) sebagai tipe kemiripan dapat menghasilkan skor mulai dari [-∞, +∞], sementara menggunakan jarak Euclidean (L2) menghasilkan skor mulai dari [0, +∞]. Karena rentang skor dari pencarian yang berbeda bervariasi dan tidak dapat dibandingkan secara langsung, maka perlu dilakukan normalisasi skor dari setiap jalur pencarian. Biasanya, fungsi <code translate="no">arctan</code> digunakan untuk mengubah skor menjadi rentang antara [0, 1] (skor_1_normalized, skor_2_normalized). Skor yang lebih dekat ke 1 menunjukkan kemiripan yang lebih tinggi.</p></li>
 <li><p><strong>Menetapkan Bobot</strong>: Berdasarkan tingkat kepentingan yang diberikan pada bidang vektor yang berbeda, bobot<strong>(wi)</strong> dialokasikan pada skor yang dinormalisasi (score_1_normalized, score_2_normalized). Bobot setiap jalur harus berkisar antara [0,1]. Skor terbobot yang dihasilkan adalah skor_1_terbobot dan skor_2_terbobot.</p></li>
 <li><p><strong>Menggabungkan Skor</strong>: Skor terbobot (skor_1_terbobot, skor_2_terbobot) diberi peringkat dari yang tertinggi hingga terendah untuk menghasilkan satu set skor akhir (skor_akhir).</p></li>
 </ol>
@@ -214,7 +214,7 @@ summary: >-
 <td><p>0.6×0+0.4×0.78=0.312</p></td>
 </tr>
 </table></p></li>
-<li><p>Hasil akhir setelah pemeringkatan ulang (topK=5): Hasil akhir setelah pemeringkatan ulang</p>
+<li><p>Hasil akhir setelah pemeringkatan ulang (topK = 5): Hasil akhir</p>
 <p><table>
 <tr>
 <th><p><strong>Peringkat</strong></p></th>

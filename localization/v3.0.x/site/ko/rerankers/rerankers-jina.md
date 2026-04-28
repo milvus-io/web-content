@@ -22,7 +22,7 @@ title: Jina AI - 리랭커
         ></path>
       </svg>
     </button></h1><p>Milvus는 JinaRerankFunction 클래스를 통해 Jina <a href="https://jina.ai/reranker/">AI 재랭커 모델을</a> 지원합니다. 이 기능을 사용하면 쿼리-문서 쌍의 관련성을 효과적으로 점수화할 수 있습니다.</p>
-<p>이 기능을 사용하려면 필요한 종속 요소를 설치하세요:</p>
+<p>이 기능을 사용하려면 필요한 종속성을 설치하세요:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

@@ -41,14 +41,29 @@ title: 扩展 Milvus 集群
         ></path>
       </svg>
     </button></h2><p>水平扩展包括向外扩展和向内扩展。</p>
-<h3 id="Scaling-out" class="common-anchor-header">向外扩展</h3><p>向外扩展是指增加群集中的节点数量。与向上扩展不同，向外扩展不需要为群集中的一个节点分配更多资源。相反，向外扩展是通过添加更多节点来横向扩展群集。</p>
+<h3 id="Scaling-out" class="common-anchor-header">向外扩展<button data-href="#Scaling-out" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>向外扩展是指增加群集中的节点数量。与向上扩展不同，向外扩展不需要为群集中的一个节点分配更多资源。相反，向外扩展是通过添加更多节点来横向扩展群集。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
    </span> <span class="img-wrapper"> <span>扩展</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>扩展</span> </span></p>
 <p>根据<a href="/docs/zh/architecture_overview.md">Milvus 架构</a>，无状态工作节点包括查询节点、数据节点、索引节点和代理。因此，你可以根据业务需求和应用场景来扩展这些类型的节点。你可以手动或自动扩展 Milvus 集群。</p>
 <p>一般来说，如果您创建的 Milvus 集群使用率过高，您就需要对其进行缩减。以下是一些可能需要缩减 Milvus 集群的典型情况：</p>
@@ -59,7 +74,22 @@ title: 扩展 Milvus 集群
 <li>需要处理大量大型数据集。</li>
 <li>需要确保 Milvus 服务的高可用性。</li>
 </ul>
-<h3 id="Scaling-in" class="common-anchor-header">向内扩展</h3><p>向内扩展是指减少集群中的节点数量。一般来说，如果您创建的 Milvus 集群利用率不足，您就需要对其进行扩展。下面是一些需要对 Milvus 集群进行扩展的典型情况：</p>
+<h3 id="Scaling-in" class="common-anchor-header">向内扩展<button data-href="#Scaling-in" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>向内扩展是指减少集群中的节点数量。一般来说，如果您创建的 Milvus 集群利用率不足，您就需要对其进行扩展。下面是一些需要对 Milvus 集群进行扩展的典型情况：</p>
 <ul>
 <li>一段时间内 CPU 和内存利用率较低。</li>
 <li>查询吞吐量变低。</li>
@@ -164,7 +194,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>如果您想了解如何监控 Milvus 服务并创建警报：</p>
+<li><p>如果想了解如何监控 Milvus 服务并创建警报：</p>
 <ul>
 <li>学习<a href="/docs/zh/monitor.md">在 Kubernetes 上使用 Prometheus 操作符监控 Milvus</a></li>
 </ul></li>

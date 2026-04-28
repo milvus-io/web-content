@@ -87,7 +87,7 @@ title: تثبيت Milvus Nodejs SDK لميلفوس
 # or ...
 yarn add @zilliz/milvus2-sdk-node
 <button class="copy-code-btn"></button></code></pre>
-<p>سيؤدي ذلك إلى تنزيل Milvus node.jsdk وإضافة إدخال تبعية في ملف package.json الخاص بك.</p>
+<p>سيؤدي هذا إلى تنزيل Milvus node.jsdk وإضافة إدخال تبعية في ملف package.json الخاص بك.</p>
 <h2 id="Whats-next" class="common-anchor-header">الخطوة التالية<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -192,7 +192,7 @@ successfully updated mq.type configuration <span class="hljs-keyword">in</span> 
 <div class="alert note">
 <p>بدءًا من الإصدار 2.6 من Milvus v2.6، يعلن الإعداد الافتراضي <code translate="no">docker-compose.yaml</code> بالفعل <code translate="no">mqType</code> على أنه Woodpecker. ما لم تقم بتعديل التكوين الافتراضي أو الترقية من الإصدار 2.5، قد لا يكون هذا الإجراء ضروريًا.</p>
 </div>
-<h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">الخطوة 1: التحقق من تشغيل مثيل Milvus<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
+<h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">الخطوة 1: تحقق من تشغيل مثيل Milvus<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -233,7 +233,7 @@ successfully updated mq.type configuration <span class="hljs-keyword">in</span> 
 <pre><code translate="no" class="language-shell">docker compose down
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">الخطوة 3: تنفيذ التبديل MQ<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
+<h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">الخطوة 3: قم بتشغيل مفتاح MQ<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

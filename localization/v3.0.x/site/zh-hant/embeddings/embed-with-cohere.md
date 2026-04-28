@@ -19,7 +19,7 @@ title: 嵌入 Cohere
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cohere 的內嵌模型用來產生文字內嵌，也就是捕捉文字語意資訊的浮點數字清單。這些嵌入資料可用於文字分類和語意搜尋等任務。</p>
+    </button></h1><p>Cohere 的內嵌模型用來產生文字內嵌，也就是捕捉文字語意資訊的浮點數字清單。這些內嵌資料可用於文字分類和語意搜尋等任務。</p>
 <p>Milvus 使用<code translate="no">CohereEmbeddingFunction</code> 類與 Cohere 的嵌入模型整合。這個類別處理嵌入的計算，並將它們以與 Milvus 相容的格式傳回，以便進行索引和搜尋。</p>
 <p>要使用此功能，請安裝必要的相依性：</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
@@ -44,13 +44,13 @@ cohere_ef = CohereEmbeddingFunction(
 <li><p><code translate="no">input_type</code> <em>(字串</em>)</p>
 <p>傳送到模型的輸入類型。嵌入模型 v3 及更高版本必須使用。</p>
 <ul>
-<li><code translate="no">&quot;search_document&quot;</code>:用於儲存於向量資料庫中的嵌入，供搜尋用例使用。</li>
+<li><code translate="no">&quot;search_document&quot;</code>:用於儲存於向量資料庫的嵌入模型，供搜尋用例使用。</li>
 <li><code translate="no">&quot;search_query&quot;</code>:用於對向量資料庫執行搜尋查詢的嵌入，以尋找相關文件。</li>
 <li><code translate="no">&quot;classification&quot;</code>:用於通過文字分類器的嵌入。</li>
 <li><code translate="no">&quot;clustering&quot;</code>:用於通過聚類演算法運行的嵌入。</li>
 </ul></li>
 <li><p><code translate="no">embedding_types</code> <em>(List[str]</em>)</p>
-<p>您想要獲取的嵌入式資料類型。非必要，預設為 None，會返回 Embed Floats 回應類型。目前，您只能指定此參數的單一值。可能的值：</p>
+<p>您想要返回的嵌入式資料類型。非必要，預設為 None，會返回 Embed Floats 回應類型。目前，您只能指定此參數的單一值。可能的值：</p>
 <ul>
 <li><code translate="no">&quot;float&quot;</code>:當您想要回傳預設的浮動嵌入時，請使用此值。對所有模型都有效。</li>
 <li><code translate="no">&quot;binary&quot;</code>:當您想要取回有符號的二進位內嵌時，請使用此項。僅對 v3 模型有效。</li>

@@ -37,7 +37,7 @@ gemini_ef = model.dense.GeminiEmbeddingFunction(
 <li><p><strong>nom_modèle</strong><em>(chaîne</em>)</p>
 <p>Le nom du modèle Gemini à utiliser pour l'encodage. Les options valides sont <strong>gemini-embedding-exp-03-07</strong>(par défaut), <strong>models/embedding-001</strong>, et <strong>models/text-embedding-004</strong>.</p></li>
 <li><p><strong>api_key</strong><em>(chaîne</em>)</p>
-<p>La clé API pour accéder à l'API Gemini.</p></li>
+<p>La clé d'API pour accéder à l'API Gemini.</p></li>
 <li><p><strong>config</strong><em>(types.EmbedContentConfig</em>) Configuration optionnelle pour le modèle d'intégration.</p>
 <ul>
 <li>Le paramètre <strong>output_dimensionality</strong> peut être spécifié pour le nombre d'embeddings résultants.</li>

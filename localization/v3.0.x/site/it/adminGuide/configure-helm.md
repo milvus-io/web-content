@@ -54,7 +54,7 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo il riavvio di 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">Scaricare</a> <code translate="no">values.yaml</code> direttamente o con il seguente comando.</p>
+    </button></h3><p><a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">Scaricare</a> <code translate="no">values.yaml</code> direttamente o con il seguente comando.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">Modificare il file di configurazione<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
@@ -89,7 +89,7 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo il riavvio di 
 <p>Per ulteriori informazioni su ciascun parametro, consultare i seguenti link.</p>
 <p>Ordinati per:</p>
 <div class="filter">
-<a href="#component">Componenti o dipendenze</a> <a href="#purpose">Scopo della configurazione</a> </div>
+<a href="#component">Componenti o dipendenze</a> <a href="#purpose">Scopi della configurazione</a> </div>
 <div class="filter-component table-wrapper">
 <table id="component">
 <thead>
@@ -126,10 +126,9 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo il riavvio di 
             <li><a href="/docs/it/configure_indexcoord.md">Indice coord</a></li>
             <li><a href="/docs/it/configure_metastore.md">Metastore</a></li>
             <li><a href="/docs/it/configure_mq.md">Coda di messaggi</a></li>
-            <li><a href="/docs/it/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/it/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/it/configure_trace.md">Traccia</a></li>
-            <li><a href="/docs/it/configure_quotaandlimits.md">Quote e limiti</a></li>
+            <li><a href="/docs/it/configure_quotaandlimits.md">Quota e limiti</a></li>
         </ul>
     </td>
   </tr>

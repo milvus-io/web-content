@@ -5,7 +5,7 @@ related_key: Kubernetes
 summary: Scoprite come installare il cluster Milvus su Kubernetes.
 title: Installare il cluster Milvus con Helm
 ---
-<h1 id="Run-Milvus-in-Kubernetes-with-Helm" class="common-anchor-header">Avviare Milvus in Kubernetes con Helm<button data-href="#Run-Milvus-in-Kubernetes-with-Helm" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-in-Kubernetes-with-Helm" class="common-anchor-header">Eseguire Milvus in Kubernetes con Helm<button data-href="#Run-Milvus-in-Kubernetes-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -155,7 +155,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <div class="alert note">
 <p><strong>Modifiche all'architettura in Milvus 2.6.x:</strong></p>
 <ul>
-<li><strong>Coda dei messaggi</strong>: <strong>Woodpecker</strong> è ora raccomandato (riduce la manutenzione dell'infrastruttura rispetto a Pulsar)</li>
+<li><strong>Coda dei messaggi</strong>: <strong>Woodpecker</strong> è ora consigliato (riduce la manutenzione dell'infrastruttura rispetto a Pulsar)</li>
 <li><strong>Nuovo componente</strong>: Il <strong>nodo di streaming</strong> è stato introdotto e abilitato per impostazione predefinita.</li>
 <li><strong>Componenti fusi</strong>: <strong>Index Node</strong> e <strong>Data Node</strong> sono stati combinati in un unico <strong>Data Node</strong>.</li>
 </ul>

@@ -41,7 +41,22 @@ title: 与 Milvus 一起使用 NLWeb
         ></path>
       </svg>
     </button></h2><p>NLWeb 可以配置为使用 Milvus 作为检索引擎。以下是如何使用 Milvus 设置和使用 NLWeb 的指南。</p>
-<h3 id="Installation" class="common-anchor-header">安装</h3><p>克隆版本库并设置环境：</p>
+<h3 id="Installation" class="common-anchor-header">安装<button data-href="#Installation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>克隆软件仓库并设置环境：</p>
 <pre><code translate="no" class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/microsoft/NLWeb
 <span class="hljs-built_in">cd</span> NLWeb
 python -m venv .venv
@@ -50,7 +65,22 @@ python -m venv .venv
 pip install -r requirements.txt
 pip install pymilvus  <span class="hljs-comment"># Add Milvus Python client</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Configuring-Milvus" class="common-anchor-header">配置 Milvus</h3><p>要使用<strong>Milvus</strong>，请更新配置。</p>
+<h3 id="Configuring-Milvus" class="common-anchor-header">配置 Milvus<button data-href="#Configuring-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要使用<strong>Milvus</strong>，请更新配置。</p>
 <h4 id="Update-config-files-in-codeconfig" class="common-anchor-header">更新配置文件<code translate="no">code/config</code></h4><p>打开<code translate="no">config_retrieval.yaml</code> 文件，添加 Milvus 配置：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">preferred_endpoint:</span> <span class="hljs-string">milvus_local</span>
 
@@ -62,12 +92,42 @@ pip install pymilvus  <span class="hljs-comment"># Add Milvus Python client</spa
     <span class="hljs-comment"># Specify the database type</span>
     <span class="hljs-attr">db_type:</span> <span class="hljs-string">milvus</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Loading-Data" class="common-anchor-header">加载数据</h3><p>配置完成后，使用 RSS 源加载内容。</p>
+<h3 id="Loading-Data" class="common-anchor-header">加载数据<button data-href="#Loading-Data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>配置完成后，使用 RSS 源加载内容。</p>
 <p>从<code translate="no">code</code> 目录加载内容：</p>
 <pre><code translate="no" class="language-bash">python -m tools.db_load https://feeds.libsyn.com/121695/rss Behind-the-Tech
 <button class="copy-code-btn"></button></code></pre>
 <p>这将把内容摄取到你的 Milvus Collections 中，同时存储文本数据和向量嵌入。</p>
-<h3 id="Running-the-Server" class="common-anchor-header">运行服务器</h3><p>要启动 NLWeb，请从<code translate="no">code</code> 目录运行：</p>
+<h3 id="Running-the-Server" class="common-anchor-header">运行服务器<button data-href="#Running-the-Server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要启动 NLWeb，请从<code translate="no">code</code> 目录运行：</p>
 <pre><code translate="no" class="language-bash">python app-file.py
 <button class="copy-code-btn"></button></code></pre>
 <p>现在，您可以使用 http://localhost:8000/ 的网络用户界面或直接通过与 MCP 兼容的 REST API，通过自然语言查询内容。</p>

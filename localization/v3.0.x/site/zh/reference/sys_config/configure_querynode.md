@@ -163,7 +163,7 @@ summary: 了解如何为 Milvus 配置 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        临时索引 nlist，建议设置为 sqrt（chunkRows），必须小于 chunkRows/8      </td>
+      <td>        临时索引 nlist，建议设置 sqrt（chunkRows），必须小于 chunkRows/8      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -395,7 +395,7 @@ summary: 了解如何为 Milvus 配置 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        2GB, 2 * 1024 *1024 *1024     </td>
+      <td>        2GB，2 * 1024 *1024 *1024     </td>
       <td>2147483648</td>
     </tr>
   </tbody>
@@ -456,10 +456,10 @@ summary: 了解如何为 Milvus 配置 queryNode。
       <td>
         <li>选项：async、sync、disable。 </li>      
         <li>指定预热块缓存的必要性。 </li>      
-        <li>1.如果设置为 "sync"（同步）或 "async"（异步），原始向量数据将在加载过程中同步/异步加载到 </li>      
+        <li>1.如果设置为 "sync（同步）"或 "async（异步）"，原始向量数据将在加载过程中同步/异步加载到 </li>      
         <li>在加载过程中，原始矢量数据将同步/异步加载到块缓存中。这种方法有可能在加载后的特定时间内大幅减少查询/搜索延迟。</li>      
         <li>尽管同时会增加磁盘使用量；</li>      
-        <li>2.如果设置为 "禁用"，原始向量数据只会在搜索/查询过程中加载到块缓存中。</li>      </td>
+        <li>2.如果设置为 "禁用"，原始向量数据将只在搜索/查询过程中加载到块缓存中。</li>      </td>
       <td>禁用</td>
     </tr>
   </tbody>
@@ -897,7 +897,7 @@ summary: 了解如何为 Milvus 配置 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        启用某些标量索引的索引偏移缓存，现在仅适用于位图索引，启用此参数可提高从索引中检索原始数据的性能      </td>
+      <td>        启用某些标量索引的索引偏移缓存，现在仅适用于位图索引，启用此参数可提高从索引检索原始数据的性能      </td>
       <td>假</td>
     </tr>
   </tbody>
@@ -1344,7 +1344,7 @@ summary: 了解如何为 Milvus 配置 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        工作流节点客户端池的大小      </td>
+      <td>        工作负载均衡器客户端池的大小      </td>
       <td>10</td>
     </tr>
   </tbody>

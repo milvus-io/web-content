@@ -42,7 +42,7 @@ summary: 了解如何在 EKS 上部署 Milvus 集群
 <li><a href="https://helm.sh/docs/intro/install/"><code translate="no">helm</code></a></li>
 <li><a href="https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html"><code translate="no">eksctl</code></a></li>
 </ul></li>
-<li>已正确授予 AWS IAM 权限。您使用的 IAM 安全负责人必须拥有使用 Amazon EKS IAM 角色、服务相关角色、AWS CloudFormation、VPC 和其他相关资源的权限。您可以采用以下任一方法授予您的委托人适当的权限。<ul>
+<li>已正确授予 AWS IAM 权限。您使用的 IAM 安全负责人必须拥有使用 Amazon EKS IAM 角色、服务相关角色、AWS CloudFormation、VPC 和其他相关资源的权限。您可以采用以下任一方法授予委托人适当的权限。<ul>
 <li>(不建议）只需将您使用的用户/角色的关联策略设置为 AWS 受管策略<code translate="no">AdministratorAccess</code> 。</li>
 <li>(强烈建议）要执行最小权限原则，请执行以下操作：<ul>
 <li><p>要设置<code translate="no">eksctl</code> 的权限，请参阅<a href="https://eksctl.io/usage/minimum-iam-policies/"> <code translate="no">eksctl</code> 的最小权限</a>。</p></li>
@@ -101,9 +101,24 @@ summary: 了解如何在 EKS 上部署 Milvus 集群
         ></path>
       </svg>
     </button></h2><p>您可以使用 AWS 管理控制台、AWS CLI 或 IaC 工具（如 Terraform）设置所需的 AWS 资源，包括 AWS S3 存储桶和 EKS 群集。在本文档中，首选 AWS CLI 来演示如何设置 AWS 资源。</p>
-<h3 id="Create-an-Amazon-S3-Bucket" class="common-anchor-header">创建亚马逊 S3 存储桶</h3><ul>
+<h3 id="Create-an-Amazon-S3-Bucket" class="common-anchor-header">创建亚马逊 S3 存储桶<button data-href="#Create-an-Amazon-S3-Bucket" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>创建 AWS S3 存储桶。</p>
-<p>阅读 "桶<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">命名规则</a>"，并在命名 AWS S3 桶时遵守命名规则。</p>
+<p>阅读 "<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">桶命名规则</a>"，并在命名 AWS S3 桶时遵守命名规则。</p>
 <pre><code translate="no" class="language-shell">milvus_bucket_name=&quot;milvus-bucket-$(openssl rand -hex 12)&quot;
 
 aws s3api create-bucket --bucket &quot;$milvus_bucket_name&quot; --region &#x27;us-east-2&#x27; --acl private  --object-ownership ObjectWriter --create-bucket-configuration LocationConstraint=&#x27;us-east-2&#x27;
@@ -113,7 +128,7 @@ aws s3api create-bucket --bucket &quot;$milvus_bucket_name&quot; --region &#x27;
 <span class="hljs-meta prompt_">#</span><span class="language-bash">
 <span class="hljs-comment"># &quot;Location&quot;: &quot;http://milvus-bucket-039dd013c0712f085d60e21f.s3.amazonaws.com/&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>创建一个 IAM 策略，用于读取和写入上述桶中的对象。<strong>请使用您自己的名称替换桶的名称。</strong></p>
+<li><p>创建一个 IAM 策略，用于读取和写入上述桶中的对象。<strong>请用您自己的名称替换桶的名称。</strong></p>
 <pre><code translate="no" class="language-shell">echo &#x27;{
   &quot;Version&quot;: &quot;2012-10-17&quot;,
   &quot;Statement&quot;: [
@@ -156,7 +171,22 @@ aws iam create-policy --policy-name MilvusS3ReadWrite --policy-document file://m
 <pre><code translate="no" class="language-shell">aws iam attach-user-policy --user-name &lt;your-user-name&gt; --policy-arn &quot;arn:aws:iam::&lt;your-iam-account-id&gt;:policy/MilvusS3ReadWrite&quot;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Create-an-Amazon-EKS-Cluster" class="common-anchor-header">创建亚马逊 EKS 群集</h3><ul>
+<h3 id="Create-an-Amazon-EKS-Cluster" class="common-anchor-header">创建亚马逊 EKS 群集<button data-href="#Create-an-Amazon-EKS-Cluster" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>按如下方式准备群集配置文件，并将其命名为<code translate="no">eks_cluster.yaml</code> 。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">eksctl.io/v1alpha5</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">ClusterConfig</span>
@@ -241,7 +271,22 @@ kubectl get nodes -A -o wide
 <p>将原来的 gp2 StorageClass 设置为非默认。</p>
 <pre><code translate="no" class="language-shell">kubectl patch storageclass gp2 -p &#x27;{&quot;metadata&quot;: {&quot;annotations&quot;:{&quot;storageclass.kubernetes.io/is-default-class&quot;:&quot;false&quot;}}}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Install-AWS-LoadBalancer-Controller" class="common-anchor-header">安装 AWS LoadBalancer 控制器</h3><ul>
+<h3 id="Install-AWS-LoadBalancer-Controller" class="common-anchor-header">安装 AWS LoadBalancer 控制器<button data-href="#Install-AWS-LoadBalancer-Controller" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>添加 Helm chars repo。</p>
 <pre><code translate="no" class="language-shell">helm repo add eks https://aws.github.io/eks-charts
 helm repo update
@@ -390,7 +435,7 @@ helm repo update
 <li><p>下载示例代码。</p>
 <pre><code translate="no" class="language-shell">wget https://raw.githubusercontent.com/milvus-io/pymilvus/master/examples/hello_milvus.py
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>将示例代码中的<code translate="no">host</code> 参数更改为上述 Milvus 服务地址。</p></li>
+<li><p>将示例代码中的<code translate="no">host</code> 参数改为上述 Milvus 服务地址。</p></li>
 </ul>
 <pre><code translate="no">```python
 ...

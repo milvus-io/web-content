@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus suporta duas abordagens de configuração para o tokenizador <code translate="no">jieba</code>: uma configuração simples e uma configuração personalizada.</p>
+    </button></h2><p>Milvus suporta duas abordagens de configuração para o tokenizador <code translate="no">jieba</code>: uma configuração simples e uma configuração personalizada.</p>
 <h3 id="Simple-configuration" class="common-anchor-header">Configuração simples<button data-href="#Simple-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -169,7 +169,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
    </tr>
    <tr>
      <td><p><code translate="no">mode</code></p></td>
-     <td><p>O modo de segmentação. Valores possíveis:</p><ul><li><p><code translate="no">"exact"</code>: Tenta segmentar a frase da forma mais precisa, tornando-a ideal para análise de texto.</p></li><li><p><code translate="no">"search"</code>: Baseia-se no modo exato, decompondo ainda mais as palavras longas para melhorar a recuperação, tornando-o adequado para a tokenização de motores de busca.</p><p>Para obter mais informações, consulte <a href="https://github.com/fxsjy/jieba">Jieba GitHub Project</a>.</p></li></ul></td>
+     <td><p>O modo de segmentação. Valores possíveis:</p><ul><li><p><code translate="no">"exact"</code>: Tenta segmentar a frase da maneira mais precisa, tornando-a ideal para análise de texto.</p></li><li><p><code translate="no">"search"</code>: Baseia-se no modo exato, decompondo ainda mais as palavras longas para melhorar a recuperação, tornando-o adequado para a tokenização de motores de busca.</p><p>Para obter mais informações, consulte <a href="https://github.com/fxsjy/jieba">Jieba GitHub Project</a>.</p></li></ul></td>
      <td><p><code translate="no">"search"</code></p></td>
    </tr>
    <tr>
@@ -178,7 +178,97 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
-<p>Depois de definir <code translate="no">analyzer_params</code>, pode aplicá-las a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Isto permite que o Milvus processe o texto nesse campo utilizando o analisador especificado para uma tokenização e filtragem eficientes. Para obter detalhes, consulte <a href="/docs/pt/analyzer-overview.md#Example-use">Exemplo de uso</a>.</p>
+<p>Para carregar um grande vocabulário personalizado a partir de um ficheiro externo em vez de o incorporar através de <code translate="no">dict</code>, consulte <a href="/docs/pt/jieba-tokenizer.md#Custom-configuration-with-a-dictionary-file">Configuração personalizada com um ficheiro de dicionário</a> abaixo.</p>
+<p>Depois de definir <code translate="no">analyzer_params</code>, pode aplicá-los a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Isto permite que o Milvus processe o texto nesse campo utilizando o analisador especificado para uma tokenização e filtragem eficientes. Para mais pormenores, consulte <a href="/docs/pt/analyzer-overview.md#Example-use">Exemplo de utilização</a>.</p>
+<h3 id="Custom-configuration-with-a-dictionary-file--Milvus-30x" class="common-anchor-header">Configuração personalizada com um ficheiro de dicionário<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Custom-configuration-with-a-dictionary-file--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para grandes vocabulários personalizados - glossários de domínios, terminologia de produtos ou listas de nomes próprios - armazene as palavras em um arquivo e registre o arquivo como um recurso de arquivo remoto e, em seguida, faça referência a ele no tokenizador por meio do parâmetro <code translate="no">extra_dict_file</code>. O analisador carrega estas palavras no seu vocabulário, para além do dicionário incorporado.</p>
+<p>O ficheiro é um texto UTF-8 simples com um termo por linha. Por exemplo:</p>
+<pre><code translate="no" class="language-plaintext">结巴分词器
+向量数据库
+<button class="copy-code-btn"></button></code></pre>
+<p>Carregue o ficheiro para o armazenamento de objectos que o seu cluster Milvus está configurado para utilizar e, em seguida, registe-o:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="hljs-comment"># Register the uploaded file under a name you&#x27;ll reference from analyzer configs.</span>
+client.add_file_resource(
+    name=<span class="hljs-string">&quot;zh_terms&quot;</span>,
+    path=<span class="hljs-string">&quot;file/zh_terms.txt&quot;</span>,    <span class="hljs-comment"># full S3 object key, including the rootPath prefix</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Referenciar o recurso registado no tokenizer através de <code translate="no">extra_dict_file</code>:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">analyzer_params = {
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: {
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+        <span class="hljs-string">&quot;dict&quot;</span>: [<span class="hljs-string">&quot;_default_&quot;</span>],             <span class="hljs-comment"># keep the built-in dictionary</span>
+        <span class="hljs-string">&quot;mode&quot;</span>: <span class="hljs-string">&quot;exact&quot;</span>,
+        <span class="hljs-string">&quot;hmm&quot;</span>: <span class="hljs-literal">False</span>,
+        <span class="hljs-string">&quot;extra_dict_file&quot;</span>: {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;remote&quot;</span>,
+            <span class="hljs-string">&quot;resource_name&quot;</span>: <span class="hljs-string">&quot;zh_terms&quot;</span>,
+            <span class="hljs-string">&quot;file_name&quot;</span>: <span class="hljs-string">&quot;zh_terms.txt&quot;</span>,
+        },
+    },
+}
+
+client.run_analyzer([<span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>], analyzer_params)
+<span class="hljs-comment"># → [[&#x27;milvus&#x27;, &#x27;结巴&#x27;, &#x27;分词器&#x27;, &#x27;中文&#x27;, &#x27;测试&#x27;]]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>O parâmetro <code translate="no">extra_dict_file</code> aceita um objeto com os seguintes campos:</p>
+<table>
+   <tr>
+     <th><p>Campo</p></th>
+     <th><p>Descrição</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">type</code></p></td>
+     <td><p>O tipo de recurso. Utilize <code translate="no">"remote"</code> para um ficheiro registado através de <code translate="no">add_file_resource</code>. Para a variante <code translate="no">"local"</code> utilizada em implementações auto-hospedadas, consulte <a href="/docs/pt/manage-file-resources.md">Gerir Recursos de Ficheiros</a>.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">resource_name</code></p></td>
+     <td><p>O nome utilizado quando o ficheiro foi registado em <code translate="no">add_file_resource</code>.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">file_name</code></p></td>
+     <td><p>A parte do nome do ficheiro do caminho do armazenamento de objectos do recurso registado (por exemplo, <code translate="no">"zh_terms.txt"</code> se o recurso tiver sido registado com <code translate="no">path="file/zh_terms.txt"</code>).</p></td>
+   </tr>
+</table>
+<p>As palavras adicionadas através de <code translate="no">extra_dict_file</code> são fundidas com o dicionário incorporado, pelo que o algoritmo de segmentação da jieba as vê juntamente com as entradas existentes. Se um termo específico surge como um token autónomo depende da seleção DAG ponderada pela probabilidade da jieba - um termo personalizado longo como <code translate="no">向量数据库</code> pode ainda ser dividido em <code translate="no">向量</code> + <code translate="no">数据库</code> se essas entradas mais curtas tiverem frequências mais elevadas no dicionário incorporado.</p>
 <h2 id="Examples" class="common-anchor-header">Exemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -242,7 +332,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verificação usando <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Verification-using-runanalyzer--Milvus-2511+" class="anchor-icon" translate="no">
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verificação usando <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -162,7 +162,22 @@ title: 'MCP + Milvus: Menghubungkan AI dengan Basis Data Vektor'
         ></path>
       </svg>
     </button></h2><p><a href="https://docs.cursor.com/context/model-context-protocol">Cursor</a> juga mendukung alat MCP melalui fitur Agen di Composer. Anda dapat menambahkan server MCP Milvus ke Cursor dengan dua cara:</p>
-<h3 id="Option-1-Using-Cursor-Settings-UI" class="common-anchor-header">Opsi 1: Menggunakan UI Pengaturan Kursor</h3><ol>
+<h3 id="Option-1-Using-Cursor-Settings-UI" class="common-anchor-header">Opsi 1: Menggunakan UI Pengaturan Kursor<button data-href="#Option-1-Using-Cursor-Settings-UI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>Buka <code translate="no">Cursor Settings</code> → <code translate="no">Features</code> → <code translate="no">MCP</code>.</li>
 <li>Klik <code translate="no">+ Add New MCP Server</code>.</li>
 <li>Isi:<ul>
@@ -173,7 +188,22 @@ title: 'MCP + Milvus: Menghubungkan AI dengan Basis Data Vektor'
 <li>⚠️ Tip: Gunakan <code translate="no">127.0.0.1</code> dan bukan <code translate="no">localhost</code> untuk menghindari potensi masalah resolusi DNS.</li>
 </ul></li>
 </ol>
-<h3 id="Option-2-Using-Project-specific-Configuration-Recommended" class="common-anchor-header">Opsi 2: Menggunakan Konfigurasi Khusus Proyek (Direkomendasikan)</h3><ol>
+<h3 id="Option-2-Using-Project-specific-Configuration-Recommended" class="common-anchor-header">Opsi 2: Menggunakan Konfigurasi Khusus Proyek (Direkomendasikan)<button data-href="#Option-2-Using-Project-specific-Configuration-Recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>Buat berkas <code translate="no">.cursor/mcp.json</code> di <strong>direktori root proyek</strong> Anda:</li>
 </ol>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
@@ -212,7 +242,22 @@ title: 'MCP + Milvus: Menghubungkan AI dengan Basis Data Vektor'
         ></path>
       </svg>
     </button></h2><p>Untuk memastikan server MCP telah diatur dengan benar:</p>
-<h3 id="For-Cursor" class="common-anchor-header">Untuk Kursor</h3><ol>
+<h3 id="For-Cursor" class="common-anchor-header">Untuk Kursor<button data-href="#For-Cursor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>Buka <code translate="no">Cursor Settings</code> → <code translate="no">Features</code> → <code translate="no">MCP</code>.</li>
 <li>Konfirmasikan bahwa <code translate="no">&quot;Milvus&quot;</code> muncul dalam daftar server MCP.</li>
 <li>Periksa apakah alat Milvus (misalnya, <code translate="no">milvus_list_collections</code>, <code translate="no">milvus_vector_search</code>) terdaftar.</li>
@@ -234,7 +279,22 @@ title: 'MCP + Milvus: Menghubungkan AI dengan Basis Data Vektor'
         ></path>
       </svg>
     </button></h2><p>Server MCP ini menyediakan beberapa alat untuk <strong>mencari, menanyakan, dan mengelola data vektor di Milvus</strong>. Untuk lebih jelasnya, silakan lihat dokumentasi <a href="https://github.com/zilliztech/mcp-server-milvus">mcp-server-milvus</a>.</p>
-<h3 id="🔍-Search-and-Query-Tools" class="common-anchor-header">🔍 Alat Pencarian dan Kueri</h3><ul>
+<h3 id="🔍-Search-and-Query-Tools" class="common-anchor-header">🔍 Alat Pencarian dan Kueri<button data-href="#🔍-Search-and-Query-Tools" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-text-search</code></strong> → Mencari dokumen dengan menggunakan pencarian teks lengkap.</li>
 <li><strong><code translate="no">milvus-vector-search</code></strong> → Melakukan pencarian kemiripan vektor pada sebuah koleksi.</li>
 <li><strong><code translate="no">milvus-hybrid-search</code></strong> → Melakukan pencarian hibrida yang menggabungkan kemiripan vektor dan penyaringan atribut.</li>
@@ -242,7 +302,22 @@ title: 'MCP + Milvus: Menghubungkan AI dengan Basis Data Vektor'
 <li><strong><code translate="no">milvus-query</code></strong> → Kueri koleksi menggunakan ekspresi filter.</li>
 <li><strong><code translate="no">milvus-count</code></strong> → Menghitung entitas dalam koleksi.</li>
 </ul>
-<h3 id="📁-Collection-Management" class="common-anchor-header">📁 Manajemen Koleksi</h3><ul>
+<h3 id="📁-Collection-Management" class="common-anchor-header">📁 Manajemen Koleksi<button data-href="#📁-Collection-Management" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-list-collections</code></strong> → Membuat daftar semua koleksi dalam database.</li>
 <li><strong><code translate="no">milvus-collection-info</code></strong> → Mendapatkan informasi rinci tentang koleksi.</li>
 <li><strong><code translate="no">milvus-get-collection-stats</code></strong> → Mendapatkan statistik tentang koleksi.</li>
@@ -252,14 +327,44 @@ title: 'MCP + Milvus: Menghubungkan AI dengan Basis Data Vektor'
 <li><strong><code translate="no">milvus-get-query-segment-info</code></strong> → Mendapatkan informasi tentang segmen kueri.</li>
 <li><strong><code translate="no">milvus-get-collection-loading-progress</code></strong> → Mendapatkan kemajuan pemuatan koleksi.</li>
 </ul>
-<h3 id="📊-Data-Operations" class="common-anchor-header">📊 Operasi Data</h3><ul>
+<h3 id="📊-Data-Operations" class="common-anchor-header">📊 Operasi Data<button data-href="#📊-Data-Operations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-insert-data</code></strong> → Menyisipkan data ke dalam koleksi.</li>
 <li><strong><code translate="no">milvus-bulk-insert</code></strong> → Menyisipkan data dalam kelompok untuk kinerja yang lebih baik.</li>
 <li><strong><code translate="no">milvus-upsert-data</code></strong> → Meng-upsert data ke dalam koleksi (menyisipkan atau memperbarui jika ada).</li>
 <li><strong><code translate="no">milvus-delete-entities</code></strong> → Menghapus entitas dari koleksi berdasarkan ekspresi filter.</li>
 <li><strong><code translate="no">milvus-create-dynamic-field</code></strong> → Menambahkan bidang dinamis ke koleksi yang sudah ada.</li>
 </ul>
-<h3 id="⚙️-Index-Management" class="common-anchor-header">⚙️ Manajemen Indeks</h3><ul>
+<h3 id="⚙️-Index-Management" class="common-anchor-header">⚙️ Manajemen Indeks<button data-href="#⚙️-Index-Management" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-create-index</code></strong> → Membuat indeks pada bidang vektor.</li>
 <li><strong><code translate="no">milvus-get-index-info</code></strong> → Mendapatkan informasi tentang indeks dalam koleksi.</li>
 </ul>
@@ -316,7 +421,22 @@ title: 'MCP + Milvus: Menghubungkan AI dengan Basis Data Vektor'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">Menggunakan Claude Desktop</h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">Contoh 1: Mendaftar Koleksi</h4><pre><code translate="no">What are the collections <span class="hljs-selector-tag">I</span> have in my Milvus DB?
+    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">Menggunakan Claude Desktop<button data-href="#Using-Claude-Desktop" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">Contoh 1: Mendaftar Koleksi</h4><pre><code translate="no">What are the collections <span class="hljs-selector-tag">I</span> have in my Milvus DB?
 <button class="copy-code-btn"></button></code></pre>
 <p>Claude kemudian akan menggunakan MCP untuk memeriksa informasi ini di Milvus DB.</p>
 <pre><code translate="no">I<span class="hljs-comment">&#x27;ll check what collections are available in your Milvus database.</span>
@@ -343,7 +463,22 @@ Here are the collections <span class="hljs-keyword">in</span> your Milvus databa
 Here are the documents I found that mention machine learning:
 [Results will appear here based <span class="hljs-keyword">on</span> your actual data]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Using-Cursor" class="common-anchor-header">Menggunakan Kursor</h3><h4 id="Example-Creating-a-Collection" class="common-anchor-header">Contoh: Membuat Koleksi</h4><p>Di dalam Cursor's Composer, Anda dapat bertanya:</p>
+<h3 id="Using-Cursor" class="common-anchor-header">Menggunakan Kursor<button data-href="#Using-Cursor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-Creating-a-Collection" class="common-anchor-header">Contoh: Membuat Koleksi</h4><p>Di dalam Cursor's Composer, Anda dapat bertanya:</p>
 <pre><code translate="no">Create a <span class="hljs-keyword">new</span> collection called <span class="hljs-string">&#x27;articles&#x27;</span> <span class="hljs-function"><span class="hljs-keyword">in</span> Milvus <span class="hljs-keyword">with</span> fields <span class="hljs-keyword">for</span> <span class="hljs-title">title</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-title">content</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-keyword">and</span> a vector <span class="hljs-title">field</span> (<span class="hljs-params"><span class="hljs-number">128</span> dimensions</span>)
 </span><button class="copy-code-btn"></button></code></pre>
 <p>Cursor akan menggunakan server MCP untuk menjalankan operasi ini:</p>
@@ -371,10 +506,25 @@ Collection <span class="hljs-comment">&#x27;articles&#x27; has been created succ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Common-Issues" class="common-anchor-header">Masalah Umum</h3><h4 id="Connection-Errors" class="common-anchor-header">Kesalahan Koneksi</h4><p>Jika Anda melihat kesalahan seperti "Gagal menyambung ke server Milvus":</p>
+    </button></h2><h3 id="Common-Issues" class="common-anchor-header">Masalah Umum<button data-href="#Common-Issues" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Connection-Errors" class="common-anchor-header">Kesalahan Koneksi</h4><p>Jika Anda melihat kesalahan seperti "Gagal menyambung ke server Milvus":</p>
 <ol>
 <li>Pastikan instans Milvus Anda berjalan: <code translate="no">docker ps</code> (jika menggunakan Docker)</li>
-<li>Periksa URI yang benar dalam konfigurasi Anda</li>
+<li>Periksa URI sudah benar dalam konfigurasi Anda</li>
 <li>Pastikan tidak ada aturan firewall yang memblokir koneksi</li>
 <li>Coba gunakan <code translate="no">127.0.0.1</code> alih-alih <code translate="no">localhost</code> pada URI</li>
 </ol>
@@ -387,11 +537,26 @@ Collection <span class="hljs-comment">&#x27;articles&#x27; has been created succ
 <h4 id="Tool-Not-Found" class="common-anchor-header">Alat Tidak Ditemukan</h4><p>Jika alat MCP tidak muncul di Claude Desktop atau Kursor:</p>
 <ol>
 <li>Mulai ulang aplikasi</li>
-<li>Periksa log server untuk mengetahui adanya kesalahan</li>
+<li>Periksa log server untuk kesalahan apa pun</li>
 <li>Pastikan server MCP berjalan dengan benar</li>
 <li>Tekan tombol refresh pada pengaturan MCP (untuk Kursor)</li>
 </ol>
-<h3 id="Getting-Help" class="common-anchor-header">Mendapatkan Bantuan</h3><p>Jika Anda terus mengalami masalah:</p>
+<h3 id="Getting-Help" class="common-anchor-header">Mendapatkan Bantuan<button data-href="#Getting-Help" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jika Anda terus mengalami masalah:</p>
 <ol>
 <li>Periksa <a href="https://github.com/zilliztech/mcp-server-milvus/issues">Masalah GitHub</a> untuk masalah serupa</li>
 <li>Bergabunglah dengan <a href="https://discord.gg/zilliz">Komunitas Zilliz Discord</a> untuk mendapatkan dukungan</li>

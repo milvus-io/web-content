@@ -61,7 +61,7 @@ title: التوليد المعزز للاسترجاع (RAG) مع Milvus و Bento
 <p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
 </div>
 <p>بعد تسجيل الدخول إلى بينتوكلاود، يمكننا التفاعل مع خدمات بينتوكلاود التي تم نشرها في عمليات النشر، وتوجد النهاية_POINT وواجهة برمجة التطبيقات المقابلة في ساحة اللعب -&gt; بايثون. يمكنك تنزيل بيانات المدينة <a href="https://github.com/ytang07/bento_octo_milvus_RAG/tree/main/data">هنا</a>.</p>
-<h2 id="Serving-Embeddings-with-BentoMLBentoCloud" class="common-anchor-header">خدمة التضمينات باستخدام BentoML/BentoCloud<button data-href="#Serving-Embeddings-with-BentoMLBentoCloud" class="anchor-icon" translate="no">
+<h2 id="Serving-Embeddings-with-BentoMLBentoCloud" class="common-anchor-header">خدمة التضمينات مع BentoML/BentoCloud<button data-href="#Serving-Embeddings-with-BentoMLBentoCloud" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -133,7 +133,7 @@ city_chunks = []
     mapped = {<span class="hljs-string">&quot;city_name&quot;</span>: city.split(<span class="hljs-string">&quot;.&quot;</span>)[<span class="hljs-number">0</span>], <span class="hljs-string">&quot;chunks&quot;</span>: cleaned}
     city_chunks.append(mapped)
 <button class="copy-code-btn"></button></code></pre>
-<p>نقسّم قائمة من السلاسل إلى قائمة من التضمينات، كل منها مجمّع 25 سلسلة نصية.</p>
+<p>نقسّم قائمة من السلاسل إلى قائمة من التضمينات، كل منها مجمّعة 25 سلسلة نصية.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_embeddings</span>(<span class="hljs-params">texts: <span class="hljs-built_in">list</span></span>) -&gt; <span class="hljs-built_in">list</span>:
     <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(texts) &gt; <span class="hljs-number">25</span>:
         splits = [texts[x : x + <span class="hljs-number">25</span>] <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(texts), <span class="hljs-number">25</span>)]
@@ -178,7 +178,7 @@ city_chunks = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بعد إعداد التضمينات والبيانات الخاصة بنا، يمكننا إدراج المتجهات مع البيانات الوصفية في Milvus Lite للبحث عن المتجهات لاحقًا. الخطوة الأولى في هذا القسم هي بدء تشغيل عميل من خلال الاتصال بـ Milvus Lite. نقوم ببساطة باستيراد الوحدة النمطية <code translate="no">MilvusClient</code> وتهيئة عميل Milvus Lite الذي يتصل بقاعدة بيانات متجهات Milvus Lite. يأتي حجم البعد من حجم نموذج التضمين، على سبيل المثال نموذج محول الجملة <code translate="no">all-MiniLM-L6-v2</code> ينتج متجهات ذات أبعاد 384.</p>
+    </button></h2><p>بعد إعداد التضمينات والبيانات الخاصة بنا، يمكننا إدراج المتجهات مع البيانات الوصفية في Milvus Lite للبحث عن المتجهات لاحقًا. الخطوة الأولى في هذا القسم هي بدء تشغيل عميل من خلال الاتصال بـ Milvus Lite. نقوم ببساطة باستيراد الوحدة النمطية <code translate="no">MilvusClient</code> وتهيئة عميل Milvus Lite الذي يتصل بقاعدة بيانات متجهات Milvus Lite. يأتي حجم البُعد من حجم نموذج التضمين، على سبيل المثال نموذج محول الجملة <code translate="no">all-MiniLM-L6-v2</code> ينتج متجهات ذات أبعاد 384.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 COLLECTION_NAME = <span class="hljs-string">&quot;Bento_Milvus_RAG&quot;</span>  <span class="hljs-comment"># random name for your collection</span>
@@ -195,7 +195,7 @@ milvus_client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot
 <li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، اضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في Zilliz Cloud.</li>
 </ul>
 </div>
-<p>أو مع واجهة برمجة التطبيقات القديمة للاتصالات.connect.API (غير مستحسن):</p>
+<p>أو باستخدام واجهة برمجة التطبيقات القديمة للاتصالات.connect.API (غير مستحسن):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections
 
 connections.connect(uri=<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)

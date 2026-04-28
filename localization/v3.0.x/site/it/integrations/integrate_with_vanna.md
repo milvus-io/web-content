@@ -43,7 +43,7 @@ title: Scrivere SQL con Vanna e Milvus
 <pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;vanna[milvus,openai]&quot;</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se si utilizza Google Colab, per abilitare le dipendenze appena installate potrebbe essere necessario <strong>riavviare il runtime</strong> (fare clic sul menu "Runtime" nella parte superiore dello schermo e selezionare "Restart session" dal menu a discesa).</p>
+<p>Se si utilizza Google Colab, per abilitare le dipendenze appena installate potrebbe essere necessario <strong>riavviare il runtime</strong> (fare clic sul menu "Runtime" nella parte superiore dello schermo e selezionare "Riavvia sessione" dal menu a discesa).</p>
 </div>
 <p>È inoltre necessario impostare <code translate="no">OPENAI_API_KEY</code> nelle variabili d'ambiente. È possibile ottenere la chiave API da <a href="https://platform.openai.com/docs/guides/production-best-practices/api-keys">OpenAI</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -268,7 +268,7 @@ training_data
       <th>3</th>
       <td>feae618c-5910-4f6f-8b4b-6cc3e03aec06-ddl</td>
       <td>Nessuno</td>
-      <td>CREARE TABELLA Utente (ón ID INTEGER PRIMARY KE...</td>
+      <td>CREARE TABLE User (ón ID INTEGER PRIMARY KE...</td>
     </tr>
     <tr>
       <th>0</th>

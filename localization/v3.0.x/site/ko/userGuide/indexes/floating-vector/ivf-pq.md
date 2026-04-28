@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>IVF_PQ</strong> 인덱스는 고차원 공간에서 대략적인 최접근 이웃 검색을 위한 <strong>양자화 기반</strong> 인덱싱 알고리즘입니다. 일부 그래프 기반 방법만큼 빠르지는 않지만 <strong>IVF_PQ는</strong> 메모리를 훨씬 적게 필요로 하므로 대규모 데이터 세트에 실용적인 선택입니다.</p>
+    </button></h1><p><strong>IVF_PQ</strong> 인덱스는 고차원 공간에서 대략적인 최접근 이웃 검색을 위한 <strong>양자화 기반</strong> 인덱싱 알고리즘입니다. 일부 그래프 기반 방법만큼 빠르지는 않지만, <strong>IVF_PQ는</strong> 메모리가 훨씬 적게 필요하므로 대규모 데이터 세트에 실용적인 선택입니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -58,7 +58,7 @@ summary: >-
 <li><p><strong>클러스터링:</strong> 벡터 데이터 세트는 k-평균과 같은 클러스터링 알고리즘을 사용하여 지정된 수의 클러스터로 나뉩니다. 각 클러스터에는 중심(클러스터의 대표 벡터)이 있습니다.</p></li>
 <li><p><strong>할당:</strong> 각 벡터는 중심이 가장 가까운 클러스터에 할당됩니다.</p></li>
 <li><p><strong>반전 인덱스:</strong> 각 클러스터 중심을 해당 클러스터에 할당된 벡터 목록에 매핑하는 인덱스가 생성됩니다.</p></li>
-<li><p><strong>검색:</strong> 가장 가까운 이웃을 검색할 때 검색 알고리즘은 쿼리 벡터와 클러스터 중심을 비교하여 가장 가능성이 높은 클러스터를 선택합니다. 그런 다음 선택한 클러스터 내의 벡터로 검색 범위가 좁혀집니다.</p></li>
+<li><p><strong>검색:</strong> 가장 가까운 이웃을 검색할 때 검색 알고리즘이 쿼리 벡터와 클러스터 중심을 비교하여 가장 가능성이 높은 클러스터를 선택합니다. 그런 다음 선택한 클러스터 내의 벡터로 검색 범위가 좁혀집니다.</p></li>
 </ol>
 <p>기술적 세부 사항에 대해 자세히 알아보려면 <a href="/docs/ko/ivf-flat.md">IVF_FLAT을</a> 참조하세요.</p>
 <h3 id="PQ" class="common-anchor-header">PQ<button data-href="#PQ" class="anchor-icon" translate="no">
@@ -137,7 +137,7 @@ summary: >-
 <li><p>IVF를<strong>사용한 거친 필터링</strong>: IVF는 벡터 공간을 클러스터로 분할하여 검색 범위를 줄입니다. 이 알고리즘은 전체 데이터 세트를 평가하는 대신 쿼리 벡터에 가장 가까운 클러스터에만 집중합니다.</p></li>
 <li><p><strong>PQ와의 세분화된 비교</strong>: 선택한 클러스터 내에서 PQ는 압축 및 양자화된 벡터 표현을 사용해 대략적인 거리를 빠르게 계산합니다.</p></li>
 </ol>
-<p><strong>IVF_PQ</strong> 인덱스의 성능은 IVF 및 PQ 알고리즘을 모두 제어하는 매개변수에 의해 크게 영향을 받습니다. 주어진 데이터 세트와 애플리케이션에 대해 최적의 결과를 얻으려면 이러한 매개변수를 조정하는 것이 중요합니다. 이러한 매개변수에 대한 자세한 정보와 조정 방법은 <a href="/docs/ko/ivf-pq.md#Index-params">인덱스</a> 매개변수에서 확인할 수 있습니다.</p>
+<p><strong>IVF_PQ</strong> 인덱스의 성능은 IVF와 PQ 알고리즘을 모두 제어하는 매개변수에 의해 크게 영향을 받습니다. 주어진 데이터 세트와 애플리케이션에 대해 최적의 결과를 얻으려면 이러한 매개변수를 조정하는 것이 중요합니다. 이러한 매개변수에 대한 자세한 정보와 조정 방법은 <a href="/docs/ko/ivf-pq.md#Index-params">인덱스</a> 매개변수에서 확인할 수 있습니다.</p>
 <h2 id="Build-index" class="common-anchor-header">인덱스 구축<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

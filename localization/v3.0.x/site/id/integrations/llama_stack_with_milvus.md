@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p><a href="https://github.com/meta-llama/llama-stack/tree/main">Llama Stack</a> adalah pendekatan yang berorientasi pada layanan dan mengutamakan API untuk membangun aplikasi AI produksi. Llama Stack menyediakan tumpukan universal yang memungkinkan pengembang untuk mengembangkan di mana saja, menerapkan di mana saja, dan memanfaatkan blok bangunan yang siap produksi dengan kemandirian penyedia yang sebenarnya. Llama Stack berfokus pada model Llama Meta, komposabilitas, kesiapan produksi, dan ekosistem kemitraan.</p>
-<p>Dalam tutorial ini, kami akan memperkenalkan cara membangun Llama Stack Server yang dikonfigurasi dengan Milvus, yang memungkinkan Anda untuk mengimpor data pribadi Anda untuk digunakan sebagai basis pengetahuan. Kita kemudian akan melakukan kueri pada server, membuat aplikasi RAG yang lengkap.</p>
+<p>Dalam tutorial ini, kami akan memperkenalkan cara membangun Llama Stack Server yang dikonfigurasi dengan Milvus, memungkinkan Anda untuk mengimpor data pribadi Anda untuk berfungsi sebagai basis pengetahuan Anda. Kita kemudian akan melakukan kueri pada server, membuat aplikasi RAG yang lengkap.</p>
 <h2 id="Preparing-the-Environment" class="common-anchor-header">Mempersiapkan Lingkungan<button data-href="#Preparing-the-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,7 +65,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">Menyiapkan Lingkungan</h3><p>Karena kita perlu menggunakan Together AI sebagai layanan LLM, pertama-tama kita harus masuk ke situs web resminya untuk mengajukan permohonan <a href="https://api.together.xyz/settings/api-keys">API key</a> dan menetapkan API key <code translate="no">TOGETHER_API_KEY</code> sebagai variabel lingkungan.</p>
+    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">Menyiapkan Lingkungan<button data-href="#Prepare-the-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Karena kita perlu menggunakan Together AI sebagai layanan LLM, pertama-tama kita harus masuk ke situs web resminya untuk mengajukan permohonan <a href="https://api.together.xyz/settings/api-keys">API key</a> dan menetapkan API key <code translate="no">TOGETHER_API_KEY</code> sebagai variabel lingkungan.</p>
 <p>Kloning kode sumber Llama Stack</p>
 <pre><code translate="no" class="language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/meta-llama/llama-stack.git
 $ <span class="hljs-built_in">cd</span> llama-stack
@@ -98,10 +113,25 @@ $ pip install -e .
 <li>Jika Anda ingin menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang dikelola sepenuhnya untuk Milvus, sesuaikan <code translate="no">uri</code> dan <code translate="no">token</code>, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint dan kunci API</a> di Zilliz Cloud.</li>
 </ul></li>
 </ul>
-<h3 id="Build-distribution-from-the-template" class="common-anchor-header">Membangun distribusi dari templat</h3><p>Jalankan perintah berikut untuk membangun distribusi:</p>
+<h3 id="Build-distribution-from-the-template" class="common-anchor-header">Membangun distribusi dari templat<button data-href="#Build-distribution-from-the-template" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jalankan perintah berikut untuk membangun distribusi:</p>
 <pre><code translate="no" class="language-bash">$ llama stack build --template together --image-type conda
 <button class="copy-code-btn"></button></code></pre>
-<p>Sebuah berkas akan dihasilkan di <code translate="no">~/.llama/distributions/together/together-run.yaml</code>. Kemudian, jalankan perintah ini untuk memulai server:</p>
+<p>Sebuah berkas akan dibuat di <code translate="no">~/.llama/distributions/together/together-run.yaml</code>. Kemudian, jalankan perintah ini untuk memulai server:</p>
 <pre><code translate="no" class="language-bash">$ llama stack run --image-type conda ~/.llama/distributions/together/together-run.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>Jika semuanya berjalan lancar, Anda akan melihat server Llama Stack berhasil berjalan pada port 8321.</p>

@@ -132,7 +132,7 @@ mc ls my_minio
 # </span><span class="language-bash">Download a bucket recursively</span>
 mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>Jetzt können Sie die Sicherungsdateien an einem sicheren Ort speichern, um sie später wiederherzustellen, oder sie in die <a href="https://cloud.zilliz.com">Zilliz Cloud</a> hochladen, um eine verwaltete Vektordatenbank mit Ihren Daten zu erstellen. Details finden Sie unter <a href="https://zilliz.com/doc/migrate_from_milvus-2x">Migrieren von Milvus zu Zilliz Cloud</a>.</p>
+<p>Jetzt können Sie die Sicherungsdateien an einem sicheren Ort speichern, um sie in Zukunft wiederherzustellen, oder sie in die <a href="https://cloud.zilliz.com">Zilliz Cloud</a> hochladen, um eine verwaltete Vektordatenbank mit Ihren Daten zu erstellen. Details finden Sie unter <a href="https://zilliz.com/doc/migrate_from_milvus-2x">Migrieren von Milvus zu Zilliz Cloud</a>.</p>
 <h2 id="Restore-data" class="common-anchor-header">Daten wiederherstellen<button data-href="#Restore-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

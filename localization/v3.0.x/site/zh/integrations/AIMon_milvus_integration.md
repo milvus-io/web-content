@@ -346,7 +346,7 @@ queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_
 <p>LLM 应用程序质量得分是 AIMon 3 个单独质量指标的组合：</p>
 <ol>
 <li><strong>幻觉得分</strong>（hall_score）：检查生成的文本是否符合所提供的上下文。接近 1.0 的分数表示有强烈的幻觉迹象，接近 0.0 的分数表示幻觉迹象较少。因此，在计算最终质量得分时，我们将使用（1.0-hall_score）。</li>
-<li><strong>指示遵守得分</strong>（ia_score）：检查法律硕士是否遵守了所有明确的指示。ia_score 越高，说明遵守情况越好。分数越低，说明遵守情况越差。</li>
+<li><strong>指示遵守得分</strong>（ia_score）：检查法律硕士是否遵守了所有明确的指示。ia_score 越高，说明遵守情况越好。得分越低，说明遵守情况越差。</li>
 <li><strong>检索相关性得分</strong>（rr_score）：检查检索到的文档是否与查询相关。得分接近 100.0 表示文档与查询完全相关，得分接近 0.0 表示文档与查询相关性较差。</li>
 </ol>
 <p><code translate="no">quality_score = 0.35 * (1.0 - hall_score) + 0.35 * ia_score + 0.3 * rr_score</code></p>
@@ -527,10 +527,10 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
         ></path>
       </svg>
     </button></h1><p>现在，我们将通过加入向量 DB 来提高质量得分。与之前的方法相比，这也有助于改善查询延迟。</p>
-<p>我们需要注意两个主要部分：摄取和基于 RAG 的问答。摄取管道处理来自 Meeting Bank 数据集的记录誊本，并将其存储到 Milvus 向量数据库中。RAG 问答管道在处理用户查询时，首先会从向量存储中检索相关文档。然后，这些文档将被用作 LLM 生成其回复的基础文档。我们利用 AIMon 来计算质量得分，并持续监控应用程序的<a href="https://docs.aimon.ai/detectors/hallucination">幻觉</a>、<a href="https://docs.aimon.ai/detectors/instruction_adherence">指令遵守</a>情况和<a href="https://docs.aimon.ai/checker-models/context_relevance">上下文相关性</a>。这也是我们用来定义<code translate="no">quality</code> 分数的 3 个指标。</p>
+<p>我们需要注意两个主要部分：摄取和基于 RAG 的问答。摄取管道处理来自 Meeting Bank 数据集的记录誊本，并将其存储到 Milvus 向量数据库中。RAG 问答管道在处理用户查询时，首先会从向量存储中检索相关文档。然后，这些文档将被用作 LLM 生成回复的基础文档。我们利用 AIMon 来计算质量分数，并持续监控应用程序的<a href="https://docs.aimon.ai/detectors/hallucination">幻觉</a>、<a href="https://docs.aimon.ai/detectors/instruction_adherence">指令遵守</a>情况和<a href="https://docs.aimon.ai/checker-models/context_relevance">上下文相关性</a>。这也是我们用来定义<code translate="no">quality</code> 分数的 3 个指标。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
    </span> <span class="img-wrapper"> <span>工作流程</span> </span></p>
 <p>下面是一些实用功能，用于预处理和计算文档的嵌入。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -1034,5 +1034,5 @@ df_scores
     </tr>
   </tbody>
 </table>
-<p>上表总结了我们的结果。实际数字会因各种因素（如 LLM 响应质量的变化、VectorDB 中近邻搜索的性能等）而有所不同。</p>
+<p>上表总结了我们的结果。实际数字会因各种因素而变化，如 LLM 响应质量的变化、VectorDB 中近邻搜索的性能等。</p>
 <p>总之，如下图所示，我们对您的 LLM 应用程序的质量得分、RAG 相关性和指令跟踪能力进行了评估。我们使用 AIMon 的重新排序器提高了应用程序的整体质量以及从您的 RAG 中检索到的文档的平均相关性。</p>

@@ -322,7 +322,13 @@
             "children": []
           },
           {
-            "label": "檢視收藏集",
+            "label": "建立外部收藏集",
+            "id": "create-an-external-collection.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "檢視館藏",
             "id": "view-collections.md",
             "order": 3,
             "children": []
@@ -474,15 +480,21 @@
             "children": []
           },
           {
-            "label": "Nullable &amp; Default",
+            "label": "可歸零欄位",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
           },
           {
+            "label": "預設值",
+            "id": "default-values.md",
+            "order": 14,
+            "children": []
+          },
+          {
             "label": "分析器",
             "id": "analyzer",
-            "order": 14,
+            "order": 15,
             "children": [
               {
                 "label": "分析儀總覽",
@@ -628,6 +640,12 @@
                     "id": "regex-filter.md",
                     "order": 10,
                     "children": []
+                  },
+                  {
+                    "label": "同義字",
+                    "id": "synonym-filter.md",
+                    "order": 11,
+                    "children": []
                   }
                 ]
               },
@@ -642,26 +660,32 @@
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
+              },
+              {
+                "label": "管理檔案資源",
+                "id": "manage-file-resources.md",
+                "order": 6,
+                "children": []
               }
             ]
           },
           {
             "label": "更改收藏欄位",
             "id": "alter-collection-field.md",
-            "order": 15,
+            "order": 16,
             "children": []
           },
           {
             "label": "新增欄位到現有的集合",
             "id": "add-fields-to-an-existing-collection.md",
-            "order": 16,
+            "order": 17,
             "children": []
           },
           {
             "label": "最佳實務",
             "id": "best-practices",
             "isMenu": true,
-            "order": 17,
+            "order": 18,
             "children": [
               {
                 "label": "搜尋的資料模型設計",
@@ -997,15 +1021,21 @@
                 "children": []
               },
               {
+                "label": "StructArray 運算符號",
+                "id": "struct-array-operators.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "隨機抽樣",
                 "id": "random-sampling.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "幾何運算符號",
                 "id": "geometry-operators.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -1061,15 +1091,21 @@
         ]
       },
       {
-        "label": "嵌入與重新排名",
+        "label": "功能與模型推論",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
         "children": [
           {
-            "label": "嵌入功能",
-            "id": "embedding-function",
+            "label": "BM25 功能",
+            "id": "bm25-function.md",
             "order": 0,
+            "children": []
+          },
+          {
+            "label": "基於模型的嵌入函數",
+            "id": "embedding-function",
+            "order": 1,
             "isMenu": true,
             "children": [
               {
@@ -1109,7 +1145,7 @@
                 "children": []
               },
               {
-                "label": "航程 AI",
+                "label": "Voyage AI",
                 "id": "voyage-ai.md",
                 "order": 6,
                 "children": []
@@ -1141,9 +1177,15 @@
             ]
           },
           {
+            "label": "MinHash 函數",
+            "id": "minhash-function.md",
+            "order": 2,
+            "children": []
+          },
+          {
             "label": "重新排名功能",
             "id": "reranking",
-            "order": 1,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -1269,9 +1311,15 @@
             "children": []
           },
           {
+            "label": "強制合併壓縮",
+            "id": "force-merge.md",
+            "order": 2,
+            "children": []
+          },
+          {
             "label": "分層儲存",
             "id": "tiered_storage",
-            "order": 2,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -1293,6 +1341,32 @@
                 "children": []
               }
             ]
+          }
+        ]
+      },
+      {
+        "label": "快照",
+        "id": "snapshots",
+        "order": 11,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "概述",
+            "id": "snapshots.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "管理快照",
+            "id": "manage-snapshots.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "使用案例",
+            "id": "snapshot-use-cases.md",
+            "order": 2,
+            "children": []
           }
         ]
       }
@@ -2460,7 +2534,7 @@
         "order": 6,
         "children": [
           {
-            "label": "拉格",
+            "label": "拉格舞曲",
             "id": "integrate_with_ragas.md",
             "order": 0,
             "children": []
@@ -2582,7 +2656,7 @@
             "children": []
           },
           {
-            "label": "煙火",
+            "label": "煙花",
             "id": "build_RAG_with_milvus_and_fireworks.md",
             "order": 2,
             "children": []
@@ -2625,7 +2699,7 @@
         "order": 5,
         "children": [
           {
-            "label": "如何",
+            "label": "為什麼",
             "id": "integrate_with_whyhow.md",
             "order": 0,
             "children": []

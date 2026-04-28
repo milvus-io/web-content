@@ -21,7 +21,7 @@ title: الأسئلة الشائعة التشغيلية
     </button></h1><h4 id="What-is-a-QueryNode-delegator-and-what-are-its-responsibilities" class="common-anchor-header">ما هو مفوض عقدة الاستعلام، وما هي مسؤولياته؟</h4><p>عند تحميل مجموعة، تشترك عقدة الاستعلام في قنوات DML لرسائل الإدراج والحذف القادمة من قائمة انتظار الرسائل. تكون عقدة الاستعلام التي تشترك في هذه القنوات، والمعروفة باسم المفوض، مسؤولة عن:</p>
 <ul>
 <li>إدارة المقاطع المتزايدة التي تتطلب ذاكرة إضافية بسبب عمليات الإدراج المستمرة.</li>
-<li>تلقي رسائل الحذف وتمريرها إلى عقد الاستعلام الأخرى التي تحتوي على المقاطع ذات الصلة.</li>
+<li>تلقي رسائل الحذف وتمريرها إلى عقد الاستعلام الأخرى التي تحتفظ بالمقاطع ذات الصلة.</li>
 </ul>
 <h4 id="How-to-identify-delegator-nodes-for-a-collection" class="common-anchor-header">كيف يمكن تحديد العقد المفوض لمجموعة ما؟</h4><p>استخدم Birdwatcher.</p>
 <p>قم بتثبيت Birdwatcher بعد <a href="https://milvus.io/docs/birdwatcher_install_guides.md#Install-Birdwatcher">ذلك،</a> ثم قم بتشغيل الأمر التالي:</p>
@@ -56,7 +56,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="How-to-set-shardnum-for-a-collection" class="common-anchor-header">كيفية تعيين shard_num لمجموعة؟</h4><p>كأفضل ممارسة، بالنسبة لمجموعة ذات متجهات ذات أبعاد 768، يوصى باستخدام جزء واحد على الأقل لكل 100 مليون متجه تقريبًا. بالنسبة لحالة استخدام الكتابة الثقيلة، استخدم 4 أجزاء لكل 100 مليون ناقل تقريبًا.</p>
 <p>على سبيل المثال، إذا كان لديك 100 مليون متجه، استخدم 1-4 أجزاء. إذا كان لديك 500 مليون متجه، استخدم 5-10 شظايا.</p>
-<h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">ماذا لو فشلتُ في سحب صورة Milvus Docker من Docker Hub؟</h4><p>إذا فشلتَ في سحب صورة Milvus Docker من Docker Hub، حاول إضافة مرايا تسجيل أخرى.</p>
+<h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">ماذا لو فشلت في سحب صورة Milvus Docker من Docker Hub؟</h4><p>إذا فشلت في سحب صورة Milvus Docker من Docker Hub، حاول إضافة مرايا تسجيل أخرى.</p>
 <p>يمكن للمستخدمين من البر الرئيسي للصين إضافة عنوان URL "https://registry.docker-cn.com" إلى مصفوفة مرايا السجل في <strong>/etc.docker/daemon.json</strong>.</p>
 <pre><code translate="no"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;registry-mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span><span class="hljs-punctuation">]</span>
@@ -65,7 +65,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">هل Docker هو الطريقة الوحيدة لتثبيت وتشغيل Milvus؟</h4><p>Docker هي طريقة فعالة لنشر Milvus، ولكنها ليست الطريقة الوحيدة. يمكنك أيضاً نشر ميلفوس من التعليمات البرمجية المصدرية. يتطلب ذلك Ubuntu (18.04 أو أعلى) أو CentOS (7 أو أعلى). انظر <a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">بناء ميلفوس من التعليمات البرمجية المصدرية</a> لمزيد من المعلومات.</p>
 <h4 id="What-are-the-main-factors-affecting-recall" class="common-anchor-header">ما هي العوامل الرئيسية التي تؤثر على الاستدعاء؟</h4><p>يتأثر الاستدعاء بشكل رئيسي بنوع الفهرس ومعلمات البحث.</p>
 <p>بالنسبة للفهرس المسطح، يأخذ Milvus مسحًا شاملًا داخل المجموعة، مع إرجاع 100%.</p>
-<p>بالنسبة لفهارس IVF، تحدد معلمة nprobe نطاق البحث داخل المجموعة. تؤدي زيادة nprobe إلى زيادة نسبة المتجهات التي يتم البحث عنها واسترجاعها، ولكنها تقلل من أداء الاستعلام.</p>
+<p>بالنسبة لفهارس IVF، تحدد معلمة nprobe نطاق البحث داخل المجموعة. تؤدي زيادة nprobe إلى زيادة نسبة المتجهات التي يتم البحث فيها واسترجاعها، ولكنها تقلل من أداء الاستعلام.</p>
 <p>بالنسبة لفهرس HNSW، تحدد المعلمة ef نطاق البحث في الرسم البياني. تؤدي زيادة ef إلى زيادة عدد النقاط التي يتم البحث عنها في الرسم البياني والاستدعاء، ولكنها تقلل من أداء الاستعلام.</p>
 <p>لمزيد من المعلومات، راجع <a href="https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">فهرسة المتجهات</a>.</p>
 <h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">لماذا لم تدخل التغييرات التي أجريتها على ملفات التكوين حيز التنفيذ؟</h4><p>لا يدعم Milvus التعديل على ملفات التكوين أثناء وقت التشغيل. يجب إعادة تشغيل Milvus Docker حتى تدخل تغييرات ملفات التكوين حيز التنفيذ.</p>
@@ -105,7 +105,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <p>يمكنك ترقية PyMilvus باستخدام الأمر التالي:</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Why-am-I-getting-fewer-results-than-the-limit-I-set-in-my-searchquery" class="common-anchor-header">لماذا أحصل على نتائج أقل من <code translate="no">limit</code> التي قمت بتعيينها في البحث/الاستعلام الخاص بي؟</h4><p>هناك العديد من الأسباب التي قد تجعلك تتلقى نتائج أقل من <code translate="no">limit</code> الذي حددته:</p>
+<h4 id="Why-am-I-getting-fewer-results-than-the-limit-I-set-in-my-searchquery" class="common-anchor-header">لماذا أحصل على نتائج أقل من <code translate="no">limit</code> التي قمت بتعيينها في البحث/الاستعلام الخاص بي؟</h4><p>هناك عدة أسباب قد تجعلك تتلقى نتائج أقل من <code translate="no">limit</code> الذي حددته:</p>
 <ul>
 <li><p><strong>بيانات محدودة</strong>: قد لا تحتوي المجموعة على كيانات كافية لاستيفاء الحد الذي طلبته. إذا كان العدد الإجمالي للكيانات في المجموعة أقل من الحد، فستتلقى بطبيعة الحال نتائج أقل.</p></li>
 <li><p><strong>تكرار المفاتيح الأساسية</strong>: يعطي ميلفوس الأولوية لكيانات محددة عند مواجهة مفاتيح أساسية مكررة أثناء البحث. يختلف هذا السلوك بناءً على نوع البحث:</p></li>

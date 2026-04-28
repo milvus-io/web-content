@@ -24,7 +24,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>通过 Milvus 的 Function 模块，您可以自动调用外部嵌入服务提供商（如 OpenAI、AWS Bedrock、Google Vertex AI 等），将原始文本数据转换为向量嵌入。有了 Function 模块，您就不再需要手动与嵌入式 API 接口--Milvus 会处理向提供商发送请求、接收嵌入式数据并将其存储到您的 Collections 中的整个过程。对于语义搜索，您只需要提供原始查询数据，而不需要查询向量。Milvus 使用与您用于摄取的相同模型生成查询向量，将其与存储的向量进行比较，并返回最相关的结果。</p>
+    </button></h1><p>通过 Milvus 的 Function 模块，您可以自动调用外部嵌入服务提供商（如 OpenAI、AWS Bedrock、Google Vertex AI 等），将原始文本数据转换为向量嵌入。有了 Function 模块，您就不再需要手动与嵌入式 API 接口--Milvus 会处理向提供商发送请求、接收嵌入式数据并将其存储到您的 Collections 中的整个过程。对于语义搜索，您只需要提供原始查询数据，而不需要查询向量。Milvus 使用与您用于接收的相同模型生成查询向量，将其与存储的向量进行比较，并返回最相关的结果。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -75,7 +75,7 @@ beta: Milvus 2.6.x
    </tr>
    <tr>
      <td><p><a href="/docs/zh/openai.md">OpenAI</a></p></td>
-     <td><p>text-embedding-3-*</p></td>
+     <td><p>文本嵌入-3-*</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>API 密钥</p></td>
    </tr>
@@ -154,7 +154,7 @@ beta: Milvus 2.6.x
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
    </span> <span class="img-wrapper"> <span>Embeddings 功能概述</span> </span></p>
 <h2 id="Configure-credentials" class="common-anchor-header">配置凭证<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -172,17 +172,17 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>在与 Milvus 一起使用嵌入函数之前，请配置嵌入服务凭据以便 Milvus 访问。</p>
-<p>Milvus 可通过两种方式提供嵌入服务凭证：</p>
+<p>Milvus 允许你通过两种方式提供嵌入服务凭证：</p>
 <ul>
 <li><p><strong>配置文件</strong>(<code translate="no">milvus.yaml</code>)：</p>
-<p>本主题中的示例演示了使用<code translate="no">milvus.yaml</code> 的<strong>推荐设置</strong>。</p></li>
+<p>本主题中的示例演示了<strong>建议</strong>使用<code translate="no">milvus.yaml</code> 进行的<strong>设置</strong>。</p></li>
 <li><p><strong>环境变量</strong>：</p>
 <p>有关通过环境变量配置凭据的详细信息，请参阅嵌入服务提供商的文档（例如，<a href="/docs/zh/openai.md">OpenAI</a>或<a href="/docs/zh/azure-openai.md">Azure OpenAI</a>）。</p></li>
 </ul>
 <p>下图显示了通过 Milvus 配置文件 (<code translate="no">milvus.yaml</code>) 配置凭据，然后在 Milvus 内调用函数的过程。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
    </span> <span class="img-wrapper"> <span>凭证配置溢出</span> </span></p>
 <h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">步骤 1：在 Milvus 配置文件中添加凭据<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -384,7 +384,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>使用的函数类型。对于文本嵌入，将值设为<code translate="no">FunctionType.TEXTEMBEDDING</code> 。</p><p><strong>注</strong>：Milvus 接受<code translate="no">FunctionType.BM25</code> （用于稀疏嵌入转换）和<code translate="no">FunctionType.RERANK</code> （用于 Reranker）作为该参数。详情请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>和<a href="/docs/zh/decay-ranker-overview.md">衰减排名器概述</a>。</p></td>
+     <td><p>使用的函数类型。对于文本嵌入，将值设为<code translate="no">FunctionType.TEXTEMBEDDING</code> 。</p><p><strong>注意</strong>：Milvus 接受<code translate="no">FunctionType.BM25</code> （用于稀疏嵌入转换）和<code translate="no">FunctionType.RERANK</code> （用于 Reranker）作为该参数。详情请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>和<a href="/docs/zh/decay-ranker-overview.md">衰减排名器概述</a>。</p></td>
      <td><p><code translate="no">FunctionType.TEXTEMBEDDING</code></p></td>
    </tr>
    <tr>

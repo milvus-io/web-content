@@ -450,7 +450,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>與原始向量嵌入相比，這可達到 64 倍的壓縮率，而<strong>HNSWPQ</strong>索引類型使用的總記憶體為<strong>128 MB (圖形) + 8 MB (壓縮向量) = 136 MB</strong>。</p></li>
 <li><p><strong>計算精煉開銷。</strong></p>
-<p>精煉（例如使用原始向量重新排序）會暫時將高精度資料載入記憶體。對於擷取前 10 個結果且擴充率為 5 的搜尋，精煉開銷可估算如下：</p>
+<p>精煉（例如使用原始向量重新排序）會暫時將高精確度資料載入記憶體。對於擷取前 10 個結果且擴充率為 5 的搜尋，精煉開銷可估算如下：</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
 <button class="copy-code-btn"></button></code></pre></li>
@@ -472,6 +472,6 @@ summary: >-
       </svg>
     </button></h3><p>IVF 和基於圖表的索引會透過量化來最佳化記憶體的使用，而記憶體映射檔案 (mmap) 和 DiskANN 則會處理資料集超出可用隨機存取記憶體 (RAM) 的情況。</p>
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN 是基於 Vamana 圖形的索引，可連結資料點，以便在搜尋過程中有效導航，同時應用 PQ 來縮小向量的大小，並快速計算向量之間的近似距離。</p>
-<p>Vamana 圖形儲存在磁碟上，這使得 DiskANN 可以處理大型資料集，否則記憶體就無法容納這些資料集。這對十億點的資料集特別有用。</p>
+<p>Vamana 圖形儲存在磁碟上，這使得 DiskANN 可以處理大型資料集，否則這些資料集會太大，無法放入記憶體中。這對十億點的資料集特別有用。</p>
 <h4 id="Memory-mapped-files-mmap" class="common-anchor-header">記憶體映射檔案 (mmap)</h4><p>記憶體映射 (Mmap) 可直接存取磁碟上的大型檔案，讓 Milvus 在記憶體和硬碟中同時儲存索引和資料。此方法可根據存取頻率減少 I/O 呼叫的開銷，有助於最佳化 I/O 作業，從而擴大資料集的儲存容量，且不會顯著影響搜尋效能。</p>
 <p>具體來說，您可以設定 Milvus 對某些欄位的原始資料進行記憶體映射，而不是將其完全載入記憶體。如此一來，您就可以直接取得欄位的記憶體存取權，而不必擔心記憶體問題，並擴大資料集的容量。</p>

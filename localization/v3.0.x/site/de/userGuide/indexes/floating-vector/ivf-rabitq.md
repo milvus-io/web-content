@@ -25,7 +25,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Der <strong>IVF_RABITQ-Index</strong> ist ein <strong>auf binärer Quantisierung basierender</strong> Indizierungsalgorithmus, der FP32-Vektoren in binäre Darstellungen quantisiert. Dieser Index bietet eine außergewöhnliche Speichereffizienz mit einem Komprimierungsverhältnis von 1 zu 32 bei gleichzeitig relativ guten Wiederfindungsraten. Er unterstützt optionale Verfeinerungen, um eine höhere Wiederauffindbarkeit auf Kosten von zusätzlichem Speicherplatz zu erreichen, was ihn zu einem vielseitigen Ersatz für <a href="/docs/de/ivf-sq8.md">IVF_SQ8</a> und <a href="/docs/de/ivf-flat.md">IVF_FLAT</a> in Szenarien mit Speicherbeschränkungen macht.</p>
+    </button></h1><p>Der <strong>IVF_RABITQ-Index</strong> ist ein <strong>auf binärer Quantisierung basierender</strong> Indizierungsalgorithmus, der FP32-Vektoren in binäre Darstellungen quantisiert. Dieser Index bietet eine außergewöhnliche Speichereffizienz mit einem Komprimierungsverhältnis von 1 zu 32 bei gleichzeitig relativ guten Wiederfindungsraten. Er unterstützt eine optionale Verfeinerung, um eine höhere Wiederauffindbarkeit auf Kosten von zusätzlichem Speicherplatz zu erreichen, was ihn zu einem vielseitigen Ersatz für <a href="/docs/de/ivf-sq8.md">IVF_SQ8</a> und <a href="/docs/de/ivf-flat.md">IVF_FLAT</a> in Szenarien mit Speicherbeschränkungen macht.</p>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,9 +42,39 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p><strong>IVF_RABITQ</strong> steht für <strong>Inverted File mit RaBitQ-Quantisierung</strong> und kombiniert zwei leistungsstarke Techniken für effiziente Vektorsuche und -speicherung.</p>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p><strong>Inverted File (IVF)</strong> organisiert den Vektorraum mit Hilfe von <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means clustering</a> in verwaltbare Regionen. Jeder Cluster wird durch einen Zentroid repräsentiert, der als Referenzpunkt für die Vektoren innerhalb dieses Clusters dient. Dieser Clustering-Ansatz reduziert den Suchraum, indem er es dem Algorithmus ermöglicht, sich bei der Abfrageverarbeitung nur auf die relevantesten Cluster zu konzentrieren.</p>
+<h3 id="IVF" class="common-anchor-header">IVF<button data-href="#IVF" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>Inverted File (IVF)</strong> organisiert den Vektorraum mit Hilfe von <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means clustering</a> in verwaltbare Regionen. Jeder Cluster wird durch einen Zentroid repräsentiert, der als Referenzpunkt für die Vektoren innerhalb dieses Clusters dient. Dieser Clustering-Ansatz reduziert den Suchraum, indem er es dem Algorithmus ermöglicht, sich bei der Abfrageverarbeitung nur auf die relevantesten Cluster zu konzentrieren.</p>
 <p>Mehr über die technischen Details von IVF erfahren Sie unter <a href="/docs/de/ivf-flat.md">IVF_FLAT</a>.</p>
-<h3 id="RaBitQ" class="common-anchor-header">RaBitQ</h3><p><strong>RaBitQ</strong> ist eine hochmoderne binäre Quantisierungsmethode mit theoretischen Garantien, die in dem Forschungspapier "RaBitQ: Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search" von Jianyang Gao und Cheng Long vorgestellt wurde.</p>
+<h3 id="RaBitQ" class="common-anchor-header">RaBitQ<button data-href="#RaBitQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>RaBitQ</strong> ist eine hochmoderne binäre Quantisierungsmethode mit theoretischen Garantien, die in dem Forschungspapier "RaBitQ: Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search" von Jianyang Gao und Cheng Long vorgestellt wurde.</p>
 <p>RaBitQ führt mehrere innovative Konzepte ein:</p>
 <p><strong>Angular Information Encoding</strong>: Im Gegensatz zur traditionellen räumlichen Kodierung kodiert RaBitQ Winkelinformationen durch Vektornormalisierung. In IVF_RABITQ werden die Datenvektoren anhand ihres nächstgelegenen IVF-Schwerpunkts normalisiert, wodurch die Präzision des Quantisierungsprozesses verbessert wird.</p>
 <p><strong>Theoretische Grundlage</strong>: Die Kernformel der Abstandsapproximation lautet:</p>
@@ -60,11 +90,26 @@ beta: Milvus 2.6.x
 </ul>
 <p><strong>Berechnungseffizienz</strong>: Die binäre Natur von <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> o~\tilde{\mathbf{o}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6813em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span> o</span></span></span></span></span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3.3634em;"><span class="pstrut" style="height:3em;"></span> ~ macht Entfernungsberechnungen extrem schnell, was besonders von modernen CPU-Architekturen mit dedizierten</span></span></span></span></span></span></span></span> <code translate="no">AVX-512 VPOPCNTDQ</code> Anweisungen auf Intel Ice Lake+ oder AMD Zen 4+ Prozessoren profitiert.</p>
 <p><strong>Algorithmische Weiterentwicklungen</strong>: RaBitQ lässt sich effektiv mit etablierten Verfahren wie dem <a href="https://www.vldb.org/pvldb/vol9/p288-andre.pdf"><code translate="no">FastScan</code> -Ansatz</a> und <a href="https://github.com/facebookresearch/faiss/wiki/Pre--and-post-processing">zufälligen Rotationen</a> kombinieren, um die Leistung zu verbessern.</p>
-<h3 id="IVF-+-RaBitQ" class="common-anchor-header">IVF + RaBitQ</h3><p>Der <strong>IVF_RABITQ-Index</strong> kombiniert das effiziente Clustering von IVF mit der erweiterten binären Quantisierung von RaBitQ:</p>
+<h3 id="IVF-+-RaBitQ" class="common-anchor-header">IVF + RaBitQ<button data-href="#IVF-+-RaBitQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Der <strong>IVF_RABITQ-Index</strong> kombiniert das effiziente Clustering von IVF mit der fortschrittlichen binären Quantisierung von RaBitQ:</p>
 <ol>
 <li><p><strong>Coarse Filtering</strong>: IVF unterteilt den Vektorraum in Cluster, wodurch der Suchumfang durch die Konzentration auf die relevantesten Clusterregionen erheblich reduziert wird.</p></li>
 <li><p><strong>Binäre Quantisierung</strong>: Innerhalb jedes Clusters komprimiert RaBitQ die Vektoren in binäre Darstellungen, wobei wesentliche Abstandsbeziehungen durch theoretische Garantien erhalten bleiben.</p></li>
-<li><p><strong>Optionale Verfeinerung</strong>: Wenn diese Option aktiviert ist, speichert der Index zusätzliche verfeinerte Daten in Formaten mit höherer Genauigkeit (SQ6, SQ8, FP16, BF16 oder FP32), um die Wiederauffindungsrate auf Kosten eines größeren Speicherplatzes zu verbessern.</p></li>
+<li><p><strong>Optionale Verfeinerung</strong>: Wenn diese Option aktiviert ist, speichert der Index zusätzliche verfeinerte Daten in Formaten mit höherer Genauigkeit (SQ6, SQ8, FP16, BF16 oder FP32), um die Wiederauffindungsrate zu verbessern, was allerdings mit einem höheren Speicherbedarf verbunden ist.</p></li>
 </ol>
 <p>Milvus implementiert IVF_RABITQ unter Verwendung der folgenden FAISS-Fabrikstrings:</p>
 <ul>
@@ -165,8 +210,23 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dieser Abschnitt bietet einen Überblick über die Parameter, die für den Aufbau eines Index und die Durchführung von Suchvorgängen im Index verwendet werden.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/ivf-rabitq.md#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
+    </button></h2><p>Dieser Abschnitt bietet einen Überblick über die Parameter, die für den Aufbau eines Index und die Durchführung von Suchvorgängen in diesem Index verwendet werden.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/ivf-rabitq.md#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
 <table>
    <tr>
      <th></th>
@@ -187,16 +247,31 @@ res = MilvusClient.search(
      <td><p><code translate="no">refine</code></p></td>
      <td><p>Aktiviert den Verfeinerungsprozess und speichert die verfeinerten Daten.</p></td>
      <td><p><strong>Typ</strong>: Boolesch<br><strong>Bereich</strong>: [<code translate="no">true</code>, <code translate="no">false</code>]<br><strong>Standardwert</strong>: <code translate="no">false</code></p></td>
-     <td><p>Auf <code translate="no">true</code> gesetzt, wenn eine Wiederfindungsrate von 0,9+ erforderlich ist. Die Aktivierung der Verfeinerung verbessert die Genauigkeit, erhöht jedoch die Speicheranforderungen und die Zeit für den Indexaufbau.</p></td>
+     <td><p>Auf <code translate="no">true</code> gesetzt, wenn eine Wiederfindungsrate von 0,9+ benötigt wird. Die Aktivierung der Verfeinerung verbessert die Genauigkeit, erhöht jedoch die Speicheranforderungen und die Zeit für den Indexaufbau.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">refine_type</code></p></td>
      <td><p>Definiert die Datendarstellung, die für die Verfeinerung verwendet wird, wenn <code translate="no">refine</code> aktiviert ist.</p></td>
      <td><p><strong>Typ</strong>: String<br><strong>Bereich</strong>: [<code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">FP16</code>, <code translate="no">BF16</code>, <code translate="no">FP32</code>]<br><strong>Standardwert</strong>: Keine</p></td>
-     <td><p>Die aufgelisteten Werte sind in der Reihenfolge ansteigender Wiederfindungsrate, abnehmender QPS und zunehmender Speichergröße aufgeführt. <code translate="no">SQ8</code> wird als Ausgangspunkt empfohlen und bietet ein gutes Gleichgewicht zwischen Genauigkeit und Ressourcenverbrauch.</p></td>
+     <td><p>Die aufgelisteten Werte werden in der Reihenfolge von steigender Wiederauffindungsrate, abnehmender QPS und steigender Speichergröße präsentiert. <code translate="no">SQ8</code> wird als Ausgangspunkt empfohlen und bietet ein gutes Gleichgewicht zwischen Genauigkeit und Ressourcenverbrauch.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/ivf-rabitq.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/ivf-rabitq.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
 <table>
    <tr>
      <th></th>

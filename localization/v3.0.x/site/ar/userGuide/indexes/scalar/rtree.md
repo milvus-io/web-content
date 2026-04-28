@@ -57,12 +57,12 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><ol>
 <li><p><strong>إنشاء العقد الورقية:</strong> لكل كائن هندسي، قم بحساب <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">الحد الأدنى للمستطيل المحيط</a> به (MBR)، وهو أصغر مستطيل يحتوي على الكائن بالكامل، وقم بتخزينه كعقدة ورقة.</p></li>
-<li><p><strong>جمِّع في مربعات أكبر:</strong> قم بتجميع العقد الورقية القريبة معًا ولف كل مجموعة مع MBR جديدة، لتكوين عقد داخلية. على سبيل المثال، تحتوي المجموعة <strong>B</strong> على <strong>D</strong> <strong>وE؛</strong> وتحتوي المجموعة <strong>C</strong> على <strong>F</strong> <strong>وG</strong>.</p></li>
+<li><p><strong>جمِّع في مربعات أكبر:</strong> قم بتجميع العقد الورقية القريبة معًا ولف كل مجموعة مع MBR جديد، لتكوين عقد داخلية. على سبيل المثال، تحتوي المجموعة <strong>B</strong> على <strong>D</strong> <strong>وE؛</strong> وتحتوي المجموعة <strong>C</strong> على <strong>F</strong> <strong>وG</strong>.</p></li>
 <li><p><strong>أضف عقدة الجذر:</strong> أضف عقدة جذر تغطي MBR جميع المجموعات الداخلية، مما ينتج عنه بنية شجرة متوازنة الارتفاع.</p></li>
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-retree-works.png" alt="How Retree Works" class="doc-image" id="how-retree-works" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-retree-works.png" alt="How Retree Works" class="doc-image" id="how-retree-works" />
    </span> <span class="img-wrapper"> <span>كيف يعمل ريتري</span> </span></p>
 <h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">المرحلة 2: تسريع الاستعلامات<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"

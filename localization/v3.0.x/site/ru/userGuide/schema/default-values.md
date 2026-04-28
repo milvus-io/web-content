@@ -240,7 +240,7 @@ Query results (status == &#x27;active&#x27;):
     </button></h2><p>Когда для поля настроены оба параметра <code translate="no">nullable</code> и <code translate="no">default_value</code>, следующие правила определяют, как Milvus обрабатывает ввод NULL или отсутствующие значения поля при вставке.</p>
 <table>
    <tr>
-     <th><p>Нулевое поле</p></th>
+     <th><p>Nullable</p></th>
      <th><p>Значение по умолчанию</p></th>
      <th><p>Ввод пользователя</p></th>
      <th><p>Результат</p></th>

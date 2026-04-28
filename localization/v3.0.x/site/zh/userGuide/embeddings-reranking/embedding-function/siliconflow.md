@@ -208,7 +208,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h3><p>要使用嵌入函数，请创建一个具有特定 Schema 的 Collections。此 Schema 必须至少包含三个必要字段：</p>
 <ul>
-<li><p>唯一标识 Collections 中每个实体的主字段。</p></li>
+<li><p>主字段，用于唯一标识 Collections 中的每个实体。</p></li>
 <li><p>标量字段，用于存储要嵌入的原始数据。</p></li>
 <li><p>一个向量字段，用于存储函数将为标量字段生成的向量嵌入。</p></li>
 </ul>

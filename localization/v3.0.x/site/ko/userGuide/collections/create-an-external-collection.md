@@ -39,14 +39,14 @@ beta: Milvus 3.0.x
 <p>이러한 데이터 가져오기 워크플로우는 동기화하기 어려운 중복 데이터를 생성하고 데이터 일관성을 보장하기 위한 엔지니어링 유지 관리 부담을 가중시킵니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/yqxwwpq3vheya4b8398cwopnnyn.png" alt="Yqxwwpq3vheya4b8398cwopnnyn" class="doc-image" id="yqxwwpq3vheya4b8398cwopnnyn" />
-   </span> <span class="img-wrapper"> <span>Yqxwwpq3vheya4b8398cwopnnyn</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" />
+   </span> <span class="img-wrapper"> <span>데이터 가져오기를 통한 워크플로우 계산</span> </span></p>
 <p>이러한 문제를 해결하기 위해 Milvus는 데이터 동기화 및 ETL 파이프라인에 대한 걱정 없이 Milvus에서 외부에 저장된 데이터에 액세스할 수 있는 외부 컬렉션을 제공합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/q6f4wtcd2h3pnkbnmxncw3urn3f.png" alt="Q6f4wtcd2h3pnkbnmxncw3urn3f" class="doc-image" id="q6f4wtcd2h3pnkbnmxncw3urn3f" />
-   </span> <span class="img-wrapper"> <span>Q6f4wtcd2h3pnkbnmxncw3urn3f</span> </span></p>
-<p>일단 생성된 외부 컬렉션은 데이터에 직접 액세스하여 데이터를 저장하는 동일한 위치에 보관할 수 있습니다. 밀버스는 백그라운드에서 매니페스트 파일을 생성하여 밀버스 메타데이터와 외부 데이터 파일의 행 간의 매핑을 기록합니다. 매니페스트 파일이 준비되면 관리되는 컬렉션에서와 마찬가지로 외부 컬렉션에 인덱스를 만들 수 있습니다.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" />
+   </span> <span class="img-wrapper"> <span>데이터 워크플로우에 컴퓨팅 도입</span> </span></p>
+<p>외부 컬렉션이 생성되면 데이터에 직접 액세스하여 데이터를 저장하는 동일한 위치에 보관할 수 있습니다. 밀버스는 백그라운드에서 매니페스트 파일을 생성하여 밀버스 메타데이터와 외부 데이터 파일의 행 간의 매핑을 기록합니다. 매니페스트 파일이 준비되면 관리되는 컬렉션에서와 마찬가지로 외부 컬렉션에 인덱스를 만들 수 있습니다.</p>
 <p>데이터가 변경되면 1초 미만의 새로 고침을 수동으로 트리거하면 메타데이터가 업데이트되어 Milvus가 항상 최신 상태로 유지됩니다.</p>
 <h2 id="Limits--restrictions" class="common-anchor-header">제한 및 제한 사항<button data-href="#Limits--restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -179,7 +179,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.region</code></p></td>
-     <td><p>클라우드 지역 ID</p></td>
+     <td><p>클라우드 리전 ID</p></td>
      <td><p><code translate="no">us-west-2</code></p></td>
    </tr>
    <tr>
@@ -312,7 +312,7 @@ schema := entity.NewSchema().
 <li><p>역할의 신뢰 정책의 조건 필드에 자체 정의된 <code translate="no">sts:ExternalId</code> 을 포함합니다.</p></li>
 </ul>
 <p>그런 다음 버킷 소유자가 IAM 역할 ARN과 외부 ID를 제공해야 해당 값으로 <code translate="no">sts:AssumeRole</code> 을 호출하여 IAM 역할을 맡을 수 있습니다.</p>
-<p>다음은 허용된 권한과 함께 IAM 역할에 첨부할 권한 정책의 예시입니다. 요구 사항에 맞게 이를 조정할 수 있습니다.</p>
+<p>다음은 허용된 권한으로 IAM 역할에 첨부할 권한 정책의 예시입니다. 요구 사항에 맞게 이를 조정할 수 있습니다.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -355,7 +355,7 @@ schema := entity.NewSchema().
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>IAM 역할 ARN과 외부 ID를 얻은 후에는 다음과 같이 <code translate="no">external_spec</code> 매개 변수를 설정할 수 있습니다:</p>
+<p>IAM 역할 ARN과 외부 ID를 얻은 후에는 다음과 같이 <code translate="no">external_spec</code> 파라미터를 설정할 수 있습니다:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>

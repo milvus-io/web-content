@@ -21,7 +21,7 @@ title: Recherche d'images avec Milvus
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/image_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/image_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/image_search_with_milvus/pics/image_search_demo.png"/></p>
-<p>Dans ce carnet, nous allons vous montrer comment utiliser Milvus pour rechercher des images similaires dans un ensemble de données. Nous utiliserons un sous-ensemble de l'ensemble de données <a href="https://www.image-net.org/">ImageNet</a>, puis nous rechercherons une image d'un chien de chasse afghan.</p>
+<p>Dans ce carnet, nous allons vous montrer comment utiliser Milvus pour rechercher des images similaires dans un ensemble de données. Nous utiliserons un sous-ensemble de l'ensemble de données <a href="https://www.image-net.org/">ImageNet</a>, puis nous rechercherons une image d'un chien de chasse afghan pour en faire la démonstration.</p>
 <h2 id="Dataset-Preparation" class="common-anchor-header">Préparation du jeu de données<button data-href="#Dataset-Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -236,13 +236,13 @@ display(concatenated_image)
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <pre><code translate="no">'results'
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/results.png" alt="Results" class="doc-image" id="results" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results.png" alt="Results" class="doc-image" id="results" />
    </span> <span class="img-wrapper"> <span>Résultats</span> </span></p>
 <p>Nous pouvons constater que la plupart des images appartiennent à la même catégorie que l'image recherchée, à savoir le chien de chasse afghan. Cela signifie que nous avons trouvé des images similaires à l'image recherchée.</p>
 <h2 id="Quick-Deploy" class="common-anchor-header">Déploiement rapide<button data-href="#Quick-Deploy" class="anchor-icon" translate="no">

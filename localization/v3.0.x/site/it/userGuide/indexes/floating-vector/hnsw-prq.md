@@ -115,7 +115,7 @@ summary: >-
 <ul>
 <li><p><code translate="no">refine</code>: Controlla se questa fase di raffinamento è attivata. Se impostato su <code translate="no">true</code>, il sistema ricalcola le distanze utilizzando rappresentazioni di maggiore precisione o non compresse.</p></li>
 <li><p><code translate="no">refine_type</code>: Specifica il livello di precisione dei dati utilizzati durante il raffinamento (ad esempio, SQ6, SQ8, BF16). Una scelta di precisione superiore, come <code translate="no">FP32</code>, può dare risultati più accurati, ma richiede più memoria. Il livello di precisione deve essere superiore alla precisione dell'insieme di dati compresso originale di <code translate="no">sq_type</code>.</p></li>
-<li><p><code translate="no">refine_k</code>: Agisce come fattore di ingrandimento. Ad esempio, se il top <em>k</em> è 100 e <code translate="no">refine_k</code> è 2, il sistema classifica nuovamente i 200 candidati migliori e restituisce i 100 migliori, migliorando l'accuratezza complessiva.</p></li>
+<li><p><code translate="no">refine_k</code>: Agisce come fattore di ingrandimento. Ad esempio, se il top <em>k</em> è 100 e <code translate="no">refine_k</code> è 2, il sistema classifica nuovamente i 200 candidati migliori e restituisce i 100 migliori, migliorando la precisione complessiva.</p></li>
 </ul></li>
 </ol>
 <p>Per un elenco completo dei parametri e dei valori validi, consultare la sezione <a href="/docs/it/hnsw-prq.md#Index-params">Parametri dell'indice</a>.</p>
@@ -162,7 +162,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>: Il metodo utilizzato per calcolare la distanza tra i vettori. I valori supportati sono <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code>. Per maggiori dettagli, consultare <a href="/docs/it/metric.md">Tipi di metriche</a>.</p></li>
 <li><p><code translate="no">params</code>: Opzioni di configurazione aggiuntive per la costruzione dell'indice. Per i dettagli, fare riferimento a <a href="/docs/it/hnsw-prq.md#Index-building-params">Parametri di costruzione dell'indice</a>.</p></li>
 </ul>
-<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice utilizzando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
+<p>Una volta configurati i parametri dell'indice, si può creare l'indice usando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Ricerca nell'indice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -245,7 +245,7 @@ res = MilvusClient.search(
      <td><p><strong>Tipo</strong>: <strong>Intervallo</strong>: [2, 2048]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">30</code> (fino a 30 bordi uscenti e 30 bordi entranti per nodo)</p></td>
      <td><p>Un valore maggiore di <code translate="no">M</code> porta generalmente a una <strong>maggiore accuratezza</strong>, ma <strong>aumenta l'overhead di memoria</strong> e <strong>rallenta sia la costruzione dell'indice che la ricerca</strong>. Considerare di aumentare <code translate="no">M</code> per i set di dati con elevata dimensionalità o quando è fondamentale un richiamo elevato.</p>
-<p>Si consiglia di diminuire <code translate="no">M</code> quando l'uso della memoria e la velocità di ricerca sono le principali preoccupazioni.</p>
+<p>Considerare di diminuire <code translate="no">M</code> quando l'uso della memoria e la velocità di ricerca sono le principali preoccupazioni.</p>
 <p>Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [5, 100].</p></td>
    </tr>
    <tr>
@@ -264,7 +264,7 @@ res = MilvusClient.search(
      <td><p>Numero di sottovettori (usati per la quantizzazione) in cui dividere ogni vettore ad alta dimensionalità durante il processo di quantizzazione.</p></td>
      <td><p><strong>Tipo</strong>: Intero <strong>Intervallo</strong>: [1, 65536]</p>
 <p><strong>Valore predefinito</strong>: Nessuno</p></td>
-     <td><p>Un valore più alto di <code translate="no">m</code> può migliorare l'accuratezza, ma aumenta anche la complessità computazionale e l'utilizzo di memoria. <code translate="no">m</code> deve essere un divisore della dimensione del vettore<em>(D</em>) per garantire una corretta decomposizione. Un valore comunemente raccomandato è <em>m = D/2</em>.</p>
+     <td><p>Un valore più alto di <code translate="no">m</code> può migliorare l'accuratezza, ma aumenta anche la complessità computazionale e l'utilizzo di memoria. <code translate="no">m</code> deve essere un divisore della dimensione del vettore<em>(D</em>) per garantire una corretta decomposizione. Un valore comunemente consigliato è <em>m = D/2</em>.</p>
 <p>Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [D/8, D].</p></td>
    </tr>
    <tr>

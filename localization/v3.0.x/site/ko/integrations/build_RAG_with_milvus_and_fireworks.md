@@ -24,7 +24,7 @@ title: Milvus 및 Fireworks AI로 RAG 구축하기
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_fireworks.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://fireworks.ai/">Fireworks AI는</a> 업계 최고의 속도와 모델 실행 및 커스터마이징을 위한 생산 준비성을 제공하는 생성형 AI 추론 플랫폼입니다. Fireworks AI는 서버리스 모델, 온디맨드 배포, 미세 조정 기능 등 다양한 생성형 AI 서비스를 제공합니다. 대규모 언어 모델(LLM) 및 임베딩 모델을 포함한 다양한 AI 모델을 배포할 수 있는 포괄적인 환경을 제공합니다. Fireworks AI는 수많은 모델을 통합하여 사용자가 광범위한 인프라 설정 없이도 이러한 리소스에 쉽게 액세스하고 활용할 수 있도록 지원합니다.</p>
+<p><a href="https://fireworks.ai/">Fireworks AI는</a> 업계 최고의 속도와 모델 실행 및 커스터마이징을 위한 생산 준비성을 제공하는 생성형 AI 추론 플랫폼입니다. Fireworks AI는 서버리스 모델, 온디맨드 배포, 미세 조정 기능 등 다양한 생성형 AI 서비스를 제공합니다. 대규모 언어 모델(LLM) 및 임베딩 모델을 포함한 다양한 AI 모델을 배포할 수 있는 포괄적인 환경을 제공합니다. Fireworks AI는 수많은 모델을 통합하여 사용자가 대규모 인프라 설정 없이도 이러한 리소스에 쉽게 액세스하고 활용할 수 있도록 지원합니다.</p>
 <p>이 튜토리얼에서는 Milvus와 Fireworks AI를 사용하여 RAG(검색 증강 생성) 파이프라인을 구축하는 방법을 보여드립니다.</p>
 <h2 id="Preparation" class="common-anchor-header">준비 사항<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -179,7 +179,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <p><code translate="no">MilvusClient</code> 의 인수를 사용합니다:</p>
 <ul>
 <li><code translate="no">uri</code> 을 로컬 파일(예:<code translate="no">./milvus.db</code>)로 설정하는 것이 가장 편리한 방법인데, <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하여 모든 데이터를 이 파일에 저장하기 때문입니다.</li>
-<li>데이터 규모가 큰 경우, <a href="https://milvus.io/docs/quickstart.md">도커나 쿠버네티스에</a> 더 성능이 좋은 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 URL(예:<code translate="no">http://localhost:19530</code>)을 <code translate="no">uri</code> 으로 사용하세요.</li>
+<li>데이터 규모가 큰 경우, <a href="https://milvus.io/docs/quickstart.md">도커나 쿠버네티스에</a> 더 고성능의 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 URL(예:<code translate="no">http://localhost:19530</code>)을 <code translate="no">uri</code> 으로 사용하세요.</li>
 <li>밀버스의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">질리즈 클라우드를</a> 사용하려면, 질리즈 클라우드의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">퍼블릭 엔드포인트와 API 키에</a> 해당하는 <code translate="no">uri</code> 와 <code translate="no">token</code> 을 조정하세요.</li>
 </ul>
 </div>

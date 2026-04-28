@@ -144,7 +144,7 @@ summary: 'Erfahren Sie, wie Sie etcd für Milvus konfigurieren.'
     <tr>
       <td>
         <li>Sub-Präfix des Schlüssels, unter dem Milvus Zeitstempel in etcd speichert.</li>      
-        <li>Vorsicht! Wenn Sie diesen Parameter ändern, nachdem Sie Milvus eine gewisse Zeit lang benutzt haben, wird Ihr Zugriff auf alte Daten beeinträchtigt.</li>      
+        <li>Vorsicht! Wenn Sie diesen Parameter ändern, nachdem Sie Milvus eine Zeit lang verwendet haben, wird Ihr Zugriff auf alte Daten beeinträchtigt.</li>      
         <li>Es wird empfohlen, diesen Parameter nicht zu ändern, wenn es keinen besonderen Grund dafür gibt.</li>      </td>
       <td>kv</td>
     </tr>

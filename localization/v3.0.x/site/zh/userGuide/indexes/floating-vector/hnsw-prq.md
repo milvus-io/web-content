@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>HNSW_PRQ</strong>利用分层可导航小世界（HNSW）图与残差产品量化（PRQ），提供了一种先进的向量索引方法，允许您在索引大小和准确性之间进行微调。PRQ 超越了传统的乘积量化 (PQ)，引入了残差量化 (RQ) 步骤来捕捉更多信息，与纯粹基于 PQ 的方法相比，PRQ 可实现更高的精度或更紧凑的索引。不过，额外的步骤会导致索引构建和搜索过程中的计算开销增加。</p>
+    </button></h1><p><strong>HNSW_PRQ</strong>利用分层可导航小世界（HNSW）图和残差产品量化（PRQ），提供了一种先进的向量索引方法，使您可以在索引大小和准确性之间进行微调。PRQ 超越了传统的乘积量化 (PQ)，引入了残差量化 (RQ) 步骤来捕捉更多信息，与纯粹基于 PQ 的方法相比，PRQ 可实现更高的精度或更紧凑的索引。不过，额外的步骤会导致索引构建和搜索过程中的计算开销增加。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -291,7 +291,7 @@ res = MilvusClient.search(
      <td><p>确定细化过程中使用的数据精度。 该精度必须高于压缩向量的精度（由<code translate="no">m</code> 和<code translate="no">nbits</code> 参数设置）。</p></td>
      <td><p><strong>类型</strong>： 字符串字符串<strong>范围</strong>：[<code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code>,<code translate="no">FP32</code> ]</p>
 <p><strong>默认值</strong>：无</p></td>
-     <td><p>使用<code translate="no">FP32</code> 可获得最高精度，但内存成本较高；使用<code translate="no">SQ6</code>/<code translate="no">SQ8</code> 可获得更好的压缩效果。<code translate="no">BF16</code> 和<code translate="no">FP16</code> 提供了一个平衡的替代方案。</p></td>
+     <td><p><code translate="no">FP32</code> <code translate="no">SQ6</code><code translate="no">SQ8</code> <code translate="no">BF16</code> 和 提供了一个平衡的替代方案。<code translate="no">FP16</code> </p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">特定于索引的搜索参数<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
@@ -325,7 +325,7 @@ res = MilvusClient.search(
  该参数只影响搜索过程，并且只适用于图形的底层。</p></td>
      <td><p><strong>类型</strong>： 整数整数<strong>范围</strong>：[1，<em>int_max］</em></p>
 <p><strong>默认值</strong>：<em>limit</em>（返回的前 K 个近邻）</p></td>
-     <td><p><code translate="no">ef</code> 越大，通常<strong>搜索精度越高</strong>，因为会考虑更多的潜在近邻。当获得高召回率至关重要，而<strong>搜索</strong>速度则不那么重要时，可考虑增加<code translate="no">ef</code> 。</p>
+     <td><p><code translate="no">ef</code> 越大，通常<strong>搜索精度越高</strong>，因为会考虑更多的潜在近邻。当实现高召回率至关重要，而<strong>搜索</strong>速度则不那么重要时，可考虑增加<code translate="no">ef</code> 。</p>
 <p>考虑降低<code translate="no">ef</code> 以优先提高搜索速度，尤其是在可以接受稍微降低准确率的情况下。</p>
 <p>在大多数情况下，我们建议您在此范围内设置一个值：[K，10K]。</p></td>
    </tr>

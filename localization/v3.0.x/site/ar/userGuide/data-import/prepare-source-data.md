@@ -40,7 +40,7 @@ summary: >-
     </button></h2><p>تتطلب المجموعة المستهدفة تعيين بيانات المصدر إلى مخططها. يوضح الرسم البياني أدناه كيفية تعيين بيانات المصدر المقبولة إلى مخطط المجموعة المستهدفة.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
    </span> <span class="img-wrapper"> <span>تعيين البيانات إلى المخطط</span> </span></p>
 <p>يجب عليك فحص بياناتك بعناية وتصميم مخطط المجموعة الهدف وفقًا لذلك.</p>
 <p>بأخذ بيانات JSON في الرسم البياني أعلاه كمثال، هناك كيانان في قائمة الصفوف، كل صف يحتوي على ستة حقول. يتضمن مخطط المجموعة بشكل انتقائي أربعة حقول: <strong>المعرف،</strong> <strong>والمتجه،</strong> <strong>والمقدار_1،</strong> <strong>والمقدار_2</strong>.</p>
@@ -408,7 +408,7 @@ writer = RemoteBulkWriter(
 <div class="language-java">
 <p>يحتوي <strong>BulkWriter بالجملة</strong> على طريقتين: <code translate="no">appendRow()</code> يضيف صفًا من مجموعة بيانات مصدر، و <code translate="no">commit()</code> يرتكب الصفوف المضافة إلى ملف محلي أو دلو بعيد.</p>
 </div>
-<p>لأغراض العرض التوضيحي، يلحق الرمز التالي البيانات التي تم إنشاؤها عشوائيًا.</p>
+<p>لأغراض العرض التوضيحي، تلحق الشيفرة التالية البيانات التي تم إنشاؤها عشوائيًا.</p>
 <div class="multipleCode">
  <a href="#python">بايثون </a> <a href="#java">جافا</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random, string, json

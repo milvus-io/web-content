@@ -53,9 +53,9 @@ title: Knowhere
     </button></h2><p>下図は、MilvusアーキテクチャにおけるKnowhereの位置を示しています。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
    </span> <span class="img-wrapper"> <span>Knowhere</span> </span></p>
-<p>最下層はシステム・ハードウェアです。その上にサードパーティのインデックス・ライブラリが配置されています。一番上のレイヤでは、KnowhereはCGOを介してインデックスノードやクエリノードと対話します。</p>
+<p>一番下の層はシステム・ハードウェアです。その上にサードパーティのインデックス・ライブラリが配置されています。一番上のレイヤでは、KnowhereはCGOを介してインデックスノードやクエリノードとやり取りします。</p>
 <h2 id="Knowhere-advantages" class="common-anchor-header">Knowhereの利点<button data-href="#Knowhere-advantages" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -73,7 +73,7 @@ title: Knowhere
       </svg>
     </button></h2><p>以下はKnowhereがFaissより優れている点です。</p>
 <h4 id="Support-for-BitsetView" class="common-anchor-header">BitsetViewのサポート</h4><p>Milvusは "ソフト削除 "を実現するためにビットセット機構を導入しています。ソフト削除されたベクトルはデータベースに存在しますが、ベクトルの類似性検索やクエリの際に計算されることはありません。</p>
-<p>ビットセットの各ビットはインデックス付きベクトルに対応する。あるベクトルがビットセットで "1 "とマークされた場合、そのベクトルはソフト削除され、ベクトル検索には関与しないことを意味する。bitset パラメータは、CPU および GPU インデックスを含め、Knowhere で公開されているすべての Faiss インデックス照会 API に適用されます。</p>
+<p>ビットセットの各ビットはインデックス付きベクトルに対応する。あるベクトルがビットセットで "1 "とマークされた場合、そのベクトルはソフト削除され、ベクトル検索には関与しないことを意味する。bitset パラメータは、CPU および GPU インデックスを含む、Knowhere で公開されているすべての Faiss インデックス照会 API に適用されます。</p>
 <p>bitset メカニズムの詳細については、<a href="/docs/ja/bitset.md">bitset</a> を参照してください。</p>
 <h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">バイナリ・ベクトルのインデックス作成における複数の類似性メトリクスのサポート</h4><p>Knowhereは<a href="/docs/ja/metric.md#Hamming-distance">ハミング</a>、<a href="/docs/ja/metric.md#Jaccard-distance">Jaccard</a>、<a href="/docs/ja/metric.md#Tanimoto-distance">Tanimoto</a>、<a href="/docs/ja/metric.md#Superstructure">Superstructure</a>、<a href="/docs/ja/metric.md#Substructure">Substructureを</a>サポートしています。Jaccard と Tanimoto は 2 つのサンプル・セット間の類似度を測定するために使用でき、Superstructure と Substructure は化学構造の類似度を測定するために使用できます。</p>
 <h4 id="Support-for-AVX512-instruction-set" class="common-anchor-header">AVX512命令セットのサポート</h4><p>Faissがすでにサポートしている<a href="https://en.wikipedia.org/wiki/AArch64">AArch64</a>、<a href="https://en.wikipedia.org/wiki/SSE4#SSE4.2">SSE4.2</a>、<a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions">AVX2</a>以外に、Knowhereは<a href="https://en.wikipedia.org/wiki/AVX-512">AVX512も</a>サポートしています。AVX512はAVX2と比較して<a href="https://milvus.io/blog/milvus-performance-AVX-512-vs-AVX2.md">インデックス構築とクエリの性能を20～30%向上させる</a>ことができます。</p>
@@ -101,30 +101,30 @@ title: Knowhere
 <h4 id="DataObj-base-class" class="common-anchor-header"><code translate="no">DataObj</code>基底クラス</h4><p><code translate="no">DataObj</code> <code translate="no">Size()</code> は の唯一の仮想メソッドです。Indexクラスは 、"size_"というフィールドを継承しています。また、Index クラスには と の 2 つの仮想メソッドがあります。 から派生した クラスは、すべてのベクトル・インデックスの仮想基底クラスです。 は、 、 、 、 などのメソッドを提供します。<code translate="no">DataObj</code> <code translate="no">DataObj</code> <code translate="no">Serialize()</code> <code translate="no">Load()</code> <code translate="no">Index</code> <code translate="no">VecIndex</code> <code translate="no">VecIndex</code> <code translate="no">Train()</code> <code translate="no">Query()</code> <code translate="no">GetStatistics()</code> <code translate="no">ClearStatistics()</code></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
    </span> <span class="img-wrapper"> <span>基底クラス</span> </span></p>
 <p>その他のインデックス・タイプを上図の右側にいくつか示します。</p>
 <ul>
-<li><p>Faissインデックスには2つの基底クラスがあります：浮動小数点ベクトル上のすべてのインデックス用の<code translate="no">FaissBaseIndex</code> 、バイナリ・ベクトル上のすべてのインデックス用の<code translate="no">FaissBaseBinaryIndex</code> 。</p></li>
+<li><p>Faiss インデックスには2つの基底クラスがあります：浮動小数点ベクトル上のすべてのインデックス用の基底クラス<code translate="no">FaissBaseIndex</code> と、バイナリ・ベクトル上のすべてのインデックス用の基底クラス<code translate="no">FaissBaseBinaryIndex</code> です。</p></li>
 <li><p><code translate="no">GPUIndex</code> はすべてのFaiss GPUインデックスの基底クラスです。</p></li>
 <li><p><code translate="no">OffsetBaseIndex</code> はすべての自己開発インデックスの基本クラスです。ベクトルIDのみがインデックス・ファイルに格納されることを考えると、128次元ベクトルのファイル・サイズは2桁小さくなります。</p></li>
 </ul>
 <h4 id="IDMAP-brute-force-search" class="common-anchor-header"><code translate="no">IDMAP</code>ブルートフォース検索</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
    </span> <span class="img-wrapper"> <span>IDMAP</span> </span></p>
-<p>技術的に言えば、<code translate="no">IDMAP</code> はインデックスではなく、ブルートフォース検索に使用されます。ベクトルがデータベースに挿入される際、データ学習もインデックス構築も必要ない。検索は挿入されたベクトル・データに対して直接行われる。</p>
+<p>厳密に言えば、<code translate="no">IDMAP</code> はインデックスではなく、ブルートフォース検索に使用されます。ベクトルがデータベースに挿入される際、データ学習もインデックス構築も必要ない。検索は挿入されたベクトル・データに対して直接行われる。</p>
 <p>しかし、コードの一貫性を保つために、<code translate="no">IDMAP</code> は<code translate="no">VecIndex</code> クラスを継承し、その仮想インターフェースもすべて継承している。<code translate="no">IDMAP</code> の使い方は他のインデックスと同じである。</p>
 <h4 id="IVF-indices" class="common-anchor-header">IVFインデックス</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
    </span> <span class="img-wrapper"> <span>IVF</span> </span></p>
 <p>IVF（転置ファイル）インデックスは最も頻繁に使用される。<code translate="no">IVF</code> クラスは<code translate="no">VecIndex</code> と<code translate="no">FaissBaseIndex</code> から派生し、さらに<code translate="no">IVFSQ</code> と<code translate="no">IVFPQ</code> へと拡張される。<code translate="no">GPUIVF</code> は<code translate="no">GPUIndex</code> と<code translate="no">IVF</code> から派生する。そして<code translate="no">GPUIVF</code> はさらに<code translate="no">GPUIVFSQ</code> と<code translate="no">GPUIVFPQ</code> に拡張される。</p>
-<p><code translate="no">IVFSQHybrid</code> は、独自に開発したハイブリッド・インデックスである。粗い量子化器はGPUで実行され、バケット内の検索はCPUで実行される。このタイプのインデックスは、GPUの計算能力を活用することで、CPUとGPU間のメモリコピーの発生を減らすことができる。 は、 と同じ想起率を持つが、より優れた性能を持つ。<code translate="no">IVFSQHybrid</code> <code translate="no">GPUIVFSQ</code> </p>
+<p><code translate="no">IVFSQHybrid</code> は、独自に開発したハイブリッド・インデックスである。粗い量子化器はGPUで実行され、バケット内の検索はCPUで実行される。このタイプのインデックスは、GPUの計算能力を活用することで、CPUとGPU間のメモリコピーの発生を減らすことができる。<code translate="no">IVFSQHybrid</code> は、<code translate="no">GPUIVFSQ</code> と同じ想起率を持つが、より優れた性能を持つ。</p>
 <p><code translate="no">BinaryIDMAP</code> と<code translate="no">BinaryIVF</code> は<code translate="no">FaissBaseBinaryIndex</code> と<code translate="no">VecIndex</code> から派生したものである。</p>
 <h4 id="Third-party-indices" class="common-anchor-header">サードパーティ・インデックス</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
    </span> <span class="img-wrapper"> <span>サード・パーティ・インデックス</span> </span></p>
 <p>現在、Faiss以外のサードパーティ・インデックスとしてサポートされているのは、ツリーベース・インデックス<code translate="no">Annoy</code> とグラフベース・インデックス<code translate="no">HNSW</code> の2種類のみである。これら 2 つの一般的で頻繁に使用されるサードパーティ・インデックスは、いずれも<code translate="no">VecIndex</code> から派生したものである。</p>
 <h2 id="Adding-indices-to-Knowhere" class="common-anchor-header">Knowhere へのインデックスの追加<button data-href="#Adding-indices-to-Knowhere" class="anchor-icon" translate="no">

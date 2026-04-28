@@ -41,8 +41,23 @@ summary: 瞭解如何使用 Milvus Operator 設定物件儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 集群使用 MinIO 或 S3 作為物件儲存，以持久化大型檔案，例如索引檔案和二進位日誌。在<code translate="no">spec.dependencies.storage</code> 下添加必填字段以配置对象存储，可能的选项是<code translate="no">external</code> 和<code translate="no">inCluster</code> 。</p>
-<h3 id="Internal-object-storage" class="common-anchor-header">內部物件儲存</h3><p>預設情況下，Milvus Operator 會為 Milvus 部署集群內 MinIO。以下是一個配置範例，示範如何使用此 MinIO 作為內部物件儲存。</p>
+    </button></h2><p>Milvus 集群使用 MinIO 或 S3 作為物件儲存，以持久化大型檔案，例如索引檔案和二進位日誌。在<code translate="no">spec.dependencies.storage</code> 下新增必填欄位，以設定物件儲存，可能的選項為<code translate="no">external</code> 和<code translate="no">inCluster</code> 。</p>
+<h3 id="Internal-object-storage" class="common-anchor-header">內部物件儲存<button data-href="#Internal-object-storage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>預設情況下，Milvus Operator 會為 Milvus 部署集群內 MinIO。以下是一個配置範例，示範如何使用此 MinIO 作為內部物件儲存。</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -73,7 +88,22 @@ summary: 瞭解如何使用 Milvus Operator 設定物件儲存。
 <li><p><code translate="no">pvcDeletion</code> 欄位指定當叢集內 MinIO 刪除時，是否刪除 PVC(Persistent Volume Claim)。</p></li>
 </ul>
 <p><code translate="no">inCluster.values</code> 下的欄位與 Milvus Helm Chart 中的相同，您可以<a href="https://github.com/milvus-io/milvus-helm/blob/master/charts/minio/values.yaml">在這裡</a>找到。</p>
-<h3 id="External-object-storage" class="common-anchor-header">外部物件儲存</h3><p>在模板 YAML 檔案中使用<code translate="no">external</code> 表示使用外部物件儲存服務。要使用外部物件儲存，您需要在 Milvus CRD 中正確設定<code translate="no">spec.dependencies.storage</code> 和<code translate="no">spec.config.minio</code> 下的欄位。</p>
+<h3 id="External-object-storage" class="common-anchor-header">外部物件儲存<button data-href="#External-object-storage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在模板 YAML 檔案中使用<code translate="no">external</code> 表示使用外部物件儲存服務。若要使用外部物件儲存，您需要在 Milvus CRD 中正確設定<code translate="no">spec.dependencies.storage</code> 和<code translate="no">spec.config.minio</code> 下的欄位。</p>
 <h4 id="Use-Amazon-Web-Service-AWS-S3-as-external-object-storage" class="common-anchor-header">使用 Amazon Web Service (AWS) S3 作為外部物件儲存空間</h4><ul>
 <li><p>透過 AK/SK 設定 AWS S3 存取權限</p>
 <p>通常可透過存取金鑰和存取秘鑰的一對來存取 S3 儲存桶。您可以建立<code translate="no">Secret</code> 物件，將它們儲存在 Kubernetes 中，如下所示：</p>
@@ -87,7 +117,7 @@ summary: 瞭解如何使用 Milvus Operator 設定物件儲存。
   <span class="hljs-attr">accesskey:</span> <span class="hljs-string">&lt;my-access-key&gt;</span>
   <span class="hljs-attr">secretkey:</span> <span class="hljs-string">&lt;my-secret-key&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>然後您可以設定 AWS S3 儲存桶作為外部物件儲存：</p>
+<p>然後您就可以設定 AWS S3 儲存桶作為外部物件儲存：</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-comment"># # change the &lt;parameters&gt; to match your environment</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

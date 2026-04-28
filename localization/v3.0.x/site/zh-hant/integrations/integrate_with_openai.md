@@ -133,7 +133,7 @@ res = milvus_client.search(
         <span class="hljs-built_in">print</span>(result)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>您應該會看到以下的輸出：</p>
+<p>您應該會看到以下輸出：</p>
 <pre><code translate="no" class="language-python">[
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>,

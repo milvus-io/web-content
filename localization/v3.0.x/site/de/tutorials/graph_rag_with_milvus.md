@@ -25,7 +25,7 @@ title: Graph RAG mit Milvus
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>Die weit verbreitete Anwendung großer Sprachmodelle macht deutlich, wie wichtig es ist, die Genauigkeit und Relevanz ihrer Antworten zu verbessern. Retrieval-Augmented Generation (RAG) erweitert Modelle mit externen Wissensdatenbanken, liefert mehr kontextbezogene Informationen und mildert Probleme wie Halluzinationen und unzureichendes Wissen. Sich ausschließlich auf einfache RAG-Paradigmen zu verlassen, hat jedoch seine Grenzen, insbesondere wenn es um komplexe Entitätsbeziehungen und Multi-Hop-Fragen geht, bei denen das Modell oft Schwierigkeiten hat, genaue Antworten zu geben.</p>
-<p>Die Einführung von Wissensgraphen (KGs) in das RAG-System bietet eine neue Lösung. KGs stellen Entitäten und ihre Beziehungen auf strukturierte Weise dar, liefern präzisere Suchinformationen und helfen RAG dabei, komplexe Aufgaben zur Beantwortung von Fragen besser zu bewältigen. KG-RAG befindet sich noch in der Anfangsphase, und es gibt keinen Konsens darüber, wie Entitäten und Beziehungen aus KGs effektiv abgerufen werden können oder wie die vektorielle Ähnlichkeitssuche in Graphstrukturen integriert werden kann.</p>
+<p>Die Einführung von Wissensgraphen (KGs) in das RAG-System bietet eine neue Lösung. KGs stellen Entitäten und ihre Beziehungen auf strukturierte Weise dar, liefern präzisere Suchinformationen und helfen RAG dabei, komplexe Aufgaben zur Beantwortung von Fragen besser zu bewältigen. KG-RAG befindet sich noch in der Anfangsphase, und es gibt keinen Konsens darüber, wie Entitäten und Beziehungen aus KGs effektiv abgerufen werden können oder wie die vektorielle Ähnlichkeitssuche mit Graphenstrukturen integriert werden kann.</p>
 <p>In diesem Notizbuch stellen wir einen einfachen, aber leistungsfähigen Ansatz vor, um die Leistung dieses Szenarios erheblich zu verbessern. Es handelt sich um ein einfaches RAG-Paradigma mit mehrseitigem Retrieval und anschließendem Reranking, das jedoch Graph RAG logisch implementiert und bei der Behandlung von Multi-Hop-Fragen eine Spitzenleistung erzielt. Schauen wir uns an, wie es implementiert ist.</p>
 <p>
   <span class="img-wrapper">
@@ -83,7 +83,7 @@ embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-em
 <div class="alert note">
 <p>Für die Args in MilvusClient:</p>
 <ul>
-<li>Die Einstellung von <code translate="no">uri</code> als lokale Datei, z. B.<code translate="no">./milvus.db</code>, ist die bequemste Methode, da sie automatisch <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> nutzt, um alle Daten in dieser Datei zu speichern.</li>
+<li>Die Einstellung von <code translate="no">uri</code> als lokale Datei, z. B.<code translate="no">./milvus.db</code>, ist die bequemste Methode, da sie automatisch <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> verwendet, um alle Daten in dieser Datei zu speichern.</li>
 <li>Wenn Sie große Datenmengen haben, können Sie einen leistungsfähigeren Milvus-Server auf <a href="https://milvus.io/docs/quickstart.md">Docker oder Kubernetes</a> einrichten. Bei dieser Einrichtung verwenden Sie bitte die Server-Uri, z. B.<code translate="no">http://localhost:19530</code>, als <code translate="no">uri</code>.</li>
 <li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Service für Milvus, verwenden möchten, passen Sie <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">öffentlichen Endpunkt und dem Api-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
 </ul>
@@ -183,7 +183,7 @@ embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-em
 <p>Wir konstruieren die Entitäten und Relationen wie folgt:</p>
 <ul>
 <li>Die Entität ist das Subjekt oder Objekt im Triplett, also extrahieren wir sie direkt aus den Tripletts.</li>
-<li>Hier konstruieren wir das Konzept der Beziehung, indem wir Subjekt, Prädikat und Objekt mit einem Leerzeichen dazwischen direkt aneinanderhängen.</li>
+<li>Hier konstruieren wir das Konzept der Beziehung, indem wir Subjekt, Prädikat und Objekt mit einem Leerzeichen dazwischen direkt aneinanderreihen.</li>
 </ul>
 <p>Wir bereiten auch ein Diktat vor, um die Entitäts-ID auf die Beziehungs-ID abzubilden, und ein weiteres Diktat, um die Beziehungs-ID auf die Passagen-ID abzubilden, um sie später zu verwenden.</p>
 <pre><code translate="no" class="language-python">entityid_2_relationids = defaultdict(<span class="hljs-built_in">list</span>)
@@ -306,7 +306,7 @@ Inserting: 100%|█████████████████████�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Similarity-Retrieval" class="common-anchor-header">Abfrage der Ähnlichkeit<button data-href="#Similarity-Retrieval" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Similarity-Retrieval" class="common-anchor-header">Ähnlichkeitsabfrage<button data-href="#Similarity-Retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -451,7 +451,7 @@ relation_candidate_texts = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>In dieser Phase setzen wir den leistungsstarken Selbstbeobachtungsmechanismus des LLM ein, um die Kandidaten für die Beziehungen weiter zu filtern und zu verfeinern. Wir verwenden einen One-Shot-Prompt, der die Anfrage und den Kandidatensatz von Beziehungen in den Prompt einbezieht, und weisen LLM an, potenzielle Beziehungen auszuwählen, die bei der Beantwortung der Anfrage helfen könnten. In Anbetracht der Tatsache, dass einige Abfragen komplex sein können, verwenden wir den Chain-of-Thought-Ansatz, der es dem LLM ermöglicht, seinen Gedankenprozess in seiner Antwort zu artikulieren. Wir legen fest, dass die Antwort des LLM im json-Format vorliegt, um die Analyse zu erleichtern.</p>
+    </button></h3><p>In dieser Phase setzen wir den leistungsstarken Selbstbeobachtungsmechanismus des LLM ein, um die Menge der in Frage kommenden Beziehungen weiter zu filtern und zu verfeinern. Wir verwenden einen One-Shot-Prompt, der die Anfrage und den Kandidatensatz von Beziehungen in den Prompt einbezieht, und weisen LLM an, potenzielle Beziehungen auszuwählen, die bei der Beantwortung der Anfrage helfen könnten. In Anbetracht der Tatsache, dass einige Abfragen komplex sein können, verwenden wir den Chain-of-Thought-Ansatz, der es dem LLM ermöglicht, seinen Gedankenprozess in seiner Antwort zu artikulieren. Wir legen fest, dass die Antwort des LLM im json-Format vorliegt, um die Analyse zu erleichtern.</p>
 <pre><code translate="no" class="language-python">query_prompt_one_shot_input = <span class="hljs-string">&quot;&quot;&quot;I will provide you with a list of relationship descriptions. Your task is to select 3 relationships that may be useful to answer the given question. Please return a JSON object containing your thought process and a list of the selected relationships in order of their relevance.
 
 Question:

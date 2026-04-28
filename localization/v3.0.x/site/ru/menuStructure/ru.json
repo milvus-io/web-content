@@ -322,6 +322,12 @@
             "children": []
           },
           {
+            "label": "Создание внешней коллекции",
+            "id": "create-an-external-collection.md",
+            "order": 2,
+            "children": []
+          },
+          {
             "label": "Просмотр коллекций",
             "id": "view-collections.md",
             "order": 3,
@@ -474,15 +480,21 @@
             "children": []
           },
           {
-            "label": "Нулевые и по умолчанию",
+            "label": "Нулевые поля",
             "id": "nullable-and-default.md",
             "order": 13,
             "children": []
           },
           {
+            "label": "Значения по умолчанию",
+            "id": "default-values.md",
+            "order": 14,
+            "children": []
+          },
+          {
             "label": "Анализатор",
             "id": "analyzer",
-            "order": 14,
+            "order": 15,
             "children": [
               {
                 "label": "Обзор анализатора",
@@ -628,6 +640,12 @@
                     "id": "regex-filter.md",
                     "order": 10,
                     "children": []
+                  },
+                  {
+                    "label": "Синоним",
+                    "id": "synonym-filter.md",
+                    "order": 11,
+                    "children": []
                   }
                 ]
               },
@@ -642,26 +660,32 @@
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
+              },
+              {
+                "label": "Управление файловыми ресурсами",
+                "id": "manage-file-resources.md",
+                "order": 6,
+                "children": []
               }
             ]
           },
           {
             "label": "Изменить поле коллекции",
             "id": "alter-collection-field.md",
-            "order": 15,
+            "order": 16,
             "children": []
           },
           {
             "label": "Добавление полей в существующую коллекцию",
             "id": "add-fields-to-an-existing-collection.md",
-            "order": 16,
+            "order": 17,
             "children": []
           },
           {
             "label": "Лучшие практики",
             "id": "best-practices",
             "isMenu": true,
-            "order": 17,
+            "order": 18,
             "children": [
               {
                 "label": "Разработка модели данных для поиска",
@@ -997,15 +1021,21 @@
                 "children": []
               },
               {
+                "label": "Операторы структурных массивов",
+                "id": "struct-array-operators.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "Случайная выборка",
                 "id": "random-sampling.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "Геометрические операторы",
                 "id": "geometry-operators.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -1061,15 +1091,21 @@
         ]
       },
       {
-        "label": "Вкрапления и рерайтинг",
+        "label": "Вывод функций и моделей",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
         "children": [
           {
-            "label": "Функция встраивания",
-            "id": "embedding-function",
+            "label": "Функция BM25",
+            "id": "bm25-function.md",
             "order": 0,
+            "children": []
+          },
+          {
+            "label": "Функции встраивания на основе моделей",
+            "id": "embedding-function",
+            "order": 1,
             "isMenu": true,
             "children": [
               {
@@ -1141,9 +1177,15 @@
             ]
           },
           {
-            "label": "Функция рерайтинга",
+            "label": "Функция MinHash",
+            "id": "minhash-function.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Функции реранки",
             "id": "reranking",
-            "order": 1,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -1269,9 +1311,15 @@
             "children": []
           },
           {
+            "label": "Принудительное уплотнение слияния",
+            "id": "force-merge.md",
+            "order": 2,
+            "children": []
+          },
+          {
             "label": "Многоярусное хранение",
             "id": "tiered_storage",
-            "order": 2,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -1293,6 +1341,32 @@
                 "children": []
               }
             ]
+          }
+        ]
+      },
+      {
+        "label": "Снимки",
+        "id": "snapshots",
+        "order": 11,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Обзор",
+            "id": "snapshots.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Управление моментальными снимками",
+            "id": "manage-snapshots.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Примеры использования",
+            "id": "snapshot-use-cases.md",
+            "order": 2,
+            "children": []
           }
         ]
       }
@@ -1828,7 +1902,7 @@
                 "children": []
               },
               {
-                "label": "Пользователи, привилегии и роли",
+                "label": "Users, Privileges, and Roles",
                 "id": "users_and_roles.md",
                 "order": 1,
                 "children": []

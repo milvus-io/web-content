@@ -29,7 +29,7 @@ title: 使用 Milvus 進行上下文檢索
   
    <span class="img-wrapper"> <img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/refs/heads/master/pics/contextual_retrieval_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>image</span> </span><a href="https://www.anthropic.com/news/contextual-retrieval">Contextual Retrieval</a>是 Anthropic 提出的進階檢索方法，用以解決目前的 Retrieval-Augmented Generation (RAG) 解決方案中出現的語意分離問題 (semantic isolation of chunks)。在目前實用的 RAG 范例中，文件會被分割成幾個區塊，並使用向量資料庫來搜尋查詢，擷取最相關的區塊。之後，LLM 會使用這些擷取的分塊來回應查詢。然而，這個分塊過程可能會造成上下文資訊的遺失，使得擷取者難以判斷相關性。</p>
-<p>上下文檢索改善了傳統的檢索系統，在嵌入或編入索引之前，先將相關上下文加入每個文件塊，以提高準確性並減少檢索錯誤。結合混合檢索和重排等技術，它可以增強檢索-增強生成 (RAG) 系統，特別是針對大型知識庫。此外，如果搭配即時快取，它還能提供具成本效益的解決方案，大幅降低延遲時間和作業成本，每百萬個文件標記的上下文區塊成本約為 1.02 美元。這使其成為處理大型知識庫的可擴充且有效率的方法。Anthropic 的解決方案展現出兩項精闢之處：</p>
+<p>上下文檢索改善了傳統的檢索系統，在嵌入或編入索引之前，先將相關上下文加入每個文件分塊，以提高準確性並減少檢索錯誤。結合混合檢索和重排等技術，它可以增強檢索增強生成 (RAG) 系統，特別是針對大型知識庫。此外，如果搭配即時快取，它還能提供具成本效益的解決方案，大幅降低延遲時間和作業成本，每百萬個文件標記的上下文區塊成本約為 1.02 美元。這使其成為處理大型知識庫的可擴充且有效率的方法。Anthropic 的解決方案展現出兩項精闢之處：</p>
 <ul>
 <li><code translate="no">Document Enhancement</code>:查詢重寫（Query rewriting）是現代資訊檢索的重要技術，通常會使用輔助資訊來使查詢內容更豐富。同樣地，為了在 RAG 中達到更好的效能，在索引之前使用 LLM 對文件進行預處理（例如清理資料來源、補充遺失的資訊、總結等），可以大幅提高檢索到相關文件的機會。換句話說，這個預處理步驟有助於使文件在相關性方面更接近查詢。</li>
 <li><code translate="no">Low-Cost Processing by Caching Long Context</code>:使用 LLM 處理文件時，一個常見的顧慮是成本問題。KVCache 是一種流行的解決方案，它允許重覆使用相同前文的中間結果。雖然大多數主機 LLM 供應商會讓這項功能對使用者透明，但 Anthropic 卻讓使用者可以控制快取過程。當快取命中時，大部分的計算都可以被儲存（這在長上下文保持相同，但每個查詢的指令改變時很常見）。如需詳細資訊，請點<a href="https://www.anthropic.com/news/prompt-caching">選此</a>處。</li>
@@ -50,12 +50,27 @@ title: 使用 Milvus 進行上下文檢索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">安裝相依性</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">安裝相依性<button data-href="#Install-Dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install tqdm</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install anthropic</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果您使用的是 Google Colab，為了啟用剛安裝的依賴項目，您可能需要<strong>重新啟動執行時</strong>（點選畫面上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
+<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
 </div>
 <p>您需要 Cohere、Voyage 和 Anthropic 的 API 金鑰才能執行程式碼。</p>
 <h2 id="Download-Data" class="common-anchor-header">下載資料<button data-href="#Download-Data" class="anchor-icon" translate="no">
@@ -603,7 +618,7 @@ Total queries: 248
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>加入 Cohere reranker 可以進一步改善結果。我們不需要另外初始化一個帶有 reranker 的新retriever，只要簡單地設定現有的 retriever 使用 reranker 就可以增強效能。</p>
+    </button></h2><p>加入 Cohere reranker 可以進一步改善結果。我們不需要另外初始化一個有 reranker 的新retriever，只要簡單地設定現有的 retriever 使用 reranker 就能提升效能。</p>
 <pre><code translate="no" class="language-python">contextual_retriever.use_reranker = <span class="hljs-literal">True</span>
 contextual_retriever.rerank_function = cohere_rf
 <button class="copy-code-btn"></button></code></pre>

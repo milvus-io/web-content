@@ -50,7 +50,7 @@ summary: >-
      <th><p>Tipos de índice aplicables</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>VECTOR_FLOT16</p></li><li><p>BFLOAT16_VECTOR</p></li><li><p>VECTOR_INT8</p></li></ul></td>
+     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>VECTOR_FLOAT16</p></li><li><p>BFLOAT16_VECTOR</p></li><li><p>VECTOR_INT8</p></li></ul></td>
      <td><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>HNSW</p></li><li><p>HNSW_SQ</p></li><li><p>HNSW_PQ</p></li><li><p>HNSW_PRQ</p></li><li><p>DISKANN</p></li><li><p>SCANN</p></li><li><p>AISAQ</p></li><li><p>GPU_CAGRA</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>GPU_BRUTE_FORCE</p></li></ul></td>
    </tr>
    <tr>
@@ -131,7 +131,7 @@ summary: >-
     </button></h3><p>La estructura de datos constituye la base del índice. Los tipos más comunes son:</p>
 <ul>
 <li><p><strong>Archivo invertido (IVF)</strong></p>
-<p>Los tipos de índice de la serie IVF permiten a Milvus agrupar vectores en cubos a través de la partición basada en centroides. Generalmente es seguro asumir que todos los vectores en un cubo probablemente estén cerca del vector de consulta si el centroide del cubo está cerca del vector de consulta. Basándose en esta premisa, Milvus explora únicamente las incrustaciones de vectores en aquellos cubos cuyos centroides están cerca del vector de consulta, en lugar de examinar todo el conjunto de datos. Esta estrategia reduce los costes computacionales al tiempo que mantiene una precisión aceptable.</p>
+<p>Los tipos de índice de la serie IVF permiten a Milvus agrupar vectores en cubos mediante la partición basada en centroides. Generalmente es seguro asumir que todos los vectores en un cubo probablemente estén cerca del vector de consulta si el centroide del cubo está cerca del vector de consulta. Basándose en esta premisa, Milvus explora únicamente las incrustaciones de vectores en aquellos cubos cuyos centroides están cerca del vector de consulta, en lugar de examinar todo el conjunto de datos. Esta estrategia reduce los costes computacionales al tiempo que mantiene una precisión aceptable.</p>
 <p>Este tipo de estructura de datos de índice es ideal para conjuntos de datos a gran escala que requieren un rendimiento rápido.</p></li>
 <li><p><strong>Estructura gráfica</strong></p>
 <p>Una estructura de datos basada en grafos para la búsqueda vectorial, como Hierarchical Navigable Small World<a href="https://arxiv.org/abs/1603.09320">(HNSW</a>), construye un grafo en capas en el que cada vector se conecta con sus vecinos más cercanos. Las consultas recorren esta jerarquía, partiendo de capas superiores gruesas y pasando por capas inferiores, lo que permite una complejidad de búsqueda eficiente en tiempo logarítmico.</p>
@@ -439,7 +439,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Los índices basados en grafos, como el HNSW, requieren una cantidad significativa de memoria para almacenar tanto la estructura del grafo como las incrustaciones de vectores sin procesar. A continuación se muestra un desglose detallado de la memoria consumida por 1 millón de vectores de 128 dimensiones indexados mediante el tipo de índice HNSW.</p>
+    </button></h3><p>Los índices basados en grafos, como el HNSW, requieren una cantidad significativa de memoria para almacenar tanto la estructura del grafo como las incrustaciones de vectores sin procesar. A continuación se muestra un desglose detallado de la memoria consumida por 1 millón de vectores de 128 dimensiones indexados utilizando el tipo de índice HNSW.</p>
 <ol>
 <li><p><strong>Calcular la memoria utilizada por la estructura gráfica.</strong></p>
 <p>Cada vector en HNSW mantiene conexiones con sus vecinos. Con un grado de grafo (aristas por nodo) de 32, la memoria consumida puede calcularse del siguiente modo:</p>

@@ -19,7 +19,7 @@ summary: Imparare a configurare il proxy per Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Configurazione correlata del proxy, usata per convalidare le richieste del client e ridurre i risultati restituiti.</p>
+    </button></h1><p>Configurazione correlata del proxy, utilizzata per convalidare le richieste del client e ridurre i risultati restituiti.</p>
 <h2 id="proxytimeTickInterval" class="common-anchor-header"><code translate="no">proxy.timeTickInterval</code><button data-href="#proxytimeTickInterval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -423,7 +423,7 @@ summary: Imparare a configurare il proxy per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        interruttore per stabilire se il proxy deve usare la chiave di partizione per la collezione      </td>
+      <td>        interruttore per stabilire se il proxy deve utilizzare la chiave di partizione per la collezione      </td>
       <td>falso</td>
     </tr>
   </tbody>
@@ -742,7 +742,7 @@ summary: Imparare a configurare il proxy per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        intervallo di tempo (in secondi) per la scansione da parte del gestore delle connessioni delle informazioni sui client inattivi.      </td>
+      <td>        intervallo di tempo (in secondi) per la scansione delle informazioni del client inattivo da parte del gestore delle connessioni.      </td>
       <td>120</td>
     </tr>
   </tbody>
@@ -771,7 +771,7 @@ summary: Imparare a configurare il proxy per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        durata del TTL delle informazioni sul client inattivo, in secondi      </td>
+      <td>        durata TTL delle informazioni sul client inattivo, in secondi      </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -800,7 +800,7 @@ summary: Imparare a configurare il proxy per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        il numero massimo di informazioni sul client che il proxy deve gestire, per evitare un numero eccessivo di informazioni sul client      </td>
+      <td>        numero massimo di informazioni sul client che il proxy deve gestire, per evitare un numero eccessivo di informazioni sul client      </td>
       <td>10000</td>
     </tr>
   </tbody>
@@ -887,7 +887,7 @@ summary: Imparare a configurare il proxy per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        dimensione del pool di client di shardleader(querynode)      </td>
+      <td>        la dimensione del pool di client di shardleader(querynode)      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1032,7 +1032,7 @@ summary: Imparare a configurare il proxy per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Se abilitare il middleware pprof sulla porta delle metriche      </td>
+      <td>        Se abilitare il middleware pprof sulla porta metrica      </td>
       <td>vero</td>
     </tr>
   </tbody>
@@ -1061,7 +1061,7 @@ summary: Imparare a configurare il proxy per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Indirizzo TCP/IP del proxy. Se non viene specificato, viene utilizzato il primo indirizzo unicastable.      </td>
+      <td>        Indirizzo TCP/IP del proxy. Se non viene specificato, viene utilizzato il primo indirizzo non ciclabile.      </td>
       <td></td>
     </tr>
   </tbody>

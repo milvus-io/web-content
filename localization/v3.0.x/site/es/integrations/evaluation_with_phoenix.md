@@ -184,7 +184,7 @@ my_rag = RAG(openai_client=openai_client, milvus_client=milvus_client)
 <p>En cuanto al argumento de <code translate="no">MilvusClient</code>:</p>
 <ul>
 <li>Establecer el <code translate="no">uri</code> como un archivo local, por ejemplo<code translate="no">./milvus.db</code>, es el método más conveniente, ya que utiliza automáticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> para almacenar todos los datos en este archivo.</li>
-<li>Si tiene una gran escala de datos, puede configurar un servidor Milvus más eficiente en <a href="https://milvus.io/docs/quickstart.md">docker o kubernetes</a>. En esta configuración, por favor utilice la uri del servidor, por ejemplo<code translate="no">http://localhost:19530</code>, como su <code translate="no">uri</code>.</li>
+<li>Si tiene una gran escala de datos, puede configurar un servidor Milvus de mayor rendimiento en <a href="https://milvus.io/docs/quickstart.md">docker o kubernetes</a>. En esta configuración, por favor utilice la uri del servidor, por ejemplo<code translate="no">http://localhost:19530</code>, como su <code translate="no">uri</code>.</li>
 <li>Si desea utilizar <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, el servicio en la nube totalmente gestionado para Milvus, ajuste <code translate="no">uri</code> y <code translate="no">token</code>, que corresponden al <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">punto final público y a la clave Api</a> en Zilliz Cloud.</li>
 </ul>
 </div>
@@ -327,7 +327,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Usamos Arize Phoenix para evaluar nuestro canal de generación de recuperación aumentada (RAG), centrándonos en dos métricas clave:</p>
+    </button></h2><p>Utilizamos Arize Phoenix para evaluar nuestro canal de generación de recuperación aumentada (RAG), centrándonos en dos métricas clave:</p>
 <ul>
 <li><p><strong>Evaluación de alucinaciones</strong>: Determina si el contenido es factual o alucinatorio (información no basada en el contexto), garantizando la integridad de los datos.</p>
 <ul>
@@ -464,7 +464,7 @@ results_df.head()
       <td>[CMake &amp; Conan\n\nLa biblioteca de algoritmos de Mil...</td>
       <td>El lenguaje de programación utilizado para escribir Knowher...</td>
       <td>El lenguaje de programación utilizado para escribir Knowher...</td>
-      <td>[CMake &amp; Conan La librería de algoritmos de Mil...</td>
+      <td>[CMake &amp; Conan\nLa biblioteca de algoritmos de Mil...</td>
       <td>[CMake &amp; Conan La biblioteca de algoritmos de Mil...</td>
       <td>factual</td>
       <td>Determinar si la respuesta es factual o hallu...</td>

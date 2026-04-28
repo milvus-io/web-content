@@ -76,7 +76,7 @@ title: Milvus와 통합된 MemGPT
 <pre><code translate="no" class="language-text">Loading files: 100%|███████████████████████████████████| 1/1 [00:00&lt;00:00,  3.94file/s]
 Loaded 74 passages and 13 documents from memgpt_research_paper
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Attaching-the-data-source-to-a-MemGPT-agent" class="common-anchor-header">MemGPT 에이전트에 데이터 소스 첨부하기<button data-href="#Attaching-the-data-source-to-a-MemGPT-agent" class="anchor-icon" translate="no">
+<h2 id="Attaching-the-data-source-to-a-MemGPT-agent" class="common-anchor-header">MemGPT 에이전트에 데이터 소스 연결하기<button data-href="#Attaching-the-data-source-to-a-MemGPT-agent" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

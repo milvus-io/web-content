@@ -1,6 +1,6 @@
 ---
 id: allocate.md
-title: تخصيص الموارد إلى Milvus على Kubernetes
+title: تخصيص الموارد لميلفوس على Kubernetes
 summary: تعرف على كيفية تخصيص الموارد لـ Milvus على Kubernetes.
 ---
 <h1 id="Allocate-Resources-on-Kubernetes" class="common-anchor-header">تخصيص الموارد على Kubernetes<button data-href="#Allocate-Resources-on-Kubernetes" class="anchor-icon" translate="no">
@@ -80,11 +80,11 @@ summary: تعرف على كيفية تخصيص الموارد لـ Milvus على
     </button></h3><p>تحتاج إلى تعيين متغيرات الموارد لكل مكون من مكونات Milvus إذا كنت تستخدم <code translate="no">--set</code> لتحديث تكوينات الموارد.</p>
 <div class="filter">
  <a href="#cluster">عنقود</a><a href="#standalone">ميلفوس المستقل</a> <a href="#cluster">ميلفوس العنقودي</a></div>
-<div class="table-wrapper filter-standalone" markdown="block">
+<div class="filter-standalone table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set standalone.resources.limits.cpu=2 --set standalone.resources.limits.memory=4Gi --set standalone.resources.requests.cpu=0.1 --set standalone.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<div class="table-wrapper filter-cluster" markdown="block">
+<div class="filter-cluster table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set dataNode.resources.limits.cpu=2 --set dataNode.resources.limits.memory=4Gi --set dataNode.resources.requests.cpu=0.1 --set dataNode.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>

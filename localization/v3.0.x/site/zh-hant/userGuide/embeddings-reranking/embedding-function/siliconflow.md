@@ -96,7 +96,7 @@ beta: Milvus 2.6.x
 </ul>
 <p>在以下兩種方法中選擇一種--配置檔案在裸機和虛擬機器上較容易維護，而 env-var 路線則適合容器工作流程。</p>
 <div class="alert note">
-<p>如果相同提供者的 API 金鑰同時出現在組態檔案和環境變數中，Milvus 會永遠使用<code translate="no">milvus.yaml</code> 中的值，而忽略環境變數。</p>
+<p>如果相同提供者的 API 金鑰同時出現在組態檔案和環境變數中，Milvus 會始終使用<code translate="no">milvus.yaml</code> 中的值，而忽略環境變數。</p>
 </div>
 <h3 id="Option-1-Configuration-file" class="common-anchor-header">選項 1：組態檔<button data-href="#Option-1-Configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"

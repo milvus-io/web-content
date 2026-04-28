@@ -21,7 +21,10 @@ title: فهرس الحقول العددية
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>في Milvus، يتم استخدام الفهرس العددي لتسريع التصفية الوصفية حسب قيمة حقل معين غير متجه، على غرار فهرس قاعدة البيانات التقليدية. سيرشدك هذا الدليل إلى كيفية إنشاء وتكوين الفهارس العددية للحقول مثل الأعداد الصحيحة والسلاسل وغيرها.</p>
+    </button></h1><p>في Milvus، يتم استخدام الفهرس العددي لتسريع التصفية الوصفية حسب قيمة حقل معين غير متجه، على غرار فهرس قاعدة البيانات التقليدية. سيرشدك هذا الدليل خلال إنشاء وتكوين الفهارس العددية للحقول مثل الأعداد الصحيحة والسلاسل وما إلى ذلك.</p>
+<div class="alert warning">
+<p>تم إهمال هذه الصفحة. للحصول على أحدث التطبيقات، راجع <a href="/docs/ar/bitmap.md">BITMAP</a> و <a href="/docs/ar/inverted.md">INVERTED</a> و <a href="/docs/ar/ngram.md">NGRAM</a> و <a href="/docs/ar/rtree.md">RTREE</a> <a href="/docs/ar/stl-sort.md">STL_SORT</a> وغيرها.</p>
+</div>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">أنواع الفهرسة العددية<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,8 +41,8 @@ title: فهرس الحقول العددية
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">الفهرسة التلقائية</a></strong>: يقرر Milvus تلقائيًا نوع الفهرس بناءً على نوع بيانات الحقل القياسي. وهذا مناسب عندما لا تحتاج إلى التحكم في نوع الفهرس المحدد.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">الفهرسة المخصصة</a></strong>: يمكنك تحديد نوع الفهرس الدقيق، مثل الفهرس المقلوب. يوفر هذا المزيد من التحكم في تحديد نوع الفهرس.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">الفهرسة التلقائية</a></strong>: يقرر Milvus نوع الفهرسة تلقائيًا بناءً على نوع بيانات الحقل القياسي. وهذا مناسب عندما لا تحتاج إلى التحكم في نوع الفهرس المحدد.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">الفهرسة المخصصة</a></strong>: يمكنك تحديد نوع الفهرس الدقيق، مثل الفهرس المقلوب أو <a href="/docs/ar/bitmap.md">الفهرس النقطي</a>. يوفر هذا المزيد من التحكم في تحديد نوع الفهرس.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">الفهرسة التلقائية<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -57,7 +60,7 @@ title: فهرس الحقول العددية
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>لاستخدام الفهرسة التلقائية، احذف معلمة <strong>نوع الفهرس</strong> في <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>بحيث يمكن لميلفوس استنتاج نوع الفهرس بناءً على نوع الحقل القياسي.</p>
+<p>لاستخدام الفهرسة التلقائية، احذف معلمة <strong>نوع الفهرسة</strong> في <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>بحيث يمكن ل Milvus استنتاج نوع الفهرس بناءً على نوع الحقل القياسي.</p>
 </div>
 <div class="language-java">
 <p>لاستخدام الفهرسة التلقائية، احذف معلمة <strong>نوع الفهرس</strong> في <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>بحيث يمكن ل Milvus استنتاج نوع الفهرس بناءً على نوع الحقل القياسي.</p>
@@ -128,7 +131,7 @@ client.createIndex(createIndexReq);
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>لاستخدام الفهرسة المخصصة، حدد نوع فهرسة معين باستخدام معلمة <strong>Index_type</strong> في <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
+<p>لاستخدام الفهرسة المخصصة، حدد نوع فهرسة معين باستخدام معلمة <strong>index_type</strong> في <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
 </div>
 <div class="language-java">
 <p>لاستخدام الفهرسة المخصصة، حدد نوع فهرسة معين باستخدام معلمة <strong>indexType</strong> في . <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>.</p>
@@ -181,7 +184,7 @@ client.createIndex(createIndexReq);
 <div class="language-python">
 <p><strong>الطرق والمعلمات</strong></p>
 <ul>
-<li><p><strong>إعداد_المفهرس_بارامز()</strong></p>
+<li><p><strong>إعداد_مفهرس_بارامز()</strong></p>
 <p>يقوم بإعداد كائن <strong>IndexParams</strong>.</p></li>
 <li><p><strong>إضافة_الفهرس()</strong></p>
 <p>يضيف تكوينات الفهرس إلى كائن <strong>IndexParams</strong>.</p>
@@ -193,7 +196,8 @@ client.createIndex(createIndexReq);
 <p>للفهرسة المخصصة، القيم الصالحة هي:</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (موصى به) يتكون الفهرس المقلوب من قاموس مصطلحات يحتوي على جميع الكلمات الرمزية مرتبة أبجديًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/scalar_index.md">الفهرس المقلوب</a>.</p></li>
-<li><p><strong>STL_SORT</strong>: يفرز الحقول العددية باستخدام خوارزمية فرز مكتبة القالب القياسية. يدعم فقط الحقول الرقمية (مثل INT8 و INT16 و INT32 و INT64 و FLOAT و DOUBLE).</p></li>
+<li><p><strong>BITMAP</strong>: نوع فهرس يخزن صورة نقطية لجميع القيم الفريدة في الحقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/bitmap.md">BITMAP</a>.</p></li>
+<li><p><strong>STL_SORT</strong>: فرز الحقول العددية باستخدام خوارزمية فرز مكتبة القالب القياسية. يدعم فقط الحقول الرقمية (مثل INT8 و INT16 و INT32 و INT64 و FLOAT و DOUBLE).</p></li>
 <li><p><strong>تري</strong>: بنية بيانات شجرية لعمليات البحث والاسترجاع السريع للبادئة. يدعم حقول VARCHAR.</p></li>
 </ul></li>
 <li><p><strong>اسم_الفهرس</strong><em>(سلسلة</em>)</p>
@@ -239,7 +243,7 @@ client.createIndex(createIndexReq);
 <li><strong>نوع_الفهرس</strong><em>(سلسلة</em>) نوع الفهرس القياسي المراد إنشاؤه. للفهرسة الضمنية، اتركها فارغة أو احذف هذه المعلمة. للفهرسة المخصصة، القيم الصالحة هي<ul>
 <li><strong>INVERTED</strong>: (موصى به) يتكون الفهرس المقلوب من قاموس مصطلحات يحتوي على جميع الكلمات الرمزية مرتبة أبجديًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/scalar_index.md">الفهرس المقلوب</a>.</li>
 <li><strong>STL_SORT</strong>: يفرز الحقول العددية باستخدام خوارزمية فرز مكتبة القالب القياسية. يدعم الحقول المنطقية والرقمية (مثل INT8 و INT16 و INT32 و INT64 و FLOAT و DOUBLE).</li>
-<li><strong>تري</strong>: بنية بيانات شجرية لعمليات البحث والاسترجاع السريع للبادئة. يدعم حقول VARCHAR.</li>
+<li><strong>تري</strong>: بنية بيانات شجرية لعمليات بحث واسترجاع سريعة للبادئة. يدعم حقول VARCHAR.</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -269,7 +273,7 @@ client.createIndex(createIndexReq);
 <p>استخدم الأسلوب <code translate="no">listIndexes()</code> للتحقق من إنشاء الفهارس العددية:</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">client.list_indexes(
     collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>  <span class="hljs-comment"># Specify the collection name</span>
 )
@@ -306,21 +310,3 @@ System.out.println(indexNames);
 <span class="hljs-comment">//     &quot;inverted_index&quot;</span>
 <span class="hljs-comment">// ]   </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">الحدود<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li>تدعم الفهرسة العددية حاليًا أنواع البيانات INT8 و INT16 و INT32 و INT64 و FLOAT و DOUBLE و BOOL و VARCHAR و ARRAY، ولكن ليس نوع بيانات JSON.</li>
-</ul>

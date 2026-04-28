@@ -37,10 +37,10 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>バイナリベクタは、複雑なオブジェクト（画像、テキスト、音声など）を固定長のバイナリ値にエンコードする方法です。Milvusでは、バイナリベクタは通常ビット配列またはバイト配列として表現されます。例えば、8次元のバイナリベクトルは<code translate="no">[1, 0, 1, 1, 0, 0, 1, 0]</code> のように表現できます。</p>
-<p>下の図は、バイナリ・ベクトルがテキスト・コンテンツ内のキーワードの存在をどのように表すかを示しています。この例では、10 次元のバイナリ・ベクトルを使用して 2 つの異なるテキスト<strong>（テキスト 1</strong>と<strong>テキスト 2</strong>）を表し、各次元が語彙内の単語に対応します。</p>
+<p>下の図は、バイナリ・ベクトルがテキスト・コンテンツ内のキーワードの存在をどのように表すかを示しています。この例では、10 次元のバイナリ・ベクトルを使用して、2 つの異なるテキスト<strong>（テキスト 1</strong>と<strong>テキスト 2</strong>）を表し、各次元は語彙内の単語に対応します。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
    </span> <span class="img-wrapper"> <span>バイナリ・ベクトル</span> </span></p>
 <p>バイナリ・ベクトルには、以下の特徴があります：</p>
 <ul>
@@ -53,7 +53,7 @@ summary: >-
 <p>2値ベクトル化後、データはmilvusに保存され、管理とベクトル検索ができる。下図は基本的なプロセスを示しています。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
    </span> <span class="img-wrapper"> <span>バイナリベクトルの使用</span> </span></p>
 <div class="alert note">
 <p>バイナリベクトルは特定のシナリオでは優れていますが、表現力に限界があり、複雑な意味的関係を捉えることが困難です。そのため、実世界のシナリオでは、効率と表現力のバランスをとるために、バイナリー・ベクターが他のベクター・タイプと一緒に使用されることがよくあります。詳細については、<a href="/docs/ja/dense-vector.md">密なベクトルと</a> <a href="/docs/ja/sparse_vector.md">疎なベクトルを</a>参照してください。</p>
@@ -73,7 +73,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">ベクトルフィールドの追加</h3><p>Milvusでバイナリベクタを使用するには、まずコレクションを作成する際にバイナリベクタを格納するためのベクタフィールドを定義します。このプロセスには以下が含まれます：</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">ベクトルフィールドの追加<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvusでバイナリベクトルを使用するには、まずコレクションを作成する際にバイナリベクトルを格納するためのベクトルフィールドを定義します。このプロセスには以下が含まれます：</p>
 <ol>
 <li><p><code translate="no">datatype</code> をサポートされるバイナリベクタデータ型、すなわち<code translate="no">BINARY_VECTOR</code> に設定する。</p></li>
 <li><p><code translate="no">dim</code> パラメータを使用して、ベクトルの次元を指定する。バイナリベクタは挿入時にバイト配列に変換する必要があるため、<code translate="no">dim</code> は 8 の倍数でなければならないことに注意。8個のブーリアン値（0または1）は、1バイトにパックされる。例えば、<code translate="no">dim=128</code> の場合、挿入には16バイトの配列が必要となる。</p></li>
@@ -191,7 +206,22 @@ schema.WithField(entity.NewField().
 
 <button class="copy-code-btn"></button></code></pre>
 <p>この例では、バイナリ・ベクトルを格納するために、<code translate="no">binary_vector</code> というベクトル・フィールドが追加されています。このフィールドのデータ型は<code translate="no">BINARY_VECTOR</code> で、次元は 128 です。</p>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">ベクトル・フィールドにインデックス・パラメータを設定する</h3><p>検索を高速化するには、バイナリ・ベクタ・フィールドにインデックスを作成する必要があります。インデックスを作成することで、大規模なベクトル・データの検索効率を大幅に向上させることができます。</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">ベクトル・フィールドにインデックス・パラメータを設定する<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>検索を高速化するには、バイナリ・ベクタ・フィールドにインデックスを作成する必要があります。インデックスを作成することで、大規模なベクトル・データの検索効率を大幅に向上させることができます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -239,7 +269,22 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <p>上の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、<code translate="no">binary_vector</code> フィールドに<code translate="no">binary_vector_index</code> という名前のインデックスが作成されている。<code translate="no">metric_type</code> は<code translate="no">HAMMING</code> に設定され、ハミング距離が類似性測定に使用されることを示している。</p>
 <p>Milvusはより良いベクトル検索を行うために様々なインデックスタイプを提供しています。AUTOINDEXはベクトル検索の学習曲線を滑らかにするために設計された特別なインデックスタイプです。様々なインデックスタイプを選択することができます。詳しくは<a href="/docs/ja/index-explained.md">インデックスの</a>説明をご覧ください。</p>
 <p>さらに、Milvusはバイナリベクトルの他の類似度メトリックもサポートしています。詳細は<a href="/docs/ja/metric.md">メトリックタイプを</a>参照してください。</p>
-<h3 id="Create-collection" class="common-anchor-header">コレクションの作成</h3><p>バイナリベクトルとインデックスの設定が完了したら、バイナリベクトルを含むコレクションを作成します。以下の例では、<code translate="no">create_collection</code> メソッドを使用して、<code translate="no">my_collection</code> という名前のコレクションを作成しています。</p>
+<h3 id="Create-collection" class="common-anchor-header">コレクションの作成<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>バイナリベクトルとインデックスの設定が完了したら、バイナリベクトルを含むコレクションを作成します。以下の例では、<code translate="no">create_collection</code> メソッドを使用して、<code translate="no">my_collection</code> という名前のコレクションを作成しています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -292,7 +337,22 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">データの挿入</h3><p>コレクションを作成した後、<code translate="no">insert</code> メソッドを使用して、バイナリ・ベク ターを含むデータを追加する。バイナリー・ベクターはバイト配列の形で提供する必要があり、各バイトは8つのブール値を表す。</p>
+<h3 id="Insert-data" class="common-anchor-header">データの挿入<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>コレクションを作成した後、<code translate="no">insert</code> メソッドを使用して、バイナリ・ベク ターを含むデータを追加する。バイナリ・ベクトルは、バイト配列の形式で提供されなければならない。</p>
 <p>例えば、128次元のバイナリー・ベクターの場合、16バイトの配列が必要です（128ビット÷8ビット/バイト＝16バイトなので）。以下は、データを挿入するためのコード例である：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -387,7 +447,22 @@ client.<span class="hljs-title function_">insert</span>({
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">類似検索の実行</h3><p>類似性検索はMilvusのコア機能の一つであり、ベクトル間の距離に基づいてクエリベクトルに最も類似したデータを素早く見つけることができます。バイナリベクトルを使って類似検索を行うには、クエリベクトルと検索パラメータを用意し、<code translate="no">search</code> メソッドを呼び出します。</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">類似検索の実行<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>類似性検索はMilvusのコア機能の一つであり、ベクトル間の距離に基づいてクエリベクトルに最も類似したデータを素早く見つけることができます。バイナリベクトルを使って類似検索を行うには、クエリベクトルと検索パラメータを用意し、<code translate="no">search</code> メソッドを呼び出します。</p>
 <p>検索操作では、バイナリ・ベクトルもバイト配列の形式で提供する必要がある。クエリ・ベクタの次元が<code translate="no">dim</code> の定義時に指定した次元と一致し、8 個のブーリアン値が 1 バイトに変換されることを確認してください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

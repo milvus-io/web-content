@@ -77,7 +77,7 @@ title: 為 Milvus 設定水平 Pod 自動擴充 (HPA)
 <p>在 Milvus 自訂資源 (CR) 中，針對要使用 HPA 擴充的元件，將<code translate="no">replicas</code> 欄位設定為<code translate="no">-1</code> 。這將縮放控制權下放到 HPA，而不是操作員。您可以直接編輯 CR 或使用下列<code translate="no">kubectl patch</code> 指令快速切換到 HPA 控制：</p>
 <pre><code translate="no" class="language-bash">kubectl patch milvus &lt;your-release-name&gt; --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;json&#x27;</span> -p=<span class="hljs-string">&#x27;[{&quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;/spec/components/proxy/replicas&quot;, &quot;value&quot;: -1}]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>將<code translate="no">&lt;your-release-name&gt;</code> 改為您的 Milvus 集群名稱。</p>
+<p>將<code translate="no">&lt;your-release-name&gt;</code> 改為您 Milvus 叢集的名稱。</p>
 <p>要驗證是否已套用變更，請執行：</p>
 <pre><code translate="no" class="language-bash">kubectl get milvus &lt;your-release-name&gt; -o jsonpath=<span class="hljs-string">&#x27;{.spec.components.proxy.replicas}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -144,11 +144,11 @@ title: 為 Milvus 設定水平 Pod 自動擴充 (HPA)
 <pre><code translate="no">NAME                          REFERENCE                            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>proxy<span class="hljs-operator">-</span>hpa   Deployment<span class="hljs-operator">/</span>my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>proxy   <span class="hljs-operator">&lt;</span><span class="hljs-keyword">some</span><span class="hljs-operator">&gt;</span><span class="hljs-operator">/</span><span class="hljs-number">60</span><span class="hljs-operator">%</span>      <span class="hljs-number">2</span>         <span class="hljs-number">10</span>        <span class="hljs-number">2</span>          <span class="hljs-operator">&lt;</span><span class="hljs-type">time</span><span class="hljs-operator">&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">NAME</code> 和<code translate="no">REFERENCE</code> 欄位會反映您的群集名稱 (例如：<code translate="no">&lt;your-release-name&gt;-milvus-proxy-hpa</code> 和<code translate="no">Deployment/&lt;your-release-name&gt;-milvus-proxy</code>)。</p></li>
+<p><code translate="no">NAME</code> 和<code translate="no">REFERENCE</code> 欄位將反映您的群集名稱 (例如：<code translate="no">&lt;your-release-name&gt;-milvus-proxy-hpa</code> 和<code translate="no">Deployment/&lt;your-release-name&gt;-milvus-proxy</code>)。</p></li>
 </ol>
 <ul>
 <li><code translate="no">scaleTargetRef</code>:指定要縮放的部署 (例如：<code translate="no">my-release-milvus-proxy</code>)。</li>
-<li><code translate="no">minReplicas</code> 和 : 設定縮放範圍 (本範例中為 2 到 10 個 Pod)。<code translate="no">maxReplicas</code></li>
+<li><code translate="no">minReplicas</code> 和<code translate="no">maxReplicas</code>: 設定縮放範圍 (本範例中為 2 到 10 個 Pod)。</li>
 <li><code translate="no">metrics</code>:設定基於 CPU 和記憶體使用率的擴充，目標是 60% 的平均使用率。</li>
 </ul>
 <h2 id="Conclusion" class="common-anchor-header">總結<button data-href="#Conclusion" class="anchor-icon" translate="no">

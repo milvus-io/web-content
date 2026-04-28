@@ -76,7 +76,7 @@ beta: Milvus v2.6.2+
     </button></h2><p>Diagram berikut ini menggambarkan alur kerja utama Boost Rankers.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
    </span> <span class="img-wrapper"> <span>Mekanisme Boost Ranker</span> </span></p>
 <p>Ketika Anda memasukkan data, Milvus mendistribusikannya ke seluruh segmen. Selama pencarian, setiap segmen mengembalikan sekumpulan kandidat, dan Milvus memberi peringkat pada kandidat dari semua segmen untuk menghasilkan hasil akhir. Ketika permintaan pencarian menyertakan Boost Ranker, Milvus menerapkannya pada hasil kandidat dari setiap segmen untuk mencegah potensi kehilangan presisi dan meningkatkan recall.</p>
 <p>Sebelum menyelesaikan hasil akhir, Milvus memproses kandidat-kandidat ini dengan Boost Ranker sebagai berikut:</p>
@@ -267,7 +267,7 @@ beta: Milvus v2.6.2+
 </tr>
 </table></p></li>
 <li><p><strong>Terapkan bobot yang ditentukan dalam Boost Ranker</strong> (<code translate="no">weight=0.5</code>).</p>
-<p>Semua entitas yang teridentifikasi pada langkah sebelumnya akan dikalikan dengan bobot yang ditentukan di Boost Ranker, sehingga menghasilkan perubahan pada peringkat mereka.</p>
+<p>Semua entitas yang teridentifikasi pada langkah sebelumnya akan dikalikan dengan bobot yang ditentukan dalam Boost Ranker, yang akan menghasilkan perubahan pada peringkat mereka.</p>
 <p><table>
 <tr>
 <th><p>ID</p></th>

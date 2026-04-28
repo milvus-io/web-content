@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>스파스 벡터는 정보 검색과 자연어 처리에서 표면 수준의 용어 일치를 포착하는 중요한 방법입니다. 고밀도 벡터는 의미 이해에 탁월하지만, 희소 벡터는 특히 특수 용어나 텍스트 식별자를 검색할 때 더 예측 가능한 일치 결과를 제공하는 경우가 많습니다.</p>
+    </button></h1><p>스파스 벡터는 정보 검색 및 자연어 처리에서 표면 수준의 용어 일치를 포착하는 중요한 방법입니다. 고밀도 벡터는 의미 이해에 탁월하지만, 희소 벡터는 특히 특수 용어나 텍스트 식별자를 검색할 때 더 예측 가능한 일치 결과를 제공하는 경우가 많습니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ summary: >-
     </button></h2><p>스파스 벡터는 대부분의 요소가 0이고 일부 차원만 0이 아닌 값을 갖는 특수한 고차원 벡터입니다. 아래 다이어그램에서 볼 수 있듯이 고밀도 벡터는 일반적으로 각 위치에 값이 있는 연속 배열로 표현됩니다(예: <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). 이와 대조적으로 희소 벡터는 0이 아닌 요소와 해당 차원의 인덱스만 저장하며, 종종 <code translate="no">{ index: value}</code> 의 키-값 쌍으로 표현됩니다(예: <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
    </span> <span class="img-wrapper"> <span>스파스 벡터 표현</span> </span></p>
 <p>토큰화 및 점수화를 통해 문서는 각 차원이 어휘의 특정 단어에 해당하는 단어 가방 벡터로 표현될 수 있습니다. 문서에 존재하는 단어만 0이 아닌 값을 가지므로 희소 벡터 표현이 생성됩니다. 스파스 벡터는 두 가지 접근 방식을 사용하여 생성할 수 있습니다:</p>
 <ul>
@@ -49,7 +49,7 @@ summary: >-
 <p>효율적인 검색을 위해 스파스 벡터와 원본 텍스트를 Milvus에 저장할 수 있습니다. 아래 다이어그램은 전체 프로세스를 간략하게 설명합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
    </span> <span class="img-wrapper"> <span>스파스 벡터 워크플로</span> </span></p>
 <div class="alert note">
 <p>밀버스는 스파스 벡터 외에도 고밀도 벡터와 바이너리 벡터도 지원합니다. 고밀도 벡터는 심층적인 의미 관계를 캡처하는 데 이상적이며, 이진 벡터는 빠른 유사도 비교 및 콘텐츠 중복 제거와 같은 시나리오에 탁월합니다. 자세한 내용은 <a href="/docs/ko/dense-vector.md">고밀도 벡터</a> 및 <a href="/docs/ko/binary-vector.md">바이너리 벡터를</a> 참조하세요.</p>

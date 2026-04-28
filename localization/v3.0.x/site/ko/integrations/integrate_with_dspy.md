@@ -53,7 +53,7 @@ title: Milvus와 DSPy 통합
       </svg>
     </button></h2><ul>
 <li>프로그래밍 접근 방식: DSPy는 단순히 LLM에 명령을 내리는 대신 파이프라인을 텍스트 변환 그래프로 추상화하여 LM 파이프라인 개발을 위한 체계적인 프로그래밍 접근 방식을 제공합니다. 선언적 모듈을 통해 구조화된 설계와 최적화가 가능하므로 기존 프롬프트 템플릿의 시행착오적인 방식을 대체할 수 있습니다.</li>
-<li>성능 향상: DSPy는 기존 방식에 비해 상당한 성능 향상을 보여줍니다. 사례 연구를 통해 표준 프롬프트 및 전문가가 만든 데모보다 성능이 뛰어나며, 더 작은 LM 모델로 컴파일했을 때도 그 다양성과 효율성을 보여줍니다.</li>
+<li>성능 향상: DSPy는 기존 방식에 비해 상당한 성능 향상을 보여줍니다. 사례 연구를 통해 표준 프롬프트 및 전문가가 만든 데모보다 성능이 뛰어나며, 더 작은 LM 모델에 컴파일된 경우에도 그 다양성과 효율성을 보여줍니다.</li>
 <li>모듈화된 추상화: DSPy는 분해, 미세 조정 및 모델 선택과 같은 LM 파이프라인 개발의 복잡한 측면을 효과적으로 추상화합니다. DSPy를 사용하면 간결한 프로그램을 GPT-4, Llama2-13b 또는 T5-base와 같은 다양한 모델에 대한 지침으로 원활하게 변환하여 개발을 간소화하고 성능을 향상시킬 수 있습니다.</li>
 </ul>
 <h2 id="Modules" class="common-anchor-header">모듈<button data-href="#Modules" class="anchor-icon" translate="no">
@@ -74,7 +74,7 @@ title: Milvus와 DSPy 통합
     </button></h2><p>LLM 파이프라인을 구성하는 데 기여하는 수많은 구성 요소가 있습니다. 여기에서는 DSPy의 작동 방식을 개략적으로 이해할 수 있도록 몇 가지 주요 구성 요소에 대해 설명합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
    </span> <span class="img-wrapper"> <span>DSPy 모듈</span> </span></p>
 <p>시그니처: DSPy의 시그니처는 모듈의 입출력 동작을 설명하는 선언적 사양으로, 작업 실행에서 언어 모델을 안내하는 역할을 합니다. 모듈: DSPy 모듈은 언어 모델(LM)을 활용하는 프로그램의 기본 구성 요소 역할을 합니다. 모듈은 연쇄 사고 또는 ReAct와 같은 다양한 프롬프트 기법을 추상화하며 모든 DSPy 서명을 처리하도록 조정할 수 있습니다. 학습 가능한 매개변수와 입력을 처리하고 출력을 생성하는 기능을 갖춘 이러한 모듈을 결합하여 더 큰 프로그램을 구성할 수 있으며, PyTorch의 NN 모듈에서 영감을 얻었지만 LM 애플리케이션에 맞게 조정되었습니다. 옵티마이저: DSPy의 최적화 도구는 프롬프트 및 LLM 가중치와 같은 DSPy 프로그램의 파라미터를 미세 조정하여 정확도와 같은 지정된 메트릭을 최대화하여 프로그램 효율성을 향상시킵니다.</p>
 <h2 id="Why-Milvus-in-DSPy" class="common-anchor-header">왜 밀버스가 필요한가?<button data-href="#Why-Milvus-in-DSPy" class="anchor-icon" translate="no">
@@ -108,14 +108,44 @@ title: Milvus와 DSPy 통합
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이제 DSPy에서 Milvus를 활용하여 RAG 애플리케이션을 최적화하는 방법을 보여주는 간단한 예제를 살펴보겠습니다.</p>
-<h3 id="Prerequisites" class="common-anchor-header">전제 조건</h3><p>RAG 앱을 빌드하기 전에 DSPy와 PyMilvus를 설치하세요.</p>
+    </button></h2><p>이제 간단한 예제를 통해 DSPy에서 Milvus를 활용하여 RAG 애플리케이션을 최적화하는 방법을 살펴보겠습니다.</p>
+<h3 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>RAG 앱을 빌드하기 전에 DSPy와 PyMilvus를 설치하세요.</p>
 <pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;dspy-ai[milvus]&quot;</span>
 $ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-Google Colab을 사용하는 경우 방금 설치한 의존성을 활성화하려면 **런타임을 다시 시작**해야 할 수 있습니다(화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택).</div>
-<h3 id="Loading-the-dataset" class="common-anchor-header">데이터 세트 로드하기</h3><p>이 예에서는 복잡한 질문-답변 쌍의 모음인 HotPotQA를 훈련 데이터셋으로 사용합니다. HotPotQA 클래스를 통해 로드할 수 있습니다.</p>
+Google Colab을 사용하는 경우 방금 설치한 종속성을 활성화하려면 **런타임을 다시 시작**해야 할 수 있습니다(화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택).</div>
+<h3 id="Loading-the-dataset" class="common-anchor-header">데이터 세트 로드하기<button data-href="#Loading-the-dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이 예에서는 복잡한 질문-답변 쌍의 모음인 HotPotQA를 훈련 데이터셋으로 사용합니다. HotPotQA 클래스를 통해 로드할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.datasets <span class="hljs-keyword">import</span> HotPotQA
 
 <span class="hljs-comment"># Load the dataset.</span>
@@ -127,7 +157,22 @@ dataset = HotPotQA(
 trainset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.train]
 devset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.dev]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">Milvus 벡터 데이터베이스로 데이터 수집하기</h3><p>벡터 검색을 위해 Milvus 컬렉션에 컨텍스트 정보를 수집합니다. 이 컬렉션에는 <code translate="no">embedding</code> 필드와 <code translate="no">text</code> 필드가 있어야 합니다. 이 경우 기본 쿼리 임베딩 함수로 OpenAI의 <code translate="no">text-embedding-3-small</code> 모델을 사용합니다.</p>
+<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">Milvus 벡터 데이터베이스로 데이터 수집하기<button data-href="#Ingest-data-into-the-Milvus-vector-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>벡터 검색을 위해 Milvus 컬렉션에 컨텍스트 정보를 수집합니다. 이 컬렉션에는 <code translate="no">embedding</code> 필드와 <code translate="no">text</code> 필드가 있어야 합니다. 이 경우 기본 쿼리 임베딩 함수로 OpenAI의 <code translate="no">text-embedding-3-small</code> 모델을 사용합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> os
 
@@ -170,7 +215,22 @@ text = requests.get(
         ],
     )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-MilvusRM" class="common-anchor-header">MilvusRM을 정의합니다.</h3><p>이제 MilvusRM을 정의해야 합니다.</p>
+<h3 id="Define-MilvusRM" class="common-anchor-header">MilvusRM을 정의합니다.<button data-href="#Define-MilvusRM" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이제 MilvusRM을 정의해야 합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.retrieve.milvus_rm <span class="hljs-keyword">import</span> MilvusRM
 <span class="hljs-keyword">import</span> dspy
 
@@ -183,7 +243,22 @@ retriever_model = MilvusRM(
 turbo = dspy.OpenAI(model=<span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>)
 dspy.settings.configure(lm=turbo)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Building-signatures" class="common-anchor-header">서명 구축</h3><p>이제 데이터를 로드했으므로 파이프라인의 하위 작업에 대한 시그니처를 정의해 보겠습니다. 간단한 입력 <code translate="no">question</code> 과 출력 <code translate="no">answer</code> 을 식별할 수 있지만, 우리는 RAG 파이프라인을 구축하고 있으므로 Milvus에서 컨텍스트 정보를 검색할 것입니다. 따라서 서명을 <code translate="no">context, question --&gt; answer</code> 로 정의해 보겠습니다.</p>
+<h3 id="Building-signatures" class="common-anchor-header">서명 구축<button data-href="#Building-signatures" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이제 데이터를 로드했으므로 파이프라인의 하위 작업에 대한 시그니처를 정의해 보겠습니다. 간단한 입력 <code translate="no">question</code> 과 출력 <code translate="no">answer</code> 을 식별할 수 있지만, 우리는 RAG 파이프라인을 구축하고 있으므로 Milvus에서 컨텍스트 정보를 검색할 것입니다. 따라서 서명을 <code translate="no">context, question --&gt; answer</code> 로 정의해 보겠습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">GenerateAnswer</span>(dspy.Signature):
     <span class="hljs-string">&quot;&quot;&quot;Answer questions with short factoid answers.&quot;&quot;&quot;</span>
 
@@ -192,7 +267,22 @@ dspy.settings.configure(lm=turbo)
     answer = dspy.OutputField(desc=<span class="hljs-string">&quot;often between 1 and 5 words&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">context</code> 및 <code translate="no">answer</code> 필드에 대한 간단한 설명을 추가하여 모델이 수신하고 생성할 내용에 대한 보다 명확한 지침을 정의합니다.</p>
-<h3 id="Building-the-pipeline" class="common-anchor-header">파이프라인 구축하기</h3><p>이제 RAG 파이프라인을 정의해 보겠습니다.</p>
+<h3 id="Building-the-pipeline" class="common-anchor-header">파이프라인 구축하기<button data-href="#Building-the-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이제 RAG 파이프라인을 정의해 보겠습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">RAG</span>(dspy.Module):
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, rm</span>):
         <span class="hljs-built_in">super</span>().__init__()
@@ -210,7 +300,22 @@ dspy.settings.configure(lm=turbo)
             context=[item.long_text <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> context], answer=prediction.answer
         )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Executing-the-pipeline-and-getting-the-results" class="common-anchor-header">파이프라인 실행 및 결과 가져오기</h3><p>이제 RAG 파이프라인을 구축했습니다. 이제 실행하여 결과를 확인해 보겠습니다.</p>
+<h3 id="Executing-the-pipeline-and-getting-the-results" class="common-anchor-header">파이프라인 실행 및 결과 가져오기<button data-href="#Executing-the-pipeline-and-getting-the-results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이제 RAG 파이프라인을 구축했습니다. 이제 실행하여 결과를 확인해 보겠습니다.</p>
 <pre><code translate="no" class="language-python">rag = RAG(retriever_model)
 <span class="hljs-built_in">print</span>(rag(<span class="hljs-string">&quot;who write At My Window&quot;</span>).answer)
 <button class="copy-code-btn"></button></code></pre>
@@ -228,7 +333,22 @@ metric = dspy.evaluate.answer_exact_match
 score = evaluate_on_hotpotqa(rag, metric=metric)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;rag:&quot;</span>, score)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optimizing-the-pipeline" class="common-anchor-header">파이프라인 최적화하기</h3><p>이 프로그램을 정의한 후 다음 단계는 컴파일입니다. 이 프로세스는 성능을 향상시키기 위해 각 모듈 내의 매개변수를 업데이트합니다. 컴파일 프로세스는 세 가지 중요한 요소에 따라 달라집니다:</p>
+<h3 id="Optimizing-the-pipeline" class="common-anchor-header">파이프라인 최적화하기<button data-href="#Optimizing-the-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이 프로그램을 정의한 후 다음 단계는 컴파일입니다. 이 프로세스는 성능을 향상시키기 위해 각 모듈 내의 매개변수를 업데이트합니다. 컴파일 프로세스는 세 가지 중요한 요소에 따라 달라집니다:</p>
 <ul>
 <li>훈련 세트: 이 데모에서는 학습 데이터 세트의 20개 질문-답변 예시를 활용하겠습니다.</li>
 <li>검증 메트릭: 간단한 <code translate="no">validate_context_and_answer</code> 메트릭을 설정합니다. 이 메트릭은 예측된 답변의 정확성을 검증하고 검색된 컨텍스트에 해당 답변이 포함되어 있는지 확인합니다.</li>

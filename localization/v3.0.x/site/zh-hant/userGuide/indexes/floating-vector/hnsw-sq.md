@@ -71,7 +71,7 @@ summary: >-
       </svg>
     </button></h3><p>SQ 是一種壓縮向量的方法，用較少的位元來表示向量。舉例來說：</p>
 <ul>
-<li><p><strong>SQ8</strong>使用 8 位元，將值映射為 256 層。  如需詳細資訊，請參閱<a href="/docs/zh-hant/ivf-sq8.md#SQ8">IVF_SQ8</a>。</p></li>
+<li><p><strong>SQ8</strong>使用 8 位元，將值映射成 256 層。  如需詳細資訊，請參閱<a href="/docs/zh-hant/ivf-sq8.md#SQ8">IVF_SQ8</a>。</p></li>
 <li><p><strong>SQ6</strong>使用 6 位元來表示每個浮點值，因此有 64 個離散的層級。</p></li>
 </ul>
 <p>
@@ -102,7 +102,7 @@ summary: >-
 </ol>
 <p><strong>效能優勢：</strong></p>
 <ul>
-<li><p><strong>8 倍壓縮率：</strong>與<code translate="no">FP32</code> 相比，可縮小 8 倍，與<code translate="no">SQ8</code> 相比，可縮小 2 倍，大幅降低記憶體頻寬壓力 - 這通常是向量搜尋的瓶頸。</p></li>
+<li><p><strong>8 倍壓縮比：</strong>與<code translate="no">FP32</code> 相比，可縮小 8 倍，與<code translate="no">SQ8</code> 相比，可縮小 2 倍，大幅降低記憶體頻寬壓力 - 這通常是向量搜尋的瓶頸。</p></li>
 <li><p><strong>SIMD 最佳化：</strong>緊湊的結構允許現代 CPU (AVX2/AVX-512) 在每個週期處理更多維度。最重要的是，全局參數的使用消除了在計算距離期間載入不同標度/偏移值的需要，使指令流水線保持完全飽和。</p></li>
 <li><p><strong>快取記憶體效率：</strong>較小的向量尺寸意味著 CPU 快取記憶體可容納更多資料，減少存取記憶體所造成的延遲。</p></li>
 </ul>
@@ -128,7 +128,7 @@ summary: >-
 <ol>
 <li><p><strong>資料壓縮：</strong>SQ 會使用<code translate="no">sq_type</code> (例如 SQ6 或 SQ8) 來壓縮向量，以減少記憶體使用量。這種壓縮可能會降低精確度，但卻能讓系統處理更大的資料集。</p></li>
 <li><p><strong>圖形建構：</strong>壓縮向量用於建立 HNSW 圖形。由於資料已壓縮，因此產生的圖形更小、搜尋速度更快。</p></li>
-<li><p><strong>候選檢索：</strong>當提供查詢向量時，演算法會使用壓縮資料從 HNSW 圖中快速找出候選鄰居。</p></li>
+<li><p><strong>候選擷取：</strong>當提供查詢向量時，演算法會使用壓縮資料從 HNSW 圖中快速找出候選鄰居。</p></li>
 <li><p><strong>(可選）結果精進：</strong>初始候選結果可以根據下列參數進行精煉，以獲得更高的精確度：</p>
 <ul>
 <li><p><code translate="no">refine</code>:控制是否啟動此精煉步驟。當設定為<code translate="no">true</code> 時，系統會使用更高精度或未壓縮的表示法重新計算距離。</p></li>

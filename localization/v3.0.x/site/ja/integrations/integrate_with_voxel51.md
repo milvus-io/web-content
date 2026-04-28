@@ -389,7 +389,7 @@ milvus_index = fob.compute_similarity(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Manage-brain-runs" class="common-anchor-header">ブレイン・ランの管理<button data-href="#Manage-brain-runs" class="anchor-icon" translate="no">
+<h2 id="Manage-brain-runs" class="common-anchor-header">ブレイン実行の管理<button data-href="#Manage-brain-runs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

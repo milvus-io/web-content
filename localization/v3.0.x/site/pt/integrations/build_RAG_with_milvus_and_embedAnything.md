@@ -31,10 +31,10 @@ title: Construindo RAG com Milvus e EmbedAnything
         ></path>
       </svg>
     </button></h1><p><a href="https://github.com/StarlightSearch/EmbedAnything">O EmbedAnything</a> é um pipeline de incorporação leve e extremamente rápido, construído em Rust, que suporta texto, PDFs, imagens, áudio e muito mais.</p>
-<p>Neste tutorial, demonstraremos como construir um pipeline Retrieval-Augmented Generation (RAG) usando o EmbedAnything junto com o <a href="https://milvus.io">Milvus</a>. Em vez de se acoplar firmemente a qualquer banco de dados específico, o EmbedAnything usa um sistema <strong>de adaptador</strong> plugável - os adaptadores servem como invólucros que definem como os embeddings são formatados, indexados e armazenados no armazenamento de vetor de destino.</p>
+<p>Neste tutorial, demonstraremos como construir um pipeline Retrieval-Augmented Generation (RAG) usando o EmbedAnything junto com o <a href="https://milvus.io">Milvus</a>. Em vez de se acoplar firmemente a qualquer banco de dados específico, o EmbedAnything usa um sistema de <strong>adaptador</strong> plugável - os adaptadores servem como invólucros que definem como os embeddings são formatados, indexados e armazenados no armazenamento de vetor de destino.</p>
 <p>Ao emparelhar o EmbedAnything com um adaptador Milvus, pode gerar embeddings a partir de diversos tipos de ficheiros e armazená-los eficientemente no Milvus em apenas algumas linhas de código.</p>
 <blockquote>
-<p>⚠️ Nota: Embora o adaptador no EmbedAnything lide com a inserção no Milvus, ele não suporta a pesquisa fora da caixa. Para construir um pipeline RAG completo, terá também de instanciar um MilvusClient separadamente e implementar a lógica de recuperação (por exemplo, pesquisa por semelhança em vectores) como parte da sua aplicação.</p>
+<p>⚠️ Nota: Embora o adaptador do EmbedAnything lide com a inserção no Milvus, ele não suporta a pesquisa imediata. Para construir um pipeline RAG completo, terá também de instanciar um MilvusClient separadamente e implementar a lógica de recuperação (por exemplo, pesquisa por semelhança em vectores) como parte da sua aplicação.</p>
 </blockquote>
 <h2 id="Preparation" class="common-anchor-header">Preparação<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -98,7 +98,7 @@ sys.path.append(<span class="hljs-string">&quot;EmbedAnything/examples/adapters&
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">✅ EmbedAnything cloned and adapter path added.
 </code></pre>
-<p>Utilizaremos o OpenAI como LLM neste pipeline RAG. Deve preparar a <a href="https://platform.openai.com/docs/quickstart">chave api</a> <code translate="no">OPENAI_API_KEY</code> como uma variável de ambiente.</p>
+<p>Iremos utilizar o OpenAI como LLM neste pipeline RAG. Deve preparar a <a href="https://platform.openai.com/docs/quickstart">chave api</a> <code translate="no">OPENAI_API_KEY</code> como uma variável de ambiente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 

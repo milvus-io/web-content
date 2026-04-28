@@ -84,7 +84,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Hnsw Prq</span> </span></p>
 <ol>
 <li><p><strong>Produktquantisierung (PQ)</strong></p>
-<p>In dieser Phase wird der ursprüngliche Vektor in kleinere Untervektoren unterteilt, und jeder Untervektor wird auf den nächstgelegenen Schwerpunkt in einem gelernten Codebuch abgebildet. Diese Zuordnung reduziert die Datengröße erheblich, führt aber zu Rundungsfehlern, da jeder Untervektor durch einen einzigen Schwerpunkt approximiert wird. Weitere Einzelheiten finden Sie unter <a href="/docs/de/ivf-pq.md#PQ">IVF_PQ</a>.</p></li>
+<p>In dieser Phase wird der ursprüngliche Vektor in kleinere Untervektoren unterteilt, und jeder Untervektor wird auf den nächstgelegenen Schwerpunkt in einem gelernten Codebuch abgebildet. Durch diese Zuordnung wird die Datengröße erheblich reduziert, aber es treten Rundungsfehler auf, da jeder Untervektor durch einen einzigen Schwerpunkt approximiert wird. Weitere Einzelheiten finden Sie unter <a href="/docs/de/ivf-pq.md#PQ">IVF_PQ</a>.</p></li>
 <li><p><strong>Restquantisierung (RQ)</strong></p>
 <p>Nach der PQ-Phase quantisiert RQ den Rest - die Differenz zwischen dem ursprünglichen Vektor und seiner PQ-basierten Approximation - unter Verwendung zusätzlicher Codebücher. Da dieses Residuum in der Regel sehr viel kleiner ist, kann es präziser kodiert werden, ohne dass der Speicherplatz stark zunimmt.</p>
 <p>Der Parameter <code translate="no">nrq</code> bestimmt, wie oft dieses Residuum iterativ quantisiert wird, so dass Sie das Gleichgewicht zwischen Kompressionseffizienz und Genauigkeit fein abstimmen können.</p></li>
@@ -109,7 +109,7 @@ summary: >-
     </button></h3><p>Durch die Kombination von HNSW und PRQ behält <strong>HNSW_PRQ</strong> die schnelle graphbasierte Suche von HNSW bei und nutzt gleichzeitig die Vorteile der mehrstufigen Komprimierung von PRQ. Der Arbeitsablauf sieht wie folgt aus:</p>
 <ol>
 <li><p><strong>Datenkomprimierung:</strong> Jeder Vektor wird zunächst über PQ in eine grobe Darstellung transformiert, und dann werden die Residuen über RQ zur weiteren Verfeinerung quantisiert. Das Ergebnis ist eine Reihe von kompakten Codes, die jeden Vektor repräsentieren.</p></li>
-<li><p><strong>Graphische Konstruktion:</strong> Die komprimierten Vektoren (einschließlich der PQ- und RQ-Codes) bilden die Grundlage für den Aufbau des HNSW-Graphen. Da die Daten in einer kompakten Form gespeichert sind, benötigt der Graph weniger Speicherplatz und die Navigation durch ihn wird beschleunigt.</p></li>
+<li><p><strong>Graphische Konstruktion:</strong> Die komprimierten Vektoren (einschließlich der PQ- und RQ-Codes) bilden die Grundlage für den Aufbau des HNSW-Graphen. Da die Daten in einer kompakten Form gespeichert werden, benötigt der Graph weniger Speicherplatz und die Navigation durch ihn wird beschleunigt.</p></li>
 <li><p><strong>Abruf von Kandidaten:</strong> Bei der Suche verwendet HNSW die komprimierten Darstellungen, um den Graphen zu durchlaufen und einen Pool von Kandidaten zu finden. Dadurch wird die Anzahl der zu berücksichtigenden Vektoren drastisch reduziert.</p></li>
 <li><p><strong>(Optional) Verfeinerung der Ergebnisse:</strong> Die anfänglichen Kandidatenergebnisse können zur Verbesserung der Genauigkeit auf der Grundlage der folgenden Parameter verfeinert werden:</p>
 <ul>
@@ -281,12 +281,12 @@ res = MilvusClient.search(
      <td><p>Legt fest, wie viele Restunterquantisierer in der RQ-Stufe verwendet werden. Mit mehr Unterquantisierern wird möglicherweise eine stärkere Komprimierung erreicht, aber es kann zu einem größeren Informationsverlust kommen.</p></td>
      <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, 16]</p>
 <p><strong>Standardwert</strong>: <code translate="no">2</code></p></td>
-     <td><p>Ein höherer Wert von <code translate="no">nrq</code> ermöglicht zusätzliche Subquantisierungsschritte, was zu einer präziseren Rekonstruktion der ursprünglichen Vektoren führen kann. Allerdings bedeutet dies auch, dass mehr Subquantisierer gespeichert und berechnet werden müssen, was zu einer größeren Indexgröße und einem höheren Rechenaufwand führt.</p></td>
+     <td><p>Ein höherer Wert von <code translate="no">nrq</code> erlaubt zusätzliche Subquantisierungsschritte, was zu einer präziseren Rekonstruktion der ursprünglichen Vektoren führen kann. Allerdings bedeutet dies auch, dass mehr Subquantisierer gespeichert und berechnet werden müssen, was zu einer größeren Indexgröße und einem höheren Rechenaufwand führt.</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine</code></p></td>
-     <td><p>Ein boolesches Flag, das steuert, ob während der Suche ein Verfeinerungsschritt angewendet wird. Bei der Verfeinerung werden die ursprünglichen Ergebnisse neu geordnet, indem die genauen Abstände zwischen dem Abfragevektor und den Kandidaten berechnet werden.</p></td>
+     <td><p>Ein boolesches Flag, das steuert, ob ein Verfeinerungsschritt während der Suche angewendet wird. Bei der Verfeinerung werden die ursprünglichen Ergebnisse neu geordnet, indem die genauen Abstände zwischen dem Abfragevektor und den Kandidaten berechnet werden.</p></td>
      <td><p><strong>Typ</strong>: Boolean <strong>Bereich</strong>: [<code translate="no">true</code>, <code translate="no">false</code>]</p>
 <p><strong>Standardwert</strong>: <code translate="no">false</code></p></td>
      <td><p>Setzen Sie <code translate="no">true</code>, wenn hohe Genauigkeit wichtig ist und Sie etwas langsamere Suchzeiten tolerieren können. Verwenden Sie <code translate="no">false</code>, wenn Geschwindigkeit eine Priorität ist und ein kleiner Kompromiss bei der Genauigkeit akzeptabel ist.</p></td>
@@ -332,7 +332,7 @@ res = MilvusClient.search(
      <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Standardwert</strong>: <em>limit</em> (TopK nächste Nachbarn, die zurückgegeben werden)</p></td>
      <td><p>Eine größere <code translate="no">ef</code> führt im Allgemeinen zu einer <strong>höheren Suchgenauigkeit</strong>, da mehr potenzielle Nachbarn berücksichtigt werden. Allerdings <strong>erhöht sich</strong> dadurch auch <strong>die Suchzeit</strong>. <code translate="no">ef</code> sollte erhöht werden, wenn eine hohe Wiederfindungsrate entscheidend ist und die Suchgeschwindigkeit weniger wichtig ist.</p>
-<p>Ziehen Sie in Erwägung, <code translate="no">ef</code> zu verringern, um schnelleren Suchen den Vorzug zu geben, insbesondere in Szenarien, in denen eine leichte Verringerung der Genauigkeit akzeptabel ist.</p>
+<p>Ziehen Sie in Erwägung, <code translate="no">ef</code> zu verringern, um schnelleren Suchen den Vorrang zu geben, insbesondere in Szenarien, in denen eine leichte Verringerung der Genauigkeit akzeptabel ist.</p>
 <p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs zu wählen: [K, 10K].</p></td>
    </tr>
    <tr>

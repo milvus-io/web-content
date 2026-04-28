@@ -22,6 +22,9 @@ title: Indexar campos vectoriales
         ></path>
       </svg>
     </button></h1><p>Esta guía le guiará a través de las operaciones básicas de creación y gestión de índices en campos vectoriales de una colección.</p>
+<div class="alert warning">
+<p>Esta página está obsoleta. Para la última implementación, consulte <a href="/docs/es/ivf-flat.md">IVF_FLAT</a>, <a href="/docs/es/hnsw.md">HNSW</a>, etc.</p>
+</div>
 <h2 id="Overview" class="common-anchor-header">Visión general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,10 +87,19 @@ title: Indexar campos vectoriales
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky"><ul><li>SPARSE_INVERTED_INDEX</li><li>VARA_ESPARAZ</li></ul></td>
+    <td class="tg-0pky">ÍNDICE_ESPARCIDO_INVERTIDO</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td class="tg-0pky">BM25</td>
+    <td class="tg-0pky">ÍNDICE_ESPARCIDO_INVERTIDO</td>
   </tr>
 </tbody>
 </table>
+<div class="alert note">
+<p>A partir de Milvus 2.5.4, <code translate="no">SPARSE_WAND</code> queda obsoleto. En su lugar, se recomienda utilizar <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> por equivalencia manteniendo la compatibilidad. Para más información, consulte <a href="/docs/es/sparse_vector.md#Set-index-params-for-vector-field">Vector disperso</a>.</p>
+</div>
 </div>
 <p>Se recomienda crear índices tanto para el campo vectorial como para los campos escalares a los que se accede con frecuencia.</p>
 <h2 id="Preparations" class="common-anchor-header">Preparativos<button data-href="#Preparations" class="anchor-icon" translate="no">
@@ -118,7 +130,7 @@ title: Indexar campos vectoriales
 <p>Para preparar la indexación, utilice <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> para conectarse al servidor Milvus y configurar una colección utilizando <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>y <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>Para preparar la indexación, utilice <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> para conectarse al servidor Milvus y configurar una colección utilizando <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>Para preparar la indexación, utilice <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> para conectarse al servidor Milvus y crear una colección utilizando <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>

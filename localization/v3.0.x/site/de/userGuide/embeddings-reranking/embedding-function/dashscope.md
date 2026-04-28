@@ -42,7 +42,7 @@ beta: Milvus 2.6.x
    <tr>
      <th><p>Modell Name</p></th>
      <th><p>Abmessungen</p></th>
-     <th><p>Maximale Token pro Zeile</p></th>
+     <th><p>Max. Token pro Zeile</p></th>
      <th><p>Unterstützte Sprachen</p></th>
    </tr>
    <tr>
@@ -107,7 +107,7 @@ beta: Milvus 2.6.x
     </button></h3><p>Bewahren Sie Ihre API-Schlüssel in <code translate="no">milvus.yaml</code> auf; Milvus liest sie beim Start und setzt jede Umgebungsvariable für denselben Anbieter außer Kraft.</p>
 <ol>
 <li><p>**Deklarieren Sie Ihre Schlüssel unter <code translate="no">credential:</code></p>
-<p>Sie können einen oder mehrere API-Schlüssel auflisten - geben Sie jedem einen Namen, den Sie erfinden und später referenzieren werden.</p>
+<p>Sie können einen oder mehrere API-Schlüssel auflisten - geben Sie jedem einen Namen, den Sie selbst erfinden und später referenzieren werden.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">apikey_dev:</span>            <span class="hljs-comment"># dev environment</span>

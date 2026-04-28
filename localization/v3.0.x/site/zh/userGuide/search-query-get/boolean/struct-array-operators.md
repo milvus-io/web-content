@@ -19,8 +19,8 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>实体中的结构数组或结构数组（StructArray）存储了一组有序的结构元素。数组中的每个 Struct 都共享相同的预定义 Schema，其中包括多个向量和标量字段。当对 Struct 中的标量子字段进行索引时，可以使用<strong>匹配系列中的</strong> <strong>元素过滤器</strong>和<strong>操作符</strong>对其执行标量过滤。</p>
-<p>元素过滤器会选择在 StructArray 字段中至少包含一个与指定谓词匹配的值的实体。相比之下，匹配族操作符用于查找在符合指定谓词的结构数组字段中包含特定数量或比例值的实体。</p>
+    </button></h1><p>实体中的结构数组（或 StructArray）存储了一组有序的结构元素。数组中的每个 Struct 都共享相同的预定义 Schema，其中包括多个向量和标量字段。当对 Struct 中的标量子字段进行索引时，可以使用<strong>匹配系列中的</strong> <strong>元素过滤器</strong>和<strong>操作符</strong>对其执行标量过滤。</p>
+<p>元素过滤器会选择在 StructArray 字段中至少包含一个与指定谓词匹配的值的实体。相比之下，匹配族操作符用于查找在符合指定谓词的 StructArray 字段中包含特定数量或比例值的实体。</p>
 <div class="alert note">
 <p>在针对<code translate="no">$[subField]</code> 构建谓词时，如果要处理大规模数据集，请确保对子字段进行索引，因为这些操作符需要为每个候选实体遍历数组元素。</p>
 </div>
@@ -72,7 +72,7 @@ element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; 
 <li><p><a href="/docs/zh/struct-array-operators.md#MATCHALL"><code translate="no">MATCH_ALL(identifier, predicate)</code></a>Red：返回所有分块的文本子字段都以 "Red "开头的实体。</p></li>
 <li><p><a href="/docs/zh/struct-array-operators.md#MATCHLEAST"><code translate="no">MATCH_LEAST(identifier, predicate, k)</code></a><code translate="no">k</code> ：返回至少包含<code translate="no">text</code> 子字段中以 "Red "开头的块的实体。</p></li>
 <li><p><a href="/docs/zh/struct-array-operators.md#MATCHMOST"><code translate="no">MATCH_MOST(identifier, predicate, k)</code></a>RED：返回在<code translate="no">text</code> 子字段中最多包含以 "Red "开头的<code translate="no">k</code> 块的实体。</p></li>
-<li><p><a href="/docs/zh/struct-array-operators.md#MATCHEXACT"><code translate="no">MATCH_EXACT(identifier, predicate, k)</code></a>MATCH_ANY ：返回在<code translate="no">text</code> 子字段中恰好包含以 "Red "开头的<code translate="no">k</code> 块的实体。</p></li>
+<li><p><a href="/docs/zh/struct-array-operators.md#MATCHEXACT"><code translate="no">MATCH_EXACT(identifier, predicate, k)</code></a>MATCH_ANY：返回在<code translate="no">text</code> 子字段中恰好包含以 "Red "开头的<code translate="no">k</code> 块的实体。</p></li>
 </ul>
 <h3 id="MATCHANY" class="common-anchor-header">MATCH_ANY<button data-href="#MATCHANY" class="anchor-icon" translate="no">
       <svg translate="no"

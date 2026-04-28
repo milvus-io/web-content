@@ -80,7 +80,7 @@ summary: >-
 <li><p><code translate="no">price</code>float データを格納し、NULL 値を許可しますが、デフォルト値はありません。</p></li>
 </ul>
 <div class="alert note">
-<p>スキーマ定義時に<code translate="no">enable_dynamic_fields=True</code> を設定すると、milvusは事前に定義されていないスカラーフィールドを挿入することができます。しかし、これによりクエリや管理が複雑になり、パフォーマンスに影響を与える可能性があります。詳細については、<a href="/docs/ja/enable-dynamic-field.md">動的フィールドを</a>参照してください。</p>
+<p>スキーマ定義時に<code translate="no">enable_dynamic_fields=True</code> を設定すると、milvusは事前に定義されていないスカラーフィールドを挿入することができます。ただし、これによりクエリや管理が複雑になり、パフォーマンスに影響を与える可能性があります。詳細については、<a href="/docs/ja/enable-dynamic-field.md">動的フィールドを</a>参照してください。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -503,7 +503,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>エンティティの挿入後、<code translate="no">query</code> メソッドを使用して、指定されたフィルタ式に一致するエンティティを取得します。</p>
+    </button></h2><p>エンティティの挿入後、<code translate="no">query</code> メソッドを使用して、指定されたフィルター式に一致するエンティティを取得します。</p>
 <p><code translate="no">age</code> が 30 より大きいエンティティを取得する：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -835,4 +835,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:35,&quot;distance&quot;:-0.19054288,&quot;id&quot;:3,&quot;price&quot;:199.99},{&quot;age&quot;:30,&quot;distance&quot;:-0.20163085,&quot;id&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:25,&quot;distance&quot;:-0.2364331,&quot;id&quot;:1,&quot;price&quot;:99.99}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、まずクエリー・ベクターを定義し、検索中にフィルター条件（<code translate="no">25 &lt;= age &lt;= 35</code> ）を追加します。これにより、検索結果がクエリ・ベクトルに類似しているだけでなく、指定された年齢範囲も満たすようになります。詳細については、<a href="/docs/ja/filtering">フィルタリングを</a>参照してください。</p>
+<p>この例では、まずクエリー・ベクターを定義し、検索中にフィルター条件（<code translate="no">25 &lt;= age &lt;= 35</code> ）を追加します。これにより、検索結果がクエリーベクトルに類似しているだけでなく、指定された年齢範囲も満たすようになります。詳細については、<a href="/docs/ja/filtering">フィルタリングを</a>参照してください。</p>

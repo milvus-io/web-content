@@ -17,7 +17,7 @@ title: Настройка журналов доступа
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Функция журнала доступа в Milvus позволяет менеджерам серверов записывать и анализировать поведение пользователей при доступе, помогая понять такие аспекты, как частота успешных запросов и причины отказов.</p>
+    </button></h1><p>Функция журнала доступа в Milvus позволяет менеджерам сервера записывать и анализировать поведение пользователей при доступе, помогая понять такие аспекты, как частота успешных запросов и причины отказов.</p>
 <p>В этом руководстве приведены подробные инструкции по настройке журналов доступа в Milvus.</p>
 <p>Конфигурация журналов доступа зависит от метода установки Milvus:</p>
 <ul>
@@ -46,7 +46,22 @@ title: Настройка журналов доступа
 <li><strong>Конфигурация для файлов журналов локального доступа</strong>: Для локального хранения журналов.</li>
 <li><strong>Конфигурация для загрузки локальных журналов доступа в MinIO</strong>: Для облачного хранения и резервного копирования.</li>
 </ul>
-<h3 id="Base-config" class="common-anchor-header">Базовая конфигурация</h3><p>Базовая конфигурация включает в себя включение журналов доступа и определение имени файла журнала или использование stdout.</p>
+<h3 id="Base-config" class="common-anchor-header">Базовая конфигурация<button data-href="#Base-config" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Базовая конфигурация включает в себя включение журналов доступа и определение имени файла журнала или использование stdout.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -58,7 +73,22 @@ title: Настройка журналов доступа
 <li><code translate="no">proxy.accessLog.enable</code>: Включать ли функцию журнала доступа. По умолчанию <strong>false</strong>.</li>
 <li><code translate="no">proxy.accessLog.filename</code>: Имя файла журнала доступа. Если оставить этот параметр пустым, журналы доступа будут выводиться в stdout.</li>
 </ul>
-<h3 id="Config-for-local-access-log-files" class="common-anchor-header">Настройка локальных файлов журнала доступа</h3><p>Настройка локального хранения файлов журнала доступа с параметрами, включающими путь к локальному файлу, размер файла и интервал ротации:</p>
+<h3 id="Config-for-local-access-log-files" class="common-anchor-header">Настройка локальных файлов журнала доступа<button data-href="#Config-for-local-access-log-files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Настройка локального хранения файлов журнала доступа с параметрами, включающими путь к локальному файлу, размер файла и интервал ротации:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -74,9 +104,24 @@ title: Настройка журналов доступа
 <li><code translate="no">proxy.accessLog.localPath</code>: Путь к локальному файлу, где хранится файл журнала доступа.</li>
 <li><code translate="no">proxy.accessLog.maxSize</code>: : Максимальный размер в МБ, допустимый для одного файла журнала доступа. Если размер файла журнала достигнет этого предела, будет запущен процесс ротации. Этот процесс запечатывает текущий файл журнала доступа, создает новый файл журнала и очищает содержимое исходного файла журнала.</li>
 <li><code translate="no">proxy.accessLog.rotatedTime</code>: Максимальный интервал времени в секундах, допустимый для ротации одного файла журнала доступа. По достижении указанного интервала времени запускается процесс ротации, в результате которого создается новый файл журнала доступа и запечатывается предыдущий.</li>
-<li><code translate="no">proxy.accessLog.maxBackups</code>: Максимальное количество опечатанных файлов журнала доступа, которое может быть сохранено. Если количество опечатанных файлов журнала доступа превысит этот предел, самый старый из них будет удален.</li>
+<li><code translate="no">proxy.accessLog.maxBackups</code>: Максимальное количество опечатанных файлов журнала доступа, которые могут быть сохранены. Если количество опечатанных файлов журнала доступа превысит этот предел, самый старый из них будет удален.</li>
 </ul>
-<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">Настройка выгрузки локальных файлов журналов доступа в MinIO</h3><p>Включите и настройте параметры для загрузки локальных файлов журналов доступа в MinIO:</p>
+<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">Настройка выгрузки локальных файлов журналов доступа в MinIO<button data-href="#Config-for-uploading-local-access-log-files-to-MinIO" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Включите и настройте параметры для загрузки локальных файлов журналов доступа в MinIO:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>

@@ -480,7 +480,7 @@ Doc 2: [&#x27;my second test doc. {Milvus} is an open-source vector database&#x2
     </button></h3><p>Cuando se realizan búsquedas con varias consultas en la búsqueda de texto completo BM25, los resultados de cada consulta se resaltan de forma independiente. Los resultados de la primera consulta contienen los términos buscados, los de la segunda los términos buscados, y así sucesivamente. Cada consulta utiliza la misma configuración <code translate="no">highlighter</code> pero la aplica de forma independiente.</p>
 <p>En el ejemplo siguiente</p>
 <ul>
-<li><p>La primera consulta resalta <code translate="no">&quot;test&quot;</code> en su conjunto de resultados.</p></li>
+<li><p>La primera consulta destaca <code translate="no">&quot;test&quot;</code> en su conjunto de resultados.</p></li>
 <li><p>La segunda consulta resalta <code translate="no">&quot;Milvus&quot;</code> en su conjunto de resultados</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="highlighted-comment-line">highlighter = LexicalHighlighter(</span>

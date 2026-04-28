@@ -101,7 +101,7 @@ source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要与 Milvus 建立连接，我们将使用 MilvusClient 类。这种方法简化了连接过程，并允许我们使用基于本地文件的 Milvus 实例，非常适合我们的教程。</p>
+    </button></h2><p>要与 Milvus 建立连接，我们将使用 MilvusClient 类。这种方法简化了连接过程，允许我们使用基于本地文件的 Milvus 实例，非常适合我们的教程。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Initialize the Milvus client</span>
@@ -258,8 +258,8 @@ embeddings, task_result = generate_embedding(video_url)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Embedding vector (first 5 values): <span class="hljs-subst">{emb[<span class="hljs-string">&#x27;embedding&#x27;</span>][:<span class="hljs-number">5</span>]}</span>&quot;</span>)
     <span class="hljs-built_in">print</span>()
 <button class="copy-code-btn"></button></code></pre>
-<p>该实现允许您使用 Twelve Labs Embed API 为任何视频 URL 生成嵌入式内容。generate_embedding 函数负责处理从创建任务到获取结果的整个过程。它会返回一个字典列表，每个字典都包含一个嵌入向量及其元数据（时间范围和范围）。在生产环境中，切记要处理潜在的错误，如网络问题或 API 限制。根据具体的使用情况，您可能还需要执行重试或更强大的错误处理。</p>
-<h2 id="Inserting-Embeddings-into-Milvus" class="common-anchor-header">将嵌入式数据插入 Milvus<button data-href="#Inserting-Embeddings-into-Milvus" class="anchor-icon" translate="no">
+<p>该实现允许您使用 Twelve Labs Embed API 为任何视频 URL 生成嵌入式内容。generate_embedding 函数负责处理从创建任务到获取结果的整个过程。它会返回一个字典列表，每个字典都包含一个嵌入向量及其元数据（时间范围和范围）。在生产环境中，请记住要处理潜在的错误，如网络问题或 API 限制。根据具体的使用情况，您可能还需要执行重试或更强大的错误处理。</p>
+<h2 id="Inserting-Embeddings-into-Milvus" class="common-anchor-header">将 Embeddings 插入 Milvus<button data-href="#Inserting-Embeddings-into-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -335,7 +335,7 @@ insert_result = insert_embeddings(milvus_client, collection_name, task_result, v
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>将嵌入向量存储到 Milvus 后，我们就可以执行相似性搜索，根据查询向量找到最相关的视频片段。下面是实现这一功能的方法：</p>
+    </button></h2><p>将嵌入向量存储到 Milvus 中后，我们就可以执行相似性搜索，根据查询向量找到最相关的视频片段。下面是实现这一功能的方法：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">perform_similarity_search</span>(<span class="hljs-params">milvus_client, collection_name, query_vector, limit=<span class="hljs-number">5</span></span>):
     <span class="hljs-string">&quot;&quot;&quot;
     Perform a similarity search on the Milvus collection.
@@ -419,7 +419,7 @@ search_results = perform_similarity_search(milvus_client, collection_name, query
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>现在，让我们添加一些很酷的功能，让我们的应用程序脱颖而出！我们可以实现<strong>混合搜索，将文本和视频查询结合起来</strong>。事实上，<a href="https://docs.twelvelabs.io/docs/create-text-embeddings">Twelve Labs Embeddings API 还能为您的文本查询生成文本嵌入</a>。想象一下，允许用户输入文字描述和视频片段示例，我们就能为两者生成 Embeddings，并在 Milvus 中执行加权搜索。这将为我们提供超级精确的结果。</p>
+    </button></h2><p>现在，让我们添加一些很酷的功能，让我们的应用程序脱颖而出！我们可以实现<strong>混合搜索，将文本和视频查询结合起来</strong>。事实上，<a href="https://docs.twelvelabs.io/docs/create-text-embeddings">Twelve Labs Embeddings API 还能为您的文本查询生成文本嵌入</a>。想象一下，允许用户同时输入文字描述和视频片段示例，我们就能为两者生成 Embeddings，并在 Milvus 中执行加权搜索。这将为我们提供超级精确的结果。</p>
 <p>另一个很棒的功能是<strong>在视频中进行时间搜索</strong>。<a href="https://docs.twelvelabs.io/docs/create-video-embeddings#customize-your-embeddings">我们可以将长视频分解成更小的片段，每个片段都有自己的 Embeddings</a>。这样，用户就可以找到视频中的特定时刻，而不仅仅是整个片段。还有，为什么不加入一些基本的视频分析功能呢？我们可以使用 Embeddings 对相似的视频片段进行聚类，检测趋势，甚至识别大型视频 Collections 中的异常值。</p>
 <h2 id="Error-Handling-and-Logging" class="common-anchor-header">错误处理和日志记录<button data-href="#Error-Handling-and-Logging" class="anchor-icon" translate="no">
       <svg translate="no"

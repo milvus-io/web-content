@@ -175,7 +175,7 @@ summary: >-
 </tr>
 <tr>
 <td><p>DescribeCollection</p></td>
-<td><p>Anzeigen der Details einer Sammlung</p></td>
+<td><p>Anzeige der Details einer Sammlung</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_collection.md">DescribeCollection</a></p></td>
 </tr>
 <tr>

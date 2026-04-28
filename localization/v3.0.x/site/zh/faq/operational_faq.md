@@ -91,7 +91,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <pre><code translate="no" class="language-shell">pip install --upgrade pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">我可以在断开互联网的情况下部署 Milvus 吗？</h4><p>可以。您可以在离线环境下安装 Milvus。请参阅<a href="/docs/zh/install_offline-helm.md">离线安装 Milvus</a>获取更多信息。</p>
-<h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">在哪里可以找到 Milvus 生成的日志？</h4><p>Milvus 日志默认打印到 stout（标准输出）和 stderr（标准错误），但我们强烈建议在生产中将日志重定向到持久卷。为此，请更新<strong>Milvus.yaml</strong> 中的<code translate="no">log.file.rootPath</code> 。而如果你用<code translate="no">milvus-helm</code> chart 部署 Milvus，也需要先通过<code translate="no">--set log.persistence.enabled=true</code> 启用日志持久性。</p>
+<h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">在哪里可以找到 Milvus 生成的日志？</h4><p>Milvus 日志默认打印到 stout（标准输出）和 stderr（标准错误），但是我们强烈建议在生产中将日志重定向到持久卷。为此，请更新<strong>Milvus.yaml</strong> 中的<code translate="no">log.file.rootPath</code> 。而如果你用<code translate="no">milvus-helm</code> chart 部署 Milvus，也需要先通过<code translate="no">--set log.persistence.enabled=true</code> 启用日志持久性。</p>
 <p>如果你没有更改配置，使用 kubectl logs<pod-name> 或 docker logs CONTAINER 也能帮你找到日志。</p>
 <h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">在插入数据之前，我可以为段创建索引吗？</h4><p>可以。但我们建议在为每个数据段创建索引之前，分批插入数据，每批不应超过 256 MB。</p>
 <h4 id="Can-I-share-an-etcd-instance-among-multiple-Milvus-instances" class="common-anchor-header">能否在多个 Milvus 实例之间共享一个 etcd 实例？</h4><p>可以，您可以在多个 Milvus 实例之间共享一个 etcd 实例。为此，在启动每个 Milvus 实例之前，需要在每个实例的配置文件中将<code translate="no">etcd.rootPath</code> 更改为单独的值。</p>
@@ -101,7 +101,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <li>如果不打算在 Pulsar 实例上启用多租户功能，可考虑在启动 Milvus 实例之前，将其配置文件中的<code translate="no">msgChannel.chanNamePrefix.cluster</code> 更改为每个实例的唯一值。</li>
 </ul>
 <h4 id="Can-I-share-a-MinIO-instance-among-multiple-Milvus-instances" class="common-anchor-header">我可以在多个 Milvus 实例之间共享一个 MinIO 实例吗？</h4><p>可以，您可以在多个 Milvus 实例之间共享一个 MinIO 实例。为此，您需要在启动每个 Milvus 实例之前，在每个实例的配置文件中将<code translate="no">minio.rootPath</code> 更改为唯一值。</p>
-<h4 id="How-do-I-handle-the-error-message-pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345" class="common-anchor-header">如何处理<code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code> 错误信息？</h4><p>错误信息<code translate="no">Illegal uri [example.db]</code> 表明你正在尝试使用早期版本的 PyMilvus 连接 Milvus Lite，该版本不支持这种连接类型。要解决这个问题，请将你的 PyMilvus 安装升级到至少 2.4.2 版本，其中包括对连接 Milvus Lite 的支持。</p>
+<h4 id="How-do-I-handle-the-error-message-pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345" class="common-anchor-header">如何处理<code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code> 错误信息？</h4><p>错误信息<code translate="no">Illegal uri [example.db]</code> 表明你正在尝试使用早期版本的 PyMilvus 连接 Milvus Lite，而早期版本的 PyMilvus 不支持这种连接类型。要解决这个问题，请将你的 PyMilvus 安装升级到至少 2.4.2 版本，其中包括对连接 Milvus Lite 的支持。</p>
 <p>您可以使用以下命令升级 PyMilvus：</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
 <button class="copy-code-btn"></button></code></pre>
@@ -112,7 +112,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <li><p><strong>查询（精确匹配）</strong>：Milvus 选择具有匹配 PK 的最新实体。 ANN 搜索：Milvus 会选择相似度得分最高的实体，即使实体共享相同的 PK。 如果您的 Collections 有很多重复的主键，这种优先级可能会导致唯一结果少于限制。</p></li>
 <li><p><strong>匹配不足</strong>：您的搜索过滤表达式可能过于严格，导致符合相似性阈值的实体较少。如果为搜索设置的条件限制性太强，匹配的实体就不够多，导致结果比预期的少。</p></li>
 </ul>
-<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>.什么原因导致这种情况，如何解决？</h4><p>当您尝试在 Windows 平台上使用 Milvus Lite 时，会出现此错误。Milvus Lite 主要为 Linux 环境设计，可能不支持 Windows。</p>
+<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>.什么原因导致这种情况，如何解决？</h4><p>当你试图在 Windows 平台上使用 Milvus Lite 时，就会出现这个错误。Milvus Lite 主要为 Linux 环境设计，可能不支持 Windows。</p>
 <p>解决办法是使用 Linux 环境：</p>
 <ul>
 <li>使用基于 Linux 的操作系统或虚拟机来运行 Milvus Lite。</li>

@@ -23,14 +23,44 @@ summary: >-
       </svg>
     </button></h1><p>Im Vergleich zu einem Layer-4-Load Balancer bietet ein Layer-7-Load Balancer intelligente Load Balancing- und Caching-Funktionen und ist eine gute Wahl für Cloud-native Dienste.</p>
 <p>Diese Anleitung führt Sie durch die Einrichtung eines Layer-7 Load Balancers für einen Milvus-Cluster, der bereits hinter einem Layer-4 Load Balancer läuft.</p>
-<h3 id="Before-your-start" class="common-anchor-header">Bevor Sie beginnen</h3><ul>
+<h3 id="Before-your-start" class="common-anchor-header">Bevor Sie beginnen<button data-href="#Before-your-start" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>In Ihrem GCP-Konto ist bereits ein Projekt vorhanden.</p>
-<p>Wie Sie ein Projekt erstellen, erfahren Sie unter <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Erstellen und Verwalten von Projekten</a>. Der Name des in dieser Anleitung verwendeten Projekts ist <strong>milvus-testing-nonprod</strong>.</p></li>
+<p>Wie Sie ein Projekt erstellen, erfahren Sie unter <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Erstellen und Verwalten von Projekten</a>. Der Name des in diesem Leitfaden verwendeten Projekts ist <strong>milvus-testing-nonprod</strong>.</p></li>
 <li><p>Sie haben <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> und <a href="https://helm.sh/docs/intro/install/">Helm</a> lokal installiert oder sich entschieden, stattdessen die browserbasierte <a href="https://cloud.google.com/shell">Cloud Shell</a> zu verwenden.</p></li>
 <li><p>Sie haben <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">die gcloud CLI</a> mit Ihren GCP-Kontoanmeldeinformationen <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">initialisiert</a>.</p></li>
 <li><p>Sie haben <a href="/docs/de/gcp.md">einen Milvus-Cluster hinter einem Layer-4-Loadbalancer auf GCP bereitgestellt</a>.</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Anpassen der Milvus-Konfigurationen</h3><p>In dieser Anleitung wird davon ausgegangen, dass Sie bereits <a href="/docs/de/gcp.md">einen Milvus-Cluster hinter einem Layer-4-Loadbalancer auf GCP bereitgestellt</a> haben.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Anpassen der Milvus-Konfigurationen<button data-href="#Tweak-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In dieser Anleitung wird davon ausgegangen, dass Sie bereits <a href="/docs/de/gcp.md">einen Milvus-Cluster hinter einem Layer-4-Loadbalancer auf GCP bereitgestellt</a> haben.</p>
 <p>Bevor Sie einen Layer-7-Loadbalancer für diesen Milvus-Cluster einrichten, führen Sie den folgenden Befehl aus, um den Layer-4-Loadbalancer zu entfernen.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
@@ -44,7 +74,22 @@ summary: >-
       security:
         tlsMode: 1
 </span><button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">Einrichten eines Gesundheitsprüfungs-Endpunkts</h3><p>Um die Verfügbarkeit des Dienstes zu gewährleisten, erfordert der Layer-7-Lastenausgleich auf GCP die Überprüfung des Zustands des Backend-Dienstes. Daher müssen wir eine BackendConfig einrichten, um den Gesundheitsprüfungs-Endpunkt zu verpacken und die BackendConfig mit dem Milvus-Dienst durch Anmerkungen zu verknüpfen.</p>
+<h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">Einrichten eines Gesundheitsprüfungs-Endpunkts<button data-href="#Set-up-a-health-check-endpoint" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um die Verfügbarkeit des Dienstes zu gewährleisten, erfordert der Layer-7-Lastenausgleich auf GCP die Überprüfung des Zustands des Backend-Dienstes. Daher müssen wir eine BackendConfig einrichten, um den Gesundheitsprüfungs-Endpunkt zu verpacken und die BackendConfig mit dem Milvus-Dienst durch Anmerkungen zu verknüpfen.</p>
 <p>Das folgende Snippet zeigt die BackendConfig-Einstellungen. Speichern Sie ihn als <code translate="no">backendconfig.yaml</code> zur späteren Verwendung.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">cloud.google.com/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">BackendConfig</span>
@@ -71,12 +116,27 @@ summary: >-
 <li><p>Was die erste Anmerkung betrifft,</p>
 <p>Milvus ist nativ für gRPC, das auf HTTP/2 aufgebaut ist. Daher können wir HTTP/2 als Kommunikationsprotokoll zwischen dem Layer-7 Load Balancer und Milvus verwenden.</p></li>
 <li><p>Was die zweite Anmerkung betrifft,</p>
-<p>Milvus bietet nur den Endpunkt für die Gesundheitsprüfung über gRPC und HTTP/1 an. Wir müssen eine BackendConfig einrichten, um den Endpunkt für die Gesundheitsprüfung zu verpacken und ihn mit dem Milvus-Dienst zu verknüpfen, damit der Layer-7-Load-Balancer diesen Endpunkt auf den Gesundheitszustand von Milvus prüft.</p></li>
+<p>Milvus bietet nur den Endpunkt für die Gesundheitsprüfung über gRPC und HTTP/1 an. Wir müssen eine BackendConfig einrichten, um den Endpunkt für die Gesundheitsprüfung zu verpacken und ihn mit dem Milvus-Dienst zu verknüpfen, damit der Layer-7-Loadbalancer diesen Endpunkt auf den Gesundheitszustand von Milvus prüft.</p></li>
 <li><p>Was die dritte Anmerkung betrifft,</p>
 <p>Sie fordert die Erstellung einer Netzwerkendpunktgruppe (NEG), nachdem ein Ingress erstellt wurde. Wenn NEGs mit GKE-Ingress verwendet werden, erleichtert der Ingress-Controller die Erstellung aller Aspekte des Load Balancer. Dazu gehören die Erstellung der virtuellen IP-Adresse, Weiterleitungsregeln, Zustandsprüfungen, Firewall-Regeln und vieles mehr. Einzelheiten finden Sie in den <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing">Google Cloud-Dokumenten</a>.</p></li>
 </ul>
 </div>
-<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Vorbereiten von TLS-Zertifikaten</h3><p>TLS erfordert Zertifikate, um zu funktionieren. <strong>Es gibt zwei Möglichkeiten, Zertifikate zu erstellen, nämlich selbstverwaltete und von Google verwaltete.</strong></p>
+<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Vorbereiten von TLS-Zertifikaten<button data-href="#Prepare-TLS-certificates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>TLS erfordert Zertifikate, um zu funktionieren. <strong>Es gibt zwei Möglichkeiten, Zertifikate zu erstellen, nämlich selbstverwaltete und von Google verwaltete.</strong></p>
 <p>In dieser Anleitung wird <strong>my-release.milvus.io</strong> als Domainname für den Zugriff auf unseren Milvus-Dienst verwendet.</p>
 <h4 id="Create-self-managed-certificates" class="common-anchor-header">Selbstverwaltete Zertifikate erstellen</h4><p>Führen Sie die folgenden Befehle aus, um ein Zertifikat zu erstellen.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Generates a tls.key.</span>
@@ -116,7 +176,22 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
     status: Provisioning
 <button class="copy-code-btn"></button></code></pre>
 <p>Sobald <strong>certificateStatus</strong> auf <strong>Active</strong> wechselt, können Sie den Load Balancer einrichten.</p>
-<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Erstellen Sie einen Ingress, um einen Layer-7 Load Balancer zu generieren</h3><p>Erstellen Sie eine YAML-Datei mit einem der folgenden Schnipsel.</p>
+<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Erstellen Sie einen Ingress, um einen Layer-7 Load Balancer zu generieren<button data-href="#Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Erstellen Sie eine YAML-Datei mit einem der folgenden Schnipsel.</p>
 <ul>
 <li><p>Selbst verwaltete Zertifikate verwenden</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>

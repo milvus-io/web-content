@@ -18,7 +18,7 @@ summary: AI 코딩 어시스턴트가 Milvus 인덱스를 선택하고 구성하
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>자동 인덱스, HNSW, DiskANN, IVF 및 스파스 인덱스를 포함한 Milvus 인덱스 선택 및 조정을 위한 결정 가이드 및 구성 규칙입니다. 이러한 규칙을 자동으로 적용하려면 아래의 전체 프롬프트를 AI 도구에 복사하세요. 모든 프롬프트에 대한 개요는 <a href="/docs/ko/milvus_for_agents.md">AI 프롬프트를</a> 참조하세요.</p>
+    </button></h1><p>자동 인덱스, HNSW, DiskANN, IVF 및 스파스 인덱스를 포함한 Milvus 인덱스 선택 및 조정을 위한 결정 가이드 및 구성 규칙입니다. 아래의 전체 프롬프트를 AI 도구에 복사하여 이러한 규칙을 자동으로 적용하세요. 모든 프롬프트에 대한 개요는 <a href="/docs/ko/milvus_for_agents.md">AI 프롬프트를</a> 참조하세요.</p>
 <h2 id="How-to-use-this-prompt" class="common-anchor-header">이 프롬프트를 사용하는 방법<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

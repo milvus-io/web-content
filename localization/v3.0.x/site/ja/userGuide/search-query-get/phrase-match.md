@@ -1,14 +1,14 @@
 ---
 id: phrase-match.md
-title: フレーズ一致Compatible with Milvus 2.6.x
+title: フレーズ一致Compatible with Milvus 2.5.17+
 summary: >-
   フレーズ一致では、クエリー用語を完全なフレーズとして含む文書を検索できます。デフォルトでは、単語は同じ順序で、互いに直接隣接していなければなりません。例えば、"robotics
   machine learning "のクエリは、"robotics"、"machine"、"learning
   "の単語が、間に他の単語がない状態で順番に現れる、"...typical robotics machine learning models...
   "のようなテキストにマッチします。
-beta: Milvus 2.6.x
+beta: Milvus 2.5.17+
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">フレーズ一致<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">フレーズ一致<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,10 +43,10 @@ beta: Milvus 2.6.x
     </button></h2><p><a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>サーチエンジンライブラリを搭載したフレーズマッチは、ドキュメント内の単語の位置情報を分析することで機能する。下図はそのプロセスを示しています：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
    </span> <span class="img-wrapper"> <span>フレーズ一致のワークフロー</span> </span></p>
 <ol>
-<li><p><strong>文書のトークン化</strong>Milvusに文書を挿入すると、テキストはアナライザーを使ってトークン（個々の単語または用語）に分割され、各トークンの位置情報が記録されます。例えば、<strong>doc_</strong>1は<strong>["machine" (pos=0), "learning" (pos=1), "boosts" (pos=2), "efficiency" (pos=3)]</strong>にトークン化されます。アナライザーの詳細については、<a href="/docs/ja/analyzer-overview.md">アナライザーの概要を</a>参照のこと。</p></li>
+<li><p><strong>文書のトークン化</strong>Milvusに文書を挿入すると、テキストはアナライザーを使ってトークン（個々の単語や用語）に分割され、各トークンの位置情報が記録されます。例えば、<strong>doc_</strong>1は<strong>["machine" (pos=0), "learning" (pos=1), "boosts" (pos=2), "efficiency" (pos=3)]</strong>にトークン化されます。アナライザーの詳細については、<a href="/docs/ja/analyzer-overview.md">アナライザーの概要を</a>参照のこと。</p></li>
 <li><p><strong>転置インデックスの作成</strong>Milvusは転置インデックスを作成し、各トークンをそのトークンが出現する文書とそれらの文書におけるトークンの位置に対応付ける。</p></li>
 <li><p><strong>フレーズマッチング</strong>: フレーズクエリが実行されると、Milvusは転置インデックス内の各トークンを検索し、それらが正しい順序で出現しているか、また近接して出現しているかをチェックします。<code translate="no">slop</code> パラメータは一致するトークン間の最大許容位置数を制御します：</p>
 <ul>
@@ -76,7 +76,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>フレーズマッチはMilvusの文字列データ型である<code translate="no">VARCHAR</code> フィールドタイプで機能します。フレーズ一致を有効にするには、<code translate="no">enable_analyzer</code> と<code translate="no">enable_match</code> の両方のパラメータを<code translate="no">True</code> に設定して、<a href="/docs/ja/keyword-match.md">テキスト一致と</a>同様にコレクションスキーマを構成します。</p>
+    </button></h2><p>フレーズマッチはmilvusの文字列データ型である<code translate="no">VARCHAR</code> フィールドタイプで機能します。フレーズ一致を有効にするには、<code translate="no">enable_analyzer</code> と<code translate="no">enable_match</code> の両方のパラメータを<code translate="no">True</code> に設定して、<a href="/docs/ja/keyword-match.md">テキスト一致と</a>同様にコレクションスキーマを構成します。</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header"><code translate="no">enable_analyzer</code> と<code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -133,8 +133,8 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>フレーズ・マッチングの精度は、テキスト・データのトークン化に使用するアナライザーに大きく依存します。異なるアナライザーは異なる言語やテキスト形式に対応し、トークン化と位置の精度に影響を与えます。特定の使用ケースに適したアナライザを選択することで、フレーズ マッチングの結果を最適化できます。</p>
-<p>デフォルトでは、Milvusは標準アナライザーを使用し、空白と句読点に基づいてテキストをトークン化し、40文字以上のトークンを削除し、テキストを小文字に変換します。デフォルトでは追加のパラメータは必要ありません。詳細については、<a href="/docs/ja/standard-analyzer.md">Standard Analyzerを</a>参照してください。</p>
+    </button></h3><p>フレーズ・マッチングの精度は、テキスト・データのトークン化に使用するアナライザーに大きく依存します。異なるアナライザーは異なる言語やテキスト形式に適しており、トークン化と位置の精度に影響を与えます。特定の使用ケースに適したアナライザを選択することで、フレーズ マッチングの結果を最適化できます。</p>
+<p>デフォルトでは、Milvusは標準アナライザーを使用します。このアナライザーは、空白と句読点に基づいてテキストをトークン化し、40文字以上のトークンを削除し、テキストを小文字に変換します。デフォルトでは追加のパラメータは必要ありません。詳細については、<a href="/docs/ja/standard-analyzer.md">Standard Analyzerを</a>参照してください。</p>
 <p>アプリケーションで特定のアナライザが必要な場合は、<code translate="no">analyzer_params</code> パラメータを使用して設定します。例えば、<code translate="no">english</code> アナライザを英語テキストのフレーズマッチ用に設定する方法を以下に示します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
@@ -151,7 +151,7 @@ schema.add_field(
     enable_match=<span class="hljs-literal">True</span>                  <span class="hljs-comment"># Enables inverted indexing for phrase matching</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvusは様々な言語やユースケースに合わせた複数のアナライザーをサポートしています。詳細については、<a href="/docs/ja/analyzer-overview.md">Analyzer Overviewを</a>参照してください。</p>
+<p>Milvusは様々な言語や用途に合わせたアナライザをサポートしています。詳細については、<a href="/docs/ja/analyzer-overview.md">Analyzer Overviewを</a>参照してください。</p>
 <h2 id="Use-phrase-match" class="common-anchor-header">フレーズ一致を使用する<button data-href="#Use-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -295,7 +295,7 @@ result = client.query(
         ></path>
       </svg>
     </button></h3><p>検索操作では、ベクトル類似度ランキングを適用する前に、<strong>PHRASE_MATCHを</strong>使用して文書をフィルタリングする。この2段階のアプローチは、まずテキストマッチによって候補を絞り込み、次にそれらの候補をベクトル埋め込みに基づいて再ランク付けする。</p>
-<h4 id="Example-slop--1" class="common-anchor-header">例: スロップ = 1</h4><p>ここでは、slop = 1を許容する。このフィルターは、<strong>"learning machine "という</strong>フレーズを含む文書に、若干の柔軟性を持たせて適用される。</p>
+<h4 id="Example-slop--1" class="common-anchor-header">例: スロップ = 1</h4><p>ここでは、slopを1としている。このフィルターは、<strong>"learning machine "という</strong>フレーズを含む文書に対して、若干の柔軟性を持たせて適用される。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
 filter_slop1 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>
 

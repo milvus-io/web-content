@@ -57,7 +57,7 @@ go build
         ></path>
       </svg>
     </button></h2><p>Descarregue o <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/master/configs/backup.yaml">ficheiro de configuração de exemplo</a> e adapte-o às suas necessidades.</p>
-<p>Em seguida, crie uma pasta juntamente com o binário Milvus Backup descarregado ou compilado, dê-lhe o nome de <code translate="no">configs</code> e coloque o ficheiro de configuração dentro da pasta <code translate="no">configs</code>.</p>
+<p>Em seguida, crie uma pasta juntamente com o binário Milvus Backup descarregado ou compilado, dê o nome à pasta <code translate="no">configs</code> e coloque o ficheiro de configuração dentro da pasta <code translate="no">configs</code>.</p>
 <p>A estrutura da pasta deve ser semelhante à seguinte:</p>
 <pre>
   <code translate="no">

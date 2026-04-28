@@ -129,7 +129,7 @@ beta: Milvus 2.6.4+
       <span class="hljs-comment"># no expiration time, which avoids frequent reloading</span>
       <span class="hljs-attr">cacheTtl:</span> <span class="hljs-number">0</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>理由</strong></p>
+<p><strong>根拠</strong></p>
 <ul>
 <li><p>ウォームアップにより、アクセス頻度の高いスカラーおよびベクトル・インデックスのファーストヒット・レイテンシを排除。</p></li>
 <li><p>バックグラウンド・エビクションにより、クエリをブロックすることなく安定したキャッシュ・プレッシャーを維持する。</p></li>
@@ -237,7 +237,7 @@ beta: Milvus 2.6.4+
      <th><p>説明</p></th>
    </tr>
    <tr>
-     <td><p><strong>ウォームアップスコープ</strong></p></td>
+     <td><p><strong>ウォームアップ範囲</strong></p></td>
      <td><p>クエリ頻度の高いフィールドまたはインデックスのみをプリロードする。</p></td>
      <td><p>不必要なプリロードはロード時間とリソース使用を増加させる。</p></td>
    </tr>

@@ -54,7 +54,7 @@ summary: >-
      <td><p>gemini-incrustación-2</p></td>
      <td><p>Por defecto: 3.072 (recomendado: 768, 1.536 o 3.072)</p></td>
      <td><p>8,192</p></td>
-     <td><p>El primer modelo de incrustación multimodal nativo de Google, que admite texto, imágenes, vídeo, audio y documentos en un espacio de incrustación unificado.</p></td>
+     <td><p>Primer modelo de incrustación multimodal nativo de Google, que admite texto, imágenes, vídeo, audio y documentos en un espacio de incrustación unificado.</p></td>
    </tr>
 </table>
 <p>Ambos modelos se entrenan mediante la técnica Matryoshka Representation Learning (MRL), que permite dimensiones de salida flexibles a través del parámetro <code translate="no">dim</code>. Se recomienda empezar con 768 dimensiones y ampliarlas a 1.536 o 3.072 si es necesario. Para más información, consulte <a href="https://ai.google.dev/gemini-api/docs/embeddings">Modelos de incrustación Gemini</a>.</p>

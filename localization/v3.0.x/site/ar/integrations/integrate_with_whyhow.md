@@ -92,19 +92,64 @@ milvus_client = ClientMilvus(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Defining-necessary-variables" class="common-anchor-header">تحديد المتغيرات الضرورية</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Define collection name</span>
+    </button></h2><h3 id="Defining-necessary-variables" class="common-anchor-header">تحديد المتغيرات الضرورية<button data-href="#Defining-necessary-variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Define collection name</span>
 COLLECTION_NAME=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span> <span class="hljs-comment"># take your own collection name</span>
 
 <span class="hljs-comment"># Define vector dimension size</span>
 DIMENSION=<span class="hljs-number">1536</span> <span class="hljs-comment"># decide by the model you use</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-schema" class="common-anchor-header">إضافة مخطط</h3><p>قبل إدراج أي بيانات في قاعدة بيانات Milvus Lite، نحتاج أولاً إلى تحديد حقل البيانات، والذي يسمى المخطط هنا. من خلال إنشاء كائن <code translate="no">CollectionSchema</code> وإضافة حقل بيانات من خلال <code translate="no">add_field()</code> ، يمكننا التحكم في نوع البيانات وخصائصها. هذه الخطوة إلزامية قبل إدراج أي بيانات في ميلفوس.</p>
+<h3 id="Add-schema" class="common-anchor-header">إضافة مخطط<button data-href="#Add-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قبل إدراج أي بيانات في قاعدة بيانات Milvus Lite، نحتاج أولاً إلى تحديد حقل البيانات، والذي يسمى المخطط هنا. من خلال إنشاء كائن <code translate="no">CollectionSchema</code> وإضافة حقل بيانات من خلال <code translate="no">add_field()</code> ، يمكننا التحكم في نوع البيانات وخصائصها. هذه الخطوة إلزامية قبل إدراج أي بيانات في ميلفوس.</p>
 <pre><code translate="no" class="language-python">schema = milvus_client.create_schema(auto_id=<span class="hljs-literal">True</span>) <span class="hljs-comment"># Enable id matching</span>
 
 schema = milvus_client.add_field(schema=schema, field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 schema = milvus_client.add_field(schema=schema, field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=DIMENSION)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-index" class="common-anchor-header">إنشاء فهرس</h3><p>لكل مخطط، من الأفضل أن يكون لدينا فهرس حتى يكون الاستعلام أكثر كفاءة. لإنشاء فهرس، نحتاج أولاً إلى <code translate="no">index_params</code> ثم نضيف لاحقًا المزيد من بيانات الفهرس على هذا الكائن <code translate="no">IndexParams</code>.</p>
+<h3 id="Create-index" class="common-anchor-header">إنشاء فهرس<button data-href="#Create-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لكل مخطط، من الأفضل أن يكون لدينا فهرس حتى يكون الاستعلام أكثر كفاءة. لإنشاء فهرس، نحتاج أولاً إلى <code translate="no">index_params</code> ثم إضافة المزيد من بيانات الفهرس على هذا الكائن <code translate="no">IndexParams</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Start to indexing data field</span>
 index_params = milvus_client.prepare_index_params()
 index_params = milvus_client.add_index(
@@ -115,7 +160,22 @@ index_params = milvus_client.add_index(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>هذه الطريقة عبارة عن غلاف رفيع حول تطبيق Milvus الرسمي<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md">(المستندات الرسمية</a>).</p>
-<h3 id="Create-collection" class="common-anchor-header">إنشاء مجموعة</h3><p>بعد تحديد جميع حقول البيانات وفهرستها، نحتاج الآن إلى إنشاء مجموعة قاعدة البيانات الخاصة بنا حتى نتمكن من الوصول إلى بياناتنا بسرعة ودقة. ما يجب ذكره هو أننا قمنا بتهيئة <code translate="no">enable_dynamic_field</code> ليكون صحيحًا حتى تتمكن من تحميل أي بيانات بحرية. التكلفة هي أن الاستعلام عن البيانات قد يكون غير فعال.</p>
+<h3 id="Create-collection" class="common-anchor-header">إنشاء مجموعة<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد تحديد جميع حقول البيانات وفهرستها، نحتاج الآن إلى إنشاء مجموعة قاعدة البيانات الخاصة بنا حتى نتمكن من الوصول إلى بياناتنا بسرعة ودقة. ما يجب ذكره هو أننا قمنا بتهيئة <code translate="no">enable_dynamic_field</code> ليكون صحيحًا حتى تتمكن من تحميل أي بيانات بحرية. التكلفة هي أن الاستعلام عن البيانات قد يكون غير فعال.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection</span>
 milvus_client.create_collection(
     collection_name=COLLECTION_NAME,
@@ -179,7 +239,22 @@ res = milvus_client.search(
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&#x27;answer&#x27;</span>])
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&#x27;matches&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Rules" class="common-anchor-header">القواعد</h3><p>في المثال السابق، تم النظر في كل مستند في فهرسنا. ومع ذلك، قد يكون من المفيد أحيانًا استرداد المستندات التي تستوفي بعض الشروط المحددة مسبقًا فقط (على سبيل المثال <code translate="no">filename=harry-potter.pdf</code>). في <code translate="no">whyhow_rbr</code> من خلال ميلفوس لايت، يمكن القيام بذلك من خلال ضبط معلمات البحث.</p>
+<h3 id="Rules" class="common-anchor-header">القواعد<button data-href="#Rules" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في المثال السابق، تم النظر في كل مستند في فهرسنا. ومع ذلك، قد يكون من المفيد في بعض الأحيان استرداد المستندات التي تستوفي بعض الشروط المحددة مسبقًا فقط (على سبيل المثال <code translate="no">filename=harry-potter.pdf</code>). في <code translate="no">whyhow_rbr</code> من خلال ميلفوس لايت، يمكن القيام بذلك من خلال ضبط معلمات البحث.</p>
 <p>يمكن أن تتحكم القاعدة في سمات البيانات الوصفية التالية</p>
 <ul>
 <li><code translate="no">filename</code> اسم الملف</li>
@@ -210,7 +285,22 @@ res = milvus_client.search(
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&#x27;matches&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
 <p>في هذا المثال، نقوم أولاً بإنشاء قسم لتخزين ملفات PDF ذات الصلة بـ harry-potter، ومن خلال البحث داخل هذا القسم، يمكننا الحصول على المعلومات الأكثر مباشرة. أيضًا، نطبّق أرقام الصفحات كمرشح لتحديد الصفحة التي نرغب في البحث عنها بالضبط. تذكّر، يجب أن تتبع معلمة عامل التصفية <a href="https://milvus.io/docs/boolean.md">القاعدة المنطقية</a>.</p>
-<h3 id="Clean-up" class="common-anchor-header">التنظيف</h3><p>أخيرًا، بعد تنفيذ جميع التعليمات، يمكنك تنظيف قاعدة البيانات عن طريق الاتصال بـ <code translate="no">drop_collection()</code>.</p>
+<h3 id="Clean-up" class="common-anchor-header">التنظيف<button data-href="#Clean-up" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>أخيرًا، بعد تنفيذ جميع التعليمات، يمكنك تنظيف قاعدة البيانات عن طريق الاتصال بـ <code translate="no">drop_collection()</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Clean up</span>
 milvus_client.drop_collection(
     collection_name=COLLECTION_NAME

@@ -48,7 +48,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <ul>
 <li><p>구문<strong>분석 시간 단축</strong>: 크거나 복잡한 필터 표현식을 자리 표시자로 대체함으로써 시스템에서 필터를 구문 분석하고 처리하는 데 소요되는 시간을 줄일 수 있습니다.</p></li>
 <li><p><strong>쿼리 성능 향상</strong>: 구문 분석 오버헤드가 줄어들면 쿼리 성능이 향상되어 QPS가 높아지고 응답 시간이 빨라집니다.</p></li>
-<li><p><strong>확장성</strong>: 데이터 세트가 증가하고 필터 표현식이 복잡해져도 템플릿을 사용하면 효율적이고 확장 가능한 성능을 유지할 수 있습니다.</p></li>
+<li><p><strong>확장성</strong>: 데이터 세트가 증가하고 필터 표현식이 더 복잡해져도 템플릿을 사용하면 효율적이고 확장 가능한 성능을 유지할 수 있습니다.</p></li>
 </ul>
 <h2 id="Search-Operations" class="common-anchor-header">검색 작업<button data-href="#Search-Operations" class="anchor-icon" translate="no">
       <svg translate="no"

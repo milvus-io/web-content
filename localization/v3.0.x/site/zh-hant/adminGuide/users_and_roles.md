@@ -155,7 +155,7 @@ curl --request POST \
     </button></h3><p>建立使用者後，如果忘記了，可以更新密碼。</p>
 <p>新密碼也必須遵循以下規則：</p>
 <ul>
-<li>長度必須為 8-64 個字元，並包含下列三項：大寫字母、小寫字母、數字及特殊字元。</li>
+<li>長度必須為 8-64 個字元，並包含下列三項：大寫字母、小寫字母、數字及特殊字符。</li>
 </ul>
 <p>以下範例顯示如何更新使用者<code translate="no">user_1</code> 的密碼為<code translate="no">NewP@ssw0rd</code> 。</p>
 <div class="multipleCode">

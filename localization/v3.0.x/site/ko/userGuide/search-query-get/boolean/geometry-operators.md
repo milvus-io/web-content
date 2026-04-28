@@ -22,7 +22,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>Milvus는 기하학적 데이터를 관리하고 분석하는 데 필수적인 <code translate="no">GEOMETRY</code> 필드에서 공간 필터링을 위한 연산자 집합을 지원합니다. 이러한 연산자를 사용하면 개체 간의 기하학적 관계를 기반으로 엔티티를 검색할 수 있습니다.</p>
-<p>모든 기하 도형 연산자는 컬렉션 스키마에 정의된 <code translate="no">GEOMETRY</code> 필드의 이름과 <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">잘 알려진 텍스트</a> (WKT) 형식으로 표현된 대상 기하 도형 객체라는 두 가지 기하 도형 인수를 받아 작동합니다.</p>
+<p>모든 기하 도형 연산자는 컬렉션 스키마에 정의된 <code translate="no">GEOMETRY</code> 필드의 이름과 <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">잘 알려진 텍스트</a> (WKT) 형식으로 표현된 대상 기하 도형 개체라는 두 가지 기하 도형 인수를 받아 작동합니다.</p>
 <h2 id="Use-syntax" class="common-anchor-header">구문 사용<button data-href="#Use-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +38,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">GEOMETRY</code> 필드를 필터링하려면 표현식에서 기하 도형 연산자를 사용합니다:</p>
+    </button></h2><p><code translate="no">GEOMETRY</code> 필드를 필터링하려면 표현식에 기하 도형 연산자를 사용합니다:</p>
 <ul>
 <li><p>일반: <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
 <li><p>거리 기반: <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
@@ -79,7 +79,7 @@ beta: Milvus 2.6.4+
    <tr>
      <td><p><code translate="no">ST_EQUALS(A, B)</code> / <code translate="no">st_equals(A, B)</code></p></td>
      <td><p>두 도형이 공간적으로 동일한 경우, 즉 점과 치수의 집합이 동일한 경우 TRUE를 반환합니다.</p></td>
-     <td><p>두 도형(A와 B)이 공간적으로 정확히 같은가요?</p></td>
+     <td><p>두 도형(A와 B)이 공간적으로 정확히 동일한가요?</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">ST_CONTAINS(A, B)</code> / <code translate="no">st_contains(A, B)</code></p></td>
@@ -153,7 +153,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">ST_CONTAINS</code> 연산자는 첫 번째 지오메트리가 두 번째 지오메트리를 완전히 포함하는 경우 TRUE를 반환합니다. 이 연산자는 다각형 내의 점 또는 큰 다각형 내의 작은 다각형을 찾는 데 유용합니다.</p>
+    </button></h2><p><code translate="no">ST_CONTAINS</code> 연산자는 첫 번째 도형이 두 번째 도형을 완전히 포함하는 경우 TRUE를 반환합니다. 이 연산자는 다각형 내의 점 또는 큰 다각형 내의 작은 다각형을 찾는 데 유용합니다.</p>
 <p><strong>예제</strong></p>
 <p>도시 구역의 집합이 있고 특정 구역의 경계 내에 있는 레스토랑과 같은 특정 관심 지점을 찾고 싶다고 가정해 보겠습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries completely within a specific polygon.</span>

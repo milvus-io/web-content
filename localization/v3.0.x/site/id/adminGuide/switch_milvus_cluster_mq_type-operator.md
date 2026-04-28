@@ -57,7 +57,7 @@ title: Mengganti Jenis MQ untuk Milvus Cluster
         ></path>
       </svg>
     </button></h2><p>Ikuti langkah-langkah berikut untuk mengganti jenis MQ dari Pulsar atau Kafka ke Woodpecker dengan penyimpanan MinIO.</p>
-<h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">Langkah 1: Pastikan instans Milvus sedang berjalan<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
+<h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">Langkah 1: Pastikan instans Milvus sudah berjalan<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -237,7 +237,7 @@ successfully updated mq.type configuration <span class="hljs-keyword">in</span> 
 <div class="alert note">
 <p>Ganti <code translate="no">&lt;mixcoord_addr&gt;</code> dengan alamat sebenarnya dari layanan MixCoord Anda.</p>
 </div>
-<h3 id="Step-4-Verify-the-switch-is-complete" class="common-anchor-header">Langkah 4: Verifikasi peralihan sudah selesai<button data-href="#Step-4-Verify-the-switch-is-complete" class="anchor-icon" translate="no">
+<h3 id="Step-4-Verify-the-switch-is-complete" class="common-anchor-header">Langkah 4: Verifikasi peralihan telah selesai<button data-href="#Step-4-Verify-the-switch-is-complete" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

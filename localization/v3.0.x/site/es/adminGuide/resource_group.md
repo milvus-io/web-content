@@ -213,7 +213,7 @@ except Exception:
     print(f&quot;</span>Something went wrong <span class="hljs-keyword">while</span> dropping {resource_group}.<span class="hljs-string">&quot;)
 </span><button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<p>Para obtener más información, consulte los <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">ejemplos correspondientes en pymilvus</a>.</p>
+<p>Para más detalles, por favor consulte los <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">ejemplos relevantes en pymilvus</a></p>
 <h2 id="A-good-practice-to-manage-cluster-scaling" class="common-anchor-header">Una buena práctica para gestionar el escalado del cluster<button data-href="#A-good-practice-to-manage-cluster-scaling" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

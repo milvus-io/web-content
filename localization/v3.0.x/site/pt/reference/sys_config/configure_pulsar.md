@@ -139,7 +139,7 @@ summary: Saiba como configurar o pulsar para o Milvus.
       <td>
         <li>O tamanho máximo de cada mensagem na Pulsar. Unidade: Byte.</li>      
         <li>Por padrão, a Pulsar pode transmitir no máximo 2MB de dados em uma única mensagem. Quando o tamanho dos dados inseridos é maior que este valor, o proxy fragmenta os dados em várias mensagens para garantir que eles possam ser transmitidos corretamente.</li>      
-        <li>Se o parâmetro correspondente na Pulsar permanecer inalterado, aumentar essa configuração fará com que o Milvus falhe, e reduzi-la não produz nenhuma vantagem.</li>      </td>
+        <li>Se o parâmetro correspondente na Pulsar permanecer inalterado, aumentar esta configuração fará com que o Milvus falhe, e reduzi-la não produz nenhuma vantagem.</li>      </td>
       <td>2097152</td>
     </tr>
   </tbody>
@@ -169,7 +169,7 @@ summary: Saiba como configurar o pulsar para o Milvus.
   <tbody>
     <tr>
       <td>
-        <li>O Pulsar pode ser provisionado para inquilinos específicos com a capacidade apropriada alocada ao inquilino.</li>      
+        <li>O Pulsar pode ser provisionado para inquilinos específicos com capacidade apropriada alocada ao inquilino.</li>      
         <li>Para compartilhar uma instância do Pulsar entre várias instâncias do Milvus, é possível alterar esse valor para um locatário do Pulsar em vez do valor padrão para cada instância do Milvus antes de iniciá-las. No entanto, se você não quiser o multi-tenancy Pulsar, é aconselhável alterar msgChannel.chanNamePrefix.cluster para o valor diferente.</li>      </td>
       <td>público</td>
     </tr>

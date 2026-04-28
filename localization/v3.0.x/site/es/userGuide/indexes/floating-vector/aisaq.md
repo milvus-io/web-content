@@ -195,7 +195,7 @@ beta: Milvus 2.6.4+
    <tr>
      <td><p><code translate="no">inline_pq</code></p></td>
      <td><p>Número de vectores PQ almacenados en línea por nodo del índice (se leen cuando se accede al nodo, para reducir el IO)</p></td>
-     <td><p><strong>Tipo</strong>: Entero</p><p><strong>Rango</strong>: [0, <em>grado_máximo</em>]</p><p><strong>Valor por defecto</strong>: <code translate="no">-1</code></p></td>
+     <td><p><strong>Tipo</strong>: Entero</p><p><strong>Rango</strong>: [0, <em>grado_máx</em>]</p><p><strong>Valor por defecto</strong>: <code translate="no">-1</code></p></td>
      <td><p>Los valores más altos de <code translate="no">inline_pq</code> mejoran el rendimiento pero aumentan el espacio en disco.</p><p>Establezca <code translate="no">inline_pq</code>=0 para AISAQ en modo de escala.</p><p>Establezca <code translate="no">inline_pq</code>=-1 para rellenar automáticamente cualquier espacio no utilizado en el índice con vectores PQ para una mayor optimización de AISAQ en modo de escala.</p><p>Establezca <code translate="no">inline_pq</code><em>=grado_máx</em> para AISAQ en modo de rendimiento.</p><p><code translate="no">inline_pq</code> Los ajustes entre 0 y <em>max_degree</em> permiten un equilibrio ajustable entre rendimiento y consumo de espacio en disco.</p></td>
    </tr>
    <tr>

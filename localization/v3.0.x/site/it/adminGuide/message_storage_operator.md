@@ -59,7 +59,7 @@ summary: Scoprite come configurare l'archiviazione dei messaggi con Milvus Opera
 </ul></li>
 <li>L'archiviazione dei messaggi non può essere modificata mentre il sistema Milvus è in funzione.</li>
 <li>È supportata solo la versione Kafka 2.x o 3.x.</li>
-<li><strong>Limitazioni dell'aggiornamento</strong>: <strong>Limitazioni della coda di messaggi</strong>: Quando si esegue l'aggiornamento a Milvus v2.6.15, è necessario mantenere l'attuale scelta della coda di messaggi. Il passaggio da un sistema di code di messaggi all'altro durante l'aggiornamento non è supportato. Il supporto per cambiare sistema di code di messaggi sarà disponibile nelle versioni future.</li>
+<li><strong>Limitazioni dell'aggiornamento</strong>: <strong>Limitazioni della coda di messaggi</strong>: Quando si esegue l'aggiornamento a Milvus v2.6.15, è necessario mantenere l'attuale scelta della coda di messaggi. Il passaggio da un sistema di code di messaggi all'altro durante l'aggiornamento non è supportato. Il supporto per il cambio di sistemi di code di messaggi sarà disponibile nelle versioni future.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurare RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -344,7 +344,7 @@ summary: Scoprite come configurare l'archiviazione dei messaggi con Milvus Opera
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p><a href="https://artifacthub.io/packages/helm/bitnami/kafka">Qui</a> si trovano gli elementi di configurazione completi per configurare un servizio Kafka interno. Aggiungere gli elementi di configurazione necessari sotto <code translate="no">kafka.inCluster.values</code>.</p>
+<p><a href="https://artifacthub.io/packages/helm/bitnami/kafka">Qui</a> si trovano gli elementi di configurazione completi per configurare un servizio Kafka interno. Aggiungere le voci di configurazione necessarie sotto <code translate="no">kafka.inCluster.values</code>.</p>
 <p>Supponendo che il file di configurazione sia denominato <code translate="no">milvuscluster.yaml</code>, eseguire il comando seguente per applicare la configurazione.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>

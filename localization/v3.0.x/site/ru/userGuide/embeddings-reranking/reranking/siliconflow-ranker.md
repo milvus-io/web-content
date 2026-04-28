@@ -29,7 +29,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>Расширенное измельчение документов с настраиваемым перекрытием для работы с длинными документами</p></li>
 <li><p>Доступ к различным моделям ранжирования, включая серию BAAI/bge-reranker и другие специализированные модели</p></li>
-<li><p>Гибкая оценка на основе фрагментов, когда фрагмент с наивысшей оценкой представляет оценку документа</p></li>
+<li><p>Гибкая оценка на основе фрагментов, когда фрагмент с наивысшей оценкой представляет собой оценку документа</p></li>
 <li><p>Экономичный рерайтинг с поддержкой стандартных и профессиональных моделей.</p></li>
 </ul>
 <h2 id="Prerequisites" class="common-anchor-header">Предварительные условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -189,7 +189,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">overlap_tokens</code></p></td>
      <td><p>Нет</p></td>
-     <td><p>Количество перекрытий лексем между соседними фрагментами при разбивке документов на фрагменты. Это обеспечивает непрерывность по границам чанков для лучшего семантического понимания. Поддерживается только определенными моделями: <code translate="no">BAAI/bge-reranker-v2-m3</code>, <code translate="no">Pro/BAAI/bge-reranker-v2-m3</code>, и <code translate="no">netease-youdao/bce-reranker-base_v1</code>.</p></td>
+     <td><p>Количество перекрытий лексем между соседними фрагментами при разбивке документов на фрагменты. Это обеспечивает непрерывность границ чанков для лучшего семантического понимания. Поддерживается только определенными моделями: <code translate="no">BAAI/bge-reranker-v2-m3</code>, <code translate="no">Pro/BAAI/bge-reranker-v2-m3</code>, и <code translate="no">netease-youdao/bce-reranker-base_v1</code>.</p></td>
      <td><p><code translate="no">50</code></p></td>
    </tr>
    <tr>

@@ -128,7 +128,7 @@ lepton_client = OpenAI(
 
 embedding_model = milvus_model.DefaultEmbeddingFunction()
 <button class="copy-code-btn"></button></code></pre>
-<p>Buatlah sebuah embedding uji dan cetak dimensi dan beberapa elemen pertamanya.</p>
+<p>Buatlah embedding uji coba dan cetak dimensi dan beberapa elemen pertamanya.</p>
 <pre><code translate="no" class="language-python">test_embedding = embedding_model.encode_queries([<span class="hljs-string">&quot;This is a test&quot;</span>])[<span class="hljs-number">0</span>]
 embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <span class="hljs-built_in">print</span>(embedding_dim)

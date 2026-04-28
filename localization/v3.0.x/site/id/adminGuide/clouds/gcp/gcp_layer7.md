@@ -23,14 +23,44 @@ summary: >-
       </svg>
     </button></h1><p>Jika dibandingkan dengan penyeimbang beban Layer-4, penyeimbang beban Layer-7 menawarkan kemampuan penyeimbangan beban dan caching yang cerdas dan merupakan pilihan yang tepat untuk layanan cloud-native.</p>
 <p>Panduan ini memandu Anda dalam menyiapkan penyeimbang beban Layer-7 untuk cluster Milvus yang sudah berjalan di belakang penyeimbang beban Layer-4.</p>
-<h3 id="Before-your-start" class="common-anchor-header">Sebelum memulai</h3><ul>
+<h3 id="Before-your-start" class="common-anchor-header">Sebelum memulai<button data-href="#Before-your-start" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Sebuah proyek sudah ada di akun GCP Anda.</p>
 <p>Untuk membuat proyek, lihat <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Membuat dan mengelola proyek</a>. Nama proyek yang digunakan dalam panduan ini adalah <strong>milvus-testing-nonprod</strong>.</p></li>
 <li><p>Anda telah menginstal <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a>, dan <a href="https://helm.sh/docs/intro/install/">Helm</a> secara lokal, atau memutuskan untuk menggunakan <a href="https://cloud.google.com/shell">Cloud Shell</a> berbasis peramban.</p></li>
 <li><p>Anda telah <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">menginisialisasi gcloud CLI</a> dengan kredensial akun GCP Anda.</p></li>
 <li><p>Anda telah <a href="/docs/id/gcp.md">menerapkan cluster Milvus di belakang penyeimbang beban Layer-4 pada GCP</a>.</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Mengubah konfigurasi Milvus</h3><p>Panduan ini mengasumsikan bahwa Anda telah <a href="/docs/id/gcp.md">menggunakan cluster Milvus di belakang penyeimbang beban Layer-4 pada GCP</a>.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Mengubah konfigurasi Milvus<button data-href="#Tweak-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Panduan ini mengasumsikan bahwa Anda telah <a href="/docs/id/gcp.md">menggunakan cluster Milvus di belakang penyeimbang beban Layer-4 pada GCP</a>.</p>
 <p>Sebelum menyiapkan penyeimbang beban Layer-7 untuk klaster Milvus ini, jalankan perintah berikut untuk menghapus penyeimbang beban Layer-4.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
@@ -44,7 +74,22 @@ summary: >-
       security:
         tlsMode: 1
 </span><button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">Menyiapkan titik akhir pemeriksaan kesehatan</h3><p>Untuk memastikan ketersediaan layanan, penyeimbangan beban Layer-7 pada GCP memerlukan pemeriksaan kondisi kesehatan layanan backend. Oleh karena itu, kita perlu menyiapkan BackendConfig untuk membungkus titik akhir pemeriksaan kesehatan dan mengaitkan BackendConfig dengan layanan Milvus melalui anotasi.</p>
+<h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">Menyiapkan titik akhir pemeriksaan kesehatan<button data-href="#Set-up-a-health-check-endpoint" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk memastikan ketersediaan layanan, penyeimbangan beban Layer-7 pada GCP memerlukan pemeriksaan kondisi kesehatan layanan backend. Oleh karena itu, kita perlu menyiapkan BackendConfig untuk membungkus titik akhir pemeriksaan kesehatan dan mengaitkan BackendConfig dengan layanan Milvus melalui anotasi.</p>
 <p>Cuplikan berikut ini adalah pengaturan BackendConfig. Simpan sebagai <code translate="no">backendconfig.yaml</code> untuk digunakan nanti.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">cloud.google.com/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">BackendConfig</span>
@@ -76,7 +121,22 @@ summary: >-
 <p>Ini meminta pembuatan grup titik akhir jaringan (NEG) setelah Ingress dibuat. Ketika NEG digunakan dengan GKE Ingress, pengontrol Ingress memfasilitasi pembuatan semua aspek penyeimbang beban. Ini termasuk membuat alamat IP virtual, aturan penerusan, pemeriksaan kesehatan, aturan firewall, dan banyak lagi. Untuk detailnya, lihat <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing">dokumen Google Cloud</a>.</p></li>
 </ul>
 </div>
-<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Menyiapkan sertifikat TLS</h3><p>TLS memerlukan sertifikat agar dapat berfungsi. <strong>Ada dua cara untuk membuat sertifikat, yaitu dikelola sendiri dan dikelola Google.</strong></p>
+<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Menyiapkan sertifikat TLS<button data-href="#Prepare-TLS-certificates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>TLS memerlukan sertifikat agar dapat berfungsi. <strong>Ada dua cara untuk membuat sertifikat, yaitu dikelola sendiri dan dikelola Google.</strong></p>
 <p>Panduan ini menggunakan <strong>my-release.milvus.io</strong> sebagai nama domain untuk mengakses layanan Milvus.</p>
 <h4 id="Create-self-managed-certificates" class="common-anchor-header">Membuat sertifikat yang dikelola sendiri</h4><p>Jalankan perintah berikut ini untuk membuat sertifikat.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Generates a tls.key.</span>
@@ -116,7 +176,22 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
     status: Provisioning
 <button class="copy-code-btn"></button></code></pre>
 <p>Setelah <strong>certificateStatus</strong> berubah menjadi <strong>Active</strong>, Anda siap untuk menyiapkan penyeimbang beban.</p>
-<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Membuat Ingress untuk menghasilkan Load Balancer Layer-7</h3><p>Buat berkas YAML dengan salah satu cuplikan berikut ini.</p>
+<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Membuat Ingress untuk menghasilkan Load Balancer Layer-7<button data-href="#Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Buat berkas YAML dengan salah satu cuplikan berikut ini.</p>
 <ul>
 <li><p>Menggunakan sertifikat yang dikelola sendiri</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>

@@ -45,12 +45,12 @@ summary: HNSW 索引是一種基於圖的索引演算法，可以提高搜尋高
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
    </span> <span class="img-wrapper"> <span>HNSW</span> </span></p>
 <p>HNSW 的效能取決於幾個控制圖形結構和搜尋行為的關鍵參數。這些參數包括</p>
 <ul>
-<li><p><code translate="no">M</code>:每個節點在階層結構的每一層圖中所能擁有的最大邊緣或連線數。<code translate="no">M</code> 越高，圖形就越密集，並且會增加回復率和精確度，因為搜尋有更多路徑可以探索，這也會消耗更多的記憶體，並且會因為額外的連線而減慢插入時間。如上圖所示，<strong>M = 5</strong>表示 HNSW 圖中的每個節點最多與其他 5 個節點直接連接。這創造了一個中度密集的圖結構，其中節點有多條路徑可以到達其他節點。</p></li>
-<li><p><code translate="no">efConstruction</code>:索引建構時所考慮的候選數。較高的<code translate="no">efConstruction</code> 通常會產生品質較佳的圖形，但需要較多時間來建立。</p></li>
+<li><p><code translate="no">M</code>:每個節點在階層結構的每一層圖中所能擁有的最大邊緣或連線數。<code translate="no">M</code> 越高，圖形就越密集，並且會增加回復率和精確度，因為搜尋有更多路徑可供探索，這也會消耗更多的記憶體，並且會因為額外的連線而減慢插入時間。如上圖所示，<strong>M = 5</strong>表示 HNSW 圖中的每個節點最多與其他 5 個節點直接連接。這創造了一個中度密集的圖結構，其中節點有多條路徑可以到達其他節點。</p></li>
+<li><p><code translate="no">efConstruction</code>:索引建構過程中所考慮的候選數。較高的<code translate="no">efConstruction</code> 通常會產生品質較佳的圖形，但需要較多時間來建立。</p></li>
 <li><p><code translate="no">ef</code>:搜尋過程中評估的鄰居數量。增加<code translate="no">ef</code> 可提高找到最近鄰居的可能性，但會減慢搜尋過程。</p></li>
 </ul>
 <p>有關如何調整這些設定以符合您需求的詳細資訊，請參閱<a href="/docs/zh-hant/hnsw.md#Index-params">索引參數</a>。</p>
@@ -92,7 +92,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>:用來計算向量間距離的方法。支援的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/metric.md">公制類型</a>。</p></li>
 <li><p><code translate="no">params</code>:建立索引的附加設定選項。</p>
 <ul>
-<li><p><code translate="no">M</code>:每個節點可以連線的最大鄰居數量。</p></li>
+<li><p><code translate="no">M</code>:每個節點可以連線的最大鄰居數。</p></li>
 <li><p><code translate="no">efConstruction</code>:索引建構期間考慮連接的候選鄰居數量。</p></li>
 </ul>
 <p>若要瞭解<code translate="no">HNSW</code> 索引可用的更多建置參數，請參閱<a href="/docs/zh-hant/hnsw.md#Index-building-params">索引建置參數</a>。</p></li>
@@ -152,7 +152,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>本節概述用於建立索引和在索引上執行搜尋的參數。</p>
-<h3 id="Index-building-params" class="common-anchor-header">索引建立參數</h3><p>下表列出了<a href="/docs/zh-hant/hnsw.md#Build-index">建立索引</a>時可在<code translate="no">params</code> 中設定的參數。</p>
+<h3 id="Index-building-params" class="common-anchor-header">索引建立參數<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下表列出了<a href="/docs/zh-hant/hnsw.md#Build-index">建立索引</a>時可在<code translate="no">params</code> 中設定的參數。</p>
 <table>
    <tr>
      <th><p>參數</p></th>
@@ -162,7 +177,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">M</code></p></td>
-     <td><p>每個節點在圖表中可擁有的最大連線（或邊緣）數量，包括傳出和傳入的邊緣。此參數直接影響索引建構和搜尋。</p></td>
+     <td><p>每個節點在圖表中可擁有的最大連線 (或邊) 數量，包括傳出邊和傳入邊。此參數直接影響索引建構和搜尋。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[2, 2048]</p><p><strong>預設值</strong>：<code translate="no">30</code> (每個節點最多可有 30 條出站邊和 30 條入站邊)</p></td>
      <td><p>較大的<code translate="no">M</code> 通常會帶來<strong>較高的精確度</strong>，但會<strong>增加記憶體開銷</strong>，<strong>並減慢索引建立和搜尋的速度</strong>。對於高維度的資料集或高召回率非常重要時，請考慮增加<code translate="no">M</code> 。</p><p>如果記憶體佔用量和搜尋速度是主要考量，則考慮降低<code translate="no">M</code> 。</p><p>在大多數情況下，我們建議您在此範圍內設定一個值：[5, 100].</p></td>
    </tr>
@@ -173,7 +188,22 @@ res = MilvusClient.search(
      <td><p>較高的<code translate="no">efConstruction</code> 通常會產生<strong>更精確的索引</strong>，因為會探索更多的潛在連線。不過，這也會導致建立<strong>索引的時間變長，並增加</strong>建構時的<strong>記憶體使用量</strong>。考慮增加<code translate="no">efConstruction</code> 以提高精確度，尤其是在索引時間不太重要的情況下。</p><p>在資源有限的情況下，可考慮降低<code translate="no">efConstruction</code> ，以加快索引建置速度。</p><p>在大多數情況下，我們建議您設定此範圍內的值：[50, 500].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數</h3><p>下表列出<a href="/docs/zh-hant/hnsw.md#Search-on-index">在索引上搜尋時</a>，可在<code translate="no">search_params.params</code> 中設定的參數。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下表列出<a href="/docs/zh-hant/hnsw.md#Search-on-index">在索引上搜尋時</a>，可在<code translate="no">search_params.params</code> 中設定的參數。</p>
 <table>
    <tr>
      <th><p>參數</p></th>
@@ -183,7 +213,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>控制最近鄰檢索時的搜尋範圍。它決定有多少節點會被造訪並評估為潛在的最近鄰居。  此參數僅影響搜尋過程，且僅適用於圖的底層。</p></td>
+     <td><p>控制最近鄰檢索時的搜尋範圍。它決定要造訪多少節點，並將其評估為潛在最近鄰居。  此參數僅影響搜尋過程，且僅適用於圖的底層。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1、<em>int_max］</em></p><p><strong>預設值</strong>:<em>limit</em>(要回傳的 TopK 最近鄰居)</p></td>
      <td><p>較大的<code translate="no">ef</code> 通常會導致<strong>較高的搜尋準確度</strong>，因為會考慮更多的潛在鄰居。不過，這也會<strong>增加搜尋時間</strong>。當達到高召回率是關鍵，而搜尋速度較不重要時，請考慮增加<code translate="no">ef</code> 。</p><p>考慮降低<code translate="no">ef</code> 以優先加快搜尋速度，尤其是在可以接受稍微降低精確度的情況下。</p><p>在大多數情況下，我們建議您設定此範圍內的值：[K, 10K]。</p></td>
    </tr>

@@ -72,7 +72,7 @@ title: Milvus WebUI
     </button></h2><p>Milvus Web UIには以下の機能があります：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
    </span> <span class="img-wrapper"> <span>Milvus Web UIの概要</span> </span></p>
 <ul>
 <li><p><a href="#Home">ホーム</a></p>
@@ -82,7 +82,7 @@ title: Milvus WebUI
 <li><p><a href="#Query">クエリ</a></p>
 <p>クエリノードおよびクエリコーディネータのセグメント、チャネル、レプリカ、リソースグループの統計情報を確認できます。</p></li>
 <li><p><a href="#Data">データ</a></p>
-<p>データノードの収集された統計情報をセグメントおよびチャネル単位で確認できます。</p></li>
+<p>データノードの収集された統計情報をセグメントとチャネル単位で確認できます。</p></li>
 <li><p><a href="#Tasks">タスク</a></p>
 <p>Querycoordスケジューラタスク、コンパクションタスク、インデックス構築タスク、インポートタスク、データ同期タスクなど、Milvusで実行されているタスクのリストを表示することができます。</p></li>
 <li><p><a href="#Slow-requests">スローリクエスト</a></p>
@@ -110,7 +110,7 @@ title: Milvus WebUI
     </button></h2><p>Home ページでは、以下の情報をご覧いただけます：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-home.png" alt="Milvus Web UI Home" class="doc-image" id="milvus-web-ui-home" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-home.png" alt="Milvus Web UI Home" class="doc-image" id="milvus-web-ui-home" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI ホーム</span> </span></p>
 <ul>
 <li><p><strong>システム情報</strong>配置モード、配置に使用されたイメージ、および関連情報などのシステム情報を表示します。</p></li>
@@ -136,7 +136,7 @@ title: Milvus WebUI
     </button></h2><p>Collectionsページでは、現在Milvusに登録されているデータベースやコレクションの一覧を表示し、その詳細を確認することができます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-collections.png" alt="Milvus Web UI Collections" class="doc-image" id="milvus-web-ui-collections" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-collections.png" alt="Milvus Web UI Collections" class="doc-image" id="milvus-web-ui-collections" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI コレクション</span> </span></p>
 <ul>
 <li><p><strong>データベース</strong>現在Milvusに登録されているデータベースの一覧とその詳細を表示します。</p></li>
@@ -144,7 +144,7 @@ title: Milvus WebUI
 <p>コレクションをクリックすると、フィールド数、パーティション、インデックスなどの詳細情報を表示することができます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI コレクションの詳細</span> </span></p></li>
 </ul>
 <h2 id="Query" class="common-anchor-header">クエリ<button data-href="#Query" class="anchor-icon" translate="no">
@@ -164,7 +164,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI クエリページ</span> </span></p>
 <ul>
 <li><p><strong>セグメント</strong>セグメントID、対応するコレクション、状態、サイズなど、セグメントのリストとその詳細を表示します。</p></li>
@@ -189,7 +189,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-data.png" alt="Milvus Web UI Data Page" class="doc-image" id="milvus-web-ui-data-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-data.png" alt="Milvus Web UI Data Page" class="doc-image" id="milvus-web-ui-data-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI データページ</span> </span></p>
 <ul>
 <li><p><strong>セグメント</strong>データノード/コーディネーターからのセグメントのリストと、セグメントID、対応するコレクション、状態、サイズなどの詳細を表示します。</p></li>
@@ -212,7 +212,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-tasks.png" alt="Milvus Web UI Tasks Page" class="doc-image" id="milvus-web-ui-tasks-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-tasks.png" alt="Milvus Web UI Tasks Page" class="doc-image" id="milvus-web-ui-tasks-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI タスクページ</span> </span></p>
 <ul>
 <li><p><strong>タスク</strong>Milvusで実行中のタスクのリストとタスクタイプ、状態、アクションを表示します。</p>
@@ -241,10 +241,10 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
-   </span> <span class="img-wrapper"> <span>Milvus Web UI スローリクエストページ</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
+   </span> <span class="img-wrapper"> <span>Milvus Web UIスローリクエストページ</span> </span></p>
 <ul>
-<li><strong>スローリクエスト</strong>：低速リクエストとは、設定で指定された<code translate="no">proxy.slowQuerySpanInSeconds</code> の値よりも長いレイテンシを持つ検索またはクエリのことです。スローリクエストのリストには、過去15分以内のすべてのスローリクエストが表示されます。</li>
+<li><strong>スローリクエスト</strong>：スローリクエストとは、設定で指定された<code translate="no">proxy.slowQuerySpanInSeconds</code> の値よりも長いレイテンシを持つ検索またはクエリのことです。スローリクエストのリストには、過去15分以内のすべてのスローリクエストが表示されます。</li>
 </ul>
 <h2 id="Configurations" class="common-anchor-header">設定<button data-href="#Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -263,7 +263,7 @@ title: Milvus WebUI
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-configurations.png" alt="Milvus Web UI Configurations Page" class="doc-image" id="milvus-web-ui-configurations-page" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/webui-configurations.png" alt="Milvus Web UI Configurations Page" class="doc-image" id="milvus-web-ui-configurations-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 設定ページ</span> </span></p>
 <ul>
 <li><strong>コンフィギュレーション</strong>：Milvusランタイム設定とその値のリストを表示します。</li>

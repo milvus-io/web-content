@@ -1,6 +1,6 @@
 ---
 id: model-ranker-overview.md
-title: Gambaran Umum Pemeringkat ModelCompatible with Milvus 2.6.x
+title: Ikhtisar Pemeringkat ModelCompatible with Milvus 2.6.x
 summary: >-
   Pencarian vektor tradisional mengurutkan hasil pencarian berdasarkan kemiripan
   matematis-seberapa dekat vektor-vektor tersebut cocok dalam ruang dimensi
@@ -11,7 +11,7 @@ summary: >-
   benar-benar memberikan strategi pengoptimalan yang dapat ditindaklanjuti.
 beta: Milvus 2.6.x
 ---
-<h1 id="Model-Ranker-Overview" class="common-anchor-header">Gambaran Umum Pemeringkat Model<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
+<h1 id="Model-Ranker-Overview" class="common-anchor-header">Ikhtisar Pemeringkat Model<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

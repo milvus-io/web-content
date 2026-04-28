@@ -52,15 +52,15 @@ summary: ⚡️ 한 번 구성하면 영원히 효율성을 높일 수 있습니
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>다음 그림은 Milvus SDK 코드 헬퍼를 사용했을 때와 사용하지 않았을 때의 코드 생성 효과를 비교한 것입니다. Milvus SDK 코드 도우미를 사용하지 않는 경우 작성된 코드는 더 이상 권장되지 않는 이전 ORM SDK 방식을 따릅니다. 다음은 코드 도우미 MCP를 사용할 때와 사용하지 않을 때의 코드 스크린샷을 비교한 것입니다:</p>
+    </button></h1><p>다음 그림은 Milvus SDK 코드 도우미를 사용했을 때와 사용하지 않았을 때의 코드 생성 효과를 비교한 것입니다. Milvus SDK 코드 도우미를 사용하지 않는 경우 작성된 코드는 더 이상 권장되지 않는 이전 ORM SDK 방식을 따릅니다. 다음은 코드 도우미 MCP를 사용할 때와 사용하지 않을 때의 코드 스크린샷을 비교한 것입니다:</p>
 <table>
    <tr>
      <th><p>MCP 코드 도우미 <strong>사용</strong></p></th>
      <th><p>MCP 코드 도우미 <strong>비활성화</strong></p></th>
    </tr>
    <tr>
-     <td><p><img translate="no" width="400" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
-     <td><p><img translate="no" width="400"src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
+     <td><p><img translate="no" width="400" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
+     <td><p><img translate="no" width="400"src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
    </tr>
    <tr>
      <td><p>공식적으로 권장되는 최신 MilvusClient 인터페이스를 사용하여 컬렉션 만들기</p></td>
@@ -101,7 +101,7 @@ summary: ⚡️ 한 번 구성하면 영원히 효율성을 높일 수 있습니
     </button></h2><p>이동 <code translate="no">Settings</code> -&gt; <code translate="no">Cursor Settings</code> -&gt; <code translate="no">Tools &amp; Intergrations</code> -&gt; <code translate="no">Add new global MCP server</code></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cursor-mcp-settings.png" alt="Cursor Mcp Settings" class="doc-image" id="cursor-mcp-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cursor-mcp-settings.png" alt="Cursor Mcp Settings" class="doc-image" id="cursor-mcp-settings" />
    </span> <span class="img-wrapper"> <span>커서 Mcp 설정</span> </span></p>
 <p>다음 구성을 커서 <code translate="no">~/.cursor/mcp.json</code> 파일에 붙여넣는 것이 좋습니다. 프로젝트 폴더에 <code translate="no">.cursor/mcp.json</code> 을 생성하여 특정 프로젝트를 설치할 수도 있습니다. 자세한 내용은 <a href="https://docs.cursor.com/context/model-context-protocol">커서 MCP 문서를</a> 참조하세요.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
@@ -248,7 +248,7 @@ summary: ⚡️ 한 번 구성하면 영원히 효율성을 높일 수 있습니
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cherry-studio-mcp-settings.png" alt="Cherry Studio Mcp Settings" class="doc-image" id="cherry-studio-mcp-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cherry-studio-mcp-settings.png" alt="Cherry Studio Mcp Settings" class="doc-image" id="cherry-studio-mcp-settings" />
    </span> <span class="img-wrapper"> <span>Cherry Studio Mcp 설정</span> </span></p>
 <h2 id="Cline" class="common-anchor-header">Cline<button data-href="#Cline" class="anchor-icon" translate="no">
       <svg translate="no"

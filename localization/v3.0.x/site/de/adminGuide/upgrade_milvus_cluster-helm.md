@@ -85,7 +85,7 @@ title: Upgrade des Milvus-Clusters mit Helm Chart
 <p><strong>Kompatibilitätsanforderungen:</strong></p>
 <ul>
 <li>Milvus v2.6.0-rc1 ist <strong>nicht</strong> mit v2.6.15 <strong>kompatibel</strong>. Direkte Upgrades von Release Candidates werden nicht unterstützt.</li>
-<li>Wenn Sie derzeit v2.6.0-rc1 verwenden und Ihre Daten erhalten müssen, finden Sie in <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">diesem Community-Leitfaden</a> Unterstützung bei der Migration.</li>
+<li>Wenn Sie derzeit v2.6.0-rc1 einsetzen und Ihre Daten erhalten müssen, finden Sie in <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">diesem Community-Leitfaden</a> Unterstützung bei der Migration.</li>
 <li>Vor dem Upgrade auf v2.6.15 <strong>müssen</strong> Sie ein Upgrade auf v2.5.16 oder höher mit aktiviertem <code translate="no">mixCoordinator</code> durchführen.</li>
 </ul>
 <p><strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Wenn Sie auf Milvus v2.6.15 aktualisieren, müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Message-Queue-Systemen während des Upgrades wird nicht unterstützt. Unterstützung für den Wechsel von Nachrichtenwarteschlangensystemen wird in zukünftigen Versionen verfügbar sein.</p>

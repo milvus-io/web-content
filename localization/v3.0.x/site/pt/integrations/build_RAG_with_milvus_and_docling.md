@@ -1,10 +1,10 @@
 ---
 id: build_RAG_with_milvus_and_docling.md
 summary: >-
-  Neste tutorial, mostraremos como criar um pipeline RAG (Retrieval-Augmented
-  Generation) usando Milvus e Docling. O pipeline integra o Docling para análise
-  de documentos, o Milvus para armazenamento de vectores e o OpenAI para gerar
-  respostas perspicazes e sensíveis ao contexto.
+  Neste tutorial, mostraremos como construir um pipeline RAG
+  (Retrieval-Augmented Generation) usando Milvus e Docling. O pipeline integra o
+  Docling para análise de documentos, o Milvus para armazenamento de vectores e
+  o OpenAI para gerar respostas perspicazes e sensíveis ao contexto.
 title: Construir RAG com Milvus e Docling
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_docling.ipynb" target="_parent">

@@ -602,7 +602,7 @@ summary: Pelajari cara mengonfigurasi dataNode untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Jumlah maksimum tugas impor/pra-impor yang diizinkan untuk dijalankan secara bersamaan pada datanode.      </td>
+      <td>        Jumlah maksimum tugas impor/pra-impor yang diizinkan untuk dijalankan secara bersamaan pada sebuah datanode.      </td>
       <td>16</td>
     </tr>
   </tbody>

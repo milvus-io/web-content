@@ -74,12 +74,12 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
         Milvus_VectorStore.__init__(<span class="hljs-variable language_">self</span>, config=config)
         OpenAI_Chat.__init__(<span class="hljs-variable language_">self</span>, config=config)
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">VannaMilvus</code> クラスを必要な設定パラメータで初期化する。エンベッディングの格納には<code translate="no">milvus_client</code> のインスタンスを使い、エンベッディングの生成には<a href="https://milvus.io/docs/embeddings.md">milvus_model</a>から初期化した<code translate="no">model.DefaultEmbeddingFunction()</code> を使います。</p>
+<p><code translate="no">VannaMilvus</code> クラスを必要な設定パラメータで初期化する。エンベッディングの保存には<code translate="no">milvus_client</code> のインスタンスを使い、エンベッディングの生成には<a href="https://milvus.io/docs/embeddings.md">milvus_model</a>から初期化した<code translate="no">model.DefaultEmbeddingFunction()</code> を使います。</p>
 <div class="alert note">
 <p><code translate="no">MilvusClient</code> の引数については、次のようにします：</p>
 <ul>
 <li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利な方法です。</li>
-<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
+<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、<code translate="no">http://localhost:19530</code> などのサーバ uri を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>

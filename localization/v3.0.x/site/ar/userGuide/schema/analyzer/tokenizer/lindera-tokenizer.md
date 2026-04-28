@@ -488,4 +488,4 @@ result = client.run_analyzer(sample_text, analyzer_params)
 <p><strong>الناتج المتوقع:</strong></p>
 <pre><code translate="no" class="language-plaintext">[&#x27;東京&#x27;, &#x27;スカイ&#x27;, &#x27;ツリー&#x27;, &#x27;最寄り駅&#x27;, &#x27;とう&#x27;, &#x27;きょう&#x27;, &#x27;スカイ&#x27;, &#x27;ツリー&#x27;, &#x27;駅&#x27;]
 <button class="copy-code-btn"></button></code></pre>
-<p>بدون <code translate="no">japanese_stop_tags</code> ، سيتضمن الإخراج جسيمات مثل <code translate="no">の</code> (ملكية) و <code translate="no">は</code> (علامة الموضوع) و <code translate="no">です</code> (علامة الموضوع) و (copula).</p>
+<p>بدون <code translate="no">japanese_stop_tags</code> ، سيتضمن الإخراج جسيمات مثل <code translate="no">の</code> (في) و <code translate="no">は</code> (علامة الموضوع) و <code translate="no">です</code> (علامة الموضوع).</p>

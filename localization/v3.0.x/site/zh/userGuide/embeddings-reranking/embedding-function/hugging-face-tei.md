@@ -49,10 +49,40 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>在为 Milvus 配置 TEI 功能之前，您需要有一个正在运行的 TEI 服务。Milvus 支持两种 TEI 部署方法：</p>
-<h3 id="Standard-deployment-external" class="common-anchor-header">标准部署（外部）</h3><p>您可以使用来自 Hugging Face 的官方方法，将 TEI 作为独立服务进行部署。这种方法为您的 TEI 服务提供了最大的灵活性和控制权。</p>
+<h3 id="Standard-deployment-external" class="common-anchor-header">标准部署（外部）<button data-href="#Standard-deployment-external" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您可以使用来自 Hugging Face 的官方方法，将 TEI 作为独立服务进行部署。这种方法为您的 TEI 服务提供了最大的灵活性和控制权。</p>
 <p>有关使用 Docker 或其他方法部署 TEI 的详细说明，请参阅<a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour#deploy">Hugging Face Text Embeddings Inference 官方文档</a>。</p>
-<p>部署完成后，请记下您的 TEI 服务端点（如<code translate="no">http://localhost:8080</code> ），因为<a href="/docs/zh/hugging-face-tei.md#Use-embedding-function-">在 Milvus 中使用 TEI 功能</a>时会用到它。</p>
-<h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Milvus Helm 图表部署（已集成）</h3><p>对于 Kubernetes 环境，Milvus 通过其 Helm 图表提供了集成部署选项。这通过与 Milvus 一起部署和配置 TEI 简化了流程。</p>
+<p>部署后，请记下您的 TEI 服务端点（如<code translate="no">http://localhost:8080</code> ），因为<a href="/docs/zh/hugging-face-tei.md#Use-embedding-function-">在 Milvus 中使用 TEI 功能</a>时会用到它。</p>
+<h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Milvus Helm 图表部署（已集成）<button data-href="#Milvus-Helm-Chart-deployment-integrated" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>对于 Kubernetes 环境，Milvus 通过其 Helm 图表提供了集成部署选项。这通过与 Milvus 一起部署和配置 TEI 简化了流程。</p>
 <p>在 Milvus Helm 部署中启用 TEI：</p>
 <ol>
 <li><p>配置<strong>values.yaml</strong>以启用 TEI：</p>
@@ -105,7 +135,7 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
         ></path>
       </svg>
     </button></h2><p>部署 TEI 服务后，您需要在定义 TEI Embeddings 功能时提供其端点。在大多数情况下，不需要额外的配置，因为 TEI 在 Milvus 中是默认启用的。</p>
-<p>不过，如果您的 TEI 服务在部署时使用了 API 密钥验证 (<code translate="no">--api-key</code> 标志)，则需要配置 Milvus 以使用此密钥：</p>
+<p>不过，如果您的 TEI 服务是使用 API 密钥验证（<code translate="no">--api-key</code> 标志）部署的，则需要配置 Milvus 以使用此密钥：</p>
 <ol>
 <li><p><strong>在<code translate="no">credential</code> 部分定义 API 密钥：</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
@@ -138,9 +168,24 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
         ></path>
       </svg>
     </button></h2><p>配置 TEI 服务后，请按照以下步骤定义和使用嵌入函数。</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">步骤 1：定义 Schema 字段</h3><p>要使用嵌入函数，请创建一个具有特定 Schema 的 Collections。此 Schema 必须至少包含三个必要字段：</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">步骤 1：定义 Schema 字段<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要使用嵌入函数，请创建一个具有特定 Schema 的 Collections。此 Schema 必须至少包含三个必要字段：</p>
 <ul>
-<li><p>唯一标识 Collections 中每个实体的主字段。</p></li>
+<li><p>主字段，用于唯一标识 Collections 中的每个实体。</p></li>
 <li><p>标量字段，用于存储要嵌入的原始数据。</p></li>
 <li><p>一个向量字段，用于存储函数将为标量字段生成的向量嵌入。</p></li>
 </ul>
@@ -159,7 +204,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to exactly match the TEI model&#x27;s output dimension</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">第 2 步：向 Schema 添加嵌入函数</h3><p>Milvus 中的 Function 模块会自动将标量字段中存储的原始数据转换为嵌入数据，并将其存储到明确定义的向量字段中。</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">第 2 步：向 Schema 添加嵌入函数<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 中的 Function 模块会自动将标量字段中存储的原始数据转换为嵌入数据，并将其存储到明确定义的向量字段中。</p>
 <p>下面的示例添加了一个 Function 模块 (<code translate="no">tei_func</code>)，该模块将标量域<code translate="no">&quot;document&quot;</code> 转换为嵌入，将得到的向量存储到之前定义的<code translate="no">&quot;dense_vector&quot;</code> 向量域中。</p>
 <p>定义好嵌入函数后，将其添加到 Collections Schema 中。这将指示 Milvus 使用指定的嵌入函数来处理和存储文本数据的嵌入。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define TEI embedding function</span>

@@ -19,7 +19,7 @@ title: Milvus와 SentenceTransformers를 사용한 영화 검색
         ></path>
       </svg>
     </button></h1><p>이 예제에서는 Milvus와 SentenceTransformers 라이브러리를 사용하여 영화 줄거리 요약을 검색하겠습니다. 우리가 사용할 데이터 세트는 HuggingFace에서 호스팅되는 <a href="https://huggingface.co/datasets/vishnupriyavr/wiki-movie-plots-with-summaries">요약이 포함된 Wikipedia 영화 플롯입니다</a>.</p>
-<p>시작해 보겠습니다!</p>
+<p>시작해 봅시다!</p>
 <h2 id="Required-Libraries" class="common-anchor-header">필요한 라이브러리<button data-href="#Required-Libraries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,7 +82,7 @@ collection_name = <span class="hljs-string">&quot;movie_embeddings&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 시점에서 Milvus 설정을 시작하겠습니다. 단계는 다음과 같습니다:</p>
+    </button></h2><p>이제 Milvus 설정을 시작하겠습니다. 단계는 다음과 같습니다:</p>
 <ol>
 <li>로컬 파일에 Milvus Lite 데이터베이스를 만듭니다. (이 URI를 Milvus 독립형 및 Milvus 배포용 서버 주소로 바꿉니다.).</li>
 </ol>
@@ -109,7 +109,7 @@ client.create_collection(collection_name=collection_name, schema=schema)
 index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;IP&quot;</span>)
 client.create_index(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
-<p>이 단계가 완료되면 컬렉션에 데이터를 삽입하고 검색을 수행할 준비가 된 것입니다. 추가된 모든 데이터는 자동으로 색인되며 즉시 검색에 사용할 수 있습니다. 데이터가 매우 새 데이터인 경우, 색인 작업이 진행 중인 데이터에 대해 무차별 대입 검색이 사용되므로 검색 속도가 느려질 수 있습니다.</p>
+<p>이 단계가 완료되면 컬렉션에 데이터를 삽입하고 검색을 수행할 준비가 된 것입니다. 추가된 모든 데이터는 자동으로 색인되며 즉시 검색에 사용할 수 있습니다. 데이터가 매우 새 데이터인 경우, 색인화 작업이 진행 중인 데이터에 대해 무차별 대입 검색이 사용되므로 검색 속도가 느려질 수 있습니다.</p>
 <h2 id="Inserting-the-Data" class="common-anchor-header">데이터 삽입하기<button data-href="#Inserting-the-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

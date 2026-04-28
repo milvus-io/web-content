@@ -51,7 +51,7 @@ beta: Milvus 2.6.6+
 <li><p>Sie können <code translate="no">nullable=True</code> für <code translate="no">TIMESTAMPTZ</code> Felder einstellen, um fehlende Werte zuzulassen.</p></li>
 <li><p>Sie können einen Standardzeitstempelwert mit dem Attribut <code translate="no">default_value</code> im <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601-Format</a> angeben.</p></li>
 </ul>
-<p>Siehe <a href="/docs/de/nullable-and-default.md">Nullable &amp; Default</a> für weitere Informationen.</p>
+<p>Siehe <a href="/docs/de/nullable-and-default.md">Nullable &amp; Default</a> für weitere Details.</p>
 </div>
 <h2 id="Basic-operations" class="common-anchor-header">Grundlegende Vorgänge<button data-href="#Basic-operations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -386,7 +386,7 @@ res = client.search(
      <td><p>Höchste</p></td>
    </tr>
 </table>
-<p>Schritt-für-Schritt-Anleitungen und Codebeispiele finden Sie auf den entsprechenden Seiten:</p>
+<p>Schritt-für-Schritt-Anweisungen und Codebeispiele finden Sie auf den entsprechenden Seiten:</p>
 <ul>
 <li><p><a href="/docs/de/modify-collection.md#Example-6-Set-collection-time-zone">Sammlung modifizieren</a></p></li>
 <li><p><a href="/docs/de/manage_databases.md#Manage-database-properties">Datenbank</a></p></li>

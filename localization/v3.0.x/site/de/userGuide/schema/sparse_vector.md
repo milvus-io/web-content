@@ -5,9 +5,9 @@ summary: >-
   Spärliche Vektoren sind eine wichtige Methode zur Erfassung oberflächlicher
   Begriffsübereinstimmungen beim Information Retrieval und bei der Verarbeitung
   natürlicher Sprache. Während sich dichte Vektoren durch ein besseres
-  semantisches Verständnis auszeichnen, liefern spärliche Vektoren oft
-  vorhersehbarere Ergebnisse, insbesondere bei der Suche nach speziellen
-  Begriffen oder textuellen Identifikatoren.
+  semantisches Verständnis auszeichnen, liefern spärliche Vektoren oft besser
+  vorhersehbare Ergebnisse, insbesondere bei der Suche nach speziellen Begriffen
+  oder textuellen Identifikatoren.
 ---
 <h1 id="Sparse-Vector" class="common-anchor-header">Sparsamer Vektor<button data-href="#Sparse-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Spärliche Vektoren sind eine wichtige Methode zur Erfassung der Übereinstimmung von Begriffen auf der Oberflächenebene bei der Informationssuche und der Verarbeitung natürlicher Sprache. Während sich dichte Vektoren durch ein besseres semantisches Verständnis auszeichnen, liefern spärliche Vektoren oft besser vorhersehbare Ergebnisse, insbesondere bei der Suche nach speziellen Begriffen oder textuellen Identifikatoren.</p>
+    </button></h1><p>Spärliche Vektoren sind eine wichtige Methode zur Erfassung der Übereinstimmung von Begriffen auf der Oberflächenebene bei der Informationsbeschaffung und der Verarbeitung natürlicher Sprache. Während sich dichte Vektoren durch ein besseres semantisches Verständnis auszeichnen, liefern spärliche Vektoren oft besser vorhersehbare Ergebnisse, insbesondere bei der Suche nach speziellen Begriffen oder textuellen Identifikatoren.</p>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,17 +43,17 @@ summary: >-
     </button></h2><p>Ein spärlicher Vektor ist ein spezieller hochdimensionaler Vektor, bei dem die meisten Elemente Null sind und nur einige wenige Dimensionen Nicht-Null-Werte haben. Wie im folgenden Diagramm dargestellt, werden dichte Vektoren in der Regel als kontinuierliche Arrays dargestellt, bei denen jede Position einen Wert hat (z. B. <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). Im Gegensatz dazu speichern spärliche Vektoren nur Nicht-Null-Elemente und ihre Indizes der Dimension, die oft als Schlüssel-Wert-Paare von <code translate="no">{ index: value}</code> dargestellt werden (z. B. <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
    </span> <span class="img-wrapper"> <span>Sparse-Vektor-Repräsentation</span> </span></p>
 <p>Mit Tokenisierung und Scoring können Dokumente als Bag-of-Words-Vektoren dargestellt werden, wobei jede Dimension einem bestimmten Wort im Vokabular entspricht. Nur die im Dokument vorkommenden Wörter haben Werte ungleich Null, wodurch eine spärliche Vektordarstellung entsteht. Spärliche Vektoren können mit zwei Ansätzen erzeugt werden:</p>
 <ul>
-<li><p><strong>Traditionelle statistische Verfahren</strong> wie <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) und <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (Best Matching 25) gewichten Wörter auf der Grundlage ihrer Häufigkeit und Bedeutung in einem Korpus. Diese Methoden berechnen einfache Statistiken als Punktwerte für jede Dimension, die ein Token darstellt.  Milvus bietet eine integrierte <strong>Volltextsuche</strong> mit der BM25-Methode, die den Text automatisch in spärliche Vektoren umwandelt, wodurch eine manuelle Vorverarbeitung überflüssig wird. Dieser Ansatz ist ideal für die stichwortbasierte Suche, bei der Präzision und exakte Treffer wichtig sind. Weitere Informationen finden Sie unter <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p></li>
-<li><p><strong>Neuronale Sparse Embedding-Modelle</strong> sind erlernte Methoden zur Erzeugung spärlicher Repräsentationen durch Training auf großen Datensätzen. Dabei handelt es sich in der Regel um Deep-Learning-Modelle mit Transformer-Architektur, die in der Lage sind, Begriffe auf der Grundlage des semantischen Kontexts zu erweitern und zu gewichten. Milvus unterstützt auch extern generierte Sparse Embeddings von Modellen wie <a href="https://arxiv.org/abs/2109.10086">SPLADE</a>. Siehe <a href="/docs/de/embeddings.md#Embedding-Overview">Einbettungen</a> für Details.</include></p></li>
+<li><p><strong>Traditionelle statistische Verfahren</strong> wie <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) und <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (Best Matching 25) gewichten Wörter auf der Grundlage ihrer Häufigkeit und Bedeutung in einem Korpus. Diese Methoden berechnen einfache Statistiken als Scores für jede Dimension, die ein Token darstellt.  Milvus bietet eine integrierte <strong>Volltextsuche</strong> mit der BM25-Methode, die den Text automatisch in spärliche Vektoren umwandelt, wodurch eine manuelle Vorverarbeitung überflüssig wird. Dieser Ansatz ist ideal für die stichwortbasierte Suche, bei der Präzision und exakte Treffer wichtig sind. Weitere Informationen finden Sie unter <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p></li>
+<li><p><strong>Neuronale Sparse Embedding-Modelle</strong> sind erlernte Methoden zur Erzeugung spärlicher Repräsentationen durch Training auf großen Datensätzen. Dabei handelt es sich in der Regel um Deep-Learning-Modelle mit Transformer-Architektur, die in der Lage sind, Begriffe auf der Grundlage des semantischen Kontexts zu erweitern und zu gewichten. Milvus unterstützt auch extern generierte Sparse Embeddings von Modellen wie <a href="https://arxiv.org/abs/2109.10086">SPLADE</a>. Siehe <a href="/docs/de/embeddings.md#Embedding-Overview">Einbettungen</a> für weitere Details.</include></p></li>
 </ul>
 <p>Sparse-Vektoren und der Originaltext können in Milvus gespeichert werden, um sie effizient wiederzufinden. Das folgende Diagramm zeigt den Gesamtprozess.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
    </span> <span class="img-wrapper"> <span>Arbeitsablauf bei spärlichen Vektoren</span> </span></p>
 <div class="alert note">
 <p>Zusätzlich zu spärlichen Vektoren unterstützt Milvus auch dichte Vektoren und binäre Vektoren. Dichte Vektoren sind ideal für die Erfassung tiefgreifender semantischer Beziehungen, während binäre Vektoren sich in Szenarien wie schnellen Ähnlichkeitsvergleichen und der Deduplizierung von Inhalten auszeichnen. Weitere Informationen finden Sie unter <a href="/docs/de/dense-vector.md">Dichte Vektoren</a> und <a href="/docs/de/binary-vector.md">binäre Vektoren</a>.</p>
@@ -380,7 +380,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sobald die Einstellungen für Sparse Vector und Index abgeschlossen sind, können Sie eine Sammlung erstellen, die Sparse Vectors enthält. Das folgende Beispiel verwendet die <a href="/docs/de/create-collection.md"><code translate="no">create_collection</code></a> Methode, um eine Sammlung namens <code translate="no">my_collection</code> zu erstellen.</p>
+    </button></h2><p>Sobald die Einstellungen für Sparse-Vektoren und Indizes abgeschlossen sind, können Sie eine Sammlung erstellen, die Sparse-Vektoren enthält. Das folgende Beispiel verwendet die <a href="/docs/de/create-collection.md"><code translate="no">create_collection</code></a> Methode, um eine Sammlung namens <code translate="no">my_collection</code> zu erstellen.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -441,7 +441,7 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie müssen Daten für alle bei der Erstellung der Sammlung definierten Felder bereitstellen, mit Ausnahme von Feldern, die automatisch generiert werden (z. B. der Primärschlüssel mit <code translate="no">auto_id</code> aktiviert). Wenn Sie die integrierte Funktion BM25 zur automatischen Generierung von Sparse-Vektoren verwenden, sollten Sie beim Einfügen von Daten auch das Sparse-Vektor-Feld auslassen.</p>
+    </button></h2><p>Sie müssen Daten für alle bei der Erstellung der Sammlung definierten Felder bereitstellen, mit Ausnahme von Feldern, die automatisch generiert werden (z. B. der Primärschlüssel mit <code translate="no">auto_id</code> aktiviert). Wenn Sie die integrierte Funktion BM25 zur automatischen Generierung von Sparse-Vektoren verwenden, sollten Sie beim Einfügen von Daten auch das Sparse-Vektor-Feld weglassen.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [

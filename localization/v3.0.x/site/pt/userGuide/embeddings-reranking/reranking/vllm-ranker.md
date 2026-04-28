@@ -2,7 +2,7 @@
 id: vllm-ranker.md
 title: Classificador vLLMCompatible with Milvus 2.6.x
 summary: >-
-  O vLLM Ranker aproveita a estrutura de inferência vLLM para melhorar a
+  O vLLM Ranker utiliza a estrutura de inferência vLLM para melhorar a
   relevância da pesquisa através da classificação semântica. Representa uma
   abordagem avançada à ordenação de resultados de pesquisa que vai além da
   tradicional semelhança de vectores.

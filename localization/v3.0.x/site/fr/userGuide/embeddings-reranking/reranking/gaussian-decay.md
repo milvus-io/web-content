@@ -106,7 +106,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">scale</code> (±2 km) : La distance à laquelle la pertinence chute à la valeur de décroissance - les restaurants situés à exactement 2 kilomètres voient leur score de pertinence divisé par deux (0,5).</p></li>
 <li><p><code translate="no">decay</code> (0.5) : Le score à la distance d'échelle - ce paramètre contrôle essentiellement la vitesse à laquelle les scores diminuent avec la distance.</p></li>
 </ul>
-<p>Comme le montre la courbe, la pertinence des restaurants situés à plus de 2 km continue de diminuer sans jamais atteindre zéro. Même les restaurants situés à 4 ou 5 kilomètres conservent une pertinence minimale, ce qui permet à d'excellents restaurants éloignés d'apparaître dans les résultats (bien que moins bien classés).</p>
+<p>Comme vous pouvez le voir sur la courbe, la pertinence des restaurants situés à plus de 2 km continue de diminuer sans jamais atteindre zéro. Même les restaurants situés à 4 ou 5 kilomètres conservent une pertinence minimale, ce qui permet à d'excellents restaurants éloignés d'apparaître dans les résultats (bien que moins bien classés).</p>
 <p>Ce comportement imite la façon dont les gens pensent naturellement à la pertinence de la distance - les endroits proches sont préférés, mais nous sommes prêts à voyager plus loin pour des options exceptionnelles.</p>
 <h2 id="Formula" class="common-anchor-header">Formule<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"

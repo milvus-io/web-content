@@ -76,7 +76,7 @@ beta: Milvus v2.6.2+
     </button></h2><p>Il diagramma seguente illustra il flusso di lavoro principale dei Boost Ranker.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
    </span> <span class="img-wrapper"> <span>Meccanismo di Boost Ranker</span> </span></p>
 <p>Quando si inseriscono i dati, Milvus li distribuisce in segmenti. Durante una ricerca, ogni segmento restituisce un insieme di candidati e Milvus classifica questi candidati da tutti i segmenti per produrre i risultati finali. Quando una richiesta di ricerca include un Boost Ranker, Milvus lo applica ai risultati dei candidati di ogni segmento per evitare una potenziale perdita di precisione e migliorare il richiamo.</p>
 <p>Prima di finalizzare i risultati, Milvus elabora questi candidati con il Boost Ranker come segue:</p>

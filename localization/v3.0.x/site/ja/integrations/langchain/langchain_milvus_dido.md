@@ -184,7 +184,7 @@ vector_store = Milvus(
 </p>
 <p><strong>特徴</strong></p>
 <ul>
-<li>Milvusサーバーが埋め込みAPIを呼び出す</li>
+<li>Milvusサーバが埋め込みAPIを呼び出す</li>
 <li>APIキーはサーバ側で一元管理</li>
 <li>データの流れテキスト → Milvus → エンベッディングAPI → ベクター（Milvusに格納）</li>
 </ul>

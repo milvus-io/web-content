@@ -49,11 +49,11 @@ summary: >-
     </button></h2><p>Los vectores densos suelen representarse como matrices de números en coma flotante con una longitud fija, como <code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code>. La dimensionalidad de estos vectores suele oscilar entre cientos y miles, como 128, 256, 768 o 1024. Cada dimensión captura características semánticas específicas de un objeto, haciéndolo aplicable a diversos escenarios mediante cálculos de similitud.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" />
    </span> <span class="img-wrapper"> <span>Vector denso</span> </span></p>
 <p>La imagen anterior ilustra la representación de vectores densos en un espacio 2D. Aunque los vectores densos en aplicaciones reales suelen tener dimensiones mucho mayores, esta ilustración en 2D transmite eficazmente varios conceptos clave:</p>
 <ul>
-<li><p><strong>Representación multidimensional:</strong> Cada punto representa un objeto conceptual (como <strong>Milvus</strong>, una <strong>base de datos vectorial</strong>, <strong>un sistema de recuperación</strong>, etc.), cuya posición viene determinada por los valores de sus dimensiones.</p></li>
+<li><p><strong>Representación multidimensional:</strong> Cada punto representa un objeto conceptual (como <strong>Milvus</strong>, <strong>base de datos vectorial</strong>, <strong>sistema de recuperación</strong>, etc.), cuya posición viene determinada por los valores de sus dimensiones.</p></li>
 <li><p><strong>Relaciones semánticas:</strong> Las distancias entre puntos reflejan la similitud semántica entre conceptos. Los puntos más cercanos indican conceptos más relacionados semánticamente.</p></li>
 <li><p><strong>Efecto de agrupamiento:</strong> Los conceptos relacionados (como <strong>Milvus</strong>, <strong>base de datos vectorial</strong> y <strong>sistema de recuperación</strong>) se sitúan cerca unos de otros en el espacio, formando un cluster semántico.</p></li>
 </ul>
@@ -75,7 +75,7 @@ summary: >-
 <p>Una vez vectorizados los datos, pueden almacenarse en Milvus para su gestión y recuperación de vectores. El diagrama siguiente muestra el proceso básico.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>Utilizar vectores densos</span> </span></p>
 <div class="alert note">
 <p>Además de los vectores densos, Milvus también admite vectores dispersos y vectores binarios. Los vectores dispersos son adecuados para coincidencias precisas basadas en términos específicos, como la búsqueda de palabras clave y la coincidencia de términos, mientras que los vectores binarios se utilizan comúnmente para manejar eficientemente datos binarizados, como la coincidencia de patrones de imágenes y ciertas aplicaciones hash. Para más información, consulte <a href="/docs/es/binary-vector.md">Vectores binarios</a> y <a href="/docs/es/sparse_vector.md">vectores dispersos</a>.</p>
@@ -95,7 +95,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Añadir campo vectorial</h3><p>Para utilizar vectores densos en Milvus, defina primero un campo vectorial para almacenar vectores densos al crear una colección. Este proceso incluye:</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Añadir campo vectorial<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para utilizar vectores densos en Milvus, defina primero un campo vectorial para almacenar vectores densos al crear una colección. Este proceso incluye:</p>
 <ol>
 <li><p>Establecer <code translate="no">datatype</code> en un tipo de datos de vectores densos admitido. Para tipos de datos de vectores densos soportados, ver Tipos de Datos.</p></li>
 <li><p>Especificar las dimensiones del vector denso utilizando el parámetro <code translate="no">dim</code>.</p></li>
@@ -235,7 +250,22 @@ schema.WithField(entity.NewField().
      <td><p>Almacena vectores cuyos elementos individuales en cada dimensión son enteros de 8 bits (int8), con cada elemento entre -128 y 127. Diseñado para modelos de aprendizaje profundo cuantizados (por ejemplo, ResNet, EfficientNet), INT8_VECTOR reduce el tamaño del modelo y acelera la inferencia con una pérdida de precisión mínima.<br><strong>Nota</strong>: Este tipo de vector sólo se admite para índices HNSW.</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Establecer parámetros de índice para el campo vectorial</h3><p>Para acelerar las búsquedas semánticas, debe crearse un índice para el campo vectorial. La indexación puede mejorar significativamente la eficacia de la recuperación de datos vectoriales a gran escala.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Establecer parámetros de índice para el campo vectorial<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para acelerar las búsquedas semánticas, debe crearse un índice para el campo vectorial. La indexación puede mejorar significativamente la eficacia de la recuperación de datos vectoriales a gran escala.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -282,7 +312,22 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <p>En el ejemplo anterior, se crea un índice denominado <code translate="no">dense_vector_index</code> para el campo <code translate="no">dense_vector</code> utilizando el tipo de índice <code translate="no">AUTOINDEX</code>. El <code translate="no">metric_type</code> se establece en <code translate="no">IP</code>, lo que indica que se utilizará el producto interno como métrica de distancia.</p>
 <p>Milvus proporciona varios tipos de índice para una mejor experiencia de búsqueda vectorial. AUTOINDEX es un tipo de índice especial diseñado para suavizar la curva de aprendizaje de la búsqueda vectorial. Hay muchos tipos de índice disponibles para elegir. Para más detalles, consulte xxx.</p>
 <p>Milvus soporta otros tipos métricos. Para más información, consulte <a href="/docs/es/metric.md">Tipos métricos</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">Crear colección</h3><p>Una vez completados los ajustes de vectores densos y parámetros de índice, puede crear una colección que contenga vectores densos. El siguiente ejemplo utiliza el método <code translate="no">create_collection</code> para crear una colección llamada <code translate="no">my_collection</code>.</p>
+<h3 id="Create-collection" class="common-anchor-header">Crear colección<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Una vez completados los ajustes de vectores densos y parámetros de índice, puede crear una colección que contenga vectores densos. El siguiente ejemplo utiliza el método <code translate="no">create_collection</code> para crear una colección llamada <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -336,7 +381,22 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Insertar datos</h3><p>Tras crear la colección, utiliza el método <code translate="no">insert</code> para añadir datos que contengan vectores densos. Asegúrate de que la dimensionalidad de los vectores densos que se insertan coincide con el valor <code translate="no">dim</code> definido al añadir el campo de vectores densos.</p>
+<h3 id="Insert-data" class="common-anchor-header">Insertar datos<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tras crear la colección, utiliza el método <code translate="no">insert</code> para añadir datos que contengan vectores densos. Asegúrate de que la dimensionalidad de los vectores densos que se insertan coincide con el valor <code translate="no">dim</code> definido al añadir el campo de vectores densos.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -399,7 +459,22 @@ client.<span class="hljs-title function_">insert</span>({
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572531&quot;,&quot;453577185629572532&quot;]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Realizar búsqueda por similitud</h3><p>La búsqueda semántica basada en vectores densos es una de las características principales de Milvus, que le permite encontrar rápidamente los datos más similares a un vector de consulta basándose en la distancia entre vectores. Para realizar una búsqueda de similitud, prepare el vector de consulta y los parámetros de búsqueda y, a continuación, llame al método <code translate="no">search</code>.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">Realizar búsqueda por similitud<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La búsqueda semántica basada en vectores densos es una de las características principales de Milvus, que le permite encontrar rápidamente los datos más similares a un vector de consulta basándose en la distancia entre vectores. Para realizar una búsqueda de similitud, prepare el vector de consulta y los parámetros de búsqueda y, a continuación, llame al método <code translate="no">search</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {

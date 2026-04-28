@@ -53,7 +53,7 @@ beta: Milvus 2.6.x
      <td><p>航程-3</p></td>
      <td><p>1,024</p></td>
      <td><p>32,000</p></td>
-     <td><p>最佳化的一般用途與多語言檢索品質。詳情請參閱<a href="https://blog.voyageai.com/2024/09/18/voyage-3/">部落格文章</a>。</p></td>
+     <td><p>最佳的一般用途與多語言檢索品質。詳情請參閱<a href="https://blog.voyageai.com/2024/09/18/voyage-3/">部落格文章</a>。</p></td>
    </tr>
    <tr>
      <td><p>voyage-3-lite</p></td>
@@ -104,7 +104,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Milvus 必須知道您的 Voyage AI API 金鑰，才能請求嵌入。Milvus 提供兩種配置憑證的方法：</p>
 <ul>
-<li><p><strong>設定檔案 (建議使用)：</strong>將 API 金鑰儲存在<code translate="no">milvus.yaml</code> ，以便每次重新啟動和節點都會自動擷取。</p></li>
+<li><p><strong>設定檔案 (建議使用)：</strong>將 API 金鑰儲存在<code translate="no">milvus.yaml</code> ，以便每次重新啟動和節點都會自動取得。</p></li>
 <li><p><strong>環境變數：</strong>在部署時注入金鑰 - 最適合 Docker Compose。</p></li>
 </ul>
 <p>在以下兩種方法中選擇一種--配置檔案在裸機和虛擬機器上較容易維護，而 env-var 路線則適合容器工作流程。</p>
@@ -128,7 +128,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h3><p>將您的 API 金鑰保留在<code translate="no">milvus.yaml</code> ；Milvus 會在啟動時讀取它們，並覆寫相同提供者的任何環境變數。</p>
 <ol>
-<li><p>**在下列位置宣告您的金鑰<code translate="no">credential:</code></p>
+<li><p>**在以下位置宣告您的金鑰<code translate="no">credential:</code></p>
 <p>您可以列出一個或多個 API 金鑰 - 給每個金鑰一個您自創的標籤，稍後可以參考。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
@@ -147,7 +147,7 @@ beta: Milvus 2.6.x
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey_dev</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-comment"># url: https://api.voyageai.com/v1/embeddings   # (optional) custom url</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>這樣，Milvus 傳送給 Voyage AI embeddings endpoint 的每個請求都會綁定特定的 key。</p></li>
+<p>這樣，Milvus 傳送至 Voyage AI embeddings endpoint 的每個請求都會綁定特定的 key。</p></li>
 </ol>
 <h3 id="Option-2-Environment-variable" class="common-anchor-header">選項 2：環境變數<button data-href="#Option-2-Environment-variable" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -225,7 +225,7 @@ beta: Milvus 2.6.x
 <li><p>儲存要嵌入的原始資料的標量欄位。</p></li>
 <li><p>預留向量欄位，用來儲存函式將為標量欄位產生的向量嵌入。</p></li>
 </ul>
-<p>以下範例定義了一個模式，其中一個標量欄位<code translate="no">&quot;document&quot;</code> 用來儲存文字資料，另一個向量欄位<code translate="no">&quot;dense&quot;</code> 用來儲存函式模組要產生的嵌入資料。切記設定向量維度 (<code translate="no">dim</code>) 以符合您所選擇的嵌入模型輸出。</p>
+<p>以下範例定義了一個模式，其中一個標量欄位<code translate="no">&quot;document&quot;</code> 用來儲存文字資料，另一個向量欄位<code translate="no">&quot;dense&quot;</code> 用來儲存函式模組要產生的嵌入資料。請記住設定向量維度 (<code translate="no">dim</code>) 以符合您所選擇的嵌入模型輸出。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -263,7 +263,7 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
       </svg>
     </button></h3><p>Milvus 中的 Function 模組會自動將儲存在標量欄位中的原始資料轉換為嵌入資料，並將其儲存在明確定義的向量欄位中。</p>
 <p>下面的範例新增了一個 Function 模組 (<code translate="no">voya</code>)，將標量欄位<code translate="no">&quot;document&quot;</code> 轉換為嵌入，將產生的向量儲存到之前定義的<code translate="no">&quot;dense&quot;</code> 向量欄位中。</p>
-<p>定義好嵌入函數後，將它加入集合模式。這會指示 Milvus 使用指定的 embedding 函式來處理和儲存文字資料的 embeddings。</p>
+<p>定義好嵌入函數後，將它加入集合模式。這會指示 Milvus 使用指定的 embedding 函數來處理和儲存文字資料的 embeddings。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function specifically for embedding model provider</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;voya&quot;</span>,                                  <span class="hljs-comment"># Unique identifier for this embedding function</span>

@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>HNSW_PRQは</strong>、HNSW（Hierarchical Navigable Small World）グラフとPRQ（Product Residual Quantization）を活用し、インデックスサイズと精度のトレードオフを微調整できる高度なベクトルインデックス作成手法を提供します。PRQは、従来の積量子化(PQ)を超えて、残差量子化(RQ)ステップを導入することで、追加情報を取り込み、純粋なPQベースの手法と比較して、より高い精度やよりコンパクトなインデックスを実現します。しかし、余分なステップはインデックス構築時や検索時の計算オーバーヘッドを増大させる可能性がある。</p>
+    </button></h1><p><strong>HNSW_PRQは</strong>、HNSW(Hierarchical Navigable Small World)グラフとPRQ(Product Residual Quantization)を活用し、インデックスサイズと精度のトレードオフを微調整できる高度なベクトルインデックス作成手法を提供します。PRQは、従来の積量子化(PQ)を超えて、残差量子化(RQ)ステップを導入することで、追加情報を取り込み、純粋なPQベースの手法と比較して、より高い精度やよりコンパクトなインデックスを実現します。しかし、余分なステップはインデックス構築時や検索時の計算オーバーヘッドを増大させる可能性がある。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -287,7 +287,7 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
-     <td><p>この精度は，圧縮ベクトル（<code translate="no">m</code> と<code translate="no">nbits</code> パラメータで設定）の精度よりも高くなければならない。</p></td>
+     <td><p>精緻化処理で使用するデータの精度を決定します。 この精度は、圧縮されたベクトル（<code translate="no">m</code> と<code translate="no">nbits</code> パラメータで設定）の精度よりも高くなければなりません。</p></td>
      <td><p><strong>型</strong>：String<strong>Range:[</strong> <code translate="no">SQ6</code><strong>,</strong> <code translate="no">SQ8</code><strong>,</strong> <code translate="no">BF16</code><strong>,</strong> <code translate="no">FP16</code><strong>,</strong> <code translate="no">FP32</code> <strong>]。</strong></p>
 <p><strong>デフォルト値</strong>：なし</p></td>
      <td><p>より高いメモリコストで最大の精度を得るには<code translate="no">FP32</code> を使用し、より良い圧縮を得るには<code translate="no">SQ6</code>/<code translate="no">SQ8</code> を使用する。<code translate="no">BF16</code> と<code translate="no">FP16</code> は、バランスの取れた代替案を提供する。</p></td>
@@ -324,7 +324,7 @@ res = MilvusClient.search(
  このパラメータは検索プロセスのみに影響し、グラフの最下層にのみ適用される。</p></td>
      <td><p><strong>タイプ</strong>整数<strong>Range</strong>：[1,<em>int_max］</em></p>
 <p><strong>デフォルト値</strong>:<em>limit</em>(TopK nearest neighbors to return)</p></td>
-     <td><p><code translate="no">ef</code> を大きくすると、より多くの近傍候補が考慮されるため、一般的に<strong>検索精度が高く</strong>なる。しかし、これは<strong>検索時間を増加させます</strong>。 高い想起を達成することが重要であり、検索速度があまり気にならない場合は、<code translate="no">ef</code> を増加させることを検討してください。</p>
+     <td><p><code translate="no">ef</code> を大きくすると、より多くの近傍候補が考慮されるため、一般的に<strong>検索精度が高く</strong>なる。しかし、これはまた<strong>検索時間を増加させます</strong>。 高い想起を達成することが重要であり、検索速度があまり気にならない場合は、<code translate="no">ef</code> を増加させることを検討してください。</p>
 <p>特に精度が多少低下しても構わないようなシナリオでは、<code translate="no">ef</code> を減らして、より高速な検索を優先させることを検討してください。</p>
 <p>ほとんどの場合、この範囲内の値を設定することをお勧めします：[K, 10K]。</p></td>
    </tr>

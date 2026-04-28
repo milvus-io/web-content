@@ -21,7 +21,7 @@ title: البداية سريعة
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>يمكن للمتجهات، وهي تنسيق بيانات المخرجات لنماذج الشبكات العصبية، ترميز المعلومات بفعالية وتؤدي دورًا محوريًا في تطبيقات الذكاء الاصطناعي مثل قاعدة المعرفة والبحث الدلالي والتوليد المعزز للاسترجاع (RAG) وغيرها.</p>
-<p>Milvus هي قاعدة بيانات متجهة مفتوحة المصدر تناسب تطبيقات الذكاء الاصطناعي من كل الأحجام، بدءًا من تشغيل روبوت دردشة تجريبي في دفتر ملاحظات Jupyter إلى بناء بحث على نطاق الويب يخدم مليارات المستخدمين. في هذا الدليل، سنرشدك في هذا الدليل إلى كيفية إعداد Milvus محليًا في غضون دقائق واستخدام مكتبة عميل Python لإنشاء المتجهات وتخزينها والبحث فيها.</p>
+<p>Milvus هي قاعدة بيانات متجهة مفتوحة المصدر تناسب تطبيقات الذكاء الاصطناعي من كل الأحجام بدءًا من تشغيل روبوت دردشة تجريبي في دفتر ملاحظات Jupyter إلى بناء بحث على نطاق الويب يخدم مليارات المستخدمين. في هذا الدليل، سنرشدك في هذا الدليل إلى كيفية إعداد Milvus محليًا في غضون دقائق واستخدام مكتبة عميل Python لإنشاء المتجهات وتخزينها والبحث فيها.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">تثبيت ميلفوس<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +61,7 @@ title: البداية سريعة
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لإنشاء قاعدة بيانات Milvus vector محلية، ما عليك سوى إنشاء <code translate="no">MilvusClient</code> عن طريق تحديد اسم ملف لتخزين جميع البيانات، مثل "milvus_demo.db".</p>
+    </button></h2><p>لإنشاء قاعدة بيانات متجهية محلية لـ Milvus، ما عليك سوى إنشاء <code translate="no">MilvusClient</code> عن طريق تحديد اسم ملف لتخزين جميع البيانات، مثل "milvus_demo.db".</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
@@ -93,7 +93,7 @@ client.create_collection(
 <ul>
 <li>يستخدم حقلا المفتاح الأساسي والمتجه اسميهما الافتراضيين ("معرف" و"متجه").</li>
 <li>يتم تعيين نوع القياس (تعريف مسافة المتجه) إلى قيمته الافتراضية<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">(COSINE</a>).</li>
-<li>يقبل حقل المفتاح الأساسي أعدادًا صحيحة ولا يزيد تلقائيًا (أي لا يستخدم <a href="https://milvus.io/docs/schema.md">ميزة المعرف التلقائي</a>) بدلاً من ذلك، يمكنك تحديد مخطط المجموعة رسميًا باتباع هذه <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">التعليمات</a>.</li>
+<li>يقبل حقل المفتاح الأساسي الأعداد الصحيحة ولا يزيد تلقائيًا (أي لا يستخدم <a href="https://milvus.io/docs/schema.md">ميزة المعرف التلقائي</a>) بدلاً من ذلك، يمكنك تحديد مخطط المجموعة رسميًا باتباع هذه <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">التعليمات</a>.</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">إعداد البيانات<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -454,4 +454,4 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
         ></path>
       </svg>
     </button></h2><p>إذا كنت تستخدم مساعدي ترميز الذكاء الاصطناعي مثل Claude Code أو Cursor، يمكنك تثبيت Milvus <a href="https://github.com/zilliztech/milvus-skill">Skill</a> لمساعدة أدوات الذكاء الاصطناعي الخاصة بك على كتابة كود Milvus الصحيح.</p>
-<p>لمزيد من أدوات الوكلاء بما في ذلك خوادم MCP والمطالبات المنسقة، راجع <a href="/docs/ar/milvus_for_agents.md">Milvus لوكلاء الذكاء الاصطناعي</a>.</p>
+<p>لمزيد من أدوات الوكيل بما في ذلك خوادم MCP والمطالبات المنسقة، راجع <a href="/docs/ar/milvus_for_agents.md">Milvus لوكلاء الذكاء الاصطناعي</a>.</p>

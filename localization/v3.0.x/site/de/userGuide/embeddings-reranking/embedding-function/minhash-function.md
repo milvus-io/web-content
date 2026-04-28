@@ -39,7 +39,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Das Ausgabefeld muss <code translate="no">BINARY_VECTOR</code> mit einer Dimension sein, die <code translate="no">dim % 32 == 0</code> entspricht, da jede MinHash-Signatur ein 32-Bit-Hash-Wert ist.</p></li>
+<li><p>Das Ausgabefeld muss eine <code translate="no">BINARY_VECTOR</code> mit einer Dimension sein, die <code translate="no">dim % 32 == 0</code> erfüllt, da jede MinHash-Signatur ein 32-Bit-Hash-Wert ist.</p></li>
 <li><p>Die <code translate="no">dim</code> des binären Vektorfeldes muss gleich <code translate="no">32 * num_hashes</code> sein. Eine Nichtübereinstimmung führt zu einem Fehler.</p></li>
 <li><p>Bei Verwendung des Index <code translate="no">MINHASH_LSH</code> mit der Ausgabe der MinHash-Funktion muss <code translate="no">mh_element_bit_width</code> auf <code translate="no">32</code> gesetzt werden.</p></li>
 </ul>
@@ -84,7 +84,7 @@ beta: Milvus 3.0.x
     </button></h3><p>Sowohl bei der Dokumentenerfassung als auch bei der Abfrageverarbeitung durchläuft der Rohtext die gleiche vierstufige Transformation:</p>
 <ol>
 <li><p><strong>Textanalyse</strong>: Der Text wird von einem <a href="/docs/de/analyzer-overview.md">Analysator</a> verarbeitet (wenn <code translate="no">token_level</code> <code translate="no">&quot;word&quot;</code> ist) oder direkt verwendet (wenn <code translate="no">token_level</code> <code translate="no">&quot;char&quot;</code> ist). Die Tokenisierung auf Wortebene wendet den für das Eingabefeld konfigurierten Analyzer an, um den Text in Begriffe zu segmentieren - zum Beispiel wird aus <code translate="no">&quot;milvus is vector db&quot;</code> <code translate="no">[&quot;milvus&quot;, &quot;is&quot;, &quot;vector&quot;, &quot;db&quot;]</code> .</p></li>
-<li><p><strong>Shingling</strong>: Die Token werden in überlappende n-Gramme (Schindeln) der Größe <code translate="no">shingle_size</code> aufgeteilt. Bei 3-Grammen auf Wortebene werden z. B. die Token <code translate="no">[&quot;information&quot;, &quot;retrieval&quot;, &quot;is&quot;, &quot;a&quot;, &quot;field&quot;]</code> zu Shingles wie <code translate="no">[&quot;information retrieval is&quot;, &quot;retrieval is a&quot;, &quot;is a field&quot;]</code>.</p></li>
+<li><p><strong>Shingling</strong>: Die Token werden in sich überlappende n-Gramme (Schindeln) der Größe <code translate="no">shingle_size</code> aufgeteilt. Bei 3-Grammen auf Wortebene werden z. B. die Token <code translate="no">[&quot;information&quot;, &quot;retrieval&quot;, &quot;is&quot;, &quot;a&quot;, &quot;field&quot;]</code> zu Shingles wie <code translate="no">[&quot;information retrieval is&quot;, &quot;retrieval is a&quot;, &quot;is a field&quot;]</code>.</p></li>
 <li><p><strong>MinHash-Signaturerzeugung</strong>: Mehrere Hash-Funktionen (H1, H2, ..., Hn, mit n = <code translate="no">num_hashes</code>) werden auf die Shingle-Menge angewendet. Für jede Hash-Funktion wird der minimale Hash-Wert für alle Schindeln ausgewählt. Die Sammlung dieser Mindestwerte bildet die MinHash-Signatur - eine Darstellung mit fester Länge, die der Jaccard-Ähnlichkeit des Originaldokuments nahe kommt.</p></li>
 <li><p><strong>Binärvektor-Kodierung</strong>: Jeder Signaturwert ist ein 32-Bit-Hash, und die vollständige Signatur wird in ein <code translate="no">BINARY_VECTOR</code> der Dimension <code translate="no">32 * num_hashes</code> gepackt.</p></li>
 </ol>
@@ -103,7 +103,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Beim Einfügen wird der von der gemeinsamen Pipeline erzeugte binäre Vektor im Index <code translate="no">MINHASH_LSH</code> gespeichert. Der Index verwaltet eine LSH-Tabelle (Locality-Sensitive Hashing), in der ähnliche Signaturen in denselben Buckets gruppiert werden, was einen schnellen Abruf von Kandidaten zur Abfragezeit ermöglicht.</p>
+    </button></h3><p>Beim Einfügen wird der von der gemeinsamen Pipeline erzeugte binäre Vektor im Index <code translate="no">MINHASH_LSH</code> gespeichert. Der Index verwaltet eine LSH-Tabelle (Locality-Sensitive Hashing), in der ähnliche Signaturen in denselben Buckets gruppiert werden, was ein schnelles Auffinden von Kandidaten zum Zeitpunkt der Abfrage ermöglicht.</p>
 <h3 id="Query-processing" class="common-anchor-header">Abfrageverarbeitung<button data-href="#Query-processing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -120,7 +120,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h3><p>Während der Suche durchläuft der Abfragetext die gleiche gemeinsame Pipeline, um einen binären Vektor zu erzeugen. Dieser Vektor wird verwendet, um einen LSH-Lookup im <code translate="no">MINHASH_LSH</code> Index durchzuführen, der schnell Kandidatenpaare identifiziert, die wahrscheinlich ähnlich sind. Die Kandidaten werden dann nach der geschätzten Jaccard-Ähnlichkeit geordnet und die Top-K-Ergebnisse werden zurückgegeben.</p>
-<p>Da beide Pfade die gleiche Transformationslogik verwenden, erzeugen zwei Dokumente mit stark überlappendem Inhalt ähnliche MinHash-Signaturen. Dies macht die Funktion effektiv für das Auffinden von Beinahe-Duplikaten, selbst wenn sich die Dokumente in der Wortreihenfolge, der Formatierung oder kleineren Formulierungen unterscheiden.</p>
+<p>Da beide Pfade die gleiche Transformationslogik verwenden, erzeugen zwei Dokumente mit stark überlappendem Inhalt ähnliche MinHash-Signaturen. Dies macht die Funktion effektiv für das Auffinden von Beinahe-Duplikaten, selbst wenn sich die Dokumente in der Wortreihenfolge, der Formatierung oder in kleineren Formulierungen unterscheiden.</p>
 <p></details></p>
 <h2 id="Before-you-start" class="common-anchor-header">Bevor Sie beginnen<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -177,7 +177,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ihr Sammlungsschema muss mindestens drei Felder enthalten:</p>
+    </button></h3><p>Das Schema Ihrer Sammlung muss mindestens drei Felder enthalten:</p>
 <ul>
 <li><p><strong>Primärfeld</strong>: Identifiziert jede Entität in der Sammlung eindeutig.</p></li>
 <li><p><strong>Textfeld</strong> (<code translate="no">VARCHAR</code>): Speichert rohe Textdokumente. Stellen Sie <code translate="no">enable_analyzer=True</code> ein, damit Milvus den Text für die MinHash-Signaturerstellung verarbeiten kann. Standardmäßig verwendet Milvus den <code translate="no">standard</code> Analysator für die Textanalyse. Um einen anderen Analyzer zu konfigurieren, lesen Sie bitte den Abschnitt <a href="/docs/de/choose-the-right-analyzer-for-your-use-case.md">Wählen Sie den richtigen Analyzer für Ihren Anwendungsfall</a>.</p></li>
@@ -404,7 +404,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sobald Sie Daten eingefügt haben, suchen Sie nach nahezu identischen Dokumenten, indem Sie Rohtextabfragen bereitstellen. Milvus konvertiert Ihren Abfragetext automatisch in einen binären MinHash-Vektor und findet die ähnlichsten Dokumente anhand der geschätzten Jaccard-Ähnlichkeit.</p>
+    </button></h2><p>Sobald Sie die Daten eingefügt haben, suchen Sie nach nahezu doppelten Dokumenten, indem Sie Rohtextabfragen bereitstellen. Milvus konvertiert Ihren Abfragetext automatisch in einen binären MinHash-Vektor und findet die ähnlichsten Dokumente anhand der geschätzten Jaccard-Ähnlichkeit.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {

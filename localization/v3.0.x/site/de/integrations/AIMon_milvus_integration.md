@@ -41,7 +41,7 @@ title: Verbessern Sie die Abrufqualität Ihrer LLM-Bewerbung mit AIMon und Milvu
 <ul>
 <li>Eine LLM-Anwendung zu erstellen, die die Anfrage eines Benutzers in Bezug auf den Meetingbank-Datensatz beantwortet.</li>
 <li>Die Qualität Ihrer LLM-Anwendung zu definieren und zu messen.</li>
-<li>Die Qualität Ihrer Anwendung mit Hilfe von 2 inkrementellen Ansätzen zu verbessern: eine Vektor-DB mit hybrider Suche und ein hochmoderner Re-Ranker.</li>
+<li>die Qualität Ihrer Anwendung mit Hilfe von 2 inkrementellen Ansätzen zu verbessern: eine Vektor-DB mit hybrider Suche und ein hochmoderner Re-Ranker.</li>
 </ul>
 <h2 id="Tech-Stack" class="common-anchor-header">Technischer Stapel<button data-href="#Tech-Stack" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -344,7 +344,7 @@ queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Diese Qualitätsmetrik hilft uns zu verstehen, wie gut die LLM-Antworten für die obige Abfragegruppe sind. Um die Qualität unserer Anwendung zu messen, werden wir eine Reihe von Abfragen durchführen und die Qualitätswerte für alle diese Abfragen zusammenfassen.</p>
+    </button></h1><p>Diese Qualitätsmetrik hilft uns zu verstehen, wie gut die LLM-Antworten für die oben genannten Abfragen sind. Um die Qualität unserer Anwendung zu messen, werden wir eine Reihe von Abfragen durchführen und die Qualitätswerte für alle diese Abfragen zusammenfassen.</p>
 <p>Der LLM Application Quality Score ist eine Kombination aus 3 einzelnen Qualitätsmetriken von AIMon:</p>
 <ol>
 <li><strong>Hallucination Score</strong> (hall_score): prüft, ob der generierte Text in dem angegebenen Kontext begründet ist. Ein Wert näher an 1,0 bedeutet, dass es einen starken Hinweis auf Halluzinationen gibt, ein Wert näher an 0,0 bedeutet einen geringeren Hinweis auf Halluzinationen. Daher verwenden wir hier (1.0-hall_score), um die endgültige Qualitätsbewertung zu berechnen.</li>
@@ -532,9 +532,9 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
 <p>Es gibt zwei Hauptkomponenten, auf die wir achten müssen: Ingestion und RAG-basierte Q&amp;A. Die Ingestion-Pipeline verarbeitet die Transkripte aus dem Meeting Bank-Datensatz und speichert sie in der Milvus-Vektor-Datenbank. Die RAG-Q&amp;A-Pipeline verarbeitet eine Benutzeranfrage, indem sie zunächst die relevanten Dokumente aus dem Vektorspeicher abruft. Diese Dokumente werden dann als Grundlagendokumente für den LLM verwendet, um seine Antwort zu generieren. Wir nutzen AIMon, um die Qualitätsbewertung zu berechnen und die Anwendung kontinuierlich auf <a href="https://docs.aimon.ai/detectors/hallucination">Halluzinationen</a>, die <a href="https://docs.aimon.ai/detectors/instruction_adherence">Einhaltung von Anweisungen</a> und die <a href="https://docs.aimon.ai/checker-models/context_relevance">Kontextrelevanz</a> zu überwachen. Dies sind dieselben 3 Metriken, die wir oben zur Definition des <code translate="no">quality</code> Scores verwendet haben.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
    </span> <span class="img-wrapper"> <span>Arbeitsablauf</span> </span></p>
-<p>Nachfolgend finden Sie einige Hilfsfunktionen zur Vorverarbeitung und Berechnung von Einbettungen für Dokumente.</p>
+<p>Im Folgenden finden Sie einige Hilfsfunktionen zur Vorverarbeitung und Berechnung von Einbettungen für Dokumente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
@@ -946,11 +946,11 @@ avg_retrieval_rel_score_rr = statistics.mean(avg_retrieval_rel_scores_rr)
     </button></h2><p>Beachten Sie, dass sich die Gesamtqualitätsbewertung für alle Abfragen nach der Verwendung des AIMon-Rerankers verbessert hat.</p>
 <p>Zusammenfassend haben wir, wie in der Abbildung unten dargestellt, Folgendes gezeigt:</p>
 <ul>
-<li>Berechnung eines Qualitätsscores durch eine gewichtete Kombination von drei verschiedenen Qualitätsmetriken: Halluzinations-Score, Anweisungstreue-Score und Retrieval-Relevanz-Score.</li>
+<li>Berechnung eines Qualitäts-Scores durch eine gewichtete Kombination von drei verschiedenen Qualitätsmetriken: Halluzinations-Score, Instruktionstreue-Score und Retrieval-Relevanz-Score.</li>
 <li>Erstellung einer Qualitätsbasis mit Hilfe eines Brute-Force-String-Matching-Ansatzes, um Dokumente einer Abfrage zuzuordnen und diese an einen LLM weiterzuleiten.</li>
 <li>Verbesserung der Basisqualität mithilfe einer Vektor-DB (hier wurde Milvus verwendet)</li>
 <li>Weitere Verbesserung des Qualitätsergebnisses durch den anpassungsfähigen Re-Ranker von AIMon mit niedriger Latenz.</li>
-<li>Wir haben auch gezeigt, wie sich die Suchrelevanz durch den Einsatz des Re-Rankers von AIMon deutlich verbessert.</li>
+<li>Wir haben auch gezeigt, wie sich die Suchrelevanz durch den Einsatz von AIMons Re-Ranker deutlich verbessert.</li>
 </ul>
 <p>Wir möchten Sie ermutigen, mit den verschiedenen in diesem Notizbuch gezeigten Komponenten zu experimentieren, um <strong>die Qualitätsbewertung</strong> weiter <strong>zu verbessern</strong>. Eine Idee ist es, Ihre eigenen Definitionen von Qualität hinzuzufügen, indem Sie das <code translate="no">instructions</code> Feld im instruction_adherence detector oben verwenden. Eine andere Idee ist, ein weiteres der <a href="https://docs.aimon.ai/category/checker-models">AIMon-Prüfmodelle</a> als Teil der Qualitätsmetrikberechnung hinzuzufügen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd

@@ -1,12 +1,12 @@
 ---
 id: sparse-inverted-index.md
-title: الفهرس_المتفرق_المقلوب_الفهرس
+title: الفهرس_المقلوب_المتفرق
 summary: >-
   فهرس SPARSE_INVERTED_INDEX هو نوع فهرس يستخدمه Milvus لتخزين المتجهات المتفرقة
   والبحث فيها بكفاءة. يستفيد هذا النوع من الفهرس من مبادئ الفهرسة المقلوبة
   لإنشاء بنية بحث عالية الكفاءة للبيانات المتفرقة.
 ---
-<h1 id="SPARSEINVERTEDINDEX" class="common-anchor-header">الفهرس_المتفرق_المقلوب_الفهرس<button data-href="#SPARSEINVERTEDINDEX" class="anchor-icon" translate="no">
+<h1 id="SPARSEINVERTEDINDEX" class="common-anchor-header">الفهرس_المقلوب_المتفرق<button data-href="#SPARSEINVERTEDINDEX" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,8 +62,8 @@ index_params.add_index(
 </ul></li>
 <li><p><code translate="no">params.inverted_index_algo</code>: الخوارزمية المستخدمة لبناء الفهرس والاستعلام عنه. قيم صالحة:</p>
 <ul>
-<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (افتراضي): معالجة استعلام المستند في الوقت المحسن (DAAT) باستخدام خوارزمية MaxScore. يوفر MaxScore أداءً أفضل لقيم <em>k</em> العالية أو الاستعلامات التي تحتوي على العديد من المصطلحات عن طريق تخطي المصطلحات والمستندات التي من المحتمل أن يكون لها تأثير ضئيل. وهي تحقق ذلك من خلال تقسيم المصطلحات إلى مجموعات أساسية وغير أساسية بناءً على درجات التأثير القصوى، مع التركيز على المصطلحات التي يمكن أن تساهم في أعلى k من النتائج.</p></li>
-<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: معالجة استعلام DAAT المحسّنة باستخدام خوارزمية WAND. تقوم WAND بتقييم عدد أقل من المستندات التي تم الوصول إليها من خلال الاستفادة من درجات التأثير القصوى لتخطي المستندات غير المنافسة، ولكن لديها نفقات أعلى لكل ضربة. هذا يجعل WAND أكثر كفاءة للاستعلامات ذات قيم <em>k</em> الصغيرة أو الاستعلامات القصيرة، حيث يكون التخطي أكثر جدوى.</p></li>
+<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (افتراضي): معالجة استعلام المستند في الوقت المحسن (DAAT) باستخدام خوارزمية MaxScore. توفر MaxScore أداءً أفضل لقيم <em>k</em> العالية أو الاستعلامات التي تحتوي على العديد من المصطلحات عن طريق تخطي المصطلحات والمستندات التي من المحتمل أن يكون لها تأثير ضئيل. وهي تحقق ذلك من خلال تقسيم المصطلحات إلى مجموعات أساسية وغير أساسية بناءً على درجات التأثير القصوى، مع التركيز على المصطلحات التي يمكن أن تساهم في أعلى k من النتائج.</p></li>
+<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: معالجة استعلام DAAT الأمثل باستخدام خوارزمية WAND. تقوم WAND بتقييم عدد أقل من المستندات التي تم الوصول إليها من خلال الاستفادة من درجات التأثير القصوى لتخطي المستندات غير المنافسة، ولكن لديها نفقات أعلى لكل ضربة. وهذا يجعل WAND أكثر كفاءة للاستعلامات ذات القيم <em>k</em> الصغيرة أو الاستعلامات القصيرة، حيث يكون التخطي أكثر جدوى.</p></li>
 <li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: معالجة استعلام المصطلح الأساسي في الوقت (TAAT). على الرغم من أنها أبطأ مقارنةً بـ <code translate="no">DAAT_MAXSCORE</code> و <code translate="no">DAAT_WAND</code> ، إلا أن <code translate="no">TAAT_NAIVE</code> تقدم ميزة فريدة. على عكس خوارزميات DAAT، التي تستخدم درجات التأثير القصوى المخزنة مؤقتًا والتي تظل ثابتة بغض النظر عن التغييرات التي تطرأ على معلمة التجميع العالمية (avgdl)، يتكيف <code translate="no">TAAT_NAIVE</code> ديناميكيًا مع هذه التغييرات.</p></li>
 </ul>
 <p>لمعرفة المزيد من معلمات البناء المتوفرة للفهرس <code translate="no">SPARSE_INVERTED_INDEX</code> ، راجع <a href="/docs/ar/sparse-inverted-index.md#Index-building-params">بارامترات بناء الفهرس</a>.</p></li>
@@ -95,7 +95,7 @@ res = MilvusClient.search(
     limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>لمعرفة المزيد من معلمات البحث المتوفرة للفهرس <code translate="no">SPARSE_INVERTED_INDEX</code> ، راجع بارامزات <a href="/docs/ar/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">البحث الخاصة بالفهرس</a>.</p>
+<p>لمعرفة المزيد من معلمات البحث المتوفرة للفهرس <code translate="no">SPARSE_INVERTED_INDEX</code> ، راجع <a href="/docs/ar/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">باراميات البحث الخاصة بالفهرس</a>.</p>
 <h2 id="Index-params" class="common-anchor-header">بارامترات الفهرس<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -169,6 +169,6 @@ res = MilvusClient.search(
      <td><p><code translate="no">drop_ratio_search</code></p></td>
      <td><p>نسبة أصغر القيم المراد تجاهلها أثناء البحث، مما يساعد على تقليل التشويش.</p></td>
      <td><p>الكسر بين 0.0 و1.0 (على سبيل المثال، 0.2 يتجاهل أصغر 20% من القيم)</p></td>
-     <td><p>اضبط هذه المعلمة بناءً على مستوى التشتت والتشويش في متجهات الاستعلام لديك.</p><p>تتحكم هذه المعلمة في نسبة القيم منخفضة الحجم التي تم إسقاطها أثناء البحث. يمكن أن تؤدي زيادة هذه القيمة (على سبيل المثال، إلى <code translate="no">0.2</code>) إلى تقليل الضوضاء وتركيز البحث على مكونات أكثر أهمية، مما قد يحسن الدقة والكفاءة. ومع ذلك، فإن إسقاط المزيد من القيم يمكن أن يقلل أيضًا من الاستدعاء عن طريق استبعاد الإشارات ذات الصلة المحتملة. اختر القيمة التي توازن بين الاستدعاء والدقة لعبء العمل لديك.</p></td>
+     <td><p>اضبط هذه المعلمة استنادًا إلى مستوى التشتت والتشويش في متجهات الاستعلام لديك.</p><p>تتحكم هذه المعلمة في نسبة القيم منخفضة الحجم التي تم إسقاطها أثناء البحث. يمكن أن تؤدي زيادة هذه القيمة (على سبيل المثال، إلى <code translate="no">0.2</code>) إلى تقليل التشويش وتركيز البحث على مكونات أكثر أهمية، مما قد يحسن الدقة والكفاءة. ومع ذلك، فإن إسقاط المزيد من القيم يمكن أن يقلل أيضًا من الاستدعاء عن طريق استبعاد الإشارات ذات الصلة المحتملة. اختر القيمة التي توازن بين الاستدعاء والدقة لعبء العمل لديك.</p></td>
    </tr>
 </table>

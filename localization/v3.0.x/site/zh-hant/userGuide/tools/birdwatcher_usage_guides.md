@@ -135,7 +135,22 @@ Flags:
 
 Use &quot; show [command] --help&quot; for more information about a command.
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-sessions" class="common-anchor-header">列出會話</h3><p>列出與 Milvus 不同元件相關的 session：</p>
+<h3 id="List-sessions" class="common-anchor-header">列出會話<button data-href="#List-sessions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>列出與 Milvus 不同元件相關的 session：</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show session
 Session:datacoord, ServerID: 3, Version: 2.2.11, Address: 10.244.0.8:13333
 Session:datanode, ServerID: 6, Version: 2.2.11, Address: 10.244.0.8:21124
@@ -147,7 +162,22 @@ Session:querynode, ServerID: 2, Version: 2.2.11, Address: 10.244.0.8:21123
 Session:rootcoord, ServerID: 1, Version: 2.2.11, Address: 10.244.0.8:53100
 <button class="copy-code-btn"></button></code></pre>
 <p>在命令輸出中，由<code translate="no">show session</code> 列出的每個會話項目對應於目前活動並已在<strong>etcd</strong> 中註冊的節點或服務。</p>
-<h3 id="Check-databases-and-collections" class="common-anchor-header">檢查資料庫和資料集</h3><p>您可以列出所有資料庫和集合。</p>
+<h3 id="Check-databases-and-collections" class="common-anchor-header">檢查資料庫和資料集<button data-href="#Check-databases-and-collections" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您可以列出所有資料庫和集合。</p>
 <ul>
 <li><p>列出資料庫</p>
 <p>在指令輸出中，您可以找到每個資料庫的相關資訊。</p>
@@ -158,7 +188,7 @@ TenantID:        State: DatabaseCreated
 --- Total Database(s): 1
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>列出集合</p>
-<p>在指令輸出中，您可以找到每個收藏集的詳細資訊。</p>
+<p>在命令輸出中，您可以找到每個收藏集的詳細資訊。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show collections
 ================================================================================
 DBID: 1
@@ -215,7 +245,7 @@ Consistency Level: Bounded
 Start position for channel by-dev-rootcoord-dml_0(by-dev-rootcoord-dml_0_443407225551410746v0): [1 0 28 175 133 76 39 6]
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>檢視所有載入的收藏集</p>
-<p>您可以讓 Birdwatcher 過濾所有已載入的集合。</p>
+<p>您可以讓 Birdwatcher 過濾所有已載入的收藏集。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show collection-loaded
 Version: [&gt;= 2.2.0]     CollectionID: 443407225551410746
 ReplicaNumber: 1        LoadStatus: Loaded
@@ -227,7 +257,22 @@ ReplicaNumber: 1        LoadStatus: Loaded
 vchannel by-dev-rootcoord-dml_0_443407225551410746v0 seek to 2023-08-08 09:36:09.54 +0000 UTC, cp channel: by-dev-rootcoord-dml_0_443407225551410746v0, Source: Channel Checkpoint
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Check-index-details" class="common-anchor-header">檢查索引詳細資料</h3><p>執行以下指令，詳細列出所有索引檔案。</p>
+<h3 id="Check-index-details" class="common-anchor-header">檢查索引詳細資料<button data-href="#Check-index-details" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>執行以下指令，詳細列出所有索引檔案。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show index
 *************2.1.x***************
 *************2.2.x***************
@@ -238,12 +283,42 @@ Index Type: HNSW        Metric Type: L2
 Index Params: 
 ==================================================================
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-partitions" class="common-anchor-header">列出分區</h3><p>執行下列指令可列出特定資料集中的所有磁碟分割。</p>
+<h3 id="List-partitions" class="common-anchor-header">列出分區<button data-href="#List-partitions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>執行下列指令可列出特定資料集中的所有磁碟分割。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show partition --collection 443407225551410746
 Parition ID: 443407225551410747 Name: _default  State: PartitionCreated
 --- Total Database(s): 1
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Check-channel-status" class="common-anchor-header">檢查通道狀態</h3><p>執行下列指令檢視通道狀態</p>
+<h3 id="Check-channel-status" class="common-anchor-header">檢查通道狀態<button data-href="#Check-channel-status" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>執行以下指令檢視通道狀態</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show channel-watch
 =============================
 key: by-dev/meta/channelwatch/6/by-dev-rootcoord-dml_0_443407225551410746v0
@@ -255,9 +330,24 @@ Flushed segments: []
 Dropped segments: []
 --- Total Channels: 1
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-all-replicas-and-segments" class="common-anchor-header">列出所有副本和區段</h3><ul>
+<h3 id="List-all-replicas-and-segments" class="common-anchor-header">列出所有副本和區段<button data-href="#List-all-replicas-and-segments" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>列出所有副本</p>
-<p>執行下列指令以列出所有複製品及其對應的集合。</p>
+<p>執行下列指令，以列出所有複製品及其對應的集合。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show replica
 ================================================================================
 ReplicaID: 443407225685278721 CollectionID: 443407225551410746 version:&gt;=2.2.0
@@ -280,7 +370,22 @@ SegmentID: 443407225551610865 CollectionID: 443407225551410746 Channel: by-dev-r
 Sealed segments number: 1    
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="List-configurations" class="common-anchor-header">列出配置</h3><p>您可以讓 Birdwatcher 列出每個 Milvus 元件的目前配置。</p>
+<h3 id="List-configurations" class="common-anchor-header">列出配置<button data-href="#List-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您可以讓 Birdwatcher 列出每個 Milvus 元件的目前配置。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show configurations
 client nil Session:proxy, ServerID: 8, Version: 2.2.11, Address: 10.244.0.8:19529
 Component rootcoord-1
@@ -381,7 +486,22 @@ backup for prefix done, stored in file: bw_etcd_ALL.230810-075211.bak.gz
         ></path>
       </svg>
     </button></h2><p>您可以讓 Birdwatcher 用指定的主索引鍵或模擬查詢探查已載入集合的狀態。</p>
-<h3 id="Probe-collection-with-known-primary-key" class="common-anchor-header">探查已知主鍵的集合</h3><p>在<code translate="no">probe</code> 命令中，應使用<code translate="no">pk</code> 標誌指定主索引鍵，並使用<code translate="no">collection</code> 標誌指定集合 ID。</p>
+<h3 id="Probe-collection-with-known-primary-key" class="common-anchor-header">探查已知主鍵的集合<button data-href="#Probe-collection-with-known-primary-key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在<code translate="no">probe</code> 命令中，應使用<code translate="no">pk</code> 標誌指定主索引鍵，並使用<code translate="no">collection</code> 標誌指定集合 ID。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; probe pk --pk 110 --collection 442844725212299747
 PK 110 found on segment 442844725212299830
 Field id, value: &amp;{long_data:&lt;data:110 &gt; }
@@ -389,7 +509,22 @@ Field title, value: &amp;{string_data:&lt;data:&quot;Human Resources Dataficatio
 Field title_vector, value: &amp;{dim:768 float_vector:&lt;data:0.022454707 data:0.007861045 data:0.0063843643 data:0.024065714 data:0.013782166 data:0.018483251 data:-0.026526336 ... data:-0.06579628 data:0.00033906146 data:0.030992996 data:-0.028134001 data:-0.01311325 data:0.012471594 &gt; }
 Field article_meta, value: &amp;{json_data:&lt;data:&quot;{\&quot;link\&quot;:\&quot;https:\\/\\/towardsdatascience.com\\/human-resources-datafication-d44c8f7cb365\&quot;,\&quot;reading_time\&quot;:6,\&quot;publication\&quot;:\&quot;Towards Data Science\&quot;,\&quot;claps\&quot;:256,\&quot;responses\&quot;:0}&quot; &gt; }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Probe-all-collections-with-mock-queries" class="common-anchor-header">使用模擬查詢探查所有集合</h3><p>您也可以讓 Birdwatcher 使用模擬查詢探查所有集合。</p>
+<h3 id="Probe-all-collections-with-mock-queries" class="common-anchor-header">使用模擬查詢探查所有集合<button data-href="#Probe-all-collections-with-mock-queries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您也可以讓 Birdwatcher 使用模擬查詢探查所有集合。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; probe query
 probing collection 442682158191982314
 Found vector field vector(103) with dim[384], indexID: 442682158191990455

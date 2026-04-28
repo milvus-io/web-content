@@ -3,7 +3,7 @@ id: text-highlighter.md
 title: أداة تمييز النصCompatible with Milvus 2.6.8+
 summary: >-
   تقوم أداة التظليل في Milvus بوضع تعليقات توضيحية للمصطلحات المتطابقة في حقول
-  النص عن طريق تغليفها بعلامات قابلة للتخصيص. يساعد التظليل على شرح سبب تطابق
+  النص عن طريق تغليفها بعلامات قابلة للتخصيص. يساعد التظليل على توضيح سبب تطابق
   المستند، ويحسن من إمكانية قراءة النتائج، ويدعم العرض الغني في تطبيقات البحث و
   RAG.
 beta: Milvus 2.6.8+
@@ -412,7 +412,7 @@ results = client.search(
 [&#x27;{my} second {test} {doc}. Milvus is an open-source vector database that suits AI applications of every siz&#x27;]
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h3 id="Example-3-Return-highlights-as-fragments" class="common-anchor-header">مثال 3: إرجاع الإبرازات كأجزاء<button data-href="#Example-3-Return-highlights-as-fragments" class="anchor-icon" translate="no">
+<h3 id="Example-3-Return-highlights-as-fragments" class="common-anchor-header">مثال 3: إرجاع التظليل على شكل أجزاء<button data-href="#Example-3-Return-highlights-as-fragments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -40,7 +40,22 @@ summary: >-
 <li><p><strong>転置ファイル（IVF）</strong>：データをクラスタに整理し、検索アルゴリズムが最も関連性の高いベクトルのサブセットのみにフォーカスできるようにする。</p></li>
 <li><p><strong>スカラー量子化（SQ8）</strong>：ベクトルをよりコンパクトな形に圧縮し、メモリ使用量を大幅に削減すると同時に、高速な類似度計算のための十分な精度を維持します。</p></li>
 </ul>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVFは、本の索引を作るようなものです。すべてのページ（私たちの場合はすべてのベクトル）をスキャンする代わりに、インデックスで特定のキーワード（クラスタ）を検索し、関連するページ（ベクトル）をすばやく見つけます。このシナリオでは、ベクターはクラスターにグループ化され、アルゴリズムはクエリーベクターに近いいくつかのクラスター内を検索します。</p>
+<h3 id="IVF" class="common-anchor-header">IVF<button data-href="#IVF" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>IVFは、本の索引を作るようなものです。すべてのページ（私たちの場合はすべてのベクトル）をスキャンする代わりに、インデックスで特定のキーワード（クラスタ）を検索し、関連するページ（ベクトル）をすばやく見つけます。このシナリオでは、ベクターはクラスターにグループ化され、アルゴリズムはクエリーベクターに近いいくつかのクラスター内を検索します。</p>
 <p>以下がその仕組みだ：</p>
 <ol>
 <li><p><strong>クラスタリング：</strong>ベクトルデータセットは、k-meansのようなクラスタリングアルゴリズムを使用して、指定された数のクラスタに分割されます。各クラスタにはセントロイド（クラスタを代表するベクトル）があります。</p></li>
@@ -49,21 +64,51 @@ summary: >-
 <li><p><strong>検索：</strong>最近傍を検索する場合、検索アルゴリズムはクエリベクトルとクラスタ重心を比較し、最も有望なクラスタを選択します。そして、その選択されたクラスタ内のベクトルに検索が絞り込まれます。</p></li>
 </ol>
 <p>技術的な詳細については、<a href="/docs/ja/ivf-flat.md">IVF_FLATを</a>参照してください。</p>
-<h3 id="SQ8" class="common-anchor-header">SQ8</h3><p>スカラー量子化(SQ)は、高次元ベクトルの値をより小さくコンパクトな表現に置き換えることで、そのサイズを縮小するために使用される手法です。<strong>SQ8では</strong>、ベクトルの各次元の値を格納するのに、一般的な32ビット浮動小数点数の代わりに8ビット整数を使用します。これにより、データの保存に必要なメモリ量が大幅に削減される。</p>
+<h3 id="SQ8" class="common-anchor-header">SQ8<button data-href="#SQ8" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>スカラー量子化(SQ)は、高次元ベクトルの値をより小さくコンパクトな表現に置き換えることで、そのサイズを縮小するために使用される手法です。<strong>SQ8では</strong>、ベクトルの各次元の値を格納するのに、一般的な32ビット浮動小数点数の代わりに8ビット整数を使用します。これにより、データの保存に必要なメモリ量が大幅に削減される。</p>
 <p>SQ8の仕組みは以下の通り：</p>
 <ol>
 <li><p><strong>範囲の特定</strong>まず、ベクトル内の最小値と最大値を特定します。この範囲が量子化の境界となる。</p></li>
 <li><p><strong>正規化：</strong>式を使用して、ベクトル値を0から1の範囲に正規化します：</p>
 <p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>normalized_value</mtext><mo>=</mo><mfrac><mrow><mtext>value</mtext><mo>−</mo><mtext>min</mtext></mrow><mrow><mtext>max</mtext><mo>−</mo><mtext>min</mtext></mrow></mfrac></mrow><annotation encoding="application/x-tex">\text{normalized\_value} = \frac{\text{value} - \text{min}}{\text{max} - \text{min}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0044em;vertical-align:-0.31em;"></span><span class="mord text"><span class="mord">normalized_value</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1408em;vertical-align:-0.7693em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">max</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord text"><span class="mord">min</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">value</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord text"><span class="mord">min</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<p>これにより、すべての値が標準化された範囲に比例してマッピングされ、圧縮に備えます。</p></li>
+<p>これにより、すべての値が標準化された範囲内に比例してマッピングされ、圧縮に備えます。</p></li>
 <li><p><strong>8ビット圧縮：</strong>正規化された値に255（8ビット整数の最大値）を掛け、その結果を最も近い整数に丸めます。これにより、各値が効果的に 8 ビット表現に圧縮されます。</p></li>
 </ol>
 <p>ディメンジョン値が 1.2 で、最小値が -1.7、最大値が 2.3 であるとします。次の図は、float32 値を int8 整数に変換するために SQ8 がどのように適用されるかを示しています。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ivf-sq8.png" alt="Ivf Sq8" class="doc-image" id="ivf-sq8" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ivf-sq8.png" alt="Ivf Sq8" class="doc-image" id="ivf-sq8" />
    </span> <span class="img-wrapper"> <span>IVF SQ8</span> </span></p>
-<h3 id="IVF-+-SQ8" class="common-anchor-header">IVF + SQ8</h3><p>IVF_SQ8 インデックスは、IVF と SQ8 を組み合わせて効率的に類似検索を行います：</p>
+<h3 id="IVF-+-SQ8" class="common-anchor-header">IVF + SQ8<button data-href="#IVF-+-SQ8" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>IVF_SQ8 インデックスは、IVF と SQ8 を組み合わせて効率的に類似検索を行います：</p>
 <ol>
 <li><p><strong>IVF は検索範囲を狭める</strong>：データセットをクラスタに分割し、クエリが発行されると、IVF はまずクエリとクラスタのセントロイドを比較し、最も関連性の高いクラスタを選択する。</p></li>
 <li><p><strong>SQ8は距離計算を高速化する</strong>：選択されたクラスタ内で、SQ8はベクトルを8ビット整数に圧縮し、メモリ使用量を削減し、距離計算を高速化する。</p></li>
@@ -165,7 +210,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行する際に使用するパラメータの概要を説明します。</p>
-<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/ivf-sq8.md#share-X9Y9dTuhDohRRBxSvzBcXmIEnu4">インデックスを構築する</a>際に設定できるパラメータの一覧です。</p>
+<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/ivf-sq8.md#share-X9Y9dTuhDohRRBxSvzBcXmIEnu4">インデックスを構築する</a>際に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th></th>
@@ -183,7 +243,22 @@ res = MilvusClient.search(
      <td><p><code translate="no">nlist</code> の値を大きくすると、より洗練されたクラスターを作成することでリコールが向上しますが、インデックス構築時間が長くなります。ほとんどの場合、この範囲内の値を設定することを推奨する：[32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>次の表は、<code translate="no">search_params.params</code> で<a href="/docs/ja/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">インデックス検索</a>時に設定できるパラメータの一覧です。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>次の表は、<code translate="no">search_params.params</code> で<a href="/docs/ja/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">インデックス検索</a>時に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th></th>

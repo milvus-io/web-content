@@ -47,7 +47,7 @@ beta: Milvus 3.0.x
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/compaction.png" alt="R8eow3kaqhktokblcmocnvxmnee" class="doc-image" id="r8eow3kaqhktokblcmocnvxmnee" />
    </span> <span class="img-wrapper"> <span>R8eow3kaqhktokblcmocnvxmnee</span> </span></p>
-<p>Pemadatan penggabungan paksa memperluas API yang sudah ada <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md"><code translate="no">Compaction</code></a> API dengan parameter <code translate="no">target_size</code>. API ini sepenuhnya kompatibel ke belakang: panggilan pemadatan yang sudah ada tanpa <code translate="no">target_size</code> akan tetap berfungsi seperti sebelumnya.</p>
+<p>Pemadatan penggabungan paksa memperluas pemadatan yang sudah ada <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md"><code translate="no">Compaction</code></a> API dengan parameter <code translate="no">target_size</code>. API ini sepenuhnya kompatibel ke belakang: panggilan pemadatan yang sudah ada tanpa <code translate="no">target_size</code> akan tetap berfungsi seperti sebelumnya.</p>
 <p>Penggabungan paksa beroperasi secara asinkron. Ia tidak memblokir operasi pencarian atau kueri, meskipun mengkonsumsi sumber daya I/O dan memori selama eksekusi.</p>
 <h2 id="Use-Force-Merge-Compaction" class="common-anchor-header">Menggunakan Pemadatan Penggabungan Paksa<button data-href="#Use-Force-Merge-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -201,6 +201,7 @@ job_id = client.compact(
     target_size=max_int64
 )
 <button class="copy-code-btn"></button></code></pre>
+<p><a id="parameter-reference"></a></p>
 <h4 id="Parameter-reference" class="common-anchor-header">Referensi parameter</h4><p>Tabel berikut menjelaskan parameter.</p>
 <table>
    <tr>
@@ -263,6 +264,7 @@ state = client.get_compaction_state(job_id)
 <li><p><strong>Pertimbangkan pertukaran kinerja.</strong> Pemadatan Force Merge adalah operasi yang membutuhkan banyak sumber daya. Operasi ini membaca, menggabungkan, dan menulis ulang data segmen. Jadwalkan selama periode lalu lintas rendah untuk meminimalkan dampak pada latensi kueri.</p></li>
 <li><p><strong>Pantau jumlah segmen sebelum dan sesudahnya.</strong> Gunakan <code translate="no">get_compaction_state()</code> dan <code translate="no">list_persistent_segments</code> untuk memverifikasi bahwa pemadatan menghasilkan segmen yang lebih sedikit dan lebih besar seperti yang diharapkan.</p></li>
 </ul>
+<p><a id="faq"></a></p>
 <h2 id="FAQ" class="common-anchor-header">PERTANYAAN UMUM<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -281,7 +283,7 @@ state = client.get_compaction_state(job_id)
     </button></h2><p><strong>Apa perbedaan Penggabungan Paksa dengan pemadatan standar?</strong></p>
 <p>Kedua jenis operasi pemadatan ini memiliki tujuan yang berbeda.</p>
 <ul>
-<li><p>Pemadatan standar (targetSize = 0 atau dihilangkan) adalah upaya terbaik, jalur pembersihan tambahan.</p></li>
+<li><p>Pemadatan standar (targetSize = 0 atau dihilangkan) adalah upaya terbaik, jalur pembersihan bertahap.</p></li>
 <li><p>Penggabungan paksa (targetSize&gt;0) adalah jalur pengemasan ulang tingkat koleksi untuk menghasilkan segmen yang lebih sedikit, lebih besar, dan mendekati target.</p></li>
 </ul>
 <p>Perbedaan utamanya adalah bentuk penggabungan: pemadatan standar secara efektif adalah m → 1 per tugas, sedangkan penggabungan paksa adalah m → n di seluruh input yang dikelompokkan. Inilah sebabnya mengapa penggabungan paksa dapat menyelesaikan tata letak segmen yang tidak dapat dilakukan oleh pemadatan standar. Tabel berikut ini membandingkan 2 jenis operasi tersebut.</p>
@@ -317,7 +319,7 @@ state = client.get_compaction_state(job_id)
      <td><p>maxSafeSize = min(QueryNode mem, DataNode mem) / memory_factor (mandiri non-pooling: dibagi dua)</p></td>
    </tr>
    <tr>
-     <td><p>Bentuk gabungan</p></td>
+     <td><p>Gabungkan bentuk</p></td>
      <td><p>m → 1 per tugas, keluaran &lt;= configMaxSize</p></td>
      <td><p>m → n, keluaran mendekati targetSize</p></td>
    </tr>

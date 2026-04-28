@@ -44,7 +44,7 @@ title: Milvus와 Feast로 RAG 구축하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Feast는 이러한 흐름에서 몇 가지 일반적인 문제를 해결합니다:</p>
+    </button></h1><p>Feast는 이 흐름에서 몇 가지 일반적인 문제를 해결합니다:</p>
 <ol>
 <li><strong>온라인 검색:</strong> 추론 시점에 LLM은 쉽게 사용할 수 없고 다른 데이터 소스에서 미리 계산해야 하는 데이터에 액세스해야 하는 경우가 많습니다.<ul>
 <li>Feast는 다양한 온라인 스토어(예: Milvus, DynamoDB, Redis, Google Cloud Datastore)에 대한 배포를 관리하고 추론 시점에 필요한 기능을 일관되게 <em>사용할 수</em> 있고 <em>새로 계산되도록</em> 보장합니다.</li>
@@ -80,7 +80,22 @@ title: Milvus와 Feast로 RAG 구축하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies" class="common-anchor-header">종속성</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&#x27;feast[milvus]&#x27;</span> openai -U -q</span>
+    </button></h2><h3 id="Dependencies" class="common-anchor-header">종속성<button data-href="#Dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&#x27;feast[milvus]&#x27;</span> openai -U -q</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colab을 사용하는 경우 방금 설치한 종속성을 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 '런타임' 메뉴를 클릭하고 드롭다운 메뉴에서 '세션 다시 시작'을 선택).</p>
@@ -119,7 +134,22 @@ llm_client = OpenAI(
 │── feature_store.yaml     <span class="hljs-comment"># Configures Milvus and feature store settings</span>
 │── test_workflow.py       <span class="hljs-comment"># Example workflow for Feast operations</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Key-Configuration-Files" class="common-anchor-header">주요 구성 파일</h3><h4 id="1-featurestoreyaml" class="common-anchor-header">1. feature_store.yaml</h4><p>이 파일은 피처 저장소 인프라를 구성합니다:</p>
+<h3 id="Key-Configuration-Files" class="common-anchor-header">주요 구성 파일<button data-href="#Key-Configuration-Files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="1-featurestoreyaml" class="common-anchor-header">1. feature_store.yaml</h4><p>이 파일은 피처 저장소 인프라를 구성합니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">project:</span> <span class="hljs-string">rag</span>
 <span class="hljs-attr">provider:</span> <span class="hljs-string">local</span>
 <span class="hljs-attr">registry:</span> <span class="hljs-string">data/registry.db</span>
@@ -139,7 +169,7 @@ llm_client = OpenAI(
 <ul>
 <li>빠른 벡터 검색을 위한 온라인 저장소로서의 Milvus</li>
 <li>기록 데이터 처리를 위한 파일 기반 오프라인 스토리지</li>
-<li>COSINE 유사성을 이용한 벡터 검색 기능</li>
+<li>COSINE 유사성을 사용한 벡터 검색 기능</li>
 </ul>
 <h4 id="2-examplerepopy" class="common-anchor-header">2. example_repo.py</h4><p>다음을 포함한 도시 데이터에 대한 기능 정의가 포함되어 있습니다:</p>
 <ul>
@@ -153,7 +183,7 @@ llm_client = OpenAI(
 <li>사전 계산된 임베딩(384차원 벡터)</li>
 <li>도시 이름 및 주와 같은 관련 메타데이터</li>
 </ul>
-<p>이러한 파일은 Milvus의 벡터 검색 기능과 Feast의 기능 관리 기능을 결합한 기능 저장소를 생성하여 RAG 애플리케이션에 필요한 관련 도시 정보를 효율적으로 검색할 수 있도록 합니다.</p>
+<p>이러한 파일은 Milvus의 벡터 검색 기능과 Feast의 기능 관리 기능을 결합한 기능 저장소를 생성하기 위해 함께 작동하여 RAG 애플리케이션을 위한 관련 도시 정보를 효율적으로 검색할 수 있게 해줍니다.</p>
 <h2 id="Inspect-the-Data" class="common-anchor-header">데이터 검사<button data-href="#Inspect-the-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -236,7 +266,7 @@ display(df.head())
       <td>2</td>
       <td>2025-01-09 13:36:59.280589</td>
       <td>뉴욕, 뉴욕</td>
-      <td>뉴욕, 종종 뉴욕시 또는 단순히 ...</td>
+      <td>뉴욕, 종종 뉴욕시 또는 간단히 ...</td>
       <td>뉴욕은 금융 및 통신의 글로벌 중심지입니다 ...</td>
       <td>[0.06769222766160965, -0.07371102273464203, -0...</td>
     </tr>
@@ -419,7 +449,22 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="common-anchor-header">1. 파이토치와 문장 변환기를 사용하여 쿼리 삽입하기</h3><p>추론하는 동안(예: 사용자가 채팅 메시지를 제출할 때) 우리는 입력 텍스트를 임베드해야 합니다. 이것은 입력 데이터의 특징 변환으로 생각할 수 있습니다. 이 예에서는 포옹하는 얼굴의 작은 문장 트랜스포머를 사용하여 이 작업을 수행하겠습니다.</p>
+    </button></h2><h3 id="1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="common-anchor-header">1. 파이토치와 문장 변환기를 사용하여 쿼리 삽입하기<button data-href="#1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>추론하는 동안(예: 사용자가 채팅 메시지를 제출할 때) 우리는 입력 텍스트를 임베드해야 합니다. 이것은 입력 데이터의 특징 변환으로 생각할 수 있습니다. 이 예에서는 포옹하는 얼굴의 작은 문장 트랜스포머를 사용하여 이 작업을 수행하겠습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> feast <span class="hljs-keyword">import</span> FeatureStore
@@ -455,7 +500,22 @@ MODEL = <span class="hljs-string">&quot;sentence-transformers/all-MiniLM-L6-v2&q
     sentence_embeddings = F.normalize(sentence_embeddings, p=<span class="hljs-number">2</span>, dim=<span class="hljs-number">1</span>)
     <span class="hljs-keyword">return</span> sentence_embeddings
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2. 온라인 추론을 위한 실시간 벡터 및 데이터 가져오기</h3><p>쿼리가 임베딩으로 변환되면 다음 단계는 벡터 저장소에서 관련 문서를 검색하는 것입니다. 추론 시에는 벡터 유사성 검색을 활용하여 <code translate="no">retrieve_online_documents_v2()</code> 을 사용하여 온라인 피처 스토어에 저장된 가장 관련성이 높은 문서 임베딩을 찾습니다. 그런 다음 이러한 피처 벡터를 LLM의 컨텍스트에 공급할 수 있습니다.</p>
+<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2. 온라인 추론을 위한 실시간 벡터 및 데이터 가져오기<button data-href="#2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>쿼리가 임베딩으로 변환되면 다음 단계는 벡터 저장소에서 관련 문서를 검색하는 것입니다. 추론 시에는 벡터 유사성 검색을 활용하여 <code translate="no">retrieve_online_documents_v2()</code> 을 사용하여 온라인 피처 스토어에 저장된 가장 관련성이 높은 문서 임베딩을 찾습니다. 그런 다음 이러한 피처 벡터를 LLM의 컨텍스트에 공급할 수 있습니다.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;Which city has the largest population in New York?&quot;</span>
 
 tokenizer = AutoTokenizer.from_pretrained(TOKENIZER)
@@ -510,7 +570,7 @@ display(context_data)
       <td>0</td>
       <td>뉴욕, 뉴욕</td>
       <td>뉴욕, 종종 뉴욕시 또는 간단히 ...</td>
-      <td>뉴욕, 종종 뉴욕시 또는 단순히 ...</td>
+      <td>뉴욕, 종종 뉴욕시 또는 간단히 ...</td>
       <td>0.743023</td>
     </tr>
     <tr>
@@ -534,7 +594,22 @@ display(context_data)
   </tbody>
 </table>
 </div>
-<h3 id="3-Formatting-Retrieved-Documents-for-RAG-Context" class="common-anchor-header">3. RAG 컨텍스트에 맞게 검색된 문서 서식 지정하기</h3><p>관련 문서를 검색한 후에는 데이터를 다운스트림 애플리케이션에서 효율적으로 사용할 수 있는 구조화된 컨텍스트로 포맷해야 합니다. 이 단계는 추출된 정보가 깨끗하고 체계적으로 정리되어 RAG 파이프라인에 통합할 준비가 되었는지 확인합니다.</p>
+<h3 id="3-Formatting-Retrieved-Documents-for-RAG-Context" class="common-anchor-header">3. RAG 컨텍스트에 맞게 검색된 문서 서식 지정하기<button data-href="#3-Formatting-Retrieved-Documents-for-RAG-Context" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>관련 문서를 검색한 후에는 데이터를 다운스트림 애플리케이션에서 효율적으로 사용할 수 있는 구조화된 컨텍스트로 포맷해야 합니다. 이 단계는 추출된 정보가 깨끗하고 체계적으로 정리되어 RAG 파이프라인에 통합할 준비가 되었는지 확인합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">format_documents</span>(<span class="hljs-params">context_df</span>):
     output_context = <span class="hljs-string">&quot;&quot;</span>
     unique_documents = context_df.drop_duplicates().apply(
@@ -561,7 +636,22 @@ New York City traces its origins to Fort Amsterdam and a trading post founded on
 Anchored by Wall Street in the Financial District of Lower Manhattan, New York City has been called both the world's premier financial and fintech center and the most economically powerful city in the world. As of 2022, the New York metropolitan area is the largest metropolitan economy in the world with a gross metropolitan product of over US$2.16 trillion. If the New York metropolitan area were its own country, it would have the tenth-largest economy in the world. The city is home to the world's two largest stock exchanges by market capitalization of their listed companies: the New York Stock Exchange and Nasdaq. New York City is an established safe haven for global investors. As of 2023, New York City is the most expensive city in the world for expatriates to live. New York City is home to the highest number of billionaires, individuals of ultra-high net worth (greater than US$30 million), and millionaires of any city in the world.}
 ****END DOCUMENT 0****
 </code></pre>
-<h3 id="4-Generating-Responses-Using-Retrieved-Context" class="common-anchor-header">4. 검색된 컨텍스트를 사용하여 응답 생성</h3><p>이제 검색된 문서의 형식을 지정했으므로 응답 생성을 위한 구조화된 프롬프트에 통합할 수 있습니다. 이 단계에서는 어시스턴트가 검색된 정보에만 의존하여 응답이 엉뚱하게 생성되는 것을 방지할 수 있습니다.</p>
+<h3 id="4-Generating-Responses-Using-Retrieved-Context" class="common-anchor-header">4. 검색된 컨텍스트를 사용하여 응답 생성<button data-href="#4-Generating-Responses-Using-Retrieved-Context" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이제 검색된 문서의 형식을 지정했으므로 응답 생성을 위한 구조화된 프롬프트에 통합할 수 있습니다. 이 단계에서는 어시스턴트가 검색된 정보에만 의존하여 응답이 엉뚱하게 생성되는 것을 방지할 수 있습니다.</p>
 <pre><code translate="no" class="language-python">FULL_PROMPT = <span class="hljs-string">f&quot;&quot;&quot;
 You are an assistant for answering questions about states. You will be provided documentation from Wikipedia. Provide a conversational answer.
 If you don&#x27;t know the answer, just say &quot;I do not know.&quot; Don&#x27;t make up an answer.

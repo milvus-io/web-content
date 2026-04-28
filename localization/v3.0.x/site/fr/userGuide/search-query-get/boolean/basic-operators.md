@@ -260,7 +260,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour effectuer une recherche par <strong>préfixe</strong>, où la chaîne commence par un motif donné, vous pouvez placer le motif au début et utiliser <code translate="no">%</code> pour rechercher tous les caractères qui le suivent. Par exemple, pour trouver tous les produits dont le site <code translate="no">name</code> commence par "Prod" :</p>
+    </button></h3><p>Pour effectuer une recherche par <strong>préfixe</strong>, lorsque la chaîne commence par un motif donné, vous pouvez placer le motif au début et utiliser <code translate="no">%</code> pour rechercher tous les caractères qui le suivent. Par exemple, pour trouver tous les produits dont le site <code translate="no">name</code> commence par "Prod" :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Cela correspondra à tous les produits dont le nom commence par "Prod", tels que "Produit A", "Produit B", etc.</p>
@@ -335,7 +335,7 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><p><code translate="no">+</code> (Addition)</p></li>
-<li><p><code translate="no">-</code> (Soustraction)</p></li>
+<li><p><code translate="no">-</code> (Addition) (Soustraction)</p></li>
 <li><p><code translate="no">*</code> (Multiplication)</p></li>
 <li><p><code translate="no">/</code> (division)</p></li>
 <li><p><code translate="no">%</code> (Modulus)</p></li>
@@ -485,7 +485,7 @@ summary: >-
     </button></h2><p>Les opérateurs <code translate="no">IS NULL</code> et <code translate="no">IS NOT NULL</code> sont utilisés pour filtrer les champs selon qu'ils contiennent ou non une valeur nulle (absence de données).</p>
 <ul>
 <li><p><code translate="no">IS NULL</code>: Identifie les entités dont un champ spécifique contient une valeur nulle, c'est-à-dire que la valeur est absente ou indéfinie.</p></li>
-<li><p><code translate="no">IS NOT NULL</code>: Identifie les entités dont un champ spécifique contient une valeur autre que null, ce qui signifie que le champ a une valeur valide et définie.</p></li>
+<li><p><code translate="no">IS NOT NULL</code>: Identifie les entités où un champ spécifique contient une valeur autre que null, ce qui signifie que le champ a une valeur valide et définie.</p></li>
 </ul>
 <div class="alert note">
 <p>Les opérateurs ne sont pas sensibles à la casse, vous pouvez donc utiliser <code translate="no">IS NULL</code> ou <code translate="no">is null</code>, et <code translate="no">IS NOT NULL</code> ou <code translate="no">is not null</code>.</p>
@@ -565,7 +565,7 @@ summary: >-
 ]
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Exemple 1 : Récupérer les entités dont les métadonnées sont nulles</strong></p>
-<p>Pour trouver les entités dont le champ <code translate="no">metadata</code> est soit manquant, soit explicitement défini sur None :</p>
+<p>Pour trouver des entités dont le champ <code translate="no">metadata</code> est soit manquant, soit explicitement défini sur None :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -629,7 +629,7 @@ summary: >-
 ]
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Exemple 1 : Récupérer les entités dont les balises sont nulles</strong></p>
-<p>Pour récupérer les entités dont le champ <code translate="no">tags</code> est soit absent, soit explicitement défini sur <code translate="no">None</code>:</p>
+<p>Pour extraire les entités dont le champ <code translate="no">tags</code> est soit absent, soit explicitement défini sur <code translate="no">None</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -685,7 +685,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus propose une gamme d'opérateurs de base qui vous offrent une grande souplesse dans le filtrage et l'interrogation de vos données. En combinant des opérateurs de comparaison, de plage, arithmétiques et logiques, vous pouvez créer des expressions de filtrage puissantes pour réduire les résultats de vos recherches et récupérer efficacement les données dont vous avez besoin.</p>
+    </button></h2><p>Milvus propose une gamme d'opérateurs de base qui vous offrent une grande souplesse dans le filtrage et l'interrogation de vos données. En combinant des opérateurs de comparaison, de plage, arithmétiques et logiques, vous pouvez créer de puissantes expressions de filtrage pour réduire les résultats de vos recherches et récupérer efficacement les données dont vous avez besoin.</p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

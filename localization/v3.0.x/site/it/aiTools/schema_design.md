@@ -38,7 +38,7 @@ summary: >-
       </svg>
     </button></h2><ol>
 <li><strong>Copiare</strong> il prompt completo dalla sezione <a href="#full-prompt">prompt completo</a> qui sotto.</li>
-<li><strong>Salvarlo</strong> nella posizione prevista dallo strumento di IA (vedere la <a href="/docs/it/milvus_for_agents.md">tabella degli ambienti per</a> i dettagli sulla collocazione).</li>
+<li><strong>Salvarlo</strong> nella posizione prevista dallo strumento di IA (vedere la <a href="/docs/it/milvus_for_agents.md">tabella degli ambienti per</a> i dettagli sul posizionamento).</li>
 <li>L'assistente AI applicherà automaticamente queste regole durante la generazione o la revisione del codice Milvus.</li>
 </ol>
 <p>Per gli utenti di <strong>Cursor</strong>: copiare il prompt dalla sezione <a href="#full-prompt">prompt completo</a> e salvarlo in <code translate="no">.cursor/rules/</code> nel progetto.</p>

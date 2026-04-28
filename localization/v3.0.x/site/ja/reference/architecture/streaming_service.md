@@ -2,8 +2,8 @@
 id: streaming_service.md
 title: ストリーミングサービス
 summary: >-
-  ストリーミングサービスは、Milvus内部ストリーミングシステムモジュールのコンセプトであり、WAL（Write-Ahead
-  Log）を中心に構築され、様々なストリーミング関連機能をサポートする。
+  ストリーミングサービスは、Milvusの内部ストリーミングシステムモジュールのコンセプトであり、WAL（Write-Ahead
+  Log）を中心に構築され、様々なストリーミング関連機能をサポートしています。
 ---
 <h1 id="Streaming-Service" class="common-anchor-header">ストリーミングサービス<button data-href="#Streaming-Service" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,7 +23,7 @@ summary: >-
     </button></h1><p><strong>ストリーミングサービスは</strong>、Milvus内部ストリーミングシステムモジュールのコンセプトであり、Write-Ahead Log (WAL)を中心に構築され、様々なストリーミング関連機能をサポートします。具体的には、ストリーミングデータのインジェスト/サブスクリプション、クラスタ状態の障害回復、ストリーミングデータの履歴データへの変換、データクエリの増加などが含まれます。アーキテクチャ上、ストリーミング・サービスは3つの主要コンポーネントで構成される：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/streaming_distributed_arch.png" alt="Streaming Distributed Arc" class="doc-image" id="streaming-distributed-arc" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/streaming_distributed_arch.png" alt="Streaming Distributed Arc" class="doc-image" id="streaming-distributed-arc" />
    </span> <span class="img-wrapper"> <span>ストリーミング分散アーク</span> </span></p>
 <ul>
 <li><p><strong>ストリーミング・コーディネーター</strong>：コーディネータノードの論理コンポーネント。Etcdを使用してサービス・ディスカバリーを行い、利用可能なストリーミング・ノードを見つけ、WALを対応するストリーミング・ノードにバインドする。また、WAL配布トポロジーを公開するサービスを登録し、ストリーミングクライアントが与えられたWALに適切なストリーミングノードを知ることができるようにする。</p></li>
@@ -53,7 +53,7 @@ summary: >-
 <p>Milvusにおけるメッセージの順序は以下のようになります：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/message_order.png" alt="Message Order" class="doc-image" id="message-order" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/message_order.png" alt="Message Order" class="doc-image" id="message-order" />
    </span> <span class="img-wrapper"> <span>メッセージ順序</span> </span></p>
 <h2 id="WAL-Component" class="common-anchor-header">WALコンポーネント<button data-href="#WAL-Component" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,7 +75,7 @@ summary: >-
 <ul>
 <li><p><strong>セグメントのライフサイクル管理</strong>：メモリ条件／セグメントサイズ／セグメントアイドル時間などのポリシーに基づいて、WALはすべてのセグメントのライフサイクルを管理する。</p></li>
 <li><p><strong>基本的なトランザクションのサポート</strong>：各メッセージにはサイズ制限があるため、WALコンポーネントはVChannelレベルでアトミックライトを約束するシンプルなトランザクションレベルをサポートします。</p></li>
-<li><p><strong>高同期リモートログ書き込み</strong>：MilvusはサードパーティのリモートメッセージキューをWALストレージとしてサポートしています。ストリーミングノードとリモートWALストレージ間のラウンドトリップレイテンシ（RTT）を緩和し、書き込みスループットを向上させるために、ストリーミングサービスは同時ログ書き込みをサポートします。TSOとTSO同期によってメッセージ順序を維持し、WAL内のメッセージはTSO順序で読み込まれる。</p></li>
+<li><p><strong>高同期リモートログ書き込み</strong>：MilvusはWALストレージとしてサードパーティのリモートメッセージキューをサポートしています。ストリーミングノードとリモートWALストレージ間のラウンドトリップレイテンシ（RTT）を緩和し、書き込みスループットを向上させるために、ストリーミングサービスは同時ログ書き込みをサポートします。TSOとTSO同期によってメッセージ順序を維持し、WAL内のメッセージはTSO順序で読み込まれる。</p></li>
 <li><p><strong>ライト・アヘッド・バッファ</strong>：メッセージがWALに書き込まれた後、それらは一時的にWrite-Ahead Bufferに保存される。これにより、リモートWALストレージからメッセージをフェッチすることなく、ログのテールリードが可能になる。</p></li>
 <li><p><strong>複数のWALストレージをサポート</strong>：Woodpecker、Pulsar、Kafka。ゼロディスク・モードでwoodpeckerを使用することで、リモートWALストレージへの依存を取り除くことができます。</p></li>
 </ul>
@@ -96,12 +96,12 @@ summary: >-
       </svg>
     </button></h2><p><strong>Recovery Storage</strong>コンポーネントは、対応するWALコンポーネントが配置されているストリーミング・ノード上で常に実行されます。</p>
 <ul>
-<li><p>これはストリーミングデータを永続化された履歴データに変換し、オブジェクトストレージに格納する役割を果たします。</p></li>
+<li><p>このコンポーネントはストリーミングデータを永続化された履歴データに変換し、オブジェクトストレージに格納する役割を担います。</p></li>
 <li><p>また、ストリーミング・ノード上のWALコンポーネントのメモリ内状態の回復も行う。</p></li>
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/recovery_storage.png" alt="Recovery Storage" class="doc-image" id="recovery-storage" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/recovery_storage.png" alt="Recovery Storage" class="doc-image" id="recovery-storage" />
    </span> <span class="img-wrapper"> <span>回復ストレージ</span> </span></p>
 <h2 id="Query-Delegator" class="common-anchor-header">クエリ・デレゲータ<button data-href="#Query-Delegator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -139,7 +139,7 @@ summary: >-
     </button></h2><p>コンピューティングノードとストレージを分離することで、Milvusはストリーミングノードから別のストリーミングノードへWALを簡単に転送することができ、ストリーミングサービスの高可用性を実現します。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/wal_lifetime.png" alt="wal lifetime" class="doc-image" id="wal-lifetime" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/wal_lifetime.png" alt="wal lifetime" class="doc-image" id="wal-lifetime" />
    </span> <span class="img-wrapper"> <span>WALライフタイム</span> </span></p>
 <h2 id="Wait-for-Ready" class="common-anchor-header">レディ待ち<button data-href="#Wait-for-Ready" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -159,5 +159,5 @@ summary: >-
     </button></h2><p>WALが新しいストリーミングノードに移動する際、古いストリーミングノードではリクエストが拒否されることがあります。一方、新しいストリーミング・ノードではWALが回収されるので、クライアントは新しいストリーミング・ノードでWALが提供できるようになるのを待ちます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/streaming_wait_for_ready.png" alt="wait for ready" class="doc-image" id="wait-for-ready" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/streaming_wait_for_ready.png" alt="wait for ready" class="doc-image" id="wait-for-ready" />
    </span> <span class="img-wrapper"> <span>待機</span> </span></p>

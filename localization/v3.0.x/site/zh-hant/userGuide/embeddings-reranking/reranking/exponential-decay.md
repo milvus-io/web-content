@@ -171,7 +171,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h3><p>在您的資料集中設定了數值欄位 (在本範例中為<code translate="no">publish_time</code>)，請建立指數衰減排名器：</p>
 <div class="alert note">
-<p><strong>時間單位一致性</strong>：當使用基於時間的遞減時，請確保<code translate="no">origin</code>,<code translate="no">scale</code>, 和<code translate="no">offset</code> 參數與您的收集資料使用相同的時間單位。如果您的集合以秒為單位儲存時間戳記，則所有參數都使用秒。如果它使用毫秒，則所有參數都使用毫秒。</p>
+<p><strong>時間單位一致性</strong>：當使用基於時間的遞減時，請確保<code translate="no">origin</code>,<code translate="no">scale</code>, 和<code translate="no">offset</code> 參數與您的收集資料使用相同的時間單位。如果您的資料集以秒為單位儲存時間戳記，則所有參數都使用秒。如果它使用毫秒，則所有參數都使用毫秒。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

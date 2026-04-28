@@ -23,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus fornece operadores poderosos para consultar campos de arrays, permitindo-lhe filtrar e recuperar entidades com base no conteúdo de arrays.</p>
 <div class="alert note">
-<p>Todos os elementos dentro de uma matriz devem ser do mesmo tipo, e as estruturas aninhadas dentro de matrizes são tratadas como strings simples. Portanto, ao trabalhar com campos ARRAY, é aconselhável evitar aninhamentos excessivamente profundos e garantir que as estruturas de dados sejam tão planas quanto possível para um desempenho ideal.</p>
+<p>Todos os elementos dentro de uma matriz devem ser do mesmo tipo, e as estruturas aninhadas dentro de matrizes são tratadas como strings simples. Portanto, ao trabalhar com campos ARRAY, é aconselhável evitar aninhamentos excessivamente profundos e garantir que as suas estruturas de dados sejam tão planas quanto possível para um desempenho ótimo.</p>
 </div>
 <h2 id="Available-ARRAY-Operators" class="common-anchor-header">Operadores ARRAY disponíveis<button data-href="#Available-ARRAY-Operators" class="anchor-icon" translate="no">
       <svg translate="no"

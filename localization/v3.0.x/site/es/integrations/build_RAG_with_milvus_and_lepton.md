@@ -62,7 +62,7 @@ title: Construir RAG con Milvus y Lepton AIAbout to Deprecate
     </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus[model] openai requests tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Si estás utilizando Google Colab, para habilitar las dependencias recién instaladas, puede que necesites <strong>reiniciar el tiempo de ejecución</strong> (haz clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla, y selecciona "Reiniciar sesión" en el menú desplegable).</p>
+<p>Si estás utilizando Google Colab, para habilitar las dependencias que acabas de instalar, puede que necesites <strong>reiniciar el tiempo de ejecución</strong> (haz clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla, y selecciona "Reiniciar sesión" en el menú desplegable).</p>
 </div>
 <p>Lepton habilita la API estilo OpenAI. Puedes acceder a su web oficial y preparar la <a href="https://www.lepton.ai/docs">clave api</a> <code translate="no">LEPTONAI_TOKEN</code> como variable de entorno.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os

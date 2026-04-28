@@ -76,7 +76,22 @@ nvme1n1     259:1    0 250.0G  0 disk
         ></path>
       </svg>
     </button></h2><p>若要設定 Milvus Distributed 的 QueryNode 使用 NVMe 磁碟儲存，您需要設定目標 Kubernetes 叢集的 Worker 節點，將容器和影像儲存於 NVMe 磁碟上。其步驟依雲供應商而有所不同。</p>
-<h3 id="AWS" class="common-anchor-header">AWS</h3><p>使用 Amazon EKS 時，您可以使用啟動範本自訂受管節點，您可以在其中指定節點群組的組態設定。以下是如何在 Amazon EKS 群集的工作節點上掛載 NVMe 磁碟的範例：</p>
+<h3 id="AWS" class="common-anchor-header">AWS<button data-href="#AWS" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>使用 Amazon EKS 時，您可以使用啟動範本自訂受管節點，您可以在其中指定節點群組的組態設定。以下是如何在 Amazon EKS 群集的工作節點上掛載 NVMe 磁碟的範例：</p>
 <pre><code translate="no" class="language-bash">MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary=<span class="hljs-string">&quot;==MYBOUNDARY==&quot;</span>
 
@@ -105,14 +120,44 @@ Content-Type: text/x-shellscript; charset=<span class="hljs-string">&quot;us-asc
 <p>在上述範例中，我們假設 NVMe 磁碟為<code translate="no">/dev/nvme1n1</code> 。您需要修改腳本以符合您的特定配置。</p>
 </div>
 <p>如需詳細資訊，請參閱<a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html#launch-template-user-data">使用啟動範本自訂受管節點</a>。</p>
-<h3 id="GCP" class="common-anchor-header">GCP</h3><p>若要在 Google Kubernetes Engine (GKE) 叢集上佈建 Local SSD 儲存，並配置工作負載從連接至叢集中節點的 Local SSD 支援暫存中消耗資料，請執行下列指令：</p>
+<h3 id="GCP" class="common-anchor-header">GCP<button data-href="#GCP" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>若要在 Google Kubernetes Engine (GKE) 集群上配置 Local SSD 儲存，並配置工作負載從連接至集群中節點的 Local SSD 支援暫存中消耗資料，請執行下列指令：</p>
 <pre><code translate="no" class="language-bash">gcloud container node-pools create <span class="hljs-variable">${POOL_NAME}</span> \
     --cluster=<span class="hljs-variable">${CLUSTER_NAME}</span> \
     --ephemeral-storage-local-ssd count=<span class="hljs-variable">${NUMBER_OF_DISKS}</span> \
     --machine-type=<span class="hljs-variable">${MACHINE_TYPE}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>如需詳細資訊，請參閱<a href="https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/local-ssd">在 GKE 上配置 Local SSD 儲存</a>。</p>
-<h3 id="Azure" class="common-anchor-header">Azure</h3><p>若要使用本機 NVMe 磁碟儲存建立虛擬機器規模集 (VMSS)，您需要傳送自訂資料至虛擬機器實體。以下是如何將 NVMe 磁碟附加到 VMSS 中的虛擬機器實體的範例：</p>
+<h3 id="Azure" class="common-anchor-header">Azure<button data-href="#Azure" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>若要使用本機 NVMe 磁碟儲存建立虛擬機器規模集 (VMSS)，您需要傳送自訂資料至虛擬機器實體。以下是如何將 NVMe 磁碟附加到 VMSS 中的虛擬機器實體的範例：</p>
 <pre><code translate="no" class="language-bash">mdadm -Cv /dev/md0 -l0 -n2 /dev/nvme0n1 /dev/nvme1n1
 mdadm -Ds &gt; /etc/mdadm/mdadm.conf 
 update-initramfs -u
@@ -125,7 +170,22 @@ mount -a
 <div class="alert note">
 <p>在上述示例中，我們假設 NVMe 磁碟為<code translate="no">/dev/nvme0n1</code> 和<code translate="no">/dev/nvme1n1</code> 。您需要修改腳本以符合您的特定配置。</p>
 </div>
-<h3 id="Alibaba-Cloud--TecentCloud" class="common-anchor-header">阿里雲與 TecentCloud</h3><p>要創建一個使用本地 SSD 卷的節點池，我們需要傳入自定義數據（Custom Data）。以下是自訂資料的範例。</p>
+<h3 id="Alibaba-Cloud--TecentCloud" class="common-anchor-header">阿里雲與 TecentCloud<button data-href="#Alibaba-Cloud--TecentCloud" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要創建一個使用本地 SSD 卷的節點池，我們需要傳入自定義數據（Custom Data）。以下是自訂資料的範例。</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nvme init start...&quot;</span>
 mkfs.xfs /dev/nvme0n1
@@ -146,7 +206,22 @@ mount -a
 <div class="alert note">
 <p>在上述示例中，我們假設 NVMe 磁碟為<code translate="no">/dev/nvme0n1</code> 。您需要修改腳本以符合您的特定配置。</p>
 </div>
-<h3 id="Your-own-IDC" class="common-anchor-header">您自己的 IDC</h3><p>如果您正在運行自己的 IDC，並且想要在 containerd 中設定容器預設使用新掛載的 NVMe 磁碟上的檔案系統，請遵循下列步驟：</p>
+<h3 id="Your-own-IDC" class="common-anchor-header">您自己的 IDC<button data-href="#Your-own-IDC" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果您正在運行自己的 IDC，並且想要在 containerd 中設定容器預設使用新掛載的 NVMe 磁碟上的檔案系統，請遵循下列步驟：</p>
 <ul>
 <li><p><strong>掛載 NVMe 磁碟。</strong></p>
 <p>確保您的 NVMe 磁碟已在主機上正確掛載。您可以將它掛載到您選擇的目錄。例如，如果您將它掛載到<code translate="no">/mnt/nvme</code> ，請確定它已正確設定，而且您可以透過執行<code translate="no">lsblk</code> 或<code translate="no">df -h</code> ，在<code translate="no">/mnt/nvme</code> 看到磁碟可用。</p></li>
@@ -265,9 +340,39 @@ IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=100.0%
         ></path>
       </svg>
     </button></h2><p>一旦驗證結果令人滿意，您就可以依照下列步驟部署 Milvus Distributed：</p>
-<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">使用 Helm 部署 Milvus Distributed 的提示</h3><p>QueryNode pod 預設使用 NVMe 磁碟作為 EmptyDir 磁碟區。建議您將 NVMe 磁碟掛載至 QueryNode pod 內的<code translate="no">/var/lib/milvus/data</code> ，以確保最佳效能。</p>
+<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">使用 Helm 部署 Milvus Distributed 的提示<button data-href="#Tips-for-deploying-Milvus-Distributed-using-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>QueryNode pod 預設使用 NVMe 磁碟作為 EmptyDir 磁碟區。建議您在 QueryNode pod 中將 NVMe 磁碟掛載至<code translate="no">/var/lib/milvus/data</code> ，以確保最佳效能。</p>
 <p>有關如何使用 Helm 部署 Milvus Distributed 的詳細資訊，請參閱使用<a href="/docs/zh-hant/install_cluster-helm.md">Helm 在 Kubernetes 執行 Milvus</a>。</p>
-<h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">使用 Milvus Operator 部署 Milvus Distributed 的提示</h3><p>Milvus Operator 會自動設定 QueryNode pod 使用 NVMe 磁碟作為 EmptyDir 磁碟區。建議您將下列配置新增至<code translate="no">MilvusCluster</code> 自訂資源：</p>
+<h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">使用 Milvus Operator 部署 Milvus Distributed 的提示<button data-href="#Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus Operator 會自動設定 QueryNode pod 使用 NVMe 磁碟作為 EmptyDir 磁碟區。建議您將下列配置新增至<code translate="no">MilvusCluster</code> 自訂資源：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>

@@ -135,7 +135,7 @@ iterator = collection.search_iterator(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在上述示例中，您将每次搜索返回的实体数<strong>（batch_</strong><strong>size</strong><strong>/batchSize</strong>）设置为 50，将返回的实体总数<strong>（topK</strong>）设置为 20,000。</p>
+<p>在上述示例中，您将每次搜索返回的实体数<strong>（batch_size/</strong><strong>batchSize</strong>）设置为 50，将返回的实体总数<strong>（topK</strong>）设置为 20,000。</p>
 <h2 id="Use-SearchIterator" class="common-anchor-header">使用 SearchIterator<button data-href="#Use-SearchIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

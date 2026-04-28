@@ -37,7 +37,7 @@ title: Erste Schritte mit Dynamiq und Milvus
 <li><p><strong>Document Indexing Flow</strong>: Lernen Sie, wie Sie Eingabedateien (z.B. PDFs) verarbeiten, ihren Inhalt in Vektoreinbettungen umwandeln und sie in Milvus speichern. Die Nutzung der leistungsstarken Indizierungsfunktionen von Milvus stellt sicher, dass Ihre Daten für einen schnellen Abruf bereit sind.</p></li>
 <li><p><strong>Document Retrieval Flow</strong>: Erfahren Sie, wie Sie Milvus nach relevanten Dokumenteneinbettungen abfragen und diese nutzen, um mit den LLM-Agenten von Dynamiq aufschlussreiche, kontextbezogene Antworten zu generieren und so eine nahtlose KI-gestützte Benutzererfahrung zu schaffen.</p></li>
 </ul>
-<p>Am Ende dieses Tutorials werden Sie ein solides Verständnis dafür erlangen, wie Milvus und Dynamiq zusammenarbeiten, um skalierbare, kontextbezogene KI-Systeme zu entwickeln, die auf Ihre Bedürfnisse zugeschnitten sind.</p>
+<p>Am Ende dieses Tutorials werden Sie ein solides Verständnis dafür erlangen, wie Milvus und Dynamiq zusammenarbeiten, um skalierbare, kontextbewusste KI-Systeme zu entwickeln, die auf Ihre Bedürfnisse zugeschnitten sind.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -109,7 +109,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
         ></path>
       </svg>
     </button></h2><p>Dieses Tutorial demonstriert einen Retrieval-Augmented Generation (RAG) Workflow zur Indizierung von Dokumenten mit Milvus als Vektordatenbank. Der Workflow nimmt PDF-Eingabedateien, verarbeitet sie in kleinere Teile, erzeugt Vektoreinbettungen mit dem Einbettungsmodell von OpenAI und speichert die Einbettungen in einer Milvus-Sammlung für eine effiziente Suche.</p>
-<p>Am Ende dieses Workflows werden Sie über ein skalierbares und effizientes Dokumentenindizierungssystem verfügen, das zukünftige RAG-Aufgaben wie semantische Suche und Fragenbeantwortung unterstützt.</p>
+<p>Am Ende dieses Workflows werden Sie über ein skalierbares und effizientes System zur Indizierung von Dokumenten verfügen, das zukünftige RAG-Aufgaben wie semantische Suche und Fragenbeantwortung unterstützt.</p>
 <h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">Erforderliche Bibliotheken importieren und Workflow initialisieren<button data-href="#Import-Required-Libraries-and-Initialize-Workflow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -335,7 +335,7 @@ ResourceWarning: Enable tracemalloc to get the object allocation traceback
 2024-11-19 22:14:10 - INFO - Flow b30b48ec-d5d2-4e4c-8e25-d6976c8a9c17: execution succeeded in 1.3s.
 2024-11-19 22:14:10 - INFO - Workflow 87878444-6a3d-43f3-ae32-0127564a959f: execution succeeded in 1.3s.
 </code></pre>
-<p>Mit diesem Workflow haben wir erfolgreich eine Dokumentenindizierungspipeline implementiert, die Milvus als Vektordatenbank und das Einbettungsmodell von OpenAI für die semantische Darstellung verwendet. Dieser Aufbau ermöglicht ein schnelles und genaues vektorbasiertes Retrieval und bildet die Grundlage für RAG-Workflows wie semantische Suche, Dokumentenretrieval und kontextbezogene KI-gesteuerte Interaktionen.</p>
+<p>Mit diesem Workflow haben wir erfolgreich eine Dokumentenindizierungspipeline implementiert, die Milvus als Vektordatenbank und das Einbettungsmodell von OpenAI für die semantische Darstellung verwendet. Dieser Aufbau ermöglicht eine schnelle und genaue vektorbasierte Suche und bildet die Grundlage für RAG-Workflows wie semantische Suche, Dokumentenabfrage und kontextbezogene KI-gesteuerte Interaktionen.</p>
 <p>Mit den skalierbaren Speichermöglichkeiten von Milvus und der Orchestrierung von Dynamiq ist diese Lösung sowohl für das Prototyping als auch für groß angelegte Produktionsimplementierungen geeignet. Sie können diese Pipeline nun erweitern, um zusätzliche Aufgaben wie Retrieval-basierte Fragebeantwortung oder KI-gesteuerte Inhaltsgenerierung einzubeziehen.</p>
 <h2 id="RAG-Document-Retrieval-Flow" class="common-anchor-header">Ablauf der RAG-Dokumentenrecherche<button data-href="#RAG-Document-Retrieval-Flow" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -20,6 +20,9 @@ title: 使用 GPU 建立索引
         ></path>
       </svg>
     </button></h1><p>本指南概述了在 Milvus 中建立支持 GPU 的索引的步骤，这可以显著提高高吞吐量和高调用场景中的搜索性能。有关 Milvus 支持的 GPU 索引类型的详细信息，请参阅<a href="/docs/zh/gpu_index.md">GPU 索引</a>。</p>
+<div class="alert warning">
+<p>此页面已被弃用。有关最新实现，请参阅<a href="/docs/zh/gpu-index-overview.md">GPU 索引概述</a></p>
+</div>
 <h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">为 GPU 内存控制配置 Milvus 设置<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +39,7 @@ title: 使用 GPU 建立索引
         ></path>
       </svg>
     </button></h2><p>Milvus 使用全局图形内存池分配 GPU 内存。</p>
-<p>它支持<a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">Milvus 配置文件</a>中的两个参数<code translate="no">initMemSize</code> 和<code translate="no">maxMemSize</code> 。显存池大小初始设置为<code translate="no">initMemSize</code> ，超过此限制后将自动扩展至<code translate="no">maxMemSize</code> 。</p>
+<p>它支持<a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">Milvus 配置文件</a>中的两个参数<code translate="no">initMemSize</code> 和<code translate="no">maxMemSize</code> 。内存池大小初始设置为<code translate="no">initMemSize</code> ，超过此限制后将自动扩展至<code translate="no">maxMemSize</code> 。</p>
 <p>Milvus 启动时，默认<code translate="no">initMemSize</code> 为可用 GPU 内存的 1/2，默认<code translate="no">maxMemSize</code> 等于所有可用 GPU 内存。</p>
 <p>在 Milvus 2.4.1（包括 2.4.1 版）之前，Milvus 使用统一的 GPU 内存池。对于 2.4.1 之前的版本（包括 2.4.1 版），建议将这两个值都设为 0。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">gpu:</span>
@@ -208,7 +211,7 @@ collection.create_index(
 <li><p><strong>itopk_size</strong>：决定搜索过程中保留的中间结果的大小。较大的值可能会提高召回率，但会降低搜索性能。它至少应等于最终的 top-k<strong>（极限</strong>）值，通常是 2 的幂次（如 16、32、64、128）。</p></li>
 <li><p><strong>search_width</strong>：指定搜索过程中进入 CAGRA 图的入口点数量。增加该值可以提高召回率，但可能会影响搜索性能。</p></li>
 <li><p><strong>min_iterations</strong>/<strong>max</strong><strong>_</strong> <strong>iterations</strong>：这些参数控制搜索迭代过程。默认情况下，它们被设置为<strong>0</strong>，CAGRA 会根据<strong>itopk_size</strong>和<strong>search_width</strong> 自动确定迭代次数。手动调整这些值有助于平衡性能和准确性。</p></li>
-<li><p><strong>team_size</strong>（<strong>团队规模</strong>）：指定用于在 GPU 上计算度量距离的 CUDA 线程数。常用值为 2 的幂次，最高为 32（例如 2、4、8、16、32）。它对搜索性能影响不大。默认值为<strong>0</strong>，Milvus 会根据向量维度自动选择<strong>team_size</strong>。</p></li>
+<li><p><strong>team_size</strong>（<strong>团队规模</strong>）：指定用于在 GPU 上计算度量距离的 CUDA 线程数。常用值是 2 的幂次，最高为 32（如 2、4、8、16、32）。它对搜索性能影响不大。默认值为<strong>0</strong>，Milvus 会根据向量维度自动选择<strong>team_size</strong>。</p></li>
 </ul></li>
 <li><p><strong>GPU_IVF_FLAT</strong>或<strong>GPU_IVF_PQ</strong>索引</p>
 <pre><code translate="no" class="language-python">search_params = {
@@ -265,7 +268,7 @@ collection.search(
 <li><p>对于<strong>GPU_IVF_PQ</strong>和<strong>GPU_CAGRA</strong>，<strong>limit</strong>的最大值为 1024。</p></li>
 <li><p>虽然<strong>GPU_BRUTE_FORCE</strong> 没有设定<strong>限制</strong>，但建议不要超过 4096，以避免潜在的性能问题。</p></li>
 <li><p>目前，GPU 索引不支持 COSINE 距离。如果需要使用 COSINE 距离，应首先对数据进行归一化处理，然后使用内积（IP）距离作为替代。</p></li>
-<li><p>不完全支持为 GPU 索引加载 OOM 保护，过多的数据可能会导致 QueryNode 崩溃。</p></li>
+<li><p>GPU 索引不完全支持加载 OOM 保护，过多的数据可能会导致 QueryNode 崩溃。</p></li>
 <li><p>GPU 索引不支持<a href="https://milvus.io/docs/single-vector-search.md#Range-search">范围</a>搜索和<a href="https://milvus.io/docs/single-vector-search.md#Grouping-searchh">分组搜索</a>等搜索功能。</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">常见问题<button data-href="#FAQ" class="anchor-icon" translate="no">

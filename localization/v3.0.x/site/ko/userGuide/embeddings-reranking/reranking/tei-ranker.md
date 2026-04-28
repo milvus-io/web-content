@@ -2,7 +2,7 @@
 id: tei-ranker.md
 title: TEI 랭커Compatible with Milvus 2.6.x
 summary: >-
-  TEI 랭커는 의미론적 재랭킹을 통해 검색 관련성을 향상시키기 위해 Hugging Face의 텍스트 임베딩 추론(TEI) 서비스를
+  TEI 랭커는 의미론적 재순위를 통해 검색 관련성을 향상시키기 위해 Hugging Face의 텍스트 임베딩 추론(TEI) 서비스를
   활용합니다. 이는 기존의 벡터 유사도를 뛰어넘는 검색 결과 순서에 대한 고급 접근 방식을 나타냅니다.
 beta: Milvus 2.6.x
 ---
@@ -138,7 +138,7 @@ searchWithRanker(scientists, ranker);
    <tr>
      <td><p><code translate="no">reranker</code></p></td>
      <td><p>예</p></td>
-     <td><p>모델 순위 재지정을 사용하려면 <code translate="no">"model"</code> 으로 설정해야 합니다.</p></td>
+     <td><p>모델 순위 재지정을 사용하려면 <code translate="no">"model"</code> 로 설정해야 합니다.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>

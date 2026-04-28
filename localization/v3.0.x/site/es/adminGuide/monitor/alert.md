@@ -106,7 +106,7 @@ summary: Aprenda a crear una alerta para los servicios Milvus en Grafana.
     </button></h3><p>Para añadir una alerta para el uso de memoria de los componentes de Milvus, edite el panel Memoria. A continuación, añada una nueva consulta con la métrica <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
    </span> <span class="img-wrapper"> <span>Alerta_metrica</span> </span></p>
 <h3 id="2-Save-the-dashboard" class="common-anchor-header">2. Guarde el panel<button data-href="#2-Save-the-dashboard" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -126,12 +126,12 @@ summary: Aprenda a crear una alerta para los servicios Milvus en Grafana.
     </button></h3><p>Guarde el panel y espere unos minutos para ver la alerta.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
    </span> <span class="img-wrapper"> <span>Alert_dashboard</span> </span></p>
 <p>La consulta de alerta de Grafana no admite variables de plantilla. Por lo tanto, debes añadir una segunda consulta sin variables de plantilla en las etiquetas. La segunda consulta se llama "A" por defecto. Puedes cambiarle el nombre haciendo clic en el desplegable.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
    </span> <span class="img-wrapper"> <span>Consulta_alerta</span> </span></p>
 <h3 id="3-Add-alert-notifications" class="common-anchor-header">3. Añadir notificaciones de alerta<button data-href="#3-Add-alert-notifications" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,17 +151,17 @@ summary: Aprenda a crear una alerta para los servicios Milvus en Grafana.
     </button></h3><p>Para recibir notificaciones de alerta, añada un "canal de notificación". A continuación, especifique el canal en el campo "Enviar a".</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
    </span> <span class="img-wrapper"> <span>Notificación_de_alerta</span> </span></p>
 <p>Si la alerta se crea y activa correctamente, recibirá la notificación que se muestra en la siguiente captura de pantalla.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
    </span> <span class="img-wrapper"> <span>Mensaje_notificación</span> </span></p>
 <p>Para eliminar una alerta, vaya al panel "Alerta" y haga clic en el botón eliminar.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
    </span> <span class="img-wrapper"> <span>Eliminar_alerta</span> </span></p>
 <h2 id="Whats-next" class="common-anchor-header">Siguiente paso<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -183,7 +183,7 @@ summary: Aprenda a crear una alerta para los servicios Milvus en Grafana.
 <li>Lea la <a href="/docs/es/monitor.md">guía de monitorización</a></li>
 <li>Aprenda a <a href="/docs/es/visualize.md">visualizar las métricas de monitorización</a></li>
 </ul></li>
-<li>Si ha creado alertas para el uso de memoria por parte de los componentes de Milvus:<ul>
+<li>Si ha creado alertas para el uso de memoria por los componentes de Milvus:<ul>
 <li>Aprenda a <a href="/docs/es/allocate.md#standalone">asignar recursos</a></li>
 </ul></li>
 <li>Si está buscando información sobre cómo escalar un cluster Milvus:<ul>

@@ -65,10 +65,10 @@ summary: >-
 <p>Die folgende Abbildung zeigt, wie ein Vamana-Graph aufgebaut ist.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
    </span> <span class="img-wrapper"> <span>Diskann</span> </span></p>
 <ol>
-<li><p><strong>Anfängliche zufällige Verbindungen:</strong> Jeder Datenpunkt (Vektor) wird als ein Knoten im Graphen dargestellt. Diese Knoten werden anfangs zufällig miteinander verbunden und bilden ein dichtes Netz. Normalerweise hat ein Knoten zu Beginn etwa 500 Kanten (oder Verbindungen), um eine breite Konnektivität zu gewährleisten.</p></li>
+<li><p><strong>Anfängliche zufällige Verbindungen:</strong> Jeder Datenpunkt (Vektor) wird als ein Knoten im Graphen dargestellt. Diese Knoten werden anfangs zufällig miteinander verbunden und bilden ein dichtes Netz. Normalerweise hat ein Knoten zu Beginn etwa 500 Kanten (oder Verbindungen), um eine breite Konnektivität zu erreichen.</p></li>
 <li><p><strong>Verfeinerung für mehr Effizienz:</strong> Der anfängliche Zufallsgraph wird einem Optimierungsprozess unterzogen, um ihn für die Suche effizienter zu machen. Dies umfasst zwei wichtige Schritte:</p>
 <ul>
 <li><p><strong>Ausschneiden überflüssiger Kanten:</strong> Der Algorithmus verwirft unnötige Verbindungen auf der Grundlage der Entfernungen zwischen den Knoten. Bei diesem Schritt werden Kanten höherer Qualität bevorzugt.</p>
@@ -84,7 +84,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>wobei:</p>
 <ul>
-<li><p><code translate="no">vec_field_size_gb</code> die Gesamtgröße der Vektoren (in Gigabyte) ist.</p></li>
+<li><p><code translate="no">vec_field_size_gb</code> die Gesamtgröße der Vektoren ist (in Gigabyte).</p></li>
 <li><p><code translate="no">pq_code_budget_gb_ratio</code> ist ein benutzerdefiniertes Verhältnis, das den für PQ-Codes reservierten Anteil der Gesamtdatengröße angibt. Mit diesem Parameter kann ein Kompromiss zwischen Suchgenauigkeit und Speicherressourcen gefunden werden. Weitere Informationen zur Parametereinstellung finden Sie unter <a href="/docs/de/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN-Konfigurationen</a>.</p></li>
 </ul>
 <p>Technische Einzelheiten über die zugrunde liegende PQ-Methode finden Sie unter <a href="/docs/de/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
@@ -106,12 +106,12 @@ summary: >-
     </button></h3><p>Sobald der Index (der Vamana-Graph auf der Festplatte und die PQ-Codes im Speicher) aufgebaut ist, führt DISKANN die ANN-Suche wie folgt durch:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
    </span> <span class="img-wrapper"> <span>Diskann 2</span> </span></p>
 <ol>
 <li><p><strong>Abfrage und Einstiegspunkt:</strong> Ein Abfragevektor wird bereitgestellt, um seine nächsten Nachbarn zu finden. DISKANN beginnt mit einem ausgewählten Einstiegspunkt im Vamana-Graphen, häufig ein Knoten in der Nähe des globalen Schwerpunkts des Datensatzes. Der globale Schwerpunkt stellt den Durchschnitt aller Vektoren dar, was dazu beiträgt, die Traversaldistanz durch den Graphen zu minimieren, um die gewünschten Nachbarn zu finden.</p></li>
 <li><p><strong>Erkundung der Nachbarschaft:</strong> Der Algorithmus sammelt potenzielle Nachbarschaftskandidaten (rote Kreise in der Abbildung) an den Kanten des aktuellen Knotens und nutzt speicherinterne PQ-Codes, um die Abstände zwischen diesen Kandidaten und dem Abfragevektor zu approximieren. Diese potenziellen Nachbarschaftskandidaten sind die Knoten, die über Kanten im Vamana-Graphen direkt mit dem ausgewählten Einstiegspunkt verbunden sind.</p></li>
-<li><p><strong>Auswahl von Knoten für eine genaue Abstandsberechnung:</strong> Aus den Näherungsergebnissen wird eine Teilmenge der vielversprechendsten Nachbarn (grüne Kreise in der Abbildung) für eine genaue Abstandsberechnung anhand ihrer ursprünglichen, nicht komprimierten Vektoren ausgewählt. Dazu müssen die Daten von der Festplatte gelesen werden, was sehr zeitaufwändig sein kann. DISKANN verwendet zwei Parameter, um dieses empfindliche Gleichgewicht zwischen Genauigkeit und Geschwindigkeit zu steuern:</p>
+<li><p><strong>Auswahl von Knoten für eine genaue Abstandsberechnung:</strong> Aus den Näherungsergebnissen wird eine Teilmenge der vielversprechendsten Nachbarn (grüne Kreise in der Abbildung) für eine genaue Abstandsberechnung anhand ihrer ursprünglichen, nicht komprimierten Vektoren ausgewählt. Dies erfordert das Lesen von Daten von der Festplatte, was zeitaufwändig sein kann. DISKANN verwendet zwei Parameter, um dieses empfindliche Gleichgewicht zwischen Genauigkeit und Geschwindigkeit zu steuern:</p>
 <ul>
 <li><p><code translate="no">beam_width_ratio</code>: Ein Verhältnis, das die Breite der Suche steuert und bestimmt, wie viele Nachbarschaftskandidaten parallel ausgewählt werden, um ihre Nachbarn zu untersuchen. Ein größeres <code translate="no">beam_width_ratio</code> führt zu einer breiteren Suche, was zu einer höheren Genauigkeit führen kann, aber auch die Rechenkosten und die Festplatten-E/A erhöht. Die Breite des Suchstrahls, d. h. die Anzahl der ausgewählten Knoten, wird anhand der folgenden Formel bestimmt: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
 <li><p><code translate="no">search_cache_budget_gb_ratio</code>: Der Anteil des Speichers, der für die Zwischenspeicherung häufig abgerufener Festplattendaten zugewiesen wird. Diese Zwischenspeicherung trägt dazu bei, die Festplatten-E/A zu minimieren, wodurch wiederholte Suchvorgänge schneller durchgeführt werden können, da sich die Daten bereits im Speicher befinden.</p></li>
@@ -134,7 +134,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Standardmäßig ist <strong>DISKANN</strong> in Milvus deaktiviert, um der Geschwindigkeit von In-Memory-Indizes für Datensätze, die bequem in den RAM passen, den Vorrang zu geben. Wenn Sie jedoch mit großen Datensätzen arbeiten oder die Skalierbarkeit von <strong>DISKANN</strong> und die SSD-Optimierung nutzen möchten, können Sie DISKANN problemlos aktivieren.</p>
+    </button></h2><p>Standardmäßig ist <strong>DISKANN</strong> in Milvus deaktiviert, um der Geschwindigkeit von In-Memory-Indizes für Datensätze, die bequem in den RAM passen, den Vorrang zu geben. Wenn Sie jedoch mit großen Datensätzen arbeiten oder die Vorteile von <strong>DISKANNs</strong> Skalierbarkeit und SSD-Optimierung nutzen möchten, können Sie es einfach aktivieren.</p>
 <p>Hier erfahren Sie, wie Sie DISKANN in Milvus aktivieren können:</p>
 <ol>
 <li><p><strong>Aktualisieren Sie die Milvus-Konfigurationsdatei</strong></p>
@@ -147,7 +147,7 @@ summary: >-
 </ol></li>
 <li><p><strong>Optimieren Sie den Speicher für DISKANN</strong></p></li>
 </ol>
-<p>Um die beste Leistung mit DISKANN zu gewährleisten, wird empfohlen, Ihre Milvus-Daten auf einer schnellen NVMe-SSD zu speichern. Im Folgenden wird beschrieben, wie Sie dies sowohl für Milvus Standalone als auch für Cluster-Einsätze tun können:</p>
+<p>Um die beste Leistung mit DISKANN zu gewährleisten, empfiehlt es sich, Ihre Milvus-Daten auf einer schnellen NVMe-SSD zu speichern. Im Folgenden wird beschrieben, wie Sie dies sowohl für Milvus Standalone als auch für Cluster-Einsätze tun können:</p>
 <ul>
 <li><p><strong>Milvus Standalone</strong></p>
 <ul>
@@ -239,7 +239,7 @@ summary: >-
      <td><p>Steuert die maximale Anzahl von Verbindungen (Kanten), die jeder Datenpunkt im Vamana-Diagramm haben kann.</p></td>
      <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, 512]</p>
 <p><strong>Standardwert</strong>: <code translate="no">56</code></p></td>
-     <td><p>Höhere Werte führen zu dichteren Graphen, was die Wiederauffindbarkeit erhöht (es werden mehr relevante Ergebnisse gefunden), aber auch den Speicherverbrauch und die Erstellungszeit erhöht. 
+     <td><p>Höhere Werte führen zu dichteren Graphen, was die Wiederauffindbarkeit erhöht (es werden mehr relevante Ergebnisse gefunden), aber auch die Speichernutzung und die Erstellungszeit erhöht. 
  In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs zu wählen: [10, 100].</p></td>
    </tr>
    <tr>

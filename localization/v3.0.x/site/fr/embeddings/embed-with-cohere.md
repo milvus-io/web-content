@@ -48,7 +48,7 @@ cohere_ef = CohereEmbeddingFunction(
 <p>Le type d'entrée transmis au modèle. Requis pour les modèles d'intégration v3 et plus.</p>
 <ul>
 <li><code translate="no">&quot;search_document&quot;</code>: Utilisé pour les embeddings stockés dans une base de données vectorielle pour les cas d'utilisation de recherche.</li>
-<li><code translate="no">&quot;search_query&quot;</code>: Utilisé pour l'intégration de requêtes de recherche exécutées dans une base de données vectorielle pour trouver des documents pertinents.</li>
+<li><code translate="no">&quot;search_query&quot;</code>: Utilisé pour les enchâssements de requêtes de recherche exécutées dans une base de données vectorielle pour trouver des documents pertinents.</li>
 <li><code translate="no">&quot;classification&quot;</code>: Utilisé pour les enchâssements passés par un classificateur de texte.</li>
 <li><code translate="no">&quot;clustering&quot;</code>: Utilisé pour les enregistrements passés par un algorithme de clustering.</li>
 </ul></li>

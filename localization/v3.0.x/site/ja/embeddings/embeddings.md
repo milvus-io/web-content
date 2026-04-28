@@ -20,10 +20,10 @@ title: エンベッディングの概要
         ></path>
       </svg>
     </button></h1><p>エンベッディングは、データを高次元空間にマッピングするための機械学習の概念であり、類似したセマンティックのデータが近くに配置される。通常、BERTまたは他のTransformerファミリーのDeep Neural Networkであるエンベッディング・モデルは、テキスト、画像、および他のデータタイプのセマンティクスを、ベクトルとして知られる一連の数値で効果的に表現することができます。これらのモデルの主な特徴は、高次元空間におけるベクトル間の数学的距離が、元のテキストや画像のセマンティクスの類似性を示すことができることです。この特性は、GoogleやBingのようなウェブ検索エンジン、eコマースサイトの商品検索やレコメンデーション、そして最近話題の生成AIにおけるRAG（Retrieval Augmented Generation）パラダイムなど、多くの情報検索アプリケーションを解き放つ。</p>
-<p>エンベッディングには主に2つのカテゴリがあり、それぞれが異なるタイプのベクトルを生成する：</p>
+<p>エンベッディングには2つの主要なカテゴリがあり、それぞれが異なるタイプのベクトルを生成する：</p>
 <ul>
-<li><p><strong>高密度埋め込み</strong>：ほとんどの埋め込みモデルは、情報を数百から数千次元の浮動小数点ベクトルとして表現します。ほとんどの次元が0でない値を持つため、出力は「密な」ベクトルと呼ばれます。例えば、一般的なオープンソースの埋め込みモデルBAAI/bge-base-en-v1.5は、768個の浮動小数点数からなるベクトル（768次元浮動小数点ベクトル）を出力します。</p></li>
-<li><p><strong>疎な埋め込み</strong>：これに対して、スパース埋め込みは、ほとんどの次元がゼロのベクトル（スパースベクトル）を出力します。これらのベクトルは、多くの場合、トークン語彙のサイズによって決定されるはるかに高い次元（数万またはそれ以上）を持っています。スパース・ベクトルはディープ・ニューラル・ネットワークやテキスト・コーパスの統計解析によって生成される。その解釈のしやすさと、より優れた領域外汎化能力により、スパース埋め込みは密な埋め込みを補完するものとして開発者に採用されつつあります。</p></li>
+<li><p><strong>高密度埋め込み</strong>：ほとんどの埋め込みモデルは、情報を数百から数千次元の浮動小数点ベクトルとして表現します。ほとんどの次元がゼロでないため、出力は「密な」ベクトルと呼ばれます。例えば、一般的なオープンソースの埋め込みモデルBAAI/bge-base-en-v1.5は、768個の浮動小数点数からなるベクトル（768次元浮動小数点ベクトル）を出力します。</p></li>
+<li><p><strong>疎な埋め込み</strong>：これに対して、スパース埋め込みは、ほとんどの次元がゼロのベクトル（スパースベクトル）を出力します。これらのベクトルは、トークン語彙のサイズによって決定される、はるかに高い次元（数万またはそれ以上）を持つことがよくあります。スパース・ベクトルはディープ・ニューラル・ネットワークやテキスト・コーパスの統計解析によって生成される。その解釈のしやすさと、より優れた領域外汎化能力により、スパース埋め込みは密な埋め込みを補完するものとして開発者に採用されつつあります。</p></li>
 </ul>
 <p>Milvusはベクトルデータの管理、保存、検索のために設計されたベクトルデータベースです。主流の埋め込みと<a href="https://milvus.io/docs/rerankers-overview.md">再ランク付け</a>モデルを統合することで、元のテキストを検索可能なベクトルに簡単に変換したり、強力なモデルを使用して結果を再ランク付けし、RAGのより正確な結果を達成することができます。この統合により、テキスト変換が簡素化され、エンベッディングやリランキングコンポーネントを追加する必要がなくなるため、RAGの開発と検証が効率化されます。</p>
 <p>エンベッディングを実際に作成するには、<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">Using PyMilvus's Model To Generate Text Embeddingsを</a>参照してください。</p>
@@ -65,7 +65,7 @@ title: エンベッディングの概要
     </button></h2><p>Milvusで埋め込み関数を使うには、まずPyMilvusクライアントライブラリを、埋め込み生成のための全てのユーティリティをラップした<code translate="no">model</code> サブパッケージとともにインストールします。</p>
 <pre><code translate="no" class="language-python">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">model</code> サブパッケージは<a href="https://milvus.io/docs/embed-with-openai.md">OpenAI</a>,<a href="https://milvus.io/docs/embed-with-sentence-transform.md">Sentence Transformers</a>,<a href="https://milvus.io/docs/embed-with-bgm-m3.md">BGE M3</a>,<a href="https://milvus.io/docs/embed-with-splade.md">SPLADE</a>事前学習モデルなど様々な埋め込みモデルをサポートしています。簡略化のため、この例では<code translate="no">DefaultEmbeddingFunction</code> を使用します。このモデルは<strong>すべてMiniLM-L6-v2</strong>文変換モデルで、約70MBあります：</p>
+<p><code translate="no">model</code> サブパッケージは<a href="https://milvus.io/docs/embed-with-openai.md">OpenAI</a>,<a href="https://milvus.io/docs/embed-with-sentence-transform.md">Sentence Transformers</a>,<a href="https://milvus.io/docs/embed-with-bgm-m3.md">BGE M3</a>,<a href="https://milvus.io/docs/embed-with-splade.md">SPLADE</a>事前学習モデルなど様々な埋め込みモデルをサポートしています。簡略化のため、この例では、<code translate="no">DefaultEmbeddingFunction</code> 、<strong>全MiniLM-L6-v2</strong>文変換モデルを使用します。モデルは約70MBで、最初の使用時にダウンロードされます：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
 
 <span class="hljs-comment"># This will download &quot;all-MiniLM-L6-v2&quot;, a light weight model.</span>

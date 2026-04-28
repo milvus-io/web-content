@@ -26,7 +26,7 @@ beta: Milvus 2.6.x
 <p>يعد vLLLM Ranker ذا قيمة خاصة للتطبيقات التي تكون فيها الدقة والسياق أمرًا بالغ الأهمية، مثل:</p>
 <ul>
 <li><p>البحث في الوثائق التقنية التي تتطلب فهماً عميقاً للمفاهيم</p></li>
-<li><p>قواعد بيانات البحث حيث تفوق العلاقات الدلالية مطابقة الكلمات الرئيسية</p></li>
+<li><p>قواعد البيانات البحثية التي تفوق فيها العلاقات الدلالية مطابقة الكلمات الرئيسية</p></li>
 <li><p>أنظمة دعم العملاء التي تحتاج إلى مطابقة مشاكل المستخدم مع الحلول ذات الصلة</p></li>
 <li><p>البحث في التجارة الإلكترونية التي يجب أن تفهم سمات المنتج ونية المستخدم.</p></li>
 </ul>
@@ -66,7 +66,7 @@ curl -X <span class="hljs-string">&#x27;POST&#x27;</span> \
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يجب أن تُعيد الاستجابة الناجحة المستندات مرتبة حسب درجات الملاءمة، على غرار استجابة واجهة برمجة التطبيقات OpenAI rerank API.</p>
+<p>يجب أن تُرجع الاستجابة الناجحة المستندات مرتبة حسب درجات الملاءمة، على غرار استجابة واجهة برمجة التطبيقات OpenAI rerank API.</p>
 <p>ارجع إلى <a href="https://docs.vllm.ai/en/latest/serving/openai_compatible_server.html#re-rank-api">وثائق خادم vLLM OpenAI المتوافق مع vLLM</a> لمزيد من الوسيطات والخيارات الخاصة بالخادم.</p></li>
 </ul>
 <h2 id="Create-a-vLLM-ranker-function" class="common-anchor-header">إنشاء دالة مصنف vLLM<button data-href="#Create-a-vLLM-ranker-function" class="anchor-icon" translate="no">
@@ -168,7 +168,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">provider</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>مزود خدمة النموذج المراد استخدامه لإعادة الترتيب.</p></td>
+     <td><p>مزود خدمة النموذج المراد استخدامه لإعادة ترتيب النماذج.</p></td>
      <td><p><code translate="no">"vllm"</code></p></td>
    </tr>
    <tr>
@@ -192,7 +192,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">truncate_prompt_tokens</code></p></td>
      <td><p>لا</p></td>
-     <td><p>إذا تم تعيينه إلى عدد صحيح <em>k،</em> سيستخدم فقط آخر <em>k</em> من المطالبة (أي الاقتطاع الأيسر). افتراضي إلى لا شيء (أي لا اقتطاع).</p></td>
+     <td><p>إذا تم تعيينه إلى عدد صحيح <em>k،</em> فسيستخدم فقط آخر <em>k</em> من المطالبة (أي الاقتطاع الأيسر). افتراضي إلى لا شيء (أي لا اقتطاع).</p></td>
      <td><p><code translate="no">256</code></p></td>
    </tr>
 </table>

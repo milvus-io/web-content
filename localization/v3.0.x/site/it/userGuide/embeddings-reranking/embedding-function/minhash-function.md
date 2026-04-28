@@ -21,7 +21,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La <strong>funzione MinHash</strong> converte il testo grezzo in <strong>vettori binari</strong> che approssimano la <a href="https://en.wikipedia.org/wiki/Jaccard_index">somiglianza di Jaccard</a> tra i documenti. Applica lo shingling del testo e funzioni hash multiple per produrre vettori di firma a lunghezza fissa, consentendo un rapido rilevamento di quasi-duplicazioni e la deduplicazione dei documenti su scala.</p>
+    </button></h1><p>La <strong>funzione MinHash</strong> converte il testo grezzo in <strong>vettori binari</strong> che approssimano la <a href="https://en.wikipedia.org/wiki/Jaccard_index">somiglianza di Jaccard</a> tra i documenti. Applica lo shingling del testo e funzioni hash multiple per produrre vettori di firme a lunghezza fissa, consentendo un rapido rilevamento di quasi-duplicazioni e la deduplicazione dei documenti su scala.</p>
 <p>Essendo una funzione integrata, MinHash viene eseguito all'interno di Milvus e non richiede l'inferenza di modelli esterni o la preelaborazione. Si inserisce il testo grezzo e Milvus genera automaticamente i vettori di firma MinHash.</p>
 <h2 id="Limits" class="common-anchor-header">Limiti<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,7 +40,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><ul>
 <li><p>Il campo di output deve essere un <code translate="no">BINARY_VECTOR</code> con una dimensione che soddisfa <code translate="no">dim % 32 == 0</code>, perché ogni firma MinHash è un valore hash a 32 bit.</p></li>
-<li><p>Il campo <code translate="no">dim</code> del vettore binario deve essere uguale a <code translate="no">32 * num_hashes</code>. Una mancata corrispondenza provoca un errore.</p></li>
+<li><p>Il campo <code translate="no">dim</code> del vettore binario deve essere uguale a <code translate="no">32 * num_hashes</code>. Una mancata corrispondenza causa un errore.</p></li>
 <li><p>Quando si utilizza l'indice <code translate="no">MINHASH_LSH</code> con l'output della funzione MinHash, <code translate="no">mh_element_bit_width</code> deve essere impostato su <code translate="no">32</code>.</p></li>
 </ul>
 <h2 id="How-MinHash-works" class="common-anchor-header">Come funziona MinHash<button data-href="#How-MinHash-works" class="anchor-icon" translate="no">
@@ -137,7 +137,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Prima di utilizzare la funzione MinHash, pianificare lo schema della raccolta in modo da includere quanto segue:</p>
+    </button></h2><p>Prima di utilizzare la funzione MinHash, pianificare lo schema della raccolta in modo che includa quanto segue:</p>
 <ul>
 <li><p><strong>Un campo di testo per il contenuto grezzo</strong></p>
 <p>La raccolta deve includere un campo <code translate="no">VARCHAR</code> per memorizzare il testo grezzo. Questo campo serve come input alla funzione MinHash.</p></li>
@@ -146,7 +146,7 @@ beta: Milvus 3.0.x
 <li><p><strong>Un campo vettore binario per l'output MinHash</strong></p>
 <p>La collezione deve includere un campo <code translate="no">BINARY_VECTOR</code> per memorizzare i vettori binari generati dalla funzione MinHash. La dimensione deve essere uguale a <code translate="no">32 * num_hashes</code>.</p></li>
 </ul>
-<h2 id="Step-1-Create-a-collection-with-a-MinHash-function" class="common-anchor-header">Passo 1: Creare una raccolta con una funzione MinHash<button data-href="#Step-1-Create-a-collection-with-a-MinHash-function" class="anchor-icon" translate="no">
+<h2 id="Step-1-Create-a-collection-with-a-MinHash-function" class="common-anchor-header">Passo 1: creare una collezione con una funzione MinHash<button data-href="#Step-1-Create-a-collection-with-a-MinHash-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

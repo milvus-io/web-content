@@ -335,7 +335,7 @@ title: نظرة عامة على بنية ميلفوس
         ></path>
       </svg>
     </button></h2><ul>
-<li>استكشف <a href="/docs/ar/main_components.md">المكونات الرئيسية</a> لمعرفة تفاصيل التنفيذ التفصيلية</li>
+<li>استكشف <a href="/docs/ar/main_components.md">المكونات الرئيسية</a> للحصول على تفاصيل التنفيذ التفصيلية</li>
 <li>تعرف على سير عمل <a href="/docs/ar/data_processing.md">معالجة البيانات</a> واستراتيجيات التحسين</li>
 <li>فهم <a href="/docs/ar/tune_consistency.md">نموذج الاتساق</a> وضمانات المعاملات في ميلفوس</li>
 </ul>

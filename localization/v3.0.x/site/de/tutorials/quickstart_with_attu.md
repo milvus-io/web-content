@@ -55,7 +55,7 @@ title: Schnellstart mit Attu - der Web-UI von Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Laden Sie die Desktop-Version von Attu herunter, indem Sie die <a href="https://github.com/zilliztech/attu/releases">Attu GitHub Releases-Seite</a> besuchen. Wählen Sie die für Ihr Betriebssystem geeignete Version aus und folgen Sie den Installationsschritten.</p>
+    </button></h2><p>Laden Sie die Desktop-Version von Attu herunter, indem Sie die <a href="https://github.com/zilliztech/attu/releases">Attu GitHub Releases-Seite</a> besuchen. Wählen Sie die entsprechende Version für Ihr Betriebssystem aus und folgen Sie den Installationsschritten.</p>
 <h3 id="Note-for-macOS-M-series-chip" class="common-anchor-header">Hinweis für macOS (Chip der M-Serie):<button data-href="#Note-for-macOS-M-series-chip" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -265,13 +265,13 @@ client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Nun können wir das Datenschema und die eingefügten Entitäten mit Hilfe der Attu-Schnittstelle visualisieren. Das Schema zeigt definierte Felder an, darunter ein <code translate="no">id</code> Feld vom Typ <code translate="no">Int64</code> und ein <code translate="no">vector</code> Feld vom Typ <code translate="no">FloatVector(768)</code> mit einer <code translate="no">Inner Product (IP)</code> Metrik. Die Sammlung ist mit <strong>72 Entitäten</strong> geladen.</p>
+    </button></h3><p>Nun können wir das Datenschema und die eingefügten Entitäten mit Hilfe der Attu-Schnittstelle visualisieren. Das Schema zeigt definierte Felder an, darunter ein Feld <code translate="no">id</code> vom Typ <code translate="no">Int64</code> und ein Feld <code translate="no">vector</code> vom Typ <code translate="no">FloatVector(768)</code> mit einer Metrik <code translate="no">Inner Product (IP)</code>. Die Sammlung ist mit <strong>72 Entitäten</strong> geladen.</p>
 <p>Außerdem können die eingefügten Daten angezeigt werden, einschließlich ID, Vektoreinbettungen und dynamische Felder, die Metadaten wie Textinhalte speichern. Die Schnittstelle unterstützt das Filtern und Abfragen auf der Grundlage bestimmter Bedingungen oder dynamischer Felder.</p>
 <p align="center">
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_after_data_insertion_1.png" alt="Schema View" width="45%" />
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_after_data_insertion_2.png" alt="Data View" width="45%" />
 </p>
-<h2 id="5-Visualizing-Search-Results-and-Relationships" class="common-anchor-header">5. Visualisierung von Suchergebnissen und Relationen<button data-href="#5-Visualizing-Search-Results-and-Relationships" class="anchor-icon" translate="no">
+<h2 id="5-Visualizing-Search-Results-and-Relationships" class="common-anchor-header">5. Visualisierung von Suchergebnissen und Beziehungen<button data-href="#5-Visualizing-Search-Results-and-Relationships" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -287,7 +287,7 @@ client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h2><p>Attu bietet eine leistungsstarke Schnittstelle zur Visualisierung und Erkundung von Datenbeziehungen. Um die eingefügten Datenpunkte und ihre Ähnlichkeitsbeziehungen zu untersuchen, gehen Sie wie folgt vor:</p>
-<h3 id="51-Perform-a-Search" class="common-anchor-header">5.1 <strong>Eine Suche durchführen</strong><button data-href="#51-Perform-a-Search" class="anchor-icon" translate="no">
+<h3 id="51-Perform-a-Search" class="common-anchor-header">5.1 <strong>Durchführen einer Suche</strong><button data-href="#51-Perform-a-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -307,7 +307,7 @@ client.insert(collection_name=collection_name, data=data)
 <li>Klicken Sie auf die Schaltfläche <strong>Zufallsdaten generieren</strong>, um Testabfragen zu erstellen.</li>
 <li>Klicken Sie auf <strong>Suchen</strong>, um die Ergebnisse auf der Grundlage der generierten Daten abzurufen.</li>
 </ol>
-<p>Die Ergebnisse werden in einer Tabelle mit IDs, Ähnlichkeitswerten und dynamischen Feldern für jede übereinstimmende Entität angezeigt.</p>
+<p>Die Ergebnisse werden in einer Tabelle angezeigt, die IDs, Ähnlichkeitswerte und dynamische Felder für jede übereinstimmende Entität enthält.</p>
 <p align="center">
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_searched_table.png" alt="Search Results Table" width="80%">
 </p>

@@ -37,7 +37,7 @@ title: 整合 Milvus 與 Jina
         ></path>
       </svg>
     </button></h2><p>Jina AI 於 2020 年在柏林成立，是一家先進的人工智能公司，專注於透過其搜尋基礎徹底改變人工智能的未來。Jina AI 專精於多模態 AI，旨在透過其整合式元件套件，包括 embeddings、reerankers、prompt ops 和核心基礎架構，讓企業和開發人員能夠利用多模態資料的力量來創造價值和節省成本。<br>
-Jina AI 的尖端嵌入式系統擁有頂級效能，其 8192 符記長度模型是全面資料表達的理想選擇。這些嵌入式提供多語言支援，並可與 OpenAI 等領先平台無縫整合，有助於跨語言應用程式的發展。</p>
+Jina AI 的尖端嵌入式系統擁有頂級效能，其 8192 符記長度模型是全面資料表達的理想選擇。這些嵌入式提供多語言支援，並與 OpenAI 等領先平台無縫整合，有助於跨語言應用程式的發展。</p>
 <h2 id="Milvus-and-Jina-AIs-Embedding" class="common-anchor-header">Milvus 與 Jina AI 的嵌入式系統<button data-href="#Milvus-and-Jina-AIs-Embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

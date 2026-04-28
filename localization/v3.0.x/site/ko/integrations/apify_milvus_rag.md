@@ -133,7 +133,7 @@ Enter YOUR MILVUS_TOKEN··········
         ></path>
       </svg>
     </button></h2><p>다음으로, 웹사이트 콘텐츠 크롤러를 Apify Python SDK와 함께 사용하겠습니다. 먼저 actor_id와 run_input을 정의한 다음 벡터 데이터베이스에 저장할 정보를 지정합니다.</p>
-<p><code translate="no">actor_id=&quot;apify/website-content-crawler&quot;</code> 은 웹사이트 콘텐츠 크롤러의 식별자입니다. 크롤러의 동작은 run_input 매개변수를 통해 완전히 제어할 수 있습니다(자세한 내용은 <a href="https://apify.com/apify/website-content-crawler/input-schema">입력 페이지</a> 참조). 이 예에서는 자바스크립트 렌더링이 필요 없는 Milvus 문서를 크롤링하겠습니다. 따라서 <code translate="no">crawlerType=cheerio</code> 을 설정하고 <code translate="no">startUrls</code> 을 정의하며 <code translate="no">maxCrawlPages=10</code> 을 설정하여 크롤링되는 페이지 수를 제한합니다.</p>
+<p><code translate="no">actor_id=&quot;apify/website-content-crawler&quot;</code> 은 웹사이트 콘텐츠 크롤러의 식별자입니다. 크롤러의 동작은 run_input 매개변수를 통해 완전히 제어할 수 있습니다(자세한 내용은 <a href="https://apify.com/apify/website-content-crawler/input-schema">입력 페이지</a> 참조). 이 예제에서는 자바스크립트 렌더링이 필요 없는 Milvus 문서를 크롤링하겠습니다. 따라서 <code translate="no">crawlerType=cheerio</code> 을 설정하고 <code translate="no">startUrls</code> 을 정의하며 <code translate="no">maxCrawlPages=10</code> 을 설정하여 크롤링되는 페이지 수를 제한합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> apify_client <span class="hljs-keyword">import</span> ApifyClient
 
 client = ApifyClient(os.getenv(<span class="hljs-string">&quot;APIFY_API_TOKEN&quot;</span>))

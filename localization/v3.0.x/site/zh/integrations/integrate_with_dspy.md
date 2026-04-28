@@ -35,7 +35,7 @@ title: Milvus 与 DSPy 集成
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DSPy 由斯坦福大学 NLP 小组推出，是一个开创性的程序框架，旨在优化语言模型中的提示和权重，尤其适用于大型语言模型 (LLMs) 在管道的多个阶段进行集成的情况。与依赖人工制作和调整的传统提示工程技术不同，DSPy 采用的是一种基于学习的方法。通过吸收问答示例，DSPy 可根据特定任务动态生成优化提示。这种创新方法可实现整个流水线的无缝重组，从而消除了连续手动调整提示的需要。DSPy 的 Pythonic 语法提供了各种可组合的声明式模块，简化了 LLMs 的指令。</p>
+    </button></h2><p>DSPy 由斯坦福大学 NLP 小组推出，是一个开创性的程序框架，旨在优化语言模型中的提示和权重，尤其适用于大型语言模型 (LLMs) 在管道的多个阶段进行集成的情况。与依赖人工制作和调整的传统提示工程技术不同，DSPy 采用的是一种基于学习的方法。通过吸收问答示例，DSPy 可根据特定任务动态生成优化提示。这种创新方法可实现整个流水线的无缝重组，从而消除了持续手动调整提示的需要。DSPy 的 Pythonic 语法提供了各种可组合的声明式模块，简化了 LLMs 的指令。</p>
 <h2 id="Benefits-of-using-DSPy" class="common-anchor-header">使用 DSPy 的好处<button data-href="#Benefits-of-using-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,7 +74,7 @@ title: Milvus 与 DSPy 集成
     </button></h2><p>构建 LLM 管道需要许多组件。在此，我们将介绍一些关键组件，以提供对 DSPy 操作符的高层次理解。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
    </span> <span class="img-wrapper"> <span>DSPy 模块</span> </span></p>
 <p>签名：DSPy 中的签名作为声明性规范，概述了模块的输入/输出行为，在任务执行中指导语言模型。 模块：DSPy 模块是利用语言模型（LM）的程序的基本组件。它们抽象了各种提示技术，如思维链或 ReAct，并可用于处理任何 DSPy Signature。凭借可学习的参数以及处理输入和产生输出的能力，这些模块可以组合成更大的程序，其灵感来自 PyTorch 中的 NN 模块，但专为 LM 应用量身定制。 优化器：DSPy 中的优化器可对 DSPy 程序的参数（如提示和 LLM 权重）进行微调，以最大限度地提高指定指标（如准确性），从而提高程序效率。</p>
 <h2 id="Why-Milvus-in-DSPy" class="common-anchor-header">为什么在 DSPy 中使用 Milvus<button data-href="#Why-Milvus-in-DSPy" class="anchor-icon" translate="no">
@@ -92,7 +92,7 @@ title: Milvus 与 DSPy 集成
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DSPy 是一个功能强大的编程框架，可促进 RAG 应用程序的发展。此类应用程序需要检索有用信息以提高答案质量，这就需要向量数据库。Milvus 是著名的开源向量数据库，可提高性能和可扩展性。有了 DSPy 中的检索模块 MilvusRM，集成 Milvus 就变得天衣无缝。现在，开发人员可以利用 Milvus 强大的向量搜索功能，使用 DSPy 轻松定义和优化 RAG 程序。这种合作将 DSPy 的编程能力与 Milvus 的搜索功能结合起来，使 RAG 应用程序更高效、更可扩展。</p>
+    </button></h2><p>DSPy 是一个功能强大的编程框架，可促进 RAG 应用程序的发展。此类应用程序需要检索有用信息以提高答案质量，这就需要向量数据库。Milvus 是著名的开源向量数据库，可提高性能和可扩展性。有了 DSPy 中的检索模块 MilvusRM，集成 Milvus 就变得天衣无缝。现在，开发人员可以利用 Milvus 强大的向量搜索功能，使用 DSPy 轻松定义和优化 RAG 程序。这种合作结合了 DSPy 的编程能力和 Milvus 的搜索功能，使 RAG 应用程序更高效、更可扩展。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -109,13 +109,43 @@ title: Milvus 与 DSPy 集成
         ></path>
       </svg>
     </button></h2><p>现在，让我们通过一个快速示例来演示如何在 DSPy 中利用 Milvus 来优化 RAG 应用程序。</p>
-<h3 id="Prerequisites" class="common-anchor-header">前提条件</h3><p>在构建 RAG 应用程序之前，请安装 DSPy 和 PyMilvus。</p>
+<h3 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在构建 RAG 应用程序之前，请安装 DSPy 和 PyMilvus。</p>
 <pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;dspy-ai[milvus]&quot;</span>
 $ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 如果使用的是 Google Colab，要启用刚安装的依赖项，可能需要**重启运行时**（点击屏幕上方的 "运行时 "菜单，从下拉菜单中选择 "重启会话"）。</div>
-<h3 id="Loading-the-dataset" class="common-anchor-header">加载数据集</h3><p>在本例中，我们使用 HotPotQA（一个复杂问答对的 Collections）作为训练数据集。我们可以通过 HotPotQA 类加载这些数据集。</p>
+<h3 id="Loading-the-dataset" class="common-anchor-header">加载数据集<button data-href="#Loading-the-dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在本例中，我们使用 HotPotQA（一个复杂问答对的 Collections）作为训练数据集。我们可以通过 HotPotQA 类加载这些数据集。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.datasets <span class="hljs-keyword">import</span> HotPotQA
 
 <span class="hljs-comment"># Load the dataset.</span>
@@ -127,7 +157,22 @@ dataset = HotPotQA(
 trainset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.train]
 devset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.dev]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">将数据摄入 Milvus 向量数据库</h3><p>将上下文信息摄入到用于向量检索的 Milvus Collections 中。该 Collections 应有一个<code translate="no">embedding</code> 字段和一个<code translate="no">text</code> 字段。在这种情况下，我们使用 OpenAI 的<code translate="no">text-embedding-3-small</code> 模型作为默认查询嵌入函数。</p>
+<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">将数据摄入 Milvus 向量数据库<button data-href="#Ingest-data-into-the-Milvus-vector-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>将上下文信息摄入到用于向量检索的 Milvus Collections 中。该 Collections 应有一个<code translate="no">embedding</code> 字段和一个<code translate="no">text</code> 字段。在这种情况下，我们使用 OpenAI 的<code translate="no">text-embedding-3-small</code> 模型作为默认查询嵌入函数。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> os
 
@@ -170,7 +215,22 @@ text = requests.get(
         ],
     )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-MilvusRM" class="common-anchor-header">定义 MilvusRM。</h3><p>现在，您需要定义 MilvusRM。</p>
+<h3 id="Define-MilvusRM" class="common-anchor-header">定义 MilvusRM。<button data-href="#Define-MilvusRM" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>现在，您需要定义 MilvusRM。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.retrieve.milvus_rm <span class="hljs-keyword">import</span> MilvusRM
 <span class="hljs-keyword">import</span> dspy
 
@@ -183,7 +243,22 @@ retriever_model = MilvusRM(
 turbo = dspy.OpenAI(model=<span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>)
 dspy.settings.configure(lm=turbo)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Building-signatures" class="common-anchor-header">构建签名</h3><p>现在我们已经加载了数据，让我们开始为管道的子任务定义签名。我们可以确定简单的输入<code translate="no">question</code> 和输出<code translate="no">answer</code> ，但由于我们正在构建一个 RAG 管道，我们将从 Milvus 获取上下文信息。因此，我们将签名定义为<code translate="no">context, question --&gt; answer</code> 。</p>
+<h3 id="Building-signatures" class="common-anchor-header">构建签名<button data-href="#Building-signatures" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>现在我们已经加载了数据，让我们开始为管道的子任务定义签名。我们可以确定简单的输入<code translate="no">question</code> 和输出<code translate="no">answer</code> ，但由于我们正在构建一个 RAG 管道，我们将从 Milvus 获取上下文信息。因此，我们将签名定义为<code translate="no">context, question --&gt; answer</code> 。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">GenerateAnswer</span>(dspy.Signature):
     <span class="hljs-string">&quot;&quot;&quot;Answer questions with short factoid answers.&quot;&quot;&quot;</span>
 
@@ -192,7 +267,22 @@ dspy.settings.configure(lm=turbo)
     answer = dspy.OutputField(desc=<span class="hljs-string">&quot;often between 1 and 5 words&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>我们在<code translate="no">context</code> 和<code translate="no">answer</code> 字段中加入了简短的描述，以便更清晰地定义模型将接收和应生成的内容。</p>
-<h3 id="Building-the-pipeline" class="common-anchor-header">构建管道</h3><p>现在，让我们定义 RAG 管道。</p>
+<h3 id="Building-the-pipeline" class="common-anchor-header">构建管道<button data-href="#Building-the-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>现在，让我们定义 RAG 管道。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">RAG</span>(dspy.Module):
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, rm</span>):
         <span class="hljs-built_in">super</span>().__init__()
@@ -210,7 +300,22 @@ dspy.settings.configure(lm=turbo)
             context=[item.long_text <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> context], answer=prediction.answer
         )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Executing-the-pipeline-and-getting-the-results" class="common-anchor-header">执行管道并获取结果</h3><p>现在，我们已经构建了 RAG 管道。让我们试一试并获取结果。</p>
+<h3 id="Executing-the-pipeline-and-getting-the-results" class="common-anchor-header">执行管道并获取结果<button data-href="#Executing-the-pipeline-and-getting-the-results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>现在，我们已经构建了 RAG 管道。让我们试一试并获取结果。</p>
 <pre><code translate="no" class="language-python">rag = RAG(retriever_model)
 <span class="hljs-built_in">print</span>(rag(<span class="hljs-string">&quot;who write At My Window&quot;</span>).answer)
 <button class="copy-code-btn"></button></code></pre>
@@ -228,7 +333,22 @@ metric = dspy.evaluate.answer_exact_match
 score = evaluate_on_hotpotqa(rag, metric=metric)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;rag:&quot;</span>, score)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optimizing-the-pipeline" class="common-anchor-header">优化管道</h3><p>定义完程序后，下一步就是编译。这个过程会更新每个模块内的参数，以提高性能。编译过程取决于三个关键因素：</p>
+<h3 id="Optimizing-the-pipeline" class="common-anchor-header">优化管道<button data-href="#Optimizing-the-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>定义完程序后，下一步就是编译。这个过程会更新每个模块内的参数，以提高性能。编译过程取决于三个关键因素：</p>
 <ul>
 <li>训练集：我们将利用训练数据集中的 20 个问答示例进行演示。</li>
 <li>验证指标：我们将建立一个简单的<code translate="no">validate_context_and_answer</code> 指标。该指标可验证预测答案的准确性，并确保检索到的上下文包含答案。</li>

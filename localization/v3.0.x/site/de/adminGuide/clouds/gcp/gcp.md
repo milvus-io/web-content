@@ -22,7 +22,7 @@ summary: 'Erfahren Sie, wie Sie einen Milvus-Cluster auf GKE einsetzen.'
     </button></h1><p>Milvus ist eine Cloud-native Vektordatenbank und kann in verschiedenen Cloud-Umgebungen eingesetzt werden. Dieser Leitfaden führt Sie durch alle Details zur Einrichtung von Milvus auf der Google Cloud Platform (GCP).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gcp-networking.png" alt="Deploy a Milvus cluster on GCP" class="doc-image" id="deploy-a-milvus-cluster-on-gcp" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gcp-networking.png" alt="Deploy a Milvus cluster on GCP" class="doc-image" id="deploy-a-milvus-cluster-on-gcp" />
    </span> <span class="img-wrapper"> <span>Bereitstellen eines Milvus-Clusters auf GCP</span> </span></p>
 <h2 id="Before-you-start" class="common-anchor-header">Bevor Sie beginnen<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,9 +42,9 @@ summary: 'Erfahren Sie, wie Sie einen Milvus-Cluster auf GKE einsetzen.'
     </button></h2><p>Um Milvus auf GCP bereitzustellen, müssen Sie sicherstellen, dass</p>
 <ul>
 <li><p>In Ihrem GCP-Konto ist bereits ein Projekt vorhanden.</p>
-<p>Um ein Projekt zu erstellen, lesen Sie bitte den Abschnitt <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Erstellen und Verwalten von Projekten</a>. Der Name des in dieser Anleitung verwendeten Projekts ist <strong>milvus-testing-nonprod</strong>.</p></li>
+<p>Wie Sie ein Projekt erstellen können, erfahren Sie unter <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Erstellen und Verwalten von Projekten</a>. Der Name des in dieser Anleitung verwendeten Projekts ist <strong>milvus-testing-nonprod</strong>.</p></li>
 <li><p>Sie haben <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> und <a href="https://helm.sh/docs/intro/install/">Helm</a> lokal installiert oder sich entschieden, stattdessen die browserbasierte <a href="https://cloud.google.com/shell">Cloud Shell</a> zu verwenden.</p></li>
-<li><p>Sie haben <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">die gcloud CLI</a> mit Ihren GCP-Kontoanmeldeinformationen <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">initialisiert</a>.</p></li>
+<li><p>Sie haben <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">die gcloud CLI</a> mit Ihren GCP-Konto-Anmeldeinformationen <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">initialisiert</a>.</p></li>
 </ul>
 <h2 id="Set-up-the-network" class="common-anchor-header">Einrichten des Netzwerks<button data-href="#Set-up-the-network" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ summary: 'Erfahren Sie, wie Sie einen Milvus-Cluster auf GKE einsetzen.'
     --mtu=1460 \
     --bgp-routing-mode=regional
 <button class="copy-code-btn"></button></code></pre>
-<p>Um Ihnen die Arbeit zu erleichtern, müssen Sie außerdem mehrere Firewall-Regeln einrichten, um externen Datenverkehr über ICMP, RDP und SSH sowie den Datenverkehr innerhalb der VPC zuzulassen.</p>
+<p>Um Ihnen die Arbeit zu erleichtern, müssen Sie außerdem mehrere Firewall-Regeln einrichten, um externen Verkehr über ICMP, RDP und SSH sowie den Verkehr innerhalb der VPC zuzulassen.</p>
 <pre><code translate="no" class="language-bash">gcloud compute firewall-rules create milvus-network-allow-icmp \
     --project=milvus-testing-nonprod \
     --network=projects/milvus-testing-nonprod/global/networks/milvus-network \
@@ -134,7 +134,7 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In dieser Anleitung verwenden wir den Dienst Google Kubernetes Engine (GKE) zur Bereitstellung eines Kubernetes-Clusters mit zwei Knoten in der Zone <strong>us-west1-a</strong>. Jeder Knoten ist eine virtuelle Maschine <strong>der e2-standard-4</strong> Compute Engine, auf der das <strong>COS_CONTAINERD-Image</strong> ausgeführt wird.</p>
+    </button></h2><p>In dieser Anleitung verwenden wir den Google Kubernetes Engine (GKE)-Dienst zur Bereitstellung eines Kubernetes-Clusters mit zwei Knoten in der Zone <strong>us-west1-a</strong>. Jeder Knoten ist eine virtuelle Maschine <strong>der e2-standard-4</strong> Compute Engine, auf der das <strong>COS_CONTAINERD-Image</strong> ausgeführt wird.</p>
 <div class="alert note">
 <p>Es wird empfohlen, die Maschinentypen zu verwenden, die einen Mindestspeicher von 16 GB bieten, um die Stabilität des Dienstes zu gewährleisten.</p>
 </div>
@@ -183,7 +183,7 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/access_key.jpg" alt="GCP Access keys for your user account" class="doc-image" id="gcp-access-keys-for-your-user-account" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/access_key.jpg" alt="GCP Access keys for your user account" class="doc-image" id="gcp-access-keys-for-your-user-account" />
    </span> <span class="img-wrapper"> <span>GCP-Zugangsschlüssel für Ihr Nutzerkonto</span> </span></p>
 <ul>
 <li>values.yaml hinzufügen</li>
@@ -265,7 +265,7 @@ helm install -f values.yaml my-release milvus/milvus
         ></path>
       </svg>
     </button></h2><p>Bitte lesen Sie <a href="https://milvus.io/docs/v2.3.x/example_code.md">Hello Milvus</a>, ändern Sie den Host-Wert in die externe IP-Adresse und führen Sie dann den Code aus.</p>
-<h2 id="Whats-next" class="common-anchor-header">Wie geht's weiter?<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes?<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

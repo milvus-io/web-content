@@ -1,7 +1,7 @@
 ---
 id: best-practices-for-array-of-structs.md
 title: >-
-  Design do modelo de dados com um conjunto de estruturasCompatible with Milvus
+  Conceção do modelo de dados com uma matriz de structsCompatible with Milvus
   2.6.4+
 summary: >-
   As aplicações modernas de IA, especialmente na Internet das Coisas (IoT) e na
@@ -13,7 +13,7 @@ summary: >-
   de dados aninhados.
 beta: Milvus 2.6.4+
 ---
-<h1 id="Data-Model-Design-with-an-Array-of-Structs" class="common-anchor-header">Design do modelo de dados com um conjunto de estruturas<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Data-Model-Design-with-an-Array-of-Structs" class="anchor-icon" translate="no">
+<h1 id="Data-Model-Design-with-an-Array-of-Structs" class="common-anchor-header">Conceção do modelo de dados com uma matriz de structs<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Data-Model-Design-with-an-Array-of-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -28,7 +28,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>As aplicações modernas de IA, especialmente na Internet das Coisas (IoT) e na condução autónoma, normalmente raciocinam sobre eventos ricos e estruturados: uma leitura de sensor com o seu carimbo de data/hora e incorporação de vetor, um registo de diagnóstico com um código de erro e um trecho de áudio, ou um segmento de viagem com localização, velocidade e contexto de cena. Isto exige que a base de dados suporte nativamente a ingestão e a pesquisa de dados aninhados.</p>
+    </button></h1><p>As aplicações modernas de IA, especialmente na Internet das Coisas (IoT) e na condução autónoma, normalmente raciocinam sobre eventos ricos e estruturados: uma leitura de sensor com o seu carimbo de data/hora e incorporação de vetor, um registo de diagnóstico com um código de erro e um trecho de áudio, ou um segmento de viagem com localização, velocidade e contexto de cena. Estes exigem que a base de dados suporte nativamente a ingestão e a pesquisa de dados aninhados.</p>
 <p>Em vez de pedir ao utilizador que converta os seus eventos estruturais atómicos em modelos de dados planos, Milvus introduz a matriz de estruturas, em que cada estrutura da matriz pode conter escalares e vectores, preservando a integridade semântica.</p>
 <h2 id="Why-Array-of-Structs" class="common-anchor-header">Porquê uma matriz de estruturas<button data-href="#Why-Array-of-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -102,7 +102,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h3><p>Cada campo Array tem um atributo que especifica o número máximo de elementos que o campo Array pode conter para cada entidade. Defina-o com base no limite superior do seu caso de utilização. Por exemplo, existem 1000 blocos de texto por documento ou 100 manobras por cena de condução.</p>
-<p>Um valor excessivamente elevado desperdiça memória e terá de efetuar alguns cálculos para determinar o número máximo de Structs no campo Matriz.</p>
+<p>Um valor excessivamente alto desperdiça memória e será necessário fazer alguns cálculos para determinar o número máximo de Structs no campo Matriz.</p>
 <h3 id="Index-vector-fields-in-Structs" class="common-anchor-header">Indexar campos vectoriais em Structs<button data-href="#Index-vector-fields-in-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,7 +118,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>A indexação é obrigatória para campos vectoriais, incluindo os campos vectoriais de uma coleção e os definidos numa Struct. Para campos vectoriais num Struct, deve utilizar <code translate="no">AUTOINDEX</code> ou <code translate="no">HNSW</code> como o tipo de índice e <code translate="no">MAX_SIM</code> series como o tipo de métrica.</p>
+    </button></h3><p>A indexação é obrigatória para campos vectoriais, incluindo os campos vectoriais de uma coleção e os definidos num Struct. Para campos vectoriais num Struct, deve utilizar <code translate="no">AUTOINDEX</code> ou <code translate="no">HNSW</code> como o tipo de índice e <code translate="no">MAX_SIM</code> series como o tipo de métrica.</p>
 <p>Para obter detalhes sobre todos os limites aplicáveis, consulte <a href="/docs/pt/array-of-structs.md#Limits">os limites</a>.</p>
 <h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">Um exemplo do mundo real: Modelação do conjunto de dados CoVLA para condução autónoma<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
       <svg translate="no"

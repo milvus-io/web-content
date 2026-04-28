@@ -20,7 +20,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este guia explica como habilitar e usar o Woodpecker como Write-Ahead Log (WAL) no Milvus 2.6.x. O Woodpecker é um WAL nativo da nuvem projetado para armazenamento de objetos, oferecendo alta taxa de transferência, baixa sobrecarga operacional e escalabilidade contínua. Para detalhes de arquitetura e benchmark, consulte <a href="/docs/pt/woodpecker_architecture.md">Woodpecker</a>.</p>
+    </button></h1><p>Este guia explica como habilitar e usar o Woodpecker como Write-Ahead Log (WAL) no Milvus 2.6.x. O Woodpecker é um WAL nativo da nuvem projetado para armazenamento de objetos, oferecendo alta taxa de transferência, baixa sobrecarga operacional e escalabilidade contínua. Para obter detalhes de arquitetura e benchmark, consulte <a href="/docs/pt/woodpecker_architecture.md">Woodpecker</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -198,7 +198,7 @@ beta: Milvus 2.6.x
 <pre><code translate="no" class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Este exemplo configura o Woodpecker como a fila de mensagens e ativa o nó de streaming. A primeira inicialização pode levar algum tempo para puxar imagens; espere até que todos os pods estejam prontos:</p>
+<p>Este exemplo configura o Woodpecker como a fila de mensagens e habilita o nó de streaming. A primeira inicialização pode levar algum tempo para puxar imagens; espere até que todos os pods estejam prontos:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 kubectl get milvus my-release -o yaml | grep -A2 status
 <button class="copy-code-btn"></button></code></pre>
@@ -346,7 +346,7 @@ docker restart milvus-standalone
 </ul></li>
 <li>Botões do Woodpecker<ul>
 <li>Aumente <code translate="no">logstore.segmentSyncPolicy.maxFlushSize</code> e <code translate="no">maxFlushThreads</code> para obter maiores descargas e maior paralelismo.</li>
-<li>Ajuste <code translate="no">maxInterval</code> de acordo com as caraterísticas da mídia (troque a latência pela taxa de transferência com agregação mais longa).</li>
+<li>Ajuste <code translate="no">maxInterval</code> de acordo com as caraterísticas do meio (troque a latência pela taxa de transferência com agregação mais longa).</li>
 <li>Para o armazenamento de objectos, considere aumentar <code translate="no">segmentRollingPolicy.maxSize</code> para reduzir as trocas de segmentos.</li>
 </ul></li>
 <li>Lado do cliente/aplicação<ul>

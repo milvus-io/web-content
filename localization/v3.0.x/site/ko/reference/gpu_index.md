@@ -23,7 +23,7 @@ title: GPU 인덱스
 <p>GPU 인덱스를 사용한다고 해서 CPU 인덱스를 사용하는 것보다 지연 시간이 반드시 단축되는 것은 아니라는 점에 유의하세요. 처리량을 완전히 최대화하려면 요청 압력이 매우 높거나 쿼리 벡터의 수가 많아야 합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
    </span> <span class="img-wrapper"> <span>성능</span> </span></p>
 <p>Milvus의 GPU 지원은 Nvidia <a href="https://rapids.ai/">RAPIDS</a> 팀에 의해 제공되고 있습니다. 현재 Milvus에서 지원하는 GPU 인덱스 유형은 다음과 같습니다.</p>
 <h2 id="GPUCAGRA" class="common-anchor-header">GPU_CAGRA<button data-href="#GPUCAGRA" class="anchor-icon" translate="no">
@@ -51,7 +51,7 @@ title: GPU 인덱스
 <tbody>
 <tr><td><code translate="no">intermediate_graph_degree</code></td><td>가지치기 전 그래프의 정도를 결정하여 리콜 및 구축 시간에 영향을 줍니다. 권장 값은 <code translate="no">32</code> 또는 <code translate="no">64</code> 입니다.</td><td><code translate="no">128</code></td></tr>
 <tr><td><code translate="no">graph_degree</code></td><td>가지치기 후 그래프의 차수를 설정하여 검색 성능과 리콜에 영향을 줍니다. 이 두 도의 차이가 클수록 빌드 시간이 길어집니다. 이 값은 <strong>intermediate_graph_degree의</strong> 값보다 작아야 합니다.</td><td><code translate="no">64</code></td></tr>
-<tr><td><code translate="no">build_algo</code></td><td>가지치기 전 그래프 생성 알고리즘을 선택합니다. 가능한 값</br><code translate="no">IVF_PQ</code>: 더 높은 품질을 제공하지만 빌드 시간이 느립니다.</br> <code translate="no">NN_DESCENT</code> 더 빠른 빌드를 제공하지만 잠재적으로 더 낮은 리콜을 제공합니다.</td><td><code translate="no">IVF_PQ</code></td></tr>
+<tr><td><code translate="no">build_algo</code></td><td>가지치기 전 그래프 생성 알고리즘을 선택합니다. 가능한 값</br><code translate="no">IVF_PQ</code>: 더 높은 품질을 제공하지만 빌드 시간이 느립니다.</br> <code translate="no">NN_DESCENT</code>: 더 빠른 빌드를 제공하지만 잠재적으로 더 낮은 리콜을 제공합니다.</td><td><code translate="no">IVF_PQ</code></td></tr>
 <tr><td><code translate="no">cache_dataset_on_device</code></td><td>원본 데이터 세트를 GPU 메모리에 캐시할지 여부를 결정합니다. 가능한 값</br><code translate="no">“true”</code>: 원본 데이터 세트를 캐시하여 검색 결과를 구체화하여 리콜을 향상시킵니다.</br> <code translate="no">“false”</code> GPU 메모리를 절약하기 위해 원본 데이터셋을 캐시하지 않습니다.</td><td><code translate="no">“false”</code></td></tr>
 <tr><td><code translate="no">adapt_for_cpu</code></td><td>인덱스 구축에 GPU를 사용할지, 검색에 CPU를 사용할지 결정합니다. <br/>이 파라미터를 <code translate="no">true</code> 로 설정하려면 검색 요청에 <code translate="no">ef</code> 파라미터가 있어야 합니다.</td><td><code translate="no">“false”</code></td></tr>
 </tbody>
@@ -63,8 +63,8 @@ title: GPU 인덱스
 <tr><th>파라미터</th><th>설명</th><th>기본값</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">itopk_size</code></td><td>검색 중에 보관되는 중간 결과의 크기를 결정합니다. 값이 클수록 검색 성능이 저하되는 대신 검색 회수율이 향상될 수 있습니다. 이 값은 최소한 최종 상위 k(한계) 값과 같아야 하며 일반적으로 2의 거듭제곱(예: 16, 32, 64, 128)입니다.</td><td>Empty</td></tr>
-<tr><td><code translate="no">search_width</code></td><td>검색 중에 CAGRA 그래프에 포함할 진입점 수를 지정합니다. 이 값을 늘리면 기억력이 향상될 수 있지만 검색 성능에 영향을 줄 수 있습니다(예: 1, 2, 4, 8, 16, 32).</td><td>Empty</td></tr>
+<tr><td><code translate="no">itopk_size</code></td><td>검색 중에 보관되는 중간 결과의 크기를 결정합니다. 값이 클수록 검색 성능이 저하되는 대신 검색 회수율이 향상될 수 있습니다. 이 값은 최소한 최종 상위 k(한계) 값과 같아야 하며 일반적으로 2의 거듭제곱입니다(예: 16, 32, 64, 128).</td><td>Empty</td></tr>
+<tr><td><code translate="no">search_width</code></td><td>검색 중에 CAGRA 그래프에 포함할 진입점 수를 지정합니다. 이 값을 늘리면 기억력은 향상될 수 있지만 검색 성능에 영향을 줄 수 있습니다(예: 1, 2, 4, 8, 16, 32).</td><td>Empty</td></tr>
 <tr><td><code translate="no">min_iterations</code> / <code translate="no">max_iterations</code></td><td>검색 반복 프로세스를 제어합니다. 기본적으로 <code translate="no">0</code> 로 설정되어 있으며, CAGRA는 <code translate="no">itopk_size</code> 및 <code translate="no">search_width</code> 에 따라 반복 횟수를 자동으로 결정합니다. 이 값을 수동으로 조정하면 성능과 정확도의 균형을 맞추는 데 도움이 될 수 있습니다.</td><td><code translate="no">0</code></td></tr>
 <tr><td><code translate="no">team_size</code></td><td>GPU에서 메트릭 거리를 계산하는 데 사용되는 CUDA 스레드 수를 지정합니다. 일반적인 값은 2의 거듭제곱에서 최대 32입니다(예: 2, 4, 8, 16, 32). 검색 성능에 약간의 영향을 미칩니다. 기본값은 <code translate="no">0</code> 이며, Milvus는 벡터 차원에 따라 <code translate="no">team_size</code> 을 자동으로 선택합니다.</td><td><code translate="no">0</code></td></tr>
 <tr><td><code translate="no">ef</code></td><td>쿼리 시간/정확도 절충을 지정합니다. <code translate="no">ef</code> 값이 클수록 검색 정확도는 높아지지만 검색 속도는 느려집니다. <br/>인덱스 구축 시 <code translate="no">adapt_for_cpu</code> 을 <code translate="no">true</code> 으로 설정한 경우 이 파라미터는 필수입니다.</td><td><code translate="no">[top_k, int_max]</code></td></tr>
@@ -155,7 +155,7 @@ title: GPU 인덱스
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">PQ</code> (곱 양자화)는 원래의 고차원 벡터 공간을 <code translate="no">m</code> 저차원 벡터 공간의 데카르트 곱으로 균일하게 분해한 다음 분해된 저차원 벡터 공간을 정량화합니다. 곱 양자화는 목표 벡터와 모든 단위의 중심 사이의 거리를 계산하는 대신 목표 벡터와 각 저차원 공간의 클러스터링 중심 사이의 거리를 계산할 수 있어 알고리즘의 시간 복잡도와 공간 복잡도를 크게 줄여줍니다.</p>
+    </button></h2><p><code translate="no">PQ</code> (곱 양자화)는 원래의 고차원 벡터 공간을 <code translate="no">m</code> 저차원 벡터 공간의 데카르트 곱으로 균일하게 분해한 다음 분해된 저차원 벡터 공간을 정량화합니다. 곱 양자화는 목표 벡터와 모든 단위의 중심 사이의 거리를 계산하는 대신 목표 벡터와 각 저차원 공간의 클러스터링 중심 사이의 거리만 계산할 수 있어 알고리즘의 시간 복잡성과 공간 복잡성을 크게 줄여줍니다.</p>
 <p>IVF_PQ는 벡터의 곱을 정량화하기 전에 IVF 인덱스 클러스터링을 수행합니다. 이 인덱스 파일은 IVF_SQ8보다 훨씬 작지만 벡터를 검색하는 동안 정확도가 떨어집니다.</p>
 <div class="alert note">
 <p>인덱스 구축 파라미터와 검색 파라미터는 Milvus 분포에 따라 다릅니다. 먼저 Milvus 배포를 선택하세요.</p>

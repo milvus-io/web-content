@@ -43,7 +43,7 @@ title: 빠른 시작
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <blockquote>
-<p>Google Colab을 사용하는 경우 방금 설치한 종속 요소를 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다. (화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택합니다).</p>
+<p>Google Colab을 사용하는 경우 방금 설치한 종속성을 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다. (화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택합니다).</p>
 </blockquote>
 </div>
 <h2 id="Set-Up-Vector-Database" class="common-anchor-header">벡터 데이터베이스 설정<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
@@ -93,7 +93,7 @@ client.create_collection(
 <ul>
 <li>기본 키와 벡터 필드는 기본 이름("id" 및 "vector")을 사용합니다.</li>
 <li>메트릭 유형(벡터 거리 정의)은 기본값<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">(COSINE</a>)으로 설정됩니다.</li>
-<li>기본 키 필드는 정수를 허용하고 자동으로 증가하지 않습니다(즉, <a href="https://milvus.io/docs/schema.md">자동 ID 기능을</a> 사용하지 않음). 또는 이 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">지침에</a> 따라 컬렉션의 스키마를 공식적으로 정의할 수 있습니다.</li>
+<li>기본 키 필드는 정수를 허용하며 자동으로 증가하지 않습니다(즉, <a href="https://milvus.io/docs/schema.md">자동 ID 기능을</a> 사용하지 않음). 또는 이 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">지침에</a> 따라 컬렉션의 스키마를 공식적으로 정의할 수 있습니다.</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">데이터 준비<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -286,7 +286,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>메타데이터의 값을 고려하면서 벡터 검색을 수행할 수도 있습니다(Milvus에서는 "스칼라" 필드라고 하며, 스칼라는 벡터가 아닌 데이터를 의미하므로). 이는 특정 기준을 지정하는 필터 표현식을 사용하여 수행됩니다. 다음 예제에서 <code translate="no">subject</code> 필드를 사용하여 검색 및 필터링하는 방법을 살펴보겠습니다.</p>
+    </button></h2><p>메타데이터의 값을 고려하면서 벡터 검색을 수행할 수도 있습니다(밀버스에서는 "스칼라" 필드라고 하는데, 스칼라는 벡터가 아닌 데이터를 의미하기 때문입니다). 이는 특정 기준을 지정하는 필터 표현식을 사용하여 수행됩니다. 다음 예제에서 <code translate="no">subject</code> 필드를 사용하여 검색 및 필터링하는 방법을 살펴보겠습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert more docs in another subject.</span>
 docs = [
     <span class="hljs-string">&quot;Machine learning has been used for drug design.&quot;</span>,

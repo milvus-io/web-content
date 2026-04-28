@@ -53,7 +53,7 @@ title: 'Integrazione di Milvus con gli agenti OpenAI: Guida passo-passo'
 <p>In combinazione con Python, queste primitive sono sufficientemente potenti per esprimere relazioni complesse tra strumenti e agenti e consentono di creare applicazioni reali senza una curva di apprendimento troppo ripida. Inoltre, l'SDK è dotato di un tracing integrato che consente di visualizzare e debuggare i flussi agenziali, nonché di valutarli e persino di mettere a punto i modelli per l'applicazione.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/openai-agent.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openai-agent.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -125,10 +125,25 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
     </button></h2><p>Ora ci colleghiamo alla nostra istanza di Milvus e creiamo uno schema per la nostra collezione. Questo schema definirà la struttura dei nostri dati, tra cui:</p>
 <ul>
 <li>Un campo ID come chiave primaria</li>
-<li>Un campo di testo per memorizzare il contenuto del documento</li>
+<li>Un campo testo per memorizzare il contenuto del documento</li>
 <li>Un campo vettoriale rado per memorizzare le incorporazioni BM25.</li>
 </ul>
-<h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Ricerca a tutto testo in Milvus 2.5</h3><ul>
+<h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Ricerca a tutto testo in Milvus 2.5<button data-href="#Full-Text-Search-in-Milvus-25" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Sistema unificato per la ricerca vettoriale e per parole chiave (API unificate)</li>
 <li>Algoritmo sparse-BM25 incorporato (simile all'uso di Elasticsearch, ma basato su vettori)</li>
 <li>Non è necessario generare manualmente gli embeddings per la ricerca per parole chiave</li>
@@ -343,7 +358,7 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per rendere i risultati della ricerca più strutturati e più facili da utilizzare, definiremo i modelli Pydantic che specificano il formato dei risultati della ricerca.</p>
+    </button></h2><p>Per rendere i risultati della ricerca più strutturati e più facili da usare, definiremo i modelli Pydantic che specificano il formato dei risultati della ricerca.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pydantic <span class="hljs-keyword">import</span> BaseModel
 
 

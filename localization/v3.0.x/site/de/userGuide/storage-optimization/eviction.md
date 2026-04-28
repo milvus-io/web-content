@@ -59,7 +59,7 @@ beta: Milvus 2.6.4+
    <tr>
      <td><p>Verhalten</p></td>
      <td><p>Abfrage- oder Suchvorgänge werden vorübergehend angehalten, während der QueryNode Cache-Speicherplatz zurückfordert. Die Räumung wird fortgesetzt, bis die Nutzung unter die niedrige Wasserstandsmarke fällt oder eine Zeitüberschreitung auftritt. Wenn die Zeitüberschreitung erreicht ist und nicht genügend Daten zurückgewonnen werden können, kann die Abfrage oder Suche fehlschlagen.</p></td>
-     <td><p>Läuft regelmäßig im Hintergrund und verdrängt proaktiv zwischengespeicherte Daten, wenn die Nutzung die hohe Wasserstandsmarke überschreitet oder wenn die Daten aufgrund der TTL ablaufen. Die Verdrängung wird fortgesetzt, bis die Nutzung unter die niedrige Wasserstandsmarke fällt. Abfragen werden nicht blockiert.</p></td>
+     <td><p>Läuft regelmäßig im Hintergrund und verdrängt proaktiv zwischengespeicherte Daten, wenn die Nutzung die hohe Wasserstandsmarke übersteigt oder wenn die Daten aufgrund der TTL ablaufen. Die Verdrängung wird fortgesetzt, bis die Nutzung unter die niedrige Wasserstandsmarke fällt. Abfragen werden nicht blockiert.</p></td>
    </tr>
    <tr>
      <td><p>Am besten geeignet für</p></td>
@@ -83,7 +83,7 @@ beta: Milvus 2.6.4+
 <li><p>Für Leistungstests oder latenzkritische Szenarien sollten Sie die Verdrängung vollständig deaktivieren, um den Netzwerkabruf-Overhead nach der Verdrängung zu vermeiden.</p></li>
 </ul>
 <div class="alert note">
-<p>Bei verdrängbaren Feldern und Indizes entspricht die Verdrängungseinheit der Ladegranularität: Skalar-/Vektorfelder werden pro Chunk verdrängt, Skalar-/Vektorindizes pro Segment.</p>
+<p>Bei verdrängbaren Feldern und Indizes entspricht die Verdrängungseinheit der Ladegranularität: Skalar-/Vektorfelder werden pro Chunk verdrängt, Skalar-/Vektorindizes werden pro Segment verdrängt.</p>
 </div>
 <h2 id="Enable-eviction" class="common-anchor-header">Aktivieren der Verdrängung<button data-href="#Enable-eviction" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -119,7 +119,7 @@ beta: Milvus 2.6.4+
      <td><p><code translate="no">evictionEnabled</code></p></td>
      <td><p>bool</p></td>
      <td><p><code translate="no">true</code>/<code translate="no">false</code></p></td>
-     <td><p>Hauptschalter für die Räumungsstrategie. Der Standardwert ist <code translate="no">false</code>. Aktiviert den Modus "Sync Eviction".</p></td>
+     <td><p>Hauptschalter für die Räumungsstrategie. Der Standardwert ist <code translate="no">false</code>. Aktiviert den Synchronisierungsmodus.</p></td>
      <td><p>In Tiered Storage immer auf <code translate="no">true</code> eingestellt.</p></td>
    </tr>
    <tr>

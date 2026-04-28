@@ -20,7 +20,7 @@ summary: 了解如何使用 Milvus Operator 配置信息存储。
         ></path>
       </svg>
     </button></h1><p>Milvus 使用 RocksMQ、Pulsar 或 Kafka 管理最近更改的日志、输出流日志并提供日志订阅。本主题介绍如何在使用 Milvus Operator 安装 Milvus 时配置消息存储依赖关系。有关详细信息，请参阅 Milvus Operator 存储库中的<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">使用 Milvus Operator 配置消息存储</a>。</p>
-<p>本主题假定您已部署 Milvus Operator。</p>
+<p>本主题假设您已部署 Milvus Operator。</p>
 <div class="alert note">有关详细信息，请参阅<a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">部署 Milvus Operator</a>。 </div>
 <p>您需要指定使用 Milvus Operator 启动 Milvus 群集的配置文件。</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
@@ -280,9 +280,9 @@ summary: 了解如何使用 Milvus Operator 配置信息存储。
 <p>用于配置外部 Kafka 服务的字段包括</p>
 <ul>
 <li><code translate="no">external</code>:<code translate="no">true</code> 值表示 Milvus 使用外部 Kafka 服务。</li>
-<li><code translate="no">brokerList</code>:要发送消息的代理列表。</li>
+<li><code translate="no">brokerList</code>:要向其发送消息的代理列表。</li>
 </ul>
-<h4 id="Example" class="common-anchor-header">示例</h4><p>以下示例配置了外部 Kafka 服务。</p>
+<h4 id="Example" class="common-anchor-header">示例</h4><p>下面的示例配置了外部 Kafka 服务。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

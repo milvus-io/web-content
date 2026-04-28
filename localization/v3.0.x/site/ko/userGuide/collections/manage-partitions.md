@@ -37,7 +37,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>컬렉션을 만들 때 Milvus는 컬렉션에 <strong>_default라는</strong> 이름의 파티션도 만듭니다. 다른 파티션을 추가하지 않을 경우 컬렉션에 삽입된 모든 엔티티는 기본 파티션으로 이동하며, 모든 검색 및 쿼리도 기본 파티션 내에서 수행됩니다.</p>
-<p>특정 기준에 따라 파티션을 더 추가하고 그 안에 엔티티를 삽입할 수 있습니다. 그러면 특정 파티션 내에서 검색 및 쿼리를 제한하여 검색 성능을 향상시킬 수 있습니다.</p>
+<p>특정 기준에 따라 파티션을 더 추가하고 그 파티션에 엔티티를 삽입할 수 있습니다. 그러면 특정 파티션 내에서 검색 및 쿼리를 제한하여 검색 성능을 향상시킬 수 있습니다.</p>
 <p>컬렉션에는 최대 1,024개의 파티션을 만들 수 있습니다.</p>
 <div class="alert note">
 <p><strong>파티션 키</strong> 기능은 파티션을 기반으로 한 검색 최적화 기능으로, 특정 스칼라 필드의 값에 따라 Milvus가 엔티티를 여러 파티션으로 분배할 수 있게 해줍니다. 이 기능은 파티션 지향 멀티테넌시를 구현하고 검색 성능을 개선하는 데 도움이 됩니다.</p>
@@ -388,7 +388,22 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>하나 또는 특정 파티션을 개별적으로 로드하거나 해제할 수 있습니다.</p>
-<h3 id="Load-Partitions" class="common-anchor-header">파티션 로드</h3><p>컬렉션에서 특정 파티션을 개별적으로 로드할 수 있습니다. 컬렉션에 로드되지 않은 파티션이 있는 경우 컬렉션의 로드 상태는 로드되지 않은 상태로 유지된다는 점에 유의할 필요가 있습니다.</p>
+<h3 id="Load-Partitions" class="common-anchor-header">파티션 로드<button data-href="#Load-Partitions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>컬렉션에서 특정 파티션을 개별적으로 로드할 수 있습니다. 컬렉션에 로드되지 않은 파티션이 있는 경우 컬렉션의 로드 상태는 로드되지 않은 상태로 유지된다는 점에 유의할 필요가 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_partitions(
@@ -500,7 +515,22 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Release-Partitions" class="common-anchor-header">파티션 해제</h3><p>특정 파티션을 해제할 수도 있습니다.</p>
+<h3 id="Release-Partitions" class="common-anchor-header">파티션 해제<button data-href="#Release-Partitions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>특정 파티션을 해제할 수도 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.release_partitions(
@@ -620,13 +650,43 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Insert-and-Delete-Entities" class="common-anchor-header">엔티티 삽입 및 삭제</h3><p>특정 작업에서 삽입, 업서트 및 삭제 작업을 수행할 수 있습니다. 자세한 내용은 다음을 참조하세요.</p>
+    </button></h2><h3 id="Insert-and-Delete-Entities" class="common-anchor-header">엔티티 삽입 및 삭제<button data-href="#Insert-and-Delete-Entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>특정 작업에서 삽입, 업서트 및 삭제 작업을 수행할 수 있습니다. 자세한 내용은 다음을 참조하세요.</p>
 <ul>
 <li><p><a href="/docs/ko/insert-update-delete.md#Insert-Entities-into-a-Partition">파티션에 엔티티 삽입</a></p></li>
 <li><p><a href="/docs/ko/upsert-entities.md#Upsert-Entities-in-a-Partition">파티션에 엔티티 삽입</a></p></li>
 <li><p><a href="/docs/ko/delete-entities.md#Delete-Entities-from-Partitions">파티션에서 엔티티 삭제</a></p></li>
 </ul>
-<h3 id="Search-and-Query" class="common-anchor-header">검색 및 쿼리</h3><p>특정 파티션 내에서 검색 및 쿼리를 수행할 수 있습니다. 자세한 내용은 다음을 참조하세요.</p>
+<h3 id="Search-and-Query" class="common-anchor-header">검색 및 쿼리<button data-href="#Search-and-Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>특정 파티션 내에서 검색 및 쿼리를 수행할 수 있습니다. 자세한 내용은 다음을 참조하세요.</p>
 <ul>
 <li><p><a href="/docs/ko/single-vector-search.md#ANN-Search-in-Partition">파티션 내에서 ANN 검색 수행하기</a></p></li>
 <li><p><a href="/docs/ko/get-and-scalar-query.md#Queries-in-Partitions">파티션 내에서 메타데이터 필터링 수행하기</a></p></li>

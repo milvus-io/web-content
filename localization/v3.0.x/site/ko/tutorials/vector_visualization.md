@@ -25,7 +25,7 @@ title: 벡터 시각화
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>이 예에서는 <a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE를</a> 사용해 Milvus의 임베딩(벡터)을 시각화하는 방법을 보여드리겠습니다.</p>
-<p>t-SNE와 같은 차원 축소 기술은 로컬 구조를 유지하면서 2D 또는 3D 공간에서 복잡한 고차원 데이터를 시각화하는 데 매우 유용합니다. 이를 통해 패턴 인식을 가능하게 하고, 특징 관계에 대한 이해를 높이며, 머신 러닝 모델 결과의 해석을 용이하게 합니다. 또한 클러스터링 결과를 시각적으로 비교하여 알고리즘 평가를 돕고, 비전문가를 대상으로 데이터 표현을 간소화하며, 저차원 표현으로 작업하여 계산 비용을 절감할 수 있습니다. 이러한 애플리케이션을 통해 t-SNE는 데이터 세트에 대한 심층적인 인사이트를 얻을 수 있을 뿐만 아니라 보다 정보에 입각한 의사 결정 프로세스를 지원합니다.</p>
+<p>t-SNE와 같은 차원 축소 기술은 로컬 구조를 유지하면서 2D 또는 3D 공간에서 복잡한 고차원 데이터를 시각화하는 데 매우 유용합니다. 이를 통해 패턴 인식을 가능하게 하고, 특징 관계에 대한 이해를 높이며, 머신러닝 모델 결과의 해석을 용이하게 합니다. 또한 클러스터링 결과를 시각적으로 비교하여 알고리즘 평가를 돕고, 비전문가를 대상으로 데이터 표현을 간소화하며, 저차원 표현으로 작업하여 계산 비용을 절감할 수 있습니다. 이러한 애플리케이션을 통해 t-SNE는 데이터 세트에 대한 심층적인 인사이트를 얻을 수 있을 뿐만 아니라 보다 정보에 입각한 의사 결정 프로세스를 지원합니다.</p>
 <h2 id="Preparation" class="common-anchor-header">준비<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -114,7 +114,7 @@ text_lines = []
 
 openai_client = OpenAI()
 <button class="copy-code-btn"></button></code></pre>
-<p>OpenAI 클라이언트를 사용하여 텍스트 임베딩을 생성하는 함수를 정의합니다. <a href="https://platform.openai.com/docs/guides/embeddings">텍스트 임베딩-3-large</a> 모델을 예로 사용합니다.</p>
+<p>OpenAI 클라이언트를 사용하여 텍스트 임베딩을 생성하는 함수를 정의합니다. <a href="https://platform.openai.com/docs/guides/embeddings">텍스트 임베딩 3-large</a> 모델을 예로 사용합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">emb_text</span>(<span class="hljs-params">text</span>):
     <span class="hljs-keyword">return</span> (
         openai_client.embeddings.create(<span class="hljs-built_in">input</span>=text, model=<span class="hljs-string">&quot;text-embedding-3-large&quot;</span>)
@@ -237,7 +237,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 섹션에서는 밀버스 검색을 수행한 다음 쿼리 벡터와 검색된 벡터를 축소된 차원으로 함께 시각화합니다.</p>
+    </button></h2><p>이 섹션에서는 밀버스 검색을 수행한 다음 쿼리 벡터와 검색된 벡터를 함께 축소된 차원으로 시각화합니다.</p>
 <h3 id="Retrieve-Data-for-a-Query" class="common-anchor-header">쿼리에 대한 데이터 검색<button data-href="#Retrieve-Data-for-a-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

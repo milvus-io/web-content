@@ -38,9 +38,39 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p><strong>IVF_RABITQ는</strong> 효율적인 벡터 검색과 저장을 위해 두 가지 강력한 기술을 결합한 <strong>RaBitQ 양자화를 사용한 역파일(Inverted File)</strong>의 약자입니다.</p>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p><strong>반전 파일(IVF)은</strong> <a href="https://en.wikipedia.org/wiki/K-means_clustering">K-평균 클러스터링을</a> 사용하여 벡터 공간을 관리 가능한 영역으로 구성합니다. 각 클러스터는 중심점으로 표시되며, 중심점은 해당 클러스터 내의 벡터에 대한 기준점 역할을 합니다. 이 클러스터링 접근 방식은 쿼리 처리 중에 알고리즘이 가장 관련성이 높은 클러스터에만 집중할 수 있도록 하여 검색 공간을 줄여줍니다.</p>
+<h3 id="IVF" class="common-anchor-header">IVF<button data-href="#IVF" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>반전 파일(IVF)은</strong> <a href="https://en.wikipedia.org/wiki/K-means_clustering">K-평균 클러스터링을</a> 사용하여 벡터 공간을 관리 가능한 영역으로 구성합니다. 각 클러스터는 중심점으로 표시되며, 중심점은 해당 클러스터 내의 벡터에 대한 기준점 역할을 합니다. 이 클러스터링 접근 방식은 쿼리 처리 중에 알고리즘이 가장 관련성이 높은 클러스터에만 집중할 수 있도록 하여 검색 공간을 줄여줍니다.</p>
 <p>IVF 기술 세부 사항에 대해 자세히 알아보려면 <a href="/docs/ko/ivf-flat.md">IVF_FLAT을</a> 참조하세요.</p>
-<h3 id="RaBitQ" class="common-anchor-header">RaBitQ</h3><p><strong>RaBitQ는</strong> 이론적으로 보장된 최첨단 이진 양자화 방법으로, Jianyang Gao와 Cheng Long의 연구 논문 "RaBitQ: 근사 최접 이웃 검색을 위한 이론적 오차 한계를 가진 고차원 벡터 양자화"에 소개되어 있습니다.</p>
+<h3 id="RaBitQ" class="common-anchor-header">RaBitQ<button data-href="#RaBitQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>RaBitQ는</strong> 이론적으로 보장된 최첨단 이진 양자화 방법으로, Jianyang Gao와 Cheng Long의 연구 논문 "RaBitQ: 근사 최인접 이웃 검색을 위한 이론적 오차 한계를 가진 고차원 벡터 양자화"에서 소개된 바 있습니다.</p>
 <p>RaBitQ는 몇 가지 혁신적인 개념을 소개합니다:</p>
 <p><strong>각도 정보 인코딩</strong>: 기존의 공간 인코딩과 달리, RaBitQ는 벡터 정규화를 통해 각도 정보를 인코딩합니다. IVF_RABITQ에서 데이터 벡터는 가장 가까운 IVF 중심점에 대해 정규화되어 양자화 프로세스의 정밀도를 향상시킵니다.</p>
 <p><strong>이론적 기반</strong>: 핵심 거리 근사화 공식은 다음과 같습니다:</p>
@@ -48,7 +78,7 @@ beta: Milvus 2.6.x
 <p>Where:</p>
 <ul>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">or\mathbf{o_r}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5944em;vertical-align:-0.15em;"></span></span></span></span> o<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1611em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">r</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 는 데이터 세트의 데이터 벡터입니다.</li>
-<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">qr\mathbf{q_r}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6389em;vertical-align:-0.1944em;"></span></span></span></span> q<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1611em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">r</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 는 쿼리 벡터입니다.</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">qr\mathbf{q_r}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6389em;vertical-align:-0.1944em;"></span></span></span></span> q<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1611em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">r</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 은 쿼리 벡터입니다.</li>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">co\mathbf{c_o}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5944em;vertical-align:-0.15em;"></span></span></span></span> c<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1611em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">o</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 는 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> or\mathbf{o_r}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5944em;vertical-align:-0.15em;"></span></span></span></span> o <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1611em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">r</span></span></span></span></span></span></span></span> 에 대한 가장 가까운 IVF 중심 벡터입니다. <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></li>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo stretchy="false">(</mo><msub><mi mathvariant="bold">or</mi></msub><mo separator="true">,</mo><msub><mi mathvariant="bold">co</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">C(\mathbf{o_r}, \mathbf{c_o})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span></span></span></span> C<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mopen">(</span><span class="mord"><span class="mord mathbf">o</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist-s">r</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>,<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.1667em;"></span> c</span></span></span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1611em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">o</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> ) 및 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mn>C1</mn></msub><mo stretchy="false">(</mo><msub><mi mathvariant="bold">or</mi></msub><mo separator="true">,</mo><msub><mi mathvariant="bold">co</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">C_1(\mathbf{o_r}, \mathbf{c_o)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span></span></span></span> C <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">1</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathbf">(o</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist-s">r</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.1667em;"></span> c</span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1611em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">o</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> ) 는 미리 계산된 상수입니다.</li>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">o~\tilde{\mathbf{o}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6813em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span> o</span></span></span></span></span></span></span></span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3.3634em;"><span class="pstrut" style="height:3em;"></span> ~ 는 인덱스에 저장된 양자화된 이진 벡터입니다.</span></span></span></span></span></span></span></span> </li>
@@ -56,7 +86,22 @@ beta: Milvus 2.6.x
 </ul>
 <p><strong>계산 효율성</strong>: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> o~\tilde{\mathbf{o}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6813em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span> o</span></span></span></span></span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3.3634em;"><span class="pstrut" style="height:3em;"></span> ~의 이진 특성으로 인해 거리 계산이 매우 빨라지며, 특히 인텔 아이스 레이크+ 또는 AMD Zen 4+ 프로세서의 전용</span></span></span></span></span></span></span></span> <code translate="no">AVX-512 VPOPCNTDQ</code> 명령어가 있는 최신 CPU 아키텍처의 이점을 누릴 수 있습니다.</p>
 <p><strong>알고리즘 개선</strong>: RaBitQ는 <a href="https://www.vldb.org/pvldb/vol9/p288-andre.pdf"><code translate="no">FastScan</code> 접근 방식</a> 및 <a href="https://github.com/facebookresearch/faiss/wiki/Pre--and-post-processing">랜덤 로테이션과</a> 같은 기존 기술과 효과적으로 통합되어 성능을 향상시킵니다.</p>
-<h3 id="IVF-+-RaBitQ" class="common-anchor-header">IVF + RaBitQ</h3><p><strong>IVF_RABITQ</strong> 인덱스는 IVF의 효율적인 클러스터링과 RaBitQ의 고급 바이너리 양자화를 결합합니다:</p>
+<h3 id="IVF-+-RaBitQ" class="common-anchor-header">IVF + RaBitQ<button data-href="#IVF-+-RaBitQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>IVF_RABITQ</strong> 인덱스는 IVF의 효율적인 클러스터링과 RaBitQ의 고급 바이너리 양자화를 결합합니다:</p>
 <ol>
 <li><p><strong>거친 필터링</strong>: IVF는 벡터 공간을 클러스터로 분할하여 가장 관련성이 높은 클러스터 영역에 집중함으로써 검색 범위를 크게 줄입니다.</p></li>
 <li><p><strong>이진 양자화</strong>: 각 클러스터 내에서 RaBitQ는 이론적 보장을 통해 필수적인 거리 관계를 보존하면서 벡터를 이진 표현으로 압축합니다.</p></li>
@@ -162,7 +207,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>이 섹션에서는 인덱스를 구축하고 인덱스에서 검색을 수행하는 데 사용되는 매개변수에 대한 개요를 제공합니다.</p>
-<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수</h3><p>다음 표에는 <a href="/docs/ko/ivf-rabitq.md#Build-index">인덱스 구축</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 표에는 <a href="/docs/ko/ivf-rabitq.md#Build-index">인덱스 구축</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th></th>
@@ -174,9 +234,9 @@ res = MilvusClient.search(
    <tr>
      <td><p>IVF</p></td>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>인덱스 구축 중에 k-평균 알고리즘을 사용하여 생성할 클러스터의 수입니다. 중심점으로 표시되는 각 클러스터는 벡터 목록을 저장합니다. 이 매개변수를 늘리면 각 클러스터의 벡터 수가 줄어들어 더 작고 집중적인 파티션이 만들어집니다.</p></td>
+     <td><p>인덱스 구축 중에 k-평균 알고리즘을 사용하여 생성할 클러스터의 수입니다. 중심점으로 표시되는 각 클러스터는 벡터 목록을 저장합니다. 이 매개변수를 늘리면 각 클러스터의 벡터 수가 줄어들어 더 작고 집중적인 파티션이 생성됩니다.</p></td>
      <td><p><strong>유형</strong>: 정수<br><strong>범위</strong>: [1, 65536]<br><strong>기본값입니다</strong>: <code translate="no">128</code></p></td>
-     <td><p><code translate="no">nlist</code> 값이 클수록 더 세분화된 클러스터를 생성하여 회상률이 향상되지만 인덱스 구축 시간이 늘어납니다. 데이터 세트 크기와 사용 가능한 리소스에 따라 최적화하세요. 대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [32, 4096].</p></td>
+     <td><p><code translate="no">nlist</code> 값이 클수록 더 세분화된 클러스터를 생성하여 회상률이 향상되지만 인덱스 구축 시간이 늘어납니다. 데이터 세트 크기와 사용 가능한 리소스에 따라 최적화합니다. 대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [32, 4096].</p></td>
    </tr>
    <tr>
      <td rowspan="3"><p>RaBitQ</p></td>
@@ -192,7 +252,22 @@ res = MilvusClient.search(
      <td><p>나열된 값은 정확도와 리소스 사용량 간의 균형이 잘 잡힌 <code translate="no">SQ8</code> 을 시작점으로 권장하며, 정확도 증가, QPS 감소, 스토리지 크기 증가 순으로 표시됩니다.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">색인별 검색 매개변수</h3><p>다음 표에는 <a href="/docs/ko/ivf-rabitq.md#Search-on-index">색인에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">색인별 검색 매개변수<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 표에는 <a href="/docs/ko/ivf-rabitq.md#Search-on-index">색인에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th></th>
@@ -213,7 +288,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">rbq_query_bits</code></p></td>
      <td><p>쿼리 벡터의 추가 스칼라 양자화 적용 여부를 설정합니다. <code translate="no">0</code> 로 설정하면 쿼리가 양자화 없이 사용됩니다. 1, 8] 이내의 값으로 설정하면 쿼리가 n비트 스칼라 양자화를 사용하여 전처리됩니다.</p></td>
      <td><p><strong>유형</strong>: 정수<br><strong>범위</strong>: [0, 8]<br><strong>기본값입니다</strong>: <code translate="no">0</code></p></td>
-     <td><p>기본값인 <code translate="no">0</code> 값은 최대 리콜률을 제공하지만 가장 느린 성능을 제공합니다. <code translate="no">0</code> , <code translate="no">8</code>, <code translate="no">6</code> 값은 비슷한 리콜률을 제공하며 <code translate="no">6</code> 이 가장 빠르므로 테스트하는 것이 좋습니다. 리콜 요구 사항을 높이려면 더 작은 값을 사용합니다.</p></td>
+     <td><p>기본값인 <code translate="no">0</code> 값은 최대 리콜률을 제공하지만 성능이 가장 느립니다. <code translate="no">0</code> , <code translate="no">8</code>, <code translate="no">6</code> 값은 비슷한 리콜률을 제공하며 <code translate="no">6</code> 이 가장 빠르므로 테스트하는 것이 좋습니다. 리콜 요건을 높이려면 더 작은 값을 사용합니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">refine_k</code></p></td>

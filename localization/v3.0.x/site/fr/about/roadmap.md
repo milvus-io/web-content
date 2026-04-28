@@ -4,8 +4,8 @@ title: Feuille de route Milvus
 related_key: Milvus roadmap
 summary: >-
   Milvus est une base de données vectorielles open-source conçue pour alimenter
-  les applications d'intelligence artificielle. Voici notre feuille de route
-  pour guider notre développement.
+  les applications d'IA. Voici notre feuille de route pour guider notre
+  développement.
 ---
 <h1 id="Milvus-Roadmap" class="common-anchor-header">Feuille de route Milvus<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"

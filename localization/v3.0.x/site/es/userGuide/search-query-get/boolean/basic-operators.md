@@ -241,11 +241,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>El operador <code translate="no">LIKE</code> se utiliza para la comparación de patrones en campos de cadena. Puede coincidir con subcadenas en distintas posiciones dentro del texto: como <strong>prefijo</strong>, <strong>infijo</strong> o <strong>sufijo</strong>. El operador <code translate="no">LIKE</code> utiliza el símbolo <code translate="no">%</code> como comodín, que puede coincidir con cualquier número de caracteres (incluido el cero).</p>
+    </button></h3><p>El operador <code translate="no">LIKE</code> se utiliza para la concordancia de patrones en campos de cadena. Puede coincidir con subcadenas en distintas posiciones dentro del texto: como <strong>prefijo</strong>, <strong>infijo</strong> o <strong>sufijo</strong>. El operador <code translate="no">LIKE</code> utiliza el símbolo <code translate="no">%</code> como comodín, que puede coincidir con cualquier número de caracteres (incluido el cero).</p>
 <div class="alert note">
 <p>En la mayoría de los casos, la búsqueda por <strong>infijos</strong> o <strong>sufijos</strong> es mucho más lenta que la búsqueda por prefijos. Utilícelas con precaución si el rendimiento es crítico.</p>
 </div>
-<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Coincidencia de prefijo (empieza por)<button data-href="#Prefix-Match-Starts-With" class="anchor-icon" translate="no">
+<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Coincidencia de prefijo (comienza por)<button data-href="#Prefix-Match-Starts-With" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -410,7 +410,7 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><p><code translate="no">AND</code>: Combina varias condiciones que deben ser todas verdaderas.</p></li>
-<li><p><code translate="no">OR</code>: Combina condiciones donde al menos una debe ser verdadera.</p></li>
+<li><p><code translate="no">OR</code>: Combina condiciones en las que al menos una debe ser verdadera.</p></li>
 <li><p><code translate="no">NOT</code>: Niega una condición.</p></li>
 </ul>
 <h3 id="Example-1-Using-AND-to-Combine-Conditions" class="common-anchor-header">Ejemplo 1: Uso de <code translate="no">AND</code> para combinar condiciones<button data-href="#Example-1-Using-AND-to-Combine-Conditions" class="anchor-icon" translate="no">
@@ -663,7 +663,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Aunque los operadores básicos de Milvus son versátiles y pueden aplicarse a campos escalares, también pueden utilizarse eficazmente con las claves y los índices de los campos JSON y ARRAY.</p>
+    </button></h2><p>Aunque los operadores básicos de Milvus son versátiles y pueden aplicarse a campos escalares, también pueden utilizarse eficazmente con las claves e índices de los campos JSON y ARRAY.</p>
 <p>Por ejemplo, si tiene un campo <code translate="no">product</code> que contiene múltiples claves como <code translate="no">price</code>, <code translate="no">model</code>, y <code translate="no">tags</code>, siempre haga referencia a la clave directamente:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

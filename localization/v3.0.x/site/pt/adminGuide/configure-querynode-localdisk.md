@@ -35,11 +35,11 @@ summary: Saiba como configurar o Milvus QueryNode para utilizar o disco local.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus é um banco de dados vetorial focado em IA, adaptado para armazenamento e recuperação eficientes de grandes quantidades de dados vetoriais. É ideal para tarefas como análise de imagem e vídeo, processamento de linguagem natural e sistemas de recomendação. Para garantir um desempenho ideal, é crucial minimizar a latência de leitura do disco. O uso de SSDs NVMe locais é altamente recomendado para evitar atrasos e manter a estabilidade do sistema.</p>
+    </button></h2><p>O Milvus é um banco de dados vetorial focado em IA, adaptado para armazenamento e recuperação eficientes de grandes quantidades de dados vetoriais. Ele é ideal para tarefas como análise de imagem e vídeo, processamento de linguagem natural e sistemas de recomendação. Para garantir um desempenho ideal, é crucial minimizar a latência de leitura do disco. O uso de SSDs NVMe locais é altamente recomendado para evitar atrasos e manter a estabilidade do sistema.</p>
 <p>Os principais recursos em que o armazenamento em disco local entra em ação incluem:</p>
 <ul>
 <li><a href="/docs/pt/chunk_cache.md"><strong>Cache de pedaços</strong></a>: Pré-carrega dados no cache de disco local para uma pesquisa mais rápida.</li>
-<li><a href="/docs/pt/mmap.md"><strong>MMap</strong></a>: Mapeia o conteúdo do ficheiro diretamente para a memória para uma melhor eficiência da memória.</li>
+<li><a href="/docs/pt/mmap.md"><strong>MMap</strong></a>: Mapeia o conteúdo do arquivo diretamente na memória para melhor eficiência da memória.</li>
 <li><a href="/docs/pt/disk_index.md"><strong>Índice DiskANN</strong></a>: Requer armazenamento em disco para uma gestão eficiente do índice.</li>
 </ul>
 <p>Neste artigo, vamos nos concentrar na implantação do <a href="/docs/pt/install-overview.md#Milvus-Distributed">Milvus Distributed</a> em plataformas de nuvem e em como configurar o QueryNode para usar o armazenamento em disco NVMe. A tabela a seguir lista os tipos de máquina recomendados de vários provedores de nuvem.</p>
@@ -76,7 +76,22 @@ nvme1n1     259:1    0 250.0G  0 disk
         ></path>
       </svg>
     </button></h2><p>Para configurar o QueryNode do Milvus Distributed para usar o armazenamento em disco NVMe, é necessário configurar os nós de trabalho dos clusters Kubernetes de destino para armazenar os contêineres e as imagens em um disco NVMe. O procedimento para isso varia de acordo com os provedores de nuvem.</p>
-<h3 id="AWS" class="common-anchor-header">AWS</h3><p>Ao usar o Amazon EKS, é possível personalizar nós gerenciados com modelos de lançamento, nos quais você pode especificar definições de configuração para seus grupos de nós. Segue-se um exemplo de como montar um disco NVMe nos nós de trabalho do seu cluster Amazon EKS:</p>
+<h3 id="AWS" class="common-anchor-header">AWS<button data-href="#AWS" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ao usar o Amazon EKS, é possível personalizar nós gerenciados com modelos de lançamento, nos quais você pode especificar definições de configuração para seus grupos de nós. Segue-se um exemplo de como montar um disco NVMe nos nós de trabalho do seu cluster Amazon EKS:</p>
 <pre><code translate="no" class="language-bash">MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary=<span class="hljs-string">&quot;==MYBOUNDARY==&quot;</span>
 
@@ -105,14 +120,44 @@ Content-Type: text/x-shellscript; charset=<span class="hljs-string">&quot;us-asc
 <p>No exemplo acima, assumimos que o disco NVMe é <code translate="no">/dev/nvme1n1</code>. É necessário modificar o script para corresponder à sua configuração específica.</p>
 </div>
 <p>Para obter detalhes, consulte <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html#launch-template-user-data">Personalizando nós gerenciados com modelos de inicialização</a>.</p>
-<h3 id="GCP" class="common-anchor-header">GCP</h3><p>Para provisionar o armazenamento SSD Local em clusters do Google Kubernetes Engine (GKE) e configurar cargas de trabalho para consumir dados do armazenamento efémero suportado por SSD Local anexado a nós no seu cluster, execute o seguinte comando:</p>
+<h3 id="GCP" class="common-anchor-header">GCP<button data-href="#GCP" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para provisionar o armazenamento SSD Local em clusters do Google Kubernetes Engine (GKE) e configurar cargas de trabalho para consumir dados do armazenamento efémero suportado por SSD Local anexado a nós no seu cluster, execute o seguinte comando:</p>
 <pre><code translate="no" class="language-bash">gcloud container node-pools create <span class="hljs-variable">${POOL_NAME}</span> \
     --cluster=<span class="hljs-variable">${CLUSTER_NAME}</span> \
     --ephemeral-storage-local-ssd count=<span class="hljs-variable">${NUMBER_OF_DISKS}</span> \
     --machine-type=<span class="hljs-variable">${MACHINE_TYPE}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Para obter detalhes, consulte <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/local-ssd">Provisionamento de armazenamento SSD local no GKE</a>.</p>
-<h3 id="Azure" class="common-anchor-header">Azure</h3><p>Para criar um conjunto de dimensionamento de máquina virtual (VMSS) com armazenamento de disco NVMe local, você precisa passar dados personalizados para as instâncias de VM. A seguir, um exemplo de como anexar um disco NVMe às instâncias de VM no VMSS:</p>
+<h3 id="Azure" class="common-anchor-header">Azure<button data-href="#Azure" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para criar um conjunto de dimensionamento de máquina virtual (VMSS) com armazenamento de disco NVMe local, você precisa passar dados personalizados para as instâncias de VM. A seguir, um exemplo de como anexar um disco NVMe às instâncias de VM no VMSS:</p>
 <pre><code translate="no" class="language-bash">mdadm -Cv /dev/md0 -l0 -n2 /dev/nvme0n1 /dev/nvme1n1
 mdadm -Ds &gt; /etc/mdadm/mdadm.conf 
 update-initramfs -u
@@ -125,7 +170,22 @@ mount -a
 <div class="alert note">
 <p>No exemplo acima, assumimos que os discos NVMe são <code translate="no">/dev/nvme0n1</code> e <code translate="no">/dev/nvme1n1</code>. É necessário modificar o script para corresponder à sua configuração específica.</p>
 </div>
-<h3 id="Alibaba-Cloud--TecentCloud" class="common-anchor-header">Alibaba Cloud e TecentCloud</h3><p>Para criar um pool de nós que utiliza volumes SSD locais, precisamos de passar dados personalizados. A seguir, um exemplo de dados personalizados.</p>
+<h3 id="Alibaba-Cloud--TecentCloud" class="common-anchor-header">Alibaba Cloud e TecentCloud<button data-href="#Alibaba-Cloud--TecentCloud" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para criar um pool de nós que utiliza volumes SSD locais, precisamos de passar dados personalizados. A seguir, um exemplo de dados personalizados.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nvme init start...&quot;</span>
 mkfs.xfs /dev/nvme0n1
@@ -146,7 +206,22 @@ mount -a
 <div class="alert note">
 <p>No exemplo acima, assumimos que o disco NVMe é <code translate="no">/dev/nvme0n1</code>. É necessário modificar o script para corresponder à sua configuração específica.</p>
 </div>
-<h3 id="Your-own-IDC" class="common-anchor-header">Seu próprio IDC</h3><p>Se estiver a executar o seu próprio IDC e pretender configurar os seus contentores para utilizarem o sistema de ficheiros num disco NVMe recém-montado por predefinição no containerd, siga estes passos:</p>
+<h3 id="Your-own-IDC" class="common-anchor-header">Seu próprio IDC<button data-href="#Your-own-IDC" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Se estiver a executar o seu próprio IDC e pretender configurar os seus contentores para utilizarem o sistema de ficheiros num disco NVMe recém-montado por predefinição no containerd, siga estes passos:</p>
 <ul>
 <li><p><strong>Monte os discos NVMe.</strong></p>
 <p>Certifique-se de que o seu disco NVMe está devidamente montado na sua máquina anfitriã. Pode montá-lo num diretório à sua escolha. Por exemplo, se o montar em <code translate="no">/mnt/nvme</code>, certifique-se de que está corretamente configurado e de que pode ver o disco disponível em <code translate="no">/mnt/nvme</code> executando <code translate="no">lsblk</code> ou <code translate="no">df -h</code>.</p></li>
@@ -265,9 +340,39 @@ IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=100.0%
         ></path>
       </svg>
     </button></h2><p>Quando os resultados da verificação forem satisfatórios, você poderá implantar o Milvus Distributed com as etapas a seguir:</p>
-<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">Dicas para implantar o Milvus Distributed usando o Helm</h3><p>O pod QueryNode usa discos NVMe como volumes EmptyDir por padrão. É recomendável montar os discos NVMe em <code translate="no">/var/lib/milvus/data</code> dentro dos pods QueryNode para garantir o desempenho ideal.</p>
+<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">Dicas para implantar o Milvus Distributed usando o Helm<button data-href="#Tips-for-deploying-Milvus-Distributed-using-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O pod QueryNode usa discos NVMe como volumes EmptyDir por padrão. É aconselhável montar os discos NVMe em <code translate="no">/var/lib/milvus/data</code> dentro dos pods QueryNode para garantir o desempenho ideal.</p>
 <p>Para obter detalhes sobre como implantar o Milvus Distributed usando o Helm, consulte <a href="/docs/pt/install_cluster-helm.md">Executar o Milvus no Kubernetes com o Helm</a>.</p>
-<h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">Dicas para implantar o Milvus Distributed usando o Milvus Operator</h3><p>O Milvus Operator configura automaticamente o pod QueryNode para usar discos NVMe como volumes EmptyDir. Aconselha-se a adicionar as seguintes configurações ao recurso personalizado <code translate="no">MilvusCluster</code>:</p>
+<h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">Dicas para implantar o Milvus Distributed usando o Milvus Operator<button data-href="#Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O Milvus Operator configura automaticamente o pod QueryNode para usar discos NVMe como volumes EmptyDir. Aconselha-se a adicionar as seguintes configurações ao recurso personalizado <code translate="no">MilvusCluster</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>

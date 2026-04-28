@@ -48,7 +48,7 @@ title: Autenticare l'accesso degli utenti
 <span class="hljs-attr">common:</span>
 <span class="hljs-string">...</span>
   <span class="hljs-attr">security:</span>
-    <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">false</span>
+    <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">true</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 </div>
@@ -64,7 +64,7 @@ title: Autenticare l'accesso degli utenti
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-operator">
-<p>Per abilitare l'autenticazione, impostate <code translate="no">spec.common.security.authorizationEnabled</code> su <code translate="no">true</code> nel CRD <code translate="no">Milvus</code>. Per ulteriori informazioni sul CRD di Milvus, consultare <a href="https://milvus.io/docs/configure_operator.md?tab=component">Configurazione di Milvus con Milvus Operator</a>.</p>
+<p>Per abilitare l'autenticazione, impostate <code translate="no">spec.config.common.security.authorizationEnabled</code> su <code translate="no">true</code> nel CRD <code translate="no">Milvus</code>. Per ulteriori informazioni sul CRD di Milvus, consultare <a href="https://milvus.io/docs/configure_operator.md?tab=component">Configurazione di Milvus con Milvus Operator</a>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

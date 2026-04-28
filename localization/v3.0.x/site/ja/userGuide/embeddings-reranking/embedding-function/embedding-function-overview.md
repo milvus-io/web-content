@@ -39,7 +39,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><ul>
 <li><p>Functionモジュールが埋め込む入力フィールドは常に値を含んでいなければなりません。</p></li>
-<li><p>Functionモジュールはコレクションスキーマで明示的に定義されたフィールドのみを処理します。</p></li>
+<li><p>Functionモジュールは、コレクションスキーマで明示的に定義されたフィールドのみを処理します。</p></li>
 <li><p>埋め込む入力フィールドは<code translate="no">VARCHAR</code> 型でなければなりません。</p></li>
 <li><p>Functionモジュールは入力フィールドを次のように埋め込むことができる：</p>
 <ul>
@@ -146,12 +146,12 @@ beta: Milvus 2.6.x
 <li><p><strong>埋め込みデータを生成する</strong>：MilvusのFunctionモジュールは自動的に設定されたモデルプロバイダを呼び出し、生データをベクトル埋め込みデータに変換します。</p></li>
 <li><p><strong>埋め込みデータを保存</strong>します：生成された埋め込みデータはMilvusコレクション内の明示的に定義されたベクトルフィールドに格納されます。</p></li>
 <li><p><strong>テキストクエリ</strong>ユーザはMilvusにテキストクエリを送信する。</p></li>
-<li><p><strong>セマンティック検索</strong>：Milvusは内部でクエリをベクトルの埋め込みに変換し、格納された埋め込みに対して類似検索を行い、関連する結果を取得します。</p></li>
+<li><p><strong>セマンティック検索</strong>：Milvusは内部でクエリをベクトルの埋め込みに変換し、保存された埋め込みに対して類似検索を行い、関連する結果を取得します。</p></li>
 <li><p><strong>結果を返す</strong>：Milvusはトップマッチの結果をアプリケーションに返します。</p></li>
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
    </span> <span class="img-wrapper"> <span>埋め込み機能の概要</span> </span></p>
 <h2 id="Configure-credentials" class="common-anchor-header">認証情報の設定<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -179,7 +179,7 @@ beta: Milvus 2.6.x
 <p>以下の図は、Milvus設定ファイル(<code translate="no">milvus.yaml</code>)を介してクレデンシャルを設定し、Milvus内でFunctionを呼び出すプロセスを示しています。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
    </span> <span class="img-wrapper"> <span>クレデンシャル設定のオーバーフロー</span> </span></p>
 <h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">ステップ 1: Milvus 設定ファイルへのクレデンシャルの追加<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -267,7 +267,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus設定ファイルに認証情報が設定されたら、以下の手順に従って埋め込み関数を定義し、使用してください。</p>
+    </button></h2><p>Milvus設定ファイルに認証情報を設定したら、以下のステップに従って埋め込み関数を定義し、使用してください。</p>
 <h3 id="Step-1-Define-schema-fields" class="common-anchor-header">ステップ 1: スキーマフィールドの定義<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -289,7 +289,7 @@ beta: Milvus 2.6.x
 <li><p>埋め込む生データを格納する<strong>スカラーフィールド</strong>。</p></li>
 <li><p>スカラー・フィールドに対して関数が生成するベクトル埋め込みを格納するために予約された<strong>ベクトル・フィールド</strong>。</p></li>
 </ul>
-<p>次の例では、テキストデータを格納するためのスカラーフィールド<code translate="no">&quot;document&quot;</code> と、Functionモジュールによって生成される埋め込みデータを格納するためのベクトルフィールド<code translate="no">&quot;dense&quot;</code> を持つスキーマを定義しています。ベクトル次元(<code translate="no">dim</code>)は、選択した埋め込みモデルの出力に合わせて設定することを忘れないでください。</p>
+<p>以下の例では、テキストデータを格納するためのスカラーフィールド<code translate="no">&quot;document&quot;</code> と、Functionモジュールによって生成される埋め込みデータを格納するためのベクトルフィールド<code translate="no">&quot;dense&quot;</code> を持つスキーマを定義しています。ベクトル次元(<code translate="no">dim</code>)は、選択した埋め込みモデルの出力に合わせて設定することを忘れないでください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType

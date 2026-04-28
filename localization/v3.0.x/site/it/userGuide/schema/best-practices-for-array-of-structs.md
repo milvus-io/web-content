@@ -52,7 +52,7 @@ beta: Milvus 2.6.4+
 <li><p><strong>Incorporazione multimodale</strong>: Ogni struttura può contenere più vettori, come l'incorporazione di testo e l'incorporazione di immagini, oltre ai metadati.</p></li>
 <li><p><strong>Dati temporali o sequenziali</strong>: Le strutture in un campo Array rappresentano naturalmente serie temporali o eventi graduali.</p></li>
 </ul>
-<p>A differenza delle soluzioni tradizionali, che memorizzano blob JSON o dividono i dati in più raccolte, l'array di strutture offre l'applicazione nativa dello schema, l'indicizzazione dei vettori e l'archiviazione efficiente all'interno di Milvus.</p>
+<p>A differenza delle soluzioni tradizionali che memorizzano blob JSON o dividono i dati in più raccolte, l'Array di strutture offre l'applicazione nativa dello schema, l'indicizzazione dei vettori e l'archiviazione efficiente all'interno di Milvus.</p>
 <h2 id="Schema-design-guidelines" class="common-anchor-header">Linee guida per la progettazione degli schemi<button data-href="#Schema-design-guidelines" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -199,7 +199,7 @@ beta: Milvus 2.6.4+
 ├── ...
 ├── video_n
 <button class="copy-code-btn"></button></code></pre>
-<p>È possibile notare che la struttura del dataset CoVLA è altamente gerarchica, dividendo i dati raccolti in più file <code translate="no">.jsonl</code>, insieme ai video clip nel formato <code translate="no">.mp4</code>.</p>
+<p>Si può notare che la struttura del dataset CoVLA è altamente gerarchica, dividendo i dati raccolti in più file <code translate="no">.jsonl</code>, insieme ai video clip nel formato <code translate="no">.mp4</code>.</p>
 <p>In Milvus, è possibile utilizzare un campo JSON o un campo Array-of-Structs per creare strutture annidate all'interno di uno schema di raccolta. Quando le incorporazioni vettoriali fanno parte del formato annidato, è supportato solo un campo Array-of-Structs. Tuttavia, una struttura all'interno di un array non può a sua volta contenere altre strutture annidate. Per memorizzare il set di dati CoVLA mantenendo le relazioni essenziali, è necessario rimuovere la gerarchia non necessaria e appiattire i dati in modo che si adattino allo schema della raccolta Milvus.</p>
 <p>Il diagramma seguente illustra come possiamo modellare questo set di dati utilizzando lo schema illustrato nello schema seguente:</p>
 <p>

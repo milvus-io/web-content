@@ -32,7 +32,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Ce bloc-notes illustre l'utilisation du magasin vectoriel Milvus dans LlamaIndex, en se concentrant sur les capacités de filtrage des métadonnées. Vous apprendrez à indexer des documents avec des métadonnées, à effectuer des recherches vectorielles avec les filtres de métadonnées intégrés de LlamaIndex et à appliquer les expressions de filtrage natives de Milvus au magasin vectoriel.</p>
-<p>A la fin de ce carnet, vous comprendrez comment utiliser les fonctions de filtrage de Milvus pour limiter les résultats de recherche en fonction des métadonnées des documents.</p>
+<p>A la fin de ce carnet, vous comprendrez comment utiliser les fonctions de filtrage de Milvus pour réduire les résultats de recherche en fonction des métadonnées du document.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -182,7 +182,22 @@ result_nodes = retriever.retrieve(<span class="hljs-string">&quot;Books about li
 Life
 {'author': 'Keith Richards', 'genre': 'Memoir', 'year': 2010}
 </code></pre>
-<h3 id="Multiple-Metdata-Filters" class="common-anchor-header">Filtres de métadonnées multiples</h3><p>Vous pouvez également combiner plusieurs filtres de métadonnées pour créer des requêtes plus complexes. LlamaIndex prend en charge les conditions <code translate="no">AND</code> et <code translate="no">OR</code> pour combiner les filtres. Cela permet une recherche plus précise et plus flexible des documents en fonction de leurs attributs de métadonnées.</p>
+<h3 id="Multiple-Metdata-Filters" class="common-anchor-header">Filtres de métadonnées multiples<button data-href="#Multiple-Metdata-Filters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Vous pouvez également combiner plusieurs filtres de métadonnées pour créer des requêtes plus complexes. LlamaIndex prend en charge les conditions <code translate="no">AND</code> et <code translate="no">OR</code> pour combiner les filtres. Cela permet une recherche plus précise et plus flexible des documents en fonction de leurs attributs de métadonnées.</p>
 <p><strong>Condition <code translate="no">AND</code></strong></p>
 <p>Essayez un exemple de filtrage des livres publiés entre 1979 et 2010 (plus précisément, lorsque 1979 &lt; année ≤ 2010) :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core.vector_stores <span class="hljs-keyword">import</span> FilterCondition

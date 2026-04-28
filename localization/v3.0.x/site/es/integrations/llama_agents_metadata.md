@@ -41,7 +41,7 @@ title: 'Sistemas multiagente con Mistral AI, Milvus y Llama-agents'
 <ul>
 <li><p>1️⃣ Almacenar datos en Milvus: Aprender a almacenar datos en Milvus, una eficiente base de datos vectorial diseñada para búsquedas de similitud de alta velocidad y aplicaciones de IA.</p></li>
 <li><p>2️⃣ Utilizar llama-index con modelos Mistral para consultas de datos: Descubra cómo utilizar llama-index en combinación con modelos Mistral para consultar datos almacenados en Milvus.</p></li>
-<li><p>3️⃣ Crear Agentes Automatizados de Búsqueda y Lectura de Datos: Construir agentes que puedan buscar y leer datos automáticamente basándose en las consultas de los usuarios. Estos agentes automatizados mejorarán la experiencia del usuario al ofrecer respuestas rápidas y precisas, reduciendo el esfuerzo de búsqueda manual.</p></li>
+<li><p>3️⃣ Crear agentes automatizados de búsqueda y lectura de datos: Construya agentes que puedan buscar y leer datos automáticamente basándose en las consultas de los usuarios. Estos agentes automatizados mejorarán la experiencia del usuario al ofrecer respuestas rápidas y precisas, reduciendo el esfuerzo de búsqueda manual.</p></li>
 <li><p>4️⃣ Desarrollar agentes para el filtrado de metadatos basado en consultas de usuario: Implementar agentes que puedan generar automáticamente filtros de metadatos a partir de consultas de usuario, refinando y contextualizando los resultados de búsqueda, evitando confusiones y mejorando la precisión de la información recuperada, incluso para consultas complejas.</p></li>
 <li><p>🔍 Resumen Al final de este cuaderno, tendrás una comprensión completa del uso de Milvus, llama-index con llama-agentes y modelos Mistral para construir un sistema de recuperación de datos robusto y eficiente.</p></li>
 </ul>
@@ -70,7 +70,7 @@ title: 'Sistemas multiagente con Mistral AI, Milvus y Llama-agents'
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
    </span> <span class="img-wrapper"> <span>imagen.png</span> </span></p>
 <h2 id="llama-agents" class="common-anchor-header">llama-agentes<button data-href="#llama-agents" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -112,7 +112,7 @@ title: 'Sistemas multiagente con Mistral AI, Milvus y Llama-agents'
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
    </span> <span class="img-wrapper"> <span>imagen.png</span> </span></p>
 <h2 id="Mistral-AI" class="common-anchor-header">Mistral AI<button data-href="#Mistral-AI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -697,7 +697,7 @@ Uber's total revenue for the year ended December 31, 2021, is $17.455 billion.
 <li>La complejidad: La cuestión implica múltiples agentes y servicios, cada uno con su propia funcionalidad y fuentes de datos. Coordinar estos agentes para que trabajen juntos sin problemas es una tarea compleja.</li>
 </ul>
 <ul>
-<li><p>Integración de datos: La pregunta requiere integrar datos de distintas fuentes, lo que puede suponer un reto debido a las variaciones en los formatos, estructuras y metadatos de los datos.</p></li>
+<li><p>Integración de datos: La pregunta requiere integrar datos de diferentes fuentes, lo que puede suponer un reto debido a las variaciones en los formatos, estructuras y metadatos de los datos.</p></li>
 <li><p>Comprensión del contexto: La pregunta puede requerir la comprensión del contexto y las relaciones entre diferentes piezas de información, lo cual es una tarea cognitivamente exigente.</p></li>
 </ul>
 <h3 id="Why-would-Mistral-Large-help-in-this-case" class="common-anchor-header">¿Por qué sería útil Mistral Large en este caso?<button data-href="#Why-would-Mistral-Large-help-in-this-case" class="anchor-icon" translate="no">
@@ -717,7 +717,7 @@ Uber's total revenue for the year ended December 31, 2021, is $17.455 billion.
       </svg>
     </button></h3><p>Mistral Large se adapta bien a esta tarea gracias a sus capacidades avanzadas de razonamiento y de llamada a funciones. He aquí cómo ayuda:</p>
 <ul>
-<li><p>Razonamiento avanzado: Mistral Large puede manejar tareas de razonamiento complejas, lo que lo hace ideal para orquestar múltiples agentes y servicios. Puede entender las relaciones entre diferentes piezas de información y tomar decisiones informadas.</p></li>
+<li><p>Razonamiento avanzado: Mistral Large puede manejar tareas de razonamiento complejas, lo que lo hace ideal para orquestar múltiples agentes y servicios. Es capaz de entender las relaciones entre diferentes piezas de información y tomar decisiones informadas.</p></li>
 <li><p>Capacidades de llamada a funciones: Mistral Large tiene capacidades avanzadas de llamada a funciones, que son esenciales para coordinar las acciones de diferentes agentes. Esto permite una integración y orquestación perfectas de varios servicios.</p></li>
 <li><p>Conocimientos especializados: Mistral Large está diseñado para tareas altamente especializadas, por lo que es muy adecuado para manejar consultas complejas que requieren un profundo conocimiento del dominio.</p></li>
 </ul>

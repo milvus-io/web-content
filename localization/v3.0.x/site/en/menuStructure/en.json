@@ -1091,15 +1091,21 @@
         ]
       },
       {
-        "label": "Embeddings & Reranking",
+        "label": "Function & Model Inference",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
         "children": [
           {
-            "label": "Embedding Function",
-            "id": "embedding-function",
+            "label": "BM25 Function",
+            "id": "bm25-function.md",
             "order": 0,
+            "children": []
+          },
+          {
+            "label": "Model-based Embedding Functions",
+            "id": "embedding-function",
+            "order": 1,
             "isMenu": true,
             "children": [
               {
@@ -1167,19 +1173,19 @@
                 "id": "google-gemini.md",
                 "order": 10,
                 "children": []
-              },
-              {
-                "label": "MinHash Function",
-                "id": "minhash-function.md",
-                "order": 11,
-                "children": []
               }
             ]
           },
           {
-            "label": "Reranking Function",
+            "label": "MinHash Function",
+            "id": "minhash-function.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Rerank Functions",
             "id": "reranking",
-            "order": 1,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -1311,35 +1317,9 @@
             "children": []
           },
           {
-            "label": "Snapshots",
-            "id": "snapshots",
-            "order": 3,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "Overview",
-                "id": "snapshots.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Manage Snapshots",
-                "id": "manage-snapshots.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Use Cases",
-                "id": "snapshot-use-cases.md",
-                "order": 2,
-                "children": []
-              }
-            ]
-          },
-          {
             "label": "Tiered Storage",
             "id": "tiered_storage",
-            "order": 4,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -1361,6 +1341,32 @@
                 "children": []
               }
             ]
+          }
+        ]
+      },
+      {
+        "label": "Snapshots",
+        "id": "snapshots",
+        "order": 11,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Overview",
+            "id": "snapshots.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Manage Snapshots",
+            "id": "manage-snapshots.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Use Cases",
+            "id": "snapshot-use-cases.md",
+            "order": 2,
+            "children": []
           }
         ]
       }

@@ -41,7 +41,7 @@ summary: >-
       </svg>
     </button></h2><p>Milvus 整合了<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>來提供底層的倒排索引和基於詞彙的文字搜尋。對於每一個文本條目，Milvus 都會按照以下程序建立索引：</p>
 <ol>
-<li><p><a href="/docs/zh-hant/analyzer-overview.md">分析器</a>：分析器會將輸入的文字標記化為個別字詞或標記，然後視需要套用篩選器。這可讓 Milvus 根據這些標記建立索引。</p></li>
+<li><p><a href="/docs/zh-hant/analyzer-overview.md">分析器</a>：分析器會將輸入的文字標記化為單獨的字詞或標記，然後根據需要套用篩選器。這可讓 Milvus 根據這些標記建立索引。</p></li>
 <li><p><a href="/docs/zh-hant/index-explained.md">建立索引</a>：在文字分析之後，Milvus 會建立反向索引，將每個獨特的標記映射到包含該標記的文件。</p></li>
 </ol>
 <p>當使用者執行文字比對時，倒置索引會被用來快速擷取所有包含該詞彙的文件。這比逐一掃描每份文件要快得多。</p>
@@ -302,7 +302,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus 也提供其他各種適合不同語言和情境的分析器。如需詳細資訊，請參閱<a href="/docs/zh-hant/analyzer-overview.md">分析器概述</a>。</p>
+<p>Milvus 也提供其他各種適合不同語言和情境的分析器。如需詳細資訊，請參閱<a href="/docs/zh-hant/analyzer-overview.md">分析器總覽</a>。</p>
 <h2 id="Use-text-match" class="common-anchor-header">使用文字匹配<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

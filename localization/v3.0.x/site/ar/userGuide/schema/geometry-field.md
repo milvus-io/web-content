@@ -75,7 +75,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h2><p>يتضمن سير العمل لاستخدام حقل <code translate="no">GEOMETRY</code> تعريفه في مخطط مجموعتك، وإدراج البيانات الهندسية، ثم الاستعلام عن البيانات باستخدام تعبيرات تصفية محددة.</p>
-<h3 id="Step-1-Define-a-GEOMETRY-field" class="common-anchor-header">الخطوة 1: تعريف حقل جيومتري GEOMETRY<button data-href="#Step-1-Define-a-GEOMETRY-field" class="anchor-icon" translate="no">
+<h3 id="Step-1-Define-a-GEOMETRY-field" class="common-anchor-header">الخطوة 1: تحديد حقل جيومتري GEOMETRY<button data-href="#Step-1-Define-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

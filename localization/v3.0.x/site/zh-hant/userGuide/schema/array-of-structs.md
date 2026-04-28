@@ -1,10 +1,9 @@
 ---
 id: array-of-structs.md
-title: 結構陣列Compatible with Milvus 2.6.4+
-summary: 實體中的 Structs 陣列欄位儲存一組有序的 Struct 元素。陣列中的每個 Struct 都共用相同的預定義模式，包含多個向量和標量欄位。
-beta: Milvus 2.6.4+
+title: 結構陣列
+summary: 使用 StructArray 欄位，以向量和標量欄位的共用模式儲存有序的 Struct 元素。
 ---
-<h1 id="Array-of-Structs" class="common-anchor-header">結構陣列<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Array-of-Structs" class="anchor-icon" translate="no">
+<h1 id="StructArray" class="common-anchor-header">結構陣列<button data-href="#StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +18,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>實體中的 Structs 陣列欄位儲存一組有序的 Struct 元素。陣列中的每個 Struct 都共用相同的預定義模式，包含多個向量和標量欄位。</p>
-<p>以下是一個包含 Array of Structs 欄位的集合實體範例。</p>
+    </button></h1><p>實體中的 Structs 陣列欄位，或 StructArray 欄位，會儲存一組有序的 Struct 元素。陣列中的每個 Struct 都共用相同的預定義模式，包含多個向量和標量欄位。</p>
+<p>以下是一個包含 StructArray 欄位的集合實體範例。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     &#x27;id&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
     &#x27;title&#x27;<span class="hljs-punctuation">:</span> &#x27;Walden&#x27;<span class="hljs-punctuation">,</span>
@@ -42,7 +41,30 @@ beta: Milvus 2.6.4+
 <span class="highlighted-comment-line">    <span class="hljs-comment">// hightlight-end</span></span>
 <span class="highlighted-comment-line"><span class="hljs-punctuation">}</span></span>
 <span class="highlighted-comment-line"></span><button class="copy-code-btn"></button></code></pre>
-<p>在上面的範例中，<code translate="no">chunks</code> 欄位是一個 Array of Structs 欄位，而每個 Struct 元素都包含自己的欄位，即<code translate="no">text</code>,<code translate="no">text_vector</code>, 和<code translate="no">chapter</code> 。</p>
+<p>在上面的範例中，<code translate="no">chunks</code> 欄位是一個 StructArray 欄位，而每個 Struct 元素都包含自己的欄位，即<code translate="no">text</code>,<code translate="no">text_vector</code>, 和<code translate="no">chapter</code> 。</p>
+<h2 id="When-to-use" class="common-anchor-header">何時使用<button data-href="#When-to-use" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>現代人工智能應用程式，從自動駕駛到多模式檢索，越來越依賴嵌套的異質資料。傳統的平面資料模型難以呈現複<strong>雜的關</strong>係，例如<strong>「一個文件包含許多註釋區塊</strong>」或<strong>「一個駕駛場景包含多個觀察到的動作</strong>」。這正是 Milvus 中 StructArray 資料類型的優點所在。</p>
+<p>若要快速判斷 StructArray 欄位是否適合您的應用程式情境，請考慮下列因素</p>
+<ul>
+<li><p>您的資料是分層結構，例如一個文件有許多註解的區塊。</p></li>
+<li><p>搜尋結果應該是文件，而不是區塊，就像上面的範例。</p></li>
+<li><p>搜尋結果包含大量重複的實體，您很難使用群組、重複刪除和重排等技術擷取最終結果。</p></li>
+</ul>
+<p>如果您對上述問題的答案是肯定的，您應該使用 StructArray。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,43 +82,51 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><ul>
 <li><p><strong>資料類型</strong></p>
-<p>當您建立一個集合時，您可以使用 Struct 類型作為 Array 欄位中元素的資料類型。然而，你不能在現有的集合中加入一個 Struct 的 Array，而且 Milvus 不支援使用 Struct 種類作為集合欄位的資料類型。</p>
-<p>陣列欄位中的 Struct 共享相同的模式，這應該在您建立陣列欄位時定義。</p>
-<p>Struct 模式包含向量和標量欄位，如下表所列：</p>
-<p><table>
-<tr>
-<th><p>欄位類型</p></th>
-<th><p>資料類型</p></th>
-</tr>
-<tr>
-<td><p>向量</p></td>
-<td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-</tr>
-<tr>
-<td rowspan="5"><p>標量</p></td>
-<td><p><code translate="no">VARCHAR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">INT8/16/32/64</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">FLOAT</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">DOUBLE</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">BOOLEAN</code></p></td>
-</tr>
-</table></p>
-<p>保持集合層級和 Structs 合併的向量欄位數量不超過或等於 10。</p></li>
-<li><p><strong>可空值與預設值</strong></p>
-<p>Structs 陣列欄位不可為空，也不接受任何預設值。</p></li>
+<p>當您建立一個集合時，您可以使用 Struct 類型作為 Array 欄位中元素的資料類型。但是，你不能添加一個 StructArray 到現有的集合中，而且 Milvus 不支援使用 Struct 種類作為集合欄位的資料類型。</p>
+<p>Array 欄位中的 Struct 共用相同的模式，這應該在您建立 Array 欄位時定義。</p>
+<p>Struct 模式包含向量和标量字段，如下所示：</p>
+<p><Grid columnSize="2" widthRatios="50,50"></p>
+<pre><code translate="no">  &lt;div&gt;
+
+      Applicable vector fields:
+
+      - `FLOAT_VECTOR`
+
+      - `FLOAT16_VECTOR`
+
+      - `BFLOAT16_VECTOR`
+
+      - `INT8_VECTOR`
+
+      - `BINARY_VECTOR`
+
+  &lt;/div&gt;
+
+  &lt;div&gt;
+
+      Applicable scalar fields:
+
+      - `VARCHAR`
+
+      - `INT8/16/32/64`
+
+      - `FLOAT`
+
+      - `DOUBLE`
+
+      - `BOOL`
+
+  &lt;/div&gt;
+</code></pre>
+<p></Grid></p>
+<p>保持集合層級和 Structs 組合中的向量欄位數量不超過或等於 10。</p></li>
+<li><p><strong>可為空與預設值</strong></p>
+<p>StructArray 欄位不可為空且不接受任何預設值。</p></li>
 <li><p><strong>函數</strong></p>
 <p>您不能使用函數從 Struct 中的標量欄位衍生出向量欄位。</p></li>
 <li><p><strong>索引類型與度量類型</strong></p>
-<p>集合中的所有向量欄位都必須建立索引。要索引一個 Array of Structs 欄位中的向量欄位，Milvus 使用一個 embedding list 來組織每個 Struct 元素中的向量嵌入，並索引整個 embedding list 作為一個整體。</p>
-<p>您可以使用<code translate="no">AUTOINDEX</code> 或<code translate="no">HNSW</code> 作為索引類型，並使用下面列出的任何度量類型，為 Array of Structs 欄位中的嵌入清單建立索引。</p>
+<p>集合中的所有向量欄位都必須建立索引。為了索引 StructArray 欄位中的向量欄位，Milvus 使用 embedding list 來組織每個 Struct 元素中的向量嵌入，並將整個 embedding list 作為一個整體來索引。</p>
+<p>您可以使用<code translate="no">AUTOINDEX</code> 或<code translate="no">HNSW</code> 作為索引類型，並使用下列任何度量類型為 StructArray 欄位中的嵌入清單建立索引。</p>
 <p><table>
 <tr>
 <th><p>索引類型</p></th>
@@ -104,24 +134,25 @@ beta: Milvus 2.6.4+
 <th><p>備註</p></th>
 </tr>
 <tr>
-<td rowspan="3"><p><code translate="no">AUTOINDEX</code> (或<code translate="no">HNSW</code>)</p></td>
-<td><p><code translate="no">MAX_SIM_COSINE</code></p></td>
-<td rowspan="3"><p>適用於下列類型的嵌入清單：</p><ul><li>FLOAT_VECTOR</li></ul></td>
-</tr>
-<tr>
-<td><p><code translate="no">MAX_SIM_IP</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">MAX_SIM_L2</code></p></td>
+<td rowspan="3"><ul><li><p><code translate="no">AUTOINDEX</code></p></li><li><p><code translate="no">HNSW</code></p></li><li><p><code translate="no">IVF_FLAT</code></p></li><li><p><code translate="no">DISKANN</code></p></li></ul></td>
+<td rowspan="3"><ul><li><p><code translate="no">MAX_SIM_COSINE</code></p></li><li><p><code translate="no">MAX_SIM_IP</code></p></li><li><p><code translate="no">MAX_SIM_L2</code></p></li></ul></td>
+<td rowspan="3"><p>適用於下列類型的嵌入清單：</p><ul><li><p><code translate="no">FLOAT_VECTOR</code></p></li><li><p><code translate="no">FLOAT16_VECTOR</code></p></li><li><p><code translate="no">BFLOAT16_VECTOR</code></p></li><li><p><code translate="no">INT8_VECTOR</code></p></li><li><p><code translate="no">BINARY_VECTOR</code></p></li></ul></td>
 </tr>
 </table></p>
-<p>Array of Structs 欄位中的標量欄位不支援索引。</p></li>
-<li><p><strong>倒插資料</strong></p>
-<p>Structs 在合併模式下不支援 upsert。但是，您仍然可以在覆寫模式下執行 upserts 來更新 Structs 中的資料。有關在合併模式和覆寫模式下 upsert 的差異，請參閱<a href="/docs/zh-hant/upsert-entities.md#Overview">Upsert Entities</a>。</p></li>
+<p>有關 Milvus 如何計算查詢與嵌入清單之間相似度的詳細資訊，請參閱<a href="/docs/zh-hant/metric.md#Maximum-similarity">最大相似度</a>。</p>
+<p>StructArray 欄位中的標量欄位支援下列索引類型：</p>
+<ul>
+<li><p><code translate="no">INVERTED</code></p>
+<p>這通常適用於類似字串或分類篩選器，例如<code translate="no">structA[color]</code> 或<code translate="no">structA[str_val]</code> 。詳情請參閱<a href="/docs/zh-hant/inverted.md">INVERTED</a>。</p></li>
+<li><p><code translate="no">STL_SORT</code></p>
+<p>這通常適用於數值的範圍或順序式加速，如<code translate="no">strctA[num_val]</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/stl-sort.md">STL_SORT</a>。</p></li>
+</ul></li>
+<li><p><strong>向上插入資料</strong></p>
+<p>結構體在合併模式下不支援倒插。然而，您仍然可以在覆寫模式下執行 upserts 來更新 Structs 中的資料。有關在合併模式和覆寫模式下 upsert 的差異，請參閱<a href="/docs/zh-hant/upsert-entities.md#Overview">Upsert Entities</a>。</p></li>
 <li><p><strong>標量篩選</strong></p>
-<p>您不能在搜尋和查詢的過濾表達式中使用 Structs 陣列或其 Struct 元素中的任何欄位。</p></li>
+<p>您可以使用<strong>元素篩選器</strong>和<strong>match 系列中的運算符號</strong>，針對 StructArray 欄位中的標量子欄位進行標量篩選。詳情請參閱<a href="/docs/zh-hant/array-of-structs.md#Scalar-filtering-in-a-StructArray-field">StructArray 欄位中的標量篩選</a>。</p></li>
 </ul>
-<h2 id="Add-Array-of-Structs" class="common-anchor-header">添加結構陣列<button data-href="#Add-Array-of-Structs" class="anchor-icon" translate="no">
+<h2 id="Add-a-StructArray" class="common-anchor-header">新增 StructArray<button data-href="#Add-a-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -136,15 +167,15 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要在 Milvus 中使用 Structs 陣列，你需要在創建一個集合時定義一個陣列欄位，並設定其元素的數據類型為 Struct。過程如下：</p>
+    </button></h2><p>要在 Milvus 中加入 StructArray 欄位，你需要在建立集合時定義一個陣列欄位，並設定其元素的資料類型為 Struct。過程如下：</p>
 <ol>
-<li><p>在集合模式中加入陣列欄位時，設定欄位的資料類型為<code translate="no">DataType.ARRAY</code> 。</p></li>
-<li><p>將欄位的<code translate="no">element_type</code> 屬性設定為<code translate="no">DataType.STRUCT</code> ，使欄位成為 Struct 陣列。</p></li>
-<li><p>建立 Struct 結構描述，並包含所需欄位。然後，在欄位的<code translate="no">struct_schema</code> 屬性中引用 Struct 結構描述。</p></li>
+<li><p>將欄位新增為集合模式中的 Array 欄位時，設定欄位的資料類型為<code translate="no">DataType.ARRAY</code> 。</p></li>
+<li><p>設定欄位的<code translate="no">element_type</code> 屬性為<code translate="no">DataType.STRUCT</code> ，使該欄位成為 Struct Array。</p></li>
+<li><p>建立 Struct 結構描述，並包含所需欄位。然後，在欄位的<code translate="no">struct_schema</code> 屬性中引用 Struct 結構模式。</p></li>
 <li><p>設定欄位的<code translate="no">max_capacity</code> 屬性為適當的值，以指定每個實體在此欄位中可包含的最大 Struct 數量。</p></li>
 <li><p><strong>(可選</strong>）您可以為 Struct 元素中的任何欄位設定<code translate="no">mmap.enabled</code> ，以平衡 Struct 中的冷熱資料。</p></li>
 </ol>
-<p>以下是您如何定義包含 Array of Structs 的集合模式：</p>
+<p>以下是您如何定義包含 StructArray 欄位的集合模式：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -357,7 +388,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上述程式碼範例中高亮顯示的幾行說明了在集合模式中包含 Structs 陣列的程序。</p>
+<p>上面程式碼範例中高亮顯示的幾行說明如何在集合模式中包含 StructArray。</p>
 <h2 id="Set-index-params" class="common-anchor-header">設定索引參數<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -374,8 +405,23 @@ SCHEMA=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h2><p>所有向量欄位都必須設定索引，包括集合中的向量欄位和元素 Struct 中定義的向量欄位。</p>
-<p>適用的索引參數會依據使用中的索引類型而有所不同。有關適用索引參數的詳細資訊，請參閱<a href="/docs/zh-hant/index-explained.md">Index Explained</a>以及特定於您所選索引類型的說明文件頁面。</p>
-<p>若要為嵌入式清單建立索引，您需要將其索引類型設定為<code translate="no">AUTOINDEX</code> 或<code translate="no">HNSW</code> ，並使用<code translate="no">MAX_SIM_COSINE</code> 作為 Milvus 的度量類型，以衡量嵌入式清單之間的相似性。</p>
+<p>適用的索引參數因索引類型而異。有關適用索引參數的詳細資訊，請參閱<a href="/docs/zh-hant/index-explained.md">Index Explained</a>以及所選索引類型的說明文件。</p>
+<h3 id="Index-an-embedding-list" class="common-anchor-header">為嵌入式清單建立索引<button data-href="#Index-an-embedding-list" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>若要為嵌入式清單建立索引，您需要將其索引類型設定為<code translate="no">AUTOINDEX</code> 或上述任何適用的索引類型，並使用 Milvus 列出的度量類型來衡量嵌入式清單之間的相似性。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index parameters</span>
@@ -445,6 +491,48 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
   }
 ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h3 id="Index-a-scalar-struct-sub-field" class="common-anchor-header">索引標量結構子字段<button data-href="#Index-a-scalar-struct-sub-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>當您在標量 struct 子字段上建立索引時，Milvus 實際上是在<strong>元素層級</strong>建立索引，而不是在行層級，以加速標量篩選。</p>
+<p>下面的程式碼片段在一個名為<code translate="no">chunks[text]</code> 的標量 struct 子字段上建立索引。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">index_params.add_index(
+    field_name=<span class="hljs-string">&quot;chunks[text]&quot;</span>,
+    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;chunks[text]&quot;</span>)
+        .indexType(IndexParam.IndexType.INVERTED)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">indexParams.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;chunks[text]&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;INVERTED&quot;</span>
+})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">INDEX_PARAMS += <span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;chunks[text]&quot;,
+    &quot;indexName&quot;: &quot;chunks_text_vector_index&quot;,
+    &quot;indexType&quot;: &quot;INVERTED&quot;
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Create-a-collection" class="common-anchor-header">建立集合<button data-href="#Create-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -460,7 +548,7 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦模式和索引準備就緒，您就可以建立一個包含 Array of Structs 欄位的集合。</p>
+    </button></h2><p>一旦模式和索引準備就緒，您就可以建立一個包含 StructArray 欄位的集合。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -469,14 +557,7 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
-<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
-
-<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
-        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
-        .build());
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -488,7 +569,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">createCollection</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;books&quot;</span>,
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
   <span class="hljs-attr">fields</span>: schema,
   <span class="hljs-attr">indexes</span>: indexParams,
 });
@@ -518,7 +599,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>建立資料集後，您可以插入包含 Structs 陣列的資料，如下所示。</p>
+    </button></h2><p>建立集合後，您可以插入包含 Structs 陣列的資料，如下所示。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
@@ -717,7 +798,7 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
 client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h2 id="Vector-search-against-an-Array-of-Structs-field" class="common-anchor-header">針對 Structs 陣列欄位進行向量搜尋<button data-href="#Vector-search-against-an-Array-of-Structs-field" class="anchor-icon" translate="no">
+<h2 id="Vector-search-in-a-StructArray-field" class="common-anchor-header">在 StructArray 欄位中執行向量搜尋<button data-href="#Vector-search-in-a-StructArray-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -732,10 +813,10 @@ client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以對集合的向量欄位以及 Array of Structs 中的向量欄位執行向量搜尋。</p>
-<p>具體來說，你應該把 Array of Structs 欄位的名稱和 Struct 元素中目標向量欄位的名稱串連起來，作為搜尋請求中<code translate="no">anns_field</code> 參數的值，並使用<code translate="no">EmbeddingList</code> 來整齊地組織查詢向量。</p>
+    </button></h2><p>您可以在集合的向量欄位和 StructArray 中執行向量搜尋。</p>
+<p>具體來說，你應該把 StructArray 欄位的名稱和 Struct 元素中目標向量欄位的名稱串連起來，作為搜尋請求中<code translate="no">anns_field</code> 參數的值，並使用<code translate="no">EmbeddingList</code> 來整齊地組織查詢向量。</p>
 <div class="alert note">
-<p>Milvus 提供了<code translate="no">EmbeddingList</code> 來幫助您更整齊地組織查詢向量，以便針對 Array of Structs 中的嵌入清單進行搜尋。每個<code translate="no">EmbeddingList</code> 至少包含一個向量嵌入，並期望返回 topK 實體的數量。</p>
+<p>Milvus 提供<code translate="no">EmbeddingList</code> 來幫助您更整齊地組織對 StructArray 中的 embedding list 進行搜尋的查詢向量。每個<code translate="no">EmbeddingList</code> 至少包含一個向量嵌入，並期望回傳一些 topK 實體。</p>
 <p>然而，<code translate="no">EmbeddingList</code> 只能用於沒有範圍搜尋或群組搜尋參數的<code translate="no">search()</code> 請求，更不用說<code translate="no">search_iterator()</code> 請求了。</p>
 </div>
 <div class="multipleCode">
@@ -994,7 +1075,77 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>在上述程式碼範例中，<code translate="no">embeddingList1</code> 是一個向量的嵌入清單，而<code translate="no">embeddingList2</code> 則包含兩個向量。每個都會觸發單獨的搜尋請求，並期望得到前 K 個最相似的實體清單。</p>
+<p>在上述程式碼範例中，<code translate="no">embeddingList1</code> 是一個向量的嵌入清單，而<code translate="no">embeddingList2</code> 則包含兩個向量。每個都會觸發單獨的搜尋請求，並期望得到 TOP-K 類似實體的清單。</p>
+<h2 id="Scalar-filtering-in-a-StructArray-field" class="common-anchor-header">在 StructArray 欄位中進行標量篩選<button data-href="#Scalar-filtering-in-a-StructArray-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>您可以使用<strong>match 系列中的</strong> <strong>元素篩選器</strong>和<strong>運算符號</strong>，針對 StructArray 中的標量子欄位進行標量篩選。有關上述兩種運算子類型的詳細資訊和範例，請參閱<a href="/docs/zh-hant/struct-array-operators.md">Array of Structs Operators</a>。</p>
+<h3 id="Element-filters" class="common-anchor-header">元素篩選<button data-href="#Element-filters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>這是一種實體層級的篩選器，可檢查實體的 StructArray 欄位中是否至少有一個元素滿足謂詞（predicate）。例如，以下元素篩選器會返回<code translate="no">text</code> 子欄位中至少包含一個以 "Red "開頭的 chunk 的實體。</p>
+<pre><code translate="no" class="language-python">element_filter(chunks, $[text] LIKE <span class="hljs-string">&quot;Red%&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<p>您可以在謂語中使用幾乎所有的比較、範圍和算術運算子，謂語會針對每個元素進行評估，邏輯運算子可用於結合同一元素上的多個條件。詳情請參閱<a href="/docs/zh-hant/basic-operators.md">基本運算符</a>。</p>
+<p>如果篩選搜尋或查詢請求中有多個標量篩選表達式，請將元素篩選表達式放在所有實體層級篩選表達式之後，如下所示。</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># correct</span>
+<span class="hljs-built_in">id</span> &gt; <span class="hljs-number">0</span> &amp;&amp; element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>)
+
+<span class="hljs-comment"># incorrect, resulting errors</span>
+element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; <span class="hljs-built_in">id</span> &gt; <span class="hljs-number">0</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Match-family-operators" class="common-anchor-header">匹配族運算元<button data-href="#Match-family-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>匹配族運算元也可以在 StructArray 欄位上運作。與其簡單地檢查元素是否存在，您可以決定有多少個元素（或多大比例）必須滿足元素謂語。</p>
+<ul>
+<li><p><code translate="no">MATCH_ANY(chunks, $[text] LIKE &quot;Red%&quot;)</code></p>
+<p>這會返回在<code translate="no">text</code> 子欄位中至少包含一個以 "Red" 開頭的 chunk 的實體；在語義上，這等同於<code translate="no">element_filter</code> 。</p></li>
+<li><p><code translate="no">MATCH_ALL(chunks, $[text] LIKE &quot;Red%&quot;)</code></p>
+<p>這會傳回所有資料塊中文字子欄位都以 "Red" 開頭的實體。</p></li>
+<li><p><code translate="no">MATCH_LEAST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
+<p>這會傳回至少包含<code translate="no">k</code> chunks 的實體，這些 chunks 在<code translate="no">text</code> 子字段中以「Red」開頭。</p></li>
+<li><p><code translate="no">MATCH_MOST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
+<p>這會傳回在<code translate="no">text</code> 子欄位中最多包含以「Red」開頭的<code translate="no">k</code> 元組的實體。</p></li>
+<li><p><code translate="no">MATCH_EXACT(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
+<p>這會傳回在<code translate="no">text</code> 子字段中正好包含以「紅色」開頭的<code translate="no">k</code> 元組的實體。</p></li>
+</ul>
 <h2 id="Next-steps" class="common-anchor-header">下一步<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1010,4 +1161,4 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>原生 Array of Structs 資料類型的開發，代表 Milvus 處理複雜資料結構能力的一大進步。為了更好地瞭解其使用案例並最大化這項新功能，我們鼓勵您閱讀「<a href="/docs/zh-hant/best-practices-for-array-of-structs.md">使用結構陣列的模式設計</a>」。</p>
+    </button></h2><p>本機 StructArray 資料類型的開發代表 Milvus 處理複雜資料結構能力的一大進步。為了更好地理解它的用例和最大限度地利用這個新功能，我們鼓勵您閱讀《<a href="/docs/zh-hant/best-practices-for-array-of-structs.md">使用結構陣列的模式設計》（Schema Design Using an Array of Structs</a>）。</p>

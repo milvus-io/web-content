@@ -22,7 +22,7 @@ summary: 在 Milvus 中，VARCHAR 是用來儲存字串資料的資料類型。
 <p>當您定義<code translate="no">VARCHAR</code> 欄位時，有兩個參數是必須的：</p>
 <ul>
 <li><p>設定<code translate="no">datatype</code> 為<code translate="no">DataType.VARCHAR</code> 。</p></li>
-<li><p>指定<code translate="no">max_length</code>, 定義<code translate="no">VARCHAR</code> 欄位可儲存的最大位元組數。<code translate="no">max_length</code> 的有效範圍是 1 到 65,535 。</p></li>
+<li><p>指定<code translate="no">max_length</code>, 定義<code translate="no">VARCHAR</code> 欄位可儲存的最大位元組數。<code translate="no">max_length</code> 的有效範圍從 1 到 65,535 不等。</p></li>
 </ul>
 <div class="alert note">
 <p>Milvus 支援<code translate="no">VARCHAR</code> 欄位的空值和預設值。若要啟用這些功能，請將<code translate="no">nullable</code> 設為<code translate="no">True</code> ，並將<code translate="no">default_value</code> 設為字串值。如需詳細資訊，請參閱<a href="/docs/zh-hant/nullable-and-default.md">Nullable &amp; Default</a>。</p>

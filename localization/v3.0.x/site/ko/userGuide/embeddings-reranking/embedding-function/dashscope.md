@@ -62,7 +62,7 @@ beta: Milvus 2.6.x
      <td><p>중국어, 영어, 스페인어, 프랑스어, 포르투갈어, 인도네시아어, 일본어, 한국어, 독일어, 러시아어, 터키어</p></td>
    </tr>
 </table>
-<p>임베딩 모델 <strong>텍스트 임베딩-v3는</strong> <code translate="no">dim</code> 파라미터를 통해 임베딩 크기 축소를 지원합니다. 일반적으로 임베딩 크기가 클수록 컴퓨팅, 메모리, 스토리지 측면에서 비용이 더 많이 듭니다. 치수 수를 조정할 수 있으면 전체 비용과 성능을 더 잘 제어할 수 있습니다. 각 모델에 대한 자세한 내용은 <a href="https://help.aliyun.com/zh/model-studio/user-guide/embedding?disableWebsiteRedirect=true">임베딩을</a> 참조하세요.</p>
+<p>임베딩 모델 <strong>텍스트 임베딩-v3는</strong> <code translate="no">dim</code> 파라미터를 통해 임베딩 크기 축소를 지원합니다. 일반적으로 임베딩 크기가 클수록 컴퓨팅, 메모리, 스토리지 측면에서 비용이 많이 듭니다. 치수 수를 조정할 수 있으면 전체 비용과 성능을 더 잘 제어할 수 있습니다. 각 모델에 대한 자세한 내용은 <a href="https://help.aliyun.com/zh/model-studio/user-guide/embedding?disableWebsiteRedirect=true">임베딩을</a> 참조하세요.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">자격 증명 구성<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -102,7 +102,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>API 키를 <code translate="no">milvus.yaml</code>; Milvus는 시작 시 키를 읽고 동일한 공급자에 대한 모든 환경 변수를 재정의합니다.</p>
+    </button></h3><p>API 키를 <code translate="no">milvus.yaml</code>; Milvus는 시작 시 해당 키를 읽고 동일한 공급자에 대한 모든 환경 변수를 재정의합니다.</p>
 <ol>
 <li><p>**아래에 키를 선언하세요. <code translate="no">credential:</code></p>
 <p>하나 또는 여러 개의 API 키를 나열할 수 있으며, 각 키에 나중에 참조할 레이블을 지정할 수 있습니다.</p>

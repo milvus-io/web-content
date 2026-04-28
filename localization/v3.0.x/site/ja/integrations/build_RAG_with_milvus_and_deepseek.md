@@ -172,9 +172,9 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <blockquote>
 <p><code translate="no">MilvusClient</code> の引数として， を指定する．</p>
 <ul>
-<li><code translate="no">./milvus.db</code> のように、<code translate="no">uri</code> をローカルファイルとして設定する方法は、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteを</a>自動的に利用して、すべてのデータをこのファイルに格納することができるため、最も便利な方法です。</li>
+<li><code translate="no">./milvus.db</code> のように、<code translate="no">uri</code> をローカルファイルとして設定しておくと、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteを</a>自動的に利用して、すべてのデータをこのファイルに格納することができるので、最も便利な方法です。</li>
 <li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、<code translate="no">http://localhost:19530</code> などのサーバ uri を<code translate="no">uri</code> として使用してください。</li>
-<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>使用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
+<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </blockquote>
 <p>コレクションが既に存在するか確認し、存在する場合は削除します。</p>

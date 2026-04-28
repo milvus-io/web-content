@@ -108,7 +108,7 @@ fmt.Println(collectionNames)
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>すでに<code translate="no">quick_setup</code> という名前のコレクションを作成している場合、上記の例の結果は以下のようになるはずです。</p>
+<p><code translate="no">quick_setup</code> という名前のコレクションを既に作成している場合、上記の例の結果は以下のようになるはずです。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span><span class="hljs-string">&quot;quick_setup&quot;</span><span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Describe-Collection" class="common-anchor-header">コレクションの記述<button data-href="#Describe-Collection" class="anchor-icon" translate="no">

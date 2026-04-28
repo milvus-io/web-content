@@ -1,7 +1,9 @@
 ---
 id: disk_index.md
 related_key: disk_index
-summary: Mecanismo de índice de disco en Milvus.
+summary: >-
+  Mecanismo de índice de disco en Milvus para la búsqueda vectorial optimizada
+  en disco.
 title: Índice en disco
 ---
 <h1 id="On-disk-Index" class="common-anchor-header">Índice en disco<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
@@ -19,8 +21,8 @@ title: Índice en disco
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este artículo presenta un algoritmo de indexación en disco llamado DiskANN. Basado en gráficos Vamana, DiskANN permite realizar búsquedas eficaces en grandes conjuntos de datos.</p>
-<p>Para mejorar el rendimiento de las consultas, puede <a href="/docs/es/index-vector-fields.md">especificar un tipo de índice</a> para cada campo vectorial.</p>
+    </button></h1><p>Este artículo presenta DiskANN, un algoritmo de indexación en disco para búsquedas vectoriales optimizadas. Basado en gráficos Vamana, DiskANN permite realizar búsquedas vectoriales eficientes en disco en grandes conjuntos de datos.</p>
+<p>Para mejorar el rendimiento de las consultas, se puede <a href="/docs/es/index-vector-fields.md">especificar un tipo de índice</a> para cada campo vectorial.</p>
 <div class="alert note"> 
 Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina automáticamente el índice antiguo al cambiar el tipo de índice.</div>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -38,14 +40,10 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para utilizar DiskANN, tenga en cuenta que</p>
+    </button></h2><p>Para utilizar DiskANN en Milvus, tenga en cuenta que</p>
 <ul>
-<li>DiskANN está desactivado por defecto. Si prefiere el índice en memoria al índice en disco, se recomienda desactivar esta función para obtener un mejor rendimiento.<ul>
-<li>Para desactivarla, puede cambiar <code translate="no">queryNode.enableDisk</code> a <code translate="no">false</code> en su archivo de configuración de milvus.</li>
-<li>Para habilitarla de nuevo, puede cambiar <code translate="no">queryNode.enableDisk</code> por <code translate="no">true</code>.</li>
-</ul></li>
-<li>La instancia de Milvus funciona en Ubuntu 18.04.6 o una versión posterior.</li>
-<li>La ruta de datos de Milvus debería montarse en un SSD NVMe para un rendimiento completo:<ul>
+<li>La instancia de Milvus se ejecuta en Ubuntu 18.04.6 o una versión posterior.</li>
+<li>La ruta de datos de Milvus debe montarse en una SSD NVMe para un rendimiento completo:<ul>
 <li>Para una instancia Milvus Standalone, la ruta de datos debe ser <strong>/var/lib/milvus/data</strong> en el contenedor donde se ejecuta la instancia.</li>
 <li>Para una instancia Milvus Cluster, la ruta de datos debe ser <strong>/var/lib/milvus/data</strong> en los contenedores donde se ejecutan los QueryNodes y los IndexNodes.</li>
 </ul></li>
@@ -119,7 +117,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 <span class="hljs-attr">DiskIndex:</span>
   <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
   <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
-  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">PQCodeBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
 <span class="hljs-string">...</span>
@@ -131,7 +129,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 <tbody>
 <tr><td><code translate="no">MaxDegree</code></td><td>Grado máximo del gráfico Vamana. <br/> Un valor mayor ofrece una mayor tasa de recuperación, pero aumenta el tamaño y el tiempo de construcción del índice.</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>Tamaño de la lista de candidatos. <br/> Un valor mayor incrementa el tiempo empleado en construir el índice pero ofrece una mayor tasa de recuperación. <br/> Ajústalo a un valor menor que <code translate="no">MaxDegree</code> a menos que necesites reducir el tiempo de construcción del índice.</td><td>[1, int32_max]</td><td>100</td></tr>
-<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Límite de tamaño del código PQ. <br/> Un valor mayor ofrece una mayor tasa de recuperación, pero aumenta el uso de memoria.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
+<tr><td><code translate="no">PQCodeBudgetGBRatio</code></td><td>Límite de tamaño del código PQ. <br/> Un valor mayor ofrece una mayor tasa de recuperación, pero aumenta el uso de memoria.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Relación entre los números de los nodos almacenados en caché y los datos sin procesar. <br/> Un valor mayor mejora el rendimiento de la creación de índices, pero aumenta el uso de memoria.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>Relación entre el número máximo de peticiones IO por iteración de búsqueda y el número de CPU.</td><td>[1, max(128 / número de CPU, 16)]</td><td>4.0</td></tr>
 </tbody>

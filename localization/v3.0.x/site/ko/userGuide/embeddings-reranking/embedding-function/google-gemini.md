@@ -55,7 +55,7 @@ summary: 모델을 선택하고 Gemini API 키로 Milvus를 구성하여 Google 
      <td><p>통합된 임베딩 공간에서 텍스트, 이미지, 동영상, 오디오 및 문서를 지원하는 Google 최초의 네이티브 멀티모달 임베딩 모델입니다.</p></td>
    </tr>
 </table>
-<p>두 모델 모두 <code translate="no">dim</code> 매개변수를 통해 유연한 출력 차원을 허용하는 Matryoshka 표현 학습(MRL) 기법을 사용하여 학습됩니다. 768개 차원으로 시작하여 필요한 경우 1,536개 또는 3,072개까지 확장하는 것이 좋습니다. 자세한 내용은 <a href="https://ai.google.dev/gemini-api/docs/embeddings">Gemini 임베딩 모델을</a> 참조하세요.</p>
+<p>두 모델 모두 <code translate="no">dim</code> 매개변수를 통해 유연한 출력 크기를 허용하는 마트로시카 표현 학습(MRL) 기법을 사용하여 학습됩니다. 768개 차원으로 시작하여 필요한 경우 1,536개 또는 3,072개까지 확장하는 것이 좋습니다. 자세한 내용은 <a href="https://ai.google.dev/gemini-api/docs/embeddings">Gemini 임베딩 모델을</a> 참조하세요.</p>
 <p>Gemini 임베딩 모델은 특정 사용 사례에 맞게 임베딩을 최적화하는 <strong>작업 유형</strong> 파라미터도 지원합니다. Milvus는 작업에 따라 작업 유형을 자동으로 설정합니다:</p>
 <ul>
 <li><p><strong>삽입/삽입</strong>: <code translate="no">RETRIEVAL_DOCUMENT</code></p></li>
@@ -99,7 +99,7 @@ summary: 모델을 선택하고 Gemini API 키로 Milvus를 구성하여 Google 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>API 키를 <code translate="no">milvus.yaml</code>; Milvus는 시작 시 키를 읽고 동일한 공급자에 대한 모든 환경 변수를 재정의합니다.</p>
+    </button></h3><p>API 키를 <code translate="no">milvus.yaml</code>; Milvus는 시작 시 이 키를 읽고 동일한 공급자에 대한 모든 환경 변수를 재정의합니다.</p>
 <ol>
 <li><p><strong>자격 증명 아래에 키를 선언하세요:</strong></p>
 <p>하나 또는 여러 개의 API 키를 나열할 수 있으며, 각 키에 나중에 참조할 레이블을 지정할 수 있습니다.</p>
@@ -305,7 +305,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>이제 정의한 스키마와 인덱스 매개변수를 사용하여 컬렉션을 생성합니다.</p>
+    </button></h3><p>이제 정의한 스키마 및 인덱스 매개변수를 사용하여 컬렉션을 생성합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create collection named &quot;demo&quot;</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 

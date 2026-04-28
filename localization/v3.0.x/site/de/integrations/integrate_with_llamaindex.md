@@ -167,7 +167,7 @@ documents = SimpleDirectoryReader(
 <h4 id="basic-args" class="common-anchor-header">Grundargumente</h4><ul>
 <li><code translate="no">uri (str, optional)</code>: Die URI, zu der eine Verbindung hergestellt werden soll, kommt in Form von "https://address:port" für Milvus oder Zilliz Cloud Service, oder "path/to/local/milvus.db" für das lite local Milvus. Die Standardeinstellung ist "./milvus_llamaindex.db".</li>
 <li><code translate="no">token (str, optional)</code>: Das Token für den Log-In. Leer, wenn kein rbac verwendet wird. Wenn rbac verwendet wird, wird es wahrscheinlich "username:password" sein.</li>
-<li><code translate="no">collection_name (str, optional)</code>: Der Name der Sammlung, in der die Daten gespeichert werden sollen. Der Standardwert ist "llamalection".</li>
+<li><code translate="no">collection_name (str, optional)</code>: Der Name der Sammlung, in der die Daten gespeichert werden sollen. Standardwert ist "llamalection".</li>
 <li><code translate="no">overwrite (bool, optional)</code>: Ob eine bestehende Sammlung mit demselben Namen überschrieben werden soll. Der Standardwert ist False.</li>
 </ul>
 <h4 id="scalar-fields-including-doc-id--text" class="common-anchor-header">skalare Felder einschließlich doc id &amp; text</h4><ul>
@@ -177,7 +177,7 @@ documents = SimpleDirectoryReader(
 <li><code translate="no">scalar_field_types (list, optional)</code>: Die Typen der zusätzlichen skalaren Felder.</li>
 </ul>
 <h4 id="dense-field" class="common-anchor-header">dichtes Feld</h4><ul>
-<li><code translate="no">enable_dense (bool)</code>: Ein boolesches Flag zum Aktivieren oder Deaktivieren der dichten Einbettung. Die Voreinstellung ist True.</li>
+<li><code translate="no">enable_dense (bool)</code>: Ein boolesches Flag zum Aktivieren oder Deaktivieren der dichten Einbettung. Der Standardwert ist True.</li>
 <li><code translate="no">dim (int, optional)</code>: Die Dimension der Einbettungsvektoren für die Sammlung. Erforderlich bei der Erstellung einer neuen Sammlung mit enable_sparse ist False.</li>
 <li><code translate="no">embedding_field (str, optional)</code>: Name des dichten Einbettungsfeldes für die Sammlung, Standardwert ist DEFAULT_EMBEDDING_KEY.</li>
 <li><code translate="no">index_config (dict, optional)</code>: Die für die Erstellung des Dense Embedding Index verwendete Konfiguration. Der Standardwert ist None.</li>
@@ -199,7 +199,7 @@ documents = SimpleDirectoryReader(
 </ul></li>
 <li>Für "WeightedRanker" wird erwartet:<ul>
 <li>"Gewichte" (Liste von Floats): Eine Liste mit genau zwei Gewichten:<ol>
-<li>Die Gewichtung für die dichte Einbettungskomponente.</li>
+<li>Das Gewicht für die dichte Einbettungskomponente.</li>
 <li>Die Gewichtung für die spärliche Einbettungskomponente. Diese Gewichte werden verwendet, um die Wichtigkeit der dichten und spärlichen Komponenten der Einbettungen im hybriden Retrievalprozess anzupassen. Der Standardwert ist ein leeres Wörterbuch, was bedeutet, dass der Ranker mit seinen vordefinierten Standardeinstellungen arbeitet.</li>
 </ol></li>
 </ul></li>
@@ -207,7 +207,7 @@ documents = SimpleDirectoryReader(
 </ul>
 <h4 id="others" class="common-anchor-header">andere</h4><ul>
 <li><code translate="no">collection_properties (dict, optional)</code>: Die Eigenschaften der Sammlung wie TTL (Time-To-Live) und MMAP (Memory Mapping). Die Standardeinstellung ist Keine. Sie könnte enthalten:<ul>
-<li>"collection.ttl.seconds" (int): Sobald diese Eigenschaft gesetzt ist, laufen die Daten in der aktuellen Sammlung nach der angegebenen Zeit ab. Abgelaufene Daten in der Sammlung werden bereinigt und nicht in Suchvorgänge oder Abfragen einbezogen.</li>
+<li>"collection.ttl.seconds" (int): Sobald diese Eigenschaft gesetzt ist, laufen die Daten in der aktuellen Sammlung nach der angegebenen Zeit ab. Abgelaufene Daten in der Sammlung werden aufgeräumt und nicht in Suchvorgänge oder Abfragen einbezogen.</li>
 <li>"mmap.enabled" (bool): Ob die Memory-Mapped-Speicherung auf der Ebene der Sammlung aktiviert werden soll.</li>
 </ul></li>
 <li><code translate="no">index_management (IndexManagement)</code>: Gibt die zu verwendende Indexverwaltungsstrategie an. Der Standardwert ist "create_if_not_exists".</li>

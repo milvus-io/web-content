@@ -177,13 +177,13 @@ res = MilvusClient.search(
      <td><p><code translate="no">nlist</code></p></td>
      <td><p>클러스터 단위 수</p></td>
      <td><p>[1, 65536]</p></td>
-     <td><p><em>nlist가</em> 높을수록 가지 치기 효율이 높아지고 일반적으로 거친 검색 속도가 빨라지지만 파티션이 너무 작아져 회상률이 떨어질 수 있으며, <em>nlist가</em> 낮을수록 더 큰 클러스터를 스캔하여 회상률은 향상되지만 검색 속도가 느려질 수 있습니다.</p></td>
+     <td><p><em>nlist가</em> 높을수록 가지 치기 효율이 높아지고 일반적으로 거친 검색 속도가 빨라지지만 파티션이 너무 작아져 회상률이 떨어질 수 있으며, <em>nlist가</em> 낮을수록 더 큰 클러스터를 스캔하여 회상률이 향상되지만 검색 속도가 느려질 수 있습니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">with_raw_data</code></p></td>
      <td><p>양자화된 표현과 함께 원본 벡터 데이터를 저장할지 여부입니다. 활성화하면 양자화된 근사치 대신 원본 벡터를 사용하여 순위 재지정 단계에서 보다 정확한 유사도 계산을 할 수 있습니다.</p></td>
      <td><p><strong>유형</strong>: 부울</p><p><strong>범위</strong> <code translate="no">true</code>, <code translate="no">false</code></p><p><strong>기본값입니다</strong>: <code translate="no">true</code></p></td>
-     <td><p><strong>검색 정확도를 높이고</strong> 저장 공간이 크게 중요하지 않은 경우 <code translate="no">true</code> 로 설정합니다. 원본 벡터 데이터를 사용하면 순위를 재조정하는 동안 보다 정확한 유사도 계산이 가능합니다.</p><p>특히 대규모 데이터 세트의 경우 <strong>스토리지 오버헤드와</strong> 메모리 사용량을 <strong>줄이려면</strong> <code translate="no">false</code> 으로 설정합니다. 그러나 순위 재지정 단계에서 양자화된 벡터를 사용하므로 검색 정확도가 약간 낮아질 수 있습니다.</p><p><strong>권장</strong>: 정확도가 중요한 프로덕션 애플리케이션에서는 <code translate="no">true</code> 을 사용하세요.</p></td>
+     <td><p><strong>검색 정확도를 높이고</strong> 저장 공간이 크게 중요하지 않은 경우 <code translate="no">true</code> 로 설정합니다. 원본 벡터 데이터를 사용하면 순위를 재조정하는 동안 보다 정확한 유사도 계산이 가능합니다.</p><p>특히 대용량 데이터 세트의 경우 <strong>스토리지 오버헤드와</strong> 메모리 사용량을 <strong>줄이려면</strong> <code translate="no">false</code> 으로 설정합니다. 그러나 순위 재지정 단계에서 양자화된 벡터를 사용하므로 검색 정확도가 약간 낮아질 수 있습니다.</p><p><strong>권장</strong>: 정확도가 중요한 프로덕션 애플리케이션에서는 <code translate="no">true</code> 을 사용하세요.</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">색인별 검색 매개변수<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
@@ -212,8 +212,8 @@ res = MilvusClient.search(
    <tr>
      <td><p><code translate="no">reorder_k</code></p></td>
      <td><p>순위 재조정 단계에서 정제되는 후보 벡터의 수를 제어합니다. 이 매개변수는 초기 파티셔닝 및 양자화 단계에서 보다 정밀한 유사도 계산을 사용하여 재평가할 상위 후보 벡터의 수를 결정합니다.</p></td>
-     <td><p><strong>유형</strong>: 유형: 정수</p><p><strong>범위</strong>: [1, <em>int_max</em>]</p><p><strong>기본값</strong>: None</p></td>
-     <td><p><code translate="no">reorder_k</code> 이 클수록 일반적으로 최종 구체화 단계에서 더 많은 후보를 고려하므로 <strong>검색 정확도가 높아집니다</strong>. 그러나 추가 계산으로 인해 <strong>검색 시간도 늘어납니다</strong>.</p><p>높은 회상률을 달성하는 것이 중요하고 검색 속도는 크게 신경 쓰지 않는 경우 <code translate="no">reorder_k</code> 을 늘리는 것을 고려하세요. 원하는 <code translate="no">limit</code> (반환할 TopK 결과)의 2~5배가 좋은 시작점입니다.</p><p>특히 약간의 정확도 저하를 감수할 수 있는 시나리오에서는 <code translate="no">reorder_k</code> 을 줄여 더 빠른 검색을 우선시하는 것을 고려하세요.</p><p>대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다:<em>[제한</em>, <em>제한</em> * 5].</p></td>
+     <td><p><strong>유형</strong>: 정수</p><p><strong>범위</strong>: [1, <em>int_max</em>]</p><p><strong>기본값</strong>: None</p></td>
+     <td><p><code translate="no">reorder_k</code> 이 클수록 일반적으로 최종 구체화 단계에서 더 많은 후보를 고려하므로 <strong>검색 정확도가 높아집니다</strong>. 그러나 추가 계산으로 인해 <strong>검색 시간도 늘어납니다</strong>.</p><p>높은 회상률을 달성하는 것이 중요하고 검색 속도는 크게 신경 쓰지 않는 경우에는 <code translate="no">reorder_k</code> 을 늘리는 것을 고려하세요. 원하는 <code translate="no">limit</code> (반환할 TopK 결과)의 2~5배가 좋은 시작점입니다.</p><p>특히 약간의 정확도 저하를 감수할 수 있는 시나리오에서는 <code translate="no">reorder_k</code> 을 줄여 더 빠른 검색을 우선시하는 것을 고려하세요.</p><p>대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다:<em>[제한</em>, <em>제한</em> * 5].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">nprobe</code></p></td>

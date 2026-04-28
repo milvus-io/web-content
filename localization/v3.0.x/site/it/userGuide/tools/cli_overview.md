@@ -48,7 +48,7 @@ title: Interfaccia a riga di comando Milvus
 <tr><td style="text-align:center">2.0.0-RC1</td><td style="text-align:center">2.0.0-RC1</td><td style="text-align:center">x</td></tr>
 <tr><td style="text-align:center">2.0.0-RC2</td><td style="text-align:center">2.0.0rc2</td><td style="text-align:center">0.1.3</td></tr>
 <tr><td style="text-align:center">2.0.0-RC4</td><td style="text-align:center">2.0.0-RC4</td><td style="text-align:center">0.1.4</td></tr>
-<tr><td style="text-align:center">2.0.0-RC5</td><td style="text-align:center">2.0.0-RC5</td><td style="text-align:center">0.1.5</td></tr>
+<tr><td style="text-align:center">2.0.0-RC5</td><td style="text-align:center">2.0.0rc5</td><td style="text-align:center">0.1.5</td></tr>
 <tr><td style="text-align:center">2.0.0-RC6</td><td style="text-align:center">2.0.0-RC6</td><td style="text-align:center">0.1.6</td></tr>
 <tr><td style="text-align:center">2.0.0-RC7</td><td style="text-align:center">2.0.0-RC7</td><td style="text-align:center">0.1.7</td></tr>
 <tr><td style="text-align:center">2.0.0-RC8</td><td style="text-align:center">2.0.0-RC8</td><td style="text-align:center">0.1.8</td></tr>
@@ -56,8 +56,9 @@ title: Interfaccia a riga di comando Milvus
 <tr><td style="text-align:center">2.1.0</td><td style="text-align:center">2.1.0</td><td style="text-align:center">0.3.0</td></tr>
 <tr><td style="text-align:center">2.2.x</td><td style="text-align:center">2.2.x</td><td style="text-align:center">0.4.0</td></tr>
 <tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.x</td><td style="text-align:center">0.4.2</td></tr>
-<tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.x</td><td style="text-align:center">1.0.0</td></tr>
 <tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.x</td><td style="text-align:center">1.0.1</td></tr>
+<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">2.5.x</td><td style="text-align:center">1.0.2</td></tr>
+<tr><td style="text-align:center">2.6.x</td><td style="text-align:center">2.6.x</td><td style="text-align:center">1.2.1</td></tr>
 </tbody>
 </table>
 <div class="alert note">Milvus 2.0.0-RC7 e successive non sono retrocompatibili con 2.0.0-RC6 e precedenti a causa delle modifiche apportate ai formati di memorizzazione.</div>
@@ -76,4 +77,4 @@ title: Interfaccia a riga di comando Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La versione attuale di Milvus_CLI è 1.0.1. Per trovare la versione installata e verificare se è necessario aggiornarla, eseguire <code translate="no">milvus_cli --version</code>.</p>
+    </button></h2><p>La versione attuale di Milvus_CLI è 1.2.1. Per trovare la versione installata e verificare se è necessario aggiornarla, eseguire <code translate="no">milvus_cli --version</code>.</p>

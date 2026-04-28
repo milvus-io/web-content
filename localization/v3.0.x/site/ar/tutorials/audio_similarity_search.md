@@ -31,6 +31,6 @@ title: بحث تشابه الصوت
 <p>في هذا البرنامج التعليمي، سوف تتعلم كيفية بناء نظام بحث عن تشابه الصوت يمكنه إرجاع مقاطع صوتية متشابهة. يتم تحويل المقاطع الصوتية التي تم تحميلها إلى متجهات باستخدام PANNs. يتم تخزين هذه المتجهات في Milvus الذي يقوم تلقائيًا بإنشاء معرف فريد لكل متجه. بعد ذلك يمكن للمستخدمين إجراء بحث عن تشابه المتجهات في Milvus والاستعلام عن مسار بيانات المقطع الصوتي المطابق لمعرف المتجه الفريد الذي يُرجعه Milvus.</p>
 <p><br/></p>
 <p>
- <span class="img-wrapper"> <span> 
-   </span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/audio_search.png" alt="Audio_search" class="doc-image" id="audio_search" /></span> <span class="img-wrapper"> <span>
-    بح</span>ث_صوتي <img translate="no" src="/docs/v2.6.x/assets/audio_search_demo.png" alt="Audio_search_demo" class="doc-image" id="audio_search_demo" />بحث_صوتي <span>بحث_صوتي_عرضي</span> </span></p>
+  
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/audio_search.png" alt="Audio_search" class="doc-image" id="audio_search" />
+   </span> <span class="img-wrapper"> <span>بحث_صوتي</span> </span> <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/audio_search_demo.png" alt="Audio_search_demo" class="doc-image" id="audio_search_demo" /><span>بحث_صوتي</span> <span>بحث_صوتي_عرضي</span> </span></p>

@@ -24,11 +24,11 @@ summary: >-
     </button></h1><p><strong>Streaming Service</strong> - это концепция внутреннего модуля системы потоковой передачи данных Milvus, построенного на основе журнала записи вперед (WAL) для поддержки различных функций, связанных с потоковой передачей данных. К ним относятся вход/подписка потоковых данных, восстановление состояния кластера после сбоев, преобразование потоковых данных в исторические и запросы к растущим данным. Архитектурно служба потоковой передачи данных состоит из трех основных компонентов:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/streaming_distributed_arch.png" alt="Streaming Distributed Arc" class="doc-image" id="streaming-distributed-arc" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/streaming_distributed_arch.png" alt="Streaming Distributed Arc" class="doc-image" id="streaming-distributed-arc" />
    </span> <span class="img-wrapper"> <span>Распределенная потоковая дуга</span> </span></p>
 <ul>
 <li><p><strong>Координатор потоковой передачи</strong>: Логический компонент в узле координатора. Он использует Etcd для обнаружения сервисов, чтобы найти доступные потоковые узлы, и отвечает за привязку WAL к соответствующим потоковым узлам. Он также регистрирует сервис для отображения топологии распределения WAL, позволяя клиентам потоковой передачи узнать соответствующий узел потоковой передачи для данного WAL.</p></li>
-<li><p><strong>Кластер потоковых узлов</strong>: Кластер рабочих узлов потоковой обработки, отвечающий за все задачи потоковой обработки, такие как добавление WAL, восстановление состояния и запрос растущих данных.</p></li>
+<li><p><strong>Кластер потоковых узлов</strong>: Кластер рабочих узлов потоковой обработки, отвечающих за все задачи потоковой обработки, такие как добавление WAL, восстановление состояния и запрос растущих данных.</p></li>
 <li><p><strong>Потоковый клиент</strong>: Внутренне разработанный клиент Milvus, который инкапсулирует основные функции, такие как обнаружение сервисов и проверка готовности. Он используется для инициирования таких операций, как запись сообщений и подписка.</p></li>
 </ul>
 <h2 id="Message" class="common-anchor-header">Сообщение<button data-href="#Message" class="anchor-icon" translate="no">
@@ -54,7 +54,7 @@ summary: >-
 <p>Порядок сообщений в Milvus может выглядеть следующим образом:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/message_order.png" alt="Message Order" class="doc-image" id="message-order" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/message_order.png" alt="Message Order" class="doc-image" id="message-order" />
    </span> <span class="img-wrapper"> <span>Порядок сообщений</span> </span></p>
 <h2 id="WAL-Component" class="common-anchor-header">Компонент WAL<button data-href="#WAL-Component" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -102,7 +102,7 @@ summary: >-
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/recovery_storage.png" alt="Recovery Storage" class="doc-image" id="recovery-storage" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/recovery_storage.png" alt="Recovery Storage" class="doc-image" id="recovery-storage" />
    </span> <span class="img-wrapper"> <span>Хранилище восстановления</span> </span></p>
 <h2 id="Query-Delegator" class="common-anchor-header">Делегатор запросов<button data-href="#Query-Delegator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -140,7 +140,7 @@ summary: >-
     </button></h2><p>Отделяя вычислительные узлы от хранилища, Milvus может легко передавать WAL с одного потокового узла на другой, добиваясь высокой доступности потокового сервиса.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/wal_lifetime.png" alt="wal lifetime" class="doc-image" id="wal-lifetime" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/wal_lifetime.png" alt="wal lifetime" class="doc-image" id="wal-lifetime" />
    </span> <span class="img-wrapper"> <span>время жизни WAL</span> </span></p>
 <h2 id="Wait-for-Ready" class="common-anchor-header">Ожидание готовности<button data-href="#Wait-for-Ready" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -160,5 +160,5 @@ summary: >-
     </button></h2><p>Когда WAL будет перемещаться на новый потоковый узел, клиент обнаружит, что старый потоковый узел отклоняет некоторые запросы. Тем временем WAL будет восстановлен на новом потоковом узле, и клиент будет ждать, пока Wal на новом потоковом узле будет готов к обслуживанию.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/streaming_wait_for_ready.png" alt="wait for ready" class="doc-image" id="wait-for-ready" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/streaming_wait_for_ready.png" alt="wait for ready" class="doc-image" id="wait-for-ready" />
    </span> <span class="img-wrapper"> <span>ждать готовности</span> </span></p>

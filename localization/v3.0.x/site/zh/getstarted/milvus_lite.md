@@ -80,7 +80,7 @@ title: 本地运行 Milvus Lite
       </svg>
     </button></h2><pre><code translate="no" class="language-shell">pip install -U pymilvus[milvus-lite]
 <button class="copy-code-btn"></button></code></pre>
-<p>我们建议使用<code translate="no">pymilvus</code> 。你可以通过<code translate="no">pip install</code> 与<code translate="no">-U</code> 强制更新到最新版本，<code translate="no">milvus-lite</code> 将自动安装。</p>
+<p>我们建议使用<code translate="no">pymilvus</code> 。你可以通过<code translate="no">pip install</code> 与<code translate="no">-U</code> 强制更新到最新版本，<code translate="no">milvus-lite</code> 会自动安装。</p>
 <p>如果你想明确安装<code translate="no">milvus-lite</code> 软件包，或者你已经安装了旧版本的<code translate="no">milvus-lite</code> 并想更新它，可以使用<code translate="no">pip install -U milvus-lite</code> 。</p>
 <h2 id="Connect-to-Milvus-Lite" class="common-anchor-header">连接到 Milvus Lite<button data-href="#Connect-to-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -496,7 +496,7 @@ res = client.delete(
         ></path>
       </svg>
     </button></h2><p>所有存储在 Milvus Lite 中的数据都可以轻松导出并加载到其他类型的 Milvus 部署中，例如 Docker 上的 Milvus Standalone、K8s 上的 Milvus Distributed 或<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上的全托管 Milvus。</p>
-<p>Milvus Lite 提供了一个命令行工具，可以将数据转储到 json 文件中，该文件可以导入<a href="https://github.com/milvus-io/milvus">Milvus</a>和<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务）。milvus-lite 命令将与 milvus-lite python 软件包一起安装。</p>
+<p>Milvus Lite 提供了一个命令行工具，可以将数据转储到 json 文件，该文件可以导入<a href="https://github.com/milvus-io/milvus">Milvus</a>和<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全托管云服务）。milvus-lite 命令将与 milvus-lite python 软件包一起安装。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Install</span>
 pip install -U &quot;pymilvus[bulk_writer]&quot;
 

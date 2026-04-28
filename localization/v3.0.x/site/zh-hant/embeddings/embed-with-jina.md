@@ -21,7 +21,7 @@ title: Jina AI - 嵌入
       </svg>
     </button></h1><p>Jina AI 的嵌入模型是高性能的文字嵌入模型，可以將文字輸入轉換為數字表示，捕捉文字的語義。這些模型在密集檢索、語義文字相似性和多語言理解等應用中表現優異。</p>
 <p>Milvus 透過<code translate="no">JinaEmbeddingFunction</code> 類與 Jina AI 的嵌入模型整合。這個類別提供了使用 Jina AI 嵌入模型編碼文件和查詢的方法，並將嵌入作為與 Milvus 索引相容的密集向量傳回。若要使用此功能，請向<a href="https://jina.ai/embeddings/">Jina AI</a> 取得 API 金鑰。</p>
-<p>若要使用此功能，請安裝必要的相依性：</p>
+<p>要使用此功能，請安裝必要的相依性：</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -53,7 +53,7 @@ jina_ef = JinaEmbeddingFunction(
 <li><p><code translate="no">dimensions</code> <em>(int</em>)</p>
 <p>輸出嵌入結果的維數。預設為 1024。僅支援嵌入模型 v3 及更高版本。</p></li>
 <li><p><code translate="no">late_chunking</code> <em>(bool</em>)</p>
-<p>此參數控制是否使用<a href="https://arxiv.org/abs/2409.04701">Jina AI 上月推出的</a>新分塊方法來編碼一批句子。預設為<code translate="no">False</code> 。當設定為<code translate="no">True</code> 時，Jina AI API 會將輸入欄位中的所有句子串連起來，並以單一字串的方式送入模型。在內部，模型會嵌入這個長串連的字串，然後執行後期的分塊，並傳回一個與輸入清單大小相符的嵌入清單。</p></li>
+<p>此參數控制是否使用<a href="https://arxiv.org/abs/2409.04701">Jina AI 上月推出的</a>新分塊方法來編碼一批句子。預設為<code translate="no">False</code> 。當設定為<code translate="no">True</code> 時，Jina AI API 會串接輸入欄位中的所有句子，並以單一字串的方式送入模型。在內部，模型會嵌入這個長串連的字串，然後執行後期的分塊，並傳回一個與輸入清單大小相符的嵌入清單。</p></li>
 </ul>
 <p>若要為文件建立嵌入式資料，請使用<code translate="no">encode_documents()</code> 方法。此方法專為非對稱檢索任務中的文件嵌入而設計，例如為搜尋或推薦任務建立文件索引。此方法使用<code translate="no">retrieval.passage</code> 作為任務。</p>
 <pre><code translate="no" class="language-python:">

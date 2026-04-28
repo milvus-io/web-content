@@ -191,7 +191,7 @@ summary: Imparare a configurare tikv per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        dimensione del batch di scansione delle istantanee tikv    </td>
+      <td>        dimensione del batch di scansione dell'istantanea tikv    </td>
       <td>256</td>
     </tr>
   </tbody>

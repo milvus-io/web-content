@@ -482,7 +482,7 @@ summary: Milvus용 데이터코드를 구성하는 방법을 알아보세요.
   <tbody>
     <tr>
       <td>
-        <li>한 세그먼트에 대한 binlog의 최대 수(기본 키의 binlog 파일 수와 같음)입니다, </li>      
+        <li>한 세그먼트의 최대 binlog 수(기본 키의 binlog 파일 수와 같음)입니다, </li>      
         <li>binlog 파일 수가 최대 값에 도달하면 세그먼트가 봉인됩니다.</li>      </td>
       <td>32</td>
     </tr>
@@ -1455,7 +1455,7 @@ summary: Milvus용 데이터코드를 구성하는 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        최대 클러스터 크기 / Kmeans 트레인의 평균 크기      </td>
+      <td>        최대 클러스터 크기/평균 크기 Kmeans 트레인의 평균 크기      </td>
       <td>10</td>
     </tr>
   </tbody>

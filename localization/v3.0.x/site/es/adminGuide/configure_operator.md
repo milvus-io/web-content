@@ -174,10 +174,9 @@ Además, al configurar el proxy, hay un campo extra llamado `serviceType`. Este 
             <li><a href="/docs/es/configure_indexcoord.md">Índice de coordenadas</a></li>
             <li><a href="/docs/es/configure_metastore.md">Metastore</a></li>
             <li><a href="/docs/es/configure_mq.md">Cola de mensajes</a></li>
-            <li><a href="/docs/es/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/es/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/es/configure_trace.md">Rastreo</a></li>
-            <li><a href="/docs/es/configure_quotaandlimits.md">Cuotas y límites</a></li>
+            <li><a href="/docs/es/configure_quotaandlimits.md">Cuota y límites</a></li>
         </ul>
     </td>
   </tr>
@@ -188,7 +187,7 @@ Además, al configurar el proxy, hay un campo extra llamado `serviceType`. Este 
 <table id="purpose">
 <thead>
   <tr>
-    <th>Propósito</th>
+    <th>Finalidad</th>
     <th>Parámetros</th>
   </tr>
 </thead>
@@ -338,7 +337,7 @@ Además, al configurar el proxy, hay un campo extra llamado `serviceType`. Este 
   <span class="hljs-attr">dependencies:</span> {}
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-Este ejemplo configura no sólo los recursos globales sino también los recursos de computación privados para el coordenador raíz y el proxy. Cuando se utiliza este archivo de configuración para iniciar un cluster Milvus, las configuraciones de recursos privados se aplicarán a root coord y proxy, mientras que el resto de los componentes seguirán la configuración de recursos globales.</div>
+Este ejemplo configura no sólo los recursos globales, sino también los recursos de computación privados para root coord y proxy. Cuando se utiliza este archivo de configuración para iniciar un cluster Milvus, las configuraciones de recursos privados se aplicarán a root coord y proxy, mientras que el resto de los componentes seguirán la configuración de recursos globales.</div>
 <p>Ejecute el siguiente comando para aplicar las nuevas configuraciones:</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>

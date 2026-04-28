@@ -23,7 +23,7 @@ summary: >-
     </button></h1><p>Eine <strong>Dateiressource</strong> ist ein vom Server registrierter Verweis auf eine externe Wörterbuchdatei, die von Textanalysatoren zur Laufzeit verwendet wird. In Milvus 3.0 können vier Analyzer-Komponenten ihre Wörterbücher aus einer Dateiressource laden, anstatt aus einem Inline-Array:</p>
 <table>
    <tr>
-     <th><p><strong>Analyzer Komponente</strong></p></th>
+     <th><p><strong>Analyzer-Komponente</strong></p></th>
      <th><p><strong>Parameter, der eine Dateiressource akzeptiert</strong></p></th>
    </tr>
    <tr>

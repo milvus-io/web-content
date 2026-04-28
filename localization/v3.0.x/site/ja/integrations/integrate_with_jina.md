@@ -243,7 +243,7 @@ res = milvus_client.insert(collection_name=COLLECTION_NAME, data=data)
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&quot;insert_count&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>引数として、<code translate="no">MilvusClient</code> ：</p>
+<p>引数の<code translate="no">MilvusClient</code> ：</p>
 <ul>
 <li><code translate="no">./milvus.db</code> のように、<code translate="no">uri</code> をローカルファイルとして設定する方法が、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite を</a>自動的に利用して全てのデータをこのファイルに格納することができるため、最も便利な方法である。</li>
 <li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>

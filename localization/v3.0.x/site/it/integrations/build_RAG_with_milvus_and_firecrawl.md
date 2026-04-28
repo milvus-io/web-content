@@ -30,7 +30,7 @@ title: Costruire RAG con Milvus e Firecrawl
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://www.firecrawl.dev/">Firecrawl</a> consente agli sviluppatori di creare applicazioni di intelligenza artificiale con dati puliti provenienti da qualsiasi sito web. Grazie a funzionalità avanzate di scraping, crawling ed estrazione dei dati, Firecrawl semplifica il processo di conversione dei contenuti dei siti web in markdown o dati strutturati puliti per i flussi di lavoro AI a valle.</p>
-<p>In questa esercitazione vi mostreremo come costruire una pipeline Retrieval-Augmented Generation (RAG) utilizzando Milvus e Firecrawl. La pipeline integra Firecrawl per lo scraping dei dati web, Milvus per l'archiviazione vettoriale e OpenAI per la generazione di risposte perspicue e consapevoli del contesto.</p>
+<p>In questa esercitazione vi mostreremo come costruire una pipeline Retrieval-Augmented Generation (RAG) utilizzando Milvus e Firecrawl. La pipeline integra Firecrawl per lo scraping dei dati web, Milvus per l'archiviazione vettoriale e OpenAI per la generazione di risposte perspicaci e consapevoli del contesto.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparazione<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -286,7 +286,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>Creare una nuova raccolta con i parametri specificati.</p>
-<p>Se non si specifica alcun campo, Milvus creerà automaticamente un campo predefinito <code translate="no">id</code> per la chiave primaria e un campo <code translate="no">vector</code> per memorizzare i dati vettoriali. Un campo JSON riservato viene utilizzato per memorizzare campi non definiti dalla mappa e i loro valori.</p>
+<p>Se non si specifica alcun campo, Milvus creerà automaticamente un campo predefinito <code translate="no">id</code> per la chiave primaria e un campo <code translate="no">vector</code> per memorizzare i dati vettoriali. Un campo JSON riservato è usato per memorizzare campi non definiti dalla mappa e i loro valori.</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,

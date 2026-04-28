@@ -679,7 +679,7 @@ In conclusion, Widget Pro appears to offer high throughput suitable for enterpri
     </button></h2><p>In questo tutorial abbiamo costruito un agente RAG a doppia fonte che combina Milvus per il recupero della conoscenza privata con Exa per la ricerca pubblica sul web. I componenti chiave sono:</p>
 <ul>
 <li><strong>Milvus</strong> memorizza e recupera i documenti interni tramite la ricerca per similarità vettoriale, assicurando che i dati proprietari rimangano privati e ricercabili.</li>
-<li><strong>Exa</strong> fornisce una ricerca semantica sul web con funzioni quali il filtraggio delle categorie, l'estrazione dei contenuti e la scoperta di articoli simili.</li>
+<li><strong>Exa</strong> fornisce una ricerca semantica sul web con funzioni come il filtraggio delle categorie, l'estrazione dei contenuti e la scoperta di articoli simili.</li>
 <li><strong>Il richiamo di funzioni OpenAI</strong> consente all'LLM di indirizzare automaticamente le query alla fonte giusta, o a entrambe, in base all'intento della domanda.</li>
 </ul>
 <p>Questo modello è applicabile ai casi d'uso aziendali in cui un assistente AI deve accedere sia a documenti interni riservati sia a informazioni esterne in tempo reale.</p>

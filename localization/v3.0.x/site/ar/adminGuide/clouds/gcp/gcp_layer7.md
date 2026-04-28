@@ -23,14 +23,44 @@ summary: >-
       </svg>
     </button></h1><p>عند مقارنته بموازن التحميل من الطبقة 4، فإن موازن التحميل من الطبقة 7 يوفر موازنة تحميل ذكية وإمكانيات تخزين مؤقت، وهو خيار رائع للخدمات السحابية الأصلية.</p>
 <p>يرشدك هذا الدليل إلى كيفية إعداد موازن تحميل من الطبقة 7 لمجموعة Milvus التي تعمل بالفعل خلف موازن تحميل من الطبقة 4.</p>
-<h3 id="Before-your-start" class="common-anchor-header">قبل البدء</h3><ul>
+<h3 id="Before-your-start" class="common-anchor-header">قبل البدء<button data-href="#Before-your-start" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>مشروع موجود بالفعل في حساب GCP الخاص بك.</p>
 <p>لإنشاء مشروع، راجع <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">إنشاء المشاريع وإدارتها</a>. اسم المشروع المستخدم في هذا الدليل هو <strong>milvus-testing-nonprod</strong>.</p></li>
 <li><p>لقد قمتَ بتثبيت <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a> و <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> و <a href="https://helm.sh/docs/intro/install/">Helm</a> محليًا أو قررت استخدام <a href="https://cloud.google.com/shell">Cloud Shell</a> المستند إلى المتصفح بدلاً من ذلك.</p></li>
 <li><p>قمت <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">بتهيئة gcloud CLI</a> باستخدام بيانات اعتماد حساب GCP الخاص بك.</p></li>
 <li><p>قمت <a href="/docs/ar/gcp.md">بنشر مجموعة Milvus خلف موازن تحميل من الطبقة الرابعة على GCP</a>.</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">تعديل تكوينات Milvus</h3><p>يفترض هذا الدليل أنك قمت بالفعل <a href="/docs/ar/gcp.md">بنشر مجموعة Milvus خلف موازن تحميل من الطبقة 4 على GCP</a>.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">تعديل تكوينات Milvus<button data-href="#Tweak-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يفترض هذا الدليل أنك قمت بالفعل <a href="/docs/ar/gcp.md">بنشر مجموعة Milvus خلف موازن تحميل من الطبقة 4 على GCP</a>.</p>
 <p>قبل إعداد موازن تحميل من الطبقة السابعة لمجموعة Milvus العنقودية هذه، قم بتشغيل الأمر التالي لإزالة موازن تحميل الطبقة الرابعة.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
@@ -44,7 +74,22 @@ summary: >-
       security:
         tlsMode: 1
 </span><button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">إعداد نقطة نهاية التحقق من الصحة</h3><p>لضمان توافر الخدمة، تتطلب موازنة التحميل من الطبقة السابعة على GCP فحص الظروف الصحية للخدمة الخلفية. لذلك، نحن بحاجة إلى إعداد BackendConfig لتغليف نقطة نهاية التحقق من الصحة وربط BackendConfig بخدمة Milvus من خلال التعليقات التوضيحية.</p>
+<h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">إعداد نقطة نهاية التحقق من الصحة<button data-href="#Set-up-a-health-check-endpoint" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لضمان توافر الخدمة، تتطلب موازنة التحميل من الطبقة السابعة على GCP فحص الظروف الصحية للخدمة الخلفية. لذلك، نحن بحاجة إلى إعداد BackendConfig لتغليف نقطة نهاية التحقق من الصحة وربط BackendConfig بخدمة Milvus من خلال التعليقات التوضيحية.</p>
 <p>المقتطف التالي هو إعدادات BackendConfig. احفظه بصيغة <code translate="no">backendconfig.yaml</code> لاستخدامه لاحقًا.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">cloud.google.com/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">BackendConfig</span>
@@ -71,13 +116,28 @@ summary: >-
 <li><p>بالنسبة للتعليق التوضيحي الأول,</p>
 <p>فإن Milvus أصلي ل gRPC، وهو مبني على HTTP/2. لذلك، يمكننا استخدام HTTP/2 كبروتوكول اتصال بين موازن تحميل الطبقة السابعة وميلفوس.</p></li>
 <li><p>أما بالنسبة للتعليق التوضيحي الثاني,</p>
-<p>يقدم Milvus نقطة نهاية التحقق من الصحة فقط عبر gRPC و HTTP/1. نحتاج إلى إعداد BackendConfig لتغليف نقطة نهاية التحقق من الصحة وربطها بخدمة Milvus بحيث يقوم موازن تحميل الطبقة السابعة باستكشاف نقطة النهاية هذه لمعرفة الحالة الصحية ل Milvus.</p></li>
+<p>يوفر Milvus نقطة نهاية التحقق من الصحة فقط عبر gRPC و HTTP/1. نحتاج إلى إعداد BackendConfig لتغليف نقطة نهاية التحقق من الصحة وربطها بخدمة Milvus بحيث يقوم موازن تحميل الطبقة السابعة باستكشاف نقطة النهاية هذه لمعرفة الحالة الصحية ل Milvus.</p></li>
 <li><p>أما بالنسبة للتعليق التوضيحي الثالث,</p>
-<p>فهو يطلب إنشاء مجموعة نقطة نهاية الشبكة (NEG) بعد إنشاء نقطة نهاية الشبكة (Ingress). عند استخدام NEGs مع GKE Ingress، تسهل وحدة التحكم في الدخول إنشاء جميع جوانب موازن التحميل. يتضمن ذلك إنشاء عنوان IP الافتراضي، وقواعد إعادة التوجيه، والتحقق من الصحة، وقواعد جدار الحماية، والمزيد. لمزيد من التفاصيل، راجع <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing">مستندات Google Cloud</a>.</p></li>
+<p>فهو يطلب إنشاء مجموعة نقطة نهاية الشبكة (NEG) بعد إنشاء نقطة نهاية الشبكة (Ingress). عند استخدام NEGs مع GKE Ingress، تسهل وحدة التحكم في الدخول إنشاء جميع جوانب موازن التحميل. يتضمن ذلك إنشاء عنوان IP الظاهري وقواعد إعادة التوجيه والتحقق من الصحة وقواعد جدار الحماية والمزيد. لمزيد من التفاصيل، راجع <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing">مستندات Google Cloud</a>.</p></li>
 </ul>
 </div>
-<h3 id="Prepare-TLS-certificates" class="common-anchor-header">إعداد شهادات TLS</h3><p>يتطلب TLS شهادات للعمل. <strong>هناك طريقتان لإنشاء الشهادات، وهما المدارة ذاتيًا والمدارة من Google.</strong></p>
-<p>يستخدم هذا الدليل <strong>my-release.milvus.io</strong> كاسم مجال للوصول إلى خدمة Milvus.</p>
+<h3 id="Prepare-TLS-certificates" class="common-anchor-header">إعداد شهادات TLS<button data-href="#Prepare-TLS-certificates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يتطلب TLS شهادات للعمل. <strong>هناك طريقتان لإنشاء الشهادات، وهما المدارة ذاتيًا والمدارة من Google.</strong></p>
+<p>يستخدم هذا الدليل <strong>my-release.milvus.io</strong> كاسم مجال للوصول إلى خدمة Milvus الخاصة بنا.</p>
 <h4 id="Create-self-managed-certificates" class="common-anchor-header">إنشاء شهادات مُدارة ذاتيًا</h4><p>قم بتشغيل الأوامر التالية لإنشاء شهادة.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Generates a tls.key.</span>
 openssl genrsa -out tls.key 2048
@@ -116,7 +176,22 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
     status: Provisioning
 <button class="copy-code-btn"></button></code></pre>
 <p>بمجرد تحول <strong>certificateStatus</strong> إلى <strong>نشط،</strong> تكون جاهزًا لإعداد موازن التحميل.</p>
-<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">قم بإنشاء مدخل لإنشاء موازن تحميل من الطبقة السابعة</h3><p>قم بإنشاء ملف YAML بأحد المقتطفات التالية.</p>
+<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">قم بإنشاء مدخل لإنشاء موازن تحميل من الطبقة السابعة<button data-href="#Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قم بإنشاء ملف YAML بأحد المقتطفات التالية.</p>
 <ul>
 <li><p>استخدام الشهادات المُدارة ذاتيًا</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
@@ -169,7 +244,7 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
 <p>الآن، انتظر حتى تقوم جوجل بإعداد موازن تحميل الطبقة السابعة. يمكنك التحقق من التقدم عن طريق تشغيل</p>
 <pre><code translate="no" class="language-bash">kubectl  -f ./config/samples/ingress.yaml get -w
 <button class="copy-code-btn"></button></code></pre>
-<p>يجب أن يكون الناتج مشابهًا لما يلي:</p>
+<p>يجب أن يكون الإخراج مشابهًا لما يلي:</p>
 <pre><code translate="no" class="language-shell">NAME                CLASS    HOSTS                  ADDRESS   PORTS   AGE
 my-release-milvus   &lt;none&gt;   my-release.milvus.io             80      4s
 my-release-milvus   &lt;none&gt;   my-release.milvus.io   34.111.144.65   80, 443   41m
@@ -210,6 +285,6 @@ connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<
 <div class="alert note">
 <ul>
 <li>يجب أن يتطابق عنوان IP ورقم المنفذ في <strong>المضيف</strong> <strong>والمنفذ</strong> مع تلك المدرجة في نهاية <a href="#create-an-ingress-to-generate-a-layer-7-load-balancer">إنشاء مدخل لإنشاء موازن تحميل من الطبقة السابعة</a>.</li>
-<li>إذا قمت بإعداد سجل DNS لتعيين اسم المجال إلى عنوان IP المضيف، استبدل عنوان IP في <strong>المضيف</strong> باسم المجال واحذف <strong>اسم_المخدم</strong>.</li>
+<li>إذا كنت قد قمت بإعداد سجل DNS لتعيين اسم المجال إلى عنوان IP المضيف، استبدل عنوان IP في <strong>المضيف</strong> باسم المجال واحذف <strong>اسم_المخدم</strong>.</li>
 </ul>
 </div>

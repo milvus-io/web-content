@@ -144,7 +144,7 @@ index_params.add_index(
    </tr>
    <tr>
      <td><p><code translate="no">ARRAY_BOOL</code> / <code translate="no">array_bool</code></p></td>
-     <td><p>부울 값 배열을 인덱싱하는 데 사용됩니다.</p></td>
+     <td><p>부울 값의 배열을 인덱싱하는 데 사용됩니다.</p></td>
      <td><p><code translate="no">[true, false, true]</code></p></td>
    </tr>
    <tr>
@@ -366,7 +366,7 @@ index_params.add_index(
       </svg>
     </button></h3><p>전체 JSON 객체를 색인하여 그 안의 모든 필드에 대한 쿼리를 활성화합니다. <code translate="no">json_cast_type=&quot;JSON&quot;</code> 을 사용하면 시스템이 자동으로 색인을 생성합니다:</p>
 <ul>
-<li><p><strong>JSON 구조를 플랫화합니다</strong>: 효율적인 인덱싱을 위해 중첩된 개체가 플랫 경로로 변환됩니다.</p></li>
+<li><p><strong>JSON 구조를 플랫화합니다</strong>: 효율적인 인덱싱을 위해 중첩된 객체가 플랫 경로로 변환됩니다.</p></li>
 <li><p><strong>데이터 유형을 추론합니다</strong>: 각 값은 콘텐츠에 따라 숫자, 문자열, 부울, 날짜로 자동 분류됩니다.</p></li>
 <li><p><strong>포괄적인 범위를 생성합니다</strong>: 개체 내의 모든 키와 중첩된 경로를 검색할 수 있습니다.</p></li>
 </ul>
@@ -479,7 +479,7 @@ MilvusClient.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>아니요, 각 JSON 키는 하나의 인덱스만 지원합니다. 데이터와 일치하는 하나의 <code translate="no">json_cast_type</code> 를 선택해야 합니다. 하지만 전체 JSON 객체에 대한 인덱스와 해당 객체 내의 중첩된 키에 대한 인덱스를 만들 수는 있습니다.</p>
+    </button></h3><p>아니요, 각 JSON 키는 하나의 인덱스만 지원합니다. 데이터와 일치하는 하나의 <code translate="no">json_cast_type</code> 를 선택해야 합니다. 그러나 전체 JSON 객체에 대한 인덱스와 해당 객체 내의 중첩된 키에 대한 인덱스를 만들 수는 있습니다.</p>
 <h3 id="Does-a-JSON-field-support-setting-a-default-value" class="common-anchor-header">JSON 필드에서 기본값 설정을 지원하나요?<button data-href="#Does-a-JSON-field-support-setting-a-default-value" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

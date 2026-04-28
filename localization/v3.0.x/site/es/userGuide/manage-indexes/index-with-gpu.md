@@ -22,6 +22,9 @@ title: Índice con GPU
         ></path>
       </svg>
     </button></h1><p>Esta guía describe los pasos para construir un índice con soporte GPU en Milvus, que puede mejorar significativamente el rendimiento de la búsqueda en escenarios de alto rendimiento y alta recuperación. Para más detalles sobre los tipos de índices GPU soportados por Milvus, consulte <a href="/docs/es/gpu_index.md">Índice GPU</a>.</p>
+<div class="alert warning">
+<p>Esta página ha quedado obsoleta. Para la implementación más reciente, consulte <a href="/docs/es/gpu-index-overview.md">Descripción general del índice GPU</a>.</p>
+</div>
 <h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Configure los ajustes de Milvus para el control de la memoria de la GPU<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +40,7 @@ title: Índice con GPU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus utiliza un pool de memoria gráfica global para asignar memoria GPU.</p>
+    </button></h2><p>Milvus utiliza una reserva de memoria gráfica global para asignar memoria a la GPU.</p>
 <p>Admite dos parámetros <code translate="no">initMemSize</code> y <code translate="no">maxMemSize</code> en el <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">archivo de configuración de Milvus</a>. El tamaño del pool se establece inicialmente en <code translate="no">initMemSize</code>, y se ampliará automáticamente a <code translate="no">maxMemSize</code> una vez superado este límite.</p>
 <p>El valor por defecto <code translate="no">initMemSize</code> es 1/2 de la memoria GPU disponible cuando Milvus se inicia, y el valor por defecto <code translate="no">maxMemSize</code> es igual a toda la memoria GPU disponible.</p>
 <p>Hasta Milvus 2.4.1( incluyendo la versión 2.4.1), Milvus utilizaba un pool de memoria GPU unificado. Para versiones anteriores a la 2.4.1( incluyendo la versión 2.4.1), se recomendaba poner ambos valores a 0.</p>
@@ -108,7 +111,7 @@ title: Índice con GPU
 <li><p><strong>IVF_PQ</strong>: Ofrece mayor calidad pero un tiempo de construcción más lento.</p></li>
 <li><p><strong>NN_DESCENT</strong>: Proporciona una construcción más rápida con una recuperación potencialmente menor.</p></li>
 </ul></li>
-<li><p><strong>cache_dataset_on_device</strong><em>(cadena</em>, <strong>"true"</strong> | <strong>"false")</strong>: Decide si se almacena en caché el conjunto de datos original en la memoria de la GPU. Si se establece en <strong>"</strong> <strong>true"</strong> se mejora la recuperación al refinar los resultados de búsqueda, mientras que si se establece en <strong>"false"</strong> se conserva la memoria de la GPU.</p></li>
+<li><p><strong>cache_dataset_on_device</strong><em>(cadena</em>, <strong>"true"</strong> | <strong>"false")</strong>: Decide si se almacena en caché el conjunto de datos original en la memoria de la GPU. Si se establece en <strong>"</strong> <strong>true"</strong>, se mejora la recuperación al refinar los resultados de búsqueda, mientras que si se establece en <strong>"false"</strong>, se conserva la memoria de la GPU.</p></li>
 </ul></li>
 <li><p>Índice<strong>GPU_IVF_FLAT</strong> o <strong>GPU_IVF_PQ</strong> </p>
 <pre><code translate="no" class="language-python">index_params = {
@@ -218,7 +221,7 @@ collection.create_index(
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Los parámetros de búsqueda para estos dos tipos de índice son similares a los utilizados en <strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> e <a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong>. Para obtener más información, consulte <a href="https://milvus.io/docs/search.md#Prepare-search-parameters">Realizar una búsqueda de similitud vectorial</a>.</p></li>
+<p>Los parámetros de búsqueda para estos dos tipos de índice son similares a los utilizados en <strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> e <a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong>. Para más información, consulte <a href="https://milvus.io/docs/search.md#Prepare-search-parameters">Realizar una búsqueda de similitud vectorial</a>.</p></li>
 </ul>
 <h3 id="Conduct-a-search" class="common-anchor-header">Realizar una búsqueda<button data-href="#Conduct-a-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -263,9 +266,9 @@ collection.search(
       </svg>
     </button></h2><p>Cuando utilice índices GPU, tenga en cuenta ciertas restricciones:</p>
 <ul>
-<li><p>Para <strong>GPU_IVF_FLAT</strong>, el valor máximo de <strong>límite</strong> es 1024.</p></li>
+<li><p>Para <strong>GPU_IVF_FLAT</strong>, el valor máximo para <strong>limit</strong> es 1024.</p></li>
 <li><p>Para <strong>GPU_IVF_PQ</strong> y <strong>GPU_CAGRA</strong>, el valor máximo de <strong>limit</strong> es 1024.</p></li>
-<li><p>Aunque no hay un <strong>límite</strong> establecido para <strong>GPU_BRUTE_FORCE</strong>, se recomienda no superar los 4096 para evitar posibles problemas de rendimiento.</p></li>
+<li><p>Aunque no hay un <strong>límite</strong> establecido para <strong>GPU_BRUTE_FORCE</strong>, se recomienda no superar 4096 para evitar posibles problemas de rendimiento.</p></li>
 <li><p>Actualmente, los índices GPU no soportan la distancia COSINE. Si se requiere la distancia COSINE, los datos deben ser normalizados en primer lugar, y luego la distancia de producto interno (IP) se puede utilizar como sustituto.</p></li>
 <li><p>La carga de la protección OOM para los índices de la GPU no está totalmente soportada, demasiados datos pueden provocar fallos en el QueryNode.</p></li>
 <li><p>Los índices GPU no soportan funciones de búsqueda como la <a href="https://milvus.io/docs/single-vector-search.md#Range-search">búsqueda por rango</a> y la <a href="https://milvus.io/docs/single-vector-search.md#Grouping-searchh">búsqueda por agrupación</a>.</p></li>

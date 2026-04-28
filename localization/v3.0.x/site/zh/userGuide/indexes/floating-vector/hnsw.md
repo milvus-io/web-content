@@ -39,13 +39,13 @@ summary: HNSW 索引是一种基于图的索引算法，可以提高搜索高维
 <p>下面是它的工作原理：</p>
 <ol>
 <li><p><strong>入口点</strong>：搜索从顶层的一个固定入口点开始，该入口点是图中的一个预定节点。</p></li>
-<li><p><strong>贪婪搜索</strong>：算法贪婪地移动到当前层的近邻，直到无法再接近查询向量为止。上层起到导航作用，作为粗过滤器，为下层的精细搜索找到潜在的入口点。</p></li>
-<li><p><strong>层层下降</strong>：一旦当前层达到<strong>局部最小值</strong>，算法就会利用预先建立的连接跳转到下层，并重复贪婪搜索。</p></li>
+<li><p><strong>贪婪搜索</strong>：算法贪婪地移动到当前层的最近邻居，直到无法再接近查询向量为止。上层起到导航作用，作为粗过滤器，为下层的精细搜索找到潜在的入口点。</p></li>
+<li><p><strong>层层下降</strong>：一旦当前层达到<strong>局部最小值</strong>，算法就会通过预先建立的连接跳转到下层，并重复贪婪搜索。</p></li>
 <li><p><strong>最后</strong> <strong>细化</strong>：这一过程一直持续到最底层，在最底层进行最后的细化步骤，找出最近的邻居。</p></li>
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
    </span> <span class="img-wrapper"> <span>HNSW</span> </span></p>
 <p>HNSW 的性能取决于控制图结构和搜索行为的几个关键参数。这些参数包括</p>
 <ul>
@@ -152,7 +152,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>本节概述了用于建立索引和在索引上执行搜索的参数。</p>
-<h3 id="Index-building-params" class="common-anchor-header">索引建立参数</h3><p>下表列出了<a href="/docs/zh/hnsw.md#Build-index">建立索引</a>时可在<code translate="no">params</code> 中配置的参数。</p>
+<h3 id="Index-building-params" class="common-anchor-header">索引建立参数<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下表列出了<a href="/docs/zh/hnsw.md#Build-index">建立索引</a>时可在<code translate="no">params</code> 中配置的参数。</p>
 <table>
    <tr>
      <th><p>参数</p></th>
@@ -164,7 +179,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">M</code></p></td>
      <td><p>图中每个节点可拥有的最大连接数（或边），包括出边和入边。该参数直接影响索引构建和搜索。</p></td>
      <td><p><strong>类型</strong>： 整数整数<strong>范围</strong>：[2, 2048]</p><p><strong>默认值</strong>：<code translate="no">30</code> （每个节点最多有 30 条出边和 30 条入边）</p></td>
-     <td><p>较大的<code translate="no">M</code> 通常会<strong>提高准确率</strong>，但会<strong>增加内存开销</strong>，<strong>减慢索引构建和搜索速度</strong>。对于高维度数据集或高召回率至关重要时，可考虑提高<code translate="no">M</code> 。</p><p>当内存使用和搜索速度是首要考虑因素时，可考虑降低<code translate="no">M</code> 。</p><p>在大多数情况下，我们建议您在此范围内设置一个值：[5, 100].</p></td>
+     <td><p>更大的<code translate="no">M</code> 通常会带来<strong>更高的准确率</strong>，但会<strong>增加内存开销</strong>，并<strong>减慢索引构建和搜索速度</strong>。对于高维度数据集或高召回率至关重要时，可考虑提高<code translate="no">M</code> 。</p><p>当内存使用和搜索速度是首要考虑因素时，可考虑降低<code translate="no">M</code> 。</p><p>在大多数情况下，我们建议您在此范围内设置一个值：[5, 100].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">efConstruction</code></p></td>
@@ -173,7 +188,22 @@ res = MilvusClient.search(
      <td><p><code translate="no">efConstruction</code> 越高，<strong>索引</strong>越<strong>准确</strong>，因为会探索更多潜在连接。不过，这也会导致建立<strong>索引的时间延长和内存使用量增加</strong>。考虑增加<code translate="no">efConstruction</code> 以提高准确性，尤其是在索引时间不太重要的情况下。</p><p>在资源紧张的情况下，可考虑降低<code translate="no">efConstruction</code> ，以加快索引构建速度。</p><p>在大多数情况下，我们建议在此范围内设置一个值：[50, 500].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">特定于索引的搜索参数</h3><p>下表列出了<a href="/docs/zh/hnsw.md#Search-on-index">在索引上搜索</a>时可在<code translate="no">search_params.params</code> 中配置的参数。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">特定于索引的搜索参数<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下表列出了<a href="/docs/zh/hnsw.md#Search-on-index">在索引上搜索</a>时可在<code translate="no">search_params.params</code> 中配置的参数。</p>
 <table>
    <tr>
      <th><p>参数</p></th>

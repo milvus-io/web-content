@@ -112,7 +112,7 @@ summary: >-
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>Menempatkan kunci API di sini akan membuatnya persisten di seluruh proses restart dan memungkinkan Anda mengganti kunci hanya dengan mengubah label.</p></li>
+<p>Menempatkan kunci API di sini akan membuatnya tetap ada di seluruh proses restart dan memungkinkan Anda mengganti kunci hanya dengan mengubah label.</p></li>
 <li><p><strong>Memberi tahu Milvus kunci mana yang akan digunakan untuk panggilan Gemini</strong></p>
 <p>Di berkas yang sama, arahkan penyedia Gemini ke label yang Anda inginkan untuk digunakan.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>

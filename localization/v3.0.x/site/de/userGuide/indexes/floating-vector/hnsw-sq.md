@@ -135,7 +135,7 @@ summary: >-
 <li><p><strong>Abfrage von Kandidaten:</strong> Wenn ein Abfragevektor bereitgestellt wird, verwendet der Algorithmus die komprimierten Daten, um schnell einen Pool von Nachbarschaftskandidaten aus dem HNSW-Graphen zu ermitteln.</p></li>
 <li><p><strong>(Optional) Verfeinerung der Ergebnisse:</strong> Die anfänglichen Kandidatenergebnisse können zur Verbesserung der Genauigkeit anhand der folgenden Parameter verfeinert werden:</p>
 <ul>
-<li><p><code translate="no">refine</code>: Steuert, ob dieser Verfeinerungsschritt aktiviert ist. Wenn er auf <code translate="no">true</code> gesetzt ist, berechnet das System die Abstände unter Verwendung von höherer Genauigkeit oder unkomprimierten Darstellungen neu.</p></li>
+<li><p><code translate="no">refine</code>: Steuert, ob dieser Verfeinerungsschritt aktiviert ist. Wenn er auf <code translate="no">true</code> gesetzt ist, berechnet das System die Abstände unter Verwendung höherer Genauigkeit oder unkomprimierter Darstellungen neu.</p></li>
 <li><p><code translate="no">refine_type</code>: Gibt den Präzisionsgrad der Daten an, die während der Verfeinerung verwendet werden (z. B. SQ6, SQ8, BF16). Eine höhere Genauigkeit wie <code translate="no">FP32</code> kann genauere Ergebnisse liefern, erfordert aber mehr Speicherplatz. Diese muss die Genauigkeit des ursprünglichen komprimierten Datensatzes um <code translate="no">sq_type</code> übersteigen.</p></li>
 <li><p><code translate="no">refine_k</code>: Wirkt wie ein Vergrößerungsfaktor. Wenn z. B. Ihr Top <em>k</em> 100 und <code translate="no">refine_k</code> 2 ist, ordnet das System die 200 besten Kandidaten neu und gibt die besten 100 zurück, was die Gesamtgenauigkeit erhöht.</p></li>
 </ul></li>
@@ -263,7 +263,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">M</code></p></td>
      <td><p>Maximale Anzahl von Verbindungen （oder Kanten), die jeder Knoten im Graphen haben kann, einschließlich ausgehender und eingehender Kanten.</p><p>Dieser Parameter wirkt sich direkt auf den Indexaufbau und die Suche aus.</p></td>
      <td><p><strong>Typ</strong>: Integer</p><p><strong>Bereich</strong>: [2, 2048]</p><p><strong>Standardwert</strong>: <code translate="no">30</code> (bis zu 30 ausgehende und 30 eingehende Kanten pro Knoten)</p></td>
-     <td><p>Eine größere <code translate="no">M</code> führt im Allgemeinen zu einer <strong>höheren Genauigkeit</strong>, <strong>erhöht</strong> jedoch <strong>den Speicher-Overhead</strong> und <strong>verlangsamt sowohl den Indexaufbau als auch die Suche</strong>.</p><p>Erwägen Sie eine Erhöhung von <code translate="no">M</code> für Datensätze mit hoher Dimensionalität oder wenn eine hohe Wiederauffindbarkeit entscheidend ist.</p><p>Ziehen Sie eine Verringerung von <code translate="no">M</code> in Betracht, wenn die Speichernutzung und die Suchgeschwindigkeit im Vordergrund stehen.</p><p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs zu wählen: [5, 100].</p></td>
+     <td><p>Eine größere <code translate="no">M</code> führt im Allgemeinen zu einer <strong>höheren Genauigkeit</strong>, <strong>erhöht</strong> jedoch <strong>den Speicher-Overhead</strong> und <strong>verlangsamt sowohl den Indexaufbau als auch die Suche</strong>.</p><p>Erwägen Sie eine Erhöhung von <code translate="no">M</code> für Datensätze mit hoher Dimensionalität oder wenn eine hohe Wiederauffindbarkeit entscheidend ist.</p><p>Ziehen Sie eine Verringerung von <code translate="no">M</code> in Betracht, wenn die Speichernutzung und die Suchgeschwindigkeit im Vordergrund stehen.</p><p>In den meisten Fällen empfehlen wir, einen Wert innerhalb dieses Bereichs zu wählen: [5, 100].</p></td>
    </tr>
    <tr>
      <td></td>
@@ -291,7 +291,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">refine_type</code></p></td>
      <td><p>Bestimmt die Genauigkeit der für die Verfeinerung verwendeten Daten.</p><p>Diese Genauigkeit muss höher sein als die der komprimierten Vektoren (wie durch <code translate="no">sq_type</code> festgelegt), was sich sowohl auf die Genauigkeit der neu eingestuften Vektoren als auch auf deren Speicherbedarf auswirkt.</p></td>
      <td><p><strong>Typ</strong>: Zeichenkette</p><p><strong>Bereich</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p><p><strong>Standardwert</strong>: Keine</p></td>
-     <td><p>Verwenden Sie <code translate="no">FP32</code> für maximale Präzision bei höheren Speicherkosten oder <code translate="no">SQ6</code>/<code translate="no">SQ8</code> für bessere Kompression. <code translate="no">BF16</code> und <code translate="no">FP16</code> bieten eine ausgewogene Alternative.</p></td>
+     <td><p>Verwenden Sie <code translate="no">FP32</code> für maximale Präzision bei höheren Speicherkosten oder <code translate="no">SQ6</code>/<code translate="no">SQ8</code> für bessere Komprimierung. <code translate="no">BF16</code> und <code translate="no">FP16</code> bieten eine ausgewogene Alternative.</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">

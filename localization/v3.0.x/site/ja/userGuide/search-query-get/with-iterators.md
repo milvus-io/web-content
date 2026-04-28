@@ -136,7 +136,7 @@ iterator = collection.search_iterator(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記の例では、1回の検索で返すエンティティの数<strong>（batch_</strong><strong>size</strong><strong>/batchSize</strong>）を50に、返すエンティティの総数<strong>（topK</strong>）を20,000に設定している。</p>
+<p>上記の例では、1回の検索で返すエンティティの数<strong>（batch</strong><strong>_</strong><strong>size/batchSize</strong>）を50に、返すエンティティの総数<strong>（topK</strong>）を20,000に設定している。</p>
 <h2 id="Use-SearchIterator" class="common-anchor-header">SearchIterator の使用<button data-href="#Use-SearchIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

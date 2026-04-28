@@ -48,7 +48,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Prima di implementare SiliconFlow Ranker in Milvus, assicurarsi di disporre di:</p>
 <ul>
-<li><p>Una raccolta Milvus con un campo <code translate="no">VARCHAR</code> contenente il testo da rerankizzare</p></li>
+<li><p>Una collezione Milvus con un campo <code translate="no">VARCHAR</code> contenente il testo da rerankizzare</p></li>
 <li><p>Una chiave API SiliconFlow valida con accesso ai modelli di reranking. Registrarsi sulla <a href="https://www.siliconflow.com/">piattaforma di SiliconFlow</a> per ottenere le credenziali API. È possibile scegliere tra:</p>
 <ul>
 <li><p>Impostare la variabile d'ambiente <code translate="no">SILICONFLOW_API_KEY</code>, oppure</p></li>
@@ -188,7 +188,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">overlap_tokens</code></p></td>
      <td><p>No</p></td>
-     <td><p>Numero di sovrapposizioni di token tra chunk adiacenti quando i documenti sono raggruppati in chunk. Questo garantisce la continuità tra i confini dei chunk per una migliore comprensione semantica. Supportato solo da modelli specifici: <code translate="no">BAAI/bge-reranker-v2-m3</code>, <code translate="no">Pro/BAAI/bge-reranker-v2-m3</code>, e <code translate="no">netease-youdao/bce-reranker-base_v1</code>.</p></td>
+     <td><p>Numero di sovrapposizioni di token tra chunk adiacenti quando i documenti sono raggruppati in chunk. Questo assicura la continuità tra i confini dei chunk per una migliore comprensione semantica. Supportato solo da modelli specifici: <code translate="no">BAAI/bge-reranker-v2-m3</code>, <code translate="no">Pro/BAAI/bge-reranker-v2-m3</code>, e <code translate="no">netease-youdao/bce-reranker-base_v1</code>.</p></td>
      <td><p><code translate="no">50</code></p></td>
    </tr>
    <tr>

@@ -518,7 +518,22 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>作成するコレクションにプロパティを設定して、サービスに適合させることができます。適用可能なプロパティは以下の通りです。</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">シャード番号の設定</h3><p>シャードはコレクションの水平スライスで、各シャードはデータ入力チャネルに対応します。デフォルトでは、すべてのコレクションに1つのシャードがあります。データ量とワークロードに合わせて、コレクションを作成するときにシャードの数を指定で きます。</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">シャード番号の設定<button data-href="#Set-Shard-Number" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>シャードはコレクションの水平スライスで、各シャードはデータ入力チャネルに対応します。デフォルトでは、すべてのコレクションには1つのシャードがあります。データ量とワークロードに合わせて、コレクションを作成するときにシャードの数を指定で きます。</p>
 <p>一般的なガイドラインとして、シャードの数を設定するときは以下を考慮してください：</p>
 <ul>
 <li><strong>データサイズ：</strong>一般的なプラクティスは、2億エンティティごとに1つのシャードを持つことです。総データ・サイズに基づいて見積もることもできます。たとえば、挿入する予定のデータ100GBごとにシャードを1つ追加します。</li>
@@ -572,7 +587,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">mmapを有効にする</h3><p>Milvusはデフォルトですべてのコレクションでmmapを有効にし、Milvusがフィールドデータを完全にロードする代わりに、生のフィールドデータをメモリにマッピングすることを可能にします。これにより、メモリフットプリントが削減され、コレクション容量が増加します。mmapの詳細については、<a href="/docs/ja/mmap.md">Use mmapを</a>参照してください。</p>
+<h3 id="Enable-mmap" class="common-anchor-header">mmapを有効にする<button data-href="#Enable-mmap" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvusはデフォルトですべてのコレクションでmmapを有効にし、Milvusがフィールドデータを完全にロードする代わりに、生のフィールドデータをメモリにマッピングすることを可能にします。これにより、メモリフットプリントが削減され、コレクション容量が増加します。mmapの詳細については、<a href="/docs/ja/mmap.md">Use mmapを</a>参照してください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#plaintext">プレーンテキスト</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap</span>
@@ -625,7 +655,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Collection-TTL" class="common-anchor-header">コレクションTTLの設定</h3><p>コレクション内のデータを特定の期間ドロップする必要がある場合、そのTTL（Time-To-Live）を秒単位で設定することを検討してください。TTLがタイムアウトすると、Milvusはコレクション内のエンティティを削除します。削除は非同期で行われるため、削除が完了するまで検索やクエリが可能です。</p>
+<h3 id="Set-Collection-TTL" class="common-anchor-header">コレクションTTLの設定<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>コレクション内のデータを特定の期間ドロップする必要がある場合、そのTTL（Time-To-Live）を秒単位で設定することを検討してください。TTLがタイムアウトすると、Milvusはコレクション内のエンティティを削除します。削除は非同期で行われるため、削除が完了するまで検索やクエリが可能です。</p>
 <p>以下のコードスニペットでは、TTLを1日（86400秒）に設定しています。TTLは最低でも数日に設定することをお勧めします。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -681,7 +726,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Consistency-Level" class="common-anchor-header">一貫性レベルの設定</h3><p>コレクションを作成する際に、コレクション内の検索とクエリの一貫性レベルを設定できます。また、特定の検索やクエリ中にコレクションの一貫性レベルを変更することもできます。</p>
+<h3 id="Set-Consistency-Level" class="common-anchor-header">一貫性レベルの設定<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>コレクションを作成する際に、コレクション内の検索とクエリの一貫性レベルを設定することができます。また、特定の検索やクエリ中にコレクションの一貫性レベルを変更することもできます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With consistency level</span>
@@ -735,5 +795,20 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>一貫性レベルの詳細については、<a href="/docs/ja/tune_consistency.md">一貫性レベルを</a>参照してください。</p>
-<h3 id="Enable-Dynamic-Field" class="common-anchor-header">ダイナミック・フィールドの有効化</h3><p>コレクション内の動的フィールドは、<strong>$metaという</strong>名前の予約済みJavaScript Object Notation（JSON）フィールドです。このフィールドを有効にすると、Milvusは各エンティティで保持されるすべての非スキーマ定義フィールドとその値をkey-valueペアとして予約フィールドに保存します。</p>
+<h3 id="Enable-Dynamic-Field" class="common-anchor-header">ダイナミック・フィールドの有効化<button data-href="#Enable-Dynamic-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>コレクション内の動的フィールドは、<strong>$metaという</strong>名前の予約済みJavaScript Object Notation（JSON）フィールドです。このフィールドを有効にすると、Milvusは各エンティティで保持されるすべての非スキーマ定義フィールドとその値をkey-valueペアとして予約フィールドに保存します。</p>
 <p>動的フィールドの使用方法の詳細については、<a href="/docs/ja/enable-dynamic-field.md">動的フィールドを</a>参照してください。</p>

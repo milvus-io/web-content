@@ -68,7 +68,7 @@ title: تكامل Milvus مع MindsDB
 <ul>
 <li><code translate="no">search_default_limit</code>: الحد الافتراضي الذي سيتم تمريره في عبارات التحديد (افتراضي = 100)</li>
 <li><code translate="no">search_metric_type</code>: نوع المقياس المستخدم في عمليات البحث (افتراضي="L2")</li>
-<li><code translate="no">search_ignore_growing</code>: ما إذا كان سيتم تجاهل المقاطع المتزايدة أثناء عمليات البحث عن التشابه (افتراضي="خطأ")</li>
+<li><code translate="no">search_ignore_growing</code>: ما إذا كان يجب تجاهل المقاطع المتزايدة أثناء عمليات البحث عن التشابه (افتراضي="خطأ")</li>
 <li><code translate="no">search_params</code>: خاص بـ <code translate="no">search_metric_type</code> (افتراضي={"nprobe": 10})</li>
 </ul>
 <p>تُستخدم هذه لـ <code translate="no">CREATE</code> الاستعلامات</p>
@@ -101,7 +101,22 @@ title: تكامل Milvus مع MindsDB
         ></path>
       </svg>
     </button></h2><p>قبل المتابعة، تأكد من أن الإصدار <code translate="no">pymilvus</code> هو نفس الإصدار <a href="https://github.com/mindsdb/mindsdb/blob/main/mindsdb/integrations/handlers/milvus_handler/requirements.txt">المثبت</a> هذا. إذا وجدت أي مشاكل في توافق الإصدار، يمكنك التراجع عن إصدار pymilvus، أو تخصيصه في <a href="https://github.com/mindsdb/mindsdb/tree/main/mindsdb/integrations/handlers/milvus_handler">ملف المتطلبات</a> هذا.</p>
-<h3 id="Creating-connection" class="common-anchor-header">إنشاء اتصال</h3><p>من أجل الاستفادة من هذا المعالج والاتصال بخادم ميلفوس في MindsDB، يمكن استخدام الصيغة التالية:</p>
+<h3 id="Creating-connection" class="common-anchor-header">إنشاء اتصال<button data-href="#Creating-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>من أجل الاستفادة من هذا المعالج والاتصال بخادم ميلفوس في MindsDB، يمكن استخدام الصيغة التالية:</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">CREATE</span> DATABASE milvus_datasource
 <span class="hljs-keyword">WITH</span>
   ENGINE <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;milvus&#x27;</span>,
@@ -119,15 +134,75 @@ title: تكامل Milvus مع MindsDB
 <li>يمكنك أيضًا استخدام Milvus المُدار بالكامل على <a href="https://zilliz.com/cloud">Zilliz Cloud</a>. ما عليك سوى تعيين <code translate="no">uri</code> و <code translate="no">token</code> على <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">نقطة النهاية العامة ومفتاح واجهة برمجة التطبيقات</a> لمثيل Zilliz Cloud الخاص بك.</li>
 </ul>
 </blockquote>
-<h3 id="Dropping-connection" class="common-anchor-header">إسقاط الاتصال</h3><p>لإسقاط الاتصال، استخدم هذا الأمر</p>
+<h3 id="Dropping-connection" class="common-anchor-header">إسقاط الاتصال<button data-href="#Dropping-connection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لإسقاط الاتصال، استخدم هذا الأمر</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">DROP</span> DATABASE milvus_datasource;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Creating-tables" class="common-anchor-header">إنشاء الجداول</h3><p>لإدراج بيانات من جدول موجود مسبقًا، استخدم الأمر <code translate="no">CREATE</code></p>
+<h3 id="Creating-tables" class="common-anchor-header">إنشاء الجداول<button data-href="#Creating-tables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لإدراج بيانات من جدول موجود مسبقًا، استخدم الأمر <code translate="no">CREATE</code></p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> milvus_datasource.test
 (<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> sqlitedb.test);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Dropping-collections" class="common-anchor-header">إسقاط المجموعات</h3><p>إسقاط مجموعة غير مدعوم</p>
-<h3 id="Querying-and-selecting" class="common-anchor-header">الاستعلام والاختيار</h3><p>للاستعلام عن قاعدة البيانات باستخدام متجه بحث، يمكنك استخدام <code translate="no">search_vector</code> في البند <code translate="no">WHERE</code> </p>
+<h3 id="Dropping-collections" class="common-anchor-header">إسقاط المجموعات<button data-href="#Dropping-collections" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>إسقاط مجموعة غير مدعوم</p>
+<h3 id="Querying-and-selecting" class="common-anchor-header">الاستعلام والاختيار<button data-href="#Querying-and-selecting" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>للاستعلام عن قاعدة البيانات باستخدام متجه بحث، يمكنك استخدام <code translate="no">search_vector</code> في البند <code translate="no">WHERE</code> </p>
 <p>تحذيرات:</p>
 <ul>
 <li>إذا قمت بحذف <code translate="no">LIMIT</code> ، يتم استخدام <code translate="no">search_default_limit</code> نظرًا لأن ميلفوس يتطلب ذلك</li>
@@ -145,7 +220,22 @@ LIMIT <span class="hljs-number">10</span>;
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> milvus_datasource.createtest
 <span class="hljs-keyword">WHERE</span> category <span class="hljs-operator">=</span> &quot;science&quot;;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Deleting-records" class="common-anchor-header">حذف السجلات</h3><p>يمكنك حذف الإدخالات باستخدام <code translate="no">DELETE</code> تمامًا كما هو الحال في SQL.</p>
+<h3 id="Deleting-records" class="common-anchor-header">حذف السجلات<button data-href="#Deleting-records" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكنك حذف الإدخالات باستخدام <code translate="no">DELETE</code> تمامًا كما هو الحال في SQL.</p>
 <p>تنبيهات:</p>
 <ul>
 <li>يدعم ميلفوس فقط حذف الكيانات ذات المفاتيح الأساسية المحددة بوضوح</li>
@@ -154,10 +244,40 @@ LIMIT <span class="hljs-number">10</span>;
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> milvus_datasource.test
 <span class="hljs-keyword">WHERE</span> id <span class="hljs-keyword">IN</span> (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Inserting-records" class="common-anchor-header">إدراج السجلات</h3><p>يمكنك أيضًا إدراج صفوف فردية مثل ذلك:</p>
+<h3 id="Inserting-records" class="common-anchor-header">إدراج السجلات<button data-href="#Inserting-records" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكنك أيضًا إدراج صفوف فردية مثل ذلك:</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> milvus_test.testable (id,content,metadata,embeddings)
 <span class="hljs-keyword">VALUES</span> (&quot;id3&quot;, <span class="hljs-string">&#x27;this is a test&#x27;</span>, <span class="hljs-string">&#x27;{&quot;test&quot;: &quot;test&quot;}&#x27;</span>, <span class="hljs-string">&#x27;[1.0, 8.0, 9.0]&#x27;</span>);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Updating" class="common-anchor-header">تحديث</h3><p>لا تدعم واجهة برمجة تطبيقات Milvus تحديث السجلات. يمكنك محاولة استخدام مزيج من <code translate="no">DELETE</code> و <code translate="no">INSERT</code></p>
+<h3 id="Updating" class="common-anchor-header">تحديث<button data-href="#Updating" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لا تدعم واجهة برمجة تطبيقات Milvus تحديث السجلات. يمكنك محاولة استخدام مزيج من <code translate="no">DELETE</code> و <code translate="no">INSERT</code></p>
 <hr>
 <p>لمزيد من التفاصيل والأمثلة، يرجى الرجوع إلى <a href="https://docs.mindsdb.com/what-is-mindsdb">الوثائق الرسمية لـ MindsDB</a>.</p>

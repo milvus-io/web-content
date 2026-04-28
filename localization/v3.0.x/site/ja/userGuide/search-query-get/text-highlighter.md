@@ -24,7 +24,7 @@ beta: Milvus 2.6.8+
 <p>ハイライトは、最終検索結果セットの後処理として実行されます。検索候補、フィルタリングロジック、ランキング、スコアリングには影響しません。</p>
 <p>Highlighterは3つの独立した制御を提供します：</p>
 <ul>
-<li><p><strong>どの用語をハイライトするか</strong></p>
+<li><p><strong>ハイライトされる用語</strong></p>
 <p>ハイライトされる用語を選択できます。例えば、<strong>BM25の全文検索で</strong>使用される検索語や、<strong>テキストベースのフィルタリング式</strong>（<code translate="no">TEXT_MATCH</code> 条件など）で指定されるクエリ語をハイライトします。</p></li>
 <li><p><strong>ハイライトされた用語の表示方法</strong></p>
 <p>各マッチの前後に挿入されるタグを設定することで、マッチした用語がハイライト出力でどのように表示されるかを制御できます。たとえば、<code translate="no">{}</code> のような単純なマーカーや、<code translate="no">&lt;em&gt;&lt;/em&gt;</code> のような HTML タグを使用して、リッチなレンダリングを行います。</p></li>
@@ -183,7 +183,7 @@ highlighter = LexicalHighlighter(
 <button class="copy-code-btn"></button></code></pre>
 <p>この設定では</p>
 <ul>
-<li><p><code translate="no">fragment_offset</code> は、ハイライトされた最初の単語の前に、先頭のコンテキストを埋めます。</p></li>
+<li><p><code translate="no">fragment_offset</code> は、ハイライトされる最初の単語の前に、先頭のコンテキストを予約します。</p></li>
 <li><p><code translate="no">fragment_size</code> 各フラグメントに含まれるテキストの量を制限します。</p></li>
 <li><p><code translate="no">num_of_fragments</code> 返されるフラグメントの数を制御します。</p></li>
 </ul>

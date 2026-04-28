@@ -58,7 +58,7 @@ go build
       </svg>
     </button></h2><p>下載<a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/master/configs/backup.yaml">範例組態檔案</a>，並依您的需求進行調整。</p>
 <p>然後在已下載或已建立的 Milvus Backup 二進位檔旁邊建立一個資料夾，將資料夾名稱為<code translate="no">configs</code> ，並將設定檔放在<code translate="no">configs</code> 資料夾內。</p>
-<p>您的資料夾結構應該與下面相似：</p>
+<p>您的資料夾結構應與以下相似：</p>
 <pre>
   <code translate="no">
   workspace
@@ -99,7 +99,7 @@ go build
 <p>獲取<a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/main/example/prepare_data.py">腳本</a>。然後執行腳本來產生資料。確保已安裝官方的 Milvus Python SDK<a href="https://pypi.org/project/pymilvus/">PyMilvus</a>。</p>
 <pre><code translate="no" class="language-shell">python example/prepare_data.py
 <button class="copy-code-btn"></button></code></pre>
-<p>此步驟是可選的。如果您跳過這一步，請確保您的 Milvus 實例中已經有一些資料。</p>
+<p>此步驟是可選的。如果跳過此步驟，請確保您的 Milvus 實例中已經有一些資料。</p>
 <h2 id="Back-up-data" class="common-anchor-header">備份資料<button data-href="#Back-up-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,7 +115,7 @@ go build
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>請注意，針對 Milvus 實例執行 Milvus Backup 通常不會影響實例的執行。在備份或還原時，您的 Milvus 實例是完全正常的。</p>
+    </button></h2><p>請注意，針對 Milvus 實例執行 Milvus Backup 通常不會影響實例的運行。在備份或還原時，您的 Milvus 實例是完全正常的。</p>
 <div class="tab-wrapper"></div>
 <p>執行以下命令來建立備份。</p>
 <pre><code translate="no" class="language-shell">./milvus-backup create -n &lt;backup_name&gt;
@@ -153,7 +153,7 @@ mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
 <pre><code translate="no" class="language-shell">./milvus-backup restore -n my_backup -s _recover
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">-s</code> 標誌允許您為要建立的新集合設定後綴。上述命令將在您的<strong>Milvus</strong>實例中建立一個新的資料集，名稱為<strong>hello_milvus_recover</strong>。</p>
-<p>如果您希望還原已備份的資料集而不更改其名稱，請在從備份還原資料集之前刪除該資料集。現在您可以執行以下指令，清理在<a href="#Prepare-data">準備資料</a>中產生的資料。</p>
+<p>如果您希望還原備份的資料集而不更改其名稱，請在從備份還原資料集之前丟棄該資料集。現在您可以執行以下指令，清理在<a href="#Prepare-data">準備資料</a>中產生的資料。</p>
 <pre><code translate="no" class="language-shell">python example/clean_data.py
 <button class="copy-code-btn"></button></code></pre>
 <p>然後執行以下命令從備份還原資料。</p>

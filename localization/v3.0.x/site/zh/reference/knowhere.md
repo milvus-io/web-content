@@ -34,7 +34,7 @@ title: Knowhere
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Knowhere 是 Milvus 的核心向量执行引擎，它集成了多个向量相似性搜索库，包括<a href="https://github.com/facebookresearch/faiss">Faiss</a>、<a href="https://github.com/nmslib/hnswlib">Hnswlib</a>和<a href="https://github.com/spotify/annoy">Annoy</a>。Knowhere 的设计还支持异构计算。它可以控制在哪个硬件（CPU 或 GPU）上执行索引构建和搜索请求。这就是 Knowhere 名字的由来--知道在哪里执行操作符。未来的版本将支持更多类型的硬件，包括 DPU 和 TPU。</p>
+    </button></h2><p>Knowhere 是 Milvus 的核心向量执行引擎，它集成了多个向量相似性搜索库，包括<a href="https://github.com/facebookresearch/faiss">Faiss</a>、<a href="https://github.com/nmslib/hnswlib">Hnswlib</a>和<a href="https://github.com/spotify/annoy">Annoy</a>。Knowhere 的设计还支持异构计算。它可以控制在哪个硬件（CPU 或 GPU）上执行索引构建和搜索请求。这就是Knowhere名字的由来--知道在哪里执行操作符。未来的版本将支持更多类型的硬件，包括 DPU 和 TPU。</p>
 <h2 id="Knowhere-in-the-Milvus-architecture" class="common-anchor-header">Milvus架构中的Knowhere<button data-href="#Knowhere-in-the-Milvus-architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ title: Knowhere
     </button></h2><p>下图说明了 Knowhere 在 Milvus 架构中的位置。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
    </span> <span class="img-wrapper"> <span>Knowhere</span> </span></p>
 <p>最底层是系统硬件。上面是第三方索引库。在最上层，Knowhere通过CGO与索引节点和查询节点交互，CGO允许Go包调用C代码。</p>
 <h2 id="Knowhere-advantages" class="common-anchor-header">Knowhere的优势<button data-href="#Knowhere-advantages" class="anchor-icon" translate="no">
@@ -96,12 +96,12 @@ title: Knowhere
         ></path>
       </svg>
     </button></h2><p>Milvus 中的计算主要涉及向量和标量操作。Knowhere 只处理向量索引的操作符。</p>
-<p>索引是一种独立于原始向量数据的数据结构。一般来说，建立索引需要四个步骤：创建索引、训练数据、插入数据和建立索引。在一些人工智能应用中，数据集训练与向量搜索是分开的。先对数据集的数据进行训练，然后插入到 Milvus 等向量数据库中进行相似性搜索。例如，开放数据集 sift1M 和 sift1B 区分了用于训练的数据和用于测试的数据。</p>
-<p>然而，在 Knowhere 中，用于训练的数据和用于搜索的数据是相同的。Knowhere 会对一个数据<a href="https://milvus.io/blog/deep-dive-1-milvus-architecture-overview.md#Segments">段</a>中的所有数据进行训练，然后插入所有训练过的数据并为它们建立索引。</p>
-<h4 id="DataObj-base-class" class="common-anchor-header"><code translate="no">DataObj</code>基类</h4><p><code translate="no">DataObj</code> 是 Knowhere 中所有数据结构的基类。 是 中唯一的虚拟方法。Index 类继承自 ，其字段名为 "size_"。Index 类还有两个虚拟方法-- 和 。从 派生的 类是所有向量索引的虚拟基类。 提供的方法包括 , , , 和 。<code translate="no">Size()</code> <code translate="no">DataObj</code> <code translate="no">DataObj</code> <code translate="no">Serialize()</code> <code translate="no">Load()</code> <code translate="no">Index</code> <code translate="no">VecIndex</code> <code translate="no">VecIndex</code> <code translate="no">Train()</code> <code translate="no">Query()</code> <code translate="no">GetStatistics()</code> <code translate="no">ClearStatistics()</code></p>
+<p>索引是一种独立于原始向量数据的数据结构。一般来说，建立索引需要四个步骤：创建索引、训练数据、插入数据和建立索引。在一些人工智能应用中，数据集训练与向量搜索是分离的。先对数据集的数据进行训练，然后插入到 Milvus 等向量数据库中进行相似性搜索。例如，开放数据集 sift1M 和 sift1B 区分了用于训练的数据和用于测试的数据。</p>
+<p>然而，在 Knowhere 中，用于训练和搜索的数据是相同的。Knowhere 会对一个数据<a href="https://milvus.io/blog/deep-dive-1-milvus-architecture-overview.md#Segments">段</a>中的所有数据进行训练，然后插入所有训练过的数据并为它们建立索引。</p>
+<h4 id="DataObj-base-class" class="common-anchor-header"><code translate="no">DataObj</code>基类</h4><p><code translate="no">DataObj</code> 是 Knowhere 中所有数据结构的基类。<code translate="no">Size()</code> 是<code translate="no">DataObj</code> 中唯一的虚拟方法。Index 类继承自<code translate="no">DataObj</code> ，其字段名为 "size_"。Index 类还有两个虚拟方法--<code translate="no">Serialize()</code> 和<code translate="no">Load()</code> 。从<code translate="no">Index</code> 派生的<code translate="no">VecIndex</code> 类是所有向量索引的虚拟基类。<code translate="no">VecIndex</code> 提供的方法包括<code translate="no">Train()</code>,<code translate="no">Query()</code>,<code translate="no">GetStatistics()</code>, 和<code translate="no">ClearStatistics()</code> 。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
    </span> <span class="img-wrapper"> <span>基类</span> </span></p>
 <p>上图右侧列出了其他一些索引类型。</p>
 <ul>
@@ -111,20 +111,20 @@ title: Knowhere
 </ul>
 <h4 id="IDMAP-brute-force-search" class="common-anchor-header"><code translate="no">IDMAP</code>强制搜索</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
    </span> <span class="img-wrapper"> <span>IDMAP</span> </span></p>
 <p>从技术上讲，<code translate="no">IDMAP</code> 不是索引，而是用于暴力搜索。向量插入数据库时，既不需要数据训练，也不需要建立索引。搜索将直接在插入的向量数据上进行。</p>
 <p>不过，为了保持代码的一致性，<code translate="no">IDMAP</code> 也继承自<code translate="no">VecIndex</code> 类及其所有虚拟接口。<code translate="no">IDMAP</code> 的用法与其他索引相同。</p>
 <h4 id="IVF-indices" class="common-anchor-header">IVF 索引</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
    </span> <span class="img-wrapper"> <span>IVF</span> </span></p>
 <p>IVF（倒置文件）索引是最常用的索引。<code translate="no">IVF</code> 类衍生自<code translate="no">VecIndex</code> 和<code translate="no">FaissBaseIndex</code> ，并进一步扩展到<code translate="no">IVFSQ</code> 和<code translate="no">IVFPQ</code> 。<code translate="no">GPUIVF</code> 衍生自<code translate="no">GPUIndex</code> 和<code translate="no">IVF</code> 。然后，<code translate="no">GPUIVF</code> 进一步扩展到<code translate="no">GPUIVFSQ</code> 和<code translate="no">GPUIVFPQ</code> 。</p>
-<p><code translate="no">IVFSQHybrid</code> 是一个自主开发的混合索引。粗量化器在 GPU 上执行，而桶中的搜索则在 CPU 上进行。 的召回率与 相同，但性能更好。<code translate="no">IVFSQHybrid</code> <code translate="no">GPUIVFSQ</code> </p>
+<p><code translate="no">IVFSQHybrid</code> 是一个自主开发的混合索引。粗量化器在 GPU 上执行，而桶中的搜索则在 CPU 上进行。<code translate="no">IVFSQHybrid</code> 的召回率与<code translate="no">GPUIVFSQ</code> 相同，但性能更好。</p>
 <p>二进制索引的基类结构相对简单。<code translate="no">BinaryIDMAP</code> 和<code translate="no">BinaryIVF</code> 由<code translate="no">FaissBaseBinaryIndex</code> 和<code translate="no">VecIndex</code> 派生而来。</p>
 <h4 id="Third-party-indices" class="common-anchor-header">第三方索引</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
    </span> <span class="img-wrapper"> <span>第三方指数</span> </span></p>
 <p>目前，除了 Faiss 之外，只支持两种第三方索引：基于树的索引<code translate="no">Annoy</code> 和基于图的索引<code translate="no">HNSW</code> 。这两种常用的第三方指数均来自<code translate="no">VecIndex</code> 。</p>
 <h2 id="Adding-indices-to-Knowhere" class="common-anchor-header">向Knowhere添加索引<button data-href="#Adding-indices-to-Knowhere" class="anchor-icon" translate="no">

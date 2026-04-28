@@ -27,7 +27,7 @@ title: Construir una RAG con Milvus y Unstructured
         ></path>
       </svg>
     </button></h1><p><a href="https://docs.unstructured.io/welcome">Unstructured</a> proporciona una plataforma y herramientas para ingerir y procesar documentos no estructurados para la Retrieval Augmented Generation (RAG) y el ajuste de modelos. Ofrece tanto una plataforma de interfaz de usuario sin código como servicios de API sin servidor, lo que permite a los usuarios procesar datos en recursos informáticos alojados en Unstructured.</p>
-<p>En este tutorial, utilizaremos Unstructured para ingerir documentos PDF y, a continuación, utilizaremos Milvus para construir una canalización RAG.</p>
+<p>En este tutorial, utilizaremos Unstructured para ingerir documentos PDF y, a continuación, utilizaremos Milvus para crear una canalización RAG.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparación<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,7 +122,7 @@ openai_client = OpenAI()
         .embedding
     )
 <button class="copy-code-btn"></button></code></pre>
-<p>Genera una incrustación de prueba e imprime su dimensión y sus primeros elementos.</p>
+<p>Generar un embedding de prueba e imprimir su dimensión y primeros elementos.</p>
 <pre><code translate="no" class="language-python">test_embedding = emb_text(<span class="hljs-string">&quot;This is a test&quot;</span>)
 embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <span class="hljs-built_in">print</span>(embedding_dim)
@@ -191,7 +191,7 @@ milvus_client.load_collection(collection_name=collection_name)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Unstructured proporciona una canalización de ingesta flexible y potente para procesar varios tipos de archivos, incluidos PDF, HTML, etc. Particionaremos y fragmentaremos un archivo PDF local. Y luego cargaremos los datos en Milvus.</p>
+    </button></h2><p>Unstructured proporciona un canal de ingesta flexible y potente para procesar varios tipos de archivos, incluidos PDF, HTML, etc. Particionaremos y fragmentaremos un archivo PDF local. Y luego cargaremos los datos en Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> warnings
 <span class="hljs-keyword">from</span> unstructured.partition.auto <span class="hljs-keyword">import</span> partition
 

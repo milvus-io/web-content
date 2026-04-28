@@ -71,23 +71,38 @@ title: 將 Milvus 的 Pulsar 從 V2 升級至 V3
         ></path>
       </svg>
     </button></h2><p>本節提供在 Milvus 中將 Pulsar 從 V2 升級到 V3 的詳細步驟。</p>
-<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">持久化 Pulsar 中未消耗的資料</h3><p>在此步驟，您需要確保 Pulsar 中現有的資料已持久化到物件儲存服務。 有兩種方法可供使用，您可以選擇適合您需求的方法。</p>
+<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">持久化 Pulsar 中未消耗的資料<button data-href="#Persist-data-not-consumed-in-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在此步驟，您需要確保 Pulsar 中現有的資料已持久化到物件儲存服務。 有兩種方法可供使用，您可以選擇適合您需求的方法。</p>
 <h4 id="Approach-1-Using-Attu" class="common-anchor-header">方法 1：使用 Attu</h4><p>如果您的工作 Milvus 部署中只有少量的集合，且分段不多，您可以使用 Attu 將資料持久化到物件儲存服務。</p>
 <ol>
 <li><p>選取所有資料庫中的每個集合，進入<code translate="no">Segments</code> 面板，按一下<code translate="no">Flush</code> 按鈕。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
    </span> <span class="img-wrapper"> <span>集合的區段面板</span> </span></p></li>
 <li><p>然後在彈出視窗時，再次按一下<code translate="no">Flush</code> 。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
    </span> <span class="img-wrapper"> <span>在 Attu 中的資料沖洗提示</span> </span></p></li>
 <li><p>然後等到所有資料集的 Persistent Segment 狀態都是<code translate="no">Flushed</code> 。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/view-data-peristent-process.png" alt="View data flush status in Attu" class="doc-image" id="view-data-flush-status-in-attu" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/view-data-peristent-process.png" alt="View data flush status in Attu" class="doc-image" id="view-data-flush-status-in-attu" />
    </span> <span class="img-wrapper"> <span>在 Attu 中檢視資料刷新狀態</span> </span></p></li>
 </ol>
 <h4 id="Approach-2-Using-management-API" class="common-anchor-header">方法 2：使用管理 API</h4><ol>
@@ -138,7 +153,22 @@ title: 將 Milvus 的 Pulsar 從 V2 升級至 V3
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">停止 Milvus 並刪除 Pulsar V2</h3><p>在這個步驟中，您需要停止 Milvus pod 並刪除 Pulsar V2 部署。 有兩個獨立的部分可供使用：</p>
+<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">停止 Milvus 並刪除 Pulsar V2<button data-href="#Stop-Milvus-and-delete-Pulsar-V2" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在這個步驟中，您需要停止 Milvus pod 並刪除 Pulsar V2 部署。 有兩個獨立的部分可供使用：</p>
 <ul>
 <li><p>適用於 Milvus Helm 使用者</p>
 <p>如果您使用 Milvus Helm 圖表安裝 Milvus，請前往<a href="#Delete-Pulsar-V2-using-Helm">使用 Helm 刪除 Pulsar V2</a>。</p></li>
@@ -152,7 +182,7 @@ title: 將 Milvus 的 Pulsar 從 V2 升級至 V3
 <span class="hljs-built_in">cat</span> values.yaml​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>使用指令停止 Milvus 及所有相依性。不用擔心資料卷，預設會保留它們。</p>
+<li><p>使用指令停止 Milvus 及所有相依性。不用擔心資料卷，它們會被預設保留。</p>
 <pre><code translate="no" class="language-bash">helm -n default uninstall my-release​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -291,7 +321,22 @@ milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">啟動 Pulsar V3 和 Milvus</h3><p>在這個步驟中，您需要啟動 Pulsar V3 和 Milvus pods。 有兩個獨立的部分可供使用：</p>
+<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">啟動 Pulsar V3 和 Milvus<button data-href="#Start-Pulsar-V3-and-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在這個步驟中，您需要啟動 Pulsar V3 和 Milvus pods。 有兩個獨立的部分可供使用：</p>
 <ul>
 <li><p>給 Helm 使用者</p>
 <p>如果您使用 Milvus Helm 圖表安裝 Milvus，請前往<a href="#For-Helm-User">For Helm User</a>。</p></li>
@@ -322,7 +367,7 @@ Hang tight <span class="hljs-keyword">while</span> we grab the latest from your 
 Update Complete. ⎈Happy Helming!⎈​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>使用編輯好的<code translate="no">values.yaml</code> 安裝您的 milvus 版本與最新的 helm 圖表版本。</p>
+<li><p>使用編輯的<code translate="no">values.yaml</code> 安裝您的 milvus 版本與最新的 helm 圖版本</p>
 <pre><code translate="no" class="language-bash">helm -n default install my-release zilliztech/milvus --reset-values -f values.yaml​
 
 <button class="copy-code-btn"></button></code></pre>

@@ -43,14 +43,29 @@ title: Scalare un cluster Milvus
         ></path>
       </svg>
     </button></h2><p>Il ridimensionamento orizzontale comprende il ridimensionamento in uscita e il ridimensionamento in entrata.</p>
-<h3 id="Scaling-out" class="common-anchor-header">Ridimensionamento</h3><p>Lo scaling out si riferisce all'aumento del numero di nodi in un cluster. A differenza dello scaling up, lo scaling out non richiede l'allocazione di più risorse a un nodo del cluster. Invece, lo scaling out espande il cluster orizzontalmente aggiungendo altri nodi.</p>
+<h3 id="Scaling-out" class="common-anchor-header">Ridimensionamento<button data-href="#Scaling-out" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Lo scaling out si riferisce all'aumento del numero di nodi in un cluster. A differenza dello scaling up, lo scaling out non richiede l'allocazione di più risorse a un nodo del cluster. Invece, lo scaling out espande il cluster orizzontalmente aggiungendo altri nodi.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
    </span> <span class="img-wrapper"> <span>Scalare</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>Scalare</span> </span></p>
 <p>Secondo l'<a href="/docs/it/architecture_overview.md">architettura Milvus</a>, i nodi worker stateless includono il nodo di interrogazione, il nodo dati, il nodo indice e il proxy. Pertanto, è possibile scalare questo tipo di nodi in base alle esigenze aziendali e agli scenari applicativi. È possibile ridimensionare il cluster Milvus manualmente o automaticamente.</p>
 <p>In genere, è necessario ridimensionare il cluster Milvus creato se è sovrautilizzato. Di seguito sono riportate alcune situazioni tipiche in cui potrebbe essere necessario ridimensionare il cluster Milvus:</p>
@@ -61,7 +76,22 @@ title: Scalare un cluster Milvus
 <li>È necessario elaborare volumi massicci di grandi insiemi di dati.</li>
 <li>È necessario garantire un'elevata disponibilità del servizio Milvus.</li>
 </ul>
-<h3 id="Scaling-in" class="common-anchor-header">Scalare in</h3><p>Per scalare si intende diminuire il numero di nodi in un cluster. In genere, è necessario scalare il cluster Milvus creato se è sottoutilizzato. Di seguito sono riportate alcune situazioni tipiche in cui è necessario scalare il cluster Milvus:</p>
+<h3 id="Scaling-in" class="common-anchor-header">Scalare in<button data-href="#Scaling-in" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per scalare si intende diminuire il numero di nodi in un cluster. In genere, è necessario scalare il cluster Milvus creato se è sottoutilizzato. Di seguito sono riportate alcune situazioni tipiche in cui è necessario scalare il cluster Milvus:</p>
 <ul>
 <li>L'utilizzo della CPU e della memoria è basso per un certo periodo di tempo.</li>
 <li>Il throughput delle query si riduce.</li>
@@ -173,7 +203,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><p>Se siete pronti a distribuire il vostro cluster su cloud:</p>
 <ul>
 <li>Imparare a <a href="/docs/it/eks.md">distribuire Milvus su Amazon EKS con Terraform</a></li>
-<li>Imparare a <a href="/docs/it/gcp.md">distribuire il cluster Milvus su GCP con Kubernetes</a></li>
+<li>Imparare a distribuire <a href="/docs/it/gcp.md">il cluster Milvus su GCP con Kubernetes</a></li>
 <li>Imparare a <a href="/docs/it/azure.md">distribuire Milvus su Microsoft Azure con Kubernetes</a></li>
 </ul></li>
 <li><p>Se state cercando istruzioni su come allocare le risorse:</p>

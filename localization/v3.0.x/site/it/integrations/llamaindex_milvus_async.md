@@ -115,7 +115,7 @@ DIM = <span class="hljs-number">768</span>
 <div class="alert note">
 <ul>
 <li>Se si dispone di una grande quantità di dati, è possibile configurare un server Milvus performante su <a href="https://milvus.io/docs/quickstart.md">docker o kubernetes</a>. In questa configurazione, utilizzare l'URI del server, ad esempio<code translate="no">http://localhost:19530</code>, come <code translate="no">uri</code>.</li>
-<li>Se si desidera utilizzare <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, il servizio cloud completamente gestito per Milvus, è necessario impostare <code translate="no">uri</code> e <code translate="no">token</code>, che corrispondono all'<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">endpoint pubblico e alla chiave Api</a> di Zilliz Cloud.</li>
+<li>Se si desidera utilizzare <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, il servizio cloud completamente gestito da Milvus, è necessario impostare <code translate="no">uri</code> e <code translate="no">token</code>, che corrispondono all'<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">endpoint pubblico e alla chiave Api</a> di Zilliz Cloud.</li>
 <li>Nel caso di sistemi complessi (come la comunicazione di rete), l'elaborazione asincrona può migliorare le prestazioni rispetto alla sincronizzazione. Riteniamo quindi che Milvus-Lite non sia adatto all'uso di interfacce asincrone perché gli scenari utilizzati non sono adatti.</li>
 </ul>
 </div>
@@ -345,7 +345,7 @@ inserted_ids = vector_store.add(node_list)
 Async search for 100 queries took 1.39 seconds
 Async search for 1000 queries took 8.81 seconds
 </code></pre>
-<h4 id="Compare-with-synchronous-search" class="common-anchor-header">Confronto con la ricerca sincrona</h4><p>Definire una funzione di ricerca sincrona. Misurare poi il tempo di esecuzione nelle stesse condizioni.</p>
+<h4 id="Compare-with-synchronous-search" class="common-anchor-header">Confronto con la ricerca sincrona</h4><p>Definire una funzione di ricerca sincrona. Misurare il tempo di esecuzione nelle stesse condizioni.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">sync_search</span>(<span class="hljs-params">num_queries</span>):
     start_time = time.time()
     <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_queries):

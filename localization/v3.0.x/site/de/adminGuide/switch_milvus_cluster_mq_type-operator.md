@@ -144,7 +144,7 @@ AlterWAL broadcast message acknowledged <span class="hljs-keyword">by</span> all
 successfully updated mq.type configuration <span class="hljs-keyword">in</span> etcd
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>In den obigen Protokollmeldungen steht <code translate="no">&lt;MQ1&gt;</code> für den Quell-MQ-Typ (z. B. <code translate="no">pulsar</code> oder <code translate="no">kafka</code>) und <code translate="no">&lt;MQ2&gt;</code> für den Ziel-MQ-Typ (<code translate="no">woodpecker</code>).</p>
+<p>In den obigen Protokollmeldungen ist <code translate="no">&lt;MQ1&gt;</code> der Quell-MQ-Typ (z. B. <code translate="no">pulsar</code> oder <code translate="no">kafka</code>) und <code translate="no">&lt;MQ2&gt;</code> ist der Ziel-MQ-Typ (<code translate="no">woodpecker</code>).</p>
 <ul>
 <li>Die erste Meldung zeigt an, dass der WAL-Wechsel von der Quelle zum Ziel abgeschlossen ist.</li>
 <li>Die zweite Meldung zeigt an, dass alle physischen Kanäle umgeschaltet wurden.</li>
@@ -198,7 +198,7 @@ successfully updated mq.type configuration <span class="hljs-keyword">in</span> 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Bevor Sie die Umschaltung auslösen, müssen Sie sicherstellen, dass der Ziel-MQ-Dienst (Pulsar oder Kafka) verfügbar ist und seine Zugriffskonfiguration in die Milvus-Konfiguration übernommen wird.</p>
+    </button></h3><p>Bevor Sie den Wechsel auslösen, müssen Sie sicherstellen, dass der Ziel-MQ-Dienst (Pulsar oder Kafka) verfügbar ist und seine Zugriffskonfiguration in die Milvus-Konfiguration übernommen wird.</p>
 <div class="alert note">
 <p>Die genauen Schritte in diesem Abschnitt hängen davon ab, ob Sie einen internen (gebündelten) oder externen MQ-Dienst verwenden.</p>
 </div>

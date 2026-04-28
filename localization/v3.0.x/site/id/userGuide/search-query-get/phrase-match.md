@@ -1,6 +1,6 @@
 ---
 id: phrase-match.md
-title: Pencocokan FrasaCompatible with Milvus 2.6.x
+title: Pencocokan FrasaCompatible with Milvus 2.5.17+
 summary: >-
   Pencocokan frasa memungkinkan Anda mencari dokumen yang mengandung istilah
   kueri Anda sebagai frasa yang tepat. Secara default, kata-kata harus muncul
@@ -8,9 +8,9 @@ summary: >-
   "pembelajaran mesin robotika" mencocokkan teks seperti "... model pembelajaran
   mesin robotika yang khas...", di mana kata "robotika", "mesin", dan
   "pembelajaran" muncul secara berurutan tanpa kata lain di antaranya.
-beta: Milvus 2.6.x
+beta: Milvus 2.5.17+
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">Pencocokan Frasa<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">Pencocokan Frasa<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -45,7 +45,7 @@ beta: Milvus 2.6.x
     </button></h2><p>Didukung oleh pustaka mesin pencari <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, pencocokan frasa bekerja dengan menganalisis informasi posisi kata dalam dokumen. Diagram di bawah ini mengilustrasikan prosesnya:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
    </span> <span class="img-wrapper"> <span>Alur Kerja Pencocokan Frasa</span> </span></p>
 <ol>
 <li><p><strong>Tokenisasi Dokumen</strong>: Ketika Anda memasukkan dokumen ke dalam Milvus, teks akan dipecah menjadi token (kata atau istilah individual) menggunakan penganalisis, dengan informasi posisi yang dicatat untuk setiap token. Sebagai contoh, <strong>doc_1</strong> ditokenisasi menjadi <strong>["mesin" (pos=0), "belajar" (pos=1), "meningkatkan" (pos=2), "efisiensi" (pos=3)]</strong>. Untuk informasi lebih lanjut tentang penganalisis, lihat <a href="/docs/id/analyzer-overview.md">Ikhtisar Penganalisis</a>.</p></li>
@@ -136,7 +136,7 @@ schema.add_field(
         ></path>
       </svg>
     </button></h3><p>Akurasi pencocokan frasa sangat bergantung pada penganalisis yang digunakan untuk memberi token pada data teks Anda. Penganalisis yang berbeda sesuai dengan bahasa dan format teks yang berbeda, yang memengaruhi tokenisasi dan akurasi posisi. Memilih penganalisis yang sesuai untuk kasus penggunaan spesifik Anda akan mengoptimalkan hasil pencocokan frasa.</p>
-<p>Secara default, Milvus menggunakan penganalisis standar, yang memberi token pada teks berdasarkan spasi dan tanda baca, menghapus token yang lebih panjang dari 40 karakter, dan mengubah teks menjadi huruf kecil. Tidak ada parameter tambahan yang diperlukan untuk penggunaan default. Lihat <a href="/docs/id/standard-analyzer.md">Penganalisis Standar</a> untuk detailnya.</p>
+<p>Secara default, Milvus menggunakan penganalisis standar, yang memberi token pada teks berdasarkan spasi dan tanda baca, menghapus token yang lebih panjang dari 40 karakter, dan mengonversi teks menjadi huruf kecil. Tidak ada parameter tambahan yang diperlukan untuk penggunaan default. Lihat <a href="/docs/id/standard-analyzer.md">Penganalisis Standar</a> untuk detailnya.</p>
 <p>Jika aplikasi Anda memerlukan penganalisis tertentu, konfigurasikan menggunakan parameter <code translate="no">analyzer_params</code>. Sebagai contoh, berikut adalah cara mengonfigurasi <code translate="no">english</code> analyzer untuk pencocokan frasa dalam teks bahasa Inggris:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
@@ -192,7 +192,7 @@ schema.add_field(
 <pre><code translate="no" class="language-python">PHRASE_MATCH(field_name, phrase, slop)
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p><code translate="no">field_name</code><strong>:</strong> Nama bidang <code translate="no">VARCHAR</code> tempat Anda melakukan pencocokan frasa.</p></li>
+<li><p><code translate="no">field_name</code><strong>:</strong> Nama bidang <code translate="no">VARCHAR</code> yang digunakan untuk melakukan pencocokan frasa.</p></li>
 <li><p><code translate="no">phrase</code><strong>:</strong> Frasa yang tepat untuk dicari.</p></li>
 <li><p><code translate="no">slop</code> (opsional)<strong>:</strong> Bilangan bulat yang menentukan jumlah maksimum posisi yang diperbolehkan dalam pencocokan token.</p>
 <ul>

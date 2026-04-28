@@ -21,7 +21,7 @@ summary: 流媒体服务是 Milvus 内部流媒体系统模块的一个概念，
     </button></h1><p><strong>流服务</strong>是 Milvus 内部流系统模块的一个概念，它围绕前向写日志（WAL）构建，以支持各种与流相关的功能。这些功能包括流式数据摄取/订阅、集群状态故障恢复、将流式数据转换为历史数据以及增长数据查询。从架构上讲，流服务由三个主要部分组成：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/streaming_distributed_arch.png" alt="Streaming Distributed Arc" class="doc-image" id="streaming-distributed-arc" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/streaming_distributed_arch.png" alt="Streaming Distributed Arc" class="doc-image" id="streaming-distributed-arc" />
    </span> <span class="img-wrapper"> <span>流分布式弧</span> </span></p>
 <ul>
 <li><p><strong>流协调器</strong>：协调器节点中的逻辑组件。它使用 Etcd 进行服务发现，以找到可用的流节点，并负责将 WAL 与相应的流节点绑定。它还负责注册服务，以公开 WAL 分布拓扑，让流客户端知道给定 WAL 的相应流节点。</p></li>
@@ -51,7 +51,7 @@ summary: 流媒体服务是 Milvus 内部流媒体系统模块的一个概念，
 <p>Milvus 中的消息顺序可能类似于以下内容：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/message_order.png" alt="Message Order" class="doc-image" id="message-order" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/message_order.png" alt="Message Order" class="doc-image" id="message-order" />
    </span> <span class="img-wrapper"> <span>消息顺序</span> </span></p>
 <h2 id="WAL-Component" class="common-anchor-header">WAL 组件<button data-href="#WAL-Component" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -72,7 +72,7 @@ summary: 流媒体服务是 Milvus 内部流媒体系统模块的一个概念，
 <p>WAL 组件的其他功能包括</p>
 <ul>
 <li><p><strong>分段生命周期管理</strong>：基于内存条件/段大小/段空闲时间等策略，WAL 可管理每个段的生命周期。</p></li>
-<li><p><strong>基本事务支持</strong>：由于每个消息都有大小限制，因此 WAL 组件支持简单事务级，以保证在 VChannel 级别进行原子写入。</p></li>
+<li><p><strong>基本事务支持</strong>：由于每个信息都有大小限制，因此 WAL 组件支持简单事务级，以保证在 VChannel 级别进行原子写入。</p></li>
 <li><p><strong>高并发远程日志写入</strong>：Milvus 支持第三方远程消息队列作为 WAL 存储。为减少流节点和远程 WAL 存储之间的往返延迟（RTT）以提高写吞吐量，流服务支持并发日志写入。它通过 TSO 和 TSO 同步来维护消息顺序，并按 TSO 顺序读取 WAL 中的消息。</p></li>
 <li><p><strong>预写缓冲区</strong>：信息写入 WAL 后，会暂时存储在预写缓冲区中。这样就能实现日志的尾部读取，而无需从远程 WAL 存储中获取报文。</p></li>
 <li><p><strong>支持多个 WAL 存储</strong>：Woodpecker、Pulsar 和 Kafka。使用零磁盘模式的 Woodpecker，我们可以消除对远程 WAL 存储的依赖。</p></li>
@@ -99,7 +99,7 @@ summary: 流媒体服务是 Milvus 内部流媒体系统模块的一个概念，
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/recovery_storage.png" alt="Recovery Storage" class="doc-image" id="recovery-storage" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/recovery_storage.png" alt="Recovery Storage" class="doc-image" id="recovery-storage" />
    </span> <span class="img-wrapper"> <span>恢复存储</span> </span></p>
 <h2 id="Query-Delegator" class="common-anchor-header">查询委托器<button data-href="#Query-Delegator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -137,7 +137,7 @@ summary: 流媒体服务是 Milvus 内部流媒体系统模块的一个概念，
     </button></h2><p>通过将计算节点与存储分离，Milvus 可以轻松地将 WAL 从一个流节点传输到另一个流节点，实现流服务的高可用性。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/wal_lifetime.png" alt="wal lifetime" class="doc-image" id="wal-lifetime" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/wal_lifetime.png" alt="wal lifetime" class="doc-image" id="wal-lifetime" />
    </span> <span class="img-wrapper"> <span>WAL 寿命</span> </span></p>
 <h2 id="Wait-for-Ready" class="common-anchor-header">等待就绪<button data-href="#Wait-for-Ready" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -157,5 +157,5 @@ summary: 流媒体服务是 Milvus 内部流媒体系统模块的一个概念，
     </button></h2><p>当 WAL 转移到新的流节点时，客户端会发现旧的流节点拒绝了一些请求。与此同时，WAL 将在新的流节点上恢复，客户端将等待新流节点上的钱包就绪。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/streaming_wait_for_ready.png" alt="wait for ready" class="doc-image" id="wait-for-ready" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/streaming_wait_for_ready.png" alt="wait for ready" class="doc-image" id="wait-for-ready" />
    </span> <span class="img-wrapper"> <span>等待就绪</span> </span></p>

@@ -59,7 +59,22 @@ title: Configurare la Chunk Cache
 <li><p>Per le istanze Milvus installate con Operator</p>
 <p>Aggiungere la configurazione alla sezione <code translate="no">spec.components</code> della risorsa personalizzata <code translate="no">Milvus</code>. Per i dettagli, vedere <a href="/docs/it/configure_operator.md">Configurazione di Milvus con Operator</a>.</p></li>
 </ul>
-<h3 id="Configuration-options" class="common-anchor-header">Opzioni di configurazione</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
+<h3 id="Configuration-options" class="common-anchor-header">Opzioni di configurazione<button data-href="#Configuration-options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
     <span class="hljs-attr">cache:</span>
         <span class="hljs-attr">warmup:</span> <span class="hljs-string">async</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -70,7 +85,22 @@ title: Configurare la Chunk Cache
 <li><code translate="no">disable</code>: Milvus non precarica i dati nella cache di memoria.</li>
 </ul>
 <p>Si noti che le impostazioni della cache dei chunk si applicano anche quando vengono inseriti nuovi dati nelle raccolte o vengono ricostruiti gli indici delle raccolte.</p>
-<h3 id="FAQ" class="common-anchor-header">DOMANDE FREQUENTI</h3><ul>
+<h3 id="FAQ" class="common-anchor-header">DOMANDE FREQUENTI<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>Come posso determinare se il meccanismo della chunk cache funziona correttamente?</strong></p>
 <p>Si consiglia di verificare la latenza di una richiesta di ricerca o di query dopo il caricamento di una raccolta. Se la latenza è significativamente più alta del previsto (ad esempio, diversi secondi), potrebbe indicare che il meccanismo della cache dei chunk è ancora in funzione.</p>
 <p>Se la latenza della query rimane elevata per un lungo periodo di tempo. È possibile controllare il throughput dello storage degli oggetti per verificare che la cache dei chunk sia ancora funzionante. In casi normali, la cache chunk funzionante genererà un throughput elevato sullo storage degli oggetti. In alternativa, è possibile provare la cache chunk in modalità <code translate="no">sync</code>.</p></li>

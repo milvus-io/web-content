@@ -65,7 +65,7 @@ summary: تعرف على نظام مزامنة الوقت في ميلفوس.
 </ul>
 <p>يمكن تحقيق هذا السيناريو المثالي بسهولة عندما تكون هناك عقدة واحدة فقط. ومع ذلك، فإن ميلفوس عبارة عن قاعدة بيانات متجهة موزعة، ولضمان الحفاظ على جميع عمليات DML وDDL في العقد المختلفة بالترتيب، يحتاج ميلفوس إلى معالجة المشكلتين التاليتين</p>
 <ol>
-<li><p>تختلف الساعة الزمنية للمستخدمين الاثنين في المثال أعلاه إذا كانا على عقد مختلفة. على سبيل المثال، إذا كان المستخدم 2 متأخرًا بـ 24 ساعة عن المستخدم 1، فإن جميع العمليات التي يقوم بها المستخدم 1 لا تكون مرئية للمستخدم 2 حتى اليوم التالي.</p></li>
+<li><p>تختلف الساعة الزمنية للمستخدمين الاثنين في المثال أعلاه إذا كانا على عقد مختلفة. على سبيل المثال، إذا كان المستخدم 2 متأخرًا بـ 24 ساعة عن المستخدم 1، فإن جميع عمليات المستخدم 1 لا تكون مرئية للمستخدم 2 حتى اليوم التالي.</p></li>
 <li><p>يمكن أن يكون هناك تأخير في الشبكة. إذا أجرى المستخدم 2 بحثًا على المجموعة <code translate="no">C0</code> على <code translate="no">t17</code> ، يجب أن يكون ميلفوس قادرًا على ضمان معالجة جميع العمليات قبل <code translate="no">t17</code> وإتمامها بنجاح. إذا تأخرت عملية الحذف على الموقع <code translate="no">t15</code> بسبب زمن انتقال الشبكة، فمن المحتمل جدًا أن يظل بإمكان المستخدم 2 رؤية البيانات المفترض حذفها <code translate="no">A1</code> عند إجراء بحث على <code translate="no">t17</code>.</p></li>
 </ol>
 <p>لذلك، يتبنى ميلفوس نظام مزامنة الوقت (timetick) لحل المشكلة.</p>
@@ -89,7 +89,7 @@ summary: تعرف على نظام مزامنة الوقت في ميلفوس.
 <p>الطابع الزمني TSO هو نوع من القيمة <code translate="no">uint64</code> التي تتكون من جزء مادي وجزء منطقي. يوضح الشكل أدناه تنسيق الطابع الزمني.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
    </span> <span class="img-wrapper"> <span>TSO_Timestamp</span>. </span></p>
 <p>كما هو موضح، فإن ال 46 بت في البداية هي الجزء المادي، أي التوقيت العالمي المنسق بالمللي ثانية. آخر 18 بت هو الجزء المنطقي.</p>
 <h2 id="Time-synchronization-system-timetick" class="common-anchor-header">نظام مزامنة الوقت (timetick)<button data-href="#Time-synchronization-system-timetick" class="anchor-icon" translate="no">
@@ -114,30 +114,30 @@ summary: تعرف على نظام مزامنة الوقت في ميلفوس.
   <code translate="no">MsgStream</code> هو عبارة عن غلاف لقائمة انتظار الرسائل، وهو Pulsar افتراضيًا في Milvus 2.0.</div>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
    </span> <span class="img-wrapper"> <span>timesync_proxy_insert_msg</span> </span></p>
 <p>أحد المبادئ العامة هو أنه في <code translate="no">MsgStream</code> ، يجب أن تكون الطوابع الزمنية لـ<code translate="no">InsertMsgs</code> من نفس الوكيل متزايدة. ومع ذلك، لا توجد مثل هذه القاعدة لتلك الخاصة بـ <code translate="no">InsertMsgs</code> من وكلاء مختلفين.</p>
 <p>الشكل التالي هو مثال على <code translate="no">InsertMsgs</code> في <code translate="no">MsgStream</code>. يحتوي المقتطف على خمسة <code translate="no">InsertMsgs</code> ، ثلاثة منها من <code translate="no">Proxy1</code> والباقي من <code translate="no">Proxy2</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
    </span> <span class="img-wrapper"> <span>msgstream</span> </span></p>
 <p>إن الطوابع الزمنية للثلاثة <code translate="no">InsertMsgs</code> من <code translate="no">Proxy1</code> هي طوابع زمنية متزايدة، وكذلك الأمر بالنسبة للاثنين <code translate="no">InsertMsgs</code> من <code translate="no">Proxy2</code>. ومع ذلك، لا يوجد ترتيب معين بين <code translate="no">Proxy1</code> و <code translate="no">Proxy2</code> <code translate="no">InsertMsgs</code> .</p>
 <p>يتمثل أحد السيناريوهات المحتملة في أنه عند قراءة رسالة ذات طابع زمني <code translate="no">110</code> من <code translate="no">Proxy2</code> ، يجد ميلفوس أن الرسالة ذات الطابع الزمني <code translate="no">80</code> من <code translate="no">Proxy1</code> لا تزال في <code translate="no">MsgStream</code>. لذلك، يقدم ميلفوس نظام مزامنة الوقت، timetick، لضمان أنه عند قراءة رسالة من <code translate="no">MsgStream</code> ، يجب استهلاك جميع الرسائل ذات قيم الطابع الزمني الأصغر.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
    </span> <span class="img-wrapper"> <span>مزامنة_الوقت</span> </span></p>
 <p>كما هو موضح في الشكل أعلاه,</p>
 <ul>
-<li><p>يقوم كل وكيل بشكل دوري (كل 200 مللي ثانية بشكل افتراضي) بالإبلاغ عن أكبر قيمة طابع زمني لأحدث <code translate="no">InsertMsg</code> في <code translate="no">MsgStream</code>إلى التنسيق الجذر.</p></li>
+<li><p>يقوم كل وكيل بشكل دوري (كل 200 مللي ثانية افتراضيًا) بالإبلاغ عن أكبر قيمة طابع زمني لأحدث <code translate="no">InsertMsg</code> في <code translate="no">MsgStream</code>إلى التنسيق الجذر.</p></li>
 <li><p>يحدد التنسيق الجذر الحد الأدنى لقيمة الطابع الزمني الأدنى على هذا <code translate="no">Msgstream</code> ، بغض النظر عن الوكيل الذي ينتمي إليه <code translate="no">InsertMsgs</code>. ثم يقوم جذر التنسيق بإدراج هذا الحد الأدنى للطابع الزمني في <code translate="no">Msgstream</code>. يسمى هذا الطابع الزمني أيضًا بالعلامة الزمنية.</p></li>
 <li><p>عندما تقرأ المكونات المستهلكة الطابع الزمني الذي أدرجه جذر التنسيق، فإنها تفهم أن جميع رسائل الإدراج ذات قيم الطابع الزمني الأصغر قد استهلكت. لذلك، يمكن تنفيذ الطلبات ذات الصلة بأمان دون مقاطعة الترتيب.</p></li>
 </ul>
 <p>الشكل التالي هو مثال على <code translate="no">Msgstream</code> مع إدراج طابع زمني.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
    </span> <span class="img-wrapper"> <span>timetick</span> </span></p>
 <p><code translate="no">MsgStream</code> بمعالجة الرسائل على دفعات وفقًا للعلامة الزمنية للتأكد من أن الرسائل الناتجة تفي بمتطلبات الطابع الزمني. في المثال أعلاه، سوف يستهلك جميع السجلات باستثناء <code translate="no">InsertMsgs</code> من <code translate="no">Proxy2</code> على <code translate="no">Timestamp: 120</code> لأنه بعد آخر علامة زمنية.</p>
 <h2 id="Whats-next" class="common-anchor-header">ما التالي<button data-href="#Whats-next" class="anchor-icon" translate="no">

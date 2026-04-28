@@ -147,7 +147,7 @@ response = index.as_chat_engine().chat(<span class="hljs-string">&quot;What did 
     </button></h2><pre><code translate="no" class="language-python"><span class="hljs-comment"># As we want to immediately see result in Langfuse, we need to flush the callback handler</span>
 langfuse_callback_handler.flush()
 <button class="copy-code-btn"></button></code></pre>
-<p>Готово! ✨ Вы видите трассировку индекса и запроса в вашем проекте Langfuse.</p>
+<p>Готово! ✨ Вы видите трассировку вашего индекса и запроса в проекте Langfuse.</p>
 <p>Примеры трасс (публичные ссылки):</p>
 <ol>
 <li><a href="https://cloud.langfuse.com/project/cloramnkj0002jz088vzn1ja4/traces/2b26fc72-044f-4b0b-a3c3-485328975161">Запрос</a></li>

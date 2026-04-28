@@ -26,7 +26,7 @@ summary: >-
 <div class="alert note">
 <p><strong>Para texto chino</strong>: Aunque <code translate="no">lindera</code> es compatible con el chino a través del diccionario <code translate="no">cc-cedict</code>, le recomendamos que utilice el <a href="/docs/es/jieba-tokenizer.md"><code translate="no">jieba</code></a> tokenizer. Jieba está diseñado específicamente para la segmentación de palabras chinas y ofrece mejores resultados.</p>
 </div>
-<h2 id="Overview" class="common-anchor-header">Visión general<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Resumen<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

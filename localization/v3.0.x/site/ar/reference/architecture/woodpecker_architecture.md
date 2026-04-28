@@ -46,12 +46,12 @@ summary: >-
     </button></h2><p>إن الابتكار الأساسي في Woodpecker هو بنيته الخالية من الأقراص:</p>
 <ul>
 <li>جميع بيانات السجل المخزنة في تخزين الكائنات السحابية (مثل Amazon S3 أو Google Cloud Storage أو Alibaba OS)</li>
-<li>البيانات الوصفية المُدارة من خلال مخازن القيمة الرئيسية الموزعة مثل <strong>etcd</strong></li>
+<li>البيانات الوصفية المُدارة من خلال مخازن القيمة الرئيسية الموزعة مثل <strong>إلخd</strong></li>
 <li>لا توجد تبعيات أقراص محلية للعمليات الأساسية</li>
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_layers.png" alt="woodpecker layers" class="doc-image" id="woodpecker-layers" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/woodpecker_layers.png" alt="woodpecker layers" class="doc-image" id="woodpecker-layers" />
    </span> <span class="img-wrapper"> <span>طبقات نقار الخشب</span> </span></p>
 <h2 id="Architecture-components" class="common-anchor-header">مكونات البنية<button data-href="#Architecture-components" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -91,17 +91,47 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>يوفر Woodpecker وضعين للنشر ليتناسب مع احتياجاتك الخاصة:</p>
-<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - خفيف الوزن وخالي من الصيانة</h3><p>يوفّر وضع MemoryBuffer خيار نشر بسيط وخفيف الوزن حيث يقوم عميل Woodpecker المضمّن بتخزين الكتابات الواردة مؤقتًا في الذاكرة ويقوم بمسحها بشكل دوري إلى خدمة تخزين الكائنات السحابية. في هذا الوضع، يتم تضمين المخزن المؤقت للذاكرة مباشرةً في العميل، مما يتيح التجميع الفعال قبل المسح إلى S3. تتم إدارة البيانات الوصفية باستخدام <strong>etcd</strong> لضمان الاتساق والتنسيق. هذا الوضع هو الأنسب لأحمال العمل ذات الدُفعات الثقيلة في عمليات النشر على نطاق أصغر أو بيئات الإنتاج التي تعطي الأولوية للبساطة على الأداء، خاصةً عندما لا يكون زمن انتقال الكتابة المنخفض أمرًا بالغ الأهمية. يتراوح زمن انتقال الكتابة في هذا الوضع بشكل عام بين 200-500 مللي ثانية.</p>
+<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - خفيف الوزن وخالي من الصيانة<button data-href="#MemoryBuffer---Lightweight-and-maintenance-free" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يوفّر وضع MemoryBuffer خيار نشر بسيط وخفيف الوزن حيث يقوم عميل Woodpecker المضمّن بتخزين الكتابات الواردة مؤقتًا في الذاكرة ويقوم بمسحها بشكل دوري إلى خدمة تخزين الكائنات السحابية. في هذا الوضع، يتم تضمين المخزن المؤقت للذاكرة مباشرةً في العميل، مما يتيح التجميع الفعال قبل المسح إلى S3. تتم إدارة البيانات الوصفية باستخدام <strong>etcd</strong> لضمان الاتساق والتنسيق. هذا الوضع هو الأنسب لأحمال العمل ذات الدُفعات الثقيلة في عمليات النشر على نطاق أصغر أو بيئات الإنتاج التي تعطي الأولوية للبساطة على الأداء، خاصةً عندما لا يكون زمن انتقال الكتابة المنخفض أمرًا بالغ الأهمية. يتراوح زمن انتقال الكتابة في هذا الوضع بشكل عام بين 200-500 مللي ثانية.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
    </span> <span class="img-wrapper"> <span>نشر وضع ذاكرة نقار الخشب</span> </span></p>
-<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - مُحسَّن لزمن انتقال منخفض ومتانة عالية</h3><p>تم تصميم وضع QuorumBuffer لأحمال عمل القراءة/الكتابة الحساسة لوقت الاستجابة وذات التردد العالي والتي تتطلب استجابة في الوقت الحقيقي وتحملاً قوياً للأخطاء. في هذا الوضع، يتفاعل عميل Woodpecker مع نظام نصاب ثلاثي النسخ لتوفير تخزين مؤقت عالي السرعة للكتابة وضمان اتساق قوي وتوافر عالٍ من خلال الإجماع الموزع.</p>
+<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - مُحسَّن من أجل زمن انتقال منخفض ومتانة عالية<button data-href="#QuorumBuffer---Optimized-for-low-latency-high-durability" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تم تصميم وضع QuorumBuffer لأحمال عمل القراءة/الكتابة الحساسة لوقت الاستجابة وذات التردد العالي والتي تتطلب استجابة في الوقت الحقيقي وتحملاً قوياً للأخطاء. في هذا الوضع، يتفاعل عميل Woodpecker مع نظام نصاب ثلاثي النسخ لتوفير تخزين مؤقت للكتابة بسرعة عالية، مما يضمن اتساقاً قوياً وتوافرًا عاليًا من خلال الإجماع الموزع.</p>
 <p>تُعتبر الكتابة ناجحة بمجرد نجاح العميل في نسخ البيانات بنجاح إلى اثنتين على الأقل من عُقد النصاب الثلاثة، وعادةً ما تكتمل الكتابة في غضون جزء من الثانية من خانة واحدة، وبعد ذلك يتم مسح البيانات بشكل غير متزامن إلى تخزين الكائنات السحابية لضمان المتانة على المدى الطويل. تقلل هذه البنية من الحالة على العقدة، وتلغي الحاجة إلى وحدات تخزين الأقراص المحلية الكبيرة، وتتجنب الإصلاحات المعقدة المضادة للإنتروبيا التي غالباً ما تكون مطلوبة في الأنظمة التقليدية القائمة على النصاب.</p>
 <p>والنتيجة هي طبقة WAL مبسطة وقوية ومثالية لبيئات الإنتاج ذات المهام الحرجة حيث يكون الاتساق والتوافر والاسترداد السريع ضرورياً.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_quorumbuffer_mode_deployment.png" alt="woodpecker quorum mode deployment" class="doc-image" id="woodpecker-quorum-mode-deployment" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/woodpecker_quorumbuffer_mode_deployment.png" alt="woodpecker quorum mode deployment" class="doc-image" id="woodpecker-quorum-mode-deployment" />
    </span> <span class="img-wrapper"> <span>نشر وضع نصاب نقار الخشب</span> </span></p>
 <h2 id="Performance-benchmarks" class="common-anchor-header">معايير الأداء<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -135,7 +165,22 @@ summary: >-
 <li>أمازون S3 (مثيل EC2 واحد): ما يصل إلى 1.1 جيجابايت/ثانية</li>
 </ul>
 <p>من اللافت للنظر أن Woodpecker حقق باستمرار 60-80% من أقصى إنتاجية ممكنة لكل واجهة خلفية - وهو مستوى كفاءة استثنائي للبرامج الوسيطة.</p>
-<h3 id="Key-performance-insights" class="common-anchor-header">رؤى الأداء الرئيسية</h3><ul>
+<h3 id="Key-performance-insights" class="common-anchor-header">رؤى الأداء الرئيسية<button data-href="#Key-performance-insights" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>وضع نظام الملفات المحلي: حقق Woodpecker سرعة 450 ميغابايت/ثانية - أسرع بـ 3.5 أضعاف من Kafka و4.2 أضعاف من Pulsar - مع زمن انتقال منخفض للغاية يبلغ 1.8 مللي ثانية فقط، مما يجعله مثاليًا لعمليات النشر عالية الأداء للعقدة الواحدة.</li>
 <li>وضع التخزين السحابي (S3): عند الكتابة مباشرةً إلى S3، وصلت سرعة Woodpecker إلى 750 ميغابايت/ثانية (حوالي 68% من الحد النظري لـ S3)، أي أعلى بـ 5.8 ضعف من Kafka و7 أضعاف من Pulsar. في حين أن زمن الاستجابة أعلى (166 مللي ثانية)، يوفر هذا الإعداد إنتاجية استثنائية لأحمال العمل الموجهة نحو الدُفعات.</li>
 <li>وضع تخزين الكائنات (MinIO): حتى مع MinIO، حقق Woodpecker 71 ميغابايت/ثانية - حوالي 65% من سعة MinIO. هذا الأداء مماثل لأداء Kafka وPulsar ولكن بمتطلبات موارد أقل بكثير.</li>
@@ -159,7 +204,7 @@ summary: >-
     </button></h2><p>توفر بنية Woodpecker السحابية الأصلية مزايا تشغيلية كبيرة:</p>
 <ul>
 <li><strong>انعدام إدارة التخزين المحلي</strong>: الاستغناء عن إدارة وحدة تخزين الأقراص وتكوين RAID وأعطال الأجهزة</li>
-<li><strong>التحجيم التلقائي</strong>: توسيع نطاق التخزين مع تخزين الكائنات السحابية دون الحاجة إلى تخطيط السعة</li>
+<li><strong>التحجيم التلقائي</strong>: توسيع نطاق التخزين مع تخزين الكائنات السحابية بدون تخطيط السعة</li>
 <li><strong>كفاءة التكلفة</strong>: تخزين الدفع حسب الاستخدام مع خاصية التخزين التلقائي والضغط التلقائي</li>
 <li><strong>التوافر العالي</strong>: الاستفادة من متانة موفري الخدمات السحابية التي تصل إلى 11-9 مع الاسترداد السريع</li>
 <li><strong>نشر مبسط</strong>: وضعان للنشر (MemoryBuffer/QuorBuffer) يتناسبان مع الاحتياجات التشغيلية المختلفة</li>

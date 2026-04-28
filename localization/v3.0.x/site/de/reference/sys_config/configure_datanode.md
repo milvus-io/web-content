@@ -188,7 +188,7 @@ summary: 'Erfahren Sie, wie Sie dataNode für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        Schaltet den Überspringungsmodus ein, nachdem es für x Sekunden nur Zeittick-Meldungen gab   </td>
+      <td>        Schaltet den Überspringungsmodus ein, wenn es für x Sekunden nur Zeittick-Meldungen gibt    </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -426,7 +426,7 @@ summary: 'Erfahren Sie, wie Sie dataNode für Milvus konfigurieren.'
       <td>
         <li>gibt die Größe des globalen Arbeitsvorrats aller Kanäle an</li>      
         <li>wenn dieser Parameter &lt;= 0 ist, wird er als die maximale Anzahl von CPUs festgelegt, die ausgeführt werden können</li>      
-        <li>es wird empfohlen, ihn bei großen Sammlungen größer zu setzen, um Blockierungen zu vermeiden</li>      </td>
+        <li>Es wird empfohlen, ihn bei großen Sammlungszahlen größer zu setzen, um Blockierungen zu vermeiden.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>

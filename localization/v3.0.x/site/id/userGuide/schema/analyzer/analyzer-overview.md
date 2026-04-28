@@ -6,7 +6,7 @@ summary: >-
   mentah menjadi format yang terstruktur dan dapat dicari. Setiap penganalisis
   biasanya terdiri dari dua elemen inti: tokenizer dan filter. Bersama-sama,
   keduanya mengubah teks masukan menjadi token, menyempurnakan token ini, dan
-  mempersiapkannya untuk pengindeksan dan pengambilan yang efisien.
+  menyiapkannya untuk pengindeksan dan pengambilan yang efisien.
 ---
 <h1 id="Analyzer-Overview" class="common-anchor-header">Gambaran Umum Penganalisis<button data-href="#Analyzer-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -58,7 +58,7 @@ summary: >-
 <p>Alur kerja di bawah ini menunjukkan bagaimana penganalisis memproses teks.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/analyzer-process-workflow.png" alt="Analyzer Process Workflow" class="doc-image" id="analyzer-process-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/analyzer-process-workflow.png" alt="Analyzer Process Workflow" class="doc-image" id="analyzer-process-workflow" />
    </span> <span class="img-wrapper"> <span>Alur Kerja Proses Penganalisis</span> </span></p>
 <h2 id="Analyzer-types" class="common-anchor-header">Tipe-tipe Penganalisis<button data-href="#Analyzer-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,7 +86,22 @@ summary: >-
 <li>Untuk kinerja pencarian dan kueri yang optimal, pilih penganalisis yang sesuai dengan bahasa data teks Anda. Misalnya, meskipun penganalisis <code translate="no">standard</code> serbaguna, namun mungkin bukan pilihan terbaik untuk bahasa dengan struktur tata bahasa yang unik, seperti bahasa Mandarin, Jepang, atau Korea. Dalam kasus seperti itu, gunakan penganalisis khusus bahasa seperti <a href="/docs/id/chinese-analyzer.md"><code translate="no">chinese</code></a> atau penganalisis khusus dengan tokenizer khusus (seperti <a href="/docs/id/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/id/icu-tokenizer.md"><code translate="no">icu</code></a>) dan filter sangat disarankan untuk memastikan tokenisasi yang akurat dan hasil pencarian yang lebih baik.</li>
 </ul>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">Penganalisis bawaan</h3><p>Penganalisis bawaan di Milvus telah dikonfigurasikan sebelumnya dengan tokenizer dan filter tertentu, sehingga Anda dapat langsung menggunakannya tanpa perlu mendefinisikan sendiri komponen-komponen ini. Setiap penganalisis bawaan berfungsi sebagai templat yang mencakup tokenizer dan filter yang telah ditetapkan sebelumnya, dengan parameter opsional untuk penyesuaian.</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">Penganalisis bawaan<button data-href="#Built-in-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Penganalisis bawaan di Milvus telah dikonfigurasikan sebelumnya dengan tokenizer dan filter tertentu, sehingga Anda dapat langsung menggunakannya tanpa perlu mendefinisikan sendiri komponen-komponen ini. Setiap penganalisis bawaan berfungsi sebagai templat yang mencakup tokenizer dan filter yang telah ditetapkan sebelumnya, dengan parameter opsional untuk penyesuaian.</p>
 <p>Sebagai contoh, untuk menggunakan penganalisis bawaan <code translate="no">standard</code>, cukup tentukan namanya <code translate="no">standard</code> sebagai <code translate="no">type</code> dan secara opsional menyertakan konfigurasi tambahan yang spesifik untuk jenis penganalisis ini, seperti <code translate="no">stop_words</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -226,7 +241,22 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <li><p><code translate="no">english</code>: Dioptimalkan untuk teks berbahasa Inggris, dengan dukungan untuk kata henti dalam bahasa Inggris.</p></li>
 <li><p><code translate="no">chinese</code>: Khusus untuk memproses teks bahasa Mandarin, termasuk tokenisasi yang diadaptasi untuk struktur bahasa Mandarin.</p></li>
 </ul>
-<h3 id="Custom-analyzer" class="common-anchor-header">Penganalisis khusus</h3><p>Untuk pemrosesan teks yang lebih canggih, penganalisis khusus di Milvus memungkinkan Anda untuk membuat pipeline penanganan teks yang disesuaikan dengan menentukan <strong>tokenizer</strong> dan <strong>filter</strong>. Pengaturan ini ideal untuk kasus penggunaan khusus yang memerlukan kontrol yang tepat.</p>
+<h3 id="Custom-analyzer" class="common-anchor-header">Penganalisis khusus<button data-href="#Custom-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk pemrosesan teks yang lebih canggih, penganalisis khusus di Milvus memungkinkan Anda untuk membuat pipeline penanganan teks yang disesuaikan dengan menentukan <strong>tokenizer</strong> dan <strong>filter</strong>. Pengaturan ini ideal untuk kasus penggunaan khusus yang memerlukan kontrol yang tepat.</p>
 <h4 id="Tokenizer" class="common-anchor-header">Tokenizer</h4><p><strong>Tokenizer</strong> adalah komponen <strong>wajib</strong> untuk penganalisis khusus, yang memulai pipeline penganalisis dengan memecah teks input menjadi unit diskrit atau <strong>token</strong>. Tokenisasi mengikuti aturan khusus, seperti pemisahan dengan spasi atau tanda baca, tergantung pada jenis tokenizer. Proses ini memungkinkan penanganan yang lebih tepat dan independen untuk setiap kata atau frasa.</p>
 <p>Sebagai contoh, tokenizer akan mengubah teks <code translate="no">&quot;Vector Database Built for Scale&quot;</code> menjadi token-token yang terpisah:</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
@@ -259,7 +289,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <li><p><strong>Filter bawaan</strong>: Telah dikonfigurasi sebelumnya oleh Milvus, yang membutuhkan pengaturan minimal. Anda dapat menggunakan filter ini secara langsung dengan menentukan namanya. Filter di bawah ini adalah filter bawaan untuk penggunaan langsung:</p>
 <ul>
 <li><p><code translate="no">lowercase</code>: Mengonversi teks menjadi huruf kecil, memastikan pencocokan yang tidak peka huruf. Untuk detailnya, lihat <a href="/docs/id/lowercase-filter.md">Huruf Kecil</a>.</p></li>
-<li><p><code translate="no">asciifolding</code>: Mengonversi karakter non-ASCII menjadi ekuivalen ASCII, menyederhanakan penanganan teks multibahasa. Untuk detailnya, lihat <a href="/docs/id/ascii-folding-filter.md">ASCII folding (Pelipatan ASCII</a>).</p></li>
+<li><p><code translate="no">asciifolding</code>: Mengonversi karakter non-ASCII menjadi ekuivalen ASCII, menyederhanakan penanganan teks multibahasa. Untuk rinciannya, lihat <a href="/docs/id/ascii-folding-filter.md">ASCII folding (Pelipatan ASCII</a>).</p></li>
 <li><p><code translate="no">alphanumonly</code>: Mempertahankan hanya karakter alfanumerik dengan menghapus karakter lainnya. Untuk rinciannya, lihat <a href="/docs/id/alphanumonly-filter.md">Hanya alfanumerik</a>.</p></li>
 <li><p><code translate="no">cnalphanumonly</code>: Menghapus token yang berisi karakter apa pun selain karakter Cina, huruf Inggris, atau angka. Untuk detailnya, lihat <a href="/docs/id/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
 <li><p><code translate="no">cncharonly</code>: Menghapus token yang berisi karakter non-Cina. Untuk detailnya, lihat <a href="/docs/id/cncharonly-filter.md">Cncharonly</a>.</p></li>
@@ -368,7 +398,22 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 </ul></li>
 </ul>
 <p>Sebelum memasukkan konfigurasi ini ke dalam koleksi Anda, Anda akan memverifikasi setiap penganalisis menggunakan metode <code translate="no">run_analyzer</code>.</p>
-<h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">Langkah 1: Inisialisasi MilvusClient dan buat skema</h3><p>Mulailah dengan menyiapkan klien Milvus dan membuat skema baru.</p>
+<h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">Langkah 1: Inisialisasi MilvusClient dan buat skema<button data-href="#Step-1-Initialize-MilvusClient-and-create-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Mulailah dengan menyiapkan klien Milvus dan membuat skema baru.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -428,7 +473,22 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">Langkah 2: Tentukan dan verifikasi konfigurasi penganalisis</h3><ol>
+<h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">Langkah 2: Tentukan dan verifikasi konfigurasi penganalisis<button data-href="#Step-2-Define-and-verify-analyzer-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li><p><strong>Konfigurasikan dan verifikasi penganalisis bawaan</strong> (<code translate="no">english</code>)<strong>:</strong></p>
 <ul>
 <li><p><strong>Konfigurasi:</strong> Tentukan parameter penganalisis untuk penganalisis bahasa Inggris bawaan.</p></li>
@@ -595,7 +655,22 @@ result, err := client.RunAnalyzer(ctx, option)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">Langkah 3: Menambahkan bidang ke skema</h3><p>Setelah Anda memverifikasi konfigurasi penganalisis Anda, tambahkan konfigurasi tersebut ke dalam bidang skema Anda:</p>
+<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">Langkah 3: Menambahkan bidang ke skema<button data-href="#Step-3-Add-fields-to-the-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Setelah Anda memverifikasi konfigurasi penganalisis Anda, tambahkan konfigurasi tersebut ke dalam bidang skema Anda:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add VARCHAR field &#x27;title_en&#x27; using the built-in analyzer configuration</span>
@@ -700,7 +775,22 @@ schema.addField(AddFieldReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">Langkah 4: Siapkan parameter indeks dan buat koleksi</h3><div class="multipleCode">
+<h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">Langkah 4: Siapkan parameter indeks dan buat koleksi<button data-href="#Step-4-Prepare-index-parameters-and-create-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up index parameters for the vector field</span>
 index_params = client.prepare_index_params()

@@ -36,11 +36,11 @@ summary: Notas
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En Milvus, un analizador procesa el texto almacenado en este campo para hacerlo consultable para funciones como <a href="/docs/es/full-text-search.md">la búsqueda de texto completo</a> (BM25), la <a href="/docs/es/phrase-match.md">concordancia de frase</a> o <a href="/docs/es/keyword-match.md">la concordancia de texto</a>. Piense en él como un procesador de texto que transforma su contenido sin procesar en tokens buscables.</p>
+    </button></h2><p>En Milvus, un analizador procesa el texto almacenado en este campo para hacerlo consultable para funciones como <a href="/docs/es/full-text-search.md">la búsqueda de texto completo</a> (BM25), la <a href="/docs/es/phrase-match.md">concordancia de frase</a> o <a href="/docs/es/keyword-match.md">la concordancia de texto</a>. Piense en él como un procesador de texto que transforma su contenido sin procesar en tokens que permiten realizar búsquedas.</p>
 <p>Un analizador funciona en un proceso simple de dos etapas:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
    </span> <span class="img-wrapper"> <span>Flujo de trabajo del analizador</span> </span></p>
 <ol>
 <li><p><strong>Tokenización (obligatoria):</strong> Esta etapa inicial aplica un <strong>tokenizador</strong> para dividir una cadena continua de texto en unidades discretas y significativas llamadas tokens. El método de tokenización puede variar significativamente según el idioma y el tipo de contenido.</p></li>
@@ -134,7 +134,7 @@ summary: Notas
 <ul>
 <li><p>Divide el texto en espacios y signos de puntuación</p></li>
 <li><p>Convierte todos los tokens a minúsculas</p></li>
-<li><p>Elimina un conjunto integrado de palabras de parada comunes en inglés y la mayoría de los signos de puntuación.</p></li>
+<li><p>Elimina un conjunto integrado de palabras vacías comunes en inglés y la mayoría de los signos de puntuación.</p></li>
 </ul>
 <p><strong>Ejemplo de transformación</strong>:</p>
 <pre><code translate="no" class="language-plaintext">Input:  &quot;The Milvus vector database is built for scale!&quot;
@@ -353,12 +353,12 @@ schema.add_field(
    <tr>
      <td><p><a href="/docs/es/jieba-tokenizer.md"><code translate="no">jieba</code></a></p></td>
      <td><p>Segmentación basada en diccionario chino con algoritmo inteligente</p></td>
-     <td><p><strong>Recomendado para contenidos en</strong> chino - combina diccionario con algoritmos inteligentes, específicamente diseñados para el chino</p></td>
+     <td><p><strong>Recomendado para contenidos en</strong> chino - combina diccionario con algoritmos inteligentes, diseñados específicamente para el chino</p></td>
      <td><ul><li><p>Entrada: <code translate="no">"机器学习是人工智能的一个分支"</code></p></li><li><p>Salida: <code translate="no">['机器', '学习', '是', '人工', '智能', '人工智能', '的', '一个', '分支']</code></p></li></ul></td>
    </tr>
    <tr>
      <td><p><a href="/docs/es/lindera-tokenizer.md"><code translate="no">lindera</code></a></p></td>
-     <td><p>Análisis morfológico puro basado en diccionario con diccionario chino<a href="https://cc-cedict.org/wiki/">(cc-cedict</a>)</p></td>
+     <td><p>Análisis morfológico basado en diccionario puro con diccionario chino<a href="https://cc-cedict.org/wiki/">(cc-cedict</a>)</p></td>
      <td><p>En comparación con <code translate="no">jieba</code>, procesa el texto chino de forma más genérica</p></td>
      <td><ul><li><p>Entrada: <code translate="no">"机器学习算法"</code></p></li><li><p>Salida: <code translate="no">["机器", "学习", "算法"]</code></p></li></ul></td>
    </tr>
@@ -452,7 +452,7 @@ schema.add_field(
    </tr>
 </table>
 <div class="alert note">
-<p>Para las lenguas de Asia Oriental (chino, japonés, coreano, etc.), utilice <a href="/docs/es/choose-the-right-analyzer-for-your-use-case.md#Language-specific-filters">filtros específicos para cada lengua</a>. Estas lenguas suelen utilizar métodos distintos para procesar el texto y puede que no se beneficien significativamente de la normalización.</p>
+<p>Para las lenguas de Asia Oriental (chino, japonés, coreano, etc.), utilice <a href="/docs/es/choose-the-right-analyzer-for-your-use-case.md#Language-specific-filters">filtros específicos para cada lengua</a>. Estas lenguas suelen utilizar métodos distintos para procesar el texto y puede que no se beneficien mucho de la normalización.</p>
 </div>
 <h4 id="Text-normalization-filters" class="common-anchor-header">Filtros de normalización de texto</h4><p>Estos filtros normalizan las variaciones de texto para mejorar la coherencia de las coincidencias:</p>
 <table>

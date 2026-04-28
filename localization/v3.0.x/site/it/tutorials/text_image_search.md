@@ -30,7 +30,7 @@ title: Ricerca da testo a immagine con Milvus
         ></path>
       </svg>
     </button></h1><p>La ricerca da testo a immagine è una tecnologia avanzata che consente agli utenti di cercare immagini utilizzando descrizioni testuali in linguaggio naturale. Sfrutta un modello multimodale preaddestrato per convertire sia il testo che le immagini in incorporazioni in uno spazio semantico condiviso, consentendo confronti basati sulla somiglianza.</p>
-<p>In questa esercitazione esploreremo come implementare il recupero di immagini basato sul testo utilizzando il modello CLIP (Contrastive Language-Image Pretraining) di OpenAI e Milvus. Genereremo embeddings di immagini con CLIP, li memorizzeremo in Milvus ed eseguiremo ricerche di similarità efficienti.</p>
+<p>In questa esercitazione esploreremo come implementare il recupero di immagini basato sul testo utilizzando il modello CLIP (Contrastive Language-Image Pretraining) di OpenAI e Milvus. Genereremo le incorporazioni delle immagini con CLIP, le memorizzeremo in Milvus ed eseguiremo efficienti ricerche di similarità.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,7 +47,22 @@ title: Ricerca da testo a immagine con Milvus
         ></path>
       </svg>
     </button></h2><p>Prima di iniziare, assicuratevi di avere pronti tutti i pacchetti necessari e i dati di esempio.</p>
-<h3 id="Install-dependencies" class="common-anchor-header">Installare le dipendenze</h3><ul>
+<h3 id="Install-dependencies" class="common-anchor-header">Installare le dipendenze<button data-href="#Install-dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong>pymilvus&gt;=2.4.2</strong> per interagire con il database di Milvus</li>
 <li><strong>clip</strong> per lavorare con il modello CLIP</li>
 <li><strong>pillow</strong> per l'elaborazione e la visualizzazione delle immagini</li>
@@ -58,11 +73,41 @@ title: Ricerca da testo a immagine con Milvus
 <div class="alert note">
 <p>Se si utilizza Google Colab, potrebbe essere necessario <strong>riavviare il runtime</strong> (andare al menu "Runtime" nella parte superiore dell'interfaccia e selezionare "Restart session" dal menu a discesa).</p>
 </div>
-<h3 id="Download-example-data" class="common-anchor-header">Scaricare i dati di esempio</h3><p>Utilizzeremo un sottoinsieme del dataset <a href="https://www.image-net.org">ImageNet</a> (100 classi, 10 immagini per ogni classe) come immagini di esempio. Il comando seguente scarica i dati di esempio e li estrae nella cartella locale <code translate="no">./images_folder</code>:</p>
+<h3 id="Download-example-data" class="common-anchor-header">Scaricare i dati di esempio<button data-href="#Download-example-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Utilizzeremo un sottoinsieme del dataset <a href="https://www.image-net.org">ImageNet</a> (100 classi, 10 immagini per ogni classe) come immagini di esempio. Il comando seguente scarica i dati di esempio e li estrae nella cartella locale <code translate="no">./images_folder</code>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/towhee-io/examples/releases/download/data/reverse_image_search.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q reverse_image_search.zip -d images_folder</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-up-Milvus" class="common-anchor-header">Configurare Milvus</h3><p>Prima di procedere, configurare il server Milvus e connettersi utilizzando il proprio URI (e, facoltativamente, un token):</p>
+<h3 id="Set-up-Milvus" class="common-anchor-header">Configurare Milvus<button data-href="#Set-up-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Prima di procedere, configurare il server Milvus e connettersi utilizzando il proprio URI (e, facoltativamente, un token):</p>
 <ul>
 <li><p><strong>Milvus Lite (consigliato per comodità)</strong>: Impostare l'URI su un file locale, come ./milvus.db. In questo modo si sfrutta automaticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> per memorizzare tutti i dati in un unico file.</p></li>
 <li><p><strong>Docker o Kubernetes (per dati su larga scala)</strong>: Per gestire insiemi di dati più grandi, è possibile distribuire un server Milvus più performante utilizzando <a href="https://milvus.io/docs/quickstart.md">Docker o Kubernetes</a>. In questo caso, per connettersi utilizzare l'URI del server, ad esempio http://localhost:19530.</p></li>
@@ -88,7 +133,22 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;
         ></path>
       </svg>
     </button></h2><p>Ora che si dispone delle dipendenze e dei dati necessari, è il momento di impostare gli estrattori di funzioni e iniziare a lavorare con Milvus. Questa sezione illustra le fasi principali della costruzione di un sistema di ricerca da testo a immagine. Infine, dimostreremo come recuperare e visualizzare le immagini in base alle query di testo.</p>
-<h3 id="Define-feature-extractors" class="common-anchor-header">Definire gli estrattori di caratteristiche</h3><p>Utilizzeremo un modello CLIP preaddestrato per generare embeddings di immagini e testo. In questa sezione, carichiamo la variante preaddestrata <strong>ViT-B/32</strong> di CLIP e definiamo le funzioni di aiuto per la codifica di immagini e testo:</p>
+<h3 id="Define-feature-extractors" class="common-anchor-header">Definire gli estrattori di caratteristiche<button data-href="#Define-feature-extractors" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Utilizzeremo un modello CLIP preaddestrato per generare embeddings di immagini e testo. In questa sezione, carichiamo la variante preaddestrata <strong>ViT-B/32</strong> di CLIP e definiamo le funzioni di aiuto per la codifica di immagini e testo:</p>
 <ul>
 <li><code translate="no">encode_image(image_path)</code>: elabora e codifica le immagini in vettori di caratteristiche</li>
 <li><code translate="no">encode_text(text)</code>: Codifica le query di testo in vettori di caratteristiche</li>
@@ -123,7 +183,22 @@ model.<span class="hljs-built_in">eval</span>()
     )  <span class="hljs-comment"># Normalize the text features</span>
     <span class="hljs-keyword">return</span> text_features.squeeze().tolist()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Data-Ingestion" class="common-anchor-header">Ingestione dei dati</h3><p>Per consentire la ricerca semantica delle immagini, dobbiamo innanzitutto generare le incorporazioni per tutte le immagini e memorizzarle in un database vettoriale per un'indicizzazione e un recupero efficienti. Questa sezione fornisce una guida passo passo per l'inserimento dei dati delle immagini in Milvus.</p>
+<h3 id="Data-Ingestion" class="common-anchor-header">Ingestione dei dati<button data-href="#Data-Ingestion" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per consentire la ricerca semantica delle immagini, dobbiamo innanzitutto generare le incorporazioni per tutte le immagini e memorizzarle in un database vettoriale per un'indicizzazione e un recupero efficienti. Questa sezione fornisce una guida passo passo per l'inserimento dei dati delle immagini in Milvus.</p>
 <p><strong>1. Creare la raccolta Milvus</strong></p>
 <p>Prima di memorizzare le incorporazioni di immagini, è necessario creare una raccolta Milvus. Il codice seguente mostra come creare una raccolta in modalità rapida con il tipo di metrica predefinito COSINE. La collezione comprende i seguenti campi:</p>
 <ul>
@@ -146,7 +221,7 @@ milvus_client.create_collection(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>2. Inserire i dati in Milvus</strong></p>
-<p>In questa fase si utilizza un codificatore di immagini predefinito per generare le incorporazioni di tutte le immagini JPEG presenti nella directory dei dati di esempio. Questi embeddings vengono poi inseriti nella raccolta di Milvus, insieme ai percorsi dei file corrispondenti. Ogni voce della raccolta è composta da:</p>
+<p>In questa fase, si utilizza un codificatore di immagini predefinito per generare le incorporazioni di tutte le immagini JPEG presenti nella directory dei dati di esempio. Questi embeddings vengono poi inseriti nella raccolta di Milvus, insieme ai percorsi dei file corrispondenti. Ogni voce della raccolta è composta da:</p>
 <ul>
 <li><strong>Vettore di incorporazione</strong>: La rappresentazione numerica dell'immagine. Memorizzato nel campo <code translate="no">vector</code>.</li>
 <li><strong>Percorso del file</strong>: La posizione del file dell'immagine come riferimento. Memorizzato nel campo <code translate="no">filepath</code> come campo dinamico.</li>
@@ -168,7 +243,22 @@ insert_result = milvus_client.insert(collection_name=collection_name, data=raw_d
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Inserted 1000 images into Milvus.
 </code></pre>
-<h3 id="Peform-a-Search" class="common-anchor-header">Eseguire una ricerca</h3><p>Eseguiamo ora una ricerca utilizzando una query di testo di esempio. In questo modo verranno recuperate le immagini più rilevanti in base alla loro somiglianza semantica con la descrizione testuale fornita.</p>
+<h3 id="Peform-a-Search" class="common-anchor-header">Eseguire una ricerca<button data-href="#Peform-a-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Eseguiamo ora una ricerca utilizzando una query di testo di esempio. In questo modo verranno recuperate le immagini più rilevanti in base alla loro somiglianza semantica con la descrizione testuale fornita.</p>
 <pre><code translate="no" class="language-python">query_text = <span class="hljs-string">&quot;a white dog&quot;</span>
 query_embedding = encode_text(query_text)
 
@@ -209,5 +299,5 @@ Search results:
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/text_image_search_with_milvus_20_1.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_image_search_with_milvus_20_1.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>

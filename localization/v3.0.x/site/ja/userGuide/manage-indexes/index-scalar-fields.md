@@ -20,6 +20,9 @@ title: スカラーフィールドのインデックス
         ></path>
       </svg>
     </button></h1><p>Milvusでは、スカラーインデックスは、従来のデータベースインデックスと同様に、特定の非ベクトルフィールド値によるメタフィルタリングを高速化するために使用されます。このガイドでは、整数や文字列などのフィールドに対するスカラーインデックスの作成と設定について説明します。</p>
+<div class="alert warning">
+<p>このページは非推奨です。最新の実装については、<a href="/docs/ja/bitmap.md">BITMAP</a>、<a href="/docs/ja/inverted.md">INVERTED</a>、<a href="/docs/ja/ngram.md">NGRAM</a>、<a href="/docs/ja/rtree.md">RTREE</a> <a href="/docs/ja/stl-sort.md">STL_SORTなどを</a>参照してください。</p>
+</div>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">スカラーインデックスの種類<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +40,7 @@ title: スカラーフィールドのインデックス
       </svg>
     </button></h2><ul>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">オートインデックス</a></strong>：Milvusはスカラーフィールドのデータ型に基づいてインデックスタイプを自動的に決定します。特定のインデックスタイプを制御する必要がない場合に適しています。</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">カスタムインデックス</a></strong>：転置インデックスなど、正確なインデックスタイプを指定します。これは、インデックス・タイプの選択をより制御しやすくします。</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">カスタムインデックス</a></strong>：転置インデックスや<a href="/docs/ja/bitmap.md">ビットマップインデックスなど</a>、正確なインデックスタイプを指定します。インデックス・タイプの選択をより制御できる。</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">オートインデックス<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -191,7 +194,8 @@ client.createIndex(createIndexReq);
 <p>カスタム・インデックスの場合、有効な値は以下のとおりです：</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (推奨) 転置インデックスは、すべてのトークン化された単語をアルファベット順に並べた用語辞書で構成されます。詳細については、「<a href="/docs/ja/scalar_index.md">スカラー・インデックス</a>」を参照してください。</p></li>
-<li><p><strong>STL_SORT</strong>：標準テンプレート・ライブラリのソート・アルゴリズムを使用して、スカラー・フィールドをソートします。数値フィールド（INT8、INT16、INT32、INT64、FLOAT、DOUBLEなど）のみをサポート。</p></li>
+<li><p><strong>BITMAP</strong>：フィールド内のすべての一意な値のビットマップを格納するインデックス・タイプ。詳細は<a href="/docs/ja/bitmap.md">BITMAPを</a>参照。</p></li>
+<li><p><strong>STL_SORT</strong>：標準テンプレート・ライブラリのソート・アルゴリズムを用いてスカラー・フィールドをソートする。数値フィールド（INT8、INT16、INT32、INT64、FLOAT、DOUBLEなど）のみをサポートします。</p></li>
 <li><p><strong>トライ</strong>：高速なプレフィックス検索と取得のためのツリーデータ構造。VARCHAR フィールドをサポート。</p></li>
 </ul></li>
 <li><p><strong>index_name</strong><em>(string</em>)</p>
@@ -304,21 +308,3 @@ System.out.println(indexNames);
 <span class="hljs-comment">//     &quot;inverted_index&quot;</span>
 <span class="hljs-comment">// ]   </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">制限<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li>現在、スカラー・インデックスはINT8、INT16、INT32、INT64、FLOAT、DOUBLE、BOOL、VARCHAR、ARRAYデータ型をサポートしているが、JSONデータ型はサポートしていない。</li>
-</ul>

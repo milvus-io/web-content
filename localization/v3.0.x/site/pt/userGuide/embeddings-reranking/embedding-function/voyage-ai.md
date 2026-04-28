@@ -67,7 +67,7 @@ beta: Milvus 2.6.x
      <td><p>voyage-code-3</p></td>
      <td><p>1.024 (padrão), 256, 512, 2.048</p></td>
      <td><p>32,000</p></td>
-     <td><p>Optimizado para recuperação de código. Consulte a <a href="https://blog.voyageai.com/2024/12/04/voyage-code-3/">publicação no blogue</a> para obter mais informações.</p></td>
+     <td><p>Optimizado para recuperação de código. Consulte a <a href="https://blog.voyageai.com/2024/12/04/voyage-code-3/">postagem do blog</a> para obter detalhes.</p></td>
    </tr>
    <tr>
      <td><p>voyage-finance-2</p></td>

@@ -39,7 +39,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>您可以新增標量欄位 (<code translate="no">INT64</code>,<code translate="no">VARCHAR</code>,<code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code> 等)。向量欄位無法新增至現有的集合。</p></li>
 <li><p>新欄位必須是 nullable (nullable=True)，以容納沒有新欄位值的現有實體。</p></li>
-<li><p>將欄位加入已載入的集合會增加記憶體使用量。</p></li>
+<li><p>將欄位加入載入的集合會增加記憶體使用量。</p></li>
 <li><p>每個集合的欄位總數有最大限制。詳情請參閱<a href="/docs/zh-hant/limitations.md#Number-of-resources-in-a-collection">Milvus Limits</a>。</p></li>
 <li><p>在靜態欄位中，欄位名稱必須是唯一的。</p></li>
 <li><p>您無法新增<code translate="no">$meta</code> 欄位，以啟用原本未使用<code translate="no">enable_dynamic_field=True</code> 建立的集合的動態欄位功能。</p></li>

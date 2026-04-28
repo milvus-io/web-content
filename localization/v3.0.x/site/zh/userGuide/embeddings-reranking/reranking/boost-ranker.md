@@ -20,7 +20,7 @@ beta: Milvus v2.6.2+
         ></path>
       </svg>
     </button></h1><p>Boost Ranker 并不完全依赖基于向量距离计算的语义相似性，而是让您以有意义的方式影响搜索结果。它是使用元数据过滤快速调整搜索结果的理想选择。</p>
-<p>当搜索请求中包含提升排名器功能时，Milvus 会使用该功能中的可选过滤条件，在搜索结果候选项中查找匹配项，并通过应用指定权重来提升这些匹配项的得分，从而帮助提升或降低匹配实体在最终结果中的排名。</p>
+<p>当搜索请求中包含提升排名器功能时，Milvus 会使用该功能中的可选过滤条件，在搜索结果候选项中查找匹配项，并通过应用指定权重来提升这些匹配项的分数，从而帮助提升或降低匹配实体在最终结果中的排名。</p>
 <h2 id="When-to-use-Boost-Ranker" class="common-anchor-header">何时使用提升排名器<button data-href="#When-to-use-Boost-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -50,7 +50,7 @@ beta: Milvus v2.6.2+
    </tr>
    <tr>
      <td><p>战略性内容降级</p></td>
-     <td><ul><li><p>在不完全删除低库存项目的情况下，降低其显著性</p></li><li><p>在不进行审查的情况下，降低含有潜在不良词汇的内容的排名</p></li><li><p>降低旧文档的排名，同时保持其在技术搜索中的可访问性</p></li><li><p>在市场搜索中巧妙降低竞争对手产品的可见度</p></li><li><p>降低质量指标较低（如格式问题、长度较短等）的内容的相关性</p></li></ul></td>
+     <td><ul><li><p>在不完全删除低库存项目的情况下，降低其显著性</p></li><li><p>在不进行审查的情况下，降低含有潜在不良词汇的内容的排名</p></li><li><p>降低旧文档的排名，同时保持其在技术搜索中的可访问性</p></li><li><p>在市场搜索中巧妙降低竞争对手产品的可见度</p></li><li><p>降低具有较低质量指标（如格式问题、较短篇幅等）的内容的相关性</p></li></ul></td>
    </tr>
 </table>
 <p>您还可以将多个提升排名器结合起来，实施更动态、更强大的基于权重的排名策略。</p>
@@ -72,9 +72,9 @@ beta: Milvus v2.6.2+
     </button></h2><p>下图说明了提升排名器的主要工作流程。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
    </span> <span class="img-wrapper"> <span>提升排名器机制</span> </span></p>
-<p>插入数据时，Milvus 会将数据分布到各个分段。在搜索过程中，每个分段都会返回一组候选数据，Milvus 会对这些来自所有分段的候选数据进行排名，从而产生最终结果。当搜索请求包括提升排名器时，Milvus 会将其应用到每个分段的候选结果中，以防止潜在的精度损失并提高召回率。</p>
+<p>插入数据时，Milvus 会将数据分布到各个分段。在搜索过程中，每个分段都会返回一组候选数据，Milvus 会对这些来自所有分段的候选数据进行排名，从而产生最终结果。当搜索请求中包含提升排名器时，Milvus 会将其应用到每个分段的候选结果中，以防止潜在的精度损失并提高召回率。</p>
 <p>在最终确定结果之前，Milvus 会使用提升排名器对这些候选结果进行如下处理：</p>
 <ol>
 <li><p>应用 Boost Ranker 中指定的可选过滤表达式，以识别与表达式匹配的实体。</p></li>
@@ -532,7 +532,7 @@ ranker = Function(
    <tr>
      <td><p><code translate="no">params.filter</code></p></td>
      <td><p>无</p></td>
-     <td><p>指定用于在搜索结果实体中匹配实体的过滤表达式。它可以是《<a href="/docs/zh/boolean.md">过滤说明》</a>中提到的任何有效的基本过滤表达式。</p><p><strong>注意</strong>：只能使用基本操作符，如<code translate="no">==</code>,<code translate="no">&gt;</code>, 或<code translate="no">&lt;</code> 。使用高级操作符，如<code translate="no">text_match</code> 或<code translate="no">phrase_match</code> ，会降低搜索性能。</p></td>
+     <td><p>指定用于在搜索结果实体中匹配实体的过滤表达式。它可以是 "<a href="/docs/zh/boolean.md">筛选说明 "</a>中提到的任何有效的基本筛选表达式。</p><p><strong>注意</strong>：只能使用基本操作符，如<code translate="no">==</code>,<code translate="no">&gt;</code>, 或<code translate="no">&lt;</code> 。使用高级操作符，如<code translate="no">text_match</code> 或<code translate="no">phrase_match</code> ，会降低搜索性能。</p></td>
      <td><p><code translate="no">"doctype == 'abstract'"</code></p></td>
    </tr>
    <tr>

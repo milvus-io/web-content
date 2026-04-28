@@ -40,8 +40,8 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>قبل تنفيذ TEI Ranker في Milvus، تأكد من أن لديك:</p>
 <ul>
-<li><p>مجموعة Milvus مع حقل <code translate="no">VARCHAR</code> يحتوي على النص المراد إعادة ترتيبه</p></li>
-<li><p>خدمة TEI قيد التشغيل مع إمكانيات إعادة التصنيف. للحصول على إرشادات مفصلة حول إعداد خدمة TEI، راجع <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour">وثائق TEI الرسمية</a>.</p></li>
+<li><p>مجموعة Milvus تحتوي على حقل <code translate="no">VARCHAR</code> يحتوي على النص المراد إعادة تصنيفه</p></li>
+<li><p>خدمة TEI قيد التشغيل مع إمكانات إعادة التصنيف. للحصول على إرشادات مفصلة حول إعداد خدمة TEI، راجع <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour">وثائق TEI الرسمية</a>.</p></li>
 </ul>
 <h2 id="Create-a-TEI-ranker-function" class="common-anchor-header">إنشاء وظيفة مصنف TEI<button data-href="#Create-a-TEI-ranker-function" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -163,7 +163,7 @@ searchWithRanker(scientists, ranker);
    <tr>
      <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>لا</p></td>
-     <td><p>نظرًا لأن خدمات النماذج قد لا تعالج جميع البيانات في وقت واحد، فإن هذا يعين حجم الدُفعات للوصول إلى خدمة النماذج في طلبات متعددة.</p></td>
+     <td><p>نظرًا لأن خدمات النماذج قد لا تعالج جميع البيانات في وقت واحد، فإن هذا يحدد حجم الدُفعات للوصول إلى خدمة النماذج في طلبات متعددة.</p></td>
      <td><p><code translate="no">32</code> (افتراضي)</p></td>
    </tr>
    <tr>
@@ -180,7 +180,7 @@ searchWithRanker(scientists, ranker);
    </tr>
 </table>
 <div class="alert note">
-<p>بالنسبة للمعلمات العامة المشتركة عبر جميع مصنفات النماذج (على سبيل المثال، <code translate="no">provider</code> ، <code translate="no">queries</code>)، راجع <a href="/docs/ar/model-ranker-overview.md#Create-a-model-ranker">إنشاء مصنف نموذج</a>.</p>
+<p>بالنسبة للمعلمات العامة المشتركة بين جميع مصنفات النماذج (على سبيل المثال، <code translate="no">provider</code> ، <code translate="no">queries</code>)، راجع <a href="/docs/ar/model-ranker-overview.md#Create-a-model-ranker">إنشاء مصنف نموذج</a>.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">التطبيق على البحث المتجه القياسي<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"

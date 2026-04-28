@@ -24,7 +24,7 @@ beta: Milvus 2.6.2+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>JSON shredding acelera las consultas JSON convirtiendo el almacenamiento tradicional basado en filas en almacenamiento columnar optimizado. Al tiempo que mantiene la flexibilidad de JSON para el modelado de datos, Milvus realiza una optimización columnar entre bastidores que mejora drásticamente el acceso y la eficiencia de las consultas.</p>
+    </button></h1><p>JSON shredding acelera las consultas JSON convirtiendo el almacenamiento tradicional basado en filas en almacenamiento columnar optimizado. Al tiempo que mantiene la flexibilidad de JSON para el modelado de datos, Milvus realiza entre bastidores una optimización columnar que mejora drásticamente el acceso y la eficiencia de las consultas.</p>
 <p>La trituración JSON es eficaz para la mayoría de los escenarios de consulta JSON. Los beneficios de rendimiento se vuelven más pronunciados con</p>
 <ul>
 <li><p><strong>Documentos JSON más grandes y complejos</strong> - Mayores ganancias de rendimiento a medida que aumenta el tamaño del documento.</p></li>
@@ -213,7 +213,7 @@ beta: Milvus 2.6.2+
      <td><p><code translate="no">dataCoord.jsonShreddingRatioThreshold</code></p></td>
      <td><p>El ratio mínimo de aparición que debe tener una clave JSON para ser considerada para ser triturada en una columna triturada.</p><p>Se considera que una clave aparece con frecuencia si su ratio está por encima de este umbral.</p></td>
      <td><p>0.3</p></td>
-     <td><p><strong>Aumenta</strong> (por ejemplo, a 0,5) si el número de claves que cumplen los criterios de trituración supera el límite de <code translate="no">dataCoord.jsonShreddingMaxColumns</code>. Esto hace que el umbral sea más estricto, reduciendo el número de claves que cumplen los criterios para ser trituradas.</p><p><strong>Redúzcalo</strong> (por ejemplo, a 0,1) si desea destruir más claves que aparecen con menos frecuencia que el umbral predeterminado del 30%.</p></td>
+     <td><p><strong>Aumenta</strong> (por ejemplo, a 0,5) si el número de claves que cumplen los criterios de trituración supera el límite de <code translate="no">dataCoord.jsonShreddingMaxColumns</code>. Esto hace que el umbral sea más estricto, reduciendo el número de claves que cumplen los criterios para ser trituradas.</p><p><strong>Disminúyalo</strong> (por ejemplo, a 0,1) si desea destruir más claves que aparecen con menos frecuencia que el umbral predeterminado del 30%.</p></td>
    </tr>
 </table>
 <h2 id="Performance-benchmarks" class="common-anchor-header">Pruebas de rendimiento<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
@@ -369,7 +369,7 @@ beta: Milvus 2.6.2+
     </button></h2><ul>
 <li><p><strong>¿Cómo puedo comprobar si la trituración de JSON funciona correctamente?</strong></p>
 <ol>
-<li><p>En primer lugar, compruebe si los datos se han construido utilizando el comando <code translate="no">show segment --format table</code> de la herramienta <a href="/docs/es/birdwatcher_usage_guides.md">Birdwatcher</a>. Si se ha realizado correctamente, la salida contendrá <code translate="no">shredding_data/</code> y <code translate="no">shared_key_index/</code> en el campo <strong>Json Key Stats</strong>.</p>
+<li><p>En primer lugar, compruebe si los datos se han construido utilizando el comando <code translate="no">show segment --format table</code> de la herramienta <a href="/docs/es/birdwatcher_usage_guides.md">Birdwatcher</a>. Si ha funcionado correctamente, la salida contendrá <code translate="no">shredding_data/</code> y <code translate="no">shared_key_index/</code> en el campo <strong>Json Key Stats</strong>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/birdwatcher-output.png" alt="Birdwatcher Output" class="doc-image" id="birdwatcher-output" />
@@ -377,7 +377,7 @@ beta: Milvus 2.6.2+
 <li><p>A continuación, compruebe que los datos se han cargado ejecutando <code translate="no">show loaded-json-stats</code> en el nodo de consulta. La salida mostrará detalles sobre los datos triturados cargados para cada nodo de consulta.</p></li>
 </ol></li>
 <li><p><strong>¿Qué ocurre si se produce un error?</strong></p>
-<p>Si el proceso de compilación o carga falla, puede desactivar rápidamente la función configurando <code translate="no">common.enabledJSONShredding=false</code>. Para borrar las tareas restantes, utilice el comando <code translate="no">remove stats-task &lt;task_id&gt;</code> en <a href="/docs/es/birdwatcher_usage_guides.md">Birdwatcher</a>. Si falla una consulta, configure <code translate="no">common.usingjsonShreddingForQuery=false</code> para volver a la ruta de consulta original, omitiendo los datos triturados.</p></li>
+<p>Si el proceso de creación o carga falla, puede desactivar rápidamente la función configurando <code translate="no">common.enabledJSONShredding=false</code>. Para borrar las tareas restantes, utilice el comando <code translate="no">remove stats-task &lt;task_id&gt;</code> en <a href="/docs/es/birdwatcher_usage_guides.md">Birdwatcher</a>. Si una consulta falla, configure <code translate="no">common.usingjsonShreddingForQuery=false</code> para volver a la ruta de consulta original, omitiendo los datos triturados.</p></li>
 <li><p><strong>¿Cómo elijo entre la trituración JSON y la indexación JSON?</strong></p>
 <ul>
 <li><p>La<strong>trituración de</strong> JSON es ideal para las claves que aparecen con frecuencia en los documentos, especialmente en el caso de estructuras JSON complejas. Combina las ventajas del almacenamiento en columnas y de la indexación invertida, por lo que es muy adecuado para situaciones de lectura intensiva en las que se consultan muchas claves diferentes. Sin embargo, no se recomienda para documentos JSON muy pequeños, ya que el aumento de rendimiento es mínimo. Cuanto menor sea la proporción del valor de la clave con respecto al tamaño total del documento JSON, mayor será la optimización del rendimiento gracias a la trituración.</p></li>

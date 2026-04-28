@@ -65,7 +65,7 @@ summary: >-
 <p>La figure suivante montre comment un graphe de Vamana est construit.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
    </span> <span class="img-wrapper"> <span>Diskann</span> </span></p>
 <ol>
 <li><p><strong>Connexions aléatoires initiales :</strong> Chaque point de données (vecteur) est représenté par un nœud dans le graphe. Ces nœuds sont initialement connectés de manière aléatoire, formant un réseau dense. Généralement, un nœud commence avec environ 500 arêtes (ou connexions) pour une large connectivité.</p></li>
@@ -106,7 +106,7 @@ summary: >-
     </button></h3><p>Une fois que l'index (le graphe de Vamana sur le disque et les codes PQ en mémoire) est construit, DISKANN effectue les recherches ANN comme suit :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
    </span> <span class="img-wrapper"> <span>Diskann 2</span> </span></p>
 <ol>
 <li><p><strong>Requête et point d'entrée :</strong> Un vecteur de requête est fourni pour localiser les voisins les plus proches. DISKANN démarre à partir d'un point d'entrée sélectionné dans le graphe de Vamana, souvent un nœud proche du centroïde global de l'ensemble de données. Le centroïde global représente la moyenne de tous les vecteurs, ce qui permet de minimiser la distance à parcourir dans le graphe pour trouver les voisins souhaités.</p></li>
@@ -134,7 +134,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Par défaut, <strong>DISKANN</strong> est désactivé dans Milvus afin de donner la priorité à la vitesse des index en mémoire pour les ensembles de données qui tiennent aisément dans la RAM. Toutefois, si vous travaillez avec des ensembles de données volumineux ou si vous souhaitez profiter de l'évolutivité de <strong>DISKANN</strong> et de l'optimisation SSD, vous pouvez facilement l'activer.</p>
+    </button></h2><p>Par défaut, <strong>DISKANN</strong> est désactivé dans Milvus afin de donner la priorité à la vitesse des index en mémoire pour les ensembles de données qui tiennent aisément dans la RAM. Toutefois, si vous travaillez avec des ensembles de données volumineux ou si vous souhaitez profiter de l'évolutivité de <strong>DISKANN</strong> et de l'optimisation des disques SSD, vous pouvez facilement l'activer.</p>
 <p>Voici comment activer DISKANN dans Milvus :</p>
 <ol>
 <li><p><strong>Mise à jour du fichier de configuration Milvus</strong></p>

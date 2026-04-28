@@ -176,5 +176,5 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
 <li><a href="/docs/de/install_cluster-milvusoperator.md">Milvus in Kubernetes mit Milvus Operator ausführen</a></li>
 <li><a href="/docs/de/install_cluster-helm.md">Milvus in Kubernetes mit Helm ausführen</a></li>
 </ul></li>
-<li><p>Siehe <a href="/docs/de/system_configuration.md">Systemkonfiguration</a> für Parameter, die Sie während der Installation von Milvus einstellen können.</p></li>
+<li><p>Siehe <a href="/docs/de/system_configuration.md">Systemkonfiguration</a> für Parameter, die Sie bei der Installation von Milvus einstellen können.</p></li>
 </ul>

@@ -48,7 +48,7 @@ title: Ragasによる評価
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas ragas</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするには、<strong>ランタイムを再起動する</strong>必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
+<p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするには、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
 <p>この例では、LLMとしてOpenAIを使います。<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を環境変数として用意してください。</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -303,7 +303,7 @@ df
     </tr>
     <tr>
       <th>1</th>
-      <td>Milvusをビルドしてソースから実行したいのですが、プログラミング言語は何ですか？</td>
+      <td>Milvusをビルドしてソースコードから実行したいのですが、プログラミング言語は何ですか？</td>
       <td>[Milvusのアルゴリズムライブラリは、CMakeとConan...</td>
       <td>Knowherを記述するために使用されるプログラミング言語...</td>
       <td>Knowherを記述するために使用されるプログラミング言語...</td>

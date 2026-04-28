@@ -275,7 +275,7 @@ summary: Apprenez à configurer Common pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        secondes. Le serveur sera arrêté de force si le processus d'arrêt gracieux n'est pas achevé pendant cette période.      </td>
+      <td>        secondes. Le serveur sera fermé de force si le processus d'arrêt gracieux n'est pas achevé pendant cette période.      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -396,7 +396,7 @@ summary: Apprenez à configurer Common pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        mot de passe par défaut pour l'utilisateur root. La longueur maximale est de 72 caractères et les guillemets doubles sont obligatoires.      </td>
+      <td>        mot de passe par défaut pour l'utilisateur root. La longueur maximale est de 72 caractères, et les guillemets doubles sont obligatoires.      </td>
       <td>Milvus</td>
     </tr>
   </tbody>

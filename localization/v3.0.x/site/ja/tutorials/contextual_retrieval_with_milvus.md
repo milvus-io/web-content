@@ -25,8 +25,8 @@ title: Milvusによる文脈検索
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/refs/heads/master/pics/contextual_retrieval_with_milvus.png" alt="image" class="doc-image" id="image" />
-   </span> <span class="img-wrapper"> <span>画像</span> </span><a href="https://www.anthropic.com/news/contextual-retrieval">コンテキスト検索は</a>、現在のRAG（Retrieval-Augmented Generation）ソリューションで生じているチャンクの意味的分離の問題に対処するために、Anthropicによって提案された高度な検索手法である。現在の実用的なRAGパラダイムでは、文書はいくつかのチャンクに分割され、ベクトルデータベースを使ってクエリを検索し、最も関連性の高いチャンクを取り出す。そしてLLMは、検索されたチャンクを使ってクエリに応答する。しかし、このチャンキング処理によって文脈情報が失われ、検索者が関連性を判断することが難しくなる。</p>
-<p>コンテキスト検索は、埋め込みやインデックス付けの前に各文書チャンクに関連するコンテキストを追加することで、従来の検索システムを改善し、検索精度を高め、検索エラーを減らす。ハイブリッド検索やリランキングのような技術と組み合わせることで、特に大規模な知識ベースに対して、RAG（Retrieval-Augmented Generation）システムを強化する。さらに、プロンプト・キャッシングと組み合わせることで、待ち時間と運用コストを大幅に削減し、コンテキスト化されたチャンクのコストは100万文書トークンあたり約1.02ドルと、コスト効率の高いソリューションを提供します。これにより、大規模な知識ベースを扱うためのスケーラブルで効率的なアプローチとなります。Anthropicのソリューションは、2つの洞察に満ちた側面を示しています：</p>
+   </span> <span class="img-wrapper"> <span>Image</span> </span><a href="https://www.anthropic.com/news/contextual-retrieval">Contextual Retrievalは</a>、現在のRAG（Retrieval-Augmented Generation）ソリューションで生じているチャンクの意味的分離の問題に対処するため、Anthropicによって提案された高度な検索手法である。現在の実用的なRAGパラダイムでは、文書はいくつかのチャンクに分割され、ベクトルデータベースを使ってクエリを検索し、最も関連性の高いチャンクを取り出す。そしてLLMは、検索されたチャンクを使ってクエリに応答する。しかし、このチャンキング処理によって文脈情報が失われ、検索者が関連性を判断することが難しくなる。</p>
+<p>コンテキスト検索は、埋め込みやインデックス付けの前に各文書チャンクに関連するコンテキストを追加することで、従来の検索システムを改善し、検索精度を高め、検索エラーを減らす。ハイブリッド検索やリランキングのような技術と組み合わせることで、特に大規模な知識ベースに対して、RAG（Retrieval-Augmented Generation）システムを強化する。さらに、プロンプト・キャッシングと組み合わせることで、待ち時間と運用コストを大幅に削減し、コンテキスト化されたチャンクのコストは100万ドキュメント・トークンあたり約1.02ドルと、費用対効果の高いソリューションを提供します。これにより、大規模な知識ベースを扱うためのスケーラブルで効率的なアプローチとなります。Anthropicのソリューションは、2つの洞察に満ちた側面を示しています：</p>
 <ul>
 <li><code translate="no">Document Enhancement</code>:クエリの書き換えは現代の情報検索において重要な技術であり、クエリをより有益なものにするために補助的な情報を使用することが多い。同様に、RAGでより良いパフォーマンスを達成するために、インデックスを作成する前にLLMで文書を前処理（例えば、データソースのクリーニング、失われた情報の補完、要約など）することで、関連する文書を検索する可能性を大幅に向上させることができる。言い換えれば、この前処理ステップは、関連性の観点から文書をクエリに近づけるのに役立つ。</li>
 <li><code translate="no">Low-Cost Processing by Caching Long Context</code>:LLMを使って文書を処理する際の共通の懸念は、コストである。KVCacheは、同じ先行コンテキストに対する中間結果の再利用を可能にする一般的なソリューションである。ほとんどのホスト型LLMベンダーはこの機能をユーザーに透過的に提供していますが、Anthropicはユーザーにキャッシュ処理をコントロールさせます。キャッシュヒットが発生した場合、ほとんどの計算を保存することができます（これは、長いコンテキストが同じまま、各クエリの命令が変更される場合に一般的です）。詳細は<a href="https://www.anthropic.com/news/prompt-caching">こちらを</a>ご覧ください。</li>
@@ -47,7 +47,22 @@ title: Milvusによる文脈検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">依存関係のインストール</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">依存関係のインストール<button data-href="#Install-Dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install tqdm</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install anthropic</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -501,7 +516,7 @@ Total queries: 248
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Voyageエンベッディングで有望な結果が得られたので、次は強力なスパースエンベッディングを生成するBGE-M3モデルを使ったハイブリッド検索の実行に移ります。密検索と疎検索の結果は、RRF（Reciprocal Rank Fusion）法を用いて結合され、ハイブリッド検索結果となる。</p>
+    </button></h2><p>Voyage埋め込みで有望な結果が得られたので、次は強力なスパース埋め込みを生成するBGE-M3モデルを使ったハイブリッド検索の実行に移ります。密検索と疎検索の結果は、RRF（Reciprocal Rank Fusion）法を用いて結合され、ハイブリッド検索結果となる。</p>
 <pre><code translate="no" class="language-python">hybrid_retriever = MilvusContextualRetriever(
     uri=<span class="hljs-string">&quot;hybrid.db&quot;</span>,
     collection_name=<span class="hljs-string">&quot;hybrid&quot;</span>,

@@ -116,10 +116,10 @@ DIM = <span class="hljs-number">768</span>
 <ul>
 <li>Jika Anda memiliki data dalam skala besar, Anda dapat menyiapkan server Milvus yang berkinerja baik pada <a href="https://milvus.io/docs/quickstart.md">docker atau kubernetes</a>. Dalam pengaturan ini, silakan gunakan uri server, misalnya<code translate="no">http://localhost:19530</code>, sebagai <code translate="no">uri</code>.</li>
 <li>Jika Anda ingin menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang dikelola sepenuhnya untuk Milvus, sesuaikan <code translate="no">uri</code> dan <code translate="no">token</code>, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">kunci Public Endpoint dan Api</a> di Zilliz Cloud.</li>
-<li>Dalam kasus sistem yang kompleks (seperti komunikasi jaringan), pemrosesan asinkron dapat membawa peningkatan kinerja dibandingkan dengan sinkronisasi. Jadi menurut kami Milvus-Lite tidak cocok untuk menggunakan antarmuka asinkron karena skenario yang digunakan tidak sesuai.</li>
+<li>Dalam kasus sistem yang kompleks (seperti komunikasi jaringan), pemrosesan asinkron dapat membawa peningkatan kinerja dibandingkan dengan sinkronisasi. Jadi menurut kami, Milvus-Lite tidak cocok untuk menggunakan antarmuka asinkron karena skenario yang digunakan tidak sesuai.</li>
 </ul>
 </div>
-<p>Tentukan fungsi inisialisasi yang dapat kita gunakan lagi untuk membangun ulang koleksi Milvus.</p>
+<p>Tentukan fungsi inisialisasi yang dapat kita gunakan lagi untuk membangun kembali koleksi Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_vector_store</span>():
     <span class="hljs-keyword">return</span> MilvusVectorStore(
         uri=URI,

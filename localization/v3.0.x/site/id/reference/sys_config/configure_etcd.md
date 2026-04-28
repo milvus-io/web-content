@@ -381,7 +381,7 @@ summary: Pelajari cara mengkonfigurasi etcd untuk Milvus.
   <thead>
     <tr>
       <th class="width80">Deskripsi</th>
-      <th class="width20">Nilai Default</th> 
+      <th class="width20">Nilai default</th> 
     </tr>
   </thead>
   <tbody>

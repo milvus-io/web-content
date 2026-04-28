@@ -28,7 +28,7 @@ title: 開始使用 Mem0 和 Milvus
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://mem0.ai/">Mem0</a>是適用於 AI 應用程式的智慧型記憶體層級，可保留使用者偏好並隨時間持續適應，提供個人化且有效率的互動。Mem0 是聊天機器人和 AI 驅動工具的理想選擇，可創造無縫、情境感知的體驗。</p>
-<p>在本教程中，我們將介紹 Mem0 記憶體管理的基本操作 - 新增、擷取、更新、搜尋、刪除和追蹤記憶體歷史 - 使用<a href="https://milvus.io/">Milvus</a>，這是一個高效能的開放原始碼向量資料庫，提供高效的儲存和擷取功能。這個實作導覽將引導您完成基本的記憶體作業，以協助您使用 Mem0 和 Milvus 建立個人化的 AI 互動。</p>
+<p>在本教程中，我們將介紹 Mem0 記憶體管理的基本操作 - 新增、擷取、更新、搜尋、刪除和追蹤記憶體歷史 - 使用<a href="https://milvus.io/">Milvus</a>，這是一個高效能的開放原始碼向量資料庫，提供高效的儲存和擷取功能。這個實作導覽將引導您完成基礎記憶體作業，以協助您使用 Mem0 和 Milvus 建立個人化的 AI 互動。</p>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -258,7 +258,7 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
         ></path>
       </svg>
     </button></h3><p>我們可以使用<code translate="no">search</code> 函式來尋找使用者最相關的記憶體。</p>
-<p>讓我們先為 Alice 新增另一個記憶體。</p>
+<p>讓我們先為 Alice 加入另一個記憶體。</p>
 <pre><code translate="no" class="language-python">new_mem = m.add(
     <span class="hljs-string">&quot;I have a linear algebra midterm exam on November 20&quot;</span>,
     user_id=<span class="hljs-string">&quot;alice&quot;</span>,

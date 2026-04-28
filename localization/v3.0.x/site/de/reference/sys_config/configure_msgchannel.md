@@ -19,7 +19,7 @@ summary: 'Erfahren Sie, wie Sie msgChannel für Milvus konfigurieren.'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In diesem Thema werden die auf den Nachrichtenkanal bezogenen Konfigurationen von Milvus vorgestellt.</p>
+    </button></h1><p>In diesem Thema werden die nachrichtenkanalbezogenen Konfigurationen von Milvus vorgestellt.</p>
 <h2 id="msgChannelchanNamePrefixcluster" class="common-anchor-header"><code translate="no">msgChannel.chanNamePrefix.cluster</code><button data-href="#msgChannelchanNamePrefixcluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,9 +77,9 @@ summary: 'Erfahren Sie, wie Sie msgChannel für Milvus konfigurieren.'
   <tbody>
     <tr>
       <td>
-        <li>Sub-Namenspräfix des Nachrichtenkanals, in dem der Root-Koordinator Zeittick-Nachrichten veröffentlicht.</li>      
+        <li>Sub-Namenspräfix des Nachrichtenkanals, in dem der Root-Koordinator die Zeittick-Nachrichten veröffentlicht.</li>      
         <li>Der vollständige Kanalnamenspräfix lautet ${msgChannel.chanNamePrefix.cluster}-${msgChannel.chanNamePrefix.rootCoordTimeTick}</li>      
-        <li>Achtung! Wenn Sie diesen Parameter ändern, nachdem Sie Milvus eine Zeit lang verwendet haben, wird Ihr Zugriff auf alte Daten beeinträchtigt.</li>      
+        <li>Achtung! Wenn Sie diesen Parameter ändern, nachdem Sie Milvus eine gewisse Zeit lang verwendet haben, hat dies Auswirkungen auf Ihren Zugriff auf alte Daten.</li>      
         <li>Es wird empfohlen, diesen Parameter zu ändern, bevor Sie Milvus zum ersten Mal starten.</li>      </td>
       <td>rootcoord-timetick</td>
     </tr>
@@ -112,7 +112,7 @@ summary: 'Erfahren Sie, wie Sie msgChannel für Milvus konfigurieren.'
       <td>
         <li>Sub-Namenspräfix des Nachrichtenkanals, in dem der Root-Koordinator seine eigenen Statistiknachrichten veröffentlicht.</li>      
         <li>Der vollständige Kanalnamenspräfix lautet ${msgChannel.chanNamePrefix.cluster}-${msgChannel.chanNamePrefix.rootCoordStatistics}</li>      
-        <li>Achtung! Wenn Sie diesen Parameter ändern, nachdem Sie Milvus eine gewisse Zeit lang verwendet haben, wird Ihr Zugriff auf alte Daten beeinträchtigt.</li>      
+        <li>Achtung! Wenn Sie diesen Parameter ändern, nachdem Sie Milvus eine Zeit lang verwendet haben, wird Ihr Zugriff auf alte Daten beeinträchtigt.</li>      
         <li>Es wird empfohlen, diesen Parameter zu ändern, bevor Sie Milvus zum ersten Mal starten.</li>      </td>
       <td>Wurzelkoordinaten-Statistiken</td>
     </tr>
@@ -209,9 +209,9 @@ summary: 'Erfahren Sie, wie Sie msgChannel für Milvus konfigurieren.'
   <tbody>
     <tr>
       <td>
-        <li>Sub-Namenspräfix des Nachrichtenkanals, in dem die Datenkoordination die Zeittick-Nachrichten veröffentlicht.</li>      
+        <li>Sub-Namenspräfix des Nachrichtenkanals, in dem die Datenkoordination Zeittick-Nachrichten veröffentlicht.</li>      
         <li>Der vollständige Kanalnamenspräfix lautet ${msgChannel.chanNamePrefix.cluster}-${msgChannel.chanNamePrefix.dataCoordTimeTick}</li>      
-        <li>Achtung! Wenn Sie diesen Parameter ändern, nachdem Sie Milvus eine gewisse Zeit lang verwendet haben, hat dies Auswirkungen auf Ihren Zugriff auf alte Daten.</li>      
+        <li>Achtung! Wenn Sie diesen Parameter ändern, nachdem Sie Milvus eine gewisse Zeit lang verwendet haben, wird Ihr Zugriff auf alte Daten beeinträchtigt.</li>      
         <li>Es wird empfohlen, diesen Parameter zu ändern, bevor Sie Milvus zum ersten Mal starten.</li>      </td>
       <td>datacoord-timetick-kanal</td>
     </tr>

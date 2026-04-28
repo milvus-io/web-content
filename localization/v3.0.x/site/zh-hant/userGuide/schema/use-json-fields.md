@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 允許您使用<code translate="no">JSON</code> 資料類型，在單一欄位內儲存結構化資料並建立索引。這使具有嵌套屬性的靈活模式成為可能，同時仍然允許通過 JSON 索引進行有效的過濾。</p>
+    </button></h1><p>Milvus 允許您使用<code translate="no">JSON</code> 資料類型，在單一欄位內儲存結構化資料並建立索引。這使具有巢狀屬性的靈活模式成為可能，同時仍然允許通過 JSON 索引進行有效的過濾。</p>
 <h2 id="What-is-a-JSON-field" class="common-anchor-header">什麼是 JSON 欄位？<button data-href="#What-is-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -541,7 +541,7 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 </ul></li>
 <li><p><strong>JSON 轉換類型</strong>(<code translate="no">json_cast_type</code>)：Milvus 在指定路徑解釋和索引值時應該使用的資料類型。</p>
 <ul>
-<li><p>此類型必須與被索引欄位的實際資料類型相符。如果您想在編制索引時將資料類型轉換成其他類型，請考慮<a href="/docs/zh-hant/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">使用轉換函數</a>。</p></li>
+<li><p>此類型必須與被索引欄位的實際資料類型相符。如果要在編制索引時將資料類型轉換為其他類型，請考慮<a href="/docs/zh-hant/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">使用轉換函數</a>。</p></li>
 <li><p>如需完整清單，請參閱<a href="/docs/zh-hant/use-json-fields.md#Supported-JSON-cast-types">下文</a>。</p></li>
 </ul></li>
 </ul>
@@ -784,7 +784,7 @@ indexOpt3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
         ></path>
       </svg>
     </button></h3><p>對於 JSON<strong>扁平化索引</strong>，Milvus 會透過<em>扁平化</em>JSON 結構和自動推斷每個值的類型，來索引 JSON 物件路徑（包括巢狀物件）內的所有鍵值對（key-value pairs）。</p>
-<h4 id="How-flattening-and-type-inference-work" class="common-anchor-header">扁平化和類型推斷如何工作</h4><p>當您在物件路徑上建立一個 JSON 平面索引時，Milvus 會</p>
+<h4 id="How-flattening-and-type-inference-work" class="common-anchor-header">扁平化和類型推斷如何工作</h4><p>當您在物件路徑上建立一個 JSON 平面索引時，Milvus 會：</p>
 <ol>
 <li><p><strong>扁平化</strong>- 從指定的<code translate="no">json_path</code> 開始，以遞迴方式遍歷物件，並將巢狀的 key-value 對抽取為完全限定路徑。使用先前<code translate="no">metadata</code> 的範例：</p>
 <pre><code translate="no" class="language-json"><span class="hljs-attr">&quot;metadata&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -969,7 +969,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p><strong>在您的向量欄位上建立索引</strong>（集合中的每個向量欄位都必須<strong>建立索引）</strong></p>
 <p>請參閱<a href="/docs/zh-hant/create-collection.md#Optional-Set-Index-Parameters">設定索引參數</a></p></li>
 <li><p><strong>載入集合</strong></p>
-<p>請參閱<a href="/docs/zh-hant/load-and-release.md">載入與釋放</a></p></li>
+<p>請參閱<a href="/docs/zh-hant/load-and-release.md">載入與釋出</a></p></li>
 <li><p><strong>使用 JSON 路徑篩選器進行搜尋或查詢</strong></p>
 <p>請參閱<a href="/docs/zh-hant/filtered-search.md">篩選搜尋和</a> <a href="/docs/zh-hant/json-operators.md">JSON 運算符號</a></p></li>
 </ul>
@@ -1040,7 +1040,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>不，JSON 欄位不支援預設值。但是，您可以在定義欄位時設定<code translate="no">nullable=True</code> ，以允許空項目。</p>
+    </button></h3><p>不，JSON 欄位不支援預設值。但是，您可以在定義字段時設定<code translate="no">nullable=True</code> ，以允許空項目。</p>
 <p>詳情請參閱<a href="/docs/zh-hant/nullable-and-default.md">Nullable &amp; Default</a>。</p>
 <h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">JSON 欄位鍵有任何命名慣例嗎？<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1059,7 +1059,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
       </svg>
     </button></h3><p>有，以確保與查詢和索引的相容性：</p>
 <ul>
-<li><p>在 JSON 鍵中只使用字母、數字和底線。</p></li>
+<li><p>在 JSON 鍵中只能使用字母、數字和底線。</p></li>
 <li><p>避免使用特殊字符、空格或點 (<code translate="no">.</code>,<code translate="no">/</code>, 等等)。</p></li>
 <li><p>不相容的鍵可能會在篩選表達式中造成解析問題。</p></li>
 </ul>
@@ -1102,7 +1102,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
       </svg>
     </button></h3><ul>
 <li><p><strong>數字索引</strong>：</p>
-<p>如果使用<code translate="no">json_cast_type=&quot;double&quot;</code> 建立索引，則只有數字篩選條件 (例如<code translate="no">&gt;</code>,<code translate="no">&lt;</code>,<code translate="no">== 42</code>) 會利用索引。非數字條件可能會退回到暴力掃描。</p></li>
+<p>如果使用<code translate="no">json_cast_type=&quot;double&quot;</code> 建立索引，則只有數字篩選條件 (例如<code translate="no">&gt;</code>,<code translate="no">&lt;</code>,<code translate="no">== 42</code>) 才會利用索引。非數字條件可能會退回到暴力掃描。</p></li>
 <li><p><strong>字串索引</strong>：</p>
 <p>如果索引使用<code translate="no">json_cast_type=&quot;varchar&quot;</code> ，則只有字串篩選條件可從索引中獲益；其他類型可能會退回到暴力掃描。</p></li>
 <li><p><strong>布林索引</strong>：</p>

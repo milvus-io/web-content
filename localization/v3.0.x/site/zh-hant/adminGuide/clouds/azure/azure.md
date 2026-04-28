@@ -75,7 +75,7 @@ summary: 瞭解如何在 Azure 上部署 Milvus 群集。
       </svg>
     </button></h2><ol>
 <li>登入 Azure 入口網站。</li>
-<li>在 Azure 入口網站功能表上或從<strong>首頁</strong>，選擇<strong>建立資源</strong>。</li>
+<li>在 Azure 入口網站功能表上或從<strong>首頁</strong>，選擇「<strong>建立資源</strong>」。</li>
 <li>選擇<strong>容器</strong>&gt;<strong>Kubernetes 服務</strong>。</li>
 <li>在<strong>Basics</strong>頁面上，設定下列選項：</li>
 </ol>
@@ -242,7 +242,7 @@ helm repo update
 helm install -f values.yaml my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>在前面的指令中，我們在本機新增 Milvus Helm 圖表的 repo，並更新 repo 以取得最新的圖表。然後，我們安裝一個 Milvus 實例，並命名為<strong>my-release</strong>。</p>
-<p>請注意配置<code translate="no">service.type</code> 的值，它表示我們希望透過 Layer-4 負載平衡器揭露 Milvus 實例。</p>
+<p>請注意配置<code translate="no">service.type</code> 的值，它表示我們希望透過 Layer-4 負載平衡器來揭露 Milvus 的實例。</p>
 <h2 id="Verify-the-deployment" class="common-anchor-header">驗證部署<button data-href="#Verify-the-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

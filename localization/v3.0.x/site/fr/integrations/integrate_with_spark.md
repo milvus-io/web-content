@@ -24,7 +24,7 @@ title: Utiliser Apache Spark™ avec Milvus/Zilliz Cloud pour les pipelines d'IA
       </svg>
     </button></h1><p>Le <a href="https://github.com/zilliztech/spark-milvus">connecteur Spark-Milvus</a> assure l'intégration d'Apache Spark et de Databricks avec Milvus et Zilliz Cloud. Il fait le lien entre les puissantes fonctions de traitement des big data et d'apprentissage automatique (ML) d'Apache Spark et les capacités de recherche vectorielle de pointe de Milvus. Cette intégration permet de rationaliser le flux de travail pour la recherche alimentée par l'IA, l'analyse avancée, la formation au ML et la gestion efficace des données vectorielles à grande échelle.</p>
 <p>Apache Spark est une plateforme de traitement de données distribuées conçue pour traiter des ensembles de données massifs avec des calculs à grande vitesse. Associée à Milvus ou Zilliz Cloud, elle ouvre de nouvelles possibilités pour des cas d'utilisation tels que la recherche sémantique, les systèmes de recommandation et l'analyse de données pilotée par l'IA.</p>
-<p>Par exemple, Spark peut traiter par lots de grands ensembles de données pour générer des enchâssements via des modèles ML, puis utiliser le connecteur Spark-Milvus pour stocker ces enchâssements directement dans Milvus ou Zilliz Cloud. Une fois indexées, ces données peuvent être rapidement recherchées ou analysées, créant ainsi un pipeline puissant pour les flux de travail d'IA et de big data.</p>
+<p>Par exemple, Spark peut traiter par lots de grands ensembles de données pour générer des embeddings via des modèles ML, puis utiliser le connecteur Spark-Milvus pour stocker ces embeddings directement dans Milvus ou Zilliz Cloud. Une fois indexées, ces données peuvent être rapidement recherchées ou analysées, créant ainsi un pipeline puissant pour les flux de travail d'IA et de big data.</p>
 <p>Le connecteur Spark-Milvus prend en charge des tâches telles que l'ingestion itérative et en masse de données dans Milvus, la synchronisation des données entre les systèmes et l'analyse avancée des données vectorielles stockées dans Milvus. Ce guide vous guidera à travers les étapes pour configurer et utiliser efficacement le connecteur pour des cas d'utilisation tels que :</p>
 <ul>
 <li>Charger efficacement des données vectorielles dans Milvus par lots importants,</li>
@@ -46,7 +46,22 @@ title: Utiliser Apache Spark™ avec Milvus/Zilliz Cloud pour les pipelines d'IA
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Preparation" class="common-anchor-header">Préparation</h3><p>Le connecteur Spark-Milvus prend en charge les langages de programmation Scala et Python. Les utilisateurs peuvent l'utiliser avec <strong>Pyspark</strong> ou <strong>Spark-shell</strong>. Pour exécuter cette démo, configurez un environnement Spark contenant la dépendance Spark-Milvus Connector en suivant les étapes suivantes :</p>
+    </button></h2><h3 id="Preparation" class="common-anchor-header">Préparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le connecteur Spark-Milvus prend en charge les langages de programmation Scala et Python. Les utilisateurs peuvent l'utiliser avec <strong>Pyspark</strong> ou <strong>Spark-shell</strong>. Pour exécuter cette démo, configurez un environnement Spark contenant la dépendance Spark-Milvus Connector en suivant les étapes suivantes :</p>
 <ol>
 <li><p>Installer Apache Spark (version &gt;= 3.3.0)</p>
 <p>Vous pouvez installer Apache Spark en vous référant à la <a href="https://spark.apache.org/docs/latest/">documentation officielle</a>.</p></li>
@@ -64,7 +79,22 @@ title: Utiliser Apache Spark™ avec Milvus/Zilliz Cloud pour les pipelines d'IA
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 </ol>
-<h3 id="Demo" class="common-anchor-header">Démonstration</h3><p>Dans cette démo, nous créons un exemple de DataFrame Spark avec des données vectorielles et nous l'écrivons dans Milvus via le connecteur Spark-Milvus. Une collection sera créée automatiquement dans Milvus en fonction du schéma et des options spécifiées.</p>
+<h3 id="Demo" class="common-anchor-header">Démonstration<button data-href="#Demo" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dans cette démo, nous créons un exemple de DataFrame Spark avec des données vectorielles et nous l'écrivons dans Milvus via le connecteur Spark-Milvus. Une collection sera créée automatiquement dans Milvus en fonction du schéma et des options spécifiées.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#scala">Scala</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pyspark.sql <span class="hljs-keyword">import</span> SparkSession
@@ -136,7 +166,22 @@ object Hello extends App {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Milvus-options" class="common-anchor-header">Options de Milvus</h3><p>Dans la section <a href="#Quick-start">Démarrage rapide</a>, nous avons montré les options de paramétrage pendant les opérations avec Milvus. Ces options sont abstraites sous le nom d'options Milvus. Elles sont utilisées pour créer des connexions à Milvus et contrôler d'autres comportements de Milvus. Toutes les options ne sont pas obligatoires.</p>
+    </button></h2><h3 id="Milvus-options" class="common-anchor-header">Options de Milvus<button data-href="#Milvus-options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dans la section <a href="#Quick-start">Démarrage rapide</a>, nous avons montré les options de paramétrage pendant les opérations avec Milvus. Ces options sont abstraites sous le nom d'options Milvus. Elles sont utilisées pour créer des connexions à Milvus et contrôler d'autres comportements de Milvus. Toutes les options ne sont pas obligatoires.</p>
 <table>
 <thead>
 <tr><th>Option Clé</th><th>Valeur par défaut</th><th>Description de l'option</th></tr>
@@ -157,7 +202,7 @@ object Hello extends App {
 <tr><td><code translate="no">milvus.bucket</code></td><td><code translate="no">a-bucket</code></td><td>Nom de la base de données dans le stockage Milvus. Il doit être identique à <code translate="no">minio.bucketName</code> dans <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">milvus.yaml</a>.</td></tr>
 <tr><td><code translate="no">milvus.rootpath</code></td><td><code translate="no">files</code></td><td>Chemin racine du stockage Milvus. Il doit être identique à <code translate="no">minio.rootpath</code> dans <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">milvus.yaml</a>.</td></tr>
 <tr><td><code translate="no">milvus.fs</code></td><td><code translate="no">s3a://</code></td><td>Système de fichiers du stockage Milvus. La valeur <code translate="no">s3a://</code> s'applique à Spark open-source. Utilisez <code translate="no">s3://</code> pour Databricks.</td></tr>
-<tr><td><code translate="no">milvus.storage.endpoint</code></td><td><code translate="no">localhost:9000</code></td><td>Point de terminaison du stockage Milvus. Il doit être identique à <code translate="no">minio.address</code>:<code translate="no">minio.port</code> dans <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">milvus.yaml</a>.</td></tr>
+<tr><td><code translate="no">milvus.storage.endpoint</code></td><td><code translate="no">localhost:9000</code></td><td>Point final du stockage Milvus. Il doit être identique à <code translate="no">minio.address</code>:<code translate="no">minio.port</code> dans <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">milvus.yaml</a>.</td></tr>
 <tr><td><code translate="no">milvus.storage.user</code></td><td><code translate="no">minioadmin</code></td><td>Utilisateur du stockage Milvus. Il doit être identique à <code translate="no">minio.accessKeyID</code> dans <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">milvus.yaml</a>.</td></tr>
 <tr><td><code translate="no">milvus.storage.password</code></td><td><code translate="no">minioadmin</code></td><td>Mot de passe du stockage Milvus. Il doit être identique à <code translate="no">minio.secretAccessKey</code> dans <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">milvus.yaml</a>.</td></tr>
 <tr><td><code translate="no">milvus.storage.useSSL</code></td><td><code translate="no">false</code></td><td>Utilisation ou non de SSL pour le stockage Milvus. Il doit être identique à <code translate="no">minio.useSSL</code> dans <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">milvus.yaml</a>.</td></tr>
@@ -184,14 +229,59 @@ object Hello extends App {
 <li><code translate="no">milvusbinlog</code>: Le format de données Milvus pour la lecture des données binlog intégrées de Milvus.</li>
 <li><code translate="no">mjson</code>: Format JSON Milvus pour l'insertion en bloc de données dans Milvus.</li>
 </ul>
-<h3 id="milvus" class="common-anchor-header">milvus</h3><p>Dans la section <a href="#Quick-start">Démarrage rapide</a>, nous utilisons le format <strong>milvus</strong> pour écrire des échantillons de données dans un cluster Milvus. Le format <strong>milvus</strong> est un nouveau format de données qui prend en charge l'écriture transparente de données Spark DataFrame dans Milvus Collections. Ceci est réalisé par des appels par lots à l'API Insert du SDK Milvus. Si une collection n'existe pas dans Milvus, une nouvelle collection sera créée sur la base du schéma du Dataframe. Toutefois, la collection créée automatiquement peut ne pas prendre en charge toutes les fonctionnalités du schéma de collection. Par conséquent, il est recommandé de créer d'abord une collection via le SDK, puis d'utiliser spark-milvus pour l'écriture. Pour plus d'informations, veuillez vous référer à la <a href="https://github.com/zilliztech/spark-milvus/blob/main/examples/src/main/scala/InsertDemo.scala">démo</a>.</p>
-<h3 id="milvusbinlog" class="common-anchor-header">milvusbinlog</h3><p>Le nouveau format de données <strong>milvusbinlog</strong> permet de lire les données binlog intégrées de Milvus. Binlog est le format de stockage de données interne de Milvus basé sur parquet. Malheureusement, il ne peut pas être lu par une bibliothèque parquet classique, c'est pourquoi nous avons implémenté ce nouveau format de données pour aider le travail Spark à le lire. Il n'est pas recommandé d'utiliser <strong>milvusbinlog</strong> directement à moins d'être familier avec les détails du stockage interne de milvus. Nous suggérons d'utiliser la fonction <a href="#MilvusUtils">MilvusUtils</a> qui sera présentée dans la section suivante.</p>
+<h3 id="milvus" class="common-anchor-header">milvus<button data-href="#milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dans la section <a href="#Quick-start">Démarrage rapide</a>, nous utilisons le format <strong>milvus</strong> pour écrire des échantillons de données dans un cluster Milvus. Le format <strong>milvus</strong> est un nouveau format de données qui prend en charge l'écriture transparente de données Spark DataFrame dans Milvus Collections. Ceci est réalisé par des appels par lots à l'API Insert du SDK Milvus. Si une collection n'existe pas dans Milvus, une nouvelle collection sera créée sur la base du schéma du Dataframe. Toutefois, la collection créée automatiquement peut ne pas prendre en charge toutes les fonctionnalités du schéma de collection. Par conséquent, il est recommandé de créer d'abord une collection via le SDK, puis d'utiliser spark-milvus pour l'écriture. Pour plus d'informations, veuillez vous référer à la <a href="https://github.com/zilliztech/spark-milvus/blob/main/examples/src/main/scala/InsertDemo.scala">démo</a>.</p>
+<h3 id="milvusbinlog" class="common-anchor-header">milvusbinlog<button data-href="#milvusbinlog" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le nouveau format de données <strong>milvusbinlog</strong> permet de lire les données binlog intégrées de Milvus. Binlog est le format de stockage de données interne de Milvus basé sur parquet. Malheureusement, il ne peut pas être lu par une bibliothèque parquet classique, c'est pourquoi nous avons implémenté ce nouveau format de données pour aider le travail Spark à le lire. Il n'est pas recommandé d'utiliser <strong>milvusbinlog</strong> directement à moins d'être familier avec les détails du stockage interne de milvus. Nous suggérons d'utiliser la fonction <a href="#MilvusUtils">MilvusUtils</a> qui sera présentée dans la section suivante.</p>
 <pre><code translate="no" class="language-scalar">val df = spark.read
   .format(&quot;milvusbinlog&quot;)
   .load(path)
   .withColumnRenamed(&quot;val&quot;, &quot;embedding&quot;)
 </code></pre>
-<h3 id="mjson" class="common-anchor-header">mjson</h3><p>Milvus fournit la fonctionnalité <a href="https://milvus.io/docs/bulk_insert.md">Bulkinsert</a> pour améliorer les performances d'écriture lors de l'utilisation de grands ensembles de données. Cependant, le format JSON utilisé par Milvus est légèrement différent du format de sortie JSON par défaut de Spark. Pour résoudre ce problème, nous introduisons le format de données <strong>mjson</strong> pour générer des données qui répondent aux exigences de Milvus. Voici un exemple qui montre la différence entre JSON-lines et <strong>mjson</strong>:</p>
+<h3 id="mjson" class="common-anchor-header">mjson<button data-href="#mjson" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus fournit la fonctionnalité <a href="https://milvus.io/docs/bulk_insert.md">Bulkinsert</a> pour améliorer les performances d'écriture lors de l'utilisation de grands ensembles de données. Cependant, le format JSON utilisé par Milvus est légèrement différent du format de sortie JSON par défaut de Spark. Pour résoudre ce problème, nous introduisons le format de données <strong>mjson</strong> pour générer des données qui répondent aux exigences de Milvus. Voici un exemple qui montre la différence entre JSON-lines et <strong>mjson</strong>:</p>
 <ul>
 <li><p>JSON-lignes :</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;book_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">101</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;word_count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">13</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;book_intro&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">1.1</span><span class="hljs-punctuation">,</span> <span class="hljs-number">1.2</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">}</span>
@@ -229,10 +319,40 @@ object Hello extends App {
         ></path>
       </svg>
     </button></h2><p>MilvusUtils contient plusieurs fonctions util utiles. Actuellement, il n'est supporté qu'en Scala. Plus d'exemples d'utilisation se trouvent dans la section <a href="#Advanced-Usage">Utilisation avancée</a>.</p>
-<h3 id="MilvusUtilsreadMilvusCollection" class="common-anchor-header">MilvusUtils.readMilvusCollection</h3><p><strong>MilvusUtils.readMilvusCollection</strong> est une interface simple pour charger une collection Milvus entière dans un Dataframe Spark. Elle englobe diverses opérations, notamment l'appel au SDK Milvus, la lecture du <strong>milvusbinlog</strong> et les opérations communes d'union/jointure.</p>
+<h3 id="MilvusUtilsreadMilvusCollection" class="common-anchor-header">MilvusUtils.readMilvusCollection<button data-href="#MilvusUtilsreadMilvusCollection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>MilvusUtils.readMilvusCollection</strong> est une interface simple pour charger une collection Milvus entière dans un Dataframe Spark. Elle englobe diverses opérations, notamment l'appel au SDK Milvus, la lecture du <strong>milvusbinlog</strong> et les opérations communes d'union/jointure.</p>
 <pre><code translate="no" class="language-scala">val collectionDF = MilvusUtils.readMilvusCollection(spark, milvusOptions)
 </code></pre>
-<h3 id="MilvusUtilsbulkInsertFromSpark" class="common-anchor-header">MilvusUtils.bulkInsertFromSpark</h3><p><strong>MilvusUtils.bulkInsertFromSpark</strong> fournit un moyen pratique d'importer des fichiers de sortie Spark dans Milvus dans un grand lot. Il intègre l'API <strong>Bullkinsert</strong> du SDK Milvus.</p>
+<h3 id="MilvusUtilsbulkInsertFromSpark" class="common-anchor-header">MilvusUtils.bulkInsertFromSpark<button data-href="#MilvusUtilsbulkInsertFromSpark" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>MilvusUtils.bulkInsertFromSpark</strong> fournit un moyen pratique d'importer des fichiers de sortie Spark dans Milvus dans un grand lot. Il englobe l'API <strong>Bullkinsert</strong> du SDK Milvus.</p>
 <pre><code translate="no" class="language-scala">df.write.format(&quot;parquet&quot;).save(outputPath)
 MilvusUtils.bulkInsertFromSpark(spark, milvusOptions, outputPath, &quot;parquet&quot;)
 </code></pre>
@@ -252,7 +372,22 @@ MilvusUtils.bulkInsertFromSpark(spark, milvusOptions, outputPath, &quot;parquet&
         ></path>
       </svg>
     </button></h2><p>Dans cette section, vous trouverez des exemples d'utilisation avancée du connecteur Spark-Milvus pour l'analyse et la migration des données. Pour plus de démonstrations, voir <a href="https://github.com/zilliztech/spark-milvus/tree/main/examples/src/main/scala">exemples</a>.</p>
-<h3 id="MySQL---embedding---Milvus" class="common-anchor-header">MySQL -&gt; intégration -&gt; Milvus</h3><p>Dans cette démo, nous allons</p>
+<h3 id="MySQL---embedding---Milvus" class="common-anchor-header">MySQL -&gt; intégration -&gt; Milvus<button data-href="#MySQL---embedding---Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dans cette démo, nous allons</p>
 <ol>
 <li>Lire les données de MySQL à travers le connecteur Spark-MySQL,</li>
 <li>Générer de l'embedding (en utilisant Word2Vec comme exemple), et</li>
@@ -334,7 +469,22 @@ object Mysql2MilvusDemo  extends App {
     .save()
 }
 </code></pre>
-<h3 id="Milvus---Transform---Milvus" class="common-anchor-header">Milvus -&gt; Transform -&gt; Milvus</h3><p>Dans cette démo, nous allons</p>
+<h3 id="Milvus---Transform---Milvus" class="common-anchor-header">Milvus -&gt; Transform -&gt; Milvus<button data-href="#Milvus---Transform---Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dans cette démo, nous allons</p>
 <ol>
 <li>Lire les données d'une collection Milvus,</li>
 <li>Appliquer une transformation (en utilisant l'ACP comme exemple), et</li>
@@ -452,14 +602,29 @@ object TransformDemo extends App {
   MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, &quot;parquet&quot;)
 }
 </code></pre>
-<h3 id="Databricks---Zilliz-Cloud" class="common-anchor-header">Databricks -&gt; Zilliz Cloud</h3><p>Si vous utilisez Zilliz Cloud (le service géré de Milvus), vous pouvez tirer parti de son API d'importation de données très pratique. Zilliz Cloud fournit des outils et une documentation complets pour vous aider à déplacer efficacement vos données à partir de diverses sources de données, y compris Spark et Databricks. Il vous suffit de configurer un bucket S3 en tant qu'intermédiaire et d'ouvrir son accès à votre compte Zilliz Cloud. L'API d'importation de données de Zilliz Cloud chargera automatiquement le lot complet de données depuis le bucket S3 vers votre cluster Zilliz Cloud.</p>
+<h3 id="Databricks---Zilliz-Cloud" class="common-anchor-header">Databricks -&gt; Zilliz Cloud<button data-href="#Databricks---Zilliz-Cloud" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Si vous utilisez Zilliz Cloud (le service géré de Milvus), vous pouvez tirer parti de son API d'importation de données pratique. Zilliz Cloud fournit des outils et une documentation complets pour vous aider à déplacer efficacement vos données à partir de diverses sources de données, y compris Spark et Databricks. Il vous suffit de configurer un bucket S3 en tant qu'intermédiaire et d'ouvrir son accès à votre compte Zilliz Cloud. L'API d'importation de données de Zilliz Cloud chargera automatiquement le lot complet de données depuis le bucket S3 vers votre cluster Zilliz Cloud.</p>
 <p><strong>Préparations</strong></p>
 <ol>
 <li><p>Chargez le runtime Spark en ajoutant un fichier jar à votre cluster Databricks.</p>
 <p>Vous pouvez installer une bibliothèque de différentes manières. Cette capture d'écran montre le téléchargement d'un fichier jar du local vers le cluster. Pour plus d'informations, voir <a href="https://docs.databricks.com/en/libraries/cluster-libraries.html">Cluster Libraries</a> dans la documentation Databricks.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
    </span> <span class="img-wrapper"> <span>Installer la bibliothèque Databricks</span> </span></p></li>
 <li><p>Créez un bucket S3 et configurez-le comme emplacement de stockage externe pour votre cluster Databricks.</p>
 <p>Bulkinsert a exigé que les données soient stockées dans un seau temporaire afin que Zilliz Cloud puisse importer les données par lots. Vous pouvez créer un seau S3 et le configurer en tant qu'emplacement externe de Databricks. Veuillez vous référer à la section <a href="https://docs.databricks.com/en/sql/language-manual/sql-ref-external-locations.html">Emplacements externes</a> pour plus de détails.</p></li>

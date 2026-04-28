@@ -26,7 +26,7 @@ title: ジーナAI - リランカー
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>次に、<code translate="no">JinaRerankFunction</code> をインスタンス化します：</p>
+<p>そして、<code translate="no">JinaRerankFunction</code> をインスタンス化します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> JinaRerankFunction
 
 jina_rf = JinaRerankFunction(

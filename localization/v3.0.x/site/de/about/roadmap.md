@@ -78,7 +78,7 @@ summary: >-
 <li><p>Unterstützung für den Datentyp <strong>Zeitstempel mit Zeitzone</strong>.</p></li>
 </ul>
 <h4 id="🔹-StreamNode-Architecture-Refactor" class="common-anchor-header">🔹 <strong>StreamNode Architektur Refactor</strong></h4><ul>
-<li><p>Umschreiben der Streaming-Ingestion-Pipeline zur Optimierung inkrementeller Schreibvorgänge und Echtzeitberechnungen.</p></li>
+<li><p>Neuformulierung der Streaming-Ingestion-Pipeline zur Optimierung inkrementeller Schreibvorgänge und Echtzeitberechnungen.</p></li>
 <li><p>Erhebliche Verbesserung der Gleichzeitigkeitsleistung und -stabilität als Grundlage für eine vereinheitlichte Echtzeit- und Offline-Verarbeitung.</p></li>
 <li><p>Einführung einer neuen Nachrichtenwarteschlangen-Engine: <strong>Woodpecker</strong>.</p></li>
 </ul>

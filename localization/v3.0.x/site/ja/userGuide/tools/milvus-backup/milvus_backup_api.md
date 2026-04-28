@@ -1,6 +1,6 @@
 ---
 id: milvus_backup_api.md
-summary: APIを利用したMilvus Backupの利用方法をご紹介します。
+summary: APIを使ったMilvus Backupの使い方
 title: APIを利用したデータのバックアップとリストア
 ---
 <h1 id="Back-up-and-Restore-Data-Using-APIs" class="common-anchor-header">APIを利用したデータのバックアップとリストア<button data-href="#Back-up-and-Restore-Data-Using-APIs" class="anchor-icon" translate="no">

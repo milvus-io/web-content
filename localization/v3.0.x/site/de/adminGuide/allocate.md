@@ -80,11 +80,11 @@ Die Verwendung von Helm zur Aktualisierung von Ressourcen führt dazu, dass die 
     </button></h3><p>Sie müssen die Ressourcenvariablen für jede Milvus-Komponente festlegen, wenn Sie <code translate="no">--set</code> zur Aktualisierung der Ressourcenkonfigurationen verwenden.</p>
 <div class="filter">
 <a href="#standalone">Eigenständiger Milvus</a> <a href="#cluster">Milvus-Cluster</a></div>
-<div class="table-wrapper filter-standalone" markdown="block">
+<div class="filter-standalone table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set standalone.resources.limits.cpu=2 --set standalone.resources.limits.memory=4Gi --set standalone.resources.requests.cpu=0.1 --set standalone.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<div class="table-wrapper filter-cluster" markdown="block">
+<div class="filter-cluster table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set dataNode.resources.limits.cpu=2 --set dataNode.resources.limits.memory=4Gi --set dataNode.resources.requests.cpu=0.1 --set dataNode.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>

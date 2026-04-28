@@ -1,9 +1,7 @@
 ---
 id: minhash-lsh.md
 title: MINHASH_LSH
-summary: >-
-  高效的重複刪除和相似性搜尋對於大規模的機器學習資料集來說至關重要，尤其是對於清理大型語言模型 (Large Language Models, LLM)
-  的訓練語料庫等任務。在處理數百萬或數十億的文件時，傳統的精確匹配會變得太慢且成本太高。
+summary: 使用 MinHash LSH 索引加速大型文字資料集的近似重複檢測和 Jaccard 相似性搜尋。
 ---
 <h1 id="MINHASHLSH" class="common-anchor-header">MINHASH_LSH<button data-href="#MINHASHLSH" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -83,13 +81,13 @@ summary: >-
 <p>MinHash 過程包括</p>
 <ol>
 <li><p><strong>分組</strong>：將文件轉換為重疊標記序列 (shingles) 的集合</p></li>
-<li><p><strong>散列</strong>： 將多個獨立的散列函數套用到每個小片上</p></li>
+<li><p><strong>散列</strong>： 將多個獨立的散列函數套用到每個片段上</p></li>
 <li><p><strong>最小值選擇</strong>：針對每個切細函數，記錄所有切細片的<strong>最小</strong>切細值</p></li>
 </ol>
 <p>您可以在下面看到整個流程的圖解：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
    </span> <span class="img-wrapper"> <span>Minhash 工作流程</span> </span></p>
 <div class="alert note">
 <p>使用的切細函數決定 MinHash 簽章的維度。較高的維度可提供較佳的近似精確度，但代價是增加儲存和計算。</p>
@@ -117,7 +115,7 @@ summary: >-
 <p>一個<em>n 維的</em> MinHash 簽章會被分成<em>b</em>個區段。每個區段包含<em>r 個</em>連續的散列值，因此簽章總長度滿足：<em>n = b × r</em>。</p>
 <p>例如，如果您有一個 128 維的 MinHash 簽章<em>(n = 128</em>)，並將它分成 32 個區段<em>(b = 32</em>)，那麼每個區段包含 4 個切細值<em>(r = 4</em>)。</p></li>
 <li><p><strong>頻段層級散列：</strong></p>
-<p>分割之後，每個頻段都會使用標準散列函數獨立處理，將其分配到一個水桶。如果兩個簽章在一個區段內產生相同的雜湊值，也就是它們屬於同一個桶，就會被視為潛在的匹配項目。</p></li>
+<p>分割之後，每個頻段都會使用標準散列函數獨立處理，將其分配到一個水桶。如果兩個簽章在一個區段內產生相同的雜湊值，也就是落入相同的桶中，則視為潛在的匹配。</p></li>
 <li><p><strong>候選選擇：</strong></p>
 <p>至少在一個頻段內碰撞的簽名對會被選為相似性候選人。</p></li>
 </ol>
@@ -134,17 +132,17 @@ summary: >-
 <p>考慮三個具有 128 維 MinHash 簽署的文件：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
    </span> <span class="img-wrapper"> <span>Lsh 工作流程 1</span> </span></p>
 <p>首先，LSH 將 128 維的簽章分成 32 段，每段有 4 個連續值：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
    </span> <span class="img-wrapper"> <span>Lsh 工作流程 2</span> </span></p>
 <p>接著，使用散列函數將每個區段散列為不同的桶。共享散列的文件對會被選為相似度候選人。在下面的範例中，由於文件 A 和文件 B 的散列結果在<strong>Band 0</strong> 中相撞，因此它們被選為相似性候選項目：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
    </span> <span class="img-wrapper"> <span>Lsh 工作流程 3</span> </span></p>
 <div class="alert note">
 <p>頻帶的數量由<code translate="no">mh_lsh_band</code> 參數控制。如需詳細資訊，請參閱<a href="/docs/zh-hant/minhash-lsh.md#Index-building-params">索引建立參數</a>。</p>
@@ -164,7 +162,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>MinHash 簽署使用固定長度的二進位向量來近似集合間的 Jaccard 類似性。然而，由於這些簽章不保留原始資料集，因此無法直接使用<code translate="no">JACCARD</code> 、<code translate="no">L2</code> 或<code translate="no">COSINE</code> 等標準度量來比較它們。</p>
+    </button></h3><p>MinHash 簽署使用固定長度的二進位向量來近似集合間的 Jaccard 相似度。然而，由於這些簽章不保留原始資料集，因此無法直接使用<code translate="no">JACCARD</code> 、<code translate="no">L2</code> 或<code translate="no">COSINE</code> 等標準度量來比較它們。</p>
 <p>為了解決這個問題，Milvus 引進了一種稱為<code translate="no">MHJACCARD</code> 的特殊度量類型，專門用來比較 MinHash 簽署。</p>
 <p>在 Milvus 中使用 MinHash 時：</p>
 <ul>
@@ -189,10 +187,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>MinHash LSH 所提供的重複資料刪除程序，讓 Milvus 能夠有效率地識別並濾除近乎重複的文字或結構化記錄，然後再將它們插入到資料集中。</p>
-<p><img translate="no" src="/docs/v2.6.x/assets/deduplication-workflow.png" alt="Deduplication Workflow" width="600"></p>
+    </button></h3><p>MinHash LSH 所提供的重複資料刪除程序，可讓 Milvus 在將近乎重複的文字或結構化記錄插入資料庫之前，有效率地識別與篩選出這些記錄。</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/it9wwbcfwhft0rbwosacgltzneb.png" alt="It9wwbcfwhft0rbwosacgltzneb" class="doc-image" id="it9wwbcfwhft0rbwosacgltzneb" />
+   </span> <span class="img-wrapper"> <span>It9wwbcfwhft0rbwosacgltzneb</span> </span></p>
 <ol>
-<li><p><strong>分塊與預先處理</strong>：將傳入的文字資料或結構化資料 (例如：記錄、欄位) 分割成小塊；將文字規格化 (小寫、標點符號移除)，並視需要移除停用字。</p></li>
+<li><p><strong>分塊與預處理</strong>：將傳入的文字資料或結構化資料 (例如：記錄、欄位) 分割成小塊；將文字規範化 (小寫、標點符號移除)，並視需要移除停止字。</p></li>
 <li><p><strong>特徵建構</strong>：建立用於 MinHash 的標記集 (例如，從文字產生的小塊；結構化資料的連結欄位標記)。</p></li>
 <li><p><strong>MinHash 簽署產生</strong>：為每個區塊或記錄計算 MinHash 簽章。</p></li>
 <li><p><strong>二進位向量轉換</strong>：將簽署轉換為與 Milvus 相容的二進位向量。</p></li>
@@ -214,7 +215,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中使用 MinHash LSH 之前，您必須先產生<strong>MinHash 簽署</strong>。這些精簡的二進位簽章近似於集合間的 Jaccard 類似性，是在 Milvus 中基於<code translate="no">MHJACCARD</code> 搜尋所需的。</p>
+    </button></h2><p>在 Milvus 中使用 MinHash LSH 之前，您必須先產生<strong>MinHash 簽名</strong>。這些精簡的二進位簽章近似於集合間的 Jaccard 類似性，是在 Milvus 中基於<code translate="no">MHJACCARD</code> 搜尋所需要的。</p>
+<div class="alert note">
+<p>您可以用兩種方式為<code translate="no">MINHASH_LSH</code> 索引準備 MinHash 簽署：</p>
+<ul>
+<li><p>使用外部工具自行產生簽章，並將它們插入 BINARY_VECTOR 欄位，或</p></li>
+<li><p>使用內建的 MinHash 功能從文字自動產生相容的二進位向量。如需 MinHash 函式的端對端工作流程和組態選項，請參閱<a href="/docs/zh-hant/minhash-function.md">MinHash 函式</a>。</p></li>
+</ul>
+</div>
 <h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">選擇產生 MinHash 簽署的方法<button data-href="#Choose-a-method-to-generate-MinHash-signatures" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -232,7 +240,7 @@ summary: >-
       </svg>
     </button></h3><p>根據您的工作量，您可以選擇</p>
 <ul>
-<li><p>使用 Python 的 <a href="https://ekzhu.github.io/datasketch/"><code translate="no">datasketch</code></a>來簡化 (建議用於原型設計)</p></li>
+<li><p>使用 Python 的 <a href="https://ekzhu.github.io/datasketch/"><code translate="no">datasketch</code></a>以簡化 (建議用於原型設計)</p></li>
 <li><p>使用分散式工具 (例如 Spark、Ray) 來處理大型資料集</p></li>
 <li><p>如果效能調整非常重要，則實作自訂邏輯 (NumPy、C++ 等)</p></li>
 </ul>
@@ -283,7 +291,7 @@ HASH_BIT_WIDTH = <span class="hljs-number">64</span>
         m.update(token.encode(<span class="hljs-string">&quot;utf8&quot;</span>))
     <span class="hljs-keyword">return</span> m.hashvalues.astype(<span class="hljs-string">&#x27;&gt;u8&#x27;</span>).tobytes()  <span class="hljs-comment"># Returns 2048 bytes</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>每個簽章是 256 × 64 位元組 = 2048 位元組。這個位元組字串可以直接插入<code translate="no">BINARY_VECTOR</code> 欄位。關於 Milvus 使用的二進位向量的更多資訊，請參考<a href="/docs/zh-hant/binary-vector.md">二進位向量</a>。</p>
+<p>每個簽章為 256 × 64 位元組 = 2048 位元組。這個位元組字串可以直接插入<code translate="no">BINARY_VECTOR</code> 欄位。關於 Milvus 使用的二進位向量的更多資訊，請參閱<a href="/docs/zh-hant/binary-vector.md">二進位向量</a>。</p>
 <h3 id="Optional-Prepare-raw-token-sets-for-refined-search" class="common-anchor-header">(可選）準備原始標記集（用於精細搜尋）<button data-href="#Optional-Prepare-raw-token-sets-for-refined-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -633,9 +641,9 @@ refined_results = client.search(
    </tr>
    <tr>
      <td><p><code translate="no">mh_lsh_band</code></p></td>
-     <td><p>分割 LSH MinHash 簽章的區段數目。控制召回與效能的取捨。</p></td>
+     <td><p>分割 LSH MinHash 簽署的區段數目。控制召回與效能的取捨。</p></td>
      <td><p>[1,<em>signature_length］</em></p></td>
-     <td><p>對於 128 段的簽章：從 32 段開始 (4 個值/段)。增加到 64 以獲得更高的召回率，減少到 16 以獲得更好的效能。必須平均分割簽章長度。</p></td>
+     <td><p>對於 128 段簽章：從 32 段開始 (4 個值/段)。增加到 64 以獲得更高的召回率，減少到 16 以獲得更好的效能。必須平均分割簽章長度。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mh_lsh_code_in_mem</code></p></td>
@@ -653,7 +661,7 @@ refined_results = client.search(
      <td><p><code translate="no">mh_lsh_bloom_false_positive_prob</code></p></td>
      <td><p>LSH 儲存桶最佳化中使用的 Bloom 過濾器的假陽性概率。</p></td>
      <td><p>[0.001, 0.1]</p></td>
-     <td><p>使用<code translate="no">0.01</code> 以平衡記憶體使用量與精確度。較低的值 (<code translate="no">0.001</code>) 會減少誤報，但會增加記憶體。較高的值 (<code translate="no">0.05</code>) 可節省記憶體，但可能會降低精確度。</p></td>
+     <td><p>使用<code translate="no">0.01</code> 以平衡記憶體使用量和精確度。較低的值 (<code translate="no">0.001</code>) 會減少誤報，但會增加記憶體。較高的值 (<code translate="no">0.05</code>) 可節省記憶體，但可能會降低精確度。</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
@@ -688,7 +696,7 @@ refined_results = client.search(
    <tr>
      <td><p><code translate="no">refine_k</code></p></td>
      <td><p>Jaccard 精細化前要擷取的候選結果數量。僅在<code translate="no">mh_search_with_jaccard</code> 為<code translate="no">true</code> 時有效。</p></td>
-     <td><p><em>[top_k</em>, *top_k * 10*] 。</p></td>
+     <td><p><em>[top_k</em>,<em>top_k &amp;ast; 10</em>] 。</p></td>
      <td><p>設定為所需<em>top_k</em>的 2-5 倍，以取得良好的召回率-效能平衡。較高的值會提高召回率，但會增加計算成本。</p></td>
    </tr>
    <tr>

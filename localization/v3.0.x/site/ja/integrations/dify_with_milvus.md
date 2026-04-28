@@ -38,10 +38,40 @@ title: MilvusでDifyを導入する
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Clone-the-Repository" class="common-anchor-header">リポジトリのクローン</h3><p>Difyのソースコードをローカルマシンにクローンしてください：</p>
+    </button></h2><h3 id="Clone-the-Repository" class="common-anchor-header">リポジトリのクローン<button data-href="#Clone-the-Repository" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Difyのソースコードをローカルマシンにクローンしてください：</p>
 <pre><code translate="no" class="language-shell">git clone https://github.com/langgenius/dify.git
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-Environment-Configuration" class="common-anchor-header">環境設定の準備</h3><p>DifyソースコードのDockerディレクトリに移動します。</p>
+<h3 id="Prepare-Environment-Configuration" class="common-anchor-header">環境設定の準備<button data-href="#Prepare-Environment-Configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>DifyソースコードのDockerディレクトリに移動します。</p>
 <pre><code translate="no" class="language-shell">cd dify/docker
 <button class="copy-code-btn"></button></code></pre>
 <p>環境設定ファイルをコピーする</p>
@@ -78,8 +108,23 @@ title: MilvusでDifyを導入する
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Docker Composeを使用し、ローカルマシン上でDifyと同時にMilvusコンテナを実行します。</p>
-<h3 id="Configure-Environment-Variables" class="common-anchor-header">環境変数の設定</h3><p><code translate="no">.env</code> ファイルを以下のMilvus設定で編集します：</p>
+    </button></h2><p>Docker Composeを使用し、ローカルマシン上でDifyと並行してMilvusコンテナを実行します。</p>
+<h3 id="Configure-Environment-Variables" class="common-anchor-header">環境変数の設定<button data-href="#Configure-Environment-Variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">.env</code> ファイルを以下のMilvus設定で編集します：</p>
 <pre><code translate="no">VECTOR_STORE=milvus
 MILVUS_URI=http://host.docker.internal:19530
 MILVUS_TOKEN=
@@ -90,7 +135,22 @@ MILVUS_TOKEN=
 <li><code translate="no">MILVUS_TOKEN</code> ローカルにMilvusをデプロイする場合は、空のままでも構いません。</li>
 </ul>
 </div>
-<h3 id="Start-the-Docker-Containers" class="common-anchor-header">Dockerコンテナの起動</h3><p>Milvusサービスを含めるために、<code translate="no">milvus</code> プロファイルを使用してコンテナを起動します：</p>
+<h3 id="Start-the-Docker-Containers" class="common-anchor-header">Dockerコンテナの起動<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvusサービスを含めるために、<code translate="no">milvus</code> プロファイルを使用してコンテナを起動します：</p>
 <pre><code translate="no" class="language-shell">docker compose --profile milvus up -d
 <button class="copy-code-btn"></button></code></pre>
 <p>このコマンドは、<code translate="no">milvus-standalone</code> 、<code translate="no">etcd</code> 、<code translate="no">minio</code> コンテナと共にDifyサービスを開始します。</p>
@@ -110,18 +170,48 @@ MILVUS_TOKEN=
         ></path>
       </svg>
     </button></h2><p>このオプションは、DifyをZilliz Cloud上のマネージドMilvusサービスに接続します。</p>
-<h3 id="Configure-Environment-Variables" class="common-anchor-header">環境変数の設定</h3><p><code translate="no">.env</code> ファイルを編集し、Zilliz Cloud 接続の詳細を入力します：</p>
+<h3 id="Configure-Environment-Variables" class="common-anchor-header">環境変数の設定<button data-href="#Configure-Environment-Variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">.env</code> ファイルを編集し、Zilliz Cloud 接続の詳細を入力します：</p>
 <pre><code translate="no"><span class="hljs-attr">VECTOR_STORE</span>=milvus
 <span class="hljs-attr">MILVUS_URI</span>=YOUR_ZILLIZ_CLOUD_ENDPOINT
 <span class="hljs-attr">MILVUS_TOKEN</span>=YOUR_ZILLIZ_CLOUD_API_KEY
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><code translate="no">YOUR_ZILLIZ_CLOUD_ENDPOINT</code> を Zilliz Cloud の<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint に置き換えて</a>ください。</li>
+<li><code translate="no">YOUR_ZILLIZ_CLOUD_ENDPOINT</code> をZilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">パブリックエンドポイントに</a>置き換えます。</li>
 <li><code translate="no">YOUR_ZILLIZ_CLOUD_API_KEY</code> をZilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">APIキーに</a>置き換えます。</li>
 </ul>
 </div>
-<h3 id="Start-the-Docker-Containers" class="common-anchor-header">Dockerコンテナを起動します。</h3><p>Milvusプロファイルを使用せずに、Difyコンテナのみを起動します：</p>
+<h3 id="Start-the-Docker-Containers" class="common-anchor-header">Dockerコンテナを起動します。<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvusプロファイルを使用せずに、Difyコンテナのみを起動します：</p>
 <pre><code translate="no" class="language-shell">docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Accessing-Dify" class="common-anchor-header">Difyへのアクセス<button data-href="#Accessing-Dify" class="anchor-icon" translate="no">
@@ -139,5 +229,20 @@ MILVUS_TOKEN=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Log-in-to-Dify" class="common-anchor-header">Difyにログインする。</h3><p>ブラウザを開き、Difyのインストールページにアクセスし、管理者アカウントを<code translate="no">http://localhost/install</code> に設定します。</p>
+    </button></h2><h3 id="Log-in-to-Dify" class="common-anchor-header">Difyにログインする。<button data-href="#Log-in-to-Dify" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ブラウザを開き、Difyのインストールページにアクセスします。ここで管理者アカウントを設定します。<code translate="no">http://localhost/install</code> 、その後、Difyのメインページにログインします。</p>
 <p>さらに詳しい使い方やガイダンスについては、<a href="https://docs.dify.ai/">Difyのドキュメントを</a>参照してください。</p>

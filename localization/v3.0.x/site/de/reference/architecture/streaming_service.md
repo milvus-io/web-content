@@ -24,10 +24,10 @@ summary: >-
     </button></h1><p>Der <strong>Streaming Service</strong> ist ein Konzept für das interne Streaming-Systemmodul von Milvus, das auf dem Write-Ahead Log (WAL) aufbaut, um verschiedene Streaming-bezogene Funktionen zu unterstützen. Dazu gehören die Aufnahme/Abonnement von Streaming-Daten, die Wiederherstellung des Cluster-Zustands im Fehlerfall, die Umwandlung von Streaming-Daten in historische Daten und die Abfrage wachsender Datenmengen. Architektonisch setzt sich der Streaming Service aus drei Hauptkomponenten zusammen:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/streaming_distributed_arch.png" alt="Streaming Distributed Arc" class="doc-image" id="streaming-distributed-arc" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/streaming_distributed_arch.png" alt="Streaming Distributed Arc" class="doc-image" id="streaming-distributed-arc" />
    </span> <span class="img-wrapper"> <span>Verteilter Streaming-Bogen</span> </span></p>
 <ul>
-<li><p><strong>Streaming-Koordinator</strong>: Eine logische Komponente im Koordinator-Knoten. Er verwendet Etcd für die Service-Erkennung, um verfügbare Streaming-Knoten zu finden, und ist für die Bindung von WAL an die entsprechenden Streaming-Knoten verantwortlich. Außerdem registriert er Dienste, um die WAL-Verteilungstopologie offenzulegen, so dass Streaming-Clients den geeigneten Streaming-Knoten für eine bestimmte WAL kennen.</p></li>
+<li><p><strong>Streaming-Koordinator</strong>: Eine logische Komponente im Koordinator-Knoten. Er verwendet Etcd für die Service-Erkennung, um verfügbare Streaming-Knoten zu finden und ist für die Bindung von WAL an die entsprechenden Streaming-Knoten verantwortlich. Außerdem registriert er Dienste, um die WAL-Verteilungstopologie offenzulegen, so dass Streaming-Clients den geeigneten Streaming-Knoten für eine bestimmte WAL kennen.</p></li>
 <li><p><strong>Streaming-Knoten-Cluster</strong>: Ein Cluster von Streaming-Worker-Nodes, die für alle Streaming-Verarbeitungsaufgaben zuständig sind, z. B. für das Anhängen von WALs, die Wiederherstellung von Zuständen und die Abfrage von wachsenden Daten.</p></li>
 <li><p><strong>Streaming-Client</strong>: Ein intern entwickelter Milvus-Client, der grundlegende Funktionalitäten wie Service Discovery und Readiness Checks kapselt. Er wird verwendet, um Vorgänge wie das Schreiben von Nachrichten und Abonnements zu initiieren.</p></li>
 </ul>
@@ -54,7 +54,7 @@ summary: >-
 <p>Die Nachrichtenreihenfolge in Milvus kann wie folgt aussehen:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/message_order.png" alt="Message Order" class="doc-image" id="message-order" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/message_order.png" alt="Message Order" class="doc-image" id="message-order" />
    </span> <span class="img-wrapper"> <span>Reihenfolge der Nachrichten</span> </span></p>
 <h2 id="WAL-Component" class="common-anchor-header">WAL-Komponente<button data-href="#WAL-Component" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,7 +76,7 @@ summary: >-
 <ul>
 <li><p><strong>Segment Lifecycle Management</strong>: Die WAL verwaltet den Lebenszyklus der einzelnen Segmente auf der Grundlage von Richtlinien wie Speicherbedingungen, Segmentgröße und Leerlaufzeit.</p></li>
 <li><p><strong>Unterstützung von Basistransaktionen</strong>: Da jede Nachricht eine Größenbeschränkung hat, unterstützt die WAL-Komponente einfache Transaktionen, um atomare Schreibvorgänge auf VChannel-Ebene zu ermöglichen.</p></li>
-<li><p><strong>Ferngesteuertes Schreiben von Protokollen mit hoher Parallelität</strong>: Milvus unterstützt Remote-Message-Queues von Drittanbietern als WAL-Speicher. Um die Round-Trip-Latenz (RTT) zwischen dem Streaming-Knoten und dem Remote-WAL-Speicher zu verringern und den Schreibdurchsatz zu verbessern, unterstützt der Streaming-Dienst gleichzeitige Protokollschreibvorgänge. Die Nachrichtenreihenfolge wird durch TSO und TSO-Synchronisierung beibehalten, und die Nachrichten in der WAL werden in TSO-Reihenfolge gelesen.</p></li>
+<li><p><strong>Ferngesteuertes Schreiben von Protokollen mit hoher Parallelität</strong>: Milvus unterstützt Remote Message Queues von Drittanbietern als WAL-Speicher. Um die Round-Trip-Latenz (RTT) zwischen dem Streaming-Knoten und dem Remote-WAL-Speicher zu verringern und den Schreibdurchsatz zu verbessern, unterstützt der Streaming-Dienst gleichzeitige Protokollschreibvorgänge. Die Nachrichtenreihenfolge wird durch TSO und TSO-Synchronisierung beibehalten, und die Nachrichten in der WAL werden in TSO-Reihenfolge gelesen.</p></li>
 <li><p><strong>Vorausschauender Schreibpuffer</strong>: Nachdem Nachrichten in die WAL geschrieben wurden, werden sie vorübergehend in einem Write-Ahead Buffer gespeichert. Dies ermöglicht das Lesen von Protokollen im Nachhinein, ohne dass Nachrichten aus einem entfernten WAL-Speicher abgerufen werden müssen.</p></li>
 <li><p><strong>Mehrere WAL-Speicher werden unterstützt</strong>: Woodpecker, Pulsar, Kafka. Wenn Sie Woodpecker im Zero-Disk-Modus verwenden, können Sie die Abhängigkeit vom entfernten WAL-Speicher aufheben.</p></li>
 </ul>
@@ -102,7 +102,7 @@ summary: >-
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/recovery_storage.png" alt="Recovery Storage" class="doc-image" id="recovery-storage" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/recovery_storage.png" alt="Recovery Storage" class="doc-image" id="recovery-storage" />
    </span> <span class="img-wrapper"> <span>Wiederherstellungsspeicher</span> </span></p>
 <h2 id="Query-Delegator" class="common-anchor-header">Abfrage-Delegator<button data-href="#Query-Delegator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -140,7 +140,7 @@ summary: >-
     </button></h2><p>Durch die Trennung von Rechenknoten und Speicher kann Milvus die WAL leicht von einem Streaming-Knoten auf einen anderen übertragen und so eine hohe Verfügbarkeit des Streaming-Dienstes erreichen.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/wal_lifetime.png" alt="wal lifetime" class="doc-image" id="wal-lifetime" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/wal_lifetime.png" alt="wal lifetime" class="doc-image" id="wal-lifetime" />
    </span> <span class="img-wrapper"> <span>WAL-Lebensdauer</span> </span></p>
 <h2 id="Wait-for-Ready" class="common-anchor-header">Warten auf Bereitschaft<button data-href="#Wait-for-Ready" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -160,5 +160,5 @@ summary: >-
     </button></h2><p>Wenn die Wal auf einen neuen Streaming-Knoten übertragen wird, wird der Client feststellen, dass der alte Streaming-Knoten einige Anfragen zurückweist. In der Zwischenzeit wird die WAL auf dem neuen Streaming-Knoten wiederhergestellt, und der Client wartet darauf, dass die WAL auf dem neuen Streaming-Knoten bereit für den Dienst ist.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/streaming_wait_for_ready.png" alt="wait for ready" class="doc-image" id="wait-for-ready" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/streaming_wait_for_ready.png" alt="wait for ready" class="doc-image" id="wait-for-ready" />
    </span> <span class="img-wrapper"> <span>Warten auf Bereitschaft</span> </span></p>

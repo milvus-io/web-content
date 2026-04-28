@@ -37,12 +37,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Bitmap</strong>一詞由兩個字組合而成：<strong>Bit</strong>和<strong>Map</strong>。位元代表電腦中最小的資料單位，只能容納<strong>0</strong>或<strong>1 的</strong>值。在此上下文中，映射是指根據 0 和 1 應該被指定什麼值來轉換和組織資料的過程。</p>
+    </button></h2><p><strong>Bitmap</strong>一詞結合了兩個字：<strong>Bit</strong>和<strong>Map</strong>。位元代表電腦中最小的資料單位，只能容納<strong>0</strong>或<strong>1 的</strong>值。在此上下文中，映射是指根據 0 和 1 應該被指定什麼值來轉換和組織資料的過程。</p>
 <p>位圖索引由兩個主要部分組成：位圖和鍵。鍵代表索引欄位中的唯一值。每個唯一值都有一個對應的位元圖。這些位元圖的長度等於集合中記錄的數量。位圖中的每個位元對應集合中的一筆記錄。如果記錄中索引欄位的值與關鍵相符，對應的位就會被設定為<strong>1</strong>；否則就會被設為<strong>0</strong>。</p>
 <p>考慮一個具有<strong>Category</strong>和<strong>Public 欄位</strong>的文件集合。我們要擷取屬於<strong>Tech</strong>類別且開放給<strong>Public 的</strong>文件。在這種情況下，我們的位圖索引的鍵是<strong>Tech</strong>和<strong>Public</strong>。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" />
    </span> <span class="img-wrapper"> <span>位圖</span> </span></p>
 <p>如圖所示，<strong>Category</strong>和<strong>Public</strong>的位圖索引為</p>
 <ul>
@@ -108,7 +108,7 @@ client.create_index(
     </button></h2><p>使用<code translate="no">drop_index()</code> 方法從集合中移除現有的索引。</p>
 <div class="alert note">
 <ul>
-<li><p>在<strong>v2.6.3</strong>或更早版本中，您必須先釋放集合，才能丟棄標量索引。</p></li>
+<li><p>在<strong>v2.6.3</strong>或更早版本中，您必須先釋放集合，才能刪除標量索引。</p></li>
 <li><p>從<strong>v2.6.4</strong>或更高版本開始，一旦不再需要標量索引，您可以直接丟棄它，而不需要先釋放集合。</p></li>
 </ul>
 </div>
@@ -146,7 +146,7 @@ client.create_index(
 </ul></li>
 <li><p>位圖索引不適用於高 cardinality 的欄位（即有大量不同值的欄位）。</p>
 <ul>
-<li><p>一般而言，當欄位的 cardinality 小於 500 時，位圖索引最為有效。</p></li>
+<li><p>一般而言，當字段的 cardinality 小於 500 時，位圖索引最為有效。</p></li>
 <li><p>當卡片性增加到超過這個臨界值時，位圖索引的效能優勢就會減弱，而且儲存開銷也會變得很大。</p></li>
 <li><p>對於高卡片數的欄位，請考慮使用其他索引技術，例如倒轉索引，這取決於您的特定使用個案和查詢需求。</p></li>
 </ul></li>

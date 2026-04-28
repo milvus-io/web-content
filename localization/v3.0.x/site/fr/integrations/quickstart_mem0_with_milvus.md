@@ -213,7 +213,7 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'updated_at': '2024-11-01T19:33:47.619857-07:00',
    'user_id': 'alice'}]}
 </code></pre>
-<h3 id="View-Memory-Update-History" class="common-anchor-header">Afficher l'historique des mises à jour de la mémoire<button data-href="#View-Memory-Update-History" class="anchor-icon" translate="no">
+<h3 id="View-Memory-Update-History" class="common-anchor-header">Afficher l'historique des mises à jour des mémoires<button data-href="#View-Memory-Update-History" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -445,7 +445,7 @@ summary: Milvus用のetcdの設定方法について説明します。
   <tbody>
     <tr>
       <td>        組み込みEtcdのみ。組み込みMilvusで調整してください: /tmp/milvus/etcdData/      </td>
-      <td>デフォルト.etcd</td>
+      <td>デフォルトetcd</td>
     </tr>
   </tbody>
 </table>

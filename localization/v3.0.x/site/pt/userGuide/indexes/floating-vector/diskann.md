@@ -4,10 +4,11 @@ title: DISKANN
 summary: >-
   Em cenários de grande escala, em que os conjuntos de dados podem incluir
   biliões ou mesmo triliões de vectores, os métodos de indexação padrão na
-  memória (por exemplo, HNSW, IVF_FLAT) muitas vezes não conseguem acompanhar o
-  ritmo devido a limitações de memória. O DISKANN oferece uma abordagem baseada
-  em disco que aborda esses desafios, mantendo alta precisão e velocidade de
-  pesquisa quando o tamanho do conjunto de dados excede a RAM disponível.
+  memória (por exemplo, HNSW, IVF_FLAT) não conseguem frequentemente acompanhar
+  o ritmo devido a limitações de memória. O DISKANN oferece uma abordagem
+  baseada em disco que aborda esses desafios, mantendo alta precisão e
+  velocidade de pesquisa quando o tamanho do conjunto de dados excede a RAM
+  disponível.
 ---
 <h1 id="DISKANN" class="common-anchor-header">DISKANN<button data-href="#DISKANN" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Em cenários de grande escala, onde os conjuntos de dados podem incluir biliões ou mesmo triliões de vectores, os métodos padrão de indexação na memória (por exemplo, <a href="/docs/pt/hnsw.md">HNSW</a>, <a href="/docs/pt/ivf-flat.md">IVF_FLAT</a>) muitas vezes não conseguem acompanhar o ritmo devido a limitações de memória. <strong>O DISKANN</strong> oferece uma abordagem baseada em disco que aborda esses desafios, mantendo alta precisão e velocidade de pesquisa quando o tamanho do conjunto de dados excede a RAM disponível.</p>
+    </button></h1><p>Em cenários de grande escala, onde os conjuntos de dados podem incluir biliões ou mesmo triliões de vectores, os métodos de indexação padrão na memória (por exemplo, <a href="/docs/pt/hnsw.md">HNSW</a>, <a href="/docs/pt/ivf-flat.md">IVF_FLAT</a>) muitas vezes não conseguem acompanhar o ritmo devido a limitações de memória. <strong>O DISKANN</strong> oferece uma abordagem baseada em disco que aborda esses desafios, mantendo alta precisão e velocidade de pesquisa quando o tamanho do conjunto de dados excede a RAM disponível.</p>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +41,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>O DISKANN</strong> combina duas técnicas fundamentais para uma pesquisa vetorial eficiente:</p>
+    </button></h2><p><strong>O DISKANN</strong> combina duas técnicas-chave para uma pesquisa vetorial eficiente:</p>
 <ul>
 <li><p><strong>Gráfico Vamana</strong> - Um índice <strong>baseado em disco</strong> e <strong>em gráficos</strong> que liga pontos de dados (ou vectores) para uma navegação eficiente durante a pesquisa.</p></li>
 <li><p><strong>Quantização de produtos (PQ)</strong> - Um método de compressão <strong>na memória</strong> que reduz o tamanho dos vectores, permitindo cálculos rápidos de distância aproximada entre vectores.</p></li>
@@ -64,7 +65,7 @@ summary: >-
 <p>A figura seguinte mostra como é construído um gráfico Vamana.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
    </span> <span class="img-wrapper"> <span>Diskann</span> </span></p>
 <ol>
 <li><p><strong>Ligações aleatórias iniciais:</strong> Cada ponto de dados (vetor) é representado como um nó no grafo. Estes nós são inicialmente ligados de forma aleatória, formando uma rede densa. Normalmente, um nó começa com cerca de 500 arestas (ou ligações) para uma conetividade alargada.</p></li>
@@ -72,7 +73,7 @@ summary: >-
 <ul>
 <li><p><strong>Poda de arestas redundantes:</strong> O algoritmo elimina ligações desnecessárias com base nas distâncias entre nós. Este passo dá prioridade a arestas de maior qualidade.</p>
 <p>O parâmetro <code translate="no">max_degree</code> restringe o número máximo de arestas por nó. Um <code translate="no">max_degree</code> mais elevado resulta num gráfico mais denso, podendo encontrar vizinhos mais relevantes (maior recordação), mas também aumenta a utilização da memória e o tempo de pesquisa.</p></li>
-<li><p><strong>Adicionar atalhos estratégicos:</strong> O Vamana introduz arestas de longo alcance, ligando pontos de dados que estão muito afastados no espaço vetorial. Estes atalhos permitem que as pesquisas saltem rapidamente através do gráfico, contornando nós intermédios e acelerando significativamente a navegação.</p>
+<li><p><strong>Adicionar atalhos estratégicos:</strong> O Vamana introduz arestas de longo alcance, ligando pontos de dados que estão muito afastados no espaço vetorial. Estes atalhos permitem que as pesquisas saltem rapidamente através do gráfico, contornando os nós intermédios e acelerando significativamente a navegação.</p>
 <p>O parâmetro <code translate="no">search_list_size</code> determina a amplitude do processo de refinamento do gráfico. Um <code translate="no">search_list_size</code> mais elevado alarga a pesquisa de vizinhos durante a construção e pode melhorar a precisão final, mas aumenta o tempo de construção do índice.</p></li>
 </ul></li>
 </ol>
@@ -84,7 +85,7 @@ summary: >-
 <p>onde:</p>
 <ul>
 <li><p><code translate="no">vec_field_size_gb</code> é o tamanho total dos vectores (em gigabytes).</p></li>
-<li><p><code translate="no">pq_code_budget_gb_ratio</code> é um rácio definido pelo utilizador, que representa a fração do tamanho total dos dados reservada para os códigos PQ. Este parâmetro permite um compromisso entre a precisão da pesquisa e os recursos de memória. Para obter mais informações sobre o ajuste de parâmetros, consulte <a href="/docs/pt/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">Configurações do DISKANN</a>.</p></li>
+<li><p><code translate="no">pq_code_budget_gb_ratio</code> é um rácio definido pelo utilizador, que representa a fração do tamanho total dos dados reservada aos códigos PQ. Este parâmetro permite um compromisso entre a precisão da pesquisa e os recursos de memória. Para obter mais informações sobre o ajuste de parâmetros, consulte <a href="/docs/pt/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">Configurações do DISKANN</a>.</p></li>
 </ul>
 <p>Para obter pormenores técnicos sobre o método PQ subjacente, consulte <a href="/docs/pt/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
 <h3 id="Search-process" class="common-anchor-header">Processo de pesquisa<button data-href="#Search-process" class="anchor-icon" translate="no">
@@ -105,7 +106,7 @@ summary: >-
     </button></h3><p>Uma vez construído o índice (o gráfico Vamana no disco e os códigos PQ na memória), o DISKANN efectua pesquisas ANN da seguinte forma:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
    </span> <span class="img-wrapper"> <span>Diskann 2</span> </span></p>
 <ol>
 <li><p><strong>Consulta e ponto de entrada:</strong> É fornecido um vetor de consulta para localizar os seus vizinhos mais próximos. O DISKANN começa a partir de um ponto de entrada selecionado no gráfico Vamana, frequentemente um nó próximo do centróide global do conjunto de dados. O centróide global representa a média de todos os vectores, o que ajuda a minimizar a distância de deslocação através do grafo para encontrar os vizinhos desejados.</p></li>
@@ -133,7 +134,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Por padrão, <strong>DISKANN</strong> é desativado no Milvus para priorizar a velocidade dos índices na memória para conjuntos de dados que cabem confortavelmente na RAM. No entanto, se estiver a trabalhar com conjuntos de dados maciços ou quiser tirar partido da escalabilidade do <strong>DISKANN</strong> e da otimização de SSD, pode activá-lo facilmente.</p>
+    </button></h2><p>Por padrão, <strong>DISKANN</strong> é desativado no Milvus para priorizar a velocidade dos índices na memória para conjuntos de dados que cabem confortavelmente na RAM. No entanto, se estiver a trabalhar com conjuntos de dados enormes ou quiser tirar partido da escalabilidade do <strong>DISKANN</strong> e da otimização de SSD, pode activá-lo facilmente.</p>
 <p>Veja como habilitar o DISKANN no Milvus:</p>
 <ol>
 <li><p><strong>Atualizar o arquivo de configuração do Milvus</strong></p>
@@ -260,7 +261,7 @@ summary: >-
    <tr>
      <td><p>PQ</p></td>
      <td><p><code translate="no">PQCodeBudgetGBRatio</code></p></td>
-     <td><p>Controla o tamanho dos códigos PQ (representações comprimidas de pontos de dados) em comparação com o tamanho dos dados não comprimidos.</p></td>
+     <td><p>Controla o tamanho dos códigos PQ (representações comprimidas dos pontos de dados) em comparação com o tamanho dos dados não comprimidos.</p></td>
      <td><p><strong>Tipo</strong>: Float <strong>Intervalo</strong>: (0,0, 0,25)</p>
 <p><strong>Valor predefinido</strong>: <code translate="no">0.125</code></p></td>
      <td><p>Um rácio mais elevado conduz a resultados de pesquisa mais precisos ao atribuir uma maior proporção de memória para códigos PQ, armazenando efetivamente mais informações sobre os vectores originais. Um rácio mais baixo reduz a utilização de memória mas sacrifica potencialmente a precisão, uma vez que os códigos PQ mais pequenos retêm menos informação. Esta abordagem é adequada para cenários em que as restrições de memória são uma preocupação, permitindo potencialmente a indexação de conjuntos de dados maiores.</p>

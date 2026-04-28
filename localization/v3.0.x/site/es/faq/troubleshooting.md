@@ -124,7 +124,7 @@ title: Solución de problemas
         ></path>
       </svg>
     </button></h3><p>Cuando un pod etcd se bloquea con <code translate="no">Error: bad member ID arg (strconv.ParseUint: parsing &quot;&quot;: invalid syntax), expecting ID in Hex</code>, puede iniciar sesión en este pod y eliminar el archivo <code translate="no">/bitnami/etcd/data/member_id</code>.</p>
-<h3 id="3-Multiple-pods-keep-crashing-while-etcd-0-is-still-running" class="common-anchor-header">3. Múltiples pods siguen fallando mientras <code translate="no">etcd-0</code> sigue ejecutándose<button data-href="#3-Multiple-pods-keep-crashing-while-etcd-0-is-still-running" class="anchor-icon" translate="no">
+<h3 id="3-Multiple-pods-keep-crashing-while-etcd-0-is-still-running" class="common-anchor-header">3. Múltiples pods siguen fallando mientras <code translate="no">etcd-0</code> sigue en ejecución<button data-href="#3-Multiple-pods-keep-crashing-while-etcd-0-is-still-running" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

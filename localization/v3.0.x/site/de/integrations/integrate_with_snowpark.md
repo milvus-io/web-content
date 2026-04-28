@@ -53,15 +53,45 @@ title: Milvus auf Snowpark-Containerdiensten
         ></path>
       </svg>
     </button></h2><p>Im Folgenden werden die Fähigkeiten von Milvus und die Verwendung von Milvus in SPCS anhand von Konfiguration und Code erläutert.</p>
-<h3 id="1-Obtain-account-information" class="common-anchor-header">1. Beschaffung von Kontoinformationen</h3><p>Laden Sie den SPCS-Client herunter: <a href="https://docs.snowflake.com/en/user-guide/snowsql-install-config">SnowSQL</a>, dann melden Sie sich bei Ihrem Konto an.</p>
+<h3 id="1-Obtain-account-information" class="common-anchor-header">1. Beschaffung von Kontoinformationen<button data-href="#1-Obtain-account-information" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Laden Sie den SPCS-Client herunter: <a href="https://docs.snowflake.com/en/user-guide/snowsql-install-config">SnowSQL</a>, dann melden Sie sich bei Ihrem Konto an.</p>
 <pre><code translate="no" class="language-shell">snowsql -a ${instance_name} -u ${user_name}
 <button class="copy-code-btn"></button></code></pre>
 <p>Die Regel von <code translate="no">${instance_name}</code> lautet <code translate="no">${org_name}-${acct_name}</code>. Die entsprechenden Informationen erhalten Sie, wenn Sie sich bei <a href="http://app.snowflake.com/sn">app.snowflake.com</a> anmelden und die persönlichen Kontoinformationen überprüfen.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/snowflake-01.png" alt="Snowflake account information" class="doc-image" id="snowflake-account-information" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-01.png" alt="Snowflake account information" class="doc-image" id="snowflake-account-information" />
    </span> <span class="img-wrapper"> <span>Snowflake-Kontoinformationen</span> </span></p>
-<h3 id="2-Configure-Role-and-privileges" class="common-anchor-header">2. Konfigurieren von Rolle und Berechtigungen</h3><p>Konfigurieren Sie die OAUTH-Integration.</p>
+<h3 id="2-Configure-Role-and-privileges" class="common-anchor-header">2. Konfigurieren von Rolle und Berechtigungen<button data-href="#2-Configure-Role-and-privileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Konfigurieren Sie die OAUTH-Integration.</p>
 <pre><code translate="no" class="language-sql">USE ROLE ACCOUNTADMIN;
 <span class="hljs-keyword">CREATE</span> SECURITY INTEGRATION SNOWSERVICES_INGRESS_OAUTH
   TYPE<span class="hljs-operator">=</span>oauth
@@ -85,7 +115,22 @@ USE ROLE USERADMIN;
 USE ROLE SECURITYADMIN;
 <span class="hljs-keyword">GRANT</span> ROLE MILVUS_ROLE <span class="hljs-keyword">TO</span> <span class="hljs-keyword">USER</span> milvus_user;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Create-data-storage-configuration" class="common-anchor-header">3. Konfiguration der Datenspeicherung erstellen</h3><ul>
+<h3 id="3-Create-data-storage-configuration" class="common-anchor-header">3. Konfiguration der Datenspeicherung erstellen<button data-href="#3-Create-data-storage-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Lager und Datenbank erstellen</p>
 <pre><code translate="no" class="language-sql">USE ROLE SYSADMIN;
 <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">OR</span> REPLACE WAREHOUSE MILVUS_WAREHOUSE <span class="hljs-keyword">WITH</span>
@@ -125,10 +170,25 @@ ENABLED<span class="hljs-operator">=</span><span class="hljs-literal">TRUE</span
 <span class="hljs-keyword">GRANT</span> USAGE <span class="hljs-keyword">ON</span> INTEGRATION allow_all_eai <span class="hljs-keyword">TO</span> ROLE SYSADMIN;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="4-Create-images" class="common-anchor-header">4. Bilder erstellen</h3><p>Das von Milvus verwendete Image muss lokal erstellt und dann vom Benutzer hochgeladen werden. Für die entsprechende Konfiguration des Images verweisen wir auf <a href="https://github.com/dald001/milvus_on_spcs">dieses Repo</a>. Nachdem Sie den Code geklont haben, wechseln Sie in das Stammverzeichnis des Projekts und bereiten die Erstellung des Images vor.</p>
+<h3 id="4-Create-images" class="common-anchor-header">4. Bilder erstellen<button data-href="#4-Create-images" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Das von Milvus verwendete Image muss lokal erstellt und dann vom Benutzer hochgeladen werden. Für die entsprechende Konfiguration des Images verweisen wir auf <a href="https://github.com/dald001/milvus_on_spcs">dieses Repo</a>. Nachdem Sie den Code geklont haben, wechseln Sie in das Stammverzeichnis des Projekts und bereiten die Erstellung des Images vor.</p>
 <ul>
 <li><p>Images lokal erstellen</p>
-<p>Öffnen Sie Ihre lokale Shell und beginnen Sie mit dem Erstellen der Images.</p>
+<p>Öffnen Sie Ihre lokale Shell und beginnen Sie mit der Erstellung der Images.</p>
 <pre><code translate="no" class="language-shell">cd ${repo_git_root_path}
 docker build --rm --no-cache --platform linux/amd64 -t milvus ./images/milvus
 docker build --rm --no-cache --platform linux/amd64 -t jupyter ./images/jupyter
@@ -154,7 +214,22 @@ $</span><span class="language-bash">{instance_name}.registry.snowflakecomputing.
 docker push ${instance_name}.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/jupyter
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="5-Create-and-start-services" class="common-anchor-header">5. Dienste erstellen und starten</h3><p>Kehren wir zurück in die SnowSQL-Shell.</p>
+<h3 id="5-Create-and-start-services" class="common-anchor-header">5. Dienste erstellen und starten<button data-href="#5-Create-and-start-services" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kehren wir zurück in die SnowSQL-Shell.</p>
 <ul>
 <li>Compute-Pools erstellen</li>
 </ul>
@@ -176,7 +251,7 @@ docker push ${instance_name}.registry.snowflakecomputing.com/milvus_demo/public/
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/snowflake-02.png" alt="Compute pool status" class="doc-image" id="compute-pool-status" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-02.png" alt="Compute pool status" class="doc-image" id="compute-pool-status" />
    </span> <span class="img-wrapper"> <span>Compute-Pool-Status</span> </span></p>
 <ul>
 <li>Hochladen von Spezifikationsdateien</li>
@@ -221,7 +296,7 @@ USE SCHEMA PUBLIC;
 <p>Wenn Sie Probleme beim Starten des Dienstes haben, können Sie die Dienstinformationen unter <code translate="no">CALL SYSTEM$GET_SERVICE_STATUS('milvus');</code> einsehen.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/snowflake-03.png" alt="Service status" class="doc-image" id="service-status" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-03.png" alt="Service status" class="doc-image" id="service-status" />
    </span> <span class="img-wrapper"> <span>Status des Dienstes</span> </span></p>
 <p>Weitere Informationen erhalten Sie unter <code translate="no">CALL SYSTEM$GET_SERVICE_LOGS('milvus', '0', 'milvus', 10);</code>.</p>
 <h2 id="Use-Notebook" class="common-anchor-header">Notebook verwenden<button data-href="#Use-Notebook" class="anchor-icon" translate="no">
@@ -250,12 +325,12 @@ USE SCHEMA PUBLIC;
 <p>Zeichnen Sie den <code translate="no">ingress_url</code> Teil der Informationen auf, öffnen Sie dann den Browser und geben Sie die <code translate="no">ingress_url</code> ein, verwenden Sie das milvus_user Konto, um sich auf der Website anzumelden.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/snowflake-04.png" alt="Obtain the ingress URL" class="doc-image" id="obtain-the-ingress-url" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-04.png" alt="Obtain the ingress URL" class="doc-image" id="obtain-the-ingress-url" />
    </span> <span class="img-wrapper"> <span>Erhalten Sie die Ingress-URL</span> </span></p>
 <p>Öffnen Sie das Notebook über <code translate="no">ingress_url</code>, doppelklicken Sie auf die Datei <code translate="no">TestMilvus.ipynb</code> auf der Seite, um Milvus auszuprobieren. Wählen Sie den ersten Teil des Codeblocks aus und klicken Sie auf die Schaltfläche <strong>Ausführen</strong>, um die Verbindung herzustellen und die Einbettungsfunktion zu initialisieren.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/snowflake-05.png" alt="Run TestMilvus.ipynb in the notebook" class="doc-image" id="run-testmilvus.ipynb-in-the-notebook" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-05.png" alt="Run TestMilvus.ipynb in the notebook" class="doc-image" id="run-testmilvus.ipynb-in-the-notebook" />
    </span> <span class="img-wrapper"> <span>TestMilvus.ipynb im Notizbuch ausführen</span> </span></p>
 <p>Nachdem Sie die Verbindung hergestellt haben, klicken Sie weiter auf <strong>RUN</strong>. Der Code wandelt einen Text nach der Einbettung in Vektordaten um und fügt ihn dann in Milvus ein.</p>
 <pre><code translate="no" class="language-python">docs = [
@@ -267,7 +342,7 @@ USE SCHEMA PUBLIC;
 <p>Verwenden Sie dann einen Text als Abfrage: "Wer hat mit der KI-Forschung begonnen?", führen Sie die Abfrage nach der Einbettung durch und erhalten Sie schließlich die relevantesten Ergebnisse und zeigen Sie diese an.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
    </span> <span class="img-wrapper"> <span>Ermitteln und Anzeigen der relevantesten Ergebnisse</span> </span></p>
 <p>Weitere Informationen über die Verwendung des Milvus-Clients finden Sie im Abschnitt <a href="/docs/de/quickstart.md">Milvus Doc</a>.</p>
 <h2 id="7-Clean-up" class="common-anchor-header">7. Aufräumen<button data-href="#7-Clean-up" class="anchor-icon" translate="no">

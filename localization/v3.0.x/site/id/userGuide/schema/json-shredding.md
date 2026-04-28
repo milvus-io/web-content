@@ -349,7 +349,7 @@ beta: Milvus 2.6.2+
     </button></h3><ul>
 <li><p><strong>Kueri kunci bersama</strong> menunjukkan peningkatan paling dramatis (hingga 89x lebih cepat)</p></li>
 <li><p><strong>Kueri kunci yang diketik</strong> memberikan peningkatan kinerja 15-30x yang konsisten</p></li>
-<li><p><strong>Semua jenis kueri</strong> mendapat manfaat dari JSON Shredding tanpa regresi kinerja</p></li>
+<li><p><strong>Semua jenis kueri</strong> mendapatkan manfaat dari JSON Shredding tanpa regresi kinerja</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">PERTANYAAN UMUM<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"

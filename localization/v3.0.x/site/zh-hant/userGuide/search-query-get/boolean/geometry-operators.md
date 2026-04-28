@@ -2,8 +2,8 @@
 id: geometry-operators.md
 title: 幾何運算符號Compatible with Milvus 2.6.4+
 summary: >-
-  Milvus 支援一組運算元，用於在 GEOMETRY
-  欄位上進行空間篩選，這對於管理和分析幾何資料非常重要。這些運算符允許您根據物件之間的幾何關係檢索實體。
+  Milvus 支援一系列運算符號，用於在 GEOMETRY
+  欄位上進行空間篩選，這些運算符號對於管理和分析幾何資料非常重要。這些運算符允許您根據物件之間的幾何關係檢索實體。
 beta: Milvus 2.6.4+
 ---
 <h1 id="Geometry-Operators" class="common-anchor-header">幾何運算符號<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
@@ -83,7 +83,7 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p><code translate="no">ST_CONTAINS(A, B)</code> /<code translate="no">st_contains(A, B)</code></p></td>
-     <td><p>如果幾何圖 A 完全包含幾何圖 B，且兩者內部至少有一個共同點，則回傳 TRUE。</p></td>
+     <td><p>如果幾何圖 A 完全包含幾何圖 B，且兩者內部至少有一個共同點，則傳回值為 TRUE。</p></td>
      <td><p>城市邊界 (A) 是否包含特定公園 (B)？</p></td>
    </tr>
    <tr>
@@ -176,7 +176,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>如果兩個幾何形狀的交點形成一個尺寸比原始幾何形狀低的幾何形狀，<code translate="no">ST_CROSSES</code> 運算符號會返回<code translate="no">TRUE</code> 。這通常適用於與多邊形或另一條線相交的線。</p>
 <p><strong>範例</strong></p>
-<p>您想要尋找所有跨越特定邊界線（另一條線串）或進入保護區域（多邊形）的遠足路徑（線串）。</p>
+<p>您想要尋找所有穿越特定邊界線（另一條線串）或進入保護區域（多邊形）的遠足路徑（線串）。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries that cross a line string.</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_CROSSES(geo_field, &#x27;LINESTRING(5 0, 5 10)&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -197,7 +197,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>如果兩個幾何圖形的邊界或內部有任何一點是共通的，<code translate="no">ST_INTERSECTS</code> 運算符號會返回<code translate="no">TRUE</code> 。這是偵測任何形式空間重疊的通用運算子。</p>
 <p><strong>範例</strong></p>
-<p>如果您有一個道路集合，想要找出所有與代表建議中的新道路的特定線串交叉或接觸的道路，您可以使用<code translate="no">ST_INTERSECTS</code>.</p>
+<p>如果您有一個道路集合，並想要找出所有與代表建議新道路的特定線串交叉或接觸的道路，您可以使用<code translate="no">ST_INTERSECTS</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries that intersect with a specific line string.</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_INTERSECTS(geo_field, &#x27;LINESTRING (1 1, 2 2)&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

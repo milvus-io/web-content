@@ -487,7 +487,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>El siguiente ejemplo de código demuestra cómo upsert entidades con actualizaciones parciales. Proporcione sólo los campos que necesitan actualizaciones y sus nuevos valores, junto con la bandera de actualización parcial explícita.</p>
-<p>En el siguiente ejemplo, el campo <code translate="no">issue</code> de las entidades especificadas en la solicitud de upsert se actualizará con los valores incluidos en la solicitud.</p>
+<p>En el siguiente ejemplo, el campo <code translate="no">issue</code> de las entidades especificadas en la solicitud upsert se actualizará con los valores incluidos en la solicitud.</p>
 <div class="alert note">
 <p>Al realizar una upsert en modo merge, asegúrese de que las entidades implicadas en la petición tienen el mismo conjunto de campos. Supongamos que hay dos o más entidades que se van a upsertar, como se muestra en el siguiente fragmento de código, es importante que incluyan campos idénticos para evitar errores y mantener la integridad de los datos.</p>
 </div>

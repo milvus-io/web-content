@@ -48,7 +48,7 @@ summary: >-
 <li><p>Kamus yang asli berukuran besar. Kosakata Jieba bahasa Mandarin dapat terdiri dari puluhan ribu baris; tabel sinonim biasanya terdiri dari ribuan aturan. Memasukkannya ke dalam konfigurasi penganalisis tidak praktis.</p></li>
 <li><p>Kamus yang sama biasanya digunakan bersama di seluruh koleksi. Mendaftarkannya sekali, lalu merujuknya berdasarkan nama, membuat skema tetap kecil dan membuat pembaruan kamus menjadi satu operasi.</p></li>
 </ul>
-<h2 id="File-resource-types" class="common-anchor-header">Tipe sumber daya berkas<button data-href="#File-resource-types" class="anchor-icon" translate="no">
+<h2 id="File-resource-types" class="common-anchor-header">Jenis sumber daya berkas<button data-href="#File-resource-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

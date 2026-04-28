@@ -53,7 +53,7 @@ summary: >-
 <pre><code translate="no" class="language-bash">$ pip install -U pymilvus llama-index-vector-stores-milvus llama-index nest-asyncio
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" oben auf dem Bildschirm und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
+<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Bildschirmrand und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
 </div>
 <p>Wir werden die Modelle von OpenAI verwenden. Sie sollten den <a href="https://platform.openai.com/docs/quickstart">api-Schlüssel</a> <code translate="no">OPENAI_API_KEY</code> als Umgebungsvariable vorbereiten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -116,7 +116,7 @@ DIM = <span class="hljs-number">768</span>
 <div class="alert note">
 <ul>
 <li>Wenn Sie große Datenmengen haben, können Sie einen performanten Milvus-Server auf <a href="https://milvus.io/docs/quickstart.md">Docker oder Kubernetes</a> einrichten. Bei dieser Einrichtung verwenden Sie bitte die Server-URI, z. B.<code translate="no">http://localhost:19530</code>, als <code translate="no">uri</code>.</li>
-<li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Service für Milvus, nutzen möchten, passen Sie die <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint und dem Api-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
+<li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Service für Milvus, nutzen möchten, passen Sie <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint und Api-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
 <li>Bei komplexen Systemen (z.B. Netzwerkkommunikation) kann die asynchrone Verarbeitung im Vergleich zur Synchronisation eine Leistungssteigerung bringen. Wir denken also, dass Milvus-Lite für die Verwendung asynchroner Schnittstellen nicht geeignet ist, da die verwendeten Szenarien nicht geeignet sind.</li>
 </ul>
 </div>
@@ -346,7 +346,7 @@ inserted_ids = vector_store.add(node_list)
 Async search for 100 queries took 1.39 seconds
 Async search for 1000 queries took 8.81 seconds
 </code></pre>
-<h4 id="Compare-with-synchronous-search" class="common-anchor-header">Vergleich mit synchroner Suche</h4><p>Definieren Sie eine synchrone Suchfunktion. Messen Sie dann die Laufzeit unter der gleichen Bedingung.</p>
+<h4 id="Compare-with-synchronous-search" class="common-anchor-header">Vergleich mit synchroner Suche</h4><p>Definieren Sie eine synchrone Suchfunktion. Messen Sie dann die Laufzeit unter den gleichen Bedingungen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">sync_search</span>(<span class="hljs-params">num_queries</span>):
     start_time = time.time()
     <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_queries):

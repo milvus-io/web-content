@@ -70,7 +70,7 @@ summary: 了解如何为 Milvus 配置 etcd。
     </button></h2><table id="etcd.rootPath">
   <thead>
     <tr>
-      <th class="width80">默认值</th>
+      <th class="width80">说明</th>
       <th class="width20">默认值</th> 
     </tr>
   </thead>

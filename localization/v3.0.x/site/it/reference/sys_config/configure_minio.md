@@ -341,7 +341,7 @@ summary: Imparate a configurare minio per Milvus.
       <td>
         <li>Fornitore cloud di S3. Supporta: "aws", "gcp", "aliyun".</li>      
         <li>Provider cloud di Google Cloud Storage. Supporta: "gcpnative".</li>      
-        <li>È possibile utilizzare "aws" per altri provider cloud che supportano S3 API con firma v4, ad esempio: minio</li>      
+        <li>È possibile utilizzare "aws" per altri provider cloud che supportano l'API S3 con firma v4, ad es.</li>      
         <li>È possibile utilizzare "gcp" per altri cloud provider che supportano S3 API con firma v2.</li>      
         <li>È possibile utilizzare "aliyun" per un altro cloud provider che utilizza un bucket in stile host virtuale.</li>      
         <li>È possibile utilizzare "gcpnative" per il provider Google Cloud Platform. Utilizza le credenziali dell'account del servizio</li>      
@@ -524,7 +524,7 @@ summary: Imparate a configurare minio per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        timeout minio per il tempo di richiesta in millisecondi      </td>
+      <td>        Timeout minio per il tempo di richiesta in millisecondi      </td>
       <td>10000</td>
     </tr>
   </tbody>

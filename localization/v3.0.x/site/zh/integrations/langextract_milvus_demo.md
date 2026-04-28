@@ -25,7 +25,7 @@ title: LangExtract + Milvus 集成
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>本指南演示了如何使用<a href="https://github.com/google/langextract">LangExtract</a>与<a href="https://milvus.io/">Milvus</a>来构建智能文档处理和检索系统。</p>
-<p>LangExtract 是一个 Python 库，它使用大型语言模型（LLMs）从非结构化文本文档中提取结构化信息，并提供精确的源基础。该系统将 LangExtract 的提取能力与 Milvus 的向量存储相结合，既能进行语义相似性搜索，又能进行精确的元数据过滤。</p>
+<p>LangExtract 是一个 Python 库，它使用大型语言模型 (LLMs) 从非结构化文本文档中提取结构化信息，并提供精确的源基础。该系统将 LangExtract 的提取功能与 Milvus 的向量存储相结合，既能进行语义相似性搜索，又能进行精确的元数据过滤。</p>
 <p>这种整合对于内容管理、语义搜索、知识发现以及基于提取的文档属性构建推荐系统尤为重要。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ os.environ[<span class="hljs-string">&quot;GEMINI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>我们将定义使用 LangExtract 进行结构化信息提取和使用 Milvus 作为向量存储的管道。</p>
+    </button></h2><p>我们将定义使用 LangExtract 进行结构化信息提取、使用 Milvus 作为向量存储的管道。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> langextract <span class="hljs-keyword">as</span> lx
 <span class="hljs-keyword">import</span> textwrap
 <span class="hljs-keyword">from</span> google <span class="hljs-keyword">import</span> genai
@@ -372,7 +372,7 @@ extraction_results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>现在，我们需要处理提取结果，并为每个文档生成向量嵌入。我们还将把提取的属性扁平化到单独的字段中，以便于在 Milvus 中搜索。</p>
+    </button></h2><p>现在，我们需要处理提取结果，并为每个文档生成向量嵌入。我们还将把提取的属性扁平化为单独的字段，以便在 Milvus 中轻松搜索。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n3. Processing extraction results and generating vectors...&quot;</span>)
 
 processed_data = []

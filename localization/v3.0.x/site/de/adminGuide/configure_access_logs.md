@@ -44,9 +44,24 @@ title: Zugriffsprotokolle konfigurieren
 <ul>
 <li><strong>Basiskonfiguration</strong>: Für allgemeine Zwecke.</li>
 <li><strong>Konfiguration für lokale Zugriffsprotokolldateien</strong>: Für die lokale Speicherung von Protokollen.</li>
-<li><strong>Konfiguration für das Hochladen von lokalen Zugriffsprotokollen zu MinIO</strong>: Für die Speicherung und Sicherung in der Cloud.</li>
+<li><strong>Konfiguration für das Hochladen lokaler Zugriffsprotokolle zu MinIO</strong>: Für die Speicherung und Sicherung in der Cloud.</li>
 </ul>
-<h3 id="Base-config" class="common-anchor-header">Basis-Konfiguration</h3><p>Die Basiskonfiguration umfasst die Aktivierung von Zugriffsprotokollen und die Definition des Dateinamens für das Protokoll oder die Verwendung von stdout.</p>
+<h3 id="Base-config" class="common-anchor-header">Basis-Konfiguration<button data-href="#Base-config" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Die Basiskonfiguration umfasst die Aktivierung von Zugriffsprotokollen und die Definition des Dateinamens für das Protokoll oder die Verwendung von stdout.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -58,7 +73,22 @@ title: Zugriffsprotokolle konfigurieren
 <li><code translate="no">proxy.accessLog.enable</code>: Ob die Zugriffsprotokollfunktion aktiviert werden soll. Die Voreinstellung ist <strong>false</strong>.</li>
 <li><code translate="no">proxy.accessLog.filename</code>: Der Name der Zugriffsprotokolldatei. Wenn Sie diesen Parameter leer lassen, werden die Zugriffsprotokolle auf stdout ausgegeben.</li>
 </ul>
-<h3 id="Config-for-local-access-log-files" class="common-anchor-header">Config für lokale Zugriffsprotokolldateien</h3><p>Konfigurieren Sie die lokale Speicherung für Zugriffsprotokolldateien mit Parametern wie dem lokalen Dateipfad, der Dateigröße und dem Rotationsintervall:</p>
+<h3 id="Config-for-local-access-log-files" class="common-anchor-header">Config für lokale Zugriffsprotokolldateien<button data-href="#Config-for-local-access-log-files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Konfigurieren Sie die lokale Speicherung für Zugriffsprotokolldateien mit Parametern wie dem lokalen Dateipfad, der Dateigröße und dem Rotationsintervall:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -76,7 +106,22 @@ title: Zugriffsprotokolle konfigurieren
 <li><code translate="no">proxy.accessLog.rotatedTime</code>: Das maximale Zeitintervall in Sekunden, das für die Rotation einer einzelnen Zugriffsprotokolldatei zulässig ist. Bei Erreichen des angegebenen Zeitintervalls wird ein Rotationsprozess ausgelöst, der zur Erstellung einer neuen Zugriffsprotokolldatei und zur Versiegelung der vorherigen Datei führt.</li>
 <li><code translate="no">proxy.accessLog.maxBackups</code>: Die maximale Anzahl der versiegelten Zugriffsprotokolldateien, die aufbewahrt werden können. Wenn die Anzahl der versiegelten Zugriffsprotokolldateien diese Grenze überschreitet, wird die älteste Datei gelöscht.</li>
 </ul>
-<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">Konfiguration für das Hochladen lokaler Zugriffsprotokolldateien zu MinIO</h3><p>Aktivieren und konfigurieren Sie die Einstellungen zum Hochladen lokaler Zugriffsprotokolldateien zu MinIO:</p>
+<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">Konfiguration für das Hochladen lokaler Zugriffsprotokolldateien zu MinIO<button data-href="#Config-for-uploading-local-access-log-files-to-MinIO" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Aktivieren und konfigurieren Sie die Einstellungen zum Hochladen lokaler Zugriffsprotokolldateien zu MinIO:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>

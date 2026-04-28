@@ -36,15 +36,15 @@ summary: Note
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, un analizzatore elabora il testo memorizzato in questo campo per renderlo ricercabile con funzioni quali la <a href="/docs/it/full-text-search.md">ricerca a testo completo</a> (BM25), la <a href="/docs/it/phrase-match.md">corrispondenza di frase</a> o la <a href="/docs/it/keyword-match.md">corrispondenza di testo</a>. Si tratta di un elaboratore di testo che trasforma i contenuti grezzi in token ricercabili.</p>
+    </button></h2><p>In Milvus, un analizzatore elabora il testo memorizzato in questo campo per renderlo ricercabile con funzioni quali la <a href="/docs/it/full-text-search.md">ricerca full text</a> (BM25), la <a href="/docs/it/phrase-match.md">corrispondenza di frasi</a> o la <a href="/docs/it/keyword-match.md">corrispondenza di testo</a>. Si tratta di un elaboratore di testo che trasforma i contenuti grezzi in token ricercabili.</p>
 <p>Un analizzatore funziona in una semplice pipeline a due fasi:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
    </span> <span class="img-wrapper"> <span>Flusso di lavoro dell'analizzatore</span> </span></p>
 <ol>
-<li><p><strong>Tokenizzazione (necessaria):</strong> Questa fase iniziale applica un <strong>tokenizer</strong> per scomporre una stringa continua di testo in unità discrete e significative, chiamate token. Il metodo di tokenizzazione può variare in modo significativo a seconda della lingua e del tipo di contenuto.</p></li>
-<li><p><strong>Filtraggio dei tokens (opzionale):</strong> Dopo la tokenizzazione, vengono applicati dei <strong>filtri</strong> per modificare, rimuovere o perfezionare i token. Queste operazioni possono includere la conversione di tutti i token in minuscolo, la rimozione di parole comuni senza significato (come le stopword) o la riduzione delle parole alla loro forma radicale (stemming).</p></li>
+<li><p><strong>Tokenizzazione (necessaria):</strong> Questa fase iniziale applica un <strong>tokenizer</strong> per scomporre una stringa continua di testo in unità discrete e significative, chiamate token. Il metodo di tokenizzazione può variare significativamente a seconda della lingua e del tipo di contenuto.</p></li>
+<li><p><strong>Filtraggio dei tokens (opzionale):</strong> Dopo la tokenizzazione, vengono applicati dei <strong>filtri</strong> per modificare, rimuovere o perfezionare i token. Queste operazioni possono includere la conversione di tutti i token in minuscolo, la rimozione di parole comuni senza significato (come le stopword) o la riduzione delle parole alla loro radice (stemming).</p></li>
 </ol>
 <p><strong>Esempio</strong>:</p>
 <pre><code translate="no" class="language-plaintext">Input: &quot;Hello World!&quot; 
@@ -67,7 +67,7 @@ summary: Note
         ></path>
       </svg>
     </button></h2><p>La scelta dell'analizzatore sbagliato può rendere i documenti rilevanti non ricercabili o restituire risultati irrilevanti.</p>
-<p>La tabella seguente riassume i problemi più comuni causati da una scelta impropria dell'analizzatore e fornisce soluzioni praticabili per diagnosticare i problemi di ricerca.</p>
+<p>La tabella seguente riassume i problemi più comuni causati da una scelta errata dell'analizzatore e fornisce soluzioni praticabili per diagnosticare i problemi di ricerca.</p>
 <table>
    <tr>
      <th><p>Problema</p></th>
@@ -132,8 +132,8 @@ summary: Note
     </button></h3><p>Se non si specifica un analizzatore quando si usano funzioni di recupero del testo come la ricerca full text, Milvus usa automaticamente l'analizzatore <a href="/docs/it/standard-analyzer.md"><code translate="no">standard</code></a> ...l'analizzatore.</p>
 <p>L'analizzatore <code translate="no">standard</code>:</p>
 <ul>
-<li><p>divide il testo in base agli spazi e alla punteggiatura</p></li>
-<li><p>Converte tutti i token in minuscolo</p></li>
+<li><p>Divide il testo in base agli spazi e alla punteggiatura</p></li>
+<li><p>converte tutti i token in minuscolo</p></li>
 <li><p>Rimuove una serie di stop word inglesi comuni e la maggior parte della punteggiatura.</p></li>
 </ul>
 <p><strong>Esempio di trasformazione</strong>:</p>

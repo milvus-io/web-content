@@ -161,7 +161,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/gpu-cagra.md#Build-index">membangun indeks.</a></p>
+    </button></h3><p>Tabel berikut berisi daftar parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/gpu-cagra.md#Build-index">membangun indeks.</a></p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -175,7 +175,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">graph_degree</code></p></td>
-     <td><p>Mempengaruhi kinerja pencarian dan pemanggilan dengan mengatur derajat grafik setelah pemangkasan. Perbedaan yang lebih besar antara kedua derajat ini menghasilkan waktu pembangunan yang lebih lama. Nilainya harus lebih kecil dari nilai <code translate="no">intermediate_graph_degree</code>.</p></td>
+     <td><p>Mempengaruhi kinerja pencarian dan penarikan dengan mengatur derajat grafik setelah pemangkasan. Perbedaan yang lebih besar antara kedua derajat ini menghasilkan waktu pembangunan yang lebih lama. Nilainya harus lebih kecil dari nilai <code translate="no">intermediate_graph_degree</code>.</p></td>
      <td><p><code translate="no">64</code></p></td>
    </tr>
    <tr>
@@ -238,7 +238,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>Menentukan pertukaran waktu/akurasi kueri. Nilai <code translate="no">ef</code> yang lebih tinggi akan menghasilkan pencarian yang lebih akurat tetapi lebih lambat.</p><p>Parameter ini wajib diisi jika Anda mengatur <code translate="no">adapt_for_cpu</code> ke <code translate="no">true</code> ketika Anda membangun indeks.</p></td>
+     <td><p>Menentukan pertukaran waktu/akurasi kueri. Nilai <code translate="no">ef</code> yang lebih tinggi akan menghasilkan pencarian yang lebih akurat tetapi lebih lambat.</p><p>Parameter ini wajib diisi jika Anda menetapkan <code translate="no">adapt_for_cpu</code> ke <code translate="no">true</code> ketika Anda membangun indeks.</p></td>
      <td><p><code translate="no">[top_k, int_max]</code></p></td>
    </tr>
 </table>

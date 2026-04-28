@@ -89,7 +89,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><p>O AISAQ oferece dois modos de operação para atender a dois casos de uso distintos:</p>
 <p>Modo de desempenho: optimizado para aplicações que requerem baixa latência e alta taxa de transferência em escala, como a pesquisa semântica online.</p>
-<p>Modo de escala: optimizado para aplicações com restrições de latência mais relaxadas, como RAG e pesquisa semântica offline, ao mesmo tempo que permite a expansão rentável de conjuntos de dados para uma escala ultra-alta.</p>
+<p>Modo de escala: optimizado para aplicações com restrições de latência mais relaxadas, como RAG e pesquisa semântica offline, ao mesmo tempo que permite a expansão económica de conjuntos de dados para uma escala ultra-alta.</p>
 <h4 id="AISAQ-performance-mode" class="common-anchor-header">Modo de desempenho do AISAQ</h4><p><strong>O AISAQ-performance</strong> alcança uma "pegada DRAM quase nula", movendo os dados PQ da memória para o disco, mantendo baixos IOPS através da colocação e redundância de dados.</p>
 <ul>
 <li><p>O vetor bruto de cada nó, a lista de arestas e os dados PQ dos seus vizinhos são armazenados em conjunto no disco.</p></li>
@@ -101,7 +101,7 @@ beta: Milvus 2.6.4+
 <ul>
 <li><p>Os dados PQ são armazenados separadamente no disco, sem redundância.</p></li>
 <li><p>Este design minimiza o tamanho do índice, mas leva a mais operações de E/S durante a travessia do gráfico.</p></li>
-<li><p>Para reduzir o excesso de IOPS, o AISAQ introduz duas optimizações:</p>
+<li><p>Para atenuar o excesso de IOPS, o AISAQ introduz duas optimizações:</p>
 <ul>
 <li><p>Um algoritmo de reorganização que ordena os vectores PQ por prioridade para melhorar a localização dos dados.</p></li>
 <li><p>Uma cache PQ na DRAM (pq_read_page_cache_size) que armazena em cache os dados PQ acedidos frequentemente.</p></li>
@@ -188,7 +188,7 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p><code translate="no">search_list_size</code></p></td>
-     <td><p>Durante a construção do índice, este parâmetro define o tamanho do conjunto de candidatos usado na pesquisa dos vizinhos mais próximos de cada nó. Para cada nó que está sendo adicionado ao gráfico, o algoritmo mantém uma lista dos melhores candidatos encontrados até o momento. A procura de vizinhos pára quando esta lista já não pode ser melhorada. A partir deste conjunto final de candidatos, os nós de grau máximo superior são selecionados para formar as arestas finais.</p></td>
+     <td><p>Durante a construção do índice, este parâmetro define o tamanho do conjunto de candidatos usado na pesquisa dos vizinhos mais próximos de cada nó. Para cada nó que está sendo adicionado ao gráfico, o algoritmo mantém uma lista dos melhores candidatos encontrados até o momento. A procura de vizinhos pára quando esta lista já não pode ser melhorada. A partir deste conjunto final de candidatos, os nós com o grau máximo mais elevado são selecionados para formar as arestas finais.</p></td>
      <td><p><strong>Tipo</strong>: Integer</p><p><strong>Range</strong>: [1, 512]</p><p><strong>Valor padrão</strong>: <code translate="no">100</code></p></td>
      <td><p>Um tamanho maior de search_list_size aumenta a probabilidade de encontrar os verdadeiros vizinhos mais próximos para cada nó, o que pode levar a um gráfico de maior qualidade e melhor desempenho de pesquisa (recall). No entanto, isto tem o custo de um tempo de construção do índice significativamente mais longo. Deve ser sempre definido para um valor maior ou igual a max_degree.</p></td>
    </tr>
@@ -260,7 +260,7 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p><code translate="no">search_list</code></p></td>
-     <td><p>Durante uma operação de pesquisa, esse parâmetro determina o tamanho do pool de candidatos que o algoritmo mantém à medida que percorre o gráfico. Um valor maior aumenta as hipóteses de encontrar os verdadeiros vizinhos mais próximos (maior recuperação), mas também aumenta a latência da pesquisa.</p></td>
+     <td><p>Durante uma operação de pesquisa, este parâmetro determina o tamanho do conjunto de candidatos que o algoritmo mantém à medida que percorre o gráfico. Um valor maior aumenta as hipóteses de encontrar os verdadeiros vizinhos mais próximos (maior recuperação), mas também aumenta a latência da pesquisa.</p></td>
      <td><p><strong>Tipo</strong>: Inteiro</p><p><strong>Intervalo</strong>: [topk, int32_max]</p><p><strong>Valor predefinido</strong>: <code translate="no">16</code></p></td>
      <td><p>Para obter um bom equilíbrio entre desempenho e precisão, é recomendável definir este valor como sendo igual ou ligeiramente superior ao número de resultados que pretende obter (top_k).</p></td>
    </tr>

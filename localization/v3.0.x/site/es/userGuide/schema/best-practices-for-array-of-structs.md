@@ -50,7 +50,7 @@ beta: Milvus 2.6.4+
 <ul>
 <li><p><strong>Datos jerárquicos</strong>: Entidades padre con múltiples registros hijo, como un libro con muchos trozos de texto, o un vídeo con muchos fotogramas anotados.</p></li>
 <li><p><strong>Incrustaciones multimodales</strong>: Cada Estructura puede contener múltiples vectores, como incrustaciones de texto más incrustaciones de imagen, junto con metadatos.</p></li>
-<li><p><strong>Datos temporales o secuenciales</strong>: Los Structs en un campo Array representan de forma natural series temporales o eventos paso a paso.</p></li>
+<li><p><strong>Datos temporales o secuenciales</strong>: Los Structs de un campo Array representan de forma natural series temporales o eventos paso a paso.</p></li>
 </ul>
 <p>A diferencia de las soluciones tradicionales que almacenan blobs JSON o dividen los datos en múltiples colecciones, la matriz de estructuras proporciona una aplicación nativa del esquema, indexación de vectores y almacenamiento eficiente dentro de Milvus.</p>
 <h2 id="Schema-design-guidelines" class="common-anchor-header">Directrices de diseño de esquemas<button data-href="#Schema-design-guidelines" class="anchor-icon" translate="no">
@@ -85,7 +85,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h3><p>Antes de añadir el campo Array a su colección, defina el esquema Struct interno. Cada campo de la estructura debe tener un tipo explícito, escalar<strong>(VARCHAR</strong>, <strong>INT</strong>, <strong>BOOLEAN</strong>, etc.) o vectorial<strong>(FLOAT_VECTOR</strong>).</p>
-<p>Se aconseja mantener el esquema Struct simplificado incluyendo sólo los campos que se utilizarán para la recuperación o visualización. Evite sobrecargarlo con metadatos no utilizados.</p>
+<p>Se aconseja mantener el esquema Struct simplificado, incluyendo sólo los campos que vaya a utilizar para la recuperación o visualización. Evite sobrecargarlo con metadatos no utilizados.</p>
 <h3 id="Set-the-max-capacity-thoughtfully" class="common-anchor-header">Establezca cuidadosamente la capacidad máxima<button data-href="#Set-the-max-capacity-thoughtfully" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -120,7 +120,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><p>La indexación es obligatoria para los campos vectoriales, incluyendo tanto los campos vectoriales de una colección como los definidos en una Struct. Para los campos vectoriales de una Struct, debe utilizar <code translate="no">AUTOINDEX</code> o <code translate="no">HNSW</code> como tipo de índice y la serie <code translate="no">MAX_SIM</code> como tipo de métrica.</p>
 <p>Para más detalles sobre todos los límites aplicables, consulte <a href="/docs/es/array-of-structs.md#Limits">los límites</a>.</p>
-<h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">Un ejemplo real: Modelización del conjunto de datos CoVLA para la conducción autónoma<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
+<h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">Un ejemplo real: Modelado del conjunto de datos CoVLA para la conducción autónoma<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -200,7 +200,7 @@ beta: Milvus 2.6.4+
 ├── video_n
 <button class="copy-code-btn"></button></code></pre>
 <p>La estructura del conjunto de datos CoVLA es altamente jerárquica, dividiendo los datos recogidos en múltiples archivos <code translate="no">.jsonl</code>, junto con los clips de vídeo en el formato <code translate="no">.mp4</code>.</p>
-<p>En Milvus, puede utilizar un campo JSON o un campo Array-of-Structs para crear estructuras anidadas dentro de un esquema de colección. Cuando las incrustaciones vectoriales forman parte del formato anidado, sólo se admite un campo Array-of-Structs. Sin embargo, una estructura dentro de una matriz no puede contener más estructuras anidadas. Para almacenar el conjunto de datos CoVLA conservando las relaciones esenciales, es necesario eliminar la jerarquía innecesaria y aplanar los datos para que se ajusten al esquema de la colección Milvus.</p>
+<p>En Milvus, puede utilizar un campo JSON o un campo Array-of-Structs para crear estructuras anidadas dentro de un esquema de colección. Cuando las incrustaciones vectoriales forman parte del formato anidado, sólo se admite un campo Array-of-Structs. Sin embargo, una estructura dentro de una matriz no puede contener otras estructuras anidadas. Para almacenar el conjunto de datos CoVLA conservando las relaciones esenciales, es necesario eliminar la jerarquía innecesaria y aplanar los datos para que se ajusten al esquema de la colección Milvus.</p>
 <p>El diagrama siguiente ilustra cómo podemos modelar este conjunto de datos utilizando el esquema ilustrado en el esquema siguiente:</p>
 <p>
   

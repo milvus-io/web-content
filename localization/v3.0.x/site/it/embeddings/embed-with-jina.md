@@ -40,7 +40,7 @@ jina_ef = JinaEmbeddingFunction(
 <p><strong>Parametri</strong>:</p>
 <ul>
 <li><p><code translate="no">model_name</code> <em>(stringa</em>)</p>
-<p>Il nome del modello di incorporazione Jina AI da utilizzare per la codifica. È possibile specificare uno qualsiasi dei nomi dei modelli di incorporamento Jina AI disponibili, ad esempio <code translate="no">jina-embeddings-v3</code>, <code translate="no">jina-embeddings-v2-base-en</code>, ecc. Se si lascia questo parametro non specificato, verrà utilizzato <code translate="no">jina-embeddings-v3</code>. Per un elenco dei modelli disponibili, fare riferimento a <a href="https://jina.ai/embeddings">Jina Embeddings</a>.</p></li>
+<p>Il nome del modello di incorporazione di Jina AI da utilizzare per la codifica. È possibile specificare uno qualsiasi dei nomi dei modelli di incorporamento Jina AI disponibili, ad esempio <code translate="no">jina-embeddings-v3</code>, <code translate="no">jina-embeddings-v2-base-en</code>, ecc. Se si lascia questo parametro non specificato, verrà utilizzato <code translate="no">jina-embeddings-v3</code>. Per un elenco dei modelli disponibili, fare riferimento a <a href="https://jina.ai/embeddings">Jina Embeddings</a>.</p></li>
 <li><p><code translate="no">api_key</code> <em>(stringa</em>)</p>
 <p>La chiave API per accedere all'API Jina AI.</p></li>
 <li><p><code translate="no">task</code> <em>(stringa</em>)</p>
@@ -104,7 +104,7 @@ query_embeddings = jina_ef.encode_queries(queries)
        -<span class="hljs-number">1.65050142e-02</span>, -<span class="hljs-number">4.26847413e-02</span>,  <span class="hljs-number">2.02664156e-02</span>, -<span class="hljs-number">1.72684863e-02</span>])]
 Dim <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 <button class="copy-code-btn"></button></code></pre>
-<p>Per creare incorporazioni di input per la corrispondenza di similarità (come i compiti STS o di reperimento simmetrico), la classificazione del testo, il clustering o il reranking, usare il valore appropriato del parametro <code translate="no">task</code> quando si istanzia la classe <code translate="no">JinaEmbeddingFunction</code>.</p>
+<p>Per creare incorporazioni di input per la corrispondenza di similarità (come i compiti STS o di reperimento simmetrico), la classificazione del testo, il clustering o il reranking, utilizzare il valore appropriato del parametro <code translate="no">task</code> quando si istanzia la classe <code translate="no">JinaEmbeddingFunction</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_ef = JinaEmbeddingFunction(

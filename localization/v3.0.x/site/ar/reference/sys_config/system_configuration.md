@@ -140,12 +140,13 @@ summary: تعرف على تكوين نظام ميلفوس.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يدعم Milvus أربعة من MQ: rocksmq (استنادًا إلى RockDB)، و natsmq (خادم nats-server المدمج)، وPulsar وKafka.</p>
+    </button></h3><p>يدعم Milvus أربعة من MQ: rocksmq (استنادًا إلى RockDB) وPulsar وKafka وWoodpecker.</p>
 <p>يمكنك تغيير mq الخاص بك عن طريق تعيين حقل mq.type.</p>
-<p>إذا لم تقم بتعيين الحقل mq.type كإعداد افتراضي، فهناك ملاحظة حول تمكين الأولوية إذا قمنا بتكوين عدة mq في هذا الملف.</p>
+<p>إذا لم تقم بتعيين حقل mq.type كإعداد افتراضي، فهناك ملاحظة حول تمكين الأولوية إذا قمنا بتكوين عدة mq في هذا الملف.</p>
 <ol>
-<li><p>الوضع المستقل (المحلي): وضع مستقل (محلي): rocksmq (افتراضي) &gt; natsmq &gt; بولسار &gt; كافكا</p></li>
-<li><p>الوضع العنقودي:  بولسار(افتراضي) &gt; كافكا (روكسمك و ناتسمك غير مدعوم في وضع المجموعة)</p></li>
+<li><p>الوضع المستقل (المحلي): وضع مستقل (محلي): rocksmq (افتراضي) &gt; بولسار &gt; كافكا</p></li>
+<li><p>الوضع العنقودي:  بولسار(افتراضي) &gt; كافكا (روكسمك غير مدعوم في وضع التجميع)</p></li>
+<li><p>يمكن استخدام نقار الخشب في كل من الوضع المستقل ووضع المجموعة عن طريق تعيين mq.type إلى نقار الخشب.</p></li>
 </ol>
 <p>انظر <a href="/docs/ar/configure_mq.md">التكوينات المتعلقة بـ mq</a> للحصول على وصف تفصيلي لكل معلمة تحت هذا القسم.</p>
 <h3 id="pulsar" class="common-anchor-header"><code translate="no">pulsar</code><button data-href="#pulsar" class="anchor-icon" translate="no">
@@ -163,8 +164,8 @@ summary: تعرف على تكوين نظام ميلفوس.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>التكوينات ذات الصلة بـ pulsar، وتستخدم لإدارة سجلات ميلفوس لعمليات الطفرات الأخيرة، وسجل تدفق الإخراج، وتوفير خدمات نشر-اشتراك السجل.</p>
-<p>انظر <a href="/docs/ar/configure_pulsar.md">التكوينات المتعلقة</a> بـ <a href="/docs/ar/configure_pulsar.md">pulsar</a> للحصول على وصف مفصل لكل معلمة تحت هذا القسم.</p>
+    </button></h3><p>التكوينات ذات الصلة بـ pulsar، والمستخدمة لإدارة سجلات ميلفوس لعمليات الطفرات الأخيرة، وسجل تدفق الإخراج، وتوفير خدمات نشر-اشتراك السجل.</p>
+<p>راجع <a href="/docs/ar/configure_pulsar.md">التكوينات المتعلقة</a> بـ <a href="/docs/ar/configure_pulsar.md">pulsar</a> للحصول على وصف مفصل لكل معلمة تحت هذا القسم.</p>
 <h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code><button data-href="#rocksmq" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -181,8 +182,8 @@ summary: تعرف على تكوين نظام ميلفوس.
         ></path>
       </svg>
     </button></h3><p>إذا كنت ترغب في تمكين كافكا، تحتاج إلى التعليق على تكوينات النابض</p>
-<p>kafka:</p>
-<p>brokerList:</p>
+<p>كافكا</p>
+<p>الوسيط: المضيف المحلي: 9092</p>
 <p>saslUsername:</p>
 <p>saslPassword:</p>
 <p>saslMechanisms:</p>
@@ -200,24 +201,6 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 </code></pre>
 <p>readTimeTimeout: 10</p>
 <p>انظر <a href="/docs/ar/configure_rocksmq.md">التكوينات المتعلقة بـ rocksmq</a> للحصول على وصف تفصيلي لكل معلمة ضمن هذا القسم.</p>
-<h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code><button data-href="#natsmq" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>تكوين natsmq.</p>
-<p>مزيد من التفاصيل: https://docs.nats.io/running-a-nats-service/configuration</p>
-<p>انظر <a href="/docs/ar/configure_natsmq.md">التكوينات المتعلقة</a> بـ <a href="/docs/ar/configure_natsmq.md">natsmq</a> للحصول على وصف تفصيلي لكل معلمة تحت هذا القسم.</p>
 <h3 id="rootCoord" class="common-anchor-header"><code translate="no">rootCoord</code><button data-href="#rootCoord" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -233,8 +216,8 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>التكوينات ذات الصلة بـ rootCoord، المستخدمة للتعامل مع طلبات لغة تعريف البيانات (DDL) ولغة التحكم في البيانات (DCL)</p>
-<p>راجع <a href="/docs/ar/configure_rootcoord.md">التكوينات المتعلقة</a> بـ <a href="/docs/ar/configure_rootcoord.md">rootCoord</a> للحصول على وصف تفصيلي لكل معلمة ضمن هذا القسم.</p>
+    </button></h3><p>تكوينات ذات صلة بـ rootCoord، تُستخدم للتعامل مع طلبات لغة تعريف البيانات (DDL) ولغة التحكم في البيانات (DCL)</p>
+<p>راجع <a href="/docs/ar/configure_rootcoord.md">التكوينات</a> ذات <a href="/docs/ar/configure_rootcoord.md">الصلة</a> بـ <a href="/docs/ar/configure_rootcoord.md">rootCoord</a> للحصول على وصف مفصل لكل معلمة تحت هذا القسم.</p>
 <h3 id="proxy" class="common-anchor-header"><code translate="no">proxy</code><button data-href="#proxy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -415,8 +398,25 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>تكوين تمكين tls الوكيل tls.</p>
+    </button></h3><p>تكوين tls الخارجي.</p>
 <p>راجع <a href="/docs/ar/configure_tls.md">التكوينات المتعلقة بـ tls</a> للحصول على وصف تفصيلي لكل معلمة ضمن هذا القسم.</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code><button data-href="#internaltls" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تكوين tls الداخلي.</p>
+<p>راجع <a href="/docs/ar/configure_internaltls.md">التكوينات المتعلقة بـ tls الداخلية</a> للحصول على وصف تفصيلي لكل معلمة ضمن هذا القسم.</p>
 <h3 id="common" class="common-anchor-header"><code translate="no">common</code><button data-href="#common" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -432,7 +432,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>راجع <a href="/docs/ar/configure_common.md">التكوينات المتعلقة</a> بـ <a href="/docs/ar/configure_common.md">common-related Configurations</a> للحصول على وصف تفصيلي لكل معلمة ضمن هذا القسم.</p>
+    </button></h3><p>راجع <a href="/docs/ar/configure_common.md">التكوينات المرتبطة</a> بـ tls للحصول على وصف تفصيلي لكل معلمة ضمن هذا القسم.</p>
 <h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code><button data-href="#quotaAndLimits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -448,7 +448,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>QuotaConfig، تكوينات حصة ميلفوس وحدودها.</p>
+    </button></h3><p>QuotaConfig، تكوينات الحصة والحدود الخاصة بـ Milvus.</p>
 <p>بشكل افتراضي، نقوم بتمكين:</p>
 <ol>
 <li><p>حماية TT;</p></li>
@@ -499,6 +499,57 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>#هنا، يمكنك تعيين حجم الذاكرة التي يشغلها تجمع الذاكرة، على أن تكون الوحدة ميغابايت.</p>
 <p># لاحظ أن هناك احتمال تعطل Milvus عندما يتجاوز الطلب الفعلي على الذاكرة القيمة التي تم تعيينها بواسطة maxMemSize.</p>
 <p>#إذا تم تعيين كل من initMemSize و MaxMemSize على صفر,</p>
-<p>سيقوم #milvus تلقائيًا بتهيئة نصف ذاكرة وحدة معالجة الرسومات المتاحة,</p>
+<p>فسيقوم #milvus تلقائيًا بتهيئة نصف ذاكرة وحدة معالجة الرسومات المتاحة,</p>
 <p>سيقوم #maxMemSemSize بتهيئة كامل ذاكرة وحدة معالجة الرسومات المتوفرة.</p>
 <p>انظر <a href="/docs/ar/configure_gpu.md">التكوينات المتعلقة بوحدة معالجة الرسومات</a> للحصول على وصف تفصيلي لكل معلمة ضمن هذا القسم.</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code><button data-href="#streamingNode" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>أي تكوين متعلق بخادم عقدة التدفق.</p>
+<p>راجع <a href="/docs/ar/configure_streamingnode.md">التكوينات المتعلقة بعقدة البث</a> للحصول على وصف تفصيلي لكل معلمة ضمن هذا القسم.</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code><button data-href="#streaming" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>أي تكوين متعلق بخدمة البث.</p>
+<p>راجع <a href="/docs/ar/configure_streaming.md">التكوينات المتعلقة بالبث</a> للحصول على وصف تفصيلي لكل معلمة ضمن هذا القسم.</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code><button data-href="#knowhere" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>أي تكوين متعلق بمحرك البحث الناقل لـ knowhere</p>
+<p>راجع <a href="/docs/ar/configure_knowhere.md">التكوينات المتعلقة</a> بـ <a href="/docs/ar/configure_knowhere.md">knowhere</a> للحصول على وصف تفصيلي لكل معلمة تحت هذا القسم.</p>

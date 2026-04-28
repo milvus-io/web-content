@@ -2,7 +2,7 @@
 id: configure-docker.md
 label: Docker Compose
 related_key: configure
-summary: Configure Milvus con Docker Compose.
+summary: Configurar Milvus con Docker Compose.
 title: Configurar Milvus con Docker Compose
 ---
 <h1 id="Configure-Milvus-with-Docker-Compose" class="common-anchor-header">Configurar Milvus con Docker Compose<button data-href="#Configure-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">

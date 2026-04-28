@@ -158,13 +158,13 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">provider</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>مزود خدمة النموذج المراد استخدامه لإعادة ترتيب النماذج.</p></td>
+     <td><p>مزود خدمة النموذج المراد استخدامه لإعادة الترتيب.</p></td>
      <td><p><code translate="no">"siliconflow"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">model_name</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>نموذج إعادة ترتيب نموذج SiliconFlow لاستخدامه من النماذج المدعومة على منصة SiliconFlow.</p><p>للحصول على قائمة نماذج إعادة الترتيب المتاحة، راجع <a href="https://docs.siliconflow.cn/en/api-reference/rerank/create-rerank">وثائق SiliconFlow</a>.</p></td>
+     <td><p>نموذج إعادة ترتيب نموذج SiliconFlow لاستخدامه من النماذج المدعومة على منصة SiliconFlow.</p><p>للاطلاع على قائمة نماذج إعادة الترتيب المتاحة، راجع <a href="https://docs.siliconflow.cn/en/api-reference/rerank/create-rerank">وثائق SiliconFlow</a>.</p></td>
      <td><p><code translate="no">"BAAI/bge-reranker-v2-m3"</code></p></td>
    </tr>
    <tr>
@@ -182,7 +182,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">max_chunks_per_doc</code></p></td>
      <td><p>لا</p></td>
-     <td><p>الحد الأقصى لعدد القطع التي تم إنشاؤها من داخل المستند. يتم تقسيم المستندات الطويلة إلى أجزاء متعددة للحساب، ويتم أخذ أعلى درجة من بين الأجزاء كدرجة المستند. مدعومة فقط من قبل نماذج محددة: <code translate="no">BAAI/bge-reranker-v2-m3</code> ، <code translate="no">Pro/BAAI/bge-reranker-v2-m3</code> ، و <code translate="no">netease-youdao/bce-reranker-base_v1</code>.</p></td>
+     <td><p>الحد الأقصى لعدد القطع التي تم إنشاؤها من داخل المستند. يتم تقسيم المستندات الطويلة إلى أجزاء متعددة لحسابها، ويتم أخذ أعلى درجة من بين الأجزاء كدرجة المستند. مدعومة فقط من قبل نماذج محددة: <code translate="no">BAAI/bge-reranker-v2-m3</code> ، <code translate="no">Pro/BAAI/bge-reranker-v2-m3</code> ، و <code translate="no">netease-youdao/bce-reranker-base_v1</code>.</p></td>
      <td><p><code translate="no">5</code>, <code translate="no">10</code></p></td>
    </tr>
    <tr>

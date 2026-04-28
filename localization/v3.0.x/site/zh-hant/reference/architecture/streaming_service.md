@@ -21,7 +21,7 @@ summary: Streaming Service 是 Milvus 內部串流系統模組的概念，以 Wr
     </button></h1><p><strong>Streaming Service</strong>是 Milvus 內部串流系統模組的概念，以 Write-Ahead Log (WAL) 為核心，支援各種串流相關功能。這些功能包括串流資料的擷取/訂閱、群集狀態的故障復原、串流資料轉換為歷史資料，以及成長中的資料查詢。在架構上，串流服務由三個主要元件組成：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/streaming_distributed_arch.png" alt="Streaming Distributed Arc" class="doc-image" id="streaming-distributed-arc" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/streaming_distributed_arch.png" alt="Streaming Distributed Arc" class="doc-image" id="streaming-distributed-arc" />
    </span> <span class="img-wrapper"> <span>串流分散式弧</span> </span></p>
 <ul>
 <li><p><strong>串流協調器</strong>：協調器節點中的邏輯元件。它使用 Etcd 進行服務發現，以找出可用的串流節點，並負責將 WAL 綁定到對應的串流節點。它還會註冊服務以揭露 WAL 分佈拓樸，讓串流用戶端知道給定 WAL 的適當串流節點。</p></li>
@@ -51,7 +51,7 @@ summary: Streaming Service 是 Milvus 內部串流系統模組的概念，以 Wr
 <p>Milvus 中的訊息順序如下：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/message_order.png" alt="Message Order" class="doc-image" id="message-order" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/message_order.png" alt="Message Order" class="doc-image" id="message-order" />
    </span> <span class="img-wrapper"> <span>訊息順序</span> </span></p>
 <h2 id="WAL-Component" class="common-anchor-header">WAL 元件<button data-href="#WAL-Component" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -99,7 +99,7 @@ summary: Streaming Service 是 Milvus 內部串流系統模組的概念，以 Wr
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/recovery_storage.png" alt="Recovery Storage" class="doc-image" id="recovery-storage" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/recovery_storage.png" alt="Recovery Storage" class="doc-image" id="recovery-storage" />
    </span> <span class="img-wrapper"> <span>復原儲存</span> </span></p>
 <h2 id="Query-Delegator" class="common-anchor-header">查詢委託器<button data-href="#Query-Delegator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -118,7 +118,7 @@ summary: Streaming Service 是 Milvus 內部串流系統模組的概念，以 Wr
       </svg>
     </button></h2><p><strong>Query Delegator</strong>在每個串流節點上執行，負責在單一分片上執行<strong>增量查詢</strong>。它會產生查詢計劃、將計劃轉送至相關的查詢節點，並匯總結果。</p>
 <p>此外，查詢委託器負責將<strong>Delete 作業</strong>廣播給其他查詢節點。</p>
-<p>查詢委託器總是與 WAL 元件共存於同一個串流節點上。但如果集合設定為多重複製，則會在其他串流節點上部署<strong>N-1 個</strong>Delegator。</p>
+<p>查詢委託器總是與 WAL 元件共存於同一個串流節點上。但如果集合設定為多重複製，則會在其他串流節點上部署<strong>N-1 個委</strong>託器。</p>
 <h2 id="WAL-Lifetime-and-Wait-for-Ready" class="common-anchor-header">WAL 壽命與等待就緒<button data-href="#WAL-Lifetime-and-Wait-for-Ready" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -137,7 +137,7 @@ summary: Streaming Service 是 Milvus 內部串流系統模組的概念，以 Wr
     </button></h2><p>透過將計算節點與儲存分離，Milvus 可以輕鬆地將 WAL 從一個串流節點傳輸到另一個串流節點，達到串流服務的高可用性。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/wal_lifetime.png" alt="wal lifetime" class="doc-image" id="wal-lifetime" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/wal_lifetime.png" alt="wal lifetime" class="doc-image" id="wal-lifetime" />
    </span> <span class="img-wrapper"> <span>WAL 壽命</span> </span></p>
 <h2 id="Wait-for-Ready" class="common-anchor-header">等待就緒<button data-href="#Wait-for-Ready" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -157,5 +157,5 @@ summary: Streaming Service 是 Milvus 內部串流系統模組的概念，以 Wr
     </button></h2><p>當 WAL 移動到新的串流節點時，用戶端會發現舊的串流節點拒絕了一些請求。與此同時，WAL 會在新的串流節點恢復，用戶端會等待新串流節點上的 wal 準備好提供服務。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/streaming_wait_for_ready.png" alt="wait for ready" class="doc-image" id="wait-for-ready" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/streaming_wait_for_ready.png" alt="wait for ready" class="doc-image" id="wait-for-ready" />
    </span> <span class="img-wrapper"> <span>等待就緒</span> </span></p>

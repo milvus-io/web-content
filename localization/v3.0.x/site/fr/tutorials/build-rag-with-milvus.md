@@ -94,7 +94,7 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-Embedding-Model" class="common-anchor-header">Préparer le modèle d'intégration<button data-href="#Prepare-the-Embedding-Model" class="anchor-icon" translate="no">
+<h3 id="Prepare-the-Embedding-Model" class="common-anchor-header">Préparation du modèle d'intégration<button data-href="#Prepare-the-Embedding-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

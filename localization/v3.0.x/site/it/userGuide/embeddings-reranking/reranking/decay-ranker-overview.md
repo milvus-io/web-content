@@ -24,7 +24,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Nella ricerca vettoriale tradizionale, i risultati sono classificati esclusivamente in base alla somiglianza vettoriale, ovvero alla vicinanza dei vettori nello spazio matematico. Ma nelle applicazioni reali, ciò che rende i contenuti veramente rilevanti spesso dipende da qualcosa di più della semplice somiglianza semantica.</p>
+    </button></h1><p>Nella ricerca vettoriale tradizionale, i risultati sono classificati esclusivamente in base alla somiglianza vettoriale, ovvero alla vicinanza dei vettori nello spazio matematico. Ma nelle applicazioni reali, ciò che rende un contenuto veramente rilevante spesso dipende da qualcosa di più della semplice somiglianza semantica.</p>
 <p>Considerate questi scenari quotidiani:</p>
 <ul>
 <li><p>Una ricerca di notizie in cui l'articolo di ieri dovrebbe essere più importante di un articolo simile di tre anni fa.</p></li>
@@ -250,7 +250,7 @@ beta: Milvus 2.6.x
    </tr>
    <tr>
      <td><p>Lineare (<code translate="no">linear</code>)</p></td>
-     <td><p>Declino coerente e prevedibile con un limite chiaro</p></td>
+     <td><p>Declino coerente e prevedibile, con un limite ben definito</p></td>
      <td><ul><li><p>Applicazioni con confini naturali</p></li><li><p>Servizi con limiti di distanza</p></li><li><p>Contenuti con date di scadenza o soglie chiare</p></li></ul></td>
      <td><p>In un cercatore di eventi, gli eventi oltre una finestra futura di due settimane non appaiono affatto.</p></td>
    </tr>

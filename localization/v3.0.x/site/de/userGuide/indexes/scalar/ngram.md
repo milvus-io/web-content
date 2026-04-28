@@ -9,9 +9,9 @@ summary: >-
   werden. Bei n = 3 wird zum Beispiel das Wort "Milvus" in 3-Gramme aufgeteilt:
   "Mil", "ilv", "lvu", und "vus". Diese n-Gramme werden dann in einem
   invertierten Index gespeichert, der jedes Gramm den Dokument-IDs zuordnet, in
-  denen es vorkommt. Zur Abfragezeit ermöglicht dieser Index Milvus eine
-  schnelle Eingrenzung der Suche auf eine kleine Gruppe von Kandidaten, was zu
-  einer wesentlich schnelleren Abfrageausführung führt.
+  denen es vorkommt. Bei der Abfrage ermöglicht dieser Index Milvus, die Suche
+  schnell auf eine kleine Gruppe von Kandidaten einzugrenzen, was zu einer
+  wesentlich schnelleren Abfrageausführung führt.
 ---
 <h1 id="NGRAM" class="common-anchor-header">NGRAM<button data-href="#NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -53,7 +53,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus implementiert den <code translate="no">NGRAM</code> Index in einem zweiphasigen Prozess:</p>
+    </button></h2><p>Milvus implementiert den <code translate="no">NGRAM</code> Index in einem Zwei-Phasen-Prozess:</p>
 <ol>
 <li><p><strong>Index aufbauen</strong>: Generierung von n-Grammen für jedes Dokument und Aufbau eines invertierten Index während des Ingest-Prozesses.</p></li>
 <li><p><strong>Abfragen beschleunigen</strong>: Verwenden Sie den Index, um eine kleine Kandidatengruppe herauszufiltern, und überprüfen Sie dann die exakten Übereinstimmungen.</p></li>
@@ -369,7 +369,7 @@ client.create_index(
 <li><p><strong>Wählen Sie min_gram und max_gram entsprechend dem Suchverhalten</strong></p>
 <ul>
 <li><p>Beginnen Sie mit <code translate="no">min_gram=2</code>, <code translate="no">max_gram=3</code>.</p></li>
-<li><p>Setzen Sie <code translate="no">min_gram</code> auf das kürzeste Literal, das Sie von den Benutzern erwarten.</p></li>
+<li><p>Setzen Sie <code translate="no">min_gram</code> auf das kürzeste Literal, das Sie erwarten, dass die Benutzer eingeben.</p></li>
 <li><p>Setzen Sie <code translate="no">max_gram</code> auf die typische Länge sinnvoller Teilstrings; eine größere <code translate="no">max_gram</code> verbessert die Filterung, erhöht aber den Platzbedarf.</p></li>
 </ul></li>
 <li><p><strong>Vermeiden Sie Gramm mit geringer Selektivität</strong></p>

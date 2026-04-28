@@ -70,7 +70,7 @@ summary: >-
 <p>Por exemplo, o valor <strong>"electronics"</strong> mapeia para os IDs <strong>1</strong> e <strong>3</strong>, enquanto <strong>"books"</strong> mapeia para os IDs <strong>2</strong> e <strong>5</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
    </span> <span class="img-wrapper"> <span>Como funciona o Índice Invertido</span> </span></p>
 <p>Quando filtra por um valor específico (por exemplo, <code translate="no">category == &quot;electronics&quot;</code>), o Milvus procura simplesmente o termo no índice e obtém diretamente os IDs correspondentes. Isto evita a pesquisa de todo o conjunto de dados e permite uma filtragem rápida, especialmente para valores categóricos ou repetidos.</p>
 <p>Os índices INVERTED suportam todos os tipos de campos escalares, como <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong> e <strong>ARRAY</strong>. No entanto, os parâmetros de índice para indexar um campo JSON são ligeiramente diferentes dos campos escalares normais.</p>

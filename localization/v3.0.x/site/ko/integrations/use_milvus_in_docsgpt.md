@@ -110,7 +110,7 @@ title: DocsGPT에서 Milvus 사용
 <p><code translate="no">MILVUS_URI</code>, <code translate="no">MILVUS_TOKEN</code> 의 경우, 완전 관리형 <a href="https://zilliz.com/cloud">질리즈 클라우드</a>(권장) 서비스를 사용하거나 수동으로 밀버스 서비스를 시작할 수 있습니다.</p>
 <ul>
 <li><p>완전 관리형 질리즈 클라우드 서비스의 경우: 질리즈 클라우드 서비스 사용을 권장합니다. <a href="https://zilliz.com/cloud">질리즈 클라우드에서</a> 무료 체험 계정을 신청할 수 있습니다. 그 후 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">퍼블릭 엔드포인트와 API 키에</a> 해당하는 <code translate="no">MILVUS_URI</code> 및 <code translate="no">MILVUS_TOKEN</code> 을 받게 됩니다.</p></li>
-<li><p>수동으로 Milvus 서비스를 시작하려면: 밀버스 서비스를 설정하려면 밀버스 <a href="https://milvus.io/docs/install_standalone-docker-compose.md">공식 문서에</a> 따라 밀버스 서버를 설정한 후, 해당 서버에서 <code translate="no">MILVUS_URI</code> 및 <code translate="no">MILVUS_TOKEN</code> 을 받으면 됩니다. <code translate="no">MILVUS_URI</code> 및 <code translate="no">MILVUS_TOKEN</code> 은 각각 <code translate="no">http://&lt;your_server_ip&gt;:19530</code> 및 <code translate="no">&lt;your_username&gt;:&lt;your_password&gt;</code> 형식이어야 합니다.</p></li>
+<li><p>수동으로 Milvus 서비스를 시작하려면: 밀버스 서비스를 설정하려면 밀버스 <a href="https://milvus.io/docs/install_standalone-docker-compose.md">공식 문서에</a> 따라 밀버스 서버를 설정한 후 해당 서버에서 <code translate="no">MILVUS_URI</code> 및 <code translate="no">MILVUS_TOKEN</code> 을 받으면 됩니다. <code translate="no">MILVUS_URI</code> 및 <code translate="no">MILVUS_TOKEN</code> 은 각각 <code translate="no">http://&lt;your_server_ip&gt;:19530</code> 및 <code translate="no">&lt;your_username&gt;:&lt;your_password&gt;</code> 형식이어야 합니다.</p></li>
 </ul>
 <h2 id="Start-the-services" class="common-anchor-header">서비스 시작하기<button data-href="#Start-the-services" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -132,9 +132,9 @@ title: DocsGPT에서 Milvus 사용
 <p>UI를 살펴보고 문서에 대해 질문할 수 있습니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
    </span> <span class="img-wrapper"> <span>대체 텍스트</span> </span></p>
 <p>서비스를 중지하려면 실행을 클릭합니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose down</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>자세한 내용 및 고급 설정에 대한 자세한 내용은 <a href="https://github.com/arc53/DocsGPT">DocsGPT</a> 공식 문서를 참조하세요.</p>
+<p>자세한 내용 및 고급 설정은 <a href="https://github.com/arc53/DocsGPT">DocsGPT</a> 공식 문서를 참조하세요.</p>

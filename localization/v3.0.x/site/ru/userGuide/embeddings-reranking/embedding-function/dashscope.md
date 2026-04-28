@@ -115,7 +115,7 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>Размещение ключей API здесь делает их постоянными при перезагрузке и позволяет вам переключаться между ключами, просто меняя метку.</p></li>
+<p>Если поместить API-ключи сюда, они станут постоянными при перезагрузке и позволят вам переключаться между ключами, просто меняя метку.</p></li>
 <li><p><strong>Укажите Milvus, какой ключ использовать для вызовов DashScope</strong></p>
 <p>В том же файле укажите провайдеру DashScope на метку, которую вы хотите использовать.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>

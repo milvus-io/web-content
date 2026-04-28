@@ -131,7 +131,7 @@ title: Настройка Milvus с помощью Docker Compose
     </td>
   </tr>
   <tr>
-    <td>Данные и мета</td>
+    <td>Данные и метаданные</td>
     <td>
         <ul>
             <li><a href="/docs/ru/configure_common.md#commonretentionDuration"><code translate="no">common.retentionDuration</code></a></li>

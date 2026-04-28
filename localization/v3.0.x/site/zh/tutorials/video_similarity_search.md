@@ -30,11 +30,11 @@ title: 视频相似性搜索
 <li><a href="https://towhee.io/">Towhee</a></li>
 </ul>
 <p><br/></p>
-<p>如今，人们在观看自己喜欢的电影或视频后，可以轻松地截图并在各种社交网络平台上发布，分享自己的想法。当粉丝们看到截图时，如果帖子中没有明确写出电影名称，他们真的很难分辨出这是哪部电影。为了弄清电影名称，人们可以利用视频相似性搜索系统。通过使用该系统，用户可以上传一张图片，然后获取包含与上传图片相似的关键帧的视频或电影。</p>
+<p>如今，人们在观看自己喜欢的电影或视频后，可以轻松地截图并在各种社交网络平台上发布，分享自己的想法。当粉丝们看到这些截图时，如果帖子中没有明确写出电影名称，他们真的很难分辨出这是哪部电影。为了弄清电影名称，人们可以利用视频相似性搜索系统。通过使用该系统，用户可以上传一张图片，然后获取包含与上传图片相似的关键帧的视频或电影。</p>
 <p><br/></p>
-<p>在本教程中，您将学习如何构建视频相似性搜索系统。本教程使用 Tumblr 上的约 100 个 gif 动画来构建系统。不过，您也可以准备自己的视频数据集。系统首先使用 OpenCV 提取视频中的关键帧，然后使用 ResNet-50 获取每个关键帧的特征向量。所有向量都存储在 Milvus 中并进行搜索，Milvus 会返回相似向量的 ID。然后将 ID 映射到 MySQL 中存储的相应视频。</p>
+<p>在本教程中，您将学习如何构建视频相似性搜索系统。本教程使用 Tumblr 上的约 100 个 gif 动画来构建系统。不过，您也可以准备自己的视频数据集。系统首先使用 OpenCV 提取视频中的关键帧，然后使用 ResNet-50 获取每个关键帧的特征向量。所有向量都存储在 Milvus 中并进行搜索，它会返回相似向量的 ID。然后将 ID 映射到 MySQL 中存储的相应视频。</p>
 <p><br/></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/video_search.png" alt="video_search" class="doc-image" id="video_search" />
-   </span> <span class="img-wrapper"> <span>视频搜索</span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/video_search_demo.gif" alt="video_search_demo" class="doc-image" id="video_search_demo" /><span>视频搜索演示</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/video_search.png" alt="video_search" class="doc-image" id="video_search" />
+   </span> <span class="img-wrapper"> <span>视频搜索</span> </span> <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/video_search_demo.gif" alt="video_search_demo" class="doc-image" id="video_search_demo" /><span>视频搜索演示</span> </span></p>

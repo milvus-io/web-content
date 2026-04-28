@@ -77,7 +77,7 @@ title: Integrazione della funzione di inclusione del testo di Milvus con LangCha
   <span class="hljs-attr">apikey_dev:</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_OPENAI_API_KEY&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Indicare a Milvus quale chiave utilizzare per le chiamate OpenAI</strong></p>
+<p><strong>Indicare a Milvus quale chiave utilizzare per le chiamate a OpenAI</strong></p>
 <p>Nello stesso file, indicare al provider OpenAI l'etichetta che si desidera utilizzare.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
@@ -208,7 +208,7 @@ vector_store = Milvus(
       </svg>
     </button></h3><table>
 <thead>
-<tr><th>Caratteristica</th><th>Incorporamento LangChain (lato client)</th><th>Funzione di incorporamento del testo di Milvus (lato server)</th></tr>
+<tr><th>Caratteristica</th><th>Incorporamento LangChain (lato client)</th><th>Funzione di incorporamento del testo Milvus (lato server)</th></tr>
 </thead>
 <tbody>
 <tr><td><strong>Posizione di elaborazione</strong></td><td>Applicazione client</td><td>Server Milvus</td></tr>

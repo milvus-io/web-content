@@ -57,7 +57,7 @@ summary: Scoprite come distribuire un cluster Milvus su Azure.
 <li><a href="https://helm.sh/docs/intro/install/">Helm</a></li>
 </ul>
 <p>In alternativa, è possibile utilizzare <a href="https://learn.microsoft.com/en-us/azure/cloud-shell/overview">Cloud Shell</a>, che ha preinstallato Azure CLI, kubectl e Helm.</p>
-<div class="alert note">Dopo aver installato la Azure CLI, assicuratevi di essere autenticati correttamente. </div>
+<div class="alert note">Dopo aver installato la Azure CLI, assicuratevi di essere correttamente autenticati. </div>
 <h2 id="Provision-a-Kubernetes-cluster" class="common-anchor-header">Provisionare un cluster Kubernetes<button data-href="#Provision-a-Kubernetes-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -242,7 +242,7 @@ helm repo update
 helm install -f values.yaml my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Nei comandi precedenti, aggiungiamo il repo dei grafici di Milvus Helm in locale e aggiorniamo il repo per recuperare i grafici più recenti. Poi installiamo un'istanza di Milvus e la chiamiamo <strong>my-release</strong>.</p>
-<p>Notate il valore config <code translate="no">service.type</code>, che indica che vogliamo esporre l'istanza Milvus attraverso un bilanciatore di carico Layer-4.</p>
+<p>Notate il valore di config <code translate="no">service.type</code>, che indica che vogliamo esporre l'istanza Milvus attraverso un bilanciatore di carico Layer-4.</p>
 <h2 id="Verify-the-deployment" class="common-anchor-header">Verificare la distribuzione<button data-href="#Verify-the-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

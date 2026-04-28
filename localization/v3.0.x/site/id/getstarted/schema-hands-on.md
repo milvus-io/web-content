@@ -27,7 +27,7 @@ summary: >-
 <p>Milvus memungkinkan Anda untuk menentukan model data pencarian melalui skema koleksi, mengatur data yang tidak terstruktur, representasi vektor yang padat atau jarang, dan metadata terstruktur. Baik Anda bekerja dengan teks, gambar, atau tipe data lainnya, panduan praktis ini akan membantu Anda memahami dan menerapkan konsep-konsep skema utama untuk mendesain model data pencarian dalam praktiknya.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
    </span> <span class="img-wrapper"> <span>Anatomi Model Data</span> </span></p>
 <h2 id="Data-Model" class="common-anchor-header">Model Data<button data-href="#Data-Model" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -383,7 +383,7 @@ schema := entity.NewSchema()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah skema dibuat, langkah selanjutnya adalah menentukan bidang yang akan menjadi bagian dari data Anda. Setiap field diasosiasikan dengan tipe data dan atributnya masing-masing.</p>
+    </button></h3><p>Setelah skema dibuat, langkah selanjutnya adalah menentukan bidang yang akan terdiri dari data Anda. Setiap field diasosiasikan dengan tipe data dan atributnya masing-masing.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType

@@ -34,7 +34,7 @@ title: AIMonとmilvusでLLM出願の検索品質を向上させる
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このチュートリアルでは、<a href="https://meetingbank.github.io/">会議バンクのデータセットに関する</a>質問に回答する検索支援世代（RAG）チャットボットを構築するお手伝いをします。</p>
+    </button></h2><p>このチュートリアルでは、<a href="https://meetingbank.github.io/">会議バンクのデータセットに関する</a>質問に回答する検索拡張世代（RAG）チャットボットを構築するお手伝いをします。</p>
 <p>このチュートリアルでは以下のことを学びます：</p>
 <ul>
 <li>会議バンクデータセットに関連するユーザーの質問に答えるLLMアプリケーションを構築する。</li>
@@ -345,7 +345,7 @@ queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_
     </button></h1><p>この品質スコア指標は、上記のクエリセットに対するLLMの応答がどの程度優れているかを理解するのに役立ちます。アプリケーションの品質を測定するために、一連のクエリを実行し、これらすべてのクエリの品質スコアを集計します。</p>
 <p>LLMアプリケーション品質スコアは、AIMonの3つの個別品質メトリクスの組み合わせです：</p>
 <ol>
-<li><strong>幻覚スコア</strong>（hall_score）：生成されたテキストが提供されたコンテキストに根拠があるかどうかをチェックする。スコアが1.0に近いほど幻覚の兆候が強く、0.0に近いほど幻覚の兆候が低いことを意味する。したがって、最終的な品質スコアを計算する際には、ここでは（1.0-hall_score）を使用する。</li>
+<li><strong>幻覚スコア</strong>（hall_score）：生成されたテキストが提供されたコンテキストに根拠があるかどうかをチェックする。スコアが1.0に近いほど幻覚の兆候が強く、0.0に近いほど幻覚の兆候が低いことを意味する。したがって、ここでは最終的な品質スコアを計算する際に（1.0-hall_score）を使用する。</li>
 <li><strong>指示遵守スコア</strong>（ia_score）：提供されたすべての明示的指示がLLMによって遵守されたかどうかをチェックする。ia_scoreが高いほど、指示の遵守度が高い。スコアが低いほど、指示の遵守度が低い。</li>
 <li><strong>検索関連度スコア</strong>（rr_score）：検索された文書がクエリに関連しているかどうかをチェックする。スコアが100.0に近いほどクエリとの関連性が高く、0.0に近いほどクエリとの関連性が低いことを意味する。</li>
 </ol>
@@ -527,10 +527,10 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
         ></path>
       </svg>
     </button></h1><p>今度は、ベクトルDBを追加することで品質スコアを向上させる。これは、以前のアプローチと比較して、クエリのレイテンシを改善するのにも役立つ。</p>
-<p>注意すべき主なコンポーネントは2つある：インジェストとRAGベースのQ&amp;Aである。インジェストパイプラインは、Meeting Bankデータセットからトランスクリプトを処理し、Milvus Vectorデータベースに格納する。RAG Q&amp;Aパイプラインは、まずベクターストアから関連ドキュメントを取得することで、ユーザクエリを処理する。これらの文書はLLMが回答を生成するための基礎文書として使用される。AIMonを活用して品質スコアを計算し、<a href="https://docs.aimon.ai/detectors/hallucination">幻覚</a>、<a href="https://docs.aimon.ai/detectors/instruction_adherence">指示の遵守</a>、<a href="https://docs.aimon.ai/checker-models/context_relevance">文脈の関連</a>性についてアプリケーションを継続的に監視する。これらは、上記の<code translate="no">quality</code> スコアの定義に使用したのと同じ3つのメトリクスです。</p>
+<p>注意すべき主なコンポーネントは2つある：インジェストとRAGベースのQ&amp;Aである。インジェストパイプラインは、Meeting Bankデータセットからトランスクリプトを処理し、Milvus Vectorデータベースに格納する。RAG Q&amp;Aパイプラインは、まずベクターストアから関連ドキュメントを取得することで、ユーザクエリを処理する。これらの文書はLLMが回答を生成するための基礎文書として使用される。AIMonを活用して品質スコアを計算し、<a href="https://docs.aimon.ai/detectors/hallucination">幻覚</a>、<a href="https://docs.aimon.ai/detectors/instruction_adherence">指示の順守</a>、<a href="https://docs.aimon.ai/checker-models/context_relevance">文脈の関連</a>性についてアプリケーションを継続的に監視する。これらは、上記の<code translate="no">quality</code> スコアの定義に使用したのと同じ3つのメトリクスです。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
    </span> <span class="img-wrapper"> <span>ワークフロー</span> </span></p>
 <p>以下は、ドキュメントの前処理と埋め込みを計算するためのユーティリティ関数です。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -612,7 +612,7 @@ llm = OpenAI(model=<span class="hljs-string">&quot;gpt-4o-mini&quot;</span>, tem
 
 query_engine = RetrieverQueryEngine.from_args(retriever, llm)
 <button class="copy-code-btn"></button></code></pre>
-<p>この時点で、クエリーエンジン、レトリーバー、LLMのセットアップが完了した。次に、品質スコアを測定するためのAIMonをセットアップします。上の前のセルで作成したのと同じ<code translate="no">@detect</code> デコレーターを使用します。<code translate="no">ask_and_validate</code> 、AIMonがLLamaIndexから取得したドキュメントの "ノード "とインターフェースするためのコードを追加しただけだ。</p>
+<p>この時点で、クエリーエンジン、レトリーバー、LLMのセットアップが完了した。次に、品質スコアを測定するためのAIMonをセットアップします。上の前のセルで作成したのと同じ<code translate="no">@detect</code> デコレーターを使用します。<code translate="no">ask_and_validate</code> 、AIMonがLLamaIndexから取得したドキュメントの "ノード "とインターフェースするためのコードだけが追加されている。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> logging
 
 
@@ -905,7 +905,7 @@ Avg. Retrieval relevance score across chunks: 41.417109763746396 for query: What
 Avg. Retrieval relevance score across chunks: 43.34866213159572 for query: What did the team decide about the project timeline?
 Time elapsed: 97.93312644958496 seconds
 </code></pre>
-<p>リランカーを使用した場合と使用しなかった場合、そして素朴で力任せのアプローチを使用した場合の、文書関連性スコアの平均値の違いに注目してください。</p>
+<p>リランカーを使用した場合と使用しなかった場合、そして素朴で力任せなアプローチを使用した場合の、文書関連性スコアの平均値の違いに注目してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># This is the average quality score.</span>
 avg_quality_score_rr = statistics.mean(qual_scores_rr)
 <span class="hljs-built_in">print</span>(
@@ -945,7 +945,7 @@ avg_retrieval_rel_score_rr = statistics.mean(avg_retrieval_rel_scores_rr)
 <p>まとめると、下図に示すように、以下のことが実証されました：</p>
 <ul>
 <li>幻覚スコア、指示遵守スコア、検索関連性スコアの3つの異なる品質メトリクスの重み付けされた組み合わせを使用した品質スコアの計算。</li>
-<li>ブルートフォース（総当たり）文字列マッチング・アプローチを使って、クエリに文書をマッチングさせ、それをLLMに渡すことで、品質ベースラインを確立。</li>
+<li>ブルートフォース（総当り）文字列マッチング・アプローチを使って、クエリに文書をマッチングさせ、それをLLMに渡すことで、品質ベースラインを確立。</li>
 <li>ベクターDB（ここではmilvusを使用）を使ってベースラインの品質を改善。</li>
 <li>AIMonの低レイテンシーでドメインに適応可能な再ランカーを使い、品質スコアをさらに向上させた。</li>
 <li>また、AIMonのリランカーを追加することで、検索関連性が大幅に向上することも示した。</li>
@@ -1035,4 +1035,4 @@ df_scores
   </tbody>
 </table>
 <p>上記の表は、私たちの結果をまとめたものです。実際の数値は、LLM回答の品質のばらつき、VectorDBの最近傍探索のパフォーマンスなど、様々な要因によって異なります。</p>
-<p>結論として、下図に示すように、LLMアプリケーションの品質スコア、RAG関連性、命令フォロー能力を評価しました。AIMonのリランカーを使用して、アプリケーションの全体的な品質と、お客様のRAGから検索されたドキュメントの平均的な関連性を改善しました。</p>
+<p>結論として、下図に示すように、LLMアプリケーションの品質スコア、RAG関連性、命令フォロー能力を評価しました。AIMonのリランカーを使用して、アプリケーションの全体的な品質と、お客様のRAGから検索された文書の平均的な関連性を改善しました。</p>

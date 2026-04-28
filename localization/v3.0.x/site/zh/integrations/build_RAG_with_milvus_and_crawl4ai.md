@@ -27,7 +27,7 @@ title: 使用 Milvus 和 Crawl4AI 构建 RAG
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://crawl4ai.com/mkdocs/">Crawl4AI</a>可为 LLMs 提供超快的人工智能就绪网络爬行。它开源并针对 RAG 进行了优化，通过高级提取和实时性能简化了抓取工作。</p>
-<p>在本教程中，我们将向您展示如何使用 Milvus 和 Crawl4AI 构建一个检索增强生成（RAG）管道。该管道集成了用于网络数据抓取的 Crawl4AI、用于向量存储的 Milvus 和用于生成有洞察力的上下文感知响应的 OpenAI。</p>
+<p>在本教程中，我们将向您展示如何使用 Milvus 和 Crawl4AI 构建一个检索增强生成（RAG）管道。该管道集成了用于网络数据抓取的 Crawl4AI、用于向量存储的 Milvus 和用于生成具有洞察力的上下文感知响应的 OpenAI。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

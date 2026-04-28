@@ -33,7 +33,7 @@ title: 使用 Milvus 进行上下文检索
 <li><code translate="no">Document Enhancement</code>:查询重写是现代信息检索中的一项重要技术，通常使用辅助信息使查询更具信息性。同样，为了在 RAG 中获得更好的性能，在索引之前使用 LLM 对文档进行预处理（例如，清理数据源、补充丢失的信息、总结等）可以显著提高检索到相关文档的几率。换句话说，这一预处理步骤有助于使文档在相关性方面更接近查询。</li>
 <li><code translate="no">Low-Cost Processing by Caching Long Context</code>:使用 LLMs 处理文档时，人们普遍关心的一个问题是成本。KVCache 是一种流行的解决方案，它允许重复使用同一上下文的中间结果。大多数托管 LLM 供应商都将这一功能对用户透明化，而 Anthropic 则让用户控制缓存过程。当缓存命中时，大多数计算都可以被保存（当长上下文保持不变，但每个查询的指令发生变化时，这种情况很常见）。更多详情，请点击<a href="https://www.anthropic.com/news/prompt-caching">此处</a>。</li>
 </ul>
-<p>在本笔记本中，我们将演示如何使用 Milvus 与 LLM 执行上下文检索，将密集-稀疏混合检索与 Reranker 结合起来，创建一个逐渐强大的检索系统。数据和实验设置均基于<a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">上下文检索</a>。</p>
+<p>在本笔记本中，我们将演示如何使用 Milvus 与 LLM 执行上下文检索，将密集-稀疏混合检索与 Reranker 结合起来，创建一个逐渐强大的检索系统。数据和实验设置基于<a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">上下文检索</a>。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,7 +49,22 @@ title: 使用 Milvus 进行上下文检索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">安装依赖项</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">安装依赖项<button data-href="#Install-Dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install tqdm</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install anthropic</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -602,7 +617,7 @@ Total queries: 248
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>通过添加一个 Cohere Reranker，可以进一步改善结果。我们无需单独初始化一个带有 Reranker 的新检索器，只需简单配置现有检索器即可使用 Reranker，从而提高性能。</p>
+    </button></h2><p>通过添加一个 Cohere Reranker，可以进一步改善结果。我们无需单独初始化一个带有 Reranker 的新检索器，只需将现有检索器配置为使用 Reranker 即可提高性能。</p>
 <pre><code translate="no" class="language-python">contextual_retriever.use_reranker = <span class="hljs-literal">True</span>
 contextual_retriever.rerank_function = cohere_rf
 <button class="copy-code-btn"></button></code></pre>

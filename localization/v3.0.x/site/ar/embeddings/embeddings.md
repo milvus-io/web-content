@@ -25,7 +25,7 @@ title: نظرة عامة على التضمين
 <li><p><strong>التضمين الكثيف</strong>: تمثل معظم نماذج التضمين المعلومات كمتجه ذي نقطة عائمة من مئات إلى آلاف الأبعاد. ويسمى الناتج متجهات "كثيفة" لأن معظم الأبعاد لها قيم غير صفرية. على سبيل المثال، يُخرج نموذج التضمين مفتوح المصدر الشهير BAAI/bge-base-en-v1.5 متجهات مكونة من 768 رقم فاصلة عائمة (متجه عائم ذو 768 بُعدًا).</p></li>
 <li><p><strong>التضمين المتناثر</strong>: في المقابل، تحتوي متجهات مخرجات التضمينات المتفرقة على معظم أبعادها صفر، أي المتجهات "المتفرقة". هذه المتجهات غالبًا ما يكون لها أبعاد أعلى بكثير (عشرات الآلاف أو أكثر) والتي يتم تحديدها حسب حجم المفردات الرمزية. يمكن توليد المتجهات المتفرقة بواسطة الشبكات العصبية العميقة أو التحليل الإحصائي للنصوص. ونظرًا لقابليتها للتفسير وقدرات التعميم الأفضل خارج النطاق، يتم اعتماد التضمينات المتفرقة بشكل متزايد من قبل المطورين كمكمل للتضمينات الكثيفة.</p></li>
 </ul>
-<p>Milvus هي قاعدة بيانات متجهة مصممة لإدارة البيانات المتجهة وتخزينها واسترجاعها. من خلال دمج نماذج التضمين <a href="https://milvus.io/docs/rerankers-overview.md">وإعادة التصنيف</a> السائدة، يمكنك بسهولة تحويل النص الأصلي إلى متجهات قابلة للبحث أو إعادة تصنيف النتائج باستخدام نماذج قوية لتحقيق نتائج أكثر دقة لـ RAG. يعمل هذا التكامل على تبسيط عملية تحويل النص وإلغاء الحاجة إلى مكونات تضمين أو إعادة ترتيب إضافية، وبالتالي تبسيط عملية تطوير RAG والتحقق من صحة النتائج.</p>
+<p>Milvus هي قاعدة بيانات متجهة مصممة لإدارة البيانات المتجهة وتخزينها واسترجاعها. من خلال دمج نماذج التضمين <a href="https://milvus.io/docs/rerankers-overview.md">وإعادة الترتيب</a> السائدة، يمكنك بسهولة تحويل النص الأصلي إلى متجهات قابلة للبحث أو إعادة ترتيب النتائج باستخدام نماذج قوية لتحقيق نتائج أكثر دقة لـ RAG. يعمل هذا التكامل على تبسيط عملية تحويل النص وإلغاء الحاجة إلى مكونات تضمين أو إعادة ترتيب إضافية، وبالتالي تبسيط عملية تطوير RAG والتحقق من صحة النتائج.</p>
 <p>لإنشاء تضمينات أثناء العمل، راجع <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">استخدام نموذج PyMilvus لتوليد تضمينات نصية</a>.</p>
 <table>
 <thead>
@@ -39,7 +39,7 @@ title: نظرة عامة على التضمين
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/VoyageEmbeddingFunction/VoyageEmbeddingFunction.md">فوياجاي</a></td><td>كثيف</td><td>واجهة برمجة التطبيقات</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/JinaEmbeddingFunction/JinaEmbeddingFunction.md">جينا</a></td><td>كثيفة</td><td>واجهة برمجة التطبيقات</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/CohereEmbeddingFunction/CohereEmbeddingFunction.md">التماسك</a></td><td>كثيف</td><td>واجهة برمجة التطبيقات</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/InstructorEmbeddingFunction/InstructorEmbeddingFunction.md">مدرب</a></td><td>كثيف</td><td>مفتوح المصدر</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/InstructorEmbeddingFunction/InstructorEmbeddingFunction.md">مدرس</a></td><td>كثيف</td><td>مفتوح المصدر</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/MistralAIEmbeddingFunction/MistralAIEmbeddingFunction.md">ميسترال للذكاء الاصطناعي</a></td><td>كثيف</td><td>واجهة برمجة التطبيقات</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/NomicEmbeddingFunction/NomicEmbeddingFunction.md">نوميكس</a></td><td>كثيف</td><td>واجهة برمجة التطبيقات</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/Model2VecEmbeddingFunction/Model2VecEmbeddingFunction.md">mGTE</a></td><td>هجين</td><td>مفتوح المصدر</td></tr>
@@ -62,7 +62,7 @@ title: نظرة عامة على التضمين
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لاستخدام دالات التضمين مع Milvus، قم أولاً بتثبيت مكتبة عميل PyMilvus مع الحزمة الفرعية <code translate="no">model</code> التي تغلف جميع الأدوات المساعدة لتوليد التضمين.</p>
+    </button></h2><p>لاستخدام دوال التضمين مع Milvus، قم أولاً بتثبيت مكتبة عميل PyMilvus مع الحزمة الفرعية <code translate="no">model</code> التي تغلف جميع الأدوات المساعدة لتوليد التضمين.</p>
 <pre><code translate="no" class="language-python">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>تدعم الحزمة الفرعية <code translate="no">model</code> نماذج التضمين المختلفة، من <a href="https://milvus.io/docs/embed-with-openai.md">OpenAI،</a> <a href="https://milvus.io/docs/embed-with-sentence-transform.md">ومحولات الجملة،</a> و <a href="https://milvus.io/docs/embed-with-bgm-m3.md">BGE M3،</a> إلى نماذج <a href="https://milvus.io/docs/embed-with-splade.md">SPLADE</a> المدربة مسبقًا. وللتبسيط، يستخدم هذا المثال <code translate="no">DefaultEmbeddingFunction</code> وهو نموذج محولات الجمل من طراز <strong>MiniLM-L6-v2 بالكامل،</strong> ويبلغ حجم النموذج حوالي 70 ميغابايت وسيتم تنزيله أثناء الاستخدام الأول:</p>

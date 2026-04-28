@@ -2,8 +2,10 @@
 id: tei-ranker.md
 title: TEI 排行榜Compatible with Milvus 2.6.x
 summary: >-
-  TEI Ranker 利用 Hugging Face 的 Text Embedding Inference (TEI)
-  服務，透過語意重新排序來提升搜尋相關性。它代表了一種先進的搜尋結果排序方法，超越了傳統的向量相似性。
+  The TEI Ranker leverages the Text Embedding Inference (TEI) service from
+  Hugging Face to enhance search relevance through semantic reranking. It
+  represents an advanced approach to search result ordering that goes beyond
+  traditional vector similarity.
 beta: Milvus 2.6.x
 ---
 <h1 id="TEI-Ranker" class="common-anchor-header">TEI 排行榜<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#TEI-Ranker" class="anchor-icon" translate="no">

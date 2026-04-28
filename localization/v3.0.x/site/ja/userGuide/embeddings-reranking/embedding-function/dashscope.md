@@ -62,7 +62,7 @@ beta: Milvus 2.6.x
      <td><p>中国語, 英語, スペイン語, フランス語, ポルトガル語, インドネシア語, 日本語, 韓国語, ドイツ語, ロシア語</p></td>
    </tr>
 </table>
-<p>埋め込みモデル<strong>text-embedding-v3は</strong>、<code translate="no">dim</code> パラメータによって埋め込みサイズを小さくすることをサポートしています。一般的に、埋め込みサイズが大きいと、計算、メモリ、ストレージの観点から、より高価になります。次元数を調整できることで、全体的なコストとパフォーマンスをよりコントロールできるようになります。各モデルの詳細については、<a href="https://help.aliyun.com/zh/model-studio/user-guide/embedding?disableWebsiteRedirect=true">エンベッディングを</a>参照してください。</p>
+<p>埋め込みモデル<strong>text-embedding-v3は</strong>、<code translate="no">dim</code> パラメータによって埋め込みサイズを小さくすることができます。一般的に、埋め込みサイズが大きいと、計算、メモリ、ストレージの観点から、より高価になります。次元数を調整できることで、全体的なコストとパフォーマンスをよりコントロールできるようになります。各モデルの詳細については、<a href="https://help.aliyun.com/zh/model-studio/user-guide/embedding?disableWebsiteRedirect=true">エンベッディングを</a>参照してください。</p>
 <h2 id="Configure-credentials" class="common-anchor-header">認証情報の構成<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -113,7 +113,7 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>APIキーをここに記述することで、再起動後もAPIキーが保持され、ラベルを変更するだけでAPIキーを切り替えることができます。</p></li>
+<p>ここにAPIキーを記述することで、再起動後もAPIキーが保持され、ラベルを変更するだけでAPIキーを切り替えることができます。</p></li>
 <li><p><strong>DashScopeの呼び出しに使用するキーをMilvusに伝える。</strong></p>
 <p>同じファイルで、DashScope プロバイダーに使用するラベルを指定します。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
@@ -180,7 +180,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>認証情報の設定が完了したら、以下の手順で埋め込み関数を定義し、使用します。</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">ステップ1: スキーマフィールドの定義<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">ステップ1：スキーマフィールドの定義<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

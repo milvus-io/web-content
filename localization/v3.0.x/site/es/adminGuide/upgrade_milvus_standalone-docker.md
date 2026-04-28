@@ -211,7 +211,7 @@ docker compose logs standalone | grep <span class="hljs-string">&quot;version&qu
         ></path>
       </svg>
     </button></h2><ul>
-<li>Es posible que también desee aprender cómo:<ul>
+<li>También puede aprender a:<ul>
 <li><a href="/docs/es/scaleout.md">Escalar un clúster Milvus</a></li>
 </ul></li>
 <li>Si está listo para desplegar su cluster en nubes:<ul>

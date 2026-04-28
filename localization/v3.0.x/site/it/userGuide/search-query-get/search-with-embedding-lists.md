@@ -40,7 +40,7 @@ summary: >-
       </svg>
     </button></h2><p>Per costruire un sistema di recupero del testo, potrebbe essere necessario dividere i documenti in pezzi e memorizzare ogni pezzo insieme ai suoi embedding come entità in un database vettoriale per garantire precisione e accuratezza, soprattutto per i documenti lunghi in cui gli embedding a testo pieno potrebbero diluire la specificità semantica o superare i limiti di input del modello.</p>
 <p>Tuttavia, la memorizzazione dei dati in chunk porta a risultati di ricerca chunk-wise, il che significa che il recupero identifica inizialmente <em>segmenti</em> rilevanti piuttosto che <em>documenti</em> coesi. Per ovviare a questo problema, è necessario eseguire un'ulteriore elaborazione post-ricerca.</p>
-<p>ColBERT (arXiv: <a href="https://arxiv.org/abs/2004.12832">2004.12832</a>) è un sistema di recupero di testi che offre una ricerca efficiente ed efficace dei passaggi attraverso interazioni tardive contestualizzate su BERT. Consente la codifica token-wise indipendente di query e documenti e calcola la loro somiglianza.</p>
+<p>ColBERT (arXiv: <a href="https://arxiv.org/abs/2004.12832">2004.12832</a>) è un sistema di recupero di testi che offre una ricerca efficiente ed efficace dei passaggi attraverso interazioni tardive contestualizzate su BERT. Consente la codifica token-wise indipendente di query e documenti e ne calcola la similarità.</p>
 <h3 id="Token-wise-encoding" class="common-anchor-header">Codifica per token<button data-href="#Token-wise-encoding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -472,7 +472,7 @@ df = ds[<span class="hljs-string">&#x27;test&#x27;</span>].to_pandas()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Come illustrato nella sezione <a href="/docs/it/search-with-embedding-lists.md#ColPali-extension">Panoramica</a>, il modello ColPali è un VLM che proietta le immagini nello spazio vettoriale di un modello di testo. In questo passo, utilizzeremo l'ultimo modello ColPali <strong>vidore/colpali-v1.3</strong>. I dettagli su questo modello sono disponibili a <a href="https://huggingface.co/vidore/colpali-v1.3">questa pagina</a>.</p>
+    </button></h3><p>Come illustrato nella sezione <a href="/docs/it/search-with-embedding-lists.md#ColPali-extension">Panoramica</a>, il modello ColPali è un VLM che proietta le immagini nello spazio vettoriale di un modello di testo. In questa fase utilizzeremo l'ultimo modello ColPali <strong>vidore/colpali-v1.3</strong>. I dettagli su questo modello sono disponibili a <a href="https://huggingface.co/vidore/colpali-v1.3">questa pagina</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> cast
 <span class="hljs-keyword">from</span> colpali_engine.models <span class="hljs-keyword">import</span> ColPali, ColPaliProcessor

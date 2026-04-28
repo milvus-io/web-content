@@ -20,7 +20,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南介绍如何在 Milvus 2.6.x 中启用和使用 Woodpecker 作为先写日志（WAL）。Woodpecker 是专为对象存储设计的云原生 WAL，具有高吞吐量、低操作符和无缝可扩展性。有关架构和基准的详细信息，请参阅<a href="/docs/zh/woodpecker_architecture.md">Woodpecker</a>。</p>
+    </button></h1><p>本指南介绍如何在 Milvus 2.6.x 中启用和使用 Woodpecker 作为先写日志（WAL）。Woodpecker 是专为对象存储设计的云原生 WAL，具有高吞吐量、低操作符和无缝可扩展性。有关架构和基准的详细信息，请参阅<a href="/docs/zh/v2.6.x/woodpecker_architecture.md">Woodpecker</a>。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -162,45 +162,7 @@ beta: Milvus 2.6.x
 <p>备注</p>
 <ul>
 <li>使用<code translate="no">minio</code> ，啄木鸟与 Milvus 共享相同的对象存储（MinIO/S3/GCS/OSS 等）。</li>
-<li>通过<code translate="no">local</code> ，单节点本地磁盘仅适用于 Standalone。如果所有 pod 都能访问共享文件系统（如 NFS），集群模式也可使用<code translate="no">local</code> 。</li>
-</ul>
-<h2 id="Object-storage-compatibility-for-storagetypeminio" class="common-anchor-header">对象存储的兼容性<code translate="no">storage.type=minio</code><button data-href="#Object-storage-compatibility-for-storagetypeminio" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>下表总结了目前已知的对象存储后端在啄木鸟配置为<code translate="no">storage.type=minio</code> 时的兼容性。此信息基于<a href="https://github.com/zilliztech/woodpecker/discussions/150">GitHub 讨论 #150</a>。</p>
-<table>
-<thead>
-<tr><th>提供商/服务</th><th>状态</th><th>备注</th></tr>
-</thead>
-<tbody>
-<tr><td>Azure Blob 存储</td><td>支持</td><td>使用本地 Azure SDK。</td></tr>
-<tr><td>AWS S3</td><td>支持</td><td>完全支持条件写入的本地 S3。</td></tr>
-<tr><td>MinIO (<code translate="no">&gt;= 2024-12</code>)</td><td>支持</td><td>完全支持 S3 条件写入。</td></tr>
-<tr><td>阿里云开放源码软件</td><td>支持</td><td>通过其 S3 兼容接口提供支持。</td></tr>
-<tr><td>腾讯 COS</td><td>支持</td><td>通过其 S3 兼容接口支持。</td></tr>
-<tr><td>谷歌云存储（GCS）</td><td>支持</td><td>通过 S3 互操作模式支持。</td></tr>
-<tr><td>华为云 OBS</td><td>不支持</td><td>缺乏所需的条件写入语义。</td></tr>
-<tr><td>VAST 数据</td><td>支持</td><td>已通过社区验证；仅适用于非版本控制的存储桶。</td></tr>
-<tr><td>其他 S3 兼容存储</td><td>部分支持</td><td>取决于对 S3 条件写入语义的完全支持。</td></tr>
-</tbody>
-</table>
-<p>备注：</p>
-<ul>
-<li>兼容性取决于本地 SDK 支持或 S3 条件写入语义支持。</li>
-<li>如果为啄木鸟自托管 MinIO，请使用<code translate="no">RELEASE.2024-12-18T13-15-44Z</code> 或更高版本。</li>
-<li>此矩阵反映了<a href="https://github.com/zilliztech/woodpecker/discussions/150">当前的讨论情况</a>，可能会随着后端支持的进一步验证而发生变化。</li>
+<li>通过<code translate="no">local</code> ，单节点本地磁盘仅适用于 Standalone。如果所有 pod 都能访问共享文件系统（如 NFS），集群模式也可以使用<code translate="no">local</code> 。</li>
 </ul>
 <h2 id="Deployment-guides" class="common-anchor-header">部署指南<button data-href="#Deployment-guides" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -217,7 +179,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="common-anchor-header">为 Kubernetes 上的 Milvus 群集启用 Woodpecker（Milvus 操作符，存储=minio）<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="common-anchor-header">为 Kubernetes 上的 Milvus 群集启用啄木鸟（Milvus 操作符，存储=minio）<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -232,7 +194,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>安装<a href="/docs/zh/install_cluster-milvusoperator.md">Milvus 操作符</a>后，使用官方示例启动启用 Woodpecker 的 Milvus 集群：</p>
+    </button></h3><p>安装<a href="/docs/zh/v2.6.x/install_cluster-milvusoperator.md">Milvus 操作符</a>后，使用官方示例启动启用 Woodpecker 的 Milvus 群集：</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 
 <button class="copy-code-btn"></button></code></pre>
@@ -258,7 +220,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <p>运行以下命令卸载 Milvus 集群。</p>
 <pre><code translate="no" class="language-bash">kubectl delete milvus my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>如果需要调整 Woodpecker 参数，请按照<a href="/docs/zh/deploy_pulsar.md">消息存储配置</a>中所述进行设置。</p>
+<p>如果需要调整 Woodpecker 参数，请按照<a href="/docs/zh/v2.6.x/deploy_pulsar.md">消息存储配置</a>中所述进行设置。</p>
 <h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Helm-Chart-storageminio" class="common-anchor-header">为 Kubernetes 上的 Milvus 群集启用 Woodpecker（Helm 图表，存储=minio）<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Helm-Chart-storageminio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -274,7 +236,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>首先按照在<a href="/docs/zh/install_cluster-helm.md">Kubernetes 中使用 Helm 运行 Milvus 中的</a>描述，添加并更新<a href="/docs/zh/install_cluster-helm.md">Milvus</a> Helm 图表。</p>
+    </button></h3><p>首先按照在<a href="/docs/zh/v2.6.x/install_cluster-helm.md">Kubernetes 中使用 Helm 运行 Milvus 中的</a>描述，添加并更新<a href="/docs/zh/v2.6.x/install_cluster-helm.md">Milvus</a> Helm 图表。</p>
 <p>然后使用以下示例之一进行部署：</p>
 <p>- 集群部署（建议设置为启用 Woodpecker 和流节点）：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
@@ -293,7 +255,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>部署后，按照文档进行端口转发和连接。要调整 Woodpecker 参数，请按照<a href="/docs/zh/deploy_pulsar.md">消息存储配置</a>中所述的设置进行。</p>
+<p>部署后，按照文档进行端口转发和连接。要调整 Woodpecker 参数，请按照<a href="/docs/zh/v2.6.x/deploy_pulsar.md">消息存储配置</a>中所述的设置进行。</p>
 <h3 id="Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="common-anchor-header">在 Docker 中为 Milvus Standalone 启用啄木鸟（存储=本地）<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -309,7 +271,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>按照<a href="/docs/zh/install_standalone-docker.md">在 Docker 中运行 Milvus 的</a>步骤操作。示例：</p>
+    </button></h3><p>按照<a href="/docs/zh/v2.6.x/install_standalone-docker.md">在 Docker 中运行 Milvus 的</a>步骤操作。示例：</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 
@@ -341,7 +303,7 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><a href="/docs/zh/install_standalone-docker-compose.md">使用 Docker Compose 运行 Milvus</a>。示例：</p>
+    </button></h3><p><a href="/docs/zh/v2.6.x/install_standalone-docker-compose.md">使用 Docker Compose 运行 Milvus</a>。示例：</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp-compose &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp-compose
 wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml
 <span class="hljs-comment"># By default, the Docker Compose standalone uses Woodpecker</span>
@@ -376,10 +338,10 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>根据<a href="/docs/zh/woodpecker_architecture.md">Woodpecker</a> 中的基准和后端限制，从以下方面优化端到端写吞吐量：</p>
+    </button></h2><p>根据<a href="/docs/zh/v2.6.x/woodpecker_architecture.md">Woodpecker</a> 中的基准和后端限制，从以下方面优化端到端写吞吐量：</p>
 <ul>
 <li>存储端<ul>
-<li><strong>对象存储（兼容 minio/S3）</strong>：增加并发量和对象大小（避免微小对象）。注意网络和桶带宽限制。固态硬盘上的单个 MinIO 节点本地带宽上限通常在 100 MB/s 左右；单个 EC2 到 S3 的带宽上限可达 GB/s。</li>
+<li><strong>对象存储（兼容 minio/S3）</strong>：增加并发量和对象大小（避免微小对象）。注意网络和桶带宽限制。固态硬盘上的单个 MinIO 节点本地带宽上限通常在 100 MB/s 左右；单个 EC2 至 S3 的带宽上限可达 GB/s。</li>
 <li><strong>本地/共享文件系统（本地）</strong>：首选 NVMe/高速磁盘。确保文件系统能很好地处理小规模写入和同步延迟。</li>
 </ul></li>
 <li>啄木鸟旋钮<ul>
@@ -449,7 +411,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>啄木鸟是一款云原生 WAL，设计用于对象存储，在吞吐量、成本和延迟之间进行权衡。目前支持的轻量级嵌入式模式优先考虑成本和吞吐量优化，因为大多数场景只要求在一定时间内写入数据，而不要求单个写入请求的低延迟。因此，啄木鸟采用分批写入的方式，本地文件系统存储后端默认写入间隔为 10 毫秒，类 MinIO 存储后端默认写入间隔为 200 毫秒。在慢速写操作期间，最大延迟等于间隔时间加上刷新时间。</p>
+    </button></h2><p>啄木鸟是一款云原生 WAL，设计用于对象存储，在吞吐量、成本和延迟之间进行权衡。目前支持的轻量级嵌入式模式优先考虑成本和吞吐量优化，因为大多数场景只要求在一定时间内写入数据，而不是要求单个写入请求的低延迟。因此，啄木鸟采用分批写入的方式，本地文件系统存储后端的默认写入间隔为 10 毫秒，类 MinIO 存储后端的默认写入间隔为 200 毫秒。在慢速写操作期间，最大延迟等于间隔时间加上刷新时间。</p>
 <p>请注意，批量插入不仅由时间间隔触发，还由批量大小（默认为 2MB）触发。</p>
-<p>有关架构、部署模式（MemoryBuffer / QuorumBuffer）和性能的详细信息，请参阅<a href="/docs/zh/woodpecker_architecture.md">啄木鸟架构</a>。</p>
+<p>有关架构、部署模式（MemoryBuffer / QuorumBuffer）和性能的详细信息，请参阅<a href="/docs/zh/v2.6.x/woodpecker_architecture.md">啄木鸟架构</a>。</p>
 <p>更多参数详情，请参阅 Woodpecker<a href="https://github.com/zilliztech/woodpecker">GitHub 代码库</a>。</p>

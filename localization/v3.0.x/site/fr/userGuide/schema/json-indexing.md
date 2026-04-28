@@ -52,7 +52,7 @@ summary: >-
     </button></h2><p>Lorsque vous créez un index JSON, vous spécifiez :</p>
 <ul>
 <li><p><strong>le chemin JSON</strong>: l'emplacement exact des données à indexer</p></li>
-<li><p><strong>Le type de distribution des données</strong>: Comment interpréter et stocker les valeurs indexées</p></li>
+<li><p><strong>Type de distribution des données</strong>: Comment interpréter et stocker les valeurs indexées</p></li>
 <li><p><strong>Conversion de type facultative</strong>: Transformer les données pendant l'indexation si nécessaire</p></li>
 </ul>
 <p>Voici la syntaxe pour indexer un champ JSON :</p>
@@ -166,7 +166,7 @@ index_params.add_index(
    </tr>
 </table>
 <div class="alert note">
-<p>Les tableaux doivent contenir des éléments de même type pour une indexation optimale. Pour plus d'informations, voir <a href="/docs/fr/array_data_type.md">Champ de tableau</a>.</p>
+<p>Les tableaux doivent contenir des éléments du même type pour une indexation optimale. Pour plus d'informations, voir <a href="/docs/fr/array_data_type.md">Champ de tableau</a>.</p>
 </div>
 <h3 id="Supported-cast-functions" class="common-anchor-header">Fonctions de conversion prises en charge<button data-href="#Supported-cast-functions" class="anchor-icon" translate="no">
       <svg translate="no"

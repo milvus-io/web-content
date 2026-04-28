@@ -172,7 +172,7 @@ documents = SimpleDirectoryReader(
 </ul>
 <h4 id="scalar-fields-including-doc-id--text" class="common-anchor-header">campos escalares incluindo id do documento e texto</h4><ul>
 <li><code translate="no">doc_id_field (str, optional)</code>: O nome do campo doc_id para a coleção. A predefinição é DEFAULT_DOC_ID_KEY.</li>
-<li><code translate="no">text_key (str, optional)</code>: O texto da chave que é armazenado na coleção transmitida. Utilizado quando se traz a sua própria coleção. A predefinição é DEFAULT_TEXT_KEY.</li>
+<li><code translate="no">text_key (str, optional)</code>: A chave de texto que é armazenada na coleção transmitida. Utilizado quando se traz a sua própria coleção. A predefinição é DEFAULT_TEXT_KEY.</li>
 <li><code translate="no">scalar_field_names (list, optional)</code>: Os nomes dos campos escalares extra a serem incluídos no esquema da coleção.</li>
 <li><code translate="no">scalar_field_types (list, optional)</code>: Os tipos dos campos escalares extra.</li>
 </ul>
@@ -182,7 +182,7 @@ documents = SimpleDirectoryReader(
 <li><code translate="no">embedding_field (str, optional)</code>: O nome do campo de incorporação denso para a coleção; a predefinição é DEFAULT_EMBEDDING_KEY.</li>
 <li><code translate="no">index_config (dict, optional)</code>: A configuração usada para criar o índice de incorporação densa. A predefinição é Nenhum.</li>
 <li><code translate="no">search_config (dict, optional)</code>: A configuração utilizada para pesquisar o índice denso Milvus. Note que isto tem de ser compatível com o tipo de índice especificado por <code translate="no">index_config</code>. A predefinição é Nenhum.</li>
-<li><code translate="no">similarity_metric (str, optional)</code>: A métrica de similaridade a utilizar para a incorporação densa, atualmente suporta IP, COSINE e L2.</li>
+<li><code translate="no">similarity_metric (str, optional)</code>: A métrica de similaridade a usar para a incorporação densa, atualmente suporta IP, COSINE e L2.</li>
 </ul>
 <h4 id="sparse-field" class="common-anchor-header">campo esparso</h4><ul>
 <li><code translate="no">enable_sparse (bool)</code>: Um sinalizador booleano para ativar ou desativar a incorporação esparsa. O padrão é False.</li>

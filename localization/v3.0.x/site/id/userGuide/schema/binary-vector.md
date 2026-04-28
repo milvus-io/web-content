@@ -4,7 +4,7 @@ title: Vektor Biner
 summary: >-
   Vektor biner adalah bentuk khusus representasi data yang mengubah vektor
   floating-point berdimensi tinggi tradisional menjadi vektor biner yang hanya
-  berisi 0 dan 1. Transformasi ini tidak hanya memadatkan ukuran vektor tetapi
+  berisi 0 dan 1. Transformasi ini tidak hanya memampatkan ukuran vektor tetapi
   juga mengurangi biaya penyimpanan dan komputasi dengan tetap mempertahankan
   informasi semantik. Ketika ketepatan untuk fitur yang tidak penting tidak
   diperlukan, vektor biner dapat secara efektif mempertahankan sebagian besar
@@ -46,7 +46,7 @@ summary: >-
 <p>Diagram di bawah ini menunjukkan bagaimana vektor biner merepresentasikan keberadaan kata kunci dalam konten teks. Dalam contoh ini, vektor biner 10 dimensi digunakan untuk merepresentasikan dua teks yang berbeda<strong>(Teks 1</strong> dan <strong>Teks 2</strong><strong>)</strong>, di mana setiap dimensi sesuai dengan kata dalam kosakata: 1 menunjukkan keberadaan kata tersebut dalam teks, sedangkan 0 menunjukkan ketidakhadirannya.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
    </span> <span class="img-wrapper"> <span>Vektor Biner</span> </span></p>
 <p>Vektor biner memiliki karakteristik sebagai berikut:</p>
 <ul>
@@ -59,7 +59,7 @@ summary: >-
 <p>Setelah vektorisasi biner, data dapat disimpan di Milvus untuk manajemen dan pengambilan vektor. Diagram di bawah ini menunjukkan proses dasarnya.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
    </span> <span class="img-wrapper"> <span>Menggunakan Vektor Biner</span> </span></p>
 <div class="alert note">
 <p>Meskipun vektor biner unggul dalam skenario tertentu, vektor biner memiliki keterbatasan dalam kemampuan ekspresifnya, sehingga sulit untuk menangkap hubungan semantik yang kompleks. Oleh karena itu, dalam skenario dunia nyata, vektor biner sering digunakan bersama jenis vektor lain untuk menyeimbangkan efisiensi dan ekspresifitas. Untuk informasi lebih lanjut, lihat <a href="/docs/id/dense-vector.md">Vektor Padat</a> dan <a href="/docs/id/sparse_vector.md">Vektor Jarang</a>.</p>
@@ -79,7 +79,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Menambahkan bidang vektor</h3><p>Untuk menggunakan vektor biner di Milvus, pertama-tama tentukan bidang vektor untuk menyimpan vektor biner saat membuat koleksi. Proses ini meliputi:</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Menambahkan bidang vektor<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk menggunakan vektor biner di Milvus, pertama-tama tentukan bidang vektor untuk menyimpan vektor biner saat membuat koleksi. Proses ini meliputi:</p>
 <ol>
 <li><p>Mengatur <code translate="no">datatype</code> ke tipe data vektor biner yang didukung, misalnya, <code translate="no">BINARY_VECTOR</code>.</p></li>
 <li><p>Menentukan dimensi vektor menggunakan parameter <code translate="no">dim</code>. Perhatikan bahwa <code translate="no">dim</code> harus merupakan kelipatan 8 karena vektor biner harus dikonversi menjadi larik byte saat memasukkan. Setiap 8 nilai boolean (0 atau 1) akan dikemas ke dalam 1 byte. Sebagai contoh, jika <code translate="no">dim=128</code>, array 16 byte diperlukan untuk penyisipan.</p></li>
@@ -197,7 +212,22 @@ schema.WithField(entity.NewField().
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Pada contoh ini, sebuah bidang vektor bernama <code translate="no">binary_vector</code> ditambahkan untuk menyimpan vektor biner. Tipe data dari field ini adalah <code translate="no">BINARY_VECTOR</code>, dengan dimensi 128.</p>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Mengatur parameter indeks untuk bidang vektor</h3><p>Untuk mempercepat pencarian, indeks harus dibuat untuk bidang vektor biner. Pengindeksan dapat secara signifikan meningkatkan efisiensi pengambilan data vektor berskala besar.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Mengatur parameter indeks untuk bidang vektor<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk mempercepat pencarian, indeks harus dibuat untuk bidang vektor biner. Pengindeksan dapat secara signifikan meningkatkan efisiensi pengambilan data vektor berskala besar.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -245,7 +275,22 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <p>Pada contoh di atas, indeks bernama <code translate="no">binary_vector_index</code> dibuat untuk bidang <code translate="no">binary_vector</code>, menggunakan jenis indeks <code translate="no">AUTOINDEX</code>. <code translate="no">metric_type</code> disetel ke <code translate="no">HAMMING</code>, yang menunjukkan bahwa jarak Hamming digunakan untuk pengukuran kemiripan.</p>
 <p>Milvus menyediakan berbagai jenis indeks untuk pengalaman pencarian vektor yang lebih baik. AUTOINDEX adalah jenis indeks khusus yang dirancang untuk memperlancar kurva pembelajaran pencarian vektor. Ada banyak jenis indeks yang tersedia untuk Anda pilih. Untuk detailnya, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks.</a></p>
 <p>Selain itu, Milvus mendukung metrik kemiripan lainnya untuk vektor biner. Untuk informasi lebih lanjut, lihat <a href="/docs/id/metric.md">Jenis Metrik</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">Membuat koleksi</h3><p>Setelah pengaturan vektor biner dan indeks selesai, buatlah sebuah koleksi yang berisi vektor-vektor biner. Contoh di bawah ini menggunakan metode <code translate="no">create_collection</code> untuk membuat koleksi bernama <code translate="no">my_collection</code>.</p>
+<h3 id="Create-collection" class="common-anchor-header">Membuat koleksi<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Setelah pengaturan vektor biner dan indeks selesai, buatlah sebuah koleksi yang berisi vektor-vektor biner. Contoh di bawah ini menggunakan metode <code translate="no">create_collection</code> untuk membuat koleksi bernama <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -298,7 +343,22 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Menyisipkan data</h3><p>Setelah membuat koleksi, gunakan metode <code translate="no">insert</code> untuk menambahkan data yang berisi vektor biner. Perhatikan bahwa vektor biner harus disediakan dalam bentuk larik byte, di mana setiap byte mewakili 8 nilai boolean.</p>
+<h3 id="Insert-data" class="common-anchor-header">Menyisipkan data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Setelah membuat koleksi, gunakan metode <code translate="no">insert</code> untuk menambahkan data yang berisi vektor biner. Perhatikan bahwa vektor biner harus disediakan dalam bentuk larik byte, di mana setiap byte mewakili 8 nilai boolean.</p>
 <p>Sebagai contoh, untuk vektor biner 128 dimensi, diperlukan larik 16 byte (karena 128 bit ÷ 8 bit/byte = 16 byte). Di bawah ini adalah contoh kode untuk memasukkan data:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -393,7 +453,22 @@ client.<span class="hljs-title function_">insert</span>({
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Melakukan pencarian kemiripan</h3><p>Pencarian kemiripan adalah salah satu fitur inti dari Milvus, yang memungkinkan Anda untuk dengan cepat menemukan data yang paling mirip dengan vektor kueri berdasarkan jarak antar vektor. Untuk melakukan pencarian kemiripan menggunakan vektor biner, siapkan vektor kueri dan parameter pencarian, lalu panggil metode <code translate="no">search</code>.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">Melakukan pencarian kemiripan<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pencarian kemiripan adalah salah satu fitur inti dari Milvus, yang memungkinkan Anda untuk dengan cepat menemukan data yang paling mirip dengan vektor kueri berdasarkan jarak antar vektor. Untuk melakukan pencarian kemiripan menggunakan vektor biner, siapkan vektor kueri dan parameter pencarian, lalu panggil metode <code translate="no">search</code>.</p>
 <p>Selama operasi pencarian, vektor biner juga harus disediakan dalam bentuk larik byte. Pastikan dimensi vektor kueri sesuai dengan dimensi yang ditentukan saat mendefinisikan <code translate="no">dim</code> dan setiap 8 nilai boolean diubah menjadi 1 byte.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

@@ -234,7 +234,7 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/it/manage_databases.md">Gestire i database</a></li>
 <li><a href="/docs/it/manage-collections.md">Gestire le collezioni</a></li>
 <li><a href="/docs/it/manage-partitions.md">Gestire le partizioni</a></li>
-<li><a href="/docs/it/insert-update-delete.md">Inserimento, inserimento ed eliminazione</a></li>
+<li><a href="/docs/it/insert-update-delete.md">Inserire, inserire ed eliminare</a></li>
 <li><a href="/docs/it/single-vector-search.md">Ricerca a vettore singolo</a></li>
 <li><a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>

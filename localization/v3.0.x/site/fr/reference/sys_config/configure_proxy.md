@@ -102,7 +102,7 @@ summary: Apprenez à configurer le proxy pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Nombre maximal de messages pouvant être mis en mémoire tampon dans le flux de messages timeTick du proxy lors de la production de messages.      </td>
+      <td>        Le nombre maximum de messages pouvant être mis en mémoire tampon dans le flux de messages timeTick du proxy lors de la production de messages.      </td>
       <td>512</td>
     </tr>
   </tbody>
@@ -510,7 +510,7 @@ summary: Apprenez à configurer le proxy pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Le chemin d'accès au dossier local dans lequel le fichier journal d'accès est stocké. Ce paramètre peut être spécifié lorsque proxy.accessLog.filename n'est pas vide.      </td>
+      <td>        Le chemin d'accès au dossier local où le fichier journal d'accès est stocké. Ce paramètre peut être spécifié lorsque proxy.accessLog.filename n'est pas vide.      </td>
       <td>/tmp/milvus_access</td>
     </tr>
   </tbody>
@@ -742,7 +742,7 @@ summary: Apprenez à configurer le proxy pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        intervalle de temps (en secondes) pendant lequel le gestionnaire de connexion recherche les informations sur les clients inactifs.      </td>
+      <td>        l'intervalle de temps (en secondes) pour que le gestionnaire de connexion analyse les informations sur les clients inactifs      </td>
       <td>120</td>
     </tr>
   </tbody>

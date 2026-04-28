@@ -1,8 +1,7 @@
 ---
 id: grouping-search.md
 title: グループ化検索
-summary: >-
-  グループ化検索は、Milvusが指定したフィールドの値によって検索結果をグループ化し、より高いレベルでデータを集約することを可能にします。例えば、基本的なANN検索を使用して、手元にある書籍と類似した書籍を検索することができますが、グルーピング検索を使用して、その書籍で説明されているトピックに関連する可能性のある書籍カテゴリを検索することができます。このトピックでは、キーとなる考慮事項とともに、グルーピング検索の使用方法について説明します。
+summary: ANNの検索結果をフィールド値で集約し、重複エンティティを減らすには、グルーピング検索を使用します。
 ---
 <h1 id="Grouping-Search" class="common-anchor-header">グループ化検索<button data-href="#Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -369,7 +368,50 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><code translate="no">group_size</code>:グループごとに返したいエンティティの数を指定します。たとえば、<code translate="no">group_size=2</code> を設定すると、各グループ（または各<code translate="no">docId</code> ）が最も類似した段落（または<strong>チャンク</strong>）を2つ返すのが理想的です。<code translate="no">group_size</code> が設定されていない場合、システムはデフォルトでグループごとに 1 つの結果を返します。</p></li>
 <li><p><code translate="no">strict_group_size</code>:このブーリアン・パラメータは、システムが<code translate="no">group_size</code> で設定されたカウントを厳密に実行するかどうかを制御します。<code translate="no">strict_group_size=True</code> の場合、そのグループに十分なデータがない場合を除き、<code translate="no">group_size</code> で指定されたエンティティ数 (たとえば 2 つの段落) を各グループに含めようとします。デフォルト（<code translate="no">strict_group_size=False</code> ）では、システムは、各グループに<code translate="no">group_size</code> エンティティが含まれるようにするよりも、<code translate="no">limit</code> パラメータで指定されたグループ数を満たすことを優先する。このアプローチは、データ分布が不均一な場合に一般的により効率的である。</p></li>
 </ul>
-<p>その他のパラメータの詳細については、<a href="https://docs.zilliz.com/reference/python/python/Vector-search">searchを</a>参照のこと。</p>
+<p>パラメータの詳細については、<a href="https://docs.zilliz.com/reference/python/python/Vector-search">searchを</a>参照してください。</p>
+<h2 id="Order-groups-by-a-scalar-field--Milvus-30x" class="common-anchor-header">スカラー・フィールドによるグループの順序付け<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Order-groups-by-a-scalar-field--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>グループ化検索を<code translate="no">order_by_fields</code> と組み合わせると、スカラー・フィールドでグループを並べ替えることができます。これは、グループ間で多様な結果を得たいが、価格や格付けのようなビジネスに関連した順序に従ってグループを並べたい場合に便利です。</p>
+<p>次の例では、検索結果を<code translate="no">category</code> でグループ化し、グループごとに最大 3 つのエンティ ティを返し、返されたグループを<code translate="no">price</code> で低い順から並べ替えています。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
+    data=query_vectors,
+    anns_field=<span class="hljs-string">&quot;embedding&quot;</span>,
+    limit=<span class="hljs-number">20</span>,
+    group_by_field=<span class="hljs-string">&quot;category&quot;</span>,
+    group_size=<span class="hljs-number">3</span>,
+    strict_group_size=<span class="hljs-literal">True</span>,
+    output_fields=[<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>],
+<span class="highlighted-comment-line">    order_by_fields=[</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;field&quot;</span>: <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;order&quot;</span>: <span class="hljs-string">&quot;asc&quot;</span>}</span>
+<span class="highlighted-comment-line">    ],</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>上記のリクエストで、<code translate="no">limit=20</code> は、Milvusが20のエンティティではなく、20のグループまで選択することを意味する。<code translate="no">group_size=3</code> のため、フラットな結果リストには、合計で最大60エンティティを含めることができる。</p>
+<p><code translate="no">group_by_field</code> とともに<code translate="no">order_by_fields</code> を使用すると、Milvusは各グループの先頭エンティティの指定されたスカラーフィールド値によってグループを順序付けます。各グループ内では、エンティティはクエリ・ベクタに対する類似度スコアで並べ替えられます。</p>
 <h2 id="Considerations" class="common-anchor-header">考慮事項<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -386,7 +428,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>インデックス作成</strong>：このグループ化機能は、これらのインデックス・タイプでインデックス付けされたコレクションに対してのみ機能します：<strong>flat</strong>、<strong>ivf_flat</strong>、<strong>ivf_sq8</strong>、<strong>hnsw</strong>、<strong>hnsw_pq</strong>、<strong>hnsw_prq</strong>、<strong>hnsw_sq</strong>、<strong>diskann</strong>、<strong>sparse_inverted_index</strong>。</p></li>
+<li><p><strong>インデックス作成</strong>：このグループ化機能は、以下のインデックスタイプでインデックスされたコレクションに対してのみ機能します：<strong>flat</strong>、<strong>ivf_flat</strong>、<strong>ivf_sq8</strong>、<strong>hnsw</strong>、<strong>hnsw_pq</strong>、<strong>hnsw_prq</strong>、<strong>hnsw_sq</strong>、<strong>diskann</strong>、<strong>sparse_inverted_index</strong>。</p></li>
 <li><p><strong>グループ数</strong>：<code translate="no">limit</code> パラメータは、各グループ内の特定のエンティティの数ではなく、検索結果が返されるグループの数を制御する。適切な<code translate="no">limit</code> を設定することで、検索の多様性とクエリ・パフォーマンスを制御することができます。データが高密度に分散している場合やパフォーマンスが懸念される場合は、<code translate="no">limit</code> を減らすことで計算コストを削減できます。</p></li>
 <li><p><strong>グループあたりのエンティティ</strong>数：<code translate="no">group_size</code> パラメータは、グループごとに返されるエンティティの数を制御します。ユースケースに基づいて<code translate="no">group_size</code> を調整すると、検索結果の豊かさが向上します。ただし、データが不均一に分散している場合、特にデータが限られたシナリオでは、<code translate="no">group_size</code> で指定した数よりも少ないエンティティしか返されないグループもあります。</p></li>
 <li><p><strong>厳格なグループサイズ</strong>：<code translate="no">strict_group_size=True</code> を指定すると、そのグループに十分なデータがない場合を除き、各グループで指定されたエンティティ数 (<code translate="no">group_size</code>) を返そうとします。この設定により、グループごとに一貫したエンティティ数が保証されますが、データ分散が不均一な場合やリソースが限られている場合、パフォーマンスが低下する可能性があります。厳密なエンティティ数が必要でない場合は、<code translate="no">strict_group_size=False</code> を設定することで、クエリの速度を向上させることができます。</p></li>

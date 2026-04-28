@@ -24,7 +24,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>L'éviction gère les ressources de cache de chaque nœud de requête dans Milvus. Lorsqu'elle est activée, elle supprime automatiquement les données mises en cache lorsque les seuils de ressources sont atteints, ce qui garantit des performances stables et empêche l'épuisement de la mémoire ou du disque.</p>
-<p>L'éviction utilise une politique de <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">moindre utilisation (LRU</a> ) pour récupérer l'espace du cache. Les métadonnées sont toujours mises en cache et ne sont jamais évacuées, car elles sont essentielles à la planification des requêtes et sont généralement de petite taille.</p>
+<p>L'éviction utilise une politique de <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">moindre utilisation (LRU)</a> pour récupérer l'espace du cache. Les métadonnées sont toujours mises en cache et ne sont jamais évacuées, car elles sont essentielles pour la planification des requêtes et sont généralement de petite taille.</p>
 <div class="alert note">
 <p>L'éviction doit être explicitement activée. Sans configuration, les données mises en cache continueront à s'accumuler jusqu'à ce que les ressources soient épuisées.</p>
 </div>
@@ -184,7 +184,7 @@ beta: Milvus 2.6.4+
      <td><p>float</p></td>
      <td><p>(0.0, 1.0]</p></td>
      <td><p>Niveau d'utilisation de la mémoire où l'éviction asynchrone commence.</p></td>
-     <td><p>Commence à <code translate="no">0.8</code>. Maintenir un écart raisonnable par rapport au filigrane bas (par exemple, 0,05-0,10) pour éviter des déclenchements fréquents.</p></td>
+     <td><p>Commence à <code translate="no">0.8</code>. Maintenir un écart raisonnable par rapport au filigrane bas (par exemple, 0,05-0,10) afin d'éviter des déclenchements fréquents.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">diskLowWatermarkRatio</code></p></td>

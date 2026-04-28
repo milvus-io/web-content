@@ -261,7 +261,7 @@ res = MilvusClient.search(
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">M</code></p></td>
-     <td><p>Jumlah maksimum koneksi (atau sisi) yang dapat dimiliki oleh setiap simpul dalam graf, termasuk sisi keluar dan masuk.</p><p>Parameter ini secara langsung mempengaruhi konstruksi indeks dan pencarian.</p></td>
+     <td><p>Jumlah maksimum koneksi (atau sisi) yang dapat dimiliki setiap simpul dalam graf, termasuk sisi keluar dan masuk.</p><p>Parameter ini secara langsung mempengaruhi konstruksi indeks dan pencarian.</p></td>
      <td><p><strong>Tipe</strong> Bilangan bulat</p><p><strong>Rentang</strong>: [2, 2048]</p><p><strong>Nilai default</strong>: <code translate="no">30</code> (hingga 30 sisi keluar dan 30 sisi masuk per simpul)</p></td>
      <td><p><code translate="no">M</code> yang lebih besar umumnya menghasilkan <strong>akurasi yang lebih tinggi</strong> tetapi <strong>meningkatkan overhead memori</strong> dan <strong>memperlambat pembuatan indeks dan pencarian</strong>.</p><p>Pertimbangkan untuk meningkatkan <code translate="no">M</code> untuk dataset dengan dimensi tinggi atau ketika pemanggilan yang tinggi sangat penting.</p><p>Pertimbangkan untuk mengurangi <code translate="no">M</code> ketika penggunaan memori dan kecepatan pencarian menjadi perhatian utama.</p><p>Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [5, 100].</p></td>
    </tr>

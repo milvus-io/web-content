@@ -23,7 +23,7 @@ title: Retrieval-Augmented Generation (RAG) dengan Milvus dan LangChain
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/langchain/rag_with_milvus_and_langchain.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>   <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/rag_with_milvus_and_langchain.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>Panduan ini mendemonstrasikan cara membangun sistem Retrieval-Augmented Generation (RAG) dengan menggunakan LangChain dan Milvus.</p>
+<p>Panduan ini mendemonstrasikan cara membangun sistem Retrieval-Augmented Generation (RAG) menggunakan LangChain dan Milvus.</p>
 <p>Sistem RAG menggabungkan sistem pengambilan dengan model generatif untuk menghasilkan teks baru berdasarkan perintah yang diberikan. Sistem ini pertama-tama mengambil dokumen yang relevan dari korpus menggunakan Milvus, dan kemudian menggunakan model generatif untuk menghasilkan teks baru berdasarkan dokumen yang diambil.</p>
 <p><a href="https://www.langchain.com/">LangChain</a> adalah kerangka kerja untuk mengembangkan aplikasi yang didukung oleh model bahasa besar (LLM). <a href="https://milvus.io/">Milvus</a> adalah basis data vektor sumber terbuka yang paling canggih di dunia, yang dibuat untuk mendukung pencarian kemiripan dan aplikasi AI.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">

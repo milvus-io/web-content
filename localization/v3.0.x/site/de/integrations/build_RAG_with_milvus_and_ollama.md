@@ -128,7 +128,7 @@ text_lines = []
       </svg>
     </button></h3><p>Ollama unterstützt mehrere Modelle sowohl für LLM-basierte Aufgaben als auch für die Generierung von Einbettungen, was die Entwicklung von Retrieval-Augmented Generation (RAG)-Anwendungen erleichtert. Für dieses Setup:</p>
 <ul>
-<li>Wir werden <strong>Llama 3.2 (3B)</strong> als unser LLM für Textgenerierungsaufgaben verwenden.</li>
+<li>Wir werden <strong>Llama 3.2 (3B)</strong> als LLM für Textgenerierungsaufgaben verwenden.</li>
 <li>Für die Einbettungsgenerierung werden wir <strong>mxbai-embed-large</strong> verwenden, ein Modell mit 334M Parametern, das für semantische Ähnlichkeit optimiert ist.</li>
 </ul>
 <p>Bevor wir beginnen, stellen wir sicher, dass beide Modelle lokal gezogen werden:</p>

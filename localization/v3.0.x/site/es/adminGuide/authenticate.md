@@ -48,12 +48,12 @@ title: Autenticar el Acceso de Usuario
 <span class="hljs-attr">common:</span>
 <span class="hljs-string">...</span>
   <span class="hljs-attr">security:</span>
-    <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">false</span>
+    <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">true</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-helm">
-<p>Para habilitar la autenticación de usuario para su servidor Milvus, establezca authorizationEnabled en true en el archivo de configuración de Milvus <code translate="no">values.yaml</code>. Para más información sobre configuraciones, consulte <a href="https://milvus.io/docs/configure-helm.md?tab=component">Configurar Milvus con Helm Charts</a>.</p>
+<p>Para habilitar la autenticación de usuario para su servidor Milvus, establezca authorizationEnabled como true en el archivo de configuración de Milvus <code translate="no">values.yaml</code>. Para más información sobre configuraciones, consulte <a href="https://milvus.io/docs/configure-helm.md?tab=component">Configurar Milvus con Helm Charts</a>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -64,7 +64,7 @@ title: Autenticar el Acceso de Usuario
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-operator">
-<p>Para habilitar la autenticación, establezca <code translate="no">spec.common.security.authorizationEnabled</code> a <code translate="no">true</code> en el CRD <code translate="no">Milvus</code>. Para más información sobre Milvus CRD, consulte <a href="https://milvus.io/docs/configure_operator.md?tab=component">Configurar Milvus con Milvus Operator</a>.</p>
+<p>Para habilitar la autenticación, establezca <code translate="no">spec.config.common.security.authorizationEnabled</code> a <code translate="no">true</code> en el CRD <code translate="no">Milvus</code>. Para más información sobre Milvus CRD, consulte <a href="https://milvus.io/docs/configure_operator.md?tab=component">Configurar Milvus con Milvus Operator</a>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

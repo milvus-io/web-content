@@ -34,10 +34,10 @@ voyage_ef = VoyageEmbeddingFunction(
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>參數</strong>：</p>
 <ul>
-<li><code translate="no">model_name</code> (string) 用於編碼的 Voyage 模型名稱。您可以指定任何可用的 Voyage 模型名稱，例如 , 等。如果未指定此參數，則會使用 。如需可用模型的清單，請參閱<code translate="no">voyage-3-lite</code> <code translate="no">voyage-finance-2</code> <code translate="no">voyage-3</code> <a href="https://docs.voyageai.com/docs/embeddings">Voyage 官方文件</a>。</li>
+<li><code translate="no">model_name</code> (string) 用於編碼的 Voyage 模型名稱。您可以指定任何可用的 Voyage 模型名稱，例如<code translate="no">voyage-3-lite</code>,<code translate="no">voyage-finance-2</code> 等。如果未指定此參數，則會使用<code translate="no">voyage-3</code> 。如需可用模型的清單，請參閱<a href="https://docs.voyageai.com/docs/embeddings">Voyage 官方文件</a>。</li>
 <li><code translate="no">api_key</code> (字串) 用來存取 Voyage API 的 API 金鑰。有關如何建立 API 金鑰的資訊，請參閱<a href="https://docs.voyageai.com/docs/api-key-and-installation">API 金鑰與 Python Client</a>。</li>
 </ul>
-<p>若要為文件建立嵌入式資料，請使用<code translate="no">encode_documents()</code> 方法：</p>
+<p>要為文件建立嵌入式資料，請使用<code translate="no">encode_documents()</code> 方法：</p>
 <pre><code translate="no" class="language-python">docs = [
     <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
     <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,

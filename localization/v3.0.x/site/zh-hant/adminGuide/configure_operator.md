@@ -137,7 +137,7 @@ title: 使用 Milvus Operator 配置 Milvus
 此外，在設定代理時，有一個額外的欄位叫做 `serviceType`。這個欄位定義 Milvus 在 K8s 集群中提供的服務類型。</div>
 <p>若要設定特定元件的資源，請先在<code translate="no">spec.componets</code> 下的欄位中加入元件名稱，然後再設定其私有資源。</p>
 <div class="filter">
-<a href="#component">組件或依賴組件</a> <a href="#purpose">配置目的</a></div>
+<a href="#component">組件或依賴</a> <a href="#purpose">組態目的</a></div>
 <div class="filter-component table-wrapper">
 <table id="component">
 <thead>
@@ -174,7 +174,6 @@ title: 使用 Milvus Operator 配置 Milvus
             <li><a href="/docs/zh-hant/configure_indexcoord.md">索引坐標</a></li>
             <li><a href="/docs/zh-hant/configure_metastore.md">元存儲</a></li>
             <li><a href="/docs/zh-hant/configure_mq.md">訊息佇列</a></li>
-            <li><a href="/docs/zh-hant/configure_natsmq.md">訊息佇列</a></li>
             <li><a href="/docs/zh-hant/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/zh-hant/configure_trace.md">追蹤</a></li>
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md">配額與限制</a></li>

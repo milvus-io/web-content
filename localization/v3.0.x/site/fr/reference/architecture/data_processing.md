@@ -37,22 +37,22 @@ title: Traitement des données
     </button></h2><p>Vous pouvez choisir le nombre d'unités de stockage qu'une collection utilise dans Milvus - chaque unité de stockage correspond à un canal virtuel<em>(vchannel</em>). Comme illustré ci-dessous, Milvus affecte ensuite chaque <em>vchannel</em> à un canal physique<em>(pchannel</em>), et chaque <em>pchannel</em> est lié à un nœud de streaming spécifique.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/pvchannel_wal.png" alt="VChannel PChannel and StreamingNode" class="doc-image" id="vchannel-pchannel-and-streamingnode" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/pvchannel_wal.png" alt="VChannel PChannel and StreamingNode" class="doc-image" id="vchannel-pchannel-and-streamingnode" />
    </span> <span class="img-wrapper"> <span>VChannel PChannel et StreamingNode</span> </span></p>
 <p>Après la vérification des données, le proxy divise le message écrit en plusieurs paquets de données (shards) conformément aux règles d'acheminement des shards spécifiées.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/channels_1.png" alt="Channels 1" class="doc-image" id="channels-1" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_1.png" alt="Channels 1" class="doc-image" id="channels-1" />
    </span> <span class="img-wrapper"> <span>Canaux 1</span> </span></p>
 <p>Les données écrites d'un groupe<em>(vchannel</em>) sont ensuite envoyées au nœud de diffusion correspondant de <em>pchannel</em>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/written_data_flow.png" alt="write flow" class="doc-image" id="write-flow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/written_data_flow.png" alt="write flow" class="doc-image" id="write-flow" />
    </span> <span class="img-wrapper"> <span>flux d'écriture</span> </span></p>
 <p>Le nœud de diffusion en continu attribue un Oracle d'horodatage (TSO) à chaque paquet de données afin d'établir un ordre total des opérations. Il effectue des contrôles de cohérence sur la charge utile avant de l'écrire dans le journal d'écriture (WAL) sous-jacent. Même en cas de panne, le nœud de streaming peut rejouer le WAL pour récupérer toutes les opérations en attente.</p>
 <p>Pendant ce temps, le nœud de streaming découpe également de manière asynchrone les entrées WAL validées en segments distincts. Il existe deux types de segments :</p>
 <ul>
-<li><strong>Segment croissant</strong>: toutes les données qui n'ont pas encore été transférées dans le stockage d'objets.</li>
+<li><strong>segment croissant</strong>: toutes les données qui n'ont pas encore été transférées dans le stockage d'objets.</li>
 <li><strong>Segment scellé</strong>: toutes les données ont été persistées dans le stockage d'objets, les données du segment scellé sont immuables.</li>
 </ul>
 <p>La transition d'un segment croissant à un segment scellé est appelée "flush". Le nœud de streaming déclenche un flush dès qu'il a ingéré et écrit toutes les entrées WAL disponibles pour ce segment, c'est-à-dire lorsqu'il n'y a plus d'enregistrements en attente dans le journal d'écriture sous-jacent, ce qui permet de finaliser le segment et d'en optimiser la lecture.</p>
@@ -74,7 +74,7 @@ title: Traitement des données
     </button></h2><p>La construction de l'index est effectuée par le nœud de données. Pour éviter la création fréquente d'index lors des mises à jour de données, une collection dans Milvus est divisée en segments, chacun ayant son propre index.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/index_building.png" alt="Index building" class="doc-image" id="index-building" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/index_building.png" alt="Index building" class="doc-image" id="index-building" />
    </span> <span class="img-wrapper"> <span>Construction d'index</span> </span></p>
 <p>Milvus prend en charge la construction d'index pour chaque champ vectoriel, champ scalaire et champ primaire. L'entrée et la sortie de la construction d'index s'engagent avec le stockage d'objets : Le nœud de données charge les instantanés de journal à indexer à partir d'un segment (qui se trouve dans le stockage d'objets) dans la mémoire, désérialise les données et métadonnées correspondantes pour construire l'index, sérialise l'index lorsque la construction de l'index est terminée et le réécrit dans le stockage d'objets.</p>
 <p>La construction d'un index implique principalement des opérations sur les vecteurs et les matrices et nécessite donc beaucoup de calculs et de mémoire. Les vecteurs ne peuvent pas être indexés efficacement avec les index arborescents traditionnels en raison de leur nature hautement dimensionnelle, mais peuvent l'être avec des techniques plus abouties dans ce domaine, telles que les index basés sur les grappes ou les graphes. Quel que soit son type, la construction d'un index implique des calculs itératifs massifs pour les vecteurs à grande échelle, tels que Kmeans ou graph traverse.</p>
@@ -98,7 +98,7 @@ title: Traitement des données
     </button></h2><p>L'interrogation de données est le processus de recherche, dans une collection donnée, du nombre <em>k</em> de vecteurs les plus proches d'un vecteur cible ou de <em>tous les</em> vecteurs situés dans une plage de distance donnée par rapport au vecteur. Les vecteurs sont renvoyés avec leur clé primaire et les champs correspondants.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
    </span> <span class="img-wrapper"> <span>Requête de données</span> </span></p>
 <p>Dans Milvus, une collection est divisée en plusieurs segments ; le nœud de diffusion en continu charge les segments croissants et conserve les données en temps réel, tandis que les nœuds d'interrogation chargent les segments scellés.</p>
 <p>Lorsqu'une demande de requête/recherche arrive, le proxy la diffuse à tous les nœuds de diffusion en continu responsables des segments correspondants pour une recherche simultanée.</p>
@@ -107,10 +107,10 @@ title: Traitement des données
 <p>Enfin, le proxy recueille tous les résultats des nuées, les fusionne en un résultat final et le renvoie au client.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/handoff.png" alt="Handoff" class="doc-image" id="handoff" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/handoff.png" alt="Handoff" class="doc-image" id="handoff" />
    </span> <span class="img-wrapper"> <span>Transfert</span> </span></p>
 <p>Lorsque le segment croissant d'un nœud de streaming est transféré dans un segment scellé, ou lorsqu'un nœud de données achève un compactage, le coordinateur lance une opération de transfert pour convertir ces données croissantes en données historiques. Le coordinateur répartit ensuite uniformément les segments scellés entre tous les nœuds de requête, en équilibrant l'utilisation de la mémoire, les frais généraux de l'unité centrale et le nombre de segments, et libère tout segment redondant.</p>
-<h2 id="Whats-next" class="common-anchor-header">Et maintenant ?<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

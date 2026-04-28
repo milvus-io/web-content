@@ -28,7 +28,7 @@ title: 开始使用 Mem0 和 Milvus
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://mem0.ai/">Mem0</a>是人工智能应用的智能记忆层，旨在通过保留用户偏好和随时间不断调整来提供个性化和高效的交互。作为聊天机器人和人工智能驱动工具的理想选择，Mem0 可创建无缝、上下文感知的体验。</p>
-<p>在本教程中，我们将介绍基本的 Mem0 内存管理操作--添加、检索、更新、搜索、删除和跟踪内存历史记录--使用高性能开源向量数据库<a href="https://milvus.io/">Milvus</a>，它为高效存储和检索提供了动力。本实践介绍将指导您完成基础内存操作，帮助您利用 Mem0 和 Milvus 构建个性化的人工智能交互。</p>
+<p>在本教程中，我们将介绍基本的 Mem0 内存管理操作--使用<a href="https://milvus.io/">Milvus</a> 添加、检索、更新、搜索、删除和跟踪内存历史记录--<a href="https://milvus.io/">Milvus</a> 是一个高性能、开源的向量数据库，为高效存储和检索提供了动力。本实践介绍将指导您完成基础内存操作，帮助您利用 Mem0 和 Milvus 构建个性化的人工智能交互。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

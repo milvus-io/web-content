@@ -61,7 +61,7 @@ title: >-
         ></path>
       </svg>
     </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>Database vettoriale</em></h4><p>Per questa applicazione utilizzeremo <a href="https://milvus.io/">Milvus</a> per gestire e ricercare dati non strutturati su larga scala, come testi, immagini e video.</p>
-<h4 id="LLM-Framework" class="common-anchor-header"><em>Struttura LLM</em></h4><p>LlamaIndex è un framework open-source per l'orchestrazione dei dati che semplifica la costruzione di applicazioni di modelli linguistici di grandi dimensioni (LLM) facilitando l'integrazione di dati privati con LLM, consentendo applicazioni di intelligenza artificiale generativa contestualizzata attraverso una pipeline Retrieval-Augmented Generation (RAG). In questo tutorial utilizzeremo LlamaIndex, poiché offre una buona flessibilità e migliori astrazioni API di livello inferiore.</p>
+<h4 id="LLM-Framework" class="common-anchor-header"><em>Struttura LLM</em></h4><p>LlamaIndex è un framework open-source per l'orchestrazione dei dati che semplifica la costruzione di applicazioni di modelli linguistici di grandi dimensioni (LLM) facilitando l'integrazione di dati privati con LLM, consentendo applicazioni di IA generativa contestualizzata attraverso una pipeline Retrieval-Augmented Generation (RAG). In questo tutorial utilizzeremo LlamaIndex, poiché offre una buona flessibilità e migliori astrazioni API di livello inferiore.</p>
 <h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>Valutazione della qualità dell'output di LLM</em></h4><p><a href="https://www.aimon.ai">AIMon</a> offre modelli di giudizio proprietari per l'allucinazione, i problemi di qualità del contesto, l'aderenza alle istruzioni degli LLM, la qualità del recupero e altri compiti di affidabilità degli LLM. Utilizzeremo AIMon per valutare la qualità dell'applicazione LLM.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -392,7 +392,7 @@ instructions_to_evaluate = <span class="hljs-string">&quot;&quot;&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Come accennato in precedenza, AIMon sarà utilizzato per giudicare la qualità dell'applicazione LLM. <a href="https://docs.aimon.ai/">La documentazione è disponibile qui</a>.</p>
+    </button></h1><p>Come accennato in precedenza, AIMon verrà utilizzato per giudicare la qualità dell'applicazione LLM. <a href="https://docs.aimon.ai/">La documentazione è disponibile qui</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> aimon <span class="hljs-keyword">import</span> Detect
 
 aimon_config = {
@@ -437,7 +437,7 @@ detect = Detect(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In questo primo approccio semplice, utilizzeremo la distanza di Levenshtein per abbinare un documento a una determinata query. I primi 3 documenti con la migliore corrispondenza saranno inviati al LLM come contesto per la risposta.</p>
+    </button></h1><p>In questo primo semplice approccio, utilizzeremo la distanza di Levenshtein per abbinare un documento a una determinata query. I primi 3 documenti con la migliore corrispondenza saranno inviati al LLM come contesto per la risposta.</p>
 <p><strong>NOTA: L'esecuzione di questa cella richiederà circa 3 minuti.</strong></p>
 <p>Godetevi la vostra bevanda preferita mentre aspettate :)</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> fuzzywuzzy <span class="hljs-keyword">import</span> process
@@ -534,7 +534,7 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
 <p>Ci sono due componenti principali di cui dobbiamo essere consapevoli: Ingestion e Q&amp;A basato su RAG. La pipeline di ingestione elabora le trascrizioni dal dataset della Meeting Bank e le memorizza nel database vettoriale di Milvus. La pipeline RAG Q&amp;A elabora una query dell'utente recuperando prima i documenti rilevanti dal database vettoriale. Questi documenti saranno poi utilizzati come documenti di base per il LLM per generare la sua risposta. Sfruttiamo AIMon per calcolare il punteggio di qualità e monitorare continuamente la domanda per quanto riguarda l'<a href="https://docs.aimon.ai/detectors/hallucination">allucinazione</a>, l'<a href="https://docs.aimon.ai/detectors/instruction_adherence">aderenza alle istruzioni</a> e la <a href="https://docs.aimon.ai/checker-models/context_relevance">rilevanza del contesto</a>. Queste sono le stesse 3 metriche che abbiamo usato per definire il punteggio di <code translate="no">quality</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
    </span> <span class="img-wrapper"> <span>flusso di lavoro</span> </span></p>
 <p>Di seguito sono riportate alcune funzioni di utilità per pre-processare e calcolare le incorporazioni dei documenti.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -866,7 +866,7 @@ query_engine_with_reranking = RetrieverQueryEngine.from_args(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Eseguiamo nuovamente le query e ricalcoliamo il punteggio di qualità complessivo per vedere se c'è un miglioramento.</p>
-<p>Il <strong>reranking di AIMon non dovrebbe aggiungere ulteriore latenza, poiché riduce la quantità di documenti di contesto che devono essere inviati all'LLM per generare una risposta, rendendo l'operazione efficiente in termini di I/O di rete e di costi di elaborazione dei token dell'LLM (denaro e tempo).</strong></p>
+<p>Il <strong>reranking di AIMon non dovrebbe aggiungere ulteriore latenza, poiché riduce la quantità di documenti di contesto da inviare all'LLM per generare una risposta, rendendo l'operazione efficiente in termini di I/O di rete e di costi di elaborazione dei token dell'LLM (denaro e tempo).</strong></p>
 <p><strong>NOTA: Questo passaggio richiede 2 minuti</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 

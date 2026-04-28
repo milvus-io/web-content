@@ -131,7 +131,7 @@ client = MilvusClient(
       </svg>
     </button></h2><p>أبسط طريقة لتوسيع مجموعتك هي إضافة حقول قابلة للإلغاء. هذا مثالي عندما تحتاج إلى إضافة سمات جديدة بسرعة إلى بياناتك.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a nullable field to an existing collection</span>
 <span class="hljs-comment"># This operation:</span>
 <span class="hljs-comment"># - Returns almost immediately (non-blocking)</span>
@@ -282,7 +282,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <button class="copy-code-btn"></button></code></pre>
 <p>السلوك المتوقع:</p>
 <ul>
-<li><p>ستحتوي<strong>الكيانات الحالية</strong> على القيمة الافتراضية (<code translate="no">&quot;standard&quot;</code>) للحقل المضاف حديثًا</p></li>
+<li><p>ستحصل<strong>الكيانات الحالية</strong> على القيمة الافتراضية (<code translate="no">&quot;standard&quot;</code>) للحقل المضاف حديثًا</p></li>
 <li><p>يمكن للكيانات<strong>الجديدة</strong> تجاوز القيمة الافتراضية أو استخدامها إذا لم يتم توفير قيمة</p></li>
 <li><p>يحدث<strong>توفر الحقل</strong> على الفور تقريبًا بأقل تأخير</p></li>
 <li><p><strong>يمكن الاستعلام عنه مباشرة</strong> بعد فترة المزامنة القصيرة</p></li>
@@ -402,7 +402,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>عندما يتم تمكين الحقل الديناميكي في مجموعتك (<code translate="no">$meta</code> موجود)، يمكنك إضافة حقول ثابتة لها نفس اسم مفاتيح الحقول الديناميكية الموجودة. سيخفي الحقل الثابت الجديد مفتاح الحقل الديناميكي، ولكن يتم الاحتفاظ بالبيانات الديناميكية الأصلية.</p>
+    </button></h3><p>عندما تكون مجموعتك ممكّنة للحقل الديناميكي (<code translate="no">$meta</code> موجود)، يمكنك إضافة حقول ثابتة لها نفس اسم مفاتيح الحقول الديناميكية الموجودة. سيخفي الحقل الثابت الجديد مفتاح الحقل الديناميكي، ولكن يتم الاحتفاظ بالبيانات الديناميكية الأصلية.</p>
 <p>لتجنب التعارضات المحتملة في أسماء الحقول، فكر في اسم الحقل المراد إضافته بالرجوع إلى الحقول الموجودة ومفاتيح الحقول الديناميكية قبل إضافته فعليًا.</p>
 <p><strong>سيناريو مثال:</strong></p>
 <div class="multipleCode">

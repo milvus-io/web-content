@@ -39,7 +39,7 @@ title: Migration entre instances et entre godets
     </button></h2><p>Le diagramme ci-dessous illustre le processus de sauvegarde et de restauration à l'aide de différents godets au sein du même stockage d'objets.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cross-bucket-backup-and-restore.png" alt="cross-bucket-backup-and-restore.png" class="doc-image" id="cross-bucket-backup-and-restore.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cross-bucket-backup-and-restore.png" alt="cross-bucket-backup-and-restore.png" class="doc-image" id="cross-bucket-backup-and-restore.png" />
    </span> <span class="img-wrapper"> <span>cross-bucket-backup-and-restore.png</span> </span></p>
 <p>Supposons que nous ayons deux instances Milvus, <code translate="no">milvus_A</code> et <code translate="no">milvus_B</code>, qui utilisent toutes deux le moteur de stockage MinIO par défaut pour le stockage d'objets. Ces instances utilisent différents buckets bucket_A et <code translate="no">bucket_B</code> dans le même stockage d'objets. Dans cet exemple, notre objectif est de réaliser les tâches suivantes :</p>
 <ol>
@@ -80,7 +80,22 @@ title: Migration entre instances et entre godets
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">Etape 1 : Préparer la configuration</h3><p>Aller dans le répertoire du projet milvus-backup et créer un répertoire nommé configs :</p>
+    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">Etape 1 : Préparer la configuration<button data-href="#Step-1-Prepare-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Aller dans le répertoire du projet milvus-backup et créer un répertoire nommé configs :</p>
 <pre><code translate="no" class="language-shell">mkdir configs
 cd configs
 <button class="copy-code-btn"></button></code></pre>
@@ -93,7 +108,22 @@ cd configs
 ├── milvus-backup
 └── README.md
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">Etape 2 : Editer le fichier de configuration</h3><p>Modifiez le fichier backup.yaml pour définir les configurations appropriées pour<code translate="no">milvus_A</code>:</p>
+<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">Etape 2 : Editer le fichier de configuration<button data-href="#Step-2-Edit-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Modifiez le fichier backup.yaml pour définir les configurations appropriées pour<code translate="no">milvus_A</code>:</p>
 <ul>
 <li><p>Connexion configs</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
@@ -136,11 +166,26 @@ cd configs
   <span class="hljs-attr">backupRootPath:</span> <span class="hljs-string">&quot;backup&quot;</span> <span class="hljs-comment"># Rootpath to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><code translate="no">minio.bucketName</code>: Nom du seau utilisé pour le stockage des données dans <code translate="no">milvus_A</code>. Dans cet exemple, défini sur <code translate="no">bucket_A</code>.</p></li>
-<li><p><code translate="no">minio.rootPath</code>: Chemin racine à l'intérieur du seau où les données de <code translate="no">milvus_A</code> sont stockées. Dans cet exemple, il s'agit de <code translate="no">files</code>.</p></li>
-<li><p><code translate="no">minio.backupBucketName</code>: Nom du godet utilisé pour le stockage des sauvegardes dans<code translate="no">milvus_B</code>. Dans cet exemple, <code translate="no">milvus_A</code> et <code translate="no">milvus_B</code> utilisent des bacs différents. Par conséquent, la valeur est <code translate="no">bucket_B</code>.</p></li>
+<li><p><code translate="no">minio.rootPath</code>: Chemin d'accès à la racine du seau dans lequel les données de <code translate="no">milvus_A</code> sont stockées. Dans cet exemple, il s'agit de <code translate="no">files</code>.</p></li>
+<li><p><code translate="no">minio.backupBucketName</code>: Nom du répertoire utilisé pour le stockage de sauvegarde dans<code translate="no">milvus_B</code>. Dans cet exemple, <code translate="no">milvus_A</code> et <code translate="no">milvus_B</code> utilisent des bacs différents. Par conséquent, la valeur est <code translate="no">bucket_B</code>.</p></li>
 <li><p><code translate="no">minio.backupRootPath</code>: Chemin d'accès à la racine du godet désigné pour le stockage des fichiers de sauvegarde dans <code translate="no">milvus_B</code>. Dans cet exemple, il s'agit de <code translate="no">backup</code>.</p></li>
 </ul>
-<h3 id="Step-3-Create-backup" class="common-anchor-header">Étape 3 : Créer une sauvegarde</h3><p>Une fois le fichier backup.yaml enregistré, créez une sauvegarde nommée <code translate="no">my_backup</code>:</p>
+<h3 id="Step-3-Create-backup" class="common-anchor-header">Étape 3 : Créer une sauvegarde<button data-href="#Step-3-Create-backup" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Une fois le fichier backup.yaml enregistré, créez une sauvegarde nommée <code translate="no">my_backup</code>:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup create -c coll -n my_backup
 <button class="copy-code-btn"></button></code></pre>
 <p>Cette commande crée la sauvegarde <code translate="no">bucket_B/backup/my_backup</code> dans le stockage d'objets pour la collection coll.</p>
@@ -159,7 +204,22 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Configure-restoration-settings" class="common-anchor-header">Étape 1 : Configuration des paramètres de restauration</h3><p>Répétez l'étape 2 pour modifier les configurations en vue de la restauration vers <code translate="no">milvus_B</code>, en veillant à ce que <code translate="no">minio.bucketName</code> soit défini sur <code translate="no">bucket_B</code>.</p>
+    </button></h2><h3 id="Step-1-Configure-restoration-settings" class="common-anchor-header">Étape 1 : Configuration des paramètres de restauration<button data-href="#Step-1-Configure-restoration-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Répétez l'étape 2 pour modifier les configurations en vue de la restauration vers <code translate="no">milvus_B</code>, en veillant à ce que <code translate="no">minio.bucketName</code> soit défini sur <code translate="no">bucket_B</code>.</p>
 <p>Voici un exemple de configuration :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
@@ -197,7 +257,22 @@ cd configs
   <span class="hljs-attr">backupRootPath:</span> <span class="hljs-string">&quot;backup&quot;</span> <span class="hljs-comment"># Rootpath to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Restore-backup" class="common-anchor-header">Étape 2 : Restauration de la sauvegarde</h3><p>Restaurer la sauvegarde sur <code translate="no">milvus_B</code>:</p>
+<h3 id="Step-2-Restore-backup" class="common-anchor-header">Étape 2 : Restauration de la sauvegarde<button data-href="#Step-2-Restore-backup" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Restaurer la sauvegarde sur <code translate="no">milvus_B</code>:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak
 <button class="copy-code-btn"></button></code></pre>
 <p>Cette commande restaure la sauvegarde dans une nouvelle collection nommée <code translate="no">coll_bak</code> dans <code translate="no">milvus_B</code>, avec des données stockées dans <code translate="no">bucket_B/files/insert_log/[ID of new collection]</code>.</p>

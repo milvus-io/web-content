@@ -57,7 +57,7 @@ title: بناء RAG مع Milvus و DeepSeek
     </button></h3><pre><code translate="no" class="language-python">! pip install --upgrade pymilvus[model] milvus-lite openai requests tqdm
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
+<p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، فقد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
 </blockquote>
 <p>يقوم DeepSeek بتمكين واجهة برمجة التطبيقات على غرار OpenAI. يمكنك تسجيل الدخول إلى موقعه الرسمي وإعداد <a href="https://platform.deepseek.com/api_keys">مفتاح واجهة برمجة التطبيقات</a> <code translate="no">DEEPSEEK_API_KEY</code> كمتغير بيئة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os

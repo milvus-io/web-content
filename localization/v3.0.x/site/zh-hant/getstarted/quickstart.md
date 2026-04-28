@@ -37,7 +37,7 @@ title: 快速入門
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本指南中，我們使用 Milvus Lite，它是<code translate="no">pymilvus</code> 中包含的一個 python 函式庫，可以嵌入到客戶端應用程式中。Milvus 也支援在<a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a>和<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>上部署，以應用於生產使用個案。</p>
+    </button></h2><p>在本指南中，我們使用 Milvus Lite，它是<code translate="no">pymilvus</code> 中包含的一個 python 函式庫，可以嵌入到客戶端應用程式中。Milvus 也支援部署在<a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a>和<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>上，以應用於生產使用個案。</p>
 <p>在開始之前，請確認您的本機環境中有 Python 3.8+ 可用。安裝<code translate="no">pymilvus</code> ，其中包含 python 客戶端函式庫和 Milvus Lite：</p>
 <pre><code translate="no" class="language-python">$ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
@@ -81,7 +81,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中，我們需要一個集合來儲存向量及其相關的元資料。您可以將它想像成傳統 SQL 資料庫中的資料表。建立集合時，您可以定義 schema 和索引參數，以設定向量規格，例如維度、索引類型和遠端指標。此外，還有一些複雜的概念，可以優化索引的向量搜尋效能。目前，讓我們先專注於基本概念，並盡可能使用預設值。至少，您只需要設定集合名稱和集合向量欄位的維度。</p>
+    </button></h2><p>在 Milvus 中，我們需要一個集合來儲存向量及其相關的元資料。您可以將它想像成傳統 SQL 資料庫中的資料表。在建立集合時，您可以定義 schema 和索引參數，以設定向量規格，例如維度、索引類型和遠端指標。此外，還有一些複雜的概念，可以優化索引的向量搜尋效能。目前，讓我們先專注於基本概念，並盡可能使用預設值。至少，您只需要設定集合名稱和集合向量欄位的維度。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>):
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
@@ -453,5 +453,5 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>如果您使用 Claude Code 或 Cursor 等 AI 編碼輔助工具，您可以安裝<a href="https://github.com/zilliztech/milvus-skill">Milvus Skill</a>來協助您的 AI 工具寫出正確的 Milvus 程式碼。</p>
+    </button></h2><p>如果您正在使用 Claude Code 或 Cursor 等 AI 編碼輔助工具，您可以安裝<a href="https://github.com/zilliztech/milvus-skill">Milvus Skill</a>以協助您的 AI 工具編寫正確的 Milvus 程式碼。</p>
 <p>如需更多代理工具，包括 MCP 伺服器和策劃提示，請參閱<a href="/docs/zh-hant/milvus_for_agents.md">Milvus for AI Agents</a>。</p>

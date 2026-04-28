@@ -298,7 +298,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
     <tr>
       <th>1</th>
       <td>Apa bahasa pemrograman yang digunakan untuk menulis ...</td>
-      <td>[CMake &amp; Conan\n\nPustaka algoritma Mil...</td>
+      <td>[CMake &amp; Conan\n\nPustaka algoritme dari Mil...</td>
       <td>Bahasa pemrograman yang digunakan untuk menulis Knowher...</td>
       <td>Bahasa pemrograman yang digunakan untuk menulis Knowher...</td>
     </tr>

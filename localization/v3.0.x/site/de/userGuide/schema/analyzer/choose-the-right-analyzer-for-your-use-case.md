@@ -40,7 +40,7 @@ summary: Anmerkungen
 <p>Ein Analyzer arbeitet in einer einfachen, zweistufigen Pipeline:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
    </span> <span class="img-wrapper"> <span>Analyzer Arbeitsablauf</span> </span></p>
 <ol>
 <li><p><strong>Tokenisierung (erforderlich):</strong> In dieser ersten Phase wird ein <strong>Tokenizer</strong> eingesetzt, um eine fortlaufende Textkette in diskrete, aussagekräftige Einheiten, so genannte Token, zu zerlegen. Die Tokenisierungsmethode kann je nach Sprache und Inhaltstyp erheblich variieren.</p></li>
@@ -73,7 +73,7 @@ summary: Anmerkungen
      <th><p>Problem</p></th>
      <th><p>Symptom</p></th>
      <th><p>Beispiel (Input &amp; Output)</p></th>
-     <th><p>Ursache (schlechter Analyzer)</p></th>
+     <th><p>Ursache (Schlechter Analyzer)</p></th>
      <th><p>Lösung (guter Analyzer)</p></th>
    </tr>
    <tr>
@@ -304,7 +304,7 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wenn die <a href="/docs/de/choose-the-right-analyzer-for-your-use-case.md#Available-built-in-analyzers">integrierten Optionen</a> Ihren Anforderungen nicht genügen, können Sie einen benutzerdefinierten Analyzer erstellen, indem Sie einen Tokenizer mit einer Reihe von Filtern kombinieren. Damit haben Sie die volle Kontrolle über die Textverarbeitungspipeline.</p>
+    </button></h2><p>Wenn die <a href="/docs/de/choose-the-right-analyzer-for-your-use-case.md#Available-built-in-analyzers">integrierten Optionen</a> Ihren Anforderungen nicht genügen, können Sie einen benutzerdefinierten Analyzer erstellen, indem Sie einen Tokenizer mit einer Reihe von Filtern kombinieren. So haben Sie die volle Kontrolle über die Textverarbeitungspipeline.</p>
 <h3 id="Step-1-Select-the-tokenizer-based-on-language" class="common-anchor-header">Schritt 1: Wählen Sie den Tokenizer anhand der Sprache aus<button data-href="#Step-1-Select-the-tokenizer-based-on-language" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -331,7 +331,7 @@ schema.add_field(
    </tr>
    <tr>
      <td><p><a href="/docs/de/standard-tokenizer.md"><code translate="no">standard</code></a></p></td>
-     <td><p>Trennt Text anhand von Leerzeichen und Satzzeichen</p></td>
+     <td><p>Teilt Text anhand von Leerzeichen und Interpunktionszeichen auf</p></td>
      <td><p>Allgemeiner Text, gemischte Zeichensetzung</p></td>
      <td><ul><li><p>Eingabe: <code translate="no">"Hello, world! Visit example.com"</code></p></li><li><p>Ausgabe: <code translate="no">['Hello', 'world', 'Visit', 'example', 'com']</code></p></li></ul></td>
    </tr>
@@ -397,7 +397,7 @@ schema.add_field(
    <tr>
      <td><p><a href="/docs/de/icu-tokenizer.md"><code translate="no">icu</code></a></p></td>
      <td><p>Unicode-fähige Tokenisierung (Internationale Komponenten für Unicode)</p></td>
-     <td><p>Gemischte Skripte, unbekannte Sprachen oder wenn einfache Tokenisierung ausreicht</p></td>
+     <td><p>Gemischte Schriften, unbekannte Sprachen, oder wenn einfache Tokenisierung ausreicht</p></td>
      <td><ul><li><p>Eingabe: <code translate="no">"Hello 世界 مرحبا"</code></p></li><li><p>Ausgabe: <code translate="no">['Hello', ' ', '世界', ' ', 'مرحبا']</code></p></li></ul></td>
    </tr>
 </table>
@@ -800,7 +800,7 @@ analyzer_params = {
 <p>Für eine bessere Kontrolle über das Verhalten von Token in verschiedenen Sprachen:</p>
 <ul>
 <li><p>Verwenden Sie eine <strong>mehrsprachige Analyzer-Konfiguration</strong>. Einzelheiten finden Sie unter <a href="/docs/de/multi-language-analyzers.md">Mehrsprachige Analyzer</a>.</p></li>
-<li><p>Implementieren Sie einen <strong>Sprachbezeichner</strong> für Ihren Inhalt. Weitere Informationen finden Sie unter <a href="/docs/de/language-identifier.md">Sprachidentifikator</a>.</p></li>
+<li><p>Implementieren Sie einen <strong>Sprachidentifikator</strong> für Ihren Inhalt. Weitere Informationen finden Sie unter <a href="/docs/de/language-identifier.md">Sprachidentifikator</a>.</p></li>
 </ul>
 <h2 id="Integrate-with-text-retrieval-features" class="common-anchor-header">Integration mit Textabfragefunktionen<button data-href="#Integrate-with-text-retrieval-features" class="anchor-icon" translate="no">
       <svg translate="no"

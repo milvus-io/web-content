@@ -23,7 +23,7 @@ title: Reranker Überblick
       </svg>
     </button></h1><p>Im Bereich des Information Retrieval und der generativen KI ist ein Reranker ein unverzichtbares Werkzeug, das die Reihenfolge der Ergebnisse der ersten Suche optimiert. Reranker unterscheiden sich von traditionellen <a href="/docs/de/embeddings.md">Einbettungsmodellen</a>, indem sie eine Anfrage und ein Dokument als Eingabe nehmen und anstelle von Einbettungen direkt einen Ähnlichkeitswert zurückgeben. Dieser Wert gibt die Relevanz zwischen der Eingabeanfrage und dem Dokument an.</p>
 <p>Reranker werden häufig nach der ersten Stufe des Retrievals eingesetzt, die in der Regel über vektorielle Approximate Nearest Neighbor (ANN)-Verfahren erfolgt. ANN-Suchen sind zwar effizient, wenn es darum geht, eine große Menge potenziell relevanter Ergebnisse abzurufen, doch werden die Ergebnisse nicht immer nach der tatsächlichen semantischen Nähe zur Suchanfrage priorisiert. Hier wird rerankers eingesetzt, um die Reihenfolge der Ergebnisse durch tiefere kontextuelle Analysen zu optimieren, wobei häufig fortgeschrittene maschinelle Lernmodelle wie BERT oder andere Transformer-basierte Modelle zum Einsatz kommen. Auf diese Weise kann rerankers die Genauigkeit und Relevanz der endgültigen Ergebnisse, die dem Nutzer präsentiert werden, drastisch verbessern.</p>
-<p>Die PyMilvus-Modellbibliothek integriert Rerank-Funktionen, um die Reihenfolge der Ergebnisse zu optimieren, die von den ersten Suchen zurückgegeben werden. Nachdem Sie die nächstgelegenen Einbettungen von Milvus abgerufen haben, können Sie diese Reranking-Tools nutzen, um die Suchergebnisse zu verfeinern und die Präzision der Suchergebnisse zu verbessern.</p>
+<p>Die PyMilvus-Modellbibliothek integriert Rerank-Funktionen, um die Reihenfolge der Ergebnisse zu optimieren, die von den anfänglichen Suchen zurückgegeben werden. Nachdem Sie die nächstgelegenen Einbettungen von Milvus abgerufen haben, können Sie diese Reranking-Tools nutzen, um die Suchergebnisse zu verfeinern und die Präzision der Suchergebnisse zu verbessern.</p>
 <table>
 <thead>
 <tr><th>Rerank-Funktion</th><th>API oder Open-sourced</th></tr>
@@ -104,7 +104,7 @@ bge_rf(query, documents)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In diesem Leitfaden wird untersucht, wie die Methode <code translate="no">search()</code> in PyMilvus für die Durchführung von Ähnlichkeitssuchen verwendet werden kann und wie die Relevanz der Suchergebnisse mithilfe eines Rerankers verbessert werden kann. Unsere Demonstration wird den folgenden Datensatz verwenden:</p>
+    </button></h2><p>In dieser Anleitung werden wir untersuchen, wie die Methode <code translate="no">search()</code> in PyMilvus für die Durchführung von Ähnlichkeitssuchen verwendet werden kann und wie die Relevanz der Suchergebnisse mithilfe eines Rerankers verbessert werden kann. Unsere Demonstration wird den folgenden Datensatz verwenden:</p>
 <pre><code translate="no" class="language-python">entities = [
     {<span class="hljs-string">&#x27;doc_id&#x27;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;doc_vector&#x27;</span>: [-<span class="hljs-number">0.0372721</span>,<span class="hljs-number">0.0101959</span>,...,-<span class="hljs-number">0.114994</span>], <span class="hljs-string">&#x27;doc_text&#x27;</span>: <span class="hljs-string">&quot;In 1950, Alan Turing published his seminal paper, &#x27;Computing Machinery and Intelligence,&#x27; proposing the Turing Test as a criterion of intelligence, a foundational concept in the philosophy and development of artificial intelligence.&quot;</span>}, 
     {<span class="hljs-string">&#x27;doc_id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;doc_vector&#x27;</span>: [-<span class="hljs-number">0.00308882</span>,-<span class="hljs-number">0.0219905</span>,...,-<span class="hljs-number">0.00795811</span>], <span class="hljs-string">&#x27;doc_text&#x27;</span>: <span class="hljs-string">&quot;The Dartmouth Conference in 1956 is considered the birthplace of artificial intelligence as a field; here, John McCarthy and others coined the term &#x27;artificial intelligence&#x27; and laid out its basic goals.&quot;</span>}, 
@@ -118,7 +118,22 @@ bge_rf(query, documents)
 <li><code translate="no">doc_vector</code>: Vektorielle Einbettungen, die das Dokument repräsentieren. Eine Anleitung zur Erzeugung von Einbettungen finden Sie unter <a href="/docs/de/embeddings.md">Einbettungen</a>.</li>
 <li><code translate="no">doc_text</code>: Textinhalt des Dokuments.</li>
 </ul>
-<h3 id="Preparations" class="common-anchor-header">Vorbereitungen</h3><p>Bevor Sie eine Ähnlichkeitssuche starten, müssen Sie eine Verbindung mit Milvus herstellen, eine Sammlung erstellen und Daten vorbereiten und in diese Sammlung einfügen. Der folgende Codeschnipsel veranschaulicht diese vorbereitenden Schritte.</p>
+<h3 id="Preparations" class="common-anchor-header">Vorbereitungen<button data-href="#Preparations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Bevor Sie eine Ähnlichkeitssuche starten, müssen Sie eine Verbindung mit Milvus herstellen, eine Sammlung erstellen und Daten vorbereiten und in diese Sammlung einfügen. Der folgende Codeschnipsel veranschaulicht diese vorbereitenden Schritte.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -152,7 +167,22 @@ client.insert(collection_name=<span class="hljs-string">&quot;test_collection&qu
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># {&#x27;insert_count&#x27;: 4, &#x27;ids&#x27;: [0, 1, 2, 3]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Conduct-a-similarity-search" class="common-anchor-header">Durchführen einer Ähnlichkeitssuche</h3><p>Nach dem Einfügen der Daten führen Sie eine Ähnlichkeitssuche mit der Methode <code translate="no">search</code> durch.</p>
+<h3 id="Conduct-a-similarity-search" class="common-anchor-header">Durchführen einer Ähnlichkeitssuche<button data-href="#Conduct-a-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nach dem Einfügen der Daten führen Sie eine Ähnlichkeitssuche mit der Methode <code translate="no">search</code> durch.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># search results based on our query</span>
 
 res = client.search(
@@ -174,7 +204,22 @@ doc_text: In <span class="hljs-number">1950</span>, Alan Turing published his se
 distance: <span class="hljs-number">0.5340118408203125</span>
 doc_text: The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, <span class="hljs-keyword">and</span> Cliff Shaw <span class="hljs-keyword">in</span> <span class="hljs-number">1955</span> marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-a-reranker-to-enhance-search-results" class="common-anchor-header">Verwendung eines Rerankers zur Verbesserung der Suchergebnisse</h3><p>Verbessern Sie dann die Relevanz Ihrer Suchergebnisse mit einem Reranking-Schritt. In diesem Beispiel verwenden wir <code translate="no">CrossEncoderRerankFunction</code>, das in PyMilvus integriert ist, um die Ergebnisse zur Verbesserung der Genauigkeit neu zu ordnen.</p>
+<h3 id="Use-a-reranker-to-enhance-search-results" class="common-anchor-header">Verwendung eines Rerankers zur Verbesserung der Suchergebnisse<button data-href="#Use-a-reranker-to-enhance-search-results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Verbessern Sie dann die Relevanz Ihrer Suchergebnisse mit einem Reranking-Schritt. In diesem Beispiel verwenden wir <code translate="no">CrossEncoderRerankFunction</code>, das in PyMilvus integriert ist, um die Ergebnisse zur Verbesserung der Genauigkeit neu zu ordnen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># use reranker to rerank search results</span>
 
 <span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> CrossEncoderRerankFunction

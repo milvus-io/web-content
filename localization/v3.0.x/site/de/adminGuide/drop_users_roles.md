@@ -198,7 +198,7 @@ client.dropRole(dropRoleReq);
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Sobald die Rolle gelöscht wurde, können Sie alle vorhandenen Rollen auflisten, um zu überprüfen, ob der Löschvorgang erfolgreich war.</p>
+<p>Sobald die Rolle gelöscht wurde, können Sie alle vorhandenen Rollen auflisten, um zu prüfen, ob der Löschvorgang erfolgreich war.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

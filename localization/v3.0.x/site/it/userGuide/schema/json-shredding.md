@@ -348,8 +348,8 @@ beta: Milvus 2.6.2+
       </svg>
     </button></h3><ul>
 <li><p>Le<strong>query a chiave condivisa</strong> mostrano i miglioramenti più evidenti (fino a 89 volte più veloci)</p></li>
-<li><p><strong>Le query con chiave tipizzata</strong> forniscono un aumento costante delle prestazioni di 15-30 volte</p></li>
-<li><p><strong>Tutti i tipi di query</strong> traggono vantaggio dal JSON Shredding senza regressioni di prestazioni</p></li>
+<li><p><strong>Le query con chiave tipizzata</strong> forniscono un aumento costante delle prestazioni di 15-30 volte.</p></li>
+<li><p><strong>Tutti i tipi di query</strong> traggono vantaggio dal JSON Shredding senza regressioni delle prestazioni</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">DOMANDE FREQUENTI<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -1,7 +1,7 @@
 ---
 id: kafka-connect-milvus.md
 summary: >-
-  تم دمج Apache Kafka مع Milvus وZilliz Cloud لدفق البيانات المتجهة. تعرّف على
+  تم دمج Apache Kafka مع Milvus وZilliz Cloud لتدفق البيانات المتجهة. تعرّف على
   كيفية استخدام موصل Kafka-Milvus لإنشاء خطوط أنابيب في الوقت الفعلي للبحث
   الدلالي وأنظمة التوصيات والتحليلات القائمة على الذكاء الاصطناعي.
 title: >-
@@ -122,7 +122,7 @@ title: >-
 <li><p>إذا لم يكن لديك موضوع بالفعل في كافكا، قم بإنشاء موضوع (على سبيل المثال <code translate="no">topic_0</code>) في كافكا.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bin/kafka-topics.sh --create --topic topic_0 --bootstrap-server localhost:9092</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>إذا لم يكن لديك بالفعل مجموعة في زيليز كلاود، فأنشئ مجموعة مع حقل متجه (في هذا المثال المتجه <code translate="no">dimension=8</code>). يمكنك استخدام مثال المخطط التالي على زيليز كلاود:</p>
+<li><p>إذا لم يكن لديك بالفعل مجموعة في Zilliz Cloud، فأنشئ مجموعة مع حقل متجه (في هذا المثال المتجه <code translate="no">dimension=8</code>). يمكنك استخدام مثال المخطط التالي على زيليز كلاود:</p>
 <p><img translate="no" src="https://github.com/zilliztech/kafka-connect-milvus/raw/main/src/main/resources/images/collection_schema.png" width="100%"  alt=""/></p>
 <p><div class="alert note"></p>
 <p>ملاحظة: تأكد من تطابق المخطط على كلا الجانبين. في المخطط، يوجد حقل متجه واحد فقط. أسماء كل حقل على كلا الجانبين هي نفسها تمامًا.</p>
@@ -186,4 +186,19 @@ topics=topic_0
 <li><p>تحقق مما إذا تم إدراج الكيان في المجموعة في زيليز كلاود. هذا ما يبدو عليه الأمر في زيليز كلاود إذا نجح الإدراج:</p>
 <p><img translate="no" src="https://github.com/zilliztech/kafka-connect-milvus/raw/main/src/main/resources/images/insearted_entities.png" width="80%" /></p></li>
 </ol>
-<h3 id="Support" class="common-anchor-header">الدعم</h3><p>إذا كنت بحاجة إلى أي مساعدة أو كانت لديك أسئلة بخصوص موصل Kafka Connect Milvus Connector، فلا تتردد في التواصل مع المشرف على الموصل: <strong>البريد الإلكتروني:</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>
+<h3 id="Support" class="common-anchor-header">الدعم<button data-href="#Support" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>إذا كنت بحاجة إلى أي مساعدة أو كانت لديك أسئلة بخصوص موصل Kafka Connect Milvus Connector، فلا تتردد في التواصل مع المشرف على الموصل: <strong>البريد الإلكتروني:</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>

@@ -95,7 +95,7 @@ beta: Milvus 2.6.4+
 <li><p>Si un champ possède son propre paramètre de réchauffement, ce paramètre a la priorité sur les paramètres au niveau de la collection et du cluster.</p></li>
 <li><p>S'il n'existe aucun paramètre au niveau du champ ou de l'index, c'est le paramètre au niveau de la collection qui s'applique.</p></li>
 <li><p>S'il n'existe aucun paramètre au niveau du champ ou de l'index, ni au niveau de la collection, c'est le paramètre au niveau du cluster qui s'applique.</p></li>
-<li><p>Lors de l'utilisation d'opérations de modification, c'est la valeur de modification la plus récente qui prend effet.</p></li>
+<li><p>Lors de l'utilisation d'opérations de modification, c'est la valeur de modification la plus récente qui s'applique.</p></li>
 </ul>
 <h2 id="Configure-warmup-at-cluster-level" class="common-anchor-header">Configurer le réchauffement au niveau du cluster<button data-href="#Configure-warmup-at-cluster-level" class="anchor-icon" translate="no">
       <svg translate="no"

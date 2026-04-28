@@ -47,7 +47,7 @@ beta: Milvus 2.6.x
     </button></h2><p>在配置 Vertex AI 之前，请确保满足以下要求：</p>
 <ul>
 <li><p><strong>运行 Milvus 2.6 或更高版本</strong>- 确认您的部署满足最低版本要求。</p></li>
-<li><p><strong>创建 Google 云服务账户</strong>- 至少，您可能需要 "Vertex AI 用户 "等角色或其他更具体的角色。有关详细信息，请参阅<a href="https://cloud.google.com/iam/docs/service-accounts-create?_gl=1*1jz33xw*_ga*MjE0NTAwMjk3Mi4xNzUwMTQwNTMw*_ga_WH2QY8WWF5*czE3NTAxNDA1MzEkbzEkZzEkdDE3NTAxNDIyOTEkajE0JGwwJGgw">创建服务帐户</a>。</p></li>
+<li><p><strong>创建 Google 云服务帐户</strong>- 至少，您可能需要 "Vertex AI 用户 "等角色或其他更具体的角色。有关详细信息，请参阅<a href="https://cloud.google.com/iam/docs/service-accounts-create?_gl=1*1jz33xw*_ga*MjE0NTAwMjk3Mi4xNzUwMTQwNTMw*_ga_WH2QY8WWF5*czE3NTAxNDA1MzEkbzEkZzEkdDE3NTAxNDIyOTEkajE0JGwwJGgw">创建服务帐户</a>。</p></li>
 <li><p><strong>下载服务帐户的 JSON 密钥文件</strong>- 将此凭证文件安全地存储在服务器或本地计算机上。有关详情，请参阅<a href="https://cloud.google.com/iam/docs/keys-create-delete?_gl=1*ittbs8*_ga*MjE0NTAwMjk3Mi4xNzUwMTQwNTMw*_ga_WH2QY8WWF5*czE3NTAxNDA1MzEkbzEkZzEkdDE3NTAxNDI0NjMkajYwJGwwJGgw#creating">创建服务帐户密钥</a>。</p></li>
 </ul>
 <h2 id="Configure-credentials" class="common-anchor-header">配置凭据<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
@@ -83,7 +83,22 @@ beta: Milvus 2.6.x
      <td><p>容器工作流程、快速测试</p></td>
    </tr>
 </table>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">选项 1：配置文件（推荐且优先级更高）</h3><p>Milvus 总是优先选择在<code translate="no">milvus.yaml</code> 中声明的凭据，而不是同一提供商的任何环境变量。</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">选项 1：配置文件（推荐且优先级更高）<button data-href="#Option-1-Configuration-file-recommended--higher-priority" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 总是优先选择在<code translate="no">milvus.yaml</code> 中声明的凭据，而不是同一提供商的任何环境变量。</p>
 <ol>
 <li><p>对 JSON 密钥进行 Base64 编码</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> credentials.json | jq . | <span class="hljs-built_in">base64</span>
@@ -108,7 +123,22 @@ beta: Milvus 2.6.x
 <p>如果以后需要轮换密钥，只需更新<code translate="no">credential_json</code> 下的 Base64 字符串，然后重启 Milvus--无需更改环境或容器。</p>
 <p></div></p></li>
 </ol>
-<h3 id="Option-2-Environment-variables" class="common-anchor-header">选项 2：环境变量</h3><p>如果喜欢在部署时注入秘密，请使用此方法。只有当<code translate="no">milvus.yaml</code> 中不存在匹配的条目时，Milvus 才会使用环境变量。</p>
+<h3 id="Option-2-Environment-variables" class="common-anchor-header">选项 2：环境变量<button data-href="#Option-2-Environment-variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果喜欢在部署时注入秘密，请使用此方法。只有当<code translate="no">milvus.yaml</code> 中不存在匹配的条目时，Milvus 才会使用环境变量。</p>
 <div class="alert note">
 <p>配置步骤取决于 Milvus 的部署模式（独立集群与分布式集群）和协调平台（Docker Compose 与 Kubernetes）。</p>
 </div>
@@ -134,7 +164,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">:ro</code> 标志确保只读访问的安全性</p></li>
 </ul></li>
 <li><p><strong>设置环境变量</strong></p>
-<p>在同一个<code translate="no">docker-compose.yaml</code> 文件中，添加指向凭证路径的环境变量：</p>
+<p>在同一<code translate="no">docker-compose.yaml</code> 文件中，添加指向凭证路径的环境变量：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">services:</span>
   <span class="hljs-attr">standalone:</span>
     <span class="hljs-attr">environment:</span>
@@ -224,7 +254,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Vertex AI 配置完成后，请按照以下步骤定义和使用嵌入函数。</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">步骤 1：定义 Schema 字段</h3><p>要使用嵌入功能，请创建具有特定 Schema 的 Collections。此 Schema 必须至少包含三个必要字段：</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">步骤 1：定义 Schema 字段<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要使用嵌入功能，请创建具有特定 Schema 的 Collections。此 Schema 必须至少包含三个必要字段：</p>
 <ul>
 <li><p>主字段，用于唯一标识 Collections 中的每个实体。</p></li>
 <li><p>标量字段，用于存储要嵌入的原始数据。</p></li>
@@ -244,7 +289,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the output dimension of the model and parameters</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">步骤 2：向 Schema 添加嵌入函数</h3><p>Milvus 中的函数模块会自动将标量字段中存储的原始数据转换为嵌入数据，并将其存储到明确定义的向量字段中。</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">步骤 2：向 Schema 添加嵌入函数<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 中的函数模块会自动将标量字段中存储的原始数据转换为嵌入数据，并将其存储到明确定义的向量字段中。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define Vertex AI embedding function</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;vert_func&quot;</span>,                           <span class="hljs-comment"># Unique identifier for this embedding function</span>

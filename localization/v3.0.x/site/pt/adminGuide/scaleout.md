@@ -22,7 +22,7 @@ title: Escalar um Cluster Milvus
         ></path>
       </svg>
     </button></h1><p>O Milvus suporta o escalonamento horizontal dos seus componentes. Isto significa que pode aumentar ou diminuir o número de nós de trabalho de cada tipo de acordo com as suas necessidades.</p>
-<p>Este tópico descreve como aumentar e diminuir a escala de um cluster Milvus. Presumimos que já tenha <a href="/docs/pt/install_cluster-helm.md">instalado um cluster Milvus</a> antes de efetuar o escalonamento. Além disso, recomendamos que se familiarize com a <a href="/docs/pt/architecture_overview.md">arquitetura do Milvus</a> antes de começar.</p>
+<p>Este tópico descreve como aumentar e diminuir a escala de um cluster Milvus. Partimos do princípio de que já instalou <a href="/docs/pt/install_cluster-helm.md">um cluster Milvus</a> antes de efetuar o escalonamento. Além disso, recomendamos que se familiarize com a <a href="/docs/pt/architecture_overview.md">arquitetura do Milvus</a> antes de começar.</p>
 <p>Este tutorial usa como exemplo o escalonamento de três nós de consulta. Para dimensionar outros tipos de nós, substitua <code translate="no">queryNode</code> pelo tipo de nó correspondente na linha de comando.</p>
 <div class="alert note">
 <p>Para obter informações sobre como dimensionar um cluster com o Milvus Operator, consulte <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/scale-a-milvus-cluster.md">Dimensionar um cluster com o Milvus Operator</a>.</p>
@@ -43,14 +43,29 @@ title: Escalar um Cluster Milvus
         ></path>
       </svg>
     </button></h2><p>O escalonamento horizontal inclui o escalonamento para fora e para dentro.</p>
-<h3 id="Scaling-out" class="common-anchor-header">Dimensionamento para fora</h3><p>O escalonamento para fora refere-se ao aumento do número de nós em um cluster. Ao contrário do aumento de escala, o aumento de escala não requer a alocação de mais recursos para um nó no cluster. Em vez disso, o aumento de escala expande o cluster horizontalmente, adicionando mais nós.</p>
+<h3 id="Scaling-out" class="common-anchor-header">Dimensionamento para fora<button data-href="#Scaling-out" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O escalonamento para fora refere-se ao aumento do número de nós em um cluster. Ao contrário do aumento de escala, o aumento de escala não requer a alocação de mais recursos para um nó no cluster. Em vez disso, o aumento de escala expande o cluster horizontalmente, adicionando mais nós.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
    </span> <span class="img-wrapper"> <span>Aumento de escala</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>Aumento de escala</span> </span></p>
 <p>De acordo com a <a href="/docs/pt/architecture_overview.md">arquitetura Milvus</a>, os nós de trabalho sem estado incluem o nó de consulta, o nó de dados, o nó de índice e o proxy. Portanto, é possível escalar esses tipos de nós para atender às suas necessidades de negócios e cenários de aplicativos. Pode escalar o cluster Milvus manualmente ou automaticamente.</p>
 <p>Geralmente, será necessário expandir o cluster Milvus criado se ele estiver sendo usado em excesso. Abaixo estão algumas situações típicas em que pode ser necessário dimensionar o cluster do Milvus:</p>
@@ -61,7 +76,22 @@ title: Escalar um Cluster Milvus
 <li>É necessário processar volumes massivos de grandes conjuntos de dados.</li>
 <li>É necessário garantir a alta disponibilidade do serviço Milvus.</li>
 </ul>
-<h3 id="Scaling-in" class="common-anchor-header">Aumento de escala</h3><p>O escalonamento refere-se à diminuição do número de nós num cluster. Geralmente, será necessário escalar o cluster Milvus que criou se este estiver a ser subutilizado. Abaixo estão algumas situações típicas em que é necessário escalonar o cluster Milvus:</p>
+<h3 id="Scaling-in" class="common-anchor-header">Aumento de escala<button data-href="#Scaling-in" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O escalonamento refere-se à diminuição do número de nós num cluster. Geralmente, será necessário escalar o cluster Milvus que criou se este estiver a ser subutilizado. Abaixo estão algumas situações típicas em que é necessário escalonar o cluster Milvus:</p>
 <ul>
 <li>A utilização da CPU e da memória é baixa por um período de tempo.</li>
 <li>A taxa de transferência da consulta torna-se mais baixa.</li>
@@ -116,7 +146,7 @@ O Milvus só suporta a adição dos nós de trabalho e não suporta a adição d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>É possível dimensionar o cluster do Milvus manual ou automaticamente. Para o dimensionamento automático com o HPA (Horizontal Pod Autoscaling), consulte <a href="/docs/pt/hpa.md">Configurar HPA para Milvus</a>. Se o escalonamento automático estiver ativado, o cluster do Milvus será reduzido ou expandido automaticamente quando o consumo de recursos de CPU e memória atingir o valor definido.</p>
+    </button></h2><p>É possível dimensionar o cluster do Milvus manual ou automaticamente. Para o dimensionamento automático com o HPA (Horizontal Pod Autoscaling), consulte <a href="/docs/pt/hpa.md">Configurar o HPA para o Milvus</a>. Se o escalonamento automático estiver ativado, o cluster do Milvus será reduzido ou expandido automaticamente quando o consumo de recursos de CPU e memória atingir o valor definido.</p>
 <p>Atualmente, o Milvus 2.1.0 suporta apenas o escalonamento manual.</p>
 <h4 id="Scaling-out" class="common-anchor-header">Redimensionamento</h4><p>Execute <code translate="no">helm upgrade my-release milvus/milvus --set queryNode.replicas=3 --reuse-values</code> para dimensionar manualmente o nó de consulta.</p>
 <p>Se for bem-sucedido, três pods em execução no nó de consulta serão adicionados, conforme mostrado no exemplo a seguir.</p>
@@ -174,9 +204,9 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <ul>
 <li>Saiba como implantar <a href="/docs/pt/eks.md">o Milvus no Amazon EKS com o Terraform</a></li>
 <li>Saiba como implantar <a href="/docs/pt/gcp.md">o Milvus Cluster no GCP com Kubernetes</a></li>
-<li>Saiba como <a href="/docs/pt/azure.md">implantar o Milvus no Microsoft Azure com o Kubernetes</a></li>
+<li>Saiba como <a href="/docs/pt/azure.md">implantar o Milvus no Microsoft Azure com Kubernetes</a></li>
 </ul></li>
-<li><p>Se estiver à procura de instruções sobre como alocar recursos:</p>
+<li><p>Se você está procurando instruções sobre como alocar recursos:</p>
 <ul>
 <li><a href="/docs/pt/allocate.md#standalone">Alocar recursos no Kubernetes</a></li>
 </ul></li>

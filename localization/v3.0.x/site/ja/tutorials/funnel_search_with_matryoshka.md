@@ -19,8 +19,8 @@ title: マトリョーシカ埋め込みによる漏斗探索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.6.x/assets/funnel-search.png' width='100%'></div>
-効率的なベクトル検索システムを構築する際の重要な課題の1つは、許容可能なレイテンシとリコールを維持しながらストレージコストを管理することです。最新の埋め込みモデルは数百から数千次元のベクトルを出力するため、生のベクトルとインデックスに大きなストレージと計算オーバーヘッドが発生します。<p>従来は、インデックスを構築する直前に量子化や次元削減を行うことで、ストレージの容量を削減していました。例えば、積量子化(PQ)を使って精度を下げたり、主成分分析(PCA)を使って次元数を下げることで、ストレージを節約することができます。これらの方法はベクトル集合全体を分析し、ベクトル間の意味的関係を維持したまま、よりコンパクトなものを見つける。</p>
+    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/funnel-search.png' width='100%'></div>
+効率的なベクトル検索システムを構築する際の重要な課題の1つは、許容可能なレイテンシとリコールを維持しながらストレージコストを管理することです。最新の埋め込みモデルは数百から数千次元のベクトルを出力するため、未加工のベクトルとインデックスに多大なストレージと計算オーバーヘッドが発生します。<p>従来は、インデックスを構築する直前に量子化や次元削減を行うことで、ストレージの容量を削減していました。例えば、積量子化(PQ)を使って精度を下げたり、主成分分析(PCA)を使って次元数を下げることで、ストレージを節約することができます。これらの方法はベクトル集合全体を分析し、ベクトル間の意味的関係を維持したまま、よりコンパクトなものを見つける。</p>
 <p>効果的ではあるが、これらの標準的なアプローチは精度や次元数を一度だけ、しかも単一のスケールで削減する。しかし、複数の詳細なレイヤーを同時に維持し、ピラミッドのように精度を高めていくことができるとしたらどうだろう？</p>
 <p>マトリョーシカ埋め込みが登場する。ロシアの入れ子人形にちなんで名付けられたこの巧妙な構造は（図を参照）、1つのベクトル内に複数のスケールの表現を埋め込む。従来の後処理手法とは異なり、マトリョーシカ埋め込みは最初の学習過程でこのマルチスケール構造を学習する。その結果は驚くべきもので、完全な埋め込みが入力セマンティクスを捉えるだけでなく、入れ子になった各サブセットの接頭辞（前半、4分の1など）が、詳細ではないにせよ、首尾一貫した表現を提供します。</p>
 <p>このノートブックでは、Milvusを使ったマトリョーシカ埋め込みを意味検索に使う方法を検討する。ファネル検索」と呼ばれるアルゴリズムにより、埋め込み次元の小さなサブセットで類似検索を行うことができます。</p>
@@ -129,7 +129,7 @@ fields = [
 schema = CollectionSchema(fields=fields, enable_dynamic_field=<span class="hljs-literal">False</span>)
 client.create_collection(collection_name=collection_name, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvusは現在、埋め込みデータの部分集合を検索することをサポートしていないため、埋め込みデータを2つの部分に分割する：頭部はインデックスと検索を行うベクトルの初期部分集合を表し、尾部は残りの部分である。このモデルは余弦距離類似検索のために学習されたものなので、head embeddingsを正規化します。しかし、後でより大きな部分集合の類似度を計算するために、先頭の埋込みのノルムを保存する必要があります。</p>
+<p>Milvusは現在、埋込みデータの部分集合を検索することをサポートしていないので、埋込みデータを2つの部分に分割します：頭部はインデックスを付け検索するベクトルの初期部分集合を表し、尾部は残りの部分です。このモデルは余弦距離類似検索のために学習されたものなので、頭の埋め込みを正規化します。しかし、後でより大きな部分集合の類似度を計算するために、頭の埋め込み値のノルムを保存しておく必要があります。</p>
 <p>埋込みの最初の1/6を検索するためには、<code translate="no">head_embedding</code> フィールド上のベクトル検索インデックスを作成する必要があります。後ほど、「ファネル検索」と通常のベクトル検索の結果を比較しますので、完全な埋め込みに対する検索インデックスも作成します。</p>
 <p><em>重要なのは、<code translate="no">IP</code> の距離尺度ではなく、<code translate="no">COSINE</code> の距離尺度を使うことです。そうしないと、埋め込みノルムを追跡する必要があり、実装が複雑になるからです（これは、ファネル検索のアルゴリズムが説明されれば、より理解できるようになるでしょう）。</em></p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -205,7 +205,7 @@ res = client.search(
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;head_embedding&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>この時点で、より小さなベクトル空間に対して検索を実行したので、全空間に対して検索を実行するよりも、待ち時間が短縮され、インデックスのストレージ要件も軽減されている可能性が高い。各クエリの上位5件を調べてみましょう：</p>
+<p>この時点では、より小さなベクトル空間上で検索を実行したため、全空間上で検索するよりも待ち時間が短縮され、インデックスのストレージ要件も軽減されている可能性が高い。各クエリの上位5件を調べてみましょう：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> query, hits <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(queries, res):
     rows = [x[<span class="hljs-string">&quot;entity&quot;</span>] <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> hits][:<span class="hljs-number">5</span>]
 
@@ -256,7 +256,7 @@ The House in Marsh Road
 dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 <button class="copy-code-btn"></button></code></pre>
 <p>さて、ファネル検索を実行するために、我々は埋込みのますます大きなサブセットに対して反復します。各反復において、我々は新しい類似度に従って候補を再ランク付けし、最下位にランク付けされた候補の一部を削除する。</p>
-<p>これを具体的にするために、前のステップでは、埋め込みとクエリの次元の1/6を使って128の候補を検索した。ファネル検索の最初のステップは、<em>最初の1/3の次元を用いて</em>クエリと候補の類似度を再計算することである。下位64個の候補は刈り込まれる。次に<em>最初の2/3の次元</em>、そして<em>全ての次元で</em>このプロセスを繰り返し、32と16の候補に順次刈り込んでいく。</p>
+<p>これを具体的にするために、前のステップでは、埋め込みとクエリの次元の1/6を使って128の候補を検索した。ファネル検索の最初のステップは、<em>最初の1/3の次元を用いて</em>クエリと候補の類似度を再計算することである。下位64個の候補は刈り込まれる。次に、<em>最初の2/3の次元</em>、そして<em>全ての次元で</em>このプロセスを繰り返し、32と16の候補に順次刈り込んでいく。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># An optimized implementation would vectorize the calculation of similarity scores across rows (using a matrix)</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_score</span>(<span class="hljs-params">row, query_emb=<span class="hljs-literal">None</span>, dims=<span class="hljs-number">768</span></span>):
     emb = F.normalize(row[<span class="hljs-string">&quot;embedding&quot;</span>][:dims], dim=-<span class="hljs-number">1</span>)
@@ -319,7 +319,7 @@ A young couple with a kid look after a hotel during winter and the husband goes 
 12         Home Alone
 Name: title, dtype: object 
 </code></pre>
-<p>追加のベクトル検索を行うことなく、想起を回復させることができた！定性的には、これらの結果は "Raiders of the Lost Ark "と "The Shining "については、チュートリアルの<a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"MilvusとSentence Transformersを使った映画検索 "の</a>標準的なベクトル検索よりも高い想起率を示しているようです。しかし、このチュートリアルで後ほど紹介する "Ferris Bueller's Day Off "を見つけることはできない。(より定量的な実験とベンチマークについては論文<a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learningを</a>参照)</p>
+<p>追加のベクトル検索を行うことなく、想起を回復させることができた！定性的には、これらの結果は、"Raiders of the Lost Ark "と "The Shining "については、チュートリアルの<a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"MilvusとSentence Transformersを使った映画検索 "の</a>標準的なベクトル検索よりも高い想起率を示しているようです。しかし、このチュートリアルで後ほど紹介する "Ferris Bueller's Day Off "を見つけることはできない。(より定量的な実験とベンチマークについては論文<a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learningを</a>参照)</p>
 <h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">漏斗探索と通常探索の比較<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -584,7 +584,7 @@ Leopard in the Snow
         ></path>
       </svg>
     </button></h2><p>以下は、メソッド間の検索結果の比較である：</p>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.6.x/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
-<div style='margin: auto; width: 100%;'><img translate="no" src='/docs/v2.6.x/assets/results-ferris-buellers-day-off.png' width='100%'></div>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.6.x/assets/results-the-shining.png' width='100%'></div>
-我々はMilvusとマトリョーシカ埋め込みを用いて、"漏斗探索 "と呼ばれるより効率的な意味検索アルゴリズムを実行する方法を示した。また、アルゴリズムの再ランク付けと枝刈りステップの重要性と、初期候補リストが小さすぎる場合の失敗モードについても検討した。最後に、サブエンベッディングを形成する際に、次元の順序がいかに重要であるかを議論した。というか、モデルが特定の方法で学習されたからこそ、エンベッディングの接頭辞が意味を持つのです。これで、マトリョーシカ埋め込みとファネル検索を実装することで、検索性能をあまり犠牲にすることなく、セマンティック検索のストレージコストを削減する方法がお分かりいただけたと思います！
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
+<div style='margin: auto; width: 100%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-ferris-buellers-day-off.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-the-shining.png' width='100%'></div>
+我々はMilvusとマトリョーシカ埋め込みを用いて、"漏斗探索 "と呼ばれるより効率的な意味検索アルゴリズムを実行する方法を示した。また、アルゴリズムの再ランク付けと枝刈りステップの重要性と、初期候補リストが小さすぎる場合の失敗モードについても探求した。最後に、サブエンベッディングを形成する際に、次元の順序がいかに重要であるかを議論した。というか、モデルが特定の方法で学習されたからこそ、エンベッディングの接頭辞が意味を持つのです。これで、マトリョーシカ埋め込みとファネル検索を実装することで、検索性能をあまり犠牲にすることなく、セマンティック検索のストレージコストを削減する方法がお分かりいただけたと思います！

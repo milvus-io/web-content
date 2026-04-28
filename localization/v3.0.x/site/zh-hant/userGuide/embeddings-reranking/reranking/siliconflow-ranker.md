@@ -46,7 +46,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>在 Milvus 中實作 SiliconFlow Ranker 之前，請確保您擁有</p>
 <ul>
-<li><p>一個具有<code translate="no">VARCHAR</code> 欄位的 Milvus 集合，該欄位包含要重新排名的文字</p></li>
+<li><p>一個具有<code translate="no">VARCHAR</code> 欄位的 Milvus 集合，其中包含要重新排名的文字</p></li>
 <li><p>一個有效的 SiliconFlow API 密鑰，可以存取 reranking 模型。在<a href="https://www.siliconflow.com/">SiliconFlow 平台</a>註冊以取得您的 API 認證。您可以</p>
 <ul>
 <li><p>設定<code translate="no">SILICONFLOW_API_KEY</code> 環境變數，或</p></li>

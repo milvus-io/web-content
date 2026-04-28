@@ -157,7 +157,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <th><p>Paramètre</p></th>
      <th><p>Nécessaire ?</p></th>
-     <th><p>Description du paramètre</p></th>
+     <th><p>Description</p></th>
      <th><p>Valeur / Exemple</p></th>
    </tr>
    <tr>

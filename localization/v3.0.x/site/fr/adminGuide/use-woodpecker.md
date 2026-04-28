@@ -39,7 +39,7 @@ beta: Milvus 2.6.x
     </button></h2><ul>
 <li>À partir de Milvus 2.6, Woodpecker est un WAL optionnel qui fournit des écritures ordonnées et une récupération en tant que service de journalisation.</li>
 <li>En tant que choix de file d'attente de messages, il se comporte de manière similaire à Pulsar/Kafka et peut être activé via la configuration.</li>
-<li>Deux supports de stockage sont pris en charge : le système de fichiers local (<code translate="no">local</code>) et le stockage d'objets (<code translate="no">minio</code>/S3-compatible).</li>
+<li>Deux backends de stockage sont pris en charge : le système de fichiers local (<code translate="no">local</code>) et le stockage d'objets (<code translate="no">minio</code>/S3-compatible).</li>
 </ul>
 <h2 id="Quick-start" class="common-anchor-header">Démarrage rapide<button data-href="#Quick-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,7 +76,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous trouverez ci-dessous le bloc de configuration complet de Woodpecker (modifiez <code translate="no">milvus.yaml</code> ou remplacez le bloc dans <code translate="no">user.yaml</code>) :</p>
+    </button></h2><p>Vous trouverez ci-dessous le bloc de configuration complet de Woodpecker (modifiez <code translate="no">milvus.yaml</code> ou remplacez dans <code translate="no">user.yaml</code>) :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Related configuration of woodpecker, used to manage Milvus logs of recent mutation operations, output streaming log, and provide embedded log sequential read and write.</span>
 <span class="hljs-attr">woodpecker:</span>
   <span class="hljs-attr">meta:</span>
@@ -351,7 +351,7 @@ docker restart milvus-standalone
 </ul></li>
 <li>Côté client/application<ul>
 <li>Utiliser des lots plus importants et un plus grand nombre d'écrivains/clients simultanés.</li>
-<li>Contrôler la synchronisation de l'actualisation et de la constitution de l'index (mettre en lot avant de déclencher) afin d'éviter les petites écritures fréquentes.</li>
+<li>Contrôler la synchronisation de l'actualisation et de la constitution de l'index (mise en lot avant le déclenchement) afin d'éviter les petites écritures fréquentes.</li>
 </ul></li>
 </ul>
 <p>Démonstration d'insertion par lots</p>
@@ -412,6 +412,6 @@ batch_count = <span class="hljs-number">2000</span>
         ></path>
       </svg>
     </button></h2><p>Woodpecker est un WAL natif conçu pour le stockage d'objets avec des compromis entre le débit, le coût et la latence. Le mode léger intégré actuellement pris en charge donne la priorité à l'optimisation des coûts et du débit, car la plupart des scénarios exigent que les données soient écrites dans un certain délai plutôt que d'exiger une faible latence pour les demandes d'écriture individuelles. Par conséquent, Woodpecker utilise des écritures par lots, avec des intervalles par défaut de 10 ms pour les backends de stockage de systèmes de fichiers locaux et de 200 ms pour les backends de stockage de type MinIO. Lors d'opérations d'écriture lentes, la latence maximale est égale au temps d'intervalle plus le temps de vidage.</p>
-<p>Notez que l'insertion de lots est déclenchée non seulement par les intervalles de temps mais aussi par la taille du lot, qui est par défaut de 2 Mo.</p>
+<p>Notez que l'insertion de lots est déclenchée non seulement par les intervalles de temps, mais aussi par la taille du lot, qui est par défaut de 2 Mo.</p>
 <p>Pour plus de détails sur l'architecture, les modes de déploiement (MemoryBuffer / QuorumBuffer) et les performances, voir <a href="/docs/fr/woodpecker_architecture.md">Architecture Woodpecker</a>.</p>
 <p>Pour plus de détails sur les paramètres, voir le <a href="https://github.com/zilliztech/woodpecker">dépôt GitHub</a> Woodpecker.</p>

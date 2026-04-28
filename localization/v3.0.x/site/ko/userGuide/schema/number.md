@@ -45,7 +45,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">INT64</code></p></td>
-     <td><p>64비트 정수, 타임스탬프나 식별자와 같은 대용량 데이터 저장에 적합합니다.</p></td>
+     <td><p>64비트 정수 - 타임스탬프나 식별자와 같은 대용량 데이터 저장에 적합합니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT</code></p></td>
@@ -78,10 +78,10 @@ summary: >-
     </button></h2><p>숫자 데이터를 저장하려면 컬렉션 스키마에 숫자 필드를 정의합니다. 다음은 두 개의 숫자 필드가 있는 컬렉션 스키마의 예입니다:</p>
 <ul>
 <li><p><code translate="no">age</code>: 정수 데이터를 저장하고, null 값을 허용하며, 기본값은 <code translate="no">18</code> 입니다.</p></li>
-<li><p><code translate="no">price</code>는 부동 소수점 데이터를 저장하고 null 값을 허용하지만 기본값은 없습니다.</p></li>
+<li><p><code translate="no">price</code>: 는 실수 데이터를 저장하고 null 값을 허용하지만 기본값은 없습니다.</p></li>
 </ul>
 <div class="alert note">
-<p>스키마를 정의할 때 <code translate="no">enable_dynamic_fields=True</code> 을 설정하면 Milvus에서는 미리 정의하지 않은 스칼라 필드를 삽입할 수 있습니다. 그러나 이렇게 하면 쿼리 및 관리의 복잡성이 증가하여 성능에 영향을 미칠 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>
+<p>스키마를 정의할 때 <code translate="no">enable_dynamic_fields=True</code> 을 설정하면 Milvus에서는 미리 정의되지 않은 스칼라 필드를 삽입할 수 있습니다. 그러나 이렇게 하면 쿼리 및 관리의 복잡성이 증가하여 성능에 영향을 미칠 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -651,7 +651,7 @@ curl --request POST \
   &quot;outputFields&quot;: [&quot;age&quot;, &quot;price&quot;, &quot;pk&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">age</code> 에 <code translate="no">18</code> 값이 있는 엔티티를 검색하려면 아래 표현식을 사용합니다. <code translate="no">age</code> 의 기본값은 <code translate="no">18</code> 이므로 예상 결과에는 <code translate="no">age</code> 가 명시적으로 <code translate="no">18</code> 로 설정된 엔터티 또는 <code translate="no">age</code> 가 null 로 설정된 엔터티가 포함되어야 합니다.</p>
+<p><code translate="no">age</code> 에 <code translate="no">18</code> 값이 있는 엔티티를 검색하려면 아래 표현식을 사용합니다. <code translate="no">age</code> 의 기본값은 <code translate="no">18</code> 이므로 예상 결과에는 <code translate="no">age</code> 가 명시적으로 <code translate="no">18</code> 로 설정된 엔티티 또는 <code translate="no">age</code> 가 null로 설정된 엔티티가 포함되어야 합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age == 18&#x27;</span>

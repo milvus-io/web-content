@@ -37,7 +37,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Search 請求會返回搜尋結果，而 SearchIterator 會返回一個迭代器。您可以呼叫這個迭代器的<strong>next()</strong>方法來取得搜尋結果。</p>
-<p>具體來說，您可以如下使用 SearchIterator：</p>
+<p>具體而言，您可以如下方式使用 SearchIterator：</p>
 <ol>
 <li><p>建立一個 SearchIterator，並設定<strong>每個搜尋要求要傳回的實體數量</strong>，以及<strong>要傳回的實體總數</strong>。</p></li>
 <li><p>在循環中呼叫 SearchIterator 的<strong>next()</strong>方法，以分頁方式取得搜尋結果。</p></li>
@@ -134,7 +134,7 @@ iterator = collection.search_iterator(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在上述範例中，您將每次搜尋要返回的實體數量<strong>(</strong><strong>batch_size/batchSize</strong>) 設定為 50，而要返回的實體總數<strong>(topK</strong>) 設定為 20,000。</p>
+<p>在上述範例中，您將每次搜尋要返回的實體數量<strong>(</strong><strong>batch_size/batchSize</strong>) 設定為 50，並將要返回的實體總數<strong>(topK</strong>) 設定為 20,000。</p>
 <h2 id="Use-SearchIterator" class="common-anchor-header">使用 SearchIterator<button data-href="#Use-SearchIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -186,4 +186,4 @@ iterator = collection.search_iterator(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在上面的程式碼範例中，您建立了一個無限循環，並在循環中呼叫<strong>next()</strong>方法，將搜尋結果儲存在變數中，並在<strong>next()</strong>沒有回傳任何結果時關閉迭代器。</p>
+<p>在上面的程式碼範例中，您建立了一個無限循環，並在循環中呼叫<strong>next(</strong> <strong>)</strong>方法，將搜尋結果儲存在變數中，並在<strong>next()</strong>沒有回傳任何結果時關閉迭代器。</p>

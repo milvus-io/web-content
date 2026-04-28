@@ -161,7 +161,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">reranker</code></p></td>
      <td><p>예</p></td>
-     <td><p>모델 순위 재지정을 사용하려면 <code translate="no">"model"</code> 으로 설정해야 합니다.</p></td>
+     <td><p>모델 순위 재지정을 사용하려면 <code translate="no">"model"</code> 로 설정해야 합니다.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>

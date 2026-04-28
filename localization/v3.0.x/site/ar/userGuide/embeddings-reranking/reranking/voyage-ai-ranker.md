@@ -155,7 +155,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">provider</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>مزود خدمة النموذج المراد استخدامه لإعادة الترتيب.</p></td>
+     <td><p>مزود خدمة النموذج المراد استخدامه لإعادة ترتيب النماذج.</p></td>
      <td><p><code translate="no">"voyageai"</code></p></td>
    </tr>
    <tr>

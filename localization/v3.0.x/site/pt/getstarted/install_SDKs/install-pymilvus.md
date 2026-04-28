@@ -102,7 +102,7 @@ Recomenda-se a instalação de uma versão do PyMilvus que corresponda à versã
 <li><a href="/docs/pt/manage-collections.md">Gerir colecções</a></li>
 <li><a href="/docs/pt/manage-partitions.md">Gerir partições</a></li>
 <li><a href="/docs/pt/insert-update-delete.md">Inserir, Upsert e Apagar</a></li>
-<li><a href="/docs/pt/single-vector-search.md">Pesquisa de vetor único</a></li>
+<li><a href="/docs/pt/single-vector-search.md">Pesquisa de um único vetor</a></li>
 <li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
 </ul></li>
 <li><p>Explorar <a href="/api-reference/pymilvus/v2.4.x/About.md">a referência da API do PyMilvus</a></p></li>

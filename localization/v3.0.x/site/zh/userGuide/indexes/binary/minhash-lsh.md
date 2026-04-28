@@ -1,8 +1,7 @@
 ---
 id: minhash-lsh.md
 title: MINHASH_LSH
-summary: >-
-  高效的重复数据删除和相似性搜索对于大规模机器学习数据集来说至关重要，尤其是对于为大型语言模型（LLMs）清理训练语料库等任务来说。在处理数百万或数十亿文档时，传统的精确匹配变得过于缓慢且成本高昂。
+summary: 使用 MinHash LSH 索引加速大型文本数据集的近似重复检测和 Jaccard 相似性搜索。
 ---
 <h1 id="MINHASHLSH" class="common-anchor-header">MINHASH_LSH<button data-href="#MINHASHLSH" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -88,7 +87,7 @@ summary: >-
 <p>整个流程如下图所示：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
    </span> <span class="img-wrapper"> <span>最小散列工作流程</span> </span></p>
 <div class="alert note">
 <p>使用的哈希函数数量决定了 MinHash 签名的维度。维数越高，近似精度越高，但存储和计算量也会随之增加。</p>
@@ -133,17 +132,17 @@ summary: >-
 <p>考虑三个具有 128 维 MinHash 签名的文档：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
    </span> <span class="img-wrapper"> <span>Lsh 工作流程 1</span> </span></p>
 <p>首先，LSH 将 128 维签名分为 32 个带，每个带有 4 个连续值：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
    </span> <span class="img-wrapper"> <span>Lsh 工作流程 2</span> </span></p>
 <p>然后，使用哈希函数将每个带散列到不同的桶中。共享散列的文档对被选为相似性候选文档。在下面的示例中，文档 A 和文档 B 被选为相似性候选对象，因为它们的哈希结果在<strong>带 0</strong> 中相撞：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
    </span> <span class="img-wrapper"> <span>Lsh 工作流程 3</span> </span></p>
 <div class="alert note">
 <p>带的数量由<code translate="no">mh_lsh_band</code> 参数控制。更多信息，请参阅<a href="/docs/zh/minhash-lsh.md#Index-building-params">索引构建参数</a>。</p>
@@ -163,7 +162,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>MinHash 签名使用固定长度的二进制向量近似于集合间的 Jaccard 相似性。但是，由于这些签名不保留原始集合，因此无法直接应用<code translate="no">JACCARD</code> 、<code translate="no">L2</code> 或<code translate="no">COSINE</code> 等标准度量来比较它们。</p>
+    </button></h3><p>MinHash 签名使用固定长度的二进制向量近似于集合间的 Jaccard 相似性。但是，由于这些签名不保留原始数据集，因此无法直接使用<code translate="no">JACCARD</code> 、<code translate="no">L2</code> 或<code translate="no">COSINE</code> 等标准度量来比较它们。</p>
 <p>为了解决这个问题，Milvus 引入了一种专门的度量类型，称为<code translate="no">MHJACCARD</code> ，专为比较 MinHash 签名而设计。</p>
 <p>在 Milvus 中使用 MinHash 时：</p>
 <ul>
@@ -189,10 +188,13 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>由 MinHash LSH 支持的重复数据删除流程允许 Milvus 在将近乎重复的文本或结构化记录插入 Collections 之前，高效地识别并过滤掉它们。</p>
-<p><img translate="no" src="/docs/v2.6.x/assets/deduplication-workflow.png" alt="Deduplication Workflow" width="600"></p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/it9wwbcfwhft0rbwosacgltzneb.png" alt="It9wwbcfwhft0rbwosacgltzneb" class="doc-image" id="it9wwbcfwhft0rbwosacgltzneb" />
+   </span> <span class="img-wrapper"> <span>它9wwbcfwhft0rbwosacgltzneb</span> </span></p>
 <ol>
-<li><p><strong>分块和预处理</strong>：将输入的文本数据或结构化数据（如记录、字段）分割成块；对文本进行规范化处理（小写、去除标点符号），并根据需要删除停止词。</p></li>
-<li><p><strong>构建特征</strong>：构建 MinHash 所用的标记集（例如，从文本中提取小块；对结构化数据进行字段标记串联）。</p></li>
+<li><p><strong>分块和预处理</strong>：将输入的文本数据或结构化数据（如记录、字段）分割成块；对文本进行规范化处理（小写、去除标点符号），并根据需要去除停止词。</p></li>
+<li><p><strong>构建特征</strong>：构建 MinHash 使用的标记集（例如，从文本中提取 "shingles"；对结构化数据进行字段标记串联）。</p></li>
 <li><p><strong>MinHash 签名生成</strong>：为每个数据块或记录计算 MinHash 签名。</p></li>
 <li><p><strong>二进制向量转换</strong>：将签名转换为与 Milvus 兼容的二进制向量。</p></li>
 <li><p><strong>插入前搜索</strong>使用 MinHash LSH 索引在目标 Collections 中搜索输入项的近似重复项。</p></li>
@@ -214,6 +216,13 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>在 Milvus 中使用 MinHash LSH 之前，必须先生成<strong>MinHash 签名</strong>。这些紧凑的二进制签名近似于集合之间的 Jaccard 相似性，是在 Milvus 中进行基于<code translate="no">MHJACCARD</code> 的搜索所必需的。</p>
+<div class="alert note">
+<p>您可以通过两种方式为<code translate="no">MINHASH_LSH</code> 索引准备 MinHash 签名：</p>
+<ul>
+<li><p>使用外部工具自行生成签名并将其插入 BINARY_VECTOR 字段，或</p></li>
+<li><p>使用内置 MinHash 函数从文本自动生成兼容的二进制向量。有关 MinHash 函数的端到端工作流程和配置选项，请参阅<a href="/docs/zh/minhash-function.md">MinHash 函数</a>。</p></li>
+</ul>
+</div>
 <h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">选择生成 MinHash 签名的方法<button data-href="#Choose-a-method-to-generate-MinHash-signatures" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -232,7 +241,7 @@ summary: >-
     </button></h3><p>根据您的工作量，您可以选择</p>
 <ul>
 <li><p>使用 Python 的 <a href="https://ekzhu.github.io/datasketch/"><code translate="no">datasketch</code></a>以简化（建议用于原型开发）</p></li>
-<li><p>使用分布式工具（如 Spark、Ray）处理大规模数据集</p></li>
+<li><p>使用分布式工具（如 Spark、Ray）来处理大规模数据集</p></li>
 <li><p>如果性能调整非常重要，则执行自定义逻辑（NumPy、C++ 等）。</p></li>
 </ul>
 <p>在本指南中，我们使用<code translate="no">datasketch</code> ，以简化并兼容 Milvus 输入格式。</p>
@@ -412,7 +421,7 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>构建<code translate="no">MINHASH_LSH</code> 索引并启用 Jaccard 精细化：</p>
+    </button></h3><p>构建<code translate="no">MINHASH_LSH</code> 索引并启用雅卡德细化：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -552,7 +561,7 @@ approx_results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="53-Refined-search-recommended-for-accuracy" class="common-anchor-header">5.3 精细搜索（推荐用于提高准确性）：</h4><p>这可以使用存储在 Milvus 中的原始标记集进行精确的 Jaccard 比较。速度稍慢，但推荐用于质量敏感型任务：</p>
+<h4 id="53-Refined-search-recommended-for-accuracy" class="common-anchor-header">5.3 精细搜索（推荐用于提高准确性）：</h4><p>这可以使用 Milvus 中存储的原始标记集进行精确的 Jaccard 比较。速度稍慢，但推荐用于质量敏感型任务：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="highlighted-comment-line">search_params = {</span>
@@ -682,18 +691,18 @@ refined_results = client.search(
      <td><p><code translate="no">mh_search_with_jaccard</code></p></td>
      <td><p>是否对候选结果执行精确的 Jaccard 相似性计算以进行细化。</p></td>
      <td><p>true, false</p></td>
-     <td><p>对于精度要求较高的应用（如重复数据删除），请使用<code translate="no">true</code> 。在可以接受轻微精度损失的情况下，使用<code translate="no">false</code> 进行更快的近似搜索。</p></td>
+     <td><p>对于需要高精度的应用（如重复数据删除），请使用<code translate="no">true</code> 。在可以接受轻微精度损失的情况下，使用<code translate="no">false</code> 进行更快的近似搜索。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">refine_k</code></p></td>
-     <td><p>Jaccard 精炼前检索的候选结果数量。仅当<code translate="no">mh_search_with_jaccard</code> 是<code translate="no">true</code> 时有效。</p></td>
-     <td><p><em>[top_k</em>,*top_k*10*]。</p></td>
+     <td><p>Jaccard 精炼前检索的候选结果数量。仅当<code translate="no">mh_search_with_jaccard</code> 为<code translate="no">true</code> 时有效。</p></td>
+     <td><p>[<em>top_k</em>,<em>top_k &amp;ast; 10］</em></p></td>
      <td><p>设置为所需<em>top_k</em>的 2-5 倍，以实现召回率与性能之间的良好平衡。数值越大，召回率越高，但计算成本也会增加。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mh_lsh_batch_search</code></p></td>
      <td><p>是否为多个同时查询启用批量优化。</p></td>
-     <td><p>真, 假</p></td>
+     <td><p>true, false</p></td>
      <td><p>同时搜索多个查询时使用<code translate="no">true</code> ，以获得更好的吞吐量。单次查询时使用<code translate="no">false</code> ，以减少内存开销。</p></td>
    </tr>
 </table>

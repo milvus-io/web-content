@@ -60,11 +60,11 @@ summary: >-
 <p>Milvus propose quatre types de niveaux de cohérence avec différents T de garantie.</p>
 <ul>
 <li><p><strong>Fort</strong></p>
-<p>L'horodatage le plus récent est utilisé comme T de garantie, et les nœuds de requête doivent attendre que l'heure de service soit conforme aux T de garantie avant d'exécuter les requêtes de recherche.</p></li>
+<p>L'horodatage le plus récent est utilisé comme T de garantie, et les nœuds de requête doivent attendre que le temps de service soit conforme aux T de garantie avant d'exécuter les requêtes de recherche.</p></li>
 <li><p><strong>Eventuel</strong></p>
 <p>La GarantieTs est fixée à une valeur extrêmement faible, telle que 1, afin d'éviter les contrôles de cohérence et de permettre aux nœuds de requête d'exécuter immédiatement des requêtes de recherche sur toutes les données du lot.</p></li>
 <li><p><strong>Stabilité limitée</strong></p>
-<p>La valeur de GuaranteeTs est fixée à un moment antérieur au dernier horodatage pour permettre aux QueryNodes d'effectuer des recherches en tolérant une certaine perte de données.</p></li>
+<p>La valeur de GuaranteeTs est fixée à un moment antérieur au dernier horodatage pour permettre aux QueryNodes d'effectuer des recherches en tolérant certaines pertes de données.</p></li>
 <li><p><strong>Session</strong></p>
 <p>Le dernier point temporel auquel le client insère des données est utilisé comme GuaranteeTs afin que les QueryNodes puissent effectuer des recherches sur toutes les données insérées par le client.</p></li>
 </ul>

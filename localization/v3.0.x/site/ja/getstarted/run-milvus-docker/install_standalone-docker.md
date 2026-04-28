@@ -187,7 +187,7 @@ EOF
 </ul></li>
 <li><p><a href="/docs/ja/upgrade_milvus_cluster-helm.md">Helm Chartを使用したMilvusのアップグレード</a>。</p></li>
 <li><p><a href="/docs/ja/scaleout.md">Milvusクラスタをスケールする</a>。</p></li>
-<li><p>Milvuクラスタをクラウドにデプロイする：</p>
+<li><p>Milvuクラスタをクラウド上にデプロイする：</p>
 <ul>
 <li><a href="/docs/ja/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/ja/gcp.md">Googleクラウド</a></li>

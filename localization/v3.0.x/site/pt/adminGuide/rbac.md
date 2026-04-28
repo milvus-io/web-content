@@ -42,7 +42,7 @@ summary: >-
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/users-roles-privileges.png" alt="Users Roles Privileges" class="doc-image" id="users-roles-privileges" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/users-roles-privileges.png" alt="Users Roles Privileges" class="doc-image" id="users-roles-privileges" />
    </span> <span class="img-wrapper"> <span>Utilizadores Funções Privilégios</span> </span></p>
 <p>Existem quatro componentes principais no modelo RBAC.</p>
 <ul>
@@ -73,5 +73,5 @@ summary: >-
 <li><p><strong><a href="/docs/pt/users_and_roles.md#Create-a-role">Criar uma função</a></strong>: Pode criar funções personalizadas com base nas suas necessidades. As capacidades específicas de uma função são determinadas pelos seus privilégios.</p></li>
 <li><p><strong><a href="/docs/pt/privilege_group.md">Criar um grupo de privilégios</a></strong>: Combine vários privilégios num único grupo de privilégios para simplificar o processo de concessão de privilégios a uma função.</p></li>
 <li><p><strong><a href="/docs/pt/grant_privileges.md">Conceder privilégios ou grupos de privilégios a uma função</a></strong>: Defina as capacidades de uma função concedendo privilégios ou grupos de privilégios a esta função.</p></li>
-<li><p><strong><a href="/docs/pt/grant_roles.md">Atribuir funções aos utilizadores</a></strong>: Conceder funções com determinados privilégios aos utilizadores para que estes possam ter os privilégios de uma função. Uma única função pode ser concedida a vários utilizadores.</p></li>
+<li><p><strong><a href="/docs/pt/grant_roles.md">Conceder funções aos utilizadores</a></strong>: Conceder funções com determinados privilégios aos utilizadores para que estes possam ter os privilégios de uma função. Uma única função pode ser concedida a vários utilizadores.</p></li>
 </ol>

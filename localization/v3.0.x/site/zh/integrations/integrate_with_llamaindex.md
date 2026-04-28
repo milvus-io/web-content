@@ -189,7 +189,7 @@ documents = SimpleDirectoryReader(
 <li><code translate="no">sparse_index_config (dict, optional)</code>:用于构建稀疏嵌入索引的配置。默认为 "无"。</li>
 </ul>
 <h4 id="hybrid-ranker" class="common-anchor-header">混合排序器</h4><ul>
-<li><p><code translate="no">hybrid_ranker (str)</code>:指定混合搜索查询中使用的排名器类型。目前仅支持["RRFRanker", "WeightedRanker"]。默认为 "RRFRanker"。</p></li>
+<li><p><code translate="no">hybrid_ranker (str)</code>:指定混合搜索查询中使用的排名器类型。目前只支持 ["RRFRanker", "WeightedRanker"]。默认为 "RRFRanker"。</p></li>
 <li><p><code translate="no">hybrid_ranker_params (dict, optional)</code>:混合排名器的配置参数。该字典的结构取决于所使用的特定排名器：</p>
 <ul>
 <li>对于 "RRFRanker"，它应包括<ul>

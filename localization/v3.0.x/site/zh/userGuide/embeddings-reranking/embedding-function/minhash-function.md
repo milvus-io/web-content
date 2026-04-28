@@ -19,8 +19,8 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>MinHash 函数</strong>可将原始文本转换为<strong>二进制向量</strong>，以近似地表示文档之间的<a href="https://en.wikipedia.org/wiki/Jaccard_index">Jaccard 相似性</a>。它应用文本切分和多个哈希函数来生成固定长度的签名向量，从而实现快速的近似重复检测和大规模的文档重复删除。</p>
-<p>作为内置函数，MinHash 在 Milvus 内部运行，不需要外部模型推断或预处理。你只需插入原始文本，Milvus 就会自动生成 MinHash 签名向量。</p>
+    </button></h1><p><strong>MinHash 函数</strong>可将原始文本转换为<strong>二进制向量</strong>，以接近文档之间的<a href="https://en.wikipedia.org/wiki/Jaccard_index">Jaccard 相似性</a>。它应用文本切分和多个哈希函数来生成固定长度的签名向量，从而实现快速的近似重复检测和大规模的文档重复删除。</p>
+<p>作为一个内置函数，MinHash 在 Milvus 内部运行，不需要外部模型推断或预处理。你只需插入原始文本，Milvus 就会自动生成 MinHash 签名向量。</p>
 <h2 id="Limits" class="common-anchor-header">限制条件<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -135,7 +135,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在使用 MinHash 函数之前，请规划好您的 Collections Schema，使其包括以下内容：</p>
+    </button></h2><p>在使用 MinHash 函数之前，请规划好您的 Collections Schema，使其包含以下内容：</p>
 <ul>
 <li><p><strong>原始内容的文本字段</strong></p>
 <p>您的 Collections 必须包含一个<code translate="no">VARCHAR</code> 字段来存储原始文本。这个字段是 MinHash 函数的输入。</p></li>

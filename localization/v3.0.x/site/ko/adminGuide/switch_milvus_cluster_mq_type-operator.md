@@ -38,7 +38,7 @@ title: Milvus 클러스터의 MQ 유형 전환하기
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ko/install_cluster-milvusoperator.md">밀버스 오퍼레이터</a> 또는 <a href="/docs/ko/install_cluster-helm.md">헬름을</a> 통해 설치된 실행 중인 밀버스 클러스터 인스턴스.</li>
+<li><a href="/docs/ko/install_cluster-milvusoperator.md">Milvus 운영자</a> 또는 <a href="/docs/ko/install_cluster-helm.md">헬름을</a> 통해 설치된 실행 중인 Milvus 클러스터 인스턴스.</li>
 <li>Milvus 인스턴스가 이 Switch MQ 기능을 지원하는 최신 버전으로 업그레이드되었습니다.</li>
 </ul>
 <h2 id="Switch-from-PulsarKafka-to-Woodpecker-MinIO" class="common-anchor-header">Pulsar/Kafka에서 Woodpecker(MinIO)로 전환하기<button data-href="#Switch-from-PulsarKafka-to-Woodpecker-MinIO" class="anchor-icon" translate="no">

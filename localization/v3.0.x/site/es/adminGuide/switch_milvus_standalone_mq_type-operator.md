@@ -62,7 +62,7 @@ title: Cambiar el tipo de MQ para Milvus Standalone
 <li>Confirme el tipo de MQ de origen y el tipo de MQ de destino.</li>
 <li>Configure los ajustes de acceso del MQ de destino en la configuración de Milvus sin cambiar el valor <code translate="no">mqType</code>.</li>
 <li>Active el cambio llamando a la API WAL alter.</li>
-<li>Supervise los registros para comprobar que la conmutación se ha completado correctamente.</li>
+<li>Supervise los registros para verificar que la conmutación se ha completado correctamente.</li>
 </ol>
 <div class="alert note">
 <p>Antes de conmutar, asegúrese de que el MQ de destino no contiene temas con los mismos nombres que los utilizados por la instancia Milvus actual. Esto es especialmente importante si el servicio MQ de destino ha sido utilizado previamente por otra instancia de Milvus, ya que los nombres de temas conflictivos pueden provocar un comportamiento inesperado.</p>
@@ -98,7 +98,7 @@ title: Cambiar el tipo de MQ para Milvus Standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Asegúrese de que su instancia Milvus Standalone Docker está funcionando correctamente. Puede comprobarlo creando una colección de prueba, insertando datos y ejecutando una consulta.</p>
+    </button></h3><p>Asegúrese de que su instancia Milvus Standalone Docker se está ejecutando correctamente. Puede comprobarlo creando una colección de prueba, insertando datos y ejecutando una consulta.</p>
 <h3 id="Step-2-Configure-Woodpecker-with-local-storage" class="common-anchor-header">Paso 2: Configurar Woodpecker con almacenamiento local<button data-href="#Step-2-Configure-Woodpecker-with-local-storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

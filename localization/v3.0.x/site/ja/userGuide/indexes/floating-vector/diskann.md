@@ -55,25 +55,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="Vamana-graph" class="common-anchor-header">バマナグラフ</h4><p>VamanaグラフはDISKANNのディスクベース戦略の中心です。構築中も構築後も完全にメモリに常駐する必要がないため、非常に大きなデータセットを扱うことができます。</p>
+    </button></h3><h4 id="Vamana-graph" class="common-anchor-header">バマナグラフ</h4><p>VamanaグラフはDISKANNのディスクベース戦略の中心です。構築中も構築後もメモリ上に完全に存在する必要がないため、非常に大きなデータセットを扱うことができます。</p>
 <p>次の図は、Vamanaグラフの構築方法を示しています。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
    </span> <span class="img-wrapper"> <span>Diskann</span> </span></p>
 <ol>
 <li><p><strong>初期ランダム接続：</strong>各データ点（ベクトル）はグラフのノードとして表現される。これらのノードは最初はランダムに接続され、密なネットワークを形成する。通常、1つのノードは約500のエッジ（または接続）から始まり、幅広い接続性を持つ。</p></li>
 <li><p><strong>効率化のための洗練：</strong>初期のランダム・グラフは、検索効率を高めるために最適化プロセスを経ます。これには2つの重要なステップがある：</p>
 <ul>
 <li><p><strong>冗長なエッジの刈り込み：</strong>冗長なエッジの刈り込み：このアルゴリズムは、ノード間の距離に基づいて不要な接続を削除します。このステップは、より質の高いエッジを優先する。</p>
-<p><code translate="no">max_degree</code> パラメータは、ノードあたりの最大エッジ数を制限します。<code translate="no">max_degree</code> が高いほどグラフが密になり、より関連性の高い近傍を発見できる可能性がある（より高い想起）が、メモリ使用量と検索時間が増加する。</p></li>
+<p><code translate="no">max_degree</code> パラメータは、ノードあたりの最大エッジ数を制限します。<code translate="no">max_degree</code> を高くすると、グラフが密になり、より関連性の高い近傍を発見できる可能性があるが（より高い想起）、メモリ使用量と検索時間が増加する。</p></li>
 <li><p><strong>戦略的ショートカットの追加：</strong>Vamanaは長距離エッジを導入し、ベクトル空間内で離れたデータポイント同士を接続する。これらのショートカットにより、検索はグラフを素早く飛び越え、中間ノードを迂回し、ナビゲーションを大幅に高速化する。</p>
 <p><code translate="no">search_list_size</code> パラメータは、グラフ精密化処理の幅を決定する。<code translate="no">search_list_size</code> を高くすると、構築中の近傍探索が拡張され、最終的な精度が向上しますが、インデックス構築時間が長くなります。</p></li>
 </ul></li>
 </ol>
 <p>パラメータチューニングの詳細については、<a href="/docs/ja/diskann.md#DISKANN-params">DISKANN paramsを</a>参照してください。</p>
-<h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANNは<strong>PQを使って</strong>高次元ベクトルをより小さな表現<strong>（PQコード</strong>）に圧縮し、それをメモリに保存して近似距離計算を高速に行います。</p>
-<p><code translate="no">pq_code_budget_gb_ratio</code> パラメータは、これらの PQ コードを格納するためのメモリフットプリントを管理します。これは、ベクターの合計サイズ（ギガバイト単位）とPQコードの格納に割り当てられたスペースの比率を表します。実際のPQコードバジェット（ギガバイト単位）は、次の式で計算できます：</p>
+<h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANNは<strong>PQを使って</strong>高次元ベクトルをより小さい表現<strong>（PQコード</strong>）に圧縮し、それをメモリに保存して近似距離計算を高速に行います。</p>
+<p><code translate="no">pq_code_budget_gb_ratio</code> パラメータは、これらの PQ コードを格納するためのメモリフットプリントを管理します。これは、ベクターの合計サイズ（ギガバイト単位）とPQコードの格納に割り当てられたスペースの比率を表します。実際のPQコードバジェット（ギガバイト単位）は、以下の式で計算できます：</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio
 <button class="copy-code-btn"></button></code></pre>
 <p>ここで</p>
@@ -100,7 +100,7 @@ summary: >-
     </button></h3><p>インデックス（ディスク上のVamanaグラフとメモリ上のPQコード）が構築されると、DISKANNは以下のようにANN検索を実行する：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
    </span> <span class="img-wrapper"> <span>Diskann 2</span> </span></p>
 <ol>
 <li><p><strong>クエリーとエントリーポイント：</strong>最も近い近傍を見つけるためにクエリーベクトルが提供される。DISKANNは、Vamanaグラフの選択されたエントリーポイント（多くの場合、データセットのグローバルセントロイドに近いノード）から開始する。グローバルセントロイドは全ベクトルの平均を表し、これはグラフを走査して希望する近傍を見つける距離を最小化するのに役立つ。</p></li>
@@ -108,7 +108,7 @@ summary: >-
 <li><p><strong>正確な距離計算のためのノードの選択：</strong>近似結果から、最も有望な近隣ノードのサブセット（図中の緑色の丸）が、圧縮されていない元のベクトルを使用して正確な距離評価のために選択されます。これにはディスクからデータを読み込む必要があり、時間がかかります。DISKANNはこの精度とスピードの微妙なバランスをコントロールするために2つのパラメータを使用します：</p>
 <ul>
 <li><p><code translate="no">beam_width_ratio</code>:探索の幅を制御する比率で、近傍探索のためにいくつの近傍候補が並列に選択されるかを決定する。<code translate="no">beam_width_ratio</code> を大きくすると探索範囲が広くなり、精度が向上する可能性がありますが、計算コストとディスクI/Oが増加します。ビーム幅、つまり選択されるノードの数は、以下の式で決定されます：<code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
-<li><p><code translate="no">search_cache_budget_gb_ratio</code>:頻繁にアクセスされるディスクデータをキャッシュするために割り当てられるメモリの割合。このキャッシングはディスクI/Oを最小化するのに役立ち、データがすでにメモリ内にあるため、繰り返しの検索が速くなります。</p></li>
+<li><p><code translate="no">search_cache_budget_gb_ratio</code>:頻繁にアクセスされるディスクデータをキャッシュするために割り当てられるメモリの割合。このキャッシングはディスクI/Oを最小化するのに役立ち、データがすでにメモリ内にあるため、繰り返しの検索がより速くなります。</p></li>
 </ul>
 <p>パラメータチューニングの詳細については、<a href="/docs/ja/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configsを</a>参照してください。</p></li>
 <li><p><strong>反復探索：</strong>十分な数の近傍が見つかるまで、近似評価（PQを使用）と正確なチェック（ディスクから元のベクトルを使用）を繰り返しながら、候補の集合を繰り返し改良します。</p></li>
@@ -231,7 +231,7 @@ summary: >-
      <td><p>Vamana</p></td>
      <td><p><code translate="no">MaxDegree</code></p></td>
      <td><p>Vamanaグラフで各データポイントが持つことのできる接続（エッジ）の最大数を制御する。</p></td>
-     <td><p><strong>タイプ</strong>整数<strong>Range</strong>：[1, 512]</p>
+     <td><p><strong>タイプ</strong>整数<strong>：</strong>[1, 512]</p>
 <p><strong>デフォルト値</strong>：<code translate="no">56</code></p></td>
      <td><p>値を大きくするとグラフが密になり、リコール（より関連性の高い結果を見つけること）が増加する可能性がありますが、メモリ使用量とビルド時間も増加します。 
  ほとんどの場合、この範囲内の値を設定することをお勧めします：[10, 100].</p></td>
@@ -294,7 +294,7 @@ summary: >-
      <td><p>Vamana</p></td>
      <td><p><code translate="no">BeamWidthRatio</code></p></td>
      <td><p>利用可能なCPUコア数に対する並列ディスクI/Oリクエストの最大数を決定することにより、検索中の並列性の程度を制御する。</p></td>
-     <td><p><strong>タイプ</strong>Float<strong>レンジ</strong>：[1, max(128 / CPU数, 16)] です。</p>
+     <td><p><strong>タイプ</strong>Float<strong>レンジ</strong>：[1, max(128 / CPU数, 16)] を指定する。</p>
 <p><strong>デフォルト値</strong>：<code translate="no">4.0</code></p></td>
      <td><p>値を高くすると並列性が高まり、強力な CPU と SSD を持つシステムでの検索を高速化できる。ほとんどの場合、この範囲内の値を設定することを推奨する：[1.0, 4.0].</p></td>
    </tr>

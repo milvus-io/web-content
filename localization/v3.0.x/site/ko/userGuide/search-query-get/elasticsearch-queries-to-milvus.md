@@ -527,7 +527,7 @@ res = client.query(
 )
 
 <button class="copy-code-btn"></button></code></pre>
-<p>전문 벡터 데이터베이스인 Milvus는 인덱스 유형을 사용해 벡터 검색을 최적화합니다. 일반적으로 고차원 벡터 데이터에 대해 근사 근사 이웃(ANN) 검색을 우선시합니다. FLAT 인덱스 유형을 사용한 무차별 kNN 검색은 정확한 결과를 제공하지만, 시간과 리소스를 많이 소모합니다. 반면, AUTOINDEX 또는 다른 인덱스 유형을 사용하는 ANN 검색은 속도와 정확도의 균형을 유지하여 kNN보다 훨씬 빠르고 리소스 효율적인 성능을 제공합니다.</p>
+<p>전문 벡터 데이터베이스인 Milvus는 인덱스 유형을 사용해 벡터 검색을 최적화합니다. 일반적으로 고차원 벡터 데이터에 대해 근사 근사 이웃(ANN) 검색의 우선순위를 정합니다. FLAT 인덱스 유형을 사용한 무차별 kNN 검색은 정확한 결과를 제공하지만, 시간과 리소스를 많이 소모합니다. 반면, AUTOINDEX 또는 다른 인덱스 유형을 사용하는 ANN 검색은 속도와 정확도의 균형을 유지하여 kNN보다 훨씬 빠르고 리소스 효율적인 성능을 제공합니다.</p>
 <p>위의 벡터 쿼리를 Mlivus에서 이와 유사하게 표현하면 다음과 같습니다:</p>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -625,7 +625,7 @@ res = client.hybrid_search(
 <button class="copy-code-btn"></button></code></pre>
 <p>이 예는 Milvus의 하이브리드 검색을 결합한 것입니다:</p>
 <ol>
-<li><p><strong>고밀도 벡터 검색</strong>: <code translate="no">vector</code> 필드에 대한 근사 근사 이웃(ANN) 검색을 위해 <code translate="no">nprobe</code> 을 10으로 설정하여 내부 곱(IP) 메트릭을 사용합니다.</p></li>
+<li><p><strong>고밀도 벡터 검색</strong>: <code translate="no">vector</code> 필드에서 근사 근사 이웃(ANN) 검색을 위해 <code translate="no">nprobe</code> 을 10으로 설정하여 내부 곱(IP) 메트릭을 사용합니다.</p></li>
 <li><p><strong>희소 벡터 검색</strong>: <code translate="no">text_sparse</code> 필드에서 BM25 유사성 메트릭을 사용합니다.</p></li>
 </ol>
 <p>이러한 검색의 결과는 개별적으로 실행되고, 결합되며, 상호 순위 융합(RRF) 순위 매기기를 사용하여 다시 순위가 매겨집니다. 하이브리드 검색은 순위가 재조정된 목록에서 상위 10개 엔티티를 반환합니다.</p>

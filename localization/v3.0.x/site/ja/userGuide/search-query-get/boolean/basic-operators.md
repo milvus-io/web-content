@@ -354,7 +354,7 @@ summary: >-
     </button></h3><p><code translate="no">id</code> が偶数（つまり2で割り切れる）である実体を見つける：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;id % 2 == 0&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-Exponentiation-" class="common-anchor-header">例 2: 指数を使う (<code translate="no">**</code>)<button data-href="#Example-2-Using-Exponentiation-" class="anchor-icon" translate="no">
+<h3 id="Example-2-Using-Exponentiation-" class="common-anchor-header">例2: 指数を使う (<code translate="no">**</code>)<button data-href="#Example-2-Using-Exponentiation-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -480,7 +480,7 @@ summary: >-
     </button></h2><p><code translate="no">IS NULL</code> および<code translate="no">IS NOT NULL</code> 演算子は、フィールドに NULL 値（データがないこと）が含まれているかどうかに基づいてフィールドをフィルタリングするために使用されます。</p>
 <ul>
 <li><p><code translate="no">IS NULL</code>:特定のフィールドに NULL 値が含まれる、つまり値が存在しないか未定義のエンティティを識別します。</p></li>
-<li><p><code translate="no">IS NOT NULL</code>:特定のフィールドにヌル以外の値が含まれているエンティティを識別します。</p></li>
+<li><p><code translate="no">IS NOT NULL</code>:特定のフィールドに NULL 以外の値が含まれているエンティティを識別します。</p></li>
 </ul>
 <div class="alert note">
 <p>演算子は大文字と小文字を区別しないので、<code translate="no">IS NULL</code> または<code translate="no">is null</code> と、<code translate="no">IS NOT NULL</code> または<code translate="no">is not null</code> を使用できます。</p>
@@ -696,5 +696,5 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>フィルタ条件（例えば、filter='color in ["red", "green", "blue"]'）のマッチ値リストの長さに制限はありますか？リストが長すぎる場合はどうすればいいですか？</strong></p>
+    </button></h2><p><strong>フィルタ条件（例えば、filter='color in ["red", "green", "blue"]'）のマッチ値リストの長さに制限はありますか？リストが長すぎる場合はどうすればよいですか？</strong></p>
 <p>Zilliz Cloudでは、フィルター条件のマッチ値リストに長さの制限は設けておりません。しかし、長すぎるリストは、クエリのパフォーマンスに大きな影響を与える可能性があります。 フィルタ条件に長いマッチ値のリストや多くの要素を含む複雑な式が含まれる場合は、クエリのパフォーマンスを向上させるために<a href="/docs/ja/filtering-templating.md">フィルタテンプレートを</a>使用することをお勧めします。</p>

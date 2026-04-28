@@ -61,7 +61,7 @@ title: Panoramica del CDC
     </button></h2><p>Milvus-CDC adotta un'architettura con due componenti principali: un server HTTP che gestisce i task e i metadati e <strong>corelib</strong> che sincronizza l'esecuzione dei task con un lettore che ottiene i dati dall'istanza Milvus di origine e uno scrittore che invia i dati elaborati all'istanza Milvus di destinazione.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
    </span> <span class="img-wrapper"> <span>architettura milvus-cdc</span> </span></p>
 <p>Nel diagramma precedente,</p>
 <ul>
@@ -92,7 +92,7 @@ title: Panoramica del CDC
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
    </span> <span class="img-wrapper"> <span>milvus-cdc-flusso di lavoro</span> </span></p>
 <h2 id="Limits" class="common-anchor-header">Limiti<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -110,7 +110,7 @@ title: Panoramica del CDC
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Sincronizzazione incrementale dei dati</strong>: Attualmente Milvus-CDC è progettato per sincronizzare solo dati incrementali. Se la vostra azienda necessita di un backup completo dei dati, <a href="https://milvus.io/community">contattateci</a> per assistenza.</p></li>
+<li><p><strong>Sincronizzazione incrementale dei dati</strong>: Attualmente, Milvus-CDC è progettato per sincronizzare solo dati incrementali. Se la vostra azienda necessita di un backup completo dei dati, <a href="https://milvus.io/community">contattateci</a> per assistenza.</p></li>
 <li><p><strong>Ambito di sincronizzazione</strong>: Attualmente, Milvus-CDC può sincronizzare i dati a livello di cluster. Stiamo lavorando per aggiungere il supporto per la sincronizzazione dei dati a livello di collezione nelle prossime versioni.</p></li>
 <li><p><strong>Richieste API supportate</strong>: Milvus-CDC supporta attualmente le seguenti richieste API. Nelle prossime versioni si prevede di estendere il supporto ad altre richieste:</p>
 <ul>

@@ -40,7 +40,7 @@ summary: >-
 <p>下圖顯示一個有八列和六個實體的集合。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/collection-explained.png" alt="Collection Explained" class="doc-image" id="collection-explained" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/collection-explained.png" alt="Collection Explained" class="doc-image" id="collection-explained" />
    </span> <span class="img-wrapper"> <span>集合說明</span> </span></p>
 <h2 id="Schema-and-Fields" class="common-anchor-header">模式與欄位<button data-href="#Schema-and-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -133,7 +133,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>載入一個集合是在集合中進行相似性搜索和查詢的先決條件。當你載入一個資料集時，Milvus 會將所有索引檔案和每個欄位的原始資料載入記憶體，以便快速回應搜尋和查詢。</p>
+    </button></h2><p>加载集合是在集合中进行相似性搜索和查询的先决条件。當你載入一個資料集時，Milvus 會將所有索引檔案和每個欄位的原始資料載入記憶體，以便快速回應搜尋和查詢。</p>
 <p>搜尋和查詢是需要大量記憶體的作業。為了節省成本，建議您釋放目前不使用的資料集。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/load-and-release.md">載入與釋放</a>。</p>
 <h2 id="Search-and-Query" class="common-anchor-header">搜尋和查詢<button data-href="#Search-and-Query" class="anchor-icon" translate="no">
@@ -151,7 +151,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>建立索引並載入資料庫後，您可以輸入一個或多個查詢向量，開始相似性搜尋。舉例來說，當接收到搜尋要求中攜帶的查詢向量表達時，Milvus 會使用指定的度量類型來測量查詢向量與目標資料集中的相似度，然後再回傳那些與查詢語意相似的向量。</p>
+    </button></h2><p>建立索引並載入資料庫後，您就可以輸入一個或多個查詢向量開始相似性搜尋。舉例來說，當接收到搜尋要求中攜帶的查詢向量表達時，Milvus 會使用指定的度量類型來衡量查詢向量與目標資料集中的向量之間的相似性，然後再回傳與查詢語意相似的向量。</p>
 <p>您也可以在搜尋與查詢中加入 metadata 過濾，以改善結果的相關性。請注意，元資料篩選條件在查詢中是強制性的，但在搜尋中是選擇性的。</p>
 <p>如需適用公制類型的詳細資訊，請參閱<a href="/docs/zh-hant/metric.md">公制類型</a>。</p>
 <p>有關搜尋和查詢的詳細資訊，請參閱「搜尋與重新排名」章節中的文章，其中的基本功能如下：</p>

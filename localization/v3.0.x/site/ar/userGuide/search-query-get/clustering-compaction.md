@@ -40,13 +40,13 @@ summary: >-
     </button></h2><p>يقوم Milvus بتخزين الكيانات الواردة في مقاطع داخل مجموعة ويغلق المقطع عندما يمتلئ. إذا حدث ذلك، يتم إنشاء مقطع جديد لاستيعاب كيانات إضافية. ونتيجة لذلك، يتم توزيع الكيانات بشكل اعتباطي عبر المقاطع. يتطلب هذا التوزيع من Milvus البحث في مقاطع متعددة للعثور على أقرب الجيران إلى متجه استعلام معين.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/without-clustering-compaction.png" alt="Without Clustering Compaction" class="doc-image" id="without-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/without-clustering-compaction.png" alt="Without Clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>بدون ضغط التجميع</span> </span></p>
 <p>إذا كان بإمكان Milvus توزيع الكيانات بين المقاطع بناءً على القيم الموجودة في حقل معين، يمكن تقييد نطاق البحث داخل مقطع واحد، وبالتالي تحسين أداء البحث.</p>
-<p><strong>ضغط التجميع</strong> هو ميزة في Milvus تقوم بإعادة توزيع الكيانات بين المقاطع في مجموعة بناءً على القيم الموجودة في حقل قياسي. لتمكين هذه الميزة، تحتاج أولاً إلى تحديد حقل قياسي <strong>كمفتاح ت</strong>جميع. وهذا يسمح ل Milvus بإعادة توزيع الكيانات في مقطع عندما تقع قيم مفتاح التجميع الخاصة بها ضمن نطاق محدد. عندما تقوم بتشغيل ضغط التجميع، يقوم Milvus بإنشاء/تحديث فهرس عام يسمى <strong>PartitionStats،</strong> والذي يسجل علاقة التعيين بين المقاطع وقيم مفاتيح التجميع.</p>
+<p><strong>ضغط التجميع</strong> هو ميزة في Milvus تقوم بإعادة توزيع الكيانات بين المقاطع في مجموعة بناءً على القيم الموجودة في حقل قياسي. لتمكين هذه الميزة، تحتاج أولاً إلى تحديد حقل قياسي <strong>كمفتاح ت</strong>جميع. يسمح ذلك ل Milvus بإعادة توزيع الكيانات في مقطع عندما تقع قيم مفتاح التجميع الخاصة بها ضمن نطاق محدد. عندما تقوم بتشغيل ضغط التجميع، يقوم Milvus بإنشاء/تحديث فهرس عام يسمى <strong>PartitionStats،</strong> والذي يسجل علاقة التعيين بين المقاطع وقيم مفاتيح التجميع.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>ضغط التجميع</span> </span></p>
 <p>باستخدام <strong>PartitionStats</strong> كمرجع، يمكن ل Milvus تشذيب البيانات غير ذات الصلة عند تلقي طلب بحث/استعلام يحمل قيمة مفتاح تجميع وتقييد نطاق البحث داخل المقاطع التي تم تعيينها إلى القيمة، وبالتالي تحسين أداء البحث. للحصول على تفاصيل حول تحسين الأداء، راجع <a href="/docs/ar/clustering-compaction.md#Benchmark-Test">الاختبارات المعيارية</a>.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">استخدام ضغط التجميع<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
@@ -65,7 +65,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>ميزة ضغط التجميع في Milvus قابلة للتكوين بدرجة كبيرة. يمكنك اختيار تشغيله يدويًا أو تعيينه ليتم تشغيله تلقائيًا على فترات بواسطة Milvus. لتمكين ضغط التجميع، قم بما يلي:</p>
-<h3 id="Global-Configuration" class="common-anchor-header">التكوين العام</h3><p>تحتاج إلى تعديل ملف تكوين Milvus كما هو موضح أدناه.</p>
+<h3 id="Global-Configuration" class="common-anchor-header">التكوين العام<button data-href="#Global-Configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تحتاج إلى تعديل ملف تكوين Milvus كما هو موضح أدناه.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">dataCoord:</span>
   <span class="hljs-attr">compaction:</span>
     <span class="hljs-attr">clustering:</span>
@@ -162,7 +177,22 @@ summary: >-
    </tr>
 </table>
 <p>لتطبيق التغييرات المذكورة أعلاه على مجموعة Milvus الخاصة بك، يرجى اتباع الخطوات الواردة في <a href="/docs/ar/configure-helm.md#Configure-Milvus-via-configuration-file">تكوين Milvus مع Helm</a> <a href="/docs/ar/configure_operator.md">وتكوين Milvus مع مشغلي Milvus</a>.</p>
-<h3 id="Collection-Configuration" class="common-anchor-header">تكوين التجميع</h3><p>لضغط التجميع في مجموعة معينة، يجب عليك تحديد حقل قياسي من المجموعة كمفتاح التجميع.</p>
+<h3 id="Collection-Configuration" class="common-anchor-header">تكوين التجميع<button data-href="#Collection-Configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لضغط التجميع في مجموعة معينة، يجب عليك تحديد حقل قياسي من المجموعة كمفتاح التجميع.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -273,9 +303,24 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>يمكنك استخدام الحقول القياسية لأنواع البيانات التالية كمفتاح التجميع: <code translate="no">Int8</code> و <code translate="no">Int16</code> و و <code translate="no">Int32</code> و <code translate="no">Int64</code> و <code translate="no">Float</code> و <code translate="no">Double</code> و <code translate="no">VarChar</code>.</p>
+<p>يمكنك استخدام الحقول العددية لأنواع البيانات التالية كمفتاح التجميع: <code translate="no">Int8</code> و <code translate="no">Int16</code> و و <code translate="no">Int32</code> و <code translate="no">Int64</code> و <code translate="no">Float</code> و <code translate="no">Double</code> و <code translate="no">VarChar</code>.</p>
 </div>
-<h3 id="Trigger-Clustering-Compaction" class="common-anchor-header">تشغيل ضغط التجميع التجميعي</h3><p>إذا قمت بتمكين الضغط التجميعي التلقائي للتجميع، يقوم برنامج Milvus تلقائيًا بتشغيل الضغط في الفاصل الزمني المحدد. بدلاً من ذلك، يمكنك تشغيل الضغط يدويًا على النحو التالي:</p>
+<h3 id="Trigger-Clustering-Compaction" class="common-anchor-header">تشغيل ضغط التجميع التجميعي<button data-href="#Trigger-Clustering-Compaction" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>إذا قمت بتمكين ضغط التجميع التلقائي، يقوم برنامج Milvus تلقائيًا بتشغيل الضغط التجميعي في الفاصل الزمني المحدد. بدلاً من ذلك، يمكنك تشغيل الضغط يدويًا على النحو التالي:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># trigger a manual compaction</span>
@@ -335,8 +380,8 @@ System.out.println(stateResp.getState());
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يحدد حجم البيانات وأنماط الاستعلام مجتمعةً تحسين الأداء الذي يمكن أن يحققه ضغط التجميع. يُظهر اختبار معياري داخلي أن ضغط التجميع يؤدي إلى تحسين يصل إلى 25 ضعفًا في الاستعلامات في الثانية (QPS).</p>
-<p>يتم إجراء الاختبار المعياري على مجموعة تحتوي على كيانات من مجموعة بيانات LAION ذات 20 مليونًا و768 بُعدًا مع تعيين الحقل <code translate="no">key</code> كمفتاح تجميع. بعد تشغيل ضغط التجميع في المجموعة، يتم إرسال عمليات البحث المتزامنة حتى يصل استخدام وحدة المعالجة المركزية إلى مستوى عالٍ من وحدة المعالجة المركزية.</p>
+    </button></h2><p>يحدد حجم البيانات وأنماط الاستعلام مجتمعةً التحسن في الأداء الذي يمكن أن يحققه ضغط التجميع. يُظهر اختبار معياري داخلي أن ضغط التجميع يؤدي إلى تحسين يصل إلى 25 ضعفًا في الاستعلامات في الثانية (QPS).</p>
+<p>يتم إجراء الاختبار المعياري على مجموعة تحتوي على كيانات من مجموعة بيانات LAION ذات 20 مليونًا و768 بُعدًا مع تعيين الحقل <code translate="no">key</code> كمفتاح تجميع. بعد تشغيل عملية ضغط التجميع في المجموعة، يتم إرسال عمليات البحث المتزامنة حتى يصل استخدام وحدة المعالجة المركزية إلى مستوى عالٍ من وحدة المعالجة المركزية.</p>
 <table>
    <tr>
      <th rowspan="2"><p>مرشح البحث</p></th>

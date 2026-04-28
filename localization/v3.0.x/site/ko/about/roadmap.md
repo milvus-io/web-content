@@ -77,7 +77,7 @@ summary: Milvus는 AI 애플리케이션을 구동하기 위해 구축된 오픈
 </ul>
 <h4 id="🔹-StreamNode-Architecture-Refactor" class="common-anchor-header">🔹 <strong>StreamNode 아키텍처 리팩터링</strong></h4><ul>
 <li><p>스트리밍 수집 파이프라인을 재작성하여 증분 쓰기와 실시간 계산을 최적화합니다.</p></li>
-<li><p>동시성 성능과 안정성을 대폭 개선하여 통합된 실시간 및 오프라인 처리의 기반을 마련합니다.</p></li>
+<li><p>동시성 성능과 안정성을 대폭 개선하여 통합 실시간 및 오프라인 처리를 위한 기반을 마련합니다.</p></li>
 <li><p>새로운 메시지 큐 엔진을 도입합니다: <strong>딱따구리</strong>.</p></li>
 </ul>
 <h4 id="🔹-HotCold-Tiering--Storage-Architecture-StorageV2" class="common-anchor-header">🔹 <strong>핫/콜드 티어링 및 스토리지 아키텍처(StorageV2)</strong></h4><ul>
@@ -127,7 +127,7 @@ summary: Milvus는 AI 애플리케이션을 구동하기 위해 구축된 오픈
 <li><p>쿼리에 대한 <strong>집계</strong> 기능을 도입합니다.</p></li>
 </ul>
 <h4 id="🔹-Multi-Tenancy--Resource-Management" class="common-anchor-header">🔹 <strong>멀티 테넌시 및 리소스 관리</strong></h4><ul>
-<li><p>멀티 테넌트 삭제, 통계, 핫/콜드 계층화를 사용하세요.</p></li>
+<li><p>멀티 테넌트 삭제, 통계, 핫/콜드 티어링을 활성화하세요.</p></li>
 <li><p>리소스 격리 및 스케줄링 전략을 개선하여 단일 클러스터에서 수백만 개의 테이블을 지원하세요.</p></li>
 </ul>
 <h4 id="🔹-Schema--Primary-Key-Enhancements" class="common-anchor-header"><strong>스키마 및 기본 키 개선 사항</strong></h4><ul>
@@ -201,7 +201,7 @@ summary: Milvus는 AI 애플리케이션을 구동하기 위해 구축된 오픈
 </ul></li>
 </ul>
 <h4 id="🔹-Dynamic-Sharding--Scalability" class="common-anchor-header">🔹 <strong>동적 샤딩 및 확장성</strong></h4><ul>
-<li><p>원활한 확장을 위해 <strong>자동 샤드 분할</strong> 및 <strong>로드 밸런싱을</strong> 활성화합니다.</p></li>
+<li><p>원활한 확장을 위해 <strong>자동 샤드 분할</strong> 및 <strong>로드 밸런싱을</strong> 활성화하세요.</p></li>
 <li><p><strong>글로벌 인덱스 구축을</strong> 개선하고 <strong>분산된 검색 성능을</strong> 보장합니다.</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-V10" class="common-anchor-header">🔹 <strong>Vector Lake V1.0</strong></h4><ul>

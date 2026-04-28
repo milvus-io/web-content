@@ -27,7 +27,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>O HNSW_PRQ</strong> aproveita os gráficos Hierarchical Navigable Small World (HNSW) com Product Residual Quantization (PRQ), oferecendo um método avançado de indexação de vectores que permite ajustar a relação entre o tamanho do índice e a precisão. A PRQ vai além da Quantização de Produto (PQ) tradicional, introduzindo uma etapa de quantização residual (RQ) para capturar informações adicionais, resultando em maior precisão ou índices mais compactos em comparação com métodos puramente baseados em PQ. No entanto, os passos extra podem levar a um maior custo computacional durante a construção e pesquisa do índice.</p>
+    </button></h1><p><strong>O HNSW_PRQ</strong> aproveita os gráficos Hierarchical Navigable Small World (HNSW) com Product Residual Quantization (PRQ), oferecendo um método avançado de indexação de vectores que permite ajustar a relação entre o tamanho do índice e a precisão. A PRQ vai além da Quantização de Produto (PQ) tradicional, introduzindo uma etapa de quantização residual (RQ) para capturar informações adicionais, resultando em maior precisão ou índices mais compactos em comparação com métodos puramente baseados em PQ. No entanto, os passos adicionais podem levar a um maior custo computacional durante a construção e pesquisa do índice.</p>
 <h2 id="Overview" class="common-anchor-header">Síntese<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,7 +59,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>O HNSW constrói um gráfico de várias camadas em que cada nó corresponde a um vetor no conjunto de dados. Neste gráfico, os nós são ligados com base na sua semelhança, permitindo uma rápida deslocação através do espaço de dados. A estrutura hierárquica permite que o algoritmo de pesquisa reduza os vizinhos candidatos, acelerando significativamente o processo de pesquisa em espaços de elevada dimensão.</p>
+    </button></h3><p>O HNSW constrói um grafo de várias camadas em que cada nó corresponde a um vetor no conjunto de dados. Neste gráfico, os nós são ligados com base na sua semelhança, permitindo uma rápida deslocação através do espaço de dados. A estrutura hierárquica permite que o algoritmo de pesquisa reduza os vizinhos candidatos, acelerando significativamente o processo de pesquisa em espaços de elevada dimensão.</p>
 <p>Para obter mais informações, consulte <a href="/docs/pt/hnsw.md">HNSW</a>.</p>
 <h3 id="PRQ" class="common-anchor-header">PRQ<button data-href="#PRQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -89,7 +89,7 @@ summary: >-
 <p>Após a fase PQ, a RQ quantiza o resíduo - a diferença entre o vetor original e a sua aproximação baseada na PQ - utilizando livros de códigos adicionais. Como este resíduo é tipicamente muito mais pequeno, pode ser codificado com mais precisão sem um grande aumento no armazenamento.</p>
 <p>O parâmetro <code translate="no">nrq</code> determina o número de vezes que este resíduo é quantizado iterativamente, permitindo-lhe ajustar o equilíbrio entre a eficiência e a precisão da compressão.</p></li>
 <li><p><strong>Representação de compressão final</strong></p>
-<p>Quando o RQ termina a quantização do resíduo, os códigos inteiros do PQ e do RQ são combinados num único índice comprimido. Ao capturar detalhes refinados que o PQ sozinho poderia perder, o RQ melhora a precisão sem causar um aumento significativo no armazenamento. Esta sinergia entre PQ e RQ é o que define PRQ.</p></li>
+<p>Quando o RQ termina a quantização do resíduo, os códigos inteiros do PQ e do RQ são combinados num único índice comprimido. Ao capturar detalhes refinados que o PQ sozinho poderia perder, o RQ aumenta a precisão sem causar um aumento significativo no armazenamento. Esta sinergia entre PQ e RQ é o que define PRQ.</p></li>
 </ol>
 <h3 id="HNSW-+-PRQ" class="common-anchor-header">HNSW + PRQ<button data-href="#HNSW-+-PRQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -106,11 +106,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ao combinar o HNSW com o PRQ, <strong>o HNSW_PRQ</strong> mantém a pesquisa rápida baseada em gráficos do HNSW, aproveitando a compactação em vários estágios do PRQ. O fluxo de trabalho tem o seguinte aspeto:</p>
+    </button></h3><p>Ao combinar o HNSW com o PRQ, <strong>o HNSW_PRQ</strong> mantém a pesquisa rápida baseada em gráficos do HNSW e aproveita a compactação em vários estágios do PRQ. O fluxo de trabalho tem o seguinte aspeto:</p>
 <ol>
 <li><p><strong>Compressão de dados:</strong> Cada vetor é primeiro transformado através de PQ para uma representação grosseira e, em seguida, os resíduos são quantizados através de RQ para um maior refinamento. O resultado é um conjunto de códigos compactos que representam cada vetor.</p></li>
 <li><p><strong>Construção de gráficos:</strong> Os vectores comprimidos (incluindo os códigos PQ e RQ) formam a base para a construção do gráfico HNSW. Como os dados são armazenados numa forma compacta, o gráfico requer menos memória e a navegação através dele é acelerada.</p></li>
-<li><p><strong>Recuperação de candidatos:</strong> Durante a pesquisa, o HNSW usa as representações compactadas para percorrer o gráfico e recuperar um conjunto de candidatos. Isto reduz drasticamente o número de vectores que precisam de ser considerados.</p></li>
+<li><p><strong>Recuperação de candidatos:</strong> Durante a pesquisa, o HNSW utiliza as representações compactadas para percorrer o gráfico e recuperar um conjunto de candidatos. Isto reduz drasticamente o número de vectores que precisam de ser considerados.</p></li>
 <li><p><strong>(Opcional) Refinamento de resultados:</strong> Os resultados iniciais dos candidatos podem ser refinados para uma melhor precisão, com base nos seguintes parâmetros:</p>
 <ul>
 <li><p><code translate="no">refine</code>: Controla se esta etapa de refinamento está activada. Quando definido para <code translate="no">true</code>, o sistema recalcula as distâncias utilizando representações de maior precisão ou não comprimidas.</p></li>
@@ -178,7 +178,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de o índice ser construído e as entidades serem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
+    </button></h2><p>Depois de o índice ter sido criado e as entidades terem sido inseridas, pode efetuar pesquisas de similaridade no índice.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;ef&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Parameter controlling query time/accuracy trade-off</span>
@@ -264,7 +264,7 @@ res = MilvusClient.search(
      <td><p>O número de sub-vectores (utilizados para quantização) para dividir cada vetor de alta dimensão durante o processo de quantização.</p></td>
      <td><p><strong>Tipo</strong>: Inteiro <strong>Intervalo</strong>: [1, 65536]</p>
 <p><strong>Valor predefinido</strong>: Nenhum</p></td>
-     <td><p>Um valor <code translate="no">m</code> mais elevado pode melhorar a precisão, mas também aumenta a complexidade computacional e a utilização de memória. <code translate="no">m</code> tem de ser um divisor da dimensão do vetor<em>(D</em>) para garantir uma decomposição adequada. Um valor geralmente recomendado é <em>m = D/2</em>.</p>
+     <td><p>Um valor <code translate="no">m</code> mais elevado pode melhorar a precisão, mas também aumenta a complexidade computacional e a utilização de memória. <code translate="no">m</code> deve ser um divisor da dimensão do vetor<em>(D</em>) para garantir uma decomposição adequada. Um valor geralmente recomendado é <em>m = D/2</em>.</p>
 <p>Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [D/8, D].</p></td>
    </tr>
    <tr>
@@ -272,7 +272,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">nbits</code></p></td>
      <td><p>O número de bits utilizados para representar o índice do centróide de cada sub-vetor na forma comprimida. Determina diretamente o tamanho de cada livro de códigos. Cada livro de códigos conterá centroides de <sup>2nbits</sup>. Por exemplo, se <code translate="no">nbits</code> estiver definido para 8, cada sub-vetor será representado por um índice de centróide de 8 bits. Isto permite<sup>28</sup> (256) centróides possíveis no livro de códigos para esse sub-vetor.</p></td>
      <td><p><strong>Tipo</strong>: Integer <strong>Intervalo</strong>: [1, 24]</p>
-<p><strong>Valor por defeito</strong>: <code translate="no">8</code></p></td>
+<p><strong>Valor predefinido</strong>: <code translate="no">8</code></p></td>
      <td><p>Um valor <code translate="no">nbits</code> mais alto permite livros de códigos maiores, potencialmente levando a representações mais precisas dos vectores originais. No entanto, também significa utilizar mais bits para armazenar cada índice, resultando numa menor compressão. Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [1, 16].</p></td>
    </tr>
    <tr>

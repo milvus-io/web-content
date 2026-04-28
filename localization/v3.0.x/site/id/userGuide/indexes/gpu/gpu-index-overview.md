@@ -68,7 +68,7 @@ summary: >-
 <li><p>Untuk <code translate="no">GPU_IVF_FLAT</code>, nilai maksimum untuk <code translate="no">limit</code> adalah 1.024.</p></li>
 <li><p>Untuk <code translate="no">GPU_IVF_PQ</code> dan <code translate="no">GPU_CAGRA</code>, nilai maksimum untuk <code translate="no">limit</code> adalah 1.024.</p></li>
 <li><p>Meskipun tidak ada batasan <code translate="no">limit</code> untuk <code translate="no">GPU_BRUTE_FORCE</code>, disarankan untuk tidak melebihi 4.096 untuk menghindari potensi masalah kinerja.</p></li>
-<li><p>Saat ini, indeks GPU tidak mendukung jarak <code translate="no">COSINE</code>. Jika jarak <code translate="no">COSINE</code> diperlukan, data harus dinormalisasi terlebih dahulu, lalu jarak inner product (IP) dapat digunakan sebagai pengganti.</p></li>
+<li><p>Saat ini, indeks GPU tidak mendukung jarak <code translate="no">COSINE</code>. Jika jarak <code translate="no">COSINE</code> diperlukan, data harus dinormalisasi terlebih dahulu, dan kemudian jarak inner product (IP) dapat digunakan sebagai pengganti.</p></li>
 <li><p>Memuat perlindungan OOM untuk indeks GPU tidak sepenuhnya didukung, terlalu banyak data dapat menyebabkan QueryNode mengalami crash.</p></li>
 <li><p>Indeks GPU tidak mendukung fungsi pencarian seperti <a href="/docs/id/range-search.md">pencarian rentang</a> dan <a href="/docs/id/grouping-search.md">pencarian pengelompokan</a>.</p></li>
 </ul>

@@ -43,7 +43,7 @@ gemini_ef = model.dense.GeminiEmbeddingFunction(
 <li><p><strong>config</strong><em>(types.EmbedContentConfig</em>) Configuração opcional para o modelo de incorporação.</p>
 <ul>
 <li>O <strong>output_dimensionality</strong> pode ser especificado para o número de embeddings de saída resultantes.</li>
-<li>O <strong>task_type</strong> pode ser especificado para gerar embeddings optimizados para tarefas específicas, poupando tempo e custos e melhorando o desempenho. Suportado apenas no modelo <strong>gemini-embedding-exp-03-07</strong>.</li>
+<li>O <strong>task_type</strong> pode ser especificado para gerar embeddings optimizados para tarefas específicas, poupando-lhe tempo e custos e melhorando o desempenho. Suportado apenas no modelo <strong>gemini-embedding-exp-03-07</strong>.</li>
 </ul></li>
 </ul>
 <table>
@@ -62,7 +62,7 @@ gemini_ef = model.dense.GeminiEmbeddingFunction(
 </thead>
 <tbody>
 <tr><td>SEMANTIC_SIMILARITY</td><td>Utilizado para gerar embeddings que são optimizados para avaliar a semelhança de texto.</td></tr>
-<tr><td>CLASSIFICAÇÃO</td><td>Utilizada para gerar embeddings que são optimizados para classificar textos de acordo com etiquetas predefinidas.</td></tr>
+<tr><td>CLASSIFICAÇÃO</td><td>Utilizado para gerar embeddings que são optimizados para classificar textos de acordo com etiquetas predefinidas.</td></tr>
 <tr><td>CLUSTERING</td><td>Utilizado para gerar embeddings que são optimizados para agrupar textos com base nas suas semelhanças.</td></tr>
 <tr><td>RETRIEVAL_DOCUMENT, RETRIEVAL_QUERY, QUESTION_ANSWERING e FACT_VERIFICATION</td><td>Utilizado para gerar embeddings optimizados para pesquisa de documentos ou recuperação de informação.</td></tr>
 <tr><td>CONSULTA_DE_RECUPERAÇÃO_DE_CÓDIGO</td><td>Utilizado para recuperar um bloco de código com base numa consulta de linguagem natural, como ordenar uma matriz ou inverter uma lista ligada. Os embeddings dos blocos de código são computados usando RETRIEVAL_DOCUMENT.</td></tr>

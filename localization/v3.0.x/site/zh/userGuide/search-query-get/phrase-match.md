@@ -1,12 +1,12 @@
 ---
 id: phrase-match.md
-title: 短语匹配Compatible with Milvus 2.6.x
+title: 短语匹配Compatible with Milvus 2.5.17+
 summary: >-
   短语匹配可让您搜索包含精确短语查询词的文档。默认情况下，单词必须以相同的顺序出现，并且彼此直接相邻。例如，查询 "机器人机器学习
   "会匹配"...典型的机器人机器学习模型... "这样的文本，其中 "机器人"、"机器 "和 "学习 "依次出现，中间没有其他词。
-beta: Milvus 2.6.x
+beta: Milvus 2.5.17+
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">短语匹配<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">短语匹配<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,7 +41,7 @@ beta: Milvus 2.6.x
     </button></h2><p>短语匹配由<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>搜索引擎库提供支持，通过分析文档中单词的位置信息来实现。下图说明了这一过程：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
    </span> <span class="img-wrapper"> <span>短语匹配工作流程</span> </span></p>
 <ol>
 <li><p><strong>文档标记化</strong>：将文档插入 Milvus 时，使用分析器将文本分割成标记（单个词或术语），并记录每个标记的位置信息。例如，<strong>doc_1</strong>被标记为<strong>["machine" (pos=0), "learning" (pos=1), "boosts" (pos=2), "efficiency" (pos=3)]</strong>。有关分析器的更多信息，请参阅<a href="/docs/zh/analyzer-overview.md">分析器概述</a>。</p></li>
@@ -50,7 +50,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p><strong>slop = 0</strong>表示词组必须<strong>以完全相同的顺序</strong>出现<strong>，并且紧邻</strong>（即中间没有多余的字）。</p>
 <ul>
-<li>在示例中，只有<strong>doc_1</strong>（<strong>"machine "</strong>在<strong>位置 0</strong>，<strong>"learning "</strong>在<strong>位置 1</strong>）完全匹配。</li>
+<li>在本例中，只有<strong>doc_1</strong>（<strong>"machine "</strong>在<strong>位置 0</strong>，<strong>"learning "</strong>在<strong>位置 1</strong>）完全匹配。</li>
 </ul></li>
 <li><p><strong>slop = 2</strong>允许匹配词之间最多有两个位置的灵活性或重新排列。</p>
 <ul>
@@ -224,7 +224,7 @@ schema.add_field(
    </tr>
    <tr>
      <td><p>2</p></td>
-     <td><p>"学习基于机器的方法对现代人工智能的发展至关重要" 3</p></td>
+     <td><p>"学习基于机器的方法对现代人工智能的进步至关重要" 3</p></td>
    </tr>
    <tr>
      <td><p>3</p></td>
@@ -276,7 +276,7 @@ result = client.query(
      <td><p>"机器学习提高了大规模数据分析的效率</p></td>
    </tr>
 </table>
-<p>只有文档 1 按指定顺序包含精确短语<strong>"machine learning"</strong>，且没有额外标记。</p>
+<p>只有文档 1 按指定顺序包含精确短语<strong>"machine learning"</strong>，且没有附加标记。</p>
 <h3 id="Search-with-phrase-match" class="common-anchor-header">使用短语匹配进行搜索<button data-href="#Search-with-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -293,7 +293,7 @@ result = client.query(
         ></path>
       </svg>
     </button></h3><p>在搜索操作中，<strong>PHRASE_MATCH</strong>用于在应用向量相似性排序之前过滤文档。这种两步法首先通过文本匹配缩小候选集的范围，然后根据向量嵌入重新对这些候选集进行排序。</p>
-<h4 id="Example-slop--1" class="common-anchor-header">示例：斜率 = 1</h4><p>在这里，我们允许斜率为 1。该过滤器适用于包含<strong>"learning machine（学习机器）"</strong>短语的文档，并略有灵活性。</p>
+<h4 id="Example-slop--1" class="common-anchor-header">示例：斜率 = 1</h4><p>这里，我们允许斜率为 1。该过滤器适用于包含<strong>"学习机 "</strong>短语的文档，并略有灵活性。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
 filter_slop1 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>
 
@@ -410,7 +410,7 @@ result_slop2 = client.search(
     </button></h2><ul>
 <li><p>为字段启用短语匹配会触发倒排索引的创建，从而消耗存储资源。在决定是否启用此功能时，请考虑对存储的影响，因为它根据文本大小、唯一标记和所使用的分析器而有所不同。</p></li>
 <li><p>在 Schema 中定义分析器后，其设置将永久适用于该 Collections。如果您认为不同的分析器更适合您的需要，可以考虑删除现有的 Collections，然后使用所需的分析器配置创建一个新的 Collections。</p></li>
-<li><p>短语匹配性能取决于文本标记化的方式。在将分析器应用到整个 Collections 之前，请使用<code translate="no">run_analyzer</code> 方法查看标记化输出。有关详细信息，请参阅<a href="/docs/zh/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">分析器概述</a>。</p></li>
+<li><p>短语匹配性能取决于文本标记化的方式。在对整个 Collections 应用分析器之前，请使用<code translate="no">run_analyzer</code> 方法查看标记化输出。有关详细信息，请参阅<a href="/docs/zh/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">分析器概述</a>。</p></li>
 <li><p><code translate="no">filter</code> 表达式中的转义规则：</p>
 <ul>
 <li><p>表达式中用双引号或单引号括起来的字符被解释为字符串常量。如果字符串常量包含转义字符，则必须使用转义序列来表示转义字符。例如，用<code translate="no">\\</code> 表示<code translate="no">\</code> ，用<code translate="no">\\t</code> 表示制表符<code translate="no">\t</code> ，用<code translate="no">\\n</code> 表示换行符。</p></li>

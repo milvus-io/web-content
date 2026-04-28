@@ -60,19 +60,49 @@ title: CDC 서버 배포
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Obtain-the-Milvus-CDC-config-file" class="common-anchor-header">Milvus-CDC 구성 파일 가져오기</h3><p><a href="https://github.com/zilliztech/milvus-cdc">Milvus-CDC 리</a> 포지토리를 복제하고 <code translate="no">milvus-cdc/server/configs</code> 디렉토리로 이동하여 <code translate="no">cdc.yaml</code> 구성 파일에 액세스합니다.</p>
+    </button></h2><h3 id="Obtain-the-Milvus-CDC-config-file" class="common-anchor-header">Milvus-CDC 구성 파일 가져오기<button data-href="#Obtain-the-Milvus-CDC-config-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="https://github.com/zilliztech/milvus-cdc">Milvus-CDC 리</a> 포지토리를 복제하고 <code translate="no">milvus-cdc/server/configs</code> 디렉토리로 이동하여 <code translate="no">cdc.yaml</code> 구성 파일에 액세스합니다.</p>
 <pre><code translate="no" class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/milvus-cdc.git
 
 <span class="hljs-built_in">cd</span> milvus-cdc/server/configs
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Edit-the-config-file" class="common-anchor-header">구성 파일 편집</h3><p><code translate="no">milvus-cdc/server/configs</code> 디렉터리에서 <code translate="no">cdc.yaml</code> 파일을 수정하여 Milvus-CDC 메타스토어와 관련된 구성 및 소스 Milvus의 연결 세부 정보를 사용자 지정합니다.</p>
+<h3 id="Edit-the-config-file" class="common-anchor-header">구성 파일 편집<button data-href="#Edit-the-config-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">milvus-cdc/server/configs</code> 디렉터리에서 <code translate="no">cdc.yaml</code> 파일을 수정하여 Milvus-CDC 메타스토어와 관련된 구성 및 소스 Milvus의 연결 세부 정보를 사용자 지정합니다.</p>
 <ul>
 <li><p><strong>메타스토어 구성</strong>:</p>
 <ul>
 <li><p><code translate="no">metaStoreConfig.storeType</code>: Milvus-CDC의 메타스토어 유형입니다. 가능한 값은 <code translate="no">etcd</code> 또는 <code translate="no">mysql</code> 입니다.</p></li>
 <li><p><code translate="no">metaStoreConfig.etcdEndpoints</code>: Milvus-CDC의 etcd에 연결하기 위한 주소입니다. <code translate="no">storeType</code> 가 <code translate="no">etcd</code> 로 설정된 경우 필수입니다.</p></li>
 <li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>: Milvus-CDC 서버의 MySQL 데이터베이스 연결 주소입니다. <code translate="no">storeType</code> 가 <code translate="no">mysql</code> 로 설정된 경우 필수.</p></li>
-<li><p><code translate="no">metaStoreConfig.rootPath</code>: Milvus-CDC 메타스토어의 루트 경로. 이 구성을 사용하면 멀티테넌시를 활성화하여 여러 CDC 서비스가 동일한 etcd 또는 MySQL 인스턴스를 활용하면서 서로 다른 루트 경로를 통해 격리할 수 있습니다.</p></li>
+<li><p><code translate="no">metaStoreConfig.rootPath</code>: Milvus-CDC 메타스토어의 루트 경로입니다. 이 구성을 사용하면 멀티테넌시를 활성화하여 여러 CDC 서비스가 동일한 etcd 또는 MySQL 인스턴스를 활용하면서 서로 다른 루트 경로를 통해 격리할 수 있습니다.</p></li>
 </ul>
 <p>구성 예시:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># cdc meta data config</span>
@@ -126,7 +156,22 @@ title: CDC 서버 배포
 <span class="hljs-comment">#  kafka:</span>
 <span class="hljs-comment">#    address: 127.0.0.1:9092</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">Milvus-CDC 서버 컴파일</h3><p><code translate="no">cdc.yaml</code> 파일을 저장한 후 <code translate="no">milvus-cdc</code> 디렉토리로 이동하여 다음 명령 중 하나를 실행하여 서버를 컴파일합니다:</p>
+<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">Milvus-CDC 서버 컴파일<button data-href="#Compile-the-Milvus-CDC-server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">cdc.yaml</code> 파일을 저장한 후 <code translate="no">milvus-cdc</code> 디렉토리로 이동하여 다음 명령 중 하나를 실행하여 서버를 컴파일합니다:</p>
 <ul>
 <li><p>바이너리 파일의 경우</p>
 <pre><code translate="no" class="language-bash">make build
@@ -136,7 +181,22 @@ title: CDC 서버 배포
 <button class="copy-code-btn"></button></code></pre>
 <p>Docker 이미지의 경우, 컴파일된 파일을 컨테이너 내의 <code translate="no">/app/server/configs/cdc.yaml</code> 에 마운트합니다.</p></li>
 </ul>
-<h3 id="Start-the-server" class="common-anchor-header">서버 시작</h3><ul>
+<h3 id="Start-the-server" class="common-anchor-header">서버 시작<button data-href="#Start-the-server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>바이너리 사용</p>
 <p><code translate="no">milvus-cdc</code> 바이너리가 포함된 디렉토리와 <code translate="no">cdc.yaml</code> 파일이 있는 <code translate="no">configs</code> 디렉토리로 이동한 다음 서버를 시작합니다:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># dir tree</span>

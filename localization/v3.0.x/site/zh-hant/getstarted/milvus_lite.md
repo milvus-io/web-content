@@ -80,7 +80,7 @@ title: 本地運行 Milvus Lite
       </svg>
     </button></h2><pre><code translate="no" class="language-shell">pip install -U pymilvus[milvus-lite]
 <button class="copy-code-btn"></button></code></pre>
-<p>我們建議使用<code translate="no">pymilvus</code> 。您可以<code translate="no">pip install</code> 與<code translate="no">-U</code> 強制更新到最新版本，<code translate="no">milvus-lite</code> 將自動安裝。</p>
+<p>我們建議使用<code translate="no">pymilvus</code> 。您可以使用<code translate="no">pip install</code> 與<code translate="no">-U</code> 來強制更新到最新版本，<code translate="no">milvus-lite</code> 會自動安裝。</p>
 <p>如果您想明確地安裝<code translate="no">milvus-lite</code> 套件，或者您已經安裝了較舊版本的<code translate="no">milvus-lite</code> 並想要更新它，您可以進行<code translate="no">pip install -U milvus-lite</code> 。</p>
 <h2 id="Connect-to-Milvus-Lite" class="common-anchor-header">連接至 Milvus Lite<button data-href="#Connect-to-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -496,7 +496,7 @@ res = client.delete(
         ></path>
       </svg>
     </button></h2><p>所有儲存於 Milvus Lite 的資料都可以輕鬆匯出並載入其他類型的 Milvus 部署，例如 Docker 上的 Milvus Standalone、K8s 上的 Milvus Distributed 或<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上的完全管理式 Milvus。</p>
-<p>Milvus Lite 提供一個命令列工具，可以將資料轉存為 json 檔案，並將其匯入<a href="https://github.com/milvus-io/milvus">Milvus</a>和<a href="https://zilliz.com/cloud">Zilliz Cloud</a>(Milvus 的完全管理雲端服務)。milvus-lite 指令會與 milvus-lite python 套件一起安裝。</p>
+<p>Milvus Lite 提供一個命令列工具，可以將資料轉換成 json 檔案，並將其匯入<a href="https://github.com/milvus-io/milvus">Milvus</a>和<a href="https://zilliz.com/cloud">Zilliz Cloud</a>(Milvus 的完全管理雲端服務)。milvus-lite 指令會與 milvus-lite python 套件一起安裝。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Install</span>
 pip install -U &quot;pymilvus[bulk_writer]&quot;
 
@@ -548,7 +548,7 @@ optional arguments:
 <li><a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a></li>
 </ul></li>
 <li><p><a href="/docs/zh-hant/upgrade_milvus_cluster-helm.md">使用 Helm Chart 升級 Milvus</a>。</p></li>
-<li><p><a href="/docs/zh-hant/scaleout.md">擴充您的 Milvus 集群</a>。</p></li>
+<li><p><a href="/docs/zh-hant/scaleout.md">擴充你的 Milvus 集群</a>。</p></li>
 <li><p>在雲端部署您的 Milvus 叢集：</p>
 <ul>
 <li><a href="/docs/zh-hant/eks.md">亞馬遜 EKS</a></li>

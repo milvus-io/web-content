@@ -38,8 +38,8 @@ summary: >-
       </svg>
     </button></h2><ol>
 <li><strong>Kopieren Sie</strong> die vollständige Eingabeaufforderung aus dem Abschnitt <a href="#full-prompt">Vollständige Eingabeaufforderung</a> unten.</li>
-<li><strong>Speichern Sie</strong> sie an dem Ort, den Ihr KI-Tool erwartet - Einzelheiten zur Platzierung finden Sie in der <a href="/docs/de/milvus_for_agents.md">Umgebungstabelle</a>.</li>
-<li>Ihr KI-Assistent wird diese Regeln automatisch anwenden, wenn er Milvus-Code generiert oder überprüft.</li>
+<li><strong>Speichern Sie</strong> sie an dem Ort, den Ihr KI-Tool erwartet - Details zur Platzierung finden Sie in der <a href="/docs/de/milvus_for_agents.md">Umgebungstabelle</a>.</li>
+<li>Ihr KI-Assistent wird diese Regeln automatisch anwenden, wenn er Milvus-Code erzeugt oder überprüft.</li>
 </ol>
 <p>Für <strong>Cursor-Benutzer</strong>: Kopieren Sie den Prompt aus dem Abschnitt <a href="#full-prompt">Vollständiger Prompt</a> und speichern Sie ihn unter <code translate="no">.cursor/rules/</code> in Ihrem Projekt.</p>
 <h2 id="Full-prompt" class="common-anchor-header">Vollständige Eingabeaufforderung<button data-href="#Full-prompt" class="anchor-icon" translate="no">

@@ -25,7 +25,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Os vectores esparsos são um método importante para captar a correspondência de termos ao nível da superfície na recuperação de informação e no processamento de linguagem natural. Enquanto os vectores densos se destacam na compreensão semântica, os vectores esparsos fornecem frequentemente resultados de correspondência mais previsíveis, especialmente quando se procura termos especiais ou identificadores textuais.</p>
-<h2 id="Overview" class="common-anchor-header">Síntese<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,7 +43,7 @@ summary: >-
     </button></h2><p>Um vetor esparso é um vetor especial de alta dimensão em que a maioria dos elementos é zero e apenas algumas dimensões têm valores diferentes de zero. Como mostra o diagrama abaixo, os vectores densos são normalmente representados como matrizes contínuas em que cada posição tem um valor (por exemplo, <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). Em contrapartida, os vectores esparsos armazenam apenas elementos não nulos e os respectivos índices da dimensão, frequentemente representados como pares chave-valor de <code translate="no">{ index: value}</code> (por exemplo, <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
    </span> <span class="img-wrapper"> <span>Representação de vectores esparsos</span> </span></p>
 <p>Com a tokenização e a pontuação, os documentos podem ser representados como vectores de saco de palavras, em que cada dimensão corresponde a uma palavra específica do vocabulário. Apenas as palavras presentes no documento têm valores diferentes de zero, criando uma representação vetorial esparsa. Os vectores esparsos podem ser gerados através de duas abordagens:</p>
 <ul>
@@ -53,7 +53,7 @@ summary: >-
 <p>Os vectores esparsos e o texto original podem ser armazenados no Milvus para uma recuperação eficiente. O diagrama abaixo descreve o processo geral.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
    </span> <span class="img-wrapper"> <span>Fluxo de trabalho do vetor esparso</span> </span></p>
 <div class="alert note">
 <p>Para além dos vectores esparsos, Milvus também suporta vectores densos e vectores binários. Os vectores densos são ideais para capturar relações semânticas profundas, enquanto os vectores binários são excelentes em cenários como comparações rápidas de semelhanças e desduplicação de conteúdos. Para obter mais informações, consulte <a href="/docs/pt/dense-vector.md">Vetor denso</a> e <a href="/docs/pt/binary-vector.md">Vetor binário</a>.</p>

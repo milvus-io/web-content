@@ -18,7 +18,7 @@ title: PyTorchとMilvusによる画像検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このガイドでは、PyTorchとMilvusを統合して埋め込みを使った画像検索を行う例を紹介します。PyTorchは強力なオープンソースのディープラーニングフレームワークで、機械学習モデルの構築やデプロイに広く利用されています。この例では、Torchvisionライブラリと事前に訓練されたResNet50モデルを活用して、画像コンテンツを表す特徴ベクトル（埋め込み）を生成します。これらの埋め込みは、高性能ベクトルデータベースであるMilvusに保存され、効率的な類似検索を可能にする。使用するデータセットは、<a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggleの</a>Impressionist-Classifier Datasetである。PyTorchのディープラーニング機能とMilvusのスケーラブルな検索機能を組み合わせることで、ロバストで効率的な画像検索システムを構築する方法を示します。</p>
+    </button></h1><p>このガイドでは、PyTorchとMilvusを統合して埋め込みを使った画像検索を行う例を紹介します。PyTorchは強力なオープンソースのディープラーニングフレームワークで、機械学習モデルの構築やデプロイに広く利用されています。この例では、Torchvisionライブラリと事前に訓練されたResNet50モデルを活用して、画像コンテンツを表す特徴ベクトル（埋め込み）を生成します。これらの埋め込みは、高性能ベクトルデータベースであるMilvusに格納され、効率的な類似検索を可能にする。使用するデータセットは、<a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggleの</a>Impressionist-Classifier Datasetである。PyTorchのディープラーニング機能とMilvusのスケーラブルな検索機能を組み合わせることで、堅牢で効率的な画像検索システムを構築する方法を示します。</p>
 <p>それでは始めましょう！</p>
 <h2 id="Installing-the-requirements" class="common-anchor-header">要件のインストール<button data-href="#Installing-the-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,7 +82,7 @@ gdown.download(url, output)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>トラッキングとアップデートを容易にするために使用する主なグローバル引数である。</p>
+    </button></h2><p>以下は、トラッキングとアップデートを容易にするために使用する主なグローバル引数である。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Milvus Setup Arguments</span>
 COLLECTION_NAME = <span class="hljs-string">&#x27;image_search&#x27;</span>  <span class="hljs-comment"># Collection name</span>
 DIMENSION = <span class="hljs-number">2048</span>  <span class="hljs-comment"># Embedding vector size in this example</span>
@@ -290,8 +290,8 @@ f, axarr = plt.subplots(<span class="hljs-built_in">len</span>(data_batch[<span 
 <span class="hljs-comment"># Save the search result in a separate image file alongside your script.</span>
 plt.savefig(<span class="hljs-string">&#x27;search_result.png&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>検索結果の画像は以下のようになるはずです：</p>
+<p>検索結果画像は以下のようになるはずです：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/integrate_with_pytorch.png" alt="Image search output" class="doc-image" id="image-search-output" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/integrate_with_pytorch.png" alt="Image search output" class="doc-image" id="image-search-output" />
    </span> <span class="img-wrapper"> <span>画像検索の出力</span> </span></p>

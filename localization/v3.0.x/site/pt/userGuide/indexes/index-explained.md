@@ -8,8 +8,8 @@ summary: >-
   pré-processamento, espaço e RAM adicionais durante a pesquisa. Além disso, a
   utilização de um índice reduz normalmente a taxa de recuperação (embora o
   efeito seja insignificante, não deixa de ser importante). Portanto, este
-  artigo explica como minimizar os custos da utilização de um índice e maximizar
-  os benefícios.
+  artigo explica como minimizar os custos da utilização de um índice e, ao mesmo
+  tempo, maximizar os benefícios.
 ---
 <h1 id="Index-Explained" class="common-anchor-header">Índice explicado<button data-href="#Index-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -112,7 +112,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
    </span> <span class="img-wrapper"> <span>Anatomia do Índice Vetorial</span> </span></p>
-<p>Durante a criação do índice, Milvus combina a estrutura de dados escolhida e o método de quantização para determinar uma <strong>taxa de expansão</strong> óptima. No momento da consulta, o sistema recupera <code translate="no">topK × expansion rate</code> os vectores candidatos, aplica o refinador para recalcular as distâncias com maior precisão e, finalmente, devolve os resultados mais exactos <code translate="no">topK</code>. Esta abordagem híbrida equilibra a velocidade e a precisão, restringindo o refinamento, que consome muitos recursos, a um subconjunto filtrado de candidatos.</p>
+<p>Durante a criação do índice, o Milvus combina a estrutura de dados escolhida e o método de quantização para determinar uma <strong>taxa de expansão</strong> óptima. No momento da consulta, o sistema recupera <code translate="no">topK × expansion rate</code> os vectores candidatos, aplica o refinador para recalcular as distâncias com maior precisão e, finalmente, devolve os resultados mais exactos <code translate="no">topK</code>. Esta abordagem híbrida equilibra a velocidade e a precisão, restringindo o refinamento, que consome muitos recursos, a um subconjunto filtrado de candidatos.</p>
 <h3 id="Data-structure" class="common-anchor-header">Estrutura de dados<button data-href="#Data-structure" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -134,7 +134,7 @@ summary: >-
 <p>Os tipos de índice da série IVF permitem que o Milvus agrupe vectores em grupos através de um particionamento baseado em centróides. Em geral, é seguro assumir que todos os vectores de um grupo estão provavelmente próximos do vetor de consulta se o centróide do grupo estiver próximo do vetor de consulta. Com base nesta premissa, o Milvus analisa apenas as incorporações de vectores nos baldes em que os centróides estão próximos do vetor de consulta, em vez de examinar todo o conjunto de dados. Esta estratégia reduz os custos computacionais, mantendo uma precisão aceitável.</p>
 <p>Este tipo de estrutura de dados de índice é ideal para conjuntos de dados de grande escala que requerem um rendimento rápido.</p></li>
 <li><p><strong>Estrutura baseada em grafos</strong></p>
-<p>Uma estrutura de dados baseada em gráficos para pesquisa vetorial, como o Hierarchical Navigable Small World<a href="https://arxiv.org/abs/1603.09320">(HNSW</a>), constrói um gráfico em camadas em que cada vetor se liga aos seus vizinhos mais próximos. As consultas navegam nesta hierarquia, começando nas camadas superiores grosseiras e passando pelas camadas inferiores, permitindo uma complexidade de pesquisa eficiente em tempo logarítmico.</p>
+<p>Uma estrutura de dados baseada em gráficos para pesquisa vetorial, como o Hierarchical Navigable Small World<a href="https://arxiv.org/abs/1603.09320">(HNSW</a>), constrói um gráfico em camadas em que cada vetor se liga aos seus vizinhos mais próximos. As consultas navegam nesta hierarquia, começando nas camadas superiores grosseiras e passando pelas camadas inferiores, o que permite uma complexidade de pesquisa eficiente em tempo logarítmico.</p>
 <p>Este tipo de estrutura de dados de índice é excelente em espaços de elevada dimensão e em cenários que exigem consultas de baixa latência.</p></li>
 </ul>
 <h3 id="Quantization" class="common-anchor-header">Quantização<button data-href="#Quantization" class="anchor-icon" translate="no">
@@ -155,7 +155,7 @@ summary: >-
     </button></h3><p>A quantização reduz o espaço de memória e os custos computacionais através de uma representação mais grosseira:</p>
 <ul>
 <li><p><strong>A Quantização Escalar</strong> (por exemplo, <strong>SQ8</strong>) permite ao Milvus comprimir cada dimensão vetorial num único byte (8 bits), reduzindo a utilização de memória em 75% em comparação com os valores flutuantes de 32 bits, preservando uma precisão razoável.</p></li>
-<li><p><strong>A Quantização de Produto</strong><strong>(PQ</strong>) permite ao Milvus dividir os vectores em subvectores e codificá-los utilizando o agrupamento baseado em livros de códigos. Isto permite atingir rácios de compressão mais elevados (por exemplo, 4-32x) à custa de uma redução marginal da recuperação, tornando-o adequado para ambientes com restrições de memória.</p></li>
+<li><p><strong>A Quantização de Produto</strong><strong>(PQ</strong>) permite ao Milvus dividir os vectores em subvectores e codificá-los utilizando o agrupamento baseado em livros de códigos. Isto permite atingir rácios de compressão mais elevados (por exemplo, 4-32x) à custa de uma redução marginal da recuperação, tornando-o adequado para ambientes com limitações de memória.</p></li>
 </ul>
 <h3 id="Refiner" class="common-anchor-header">Refinador<button data-href="#Refiner" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -381,7 +381,7 @@ summary: >-
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 2 bytes = 2.0 MB
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Calcular a compressão causada pela quantização.</strong></p>
-<p>As variantes de FIV utilizam normalmente PQ e SQ8, e a utilização de memória pode ser estimada da seguinte forma:</p>
+<p>As variantes de FIV utilizam tipicamente PQ e SQ8, e a utilização de memória pode ser estimada da seguinte forma:</p>
 <ul>
 <li><p>Usando PQ com 8 subquantizadores</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8.0 MB
@@ -449,7 +449,7 @@ summary: >-
 <p>A memória consumida pelo armazenamento de vectores FP32 não comprimidos pode ser calculada da seguinte forma:</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 128 dimensions × 4 bytes = 512 MB  
 <button class="copy-code-btn"></button></code></pre>
-<p>Quando se utiliza o HNSW para indexar 1 milhão de embeddings vectoriais de 128 dimensões, a memória total utilizada seria de <strong>128 MB (gráfico) + 512 MB (vectores) = 640 MB</strong>.</p></li>
+<p>Quando se utiliza o HNSW para indexar o 1 milhão de embeddings vectoriais de 128 dimensões, a memória total utilizada seria de <strong>128 MB (gráfico) + 512 MB (vectores) = 640 MB</strong>.</p></li>
 <li><p><strong>Calcule a compressão causada pela quantização.</strong></p>
 <p>A quantização reduz o tamanho do vetor. Por exemplo, a utilização de PQ com 8 subquantizadores (8 bytes por vetor) conduz a uma compressão drástica. A memória consumida pelos embeddings vectoriais comprimidos pode ser calculada da seguinte forma:</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8 MB

@@ -36,7 +36,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>HNSW（Hierarchical Navigable Small World）アルゴリズムは、異なるズームレベルの地図のような多層グラフを構築する。<strong>最下層には</strong>すべてのデータ点が含まれ、<strong>上位層は</strong>下位層からサンプリングされたデータ点のサブセットで構成される。</p>
-<p>この階層構造では、各レイヤーはデータポイントを表すノードを含み、それらの近接性を示すエッジで接続されている。上位レイヤーはターゲットに素早く近づくための長距離ジャンプを提供し、下位レイヤーは最も正確な結果を得るためのきめ細かい検索を可能にする。</p>
+<p>この階層構造では、各レイヤーはデータポイントを表すノードを含み、それらの近接性を示すエッジで接続されている。上位のレイヤーはターゲットに素早く近づくための長距離ジャンプを提供し、下位のレイヤーは最も正確な結果を得るためのきめ細かい検索を可能にする。</p>
 <p>その仕組みは以下の通りだ：</p>
 <ol>
 <li><p><strong>エントリーポイント</strong>：探索は、グラフ内のあらかじめ決められたノードである最上位レイヤーの固定されたエントリー・ポイントから開始される。</p></li>
@@ -46,7 +46,7 @@ summary: >-
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
    </span> <span class="img-wrapper"> <span>HNSW</span> </span></p>
 <p>HNSWの性能は、グラフの構造と探索動作の両方を制御するいくつかの重要なパラメータに依存する。これらには以下が含まれる：</p>
 <ul>
@@ -153,7 +153,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行する際に使用するパラメータの概要を説明します。</p>
-<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/hnsw.md#Build-index">インデックスを構築する</a>際に設定できるパラメータの一覧です。</p>
+<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/hnsw.md#Build-index">インデックスを構築する</a>際に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th><p>パラメータ</p></th>
@@ -165,16 +180,31 @@ res = MilvusClient.search(
      <td><p><code translate="no">M</code></p></td>
      <td><p>各ノードがグラフ内で持つことのできる接続（またはエッジ）の最大数。このパラメータはインデックス構築と検索の両方に直接影響する。</p></td>
      <td><p><strong>型</strong>：整数<strong>：</strong>[2, 2048]</p><p><strong>デフォルト値</strong>:<code translate="no">30</code> (ノードあたり最大 30 の送信エッジと 30 の受信エッジ)</p></td>
-     <td><p><code translate="no">M</code> を大きくすると、一般的に<strong>精度が高く</strong>なるが、<strong>メモリのオーバーヘッドが増加</strong>し、<strong>インデックス構築と検索の両方が遅くなる</strong>。高次元のデータセットや高い再現性が重要な場合は、<code translate="no">M</code> を増やすことを検討する。</p><p>メモリ使用量と検索速度を重視する場合は、<code translate="no">M</code> を減らすことを検討する。</p><p>ほとんどの場合、この範囲内の値を設定することを推奨する：[5, 100].</p></td>
+     <td><p><code translate="no">M</code> を大きくすると、一般的に<strong>精度が高く</strong>なるが、<strong>メモリのオーバーヘッドが増加</strong>し、<strong>インデックス構築と検索の両方が遅くなる</strong>。高次元のデータセットや高い再現性が重要な場合は、<code translate="no">M</code> を増やすことを検討する。</p><p>メモリ使用量と検索速度が重要な場合は、<code translate="no">M</code> を減らすことを検討する。</p><p>ほとんどの場合、この範囲内の値を設定することを推奨する：[5, 100].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">efConstruction</code></p></td>
      <td><p>インデックス構築時に接続を考慮する近隣候補の数。各新要素に対してより多くの候補が評価されますが、 実際に確立される接続の最大数は<code translate="no">M</code> によって制限されます。</p></td>
      <td><p><strong>型</strong>：整数<strong>：</strong>[1,<em>int_max</em>] です。</p><p><strong>デフォルト値</strong>：<code translate="no">360</code></p></td>
-     <td><p>より多くの接続候補が探索されるため、<code translate="no">efConstruction</code> を大きくすると、<strong>通常より正確なインデックスが</strong>得られる。しかし、これは<strong>インデックス作成時間の延長と、</strong>作成中の<strong>メモリ使用量の増加にも</strong>つながります。特にインデックス作成時間がそれほど重要でないシナリオでは、精度を向上させるために<code translate="no">efConstruction</code> を増加させることを検討してください。</p><p>リ ソ ース制約が懸念 さ れ る 場合には、<code translate="no">efConstruction</code> を減らして イ ンデ ッ ク ス作成を高速化す る こ と を検討 し て く だ さ い。</p><p>ほとんどの場合、この範囲内の値を設定することを推奨します：[50, 500].</p></td>
+     <td><p><code translate="no">efConstruction</code> を大きくすると、より多くの接続候補が探索されるため、<strong>通常より正確なインデックスが</strong>得られる。しかし、これは<strong>インデックス作成時間の延長と、</strong>作成中の<strong>メモリ使用量の増加にも</strong>つながります。特にインデックス作成時間がそれほど重要でないシナリオでは、精度を向上させるために<code translate="no">efConstruction</code> を増やすことを検討する。</p><p>リ ソ ース制約が懸念 さ れ る 場合には、<code translate="no">efConstruction</code> を減らして イ ンデ ッ ク ス作成を高速化す る こ と を検討 し て く だ さ い。</p><p>ほとんどの場合、この範囲内の値を設定することを推奨します：[50, 500].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>次の表は、<a href="/docs/ja/hnsw.md#Search-on-index">インデックスを検索する</a>際に<code translate="no">search_params.params</code> で設定できるパラメータの一覧です。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>次の表は、<a href="/docs/ja/hnsw.md#Search-on-index">インデックスを検索する</a>際に<code translate="no">search_params.params</code> で設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th><p>パラメータ</p></th>

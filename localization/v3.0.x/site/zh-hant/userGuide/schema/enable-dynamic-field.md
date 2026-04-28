@@ -58,7 +58,7 @@ summary: >-
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>這允許您在不改變模式的情況下演進資料結構。</p>
-<p>常見的用例包括</p>
+<p>常見用例包括</p>
 <ul>
 <li><p>儲存可選或不常檢索的欄位</p></li>
 <li><p>捕捉因實體而異的元資料</p></li>
@@ -415,7 +415,22 @@ curl --request POST \
 <div class="alert note">
 <p>動態欄位鍵的索引是<strong>可選的</strong>。在沒有索引的情況下，您仍可依據動態欄位鍵查詢或過濾，但可能會因為強制搜尋而導致效能變慢。</p>
 </div>
-<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">JSON 路徑索引語法</h3><p>要建立 JSON 路徑索引，請指定：</p>
+<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">JSON 路徑索引語法<button data-href="#JSON-path-indexing-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要建立 JSON 路徑索引，請指定：</p>
 <ul>
 <li><p><strong>JSON path</strong>(<code translate="no">json_path</code>)：您要索引的 JSON 物件中的關鍵或巢狀欄位的路徑。</p>
 <ul>
@@ -428,7 +443,22 @@ curl --request POST \
 <li><p>如需完整清單，請參閱<a href="/docs/zh-hant/use-json-fields.md#Supported-JSON-cast-types">支援的 JSON 鑄模類型</a>。</p></li>
 </ul></li>
 </ul>
-<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">使用 JSON 路徑索引動態欄位鍵值</h3><p>由於動態欄位是 JSON 欄位，您可以使用 JSON 路徑語法索引其中的任何鍵。這對簡單的標量值和複雜的嵌套結構都有效。</p>
+<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">使用 JSON 路徑索引動態欄位鍵值<button data-href="#Use-JSON-path-to-index-dynamic-field-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>由於動態欄位是 JSON 欄位，您可以使用 JSON 路徑語法索引其中的任何鍵。這對簡單的標量值和複雜的嵌套結構都有效。</p>
 <p><strong>JSON 路徑範例：</strong></p>
 <ul>
 <li><p>對於簡單的鍵：<code translate="no">overview</code>,<code translate="no">words</code></p></li>
@@ -632,7 +662,22 @@ indexOpt4 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">使用 JSON 轉換函式進行類型轉換<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h3><p>如果動態欄位 key 包含格式不正確的值 (例如：儲存為字串的數字)，您可以使用轉換函式來轉換：</p>
+<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">使用 JSON 轉換函式進行類型轉換<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span><button data-href="#Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果動態欄位 key 包含格式不正確的值 (例如：儲存為字串的數字)，您可以使用轉換函式來轉換：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Convert a string to double before indexing</span>
@@ -695,7 +740,22 @@ indexOpt5 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
 <li><p>有關 cast 函式參數的詳細資訊，請參閱<a href="/docs/zh-hant/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">JSON Field</a>。</p></li>
 </ul>
 </div>
-<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">為集合套用索引</h3><p>定義索引參數後，您可以使用<code translate="no">create_index()</code> 將其套用至集合：</p>
+<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">為集合套用索引<button data-href="#Apply-indexes-to-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>定義索引參數後，您可以使用<code translate="no">create_index()</code> 將其套用至集合：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_index(
@@ -951,19 +1011,79 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">什麼時候應該在模式中明確定義欄位，而不是使用動態欄位鍵呢？</h3><p>在下列情況下，您應該在模式中明確定義字段，而不是使用動態字段鍵：</p>
+    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">什麼時候應該在模式中明確定義欄位，而不是使用動態欄位鍵呢？<button data-href="#When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在下列情況下，您應該在模式中明確定義字段，而不是使用動態字段鍵：</p>
 <ul>
 <li><p><strong>欄位經常包含在 output_fields 中</strong>：只有明確定義的欄位才能保證透過<code translate="no">output_fields</code> 有效地檢索。動態欄位鍵未針對高頻檢索進行最佳化，可能會產生效能開銷。</p></li>
 <li><p><strong>欄位被頻繁存取或篩選</strong>：雖然索引動態欄位鍵可以提供與固定模式欄位相似的篩選效能，但明確定義的欄位提供更清晰的結構和更好的可維護性。</p></li>
 <li><p><strong>您需要完全控制欄位行為</strong>：明確欄位支援模式層級的約束、驗證和更清晰的類型，這對於管理資料完整性和一致性非常有用。</p></li>
 <li><p><strong>您想要避免索引不一致</strong>：動態欄位鍵中的資料較容易出現類型或結構不一致的情況。使用固定的模式有助於確保資料品質，尤其是當您打算使用索引或鑄造時。</p></li>
 </ul>
-<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">我可以在同一個動態欄位鍵上，以不同的資料類型建立多個索引嗎？</h3><p>不可以，<strong>每個 JSON 路徑只能</strong>建立<strong>一個索引</strong>。即使動態欄位關鍵包含混合類型的值（例如，一些字串和一些數字），您在為該路徑建立索引時也必須選擇單一的<code translate="no">json_cast_type</code> 。目前不支援同一關鍵值上不同類型的多重索引。</p>
-<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">索引動態欄位關鍵時，如果資料轉換失敗怎麼辦？</h3><p>如果您在動態欄位鍵上建立索引，但資料轉換失敗，例如，要轉換到<code translate="no">double</code> 的值是非數字字串，如<code translate="no">&quot;abc&quot;</code>，<strong>則在建立索引時會默默跳過</strong>這些特定值。它們不會出現在索引中，因此也<strong>不會在</strong>依賴索引<strong>的過濾式搜尋或查詢結果中傳回</strong>。</p>
+<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">我可以在同一個動態欄位鍵上，以不同的資料類型建立多個索引嗎？<button data-href="#Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>不可以，<strong>每個 JSON 路徑只能</strong>建立<strong>一個索引</strong>。即使動態欄位關鍵包含混合類型的值（例如，一些字串和一些數字），您在為該路徑建立索引時也必須選擇單一的<code translate="no">json_cast_type</code> 。目前不支援同一關鍵值上不同類型的多重索引。</p>
+<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">索引動態欄位關鍵時，如果資料轉換失敗怎麼辦？<button data-href="#When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果您在動態欄位鍵上建立索引，但資料轉換失敗，例如，要轉換到<code translate="no">double</code> 的值是非數字字串，如<code translate="no">&quot;abc&quot;</code>，<strong>則在建立索引時會默默跳過</strong>這些特定值。它們不會出現在索引中，因此也<strong>不會在</strong>依賴索引<strong>的過濾式搜尋或查詢結果中傳回</strong>。</p>
 <p>這有幾個重要的影響：</p>
 <ul>
 <li><p><strong>不會回退到完整掃描</strong>：如果大多數的實體都成功建立索引，過濾查詢就會完全依賴索引。鑄造失敗的實體將被排除在結果集之外 - 即使它們在邏輯上符合篩選條件。</p></li>
 <li><p><strong>搜尋準確性風險</strong>：在資料品質不一致的大型資料集中 (尤其是動態欄位鍵)，此行為可能會導致意想不到的遺漏結果。在建立索引之前，確保一致且有效的資料格式是非常重要的。</p></li>
 <li><p><strong>謹慎使用轉換函數</strong>：如果您在編制索引期間使用<code translate="no">json_cast_function</code> 將字串轉換為數字，請確保字串值可以可靠地轉換。<code translate="no">json_cast_type</code> 與實際轉換類型不匹配會導致錯誤或跳過項目。</p></li>
 </ul>
-<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">如果我的查詢使用與索引轉換類型不同的資料類型，會發生什麼情況？</h3><p>如果您的查詢比較動態欄位關鍵使用的<strong>資料類型</strong>與索引中使用的<strong>不同</strong>（例如，當索引被轉換為<code translate="no">double</code> 時，使用字串比較進行查詢），系統<strong>將不會使用索引</strong>，並可能<em>僅在可能的情況</em>下退回到完全掃描。為了獲得最佳效能與精確度，請確保您的查詢類型符合索引建立時所使用的<code translate="no">json_cast_type</code> 。</p>
+<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">如果我的查詢使用與索引轉換類型不同的資料類型，會發生什麼情況？<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果您的查詢比較動態欄位關鍵使用的<strong>資料類型</strong>與索引中使用的<strong>不同</strong>（例如，當索引被轉換為<code translate="no">double</code> 時，使用字串比較進行查詢），系統<strong>將不會使用索引</strong>，並可能<em>僅在可能的情況</em>下退回到完全掃描。為了獲得最佳效能與精確度，請確保您的查詢類型符合索引建立時所使用的<code translate="no">json_cast_type</code> 。</p>

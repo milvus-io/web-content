@@ -76,7 +76,7 @@ title: Configurar o escalonamento automático de pod horizontal (HPA) para Milvu
     </button></h2><p>Para habilitar o HPA em um cluster Milvus gerenciado pelo Milvus Operator, siga estas etapas:</p>
 <ol>
 <li><p><strong>Defina Réplicas como -1</strong>:</p>
-<p>No recurso personalizado (CR) do Milvus, defina o campo <code translate="no">replicas</code> como <code translate="no">-1</code> para o componente que deseja escalar com HPA. Isto delega o controlo de escala para a HPA em vez do operador. Pode editar o CR diretamente ou utilizar o seguinte comando <code translate="no">kubectl patch</code> para mudar rapidamente para o controlo HPA:</p>
+<p>No recurso personalizado (CR) do Milvus, defina o campo <code translate="no">replicas</code> como <code translate="no">-1</code> para o componente que deseja escalar com HPA. Isto delega o controlo de dimensionamento ao HPA em vez de ao operador. Pode editar o CR diretamente ou utilizar o seguinte comando <code translate="no">kubectl patch</code> para mudar rapidamente para o controlo HPA:</p>
 <pre><code translate="no" class="language-bash">kubectl patch milvus &lt;your-release-name&gt; --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;json&#x27;</span> -p=<span class="hljs-string">&#x27;[{&quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;/spec/components/proxy/replicas&quot;, &quot;value&quot;: -1}]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Substitua <code translate="no">&lt;your-release-name&gt;</code> pelo nome do seu cluster Milvus.</p>

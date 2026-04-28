@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>필요할 때 반전 인덱스를 사용하세요:</p>
+    </button></h2><p>필요할 때 INVERTED 인덱스를 사용하세요:</p>
 <ul>
 <li><p><strong>특정 값으로 필터링할</strong> 때: 필드가 특정 값과 같은 모든 레코드 찾기(예: <code translate="no">category == &quot;electronics&quot;</code>)</p></li>
 <li><p><strong>텍스트 콘텐츠 필터링</strong>: <code translate="no">VARCHAR</code> 필드에서 효율적인 검색 수행</p></li>
@@ -67,7 +67,7 @@ summary: >-
 <p>예를 들어, <strong>'electronics'</strong> 값은 ID <strong>1과</strong> <strong>3에</strong> 매핑되고 <strong>'books'는</strong> ID <strong>2와</strong> <strong>5에</strong> 매핑됩니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
    </span> <span class="img-wrapper"> <span>반전 인덱스의 작동 방식</span> </span></p>
 <p>특정 값(예: <code translate="no">category == &quot;electronics&quot;</code>)을 필터링하면 Milvus는 색인에서 해당 용어를 조회하여 일치하는 ID를 직접 검색합니다. 이렇게 하면 전체 데이터 세트를 스캔하지 않아도 되며, 특히 범주형 또는 반복되는 값에 대해 빠른 필터링이 가능합니다.</p>
 <p>INVERTED 인덱스는 <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong>, <strong>ARRAY와</strong> 같은 모든 스칼라 필드 유형을 지원합니다. 그러나 JSON 필드를 색인하기 위한 인덱스 매개변수는 일반 스칼라 필드와 약간 다릅니다.</p>

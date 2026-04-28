@@ -47,7 +47,7 @@ jina_ef = JinaEmbeddingFunction(
 <p>نوع المدخلات التي تم تمريرها إلى النموذج. مطلوب لتضمين النماذج v3 والإصدارات الأحدث.</p>
 <ul>
 <li><code translate="no">&quot;retrieval.passage&quot;</code>: يُستخدم لترميز المستندات الكبيرة في مهام الاسترجاع في وقت الفهرسة.</li>
-<li><code translate="no">&quot;retrieval.query&quot;</code>: يستخدم لترميز استفسارات المستخدم أو الأسئلة في مهام الاسترجاع.</li>
+<li><code translate="no">&quot;retrieval.query&quot;</code>: يُستخدم لترميز استفسارات المستخدم أو الأسئلة في مهام الاسترجاع.</li>
 <li><code translate="no">&quot;classification&quot;</code>: تستخدم لترميز النصوص لمهام تصنيف النصوص.</li>
 <li><code translate="no">&quot;text-matching&quot;</code>: تستخدم لترميز النص لمطابقة التشابه، مثل قياس التشابه بين جملتين.</li>
 <li><code translate="no">&quot;clustering&quot;</code>: يُستخدم لتجميع أو إعادة ترتيب المهام.</li>
@@ -57,7 +57,7 @@ jina_ef = JinaEmbeddingFunction(
 <li><p><code translate="no">late_chunking</code> <em>(bool</em>)</p>
 <p>تتحكم هذه المعلمة في ما إذا كان سيتم استخدام طريقة التقطيع الجديدة <a href="https://arxiv.org/abs/2409.04701">التي قدمتها جينا للذكاء الاصطناعي الشهر الماضي</a> لترميز مجموعة من الجمل. الإعداد الافتراضي هو <code translate="no">False</code>. عند ضبطه على <code translate="no">True</code> ، ستقوم واجهة برمجة تطبيقات Jina AI API بتجميع كل الجمل في حقل الإدخال وتغذيتها كسلسلة واحدة للنموذج. داخليًا، يقوم النموذج بتضمين هذه السلسلة الطويلة المتسلسلة ثم يقوم بإجراء التقطيع المتأخر، ويعيد قائمة من التضمينات التي تطابق حجم قائمة الإدخال.</p></li>
 </ul>
-<p>لإنشاء تضمينات للمستندات، استخدم الطريقة <code translate="no">encode_documents()</code>. هذه الطريقة مصممة لتضمين المستندات في مهام الاسترجاع غير المتماثلة، مثل فهرسة المستندات لمهام البحث أو التوصية. تستخدم هذه الطريقة <code translate="no">retrieval.passage</code> كمهمة.</p>
+<p>لإنشاء تضمينات للمستندات، استخدم الطريقة <code translate="no">encode_documents()</code>. صُممت هذه الطريقة لتضمين المستندات في مهام الاسترجاع غير المتماثلة، مثل فهرسة المستندات لمهام البحث أو التوصية. تستخدم هذه الطريقة <code translate="no">retrieval.passage</code> كمهمة.</p>
 <pre><code translate="no" class="language-python:">
 ```python
 docs = [

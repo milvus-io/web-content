@@ -19,12 +19,13 @@ summary: Aprenda a configurar mq para Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus soporta cuatro MQ: rocksmq(basado en RockDB), natsmq(servidor nats embebido), Pulsar y Kafka.</p>
+    </button></h1><p>Milvus soporta cuatro MQ: rocksmq(basado en RockDB), Pulsar, Kafka y Woodpecker.</p>
 <p>Puede cambiar su mq configurando el campo mq.type.</p>
-<p>Si no estableces el campo mq.type como predeterminado, hay una nota sobre cómo habilitar la prioridad si configuramos múltiples mq en este archivo.</p>
+<p>Si no estableces el campo mq.type como predeterminado, hay una nota acerca de habilitar la prioridad si configuramos múltiples mq en este archivo.</p>
 <ol>
-<li><p>modo standalone(local): rocksmq(por defecto) &gt; natsmq &gt; Pulsar &gt; Kafka</p></li>
-<li><p>modo cluster:  Pulsar(por defecto) &gt; Kafka (rocksmq y natsmq no están soportados en modo cluster)</p></li>
+<li><p>modo standalone(local): rocksmq(por defecto) &gt; Pulsar &gt; Kafka</p></li>
+<li><p>modo cluster:  Pulsar(por defecto) &gt; Kafka (rocksmq no está soportado en modo cluster)</p></li>
+<li><p>Woodpecker se puede utilizar tanto en modo autónomo como en modo clúster estableciendo mq.type como woodpecker.</p></li>
 </ol>
 <h2 id="mqtype" class="common-anchor-header"><code translate="no">mq.type</code><button data-href="#mqtype" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +53,7 @@ summary: Aprenda a configurar mq para Milvus.
     <tr>
       <td>
         <li>Valor por defecto: "default"</li>      
-        <li>Valores válidos: [default, pulsar, kafka, rocksmq, natsmq]</li>      </td>
+        <li>Valores válidos: [default, pulsar, kafka, rocksmq, woodpecker]</li>      </td>
       <td>por defecto</td>
     </tr>
   </tbody>
@@ -141,6 +142,35 @@ summary: Aprenda a configurar mq para Milvus.
     <tr>
       <td>        tamaño del búfer del modo de persecución, en bytes     </td>
       <td>8388608</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="mqpursuitBufferTime" class="common-anchor-header"><code translate="no">mq.pursuitBufferTime</code><button data-href="#mqpursuitBufferTime" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="mq.pursuitBufferTime">
+  <thead>
+    <tr>
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        tiempo del búfer del modo pursuit en segundos      </td>
+      <td>60</td>
     </tr>
   </tbody>
 </table>
@@ -257,6 +287,93 @@ summary: Aprenda a configurar mq para Milvus.
     <tr>
       <td>        Valor por defecto: "3", el tiempo de espera(en segundos) que el objetivo envía msgPack      </td>
       <td>3</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="mqdispatchermaxDispatcherNumPerPchannel" class="common-anchor-header"><code translate="no">mq.dispatcher.maxDispatcherNumPerPchannel</code><button data-href="#mqdispatchermaxDispatcherNumPerPchannel" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="mq.dispatcher.maxDispatcherNumPerPchannel">
+  <thead>
+    <tr>
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        El número máximo de despachadores por canal físico, principalmente para limitar el número de consumidores y evitar problemas de rendimiento (por ejemplo, durante la recuperación cuando se vigila un gran número de canales).      </td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="mqdispatcherretrySleep" class="common-anchor-header"><code translate="no">mq.dispatcher.retrySleep</code><button data-href="#mqdispatcherretrySleep" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="mq.dispatcher.retrySleep">
+  <thead>
+    <tr>
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        tiempo de espera de reintento de registro en segundos      </td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="mqdispatcherretryTimeout" class="common-anchor-header"><code translate="no">mq.dispatcher.retryTimeout</code><button data-href="#mqdispatcherretryTimeout" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="mq.dispatcher.retryTimeout">
+  <thead>
+    <tr>
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        tiempo de espera de reintento de registro en segundos      </td>
+      <td>60</td>
     </tr>
   </tbody>
 </table>

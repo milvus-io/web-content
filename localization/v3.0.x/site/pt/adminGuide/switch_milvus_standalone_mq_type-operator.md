@@ -58,7 +58,7 @@ title: Trocar o tipo de MQ para o Milvus Standalone
       </svg>
     </button></h2><p>O fluxo de trabalho geral para alternar o tipo de MQ é o seguinte:</p>
 <ol>
-<li>Garantir que a instância do Milvus esteja funcionando corretamente.</li>
+<li>Assegurar que a instância do Milvus está a funcionar corretamente.</li>
 <li>Confirmar o tipo de MQ de origem e o tipo de MQ de destino.</li>
 <li>Configurar as definições de acesso do MQ de destino na configuração do Milvus sem alterar o valor <code translate="no">mqType</code>.</li>
 <li>Acionar a troca chamando a API de alteração do WAL.</li>

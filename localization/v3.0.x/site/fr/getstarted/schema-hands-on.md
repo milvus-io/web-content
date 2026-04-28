@@ -28,7 +28,7 @@ summary: >-
 <p>Milvus vous permet de spécifier le modèle de données de recherche par le biais d'un schéma de collection, organisant les données non structurées, leurs représentations vectorielles denses ou éparses et les métadonnées structurées. Que vous travailliez avec du texte, des images ou d'autres types de données, ce guide pratique vous aidera à comprendre et à appliquer les concepts clés des schémas pour concevoir un modèle de données de recherche dans la pratique.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
    </span> <span class="img-wrapper"> <span>Anatomie du modèle de données</span> </span></p>
 <h2 id="Data-Model" class="common-anchor-header">Modèle de données<button data-href="#Data-Model" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,7 +45,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La conception du modèle de données d'un système de recherche implique l'analyse des besoins de l'entreprise et l'abstraction des informations dans un modèle de données exprimé par un schéma. Un schéma bien défini est important pour aligner le modèle de données sur les objectifs de l'entreprise et garantir la cohérence des données et la qualité du service.  En outre, le choix de types de données et d'index appropriés est important pour atteindre l'objectif de l'entreprise de manière économique.</p>
+    </button></h2><p>La conception du modèle de données d'un système de recherche implique l'analyse des besoins de l'entreprise et l'abstraction des informations dans un modèle de données exprimé par un schéma. Un schéma bien défini est important pour aligner le modèle de données sur les objectifs de l'entreprise et garantir la cohérence des données et la qualité du service.  En outre, le choix des types de données et de l'index appropriés est important pour atteindre l'objectif de l'entreprise de manière économique.</p>
 <h3 id="Analyzing-Business-Needs" class="common-anchor-header">Analyse des besoins de l'entreprise<button data-href="#Analyzing-Business-Needs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -172,7 +172,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Lors de la conception d'un schéma, il ne suffit pas de faire correspondre vos données aux champs en utilisant les types de données pris en charge. Il est essentiel de bien comprendre les relations entre les champs et les stratégies disponibles pour la configuration. Le fait de garder à l'esprit les caractéristiques clés au cours de la phase de conception garantit que le schéma répond non seulement aux exigences immédiates en matière de traitement des données, mais qu'il est également évolutif et adaptable aux besoins futurs. En intégrant soigneusement ces fonctionnalités, vous pouvez construire une architecture de données solide qui maximise les capacités de Milvus et prend en charge votre stratégie et vos objectifs plus larges en matière de données. Voici une vue d'ensemble des principales caractéristiques permettant de créer un schéma de collecte :</p>
+    </button></h2><p>Lors de la conception d'un schéma, il ne suffit pas de faire correspondre vos données aux champs en utilisant les types de données pris en charge. Il est essentiel de bien comprendre les relations entre les champs et les stratégies disponibles pour la configuration. Le fait de garder à l'esprit les caractéristiques clés pendant la phase de conception garantit que le schéma répond non seulement aux exigences immédiates en matière de traitement des données, mais qu'il est également évolutif et adaptable aux besoins futurs. En intégrant soigneusement ces fonctionnalités, vous pouvez construire une architecture de données solide qui maximise les capacités de Milvus et prend en charge votre stratégie et vos objectifs plus larges en matière de données. Voici une vue d'ensemble des principales caractéristiques permettant de créer un schéma de collecte :</p>
 <h3 id="Primary-Key" class="common-anchor-header">Clé primaire<button data-href="#Primary-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -256,7 +256,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans cette section, nous décrivons la conception du schéma et l'exemple de code pour une application de recherche de documents multimédias illustrée dans le diagramme ci-dessus. Ce schéma est conçu pour gérer un ensemble de données contenant des articles dont les données correspondent aux champs suivants :</p>
+    </button></h2><p>Dans cette section, nous décrirons la conception du schéma et l'exemple de code pour une application de recherche de documents multimédias illustrée dans le diagramme ci-dessus. Ce schéma est conçu pour gérer un ensemble de données contenant des articles dont les données correspondent aux champs suivants :</p>
 <table>
    <tr>
      <th><p><strong>Champ</strong></p></th>

@@ -1,11 +1,11 @@
 ---
 id: langchain_milvus_dido.md
 summary: >-
-  Esta guía muestra cómo utilizar la función de incrustación de texto de Milvus
-  2.6 (también conocida como Data In Data Out) con LangChain. Esta función
-  permite que el servidor Milvus convierta automáticamente texto sin formato en
-  incrustaciones vectoriales, simplificando el código del lado del cliente y
-  centralizando la gestión de claves API.
+  Esta guía demuestra cómo utilizar la función de incrustación de texto de
+  Milvus 2.6 (también conocida como Data In Data Out) con LangChain. Esta
+  función permite que el servidor Milvus convierta automáticamente texto sin
+  formato en incrustaciones vectoriales, simplificando el código del lado del
+  cliente y centralizando la gestión de claves API.
 title: Integración de la función de incrustación de texto de Milvus con LangChain
 ---
 <h1 id="Integrating-Milvus-Text-Embedding-Function-with-LangChain" class="common-anchor-header">Integración de la función de incrustación de texto de Milvus con LangChain<button data-href="#Integrating-Milvus-Text-Embedding-Function-with-LangChain" class="anchor-icon" translate="no">
@@ -177,7 +177,7 @@ vector_store = Milvus(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La función de incrustación de texto (entrada y salida de datos) de Milvus 2.6 permite al servidor de Milvus convertir automáticamente texto sin formato en incrustaciones vectoriales. El cliente sólo tiene que proporcionar el texto, y Milvus se encargará automáticamente de la generación de la incrustación.</p>
+    </button></h3><p>La función de incrustación de texto (entrada y salida de datos) de Milvus 2.6 permite al servidor de Milvus convertir automáticamente texto en bruto en incrustaciones vectoriales. El cliente sólo tiene que proporcionar el texto, y Milvus se encargará automáticamente de la generación de la incrustación.</p>
 <p><strong>Diagrama de secuencia:</strong></p>
 <p>
   <span class="img-wrapper">

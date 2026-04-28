@@ -2,7 +2,7 @@
 id: configure_pulsar.md
 related_key: configure
 group: system_configuration.md
-summary: Apprenez à configurer les pulsars pour Milvus.
+summary: Apprenez à configurer le pulsar pour Milvus.
 ---
 <h1 id="pulsar-related-Configurations" class="common-anchor-header">Configurations liées à pulsar<button data-href="#pulsar-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -139,7 +139,7 @@ summary: Apprenez à configurer les pulsars pour Milvus.
       <td>
         <li>La taille maximale de chaque message dans Pulsar. Unité : Octet.</li>      
         <li>Par défaut, Pulsar peut transmettre au maximum 2 Mo de données dans un seul message. Lorsque la taille des données insérées est supérieure à cette valeur, le proxy fragmente les données en plusieurs messages afin de garantir leur transmission correcte.</li>      
-        <li>Si le paramètre correspondant dans Pulsar reste inchangé, l'augmentation de cette configuration entraînera l'échec de Milvus, et sa réduction ne produira aucun avantage.</li>      </td>
+        <li>Si le paramètre correspondant dans Pulsar reste inchangé, l'augmentation de cette configuration entraînera l'échec de Milvus, et sa réduction ne présente aucun avantage.</li>      </td>
       <td>2097152</td>
     </tr>
   </tbody>

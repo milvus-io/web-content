@@ -143,7 +143,7 @@ summary: >-
 <p>Формула для евклидова расстояния выглядит следующим образом:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/euclidean-metric.png" alt="Euclidean Metric" class="doc-image" id="euclidean-metric" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/euclidean-metric.png" alt="Euclidean Metric" class="doc-image" id="euclidean-metric" />
    </span> <span class="img-wrapper"> <span>Евклидова метрика</span> </span></p>
 <p>где <strong>a = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> и <strong>b = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong> - две точки в n-мерном евклидовом пространстве.</p>
 <p>Это наиболее часто используемая метрика расстояния, которая очень полезна, когда данные непрерывны.</p>
@@ -168,7 +168,7 @@ summary: >-
     </button></h2><p>Расстояние IP между двумя вкраплениями определяется следующим образом:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IP-formula.png" alt="IP Formula" class="doc-image" id="ip-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IP-formula.png" alt="IP Formula" class="doc-image" id="ip-formula" />
    </span> <span class="img-wrapper"> <span>Формула IP</span> </span></p>
 <p>IP более полезно, если вам нужно сравнить ненормированные данные или если вам важны величина и угол.</p>
 <div class="alert note">
@@ -177,12 +177,12 @@ summary: >-
 <p>Предположим, что X' нормализовано из вкрапления X:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/normalize-formula.png" alt="Normalize Formula" class="doc-image" id="normalize-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalize-formula.png" alt="Normalize Formula" class="doc-image" id="normalize-formula" />
    </span> <span class="img-wrapper"> <span>Формула нормализации</span> </span></p>
 <p>Корреляция между двумя эмбеддингами выглядит следующим образом:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/correlation-between-embeddings.png" alt="Correlation Between Embeddings" class="doc-image" id="correlation-between-embeddings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/correlation-between-embeddings.png" alt="Correlation Between Embeddings" class="doc-image" id="correlation-between-embeddings" />
    </span> <span class="img-wrapper"> <span>Корреляция между эмбеддингами</span> </span></p>
 <h2 id="Cosine-similarity" class="common-anchor-header">Косинусное сходство<button data-href="#Cosine-similarity" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -203,7 +203,7 @@ summary: >-
 <p>Чтобы вычислить косинусоидальное сходство между двумя наборами векторов <strong>A = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> и <strong>B = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong>, используйте следующую формулу:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
    </span> <span class="img-wrapper"> <span>Косинусное сходство</span> </span></p>
 <p>Косинусное сходство всегда находится в интервале <strong>[-1, 1]</strong>. Например, косинус сходства двух пропорциональных векторов равен <strong>1</strong>, двух ортогональных векторов - <strong>0</strong>, а двух противоположных векторов - <strong>-1</strong>. Чем больше косинус, тем меньше угол между двумя векторами, что говорит о том, что эти два вектора более похожи друг на друга.</p>
 <p>Вычитая косинус сходства из 1, вы можете получить косинусоидальное расстояние между двумя векторами.</p>
@@ -225,12 +225,12 @@ summary: >-
     </button></h2><p>Коэффициент расстояния JACCARD измеряет сходство между двумя выборочными совокупностями и определяется как кардинальность пересечения заданных совокупностей, деленная на кардинальность их объединения. Он может быть применен только к конечным выборочным совокупностям.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
    </span> <span class="img-wrapper"> <span>Формула коэффициента сходства JACCARD</span> </span></p>
 <p>Расстояние JACCARD измеряет несходство между наборами данных и получается путем вычитания коэффициента сходства JACCARD из 1. Для бинарных переменных расстояние JACCARD эквивалентно коэффициенту Танимото.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
    </span> <span class="img-wrapper"> <span>Формула расстояния JACCARD</span> </span></p>
 <h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
       <svg translate="no"

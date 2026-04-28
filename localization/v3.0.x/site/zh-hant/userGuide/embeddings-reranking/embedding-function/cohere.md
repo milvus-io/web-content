@@ -128,7 +128,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h3><p>將您的 API 金鑰保留在<code translate="no">milvus.yaml</code> ；Milvus 會在啟動時讀取它們，並覆寫相同提供者的任何環境變數。</p>
 <ol>
-<li><p>**在下列位置宣告您的金鑰<code translate="no">credential:</code></p>
+<li><p>**在以下位置宣告您的金鑰<code translate="no">credential:</code></p>
 <p>您可以列出一個或多個 API 金鑰 - 給每個金鑰一個您自創的標籤，稍後可以參考。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
@@ -165,7 +165,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h3><p>當您使用 Docker Compose 執行 Milvus，並希望不在檔案和影像中洩露秘密時，請使用此方法。</p>
-<p>只有在<code translate="no">milvus.yaml</code> 中找不到提供者的金鑰時，Milvus 才會回退到環境變數。</p>
+<p>只有在<code translate="no">milvus.yaml</code> 中找不到提供者的金鑰時，Milvus 才會使用環境變數。</p>
 <table>
    <tr>
      <th><p>變數</p></th>
@@ -225,7 +225,7 @@ beta: Milvus 2.6.x
 <li><p>儲存要嵌入的原始資料的標量欄位。</p></li>
 <li><p>預留向量欄位，用來儲存函式將為標量欄位產生的向量嵌入。</p></li>
 </ul>
-<p>以下範例定義了一個模式，其中一個標量欄位<code translate="no">&quot;document&quot;</code> 用來儲存文字資料，另一個向量欄位<code translate="no">&quot;dense&quot;</code> 用來儲存函式模組要產生的嵌入資料。切記設定向量維度 (<code translate="no">dim</code>) 以符合您所選擇的嵌入模型輸出。</p>
+<p>以下範例定義了一個模式，其中一個標量欄位<code translate="no">&quot;document&quot;</code> 用來儲存文字資料，另一個向量欄位<code translate="no">&quot;dense&quot;</code> 用來儲存函式模組要產生的嵌入資料。請記住設定向量維度 (<code translate="no">dim</code>) 以符合您所選擇的嵌入模型輸出。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>

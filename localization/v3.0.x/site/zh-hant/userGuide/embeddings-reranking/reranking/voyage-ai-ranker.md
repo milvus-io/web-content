@@ -21,7 +21,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Voyage AI Ranker 利用<a href="https://www.voyageai.com/">Voyage AI 的</a>專門 rerankers，透過語義重排（semantic reranking）增強搜尋相關性。它提供高性能的重排功能，針對檢索增量生成（RAG）和搜尋應用進行了優化。</p>
+    </button></h1><p>Voyage AI Ranker 利用<a href="https://www.voyageai.com/">Voyage AI 的</a>專門 rerankers，透過語義重排（semantic reranking）增強搜尋相關性。它提供高性能的重排功能，針對檢索增強生成（RAG）和搜尋應用進行了優化。</p>
 <p>Voyage AI Ranker 對需要下列功能的應用程式特別有價值：</p>
 <ul>
 <li><p>先進的語意理解能力，具備專門針對 Reranking 任務所訓練的模型</p></li>
@@ -166,7 +166,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">queries</code></p></td>
      <td><p>是</p></td>
-     <td><p>rerank 模型用來計算相關性分數的查詢字串清單。查詢字串的數量必須與您搜尋作業中的查詢字串數量完全相同（即使是使用查詢向量來取代文字），否則會報錯。</p></td>
+     <td><p>rerank 模型用來計算相關性分數的查詢字串清單。查詢字串的數量必須與您的搜尋作業中的查詢字串數量完全相同（即使使用查詢向量來取代文字），否則會報錯。</p></td>
      <td><p><em>[「搜尋查詢」]</em></p></td>
    </tr>
    <tr>

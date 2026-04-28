@@ -26,11 +26,11 @@ title: 音訊相似性搜尋
 <li><a href="https://towhee.io/">Towhee</a></li>
 </ul>
 <p></br></p>
-<p>語音、音樂、音效等類型的音訊搜尋，讓快速查詢海量音訊資料並浮現相似聲音成為可能。音訊相似性搜尋系統的應用包括識別相似的音效、將 IP 侵犯減至最低等。音訊檢索可用於即時搜尋與監控線上媒體，以打擊侵犯智慧財產權的行為。它也在音訊資料的分類和統計分析中擔當著重要的角色。</p>
+<p>語音、音樂、音效等類型的音訊搜尋，使得快速查詢海量音訊資料並浮現相似聲音成為可能。音訊相似性搜尋系統的應用包括識別相似的音效、將 IP 侵犯減至最低等。音訊檢索可用於即時搜尋與監控線上媒體，以打擊侵犯智慧財產權的行為。它也在音訊資料的分類和統計分析中擔當著重要的角色。</p>
 <p></br></p>
 <p>在本教程中，您將學習如何建立一個能夠傳回相似聲音片段的音訊相似性搜尋系統。上傳的音訊片段會使用 PANNs 轉換成向量。這些向量會儲存在 Milvus 中，Milvus 會自動為每個向量產生唯一的 ID。然後，使用者可以在 Milvus 中進行向量相似性搜尋，並查詢與 Milvus 所傳回的唯一向量 ID 相對應的音訊素材資料路徑。</p>
 <p><br/></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/audio_search.png" alt="Audio_search" class="doc-image" id="audio_search" />
-   </span> <span class="img-wrapper"> <span>Audio_search</span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/audio_search_demo.png" alt="Audio_search_demo" class="doc-image" id="audio_search_demo" /><span>Audio_search_demo</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/audio_search.png" alt="Audio_search" class="doc-image" id="audio_search" />
+   </span> <span class="img-wrapper"> <span>Audio_search</span> </span> <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/audio_search_demo.png" alt="Audio_search_demo" class="doc-image" id="audio_search_demo" /><span>Audio_search_demo</span> </span></p>

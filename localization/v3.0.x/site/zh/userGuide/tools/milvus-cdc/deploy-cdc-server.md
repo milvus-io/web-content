@@ -60,12 +60,42 @@ title: 部署 CDC 服务器
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Obtain-the-Milvus-CDC-config-file" class="common-anchor-header">获取 Milvus-CDC 配置文件</h3><p>克隆<a href="https://github.com/zilliztech/milvus-cdc">Milvus-CDC repo</a>并导航到<code translate="no">milvus-cdc/server/configs</code> 目录，访问<code translate="no">cdc.yaml</code> 配置文件。</p>
+    </button></h2><h3 id="Obtain-the-Milvus-CDC-config-file" class="common-anchor-header">获取 Milvus-CDC 配置文件<button data-href="#Obtain-the-Milvus-CDC-config-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>克隆<a href="https://github.com/zilliztech/milvus-cdc">Milvus-CDC repo</a>并导航到<code translate="no">milvus-cdc/server/configs</code> 目录，访问<code translate="no">cdc.yaml</code> 配置文件。</p>
 <pre><code translate="no" class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/milvus-cdc.git
 
 <span class="hljs-built_in">cd</span> milvus-cdc/server/configs
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Edit-the-config-file" class="common-anchor-header">编辑配置文件</h3><p>在<code translate="no">milvus-cdc/server/configs</code> 目录中，修改<code translate="no">cdc.yaml</code> 文件，自定义与 Milvus-CDC 元存储和源 Milvus 的连接详细信息相关的配置。</p>
+<h3 id="Edit-the-config-file" class="common-anchor-header">编辑配置文件<button data-href="#Edit-the-config-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在<code translate="no">milvus-cdc/server/configs</code> 目录中，修改<code translate="no">cdc.yaml</code> 文件，自定义与 Milvus-CDC 元存储和源 Milvus 的连接详细信息相关的配置。</p>
 <ul>
 <li><p><strong>元存储配置</strong>：</p>
 <ul>
@@ -126,7 +156,22 @@ title: 部署 CDC 服务器
 <span class="hljs-comment">#  kafka:</span>
 <span class="hljs-comment">#    address: 127.0.0.1:9092</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">编译 Milvus-CDC 服务器</h3><p>保存<code translate="no">cdc.yaml</code> 文件后，导航到<code translate="no">milvus-cdc</code> 目录，运行以下命令之一编译服务器：</p>
+<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">编译 Milvus-CDC 服务器<button data-href="#Compile-the-Milvus-CDC-server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>保存<code translate="no">cdc.yaml</code> 文件后，导航到<code translate="no">milvus-cdc</code> 目录，运行以下命令之一编译服务器：</p>
 <ul>
 <li><p>对于二进制文件</p>
 <pre><code translate="no" class="language-bash">make build
@@ -136,7 +181,22 @@ title: 部署 CDC 服务器
 <button class="copy-code-btn"></button></code></pre>
 <p>对于 Docker 映像，将编译后的文件挂载到容器内的<code translate="no">/app/server/configs/cdc.yaml</code> 。</p></li>
 </ul>
-<h3 id="Start-the-server" class="common-anchor-header">启动服务器</h3><ul>
+<h3 id="Start-the-server" class="common-anchor-header">启动服务器<button data-href="#Start-the-server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>使用二进制文件</p>
 <p>导航到包含<code translate="no">milvus-cdc</code> 二进制文件的目录和包含<code translate="no">cdc.yaml</code> 文件的<code translate="no">configs</code> 目录，然后启动服务器：</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># dir tree</span>

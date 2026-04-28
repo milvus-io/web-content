@@ -5,7 +5,7 @@ related_key: LlamaIndex
 summary: >-
   Questo quaderno mostra come utilizzare Milvus per la ricerca ibrida nelle
   pipeline RAG di [LlamaIndex](https://www.llamaindex.ai/). Inizieremo con la
-  ricerca ibrida predefinita raccomandata (semantica + BM25) e poi esploreremo
+  ricerca ibrida predefinita raccomandata (semantica + BM25) per poi esplorare
   altri metodi alternativi di incorporazione rada e la personalizzazione del
   reranker ibrido.
 ---
@@ -138,14 +138,14 @@ Default sparse embedding function: BM25BuiltInFunction(input_field_names='text',
 <li><code translate="no">dim (int, optional)</code>: La dimensione dei vettori di incorporamento per l'insieme.</li>
 <li><code translate="no">embedding_field (str, optional)</code>: Il nome del campo di incorporamento denso per l'insieme, predefinito a DEFAULT_EMBEDDING_KEY.</li>
 <li><code translate="no">index_config (dict, optional)</code>: La configurazione utilizzata per costruire l'indice di incorporamento denso. Per impostazione predefinita, Nessuno.</li>
-<li><code translate="no">search_config (dict, optional)</code>: Configurazione utilizzata per la ricerca nell'indice denso di Milvus. Si noti che deve essere compatibile con il tipo di indice specificato da <code translate="no">index_config</code>. Il valore predefinito è Nessuno.</li>
+<li><code translate="no">search_config (dict, optional)</code>: Configurazione utilizzata per la ricerca nell'indice denso di Milvus. Si noti che deve essere compatibile con il tipo di indice specificato da <code translate="no">index_config</code>. Valore predefinito: Nessuno.</li>
 <li><code translate="no">similarity_metric (str, optional)</code>: La metrica di somiglianza da utilizzare per l'incorporazione densa; attualmente supporta IP, COSINE e L2.</li>
 </ul>
 <p><strong>campo sparse</strong></p>
 <ul>
 <li><code translate="no">enable_sparse (bool)</code>: Un flag booleano per abilitare o disabilitare l'incorporazione rada. L'impostazione predefinita è False.</li>
 <li><code translate="no">sparse_embedding_field (str)</code>: Il nome del campo sparse embedding, predefinito a DEFAULT_SPARSE_EMBEDDING_KEY.</li>
-<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>: Se enable_sparse è True, questo oggetto deve essere fornito per convertire il testo in un'incorporazione rada. Se None, verrà utilizzata la funzione di incorporamento rado predefinita (BM25BuiltInFunction), oppure verrà utilizzato BGEM3SparseEmbedding, data la raccolta esistente senza funzioni incorporate.</li>
+<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>: Se enable_sparse è True, questo oggetto deve essere fornito per convertire il testo in un'incorporazione rada. Se None, verrà utilizzata la funzione di incorporamento rado predefinita (BM25BuiltInFunction), oppure verrà utilizzato BGEM3SparseEmbedding se si tratta di una raccolta esistente senza funzioni incorporate.</li>
 <li><code translate="no">sparse_index_config (dict, optional)</code>: La configurazione utilizzata per costruire l'indice di incorporamento rado. L'impostazione predefinita è Nessuno.</li>
 </ul>
 <p>Per abilitare la ricerca ibrida durante la fase di interrogazione, impostare <code translate="no">vector_store_query_mode</code> su "hybrid". Questo combinerà e classificherà i risultati della ricerca semantica e della ricerca full-text. Proviamo con una query di esempio: "Cosa ha imparato l'autore in Viaweb?":</p>
@@ -160,9 +160,24 @@ response = query_engine.query(<span class="hljs-string">&quot;What did the autho
 <pre><code translate="no">The author learned about retail, the importance of user feedback, and the significance of growth
 rate as the ultimate test of a startup at Viaweb.
 </code></pre>
-<h3 id="Customize-text-analyzer" class="common-anchor-header">Personalizzare l'analizzatore di testo</h3><p>Gli analizzatori svolgono un ruolo fondamentale nella ricerca full-text, suddividendo le frasi in token ed eseguendo l'elaborazione lessicale, come l'eliminazione di stemming e stop-word. In genere sono specifici per la lingua. Per maggiori dettagli, consultare la <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Guida agli analizzatori di Milvus</a>.</p>
+<h3 id="Customize-text-analyzer" class="common-anchor-header">Personalizzare l'analizzatore di testo<button data-href="#Customize-text-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Gli analizzatori svolgono un ruolo fondamentale nella ricerca full-text, suddividendo le frasi in token ed eseguendo l'elaborazione lessicale, come l'eliminazione di stemming e stop-word. In genere sono specifici per la lingua. Per maggiori dettagli, consultare la <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Guida agli analizzatori di Milvus</a>.</p>
 <p>Milvus supporta due tipi di analizzatori: <strong>Analizzatori integrati</strong> e <strong>Analizzatori personalizzati</strong>. Per impostazione predefinita, se <code translate="no">enable_sparse</code> è impostato su True, <code translate="no">MilvusVectorStore</code> utilizza <code translate="no">BM25BuiltInFunction</code> con le configurazioni predefinite, impiegando l'analizzatore incorporato standard che tokenizza il testo in base alla punteggiatura.</p>
-<p>Per utilizzare un analizzatore diverso o personalizzare quello esistente, è possibile fornire dei valori all'argomento <code translate="no">analyzer_params</code> durante la creazione di <code translate="no">BM25BuiltInFunction</code>. Quindi, impostare questa funzione come <code translate="no">sparse_embedding_function</code> in <code translate="no">MilvusVectorStore</code>.</p>
+<p>Per utilizzare un analizzatore diverso o personalizzare quello esistente, si possono fornire valori all'argomento <code translate="no">analyzer_params</code> quando si costruisce <code translate="no">BM25BuiltInFunction</code>. Quindi, impostare questa funzione come <code translate="no">sparse_embedding_function</code> in <code translate="no">MilvusVectorStore</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.vector_stores.milvus.utils <span class="hljs-keyword">import</span> BM25BuiltInFunction
 
 bm25_function = BM25BuiltInFunction(
@@ -240,7 +255,22 @@ The author learned about retail, the importance of user feedback, the value of g
 startup, the significance of pricing strategy, the benefits of working on things that weren't
 prestigious, and the challenges and rewards of running a startup.
 </code></pre>
-<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">Personalizzare la funzione Sparse Embedding</h3><p>È possibile personalizzare anche la funzione Sparse Embedding, purché erediti da <code translate="no">BaseSparseEmbeddingFunction</code>, compresi i seguenti metodi:</p>
+<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">Personalizzare la funzione Sparse Embedding<button data-href="#Customize-Sparse-Embedding-Function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>È possibile personalizzare anche la funzione Sparse Embedding, purché erediti da <code translate="no">BaseSparseEmbeddingFunction</code>, compresi i seguenti metodi:</p>
 <ul>
 <li><code translate="no">encode_queries</code>: Questo metodo converte i testi in elenchi di incorporazioni sparse per le query.</li>
 <li><code translate="no">encode_documents</code>: Questo metodo converte il testo in un elenco di incorporazioni rade per i documenti.</li>
@@ -300,7 +330,7 @@ prestigious, and the challenges and rewards of running a startup.
 <li><code translate="no">hybrid_ranker (str)</code>: Specifica il tipo di ranker utilizzato nelle query di ricerca ibrida. Attualmente supporta solo ["RRFRanker", "WeightedRanker"]. L'impostazione predefinita è "RRFRanker".</li>
 <li><code translate="no">hybrid_ranker_params (dict, optional)</code>: Parametri di configurazione per il ranker ibrido. La struttura di questo dizionario dipende dal ranker specifico utilizzato:<ul>
 <li>Per "RRFRanker", dovrebbe includere:<ul>
-<li>"k" (int): Un parametro utilizzato nella Reciprocal Rank Fusion (RRF). Questo valore viene utilizzato per calcolare i punteggi di rango come parte dell'algoritmo RRF, che combina più strategie di classificazione in un unico punteggio per migliorare la rilevanza della ricerca. Il valore predefinito è 60 se non specificato.</li>
+<li>"k" (int): Un parametro utilizzato nella Reciprocal Rank Fusion (RRF). Questo valore viene utilizzato per calcolare i punteggi di rango come parte dell'algoritmo RRF, che combina più strategie di ranking in un unico punteggio per migliorare la rilevanza della ricerca. Il valore predefinito è 60 se non specificato.</li>
 </ul></li>
 <li>Per "WeightedRanker", si aspetta:<ul>
 <li>"weights" (elenco di float): Un elenco di esattamente due pesi:<ol>

@@ -89,7 +89,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/iterative-filtering.png" alt="Iterative Filtering" class="doc-image" id="iterative-filtering" />
    </span> <span class="img-wrapper"> <span>Filtrage itératif</span> </span></p>
 <p>Comme l'illustre le diagramme ci-dessus, une recherche avec filtrage itératif effectue la recherche vectorielle par itérations. Chaque entité renvoyée par l'itérateur subit un filtrage scalaire, et ce processus se poursuit jusqu'à ce que les K premiers résultats spécifiés soient atteints.</p>
-<p>Cette méthode réduit considérablement le nombre d'entités soumises au filtrage scalaire, ce qui la rend particulièrement utile pour traiter des expressions de filtrage très complexes.</p>
+<p>Cette méthode réduit considérablement le nombre d'entités soumises au filtrage scalaire, ce qui la rend particulièrement avantageuse pour traiter des expressions de filtrage très complexes.</p>
 <p>Cependant, il est important de noter que l'itérateur traite les entités une par une. Cette approche séquentielle peut entraîner des temps de traitement plus longs ou des problèmes de performance potentiels, en particulier lorsqu'un grand nombre d'entités sont soumises au filtrage scalaire.</p>
 <h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"

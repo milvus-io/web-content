@@ -63,7 +63,7 @@ collection_name = <span class="hljs-string">&quot;movie_embeddings&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Con una sola riga, <code translate="no">datasets</code> ci permette di scaricare e aprire un set di dati. La libreria metterà in cache il set di dati a livello locale e utilizzerà quella copia la prossima volta che verrà eseguita. Ogni riga contiene i dettagli di un film che ha un articolo di Wikipedia allegato. Utilizziamo le colonne <code translate="no">Title</code>, <code translate="no">PlotSummary</code>, <code translate="no">Release Year</code> e <code translate="no">Origin/Ethnicity</code>.</p>
+    </button></h2><p>Con una sola riga, <code translate="no">datasets</code> ci permette di scaricare e aprire un set di dati. La libreria metterà in cache il dataset a livello locale e utilizzerà quella copia la prossima volta che verrà eseguita. Ogni riga contiene i dettagli di un film che ha un articolo di Wikipedia allegato. Utilizziamo le colonne <code translate="no">Title</code>, <code translate="no">PlotSummary</code>, <code translate="no">Release Year</code> e <code translate="no">Origin/Ethnicity</code>.</p>
 <pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
@@ -109,7 +109,7 @@ client.create_collection(collection_name=collection_name, schema=schema)
 index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;IP&quot;</span>)
 client.create_index(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
-<p>Una volta eseguiti questi passaggi, siamo pronti a inserire i dati nella raccolta e a eseguire una ricerca. Tutti i dati aggiunti verranno indicizzati automaticamente e saranno immediatamente disponibili per la ricerca. Se i dati sono molto recenti, la ricerca potrebbe essere più lenta, poiché la ricerca brute force sarà utilizzata sui dati ancora in fase di indicizzazione.</p>
+<p>Una volta eseguiti questi passaggi, siamo pronti a inserire i dati nella raccolta e a eseguire una ricerca. Tutti i dati aggiunti verranno indicizzati automaticamente e saranno immediatamente disponibili per la ricerca. Se i dati sono molto recenti, la ricerca potrebbe essere più lenta, poiché la ricerca brute force verrà utilizzata sui dati ancora in fase di indicizzazione.</p>
 <h2 id="Inserting-the-Data" class="common-anchor-header">Inserimento dei dati<button data-href="#Inserting-the-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -128,7 +128,7 @@ client.create_index(collection_name, index_params)
     </button></h2><p>Per questo esempio, utilizzeremo il modello SentenceTransformers miniLM per creare embeddings del testo della trama. Questo modello restituisce embeddings a 384 dimensioni.</p>
 <pre><code translate="no" class="language-python">model = SentenceTransformer(<span class="hljs-string">&quot;all-MiniLM-L12-v2&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Si esegue un ciclo sulle righe dei dati, si incorpora il campo di riepilogo della trama e si inseriscono le entità nel database dei vettori. In generale, è consigliabile eseguire questa fase su batch di dati per massimizzare il throughput della CPU o della GPU per il modello di embedding, come facciamo qui.</p>
+<p>Eseguiamo un ciclo sulle righe dei dati, incorporiamo il campo di riepilogo della trama e inseriamo le entità nel database dei vettori. In generale, è consigliabile eseguire questa fase su batch di dati per massimizzare il throughput della CPU o della GPU per il modello di embedding, come facciamo qui.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> tqdm(ds.batch(batch_size=<span class="hljs-number">512</span>)):
     embeddings = model.encode(batch[<span class="hljs-string">&quot;PlotSummary&quot;</span>])
     data = [

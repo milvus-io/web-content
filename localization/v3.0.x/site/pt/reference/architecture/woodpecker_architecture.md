@@ -52,7 +52,7 @@ summary: >-
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_layers.png" alt="woodpecker layers" class="doc-image" id="woodpecker-layers" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/woodpecker_layers.png" alt="woodpecker layers" class="doc-image" id="woodpecker-layers" />
    </span> <span class="img-wrapper"> <span>camadas do woodpecker</span> </span></p>
 <h2 id="Architecture-components" class="common-anchor-header">Componentes da arquitetura<button data-href="#Architecture-components" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -92,17 +92,47 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>O Woodpecker oferece dois modos de implantação para atender às suas necessidades específicas:</p>
-<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - Leve e livre de manutenção</h3><p>O modo MemoryBuffer oferece uma opção de implantação simples e leve, em que o cliente incorporado do Woodpecker armazena temporariamente em memória as gravações recebidas e as envia periodicamente para um serviço de armazenamento de objetos na nuvem. Neste modo, o buffer de memória é embutido diretamente no cliente, permitindo um agrupamento eficiente antes da descarga para o S3. Os metadados são gerenciados usando <strong>o etcd</strong> para garantir consistência e coordenação. Este modo é mais adequado para cargas de trabalho pesadas em lote em implantações de menor escala ou ambientes de produção que priorizam a simplicidade sobre o desempenho, especialmente quando a baixa latência de gravação não é crítica. A latência de gravação neste modo é geralmente entre 200-500 ms.</p>
+<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - Leve e livre de manutenção<button data-href="#MemoryBuffer---Lightweight-and-maintenance-free" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O modo MemoryBuffer oferece uma opção de implantação simples e leve, em que o cliente incorporado do Woodpecker armazena temporariamente em memória as gravações recebidas e as envia periodicamente para um serviço de armazenamento de objetos na nuvem. Neste modo, o buffer de memória é embutido diretamente no cliente, permitindo um agrupamento eficiente antes da descarga para o S3. Os metadados são gerenciados usando <strong>o etcd</strong> para garantir consistência e coordenação. Este modo é mais adequado para cargas de trabalho pesadas em lote em implantações de menor escala ou ambientes de produção que priorizam a simplicidade sobre o desempenho, especialmente quando a baixa latência de gravação não é crítica. A latência de gravação neste modo é geralmente entre 200-500 ms.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
    </span> <span class="img-wrapper"> <span>implantação do modo de memória do pica-pau</span> </span></p>
-<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - Optimizado para baixa latência e alta durabilidade</h3><p>O modo QuorumBuffer foi projetado para cargas de trabalho de leitura/gravação sensíveis à latência e de alta frequência que requerem capacidade de resposta em tempo real e forte tolerância a falhas. Nesse modo, o cliente do Woodpecker interage com um sistema de quorum de três réplicas para fornecer buffer de gravação de alta velocidade, garantindo forte consistência e alta disponibilidade por meio de consenso distribuído.</p>
-<p>Uma gravação é considerada bem-sucedida quando o cliente replica com sucesso os dados para pelo menos dois dos três nós de quorum, geralmente concluindo em milissegundos de um dígito, após o que os dados são descarregados de forma assíncrona no armazenamento de objetos na nuvem para durabilidade de longo prazo. Esta arquitetura minimiza o estado no nó, elimina a necessidade de grandes volumes de disco locais e evita reparações complexas de anti-entropia frequentemente necessárias nos sistemas tradicionais baseados em quorum.</p>
+<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - Optimizado para baixa latência e alta durabilidade<button data-href="#QuorumBuffer---Optimized-for-low-latency-high-durability" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O modo QuorumBuffer foi projetado para cargas de trabalho de leitura/gravação sensíveis à latência e de alta frequência que requerem capacidade de resposta em tempo real e forte tolerância a falhas. Nesse modo, o cliente do Woodpecker interage com um sistema de quorum de três réplicas para fornecer buffer de gravação de alta velocidade, garantindo forte consistência e alta disponibilidade por meio de consenso distribuído.</p>
+<p>Uma gravação é considerada bem-sucedida quando o cliente replica com sucesso os dados para pelo menos dois dos três nós de quorum, geralmente concluindo em milissegundos de um dígito, após o que os dados são descarregados de forma assíncrona no armazenamento de objetos na nuvem para durabilidade a longo prazo. Esta arquitetura minimiza o estado no nó, elimina a necessidade de grandes volumes de disco locais e evita reparações complexas de anti-entropia frequentemente necessárias nos sistemas tradicionais baseados em quorum.</p>
 <p>O resultado é uma camada WAL simplificada e robusta, ideal para ambientes de produção de missão crítica, onde consistência, disponibilidade e recuperação rápida são essenciais.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_quorumbuffer_mode_deployment.png" alt="woodpecker quorum mode deployment" class="doc-image" id="woodpecker-quorum-mode-deployment" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/woodpecker_quorumbuffer_mode_deployment.png" alt="woodpecker quorum mode deployment" class="doc-image" id="woodpecker-quorum-mode-deployment" />
    </span> <span class="img-wrapper"> <span>implantação do modo quorum do woodpecker</span> </span></p>
 <h2 id="Performance-benchmarks" class="common-anchor-header">Benchmarks de desempenho<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -136,7 +166,22 @@ summary: >-
 <li>Amazon S3 (instância única do EC2): até 1,1 GB/s</li>
 </ul>
 <p>Notavelmente, o Woodpecker atingiu consistentemente 60-80% da taxa de transferência máxima possível para cada backend - um nível de eficiência excecional para middleware.</p>
-<h3 id="Key-performance-insights" class="common-anchor-header">Principais informações sobre desempenho</h3><ul>
+<h3 id="Key-performance-insights" class="common-anchor-header">Principais informações sobre desempenho<button data-href="#Key-performance-insights" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Modo de sistema de arquivos local: O Woodpecker alcançou 450 MB/s - 3,5 vezes mais rápido que o Kafka e 4,2 vezes mais rápido que o Pulsar - com latência ultrabaixa de apenas 1,8 ms, o que o torna ideal para implantações de nó único de alto desempenho.</li>
 <li>Modo de armazenamento em nuvem (S3): Ao gravar diretamente no S3, o Woodpecker atingiu 750 MB/s (cerca de 68% do limite teórico do S3), 5,8 vezes mais rápido que o Kafka e 7 vezes mais rápido que o Pulsar. Embora a latência seja maior (166 ms), essa configuração fornece uma taxa de transferência excecional para cargas de trabalho orientadas por lote.</li>
 <li>Modo de armazenamento de objetos (MinIO): Mesmo com o MinIO, o Woodpecker atingiu 71 MB/s - cerca de 65% da capacidade do MinIO. Esse desempenho é comparável ao do Kafka e do Pulsar, mas com requisitos de recursos significativamente menores.</li>

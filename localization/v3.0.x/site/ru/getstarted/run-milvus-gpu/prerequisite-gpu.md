@@ -81,7 +81,7 @@ version:        545.29.06
     </button></h2><p>Кластер Kubernetes рекомендуется запускать на платформах Linux.</p>
 <ul>
 <li>kubectl - это инструмент командной строки для Kubernetes. Используйте версию kubectl, которая находится в пределах одного минорного различия версий для вашего кластера. Использование последней версии kubectl поможет избежать непредвиденных проблем.</li>
-<li>minikube необходим при локальном запуске кластера Kubernetes. minikube требует наличия Docker в качестве зависимости. Убедитесь, что вы установили Docker перед установкой Milvus с помощью Helm. Дополнительные сведения см. в разделе <a href="https://docs.docker.com/get-docker">Получить Docker</a>.</li>
+<li>minikube требуется при локальном запуске кластера Kubernetes. minikube требует наличия Docker в качестве зависимости. Убедитесь, что вы установили Docker перед установкой Milvus с помощью Helm. Дополнительные сведения см. в разделе <a href="https://docs.docker.com/get-docker">Получить Docker</a>.</li>
 </ul>
 <table>
 <thead>
@@ -106,7 +106,22 @@ version:        545.29.06
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">Как я могу запустить кластер K8s локально для тестирования?</h3><p>Вы можете использовать такие инструменты, как <a href="https://minikube.sigs.k8s.io/docs/">minikube</a>, <a href="https://kind.sigs.k8s.io/">kind</a> и <a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm</a>, для быстрой локальной настройки кластера Kubernetes. В следующей процедуре в качестве примера используется minikube.</p>
+    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">Как я могу запустить кластер K8s локально для тестирования?<button data-href="#How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Вы можете использовать такие инструменты, как <a href="https://minikube.sigs.k8s.io/docs/">minikube</a>, <a href="https://kind.sigs.k8s.io/">kind</a> и <a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm</a>, для быстрой локальной настройки кластера Kubernetes. В следующей процедуре в качестве примера используется minikube.</p>
 <ol>
 <li>Загрузите minikube</li>
 </ol>
@@ -125,7 +140,22 @@ version:        545.29.06
 <div class="alert note">
 <p>Убедитесь, что вы можете получить доступ к кластеру K8s через <code translate="no">kubectl</code>. Если вы не установили <code translate="no">kubectl</code> локально, смотрите раздел <a href="https://minikube.sigs.k8s.io/docs/handbook/kubectl/">Использование kubectl внутри minikube</a>.</p>
 </div>
-<h3 id="How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes" class="common-anchor-header">Как запустить кластер K8s с рабочими узлами на GPU?</h3><p>Если вы предпочитаете использовать рабочие узлы с поддержкой GPU, вы можете выполнить следующие шаги, чтобы создать кластер K8s с рабочими узлами на GPU. Мы рекомендуем установить Milvus на кластер K8s с рабочими узлами на GPU и использовать класс хранения по умолчанию.</p>
+<h3 id="How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes" class="common-anchor-header">Как запустить кластер K8s с рабочими узлами на GPU?<button data-href="#How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Если вы предпочитаете использовать рабочие узлы с поддержкой GPU, вы можете выполнить следующие шаги, чтобы создать кластер K8s с рабочими узлами на GPU. Мы рекомендуем установить Milvus на кластер K8s с рабочими узлами на GPU и использовать класс хранения по умолчанию.</p>
 <ol>
 <li>Подготовьте рабочие узлы с GPU</li>
 </ol>

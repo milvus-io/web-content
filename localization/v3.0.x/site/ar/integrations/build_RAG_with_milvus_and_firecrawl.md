@@ -28,7 +28,7 @@ title: بناء RAG باستخدام Milvus و Firecrawl
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_firecrawl.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>يُمكِّن<a href="https://www.firecrawl.dev/">Firecrawl</a> المطورين من إنشاء تطبيقات ذكاء اصطناعي ببيانات نظيفة يتم كشطها من أي موقع إلكتروني. من خلال قدرات متقدمة في الكشط والزحف واستخراج البيانات، يعمل Firecrawl على تبسيط عملية تحويل محتوى الموقع الإلكتروني إلى بيانات نظيفة أو بيانات منظمة لمهام سير عمل الذكاء الاصطناعي النهائية.</p>
+<p>يُمكِّن<a href="https://www.firecrawl.dev/">Firecrawl</a> المطورين من إنشاء تطبيقات ذكاء اصطناعي ببيانات نظيفة يتم كشطها من أي موقع إلكتروني. وبفضل إمكانات الكشط والزحف واستخراج البيانات المتقدمة، يعمل Firecrawl على تبسيط عملية تحويل محتوى الموقع الإلكتروني إلى بيانات نظيفة أو بيانات منظمة لمهام سير عمل الذكاء الاصطناعي النهائية.</p>
 <p>في هذا البرنامج التعليمي، سنوضح لك في هذا البرنامج التعليمي كيفية إنشاء خط أنابيب استرجاع-مُعزَّز (RAG) باستخدام Milvus و Firecrawl. يدمج خط الأنابيب بين Firecrawl لكشط بيانات الويب، وMilvus لتخزين المتجهات، وOpenAI لتوليد استجابات ثاقبة مدركة للسياق.</p>
 <h2 id="Preparation" class="common-anchor-header">الإعداد<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"

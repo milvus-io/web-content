@@ -115,7 +115,7 @@ beta: Milvus 2.6.x
      <td><p>Kunci API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/id/cohere.md">Cohere</a></p></td>
+     <td><p><a href="/docs/id/cohere.md">Cohere (menyatu)</a></p></td>
      <td><p>embed-english-v3.0</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code></p></td>
      <td><p>Kunci API</p></td>
@@ -151,7 +151,7 @@ beta: Milvus 2.6.x
     </button></h2><p>Diagram berikut ini menunjukkan bagaimana Fungsi bekerja di Milvus.</p>
 <ol>
 <li><p><strong>Memasukkan teks</strong>: Pengguna memasukkan data mentah (misalnya dokumen) ke dalam Milvus.</p></li>
-<li><p><strong>Menghasilkan penyematan</strong>: Modul Function di dalam Milvus secara otomatis memanggil penyedia model yang telah dikonfigurasi untuk mengkonversi data mentah menjadi embedding vektor.</p></li>
+<li><p><strong>Menghasilkan penyematan</strong>: Modul Function di dalam Milvus secara otomatis memanggil penyedia model yang telah dikonfigurasi untuk mengubah data mentah menjadi embedding vektor.</p></li>
 <li><p><strong>Menyimpan embeddings</strong>: Penyematan yang dihasilkan disimpan dalam bidang vektor yang didefinisikan secara eksplisit dalam koleksi Milvus.</p></li>
 <li><p><strong>Kueri teks</strong>: Pengguna mengirimkan kueri teks ke Milvus.</p></li>
 <li><p><strong>Pencarian semantik</strong>: Milvus secara internal mengubah kueri menjadi sematan vektor, melakukan pencarian kemiripan terhadap sematan yang tersimpan, dan mengambil hasil yang relevan.</p></li>
@@ -159,7 +159,7 @@ beta: Milvus 2.6.x
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
    </span> <span class="img-wrapper"> <span>Ikhtisar Fungsi Penyematan</span> </span></p>
 <h2 id="Configure-credentials" class="common-anchor-header">Mengonfigurasi kredensial<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -187,7 +187,7 @@ beta: Milvus 2.6.x
 <p>Diagram berikut ini menunjukkan proses konfigurasi kredensial melalui file konfigurasi Milvus (<code translate="no">milvus.yaml</code>) dan kemudian memanggil Fungsi dalam Milvus.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
    </span> <span class="img-wrapper"> <span>Konfigurasi Kredensial Melimpah</span> </span></p>
 <h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Langkah 1: Menambahkan kredensial ke file konfigurasi Milvus<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"

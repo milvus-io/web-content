@@ -2,7 +2,7 @@
 id: gaussian-decay.md
 title: 高斯衰减Compatible with Milvus 2.6.x
 summary: >-
-  高斯衰减也称为正常衰减，它能对搜索结果进行最自然的调整。就像人的视力会随着距离的增加而逐渐模糊一样，高斯衰减会创建一条平滑的钟形曲线，随着条目远离您的理想点，相关性也会逐渐降低。这种方法非常适合您需要一种平衡的衰减方式，既不会对您偏好范围之外的项目造成严重影响，又能显著降低远处项目的相关性。
+  高斯衰减也称为正常衰减，它能对搜索结果进行最自然的调整。就像人的视力会随着距离的增加而逐渐模糊一样，高斯衰减会创建一条平滑的钟形曲线，随着项目远离您的理想点，相关性也会逐渐降低。这种方法非常适合您需要一种平衡的衰减方式，既不会对您偏好范围之外的项目造成严重影响，又能显著降低远处项目的相关性。
 beta: Milvus 2.6.x
 ---
 <h1 id="Gaussian-Decay" class="common-anchor-header">高斯衰减<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Gaussian-Decay" class="anchor-icon" translate="no">

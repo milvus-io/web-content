@@ -40,7 +40,7 @@ summary: 備考
 <p>アナライザーは、シンプルな2段階のパイプラインで動作します：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
    </span> <span class="img-wrapper"> <span>アナライザーのワークフロー</span> </span></p>
 <ol>
 <li><p><strong>トークン化（必須）：</strong> <strong>トー</strong>クン化（必須）：この最初の段階では、<strong>トークン化ツールを</strong>使用して、連続したテキスト文字列をトークンと呼ばれる意味のある個別の単位に分割します。トークン化の方法は、言語やコンテンツの種類によって大きく異なります。</p></li>
@@ -95,10 +95,10 @@ summary: 備考
      <td><p>特定の言語の検索結果が無意味または存在しない。</p></td>
      <td><p>中国語テキスト： <code translate="no">"机器学习"</code> →<code translate="no">['机器学习']</code> (1トークン)</p></td>
      <td><p><a href="/docs/ja/english-analyzer.md"><code translate="no">english</code></a>アナライザー</p></td>
-     <td><p>以下のような、言語固有のアナライザーを使用してください。 <a href="/docs/ja/chinese-analyzer.md"><code translate="no">chinese</code></a>.</p></td>
+     <td><p>次のような、言語固有のアナライザーを使用してください。 <a href="/docs/ja/chinese-analyzer.md"><code translate="no">chinese</code></a>.</p></td>
    </tr>
 </table>
-<h2 id="First-question-Do-you-need-to-choose-an-analyzer" class="common-anchor-header">最初の質問解析器を選ぶ必要があるのか？<button data-href="#First-question-Do-you-need-to-choose-an-analyzer" class="anchor-icon" translate="no">
+<h2 id="First-question-Do-you-need-to-choose-an-analyzer" class="common-anchor-header">最初の質問解析器を選ぶ必要がありますか？<button data-href="#First-question-Do-you-need-to-choose-an-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -241,7 +241,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
      <td><p><a href="/docs/ja/standard-analyzer.md"><code translate="no">standard</code></a></p></td>
      <td><p>スペースで区切られたほとんどの言語（英語、フランス語、ドイツ語、スペイン語など）</p></td>
      <td><ul><li><p>トーケナイザー<code translate="no">standard</code></p></li><li><p>フィルタ：<code translate="no">lowercase</code></p></li></ul></td>
-     <td><p>初期テキスト処理用の汎用解析器。単言語シナリオでは、言語固有のアナライザ (<code translate="no">english</code> など) の方が優れたパフォーマンスを発揮します。</p></td>
+     <td><p>初期テキスト処理用の汎用解析器。モノリンガルのシナリオでは、言語固有のアナライザ (<code translate="no">english</code> など) を使用すると、パフォーマンスが向上します。</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/ja/english-analyzer.md"><code translate="no">english</code></a></p></td>
@@ -320,7 +320,7 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>コンテンツの主要言語に基づいてトークナイザを選択します：</p>
+    </button></h3><p>コンテンツの主要言語に基づいてトークナイザーを選択します：</p>
 <h4 id="Western-languages" class="common-anchor-header">欧米言語</h4><p>スペースで区切られた言語の場合、以下のオプションがあります：</p>
 <table>
    <tr>
@@ -789,7 +789,7 @@ analyzer_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>複数の言語にまたがるコンテンツや、予測不可能なスクリプトを使用するコンテンツを扱う場合は、<code translate="no">icu</code> アナライザから始めましょう。この Unicode 対応アナライザは、混在するスクリプトや記号を効果的に処理します。</p>
+    </button></h3><p>複数の言語にまたがるコンテンツや、予測不可能なスクリプトを使用するコンテンツを扱う場合は、<code translate="no">icu</code> アナライザから始めましょう。この Unicode 対応の解析器は、混在するスクリプトや記号を効果的に処理します。</p>
 <p><strong>基本的な多言語設定 (ステミングなし)：</strong></p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;icu&quot;</span>,
@@ -824,5 +824,5 @@ analyzer_params = {
 <li><p><strong>テキストマッチ</strong></p>
 <p>テキストマッチ操作は、アナライザーの出力に基づき、クエリーとインデックスされたコンテンツの間で正確なトークンマッチングを行います。実装の詳細については、<a href="/docs/ja/keyword-match.md">テキストマッチを</a>参照してください。</p></li>
 <li><p><strong>フレーズ一致</strong></p>
-<p>フレーズ一致では、フレーズの境界と意味を維持するために、複数単語の表現間で一貫したトークン化が必要です。実装の詳細については、「<a href="/docs/ja/phrase-match.md">フレーズ・マッチ</a>」を参照してください。</p></li>
+<p>フレーズ一致では、フレーズの境界と意味を維持するために、複数単語の表現間で一貫したトークン化が必要です。実装の詳細については、「<a href="/docs/ja/phrase-match.md">フレーズ一致</a>」を参照してください。</p></li>
 </ul>

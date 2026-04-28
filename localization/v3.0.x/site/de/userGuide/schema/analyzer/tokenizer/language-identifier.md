@@ -47,7 +47,7 @@ beta: Milvus v2.5.15+
     </button></h2><p><code translate="no">language_identifier</code> führt eine Reihe von Schritten durch, um einen Textstring zu verarbeiten. Dieser Arbeitsablauf ist für die Benutzer entscheidend, um zu verstehen, wie er richtig konfiguriert wird.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
    </span> <span class="img-wrapper"> <span>Spracherkennungs-Workflow</span> </span></p>
 <ol>
 <li><p><strong>Eingabe:</strong> Der Arbeitsablauf beginnt mit einer Textzeichenfolge als Eingabe.</p></li>
@@ -55,7 +55,7 @@ beta: Milvus v2.5.15+
 <li><p><strong>Auswahl des Analyzers:</strong></p>
 <ul>
 <li><p><strong>Erfolg:</strong> Wenn die Sprache erfolgreich erkannt wurde, prüft das System, ob für den erkannten Sprachnamen ein entsprechender Analyzer in Ihrem <code translate="no">analyzers</code> Wörterbuch konfiguriert ist. Wenn eine Übereinstimmung gefunden wird, wendet das System den angegebenen Analyzer auf den Eingabetext an. Zum Beispiel würde ein erkannter "Mandarin"-Text an einen <code translate="no">jieba</code> Tokenizer weitergeleitet werden.</p></li>
-<li><p><strong>Fallback:</strong> Wenn die Erkennung fehlschlägt oder wenn eine Sprache erfolgreich erkannt wurde, Sie aber kein spezifisches Analyseprogramm dafür angegeben haben, verwendet das System standardmäßig ein vorkonfiguriertes <strong>Standard-Analyseprogramm</strong>. Dies ist ein wichtiger Punkt zur Klarstellung; das Analysegerät <code translate="no">default</code> ist ein Fallback sowohl für den Fall, dass die Erkennung fehlschlägt als auch für den Fall, dass kein passendes Analysegerät vorhanden ist.</p></li>
+<li><p><strong>Fallback:</strong> Wenn die Erkennung fehlschlägt oder wenn eine Sprache erfolgreich erkannt wurde, Sie aber kein spezifisches Analyseprogramm dafür angegeben haben, verwendet das System standardmäßig ein vorkonfiguriertes <strong>Standard-Analyseprogramm</strong>. Dies ist ein wichtiger Punkt zur Klarstellung; das Analysegerät <code translate="no">default</code> ist ein Fallback sowohl für die fehlgeschlagene Erkennung als auch für das Fehlen eines passenden Analysegeräts.</p></li>
 </ul></li>
 </ol>
 <p>Nachdem das passende Analyseprogramm ausgewählt wurde, wird der Text tokenisiert und verarbeitet, womit der Arbeitsablauf abgeschlossen ist.</p>
@@ -136,7 +136,7 @@ beta: Milvus v2.5.15+
         ></path>
       </svg>
     </button></h3><p>Das Kernstück der Einrichtung von <code translate="no">language_identifier</code> ist die Anpassung der Analysatoren an die spezifischen Sprachen, die Sie unterstützen wollen. Das System arbeitet, indem es die erkannte Sprache mit dem richtigen Analysator abgleicht, daher ist dieser Schritt entscheidend für eine genaue Textverarbeitung.</p>
-<p>Im Folgenden finden Sie eine empfohlene Zuordnung von Sprachen zu geeigneten Milvus-Analysatoren. Diese Tabelle dient als Brücke zwischen der Ausgabe der Spracherkennungsmaschine und dem besten Werkzeug für die Aufgabe.</p>
+<p>Im Folgenden finden Sie eine empfohlene Zuordnung von Sprachen zu geeigneten Milvus-Analysatoren. Diese Tabelle dient als Brücke zwischen der Ausgabe des Spracherkennungsprogramms und dem besten Werkzeug für die jeweilige Aufgabe.</p>
 <table>
    <tr>
      <th><p>Sprache (Detektorausgabe)</p></th>
@@ -194,7 +194,7 @@ beta: Milvus v2.5.15+
 <li><p><code translate="no">default</code> - Den Fallback-Analyzer, der verwendet wird, wenn die Spracherkennung fehlschlägt oder kein passender Analyzer gefunden wird</p></li>
 <li><p><strong>Sprachspezifische Analyzer</strong> - Jeder definiert als <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code>, wobei:</p>
 <ul>
-<li><p><code translate="no">analyzer_name</code> mit der Ausgabe der gewählten Erkennungsmaschine übereinstimmt (z. B. <code translate="no">&quot;English&quot;</code>, <code translate="no">&quot;Japanese&quot;</code>)</p></li>
+<li><p><code translate="no">analyzer_name</code> mit der Ausgabe der von Ihnen gewählten Erkennungsmaschine übereinstimmt (z. B. <code translate="no">&quot;English&quot;</code>, <code translate="no">&quot;Japanese&quot;</code>)</p></li>
 <li><p><code translate="no">analyzer_config</code> dem Standard-Analyzer-Parameterformat folgt (siehe <a href="/docs/de/analyzer-overview.md#Analyzer-types">Analyzer-Übersicht</a>)</p></li>
 </ul></li>
 </ul></li>
@@ -370,7 +370,7 @@ result_fr = client.run_analyzer(<span class="hljs-string">&quot;Café français 
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Eine Sprache pro Feld:</strong> Ein Feld wird als eine einzige, homogene Texteinheit betrachtet. Sie ist so konzipiert, dass sie verschiedene Sprachen in verschiedenen Datensätzen verarbeiten kann, z. B. wenn ein Datensatz einen englischen Satz und der nächste einen französischen Satz enthält.</p></li>
+<li><p><strong>Eine Sprache pro Feld:</strong> Ein Feld wird als eine einzige, homogene Texteinheit betrachtet. Sie ist dafür ausgelegt, verschiedene Sprachen in verschiedenen Datensätzen zu verarbeiten, z. B. wenn ein Datensatz einen englischen Satz und der nächste einen französischen Satz enthält.</p></li>
 <li><p><strong>Keine gemischtsprachigen Zeichenketten:</strong> Es ist <strong>nicht</strong> dafür ausgelegt, eine einzelne Zeichenfolge zu verarbeiten, die Text in mehreren Sprachen enthält. So wird beispielsweise ein einzelnes Feld <code translate="no">VARCHAR</code>, das sowohl einen englischen Satz als auch eine japanische Phrase in Anführungszeichen enthält, als eine einzige Sprache verarbeitet.</p></li>
 <li><p><strong>Verarbeitung der dominanten Sprache:</strong> In gemischtsprachigen Szenarien wird die Erkennungsmaschine wahrscheinlich die dominante Sprache identifizieren, und der entsprechende Analysator wird auf den gesamten Text angewendet. Dies führt dazu, dass der eingebettete Fremdtext nur unzureichend oder gar nicht tokenisiert wird.</p></li>
 </ul>

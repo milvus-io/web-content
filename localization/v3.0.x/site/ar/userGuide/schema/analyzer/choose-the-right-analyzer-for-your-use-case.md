@@ -40,11 +40,11 @@ summary: الملاحظات
 <p>يعمل المحلل في مسار عمل بسيط من مرحلتين:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
    </span> <span class="img-wrapper"> <span>سير عمل المحلِّل</span> </span></p>
 <ol>
 <li><p><strong>الترميز (مطلوب):</strong> تطبّق هذه المرحلة الأولية <strong>أداة ترميز</strong> لتقسيم سلسلة نصية متصلة إلى وحدات منفصلة ذات معنى تسمى الرموز. يمكن أن تختلف طريقة الترميز بشكل كبير اعتمادًا على اللغة ونوع المحتوى.</p></li>
-<li><p><strong>تصفية الرموز (اختياري):</strong> بعد الترميز، يتم تطبيق <strong>المرشحات</strong> لتعديل الرموز أو إزالتها أو تنقيحها. يمكن أن تتضمن هذه العمليات تحويل جميع الرموز إلى أحرف صغيرة، أو إزالة الكلمات الشائعة التي لا معنى لها (مثل الكلمات الوقفية)، أو اختزال الكلمات إلى شكلها الجذري (الجذعية).</p></li>
+<li><p><strong>تصفية الرموز (اختياري):</strong> بعد الترميز، يتم تطبيق <strong>المرشحات</strong> لتعديل الرموز أو إزالتها أو تنقيحها. يمكن أن تشمل هذه العمليات تحويل جميع الرموز إلى أحرف صغيرة، أو إزالة الكلمات الشائعة التي لا معنى لها (مثل الكلمات الوقفية)، أو اختزال الكلمات إلى شكلها الجذري (الجذعية).</p></li>
 </ol>
 <p><strong>مثال</strong>:</p>
 <pre><code translate="no" class="language-plaintext">Input: &quot;Hello World!&quot; 
@@ -78,7 +78,7 @@ summary: الملاحظات
    </tr>
    <tr>
      <td><p>الإفراط في الترميز</p></td>
-     <td><p>تفشل الاستعلامات النصية للمصطلحات التقنية أو المعرفات أو عناوين URL في العثور على المستندات ذات الصلة.</p></td>
+     <td><p>تفشل الاستعلامات النصية للمصطلحات التقنية أو المعرّفات أو عناوين URL في العثور على المستندات ذات الصلة.</p></td>
      <td><ul><li><p><code translate="no">"user_id"</code> → <code translate="no">['user', 'id']</code></p></li><li><p><code translate="no">"C++"</code> → <code translate="no">['c']</code></p></li></ul></td>
      <td><p><a href="/docs/ar/standard-analyzer.md"><code translate="no">standard</code></a> محلل</p></td>
      <td><p>استخدم أداة <a href="/docs/ar/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> أداة ترميز؛ وادمجها مع <a href="/docs/ar/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a> مرشح.</p></td>
@@ -129,7 +129,7 @@ summary: الملاحظات
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>إذا لم تقم بتحديد محلل عند استخدام ميزات استرجاع النص مثل البحث عن النص الكامل، يستخدم ميلفوس تلقائيًا <a href="/docs/ar/standard-analyzer.md"><code translate="no">standard</code></a> المحلِّل.</p>
+    </button></h3><p>إذا لم تقم بتحديد محلل عند استخدام ميزات استرجاع النص مثل البحث عن النص الكامل، يستخدم ميلفوس تلقائيًا <a href="/docs/ar/standard-analyzer.md"><code translate="no">standard</code></a> محللاً.</p>
 <p>محلل <code translate="no">standard</code> </p>
 <ul>
 <li><p>يقسم النص على المسافات وعلامات الترقيم</p></li>
@@ -178,7 +178,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
    <tr>
      <td><p>الوثائق الفنية</p></td>
      <td><p>❌ لا</p></td>
-     <td><p>يتم تجريد علامات الترقيم من المصطلحات مثل <code translate="no">C++</code>.</p></td>
+     <td><p>يتم حذف علامات الترقيم من المصطلحات مثل <code translate="no">C++</code>.</p></td>
      <td><p>قم بإنشاء محلل مخصص باستخدام <a href="/docs/ar/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> أداة ترميز و <a href="/docs/ar/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a> مرشح.</p></td>
    </tr>
    <tr>
@@ -245,7 +245,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
    </tr>
    <tr>
      <td><p><a href="/docs/ar/english-analyzer.md"><code translate="no">english</code></a></p></td>
-     <td><p>مخصص للغة الإنجليزية، والذي يطبق الجذعية وإزالة كلمات الوقف لمطابقة دلالات اللغة الإنجليزية بشكل أفضل</p></td>
+     <td><p>مخصص للغة الإنجليزية، والذي يطبق الجذعية وإزالة كلمات التوقف لمطابقة دلالات اللغة الإنجليزية بشكل أفضل</p></td>
      <td><ul><li><p>أداة ترميز: <code translate="no">standard</code></p></li><li><p>المرشحات <code translate="no">lowercase</code> <code translate="no">stemmer</code> , <code translate="no">stop</code></p></li></ul></td>
      <td><p>موصى به للمحتوى باللغة الإنجليزية فقط على <code translate="no">standard</code>.</p></td>
    </tr>
@@ -339,7 +339,7 @@ schema.add_field(
      <td><p><a href="/docs/ar/whitespace-tokenizer.md"><code translate="no">whitespace</code></a></p></td>
      <td><p>يقسم على أحرف المسافات البيضاء فقط</p></td>
      <td><p>محتوى معالج مسبقًا، نص منسق من قبل المستخدم</p></td>
-     <td><ul><li><p>المدخلات: <code translate="no">"user_id = get_user_data()"</code></p></li><li><p>المخرجات <code translate="no">['user_id', '=', 'get_user_data()']</code></p></li></ul></td>
+     <td><ul><li><p>المدخلات: <code translate="no">"user_id = get_user_data()"</code></p></li><li><p>الإخراج: <code translate="no">['user_id', '=', 'get_user_data()']</code></p></li></ul></td>
    </tr>
 </table>
 <h4 id="East-Asian-languages" class="common-anchor-header">لغات شرق آسيا</h4><p>تتطلب اللغات المستندة إلى القاموس أدوات ترميز متخصصة لتجزئة الكلمات بشكل صحيح:</p>
@@ -353,7 +353,7 @@ schema.add_field(
    <tr>
      <td><p><a href="/docs/ar/jieba-tokenizer.md"><code translate="no">jieba</code></a></p></td>
      <td><p>التجزئة القائمة على القاموس الصيني مع خوارزمية ذكية</p></td>
-     <td><p><strong>موصى به للمحتوى الصيني</strong> - يجمع بين القاموس والخوارزميات الذكية، المصممة خصيصًا للغة الصينية</p></td>
+     <td><p><strong>يوصى به للمحتوى الصيني</strong> - يجمع بين القاموس والخوارزميات الذكية، المصممة خصيصًا للغة الصينية</p></td>
      <td><ul><li><p>المدخلات <code translate="no">"机器学习是人工智能的一个分支"</code></p></li><li><p>المخرجات <code translate="no">['机器', '学习', '是', '人工', '智能', '人工智能', '的', '一个', '分支']</code></p></li></ul></td>
    </tr>
    <tr>
@@ -386,7 +386,7 @@ schema.add_field(
      <td><ul><li><p>المدخلات: <code translate="no">"안녕하세요"</code></p></li><li><p>الإخراج: <code translate="no">["안녕", "하", "세요"]</code></p></li></ul></td>
    </tr>
 </table>
-<h4 id="Multilingual-or-unknown-languages" class="common-anchor-header">لغات متعددة اللغات أو غير معروفة</h4><p>للمحتوى الذي لا يمكن التنبؤ فيه باللغات أو المختلطة داخل المستندات:</p>
+<h4 id="Multilingual-or-unknown-languages" class="common-anchor-header">لغات متعددة اللغات أو لغات غير معروفة</h4><p>للمحتوى الذي لا يمكن التنبؤ فيه باللغات أو المختلطة داخل المستندات:</p>
 <table>
    <tr>
      <th><p>أداة الترميز</p></th>
@@ -397,7 +397,7 @@ schema.add_field(
    <tr>
      <td><p><a href="/docs/ar/icu-tokenizer.md"><code translate="no">icu</code></a></p></td>
      <td><p>الترميز المدرك للرموز الأحادية (المكونات الدولية لليونيكود)</p></td>
-     <td><p>النصوص المختلطة أو اللغات غير المعروفة أو عندما يكون الترميز البسيط كافياً</p></td>
+     <td><p>نصوص مختلطة أو لغات غير معروفة أو عندما يكون الترميز البسيط كافياً</p></td>
      <td><ul><li><p>الإدخال: <code translate="no">"Hello 世界 مرحبا"</code></p></li><li><p>الإخراج: <code translate="no">['Hello', ' ', '世界', ' ', 'مرحبا']</code></p></li></ul></td>
    </tr>
 </table>
@@ -607,7 +607,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
       </svg>
     </button></h2><p>يوفر هذا القسم التكوينات الموصى بها لأداة الترميز والتصفية لحالات الاستخدام الشائعة عند العمل مع أدوات التحليل في Milvus. اختر المجموعة التي تتوافق بشكل أفضل مع نوع المحتوى ومتطلبات البحث الخاصة بك.</p>
 <div class="alert note">
-<p>قبل تطبيق محلل على مجموعتك، نوصيك باستخدام <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/CollectionSchema/run_analyzer.md"><code translate="no">run_analyzer</code></a> لاختبار أداء تحليل النص والتحقق من صحة أدائه.</p>
+<p>قبل تطبيق أحد المحللين على مجموعتك، نوصيك باستخدام <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/CollectionSchema/run_analyzer.md"><code translate="no">run_analyzer</code></a> لاختبار أداء تحليل النص والتحقق من صحة أدائه.</p>
 </div>
 <h3 id="Languages-with-accent-marks-French-Spanish-German-etc" class="common-anchor-header">اللغات ذات علامات التشكيل (الفرنسية والإسبانية والألمانية وغيرها)<button data-href="#Languages-with-accent-marks-French-Spanish-German-etc" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -789,7 +789,7 @@ analyzer_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>عند العمل مع محتوى يمتد على عدة لغات أو يستخدم نصوصًا بشكل غير متوقع، ابدأ باستخدام محلل <code translate="no">icu</code>. يتعامل هذا المحلل المدرك للرموز الأحادية مع النصوص والرموز المختلطة بفعالية.</p>
+    </button></h3><p>عند العمل مع محتوى يمتد على عدة لغات أو يستخدم نصوصًا بشكل غير متوقع، ابدأ بمحلل <code translate="no">icu</code>. يتعامل هذا المحلل المدرك للرموز الأحادية مع النصوص والرموز المختلطة بفعالية.</p>
 <p><strong>التكوين الأساسي متعدد اللغات (بدون جذع)</strong>:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;icu&quot;</span>,
@@ -817,10 +817,10 @@ analyzer_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بعد اختيار المحلّل الخاص بك، يمكنك دمجه مع ميزات استرجاع النصوص التي يوفرها Milvus.</p>
+    </button></h2><p>بعد تحديد المحلّل الخاص بك، يمكنك دمجه مع ميزات استرجاع النصوص التي يوفرها Milvus.</p>
 <ul>
 <li><p><strong>البحث عن النص الكامل</strong></p>
-<p>تؤثر المحللات بشكل مباشر على البحث عن النص الكامل المستند إلى BM25 من خلال توليد المتجهات المتفرقة. استخدم نفس المحلّل لكل من الفهرسة والاستعلام لضمان اتساق الترميز. توفر المحللات الخاصة باللغات بشكل عام درجات BM25 أفضل من تلك العامة. للحصول على تفاصيل التنفيذ، راجع <a href="/docs/ar/full-text-search.md">البحث عن النص الكامل</a>.</p></li>
+<p>تؤثر المحللات بشكل مباشر على البحث في النص الكامل المستند إلى BM25 من خلال توليد المتجهات المتفرقة. استخدم نفس المحلّل لكل من الفهرسة والاستعلام لضمان اتساق الترميز. توفر المحللات الخاصة باللغات بشكل عام درجات BM25 أفضل من تلك العامة. للحصول على تفاصيل التنفيذ، راجع <a href="/docs/ar/full-text-search.md">البحث عن النص الكامل</a>.</p></li>
 <li><p><strong>مطابقة النص</strong></p>
 <p>تقوم عمليات مطابقة النص بإجراء مطابقة تامة للرموز بين الاستعلامات والمحتوى المفهرس بناءً على مخرجات المحلل. للحصول على تفاصيل التنفيذ، راجع <a href="/docs/ar/keyword-match.md">مطابقة النص</a>.</p></li>
 <li><p><strong>مطابقة العبارات</strong></p>

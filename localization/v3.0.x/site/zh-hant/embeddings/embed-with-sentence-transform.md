@@ -63,7 +63,7 @@ docs_embeddings = sentence_transformer_ef.encode_documents(docs)
       dtype=float32)]
 Dim: <span class="hljs-number">384</span> (<span class="hljs-number">384</span>,)
 <button class="copy-code-btn"></button></code></pre>
-<p>要為查詢建立嵌入式資料，請使用<strong>encode_queries()</strong>方法：</p>
+<p>要為查詢建立內嵌資料，請使用<strong>encode_queries()</strong>方法：</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>, 
            <span class="hljs-string">&quot;Where was Alan Turing born?&quot;</span>]
 

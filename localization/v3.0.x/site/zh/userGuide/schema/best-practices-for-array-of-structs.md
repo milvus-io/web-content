@@ -21,7 +21,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>现代人工智能应用，尤其是在物联网（IoT）和自动驾驶领域，通常会对丰富的结构化事件进行推理：带有时间戳和向量嵌入的传感器读数、带有错误代码和音频片段的诊断日志，或者带有位置、速度和场景上下文的行程片段。这些都要求数据库能够本机支持嵌套数据的摄取和搜索。</p>
-<p>Milvus 没有要求用户将原子结构事件转换成平面数据模型，而是引入了结构数组（Array of Structs），数组中的每个结构都可以容纳标量和向量，从而保持了语义的完整性。</p>
+<p>Milvus 没有要求用户将原子结构事件转换为平面数据模型，而是引入了结构数组（Array of Structs），数组中的每个结构都可以容纳标量和向量，从而保持了语义的完整性。</p>
 <h2 id="Why-Array-of-Structs" class="common-anchor-header">为什么要使用结构数组<button data-href="#Why-Array-of-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +38,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h2><p>从自动驾驶到多模态检索，现代人工智能应用越来越依赖于嵌套的异构数据。传统的平面数据模型难以表示复杂的关系，如<strong>"一个文档包含许多注释块</strong>"或<strong>"一个驾驶场景包含多个观察到的操作</strong>"。这正是 Milvus 的结构数组数据类型的优势所在。</p>
-<p>数组结构体允许您存储一组有序的结构化元素，其中每个结构体都包含自己的标量字段和向量嵌入的组合。因此，它非常适合于</p>
+<p>数组结构体允许您存储一组有序的结构化元素，其中每个结构体都包含自己的标量字段和向量嵌入的组合。这使得它非常适合于</p>
 <ul>
 <li><p><strong>分层数据</strong>：具有多个子记录的父实体，如具有许多文本块的书籍或具有许多注释帧的视频。</p></li>
 <li><p><strong>多模态嵌入</strong>：每个 Struct 都可以容纳多个向量，如文本嵌入加图像嵌入，以及元数据。</p></li>
@@ -208,7 +208,7 @@ beta: Milvus 2.6.4+
 <li><p><code translate="no">plain_caption</code> 是对当前帧的描述，不包含周围环境，如天气、路况等，<code translate="no">plain_cap_vector</code> 是其相应的向量嵌入。</p></li>
 <li><p><code translate="no">rich_caption</code> 是对当前有环境的帧的描述，<code translate="no">rich_cap_vector</code> 是其对应的向量嵌入。</p></li>
 <li><p><code translate="no">risk</code> 是对当前帧中小我车辆所面临风险的描述，<code translate="no">risk_vector</code> 是其对应的向量嵌入，以及</p></li>
-<li><p>帧的所有其他属性，如<code translate="no">road</code>,<code translate="no">weather</code>,<code translate="no">is_tunnel</code>,<code translate="no">has_pedestrain</code>, 等。</p></li>
+<li><p>帧的其他所有属性，如<code translate="no">road</code>,<code translate="no">weather</code>,<code translate="no">is_tunnel</code>,<code translate="no">has_pedestrain</code>, 等。</p></li>
 </ul></li>
 <li><p><code translate="no">traffic_lights</code> 是一个 JSON 主体，包含当前帧中识别出的所有交通信号灯。</p></li>
 <li><p><code translate="no">front_cars</code> 也是一个结构数组，包含当前帧中标识的所有前导车。</p></li>
@@ -498,7 +498,7 @@ index_params.add_index(
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>建议启用 JSON 字段的 JSON 切碎功能，以加快这些字段内的过滤速度。</p>
+<p>建议启用 JSON 字段的 JSON 切碎功能，以加快这些字段的过滤速度。</p>
 <h3 id="Step-4-Create-a-collection" class="common-anchor-header">第 4 步：创建 Collections<button data-href="#Step-4-Create-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

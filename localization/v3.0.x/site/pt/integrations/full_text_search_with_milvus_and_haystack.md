@@ -28,7 +28,7 @@ title: Pesquisa de texto integral com Milvus e Haystack
       </svg>
     </button></h1><p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">A pesquisa de texto integral</a> é um método tradicional de recuperação de documentos através da correspondência de palavras-chave ou frases específicas no texto. Classifica os resultados com base em pontuações de relevância calculadas a partir de factores como a frequência de termos. Enquanto a pesquisa semântica é melhor na compreensão do significado e do contexto, a pesquisa em texto integral é excelente na correspondência exacta de palavras-chave, o que a torna um complemento útil da pesquisa semântica. O algoritmo BM25 é amplamente utilizado para a classificação na pesquisa de texto integral e desempenha um papel fundamental na Retrieval-Augmented Generation (RAG).</p>
 <p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">O Milvus 2.5</a> introduz capacidades nativas de pesquisa de texto integral utilizando o BM25. Esta abordagem converte o texto em vectores esparsos que representam as pontuações BM25. Pode simplesmente introduzir o texto em bruto e o Milvus gera e armazena automaticamente os vectores esparsos, sem necessidade de geração manual de incorporação esparsa.</p>
-<p><a href="https://haystack.deepset.ai/">O Haystack</a> suporta agora esta funcionalidade do Milvus, facilitando a adição da pesquisa de texto completo às aplicações RAG. Pode combinar a pesquisa de texto completo com a pesquisa semântica de vectores densos para uma abordagem híbrida que beneficia tanto da compreensão semântica como da precisão da correspondência de palavras-chave. Esta combinação melhora a precisão da pesquisa e fornece melhores resultados aos utilizadores.</p>
+<p><a href="https://haystack.deepset.ai/">O Haystack</a> suporta agora esta funcionalidade do Milvus, facilitando a adição de pesquisa de texto completo às aplicações RAG. Pode combinar a pesquisa de texto completo com a pesquisa semântica de vectores densos para uma abordagem híbrida que beneficia tanto da compreensão semântica como da precisão da correspondência de palavras-chave. Esta combinação melhora a precisão da pesquisa e fornece melhores resultados aos utilizadores.</p>
 <p>Este tutorial demonstra como implementar a pesquisa de texto completo e a pesquisa híbrida na sua aplicação utilizando o Haystack e o Milvus.</p>
 <p>Para utilizar o armazenamento de vectores do Milvus, especifique o seu servidor Milvus <code translate="no">URI</code> (e opcionalmente com o <code translate="no">TOKEN</code>). Para iniciar um servidor Milvus, pode configurar um servidor Milvus seguindo o <a href="https://milvus.io/docs/install-overview.md">guia de instalação do Milvus</a> ou simplesmente <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">experimentar o Zilliz Cloud</a>(Milvus totalmente gerido) gratuitamente.</p>
 <div class="alert note">
@@ -63,7 +63,22 @@ title: Pesquisa de texto integral com Milvus e Haystack
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-data" class="common-anchor-header">Preparar os dados</h3><p>Importe os pacotes necessários neste bloco de notas. Em seguida, prepare alguns documentos de amostra.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">Preparar os dados<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Importe os pacotes necessários neste bloco de notas. Em seguida, prepare alguns documentos de amostra.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> haystack <span class="hljs-keyword">import</span> Pipeline
 <span class="hljs-keyword">from</span> haystack.components.embedders <span class="hljs-keyword">import</span> OpenAIDocumentEmbedder, OpenAITextEmbedder
 <span class="hljs-keyword">from</span> haystack.components.writers <span class="hljs-keyword">import</span> DocumentWriter
@@ -85,7 +100,7 @@ documents = [
     Document(content=<span class="hljs-string">&quot;Charlie likes white dogs&quot;</span>, meta={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;pets&quot;</span>}),
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>A integração da pesquisa de texto integral num sistema RAG equilibra a pesquisa semântica com a recuperação precisa e previsível baseada em palavras-chave. Também pode optar por utilizar apenas a pesquisa de texto integral, embora seja recomendável combinar a pesquisa de texto integral com a pesquisa semântica para obter melhores resultados de pesquisa. Aqui, para efeitos de demonstração, mostraremos apenas a pesquisa de texto integral e a pesquisa híbrida.</p>
+<p>A integração da pesquisa em texto integral num sistema RAG equilibra a pesquisa semântica com a recuperação precisa e previsível baseada em palavras-chave. Também pode optar por utilizar apenas a pesquisa de texto integral, embora seja recomendável combinar a pesquisa de texto integral com a pesquisa semântica para obter melhores resultados de pesquisa. Aqui, para efeitos de demonstração, mostraremos apenas a pesquisa de texto integral e a pesquisa híbrida.</p>
 <h2 id="BM25-search-without-embedding" class="common-anchor-header">Pesquisa BM25 sem incorporação<button data-href="#BM25-search-without-embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -101,7 +116,22 @@ documents = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">Criar o pipeline de indexação</h3><p>Para a pesquisa de texto integral, o Milvus MilvusDocumentStore aceita um parâmetro <code translate="no">builtin_function</code>. Através deste parâmetro, pode passar uma instância do <code translate="no">BM25BuiltInFunction</code>, que implementa o algoritmo BM25 no lado do servidor do Milvus. Defina o <code translate="no">builtin_function</code> especificado como a instância da função BM25. Por exemplo:</p>
+    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">Criar o pipeline de indexação<button data-href="#Create-the-indexing-Pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para a pesquisa de texto integral, o Milvus MilvusDocumentStore aceita um parâmetro <code translate="no">builtin_function</code>. Através deste parâmetro, pode passar uma instância do <code translate="no">BM25BuiltInFunction</code>, que implementa o algoritmo BM25 no lado do servidor do Milvus. Defina o <code translate="no">builtin_function</code> especificado como a instância da função BM25. Por exemplo:</p>
 <pre><code translate="no" class="language-python">connection_args = {<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>}
 <span class="hljs-comment"># connection_args = {&quot;uri&quot;: YOUR_ZILLIZ_CLOUD_URI, &quot;token&quot;: Secret.from_env_var(&quot;ZILLIZ_CLOUD_API_KEY&quot;)}</span>
 
@@ -133,7 +163,22 @@ indexing_pipeline.run({<span class="hljs-string">&quot;writer&quot;</span>: {<sp
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'writer': {'documents_written': 3}}
 </code></pre>
-<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">Criar o pipeline de recuperação</h3><p>Crie um pipeline de recuperação que recupere documentos do armazenamento de documentos Milvus utilizando <code translate="no">MilvusSparseEmbeddingRetriever</code>, que é um invólucro em torno de <code translate="no">document_store</code>.</p>
+<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">Criar o pipeline de recuperação<button data-href="#Create-the-retrieval-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Crie um pipeline de recuperação que recupere documentos do armazenamento de documentos Milvus utilizando <code translate="no">MilvusSparseEmbeddingRetriever</code>, que é um invólucro em torno de <code translate="no">document_store</code>.</p>
 <pre><code translate="no" class="language-python">retrieval_pipeline = Pipeline()
 retrieval_pipeline.add_component(
     <span class="hljs-string">&quot;retriever&quot;</span>, MilvusSparseEmbeddingRetriever(document_store=document_store)
@@ -162,7 +207,22 @@ retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">Criar o pipeline de indexação</h3><p>Na pesquisa híbrida, utilizamos a função BM25 para efetuar a pesquisa de texto integral e especificamos o campo vetorial denso <code translate="no">vector</code>, para efetuar a pesquisa semântica.</p>
+    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">Criar o pipeline de indexação<button data-href="#Create-the-indexing-Pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Na pesquisa híbrida, utilizamos a função BM25 para efetuar a pesquisa de texto integral e especificamos o campo vetorial denso <code translate="no">vector</code>, para efetuar a pesquisa semântica.</p>
 <pre><code translate="no" class="language-python">document_store = MilvusDocumentStore(
     connection_args=connection_args,
     vector_field=<span class="hljs-string">&quot;vector&quot;</span>,  <span class="hljs-comment"># The dense vector field.</span>
@@ -194,7 +254,22 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
 
 Number of documents: 3
 </code></pre>
-<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">Criar o pipeline de recuperação</h3><p>Crie um pipeline de recuperação que recupere documentos do repositório de documentos Milvus utilizando <code translate="no">MilvusHybridRetriever</code>, que contém o endereço <code translate="no">document_store</code> e recebe parâmetros sobre a pesquisa híbrida.</p>
+<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">Criar o pipeline de recuperação<button data-href="#Create-the-retrieval-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Crie um pipeline de recuperação que recupere documentos do repositório de documentos Milvus utilizando <code translate="no">MilvusHybridRetriever</code>, que contém o endereço <code translate="no">document_store</code> e recebe parâmetros sobre a pesquisa híbrida.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from pymilvus import WeightedRanker</span>
 retrieval_pipeline = Pipeline()
 retrieval_pipeline.add_component(<span class="hljs-string">&quot;dense_text_embedder&quot;</span>, OpenAITextEmbedder())
@@ -246,7 +321,7 @@ retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os analisadores são essenciais na pesquisa de texto integral, dividindo a frase em tokens e efectuando a análise lexical, como a remoção de stemming e stop word. Os analisadores são normalmente específicos do idioma. Pode consultar <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">este guia</a> para saber mais sobre analisadores no Milvus.</p>
+    </button></h2><p>Os analisadores são essenciais na pesquisa de texto integral, pois dividem a frase em tokens e efectuam a análise lexical, como a remoção de stemming e stop word. Os analisadores são normalmente específicos do idioma. Pode consultar <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">este guia</a> para saber mais sobre analisadores no Milvus.</p>
 <p>O Milvus suporta dois tipos de analisadores: <strong>Analisadores incorporados</strong> e <strong>Analisadores personalizados</strong>. Por predefinição, o <code translate="no">BM25BuiltInFunction</code> utilizará o <a href="https://milvus.io/docs/standard-analyzer.md">analisador incorporado padrão</a>, que é o analisador mais básico que simboliza o texto com pontuação.</p>
 <p>Se você quiser usar um analisador diferente ou personalizar o analisador, pode passar o parâmetro <code translate="no">analyzer_params</code> na inicialização <code translate="no">BM25BuiltInFunction</code>.</p>
 <pre><code translate="no" class="language-python">analyzer_params_custom = {

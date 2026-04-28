@@ -39,7 +39,7 @@ summary: >-
       </svg>
     </button></h2><p>Milvus 2.5 introduit une nouvelle version de l'API qui rationalise l'opération d'octroi. Il n'est plus nécessaire de rechercher le type d'objet lors de l'octroi d'un privilège à un rôle. Voici les paramètres et les explications correspondantes.</p>
 <ul>
-<li><p><strong>role_name :</strong> Le nom du rôle cible auquel le(s) privilège(s) ou le(s) groupe(s) de privilèges doit(vent) être accordé(s).</p></li>
+<li><p><strong>role_name :</strong> Le nom du rôle cible auquel le(s) privilège(s) ou le(s) groupe(s) de privilèges doit/doivent être accordé(s).</p></li>
 <li><p><strong>Ressource</strong>: La ressource cible d'un privilège, qui peut être une instance, une base de données ou une collection spécifique.</p></li>
 </ul>
 <p>Le tableau suivant explique comment spécifier la ressource dans la méthode <code translate="no">client.grantV2()</code>.</p>
@@ -319,7 +319,7 @@ summary: >-
 <tr>
 <td><p>BackupRBAC</p></td>
 <td><p>Créer une sauvegarde de toutes les opérations liées à RBAC dans l'instance actuelle</p></td>
-<td><p>BackupRBAC</p></td>
+<td><p>SauvegardeRBAC</p></td>
 </tr>
 <tr>
 <td><p>RestoreRBAC</p></td>

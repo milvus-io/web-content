@@ -65,7 +65,7 @@ title: Запуск Milvus в Docker (Linux)
 <div class="alert note">
 <p><strong>Что нового в версии 2.6.15:</strong></p>
 <ul>
-<li><strong>Потоковая нода</strong>: Расширенные возможности обработки данных</li>
+<li><strong>Streaming Node</strong>: Расширенные возможности обработки данных</li>
 <li><strong>Woodpecker MQ</strong>: улучшенная очередь сообщений с уменьшенными затратами на обслуживание, подробнее см. в разделе <a href="/docs/ru/use-woodpecker.md">"Использование Woodpecker"</a>.</li>
 <li><strong>Оптимизированная архитектура</strong>: Консолидированные компоненты для повышения производительности</li>
 </ul>

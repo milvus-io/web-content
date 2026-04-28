@@ -100,8 +100,23 @@ summary: 學習如何在 EKS 上部署 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以使用 AWS 管理主控台、AWS CLI 或 IaC 工具（如 Terraform）設定所需的 AWS 資源，包括 AWS S3 桶和 EKS 群集。在本文件中，我們建議使用 AWS CLI 來示範如何設定 AWS 資源。</p>
-<h3 id="Create-an-Amazon-S3-Bucket" class="common-anchor-header">建立 Amazon S3 儲存桶</h3><ul>
+    </button></h2><p>您可以使用 AWS 管理主控台、AWS CLI 或 IaC 工具（如 Terraform）設定所需的 AWS 資源，包括 AWS S3 桶和 EKS 群集。在本文件中，我們會使用 AWS CLI 來示範如何設定 AWS 資源。</p>
+<h3 id="Create-an-Amazon-S3-Bucket" class="common-anchor-header">建立 Amazon S3 儲存桶<button data-href="#Create-an-Amazon-S3-Bucket" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>建立 AWS S3 儲存桶。</p>
 <p>閱讀桶命名<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">規則</a>，並在命名 AWS S3 桶時遵守命名規則。</p>
 <pre><code translate="no" class="language-shell">milvus_bucket_name=&quot;milvus-bucket-$(openssl rand -hex 12)&quot;
@@ -156,7 +171,22 @@ aws iam create-policy --policy-name MilvusS3ReadWrite --policy-document file://m
 <pre><code translate="no" class="language-shell">aws iam attach-user-policy --user-name &lt;your-user-name&gt; --policy-arn &quot;arn:aws:iam::&lt;your-iam-account-id&gt;:policy/MilvusS3ReadWrite&quot;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Create-an-Amazon-EKS-Cluster" class="common-anchor-header">建立 Amazon EKS 叢集</h3><ul>
+<h3 id="Create-an-Amazon-EKS-Cluster" class="common-anchor-header">建立 Amazon EKS 叢集<button data-href="#Create-an-Amazon-EKS-Cluster" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>準備一個群集設定檔案如下，並將其命名為<code translate="no">eks_cluster.yaml</code> 。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">eksctl.io/v1alpha5</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">ClusterConfig</span>
@@ -241,7 +271,22 @@ kubectl get nodes -A -o wide
 <p>將原始的 gp2 StorageClass 設定為非預設值。</p>
 <pre><code translate="no" class="language-shell">kubectl patch storageclass gp2 -p &#x27;{&quot;metadata&quot;: {&quot;annotations&quot;:{&quot;storageclass.kubernetes.io/is-default-class&quot;:&quot;false&quot;}}}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Install-AWS-LoadBalancer-Controller" class="common-anchor-header">安裝 AWS LoadBalancer 控制器</h3><ul>
+<h3 id="Install-AWS-LoadBalancer-Controller" class="common-anchor-header">安裝 AWS LoadBalancer 控制器<button data-href="#Install-AWS-LoadBalancer-Controller" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>新增 Helm chars repo。</p>
 <pre><code translate="no" class="language-shell">helm repo add eks https://aws.github.io/eks-charts
 helm repo update
@@ -282,7 +327,7 @@ helm repo update
 <p><div class="alert note"></p>
 <ul>
 <li>要為您的 Milvus 設定 HA，請參考<a href="https://milvus.io/tools/sizing/">此計算器</a>以獲得更多資訊。您可以直接從計算器下載相關組態，並應移除 MinIO 相關組態。</li>
-<li>若要執行協調器的多重複製部署，請將<code translate="no">xxCoordinator.activeStandby.enabled</code> 設為<code translate="no">true</code> 。</li>
+<li>若要實現協調器的多重複製部署，請將<code translate="no">xxCoordinator.activeStandby.enabled</code> 設為<code translate="no">true</code> 。</li>
 </ul>
 <p></div></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">cluster:</span>

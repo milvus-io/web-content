@@ -54,7 +54,7 @@ title: تكوين Milvus مع مخططات Helm Charts
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">قم بتنزيل</a> <code translate="no">values.yaml</code> مباشرة أو باستخدام الأمر التالي.</p>
+    </button></h3><p><a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">قم بتنزيل</a> <code translate="no">values.yaml</code> مباشرة أو باستخدام الأمر التالي.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">تعديل ملف التكوين<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
@@ -72,7 +72,7 @@ title: تكوين Milvus مع مخططات Helm Charts
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>قم بتهيئة مثيل ميلفوس الخاص بك ليناسب سيناريوهات تطبيقك من خلال تعديل المعلمات المقابلة في <code translate="no">values.yaml</code>.</p>
+    </button></h3><p>قم بتهيئة مثيل Milvus الخاص بك ليناسب سيناريوهات تطبيقك عن طريق تعديل المعلمات المقابلة في <code translate="no">values.yaml</code>.</p>
 <p>على وجه التحديد، ابحث عن <code translate="no">extraConfigFiles</code> في <code translate="no">values.yaml</code> وضع التكوينات الخاصة بك في هذا القسم على النحو التالي:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Extra configs for milvus.yaml</span>
 <span class="hljs-comment"># If set, this config will merge into milvus.yaml</span>
@@ -126,7 +126,6 @@ title: تكوين Milvus مع مخططات Helm Charts
             <li><a href="/docs/ar/configure_indexcoord.md">تنسيق الفهرس</a></li>
             <li><a href="/docs/ar/configure_metastore.md">مخزن الميتاستور</a></li>
             <li><a href="/docs/ar/configure_mq.md">قائمة انتظار الرسائل</a></li>
-            <li><a href="/docs/ar/configure_natsmq.md">ناتسمك</a></li>
             <li><a href="/docs/ar/configure_tikv.md">تيكف</a></li>
             <li><a href="/docs/ar/configure_trace.md">التتبع</a></li>
             <li><a href="/docs/ar/configure_quotaandlimits.md">الحصة والحدود</a></li>
@@ -259,7 +258,7 @@ title: تكوين Milvus مع مخططات Helm Charts
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بدلاً من ذلك، يمكنك ترقية تكوينات ميلفوس مباشرةً باستخدام أمر Helm.</p>
+    </button></h2><p>بدلاً من ذلك، يمكنك ترقية تكوينات ملف Milvus مباشرةً باستخدام أمر Helm.</p>
 <h3 id="Check-the-configurable-parameters" class="common-anchor-header">تحقق من المعلمات القابلة للتكوين<button data-href="#Check-the-configurable-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

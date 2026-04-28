@@ -127,7 +127,7 @@ summary: 了解如何为 Milvus 配置 tikv。
     </button></h2><table id="tikv.kvSubPath">
   <thead>
     <tr>
-      <th class="width80">说明</th>
+      <th class="width80">描述</th>
       <th class="width20">默认值</th> 
     </tr>
   </thead>

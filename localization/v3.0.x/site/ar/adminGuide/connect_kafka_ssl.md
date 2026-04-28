@@ -38,7 +38,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>لبدء تشغيل ميلفوس وكافكا بدون SASL/SSL، يمكنك تعطيل المصادقة والتشفير لكل من كافكا وميلفوس. استخدمها فقط في بيئة موثوقة.</p>
-<h3 id="1-Start-a-Kafka-service-without-SASLSSL" class="common-anchor-header">1. ابدأ خدمة كافكا بدون SASL/SSL</h3><p>يمكنك استخدام ملف <code translate="no">docker-compose.yaml</code> التالي لبدء خدمة كافكا بدون SASL/SSL:</p>
+<h3 id="1-Start-a-Kafka-service-without-SASLSSL" class="common-anchor-header">1. ابدأ خدمة كافكا بدون SASL/SSL<button data-href="#1-Start-a-Kafka-service-without-SASLSSL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكنك استخدام ملف <code translate="no">docker-compose.yaml</code> التالي لبدء خدمة كافكا بدون SASL/SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -64,7 +79,22 @@ summary: >-
 <p>ثم يمكنك بدء خدمة كافكا باستخدام الأمر التالي:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. بدء تشغيل ميلفوس والاتصال بكافكا</h3><p>بمجرد بدء تشغيل خدمة كافكا، يمكنك بدء تشغيل ميلفوس والاتصال بها. استخدم الملف التالي <code translate="no">docker-compose.yaml</code> لبدء تشغيل ميلفوس والاتصال بكافكا بدون SASL/SSL:</p>
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. بدء تشغيل ميلفوس والاتصال بكافكا<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بمجرد بدء تشغيل خدمة كافكا، يمكنك بدء تشغيل ميلفوس والاتصال بها. استخدم الملف التالي <code translate="no">docker-compose.yaml</code> لبدء تشغيل ميلفوس والاتصال بكافكا بدون SASL/SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -121,7 +151,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>لبدء تشغيل كافكا بمصادقة SASL/PLAIN، تحتاج إلى إضافة ملف <code translate="no">kafka_server_jass.conf</code> بالإعدادات المناسبة.</p>
-<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN" class="common-anchor-header">1. ابدأ خدمة كافكا باستخدام SASL/PLAIN</h3><p>ضع الملف التالي <code translate="no">docker-compose.yaml</code> والملف <code translate="no">kafka_server_jaas.conf</code> في نفس الدليل.</p>
+<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN" class="common-anchor-header">1. ابدأ خدمة كافكا باستخدام SASL/PLAIN<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ضع الملف التالي <code translate="no">docker-compose.yaml</code> والملف <code translate="no">kafka_server_jaas.conf</code> في نفس الدليل.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -169,7 +214,22 @@ summary: >-
 <p>ثم يمكنك بدء تشغيل خدمة كافكا باستخدام الأمر التالي:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. بدء تشغيل ميلفوس والاتصال بكافكا</h3><p>بمجرد بدء تشغيل خدمة كافكا، يمكنك بدء تشغيل ميلفوس والاتصال بها. استخدم الملف التالي <code translate="no">docker-compose.yaml</code> لبدء تشغيل ميلفوس والاتصال بكافكا باستخدام SASL/PLAIN:</p>
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. بدء تشغيل ميلفوس والاتصال بكافكا<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بمجرد بدء تشغيل خدمة كافكا، يمكنك بدء تشغيل ميلفوس والاتصال بها. استخدم الملف التالي <code translate="no">docker-compose.yaml</code> لبدء تشغيل ميلفوس والاتصال بكافكا باستخدام SASL/PLAIN:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -226,7 +286,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>لبدء تشغيل كافكا بمصادقة SSL، تحتاج إلى الحصول على بعض ملفات الشهادات أو إنشاء شهادات موقعة ذاتيًا. في هذا المثال، نستخدم الشهادات الموقعة ذاتيًا.</p>
-<h3 id="1-Generate-Self-Signed-Certificates" class="common-anchor-header">1. إنشاء شهادات موقعة ذاتيًا</h3><p>أنشئ مجلدًا باسم <code translate="no">my_secrets</code> ، وأضف برنامج نصي باش باسم <code translate="no">gen-ssl-certs.sh</code> فيه، والصق المحتوى التالي فيه:</p>
+<h3 id="1-Generate-Self-Signed-Certificates" class="common-anchor-header">1. إنشاء شهادات موقعة ذاتيًا<button data-href="#1-Generate-Self-Signed-Certificates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>أنشئ مجلدًا باسم <code translate="no">my_secrets</code> ، وأضف برنامج نصي باش باسم <code translate="no">gen-ssl-certs.sh</code> فيه، والصق المحتوى التالي فيه:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment">#</span>
@@ -424,7 +499,22 @@ total 12
 -rw-rw-r-- 1 5.6K Feb 26 11:54 kafka_server.keystore.jks
 -rw-rw-r-- 1 1.4K Feb 26 11:54 kafka_server.truststore.jks
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-a-Kafka-service-with-SSL" class="common-anchor-header">2. بدء خدمة كافكا مع SSL</h3><p>استخدم الملف التالي <code translate="no">docker-compose.yaml</code> لبدء خدمة كافكا باستخدام SSL:</p>
+<h3 id="2-Start-a-Kafka-service-with-SSL" class="common-anchor-header">2. بدء خدمة كافكا مع SSL<button data-href="#2-Start-a-Kafka-service-with-SSL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>استخدم الملف التالي <code translate="no">docker-compose.yaml</code> لبدء خدمة كافكا باستخدام SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -466,7 +556,22 @@ total 12
 <p>ثم ابدأ تشغيل خدمة كافكا باستخدام الأمر التالي:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="common-anchor-header">3. بدء تشغيل ميلفوس والاتصال بكافكا باستخدام SSL</h3><p>بمجرد بدء تشغيل خدمة كافكا، يمكنك بدء تشغيل ميلفوس والاتصال بها. استخدم الملف التالي <code translate="no">docker-compose.yaml</code> لبدء تشغيل ميلفوس والاتصال بكافكا باستخدام SSL:</p>
+<h3 id="3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="common-anchor-header">3. بدء تشغيل ميلفوس والاتصال بكافكا باستخدام SSL<button data-href="#3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بمجرد بدء تشغيل خدمة كافكا، يمكنك بدء تشغيل ميلفوس والاتصال بها. استخدم الملف التالي <code translate="no">docker-compose.yaml</code> لبدء تشغيل ميلفوس والاتصال بكافكا باستخدام SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -484,7 +589,7 @@ total 12
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/milvus/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>استخدم الأمر التالي لتنزيل قالب ملف تكوين ملف Milvus:</p>
+<p>استخدم الأمر التالي لتنزيل قالب ملف تكوين Milvus:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>وقم بتعيين المعلمات التالية:</p>
@@ -524,7 +629,22 @@ total 12
         ></path>
       </svg>
     </button></h2><p>لتوصيل ميلفوس بكافكا باستخدام SASL/PLAIN و SSL، تحتاج إلى تكرار الخطوات في توصيل ميلفوس بكافكا <a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">باستخدام SASL/PLAIN وحده</a> <a href="#Connect-Milus-to-Kafka-with-SSL-Alone">وتوصيل ميلفوس بكافكا باستخدام SSL وحده</a>.</p>
-<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="common-anchor-header">1. ابدأ خدمة كافكا باستخدام SASL/PLAIN و SSL</h3><p>استخدم الملف <code translate="no">kafka_server_jass.conf</code> المذكور في <a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">Connect Milus إلى</a> كافكا مع SASL/PLAIN <a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">Alone</a> والمجلد <code translate="no">my_secrets</code> الذي تم إنشاؤه في <a href="#Connect-Milus-to-Kafka-with-SSL-Alone">Connect Milus إلى كافكا مع SSL Alone</a> لبدء خدمة كافكا مع SASL/PLAIN و SSL.</p>
+<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="common-anchor-header">1. ابدأ خدمة كافكا باستخدام SASL/PLAIN و SSL<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>استخدم الملف <code translate="no">kafka_server_jass.conf</code> المذكور في <a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">Connect Milus إلى</a> كافكا مع SASL/PLAIN <a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">Alone</a> والمجلد <code translate="no">my_secrets</code> الذي تم إنشاؤه في <a href="#Connect-Milus-to-Kafka-with-SSL-Alone">Connect Milus إلى كافكا مع SSL Alone</a> لبدء خدمة كافكا مع SASL/PLAIN و SSL.</p>
 <p>يمكن استخدام الملف التالي <code translate="no">docker-compose.yaml</code> لبدء خدمة كافكا مع SASL/PLAIN و SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
@@ -578,7 +698,22 @@ total 12
 <p>ثم ابدأ تشغيل خدمة كافكا باستخدام الأمر التالي:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2. بدء تشغيل ميلفوس والاتصال بكافكا باستخدام SASL/PLAIN و SSL</h3><p>بمجرد بدء تشغيل خدمة كافكا، يمكنك بدء تشغيل ميلفوس والاتصال بها. استخدم الملف التالي <code translate="no">docker-compose.yaml</code> لبدء تشغيل Milvus والاتصال بكافكا باستخدام SASL/PLAIN و SSL:</p>
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2. بدء تشغيل ميلفوس والاتصال بخدمة كافكا باستخدام SASL/PLAIN و SSL<button data-href="#2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بمجرد بدء تشغيل خدمة كافكا، يمكنك بدء تشغيل ميلفوس والاتصال بها. استخدم الملف التالي <code translate="no">docker-compose.yaml</code> لبدء تشغيل Milvus والاتصال بكافكا باستخدام SASL/PLAIN و SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>

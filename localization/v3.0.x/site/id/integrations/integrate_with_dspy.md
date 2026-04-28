@@ -76,9 +76,9 @@ title: Mengintegrasikan Milvus dengan DSPy
     </button></h2><p>Ada banyak komponen yang berkontribusi dalam membangun pipeline LLM. Di sini, kami akan menjelaskan beberapa komponen utama untuk memberikan pemahaman tingkat tinggi tentang cara kerja DSPy.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
    </span> <span class="img-wrapper"> <span>Modul DSPy</span> </span></p>
-<p>Tanda tangan: Signature dalam DSPy berfungsi sebagai spesifikasi deklaratif, yang menguraikan perilaku input/output modul, memandu model bahasa dalam eksekusi tugas. Modul: Modul DSPy berfungsi sebagai komponen fundamental untuk program yang memanfaatkan model bahasa (LM). Modul ini mengabstraksikan berbagai teknik prompt, seperti rantai pemikiran atau ReAct, dan dapat beradaptasi untuk menangani DSPy Signature apa pun. Dengan parameter yang dapat dipelajari dan kemampuan untuk memproses input dan menghasilkan output, modul-modul ini dapat dikombinasikan untuk membentuk program yang lebih besar, mengambil inspirasi dari modul NN di PyTorch tetapi disesuaikan untuk aplikasi LM. Pengoptimal: Pengoptimal dalam DSPy menyempurnakan parameter program DSPy, seperti petunjuk dan bobot LLM, untuk memaksimalkan metrik yang ditentukan seperti akurasi, meningkatkan efisiensi program.</p>
+<p>Tanda tangan: Signature dalam DSPy berfungsi sebagai spesifikasi deklaratif, yang menguraikan perilaku input/output modul, memandu model bahasa dalam eksekusi tugas. Modul: Modul DSPy berfungsi sebagai komponen fundamental untuk program yang memanfaatkan model bahasa (LM). Modul ini mengabstraksikan berbagai teknik prompt, seperti rantai pemikiran atau ReAct, dan dapat diadaptasi untuk menangani DSPy Signature apa pun. Dengan parameter yang dapat dipelajari dan kemampuan untuk memproses input dan menghasilkan output, modul-modul ini dapat dikombinasikan untuk membentuk program yang lebih besar, mengambil inspirasi dari modul NN di PyTorch tetapi disesuaikan untuk aplikasi LM. Pengoptimal: Pengoptimal dalam DSPy menyempurnakan parameter program DSPy, seperti petunjuk dan bobot LLM, untuk memaksimalkan metrik yang ditentukan seperti akurasi, meningkatkan efisiensi program.</p>
 <h2 id="Why-Milvus-in-DSPy" class="common-anchor-header">Mengapa Milvus di DSPy<button data-href="#Why-Milvus-in-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -111,13 +111,43 @@ title: Mengintegrasikan Milvus dengan DSPy
         ></path>
       </svg>
     </button></h2><p>Sekarang, mari kita lihat contoh singkat untuk mendemonstrasikan cara memanfaatkan Milvus dalam DSPy untuk mengoptimalkan aplikasi RAG.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Prasyarat</h3><p>Sebelum membuat aplikasi RAG, instal DSPy dan PyMilvus.</p>
+<h3 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sebelum membuat aplikasi RAG, instal DSPy dan PyMilvus.</p>
 <pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;dspy-ai[milvus]&quot;</span>
 $ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja diinstal, Anda mungkin perlu **memulai ulang runtime** (Klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</div>
-<h3 id="Loading-the-dataset" class="common-anchor-header">Memuat dataset</h3><p>Dalam contoh ini, kita menggunakan HotPotQA, sebuah kumpulan pasangan pertanyaan-jawaban yang kompleks, sebagai kumpulan data latihan. Kita dapat memuatnya melalui kelas HotPotQA.</p>
+<h3 id="Loading-the-dataset" class="common-anchor-header">Memuat kumpulan data<button data-href="#Loading-the-dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dalam contoh ini, kita menggunakan HotPotQA, sebuah kumpulan pasangan pertanyaan-jawaban yang kompleks, sebagai kumpulan data latihan. Kita dapat memuatnya melalui kelas HotPotQA.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.datasets <span class="hljs-keyword">import</span> HotPotQA
 
 <span class="hljs-comment"># Load the dataset.</span>
@@ -129,7 +159,22 @@ dataset = HotPotQA(
 trainset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.train]
 devset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.dev]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">Memasukkan data ke dalam basis data vektor Milvus</h3><p>Masukkan informasi konteks ke dalam koleksi Milvus untuk pengambilan vektor. Koleksi ini harus memiliki bidang <code translate="no">embedding</code> dan bidang <code translate="no">text</code>. Kami menggunakan model <code translate="no">text-embedding-3-small</code> dari OpenAI sebagai fungsi penyematan kueri default dalam kasus ini.</p>
+<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">Memasukkan data ke dalam basis data vektor Milvus<button data-href="#Ingest-data-into-the-Milvus-vector-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Masukkan informasi konteks ke dalam koleksi Milvus untuk pengambilan vektor. Koleksi ini harus memiliki bidang <code translate="no">embedding</code> dan bidang <code translate="no">text</code>. Kami menggunakan model <code translate="no">text-embedding-3-small</code> dari OpenAI sebagai fungsi penyematan kueri default dalam kasus ini.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> os
 
@@ -172,7 +217,22 @@ text = requests.get(
         ],
     )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-MilvusRM" class="common-anchor-header">Mendefinisikan MilvusRM.</h3><p>Sekarang, Anda perlu mendefinisikan MilvusRM.</p>
+<h3 id="Define-MilvusRM" class="common-anchor-header">Mendefinisikan MilvusRM.<button data-href="#Define-MilvusRM" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sekarang, Anda perlu mendefinisikan MilvusRM.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.retrieve.milvus_rm <span class="hljs-keyword">import</span> MilvusRM
 <span class="hljs-keyword">import</span> dspy
 
@@ -185,7 +245,22 @@ retriever_model = MilvusRM(
 turbo = dspy.OpenAI(model=<span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>)
 dspy.settings.configure(lm=turbo)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Building-signatures" class="common-anchor-header">Membangun tanda tangan</h3><p>Setelah kita memuat data, mari kita mulai mendefinisikan tanda tangan untuk sub-tugas pipeline kita. Kita dapat mengidentifikasi masukan sederhana kita <code translate="no">question</code> dan keluaran <code translate="no">answer</code>, tetapi karena kita sedang membangun pipeline RAG, kita akan mengambil informasi kontekstual dari Milvus. Jadi mari kita definisikan tanda tangan kita sebagai <code translate="no">context, question --&gt; answer</code>.</p>
+<h3 id="Building-signatures" class="common-anchor-header">Membangun tanda tangan<button data-href="#Building-signatures" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Setelah kita memuat data, mari kita mulai mendefinisikan tanda tangan untuk sub-tugas pipeline kita. Kita dapat mengidentifikasi masukan sederhana kita <code translate="no">question</code> dan keluaran <code translate="no">answer</code>, tetapi karena kita sedang membangun pipeline RAG, kita akan mengambil informasi kontekstual dari Milvus. Jadi mari kita definisikan tanda tangan kita sebagai <code translate="no">context, question --&gt; answer</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">GenerateAnswer</span>(dspy.Signature):
     <span class="hljs-string">&quot;&quot;&quot;Answer questions with short factoid answers.&quot;&quot;&quot;</span>
 
@@ -194,7 +269,22 @@ dspy.settings.configure(lm=turbo)
     answer = dspy.OutputField(desc=<span class="hljs-string">&quot;often between 1 and 5 words&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Kami menyertakan deskripsi singkat untuk bidang <code translate="no">context</code> dan <code translate="no">answer</code> untuk mendefinisikan panduan yang lebih jelas tentang apa yang akan diterima dan dihasilkan oleh model.</p>
-<h3 id="Building-the-pipeline" class="common-anchor-header">Membangun pipeline</h3><p>Sekarang, mari kita mendefinisikan pipeline RAG.</p>
+<h3 id="Building-the-pipeline" class="common-anchor-header">Membangun pipeline<button data-href="#Building-the-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sekarang, mari kita mendefinisikan pipeline RAG.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">RAG</span>(dspy.Module):
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, rm</span>):
         <span class="hljs-built_in">super</span>().__init__()
@@ -212,7 +302,22 @@ dspy.settings.configure(lm=turbo)
             context=[item.long_text <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> context], answer=prediction.answer
         )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Executing-the-pipeline-and-getting-the-results" class="common-anchor-header">Menjalankan pipeline dan mendapatkan hasilnya</h3><p>Sekarang, kita telah membuat pipeline RAG ini. Mari kita coba dan dapatkan hasilnya.</p>
+<h3 id="Executing-the-pipeline-and-getting-the-results" class="common-anchor-header">Menjalankan pipeline dan mendapatkan hasilnya<button data-href="#Executing-the-pipeline-and-getting-the-results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sekarang, kita telah membuat pipeline RAG ini. Mari kita coba dan dapatkan hasilnya.</p>
 <pre><code translate="no" class="language-python">rag = RAG(retriever_model)
 <span class="hljs-built_in">print</span>(rag(<span class="hljs-string">&quot;who write At My Window&quot;</span>).answer)
 <button class="copy-code-btn"></button></code></pre>
@@ -230,7 +335,22 @@ metric = dspy.evaluate.answer_exact_match
 score = evaluate_on_hotpotqa(rag, metric=metric)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;rag:&quot;</span>, score)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optimizing-the-pipeline" class="common-anchor-header">Mengoptimalkan pipeline</h3><p>Setelah mendefinisikan program ini, langkah selanjutnya adalah kompilasi. Proses ini memperbarui parameter dalam setiap modul untuk meningkatkan kinerja. Proses kompilasi bergantung pada tiga faktor penting:</p>
+<h3 id="Optimizing-the-pipeline" class="common-anchor-header">Mengoptimalkan pipeline<button data-href="#Optimizing-the-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Setelah mendefinisikan program ini, langkah selanjutnya adalah kompilasi. Proses ini memperbarui parameter dalam setiap modul untuk meningkatkan kinerja. Proses kompilasi bergantung pada tiga faktor penting:</p>
 <ul>
 <li>Training Set: Kami akan menggunakan 20 contoh pertanyaan-jawaban dari kumpulan data pelatihan kami untuk demonstrasi ini.</li>
 <li>Metrik Validasi: Kami akan membuat metrik sederhana <code translate="no">validate_context_and_answer</code>. Metrik ini memverifikasi keakuratan jawaban yang diprediksi dan memastikan bahwa konteks yang diambil mencakup jawabannya.</li>

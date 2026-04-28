@@ -267,7 +267,7 @@ res = client.search(
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Filtering-with-JSON-specific-operators" class="common-anchor-header">Filtrage avec des opérateurs spécifiques à JSON</h4><p>Milvus fournit également des opérateurs spéciaux pour interroger les valeurs de tableau sur des clés de champ JSON spécifiques. Par exemple, Milvus fournit des opérateurs spéciaux pour interroger des valeurs de tableau sur des clés de champ JSON spécifiques :</p>
+<h4 id="Filtering-with-JSON-specific-operators" class="common-anchor-header">Filtrage avec des opérateurs spécifiques à JSON</h4><p>Milvus fournit également des opérateurs spéciaux pour interroger les valeurs de tableau sur des clés de champ JSON spécifiques. Par exemple, Milvus fournit des opérateurs spéciaux pour interroger les valeurs de tableau sur des clés de champ JSON spécifiques :</p>
 <ul>
 <li><p><code translate="no">json_contains(identifier, expr)</code>: Vérifie si un élément ou un sous-réseau spécifique existe dans un tableau JSON.</p></li>
 <li><p><code translate="no">json_contains_all(identifier, expr)</code>: Vérifie que tous les éléments de l'expression JSON spécifiée sont présents dans le champ.</p></li>

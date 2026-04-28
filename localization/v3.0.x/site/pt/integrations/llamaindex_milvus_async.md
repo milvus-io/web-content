@@ -31,7 +31,7 @@ summary: >-
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_async.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>Este tutorial demonstra como usar <a href="https://www.llamaindex.ai/">o LlamaIndex</a> com o <a href="https://milvus.io/">Milvus</a> para construir um pipeline assíncrono de processamento de documentos para o RAG. O LlamaIndex fornece uma maneira de processar documentos e armazená-los em um banco de dados vetorial como o Milvus. Aproveitando a API assíncrona do LlamaIndex e a biblioteca cliente Python do Milvus, podemos aumentar a taxa de transferência do pipeline para processar e indexar eficientemente grandes volumes de dados.</p>
+<p>Este tutorial demonstra como usar <a href="https://www.llamaindex.ai/">LlamaIndex</a> com <a href="https://milvus.io/">Milvus</a> para construir um pipeline assíncrono de processamento de documentos para RAG. O LlamaIndex fornece uma maneira de processar documentos e armazená-los em bancos de dados vetoriais como o Milvus. Ao aproveitar a API assíncrona do LlamaIndex e a biblioteca cliente Python do Milvus, podemos aumentar a taxa de transferência do pipeline para processar e indexar eficientemente grandes volumes de dados.</p>
 <p>Neste tutorial, vamos primeiro introduzir o uso de métodos assíncronos para construir um RAG com LlamaIndex e Milvus a partir de um alto nível e, em seguida, introduzir o uso de métodos de baixo nível e a comparação de desempenho entre síncrono e assíncrono.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Antes de começar<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,7 +48,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os trechos de código nesta página requerem as dependências pymilvus e llamaindex. Você pode instalá-las usando os seguintes comandos:</p>
+    </button></h2><p>Os trechos de código nesta página requerem as dependências do pymilvus e do llamaindex. Você pode instalá-las usando os seguintes comandos:</p>
 <pre><code translate="no" class="language-bash">$ pip install -U pymilvus llama-index-vector-stores-milvus llama-index nest-asyncio
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -174,7 +174,7 @@ index = VectorStoreIndex.from_documents(
 
 llm = OpenAI(model=<span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Ao criar o mecanismo de consulta, você também pode definir o parâmetro <code translate="no">use_async</code> como <code translate="no">True</code> para habilitar a pesquisa assíncrona.</p>
+<p>Ao criar o mecanismo de consulta, você também pode definir o parâmetro <code translate="no">use_async</code> para <code translate="no">True</code> para habilitar a pesquisa assíncrona.</p>
 <pre><code translate="no" class="language-python">query_engine = index.as_query_engine(use_async=<span class="hljs-literal">True</span>, llm=llm)
 response = <span class="hljs-keyword">await</span> query_engine.aquery(<span class="hljs-string">&quot;What did the author learn?&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -315,7 +315,7 @@ inserted_ids = vector_store.add(node_list)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">2025-01-24 20:08:57,982 [DEBUG][_create_connection]: Created new connection using: 351dc7ea4fb14d4386cfab02621ab7d1 (async_milvus_client.py:600)
 </code></pre>
-<p>Defina uma função de pesquisa assíncrona. Utilizamos a função <code translate="no">aquery()</code> na instância do armazenamento vetorial Milvus.</p>
+<p>Defina uma função de pesquisa assíncrona. Utilizamos a função <code translate="no">aquery()</code> na instância de armazenamento de vectores do Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">async_search</span>(<span class="hljs-params">num_queries</span>):
     start_time = time.time()
     tasks = []

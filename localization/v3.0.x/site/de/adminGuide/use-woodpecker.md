@@ -118,7 +118,7 @@ beta: Milvus 2.6.x
 <li><code translate="no">woodpecker.meta</code>
 <ul>
 <li><strong>Typ</strong>: Derzeit wird nur <code translate="no">etcd</code> unterstützt. Verwenden Sie denselben etcd wie Milvus, um leichtgewichtige Metadaten zu speichern.</li>
-<li><strong>Präfix</strong>: Der Schlüsselpräfix für Metadaten. Standard: <code translate="no">woodpecker</code>.</li>
+<li><strong>Präfix</strong>: Das Schlüsselpräfix für Metadaten. Standard: <code translate="no">woodpecker</code>.</li>
 </ul></li>
 <li><code translate="no">woodpecker.client</code>
 <ul>
@@ -411,7 +411,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Woodpecker ist eine Cloud-native WAL, die für Objektspeicher mit Kompromissen zwischen Durchsatz, Kosten und Latenzzeit entwickelt wurde. Der derzeit unterstützte leichtgewichtige eingebettete Modus priorisiert die Optimierung von Kosten und Durchsatz, da die meisten Szenarien nur das Schreiben von Daten innerhalb einer bestimmten Zeit erfordern und keine niedrige Latenz für einzelne Schreibanfragen verlangen. Daher verwendet Woodpecker gebündelte Schreibvorgänge mit Standardintervallen von 10 ms für lokale Dateisystem-Speicher-Backends und 200 ms für MinIO-ähnliche Speicher-Backends. Bei langsamen Schreibvorgängen ist die maximale Latenzzeit gleich der Intervallzeit plus der Flush-Zeit.</p>
+    </button></h2><p>Woodpecker ist eine Cloud-native WAL, die für die Objektspeicherung mit Kompromissen zwischen Durchsatz, Kosten und Latenzzeit entwickelt wurde. Der derzeit unterstützte leichtgewichtige eingebettete Modus priorisiert die Optimierung von Kosten und Durchsatz, da die meisten Szenarien nur das Schreiben von Daten innerhalb einer bestimmten Zeit erfordern und keine niedrige Latenz für einzelne Schreibanfragen verlangen. Daher verwendet Woodpecker gebündelte Schreibvorgänge mit Standardintervallen von 10 ms für lokale Dateisystem-Speicher-Backends und 200 ms für MinIO-ähnliche Speicher-Backends. Bei langsamen Schreibvorgängen ist die maximale Latenzzeit gleich der Intervallzeit plus der Flush-Zeit.</p>
 <p>Beachten Sie, dass das Einfügen von Stapeln nicht nur durch Zeitintervalle, sondern auch durch die Stapelgröße ausgelöst wird, die standardmäßig bei 2 MB liegt.</p>
 <p>Einzelheiten zur Architektur, zu den Bereitstellungsmodi (MemoryBuffer / QuorumBuffer) und zur Leistung finden Sie unter <a href="/docs/de/woodpecker_architecture.md">Woodpecker-Architektur</a>.</p>
 <p>Weitere Details zu den Parametern finden Sie im <a href="https://github.com/zilliztech/woodpecker">Woodpecker-GitHub-Repository</a>.</p>

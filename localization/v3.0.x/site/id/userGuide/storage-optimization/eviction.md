@@ -28,7 +28,7 @@ beta: Milvus 2.6.4+
 <div class="alert note">
 <p>Penggusuran harus diaktifkan secara eksplisit. Tanpa konfigurasi, data yang ditembolok akan terus terakumulasi hingga sumber daya habis.</p>
 </div>
-<h2 id="Eviction-types" class="common-anchor-header">Jenis penggusuran<button data-href="#Eviction-types" class="anchor-icon" translate="no">
+<h2 id="Eviction-types" class="common-anchor-header">Jenis-jenis penggusuran<button data-href="#Eviction-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

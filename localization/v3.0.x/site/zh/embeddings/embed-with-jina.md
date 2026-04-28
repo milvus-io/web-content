@@ -47,7 +47,7 @@ jina_ef = JinaEmbeddingFunction(
 <li><code translate="no">&quot;retrieval.passage&quot;</code>:用于在索引时对检索任务中的大型文档进行编码。</li>
 <li><code translate="no">&quot;retrieval.query&quot;</code>:用于在检索任务中对用户查询或问题进行编码。</li>
 <li><code translate="no">&quot;classification&quot;</code>:用于对文本分类任务中的文本进行编码。</li>
-<li><code translate="no">&quot;text-matching&quot;</code>:用于对相似性匹配的文本进行编码，如测量两个句子之间的相似性。</li>
+<li><code translate="no">&quot;text-matching&quot;</code>:用于对相似性匹配的文本进行编码，例如测量两个句子之间的相似性。</li>
 <li><code translate="no">&quot;clustering&quot;</code>:用于聚类或 Rerankers 任务。</li>
 </ul></li>
 <li><p><code translate="no">dimensions</code> <em>维数</em></p>

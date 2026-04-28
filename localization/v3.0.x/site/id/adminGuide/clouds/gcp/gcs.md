@@ -62,7 +62,7 @@ summary: Pelajari cara mengonfigurasi gcs dengan Workload Identity.
 <pre><code translate="no" class="language-bash">kubectl create serviceaccount milvus-gcs-access-sa
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Buat akun layanan IAM untuk aplikasi Anda atau gunakan akun layanan IAM yang sudah ada. Anda dapat menggunakan akun layanan IAM apa pun di proyek mana pun di organisasi Anda.</li>
+<li>Buat akun layanan IAM untuk aplikasi Anda atau gunakan akun layanan IAM yang sudah ada. Anda dapat menggunakan akun layanan IAM mana pun di proyek mana pun di organisasi Anda.</li>
 </ul>
 <pre><code translate="no" class="language-bash">gcloud iam service-accounts create milvus-gcs-access-sa \
     --project=milvus-testing-nonprod

@@ -146,7 +146,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
 <p>إذا كنت ترى كبسولات منسق منفصلة (<code translate="no">datacoord</code> ، <code translate="no">querycoord</code> ، <code translate="no">indexcoord</code>) بدلاً من ذلك، فأنت بحاجة إلى تمكين <code translate="no">mixCoord</code> في الخطوة التالية.</p>
-<h4 id="22-Upgrade-to-v2516-with-mixCoord" class="common-anchor-header">2.2 الترقية إلى الإصدار 2.5.16 مع mixCoord</h4><div class="alert-note">
+<h4 id="22-Upgrade-to-v2516-with-mixCoord" class="common-anchor-header">2.2 الترقية إلى الإصدار 2.5.16 باستخدام mixCoord</h4><div class="alert-note">
 <p>تخطي هذه الخطوة إذا كانت مجموعتك تعمل بالفعل الإصدار 2.5.16 أو أعلى مع تمكين <code translate="no">mixCoord</code>.</p>
 </div>
 <p>قم بإنشاء ملف تكوين <code translate="no">milvusupgrade.yaml</code> لتمكين <code translate="no">mixCoord</code> والترقية إلى الإصدار 2.5.16:</p>

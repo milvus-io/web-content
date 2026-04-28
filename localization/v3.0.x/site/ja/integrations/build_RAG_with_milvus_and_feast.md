@@ -26,8 +26,8 @@ title: MilvusとFeastを使ってRAGを構築する
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_feast.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>このチュートリアルでは、<a href="https://github.com/feast-dev/feast">Feastと</a> <a href="https://milvus.io/">Milvusを使って</a>RAG（Retrieval-Augmented Generation）パイプラインを構築します。Feastは、機械学習のための特徴管理を合理化するオープンソースの特徴ストアであり、学習とリアルタイムの推論の両方で構造化データの効率的な保存と検索を可能にします。Milvusは、高速な類似検索のために設計された高性能ベクトルデータベースであり、RAGワークフローにおける関連文書の検索に最適である。</p>
-<p>基本的には、Milvusをオンラインベクターデータベースとして使用するRAGアプリケーション（Retrieval Augmented Generation）をパワーアップするために、LLM（大規模言語モデル）のコンテキストにドキュメントと構造化データ（すなわち特徴）を注入するためにFeastを使用します。</p>
+<p>このチュートリアルでは、<a href="https://github.com/feast-dev/feast">Feastと</a> <a href="https://milvus.io/">Milvusを使って</a>RAG（Retrieval-Augmented Generation）パイプラインを構築します。Feastは、機械学習のための特徴管理を合理化するオープンソースの特徴ストアであり、学習とリアルタイムの推論の両方で構造化データの効率的な保存と検索を可能にします。Milvusは、高速な類似性検索のために設計された高性能ベクトルデータベースであり、RAGワークフローにおける関連文書の検索に最適である。</p>
+<p>基本的には、Milvusをオンラインベクターデータベースとして使用するRAGアプリケーション（Retrieval Augmented Generation）をパワーアップさせるために、LLM（大規模言語モデル）のコンテキストにドキュメントと構造化データ（すなわち特徴）を注入するためにFeastを使用します。</p>
 <h1 id="Why-Feast" class="common-anchor-header">なぜFeastなのか？<button data-href="#Why-Feast" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -79,7 +79,22 @@ title: MilvusとFeastを使ってRAGを構築する
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies" class="common-anchor-header">依存関係</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&#x27;feast[milvus]&#x27;</span> openai -U -q</span>
+    </button></h2><h3 id="Dependencies" class="common-anchor-header">依存関係<button data-href="#Dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&#x27;feast[milvus]&#x27;</span> openai -U -q</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
@@ -118,7 +133,22 @@ llm_client = OpenAI(
 │── feature_store.yaml     <span class="hljs-comment"># Configures Milvus and feature store settings</span>
 │── test_workflow.py       <span class="hljs-comment"># Example workflow for Feast operations</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Key-Configuration-Files" class="common-anchor-header">キー設定ファイル</h3><h4 id="1-featurestoreyaml" class="common-anchor-header">1. feature_store.yaml</h4><p>このファイルは、フィーチャーストアのインフラストラクチャを設定します：</p>
+<h3 id="Key-Configuration-Files" class="common-anchor-header">キー設定ファイル<button data-href="#Key-Configuration-Files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="1-featurestoreyaml" class="common-anchor-header">1. feature_store.yaml</h4><p>このファイルは、フィーチャーストアのインフラストラクチャを設定します：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">project:</span> <span class="hljs-string">rag</span>
 <span class="hljs-attr">provider:</span> <span class="hljs-string">local</span>
 <span class="hljs-attr">registry:</span> <span class="hljs-string">data/registry.db</span>
@@ -137,7 +167,7 @@ llm_client = OpenAI(
 <p>このコンフィギュレーションは、以下を確立します：</p>
 <ul>
 <li>Milvusをオンラインストアとして確立し、高速なベクトル検索を実現します。</li>
-<li>履歴データ処理用のファイルベースのオフラインストレージ</li>
+<li>過去のデータ処理のためのファイルベースのオフラインストレージ</li>
 <li>COSINE類似度によるベクトル検索機能</li>
 </ul>
 <h4 id="2-examplerepopy" class="common-anchor-header">2. example_repo.py</h4><p>都市データの特徴定義が含まれています：</p>
@@ -362,7 +392,7 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
       <td>0</td>
       <td>1736447819280589</td>
       <td>0</td>
-      <td>ニューヨークは、しばしばニューヨーク・シティまたは単に...</td>
+      <td>ニューヨーク（New York）は、しばしばニューヨーク・シティ（New York City）または単に...</td>
       <td>ニューヨーク, ニューヨーク</td>
       <td>-0.073177</td>
       <td>ニューヨークは、しばしばニューヨーク・シティまたは単に...</td>
@@ -373,7 +403,7 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
       <td>0</td>
       <td>1736447819280589</td>
       <td>0</td>
-      <td>ニューヨーク（New York）は、しばしばニューヨーク・シティ（New York City）または単に...</td>
+      <td>ニューヨークは、しばしばニューヨーク・シティまたは単に...</td>
       <td>ニューヨーク, ニューヨーク</td>
       <td>0.052114</td>
       <td>ニューヨーク（しばしばニューヨーク・シティまたは単に...</td>
@@ -418,7 +448,22 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="common-anchor-header">1.PyTorchと文変換器を使ったクエリの埋め込み</h3><p>推論中（例えば、ユーザがチャットメッセージを送信している間）、入力テキストを埋め込む必要がある。これは入力データの特徴変換と考えることができます。この例では、Hugging Faceの小さなSentence Transformerを使ってこれを行います。</p>
+    </button></h2><h3 id="1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="common-anchor-header">1.PyTorchとSent Transformersを使ってクエリを埋め込む<button data-href="#1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>推論の間（例えば、ユーザがチャットメッセージを送信する間）、入力テキストを埋め込む必要がある。これは入力データの特徴変換と考えることができます。この例では、Hugging Faceの小さなSentence Transformerを使ってこれを行います。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> feast <span class="hljs-keyword">import</span> FeatureStore
@@ -454,7 +499,22 @@ MODEL = <span class="hljs-string">&quot;sentence-transformers/all-MiniLM-L6-v2&q
     sentence_embeddings = F.normalize(sentence_embeddings, p=<span class="hljs-number">2</span>, dim=<span class="hljs-number">1</span>)
     <span class="hljs-keyword">return</span> sentence_embeddings
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2.オンライン推論のためのリアルタイムのベクトルとデータのフェッチ</h3><p>クエリがエンベッディングに変換されると、次のステップは、ベクトルストアから関連ドキュメントを取得することである。推論時には、ベクトル類似度検索を活用し、<code translate="no">retrieve_online_documents_v2()</code> を使用して、オンライン特徴ストアに格納されている最も関連性の高い文書埋め込みを検索します。そして、これらの特徴ベクトルをLLMのコンテキストに送り込むことができる。</p>
+<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2.オンライン推論のためのリアルタイムのベクトルとデータのフェッチ<button data-href="#2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>クエリがエンベッディングに変換されると、次のステップは、ベクトルストアから関連ドキュメントを取得することである。推論時には、ベクトル類似度検索を活用し、<code translate="no">retrieve_online_documents_v2()</code> を使用して、オンライン特徴ストアに格納されている最も関連性の高い文書埋め込みを検索します。そして、これらの特徴ベクトルをLLMのコンテキストに送り込むことができる。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;Which city has the largest population in New York?&quot;</span>
 
 tokenizer = AutoTokenizer.from_pretrained(TOKENIZER)
@@ -518,7 +578,7 @@ display(context_data)
       <td>6</td>
       <td>ニューヨーク州ニューヨーク</td>
       <td>ニューヨーク（New York）は、ニューヨーク州の州都である。</td>
-      <td>ニューヨーク（New York）は、ニューヨーク市（New York City）または単に...</td>
+      <td>ニューヨークは、しばしばニューヨーク・シティまたは単に...</td>
       <td>0.739733</td>
     </tr>
     <tr>
@@ -533,7 +593,22 @@ display(context_data)
   </tbody>
 </table>
 </div>
-<h3 id="3-Formatting-Retrieved-Documents-for-RAG-Context" class="common-anchor-header">3.RAGコンテキストのために取得した文書をフォーマットする</h3><p>関連文書を検索した後、データを、下流のアプリケーションで効率的に使用できる構造化されたコンテキストにフォーマットする必要がある。このステップによって、抽出された情報がきれいに整理され、RAGパイプラインに統合する準備が整う。</p>
+<h3 id="3-Formatting-Retrieved-Documents-for-RAG-Context" class="common-anchor-header">3.RAGコンテキストのために取得した文書をフォーマットする<button data-href="#3-Formatting-Retrieved-Documents-for-RAG-Context" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>関連文書を検索した後、データを、下流のアプリケーションで効率的に使用できる構造化されたコンテキストにフォーマットする必要がある。このステップによって、抽出された情報がきれいに整理され、RAGパイプラインに統合する準備が整う。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">format_documents</span>(<span class="hljs-params">context_df</span>):
     output_context = <span class="hljs-string">&quot;&quot;</span>
     unique_documents = context_df.drop_duplicates().apply(
@@ -560,7 +635,22 @@ New York City traces its origins to Fort Amsterdam and a trading post founded on
 Anchored by Wall Street in the Financial District of Lower Manhattan, New York City has been called both the world's premier financial and fintech center and the most economically powerful city in the world. As of 2022, the New York metropolitan area is the largest metropolitan economy in the world with a gross metropolitan product of over US$2.16 trillion. If the New York metropolitan area were its own country, it would have the tenth-largest economy in the world. The city is home to the world's two largest stock exchanges by market capitalization of their listed companies: the New York Stock Exchange and Nasdaq. New York City is an established safe haven for global investors. As of 2023, New York City is the most expensive city in the world for expatriates to live. New York City is home to the highest number of billionaires, individuals of ultra-high net worth (greater than US$30 million), and millionaires of any city in the world.}
 ****END DOCUMENT 0****
 </code></pre>
-<h3 id="4-Generating-Responses-Using-Retrieved-Context" class="common-anchor-header">4.取得したコンテキストを使用してレスポンスを生成する</h3><p>検索されたドキュメントをフォーマットしたので、それらを応答生成のための構造化されたプロンプトに統合することができる。このステップは、アシスタントが検索された情報のみに依存し、幻覚のような応答を避けることを保証する。</p>
+<h3 id="4-Generating-Responses-Using-Retrieved-Context" class="common-anchor-header">4.取得したコンテキストを使用してレスポンスを生成する<button data-href="#4-Generating-Responses-Using-Retrieved-Context" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>検索されたドキュメントをフォーマットしたので、それらを応答生成のための構造化されたプロンプトに統合することができる。このステップは、アシスタントが検索された情報のみに依存し、幻覚のような応答を避けることを保証する。</p>
 <pre><code translate="no" class="language-python">FULL_PROMPT = <span class="hljs-string">f&quot;&quot;&quot;
 You are an assistant for answering questions about states. You will be provided documentation from Wikipedia. Provide a conversational answer.
 If you don&#x27;t know the answer, just say &quot;I do not know.&quot; Don&#x27;t make up an answer.

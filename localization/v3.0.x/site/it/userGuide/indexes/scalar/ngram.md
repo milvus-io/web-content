@@ -28,8 +28,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>L'indice <code translate="no">NGRAM</code> di Milvus è costruito per accelerare le interrogazioni <code translate="no">LIKE</code> sui campi <code translate="no">VARCHAR</code> o su percorsi JSON specifici all'interno dei campi <code translate="no">JSON</code>. Prima di costruire l'indice, Milvus divide il testo in brevi sottostringhe sovrapposte di lunghezza fissa <em>n</em>, note come <em>n-grammi</em>. Ad esempio, con <em>n = 3</em>, la parola <em>"Milvus"</em> viene suddivisa in 3 grafemi: <em>"Mil",</em> <em>"ilv",</em> <em>"lvu"</em> e <em>"vus".</em> Questi n-grammi vengono poi memorizzati in un indice invertito che mappa ogni grammo con gli ID dei documenti in cui compare. Al momento dell'interrogazione, questo indice consente a Milvus di restringere rapidamente la ricerca a un piccolo insieme di candidati, rendendo molto più veloce l'esecuzione della query.</p>
-<p>Si può usare quando si ha bisogno di un filtro rapido con prefisso, suffisso, infisso o carattere jolly, come ad esempio:</p>
+    </button></h1><p>L'indice <code translate="no">NGRAM</code> di Milvus è costruito per accelerare le interrogazioni <code translate="no">LIKE</code> sui campi <code translate="no">VARCHAR</code> o su percorsi JSON specifici all'interno dei campi <code translate="no">JSON</code>. Prima di costruire l'indice, Milvus divide il testo in brevi sottostringhe sovrapposte di lunghezza fissa <em>n</em>, note come <em>n-grammi</em>. Ad esempio, con <em>n = 3</em>, la parola <em>"Milvus"</em> viene suddivisa in 3 grafemi: <em>"Mil",</em> <em>"ilv",</em> <em>"lvu"</em> e <em>"vus".</em> Questi n-grammi vengono poi memorizzati in un indice invertito che mappa ogni grammo con gli ID dei documenti in cui compare. Al momento dell'interrogazione, questo indice permette a Milvus di restringere rapidamente la ricerca a un piccolo insieme di candidati, rendendo molto più veloce l'esecuzione della query.</p>
+<p>Si usa quando si ha bisogno di un filtro rapido con prefisso, suffisso, infisso o carattere jolly, come ad esempio:</p>
 <ul>
 <li><p><code translate="no">name LIKE &quot;data%&quot;</code></p></li>
 <li><p><code translate="no">title LIKE &quot;%vector%&quot;</code></p></li>
@@ -148,7 +148,7 @@ A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists
 <ul>
 <li><p>Se <code translate="no">L &lt; min_gram</code>, l'indice non può essere usato e la query torna a una scansione completa.</p></li>
 <li><p>Se <code translate="no">min_gram ≤ L ≤ max_gram</code>, l'intero termine della query viene trattato come un singolo n-gramma e non sono necessarie ulteriori scomposizioni.</p></li>
-<li><p>Se <code translate="no">L &gt; max_gram</code>, il termine della query viene scomposto in n-grammi sovrapposti utilizzando una finestra di dimensioni pari a <code translate="no">max_gram</code>.</p></li>
+<li><p>Se <code translate="no">L &gt; max_gram</code>, il termine della query viene scomposto in grammi sovrapposti utilizzando una finestra di dimensioni pari a <code translate="no">max_gram</code>.</p></li>
 </ul>
 <p>Ad esempio, se <code translate="no">max_gram</code> è impostato su <code translate="no">3</code> e il termine di query è <code translate="no">&quot;database&quot;</code>, che ha una lunghezza di <strong>8</strong>, viene scomposto in sottostringhe di 3 grami come <code translate="no">&quot;dat&quot;</code>, <code translate="no">&quot;ata&quot;</code>, <code translate="no">&quot;tab&quot;</code>, e così via.</p></li>
 <li><p><strong>Ricerca di ogni grammo e intersezione</strong>: Milvus cerca ogni grammo della query nell'indice invertito e poi interseca gli elenchi di ID documento risultanti per trovare un piccolo insieme di documenti candidati. Questi candidati contengono tutti i grammi della query.</p></li>
@@ -279,7 +279,7 @@ client.create_index(
       </svg>
     </button></h2><p>Per applicare l'indice NGRAM:</p>
 <ul>
-<li><p>La query deve avere come obiettivo un campo <code translate="no">VARCHAR</code> (o un percorso JSON) che abbia un indice <code translate="no">NGRAM</code>.</p></li>
+<li><p>La query deve puntare a un campo <code translate="no">VARCHAR</code> (o a un percorso JSON) che abbia un indice <code translate="no">NGRAM</code>.</p></li>
 <li><p>La parte letterale del pattern <code translate="no">LIKE</code> deve essere lunga almeno <code translate="no">min_gram</code> caratteri<em>(ad esempio, se il termine di query più breve previsto è di 2 caratteri, impostare min_gram=2 durante la creazione dell'indice).</em></p></li>
 </ul>
 <p>Tipi di query supportati:</p>
@@ -346,7 +346,7 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p><strong>Tipi di campo</strong>: Supportato sui campi <code translate="no">VARCHAR</code> e <code translate="no">JSON</code>. Per JSON, fornire sia <code translate="no">params.json_path</code> che <code translate="no">params.json_cast_type=&quot;varchar&quot;</code>.</p></li>
-<li><p><strong>Unicode</strong>: La decomposizione NGRAM è basata sui caratteri e indipendente dalla lingua e include spazi bianchi e punteggiatura.</p></li>
+<li><p><strong>Unicode</strong>: La decomposizione NGRAM è basata sui caratteri, è indipendente dalla lingua e include gli spazi bianchi e la punteggiatura.</p></li>
 <li><p><strong>Trade-off spazio-tempo</strong>: intervalli di grammi più ampi <code translate="no">[min_gram, max_gram]</code> producono più grammi e indici più grandi. Se la memoria è limitata, considerare la modalità <code translate="no">mmap</code> per elenchi di posting di grandi dimensioni. Per ulteriori informazioni, fare riferimento a <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">Utilizzare mmap</a>.</p></li>
 <li><p><strong>Immutabilità</strong>: <code translate="no">min_gram</code> e <code translate="no">max_gram</code> non possono essere modificati sul posto; per modificarli, ricostruire l'indice.</p></li>
 </ul>

@@ -29,7 +29,7 @@ title: Tingkatkan Pulsar di Milvus dari V2 ke V3
 <li><p>Proses peningkatan memerlukan pemadaman layanan singkat (biasanya membutuhkan waktu sekitar beberapa menit hingga lebih dari sepuluh menit, tergantung pada jumlah data).</p></li>
 <li><p>Sebelum operasi, Anda harus menghentikan semua klien yang sedang berjalan untuk menulis data ke Milvus. Jika tidak, data yang ditulis dapat hilang.</p></li>
 <li><p>Artikel ini mengasumsikan bahwa Milvus terinstal pada namespace <code translate="no">default</code> dan bernama <code translate="no">my-release</code>. Silakan ubah parameter ke namespace dan nama rilis Anda sendiri ketika menjalankan perintah-perintah yang disalin dari halaman ini.</p></li>
-<li><p>Pastikan lingkungan kerja Anda memiliki izin di bawah ruang nama yang disebutkan di atas dalam kluster Kubernetes dan perintah berikut ini terinstal.</p>
+<li><p>Pastikan bahwa lingkungan kerja Anda memiliki izin di bawah ruang nama yang disebutkan di atas dalam kluster Kubernetes dan perintah berikut ini terinstal.</p>
 <p>a. <code translate="no">kubectl</code> &gt;= 1.20</p>
 <p>b. <code translate="no">helm</code> &gt;= 3.14.0</p>
 <p>c. <code translate="no">cat</code>, <code translate="no">grep</code>, <code translate="no">awk</code> untuk operasi manipulasi string</p>
@@ -73,23 +73,38 @@ title: Tingkatkan Pulsar di Milvus dari V2 ke V3
         ></path>
       </svg>
     </button></h2><p>Bagian ini memberikan prosedur terperinci untuk meningkatkan Pulsar dari V2 ke V3 di Milvus.</p>
-<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">Menyimpan data yang tidak digunakan di Pulsar</h3><p>Pada langkah ini, Anda perlu memastikan bahwa data yang ada di Pulsar telah dipertahankan ke layanan penyimpanan objek. Ada dua pendekatan yang tersedia, dan Anda dapat memilih salah satu yang sesuai dengan kebutuhan Anda.</p>
+<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">Menyimpan data yang tidak digunakan di Pulsar<button data-href="#Persist-data-not-consumed-in-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pada langkah ini, Anda perlu memastikan bahwa data yang ada di Pulsar telah dipertahankan ke layanan penyimpanan objek. Ada dua pendekatan yang tersedia, dan Anda dapat memilih salah satu yang sesuai dengan kebutuhan Anda.</p>
 <h4 id="Approach-1-Using-Attu" class="common-anchor-header">Pendekatan 1: Menggunakan Attu</h4><p>Jika Anda hanya memiliki sejumlah kecil koleksi dalam penerapan Milvus yang sedang berjalan dengan segmen yang tidak terlalu banyak, Anda dapat menggunakan Attu untuk menyimpan data ke layanan penyimpanan objek.</p>
 <ol>
 <li><p>Pilih setiap koleksi di semua basis data Anda, masuk ke panel <code translate="no">Segments</code>, Klik tombol <code translate="no">Flush</code> </p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
    </span> <span class="img-wrapper"> <span>Panel segmen dari sebuah koleksi</span> </span></p></li>
 <li><p>Kemudian pada popup, Klik <code translate="no">Flush</code> lagi.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
    </span> <span class="img-wrapper"> <span>Perintah flush data di Attu</span> </span></p></li>
 <li><p>Kemudian tunggu hingga semua status Persistent Segment semua koleksi menjadi <code translate="no">Flushed</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/view-data-peristent-process.png" alt="View data flush status in Attu" class="doc-image" id="view-data-flush-status-in-attu" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/view-data-peristent-process.png" alt="View data flush status in Attu" class="doc-image" id="view-data-flush-status-in-attu" />
    </span> <span class="img-wrapper"> <span>Melihat status flush data di Attu</span> </span></p></li>
 </ol>
 <h4 id="Approach-2-Using-management-API" class="common-anchor-header">Pendekatan 2: Menggunakan API manajemen</h4><ol>
@@ -140,7 +155,22 @@ title: Tingkatkan Pulsar di Milvus dari V2 ke V3
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Hentikan Milvus dan hapus Pulsar V2</h3><p>Pada langkah ini, Anda perlu menghentikan pod Milvus dan menghapus penyebaran Pulsar V2. Ada dua bagian terpisah yang tersedia:</p>
+<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Hentikan Milvus dan hapus Pulsar V2<button data-href="#Stop-Milvus-and-delete-Pulsar-V2" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pada langkah ini, Anda perlu menghentikan pod Milvus dan menghapus penyebaran Pulsar V2. Ada dua bagian terpisah yang tersedia:</p>
 <ul>
 <li><p>Untuk pengguna Milvus Helm</p>
 <p>Jika Anda telah menginstal Milvus menggunakan bagan Milvus Helm, buka <a href="#Delete-Pulsar-V2-using-Helm">Hapus Pulsar v2 menggunakan Helm</a>.</p></li>
@@ -244,7 +274,7 @@ kubectl -n default get pvc -lapp=pulsar,release=my-release -o custom-columns=VOL
   <span class="hljs-string">components:​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Buat berkas <code translate="no">patch.yaml</code> dengan konten berikut ini.</p>
+<li><p>Buat berkas <code translate="no">patch.yaml</code> dengan konten berikut.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># a patch to retain etcd &amp; storage data and delete pulsar data while delete milvus​</span>
 <span class="hljs-string">spec:​</span>
   <span class="hljs-string">dependencies:​</span>
@@ -293,7 +323,22 @@ milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">Memulai Pulsar V3 dan Milvus</h3><p>Pada langkah ini, Anda harus memulai Pulsar V3 dan Milvus. Ada dua bagian terpisah yang tersedia:</p>
+<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">Memulai Pulsar V3 dan Milvus<button data-href="#Start-Pulsar-V3-and-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pada langkah ini, Anda harus memulai Pulsar V3 dan Milvus. Ada dua bagian terpisah yang tersedia:</p>
 <ul>
 <li><p>Untuk Pengguna Helm</p>
 <p>Jika Anda telah menginstal Milvus menggunakan bagan Helm Milvus, masuk ke <a href="#For-Helm-User">Untuk Pengguna Helm</a>.</p></li>

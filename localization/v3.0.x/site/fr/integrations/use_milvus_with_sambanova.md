@@ -28,7 +28,7 @@ title: Utiliser Milvus avec SambaNova
 <div class="alert note">
 <p>Ce tutoriel se réfère principalement au guide officiel de <a href="https://github.com/sambanova/ai-starter-kit/tree/main">SambaNova AI Starter Kits</a>. Si vous trouvez que ce tutoriel contient des parties obsolètes, vous pouvez suivre en priorité le guide officiel et créer un problème avec nous.</p>
 </div>
-<h2 id="Prerequisites" class="common-anchor-header">Pré-requis<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+<h2 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -127,7 +127,7 @@ pip install -r requirements.txt
 <p>Ensuite, l'interface utilisateur s'affiche dans votre navigateur :<code translate="no">http://localhost:8501/</code></p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/sambanava_ui.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sambanava_ui.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

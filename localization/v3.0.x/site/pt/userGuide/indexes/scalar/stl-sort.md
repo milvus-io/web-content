@@ -159,7 +159,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Tipos de campo:</strong> Funciona com campos numéricos e <code translate="no">TIMESTAMPTZ</code>. Para obter mais informações sobre os tipos de dados, consulte <a href="/docs/pt/number.md">Boolean &amp; Number</a> e <a href="/docs/pt/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p></li>
+<li><p><strong>Tipos de campo:</strong> Funciona com campos numéricos e <code translate="no">TIMESTAMPTZ</code>. Para obter mais informações sobre tipos de dados, consulte <a href="/docs/pt/number.md">Boolean &amp; Number</a> e <a href="/docs/pt/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p></li>
 <li><p><strong>Parâmetros:</strong> Não são necessários parâmetros de índice.</p></li>
 <li><p><strong>Mmap não suportado:</strong> O modo de memória mapeada não está disponível para <code translate="no">STL_SORT</code>.</p></li>
 </ul>

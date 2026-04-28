@@ -2,12 +2,9 @@
 id: minhash-lsh.md
 title: MINHASH_LSH
 summary: >-
-  La deduplicación eficiente y la búsqueda de similitudes son fundamentales para
-  los conjuntos de datos de aprendizaje automático a gran escala, especialmente
-  para tareas como la limpieza de corpus de entrenamiento para grandes modelos
-  lingüísticos (LLM). Cuando se trata de millones o miles de millones de
-  documentos, la comparación exacta tradicional resulta demasiado lenta y
-  costosa.
+  Utilice los índices MinHash LSH para acelerar la detección de casi duplicados
+  y la búsqueda de similitudes de Jaccard en grandes conjuntos de datos de
+  texto.
 ---
 <h1 id="MINHASHLSH" class="common-anchor-header">MINHASH_LSH<button data-href="#MINHASHLSH" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,7 +79,7 @@ summary: >-
       </svg>
     </button></h3><p><a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a> es una técnica probabilística que ofrece una forma eficaz de estimar la similitud de Jaccard. Funciona transformando cada conjunto en un <strong>vector de firmas</strong> compacto, preservando suficiente información para aproximar la similitud de conjuntos de forma eficiente.</p>
 <p><strong>La idea central</strong>:</p>
-<p>Cuanto más parecidos sean los dos conjuntos, más probable será que sus firmas MinHash coincidan en las mismas posiciones. Esta propiedad permite a MinHash aproximar la similitud de Jaccard entre conjuntos.</p>
+<p>Cuanto más parecidos sean los dos conjuntos, más probable es que sus firmas MinHash coincidan en las mismas posiciones. Esta propiedad permite a MinHash aproximar la similitud de Jaccard entre conjuntos.</p>
 <p>Esta propiedad permite a MinHash <strong>aproximar la similitud de Jaccard</strong> entre conjuntos sin necesidad de comparar directamente los conjuntos completos.</p>
 <p>El proceso MinHash implica:</p>
 <ol>
@@ -93,7 +90,7 @@ summary: >-
 <p>A continuación se ilustra todo el proceso:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
    </span> <span class="img-wrapper"> <span>Flujo de trabajo Minhash</span> </span></p>
 <div class="alert note">
 <p>El número de funciones hash utilizadas determina la dimensionalidad de la firma MinHash. Unas dimensiones mayores proporcionan una mayor precisión de aproximación, a costa de un aumento del almacenamiento y del cálculo.</p>
@@ -138,17 +135,17 @@ summary: >-
 <p>Considere tres documentos con firmas MinHash de 128 dimensiones:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
    </span> <span class="img-wrapper"> <span>Flujo de trabajo de Lsh 1</span> </span></p>
 <p>En primer lugar, LSH divide la firma de 128 dimensiones en 32 bandas de 4 valores consecutivos cada una:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
    </span> <span class="img-wrapper"> <span>Flujo de trabajo Lsh 2</span> </span></p>
-<p>A continuación, cada banda se divide en distintos buckets mediante una función hash. Los pares de documentos que comparten buckets se seleccionan como candidatos de similitud. En el ejemplo siguiente, el Documento A y el Documento B se seleccionan como candidatos de similitud porque sus resultados hash coinciden en <strong>la Banda 0</strong>:</p>
+<p>A continuación, cada banda se divide en distintos buckets mediante una función hash. Los pares de documentos que comparten buckets se seleccionan como candidatos de similitud. En el ejemplo siguiente, el Documento A y el Documento B se seleccionan como candidatos de similitud, ya que sus resultados hash coinciden en <strong>la Banda 0</strong>:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
    </span> <span class="img-wrapper"> <span>Flujo de trabajo Lsh 3</span> </span></p>
 <div class="alert note">
 <p>El número de bandas se controla mediante el parámetro <code translate="no">mh_lsh_band</code>. Para obtener más información, consulte <a href="/docs/es/minhash-lsh.md#Index-building-params">Parámetros de creación de índices</a>.</p>
@@ -194,9 +191,12 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>El proceso de deduplicación impulsado por MinHash LSH permite a Milvus identificar y filtrar eficazmente los registros de texto o estructurados casi duplicados antes de insertarlos en la colección.</p>
-<p><img translate="no" src="/docs/v2.6.x/assets/deduplication-workflow.png" alt="Deduplication Workflow" width="600"></p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/it9wwbcfwhft0rbwosacgltzneb.png" alt="It9wwbcfwhft0rbwosacgltzneb" class="doc-image" id="it9wwbcfwhft0rbwosacgltzneb" />
+   </span> <span class="img-wrapper"> <span>It9wwbcfwhft0rbwosacgltzneb</span> </span></p>
 <ol>
-<li><p><strong>Trocear y preprocesar</strong>: Divide los datos de texto entrantes o los datos estructurados (por ejemplo, registros, campos) en trozos; normaliza el texto (minúsculas, eliminación de puntuación), y elimina las palabras clave según sea necesario.</p></li>
+<li><p><strong>Trocear y preprocesar</strong>: Divida los datos de texto entrantes o los datos estructurados (p. ej., registros, campos) en trozos; normalice el texto (minúsculas, eliminación de puntuación) y elimine las palabras clave según sea necesario.</p></li>
 <li><p><strong>Construcción de características</strong>: Construir el conjunto de tokens utilizado para MinHash (por ejemplo, shingles a partir de texto; tokens de campo concatenados para datos estructurados).</p></li>
 <li><p><strong>Generación de firmas MinHash</strong>: Calcular firmas MinHash para cada trozo o registro.</p></li>
 <li><p><strong>Conversión de vectores binarios</strong>: Convierte la firma en un vector binario compatible con Milvus.</p></li>
@@ -219,6 +219,13 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Antes de utilizar MinHash LSH en Milvus, primero debe generar <strong>firmas MinHash</strong>. Estas firmas binarias compactas aproximan la similitud de Jaccard entre conjuntos y son necesarias para la búsqueda basada en <code translate="no">MHJACCARD</code> en Milvus.</p>
+<div class="alert note">
+<p>Puede preparar firmas MinHash para el índice <code translate="no">MINHASH_LSH</code> de dos maneras:</p>
+<ul>
+<li><p>Genere usted mismo las firmas utilizando herramientas externas e insértelas en un campo BINARY_VECTOR, o bien</p></li>
+<li><p>Utilice la función MinHash incorporada para generar automáticamente vectores binarios compatibles a partir de texto. Para conocer el flujo de trabajo integral y las opciones de configuración de la función MinHash, consulte <a href="/docs/es/minhash-function.md">Función MinHash</a>.</p></li>
+</ul>
+</div>
 <h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">Elija un método para generar firmas MinHash<button data-href="#Choose-a-method-to-generate-MinHash-signatures" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -236,7 +243,7 @@ summary: >-
       </svg>
     </button></h3><p>Dependiendo de su carga de trabajo, puede elegir:</p>
 <ul>
-<li><p>Usar Python <a href="https://ekzhu.github.io/datasketch/"><code translate="no">datasketch</code></a> por simplicidad (recomendado para la creación de prototipos)</p></li>
+<li><p>Utilizar el método de Python <a href="https://ekzhu.github.io/datasketch/"><code translate="no">datasketch</code></a> por simplicidad (recomendado para la creación de prototipos)</p></li>
 <li><p>Utilizar herramientas distribuidas (por ejemplo, Spark, Ray) para conjuntos de datos a gran escala</p></li>
 <li><p>Implementar lógica personalizada (NumPy, C++, etc.) si el ajuste del rendimiento es crítico</p></li>
 </ul>
@@ -417,7 +424,7 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Construye un índice <code translate="no">MINHASH_LSH</code> con el refinamiento Jaccard habilitado:</p>
+    </button></h3><p>Construye un índice <code translate="no">MINHASH_LSH</code> con el refinamiento Jaccard activado:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -685,14 +692,14 @@ refined_results = client.search(
    </tr>
    <tr>
      <td><p><code translate="no">mh_search_with_jaccard</code></p></td>
-     <td><p>Si se debe realizar el cálculo exacto de la similitud de Jaccard en los resultados candidatos para el refinamiento.</p></td>
+     <td><p>Si se debe realizar un cálculo exacto de la similitud de Jaccard en los resultados candidatos para el refinamiento.</p></td>
      <td><p>true, false</p></td>
      <td><p>Utilice <code translate="no">true</code> para aplicaciones que requieran alta precisión (por ejemplo, deduplicación). Utilice <code translate="no">false</code> para una búsqueda aproximada más rápida cuando sea aceptable una ligera pérdida de precisión.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">refine_k</code></p></td>
      <td><p>Número de candidatos a recuperar antes del refinamiento de Jaccard. Sólo es efectivo cuando <code translate="no">mh_search_with_jaccard</code> es <code translate="no">true</code>.</p></td>
-     <td><p>[<em>top_k</em>, *top_k * 10*]</p></td>
+     <td><p>[<em>top_k</em>, <em>top_k &amp;ast; 10</em>]</p></td>
      <td><p>Establezca entre 2 y 5 veces el <em>top_k</em> deseado para obtener un buen equilibrio entre memoria y rendimiento. Los valores más altos mejoran la recuperación pero aumentan el coste de cálculo.</p></td>
    </tr>
    <tr>

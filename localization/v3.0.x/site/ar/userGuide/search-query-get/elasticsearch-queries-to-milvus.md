@@ -56,7 +56,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><a href="/docs/ar/elasticsearch-queries-to-milvus.md#Match-query">استعلام مطابقة</a></p></td>
-     <td><p>البحث عن النص الكامل</p></td>
+     <td><p>بحث النص الكامل</p></td>
      <td><p>كلاهما يوفران مجموعات متشابهة من الإمكانيات.</p></td>
    </tr>
    <tr>

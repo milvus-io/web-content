@@ -63,7 +63,7 @@ title: Configuration requise pour l'exécution de Milvus sur Kubernetes
         ></path>
       </svg>
     </button></h2><p>Il est recommandé d'exécuter le cluster Kubernetes sur des plateformes Linux.</p>
-<p>kubectl est l'outil de ligne de commande pour Kubernetes. Utilisez une version de kubectl qui ne diffère pas de plus d'une version mineure de votre cluster. L'utilisation de la dernière version de kubectl permet d'éviter des problèmes imprévus.</p>
+<p>kubectl est l'outil de ligne de commande pour Kubernetes. Utilisez une version de kubectl qui se situe à une différence de version mineure près de votre cluster. L'utilisation de la dernière version de kubectl permet d'éviter des problèmes imprévus.</p>
 <p>minikube est nécessaire pour l'exécution locale d'un cluster Kubernetes. minikube nécessite Docker comme dépendance. Veillez à installer Docker avant d'installer Milvus à l'aide de Helm. Voir <a href="https://docs.docker.com/get-docker">Obtenir Docker</a> pour plus d'informations.</p>
 <table>
 <thead>

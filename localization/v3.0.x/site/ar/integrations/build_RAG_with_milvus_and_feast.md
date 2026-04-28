@@ -32,7 +32,7 @@ title: بناء RAG باستخدام Milvus وFeast
 </a></p>
 <p>في هذا البرنامج التعليمي، سنقوم في هذا البرنامج التعليمي ببناء خط أنابيب توليد الاسترجاع المعزز (RAG) باستخدام <a href="https://github.com/feast-dev/feast">Feast</a> و <a href="https://milvus.io/">Milvus</a>. Feast هو مخزن ميزات مفتوح المصدر يعمل على تبسيط إدارة الميزات للتعلم الآلي، مما يتيح تخزين واسترجاع البيانات المنظمة بكفاءة لكل من التدريب والاستدلال في الوقت الفعلي. Milvus عبارة عن قاعدة بيانات متجهة عالية الأداء مصممة للبحث السريع عن التشابه، مما يجعلها مثالية لاسترجاع المستندات ذات الصلة في عمليات سير عمل RAG.</p>
 <p>بشكل أساسي، سنستخدم Feast لحقن المستندات والبيانات المهيكلة (أي الميزات) في سياق نموذج اللغة الكبيرة (LLM) لتشغيل تطبيق RAG (استرجاع الجيل المعزز) مع Milvus كقاعدة بيانات متجهة عبر الإنترنت.</p>
-<h1 id="Why-Feast" class="common-anchor-header">لماذا العيد؟<button data-href="#Why-Feast" class="anchor-icon" translate="no">
+<h1 id="Why-Feast" class="common-anchor-header">لماذا فيست؟<button data-href="#Why-Feast" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,10 +83,25 @@ title: بناء RAG باستخدام Milvus وFeast
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies" class="common-anchor-header">التبعيات</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&#x27;feast[milvus]&#x27;</span> openai -U -q</span>
+    </button></h2><h3 id="Dependencies" class="common-anchor-header">التبعيات<button data-href="#Dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&#x27;feast[milvus]&#x27;</span> openai -U -q</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
+<p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، فقد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
 </div>
 <p>سنستخدم OpenAI كموفر LLM الخاص بنا. يمكنك تسجيل الدخول إلى موقعه الرسمي وإعداد <a href="https://platform.openai.com/api-keys">OPENAI_API_KEY</a> كمتغير بيئة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -122,7 +137,22 @@ llm_client = OpenAI(
 │── feature_store.yaml     <span class="hljs-comment"># Configures Milvus and feature store settings</span>
 │── test_workflow.py       <span class="hljs-comment"># Example workflow for Feast operations</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Key-Configuration-Files" class="common-anchor-header">ملفات تكوين المفاتيح</h3><h4 id="1-featurestoreyaml" class="common-anchor-header">1. feature_store.yaml</h4><p>يقوم هذا الملف بتكوين البنية التحتية لمخزن الميزات:</p>
+<h3 id="Key-Configuration-Files" class="common-anchor-header">ملفات تكوين المفاتيح<button data-href="#Key-Configuration-Files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="1-featurestoreyaml" class="common-anchor-header">1. feature_store.yaml</h4><p>يقوم هذا الملف بتكوين البنية التحتية لمخزن الميزات:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">project:</span> <span class="hljs-string">rag</span>
 <span class="hljs-attr">provider:</span> <span class="hljs-string">local</span>
 <span class="hljs-attr">registry:</span> <span class="hljs-string">data/registry.db</span>
@@ -219,7 +249,7 @@ display(df.head())
       <td>0</td>
       <td>2025-01-09 13:36:59.280589</td>
       <td>نيويورك، نيويورك</td>
-      <td>نيويورك، وغالباً ما تسمى مدينة نيويورك أو ببساطة...</td>
+      <td>نيويورك، غالباً ما تسمى مدينة نيويورك أو ببساطة...</td>
       <td>نيويورك، وغالبًا ما تسمى مدينة نيويورك أو ببساطة...</td>
       <td>[0.1465730518102646, -0.07317650318145752, 0.0...</td>
     </tr>
@@ -239,7 +269,7 @@ display(df.head())
       <td>2</td>
       <td>2025-01-09 13:36:59.280589</td>
       <td>نيويورك، نيويورك</td>
-      <td>نيويورك، وغالباً ما يطلق عليها اسم مدينة نيويورك أو ببساطة...</td>
+      <td>نيويورك، وغالباً ما تسمى مدينة نيويورك أو ببساطة...</td>
       <td>نيويورك هي مركز عالمي للتمويل والتجارة...</td>
       <td>[0.06769222766160965, -0.07371102273464203, -0...</td>
     </tr>
@@ -260,7 +290,7 @@ display(df.head())
       <td>2025-01-09 13:36:59.280589</td>
       <td>نيويورك، نيويورك</td>
       <td>نيويورك، وغالباً ما يطلق عليها اسم مدينة نيويورك أو ببساطة...</td>
-      <td>يُقدر عدد سكانها في عام 2022 بـ 8,335 نسمة...</td>
+      <td>ويقدر عدد سكانها في عام 2022 بـ 8,335 نسمة...</td>
       <td>[0.17943550646305084, -0.09458263963460922, 0....</td>
     </tr>
   </tbody>
@@ -369,7 +399,7 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
       <td>نيويورك، وغالباً ما تسمى مدينة نيويورك أو ببساطة...</td>
       <td>نيويورك، نيويورك</td>
       <td>-0.073177</td>
-      <td>نيويورك، وغالباً ما تسمى مدينة نيويورك أو ببساطة مدينة...</td>
+      <td>نيويورك، غالباً ما تسمى مدينة نيويورك أو ببساطة مدينة نيويورك...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -422,7 +452,22 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="common-anchor-header">1. تضمين استعلام باستخدام PyTorch ومحولات الجمل</h3><p>أثناء الاستدلال (على سبيل المثال، أثناء إرسال المستخدم لرسالة دردشة) نحتاج إلى تضمين نص الإدخال. يمكن اعتبار ذلك بمثابة تحويل ميزة لبيانات الإدخال. في هذا المثال، سنقوم بذلك باستخدام محول جملة صغير من Hugging Face.</p>
+    </button></h2><h3 id="1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="common-anchor-header">1. تضمين استعلام باستخدام PyTorch ومحولات الجمل<button data-href="#1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>أثناء الاستدلال (على سبيل المثال، أثناء إرسال المستخدم لرسالة دردشة) نحتاج إلى تضمين نص الإدخال. يمكن اعتبار ذلك بمثابة تحويل ميزة لبيانات الإدخال. في هذا المثال، سنقوم بذلك باستخدام محول جملة صغير من Hugging Face.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> feast <span class="hljs-keyword">import</span> FeatureStore
@@ -458,7 +503,22 @@ MODEL = <span class="hljs-string">&quot;sentence-transformers/all-MiniLM-L6-v2&q
     sentence_embeddings = F.normalize(sentence_embeddings, p=<span class="hljs-number">2</span>, dim=<span class="hljs-number">1</span>)
     <span class="hljs-keyword">return</span> sentence_embeddings
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2. جلب المتجهات والبيانات في الوقت الحقيقي للاستدلال عبر الإنترنت</h3><p>بمجرد تحويل الاستعلام إلى تضمين، فإن الخطوة التالية هي استرداد المستندات ذات الصلة من مخزن المتجهات. في وقت الاستدلال، نستفيد من البحث عن تشابه المتجهات للعثور على تضمينات المستندات الأكثر صلة المخزنة في مخزن الميزات عبر الإنترنت، باستخدام <code translate="no">retrieve_online_documents_v2()</code>. يمكن بعد ذلك إدخال متجهات الميزات هذه في سياق LLM.</p>
+<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2. جلب المتجهات والبيانات في الوقت الحقيقي للاستدلال عبر الإنترنت<button data-href="#2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بمجرد تحويل الاستعلام إلى تضمين، فإن الخطوة التالية هي استرداد المستندات ذات الصلة من مخزن المتجهات. في وقت الاستدلال، نستفيد من البحث عن تشابه المتجهات للعثور على تضمينات المستندات الأكثر صلة المخزنة في مخزن الميزات عبر الإنترنت، باستخدام <code translate="no">retrieve_online_documents_v2()</code>. يمكن بعد ذلك إدخال متجهات الميزات هذه في سياق LLM.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;Which city has the largest population in New York?&quot;</span>
 
 tokenizer = AutoTokenizer.from_pretrained(TOKENIZER)
@@ -531,13 +591,28 @@ display(context_data)
       <td>7</td>
       <td>نيويورك، نيويورك</td>
       <td>يبلغ عدد سكانها أكثر من 20.1 مليون نسمة...</td>
-      <td>نيويورك، وغالباً ما يطلق عليها اسم مدينة نيويورك أو ببساطة...</td>
+      <td>نيويورك، وغالباً ما تسمى مدينة نيويورك أو ببساطة مدينة نيويورك...</td>
       <td>0.728218</td>
     </tr>
   </tbody>
 </table>
 </div>
-<h3 id="3-Formatting-Retrieved-Documents-for-RAG-Context" class="common-anchor-header">3. تنسيق المستندات المسترجعة لسياق RAG</h3><p>بعد استرجاع المستندات ذات الصلة، نحتاج إلى تنسيق البيانات في سياق منظم يمكن استخدامه بكفاءة في التطبيقات النهائية. تضمن هذه الخطوة أن تكون المعلومات المستخرجة نظيفة ومنظمة وجاهزة للاندماج في خط أنابيب RAG.</p>
+<h3 id="3-Formatting-Retrieved-Documents-for-RAG-Context" class="common-anchor-header">3. تنسيق المستندات المسترجعة لسياق RAG<button data-href="#3-Formatting-Retrieved-Documents-for-RAG-Context" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد استرجاع المستندات ذات الصلة، نحتاج إلى تنسيق البيانات في سياق منظم يمكن استخدامه بكفاءة في التطبيقات النهائية. تضمن هذه الخطوة أن تكون المعلومات المستخرجة نظيفة ومنظمة وجاهزة للاندماج في خط أنابيب RAG.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">format_documents</span>(<span class="hljs-params">context_df</span>):
     output_context = <span class="hljs-string">&quot;&quot;</span>
     unique_documents = context_df.drop_duplicates().apply(
@@ -564,7 +639,22 @@ New York City traces its origins to Fort Amsterdam and a trading post founded on
 Anchored by Wall Street in the Financial District of Lower Manhattan, New York City has been called both the world's premier financial and fintech center and the most economically powerful city in the world. As of 2022, the New York metropolitan area is the largest metropolitan economy in the world with a gross metropolitan product of over US$2.16 trillion. If the New York metropolitan area were its own country, it would have the tenth-largest economy in the world. The city is home to the world's two largest stock exchanges by market capitalization of their listed companies: the New York Stock Exchange and Nasdaq. New York City is an established safe haven for global investors. As of 2023, New York City is the most expensive city in the world for expatriates to live. New York City is home to the highest number of billionaires, individuals of ultra-high net worth (greater than US$30 million), and millionaires of any city in the world.}
 ****END DOCUMENT 0****
 </code></pre>
-<h3 id="4-Generating-Responses-Using-Retrieved-Context" class="common-anchor-header">4. توليد الاستجابات باستخدام السياق المستخرج</h3><p>الآن بعد أن قمنا بتنسيق المستندات المسترجعة، يمكننا دمجها في موجه منظم لتوليد الردود. تضمن هذه الخطوة أن المساعد يعتمد فقط على المعلومات المسترجعة ويتجنب الهلوسة في الردود.</p>
+<h3 id="4-Generating-Responses-Using-Retrieved-Context" class="common-anchor-header">4. توليد الاستجابات باستخدام السياق المستخرج<button data-href="#4-Generating-Responses-Using-Retrieved-Context" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>الآن بعد أن قمنا بتنسيق المستندات المسترجعة، يمكننا دمجها في موجه منظم لتوليد الردود. تضمن هذه الخطوة أن المساعد يعتمد فقط على المعلومات المسترجعة ويتجنب الهلوسة في الردود.</p>
 <pre><code translate="no" class="language-python">FULL_PROMPT = <span class="hljs-string">f&quot;&quot;&quot;
 You are an assistant for answering questions about states. You will be provided documentation from Wikipedia. Provide a conversational answer.
 If you don&#x27;t know the answer, just say &quot;I do not know.&quot; Don&#x27;t make up an answer.

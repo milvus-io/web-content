@@ -1,7 +1,7 @@
 ---
 id: NLWeb_with_milvus.md
 summary: >-
-  Lernen Sie, wie Sie Microsoft NLWeb mit Milvus integrieren können, um
+  Erfahren Sie, wie Sie Microsoft NLWeb mit Milvus integrieren können, um
   leistungsstarke natürlichsprachliche Schnittstellen für Websites zu erstellen.
   Dieses Tutorial zeigt Ihnen, wie Sie die Fähigkeiten der Vektordatenbank
   Milvus für eine effiziente semantische Suche, Einbettung und Kontextabfrage in
@@ -44,7 +44,22 @@ title: Verwendung von NLWeb mit Milvus
         ></path>
       </svg>
     </button></h2><p>NLWeb kann so konfiguriert werden, dass es Milvus als Retrieval Engine verwendet. Im Folgenden finden Sie eine Anleitung, wie Sie NLWeb mit Milvus einrichten und verwenden.</p>
-<h3 id="Installation" class="common-anchor-header">Einrichtung</h3><p>Klonen Sie das Repo und richten Sie Ihre Umgebung ein:</p>
+<h3 id="Installation" class="common-anchor-header">Einrichtung<button data-href="#Installation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Klonen Sie das Repo und richten Sie Ihre Umgebung ein:</p>
 <pre><code translate="no" class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/microsoft/NLWeb
 <span class="hljs-built_in">cd</span> NLWeb
 python -m venv .venv
@@ -53,7 +68,22 @@ python -m venv .venv
 pip install -r requirements.txt
 pip install pymilvus  <span class="hljs-comment"># Add Milvus Python client</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Configuring-Milvus" class="common-anchor-header">Milvus konfigurieren</h3><p>Um <strong>Milvus</strong> zu verwenden, aktualisieren Sie Ihre Konfiguration.</p>
+<h3 id="Configuring-Milvus" class="common-anchor-header">Milvus konfigurieren<button data-href="#Configuring-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um <strong>Milvus</strong> zu verwenden, aktualisieren Sie Ihre Konfiguration.</p>
 <h4 id="Update-config-files-in-codeconfig" class="common-anchor-header">Aktualisieren Sie die Konfigurationsdateien in <code translate="no">code/config</code></h4><p>Öffnen Sie die Datei <code translate="no">config_retrieval.yaml</code> und fügen Sie die Milvus-Konfiguration hinzu:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">preferred_endpoint:</span> <span class="hljs-string">milvus_local</span>
 
@@ -65,12 +95,42 @@ pip install pymilvus  <span class="hljs-comment"># Add Milvus Python client</spa
     <span class="hljs-comment"># Specify the database type</span>
     <span class="hljs-attr">db_type:</span> <span class="hljs-string">milvus</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Loading-Data" class="common-anchor-header">Daten laden</h3><p>Nach der Konfiguration laden Sie Ihre Inhalte über RSS-Feeds.</p>
+<h3 id="Loading-Data" class="common-anchor-header">Daten laden<button data-href="#Loading-Data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nach der Konfiguration laden Sie Ihre Inhalte über RSS-Feeds.</p>
 <p>Aus dem Verzeichnis <code translate="no">code</code>:</p>
 <pre><code translate="no" class="language-bash">python -m tools.db_load https://feeds.libsyn.com/121695/rss Behind-the-Tech
 <button class="copy-code-btn"></button></code></pre>
 <p>Dadurch wird der Inhalt in Ihre Milvus-Sammlung aufgenommen, wobei sowohl die Textdaten als auch die Vektoreinbettungen gespeichert werden.</p>
-<h3 id="Running-the-Server" class="common-anchor-header">Starten des Servers</h3><p>Um NLWeb zu starten, starten Sie im Verzeichnis <code translate="no">code</code> den Befehl run:</p>
+<h3 id="Running-the-Server" class="common-anchor-header">Starten des Servers<button data-href="#Running-the-Server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um NLWeb zu starten, starten Sie im Verzeichnis <code translate="no">code</code> den Befehl run:</p>
 <pre><code translate="no" class="language-bash">python app-file.py
 <button class="copy-code-btn"></button></code></pre>
 <p>Sie können nun Ihre Inhalte über natürliche Sprache entweder über die Web-UI auf http://localhost:8000/ oder direkt über die MCP-kompatible REST-API abfragen.</p>

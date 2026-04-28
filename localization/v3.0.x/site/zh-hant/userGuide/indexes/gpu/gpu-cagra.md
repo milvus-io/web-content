@@ -59,10 +59,10 @@ index_params.add_index(
 <p>在此設定中</p>
 <ul>
 <li><p><code translate="no">index_type</code>:要建立的索引類型。在本範例中，設定值為<code translate="no">GPU_CAGRA</code> 。</p></li>
-<li><p><code translate="no">metric_type</code>:用於計算向量間距離的方法。詳情請參閱<a href="/docs/zh-hant/metric.md">公制類型</a>。</p></li>
+<li><p><code translate="no">metric_type</code>:用來計算向量間距離的方法。詳情請參閱<a href="/docs/zh-hant/metric.md">公制類型</a>。</p></li>
 <li><p><code translate="no">params</code>:建立索引的其他設定選項。要瞭解<code translate="no">GPU_CAGRA</code> 索引可用的更多建立參數，請參閱<a href="/docs/zh-hant/gpu-cagra.md#Index-building-params">索引建立參數</a>。</p></li>
 </ul>
-<p>索引參數配置完成後，您可以直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中傳入索引參數來建立索引。如需詳細資訊，請參閱<a href="/docs/zh-hant/create-collection.md">建立集合</a>。</p>
+<p>索引參數設定完成後，您可以直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中傳入索引參數來建立索引。如需詳細資訊，請參閱<a href="/docs/zh-hant/create-collection.md">建立集合</a>。</p>
 <h2 id="Search-on-index" class="common-anchor-header">在索引上搜尋<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -217,7 +217,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">itopk_size</code></p></td>
-     <td><p>決定搜尋期間保留的中間結果大小。較大的值可能會在犧牲搜尋效能的情況下提高召回率。它應該至少等於最終 top-k (限制) 值，而且通常是 2 的幂次 (例如：16、32、64、128)。</p></td>
+     <td><p>決定搜尋期間保留的中間結果大小。較大的值可能會在犧牲搜尋效能的情況下提高召回率。它應該至少等於最終 top-k (限制) 值，而且通常是 2 的幂次 (例如 16、32、64、128)。</p></td>
      <td><p>空</p></td>
    </tr>
    <tr>
@@ -237,7 +237,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>指定查詢時間/精確度的權衡。<code translate="no">ef</code> 值越高，搜尋準確度越高，但搜尋速度越慢。</p><p>如果在建立索引時將<code translate="no">adapt_for_cpu</code> 設定為<code translate="no">true</code> ，則必須使用此參數。</p></td>
+     <td><p>指定查詢時間/精確度的權衡。<code translate="no">ef</code> 值越高，搜尋準確度越高，但速度越慢。</p><p>如果在建立索引時將<code translate="no">adapt_for_cpu</code> 設定為<code translate="no">true</code> ，則必須使用此參數。</p></td>
      <td><p><code translate="no">[top_k, int_max]</code></p></td>
    </tr>
 </table>

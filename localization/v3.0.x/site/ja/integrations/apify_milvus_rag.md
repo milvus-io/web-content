@@ -104,7 +104,7 @@ Enter YOUR OPENAI_API_KEY··········
       </svg>
     </button></h2><p>クライアントのセットアップにはMilvus/ZillizのURIとTokenが必要です。</p>
 <ul>
-<li><a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上にMilvusサーバを自前でデプロイしている場合は、サーバのアドレスとポートをURIとして使用します（例:<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合は、"<your_username>:<your_password>"をトークンとして使用し、そうでない場合は空文字列のままにしてください。</li>
+<li><a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上にMilvusサーバを自前でデプロイしている場合は、サーバのアドレスとポートをURIとして使用します（例:<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合は、"<your_username>:<your_password>" をトークンとして使用し、そうでない場合は空文字列のままにしてください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>ご利用の場合は、<code translate="no">uri</code> と<code translate="no">token</code> をZilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public EndpointとAPI keyに</a>対応させてください。</li>
 </ul>
 <p>コレクションは事前に存在する必要はありません。データベースにデータがアップロードされると自動的に作成されます。</p>
@@ -131,7 +131,7 @@ Enter YOUR MILVUS_TOKEN··········
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>次に、Apify Python SDKでウェブサイトコンテンツクローラを使ってみます。まず、actor_idとrun_inputを定義し、vectorデータベースに保存する情報を指定します。</p>
+    </button></h2><p>次に、Apify Python SDKでウェブサイトコンテンツクローラを使ってみます。まずactor_idとrun_inputを定義し、vectorデータベースに保存される情報を指定します。</p>
 <p><code translate="no">actor_id=&quot;apify/website-content-crawler&quot;</code> は Website Content Crawler の識別子です。クローラーの動作は、run_input パラメータで完全に制御できます（詳細は<a href="https://apify.com/apify/website-content-crawler/input-schema">input ページを</a>参照）。この例では、JavaScriptのレンダリングを必要としないMilvusのドキュメントをクローリングします。そのため、<code translate="no">crawlerType=cheerio</code> を設定し、<code translate="no">startUrls</code> を定義し、<code translate="no">maxCrawlPages=10</code> を設定してクロールするページ数を制限します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> apify_client <span class="hljs-keyword">import</span> ApifyClient
 
@@ -152,7 +152,7 @@ dataset_id
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'P9dLFfeJAljlePWnz'
 </code></pre>
-<p>以下のコードは、アピファイ<code translate="no">Dataset</code> からスクレイピングされたデータをフェッチし、最初にスクレイピングされたウェブサイトを表示します。</p>
+<p>次のコードは、アピファイ<code translate="no">Dataset</code> からスクレイピングされたデータをフェッチし、最初にスクレイピングされたウェブサイトを表示します。</p>
 <pre><code translate="no" class="language-python">item = client.dataset(dataset_id).list_items(limit=<span class="hljs-number">1</span>).items
 item[<span class="hljs-number">0</span>].get(<span class="hljs-string">&quot;text&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -175,7 +175,7 @@ item[<span class="hljs-number">0</span>].get(<span class="hljs-string">&quot;tex
     run_input=milvus_integration_inputs
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>すべてのスクレイピングされたデータはMilvusデータベースに保存され、検索と質問応答の準備が整いました。</p>
+<p>全てのスクレイピングされたデータはMilvusデータベースに保存され、検索と質問応答の準備が整いました。</p>
 <h1 id="Retrieval-and-LLM-generative-pipeline" class="common-anchor-header">検索とLLM生成パイプライン<button data-href="#Retrieval-and-LLM-generative-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -259,5 +259,5 @@ rag_chain.invoke(question)
         ></path>
       </svg>
     </button></h1><p>このチュートリアルでは、Apifyを使用してWebサイトのコンテンツをクロールし、milvusベクトルデータベースにデータを保存し、検索補強パイプラインを使用して質問応答タスクを実行する方法を示しました。ApifyのWebスクレイピング機能とベクトルストレージのMilvus/Zilliz、言語モデルのLangchainを組み合わせることで、非常に効果的な情報検索システムを構築することができます。</p>
-<p>データベースのデータ収集と更新を改善するために、Apifyの統合は<a href="https://apify.com/apify/milvus-integration#incrementally-update-database-from-the-website-content-crawler">インクリメンタルアップデートを</a>提供し、チェックサムに基づいて新しいデータや変更されたデータのみを更新します。さらに、指定された時間内にクロールされなかった<a href="https://apify.com/apify/milvus-integration#delete-outdated-expired-data">古い</a>データを自動的に<a href="https://apify.com/apify/milvus-integration#delete-outdated-expired-data">削除する</a>こともできます。これらの機能は、ベクターデータベースを最適化し、検索で補強されたパイプラインが最小限の手作業で効率的かつ最新の状態を維持することを確実にするのに役立ちます。</p>
+<p>データベースのデータ収集と更新を改善するために、Apifyの統合は<a href="https://apify.com/apify/milvus-integration#incrementally-update-database-from-the-website-content-crawler">インクリメンタルアップデートを</a>提供し、チェックサムに基づいて新しいデータや変更されたデータのみを更新します。さらに、指定された時間内にクロールされなかった<a href="https://apify.com/apify/milvus-integration#delete-outdated-expired-data">古い</a>データを自動的に<a href="https://apify.com/apify/milvus-integration#delete-outdated-expired-data">削除する</a>こともできます。これらの機能により、ベクターデータベースを最適化し、検索で補強されたパイプラインを最小限の手作業で効率的かつ最新の状態に保つことができます。</p>
 <p>ApifyとMilvusの統合の詳細については、<a href="https://docs.apify.com/platform/integrations/milvus">Apify Milvusのドキュメントと</a> <a href="https://apify.com/apify/milvus-integration">統合のREADMEファイルを</a>参照してください。</p>

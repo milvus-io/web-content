@@ -25,7 +25,7 @@ title: LangExtract + Milvus 整合
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>本指南示範如何使用<a href="https://github.com/google/langextract">LangExtract</a>與<a href="https://milvus.io/">Milvus</a>建立智慧型文件處理與檢索系統。</p>
-<p>LangExtract 是一個 Python 函式庫，它使用大型語言模型 (Large Language Models, LLMs) 來從非結構化的文字文件中萃取結構化的資訊，並提供精確的來源基礎。該系統結合了 LangExtract 的萃取能力與 Milvus 的向量儲存，可同時進行語意相似性搜尋與精確的元資料篩選。</p>
+<p>LangExtract 是一個 Python 函式庫，它使用大型語言模型 (Large Language Models, LLMs) 來從非結構化的文字文件中抽取結構化的資訊，並提供精確的來源基礎。該系統結合了 LangExtract 的萃取能力與 Milvus 的向量儲存，可同時進行語意相似性搜尋與精確的元資料篩選。</p>
 <p>這種整合對於內容管理、語義搜尋、知識發現，以及根據萃取的文件屬性建立推薦系統特別有價值。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -91,7 +91,7 @@ os.environ[<span class="hljs-string">&quot;GEMINI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>讓我們為整合配置全局參數。我們將使用 Gemini 的嵌入模型來為我們的文件產生向量表示。</p>
+    </button></h2><p>讓我們為整合配置全局參數。我們將使用 Gemini 的嵌入模型為我們的文件產生向量表示。</p>
 <pre><code translate="no" class="language-python">genai_client = genai.Client()
 
 COLLECTION_NAME = <span class="hljs-string">&quot;document_extractions&quot;</span>
@@ -277,7 +277,7 @@ prompt = textwrap.dedent(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>為了改善萃取的品質與一致性，我們將為 LangExtract 提供一些範例。這些範例展示了預期的格式，並幫助模型了解我們的抽取需求。</p>
+    </button></h2><p>為了提高抽取的品質與一致性，我們會提供 LangExtract 一些範例。這些範例展示了預期的格式，並幫助模型了解我們的抽取需求。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Provide examples to guide the model - n-shot examples for movie descriptions</span>
 <span class="hljs-comment"># Unify attribute keys to ensure consistency in extraction results</span>
 examples = [
@@ -372,7 +372,7 @@ extraction_results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>現在我們需要處理萃取結果，並為每個文件產生向量嵌入。我們也會將擷取的屬性扁平化成獨立的欄位，讓它們在 Milvus 中容易搜尋。</p>
+    </button></h2><p>現在我們需要處理萃取結果，並為每個文件產生向量內嵌。我們也會將擷取的屬性扁平化成獨立的欄位，讓它們在 Milvus 中容易搜尋。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n3. Processing extraction results and generating vectors...&quot;</span>)
 
 processed_data = []

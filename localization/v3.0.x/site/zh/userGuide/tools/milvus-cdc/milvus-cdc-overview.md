@@ -59,7 +59,7 @@ title: CDC 概览
     </button></h2><p>Milvus CDC 采用的架构包含两个主要组件--管理任务和元数据的 HTTP 服务器，以及与任务执行同步的<strong>corelib</strong>，前者负责从源 Milvus 实例获取数据，后者负责将处理后的数据发送到目标 Milvus 实例。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
    </span> <span class="img-wrapper"> <span>Milvus CDC 架构</span> </span></p>
 <p>在上图中</p>
 <ul>
@@ -86,11 +86,11 @@ title: CDC 概览
 <li><p><strong>创建任务</strong>：用户通过 HTTP 请求启动 CDC 任务。</p></li>
 <li><p><strong>元数据检索</strong>：系统从 Milvus 的 etcd 源获取特定于 Collections 的元数据，包括 Collections 的通道和检查点信息。</p></li>
 <li><p><strong>MQ 连接</strong>：有了元数据，系统就会连接到 MQ，开始订阅数据流。</p></li>
-<li><p><strong>数据处理</strong>：读取、解析来自 MQ 的数据，然后使用 Go SDK 将其传递给其他系统，或进行处理以复制在源 Milvus 中执行的操作符。</p></li>
+<li><p><strong>数据处理</strong>：读取、解析来自 MQ 的数据，并使用 Go SDK 将其传递给其他系统，或进行处理以复制在源 Milvus 中执行的操作符。</p></li>
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
    </span> <span class="img-wrapper"> <span>Milvus CDC 工作流</span> </span></p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

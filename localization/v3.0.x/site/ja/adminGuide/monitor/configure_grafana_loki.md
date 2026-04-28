@@ -333,12 +333,12 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000
 <ol>
 <li>ウェブブラウザを開き、<code translate="no">127.0.0.1:3000</code> に移動する。ユーザー名<code translate="no">admin</code> と先ほど取得したパスワードを使用してログインする。</li>
 <li>左側のメニューで、<strong>Connections</strong>&gt;<strong>Add new connection</strong> を選択する。</li>
-<li>表示されるページで、データソースのタイプとして<strong>Lokiを</strong>選択する。検索バーに<strong>loki</strong>と入力すると、データ・ソースを検索できます。</li>
+<li>表示されたページで、データソースのタイプとして<strong>Lokiを</strong>選択する。検索バーに<strong>loki</strong>と入力すると、データ・ソースを検索できます。</li>
 <li>Lokiデータソースの設定で、<strong>Nameと</strong> <strong>URLを</strong>指定し、<strong>Save &amp; testを</strong>クリックします。</li>
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
    </span> <span class="img-wrapper"> <span>データソース</span> </span></p>
 <h3 id="3-Query-Milvus-Logs" class="common-anchor-header">3.Milvusログの照会<button data-href="#3-Query-Milvus-Logs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -363,5 +363,5 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvuslog.jpg" alt="Query" class="doc-image" id="query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvuslog.jpg" alt="Query" class="doc-image" id="query" />
    </span> <span class="img-wrapper"> <span>クエリ</span> </span></p>

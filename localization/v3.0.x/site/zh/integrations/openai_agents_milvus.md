@@ -51,7 +51,7 @@ title: Milvus 与 OpenAI Agents 的集成：分步指南
 <p>与 Python 结合使用，这些基元功能强大，足以表达工具和 Agents 之间的复杂关系，让您无需经过陡峭的学习曲线就能构建真实世界的应用程序。此外，SDK 还带有内置跟踪功能，可让您可视化和调试 Agents 流程，并对其进行评估，甚至微调适合您应用的模型。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/openai-agent.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openai-agent.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -90,7 +90,7 @@ title: Milvus 与 OpenAI Agents 的集成：分步指南
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install openai pymilvus pydantic nest_asyncio</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果使用的是 Google Colab，要启用刚安装的依赖项，可能需要<strong>重启运行时</strong>（点击屏幕顶部的 "运行时 "菜单，从下拉菜单中选择 "重启会话"）。</p>
+<p>如果使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重启运行时</strong>（点击屏幕顶部的 "运行时 "菜单，从下拉菜单中选择 "重启会话"）。</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> asyncio
 <span class="hljs-keyword">import</span> nest_asyncio
@@ -126,7 +126,22 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 <li>一个文本字段，用于存储文档内容</li>
 <li>用于存储 BM25 嵌入的稀疏向量字段</li>
 </ul>
-<h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Milvus 2.5 中的全文搜索</h3><ul>
+<h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Milvus 2.5 中的全文搜索<button data-href="#Full-Text-Search-in-Milvus-25" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>向量和关键词搜索的统一系统（统一 API）</li>
 <li>内置稀疏 BM25 算法（与 Elasticsearch 使用的算法类似，但基于向量）</li>
 <li>无需为关键词搜索手动生成 Embeddings</li>

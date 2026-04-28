@@ -159,7 +159,7 @@ go build
 --header &#x27;Content-Type: application/json&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p>运行上述命令时，将<code translate="no">backup_id</code> 和<code translate="no">backup_name</code> 更改为列表 API 返回的值。</p>
-<p>现在，您可以将备份文件保存到安全的地方，以便将来还原，也可以将其上传到<a href="https://cloud.zilliz.com">Zilliz Cloud</a>，用您的数据创建受管向量数据库。详情请参阅<a href="https://zilliz.com/doc/migrate_from_milvus-2x">从 Milvus 迁移到 Zilliz Cloud</a>。</p>
+<p>现在，您可以将备份文件保存到安全的地方，以便将来还原，或者上传到<a href="https://cloud.zilliz.com">Zilliz Cloud</a>，用您的数据创建受管向量数据库。详情请参阅<a href="https://zilliz.com/doc/migrate_from_milvus-2x">从 Milvus 迁移到 Zilliz Cloud</a>。</p>
 <h2 id="Restore-data" class="common-anchor-header">还原数据<button data-href="#Restore-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -189,7 +189,7 @@ go build
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p>通过<code translate="no">collection_suffix</code> 选项，可以为要创建的新 Collection 设置后缀。上述命令将在你的<strong>Milvus</strong>实例中创建一个名为<strong>hello_milvus_recover</strong>的新 Collection。</p>
-<p>如果你希望在不更改名称的情况下恢复备份的 Collections，请在从备份恢复之前删除 Collections。现在，您可以运行以下命令清理在 "<a href="#Prepare-data">准备数据</a>"中生成的数据。</p>
+<p>如果你希望在不更改名称的情况下恢复备份的 Collections，请在从备份恢复之前删除该 Collection。现在，您可以运行以下命令清理在 "<a href="#Prepare-data">准备数据</a>"中生成的数据。</p>
 <pre><code translate="no" class="language-shell">python example/clean_data.py
 <button class="copy-code-btn"></button></code></pre>
 <p>然后运行以下命令从备份中还原数据。</p>

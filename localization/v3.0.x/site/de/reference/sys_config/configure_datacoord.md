@@ -1397,7 +1397,7 @@ summary: 'Erfahren Sie, wie Sie dataCoord für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        Minimale Anzahl von Zentren im Kmeans-Zug      </td>
+      <td>        minimale Anzahl von Zentren im Kmeans-Zug      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -1861,7 +1861,7 @@ summary: 'Erfahren Sie, wie Sie dataCoord für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        Die Aufbewahrungszeit in Sekunden für Aufgaben im Status "Abgeschlossen" oder "Fehlgeschlagen".      </td>
+      <td>        Der Aufbewahrungszeitraum in Sekunden für Aufgaben im Status "Abgeschlossen" oder "Fehlgeschlagen".      </td>
       <td>10800</td>
     </tr>
   </tbody>

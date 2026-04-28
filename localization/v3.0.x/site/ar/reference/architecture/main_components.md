@@ -37,7 +37,7 @@ title: المكونات الرئيسية
     </button></h2><ul>
 <li>المنسق: يمكن تمكين وضع رئيسي-عبد لتوفير توافر عالٍ.</li>
 <li>الوكيل: واحد أو أكثر لكل مجموعة</li>
-<li>عقدة تدفق: واحدة أو أكثر لكل مجموعة</li>
+<li>عقدة التدفق: واحدة أو أكثر لكل مجموعة</li>
 <li>عقدة الاستعلام: واحدة أو أكثر لكل مجموعة</li>
 <li>عقدة البيانات: واحدة أو أكثر لكل مجموعة</li>
 </ul>
@@ -79,16 +79,46 @@ title: المكونات الرئيسية
         ></path>
       </svg>
     </button></h2><p>هناك وضعان لتشغيل ميلفوس:</p>
-<h3 id="Standalone" class="common-anchor-header">مستقل</h3><p>مثيل واحد من Milvus يقوم بتشغيل جميع المكونات في عملية واحدة، وهو مناسب لمجموعات البيانات الصغيرة وأعباء العمل المنخفضة. بالإضافة إلى ذلك، في الوضع المستقل، يمكن اختيار تطبيق WAL الأبسط، مثل Woodpecker و rocksmq، في الوضع المستقل لإلغاء متطلبات تبعيات تخزين WAL من طرف ثالث.</p>
+<h3 id="Standalone" class="common-anchor-header">مستقل<button data-href="#Standalone" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>مثيل واحد من Milvus يقوم بتشغيل جميع المكونات في عملية واحدة، وهو مناسب لمجموعات البيانات الصغيرة وأعباء العمل المنخفضة. بالإضافة إلى ذلك، في الوضع المستقل، يمكن اختيار تطبيق WAL الأبسط، مثل Woodpecker و rocksmq، في الوضع المستقل لإلغاء متطلبات تبعيات تخزين WAL من طرف ثالث.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/standalone_architecture.png" alt="Standalone_architecture" class="doc-image" id="standalone_architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/standalone_architecture.png" alt="Standalone_architecture" class="doc-image" id="standalone_architecture" />
    </span> <span class="img-wrapper"> <span>البنية_المستقلة</span> </span></p>
 <p>في الوقت الحالي، لا يمكنك إجراء ترقية عبر الإنترنت من مثيل Milvus مستقل إلى مجموعة Milvus، حتى لو كانت الواجهة الخلفية لتخزين WAL تدعم وضع المجموعة.</p>
-<h3 id="Cluster" class="common-anchor-header">الكتلة</h3><p>وضع النشر الموزع ل Milvus حيث يعمل كل مكون بشكل مستقل ويمكن توسيعه لتحقيق المرونة. هذا الإعداد مناسب لمجموعات البيانات الكبيرة وسيناريوهات الأحمال العالية.</p>
+<h3 id="Cluster" class="common-anchor-header">الكتلة<button data-href="#Cluster" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>وضع النشر الموزع ل Milvus حيث يعمل كل مكون بشكل مستقل ويمكن توسيعه لتحقيق المرونة. هذا الإعداد مناسب لمجموعات البيانات الكبيرة وسيناريوهات الأحمال العالية.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/distributed_architecture.png" alt="Distributed_architecture" class="doc-image" id="distributed_architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/distributed_architecture.png" alt="Distributed_architecture" class="doc-image" id="distributed_architecture" />
    </span> <span class="img-wrapper"> <span>البنية_الموزعة</span> </span></p>
 <h2 id="Whats-next" class="common-anchor-header">ما التالي<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

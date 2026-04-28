@@ -44,13 +44,58 @@ summary: >-
 <li><p><strong>逻辑操作符</strong>：<code translate="no">AND</code>,<code translate="no">OR</code>, 和<code translate="no">NOT</code> 将多个条件组合成复杂的表达式。</p></li>
 <li><p><strong>IS NULL 和 IS NOT NULL 操作符</strong>：<code translate="no">IS NULL</code> 和<code translate="no">IS NOT NULL</code> 操作符用于根据字段是否包含空值（无数据）来筛选字段。有关详细信息，请参阅<a href="/docs/zh/basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators">基本操作符</a>。</p></li>
 </ul>
-<h3 id="Example-Filtering-by-Color" class="common-anchor-header">示例按颜色筛选</h3><p>要在标量字段<code translate="no">color</code> 中查找具有三原色（红色、绿色或蓝色）的实体，请使用以下过滤表达式：</p>
+<h3 id="Example-Filtering-by-Color" class="common-anchor-header">示例按颜色筛选<button data-href="#Example-Filtering-by-Color" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要在标量字段<code translate="no">color</code> 中查找具有三原色（红色、绿色或蓝色）的实体，请使用以下过滤表达式：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">示例：按颜色过滤过滤 JSON 字段</h3><p>Milvus 允许在 JSON 字段中引用键。例如，如果您有一个带有键<code translate="no">price</code> 和<code translate="no">model</code> 的 JSON 字段<code translate="no">product</code> ，并想查找具有特定模型且价格低于 1,850 的产品，请使用此过滤表达式：</p>
+<h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">示例：按颜色过滤过滤 JSON 字段<button data-href="#Example-Filtering-JSON-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 允许在 JSON 字段中引用键。例如，如果您有一个带有键<code translate="no">price</code> 和<code translate="no">model</code> 的 JSON 字段<code translate="no">product</code> ，并想查找具有特定模型且价格低于 1,850 的产品，请使用此过滤表达式：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;product[&quot;model&quot;] == &quot;JSN-087&quot; AND product[&quot;price&quot;] &lt; 1850&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">示例：过滤数组字段</h3><p>如果有一个数组字段<code translate="no">history_temperatures</code> ，其中包含自 2000 年以来各观测站报告的平均气温记录，要查找 2009 年（第 10 次记录）气温超过 23°C 的观测站，请使用此表达式：</p>
+<h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">示例：过滤数组字段<button data-href="#Example-Filtering-Array-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果有一个数组字段<code translate="no">history_temperatures</code> ，其中包含自 2000 年以来各观测站报告的平均气温记录，要查找 2009 年（第 10 次记录）气温超过 23°C 的观测站，请使用此表达式：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;history_temperatures[10] &gt; 23&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>有关这些基本操作符的更多信息，请参阅<a href="/docs/zh/basic-operators.md">基本操作符</a>。</p>
@@ -71,7 +116,22 @@ summary: >-
       </svg>
     </button></h2><p>使用中日韩字符进行筛选时，由于字符集较大且编码不同，处理过程可能会更加复杂。这会导致性能变慢，尤其是使用<code translate="no">IN</code> 操作符时。</p>
 <p>Milvus 引入了过滤表达式模板，以优化处理中日韩字符时的性能。通过将动态值从过滤器表达式中分离出来，查询引擎能更有效地处理参数插入。</p>
-<h3 id="Example" class="common-anchor-header">示例</h3><p>要查找居住在 "北京"（北京）或 "上海"（上海）的 25 岁以上的个人，请使用以下模板表达式：</p>
+<h3 id="Example" class="common-anchor-header">示例<button data-href="#Example" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要查找居住在 "北京"（北京）或 "上海"（上海）的 25 岁以上的个人，请使用以下模板表达式：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 AND city IN [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>为提高性能，可使用这种带参数的变体：</p>
@@ -95,7 +155,22 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
         ></path>
       </svg>
     </button></h2><p>Milvus 为特定数据类型（如 JSON、ARRAY 和 VARCHAR 字段）提供高级过滤操作符。</p>
-<h3 id="JSON-field-specific-operators" class="common-anchor-header">特定于 JSON 字段的操作符</h3><p>Milvus 为查询 JSON 字段提供高级操作符，可在复杂的 JSON 结构中进行精确过滤：</p>
+<h3 id="JSON-field-specific-operators" class="common-anchor-header">特定于 JSON 字段的操作符<button data-href="#JSON-field-specific-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 为查询 JSON 字段提供高级操作符，可在复杂的 JSON 结构中进行精确过滤：</p>
 <p><code translate="no">JSON_CONTAINS(identifier, jsonExpr)</code>:检查字段中是否存在 JSON 表达式。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains(tags, &quot;sale&quot;)&#x27;</span>
@@ -109,7 +184,22 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>有关 JSON 操作符的更多详情，请参阅<a href="/docs/zh/json-operators.md">JSON 操作符</a>。</p>
-<h3 id="ARRAY-field-specific-operators" class="common-anchor-header">ARRAY 字段特定操作符</h3><p>Milvus 为数组字段提供了高级过滤操作符，如<code translate="no">ARRAY_CONTAINS</code>,<code translate="no">ARRAY_CONTAINS_ALL</code>,<code translate="no">ARRAY_CONTAINS_ANY</code>, 和<code translate="no">ARRAY_LENGTH</code> ，可对数组数据进行细粒度控制：</p>
+<h3 id="ARRAY-field-specific-operators" class="common-anchor-header">ARRAY 字段特定操作符<button data-href="#ARRAY-field-specific-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 为数组字段提供了高级过滤操作符，如<code translate="no">ARRAY_CONTAINS</code>,<code translate="no">ARRAY_CONTAINS_ALL</code>,<code translate="no">ARRAY_CONTAINS_ANY</code>, 和<code translate="no">ARRAY_LENGTH</code> ，可对数组数据进行细粒度控制：</p>
 <p><code translate="no">ARRAY_CONTAINS</code>:过滤包含特定元素的实体。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -119,11 +209,26 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <p><code translate="no">ARRAY_CONTAINS_ANY</code>:过滤包含列表中任何元素的实体。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS_ANY(history_temperatures, [23, 24])&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">ARRAY_LENGTH</code>:根据数组的长度进行过滤。</p>
+<p><code translate="no">ARRAY_LENGTH</code>:根据数组长度进行筛选。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>有关数组操作符的更多详情，请参阅<a href="/docs/zh/array-operators.md">ARRAY Operators</a>。</p>
-<h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">VARCHAR 字段专用操作符</h3><p>Milvus 提供专门的操作符，用于对 VARCHAR 字段进行基于文本的精确搜索：</p>
+<h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">VARCHAR 字段专用操作符<button data-href="#VARCHAR-field-specific-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 为在 VARCHAR 字段上进行基于文本的精确搜索提供了专门的操作符：</p>
 <h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> 操作符</h4><p><code translate="no">TEXT_MATCH</code> 操作符允许根据特定查询词精确检索文档。它对于结合标量过滤器和向量相似性搜索的过滤搜索特别有用。与语义搜索不同，文本匹配侧重于精确的术语出现。</p>
 <p>Milvus 使用 Tantivy 支持倒排索引和基于术语的文本搜索。过程包括</p>
 <ol>

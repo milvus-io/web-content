@@ -35,7 +35,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MilvusはSiliconFLowが提供するエンベッディングモデルに対応しています。以下に現在利用可能なSiliconFLowのエンベッディングモデルを示しますので、ご参照ください：</p>
+    </button></h2><p>MilvusはSiliconFLowが提供するエンベッディングモデルに対応しています。以下に、現在利用可能なSiliconFLowのエンベッディングモデルを示しますので、ご参照ください：</p>
 <table>
    <tr>
      <th><p>モデル名</p></th>
@@ -59,7 +59,7 @@ beta: Milvus 2.6.x
      <td><p>netease-youdao/bce-embedding-base_v1</p></td>
      <td><p>768</p></td>
      <td><p>512</p></td>
-     <td><p>NetEase Youdaoが開発したバイリンガル/クロスリンガル埋め込みモデルです。中国語と英語の意味表現と検索タスクで優れた性能を発揮し、特にクロスリンガルシナリオで優れている。</p></td>
+     <td><p>NetEase Youdaoが開発したバイリンガル/クロスリンガル埋め込みモデルです。中国語と英語の意味表現や検索タスクで優れた性能を発揮し、特にクロスリンガルシナリオで優れている。</p></td>
    </tr>
    <tr>
      <td><p>BAAI/bge-m3</p></td>
@@ -116,7 +116,7 @@ beta: Milvus 2.6.x
     </button></h3><p><code translate="no">milvus.yaml</code>Milvusは起動時にAPIキーを読み込み、同じプロバイダの環境変数を上書きします。</p>
 <ol>
 <li><p>**の下にキーを宣言してください。<code translate="no">credential:</code></p>
-<p>APIキーは1つでも多くてもかまいません。</p>
+<p>APIキーは1つでも複数でもかまいません。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">apikey_dev:</span>            <span class="hljs-comment"># dev environment</span>
@@ -124,7 +124,7 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>APIキーをここに記述することで、再起動後もAPIキーが保持され、ラベルを変更するだけでAPIキーを切り替えることができます。</p></li>
+<p>ここにAPIキーを記述することで、再起動後もAPIキーが保持され、ラベルを変更するだけでAPIキーを切り替えることができます。</p></li>
 <li><p><strong>Milvusに、サービス呼び出しに使用するキーを知らせる。</strong></p>
 <p>同じファイルで、SiliconFlow プロバイダに使用するラベルを指定します。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
@@ -134,7 +134,7 @@ beta: Milvus 2.6.x
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey_dev</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-comment"># url: https://api.siliconflow.cn/v1/embeddings   # (optional) custom url</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>これにより、MilvusがOpenAIのembeddingsエンドポイントに送信するすべてのリクエストに特定のキーがバインドされます。</p></li>
+<p>これにより、MilvusがOpenAIのエンベッディングエンドポイントに送信するすべてのリクエストに特定のキーがバインドされます。</p></li>
 </ol>
 <h3 id="Option-2-Environment-variable" class="common-anchor-header">オプション 2: 環境変数<button data-href="#Option-2-Environment-variable" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -191,7 +191,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>認証情報の設定が完了したら、以下の手順で埋め込み関数を定義し、使用します。</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">ステップ1：スキーマフィールドの定義<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">ステップ1: スキーマフィールドの定義<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

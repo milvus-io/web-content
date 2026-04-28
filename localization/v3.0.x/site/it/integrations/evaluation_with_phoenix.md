@@ -360,7 +360,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
 <li><strong>Eccezioni di runtime</strong>: Cattura i problemi critici come il rate-limiting.</li>
 <li><strong>Documenti recuperati</strong>: Analizzare il recupero dei documenti, il punteggio e l'ordine.</li>
 </ul>
-<p>Utilizzando il tracciamento di Phoenix, è possibile <strong>identificare i colli di bottiglia</strong>, <strong>ottimizzare le risorse</strong> e <strong>garantire l'affidabilità del sistema</strong> in diversi framework e linguaggi.</p>
+<p>Utilizzando il tracciamento di Phoenix, è possibile <strong>identificare i colli di bottiglia</strong>, <strong>ottimizzare le risorse</strong> e <strong>garantire l'affidabilità del sistema</strong> in vari framework e linguaggi.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> phoenix <span class="hljs-keyword">as</span> px
 <span class="hljs-keyword">from</span> phoenix.trace.openai <span class="hljs-keyword">import</span> OpenAIInstrumentor
 

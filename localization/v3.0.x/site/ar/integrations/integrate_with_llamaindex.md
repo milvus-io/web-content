@@ -165,7 +165,7 @@ documents = SimpleDirectoryReader(
       </svg>
     </button></h3><p>الآن بعد أن أصبح لدينا مستند، يمكننا إنشاء فهرس وإدراج المستند. بالنسبة للفهرس سنستخدم MilvusVectorStore. يأخذ MilvusVectorStore بعض الوسيطات:</p>
 <h4 id="basic-args" class="common-anchor-header">الوسيطات الأساسية</h4><ul>
-<li><code translate="no">uri (str, optional)</code>: URI المطلوب الاتصال به، ويأتي على شكل "https://address:port" لخدمة Milvus أو خدمة Zilliz Cloud، أو "المسار/إلى/إلى/المحلي/ilvus.db" لـ Milvus.db المحلي الخفيف. الافتراضي إلى "./milvus_llamaindex.db".</li>
+<li><code translate="no">uri (str, optional)</code>: URI المراد الاتصال به، ويأتي على شكل "https://address:port" لخدمة Milvus أو خدمة Zilliz Cloud، أو "المسار/إلى/إلى/المحلي/ilvus.db" لـ Milvus.db المحلي الخفيف. الافتراضي إلى "./milvus_llamaindex.db".</li>
 <li><code translate="no">token (str, optional)</code>: الرمز المميز لتسجيل الدخول. فارغ في حالة عدم استخدام rbac، وفي حالة استخدام rbac سيكون على الأرجح "اسم المستخدم: كلمة المرور".</li>
 <li><code translate="no">collection_name (str, optional)</code>: اسم المجموعة التي سيتم تخزين البيانات فيها. افتراضي إلى "llamalection".</li>
 <li><code translate="no">overwrite (bool, optional)</code>: ما إذا كان سيتم الكتابة فوق المجموعة الموجودة بنفس الاسم. الإعداد الافتراضي إلى خطأ.</li>
@@ -191,7 +191,7 @@ documents = SimpleDirectoryReader(
 <li><code translate="no">sparse_index_config (dict, optional)</code>: التكوين المستخدم لبناء فهرس التضمين المتناثر. الإعداد الافتراضي إلى بلا.</li>
 </ul>
 <h4 id="hybrid-ranker" class="common-anchor-header">مصنف هجين</h4><ul>
-<li><p><code translate="no">hybrid_ranker (str)</code>: يحدد نوع مصنف التصنيف المستخدم في استعلامات البحث المختلط. يدعم حاليًا فقط ["RRFRFRanker"، "RRFRanker"، "WeightedRanker"]. الافتراضي إلى "RRFRFRanker".</p></li>
+<li><p><code translate="no">hybrid_ranker (str)</code>: يحدد نوع مصنف التصنيف المستخدم في استعلامات البحث المختلط. يدعم حاليًا فقط ["RRFRanker"، "RRFRanker"، "WeightedRanker"]. الافتراضي إلى "RRFRFRanker".</p></li>
 <li><p><code translate="no">hybrid_ranker_params (dict, optional)</code>: معلمات التكوين لمصنّف البحث الهجين. تعتمد بنية هذا القاموس على مصنف التصنيف المحدد المستخدم:</p>
 <ul>
 <li>بالنسبة إلى "RRFRFRanker"، يجب أن يتضمن:<ul>
@@ -226,7 +226,7 @@ index = VectorStoreIndex.from_documents(documents, storage_context=storage_conte
 <div class="alert note">
 <p>بالنسبة لمعلمات <code translate="no">MilvusVectorStore</code>:</p>
 <ul>
-<li>يعد تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، الطريقة الأكثر ملاءمة، حيث يستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">ملف Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
+<li>تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هي الطريقة الأكثر ملاءمة، حيث تستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">ملف Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
 <li>إذا كان لديك حجم كبير من البيانات، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">docker أو kubernetes</a>. في هذا الإعداد، يُرجى استخدام الخادم uri، على سبيل المثال<code translate="no">http://localhost:19530</code> ، كـ <code translate="no">uri</code>.</li>
 <li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، اضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في Zilliz Cloud.</li>
 </ul>

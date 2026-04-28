@@ -25,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Der <strong>GPU_IVF_PQ-Index</strong> baut auf dem <strong>IVF_PQ-Konzept</strong> auf, indem er Inverted File Clustering mit Product Quantization (PQ) kombiniert, das hochdimensionale Vektoren in kleinere Unterräume aufteilt und diese für eine effiziente Ähnlichkeitssuche quantisiert. GPU_IVF_PQ wurde ausschließlich für GPU-Umgebungen entwickelt und nutzt die Parallelverarbeitung, um Berechnungen zu beschleunigen und große Vektordaten effektiv zu verarbeiten. Weitere Informationen zu den grundlegenden Konzepten finden Sie unter <a href="/docs/de/ivf-pq.md">IVF_PQ</a>.</p>
+    </button></h1><p>Der <strong>GPU_IVF_PQ-Index</strong> baut auf dem <strong>IVF_PQ-Konzept</strong> auf, indem er Inverted File Clustering mit Product Quantization (PQ) kombiniert, das hochdimensionale Vektoren in kleinere Unterräume zerlegt und diese für eine effiziente Ähnlichkeitssuche quantisiert. GPU_IVF_PQ wurde ausschließlich für GPU-Umgebungen entwickelt und nutzt die Parallelverarbeitung, um Berechnungen zu beschleunigen und große Vektordaten effektiv zu verarbeiten. Weitere Informationen zu den grundlegenden Konzepten finden Sie unter <a href="/docs/de/ivf-pq.md">IVF_PQ</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Index erstellen<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,7 +175,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">cache_dataset_on_device</code></p></td>
      <td><p>Legt fest, ob der Originaldatensatz im GPU-Speicher zwischengespeichert werden soll. Mögliche Werte:</p>
 <ul>
-<li><p><code translate="no">"true"</code>: Zwischenspeichern des Originaldatensatzes zur Verbesserung der Wiederauffindbarkeit durch Verfeinerung der Suchergebnisse.</p></li>
+<li><p><code translate="no">"true"</code>: Zwischenspeichern des Originaldatensatzes zur Verbesserung der Wiederauffindung durch Verfeinerung der Suchergebnisse.</p></li>
 <li><p><code translate="no">"false"</code>: Der Originaldatensatz wird nicht zwischengespeichert, um GPU-Speicher zu sparen.</p></li>
 </ul></td>
      <td><p><strong>Typ</strong>: String <strong>Bereich</strong>: [<code translate="no">"true"</code>, <code translate="no">"false"</code>]</p>

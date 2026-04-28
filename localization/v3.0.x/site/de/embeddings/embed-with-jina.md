@@ -104,7 +104,7 @@ query_embeddings = jina_ef.encode_queries(queries)
        -<span class="hljs-number">1.65050142e-02</span>, -<span class="hljs-number">4.26847413e-02</span>,  <span class="hljs-number">2.02664156e-02</span>, -<span class="hljs-number">1.72684863e-02</span>])]
 Dim <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 <button class="copy-code-btn"></button></code></pre>
-<p>Um Einbettungen von Eingaben für Ähnlichkeitsabgleiche (z. B. STS oder symmetrische Abrufaufgaben), Textklassifizierung, Clustering oder Reranking-Aufgaben zu erstellen, verwenden Sie den entsprechenden <code translate="no">task</code> Parameterwert bei der Instanziierung der Klasse <code translate="no">JinaEmbeddingFunction</code>.</p>
+<p>Um Einbettungen von Eingaben für Ähnlichkeitsabgleiche (z. B. STS oder symmetrische Abrufaufgaben), Textklassifizierung, Clustering oder Reranking-Aufgaben zu erstellen, verwenden Sie beim Instanziieren der Klasse <code translate="no">JinaEmbeddingFunction</code> den entsprechenden Parameterwert <code translate="no">task</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_ef = JinaEmbeddingFunction(

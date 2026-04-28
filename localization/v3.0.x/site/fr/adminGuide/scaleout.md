@@ -43,17 +43,32 @@ title: Mise à l'échelle d'un cluster Milvus
         ></path>
       </svg>
     </button></h2><p>La mise à l'échelle horizontale comprend la mise à l'échelle vers le bas et la mise à l'échelle vers le haut.</p>
-<h3 id="Scaling-out" class="common-anchor-header">Mise à l'échelle</h3><p>La mise à l'échelle consiste à augmenter le nombre de nœuds dans un cluster. Contrairement à la mise à l'échelle, la mise à l'échelle n'exige pas que vous allouiez davantage de ressources à un nœud de la grappe. Au contraire, la mise à l'échelle étend la grappe horizontalement en ajoutant des nœuds supplémentaires.</p>
+<h3 id="Scaling-out" class="common-anchor-header">Mise à l'échelle<button data-href="#Scaling-out" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La mise à l'échelle consiste à augmenter le nombre de nœuds dans un cluster. Contrairement à la mise à l'échelle, la mise à l'échelle n'exige pas que vous allouiez davantage de ressources à un nœud de la grappe. Au contraire, la mise à l'échelle étend la grappe horizontalement en ajoutant des nœuds supplémentaires.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
    </span> <span class="img-wrapper"> <span>Scaleout</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>Mise à l'échelle</span> </span></p>
 <p>Selon l'<a href="/docs/fr/architecture_overview.md">architecture Milvus</a>, les nœuds de travail sans état comprennent le nœud de requête, le nœud de données, le nœud d'index et le proxy. Par conséquent, vous pouvez étendre ce type de nœuds en fonction des besoins de votre entreprise et des scénarios d'application. La mise à l'échelle du cluster Milvus peut se faire manuellement ou automatiquement.</p>
-<p>En règle générale, vous devrez redimensionner le cluster Milvus que vous avez créé s'il est surutilisé. Vous trouverez ci-dessous quelques situations typiques dans lesquelles vous pourriez avoir besoin de redimensionner le cluster Milvus :</p>
+<p>En règle générale, vous devrez redimensionner le cluster Milvus que vous avez créé s'il est surutilisé. Vous trouverez ci-dessous quelques situations typiques dans lesquelles vous pouvez avoir besoin d'une mise à l'échelle du cluster Milvus :</p>
 <ul>
 <li>L'utilisation de l'UC et de la mémoire est élevée pendant un certain temps.</li>
 <li>Le débit des requêtes augmente.</li>
@@ -61,7 +76,22 @@ title: Mise à l'échelle d'un cluster Milvus
 <li>Des volumes massifs de grands ensembles de données doivent être traités.</li>
 <li>La haute disponibilité du service Milvus doit être assurée.</li>
 </ul>
-<h3 id="Scaling-in" class="common-anchor-header">Mise à l'échelle</h3><p>La mise à l'échelle consiste à diminuer le nombre de nœuds dans un cluster. En général, vous devrez mettre à l'échelle le cluster Milvus que vous avez créé s'il est sous-utilisé. Vous trouverez ci-dessous quelques situations typiques dans lesquelles vous devrez procéder à une mise à l'échelle du cluster Milvus :</p>
+<h3 id="Scaling-in" class="common-anchor-header">Mise à l'échelle<button data-href="#Scaling-in" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La mise à l'échelle consiste à diminuer le nombre de nœuds dans un cluster. En général, vous devrez mettre à l'échelle le cluster Milvus que vous avez créé s'il est sous-utilisé. Voici quelques situations typiques dans lesquelles il est nécessaire de procéder à une mise à l'échelle du cluster Milvus :</p>
 <ul>
 <li>L'utilisation de l'UC et de la mémoire est faible pendant un certain temps.</li>
 <li>Le débit des requêtes diminue.</li>
@@ -101,7 +131,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 Milvus prend uniquement en charge l'ajout de nœuds de travail et ne prend pas en charge l'ajout de composants de coordinateur.</div>
-<h2 id="Scale-a-Milvus-cluster" class="common-anchor-header">Mise à l'échelle d'un cluster Milvus<button data-href="#Scale-a-Milvus-cluster" class="anchor-icon" translate="no">
+<h2 id="Scale-a-Milvus-cluster" class="common-anchor-header">Évolution d'un cluster Milvus<button data-href="#Scale-a-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -174,7 +204,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <ul>
 <li>Apprendre à <a href="/docs/fr/eks.md">déployer Milvus sur Amazon EKS avec Terraform</a></li>
 <li>Apprendre à <a href="/docs/fr/gcp.md">déployer le cluster Milvus sur GCP avec Kubernetes</a></li>
-<li>Apprendre à <a href="/docs/fr/azure.md">déployer Milvus sur Microsoft Azure avec Kubernetes</a></li>
+<li>Apprenez à <a href="/docs/fr/azure.md">déployer Milvus sur Microsoft Azure avec Kubernetes</a></li>
 </ul></li>
 <li><p>Si vous cherchez des instructions sur la façon d'allouer des ressources :</p>
 <ul>

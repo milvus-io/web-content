@@ -70,7 +70,7 @@ title: 'Sistemi multi-agente con Mistral AI, Milvus e Llama-agenti'
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
    </span> <span class="img-wrapper"> <span>immagine.png</span> </span></p>
 <h2 id="llama-agents" class="common-anchor-header">llama-agenti<button data-href="#llama-agents" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -112,7 +112,7 @@ title: 'Sistemi multi-agente con Mistral AI, Milvus e Llama-agenti'
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
    </span> <span class="img-wrapper"> <span>immagine.png</span> </span></p>
 <h2 id="Mistral-AI" class="common-anchor-header">Mistral AI<button data-href="#Mistral-AI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -219,7 +219,7 @@ load_dotenv()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Definiamo il modello di embedding che verrà utilizzato in questo notebook. Utilizziamo <code translate="no">mistral-embed</code>, un modello di embedding sviluppato da Mistral, addestrato tenendo conto dei recuperi, il che lo rende un ottimo modello per il nostro sistema Agentic RAG. Per i dettagli, consultare la pagina <a href="https://docs.mistral.ai/capabilities/embeddings/">Embedding</a> nella documentazione di Mistral.</p>
+    </button></h1><p>Definiamo il modello di embedding che verrà utilizzato in questo notebook. Utilizziamo <code translate="no">mistral-embed</code>, un modello di embedding sviluppato da Mistral, addestrato tenendo conto dei recuperi, il che lo rende un ottimo modello per il nostro sistema agenziale RAG. Per i dettagli, consultare la pagina <a href="https://docs.mistral.ai/capabilities/embeddings/">Embedding</a> nella documentazione di Mistral.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> Settings
 <span class="hljs-keyword">from</span> llama_index.embeddings.mistralai <span class="hljs-keyword">import</span> MistralAIEmbedding
 
@@ -482,7 +482,7 @@ llm = Ollama(model=<span class="hljs-string">&quot;mistral-nemo&quot;</span>)
     </button></h2><p>Ora possiamo vedere il filtraggio dei metadati in azione:</p>
 <ol>
 <li>Nel primo caso, l'Agente non dovrebbe essere in grado di trovare nulla che risponda alla richiesta dell'utente, poiché si tratta di Uber e noi filtriamo solo i documenti relativi a Lyft.</li>
-<li>Nel secondo, l'agente dovrebbe essere in grado di trovare informazioni su Lyft, poiché cercheremo solo documenti che riguardano Lyft.</li>
+<li>Nel secondo, l'agente dovrebbe essere in grado di trovare informazioni su Lyft, in quanto cercheremo solo documenti che riguardano Lyft.</li>
 </ol>
 <pre><code translate="no" class="language-python">response = llm.predict_and_call(
     query_engine_tools,
@@ -578,7 +578,7 @@ Based on the provided context, which pertains to Lyft&#x27;s Risk Factors sectio
     </button></h3><ul>
 <li><p><strong>Modello di prompt</strong>: La classe PromptTemplate è usata per definire un modello per estrarre i filtri di metadati dalla domanda dell'utente. Il modello indica al modello linguistico di considerare i nomi delle aziende, gli anni e altri attributi rilevanti.</p></li>
 <li><p><strong>LLM</strong>: Mistral Nemo viene utilizzato per generare i filtri di metadati in base alla domanda dell'utente. Il modello viene sollecitato con la domanda e il modello per estrarre i filtri pertinenti.</p></li>
-<li><p><strong>Filtri dei metadati</strong>: La risposta dell'LLM viene analizzata per creare un oggetto <code translate="no">MetadataFilters</code>. Se non vengono indicati filtri specifici, viene restituito un oggetto <code translate="no">MetadataFilters</code> vuoto.</p></li>
+<li><p><strong>Filtri dei metadati</strong>: La risposta del LLM viene analizzata per creare un oggetto <code translate="no">MetadataFilters</code>. Se non vengono indicati filtri specifici, viene restituito un oggetto <code translate="no">MetadataFilters</code> vuoto.</p></li>
 <li><p><strong>Motore di query filtrata</strong>: il metodo <code translate="no">index.as_query_engine(filters=metadata_filters)</code> crea un motore di query che applica i filtri dei metadati estratti all'indice. Questo assicura che vengano recuperati solo i documenti che corrispondono ai criteri del filtro.</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core.prompts.base <span class="hljs-keyword">import</span> PromptTemplate

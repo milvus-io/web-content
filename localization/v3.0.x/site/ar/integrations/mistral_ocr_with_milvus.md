@@ -138,7 +138,7 @@ title: فهم المستندات باستخدام Mistral OCR و Milvus
     </button></h2><p>ستحتاج إلى</p>
 <ol>
 <li>مفتاح واجهة برمجة تطبيقات ميسترال (احصل على واحد من https://console.mistral.ai/)</li>
-<li>تشغيل Milvus محلياً من خلال <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> أو مع <a href="https://zilliz.com">Zilliz Cloud</a></li>
+<li>تشغيل Milvus محلياً من خلال <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> أو باستخدام <a href="https://zilliz.com">Zilliz Cloud</a></li>
 </ol>
 <p>لنقم بإعداد بيئتنا:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json

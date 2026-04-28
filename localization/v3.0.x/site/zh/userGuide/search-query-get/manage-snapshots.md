@@ -40,7 +40,7 @@ beta: Milvus 3.0.x
 <p>调用<code translate="no">flush()</code> 不是必须的，但强烈建议这样做以避免数据丢失。如果跳过这一步，快照将只包含已刷新的数据。</p>
 </div>
 <p>命名快照时，请使用清晰、描述性的名称，如<code translate="no">&quot;daily_backup_20240101&quot;</code> 或<code translate="no">&quot;v2.1_production_release&quot;</code> ，避免使用通用术语，如<code translate="no">&quot;backup1&quot;</code> 和<code translate="no">&quot;test&quot;</code> 。明智地使用快照名称，以区分不同版本、环境和阶段的快照。</p>
-<p>下面的代码示例假定您已经有一个名为<code translate="no">my_collection</code> 的 Collection。</p>
+<p>下面的代码示例假定您已经有一个名为<code translate="no">my_collection</code> 的 Collections。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

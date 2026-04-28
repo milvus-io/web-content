@@ -42,7 +42,7 @@ summary: >-
 <p>考虑一个带有 "<strong>类别</strong>"和 "<strong>公共</strong>"字段的文档 Collections。我们想检索属于<strong>Tech</strong>类别并对<strong>公众</strong>开放的文档。在这种情况下，位图索引的键就是<strong>Tech</strong>和<strong>Public</strong>。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" />
    </span> <span class="img-wrapper"> <span>位图</span> </span></p>
 <p>如图所示，"<strong>类别</strong>"和<strong>"公开</strong> <strong>"</strong>的位图索引是</p>
 <ul>

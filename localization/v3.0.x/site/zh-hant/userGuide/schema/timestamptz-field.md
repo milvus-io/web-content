@@ -21,7 +21,7 @@ beta: Milvus 2.6.6+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>跨區域追蹤時間的應用程式，例如電子商務系統、協作工具或分散式日誌，需要精確處理帶有時區的時間戳。Milvus 中的<code translate="no">TIMESTAMPTZ</code> 資料類型透過儲存時間戳與其相關的時區來提供此功能。</p>
+    </button></h1><p>跨區域追蹤時間的應用程式，例如電子商務系統、協作工具或分散式日誌，需要精確處理帶有時區的時間戳。Milvus 中的<code translate="no">TIMESTAMPTZ</code> 資料類型透過儲存帶有相關時區的時間戳來提供此功能。</p>
 <h2 id="What-is-a-TIMESTAMPTZ-field" class="common-anchor-header">什麼是 TIMESTAMPTZ 欄位？<button data-href="#What-is-a-TIMESTAMPTZ-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +37,7 @@ beta: Milvus 2.6.6+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">TIMESTAMPTZ</code> 欄位是 Milvus 中一個模式定義的資料類型 (<code translate="no">DataType.TIMESTAMPTZ</code>) ，它處理時區感應輸入，並在內部將所有時間點儲存為 UTC 絕對時間：</p>
+    </button></h2><p><code translate="no">TIMESTAMPTZ</code> 欄位是 Milvus 中一個模式定義的資料類型 (<code translate="no">DataType.TIMESTAMPTZ</code>)，它處理時區感應輸入，並在內部將所有時間點儲存為 UTC 絕對時間：</p>
 <ul>
 <li><p><strong>接受的輸入格式</strong>：帶有時區偏移的<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>字串（例如，<code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> 表示 2025 年 5 月 1 日晚上 11:59:59 (UTC+08:00)）。</p></li>
 <li><p><strong>內部儲存</strong>：所有<code translate="no">TIMESTAMPTZ</code> 值均以統<a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">一時間 (Coordinated Universal Time</a>, UTC) 標準化和儲存。</p></li>

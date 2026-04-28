@@ -39,9 +39,9 @@ title: 使用 Mistral AI、Milvus 和 Llama-agents 的多代理系統
 <ul>
 <li><p>1️⃣ Store Data into Milvus：學習將資料儲存到Milvus中，Milvus是為高速相似性搜索和人工智能應用而設計的高效向量資料庫。</p></li>
 <li><p>2️⃣使用llama-index與Mistral模型進行資料查詢：探索如何結合Mistral模型使用llama-index查詢儲存於Milvus的資料。</p></li>
-<li><p>3️⃣建立自動化的資料搜尋與讀取代理：建立能根據使用者查詢自動搜尋與讀取資料的代理。這些自動化代理程式可提供快速、精確的回覆，減少手動搜尋的工作量，進而提升使用者體驗。</p></li>
+<li><p>3️⃣建立自動化的資料搜尋與讀取代理：建立能根據使用者查詢自動搜尋與讀取資料的代理。這些自動化代理程式將透過提供快速、精確的回覆來提升使用者體驗，減少手動搜尋的工作。</p></li>
 <li><p>4️⃣開發基於使用者查詢的元資料篩選代理程式：實施可自動根據使用者查詢產生元資料篩選程式的代理程式，精煉搜尋結果並將其上下文化，避免混亂並提高擷取資訊的準確性，即使是複雜的查詢也不例外。</p></li>
-<li><p>🔍 摘要 在本筆記簿結束時，您將全面了解如何使用 Milvus、llama-index 搭配 llama-agents 以及 Mistral 模型來建立一個強大且有效率的資料檢索系統。</p></li>
+<li><p>🔍 摘要 在本筆記簿結束時，您將全面了解如何使用 Milvus、llama-index 搭配 llama-agents 以及 Mistral 模型來建立穩健且有效率的資料檢索系統。</p></li>
 </ul>
 <h2 id="Milvus" class="common-anchor-header">Milvus<button data-href="#Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ title: 使用 Mistral AI、Milvus 和 Llama-agents 的多代理系統
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
    </span> <span class="img-wrapper"> <span>image.png</span> </span></p>
 <h2 id="llama-agents" class="common-anchor-header">llama-agents<button data-href="#llama-agents" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -110,7 +110,7 @@ title: 使用 Mistral AI、Milvus 和 Llama-agents 的多代理系統
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
    </span> <span class="img-wrapper"> <span>image.png</span> </span></p>
 <h2 id="Mistral-AI" class="common-anchor-header">Mistral AI<button data-href="#Mistral-AI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -127,7 +127,7 @@ title: 使用 Mistral AI、Milvus 和 Llama-agents 的多代理系統
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Mistral AI 是一個建立 LLM 與 Embeddings 模型的研究實驗室，他們最近發表了新版本的模型，Mistral Nemo 與 Mistral Large，這兩個模型在 RAG 與函式呼叫方面表現得特別好。正因為如此，我們將在本筆記本中使用它們。</p>
+    </button></h2><p>Mistral AI 是一個建立 LLM 與 Embeddings 模型的研究實驗室，他們最近發表了新版本的模型，Mistral Nemo 與 Mistral Large，這兩個模型在 RAG 與函式呼叫方面表現得特別好。正因如此，我們將在本筆記本中使用它們。</p>
 <h2 id="Install-Dependencies" class="common-anchor-header">安裝相依性<button data-href="#Install-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -241,7 +241,7 @@ Settings.embed_model = MistralAIEmbedding(model_name=<span class="hljs-string">&
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Llama Index 使用 LLM 來回應提示和查詢，並負責撰寫自然語言回應。 我們定義 Mistral Nemo 為預設。Nemo 提供最多 128k tokens 的大型上下文視窗。它的推理能力、世界知識和編碼精確度都是同級產品中最先進的。</p>
+    </button></h2><p>Llama Index 使用 LLM 來回應提示和查詢，並負責撰寫自然語言回應。 我們定義 Mistral Nemo 為預設。Nemo 提供最多 128k tokens 的大型上下文視窗。它的推理能力、世界知識和編碼準確度在同級產品中都是最先進的。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.llms.ollama <span class="hljs-keyword">import</span> Ollama
 
 Settings.llm = Ollama(<span class="hljs-string">&quot;mistral-nemo&quot;</span>)
@@ -265,7 +265,7 @@ Settings.llm = Ollama(<span class="hljs-string">&quot;mistral-nemo&quot;</span>)
 <ul>
 <li>將 uri 設定為本機檔案，例如<code translate="no">./milvus.db</code> ，是最方便的方法，因為它會自動利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>將所有資料儲存在此檔案中。</li>
 <li>如果您有大規模的資料，例如超過一百萬個向量，您可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上架設效能更高的 Milvus 伺服器。在此設定中，請使用伺服器的 uri，例如<code translate="no">http://localhost:19530</code> ，作為您的 uri。</li>
-<li>如果您想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">雲端</a>服務，請調整 uri 和 token，對應 Zilliz Cloud 的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint 和 API key</a>。</li>
+<li>如果您想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，Milvus 的完整管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">雲端</a>服務，請調整 uri 和 token，對應 Zilliz Cloud 的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint 和 API key</a>。</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.vector_stores.milvus <span class="hljs-keyword">import</span> MilvusVectorStore
 <span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> (
@@ -311,7 +311,7 @@ company_engine = index.as_query_engine(similarity_top_k=<span class="hljs-number
         ></path>
       </svg>
     </button></h2><p>建立有效代理程式的關鍵步驟之一，就是定義它可以用來執行任務的工具。這些工具基本上是代理程式可以用來擷取資訊或執行動作的函式或服務。</p>
-<p>下面，我們將定義兩個工具，讓我們的代理可以用來查詢 2021 年 Lyft 和 Uber 的財務資訊。這些工具將會整合到我們的代理程式中，讓代理程式能夠以精確且相關的資訊回應自然語言查詢。</p>
+<p>下面，我們將定義兩個工具，讓我們的代理可以用來查詢 2021 年 Lyft 和 Uber 的財務資訊。這些工具將整合到我們的代理程式中，讓代理程式能夠以精確且相關的資訊回應自然語言查詢。</p>
 <p>如果您看一下我們在頂端的圖表，這就是「Agent 服務」。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define the different tools that can be used by our Agent.</span>
 query_engine_tools = [
@@ -576,7 +576,7 @@ Based on the provided context, which pertains to Lyft&#x27;s Risk Factors sectio
     </button></h3><ul>
 <li><p><strong>Prompt Template</strong>：PromptTemplate 類用於定義從使用者問題中抽取元資料篩選器的範本。該模板指示語言模型考慮公司名稱、年份和其他相關屬性。</p></li>
 <li><p><strong>LLM</strong>: Mistral Nemo 用來根據使用者的問題產生元資料篩選器。模型會根據問題和範本來擷取相關的篩選條件。</p></li>
-<li><p><strong>元資料篩選器</strong>：LLM 的回應會被解析以建立<code translate="no">MetadataFilters</code> 物件。如果沒有提及特定的篩選條件，則會傳回一個空的<code translate="no">MetadataFilters</code> 物件。</p></li>
+<li><p><strong>元資料篩選器</strong>：LLM 的回應會被解析以建立<code translate="no">MetadataFilters</code> 物件。如果沒有提到特定的篩選條件，則會傳回一個空的<code translate="no">MetadataFilters</code> 物件。</p></li>
 <li><p><strong>過濾查詢引擎</strong>：<code translate="no">index.as_query_engine(filters=metadata_filters)</code> 方法會建立一個查詢引擎，將擷取的元資料過濾器套用至索引。這可確保只擷取符合篩選條件的文件。</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core.prompts.base <span class="hljs-keyword">import</span> PromptTemplate

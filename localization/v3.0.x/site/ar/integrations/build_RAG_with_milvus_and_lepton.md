@@ -64,7 +64,7 @@ title: بناء RAG مع Milvus و Lepton AIAbout to Deprecate
 <div class="alert note">
 <p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، فقد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
 </div>
-<p>يُمكّن Lepton واجهة برمجة التطبيقات على غرار OpenAI. يمكنك تسجيل الدخول إلى موقعه الرسمي وإعداد <a href="https://www.lepton.ai/docs">مفتاح واجهة برمجة التطبيقات</a> <code translate="no">LEPTONAI_TOKEN</code> كمتغير بيئة.</p>
+<p>يُمكّن Lepton واجهة برمجة التطبيقات على غرار OpenAI. يمكنك تسجيل الدخول إلى موقعه الرسمي وإعداد <a href="https://www.lepton.ai/docs">مفتاح API</a> <code translate="no">LEPTONAI_TOKEN</code> كمتغير بيئة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;LEPTONAI_TOKEN&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>
@@ -89,7 +89,7 @@ os.environ[<span class="hljs-string">&quot;LEPTONAI_TOKEN&quot;</span>] = <span 
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>نقوم بتحميل جميع ملفات تخفيض السعر من المجلد <code translate="no">milvus_docs/en/faq</code>. بالنسبة لكل مستند، نستخدم ببساطة "# " لفصل المحتوى في الملف، وهو ما يمكن أن يفصل تقريبًا محتوى كل جزء رئيسي من ملف تخفيض السعر.</p>
+<p>نقوم بتحميل جميع ملفات تخفيض السعر من المجلد <code translate="no">milvus_docs/en/faq</code>. بالنسبة لكل مستند، نستخدم ببساطة "#" لفصل المحتوى في الملف، وهو ما يمكن أن يفصل تقريبًا محتوى كل جزء رئيسي من ملف تخفيض السعر.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []

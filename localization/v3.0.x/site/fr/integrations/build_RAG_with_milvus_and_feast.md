@@ -6,9 +6,9 @@ summary: >-
   caractéristiques open-source qui rationalise la gestion des caractéristiques
   pour l'apprentissage automatique, permettant un stockage et une récupération
   efficaces des données structurées pour la formation et l'inférence en temps
-  réel. Milvus est une base de données vectorielle haute performance conçue pour
-  la recherche rapide de similarités, ce qui la rend idéale pour récupérer les
-  documents pertinents dans les flux de travail RAG.
+  réel. Milvus est une base de données vectorielles haute performance conçue
+  pour la recherche rapide de similarités, ce qui la rend idéale pour récupérer
+  les documents pertinents dans les flux de travail RAG.
 title: Construire RAG avec Milvus et Feast
 ---
 <h1 id="Build-RAG-with-Milvus-and-Feast" class="common-anchor-header">Construire RAG avec Milvus et Feast<button data-href="#Build-RAG-with-Milvus-and-Feast" class="anchor-icon" translate="no">
@@ -32,8 +32,8 @@ title: Construire RAG avec Milvus et Feast
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_feast.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>Dans ce tutoriel, nous allons construire un pipeline Retrieval-Augmented Generation (RAG) en utilisant <a href="https://github.com/feast-dev/feast">Feast</a> et <a href="https://milvus.io/">Milvus</a>. Feast est un magasin de fonctionnalités open-source qui rationalise la gestion des fonctionnalités pour l'apprentissage automatique, permettant un stockage et une récupération efficaces des données structurées pour la formation et l'inférence en temps réel. Milvus est une base de données vectorielle haute performance conçue pour la recherche rapide de similarités, ce qui la rend idéale pour récupérer les documents pertinents dans les flux de travail RAG.</p>
-<p>Essentiellement, nous utiliserons Feast pour injecter des documents et des données structurées (c'est-à-dire des caractéristiques) dans le contexte d'un LLM (Large Language Model) afin d'alimenter une application RAG (Retrieval Augmented Generation) avec Milvus comme base de données vectorielle en ligne.</p>
+<p>Dans ce tutoriel, nous allons construire un pipeline Retrieval-Augmented Generation (RAG) en utilisant <a href="https://github.com/feast-dev/feast">Feast</a> et <a href="https://milvus.io/">Milvus</a>. Feast est un magasin de caractéristiques open-source qui rationalise la gestion des caractéristiques pour l'apprentissage automatique, permettant un stockage et une récupération efficaces des données structurées pour la formation et l'inférence en temps réel. Milvus est une base de données vectorielle haute performance conçue pour la recherche rapide de similarités, ce qui la rend idéale pour récupérer les documents pertinents dans les flux de travail RAG.</p>
+<p>Essentiellement, nous utiliserons Feast pour injecter des documents et des données structurées (c'est-à-dire des caractéristiques) dans le contexte d'un LLM (Large Language Model) afin d'alimenter une application RAG (Retrieval Augmented Generation) avec Milvus comme base de données vectorielles en ligne.</p>
 <h1 id="Why-Feast" class="common-anchor-header">Pourquoi Feast ?<button data-href="#Why-Feast" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,7 +85,22 @@ title: Construire RAG avec Milvus et Feast
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies" class="common-anchor-header">Dépendances</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&#x27;feast[milvus]&#x27;</span> openai -U -q</span>
+    </button></h2><h3 id="Dependencies" class="common-anchor-header">Dépendances<button data-href="#Dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&#x27;feast[milvus]&#x27;</span> openai -U -q</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong> (cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" dans le menu déroulant).</p>
@@ -124,7 +139,22 @@ llm_client = OpenAI(
 │── feature_store.yaml     <span class="hljs-comment"># Configures Milvus and feature store settings</span>
 │── test_workflow.py       <span class="hljs-comment"># Example workflow for Feast operations</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Key-Configuration-Files" class="common-anchor-header">Fichiers de configuration de la clé</h3><h4 id="1-featurestoreyaml" class="common-anchor-header">1. feature_store.yaml</h4><p>Ce fichier configure l'infrastructure du magasin de fonctionnalités :</p>
+<h3 id="Key-Configuration-Files" class="common-anchor-header">Fichiers de configuration de la clé<button data-href="#Key-Configuration-Files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="1-featurestoreyaml" class="common-anchor-header">1. feature_store.yaml</h4><p>Ce fichier configure l'infrastructure du magasin de fonctionnalités :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">project:</span> <span class="hljs-string">rag</span>
 <span class="hljs-attr">provider:</span> <span class="hljs-string">local</span>
 <span class="hljs-attr">registry:</span> <span class="hljs-string">data/registry.db</span>
@@ -142,7 +172,7 @@ llm_client = OpenAI(
 <button class="copy-code-btn"></button></code></pre>
 <p>Cette configuration établit :</p>
 <ul>
-<li>Milvus comme magasin en ligne pour la récupération rapide des vecteurs</li>
+<li>Milvus comme magasin en ligne pour une récupération rapide des vecteurs</li>
 <li>Le stockage hors ligne basé sur des fichiers pour le traitement des données historiques</li>
 <li>Des capacités de recherche vectorielle avec la similarité COSINE</li>
 </ul>
@@ -424,7 +454,22 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="common-anchor-header">1. Intégrer une requête en utilisant PyTorch et les transformateurs de phrases</h3><p>Pendant l'inférence (par exemple, lorsqu'un utilisateur soumet un message de chat), nous devons intégrer le texte d'entrée. Cela peut être considéré comme une transformation des caractéristiques des données d'entrée. Dans cet exemple, nous le ferons avec un petit transformateur de phrases de Hugging Face.</p>
+    </button></h2><h3 id="1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="common-anchor-header">1. Intégrer une requête en utilisant PyTorch et les transformateurs de phrases<button data-href="#1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pendant l'inférence (par exemple, lorsqu'un utilisateur soumet un message de chat), nous devons intégrer le texte d'entrée. Cela peut être considéré comme une transformation des caractéristiques des données d'entrée. Dans cet exemple, nous le ferons avec un petit transformateur de phrases de Hugging Face.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> feast <span class="hljs-keyword">import</span> FeatureStore
@@ -460,7 +505,22 @@ MODEL = <span class="hljs-string">&quot;sentence-transformers/all-MiniLM-L6-v2&q
     sentence_embeddings = F.normalize(sentence_embeddings, p=<span class="hljs-number">2</span>, dim=<span class="hljs-number">1</span>)
     <span class="hljs-keyword">return</span> sentence_embeddings
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2. Récupération de vecteurs et de données en temps réel pour l'inférence en ligne</h3><p>Une fois que la requête a été transformée en un encastrement, l'étape suivante consiste à récupérer les documents pertinents dans le magasin de vecteurs. Au moment de l'inférence, nous tirons parti de la recherche de similarité vectorielle pour trouver les intégrations de documents les plus pertinentes stockées dans le magasin de caractéristiques en ligne, à l'aide de <code translate="no">retrieve_online_documents_v2()</code>. Ces vecteurs de caractéristiques peuvent ensuite être introduits dans le contexte du LLM.</p>
+<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2. Récupération de vecteurs et de données en temps réel pour l'inférence en ligne<button data-href="#2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Une fois que la requête a été transformée en un encastrement, l'étape suivante consiste à récupérer les documents pertinents dans le magasin de vecteurs. Au moment de l'inférence, nous tirons parti de la recherche de similarité vectorielle pour trouver les intégrations de documents les plus pertinentes stockées dans le magasin de caractéristiques en ligne, à l'aide de <code translate="no">retrieve_online_documents_v2()</code>. Ces vecteurs de caractéristiques peuvent ensuite être introduits dans le contexte du LLM.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;Which city has the largest population in New York?&quot;</span>
 
 tokenizer = AutoTokenizer.from_pretrained(TOKENIZER)
@@ -539,7 +599,22 @@ display(context_data)
   </tbody>
 </table>
 </div>
-<h3 id="3-Formatting-Retrieved-Documents-for-RAG-Context" class="common-anchor-header">3. Formatage des documents extraits pour le contexte RAG</h3><p>Après avoir extrait les documents pertinents, nous devons formater les données dans un contexte structuré qui peut être utilisé efficacement dans les applications en aval. Cette étape permet de s'assurer que les informations extraites sont propres, organisées et prêtes à être intégrées dans le pipeline RAG.</p>
+<h3 id="3-Formatting-Retrieved-Documents-for-RAG-Context" class="common-anchor-header">3. Formatage des documents extraits pour le contexte RAG<button data-href="#3-Formatting-Retrieved-Documents-for-RAG-Context" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Après avoir extrait les documents pertinents, nous devons formater les données dans un contexte structuré qui peut être utilisé efficacement dans les applications en aval. Cette étape permet de s'assurer que les informations extraites sont propres, organisées et prêtes à être intégrées dans le pipeline RAG.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">format_documents</span>(<span class="hljs-params">context_df</span>):
     output_context = <span class="hljs-string">&quot;&quot;</span>
     unique_documents = context_df.drop_duplicates().apply(
@@ -566,7 +641,22 @@ New York City traces its origins to Fort Amsterdam and a trading post founded on
 Anchored by Wall Street in the Financial District of Lower Manhattan, New York City has been called both the world's premier financial and fintech center and the most economically powerful city in the world. As of 2022, the New York metropolitan area is the largest metropolitan economy in the world with a gross metropolitan product of over US$2.16 trillion. If the New York metropolitan area were its own country, it would have the tenth-largest economy in the world. The city is home to the world's two largest stock exchanges by market capitalization of their listed companies: the New York Stock Exchange and Nasdaq. New York City is an established safe haven for global investors. As of 2023, New York City is the most expensive city in the world for expatriates to live. New York City is home to the highest number of billionaires, individuals of ultra-high net worth (greater than US$30 million), and millionaires of any city in the world.}
 ****END DOCUMENT 0****
 </code></pre>
-<h3 id="4-Generating-Responses-Using-Retrieved-Context" class="common-anchor-header">4. Générer des réponses en utilisant le contexte extrait</h3><p>Maintenant que nous avons formaté les documents extraits, nous pouvons les intégrer dans une invite structurée pour la génération de réponses. Cette étape permet de s'assurer que l'assistant s'appuie uniquement sur les informations extraites et évite d'halluciner les réponses.</p>
+<h3 id="4-Generating-Responses-Using-Retrieved-Context" class="common-anchor-header">4. Générer des réponses à partir du contexte extrait<button data-href="#4-Generating-Responses-Using-Retrieved-Context" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Maintenant que nous avons formaté les documents extraits, nous pouvons les intégrer dans une invite structurée pour la génération de réponses. Cette étape permet de s'assurer que l'assistant s'appuie uniquement sur les informations extraites et évite d'halluciner les réponses.</p>
 <pre><code translate="no" class="language-python">FULL_PROMPT = <span class="hljs-string">f&quot;&quot;&quot;
 You are an assistant for answering questions about states. You will be provided documentation from Wikipedia. Provide a conversational answer.
 If you don&#x27;t know the answer, just say &quot;I do not know.&quot; Don&#x27;t make up an answer.

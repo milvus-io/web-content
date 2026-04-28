@@ -153,7 +153,7 @@ summary: >-
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;message&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>在上面的範例中，<code translate="no">message_sparse</code> 是一個由 VarChar 欄位衍生出來的稀疏向量欄位，其名稱為<code translate="no">message</code> 。Milvus 使用 BM25 嵌入模型將<code translate="no">message</code> 欄位中的值轉換為稀疏向量嵌入，並儲存在<code translate="no">message_sparse</code> 欄位中。收到搜尋請求後，Milvus 會使用相同的 BM25 模型嵌入純文字查詢有效載荷，並執行稀疏向量搜尋，然後傳回<code translate="no">output_fields</code> 參數中指定的<code translate="no">id</code> 和<code translate="no">message</code> 欄位，以及相應的相似性分數。</p>
+<p>在上面的範例中，<code translate="no">message_sparse</code> 是一個由 VarChar 欄位衍生出來的稀疏向量欄位，其名稱為<code translate="no">message</code> 。Milvus 使用 BM25 嵌入模型將<code translate="no">message</code> 欄位中的值轉換為稀疏向量嵌入，並儲存在<code translate="no">message_sparse</code> 欄位中。收到搜尋請求後，Milvus 會使用相同的 BM25 模型嵌入純文字查詢有效負載，並執行稀疏向量搜尋，然後傳回<code translate="no">output_fields</code> 參數中指定的<code translate="no">id</code> 和<code translate="no">message</code> 欄位，以及相應的相似性分數。</p>
 <p>若要使用此功能，您必須啟用<code translate="no">message</code> 欄位的分析器，並定義一個函式，從中得出<code translate="no">message_sparse</code> 欄位。有關啟用分析器和在 Milvus 中建立衍生函數的詳細說明，請參閱<a href="/docs/zh-hant/full-text-search.md">全文檢索</a>。</p>
 <h2 id="Term-level-queries" class="common-anchor-header">詞彙層級查詢<button data-href="#Term-level-queries" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -448,7 +448,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>在 Elasticsearch 中，布林查詢是匹配其他查詢的布林組合的文件的查詢。</p>
-<p>以下範例改編<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html">自本頁</a> Elasticsearch 文件中的範例。該查詢將傳回名稱中含有<code translate="no">kimchy</code> 的使用者，並附有<code translate="no">production</code> 標籤。</p>
+<p>以下範例改編<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html">自本頁</a> Elasticsearch 文件中的範例。查詢將傳回名稱中含有<code translate="no">kimchy</code> 的使用者，並帶有<code translate="no">production</code> 標籤。</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -551,7 +551,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Elasticsearch 提供 Reciprocal Rank Fusion (RRF)，可將具有不同相關性指標的多個結果集合併為單一排序的結果集。</p>
+    </button></h3><p>Elasticsearch 提供 Reciprocal Rank Fusion (RRF)，可將具有不同相關性指標的多個結果集合併為單一排序結果集。</p>
 <p>以下範例展示如何結合傳統的詞彙搜尋與 k-nearest neighbors (kNN) 向量搜尋，以改善搜尋的相關性：</p>
 <pre><code translate="no" class="language-python">client.search(
     index=<span class="hljs-string">&quot;my_index&quot;</span>,
@@ -592,7 +592,7 @@ res = client.query(
 </ul>
 <p>每個擷取器會貢獻多達 50 個最頂尖的匹配結果，這些結果會由 RRF 重新排序，最後會傳回最頂尖的 10 個結果。</p>
 <p>在 Milvus 中，您可以透過結合跨多個向量欄位的搜尋、套用重新排序策略，並從結合清單中擷取 Top-K 結果，來達到類似混合搜尋的目的。Milvus 支援 RRF 和加權 reranker 策略。如需詳細資訊，請參閱<a href="/docs/zh-hant/weighted-ranker.md">Reranking</a>。</p>
-<p>以下是上述 Elasticsearch 範例在 Milvus 中的非嚴格等效性。</p>
+<p>以下是上述 Elasticsearch 範例在 Milvus 中的非嚴格等化。</p>
 <pre><code translate="no" class="language-python">search_params_dense = {
     <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">1.25</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3.5</span>]],
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;vector&quot;</span>,
@@ -628,7 +628,7 @@ res = client.hybrid_search(
 <li><p><strong>稀疏向量搜尋</strong>：在<code translate="no">text_sparse</code> 欄位上使用 BM25 相似度指標。</p></li>
 </ol>
 <p>這些搜尋的結果會分別執行、合併，並使用 Reciprocal Rank Fusion (RRF) 排序器重新排序。混合搜尋會從重新排序的清單中返回前 10 個實體。</p>
-<p>不同於 Elasticsearch 的 RRF 排序會合併標準文字式查詢和 kNN 搜尋的結果，Milvus 會合併稀疏和密集向量搜尋的結果，提供獨特的混合搜尋功能，針對多模式資料進行最佳化。</p>
+<p>不同於 Elasticsearch 的 RRF 排序會合併來自標準文字查詢和 kNN 搜尋的結果，Milvus 會合併來自稀疏和密集向量搜尋的結果，提供獨特的混合搜尋功能，針對多模式資料進行最佳化。</p>
 <h2 id="Recap" class="common-anchor-header">重溫<button data-href="#Recap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -63,7 +63,7 @@ curl -X <span class="hljs-string">&#x27;POST&#x27;</span> \
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>成功的响应应返回按相关性得分排序的文档，类似于 OpenAI rerankers API 响应。</p>
+<p>成功的响应应返回按相关性得分排序的文档，类似于 OpenAI rerankers API 的响应。</p>
 <p>有关更多服务器参数和选项，请参阅<a href="https://docs.vllm.ai/en/latest/serving/openai_compatible_server.html#re-rank-api">vLLM OpenAI Compatible Server 文档</a>。</p></li>
 </ul>
 <h2 id="Create-a-vLLM-ranker-function" class="common-anchor-header">创建 vLLM Ranker 函数<button data-href="#Create-a-vLLM-ranker-function" class="anchor-icon" translate="no">
@@ -81,7 +81,7 @@ curl -X <span class="hljs-string">&#x27;POST&#x27;</span> \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要在你的 Milvus 应用程序中使用 vLLM Ranker，请创建一个 Function 对象，指定 Reranking 的操作符。该函数将传递给 Milvus 搜索操作符，以增强结果排名。</p>
+    </button></h2><p>要在 Milvus 应用程序中使用 vLLM Ranker，请创建一个 Function 对象，指定 Reranking 的操作符。该函数将传递给 Milvus 搜索操作符，以增强结果排名。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType

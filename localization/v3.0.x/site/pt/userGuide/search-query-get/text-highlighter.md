@@ -5,7 +5,7 @@ summary: >-
   O Marcador em Milvus anota os termos correspondentes nos campos de texto,
   envolvendo-os com etiquetas personalizáveis. O realce ajuda a explicar o
   motivo pelo qual um documento corresponde, melhora a legibilidade dos
-  resultados e suporta a renderização rica em aplicações de pesquisa e RAG.
+  resultados e suporta uma renderização rica em aplicações de pesquisa e RAG.
 beta: Milvus 2.6.8+
 ---
 <h1 id="Text-Highlighter" class="common-anchor-header">Marcador de texto<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.8+</span><button data-href="#Text-Highlighter" class="anchor-icon" translate="no">
@@ -77,7 +77,7 @@ highlighter = LexicalHighlighter(
 <span class="highlighted-wrapper-line">    highlighter=highlighter <span class="hljs-comment"># Pass highlighter config here</span></span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Saída de realce</strong></p>
+<p><strong>Realçar a saída</strong></p>
 <p>Quando o realce está ativado, o Milvus devolve o texto realçado num campo dedicado <code translate="no">highlight</code>. Por predefinição, a saída destacada é devolvida como um fragmento a partir do primeiro termo correspondido.</p>
 <p>Neste exemplo, o termo de pesquisa é <code translate="no">&quot;BM25&quot;</code>, portanto é destacado no resultado retornado:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
@@ -113,7 +113,7 @@ highlighter = LexicalHighlighter(
 <p>Suponha que o conteúdo a seguir seja armazenado em um campo de texto:</p>
 <pre><code translate="no" class="language-python">This document explains how text filtering works <span class="hljs-keyword">in</span> Milvus.
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Configuração do Marcador</strong></p>
+<p><strong>Configuração do Marcador de texto</strong></p>
 <p>Para destacar os termos de consulta utilizados na filtragem, crie um <code translate="no">LexicalHighlighter</code> e defina um <code translate="no">highlight_query</code> que corresponda à condição de filtragem:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> LexicalHighlighter
 
@@ -412,7 +412,7 @@ results = client.search(
 [&#x27;{my} second {test} {doc}. Milvus is an open-source vector database that suits AI applications of every siz&#x27;]
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h3 id="Example-3-Return-highlights-as-fragments" class="common-anchor-header">Exemplo 3: Devolver destaques como fragmentos<button data-href="#Example-3-Return-highlights-as-fragments" class="anchor-icon" translate="no">
+<h3 id="Example-3-Return-highlights-as-fragments" class="common-anchor-header">Exemplo 3: Retornar destaques como fragmentos<button data-href="#Example-3-Return-highlights-as-fragments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

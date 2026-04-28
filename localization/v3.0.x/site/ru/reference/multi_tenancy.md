@@ -39,10 +39,25 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus поддерживает многопользовательскую работу на четырех уровнях: <strong>База данных</strong>, <strong>Коллекция</strong>, <strong>Раздел</strong> и <strong>Ключ раздела</strong>.</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Мультиарендность на уровне базы данных</h3><p>При многопользовательстве на уровне базы данных каждый арендатор получает соответствующую <a href="/docs/ru/manage_databases.md">базу данных</a>, содержащую одну или несколько коллекций.</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Мультиарендность на уровне базы данных<button data-href="#Database-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>При многопользовательстве на уровне базы данных каждый арендатор получает соответствующую <a href="/docs/ru/manage_databases.md">базу данных</a>, содержащую одну или несколько коллекций.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>Многоарендность на уровне базы данных</span> </span></p>
 <ul>
 <li><p><strong>Масштабируемость</strong>: Стратегия многопользовательской аренды на уровне базы данных по умолчанию поддерживает максимум 64 арендатора.</p></li>
@@ -50,10 +65,25 @@ summary: >-
 <li><p><strong>Гибкость</strong>: В каждой базе данных могут быть коллекции с различными схемами, что обеспечивает гибкую организацию данных и позволяет каждому арендатору иметь собственную схему данных.</p></li>
 <li><p><strong>Другие</strong>: Эта стратегия также поддерживает RBAC, позволяя осуществлять тонкий контроль над доступом пользователей для каждого арендатора. Кроме того, вы можете гибко загружать или освобождать данные для определенных арендаторов, чтобы эффективно управлять "горячими" и "холодными" данными.</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Многопользовательская лицензия на уровне коллекции</h3><p>При многопользовательской системе на уровне коллекций каждому арендатору назначается своя <a href="/docs/ru/manage-collections.md">коллекция</a>, что обеспечивает надежную изоляцию данных.</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Многопользовательская лицензия на уровне коллекции<button data-href="#Collection-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>При многопользовательской системе на уровне коллекций каждому арендатору назначается своя <a href="/docs/ru/manage-collections.md">коллекция</a>, что обеспечивает надежную изоляцию данных.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>Мультиарендность на уровне коллекций</span> </span></p>
 <ul>
 <li><p><strong>Масштабируемость</strong>: Поскольку кластер по умолчанию может содержать до 65 536 коллекций, эта стратегия позволяет разместить такое же количество арендаторов в кластере.</p></li>
@@ -61,10 +91,25 @@ summary: >-
 <li><p><strong>Гибкость</strong>: Эта стратегия позволяет каждой коллекции иметь собственную схему, что позволяет разместить арендаторов с различными схемами данных.</p></li>
 <li><p><strong>Другие</strong>: Эта стратегия также поддерживает RBAC, позволяя осуществлять гранулярный контроль доступа для арендаторов. Кроме того, вы можете гибко загружать или освобождать данные для определенных арендаторов, чтобы эффективно управлять "горячими" и "холодными" данными.</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Многопользовательская лицензия на уровне разделов</h3><p>При многопользовательской системе на уровне разделов каждый арендатор назначается на созданный вручную <a href="/docs/ru/manage-partitions.md">раздел</a> в общей коллекции.</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Многопользовательская лицензия на уровне разделов<button data-href="#Partition-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>При многопользовательской системе на уровне разделов каждый арендатор назначается на созданный вручную <a href="/docs/ru/manage-partitions.md">раздел</a> в общей коллекции.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>Многопользовательская аренда на уровне разделов</span> </span></p>
 <ul>
 <li><p><strong>Масштабируемость</strong>: Коллекция может содержать до 1 024 разделов, что позволяет разместить в ней такое же количество арендаторов.</p></li>
@@ -72,10 +117,25 @@ summary: >-
 <li><p><strong>Гибкость</strong>: Эта стратегия требует, чтобы все арендаторы использовали одну и ту же схему данных. А разделы необходимо создавать вручную.</p></li>
 <li><p><strong>Другие</strong>: RBAC не поддерживается на уровне разделов. К арендаторам можно обращаться как по отдельности, так и через несколько разделов, что делает этот подход хорошо подходящим для сценариев с агрегированными запросами или аналитикой по сегментам арендаторов. Кроме того, вы можете гибко загружать или освобождать данные для определенных арендаторов, чтобы эффективно управлять "горячими" и "холодными" данными.</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Многопользовательская аренда на уровне ключа раздела</h3><p>При этой стратегии все арендаторы используют единую коллекцию и схему, но данные каждого арендатора автоматически распределяются по 16 физически изолированным разделам на основе значения <a href="/docs/ru/use-partition-key.md">ключа раздела</a>. Хотя каждый физический раздел может содержать несколько арендаторов, данные разных арендаторов остаются логически разделенными.</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Многопользовательская аренда на уровне ключа раздела<button data-href="#Partition-key-level-multi-tenancy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>При этой стратегии все арендаторы используют единую коллекцию и схему, но данные каждого арендатора автоматически распределяются по 16 физически изолированным разделам на основе значения <a href="/docs/ru/use-partition-key.md">ключа раздела</a>. Хотя каждый физический раздел может содержать несколько арендаторов, данные разных арендаторов остаются логически разделенными.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
    </span> <span class="img-wrapper"> <span>Уровень ключа раздела Много арендаторов</span> </span></p>
 <ul>
 <li><p><strong>Масштабируемость</strong>: Стратегия на уровне ключа раздела предлагает наиболее масштабируемый подход, поддерживающий миллионы арендаторов.</p></li>

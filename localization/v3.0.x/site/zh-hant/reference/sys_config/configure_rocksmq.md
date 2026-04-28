@@ -66,7 +66,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
         <li>Milvus 在 RocksMQ 中儲存資料的 key 的前綴。</li>      
         <li>注意：在使用 Milvus 一段時間後更改此參數會影響您對舊資料的存取。</li>      
         <li>建議在第一次啟動 Milvus 之前更改這個參數。</li>      
-        <li>如果 etcd 服務已經存在，為 Milvus 設定一個易於識別的 root key 前綴。</li>      </td>
+        <li>如果 etcd 服務已經存在，為 Milvus 設定一個容易識別的 root key 前綴。</li>      </td>
       <td>/var/lib/milvus/rdb_data</td>
     </tr>
   </tbody>
@@ -153,7 +153,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
   </thead>
   <tbody>
     <tr>
-      <td>        RocksMQ 中已接收訊息的最長保留時間。在RocksMQ中被acked的訊息會保留指定的時間，然後被清除。單位：分鐘。      </td>
+      <td>        RocksMQ 中已接收訊息的最長保留時間。在 RocksMQ 中，acked 訊息會保留指定的時間，然後被清除。單位：分鐘。      </td>
       <td>4320</td>
     </tr>
   </tbody>

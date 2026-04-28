@@ -71,7 +71,7 @@ title: 'Systèmes multi-agents avec Mistral AI, Milvus et Llama-agents'
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
    </span> <span class="img-wrapper"> <span>image.png</span> </span></p>
 <h2 id="llama-agents" class="common-anchor-header">llama-agents<button data-href="#llama-agents" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -113,7 +113,7 @@ title: 'Systèmes multi-agents avec Mistral AI, Milvus et Llama-agents'
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
    </span> <span class="img-wrapper"> <span>image.png</span> </span></p>
 <h2 id="Mistral-AI" class="common-anchor-header">Mistral AI<button data-href="#Mistral-AI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -459,7 +459,7 @@ query_engine_tools = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Mistral Nemo et Large supportent l'appel de fonction natif. Il y a une intégration transparente avec les outils LlamaIndex, par le biais de la fonction <code translate="no">predict_and_call</code> sur le LLM. Cela permet à l'utilisateur d'attacher n'importe quel outil et de laisser le LLM décider quels outils appeler (s'il y en a).</p>
+    </button></h2><p>Mistral Nemo et Large supportent l'appel de fonction natif. Il y a une intégration transparente avec les outils LlamaIndex, par le biais de la fonction <code translate="no">predict_and_call</code> sur le LLM. Cela permet à l'utilisateur d'attacher n'importe quel outil et de laisser le LLM décider quels outils appeler (le cas échéant).</p>
 <p>Pour en savoir plus sur les <a href="https://docs.llamaindex.ai/en/latest/module_guides/deploying/agents/">agents</a>, consultez le site Web de llama-index.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up the LLM we will use for Function Calling</span>
 
@@ -482,7 +482,7 @@ llm = Ollama(model=<span class="hljs-string">&quot;mistral-nemo&quot;</span>)
       </svg>
     </button></h2><p>Nous pouvons maintenant voir le filtrage des métadonnées en action :</p>
 <ol>
-<li>Dans le premier cas, l'agent ne devrait rien trouver pour répondre à la requête de l'utilisateur puisqu'elle concerne Uber et que nous filtrons uniquement les documents relatifs à Lyft.</li>
+<li>Dans le premier cas, l'agent ne devrait rien trouver pour répondre à la requête de l'utilisateur car elle concerne Uber et nous filtrons uniquement les documents relatifs à Lyft.</li>
 <li>Dans le second, l'agent devrait pouvoir trouver des informations sur Lyft car nous ne recherchons que les documents qui concernent Lyft.</li>
 </ol>
 <pre><code translate="no" class="language-python">response = llm.predict_and_call(
@@ -560,7 +560,7 @@ Based on the provided context, which pertains to Lyft&#x27;s Risk Factors sectio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L'exemple de code ci-dessous montre comment créer un moteur de requêtes filtrées en utilisant un agent pour extraire les filtres de métadonnées de la question de l'utilisateur :</p>
+    </button></h2><p>L'exemple de code ci-dessous montre comment créer un moteur de requêtes filtrées en utilisant un agent pour extraire des filtres de métadonnées de la question de l'utilisateur :</p>
 <h3 id="Explanation" class="common-anchor-header">Explication<button data-href="#Explanation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

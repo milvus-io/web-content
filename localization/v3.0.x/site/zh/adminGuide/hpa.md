@@ -148,8 +148,8 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 </ol>
 <ul>
 <li><code translate="no">scaleTargetRef</code>:指定要缩放的部署（如<code translate="no">my-release-milvus-proxy</code> ）。</li>
-<li><code translate="no">minReplicas</code> 和 : 设置扩展范围（本例中为 2 至 10 个 Pod）。<code translate="no">maxReplicas</code></li>
-<li><code translate="no">metrics</code>:配置基于 CPU 和内存利用率的缩放，目标是 60% 的平均使用率。</li>
+<li><code translate="no">minReplicas</code> 和<code translate="no">maxReplicas</code>: 设置扩展范围（本例中为 2 至 10 个 Pod）。</li>
+<li><code translate="no">metrics</code>:配置基于 CPU 和内存利用率的扩展，目标是 60% 的平均使用率。</li>
 </ul>
 <h2 id="Conclusion" class="common-anchor-header">结论<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"

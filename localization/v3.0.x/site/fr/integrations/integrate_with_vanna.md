@@ -22,7 +22,7 @@ title: Ecrire du SQL avec Vanna et Milvus
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/vanna_write_sql.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/vanna_write_sql.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p><a href="https://vanna.ai/">Vanna</a> est un framework Python RAG (Retrieval-Augmented Generation) open-source pour la génération SQL et les fonctionnalités associées. <a href="https://milvus.io/">Milvus</a> est la base de données vectorielles open-source la plus avancée au monde, conçue pour permettre la recherche de similarités dans les applications d'intégration et d'intelligence artificielle.</p>
+<p><a href="https://vanna.ai/">Vanna</a> est un framework Python RAG (Retrieval-Augmented Generation) open-source pour la génération SQL et les fonctionnalités associées. <a href="https://milvus.io/">Milvus</a> est la base de données vectorielles open-source la plus avancée au monde, conçue pour permettre la recherche de similarités et les applications d'intelligence artificielle.</p>
 <p>Vanna fonctionne en deux étapes simples - former un "modèle" RAG sur vos données, puis poser des questions qui renverront des requêtes SQL qui peuvent être configurées pour être exécutées sur votre base de données. Ce guide montre comment utiliser Vanna pour générer et exécuter des requêtes SQL basées sur vos données stockées dans une base de données.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -280,7 +280,7 @@ training_data
       <th>1</th>
       <td>9f9df1b8-ae62-4823-ad28-d7e0f2d1f4c0-doc</td>
       <td>Aucun</td>
-      <td>ABC Corp est spécialisée dans les technologies de pointe...</td>
+      <td>ABC Corp se spécialise dans les technologies de pointe...</td>
     </tr>
   </tbody>
 </table>
@@ -325,7 +325,7 @@ LLM Response: SELECT Phone FROM Customer WHERE Name = 'John Doe'
   </tbody>
 </table>
 </div>
-<p>Voici une question plus complexe. Les informations sur le nom de la société de fabrication se trouvent dans les données du document, qui sont des informations de base. La requête SQL générée récupérera les informations sur le client en fonction du nom spécifique de l'entreprise de fabrication.</p>
+<p>Voici une question plus complexe. Les informations sur le nom de la société de fabrication se trouvent dans les données du document, qui sont des informations de base. La requête SQL générée récupérera les informations sur le client en fonction du nom spécifique de la société de fabrication.</p>
 <pre><code translate="no" class="language-python">sql = vn_milvus.generate_sql(<span class="hljs-string">&quot;which customer works for a manufacturing corporation?&quot;</span>)
 vn_milvus.run_sql(sql)
 <button class="copy-code-btn"></button></code></pre>

@@ -1,15 +1,15 @@
 ---
 id: phrase-match.md
-title: مطابقة العباراتCompatible with Milvus 2.6.x
+title: مطابقة العباراتCompatible with Milvus 2.5.17+
 summary: >-
   تتيح لك مطابقة العبارة البحث عن المستندات التي تحتوي على مصطلحات الاستعلام
   الخاصة بك كعبارة تامة. بشكل افتراضي، يجب أن تظهر الكلمات بنفس الترتيب وبجوار
   بعضها البعض مباشرةً. على سبيل المثال، يتطابق الاستعلام عن "تعلم الآلة
   الروبوتية" مع نص مثل "...نماذج تعلم الآلة الروبوتية النموذجية..."، حيث تظهر
   الكلمات "روبوتات" و"آلة" و"تعلم" في تسلسل دون أي كلمات أخرى بينها.
-beta: Milvus 2.6.x
+beta: Milvus 2.5.17+
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">مطابقة العبارات<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">مطابقة العبارات<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,10 +44,10 @@ beta: Milvus 2.6.x
     </button></h2><p>بدعم من مكتبة محرك البحث <a href="https://github.com/quickwit-oss/tantivy">Tantivy،</a> تعمل مطابقة العبارات من خلال تحليل المعلومات الموضعية للكلمات داخل المستندات. يوضح الرسم البياني أدناه العملية:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
    </span> <span class="img-wrapper"> <span>سير عمل مطابقة العبارات</span> </span></p>
 <ol>
-<li><p><strong>ترميز المستند</strong>: عندما تقوم بإدراج مستندات في Milvus، يتم تقسيم النص إلى رموز (كلمات أو مصطلحات فردية) باستخدام محلل، مع تسجيل المعلومات الموضعية لكل رمز. على سبيل المثال، يتم ترميز <strong>المستند_1</strong> إلى <strong>["آلة" (الموضع = 0)، "تعلم" (الموضع = 1)، "تعزيزات" (الموضع = 2)، "كفاءة" (الموضع = 3)]</strong>. لمزيد من المعلومات حول المحلِّلات، راجع <a href="/docs/ar/analyzer-overview.md">نظرة عامة</a> على <a href="/docs/ar/analyzer-overview.md">المحلِّل</a>.</p></li>
+<li><p><strong>ترميز المستند</strong>: عندما تقوم بإدراج المستندات في Milvus، يتم تقسيم النص إلى رموز (كلمات أو مصطلحات فردية) باستخدام محلل، مع تسجيل المعلومات الموضعية لكل رمز. على سبيل المثال، يتم ترميز <strong>المستند_1</strong> إلى <strong>["آلة" (الموضع = 0)، "تعلم" (الموضع = 1)، "تعزيزات" (الموضع = 2)، "كفاءة" (الموضع = 3)]</strong>. لمزيد من المعلومات حول المحلِّلات، راجع <a href="/docs/ar/analyzer-overview.md">نظرة عامة</a> على <a href="/docs/ar/analyzer-overview.md">المحلِّل</a>.</p></li>
 <li><p><strong>إنشاء فهرس مقلوب</strong>: يقوم ميلفوس ببناء فهرس مقلوب، حيث يقوم بتعيين كل رمز رمزي إلى المستند (المستندات) التي يظهر فيها ومواضع الرمز في تلك المستندات.</p></li>
 <li><p><strong>مطابقة العبارة</strong>: عندما يتم تنفيذ استعلام عن العبارة، يبحث Milvus عن كل رمز في الفهرس المقلوب ويتحقق من مواضعها لتحديد ما إذا كانت تظهر بالترتيب الصحيح والقرب. تتحكم المعلمة <code translate="no">slop</code> في الحد الأقصى لعدد المواضع المسموح بها بين الرموز المطابقة:</p>
 <ul>
@@ -77,7 +77,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تعمل مطابقة العبارات مع نوع الحقل <code translate="no">VARCHAR</code> ، وهو نوع بيانات السلسلة في Milvus. لتمكين مطابقة العبارات، قم بتكوين مخطط مجموعتك عن طريق تعيين كل من المعلمات <code translate="no">enable_analyzer</code> و <code translate="no">enable_match</code> إلى <code translate="no">True</code> ، على غرار <a href="/docs/ar/keyword-match.md">مطابقة النص</a>.</p>
+    </button></h2><p>تعمل مطابقة العبارات مع نوع الحقل <code translate="no">VARCHAR</code> ، وهو نوع بيانات السلسلة في Milvus. لتمكين مطابقة العبارة، قم بتكوين مخطط مجموعتك عن طريق تعيين كل من المعلمات <code translate="no">enable_analyzer</code> و <code translate="no">enable_match</code> إلى <code translate="no">True</code> ، على غرار <a href="/docs/ar/keyword-match.md">مطابقة النص</a>.</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">قم بتعيين <code translate="no">enable_analyzer</code> و <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -231,7 +231,7 @@ schema.add_field(
    </tr>
    <tr>
      <td><p>3</p></td>
-     <td><p>"تعمل البنى الآلية للتعلم العميق على تحسين الأحمال الحسابية"</p></td>
+     <td><p>"تعمل البنى الآلية للتعلم العميق على تحسين الأحمال الحاسوبية"</p></td>
    </tr>
    <tr>
      <td><p>4</p></td>
@@ -257,7 +257,7 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>عند استخدام الأسلوب <code translate="no">query()</code> ، يعمل <strong>PHRASE_MATCH</strong> كمرشح قياسي. لا يتم إرجاع سوى المستندات التي تحتوي على العبارة المحددة (مع مراعاة الانحدار المسموح به).</p>
+    </button></h3><p>عند استخدام طريقة <code translate="no">query()</code> ، يعمل <strong>PHRASE_MATCH</strong> كمرشح قياسي. لا يتم إرجاع سوى المستندات التي تحتوي على العبارة المحددة (مع مراعاة الانحدار المسموح به).</p>
 <h4 id="Example-slop--0-exact-match" class="common-anchor-header">مثال: المنحدر = 0 (مطابقة تامة)</h4><p>يقوم هذا المثال بإرجاع المستندات التي تحتوي على عبارة <strong>"التعلّم الآلي"</strong> بالضبط دون أي رموز إضافية بينهما.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match documents containing exactly &quot;machine learning&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>
@@ -358,7 +358,7 @@ result_slop2 = client.search(
      <td><p>"تعمل بنيات آلة التعلم العميق على تحسين الأحمال الحسابية"</p></td>
    </tr>
 </table>
-<h4 id="Example-slop--3" class="common-anchor-header">مثال: المنحدر = 3</h4><p>في هذا المثال، يوفر المنحدر 3 المزيد من المرونة. يبحث المرشح عن <strong>"تعلّم الآلة"</strong> مع السماح بما يصل إلى ثلاثة مواضع رمزية بين الكلمات.</p>
+<h4 id="Example-slop--3" class="common-anchor-header">مثال: المنحدر = 3</h4><p>في هذا المثال، يوفر المنحدر 3 المزيد من المرونة. يبحث المرشح عن <strong>"التعلّم الآلي"</strong> مع السماح بما يصل إلى ثلاثة مواضع رمزية بين الكلمات.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;machine learning&quot; with slop=3</span>
 filter_slop3 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 3)&quot;</span>
 
@@ -392,7 +392,7 @@ result_slop2 = client.search(
    </tr>
    <tr>
      <td><p>5</p></td>
-     <td><p>"تعلم خوارزميات الآلة المتقدمة يوسع من قدرات الذكاء الاصطناعي"</p></td>
+     <td><p>"تعلم خوارزميات الآلة المتقدمة يوسع قدرات الذكاء الاصطناعي"</p></td>
    </tr>
 </table>
 <h2 id="Considerations" class="common-anchor-header">الاعتبارات<button data-href="#Considerations" class="anchor-icon" translate="no">

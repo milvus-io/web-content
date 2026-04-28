@@ -199,4 +199,4 @@ kubectl get pods
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obtener ayuda adicional, consulte <a href="https://milvus.io/docs">la documentación de Milvus</a> o el <a href="https://github.com/milvus-io/milvus/discussions">foro de la comunidad</a>.</p>
+<p>Para obtener soporte adicional, consulte <a href="https://milvus.io/docs">la documentación de Milvus</a> o el <a href="https://github.com/milvus-io/milvus/discussions">foro de la comunidad</a>.</p>

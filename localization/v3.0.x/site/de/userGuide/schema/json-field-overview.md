@@ -2,7 +2,7 @@
 id: json-field-overview.md
 title: JSON-Feld-Übersicht
 summary: >-
-  Bei der Entwicklung von Anwendungen wie Produktkatalogen,
+  Bei der Erstellung von Anwendungen wie Produktkatalogen,
   Content-Management-Systemen oder Engines für Benutzerpräferenzen müssen Sie
   neben den Vektoreinbettungen häufig auch flexible Metadaten speichern.
   Produktattribute variieren je nach Kategorie, Benutzerpräferenzen entwickeln
@@ -92,8 +92,8 @@ summary: >-
    </tr>
    <tr>
      <td><p>Schema-Definition</p></td>
-     <td><p>Ein skalares Feld, das explizit im Auflistungsschema mit dem Typ <code translate="no">DataType.JSON</code> deklariert werden muss.</p></td>
-     <td><p>Ein verborgenes JSON-Feld (mit dem Namen <code translate="no">$meta</code>), das nicht deklarierte Felder automatisch speichert.</p></td>
+     <td><p>Ein skalares Feld, das im Auflistungsschema explizit mit dem Typ <code translate="no">DataType.JSON</code> deklariert werden muss.</p></td>
+     <td><p>Ein verstecktes JSON-Feld (mit dem Namen <code translate="no">$meta</code>), das nicht deklarierte Felder automatisch speichert.</p></td>
    </tr>
    <tr>
      <td><p>Anwendungsfall</p></td>
@@ -241,7 +241,7 @@ client.load_collection(collection_name=<span class="hljs-string">&quot;product_c
 <p></details></p>
 <p>Sobald diese Voraussetzungen erfüllt sind, können Sie die folgenden Ausdrücke verwenden, um Ihre Sammlung auf der Grundlage der Werte im JSON-Feld zu filtern. Diese Filterausdrücke nutzen die spezifische JSON-Pfadsyntax und spezielle Operatoren.</p>
 <h4 id="Filtering-with-JSON-path-syntax" class="common-anchor-header">Filtern mit JSON-Pfadsyntax</h4><p>Um einen bestimmten Schlüssel abzufragen, verwenden Sie die Klammerschreibweise für den Zugriff auf JSON-Schlüssel: <code translate="no">json_field_name[&quot;key&quot;]</code>. Für verschachtelte Schlüssel verketten Sie diese: <code translate="no">json_field_name[&quot;key1&quot;][&quot;key2&quot;]</code>.</p>
-<p>Um nach Entitäten zu filtern, bei denen der <code translate="no">category</code> <code translate="no">&quot;electronics&quot;</code> ist:</p>
+<p>Um nach Entitäten zu filtern, deren <code translate="no">category</code> <code translate="no">&quot;electronics&quot;</code> ist:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define filter expression</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;category&quot;] == &quot;electronics&quot;&#x27;</span>
 
@@ -267,7 +267,7 @@ res = client.search(
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Filtering-with-JSON-specific-operators" class="common-anchor-header">Filtern mit JSON-spezifischen Operatoren</h4><p>Milvus bietet auch spezielle Operatoren zur Abfrage von Array-Werten für bestimmte JSON-Feldschlüssel. Zum Beispiel:</p>
+<h4 id="Filtering-with-JSON-specific-operators" class="common-anchor-header">Filtern mit JSON-spezifischen Operatoren</h4><p>Milvus bietet auch spezielle Operatoren für die Abfrage von Array-Werten auf bestimmte JSON-Feldschlüssel. Zum Beispiel:</p>
 <ul>
 <li><p><code translate="no">json_contains(identifier, expr)</code>: Prüft, ob ein bestimmtes Element oder Unter-Array innerhalb eines JSON-Arrays existiert</p></li>
 <li><p><code translate="no">json_contains_all(identifier, expr)</code>: Stellt sicher, dass alle Elemente des angegebenen JSON-Ausdrucks in dem Feld vorhanden sind</p></li>
@@ -318,7 +318,7 @@ res = client.search(
         ></path>
       </svg>
     </button></h2><p>Standardmäßig führen Abfragen auf JSON-Felder ohne Beschleunigung einen vollständigen Scan aller Zeilen durch, was bei großen Datensätzen langsam sein kann. Um JSON-Abfragen zu beschleunigen, bietet Milvus erweiterte Indizierungs- und Speicheroptimierungsfunktionen.</p>
-<p>Die folgende Tabelle fasst die Unterschiede und die besten Einsatzszenarien zusammen:</p>
+<p>Die folgende Tabelle fasst die Unterschiede und die besten Anwendungsszenarien zusammen:</p>
 <table>
    <tr>
      <th><p>Technik</p></th>

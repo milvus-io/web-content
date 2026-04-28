@@ -2,8 +2,8 @@
 id: analyzer-overview.md
 title: نظرة عامة على المحلل
 summary: >-
-  في معالجة النصوص، يعتبر المحلل عنصرًا أساسيًا في تحويل النص الخام إلى تنسيق
-  منظم وقابل للبحث. يتكون كل محلل عادةً من عنصرين أساسيين: مُحلل الرموز والمرشح.
+  في معالجة النصوص، يعد المحلل مكونًا أساسيًا يحول النص الخام إلى تنسيق منظم
+  وقابل للبحث. يتكون كل محلل عادةً من عنصرين أساسيين: مُحلل الرموز والمرشح.
   يقومان معًا بتحويل النص المدخل إلى رموز، وتنقيح هذه الرموز، وإعدادها للفهرسة
   والاسترجاع بكفاءة.
 ---
@@ -57,7 +57,7 @@ summary: >-
 <p>يوضح سير العمل أدناه كيفية معالجة المحلل للنص.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/analyzer-process-workflow.png" alt="Analyzer Process Workflow" class="doc-image" id="analyzer-process-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/analyzer-process-workflow.png" alt="Analyzer Process Workflow" class="doc-image" id="analyzer-process-workflow" />
    </span> <span class="img-wrapper"> <span>سير عمل عملية المحلل</span> </span></p>
 <h2 id="Analyzer-types" class="common-anchor-header">أنواع المحللات<button data-href="#Analyzer-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -81,11 +81,26 @@ summary: >-
 </ul>
 <div class="alert note">
 <ul>
-<li>إذا قمت بحذف تكوينات المحلل أثناء إنشاء المجموعة، فإن Milvus يستخدم المحلل <code translate="no">standard</code> لجميع عمليات معالجة النصوص بشكل افتراضي. للحصول على التفاصيل، راجع <a href="/docs/ar/standard-analyzer.md">المحلل القياسي</a>.</li>
+<li>إذا قمت بحذف تكوينات المحلل أثناء إنشاء المجموعة، يستخدم Milvus محلل <code translate="no">standard</code> لجميع عمليات معالجة النصوص بشكل افتراضي. للحصول على التفاصيل، راجع <a href="/docs/ar/standard-analyzer.md">المحلل القياسي</a>.</li>
 <li>للحصول على الأداء الأمثل للبحث والاستعلام، اختر محللاً يطابق لغة بياناتك النصية. على سبيل المثال، على الرغم من أن محلل <code translate="no">standard</code> متعدد الاستخدامات، إلا أنه قد لا يكون الخيار الأفضل للغات ذات التراكيب النحوية الفريدة، مثل الصينية أو اليابانية أو الكورية. في مثل هذه الحالات، يمكن استخدام محلل خاص بلغة معينة مثل <a href="/docs/ar/chinese-analyzer.md"><code translate="no">chinese</code></a> أو محللات مخصصة مع أدوات تحليل رمزية متخصصة (مثل <a href="/docs/ar/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/ar/icu-tokenizer.md"><code translate="no">icu</code></a>) والمرشحات يوصى بشدة لضمان دقة الترميز ونتائج بحث أفضل.</li>
 </ul>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">محلل مدمج</h3><p>يتم تهيئة المحللات المدمجة في Milvus مسبقًا باستخدام أدوات ترميز ومرشحات محددة، مما يسمح لك باستخدامها على الفور دون الحاجة إلى تحديد هذه المكونات بنفسك. يعمل كل محلل مدمج كقالب يتضمن أداة ترميز ومرشحات محددة مسبقًا، مع معلمات اختيارية للتخصيص.</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">محلل مدمج<button data-href="#Built-in-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يتم تهيئة المحللات المدمجة في Milvus مسبقًا باستخدام أدوات ترميز ومرشحات محددة، مما يسمح لك باستخدامها على الفور دون الحاجة إلى تحديد هذه المكونات بنفسك. يعمل كل محلل مدمج كقالب يتضمن أداة ترميز ومرشحات محددة مسبقًا، مع معلمات اختيارية للتخصيص.</p>
 <p>على سبيل المثال، لاستخدام المحلّل المدمج <code translate="no">standard</code> ، ما عليك سوى تحديد اسمه <code translate="no">standard</code> على أنه <code translate="no">type</code> وتضمين اختياريًا تكوينات إضافية خاصة بهذا النوع من المحلّلات، مثل <code translate="no">stop_words</code>:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -225,8 +240,23 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <li><p><code translate="no">english</code>: مُحسّن للنصوص باللغة الإنجليزية، مع دعم كلمات التوقف الإنجليزية.</p></li>
 <li><p><code translate="no">chinese</code>: متخصص في معالجة النصوص الصينية، بما في ذلك الترميز المخصص لتراكيب اللغة الصينية.</p></li>
 </ul>
-<h3 id="Custom-analyzer" class="common-anchor-header">محلل مخصص</h3><p>لمزيد من المعالجة المتقدمة للنصوص، تتيح لك المحللات المخصصة في Milvus إنشاء خط أنابيب مخصص لمعالجة النصوص من خلال تحديد كل من <strong>أداة الترميز</strong> <strong>والمرشحات</strong>. يعد هذا الإعداد مثاليًا لحالات الاستخدام المتخصصة التي تتطلب تحكمًا دقيقًا.</p>
-<h4 id="Tokenizer" class="common-anchor-header">أداة الترميز</h4><p>يعدّ أداة <strong>الترميز</strong> مكوّنًا <strong>إلزاميًا</strong> لمحلل مخصص، حيث يبدأ خط أنابيب المحلل عن طريق تقسيم نص الإدخال إلى وحدات أو <strong>رموز</strong> منفصلة. تتبع عملية الترميز قواعد محددة، مثل التقسيم حسب المسافات البيضاء أو علامات الترقيم، اعتمادًا على نوع أداة الترميز. تسمح هذه العملية بمعالجة أكثر دقة واستقلالية لكل كلمة أو عبارة.</p>
+<h3 id="Custom-analyzer" class="common-anchor-header">محلل مخصص<button data-href="#Custom-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لمزيد من المعالجة المتقدمة للنصوص، تتيح لك المحللات المخصصة في Milvus إنشاء خط أنابيب مخصص لمعالجة النصوص من خلال تحديد كل من <strong>أداة الترميز</strong> <strong>والمرشحات</strong>. يعد هذا الإعداد مثاليًا لحالات الاستخدام المتخصصة التي تتطلب تحكمًا دقيقًا.</p>
+<h4 id="Tokenizer" class="common-anchor-header">أداة الترميز</h4><p>يُعدّ أداة <strong>الترميز</strong> مكوّنًا <strong>إلزاميًا</strong> لمحلل مخصص، حيث يبدأ خط أنابيب المحلل عن طريق تقسيم نص الإدخال إلى وحدات أو <strong>رموز</strong> منفصلة. تتبع عملية الترميز قواعد محددة، مثل التقسيم حسب المسافات البيضاء أو علامات الترقيم، اعتمادًا على نوع أداة الترميز. تسمح هذه العملية بمعالجة أكثر دقة واستقلالية لكل كلمة أو عبارة.</p>
 <p>على سبيل المثال، تقوم أداة الترميز بتحويل النص <code translate="no">&quot;Vector Database Built for Scale&quot;</code> إلى رموز منفصلة:</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
@@ -257,7 +287,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <ul>
 <li><p><strong>مرشحات</strong> مدمجة: تم تكوينها مسبقًا بواسطة Milvus، وتتطلب الحد الأدنى من الإعداد. يمكنك استخدام هذه المرشحات خارج الصندوق من خلال تحديد أسمائها. المرشحات أدناه مدمجة للاستخدام المباشر:</p>
 <ul>
-<li><p><code translate="no">lowercase</code>: تحويل النص إلى أحرف صغيرة، مما يضمن مطابقة غير حساسة لحالة الأحرف. لمزيد من التفاصيل، راجع <a href="/docs/ar/lowercase-filter.md">الأحرف الصغيرة</a>.</p></li>
+<li><p><code translate="no">lowercase</code>: يحول النص إلى أحرف صغيرة، مما يضمن مطابقة غير حساسة لحالة الأحرف. لمزيد من التفاصيل، راجع <a href="/docs/ar/lowercase-filter.md">الأحرف الصغيرة</a>.</p></li>
 <li><p><code translate="no">asciifolding</code>: يقوم بتحويل الأحرف غير ASCII إلى معادلات ASCII، مما يبسط معالجة النص متعدد اللغات. لمزيد من التفاصيل، راجع <a href="/docs/ar/ascii-folding-filter.md">طي ASCII</a>.</p></li>
 <li><p><code translate="no">alphanumonly</code>: يحتفظ بالأحرف الأبجدية الرقمية فقط عن طريق إزالة الأحرف الأخرى. لمزيد من التفاصيل، راجع <a href="/docs/ar/alphanumonly-filter.md">Alphanumonly</a>.</p></li>
 <li><p><code translate="no">cnalphanumonly</code>: يزيل الرموز التي تحتوي على أي أحرف غير الأحرف الصينية أو الأحرف الإنجليزية أو الأرقام. لمزيد من التفاصيل، ارجع إلى <a href="/docs/ar/cnalphanumonly-filter.md">Cnalphanumonumonly</a>.</p></li>
@@ -367,7 +397,22 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 </ul></li>
 </ul>
 <p>قبل دمج هذه التكوينات في مجموعتك، سوف تتحقق من كل محلل باستخدام طريقة <code translate="no">run_analyzer</code>.</p>
-<h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">الخطوة 1: تهيئة MilvusClient وإنشاء المخطط</h3><p>ابدأ بإعداد عميل Milvus وإنشاء مخطط جديد.</p>
+<h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">الخطوة 1: تهيئة MilvusClient وإنشاء المخطط<button data-href="#Step-1-Initialize-MilvusClient-and-create-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ابدأ بإعداد عميل Milvus وإنشاء مخطط جديد.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -427,7 +472,22 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">الخطوة 2: تحديد تكوينات المحلل والتحقق منها</h3><ol>
+<h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">الخطوة 2: تحديد تكوينات المحلل والتحقق منها<button data-href="#Step-2-Define-and-verify-analyzer-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li><p><strong>قم بتكوين محلل مدمج (</strong><code translate="no">english</code><strong>) والتحقق</strong> منه<strong>:</strong></p>
 <ul>
 <li><p><strong>التهيئة:</strong> تحديد معلمات المحلل لمحلل اللغة الإنجليزية المدمج.</p></li>
@@ -594,7 +654,22 @@ result, err := client.RunAnalyzer(ctx, option)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">الخطوة 3: إضافة حقول إلى المخطط</h3><p>الآن بعد أن تحققت من تكوينات المحلل، أضفها إلى حقول المخطط:</p>
+<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">الخطوة 3: إضافة حقول إلى المخطط<button data-href="#Step-3-Add-fields-to-the-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>الآن بعد أن تحققت من تكوينات المحلل، أضفها إلى حقول المخطط:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add VARCHAR field &#x27;title_en&#x27; using the built-in analyzer configuration</span>
@@ -699,7 +774,22 @@ schema.addField(AddFieldReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">الخطوة 4: إعداد معلمات الفهرس وإنشاء المجموعة</h3><div class="multipleCode">
+<h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">الخطوة 4: إعداد معلمات الفهرس وإنشاء المجموعة<button data-href="#Step-4-Prepare-index-parameters-and-create-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up index parameters for the vector field</span>
 index_params = client.prepare_index_params()

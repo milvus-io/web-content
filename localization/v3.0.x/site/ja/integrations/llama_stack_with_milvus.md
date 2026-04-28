@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://github.com/meta-llama/llama-stack/tree/main">Llama Stackは</a>、プロダクションAIアプリケーションを構築するためのサービス指向、APIファーストのアプローチです。Llama Stackは、開発者があらゆる場所で開発し、あらゆる場所にデプロイし、真のプロバイダー非依存でプロダクション対応のビルディングブロックを活用できるユニバーサルなスタックを提供します。Llamaスタックは、MetaのLlamaモデル、コンポーザビリティ、プロダクション対応、提携エコシステムに焦点を当てている。</p>
+    </button></h1><p><a href="https://github.com/meta-llama/llama-stack/tree/main">Llama Stackは</a>、プロダクションAIアプリケーションを構築するためのサービス指向、APIファーストのアプローチです。Llama Stackは、開発者があらゆる場所で開発し、あらゆる場所にデプロイし、真のプロバイダー非依存でプロダクション対応のビルディングブロックを活用できるユニバーサルなスタックを提供します。Llama Stackは、MetaのLlamaモデル、コンポーザビリティ、プロダクション対応、提携エコシステムに焦点を当てている。</p>
 <p>このチュートリアルでは、Milvusで構成されたLlama Stackサーバーの構築方法を紹介し、ナレッジベースとして使用するプライベートデータのインポートを可能にします。その後、サーバー上でクエリを実行し、完全なRAGアプリケーションを作成します。</p>
 <h2 id="Preparing-the-Environment" class="common-anchor-header">環境の準備<button data-href="#Preparing-the-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,7 +63,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">環境の準備</h3><p>LLM サービスとして Together AI を使用する必要があるため、まず公式サイトにログインして<a href="https://api.together.xyz/settings/api-keys">API キーを</a>申請し、API キー<code translate="no">TOGETHER_API_KEY</code> を環境変数として設定する必要があります。</p>
+    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">環境の準備<button data-href="#Prepare-the-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>LLM サービスとして Together AI を使用する必要があるため、まず公式サイトにログインして<a href="https://api.together.xyz/settings/api-keys">API キーを</a>申請し、API キー<code translate="no">TOGETHER_API_KEY</code> を環境変数として設定する必要があります。</p>
 <p>Llama Stack のソースコードをクローンする</p>
 <pre><code translate="no" class="language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/meta-llama/llama-stack.git
 $ <span class="hljs-built_in">cd</span> llama-stack
@@ -96,7 +111,22 @@ $ pip install -e .
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとAPI keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul></li>
 </ul>
-<h3 id="Build-distribution-from-the-template" class="common-anchor-header">テンプレートからディストリビューションをビルドする</h3><p>以下のコマンドを実行し、ディストリビューションをビルドします：</p>
+<h3 id="Build-distribution-from-the-template" class="common-anchor-header">テンプレートからディストリビューションをビルドする<button data-href="#Build-distribution-from-the-template" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下のコマンドを実行し、ディストリビューションをビルドします：</p>
 <pre><code translate="no" class="language-bash">$ llama stack build --template together --image-type conda
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">~/.llama/distributions/together/together-run.yaml</code> にファイルが生成されます。次に、このコマンドを実行してサーバを起動します：</p>

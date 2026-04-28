@@ -77,13 +77,13 @@ beta: Milvus v2.6.2+
     </button></h2><p>Le diagramme suivant illustre le flux de travail principal des Boost Rankers.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/boost-ranker-mechanism.png" alt="Boost Ranker Mechanism" class="doc-image" id="boost-ranker-mechanism" />
    </span> <span class="img-wrapper"> <span>Mécanisme de Boost Ranker</span> </span></p>
 <p>Lorsque vous insérez des données, Milvus les répartit entre les segments. Lors d'une recherche, chaque segment renvoie un ensemble de candidats et Milvus classe ces candidats à partir de tous les segments pour produire les résultats finaux. Lorsqu'une demande de recherche inclut un Boost Ranker, Milvus l'applique aux résultats des candidats de chaque segment afin d'éviter toute perte potentielle de précision et d'améliorer le rappel.</p>
 <p>Avant de finaliser les résultats, Milvus traite ces candidats avec le Boost Ranker comme suit :</p>
 <ol>
 <li><p>Il applique l'expression de filtrage facultative spécifiée dans le Boost Ranker pour identifier les entités qui correspondent à l'expression.</p></li>
-<li><p>Il applique la pondération spécifiée dans le Boost Ranker pour augmenter les scores des entités identifiées.</p></li>
+<li><p>Appliquer la pondération spécifiée dans le Boost Ranker pour augmenter les scores des entités identifiées.</p></li>
 </ol>
 <div class="alert note">
 <p>Vous ne pouvez pas utiliser Boost Ranker comme outil de classement dans une recherche hybride multi-vectorielle. Cependant, vous pouvez l'utiliser comme classificateur dans n'importe laquelle de ses sous-requêtes (<code translate="no">AnnSearchRequest</code>).</p>
@@ -531,13 +531,13 @@ ranker = Function(
    <tr>
      <td><p><code translate="no">params.weight</code></p></td>
      <td><p>Oui</p></td>
-     <td><p>Spécifie le poids qui sera multiplié par les scores de toutes les entités correspondantes dans les résultats de recherche bruts.</p><p>La valeur doit être un nombre à virgule flottante. </p><ul><li><p>Pour mettre l'accent sur l'importance des entités correspondantes, définissez une valeur qui augmente les scores.</p></li><li><p>Pour rétrograder les entités correspondantes, attribuez à ce paramètre une valeur qui diminue leur score.</p></li></ul></td>
+     <td><p>Spécifie le poids qui sera multiplié par les scores de toutes les entités correspondantes dans les résultats de recherche bruts.</p><p>La valeur doit être un nombre à virgule flottante. </p><ul><li><p>Pour souligner l'importance des entités correspondantes, définissez une valeur qui augmente les scores.</p></li><li><p>Pour rétrograder les entités correspondantes, attribuez à ce paramètre une valeur qui diminue leur score.</p></li></ul></td>
      <td><p><code translate="no">1</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.filter</code></p></td>
      <td><p>Non</p></td>
-     <td><p>Spécifie l'expression de filtre qui sera utilisée pour faire correspondre les entités parmi les entités des résultats de la recherche. Il peut s'agir de n'importe quelle expression de filtre de base valide mentionnée dans <a href="/docs/fr/boolean.md">Filtering Explained (Le filtrage expliqué)</a>.</p><p><strong>Remarque</strong>: n'utilisez que des opérateurs de base, tels que <code translate="no">==</code>, <code translate="no">&gt;</code> ou <code translate="no">&lt;</code>. L'utilisation d'opérateurs avancés, tels que <code translate="no">text_match</code> ou <code translate="no">phrase_match</code>, dégradera les performances de la recherche.</p></td>
+     <td><p>Spécifie l'expression de filtre qui sera utilisée pour faire correspondre les entités parmi les entités des résultats de la recherche. Il peut s'agir de n'importe quelle expression de filtre de base valide mentionnée dans <a href="/docs/fr/boolean.md">Filtering Explained (Le filtrage expliqué)</a>.</p><p><strong>Remarque</strong>: n'utilisez que des opérateurs de base, tels que <code translate="no">==</code>, <code translate="no">&gt;</code>, ou <code translate="no">&lt;</code>. L'utilisation d'opérateurs avancés, tels que <code translate="no">text_match</code> ou <code translate="no">phrase_match</code>, dégradera les performances de la recherche.</p></td>
      <td><p><code translate="no">"doctype == 'abstract'"</code></p></td>
    </tr>
    <tr>

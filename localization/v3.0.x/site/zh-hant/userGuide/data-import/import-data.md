@@ -347,7 +347,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
 <li><p>並發匯入要求的最大數目限制為<strong>1024</strong>。</p></li>
 </ul>
 <ul>
-<li>匯入請求中只能指定一個磁碟分割名稱。如果沒有指定磁碟分割名稱，資料會插入預設磁碟分割。此外，如果您已在目標資料集中設定了分割區金鑰，則無法在匯入請求中設定分割區名稱。</li>
+<li>匯入請求中只能指定一個磁碟分割名稱。如果沒有指定磁碟分割名稱，資料會插入預設磁碟分割。此外，如果已在目標集合中設定了分割區金鑰，則無法在匯入請求中設定分割區名稱。</li>
 </ul>
 <h2 id="Constraints" class="common-anchor-header">限制條件<button data-href="#Constraints" class="anchor-icon" translate="no">
       <svg translate="no"

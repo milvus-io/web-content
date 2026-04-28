@@ -68,7 +68,7 @@ title: 使用 Mistral AI、Milvus 和 Llama-agents 的多代理系统
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
    </span> <span class="img-wrapper"> <span>图像.png</span> </span></p>
 <h2 id="llama-agents" class="common-anchor-header">llama-agents<button data-href="#llama-agents" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -110,7 +110,7 @@ title: 使用 Mistral AI、Milvus 和 Llama-agents 的多代理系统
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
    </span> <span class="img-wrapper"> <span>图片.png</span> </span></p>
 <h2 id="Mistral-AI" class="common-anchor-header">Mistral AI<button data-href="#Mistral-AI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -392,7 +392,7 @@ Uber's total revenue for the year ended December 31, 2021 was $17,455 million.
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>精确搜索结果</strong>：通过应用元数据筛选器，可以确保搜索结果与用户的查询高度相关。例如，如果您有一个财务文档 Collections，您可以根据公司名称、年份或任何其他相关元数据对其进行过滤。</p></li>
+<li><p><strong>精确搜索结果</strong>：通过应用元数据过滤器，可以确保搜索结果与用户的查询高度相关。例如，如果您有一个财务文档 Collections，您可以根据公司名称、年份或任何其他相关元数据对其进行过滤。</p></li>
 <li><p><strong>效率</strong>：元数据过滤有助于减少需要处理的数据量，提高搜索操作的效率。这在处理大型数据集时尤其有益。</p></li>
 <li><p><strong>定制</strong>：不同的用户或应用程序可能有不同的要求。元数据过滤功能可让您自定义搜索结果，以满足特定需求，例如检索特定年份或公司的文档。</p></li>
 </ul>
@@ -557,7 +557,7 @@ Based on the provided context, which pertains to Lyft&#x27;s Risk Factors sectio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>下面是一个代码示例，演示如何使用 Agents 从用户问题中提取元数据过滤器来创建过滤查询引擎：</p>
+    </button></h2><p>下面是一个代码示例，演示如何使用代理从用户问题中提取元数据过滤器来创建过滤查询引擎：</p>
 <h3 id="Explanation" class="common-anchor-header">说明<button data-href="#Explanation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -675,7 +675,7 @@ Uber's total revenue for the year ended December 31, 2021, is $17.455 billion.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>下面要回答的问题特别具有挑战性，因为它需要协调多个服务和代理，以提供一致、准确的响应。这涉及到协调各种工具和 Agents，以检索和处理来自不同来源的信息，例如来自不同公司的财务数据。</p>
+    </button></h3><p>下面要回答的问题特别具有挑战性，因为它需要协调多个服务和代理，以提供一致而准确的响应。这涉及到协调各种工具和 Agents，以检索和处理来自不同来源的信息，例如来自不同公司的财务数据。</p>
 <h3 id="Whats-so-difficult-about-that" class="common-anchor-header">这有什么难的？<button data-href="#Whats-so-difficult-about-that" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

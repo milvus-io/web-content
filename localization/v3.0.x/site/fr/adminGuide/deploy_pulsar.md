@@ -242,7 +242,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><ol>
-<li>Configurez la section <code translate="no">externalConfigFiles</code> dans le fichier <code translate="no">values.yaml</code> si vous souhaitez utiliser Kafka comme système de stockage de messages.</li>
+<li>Configurez la section <code translate="no">externalConfigFiles</code> dans le fichier <code translate="no">values.yaml</code> si vous souhaitez utiliser Kafka comme système de stockage des messages.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+

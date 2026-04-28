@@ -53,7 +53,7 @@ beta: Milvus 3.0.x
 <li><p><strong>Dados do segmento</strong></p>
 <p>Captura os ficheiros de dados vectoriais (binlogs), os registos de eliminação (deltalogs) e os ficheiros de índice.</p></li>
 </ul>
-<p>Entre as informações acima, Milvus gera um arquivo de manifesto Apache Avro para cada segmento e armazena os metadados do snapshot, a descrição da coleção, as informações do índice e os caminhos para os arquivos de manifesto em um arquivo JSON. O diagrama a seguir ilustra a estrutura de pastas do snapshot.</p>
+<p>Entre as informações acima, Milvus gera um arquivo de manifesto Apache Avro para cada segmento e armazena os metadados do snapshot, a descrição da coleção, as informações de índice e os caminhos para os arquivos de manifesto em um arquivo JSON. O diagrama a seguir ilustra a estrutura de pastas do snapshot.</p>
 <pre><code translate="no" class="language-text">snapshots/{collection_id}/
 ├── metadata/
 │   └── {snapshot_id}.json         # Snapshot metadata (JSON format)
@@ -85,7 +85,7 @@ beta: Milvus 3.0.x
 <li>Remover regularmente instantâneos antigos para poupar armazenamento.</li>
 <li>Utilizar nomes e descrições descritivos para referência futura.</li>
 <li>Verificar sempre os resultados da criação e do restauro de instantâneos.</li>
-<li>Controlar os carimbos de data/hora da criação de instantâneos, a utilização do armazenamento e os IDs das tarefas de restauro para monitorização e resolução de problemas.</li>
+<li>Acompanhar os carimbos de data/hora da criação de instantâneos, a utilização do armazenamento e os IDs das tarefas de restauro para monitorização e resolução de problemas.</li>
 </ul>
 <h2 id="Limits-and-restrictions" class="common-anchor-header">Limites e restrições<button data-href="#Limits-and-restrictions" class="anchor-icon" translate="no">
       <svg translate="no"

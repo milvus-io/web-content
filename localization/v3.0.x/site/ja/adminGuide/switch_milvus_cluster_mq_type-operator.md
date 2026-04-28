@@ -96,7 +96,7 @@ title: MilvusクラスタのMQタイプの切り替え
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><strong>Helmの</strong>場合は、"<a href="/docs/ja/configure-helm.md">Helm ChartsでMilvusを設定する</a>"を参照し、設定を更新してください。</li>
-<li><strong>Milvus Operatorの</strong>場合は、<a href="/docs/ja/configure_operator.md">Milvus Operatorを使用してMilvusを設定するを</a>参照して設定を更新してください。</li>
+<li><strong>Milvus Operatorの</strong>場合は、<a href="/docs/ja/configure_operator.md">Milvus Operatorを使用してMilvusを設定するを</a>参照してください。</li>
 </ul>
 <h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">ステップ3: MQスイッチの実行<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -157,7 +157,7 @@ vector_store = Milvus(
 <p><strong>특징:</strong></p>
 <ul>
 <li>클라이언트가 임베딩 API를 직접 호출</li>
-<li>클라이언트 측에서 API 키 관리 필요</li>
+<li>클라이언트 측에서 API 키를 관리해야 함</li>
 <li>데이터 흐름: 텍스트 → 클라이언트 → 임베딩 API → 벡터 → 밀버스</li>
 </ul>
 <h3 id="Milvus-Text-Embedding-Function-Server-side-Data-In-Data-Out" class="common-anchor-header">Milvus 텍스트 임베딩 기능 (서버 측 데이터 인 데이터 아웃)<button data-href="#Milvus-Text-Embedding-Function-Server-side-Data-In-Data-Out" class="anchor-icon" translate="no">
@@ -175,7 +175,7 @@ vector_store = Milvus(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>밀버스 2.6의 텍스트 임베딩 기능(데이터 인 데이터 아웃)을 사용하면 밀버스 서버가 원시 텍스트를 벡터 임베딩으로 자동 변환할 수 있습니다. 클라이언트는 텍스트만 제공하면 Milvus가 임베딩 생성을 자동으로 처리합니다.</p>
+    </button></h3><p>밀버스 2.6의 텍스트 임베딩 기능(데이터 인 데이터 아웃)은 밀버스 서버가 원시 텍스트를 벡터 임베딩으로 자동 변환할 수 있는 기능입니다. 클라이언트는 텍스트만 제공하면 Milvus가 임베딩 생성을 자동으로 처리합니다.</p>
 <p><strong>시퀀스 다이어그램:</strong></p>
 <p>
   <span class="img-wrapper">
@@ -211,7 +211,7 @@ vector_store = Milvus(
 <tbody>
 <tr><td><strong>처리 위치</strong></td><td>클라이언트 애플리케이션</td><td>밀버스 서버</td></tr>
 <tr><td><strong>API 호출</strong></td><td>클라이언트가 직접 임베딩 API 호출</td><td>밀버스 서버가 임베딩 API 호출</td></tr>
-<tr><td><strong>API 키 관리</strong></td><td>클라이언트 측에서 관리 필요</td><td>서버 측에서 중앙 집중 관리, 보안 강화</td></tr>
+<tr><td><strong>API 키 관리</strong></td><td>클라이언트 측에서 관리 필요</td><td>서버 측에서 중앙 관리, 보안 강화</td></tr>
 <tr><td><strong>코드 복잡성</strong></td><td>클라이언트 측에서 API 키와 호출을 관리해야 함</td><td>Milvus 설정에서 한 번만 구성하면 됩니다.</td></tr>
 <tr><td><strong>사용 사례</strong></td><td>- 임베딩 프로세스에 대한 클라이언트 측 제어가 필요한 경우<br>- 클라이언트 측에서 임베딩 결과를 캐시해야 하는 경우<br>- 여러 임베딩 모델 전환을 지원해야 하는 경우</td><td>- 클라이언트 측 코드 간소화<br>- 서버 측에서 API 키를 중앙에서 관리해야 함<br>- 대량의 문서를 일괄 처리해야 하는 경우<br>- 외부 API와의 클라이언트 측 상호 작용을 줄이고자 하는 경우<br>- BM25와 같은 Milvus 기본 제공 기능과 결합해야 하는 경우</td></tr>
 <tr><td><strong>Milvus 버전 요구 사항</strong></td><td>모든 버전(Milvus Lite 포함)</td><td>Milvus Lite는 지원되지 않음</td></tr>

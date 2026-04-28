@@ -36,7 +36,7 @@ summary: 'Узнайте, как настроить Milvus QueryNode на исп
         ></path>
       </svg>
     </button></h2><p>Milvus - это векторная база данных, ориентированная на ИИ и предназначенная для эффективного хранения и извлечения огромных объемов векторных данных. Она идеально подходит для таких задач, как анализ изображений и видео, обработка естественного языка и рекомендательные системы. Для обеспечения оптимальной производительности очень важно минимизировать задержку чтения данных с диска. Для предотвращения задержек и поддержания стабильности системы настоятельно рекомендуется использовать локальные твердотельные накопители NVMe.</p>
-<p>Ключевые функции локального дискового хранилища включают в себя:</p>
+<p>К ключевым функциям, в которых локальные дисковые хранилища играют важную роль, относятся:</p>
 <ul>
 <li><a href="/docs/ru/chunk_cache.md"><strong>Кэш чанков</strong></a>: Предварительная загрузка данных в локальный дисковый кэш для ускорения поиска.</li>
 <li><a href="/docs/ru/mmap.md"><strong>MMap</strong></a>: Сопоставление содержимого файлов непосредственно в память для повышения эффективности использования памяти.</li>
@@ -75,8 +75,23 @@ nvme1n1     259:1    0 250.0G  0 disk
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы настроить QueryNode в Milvus Distributed на использование NVMe-диска, необходимо настроить рабочие узлы целевых кластеров Kubernetes на хранение контейнеров и образов на NVMe-диске. Процедура настройки зависит от облачных провайдеров.</p>
-<h3 id="AWS" class="common-anchor-header">AWS</h3><p>При использовании Amazon EKS вы можете настроить управляемые узлы с помощью шаблонов запуска, в которых можно указать параметры конфигурации для групп узлов. Ниже приведен пример монтирования NVMe-диска на рабочих узлах кластера Amazon EKS:</p>
+    </button></h2><p>Чтобы настроить QueryNode Milvus Distributed на использование дискового хранилища NVMe, необходимо настроить рабочие узлы целевых кластеров Kubernetes на хранение контейнеров и образов на NVMe-диске. Процедура настройки зависит от облачных провайдеров.</p>
+<h3 id="AWS" class="common-anchor-header">AWS<button data-href="#AWS" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>При использовании Amazon EKS вы можете настроить управляемые узлы с помощью шаблонов запуска, в которых можно указать параметры конфигурации для групп узлов. Ниже приведен пример монтирования NVMe-диска на рабочих узлах кластера Amazon EKS:</p>
 <pre><code translate="no" class="language-bash">MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary=<span class="hljs-string">&quot;==MYBOUNDARY==&quot;</span>
 
@@ -105,14 +120,44 @@ Content-Type: text/x-shellscript; charset=<span class="hljs-string">&quot;us-asc
 <p>В приведенном выше примере мы предполагаем, что NVMe-диск имеет адрес <code translate="no">/dev/nvme1n1</code>. Вам необходимо изменить сценарий в соответствии с вашей конкретной конфигурацией.</p>
 </div>
 <p>Подробнее см. в разделе <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html#launch-template-user-data">Настройка управляемых узлов с помощью шаблонов запуска</a>.</p>
-<h3 id="GCP" class="common-anchor-header">GCP</h3><p>Чтобы создать хранилище Local SSD на кластерах Google Kubernetes Engine (GKE) и настроить рабочие нагрузки на потребление данных из эфемерного хранилища Local SSD, подключенного к узлам кластера, выполните следующую команду:</p>
+<h3 id="GCP" class="common-anchor-header">GCP<button data-href="#GCP" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы создать хранилище Local SSD на кластерах Google Kubernetes Engine (GKE) и настроить рабочие нагрузки на потребление данных из эфемерного хранилища Local SSD, подключенного к узлам кластера, выполните следующую команду:</p>
 <pre><code translate="no" class="language-bash">gcloud container node-pools create <span class="hljs-variable">${POOL_NAME}</span> \
     --cluster=<span class="hljs-variable">${CLUSTER_NAME}</span> \
     --ephemeral-storage-local-ssd count=<span class="hljs-variable">${NUMBER_OF_DISKS}</span> \
     --machine-type=<span class="hljs-variable">${MACHINE_TYPE}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Подробнее см. в разделе <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/local-ssd">Предоставление локального SSD-хранилища на GKE</a>.</p>
-<h3 id="Azure" class="common-anchor-header">Azure</h3><p>Чтобы создать набор масштабирования виртуальных машин (VMSS) с локальным дисковым хранилищем NVMe, необходимо передать пользовательские данные экземплярам ВМ. Ниже приведен пример подключения NVMe-диска к экземплярам ВМ в VMSS:</p>
+<h3 id="Azure" class="common-anchor-header">Azure<button data-href="#Azure" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы создать набор масштабирования виртуальных машин (VMSS) с локальным дисковым хранилищем NVMe, необходимо передать пользовательские данные экземплярам ВМ. Ниже приведен пример подключения NVMe-диска к экземплярам ВМ в VMSS:</p>
 <pre><code translate="no" class="language-bash">mdadm -Cv /dev/md0 -l0 -n2 /dev/nvme0n1 /dev/nvme1n1
 mdadm -Ds &gt; /etc/mdadm/mdadm.conf 
 update-initramfs -u
@@ -125,7 +170,22 @@ mount -a
 <div class="alert note">
 <p>В приведенном выше примере предполагается, что NVMe-диски - это <code translate="no">/dev/nvme0n1</code> и <code translate="no">/dev/nvme1n1</code>. Вам необходимо изменить сценарий в соответствии с конкретной конфигурацией.</p>
 </div>
-<h3 id="Alibaba-Cloud--TecentCloud" class="common-anchor-header">Alibaba Cloud и TecentCloud</h3><p>Чтобы создать пул узлов, использующий тома Local SSD, нам нужно передать пользовательские данные. Ниже приведен пример пользовательских данных.</p>
+<h3 id="Alibaba-Cloud--TecentCloud" class="common-anchor-header">Alibaba Cloud и TecentCloud<button data-href="#Alibaba-Cloud--TecentCloud" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы создать пул узлов, использующий тома Local SSD, нам нужно передать пользовательские данные. Ниже приведен пример пользовательских данных.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nvme init start...&quot;</span>
 mkfs.xfs /dev/nvme0n1
@@ -146,7 +206,22 @@ mount -a
 <div class="alert note">
 <p>В приведенном выше примере мы предполагаем, что NVMe-диск - это <code translate="no">/dev/nvme0n1</code>. Вам необходимо изменить сценарий в соответствии с вашей конкретной конфигурацией.</p>
 </div>
-<h3 id="Your-own-IDC" class="common-anchor-header">Собственный IDC</h3><p>Если вы используете собственную IDC и хотите настроить контейнеры на использование файловой системы на только что смонтированном NVMe-диске по умолчанию в containerd, выполните следующие действия:</p>
+<h3 id="Your-own-IDC" class="common-anchor-header">Собственный IDC<button data-href="#Your-own-IDC" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Если вы используете собственную IDC и хотите настроить контейнеры на использование файловой системы на только что смонтированном NVMe-диске по умолчанию в containerd, выполните следующие действия:</p>
 <ul>
 <li><p><strong>Смонтируйте NVMe-диски.</strong></p>
 <p>Убедитесь, что NVMe-диск правильно смонтирован на хост-машине. Вы можете смонтировать его в каталог по своему выбору. Например, если вы монтируете его в <code translate="no">/mnt/nvme</code>, убедитесь, что он правильно установлен и вы можете увидеть диск, доступный по адресу <code translate="no">/mnt/nvme</code>, запустив <code translate="no">lsblk</code> или <code translate="no">df -h</code>.</p></li>
@@ -265,9 +340,39 @@ IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=100.0%
         ></path>
       </svg>
     </button></h2><p>После того как результаты проверки будут удовлетворительными, можно развернуть Milvus Distributed, выполнив следующие шаги:</p>
-<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">Советы по развертыванию Milvus Distributed с помощью Helm</h3><p>Подкад QueryNode по умолчанию использует NVMe-диски в качестве томов EmptyDir. Для обеспечения оптимальной производительности рекомендуется монтировать NVMe-диски на <code translate="no">/var/lib/milvus/data</code> внутри подкад QueryNode.</p>
+<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">Советы по развертыванию Milvus Distributed с помощью Helm<button data-href="#Tips-for-deploying-Milvus-Distributed-using-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Подкад QueryNode по умолчанию использует NVMe-диски в качестве томов EmptyDir. Для обеспечения оптимальной производительности рекомендуется монтировать NVMe-диски на <code translate="no">/var/lib/milvus/data</code> внутри подкад QueryNode.</p>
 <p>Подробнее о том, как развернуть Milvus Distributed с помощью Helm, читайте в разделе <a href="/docs/ru/install_cluster-helm.md">Запуск Milvus в Kubernetes с помощью Helm</a>.</p>
-<h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">Советы по развертыванию Milvus Distributed с помощью Milvus Operator</h3><p>Milvus Operator автоматически настраивает подкад QueryNode на использование NVMe-дисков в качестве томов EmptyDir. Рекомендуется добавить следующие конфигурации в пользовательский ресурс <code translate="no">MilvusCluster</code>:</p>
+<h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">Советы по развертыванию Milvus Distributed с помощью Milvus Operator<button data-href="#Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus Operator автоматически настраивает подкад QueryNode на использование NVMe-дисков в качестве томов EmptyDir. Рекомендуется добавить следующие конфигурации в пользовательский ресурс <code translate="no">MilvusCluster</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
@@ -279,4 +384,4 @@ IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=100.0%
       <span class="hljs-bullet">-</span> <span class="hljs-attr">emptyDir:</span>
         <span class="hljs-attr">name:</span> <span class="hljs-string">data</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Это обеспечит использование стручком QueryNode NVMe-диска в качестве тома данных. Подробнее о том, как развернуть Milvus Distributed с помощью Milvus Operator, читайте в разделе <a href="/docs/ru/install_cluster-milvusoperator.md">Запуск Milvus в Kubernetes с помощью Milvus Operator</a>.</p>
+<p>Это обеспечит использование стручком QueryNode диска NVMe в качестве тома данных. Подробнее о том, как развернуть Milvus Distributed с помощью Milvus Operator, читайте в разделе <a href="/docs/ru/install_cluster-milvusoperator.md">Запуск Milvus в Kubernetes с помощью Milvus Operator</a>.</p>

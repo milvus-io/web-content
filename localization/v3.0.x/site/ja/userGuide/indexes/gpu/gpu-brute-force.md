@@ -51,7 +51,7 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>この設定では</p>
 <ul>
-<li><p><code translate="no">index_type</code>:構築するインデックスのタイプ。この例では、<code translate="no">GPU_BRUTE_FORCE</code> とします。</p></li>
+<li><p><code translate="no">index_type</code>:構築するインデックスのタイプ。この例では<code translate="no">GPU_BRUTE_FORCE</code> とします。</p></li>
 <li><p><code translate="no">metric_type</code>:ベクトル間の距離の計算方法。詳細については、<a href="/docs/ja/metric.md">メトリック・タイプを</a>参照してください。</p></li>
 <li><p><code translate="no">params</code>:GPU_BRUTE_FORCE インデックスには追加のパラメータは必要ありません。</p></li>
 </ul>

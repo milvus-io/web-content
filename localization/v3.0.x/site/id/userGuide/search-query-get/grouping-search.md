@@ -2,14 +2,8 @@
 id: grouping-search.md
 title: Pencarian Pengelompokan
 summary: >-
-  Pencarian pengelompokan memungkinkan Milvus untuk mengelompokkan hasil
-  pencarian berdasarkan nilai dalam bidang tertentu untuk mengumpulkan data pada
-  tingkat yang lebih tinggi. Sebagai contoh, Anda dapat menggunakan pencarian
-  ANN dasar untuk menemukan buku yang mirip dengan buku yang sedang dicari,
-  tetapi Anda dapat menggunakan pencarian pengelompokan untuk menemukan kategori
-  buku yang mungkin melibatkan topik-topik yang dibahas dalam buku tersebut.
-  Topik ini menjelaskan cara menggunakan Pencarian Pengelompokan bersama dengan
-  pertimbangan utama.
+  Gunakan pencarian pengelompokan untuk mengumpulkan hasil pencarian ANN
+  berdasarkan nilai bidang dan mengurangi entitas duplikat.
 ---
 <h1 id="Grouping-Search" class="common-anchor-header">Pencarian Pengelompokan<button data-href="#Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +46,7 @@ summary: >-
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" />
-   </span> <span class="img-wrapper"> <span>Mengelompokkan Pencarian</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Pengelompokan Pencarian</span> </span></p>
 <p>Untuk meningkatkan keragaman hasil pencarian, Anda dapat menambahkan parameter <code translate="no">group_by_field</code> dalam permintaan pencarian untuk mengaktifkan Pencarian Pengelompokan. Seperti yang ditunjukkan pada diagram, Anda dapat mengatur <code translate="no">group_by_field</code> ke <code translate="no">docId</code>. Setelah menerima permintaan ini, Milvus akan:</p>
 <ul>
 <li><p>Melakukan pencarian ANN berdasarkan vektor kueri yang disediakan untuk menemukan semua entitas yang paling mirip dengan kueri.</p></li>
@@ -377,6 +371,49 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><code translate="no">strict_group_size</code>: Parameter boolean ini mengontrol apakah sistem harus secara ketat memberlakukan hitungan yang ditetapkan oleh <code translate="no">group_size</code>. Ketika <code translate="no">strict_group_size=True</code>, sistem akan berusaha memasukkan jumlah entitas yang tepat yang ditentukan oleh <code translate="no">group_size</code> dalam setiap grup (misalnya, dua paragraf), kecuali jika tidak ada cukup data dalam grup tersebut. Secara default (<code translate="no">strict_group_size=False</code>), sistem akan memprioritaskan untuk memenuhi jumlah grup yang ditentukan oleh parameter <code translate="no">limit</code>, daripada memastikan setiap grup berisi entitas <code translate="no">group_size</code>. Pendekatan ini umumnya lebih efisien dalam kasus-kasus di mana distribusi data tidak merata.</p></li>
 </ul>
 <p>Untuk detail parameter tambahan, lihat <a href="https://docs.zilliz.com/reference/python/python/Vector-search">pencarian</a>.</p>
+<h2 id="Order-groups-by-a-scalar-field--Milvus-30x" class="common-anchor-header">Mengurutkan grup berdasarkan bidang skalar<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Order-groups-by-a-scalar-field--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Anda dapat menggabungkan Pencarian Pengelompokan dengan <code translate="no">order_by_fields</code> untuk mengurutkan grup berdasarkan bidang skalar. Hal ini berguna saat Anda menginginkan hasil yang beragam di seluruh grup, namun tetap ingin grup mengikuti urutan yang relevan dengan bisnis, seperti harga atau peringkat.</p>
+<p>Contoh berikut mengelompokkan hasil pencarian dengan <code translate="no">category</code>, mengembalikan hingga tiga entitas per grup, dan mengurutkan grup yang dikembalikan oleh <code translate="no">price</code> dari rendah ke tinggi.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
+    data=query_vectors,
+    anns_field=<span class="hljs-string">&quot;embedding&quot;</span>,
+    limit=<span class="hljs-number">20</span>,
+    group_by_field=<span class="hljs-string">&quot;category&quot;</span>,
+    group_size=<span class="hljs-number">3</span>,
+    strict_group_size=<span class="hljs-literal">True</span>,
+    output_fields=[<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>],
+<span class="highlighted-comment-line">    order_by_fields=[</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;field&quot;</span>: <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;order&quot;</span>: <span class="hljs-string">&quot;asc&quot;</span>}</span>
+<span class="highlighted-comment-line">    ],</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Pada permintaan di atas, <code translate="no">limit=20</code> berarti Milvus memilih hingga 20 grup, bukan 20 entitas. Karena <code translate="no">group_size=3</code>, daftar hasil datar dapat berisi hingga 60 entitas secara total.</p>
+<p>Ketika Anda menggunakan <code translate="no">order_by_fields</code> dengan <code translate="no">group_by_field</code>, Milvus mengurutkan grup berdasarkan nilai bidang skalar yang ditentukan dari setiap entitas teratas grup. Di dalam setiap kelompok, entitas tetap diurutkan berdasarkan nilai kemiripannya dengan vektor kueri.</p>
 <h2 id="Considerations" class="common-anchor-header">Pertimbangan<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -397,5 +434,5 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><strong>Jumlah kelompok</strong>: Parameter <code translate="no">limit</code> mengontrol jumlah grup dari mana hasil pencarian dikembalikan, dan bukan jumlah spesifik entitas dalam setiap grup. Menetapkan <code translate="no">limit</code> yang tepat membantu mengontrol keragaman pencarian dan kinerja kueri. Mengurangi <code translate="no">limit</code> dapat mengurangi biaya komputasi jika data terdistribusi secara padat atau kinerja menjadi perhatian.</p></li>
 <li><p><strong>Entitas per grup</strong>: Parameter <code translate="no">group_size</code> mengontrol jumlah entitas yang dikembalikan per grup. Menyesuaikan <code translate="no">group_size</code> berdasarkan kasus penggunaan Anda dapat meningkatkan kekayaan hasil pencarian. Namun, jika data tidak terdistribusi secara merata, beberapa grup mungkin mengembalikan lebih sedikit entitas daripada yang ditentukan oleh <code translate="no">group_size</code>, terutama dalam skenario data terbatas.</p></li>
 <li><p><strong>Ukuran kelompok yang ketat</strong>: Ketika <code translate="no">strict_group_size=True</code>, sistem akan berusaha mengembalikan jumlah entitas yang ditentukan (<code translate="no">group_size</code>) untuk setiap grup, kecuali jika tidak ada cukup data dalam grup tersebut. Pengaturan ini memastikan jumlah entitas yang konsisten per grup, tetapi dapat menyebabkan penurunan kinerja dengan distribusi data yang tidak merata atau sumber daya yang terbatas. Jika jumlah entitas yang ketat tidak diperlukan, pengaturan <code translate="no">strict_group_size=False</code> dapat meningkatkan kecepatan kueri.</p></li>
-<li><p>Jika vektor kueri sudah ada di koleksi target, pertimbangkan untuk menggunakan <code translate="no">ids</code> alih-alih mengambilnya sebelum pencarian. Untuk detailnya, lihat <a href="/docs/id/primary-key-search.md">Pencarian Kunci Utama</a>.</p></li>
+<li><p>Jika vektor kueri sudah ada di koleksi target, pertimbangkan untuk menggunakan <code translate="no">ids</code> daripada mengambilnya sebelum pencarian. Untuk detailnya, lihat <a href="/docs/id/primary-key-search.md">Pencarian Kunci Utama</a>.</p></li>
 </ul>

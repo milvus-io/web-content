@@ -64,7 +64,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>: Die Methode zur Berechnung des Abstands zwischen Vektoren. Einzelheiten finden Sie unter <a href="/docs/de/metric.md">Metrische Typen</a>.</p></li>
 <li><p><code translate="no">params</code>: Zusätzliche Konfigurationsoptionen für die Erstellung des Indexes. Weitere Informationen zu den für den Index <code translate="no">GPU_CAGRA</code> verfügbaren Parametern finden Sie unter <a href="/docs/de/gpu-cagra.md#Index-building-params">Parameter für den Indexaufbau</a>.</p></li>
 </ul>
-<p>Sobald die Indexparameter konfiguriert sind, können Sie den Index erstellen, indem Sie die Methode <code translate="no">create_index()</code> direkt verwenden oder die Indexparameter in der Methode <code translate="no">create_collection</code> übergeben. Weitere Informationen finden Sie unter <a href="/docs/de/create-collection.md">Sammlung erstellen</a>.</p>
+<p>Sobald die Indexparameter konfiguriert sind, können Sie den Index erstellen, indem Sie die Methode <code translate="no">create_index()</code> direkt verwenden oder die Indexparameter in der Methode <code translate="no">create_collection</code> übergeben. Einzelheiten finden Sie unter <a href="/docs/de/create-collection.md">Sammlung erstellen</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Suche im Index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -126,7 +126,7 @@ res = MilvusClient.search(
 <ul>
 <li><p>Wenn <code translate="no">load.adapt_for_cpu</code> auf <code translate="no">true</code> gesetzt ist, konvertiert Milvus den <strong>GPU_CAGRA-Index</strong> während des Ladens in ein CPU-ausführbares Format (HNSW-ähnlich).</p></li>
 <li><p>Nachfolgende Suchoperationen werden auf der CPU ausgeführt, auch wenn der Index ursprünglich für die GPU erstellt wurde.</p></li>
-<li><p>Wird die Option weggelassen oder ist sie falsch, bleibt der Index auf der GPU und die Suchvorgänge werden auf der GPU ausgeführt.</p></li>
+<li><p>Wird er weggelassen oder ist er falsch, bleibt der Index auf der GPU und die Suchvorgänge werden auf der GPU ausgeführt.</p></li>
 </ul>
 <div class="alert note">
 <p>Verwenden Sie die CPU-Anpassung während der Ladezeit in hybriden oder kostensensitiven Umgebungen, in denen GPU-Ressourcen für die Indexerstellung reserviert sind, die Suchvorgänge aber auf der CPU ausgeführt werden.</p>

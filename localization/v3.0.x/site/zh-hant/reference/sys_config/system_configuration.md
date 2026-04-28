@@ -140,14 +140,15 @@ summary: 了解 Milvus 的系統設定。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 支援四種 MQ：rocksmq（基於 RockDB）、natsmq（內嵌 nats-server）、Pulsar 和 Kafka。</p>
+    </button></h3><p>Milvus 支援四種 MQ：rocksmq（基於 RockDB）、Pulsar、Kafka 和 Woodpecker。</p>
 <p>您可以透過設定 mq.type 欄位來變更您的 MQ。</p>
-<p>如果您不將 mq.type 欄位設定為預設值，如果我們在此檔案中設定多個 mq，則會有啟用優先順序的注意事項。</p>
+<p>如果您不將 mq.type 欄位設定為預設值，如果我們在此檔案中設定多個 MQ，則會有啟用優先順序的注意事項。</p>
 <ol>
-<li><p>獨立（本機）模式：rocksmq（預設） &gt; natsmq &gt; Pulsar &gt; Kafka</p></li>
-<li><p>群集模式：  Pulsar(default) &gt; Kafka (群集模式不支援 rocksmq 和 natsmq)</p></li>
+<li><p>獨立（本機）模式：rocksmq（預設） &gt; Pulsar &gt; Kafka</p></li>
+<li><p>群集模式：  Pulsar (預設) &gt; Kafka (群集模式不支援 rocksmq)</p></li>
+<li><p>透過將 mq.type 設定為 woodpecker，Woodpecker 可以在單機和群集模式下使用。</p></li>
 </ol>
-<p>請參閱<a href="/docs/zh-hant/configure_mq.md">mq 相關組態</a>，以取得本節下各參數的詳細說明。</p>
+<p>請參閱<a href="/docs/zh-hant/configure_mq.md">mq 相關組態</a>，以瞭解本節下每個參數的詳細說明。</p>
 <h3 id="pulsar" class="common-anchor-header"><code translate="no">pulsar</code><button data-href="#pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -182,7 +183,7 @@ summary: 了解 Milvus 的系統設定。
       </svg>
     </button></h3><p>如果你想啟用 kafka，需要註解 pulsar configs</p>
 <p>kafka：</p>
-<p>brokerList：</p>
+<p>brokerList: localhost:9092</p>
 <p>saslUsername：</p>
 <p>saslPassword：</p>
 <p>saslMechanisms：</p>
@@ -199,25 +200,7 @@ tlsCaCert:  # file or directory path to CA certificate(s) for verifying the brok
 tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_ssl_cert(), if any
 </code></pre>
 <p>readTimeout：10</p>
-<p>請參閱<a href="/docs/zh-hant/configure_rocksmq.md">rocksmq 相關組態</a>，以取得本節下各參數的詳細說明。</p>
-<h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code><button data-href="#natsmq" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>natsmq 配置。</p>
-<p>更多詳細資訊：https://docs.nats.io/running-a-nats-service/configuration</p>
-<p>請參閱<a href="/docs/zh-hant/configure_natsmq.md">natsmq 相關組態</a>，以取得本節下各參數的詳細說明。</p>
+<p>請參閱<a href="/docs/zh-hant/configure_rocksmq.md">rocksmq 相關組態</a>，瞭解本節下各參數的詳細說明。</p>
 <h3 id="rootCoord" class="common-anchor-header"><code translate="no">rootCoord</code><button data-href="#rootCoord" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -233,8 +216,8 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>rootCoord 相關組態，用來處理資料定義語言 (DDL) 和資料控制語言 (DCL) 請求</p>
-<p>請參閱<a href="/docs/zh-hant/configure_rootcoord.md">rootCoord 相關組態</a>，以取得本節下各參數的詳細說明。</p>
+    </button></h3><p>rootCoord 的相關配置，用於處理資料定義語言 (DDL) 和資料控制語言 (DCL) 請求</p>
+<p>本節下各參數的詳細說明，請參閱<a href="/docs/zh-hant/configure_rootcoord.md">rootCoord 相關組態</a>。</p>
 <h3 id="proxy" class="common-anchor-header"><code translate="no">proxy</code><button data-href="#proxy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -268,7 +251,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
         ></path>
       </svg>
     </button></h3><p>queryCoord 相關組態用於管理查詢節點的拓樸和負載平衡，以及從成長中的網段移交到封閉的網段。</p>
-<p>請參閱<a href="/docs/zh-hant/configure_querycoord.md">queryCoord 相關組態</a>，以取得本節下各參數的詳細說明。</p>
+<p>請參閱<a href="/docs/zh-hant/configure_querycoord.md">queryCoord 相關組態</a>，以瞭解本節下每個參數的詳細說明。</p>
 <h3 id="queryNode" class="common-anchor-header"><code translate="no">queryNode</code><button data-href="#queryNode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -383,7 +366,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
         ></path>
       </svg>
     </button></h3><p>設定系統日誌輸出。</p>
-<p>請參閱<a href="/docs/zh-hant/configure_log.md">log-related Configurations</a>以取得本節下各參數的詳細說明。</p>
+<p>請參閱<a href="/docs/zh-hant/configure_log.md">log-related Configurations</a>了解本節下各參數的詳細說明。</p>
 <h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code><button data-href="#grpc" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -415,8 +398,25 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>設定代理 tls 啟用。</p>
-<p>請參閱<a href="/docs/zh-hant/configure_tls.md">tls 相關組態</a>，以取得本節下各參數的詳細說明。</p>
+    </button></h3><p>設定外部 tls。</p>
+<p>請參閱<a href="/docs/zh-hant/configure_tls.md">tls 相關設定</a>，以取得本節下各參數的詳細說明。</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code><button data-href="#internaltls" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>設定內部 tls。</p>
+<p>請參閱<a href="/docs/zh-hant/configure_internaltls.md">internaltls 相關組態</a>，以取得本節下各參數的詳細說明。</p>
 <h3 id="common" class="common-anchor-header"><code translate="no">common</code><button data-href="#common" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -432,7 +432,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>本節下各參數的詳細說明，請參閱<a href="/docs/zh-hant/configure_common.md">共用相關</a>組態。</p>
+    </button></h3><p>本節下各參數的詳細說明，請參閱<a href="/docs/zh-hant/configure_common.md">共用相關組態</a>。</p>
 <h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code><button data-href="#quotaAndLimits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -502,3 +502,54 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>#milvus 將自動初始化一半可用的 GPU 記憶體、</p>
 <p>#maxMemSize 將會是整個可用的 GPU 記憶體。</p>
 <p>請參閱<a href="/docs/zh-hant/configure_gpu.md">gpu 相關組態</a>，以取得本節下各參數的詳細說明。</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code><button data-href="#streamingNode" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>任何與串流節點伺服器相關的設定。</p>
+<p>請參閱<a href="/docs/zh-hant/configure_streamingnode.md">streamingNode-related Configurations</a>，以瞭解本節下每個參數的詳細說明。</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code><button data-href="#streaming" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>任何與串流服務相關的設定。</p>
+<p>請參閱<a href="/docs/zh-hant/configure_streaming.md">串流相關設定</a>，以取得本節下各參數的詳細說明。</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code><button data-href="#knowhere" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>任何與 knowhere 向量搜尋引擎相關的設定</p>
+<p>請參閱<a href="/docs/zh-hant/configure_knowhere.md">knowhere 相關設定</a>，以取得本節下各參數的詳細說明。</p>

@@ -6,10 +6,10 @@ summary: >-
   vettoriale Milvus/Zilliz per utilizzarli successivamente per la risposta alle
   domande.
 title: >-
-  Generazione aumentata del recupero: Crawling di siti web con Apify e
+  Generazione aumentata di recupero: Crawling di siti web con Apify e
   salvataggio dei dati in Milvus per la risposta alle domande
 ---
-<h1 id="Retrieval-Augmented-Generation-Crawling-Websites-with-Apify-and-Saving-Data-to-Milvus-for-Question-Answering" class="common-anchor-header">Generazione aumentata del recupero: Crawling di siti web con Apify e salvataggio dei dati in Milvus per la risposta alle domande<button data-href="#Retrieval-Augmented-Generation-Crawling-Websites-with-Apify-and-Saving-Data-to-Milvus-for-Question-Answering" class="anchor-icon" translate="no">
+<h1 id="Retrieval-Augmented-Generation-Crawling-Websites-with-Apify-and-Saving-Data-to-Milvus-for-Question-Answering" class="common-anchor-header">Generazione aumentata di recupero: Crawling di siti web con Apify e salvataggio dei dati in Milvus per la risposta alle domande<button data-href="#Retrieval-Augmented-Generation-Crawling-Websites-with-Apify-and-Saving-Data-to-Milvus-for-Question-Answering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -137,7 +137,7 @@ Enter YOUR MILVUS_TOKEN··········
         ></path>
       </svg>
     </button></h2><p>Utilizzeremo poi Website Content Crawler con l'SDK Apify Python. Inizieremo definendo l'actor_id e il run_input, quindi specificheremo le informazioni che saranno salvate nel database vettoriale.</p>
-<p><code translate="no">actor_id=&quot;apify/website-content-crawler&quot;</code> è l'identificatore di Website Content Crawler. Il comportamento del crawler può essere completamente controllato tramite i parametri run_input (vedere la <a href="https://apify.com/apify/website-content-crawler/input-schema">pagina</a> degli <a href="https://apify.com/apify/website-content-crawler/input-schema">input</a> per maggiori dettagli). In questo esempio, verrà effettuata la scansione della documentazione di Milvus, che non richiede il rendering in JavaScript. Per questo motivo, si imposta <code translate="no">crawlerType=cheerio</code>, si definisce <code translate="no">startUrls</code> e si limita il numero di pagine strisciate impostando <code translate="no">maxCrawlPages=10</code>.</p>
+<p><code translate="no">actor_id=&quot;apify/website-content-crawler&quot;</code> è l'identificatore di Website Content Crawler. Il comportamento del crawler può essere controllato completamente tramite i parametri run_input (vedere la <a href="https://apify.com/apify/website-content-crawler/input-schema">pagina</a> degli <a href="https://apify.com/apify/website-content-crawler/input-schema">input</a> per maggiori dettagli). In questo esempio, verrà effettuata la scansione della documentazione di Milvus, che non richiede il rendering in JavaScript. Per questo motivo, si imposta <code translate="no">crawlerType=cheerio</code>, si definisce <code translate="no">startUrls</code> e si limita il numero di pagine strisciate impostando <code translate="no">maxCrawlPages=10</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> apify_client <span class="hljs-keyword">import</span> ApifyClient
 
 client = ApifyClient(os.getenv(<span class="hljs-string">&quot;APIFY_API_TOKEN&quot;</span>))
@@ -151,7 +151,7 @@ run_input = {
 
 actor_call = client.actor(actor_id).call(run_input=run_input)
 <button class="copy-code-btn"></button></code></pre>
-<p>Il Website Content Crawler effettuerà una scansione completa del sito fino a raggiungere il limite predefinito impostato da <code translate="no">maxCrawlPages</code>. I dati raccolti saranno archiviati in <code translate="no">Dataset</code> sulla piattaforma Apify. Per accedere a questi dati e analizzarli, è possibile utilizzare il codice <code translate="no">defaultDatasetId</code></p>
+<p>Il Website Content Crawler effettuerà una scansione completa del sito fino a raggiungere il limite predefinito impostato da <code translate="no">maxCrawlPages</code>. I dati raccolti vengono archiviati in <code translate="no">Dataset</code> sulla piattaforma Apify. Per accedere a questi dati e analizzarli, è possibile utilizzare il codice <code translate="no">defaultDatasetId</code></p>
 <pre><code translate="no" class="language-python">dataset_id = actor_call[<span class="hljs-string">&quot;defaultDatasetId&quot;</span>]
 dataset_id
 <button class="copy-code-btn"></button></code></pre>

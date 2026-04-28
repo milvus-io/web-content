@@ -55,7 +55,7 @@ title: Konfigurieren der horizontalen Pod-Autoskalierung (HPA) für Milvus
       </svg>
     </button></h2><ul>
 <li>Ein laufender Milvus-Cluster, der mit Milvus Operator bereitgestellt wurde.</li>
-<li>Zugriff auf <code translate="no">kubectl</code> zur Verwaltung von Kubernetes-Ressourcen.</li>
+<li>Zugang zu <code translate="no">kubectl</code> für die Verwaltung von Kubernetes-Ressourcen.</li>
 <li>Vertrautheit mit der Milvus-Architektur und Kubernetes HPA.</li>
 </ul>
 <h2 id="Configure-HPA-with-Milvus-Operator" class="common-anchor-header">Konfigurieren von HPA mit Milvus Operator<button data-href="#Configure-HPA-with-Milvus-Operator" class="anchor-icon" translate="no">

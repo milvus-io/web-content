@@ -78,7 +78,7 @@ summary: 了解如何为 Milvus 配置 msgChannel。
     <tr>
       <td>
         <li>Root coord 发布时间刻度信息的信息通道的子名称前缀。</li>      
-        <li>完整的频道名称前缀是 ${msgChannel.chanNamePrefix.cluster}-${msgChannel.chanNamePrefix.rootCoordTimeTick} 。</li>      
+        <li>完整的频道名称前缀为 ${msgChannel.chanNamePrefix.cluster}-${msgChannel.chanNamePrefix.rootCoordTimeTick} 。</li>      
         <li>注意：在使用 Milvus 一段时间后更改此参数将影响您对旧数据的访问。</li>      
         <li>建议在首次启动 Milvus 之前更改此参数。</li>      </td>
       <td>根节点时间</td>

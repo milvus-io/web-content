@@ -35,8 +35,8 @@ title: 進階視訊搜尋：利用 Twelve Labs 和 Milvus 進行語意檢索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>歡迎來到這個使用<a href="https://docs.twelvelabs.io/docs/create-embeddings">Twelve Labs Embed API</a>和 Milvus 實現語意視訊搜尋的綜合教學。在本指南中，我們將探討如何利用<a href="https://www.twelvelabs.io/blog/multimodal-embeddings">Twelve Labs 先進的多模態嵌入（multimodal embeddings</a>）和<a href="https://milvus.io/intro">Milvus 高效的向量資料庫來</a>創建一個強大的視訊搜尋解決方案。透過整合這些技術，開發人員能夠釋放視訊內容分析的新可能性，實現基於內容的視訊檢索、推薦系統以及瞭解視訊資料細微差異的精密搜尋引擎等應用程式。</p>
-<p>本教程將引導您完成從設定開發環境到實作功能性語意視訊搜尋應用程式的整個過程。我們將介紹一些關鍵概念，例如從視訊產生多模態嵌入、將其有效地儲存於 Milvus，以及執行相似性搜尋以擷取相關內容。無論您是要建立視訊分析平台、內容發現工具，或是利用視訊搜尋功能強化您現有的應用程式，本指南都將為您提供相關知識與實務步驟，讓您在專案中充分利用 Twelve Labs 與 Milvus 的優勢。</p>
+    </button></h2><p>歡迎來到這個使用<a href="https://docs.twelvelabs.io/docs/create-embeddings">Twelve Labs Embed API</a>和 Milvus 實現語意視訊搜尋的綜合教學。在本指南中，我們將探討如何利用<a href="https://www.twelvelabs.io/blog/multimodal-embeddings">Twelve Labs 先進的多模態嵌入（multimodal embeddings</a>）和<a href="https://milvus.io/intro">Milvus 高效的向量資料庫來</a>創建一個強大的視訊搜尋解決方案。透過整合這些技術，開發人員能夠發掘視訊內容分析的新可能性，實現基於內容的視訊檢索、推薦系統以及瞭解視訊資料細微差異的精密搜尋引擎等應用程式。</p>
+<p>本教學將帶您完成從設定開發環境到實作功能性語意視訊搜尋應用程式的整個過程。我們將介紹一些關鍵概念，例如從視訊產生多模態嵌入、將其有效地儲存於 Milvus，以及執行相似性搜尋以擷取相關內容。無論您是要建立視訊分析平台、內容發現工具，或是利用視訊搜尋功能強化您現有的應用程式，本指南都將為您提供相關知識與實務步驟，讓您在專案中充分利用 Twelve Labs 與 Milvus 的優勢。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -335,7 +335,7 @@ insert_result = insert_embeddings(milvus_client, collection_name, task_result, v
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>將我們的嵌入向量儲存於 Milvus 後，我們就可以執行相似性搜尋，根據查詢向量找出最相關的視訊片段。以下是實現此功能的方法：</p>
+    </button></h2><p>將我們的嵌入資料儲存在 Milvus 後，我們就可以執行相似性搜尋，根據查詢向量找出最相關的視訊片段。以下是實現此功能的方法：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">perform_similarity_search</span>(<span class="hljs-params">milvus_client, collection_name, query_vector, limit=<span class="hljs-number">5</span></span>):
     <span class="hljs-string">&quot;&quot;&quot;
     Perform a similarity search on the Milvus collection.
@@ -453,5 +453,5 @@ search_results = perform_similarity_search(milvus_client, collection_name, query
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>恭喜您！您現在已經使用 Twelve Labs 的 Embed API 和 Milvus 建立了一個功能強大的語意視訊搜尋應用程式。此整合功能可讓您以前所未有的精確度和效率來處理、儲存和擷取視訊內容。利用多模態嵌入，您建立了一個能夠理解視頻資料細微差異的系統，為內容發現、推薦系統和先進視頻分析開啟了令人振奮的可能性。</p>
-<p>當您繼續開發和完善您的應用程式時，請記住 Twelve Labs 的進階嵌入生成與 Milvus 的可擴展向量儲存的結合，為解決更複雜的視訊理解挑戰提供了堅實的基礎。我們鼓勵您嘗試使用所討論的進階功能，並推動視訊搜尋與分析的可能性。</p>
+    </button></h2><p>恭喜您！您現在已經使用 Twelve Labs 的 Embed API 和 Milvus 建立了一個功能強大的語意視訊搜尋應用程式。此整合功能可讓您以前所未有的精確度和效率處理、儲存和擷取視訊內容。利用多模態嵌入，您建立了一個能夠理解視頻資料細微差異的系統，為內容發現、推薦系統和先進視頻分析開啟了令人振奮的可能性。</p>
+<p>當您繼續開發和完善您的應用程式時，請記住 Twelve Labs 的進階嵌入生成與 Milvus 的可擴展向量儲存的結合，為應付更複雜的視訊理解挑戰提供了堅實的基礎。我們鼓勵您嘗試使用所討論的進階功能，並推動視訊搜尋與分析的可能性。</p>

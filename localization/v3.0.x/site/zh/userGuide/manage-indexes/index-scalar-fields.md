@@ -20,7 +20,10 @@ title: 标量字段索引
         ></path>
       </svg>
     </button></h1><p>在 Milvus 中，标量索引用于通过特定的非向量字段值加速元过滤，类似于传统的数据库索引。本指南将指导你为整数、字符串等字段创建和配置标量索引。</p>
-<h2 id="Types-of-scalar-indexing" class="common-anchor-header">标量索引的类型<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
+<div class="alert warning">
+<p>本页面已被弃用。有关最新实现，请参阅<a href="/docs/zh/bitmap.md">BITMAP</a>、<a href="/docs/zh/inverted.md">INVERTED</a>、<a href="/docs/zh/ngram.md">NGRAM</a>、<a href="/docs/zh/rtree.md">RTREE</a> <a href="/docs/zh/stl-sort.md">STL_SORT</a> 等。</p>
+</div>
+<h2 id="Types-of-scalar-indexing" class="common-anchor-header">标量索引类型<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,7 +40,7 @@ title: 标量字段索引
       </svg>
     </button></h2><ul>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">自动索引</a></strong>：Milvus 根据标量字段的数据类型自动决定索引类型。这适用于不需要控制特定索引类型的情况。</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">自定义索引</a></strong>：你可以指定精确的索引类型，如倒排索引。这为索引类型选择提供了更多控制。</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">自定义索引</a></strong>：你可以指定精确的索引类型，如反转索引<a href="/docs/zh/bitmap.md">或位图索引</a>。这为索引类型选择提供了更多控制。</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">自动索引<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -55,7 +58,7 @@ title: 标量字段索引
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>要使用自动<strong>索引</strong>，请省略 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>中省略 index_type 参数，以便 Milvus 根据标量字段类型推断索引类型。</p>
+<p>要使用自动<strong>索引</strong>，请在 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>中省略 index_type 参数，以便 Milvus 根据标量字段类型推断索引类型。</p>
 </div>
 <div class="language-java">
 <p>要使用自动<strong>索引</strong>，请省略 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>中的 indexType 参数，以便 Milvus 根据标量字段类型推断索引类型。</p>
@@ -191,6 +194,7 @@ client.createIndex(createIndexReq);
 <p>对于自定义索引，有效值为</p>
 <ul>
 <li><p><strong>倒排</strong>：（推荐）倒排索引由术语字典组成，其中包含按字母顺序排序的所有标记词。有关详情，请参阅<a href="/docs/zh/scalar_index.md">标量索引</a>。</p></li>
+<li><p><strong>BITMAP</strong>：<strong>位图</strong>索引：一种存储字段中所有唯一值的位图的索引类型。有关详情，请参阅<a href="/docs/zh/bitmap.md">BITMAP</a>。</p></li>
 <li><p><strong>STL_SORT</strong>：使用标准模板库排序算法对标量字段进行排序。仅支持数值字段（如 INT8、INT16、INT32、INT64、FLOAT、DOUBLE）。</p></li>
 <li><p><strong>Trie</strong>用于快速前缀搜索和检索的树形数据结构。支持 VARCHAR 字段。</p></li>
 </ul></li>
@@ -213,7 +217,7 @@ client.createIndex(createIndexReq);
 <li><strong>IndexParam</strong>准备一个 IndexParam 对象。<ul>
 <li><strong>fieldName</strong><em>（字符串</em>） 要索引的标量字段的名称。</li>
 <li><strong>indexName</strong><em>（字符串</em>） 要创建的标量索引的名称。每个标量字段支持一个索引。</li>
-<li><strong>indexType</strong><em>（字符串</em>） 要创建的标量索引的类型。对于隐式索引，留空或省略此参数。 对于自定义索引，有效值为<ul>
+<li><strong>indexType</strong><em>（字符串</em>） 要创建的标量索引的类型。对于隐式索引，请将其留空或省略此参数。 对于自定义索引，有效值为<ul>
 <li><strong>倒排</strong>：（推荐）倒排索引由术语字典组成，其中包含按字母顺序排序的所有标记词。有关详情，请参阅<a href="/docs/zh/scalar_index.md">标量索引</a>。</li>
 <li><strong>STL_SORT</strong>：使用标准模板库排序算法对标量字段进行排序。支持布尔和数值字段（如 INT8、INT16、INT32、INT64、FLOAT、DOUBLE）。</li>
 <li><strong>Trie</strong>用于快速前缀搜索和检索的树形数据结构。支持 VARCHAR 字段。</li>
@@ -304,21 +308,3 @@ System.out.println(indexNames);
 <span class="hljs-comment">//     &quot;inverted_index&quot;</span>
 <span class="hljs-comment">// ]   </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li>目前，标量索引支持 INT8、INT16、INT32、INT64、FLOAT、DOUBLE、BOOL、VARCHAR 和 ARRAY 数据类型，但不支持 JSON 数据类型。</li>
-</ul>

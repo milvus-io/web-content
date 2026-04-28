@@ -40,7 +40,7 @@ summary: >-
     </button></h2><p>Koleksi target memerlukan pemetaan data sumber ke skema. Diagram di bawah ini menunjukkan bagaimana data sumber yang dapat diterima dipetakan ke skema koleksi target.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
    </span> <span class="img-wrapper"> <span>Memetakan data ke skema</span> </span></p>
 <p>Anda harus memeriksa data Anda dengan cermat dan merancang skema koleksi target yang sesuai.</p>
 <p>Mengambil data JSON pada diagram di atas sebagai contoh, ada dua entitas dalam daftar baris, setiap baris memiliki enam bidang. Skema koleksi secara selektif mencakup empat: <strong>id</strong>, <strong>vektor</strong>, <strong>skalar_1</strong>, dan <strong>skalar_2</strong>.</p>
@@ -275,7 +275,7 @@ writer = LocalBulkWriter(
 <li>Merujuk skema yang dibuat di <code translate="no">schema</code>.</li>
 <li>Tetapkan <code translate="no">local_path</code> ke direktori keluaran.</li>
 <li>Atur <code translate="no">file_type</code> ke jenis file keluaran.</li>
-<li>Jika dataset Anda berisi sejumlah besar catatan, Anda disarankan untuk menyegmentasikan data dengan mengatur <code translate="no">segment_size</code> ke nilai yang tepat.</li>
+<li>Jika dataset Anda berisi sejumlah besar rekaman, Anda disarankan untuk menyegmentasikan data dengan mengatur <code translate="no">segment_size</code> ke nilai yang tepat.</li>
 </ul>
 <p>Untuk detail mengenai pengaturan parameter, lihat <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">LocalBulkWriter</a> dalam referensi SDK.</p>
 </div>

@@ -43,7 +43,7 @@ summary: EKS에 Milvus 클러스터를 배포하는 방법 알아보기
 <li><a href="https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html"><code translate="no">eksctl</code></a></li>
 </ul></li>
 <li>AWS IAM 권한이 올바르게 부여되었습니다. 사용 중인 IAM 보안 주체는 Amazon EKS IAM 역할, 서비스 관련 역할, AWS CloudFormation, VPC 및 기타 관련 리소스를 사용할 수 있는 권한을 가지고 있어야 합니다. 다음 방법 중 하나를 사용하여 보안 담당자에게 적절한 권한을 부여할 수 있습니다.<ul>
-<li>(권장하지 않음) 사용하던 사용자/역할의 연결 정책을 AWS 관리 정책에 설정하기만 하면 됩니다 <code translate="no">AdministratorAccess</code>.</li>
+<li>(권장하지 않음) 사용 중인 사용자/역할의 연결 정책을 AWS 관리 정책에 설정하기만 하면 됩니다 <code translate="no">AdministratorAccess</code>.</li>
 <li>(적극 권장) 최소 권한 원칙을 구현하려면 다음과 같이 하세요:<ul>
 <li><p><code translate="no">eksctl</code> 에 대한 권한을 설정하려면 <a href="https://eksctl.io/usage/minimum-iam-policies/"> <code translate="no">eksctl</code> 에 대한 최소 권한을</a> 참조하세요.</p></li>
 <li><p>AWS S3 버킷을 생성/삭제하기 위한 권한을 설정하려면 다음 권한 설정을 참조하세요:</p>
@@ -101,7 +101,22 @@ summary: EKS에 Milvus 클러스터를 배포하는 방법 알아보기
         ></path>
       </svg>
     </button></h2><p>AWS 관리 콘솔, AWS CLI 또는 Terraform과 같은 IaC 도구를 사용하여 AWS S3 버킷 및 EKS 클러스터를 포함한 필수 AWS 리소스를 설정할 수 있습니다. 이 문서에서는 AWS 리소스를 설정하는 방법을 설명하기 위해 AWS CLI를 선호합니다.</p>
-<h3 id="Create-an-Amazon-S3-Bucket" class="common-anchor-header">Amazon S3 버킷 만들기</h3><ul>
+<h3 id="Create-an-Amazon-S3-Bucket" class="common-anchor-header">Amazon S3 버킷 만들기<button data-href="#Create-an-Amazon-S3-Bucket" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>AWS S3 버킷을 생성합니다.</p>
 <p><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">버킷 이름</a> 지정 규칙을 읽고 AWS S3 버킷의 이름을 지정할 때 이름 지정 규칙을 준수하세요.</p>
 <pre><code translate="no" class="language-shell">milvus_bucket_name=&quot;milvus-bucket-$(openssl rand -hex 12)&quot;
@@ -156,7 +171,22 @@ aws iam create-policy --policy-name MilvusS3ReadWrite --policy-document file://m
 <pre><code translate="no" class="language-shell">aws iam attach-user-policy --user-name &lt;your-user-name&gt; --policy-arn &quot;arn:aws:iam::&lt;your-iam-account-id&gt;:policy/MilvusS3ReadWrite&quot;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Create-an-Amazon-EKS-Cluster" class="common-anchor-header">Amazon EKS 클러스터 생성</h3><ul>
+<h3 id="Create-an-Amazon-EKS-Cluster" class="common-anchor-header">Amazon EKS 클러스터 생성<button data-href="#Create-an-Amazon-EKS-Cluster" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>다음과 같이 클러스터 구성 파일을 준비하고 이름을 <code translate="no">eks_cluster.yaml</code> 으로 지정합니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">eksctl.io/v1alpha5</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">ClusterConfig</span>
@@ -241,7 +271,22 @@ kubectl get nodes -A -o wide
 <p>원래 gp2 StorageClass를 기본값이 아닌 것으로 설정합니다.</p>
 <pre><code translate="no" class="language-shell">kubectl patch storageclass gp2 -p &#x27;{&quot;metadata&quot;: {&quot;annotations&quot;:{&quot;storageclass.kubernetes.io/is-default-class&quot;:&quot;false&quot;}}}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Install-AWS-LoadBalancer-Controller" class="common-anchor-header">AWS 로드밸런서 컨트롤러를 설치한다.</h3><ul>
+<h3 id="Install-AWS-LoadBalancer-Controller" class="common-anchor-header">AWS 로드밸런서 컨트롤러를 설치한다.<button data-href="#Install-AWS-LoadBalancer-Controller" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>헬름 문자 리포지토리를 추가한다.</p>
 <pre><code translate="no" class="language-shell">helm repo add eks https://aws.github.io/eks-charts
 helm repo update

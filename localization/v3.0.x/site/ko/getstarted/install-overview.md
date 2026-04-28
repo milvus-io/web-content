@@ -91,9 +91,9 @@ title: Milvus 배포 옵션 개요
 <li><p><strong>빠른 프로토타이핑용</strong></p>
 <p>검색 증강 생성(RAG) 데모, AI 챗봇, 다중 양식 검색과 같이 프로토타입으로 또는 학습 목적으로 무언가를 빠르게 구축하려는 경우, Milvus Lite 자체 또는 Milvus Lite와 Milvus Standalone의 조합이 적합합니다. 노트북에서 Milvus Lite를 사용하여 신속한 프로토타입을 제작하고 RAG에서 다양한 청킹 전략과 같은 다양한 접근 방식을 탐색할 수 있습니다. 실제 사용자에게 서비스를 제공하거나 수백만 개 이상의 벡터와 같은 대규모 데이터 세트에서 아이디어를 검증하기 위해 Milvus Lite로 구축한 애플리케이션을 소규모 프로덕션에 배포하고 싶을 수도 있습니다. Milvus Standalone이 적합합니다. 모든 Milvus 배포에는 동일한 클라이언트 측 API가 있으므로 Milvus Lite의 애플리케이션 로직은 여전히 공유할 수 있습니다. 또한 명령줄 도구를 사용하여 Milvus Lite에 저장된 데이터를 Milvus Standalone으로 포팅할 수도 있습니다.</p></li>
 <li><p><strong>소규모 프로덕션 배포</strong></p>
-<p>프로젝트가 아직 제품 시장 적합성을 추구하고 확장성보다 민첩성이 더 중요한 초기 단계 프로덕션의 경우 Milvus Standalone이 최선의 선택입니다. 머신 리소스가 충분하다면 최대 1억 개의 벡터까지 확장할 수 있으며, K8s 클러스터를 유지하는 것보다 훨씬 적은 데브옵스가 필요합니다.</p></li>
+<p>프로젝트가 아직 제품 시장 적합성을 추구하고 확장성보다 민첩성이 더 중요한 초기 단계 프로덕션의 경우 Milvus Standalone이 가장 적합한 선택입니다. 머신 리소스가 충분하다면 최대 1억 개의 벡터까지 확장할 수 있으며, K8s 클러스터를 유지하는 것보다 훨씬 적은 데브옵스가 필요합니다.</p></li>
 <li><p><strong>대규모 프로덕션 배포</strong></p>
-<p>비즈니스가 빠르게 성장하고 데이터 규모가 단일 서버의 용량을 초과하는 경우, Milvus Distributed를 고려해야 할 때입니다. 편리한 개발 또는 스테이징 환경에는 Milvus Standalone을 계속 사용하고, Milvus Distributed를 실행하는 K8s 클러스터를 운영할 수 있습니다. 이렇게 하면 수백억 개의 벡터를 지원할 수 있을 뿐만 아니라 읽기 빈도가 높고 쓰기가 잦은 경우나 쓰기 빈도가 높고 읽기가 적은 경우 등 특정 워크로드에 맞게 노드 크기를 조정할 수 있는 유연성을 제공할 수 있습니다.</p></li>
+<p>비즈니스가 빠르게 성장하고 데이터 규모가 단일 서버의 용량을 초과하는 경우, Milvus Distributed를 고려해야 할 때입니다. 편리한 개발 또는 스테이징 환경에는 Milvus Standalone을 계속 사용하고, Milvus Distributed를 실행하는 K8s 클러스터를 운영할 수 있습니다. 이렇게 하면 수백억 개의 벡터를 지원할 수 있을 뿐만 아니라 읽기 빈도가 높고 쓰기가 빈번하거나 쓰기 빈도가 높고 읽기 빈도가 낮은 경우와 같이 특정 워크로드에 맞게 노드 크기를 조정할 수 있는 유연성을 제공할 수 있습니다.</p></li>
 <li><p><strong>엣지 디바이스에서 로컬 검색</strong></p>
 <p>엣지 디바이스에서 비공개 또는 민감한 자료를 검색할 경우, 클라우드 기반 서비스에 의존하지 않고 디바이스에 Milvus Lite를 배포하여 텍스트 또는 이미지 검색을 수행할 수 있습니다. 이는 독점 문서 검색 또는 디바이스 내 개체 감지와 같은 경우에 적합합니다.</p></li>
 </ul>
@@ -105,7 +105,7 @@ title: Milvus 배포 옵션 개요
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" />
    </span> <span class="img-wrapper"> <span>사용 사례에 맞는 배포 옵션 선택</span> </span></p>
 <h2 id="Comparison-on-functionalities" class="common-anchor-header">기능 비교<button data-href="#Comparison-on-functionalities" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -165,7 +165,7 @@ summary: Découvrez comment configurer rootCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Limite supérieure pour la somme du produit de partitionNumber et shardNumber      </td>
+      <td>        limite supérieure pour la somme du produit de partitionNumber et shardNumber      </td>
       <td>65536</td>
     </tr>
   </tbody>

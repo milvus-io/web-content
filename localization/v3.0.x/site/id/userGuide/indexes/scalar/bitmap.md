@@ -45,7 +45,7 @@ summary: >-
 <p>Pertimbangkan sebuah koleksi dokumen dengan bidang <strong>Kategori</strong> dan <strong>Publik</strong>. Kita ingin mengambil dokumen yang termasuk dalam kategori <strong>Teknologi</strong> dan terbuka untuk <strong>Publik</strong>. Dalam kasus ini, kunci untuk indeks bitmap kita adalah <strong>Tech</strong> dan <strong>Public</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" />
    </span> <span class="img-wrapper"> <span>Bitmap</span> </span></p>
 <p>Seperti yang ditunjukkan pada gambar, indeks bitmap untuk <strong>Kategori</strong> dan <strong>Publik</strong> adalah:</p>
 <ul>
@@ -147,7 +147,7 @@ client.create_index(
 <li><p><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>: Tipe floating-point tidak kompatibel dengan sifat biner indeks bitmap.</p></li>
 <li><p><code translate="no">JSON</code>: Tipe data JSON memiliki struktur kompleks yang tidak dapat direpresentasikan secara efisien menggunakan indeks bitmap.</p></li>
 </ul></li>
-<li><p>Indeks bitmap tidak cocok untuk bidang dengan kardinalitas tinggi (yaitu, bidang dengan sejumlah besar nilai yang berbeda).</p>
+<li><p>Indeks bitmap tidak cocok untuk bidang dengan kardinalitas tinggi (yaitu bidang dengan sejumlah besar nilai yang berbeda).</p>
 <ul>
 <li><p>Sebagai pedoman umum, indeks bitmap paling efektif bila kardinalitas bidang kurang dari 500.</p></li>
 <li><p>Ketika kardinalitas meningkat melebihi ambang batas ini, manfaat kinerja indeks bitmap berkurang, dan overhead penyimpanan menjadi signifikan.</p></li>

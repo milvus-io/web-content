@@ -19,7 +19,7 @@ title: Classificação da sequência de ADN
         ></path>
       </svg>
     </button></h1><p>Este tutorial demonstra como usar o Milvus, o banco de dados de vetores de código aberto, para criar um modelo de classificação de sequência de DNA.</p>
-<p>O modelo ML e o software de terceiros utilizados incluem:</p>
+<p>O modelo ML e o software de terceiros utilizado incluem:</p>
 <ul>
 <li>CountVectorizer</li>
 <li>MySQL</li>
@@ -32,5 +32,5 @@ title: Classificação da sequência de ADN
 <p><br/></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/dna.png" alt="dna" class="doc-image" id="dna" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dna.png" alt="dna" class="doc-image" id="dna" />
    </span> <span class="img-wrapper"> <span>ADN</span> </span></p>

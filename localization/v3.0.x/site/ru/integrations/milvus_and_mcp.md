@@ -162,9 +162,24 @@ title: 'MCP + Milvus: соединение искусственного инте
         ></path>
       </svg>
     </button></h2><p><a href="https://docs.cursor.com/context/model-context-protocol">Cursor</a> также поддерживает инструменты MCP через функцию Agent в Composer. Вы можете добавить сервер Milvus MCP в Cursor двумя способами:</p>
-<h3 id="Option-1-Using-Cursor-Settings-UI" class="common-anchor-header">Вариант 1: Использование пользовательского интерфейса настроек Cursor</h3><ol>
+<h3 id="Option-1-Using-Cursor-Settings-UI" class="common-anchor-header">Вариант 1: Использование пользовательского интерфейса настроек Cursor<button data-href="#Option-1-Using-Cursor-Settings-UI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>Откройте <code translate="no">Cursor Settings</code> → <code translate="no">Features</code> → <code translate="no">MCP</code>.</li>
-<li>Щелкните <code translate="no">+ Add New MCP Server</code>.</li>
+<li>Нажмите <code translate="no">+ Add New MCP Server</code>.</li>
 <li>Заполните:<ul>
 <li>Тип: <code translate="no">stdio</code></li>
 <li>Имя: <code translate="no">milvus</code></li>
@@ -173,7 +188,22 @@ title: 'MCP + Milvus: соединение искусственного инте
 <li>⚠️ Совет: Используйте <code translate="no">127.0.0.1</code> вместо <code translate="no">localhost</code>, чтобы избежать возможных проблем с разрешением DNS.</li>
 </ul></li>
 </ol>
-<h3 id="Option-2-Using-Project-specific-Configuration-Recommended" class="common-anchor-header">Вариант 2: Использование конфигурации для конкретного проекта (рекомендуется)</h3><ol>
+<h3 id="Option-2-Using-Project-specific-Configuration-Recommended" class="common-anchor-header">Вариант 2: Использование конфигурации для конкретного проекта (рекомендуется)<button data-href="#Option-2-Using-Project-specific-Configuration-Recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>Создайте файл <code translate="no">.cursor/mcp.json</code> в <strong>корневом каталоге проекта</strong>:</li>
 </ol>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
@@ -212,7 +242,22 @@ title: 'MCP + Milvus: соединение искусственного инте
         ></path>
       </svg>
     </button></h2><p>Чтобы убедиться, что сервер MCP настроен правильно:</p>
-<h3 id="For-Cursor" class="common-anchor-header">Для Cursor</h3><ol>
+<h3 id="For-Cursor" class="common-anchor-header">Для Cursor<button data-href="#For-Cursor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>Перейдите по адресу <code translate="no">Cursor Settings</code> → <code translate="no">Features</code> → <code translate="no">MCP</code>.</li>
 <li>Убедитесь, что в списке MCP-серверов появился <code translate="no">&quot;Milvus&quot;</code>.</li>
 <li>Проверьте, есть ли в списке инструменты Milvus (например, <code translate="no">milvus_list_collections</code>, <code translate="no">milvus_vector_search</code>).</li>
@@ -234,7 +279,22 @@ title: 'MCP + Milvus: соединение искусственного инте
         ></path>
       </svg>
     </button></h2><p>Этот MCP-сервер предоставляет множество инструментов для <strong>поиска, запроса и управления векторными данными в Milvus</strong>. Для получения более подробной информации обратитесь к документации <a href="https://github.com/zilliztech/mcp-server-milvus">mcp-server-milvus</a>.</p>
-<h3 id="🔍-Search-and-Query-Tools" class="common-anchor-header">🔍 Инструменты поиска и запросов</h3><ul>
+<h3 id="🔍-Search-and-Query-Tools" class="common-anchor-header">🔍 Инструменты поиска и запросов<button data-href="#🔍-Search-and-Query-Tools" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-text-search</code></strong> → Поиск документов с помощью полнотекстового поиска.</li>
 <li><strong><code translate="no">milvus-vector-search</code></strong> → Выполните поиск по векторному сходству в коллекции.</li>
 <li><strong><code translate="no">milvus-hybrid-search</code></strong> → Выполните гибридный поиск, сочетающий векторное сходство и фильтрацию по атрибутам.</li>
@@ -242,7 +302,22 @@ title: 'MCP + Milvus: соединение искусственного инте
 <li><strong><code translate="no">milvus-query</code></strong> → Запрашивать коллекцию с помощью выражений фильтрации.</li>
 <li><strong><code translate="no">milvus-count</code></strong> → Подсчет сущностей в коллекции.</li>
 </ul>
-<h3 id="📁-Collection-Management" class="common-anchor-header">📁 Управление коллекциями</h3><ul>
+<h3 id="📁-Collection-Management" class="common-anchor-header">📁 Управление коллекциями<button data-href="#📁-Collection-Management" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-list-collections</code></strong> → Вывод списка всех коллекций в базе данных.</li>
 <li><strong><code translate="no">milvus-collection-info</code></strong> → Получение подробной информации о коллекции.</li>
 <li><strong><code translate="no">milvus-get-collection-stats</code></strong> → Получение статистики о коллекции.</li>
@@ -252,14 +327,44 @@ title: 'MCP + Milvus: соединение искусственного инте
 <li><strong><code translate="no">milvus-get-query-segment-info</code></strong> → Получить информацию о сегментах запроса.</li>
 <li><strong><code translate="no">milvus-get-collection-loading-progress</code></strong> → Получение информации о ходе загрузки коллекции.</li>
 </ul>
-<h3 id="📊-Data-Operations" class="common-anchor-header">📊 Операции с данными</h3><ul>
+<h3 id="📊-Data-Operations" class="common-anchor-header">📊 Операции с данными<button data-href="#📊-Data-Operations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-insert-data</code></strong> → Вставка данных в коллекцию.</li>
 <li><strong><code translate="no">milvus-bulk-insert</code></strong> → Вставка данных партиями для повышения производительности.</li>
 <li><strong><code translate="no">milvus-upsert-data</code></strong> → Вставка данных в коллекцию (вставка или обновление при наличии).</li>
 <li><strong><code translate="no">milvus-delete-entities</code></strong> → Удаление сущностей из коллекции на основе выражения фильтра.</li>
 <li><strong><code translate="no">milvus-create-dynamic-field</code></strong> → Добавление динамического поля в существующую коллекцию.</li>
 </ul>
-<h3 id="⚙️-Index-Management" class="common-anchor-header">⚙️ Управление индексами</h3><ul>
+<h3 id="⚙️-Index-Management" class="common-anchor-header">⚙️ Управление индексами<button data-href="#⚙️-Index-Management" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong><code translate="no">milvus-create-index</code></strong> → Создание индекса для векторного поля.</li>
 <li><strong><code translate="no">milvus-get-index-info</code></strong> → Получение информации об индексах в коллекции.</li>
 </ul>
@@ -316,7 +421,22 @@ title: 'MCP + Milvus: соединение искусственного инте
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">Использование Claude Desktop</h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">Пример 1: Вывод списков коллекций</h4><pre><code translate="no">What are the collections <span class="hljs-selector-tag">I</span> have in my Milvus DB?
+    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">Использование Claude Desktop<button data-href="#Using-Claude-Desktop" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">Пример 1: Вывод списков коллекций</h4><pre><code translate="no">What are the collections <span class="hljs-selector-tag">I</span> have in my Milvus DB?
 <button class="copy-code-btn"></button></code></pre>
 <p>Claude будет использовать MCP для проверки этой информации в нашей БД Milvus.</p>
 <pre><code translate="no">I<span class="hljs-comment">&#x27;ll check what collections are available in your Milvus database.</span>
@@ -343,7 +463,22 @@ Here are the collections <span class="hljs-keyword">in</span> your Milvus databa
 Here are the documents I found that mention machine learning:
 [Results will appear here based <span class="hljs-keyword">on</span> your actual data]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Using-Cursor" class="common-anchor-header">Использование курсора</h3><h4 id="Example-Creating-a-Collection" class="common-anchor-header">Пример: Создание коллекции</h4><p>В Cursor's Composer вы можете задать вопрос:</p>
+<h3 id="Using-Cursor" class="common-anchor-header">Использование курсора<button data-href="#Using-Cursor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-Creating-a-Collection" class="common-anchor-header">Пример: Создание коллекции</h4><p>В Cursor's Composer вы можете задать вопрос:</p>
 <pre><code translate="no">Create a <span class="hljs-keyword">new</span> collection called <span class="hljs-string">&#x27;articles&#x27;</span> <span class="hljs-function"><span class="hljs-keyword">in</span> Milvus <span class="hljs-keyword">with</span> fields <span class="hljs-keyword">for</span> <span class="hljs-title">title</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-title">content</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-keyword">and</span> a vector <span class="hljs-title">field</span> (<span class="hljs-params"><span class="hljs-number">128</span> dimensions</span>)
 </span><button class="copy-code-btn"></button></code></pre>
 <p>Cursor будет использовать сервер MCP для выполнения этой операции:</p>
@@ -371,7 +506,22 @@ Collection <span class="hljs-comment">&#x27;articles&#x27; has been created succ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Common-Issues" class="common-anchor-header">Общие проблемы</h3><h4 id="Connection-Errors" class="common-anchor-header">Ошибки подключения</h4><p>Если вы видите ошибки типа "Не удалось подключиться к серверу Milvus":</p>
+    </button></h2><h3 id="Common-Issues" class="common-anchor-header">Общие проблемы<button data-href="#Common-Issues" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Connection-Errors" class="common-anchor-header">Ошибки подключения</h4><p>Если вы видите ошибки типа "Не удалось подключиться к серверу Milvus":</p>
 <ol>
 <li>Убедитесь, что ваш экземпляр Milvus запущен: <code translate="no">docker ps</code> (если используется Docker).</li>
 <li>Проверьте правильность URI в вашей конфигурации</li>
@@ -391,7 +541,22 @@ Collection <span class="hljs-comment">&#x27;articles&#x27; has been created succ
 <li>Убедитесь, что сервер MCP работает правильно</li>
 <li>Нажмите кнопку обновления в настройках MCP (для Cursor).</li>
 </ol>
-<h3 id="Getting-Help" class="common-anchor-header">Получение помощи</h3><p>Если вы продолжаете испытывать проблемы:</p>
+<h3 id="Getting-Help" class="common-anchor-header">Получение помощи<button data-href="#Getting-Help" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Если вы продолжаете испытывать проблемы:</p>
 <ol>
 <li>Проверьте <a href="https://github.com/zilliztech/mcp-server-milvus/issues">GitHub Issues</a> на наличие аналогичных проблем.</li>
 <li>Присоединитесь к <a href="https://discord.gg/zilliz">сообществу Zilliz в Discord</a> для получения поддержки</li>

@@ -45,7 +45,7 @@ summary: >-
 <p>La figure suivante montre comment cela fonctionne :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF-FLAT-workflow.png" alt="IVF FLAT Workflow" class="doc-image" id="ivf-flat-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF-FLAT-workflow.png" alt="IVF FLAT Workflow" class="doc-image" id="ivf-flat-workflow" />
    </span> <span class="img-wrapper"> <span>Flux de travail IVF FLAT</span> </span></p>
 <p>Cette méthode d'indexation accélère le processus de recherche, mais elle présente un inconvénient potentiel : le candidat trouvé comme étant le plus proche de l'encastrement de la requête peut ne pas être celui qui est exactement le plus proche. Cela peut se produire si l'encastrement le plus proche de l'encastrement de la requête réside dans un groupe différent de celui sélectionné sur la base du centroïde le plus proche (voir la visualisation ci-dessous).</p>
 <p>Pour résoudre ce problème, <strong>IVF_FLAT</strong> fournit deux hyperparamètres que nous pouvons régler :</p>
@@ -56,7 +56,7 @@ summary: >-
 <p>Si nous fixons <code translate="no">nprobe</code> à 3 au lieu de 1, nous obtenons le résultat suivant :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF-FLAT-workflow-2.png" alt="IVF FLAT Workflow 2" class="doc-image" id="ivf-flat-workflow-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF-FLAT-workflow-2.png" alt="IVF FLAT Workflow 2" class="doc-image" id="ivf-flat-workflow-2" />
    </span> <span class="img-wrapper"> <span>FIV FLAT Workflow 2</span> </span></p>
 <p>En augmentant la valeur de <code translate="no">nprobe</code>, vous pouvez inclure davantage de partitions dans la recherche, ce qui permet de s'assurer que l'intégration la plus proche de la requête n'est pas manquée, même si elle réside dans une partition différente. Cependant, cela se fait au prix d'une augmentation du temps de recherche, car davantage de candidats doivent être évalués. Pour plus d'informations sur le réglage des paramètres de l'index, voir <a href="/docs/fr/ivf-flat.md#Index-params">Paramètres de l'index</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Construire un index<button data-href="#Build-index" class="anchor-icon" translate="no">
@@ -155,7 +155,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Cette section présente une vue d'ensemble des paramètres utilisés pour construire un index et effectuer des recherches sur l'index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index</h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés sur <code translate="no">params</code> lors de la <a href="/docs/fr/ivf-flat.md#Build-index">création d'un index</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés sur <code translate="no">params</code> lors de la <a href="/docs/fr/ivf-flat.md#Build-index">création d'un index</a>.</p>
 <table>
    <tr>
      <th><p>Paramètre</p></th>
@@ -170,7 +185,22 @@ res = MilvusClient.search(
      <td><p>Les valeurs plus élevées de <code translate="no">nlist</code> améliorent le rappel en créant des grappes plus fines, mais augmentent le temps de construction de l'index. Optimisez en fonction de la taille du jeu de données et des ressources disponibles. Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cet intervalle : [32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques à l'index</h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés dans <code translate="no">search_params.params</code> lors d'une <a href="/docs/fr/ivf-flat.md#Search-on-index">recherche sur l'index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques à l'index<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés dans <code translate="no">search_params.params</code> lors d'une <a href="/docs/fr/ivf-flat.md#Search-on-index">recherche sur l'index</a>.</p>
 <table>
    <tr>
      <th><p>Paramètre</p></th>

@@ -992,7 +992,7 @@ summary: Découvrez comment configurer queryNode pour Milvus.
       <td>
         <li>fifo : Une file d'attente FIFO prend en charge la planification.</li>      
         <li>user-task-polling :</li>      
-        <li>    Les tâches de l'utilisateur sont interrogées une par une et programmées.</li>      
+        <li>    Les tâches de l'utilisateur sont interrogées une à une et programmées.</li>      
         <li>    L'ordonnancement est équitable en fonction de la granularité des tâches.</li>      
         <li>    La politique est basée sur le nom d'utilisateur pour l'authentification.</li>      
         <li>    Un nom d'utilisateur vide est considéré comme le même utilisateur.</li>      
@@ -1315,7 +1315,7 @@ summary: Découvrez comment configurer queryNode pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        facteur parallèle lors de l'application de pk au filtre bloom, par défaut 4*CPU_CORE_NUM      </td>
+      <td>        facteur de parallélisme lors de l'application de pk au filtre bloom, par défaut 4*CPU_CORE_NUM      </td>
       <td>4</td>
     </tr>
   </tbody>

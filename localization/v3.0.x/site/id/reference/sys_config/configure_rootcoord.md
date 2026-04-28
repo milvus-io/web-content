@@ -165,7 +165,7 @@ summary: Pelajari cara mengonfigurasi rootCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        batas atas untuk jumlah hasil kali dari nomor partisi dan nomor pecahan      </td>
+      <td>        batas atas untuk jumlah hasil kali dari nomorPartisi dan nomor pecahan      </td>
       <td>65536</td>
     </tr>
   </tbody>

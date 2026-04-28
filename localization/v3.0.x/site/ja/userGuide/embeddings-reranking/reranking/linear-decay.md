@@ -26,7 +26,7 @@ beta: Milvus 2.6.x
 <li><p>ガウス減衰は、徐々にゼロに近づくが決してゼロにはならないベル曲線に従います。</p></li>
 <li><p>指数関数的減衰は、最小限の関連性のロングテールを維持し、無限に広がります。</p></li>
 </ul>
-<p>線形減衰は、明確な終点を独自に作成するため、自然な境界や期限があるアプリケーションに特に効果的です。</p>
+<p>線形減衰は、明確な終点を独自に作成するため、自然な境界や期限を持つアプリケーションに特に効果的です。</p>
 <h2 id="When-to-use-linear-decay" class="common-anchor-header">リニアディケイを使用する場合<button data-href="#When-to-use-linear-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

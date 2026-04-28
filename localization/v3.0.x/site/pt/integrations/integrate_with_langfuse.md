@@ -24,7 +24,7 @@ title: Utilização do Langfuse para avaliar a qualidade do RAG
     </button></h1><p><a target="_blank" href="https://colab.research.google.com/github/langfuse/langfuse-docs/blob/main/cookbook/integration_llama-index_milvus-lite.ipynb">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a></p>
-<p>Este é um livro de receitas simples que demonstra como utilizar o Langfuse para rastrear as suas consultas no RAG. O pipeline RAG é implementado com LlamaIndex e Milvus Lite para armazenar e recuperar os documentos.</p>
+<p>Este é um livro de receitas simples que demonstra como usar o Langfuse para rastrear as suas consultas no RAG. O pipeline RAG é implementado com o LlamaIndex e o Milvus Lite para armazenar e recuperar os documentos.</p>
 <p>Neste início rápido, mostraremos como configurar uma aplicação LlamaIndex utilizando o Milvus Lite como o armazenamento de vectores. Também mostraremos como usar a integração Langfuse LlamaIndex para rastrear sua aplicação.</p>
 <p><a href="https://github.com/langfuse/langfuse">O Langfuse</a> é uma plataforma de engenharia LLM de código aberto que ajuda as equipas a depurar, analisar e iterar de forma colaborativa as suas aplicações LLM. Todos os recursos da plataforma são integrados nativamente para acelerar o fluxo de trabalho de desenvolvimento.</p>
 <p><a href="https://github.com/milvus-io/milvus-lite/">O Milvus Lite</a> é a versão leve do Milvus, uma base de dados vetorial de código aberto que potencia as aplicações de IA com embeddings vectoriais e pesquisa de semelhanças.</p>
@@ -147,7 +147,7 @@ response = index.as_chat_engine().chat(<span class="hljs-string">&quot;What did 
     </button></h2><pre><code translate="no" class="language-python"><span class="hljs-comment"># As we want to immediately see result in Langfuse, we need to flush the callback handler</span>
 langfuse_callback_handler.flush()
 <button class="copy-code-btn"></button></code></pre>
-<p>Concluído! Pode ver os vestígios do seu índice e consulta no seu projeto Langfuse.</p>
+<p>Feito! Pode ver os vestígios do seu índice e consulta no seu projeto Langfuse.</p>
 <p>Exemplos de traços (ligações públicas):</p>
 <ol>
 <li><a href="https://cloud.langfuse.com/project/cloramnkj0002jz088vzn1ja4/traces/2b26fc72-044f-4b0b-a3c3-485328975161">Consulta</a></li>
@@ -173,7 +173,7 @@ langfuse_callback_handler.flush()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Consulte os <a href="https://langfuse.com/docs/integrations/llama-index/get-started">documentos</a> completos <a href="https://langfuse.com/docs/integrations/llama-index/get-started">de integração</a> para saber mais sobre os recursos avançados e como usá-los:</p>
+    </button></h2><p>Consulte <a href="https://langfuse.com/docs/integrations/llama-index/get-started">os documentos</a> completos <a href="https://langfuse.com/docs/integrations/llama-index/get-started">de integração</a> para saber mais sobre os recursos avançados e como usá-los:</p>
 <ul>
 <li>Interoperabilidade com o Langfuse Python SDK e outras integrações</li>
 <li>Adicionar metadados e atributos personalizados aos traços</li>

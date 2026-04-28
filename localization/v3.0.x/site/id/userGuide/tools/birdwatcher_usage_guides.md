@@ -18,7 +18,7 @@ title: Menggunakan Birdwatcher
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Panduan ini memandu Anda tentang cara menggunakan Birdwatcher untuk memeriksa status Milvus Anda dan mengkonfigurasinya dengan cepat.</p>
+    </button></h1><p>Panduan ini memandu Anda tentang cara menggunakan Birdwatcher untuk memeriksa status Milvus dan mengkonfigurasinya dengan cepat.</p>
 <h2 id="Start-Birdwatcher" class="common-anchor-header">Memulai Birdwatcher<button data-href="#Start-Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -73,7 +73,7 @@ Milvus(by-dev) &gt;
 Milvus(by-dev)
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Sambungkan dengan jalur root yang berbeda</p>
-<p>Jika jalur root Milvus Anda berbeda dengan <code translate="no">by-dev</code> dan Anda diminta untuk melaporkan kesalahan tentang jalur root yang salah, Anda dapat menyambung ke etcd sebagai berikut:</p>
+<p>Jika jalur root Milvus Anda berbeda dari <code translate="no">by-dev</code> dan Anda diminta untuk melaporkan kesalahan tentang jalur root yang salah, Anda dapat menyambung ke etcd sebagai berikut:</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect --rootPath my-release
 Milvus(my-release) &gt;
 <button class="copy-code-btn"></button></code></pre>
@@ -135,7 +135,22 @@ Flags:
 
 Use &quot; show [command] --help&quot; for more information about a command.
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-sessions" class="common-anchor-header">Membuat daftar sesi</h3><p>Untuk membuat daftar sesi yang terkait dengan berbagai komponen di Milvus:</p>
+<h3 id="List-sessions" class="common-anchor-header">Membuat daftar sesi<button data-href="#List-sessions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk membuat daftar sesi yang terkait dengan berbagai komponen di Milvus:</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show session
 Session:datacoord, ServerID: 3, Version: 2.2.11, Address: 10.244.0.8:13333
 Session:datanode, ServerID: 6, Version: 2.2.11, Address: 10.244.0.8:21124
@@ -147,7 +162,22 @@ Session:querynode, ServerID: 2, Version: 2.2.11, Address: 10.244.0.8:21123
 Session:rootcoord, ServerID: 1, Version: 2.2.11, Address: 10.244.0.8:53100
 <button class="copy-code-btn"></button></code></pre>
 <p>Pada keluaran perintah, setiap entri sesi yang didaftarkan oleh <code translate="no">show session</code> berhubungan dengan simpul atau layanan yang saat ini aktif dan terdaftar di <strong>etcd</strong>.</p>
-<h3 id="Check-databases-and-collections" class="common-anchor-header">Memeriksa basis data dan koleksi</h3><p>Anda dapat membuat daftar semua basis data dan koleksi.</p>
+<h3 id="Check-databases-and-collections" class="common-anchor-header">Memeriksa basis data dan koleksi<button data-href="#Check-databases-and-collections" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Anda dapat membuat daftar semua basis data dan koleksi.</p>
 <ul>
 <li><p>Membuat daftar basis data</p>
 <p>Pada keluaran perintah, Anda dapat menemukan informasi tentang setiap basis data.</p>
@@ -227,7 +257,22 @@ ReplicaNumber: 1        LoadStatus: Loaded
 vchannel by-dev-rootcoord-dml_0_443407225551410746v0 seek to 2023-08-08 09:36:09.54 +0000 UTC, cp channel: by-dev-rootcoord-dml_0_443407225551410746v0, Source: Channel Checkpoint
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Check-index-details" class="common-anchor-header">Memeriksa detail indeks</h3><p>Jalankan perintah berikut untuk membuat daftar semua file indeks secara detail.</p>
+<h3 id="Check-index-details" class="common-anchor-header">Memeriksa detail indeks<button data-href="#Check-index-details" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jalankan perintah berikut untuk membuat daftar semua file indeks secara detail.</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show index
 *************2.1.x***************
 *************2.2.x***************
@@ -238,12 +283,42 @@ Index Type: HNSW        Metric Type: L2
 Index Params: 
 ==================================================================
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-partitions" class="common-anchor-header">Membuat daftar partisi</h3><p>Jalankan perintah berikut untuk membuat daftar semua partisi dalam koleksi tertentu.</p>
+<h3 id="List-partitions" class="common-anchor-header">Membuat daftar partisi<button data-href="#List-partitions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jalankan perintah berikut untuk membuat daftar semua partisi dalam koleksi tertentu.</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show partition --collection 443407225551410746
 Parition ID: 443407225551410747 Name: _default  State: PartitionCreated
 --- Total Database(s): 1
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Check-channel-status" class="common-anchor-header">Memeriksa status saluran</h3><p>Jalankan perintah berikut untuk melihat status saluran</p>
+<h3 id="Check-channel-status" class="common-anchor-header">Memeriksa status saluran<button data-href="#Check-channel-status" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jalankan perintah berikut untuk melihat status saluran</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show channel-watch
 =============================
 key: by-dev/meta/channelwatch/6/by-dev-rootcoord-dml_0_443407225551410746v0
@@ -255,7 +330,22 @@ Flushed segments: []
 Dropped segments: []
 --- Total Channels: 1
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-all-replicas-and-segments" class="common-anchor-header">Buat daftar semua replika dan segmen</h3><ul>
+<h3 id="List-all-replicas-and-segments" class="common-anchor-header">Buat daftar semua replika dan segmen<button data-href="#List-all-replicas-and-segments" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Membuat daftar semua replika</p>
 <p>Jalankan perintah berikut untuk membuat daftar semua replika dan koleksi terkait.</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show replica
@@ -280,7 +370,22 @@ SegmentID: 443407225551610865 CollectionID: 443407225551410746 Channel: by-dev-r
 Sealed segments number: 1    
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="List-configurations" class="common-anchor-header">Konfigurasi daftar</h3><p>Anda dapat meminta Birdwatcher membuat daftar konfigurasi saat ini dari setiap komponen Milvus.</p>
+<h3 id="List-configurations" class="common-anchor-header">Konfigurasi daftar<button data-href="#List-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Anda dapat meminta Birdwatcher membuat daftar konfigurasi saat ini dari setiap komponen Milvus.</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show configurations
 client nil Session:proxy, ServerID: 8, Version: 2.2.11, Address: 10.244.0.8:19529
 Component rootcoord-1
@@ -381,7 +486,22 @@ backup for prefix done, stored in file: bw_etcd_ALL.230810-075211.bak.gz
         ></path>
       </svg>
     </button></h2><p>Anda dapat meminta Birdwatcher menyelidiki status koleksi yang dimuat dengan kunci utama atau kueri tiruan yang ditentukan.</p>
-<h3 id="Probe-collection-with-known-primary-key" class="common-anchor-header">Memeriksa koleksi dengan kunci utama yang diketahui</h3><p>Pada perintah <code translate="no">probe</code>, Anda harus menentukan kunci utama menggunakan bendera <code translate="no">pk</code>, dan ID koleksi menggunakan bendera <code translate="no">collection</code>.</p>
+<h3 id="Probe-collection-with-known-primary-key" class="common-anchor-header">Memeriksa koleksi dengan kunci utama yang diketahui<button data-href="#Probe-collection-with-known-primary-key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pada perintah <code translate="no">probe</code>, Anda harus menentukan kunci utama menggunakan bendera <code translate="no">pk</code>, dan ID koleksi menggunakan bendera <code translate="no">collection</code>.</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; probe pk --pk 110 --collection 442844725212299747
 PK 110 found on segment 442844725212299830
 Field id, value: &amp;{long_data:&lt;data:110 &gt; }
@@ -389,7 +509,22 @@ Field title, value: &amp;{string_data:&lt;data:&quot;Human Resources Dataficatio
 Field title_vector, value: &amp;{dim:768 float_vector:&lt;data:0.022454707 data:0.007861045 data:0.0063843643 data:0.024065714 data:0.013782166 data:0.018483251 data:-0.026526336 ... data:-0.06579628 data:0.00033906146 data:0.030992996 data:-0.028134001 data:-0.01311325 data:0.012471594 &gt; }
 Field article_meta, value: &amp;{json_data:&lt;data:&quot;{\&quot;link\&quot;:\&quot;https:\\/\\/towardsdatascience.com\\/human-resources-datafication-d44c8f7cb365\&quot;,\&quot;reading_time\&quot;:6,\&quot;publication\&quot;:\&quot;Towards Data Science\&quot;,\&quot;claps\&quot;:256,\&quot;responses\&quot;:0}&quot; &gt; }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Probe-all-collections-with-mock-queries" class="common-anchor-header">Memeriksa semua koleksi dengan kueri tiruan</h3><p>Anda juga dapat meminta Birdwatcher menelusuri semua koleksi dengan kueri tiruan.</p>
+<h3 id="Probe-all-collections-with-mock-queries" class="common-anchor-header">Memeriksa semua koleksi dengan kueri tiruan<button data-href="#Probe-all-collections-with-mock-queries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Anda juga dapat meminta Birdwatcher menelusuri semua koleksi dengan kueri tiruan.</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; probe query
 probing collection 442682158191982314
 Found vector field vector(103) with dim[384], indexID: 442682158191990455

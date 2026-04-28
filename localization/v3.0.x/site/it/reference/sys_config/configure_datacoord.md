@@ -43,7 +43,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Timeout per la visione dei canali (in secondi). L'avanzamento dell'aggiornamento del tickler del datanode resetterà il timer di timeout.      </td>
+      <td>        Timeout per la visione dei canali (in secondi). L'avanzamento dell'orologio di aggiornamento del datanode azzera il timer di timeout.      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -72,7 +72,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        I datanode &lt;= questa versione sono considerati nodi legacy, che non hanno watch() basato su rpc. Questo valore è utilizzato solo durante gli aggiornamenti periodici, quando i nodi legacy non riceveranno nuovi canali.      </td>
+      <td>        I datanode &lt;= questa versione sono considerati nodi legacy, che non hanno watch() basato su rpc. Questo valore viene utilizzato solo durante l'aggiornamento continuo, quando i nodi legacy non riceveranno nuovi canali.      </td>
       <td>2.4.1</td>
     </tr>
   </tbody>
@@ -188,7 +188,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Timeout di notifica delle operazioni del canale (in secondi).      </td>
+      <td>        Timeout di notifica delle operazioni di canale (in secondi).      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -246,7 +246,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Dimensione massima di un segmento in MB per la raccolta che ha un indice di disco     </td>
+      <td>        Dimensione massima di un segmento in MB per l'insieme che ha un indice di disco.      </td>
       <td>2048</td>
     </tr>
   </tbody>

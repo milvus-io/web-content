@@ -52,7 +52,7 @@ title: Geração Aumentada por Recuperação (RAG) com Milvus e Camel
 <pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">import</span> requests
@@ -125,7 +125,7 @@ vector_retriever = VectorRetriever(
 [nltk_data]     /root/nltk_data...
 [nltk_data]   Unzipping taggers/averaged_perceptron_tagger.zip.
 </code></pre>
-<p>Agora podemos obter informações do armazenamento vetorial através de uma consulta. Por predefinição, será devolvido o conteúdo de texto do primeiro bloco com a pontuação de semelhança de cosseno mais elevada, e a pontuação de semelhança deve ser superior a 0,75 para garantir que o conteúdo recuperado é relevante para a consulta. Também é possível alterar o valor de <code translate="no">top_k</code>.</p>
+<p>Agora podemos obter informações do armazenamento vetorial através de uma consulta. Por predefinição, será devolvido o conteúdo de texto do primeiro bloco com a pontuação de semelhança de cosseno mais elevada, e a pontuação de semelhança deve ser superior a 0,75 para garantir que o conteúdo recuperado é relevante para a consulta. Também é possível alterar o valor <code translate="no">top_k</code>.</p>
 <p>A lista de cadeias de caracteres devolvida inclui:</p>
 <ul>
 <li>pontuação de similaridade</li>
@@ -169,7 +169,7 @@ vector_retriever = VectorRetriever(
 <li>Definir o URL remoto e a chave da API para o Milvus</li>
 <li>Fornecer uma consulta</li>
 </ul>
-<p>O pipeline Auto RAG criará colecções para os caminhos de entrada de conteúdos fornecidos. O nome da coleção será definido automaticamente com base no nome do caminho de entrada de conteúdos e, se a coleção existir, será feita a recuperação diretamente.</p>
+<p>O pipeline Auto RAG criará colecções para os caminhos de entrada de conteúdos indicados. O nome da coleção será definido automaticamente com base no nome do caminho de entrada de conteúdos e, se a coleção existir, será feita a recuperação diretamente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.retrievers <span class="hljs-keyword">import</span> AutoRetriever
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> StorageType
 

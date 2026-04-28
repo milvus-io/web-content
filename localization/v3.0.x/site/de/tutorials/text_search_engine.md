@@ -31,9 +31,9 @@ title: Text-Suchmaschine
 <p><br/></p>
 <p>Eine wichtige Anwendung von Milvus im Bereich der Verarbeitung natürlicher Sprache (NLP) ist die Textsuchmaschine. Es ist ein großartiges Werkzeug, das Benutzern helfen kann, die gesuchten Informationen zu finden. Es kann sogar Informationen aufdecken, die schwer zu finden sind. Textsuchmaschinen vergleichen die von den Benutzern eingegebenen Schlüsselwörter oder semantischen Begriffe mit einer Textdatenbank und geben dann die Ergebnisse zurück, die bestimmte Kriterien erfüllen.</p>
 <p><br/></p>
-<p>In diesem Lernprogramm lernen Sie, wie man eine Textsuchmaschine erstellt. In diesem Tutorium wird BERT verwendet, um Texte in Vektoren fester Länge zu konvertieren. Milvus wird als Vektordatenbank für die Speicherung und die Vektorähnlichkeitssuche verwendet. Anschließend wird MySQL verwendet, um die von Milvus generierten Vektor-IDs auf die Textdaten abzubilden.</p>
+<p>In diesem Lernprogramm lernen Sie, wie man eine Textsuchmaschine erstellt. In diesem Tutorium wird BERT verwendet, um Texte in Vektoren fester Länge zu konvertieren. Milvus wird als Vektordatenbank für die Speicherung und die Vektorähnlichkeitssuche verwendet. Anschließend wird MySQL verwendet, um die von Milvus generierten Vektor-IDs den Textdaten zuzuordnen.</p>
 <p><br/></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/text_search_engine.png" alt="text_search_engine" class="doc-image" id="text_search_engine" />
-   </span> <span class="img-wrapper"> <span>text_search_engine</span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/text_search_engine_demo.png" alt="text_search_engine" class="doc-image" id="text_search_engine" /><span>text_search_engine</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_search_engine.png" alt="text_search_engine" class="doc-image" id="text_search_engine" />
+   </span> <span class="img-wrapper"> <span>text_search_engine</span> </span> <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_search_engine_demo.png" alt="text_search_engine" class="doc-image" id="text_search_engine" /><span>text_search_engine</span> </span></p>

@@ -74,7 +74,7 @@ summary: >-
 <li><p>Para los campos vectoriales del tipo <code translate="no">BINARY_VECTOR</code>, el valor de dimensión (<code translate="no">dim</code>) debe ser múltiplo de 8.</p></li>
 </ul>
 </div>
-<p>La siguiente tabla resume las características de los valores de distancia de similitud de todos los tipos métricos admitidos y su rango de valores.</p>
+<p>En la tabla siguiente se resumen las características de los valores de distancia de similitud de todos los tipos de métrica admitidos y su intervalo de valores.</p>
 <table>
    <tr>
      <th><p>Tipo de métrica</p></th>
@@ -139,11 +139,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Esencialmente, la distancia euclídea mide la longitud de un segmento que une 2 puntos.</p>
+    </button></h2><p>En esencia, la distancia euclídea mide la longitud de un segmento que une 2 puntos.</p>
 <p>La fórmula de la distancia euclídea es la siguiente:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/euclidean-metric.png" alt="Euclidean Metric" class="doc-image" id="euclidean-metric" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/euclidean-metric.png" alt="Euclidean Metric" class="doc-image" id="euclidean-metric" />
    </span> <span class="img-wrapper"> <span>Métrica euclídea</span> </span></p>
 <p>donde <strong>a = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> y <strong>b = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong> son dos puntos en un espacio euclídeo n-dimensional.</p>
 <p>Es la métrica de distancia más utilizada y resulta muy útil cuando los datos son continuos.</p>
@@ -168,7 +168,7 @@ summary: >-
     </button></h2><p>La distancia IP entre dos incrustaciones se define como sigue:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IP-formula.png" alt="IP Formula" class="doc-image" id="ip-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IP-formula.png" alt="IP Formula" class="doc-image" id="ip-formula" />
    </span> <span class="img-wrapper"> <span>Fórmula IP</span> </span></p>
 <p>IP es más útil si necesita comparar datos no normalizados o cuando se preocupa por la magnitud y el ángulo.</p>
 <div class="alert note">
@@ -177,12 +177,12 @@ summary: >-
 <p>Supongamos que X' se normaliza a partir de la incrustación X:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/normalize-formula.png" alt="Normalize Formula" class="doc-image" id="normalize-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalize-formula.png" alt="Normalize Formula" class="doc-image" id="normalize-formula" />
    </span> <span class="img-wrapper"> <span>Fórmula de normalización</span> </span></p>
 <p>La correlación entre las dos incrustaciones es la siguiente:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/correlation-between-embeddings.png" alt="Correlation Between Embeddings" class="doc-image" id="correlation-between-embeddings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/correlation-between-embeddings.png" alt="Correlation Between Embeddings" class="doc-image" id="correlation-between-embeddings" />
    </span> <span class="img-wrapper"> <span>Correlación entre incrustaciones</span> </span></p>
 <h2 id="Cosine-similarity" class="common-anchor-header">Similitud coseno<button data-href="#Cosine-similarity" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -203,7 +203,7 @@ summary: >-
 <p>Para calcular la similitud coseno entre dos conjuntos de vectores <strong>A = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> y <strong>B = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong>, utiliza la siguiente fórmula:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
    </span> <span class="img-wrapper"> <span>Similitud coseno</span> </span></p>
 <p>La semejanza coseno está siempre en el intervalo <strong>[-1, 1]</strong>. Por ejemplo, dos vectores proporcionales tienen una similitud coseno de <strong>1</strong>, dos vectores ortogonales tienen una similitud de <strong>0</strong>, y dos vectores opuestos tienen una similitud de <strong>-1</strong>. Cuanto mayor sea el coseno, menor será el ángulo entre los dos vectores, lo que indica que estos dos vectores son más similares entre sí.</p>
 <p>Restando su similitud coseno de 1, se obtiene la distancia coseno entre dos vectores.</p>
@@ -225,12 +225,12 @@ summary: >-
     </button></h2><p>El coeficiente de distancia JACCARD mide la similitud entre dos conjuntos de muestras y se define como la cardinalidad de la intersección de los conjuntos definidos dividida por la cardinalidad de la unión de los mismos. Sólo puede aplicarse a conjuntos de muestras finitos.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
    </span> <span class="img-wrapper"> <span>Fórmula del coeficiente de similitud JACCARD</span> </span></p>
 <p>La distancia JACCARD mide la disimilitud entre conjuntos de datos y se obtiene restando a 1 el coeficiente de similitud JACCARD. Para variables binarias, la distancia JACCARD es equivalente al coeficiente de Tanimoto.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
    </span> <span class="img-wrapper"> <span>Fórmula de la distancia JACCARD</span> </span></p>
 <h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
       <svg translate="no"

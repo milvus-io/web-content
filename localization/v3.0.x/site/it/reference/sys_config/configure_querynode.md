@@ -250,7 +250,7 @@ summary: Imparare a configurare queryNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        rapporto tra la creazione di un indice intermedio in parallelo e il numero di cpu   </td>
+      <td>        rapporto tra la costruzione di un indice intermedio in parallelo e il numero di cpu   </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -930,7 +930,7 @@ summary: Imparare a configurare queryNode per Milvus.
         <li>maxReadConcurrentRatio è il rapporto di concorrenza dei task di lettura (task di ricerca e task di interrogazione).</li>      
         <li>La massima concomitanza di lettura è il valore di hardware.GetCPUNum * maxReadConcurrentRatio.</li>      
         <li>L'impostazione predefinita è 2,0, il che significa che la concomitanza massima in lettura sarà il valore di hardware.GetCPUNum * 2.</li>      
-        <li>La velocità di lettura massima deve essere maggiore o uguale a 1 e minore o uguale a hardware.GetCPUNum * 100.</li>      
+        <li>La massima velocità di lettura deve essere maggiore o uguale a 1 e minore o uguale a hardware.GetCPUNum * 100.</li>      
         <li>(0, 100]</li>      </td>
       <td>1</td>
     </tr>
@@ -1228,7 +1228,7 @@ summary: Imparare a configurare queryNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        utilizza le statistiche di partizione per sfrondare i dati nella ricerca/query sul delegatore di shard     </td>
+      <td>        usa le statistiche di partizione per sfrondare i dati nella ricerca/query sul delegatore shard     </td>
       <td>falso</td>
     </tr>
   </tbody>
@@ -1373,7 +1373,7 @@ summary: Imparare a configurare queryNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Indirizzo TCP/IP del queryNode. Se non viene specificato, viene usato il primo indirizzo non ciclabile.      </td>
+      <td>        Indirizzo TCP/IP del queryNode. Se non viene specificato, viene utilizzato il primo indirizzo non ciclabile.      </td>
       <td></td>
     </tr>
   </tbody>
@@ -1518,7 +1518,7 @@ summary: Imparare a configurare queryNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        La dimensione massima di ogni richiesta RPC che i client sul queryNode possono ricevere, unità: byte    </td>
+      <td>        La dimensione massima di ogni richiesta RPC che i client su queryNode possono ricevere, unità: byte    </td>
       <td>536870912</td>
     </tr>
   </tbody>

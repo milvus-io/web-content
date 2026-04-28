@@ -363,7 +363,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Sí</p></td>
-     <td><p>Especifica el método de reordenación que se va a utilizar.</p><p>Debe definirse como <code translate="no">rrf</code> para utilizar RRF Ranker.</p></td>
+     <td><p>Especifica el método de reordenación que se va a utilizar.</p><p>Debe definirse como <code translate="no">rrf</code> para utilizar el RRF Ranker.</p></td>
      <td><p><code translate="no">"weighted"</code></p></td>
    </tr>
    <tr>

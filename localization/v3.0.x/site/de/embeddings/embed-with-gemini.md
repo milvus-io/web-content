@@ -64,7 +64,7 @@ gemini_ef = model.dense.GeminiEmbeddingFunction(
 <tr><td>SEMANTISCHE_ÄHNLICHKEIT</td><td>Dient der Erzeugung von Einbettungen, die für die Bewertung der Textähnlichkeit optimiert sind.</td></tr>
 <tr><td>KLASSIFIZIERUNG</td><td>Dient der Erzeugung von Einbettungen, die für die Klassifizierung von Texten anhand vorgegebener Etiketten optimiert sind.</td></tr>
 <tr><td>CLUSTERUNG</td><td>Dient zur Erzeugung von Einbettungen, die für das Clustern von Texten auf der Grundlage ihrer Ähnlichkeiten optimiert sind.</td></tr>
-<tr><td>RETRIEVAL_DOCUMENT, RETRIEVAL_QUERY, QUESTION_ANSWERING und FACT_VERIFICATION</td><td>Dienen der Erzeugung von Einbettungen, die für die Dokumentensuche oder das Information Retrieval optimiert sind.</td></tr>
+<tr><td>RETRIEVAL_DOCUMENT, RETRIEVAL_QUERY, QUESTION_ANSWERING, und FACT_VERIFICATION</td><td>Dienen der Erzeugung von Einbettungen, die für die Dokumentensuche oder das Information Retrieval optimiert sind.</td></tr>
 <tr><td>CODE_RETRIEVAL_QUERY</td><td>Dient zum Abrufen eines Codeblocks auf der Grundlage einer natürlichsprachlichen Abfrage, z. B. zum Sortieren eines Arrays oder zum Umkehren einer verknüpften Liste. Die Einbettungen der Codeblöcke werden mit RETRIEVAL_DOCUMENT berechnet.</td></tr>
 </tbody>
 </table>

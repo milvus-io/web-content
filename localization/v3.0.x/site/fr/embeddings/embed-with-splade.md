@@ -23,7 +23,7 @@ title: SPLADE
       </svg>
     </button></h1><p>L'intégration<a href="https://arxiv.org/abs/2109.10086">SPLADE</a> est un modèle qui offre des représentations très éparses pour les documents et les requêtes, héritant des propriétés souhaitables des modèles de sacs de mots (BOW), telles que la correspondance exacte des termes et l'efficacité.</p>
 <p>Milvus s'intègre au modèle SPLADE via la classe <strong>SpladeEmbeddingFunction</strong>. Cette classe fournit des méthodes permettant d'encoder les documents et les requêtes et de renvoyer les embeddings sous forme de vecteurs épars compatibles avec l'indexation Milvus.</p>
-<p>Pour utiliser cette fonctionnalité, installez les dépendances nécessaires :</p>
+<p>Pour utiliser cette fonctionnalité, il faut installer les dépendances nécessaires :</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

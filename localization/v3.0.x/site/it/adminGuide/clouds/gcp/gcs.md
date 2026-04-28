@@ -57,7 +57,7 @@ summary: Scoprite come configurare gcs con Workload Identity.
 <pre><code translate="no" class="language-bash">gcloud storage buckets create gs://milvus-testing-nonprod --project=milvus-testing-nonprod --default-storage-class=STANDARD --location=us-west1 --uniform-bucket-level-access
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Creare un account di servizio Kubernetes per l'applicazione da utilizzare.</li>
+<li>Creare un account di servizio Kubernetes da utilizzare per l'applicazione.</li>
 </ul>
 <pre><code translate="no" class="language-bash">kubectl create serviceaccount milvus-gcs-access-sa
 <button class="copy-code-btn"></button></code></pre>

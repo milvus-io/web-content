@@ -1,10 +1,12 @@
 ---
 id: disk_index.md
 related_key: disk_index
-summary: Mécanisme d'indexation des disques dans Milvus.
-title: Indexation sur disque
+summary: >-
+  Mécanisme d'indexation des disques dans Milvus pour une recherche vectorielle
+  optimisée.
+title: Index sur disque
 ---
-<h1 id="On-disk-Index" class="common-anchor-header">Indexation sur disque<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
+<h1 id="On-disk-Index" class="common-anchor-header">Index sur disque<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +21,7 @@ title: Indexation sur disque
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cet article présente un algorithme d'indexation sur disque appelé DiskANN. Basé sur les graphes de Vamana, DiskANN permet d'effectuer des recherches efficaces dans les grands ensembles de données.</p>
+    </button></h1><p>Cet article présente DiskANN, un algorithme d'indexation sur disque pour les recherches vectorielles optimisées sur disque. Basé sur les graphes de Vamana, DiskANN permet d'effectuer des recherches vectorielles sur disque efficaces dans les grands ensembles de données.</p>
 <p>Pour améliorer les performances des requêtes, vous pouvez <a href="/docs/fr/index-vector-fields.md">spécifier un type d'index</a> pour chaque champ vectoriel.</p>
 <div class="alert note"> 
 Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Milvus supprime automatiquement l'ancien index lors du changement de type d'index.</div>
@@ -38,12 +40,8 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour utiliser DiskANN, notez que</p>
+    </button></h2><p>Pour utiliser DiskANN dans Milvus, il faut que</p>
 <ul>
-<li>DiskANN est désactivé par défaut. Si vous préférez les index en mémoire aux index sur disque, il est conseillé de désactiver cette fonction pour obtenir de meilleures performances.<ul>
-<li>Pour la désactiver, vous pouvez remplacer <code translate="no">queryNode.enableDisk</code> par <code translate="no">false</code> dans votre fichier de configuration milvus.</li>
-<li>Pour la réactiver, vous pouvez remplacer <code translate="no">queryNode.enableDisk</code> par <code translate="no">true</code>.</li>
-</ul></li>
 <li>L'instance Milvus fonctionne sous Ubuntu 18.04.6 ou une version ultérieure.</li>
 <li>Le chemin de données Milvus doit être monté sur un disque SSD NVMe pour des performances optimales :<ul>
 <li>Pour une instance Milvus autonome, le chemin de données doit être <strong>/var/lib/milvus/data</strong> dans le conteneur où l'instance s'exécute.</li>
@@ -119,7 +117,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <span class="hljs-attr">DiskIndex:</span>
   <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
   <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
-  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">PQCodeBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
 <span class="hljs-string">...</span>
@@ -130,8 +128,8 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </thead>
 <tbody>
 <tr><td><code translate="no">MaxDegree</code></td><td>Degré maximal du graphe de Vamana. <br/> Une valeur plus élevée permet d'obtenir un taux de rappel plus important, mais augmente la taille de l'index et le temps nécessaire à sa construction.</td><td>[1, 512]</td><td>56</td></tr>
-<tr><td><code translate="no">SearchListSize</code></td><td>Taille de la liste des candidats. <br/> Une valeur plus élevée augmente le temps consacré à la construction de l'index mais offre un taux de rappel plus élevé. <br/> Fixez-la à une valeur inférieure à <code translate="no">MaxDegree</code>, sauf si vous avez besoin de réduire le temps de construction de l'index.</td><td>[1, int32_max]</td><td>100</td></tr>
-<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Limite de taille du code PQ. <br/> Une valeur plus élevée offre un taux de rappel plus important mais augmente l'utilisation de la mémoire.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
+<tr><td><code translate="no">SearchListSize</code></td><td>Taille de la liste des candidats. <br/> Une valeur plus élevée augmente le temps consacré à la construction de l'index mais offre un taux de rappel plus élevé. <br/> Fixez-la à une valeur inférieure à <code translate="no">MaxDegree</code>, sauf si vous devez réduire le temps de construction de l'index.</td><td>[1, int32_max]</td><td>100</td></tr>
+<tr><td><code translate="no">PQCodeBudgetGBRatio</code></td><td>Limite de taille du code PQ. <br/> Une valeur plus élevée offre un taux de rappel plus important mais augmente l'utilisation de la mémoire.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Rapport entre les numéros de nœuds mis en cache et les données brutes. <br/> Une valeur plus élevée améliore la performance de la construction de l'index mais augmente l'utilisation de la mémoire.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>Rapport entre le nombre maximum de requêtes IO par itération de recherche et le nombre de CPU.</td><td>[1, max(128 / nombre de CPU, 16)]</td><td>4.0</td></tr>
 </tbody>

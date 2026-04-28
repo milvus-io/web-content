@@ -20,10 +20,10 @@ title: GPU 索引
         ></path>
       </svg>
     </button></h1><p>Milvus 支援多種 GPU 索引類型，以加速搜尋效能與效率，尤其是在高吞吐量與高回撥的情況下。本主題概述 Milvus 支援的 GPU 索引類型、適合的使用案例以及效能特性。有關使用 GPU 建立索引的資訊，請參閱<a href="/docs/zh-hant/index-with-gpu.md">Index with GPU</a>。</p>
-<p>值得注意的是，與使用 CPU 索引相比，使用 GPU 索引不一定會減少延遲。如果您想要完全發揮吞吐量的最大效益，您需要極高的請求壓力或大量的查詢向量。</p>
+<p>值得注意的是，與使用 CPU 索引相比，使用 GPU 索引不一定會減少延遲。如果要完全發揮吞吐量的最大效益，您需要極高的請求壓力或大量的查詢向量。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
    </span> <span class="img-wrapper"> <span>效能</span> </span></p>
 <p>Milvus 的 GPU 支援由 Nvidia<a href="https://rapids.ai/">RAPIDS</a>團隊貢獻。以下是 Milvus 目前支援的 GPU 索引類型。</p>
 <h2 id="GPUCAGRA" class="common-anchor-header">GPU_CAGRA<button data-href="#GPUCAGRA" class="anchor-icon" translate="no">
@@ -67,7 +67,7 @@ title: GPU 索引
 <tr><td><code translate="no">search_width</code></td><td>指定搜尋期間進入 CAGRA 圖形的入口點數量。增加此值可提高召回率，但可能會影響搜尋效能（例如：1、2、4、8、16、32）。</td><td>空</td></tr>
 <tr><td><code translate="no">min_iterations</code> /<code translate="no">max_iterations</code></td><td>控制搜尋的迭代過程。預設值為<code translate="no">0</code> ，CAGRA 會根據<code translate="no">itopk_size</code> 和<code translate="no">search_width</code> 自動決定迭代次數。手動調整這些值有助於平衡效能與精確度。</td><td><code translate="no">0</code></td></tr>
 <tr><td><code translate="no">team_size</code></td><td>指定用於計算 GPU 公制距離的 CUDA 線程數。常見的值是 2 的幂次，最高為 32 (例如 2、4、8、16、32)。它對搜尋效能影響不大。預設值是<code translate="no">0</code> ，Milvus 會根據向量維度自動選擇<code translate="no">team_size</code> 。</td><td><code translate="no">0</code></td></tr>
-<tr><td><code translate="no">ef</code></td><td>指定查詢時間/精確度的權衡。<code translate="no">ef</code> 值越高，搜尋準確度越高，但速度越慢。<br/>如果您在建立索引時將<code translate="no">adapt_for_cpu</code> 設定為<code translate="no">true</code> ，則必須使用此參數。</td><td><code translate="no">[top_k, int_max]</code></td></tr>
+<tr><td><code translate="no">ef</code></td><td>指定查詢時間/精確度的權衡。<code translate="no">ef</code> 值越高，搜尋準確度越高，但速度越慢。<br/>如果您在建立索引時將<code translate="no">adapt_for_cpu</code> 設定為<code translate="no">true</code> ，則此參數是必須的。</td><td><code translate="no">[top_k, int_max]</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -155,7 +155,7 @@ title: GPU 索引
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">PQ</code> (Product Quantization) 將原始的高維向量空間均勻地分解為 低維向量空間的笛卡兒乘積，然後將分解後的低維向量空間進行量化。乘積量化不需要計算目標向量與所有單元中心的距離，可以計算目標向量與每個低維空間的聚類中心的距離，大大降低了演算法的時間複雜度和空間複雜度。<code translate="no">m</code> </p>
+    </button></h2><p><code translate="no">PQ</code> (Product Quantization) 將原始的高維向量空間均勻地分解為<code translate="no">m</code> 低維向量空間的笛卡兒乘積，然後將分解後的低維向量空間進行量化。乘積量化不需要計算目標向量與所有單元中心的距離，可以計算目標向量與每個低維空間的聚類中心的距離，大大降低了演算法的時間複雜度和空間複雜度。</p>
 <p>IVF_PQ 在量化向量的乘積之前先執行 IVF 索引聚類。其索引檔案比 IVF_SQ8 更小，但在搜尋向量時也會造成精確度的損失。</p>
 <div class="alert note">
 <p>索引建立參數和搜尋參數因 Milvus 分佈而異。請先選擇您的 Milvus 分佈。</p>

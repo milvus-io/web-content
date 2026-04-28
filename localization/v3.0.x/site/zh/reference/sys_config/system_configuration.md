@@ -90,7 +90,7 @@ summary: 了解 Milvus 的系统配置。
     </button></h3><p>用于存储 Milvus 元数据的 tikv 的相关配置。</p>
 <p>请注意，启用 TiKV 作为元存储时，仍需要使用 etcd 来发现服务。</p>
 <p>当元数据大小需要更好的横向扩展能力时，TiKV 是一个不错的选择。</p>
-<p>有关本节下各参数的详细说明，请参见<a href="/docs/zh/configure_tikv.md">tikv 相关配置</a>。</p>
+<p>本节下每个参数的详细说明请参见<a href="/docs/zh/configure_tikv.md">tikv 相关配置</a>。</p>
 <h3 id="localStorage" class="common-anchor-header"><code translate="no">localStorage</code><button data-href="#localStorage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -140,14 +140,15 @@ summary: 了解 Milvus 的系统配置。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 支持四种 MQ：rocksmq（基于 RockDB）、natsmq（嵌入式 nats-server）、Pulsar 和 Kafka。</p>
+    </button></h3><p>Milvus 支持四种 MQ：rocksmq（基于 RockDB）、Pulsar、Kafka 和 Woodpecker。</p>
 <p>你可以通过设置 mq.type 字段来更改你的 MQ。</p>
-<p>如果不将 mq.type 字段设为默认值，那么如果我们在此文件中配置了多个 mq，就需要注意启用优先级。</p>
+<p>如果不将 mq.type 字段设为默认值，那么在该文件中，如果我们配置了多个 MQ，会有一个关于启用优先级的说明。</p>
 <ol>
-<li><p>独立（本地）模式：Rocksmq（默认） &gt; Natsmq &gt; Pulsar &gt; Kafka</p></li>
-<li><p>集群模式：  Pulsar（默认） &gt; Kafka（集群模式下不支持 rocksmq 和 natsmq）</p></li>
+<li><p>独立（本地）模式：Rocksmq（默认） &gt; Pulsar &gt; Kafka</p></li>
+<li><p>集群模式：  Pulsar（默认） &gt; Kafka（集群模式下不支持 rocksmq）</p></li>
+<li><p>通过将 mq.type 设置为 woodpecker，Woodpecker 可在独立模式和集群模式下使用。</p></li>
 </ol>
-<p>本节下各参数的详细说明，请参见<a href="/docs/zh/configure_mq.md">mq 相关配置</a>。</p>
+<p>本节下每个参数的详细说明，请参见<a href="/docs/zh/configure_mq.md">mq 相关配置</a>。</p>
 <h3 id="pulsar" class="common-anchor-header"><code translate="no">pulsar</code><button data-href="#pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -163,7 +164,7 @@ summary: 了解 Milvus 的系统配置。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>pulsar 的相关配置，用于管理 Milvus 最近突变操作的日志，输出流式日志，并提供日志发布-订阅服务。</p>
+    </button></h3><p>pulsar 的相关配置，用于管理最近突变操作的 Milvus 日志，输出流式日志，并提供日志发布-订阅服务。</p>
 <p>本节下各参数的详细说明，请参见<a href="/docs/zh/configure_pulsar.md">pulsar 相关配置</a>。</p>
 <h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code><button data-href="#rocksmq" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -182,7 +183,7 @@ summary: 了解 Milvus 的系统配置。
       </svg>
     </button></h3><p>如果要启用 kafka，需要对 pulsar 配置进行注释</p>
 <p>kafka：</p>
-<p>brokerList：</p>
+<p>brokerList: localhost:9092</p>
 <p>saslUsername：</p>
 <p>saslPassword：</p>
 <p>saslMechanisms：</p>
@@ -199,25 +200,7 @@ tlsCaCert:  # file or directory path to CA certificate(s) for verifying the brok
 tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_ssl_cert(), if any
 </code></pre>
 <p>readTimeout：10</p>
-<p>本节下各参数的详细说明，请参见<a href="/docs/zh/configure_rocksmq.md">rocksmq 相关配置</a>。</p>
-<h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code><button data-href="#natsmq" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>natsmq 配置。</p>
-<p>更多详情：https://docs.nats.io/running-a-nats-service/configuration</p>
-<p>有关本节中各参数的详细说明，请参见<a href="/docs/zh/configure_natsmq.md">natsmq 相关配置</a>。</p>
+<p>本节下每个参数的详细说明，请参见<a href="/docs/zh/configure_rocksmq.md">rocksmq 相关配置</a>。</p>
 <h3 id="rootCoord" class="common-anchor-header"><code translate="no">rootCoord</code><button data-href="#rootCoord" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -233,7 +216,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>rootCoord 的相关配置，用于处理数据定义语言 (DDL) 和数据控制语言 (DCL) 请求</p>
+    </button></h3><p>rootCoord 的相关配置，用于处理数据定义语言（DDL）和数据控制语言（DCL）请求</p>
 <p>有关本节中各参数的详细说明，请参见<a href="/docs/zh/configure_rootcoord.md">rootCoord 相关配置</a>。</p>
 <h3 id="proxy" class="common-anchor-header"><code translate="no">proxy</code><button data-href="#proxy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -415,8 +398,25 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>配置代理 tls 启用。</p>
+    </button></h3><p>配置外部 tls。</p>
 <p>本节下各参数的详细说明，请参见<a href="/docs/zh/configure_tls.md">tls 相关配置</a>。</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code><button data-href="#internaltls" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>配置内部 tls。</p>
+<p>有关本节下各参数的详细说明，请参见<a href="/docs/zh/configure_internaltls.md">internaltls 相关配置</a>。</p>
 <h3 id="common" class="common-anchor-header"><code translate="no">common</code><button data-href="#common" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -458,7 +458,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>可以启用</p>
 <ol>
 <li><p>DML 吞吐量限制；</p></li>
-<li><p>DDL 和 DQL qps/rps 限制；</p></li>
+<li><p>DDL、DQL qps/rps 限制；</p></li>
 <li><p>DQL 队列长度/延迟保护；</p></li>
 <li><p>DQL 结果速率保护；</p></li>
 </ol>
@@ -502,3 +502,54 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>#milvus 将自动初始化 GPU 可用内存的一半、</p>
 <p>#maxMemSize则为整个可用 GPU 内存。</p>
 <p>本节下每个参数的详细说明，请参见<a href="/docs/zh/configure_gpu.md">与 GPU 相关的配置</a>。</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code><button data-href="#streamingNode" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>与流节点服务器相关的任何配置。</p>
+<p>本节下每个参数的详细说明，请参见<a href="/docs/zh/configure_streamingnode.md">streamingNode-related Configurations</a>（<a href="/docs/zh/configure_streamingnode.md">流节点相关配置</a>）。</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code><button data-href="#streaming" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>与流媒体服务相关的任何配置。</p>
+<p>有关本节下各参数的详细说明，请参见<a href="/docs/zh/configure_streaming.md">流媒体相关配置</a>。</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code><button data-href="#knowhere" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>与 knowhere 向量搜索引擎相关的任何配置</p>
+<p>请参阅 "<a href="/docs/zh/configure_knowhere.md">knowhere 相关配置"</a>，了解本节下各参数的详细说明。</p>

@@ -69,7 +69,7 @@ summary: >-
 <p>Sebagai contoh, nilai <strong>"elektronik"</strong> dipetakan ke ID <strong>1</strong> dan <strong>3</strong>, sementara <strong>"buku"</strong> dipetakan ke ID <strong>2</strong> dan <strong>5</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
    </span> <span class="img-wrapper"> <span>Cara Kerja Indeks Terbalik</span> </span></p>
 <p>Ketika Anda memfilter nilai tertentu (misalnya, <code translate="no">category == &quot;electronics&quot;</code>), Milvus cukup mencari istilah tersebut di dalam indeks dan mengambil ID yang cocok secara langsung. Hal ini untuk menghindari pemindaian dataset secara keseluruhan dan memungkinkan pemfilteran yang cepat, terutama untuk nilai kategorikal atau nilai yang berulang.</p>
 <p>Indeks INVERTED mendukung semua jenis bidang skalar, seperti <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong>, dan <strong>ARRAY</strong>. Namun, parameter indeks untuk mengindeks bidang JSON sedikit berbeda dari bidang skalar biasa.</p>

@@ -38,7 +38,7 @@ jina_rf = JinaRerankFunction(
 <p><strong>Parâmetros</strong>:</p>
 <ul>
 <li><p><code translate="no">model_name</code> <em>(string</em>)</p>
-<p>O nome do modelo de reranker Jina AI a utilizar para a codificação. Se deixar este parâmetro não especificado, será utilizado <code translate="no">jina-reranker-v2-base-multilingual</code>. Para uma lista de modelos disponíveis, consulte <a href="https://jina.ai/reranker/#apiform">Jina AI Rerankers</a>.</p></li>
+<p>O nome do modelo do reranker Jina AI a utilizar para a codificação. Se deixar este parâmetro não especificado, será utilizado <code translate="no">jina-reranker-v2-base-multilingual</code>. Para uma lista de modelos disponíveis, consulte <a href="https://jina.ai/reranker/#apiform">Jina AI Rerankers</a>.</p></li>
 <li><p><code translate="no">api_key</code> <em>(string</em>)</p>
 <p>A chave da API para aceder à API do Jina AI.</p></li>
 </ul>

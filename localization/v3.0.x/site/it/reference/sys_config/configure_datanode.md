@@ -188,7 +188,7 @@ summary: Scoprite come configurare dataNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Attiva la modalità di salto dopo che ci sono stati solo msg timetick per x secondi      </td>
+      <td>        Attiva la modalità di salto dopo che ci sono solo msg timetick per x secondi      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -365,7 +365,7 @@ summary: Scoprite come configurare dataNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        intervallo di controllo dell'uso della memoria del datanode, in millisecondi      </td>
+      <td>        intervallo di tempo per controllare l'uso della memoria del datanode, in millisecondi      </td>
       <td>3000</td>
     </tr>
   </tbody>
@@ -660,7 +660,7 @@ summary: Scoprite come configurare dataNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        La dimensione del blocco di dati (in MB) letto da chunk manager dal datanode durante l'importazione.      </td>
+      <td>        La dimensione del blocco di dati (in MB) letto dal gestore dei chunk dal datanode durante l'importazione.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -863,7 +863,7 @@ summary: Scoprite come configurare dataNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Numero massimo di compiti (ad esempio, compattazione, importazione) che possono essere eseguiti simultaneamente su un datanode.      </td>
+      <td>        Il numero massimo di compiti (ad esempio, compattazione, importazione) che possono essere eseguiti contemporaneamente su un datanode.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -950,7 +950,7 @@ summary: Scoprite come configurare dataNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        fattore parallelo quando applicare il pk al filtro bloom, predefinito a 4*CPU_CORE_NUM      </td>
+      <td>        fattore parallelo quando applicare pk al filtro bloom, predefinito a 4*CPU_CORE_NUM      </td>
       <td>4</td>
     </tr>
   </tbody>

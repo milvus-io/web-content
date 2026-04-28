@@ -21,7 +21,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>L'Array di Strutture, o StructArray, in un'entità memorizza un insieme ordinato di elementi Struct. Ogni struttura dell'array condivide lo stesso schema predefinito, che comprende più vettori e campi scalari. Quando un sottocampo scalare in una Struct è indicizzato, è possibile utilizzare i <strong>filtri elemento</strong> e gli <strong>operatori della famiglia match</strong> per eseguire un filtraggio scalare su di esso.</p>
+    </button></h1><p>L'array di strutture, o StructArray, di un'entità memorizza un insieme ordinato di elementi Struct. Ogni struttura dell'array condivide lo stesso schema predefinito, che comprende più vettori e campi scalari. Quando un sottocampo scalare in una Struct è indicizzato, è possibile utilizzare i <strong>filtri elemento</strong> e gli <strong>operatori della famiglia match</strong> per eseguire un filtraggio scalare su di esso.</p>
 <p>Un filtro elemento seleziona le entità che contengono almeno un valore in un campo StructArray corrispondente al predicato specificato. Gli operatori della famiglia match, invece, vengono utilizzati per trovare entità che contengono numeri o proporzioni specifiche di valori in un campo StructArray che corrisponde al predicato specificato.</p>
 <div class="alert note">
 <p>Quando si costruiscono i predicati su <code translate="no">$[subField]</code>, assicurarsi che il sottocampo sia indicizzato se si lavora con set di dati di grandi dimensioni, poiché questi operatori richiedono l'iterazione degli elementi dell'array per ogni entità candidata.</p>
@@ -46,7 +46,7 @@ beta: Milvus 3.0.x
 <button class="copy-code-btn"></button></code></pre>
 <p>Come mostrato nell'espressione del filtro elemento sopra riportata, il filtro elemento restituisce le entità che contengono almeno un chunk che inizia per "Red" nel sottocampo <code translate="no">text</code>. Il primo parametro è il nome del campo StructArray, mentre il secondo parametro è il predicato che si applica al sottocampo Struct.</p>
 <p>È possibile utilizzare gli operatori di confronto, di intervallo e aritmetici per costruire la condizione e gli operatori logici per concatenare più condizioni, come mostrato in <a href="/docs/it/basic-operators.md">Operatori di base</a>.</p>
-<p>Tuttavia, quando si costruisce un'espressione di filtro che combina sia un predicato di livello entità che un filtro di elemento, si deve sempre collocare il fltler di elemento alla fine, come mostrato nell'esempio seguente.</p>
+<p>Tuttavia, quando si costruisce un'espressione di filtro che combina sia un predicato di livello entità che un filtro di elemento, si deve sempre posizionare il fltler di elemento alla fine, come mostrato nell'esempio seguente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># correct</span>
 <span class="hljs-built_in">id</span> &gt; <span class="hljs-number">0</span> &amp;&amp; element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>)
 

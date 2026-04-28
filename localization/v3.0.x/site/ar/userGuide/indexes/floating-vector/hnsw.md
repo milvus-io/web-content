@@ -49,13 +49,13 @@ summary: >-
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
    </span> <span class="img-wrapper"> <span>HNSW</span> </span></p>
 <p>يعتمد أداء HNSW على العديد من المعلمات الرئيسية التي تتحكم في كل من بنية الرسم البياني وسلوك البحث. وتشمل هذه المعلمات</p>
 <ul>
 <li><p><code translate="no">M</code>: الحد الأقصى لعدد الحواف أو الوصلات التي يمكن أن تمتلكها كل عقدة في الرسم البياني في كل مستوى من مستويات التسلسل الهرمي. يؤدي ارتفاع <code translate="no">M</code> إلى رسم بياني أكثر كثافة ويزيد من التذكر والدقة لأن البحث لديه المزيد من المسارات لاستكشافها، وهو ما يستهلك أيضًا المزيد من الذاكرة ويبطئ وقت الإدراج بسبب الاتصالات الإضافية. كما هو موضح في الصورة أعلاه، يشير <strong>M = 5</strong> إلى أن كل عقدة في الرسم البياني HNSW متصلة مباشرةً بخمس عقد أخرى كحد أقصى. وهذا يخلق بنية رسم بياني معتدلة الكثافة حيث يكون للعقد مسارات متعددة للوصول إلى العقد الأخرى.</p></li>
 <li><p><code translate="no">efConstruction</code>: عدد المرشحين الذين تم أخذهم في الاعتبار أثناء بناء الفهرس. يؤدي ارتفاع <code translate="no">efConstruction</code> عمومًا إلى الحصول على رسم بياني بجودة أفضل ولكنه يتطلب وقتًا أطول للبناء.</p></li>
-<li><p><code translate="no">ef</code>: عدد الجيران الذين يتم تقييمهم أثناء البحث. زيادة <code translate="no">ef</code> يحسن من احتمالية العثور على أقرب الجيران ولكنه يبطئ عملية البحث.</p></li>
+<li><p><code translate="no">ef</code>: عدد الجيران الذين يتم تقييمهم أثناء البحث. تؤدي زيادة <code translate="no">ef</code> إلى تحسين احتمالية العثور على أقرب الجيران ولكنها تبطئ عملية البحث.</p></li>
 </ul>
 <p>للحصول على تفاصيل حول كيفية ضبط هذه الإعدادات لتناسب احتياجاتك، راجع <a href="/docs/ar/hnsw.md#Index-params">بارامز الفهرس</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">إنشاء فهرس<button data-href="#Build-index" class="anchor-icon" translate="no">
@@ -156,7 +156,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>يقدم هذا القسم نظرة عامة على المعلمات المستخدمة لبناء الفهرس وإجراء عمليات البحث على الفهرس.</p>
-<h3 id="Index-building-params" class="common-anchor-header">معلمات بناء الفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">params</code> عند <a href="/docs/ar/hnsw.md#Build-index">إنشاء فهرس</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">معلمات بناء الفهرس<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">params</code> عند <a href="/docs/ar/hnsw.md#Build-index">إنشاء فهرس</a>.</p>
 <table>
    <tr>
      <th><p>المعلمة</p></th>
@@ -177,7 +192,22 @@ res = MilvusClient.search(
      <td><p>يؤدي ارتفاع <code translate="no">efConstruction</code> عادةً إلى <strong>فهرس أكثر دقة،</strong> حيث يتم استكشاف المزيد من الاتصالات المحتملة. ومع ذلك، يؤدي هذا أيضًا إلى <strong>إطالة وقت الفهرسة وزيادة استخدام الذاكرة</strong> أثناء الإنشاء. ضع في اعتبارك زيادة <code translate="no">efConstruction</code> لتحسين الدقة، خاصة في السيناريوهات التي يكون فيها وقت الفهرسة أقل أهمية.</p><p>فكر في تقليل <code translate="no">efConstruction</code> لتسريع بناء الفهرس عندما تكون قيود الموارد مصدر قلق.</p><p>في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [50, 500].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">بارامترات البحث الخاصة بالفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">search_params.params</code> عند <a href="/docs/ar/hnsw.md#Search-on-index">البحث في الفهرس</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">بارامترات البحث الخاصة بالفهرس<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">search_params.params</code> عند <a href="/docs/ar/hnsw.md#Search-on-index">البحث في الفهرس</a>.</p>
 <table>
    <tr>
      <th><p>المعلمة</p></th>

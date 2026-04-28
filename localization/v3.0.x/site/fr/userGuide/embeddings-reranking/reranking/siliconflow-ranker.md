@@ -29,7 +29,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>un découpage avancé des documents avec un chevauchement configurable pour traiter les longs documents</p></li>
 <li><p>L'accès à divers modèles de repositionnement, y compris la série BAAI/bge-reranker et d'autres modèles spécialisés.</p></li>
-<li><p>Une notation flexible basée sur les morceaux, où le morceau le mieux noté représente la note du document.</p></li>
+<li><p>Une notation flexible basée sur les morceaux, où le morceau ayant obtenu le meilleur score représente le score du document.</p></li>
 <li><p>Reranking rentable grâce à la prise en charge des variantes du modèle standard et du modèle pro.</p></li>
 </ul>
 <h2 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -47,7 +47,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Avant de mettre en œuvre SiliconFlow Ranker dans Milvus, assurez-vous de disposer de ce qui suit :</p>
+    </button></h2><p>Avant de mettre en œuvre SiliconFlow Ranker dans Milvus, assurez-vous que vous disposez des éléments suivants</p>
 <ul>
 <li><p>une collection Milvus avec un champ <code translate="no">VARCHAR</code> contenant le texte à reclasser</p></li>
 <li><p>Une clé API SiliconFlow valide avec accès aux modèles de reranking. Inscrivez-vous sur la <a href="https://www.siliconflow.com/">plateforme SiliconFlow</a> pour obtenir vos identifiants API. Vous pouvez soit :</p>
@@ -171,7 +171,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">queries</code></p></td>
      <td><p>Oui</p></td>
-     <td><p>Liste des chaînes de requête utilisées par le modèle de reclassement pour calculer les scores de pertinence. Le nombre de chaînes de requête doit correspondre exactement au nombre de requêtes dans votre opération de recherche (même si vous utilisez des vecteurs de requête au lieu de texte), sinon une erreur sera signalée.</p></td>
+     <td><p>Liste des chaînes de requête utilisées par le modèle de classement pour calculer les scores de pertinence. Le nombre de chaînes de requête doit correspondre exactement au nombre de requêtes dans votre opération de recherche (même si vous utilisez des vecteurs de requête au lieu de texte), sinon une erreur sera signalée.</p></td>
      <td><p><em>["search query"]</em></p></td>
    </tr>
    <tr>

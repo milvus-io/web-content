@@ -42,7 +42,22 @@ title: LangChain-milvus統合における非同期関数
         ></path>
       </svg>
     </button></h2><p>langchain-milvusは包括的な非同期処理のサポートを提供し、大規模な並行処理シナリオにおけるパフォーマンスを大幅に向上させます。非同期APIは同期APIと一貫したインターフェース設計を維持します。</p>
-<h3 id="Core-Async-Functions" class="common-anchor-header">コア非同期関数</h3><p>langchain-milvusで非同期操作を使用するには、メソッド名に<code translate="no">a</code> プレフィックスを追加するだけです。これにより、リソースの利用効率が向上し、同時検索要求を処理する際のスループットが向上します。</p>
+<h3 id="Core-Async-Functions" class="common-anchor-header">コア非同期関数<button data-href="#Core-Async-Functions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>langchain-milvusで非同期操作を使用するには、メソッド名に<code translate="no">a</code> プレフィックスを追加するだけです。これにより、同時検索要求を処理する際のリソースの有効活用とスループットの向上が可能になります。</p>
 <table>
 <thead>
 <tr><th>操作タイプ</th><th>同期メソッド</th><th>非同期メソッド</th><th>説明</th></tr>
@@ -65,7 +80,22 @@ title: LangChain-milvus統合における非同期関数
 </tbody>
 </table>
 <p>これらの関数の詳細については、<a href="https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html#milvus">APIリファレンスを</a>参照してください。</p>
-<h3 id="Performance-Benefits" class="common-anchor-header">パフォーマンスの利点</h3><p>非同期操作により、大量の同時リクエストを処理する際のパフォーマンスが大幅に向上します：</p>
+<h3 id="Performance-Benefits" class="common-anchor-header">パフォーマンスの利点<button data-href="#Performance-Benefits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>非同期操作により、大量の同時リクエストを処理する際のパフォーマンスが大幅に向上します：</p>
 <ul>
 <li>ドキュメントのバッチ処理</li>
 <li>高同時検索シナリオ</li>
@@ -131,7 +161,22 @@ nest_asyncio.apply()
 <span class="hljs-comment"># Define the Milvus URI</span>
 URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Setting-up-Test-Functions" class="common-anchor-header">テスト関数のセットアップ</h3><p>テストデータを生成するヘルパー関数を作りましょう：</p>
+<h3 id="Setting-up-Test-Functions" class="common-anchor-header">テスト関数のセットアップ<button data-href="#Setting-up-Test-Functions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>テストデータを生成するヘルパー関数を作りましょう：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">random_id</span>():
     <span class="hljs-string">&quot;&quot;&quot;Generate a random string ID&quot;&quot;&quot;</span>
     random_num_str = <span class="hljs-string">&quot;&quot;</span>
@@ -157,7 +202,22 @@ URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
         docs.append(doc)
     <span class="hljs-keyword">return</span> docs
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Initialize-the-Vector-Store" class="common-anchor-header">ベクターストアの初期化</h3><p>パフォーマンステストを実行する前に、Milvusベクターストアを初期化する必要があります。この関数により、テストごとに新しいコレクションから開始し、以前のデータからの干渉を排除します：</p>
+<h3 id="Initialize-the-Vector-Store" class="common-anchor-header">ベクターストアの初期化<button data-href="#Initialize-the-Vector-Store" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>パフォーマンステストを実行する前に、Milvusベクターストアを初期化する必要があります。この関数により、テストごとに新鮮なコレクションから開始し、以前のデータからの干渉を排除します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_vector_store</span>():
     <span class="hljs-string">&quot;&quot;&quot;Initialize and return a fresh vector store for testing&quot;&quot;&quot;</span>
     <span class="hljs-keyword">return</span> Milvus(
@@ -168,7 +228,22 @@ URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
         drop_old=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Always start with a fresh collection</span>
     )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Async-vs-Sync-Add-Documents" class="common-anchor-header">非同期と同期ドキュメントの追加</h3><p>それでは、同期と非同期のドキュメント追加のパフォーマンスを比較してみましょう。これらの関数は、ベクトルストアに複数のドキュメントを追加するときに、非同期操作がどれだけ速くなるかを測定するのに役立ちます。非同期バージョンはドキュメント追加ごとにタスクを作成して同時に実行し、同期バージョンはドキュメントを1つずつ処理します：</p>
+<h3 id="Async-vs-Sync-Add-Documents" class="common-anchor-header">非同期と同期ドキュメントの追加<button data-href="#Async-vs-Sync-Add-Documents" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>それでは、同期と非同期のドキュメント追加のパフォーマンスを比較してみましょう。これらの関数は、ベクトルストアに複数のドキュメントを追加するときに、非同期操作がどれだけ速くなるかを測定するのに役立ちます。非同期バージョンはドキュメント追加ごとにタスクを作成して同時に実行し、同期バージョンはドキュメントを1つずつ処理します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">async_add</span>(<span class="hljs-params">milvus_store, num_adding</span>):
     <span class="hljs-string">&quot;&quot;&quot;Add documents asynchronously and measure the time&quot;&quot;&quot;</span>
     docs = generate_test_documents(num_adding)
@@ -232,7 +307,22 @@ Async add for 100 documents took 2.77 seconds
 Sync add for 10 documents took 5.36 seconds
 Sync add for 100 documents took 65.60 seconds
 </code></pre>
-<h3 id="Async-vs-Sync-Search" class="common-anchor-header">非同期 vs 同期検索</h3><p>検索性能の比較では、まずベクターストアにデータを入れる必要がある。以下の関数は、複数の検索クエリーを同時に作成し、同期と非同期の実行時間を比較することで、検索パフォーマンスを測定するのに役立ちます：</p>
+<h3 id="Async-vs-Sync-Search" class="common-anchor-header">非同期 vs 同期検索<button data-href="#Async-vs-Sync-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>検索性能の比較では、まずベクターストアにデータを入れる必要がある。以下の関数は、複数の検索クエリーを同時に作成し、同期と非同期の実行時間を比較することで、検索パフォーマンスを測定するのに役立ちます：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">populate_vector_store</span>(<span class="hljs-params">milvus_store, num_docs=<span class="hljs-number">1000</span></span>):
     <span class="hljs-string">&quot;&quot;&quot;Populate the vector store with test documents&quot;&quot;&quot;</span>
     docs = generate_test_documents(num_docs)
@@ -262,7 +352,7 @@ Sync add for 100 documents took 65.60 seconds
     end_time = time.time()
     <span class="hljs-keyword">return</span> end_time - start_time
 <button class="copy-code-btn"></button></code></pre>
-<p>では、包括的な検索パフォーマンス・テストを実行して、非同期操作が同期操作に比べてどのようにスケールするかを見てみよう。異なるクエリーボリュームでテストを行い、特に同時処理の数が増えるほど、非同期処理のパフォーマンス上の利点が高まることを実証します：</p>
+<p>では、包括的な検索パフォーマンス・テストを実行して、非同期操作が同期操作に比べてどの程度スケールするのかを見てみよう。異なるクエリーボリュームでテストを行い、特に同時処理の数が増えるほど、非同期処理のパフォーマンス上の利点が高まることを実証します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Initialize and populate the vector store</span>
 milvus_store = init_vector_store()
 populate_vector_store(milvus_store, <span class="hljs-number">1000</span>)
@@ -292,7 +382,22 @@ Async search for 100 queries took 3.72 seconds
 Sync search for 10 queries took 6.07 seconds
 Sync search for 100 queries took 54.22 seconds
 </code></pre>
-<h3 id="Async-vs-Sync-Delete" class="common-anchor-header">非同期と同期の比較削除</h3><p>削除操作もまた、非同期操作によってパフォーマンスが大幅に向上する重要な要素です。同期削除操作と非同期削除操作のパフォーマンスの違いを測定する関数を作ってみましょう。これらのテストは、非同期オペレーションがバッチ削除をより効率的に処理できることを示すのに役立ちます：</p>
+<h3 id="Async-vs-Sync-Delete" class="common-anchor-header">非同期と同期の比較削除<button data-href="#Async-vs-Sync-Delete" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>削除操作もまた、非同期操作によってパフォーマンスが大幅に向上する重要な要素です。同期削除操作と非同期削除操作のパフォーマンスの違いを測定する関数を作ってみましょう。これらのテストは、非同期オペレーションがバッチ削除をより効率的に処理できることを示すのに役立ちます：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">async_delete</span>(<span class="hljs-params">milvus_store, num_deleting</span>):
     <span class="hljs-string">&quot;&quot;&quot;Delete documents asynchronously and measure the time&quot;&quot;&quot;</span>
     start_time = time.time()
@@ -376,4 +481,4 @@ Sync delete for 100 operations took 29.21 seconds
 <li>より高いスループットを生成するワークロードでは、同期操作と非同期操作の性能差は拡大する。</li>
 <li>非同期オペレーションは、マシンの計算能力をフルに活用します。</li>
 </ol>
-<p>LangChainとmilvusでプロダクションRAGアプリケーションを構築する場合、パフォーマンスが気になる場合、特に並行処理では非同期APIの使用を検討してください。</p>
+<p>LangChainとmilvusでプロダクションRAGアプリケーションを構築する場合、パフォーマンスが気になる場合、特に並列処理では非同期APIの使用を検討してください。</p>

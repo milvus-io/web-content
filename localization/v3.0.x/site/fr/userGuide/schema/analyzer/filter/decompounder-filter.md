@@ -2,10 +2,8 @@
 id: decompounder-filter.md
 title: Décompacteur
 summary: >-
-  Le filtre de décompactage divise les mots composés en composants individuels
-  sur la base d'un dictionnaire spécifié, ce qui facilite la recherche de
-  parties de termes composés. Ce filtre est particulièrement utile pour les
-  langues qui utilisent fréquemment des mots composés, comme l'allemand.
+  Utilisez le filtre de décompactage pour diviser les mots composés à l'aide
+  d'un dictionnaire en ligne ou d'un fichier enregistré.
 ---
 <h1 id="Decompounder" class="common-anchor-header">Décompacteur<button data-href="#Decompounder" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Le filtre <code translate="no">decompounder</code> divise les mots composés en composants individuels sur la base d'un dictionnaire spécifié, ce qui facilite la recherche de parties de termes composés. Ce filtre est particulièrement utile pour les langues qui utilisent fréquemment des mots composés, comme l'allemand.</p>
+    </button></h1><p>Le filtre <code translate="no">decompounder</code> divise les mots composés en composants individuels sur la base d'un dictionnaire spécifié, ce qui facilite la recherche de parties de termes composés. Ce filtre est particulièrement utile pour les langues qui utilisent fréquemment des mots composés, comme l'allemand. Le dictionnaire des composants peut être fourni en ligne via le paramètre <code translate="no">word_list</code> ou chargé à partir d'un <a href="/docs/fr/manage-file-resources.md">fichier enregistré</a> via le paramètre <code translate="no">word_list_file</code>.</p>
 <h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +36,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le filtre <code translate="no">decompounder</code> est un filtre personnalisé dans Milvus. Pour l'utiliser, spécifiez <code translate="no">&quot;type&quot;: &quot;decompounder&quot;</code> dans la configuration du filtre, ainsi qu'un paramètre <code translate="no">word_list</code> qui fournit le dictionnaire des composants de mots à reconnaître.</p>
+    </button></h2><p>Le filtre <code translate="no">decompounder</code> accepte son dictionnaire de composants soit en ligne via le paramètre <code translate="no">word_list</code>, soit à partir d'un fichier enregistré via le paramètre <code translate="no">word_list_file</code>.</p>
+<h3 id="Inline-word-list" class="common-anchor-header">Liste de mots en ligne<button data-href="#Inline-word-list" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le filtre <code translate="no">decompounder</code> est un filtre personnalisé dans Milvus. Pour l'utiliser, spécifiez <code translate="no">&quot;type&quot;: &quot;decompounder&quot;</code> dans la configuration du filtre, ainsi qu'un paramètre <code translate="no">word_list</code> qui fournit le dictionnaire des composants de mots à reconnaître.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -104,8 +118,75 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>Une liste de composants de mots utilisés pour diviser les termes composés. Ce dictionnaire détermine comment les mots composés sont décomposés en termes individuels.</p></td>
    </tr>
 </table>
-<p>Le filtre <code translate="no">decompounder</code> opère sur les termes générés par le tokenizer, il doit donc être utilisé en combinaison avec un tokenizer. Pour obtenir la liste des tokenizers disponibles dans Milvus, reportez-vous à la page <a href="/docs/fr/standard-tokenizer.md">Tokenizer standard</a> et à ses pages apparentées.</p>
+<p>Le filtre <code translate="no">decompounder</code> fonctionne sur les termes générés par le tokenizer, il doit donc être utilisé en combinaison avec un tokenizer. Pour obtenir la liste des tokenizers disponibles dans Milvus, reportez-vous à la page <a href="/docs/fr/standard-tokenizer.md">Tokenizer standard</a> et à ses pages apparentées.</p>
 <p>Après avoir défini <code translate="no">analyzer_params</code>, vous pouvez les appliquer à un champ <code translate="no">VARCHAR</code> lors de la définition d'un schéma de collection. Cela permet à Milvus de traiter le texte de ce champ à l'aide de l'analyseur spécifié pour une tokenisation et un filtrage efficaces. Pour plus de détails, voir <a href="/docs/fr/analyzer-overview.md#Example-use">Exemple d'utilisation</a>.</p>
+<h3 id="Load-word-components-from-a-file-resource--Milvus-30x" class="common-anchor-header">Charger des composants de mots à partir d'un fichier<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Load-word-components-from-a-file-resource--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour les dictionnaires de composants volumineux - en particulier les listes de mots dans une langue complète - stockez les composants dans un fichier et enregistrez le fichier en tant que ressource de fichier distante, puis faites-y référence à partir du filtre via le paramètre <code translate="no">word_list_file</code>. Vous pouvez utiliser <code translate="no">word_list_file</code> seul ou avec <code translate="no">word_list</code> en ligne ; lorsque les deux sont définis, le filtre fusionne les deux sources en une seule liste de composants.</p>
+<p>Le fichier est du texte UTF-8 brut avec <strong>un mot composant par ligne</strong>. Voici un exemple :</p>
+<pre><code translate="no" class="language-plaintext">dampf
+schiff
+fahrt
+brot
+backen
+automat
+<button class="copy-code-btn"></button></code></pre>
+<p>Téléchargez le fichier dans le magasin d'objets que votre cluster Milvus est configuré pour utiliser, puis enregistrez-le :</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="hljs-comment"># Register the uploaded file under a name you&#x27;ll reference from analyzer configs.</span>
+client.add_file_resource(
+    name=<span class="hljs-string">&quot;de_components&quot;</span>,
+    path=<span class="hljs-string">&quot;file/decompounder.txt&quot;</span>,    <span class="hljs-comment"># full S3 object key, including the rootPath prefix</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>Référencer la ressource enregistrée dans le filtre via <code translate="no">word_list_file</code>:</p>
+<pre><code translate="no" class="language-python">analyzer_params = {
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: [{
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;decompounder&quot;</span>,
+        <span class="hljs-string">&quot;word_list_file&quot;</span>: {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;remote&quot;</span>,
+            <span class="hljs-string">&quot;resource_name&quot;</span>: <span class="hljs-string">&quot;de_components&quot;</span>,
+            <span class="hljs-string">&quot;file_name&quot;</span>: <span class="hljs-string">&quot;decompounder.txt&quot;</span>,
+        },
+    }],
+}
+<button class="copy-code-btn"></button></code></pre>
+<p>Le paramètre <code translate="no">word_list_file</code> accepte un objet avec les champs suivants :</p>
+<table>
+   <tr>
+     <th><p><strong>Champ</strong></p></th>
+     <th><p><strong>Description</strong></p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">type</code></p></td>
+     <td><p>Le type de ressource. Utilisez <code translate="no">"remote"</code> pour un fichier enregistré via <code translate="no">add_file_resource</code>. Pour la variante <code translate="no">"local"</code> utilisée dans les déploiements auto-hébergés, reportez-vous à la section <a href="/docs/fr/manage-file-resources.md">Gérer les ressources de fichiers</a>.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">resource_name</code></p></td>
+     <td><p>Le nom utilisé lorsque le fichier a été enregistré sur <code translate="no">add_file_resource</code>.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">file_name</code></p></td>
+     <td><p>La partie nom de fichier du chemin d'accès au magasin d'objets de la ressource enregistrée (par exemple, <code translate="no">"decompounder.txt"</code> si la ressource a été enregistrée avec <code translate="no">path="file/decompounder.txt"</code>).</p></td>
+   </tr>
+</table>
 <h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,7 +203,22 @@ analyzerParams=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h2><p>Avant d'appliquer la configuration de l'analyseur à votre schéma de collecte, vérifiez son comportement à l'aide de la méthode <code translate="no">run_analyzer</code>.</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">Configuration de l'analyseur</h3><div class="multipleCode">
+<h3 id="Analyzer-configuration" class="common-anchor-header">Configuration de l'analyseur<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
@@ -168,9 +264,23 @@ analyzerParams=<span class="hljs-string">&#x27;{
     }
   ]
 }&#x27;</span>
-
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Vérification à l'aide de <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Vérification à l'aide de <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
@@ -236,5 +346,20 @@ result, err := client.RunAnalyzer(ctx, option)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Expected-output" class="common-anchor-header">Résultat attendu</h3><pre><code translate="no" class="language-python">[<span class="hljs-string">&#x27;dampf&#x27;</span>, <span class="hljs-string">&#x27;schiff&#x27;</span>, <span class="hljs-string">&#x27;fahrt&#x27;</span>, <span class="hljs-string">&#x27;brotbackautomat&#x27;</span>]
+<h3 id="Expected-output" class="common-anchor-header">Résultat attendu<button data-href="#Expected-output" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">[<span class="hljs-string">&#x27;dampf&#x27;</span>, <span class="hljs-string">&#x27;schiff&#x27;</span>, <span class="hljs-string">&#x27;fahrt&#x27;</span>, <span class="hljs-string">&#x27;brotbackautomat&#x27;</span>]
 <button class="copy-code-btn"></button></code></pre>

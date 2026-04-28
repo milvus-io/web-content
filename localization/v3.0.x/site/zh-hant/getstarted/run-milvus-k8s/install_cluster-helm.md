@@ -36,7 +36,7 @@ title: 使用 Helm 安裝 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Helm 使用一種稱為圖表的封裝格式。圖表是描述相關 Kubernetes 資源集的檔案集合。Milvus 提供了一組圖表來幫助您部署 Milvus 的相依性和元件。</p>
+    </button></h2><p>Helm 使用一種稱為圖表的封裝格式。圖表是描述相關 Kubernetes 資源集的檔案集合。Milvus 提供一組圖表來幫助您部署 Milvus 的相依性和元件。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -136,7 +136,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>注意</strong>：單機模式使用 Woodpecker 作為預設訊息佇列，並啟用 Streaming Node 元件。詳情請參閱<a href="/docs/zh-hant/architecture_overview.md">架構概述</a>和<a href="/docs/zh-hant/use-woodpecker.md">使用 Woodpecker</a>。</p>
 </div>
-<p><strong>部署 Milvus 集群：</strong></p>
+<p><strong>部署 Milvus 群集：</strong></p>
 <p>以下指令使用 Woodpecker 作為建議的訊息佇列，以 v2.6.15 的最佳化設定部署 Milvus 叢集：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.15 \
@@ -284,7 +284,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以透過編輯<code translate="no">values.yaml</code> 檔案更新 Milvus 叢集的配置，並再次套用。</p>
+    </button></h2><p>您可以透過編輯<code translate="no">values.yaml</code> 檔案來更新 Milvus 叢集的配置，然後再套用一次。</p>
 <ol>
 <li><p>建立具有所需配置的<code translate="no">values.yaml</code> 檔案。</p>
 <p>以下假設您要啟用<code translate="no">proxy.http</code> 。</p>
@@ -507,7 +507,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a></li>
 </ul></li>
 <li><p><a href="/docs/zh-hant/upgrade_milvus_cluster-helm.md">使用 Helm Chart 升級 Milvus</a>。</p></li>
-<li><p><a href="/docs/zh-hant/scaleout.md">擴充您的 Milvus 集群</a>。</p></li>
+<li><p><a href="/docs/zh-hant/scaleout.md">擴充你的 Milvus 集群</a>。</p></li>
 <li><p>在雲端部署您的 Milvus 叢集：</p>
 <ul>
 <li><a href="/docs/zh-hant/eks.md">亞馬遜 EKS</a></li>

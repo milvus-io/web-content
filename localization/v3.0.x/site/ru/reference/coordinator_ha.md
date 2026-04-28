@@ -39,7 +39,7 @@ title: Координатор HA
     </button></h2><p>В выпуске 2.2.3 Milvus реализовал высокую доступность для координаторов, чтобы заставить их работать в режиме активного резерва, смягчая возможные единичные точки отказа (SPoF), которые могут привести к недоступности сервиса.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
    </span> <span class="img-wrapper"> <span>Координатор HA</span> </span></p>
 <p>На рисунке выше показано, как координаторы работают в режиме активного резерва. Когда запускается пара координаторов, они регистрируются в etcd, используя идентификатор своего сервера, и конкурируют за активную роль. Координатор, которому удастся арендовать активную роль у etcd, начнет обслуживание, а другой координатор в паре останется в режиме ожидания, наблюдая за активной ролью и готовый обслуживать ее в случае гибели активного координатора.</p>
 <h2 id="Enable-coordinator-HA" class="common-anchor-header">Включение координатора HA<button data-href="#Enable-coordinator-HA" class="anchor-icon" translate="no">
@@ -57,7 +57,22 @@ title: Координатор HA
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="With-Helm" class="common-anchor-header">С помощью Helm</h3><p>Чтобы запустить несколько координаторов и заставить их работать в режиме активного ожидания, необходимо внести следующие изменения в файл <code translate="no">values.yaml</code>.</p>
+    </button></h2><h3 id="With-Helm" class="common-anchor-header">С помощью Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы запустить несколько координаторов и заставить их работать в режиме активного ожидания, необходимо внести следующие изменения в файл <code translate="no">values.yaml</code>.</p>
 <ul>
 <li>Установите <code translate="no">xxxCoordinator.replicas</code> в <code translate="no">2</code>.</li>
 <li>Установите <code translate="no">xxxCoordinator.activeStandby.enabled</code> на <code translate="no">true</code>.</li>
@@ -79,7 +94,22 @@ title: Координатор HA
   <span class="hljs-attr">activeStandby:</span>
     <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>  <span class="hljs-comment"># Set this to true to have RootCoordinators work in active-standby mode.</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="With-Docker" class="common-anchor-header">С помощью Docker</h3><p>Чтобы запустить несколько координаторов и заставить их работать в режиме активного ожидания, вы можете добавить несколько определений в файл <code translate="no">docker-compose</code>, который вы используете для запуска кластера Milvus.</p>
+<h3 id="With-Docker" class="common-anchor-header">С помощью Docker<button data-href="#With-Docker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы запустить несколько координаторов и заставить их работать в режиме активного ожидания, вы можете добавить несколько определений в файл <code translate="no">docker-compose</code>, который вы используете для запуска кластера Milvus.</p>
 <p>В следующем фрагменте кода в качестве примера используется RootCoord. Вы можете сделать то же самое с координаторами других типов.</p>
 <pre><code translate="no" class="language-yaml">  <span class="hljs-attr">rootcoord:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
@@ -114,7 +144,22 @@ title: Координатор HA
 <span class="hljs-comment">#      - &quot;pulsar&quot;</span>
 <span class="hljs-comment">#      - &quot;minio&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="With-MacLinux-shell" class="common-anchor-header">С помощью оболочки Mac/Linux</h3><p>Чтобы запустить несколько координаторов и заставить их работать в режиме активного ожидания, вы можете</p>
+<h3 id="With-MacLinux-shell" class="common-anchor-header">С помощью оболочки Mac/Linux<button data-href="#With-MacLinux-shell" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы запустить несколько координаторов и заставить их работать в режиме активного ожидания, вы можете</p>
 <ol>
 <li><p>Загрузить исходный код Milvus на локальный диск и <a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">запустить кластер Milvus из исходного кода</a> следующим образом:</p>
 <pre><code translate="no" class="language-shell">sudo ./scripts/start_cluster.sh

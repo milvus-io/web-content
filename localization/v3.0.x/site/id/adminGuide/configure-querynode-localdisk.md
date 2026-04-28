@@ -76,7 +76,22 @@ nvme1n1     259:1    0 250.0G  0 disk
         ></path>
       </svg>
     </button></h2><p>Untuk mengonfigurasi QueryNode Milvus Distributed agar menggunakan penyimpanan disk NVMe, Anda perlu mengonfigurasi node pekerja dari cluster Kubernetes target untuk menyimpan kontainer dan citra pada disk NVMe. Prosedurnya bervariasi, tergantung pada penyedia layanan cloud.</p>
-<h3 id="AWS" class="common-anchor-header">AWS</h3><p>Saat menggunakan Amazon EKS, Anda dapat menyesuaikan node terkelola dengan templat peluncuran, yang di dalamnya Anda dapat menentukan pengaturan konfigurasi untuk grup node. Berikut ini adalah contoh cara memasang disk NVMe pada node pekerja di cluster Amazon EKS Anda:</p>
+<h3 id="AWS" class="common-anchor-header">AWS<button data-href="#AWS" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Saat menggunakan Amazon EKS, Anda dapat menyesuaikan node terkelola dengan templat peluncuran, yang di dalamnya Anda dapat menentukan pengaturan konfigurasi untuk grup node. Berikut ini adalah contoh cara memasang disk NVMe pada node pekerja di cluster Amazon EKS Anda:</p>
 <pre><code translate="no" class="language-bash">MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary=<span class="hljs-string">&quot;==MYBOUNDARY==&quot;</span>
 
@@ -105,14 +120,44 @@ Content-Type: text/x-shellscript; charset=<span class="hljs-string">&quot;us-asc
 <p>Pada contoh di atas, kami mengasumsikan bahwa disk NVMe adalah <code translate="no">/dev/nvme1n1</code>. Anda perlu memodifikasi skrip agar sesuai dengan konfigurasi spesifik Anda.</p>
 </div>
 <p>Untuk detailnya, lihat <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html#launch-template-user-data">Menyesuaikan node terkelola dengan templat peluncuran</a>.</p>
-<h3 id="GCP" class="common-anchor-header">GCP</h3><p>Untuk menyediakan penyimpanan SSD Lokal di cluster Google Kubernetes Engine (GKE), dan mengonfigurasi beban kerja untuk mengonsumsi data dari penyimpanan sementara yang didukung SSD Lokal yang terpasang pada node di cluster Anda, jalankan perintah berikut:</p>
+<h3 id="GCP" class="common-anchor-header">GCP<button data-href="#GCP" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk menyediakan penyimpanan SSD Lokal di cluster Google Kubernetes Engine (GKE), dan mengonfigurasi beban kerja untuk mengonsumsi data dari penyimpanan sementara yang didukung SSD Lokal yang terpasang pada node di cluster Anda, jalankan perintah berikut:</p>
 <pre><code translate="no" class="language-bash">gcloud container node-pools create <span class="hljs-variable">${POOL_NAME}</span> \
     --cluster=<span class="hljs-variable">${CLUSTER_NAME}</span> \
     --ephemeral-storage-local-ssd count=<span class="hljs-variable">${NUMBER_OF_DISKS}</span> \
     --machine-type=<span class="hljs-variable">${MACHINE_TYPE}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Untuk detailnya, lihat <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/local-ssd">Menyediakan penyimpanan SSD Lokal di GKE</a>.</p>
-<h3 id="Azure" class="common-anchor-header">Azure</h3><p>Untuk membuat set skala mesin virtual (VMSS) dengan penyimpanan disk NVMe lokal, Anda perlu meneruskan data khusus ke instance VM. Berikut ini adalah contoh cara melampirkan disk NVMe ke instance VM di VMSS:</p>
+<h3 id="Azure" class="common-anchor-header">Azure<button data-href="#Azure" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk membuat set skala mesin virtual (VMSS) dengan penyimpanan disk NVMe lokal, Anda perlu meneruskan data khusus ke instance VM. Berikut ini adalah contoh cara melampirkan disk NVMe ke instance VM di VMSS:</p>
 <pre><code translate="no" class="language-bash">mdadm -Cv /dev/md0 -l0 -n2 /dev/nvme0n1 /dev/nvme1n1
 mdadm -Ds &gt; /etc/mdadm/mdadm.conf 
 update-initramfs -u
@@ -125,7 +170,22 @@ mount -a
 <div class="alert note">
 <p>Pada contoh di atas, kami mengasumsikan bahwa disk NVMe adalah <code translate="no">/dev/nvme0n1</code> dan <code translate="no">/dev/nvme1n1</code>. Anda perlu memodifikasi skrip agar sesuai dengan konfigurasi spesifik Anda.</p>
 </div>
-<h3 id="Alibaba-Cloud--TecentCloud" class="common-anchor-header">Alibaba Cloud &amp; TecentCloud</h3><p>Untuk membuat kumpulan node yang menggunakan volume SSD Lokal, kita perlu mengoper Data Kustom. Berikut ini adalah contoh data khusus.</p>
+<h3 id="Alibaba-Cloud--TecentCloud" class="common-anchor-header">Alibaba Cloud &amp; TecentCloud<button data-href="#Alibaba-Cloud--TecentCloud" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk membuat kumpulan node yang menggunakan volume SSD Lokal, kita perlu mengoper Data Kustom. Berikut ini adalah contoh data khusus.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nvme init start...&quot;</span>
 mkfs.xfs /dev/nvme0n1
@@ -146,7 +206,22 @@ mount -a
 <div class="alert note">
 <p>Pada contoh di atas, kami mengasumsikan bahwa disk NVMe adalah <code translate="no">/dev/nvme0n1</code>. Anda perlu memodifikasi skrip agar sesuai dengan konfigurasi spesifik Anda.</p>
 </div>
-<h3 id="Your-own-IDC" class="common-anchor-header">IDC Anda sendiri</h3><p>Jika Anda menjalankan IDC sendiri dan ingin mengonfigurasi container untuk menggunakan sistem file pada disk NVMe yang baru dipasang secara default di containerd, ikuti langkah berikut:</p>
+<h3 id="Your-own-IDC" class="common-anchor-header">IDC Anda sendiri<button data-href="#Your-own-IDC" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jika Anda menjalankan IDC sendiri dan ingin mengonfigurasi container untuk menggunakan sistem file pada disk NVMe yang baru dipasang secara default di containerd, ikuti langkah berikut:</p>
 <ul>
 <li><p><strong>Pasang disk NVMe.</strong></p>
 <p>Pastikan disk NVMe Anda terpasang dengan benar di mesin host. Anda dapat menyambungkannya ke direktori pilihan Anda. Misalnya, jika Anda memasangnya ke <code translate="no">/mnt/nvme</code>, pastikan sudah diatur dengan benar dan Anda dapat melihat disk yang tersedia di <code translate="no">/mnt/nvme</code> dengan menjalankan <code translate="no">lsblk</code> atau <code translate="no">df -h</code>.</p></li>
@@ -249,7 +324,7 @@ IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=100.0%
     latency   : target=0, window=0, percentile=100.00%, depth=64
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Deploy-Milvus-Distributed" class="common-anchor-header">Menyebarkan Milvus Terdistribusi<button data-href="#Deploy-Milvus-Distributed" class="anchor-icon" translate="no">
+<h2 id="Deploy-Milvus-Distributed" class="common-anchor-header">Menyebarkan Milvus Didistribusikan<button data-href="#Deploy-Milvus-Distributed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -265,9 +340,39 @@ IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=100.0%
         ></path>
       </svg>
     </button></h2><p>Setelah hasil verifikasi memuaskan, Anda dapat menggunakan Milvus Distributed dengan langkah-langkah berikut:</p>
-<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">Kiat untuk men-deploy Milvus Distributed menggunakan Helm</h3><p>Pod QueryNode menggunakan disk NVMe sebagai volume EmptyDir secara default. Anda disarankan untuk memasang disk NVMe ke <code translate="no">/var/lib/milvus/data</code> di dalam pod QueryNode untuk memastikan performa yang optimal.</p>
+<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">Kiat untuk men-deploy Milvus Distributed menggunakan Helm<button data-href="#Tips-for-deploying-Milvus-Distributed-using-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pod QueryNode menggunakan disk NVMe sebagai volume EmptyDir secara default. Anda disarankan untuk memasang disk NVMe ke <code translate="no">/var/lib/milvus/data</code> di dalam pod QueryNode untuk memastikan performa yang optimal.</p>
 <p>Untuk detail tentang cara menggunakan Milvus Distributed menggunakan Helm, lihat Menjalankan <a href="/docs/id/install_cluster-helm.md">Milvus di Kubernetes dengan Helm</a>.</p>
-<h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">Kiat untuk menerapkan Milvus Distributed menggunakan Milvus Operator</h3><p>Milvus Operator secara otomatis mengonfigurasi pod QueryNode untuk menggunakan disk NVMe sebagai volume EmptyDir. Anda disarankan untuk menambahkan konfigurasi berikut ke sumber daya khusus <code translate="no">MilvusCluster</code>:</p>
+<h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">Kiat untuk menerapkan Milvus Distributed menggunakan Milvus Operator<button data-href="#Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus Operator secara otomatis mengonfigurasi pod QueryNode untuk menggunakan disk NVMe sebagai volume EmptyDir. Anda disarankan untuk menambahkan konfigurasi berikut ke sumber daya khusus <code translate="no">MilvusCluster</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>

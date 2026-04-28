@@ -41,10 +41,10 @@ summary: >-
       </svg>
     </button></h2><p>Milvus는 기본 반전 색인 및 용어 기반 텍스트 검색을 강화하기 위해 <a href="https://github.com/quickwit-oss/tantivy">Tantivy를</a> 통합합니다. 각 텍스트 항목에 대해 Milvus는 절차에 따라 색인을 생성합니다:</p>
 <ol>
-<li><p><a href="/docs/ko/analyzer-overview.md">분석기</a>: 분석기는 입력 텍스트를 개별 단어 또는 토큰으로 토큰화한 다음 필요에 따라 필터를 적용하여 처리합니다. 이를 통해 Milvus는 이러한 토큰을 기반으로 색인을 구축할 수 있습니다.</p></li>
+<li><p><a href="/docs/ko/analyzer-overview.md">분석기</a>: 분석기는 입력 텍스트를 개별 단어 또는 토큰으로 토큰화한 다음 필요에 따라 필터를 적용하여 처리합니다. 이를 통해 Milvus는 이러한 토큰을 기반으로 인덱스를 구축할 수 있습니다.</p></li>
 <li><p><a href="/docs/ko/index-explained.md">인덱싱</a>: 텍스트 분석 후, Milvus는 각 고유 토큰을 해당 토큰이 포함된 문서에 매핑하는 역 인덱스를 생성합니다.</p></li>
 </ol>
-<p>사용자가 텍스트 일치를 수행하면 반전된 색인을 사용하여 해당 용어가 포함된 모든 문서를 빠르게 검색합니다. 이는 각 문서를 개별적으로 스캔하는 것보다 훨씬 빠릅니다.</p>
+<p>사용자가 텍스트 일치를 수행할 때, 반전된 색인을 사용하여 해당 용어가 포함된 모든 문서를 빠르게 검색합니다. 이는 각 문서를 개별적으로 스캔하는 것보다 훨씬 빠릅니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" />

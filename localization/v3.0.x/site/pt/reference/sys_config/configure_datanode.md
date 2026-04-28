@@ -486,7 +486,7 @@ summary: Saiba como configurar o dataNode para Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        a duração do intervalo (em segundos) para o nó de dados atualizar o ponto de verificação do canal de cada canal     </td>
+      <td>        a duração do intervalo (em segundos) para que o nó de dados actualize o ponto de verificação de cada canal     </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -892,7 +892,7 @@ summary: Saiba como configurar o dataNode para Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        O rácio do buffer de memória da compactação de clusters. Os dados maiores do que o limite serão descarregados para o armazenamento.      </td>
+      <td>        O rácio do buffer de memória da compactação de clustering. Os dados maiores do que o limite serão descarregados para o armazenamento.      </td>
       <td>0.3</td>
     </tr>
   </tbody>

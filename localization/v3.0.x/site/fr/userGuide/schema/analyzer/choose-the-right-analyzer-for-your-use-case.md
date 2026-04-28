@@ -40,7 +40,7 @@ summary: Notes
 <p>Un analyseur fonctionne selon un processus simple en deux étapes :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
    </span> <span class="img-wrapper"> <span>Flux de travail de l'analyseur</span> </span></p>
 <ol>
 <li><p><strong>Tokenisation (obligatoire) :</strong> Cette première étape consiste à appliquer un <strong>tokenizer</strong> pour décomposer une chaîne de texte continue en unités discrètes et significatives appelées "tokens". La méthode de tokénisation peut varier considérablement en fonction de la langue et du type de contenu.</p></li>
@@ -199,7 +199,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
 <li><p><a href="/docs/fr/choose-the-right-analyzer-for-your-use-case.md#Path-A-Use-built-in-analyzers">Utiliser un analyseur intégré</a> ou</p></li>
 <li><p><a href="/docs/fr/choose-the-right-analyzer-for-your-use-case.md#Path-B-Create-a-custom-analyzer">Créer un analyseur personnalisé</a></p></li>
 </ul>
-<h2 id="Path-A-Use-built-in-analyzers" class="common-anchor-header">Voie A : utiliser des analyseurs intégrés<button data-href="#Path-A-Use-built-in-analyzers" class="anchor-icon" translate="no">
+<h2 id="Path-A-Use-built-in-analyzers" class="common-anchor-header">Voie A : Utiliser des analyseurs intégrés<button data-href="#Path-A-Use-built-in-analyzers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -452,7 +452,7 @@ schema.add_field(
    </tr>
 </table>
 <div class="alert note">
-<p>Pour les langues d'Asie de l'Est (chinois, japonais, coréen, etc.), il est préférable d'utiliser des <a href="/docs/fr/choose-the-right-analyzer-for-your-use-case.md#Language-specific-filters">filtres spécifiques à la langue</a>. Ces langues utilisent généralement des approches différentes pour le traitement des textes et peuvent ne pas bénéficier de manière significative de la troncature.</p>
+<p>Pour les langues d'Asie de l'Est (chinois, japonais, coréen, etc.), privilégiez plutôt les <a href="/docs/fr/choose-the-right-analyzer-for-your-use-case.md#Language-specific-filters">filtres spécifiques à la langue</a>. Ces langues utilisent généralement des approches différentes pour le traitement du texte et peuvent ne pas bénéficier de manière significative de la troncature.</p>
 </div>
 <h4 id="Text-normalization-filters" class="common-anchor-header">Filtres de normalisation de texte</h4><p>Ces filtres normalisent les variations de texte afin d'améliorer la cohérence des correspondances :</p>
 <table>

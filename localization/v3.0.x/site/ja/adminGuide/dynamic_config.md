@@ -141,7 +141,7 @@ QueryCoord-1(ip:port) &gt; configuration  # List the configuration of the node
 </thead>
 <tbody>
 <tr><td>pulsar.maxMessageSize</td><td>5242880</td></tr>
-<tr><td>コモン.保持期間</td><td>86400</td></tr>
+<tr><td>共通.保持期間</td><td>86400</td></tr>
 <tr><td>共通.エンティティ有効期限</td><td>-1</td></tr>
 <tr><td>共通.gracefulTime</td><td>5000</td></tr>
 <tr><td>共通.gracefulStopTimeout</td><td>30</td></tr>

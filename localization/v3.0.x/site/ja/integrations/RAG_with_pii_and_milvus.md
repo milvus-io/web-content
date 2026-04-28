@@ -214,7 +214,7 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.d
 <p><code translate="no">MilvusClient</code> の引数については以下の通りです：</p>
 <ul>
 <li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> とするのが最も便利な方法です。</li>
-<li>100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合は、トークンに "<your_username>:<your_password>" を使用します。そうでない場合は、トークンを設定しないでください。</li>
+<li>100万ベクトルを超えるような大規模なデータをお持ちの場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合は、トークンに "<your_username>:<your_password>" を使用します。そうでない場合は、トークンを設定しないでください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、<code translate="no">uri</code> と<code translate="no">token</code> をZilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応させてください。</li>
 </ul>
 </div>
@@ -249,7 +249,7 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.d
         ></path>
       </svg>
     </button></h3><p>マスクされたテキスト行を繰り返し、エンベッディングを作成し、Milvusにデータを挿入します。</p>
-<p>ここに新しいフィールド<code translate="no">text</code> 、コレクションスキーマの非定義フィールドです。これは予約されたJSONダイナミックフィールドに自動的に追加され、高レベルでは通常のフィールドとして扱われる。</p>
+<p>ここに新しいフィールド<code translate="no">text</code> 、コレクションスキーマの非定義フィールドです。これは、予約されたJSONダイナミックフィールドに自動的に追加され、高レベルでは通常のフィールドとして扱うことができる。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
@@ -374,4 +374,4 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">I don't know.
 </code></pre>
-<p>ここでは、PIIをマスクに置き換えているため、LLMはPIIの情報を文脈から取得できないことがわかります。そのため、LLMは次のように答えます：「このようにして、ユーザーのプライバシーを効果的に保護することができます。</p>
+<p>ここでは、PIIをマスクに置き換えているため、LLMはPII情報を文脈から取得できないことがわかります。そのため、LLMは次のように答えます：「このようにして、ユーザーのプライバシーを効果的に保護することができます。</p>

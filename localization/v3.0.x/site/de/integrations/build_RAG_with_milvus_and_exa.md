@@ -92,7 +92,7 @@ COLLECTION = <span class="hljs-string">&quot;private_kb&quot;</span>
 <ul>
 <li>Die Einstellung von <code translate="no">uri</code> als lokale Datei, z. B.<code translate="no">./milvus.db</code>, ist die bequemste Methode, da sie automatisch <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> nutzt, um alle Daten in dieser Datei zu speichern.</li>
 <li>Wenn Sie große Datenmengen haben, z. B. mehr als eine Million Vektoren, können Sie einen leistungsfähigeren Milvus-Server auf <a href="https://milvus.io/docs/quickstart.md">Docker oder Kubernetes</a> einrichten. Bei dieser Einrichtung verwenden Sie bitte die Serveradresse und den Port als Uri, z. B.<code translate="no">http://localhost:19530</code>. Wenn Sie die Authentifizierungsfunktion auf Milvus aktivieren, verwenden Sie "<your_username>:<your_password>" als Token, andernfalls setzen Sie das Token nicht.</li>
-<li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Service für Milvus, verwenden möchten, passen Sie <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">öffentlichen Endpunkt und dem Api-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
+<li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Dienst für Milvus, verwenden möchten, passen Sie <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">öffentlichen Endpunkt und dem Api-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
 </ul>
 </div>
 <p>Definieren Sie eine Hilfsfunktion zur Erzeugung von Einbettungen. Wir werden diese Funktion im gesamten Notebook sowohl für die Indizierung als auch für die Abfrage wiederverwenden:</p>
@@ -678,8 +678,8 @@ In conclusion, Widget Pro appears to offer high throughput suitable for enterpri
       </svg>
     </button></h2><p>In diesem Tutorial haben wir einen Dual-Source-RAG-Agenten gebaut, der Milvus für die private Wissensabfrage mit Exa für die öffentliche Websuche kombiniert. Die wichtigsten Komponenten sind:</p>
 <ul>
-<li><strong>Milvus</strong> speichert und findet interne Dokumente über eine vektorielle Ähnlichkeitssuche, wodurch sichergestellt wird, dass geschützte Daten privat und durchsuchbar bleiben.</li>
+<li><strong>Milvus</strong> speichert und findet interne Dokumente über eine Vektorähnlichkeitssuche, wodurch sichergestellt wird, dass geschützte Daten privat und durchsuchbar bleiben.</li>
 <li><strong>Exa</strong> bietet eine semantische Websuche mit Funktionen wie Kategoriefilterung, Inhaltsextraktion und Erkennung ähnlicher Artikel.</li>
-<li><strong>OpenAI-Funktionsaufrufe</strong> ermöglichen es dem LLM, Abfragen automatisch an die richtige Quelle - oder an beide - weiterzuleiten, je nach Absicht der Frage.</li>
+<li><strong>OpenAI-Funktionsaufrufe</strong> ermöglichen es dem LLM, Abfragen automatisch an die richtige Quelle - oder beides - weiterzuleiten, je nach Absicht der Frage.</li>
 </ul>
 <p>Dieses Muster ist auf Anwendungsfälle in Unternehmen anwendbar, in denen ein KI-Assistent sowohl Zugang zu vertraulichen internen Dokumenten als auch zu externen Informationen in Echtzeit benötigt.</p>

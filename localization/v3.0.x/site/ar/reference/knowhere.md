@@ -34,7 +34,7 @@ title: نوير
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>نوهير هو محرك التنفيذ المتجه الأساسي لميلفوس، والذي يتضمن العديد من مكتبات البحث عن التشابه المتجه بما في ذلك <a href="https://github.com/facebookresearch/faiss">Faiss</a> و <a href="https://github.com/nmslib/hnswlib">Hnswlib</a> و <a href="https://github.com/spotify/annoy">Annoy</a>. تم تصميم Knowhere أيضًا لدعم الحوسبة غير المتجانسة. فهو يتحكم في الأجهزة (وحدة المعالجة المركزية أو وحدة معالجة الرسومات) لتنفيذ طلبات بناء الفهرس والبحث. هذه هي الطريقة التي حصلت بها نوير على اسمها - معرفة مكان تنفيذ العمليات. سيتم دعم المزيد من أنواع الأجهزة بما في ذلك DPU و TPU في الإصدارات المستقبلية.</p>
+    </button></h2><p>نوهير هو محرك التنفيذ المتجه الأساسي لميلفوس، والذي يتضمن العديد من مكتبات البحث عن التشابه المتجه بما في ذلك <a href="https://github.com/facebookresearch/faiss">Faiss</a> و <a href="https://github.com/nmslib/hnswlib">Hnswlib</a> و <a href="https://github.com/spotify/annoy">Annoy</a>. تم تصميم Knowhere أيضًا لدعم الحوسبة غير المتجانسة. فهو يتحكم في الأجهزة (وحدة المعالجة المركزية أو وحدة معالجة الرسومات) لتنفيذ طلبات بناء الفهرس والبحث. هكذا حصل Knowhere على اسمه - معرفة مكان تنفيذ العمليات. سيتم دعم المزيد من أنواع الأجهزة بما في ذلك DPU و TPU في الإصدارات المستقبلية.</p>
 <h2 id="Knowhere-in-the-Milvus-architecture" class="common-anchor-header">نوير في بنية ميلفوس<button data-href="#Knowhere-in-the-Milvus-architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -50,10 +50,10 @@ title: نوير
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوضح الشكل أدناه موقع نوير في بنية ميلفوس.</p>
+    </button></h2><p>يوضح الشكل أدناه موضع نوير في بنية ميلفوس.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
    </span> <span class="img-wrapper"> <span>نوير</span> </span></p>
 <p>الطبقة السفلى هي أجهزة النظام. وفوقها مكتبات الفهرس التابعة لجهة خارجية. في الطبقة العليا، يتفاعل Knowhere مع عقدة الفهرس وعقدة الاستعلام عبر CGO، مما يسمح لحزم Go باستدعاء كود C.</p>
 <h2 id="Knowhere-advantages" class="common-anchor-header">مزايا نوير<button data-href="#Knowhere-advantages" class="anchor-icon" translate="no">
@@ -101,7 +101,7 @@ title: نوير
 <h4 id="DataObj-base-class" class="common-anchor-header"><code translate="no">DataObj</code>: الفئة الأساسية</h4><p><code translate="no">DataObj</code> هي الفئة الأساسية لجميع هياكل البيانات في نوير. <code translate="no">Size()</code> هي الطريقة الافتراضية الوحيدة في <code translate="no">DataObj</code>. ترث فئة الفهرس من <code translate="no">DataObj</code> مع حقل يسمى "size_". تحتوي فئة الفهرس أيضًا على طريقتين افتراضيتين - <code translate="no">Serialize()</code> و <code translate="no">Load()</code>. فئة <code translate="no">VecIndex</code> المشتقة من <code translate="no">Index</code> هي الفئة الأساسية الافتراضية لجميع الفهارس المتجهة. <code translate="no">VecIndex</code> توفر طرقًا تتضمن <code translate="no">Train()</code> و <code translate="no">Query()</code> و <code translate="no">GetStatistics()</code> و <code translate="no">ClearStatistics()</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
    </span> <span class="img-wrapper"> <span>الفئة الأساسية</span> </span></p>
 <p>بعض أنواع الفهارس الأخرى مدرجة على اليمين في الشكل أعلاه.</p>
 <ul>
@@ -111,20 +111,20 @@ title: نوير
 </ul>
 <h4 id="IDMAP-brute-force-search" class="common-anchor-header"><code translate="no">IDMAP</code>:: بحث القوة الغاشمة</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
    </span> <span class="img-wrapper"> <span>IDMAP</span> </span></p>
 <p>من الناحية الفنية، <code translate="no">IDMAP</code> ليس فهرسًا، بل يُستخدم للبحث بالقوة الغاشمة. عندما يتم إدراج المتجهات في قاعدة البيانات، لا يلزم تدريب البيانات ولا بناء الفهرس. سيتم إجراء عمليات البحث مباشرة على بيانات المتجهات المدرجة.</p>
-<p>ومع ذلك، من أجل اتساق الكود، يرث <code translate="no">IDMAP</code> أيضًا من فئة <code translate="no">VecIndex</code> بجميع واجهاتها الافتراضية. استخدام <code translate="no">IDMAP</code> هو نفسه استخدام المؤشرات الأخرى.</p>
+<p>ومع ذلك، من أجل اتساق التعليمات البرمجية، يرث <code translate="no">IDMAP</code> أيضًا من فئة <code translate="no">VecIndex</code> بجميع واجهاتها الافتراضية. استخدام <code translate="no">IDMAP</code> هو نفسه استخدام المؤشرات الأخرى.</p>
 <h4 id="IVF-indices" class="common-anchor-header">مؤشرات IVF</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
    </span> <span class="img-wrapper"> <span>IVF</span> </span></p>
 <p>مؤشرات IVF (الملف المقلوب) هي الأكثر استخدامًا. فالفئة <code translate="no">IVF</code> مشتقة من <code translate="no">VecIndex</code> و <code translate="no">FaissBaseIndex</code> ، وتمتد كذلك إلى <code translate="no">IVFSQ</code> و <code translate="no">IVFPQ</code>. <code translate="no">GPUIVF</code> مشتق من <code translate="no">GPUIndex</code> و <code translate="no">IVF</code>. ثم <code translate="no">GPUIVF</code> يمتد كذلك إلى <code translate="no">GPUIVFSQ</code> و <code translate="no">GPUIVFPQ</code>.</p>
 <p><code translate="no">IVFSQHybrid</code> هو مؤشر هجين مطور ذاتيًا. يتم تنفيذ مقياس كمي خشن على وحدة معالجة الرسومات بينما يتم البحث في الدلو على وحدة المعالجة المركزية. هذا النوع من الفهرس يمكن أن يقلل من حدوث نسخ الذاكرة بين وحدة المعالجة المركزية ووحدة معالجة الرسومات من خلال الاستفادة من قوة الحوسبة لوحدة معالجة الرسومات. <code translate="no">IVFSQHybrid</code> لديه نفس معدل الاستدعاء <code translate="no">GPUIVFSQ</code> ولكنه يأتي بأداء أفضل.</p>
 <p>بنية الفئة الأساسية للمؤشرات الثنائية أبسط نسبيًا. <code translate="no">BinaryIDMAP</code> و <code translate="no">BinaryIVF</code> مشتقة من <code translate="no">FaissBaseBinaryIndex</code> و <code translate="no">VecIndex</code>.</p>
 <h4 id="Third-party-indices" class="common-anchor-header">مؤشرات الطرف الثالث</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
    </span> <span class="img-wrapper"> <span>مؤشرات الطرف الثالث</span> </span></p>
 <p>حاليًا، هناك نوعان فقط من مؤشرات الطرف الثالث مدعومان بصرف النظر عن مؤشر فايس: الفهرس القائم على الشجرة <code translate="no">Annoy</code> ، والفهرس القائم على الرسم البياني <code translate="no">HNSW</code>. هذان المؤشران الشائعان والمستخدمان بشكل متكرر من طرف ثالث كلاهما مشتق من <code translate="no">VecIndex</code>.</p>
 <h2 id="Adding-indices-to-Knowhere" class="common-anchor-header">إضافة مؤشرات إلى "نوير<button data-href="#Adding-indices-to-Knowhere" class="anchor-icon" translate="no">

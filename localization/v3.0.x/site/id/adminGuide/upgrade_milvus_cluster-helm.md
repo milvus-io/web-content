@@ -57,7 +57,7 @@ title: Upgrade Milvus Cluster dengan Helm Chart
     </button></h3><p>Peningkatan dari Milvus 2.5.x ke 2.6.15 melibatkan perubahan arsitektur yang signifikan:</p>
 <ul>
 <li><strong>Konsolidasi koordinator</strong>: Koordinator-koordinator lama yang terpisah (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) telah dikonsolidasikan menjadi satu <code translate="no">mixCoord</code></li>
-<li><strong>Komponen baru</strong>: Pengenalan Streaming Node untuk pemrosesan data yang ditingkatkan</li>
+<li><strong>Komponen baru</strong>: Pengenalan Streaming Node untuk pemrosesan data yang disempurnakan</li>
 <li><strong>Penghapusan komponen</strong>: <code translate="no">indexNode</code> telah dihapus dan dikonsolidasikan</li>
 </ul>
 <p>Proses peningkatan ini memastikan migrasi yang tepat ke arsitektur baru. Untuk informasi lebih lanjut tentang perubahan arsitektur, lihat <a href="/docs/id/architecture_overview.md">Tinjauan Arsitektur Milvus</a>.</p>
@@ -86,7 +86,7 @@ title: Upgrade Milvus Cluster dengan Helm Chart
 <ul>
 <li>Milvus v2.6.0-rc1 <strong>tidak kompatibel</strong> dengan v2.6.15. Upgrade langsung dari kandidat rilis tidak didukung.</li>
 <li>Jika Anda saat ini menjalankan v2.6.0-rc1 dan perlu mempertahankan data Anda, silakan lihat <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">panduan komunitas ini</a> untuk mendapatkan bantuan migrasi.</li>
-<li>Anda <strong>harus</strong> meng-upgrade ke v2.5.16 atau yang lebih baru dengan <code translate="no">mixCoordinator</code> diaktifkan sebelum meng-upgrade ke v2.6.15.</li>
+<li>Anda <strong>harus</strong> meningkatkan ke v2.5.16 atau yang lebih baru dengan <code translate="no">mixCoordinator</code> diaktifkan sebelum meningkatkan ke v2.6.15.</li>
 </ul>
 <p><strong>Keterbatasan Antrian Pesan</strong>: Ketika mengupgrade ke Milvus v2.6.15, anda harus mempertahankan pilihan antrian pesan anda saat ini. Beralih di antara sistem antrian pesan yang berbeda selama upgrade tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.</p>
 <div class="alert note">

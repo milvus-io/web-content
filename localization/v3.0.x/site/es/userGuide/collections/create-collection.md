@@ -225,7 +225,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
       </svg>
     </button></h2><p>La creación de un índice en un campo específico acelera la búsqueda en dicho campo. Un índice registra el orden de las entidades dentro de una colección. Como se muestra en los siguientes fragmentos de código, puede utilizar <code translate="no">metric_type</code> y <code translate="no">index_type</code> para seleccionar las formas apropiadas para que Milvus indexe un campo y mida las similitudes entre las incrustaciones vectoriales.</p>
 <p>En Milvus, puede utilizar <code translate="no">AUTOINDEX</code> como tipo de índice para todos los campos vectoriales, y uno de <code translate="no">COSINE</code>, <code translate="no">L2</code>, y <code translate="no">IP</code> como tipo de métrica en función de sus necesidades.</p>
-<p>Como se muestra en el fragmento de código anterior, debe establecer tanto el tipo de índice como el tipo métrico para los campos vectoriales y sólo el tipo de índice para los campos escalares. Los índices son obligatorios para los campos vectoriales y se recomienda crear índices en los campos escalares que se utilizan con frecuencia en las condiciones de filtrado.</p>
+<p>Como se demuestra en el fragmento de código anterior, debe establecer tanto el tipo de índice como el tipo métrico para los campos vectoriales y sólo el tipo de índice para los campos escalares. Los índices son obligatorios para los campos vectoriales y se recomienda crear índices en los campos escalares que se utilizan con frecuencia en las condiciones de filtrado.</p>
 <p>Para más detalles, consulte <a href="/docs/es/index-vector-fields.md">Indexar campos vectoriales</a> e <a href="/docs/es/index-scalar-fields.md">Indexar campos escalares</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -407,7 +407,7 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>También puede crear una colección sin parámetros de índice y añadirlos después. En este caso, Milvus no carga la colección en el momento de su creación. .</p>
-<p>El siguiente fragmento de código demuestra cómo crear una colección sin un índice, y el estado de carga de la colección permanece sin cargar al crearse.</p>
+<p>El siguiente fragmento de código demuestra cómo crear una colección sin un índice, y el estado de carga de la colección permanece sin cargar en el momento de su creación.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
@@ -520,7 +520,22 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Puede establecer propiedades para la colección a crear para que se ajuste a su servicio. Las propiedades aplicables son las siguientes</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">Establecer número de fragmentos</h3><p>Los fragmentos son partes horizontales de una colección, y cada fragmento corresponde a un canal de entrada de datos. Por defecto, cada colección tiene un fragmento. Puede especificar el número de fragmentos al crear una colección para adaptarla mejor a su volumen de datos y carga de trabajo.</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">Establecer número de fragmentos<button data-href="#Set-Shard-Number" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Los fragmentos son partes horizontales de una colección, y cada fragmento corresponde a un canal de entrada de datos. Por defecto, cada colección tiene un fragmento. Puede especificar el número de fragmentos al crear una colección para adaptarla mejor a su volumen de datos y carga de trabajo.</p>
 <p>Como norma general, tenga en cuenta lo siguiente a la hora de establecer el número de fragmentos:</p>
 <ul>
 <li><strong>Tamaño de los datos:</strong> Una práctica común es tener un shard por cada 200 millones de entidades. También puede hacer una estimación basada en el tamaño total de los datos, por ejemplo, añadiendo un shard por cada 100 GB de datos que planee insertar.</li>
@@ -574,7 +589,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">Habilitar mmap</h3><p>Milvus habilita mmap en todas las colecciones por defecto, permitiendo a Milvus mapear datos de campo sin procesar en la memoria en lugar de cargarlos completamente. Esto reduce el consumo de memoria y aumenta la capacidad de las colecciones. Para más detalles sobre mmap, consulte <a href="/docs/es/mmap.md">Usar mmap</a>.</p>
+<h3 id="Enable-mmap" class="common-anchor-header">Habilitar mmap<button data-href="#Enable-mmap" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus habilita mmap en todas las colecciones por defecto, permitiendo a Milvus mapear datos de campo sin procesar en la memoria en lugar de cargarlos completamente. Esto reduce el consumo de memoria y aumenta la capacidad de las colecciones. Para más detalles sobre mmap, consulte <a href="/docs/es/mmap.md">Usar mmap</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#plaintext">texto plano</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap</span>
@@ -627,7 +657,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Collection-TTL" class="common-anchor-header">Establecer TTL de la colección</h3><p>Si los datos de una colección deben eliminarse durante un período específico, considere establecer su tiempo de vida (TTL) en segundos. Una vez que el TTL se agota, Milvus elimina las entidades de la colección. El borrado es asíncrono, lo que indica que las búsquedas y consultas siguen siendo posibles antes de que se complete el borrado.</p>
+<h3 id="Set-Collection-TTL" class="common-anchor-header">Establecer TTL de la colección<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Si los datos de una colección deben eliminarse durante un período específico, considere establecer su tiempo de vida (TTL) en segundos. Una vez que el TTL se agota, Milvus elimina las entidades de la colección. El borrado es asíncrono, lo que indica que las búsquedas y consultas siguen siendo posibles antes de que se complete el borrado.</p>
 <p>El siguiente fragmento de código establece el TTL en un día (86400 segundos). Se recomienda establecer el TTL en un par de días como mínimo.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -683,7 +728,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Consistency-Level" class="common-anchor-header">Establecer nivel de consistencia</h3><p>Al crear una colección, puede establecer el nivel de consistencia para las búsquedas y consultas en la colección. También puedes cambiar el nivel de consistencia de la colección durante una búsqueda o consulta específica.</p>
+<h3 id="Set-Consistency-Level" class="common-anchor-header">Establecer nivel de consistencia<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Al crear una colección, puede establecer el nivel de consistencia para las búsquedas y consultas en la colección. También puedes cambiar el nivel de consistencia de la colección durante una búsqueda o consulta específica.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With consistency level</span>
@@ -737,5 +797,20 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Para obtener más información sobre los niveles de consistencia, consulte <a href="/docs/es/tune_consistency.md">Nivel de consistencia</a>.</p>
-<h3 id="Enable-Dynamic-Field" class="common-anchor-header">Habilitar campo dinámico</h3><p>El campo dinámico de una colección es un campo reservado de JavaScript Object Notation (JSON) llamado <strong>$meta</strong>. Una vez habilitado este campo, Milvus guarda todos los campos no definidos por el esquema que lleva cada entidad y sus valores como pares clave-valor en el campo reservado.</p>
+<h3 id="Enable-Dynamic-Field" class="common-anchor-header">Habilitar campo dinámico<button data-href="#Enable-Dynamic-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>El campo dinámico de una colección es un campo reservado de JavaScript Object Notation (JSON) llamado <strong>$meta</strong>. Una vez habilitado este campo, Milvus guarda todos los campos no definidos por el esquema que lleva cada entidad y sus valores como pares clave-valor en el campo reservado.</p>
 <p>Para más detalles sobre cómo utilizar el campo dinámico, consulte <a href="/docs/es/enable-dynamic-field.md">Campo dinámico</a>.</p>

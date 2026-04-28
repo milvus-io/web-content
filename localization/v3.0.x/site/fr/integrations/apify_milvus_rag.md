@@ -157,7 +157,7 @@ dataset_id
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'P9dLFfeJAljlePWnz'
 </code></pre>
-<p>Le code suivant récupère les données extraites de la plate-forme Apify <code translate="no">Dataset</code> et affiche le premier site web extrait.</p>
+<p>Le code suivant récupère les données extraites de la plate-forme Apify <code translate="no">Dataset</code> et affiche le premier site Web extrait.</p>
 <pre><code translate="no" class="language-python">item = client.dataset(dataset_id).list_items(limit=<span class="hljs-number">1</span>).items
 item[<span class="hljs-number">0</span>].get(<span class="hljs-string">&quot;text&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>

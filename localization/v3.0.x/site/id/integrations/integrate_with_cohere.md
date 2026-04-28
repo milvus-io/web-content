@@ -173,7 +173,7 @@ collection.load()
 <li>menyematkan pertanyaan asli, dan</li>
 <li>memasukkan data ke dalam koleksi yang baru saja kita buat di Milvus.</li>
 </ul>
-<p>Dalam contoh ini, data termasuk pertanyaan asli, penyematan pertanyaan asli, dan jawaban untuk pertanyaan asli.</p>
+<p>Dalam contoh ini, data mencakup pertanyaan asli, penyematan pertanyaan asli, dan jawaban untuk pertanyaan asli.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up a co:here client.</span>
 cohere_client = cohere.Client(COHERE_API_KEY)
 

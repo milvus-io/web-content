@@ -4,7 +4,7 @@ title: GPU_BRUTE_FORCE
 summary: >-
   GPU 환경 전용인 GPU_BRUTE_FORCE 인덱스는 타협하지 않는 정확도가 필수적인 시나리오를 위해 설계되었습니다. 각 쿼리를 데이터
   세트의 모든 벡터와 철저하게 비교하여 잠재적인 일치를 간과하지 않도록 함으로써 1의 리콜을 보장합니다. GPU 가속을 활용하는
-  GPU_BRUTE_FORCE는 벡터 유사도 검색에서 절대적인 정밀도가 요구되는 애플리케이션에 적합합니다.
+  GPU_BRUTE_FORCE는 벡터 유사도 검색에서 절대적인 정밀도를 요구하는 애플리케이션에 적합합니다.
 ---
 <h1 id="GPUBRUTEFORCE" class="common-anchor-header">GPU_BRUTE_FORCE<button data-href="#GPUBRUTEFORCE" class="anchor-icon" translate="no">
       <svg translate="no"

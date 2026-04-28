@@ -95,7 +95,7 @@ summary: Découvrez comment déployer un cluster Milvus sur Azure.
 </ul></li>
 <li><p><strong>Pool de nœuds primaires</strong>:</p>
 <ul>
-<li><p><strong>Taille du nœud</strong>: Nous vous recommandons de choisir des machines virtuelles dotées d'au moins 16 Go de RAM, mais vous pouvez sélectionner des machines virtuelles de la taille souhaitée.</p></li>
+<li><p><strong>Taille du nœud</strong>: Nous vous recommandons de choisir des machines virtuelles dotées d'un minimum de 16 Go de RAM, mais vous pouvez choisir la taille des machines virtuelles selon vos besoins.</p></li>
 <li><p><strong>Méthode de mise à l'échelle</strong>: Choisissez une méthode de mise à l'échelle.</p></li>
 <li><p><strong>Node count range (Nombre de nœuds</strong>) : Sélectionnez une fourchette pour le nombre de nœuds.</p></li>
 </ul></li>
@@ -107,7 +107,7 @@ summary: Découvrez comment déployer un cluster Milvus sur Azure.
 <li><p><strong>Réseau</strong>:</p>
 <ul>
 <li><p><strong>Configuration du réseau</strong>: Nous vous recommandons de choisir <code translate="no">Kubenet</code>.</p></li>
-<li><p><strong>Préfixe du nom DNS</strong>: Entrez un préfixe de nom DNS.</p></li>
+<li><p><strong>Préfixe de nom DNS</strong>: Entrez un préfixe de nom DNS.</p></li>
 <li><p><strong>Routage du trafic</strong>:</p>
 <ul>
 <li><p><strong>Équilibreur de charge</strong>: <code translate="no">Standard</code>.</p></li>
@@ -116,7 +116,7 @@ summary: Découvrez comment déployer un cluster Milvus sur Azure.
 </ul></li>
 </ul>
 <ol start="5">
-<li>Après avoir configuré les options, cliquez sur <strong>Review + create (examiner et créer)</strong>, puis sur <strong>Create (créer)</strong> lorsque la validation est terminée. La création du cluster prend quelques minutes.</li>
+<li>Après avoir configuré les options, cliquez sur <strong>Review + create</strong>, puis sur <strong>Create</strong> lorsque la validation est terminée. La création du cluster prend quelques minutes.</li>
 </ol>
 <h2 id="Connect-to-the-cluster" class="common-anchor-header">Se connecter au cluster<button data-href="#Connect-to-the-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -258,7 +258,7 @@ helm install -f values.yaml my-release milvus/milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une fois que tous les pods sont en cours d'exécution, exécutez la commande suivante pour obtenir l'adresse IP externe.</p>
+    </button></h2><p>Une fois que tous les pods fonctionnent, exécutez la commande suivante pour obtenir l'adresse IP externe.</p>
 <pre><code translate="no" class="language-bash">kubectl get services|grep my-release-milvus|grep LoadBalancer|awk <span class="hljs-string">&#x27;{print $4}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Hello-Milvus" class="common-anchor-header">Bonjour Milvus<button data-href="#Hello-Milvus" class="anchor-icon" translate="no">

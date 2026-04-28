@@ -21,7 +21,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La función <strong>MinHash</strong> convierte texto en bruto en <strong>vectores binarios</strong> que se aproximan a <a href="https://en.wikipedia.org/wiki/Jaccard_index">la similitud de Jaccard</a> entre documentos. Aplica el shingling de texto y múltiples funciones hash para producir vectores de firma de longitud fija, lo que permite una rápida detección de casi duplicados y la deduplicación de documentos a escala.</p>
+    </button></h1><p>La función <strong>MinHash</strong> convierte texto en bruto en <strong>vectores binarios</strong> que se aproximan a <a href="https://en.wikipedia.org/wiki/Jaccard_index">la similitud de Jaccard</a> entre documentos. Aplica el shingling de texto y múltiples funciones hash para producir vectores de firma de longitud fija, lo que permite una rápida detección de casi duplicados y deduplicación de documentos a escala.</p>
 <p>Como función incorporada, MinHash se ejecuta dentro de Milvus y no requiere inferencia de modelo externo o preprocesamiento. Usted inserta texto sin procesar y Milvus genera automáticamente los vectores de firma MinHash.</p>
 <h2 id="Limits" class="common-anchor-header">Límites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -452,5 +452,5 @@ results = client.search(
     </button></h2><ul>
 <li><p><a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>: Utilización de BM25 para la clasificación por relevancia léxica en lugar de la detección de casi duplicados.</p></li>
 <li><p><a href="/docs/es/analyzer-overview.md">Visión general del analizador</a>: Configuración de analizadores personalizados para la tokenización de texto.</p></li>
-<li><p><a href="/docs/es/minhash-lsh.md">Índice MINHASH_LSH</a>: Aprenda a ajustar los parámetros de LSH para mejorar la recuperación y el rendimiento.</p></li>
+<li><p><a href="/docs/es/minhash-lsh.md">Índice MINHASH_LSH</a>: Aprenda a ajustar los parámetros de LSH para la recuperación y el rendimiento.</p></li>
 </ul>

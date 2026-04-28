@@ -520,7 +520,22 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Anda dapat mengatur properti untuk koleksi yang akan dibuat agar sesuai dengan layanan Anda. Properti yang berlaku adalah sebagai berikut.</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">Tetapkan Nomor Pecahan</h3><p>Pecahan adalah irisan horizontal dari sebuah koleksi, dan setiap pecahan berhubungan dengan saluran masukan data. Secara default, setiap koleksi memiliki satu pecahan. Anda dapat menentukan jumlah pecahan saat membuat koleksi agar lebih sesuai dengan volume data dan beban kerja Anda.</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">Tetapkan Nomor Pecahan<button data-href="#Set-Shard-Number" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pecahan adalah irisan horizontal dari sebuah koleksi, dan setiap pecahan berhubungan dengan saluran masukan data. Secara default, setiap koleksi memiliki satu pecahan. Anda dapat menentukan jumlah pecahan saat membuat koleksi agar lebih sesuai dengan volume data dan beban kerja Anda.</p>
 <p>Sebagai panduan umum, pertimbangkan hal berikut saat mengatur jumlah pecahan:</p>
 <ul>
 <li><strong>Ukuran data:</strong> Praktik yang umum dilakukan adalah memiliki satu pecahan untuk setiap 200 juta entitas. Anda juga dapat memperkirakan berdasarkan ukuran data total, misalnya, menambahkan satu pecahan untuk setiap 100 GB data yang Anda rencanakan untuk dimasukkan.</li>
@@ -574,7 +589,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">Mengaktifkan mmap</h3><p>Milvus mengaktifkan mmap pada semua koleksi secara default, sehingga Milvus dapat memetakan data lapangan mentah ke dalam memori alih-alih memuatnya secara penuh. Hal ini mengurangi jejak memori dan meningkatkan kapasitas koleksi. Untuk detail tentang mmap, lihat <a href="/docs/id/mmap.md">Menggunakan mmap</a>.</p>
+<h3 id="Enable-mmap" class="common-anchor-header">Mengaktifkan mmap<button data-href="#Enable-mmap" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus mengaktifkan mmap pada semua koleksi secara default, sehingga Milvus dapat memetakan data lapangan mentah ke dalam memori alih-alih memuatnya secara penuh. Hal ini mengurangi jejak memori dan meningkatkan kapasitas koleksi. Untuk detail tentang mmap, lihat <a href="/docs/id/mmap.md">Menggunakan mmap</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#plaintext">plaintext</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap</span>
@@ -627,7 +657,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Collection-TTL" class="common-anchor-header">Mengatur TTL Koleksi</h3><p>Jika data dalam koleksi perlu dihilangkan selama periode tertentu, pertimbangkan untuk mengatur Time-To-Live (TTL) dalam hitungan detik. Setelah TTL habis, Milvus akan menghapus entitas dalam koleksi. Penghapusan ini bersifat asinkron, yang mengindikasikan bahwa pencarian dan kueri masih mungkin dilakukan sebelum penghapusan selesai.</p>
+<h3 id="Set-Collection-TTL" class="common-anchor-header">Mengatur TTL Koleksi<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jika data dalam koleksi perlu dihilangkan selama periode tertentu, pertimbangkan untuk mengatur Time-To-Live (TTL) dalam hitungan detik. Setelah TTL habis, Milvus akan menghapus entitas dalam koleksi. Penghapusan ini bersifat asinkron, yang mengindikasikan bahwa pencarian dan kueri masih mungkin dilakukan sebelum penghapusan selesai.</p>
 <p>Cuplikan kode berikut ini mengatur TTL ke satu hari (86400 detik). Anda disarankan untuk menyetel TTL ke beberapa hari minimal.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -683,7 +728,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Consistency-Level" class="common-anchor-header">Mengatur Tingkat Konsistensi</h3><p>Ketika membuat koleksi, Anda dapat mengatur tingkat konsistensi untuk pencarian dan kueri di dalam koleksi. Anda juga dapat mengubah tingkat konsistensi koleksi selama pencarian atau kueri tertentu.</p>
+<h3 id="Set-Consistency-Level" class="common-anchor-header">Mengatur Tingkat Konsistensi<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ketika membuat koleksi, Anda dapat mengatur tingkat konsistensi untuk pencarian dan kueri di dalam koleksi. Anda juga dapat mengubah tingkat konsistensi koleksi selama pencarian atau kueri tertentu.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With consistency level</span>
@@ -737,5 +797,20 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Untuk mengetahui lebih lanjut tentang tingkat konsistensi, lihat <a href="/docs/id/tune_consistency.md">Tingkat Konsistensi</a>.</p>
-<h3 id="Enable-Dynamic-Field" class="common-anchor-header">Mengaktifkan Bidang Dinamis</h3><p>Bidang dinamis dalam koleksi adalah bidang JavaScript Object Notation (JSON) yang dicadangkan bernama <strong>$meta</strong>. Setelah Anda mengaktifkan bidang ini, Milvus menyimpan semua bidang yang tidak ditentukan skema yang dibawa dalam setiap entitas dan nilainya sebagai pasangan nilai-kunci dalam bidang yang dicadangkan.</p>
+<h3 id="Enable-Dynamic-Field" class="common-anchor-header">Mengaktifkan Bidang Dinamis<button data-href="#Enable-Dynamic-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Bidang dinamis dalam koleksi adalah bidang JavaScript Object Notation (JSON) yang dicadangkan bernama <strong>$meta</strong>. Setelah Anda mengaktifkan bidang ini, Milvus menyimpan semua bidang yang tidak ditentukan skema yang dibawa dalam setiap entitas dan nilainya sebagai pasangan kunci-nilai dalam bidang yang dicadangkan.</p>
 <p>Untuk detail mengenai cara menggunakan bidang dinamis, lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a>.</p>

@@ -28,7 +28,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h1><p>Bei der herkömmlichen Vektorsuche werden die Ergebnisse rein nach mathematischer Ähnlichkeit eingestuft, d. h. danach, wie gut die Vektoren im hochdimensionalen Raum übereinstimmen. Dieser Ansatz ist zwar effizient, geht aber oft an der tatsächlichen semantischen Relevanz vorbei. Wenn Sie z. B. nach <strong>"Best Practices für die Datenbankoptimierung"</strong> suchen, erhalten Sie möglicherweise Dokumente mit hoher Vektorähnlichkeit, in denen diese Begriffe zwar häufig erwähnt werden, die aber keine wirklich umsetzbaren Optimierungsstrategien enthalten.</p>
-<p>Model Ranker verändert die Milvus-Suche durch die Integration fortschrittlicher Sprachmodelle, die semantische Beziehungen zwischen Abfragen und Dokumenten verstehen. Anstatt sich nur auf die Vektorähnlichkeit zu verlassen, wertet es die Bedeutung des Inhalts und den Kontext aus, um intelligentere, relevante Ergebnisse zu liefern.</p>
+<p>Model Ranker verändert die Milvus-Suche durch die Integration fortschrittlicher Sprachmodelle, die die semantischen Beziehungen zwischen Abfragen und Dokumenten verstehen. Anstatt sich nur auf die Vektorähnlichkeit zu verlassen, wertet es die Bedeutung des Inhalts und den Kontext aus, um intelligentere, relevante Ergebnisse zu liefern.</p>
 <h2 id="Limits" class="common-anchor-header">Einschränkungen<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

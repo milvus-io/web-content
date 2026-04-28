@@ -42,7 +42,7 @@ summary: >-
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/users-roles-privileges.png" alt="Users Roles Privileges" class="doc-image" id="users-roles-privileges" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/users-roles-privileges.png" alt="Users Roles Privileges" class="doc-image" id="users-roles-privileges" />
    </span> <span class="img-wrapper"> <span>امتيازات أدوار المستخدمين</span> </span></p>
 <p>هناك أربعة مكونات رئيسية في نموذج RBAC.</p>
 <ul>
@@ -50,7 +50,7 @@ summary: >-
 <li><p><strong>الامتيازات:</strong> الإذن بإجراء عمليات معينة على موارد ملفوس (مثل إنشاء مجموعات، إدراج البيانات، إلخ).</p></li>
 <li><p><strong>مجموعة امتيازات:</strong> مجموعة من الامتيازات المتعددة.</p></li>
 <li><p><strong>الدور:</strong> يتكون الدور من جزأين - الامتيازات والموارد. تحدد الامتيازات نوع العمليات التي يمكن للدور تنفيذها بينما تحدد الموارد الموارد الموارد المستهدفة التي يمكن تنفيذ العمليات عليها. على سبيل المثال، يمكن لدور مسؤول قاعدة البيانات تنفيذ عمليات القراءة والكتابة والإدارة على قواعد بيانات معينة.</p></li>
-<li><p><strong>المستخدم:</strong> المستخدم هو الشخص الذي يستخدم ميلفوس. لكل مستخدم معرف فريد ويتم منحه دوراً أو أدواراً متعددة.</p></li>
+<li><p><strong>المستخدم:</strong> المستخدم هو الشخص الذي يستخدم ميلفوس. لكل مستخدم معرف فريد ويتم منحه دوراً أو عدة أدوار.</p></li>
 </ul>
 <h2 id="Procedures" class="common-anchor-header">الإجراءات<button data-href="#Procedures" class="anchor-icon" translate="no">
       <svg translate="no"

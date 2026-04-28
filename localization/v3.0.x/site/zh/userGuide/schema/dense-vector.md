@@ -39,7 +39,7 @@ summary: >-
     </button></h2><p>密集向量通常表示为具有固定长度的浮点数数组，如<code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code> 。这些向量的维度通常从数百到数千不等，如 128、256、768 或 1024。每个维度都能捕捉对象的特定语义特征，通过相似性计算使其适用于各种场景。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" />
    </span> <span class="img-wrapper"> <span>密集向量</span> </span></p>
 <p>上图展示了密集向量在二维空间中的表现形式。虽然实际应用中的密集向量通常具有更高的维度，但这种二维插图有效地传达了几个关键概念：</p>
 <ul>
@@ -65,7 +65,7 @@ summary: >-
 <p>一旦数据被向量化，就可以存储在 Milvus 中进行管理和向量检索。下图显示了基本流程。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>使用密集向量</span> </span></p>
 <div class="alert note">
 <p>除了密集向量，Milvus 还支持稀疏向量和二进制向量。稀疏向量适用于基于特定术语的精确匹配，如关键词搜索和术语匹配，而二进制向量常用于高效处理二进制化数据，如图像模式匹配和某些散列应用。更多信息，请参阅<a href="/docs/zh/binary-vector.md">二进制向量</a>和<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</p>
@@ -85,7 +85,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">添加向量场</h3><p>要在 Milvus 中使用密集向量，首先要在创建 Collections 时定义一个用于存储密集向量的向量场。这一过程包括</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">添加向量场<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要在 Milvus 中使用密集向量，首先要在创建 Collections 时定义一个用于存储密集向量的向量场。这一过程包括</p>
 <ol>
 <li><p>将<code translate="no">datatype</code> 设置为支持的密集向量数据类型。有关支持的密集向量数据类型，请参阅数据类型。</p></li>
 <li><p>使用<code translate="no">dim</code> 参数指定密集向量的维数。</p></li>
@@ -222,10 +237,25 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>存储向量，其每个维度的单个元素均为 8 位整数（int8），每个元素的范围为 -128 至 127。INT8_VECTOR 专为量化深度学习模型（如 ResNet、EfficientNet）而设计，可减少模型大小并加快推理速度，同时将精度损失降到最低。<br><strong>注意</strong>：此向量类型仅支持 HNSW 索引。</p></td>
+     <td><p>存储向量，其每个维度的单个元素都是 8 位整数（int8），每个元素的范围为 -128 到 127。INT8_VECTOR 专为量化深度学习模型（如 ResNet、EfficientNet）而设计，可减少模型大小并加快推理速度，同时将精度损失降到最低。<br><strong>注意</strong>：此向量类型仅支持 HNSW 索引。</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">为向量字段设置索引参数</h3><p>为了加速语义搜索，必须为向量字段创建索引。索引可以大大提高大规模向量数据的检索效率。</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">为向量字段设置索引参数<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>为了加速语义搜索，必须为向量字段创建索引。索引可以大大提高大规模向量数据的检索效率。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -271,8 +301,23 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>在上面的示例中，使用<code translate="no">AUTOINDEX</code> 索引类型为<code translate="no">dense_vector</code> 字段创建了名为<code translate="no">dense_vector_index</code> 的索引。<code translate="no">metric_type</code> 设置为<code translate="no">IP</code> ，表示将使用内积作为距离度量。</p>
 <p>Milvus 提供多种索引类型，以获得更好的向量搜索体验。AUTOINDEX 是一种特殊的索引类型，旨在平滑向量搜索的学习曲线。有很多索引类型可供您选择。详情请参阅 xxx。</p>
-<p>Milvus 支持其他度量类型。更多信息，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p>
-<h3 id="Create-collection" class="common-anchor-header">创建 Collections</h3><p>完成密集向量和索引参数设置后，就可以创建包含密集向量的 Collections。下面的示例使用<code translate="no">create_collection</code> 方法创建了一个名为<code translate="no">my_collection</code> 的集合。</p>
+<p>Milvus 支持其他公制类型。更多信息，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p>
+<h3 id="Create-collection" class="common-anchor-header">创建 Collections<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>完成密集向量和索引参数设置后，就可以创建包含密集向量的 Collections。下面的示例使用<code translate="no">create_collection</code> 方法创建了一个名为<code translate="no">my_collection</code> 的集合。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -326,7 +371,22 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">插入数据</h3><p>创建集合后，使用<code translate="no">insert</code> 方法添加包含密集向量的数据。确保插入的密集向量的维度与添加密集向量字段时定义的<code translate="no">dim</code> 值相匹配。</p>
+<h3 id="Insert-data" class="common-anchor-header">插入数据<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>创建集合后，使用<code translate="no">insert</code> 方法添加包含密集向量的数据。确保插入的密集向量的维度与添加密集向量字段时定义的<code translate="no">dim</code> 值相匹配。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -389,7 +449,22 @@ client.<span class="hljs-title function_">insert</span>({
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572531&quot;,&quot;453577185629572532&quot;]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">执行相似性搜索</h3><p>基于密集向量的语义搜索是 Milvus 的核心功能之一，可以根据向量之间的距离快速找到与查询向量最相似的数据。要执行相似性搜索，请准备好查询向量和搜索参数，然后调用<code translate="no">search</code> 方法。</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">执行相似性搜索<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>基于密集向量的语义搜索是 Milvus 的核心功能之一，可以根据向量之间的距离快速找到与查询向量最相似的数据。要执行相似性搜索，请准备好查询向量和搜索参数，然后调用<code translate="no">search</code> 方法。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {

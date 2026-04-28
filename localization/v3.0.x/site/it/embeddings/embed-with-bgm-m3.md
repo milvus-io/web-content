@@ -41,7 +41,7 @@ bge_m3_ef = BGEM3EmbeddingFunction(
 <li><p><strong>nome_modello</strong><em>(stringa</em>)</p>
 <p>Il nome del modello da utilizzare per la codifica. Il valore predefinito è <strong>BAAI/bge-m3</strong>.</p></li>
 <li><p><strong>dispositivo</strong><em>(stringa</em>)</p>
-<p>Il dispositivo da utilizzare, con <strong>cpu</strong> per la CPU e <strong>cuda:n</strong> per l'ennesimo dispositivo GPU.</p></li>
+<p>Il dispositivo da usare, con <strong>cpu</strong> per la CPU e <strong>cuda:n</strong> per l'ennesimo dispositivo GPU.</p></li>
 <li><p><strong>use_fp16</strong><em>(bool</em>)</p>
 <p>Se utilizzare la precisione in virgola mobile a 16 bit (fp16). Specificare <strong>False</strong> se il <strong>dispositivo</strong> è <strong>cpu</strong>.</p></li>
 </ul>

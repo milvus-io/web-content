@@ -61,7 +61,7 @@ title: Milvus Operator로 Milvus 구성하기
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">spec.components</code> 필드에는 모든 Milvus 구성 요소의 글로벌 및 프라이빗 리소스 구성이 모두 포함됩니다. 다음은 글로벌 리소스를 구성하는 데 일반적으로 사용되는 네 가지 필드입니다.</p>
+<p><code translate="no">spec.components</code> 필드에는 모든 Milvus 구성 요소의 전역 및 비공개 리소스 구성이 모두 포함됩니다. 다음은 글로벌 리소스를 구성하는 데 일반적으로 사용되는 네 가지 필드입니다.</p>
 <ul>
 <li><code translate="no">image</code>: 사용된 Milvus 도커 이미지.</li>
 <li><code translate="no">resources</code>: 각 구성 요소에 할당된 컴퓨팅 리소스.</li>
@@ -135,7 +135,7 @@ K8s 클러스터에 <code translate="no">my-release</code> 이라는 이름의 M
 </ul>
 <div class="alert note">
 또한 프록시를 구성할 때 'serviceType'이라는 추가 필드가 있습니다. 이 필드는 Milvus가 K8s 클러스터에서 제공하는 서비스 유형을 정의합니다.</div>
-<p>특정 구성 요소에 대한 리소스를 구성하려면 먼저 <code translate="no">spec.componets</code> 아래 필드에 구성 요소 이름을 추가한 다음 해당 구성 요소의 프라이빗 리소스를 구성합니다.</p>
+<p>특정 구성 요소에 대한 리소스를 구성하려면 먼저 <code translate="no">spec.componets</code> 필드에 구성 요소 이름을 추가한 다음 해당 구성 요소의 프라이빗 리소스를 구성합니다.</p>
 <div class="filter">
 <a href="#component">구성 요소 또는 종속성</a> <a href="#purpose">구성 목적</a> </div>
 <div class="filter-component table-wrapper">
@@ -174,7 +174,6 @@ K8s 클러스터에 <code translate="no">my-release</code> 이라는 이름의 M
             <li><a href="/docs/ko/configure_indexcoord.md">인덱스 조정</a></li>
             <li><a href="/docs/ko/configure_metastore.md">메타스토어</a></li>
             <li><a href="/docs/ko/configure_mq.md">메시지 큐</a></li>
-            <li><a href="/docs/ko/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/ko/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/ko/configure_trace.md">Trace</a></li>
             <li><a href="/docs/ko/configure_quotaandlimits.md">할당량 및 제한</a></li>
@@ -189,7 +188,7 @@ K8s 클러스터에 <code translate="no">my-release</code> 이라는 이름의 M
 <thead>
   <tr>
     <th>목적</th>
-    <th>파라미터</th>
+    <th>매개변수</th>
   </tr>
 </thead>
 <tbody>

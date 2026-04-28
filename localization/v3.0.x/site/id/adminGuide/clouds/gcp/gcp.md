@@ -22,7 +22,7 @@ summary: Pelajari cara menggunakan cluster Milvus di GKE.
     </button></h1><p>Milvus adalah basis data vektor asli cloud dan dapat digunakan di berbagai lingkungan cloud. Panduan ini memandu Anda melalui setiap detail tentang menyiapkan Milvus di Google Cloud Platform (GCP).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gcp-networking.png" alt="Deploy a Milvus cluster on GCP" class="doc-image" id="deploy-a-milvus-cluster-on-gcp" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gcp-networking.png" alt="Deploy a Milvus cluster on GCP" class="doc-image" id="deploy-a-milvus-cluster-on-gcp" />
    </span> <span class="img-wrapper"> <span>Menerapkan cluster Milvus di GCP</span> </span></p>
 <h2 id="Before-you-start" class="common-anchor-header">Sebelum memulai<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -183,7 +183,7 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/access_key.jpg" alt="GCP Access keys for your user account" class="doc-image" id="gcp-access-keys-for-your-user-account" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/access_key.jpg" alt="GCP Access keys for your user account" class="doc-image" id="gcp-access-keys-for-your-user-account" />
    </span> <span class="img-wrapper"> <span>Kunci Akses GCP untuk akun pengguna Anda</span> </span></p>
 <ul>
 <li>Tambahkan nilai-nilai.yaml</li>

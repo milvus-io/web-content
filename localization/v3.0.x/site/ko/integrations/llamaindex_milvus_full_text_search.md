@@ -28,7 +28,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p><strong>전체 텍스트 검색은</strong> 정확한 키워드 매칭을 사용하며, 종종 BM25와 같은 알고리즘을 활용하여 관련성별로 문서 순위를 매깁니다. <strong>검색 증강 생성(RAG)</strong> 시스템에서 이 방법은 관련성 있는 텍스트를 검색하여 AI가 생성한 응답을 향상시킵니다.</p>
-<p>반면, <strong>시맨틱 검색은</strong> 문맥적 의미를 해석하여 더 광범위한 결과를 제공합니다. 두 가지 접근 방식을 결합하면 <strong>하이브리드 검색이</strong> 생성되어 정보 검색을 개선할 수 있으며, 특히 단일 방법만으로는 부족한 경우에 유용합니다.</p>
+<p>반면, <strong>시맨틱 검색은</strong> 문맥적 의미를 해석하여 보다 폭넓은 결과를 제공합니다. 두 가지 접근 방식을 결합하면 <strong>하이브리드 검색이</strong> 생성되어 정보 검색을 개선할 수 있으며, 특히 단일 방법만으로는 부족한 경우에 유용합니다.</p>
 <p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5의</a> 스파스-BM25 접근 방식을 사용하면 원시 텍스트가 스파스 벡터로 자동 변환됩니다. 따라서 수동으로 스파스 임베딩을 생성할 필요가 없으며, 의미론적 이해와 키워드 관련성의 균형을 맞추는 하이브리드 검색 전략이 가능합니다.</p>
 <p>이 튜토리얼에서는 전체 텍스트 검색과 하이브리드 검색을 사용하는 RAG 시스템을 구축하기 위해 LlamaIndex와 Milvus를 사용하는 방법을 알아봅니다. 먼저 전체 텍스트 검색만 구현한 다음 시맨틱 검색을 통합하여 보다 포괄적인 결과를 얻을 수 있도록 개선해 보겠습니다.</p>
 <blockquote>
@@ -122,7 +122,22 @@ write then, and probably still are: short stories. My stories were
 awful. They had hardly any plot, just characters with strong feelings,
 which I ...
 </code></pre>
-<h3 id="Full-Text-Search-with-BM25" class="common-anchor-header">BM25를 사용한 전체 텍스트 검색</h3><p>LlamaIndex의 <code translate="no">MilvusVectorStore</code> 는 전체 텍스트 검색을 지원하여 키워드 기반의 효율적인 검색을 가능하게 합니다. <code translate="no">sparse_embedding_function</code> 와 같은 내장된 기능을 사용하여 BM25 점수를 적용하여 검색 결과의 순위를 매깁니다.</p>
+<h3 id="Full-Text-Search-with-BM25" class="common-anchor-header">BM25를 사용한 전체 텍스트 검색<button data-href="#Full-Text-Search-with-BM25" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>LlamaIndex의 <code translate="no">MilvusVectorStore</code> 는 전체 텍스트 검색을 지원하여 키워드 기반의 효율적인 검색을 가능하게 합니다. <code translate="no">sparse_embedding_function</code> 와 같은 내장된 기능을 사용하여 BM25 점수를 적용하여 검색 결과의 순위를 매깁니다.</p>
 <p>이 섹션에서는 전체 텍스트 검색을 위해 BM25를 사용하여 RAG 시스템을 구현하는 방법을 보여드리겠습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> VectorStoreIndex, StorageContext
 <span class="hljs-keyword">from</span> llama_index.vector_stores.milvus <span class="hljs-keyword">import</span> MilvusVectorStore
@@ -184,7 +199,22 @@ hiring too many people, and the relief felt when the company was acquired by Yah
     enable_match=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Hybrid-Search-with-Reranker" class="common-anchor-header">리랭커를 사용한 하이브리드 검색</h3><p>하이브리드 검색 시스템은 시맨틱 검색과 전체 텍스트 검색을 결합하여 RAG 시스템에서 검색 성능을 최적화합니다.</p>
+<h3 id="Hybrid-Search-with-Reranker" class="common-anchor-header">리랭커를 사용한 하이브리드 검색<button data-href="#Hybrid-Search-with-Reranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>하이브리드 검색 시스템은 시맨틱 검색과 전체 텍스트 검색을 결합하여 RAG 시스템에서 검색 성능을 최적화합니다.</p>
 <p>다음 예에서는 시맨틱 검색에는 OpenAI 임베딩을, 전체 텍스트 검색에는 BM25를 사용합니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index over the documnts</span>
 vector_store = MilvusVectorStore(

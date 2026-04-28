@@ -28,7 +28,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>Moderne KI-Anwendungen, insbesondere im Internet der Dinge (IoT) und beim autonomen Fahren, verarbeiten in der Regel umfangreiche, strukturierte Ereignisse: einen Sensormesswert mit Zeitstempel und Vektoreinbettung, ein Diagnoseprotokoll mit Fehlercode und Audioschnipsel oder einen Fahrtabschnitt mit Standort, Geschwindigkeit und Szenenkontext. Diese erfordern, dass die Datenbank von Haus aus die Aufnahme und Suche von verschachtelten Daten unterstützt.</p>
-<p>Anstatt den Benutzer aufzufordern, seine atomaren Strukturereignisse in flache Datenmodelle umzuwandeln, führt Milvus das Array of Structs ein, bei dem jedes Struct im Array Skalare und Vektoren enthalten kann, wobei die semantische Integrität erhalten bleibt.</p>
+<p>Anstatt den Benutzer aufzufordern, seine atomaren Strukturereignisse in flache Datenmodelle umzuwandeln, führt Milvus das Array of Structs ein, in dem jedes Struct im Array Skalare und Vektoren enthalten kann, wobei die semantische Integrität erhalten bleibt.</p>
 <h2 id="Why-Array-of-Structs" class="common-anchor-header">Warum Array of Structs<button data-href="#Why-Array-of-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

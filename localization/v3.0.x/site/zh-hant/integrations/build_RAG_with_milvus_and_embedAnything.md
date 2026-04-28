@@ -29,7 +29,7 @@ title: 使用 Milvus 和 EmbedAnything 建立 RAG
       </svg>
     </button></h1><p><a href="https://github.com/StarlightSearch/EmbedAnything">EmbedAnything</a>是用 Rust 建立的快速、輕量嵌入管道，支援文字、PDF、圖片、音訊等。</p>
 <p>在本教程中，我們將示範如何使用 EmbedAnything 與<a href="https://milvus.io">Milvus</a> 來建立一個 Retrieval-Augmented Generation (RAG) 管道。EmbedAnything 並未與任何特定資料庫緊密結合，而是使用可插拔的<strong>適配器</strong>系統 - 適配器可作為封裝程式，定義嵌入式資料如何格式化、編入索引，以及如何儲存在目標向量儲存庫中。</p>
-<p>將 EmbedAnything 與 Milvus 轉接器搭配使用，您只需要幾行程式碼就可以從多種檔案類型產生嵌入式資料，並將它們有效地儲存在 Milvus 中。</p>
+<p>將 EmbedAnything 與 Milvus 適配器搭配使用，您只需要幾行程式碼就可以從多種檔案類型產生嵌入式資料，並將它們有效地儲存在 Milvus 中。</p>
 <blockquote>
 <p>⚠️ 注意：EmbedAnything 中的適配器可處理插入到 Milvus 中，但不支援開箱即用的搜尋功能。若要建立完整的 RAG 管道，您還需要單獨實體化 MilvusClient，並實作擷取邏輯 (例如，向量的相似性搜尋) 作為應用程式的一部分。</p>
 </blockquote>
@@ -193,7 +193,7 @@ Collection 'embed_anything_milvus_collection' created with index.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>現在我們要初始化嵌入模型。我們將使用來自 sentence-transformers 函式庫的<code translate="no">all-MiniLM-L12-v2 model</code> ，這是一個輕量級但功能強大的模型，用來產生文字嵌入。它會產生 384 維的嵌入模型，因此這與我們的 Milvus 套件維度設定為 384 是一致的。這種對齊是非常重要的，可以確保儲存在 Milvus 中的向量尺寸與模型產生的向量尺寸之間的相容性。</p>
+    </button></h3><p>現在我們要初始化嵌入模型。我們會使用來自 sentence-transformers 函式庫的<code translate="no">all-MiniLM-L12-v2 model</code> ，它是一個輕量但功能強大的模型，用來產生文字嵌入。它會產生 384 維的嵌入模型，因此這與我們的 Milvus 套件維度設定為 384 是一致的。這種對齊是非常重要的，可以確保儲存在 Milvus 中的向量尺寸與模型產生的向量尺寸之間的相容性。</p>
 <p>EmbedAnything 支援更多的嵌入模型。如需詳細資訊，請參閱<a href="https://github.com/StarlightSearch/EmbedAnything">官方文件</a>。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Initialize the embedding model</span>
 model = EmbeddingModel.from_pretrained_hf(

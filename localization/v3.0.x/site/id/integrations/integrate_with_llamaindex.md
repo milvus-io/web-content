@@ -23,7 +23,7 @@ title: Retrieval-Augmented Generation (RAG) dengan Milvus dan LlamaIndex
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/rag_with_milvus_and_llamaindex.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Panduan ini mendemonstrasikan cara membangun sistem Retrieval-Augmented Generation (RAG) dengan menggunakan LlamaIndex dan Milvus.</p>
-<p>Sistem RAG menggabungkan sistem pencarian dengan model generatif untuk menghasilkan teks baru berdasarkan perintah yang diberikan. Sistem ini pertama-tama mengambil dokumen yang relevan dari sebuah korpus menggunakan Milvus, dan kemudian menggunakan model generatif untuk menghasilkan teks baru berdasarkan dokumen yang diambil.</p>
+<p>Sistem RAG menggabungkan sistem pengambilan dengan model generatif untuk menghasilkan teks baru berdasarkan perintah yang diberikan. Sistem ini pertama-tama mengambil dokumen yang relevan dari sebuah korpus menggunakan Milvus, dan kemudian menggunakan model generatif untuk menghasilkan teks baru berdasarkan dokumen yang diambil.</p>
 <p><a href="https://www.llamaindex.ai/">LlamaIndex</a> adalah kerangka kerja data yang sederhana dan fleksibel untuk menghubungkan sumber data khusus ke model bahasa besar (LLM). <a href="https://milvus.io/">Milvus</a> adalah basis data vektor sumber terbuka yang paling canggih di dunia, yang dibuat untuk mendukung pencarian kemiripan dan aplikasi AI.</p>
 <p>Dalam buku catatan ini, kami akan menunjukkan demo singkat penggunaan MilvusVectorStore.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Sebelum Anda memulai<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
@@ -163,7 +163,7 @@ documents = SimpleDirectoryReader(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sekarang setelah kita memiliki sebuah dokumen, kita dapat membuat sebuah indeks dan menyisipkan dokumen tersebut. Untuk indeks kita akan menggunakan MilvusVectorStore. MilvusVectorStore membutuhkan beberapa argumen:</p>
+    </button></h3><p>Sekarang kita telah memiliki sebuah dokumen, kita dapat membuat sebuah indeks dan menyisipkan dokumen tersebut. Untuk indeks kita akan menggunakan MilvusVectorStore. MilvusVectorStore membutuhkan beberapa argumen:</p>
 <h4 id="basic-args" class="common-anchor-header">argumen dasar</h4><ul>
 <li><code translate="no">uri (str, optional)</code>: URI yang akan disambungkan, berupa "https://address:port" untuk layanan Milvus atau Zilliz Cloud, atau "path/to/local/milvus.db" untuk Milvus lokal lite. Defaultnya adalah "./milvus_llamaindex.db".</li>
 <li><code translate="no">token (str, optional)</code>: Token untuk masuk. Kosongkan jika tidak menggunakan rbac, jika menggunakan rbac kemungkinan besar akan menjadi "username:password".</li>

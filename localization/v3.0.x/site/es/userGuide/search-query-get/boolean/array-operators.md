@@ -2,8 +2,8 @@
 id: array-operators.md
 title: Operadores ARRAY
 summary: >-
-  Milvus proporciona potentes operadores para consultar campos de matrices, lo
-  que le permite filtrar y recuperar entidades basándose en el contenido de las
+  Milvus proporciona potentes operadores para consultar campos de matrices,
+  permitiéndole filtrar y recuperar entidades basándose en el contenido de las
   matrices.
 ---
 <h1 id="ARRAY-Operators" class="common-anchor-header">Operadores ARRAY<button data-href="#ARRAY-Operators" class="anchor-icon" translate="no">
@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus proporciona potentes operadores para consultar campos de matrices, permitiéndole filtrar y recuperar entidades basándose en el contenido de las matrices.</p>
+    </button></h1><p>Milvus proporciona potentes operadores para consultar campos de array, permitiéndole filtrar y recuperar entidades basándose en el contenido de los arrays.</p>
 <div class="alert note">
 <p>Todos los elementos de una matriz deben ser del mismo tipo, y las estructuras anidadas dentro de las matrices se tratan como cadenas simples. Por lo tanto, cuando se trabaja con campos ARRAY, es aconsejable evitar el anidamiento excesivamente profundo y asegurarse de que sus estructuras de datos son tan planas como sea posible para un rendimiento óptimo.</p>
 </div>
@@ -127,7 +127,7 @@ summary: >-
       </svg>
     </button></h2><p><code translate="no">ARRAY_LENGTH</code> devuelve la longitud (número de elementos) de un campo de matriz. Acepta exactamente un parámetro: el identificador del campo de la matriz.</p>
 <p><strong>Ejemplo</strong></p>
-<p>Para encontrar todas las entidades en las que la matriz <code translate="no">history_temperatures</code> tiene menos de 10 elementos:</p>
+<p>Encontrar todas las entidades en las que la matriz <code translate="no">history_temperatures</code> tiene menos de 10 elementos:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ARRAY_LENGTH(history_temperatures) &lt; 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Esto devolverá todas las entidades en las que la matriz <code translate="no">history_temperatures</code> tenga menos de 10 elementos.</p>

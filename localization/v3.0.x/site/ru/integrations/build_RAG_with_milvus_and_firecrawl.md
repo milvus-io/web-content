@@ -1,7 +1,7 @@
 ---
 id: build_RAG_with_milvus_and_firecrawl.md
 summary: >-
-  В этом уроке мы покажем вам, как построить конвейер Retrieval-Augmented
+  В этом руководстве мы покажем вам, как построить конвейер Retrieval-Augmented
   Generation (RAG) с использованием Milvus и Firecrawl. Конвейер объединяет
   Firecrawl для сбора веб-данных, Milvus для хранения векторов и OpenAI для
   генерации проницательных, учитывающих контекст ответов.

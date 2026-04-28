@@ -20,7 +20,7 @@ summary: 了解如何使用工作负载身份配置 gcs。
         ></path>
       </svg>
     </button></h1><p>本主题介绍如何在使用 Helm 安装 Milvus 时，通过工作负载身份配置 gcs 访问。 更多详情，请参阅<a href="https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity">工作负载身份</a>。</p>
-<h2 id="Before-you-start" class="common-anchor-header">开始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+<h2 id="Before-you-start" class="common-anchor-header">开始前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,7 +57,7 @@ summary: 了解如何使用工作负载身份配置 gcs。
 <pre><code translate="no" class="language-bash">gcloud storage buckets create gs://milvus-testing-nonprod --project=milvus-testing-nonprod --default-storage-class=STANDARD --location=us-west1 --uniform-bucket-level-access
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>为应用程序创建一个 Kubernetes 服务账户。</li>
+<li>为您的应用程序创建一个 Kubernetes 服务账户。</li>
 </ul>
 <pre><code translate="no" class="language-bash">kubectl create serviceaccount milvus-gcs-access-sa
 <button class="copy-code-btn"></button></code></pre>

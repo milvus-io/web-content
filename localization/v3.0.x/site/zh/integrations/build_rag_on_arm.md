@@ -299,7 +299,7 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
 <pre><code translate="no">'main: server is listening on 127.0.0.1:8080 - starting the main loop
 </code></pre>
 <p>您还可以调整已启动 LLM 的参数，使其与服务器硬件相适应，从而获得理想的性能。有关更多参数信息，请参阅<code translate="no">llama-server --help</code> 命令。</p>
-<p>如果在执行此步骤时遇到困难，可参阅<a href="https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama-cpu/llama-chatbot/">官方文档</a>获取更多信息。</p>
+<p>如果您在执行此步骤时遇到困难，可参阅<a href="https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama-cpu/llama-chatbot/">官方文档</a>获取更多信息。</p>
 <p>您已经在基于 Arm 的 CPU 上启动了 LLM 服务。接下来，我们直接使用 OpenAI SDK 与服务交互。</p>
 <h2 id="Online-RAG" class="common-anchor-header">在线 RAG<button data-href="#Online-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -337,7 +337,7 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
 
 llm_client = OpenAI(base_url=<span class="hljs-string">&quot;http://localhost:8080/v1&quot;</span>, api_key=<span class="hljs-string">&quot;no-key&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>生成测试 Embeddings 并打印其尺寸和前几个元素。</p>
+<p>生成一个测试 Embeddings 并打印其尺寸和前几个元素。</p>
 <pre><code translate="no" class="language-python">test_embedding = embedding_model.embed_query(<span class="hljs-string">&quot;This is a test&quot;</span>)
 embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <span class="hljs-built_in">print</span>(embedding_dim)

@@ -97,7 +97,7 @@ Loaded 74 passages and 13 documents from memgpt_research_paper
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">reminder: `memgpt run --persona memgpt_doc` will create a new MemGPT agent using the `memgpt_doc` persona</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">memgpt run --persona memgpt_doc</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Una volta che avremo chattato con l'agente, potremo "attaccare" l'origine dati alla memoria di archiviazione dell'agente:</p>
+<p>Una volta che abbiamo chattato con l'agente, possiamo "attaccare" la fonte di dati alla memoria di archiviazione dell'agente:</p>
 <pre><code translate="no" class="language-text">? Would you like to select an existing agent? No
 
 🧬 Creating new agent...

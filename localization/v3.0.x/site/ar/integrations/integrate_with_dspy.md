@@ -37,7 +37,7 @@ title: دمج ميلفوس مع DSPy
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يُعدّ DSPy، الذي قدمته مجموعة ستانفورد للبرمجة اللغوية العصبية (NLP)، إطار عمل برمجي رائد مصمم لتحسين المطالبات والأوزان داخل النماذج اللغوية، وهو ذو قيمة خاصة في السيناريوهات التي يتم فيها دمج نماذج لغوية كبيرة (LLMs) عبر مراحل متعددة من خط الأنابيب. على عكس تقنيات هندسة المطالبة التقليدية التي تعتمد على الصياغة اليدوية والتعديل، تتبنى DSPy نهجًا قائمًا على التعلم. ومن خلال استيعاب أمثلة الأسئلة والأجوبة، يقوم DSPy بإنشاء مطالبات محسّنة ديناميكيًا ومصممة خصيصًا لمهام محددة. تتيح هذه المنهجية المبتكرة إعادة التجميع السلس لخطوط الأنابيب بأكملها، مما يلغي الحاجة إلى إجراء تعديلات يدوية مستمرة على المطالبات. يوفر بناء الجملة البيثوني في DSPy العديد من الوحدات القابلة للتركيب والتعريف، مما يبسط من تعليمات LLMs.</p>
+    </button></h2><p>يُعدّ DSPy، الذي قدمته مجموعة ستانفورد للبرمجة اللغوية العصبية (NLP)، إطار عمل برمجي رائد مصمم لتحسين المطالبات والأوزان داخل النماذج اللغوية، وهو ذو قيمة خاصة في السيناريوهات التي يتم فيها دمج نماذج لغوية كبيرة (LLMs) عبر مراحل متعددة من خط الأنابيب. على عكس تقنيات هندسة المطالبة التقليدية التي تعتمد على الصياغة اليدوية والتعديل، تتبنى DSPy نهجًا قائمًا على التعلم. ومن خلال استيعاب أمثلة الأسئلة والأجوبة، يقوم DSPy بإنشاء مطالبات محسّنة ديناميكيًا ومصممة خصيصًا لمهام محددة. تُمكِّن هذه المنهجية المبتكرة من إعادة التجميع السلس لخطوط الأنابيب بالكامل، مما يلغي الحاجة إلى تعديلات يدوية مستمرة للمطالبات. يوفر بناء الجملة البيثوني في DSPy العديد من الوحدات القابلة للتركيب والتعريف، مما يبسط تعليمات LLMs.</p>
 <h2 id="Benefits-of-using-DSPy" class="common-anchor-header">فوائد استخدام DSPy<button data-href="#Benefits-of-using-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,7 +56,7 @@ title: دمج ميلفوس مع DSPy
     </button></h2><ul>
 <li>نهج البرمجة: يوفر DSPy نهج برمجة منهجي لتطوير خطوط أنابيب LLM من خلال تجريد خطوط الأنابيب كرسوم بيانية لتحويل النصوص بدلاً من مجرد المطالبة فقط بآليات LLM. تتيح وحداته التوضيحية تصميمًا منظمًا وتحسينًا منظمًا، لتحل محل طريقة التجربة والخطأ في قوالب المطالبة التقليدية.</li>
 <li>تحسين الأداء: يُظهر DSPy مكاسب كبيرة في الأداء مقارنةً بالطرق الحالية. ومن خلال دراسات الحالة، يتفوق على نماذج المطالبة القياسية والعروض التوضيحية التي أنشأها الخبراء، مما يُظهر تعدد استخداماته وفعاليته حتى عند تجميعها في نماذج LM أصغر.</li>
-<li>التجريد المعياري: يُلخص DSPy بفعالية الجوانب المعقدة لتطوير خط أنابيب إدارة التعلم الآلي بشكل فعال، مثل التحلل والضبط الدقيق واختيار النموذج. وباستخدام DSPy، يمكن ترجمة برنامج موجز بسلاسة إلى تعليمات لنماذج مختلفة، مثل GPT-4 أو Llama2-13b أو T5-base، مما يسهل عملية التطوير ويعزز الأداء.</li>
+<li>التجريد المعياري: يُلخص DSPy بفعالية الجوانب المعقدة لتطوير خط أنابيب LM، مثل التحلل والضبط الدقيق واختيار النموذج. وباستخدام DSPy، يمكن ترجمة برنامج موجز بسلاسة إلى تعليمات لنماذج مختلفة، مثل GPT-4 أو Llama2-13b أو T5-base، مما يسهل عملية التطوير ويعزز الأداء.</li>
 </ul>
 <h2 id="Modules" class="common-anchor-header">الوحدات النمطية<button data-href="#Modules" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,7 +76,7 @@ title: دمج ميلفوس مع DSPy
     </button></h2><p>هناك العديد من المكونات التي تساهم في بناء خط أنابيب LLM. سنقوم هنا بوصف بعض المكونات الرئيسية لتوفير فهم عالي المستوى لكيفية عمل DSPy.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
    </span> <span class="img-wrapper"> <span>وحدات DSPy</span> </span></p>
 <p>التوقيع: تعمل التواقيع في DSPy كمواصفات تعريفية، تحدد سلوك المدخلات/المخرجات للوحدات النمطية، وتوجه نموذج اللغة في تنفيذ المهام. الوحدة النمطية: تعمل وحدات DSPy كمكونات أساسية للبرامج التي تستفيد من نماذج اللغة (LMs). فهي تستخلص تقنيات التوجيه المختلفة، مثل سلسلة الأفكار أو ReAct، وهي قابلة للتكيف للتعامل مع أي توقيع DSPy. وبفضل المعلمات القابلة للتعلم والقدرة على معالجة المدخلات وإنتاج المخرجات، يمكن دمج هذه الوحدات لتشكيل برامج أكبر، مستوحاة من وحدات الشبكة العصبية في PyTorch ولكنها مصممة خصيصًا لتطبيقات LM. المُحسِّن: تعمل المحسّنات في DSPy على ضبط معلمات برامج DSPy، مثل المطالبات وأوزان LLM، لزيادة المقاييس المحددة مثل الدقة إلى أقصى حد، مما يعزز كفاءة البرنامج.</p>
 <h2 id="Why-Milvus-in-DSPy" class="common-anchor-header">لماذا ميلفوس في DSPy<button data-href="#Why-Milvus-in-DSPy" class="anchor-icon" translate="no">
@@ -111,13 +111,43 @@ title: دمج ميلفوس مع DSPy
         ></path>
       </svg>
     </button></h2><p>والآن، لنستعرض مثالاً سريعًا لتوضيح كيفية الاستفادة من Milvus في DSPy لتحسين تطبيق RAG.</p>
-<h3 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية</h3><p>قبل إنشاء تطبيق RAG، قم بتثبيت DSPy و PyMilvus.</p>
+<h3 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قبل إنشاء تطبيق RAG، قم بتثبيت DSPy و PyMilvus.</p>
 <pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;dspy-ai[milvus]&quot;</span>
 $ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى **إعادة تشغيل وقت التشغيل** (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</div>
-<h3 id="Loading-the-dataset" class="common-anchor-header">تحميل مجموعة البيانات</h3><p>في هذا المثال، نستخدم HotPotQA، وهي مجموعة من أزواج الأسئلة والأجوبة المعقدة، كمجموعة بيانات التدريب الخاصة بنا. يمكننا تحميلها من خلال فئة HotPotQA.</p>
+<h3 id="Loading-the-dataset" class="common-anchor-header">تحميل مجموعة البيانات<button data-href="#Loading-the-dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في هذا المثال، نستخدم HotPotQA، وهي مجموعة من أزواج الأسئلة والأجوبة المعقدة، كمجموعة بيانات التدريب الخاصة بنا. يمكننا تحميلها من خلال فئة HotPotQA.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.datasets <span class="hljs-keyword">import</span> HotPotQA
 
 <span class="hljs-comment"># Load the dataset.</span>
@@ -129,7 +159,22 @@ dataset = HotPotQA(
 trainset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.train]
 devset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.dev]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">إدخال البيانات في قاعدة بيانات ميلفوس المتجهة</h3><p>أدخل معلومات السياق في مجموعة Milvus لاسترجاع المتجهات. يجب أن تحتوي هذه المجموعة على حقل <code translate="no">embedding</code> وحقل <code translate="no">text</code>. نستخدم نموذج OpenAI <code translate="no">text-embedding-3-small</code> الخاص بـ OpenAI كوظيفة تضمين الاستعلام الافتراضية في هذه الحالة.</p>
+<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">إدخال البيانات في قاعدة بيانات ميلفوس المتجهة<button data-href="#Ingest-data-into-the-Milvus-vector-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>أدخل معلومات السياق في مجموعة Milvus لاسترجاع المتجهات. يجب أن تحتوي هذه المجموعة على حقل <code translate="no">embedding</code> وحقل <code translate="no">text</code>. نستخدم نموذج OpenAI <code translate="no">text-embedding-3-small</code> الخاص بـ OpenAI كوظيفة تضمين الاستعلام الافتراضية في هذه الحالة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> os
 
@@ -172,7 +217,22 @@ text = requests.get(
         ],
     )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-MilvusRM" class="common-anchor-header">تعريف MilvusRM.</h3><p>الآن، تحتاج إلى تعريف MilvusRM.</p>
+<h3 id="Define-MilvusRM" class="common-anchor-header">تعريف MilvusRM.<button data-href="#Define-MilvusRM" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>الآن، تحتاج إلى تعريف MilvusRM.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.retrieve.milvus_rm <span class="hljs-keyword">import</span> MilvusRM
 <span class="hljs-keyword">import</span> dspy
 
@@ -185,7 +245,22 @@ retriever_model = MilvusRM(
 turbo = dspy.OpenAI(model=<span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>)
 dspy.settings.configure(lm=turbo)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Building-signatures" class="common-anchor-header">بناء التواقيع</h3><p>الآن بعد أن قمنا بتحميل البيانات، دعنا نبدأ في تحديد التواقيع للمهام الفرعية لخط الأنابيب الخاص بنا. يمكننا تحديد المدخلات البسيطة <code translate="no">question</code> والمخرجات <code translate="no">answer</code> ، ولكن بما أننا نبني خط أنابيب RAG، سنقوم باسترداد المعلومات السياقية من Milvus. لذلك دعونا نحدد توقيعنا على أنه <code translate="no">context, question --&gt; answer</code>.</p>
+<h3 id="Building-signatures" class="common-anchor-header">بناء التواقيع<button data-href="#Building-signatures" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>الآن بعد أن قمنا بتحميل البيانات، دعنا نبدأ في تحديد التواقيع للمهام الفرعية لخط الأنابيب الخاص بنا. يمكننا تحديد المدخلات البسيطة <code translate="no">question</code> والمخرجات <code translate="no">answer</code> ، ولكن بما أننا نبني خط أنابيب RAG، سنقوم باسترداد المعلومات السياقية من Milvus. لذلك دعونا نحدد توقيعنا على أنه <code translate="no">context, question --&gt; answer</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">GenerateAnswer</span>(dspy.Signature):
     <span class="hljs-string">&quot;&quot;&quot;Answer questions with short factoid answers.&quot;&quot;&quot;</span>
 
@@ -193,8 +268,23 @@ dspy.settings.configure(lm=turbo)
     question = dspy.InputField()
     answer = dspy.OutputField(desc=<span class="hljs-string">&quot;often between 1 and 5 words&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>نقوم بتضمين أوصاف قصيرة للحقول <code translate="no">context</code> و <code translate="no">answer</code> لتحديد إرشادات أوضح حول ما سيتلقاه النموذج وما يجب أن يولده.</p>
-<h3 id="Building-the-pipeline" class="common-anchor-header">بناء خط الأنابيب</h3><p>الآن، دعونا نحدد خط أنابيب RAG.</p>
+<p>نقوم بتضمين أوصاف قصيرة للحقلين <code translate="no">context</code> و <code translate="no">answer</code> لتحديد إرشادات أوضح حول ما سيتلقاه النموذج وما يجب أن يولده.</p>
+<h3 id="Building-the-pipeline" class="common-anchor-header">بناء خط الأنابيب<button data-href="#Building-the-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>الآن، دعونا نحدد خط أنابيب RAG.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">RAG</span>(dspy.Module):
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, rm</span>):
         <span class="hljs-built_in">super</span>().__init__()
@@ -212,7 +302,22 @@ dspy.settings.configure(lm=turbo)
             context=[item.long_text <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> context], answer=prediction.answer
         )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Executing-the-pipeline-and-getting-the-results" class="common-anchor-header">تنفيذ خط الأنابيب والحصول على النتائج</h3><p>الآن، قمنا ببناء خط أنابيب RAG. لنجربه ونحصل على النتائج.</p>
+<h3 id="Executing-the-pipeline-and-getting-the-results" class="common-anchor-header">تنفيذ خط الأنابيب والحصول على النتائج<button data-href="#Executing-the-pipeline-and-getting-the-results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>الآن، قمنا ببناء خط أنابيب RAG. لنجربه ونحصل على النتائج.</p>
 <pre><code translate="no" class="language-python">rag = RAG(retriever_model)
 <span class="hljs-built_in">print</span>(rag(<span class="hljs-string">&quot;who write At My Window&quot;</span>).answer)
 <button class="copy-code-btn"></button></code></pre>
@@ -230,7 +335,22 @@ metric = dspy.evaluate.answer_exact_match
 score = evaluate_on_hotpotqa(rag, metric=metric)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;rag:&quot;</span>, score)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optimizing-the-pipeline" class="common-anchor-header">تحسين خط الأنابيب</h3><p>بعد تحديد هذا البرنامج، الخطوة التالية هي التجميع. تقوم هذه العملية بتحديث المعلمات داخل كل وحدة نمطية لتحسين الأداء. تعتمد عملية التجميع على ثلاثة عوامل حاسمة:</p>
+<h3 id="Optimizing-the-pipeline" class="common-anchor-header">تحسين خط الأنابيب<button data-href="#Optimizing-the-pipeline" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد تحديد هذا البرنامج، الخطوة التالية هي التجميع. تقوم هذه العملية بتحديث المعلمات داخل كل وحدة نمطية لتحسين الأداء. تعتمد عملية التجميع على ثلاثة عوامل حاسمة:</p>
 <ul>
 <li>مجموعة التدريب: سنستخدم أمثلة الأسئلة والأجوبة الـ 20 من مجموعة بيانات التدريب لهذا العرض التوضيحي.</li>
 <li>مقياس التحقق من الصحة: سنقوم بإنشاء مقياس <code translate="no">validate_context_and_answer</code> بسيط. يتحقق هذا المقياس من دقة الإجابة المتوقعة ويضمن أن السياق المسترجع يتضمن الإجابة.</li>
