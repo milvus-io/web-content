@@ -164,6 +164,44 @@ beta: Milvus 2.6.x
 <li>With <code translate="no">minio</code>, Woodpecker shares the same object storage with Milvus (MinIO/S3/GCS/OSS, etc.).</li>
 <li>With <code translate="no">local</code>, a single‑node local disk is only suitable for Standalone. If all pods can access a shared file system (e.g., NFS), Cluster mode can also use <code translate="no">local</code>.</li>
 </ul>
+<h2 id="Object-storage-compatibility-for-storagetypeminio" class="common-anchor-header">Object storage compatibility for <code translate="no">storage.type=minio</code><button data-href="#Object-storage-compatibility-for-storagetypeminio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>The following matrix summarizes the currently known compatibility of object storage backends when Woodpecker is configured with <code translate="no">storage.type=minio</code>. This information is based on <a href="https://github.com/zilliztech/woodpecker/discussions/150">GitHub Discussion #150</a>.</p>
+<table>
+<thead>
+<tr><th>Provider / service</th><th>Status</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Azure Blob Storage</td><td>Supported</td><td>Uses the native Azure SDK.</td></tr>
+<tr><td>AWS S3</td><td>Supported</td><td>Native S3 with full Conditional Write support.</td></tr>
+<tr><td>MinIO (<code translate="no">&gt;= 2024-12</code>)</td><td>Supported</td><td>Full S3 Conditional Write support.</td></tr>
+<tr><td>Aliyun OSS</td><td>Supported</td><td>Supported through its S3-compatible interface.</td></tr>
+<tr><td>Tencent COS</td><td>Supported</td><td>Supported through its S3-compatible interface.</td></tr>
+<tr><td>Google Cloud Storage (GCS)</td><td>Supported</td><td>Supported through S3 interoperability mode.</td></tr>
+<tr><td>Huawei Cloud OBS</td><td>Unsupported</td><td>Lacks the required Conditional Write semantics.</td></tr>
+<tr><td>VAST Data</td><td>Supported</td><td>Verified by the community; works with non-versioned buckets only.</td></tr>
+<tr><td>Other S3-compatible storage</td><td>Partial</td><td>Depends on full support for S3 Conditional Write semantics.</td></tr>
+</tbody>
+</table>
+<p>Notes:</p>
+<ul>
+<li>Compatibility depends on native SDK support or support for S3 Conditional Write semantics.</li>
+<li>If you self-host MinIO for Woodpecker, use <code translate="no">RELEASE.2024-12-18T13-15-44Z</code> or later.</li>
+<li>This matrix reflects <a href="https://github.com/zilliztech/woodpecker/discussions/150">the current discussion</a> and may evolve as backend support is validated further.</li>
+</ul>
 <h2 id="Deployment-guides" class="common-anchor-header">Deployment guides<button data-href="#Deployment-guides" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
