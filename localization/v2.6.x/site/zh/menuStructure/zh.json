@@ -1389,7 +1389,7 @@
         "children": []
       },
       {
-        "label": "克劳德代码 MCP 服务器",
+        "label": "Claude Code MCP 服务器",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
