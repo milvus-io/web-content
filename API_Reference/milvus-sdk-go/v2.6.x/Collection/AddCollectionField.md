@@ -20,7 +20,7 @@ err := client.AddCollectionField(ctx, option)
 
     The name of the target collection.
 
-- **field** (**[entity.Field](Field.md)*)
+- **[field](https://zilliverse.feishu.cn/docx/DPcJdZceFoes0sxeRVKcKhaunq9)** (**[entity.Field](Field.md)*)
 
     The field.
 
@@ -52,10 +52,8 @@ import (
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "127.0.0.1:19530"
-
 cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-	Address: milvusAddr,
+	Address: "localhost:19530",
 })
 if err != nil {
 	log.Fatal("failed to connect to milvus server: ", err.Error())

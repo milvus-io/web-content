@@ -22,7 +22,7 @@ result, err := client.DescribeCollection(ctx, option)
 
 **RETURN TYPE:**
 
-*collection* entity.Collection, err error*
+*[collection* ](https://zilliverse.feishu.cn/docx/PNwFdxMMdo6rtIxERDHcVFgdnxc)entity.Collection, err error*
 
 **RETURNS:**
 

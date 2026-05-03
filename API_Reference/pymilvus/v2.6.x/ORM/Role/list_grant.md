@@ -20,7 +20,7 @@ list_grant(
 
     The type of the object to grant the privilege.
 
-    The value is case-sensitive, and possible options are **Collection**, **Global**, and **User**. For details, refer to [Users & Roles](https://milvus.io/docs/users_and_roles.md).
+    The value is case-sensitive, and possible options are **[Collection](../Collection/Collection.md)**, **Global**, and **User**. For details, refer to [Users & Roles](https://milvus.io/docs/users_and_roles.md).
 
 - **object_name** (*str*)
 

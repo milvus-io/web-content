@@ -32,17 +32,68 @@ await milvusClient.listImportTasks({
 
     RPC timeout in milliseconds. Optional.
 
-**RETURNS:**
+**RETURNS** *Promise<ListImportTasksResponse>*
 
-*Promise\<ListImportTasksResponse\>*
+This method returns a promise that resolves to a **ListImportTasksResponse** object.
 
-The response contains a `tasks` array with import task details including state, row count, and IDs.
+```javascript
+{
+    tasks: GetImportStateResponse[],
+    status:  ResStatus
+}
+```
 
-**EXCEPTIONS:**
+**PARAMETERS:**
 
-- **MilvusError**
+- **tasks** (*GetImportStateResponse[]*) -
+A list of import-task descriptors. Each entry carries the task's state, row count, segment IDs, and creation timestamp.
 
-    This exception will be raised when any error occurs during this operation.
+    - **state** (*ImportState*) -
+
+        The task state. Possible values are **ImportPending**, **ImportFailed**, **ImportStarted**, **ImportPersisted**, **ImportCompleted**, and **ImportFailedAndCleaned**.
+
+    - **row_count** (*number*) -
+
+        The number of rows imported by the task.
+
+    - **id_list** (*number[]*) -
+
+        The auto-generated primary keys assigned to imported rows, when available.
+
+    - **infos** (*KeyValuePair[]*) -
+
+        Diagnostic key-value pairs (for example, **failed_reason**).
+
+    - **id** (*number*) -
+
+        The task identifier.
+
+    - **collection_id** (*number*) -
+
+        The collection that received the import.
+
+    - **segment_ids** (*number[]*) -
+
+        The segment IDs produced by the task.
+
+    - **create_ts** (*number*) -
+
+        The creation timestamp of the task.
+
+- **ResStatus**
+A **ResStatus** object.
+
+    - **code** (*number*) -
+
+        A code that indicates the operation result. It remains **0** if this operation succeeds.
+
+    - **error_code** (*string* | *number*) -
+
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
+
+    - **reason** (*string*) -
+
+        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
 ## Example
 

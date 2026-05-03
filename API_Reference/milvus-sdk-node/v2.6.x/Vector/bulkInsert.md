@@ -53,28 +53,24 @@ await milvusClient.bulkInsert({
 
 *Promise*<*ImportResponse*>
 
-**RETURNS:**
+**RETURNS** *Promise<ImportResponse>*
 
-This method returns a promise that resolves to an **ImportResponse** object.
+This method returns a promise that resolves to a **ImportResponse** object.
 
 ```javascript
 {
     tasks: number[],
-    status: {
-        code: number,
-        error_code: string | number,
-        reason: string
-    }
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
-- **tasks** (*number*) -
+- **tasks** (*number[]*) -
+The identifiers of the asynchronous import tasks dispatched to the data nodes. Pass these values to `listImportTasks()` to poll for completion.
 
-    The IDs of all the import tasks created.
-
-- **status** (*ResStatus*) 
+- **ResStatus**
+A **ResStatus** object.
 
     - **code** (*number*) -
 
@@ -82,11 +78,11 @@ This method returns a promise that resolves to an **ImportResponse** object.
 
     - **error_code** (*string* | *number*) -
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
-        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds. 
+        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
 ## Examples
 

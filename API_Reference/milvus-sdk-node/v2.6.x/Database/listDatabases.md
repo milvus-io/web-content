@@ -22,30 +22,32 @@ await milvusClient.listDatabases({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |<ListDatabaseResponse>*
+**RETURNS** *Promise<ListDatabasesResponse>*
 
-This method returns a promise that resolves to a **ListDatabaseResponse** object.
+This method returns a promise that resolves to a **ListDatabasesResponse** object.
 
 ```javascript
 {
     db_names: string[],
-    status: {
-        code: number,
-        error_code: string | number,
-        reason: string
-    }
+    db_ids: string[],
+    created_timestamp: string[],
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
 - **db_names** (*string[]*) -
+A list of database names defined in the current Milvus instance.
 
-    A list of database names.
+- **db_ids** (*string[]*) -
+The internal database identifiers, in the same order as **db_names**.
 
-- **status** (**ResStatus**) -
+- **created_timestamp** (*string[]*) -
+The creation timestamps of the databases, in the same order as **db_names**.
 
-    The operation status.
+- **ResStatus**
+A **ResStatus** object.
 
     - **code** (*number*) -
 
@@ -53,9 +55,9 @@ This method returns a promise that resolves to a **ListDatabaseResponse** object
 
     - **error_code** (*string* | *number*) -
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 

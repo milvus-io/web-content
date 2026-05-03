@@ -91,5 +91,8 @@ const milvusClient = new MilvusClient({
     address: 'localhost:19530',
     token: 'root:Milvus',
 });
-const resStatus = await milvusClient.createDatabase({ db_name: 'new_db' });
+const resStatus = await milvusClient.createDatabase({
+    db_name: 'new_db',
+    properties: { 'database.resource_groups': 'rg1' },
+});
 ```

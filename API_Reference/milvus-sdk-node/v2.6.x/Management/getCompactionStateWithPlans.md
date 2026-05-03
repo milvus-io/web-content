@@ -27,17 +27,48 @@ await milvusClient.getCompactionStateWithPlans({
 
     RPC timeout in milliseconds. Optional.
 
-**RETURNS:**
+**RETURNS** *Promise<GetCompactionPlansResponse>*
 
-*Promise\<GetCompactionPlansResponse\>*
+This method returns a promise that resolves to a **GetCompactionPlansResponse** object.
 
-The response contains the compaction `state` and `mergeInfos` array with source and target segment details.
+```javascript
+{
+    state: CompactionState,
+    mergeInfos: { sources: string[], target: string }[],
+    status:  ResStatus
+}
+```
 
-**EXCEPTIONS:**
+**PARAMETERS:**
 
-- **MilvusError**
+- **state** (*CompactionState*) -
+The aggregate state of the compaction. Possible values are **UndefiedState**, **Executing**, and **Completed**.
 
-    This exception will be raised when any error occurs during this operation.
+- **mergeInfos** (*{ sources: string[], target: string }[]*) -
+A list of merge plans dispatched by the compaction.
+
+    - **sources** (*string[]*) -
+
+        The segment IDs being merged.
+
+    - **target** (*string*) -
+
+        The new segment ID produced by the merge.
+
+- **ResStatus**
+A **ResStatus** object.
+
+    - **code** (*number*) -
+
+        A code that indicates the operation result. It remains **0** if this operation succeeds.
+
+    - **error_code** (*string* | *number*) -
+
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
+
+    - **reason** (*string*) -
+
+        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
 ## Example
 

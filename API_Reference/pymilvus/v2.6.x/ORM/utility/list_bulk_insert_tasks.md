@@ -42,7 +42,7 @@ list_bulk_insert_tasks(
 *list*
 
 **RETURNS:**
-A list of **BulkInsertState** objects.
+A list of **[BulkInsertState](BulkInsertState.md)** objects.
 
 ```python
 ├── BulkInsertState
@@ -122,11 +122,11 @@ A list of **BulkInsertState** objects.
 
         The names of the files involved in the current bulk-insert task in a comma-separated string.
 
-    - **collection** (*str*)
+    - **[collection](../Collection/Collection.md)** (*str*)
 
         The name of the target collection.
 
-    - **partition** (*str*)
+    - **[partition](../Partition/Partition.md)** (*str*)
 
         The name of the target partition.
 

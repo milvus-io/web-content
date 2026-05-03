@@ -29,62 +29,108 @@ await milvusClient.describeResourceGroup({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |<DescribeResourceGroupResponse>*
+**RETURNS** *Promise<DescribeResourceGroupResponse>*
 
 This method returns a promise that resolves to a **DescribeResourceGroupResponse** object.
 
 ```javascript
 {
-    code: number
-    error_code: string | number,
-    reason: string,
-    resource_group: {
-        capacity: number,
-        num_available_node: number,
-        num_loaded_replica: { [key: string]: number },
-        num_outgoing_node: { [key: string]: number },
-        num_incoming_node: { [key: string]: number }
-    }
+    resource_group: ResourceGroup,
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
-- **code** (*number*) -
+- **resource_group** (*ResourceGroup*) -
+The resource group descriptor.
 
-    A code that indicates the operation result. It remains **0** if this operation succeeds.
+    - **name** (*string*) -
 
-- **error_code** (*string* | *number*) -
-
-    An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
-
-- **reason** (*string*) - 
-
-    The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
-
-- **resource_group** (*Object*) -
-
-    An object that provides detailed information about the specified resource group.
+        The resource group name.
 
     - **capacity** (*number*) -
 
-        The number of query nodes that have been transferred to this resource group.
+        The maximum number of nodes the group can hold.
 
-    - **num_available_replica** (*Object*) -
+    - **num_available_node** (*number*) -
 
-        An object that contains collection-specific statistics on the number of available replicas, with the collection names as the keys and their numbers of replicas as the values.
+        The number of nodes currently available in the group.
 
-    - **num_outgoing_node**: (*Object*) -
+    - **num_loaded_replica** (*Record<string, number>*) -
 
-        An object that contains collection-specific statistics on the number of outgoing nodes accessed by the replicas loaded in this resource group, with the collection names as the keys and their numbers of outgoing nodes as the values.
+        A mapping from collection name to the number of replicas this group serves for that collection.
 
-    - **num_incoming_node**: (*Object*) -
+    - **num_outgoing_node** (*Record<string, number>*) -
 
-        An object that contains collection-specific statistics on the number of incoming nodes accessed by the replicas loaded in this resource group, with the collection names as the keys and their numbers of incoming nodes as the values.
+        A mapping from resource group name to the number of nodes this group is sending out during rebalancing.
+
+    - **num_incoming_node** (*Record<string, number>*) -
+
+        A mapping from resource group name to the number of nodes this group is receiving during rebalancing.
 
     - **config** (*ResourceGroupConfig*) -
 
-        The configurations of the specified resource group in a [ResourceGroupConfig](ResourceGroupConfig.md) instance.
+        The capacity, transfer policy, and node-filter configuration of the group.
+
+        - **requests** (*{ node_num: number }*) -
+
+        The minimum number of nodes the group must have. Missing nodes are pulled from groups listed in **transfer_from**.
+
+        - **limits** (*{ node_num: number }*) -
+
+        The maximum number of nodes the group can hold. Excess nodes are pushed to groups listed in **transfer_to**.
+
+        - **transfer_from** (*{ resource_group: string }[]*) -
+
+        Source groups, in priority order, from which to pull missing nodes.
+
+        - **transfer_to** (*{ resource_group: string }[]*) -
+
+        Target groups, in priority order, to which excess nodes are pushed.
+
+        - **node_filter** (*{ node_labels: KeyValuePair[] }*) -
+
+        Required node labels; only nodes that match all labels are admitted to the group.
+
+        - **requests** (*{ node_num: number }*) -
+
+            The minimum number of nodes the group must have. Missing nodes are pulled from groups listed in **transfer_from**.
+
+        - **limits** (*{ node_num: number }*) -
+
+            The maximum number of nodes the group can hold. Excess nodes are pushed to groups listed in **transfer_to**.
+
+        - **transfer_from** (*{ resource_group: string }[]*) -
+
+            Source groups, in priority order, from which to pull missing nodes.
+
+        - **transfer_to** (*{ resource_group: string }[]*) -
+
+            Target groups, in priority order, to which excess nodes are pushed.
+
+        - **node_filter** (*{ node_labels: KeyValuePair[] }*) -
+
+            Required node labels; only nodes that match all labels are admitted to the group.
+
+    - **nodes** (*NodeInfo[]*) -
+
+        Optional. The current member nodes of the group, with their IDs, addresses, and hostnames.
+
+- **ResStatus**
+A **ResStatus** object.
+
+    - **code** (*number*) -
+
+        A code that indicates the operation result. It remains **0** if this operation succeeds.
+
+    - **error_code** (*string* | *number*) -
+
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
+
+    - **reason** (*string*) -
+
+        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
 ## Example
 
