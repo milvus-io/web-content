@@ -164,6 +164,44 @@ beta: Milvus 2.6.x
 <li>Con <code translate="no">minio</code>, Woodpecker condivide lo stesso storage di oggetti con Milvus (MinIO/S3/GCS/OSS, ecc.).</li>
 <li>Con <code translate="no">local</code>, un disco locale a singolo nodo è adatto solo per Standalone. Se tutti i pod possono accedere a un file system condiviso (ad esempio, NFS), la modalità Cluster può utilizzare anche <code translate="no">local</code>.</li>
 </ul>
+<h2 id="Object-storage-compatibility-for-storagetypeminio" class="common-anchor-header">Compatibilità dello storage a oggetti per <code translate="no">storage.type=minio</code><button data-href="#Object-storage-compatibility-for-storagetypeminio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>La seguente matrice riassume la compatibilità attualmente nota dei backend di object storage quando Woodpecker è configurato con <code translate="no">storage.type=minio</code>. Queste informazioni si basano sulla <a href="https://github.com/zilliztech/woodpecker/discussions/150">discussione GitHub #150</a>.</p>
+<table>
+<thead>
+<tr><th>Fornitore / servizio</th><th>Stato</th><th>Note</th></tr>
+</thead>
+<tbody>
+<tr><td>Archiviazione Blob di Azure</td><td>Supportato</td><td>Utilizza l'SDK nativo di Azure.</td></tr>
+<tr><td>AWS S3</td><td>Supportato</td><td>S3 nativo con supporto completo per la scrittura condizionale.</td></tr>
+<tr><td>MinIO (<code translate="no">&gt;= 2024-12</code>)</td><td>Supportato</td><td>Supporto completo della scrittura condizionale S3.</td></tr>
+<tr><td>Aliyun OSS</td><td>Supportato</td><td>Supportato attraverso la sua interfaccia compatibile con S3.</td></tr>
+<tr><td>Tencent COS</td><td>Supportato</td><td>Supportato attraverso la sua interfaccia compatibile con S3.</td></tr>
+<tr><td>Google Cloud Storage (GCS)</td><td>Supportato</td><td>Supportato attraverso la modalità di interoperabilità S3.</td></tr>
+<tr><td>Huawei Cloud OBS</td><td>Non supportato</td><td>Manca della semantica di scrittura condizionale richiesta.</td></tr>
+<tr><td>Dati VAST</td><td>Supportato</td><td>Verificato dalla comunità; funziona solo con i bucket non aggiornati.</td></tr>
+<tr><td>Altri archivi compatibili con S3</td><td>Parziale</td><td>Dipende dal supporto completo della semantica S3 Conditional Write.</td></tr>
+</tbody>
+</table>
+<p>Note:</p>
+<ul>
+<li>La compatibilità dipende dal supporto nativo dell'SDK o dal supporto della semantica S3 Conditional Write.</li>
+<li>Se si autogestisce MinIO per Woodpecker, utilizzare <code translate="no">RELEASE.2024-12-18T13-15-44Z</code> o versioni successive.</li>
+<li>Questa matrice riflette la <a href="https://github.com/zilliztech/woodpecker/discussions/150">discussione in corso</a> e può evolvere man mano che il supporto del backend viene convalidato.</li>
+</ul>
 <h2 id="Deployment-guides" class="common-anchor-header">Guide alla distribuzione<button data-href="#Deployment-guides" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -194,7 +232,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Dopo aver installato <a href="/docs/it/install_cluster-milvusoperator.md">Milvus Operator</a>, avviare un cluster Milvus con Woodpecker abilitato usando l'esempio ufficiale:</p>
+    </button></h3><p>Dopo aver installato <a href="/docs/it/install_cluster-milvusoperator.md">Milvus Operator</a>, avviare un cluster Milvus con Woodpecker abilitato utilizzando l'esempio ufficiale:</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 
 <button class="copy-code-btn"></button></code></pre>

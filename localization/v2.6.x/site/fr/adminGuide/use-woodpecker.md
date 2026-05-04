@@ -164,6 +164,44 @@ beta: Milvus 2.6.x
 <li>Avec <code translate="no">minio</code>, Woodpecker partage le même stockage d'objets avec Milvus (MinIO/S3/GCS/OSS, etc.).</li>
 <li>Avec <code translate="no">local</code>, un disque local à un seul nœud n'est adapté qu'au mode autonome. Si tous les pods peuvent accéder à un système de fichiers partagé (par exemple, NFS), le mode Cluster peut également utiliser <code translate="no">local</code>.</li>
 </ul>
+<h2 id="Object-storage-compatibility-for-storagetypeminio" class="common-anchor-header">Compatibilité du stockage d'objets pour <code translate="no">storage.type=minio</code><button data-href="#Object-storage-compatibility-for-storagetypeminio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>La matrice suivante résume la compatibilité actuellement connue des backends de stockage d'objets lorsque Woodpecker est configuré avec <code translate="no">storage.type=minio</code>. Ces informations sont basées sur la <a href="https://github.com/zilliztech/woodpecker/discussions/150">discussion GitHub #150</a>.</p>
+<table>
+<thead>
+<tr><th>Fournisseur / service</th><th>Statut</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Azure Blob Storage</td><td>Pris en charge</td><td>Utilise le SDK natif d'Azure.</td></tr>
+<tr><td>AWS S3</td><td>Pris en charge</td><td>S3 natif avec prise en charge complète de l'écriture conditionnelle.</td></tr>
+<tr><td>MinIO (<code translate="no">&gt;= 2024-12</code>)</td><td>Pris en charge</td><td>Support complet de l'écriture conditionnelle S3.</td></tr>
+<tr><td>Aliyun OSS</td><td>Pris en charge</td><td>Pris en charge via son interface compatible S3.</td></tr>
+<tr><td>Tencent COS</td><td>Pris en charge</td><td>Pris en charge via son interface compatible S3.</td></tr>
+<tr><td>Google Cloud Storage (GCS)</td><td>Pris en charge</td><td>Pris en charge via le mode d'interopérabilité S3.</td></tr>
+<tr><td>Huawei Cloud OBS</td><td>Non pris en charge</td><td>Ne dispose pas de la sémantique d'écriture conditionnelle requise.</td></tr>
+<tr><td>VAST Data</td><td>Pris en charge</td><td>Vérifié par la communauté ; fonctionne avec des buckets non-versionnés uniquement.</td></tr>
+<tr><td>Autre stockage compatible S3</td><td>Partiel</td><td>Dépend de la prise en charge complète de la sémantique d'écriture conditionnelle de S3.</td></tr>
+</tbody>
+</table>
+<p>Remarques :</p>
+<ul>
+<li>La compatibilité dépend de la prise en charge native du SDK ou de la prise en charge de la sémantique d'écriture conditionnelle S3.</li>
+<li>Si vous hébergez vous-même MinIO pour Woodpecker, utilisez <code translate="no">RELEASE.2024-12-18T13-15-44Z</code> ou une version ultérieure.</li>
+<li>Cette matrice reflète la <a href="https://github.com/zilliztech/woodpecker/discussions/150">discussion actuelle</a> et peut évoluer au fur et à mesure que la prise en charge du backend est validée.</li>
+</ul>
 <h2 id="Deployment-guides" class="common-anchor-header">Guides de déploiement<button data-href="#Deployment-guides" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -194,7 +232,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Après avoir installé Milvus <a href="/docs/fr/install_cluster-milvusoperator.md">Operator</a>, démarrez un cluster Milvus avec Woodpecker activé à l'aide de l'exemple officiel :</p>
+    </button></h3><p>Après avoir installé l'<a href="/docs/fr/install_cluster-milvusoperator.md">opérateur Milvus</a>, démarrez un cluster Milvus avec Woodpecker activé à l'aide de l'exemple officiel :</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 
 <button class="copy-code-btn"></button></code></pre>
@@ -303,7 +341,7 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Suivre <a href="/docs/fr/install_standalone-docker-compose.md">Run Milvus with Docker Compose</a>. Exemple :</p>
+    </button></h3><p>Suivez <a href="/docs/fr/install_standalone-docker-compose.md">Run Milvus with Docker Compose</a>. Exemple :</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp-compose &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp-compose
 wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml
 <span class="hljs-comment"># By default, the Docker Compose standalone uses Woodpecker</span>
@@ -351,7 +389,7 @@ docker restart milvus-standalone
 </ul></li>
 <li>Côté client/application<ul>
 <li>Utiliser des lots plus importants et un plus grand nombre d'écrivains/clients simultanés.</li>
-<li>Contrôler la synchronisation de l'actualisation et de la constitution de l'index (mettre en lot avant de déclencher) afin d'éviter les petites écritures fréquentes.</li>
+<li>Contrôler la synchronisation de l'actualisation et de la constitution de l'index (mise en lot avant le déclenchement) afin d'éviter les petites écritures fréquentes.</li>
 </ul></li>
 </ul>
 <p>Démonstration d'insertion par lots</p>

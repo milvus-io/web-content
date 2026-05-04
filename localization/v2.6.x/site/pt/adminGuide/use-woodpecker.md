@@ -164,6 +164,44 @@ beta: Milvus 2.6.x
 <li>Com <code translate="no">minio</code>, o Woodpecker partilha o mesmo armazenamento de objectos com o Milvus (MinIO/S3/GCS/OSS, etc.).</li>
 <li>Com <code translate="no">local</code>, um disco local de nó único só é adequado para Standalone. Se todos os pods puderem acessar um sistema de arquivos compartilhado (por exemplo, NFS), o modo Cluster também poderá usar <code translate="no">local</code>.</li>
 </ul>
+<h2 id="Object-storage-compatibility-for-storagetypeminio" class="common-anchor-header">Compatibilidade de armazenamento de objectos para <code translate="no">storage.type=minio</code><button data-href="#Object-storage-compatibility-for-storagetypeminio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>A seguinte matriz resume a compatibilidade atualmente conhecida dos backends de armazenamento de objetos quando o Woodpecker está configurado com <code translate="no">storage.type=minio</code>. Essas informações são baseadas na <a href="https://github.com/zilliztech/woodpecker/discussions/150">Discussão #150 do GitHub</a>.</p>
+<table>
+<thead>
+<tr><th>Provedor / serviço</th><th>Status</th><th>Observações</th></tr>
+</thead>
+<tbody>
+<tr><td>Armazenamento de Blobs do Azure</td><td>Suportado</td><td>Usa o SDK nativo do Azure.</td></tr>
+<tr><td>AWS S3</td><td>Suportado</td><td>S3 nativo com suporte completo de escrita condicional.</td></tr>
+<tr><td>MinIO (<code translate="no">&gt;= 2024-12</code>)</td><td>Suportado</td><td>Suporte completo para escrita condicional no S3.</td></tr>
+<tr><td>Aliyun OSS</td><td>Suportado</td><td>Suportado através da sua interface compatível com S3.</td></tr>
+<tr><td>Tencent COS</td><td>Suportado</td><td>Suportado através da sua interface compatível com S3.</td></tr>
+<tr><td>Armazenamento em nuvem do Google (GCS)</td><td>Suportado</td><td>Suportado através do modo de interoperabilidade S3.</td></tr>
+<tr><td>OBS da Huawei Cloud</td><td>Não suportado</td><td>Não possui a semântica de escrita condicional necessária.</td></tr>
+<tr><td>Dados VAST</td><td>Suportado</td><td>Verificado pela comunidade; funciona apenas com buckets não versionados.</td></tr>
+<tr><td>Outro armazenamento compatível com S3</td><td>Parcial</td><td>Depende do suporte total à semântica de gravação condicional do S3.</td></tr>
+</tbody>
+</table>
+<p>Observações:</p>
+<ul>
+<li>A compatibilidade depende do suporte nativo ao SDK ou do suporte à semântica de gravação condicional do S3.</li>
+<li>Se você auto-hospedar o MinIO para o Woodpecker, use <code translate="no">RELEASE.2024-12-18T13-15-44Z</code> ou posterior.</li>
+<li>Esta matriz reflecte <a href="https://github.com/zilliztech/woodpecker/discussions/150">a discussão atual</a> e pode evoluir à medida que o suporte de backend é validado.</li>
+</ul>
 <h2 id="Deployment-guides" class="common-anchor-header">Guias de implantação<button data-href="#Deployment-guides" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -179,7 +217,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="common-anchor-header">Habilitar o Woodpecker para um Cluster Milvus no Kubernetes (Milvus Operator, storage=minio)<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="common-anchor-header">Habilitar o Woodpecker para um Cluster Milvus no Kubernetes (Operador Milvus, storage=minio)<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -198,7 +236,7 @@ beta: Milvus 2.6.x
 <pre><code translate="no" class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Este exemplo configura o Woodpecker como a fila de mensagens e ativa o nó de streaming. A primeira inicialização pode levar algum tempo para puxar imagens; espere até que todos os pods estejam prontos:</p>
+<p>Este exemplo configura o Woodpecker como a fila de mensagens e habilita o nó de streaming. A primeira inicialização pode levar algum tempo para puxar imagens; espere até que todos os pods estejam prontos:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 kubectl get milvus my-release -o yaml | grep -A2 status
 <button class="copy-code-btn"></button></code></pre>
@@ -346,7 +384,7 @@ docker restart milvus-standalone
 </ul></li>
 <li>Botões do Woodpecker<ul>
 <li>Aumente <code translate="no">logstore.segmentSyncPolicy.maxFlushSize</code> e <code translate="no">maxFlushThreads</code> para obter maiores descargas e maior paralelismo.</li>
-<li>Ajuste <code translate="no">maxInterval</code> de acordo com as caraterísticas da mídia (troque a latência pela taxa de transferência com agregação mais longa).</li>
+<li>Ajuste <code translate="no">maxInterval</code> de acordo com as caraterísticas do meio (troque a latência pela taxa de transferência com agregação mais longa).</li>
 <li>Para o armazenamento de objectos, considere aumentar <code translate="no">segmentRollingPolicy.maxSize</code> para reduzir as trocas de segmentos.</li>
 </ul></li>
 <li>Lado do cliente/aplicação<ul>

@@ -162,7 +162,45 @@ beta: Milvus 2.6.x
 <p>Примечания:</p>
 <ul>
 <li>При использовании <code translate="no">minio</code> Woodpecker разделяет с Milvus одно и то же хранилище объектов (MinIO/S3/GCS/OSS и т. д.).</li>
-<li>При использовании <code translate="no">local</code> локальный диск на одном узле подходит только для Standalone. Если все стручки могут получить доступ к общей файловой системе (например, NFS), в режиме кластера также можно использовать <code translate="no">local</code>.</li>
+<li>При использовании <code translate="no">local</code> локальный диск на одном узле подходит только для Standalone. Если все подсистемы могут получить доступ к общей файловой системе (например, NFS), в режиме кластера также можно использовать <code translate="no">local</code>.</li>
+</ul>
+<h2 id="Object-storage-compatibility-for-storagetypeminio" class="common-anchor-header">Совместимость объектных хранилищ для <code translate="no">storage.type=minio</code><button data-href="#Object-storage-compatibility-for-storagetypeminio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>В следующей матрице приведена известная на данный момент совместимость бэкендов объектных хранилищ, когда Woodpecker настроен на <code translate="no">storage.type=minio</code>. Эта информация основана на <a href="https://github.com/zilliztech/woodpecker/discussions/150">GitHub Discussion #150</a>.</p>
+<table>
+<thead>
+<tr><th>Провайдер / сервис</th><th>Статус</th><th>Примечания</th></tr>
+</thead>
+<tbody>
+<tr><td>Azure Blob Storage</td><td>Поддерживается</td><td>Используется собственный Azure SDK.</td></tr>
+<tr><td>AWS S3</td><td>Поддерживается</td><td>Родной S3 с полной поддержкой условной записи.</td></tr>
+<tr><td>MinIO (<code translate="no">&gt;= 2024-12</code>)</td><td>Поддерживается .</td><td>Полная поддержка условной записи в S3.</td></tr>
+<tr><td>Aliyun OSS</td><td>Поддерживается</td><td>Поддерживается через S3-совместимый интерфейс.</td></tr>
+<tr><td>Tencent COS</td><td>Поддерживается</td><td>Поддерживается через интерфейс, совместимый с S3.</td></tr>
+<tr><td>Облачное хранилище Google (GCS)</td><td>Поддерживается .</td><td>Поддерживается через режим совместимости с S3.</td></tr>
+<tr><td>Huawei Cloud OBS</td><td>Не поддерживается .</td><td>Отсутствует необходимая семантика условной записи.</td></tr>
+<tr><td>Данные VAST</td><td>Поддерживается</td><td>Проверено сообществом; работает только с неверсированными ведрами.</td></tr>
+<tr><td>Другие S3-совместимые хранилища</td><td>Частично</td><td>Зависит от полной поддержки семантики S3 Conditional Write.</td></tr>
+</tbody>
+</table>
+<p>Примечания:</p>
+<ul>
+<li>Совместимость зависит от нативной поддержки SDK или поддержки семантики S3 Conditional Write.</li>
+<li>Если вы самостоятельно устанавливаете MinIO для Woodpecker, используйте <code translate="no">RELEASE.2024-12-18T13-15-44Z</code> или более позднюю версию.</li>
+<li>Эта матрица отражает <a href="https://github.com/zilliztech/woodpecker/discussions/150">текущее обсуждение</a> и может меняться по мере подтверждения поддержки бэкенда.</li>
 </ul>
 <h2 id="Deployment-guides" class="common-anchor-header">Руководства по развертыванию<button data-href="#Deployment-guides" class="anchor-icon" translate="no">
       <svg translate="no"

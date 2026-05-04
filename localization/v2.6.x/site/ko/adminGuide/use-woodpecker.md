@@ -37,7 +37,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvus 2.6부터 추가된 Woodpecker는 로깅 서비스로서 정렬 쓰기 및 복구 기능을 제공하는 선택적 WAL입니다.</li>
+<li>Milvus 2.6부터 추가된 Woodpecker는 로깅 서비스로서 순서대로 쓰기 및 복구 기능을 제공하는 선택적 WAL입니다.</li>
 <li>메시지 큐 선택 사항으로, Pulsar/Kafka와 유사하게 작동하며 구성을 통해 활성화할 수 있습니다.</li>
 <li>로컬 파일 시스템(<code translate="no">local</code>)과 객체 스토리지(<code translate="no">minio</code>/S3 호환)의 두 가지 스토리지 백엔드가 지원됩니다.</li>
 </ul>
@@ -131,7 +131,7 @@ beta: Milvus 2.6.x
 <li><code translate="no">woodpecker.storage</code>
 <ul>
 <li><strong>유형</strong>: MinIO/S3 호환 개체 스토리지(MinIO/S3/GCS/OSS 등)의 경우 <code translate="no">minio</code>, 로컬/공유 파일 시스템의 경우 <code translate="no">local</code>.</li>
-<li><strong>rootPath</strong>: 스토리지 백엔드의 루트 경로( <code translate="no">local</code>, <code translate="no">minio</code> 의 경우 버킷/접두사에 따라 경로가 지정됨).</li>
+<li><strong>rootPath</strong>: 스토리지 백엔드의 루트 경로( <code translate="no">local</code> 에 유효, <code translate="no">minio</code> 의 경우 버킷/접두사로 경로가 지정됨).</li>
 </ul></li>
 </ul>
 <h2 id="Deployment-modes" class="common-anchor-header">배포 모드<button data-href="#Deployment-modes" class="anchor-icon" translate="no">
@@ -162,7 +162,45 @@ beta: Milvus 2.6.x
 <p>참고:</p>
 <ul>
 <li><code translate="no">minio</code> 를 사용하면 딱따구리는 Milvus와 동일한 오브젝트 스토리지를 공유합니다(MinIO/S3/GCS/OSS 등).</li>
-<li><code translate="no">local</code> 를 사용하면 단일 노드 로컬 디스크는 독립형에만 적합합니다. 모든 파드가 공유 파일 시스템(예: NFS)에 액세스할 수 있는 경우 클러스터 모드에서도 <code translate="no">local</code> 을 사용할 수 있다.</li>
+<li><code translate="no">local</code> 를 사용하면 단일 노드 로컬 디스크는 독립형에만 적합합니다. 모든 파드가 공유 파일 시스템(예: NFS)에 액세스할 수 있는 경우, 클러스터 모드에서도 <code translate="no">local</code> 을 사용할 수 있다.</li>
+</ul>
+<h2 id="Object-storage-compatibility-for-storagetypeminio" class="common-anchor-header">오브젝트 스토리지 호환성 <code translate="no">storage.type=minio</code><button data-href="#Object-storage-compatibility-for-storagetypeminio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>다음 표는 우드페커를 <code translate="no">storage.type=minio</code> 로 구성했을 때 현재 알려진 오브젝트 스토리지 백엔드의 호환성을 요약한 것이다. 이 정보는 <a href="https://github.com/zilliztech/woodpecker/discussions/150">GitHub 토론 #150을</a> 기반으로 합니다.</p>
+<table>
+<thead>
+<tr><th>공급자/서비스</th><th>상태</th><th>참고</th></tr>
+</thead>
+<tbody>
+<tr><td>Azure Blob 스토리지</td><td>지원됨</td><td>네이티브 Azure SDK를 사용합니다.</td></tr>
+<tr><td>AWS S3</td><td>지원됨</td><td>조건부 쓰기를 완벽하게 지원하는 네이티브 S3를 사용합니다.</td></tr>
+<tr><td>MinIO (<code translate="no">&gt;= 2024-12</code>)</td><td>지원됨</td><td>전체 S3 조건부 쓰기 지원.</td></tr>
+<tr><td>알리윤 OSS</td><td>지원됨</td><td>S3 호환 인터페이스를 통해 지원됩니다.</td></tr>
+<tr><td>Tencent COS</td><td>지원됨</td><td>S3 호환 인터페이스를 통해 지원됩니다.</td></tr>
+<tr><td>Google 클라우드 스토리지(GCS)</td><td>지원됨</td><td>S3 상호 운용성 모드를 통해 지원됩니다.</td></tr>
+<tr><td>화웨이 클라우드 OBS</td><td>지원되지 않음</td><td>필수 조건부 쓰기 시맨틱이 부족합니다.</td></tr>
+<tr><td>방대한 데이터</td><td>지원됨</td><td>커뮤니티에서 검증되었으며, 버전이 없는 버킷에서만 작동합니다.</td></tr>
+<tr><td>기타 S3 호환 스토리지</td><td>부분</td><td>S3 조건부 쓰기 시맨틱에 대한 전체 지원에 따라 다릅니다.</td></tr>
+</tbody>
+</table>
+<p>참고:</p>
+<ul>
+<li>호환성은 기본 SDK 지원 또는 S3 조건부 쓰기 의미론에 대한 지원 여부에 따라 달라집니다.</li>
+<li>Woodpecker용 MinIO를 자체 호스팅하는 경우 <code translate="no">RELEASE.2024-12-18T13-15-44Z</code> 이상을 사용하세요.</li>
+<li>이 매트릭스는 <a href="https://github.com/zilliztech/woodpecker/discussions/150">현재 논의를</a> 반영하며 백엔드 지원이 추가로 검증됨에 따라 발전할 수 있습니다.</li>
 </ul>
 <h2 id="Deployment-guides" class="common-anchor-header">배포 가이드<button data-href="#Deployment-guides" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -179,7 +217,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="common-anchor-header">쿠버네티스에서 밀버스 클러스터에 딱따구리 활성화(밀버스 오퍼레이터, 스토리지=미니오)<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="common-anchor-header">Kubernetes에서 Milvus 클러스터에 Woodpecker 활성화(Milvus Operator, 스토리지=minio)<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -194,7 +232,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><a href="/docs/ko/install_cluster-milvusoperator.md">밀버스 오퍼레이터를</a> 설치한 후, 공식 샘플을 사용하여 Woodpecker를 활성화한 밀버스 클러스터를 시작하세요:</p>
+    </button></h3><p><a href="/docs/ko/install_cluster-milvusoperator.md">Milvus Operator를</a> 설치한 후, 공식 샘플을 사용하여 Woodpecker를 활성화한 Milvus 클러스터를 시작하세요:</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 
 <button class="copy-code-btn"></button></code></pre>
@@ -256,7 +294,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>배포 후 문서에 따라 포트 포워딩하고 연결합니다. Woodpecker 매개변수를 조정하려면 <a href="/docs/ko/deploy_pulsar.md">메시지 저장소 구성에</a> 설명된 설정을 따르세요.</p>
-<h3 id="Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="common-anchor-header">Docker에서 Milvus 독립 실행형(저장소=로컬)에 대해 Woodpecker 사용 설정<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="anchor-icon" translate="no">
+<h3 id="Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="common-anchor-header">Docker에서 Milvus 독립 실행형(저장소=로컬)에 Woodpecker 사용 설정<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -341,7 +379,7 @@ docker restart milvus-standalone
     </button></h2><p><a href="/docs/ko/woodpecker_architecture.md">우드펙커의</a> 벤치마크 및 백엔드 제한에 따라 다음 측면에서 엔드투엔드 쓰기 처리량을 최적화하세요:</p>
 <ul>
 <li>스토리지 측면<ul>
-<li><strong>오브젝트 스토리지(미니오/S3 호환)</strong>: 동시성 및 오브젝트 크기를 늘립니다(작은 오브젝트는 피하세요). 네트워크 및 버킷 대역폭 제한에 주의하세요. SSD의 단일 MinIO 노드는 로컬에서 약 100MB/s로 제한되는 경우가 많으며, 단일 EC2~S3는 GB/s에 도달할 수 있습니다.</li>
+<li><strong>오브젝트 스토리지(미니오/S3 호환)</strong>: 동시성 및 오브젝트 크기를 늘립니다(작은 오브젝트는 피하세요). 네트워크 및 버킷 대역폭 제한을 주의하세요. SSD의 단일 MinIO 노드는 로컬에서 약 100MB/s로 제한되는 경우가 많으며, 단일 EC2~S3는 GB/s에 도달할 수 있습니다.</li>
 <li><strong>로컬/공유 파일 시스템(로컬)</strong>: NVMe/고속 디스크를 선호합니다. FS가 작은 쓰기와 fsync 대기 시간을 잘 처리하는지 확인하세요.</li>
 </ul></li>
 <li>딱따구리 노브<ul>
