@@ -88,59 +88,64 @@ await milvusClient.insert({
 
     If specified, the data is to be inserted into the specified partition.
 
-**RETURNS** *Promise\<MutationResult>*
+**RETURNS** *Promise<MutationResult>*
 
 This method returns a promise that resolves to a **MutationResult** object.
 
 ```javascript
 {
-    IDs: NumberArrayId | StringArrayId,
+    succ_index: number[],
+    err_index: number[],
     acknowledged: boolean,
-    delete_cnt: string,
-    err_index: list[number],
     insert_cnt: string,
-    status: object,
-    succ_index: list[number],
+    delete_cnt: string,
+    upsert_cnt: string,
     timestamp: string,
-    upsert_cnt: string
+    IDs: { int_id?: { data: number[] }, str_id?: { data: string[] }, id_field: 'int_id' | 'str_id' },
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
-- **IDs** (*NumberArrayId* | *StringArrayId*) -
+- **succ_index** (*number[]*) -
+The zero-based positions in the input data of rows that were successfully inserted.
 
-    A list of the IDs of the inserted entities.
+- **err_index** (*number[]*) -
+The zero-based positions of rows that were rejected. When all rows succeed, this list is empty.
 
 - **acknowledged** (*boolean*) -
-
-    A boolean value indicating whether the insert operation is successful.
-
-- **delete_cnt** (*string*) -
-
-    The deleted entities. The value stays `0` in this operation.
-
-- **err_index** (Number[]) -
-
-    The number of entities involved in the insert operation that fails.
+Whether the write was acknowledged by Milvus.
 
 - **insert_cnt** (*string*) -
+The number of rows inserted, formatted as a string.
 
-    The new entities that are inserted. 
-
-- **succ_index** (*list[number]*) -
-
-    The number of entities involved in the insert operation that have been successfully indexed.
-
-- **timestamp** (*string*) -
-
-    The timestamp at which the upsert operation occurs.
+- **delete_cnt** (*string*) -
+The number of rows deleted by this operation. For `insert()` this remains **"0"**.
 
 - **upsert_cnt** (*string*) -
+The number of rows upserted by this operation. For `insert()` this remains **"0"**.
 
-    The entities that have been updated. The value stays `0` in this operation.
+- **timestamp** (*string*) -
+The hybrid timestamp at which the write became visible. Use this value for time-travel queries.
 
-- **status** (*object*) -
+- **IDs** (*StringArrayId* | *NumberArrayId*) -
+The primary keys assigned to the inserted rows. For autoID collections, Milvus generates these values; otherwise, they echo the input keys.
+
+    - **int_id** (*{ data: number[] }*) -
+
+        Set when the primary key is an integer field.
+
+    - **str_id** (*{ data: string[] }*) -
+
+        Set when the primary key is a VARCHAR field.
+
+    - **id_field** (*'int_id' | 'str_id'*) -
+
+        Indicates which of the two id arrays carries the values.
+
+- **ResStatus**
+A **ResStatus** object.
 
     - **code** (*number*) -
 
@@ -148,9 +153,9 @@ This method returns a promise that resolves to a **MutationResult** object.
 
     - **error_code** (*string* | *number*) -
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 

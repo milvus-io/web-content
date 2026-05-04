@@ -1,6 +1,6 @@
 # add_connection()
 
-This operation adds connections to multiple Milvus instances for different purposes in a batch. 
+This operation adds [connections](Connections.md) to multiple Milvus instances for different purposes in a batch. 
 
 ## Request Syntax
 

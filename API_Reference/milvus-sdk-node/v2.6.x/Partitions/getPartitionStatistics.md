@@ -41,29 +41,28 @@ await milvusClient.getPartitionStatistics({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<StatisticsResponse>*
+**RETURNS** *Promise<StatisticsResponse>*
 
 This method returns a promise that resolves to a **StatisticsResponse** object.
 
 ```javascript
 {
-    data: string,
-    stats:string,
-    status: object
+    stats: KeyValuePair[],
+    data: { [x: string]: any },
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
-- **data** (*string*) -
+- **stats** (*KeyValuePair[]*) -
+The raw statistics list returned by Milvus. Each entry has a **key** (for example, **row_count**) and a **value** as a string.
 
-    The partition statistics.
+- **data** (*Record<string, any>*) -
+A flattened, key-indexed view of **stats** for convenience. For example, `data.row_count` returns the partition row count as a string.
 
-- **stats** (*string*) -
-
-    The number of rows in the partition.
-
-- **status** (*object*) -
+- **ResStatus**
+A **ResStatus** object.
 
     - **code** (*number*) -
 
@@ -71,9 +70,9 @@ This method returns a promise that resolves to a **StatisticsResponse** object.
 
     - **error_code** (*string* | *number*) -
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 

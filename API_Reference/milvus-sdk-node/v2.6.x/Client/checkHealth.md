@@ -16,14 +16,14 @@ milvusClient.checkHealth()
 
 *Promise*<*CheckHealthResponse*>
 
-**RETURNS:**
+**RETURNS** *Promise<CheckHealthResponse>*
 
-A promise that resolves to a **CheckHealthResponse** object.
+This method returns a promise that resolves to a **CheckHealthResponse** object.
 
 ```javascript
 {
     isHealthy: boolean,
-    reasons: []
+    reasons: string[]
 }
 ```
 
@@ -31,11 +31,11 @@ A promise that resolves to a **CheckHealthResponse** object.
 
 - **isHealthy** (*boolean*) -
 
-    Whether the currently connected Milvus server is healthy.
+    A boolean that indicates whether all critical components of the Milvus deployment are healthy.
 
-- **reasons** (*[]*) - 
+- **reasons** (*string[]*) -
 
-    The reasons for the currently connected Milvus server is unhealthy.
+    When **isHealthy** is **false**, a list of human-readable reasons explaining which components are unhealthy. The list is empty when **isHealthy** is **true**.
 
 ## Examples
 

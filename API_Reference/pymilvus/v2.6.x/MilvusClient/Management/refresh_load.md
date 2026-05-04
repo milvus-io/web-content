@@ -31,7 +31,7 @@ refresh_load(
 
 **RETURNS:**
 
- None
+None
 
 **EXCEPTIONS:**
 

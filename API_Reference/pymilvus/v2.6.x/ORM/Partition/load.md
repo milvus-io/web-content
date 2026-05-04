@@ -4,7 +4,7 @@ This operation loads the data of the current partition into memory.
 
 <div class="alert note">
 
-Using the **partition_names** parameter in the **load()** method of a **Collection** object is equivalent to using the **load()** method of corresponding **Partition** objects.
+Using the **partition_names** parameter in the **load()** method of a **[Collection](../Collection/Collection.md)** object is equivalent to using the **load()** method of corresponding **[Partition](Partition.md)** objects.
 
 </div>
 

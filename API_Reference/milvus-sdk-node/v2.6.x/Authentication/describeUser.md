@@ -34,38 +34,48 @@ await milvusClient.describeUser({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<SelectUserResponse>*
+**RETURNS** *Promise<SelectUserResponse>*
 
 This method returns a promise that resolves to a **SelectUserResponse** object.
 
 ```javascript
 {
-    result: UserResult[],
-    status: ResStatus
+    results: UserResult[],
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
-- **UserResult**
-
-    A **UserResult** type.
-
-    - **roles** (*RoleEntity[]*) -
-
-        - **name** (*string*) - 
-
-            The roles that have been granted to the user.
+- **results** (*UserResult[]*) -
+A list of **UserResult** objects. For `describeUser()`, this list contains a single entry describing the requested user.
 
     - **user** (*User*) -
 
-        - **name** (*string*) - 
+        A **User** object identifying the user.
 
-            The roles that have been granted to the user.
+        - **name** (*string*) -
+
+        The username.
+
+        - **name** (*string*) -
+
+            The username.
+
+    - **roles** (*RoleEntity[]*) -
+
+        A list of roles assigned to this user.
+
+        - **name** (*string*) -
+
+        The role name.
+
+        - **name** (*string*) -
+
+            The role name.
 
 - **ResStatus**
-
-    A **ResStatus** object.
+A **ResStatus** object.
 
     - **code** (*number*) -
 
@@ -73,9 +83,9 @@ This method returns a promise that resolves to a **SelectUserResponse** object.
 
     - **error_code** (*string* | *number*) -
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 

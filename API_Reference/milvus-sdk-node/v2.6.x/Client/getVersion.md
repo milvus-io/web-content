@@ -6,17 +6,21 @@ This operation returns version information for the Milvus server.
 await milvusClient.getVersion()
 ```
 
-**RETURNS:**
+**RETURNS** *Promise<GetVersionResponse>*
 
-*Promise\<GetVersionResponse\>*
+This method returns a promise that resolves to a **GetVersionResponse** object.
 
-The response contains the version string of the connected server.
+```javascript
+{
+    version: string
+}
+```
 
-**EXCEPTIONS:**
+**PARAMETERS:**
 
-- **MilvusError**
+- **version** (*string*) -
 
-    This exception will be raised when any error occurs during this operation.
+    The semantic version of the Milvus server (for example, **"v3.0.0"**).
 
 ## Example
 

@@ -1,6 +1,6 @@
 # add()
 
-This operation adds a single vector embedding to the current **EmbeddingList** instance.
+This operation adds a single vector embedding to the current **[EmbeddingList](EmbeddingList.md)** instance.
 
 ## Request syntax
 
@@ -15,15 +15,15 @@ add(
 
 - **embedding** (*np.ndarray, List[Any]*) - 
 
-    The vector embedding that is to be added to the current **EmbeddingList** instance.
+    The vector embedding that is to be added to the current **[EmbeddingList](EmbeddingList.md)** instance.
 
 **RETURN TYPE:**
 
-*EmbeddingList*
+*[EmbeddingList](EmbeddingList.md)*
 
 **RETURNS:**
 
-The current **EmbeddingList** instance itself for method chaining
+The current **[EmbeddingList](EmbeddingList.md)** instance itself for method chaining
 
 **EXCEPTIONS:**
 

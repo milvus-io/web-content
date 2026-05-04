@@ -16,7 +16,7 @@ err := client.DropCollectionProperties(ctx, option)
 
 **PARAMETERS:**
 
-- **collection** (*string*)
+- **[collection](https://zilliverse.feishu.cn/docx/PNwFdxMMdo6rtIxERDHcVFgdnxc)** (*string*)
 
     The collection.
 

@@ -57,57 +57,64 @@ await milvusClient.delete({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<MutationResult>*
+**RETURNS** *Promise<MutationResult>*
 
-### With DeleteByFilterReq
+This method returns a promise that resolves to a **MutationResult** object.
 
 ```javascript
-await milvusClient.delete({
-   db_name: string,
-   collection_name: string,
-   partition_name?: string,
-   filter: string,
-   exprValues?: keyValueObject,
-   consistency_level?: string,
-   timeout?: number
- })
+{
+    succ_index: number[],
+    err_index: number[],
+    acknowledged: boolean,
+    insert_cnt: string,
+    delete_cnt: string,
+    upsert_cnt: string,
+    timestamp: string,
+    IDs: { int_id?: { data: number[] }, str_id?: { data: string[] }, id_field: 'int_id' | 'str_id' },
+    status:  ResStatus
+}
 ```
 
 **PARAMETERS:**
 
-- **db_name** (*string*) -
+- **succ_index** (*number[]*) -
+The zero-based positions of input IDs that matched a row and were marked deleted.
 
-    The name of the database that holds the target collection.
+- **err_index** (*number[]*) -
+The zero-based positions of input IDs that did not match any row.
 
-- **collection_name** (*string*) -
+- **acknowledged** (*boolean*) -
+Whether the delete was acknowledged by Milvus.
 
-    **[REQUIRED]**
+- **insert_cnt** (*string*) -
+Always **"0"** for `delete()`.
 
-    The name of an existing collection.
+- **delete_cnt** (*string*) -
+The number of rows logically deleted by this operation.
 
-- **partition_name** (*string*) -
+- **upsert_cnt** (*string*) -
+Always **"0"** for `delete()`.
 
-    The name of an existing partition in the collection.
+- **timestamp** (*string*) -
+The hybrid timestamp at which the delete became visible.
 
-- **filter** (*string*) -
+- **IDs** (*StringArrayId* | *NumberArrayId*) -
+The primary keys that were targeted by this delete. For the full field reference, refer to the `insert()` doc.
 
-    A scalar filtering condition to filter matching entities. 
+- **ResStatus**
+A **ResStatus** object.
 
-    The value defaults to an empty string, indicating that no condition applies. Setting both **ids** and **filter** results in a **ParamError** exception.
+    - **code** (*number*) -
 
-    You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
+        A code that indicates the operation result. It remains **0** if this operation succeeds.
 
-- **consistency_level** (*ConsistencyLevelEnum*) -
+    - **error_code** (*string* | *number*) -
 
-    The consistency level of the target collection. The value defaults to **Bounded** (**1**) with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-- **timeout** (*number*) -
+    - **reason** (*string*) -
 
-    The timeout duration for this operation. 
-
-    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
-
-**RETURNS** *Promise\<MutationResult>*
+        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
 ## Example
 

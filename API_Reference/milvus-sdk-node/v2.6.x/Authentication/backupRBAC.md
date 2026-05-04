@@ -22,109 +22,40 @@ await milvusClient.backupRBAC({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<BackupRBACResponse>*
+**RETURNS** *Promise<BackupRBACResponse>*
 
 This method returns a promise that resolves to a **BackupRBACResponse** object.
 
 ```javascript
 {
-    RBAC_meta: {
-        users: User[],
-        roles: RoleEntity[],
-        grants: GrantEntity[],
-        privilege_groups: PrivelegeGroup[],
-    },
-    status: {
-        code: number,
-        error_code: string | number,
-        reason: string
-    }
+    RBAC_meta: RBACMeta,
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
-- **RBAC_meta** (RBACMeta) -
+- **RBAC_meta** (*RBACMeta*) -
+A snapshot of all RBAC metadata in the current Milvus instance. Pass this value to `restoreRBAC()` to recreate the same users, roles, grants, and privilege groups in another instance.
 
     - **users** (*User[]*) -
 
-        A list of user entities.
-
-        - **name** (*string*) - 
-
-            The name of a user.
+        All users defined in the instance.
 
     - **roles** (*RoleEntity[]*) -
 
-        A list of role entities.
-
-        - **name** (*string*) - 
-
-            The name of a role.
+        All roles defined in the instance.
 
     - **grants** (*GrantEntity[]*) -
 
-        A list of grant entities.
+        All grants attached to the instance's roles. For the full **GrantEntity** field reference, refer to the `describeRole()` doc.
 
-        - **db_name** (*string*) -
+    - **privilege_groups** (*PrivelegeGroup[]*) -
 
-            The database to which the object specified in the current grant belongs.
+        All privilege groups defined in the instance. For the full **PrivelegeGroup** field reference, refer to the `listPrivilegeGroups()` doc.
 
-        - **grantor** (*Grantor*) -
-
-            The user who performs the current grant and the granted privileges.
-
-            - **user** (*User*) -
-
-                The name of the grantor.
-
-            - **privilege** （*PrivilegeEntity*) -   
-
-                The privilege that has been granted.
-
-        - **object** (*ObjectEntity*) -
-
-            The type of the object that the current grant affects.
-
-            - **name** (*RbacObjects*) - 
-
-                The type of the affected object. Possible values are:
-
-                - Collection
-
-                - Global
-
-                - User
-
-        - **object_name** (string) -
-
-            The name of the affected object.
-
-        - **role** (*RoleEntity*) -   
-
-            The name of the role affected in the current grant.
-
-            - **name** (*string*) - 
-
-                The name of the affected role.
-
-    - **privilege_groups** (*PrivelegeGroup[]*) - 
-
-        A list of privilege-group entities.
-
-        - **group_name** (*string*) -
-
-            The name of a privilege group.
-
-        - **privileges** (*PrivilegeEntity[]*) -
-
-            A list of privileges.
-
-            - **name** (*string*) -
-
-                The name of a privilege. 
-
-- **status** (*ResStatus*) 
+- **ResStatus**
+A **ResStatus** object.
 
     - **code** (*number*) -
 
@@ -132,9 +63,9 @@ This method returns a promise that resolves to a **BackupRBACResponse** object.
 
     - **error_code** (*string* | *number*) -
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 

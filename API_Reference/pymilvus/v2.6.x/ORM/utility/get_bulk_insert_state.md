@@ -45,10 +45,10 @@ res = utility.get_bulk_insert_state(task_id=task_id)
 
 RETURN TYPE:
 
-*BulkInsertState*
+*[BulkInsertState](BulkInsertState.md)*
 
 **RETURNS:**
-A **BulkInsertState** that contains information about the state of the specified bulk-insert task.
+A **[BulkInsertState](BulkInsertState.md)** that contains information about the state of the specified bulk-insert task.
 
 ```python
 ├── BulkInsertState
@@ -72,7 +72,7 @@ A **BulkInsertState** that contains information about the state of the specified
 │   └── collection_name
 ```
 
-A **BulkInsertState** object has the following fields
+A **[BulkInsertState](BulkInsertState.md)** object has the following fields
 
 - **task_id** (*int*)
 
@@ -130,11 +130,11 @@ A **BulkInsertState** object has the following fields
 
         The names of the files involved in the current bulk-insert task in a comma-separated string.
 
-    - **collection** (*str*)
+    - **[collection](../Collection/Collection.md)** (*str*)
 
         The name of the target collection.
 
-    - **partition** (*str*)
+    - **[partition](../Partition/Partition.md)** (*str*)
 
         The name of the target partition.
 

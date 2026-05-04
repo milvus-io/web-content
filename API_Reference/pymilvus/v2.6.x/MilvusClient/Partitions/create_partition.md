@@ -34,7 +34,7 @@ create_partition(
 
 **RETURN TYPE:**
 
-*Partition*
+*[Partition](../../ORM/Partition/Partition.md)*
 
 **RETURNS:**
 

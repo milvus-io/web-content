@@ -25,7 +25,7 @@ create_partition(
 
 **RETURN TYPE:**
 
-*Partition*
+*[Partition](../Partition/Partition.md)*
 
 **RETURNS:**
 

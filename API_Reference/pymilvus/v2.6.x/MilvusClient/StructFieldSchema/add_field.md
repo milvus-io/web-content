@@ -19,7 +19,7 @@ add_field(
 
     The name of the field.
 
-- **datatype** (*[DataType](../Collections/DataType.md)*) - 
+- **[datatype](../Collections/DataType.md)** (*[DataType](../Collections/DataType.md)*) - 
 
     **[REQUIRED]**
 
@@ -47,7 +47,7 @@ add_field(
 
 **RETURNS:**
 
-A **StructFieldSchema** object contains the fields that have been added to the schema.
+A **[StructFieldSchema](StructFieldSchema.md)** object contains the fields that have been added to the schema.
 
 **EXCEPTIONS:**
 

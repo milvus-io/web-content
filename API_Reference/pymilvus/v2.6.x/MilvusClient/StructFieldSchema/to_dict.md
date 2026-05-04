@@ -1,6 +1,6 @@
 # to_dict()
 
-This operation converts a **StructFieldSchema** object to a dictionary representation.
+This operation converts a **[StructFieldSchema](StructFieldSchema.md)** object to a dictionary representation.
 
 ## Request Syntax
 

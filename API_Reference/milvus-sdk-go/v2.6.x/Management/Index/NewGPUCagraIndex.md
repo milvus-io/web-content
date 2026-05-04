@@ -8,7 +8,7 @@ func NewGPUCagraIndex(metricType MetricType, intermediateGraphDegree, graphDegre
 
 **PARAMETERS:**
 
-- **metricType** (*[MetricType](../MetricType.md)*)
+- **[metricType](../MetricType.md)** (*[MetricType](../MetricType.md)*)
 
     The distance metric type for similarity search (e.g., index.COSINE, index.L2, index.IP).
 
@@ -22,7 +22,7 @@ func NewGPUCagraIndex(metricType MetricType, intermediateGraphDegree, graphDegre
 
 **RETURNS:**
 
-*Index*
+*[Index](Index.md)*
 
 An index configuration instance. Pass this to `CreateIndex()` via the index option.
 

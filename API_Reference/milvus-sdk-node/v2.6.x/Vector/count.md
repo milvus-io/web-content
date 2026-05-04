@@ -39,28 +39,24 @@ await milvusClient.count({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise*<*CountResult*>
+**RETURNS** *Promise<CountResult>*
 
 This method returns a promise that resolves to a **CountResult** object.
 
 ```javascript
 {
     data: number,
-    status: {
-        code: number,
-        error_code: number | string,
-        reason: string
-    }
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
 - **data** (*number*) -
+The number of rows in the collection that match the supplied filter expression. When no expression is supplied, this is the total row count.
 
-    The number of entities that match the specified filtering expression.
-
-- **status** (*object*) -
+- **ResStatus**
+A **ResStatus** object.
 
     - **code** (*number*) -
 
@@ -68,9 +64,9 @@ This method returns a promise that resolves to a **CountResult** object.
 
     - **error_code** (*string* | *number*) -
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 

@@ -11,6 +11,7 @@ await milvusClient.alterDatabase(data: AlterDatabaseRequest)
 ```javascript
 await milvusClient.alterDatabase({
     db_name: string,
+    db_id?: string,
     properties: object,
     delete_keys?: string[],
     timeout?: number,
@@ -25,11 +26,15 @@ await milvusClient.alterDatabase({
 
     The name of the database.
 
+- **db_id** (*string*) -
+
+    The ID of the database to modify. Optional.
+
 - **properties** (*object*) -
 
     **[REQUIRED]**
 
-    An object of properties to set (e.g., `{ "database.replica.number": "2" }`).
+    An object of properties to set (e.g., `{ "database.resource_groups": "rg1" }` to set database resource groups).
 
 - **delete_keys** (*string[]*) -
 
@@ -60,6 +65,6 @@ const client = new MilvusClient({
 });
 await client.alterDatabase({
     db_name: 'my_database',
-    properties: { 'database.replica.number': '2' },
+    properties: { 'database.resource_groups': 'rg1' },
 });
 ```
