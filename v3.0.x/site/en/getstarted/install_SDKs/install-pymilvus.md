@@ -27,7 +27,7 @@ It is recommended to install a PyMilvus version that matches the version of the 
 </div>
 
 ```
-$ python3 -m pip install pymilvus==2.6.12
+$ python3 -m pip install pymilvus==3.0.0
 ```
 
 ## Verify installation
@@ -51,5 +51,5 @@ Having installed PyMilvus, you can:
   - [Single-Vector Search](single-vector-search.md)
   - [Hybrid Search](multi-vector-search.md)
 
-- Explore [PyMilvus API reference](/api-reference/pymilvus/v2.4.x/About.md)
+- Explore [PyMilvus API reference](/api-reference/pymilvus/v3.0.x/About.md)
 

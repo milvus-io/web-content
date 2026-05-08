@@ -31,7 +31,7 @@ $ bash standalone_embed.sh start
 
 <div class="alert note">
 
-**What's new in v2.6.15:**
+**What's new in v3.0-beta:**
 - **Streaming Node**: Enhanced data processing capabilities
 - **Woodpecker MQ**: Improved message queue with reduced maintenance overhead, see [Use Woodpecker](use-woodpecker.md) for detail
 - **Optimized Architecture**: Consolidated components for better performance
