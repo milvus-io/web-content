@@ -33,9 +33,9 @@ Force merge operates asynchronously. It does not block search or query operation
 
 ### Prerequisites
 
-- Milvus version 2.6.15 or later
+- Milvus version 3.0 or later
 
-- pymilvus 2.6.13 or later
+- PyMilvus 3.0 or later
 
 ### Global Configuration
 

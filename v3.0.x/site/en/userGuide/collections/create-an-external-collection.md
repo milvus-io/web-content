@@ -1,13 +1,13 @@
 ---
 id: create-an-external-collection.md
 title: "Create an External Collection"
-summary: "Access data in AWS S3 or Iceberg through an external collection without copying it into Milvus."
+summary: "An external collection is a type of data collection in Milvus that accesses data from external storage systems or database tables such as AWS S3 and Iceberg without copying it into Milvus. It acts as a query layer over data lakes while maintaining compatibility with Milvus query interfaces."
 beta: Milvus 3.0.x
 ---
 
 # Create an External Collection
 
-An external collection is a type of data collection in Milvus that accesses data from external storage systems such as AWS S3 and Iceberg without copying it into Milvus. It acts as a query layer over data lakes while maintaining compatibility with Milvus query interfaces.
+An external collection is a type of data collection in Milvus that accesses data from external storage systems or database tables such as AWS S3 and Iceberg without copying it into Milvus. It acts as a query layer over data lakes while maintaining compatibility with Milvus query interfaces.
 
 ## Overview
 
@@ -24,26 +24,6 @@ To resolve these issues, Milvus delivers external collections that let you acces
 Once created, an external collection can access your data directly and keep it in the same place where you store it. In the background, Milvus creates manifest files to record the mappings between the Milvus metadata and the rows in external data files. After the manifest files are ready, you can create indexes in the external collection as you would in any managed collection.
 
 When your data changes, manually triggering a sub-second refresh updates the metadata, keeping Milvus always up to date.
-
-## Limits & restrictions
-
-Since Milvus does not store raw data and only maintains a mapping between the metadata and raw data, external collections are read-only. That means you cannot insert, upsert, delete, import, flush, and compact data at the Milvus side.
-
-When compared with managed collections, external collections have the following limits:
-
-- You cannot set the primary key and its AutoID attributes.
-
-- You cannot enable the dynamic field.
-
-- You cannot set the partition key and clustering key, because partitions are not available.
-
-- You cannot define functions in the schema.
-
-- You cannot change the schema of an external collection once you create it.
-
-- You cannot use the text match with BM25.
-
-- You must trigger a refresh operation before creating indexes.
 
 ## Step 1: Create schema
 
@@ -63,7 +43,7 @@ from pymilvus import MilvusClient, DataType
 schema = MilvusClient.create_schema(
     external_source='s3://s3.<region-id>.amazonaws.com/<bucket>/',
     external_spec='{
-        "format": "parquet"，
+        "format": "parquet",
         "extfs": {
             ...
         }
@@ -72,7 +52,17 @@ schema = MilvusClient.create_schema(
 ```
 
 ```java
-// Java
+import com.google.gson.JsonObject;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+JsonObject externalSpec = new JsonObject();
+externalSpec.addProperty("format", "parquet");
+externalSpec.add("extfs", new JsonObject());
+
+CreateCollectionReq.CollectionSchema schema = CreateCollectionReq.CollectionSchema.builder()
+        .externalSource("s3://s3.<region-id>.amazonaws.com/<bucket>/")
+        .externalSpec(externalSpec)
+        .build();
 ```
 
 ```go
@@ -92,10 +82,53 @@ schema := entity.NewSchema().
 ```
 
 ```bash
-# restful
+export fields='[
+        {
+            "fieldName": "product_id",
+            "dataType": "Int64",
+            "isPrimary": true
+        },
+        {
+            "fieldName": "embedding",
+            "dataType": "FloatVector",
+            "elementTypeParams": {
+                "dim": "768"
+            }
+        },
+        {
+            "fieldName": "product_name",
+            "dataType": "VarChar",
+            "elementTypeParams": {
+                "max_length": 512
+            }
+        }
+    ]'
 ```
 
 To create the schema for an external collection, you need to specify the source data URI, the data format, and authentication settings.
+
+<table>
+   <tr>
+     <th><p>Parameter Name</p></th>
+     <th><p>Parameter Description</p></th>
+     <th><p>Example Value</p></th>
+   </tr>
+   <tr>
+     <td><p><code>format</code></p></td>
+     <td><p>Format of the target source data files.</p></td>
+     <td><p><code>parquet</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>snapshot_id</code></p></td>
+     <td><p>A valid Iceberg table snapshot ID. This parameter applies only when you set <code>format</code> to <code>iceberg_table</code>.</p></td>
+     <td><p><code>473984310232959286</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>extfs</code></p></td>
+     <td><p>External file system settings in a stringified JSON structure.</p></td>
+     <td><p>--</p></td>
+   </tr>
+</table>
 
 <details summary="Authentication Options">
 
@@ -124,16 +157,6 @@ This option applies to self-hosted MinIO or the scenario where you have AK/SK fo
      <th><p>Parameter Name</p></th>
      <th><p>Parameter Description</p></th>
      <th><p>Example Value</p></th>
-   </tr>
-   <tr>
-     <td><p><code>format</code></p></td>
-     <td><p>Format of the target source data files.</p><p>Possible values are <code>parquet</code>, <code>vortex</code>, <code>lance-table</code>, and <code>iceberg-table</code>.</p></td>
-     <td><p><code>parquet</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>extfs</code></p></td>
-     <td><p>External file system settings in a stringified JSON structure.</p></td>
-     <td><p>--</p></td>
    </tr>
    <tr>
      <td><p><code>extfs.access_key_id</code></p></td>
@@ -189,16 +212,6 @@ This option applies to the scenario where Milvus runs on an EC2 instance or an E
      <th><p>Parameter Name</p></th>
      <th><p>Parameter Description</p></th>
      <th><p>Example Value</p></th>
-   </tr>
-   <tr>
-     <td><p><code>format</code></p></td>
-     <td><p>Format of the target source data.</p><p>Possible values are <code>parquet</code>, <code>vortex</code>, <code>lance-table</code>, and <code>iceberg-table</code></p></td>
-     <td><p><code>parquet</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>extfs</code></p></td>
-     <td><p>External file system settings</p></td>
-     <td><p>--</p></td>
    </tr>
    <tr>
      <td><p><code>extfs.use_iam</code></p></td>
@@ -326,16 +339,6 @@ Once you have obtained the IAM Role ARN and the External ID, you can set up the 
      <th><p>Example Value</p></th>
    </tr>
    <tr>
-     <td><p><code>format</code></p></td>
-     <td><p>Format of the target source data.</p><p>Possible values are <code>parquet</code>, <code>vortex</code>, <code>lance-table</code>, and <code>iceberg-table</code></p></td>
-     <td><p><code>parquet</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>extfs</code></p></td>
-     <td><p>External file system settings</p></td>
-     <td><p>--</p></td>
-   </tr>
-   <tr>
      <td><p><code>extfs.cloud_provider</code></p></td>
      <td><p>Cloud provider ID</p></td>
      <td><p><code>aws</code></p></td>
@@ -393,15 +396,13 @@ schema.add_field(
     # highlight-next
     external_field="id" # field name in the external data file
 )
-
 schema.add_field(
     field_name="product_name",
     datatype=DataType.VARCHAR,
-    max_length=256,
+    max_length=512,
     # highlight-next
     external_field="name"
 )
-
 schema.add_field(
     field_name="embedding",
     datatype=DataType.FLOAT_VECTOR,
@@ -412,7 +413,26 @@ schema.add_field(
 ```
 
 ```java
-// Java
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+
+schema.addField(AddFieldReq.builder()
+        .fieldName("product_id")
+        .dataType(DataType.Int64)
+        .externalField("id")
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName("product_name")
+        .dataType(DataType.VarChar)
+        .maxLength(512)
+        .externalField("name")
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName("embedding")
+        .dataType(DataType.FloatVector)
+        .dimension(768)
+        .externalField("vector")
+        .build());
 ```
 
 ```go
@@ -449,12 +469,16 @@ schema = schema.
 ```
 
 ```bash
-# restful
+export schema="{
+    \"externalSource\": \"volume://my_volume/path/to/a/folder\",
+    \"externalSpec\": \"{\\\"format\\\": \\\"parquet\\\"}\",
+    \"fields\": $fields
+}"
 ```
 
 ## Step 3: Create a collection
 
-After adding all the fields to the schema, you can create the collection.
+After adding all the fields to the schema, you can create the external collection.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -477,7 +501,21 @@ client.create_collection(
 ```
 
 ```java
-// Java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+CreateCollectionReq createReq = CreateCollectionReq.builder()
+        .collectionName("test_collection")
+        .collectionSchema(schema)
+        .build();
+client.createCollection(createReq);
 ```
 
 ```go
@@ -497,8 +535,7 @@ client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     APIKey: token
 })
 
-err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("test_collection", schema).
-    WithIndexOptions(indexOptions...))
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("test_collection", schema))
 
 if err != nil {
     fmt.Println(err.Error())
@@ -511,12 +548,139 @@ if err != nil {
 ```
 
 ```bash
-# restful
+curl --request POST \
+--url "${PROJECT_ENDPOINT}/v2/vectordb/collections/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+-d "{
+    \"dbName\": \"my_database\",
+    \"collectionName\": \"test_collection\",
+    \"schema\": $schema
+}"
 ```
 
-## Step 4: Refresh data
+## Step 4: Create indexes
 
-Once the collection is ready, you need to perform a refresh to synchronize the metadata from your data to Milvus.
+You can create indexes for external collection columns as you do in managed collections.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+index_params = client.prepare_index_params()
+# Add indexes
+index_params.add_index(
+    field_name="embedding",
+    index_type="AUTOINDEX",
+    metric_type="COSINE"
+)
+index_params.add_index(
+    field_name="product_name",
+    index_type="AUTOINDEX"
+)
+client.create_index(
+    db_name="my_database",
+    collection_name="test_collection",
+    index_params=index_params
+)
+```
+
+```java
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.index.request.CreateIndexReq;
+import java.util.*;
+
+IndexParam indexParamForIdField = IndexParam.builder()
+        .fieldName("product_name")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .build();
+IndexParam indexParamForVectorField = IndexParam.builder()
+        .fieldName("embedding")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+List<IndexParam> indexParams = new ArrayList<>();
+indexParams.add(indexParamForIdField);
+indexParams.add(indexParamForVectorField);
+CreateIndexReq createIndexReq = CreateIndexReq.builder()
+        .dbName("my_database")
+        .collectionName("test_collection")
+        .indexParams(indexParams)
+        .build();
+client.createIndex(createIndexReq);
+```
+
+```go
+import (
+    "github.com/milvus-io/milvus/client/v2/entity"
+    "github.com/milvus-io/milvus/client/v2/index"
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+collectionName := "test_collection"
+indexOptions := []milvusclient.CreateIndexOption{
+    milvusclient.NewCreateIndexOption(collectionName, "embedding", index.NewAutoIndex(entity.COSINE)),
+    milvusclient.NewCreateIndexOption(collectionName, "product_name", index.NewAutoIndex(index.AUTOINDEX)),
+}
+indexTask, err := client.CreateIndex(ctx, indexOptions)
+if err != nil {
+    // handler err
+}
+err = indexTask.Await(ctx)
+if err != nil {
+    // handler err
+}
+```
+
+```javascript
+client.createIndex({
+    db_name: "my_database",
+    collection_name: "test_collection",
+    field_name: "product_name",
+    index_type: "AUTOINDEX"
+})
+client.createIndex({
+    db_name: "my_database",
+    collection_name: "test_collection",
+    field_name: "embedding",
+    index_type: "AUTOINDEX",
+    metric_type: "COSINE"
+})
+```
+
+```bash
+export indexParams='[
+        {
+            "fieldName": "embedding",
+            "indexName": "my_vector",
+            "indexType": "AUTOINDEX"
+        },
+        {
+            "fieldName": "product_name",
+            "indexName": "my_id",
+            "indexType": "AUTOINDEX"
+        }
+    ]'
+
+curl --request POST \
+--url "${PROJECT_ENDPOINT}/v2/vectordb/indexes/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+-d "{
+    \"dbName\": \"my_database\",
+    \"collectionName\": \"test_collection\",
+    \"indexParams\": $indexParams
+}"
+```
+
+## Step 5: Refresh data
+
+Once the collection is ready, refresh it to create the metadata and indexes for your data.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -528,40 +692,56 @@ Once the collection is ready, you need to perform a refresh to synchronize the m
 
 ```python
 job_id = client.refresh_external_collection(
+    db_name="my_database",
     collection_name="test_collection"
 )
-
 while True:
     progress = client.get_refresh_external_collection_progress(job_id=job_id)
     print(f"  {progress.state}: {progress.progress}%")
-
     if progress.state == "RefreshCompleted":
         elapsed = progress.end_time - progress.start_time
         print(f"  Completed in {elapsed}ms")
-        return job_id
+        break
     elif progress.state == "RefreshFailed":
         print(f"  Failed: {progress.reason}")
-        return job_id
-
+        break
     time.sleep(2)
 ```
 
 ```java
-// Java
+import io.milvus.v2.service.utility.request.GetRefreshExternalCollectionProgressReq;
+import io.milvus.v2.service.utility.request.ListRefreshExternalCollectionJobsReq;
+import io.milvus.v2.service.utility.request.RefreshExternalCollectionReq;
+import io.milvus.v2.service.utility.response.GetRefreshExternalCollectionProgressResp;
+import io.milvus.v2.service.utility.response.ListRefreshExternalCollectionJobsResp;
+import io.milvus.v2.service.utility.response.RefreshExternalCollectionJobInfo;
+import io.milvus.v2.service.utility.response.RefreshExternalCollectionResp;
+
+while (true) {
+    GetRefreshExternalCollectionProgressResp resp = client.getRefreshExternalCollectionProgress(
+            GetRefreshExternalCollectionProgressReq.builder()
+                    .jobId(jobId)
+                    .build());
+    RefreshExternalCollectionJobInfo jobInfo = resp.getJobInfo();
+    if ("RefreshCompleted".equals(jobInfo.getState())) {
+        long elapsed = jobInfo.getEndTime() - jobInfo.getStartTime();
+        System.out.printf("  Refresh completed in %dms%n", elapsed);
+        break;
+    } else if ("RefreshFailed".equals(jobInfo.getState())) {
+        System.out.printf("  Refresh failed: %s%n", jobInfo.getReason());
+    }
+    TimeUnit.SECONDS.sleep(2);
+}
 ```
 
 ```go
 refreshResult, err := client.RefreshExternalCollection(ctx,
     client.NewRefreshExternalCollectionOption("test_collection"))
-
 jobID := refreshResult.JobID
-
 for {
     progress, _ := client.GetRefreshExternalCollectionProgress(ctx,
         client.NewGetRefreshExternalCollectionProgressOption(jobID))
-
     fmt.Printf("State: %s\n", progress.State)
-
     if progress.State == entity.RefreshStateCompleted {
         fmt.Println("Refresh completed!")
         break
@@ -579,7 +759,16 @@ for {
 ```
 
 ```bash
-# restful
+curl --request POST \
+--url "${PROJECT_ENDPOINT}/v2/vectordb/jobs/external_collection/refresh" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+-d "{
+    \"dbName\": \"my_database\",
+    \"collectionName\": \"test_collection\",
+    \"externalSource\": \"volume://my_volume/path/to/a/folder\",
+    \"externalSpec\": \"{\\\"format\\\": \\\"parquet\\\"}\"
+}"
 ```
 
 The refresh operation is asynchronous, so you need to set up an iteration to monitor its progress.
@@ -592,12 +781,12 @@ The refresh operation is asynchronous, so you need to set up an iteration to mon
 
 - If there is an update to your source data, you need to manually call refresh again to keep Milvus up to date.
 
-- You cannot index an external collection only after the refresh is complete. However, the way to create indexes is the same as that for a managed collection.
-
-- A refresh requiring removing all active metadata without any insertions results in a denial.
+- A refresh that requires removing all active metadata without any insertions results in a denial.
 
 </div>
 
 ## Follow-ups
 
-Once you have conducted a refresh operation on the external collection and the manifest files are available, you can create indexes, load/release collections, and conduct similarity searches and queries in the external collection as you would in any managed collections.
+Once you have refreshed the external collection, you can load and release the collection and perform similarity searches and queries in the external collection as you would in any managed collection, except that collections in a database for on-demand computing must be attached to an on-demand cluster for searches and queries.
+
+Before conducting DQL operations, such as search, query, get, and hybrid search, you need to create a session to attach the compute resources of an on-demand cluster.
