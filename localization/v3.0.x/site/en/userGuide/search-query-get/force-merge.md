@@ -82,8 +82,8 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h3><ul>
-<li><p>Milvus version 2.6.15 or later</p></li>
-<li><p>pymilvus 2.6.13 or later</p></li>
+<li><p>Milvus version 3.0 or later</p></li>
+<li><p>PyMilvus 3.0 or later</p></li>
 </ul>
 <h3 id="Global-Configuration" class="common-anchor-header">Global Configuration<button data-href="#Global-Configuration" class="anchor-icon" translate="no">
       <svg translate="no"

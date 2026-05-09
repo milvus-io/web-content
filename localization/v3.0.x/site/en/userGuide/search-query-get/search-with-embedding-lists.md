@@ -83,7 +83,7 @@ summary: >-
     </button></h3><p>Once vectorization is complete, the query embedding list is compared with each document embedding list, token by token, to determine the final similarity score.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/late-interaction.png" alt="Late Interaction" class="doc-image" id="late-interaction" />
+    <img translate="no" src="/docs/v3.0.x/assets/late-interaction.png" alt="Late Interaction" class="doc-image" id="late-interaction" />
     <span>Late Interaction</span>
   </span>
 </p>
@@ -111,7 +111,7 @@ summary: >-
 <p>This method preserves non-textual information, such as the document layout, images, and table structures, which are lost when using text-only retrieval systems.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/copali-extension.png" alt="Copali Extension" class="doc-image" id="copali-extension" />
+    <img translate="no" src="/docs/v3.0.x/assets/copali-extension.png" alt="Copali Extension" class="doc-image" id="copali-extension" />
     <span>Copali Extension</span>
   </span>
 </p>
