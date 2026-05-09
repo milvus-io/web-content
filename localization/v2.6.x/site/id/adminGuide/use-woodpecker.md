@@ -20,7 +20,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Panduan ini menjelaskan cara mengaktifkan dan menggunakan Woodpecker sebagai Write-Ahead Log (WAL) di Milvus 2.6.x. Woodpecker adalah WAL cloud-native yang dirancang untuk penyimpanan objek, menawarkan throughput yang tinggi, overhead operasional yang rendah, dan skalabilitas yang lancar. Untuk detail arsitektur dan tolok ukur, lihat <a href="/docs/id/woodpecker_architecture.md">Woodpecker</a>.</p>
+    </button></h1><p>Panduan ini menjelaskan cara mengaktifkan dan menggunakan Woodpecker sebagai Write-Ahead Log (WAL) di Milvus 2.6.x. Woodpecker adalah WAL cloud-native yang dirancang untuk penyimpanan objek, menawarkan throughput yang tinggi, overhead operasional yang rendah, dan skalabilitas yang lancar. Untuk detail arsitektur dan tolok ukur, lihat <a href="/docs/id/v2.6.x/woodpecker_architecture.md">Woodpecker</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -232,7 +232,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah menginstal <a href="/docs/id/install_cluster-milvusoperator.md">Milvus Operator</a>, mulai cluster Milvus dengan Woodpecker yang diaktifkan menggunakan sampel resmi:</p>
+    </button></h3><p>Setelah menginstal <a href="/docs/id/v2.6.x/install_cluster-milvusoperator.md">Milvus Operator</a>, mulai cluster Milvus dengan Woodpecker yang diaktifkan menggunakan sampel resmi:</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 
 <button class="copy-code-btn"></button></code></pre>
@@ -258,7 +258,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <p>Jalankan perintah berikut untuk mencopot pemasangan cluster Milvus.</p>
 <pre><code translate="no" class="language-bash">kubectl delete milvus my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>Jika Anda perlu menyesuaikan parameter Woodpecker, ikuti pengaturan yang dijelaskan dalam <a href="/docs/id/deploy_pulsar.md">konfigurasi penyimpanan pesan</a>.</p>
+<p>Jika Anda perlu menyesuaikan parameter Woodpecker, ikuti pengaturan yang dijelaskan dalam <a href="/docs/id/v2.6.x/deploy_pulsar.md">konfigurasi penyimpanan pesan</a>.</p>
 <h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Helm-Chart-storageminio" class="common-anchor-header">Mengaktifkan Woodpecker untuk Milvus Cluster di Kubernetes (Helm Chart, storage=minio)<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Helm-Chart-storageminio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -274,7 +274,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pertama-tama, tambahkan dan perbarui bagan Helm Milvus seperti yang dijelaskan di Menjalankan <a href="/docs/id/install_cluster-helm.md">Milvus di Kubernetes dengan Helm</a>.</p>
+    </button></h3><p>Pertama-tama, tambahkan dan perbarui bagan Helm Milvus seperti yang dijelaskan di Menjalankan <a href="/docs/id/v2.6.x/install_cluster-helm.md">Milvus di Kubernetes dengan Helm</a>.</p>
 <p>Kemudian, terapkan dengan salah satu contoh berikut:</p>
 <p>- Penempatan cluster (pengaturan yang disarankan dengan mengaktifkan Woodpecker dan Streaming Node):</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
@@ -293,7 +293,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah penerapan, ikuti dokumen untuk meneruskan porting dan menghubungkan. Untuk menyesuaikan parameter Woodpecker, ikuti pengaturan yang dijelaskan dalam <a href="/docs/id/deploy_pulsar.md">konfigurasi penyimpanan pesan</a>.</p>
+<p>Setelah penerapan, ikuti dokumen untuk meneruskan porting dan menghubungkan. Untuk menyesuaikan parameter Woodpecker, ikuti pengaturan yang dijelaskan dalam <a href="/docs/id/v2.6.x/deploy_pulsar.md">konfigurasi penyimpanan pesan</a>.</p>
 <h3 id="Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="common-anchor-header">Mengaktifkan Woodpecker untuk Milvus Standalone di Docker (penyimpanan = lokal)<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -309,7 +309,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ikuti <a href="/docs/id/install_standalone-docker.md">Jalankan Milvus di Docker</a>. Contoh:</p>
+    </button></h3><p>Ikuti <a href="/docs/id/v2.6.x/install_standalone-docker.md">Jalankan Milvus di Docker</a>. Contoh:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 
@@ -341,7 +341,7 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ikuti <a href="/docs/id/install_standalone-docker-compose.md">Jalankan Milvus dengan Docker Compose</a>. Contoh:</p>
+    </button></h3><p>Ikuti <a href="/docs/id/v2.6.x/install_standalone-docker-compose.md">Jalankan Milvus dengan Docker Compose</a>. Contoh:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp-compose &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp-compose
 wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml
 <span class="hljs-comment"># By default, the Docker Compose standalone uses Woodpecker</span>
@@ -376,7 +376,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Berdasarkan tolok ukur dan batas backend di <a href="/docs/id/woodpecker_architecture.md">Woodpecker</a>, optimalkan throughput penulisan end-to-end dari aspek-aspek berikut:</p>
+    </button></h2><p>Berdasarkan tolok ukur dan batas backend di <a href="/docs/id/v2.6.x/woodpecker_architecture.md">Woodpecker</a>, optimalkan throughput penulisan end-to-end dari aspek-aspek berikut:</p>
 <ul>
 <li>Sisi penyimpanan<ul>
 <li><strong>Penyimpanan objek (kompatibel dengan minio/S3)</strong>: Tingkatkan konkurensi dan ukuran objek (hindari objek kecil). Perhatikan batas bandwidth jaringan dan bucket. Satu node MinIO pada SSD sering kali memiliki batas sekitar 100 MB/s secara lokal; satu EC2 ke S3 dapat mencapai GB/s.</li>
@@ -451,5 +451,5 @@ batch_count = <span class="hljs-number">2000</span>
       </svg>
     </button></h2><p>Woodpecker adalah WAL cloud-native yang dirancang untuk penyimpanan objek dengan trade-off antara throughput, biaya, dan latensi. Mode tertanam ringan yang saat ini didukung memprioritaskan pengoptimalan biaya dan keluaran, karena sebagian besar skenario hanya membutuhkan data untuk ditulis dalam waktu tertentu daripada menuntut latensi rendah untuk setiap permintaan penulisan. Oleh karena itu, Woodpecker menggunakan penulisan batch, dengan interval default 10 ms untuk backend penyimpanan sistem berkas lokal dan 200 ms untuk backend penyimpanan seperti MinIO. Selama operasi penulisan yang lambat, latensi maksimum sama dengan waktu interval ditambah waktu flush.</p>
 <p>Perhatikan bahwa penyisipan batch tidak hanya dipicu oleh interval waktu tetapi juga oleh ukuran batch, yang secara default adalah 2MB.</p>
-<p>Untuk detail tentang arsitektur, mode penyebaran (MemoryBuffer / QuorumBuffer), dan kinerja, lihat <a href="/docs/id/woodpecker_architecture.md">Arsitektur Woodpecker</a>.</p>
+<p>Untuk detail tentang arsitektur, mode penyebaran (MemoryBuffer / QuorumBuffer), dan kinerja, lihat <a href="/docs/id/v2.6.x/woodpecker_architecture.md">Arsitektur Woodpecker</a>.</p>
 <p>Untuk detail parameter lebih lanjut, lihat <a href="https://github.com/zilliztech/woodpecker">repositori GitHub</a> Woodpecker.</p>

@@ -37,9 +37,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>The SDK of your language installed. For details, refer to <a href="/docs/install-pymilvus.md">Python SDK</a>, <a href="/docs/install-java.md">Java SDK</a>, <a href="/docs/install-go.md">Go SDK</a>, or <a href="/docs/install-node.md">Nodejs SDK</a>.</p></li>
+<li><p>The SDK of your language installed. For details, refer to <a href="/docs/v2.6.x/install-pymilvus.md">Python SDK</a>, <a href="/docs/v2.6.x/install-java.md">Java SDK</a>, <a href="/docs/v2.6.x/install-go.md">Go SDK</a>, or <a href="/docs/v2.6.x/install-node.md">Nodejs SDK</a>.</p></li>
 <li><p>A Milvus server address (for local default: <code translate="no">http://localhost:19530</code>, proxy port <strong>19530</strong>).</p></li>
-<li><p>If <a href="/docs/authenticate.md">authentication is enabled</a>, provide either a <strong>token</strong> or a <strong>username + password</strong>. A token can be <code translate="no">username:password</code> (e.g., <code translate="no">root:Milvus</code>). See <a href="/docs/authenticate.md">Authenticate User Access</a> and <a href="/docs/users_and_roles.md">Create Users & Roles</a> for details.</p></li>
+<li><p>If <a href="/docs/v2.6.x/authenticate.md">authentication is enabled</a>, provide either a <strong>token</strong> or a <strong>username + password</strong>. A token can be <code translate="no">username:password</code> (e.g., <code translate="no">root:Milvus</code>). See <a href="/docs/v2.6.x/authenticate.md">Authenticate User Access</a> and <a href="/docs/v2.6.x/users_and_roles.md">Create Users & Roles</a> for details.</p></li>
 </ul>
 <h2 id="Connect-by-URI-authentication-disabled" class="common-anchor-header">Connect by URI (authentication disabled)<button data-href="#Connect-by-URI-authentication-disabled" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -170,7 +170,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Token format is <code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code>. The docs explicitly note <code translate="no">root:Milvus</code> as the default credential, and the <a href="/docs/users_and_roles.md">Create Users & Roles</a> guide covers managing users.</p>
+<p>Token format is <code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code>. The docs explicitly note <code translate="no">root:Milvus</code> as the default credential, and the <a href="/docs/v2.6.x/users_and_roles.md">Create Users & Roles</a> guide covers managing users.</p>
 </div>
 <h2 id="Configure-a-timeout" class="common-anchor-header">Configure a timeout<button data-href="#Configure-a-timeout" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -329,7 +329,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>See the <a href="/docs/manage_databases.md">Database</a> guide for creating, listing, and describing databases, and for broader database management tasks.</p>
+<p>See the <a href="/docs/v2.6.x/manage_databases.md">Database</a> guide for creating, listing, and describing databases, and for broader database management tasks.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -347,7 +347,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/create-collection.md">Create Collection</a></p></li>
-<li><p><a href="/docs/insert-update-delete.md">Insert Entities</a></p></li>
-<li><p><a href="/docs/single-vector-search.md">Basic Vector Search</a></p></li>
+<li><p><a href="/docs/v2.6.x/create-collection.md">Create Collection</a></p></li>
+<li><p><a href="/docs/v2.6.x/insert-update-delete.md">Insert Entities</a></p></li>
+<li><p><a href="/docs/v2.6.x/single-vector-search.md">Basic Vector Search</a></p></li>
 </ul>
