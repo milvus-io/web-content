@@ -16,7 +16,9 @@ The following collection shows Milvus versions and recommended @zilliz/milvus2-s
 
 | Milvus version | Recommended @zilliz/milvus2-sdk-node version |
 | :------------: | :------------------------------------------: |
-|     2.5.x      |                    latest                    |
+|     3.0.x      |                    latest                    |
+|     2.6.x      |                    2.6.x                     |
+|     2.5.x      |                    2.5.x                     |
 |     2.4.x      |                    2.4.10                    |
 |     2.3.x      |                    2.3.5                     |
 |     2.2.x      |                    2.2.x                     |
@@ -53,4 +55,4 @@ Having installed Milvus Node.js SDK, you can:
   - [Single-Vector Search](single-vector-search.md)
   - [Hybrid Search](multi-vector-search.md)
 
-- Explore [Milvus Node.js API reference](/api-reference/node/v2.4.x/About.md)
+- Explore [Milvus Node.js API reference](/api-reference/node/v3.0.x/About.md)
