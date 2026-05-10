@@ -2,6 +2,10 @@
 
 This operation removes all entities while preserving the collection's schema, constraints, and indexes. It is more efficient than deleting entities because it hides all entities flushed before the current timestamp from searches and queries and drops them in the background.
 
+<div class="alert note">
+
+</div>
+
 ## Request Syntax
 
 ```python

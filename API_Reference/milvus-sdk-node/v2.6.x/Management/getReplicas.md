@@ -32,17 +32,96 @@ await milvusClient.getReplicas({
 
     RPC timeout in milliseconds. Optional.
 
-**RETURNS:**
+**RETURNS** *Promise<ReplicasResponse>*
 
-*Promise\<ReplicasResponse\>*
+This method returns a promise that resolves to a **ReplicasResponse** object.
 
-The response contains a `replicas` array with replica details including ID, partition IDs, shard replicas, and node IDs.
+```javascript
+{
+    replicas: ReplicaInfo[],
+    status:  ResStatus
+}
+```
 
-**EXCEPTIONS:**
+**PARAMETERS:**
 
-- **MilvusError**
+- **replicas** (*ReplicaInfo[]*) -
+A list of replicas currently serving the requested collection.
 
-    This exception will be raised when any error occurs during this operation.
+    - **replicaID** (*string*) -
+
+        The replica identifier.
+
+    - **collectionID** (*string*) -
+
+        The collection identifier.
+
+    - **partition_ids** (*string[]*) -
+
+        The partition identifiers covered by this replica.
+
+    - **shard_replicas** (*ShardReplica[]*) -
+
+        Per-shard leader and node assignment information.
+
+        - **leaderID** (*string*) -
+
+        The query node ID acting as the shard leader.
+
+        - **leader_addr** (*string*) -
+
+        The address of the leader query node.
+
+        - **dm_channel_name** (*string*) -
+
+        The DML channel served by this shard.
+
+        - **node_ids** (*string[]*) -
+
+        The query node IDs that hold this shard's data.
+
+        - **leaderID** (*string*) -
+
+            The query node ID acting as the shard leader.
+
+        - **leader_addr** (*string*) -
+
+            The address of the leader query node.
+
+        - **dm_channel_name** (*string*) -
+
+            The DML channel served by this shard.
+
+        - **node_ids** (*string[]*) -
+
+            The query node IDs that hold this shard's data.
+
+    - **node_ids** (*string[]*) -
+
+        The query node IDs that participate in this replica.
+
+    - **resource_group_name** (*string*) -
+
+        The resource group that owns this replica's nodes.
+
+    - **num_outbound_node** (*Record<string, number>*) -
+
+        The count of outbound nodes per resource group, used during rebalancing.
+
+- **ResStatus**
+A **ResStatus** object.
+
+    - **code** (*number*) -
+
+        A code that indicates the operation result. It remains **0** if this operation succeeds.
+
+    - **error_code** (*string* | *number*) -
+
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
+
+    - **reason** (*string*) -
+
+        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
 ## Example
 

@@ -20,26 +20,24 @@ milvusClient.listUsers()
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-*Returns Promise\<ListCredUsersResponse>*
+**RETURNS** *Promise<ListCredUsersResponse>*
 
 This method returns a promise that resolves to a **ListCredUsersResponse** object.
 
 ```javascript
 {
-    usernames: string
-    status: ResStatus
+    usernames: string[],
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
 - **usernames** (*string[]*) -
-
-    A list of user names.
+A list of usernames that exist in the current Milvus instance.
 
 - **ResStatus**
-
-    A **ResStatus object.
+A **ResStatus** object.
 
     - **code** (*number*) -
 
@@ -47,9 +45,9 @@ This method returns a promise that resolves to a **ListCredUsersResponse** objec
 
     - **error_code** (*string* | *number*) -
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 

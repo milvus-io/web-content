@@ -1,6 +1,12 @@
 # upload_file_to_volume()
 
-This operation uploads the local file at the specified source path to the target file path within the specified volume.
+This operation uploads the local file at the specified source path to the target file path within the specified managed volume.
+
+<div class="alert note">
+
+This applies only to managed volumes. External volumes are read-only.
+
+</div>
 
 ## Request Syntax
 

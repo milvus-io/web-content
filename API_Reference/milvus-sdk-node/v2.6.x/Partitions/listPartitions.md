@@ -45,39 +45,48 @@ await milvusClient.listPartitions({
 
         Indicates that only the loaded partitions are to be listed.
 
-**RETURNS** *Promise\<ShowPartitionsResponse>*
+**RETURNS** *Promise<ShowPartitionsResponse>*
 
 This method returns a promise that resolves to a **ShowPartitionsResponse** object.
 
 ```javascript
 {
-    created_timestamps: string | list[string],
-    created_utc_timestamps: string | list[string],
-    partitionIDs: number | list[number],
-    partition_names: string | list[string],
-    status: object
+    partition_names: string[],
+    partitionIDs: number[],
+    data: PartitionData[],
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
-- **created_timestamps** (*string* | *list[string]*) -
+- **partition_names** (*string[]*) -
+A list of partition names defined on the collection.
 
-    The timestamp indicating the creation time of the partition.
+- **partitionIDs** (*number[]*) -
+The internal identifiers of the partitions, in the same order as **partition_names**.
 
-- **created_utc_timestamps** (*string* | *list[string]*) -
+- **data** (*PartitionData[]*) -
+A flattened, per-partition view that bundles the name, identifier, creation timestamp, and load percentage.
 
-    The timestamp in UTC indicating the creation time of the partition.
+    - **name** (*string*) -
 
-- **partitionIDs** (*number* | *list[number]*) -
+        The partition name.
 
-    A list of the IDs of the partitions.
+    - **id** (*string*) -
 
-- **partition_names** (*string* | *list[string]*) -
+        The partition identifier.
 
-    A list of the names of the partitions.
+    - **timestamp** (*string*) -
 
-- **status** (*object*) -
+        The creation timestamp of the partition.
+
+    - **loadedPercentage** (*string*) -
+
+        The percentage of the partition that is currently loaded into memory.
+
+- **ResStatus**
+A **ResStatus** object.
 
     - **code** (*number*) -
 
@@ -85,9 +94,9 @@ This method returns a promise that resolves to a **ShowPartitionsResponse** obje
 
     - **error_code** (*string* | *number*) -
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 

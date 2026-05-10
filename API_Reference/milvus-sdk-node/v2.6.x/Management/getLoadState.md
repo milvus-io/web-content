@@ -37,32 +37,24 @@ await milvusClient.getLoadState({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise\<GetLoadStateResponse>*
+**RETURNS** *Promise<GetLoadStateResponse>*
 
 This method returns a promise that resolves to a **GetLoadStateResponse** object.
 
 ```javascript
 {
     state: LoadState,
-    status: ResStatus
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
-- state (*LoadState*) -
+- **state** (*LoadState*) -
+The current load state. Possible values are **LoadStateNotExist**, **LoadStateNotLoad**, **LoadStateLoading**, and **LoadStateLoaded**.
 
-    The load status. The are four states:
-
-    - **LoadStateLoaded** indicates the status is loaded.
-
-    - **LoadStateLoading** indicates the status is loading.
-
-    - **LoadStateNotExist** indicates the status is not available.
-
-    - **LoadStateNotLoad** indicates the status is unloaded.
-
-- **status** (*ResStatus*) -
+- **ResStatus**
+A **ResStatus** object.
 
     - **code** (*number*) -
 
@@ -70,9 +62,9 @@ This method returns a promise that resolves to a **GetLoadStateResponse** object
 
     - **error_code** (*string* | *number*) -
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 

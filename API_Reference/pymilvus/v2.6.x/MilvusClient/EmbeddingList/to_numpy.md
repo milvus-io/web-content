@@ -1,6 +1,6 @@
 # to_numpy()
 
-This operation converts the current **EmbeddingList** instance into a two-dimensional (2D) NumPy array containing all vector embeddings.
+This operation converts the current **[EmbeddingList](EmbeddingList.md)** instance into a two-dimensional (2D) NumPy array containing all vector embeddings.
 
 ## Request Syntax
 
@@ -20,7 +20,7 @@ A 2D NumPy array containing all vector embeddings in the shape **(num_embeddings
 
 - **ValueError**:
 
-    This exception will be raised if the current **EmbeddingList** instance is empty.
+    This exception will be raised if the current **[EmbeddingList](EmbeddingList.md)** instance is empty.
 
 ## Examples
 

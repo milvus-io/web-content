@@ -64,6 +64,8 @@ A dictionary that contains detailed information about the specified collection.
               'element_type': 0
           }
      ],
+     'externalSource': '',
+     'externalSpecs': '',
      'functions': [],
      'aliases': [],
      'collection_id': 446738261026541332,
@@ -93,6 +95,14 @@ A dictionary that contains detailed information about the specified collection.
 - **description** (*str*) -
 
     The description of the current collection.
+
+- **external_source** (*str*) -
+
+    The external source of the collection. This applies only to external collections. 
+
+- **external_specs** (*str*) -
+
+    The external specifications of the collection. This applies only to external collections.
 
 - **fields** (*list*) -
 

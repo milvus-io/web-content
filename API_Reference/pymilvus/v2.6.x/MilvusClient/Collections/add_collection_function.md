@@ -2,6 +2,10 @@
 
 This operation adds a new function to the collection. Functions allow you to define custom processing logic such as BM25 scoring or embedding generation.
 
+<div class="alert note">
+
+</div>
+
 ## Request syntax
 
 ```python
@@ -21,7 +25,7 @@ client.add_collection_function(
 
     The name of the collection.
 
-- **function** (*Function*) -
+- **[function](../Function/Function.md)** (*[Function](../Function/Function.md)*) -
 
     **[REQUIRED]**
 

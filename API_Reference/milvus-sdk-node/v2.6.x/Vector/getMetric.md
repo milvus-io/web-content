@@ -27,17 +27,40 @@ await milvusClient.getMetric({
 
     RPC timeout in milliseconds. Optional.
 
-**RETURNS:**
+**RETURNS** *Promise<GetMetricsResponse>*
 
-*Promise\<GetMetricsResponse\>*
+This method returns a promise that resolves to a **GetMetricsResponse** object.
 
-The response contains the parsed metric data and the component name.
+```javascript
+{
+    response: any,
+    component_name: string,
+    status:  ResStatus
+}
+```
 
-**EXCEPTIONS:**
+**PARAMETERS:**
 
-- **MilvusError**
+- **response** (*any*) -
+The metrics payload returned by the targeted component. The shape depends on the requested **metric_type** (for example, **system_info**, **system_statistics**, **system_log**); parse this value as JSON.
 
-    This exception will be raised when any error occurs during this operation.
+- **component_name** (*string*) -
+The component that produced the metrics (for example, **rootcoord**, **querynode**, **datanode**).
+
+- **ResStatus**
+A **ResStatus** object.
+
+    - **code** (*number*) -
+
+        A code that indicates the operation result. It remains **0** if this operation succeeds.
+
+    - **error_code** (*string* | *number*) -
+
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
+
+    - **reason** (*string*) -
+
+        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
 ## Example
 

@@ -1,6 +1,6 @@
 # to_flat_array()
 
-This operation converts the current **EmbeddingList** instance into a flattened NumPy array containing all vector embeddings concatenated.
+This operation converts the current **[EmbeddingList](EmbeddingList.md)** instance into a flattened NumPy array containing all vector embeddings concatenated.
 
 ## Request Syntax
 
@@ -20,7 +20,7 @@ A flattened NumPy array containing all vector embeddings concatenated.
 
 - **ValueError**:
 
-    This exception will be raised if the current **EmbeddingList** instance is empty.
+    This exception will be raised if the current **[EmbeddingList](EmbeddingList.md)** instance is empty.
 
 ## Examples
 

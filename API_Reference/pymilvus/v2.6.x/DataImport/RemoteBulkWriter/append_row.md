@@ -16,7 +16,7 @@ append_row(
 
     A dictionary representing an entity to be appended.
 
-    The keys and their values in the dictionary should match the schema referenced in the current **LocalBulkWriter**.
+    The keys and their values in the dictionary should match the schema referenced in the current **[LocalBulkWriter](../LocalBulkWriter/LocalBulkWriter.md)**.
 
 ## Examples
 

@@ -1,6 +1,6 @@
 # FunctionScore
 
-A **FunctionScore** instance combines multiple **Function**s in a configurable manner. You can use a **FunctionScore** instance as a ranker to combine multiple reranking **Function**s.
+A **FunctionScore** instance combines multiple **[Function](Function/Function.md)**s in a configurable manner. You can use a **FunctionScore** instance as a ranker to combine multiple reranking **[Function](Function/Function.md)**s.
 
 ```python
 class pymilvus.FunctionScore
@@ -8,7 +8,7 @@ class pymilvus.FunctionScore
 
 ## Constructor
 
-Constructs a **FunctionScore** instance that combines multiple **Function**s in a configurable manner.
+Constructs a **FunctionScore** instance that combines multiple **[Function](Function/Function.md)**s in a configurable manner.
 
 ```python
 FunctionScore(

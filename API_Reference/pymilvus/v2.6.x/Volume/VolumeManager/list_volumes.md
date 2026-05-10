@@ -2,6 +2,10 @@
 
 This operation lists all volumes within a specific project in a paginated manner.
 
+<div class="alert note">
+
+</div>
+
 ## Request Syntax
 
 ```python
@@ -75,6 +79,10 @@ An object with the following data structure:
 
         The name of a volume.
 
+    - **type** (*str*) -
+
+        The type of a volume. Possible values are `EXTERNAL` and `MANAGED`.
+
 ## Example
 
 ```python
@@ -99,7 +107,8 @@ print(f"\nlistVolumes results: \n", volume_list.json()['data'])
 #     "pageSize": 10,
 #     "volumes": [
 #         {
-#             "volumeName": "my_volume"
+#             "volumeName": "my_volume",
+#             "type": "MANAGED"
 #         }        
 #     ]
 # }

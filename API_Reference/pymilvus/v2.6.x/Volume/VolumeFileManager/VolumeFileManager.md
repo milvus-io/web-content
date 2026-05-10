@@ -1,6 +1,6 @@
 # VolumeFileManager
 
-A `VolumeFileManager` instance maintains a connection to a specific Zilliz Cloud volume. Before uploading data files to a volume, you need to initiate a `VolumeFileManager` instance.
+A `VolumeFileManager` instance maintains a connection to a specific Zilliz Cloud managed volume. Before uploading data files to a volume, you need to initiate a `VolumeFileManager` instance.
 
 ```python
 class pymilvus.bulk_writer.volume_file_manager import VolumeFileManager
@@ -8,7 +8,7 @@ class pymilvus.bulk_writer.volume_file_manager import VolumeFileManager
 
 <div class="alert note">
 
-A volume is an intermediate storage spot where you can hold your data for further processing, such as data merging, migration, or importing. For details, refer to [Volume](https://docs.zilliz.com/docs/volume).
+This method uploads files to managed volumes on Zilliz Cloud. It does not upload files to external volumes, which are read-only references to data in external object storage. For details, refer to [Volume](https://docs.zilliz.com/docs/volume).
 
 </div>
 

@@ -42,54 +42,24 @@ await milvusClient.getIndexState({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<GetIndexStateResponse>*
+**RETURNS** *Promise<GetIndexStateResponse>*
 
 This method returns a promise that resolves to a **GetIndexStateResponse** object.
 
 ```javascript
 {
     state: IndexState,
-    status: {
-        code: number,
-        error_code: string | number,
-        reason: string
-    }
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
 - **state** (*IndexState*) -
+The current build state of the index. Possible values are **IndexStateNone**, **Unissued**, **InProgress**, **Finished**, and **Failed**.
 
-    The state of the specified index. Possible values are as follows:
-
-    - **Failed** (4)
-
-        The index building process failed.
-
-    - **Finished** (3)
-
-        The index building process succeeds.
-
-    - **InProgress** (2)
-
-        The index building process is in progress.
-
-    - **Unissued** (1)
-
-        The index building process has not started yet.
-
-    - **IndexStateNone** (0)
-
-        The index state is unknown.
-
-- **total_rows** (*number*) -
-
-    The number of entities that already persisted in the specified collection.
-
-- **status** (*ResStatus*) -  
-
-    The status of the response.
+- **ResStatus**
+A **ResStatus** object.
 
     - **code** (*number*) -
 
@@ -97,9 +67,9 @@ This method returns a promise that resolves to a **GetIndexStateResponse** objec
 
     - **error_code** (*string* | *number*) -
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 

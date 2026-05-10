@@ -29,41 +29,40 @@ await milvusClient.getCompactionState({
 
     Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise\<GetCompactionStateResponse>*
+**RETURNS** *Promise<GetCompactionStateResponse>*
 
 This method returns a promise that resolves to a **GetCompactionStateResponse** object.
 
 ```javascript
 {
-    completedPlanNo: string,
-    executingPlanNo: string,
     state: CompactionState,
-    status: ResStatus,
+    executingPlanNo: string,
     timeoutPlanNo: string,
+    completedPlanNo: string,
+    failedPlanNo: string,
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
-- **completedPlanNo** (*string*) -
-
-    The serial number of the completed plan for the specified compaction job.
+- **state** (*CompactionState*) -
+The aggregate state of the compaction. Possible values are **UndefiedState**, **Executing**, and **Completed**.
 
 - **executingPlanNo** (*string*) -
+The number of plans still executing.
 
-    The serial number of the executing plan for the specified compaction job.
+- **timeoutPlanNo** (*string*) -
+The number of plans that timed out.
 
-- **state** (*CompactionState*) -
+- **completedPlanNo** (*string*) -
+The number of plans that completed successfully.
 
-    The state of the specified compaction job. Possible values are as follows:
+- **failedPlanNo** (*string*) -
+The number of plans that failed.
 
-    - **Completed** (2)
-
-    - **Executing** (1)
-
-    - **UndefiedState** (0)
-
-- **status** (*ResStatus*) -
+- **ResStatus**
+A **ResStatus** object.
 
     - **code** (*number*) -
 
@@ -71,15 +70,11 @@ This method returns a promise that resolves to a **GetCompactionStateResponse** 
 
     - **error_code** (*string* | *number*) -
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
-
-- **timeoutPlanNo** (*string*) -
-
-    The serial number of the timeout plan for the specified compaction job.
 
 ## Example
 

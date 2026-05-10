@@ -18,7 +18,7 @@ construct_from_dict(
 
 **RETURN TYPE:**
 
-*Function*
+*[Function](Function.md)*
 
 **RETURNS:**
 

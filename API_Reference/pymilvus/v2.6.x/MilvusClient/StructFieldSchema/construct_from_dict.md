@@ -1,6 +1,6 @@
 # construct_from_dict()
 
-This operation constructs a **StructFieldSchema** object from a dictionary representation.
+This operation constructs a **[StructFieldSchema](StructFieldSchema.md)** object from a dictionary representation.
 
 ## Request Syntax
 
@@ -18,11 +18,11 @@ construct_from_dict(
 
 **RETURN TYPE:**
 
-*StructFieldSchema*
+*[StructFieldSchema](StructFieldSchema.md)*
 
 **RETURNS:**
 
-A **StructFieldSchema** object.
+A **[StructFieldSchema](StructFieldSchema.md)** object.
 
 **EXCEPTIONS:**
 
