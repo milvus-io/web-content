@@ -1,7 +1,16 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const fs = require('node:fs/promises');
+const os = require('node:os');
+const path = require('node:path');
 
-const { buildSyncPlan, assertAllowedTarget } = require('../shared-sync/core');
+const {
+  buildSyncPlan,
+  assertAllowedTarget,
+  diffTrees,
+  runCheck,
+  runApply,
+} = require('../shared-sync/core');
 
 test('buildSyncPlan resolves milvus-docs default branch dynamically via fetch', async () => {
   const manifest = [
@@ -39,4 +48,102 @@ test('assertAllowedTarget rejects non-whitelisted target', () => {
     () => assertAllowedTarget('/tmp/repo/scripts/evil', '/tmp/repo'),
     /Target path is not allowed/
   );
+});
+
+test('diffTrees returns deterministic sorted added/changed/deleted', () => {
+  const localTree = {
+    'b.txt': 'old-b',
+    'a.txt': 'same',
+    'remove.txt': 'gone',
+  };
+  const remoteTree = {
+    'c.txt': 'new-c',
+    'a.txt': 'same',
+    'b.txt': 'new-b',
+  };
+
+  const diff = diffTrees(localTree, remoteTree);
+
+  assert.deepEqual(diff, {
+    added: ['c.txt'],
+    changed: ['b.txt'],
+    deleted: ['remove.txt'],
+    hasDrift: true,
+  });
+});
+
+test('runCheck reports drift and exit code 1 when differences exist', async () => {
+  const rows = [];
+  const logger = { log: (line) => rows.push(line) };
+
+  const plan = [
+    { name: 'sync-a', targetAbsPath: '/tmp/a' },
+    { name: 'sync-b', targetAbsPath: '/tmp/b' },
+  ];
+
+  const result = await runCheck({
+    plan,
+    fetchRemoteTreeImpl: async (entry) => ({
+      'shared.js': `remote-${entry.name}`,
+      'keep.js': 'same',
+    }),
+    readLocalTreeImpl: async (targetAbsPath) => {
+      if (targetAbsPath.endsWith('/a')) {
+        return { 'shared.js': 'local-a', 'old.js': 'remove' };
+      }
+      return { 'shared.js': 'remote-sync-b', 'keep.js': 'same' };
+    },
+    logger,
+  });
+
+  assert.equal(result.exitCode, 1);
+  assert.equal(result.hasDrift, true);
+  assert.deepEqual(
+    result.rows.map((x) => ({ name: x.name, status: x.status, diff: x.diff })),
+    [
+      {
+        name: 'sync-a',
+        status: 'DRIFT',
+        diff: { added: ['keep.js'], changed: ['shared.js'], deleted: ['old.js'], hasDrift: true },
+      },
+      {
+        name: 'sync-b',
+        status: 'OK',
+        diff: { added: [], changed: [], deleted: [], hasDrift: false },
+      },
+    ]
+  );
+  assert.deepEqual(rows, ['DRIFT | sync-a | +1 ~1 -1', 'OK    | sync-b | +0 ~0 -0']);
+});
+
+test('runApply writes remote tree and removes drifted local files', async () => {
+  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'shared-sync-'));
+  const target = path.join(tempDir, 'scripts/lib');
+  await fs.mkdir(target, { recursive: true });
+  await fs.writeFile(path.join(target, 'old.js'), 'remove-me\n', 'utf8');
+  await fs.writeFile(path.join(target, 'same.js'), 'same\n', 'utf8');
+
+  const result = await runApply({
+    plan: [{ name: 'sync-a', targetAbsPath: target }],
+    fetchRemoteTreeImpl: async () => ({
+      'same.js': 'same\n',
+      'new.js': 'new\n',
+    }),
+    readLocalTreeImpl: async (absTarget) => {
+      const current = {};
+      for (const file of await fs.readdir(absTarget)) {
+        current[file] = await fs.readFile(path.join(absTarget, file), 'utf8');
+      }
+      return current;
+    },
+  });
+
+  assert.equal(result.exitCode, 0);
+  assert.equal(result.hasDrift, true);
+  assert.deepEqual(result.rows[0].diff.deleted, ['old.js']);
+  assert.deepEqual(result.rows[0].diff.added, ['new.js']);
+
+  const files = (await fs.readdir(target)).sort();
+  assert.deepEqual(files, ['new.js', 'same.js']);
+  assert.equal(await fs.readFile(path.join(target, 'new.js'), 'utf8'), 'new\n');
 });
