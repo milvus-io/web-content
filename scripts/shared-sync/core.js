@@ -184,6 +184,9 @@ async function applyTree(absTarget, remoteTree, fsImpl = fs) {
   await fsImpl.mkdir(parentDir, { recursive: true });
   await fsImpl.mkdir(stagingDir, { recursive: true });
 
+  let hadExistingTarget = false;
+  let backupExists = false;
+
   try {
     for (const rel of Object.keys(remoteTree).sort()) {
       const absPath = path.join(stagingDir, rel);
@@ -191,7 +194,6 @@ async function applyTree(absTarget, remoteTree, fsImpl = fs) {
       await fsImpl.writeFile(absPath, remoteTree[rel], 'utf8');
     }
 
-    let hadExistingTarget = false;
     try {
       await fsImpl.access(absTarget);
       hadExistingTarget = true;
@@ -203,22 +205,29 @@ async function applyTree(absTarget, remoteTree, fsImpl = fs) {
 
     if (hadExistingTarget) {
       await fsImpl.rename(absTarget, backupDir);
+      backupExists = true;
     }
 
     try {
       await fsImpl.rename(stagingDir, absTarget);
-      if (hadExistingTarget) {
-        await fsImpl.rm(backupDir, { recursive: true, force: true });
+    } catch (swapError) {
+      if (backupExists) {
+        try {
+          await fsImpl.rename(backupDir, absTarget);
+          backupExists = false;
+        } catch {
+          throw swapError;
+        }
       }
-    } catch (error) {
-      if (hadExistingTarget) {
-        await fsImpl.rename(backupDir, absTarget);
-      }
-      throw error;
+      throw swapError;
+    }
+
+    if (backupExists) {
+      await fsImpl.rm(backupDir, { recursive: true, force: true });
+      backupExists = false;
     }
   } catch (error) {
     await fsImpl.rm(stagingDir, { recursive: true, force: true });
-    await fsImpl.rm(backupDir, { recursive: true, force: true });
     throw error;
   }
 }

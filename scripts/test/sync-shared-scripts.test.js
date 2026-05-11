@@ -192,3 +192,53 @@ test('runApply keeps original target unchanged when apply fails mid-write', asyn
   assert.equal(await fs.readFile(path.join(target, 'stable.js'), 'utf8'), 'stable\n');
   await assert.rejects(fs.access(path.join(target, 'new.js')));
 });
+
+test('runApply preserves backup directory when rollback restore fails', async () => {
+  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'shared-sync-'));
+  const target = path.join(tempDir, 'scripts/lib');
+  await fs.mkdir(target, { recursive: true });
+  await fs.writeFile(path.join(target, 'stable.js'), 'stable\n', 'utf8');
+
+  const fsImpl = {
+    ...fs,
+    rename: async (fromPath, toPath) => {
+      if (fromPath.includes('.shared-sync-stage-') && toPath === target) {
+        throw new Error('injected swap failure');
+      }
+      if (fromPath.includes('.shared-sync-backup-') && toPath === target) {
+        throw new Error('injected restore failure');
+      }
+      return fs.rename(fromPath, toPath);
+    },
+  };
+
+  await assert.rejects(
+    runApply({
+      plan: [{ name: 'sync-a', targetAbsPath: target }],
+      fetchRemoteTreeImpl: async () => ({
+        'stable.js': 'stable-updated\n',
+      }),
+      readLocalTreeImpl: async (absTarget) => {
+        const current = {};
+        for (const file of await fs.readdir(absTarget)) {
+          current[file] = await fs.readFile(path.join(absTarget, file), 'utf8');
+        }
+        return current;
+      },
+      fsImpl,
+    }),
+    /injected swap failure/
+  );
+
+  await assert.rejects(fs.access(target));
+
+  const parentEntries = await fs.readdir(path.dirname(target));
+  const backupDirName = parentEntries.find((name) => name.startsWith('.shared-sync-backup-'));
+  assert.ok(backupDirName, 'backup directory should be preserved when rollback fails');
+
+  const stageDirName = parentEntries.find((name) => name.startsWith('.shared-sync-stage-'));
+  assert.equal(stageDirName, undefined);
+
+  const backupFile = path.join(path.dirname(target), backupDirName, 'stable.js');
+  assert.equal(await fs.readFile(backupFile, 'utf8'), 'stable\n');
+});
