@@ -1,6 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
+const fsSync = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 
@@ -11,6 +12,29 @@ const {
   runCheck,
   runApply,
 } = require('../shared-sync/core');
+
+test('lark-docs entrypoint and translator import shared scripts/lib modules', () => {
+  const scriptsDir = path.resolve(__dirname, '..');
+  const larkDocsDir = path.join(scriptsDir, 'lark-docs');
+
+  const entrypointPath = path.join(larkDocsDir, 'index.js');
+  const translatorPath = path.join(larkDocsDir, 'larkTranslator.js');
+
+  const entrypointSource = fsSync.readFileSync(entrypointPath, 'utf8');
+  const translatorSource = fsSync.readFileSync(translatorPath, 'utf8');
+
+  assert.match(entrypointSource, /require\('\.\.\/lib\/milvusDocsGen\.js'\)/);
+  assert.match(entrypointSource, /require\('\.\.\/lib\/milvusSdkDocsGen\.js'\)/);
+  assert.match(translatorSource, /require\('\.\.\/lib\/larkTokenFetcher\.js'\)/);
+
+  const docsGenResolved = require.resolve('../lib/milvusDocsGen.js', { paths: [larkDocsDir] });
+  const sdkDocsGenResolved = require.resolve('../lib/milvusSdkDocsGen.js', { paths: [larkDocsDir] });
+  const tokenFetcherResolved = require.resolve('../lib/larkTokenFetcher.js', { paths: [larkDocsDir] });
+
+  assert.equal(docsGenResolved, path.join(scriptsDir, 'lib', 'milvusDocsGen.js'));
+  assert.equal(sdkDocsGenResolved, path.join(scriptsDir, 'lib', 'milvusSdkDocsGen.js'));
+  assert.equal(tokenFetcherResolved, path.join(scriptsDir, 'lib', 'larkTokenFetcher.js'));
+});
 
 test('buildSyncPlan resolves milvus-docs default branch dynamically via fetch', async () => {
   const manifest = [

@@ -1,6 +1,5 @@
 const fs = require('node:fs')
 const node_path = require('node:path')
-const slugify = require('slugify')
 
 class larkUtils {
     constructor() {
@@ -50,6 +49,15 @@ class larkUtils {
                 fs.rmSync(`${outputDir}/${folder}`, {recursive: true, force: true})
             }   
         }
+
+        // // remove unnecessary index files
+        // const index_files = fs.readdirSync(outputDir, {recursive: true})
+        //     .filter(path => fs.statSync(`${outputDir}/${path}`).isDirectory() && fs.existsSync(`${outputDir}/${path}/${path}.md`))
+            
+        // for (const index_file of index_files) {
+        //     const index_path = `${outputDir}/${index_file}/${index_file}.md`
+        //     fs.rmSync(index_path, { force: true })
+        // }
 
         // check broken links and anchors
         const mds = fs.readdirSync(outputDir, {recursive: true}).filter(path => path.endsWith('.md'))
@@ -183,7 +191,7 @@ class larkUtils {
             matches.forEach(match => {
                 const label = match[1]
                 const path = match[2]
-                var link = path.startsWith('http') ? path : this.__convert_link(file, path, outputDir)
+                var link = path.startsWith('http') ? path : this.__convert_link(file, label, path, outputDir)
                 content = content.replace(match[0], `[${label}](${link})`)
             })
 
@@ -193,53 +201,27 @@ class larkUtils {
             fs.writeFileSync(`${outputDir}/${file}`, content, {encoding: 'utf-8', flag: 'w'})
         }
 
-        // remove index files
-        const folders = fs.readdirSync(outputDir, {recursive: true}).filter(path => fs.statSync(`${outputDir}/${path}`).isDirectory())
-
-        for (const folder of folders) {
-            var index_page_name = folder.split('/').slice(-1)[0] + '.md'
-            if (fs.existsSync(`${outputDir}/${folder}/${index_page_name}`)) {
-                const content = fs.readFileSync(`${outputDir}/${folder}/${index_page_name}`, {encoding: 'utf-8', flag: 'r'})
-                if (content.split('\n').length < 15) {
-                    fs.rmSync(`${outputDir}/${folder}/${index_page_name}`, {recursive: true, force: true})
-                }
-            }
-        }
-
         // rename folders
         if (outputDir.includes('reference')) {
             this.__rename_file_path(outputDir)
         }
+
+        // remove index files
+        const folders = fs.readdirSync(outputDir, {recursive: true}).filter(path => fs.statSync(`${outputDir}/${path}`).isDirectory())
+        for (const folder of folders) {
+            if (fs.existsSync(`${outputDir}/${folder}/${folder}.md`)) {
+                fs.rmSync(`${outputDir}/${folder}/${folder}.md`, {recursive: true, force: true})
+            }
+        }
     }
 
-    fetch_fallback_sources(docSourceDir, fallbackSourceDir, sourceType) {
-        const TITLE = sourceType === 'drive' ? 'name' : 'title'
-        const TOKEN = sourceType === 'drive' ? 'token' : 'node_token'
-        const PARENT = sourceType === 'drive' ? 'parent_token' : 'parent_node_token'
+    async fetch_fallback_sources(docSourceDir, fallbackSourceDir) {
+        var replaces = []
 
         // list all files in the source directory
         var files = fs.readdirSync(docSourceDir)
         var sources = files.map(file => {
             return JSON.parse(fs.readFileSync(`${docSourceDir}/${file}`, {encoding: 'utf-8', flag: 'r'}))
-        }).map(source => {
-            var raw = JSON.stringify(source, null, 2)
-            
-            if (source?.blocks?.items) {
-                const page_block = source.blocks.items.find(block => block.block_type === 1)
-                const page_block_id = page_block?.block_id
-
-                if (page_block_id) {
-                    const regex = new RegExp(`docx%2F${page_block_id}`, 'g')
-                    // const matchesBefore = [...raw.matchAll(regex)]
-                    // console.log(matchesBefore.length)
-                    raw = raw.replace(regex, sourceType === 'drive'? `docx%2F${source[TOKEN]}` : `wiki%2F${source[TOKEN]}`)
-                    // const matchesAfter = [...raw.matchAll(regex)]
-                    // console.log(matchesAfter.length)
-                    // console.log('====')
-                }
-            }
-
-            return JSON.parse(raw)
         })
 
         // list all files in the fallback source directory
@@ -248,64 +230,63 @@ class larkUtils {
             return JSON.parse(fs.readFileSync(`${fallbackSourceDir}/${file}`, {encoding: 'utf-8', flag: 'r'}))
         })
 
-        var sourceRoot, fallbackRoot
+        var sourceRoot = sources.find(source => !source.type)
+        var fallbackRoot = fallbackSources.find(fallback => !fallback.type)
 
-        if (sourceType === 'drive') {
-            sourceRoot = sources.find(source => !source?.type)
-            // find the fallback root by name
-            fallbackRoot = fallbackSources.find(fallback => !fallback.type && fallbackSourceDir.split('/').includes(fallback[TITLE]))
-        } else if (sourceType === 'wiki') {
-            sourceRoot = sources.find(source => !source?.slug)
-            fallbackRoot = fallbackSources.find(fallback => !fallback.slug && fallbackSourceDir.split('/').includes(fallback[TITLE]))
-        } else {
-            throw new Error(`Unknown source type: ${sourceType}`)
-        }
-
-        if (sourceRoot?.children?.length > 0 && fallbackRoot?.children?.length > 0) {
-
+        if (sourceRoot && fallbackRoot) {
             fallbackRoot.children.forEach(child => {
-                var pair = sourceRoot.children.find(s => s[TITLE] === child[TITLE])
+                var pair = sourceRoot.children.find(s => s.name === child.name)
 
                 if (!pair) {
-                    child[PARENT] = sourceRoot[TOKEN]
+                    child.parent_token = sourceRoot.token
                     sourceRoot.children.push(child)
-                    // fallbackSources.find(fb => fb.token === child.token).parent_token = sourceRoot.token
+
+                    fallbackSources.forEach(fb => {
+                        if (fb.token === child.token) {
+                            fb.parent_token = sourceRoot.token
+                        }
+                    })                    
                 }
             })
 
-            fs.writeFileSync(`${docSourceDir}/${sourceRoot[TOKEN]}.json`, JSON.stringify(sourceRoot, null, 2), {encoding: 'utf-8', flag: 'w'})
+            fs.writeFileSync(`${docSourceDir}/${sourceRoot.token}.json`, JSON.stringify(sourceRoot, null, 2), {encoding: 'utf-8', flag: 'w'})
         }
 
         var replaces = []
 
         fallbackSources.forEach(fallback => {            
             // folder
-            if (fallback?.type === 'folder' || fallback?.children) {
-                var source = sources.find(source => source?.slug === fallback?.slug && (source?.type === 'folder' || source?.children))
+            if (fallback.type === 'folder') {
+                var source = sources.find(source => source.slug === fallback.slug && source.type === 'folder')
                 if (source) {
-                    fallback[TOKEN] = source[TOKEN]
-                    fallback[PARENT] = source[PARENT]
+                    fallback.token = source.token
+                    fallback.parent_token = source.parent_token
                     fallback.url = source.url
                     
                     fallback.children.forEach(child => {
-                        var pair = source.children.find(s => s[TITLE] === child[TITLE])
+                        var pair = source.children.find(s => s.name === child.name)
                         if (pair) {
                             replaces.push({
-                                from: child[TOKEN],
-                                to: pair[TOKEN]
+                                from: child.token,
+                                to: pair.token
                             })
                             
-                            child[PARENT] = pair[PARENT]
+                            child.parent_token = pair.parent_token
                             child.url = pair.url
-                            child[TOKEN] = pair[TOKEN]
+                            child.token = pair.token
                         } else {
-                            child[PARENT] = source[TOKEN]
-                            // fallbackSources.find(fb => fb.token === child.token).parent_token = source.token
+                            child.parent_token = source.token
+
+                            fallbackSources.forEach(fb => {
+                                if (fb.token === child.token) {
+                                    fb.parent_token = source.token
+                                }
+                            })
                         }
                     })
 
                     source.children.forEach(s => {
-                        if (!(fallback.children.find(fb => fb[TITLE] === s[TITLE]))) {
+                        if (!(fallback.children.find(fb => fb.name === s.name))) {
                             fallback.children.push(s)
                         }
                     })
@@ -313,11 +294,11 @@ class larkUtils {
             }
 
             // docx
-            if (fallback?.type === 'docx' || !fallback?.children) {
-                var source = sources.find(source => source?.slug === fallback?.slug && (source?.type === 'docx' || !source?.children))
+            if (fallback.type === 'docx') {
+                var source = sources.find(source => source.slug === fallback.slug && source.type === 'docx')
                 if (source) {
-                    fallback[TOKEN] = source[TOKEN]
-                    fallback[PARENT] = source[PARENT]
+                    fallback.token = source.token
+                    fallback.parent_token = source.parent_token
                     fallback.url = source.url
                     fallback.blocks = source.blocks
                 }
@@ -326,8 +307,8 @@ class larkUtils {
 
         // write the fallback sources to the doc source directory
         fallbackSources.forEach(fallback => {
-            const token = fallback[TOKEN]
-            console.log(`0. Copied ${token}.json`)
+            const token = fallback.token
+            console.log(`0. Copied ${fallback.token}.json`)
             const file = `${docSourceDir}/${token}.json`
             var raw = JSON.stringify(fallback, null, 2)
             
@@ -335,25 +316,15 @@ class larkUtils {
             replaces.forEach(replace => {
                 raw = raw.replaceAll(replace.from, replace.to)
             })
-            
             fs.writeFileSync(file, raw, {encoding: 'utf-8', flag: 'w'})
         })
     }
 
-    __convert_link(file, path, outputDir) {
+    __convert_link(file, label, path, outputDir) {
         const folders = fs.readdirSync(outputDir, {recursive: true}).filter(path => fs.statSync(`${outputDir}/${path}`).isDirectory())
-        const files = fs.readdirSync(outputDir, {recursive: true}).filter(path => path.endsWith('.md'))
 
+        var parent = path.slice(2, path.lastIndexOf('-'))
         var section = path.indexOf("#") > -1 ? path.slice(path.lastIndexOf("#") + 1) : ""
-        var link_path = files.find(file => file.endsWith(path.slice(2).replace(`#${section}`, '') + '.md'))
-
-        if (!link_path) {
-            console.log(path, path.slice(2).replace(`#${section}`, '') + '.md', file)
-            throw new Error(`Cannot find linked file for ${path} in ${outputDir}`)
-        }
-
-        var parent = link_path.split('/').slice(0, -1).join('/')
-        
         var rel_path = ''
 
         var folder = folders.find(folder => folder.endsWith(parent))
@@ -364,11 +335,8 @@ class larkUtils {
 
             if (fs.existsSync(target) && fs.statSync(target).isDirectory()) {
                 target = `${target}/${path.slice(2).replace(`#${section}`, '')}.md`
-            // } else if (fs.statSync(`${target}.md`).isFile()) {
-            //     target = `${target}.md`
-            } else if (fs.readdirSync(`${outputDir}/${folder}`).find(file => file.startsWith(path.slice(2).replace(`#${section}`, '')))) {
-                target = fs.readdirSync(`${outputDir}/${folder}`).find(file => file.startsWith(path.slice(2).replace(`#${section}`, '')))
-                target = `${outputDir}/${folder}/${target}`
+            } else if (fs.statSync(`${target}.md`)) {
+                target = `${target}.md`
             } else {
                 throw new Error(`Cannot find ${path} in ${outputDir}`)
             }
@@ -380,25 +348,7 @@ class larkUtils {
         }
 
         if (section) {
-            target = fs.readFileSync(target, {encoding: 'utf-8', flag: 'r'})
-            const headings = target.match(/#{1,6} (.*)/g)
-
-            if (headings) {
-                const index = headings.findIndex(heading => {
-                    heading = heading.split(' ').slice(-1)[0].toLowerCase().split('{#')[0]
-                    return slugify(heading, {strict: true, lower: true}) === section
-                })
-
-                if (index > -1) {
-                    var slug = headings[index].split(' ').slice(-1)[0].split('{#')[0]
-                    var slug = slugify(slug, {strict: true})
-                    rel_path += '#' + slug
-                } else {
-                    throw new Error(`Cannot find ${section}`)
-                }
-            } else {
-                throw new Error(`Cannot find headings in ${target}`)
-            }
+            rel_path += '#' + section
         }
 
         return rel_path
@@ -410,8 +360,7 @@ class larkUtils {
 
         if (mods.length > 0) {
             const o = mods[0]
-            let n = o.split('/').map(part => part.includes('-') ? part.split('-').slice(-1) : part).join('/');
-            n = n.match(/_\d+.md$/) ? n.replace(/_\d+.md$/, '.md') : n
+            const n = o.split('/').map(part => part.includes('-') ? part.split('-').slice(-1) : part).join('/');
             fs.renameSync(`${outputDir}/${o}`, `${outputDir}/${n}`, {recursive: true})
             this.__rename_file_path(outputDir)
         }

@@ -33,7 +33,7 @@ class MilvusDocsGen extends larkDocWriter {
                         choices: candidates.map(source => `${source.title} (${source.page_id})`)
                     }
                 ])
-
+    
                 parent_id = source.split('(')[1].replace(')', '');
             } else if (candidates.length === 1) {
                 parent_id = candidates[0].page_id;
@@ -41,8 +41,8 @@ class MilvusDocsGen extends larkDocWriter {
                 console.error(`No sources found for ${parent_title}`);
                 return;
             }
-        }
-
+        } 
+            
         const metadata = sources.find(source => source.title === parent_title && source.page_id === parent_id)
         const children = this.__iterate_sources(metadata.record_id)
         const docs = []
@@ -53,7 +53,7 @@ class MilvusDocsGen extends larkDocWriter {
 
         return docs;
     }
-
+ 
     async write_doc(doc_title, doc_id=null) {
         console.log(`Fetching metadata for [${doc_title}]...`)
         const sources = this.records || await this.__list_sources();
@@ -70,7 +70,7 @@ class MilvusDocsGen extends larkDocWriter {
                         choices: candidates.map(source => `${source.title} (${source.page_id})`)
                     }
                 ])
-
+    
                 doc_id = source.split('(')[1].replace(')', '');
             } else if (candidates.length === 1) {
                 doc_id = candidates[0].page_id;
@@ -78,28 +78,28 @@ class MilvusDocsGen extends larkDocWriter {
                 console.error(`No sources found for ${doc_title}`);
                 return;
             }
-        }
-
+        } 
+            
         const metadata = sources.find(source => source.title === doc_title && source.page_id === doc_id)
 
-        const {
-            record_id,
-            page_id,
-            title,
-            source_link,
-            page_token,
-            label,
-            keywords,
-            beta,
-            progress,
-            parent
+        const { 
+            record_id, 
+            page_id, 
+            title, 
+            source_link, 
+            page_token, 
+            label, 
+            keywords, 
+            beta, 
+            progress, 
+            parent 
         } = metadata;
 
         if (! page_id.endsWith(".md")) {
             console.log(`Skipping ${title} as it is not a markdown file`);
             return;
         }
-
+        
         console.log(`Fetching the source ...`)
         this.page_blocks = await this.__fetch_doc_blocks(page_token);
         this.page_blocks = await this.__get_reference_syncd_blocks(this.page_blocks);
@@ -118,6 +118,7 @@ class MilvusDocsGen extends larkDocWriter {
 
         console.log(`Generating the content ...`)
         let content = await this.__markdown()
+        content = await this.__mdx_patches(content)
         content = this.__filter_content(content, this.targets)
 
         return {
@@ -144,7 +145,7 @@ class MilvusDocsGen extends larkDocWriter {
 
         paragraph = this.__filter_content(paragraph, this.targets)
 
-        return paragraph;
+        return paragraph;        
     }
 
     async __heading (heading, level) {
@@ -159,7 +160,7 @@ class MilvusDocsGen extends larkDocWriter {
             }
         } else {
             return '';
-        }
+        }        
     }
 
     async __code(block, indent, prev, next, blocks) {
@@ -168,13 +169,14 @@ class MilvusDocsGen extends larkDocWriter {
         const first_code_block_in_groups = code_block_groups.map(group => group[0]);
 
         let lang = code.style.language ? this.code_langs[code['style']['language']] : 'plaintext';
+        if (lang === 'C++') return ''; // to be removed when C++ is supported
         let elements = (await Promise.all(code['elements'].map( async x => {
             return await this.__text_run(x, code['elements'], true)
         }))).join('').split('\n')
 
         elements.splice(0, 0, '```' + lang.replace(/\s+/g, '').toLowerCase())
         elements.push('```')
-
+        
         if (first_code_block_in_groups.includes(block.block_id)) {
             let prefix = this.__get_code_block_group_container(block.block_id);
             prefix.splice(0, 0, '<div class="multipleCode">')
@@ -205,9 +207,10 @@ class MilvusDocsGen extends larkDocWriter {
             }
 
             return label;
-        }
+        } 
 
         return current_group.map(id => this.__retrieve_block_by_id(id).code.style.language)
+            .filter(lang => lang !== 9) // to be removed when C++ is supported
             .map(lang => {
                 lang = this.code_langs[lang] || 'plaintext';
                 return `    <a href="#${lang.replace(/\s+/g, '').toLowerCase()}">${get_label(lang)}</a>`
@@ -326,10 +329,10 @@ class MilvusDocsGen extends larkDocWriter {
                 break;
             default:
                 type = "alert note"
-                break;
+                break; 
         }
 
-        const raw = ' '.repeat(indent) + `<div class="${type}">` + '\n\n' + ' '.repeat(indent) +
+        const raw = ' '.repeat(indent) + `<div class="${type}">` + '\n\n' + ' '.repeat(indent) + 
             children.join('\n' + ' '.repeat(indent)) + '\n\n' + ' '.repeat(indent) + '</div>';
         return raw.replace(/(\s*\n){3,}/g, `\n${' '.repeat(indent)}\n`);
     }
@@ -352,10 +355,10 @@ class MilvusDocsGen extends larkDocWriter {
             type = `alert warning`;
         }
 
-        const raw = ' '.repeat(indent) + `<div class="${type}">` + '\n\n' + ' '.repeat(indent) +
+        const raw = ' '.repeat(indent) + `<div class="${type}">` + '\n\n' + ' '.repeat(indent) + 
             res.join('\n' + ' '.repeat(indent)) + '\n\n' + ' '.repeat(indent) + '</div>';
         return raw.replace(/(\s*\n){3,}/g, '\n\n');
-    }
+    } 
 
     __front_matters({id, title, summary, keywords, beta}) {
         if (keywords.length > 0) {
@@ -380,6 +383,10 @@ class MilvusDocsGen extends larkDocWriter {
             await this.__getBase();
         }
 
+        if (!Array.isArray(this.records)) {
+            throw new Error('Failed to load source records from Feishu base. Please verify FEISHU_HOST and token configuration.');
+        }
+
         this.records = (await Promise.all(this.records.map(async record => {
             if (! record.fields.Doc) return null
 
@@ -402,50 +409,32 @@ class MilvusDocsGen extends larkDocWriter {
         return this.records;
     }
 
-    /**
-     * Feishu API fetch with automatic rate-limit retry.
-     * Handles HTTP 429 and legacy 400/99991400 responses.
-     * Reads x-ogw-ratelimit-reset header for wait duration (fallback: 10s).
-     * Retries up to maxRetries times, then returns the last error body.
-     */
-    async __feishu_fetch(url, options, maxRetries = 5) {
-        for (let attempt = 0; attempt <= maxRetries; attempt++) {
-            const res = await fetch(url, options)
-            const status = res.status
-            const resetSecs = parseInt(res.headers.get('x-ogw-ratelimit-reset') || '0', 10) || 10
-            const body = await res.json()
-
-            if (body.code === 0) return body
-
-            const isRateLimited = status === 429 || (status === 400 && body.code === 99991400)
-            if (isRateLimited && attempt < maxRetries) {
-                console.warn(`Rate limited (attempt ${attempt + 1}/${maxRetries}). Waiting ${resetSecs}s...`)
-                await this.__wait(resetSecs * 1000)
-                continue
-            }
-
-            return body
-        }
-    }
-
     async __getBase() {
         const [base_token, table_id] = this.base.split(":")
         const base_id = await this.__convert_wiki_token(base_token)
         const token = await this.tokenFetcher.token()
 
         const url = `${process.env.FEISHU_HOST}/open-apis/bitable/v1/apps/${base_id}/tables/${table_id}/records?page_size=500`
-        const data = await this.__feishu_fetch(url, {
+        let response = await fetch(url, {
             method: "get",
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
                 'Authorization': `Bearer ${token}`
             }
-        })
+        }) 
 
-        if (data?.code === 0) {
-            this.records = data.data.items;
+        let status = response.status;
+        let headers = response.headers;
+        response = await response.json();
+
+        if (response.code === 0) {
+            this.records = response.data.items;
+        } else if (status === 429) {
+            const timeout = headers['x-ogw-ratelimit-reset']
+            await this.__wait(timeout * 1000)
+            await this.__getBase()
         } else {
-            console.error(`Failed to fetch bitable records: code=${data?.code} msg=${data?.msg}`)
+            throw new Error(`Failed to fetch base records: ${response.msg || response.code || status}`)
         }
     }
 
@@ -474,7 +463,7 @@ class MilvusDocsGen extends larkDocWriter {
         let append_blocks = [];
 
         if (!blocks) throw new Error("No blocks provided");
-
+        
         for (let block of blocks) {
             if (block.block_type === 50 && block.reference_synced) {
                 const { source_document_id, source_block_id } = block.reference_synced
@@ -488,9 +477,7 @@ class MilvusDocsGen extends larkDocWriter {
                     Object.keys(source_block).forEach(key => block[key] = source_block[key])
                     block.parent_id = parent_id
                     // append child blocks from source document
-                    for (let child of block.children) {
-                        append_blocks.push(source_blocks.find(b => b.block_id == child))
-                    }
+                    append_blocks.push(...this.__fetch_block_children(source_block, source_blocks))
 
                     replacements.push({
                         parent_id,
@@ -500,7 +487,7 @@ class MilvusDocsGen extends larkDocWriter {
 
                     // save source document if not already saved
                     console.log(`6. Fetched referenced_synced block ${source_document_id} - ${source_block_id}`)
-                }
+                }               
             }
 
             if (append_blocks.length > 0) {
@@ -519,10 +506,25 @@ class MilvusDocsGen extends larkDocWriter {
                     }
                 }
                 console.log(`8. Replaced ${replacements.length} reference_synced blocks in the current document`)
-            }
+            } 
         }
 
         return blocks;
+    } 
+
+    __fetch_block_children(block, blocks) {
+        let children = [];
+        if (block.children) {
+            for (let child_id of block.children) {
+                const child = blocks.find(b => b.block_id == child_id)
+                if (child) {
+                    children.push(child)
+                    children = children.concat(this.__fetch_block_children(child, blocks))
+                }
+            }
+        }
+
+        return children
     }
 
     async __fetch_doc_blocks(document_id, page_token=null, blocks=[]) {
@@ -534,23 +536,32 @@ class MilvusDocsGen extends larkDocWriter {
             document_token = await this.__convert_wiki_token(document_token)
         }
 
-        const url = `${process.env.FEISHU_HOST}/open-apis/docx/v1/documents/${document_token}/blocks` + (page_token ? `?page_token=${page_token}` : "")
-        const data = await this.__feishu_fetch(url, {
+        let url = `${process.env.FEISHU_HOST}/open-apis/docx/v1/documents/${document_token}/blocks` + (page_token? `?page_token=${page_token}` : "")
+        let response = await fetch(url, {
             method: "get",
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
                 'Authorization': `Bearer ${token}`
             }
-        })
+        });
 
-        if (data?.code === 0) {
-            blocks.push(...data.data.items)
-            if (data.data.has_more) {
-                return await this.__fetch_doc_blocks(document_id, data.data.page_token, blocks)
+        let status = response.status;
+        let headers = response.headers;
+        response = await response.json();
+
+        if (response.code === 0) {
+            blocks.push(...response.data.items);
+            if (response.data.has_more) {
+                await this.__fetch_doc_blocks(document_id, response.data.page_token, blocks);
             }
-            return blocks
+
+            return blocks;
+        } else if (status == 429) {
+            const timeout = headers['x-ogw-ratelimit-reset']
+            await this.__wait(timeout * 1000)
+            await this.__fetch_doc_blocks(document_id, page_token, blocks)
         } else {
-            return null
+            return null;
         }
     }
 
@@ -559,19 +570,31 @@ class MilvusDocsGen extends larkDocWriter {
 
         if (!obj_token) {
             const token = await this.tokenFetcher.token()
-            const url = `${process.env.FEISHU_HOST}/open-apis/wiki/v2/spaces/get_node?token=${page_token}`
-            const data = await this.__feishu_fetch(url, {
+            let url = `${process.env.FEISHU_HOST}/open-apis/wiki/v2/spaces/get_node?token=${page_token}`
+            let response = await fetch(url, {
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8',
                     'Authorization': `Bearer ${token}`
                 }
-            })
-
-            if (data?.code === 0) {
-                this.tokens.push({ wiki: page_token, obj: data.data.node.obj_token })
-                return data.data.node.obj_token
+            });
+    
+            let status = response.status;
+            let headers = response.headers;
+            response = await response.json();
+    
+            if (response.code === 0) {
+                this.tokens.push({
+                    wiki: page_token,
+                    obj: response.data.node.obj_token
+                });
+    
+                return response.data.node.obj_token;
+            } else if (status === 429) {
+                const timeout = headers['x-ogw-ratelimit-reset']
+                await this.__wait(timeout * 1000)
+                return await this.__convert_wiki_token(page_token)
             } else {
-                return page_token
+                return page_token;
             }
         } else {
             return obj_token;
@@ -658,7 +681,7 @@ class MilvusDocsGen extends larkDocWriter {
             return result;
         } else {
             return null;
-        }
+        }       
     }
 
     __is_new(doc_id) {
@@ -671,7 +694,7 @@ class MilvusDocsGen extends larkDocWriter {
         if (! doc_id.endsWith('.md')) {
             console.log(`Invalid document ID: ${doc_id}`);
             return;
-        }
+        } 
 
         const menu_structure = this.__parse_menu_structure();
         const sources = this.records || await this.__list_sources();
@@ -739,7 +762,7 @@ class MilvusDocsGen extends larkDocWriter {
             if (item.children) {
                 const result = this.__iterate_menu(item.children, id, currentAncestors);
                 if (result) {
-                    return result;
+                    return result; 
                 }
             }
         }

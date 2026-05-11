@@ -123,11 +123,9 @@ class larkDocScraper {
                         if (source_block) {
                             const block_id = block.block_id
                             const parent_id = block.parent_id
-                            // replace reference_synced block with actual block
                             Object.keys(block).forEach(key => delete block[key])
                             Object.keys(source_block).forEach(key => block[key] = source_block[key])
                             block.parent_id = parent_id
-                            // append child blocks from source document
                             append_blocks.push(...this.__fetch_block_children(source_block, node))
 
                             replacements.push({
@@ -135,7 +133,6 @@ class larkDocScraper {
                                 reference_block_id: block_id,
                                 source_block_id: source_block_id,
                             })
-                            // save source document if not already saved
                             console.log(`6. Fetched referenced_synced block ${source_document_id} - ${source_block_id}`)
                             fs.writeFileSync(`${this.doc_source_dir}/${json}`, JSON.stringify(source, null, 2))
                         }
@@ -161,10 +158,10 @@ class larkDocScraper {
                 }
                 console.log(`8. Replaced ${replacements.length} reference_synced blocks in ${json}`)
                 fs.writeFileSync(`${this.doc_source_dir}/${json}`, JSON.stringify(source, null, 2))
-            }   
+            }
         }
-    } 
-    
+    }
+
     __fetch_block_children(block, node) {
         let children = [];
         if (block.children) {

@@ -548,10 +548,6 @@ class larkDocWriter {
             imports = imports + "\n\nimport Grid from '@site/src/components/Grid';"
         }
 
-        if (markdown.match(/\<Procedures/g)) {
-            imports = imports + "\n\nimport Procedures from '@site/src/components/Procedures';"
-        }
-
         if (path) {
             front_matter = front_matter.split('\n')
             front_matter.splice(5, 0, `added_since: ${addedSince ? addedSince : 'FALSE'}`)
@@ -666,7 +662,7 @@ class larkDocWriter {
             } else if (this.block_types[block['block_type']-1] === 'ordered') {
                 markdown.push(await this.__ordered(block, indent));
             } else if (this.block_types[block['block_type']-1] === 'code') {
-                markdown.push(await this.__code(block['code'], indent, prev_block, next_block, blocks));
+                markdown.push(await this.__code(block, indent, prev_block, next_block, blocks));
             } else if (this.block_types[block['block_type']-1] === 'quote_container') {
                 markdown.push(await this.__quote(block, indent));
             } else if (this.block_types[block['block_type']-1] === 'image') {
@@ -764,20 +760,8 @@ class larkDocWriter {
             let patchedContent = content;
             let maxIterations = 50; // Prevent infinite loops
             let iteration = 0;
-            const seenHashes = new Set();
 
             while (iteration < maxIterations) {
-                // Cycle detection: stop if we've visited this exact content state before
-                let h = 5381;
-                for (let i = 0; i < patchedContent.length; i++) {
-                    h = Math.imul(h, 33) ^ patchedContent.charCodeAt(i);
-                }
-                if (seenHashes.has(h)) {
-                    console.warn('Cycle detected in MDX patch loop, stopping to prevent infinite iteration');
-                    break;
-                }
-                seenHashes.add(h);
-
                 try {
                     // Try to compile the current content
                     await compile(patchedContent, { development: false });
@@ -854,10 +838,7 @@ class larkDocWriter {
                             }
                             break;
                         case 'unexpected-character':
-                            if (error.message.includes('U+002C') || 
-                                error.message.includes('U+002A') || 
-                                error.message.includes('U+3001') || 
-                                error.message.includes('U+003D')) {
+                            if (error.message.includes('U+002C') || error.message.includes('U+002A')) {
                                 offset = error.place.offset;
                                 if (offset !== undefined && offset > 0 && offset < patchedContent.length) {
                                     for (let i = offset-1; i >= 0; i--) {
@@ -995,7 +976,7 @@ class larkDocWriter {
     }
 
     async __code(code, indent, prev, next, blocks) {
-        const valid_langs = ['Python', 'JavaScript', 'Java', 'Go', 'Bash', 'C++']
+        const valid_langs = ['Python', 'JavaScript', 'Java', 'Go', 'Bash']
         let lang = code.style.language ? this.code_langs[code['style']['language']] : 'plaintext'
         let elements = (await Promise.all(code['elements'].map( async x => {
             let content = await this.__text_run(x, code['elements'], true)
@@ -1003,6 +984,7 @@ class larkDocWriter {
             return content
         }))).join('') 
 
+        if (lang === 'C++') return; // to be removed once c++ is supported
 
         if (valid_langs.includes(lang)) {
             const prev_type = prev ? this.block_types[prev['block_type']-1] : null;
@@ -1016,7 +998,8 @@ class larkDocWriter {
                 (next && next_type === 'code' && valid_langs.includes(next_lang) && next_lang !== lang)
             ) {
                 console.log('first block')
-                const values = this.__code_tabs(code, prev, next, blocks);
+                const values = this.__code_tabs(code, prev, next, blocks)
+                    .filter(tab => tab.value !== 'c++'); // to be removed once c++ is supported
 
                 return this.__code_block_split(elements, indent, lang, 'first', values);
             }
@@ -1209,7 +1192,7 @@ class larkDocWriter {
         const root = this.upload_to_s3 ? IMAGE_BED_URL : `/${ this.imageDir.replace(/^static\//g, '')}`
 
         if (this.skip_image_download) {
-            return ' '.repeat(indent) + `![${board.token}](${root}/${board["token"]}.png)`;
+            return `![${board.token}](${root}/${board["token"]}.png)`;
         }
 
         const result = await this.downloader.__downloadBoardPreview(board.token)
@@ -1227,7 +1210,7 @@ class larkDocWriter {
             }
         });           
 
-        return ' '.repeat(indent) + `![${board.token}](${root}/${board["token"]}.png)`;
+        return `![${board.token}](${root}/${board["token"]}.png)`;
     }
 
     async __trim_white_borders(image) {
