@@ -1,0 +1,22 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.987.0",
+    "@aws-sdk/lib-storage": "^3.0.0",
+    "@mdx-js/mdx": "^3.1.1",
+    "bottleneck": "^2.19.5",
+    "cheerio": "^1.0.0",
+    "commander": "^13.1.0",
+    "dotenv": "^16.4.7",
+    "inquirer": "^8.2.7",
+    "node-fetch": "^2.7.0",
+    "remark-math": "^6.0.0",
+    "sharp": "^0.34.5",
+    "showdown": "^2.1.0",
+    "slugify": "^1.6.6",
+    "uuid": "^10.0.0"
+  }
+}
