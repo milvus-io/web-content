@@ -1,6 +1,6 @@
 # S3ConnectParam
 
-An **S3ConnectParam** instance sets connection parameters for a **RemoteBulkWriter** instance.
+An **S3ConnectParam** instance sets connection parameters for a **[RemoteBulkWriter](RemoteBulkWriter.md)** instance.
 
 ```python
 class pymilvus.RemoteBulkWriter.S3ConnectParam
@@ -14,7 +14,7 @@ Constructs an **S3ConnectParam** object by a set of parameters, such as **bucket
 
 An **S3ConnectParam** object defines the parameters necessary for Milvus to connect to an AWS-S3-compatible bucket.
 
-You need to create this object before initializing a **RemoteBulkWriter** object.
+You need to create this object before initializing a **[RemoteBulkWriter](RemoteBulkWriter.md)** object.
 
 </div>
 
@@ -93,11 +93,11 @@ connect_param = RemoteBulkWriter.S3ConnectParam(
 
 **RETURN TYPE:**
 
-*RemoteBulkWriter*
+*[RemoteBulkWriter](RemoteBulkWriter.md)*
 
 **RETURNS:**
 
-A **RemoteBulkWriter** object.
+A **[RemoteBulkWriter](RemoteBulkWriter.md)** object.
 
 **EXCEPTIONS:**
 

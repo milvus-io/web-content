@@ -2,6 +2,10 @@
 
 This operation deletes a volume.
 
+<div class="alert note">
+
+</div>
+
 ## Request Syntax
 
 ```python

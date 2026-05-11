@@ -26,28 +26,28 @@ milvusClient.compact()
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<CompactionResponse>*
+**RETURNS** *Promise<CompactionResponse>*
 
-This method returns a promise that resolves to a *CompactionResponse* object.
+This method returns a promise that resolves to a **CompactionResponse** object.
 
 ```javascript
 {
     compactionID: string,
-    status: {
-        code: number,
-        error_code: string | number,
-        reason: string
-    }
+    compactionPlanCount: number,
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
-- **compactionID** (*number*) -
+- **compactionID** (*string*) -
+The identifier of the compaction operation. Pass this value to `getCompactionState()` or `getCompactionStateWithPlans()` to poll progress.
 
-    Compaction task ID.
+- **compactionPlanCount** (*number*) -
+The number of compaction plans generated for this operation.
 
-- **status** (*ResStatus*) - 
+- **ResStatus**
+A **ResStatus** object.
 
     - **code** (*number*) -
 
@@ -55,9 +55,9 @@ This method returns a promise that resolves to a *CompactionResponse* object.
 
     - **error_code** (*string* | *number*) -
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 

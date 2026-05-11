@@ -41,24 +41,24 @@ await milvusClient.hasPartition({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<BoolResponse>*
+**RETURNS** *Promise<BoolResponse>*
 
-This method returns a promise that resolves to a BoolResponse object.
+This method returns a promise that resolves to a **BoolResponse** object.
 
 ```javascript
 {
     value: boolean,
-    status: object
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
-- **value** (*bool*) -
+- **value** (*boolean*) -
+A boolean that indicates whether the requested partition exists in the collection. It is **true** when the partition exists and **false** when it does not.
 
-    A boolean value indicating whether the partition exists.
-
-- **status** (*object*) -
+- **ResStatus**
+A **ResStatus** object.
 
     - **code** (*number*) -
 
@@ -66,9 +66,9 @@ This method returns a promise that resolves to a BoolResponse object.
 
     - **error_code** (*string* | *number*) -
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 

@@ -40,28 +40,24 @@ await milvusClient.flushSync({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<GetFlushStateResponse>*
+**RETURNS** *Promise<GetFlushStateResponse>*
 
 This method returns a promise that resolves to a **GetFlushStateResponse** object.
 
 ```javascript
 {
     flushed: boolean,
-    status: {
-        code: number,
-        error_code: string | number,
-        reason: string
-    }
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
 - **flushed** (*boolean*) -
+Whether all targeted segments are flushed to persistent storage. Because `flushSync()` blocks until the flush completes, this value is **true** on success.
 
-    Whether data is persisted into storage.
-
-- **status** (*ResStatus*) - 
+- **ResStatus**
+A **ResStatus** object.
 
     - **code** (*number*) -
 
@@ -69,9 +65,9 @@ This method returns a promise that resolves to a **GetFlushStateResponse** objec
 
     - **error_code** (*string* | *number*) -
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 

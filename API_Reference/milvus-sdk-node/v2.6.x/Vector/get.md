@@ -76,24 +76,24 @@ await milvusClient.get({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<ResStatus>*
+**RETURNS** *Promise<QueryResults>*
 
-This method returns a promise that resolves to a **ResStatus** object.
+This method returns a promise that resolves to a **QueryResults** object.
 
 ```javascript
 {
-    data: list[string],
-    status: object
+    data: Record<string, any>[],
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
-- **data** (*list[string]*) -
+- **data** (*Record<string, any>[]*) -
+The rows whose primary keys match the supplied **ids**. Each entry is keyed by field name and carries the value for every requested **output_fields** entry plus the primary key.
 
-    A list of entities returned.
-
-- **status** (*object*) -
+- **ResStatus**
+A **ResStatus** object.
 
     - **code** (*number*) -
 
@@ -101,9 +101,9 @@ This method returns a promise that resolves to a **ResStatus** object.
 
     - **error_code** (*string* | *number*) -
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 

@@ -33,7 +33,7 @@ grant_privilege(
 
     - **Global**: System-wide objects, allowing the user to perform actions that affect all collections, users, or system-wide settings. When **object_type** is set to **Global**, set **object_name** to the wildcard (**&ast;**), indicating all objects of the specified type.
 
-    - **Collection**: Collection-specific objects, allowing the user to perform actions such as creating indexes, loading data, inserting or deleting data, and querying data within a specific collection.
+    - **[Collection](../../ORM/Collection/Collection.md)**: Collection-specific objects, allowing the user to perform actions such as creating indexes, loading data, inserting or deleting data, and querying data within a specific collection.
 
     - **User**: Objects related to user management, allowing the user to manage credentials and roles for database users, such as updating user credentials or viewing user details.
 
@@ -49,7 +49,7 @@ grant_privilege(
 
     **[REQUIRED]**
 
-    The name of the object to control access for. For example, if the object type is **Collection**, the object name is the name of a collection. If the object type is **User**, the object name is the name of a database user.
+    The name of the object to control access for. For example, if the object type is **[Collection](../../ORM/Collection/Collection.md)**, the object name is the name of a collection. If the object type is **User**, the object name is the name of a database user.
 
     When **object_type** is set to **Global**, set **object_name** to the wildcard (**&ast;**), indicating all objects of the specified type. For details, refer to the Relevant API column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
 

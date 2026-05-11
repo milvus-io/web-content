@@ -28,27 +28,27 @@ entity.NewSchema().
 
 - `WithName(name string)`
 
-    WithName sets the name value of schema, returns schema itself.
+    This sets the name value of schema, returns schema itself.
 
 - `WithDescription(desc string)`
 
-    WithDescription sets the description value of schema, returns schema itself.
+    This sets the description value of schema, returns schema itself.
 
 - `WithAutoID(autoID bool)`
 
-    Enables or disables auto ID generation for the collection.
+    This enables or disables auto ID generation for the collection. This does not apply to external collections.
 
 - `WithDynamicFieldEnabled(dynamicEnabled bool)`
 
-    Enables or disables dynamic field support for flexible data insertion.
+    This enables or disables dynamic field support for flexible data insertion.
 
 - `WithField(f *[Field](Field.md))`
 
-    WithField adds a field into schema and returns schema itself.
+    This adds a field into schema and returns schema itself.
 
 - `WithFunction(f *[Function](Function.md))`
 
-    Adds a function definition (e.g., BM25, text embedding) to the schema.
+    This adds a function definition (e.g., BM25, text embedding) to the schema. This does not apply to external collections.
 
 **METHODS:**
 

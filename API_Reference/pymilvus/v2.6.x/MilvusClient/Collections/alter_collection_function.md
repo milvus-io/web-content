@@ -2,6 +2,10 @@
 
 This operation alters an existing function in the collection by replacing it with a new function schema.
 
+<div class="alert note">
+
+</div>
+
 ## Request syntax
 
 ```python
@@ -28,7 +32,7 @@ client.alter_collection_function(
 
     The name of the function to modify.
 
-- **function** (*Function*) -
+- **[function](../Function/Function.md)** (*[Function](../Function/Function.md)*) -
 
     **[REQUIRED]**
 

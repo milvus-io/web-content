@@ -2,12 +2,6 @@
 
 This operation prepares index parameters to build indexes for a specific collection.
 
-<div class="alert note">
-
-This is a class method. You should call this method like this: `MilvusClient.prepare_index_params()`.
-
-</div>
-
 ## Request syntax
 
 ```python

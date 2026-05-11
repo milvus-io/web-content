@@ -73,10 +73,7 @@ from pymilvus import MilvusClient
 client = MilvusClient(uri, token) # db = "default" 
 
 client.create_database(
-    db_name="my_db"， 
-    properties={
-        "database.replica.number": 3
-    }
+    db_name="my_db"
 )
 ```
 

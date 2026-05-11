@@ -26,13 +26,13 @@ Partition(
 
 **PARAMETERS:**
 
-- **collection** (*Collection* | *str*) - 
+- **[collection](../Collection/Collection.md)** (*[Collection](../Collection/Collection.md)* | *str*) - 
 
     **[REQUIRED]**
 
     The collection in which to create a partition. 
 
-    You can either reference a **Collection** object or its name.
+    You can either reference a **[Collection](../Collection/Collection.md)** object or its name.
 
     <div class="alert note">
     

@@ -154,6 +154,8 @@ await milvusClient.addCollectionField({
 
                 Lists filters to refine tokens produced by the tokenizer, with options for built-in filters and custom filters. For more information, refer to [Alphanumonly Filter](https://milvus.io/docs/alphanumonly-filer.md) and others.
 
+    For external collections, FieldType supports optional external_field to map this Milvus field to the source field name.
+
 - **timeout** (*number*) -  
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.

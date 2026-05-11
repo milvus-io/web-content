@@ -27,17 +27,48 @@ await milvusClient.describeDatabase({
 
     RPC timeout in milliseconds. Optional.
 
-**RETURNS:**
+**RETURNS** *Promise<DescribeDatabaseResponse>*
 
-*Promise\<DescribeDatabaseResponse\>*
+This method returns a promise that resolves to a **DescribeDatabaseResponse** object.
 
-The response contains `db_name`, `dbID`, `created_timestamp`, and `properties`.
+```javascript
+{
+    db_name: string,
+    dbID: number,
+    created_timestamp: number,
+    properties: KeyValuePair[],
+    status:  ResStatus
+}
+```
 
-**EXCEPTIONS:**
+**PARAMETERS:**
 
-- **MilvusError**
+- **db_name** (*string*) -
+The database name.
 
-    This exception will be raised when any error occurs during this operation.
+- **dbID** (*number*) -
+The internal database identifier.
+
+- **created_timestamp** (*number*) -
+The creation timestamp of the database, in milliseconds.
+
+- **properties** (*KeyValuePair[]*) -
+Database-level properties (for example, **database.replica.number**, **database.resource_groups**) declared at creation or set via `alterDatabaseProperties()`.
+
+- **ResStatus**
+A **ResStatus** object.
+
+    - **code** (*number*) -
+
+        A code that indicates the operation result. It remains **0** if this operation succeeds.
+
+    - **error_code** (*string* | *number*) -
+
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
+
+    - **reason** (*string*) -
+
+        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
 ## Example
 

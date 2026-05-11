@@ -6,15 +6,16 @@ This operation conducts a vector similarity search with an optional scalar filte
 
 ```python
 search(
-    data: list[list[float]], 
-    anns_field: str, 
-    param: dict, 
-    limit: int 
-    expr: str | None, 
-    partition_names: list[str] | None, 
-    output_fields: list[str] | None, 
-    timeout: float | None, 
-    round_decimal: int
+    data: list[list[float]],
+    anns_field: str,
+    param: dict,
+    limit: int
+    expr: str | None,
+    partition_names: list[str] | None,
+    output_fields: list[str] | None,
+    timeout: float | None,
+    round_decimal: int,
+    search_aggregation: Optional[SearchAggregation] = None
 )
 ```
 
@@ -97,6 +98,10 @@ search(
     The number of decimal places that Milvus rounds the calculated distances to.
 
     The value defaults to **-1**, indicating that Milvus skips rounding the calculated distances and returns the raw value.
+
+- **search_aggregation** (*Optional[SearchAggregation]*) -
+
+    Hierarchical bucket aggregation spec. Mutually exclusive with **group_by_field**. When set, **limit** is ignored and the root *SearchAggregation.size* controls top-level bucket count.
 
 **RETURN TYPE:**
 

@@ -60,7 +60,7 @@ ModelRanker.builder()
 
 **RETURNS:**
 
- A model ranker instance.
+A model ranker instance.
 
 ## Examples:
 

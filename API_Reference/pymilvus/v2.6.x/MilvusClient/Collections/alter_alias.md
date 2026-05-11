@@ -60,7 +60,7 @@ alter_alias(
 
 **RETURNS:**
 
- None
+None
 
 **EXCEPTIONS:**
 

@@ -26,7 +26,7 @@ This is a class method. You should call it from the class instead of an instance
 
 **RETURN TYPE:**
 
-*FieldSchema*
+*[FieldSchema](FieldSchema.md)*
 
 **RETURNS:**
 

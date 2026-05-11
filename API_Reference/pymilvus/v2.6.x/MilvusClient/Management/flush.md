@@ -1,6 +1,6 @@
 # flush()
 
-This operation flushes the streaming data and seals segments. It is recommended to call this operation after all the data has been inserted into a collection.
+This operation flushes the streaming data and seals segments. It is not advised to call this operation after all the data has been inserted into a collection to avoid small segments, which may degrade search performance.
 
 ## Request Syntax
 

@@ -84,6 +84,10 @@ new MilvusClient(config: ClientConfig)
 
         The number of attempts to retry the connection if the connection is not successful.
 
+    - **option** (*Record<string, string>*) -
+
+        Reserved connection options sent in the `ConnectRequest` client info. Use this to pass arbitrary key-value pairs to the server during the initial handshake.
+
     - **password** (*string*) -
 
         The user password that is used to authenticate the connection.

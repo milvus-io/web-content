@@ -29,11 +29,11 @@ CollectionSchema(
 
     **[REQUIRED]**
 
-    A list of **FieldSchema** objects that define the fields in the schema of a struct in an array of structs field.
+    A list of **[FieldSchema](../../ORM/FieldSchema/FieldSchema.md)** objects that define the fields in the schema of a struct in an array of structs field.
 
     <div class="alert note">
     
-    A field schema represents and contains metadata for a single field, while **StructFieldSchema** ties together a list of **FieldSchema** objects to define the schema of a struct in an array of structs field.
+    A field schema represents and contains metadata for a single field, while **StructFieldSchema** ties together a list of **[FieldSchema](../../ORM/FieldSchema/FieldSchema.md)** objects to define the schema of a struct in an array of structs field.
 
     </div>
 
@@ -59,7 +59,7 @@ A **StructFieldSchema** object.
 
 - **FieldTypeException**: 
 
-    This exception will be raised when a field in the **fields** list is not a **FieldSchema** object.
+    This exception will be raised when a field in the **fields** list is not a **[FieldSchema](../../ORM/FieldSchema/FieldSchema.md)** object.
 
 ```python
 from pymilvus import StructFieldSchema, FieldSchema, DataType
@@ -88,7 +88,7 @@ schema = StructFieldSchema(
 
 - **fields** (*list*) -
 
-    A list of **FieldSchema** objects that define the fields in the schema of a struct in an array of structs field.
+    A list of **[FieldSchema](../../ORM/FieldSchema/FieldSchema.md)** objects that define the fields in the schema of a struct in an array of structs field.
 
 - **description** (*string*) -
 

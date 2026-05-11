@@ -8,6 +8,10 @@ If the collection has dynamic field enabled and you add a static field with the 
 
 </div>
 
+<div class="alert note">
+
+</div>
+
 ## Request Syntax
 
 ```python

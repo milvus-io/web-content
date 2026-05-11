@@ -40,9 +40,9 @@ alter_alias(
 
     <div class="alert note">
     
-    A collection alias is an additional name for a collection. Collection aliases are useful when you want to switch your application to a new collection without any changes to your code. 
+    A[ collection](../Collection/Collection.md) alias is an additional name for a collection. Collection aliases are useful when you want to switch your application to a new collection without any changes to your code. 
     
-    In MilvusZilliz Cloud, a collection alias is a globally unique identifier. One alias can only be assigned to exactly one collection. Conversely, a collection can have multiple aliases.
+    In MilvusZilliz Cloud, a[ collection](../Collection/Collection.md) alias is a globally unique identifier. One alias can only be assigned to exactly one collection. Conversely, a collection can have multiple aliases.
     
     Below is an example of reassigning the alias of one collection to another:
     
@@ -76,7 +76,7 @@ alter_alias(
 
 **RETURNS:**
 
- None
+None
 
 **EXCEPTIONS:**
 

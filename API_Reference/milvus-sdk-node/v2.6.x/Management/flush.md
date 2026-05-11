@@ -40,28 +40,24 @@ await milvusClient.flush({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<FlushResult>*
+**RETURNS** *Promise<FlushResult>*
 
 This method returns a promise that resolves to a **FlushResult** object.
 
 ```javascript
 {
-    coll_segIDs: any,
-    status: {
-        code: number,
-        error_code: string | number,
-        reason: string
-    }
+    coll_segIDs: Record<string, { data: number[] }>,
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
-- **coll_segIDs** (*number*) -
+- **coll_segIDs** (*Record<string, { data: number[] }>*) -
+A mapping from collection name to the segment IDs that were sealed by this flush. Use the returned IDs with `getFlushState()` to confirm persistence.
 
-    The IDs of the segments that this operation affects.
-
-- **status** (*ResStatus*) - 
+- **ResStatus**
+A **ResStatus** object.
 
     - **code** (*number*) -
 
@@ -69,9 +65,9 @@ This method returns a promise that resolves to a **FlushResult** object.
 
     - **error_code** (*string* | *number*) -
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
