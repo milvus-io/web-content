@@ -110,7 +110,7 @@ summary: >-
     </button></h2><p>Como se muestra en el siguiente diagrama, un tipo de índice en Milvus consta de tres componentes principales, a saber, <strong>estructura de datos</strong>, <strong>cuantificación</strong> y <strong>refinador</strong>. La cuantificación y el refinador son opcionales, pero se utilizan ampliamente debido a un importante equilibrio entre beneficios y costes.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
    </span> <span class="img-wrapper"> <span>Anatomía del índice vectorial</span> </span></p>
 <p>Durante la creación del índice, Milvus combina la estructura de datos y el método de cuantificación elegidos para determinar un <strong>índice de expansión</strong> óptimo. En el momento de la consulta, el sistema recupera <code translate="no">topK × expansion rate</code> vectores candidatos, aplica el refinador para recalcular las distancias con mayor precisión y, por último, devuelve los resultados más exactos <code translate="no">topK</code>. Este enfoque híbrido equilibra velocidad y precisión al restringir el refinamiento, que consume muchos recursos, a un subconjunto filtrado de candidatos.</p>
 <h3 id="Data-structure" class="common-anchor-header">Estructura de datos<button data-href="#Data-structure" class="anchor-icon" translate="no">
@@ -439,7 +439,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Los índices basados en grafos, como el HNSW, requieren una cantidad significativa de memoria para almacenar tanto la estructura del grafo como las incrustaciones de vectores sin procesar. A continuación se muestra un desglose detallado de la memoria consumida por 1 millón de vectores de 128 dimensiones indexados utilizando el tipo de índice HNSW.</p>
+    </button></h3><p>Los índices basados en grafos, como el HNSW, requieren una cantidad significativa de memoria para almacenar tanto la estructura del grafo como las incrustaciones de vectores sin procesar. A continuación se muestra un desglose detallado de la memoria consumida por 1 millón de vectores de 128 dimensiones indexados mediante el tipo de índice HNSW.</p>
 <ol>
 <li><p><strong>Calcular la memoria utilizada por la estructura gráfica.</strong></p>
 <p>Cada vector en HNSW mantiene conexiones con sus vecinos. Con un grado de grafo (aristas por nodo) de 32, la memoria consumida puede calcularse del siguiente modo:</p>

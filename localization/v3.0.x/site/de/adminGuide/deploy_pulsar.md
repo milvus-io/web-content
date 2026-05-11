@@ -24,9 +24,9 @@ summary: >-
     </button></h1><p>Milvus verwendet Pulsar oder Kafka für die Verwaltung von Protokollen der letzten Änderungen, die Ausgabe von Stream-Protokollen und die Bereitstellung von Protokollabonnements. Pulsar ist das standardmäßige Nachrichtenspeichersystem. In diesem Thema wird beschrieben, wie Sie den Nachrichtenspeicher mit Docker Compose oder Helm konfigurieren.</p>
 <p>Sie können Pulsar mit <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> oder auf K8s konfigurieren und Kafka auf K8s konfigurieren.</p>
 <div class="alert note">
-<p><strong>Einschränkungen der Nachrichtenwarteschlange</strong>: Wenn Sie auf Milvus v2.6.15 aktualisieren, müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Der Wechsel zwischen verschiedenen Message-Queue-Systemen während des Upgrades wird nicht unterstützt. Unterstützung für den Wechsel von Message-Queue-Systemen wird in zukünftigen Versionen verfügbar sein.</p>
+<p><strong>Einschränkungen der Nachrichtenwarteschlange</strong>: Wenn Sie auf Milvus v3.0-beta aktualisieren, müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Der Wechsel zwischen verschiedenen Message-Queue-Systemen während des Upgrades wird nicht unterstützt. Unterstützung für den Wechsel von Message-Queue-Systemen wird in zukünftigen Versionen verfügbar sein.</p>
 </div>
-<h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Konfigurieren von Pulsar mit Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
+<h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Konfigurieren Sie Pulsar mit Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

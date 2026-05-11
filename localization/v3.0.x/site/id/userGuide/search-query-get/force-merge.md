@@ -47,7 +47,7 @@ beta: Milvus 3.0.x
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/compaction.png" alt="R8eow3kaqhktokblcmocnvxmnee" class="doc-image" id="r8eow3kaqhktokblcmocnvxmnee" />
    </span> <span class="img-wrapper"> <span>R8eow3kaqhktokblcmocnvxmnee</span> </span></p>
-<p>Pemadatan penggabungan paksa memperluas pemadatan yang sudah ada <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md"><code translate="no">Compaction</code></a> API dengan parameter <code translate="no">target_size</code>. API ini sepenuhnya kompatibel ke belakang: panggilan pemadatan yang sudah ada tanpa <code translate="no">target_size</code> akan tetap berfungsi seperti sebelumnya.</p>
+<p>Pemadatan penggabungan paksa memperluas API yang sudah ada <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md"><code translate="no">Compaction</code></a> API dengan parameter <code translate="no">target_size</code>. API ini sepenuhnya kompatibel ke belakang: panggilan pemadatan yang sudah ada tanpa <code translate="no">target_size</code> akan tetap berfungsi seperti sebelumnya.</p>
 <p>Penggabungan paksa beroperasi secara asinkron. Ia tidak memblokir operasi pencarian atau kueri, meskipun mengkonsumsi sumber daya I/O dan memori selama eksekusi.</p>
 <h2 id="Use-Force-Merge-Compaction" class="common-anchor-header">Menggunakan Pemadatan Penggabungan Paksa<button data-href="#Use-Force-Merge-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,8 +80,8 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h3><ul>
-<li><p>Milvus versi 2.6.15 atau yang lebih baru</p></li>
-<li><p>pymilvus 2.6.13 atau yang lebih baru</p></li>
+<li><p>Milvus versi 3.0 atau yang lebih baru</p></li>
+<li><p>PyMilvus 3.0 atau yang lebih baru</p></li>
 </ul>
 <h3 id="Global-Configuration" class="common-anchor-header">Konfigurasi Global<button data-href="#Global-Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -98,7 +98,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Parameter konfigurasi berikut ini mengontrol perilaku Penggabungan Paksa. Aturlah dalam berkas konfigurasi Milvus atau melalui variabel lingkungan.</p>
+    </button></h3><p>Parameter konfigurasi berikut ini mengontrol perilaku Penggabungan Paksa. Aturlah di file konfigurasi Milvus atau melalui variabel lingkungan.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">dataCoord:</span>
   <span class="hljs-attr">segment:</span>
     <span class="hljs-attr">maxSize:</span> <span class="hljs-number">512</span>         <span class="hljs-comment"># Default segment max size (MB).</span>
@@ -132,12 +132,12 @@ beta: Milvus 3.0.x
    <tr>
      <td><p><code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code></p></td>
      <td><p>100</p></td>
-     <td><p>Ambang batas jumlah segmen untuk pemilihan algoritma. Ketika jumlah segmen melebihi nilai ini, Milvus menggunakan algoritma greedy yang lebih cepat untuk perencanaan penggabungan.</p><ul><li><p><strong>Algoritma standar</strong> (digunakan ketika jumlah segmen &lt;= <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): menghasilkan hasil penggabungan yang lebih optimal tetapi membutuhkan waktu lebih lama untuk dihitung.</p></li><li><p><strong>Algoritma Greedy</strong> (digunakan ketika jumlah segmen &gt; <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): menyelesaikan perencanaan dengan lebih cepat dengan mengorbankan pengelompokan segmen yang kurang optimal.</p></li></ul></td>
+     <td><p>Ambang batas jumlah segmen untuk pemilihan algoritma. Ketika jumlah segmen melebihi nilai ini, Milvus menggunakan algoritma greedy yang lebih cepat untuk perencanaan penggabungan.</p><ul><li><p><strong>Algoritma standar</strong> (digunakan ketika jumlah segmen &lt;= <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): menghasilkan hasil penggabungan yang lebih optimal tetapi membutuhkan waktu lebih lama untuk menghitung.</p></li><li><p><strong>Algoritma Greedy</strong> (digunakan ketika jumlah segmen &gt; <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): menyelesaikan perencanaan dengan lebih cepat dengan mengorbankan pengelompokan segmen yang kurang optimal.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.datanodeMemoryFactor</code></p></td>
      <td><p>4.0</p></td>
-     <td><p>Memori DataNode dibagi dengan faktor ini untuk menghitung ukuran segmen terbesar yang dapat diijinkan oleh sistem.</p><ul><li><p>Nilai yang lebih besar mengalokasikan lebih sedikit memori untuk penggabungan tetapi menyisakan lebih banyak untuk operasi DataNode lainnya, sehingga meningkatkan stabilitas node.</p></li><li><p>Nilai yang lebih kecil memungkinkan penggabungan yang lebih besar tetapi meningkatkan tekanan memori.</p></li><li><p>Sebagai contoh, dengan faktor default 4.0 dan DataNode dengan memori 16 GB, anggaran penggabungan adalah 4 GB. Ini berarti ukuran total segmen yang digabungkan dalam satu operasi tidak boleh melebihi 4 GB.</p></li></ul></td>
+     <td><p>Memori DataNode dibagi dengan faktor ini untuk menghitung ukuran segmen terbesar yang dapat diijinkan oleh sistem.</p><ul><li><p>Nilai yang lebih besar mengalokasikan lebih sedikit memori untuk penggabungan tetapi menyisakan lebih banyak untuk operasi DataNode lainnya, sehingga meningkatkan stabilitas node.</p></li><li><p>Nilai yang lebih kecil memungkinkan penggabungan yang lebih besar tetapi meningkatkan tekanan memori.</p></li><li><p>Sebagai contoh, dengan faktor default 4.0 dan DataNode dengan memori 16 GB, anggaran penggabungan adalah 4 GB. Ini berarti ukuran total segmen yang digabungkan dalam satu operasi tidak dapat melebihi 4 GB.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.querynodeMemoryFactor</code></p></td>
@@ -283,7 +283,7 @@ state = client.get_compaction_state(job_id)
     </button></h2><p><strong>Apa perbedaan Penggabungan Paksa dengan pemadatan standar?</strong></p>
 <p>Kedua jenis operasi pemadatan ini memiliki tujuan yang berbeda.</p>
 <ul>
-<li><p>Pemadatan standar (targetSize = 0 atau dihilangkan) adalah upaya terbaik, jalur pembersihan bertahap.</p></li>
+<li><p>Pemadatan standar (targetSize = 0 atau dihilangkan) adalah upaya terbaik, jalur pembersihan tambahan.</p></li>
 <li><p>Penggabungan paksa (targetSize&gt;0) adalah jalur pengemasan ulang tingkat koleksi untuk menghasilkan segmen yang lebih sedikit, lebih besar, dan mendekati target.</p></li>
 </ul>
 <p>Perbedaan utamanya adalah bentuk penggabungan: pemadatan standar secara efektif adalah m → 1 per tugas, sedangkan penggabungan paksa adalah m → n di seluruh input yang dikelompokkan. Inilah sebabnya mengapa penggabungan paksa dapat menyelesaikan tata letak segmen yang tidak dapat dilakukan oleh pemadatan standar. Tabel berikut ini membandingkan 2 jenis operasi tersebut.</p>
@@ -319,7 +319,7 @@ state = client.get_compaction_state(job_id)
      <td><p>maxSafeSize = min(QueryNode mem, DataNode mem) / memory_factor (mandiri non-pooling: dibagi dua)</p></td>
    </tr>
    <tr>
-     <td><p>Gabungkan bentuk</p></td>
+     <td><p>Bentuk gabungan</p></td>
      <td><p>m → 1 per tugas, keluaran &lt;= configMaxSize</p></td>
      <td><p>m → n, keluaran mendekati targetSize</p></td>
    </tr>

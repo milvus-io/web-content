@@ -80,8 +80,8 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h3><ul>
-<li><p>Milvus versão 2.6.15 ou posterior</p></li>
-<li><p>pymilvus 2.6.13 ou posterior</p></li>
+<li><p>Milvus versão 3.0 ou posterior</p></li>
+<li><p>PyMilvus 3.0 ou posterior</p></li>
 </ul>
 <h3 id="Global-Configuration" class="common-anchor-header">Configuração global<button data-href="#Global-Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -121,7 +121,7 @@ beta: Milvus 3.0.x
 <table>
    <tr>
      <th><p>Parâmetro</p></th>
-     <th><p>Valor padrão</p></th>
+     <th><p>Valor Padrão</p></th>
      <th><p>Descrição</p></th>
    </tr>
    <tr>
@@ -177,7 +177,7 @@ beta: Milvus 3.0.x
    Auto-calculates optimal size based on
    segment distribution and node memory
 <button class="copy-code-btn"></button></code></pre>
-<p>Os exemplos a seguir mostram como usar cada modo de compactação de mesclagem forçada.</p>
+<p>A seguir estão exemplos que mostram como usar cada modo de compactação de mesclagem forçada.</p>
 <h4 id="Default-standard-compaction" class="common-anchor-header">Padrão (compactação padrão)</h4><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -217,7 +217,7 @@ job_id = client.compact(
    <tr>
      <td><p><code translate="no">target_size</code></p></td>
      <td><p>int</p></td>
-     <td><p>Opcional. O tamanho do segmento de destino em MB. Existem 3 opções para o valor do parâmetro:</p><ul><li><p><strong>0 ou omitido</strong>: Usa o <code translate="no">dataCoord.segment.maxSize</code> configurado (padrão: 512 MB). Equivalente à compactação padrão.</p></li><li><p><strong>Valor explícito</strong>: mescla segmentos com aproximadamente o tamanho especificado em MB (por exemplo, 2048). Deve ser maior ou igual ao configurado <code translate="no">dataCoord.segment.maxSize</code>.</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>: Calcula automaticamente o tamanho ideal com base na distribuição atual do segmento e nos recursos disponíveis do nó.</p></li></ul></td>
+     <td><p>Opcional. O tamanho do segmento de destino em MB. Há 3 opções para o valor do parâmetro:</p><ul><li><p><strong>0 ou omitido</strong>: Usa o <code translate="no">dataCoord.segment.maxSize</code> configurado (padrão: 512 MB). Equivalente à compactação padrão.</p></li><li><p><strong>Valor explícito</strong>: mescla segmentos com aproximadamente o tamanho especificado em MB (por exemplo, 2048). Deve ser maior ou igual ao configurado <code translate="no">dataCoord.segment.maxSize</code>.</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>: Calcula automaticamente o tamanho ideal com base na distribuição atual do segmento e nos recursos disponíveis do nó.</p></li></ul></td>
    </tr>
 </table>
 <div class="alert note">
@@ -283,7 +283,7 @@ state = client.get_compaction_state(job_id)
     </button></h2><p><strong>Qual é a diferença entre Force Merge e compactação padrão?</strong></p>
 <p>Esses dois tipos de operações de compactação têm finalidades diferentes.</p>
 <ul>
-<li><p>A compactação padrão (targetSize=0 ou omitido) é um caminho de limpeza incremental e de melhor esforço.</p></li>
+<li><p>A compactação padrão (targetSize=0 ou omitida) é um caminho de limpeza incremental e de melhor esforço.</p></li>
 <li><p>Force merge (targetSize&gt;0) é um caminho de reempacotamento no nível da coleção para produzir menos segmentos, maiores e próximos ao alvo.</p></li>
 </ul>
 <p>A diferença chave é a forma da mesclagem: a compactação padrão é efetivamente m → 1 por tarefa, enquanto a mesclagem forçada é m → n através de entradas agrupadas. É por isso que o force merge pode resolver layouts de segmentos que a compactação padrão não pode. A tabela a seguir compara os dois tipos de operações.</p>

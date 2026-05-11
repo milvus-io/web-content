@@ -164,7 +164,7 @@ beta: Milvus 2.6.x
 <li>Con <code translate="no">minio</code>, Woodpecker comparte el mismo almacenamiento de objetos con Milvus (MinIO/S3/GCS/OSS, etc.).</li>
 <li>Con <code translate="no">local</code>, un disco local de nodo único sólo es adecuado para Standalone. Si todos los pods pueden acceder a un sistema de archivos compartido (por ejemplo, NFS), el modo Cluster también puede utilizar <code translate="no">local</code>.</li>
 </ul>
-<h2 id="Deployment-guides" class="common-anchor-header">Guías de despliegue<button data-href="#Deployment-guides" class="anchor-icon" translate="no">
+<h2 id="Object-storage-compatibility-for-storagetypeminio" class="common-anchor-header">Compatibilidad del almacenamiento de objetos para <code translate="no">storage.type=minio</code><button data-href="#Object-storage-compatibility-for-storagetypeminio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -179,7 +179,30 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="common-anchor-header">Habilitar Woodpecker para un Cluster Milvus en Kubernetes (Milvus Operator, storage=minio)<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="anchor-icon" translate="no">
+    </button></h2><p>La siguiente matriz resume la compatibilidad actualmente conocida de los backends de almacenamiento de objetos cuando Woodpecker está configurado con <code translate="no">storage.type=minio</code>. Esta información se basa en <a href="https://github.com/zilliztech/woodpecker/discussions/150">GitHub Discussion #150</a>.</p>
+<table>
+<thead>
+<tr><th>Proveedor / servicio</th><th>Estado</th><th>Notas</th></tr>
+</thead>
+<tbody>
+<tr><td>Almacenamiento Azure Blob</td><td>Soportado</td><td>Utiliza el SDK nativo de Azure.</td></tr>
+<tr><td>AWS S3</td><td>Soportado</td><td>S3 nativo con soporte completo de escritura condicional.</td></tr>
+<tr><td>MinIO (<code translate="no">&gt;= 2024-12</code>)</td><td>Compatible con</td><td>Soporte completo de S3 Conditional Write.</td></tr>
+<tr><td>Aliyun OSS</td><td>Soportado</td><td>Soportado a través de su interfaz compatible con S3.</td></tr>
+<tr><td>COS de Tencent</td><td>Compatible</td><td>Admitido a través de su interfaz compatible con S3.</td></tr>
+<tr><td>Almacenamiento en la nube de Google (GCS)</td><td>Compatible</td><td>Compatible a través del modo de interoperabilidad S3.</td></tr>
+<tr><td>Huawei Cloud OBS</td><td>No compatible</td><td>Carece de la semántica de escritura condicional requerida.</td></tr>
+<tr><td>Datos VAST</td><td>Compatible</td><td>Verificado por la comunidad; funciona únicamente con buckets no versionados.</td></tr>
+<tr><td>Otro almacenamiento compatible con S3</td><td>Parcial</td><td>Depende de la compatibilidad total con la semántica de escritura condicional de S3.</td></tr>
+</tbody>
+</table>
+<p>Notas:</p>
+<ul>
+<li>La compatibilidad depende de la compatibilidad nativa del SDK o de la compatibilidad con la semántica de escritura condicional de S3.</li>
+<li>Si autoaloja MinIO para Woodpecker, utilice <code translate="no">RELEASE.2024-12-18T13-15-44Z</code> o una versión posterior.</li>
+<li>Esta matriz refleja <a href="https://github.com/zilliztech/woodpecker/discussions/150">el debate actual</a> y puede evolucionar a medida que se siga validando la compatibilidad con el backend.</li>
+</ul>
+<h2 id="Deployment-guides" class="common-anchor-header">Guías de implantación<button data-href="#Deployment-guides" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -194,7 +217,22 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Después de instalar el <a href="/docs/es/install_cluster-milvusoperator.md">Operador</a> Milvus, inicie un cluster Milvus con Woodpecker habilitado utilizando la muestra oficial:</p>
+    </button></h2><h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="common-anchor-header">Habilitar Woodpecker para un clúster Milvus en Kubernetes (Milvus Operator, storage=minio)<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Después de instalar <a href="/docs/es/install_cluster-milvusoperator.md">Milvus Oper</a>ator, inicie un clúster Milvus con Woodpecker habilitado utilizando el ejemplo oficial:</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 
 <button class="copy-code-btn"></button></code></pre>

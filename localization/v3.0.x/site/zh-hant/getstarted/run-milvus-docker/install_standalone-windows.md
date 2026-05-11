@@ -119,7 +119,7 @@ Delete successfully. # Data has been removed.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>如果您喜歡在 Windows 上使用 Linux 指令和 shell 腳本啟動 Milvus，請確保已經安裝了 WSL 2 指令。有關如何安裝 WSL 2 指令的詳細資訊，您可以參考這篇<a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">微軟文章</a>。</p>
+    </button></h3><p>如果您喜歡在 Windows 上使用 Linux 指令和 shell 腳本啟動 Milvus，請確保您已經安裝 WSL 2 指令。有關如何安裝 WSL 2 指令的詳細資訊，您可以參考這篇<a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">微軟文章</a>。</p>
 <ol>
 <li><p>啟動 WSL 2。</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -189,7 +189,7 @@ Delete successfully.​
 <li><p>在管理員模式中開啟 Docker Desktop，方法是按滑鼠右鍵並選擇<strong>以管理員身分執行</strong>。</p></li>
 <li><p>在 PowerShell 或 Windows Command Prompt 執行下列指令，為 Milvus Standalone 下載 Docker Compose 配置檔案，並啟動 Milvus。</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v3.0-beta/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -221,7 +221,7 @@ Creating milvus-standalone ... done​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>步驟與在 Linux 系統中使用 Docker Compose 安裝 Milvus 相似。</p>
+    </button></h3><p>步驟與使用 Docker Compose 在 Linux 系統中安裝 Milvus 相似。</p>
 <ol>
 <li><p>啟動 WSL 2。</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -230,7 +230,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>下載 Milvus 配置檔案。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0-beta/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>啟動 Milvus。</p>

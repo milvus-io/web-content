@@ -162,7 +162,45 @@ beta: Milvus 2.6.x
 <p>备注</p>
 <ul>
 <li>使用<code translate="no">minio</code> ，啄木鸟与 Milvus 共享相同的对象存储（MinIO/S3/GCS/OSS 等）。</li>
-<li>通过<code translate="no">local</code> ，单节点本地磁盘仅适用于 Standalone。如果所有 pod 都能访问共享文件系统（如 NFS），集群模式也可以使用<code translate="no">local</code> 。</li>
+<li>通过<code translate="no">local</code> ，单节点本地磁盘仅适用于 Standalone。如果所有 pod 都能访问共享文件系统（如 NFS），集群模式也可使用<code translate="no">local</code> 。</li>
+</ul>
+<h2 id="Object-storage-compatibility-for-storagetypeminio" class="common-anchor-header">对象存储的兼容性<code translate="no">storage.type=minio</code><button data-href="#Object-storage-compatibility-for-storagetypeminio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>下表总结了目前已知的对象存储后端在啄木鸟配置为<code translate="no">storage.type=minio</code> 时的兼容性。此信息基于<a href="https://github.com/zilliztech/woodpecker/discussions/150">GitHub 讨论 #150</a>。</p>
+<table>
+<thead>
+<tr><th>提供商/服务</th><th>状态</th><th>备注</th></tr>
+</thead>
+<tbody>
+<tr><td>Azure Blob 存储</td><td>支持</td><td>使用本地 Azure SDK。</td></tr>
+<tr><td>AWS S3</td><td>支持</td><td>完全支持条件写入的本地 S3。</td></tr>
+<tr><td>MinIO (<code translate="no">&gt;= 2024-12</code>)</td><td>支持</td><td>完全支持 S3 条件写入。</td></tr>
+<tr><td>阿里云开放源码软件</td><td>支持</td><td>通过其 S3 兼容接口提供支持。</td></tr>
+<tr><td>腾讯 COS</td><td>支持</td><td>通过其 S3 兼容接口支持。</td></tr>
+<tr><td>谷歌云存储（GCS）</td><td>支持</td><td>通过 S3 互操作模式支持。</td></tr>
+<tr><td>华为云 OBS</td><td>不支持</td><td>缺乏所需的条件写入语义。</td></tr>
+<tr><td>VAST 数据</td><td>支持</td><td>已通过社区验证；仅适用于非版本控制的存储桶。</td></tr>
+<tr><td>其他 S3 兼容存储</td><td>部分支持</td><td>取决于对 S3 条件写入语义的完全支持。</td></tr>
+</tbody>
+</table>
+<p>备注：</p>
+<ul>
+<li>兼容性取决于本地 SDK 支持或 S3 条件写入语义支持。</li>
+<li>如果为啄木鸟自托管 MinIO，请使用<code translate="no">RELEASE.2024-12-18T13-15-44Z</code> 或更高版本。</li>
+<li>此矩阵反映了<a href="https://github.com/zilliztech/woodpecker/discussions/150">当前的讨论情况</a>，可能会随着后端支持的进一步验证而发生变化。</li>
 </ul>
 <h2 id="Deployment-guides" class="common-anchor-header">部署指南<button data-href="#Deployment-guides" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -179,7 +217,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="common-anchor-header">为 Kubernetes 上的 Milvus 群集启用啄木鸟（Milvus 操作符，存储=minio）<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="common-anchor-header">为 Kubernetes 上的 Milvus 群集启用 Woodpecker（Milvus 操作符，存储=minio）<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -194,7 +232,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>安装<a href="/docs/zh/install_cluster-milvusoperator.md">Milvus 操作符</a>后，使用官方示例启动启用 Woodpecker 的 Milvus 群集：</p>
+    </button></h3><p>安装<a href="/docs/zh/install_cluster-milvusoperator.md">Milvus 操作符</a>后，使用官方示例启动启用 Woodpecker 的 Milvus 集群：</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 
 <button class="copy-code-btn"></button></code></pre>

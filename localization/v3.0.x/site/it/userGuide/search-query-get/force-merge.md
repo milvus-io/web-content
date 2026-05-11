@@ -80,8 +80,8 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h3><ul>
-<li><p>Milvus versione 2.6.15 o successiva</p></li>
-<li><p>pymilvus 2.6.13 o successivo</p></li>
+<li><p>Milvus versione 3.0 o successiva</p></li>
+<li><p>PyMilvus 3.0 o successivo</p></li>
 </ul>
 <h3 id="Global-Configuration" class="common-anchor-header">Configurazione globale<button data-href="#Global-Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -142,7 +142,7 @@ beta: Milvus 3.0.x
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.querynodeMemoryFactor</code></p></td>
      <td><p>4.0</p></td>
-     <td><p>La memoria minima del QueryNode viene divisa per questo fattore. Utilizzato durante il calcolo automatico delle dimensioni (<code translate="no">target_size=max_int64</code>) per garantire che i segmenti uniti possano essere caricati dai QueryNode.</p><ul><li><p>Un valore maggiore produce segmenti più piccoli che sono più facili da caricare per i QueryNode.</p></li><li><p>Un valore più piccolo consente di ottenere segmenti più grandi, ma può causare errori di caricamento nei QueryNode con problemi di memoria.</p></li><li><p>Ad esempio, con il fattore predefinito di 4,0 e il QueryNode più piccolo con 16 GB di memoria, la dimensione target calcolata automaticamente non supererà i 4 GB. Questo impedisce a Force Merge di produrre segmenti così grandi che i QueryNode non possono caricarli.</p></li></ul></td>
+     <td><p>La memoria minima del QueryNode viene divisa per questo fattore. Utilizzato durante il calcolo automatico delle dimensioni (<code translate="no">target_size=max_int64</code>) per garantire che i segmenti uniti possano essere caricati dai QueryNode.</p><ul><li><p>Un valore maggiore produce segmenti più piccoli che sono più facili da caricare per i QueryNode.</p></li><li><p>Un valore più piccolo consente di ottenere segmenti più grandi, ma può causare errori di caricamento sui QueryNode con problemi di memoria.</p></li><li><p>Ad esempio, con il fattore predefinito di 4,0 e il QueryNode più piccolo con 16 GB di memoria, la dimensione target calcolata automaticamente non supererà i 4 GB. Questo impedisce a Force Merge di produrre segmenti così grandi che i QueryNode non possono caricarli.</p></li></ul></td>
    </tr>
 </table>
 <p>Per applicare le modifiche di cui sopra al vostro cluster Milvus, seguite i passaggi in <a href="/docs/it/configure-helm.md#Configure-Milvus-via-configuration-file">Configurazione di Milvus con Helm</a> e <a href="/docs/it/configure_operator.md">Configurazione di Milvus con Milvus Operators</a>.</p>

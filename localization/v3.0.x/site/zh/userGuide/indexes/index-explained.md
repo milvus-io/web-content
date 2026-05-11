@@ -21,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>索引是建立在数据之上的附加结构。其内部结构取决于所使用的近似近邻搜索算法。索引可以加快搜索速度，但在搜索过程中会产生额外的预处理时间、空间和 RAM。此外，使用索引通常会降低召回率（虽然影响可以忽略不计，但仍然很重要）。因此，本文将解释如何最大限度地减少使用索引的成本，同时最大限度地提高索引的效益。</p>
-<h2 id="Overview" class="common-anchor-header">概览<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -104,7 +104,7 @@ summary: >-
     </button></h2><p>如下图所示，Milvus 中的索引类型由三个核心部分组成，即<strong>数据结构</strong>、<strong>量化</strong>和<strong>细化器</strong>。量化和精炼器是可选的，但由于收益大于成本的显著平衡而被广泛使用。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
    </span> <span class="img-wrapper"> <span>向量索引剖析</span> </span></p>
 <p>在创建索引时，Milvus 会结合所选的数据结构和量化方法来确定最佳<strong>扩展率</strong>。在查询时，系统会检索<code translate="no">topK × expansion rate</code> 候选向量，应用精炼器以更高的精度重新计算距离，最后返回最精确的<code translate="no">topK</code> 结果。这种混合方法通过将资源密集型细化限制在候选矢量的过滤子集上，在速度和精确度之间取得了平衡。</p>
 <h3 id="Data-structure" class="common-anchor-header">数据结构<button data-href="#Data-structure" class="anchor-icon" translate="no">
@@ -347,7 +347,7 @@ summary: >-
     </button></h2><div class="alert note">
 <p>本节侧重于计算特定索引类型的内存消耗，包括许多技术细节。如果本节内容与您的兴趣不符，您可以放心跳过。</p>
 </div>
-<p>索引的内存消耗受其数据结构、通过量化实现的压缩率以及使用中的精炼器的影响。一般来说，由于图的结构（如<strong>HNSW</strong>），基于图的索引通常会占用较多内存，这通常意味着每个向量的空间开销较大。相比之下，IVF 及其变体更节省内存，因为适用的每个向量空间开销更少。不过，<strong>DiskANN</strong>等先进技术允许索引的一部分（如图或细化器）驻留在磁盘上，从而在保持性能的同时减少了内存负荷。</p>
+<p>索引的内存消耗受其数据结构、通过量化实现的压缩率以及所使用的精炼器的影响。一般来说，由于图的结构（如<strong>HNSW</strong>），基于图的索引通常会占用较多内存，这通常意味着每个向量的空间开销较大。相比之下，IVF 及其变体更节省内存，因为适用的单位向量空间开销更少。不过，<strong>DiskANN</strong>等先进技术允许索引的一部分（如图或细化器）驻留在磁盘上，从而在保持性能的同时减少了内存负荷。</p>
 <p>具体来说，索引的内存使用量可按以下方式计算：</p>
 <h3 id="IVF-index-memory-usage" class="common-anchor-header">IVF 索引内存使用量<button data-href="#IVF-index-memory-usage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -364,7 +364,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>IVF 索引通过将数据划分为群组，在内存效率和搜索性能之间取得平衡。以下是使用 IVF 变体索引的 100 万个 128 维向量所使用的内存明细。</p>
+    </button></h3><p>IVF 索引通过将数据划分为数据集群，在内存效率和搜索性能之间取得平衡。以下是使用 IVF 变体索引的 100 万个 128 维向量所使用的内存明细。</p>
 <ol>
 <li><p><strong>计算中心点使用的内存。</strong></p>
 <p>IVF 系列索引类型使 Milvus 能够使用基于中心点的分区将向量聚类到桶中。在原始向量 Embeddings 中，每个中心点都包含在索引中。当你将向量划分为 2,000 个簇时，内存使用量可按如下方式计算：</p>
@@ -402,7 +402,7 @@ summary: >-
 <td><p>62.2 MB</p></td>
 </tr>
 <tr>
-<td><p>IVF-SQ8 (无细化)</p></td>
+<td><p>IVF-SQ8 （无细化）</p></td>
 <td><p>1.0 MB + 2.0 MB + 128 MB</p></td>
 <td><p>131.0 MB</p></td>
 </tr>

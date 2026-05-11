@@ -39,7 +39,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>標準的な<a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md">コンパクションでは</a>、多対一のマージによってセグメント・サイズを設定された<code translate="no">maxSize</code> の近くに維持しますが、それでも、制限を超えないとそれ以上マージできない中間のサイズの断片が残ることがあります。たとえば、下図のように、コレクションに 2 MB のセグメントが 5 つあり、<code translate="no">maxSize</code> が 3 MB の場合、2 つのセグメントをマージすると制限を超えるため、標準のコンパクションではセグメント数をこれ以上減らすことができず、断片化されたレイアウトが残ります。</p>
-<p>Force merge は<code translate="no">target_size</code> パラメータを追加し、可能な限り厳しい許容範囲内でセグメントを希望のサイズに再編成します。下図のように、指定された<code translate="no">target_size</code> が 4 MB の場合、5 つの 2 MB の小さなセグメントをより少ない大きなセグメントにマージすることができます。これは余分なセグメント数を減らし、デフォルトの<code translate="no">maxSize</code> 設定よりも大きなターゲットをサポートし、ターゲットが非常に大きい場合、システムは現在のハードウェアと QueryNode のトポロジーに対して実用的な出力サイズとセグメント数を選択することができます。</p>
+<p>Force merge は<code translate="no">target_size</code> パラメータを追加し、可能な限り厳しい許容範囲内でセグメントを希望のサイズに再編成します。下図のように、指定された<code translate="no">target_size</code> が 4 MB の場合、5 つの 2 MB の小さなセグメントをより少ない大きなセグメントにマージすることができます。これは過剰なセグメント数を減らし、デフォルトの<code translate="no">maxSize</code> 設定よりも大きなターゲットをサポートし、ターゲットが非常に大きい場合、システムは現在のハードウェアとQueryNodeトポロジーに対して実用的な出力サイズとセグメント数を選択することができます。</p>
 <p>どのコンパクション方法を使用するかについては、<a href="#faq">FAQを</a>参照してください。</p>
 <p>
   
@@ -78,8 +78,8 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h3><ul>
-<li><p>Milvus バージョン2.6.15以降</p></li>
-<li><p>pymilvus 2.6.13以降</p></li>
+<li><p>Milvusバージョン3.0以降</p></li>
+<li><p>PyMilvus 3.0以降</p></li>
 </ul>
 <h3 id="Global-Configuration" class="common-anchor-header">グローバル設定<button data-href="#Global-Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -96,7 +96,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下の設定パラメータは強制併合の動作を制御します。Milvus設定ファイルまたは環境変数で設定してください。</p>
+    </button></h3><p>以下の設定パラメータは強制併合の動作を制御します。Milvusの設定ファイルまたは環境変数で設定してください。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">dataCoord:</span>
   <span class="hljs-attr">segment:</span>
     <span class="hljs-attr">maxSize:</span> <span class="hljs-number">512</span>         <span class="hljs-comment"># Default segment max size (MB).</span>
@@ -215,7 +215,7 @@ job_id = client.compact(
    <tr>
      <td><p><code translate="no">target_size</code></p></td>
      <td><p>int</p></td>
-     <td><p>オプション。MB 単位のターゲット・セグメント・サイズ。パラメータ値には3つのオプションがあります：</p><ul><li><p><strong>0 または省略</strong>: 設定された<code translate="no">dataCoord.segment.maxSize</code> を使用します (デフォルト: 512 MB)。標準のコンパクションと同じ。</p></li><li><p><strong>明示的な値</strong>：セグメントをMB単位で指定されたサイズ（例：2048）にマージする。設定された<code translate="no">dataCoord.segment.maxSize</code> 以上でなければならない。</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)：</strong>現在のセグメント分布と利用可能なノード・リソースに基づいて最適なサイズを自動的に計算する。</p></li></ul></td>
+     <td><p>オプション。MB 単位のターゲット・セグメント・サイズ。パラメータ値には3つのオプションがあります：</p><ul><li><p><strong>0 または省略</strong>: 設定された<code translate="no">dataCoord.segment.maxSize</code> を使用します (デフォルト: 512 MB)。標準のコンパクションと同じ。</p></li><li><p><strong>明示的な値</strong>：セグメントをMB単位で指定されたサイズ（例：2048）にマージする。設定された<code translate="no">dataCoord.segment.maxSize</code> 以上でなければならない。</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)：</strong>現在のセグメント分布と利用可能なノードリソースに基づいて最適なサイズを自動的に計算する。</p></li></ul></td>
    </tr>
 </table>
 <div class="alert note">
@@ -293,7 +293,7 @@ state = client.get_compaction_state(job_id)
    </tr>
    <tr>
      <td><p>APIトリガー</p></td>
-     <td><p>targetSize=0（または設定なし）、Major/L0フラグなし</p></td>
+     <td><p>targetSize=0（または未設定）、Major/L0フラグなし</p></td>
      <td><p>ターゲットサイズ&gt;0 (MB)</p></td>
    </tr>
    <tr>
@@ -323,7 +323,7 @@ state = client.get_compaction_state(job_id)
    </tr>
    <tr>
      <td><p>中分割の挙動</p></td>
-     <td><p>永久にスタックする可能性あり(例えば、2つの60%セグメントを1つの120%セグメントに合法的にすることはできない)</p></td>
+     <td><p>永久にスタックする可能性あり（例えば、2つの60%セグメントを合法的に1つの120%セグメントにすることはできない）</p></td>
      <td><p>リパック＋分割が機能。「60%でスタック」パターンはない</p></td>
    </tr>
    <tr>
@@ -343,7 +343,7 @@ state = client.get_compaction_state(job_id)
    </tr>
    <tr>
      <td><p>典型的な使用例</p></td>
-     <td><p>書き込み/削除後の毎日の高回転クリーンアップ</p></td>
+     <td><p>書き込み/削除後の毎日の高負荷クリーンアップ</p></td>
      <td><p>ベンチマーク準備、検索最適化、負荷並列アライメント</p></td>
    </tr>
    <tr>

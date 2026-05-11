@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>Milvus menggunakan Pulsar atau Kafka untuk mengelola log perubahan terbaru, mengeluarkan log aliran, dan menyediakan langganan log. Pulsar adalah sistem penyimpanan pesan default. Topik ini memperkenalkan cara mengonfigurasi penyimpanan pesan dengan Docker Compose atau Helm.</p>
 <p>Anda dapat mengonfigurasi Pulsar dengan <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> atau pada K8 dan mengonfigurasi Kafka pada K8.</p>
 <div class="alert note">
-<p><strong>Batasan Antrian Pesan</strong>: Saat meningkatkan ke Milvus v2.6.15, Anda harus mempertahankan pilihan antrean pesan saat ini. Beralih di antara sistem antrean pesan yang berbeda selama peningkatan tidak didukung. Dukungan untuk mengubah sistem antrean pesan akan tersedia di versi mendatang.</p>
+<p><strong>Batasan Antrian Pesan</strong>: Saat meningkatkan ke Milvus v3.0-beta, Anda harus mempertahankan pilihan antrean pesan saat ini. Beralih di antara sistem antrean pesan yang berbeda selama peningkatan tidak didukung. Dukungan untuk mengubah sistem antrean pesan akan tersedia di versi mendatang.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Mengonfigurasi Pulsar dengan Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -225,7 +225,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Untuk cluster Milvus pada K8, Anda dapat mengonfigurasi Kafka dengan perintah yang sama dengan perintah untuk menjalankan Milvus. Atau, Anda dapat mengonfigurasi Kafka menggunakan file <code translate="no">values.yml</code> pada jalur /charts/milvus di repositori <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> sebelum memulai Milvus.</p>
-<p>Untuk detail mengenai cara mengkonfigurasi Milvus menggunakan Helm, lihat <a href="/docs/id/configure-helm.md">Mengkonfigurasi Milvus dengan Grafik Helm</a>. Untuk detail mengenai item konfigurasi yang berhubungan dengan Pulsar, lihat Konfigurasi <a href="/docs/id/configure_pulsar.md">yang berhubungan dengan Pulsar</a>.</p>
+<p>Untuk detail mengenai cara mengkonfigurasi Milvus menggunakan Helm, lihat <a href="/docs/id/configure-helm.md">Mengkonfigurasi Milvus dengan Helm Charts</a>. Untuk detail mengenai item konfigurasi yang berhubungan dengan Pulsar, lihat Konfigurasi <a href="/docs/id/configure_pulsar.md">yang berhubungan dengan Pulsar</a>.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Menggunakan file YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -298,7 +298,7 @@ summary: >-
 <div class="alert warning">
 <p>Mengubah penyimpanan pesan tidak disarankan. Jika Anda ingin melakukan ini, hentikan semua operasi DDL, lalu panggil FlushAll API untuk mem-flush semua koleksi, dan akhirnya hentikan Milvus sebelum Anda benar-benar mengubah penyimpanan pesan.</p>
 </div>
-<h2 id="Whats-next" class="common-anchor-header">Apa selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

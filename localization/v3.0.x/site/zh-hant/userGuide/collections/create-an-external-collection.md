@@ -1,7 +1,9 @@
 ---
 id: create-an-external-collection.md
 title: 建立外部資料集Compatible with Milvus 3.0.x
-summary: 透過外部集合存取 AWS S3 或 Iceberg 中的資料，無須複製到 Milvus 中。
+summary: >-
+  外部集合是 Milvus 中的一種資料集合類型，可從 AWS S3 和 Iceberg 等外部儲存系統或資料庫表存取資料，而無需將資料複製到 Milvus
+  中。它充當資料湖上的查詢層，同時保持與 Milvus 查詢介面的相容性。
 beta: Milvus 3.0.x
 ---
 <h1 id="Create-an-External-Collection" class="common-anchor-header">建立外部資料集<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Create-an-External-Collection" class="anchor-icon" translate="no">
@@ -19,7 +21,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>外部集合是 Milvus 中的一種資料集合類型，可從 AWS S3 和 Iceberg 等外部儲存系統存取資料，而無需將資料複製到 Milvus 中。它充當資料湖上的查詢層，同時保持與 Milvus 查詢介面的相容性。</p>
+    </button></h1><p>外部集合是 Milvus 中的一種資料集合類型，可從 AWS S3 和 Iceberg 等外部儲存系統或資料庫表存取資料，而無需將資料複製到 Milvus 中。它充當資料湖上的查詢層，同時保持與 Milvus 查詢介面的相容性。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +37,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在典型的人工智能資料管道中，使用者可能已將資料以 Parquet 或其他格式儲存在他們的儲存系統中，例如 AWS S3。為了讓 Milvus 使用這些外部儲存的資料，使用者通常需要使用抽取-轉換-載入 (ETL) 管道將資料匯入 Milvus 自己的儲存系統。</p>
+    </button></h2><p>在典型的人工智能資料管道中，使用者可能已經將資料以 Parquet 或其他格式儲存在他們的儲存系統中，例如 AWS S3。為了讓 Milvus 使用這些外部儲存的資料，使用者通常需要使用抽取-轉換-載入 (ETL) 管道將資料匯入 Milvus 自己的儲存系統。</p>
 <p>這種將您的資料帶到 Milvus 的工作流程會產生難以同步的冗餘資料，並增加工程維護的負擔，以確保資料的一致性。</p>
 <p>
   
@@ -47,33 +49,7 @@ beta: Milvus 3.0.x
    <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" />
    </span> <span class="img-wrapper"> <span>將計算帶入資料工作流程</span> </span></p>
 <p>一旦建立，外部資料集可直接存取您的資料，並將資料保存在您儲存資料的相同位置。在後台，Milvus 會建立艙單檔案，記錄 Milvus 元資料與外部資料檔案中的資料行之間的對應關係。清單檔案就緒後，您就可以在外部資料集中建立索引，就像在任何受管理的資料集中一樣。</p>
-<p>當您的資料變更時，手動觸發次秒級的刷新即可更新元資料，讓 Milvus 永遠保持最新狀態。</p>
-<h2 id="Limits--restrictions" class="common-anchor-header">限制與約束<button data-href="#Limits--restrictions" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>由於 Milvus 不儲存原始資料，只維護元資料和原始資料之間的映射，外部資料集是唯讀的。這意味著您無法在 Milvus 端插入、上插、刪除、匯入、刷新和壓縮資料。</p>
-<p>與管理式資料集相比，外部資料集有以下限制：</p>
-<ul>
-<li><p>您無法設定主索引鍵及其 AutoID 屬性。</p></li>
-<li><p>不能啟用動態欄位。</p></li>
-<li><p>不能設定分割鍵和群集鍵，因為分割不可用。</p></li>
-<li><p>不能在模式中定義功能。</p></li>
-<li><p>一旦建立外部資料集，就無法變更其模式。</p></li>
-<li><p>您無法在 BM25 中使用文字匹配。</p></li>
-<li><p>您必須在建立索引前觸發更新作業。</p></li>
-</ul>
+<p>當您的資料變更時，手動觸發次秒級刷新即可更新元資料，讓 Milvus 永遠保持最新狀態。</p>
 <h2 id="Step-1-Create-schema" class="common-anchor-header">步驟 1：建立模式<button data-href="#Step-1-Create-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,7 +65,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>與建立管理式資料集一樣，您也需要在建立外部資料集前建立模式。然而，模式與管理式集合略有不同。</p>
+    </button></h2><p>與建立管理式資料集一樣，在建立外部資料集之前，您也需要建立模式。然而，模式與管理式集合略有不同。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -97,14 +73,24 @@ beta: Milvus 3.0.x
 schema = MilvusClient.create_schema(
     external_source=<span class="hljs-string">&#x27;s3://s3.&lt;region-id&gt;.amazonaws.com/&lt;bucket&gt;/&#x27;</span>,
     external_spec=<span class="hljs-string">&#x27;{
-        &quot;format&quot;: &quot;parquet&quot;，
+        &quot;format&quot;: &quot;parquet&quot;,
         &quot;extfs&quot;: {
             ...
         }
     }&#x27;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// Java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.JsonObject;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">externalSpec</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+externalSpec.addProperty(<span class="hljs-string">&quot;format&quot;</span>, <span class="hljs-string">&quot;parquet&quot;</span>);
+externalSpec.add(<span class="hljs-string">&quot;extfs&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>());
+
+CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> CreateCollectionReq.CollectionSchema.builder()
+        .externalSource(<span class="hljs-string">&quot;s3://s3.&lt;region-id&gt;.amazonaws.com/&lt;bucket&gt;/&quot;</span>)
+        .externalSpec(externalSpec)
+        .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
@@ -118,9 +104,51 @@ schema := entity.NewSchema().
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> fields=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;product_id&quot;,
+            &quot;dataType&quot;: &quot;Int64&quot;,
+            &quot;isPrimary&quot;: true
+        },
+        {
+            &quot;fieldName&quot;: &quot;embedding&quot;,
+            &quot;dataType&quot;: &quot;FloatVector&quot;,
+            &quot;elementTypeParams&quot;: {
+                &quot;dim&quot;: &quot;768&quot;
+            }
+        },
+        {
+            &quot;fieldName&quot;: &quot;product_name&quot;,
+            &quot;dataType&quot;: &quot;VarChar&quot;,
+            &quot;elementTypeParams&quot;: {
+                &quot;max_length&quot;: 512
+            }
+        }
+    ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>要為外部集合建立模式，您需要指定來源資料 URI、資料格式和驗證設定。</p>
+<table>
+   <tr>
+     <th><p>參數名稱</p></th>
+     <th><p>參數說明</p></th>
+     <th><p>範例 值</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">format</code></p></td>
+     <td><p>目標來源資料檔案的格式。</p></td>
+     <td><p><code translate="no">parquet</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">snapshot_id</code></p></td>
+     <td><p>有效的 Iceberg 表快照 ID。此參數僅在您將<code translate="no">format</code> 設為<code translate="no">iceberg_table</code> 時適用。</p></td>
+     <td><p><code translate="no">473984310232959286</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">extfs</code></p></td>
+     <td><p>以字符串化 JSON 結構的外部檔案系統設定。</p></td>
+     <td><p>--</p></td>
+   </tr>
+</table>
 <p><details summary="Authentication Options"></p>
 <p>您有以下選項來設定驗證設定：</p>
 <h3 id="Use-AWS-AKSK" class="common-anchor-header">使用 AWS AK/SK<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
@@ -138,7 +166,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>此選項適用於自行託管的 MinIO 或有 AK/SK 工作的情況。</p>
+    </button></h3><p>此選項適用於自託管 MinIO 或有 AK/SK 工作的情況。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -158,18 +186,8 @@ schema := entity.NewSchema().
      <th><p>範例 值</p></th>
    </tr>
    <tr>
-     <td><p><code translate="no">format</code></p></td>
-     <td><p>目標來源資料檔案的格式。</p><p>可能的值是<code translate="no">parquet</code>,<code translate="no">vortex</code>,<code translate="no">lance-table</code>, 和<code translate="no">iceberg-table</code> 。</p></td>
-     <td><p><code translate="no">parquet</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">extfs</code></p></td>
-     <td><p>以字串化 JSON 結構顯示的外部檔案系統設定。</p></td>
-     <td><p>--</p></td>
-   </tr>
-   <tr>
      <td><p><code translate="no">extfs.access_key_id</code></p></td>
-     <td><p>存取控制鍵 ID</p></td>
+     <td><p>存取金鑰 ID</p></td>
      <td><p><code translate="no">AKIA...</code></p></td>
    </tr>
    <tr>
@@ -184,7 +202,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.cloud_provider</code></p></td>
-     <td><p>雲提供商 ID</p></td>
+     <td><p>雲端提供者 ID</p></td>
      <td><p><code translate="no">aws</code></p></td>
    </tr>
    <tr>
@@ -230,16 +248,6 @@ schema := entity.NewSchema().
      <th><p>參數名稱</p></th>
      <th><p>參數說明</p></th>
      <th><p>範例 值</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">format</code></p></td>
-     <td><p>目標來源資料的格式。</p><p>可能的值為<code translate="no">parquet</code>,<code translate="no">vortex</code>,<code translate="no">lance-table</code>, 和<code translate="no">iceberg-table</code></p></td>
-     <td><p><code translate="no">parquet</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">extfs</code></p></td>
-     <td><p>外部檔案系統設定</p></td>
-     <td><p>--</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_iam</code></p></td>
@@ -305,7 +313,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>當您的組織使用不同的 AWS 帳戶來管理 Milvus 叢集和存放目標資料檔案的儲存桶時，此選項適用。</p>
+    </button></h3><p>此選項適用於您的組織使用不同的 AWS 帳戶來管理 Milvus 叢集和存放目標資料檔案的儲存桶。</p>
 <p>在這種情況下，水桶擁有者應該建立一個 IAM 角色，以</p>
 <ul>
 <li><p>附加<code translate="no">AmazonS3FullAccess</code> 或針對水桶存取的更精細政策。</p></li>
@@ -374,26 +382,16 @@ schema := entity.NewSchema().
    <tr>
      <th><p>參數名稱</p></th>
      <th><p>參數說明</p></th>
-     <th><p>範例 值</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">format</code></p></td>
-     <td><p>目標來源資料的格式。</p><p>可能的值是<code translate="no">parquet</code>,<code translate="no">vortex</code>,<code translate="no">lance-table</code>, 和<code translate="no">iceberg-table</code></p></td>
-     <td><p><code translate="no">parquet</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">extfs</code></p></td>
-     <td><p>外部檔案系統設定</p></td>
-     <td><p>--</p></td>
+     <th><p>示例值</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.cloud_provider</code></p></td>
-     <td><p>雲提供者 ID</p></td>
+     <td><p>雲提供商 ID</p></td>
      <td><p><code translate="no">aws</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.region</code></p></td>
-     <td><p>雲端區域 ID</p></td>
+     <td><p>雲區域 ID</p></td>
      <td><p><code translate="no">us-west-2</code></p></td>
    </tr>
    <tr>
@@ -403,7 +401,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_iam</code></p></td>
-     <td><p>是否使用 AWS IAM。</p><p>將此選項設定為<code translate="no">"true"</code> 。</p></td>
+     <td><p>是否使用 AWS IAM。</p><p>此選項設定為<code translate="no">"true"</code> 。</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
@@ -438,7 +436,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦模式準備就緒，您可以如下方式新增欄位：</p>
+    </button></h2><p>模式準備就緒後，您可以如下方式新增欄位：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -447,15 +445,13 @@ schema := entity.NewSchema().
     <span class="hljs-comment"># highlight-next</span>
     external_field=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-comment"># field name in the external data file</span>
 )
-
 schema.add_field(
     field_name=<span class="hljs-string">&quot;product_name&quot;</span>,
     datatype=DataType.VARCHAR,
-    max_length=<span class="hljs-number">256</span>,
+    max_length=<span class="hljs-number">512</span>,
     <span class="hljs-comment"># highlight-next</span>
     external_field=<span class="hljs-string">&quot;name&quot;</span>
 )
-
 schema.add_field(
     field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
     datatype=DataType.FLOAT_VECTOR,
@@ -464,7 +460,26 @@ schema.add_field(
     external_field=<span class="hljs-string">&quot;vector&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// Java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
+
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;product_id&quot;</span>)
+        .dataType(DataType.Int64)
+        .externalField(<span class="hljs-string">&quot;id&quot;</span>)
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;product_name&quot;</span>)
+        .dataType(DataType.VarChar)
+        .maxLength(<span class="hljs-number">512</span>)
+        .externalField(<span class="hljs-string">&quot;name&quot;</span>)
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .dataType(DataType.FloatVector)
+        .dimension(<span class="hljs-number">768</span>)
+        .externalField(<span class="hljs-string">&quot;vector&quot;</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
@@ -495,7 +510,11 @@ schema = schema.
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
+    \&quot;externalSource\&quot;: \&quot;volume://my_volume/path/to/a/folder\&quot;,
+    \&quot;externalSpec\&quot;: \&quot;{\\\&quot;format\\\&quot;: \\\&quot;parquet\\\&quot;}\&quot;,
+    \&quot;fields\&quot;: <span class="hljs-variable">$fields</span>
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Step-3-Create-a-collection" class="common-anchor-header">步驟 3：建立集合<button data-href="#Step-3-Create-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -512,7 +531,7 @@ schema = schema.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>將所有欄位加入模式後，您就可以建立集合。</p>
+    </button></h2><p>將所有欄位加入模式後，您就可以建立外部集合。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client = MilvusClient(
@@ -525,7 +544,21 @@ client.create_collection(
     schema=schema
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// Java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+
+<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">connectConfig</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+        .build();
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(connectConfig);
+
+<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .collectionSchema(schema)
+        .build();
+client.createCollection(createReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
@@ -543,8 +576,7 @@ client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     APIKey: token
 })
 
-err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;test_collection&quot;</span>, schema).
-    WithIndexOptions(indexOptions...))
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;test_collection&quot;</span>, schema))
 
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
@@ -553,9 +585,17 @@ err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;dbName\&quot;: \&quot;my_database\&quot;,
+    \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
+    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-4-Refresh-data" class="common-anchor-header">步驟 4：刷新資料<button data-href="#Step-4-Refresh-data" class="anchor-icon" translate="no">
+<h2 id="Step-4-Create-indexes" class="common-anchor-header">步驟 4：建立索引<button data-href="#Step-4-Create-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -570,40 +610,171 @@ err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦集合準備就緒，您需要執行刷新，將資料中的元資料同步到 Milvus。</p>
+    </button></h2><p>您可以為外部集合欄位建立索引，就像在管理集合中所做的一樣。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+<span class="hljs-comment"># Add indexes</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
+)
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;product_name&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>
+)
+client.create_index(
+    db_name=<span class="hljs-string">&quot;my_database&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
+    index_params=index_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
+<span class="hljs-keyword">import</span> java.util.*;
+
+<span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParamForIdField</span> <span class="hljs-operator">=</span> IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;product_name&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .build();
+<span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParamForVectorField</span> <span class="hljs-operator">=</span> IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+List&lt;IndexParam&gt; indexParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+indexParams.add(indexParamForIdField);
+indexParams.add(indexParamForVectorField);
+<span class="hljs-type">CreateIndexReq</span> <span class="hljs-variable">createIndexReq</span> <span class="hljs-operator">=</span> CreateIndexReq.builder()
+        .dbName(<span class="hljs-string">&quot;my_database&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .indexParams(indexParams)
+        .build();
+client.createIndex(createIndexReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+collectionName := <span class="hljs-string">&quot;test_collection&quot;</span>
+indexOptions := []milvusclient.CreateIndexOption{
+    milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;embedding&quot;</span>, index.NewAutoIndex(entity.COSINE)),
+    milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;product_name&quot;</span>, index.NewAutoIndex(index.AUTOINDEX)),
+}
+indexTask, err := client.CreateIndex(ctx, indexOptions)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-comment">// handler err</span>
+}
+err = indexTask.Await(ctx)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-comment">// handler err</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">createIndex</span>({
+    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database&quot;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;test_collection&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;product_name&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>
+})
+client.<span class="hljs-title function_">createIndex</span>({
+    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database&quot;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;test_collection&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;COSINE&quot;</span>
+})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;embedding&quot;,
+            &quot;indexName&quot;: &quot;my_vector&quot;,
+            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+        },
+        {
+            &quot;fieldName&quot;: &quot;product_name&quot;,
+            &quot;indexName&quot;: &quot;my_id&quot;,
+            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+        }
+    ]&#x27;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;dbName\&quot;: \&quot;my_database\&quot;,
+    \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
+    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Step-5-Refresh-data" class="common-anchor-header">步驟 5：刷新資料<button data-href="#Step-5-Refresh-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>一旦集合準備就緒，刷新它以為您的資料建立元資料和索引。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">job_id = client.refresh_external_collection(
+    db_name=<span class="hljs-string">&quot;my_database&quot;</span>,
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>
 )
-
 <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
     progress = client.get_refresh_external_collection_progress(job_id=job_id)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{progress.state}</span>: <span class="hljs-subst">{progress.progress}</span>%&quot;</span>)
-
     <span class="hljs-keyword">if</span> progress.state == <span class="hljs-string">&quot;RefreshCompleted&quot;</span>:
         elapsed = progress.end_time - progress.start_time
         <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Completed in <span class="hljs-subst">{elapsed}</span>ms&quot;</span>)
-        <span class="hljs-keyword">return</span> job_id
+        <span class="hljs-keyword">break</span>
     <span class="hljs-keyword">elif</span> progress.state == <span class="hljs-string">&quot;RefreshFailed&quot;</span>:
         <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Failed: <span class="hljs-subst">{progress.reason}</span>&quot;</span>)
-        <span class="hljs-keyword">return</span> job_id
-
+        <span class="hljs-keyword">break</span>
     time.sleep(<span class="hljs-number">2</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// Java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.GetRefreshExternalCollectionProgressReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.ListRefreshExternalCollectionJobsReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.RefreshExternalCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.GetRefreshExternalCollectionProgressResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.ListRefreshExternalCollectionJobsResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.RefreshExternalCollectionJobInfo;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.RefreshExternalCollectionResp;
+
+<span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+    <span class="hljs-type">GetRefreshExternalCollectionProgressResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.getRefreshExternalCollectionProgress(
+            GetRefreshExternalCollectionProgressReq.builder()
+                    .jobId(jobId)
+                    .build());
+    <span class="hljs-type">RefreshExternalCollectionJobInfo</span> <span class="hljs-variable">jobInfo</span> <span class="hljs-operator">=</span> resp.getJobInfo();
+    <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;RefreshCompleted&quot;</span>.equals(jobInfo.getState())) {
+        <span class="hljs-type">long</span> <span class="hljs-variable">elapsed</span> <span class="hljs-operator">=</span> jobInfo.getEndTime() - jobInfo.getStartTime();
+        System.out.printf(<span class="hljs-string">&quot;  Refresh completed in %dms%n&quot;</span>, elapsed);
+        <span class="hljs-keyword">break</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;RefreshFailed&quot;</span>.equals(jobInfo.getState())) {
+        System.out.printf(<span class="hljs-string">&quot;  Refresh failed: %s%n&quot;</span>, jobInfo.getReason());
+    }
+    TimeUnit.SECONDS.sleep(<span class="hljs-number">2</span>);
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">refreshResult, err := client.RefreshExternalCollection(ctx,
     client.NewRefreshExternalCollectionOption(<span class="hljs-string">&quot;test_collection&quot;</span>))
-
 jobID := refreshResult.JobID
-
 <span class="hljs-keyword">for</span> {
     progress, _ := client.GetRefreshExternalCollectionProgress(ctx,
         client.NewGetRefreshExternalCollectionProgressOption(jobID))
-
     fmt.Printf(<span class="hljs-string">&quot;State: %s\n&quot;</span>, progress.State)
-
     <span class="hljs-keyword">if</span> progress.State == entity.RefreshStateCompleted {
         fmt.Println(<span class="hljs-string">&quot;Refresh completed!&quot;</span>)
         <span class="hljs-keyword">break</span>
@@ -617,16 +788,24 @@ jobID := refreshResult.JobID
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/jobs/external_collection/refresh&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;dbName\&quot;: \&quot;my_database\&quot;,
+    \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
+    \&quot;externalSource\&quot;: \&quot;volume://my_volume/path/to/a/folder\&quot;,
+    \&quot;externalSpec\&quot;: \&quot;{\\\&quot;format\\\&quot;: \\\&quot;parquet\\\&quot;}\&quot;
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>刷新作業是異步的，因此您需要設定一個迭代來監控其進度。</p>
 <div class="alert note">
 <ul>
-<li><p>刷新作業會掃描資料檔案的 metadata，並產生相應的 manifest 檔案。通常需要 150-250 毫秒。</p></li>
+<li><p>刷新作業會掃描資料檔案的元資料，並據此產生清單檔案。通常需要 150-250 毫秒。</p></li>
 <li><p>艙單檔記錄了 Milvus 中的元資料與外部檔案中的行之間的映射。</p></li>
 <li><p>如果源資料有更新，您需要再次手動呼叫刷新，以保持 Milvus 為最新。</p></li>
-<li><p>您不能在刷新完成後才為外部資料集建立索引。不過，建立索引的方法與管理式資料集相同。</p></li>
-<li><p>需要移除所有作用中元資料而沒有任何插入的刷新會導致拒絕。</p></li>
+<li><p>如果刷新需要移除所有活動的元資料，但沒有插入任何元資料，會導致拒絕。</p></li>
 </ul>
 </div>
 <h2 id="Follow-ups" class="common-anchor-header">跟進<button data-href="#Follow-ups" class="anchor-icon" translate="no">
@@ -644,4 +823,5 @@ jobID := refreshResult.JobID
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>對外部資料集執行刷新作業且清單檔案可用後，您就可以在外部資料集中建立索引、載入/釋出資料集、進行類似性搜尋和查詢，就像在任何受管資料集中一樣。</p>
+    </button></h2><p>一旦您刷新了外部資料集，您就可以載入和釋放資料集，並在外部資料集中執行相似性搜尋和查詢，就像在任何受管理的資料集中一樣，除了用於隨選運算的資料庫中的資料集必須附加到隨選叢集以進行搜尋和查詢。</p>
+<p>在進行搜尋、查詢、獲取和混合搜尋等 DQL 作業之前，您需要建立一個會話，以附加隨選群集的計算資源。</p>

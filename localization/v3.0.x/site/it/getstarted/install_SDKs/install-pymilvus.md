@@ -60,7 +60,7 @@ title: Installare l'SDK Milvus Python
     </button></h2><p>PyMilvus è disponibile nell'<a href="https://pypi.org/project/pymilvus/">indice dei pacchetti Python</a>.</p>
 <div class="alert note">
 Si raccomanda di installare una versione di PyMilvus che corrisponda alla versione del server Milvus installato. Per ulteriori informazioni, vedere le <a href="/docs/it/release_notes.md">Note di rilascio</a>.</div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">12</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">3.0</span>.<span class="hljs-number">0</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Verifica dell'installazione<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -105,5 +105,5 @@ Si raccomanda di installare una versione di PyMilvus che corrisponda alla versio
 <li><a href="/docs/it/single-vector-search.md">Ricerca a vettore singolo</a></li>
 <li><a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
-<li><p>Esplora il <a href="/api-reference/pymilvus/v2.4.x/About.md">riferimento API di PyMilvus</a></p></li>
+<li><p>Esplora il <a href="/api-reference/pymilvus/v3.0.x/About.md">riferimento API di PyMilvus</a></p></li>
 </ul>

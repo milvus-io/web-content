@@ -55,9 +55,9 @@ title: Eseguire Milvus con Docker Compose (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus fornisce un file di configurazione di Docker Compose nel repository Milvus. Per installare Milvus usando Docker Compose, è sufficiente eseguire</p>
+    </button></h2><p>Milvus fornisce un file di configurazione di Docker Compose nel repository Milvus. Per installare Milvus utilizzando Docker Compose, è sufficiente eseguire</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0-beta/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,13 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Novità della versione 2.6.15:</strong></p>
+<p><strong>Novità della v3.0-beta:</strong></p>
 <ul>
 <li><strong>Architettura migliorata</strong>: Presenta il nuovo Streaming Node e componenti ottimizzati.</li>
 <li><strong>Dipendenze aggiornate</strong>: Include le ultime versioni di MinIO e etcd.</li>
 <li><strong>Configurazione migliorata</strong>: Impostazioni ottimizzate per migliorare le prestazioni</li>
 </ul>
-<p>Scaricare sempre l'ultima configurazione di Docker Compose per garantire la compatibilità con le funzioni della versione 2.6.15.</p>
+<p>Scaricare sempre l'ultima configurazione di Docker Compose per garantire la compatibilità con le funzioni della v3.0-beta.</p>
 <ul>
 <li><p>Se non si riesce a eseguire il comando precedente, verificare se nel sistema è installato Docker Compose V1. In tal caso, si consiglia di migrare a Docker Compose V2, come indicato nelle note di <a href="https://docs.docker.com/compose/">questa pagina</a>.</p></li>
 <li><p>Se si riscontrano problemi nell'estrazione dell'immagine, contattateci all'indirizzo <a href="mailto:community@zilliz.com">community@zilliz.com</a> con i dettagli del problema e vi forniremo il supporto necessario.</p></li>

@@ -42,7 +42,9 @@ title: Milvus Nodejs SDKのインストール
 <tr><th style="text-align:center">Milvusバージョン</th><th style="text-align:center">推奨@zilliz/milvus2-sdk-nodeバージョン</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">最新版</td></tr>
+<tr><td style="text-align:center">3.0.x</td><td style="text-align:center">最新版</td></tr>
+<tr><td style="text-align:center">2.6.x</td><td style="text-align:center">2.6.x</td></tr>
+<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">2.5.x</td></tr>
 <tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.10</td></tr>
 <tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.5</td></tr>
 <tr><td style="text-align:center">2.2.x</td><td style="text-align:center">2.2.x</td></tr>
@@ -114,5 +116,5 @@ yarn add @zilliz/milvus2-sdk-node
 <li><a href="/docs/ja/single-vector-search.md">単一ベクトル検索</a></li>
 <li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a></li>
 </ul></li>
-<li><p><a href="/api-reference/node/v2.4.x/About.md">Milvus Node.js APIリファレンスの</a>検索</p></li>
+<li><p><a href="/api-reference/node/v3.0.x/About.md">Milvus Node.js APIリファレンスの</a>検索</p></li>
 </ul>

@@ -110,7 +110,7 @@ summary: >-
     </button></h2><p>Comme le montre le diagramme ci-dessous, un type d'index dans Milvus se compose de trois éléments principaux, à savoir la <strong>structure de données</strong>, la <strong>quantification</strong> et l'<strong>affineur</strong>. La quantification et le raffineur sont facultatifs, mais ils sont largement utilisés en raison de l'équilibre entre les gains et les coûts.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
    </span> <span class="img-wrapper"> <span>Anatomie de l'index vectoriel</span> </span></p>
 <p>Lors de la création de l'index, Milvus combine la structure de données et la méthode de quantification choisies pour déterminer un <strong>taux d'expansion</strong> optimal. Au moment de l'interrogation, le système récupère <code translate="no">topK × expansion rate</code> vecteurs candidats, applique le raffineur pour recalculer les distances avec une plus grande précision et renvoie finalement les résultats <code translate="no">topK</code> les plus précis. Cette approche hybride permet d'équilibrer la vitesse et la précision en limitant l'affinage à un sous-ensemble de candidats filtrés, ce qui nécessite beaucoup de ressources.</p>
 <h3 id="Data-structure" class="common-anchor-header">Structure des données<button data-href="#Data-structure" class="anchor-icon" translate="no">
@@ -377,7 +377,7 @@ summary: >-
 <pre><code translate="no" class="language-plaintext">2,000 clusters × 128 dimensions × 4 bytes = 1.0 MB
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Calculez la mémoire utilisée par les affectations de grappes.</strong></p>
-<p>Chaque intégration vectorielle est affectée à une grappe et stockée sous forme d'identifiants entiers. Pour 2 000 grappes, un nombre entier de 2 octets suffit. L'utilisation de la mémoire peut être calculée comme suit :</p>
+<p>Chaque intégration vectorielle est affectée à une grappe et stockée sous forme d'ID entiers. Pour 2 000 grappes, un nombre entier de 2 octets suffit. L'utilisation de la mémoire peut être calculée comme suit :</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 2 bytes = 2.0 MB
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Calculer la compression causée par la quantification.</strong></p>

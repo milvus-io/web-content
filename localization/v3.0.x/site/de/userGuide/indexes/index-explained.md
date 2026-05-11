@@ -91,7 +91,7 @@ summary: >-
      <td><p>INVERTED</p></td>
    </tr>
 </table>
-<p>Dieser Artikel konzentriert sich auf die Auswahl geeigneter Vektorindizes. Für skalare Felder können Sie immer den empfohlenen Indextyp verwenden.</p>
+<p>Dieser Artikel befasst sich mit der Auswahl geeigneter Vektorindizes. Für skalare Felder können Sie immer den empfohlenen Indextyp verwenden.</p>
 <p>Die Auswahl eines geeigneten Indextyps für eine Vektorsuche kann die Leistung und den Ressourcenverbrauch erheblich beeinflussen. Bei der Auswahl eines Indextyps für ein Vektorfeld müssen verschiedene Faktoren berücksichtigt werden, darunter die zugrunde liegende Datenstruktur, der Speicherverbrauch und die Leistungsanforderungen.</p>
 <h2 id="Vector-Index-anatomy" class="common-anchor-header">Anatomie des Vektorindex<button data-href="#Vector-Index-anatomy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -111,7 +111,7 @@ summary: >-
     </button></h2><p>Wie im folgenden Diagramm dargestellt, besteht ein Index-Typ in Milvus aus drei Kernkomponenten, nämlich der <strong>Datenstruktur</strong>, der <strong>Quantisierung</strong> und dem <strong>Verfeinerer</strong>. Quantisierung und Refiner sind optional, werden aber aufgrund eines signifikanten Nutzen-Kosten-Verhältnisses häufig verwendet.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
    </span> <span class="img-wrapper"> <span>Anatomie des Vektorindex</span> </span></p>
 <p>Während der Indexerstellung kombiniert Milvus die gewählte Datenstruktur und die Quantisierungsmethode, um eine optimale <strong>Expansionsrate</strong> zu bestimmen. Zum Zeitpunkt der Abfrage ruft das System <code translate="no">topK × expansion rate</code> Kandidatenvektoren ab, wendet den Refiner an, um die Abstände mit höherer Genauigkeit neu zu berechnen, und gibt schließlich die genauesten Ergebnisse zurück <code translate="no">topK</code>. Dieser hybride Ansatz stellt ein Gleichgewicht zwischen Geschwindigkeit und Genauigkeit her, indem er die ressourcenintensive Verfeinerung auf eine gefilterte Teilmenge von Kandidaten beschränkt.</p>
 <h3 id="Data-structure" class="common-anchor-header">Datenstruktur<button data-href="#Data-structure" class="anchor-icon" translate="no">
@@ -253,7 +253,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Beim Recall handelt es sich in der Regel um das Filterverhältnis, das sich auf die Daten bezieht, die vor der Suche herausgefiltert werden. Beim Recall ist Folgendes zu beachten:</p>
+    </button></h3><p>Beim Recall handelt es sich in der Regel um das Filterverhältnis, das sich auf die Daten bezieht, die vor der Suche herausgefiltert werden. Bei der Ermittlung des Rückrufs ist Folgendes zu beachten:</p>
 <ul>
 <li><p>Wenn das Filterverhältnis weniger als 85 % beträgt, sind graphbasierte Indextypen besser als IVF-Varianten.</p></li>
 <li><p>Liegt das Filterverhältnis zwischen 85% und 95%, sollten IVF-Varianten verwendet werden.</p></li>

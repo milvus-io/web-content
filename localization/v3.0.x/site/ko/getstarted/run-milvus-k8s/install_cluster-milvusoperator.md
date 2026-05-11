@@ -91,7 +91,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
   https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0/milvus-operator-1.3.0.tgz</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>설치 프로세스가 끝나면 다음과 유사한 출력이 표시됩니다.</p>
+<p>설치 프로세스가 끝나면 다음과 유사한 출력을 확인할 수 있습니다.</p>
 <pre><code translate="no" class="language-shell">NAME: milvus-operator
 LAST DEPLOYED: Thu Jul  7 13:18:40 2022
 NAMESPACE: milvus-operator
@@ -173,8 +173,8 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Milvus Operator 파드가 실행 중이면 다음과 같이 Milvus 클러스터를 배포할 수 있습니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 명령은 메시지 큐로 <strong>Woodpecker</strong> (v2.6.15에 권장)와 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 사용하여 Milvus 클러스터를 배포합니다.</p>
-<p><strong>이 배포의 아키텍처 주요 내용은 다음과 같습니다:</strong></p>
+<p>위의 명령은 메시지 큐로 <strong>Woodpecker</strong> (v3.0-beta에 권장됨)와 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 사용하여 Milvus 클러스터를 배포합니다.</p>
+<p><strong>이 배포의 아키텍처 하이라이트는 다음과 같습니다:</strong></p>
 <ul>
 <li><strong>메시지 큐</strong>: <a href="/docs/ko/use-woodpecker.md">Woodpecker 사용</a> (인프라 유지 관리 감소)</li>
 <li><strong>스트리밍 노드</strong>: 향상된 데이터 처리를 위해 사용 가능</li>
@@ -202,7 +202,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>다음 명령어를 실행하여 Milvus 클러스터 상태를 확인합니다.</p>
+    </button></h3><p>다음 명령을 실행하여 Milvus 클러스터 상태를 확인합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get milvus my-release -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus 클러스터가 준비되면 위 명령의 출력은 다음과 비슷해야 합니다. <code translate="no">status.status</code> 필드가 <code translate="no">Unhealthy</code> 으로 유지되면 Milvus 클러스터가 아직 생성 중입니다.</p>

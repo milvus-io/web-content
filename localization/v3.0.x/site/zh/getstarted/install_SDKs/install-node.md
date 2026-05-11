@@ -42,7 +42,9 @@ title: 安装 Milvus Nodejs SDK
 <tr><th style="text-align:center">Milvus 版本</th><th style="text-align:center">推荐的 @zilliz/milvus2-sdk-node 版本</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">最新版本</td></tr>
+<tr><td style="text-align:center">3.0.x</td><td style="text-align:center">最新版本</td></tr>
+<tr><td style="text-align:center">2.6.x</td><td style="text-align:center">2.6.x</td></tr>
+<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">2.5.x</td></tr>
 <tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.10</td></tr>
 <tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.5</td></tr>
 <tr><td style="text-align:center">2.2.x</td><td style="text-align:center">2.2.x</td></tr>
@@ -114,5 +116,5 @@ yarn add @zilliz/milvus2-sdk-node
 <li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
 <li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
-<li><p>探索<a href="/api-reference/node/v2.4.x/About.md">Milvus Node.js 应用程序接口参考</a></p></li>
+<li><p>探索<a href="/api-reference/node/v3.0.x/About.md">Milvus Node.js 应用程序接口参考</a></p></li>
 </ul>

@@ -90,11 +90,11 @@ title: 管理資源群組
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>本頁面的所有程式碼範例都在 PyMilvus 2.6.12 中。在執行它們之前，請先升級您的 PyMilvus 安裝。</p>
+<p>本頁面的所有程式碼範例都在 PyMilvus 3.0.0 中，執行前請先升級您的 PyMilvus 安裝。</p>
 </div>
 <ol>
 <li><p>建立資源群組</p>
-<p>要建立一個資源群組，請在連線到 Milvus 實例後執行下列步驟。以下片段假設<code translate="no">default</code> 是您 Milvus 連線的別名。</p>
+<p>要建立一個資源群組，請在連線到 Milvus 實例後執行下列程式。以下片段假設<code translate="no">default</code> 是您 Milvus 連線的別名。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pymilvus
 
 <span class="hljs-comment"># A resource group name should be a string of 1 to 255 characters, starting with a letter or an underscore (_) and containing only numbers, letters, and underscores (_).</span>

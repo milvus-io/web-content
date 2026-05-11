@@ -175,7 +175,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Sobald der Milvus Operator-Pod läuft, können Sie einen Milvus-Cluster wie folgt einrichten.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Mit dem obigen Befehl wird ein Milvus-Cluster mit <strong>Woodpecker</strong> als Nachrichtenwarteschlange (empfohlen für v2.6.15) und allen neuen Architekturkomponenten einschließlich des Streaming Node bereitgestellt.</p>
+<p>Mit dem obigen Befehl wird ein Milvus-Cluster mit <strong>Woodpecker</strong> als Nachrichtenwarteschlange (empfohlen für v3.0-beta) und allen neuen Architekturkomponenten einschließlich des Streaming Node bereitgestellt.</p>
 <p><strong>Highlights der Architektur in diesem Einsatz:</strong></p>
 <ul>
 <li><strong>Nachrichten-Warteschlange</strong>: <a href="/docs/de/use-woodpecker.md">Verwendung von Woodpecker</a> (reduziert die Wartung der Infrastruktur)</li>
@@ -207,7 +207,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Führen Sie den folgenden Befehl aus, um den Status des Milvus-Clusters zu überprüfen</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get milvus my-release -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Sobald Ihr Milvus-Cluster bereit ist, sollte die Ausgabe des obigen Befehls ähnlich wie die folgende aussehen. Wenn das Feld <code translate="no">status.status</code> <code translate="no">Unhealthy</code> bleibt, befindet sich Ihr Milvus-Cluster noch in der Erstellung.</p>
+<p>Sobald Ihr Milvus-Cluster bereit ist, sollte die Ausgabe des obigen Befehls ähnlich wie die folgende aussehen. Wenn das Feld <code translate="no">status.status</code> <code translate="no">Unhealthy</code> bleibt, ist Ihr Milvus-Cluster noch in der Erstellung.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

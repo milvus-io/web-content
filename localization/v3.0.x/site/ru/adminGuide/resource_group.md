@@ -90,7 +90,7 @@ title: Управление группами ресурсов
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Все примеры кода на этой странице приведены в версии PyMilvus 2.6.12. Перед их выполнением обновите свою установку PyMilvus.</p>
+<p>Все примеры кода на этой странице приведены в версии PyMilvus 3.0.0. Перед их выполнением обновите свою установку PyMilvus.</p>
 </div>
 <ol>
 <li><p>Создайте группу ресурсов.</p>
@@ -173,7 +173,7 @@ milvus_client.load_collection(collection_name, replica_number=<span class="hljs-
 resource_groups = [<span class="hljs-string">&#x27;rg&#x27;</span>]
 milvus_client.load_collection(replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups) 
 <button class="copy-code-btn"></button></code></pre>
-<p>Также можно просто загрузить раздел в группу ресурсов, а его реплики распределить между несколькими группами ресурсов. В следующем фрагменте предполагается, что коллекция с именем <code translate="no">Books</code> уже существует и в ней есть раздел с именем <code translate="no">Novels</code>.</p>
+<p>Также можно просто загрузить раздел в группу ресурсов и распределить его реплики между несколькими группами ресурсов. В следующем фрагменте предполагается, что коллекция с именем <code translate="no">Books</code> уже существует и в ней есть раздел с именем <code translate="no">Novels</code>.</p>
 <pre><code translate="no" class="language-python">collection = <span class="hljs-string">&quot;Books&quot;</span>
 partition = <span class="hljs-string">&quot;Novels&quot;</span>
 

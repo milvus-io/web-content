@@ -127,7 +127,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Benötigen Sie stattdessen eine eigenständige Bereitstellung?</strong></p>
 <p>Wenn Sie Milvus lieber im Standalone-Modus (einzelner Knoten) für die Entwicklung oder für Tests einsetzen möchten, verwenden Sie diesen Befehl:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.15 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0-beta \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -137,9 +137,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Hinweis</strong>: Der Standalone-Modus verwendet Woodpecker als Standard-Nachrichtenwarteschlange und aktiviert die Komponente Streaming Node. Weitere Informationen finden Sie in der <a href="/docs/de/architecture_overview.md">Architekturübersicht</a> und unter <a href="/docs/de/use-woodpecker.md">Verwendung von Woodpecker</a>.</p>
 </div>
 <p><strong>Milvus-Cluster bereitstellen:</strong></p>
-<p>Mit dem folgenden Befehl wird ein Milvus-Cluster mit optimierten Einstellungen für v2.6.15 bereitgestellt, wobei Woodpecker als empfohlene Nachrichtenwarteschlange verwendet wird:</p>
+<p>Mit dem folgenden Befehl wird ein Milvus-Cluster mit optimierten Einstellungen für v3.0-beta bereitgestellt, wobei Woodpecker als empfohlene Nachrichtenwarteschlange verwendet wird:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.15 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0-beta \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -148,7 +148,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Was dieser Befehl bewirkt:</strong></p>
 <ul>
 <li>Verwendet <strong>Woodpecker</strong> als Nachrichtenwarteschlange (empfohlen für geringeren Wartungsaufwand)</li>
-<li>Aktiviert die neue Komponente <strong>Streaming Node</strong> für eine verbesserte Leistung</li>
+<li>Aktiviert die neue Komponente <strong>Streaming Node</strong> für verbesserte Leistung</li>
 <li>Deaktiviert den alten <strong>Index-Knoten</strong> (die Funktionalität wird jetzt von Data Node übernommen)</li>
 <li>Deaktiviert Pulsar und verwendet stattdessen Woodpecker</li>
 </ul>
@@ -157,14 +157,14 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <ul>
 <li><strong>Nachrichten-Warteschlange</strong>: <strong>Woodpecker</strong> wird jetzt empfohlen (reduziert die Wartung der Infrastruktur im Vergleich zu Pulsar)</li>
 <li><strong>Neue Komponente</strong>: <strong>Streaming Node</strong> wurde eingeführt und ist standardmäßig aktiviert</li>
-<li><strong>Verschmolzene Komponenten</strong>: <strong>Indexknoten</strong> und <strong>Datenknoten</strong> werden zu einem einzigen <strong>Datenknoten</strong> zusammengefasst</li>
+<li><strong>Zusammengeführte Komponenten</strong>: <strong>Indexknoten</strong> und <strong>Datenknoten</strong> werden zu einem einzigen <strong>Datenknoten</strong> zusammengefasst</li>
 </ul>
 <p>Vollständige Details zur Architektur finden Sie in der <a href="/docs/de/architecture_overview.md">Architekturübersicht</a>.</p>
 </div>
 <p><strong>Alternative Nachrichtenwarteschlangen-Optionen:</strong></p>
 <p>Wenn Sie anstelle von Woodpecker lieber <strong>Pulsar</strong> (die traditionelle Wahl) verwenden möchten:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.15 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0-beta \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -204,7 +204,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>Überprüfen Sie den Pod-Status, um sicherzugehen, dass Ihr Einsatz erfolgreich war:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Warten Sie, bis alle Pods den Status "Running" anzeigen.</strong> Bei der Konfiguration v2.6.15 sollten Sie Pods ähnlich wie folgt sehen:</p>
+<p><strong>Warten Sie, bis alle Pods den Status "Running" anzeigen.</strong> Mit der v3.0-Beta-Konfiguration sollten Sie Pods ähnlich wie folgt sehen:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s

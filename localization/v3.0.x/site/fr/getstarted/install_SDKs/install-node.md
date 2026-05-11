@@ -36,13 +36,15 @@ title: Installation de Milvus Nodejs SDK
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La liste suivante indique les versions de Milvus et les versions recommandées de @zilliz/milvus2-sdk-node :</p>
+    </button></h2><p>La collection suivante montre les versions de Milvus et les versions recommandées de @zilliz/milvus2-sdk-node :</p>
 <table>
 <thead>
 <tr><th style="text-align:center">Version de Milvus</th><th style="text-align:center">Version @zilliz/milvus2-sdk-node recommandée</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">la plus récente</td></tr>
+<tr><td style="text-align:center">3.0.x</td><td style="text-align:center">la plus récente</td></tr>
+<tr><td style="text-align:center">2.6.x</td><td style="text-align:center">2.6.x</td></tr>
+<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">2.5.x</td></tr>
 <tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.10</td></tr>
 <tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.5</td></tr>
 <tr><td style="text-align:center">2.2.x</td><td style="text-align:center">2.2.x</td></tr>
@@ -114,5 +116,5 @@ yarn add @zilliz/milvus2-sdk-node
 <li><a href="/docs/fr/single-vector-search.md">Recherche à vecteur unique</a></li>
 <li><a href="/docs/fr/multi-vector-search.md">Recherche hybride</a></li>
 </ul></li>
-<li><p>Explorer la <a href="/api-reference/node/v2.4.x/About.md">référence de l'API Milvus Node.js</a></p></li>
+<li><p>Explorer la <a href="/api-reference/node/v3.0.x/About.md">référence de l'API Milvus Node.js</a></p></li>
 </ul>

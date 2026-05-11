@@ -41,7 +41,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>Le <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md">compactage</a> standard maintient la taille des segments près de la valeur configurée <code translate="no">maxSize</code> grâce à des fusions plusieurs à plusieurs, mais il peut toujours laisser des fragments de taille moyenne qui ne peuvent pas être fusionnés davantage sans dépasser les limites. Par exemple, comme illustré ci-dessous, si une collection comporte cinq segments de 2 Mo et que <code translate="no">maxSize</code> est de 3 Mo, la fusion de deux segments dépasserait la limite, de sorte que le compactage standard ne peut pas réduire davantage le nombre de segments et que la disposition fragmentée subsiste.</p>
-<p>Forcer la fusion ajoute un paramètre <code translate="no">target_size</code> et permet de réorganiser les segments en fonction de la taille souhaitée dans le cadre d'une tolérance étroite lorsque cela est possible. Comme illustré ci-dessous, si la taille spécifiée pour <code translate="no">target_size</code> est de 4 Mo, les cinq petits segments de 2 Mo peuvent être fusionnés en un plus petit nombre de segments plus grands. Cela permet de réduire le nombre excessif de segments, de prendre en charge des cibles plus grandes que les paramètres par défaut de <code translate="no">maxSize</code> et, lorsque la cible est très grande, de laisser le système choisir une taille de sortie et un nombre de segments pratiques pour le matériel actuel et la topologie de QueryNode.</p>
+<p>Forcer la fusion ajoute un paramètre <code translate="no">target_size</code> et permet de réorganiser les segments en fonction de la taille souhaitée dans le cadre d'une tolérance étroite lorsque cela est possible. Comme illustré ci-dessous, si la taille spécifiée pour <code translate="no">target_size</code> est de 4 Mo, les cinq petits segments de 2 Mo peuvent être fusionnés en un nombre réduit de segments plus grands. Cela permet de réduire le nombre excessif de segments, de prendre en charge des cibles plus grandes que les paramètres par défaut de <code translate="no">maxSize</code> et, lorsque la cible est très grande, de laisser le système choisir une taille de sortie et un nombre de segments pratiques pour le matériel actuel et la topologie de QueryNode.</p>
 <p>Pour savoir quelle méthode de compactage utiliser, voir la <a href="#faq">FAQ</a>.</p>
 <p>
   
@@ -80,8 +80,8 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h3><ul>
-<li><p>Milvus version 2.6.15 ou ultérieure</p></li>
-<li><p>pymilvus 2.6.13 ou version ultérieure</p></li>
+<li><p>Milvus version 3.0 ou ultérieure</p></li>
+<li><p>PyMilvus 3.0 ou version ultérieure</p></li>
 </ul>
 <h3 id="Global-Configuration" class="common-anchor-header">Configuration globale<button data-href="#Global-Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -122,7 +122,7 @@ beta: Milvus 3.0.x
    <tr>
      <th><p>Paramètre</p></th>
      <th><p>Valeur par défaut</p></th>
-     <th><p>Valeur par défaut Description</p></th>
+     <th><p>Description de la valeur par défaut</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.segment.maxSize</code></p></td>
@@ -331,7 +331,7 @@ state = client.get_compaction_state(job_id)
    <tr>
      <td><p>Capacité d'aplanissement de la collection</p></td>
      <td><p>Limitée ; des exécutions répétées peuvent encore laisser de nombreux segments moyens.</p></td>
-     <td><p>Forte ; conçue pour réduire le nombre de segments et augmenter le taux de remplissage</p></td>
+     <td><p>Forte ; conçue pour réduire le nombre de segments et augmenter le taux de remplissage.</p></td>
    </tr>
    <tr>
      <td><p>Prise en compte de la topologie</p></td>

@@ -63,7 +63,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>BOOL</p></td>
-     <td><ul><li><p>BITMAP(권장)</p></li><li><p>INVERTED</p></li></ul></td>
+     <td><ul><li><p>BITMAP (권장)</p></li><li><p>INVERTED</p></li></ul></td>
    </tr>
    <tr>
      <td><ul><li><p>INT8</p></li><li><p>INT16</p></li><li><p>INT32</p></li><li><p>INT64</p></li></ul></td>
@@ -106,7 +106,7 @@ summary: >-
     </button></h2><p>아래 다이어그램에서 볼 수 있듯이, Milvus의 인덱스 유형은 <strong>데이터 구조</strong>, <strong>양자화</strong>, <strong>정제기의</strong> 세 가지 핵심 구성 요소로 이루어져 있습니다. 양자화 및 정제기는 선택 사항이지만 비용 대비 이득이 크기 때문에 널리 사용됩니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
    </span> <span class="img-wrapper"> <span>벡터 인덱스 구조</span> </span></p>
 <p>인덱스를 생성하는 동안 Milvus는 선택한 데이터 구조와 양자화 방법을 결합하여 최적의 <strong>확장 속도를</strong> 결정합니다. 쿼리 시, 시스템은 <code translate="no">topK × expansion rate</code> 후보 벡터를 검색하고, 리파이너를 적용하여 더 높은 정밀도로 거리를 재계산한 다음, 최종적으로 가장 정확한 <code translate="no">topK</code> 결과를 반환합니다. 이 하이브리드 접근 방식은 리소스 집약적인 정제 작업을 필터링된 후보 하위 집합으로 제한하여 속도와 정확도의 균형을 맞춥니다.</p>
 <h3 id="Data-structure" class="common-anchor-header">데이터 구조<button data-href="#Data-structure" class="anchor-icon" translate="no">
@@ -349,7 +349,7 @@ summary: >-
     </button></h2><div class="alert note">
 <p>이 섹션에서는 특정 인덱스 유형의 메모리 사용량을 계산하는 데 중점을 두며 많은 기술적 세부 사항을 포함합니다. 관심 분야에 맞지 않는 경우 이 섹션을 건너뛰셔도 됩니다.</p>
 </div>
-<p>인덱스의 메모리 소비량은 데이터 구조, 정량화를 통한 압축률, 사용 중인 정제기의 영향을 받습니다. 일반적으로 그래프 기반 인덱스는 일반적으로 그래프의 구조(예: <strong>HNSW</strong>)로 인해 메모리 사용량이 더 많으며, 이는 일반적으로 벡터당 공간 오버헤드가 눈에 띄게 높다는 것을 의미합니다. 반면, IVF와 그 변형은 벡터당 공간 오버헤드가 적기 때문에 메모리 효율성이 더 높습니다. 그러나 <strong>DiskANN과</strong> 같은 고급 기술을 사용하면 그래프나 정제기와 같은 인덱스의 일부가 디스크에 상주하여 메모리 부하를 줄이면서 성능을 유지할 수 있습니다.</p>
+<p>인덱스의 메모리 소비량은 데이터 구조, 정량화를 통한 압축률, 사용 중인 정제기의 영향을 받습니다. 일반적으로 그래프 기반 인덱스는 일반적으로 그래프의 구조(예: <strong>HNSW</strong>)로 인해 메모리 사용량이 더 많으며, 이는 일반적으로 벡터당 공간 오버헤드가 눈에 띄게 높다는 것을 의미합니다. 반면, IVF와 그 변형은 벡터당 공간 오버헤드가 적기 때문에 메모리 효율성이 더 높습니다. 그러나 <strong>DiskANN과</strong> 같은 고급 기술을 사용하면 그래프나 정제기와 같은 인덱스의 일부가 디스크에 상주할 수 있으므로 메모리 부하를 줄이면서 성능을 유지할 수 있습니다.</p>
 <p>구체적으로 인덱스의 메모리 사용량은 다음과 같이 계산할 수 있습니다:</p>
 <h3 id="IVF-index-memory-usage" class="common-anchor-header">IVF 인덱스 메모리 사용량<button data-href="#IVF-index-memory-usage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -452,7 +452,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>원시 벡터 임베딩과 비교했을 때 64배의 압축률을 달성하며, <strong>HNSWPQ</strong> 인덱스 유형이 사용하는 총 메모리는 <strong>128MB(그래프) + 8MB(압축 벡터) = 136MB가</strong> 됩니다.</p></li>
 <li><p><strong>정제 오버헤드를 계산합니다.</strong></p>
-<p>원시 벡터를 사용한 순위 재조정과 같은 세분화 작업은 고정밀 데이터를 메모리에 일시적으로 로드합니다. 확장률이 5인 상위 10개 결과를 검색하는 검색의 경우, 정제 오버헤드는 다음과 같이 추정할 수 있습니다:</p>
+<p>원시 벡터를 사용한 순위 재조정과 같은 세분화는 고정밀 데이터를 메모리에 일시적으로 로드합니다. 확장률이 5인 상위 10개 결과를 검색하는 검색의 경우, 정제 오버헤드는 다음과 같이 추정할 수 있습니다:</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
 <button class="copy-code-btn"></button></code></pre></li>

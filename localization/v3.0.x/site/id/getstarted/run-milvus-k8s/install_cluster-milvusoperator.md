@@ -7,7 +7,7 @@ summary: >-
   Operator
 title: Instal Milvus Cluster dengan Operator Milvus
 ---
-<h1 id="Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="common-anchor-header">Menjalankan Milvus di Kubernetes dengan Operator Milvus<button data-href="#Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="common-anchor-header">Menjalankan Milvus di Kubernetes dengan Milvus Operator<button data-href="#Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,7 +23,7 @@ title: Instal Milvus Cluster dengan Operator Milvus
         ></path>
       </svg>
     </button></h1><p>Halaman ini mengilustrasikan cara memulai instans Milvus di Kubernetes menggunakan <a href="https://github.com/zilliztech/milvus-operator">Milvus Operator</a>.</p>
-<h2 id="Overview" class="common-anchor-header">Gambaran umum<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Ikhtisar<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,7 +83,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operator mendefinisikan sumber daya khusus klaster Milvus di atas <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Sumber Daya Khusus Kubernetes</a>. Ketika sumber daya khusus didefinisikan, Anda dapat menggunakan API K8s dengan cara deklaratif dan mengelola tumpukan penerapan Milvus untuk memastikan skalabilitas dan ketersediaannya yang tinggi.</p>
+    </button></h2><p>Milvus Operator mendefinisikan sumber daya khusus klaster Milvus di atas <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Sumber Daya Khusus Kubernetes</a>. Ketika sumber daya khusus didefinisikan, Anda dapat menggunakan API K8s dengan cara deklaratif dan mengelola tumpukan penerapan Milvus untuk memastikan skalabilitas dan ketersediaan yang tinggi.</p>
 <div class="filter">
  <a href="#helm">Helm</a> <a href="#kubectl">Kubectl</a></div>
 <div class="filter-helm">
@@ -175,11 +175,11 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Setelah pod Milvus Operator berjalan, Anda dapat men-deploy cluster Milvus sebagai berikut.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Perintah di atas men-deploy cluster Milvus dengan <strong>Woodpecker</strong> sebagai antrean pesan (disarankan untuk v2.6.15) dan semua komponen arsitektur baru termasuk Streaming Node.</p>
+<p>Perintah di atas men-deploy cluster Milvus dengan <strong>Woodpecker</strong> sebagai antrean pesan (disarankan untuk v3.0-beta) dan semua komponen arsitektur baru termasuk Streaming Node.</p>
 <p><strong>Sorotan arsitektur dalam penerapan ini:</strong></p>
 <ul>
 <li><strong>Antrian Pesan</strong>: <a href="/docs/id/use-woodpecker.md">Menggunakan Woodpecker</a> (mengurangi pemeliharaan infrastruktur)</li>
-<li><strong>Streaming Node</strong>: Diaktifkan untuk pemrosesan data yang ditingkatkan</li>
+<li><strong>Streaming Node</strong>: Diaktifkan untuk pemrosesan data yang lebih baik</li>
 <li><strong>Koordinator Campuran</strong>: Komponen koordinator yang terkonsolidasi untuk meningkatkan efisiensi</li>
 </ul>
 <p>Untuk menyesuaikan pengaturan ini, kami sarankan Anda menggunakan <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> untuk menyesuaikan konfigurasi berdasarkan ukuran data Anda yang sebenarnya, lalu mengunduh file YAML yang sesuai. Untuk mempelajari lebih lanjut tentang parameter konfigurasi, lihat <a href="https://milvus.io/docs/system_configuration.md">Daftar Periksa Konfigurasi Sistem Milvus.</a></p>
@@ -415,7 +415,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p><a href="/docs/id/upgrade_milvus_cluster-helm.md">Tingkatkan Milvus Menggunakan Bagan Helm</a>.</p></li>
 <li><p>Mengatur<a href="/docs/id/scaleout.md">skala cluster Milvus Anda</a>.</p></li>
-<li><p>Menerapkan cluster Milvu Anda di cloud:</p>
+<li><p>Menerapkan cluster Milvu Anda di awan:</p>
 <ul>
 <li><a href="/docs/id/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/id/gcp.md">Google Cloud</a></li>

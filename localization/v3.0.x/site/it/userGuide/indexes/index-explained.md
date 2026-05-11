@@ -49,7 +49,7 @@ summary: >-
      <th><p>Tipi di indice applicabili</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>VETTORE_FLAT</p></li><li><p>VETTORE_FLAT16</p></li><li><p>BFLOAT16_VETTORE</p></li><li><p>INT8_VETTORE</p></li></ul></td>
+     <td><ul><li><p>VETTORE_FIAT</p></li><li><p>VETTORE_FLAT16</p></li><li><p>BFLOAT16_VETTORE</p></li><li><p>INT8_VETTORE</p></li></ul></td>
      <td><ul><li><p>PIATTO</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>HNSW</p></li><li><p>HNSW_SQ</p></li><li><p>HNSW_PQ</p></li><li><p>HNSW_PRQ</p></li><li><p>DISKANN</p></li><li><p>SCANN</p></li><li><p>AISAQ</p></li><li><p>GPU_CAGRA</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>GPU_BRUTE_FORCE</p></li></ul></td>
    </tr>
    <tr>
@@ -109,7 +109,7 @@ summary: >-
     </button></h2><p>Come illustrato nel diagramma seguente, un tipo di indice in Milvus è costituito da tre componenti fondamentali: la <strong>struttura dei dati</strong>, la <strong>quantizzazione</strong> e il <strong>raffinatore</strong>. La quantizzazione e il raffinatore sono opzionali, ma sono ampiamente utilizzati grazie a un significativo equilibrio tra guadagni e costi.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
    </span> <span class="img-wrapper"> <span>Anatomia dell'indice vettoriale</span> </span></p>
 <p>Durante la creazione dell'indice, Milvus combina la struttura dei dati e il metodo di quantizzazione scelti per determinare un <strong>tasso di espansione</strong> ottimale. Al momento dell'interrogazione, il sistema recupera <code translate="no">topK × expansion rate</code> vettori candidati, applica il raffinatore per ricalcolare le distanze con maggiore precisione e infine restituisce i risultati <code translate="no">topK</code> più accurati. Questo approccio ibrido bilancia velocità e precisione limitando il raffinamento, che richiede molte risorse, a un sottoinsieme filtrato di candidati.</p>
 <h3 id="Data-structure" class="common-anchor-header">Struttura dei dati<button data-href="#Data-structure" class="anchor-icon" translate="no">
@@ -417,7 +417,7 @@ summary: >-
 <td><p>515,0 MB</p></td>
 </tr>
 </table></p></li>
-<li><p><strong>Calcolare l'overhead di raffinazione.</strong></p>
+<li><p><strong>Calcolare l'overhead di raffinamento.</strong></p>
 <p>Le varianti FIV sono spesso abbinate a un raffinatore per riordinare i candidati. Per una ricerca che recupera i primi 10 risultati con un tasso di espansione di 5, il refinement overhead può essere stimato come segue:</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
@@ -440,7 +440,7 @@ summary: >-
       </svg>
     </button></h3><p>Gli indici basati su grafi, come HNSW, richiedono una memoria significativa per memorizzare sia la struttura del grafo sia le incorporazioni vettoriali grezze. Di seguito è riportata una ripartizione dettagliata della memoria consumata da 1 milione di vettori a 128 dimensioni indicizzati con il tipo di indice HNSW.</p>
 <ol>
-<li><p><strong>Calcolo della memoria utilizzata dalla struttura a grafo.</strong></p>
+<li><p><strong>Calcolo della memoria utilizzata dalla struttura del grafo.</strong></p>
 <p>Ogni vettore in HNSW mantiene le connessioni con i suoi vicini. Con un grado del grafo (bordi per nodo) di 32, la memoria consumata può essere calcolata come segue:</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 32 links × 4 bytes (for 32-bit integer storage) = 128 MB  
 <button class="copy-code-btn"></button></code></pre></li>

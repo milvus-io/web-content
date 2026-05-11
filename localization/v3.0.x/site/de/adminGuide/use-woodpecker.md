@@ -118,7 +118,7 @@ beta: Milvus 2.6.x
 <li><code translate="no">woodpecker.meta</code>
 <ul>
 <li><strong>Typ</strong>: Derzeit wird nur <code translate="no">etcd</code> unterstützt. Verwenden Sie denselben etcd wie Milvus, um leichtgewichtige Metadaten zu speichern.</li>
-<li><strong>Präfix</strong>: Das Schlüsselpräfix für Metadaten. Standard: <code translate="no">woodpecker</code>.</li>
+<li><strong>Präfix</strong>: Der Schlüsselpräfix für Metadaten. Standard: <code translate="no">woodpecker</code>.</li>
 </ul></li>
 <li><code translate="no">woodpecker.client</code>
 <ul>
@@ -164,6 +164,44 @@ beta: Milvus 2.6.x
 <li>Mit <code translate="no">minio</code> nutzt Woodpecker den gleichen Objektspeicher wie Milvus (MinIO/S3/GCS/OSS, etc.).</li>
 <li>Mit <code translate="no">local</code> ist eine lokale Festplatte mit einem Knoten nur für Standalone geeignet. Wenn alle Pods auf ein gemeinsames Dateisystem (z. B. NFS) zugreifen können, kann der Cluster-Modus auch <code translate="no">local</code> verwenden.</li>
 </ul>
+<h2 id="Object-storage-compatibility-for-storagetypeminio" class="common-anchor-header">Objektspeicherkompatibilität für <code translate="no">storage.type=minio</code><button data-href="#Object-storage-compatibility-for-storagetypeminio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Die folgende Matrix fasst die derzeit bekannte Kompatibilität von Objektspeicher-Backends zusammen, wenn Woodpecker mit <code translate="no">storage.type=minio</code> konfiguriert ist. Diese Informationen basieren auf der <a href="https://github.com/zilliztech/woodpecker/discussions/150">GitHub Discussion #150</a>.</p>
+<table>
+<thead>
+<tr><th>Anbieter / Dienst</th><th>Status</th><th>Hinweise</th></tr>
+</thead>
+<tbody>
+<tr><td>Azure Blob Speicher</td><td>Unterstützt</td><td>Verwendet das native Azure SDK.</td></tr>
+<tr><td>AWS S3</td><td>Unterstützt</td><td>Natives S3 mit vollständiger Unterstützung für bedingtes Schreiben.</td></tr>
+<tr><td>MinIO (<code translate="no">&gt;= 2024-12</code>)</td><td>Unterstützt</td><td>Vollständige S3-Unterstützung für bedingtes Schreiben.</td></tr>
+<tr><td>Aliyun OSS</td><td>Unterstützt</td><td>Unterstützt durch seine S3-kompatible Schnittstelle.</td></tr>
+<tr><td>Tencent COS</td><td>Unterstützt</td><td>Unterstützt durch seine S3-kompatible Schnittstelle.</td></tr>
+<tr><td>Google Cloud-Speicher (GCS)</td><td>Unterstützt</td><td>Unterstützt durch den S3-Interoperabilitätsmodus.</td></tr>
+<tr><td>Huawei Cloud OBS</td><td>Nicht unterstützt</td><td>Fehlt die erforderliche Semantik für bedingtes Schreiben.</td></tr>
+<tr><td>VAST-Daten</td><td>Unterstützt</td><td>Von der Community verifiziert; funktioniert nur mit nicht versionierten Buckets.</td></tr>
+<tr><td>Andere S3-kompatible Speicher</td><td>Teilweise</td><td>Hängt von der vollständigen Unterstützung der S3-Semantik für bedingtes Schreiben ab.</td></tr>
+</tbody>
+</table>
+<p>Anmerkungen:</p>
+<ul>
+<li>Die Kompatibilität hängt von der nativen SDK-Unterstützung oder der Unterstützung für die S3-Semantik für bedingtes Schreiben ab.</li>
+<li>Wenn Sie MinIO für Woodpecker selbst hosten, verwenden Sie <code translate="no">RELEASE.2024-12-18T13-15-44Z</code> oder höher.</li>
+<li>Diese Matrix spiegelt den <a href="https://github.com/zilliztech/woodpecker/discussions/150">aktuellen Stand der Diskussion</a> wider und kann sich weiterentwickeln, wenn die Backend-Unterstützung weiter validiert wird.</li>
+</ul>
 <h2 id="Deployment-guides" class="common-anchor-header">Leitfäden für den Einsatz<button data-href="#Deployment-guides" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -179,7 +217,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="common-anchor-header">Woodpecker für einen Milvus Cluster auf Kubernetes aktivieren (Milvus Operator, storage=minio)<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="common-anchor-header">Aktivieren von Woodpecker für einen Milvus Cluster auf Kubernetes (Milvus Operator, storage=minio)<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -411,7 +449,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Woodpecker ist eine Cloud-native WAL, die für die Objektspeicherung mit Kompromissen zwischen Durchsatz, Kosten und Latenzzeit entwickelt wurde. Der derzeit unterstützte leichtgewichtige eingebettete Modus priorisiert die Optimierung von Kosten und Durchsatz, da die meisten Szenarien nur das Schreiben von Daten innerhalb einer bestimmten Zeit erfordern und keine niedrige Latenz für einzelne Schreibanfragen verlangen. Daher verwendet Woodpecker gebündelte Schreibvorgänge mit Standardintervallen von 10 ms für lokale Dateisystem-Speicher-Backends und 200 ms für MinIO-ähnliche Speicher-Backends. Bei langsamen Schreibvorgängen ist die maximale Latenzzeit gleich der Intervallzeit plus der Flush-Zeit.</p>
+    </button></h2><p>Woodpecker ist eine Cloud-native WAL, die für Objektspeicher mit Kompromissen zwischen Durchsatz, Kosten und Latenzzeit entwickelt wurde. Der derzeit unterstützte leichtgewichtige eingebettete Modus priorisiert die Optimierung von Kosten und Durchsatz, da die meisten Szenarien nur das Schreiben von Daten innerhalb einer bestimmten Zeit erfordern und keine niedrige Latenz für einzelne Schreibanfragen verlangen. Daher verwendet Woodpecker gebündelte Schreibvorgänge mit Standardintervallen von 10 ms für lokale Dateisystem-Speicher-Backends und 200 ms für MinIO-ähnliche Speicher-Backends. Bei langsamen Schreibvorgängen entspricht die maximale Latenzzeit der Intervallzeit plus Flush-Zeit.</p>
 <p>Beachten Sie, dass das Einfügen von Stapeln nicht nur durch Zeitintervalle, sondern auch durch die Stapelgröße ausgelöst wird, die standardmäßig bei 2 MB liegt.</p>
 <p>Einzelheiten zur Architektur, zu den Bereitstellungsmodi (MemoryBuffer / QuorumBuffer) und zur Leistung finden Sie unter <a href="/docs/de/woodpecker_architecture.md">Woodpecker-Architektur</a>.</p>
 <p>Weitere Details zu den Parametern finden Sie im <a href="https://github.com/zilliztech/woodpecker">Woodpecker-GitHub-Repository</a>.</p>

@@ -63,7 +63,7 @@ title: DockerでMilvusを起動する(Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.15の新機能</strong></p>
+<p><strong>v3.0-betaの新機能</strong></p>
 <ul>
 <li><strong>ストリーミングノード</strong>：データ処理機能の強化</li>
 <li><a href="/docs/ja/use-woodpecker.md">Woodpecker</a><strong>MQ</strong>: メンテナンスのオーバーヘッドを削減した改良型メッセージキュー。</li>
@@ -187,7 +187,7 @@ EOF
 </ul></li>
 <li><p><a href="/docs/ja/upgrade_milvus_cluster-helm.md">Helm Chartを使用したMilvusのアップグレード</a>。</p></li>
 <li><p><a href="/docs/ja/scaleout.md">Milvusクラスタをスケールする</a>。</p></li>
-<li><p>Milvuクラスタをクラウド上にデプロイする：</p>
+<li><p>Milvuクラスタをクラウドにデプロイする：</p>
 <ul>
 <li><a href="/docs/ja/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/ja/gcp.md">Googleクラウド</a></li>

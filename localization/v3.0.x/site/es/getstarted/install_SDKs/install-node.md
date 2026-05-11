@@ -42,7 +42,9 @@ title: Instalar Milvus Nodejs SDK
 <tr><th style="text-align:center">Versión de Milvus</th><th style="text-align:center">Versión recomendada de @zilliz/milvus2-sdk-node</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">última</td></tr>
+<tr><td style="text-align:center">3.0.x</td><td style="text-align:center">última</td></tr>
+<tr><td style="text-align:center">2.6.x</td><td style="text-align:center">2.6.x</td></tr>
+<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">2.5.x</td></tr>
 <tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.10</td></tr>
 <tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.5</td></tr>
 <tr><td style="text-align:center">2.2.x</td><td style="text-align:center">2.2.x</td></tr>
@@ -114,5 +116,5 @@ yarn add @zilliz/milvus2-sdk-node
 <li><a href="/docs/es/single-vector-search.md">Búsqueda de un solo vector</a></li>
 <li><a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a></li>
 </ul></li>
-<li><p>Explorar <a href="/api-reference/node/v2.4.x/About.md">la referencia API de Milvus Node.js</a></p></li>
+<li><p>Explorar <a href="/api-reference/node/v3.0.x/About.md">la referencia API de Milvus Node.js</a></p></li>
 </ul>

@@ -19,7 +19,7 @@ title: リソースグループの管理
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusでは、リソースグループを使用して特定のクエリノードを他のノードから物理的に分離することができます。このガイドでは、カスタムリソースグループの作成と管理、およびリソースグループ間でのノードの転送方法について説明します。</p>
+    </button></h1><p>Milvusでは、リソースグループを使用して特定のクエリノードを他のノードから物理的に分離することができます。このガイドでは、カスタムリソースグループの作成と管理、およびグループ間でのノードの転送方法について説明します。</p>
 <h2 id="What-is-a-resource-group" class="common-anchor-header">リソースグループとは<button data-href="#What-is-a-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -71,7 +71,7 @@ title: リソースグループの管理
 <p>ただし、以下の場合を除く：</p>
 <ul>
 <li>Milvusクラスタ内のQueryNode数が不足している場合(<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code>)、常に十分なQueryNode数を持たないリソースグループが存在します。</li>
-<li>MilvusクラスタのQueryNode数が過剰な場合、すなわち<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> 、冗長なQueryNodeは常に<strong>__default_resource_groupに</strong>最初に配置されます。</li>
+<li>MilvusクラスタのQueryNode数が過剰な場合、つまり<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> 、冗長なQueryNodeは常に<strong>__default_resource_groupに</strong>最初に配置されます。</li>
 </ul>
 <p>もちろん、クラスタ内のQueryNode数が変更された場合、Milvusは最終的な条件を満たすように継続的に調整を試みます。そのため、最初にリソースグループの設定変更を適用し、その後QueryNodeのスケーリングを実行することができます。</p>
 <h2 id="Use-declarative-api-to-manage-resource-group" class="common-anchor-header">宣言型apiを使用してリソースグループを管理する<button data-href="#Use-declarative-api-to-manage-resource-group" class="anchor-icon" translate="no">
@@ -90,11 +90,11 @@ title: リソースグループの管理
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>このページのコードサンプルはすべて PyMilvus 2.6.12 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
+<p>このページのコードサンプルはすべてPyMilvus 3.0.0のものです。実行する前にPyMilvusをアップグレードしてください。</p>
 </div>
 <ol>
 <li><p>リソースグループの作成</p>
-<p>リソースグループを作成するには、milvusインスタンスに接続した後に以下を実行します。以下のスニペットでは、<code translate="no">default</code> が Milvus 接続のエイリアスであると仮定しています。</p>
+<p>リソースグループを作成するには、milvusインスタンスに接続した後に以下を実行してください。以下のスニペットでは、<code translate="no">default</code> が Milvus 接続のエイリアスであると仮定しています。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pymilvus
 
 <span class="hljs-comment"># A resource group name should be a string of 1 to 255 characters, starting with a letter or an underscore (_) and containing only numbers, letters, and underscores (_).</span>
@@ -268,7 +268,7 @@ _PENDING_NODES_RESOURCE_GROUP=<span class="hljs-string">&quot;__pending_nodes&qu
 
 init_cluster(<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコード例を使用して、追加のQueryNodeを保持するために<strong>__pending_nodesという</strong>リソース・グループを作成します。また、<strong>rg</strong>1と<strong>rg2という</strong>2つのユーザー固有のリソース・グループを作成します。さらに、もう1つのリソース・グループが、<strong>__pending_nodesから</strong>不足または冗長なQueryNodesをリカバリすることを優先するようにします。</p></li>
+<p>上記のコード例を使用して、追加のQueryNodeを保持するために<strong>__pending_nodesという</strong>リソース・グループを作成します。また、<strong>rg</strong>1と<strong>rg2という</strong>2つのユーザー固有のリソース・グループを作成します。さらに、<strong>__pending_nodesから</strong>不足または冗長なQueryNodesをリカバリすることを、もう1つのリソース・グループが優先するようにします。</p></li>
 <li><p>クラスタのスケールアウト</p>
 <p>以下のスケーリング機能があると仮定します：</p>
 <pre><code translate="no" class="language-python">
@@ -296,7 +296,7 @@ scale_to(<span class="hljs-number">5</span>)
 <span class="hljs-comment"># rg1 has 3 nodes, rg2 has 1 node, __default_resource_group has 1 node.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>クラスタのスケールイン</p>
-<p>同様に、<strong>__pending_nodes</strong>リソース・グループからQueryNodesを優先的に選択するスケーリング・イン・ルールを確立することができます。この情報は<code translate="no">describe_resource_group</code> API から取得できます。指定したリソースグループのスケールインという目標を達成する。</p>
+<p>同様に、<strong>__pending_nodes</strong>リソースグループからQueryNodesを優先的に選択するスケーリングインルールを確立することができます。この情報は<code translate="no">describe_resource_group</code> API から取得できます。指定したリソースグループのスケールインという目標を達成する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 from 3 nodes into 2 nodes</span>
 milvus_client.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(
@@ -329,7 +329,7 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h2><ul>
 <li>1つのコレクションのレプリカとリソースグループはN対Nの関係にあります。</li>
-<li>1つのコレクションの複数のレプリカが1つのリソースグループにロードされると、そのリソースグループのQueryNodesはレプリカに均等に分配され、各レプリカが持つQueryNodesの数の差が1を超えないようにします。</li>
+<li>1つのコレクションの複数のレプリカが1つのリソースグループにロードされると、そのリソースグループのQueryNodeはレプリカに均等に分配され、各レプリカが持つQueryNodeの数の差が1を超えないようにします。</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

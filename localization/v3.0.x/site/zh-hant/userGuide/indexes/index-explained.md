@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>索引是建立在資料之上的額外結構。其內部結構取決於所使用的近似近鄰搜尋演算法。索引可加快搜尋速度，但會在搜尋過程中產生額外的預處理時間、空間和 RAM。此外，使用索引通常會降低召回率（雖然影響微乎其微，但仍然很重要）。因此，本文將解釋如何將使用索引的成本最小化，同時將效益最大化。</p>
+    </button></h1><p>索引是建立在資料之上的額外結構。其內部結構取決於所使用的近似近鄰搜尋演算法。索引可加快搜尋速度，但會在搜尋過程中產生額外的預處理時間、空間和 RAM。此外，使用索引通常會降低召回率（雖然影響微乎其微，但仍很重要）。因此，本文將解釋如何將使用索引的成本最小化，同時將效益最大化。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -104,7 +104,7 @@ summary: >-
     </button></h2><p>如下圖所示，Milvus 的索引類型包含三個核心元件，<strong>即資料結構</strong>、<strong>量化</strong>和<strong>精煉器</strong>。量化和精煉器是可選的，但由於具有顯著的收益-好於成本平衡，因此被廣泛使用。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
    </span> <span class="img-wrapper"> <span>向量索引剖析</span> </span></p>
 <p>在建立索引時，Milvus 會結合所選的資料結構和量化方法，以決定最佳的<strong>擴充率</strong>。在查詢時，系統會擷取<code translate="no">topK × expansion rate</code> 候選向量，應用精煉器以更高的精確度重新計算距離，最後傳回最精確的<code translate="no">topK</code> 結果。這種混合方法將資源密集的精煉限制在經過篩選的候選向量子集中，從而在速度和精確度之間取得平衡。</p>
 <h3 id="Data-structure" class="common-anchor-header">資料結構<button data-href="#Data-structure" class="anchor-icon" translate="no">
@@ -445,7 +445,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>當您使用 HNSW 為 100 萬個 128 維向量嵌入建立索引時，使用的總記憶體為<strong>128 MB (圖形) + 512 MB (向量) = 640 MB</strong>。</p></li>
 <li><p><strong>計算量化所造成的壓縮。</strong></p>
-<p>量化可減少向量大小。例如，使用具有 8 個子量化器的 PQ（每個向量 8 位元組）會導致大幅壓縮。經壓縮的向量嵌入所消耗的記憶體可計算如下：</p>
+<p>量化可減少向量大小。例如，使用具有 8 個子量化器的 PQ（每個向量 8 位元組）會導致大幅壓縮。經壓縮的向量嵌入所消耗的記憶體可以如下計算：</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8 MB
 <button class="copy-code-btn"></button></code></pre>
 <p>與原始向量嵌入相比，這可達到 64 倍的壓縮率，而<strong>HNSWPQ</strong>索引類型使用的總記憶體為<strong>128 MB (圖形) + 8 MB (壓縮向量) = 136 MB</strong>。</p></li>
@@ -472,6 +472,6 @@ summary: >-
       </svg>
     </button></h3><p>IVF 和基於圖表的索引會透過量化來最佳化記憶體的使用，而記憶體映射檔案 (mmap) 和 DiskANN 則會處理資料集超出可用隨機存取記憶體 (RAM) 的情況。</p>
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN 是基於 Vamana 圖形的索引，可連結資料點，以便在搜尋過程中有效導航，同時應用 PQ 來縮小向量的大小，並快速計算向量之間的近似距離。</p>
-<p>Vamana 圖形儲存在磁碟上，這使得 DiskANN 可以處理大型資料集，否則這些資料集會太大，無法放入記憶體中。這對十億點的資料集特別有用。</p>
+<p>Vamana 圖形儲存在磁碟上，這使得 DiskANN 可以處理大型資料集，否則記憶體就無法容納這些資料集。這對十億點的資料集特別有用。</p>
 <h4 id="Memory-mapped-files-mmap" class="common-anchor-header">記憶體映射檔案 (mmap)</h4><p>記憶體映射 (Mmap) 可直接存取磁碟上的大型檔案，讓 Milvus 在記憶體和硬碟中同時儲存索引和資料。此方法可根據存取頻率減少 I/O 呼叫的開銷，有助於最佳化 I/O 作業，從而擴大資料集的儲存容量，且不會顯著影響搜尋效能。</p>
 <p>具體來說，您可以設定 Milvus 對某些欄位的原始資料進行記憶體映射，而不是將其完全載入記憶體。如此一來，您就可以直接取得欄位的記憶體存取權，而不必擔心記憶體問題，並擴大資料集的容量。</p>

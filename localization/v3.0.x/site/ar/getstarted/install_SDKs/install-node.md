@@ -42,7 +42,9 @@ title: تثبيت Milvus Nodejs SDK لميلفوس
 <tr><th style="text-align:center">إصدار ميلفوس</th><th style="text-align:center">إصدار @zilliz/milvus2-sdk-node الموصى به</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">الأحدث</td></tr>
+<tr><td style="text-align:center">3.0.x</td><td style="text-align:center">الأحدث</td></tr>
+<tr><td style="text-align:center">2.6.x</td><td style="text-align:center">2.6.x</td></tr>
+<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">2.5.x</td></tr>
 <tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.10</td></tr>
 <tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.5</td></tr>
 <tr><td style="text-align:center">2.2.x</td><td style="text-align:center">2.2.x</td></tr>
@@ -105,7 +107,7 @@ yarn add @zilliz/milvus2-sdk-node
       </svg>
     </button></h2><p>بعد تثبيت Milvus Node.js SDK، يمكنك:</p>
 <ul>
-<li><p>عرض <a href="https://github.com/milvus-io/milvus-sdk-node">البداية السريعة لـ Milvus node.jsdk</a></p></li>
+<li><p>عرض <a href="https://github.com/milvus-io/milvus-sdk-node">البداية السريعة لملف Milvus node.jsdk</a></p></li>
 <li><p>تعلم العمليات الأساسية لـ Milvus</p>
 <ul>
 <li><a href="/docs/ar/manage-collections.md">إدارة المجموعات</a></li>
@@ -114,5 +116,5 @@ yarn add @zilliz/milvus2-sdk-node
 <li><a href="/docs/ar/single-vector-search.md">البحث في متجه واحد</a></li>
 <li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>
-<li><p>استكشاف <a href="/api-reference/node/v2.4.x/About.md">مرجع واجهة برمجة تطبيقات Milvus Node.js</a></p></li>
+<li><p>استكشاف <a href="/api-reference/node/v3.0.x/About.md">مرجع واجهة برمجة تطبيقات Milvus Node.js</a></p></li>
 </ul>

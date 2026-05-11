@@ -42,7 +42,9 @@ title: Milvus Nodejs SDK 설치하기
 <tr><th style="text-align:center">Milvus 버전</th><th style="text-align:center">권장 @zilliz/milvus2-sdk-node 버전</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">최신</td></tr>
+<tr><td style="text-align:center">3.0.x</td><td style="text-align:center">최신</td></tr>
+<tr><td style="text-align:center">2.6.x</td><td style="text-align:center">2.6.x</td></tr>
+<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">2.5.x</td></tr>
 <tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.10</td></tr>
 <tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.5</td></tr>
 <tr><td style="text-align:center">2.2.x</td><td style="text-align:center">2.2.x</td></tr>
@@ -114,5 +116,5 @@ yarn add @zilliz/milvus2-sdk-node
 <li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a></li>
 <li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
-<li><p><a href="/api-reference/node/v2.4.x/About.md">Milvus Node.js API 참조</a> 살펴보기</p></li>
+<li><p><a href="/api-reference/node/v3.0.x/About.md">Milvus Node.js API 참조</a> 살펴보기</p></li>
 </ul>

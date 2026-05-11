@@ -80,8 +80,8 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h3><ul>
-<li><p>Milvus версии 2.6.15 или более поздней</p></li>
-<li><p>pymilvus 2.6.13 или более поздняя версия</p></li>
+<li><p>Milvus версии 3.0 или более поздней</p></li>
+<li><p>PyMilvus 3.0 или более поздняя версия</p></li>
 </ul>
 <h3 id="Global-Configuration" class="common-anchor-header">Глобальная конфигурация<button data-href="#Global-Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -132,7 +132,7 @@ beta: Milvus 3.0.x
    <tr>
      <td><p><code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code></p></td>
      <td><p>100</p></td>
-     <td><p>Порог количества сегментов для выбора алгоритма. Когда количество сегментов превышает это значение, Milvus использует более быстрый жадный алгоритм для планирования слияния.</p><ul><li><p><strong>Стандартный алгоритм</strong> (используется, когда количество сегментов &lt;= <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): дает более оптимальные результаты слияния, но требует больше времени на вычисление.</p></li><li><p><strong>Жадный алгоритм</strong> (используется, когда количество сегментов &gt; <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): завершает планирование гораздо быстрее за счет чуть менее оптимальной группировки сегментов.</p></li></ul></td>
+     <td><p>Пороговое значение количества сегментов для выбора алгоритма. Когда количество сегментов превышает это значение, Milvus использует более быстрый жадный алгоритм для планирования слияния.</p><ul><li><p><strong>Стандартный алгоритм</strong> (используется, когда количество сегментов &lt;= <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): дает более оптимальные результаты слияния, но требует больше времени на вычисление.</p></li><li><p><strong>Жадный алгоритм</strong> (используется, когда количество сегментов &gt; <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): завершает планирование гораздо быстрее за счет чуть менее оптимальной группировки сегментов.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.datanodeMemoryFactor</code></p></td>

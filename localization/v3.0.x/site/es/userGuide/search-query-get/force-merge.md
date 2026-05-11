@@ -41,7 +41,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>La <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md">compactación</a> estándar mantiene el tamaño de los segmentos cerca del configurado en <code translate="no">maxSize</code> mediante fusiones múltiples, pero puede dejar fragmentos de tamaño medio que no se pueden fusionar más sin superar los límites. Por ejemplo, como se ilustra a continuación, si una colección tiene cinco segmentos de 2 MB y <code translate="no">maxSize</code> es de 3 MB, la fusión de dos segmentos cualquiera superaría el límite, por lo que la compactación estándar no puede reducir más el recuento de segmentos y el diseño fragmentado permanece.</p>
-<p>Forzar fusión añade un parámetro <code translate="no">target_size</code> y permite reorganizar los segmentos hacia el tamaño deseado dentro de una tolerancia ajustada siempre que sea posible. Como se ilustra a continuación, si el <code translate="no">target_size</code> especificado es de 4 MB, los cinco segmentos pequeños de 2 MB se pueden fusionar en menos segmentos más grandes. Esto reduce el número excesivo de segmentos, admite objetivos mayores que la configuración predeterminada de <code translate="no">maxSize</code> y, cuando el objetivo es muy grande, permite al sistema elegir un tamaño de salida y un número de segmentos prácticos para el hardware y la topología de QueryNode actuales.</p>
+<p>Forzar fusión añade un parámetro <code translate="no">target_size</code> y permite reorganizar los segmentos hacia el tamaño deseado dentro de una tolerancia ajustada siempre que sea posible. Como se ilustra a continuación, si el <code translate="no">target_size</code> especificado es de 4 MB, los cinco segmentos pequeños de 2 MB se pueden fusionar más en menos segmentos más grandes. Esto reduce el número excesivo de segmentos, admite objetivos mayores que la configuración predeterminada de <code translate="no">maxSize</code> y, cuando el objetivo es muy grande, permite al sistema elegir un tamaño de salida y un número de segmentos prácticos para el hardware y la topología de QueryNode actuales.</p>
 <p>Para saber qué método de compactación utilizar, consulte <a href="#faq">las preguntas frecuentes</a>.</p>
 <p>
   
@@ -80,8 +80,8 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h3><ul>
-<li><p>Milvus versión 2.6.15 o posterior</p></li>
-<li><p>pymilvus 2.6.13 o posterior</p></li>
+<li><p>Milvus versión 3.0 o posterior</p></li>
+<li><p>PyMilvus 3.0 o posterior</p></li>
 </ul>
 <h3 id="Global-Configuration" class="common-anchor-header">Configuración global<button data-href="#Global-Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -98,7 +98,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Los siguientes parámetros de configuración controlan el comportamiento de Force Merge. Establézcalos en el fichero de configuración de Milvus o mediante variables de entorno.</p>
+    </button></h3><p>Los siguientes parámetros de configuración controlan el comportamiento de Force Merge. Establézcalos en el archivo de configuración de Milvus o mediante variables de entorno.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">dataCoord:</span>
   <span class="hljs-attr">segment:</span>
     <span class="hljs-attr">maxSize:</span> <span class="hljs-number">512</span>         <span class="hljs-comment"># Default segment max size (MB).</span>
@@ -295,7 +295,7 @@ state = client.get_compaction_state(job_id)
    </tr>
    <tr>
      <td><p>Activador API</p></td>
-     <td><p>targetSize=0 (o no fijado), sin indicador Major/L0</p></td>
+     <td><p>targetSize=0 (o no establecido), sin indicador Major/L0</p></td>
      <td><p>targetSize&gt;0 (MB)</p></td>
    </tr>
    <tr>
@@ -316,7 +316,7 @@ state = client.get_compaction_state(job_id)
    <tr>
      <td><p>Límite superior de seguridad</p></td>
      <td><p>Sólo límite de configuración</p></td>
-     <td><p>maxSafeSize = min(QueryNode mem, DataNode mem) / memory_factor (independiente sin agrupación: se reduce a la mitad)</p></td>
+     <td><p>maxSafeSize = min(QueryNode mem, DataNode mem) / memory_factor (autónomo sin agrupación: reducido a la mitad)</p></td>
    </tr>
    <tr>
      <td><p>Forma de fusión</p></td>
@@ -331,7 +331,7 @@ state = client.get_compaction_state(job_id)
    <tr>
      <td><p>Capacidad de aplanamiento de la colección</p></td>
      <td><p>Limitada; las ejecuciones repetidas pueden dejar muchos segmentos medios.</p></td>
-     <td><p>Fuerte; diseñado para reducir el número de segmentos y aumentar el nivel de llenado</p></td>
+     <td><p>Fuerte; diseñado para reducir el número de segmentos y aumentar la plenitud</p></td>
    </tr>
    <tr>
      <td><p>Conocimiento de la topología</p></td>

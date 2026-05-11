@@ -42,7 +42,9 @@ title: Instalar o Milvus Nodejs SDK
 <tr><th style="text-align:center">Versão do Milvus</th><th style="text-align:center">Versão recomendada do @zilliz/milvus2-sdk-node</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">mais recente</td></tr>
+<tr><td style="text-align:center">3.0.x</td><td style="text-align:center">mais recente</td></tr>
+<tr><td style="text-align:center">2.6.x</td><td style="text-align:center">2.6.x</td></tr>
+<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">2.5.x</td></tr>
 <tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.10</td></tr>
 <tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.5</td></tr>
 <tr><td style="text-align:center">2.2.x</td><td style="text-align:center">2.2.x</td></tr>
@@ -88,7 +90,7 @@ title: Instalar o Milvus Nodejs SDK
 yarn add @zilliz/milvus2-sdk-node
 <button class="copy-code-btn"></button></code></pre>
 <p>Isto irá descarregar o sdk do Milvus node.js e adicionar uma entrada de dependência no seu ficheiro package.json.</p>
-<h2 id="Whats-next" class="common-anchor-header">O que se segue<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">O que vem a seguir<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -114,5 +116,5 @@ yarn add @zilliz/milvus2-sdk-node
 <li><a href="/docs/pt/single-vector-search.md">Pesquisa de vetor único</a></li>
 <li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
 </ul></li>
-<li><p>Explorar <a href="/api-reference/node/v2.4.x/About.md">a referência da API Milvus Node.js</a></p></li>
+<li><p>Explorar <a href="/api-reference/node/v3.0.x/About.md">a referência da API Milvus Node.js</a></p></li>
 </ul>

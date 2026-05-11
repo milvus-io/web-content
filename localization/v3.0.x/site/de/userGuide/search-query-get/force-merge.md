@@ -80,8 +80,8 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h3><ul>
-<li><p>Milvus Version 2.6.15 oder höher</p></li>
-<li><p>pymilvus 2.6.13 oder höher</p></li>
+<li><p>Milvus Version 3.0 oder höher</p></li>
+<li><p>PyMilvus 3.0 oder höher</p></li>
 </ul>
 <h3 id="Global-Configuration" class="common-anchor-header">Globale Konfiguration<button data-href="#Global-Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -142,7 +142,7 @@ beta: Milvus 3.0.x
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.querynodeMemoryFactor</code></p></td>
      <td><p>4.0</p></td>
-     <td><p>Der minimale QueryNode-Speicher wird durch diesen Faktor geteilt. Wird bei der automatischen Größenberechnung (<code translate="no">target_size=max_int64</code>) verwendet, um sicherzustellen, dass zusammengeführte Segmente von QueryNodes geladen werden können.</p><ul><li><p>Ein größerer Wert führt zu kleineren Segmenten, die für QueryNodes leichter zu laden sind.</p></li><li><p>Ein kleinerer Wert ermöglicht größere Segmente, kann aber bei QueryNodes mit begrenztem Speicherplatz zu Ladefehlern führen.</p></li><li><p>Bei einem Standardfaktor von 4,0 und einem kleinsten QueryNode mit 16 GB Arbeitsspeicher wird die automatisch berechnete Zielgröße beispielsweise 4 GB nicht überschreiten. Dadurch wird verhindert, dass Force Merge so große Segmente erzeugt, dass QueryNodes sie nicht laden können.</p></li></ul></td>
+     <td><p>Der minimale QueryNode-Speicher wird durch diesen Faktor geteilt. Wird bei der automatischen Größenberechnung (<code translate="no">target_size=max_int64</code>) verwendet, um sicherzustellen, dass zusammengeführte Segmente von QueryNodes geladen werden können.</p><ul><li><p>Ein größerer Wert führt zu kleineren Segmenten, die für QueryNodes leichter zu laden sind.</p></li><li><p>Ein kleinerer Wert ermöglicht größere Segmente, kann aber bei QueryNodes mit begrenztem Speicherplatz zu Ladefehlern führen.</p></li><li><p>Bei einem Standardfaktor von 4,0 und einem kleinsten QueryNode mit 16 GB Speicher wird die automatisch berechnete Zielgröße 4 GB nicht überschreiten. Dadurch wird verhindert, dass Force Merge so große Segmente erzeugt, dass QueryNodes sie nicht laden können.</p></li></ul></td>
    </tr>
 </table>
 <p>Um die oben genannten Änderungen auf Ihren Milvus-Cluster anzuwenden, folgen Sie bitte den Schritten in <a href="/docs/de/configure-helm.md#Configure-Milvus-via-configuration-file">Konfigurieren von Milvus mit Helm</a> und <a href="/docs/de/configure_operator.md">Konfigurieren von Milvus mit Milvus Operators</a>.</p>
@@ -284,7 +284,7 @@ state = client.get_compaction_state(job_id)
 <p>Diese beiden Arten von Verdichtungsoperationen dienen unterschiedlichen Zwecken.</p>
 <ul>
 <li><p>Bei der Standardverdichtung (targetSize=0 oder weggelassen) handelt es sich um einen inkrementellen Bereinigungspfad nach bestem Wissen und Gewissen.</p></li>
-<li><p>Die erzwungene Zusammenführung (targetSize&gt;0) ist ein Umpackungspfad auf Sammlungsebene, der weniger, größere und zielnahe Segmente erzeugt.</p></li>
+<li><p>Zusammenführen erzwingen (targetSize&gt;0) ist ein Umpackungspfad auf Sammlungsebene, um weniger, größere, zielnahe Segmente zu erzeugen.</p></li>
 </ul>
 <p>Der Hauptunterschied ist die Form der Zusammenführung: Die Standardverdichtung ist effektiv m → 1 pro Aufgabe, während die erzwungene Zusammenführung m → n über gruppierte Eingaben ist. Aus diesem Grund kann die erzwungene Zusammenführung Segment-Layouts lösen, die mit der Standardverdichtung nicht möglich sind. In der folgenden Tabelle werden die beiden Arten von Operationen miteinander verglichen.</p>
 <table>

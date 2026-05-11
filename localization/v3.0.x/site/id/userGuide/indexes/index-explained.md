@@ -3,7 +3,7 @@ id: index-explained.md
 title: Penjelasan Indeks
 summary: >-
   Indeks adalah struktur tambahan yang dibangun di atas data. Struktur
-  internalnya bergantung pada perkiraan algoritma pencarian tetangga terdekat
+  internalnya tergantung pada perkiraan algoritma pencarian tetangga terdekat
   yang digunakan. Indeks mempercepat pencarian, tetapi menimbulkan tambahan
   waktu, ruang, dan RAM selama pencarian. Selain itu, penggunaan indeks biasanya
   menurunkan tingkat pemanggilan (meskipun efeknya dapat diabaikan, namun tetap
@@ -25,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Indeks adalah struktur tambahan yang dibangun di atas data. Struktur internalnya bergantung pada perkiraan algoritme pencarian tetangga terdekat yang digunakan. Indeks mempercepat pencarian, tetapi menimbulkan waktu, ruang, dan RAM tambahan selama pencarian. Selain itu, penggunaan indeks biasanya menurunkan tingkat pemanggilan (meskipun efeknya dapat diabaikan, namun tetap penting). Oleh karena itu, artikel ini menjelaskan cara meminimalkan biaya penggunaan indeks sekaligus memaksimalkan manfaatnya.</p>
+    </button></h1><p>Indeks adalah struktur tambahan yang dibangun di atas data. Struktur internalnya bergantung pada perkiraan algoritme pencarian tetangga terdekat yang digunakan. Indeks mempercepat pencarian, tetapi menimbulkan waktu, ruang, dan RAM tambahan selama pencarian. Selain itu, menggunakan indeks biasanya menurunkan tingkat recall (meskipun efeknya dapat diabaikan, namun tetap penting). Oleh karena itu, artikel ini menjelaskan cara meminimalkan biaya penggunaan indeks sekaligus memaksimalkan manfaatnya.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -50,7 +50,7 @@ summary: >-
    </tr>
    <tr>
      <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>BFLOAT16_VECTOR</p></li><li><p>INT8_VECTOR</p></li></ul></td>
-     <td><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>HNSW</p></li><li><p>HNSW_SQ</p></li><li><p>HNSW_PQ</p></li><li><p>HNSW_PRQ</p></li><li><p>DISKANN</p></li><li><p>SCANN</p></li><li><p>AISAQ</p></li><li><p>GPU_CAGRA</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>GPU_BRUTE_FORCE</p></li></ul></td>
+     <td><ul><li><p>DATAR</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>HNSW</p></li><li><p>HNSW_SQ</p></li><li><p>HNSW_PQ</p></li><li><p>HNSW_PRQ</p></li><li><p>DISKANN</p></li><li><p>SCANN</p></li><li><p>AISAQ</p></li><li><p>GPU_CAGRA</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>GPU_BRUTE_FORCE</p></li></ul></td>
    </tr>
    <tr>
      <td><p>BINARY_VECTOR</p></td>
@@ -109,7 +109,7 @@ summary: >-
     </button></h2><p>Seperti yang ditunjukkan pada diagram di bawah ini, sebuah tipe indeks di Milvus terdiri dari tiga komponen inti, yaitu <strong>struktur data</strong>, <strong>kuantisasi</strong>, dan <strong>refiner</strong>. Kuantisasi dan refiner bersifat opsional, tetapi banyak digunakan karena keuntungan yang diperoleh lebih baik daripada biaya.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
    </span> <span class="img-wrapper"> <span>Anatomi Indeks Vektor</span> </span></p>
 <p>Selama pembuatan indeks, Milvus menggabungkan struktur data dan metode kuantisasi yang dipilih untuk menentukan <strong>tingkat ekspansi</strong> yang optimal. Pada waktu kueri, sistem mengambil vektor kandidat <code translate="no">topK × expansion rate</code>, menerapkan pemurni untuk menghitung ulang jarak dengan presisi yang lebih tinggi, dan akhirnya mengembalikan hasil <code translate="no">topK</code> yang paling akurat. Pendekatan hibrida ini menyeimbangkan kecepatan dan akurasi dengan membatasi pemurnian intensif sumber daya pada subset kandidat yang telah disaring.</p>
 <h3 id="Data-structure" class="common-anchor-header">Struktur data<button data-href="#Data-structure" class="anchor-icon" translate="no">
@@ -278,7 +278,7 @@ summary: >-
     </button></h3><p>Performa pencarian biasanya melibatkan K teratas, yang mengacu pada jumlah rekaman yang dikembalikan oleh pencarian. Ketika berurusan dengan kinerja, pertimbangkan hal berikut:</p>
 <ul>
 <li><p>Untuk pencarian dengan top-K kecil (misalnya, 2.000) yang membutuhkan tingkat penarikan yang tinggi, jenis indeks berbasis grafik mengungguli varian IVF.</p></li>
-<li><p>Untuk pencarian dengan top-K yang besar (dibandingkan dengan jumlah total sematan vektor), varian IVF merupakan pilihan yang lebih baik daripada jenis indeks berbasis grafik.</p></li>
+<li><p>Untuk pencarian dengan top-K yang besar (dibandingkan dengan jumlah total sematan vektor), varian IVF adalah pilihan yang lebih baik daripada jenis indeks berbasis grafik.</p></li>
 <li><p>Untuk pencarian dengan top-K berukuran sedang dan rasio filter yang tinggi, varian IVF adalah pilihan yang lebih baik.</p></li>
 </ul>
 <h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">Matriks Keputusan: Memilih jenis indeks yang paling tepat<button data-href="#Decision-Matrix-Choosing-the-most-appropriate-index-type" class="anchor-icon" translate="no">

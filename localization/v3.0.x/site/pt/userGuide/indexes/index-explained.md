@@ -8,8 +8,8 @@ summary: >-
   pré-processamento, espaço e RAM adicionais durante a pesquisa. Além disso, a
   utilização de um índice reduz normalmente a taxa de recuperação (embora o
   efeito seja insignificante, não deixa de ser importante). Portanto, este
-  artigo explica como minimizar os custos da utilização de um índice e, ao mesmo
-  tempo, maximizar os benefícios.
+  artigo explica como minimizar os custos da utilização de um índice e maximizar
+  os benefícios.
 ---
 <h1 id="Index-Explained" class="common-anchor-header">Índice explicado<button data-href="#Index-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -26,7 +26,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Um índice é uma estrutura adicional construída sobre os dados. A sua estrutura interna depende do algoritmo de pesquisa do vizinho mais próximo aproximado em utilização. Um índice acelera a pesquisa, mas incorre em tempo de pré-processamento, espaço e RAM adicionais durante a pesquisa. Além disso, a utilização de um índice reduz normalmente a taxa de recuperação (embora o efeito seja insignificante, não deixa de ser importante). Portanto, este artigo explica como minimizar os custos da utilização de um índice e, ao mesmo tempo, maximizar os benefícios.</p>
+    </button></h1><p>Um índice é uma estrutura adicional construída sobre os dados. A sua estrutura interna depende do algoritmo de pesquisa do vizinho mais próximo aproximado em utilização. Um índice acelera a pesquisa, mas incorre em tempo adicional de pré-processamento, espaço e RAM durante a pesquisa. Além disso, a utilização de um índice reduz normalmente a taxa de recuperação (embora o efeito seja insignificante, não deixa de ser importante). Portanto, este artigo explica como minimizar os custos da utilização de um índice e, ao mesmo tempo, maximizar os benefícios.</p>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -107,10 +107,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Como demonstrado no diagrama abaixo, um tipo de índice em Milvus consiste em três componentes principais, nomeadamente <strong>a estrutura de dados</strong>, <strong>a quantização</strong> e <strong>o refinador</strong>. A quantização e o refinador são opcionais, mas são amplamente utilizados devido a um equilíbrio significativo entre ganhos e custos.</p>
+    </button></h2><p>Como demonstrado no diagrama abaixo, um tipo de índice em Milvus consiste em três componentes principais, nomeadamente <strong>a estrutura de dados</strong>, <strong>a quantização</strong> e o <strong>refinador</strong>. A quantização e o refinador são opcionais, mas são amplamente utilizados devido a um equilíbrio significativo entre ganhos e custos.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
    </span> <span class="img-wrapper"> <span>Anatomia do Índice Vetorial</span> </span></p>
 <p>Durante a criação do índice, o Milvus combina a estrutura de dados escolhida e o método de quantização para determinar uma <strong>taxa de expansão</strong> óptima. No momento da consulta, o sistema recupera <code translate="no">topK × expansion rate</code> os vectores candidatos, aplica o refinador para recalcular as distâncias com maior precisão e, finalmente, devolve os resultados mais exactos <code translate="no">topK</code>. Esta abordagem híbrida equilibra a velocidade e a precisão, restringindo o refinamento, que consome muitos recursos, a um subconjunto filtrado de candidatos.</p>
 <h3 id="Data-structure" class="common-anchor-header">Estrutura de dados<button data-href="#Data-structure" class="anchor-icon" translate="no">
@@ -155,7 +155,7 @@ summary: >-
     </button></h3><p>A quantização reduz o espaço de memória e os custos computacionais através de uma representação mais grosseira:</p>
 <ul>
 <li><p><strong>A Quantização Escalar</strong> (por exemplo, <strong>SQ8</strong>) permite ao Milvus comprimir cada dimensão vetorial num único byte (8 bits), reduzindo a utilização de memória em 75% em comparação com os valores flutuantes de 32 bits, preservando uma precisão razoável.</p></li>
-<li><p><strong>A Quantização de Produto</strong><strong>(PQ</strong>) permite ao Milvus dividir os vectores em subvectores e codificá-los utilizando o agrupamento baseado em livros de códigos. Isto permite atingir rácios de compressão mais elevados (por exemplo, 4-32x) à custa de uma redução marginal da recuperação, tornando-o adequado para ambientes com limitações de memória.</p></li>
+<li><p><strong>A Quantização de Produto</strong><strong>(PQ</strong>) permite ao Milvus dividir os vectores em subvectores e codificá-los utilizando o agrupamento baseado em livros de códigos. Isto permite atingir rácios de compressão mais elevados (por exemplo, 4-32x) à custa de uma redução marginal da recuperação, tornando-o adequado para ambientes com restrições de memória.</p></li>
 </ul>
 <h3 id="Refiner" class="common-anchor-header">Refinador<button data-href="#Refiner" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -254,7 +254,7 @@ summary: >-
       </svg>
     </button></h3><p>A recuperação envolve normalmente o rácio de filtro, que se refere aos dados que são filtrados antes das pesquisas. Ao lidar com a recuperação, considere o seguinte:</p>
 <ul>
-<li><p>Se o rácio de filtragem for inferior a 85%, os tipos de índices baseados em grafos superam as variantes de FIV.</p></li>
+<li><p>Se o rácio de filtragem for inferior a 85%, os tipos de índice baseados em grafos têm melhor desempenho do que as variantes de FIV.</p></li>
 <li><p>Se o rácio de filtragem estiver entre 85% e 95%, utilize variantes de FIV.</p></li>
 <li><p>Se o rácio de filtragem for superior a 98%, utilize a Força bruta (FLAT) para obter os resultados de pesquisa mais exactos.</p></li>
 </ul>
@@ -278,8 +278,8 @@ summary: >-
       </svg>
     </button></h3><p>O desempenho de uma pesquisa envolve normalmente o top-K, que se refere ao número de registos que a pesquisa devolve. Ao lidar com o desempenho, considere o seguinte:</p>
 <ul>
-<li><p>Para uma pesquisa com um top-K pequeno (por exemplo, 2.000) que requer uma alta taxa de recuperação, os tipos de índice baseados em gráficos superam as variantes de FIV.</p></li>
-<li><p>Para uma pesquisa com um top-K grande (comparado com o número total de incorporações vectoriais), as variantes de FIV são uma melhor escolha do que os tipos de índices baseados em grafos.</p></li>
+<li><p>Para uma pesquisa com um top-K pequeno (por exemplo, 2.000) que requer uma alta taxa de recuperação, os tipos de índice baseados em gráficos superam as variantes de IVF.</p></li>
+<li><p>Para uma pesquisa com um top-K grande (comparado com o número total de incorporações vectoriais), as variantes FIV são uma melhor escolha do que os tipos de índices baseados em grafos.</p></li>
 <li><p>Para uma pesquisa com um top-K de dimensão média e um rácio de filtragem elevado, as variantes FIV são a melhor escolha.</p></li>
 </ul>
 <h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">Matriz de decisão: Escolher o tipo de índice mais adequado<button data-href="#Decision-Matrix-Choosing-the-most-appropriate-index-type" class="anchor-icon" translate="no">
@@ -381,7 +381,7 @@ summary: >-
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 2 bytes = 2.0 MB
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Calcular a compressão causada pela quantização.</strong></p>
-<p>As variantes de FIV utilizam tipicamente PQ e SQ8, e a utilização de memória pode ser estimada da seguinte forma:</p>
+<p>As variantes de FIV utilizam normalmente PQ e SQ8, e a utilização de memória pode ser estimada da seguinte forma:</p>
 <ul>
 <li><p>Usando PQ com 8 subquantizadores</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8.0 MB

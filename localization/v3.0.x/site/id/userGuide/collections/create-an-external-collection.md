@@ -2,8 +2,11 @@
 id: create-an-external-collection.md
 title: Membuat Koleksi EksternalCompatible with Milvus 3.0.x
 summary: >-
-  Mengakses data di AWS S3 atau Iceberg melalui koleksi eksternal tanpa
-  menyalinnya ke Milvus.
+  Koleksi eksternal adalah jenis koleksi data di Milvus yang mengakses data dari
+  sistem penyimpanan eksternal atau tabel basis data seperti AWS S3 dan Iceberg
+  tanpa menyalinnya ke dalam Milvus. Koleksi ini bertindak sebagai lapisan kueri
+  di atas danau data dengan tetap menjaga kompatibilitas dengan antarmuka kueri
+  Milvus.
 beta: Milvus 3.0.x
 ---
 <h1 id="Create-an-External-Collection" class="common-anchor-header">Membuat Koleksi Eksternal<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Create-an-External-Collection" class="anchor-icon" translate="no">
@@ -21,7 +24,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Koleksi eksternal adalah jenis koleksi data di Milvus yang mengakses data dari sistem penyimpanan eksternal seperti AWS S3 dan Iceberg tanpa menyalinnya ke dalam Milvus. Koleksi ini bertindak sebagai lapisan kueri di atas danau data dengan tetap menjaga kompatibilitas dengan antarmuka kueri Milvus.</p>
+    </button></h1><p>Koleksi eksternal adalah jenis koleksi data di Milvus yang mengakses data dari sistem penyimpanan eksternal atau tabel basis data seperti AWS S3 dan Iceberg tanpa menyalinnya ke dalam Milvus. Koleksi ini bertindak sebagai lapisan kueri di atas danau data dengan tetap menjaga kompatibilitas dengan antarmuka kueri Milvus.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +40,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dalam pipeline data AI pada umumnya, pengguna mungkin telah menyimpan data mereka dalam format Parquet atau format lain di sistem penyimpanan mereka, seperti AWS S3. Untuk membuat Milvus mengonsumsi data yang disimpan secara eksternal ini, pengguna biasanya perlu mengimpornya ke dalam penyimpanan Milvus sendiri menggunakan pipeline Extract-Transform-Load (ETL).</p>
+    </button></h2><p>Dalam pipeline data AI pada umumnya, pengguna mungkin sudah menyimpan data mereka dalam format Parquet atau format lain di sistem penyimpanan mereka, seperti AWS S3. Untuk membuat Milvus mengonsumsi data yang disimpan secara eksternal ini, pengguna biasanya perlu mengimpornya ke dalam penyimpanan Milvus sendiri menggunakan pipeline Extract-Transform-Load (ETL).</p>
 <p>Alur kerja membawa data Anda ke Milvus ini menciptakan data yang berlebihan yang sulit untuk disinkronkan dan menambah beban pemeliharaan teknik untuk memastikan konsistensi data.</p>
 <p>
   
@@ -49,33 +52,7 @@ beta: Milvus 3.0.x
    <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" />
    </span> <span class="img-wrapper"> <span>Menghadirkan komputasi ke alur kerja data</span> </span></p>
 <p>Setelah dibuat, koleksi eksternal dapat mengakses data Anda secara langsung dan menyimpannya di tempat yang sama dengan tempat Anda menyimpannya. Di latar belakang, Milvus membuat file manifes untuk mencatat pemetaan antara metadata Milvus dan baris dalam file data eksternal. Setelah file manifes siap, Anda dapat membuat indeks di koleksi eksternal seperti yang Anda lakukan pada koleksi terkelola lainnya.</p>
-<p>Ketika data Anda berubah, pemicu penyegaran sub-detik secara manual akan memperbarui metadata, sehingga Milvus selalu diperbarui.</p>
-<h2 id="Limits--restrictions" class="common-anchor-header">Batasan &amp; larangan<button data-href="#Limits--restrictions" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Karena Milvus tidak menyimpan data mentah dan hanya mempertahankan pemetaan antara metadata dan data mentah, koleksi eksternal hanya dapat dibaca. Itu berarti Anda tidak dapat menyisipkan, menambah, menghapus, mengimpor, memadatkan, dan memadatkan data di sisi Milvus.</p>
-<p>Jika dibandingkan dengan koleksi terkelola, koleksi eksternal memiliki batasan sebagai berikut:</p>
-<ul>
-<li><p>Anda tidak dapat mengatur kunci utama dan atribut AutoID.</p></li>
-<li><p>Anda tidak dapat mengaktifkan bidang dinamis.</p></li>
-<li><p>Anda tidak dapat mengatur kunci partisi dan kunci pengelompokan, karena partisi tidak tersedia.</p></li>
-<li><p>Anda tidak dapat mendefinisikan fungsi dalam skema.</p></li>
-<li><p>Anda tidak dapat mengubah skema koleksi eksternal setelah Anda membuatnya.</p></li>
-<li><p>Anda tidak dapat menggunakan pencocokan teks dengan BM25.</p></li>
-<li><p>Anda harus melakukan operasi penyegaran sebelum membuat indeks.</p></li>
-</ul>
+<p>Ketika data Anda berubah, pemicu penyegaran sub-detik secara manual akan memperbarui metadata, sehingga Milvus akan selalu diperbarui.</p>
 <h2 id="Step-1-Create-schema" class="common-anchor-header">Langkah 1: Membuat skema<button data-href="#Step-1-Create-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -99,14 +76,24 @@ beta: Milvus 3.0.x
 schema = MilvusClient.create_schema(
     external_source=<span class="hljs-string">&#x27;s3://s3.&lt;region-id&gt;.amazonaws.com/&lt;bucket&gt;/&#x27;</span>,
     external_spec=<span class="hljs-string">&#x27;{
-        &quot;format&quot;: &quot;parquet&quot;，
+        &quot;format&quot;: &quot;parquet&quot;,
         &quot;extfs&quot;: {
             ...
         }
     }&#x27;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// Java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.JsonObject;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">externalSpec</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+externalSpec.addProperty(<span class="hljs-string">&quot;format&quot;</span>, <span class="hljs-string">&quot;parquet&quot;</span>);
+externalSpec.add(<span class="hljs-string">&quot;extfs&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>());
+
+CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> CreateCollectionReq.CollectionSchema.builder()
+        .externalSource(<span class="hljs-string">&quot;s3://s3.&lt;region-id&gt;.amazonaws.com/&lt;bucket&gt;/&quot;</span>)
+        .externalSpec(externalSpec)
+        .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
@@ -120,11 +107,53 @@ schema := entity.NewSchema().
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> fields=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;product_id&quot;,
+            &quot;dataType&quot;: &quot;Int64&quot;,
+            &quot;isPrimary&quot;: true
+        },
+        {
+            &quot;fieldName&quot;: &quot;embedding&quot;,
+            &quot;dataType&quot;: &quot;FloatVector&quot;,
+            &quot;elementTypeParams&quot;: {
+                &quot;dim&quot;: &quot;768&quot;
+            }
+        },
+        {
+            &quot;fieldName&quot;: &quot;product_name&quot;,
+            &quot;dataType&quot;: &quot;VarChar&quot;,
+            &quot;elementTypeParams&quot;: {
+                &quot;max_length&quot;: 512
+            }
+        }
+    ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Untuk membuat skema untuk koleksi eksternal, Anda perlu menentukan URI data sumber, format data, dan pengaturan autentikasi.</p>
+<table>
+   <tr>
+     <th><p>Nama Parameter</p></th>
+     <th><p>Deskripsi Parameter</p></th>
+     <th><p>Nilai Contoh</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">format</code></p></td>
+     <td><p>Format berkas data sumber target.</p></td>
+     <td><p><code translate="no">parquet</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">snapshot_id</code></p></td>
+     <td><p>ID snapshot tabel Iceberg yang valid. Parameter ini hanya berlaku jika Anda mengatur <code translate="no">format</code> ke <code translate="no">iceberg_table</code>.</p></td>
+     <td><p><code translate="no">473984310232959286</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">extfs</code></p></td>
+     <td><p>Pengaturan sistem file eksternal dalam struktur JSON yang diurutkan.</p></td>
+     <td><p>--</p></td>
+   </tr>
+</table>
 <p><details summary="Authentication Options"></p>
-<p>Anda memiliki opsi berikut ini untuk mengatur pengaturan autentikasi:</p>
+<p>Anda memiliki opsi berikut untuk mengatur pengaturan autentikasi:</p>
 <h3 id="Use-AWS-AKSK" class="common-anchor-header">Gunakan AWS AK/SK<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -158,16 +187,6 @@ schema := entity.NewSchema().
      <th><p>Nama Parameter</p></th>
      <th><p>Deskripsi Parameter</p></th>
      <th><p>Nilai Contoh</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">format</code></p></td>
-     <td><p>Format file data sumber target.</p><p>Nilai yang memungkinkan adalah <code translate="no">parquet</code>, <code translate="no">vortex</code>, <code translate="no">lance-table</code>, dan <code translate="no">iceberg-table</code>.</p></td>
-     <td><p><code translate="no">parquet</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">extfs</code></p></td>
-     <td><p>Pengaturan sistem file eksternal dalam struktur JSON yang diurutkan.</p></td>
-     <td><p>--</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.access_key_id</code></p></td>
@@ -234,18 +253,8 @@ schema := entity.NewSchema().
      <th><p>Contoh Nilai</p></th>
    </tr>
    <tr>
-     <td><p><code translate="no">format</code></p></td>
-     <td><p>Format data sumber target.</p><p>Nilai yang mungkin adalah <code translate="no">parquet</code>, <code translate="no">vortex</code>, <code translate="no">lance-table</code>, dan <code translate="no">iceberg-table</code></p></td>
-     <td><p><code translate="no">parquet</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">extfs</code></p></td>
-     <td><p>Pengaturan sistem file eksternal</p></td>
-     <td><p>--</p></td>
-   </tr>
-   <tr>
      <td><p><code translate="no">extfs.use_iam</code></p></td>
-     <td><p>Apakah akan menggunakan AWS IAM.</p><p>Atur ini ke <code translate="no">"true"</code> untuk opsi ini.</p></td>
+     <td><p>Apakah akan menggunakan AWS IAM.</p><p>Setel ini ke <code translate="no">"true"</code> untuk opsi ini.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
@@ -379,16 +388,6 @@ schema := entity.NewSchema().
      <th><p>Contoh Nilai</p></th>
    </tr>
    <tr>
-     <td><p><code translate="no">format</code></p></td>
-     <td><p>Format data sumber target.</p><p>Nilai yang mungkin adalah <code translate="no">parquet</code>, <code translate="no">vortex</code>, <code translate="no">lance-table</code>, dan <code translate="no">iceberg-table</code></p></td>
-     <td><p><code translate="no">parquet</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">extfs</code></p></td>
-     <td><p>Pengaturan sistem file eksternal</p></td>
-     <td><p>--</p></td>
-   </tr>
-   <tr>
      <td><p><code translate="no">extfs.cloud_provider</code></p></td>
      <td><p>ID penyedia cloud</p></td>
      <td><p><code translate="no">aws</code></p></td>
@@ -449,15 +448,13 @@ schema := entity.NewSchema().
     <span class="hljs-comment"># highlight-next</span>
     external_field=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-comment"># field name in the external data file</span>
 )
-
 schema.add_field(
     field_name=<span class="hljs-string">&quot;product_name&quot;</span>,
     datatype=DataType.VARCHAR,
-    max_length=<span class="hljs-number">256</span>,
+    max_length=<span class="hljs-number">512</span>,
     <span class="hljs-comment"># highlight-next</span>
     external_field=<span class="hljs-string">&quot;name&quot;</span>
 )
-
 schema.add_field(
     field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
     datatype=DataType.FLOAT_VECTOR,
@@ -466,7 +463,26 @@ schema.add_field(
     external_field=<span class="hljs-string">&quot;vector&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// Java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
+
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;product_id&quot;</span>)
+        .dataType(DataType.Int64)
+        .externalField(<span class="hljs-string">&quot;id&quot;</span>)
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;product_name&quot;</span>)
+        .dataType(DataType.VarChar)
+        .maxLength(<span class="hljs-number">512</span>)
+        .externalField(<span class="hljs-string">&quot;name&quot;</span>)
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .dataType(DataType.FloatVector)
+        .dimension(<span class="hljs-number">768</span>)
+        .externalField(<span class="hljs-string">&quot;vector&quot;</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
@@ -497,7 +513,11 @@ schema = schema.
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
+    \&quot;externalSource\&quot;: \&quot;volume://my_volume/path/to/a/folder\&quot;,
+    \&quot;externalSpec\&quot;: \&quot;{\\\&quot;format\\\&quot;: \\\&quot;parquet\\\&quot;}\&quot;,
+    \&quot;fields\&quot;: <span class="hljs-variable">$fields</span>
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Step-3-Create-a-collection" class="common-anchor-header">Langkah 3: Buat koleksi<button data-href="#Step-3-Create-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -514,7 +534,7 @@ schema = schema.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah menambahkan semua bidang ke skema, Anda dapat membuat koleksi.</p>
+    </button></h2><p>Setelah menambahkan semua bidang ke skema, Anda dapat membuat koleksi eksternal.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client = MilvusClient(
@@ -527,7 +547,21 @@ client.create_collection(
     schema=schema
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// Java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+
+<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">connectConfig</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+        .build();
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(connectConfig);
+
+<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .collectionSchema(schema)
+        .build();
+client.createCollection(createReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
@@ -545,8 +579,7 @@ client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     APIKey: token
 })
 
-err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;test_collection&quot;</span>, schema).
-    WithIndexOptions(indexOptions...))
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;test_collection&quot;</span>, schema))
 
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
@@ -555,9 +588,17 @@ err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;dbName\&quot;: \&quot;my_database\&quot;,
+    \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
+    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-4-Refresh-data" class="common-anchor-header">Langkah 4: Menyegarkan data<button data-href="#Step-4-Refresh-data" class="anchor-icon" translate="no">
+<h2 id="Step-4-Create-indexes" class="common-anchor-header">Langkah 4: Membuat indeks<button data-href="#Step-4-Create-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -572,40 +613,171 @@ err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah koleksi siap, Anda perlu melakukan penyegaran untuk menyinkronkan metadata dari data Anda ke Milvus.</p>
+    </button></h2><p>Anda dapat membuat indeks untuk kolom koleksi eksternal seperti yang Anda lakukan di koleksi terkelola.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+<span class="hljs-comment"># Add indexes</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
+)
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;product_name&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>
+)
+client.create_index(
+    db_name=<span class="hljs-string">&quot;my_database&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
+    index_params=index_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
+<span class="hljs-keyword">import</span> java.util.*;
+
+<span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParamForIdField</span> <span class="hljs-operator">=</span> IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;product_name&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .build();
+<span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParamForVectorField</span> <span class="hljs-operator">=</span> IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+List&lt;IndexParam&gt; indexParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+indexParams.add(indexParamForIdField);
+indexParams.add(indexParamForVectorField);
+<span class="hljs-type">CreateIndexReq</span> <span class="hljs-variable">createIndexReq</span> <span class="hljs-operator">=</span> CreateIndexReq.builder()
+        .dbName(<span class="hljs-string">&quot;my_database&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .indexParams(indexParams)
+        .build();
+client.createIndex(createIndexReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+collectionName := <span class="hljs-string">&quot;test_collection&quot;</span>
+indexOptions := []milvusclient.CreateIndexOption{
+    milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;embedding&quot;</span>, index.NewAutoIndex(entity.COSINE)),
+    milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;product_name&quot;</span>, index.NewAutoIndex(index.AUTOINDEX)),
+}
+indexTask, err := client.CreateIndex(ctx, indexOptions)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-comment">// handler err</span>
+}
+err = indexTask.Await(ctx)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-comment">// handler err</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">createIndex</span>({
+    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database&quot;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;test_collection&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;product_name&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>
+})
+client.<span class="hljs-title function_">createIndex</span>({
+    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database&quot;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;test_collection&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;COSINE&quot;</span>
+})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;embedding&quot;,
+            &quot;indexName&quot;: &quot;my_vector&quot;,
+            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+        },
+        {
+            &quot;fieldName&quot;: &quot;product_name&quot;,
+            &quot;indexName&quot;: &quot;my_id&quot;,
+            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+        }
+    ]&#x27;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;dbName\&quot;: \&quot;my_database\&quot;,
+    \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
+    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Step-5-Refresh-data" class="common-anchor-header">Langkah 5: Menyegarkan data<button data-href="#Step-5-Refresh-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Setelah koleksi siap, segarkan kembali untuk membuat metadata dan indeks untuk data Anda.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">job_id = client.refresh_external_collection(
+    db_name=<span class="hljs-string">&quot;my_database&quot;</span>,
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>
 )
-
 <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
     progress = client.get_refresh_external_collection_progress(job_id=job_id)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{progress.state}</span>: <span class="hljs-subst">{progress.progress}</span>%&quot;</span>)
-
     <span class="hljs-keyword">if</span> progress.state == <span class="hljs-string">&quot;RefreshCompleted&quot;</span>:
         elapsed = progress.end_time - progress.start_time
         <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Completed in <span class="hljs-subst">{elapsed}</span>ms&quot;</span>)
-        <span class="hljs-keyword">return</span> job_id
+        <span class="hljs-keyword">break</span>
     <span class="hljs-keyword">elif</span> progress.state == <span class="hljs-string">&quot;RefreshFailed&quot;</span>:
         <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Failed: <span class="hljs-subst">{progress.reason}</span>&quot;</span>)
-        <span class="hljs-keyword">return</span> job_id
-
+        <span class="hljs-keyword">break</span>
     time.sleep(<span class="hljs-number">2</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// Java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.GetRefreshExternalCollectionProgressReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.ListRefreshExternalCollectionJobsReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.RefreshExternalCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.GetRefreshExternalCollectionProgressResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.ListRefreshExternalCollectionJobsResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.RefreshExternalCollectionJobInfo;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.RefreshExternalCollectionResp;
+
+<span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+    <span class="hljs-type">GetRefreshExternalCollectionProgressResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.getRefreshExternalCollectionProgress(
+            GetRefreshExternalCollectionProgressReq.builder()
+                    .jobId(jobId)
+                    .build());
+    <span class="hljs-type">RefreshExternalCollectionJobInfo</span> <span class="hljs-variable">jobInfo</span> <span class="hljs-operator">=</span> resp.getJobInfo();
+    <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;RefreshCompleted&quot;</span>.equals(jobInfo.getState())) {
+        <span class="hljs-type">long</span> <span class="hljs-variable">elapsed</span> <span class="hljs-operator">=</span> jobInfo.getEndTime() - jobInfo.getStartTime();
+        System.out.printf(<span class="hljs-string">&quot;  Refresh completed in %dms%n&quot;</span>, elapsed);
+        <span class="hljs-keyword">break</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;RefreshFailed&quot;</span>.equals(jobInfo.getState())) {
+        System.out.printf(<span class="hljs-string">&quot;  Refresh failed: %s%n&quot;</span>, jobInfo.getReason());
+    }
+    TimeUnit.SECONDS.sleep(<span class="hljs-number">2</span>);
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">refreshResult, err := client.RefreshExternalCollection(ctx,
     client.NewRefreshExternalCollectionOption(<span class="hljs-string">&quot;test_collection&quot;</span>))
-
 jobID := refreshResult.JobID
-
 <span class="hljs-keyword">for</span> {
     progress, _ := client.GetRefreshExternalCollectionProgress(ctx,
         client.NewGetRefreshExternalCollectionProgressOption(jobID))
-
     fmt.Printf(<span class="hljs-string">&quot;State: %s\n&quot;</span>, progress.State)
-
     <span class="hljs-keyword">if</span> progress.State == entity.RefreshStateCompleted {
         fmt.Println(<span class="hljs-string">&quot;Refresh completed!&quot;</span>)
         <span class="hljs-keyword">break</span>
@@ -619,16 +791,24 @@ jobID := refreshResult.JobID
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/jobs/external_collection/refresh&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;dbName\&quot;: \&quot;my_database\&quot;,
+    \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
+    \&quot;externalSource\&quot;: \&quot;volume://my_volume/path/to/a/folder\&quot;,
+    \&quot;externalSpec\&quot;: \&quot;{\\\&quot;format\\\&quot;: \\\&quot;parquet\\\&quot;}\&quot;
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Operasi penyegaran bersifat asinkron, jadi Anda perlu menyiapkan iterasi untuk memantau kemajuannya.</p>
 <div class="alert note">
 <ul>
-<li><p>Operasi penyegaran memindai metadata dari berkas data dan menghasilkan berkas manifes yang sesuai. Biasanya membutuhkan waktu 150-250 ms.</p></li>
+<li><p>Operasi penyegaran memindai metadata berkas data dan menghasilkan berkas manifes yang sesuai. Biasanya membutuhkan waktu 150-250 ms.</p></li>
 <li><p>File manifes mencatat pemetaan antara metadata di Milvus dan baris-baris di file eksternal.</p></li>
-<li><p>Jika ada pemutakhiran pada data sumber Anda, Anda perlu memanggil refresh secara manual agar Milvus tetap mutakhir.</p></li>
-<li><p>Anda tidak dapat mengindeks koleksi eksternal hanya setelah penyegaran selesai. Namun, cara membuat indeks sama dengan cara membuat indeks untuk koleksi terkelola.</p></li>
-<li><p>Penyegaran yang memerlukan penghapusan semua metadata aktif tanpa penyisipan akan mengakibatkan penolakan.</p></li>
+<li><p>Jika ada pembaruan pada data sumber Anda, Anda perlu melakukan refresh secara manual agar Milvus tetap mutakhir.</p></li>
+<li><p>Refresh yang mengharuskan menghapus semua metadata aktif tanpa penyisipan akan mengakibatkan penolakan.</p></li>
 </ul>
 </div>
 <h2 id="Follow-ups" class="common-anchor-header">Tindak lanjut<button data-href="#Follow-ups" class="anchor-icon" translate="no">
@@ -646,4 +826,5 @@ jobID := refreshResult.JobID
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah Anda melakukan operasi penyegaran pada koleksi eksternal dan berkas manifesnya tersedia, Anda dapat membuat indeks, memuat/mengeluarkan koleksi, dan melakukan pencarian kesamaan dan kueri pada koleksi eksternal seperti yang dilakukan pada koleksi terkelola.</p>
+    </button></h2><p>Setelah Anda menyegarkan koleksi eksternal, Anda dapat memuat dan melepaskan koleksi serta melakukan pencarian dan kueri kemiripan di koleksi eksternal seperti yang Anda lakukan di koleksi terkelola mana pun, kecuali bahwa koleksi di basis data untuk komputasi berdasarkan permintaan harus dilampirkan ke kluster berdasarkan permintaan untuk pencarian dan kueri.</p>
+<p>Sebelum melakukan operasi DQL, seperti pencarian, kueri, dapatkan, dan pencarian hybrid, Anda perlu membuat sesi untuk melampirkan sumber daya komputasi dari klaster sesuai permintaan.</p>

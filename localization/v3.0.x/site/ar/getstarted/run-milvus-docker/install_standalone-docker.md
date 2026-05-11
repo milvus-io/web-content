@@ -63,7 +63,7 @@ title: تشغيل Milvus في Docker (لينكس)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>ما الجديد في الإصدار 2.6.15:</strong></p>
+<p><strong>ما الجديد في الإصدار 3.0 بيتا:</strong></p>
 <ul>
 <li><strong>عقدة التدفق</strong>: قدرات معالجة البيانات المحسّنة</li>
 <li><strong>نقار الخشب MQ</strong>: قائمة انتظار محسّنة للرسائل مع تقليل نفقات الصيانة، انظر <a href="/docs/ar/use-woodpecker.md">استخدام نقار الخشب</a> للحصول على التفاصيل</li>
@@ -71,16 +71,16 @@ title: تشغيل Milvus في Docker (لينكس)
 </ul>
 <p>قم دائمًا بتنزيل أحدث برنامج نصي لضمان حصولك على أحدث التكوينات والتحسينات في البنية.</p>
 <p>إذا كنت ترغب في استخدام <a href="https://milvus.io/docs/milvus_backup_overview.md">النسخ الاحتياطي</a> في وضع النشر المستقل، فمن المستحسن استخدام طريقة نشر <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
-<p>إذا واجهتك أي مشاكل في سحب الصورة، اتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل عن المشكلة، وسنقدم لك الدعم اللازم.</p>
+<p>إذا واجهت أي مشاكل في سحب الصورة، اتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع ذكر تفاصيل عن المشكلة، وسنقدم لك الدعم اللازم.</p>
 </div>
 <p>بعد تشغيل البرنامج النصي للتثبيت:</p>
 <ul>
 <li>تم بدء تشغيل حاوية docker باسم milvus على المنفذ <strong>19530</strong>.</li>
 <li>تم تثبيت برنامج تضمين إلخd مع ميلفوس في نفس الحاوية ويعمل على المنفذ <strong>2379</strong>. يتم تعيين ملف التكوين الخاص به إلى <strong>embedEtcd.yaml</strong> في المجلد الحالي.</li>
 <li>لتغيير تكوين Milvus الافتراضي، أضف الإعدادات الخاصة بك إلى ملف <strong>user.yaml</strong> في المجلد الحالي ثم أعد تشغيل الخدمة.</li>
-<li>يتم تعيين وحدة تخزين بيانات Milvus إلى <strong>وحدات التخزين/ملف Milvus</strong> في المجلد الحالي.</li>
+<li>يتم تعيين وحدة تخزين بيانات Milvus إلى <strong>وحدات التخزين/ميلفوس</strong> في المجلد الحالي.</li>
 </ul>
-<p>يمكنك الوصول إلى Milvus WebUI على <code translate="no">http://127.0.0.1:9091/webui/</code> لمعرفة المزيد عن مثيل Milvus الخاص بك. للحصول على التفاصيل، راجع <a href="/docs/ar/milvus-webui.md">Milvus WebUI</a>.</p>
+<p>يمكنك الوصول إلى Milvus WebUI على <code translate="no">http://127.0.0.1:9091/webui/</code> لمعرفة المزيد حول مثيل Milvus الخاص بك. للحصول على التفاصيل، راجع <a href="/docs/ar/milvus-webui.md">Milvus WebUI</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(اختياري) تحديث تكوينات Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -197,5 +197,5 @@ EOF
 <li><p>استكشف Milvus <a href="/docs/ar/milvus_backup_overview.md">Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطية لبيانات Milvus.</p></li>
 <li><p>استكشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
 <li><p>استكشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
-<li><p><a href="/docs/ar/monitor.md">مراقبة ميلفوس باستخدام بروميثيوس</a>.</p></li>
+<li><p><a href="/docs/ar/monitor.md">راقب ميلفوس باستخدام بروميثيوس</a>.</p></li>
 </ul>

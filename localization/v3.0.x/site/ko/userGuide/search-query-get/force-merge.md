@@ -39,7 +39,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>표준 <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md">압축은</a> 다대일 병합을 통해 세그먼트 크기를 구성된 <code translate="no">maxSize</code> 근처로 유지하지만, 한도를 초과하지 않는 한 더 이상 병합할 수 없는 중간 크기의 조각이 남을 수 있습니다. 예를 들어 아래 그림과 같이 컬렉션에 2MB 세그먼트가 5개 있고 <code translate="no">maxSize</code> 이 3MB인 경우 두 세그먼트 중 하나를 병합하면 한도를 초과하므로 표준 압축으로 세그먼트 수를 더 줄일 수 없고 조각화된 레이아웃이 그대로 유지됩니다.</p>
-<p>강제 병합은 <code translate="no">target_size</code> 매개변수를 추가하여 가능한 경우 엄격한 허용 오차 범위 내에서 원하는 크기로 세그먼트를 재구성할 수 있도록 지원합니다. 아래 그림과 같이 지정된 <code translate="no">target_size</code> 이 4MB인 경우 2MB의 작은 세그먼트 5개를 더 적은 수의 큰 세그먼트로 병합할 수 있습니다. 이렇게 하면 초과 세그먼트 수가 줄어들고, 기본 <code translate="no">maxSize</code> 설정보다 큰 대상을 지원하며, 대상이 매우 큰 경우 시스템에서 현재 하드웨어 및 QueryNode 토폴로지에 맞는 실제 출력 크기와 세그먼트 수를 선택할 수 있습니다.</p>
+<p>강제 병합은 <code translate="no">target_size</code> 매개변수를 추가하고 가능한 경우 엄격한 허용 오차 범위 내에서 원하는 크기로 세그먼트를 재구성할 수 있도록 지원합니다. 아래 그림과 같이 지정된 <code translate="no">target_size</code> 이 4MB인 경우 2MB의 작은 세그먼트 5개를 더 적은 수의 큰 세그먼트로 병합할 수 있습니다. 이렇게 하면 초과 세그먼트 수가 줄어들고, 기본 <code translate="no">maxSize</code> 설정보다 큰 대상을 지원하며, 대상이 매우 큰 경우 시스템에서 현재 하드웨어 및 QueryNode 토폴로지에 맞는 실제 출력 크기와 세그먼트 수를 선택할 수 있습니다.</p>
 <p>어떤 압축 방법을 사용할지 알아보려면 <a href="#faq">FAQ를</a> 참조하세요.</p>
 <p>
   
@@ -78,8 +78,8 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h3><ul>
-<li><p>Milvus 버전 2.6.15 이상</p></li>
-<li><p>pymilvus 2.6.13 이상</p></li>
+<li><p>Milvus 버전 3.0 이상</p></li>
+<li><p>PyMilvus 3.0 이상</p></li>
 </ul>
 <h3 id="Global-Configuration" class="common-anchor-header">전역 구성<button data-href="#Global-Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -118,7 +118,7 @@ beta: Milvus 3.0.x
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>매개변수</p></th>
+     <th><p>파라미터</p></th>
      <th><p>기본값</p></th>
      <th><p>설명</p></th>
    </tr>
