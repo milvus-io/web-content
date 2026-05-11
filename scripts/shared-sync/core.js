@@ -175,25 +175,25 @@ async function runCheck({ plan, fetchRemoteTreeImpl = fetchRemoteTree, readLocal
   };
 }
 
-async function applyTree(absTarget, remoteTree) {
+async function applyTree(absTarget, remoteTree, fsImpl = fs) {
   const parentDir = path.dirname(absTarget);
   const nonce = `${process.pid}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
   const stagingDir = path.join(parentDir, `.shared-sync-stage-${nonce}`);
   const backupDir = path.join(parentDir, `.shared-sync-backup-${nonce}`);
 
-  await fs.mkdir(parentDir, { recursive: true });
-  await fs.mkdir(stagingDir, { recursive: true });
+  await fsImpl.mkdir(parentDir, { recursive: true });
+  await fsImpl.mkdir(stagingDir, { recursive: true });
 
   try {
     for (const rel of Object.keys(remoteTree).sort()) {
       const absPath = path.join(stagingDir, rel);
-      await fs.mkdir(path.dirname(absPath), { recursive: true });
-      await fs.writeFile(absPath, remoteTree[rel], 'utf8');
+      await fsImpl.mkdir(path.dirname(absPath), { recursive: true });
+      await fsImpl.writeFile(absPath, remoteTree[rel], 'utf8');
     }
 
     let hadExistingTarget = false;
     try {
-      await fs.access(absTarget);
+      await fsImpl.access(absTarget);
       hadExistingTarget = true;
     } catch (error) {
       if (!(error && error.code === 'ENOENT')) {
@@ -202,35 +202,41 @@ async function applyTree(absTarget, remoteTree) {
     }
 
     if (hadExistingTarget) {
-      await fs.rename(absTarget, backupDir);
+      await fsImpl.rename(absTarget, backupDir);
     }
 
     try {
-      await fs.rename(stagingDir, absTarget);
+      await fsImpl.rename(stagingDir, absTarget);
       if (hadExistingTarget) {
-        await fs.rm(backupDir, { recursive: true, force: true });
+        await fsImpl.rm(backupDir, { recursive: true, force: true });
       }
     } catch (error) {
       if (hadExistingTarget) {
-        await fs.rename(backupDir, absTarget);
+        await fsImpl.rename(backupDir, absTarget);
       }
       throw error;
     }
   } catch (error) {
-    await fs.rm(stagingDir, { recursive: true, force: true });
-    await fs.rm(backupDir, { recursive: true, force: true });
+    await fsImpl.rm(stagingDir, { recursive: true, force: true });
+    await fsImpl.rm(backupDir, { recursive: true, force: true });
     throw error;
   }
 }
 
-async function runApply({ plan, fetchRemoteTreeImpl = fetchRemoteTree, readLocalTreeImpl = readLocalTree, logger = console }) {
+async function runApply({
+  plan,
+  fetchRemoteTreeImpl = fetchRemoteTree,
+  readLocalTreeImpl = readLocalTree,
+  logger = console,
+  fsImpl = fs,
+}) {
   const rows = [];
 
   for (const entry of plan) {
     const remoteTree = await fetchRemoteTreeImpl(entry);
     const localTree = await readLocalTreeImpl(entry.targetAbsPath);
     const diff = diffTrees(localTree, remoteTree);
-    await applyTree(entry.targetAbsPath, remoteTree);
+    await applyTree(entry.targetAbsPath, remoteTree, fsImpl);
     rows.push({ name: entry.name, status: diff.hasDrift ? 'DRIFT' : 'OK', diff });
     logger.log(formatSummaryRow(entry.name, diff));
   }

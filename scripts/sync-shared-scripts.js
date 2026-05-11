@@ -1,14 +1,18 @@
 #!/usr/bin/env node
 
 const path = require('node:path');
-const fetchImplRuntime = globalThis.fetch ? globalThis.fetch.bind(globalThis) : require('node-fetch');
 
 const manifest = require('./sync-shared-scripts.manifest');
 const { buildSyncPlan, fetchRemoteTree, runCheck, runApply } = require('./shared-sync/core');
 
 function createFetch() {
+  if (typeof globalThis.fetch !== 'function') {
+    throw new Error('Fetch API is unavailable in this runtime. Please run this script with Node.js 20+');
+  }
+
+  const fetchImpl = globalThis.fetch.bind(globalThis);
   return (url) =>
-    fetchImplRuntime(url, {
+    fetchImpl(url, {
       headers: {
         'User-Agent': 'shared-scripts-sync',
         Accept: 'application/vnd.github+json',

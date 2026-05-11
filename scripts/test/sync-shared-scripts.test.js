@@ -155,37 +155,36 @@ test('runApply keeps original target unchanged when apply fails mid-write', asyn
   await fs.writeFile(path.join(target, 'stable.js'), 'stable\n', 'utf8');
   await fs.writeFile(path.join(target, 'old.js'), 'old\n', 'utf8');
 
-  const realWriteFile = fs.writeFile;
   let writes = 0;
-  fs.writeFile = async (filePath, data, encoding) => {
-    writes += 1;
-    if (writes === 2) {
-      throw new Error('injected write failure');
-    }
-    return realWriteFile(filePath, data, encoding);
+  const fsImpl = {
+    ...fs,
+    writeFile: async (filePath, data, encoding) => {
+      writes += 1;
+      if (writes === 2) {
+        throw new Error('injected write failure');
+      }
+      return fs.writeFile(filePath, data, encoding);
+    },
   };
 
-  try {
-    await assert.rejects(
-      runApply({
-        plan: [{ name: 'sync-a', targetAbsPath: target }],
-        fetchRemoteTreeImpl: async () => ({
-          'stable.js': 'stable-updated\n',
-          'new.js': 'new\n',
-        }),
-        readLocalTreeImpl: async (absTarget) => {
-          const current = {};
-          for (const file of await fs.readdir(absTarget)) {
-            current[file] = await fs.readFile(path.join(absTarget, file), 'utf8');
-          }
-          return current;
-        },
+  await assert.rejects(
+    runApply({
+      plan: [{ name: 'sync-a', targetAbsPath: target }],
+      fetchRemoteTreeImpl: async () => ({
+        'stable.js': 'stable-updated\n',
+        'new.js': 'new\n',
       }),
-      /injected write failure/
-    );
-  } finally {
-    fs.writeFile = realWriteFile;
-  }
+      readLocalTreeImpl: async (absTarget) => {
+        const current = {};
+        for (const file of await fs.readdir(absTarget)) {
+          current[file] = await fs.readFile(path.join(absTarget, file), 'utf8');
+        }
+        return current;
+      },
+      fsImpl,
+    }),
+    /injected write failure/
+  );
 
   const files = (await fs.readdir(target)).sort();
   assert.deepEqual(files, ['old.js', 'stable.js']);
