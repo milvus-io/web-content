@@ -1,0 +1,1312 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "User Operations (V2)",
+      "x-i18n": {
+        "zh-CN": {
+          "name": "User (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/vectordb/users/create": {
+      "post": {
+        "summary": "Create User",
+        "deprecated": false,
+        "description": "This operation creates a new user with a corresponding password.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建用户",
+            "description": "本接口可创建新用户并为其设置密码。"
+          }
+        },
+        "tags": [
+          "User Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userName": {
+                    "type": "string",
+                    "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建用户的用户名。\n用户名须以字母开头，并包含下划线、字母和数字。"
+                      }
+                    }
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "The corresponding password to the user. \nThe password must must include at least three of the following character types: uppercase letters, lowercase letters, numbers, and special characters.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用户对应的密码。该密码必须如下字符类型中的三种或以上：大写字母、小写字母、数字和特殊字符。"
+                      }
+                    },
+                    "minLength": 8,
+                    "maxLength": 64,
+                    "format": "password"
+                  }
+                },
+                "required": [
+                  "userName",
+                  "password"
+                ]
+              },
+              "examples": {
+                "1": {
+                  "summary": "example",
+                  "value": {
+                    "userName": "myUser",
+                    "password": "P@ssw0rd"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/users/describe": {
+      "post": {
+        "summary": "Describe User",
+        "deprecated": false,
+        "description": "This operation describes the detailed information of a specific user.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看用户详情",
+            "description": "本接口可列出指定用户的详细信息。"
+          }
+        },
+        "tags": [
+          "User Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userName": {
+                    "type": "string",
+                    "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建用户的用户名。\n用户名须以字母开头，并包含下划线、字母和数字。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "userName"
+                ],
+                "x-i18n-langs": [
+                  "zh-CN"
+                ]
+              },
+              "example": {
+                "userName": "my_user"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the name of the roles assigned to the specified user.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回为指定用户所分配的角色名称。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "description": "The name of a role assigned to the specified user.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "已分配给指定用户的角色名称。"
+                              }
+                            }
+                          },
+                          "description": "Response payload which is a list of roles already assigned to the user.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，为已分配给当前用户的角色名称列表。"
+                            }
+                          }
+                        }
+                      },
+                      "description": "A success response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "zilliz"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        "db_admin"
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "milvus"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        "public"
+                      ]
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/users/list": {
+      "post": {
+        "summary": "List Users",
+        "deprecated": false,
+        "description": "This operation lists the information of all existing users.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看用户列表",
+            "description": "本接口可列出所有已创建用户的相关信息。"
+          }
+        },
+        "tags": [
+          "User Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "description": "An empty object.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "空对象。"
+                  }
+                }
+              },
+              "example": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "An object that contains contains the user information.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回包含所有用户名称的数组。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "description": "A username.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "用户名。"
+                              }
+                            }
+                          },
+                          "description": "Response payload which is a list of usernames.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，为所有用户名列表。"
+                            }
+                          }
+                        }
+                      },
+                      "description": "A success response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "milvus"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        "root"
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "zilliz"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        "db_admin"
+                      ]
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/users/drop": {
+      "post": {
+        "summary": "Drop User",
+        "deprecated": false,
+        "description": "This operation deletes an existing user.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除用户",
+            "description": "本接口会删除一个已存在的用户。"
+          }
+        },
+        "tags": [
+          "User Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-include-target": [
+              "milvus"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userName": {
+                    "type": "string",
+                    "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建用户的用户名。\n用户名须以字母开头，并包含下划线、字母和数字。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "userName"
+                ],
+                "x-i18n-langs": [
+                  "zh-CN"
+                ]
+              },
+              "example": {
+                "userName": "my_user"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return an empty object or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/users/update_password": {
+      "post": {
+        "summary": "Update User Password",
+        "deprecated": false,
+        "description": "This operation updates the password for a specific user.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "更新用户密码",
+            "description": "本操作可更新指定用户密码。"
+          }
+        },
+        "tags": [
+          "User Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userName": {
+                    "type": "string",
+                    "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建用户的用户名。\n用户名须以字母开头，并包含下划线、字母和数字。"
+                      }
+                    }
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "The corresponding password to the user. \nThe password must be a string of 8 to 64 characters and must include at least three of the following character types: uppercase letters, lowercase letters, numbers, and special characters.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用户对应的密码。\n密码长度为 8 至 64 个字符，须包含大写字母、小写字母、数字和特殊字符。"
+                      }
+                    },
+                    "minLength": 8,
+                    "maxLength": 64,
+                    "format": "password"
+                  },
+                  "newPassword": {
+                    "type": "string",
+                    "description": "The new password for the user. \nThe password must be a string of 8 to 64 characters and must include at least three of the following character types: uppercase letters, lowercase letters, numbers, and special characters.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用户的新密码。\n密码长度为 8 至 64 个字符，须包含大写字母、小写字母、数字和特殊字符。"
+                      }
+                    },
+                    "format": "password",
+                    "minLength": 8,
+                    "maxLength": 64
+                  }
+                },
+                "required": [
+                  "userName",
+                  "password",
+                  "newPassword"
+                ],
+                "x-i18n-langs": [
+                  "zh-CN"
+                ]
+              },
+              "example": {
+                "newPassword": "P@ssw0rd!",
+                "userName": "myUser",
+                "password": "P@ssw0rd*"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return an empty object or an error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/users/grant_role": {
+      "post": {
+        "summary": "Grant Role To User",
+        "deprecated": false,
+        "description": "This operation grants a specified role to the current user. Once granted the role, the user gets permissions allowed for the current role and can perform certain operations.<include target=\"milvus\">To complete this operation, you need to enable authentication on your Milvus instance. For details, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md).</include>",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "授予用户角色",
+            "description": "本接口可以为指定用户分配指定角色。角色授予完成后，用户将获得当前角色所允许的权限，并可以执行相应的操作。"
+          }
+        },
+        "tags": [
+          "User Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userName": {
+                    "type": "string",
+                    "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建用户的用户名。\n用户名须以字母开头，并包含下划线、字母和数字。"
+                      }
+                    }
+                  },
+                  "roleName": {
+                    "type": "string",
+                    "description": "The name of the target role.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标角色名称。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "roleName",
+                  "userName"
+                ],
+                "x-i18n-langs": [
+                  "zh-CN"
+                ]
+              },
+              "examples": {
+                "1": {
+                  "summary": "example",
+                  "value": {
+                    "roleName": "admin",
+                    "userName": "milvusAdmin"
+                  },
+                  "x-include-target": [
+                    "milvus"
+                  ]
+                },
+                "2": {
+                  "summary": "example",
+                  "value": {
+                    "roleName": "db_admin",
+                    "userName": "myUser"
+                  },
+                  "x-include-target": [
+                    "zilliz"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/users/revoke_role": {
+      "post": {
+        "summary": "Revoke Role From User",
+        "deprecated": false,
+        "description": "This operation revokes a privilege granted to the current role.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "撤销用户角色",
+            "description": "本接口撤销已授予指定用户的权限。"
+          }
+        },
+        "tags": [
+          "User Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userName": {
+                    "type": "string",
+                    "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建用户的用户名。\n用户名须以字母开头，并包含下划线、字母和数字。"
+                      }
+                    }
+                  },
+                  "roleName": {
+                    "type": "string",
+                    "description": "The name of the target role.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标角色名称。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "roleName",
+                  "userName"
+                ],
+                "x-i18n-langs": [
+                  "zh-CN"
+                ]
+              },
+              "examples": {
+                "1": {
+                  "summary": "example",
+                  "value": {
+                    "roleName": "admin",
+                    "userName": "milvusAdmin"
+                  },
+                  "x-include-target": [
+                    "milvus"
+                  ]
+                },
+                "2": {
+                  "summary": "example",
+                  "value": {
+                    "roleName": "db_admin",
+                    "userName": "myUser"
+                  },
+                  "x-include-target": [
+                    "zilliz"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}

@@ -1,0 +1,5564 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Collection Operations (V2)",
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Collection (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/vectordb/collections/list": {
+      "post": {
+        "summary": "List Collections",
+        "deprecated": false,
+        "description": "This operation lists all collection names.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看 Collection 列表",
+            "description": "列出所有 Collection 名称。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "$ref": "#/components/schemas/CollectionCommons/properties/dbName"
+                  }
+                }
+              },
+              "example": {
+                "dbName": "my_database"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "This operation lists all collections in the database used in the current connection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "该操作列出当前连接中使用的数据库中的所有 Collection。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ListCollectionResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        "quick_setup_new",
+                        "customized_setup_1",
+                        "customized_setup_2"
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/collections/create": {
+      "post": {
+        "summary": "Create Collection",
+        "deprecated": false,
+        "description": "This operation creates a collection in a specified cluster.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建 Collection",
+            "description": "本接口可在指定集群中创建 Collection。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCollectionRequest"
+              },
+              "examples": {
+                "1": {
+                  "summary": "Quick setup",
+                  "x-target-request": "OPTION 1",
+                  "value": {
+                    "collectionName": "test_collection",
+                    "dimension": 5
+                  }
+                },
+                "2": {
+                  "summary": "Quick setup with custom fields",
+                  "x-target-request": "OPTION 1",
+                  "value": {
+                    "collectionName": "custom_quick_setup",
+                    "dimension": 5,
+                    "primaryFieldName": "my_id",
+                    "idType": "VarChar",
+                    "vectorFieldName": "my_vector",
+                    "metric_type": "L2",
+                    "autoId": true,
+                    "params": {
+                      "max_length": "512"
+                    }
+                  }
+                },
+                "3": {
+                  "summary": "Custom setup",
+                  "x-target-request": "OPTION 2",
+                  "value": {
+                    "collectionName": "custom_setup",
+                    "schema": {
+                      "autoId": false,
+                      "enableDynamicField": false,
+                      "fields": [
+                        {
+                          "fieldName": "my_id",
+                          "dataType": "Int64",
+                          "isPrimary": true
+                        },
+                        {
+                          "fieldName": "my_vector",
+                          "dataType": "FloatVector",
+                          "elementTypeParams": {
+                            "dim": "5"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "4": {
+                  "summary": "Custom setup with index",
+                  "x-target-request": "OPTION 2",
+                  "x-include-target": [
+                    "zilliz"
+                  ],
+                  "value": {
+                    "collectionName": "custom_setup_indexed",
+                    "schema": {
+                      "autoId": false,
+                      "enableDynamicField": false,
+                      "fields": [
+                        {
+                          "fieldName": "my_id",
+                          "dataType": "Int64",
+                          "isPrimary": true
+                        },
+                        {
+                          "fieldName": "my_vector",
+                          "dataType": "FloatVector",
+                          "elementTypeParams": {
+                            "dim": "5"
+                          }
+                        }
+                      ]
+                    },
+                    "indexParams": [
+                      {
+                        "fieldName": "my_vector",
+                        "metricType": "COSINE",
+                        "indexName": "my_vector",
+                        "params": {
+                          "index_type": "AUTOINDEX"
+                        }
+                      },
+                      {
+                        "fieldName": "my_id",
+                        "indexName": "my_id",
+                        "params": {
+                          "index_type": "STL_SORT"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "5": {
+                  "summary": "Custom setup with index",
+                  "x-target-request": "OPTION 2",
+                  "x-include-target": [
+                    "milvus"
+                  ],
+                  "value": {
+                    "collectionName": "custom_setup_indexed",
+                    "schema": {
+                      "autoId": false,
+                      "enableDynamicField": false,
+                      "fields": [
+                        {
+                          "fieldName": "my_id",
+                          "dataType": "Int64",
+                          "isPrimary": true
+                        },
+                        {
+                          "fieldName": "my_vector",
+                          "dataType": "FloatVector",
+                          "elementTypeParams": {
+                            "dim": "5"
+                          }
+                        }
+                      ]
+                    },
+                    "indexParams": [
+                      {
+                        "fieldName": "my_vector",
+                        "metricType": "COSINE",
+                        "indexName": "my_vector",
+                        "params": {
+                          "index_type": "IVF_FLAT",
+                          "nlist": 1024
+                        }
+                      },
+                      {
+                        "fieldName": "my_id",
+                        "indexName": "my_id",
+                        "params": {
+                          "index_type": "STL_SORT"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "6": {
+                  "summary": "External setup",
+                  "x-target-request": "OPTION 3",
+                  "x-include-target": [
+                    "zilliz"
+                  ],
+                  "value": {
+                    "collectionName": "test_collection",
+                    "schema": {
+                      "externalSource": "volume://my_volume/path/to/a/folder",
+                      "externalSpec": "{\"format\": \"parquet\"}",
+                      "fields": [
+                        {
+                          "fieldName": "product_id",
+                          "dataType": "Int64",
+                          "externalField": "id"
+                        },
+                        {
+                          "fieldName": "product_name",
+                          "dataType": "VarChar",
+                          "elementTypeParams": {
+                            "max_length": "256"
+                          },
+                          "externalField": "name"
+                        },
+                        {
+                          "fieldName": "embedding",
+                          "dataType": "FloatVector",
+                          "elementTypeParams": {
+                            "dim": "768"
+                          },
+                          "externalField": "vector"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "7": {
+                  "summary": "External setup",
+                  "x-target-request": "OPTION 3",
+                  "x-include-target": [
+                    "milvus"
+                  ],
+                  "value": {
+                    "collectionName": "test_collection",
+                    "schema": {
+                      "externalSource": "s3://s3.<region-id>.amazonaws.com/<bucket>/",
+                      "externalSpec": "{\"format\": \"parquet\", \"extfs\": {\"access_key_id\": \"AKIA...\", \"access_key_value\": \"u4Lh...\", \"region\": \"us-west-2\", \"cloud_provider\": \"aws\", \"use_ssl\": \"true\", \"use_virtual_host\": \"true\"}}",
+                      "fields": [
+                        {
+                          "fieldName": "product_id",
+                          "dataType": "Int64",
+                          "externalField": "id"
+                        },
+                        {
+                          "fieldName": "product_name",
+                          "dataType": "VarChar",
+                          "elementTypeParams": {
+                            "max_length": "256"
+                          },
+                          "externalField": "name"
+                        },
+                        {
+                          "fieldName": "embedding",
+                          "dataType": "FloatVector",
+                          "elementTypeParams": {
+                            "dim": "768"
+                          },
+                          "externalField": "vector"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns a collection object.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回 Collection 对象。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  },
+                  "3": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 3",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/collections/flush": {
+      "post": {
+        "summary": "Flush Collection",
+        "deprecated": false,
+        "description": "This operation flushes the streaming data and seals segments. It is recommended to call this operation after all the data has been inserted into a collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "Flush Collection",
+            "description": "本接口完成流式数据落盘并封存 Segment。建议在插入所有数据之后再调用此接口。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionCommons"
+              },
+              "example": {
+                "collectionName": "test_collection"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return an empty response.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回空响应。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/collections/compact": {
+      "post": {
+        "summary": "Compact Collection",
+        "deprecated": false,
+        "description": "This operation compacts the collection by merging small segments into larger ones. It is recommended to call this operation after inserting a large amount of data into a collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "Compact Collection",
+            "description": "本操作完成体积较小的 Segment 的合并。建议在插入大量数据之后再调用此操作。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "$ref": "#/components/schemas/CollectionCommons/properties/dbName"
+                  },
+                  "collectionName": {
+                    "$ref": "#/components/schemas/CollectionCommons/properties/collectionName"
+                  },
+                  "isClustering": {
+                    "type": "boolean",
+                    "description": "Whether to perform a clustering compaction. For more details, refer to [Clustering Compaction](https://milvus.io/docs/clustering-compaction.md).",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "是否进行 Clustering Compaction。更多细节请参考 [Clustering Compaction](https://milvus.io/docs/clustering-compaction.md)。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "collectionName"
+                ]
+              },
+              "example": {
+                "collectionName": "test_collection",
+                "isClustering": "true"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return an empty response.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回空响应。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "cost": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/collections/get_compaction_state": {
+      "post": {
+        "summary": "Get Compaction State",
+        "deprecated": false,
+        "description": "This operation gets the state of the latest compaction task for a specified collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看 Compaction 状态",
+            "description": "本接口可获取指定 Collection 最近一次 Compaction 任务的状态。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "jobID": {
+                    "type": "integer",
+                    "description": "The ID of the compaction job.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Compaction 任务的 ID。"
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "jobID": "xxxxxxxxxxxxxxxxxxxxxx"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the state of the compaction task.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回 Compaction 任务的状态。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/CompactionStateResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "compactionID": "xxxxxxxxxxxxxxxxxxxxxx",
+                        "state": "Completed",
+                        "executingPlanNumber": 0,
+                        "timeoutPlanNumber": 0,
+                        "completedPlanNumber": 5
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/collections/describe": {
+      "post": {
+        "summary": "Describe Collection",
+        "deprecated": false,
+        "description": "Describes the details of a collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看 Collection 详情",
+            "description": "本接口可列出指定 Collection 的详细信息。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionCommons"
+              },
+              "example": {
+                "collectionName": "test_collection"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the specified collection in detail.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定 Collection 的详细信息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DescribeCollectionResponse"
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "milvus"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "aliases": [],
+                        "autoId": false,
+                        "collectionID": 448707763883002000,
+                        "collectionName": "test_collection",
+                        "consistencyLevel": "Bounded",
+                        "description": "",
+                        "enableDynamicField": true,
+                        "fields": [
+                          {
+                            "autoId": false,
+                            "description": "",
+                            "id": 100,
+                            "name": "id",
+                            "partitionKey": false,
+                            "primaryKey": true,
+                            "type": "Int64"
+                          },
+                          {
+                            "autoId": false,
+                            "description": "",
+                            "id": 101,
+                            "name": "vector",
+                            "params": [
+                              {
+                                "key": "dim",
+                                "value": "5"
+                              }
+                            ],
+                            "partitionKey": false,
+                            "primaryKey": false,
+                            "type": "FloatVector"
+                          }
+                        ],
+                        "indexes": [
+                          {
+                            "fieldName": "vector",
+                            "indexName": "vector",
+                            "metricType": "COSINE"
+                          }
+                        ],
+                        "load": "LoadStateLoaded",
+                        "partitionsNum": 1,
+                        "properties": [],
+                        "shardsNum": 1
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "Managed Collection",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "zilliz"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "aliases": [],
+                        "autoId": false,
+                        "collectionID": 448707763883002000,
+                        "collectionName": "test_collection",
+                        "consistencyLevel": "Bounded",
+                        "description": "",
+                        "enableDynamicField": true,
+                        "fields": [
+                          {
+                            "autoId": false,
+                            "description": "",
+                            "id": 100,
+                            "name": "id",
+                            "partitionKey": false,
+                            "primaryKey": true,
+                            "type": "Int64"
+                          },
+                          {
+                            "autoId": false,
+                            "description": "",
+                            "id": 101,
+                            "name": "vector",
+                            "params": [
+                              {
+                                "key": "dim",
+                                "value": "5"
+                              }
+                            ],
+                            "partitionKey": false,
+                            "primaryKey": false,
+                            "type": "FloatVector"
+                          }
+                        ],
+                        "indexes": [
+                          {
+                            "fieldName": "vector",
+                            "indexName": "vector",
+                            "metricType": "COSINE"
+                          }
+                        ],
+                        "load": "LoadStateLoaded",
+                        "partitionsNum": 1,
+                        "properties": []
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "External Collection",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "zilliz"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "aliases": [],
+                        "autoId": false,
+                        "collectionID": 448707763883002000,
+                        "collectionName": "test_collection",
+                        "consistencyLevel": "Bounded",
+                        "description": "",
+                        "enableDynamicField": true,
+                        "externalSource":"volume://volume-vdc/demo_lance/",
+                        "externalSpec":"{\"format\":\"lance-table\"}",
+                        "fields": [
+                          {
+                            "autoId": false,
+                            "description": "",
+                            "id": 100,
+                            "name": "id",
+                            "partitionKey": false,
+                            "primaryKey": true,
+                            "type": "Int64"
+                          },
+                          {
+                            "autoId": false,
+                            "description": "",
+                            "id": 101,
+                            "name": "vector",
+                            "params": [
+                              {
+                                "key": "dim",
+                                "value": "5"
+                              }
+                            ],
+                            "partitionKey": false,
+                            "primaryKey": false,
+                            "type": "FloatVector"
+                          }
+                        ],
+                        "indexes": [
+                          {
+                            "fieldName": "vector",
+                            "indexName": "vector",
+                            "metricType": "COSINE"
+                          }
+                        ],
+                        "load": "LoadStateLoaded",
+                        "partitionsNum": 1,
+                        "properties": []
+                      }
+                    }
+                  },
+                  "4": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/collections/drop": {
+      "post": {
+        "summary": "Drop Collection",
+        "deprecated": false,
+        "description": "This operation drops the collection with the specified name and drops all data within.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除 Collection",
+            "description": "本接口可删除指定 Collection 及存放其中的所有数据。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionCommons"
+              },
+              "example": {
+                "collectionName": "my_collection"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/collections/truncate": {
+      "post": {
+        "summary": "Truncate Collection",
+        "deprecated": false,
+        "description": "This operation removes all data from the specified collection while keeping the collection schema.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "清空 Collection",
+            "description": "本接口可清空指定 Collection 中的所有数据，但保留 Collection 的 Schema 定义。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionCommons"
+              },
+              "example": {
+                "collectionName": "my_collection"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/collections/has": {
+      "post": {
+        "summary": "Has Collection",
+        "deprecated": false,
+        "description": "This operation checks whether a collection exists.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看 Collection 是否存在",
+            "description": "本接口可检查指定的 Collection 是否存在。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionCommons"
+              },
+              "example": {
+                "collectionName": "quick_setup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A boolean value indicates whether the specified collection exists.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回表示指定 Collection 是否存在的布尔值。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/HasCollectionResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "has": true
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/collections/get_stats": {
+      "post": {
+        "summary": "Get Collection Stats",
+        "deprecated": false,
+        "description": "This operation gets the number of entities in a collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "获取 Collection 统计信息",
+            "description": "本接口可以获取 Collection 中的 Entity 数量。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionCommons"
+              },
+              "example": {
+                "collectionName": "quick_setup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The number of entities in a collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "指定 Collection 中的 Entity 数量。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/GetCollectionStatsResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "rowCount": 0
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/collections/refresh_load": {
+      "post": {
+        "summary": "Refresh Load",
+        "deprecated": false,
+        "description": "This operaton refreshes the load of a collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "重新加载 Collection",
+            "description": "本操作可以重新加载 Collection。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "$ref": "#/components/schemas/CollectionCommons/properties/dbName"
+                  },
+                  "collectionName": {
+                    "$ref": "#/components/schemas/CollectionCommons/properties/collectionName"
+                  }
+                },
+                "required": [
+                  "collectionName"
+                ]
+              },
+              "example": {
+                "collectionName": "quick_setup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回空对象。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/collections/alter_properties": {
+      "post": {
+        "summary": "Alter Collection Properties",
+        "deprecated": false,
+        "description": "This operation alters the properties of a collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "修改 Collection 属性",
+            "description": "本操作可以修改 Collection 的属性。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlterCollectionPropertiesRequest"
+              },
+              "example": {
+                "collectionName": "test_collection",
+                "properties": {
+                  "mmap.enabled": true
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回空对象。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/collections/drop_properties": {
+      "post": {
+        "summary": "Drop Collection Properties",
+        "deprecated": false,
+        "description": "This operation drops the properties of a collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除 Collection 属性",
+            "description": "本操作可以删除 Collection 的属性。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DropCollectionPropertiesRequest"
+              },
+              "example": {
+                "collectionName": "test_collection",
+                "propertyKeys": [
+                  "mmap.enabled"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回空对象。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "cost": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/collections/fields/add": {
+      "post": {
+        "summary": "Add Collection Field",
+        "deprecated": false,
+        "description": "This operation adds a field to a collection without recreating the collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "添加 Collection 字段",
+            "description": "本操作可以在不重建 Collection 的情况下添加字段。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCollectionFieldRequest"
+              },
+              "example": {
+                "dbName": "test_db",
+                "collectionName": "test_collection",
+                "schema": {
+                  "fieldName": "new_field",
+                  "dataType": "DataType.VARCHAR",
+                  "nullable": true,
+                  "defaultValue": "default_value",
+                  "elementTypeParams": {
+                    "max_length": 255
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回空对象。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/collections/fields/alter_properties": {
+      "post": {
+        "summary": "Alter Field Properties",
+        "deprecated": false,
+        "description": "This operation alters the properties of a field in a collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "修改字段属性",
+            "description": "本操作可以修改 Collection 中字段的属性。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlterFieldPropertiesRequest"
+              },
+              "example": {
+                "collectionName": "test_collection",
+                "fieldName": "my_varchar",
+                "fieldParams": {
+                  "max_length": 100
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回空对象。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/collections/rename": {
+      "post": {
+        "summary": "Rename Collection",
+        "deprecated": false,
+        "description": "This operation renames an existing collection<include target=\"milvus\"> and optionally moves the collection to a new database</include>.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "重命名 Collection",
+            "description": "本接口重命名指定 Collection。<include target=\"milvus\">您还可将其移动到指定的数据库中。</include>"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RenameCollectionRequest"
+              },
+              "example": {
+                "collectionName": "test_collection",
+                "newCollectionName": "quick_setup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/collections/load": {
+      "post": {
+        "summary": "Load Collection",
+        "deprecated": false,
+        "description": "This operation loads the data of the current collection into memory. ",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "加载 Collection",
+            "description": "本接口可以将指定 Collection 的数据加载到内存中。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "$ref": "#/components/schemas/CollectionCommons/properties/dbName"
+                  },
+                  "collectionName": {
+                    "$ref": "#/components/schemas/CollectionCommons/properties/collectionName"
+                  }
+                },
+                "required": [
+                  "collectionName"
+                ]
+              },
+              "example": {
+                "collectionName": "quick_setup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/collections/release": {
+      "post": {
+        "summary": "Release Collection",
+        "deprecated": false,
+        "description": "This operation releases the data of the current collection from memory.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "释放 Collection",
+            "description": "本接口可以将指定 Collection 的数据从内存中释放。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "$ref": "#/components/schemas/CollectionCommons/properties/dbName"
+                  },
+                  "collectionName": {
+                    "$ref": "#/components/schemas/CollectionCommons/properties/collectionName"
+                  }
+                },
+                "required": [
+                  "collectionName"
+                ]
+              },
+              "example": {
+                "collectionName": "quick_setup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/collections/get_load_state": {
+      "post": {
+        "summary": "Get Collection Load State",
+        "deprecated": false,
+        "description": "This operation returns the load status of a specific collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看 Collection 加载状态",
+            "description": "本接口可以获取指定 Collection 的加载状态。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionLoadStateRequest"
+              },
+              "example": {
+                "collectionName": "quick_setup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A LoadState object that indicates the load status of the specified collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定 Collection 的加载状态。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/CollectionLoadStateResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "loadProgress": 100,
+                        "loadState": "LoadStateLoaded",
+                        "message": ""
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/collections/add_function": {
+      "post": {
+        "summary": "Add Function to Collection",
+        "deprecated": false,
+        "description": "This operation adds a function to the schema of an existing collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "向 Collection 添加 Function",
+            "description": "本接口将 Function 添加到现有 Collection 的 Schema 中。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "数据库名称。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the collection.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Collection 名称。"
+                      }
+                    }
+                  },
+                  "function": {
+                    "$ref": "#/components/schemas/FunctionSchema"
+                  }
+                },
+                "required": [
+                  "collectionName",
+                  "function"
+                ]
+              },
+              "example": {
+                "collectionName": "my_collection",
+                "function": {
+                  "name": "bm25_fn",
+                  "type": "FunctionType.BM25",
+                  "inputFieldNames": [
+                    "text"
+                  ],
+                  "outputFieldNames": [
+                    "sparse"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 800,
+                      "message": "not enough permission"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/collections/alter_function": {
+      "post": {
+        "summary": "Alter Function in Collection",
+        "deprecated": false,
+        "description": "This operation alters an existing function in the schema of a collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "修改 Collection 的 Function",
+            "description": "本接口修改 Collection Schema 中的现有 Function。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "数据库名称。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the collection.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Collection 名称。"
+                      }
+                    }
+                  },
+                  "functionName": {
+                    "type": "string",
+                    "description": "The name of the function to alter.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待修改的 Function 名称。"
+                      }
+                    }
+                  },
+                  "function": {
+                    "$ref": "#/components/schemas/FunctionSchema"
+                  }
+                },
+                "required": [
+                  "collectionName",
+                  "functionName",
+                  "function"
+                ]
+              },
+              "example": {
+                "collectionName": "my_collection",
+                "functionName": "bm25_fn",
+                "function": {
+                  "name": "bm25_fn",
+                  "type": "FunctionType.BM25",
+                  "inputFieldNames": [
+                    "text"
+                  ],
+                  "outputFieldNames": [
+                    "sparse"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 800,
+                      "message": "not enough permission"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/collections/drop_function": {
+      "post": {
+        "summary": "Drop Function from Collection",
+        "deprecated": false,
+        "description": "This operation drops a function from the schema of a collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "从 Collection 删除 Function",
+            "description": "本接口从 Collection Schema 中删除指定的 Function。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "数据库名称。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the collection.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Collection 名称。"
+                      }
+                    }
+                  },
+                  "FunctionName": {
+                    "type": "string",
+                    "description": "The name of the function to drop.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待删除的 Function 名称。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "collectionName",
+                  "FunctionName"
+                ]
+              },
+              "example": {
+                "collectionName": "my_collection",
+                "FunctionName": "bm25_fn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 800,
+                      "message": "not enough permission"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/common/run_analyzer": {
+      "post": {
+        "summary": "Run Analyzer",
+        "deprecated": false,
+        "description": "This operation runs an analyzer on the provided text and returns the tokenization result.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "运行分析器",
+            "description": "本接口对提供的文本运行分析器，并返回分词结果。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "数据库名称。"
+                      }
+                    }
+                  },
+                  "text": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "A list of text strings to analyze.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待分析的文本字符串列表。"
+                      }
+                    }
+                  },
+                  "analyzerParams": {
+                    "type": "string",
+                    "description": "The analyzer parameters as a JSON string.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "以 JSON 字符串形式表示的分析器参数。"
+                      }
+                    }
+                  },
+                  "withDetail": {
+                    "type": "boolean",
+                    "description": "Whether to return detailed token information.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "是否返回详细的词元信息。"
+                      }
+                    }
+                  },
+                  "withHash": {
+                    "type": "boolean",
+                    "description": "Whether to include hash values in the result.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "是否在结果中包含哈希值。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the collection whose field analyzer to use.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "使用其字段分析器的 Collection 名称。"
+                      }
+                    }
+                  },
+                  "fieldName": {
+                    "type": "string",
+                    "description": "The name of the field whose analyzer to use.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "使用其分析器的字段名称。"
+                      }
+                    }
+                  },
+                  "analyzerNames": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "A list of analyzer names to use.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待使用的分析器名称列表。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              },
+              "example": {
+                "text": [
+                  "Hello world"
+                ],
+                "analyzerParams": "{\"type\": \"standard\"}",
+                "withDetail": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer"
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "tokens": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        {
+                          "tokens": [
+                            "hello",
+                            "world"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 800,
+                      "message": "not enough permission"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/jobs/external_collection/refresh": {
+      "post": {
+        "summary": "Refresh External Collection",
+        "deprecated": false,
+        "description": "This operation triggers an asynchronous data refresh job for an existing external collection, re-syncing the collection's data from its underlying external source. `externalSource` and `externalSpec` must be both provided or both omitted; when both are omitted, the collection's previously persisted source and spec are reused.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "刷新外部 Collection",
+            "description": "本接口为已存在的外部 Collection 触发一次异步刷新任务，从底层外部数据源重新同步数据。`externalSource` 与 `externalSpec` 必须同时提供或同时省略；同时省略时，将复用此前已持久化的 source 与 spec 配置。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshExternalCollectionRequest"
+              },
+              "examples": {
+                "1": {
+                  "summary": "Refresh from an S3 source",
+                  "x-include-target": [
+                    "milvus"
+                  ],
+                  "value": {
+                    "dbName": "default",
+                    "collectionName": "ext_books"
+                  }
+                },
+                "2": {
+                  "summary": "Refresh from a Zilliz Cloud volume",
+                  "x-include-target": [
+                    "zilliz"
+                  ],
+                  "value": {
+                    "dbName": "default",
+                    "collectionName": "ext_books"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the ID of the newly created refresh job.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回新创建的刷新任务的 ID。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "example": 0,
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload carrying the new refresh job's identifier.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，包含新建刷新任务的 ID。"
+                            }
+                          },
+                          "properties": {
+                            "jobId": {
+                              "type": "integer",
+                              "format": "int64",
+                              "description": "ID of the newly created refresh job. Use this value to query progress via the describe endpoint.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "新建刷新任务的 ID。请使用该值通过 describe 接口查询任务进度。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "jobId": 449503829274509300
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "x-include-target": [
+                      "milvus"
+                    ],
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "x-include-target": [
+                      "zilliz"
+                    ],
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/jobs/external_collection/describe": {
+      "post": {
+        "summary": "Describe External Collection Refresh Job",
+        "deprecated": false,
+        "description": "This operation returns the current state and progress of a single external-collection refresh job, identified by `jobId`.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看外部 Collection 刷新任务",
+            "description": "本接口根据 `jobId` 返回单个外部 Collection 刷新任务的当前状态和进度信息。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshExternalCollectionProgressRequest"
+              },
+              "example": {
+                "jobId": 449503829274509300
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the state and progress of the specified refresh job.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定刷新任务的状态和进度信息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "example": 0,
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload describing the refresh job.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，描述该刷新任务的详情。"
+                            }
+                          },
+                          "properties": {
+                            "jobId": {
+                              "type": "integer",
+                              "format": "int64",
+                              "description": "ID of the refresh job.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "刷新任务的 ID。"
+                                }
+                              }
+                            },
+                            "collectionName": {
+                              "type": "string",
+                              "description": "Name of the external collection associated with this refresh job.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "该刷新任务关联的外部 Collection 名称。"
+                                }
+                              }
+                            },
+                            "state": {
+                              "type": "string",
+                              "description": "Current state of the refresh job.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "刷新任务的当前状态。"
+                                }
+                              },
+                              "enum": [
+                                "RefreshPending",
+                                "RefreshInProgress",
+                                "RefreshCompleted",
+                                "RefreshFailed"
+                              ]
+                            },
+                            "progress": {
+                              "type": "integer",
+                              "description": "Refresh progress in percentage (0-100).",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "刷新进度百分比(0-100)。"
+                                }
+                              }
+                            },
+                            "externalSource": {
+                              "type": "string",
+                              "description": "JSON-encoded source configuration this job is refreshing from. <include target=\"milvus\">An object url in an S3 bucket applies.</include><include target=\"zilliz\">An object url in a Zilliz Cloud volume applies.</include>",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "本任务所使用的外部数据源 JSON 配置。<include target=\"milvus\">S3 存储桶中的对象 URL 适用。</include><include target=\"zilliz\">Zilliz Cloud Volume 中的对象 URL 适用。</include>"
+                                }
+                              }
+                            },
+                            "startTime": {
+                              "type": "integer",
+                              "format": "int64",
+                              "description": "Unix timestamp at which the refresh job started.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "刷新任务的开始时间(Unix 时间戳)。"
+                                }
+                              }
+                            },
+                            "endTime": {
+                              "type": "integer",
+                              "format": "int64",
+                              "description": "Unix timestamp at which the refresh job ended; `0` when the job is still running.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "刷新任务的结束时间(Unix 时间戳)；任务仍在进行中时为 `0`。"
+                                }
+                              }
+                            },
+                            "reason": {
+                              "type": "string",
+                              "description": "Failure reason. Present only when `state` is `RefreshFailed`.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "失败原因。仅当 `state` 为 `RefreshFailed` 时返回。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "milvus"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "jobId": 449503829274509300,
+                        "collectionName": "ext_books",
+                        "state": "RefreshInProgress",
+                        "progress": 42,
+                        "externalSource": "{\"type\":\"s3\",\"path\":\"s3://my-bucket/books/\"}",
+                        "startTime": 1712832000000,
+                        "endTime": 0
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "zilliz"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "jobId": 449503829274509300,
+                        "collectionName": "ext_books",
+                        "state": "RefreshInProgress",
+                        "progress": 42,
+                        "externalSource": "{\"type\":\"volume\",\"path\":\"volume://my-volume/books\"}",
+                        "startTime": 1712832000000,
+                        "endTime": 0
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "x-include-target": [
+                      "milvus"
+                    ],
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  },
+                  "4": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "x-include-target": [
+                      "zilliz"
+                    ],
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/jobs/external_collection/list": {
+      "post": {
+        "summary": "List External Collection Refresh Jobs",
+        "deprecated": false,
+        "description": "This operation lists external-collection refresh jobs. When `collectionName` is omitted or empty, returns refresh jobs across all external collections in the target database.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "列出外部 Collection 刷新任务",
+            "description": "本接口列出外部 Collection 的刷新任务。当 `collectionName` 为空或省略时，返回目标数据库下所有外部 Collection 的刷新任务。"
+          }
+        },
+        "tags": [
+          "Collection Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "Name of the database to list refresh jobs from.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用于列出刷新任务的数据库名称。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "Name of the external collection. Leave empty or omit to list refresh jobs for all external collections in the database.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "外部 Collection 名称。留空或省略时，将返回数据库下所有外部 Collection 的刷新任务。"
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "dbName": "default",
+                "collectionName": "ext_books"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the list of refresh jobs.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回刷新任务列表。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "example": 0,
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload that wraps the list of refresh jobs.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，包含刷新任务列表。"
+                            }
+                          },
+                          "properties": {
+                            "records": {
+                              "type": "array",
+                              "description": "List of refresh jobs in detail.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "刷新任务详情列表。"
+                                }
+                              },
+                              "items": {
+                                "type": "object",
+                                "description": "A refresh job in detail.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "单个刷新任务的详细信息。"
+                                  }
+                                },
+                                "properties": {
+                                  "jobId": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "description": "ID of the refresh job.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "刷新任务的 ID。"
+                                      }
+                                    }
+                                  },
+                                  "collectionName": {
+                                    "type": "string",
+                                    "description": "Name of the external collection associated with this refresh job.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "该刷新任务关联的外部 Collection 名称。"
+                                      }
+                                    }
+                                  },
+                                  "state": {
+                                    "type": "string",
+                                    "description": "Current state of the refresh job.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "刷新任务的当前状态。"
+                                      }
+                                    },
+                                    "enum": [
+                                      "RefreshPending",
+                                      "RefreshInProgress",
+                                      "RefreshCompleted",
+                                      "RefreshFailed"
+                                    ]
+                                  },
+                                  "progress": {
+                                    "type": "integer",
+                                    "description": "Refresh progress in percentage (0-100).",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "刷新进度百分比(0-100)。"
+                                      }
+                                    }
+                                  },
+                                  "externalSource": {
+                                    "type": "string",
+                                    "description": "JSON-encoded source configuration this job is refreshing from. <include target=\"milvus\">An object url in an S3 bucket applies.</include><include target=\"zilliz\">An object url in a Zilliz Cloud volume applies.</include>",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "本任务所使用的外部数据源 JSON 配置。<include target=\"milvus\">S3 存储桶中的对象 URL 适用。</include><include target=\"zilliz\">Zilliz Cloud Volume 中的对象 URL 适用。</include>"
+                                      }
+                                    }
+                                  },
+                                  "startTime": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "description": "Unix timestamp at which the refresh job started.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "刷新任务的开始时间(Unix 时间戳)。"
+                                      }
+                                    }
+                                  },
+                                  "endTime": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "description": "Unix timestamp at which the refresh job ended; `0` when the job is still running.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "刷新任务的结束时间(Unix 时间戳)；任务仍在进行中时为 `0`。"
+                                      }
+                                    }
+                                  },
+                                  "reason": {
+                                    "type": "string",
+                                    "description": "Failure reason. Present only when `state` is `RefreshFailed`.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "失败原因。仅当 `state` 为 `RefreshFailed` 时返回。"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "milvus"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "records": [
+                          {
+                            "jobId": 449503829274509300,
+                            "collectionName": "ext_books",
+                            "state": "RefreshCompleted",
+                            "progress": 100,
+                            "externalSource": "{\"type\":\"s3\",\"path\":\"s3://my-bucket/books/\"}",
+                            "startTime": 1712832000000,
+                            "endTime": 1712832600000
+                          },
+                          {
+                            "jobId": 449503829274509300,
+                            "collectionName": "ext_movies",
+                            "state": "RefreshInProgress",
+                            "progress": 42,
+                            "externalSource": "{\"type\":\"s3\",\"path\":\"s3://my-bucket/movies/\"}",
+                            "startTime": 1712833000000,
+                            "endTime": 0
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "zilliz"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "records": [
+                          {
+                            "jobId": 449503829274509300,
+                            "collectionName": "ext_books",
+                            "state": "RefreshCompleted",
+                            "progress": 100,
+                            "externalSource": "{\"type\":\"volume\",\"path\":\"volume://my-volume/books\"}",
+                            "startTime": 1712832000000,
+                            "endTime": 1712832600000
+                          },
+                          {
+                            "jobId": 449503829274509300,
+                            "collectionName": "ext_movies",
+                            "state": "RefreshInProgress",
+                            "progress": 42,
+                            "externalSource": "{\"type\":\"volume\",\"path\":\"volume://my-volume/movies\"}",
+                            "startTime": 1712833000000,
+                            "endTime": 0
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "x-include-target": [
+                      "milvus"
+                    ],
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  },
+                  "4": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "x-include-target": [
+                      "zilliz"
+                    ],
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "x-base-urls": {
+      "ZillizVectorV2": [
+        {
+          "key": "cluster",
+          "label": "Cluster Endpoint",
+          "url": "https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530",
+          "prompt": "Use the cluster endpoint if you are using serving clusters.\n<ul><li><p><b>Free & Serverless</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>",
+          "x-i18n": {
+            "zh-CN": {
+              "label": "集群端点",
+              "prompt": "如果您使用的是服务集群，请使用集群端点。\n<ul><li><p><b>Free 与 Serverless 版</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated 版</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>"
+            }
+          },
+          "shell": "export CLUSTER_ENDPOINT=\"https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530\""
+        },
+        {
+          "key": "on-demand-compute",
+          "label": "Project Endpoint (On-Demand)",
+          "url": "https://{project-id}.{region}.api.zillizcloud.com",
+          "prompt": "<p>Use the on-demand compute endpoint if you are using on-demand clusters.</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>",
+          "x-i18n": {
+            "zh-CN": {
+              "label": "项目端点（按需）",
+              "prompt": "<p>如果您使用的是按需集群，请使用项目端点（按需）。</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>"
+            }
+          },
+          "shell": "export PROJECT_ENDPOINT=\"https://{project-id}.{region}.api.zillizcloud.com\""
+        }
+      ]
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "DropCollectionPropertiesRequest": {
+        "type": "object",
+        "properties": {
+          "dbName": {
+            "$ref": "#/components/schemas/CollectionCommons/properties/dbName"
+          },
+          "collectionName": {
+            "$ref": "#/components/schemas/CollectionCommons/properties/collectionName"
+          },
+          "propertyKeys": {
+            "type": "array",
+            "description": "The names of the properties to drop.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待删除的属性名称列表。"
+              }
+            },
+            "items": {
+              "type": "string",
+              "description": "The name of the property to drop.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "待删除的属性名称。"
+                }
+              },
+              "enum": [
+                "collection.ttl.seconds",
+                "collection.autocompaction.enabled",
+                "collection.description",
+                "collection.on.truncating",
+                "collection.function.allowInsertNonBM25FunctionOutputs",
+                "collection.insertRate.max.mb",
+                "collection.insertRate.min.mb",
+                "collection.deleteRate.max.mb",
+                "collection.deleteRate.min.mb",
+                "collection.bulkLoadRate.max.mb",
+                "collection.bulkLoadRate.min.mb",
+                "collection.queryRate.max.qps",
+                "collection.queryRate.min.qps",
+                "collection.searchRate.max.vps",
+                "collection.searchRate.min.vps",
+                "collection.diskProtection.diskQuota.mb",
+                "collection.replica.number",
+                "collection.resource_groups",
+                "mmap.enabled",
+                "partitionkey.isolation",
+                "ttl_field",
+                "warmup.scalarField",
+                "warmup.scalarIndex",
+                "warmup.vectorField",
+                "warmup.vectorIndex"
+              ]
+            }
+          }
+        },
+        "required": [
+          "collectionName",
+          "propertyKeys"
+        ]
+      },
+      "DescribeCollectionSuccessResponse": {
+        "x-tab-label": "success",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Response code.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应码。"
+              }
+            },
+            "type": "integer",
+            "example": 0
+          },
+          "data": {
+            "type": "object",
+            "description": "Response payload, which carries detailed information about the specified collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应负载，包含了指定 Collection 的详细信息。"
+              }
+            },
+            "properties": {
+              "aliases": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "An alias of the collection.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "Collection 的别名。"
+                    }
+                  }
+                },
+                "description": "A list aliases assigned to the collection.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "已分配给 Collection 的别名列表。"
+                  }
+                }
+              },
+              "autoID": {
+                "type": "boolean",
+                "description": "Whether the primary key of this collection automatically increments.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "当前 Collection 的主键是否自动增长。"
+                  }
+                }
+              },
+              "collectionID": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The ID assigned to the collection upon creation.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "创建当前 Collection 时分配的 ID。"
+                  }
+                }
+              },
+              "collectionName": {
+                "type": "string",
+                "description": "The name of the current collection.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "当前 Collection 的名称。"
+                  }
+                }
+              },
+              "consistencyLevel": {
+                "type": "string",
+                "description": "The consistency level of the current collection.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "当前 Collection 的一致性级别。"
+                  }
+                },
+                "enum": [
+                  "Strong",
+                  "Bounded",
+                  "<include target=\"milvus\">Session</include>",
+                  "Eventual"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "description": "The description of the collection.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "当前 Collection 的描述。"
+                  }
+                }
+              },
+              "enableDynamicField": {
+                "type": "boolean",
+                "description": "Whether the reserved dynamic field named $meta is enabled to save non-schema-defined fields and their values in key-value pairs.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "是否已启用保留的动态字段，用于以键值对的形式存放 Schema 中未定义的字段。"
+                  }
+                }
+              },
+              "externalSource": {
+                "type": "string",
+                "description": "The JSON-encoded external source configuration if this collection is an external collection. <include target=\"milvus\">An object url in an S3 bucket applies.</include><include target=\"zilliz\">An object url in a Zilliz Cloud volume applies.</include>",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "如果当前 Collection 是外部 Collection，则返回 JSON 编码的外部数据源配置。<include target=\"milvus\">S3 存储桶中的对象 URL 适用。</include><include target=\"zilliz\">Zilliz Cloud Volume 中的对象 URL 适用。</include>"
+                  }
+                }
+              },
+              "externalSpec": {
+                "type": "string",
+                "description": "The JSON-encoded external specification if this collection is an external collection. The content of this field may vary depending on the connector type and the source data format, which may include, but not limited to, file format, field mapping, etc.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "如果当前 Collection 是外部 Collection，则返回 JSON 编码的外部规范。该字段的内容可能因连接器类型和源数据格式而异，可能包括但不限于文件格式、字段映射等。"
+                  }
+                }
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/FieldDetails"
+                },
+                "description": "The collection fields in an array",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "当前 Collection 的字段列表。"
+                  }
+                }
+              },
+              "functions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/FunctionDetails"
+                },
+                "description": "The collection functions in an array",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "当前 Collection 的函数列表。"
+                  }
+                }
+              },
+              "indexes": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IndexDetails"
+                },
+                "description": "The created indexes in an array",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "索引列表。"
+                  }
+                }
+              },
+              "load": {
+                "type": "string",
+                "description": "The load status of the current collection.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "当前 Collection 的载入状态。"
+                  }
+                }
+              },
+              "partitionsNum": {
+                "type": "integer",
+                "description": "The number of partitions in the collection.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "当前 Collection 的 Partition 数量。"
+                  }
+                }
+              },
+              "properties": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "description": "The property name",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "属性名称。"
+                        }
+                      }
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "The property value.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "属性取值。"
+                        }
+                      }
+                    }
+                  },
+                  "description": "A collection property object in a key-value pair.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "以键值对形式呈现的 Collection 属性。"
+                    }
+                  }
+                },
+                "description": "Extra collection properties in an array.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "当前 Collection 的额外属性。"
+                  }
+                }
+              },
+              "shardsNum": {
+                "type": "integer",
+                "description": "The number of shards created along with the collection.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "随当前 Collection 创建的 Shard 数量。"
+                  }
+                },
+                "x-include-target": [
+                  "milvus"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "ErrorResponse": {
+        "x-tab-label": "failure",
+        "description": "Returns an error message.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "返回错误消息。"
+          }
+        },
+        "x-i18n-langs": [
+          "zh-CN"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Response code.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应码。"
+              }
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "错误描述。"
+              }
+            }
+          }
+        }
+      },
+      "EmptyResponse": {
+        "x-tab-label": "success",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Response code.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应码。"
+              }
+            }
+          },
+          "data": {
+            "type": "object",
+            "properties": {}
+          }
+        }
+      },
+      "DescribeCollectionResponse": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/DescribeCollectionSuccessResponse"
+          },
+          {
+            "$ref": "#/components/schemas/ErrorResponse"
+          }
+        ]
+      },
+      "QuickSetupCollection": {
+        "x-tab-label": "quick setup",
+        "type": "object",
+        "properties": {
+          "dbName": {
+            "type": "string",
+            "description": "The name of the database.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "数据库名称。"
+              }
+            }
+          },
+          "collectionName": {
+            "type": "string",
+            "description": "The name of the collection to create.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待创建 Collection 的名称。"
+              }
+            }
+          },
+          "dimension": {
+            "type": "integer",
+            "description": "The number of dimensions a vector value should have.\nThis is required if **dtype** of this field is set to **DataType.FLOAT\\_VECTOR** or **DataType.Binary\\_VECTOR**.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "向量值的维度数。\n若该字段的 **dtype** 为 **DataType.FLOAT\\_VECTOR** 或 **DataType.Binary\\_VECTOR**，则该字段为必填项。"
+              }
+            }
+          },
+          "metricType": {
+            "type": "string",
+            "description": "The metric type applied to this operation.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Collection 的度量类型。"
+              }
+            },
+            "enum": [
+              "L2",
+              "IP",
+              "COSINE",
+              "JACCARD",
+              "HAMMING"
+            ],
+            "default": "COSINE"
+          },
+          "idType": {
+            "type": "string",
+            "description": "The data type of the primary field. This parameter is designed for the quick-setup of a collection and will be ignored if __schema__ is defined.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "主键字段数据类型。该参数为快速创建 Collection 而设计，若您已定义 __schema__ 字段，则该参数将被忽略。"
+              }
+            },
+            "enum": [
+              "VarChar",
+              "Int64"
+            ]
+          },
+          "autoID": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether the primary field automatically increments. This parameter is designed for the quick-setup of a collection and will be ignored if __schema__ is defined.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "主键是否自动增长。该参数为快速创建 Collection 而设计，若您已定义 __schema__ 字段，则该参数将被忽略。"
+              }
+            }
+          },
+          "primaryFieldName": {
+            "type": "string",
+            "description": "The name of the primary field. This parameter is designed for the quick-setup of a collection and will be ignored if __schema__ is defined.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "主键字段名称。该参数为快速创建 Collection 而设计，若您已定义 __schema__ 字段，则该参数将被忽略。"
+              }
+            }
+          },
+          "vectorFieldName": {
+            "type": "string",
+            "description": "The name of the vector field. This parameter is designed for the quick-setup of a collection and will be ignored if __schema__ is defined.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "向量字段名称。该参数为快速创建 Collection 而设计，若您已定义 __schema__ 字段，则该参数将被忽略。"
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the current collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Collection 的描述信息。"
+              }
+            }
+          },
+          "params": {
+            "$ref": "#/components/schemas/QuickCollectionParams"
+          }
+        },
+        "required": [
+          "collectionName",
+          "dimension"
+        ]
+      },
+      "QuickCollectionParams": {
+        "description": "Extra parameters for the collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "创建 Collection 的附加参数。"
+          }
+        },
+        "type": "object",
+        "properties": {
+          "max_length": {
+            "type": "integer",
+            "description": "The maximum number of bytes allowed in the primary field. This parameter is available only when the primary field is a string field.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Collection 允许的最大字节数。如果当前 Collection 的主键字段是字符串类型，则该参数可用。"
+              }
+            }
+          },
+          "enableDynamicField": {
+            "type": "boolean",
+            "description": "Whether to enable the dynamic field feature. ",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否启用动态字段功能。"
+              }
+            },
+            "default": true
+          },
+          "shardsNum": {
+            "type": "integer",
+            "description": "The number of shards to create along with the current collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "随当前 Collection 创建的 Shard 数量。"
+              }
+            },
+            "x-include-target": [
+              "milvus"
+            ]
+          },
+          "consistencyLevel": {
+            "type": "string",
+            "description": "The consistency level of the collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Collection 的一致性级别。"
+              }
+            },
+            "enum": [
+              "Strong",
+              "Eventually",
+              "<include target=\"milvus\">Session</include>",
+              "Bounded"
+            ],
+            "default": "Bounded"
+          },
+          "ttlSeconds": {
+            "type": "integer",
+            "description": "The time-to-live (TTL) period of the collection. If set, the collection is to be dropped once the period ends.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Collection 的 TTL 时间。如果设置，则在 TTL 时间结束后，该 Collection 将被删除。"
+              }
+            }
+          },
+          "mmap.enabled": {
+            "type": "boolean",
+            "description": "Specifies whether to enable memory mapping for the collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否为当前 Collection 启用内存映射功能。"
+              }
+            }
+          },
+          "ttlField": {
+            "type": "string",
+            "description": "The name of the field to use for TTL-based expiration.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "用于 TTL 过期策略的字段名称。"
+              }
+            }
+          },
+          "warmup.scalarField": {
+            "type": "boolean",
+            "description": "Whether to preload scalar field data into memory on load.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否在加载时将标量字段数据预加载到内存中。"
+              }
+            }
+          },
+          "warmup.scalarIndex": {
+            "type": "boolean",
+            "description": "Whether to preload scalar index data into memory on load.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否在加载时将标量索引数据预加载到内存中。"
+              }
+            }
+          },
+          "warmup.vectorField": {
+            "type": "boolean",
+            "description": "Whether to preload vector field data into memory on load.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否在加载时将向量字段数据预加载到内存中。"
+              }
+            }
+          },
+          "warmup.vectorIndex": {
+            "type": "boolean",
+            "description": "Whether to preload vector index data into memory on load.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否在加载时将向量索引数据预加载到内存中。"
+              }
+            }
+          }
+        }
+      },
+      "CollectionSchema": {
+        "type": "object",
+        "description": "The schema is responsible for organizing data in the target collection. A valid schema should have multiple fields, which must include a primary key, a vector field, and several scalar fields.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "Schema 决定了 Collection 中数据的组织方式。一个有效的 Schema 应包含多个字段，其中必须包含主键字段、向量字段以及多个标量字段。"
+          }
+        },
+        "properties": {
+          "autoID": {
+            "type": "boolean",
+            "description": "Whether allows the primary field to automatically increment. Setting this to True makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors. Set this parameter in the field with is_primary set to True.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否允许主键字段自动增长。将该参数设置为 `True` 则主键字段将自动增长。在这种情况下，请不要在插入数据时包含主键字段，以避免错误。如果当前字段的 `is_primary` 参数设置为 `True`，则本参数为必填项。"
+              }
+            }
+          },
+          "enableDynamicField": {
+            "type": "boolean",
+            "description": "Whether allows to use the reserved __$meta__ field to hold non-schema-defined fields in key-value pairs.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否允许使用保留字段 __$meta__ 来保存 Schema 中未定义的字段。"
+              }
+            }
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldSchema"
+            },
+            "description": "A list of field objects.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "字段列表。"
+              }
+            }
+          },
+          "functions": {
+            "type": "array",
+            "description": "A list of functions.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "一个函数列表。"
+              }
+            },
+            "items": {
+              "$ref": "#/components/schemas/FunctionSchema"
+            }
+          },
+          "externalSource": {
+            "type": "string",
+            "description": "The external data source identifier (e.g., \"mysql\"). Required when creating an external collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "外部数据源标识符（例如 \"mysql\"）。创建外部集合时必填。"
+              }
+            }
+          },
+          "externalSpec": {
+            "type": "string",
+            "description": "A JSON-encoded string describing the connection parameters for the external source. Required when creating an external collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "描述外部数据源连接参数的 JSON 字符串。创建外部集合时必填。"
+              }
+            }
+          }
+        }
+      },
+      "CustomSetupCollection": {
+        "x-tab-label": "custom setup",
+        "type": "object",
+        "properties": {
+          "dbName": {
+            "type": "string",
+            "description": "The name of the database.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "数据库名称。"
+              }
+            }
+          },
+          "collectionName": {
+            "type": "string",
+            "description": "The name of the collection to create.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待创建 Collection 的名称。"
+              }
+            }
+          },
+          "schema": {
+            "description": "The schema is responsible for organizing data in the target collection. A valid schema should have multiple fields, which must include a primary key, a vector field, and several scalar fields. Setting this parameter means that `dimension`, `idType`, `autoID`, `primaryFieldName`, and `vectorFieldName` will be ignored.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Schema 决定了 Collection 中数据的组织方式。一个有效的 Schema 应包含多个字段，其中必须包含主键字段、向量字段以及多个标量字段。设置本参数时，`dimension`、 `idType`、`autoID`、`primaryFieldName`、`vectorFieldName` 等参数将被忽略。"
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CollectionSchema"
+              }
+            ]
+          },
+          "indexParams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IndexParams"
+            },
+            "description": "The parameters that apply to the index-building process.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "索引构建所需相关参数。"
+              }
+            }
+          },
+          "params": {
+            "$ref": "#/components/schemas/CustomCollectionParams"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the current collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Collection 的描述信息。"
+              }
+            }
+          }
+        }
+      },
+      "ExternalSetupCollection": {
+        "x-tab-label": "external setup",
+        "type": "object",
+        "properties": {
+          "dbName": {
+            "type": "string",
+            "description": "The name of the database.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "数据库名称。"
+              }
+            }
+          },
+          "collectionName": {
+            "type": "string",
+            "description": "The name of the collection to create.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待创建 Collection 的名称。"
+              }
+            }
+          },
+          "schema": {
+            "description": "The schema for an external collection. Must include fields with externalField mappings, plus externalSource and externalSpec.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "外部集合的 Schema。必须包含带有 externalField 映射的字段，以及 externalSource 和 externalSpec。"
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CollectionSchema"
+              }
+            ],
+            "required": [
+              "externalSource",
+              "externalSpec"
+            ]
+          },
+          "indexParams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IndexParams"
+            },
+            "description": "The parameters that apply to the index-building process.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "索引构建所需相关参数。"
+              }
+            }
+          },
+          "params": {
+            "$ref": "#/components/schemas/CustomCollectionParams"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the current collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Collection 的描述信息。"
+              }
+            }
+          }
+        }
+      },
+      "CustomCollectionParams": {
+        "description": "Extra parameters for the collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "创建 Collection 的附加参数。"
+          }
+        },
+        "type": "object",
+        "properties": {
+          "shardsNum": {
+            "type": "integer",
+            "description": "The number of shards to create along with the current collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "随当前 Collection 创建的 Shard 数量。"
+              }
+            },
+            "x-include-target": [
+              "milvus"
+            ]
+          },
+          "consistencyLevel": {
+            "type": "string",
+            "description": "The consistency level of the collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Collection 的一致性级别。"
+              }
+            },
+            "enum": [
+              "Strong",
+              "Eventually",
+              "<include target=\"milvus\">Session</include>",
+              "Bounded"
+            ],
+            "default": "Bounded"
+          },
+          "partitionsNum": {
+            "type": "integer",
+            "description": "The number of partitions to create along with the current collection. This parameter is mandatory if one field of the collection has been designated as the partition key.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "随当前 Collection 创建的 Partition 数量。如果当前 Collection 中有指定为 Partition Key 的字段，则该参数为必填项。"
+              }
+            }
+          },
+          "ttlSeconds": {
+            "type": "integer",
+            "description": "The time-to-live (TTL) period of the collection. If set, the collection is to be dropped once the period ends.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Collection 的 TTL 时间。如果设置，则在 TTL 时间结束后，该 Collection 将被删除。"
+              }
+            }
+          },
+          "partitionKeyIsolation": {
+            "type": "boolean",
+            "description": "Specifies whether to enable partition key isolation for the collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否为当前 Collection 启用 Partition Key 隔离功能。"
+              }
+            },
+            "default": false
+          },
+          "mmap.enabled": {
+            "type": "boolean",
+            "description": "Specifies whether to enable memory mapping for the collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否为当前 Collection 启用内存映射功能。"
+              }
+            }
+          },
+          "ttlField": {
+            "type": "string",
+            "description": "The name of the field to use for TTL-based expiration.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "用于 TTL 过期策略的字段名称。"
+              }
+            }
+          },
+          "warmup.scalarField": {
+            "type": "boolean",
+            "description": "Whether to preload scalar field data into memory on load.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否在加载时将标量字段数据预加载到内存中。"
+              }
+            }
+          },
+          "warmup.scalarIndex": {
+            "type": "boolean",
+            "description": "Whether to preload scalar index data into memory on load.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否在加载时将标量索引数据预加载到内存中。"
+              }
+            }
+          },
+          "warmup.vectorField": {
+            "type": "boolean",
+            "description": "Whether to preload vector field data into memory on load.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否在加载时将向量字段数据预加载到内存中。"
+              }
+            }
+          },
+          "warmup.vectorIndex": {
+            "type": "boolean",
+            "description": "Whether to preload vector index data into memory on load.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否在加载时将向量索引数据预加载到内存中。"
+              }
+            }
+          }
+        }
+      },
+      "CreateCollectionRequest": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/QuickSetupCollection"
+          },
+          {
+            "$ref": "#/components/schemas/CustomSetupCollection"
+          },
+          {
+            "$ref": "#/components/schemas/ExternalSetupCollection"
+          }
+        ]
+      },
+      "CollectionAlterProperties": {
+        "type": "object",
+        "description": "The collection properties to alter. Keys must be actual Milvus property names.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "待修改的 Collection 属性。键名必须为实际的 Milvus 属性名称。"
+          }
+        },
+        "properties": {
+          "collection.ttl.seconds": {
+            "type": "integer",
+            "description": "The time-to-live (TTL) period of the collection in seconds.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Collection 的 TTL 时间，单位为秒。"
+              }
+            }
+          },
+          "collection.autocompaction.enabled": {
+            "type": "boolean",
+            "description": "Whether to enable automatic compaction for the collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否为当前 Collection 启用自动 Compaction 功能。"
+              }
+            }
+          },
+          "collection.description": {
+            "type": "string",
+            "description": "The description of the collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Collection 的描述信息。"
+              }
+            }
+          },
+          "collection.on.truncating": {
+            "type": "boolean",
+            "description": "Whether the collection is currently truncating. When true, compaction is forbidden.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Collection 是否正在执行截断操作。为 true 时禁止执行 Compaction。"
+              }
+            }
+          },
+          "collection.function.allowInsertNonBM25FunctionOutputs": {
+            "type": "boolean",
+            "description": "Whether to allow inserting non-BM25 function outputs.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否允许插入非 BM25 函数的输出。"
+              }
+            }
+          },
+          "collection.insertRate.max.mb": {
+            "type": "number",
+            "description": "The maximum insert rate limit in MB/s.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "最大插入速率限制，单位为 MB/s。"
+              }
+            }
+          },
+          "collection.insertRate.min.mb": {
+            "type": "number",
+            "description": "The minimum insert rate limit in MB/s.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "最小插入速率限制，单位为 MB/s。"
+              }
+            }
+          },
+          "collection.deleteRate.max.mb": {
+            "type": "number",
+            "description": "The maximum delete rate limit in MB/s.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "最大删除速率限制，单位为 MB/s。"
+              }
+            }
+          },
+          "collection.deleteRate.min.mb": {
+            "type": "number",
+            "description": "The minimum delete rate limit in MB/s.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "最小删除速率限制，单位为 MB/s。"
+              }
+            }
+          },
+          "collection.bulkLoadRate.max.mb": {
+            "type": "number",
+            "description": "The maximum bulk load rate limit in MB/s.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "最大批量加载速率限制，单位为 MB/s。"
+              }
+            }
+          },
+          "collection.bulkLoadRate.min.mb": {
+            "type": "number",
+            "description": "The minimum bulk load rate limit in MB/s.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "最小批量加载速率限制，单位为 MB/s。"
+              }
+            }
+          },
+          "collection.queryRate.max.qps": {
+            "type": "number",
+            "description": "The maximum query rate limit in QPS.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "最大查询速率限制，单位为 QPS。"
+              }
+            }
+          },
+          "collection.queryRate.min.qps": {
+            "type": "number",
+            "description": "The minimum query rate limit in QPS.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "最小查询速率限制，单位为 QPS。"
+              }
+            }
+          },
+          "collection.searchRate.max.vps": {
+            "type": "number",
+            "description": "The maximum search rate limit in VPS.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "最大搜索速率限制，单位为 VPS。"
+              }
+            }
+          },
+          "collection.searchRate.min.vps": {
+            "type": "number",
+            "description": "The minimum search rate limit in VPS.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "最小搜索速率限制，单位为 VPS。"
+              }
+            }
+          },
+          "collection.diskProtection.diskQuota.mb": {
+            "type": "number",
+            "description": "The maximum disk quota for the collection in MB.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Collection 的磁盘配额上限，单位为 MB。"
+              }
+            }
+          },
+          "collection.replica.number": {
+            "type": "integer",
+            "description": "The number of replicas for the collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Collection 的副本数量。"
+              }
+            }
+          },
+          "collection.resource_groups": {
+            "type": "string",
+            "description": "A comma-separated list of resource group names associated with the collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "与当前 Collection 关联的资源组名称列表，以逗号分隔。"
+              }
+            }
+          },
+          "mmap.enabled": {
+            "type": "boolean",
+            "description": "Whether to enable memory mapping for the collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否为当前 Collection 启用内存映射功能。"
+              }
+            }
+          },
+          "partitionkey.isolation": {
+            "type": "boolean",
+            "description": "Whether to enable partition key isolation for the collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否为当前 Collection 启用 Partition Key 隔离功能。"
+              }
+            }
+          },
+          "ttl_field": {
+            "type": "string",
+            "description": "The name of the field to use for TTL-based expiration.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "用于 TTL 过期策略的字段名称。"
+              }
+            }
+          },
+          "warmup.scalarField": {
+            "type": "boolean",
+            "description": "Whether to preload scalar field data into memory on load.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否在加载时将标量字段数据预加载到内存中。"
+              }
+            }
+          },
+          "warmup.scalarIndex": {
+            "type": "boolean",
+            "description": "Whether to preload scalar index data into memory on load.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否在加载时将标量索引数据预加载到内存中。"
+              }
+            }
+          },
+          "warmup.vectorField": {
+            "type": "boolean",
+            "description": "Whether to preload vector field data into memory on load.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否在加载时将向量字段数据预加载到内存中。"
+              }
+            }
+          },
+          "warmup.vectorIndex": {
+            "type": "boolean",
+            "description": "Whether to preload vector index data into memory on load.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "是否在加载时将向量索引数据预加载到内存中。"
+              }
+            }
+          }
+        }
+      },
+      "AlterCollectionPropertiesRequest": {
+        "type": "object",
+        "properties": {
+          "dbName": {
+            "$ref": "#/components/schemas/CollectionCommons/properties/dbName"
+          },
+          "collectionName": {
+            "$ref": "#/components/schemas/CollectionCommons/properties/collectionName"
+          },
+          "properties": {
+            "type": "object",
+            "description": "The properties of the collection to alter.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待修改 Collection 属性。"
+              }
+            },
+            "$ref": "#/components/schemas/CollectionAlterProperties"
+          }
+        },
+        "required": [
+          "collectionName",
+          "properties"
+        ]
+      },
+      "AddCollectionFieldRequest": {
+        "type": "object",
+        "properties": {
+          "dbName": {
+            "$ref": "#/components/schemas/CollectionCommons/properties/dbName"
+          },
+          "collectionName": {
+            "$ref": "#/components/schemas/CollectionCommons/properties/collectionName"
+          },
+          "schema": {
+            "$ref": "#/components/schemas/FieldSchema"
+          }
+        },
+        "required": [
+          "collectionName",
+          "schema"
+        ]
+      },
+      "AlterFieldPropertiesRequest": {
+        "type": "object",
+        "properties": {
+          "dbName": {
+            "$ref": "#/components/schemas/CollectionCommons/properties/dbName"
+          },
+          "collectionName": {
+            "$ref": "#/components/schemas/CollectionCommons/properties/collectionName"
+          },
+          "fieldName": {
+            "type": "string",
+            "description": "The name of the field whose properties are to be altered.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待修改属性的字段名称。"
+              }
+            }
+          },
+          "fieldParams": {
+            "type": "object",
+            "description": "The properties of the field to alter.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待修改的字段属性。"
+              }
+            },
+            "properties": {
+              "max_length": {
+                "type": "integer",
+                "description": "The maximum length of the field. Setting this to a non-zero value restricts the maximum length of the field to the specified value.<br/>This parameter applies only when the field is of type `VarChar`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "字段的最大长度。将该属性设置为非零值将限制字段的最大长度为指定值。<br/>该参数仅适用于 `VarChar` 类型的字段。"
+                  }
+                }
+              },
+              "max_capacity": {
+                "type": "integer",
+                "description": "The maximum capacity of the field. Setting this to a non-zero value restricts the maximum capacity of the field to the specified value.<br/>This parameter applies only when the field is of type `Array`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "字段的最大容量。将该属性设置为非零值将限制字段的最大容量为指定值。<br/>该参数仅适用于 `Array` 类型的字段。"
+                  }
+                }
+              },
+              "mmap_enabled": {
+                "type": "boolean",
+                "description": "Whether to enable memory-mapped file for the field.<br/>This parameter applies only when the field is of type `Vector`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "是否为字段启用内存映射文件。"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "collectionName",
+          "fieldName"
+        ]
+      },
+      "CollectionLoadStateRequest": {
+        "type": "object",
+        "properties": {
+          "dbName": {
+            "$ref": "#/components/schemas/CollectionCommons/properties/dbName"
+          },
+          "collectionName": {
+            "$ref": "#/components/schemas/CollectionCommons/properties/collectionName"
+          },
+          "partitionNames": {
+            "type": "array",
+            "description": "A list of partition names. If any partition names are specified, releasing any of these partitions results in the return of a NotLoad state.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Partition 名称列表。如果指定了 Partition 名称，释放任何一个 Partition 都会导致返回 NotLoad 状态。"
+              }
+            }
+          }
+        },
+        "required": [
+          "collectionName"
+        ]
+      },
+      "CollectionLoadStateResponse": {
+        "x-tab-label": "success",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Response code.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应码。"
+              }
+            },
+            "type": "integer",
+            "example": 0
+          },
+          "data": {
+            "type": "object",
+            "description": "A LoadState object that indicates the load status and load progress of the specified collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定 Collection 的加载状态和加载进度。"
+              }
+            },
+            "properties": {
+              "loadState": {
+                "type": "string",
+                "description": "An object that indicates the load status of the specified collection.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "指定 Collection 的加载状态。"
+                  }
+                }
+              },
+              "loadProgress": {
+                "type": "integer",
+                "description": "An integer that indicates the load progress in the percentage of the specified collection.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "指定 Collection 的加载进度。"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "CollectionCommons": {
+        "type": "object",
+        "properties": {
+          "dbName": {
+            "type": "string",
+            "description": "The name of the database which the collection belongs to. Setting this to a non-existing database results in an error. If not specified, the default database applies.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Database 名称。设置为不存在的 Database 会导致错误。如果未指定，则使用默认 Database。"
+              }
+            }
+          },
+          "collectionName": {
+            "type": "string",
+            "description": "The name of the target collection.\nSetting this to a non-existing collection results in an error.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Collection 名称。设置为不存在的 Collection 会导致错误。"
+              }
+            }
+          }
+        },
+        "required": [
+          "collectionName"
+        ]
+      },
+      "CompactionStateResponse": {
+        "x-tab-label": "success",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Response code.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应码。"
+              }
+            }
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "compactionID": {
+                "type": "string",
+                "description": "The ID of the compaction task.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "Compaction 任务的 ID。"
+                  }
+                }
+              },
+              "state": {
+                "type": "string",
+                "description": "The state of the compaction task.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "Compaction 任务的状态。"
+                  }
+                }
+              },
+              "executingPlanNumber": {
+                "type": "number",
+                "description": "The number of executing plans.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "正在执行的计划数。"
+                  }
+                }
+              },
+              "timeoutPlanNumber": {
+                "type": "number",
+                "description": "The number of timeout plans.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "超时计划数。"
+                  }
+                }
+              },
+              "completedPlanNumber": {
+                "type": "number",
+                "description": "The number of completed plans.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "已完成的计划数。"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetCollectionStatsResponse": {
+        "x-tab-label": "success",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Response code.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应码。"
+              }
+            },
+            "type": "integer",
+            "example": 0
+          },
+          "data": {
+            "type": "object",
+            "description": "Statistics of the specified collection",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "指定 Collection 的统计信息。"
+              }
+            },
+            "properties": {
+              "rowCount": {
+                "type": "integer",
+                "description": "The number of entities.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "Entity 数量。"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "HasCollectionResponse": {
+        "x-tab-label": "success",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Response code.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应码。"
+              }
+            },
+            "type": "integer",
+            "example": 0
+          },
+          "data": {
+            "type": "object",
+            "description": "Response payload which carries a boolean value.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应负载，携带一个表示指定 Collection 是否存在的布尔值。"
+              }
+            },
+            "properties": {
+              "has": {
+                "type": "boolean",
+                "description": "A boolean value indicates whether the specified collection exists.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "表示指定 Collection 是否存在的布尔值。"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ListCollectionResponse": {
+        "x-tab-label": "success",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Response code.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应码。"
+              }
+            },
+            "type": "integer"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "A collection name.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "Collection 名称。"
+                }
+              }
+            },
+            "description": "Response payload which is a list of collection names.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应载荷，一个 Collection 名称列表。"
+              }
+            }
+          }
+        }
+      },
+      "RenameCollectionRequest": {
+        "type": "object",
+        "properties": {
+          "dbName": {
+            "$ref": "#/components/schemas/CollectionCommons/properties/dbName"
+          },
+          "collectionName": {
+            "$ref": "#/components/schemas/CollectionCommons/properties/collectionName"
+          },
+          "newDbName": {
+            "type": "string",
+            "description": "The name of the database to which the collection belongs after this operation.\nThe value defaults to **default**. Setting this to a database rather than the one the collection belongs to before this operation moves this collection to the specified database.\nSetting this to a non-existing database results in an error.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "操作完成后 Collection 所属的数据库名称。默认为 **default**。若指定的值不是 Collection 原先所属的数据库，则该操作将移动 Collection 到指定的数据库。设置为不存在的数据库将导致错误。"
+              }
+            }
+          },
+          "newCollectionName": {
+            "type": "string",
+            "description": "The name of the target collection after this operation.\nSetting this to the original one results in an error.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "操作完成后 Collection 的名称。设置为 Collection 的原有名称将导致错误。"
+              }
+            }
+          }
+        },
+        "required": [
+          "newCollectionName",
+          "collectionName"
+        ]
+      },
+      "FieldSchema": {
+        "type": "object",
+        "description": "A field schema object.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "一个字段 Schema 对象。"
+          }
+        },
+        "properties": {
+          "fieldName": {
+            "type": "string",
+            "description": "The name of the field to create in the target collection",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "目标 Collection 中待创建的字段名称。"
+              }
+            }
+          },
+          "dataType": {
+            "type": "string",
+            "description": "The data type of the field values.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "字段值的数据类型。"
+              }
+            },
+            "enum": [
+              "Bool",
+              "Int8",
+              "Int16",
+              "Int32",
+              "Int64",
+              "Float",
+              "Double",
+              "VarChar",
+              "Array",
+              "Json",
+              "Geometry",
+              "BinaryVector",
+              "FloatVector",
+              "Float16Vector",
+              "BFloat16Vector",
+              "SparseFloatVector",
+              "Int8Vector"
+            ]
+          },
+          "elementDataType": {
+            "type": "string",
+            "description": "The data type of the elements in an array field. This is required if the current field is of the array type.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "数组字段中各元素的数据类型。若当前字段为数组类型，则该参数为必填项。"
+              }
+            },
+            "enum": [
+              "Bool",
+              "Int8",
+              "Int16",
+              "Int32",
+              "Int64",
+              "Float",
+              "Double",
+              "VarChar"
+            ]
+          },
+          "nullable": {
+            "type": "boolean",
+            "description": "Whether the field can be null. If set to `true`, the field can contain null values.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "字段是否可以为 null。如果设置为 `true`，则该字段可以包含 null 值。"
+              }
+            }
+          },
+          "defaultValue": {
+            "type": "string",
+            "description": "The default value of the field. This is required if the current field is of the `VarChar` type.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "字段的默认值。若当前字段为 `VarChar` 类型，则该参数为必填项。"
+              }
+            }
+          },
+          "isPrimary": {
+            "type": "boolean",
+            "description": "Whether the current field is the primary field. Setting this to True makes the current field the primary field.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前字段是否为主键字段。将该参数设置为 `True` 则当前字段将成为主键字段。此时，还需要确定 `autoID` 参数的取值。"
+              }
+            }
+          },
+          "isPartitionKey": {
+            "type": "boolean",
+            "description": "Whether the current field serves as the partition key. Setting this to True makes the current field serve as the partition key. In this case, <include target=\"milvus\">Milvus</include><include target=\"milvus\">Zilliz Cloud</include> manages all partitions in the current collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前字段是否为 Partition Key。将该参数设置为 `True` 则当前字段将作为 Partition Key。在这种情况下，<include target=\"milvus\">Milvus</include><include target=\"milvus\">Zilliz Cloud</include> 会管理当前 Collection 中的所有 Partition。"
+              }
+            }
+          },
+          "isClusteringKey": {
+            "type": "boolean",
+            "description": "Whether the current field serves as the clustering key. Setting this to True makes the current field serve as the clustering key. You can read more about the cluster key in <a href=\"https://milvus.io/docs/clustering-compaction.md\">Clustering Compaction</a>.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前字段是否为 Clustering Key。将该参数设置为 `True` 则当前字段将作为 Clustering Key。您可以在<a href=\"https://milvus.io/docs/clustering-compaction.md\">Clustering Compaction</a>中了解更多关于 Clustering Key 的信息。"
+              }
+            },
+            "x-include-target": [
+              "milvus"
+            ]
+          },
+          "elementTypeParams": {
+            "type": "object",
+            "description": "Extra field parameters.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "字段附加参数。"
+              }
+            },
+            "properties": {
+              "max_length": {
+                "type": "integer",
+                "description": "An optional parameter for VarChar values that determines the maximum length of the value in the current field.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "如果当前字段的数据类型为 VarChar，则该参数为必填项，用于设置该字段值的最大长度。"
+                  }
+                }
+              },
+              "dim": {
+                "type": "integer",
+                "description": "An optional parameter for FloatVector or BinaryVector fields that determines the vector dimension.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "如果当前字段的数据类型为 FloatVector 或 BinaryVector，则该参数为必填项，用于设置向量维度。"
+                  }
+                }
+              },
+              "max_capacity": {
+                "type": "integer",
+                "description": "An optional parameter for Array field values that determines the maximum number of elements in the current array field.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "如果当前字段的数据类型为 Array，则该参数为必填项，用于设置该字段值的最大元素数量。"
+                  }
+                }
+              }
+            }
+          },
+          "externalField": {
+            "type": "string",
+            "description": "The name of the corresponding column in the external source. Required when creating an external collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "外部数据源中对应列的名称。创建外部集合时必填。"
+              }
+            }
+          }
+        },
+        "required": [
+          "fieldName",
+          "dataType"
+        ]
+      },
+      "FieldDetails": {
+        "type": "object",
+        "description": "A field object.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "一个字段对象。"
+          }
+        },
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the current field.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前字段的名称。"
+              }
+            }
+          },
+          "primaryKey": {
+            "type": "boolean",
+            "description": "Indicates whether the current field is a primary key.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "指示当前字段是否为主键。"
+              }
+            }
+          },
+          "partitionKey": {
+            "type": "boolean",
+            "description": "Indicates whether the current field is a partition key.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "指示当前字段是否为 Partition Key。"
+              }
+            }
+          },
+          "clusteringKey": {
+            "type": "boolean",
+            "description": "Indicates whether the current field is a clustering key.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "指示当前字段是否为 Clustering Key。"
+              }
+            },
+            "x-include-target": [
+              "milvus"
+            ]
+          },
+          "autoId": {
+            "type": "boolean",
+            "description": "Indicates whether the current field is an auto-generated ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "指示当前字段是否为自动生成的 ID。"
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the current field.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前字段的描述。"
+              }
+            }
+          },
+          "nullable": {
+            "type": "boolean",
+            "description": "Indicates whether the current field allows null values.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "指示当前字段是否允许空值。"
+              }
+            }
+          },
+          "defaultValue": {
+            "type": "string",
+            "description": "The default value of the current field. This value is only available for fields that have a default value.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前字段的默认值。当前值仅在字段有默认值时可用。"
+              }
+            }
+          },
+          "isFunctionOutput": {
+            "type": "boolean",
+            "description": "Indicates whether the current field is an derived field of a function. This value is only available for fields that are derived from a function.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "指示当前字段是否为函数的派生字段。当前值仅在字段是从函数派生时可用。"
+              }
+            }
+          },
+          "type": {
+            "type": "string",
+            "description": "The data type of the current field.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前字段的数据类型。"
+              }
+            }
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the current field.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前字段的唯一标识符。"
+              }
+            }
+          },
+          "params": {
+            "type": "object",
+            "description": "The parameters of the current field. This value is only available for fields that have parameters.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前字段的参数。当前值仅在字段有参数时可用。"
+              }
+            }
+          },
+          "elementType": {
+            "type": "string",
+            "description": "The data type of the elements in the current field. This value is only available for fields that are arrays.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前字段中元素的数据类型。当前值仅在字段为 Array 时可用。"
+              }
+            }
+          }
+        }
+      },
+      "FunctionSchema": {
+        "type": "object",
+        "description": "A function schema object.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "一个 Function Schema 对象。"
+          }
+        },
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the function to create.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待创建 Function 的名称。"
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the function to create.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待创建 Function 的描述。"
+              }
+            }
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the function to create.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待创建 Function 的类型。"
+              }
+            },
+            "enum": [
+              "FunctionType.BM25",
+              "FunctionType.TEXTEMBEDDING",
+              "FunctionType.RERANK"
+            ]
+          },
+          "inputFieldNames": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "A field name.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "字段名称。"
+                }
+              }
+            },
+            "description": "The names of the input fields for the function to create.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待创建 Function 的输入字段名称列表。"
+              }
+            }
+          },
+          "outputFieldNames": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "A field name.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "字段名称。"
+                }
+              }
+            },
+            "description": "The names of the output fields for the function to create.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待创建 Function 的输出字段名称列表。"
+              }
+            }
+          },
+          "params": {
+            "type": "object",
+            "description": "Configuration parameters specific to the current function. Once the function type is set to `FunctionType.BM25`, no parameter is required. For applicable parameters to functions of `FunctionType.TEXTEMBEDDING` or `FunctionType.RERANK`, refer to <a href=\"https://milvus.io/docs/embedding-function-overview.md\">Embedding Functions</a> and <a href=\"https://milvus.io/docs/embedding-function-overview.md\">Reranking Functions</a>",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Function 的配置参数。当函数类型为 `FunctionType.BM25`，无须设置该参数。当函数类型为其它两类时，可以查看<a href=\"https://milvus.io/docs/embedding-function-overview.md\">Embedding Functions</a> and <a href=\"https://milvus.io/docs/embedding-function-overview.md\">Reranking Functions</a>获取详细的可用参数列表。"
+              }
+            }
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "inputFieldNames",
+          "outputFieldNames"
+        ]
+      },
+      "FunctionDetails": {
+        "type": "object",
+        "description": "A function object.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "一个 Function 对象。"
+          }
+        },
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the current function.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Function 的名称。"
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the current function.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Function 的描述。"
+              }
+            }
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the current function.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Function 的类型。"
+              }
+            }
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID of the current function.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Function 的 ID。"
+              }
+            }
+          },
+          "inputFieldNames": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "The name of an input field.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "输入字段的名称。"
+                }
+              }
+            },
+            "description": "The input field names of the current function.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Function 的输入字段名称。"
+              }
+            }
+          },
+          "outputFieldNames": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "The name of an output field.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "输出字段的名称。"
+                }
+              }
+            },
+            "description": "The output field names of the current function.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Function 的输出字段名称。"
+              }
+            }
+          },
+          "params": {
+            "type": "object",
+            "description": "The parameters of the current function.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前 Function 的参数。"
+              }
+            }
+          }
+        }
+      },
+      "IndexParams": {
+        "type": "object",
+        "description": "An index Schema object.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "一个索引 Schema 对象。"
+          }
+        },
+        "properties": {
+          "metricType": {
+            "type": "string",
+            "description": "The similarity metric type used to build the index. For more information, refer to <include target=\"zilliz\">Similarity Metrics Explained](/docs/search-metrics-explained)</include><include target=\"milvus\">Similarity Metrics](https://milvus.io/docs/metric.md)</include>.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "用于构建索引的相似度类型。更多详情，请参考<include target=\"zilliz\">相似度指标详解</include><include target=\"milvus\">相似度指标](https://milvus.io/docs/metric.md)</include>。"
+              }
+            },
+            "enum": [
+              "L2",
+              "IP",
+              "COSINE",
+              "JACCARD",
+              "HAMMING"
+            ],
+            "default": "COSINE"
+          },
+          "fieldName": {
+            "type": "string",
+            "description": "The name of the target field on which an index is to be created.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "要创建索引的目标字段名称。"
+              }
+            }
+          },
+          "indexName": {
+            "type": "string",
+            "description": "The name of the index to create. The value defaults to the target field name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "要创建的索引名称。该值默认为目标字段名称。"
+              }
+            }
+          },
+          "params": {
+            "description": "The index type and related settings. <include target=\"milvus\">For details, refer to [Vector Indexes](https://milvus.io/docs/index.md).</include><include target=\"zilliz\">For Zilliz Cloud clusters, you should always set `index_type` to `AUTOINDEX`.</include>",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "索引类型及相关设置。<include target=\"milvus\">详细信息请参考[向量索引](https://milvus.io/docs/index.md)</include><include target=\"zilliz\">对于 Zilliz Cloud 集群而言，请始终将 `index_type` 设置成 `AUTOINDEX`</include>。"
+              }
+            },
+            "type": "object",
+            "properties": {
+              "index_type": {
+                "type": "string",
+                "description": "The type of the index to create",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "要创建的索引类型。<include target=\"zilliz\">对于 Zilliz Cloud 集群而言，请始终将 `index_type` 设置成 `AUTOINDEX`</include>"
+                  }
+                }
+              },
+              "M": {
+                "type": "integer",
+                "description": "The maximum degree of the node. This applies only when **index_type** is set to __HNSW__.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "数据节点与其他节点连接的边数。此参数仅适用于**索引类型**为 __HNSW__ 的情况。"
+                  }
+                },
+                "x-include-target": [
+                  "milvus"
+                ]
+              },
+              "efConstruction": {
+                "type": "integer",
+                "description": "The search scope. This applies only when **index_type** is set to __HNSW__.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "搜索范围。此参数仅适用于**索引类型**为 __HNSW__ 的情况。"
+                  }
+                },
+                "x-include-target": [
+                  "milvus"
+                ]
+              },
+              "nlist": {
+                "type": "integer",
+                "description": "The number of cluster units. This applies only when **index_type** is set to __IVF-related__ index types.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "数据集群单元的数量。此参数仅适用于**索引类型**为 __IVF__ 系列索引的情况。"
+                  }
+                },
+                "x-include-target": [
+                  "milvus"
+                ]
+              }
+            },
+            "x-i18n-langs": [
+              "zh-CN"
+            ],
+            "required": [
+              "index_type"
+            ]
+          }
+        },
+        "x-i18n-langs": [
+          "zh-CN"
+        ],
+        "required": [
+          "metricType",
+          "fieldName",
+          "indexName"
+        ]
+      },
+      "IndexDetails": {
+        "type": "object",
+        "description": "An index object.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "一个索引对象。"
+          }
+        },
+        "properties": {
+          "indexName": {
+            "type": "string",
+            "description": "The name of the current index.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前索引的名称。"
+              }
+            }
+          },
+          "fieldName": {
+            "type": "string",
+            "description": "The name of the field associated with the current index.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "与当前索引关联的字段名称。"
+              }
+            }
+          },
+          "metricType": {
+            "type": "string",
+            "description": "The metric type of the current index.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前索引的度量类型。"
+              }
+            }
+          }
+        }
+      },
+      "RefreshExternalCollectionRequest": {
+        "type": "object",
+        "properties": {
+          "dbName": {
+            "type": "string",
+            "description": "The name of the database.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "数据库名称。"
+              }
+            }
+          },
+          "collectionName": {
+            "type": "string",
+            "description": "The name of the collection to refresh.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待刷新 Collection 的名称。"
+              }
+            }
+          },
+          "externalSource": {
+            "type": "string",
+            "description": "JSON-encoded specification of the external data source. When provided, `externalSpec` must also be provided. When omitted, the collection's persisted source is reused. <include target=\"milvus\">An object url in an S3 bucket applies.</include><include target=\"zilliz\">An object url in a Zilliz Cloud volume applies.</include><br/>This parameters applies only to Iceberg tables.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "外部数据源的 JSON 配置。提供该字段时必须同时提供 `externalSpec`；省略时将复用 Collection 此前已持久化的 source 配置。<include target=\"milvus\">S3 存储桶中的对象 URL 适用。</include><include target=\"zilliz\">Zilliz Cloud Volume 中的对象 URL 适用。</include><br/>此参数仅适用于 Iceberg 表。"
+              }
+            }
+          },
+          "externalSpec": {
+            "type": "string",
+            "description": "JSON-encoded specification describing how the external data maps to the collection. When provided, `externalSource` must also be provided. When omitted, the collection's persisted spec is reused.<br/>This parameters applies only to Iceberg tables.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "描述外部数据与 Collection 字段映射关系的 JSON 配置。提供该字段时必须同时提供 `externalSource`；省略时将复用 Collection 此前已持久化的 spec 配置。<br/>此参数仅适用于 Iceberg 表。"
+              }
+            }
+          }
+        },
+        "required": [
+          "collectionName"
+        ]
+      },
+      "RefreshExternalCollectionProgressRequest": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "ID of the refresh job to describe. Obtain this value from the response of the refresh endpoint.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "要查询的刷新任务 ID。该值可通过 refresh 接口的返回结果获取。"
+              }
+            }
+          }
+        },
+        "required": [
+          "jobId"
+        ]
+      }
+    },
+    "parameters": {
+      "AuthorizationHeader": {
+        "name": "Authorization",
+        "in": "header",
+        "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`. If you are using a project endpoint, only a valid API key with sufficient permissions applies.",
+        "required": true,
+        "example": "Bearer {{TOKEN}}",
+        "schema": {
+          "type": "string"
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。如果您使用的是项目端点，则仅具备足够权限的有效 API 密钥适用。"
+          }
+        }
+      }
+    }
+  },
+  "servers": []
+}

@@ -1,0 +1,448 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Cloud Meta",
+      "x-include-target": [
+        "zilliz"
+      ],
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Cloud"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v1/clouds": {
+      "get": {
+        "summary": "List Cloud Providers",
+        "deprecated": false,
+        "description": "Lists all cloud providers available on Zilliz Cloud.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看云服务提供商",
+            "description": "本接口可列出所有可用的云服务商相关信息。"
+          }
+        },
+        "tags": [
+          "Cloud Meta"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            },
+            "x-i18n-langs": [
+              "zh-CN"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of all available cloud providers on Zilliz Cloud.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回可用的云服务商列表。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "Returns a list of applicable cloud providers.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回可用的云服务商列表。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "cloudId": {
+                                "type": "string",
+                                "description": "The ID of a cloud provider.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "云服务提供商 ID。"
+                                  }
+                                }
+                              },
+                              "description": {
+                                "type": "string",
+                                "description": "The description of the cloud provider.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "云服务提供商描述。"
+                                  }
+                                }
+                              }
+                            },
+                            "description": "A cloud provider.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "一个云服务提供商 ID 及描述。"
+                              }
+                            }
+                          },
+                          "description": "Response payload, which is a list of cloud providers.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应返回一个云服务提供商列表。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 200,
+                      "data": [
+                        {
+                          "cloudId": "aws",
+                          "description": "Amazon Web Services"
+                        },
+                        {
+                          "cloudId": "gcp",
+                          "description": "Google Cloud Platform"
+                        },
+                        {
+                          "cloudId": "azure",
+                          "description": "Microsoft Azure"
+                        }
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 200,
+                      "data": [
+                        {
+                          "cloudId": "ali",
+                          "description": "Alibaba Cloud"
+                        },
+                        {
+                          "cloudId": "tc",
+                          "description": "Tencent Cloud"
+                        }
+                      ]
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 80002,
+                      "message": "Token not found or unauthorized: The provided token does not exist in our records, or you do not have the necessary permissions to use this token. Please ensure you have the correct token."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/regions": {
+      "get": {
+        "summary": "List Cloud Regions",
+        "description": "Lists all available cloud regions of a specific cloud provider.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看云服务区域",
+            "description": "列出指定云提供商的可用云区域。"
+          }
+        },
+        "tags": [
+          "Cloud Meta"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "query",
+            "description": "The ID of a valid cloud provider.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "有效云提供商的 ID。"
+              }
+            },
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "1": {
+                "summary": "Global",
+                "x-target-lang": "en-US",
+                "value": "gcp"
+              },
+              "2": {
+                "summary": "China",
+                "x-target-lang": "zh-CN",
+                "value": "ali"
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of all available regions that the specified cloud provider offers.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定云提供商提供的所有可用区域列表。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response.",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "cloudId": {
+                                "type": "string",
+                                "description": "The ID of the cloud provider.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "云提供商的 ID。"
+                                  }
+                                }
+                              },
+                              "regionId": {
+                                "type": "string",
+                                "description": "The ID of the cloud region.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "云地域的 ID。"
+                                  }
+                                }
+                              },
+                              "domain": {
+                                "type": "string",
+                                "description": "The base URL of the Zilliz Cloud open API endpiont.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "Zilliz Cloud Open API 的 Base URL。"
+                                  }
+                                }
+                              }
+                            },
+                            "description": "A cloud region.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "云地域相关信息。"
+                              }
+                            }
+                          },
+                          "description": "Response payload, which is an object containing information about cloud regions.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，一个包含有关云地域信息的对象。"
+                            }
+                          }
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 200,
+                      "data": [
+                        {
+                          "cloudId": "gcp",
+                          "domain": "*.api.gcp-us-west1.zillizcloud.com",
+                          "regionId": "gcp-us-west1"
+                        }
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 200,
+                      "data": [
+                        {
+                          "cloudId": "ali",
+                          "domain": "*.api.ali-cn-hangzhou.cloud.zilliz.com.cn",
+                          "regionId": "ali-cn-hangzhou"
+                        }
+                      ]
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 80002,
+                      "message": "Token not found or unauthorized: The provided token does not exist in our records, or you do not have the necessary permissions to use this token. Please ensure you have the correct token."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}

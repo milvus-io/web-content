@@ -1,0 +1,462 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "On-Demand Compute Operations (V2)",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "On-Demand Compute (V2)",
+      "x-include-target": [
+        "zilliz"
+      ],
+      "x-i18n": {
+        "zh-CN": {
+          "name": "按需计算 (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/on-demand-compute/enable": {
+      "post": {
+        "summary": "Enable On-Demand Compute",
+        "deprecated": false,
+        "description": "Enable On-Demand Compute for a project region.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "启用按需计算",
+            "description": "为指定项目的地域启用按需计算。"
+          }
+        },
+        "x-admonition": [
+          {
+            "type": "info",
+            "title": "Note",
+            "content": "Enabling On-Demand Compute provisions a VectorLake instance internally. This resource is managed automatically and does not appear in the cluster list.",
+            "x-i18n": {
+              "zh-CN": {
+                "title": "注意",
+                "content": "启用按需计算会在内部自动创建一个 VectorLake 实例。该资源由系统自动管理，不会显示在集群列表中。"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "On-Demand Compute (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "string",
+                    "description": "The ID of the project.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "项目 ID。"
+                      }
+                    }
+                  },
+                  "regionId": {
+                    "type": "string",
+                    "description": "The ID of the region.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "地域 ID。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "projectId",
+                  "regionId"
+                ]
+              },
+              "example": {
+                "projectId": "proj-xxx",
+                "regionId": "aws-us-west-2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return the On-Demand Compute status.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回按需计算状态。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "projectId": {
+                              "type": "string",
+                              "description": "ID of the project.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "项目 ID。"
+                                }
+                              }
+                            },
+                            "regionId": {
+                              "type": "string",
+                              "description": "ID of the region.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "地域 ID。"
+                                }
+                              }
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "The On-Demand Compute status.",
+                              "enum": [
+                                "disabled",
+                                "enabling",
+                                "enabled",
+                                "abnormal"
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "按需计算状态。可选值为 `disabled`（已禁用）、`enabling`（启用中）、`enabled`（已启用）或 `abnormal`（异常）。"
+                                }
+                              }
+                            }
+                          },
+                          "description": "Response payload which contains the On-Demand Compute status.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，包含按需计算状态。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "projectId": "proj-xxx",
+                        "regionId": "aws-us-west-2",
+                        "status": "enabled"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/on-demand-compute": {
+      "get": {
+        "summary": "Describe On-Demand Compute",
+        "deprecated": false,
+        "description": "Describe the On-Demand Compute status for a project region.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看按需计算状态",
+            "description": "查看指定项目地域的按需计算状态。"
+          }
+        },
+        "tags": [
+          "On-Demand Compute (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "description": "The ID of the project.",
+            "required": true,
+            "example": "proj-xxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目 ID。"
+              }
+            }
+          },
+          {
+            "name": "regionId",
+            "in": "query",
+            "description": "The ID of the region.",
+            "required": true,
+            "example": "aws-us-west-2",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "地域 ID。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return the On-Demand Compute status.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回按需计算状态。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "projectId": {
+                              "type": "string",
+                              "description": "ID of the project.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "项目 ID。"
+                                }
+                              }
+                            },
+                            "regionId": {
+                              "type": "string",
+                              "description": "ID of the region.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "地域 ID。"
+                                }
+                              }
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "The On-Demand Compute status.",
+                              "enum": [
+                                "disabled",
+                                "enabling",
+                                "enabled",
+                                "abnormal"
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "按需计算状态。可选值为 `disabled`（已禁用）、`enabling`（启用中）、`enabled`（已启用）或 `abnormal`（异常）。"
+                                }
+                              }
+                            }
+                          },
+                          "description": "Response payload which contains the On-Demand Compute status.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，包含按需计算状态。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "projectId": "proj-xxx",
+                        "regionId": "aws-us-west-2",
+                        "status": "enabled"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}

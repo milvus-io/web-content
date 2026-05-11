@@ -1,0 +1,973 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Alias Operations (V2)",
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Alias (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/vectordb/aliases/list": {
+      "post": {
+        "summary": "List Aliases",
+        "deprecated": false,
+        "description": "This operation lists all existing collection aliases in the specified <include target=\"milvus\">database</include><include target=\"zilliz\">Zilliz Cloud cluster</include>.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看 Alias 列表",
+            "description": "本接口可列出指定<include target=\"milvus\">数据库</include><include target=\"zilliz\"> Zilliz Cloud 集群</include>中的所有 Collection 别名。"
+          }
+        },
+        "tags": [
+          "Alias Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`. If you are using a project endpoint, only a valid API key with sufficient permissions applies.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of an existing database.",
+                    "default": "default",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "已存在的数据库名称。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of an existing collection. If specified, only returns aliases of the specified collection. If not specified, returns aliases of all collections in the database.",
+                    "default": "default",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "已存在的 Collection 名称。若指定，仅返回该 Collection 的所有 Alias。若不指定将返回所有 Alias。"
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "dbName": "default"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A list of collection aliases. ",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回 Collection 别名列表。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "description": "A list of item objects.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "对象列表。"
+                              }
+                            }
+                          },
+                          "description": "Response payload which is a list of item objects.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，为元素对象列表。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        "bob"
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/aliases/describe": {
+      "post": {
+        "summary": "Describe Alias",
+        "deprecated": false,
+        "description": "This operation describes the details of a specific alias.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看 Alias 详情",
+            "description": "本接口可列出指定 Collection 别名的详细信息。"
+          }
+        },
+        "tags": [
+          "Alias Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`. If you are using a project endpoint, only a valid API key with sufficient permissions applies.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database to which the alias belongs.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "当前别名所属的数据库名称。"
+                      }
+                    }
+                  },
+                  "aliasName": {
+                    "type": "string",
+                    "description": "The name of the alias whose details are to be listed.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标别名。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "aliasName"
+                ]
+              },
+              "example": {
+                "aliasName": "alice"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "An alias object that contains the detailed description of an alias.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回别名的详细信息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload which carries the detailed description of an alias.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，包含了指定 Collection 别名的详细信息。"
+                            }
+                          },
+                          "properties": {
+                            "dbName": {
+                              "type": "string",
+                              "description": "The name of the database to which the collection belongs.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前别名对应的 Collection 所属的数据库名称。"
+                                }
+                              }
+                            },
+                            "collectionName": {
+                              "type": "string",
+                              "description": "the name of the collection to which an alias belongs.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前别名所属的 Collection 名称。"
+                                }
+                              }
+                            },
+                            "aliasName": {
+                              "type": "string",
+                              "description": "The name of the alias.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前别名。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "aliasName": "alice",
+                        "collectionName": "quick_setup",
+                        "dbName": "default"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/aliases/alter": {
+      "post": {
+        "summary": "Alter Alias",
+        "deprecated": false,
+        "description": "This operation reassigns the alias of one collection to another.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "修改 Alias",
+            "description": "本接口将已分配给某 Collection 的别名重新分配给另一个 Collection。"
+          }
+        },
+        "tags": [
+          "Alias Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`. If you are using a project endpoint, only a valid API key with sufficient permissions applies.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database to which the collection belongs.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "数据库名称。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the target collection to reassign an alias to.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "重新分配后当前别名所指向的 Collection 名称。"
+                      }
+                    }
+                  },
+                  "aliasName": {
+                    "type": "string",
+                    "description": "The alias of the collection. ",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待重新分配的别名。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "aliasName",
+                  "collectionName"
+                ]
+              },
+              "example": {
+                "aliasName": "bob",
+                "collectionName": "custom_setup_indexed"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object or an error message.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回一个空对象或一条错误消息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/aliases/drop": {
+      "post": {
+        "summary": "Drop Alias",
+        "deprecated": false,
+        "description": "This operation drops a specified alias. ",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除 Alias",
+            "description": "本接口可删除指定的 Collection 别名。"
+          }
+        },
+        "tags": [
+          "Alias Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`. If you are using a project endpoint, only a valid API key with sufficient permissions applies.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database to which the collection belongs.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "数据库名称。"
+                      }
+                    }
+                  },
+                  "aliasName": {
+                    "type": "string",
+                    "description": "The alias to drop.\nWhen dropping an alias, you do not need to provide the collection name because one alias can only be assigned to exactly one collection. Therefore, the server knows which collection the specified alias belongs to.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待删除的 Collection 别名。\n 删除别名时无需提供 Collection 名称，因为一个别名只能分配给一个 Collection。因此，服务器可以确定指定的别名属于哪个 Collection。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "aliasName"
+                ]
+              },
+              "example": {
+                "aliasName": "bob"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return an empty object or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/aliases/create": {
+      "post": {
+        "summary": "Create Alias",
+        "deprecated": false,
+        "description": "This operation creates an alias for an existing collection. A collection can have multiple aliases, while an alias can be associated with only one collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建 Alias",
+            "description": "本接口可以为指定 Collection 创建别名。一个 Collection 可以有多个别名，而一个别名只能对应一个 Collection。"
+          }
+        },
+        "tags": [
+          "Alias Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`. If you are using a project endpoint, only a valid API key with sufficient permissions applies.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database to which the collection belongs.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "当前 Collection 所属的数据库名称。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the target collection to assign the created alias to.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建别名的 Collection 名称。"
+                      }
+                    }
+                  },
+                  "aliasName": {
+                    "type": "string",
+                    "description": "The alias of the collection. ",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建的 Collection 别名。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "aliasName",
+                  "collectionName"
+                ]
+              },
+              "example": {
+                "aliasName": "bob",
+                "collectionName": "quick_setup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "x-base-urls": {
+      "ZillizVectorV2": [
+        {
+          "key": "cluster",
+          "label": "Cluster Endpoint",
+          "url": "https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530",
+          "prompt": "Use the cluster endpoint if you are using serving clusters.\n<ul><li><p><b>Free & Serverless</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>",
+          "x-i18n": {
+            "zh-CN": {
+              "label": "集群端点",
+              "prompt": "如果您使用的是服务集群，请使用集群端点。\n<ul><li><p><b>Free 与 Serverless 版</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated 版</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>"
+            }
+          },
+          "shell": "export CLUSTER_ENDPOINT=\"https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530\""
+        },
+        {
+          "key": "on-demand-compute",
+          "label": "Project Endpoint (On-Demand)",
+          "url": "https://{project-id}.{region}.api.zillizcloud.com",
+          "prompt": "<p>Use the on-demand compute endpoint if you are using on-demand clusters.</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>",
+          "x-i18n": {
+            "zh-CN": {
+              "label": "项目端点（按需）",
+              "prompt": "<p>如果您使用的是按需集群，请使用项目端点（按需）。</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>"
+            }
+          },
+          "shell": "export PROJECT_ENDPOINT=\"https://{project-id}.{region}.api.zillizcloud.com\""
+        }
+      ]
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}
