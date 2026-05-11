@@ -266,3 +266,13 @@ test('runApply preserves backup directory when rollback restore fails', async ()
   const backupFile = path.join(path.dirname(target), backupDirName, 'stable.js');
   assert.equal(await fs.readFile(backupFile, 'utf8'), 'stable\n');
 });
+
+test('check-shared-scripts workflow exists and runs drift check command', () => {
+  const repoRoot = path.resolve(__dirname, '..', '..');
+  const workflowPath = path.join(repoRoot, '.github/workflows/check-shared-scripts.yml');
+
+  assert.equal(fsSync.existsSync(workflowPath), true);
+
+  const workflow = fsSync.readFileSync(workflowPath, 'utf8');
+  assert.match(workflow, /npm --prefix scripts run check:shared-scripts/);
+});

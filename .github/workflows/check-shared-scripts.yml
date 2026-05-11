@@ -1,0 +1,22 @@
+name: Check Shared Scripts
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check-shared-scripts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: Install scripts dependencies
+        run: npm --prefix scripts ci
+
+      - name: Check shared scripts drift
+        run: npm --prefix scripts run check:shared-scripts

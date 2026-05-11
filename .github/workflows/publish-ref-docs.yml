@@ -37,6 +37,9 @@ jobs:
           echo APP_SECRET=${{ secrets.APP_SECRET }} >> scripts/.env
           echo IMAGE_BED_URL=${{ secrets.IMAGE_BED_URL }} >> scripts/.env
 
+      - name: Check shared script drift
+        run: npm --prefix scripts run check:shared-scripts
+
       - name: Fetch pymilvus ${{ env.SDK_VERSION }}
         working-directory: scripts
         run: node lark-docs/index.js -c config.json -m pymilvus-${{ env.SDK_VERSION }} --all --skipImageDown
