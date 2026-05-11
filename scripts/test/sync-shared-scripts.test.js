@@ -147,3 +147,49 @@ test('runApply writes remote tree and removes drifted local files', async () => 
   assert.deepEqual(files, ['new.js', 'same.js']);
   assert.equal(await fs.readFile(path.join(target, 'new.js'), 'utf8'), 'new\n');
 });
+
+test('runApply keeps original target unchanged when apply fails mid-write', async () => {
+  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'shared-sync-'));
+  const target = path.join(tempDir, 'scripts/lib');
+  await fs.mkdir(target, { recursive: true });
+  await fs.writeFile(path.join(target, 'stable.js'), 'stable\n', 'utf8');
+  await fs.writeFile(path.join(target, 'old.js'), 'old\n', 'utf8');
+
+  const realWriteFile = fs.writeFile;
+  let writes = 0;
+  fs.writeFile = async (filePath, data, encoding) => {
+    writes += 1;
+    if (writes === 2) {
+      throw new Error('injected write failure');
+    }
+    return realWriteFile(filePath, data, encoding);
+  };
+
+  try {
+    await assert.rejects(
+      runApply({
+        plan: [{ name: 'sync-a', targetAbsPath: target }],
+        fetchRemoteTreeImpl: async () => ({
+          'stable.js': 'stable-updated\n',
+          'new.js': 'new\n',
+        }),
+        readLocalTreeImpl: async (absTarget) => {
+          const current = {};
+          for (const file of await fs.readdir(absTarget)) {
+            current[file] = await fs.readFile(path.join(absTarget, file), 'utf8');
+          }
+          return current;
+        },
+      }),
+      /injected write failure/
+    );
+  } finally {
+    fs.writeFile = realWriteFile;
+  }
+
+  const files = (await fs.readdir(target)).sort();
+  assert.deepEqual(files, ['old.js', 'stable.js']);
+  assert.equal(await fs.readFile(path.join(target, 'old.js'), 'utf8'), 'old\n');
+  assert.equal(await fs.readFile(path.join(target, 'stable.js'), 'utf8'), 'stable\n');
+  await assert.rejects(fs.access(path.join(target, 'new.js')));
+});
