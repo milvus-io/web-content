@@ -5,3 +5,4 @@ node_modules
 yarn-error.log
 
 scripts/lark-docs/meta/sources/
+.claude/.worktrees/

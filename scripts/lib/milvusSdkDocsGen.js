@@ -162,7 +162,8 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
     // incorrectly treats it as the full block (does block.code which gives undefined).
     // Guard here and delegate directly to larkDocWriter.__code.
     // Then force the opening fence language tag to match the SDK language.
-    async __code(code, indent, prev, next, blocks) {
+    async __code(blockOrCode, indent, prev, next, blocks) {
+        const code = blockOrCode?.code ?? blockOrCode
         if (!code || !code.style) return ''
         const result = await larkDocWriter.prototype.__code.call(this, code, indent, prev, next, blocks)
         if (!result || !this.forcedLanguage) return result
