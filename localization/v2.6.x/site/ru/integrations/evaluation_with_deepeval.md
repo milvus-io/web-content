@@ -123,7 +123,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -395,9 +395,9 @@ Evaluating 3 test case(s) in parallel: |██████████|100% (3/3
     </button></h2><p>Чтобы оценить качество генерируемых результатов в больших языковых моделях (LLM), важно сосредоточиться на двух ключевых аспектах:</p>
 <ol>
 <li><p><strong>Релевантность</strong>: Оцените, насколько эффективно подсказка направляет LLM на генерацию полезных и контекстуально подходящих ответов.</p></li>
-<li><p><strong>Верность</strong>: Измерьте точность результатов, чтобы убедиться, что модель выдает информацию, которая соответствует фактам и не содержит галлюцинаций или противоречий. Генерируемый контент должен соответствовать фактической информации, предоставленной в контексте поиска.</p></li>
+<li><p><strong>Верность</strong>: Измерьте точность результатов, чтобы убедиться, что модель выдает информацию, которая соответствует фактам и не содержит галлюцинаций или противоречий. Генерируемый контент должен соответствовать фактической информации, представленной в контексте поиска.</p></li>
 </ol>
-<p>Эти факторы в совокупности обеспечивают актуальность и надежность результатов.</p>
+<p>Все эти факторы в совокупности обеспечивают актуальность и надежность результатов.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> deepeval.metrics <span class="hljs-keyword">import</span> AnswerRelevancyMetric, FaithfulnessMetric
 <span class="hljs-keyword">from</span> deepeval.test_case <span class="hljs-keyword">import</span> LLMTestCase
 <span class="hljs-keyword">from</span> deepeval <span class="hljs-keyword">import</span> evaluate

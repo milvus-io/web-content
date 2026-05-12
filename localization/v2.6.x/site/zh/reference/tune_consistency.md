@@ -3,7 +3,7 @@ id: tune_consistency.md
 title: 一致性级别
 summary: >-
   作为一个分布式向量数据库，Milvus
-  提供多种一致性级别，以确保每个节点或副本在读写操作期间都能访问相同的数据。目前，支持的一致性级别包括强、有限制、最终和会话，其中有限制是默认使用的一致性级别。
+  提供了多种一致性级别，以确保每个节点或副本在读写操作期间都能访问相同的数据。目前，支持的一致性级别包括强、有约束、最终和会话，其中有约束是默认使用的一致性级别。
 ---
 <h1 id="Consistency-Level" class="common-anchor-header">一致性级别<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>作为一个分布式向量数据库，Milvus 提供了多种一致性级别，以确保每个节点或副本在读写操作期间都能访问相同的数据。目前，支持的一致性级别包括<strong>强</strong>、<strong>有限制</strong>、<strong>最终</strong>和<strong>会话</strong>，其中<strong>有限制</strong>是默认使用的一致性级别。</p>
+    </button></h1><p>作为一个分布式向量数据库，Milvus 提供了多种一致性级别，以确保每个节点或副本在读写操作期间都能访问相同的数据。目前，支持的一致性级别包括<strong>强</strong>、<strong>有界</strong>、<strong>最终</strong>和<strong>会话</strong>，其中<strong>有界</strong>是默认使用的一致性级别。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,13 +36,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 是一个存储和计算分离的系统。在这个系统中，<strong>数据节点</strong>负责数据的持久性，并最终将数据存储在 MinIO/S3 等分布式对象存储中。<strong>查询节点</strong>负责处理搜索等计算任务。这些任务涉及<strong>批量数据</strong>和<strong>流数据的</strong>处理。简单地说，批量数据可以理解为已经存储在对象存储中的数据，而流式数据指的是尚未存储在对象存储中的数据。由于网络延迟，查询节点通常无法保存最新的流数据。如果没有额外的保护措施，直接在流数据上执行搜索可能会导致丢失许多未提交的数据点，从而影响搜索结果的准确性。</p>
-<p>Milvus 商业版是一个将存储和计算分离的系统。在这个系统中，数据节点负责数据的持久化，并最终将数据存储在 MinIO/S3 等分布式对象存储中。查询节点负责处理搜索等计算任务。这些任务涉及批量数据和流数据的处理。简单地说，批处理数据可以理解为已经存储在对象存储中的数据，而流式数据指的是尚未存储在对象存储中的数据。由于网络延迟，查询节点通常无法保存最新的流数据。如果没有额外的保护措施，直接对流数据执行搜索可能会导致丢失许多未提交的数据点，从而影响搜索结果的准确性。</p>
+    </button></h2><p>Milvus 是一个存储和计算分离的系统。在这个系统中，<strong>数据节点</strong>负责数据的持久性，并最终将其存储在 MinIO/S3 等分布式对象存储中。<strong>查询节点</strong>负责处理搜索等计算任务。这些任务涉及<strong>批量数据</strong>和<strong>流数据的</strong>处理。简单地说，批量数据可以理解为已经存储在对象存储中的数据，而流式数据指的是尚未存储在对象存储中的数据。由于网络延迟，查询节点通常无法保存最新的流数据。如果没有额外的保障措施，直接在流数据上执行搜索可能会导致丢失许多未提交的数据点，从而影响搜索结果的准确性。</p>
+<p>Milvus 商业版是一个将存储和计算分离的系统。在这个系统中，数据节点负责数据的持久化，并最终将数据存储在 MinIO/S3 等分布式对象存储中。查询节点负责处理搜索等计算任务。这些任务涉及批量数据和流数据的处理。简单地说，批量数据可以理解为已经存储在对象存储中的数据，而流式数据指的是尚未存储在对象存储中的数据。由于网络延迟，查询节点通常无法保存最新的流数据。如果没有额外的保护措施，直接对流数据执行搜索可能会导致丢失许多未提交的数据点，从而影响搜索结果的准确性。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/batch-data-and-streaming-data.png" alt="Batch Data And Streaming Data" class="doc-image" id="batch-data-and-streaming-data" />
    </span> <span class="img-wrapper"> <span>批数据和流数据</span> </span></p>
-<p>如上图所示，在收到搜索请求后，查询节点可以同时接收流数据和批量数据。但是，由于网络延迟，查询节点获得的流数据可能不完整。</p>
+<p>如上图所示，在收到搜索请求后，查询节点可以同时接收流数据和批处理数据。但是，由于网络延迟，查询节点获得的流数据可能不完整。</p>
 <p>为了解决这个问题，Milvus 对数据队列中的每条记录都打上时间戳，并不断向数据队列中插入同步时间戳。每当收到同步时间戳（syncTs），QueryNodes 就会将其设置为服务时间，这意味着 QueryNodes 可以查看该服务时间之前的所有数据。基于 ServiceTime，Milvus 可以提供保证时间戳（GuaranteeTs），以满足用户对一致性和可用性的不同要求。用户可以通过在搜索请求中指定 GuaranteeTs，通知查询节点需要在搜索范围中包含指定时间点之前的数据。</p>
 <p>
   
@@ -82,7 +82,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>创建 Collections 以及执行搜索和查询时，可以设置不同的一致性级别。</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">创建 Collections 时设置一致性级别</h3><p>创建 Collections 时，可以为集合内的搜索和查询设置一致性级别。以下代码示例将一致性级别设置<strong>为强</strong>。</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">创建 Collections 时设置一致性级别<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>创建 Collections 时，可以为集合内的搜索和查询设置一致性级别。以下代码示例将一致性级别设置为<strong>"有界</strong>"。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -94,13 +109,13 @@ summary: >-
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .collectionSchema(schema)
-<span class="highlighted-wrapper-line">        .consistencyLevel(ConsistencyLevel.STRONG)</span>
+<span class="highlighted-wrapper-line">        .consistencyLevel(ConsistencyLevel.BOUNDED)</span>
         .build();
 client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
-        WithConsistencyLevel(entity.ClStrong))
+        WithConsistencyLevel(entity.ClBounded))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
@@ -134,7 +149,7 @@ client.createCollection(createCollectionReq);
     }&#x27;</span>
 
 <span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
-    &quot;consistencyLevel&quot;: &quot;Strong&quot;
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 
 curl --request POST \
@@ -147,8 +162,23 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">consistency_level</code> 参数的可能值是<code translate="no">Strong</code>,<code translate="no">Bounded</code>,<code translate="no">Eventually</code>, 和<code translate="no">Session</code> 。</p>
-<h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">在搜索中设置一致性级别</h3><p>您可以随时更改特定搜索的一致性级别。下面的代码示例将一致性级别设置为 "<strong>有界</strong>"。该更改仅适用于当前搜索请求。</p>
+<p><code translate="no">consistency_level</code> 参数的可能值是<code translate="no">Strong</code> 、<code translate="no">Bounded</code> 、<code translate="no">Eventually</code> 和<code translate="no">Session</code> 。</p>
+<h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">在搜索中设置一致性级别<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您可以随时更改特定搜索的一致性级别。下面的代码示例将一致性级别设置为 "<strong>有界</strong>"。该更改仅适用于当前搜索请求。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -194,7 +224,22 @@ curl --request POST \
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>该参数也可用于混合搜索和搜索迭代器。<code translate="no">consistency_level</code> 参数的可能值是<code translate="no">Strong</code>,<code translate="no">Bounded</code>,<code translate="no">Eventually</code>, 和<code translate="no">Session</code> 。</p>
-<h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">在查询中设置一致性级别</h3><p>您可以随时更改特定搜索的一致性级别。以下代码示例将一致性级别设置为<strong>最终</strong>。该设置仅适用于当前查询请求。</p>
+<h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">在查询中设置一致性级别<button data-href="#Set-Consistency-Level-in-Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您可以随时更改特定搜索的一致性级别。以下代码示例将一致性级别设置为<strong>最终</strong>。该设置仅适用于当前查询请求。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.query(

@@ -63,7 +63,7 @@ title: Milvus in Docker ausführen (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Was ist neu in v2.6.13:</strong></p>
+<p><strong>Was ist neu in v2.6.15:</strong></p>
 <ul>
 <li><strong>Streaming Node</strong>: Verbesserte Datenverarbeitungsmöglichkeiten</li>
 <li><strong>Woodpecker MQ</strong>: Verbesserte Nachrichtenwarteschlange mit reduziertem Wartungsaufwand, siehe <a href="/docs/de/use-woodpecker.md">Woodpecker verwenden</a> für Details</li>
@@ -71,7 +71,7 @@ title: Milvus in Docker ausführen (Linux)
 </ul>
 <p>Laden Sie immer das neueste Skript herunter, um sicherzustellen, dass Sie die neuesten Konfigurationen und Architekturverbesserungen erhalten.</p>
 <p>Wenn Sie <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> im eigenständigen Bereitstellungsmodus verwenden möchten, empfiehlt sich die Verwendung der <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose-Bereitstellungsmethode</a>.</p>
-<p>Sollten Sie beim Ziehen des Images auf Probleme stoßen, wenden Sie sich bitte an <a href="mailto:community@zilliz.com">community@zilliz.com</a> und schildern Sie das Problem, damit wir Ihnen den nötigen Support bieten können.</p>
+<p>Sollten Sie beim Ziehen des Images auf Probleme stoßen, wenden Sie sich bitte an <a href="mailto:community@zilliz.com">community@zilliz.com</a> und schildern Sie uns das Problem.</p>
 </div>
 <p>Nachdem Sie das Installationsskript ausgeführt haben:</p>
 <ul>

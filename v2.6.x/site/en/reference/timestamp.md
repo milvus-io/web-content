@@ -80,5 +80,5 @@ As shown in the figure 2 , the value of `Guarantee_timestamp` is set as `2021-08
 
 ## What's next
 
-- Learn how [guarantee timestamp enables tunable consistency in Milvus](consistency.md)
+- Learn how [guarantee timestamp enables tunable consistency in Milvus](tune_consistency.md)
 

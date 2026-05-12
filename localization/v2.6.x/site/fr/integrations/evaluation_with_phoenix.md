@@ -123,7 +123,7 @@ title: Évaluation avec Arize Pheonix
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -304,7 +304,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
     </tr>
     <tr>
       <th>2</th>
-      <td>Qu'est-ce qui doit être assuré avant d'exécuter la cov...</td>
+      <td>Qu'est-ce qui doit être assuré avant d'exécuter le code cov...</td>
       <td>[Couverture de code Avant de soumettre votre pull...</td>
       <td>Avant d'exécuter la couverture du code, il faut s'assur...</td>
       <td>Avant d'exécuter la couverture du code, vous devez ...</td>

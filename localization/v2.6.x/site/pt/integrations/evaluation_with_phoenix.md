@@ -123,7 +123,7 @@ title: Avaliação com Arize Pheonix
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -293,12 +293,12 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
       <td>quais são as especificações dos requisitos de hardware...</td>
       <td>[Requisitos de hardware\n\nAs seguintes especificaç...</td>
       <td>A especificação dos requisitos de hardware para a...</td>
-      <td>Se queres construir o Milvus e correr a partir da fonte...</td>
+      <td>Se quiseres construir o Milvus e correr a partir da fonte...</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Qual é a linguagem de programação usada para escrever...</td>
-      <td>[CMake &amp; Conan\n\nA biblioteca de algoritmos do Milvus...</td>
+      <td>[CMake &amp; Conan\n\nA biblioteca de algoritmos de Mil...</td>
       <td>A linguagem de programação usada para escrever o Knowher...</td>
       <td>A linguagem de programação usada para escrever o Knowher...</td>
     </tr>

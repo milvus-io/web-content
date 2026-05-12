@@ -75,7 +75,7 @@ summary: >-
       </svg>
     </button></h3><h4 id="🔹-Data-Model-Upgrade" class="common-anchor-header"><strong>Atualização do modelo de dados</strong></h4><ul>
 <li><p>Introduzir um tipo de dados <strong>Tensor / StructList</strong> unificado para suportar estruturas de incorporação de vários vetores, permitindo a compatibilidade com <em>ColBERT</em>, <em>CoLQwen</em>, <em>vídeo</em> e <em>vetores multimodais</em>.</p></li>
-<li><p>Adicionar suporte a <strong>dados geográficos</strong>, incluindo pontos, regiões e indexação espacial (com base em <em>libspatial</em>), para expandir casos de uso em LBS e GIS.</p></li>
+<li><p>Adicionar suporte a <strong>dados geográficos</strong>, incluindo pontos, regiões e indexação espacial (com base na <em>libspatial</em>), para expandir casos de uso em LBS e GIS.</p></li>
 <li><p>Suporte para <strong>Timestamp com</strong> tipo de dados de fuso <strong>horário</strong>.</p></li>
 </ul>
 <h4 id="🔹-StreamNode-Architecture-Refactor" class="common-anchor-header"><strong>Refactor da arquitetura StreamNode</strong></h4><ul>
@@ -91,7 +91,7 @@ summary: >-
 <li><p>Integrar com <strong>Spark</strong> / <strong>DuckDB</strong> / <strong>DataFusion</strong> via FFI, permitindo a evolução do esquema offline e consultas KNN.</p></li>
 <li><p>Fornecer visualização de dados multimodais e uma demonstração do Spark ETL, estabelecendo a arquitetura fundamental do lago de dados.</p></li>
 </ul>
-<h2 id="🌠-Milvus-v30-Targeted-for-Late-2026" class="common-anchor-header">Milvus v3.0 (previsto para o final de 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Late-2026" class="anchor-icon" translate="no">
+<h2 id="🌠-Milvus-v30-Targeted-for-Early-2026" class="common-anchor-header">Milvus v3.0 (previsto para o início de 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Early-2026" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -107,7 +107,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p><strong>Cronograma: Final de 2025 - Início de 2026</strong></p>
-<p>Foco: Aprimoramentos abrangentes na <strong>experiência de pesquisa</strong>, <strong>flexibilidade de esquema</strong> e <strong>suporte a dados não estruturados</strong>, juntamente com o lançamento do <strong>Vetor Lake (v0.2)</strong>.</p>
+<p>Foco: Melhorias abrangentes na <strong>experiência de pesquisa</strong>, <strong>flexibilidade de esquema</strong> e <strong>suporte a dados não estruturados</strong>, juntamente com o lançamento do <strong>Vetor Lake (v0.2)</strong>.</p>
 <h3 id="🎯-Key-Highlights" class="common-anchor-header">Principais destaques<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

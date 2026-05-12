@@ -29,7 +29,7 @@ summary: >-
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>이 튜토리얼에서는 <a href="https://milvus.io/">Milvus와</a> 함께 <a href="https://www.llamaindex.ai/">LlamaIndex를</a> 사용하여 RAG용 비동기 문서 처리 파이프라인을 구축하는 방법을 설명합니다. LlamaIndex는 문서를 처리하고 Milvus와 같은 벡터 DB에 저장하는 방법을 제공합니다. LlamaIndex의 비동기 API와 Milvus Python 클라이언트 라이브러리를 활용하면 파이프라인의 처리량을 늘려 대량의 데이터를 효율적으로 처리하고 색인할 수 있습니다.</p>
-<p>이 튜토리얼에서는 먼저 비동기 메서드를 사용하여 높은 수준에서 LlamaIndex 및 Milvus로 RAG를 구축하는 방법을 소개한 다음, 낮은 수준의 메서드 사용과 동기 및 비동기의 성능 비교에 대해 소개합니다.</p>
+<p>이 튜토리얼에서는 먼저 비동기 메서드를 사용하여 높은 수준에서 LlamaIndex와 Milvus로 RAG를 구축하는 방법을 소개한 다음, 낮은 수준의 메서드 사용과 동기식과 비동기식의 성능 비교에 대해 소개합니다.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +61,22 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 
 nest_asyncio.apply()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-data" class="common-anchor-header">데이터 준비</h3><p>다음 명령어로 샘플 데이터를 다운로드할 수 있습니다:</p>
+<h3 id="Prepare-data" class="common-anchor-header">데이터 준비<button data-href="#Prepare-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 명령어로 샘플 데이터를 다운로드할 수 있습니다:</p>
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">&#x27;data/&#x27;</span>
 $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt&#x27;</span> -O <span class="hljs-string">&#x27;data/paul_graham_essay.txt&#x27;</span>
 $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/uber_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/uber_2021.pdf&#x27;</span>
@@ -111,7 +126,7 @@ DIM = <span class="hljs-number">768</span>
         embedding_field=<span class="hljs-string">&quot;embedding&quot;</span>,
         id_field=<span class="hljs-string">&quot;id&quot;</span>,
         similarity_metric=<span class="hljs-string">&quot;COSINE&quot;</span>,
-        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
         overwrite=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># To overwrite the collection if it already exists</span>
     )
 
@@ -132,7 +147,7 @@ documents = SimpleDirectoryReader(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document ID: 41a6f99c-489f-49ff-9821-14e2561140eb
 </code></pre>
-<p>포옹하는 얼굴 임베딩 모델을 로컬로 인스턴스화합니다. 로컬 모델을 사용하면 동시 API 요청이 빠르게 합산되어 공용 API의 예산이 소진될 수 있으므로 비동기 데이터 삽입 중에 API 속도 제한에 도달할 위험을 피할 수 있습니다. 그러나 속도 제한이 높은 경우 원격 모델 서비스를 대신 사용할 수 있습니다.</p>
+<p>포옹하는 얼굴 임베딩 모델을 로컬로 인스턴스화합니다. 로컬 모델을 사용하면 동시 API 요청이 빠르게 합산되어 퍼블릭 API의 예산이 소진될 수 있으므로 비동기 데이터 삽입 중에 API 속도 제한에 도달할 위험을 피할 수 있습니다. 그러나 속도 제한이 높은 경우 원격 모델 서비스를 대신 사용할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.embeddings.huggingface <span class="hljs-keyword">import</span> HuggingFaceEmbedding
 
 
@@ -180,7 +195,22 @@ response = <span class="hljs-keyword">await</span> query_engine.aquery(<span cla
         ></path>
       </svg>
     </button></h2><p>이 섹션에서는 하위 수준의 API 사용법을 소개하고 동기 실행과 비동기 실행의 성능을 비교합니다.</p>
-<h3 id="Async-add" class="common-anchor-header">비동기 추가</h3><p>벡터 저장소를 다시 초기화합니다.</p>
+<h3 id="Async-add" class="common-anchor-header">비동기 추가<button data-href="#Async-add" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>벡터 저장소를 다시 초기화합니다.</p>
 <pre><code translate="no" class="language-python">vector_store = init_vector_store()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">2025-01-24 20:07:38,727 [DEBUG][_create_connection]: Created new connection using: 5e0d130f3b644555ad7ea6b8df5f1fc2 (async_milvus_client.py:600)
@@ -260,7 +290,22 @@ Sync add for 100 took 5.85 seconds
 Sync add for 1000 took 62.91 seconds
 </code></pre>
 <p>결과는 동기식 추가 프로세스가 비동기식 추가 프로세스보다 훨씬 느리다는 것을 보여줍니다.</p>
-<h3 id="Async-search" class="common-anchor-header">비동기 검색</h3><p>검색을 실행하기 전에 벡터 저장소를 다시 초기화하고 일부 문서를 추가합니다.</p>
+<h3 id="Async-search" class="common-anchor-header">비동기 검색<button data-href="#Async-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>검색을 실행하기 전에 벡터 저장소를 다시 초기화하고 일부 문서를 추가합니다.</p>
 <pre><code translate="no" class="language-python">vector_store = init_vector_store()
 node_list = produce_nodes(num_adding=<span class="hljs-number">1000</span>)
 inserted_ids = vector_store.add(node_list)

@@ -125,7 +125,22 @@ docs = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Option-1Recommended-dense-embedding-+-Milvus-BM25-built-in-function" class="common-anchor-header">Opción 1(Recomendada): incrustación densa + función incorporada Milvus BM25</h3><p>Utilice la incrustación densa + la función incorporada Milvus BM25 para ensamblar la instancia del almacén de vectores de recuperación híbrida.</p>
+    </button></h2><h3 id="Option-1Recommended-dense-embedding-+-Milvus-BM25-built-in-function" class="common-anchor-header">Opción 1(Recomendada): incrustación densa + función incorporada Milvus BM25<button data-href="#Option-1Recommended-dense-embedding-+-Milvus-BM25-built-in-function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Utilice la incrustación densa + la función incorporada Milvus BM25 para ensamblar la instancia del almacén de vectores de recuperación híbrida.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, BM25BuiltInFunction
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
@@ -138,7 +153,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -150,7 +165,22 @@ vectorstore = Milvus.from_documents(
 <p>En el código anterior, definimos una instancia de <code translate="no">BM25BuiltInFunction</code> y la pasamos al objeto <code translate="no">Milvus</code>. <code translate="no">BM25BuiltInFunction</code> es una clase envolvente ligera para <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> en Milvus. Podemos usarla con <code translate="no">OpenAIEmbeddings</code> para inicializar una instancia de almacén vectorial Milvus de búsqueda híbrida densa + dispersa.</p>
 <p><code translate="no">BM25BuiltInFunction</code> no requiere que el cliente pase corpus o entrenamiento, todo se procesa automáticamente en el extremo del servidor Milvus, por lo que los usuarios no necesitan preocuparse de ningún vocabulario y corpus. Además, los usuarios también pueden personalizar el <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">analizador</a> para implementar el procesamiento de texto personalizado en el BM25.</p>
 <p>Para obtener más información sobre <code translate="no">BM25BuiltInFunction</code>, consulte <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Búsqueda</a> <a href="https://milvus.io/docs/full_text_search_with_langchain.md">de texto</a> <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">completo</a> y <a href="https://milvus.io/docs/full_text_search_with_langchain.md">Uso de la búsqueda de texto completo con LangChain y Milvus</a>.</p>
-<h3 id="Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="common-anchor-header">Opción 2: Utilizar la incrustación dispersa LangChain densa y personalizada</h3><p>Puede heredar la clase <code translate="no">BaseSparseEmbedding</code> de <code translate="no">langchain_milvus.utils.sparse</code>, e implementar los métodos <code translate="no">embed_query</code> y <code translate="no">embed_documents</code> para personalizar el proceso de incrustación dispersa. Esto le permite personalizar cualquier método de incrustación dispersa basado en estadísticas de frecuencia de términos (por ejemplo, <a href="https://milvus.io/docs/embed-with-bm25.md#BM25">BM25</a>) o en redes neuronales (por ejemplo, <a href="https://milvus.io/docs/embed-with-splade.md#SPLADE">SPADE</a>).</p>
+<h3 id="Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="common-anchor-header">Opción 2: Utilizar la incrustación dispersa LangChain densa y personalizada<button data-href="#Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Puede heredar la clase <code translate="no">BaseSparseEmbedding</code> de <code translate="no">langchain_milvus.utils.sparse</code>, e implementar los métodos <code translate="no">embed_query</code> y <code translate="no">embed_documents</code> para personalizar el proceso de incrustación dispersa. Esto le permite personalizar cualquier método de incrustación dispersa basado en estadísticas de frecuencia de términos (por ejemplo, <a href="https://milvus.io/docs/embed-with-bm25.md#BM25">BM25</a>) o en redes neuronales (por ejemplo, <a href="https://milvus.io/docs/embed-with-splade.md#SPLADE">SPADE</a>).</p>
 <p>He aquí un ejemplo:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Dict</span>, <span class="hljs-type">List</span>
 <span class="hljs-keyword">from</span> langchain_milvus.utils.sparse <span class="hljs-keyword">import</span> BaseSparseEmbedding
@@ -197,11 +227,11 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Aunque esta es una forma de utilizar BM25, requiere que los usuarios gestionen el corpus para las estadísticas de frecuencia de términos. En su lugar, recomendamos utilizar la función integrada en BM25 (opción 1), ya que se encarga de todo en el lado del servidor Milvus. Esto elimina la necesidad de que los usuarios se preocupen de la gestión del corpus o de la formación de un vocabulario. Para obtener más información, consulte la sección <a href="https://milvus.io/docs/full_text_search_with_langchain.md">Uso de la búsqueda de texto completo con LangChain y Milvus</a>.</p>
+<p>Aunque esta es una forma de utilizar BM25, requiere que los usuarios gestionen el corpus para las estadísticas de frecuencia de términos. En su lugar, recomendamos utilizar la función integrada en BM25 (opción 1), ya que se encarga de todo en el lado del servidor Milvus. Esto elimina la necesidad de que los usuarios se preocupen por la gestión del corpus o la formación de un vocabulario. Para obtener más información, consulte la sección <a href="https://milvus.io/docs/full_text_search_with_langchain.md">Uso de la búsqueda de texto completo con LangChain y Milvus</a>.</p>
 <h2 id="Define-multiple-arbitrary-vector-fields" class="common-anchor-header">Definir múltiples campos vectoriales arbitrarios<button data-href="#Define-multiple-arbitrary-vector-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -234,7 +264,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 
@@ -243,7 +273,22 @@ vectorstore.vector_fields
 <pre><code translate="no">['dense1', 'dense2', 'sparse']
 </code></pre>
 <p>En este ejemplo, tenemos tres campos vectoriales. Entre ellos, <code translate="no">sparse</code> se utiliza como campo de salida para <code translate="no">BM25BuiltInFunction</code>, mientras que los otros dos, <code translate="no">dense1</code> y <code translate="no">dense2</code>, se asignan automáticamente como campos de salida para los dos modelos <code translate="no">OpenAIEmbeddings</code> (en función del orden).</p>
-<h3 id="Specify-the-index-params-for-multi-vector-fields" class="common-anchor-header">Especificar los parámetros de índice para campos multivectoriales</h3><p>Por defecto, los tipos de índice de cada campo vectorial se determinarán automáticamente por el tipo de incrustación o función incorporada. Sin embargo, también puede especificar el tipo de índice de cada campo vectorial para optimizar el rendimiento de la búsqueda.</p>
+<h3 id="Specify-the-index-params-for-multi-vector-fields" class="common-anchor-header">Especificar los parámetros de índice para campos multivectoriales<button data-href="#Specify-the-index-params-for-multi-vector-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Por defecto, los tipos de índice de cada campo vectorial se determinarán automáticamente por el tipo de incrustación o función incorporada. Sin embargo, también puede especificar el tipo de índice de cada campo vectorial para optimizar el rendimiento de la búsqueda.</p>
 <pre><code translate="no" class="language-python">dense_index_param_1 = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span>,
     <span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;HNSW&quot;</span>,
@@ -266,7 +311,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 
@@ -277,7 +322,22 @@ vectorstore.vector_fields
 <div class="alert note">
 <p>Por favor, mantenga el orden de la lista de parámetros de índice coherente con el orden de <code translate="no">vectorstore.vector_fields</code> para evitar confusiones.</p>
 </div>
-<h3 id="Rerank-the-candidates" class="common-anchor-header">Nueva clasificación de los candidatos</h3><p>Después de la primera etapa de recuperación, necesitamos reordenar los candidatos para obtener un mejor resultado. Puede elegir <a href="https://milvus.io/docs/weighted-ranker.md#Weighted-Scoring-WeightedRanker">WeightedRanker</a> o <a href="https://milvus.io/docs/weighted-ranker.md#Reciprocal-Rank-Fusion-RRFRanker">RRFRanker</a> en función de sus necesidades. Puede consultar el <a href="https://milvus.io/docs/weighted-ranker.md#Reranking">Reranking</a> para obtener más información.</p>
+<h3 id="Rerank-the-candidates" class="common-anchor-header">Nueva clasificación de los candidatos<button data-href="#Rerank-the-candidates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Después de la primera etapa de recuperación, necesitamos reordenar los candidatos para obtener un mejor resultado. Puede elegir <a href="https://milvus.io/docs/weighted-ranker.md#Weighted-Scoring-WeightedRanker">WeightedRanker</a> o <a href="https://milvus.io/docs/weighted-ranker.md#Reciprocal-Rank-Fusion-RRFRanker">RRFRanker</a> en función de sus necesidades. Puede consultar el <a href="https://milvus.io/docs/weighted-ranker.md#Reranking">Reranking</a> para obtener más información.</p>
 <p>He aquí un ejemplo de reranking ponderado:</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
@@ -287,7 +347,7 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 
@@ -321,7 +381,22 @@ vectorstore.similarity_search(
         ></path>
       </svg>
     </button></h2><p>En el escenario de la RAG, el enfoque más frecuente para la búsqueda híbrida es la recuperación densa + dispersa, seguida de la reordenación. El siguiente ejemplo muestra un código directo de principio a fin.</p>
-<h3 id="Prepare-the-data" class="common-anchor-header">Preparación de los datos</h3><p>Utilizamos Langchain WebBaseLoader para cargar documentos de fuentes web y dividirlos en trozos utilizando RecursiveCharacterTextSplitter.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">Preparación de los datos<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Utilizamos Langchain WebBaseLoader para cargar documentos de fuentes web y dividirlos en trozos utilizando RecursiveCharacterTextSplitter.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bs4
 <span class="hljs-keyword">from</span> langchain_community.document_loaders <span class="hljs-keyword">import</span> WebBaseLoader
 <span class="hljs-keyword">from</span> langchain_text_splitters <span class="hljs-keyword">import</span> RecursiveCharacterTextSplitter
@@ -351,7 +426,22 @@ docs[<span class="hljs-number">1</span>]
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document(metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'}, page_content='Fig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning#\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.\nTask Decomposition#\nChain of thought (CoT; Wei et al. 2022) has become a standard prompting technique for enhancing model performance on complex tasks. The model is instructed to “think step by step” to utilize more test-time computation to decompose hard tasks into smaller and simpler steps. CoT transforms big tasks into multiple manageable tasks and shed lights into an interpretation of the model’s thinking process.\nTree of Thoughts (Yao et al. 2023) extends CoT by exploring multiple reasoning possibilities at each step. It first decomposes the problem into multiple thought steps and generates multiple thoughts per step, creating a tree structure. The search process can be BFS (breadth-first search) or DFS (depth-first search) with each state evaluated by a classifier (via a prompt) or majority vote.\nTask decomposition can be done (1) by LLM with simple prompting like &quot;Steps for XYZ.\\n1.&quot;, &quot;What are the subgoals for achieving XYZ?&quot;, (2) by using task-specific instructions; e.g. &quot;Write a story outline.&quot; for writing a novel, or (3) with human inputs.\nAnother quite distinct approach, LLM+P (Liu et al. 2023), involves relying on an external classical planner to do long-horizon planning. This approach utilizes the Planning Domain Definition Language (PDDL) as an intermediate interface to describe the planning problem. In this process, LLM (1) translates the problem into “Problem PDDL”, then (2) requests a classical planner to generate a PDDL plan based on an existing “Domain PDDL”, and finally (3) translates the PDDL plan back into natural language. Essentially, the planning step is outsourced to an external tool, assuming the availability of domain-specific PDDL and a suitable planner which is common in certain robotic setups but not in many other domains.\nSelf-Reflection#')
 </code></pre>
-<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">Cargar el documento en el almacén vectorial Milvus</h3><p>Como en la introducción anterior, inicializamos y cargamos los documentos preparados en el almacén vectorial de Milvus, que contiene dos campos vectoriales: <code translate="no">dense</code> es para la incrustación OpenAI y <code translate="no">sparse</code> es para la función BM25.</p>
+<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">Cargar el documento en el almacén vectorial Milvus<button data-href="#Load-the-document-into-Milvus-vector-store" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Como en la introducción anterior, inicializamos y cargamos los documentos preparados en el almacén vectorial de Milvus, que contiene dos campos vectoriales: <code translate="no">dense</code> es para la incrustación OpenAI y <code translate="no">sparse</code> es para la función BM25.</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=OpenAIEmbeddings(),
@@ -360,11 +450,26 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Build-RAG-chain" class="common-anchor-header">Creación de la cadena RAG</h3><p>Preparamos la instancia LLM y el prompt, y luego los combinamos en una cadena RAG utilizando el Lenguaje de Expresión LangChain.</p>
+<h3 id="Build-RAG-chain" class="common-anchor-header">Creación de la cadena RAG<button data-href="#Build-RAG-chain" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Preparamos la instancia LLM y el prompt, y luego los combinamos en una cadena RAG utilizando el Lenguaje de Expresión LangChain.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnablePassthrough
 <span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate
 <span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser

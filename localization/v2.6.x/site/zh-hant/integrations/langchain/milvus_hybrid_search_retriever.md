@@ -27,7 +27,7 @@ title: Milvus 混合搜尋檢索器
 </p>
 <p>此圖說明最常見的混合搜尋情況，也就是密集 + 稀疏混合搜尋。在這種情況下，候選人會同時使用語意向量相似性和精確的關鍵字匹配進行檢索。來自這些方法的結果會合併、重新排序，並傳送到 LLM 以產生最終答案。這種方法兼顧了精確度與語意理解，對於不同的查詢情境非常有效。</p>
 <p>除了密集 + 稀疏混合搜尋之外，混合策略也可以結合多種密集向量模型。例如，一個密集向量模型可能專門捕捉語義上的細微差異，而另一個則著重於上下文嵌入或特定領域的表達。透過合併這些模型的結果並重新排序，這類型的混合搜尋可確保檢索過程更仔細、更能感知上下文。</p>
-<p>LangChain Milvus 整合提供了一個彈性的方式來實作混合搜尋，它支援任何數量的向量領域，以及任何自訂的密集或稀疏嵌入模型，這讓 LangChain Milvus 可以彈性的適應各種混合搜尋的使用情境，同時也相容於 LangChain 的其他功能。</p>
+<p>LangChain Milvus 整合提供了一個彈性的方式來實現混合搜尋，它支援任何數量的向量領域，以及任何自訂的密集或稀疏嵌入模型，這使得 LangChain Milvus 能夠靈活地適應各種混合搜尋的使用情境，同時與 LangChain 的其他功能相容。</p>
 <p>在本教程中，我們將從最常見的 dense + sparse 情況開始，然後介紹任何數目的一般混合搜尋使用方式。</p>
 <div class="alert note">
 <p><a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever</a> 是 Milvus 和 LangChain 混合搜尋的另一種實作，<strong>即將被廢棄</strong>。請使用本文件中的方法來實作混合搜尋，因為它比較有彈性，而且與 LangChain 相容。</p>
@@ -123,7 +123,22 @@ docs = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Option-1Recommended-dense-embedding-+-Milvus-BM25-built-in-function" class="common-anchor-header">選項 1(推薦)：密集嵌入 + Milvus BM25 內建功能</h3><p>使用 dense embedding + Milvus BM25 內建函式來組合混合式檢索向量儲存範例。</p>
+    </button></h2><h3 id="Option-1Recommended-dense-embedding-+-Milvus-BM25-built-in-function" class="common-anchor-header">選項 1(推薦)：密集嵌入 + Milvus BM25 內建功能<button data-href="#Option-1Recommended-dense-embedding-+-Milvus-BM25-built-in-function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>使用 dense embedding + Milvus BM25 內建函式來組合混合式檢索向量儲存範例。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, BM25BuiltInFunction
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
@@ -136,7 +151,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -148,7 +163,22 @@ vectorstore = Milvus.from_documents(
 <p>在上面的程式碼中，我們定義了<code translate="no">BM25BuiltInFunction</code> 的一個實體，並將它傳給<code translate="no">Milvus</code> 物件。<code translate="no">BM25BuiltInFunction</code> 是一個輕量級的包裝類，用於 <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a>的一個輕量級包裝類。我們可以使用<code translate="no">OpenAIEmbeddings</code> 來初始化密集 + 稀疏混合搜尋 Milvus 向量儲存的實例。</p>
 <p><code translate="no">BM25BuiltInFunction</code> 在Milvus中，所有的詞彙和訓練都是在Milvus伺服器端自動處理，因此使用者不需要關心任何詞彙和詞彙庫。此外，使用者也可以自訂<a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">分析器</a>，在 BM25 中實現客製化的文字處理。</p>
 <p>關於<code translate="no">BM25BuiltInFunction</code> 的更多資訊，請參考<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Full-Text-Search</a>和<a href="https://milvus.io/docs/full_text_search_with_langchain.md">Using Full-Text Search with LangChain and Milvus</a>。</p>
-<h3 id="Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="common-anchor-header">選項二：使用密集且客製化的 LangChain 稀疏嵌入</h3><p>您可以從<code translate="no">langchain_milvus.utils.sparse</code> 繼承類別<code translate="no">BaseSparseEmbedding</code> ，並實作<code translate="no">embed_query</code> 和<code translate="no">embed_documents</code> 方法來自訂稀疏嵌入過程。這允許您自訂任何基於術語頻率統計（例如<a href="https://milvus.io/docs/embed-with-bm25.md#BM25">BM25</a>）或神經網路（例如<a href="https://milvus.io/docs/embed-with-splade.md#SPLADE">SPADE</a>）的稀疏嵌入方法。</p>
+<h3 id="Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="common-anchor-header">選項二：使用密集且客製化的 LangChain 稀疏嵌入<button data-href="#Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您可以從<code translate="no">langchain_milvus.utils.sparse</code> 繼承類別<code translate="no">BaseSparseEmbedding</code> ，並實作<code translate="no">embed_query</code> 和<code translate="no">embed_documents</code> 方法來自訂稀疏嵌入過程。這允許您自訂任何基於術語頻率統計（例如<a href="https://milvus.io/docs/embed-with-bm25.md#BM25">BM25</a>）或神經網路（例如<a href="https://milvus.io/docs/embed-with-splade.md#SPLADE">SPADE</a>）的稀疏嵌入方法。</p>
 <p>以下是一個範例：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Dict</span>, <span class="hljs-type">List</span>
 <span class="hljs-keyword">from</span> langchain_milvus.utils.sparse <span class="hljs-keyword">import</span> BaseSparseEmbedding
@@ -177,7 +207,7 @@ vectorstore = Milvus.from_documents(
             }
         ] * <span class="hljs-built_in">len</span>(texts)
 <button class="copy-code-btn"></button></code></pre>
-<p>在<code translate="no">langchain_milvus.utils.sparse</code> 中，我們有一個繼承自<code translate="no">BaseSparseEmbedding</code> 的示範類<code translate="no">BM25SparseEmbedding</code> 。您可以將它傳入 Milvus 向量存儲實例的初始化嵌入列表中，就像傳入其他 langchain 密集嵌入類別一樣。</p>
+<p>我們有一個示範類<code translate="no">BM25SparseEmbedding</code> ，它繼承自<code translate="no">langchain_milvus.utils.sparse</code> 中的<code translate="no">BaseSparseEmbedding</code> 。您可以將它傳入 Milvus 向量存儲實例的初始化嵌入列表，就像傳入其他 langchain 密集嵌入類別一樣。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># BM25SparseEmbedding is inherited from BaseSparseEmbedding</span>
 <span class="hljs-keyword">from</span> langchain_milvus.utils.sparse <span class="hljs-keyword">import</span> BM25SparseEmbedding
 
@@ -195,7 +225,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -232,7 +262,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 
@@ -241,7 +271,22 @@ vectorstore.vector_fields
 <pre><code translate="no">['dense1', 'dense2', 'sparse']
 </code></pre>
 <p>在這個範例中，我們有三個向量場。其中，<code translate="no">sparse</code> 用作<code translate="no">BM25BuiltInFunction</code> 的輸出欄位，而另外兩個，<code translate="no">dense1</code> 和<code translate="no">dense2</code> ，則自動指定為兩個<code translate="no">OpenAIEmbeddings</code> 模型的輸出欄位（根據順序）。</p>
-<h3 id="Specify-the-index-params-for-multi-vector-fields" class="common-anchor-header">指定多向量欄位的索引參數</h3><p>預設情況下，每個向量欄位的索引類型會由嵌入或內建函數的類型自動決定。不過，您也可以指定每個向量欄位的索引類型，以最佳化搜尋效能。</p>
+<h3 id="Specify-the-index-params-for-multi-vector-fields" class="common-anchor-header">指定多向量欄位的索引參數<button data-href="#Specify-the-index-params-for-multi-vector-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>預設情況下，每個向量欄位的索引類型會由嵌入或內建函數的類型自動決定。不過，您也可以指定每個向量欄位的索引類型，以最佳化搜尋效能。</p>
 <pre><code translate="no" class="language-python">dense_index_param_1 = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span>,
     <span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;HNSW&quot;</span>,
@@ -264,7 +309,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 
@@ -275,7 +320,22 @@ vectorstore.vector_fields
 <div class="alert note">
 <p>請保持索引參數清單的順序與<code translate="no">vectorstore.vector_fields</code> 的順序一致，以免混淆。</p>
 </div>
-<h3 id="Rerank-the-candidates" class="common-anchor-header">對候選人重新排序</h3><p>在第一階段的檢索之後，我們需要將候選人重新排序，以獲得更好的結果。您可以根據需求選擇<a href="https://milvus.io/docs/weighted-ranker.md#Weighted-Scoring-WeightedRanker">WeightedRanker</a>或<a href="https://milvus.io/docs/weighted-ranker.md#Reciprocal-Rank-Fusion-RRFRanker">RRFRanker</a>。您可以參考<a href="https://milvus.io/docs/weighted-ranker.md#Reranking">Reranking</a>以獲得更多資訊。</p>
+<h3 id="Rerank-the-candidates" class="common-anchor-header">對候選人重新排序<button data-href="#Rerank-the-candidates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在第一階段的檢索之後，我們需要將候選人重新排序，以獲得更好的結果。您可以根據需求選擇<a href="https://milvus.io/docs/weighted-ranker.md#Weighted-Scoring-WeightedRanker">WeightedRanker</a>或<a href="https://milvus.io/docs/weighted-ranker.md#Reciprocal-Rank-Fusion-RRFRanker">RRFRanker</a>。您可以參考<a href="https://milvus.io/docs/weighted-ranker.md#Reranking">Reranking</a>以獲得更多資訊。</p>
 <p>以下是加權重排的範例：</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
@@ -285,7 +345,7 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 
@@ -319,7 +379,22 @@ vectorstore.similarity_search(
         ></path>
       </svg>
     </button></h2><p>在 RAG 的情況下，最普遍的混合搜尋方法是密集 + 稀疏檢索，接著是重新排序。隨後的範例展示了直接的端對端程式碼。</p>
-<h3 id="Prepare-the-data" class="common-anchor-header">準備資料</h3><p>我們使用 Langchain WebBaseLoader 從網路來源載入文件，並使用 RecursiveCharacterTextSplitter 將文件分割成小塊。</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">準備資料<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>我們使用 Langchain WebBaseLoader 從網路來源載入文件，並使用 RecursiveCharacterTextSplitter 將文件分割成小塊。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bs4
 <span class="hljs-keyword">from</span> langchain_community.document_loaders <span class="hljs-keyword">import</span> WebBaseLoader
 <span class="hljs-keyword">from</span> langchain_text_splitters <span class="hljs-keyword">import</span> RecursiveCharacterTextSplitter
@@ -349,7 +424,22 @@ docs[<span class="hljs-number">1</span>]
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document(metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'}, page_content='Fig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning#\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.\nTask Decomposition#\nChain of thought (CoT; Wei et al. 2022) has become a standard prompting technique for enhancing model performance on complex tasks. The model is instructed to “think step by step” to utilize more test-time computation to decompose hard tasks into smaller and simpler steps. CoT transforms big tasks into multiple manageable tasks and shed lights into an interpretation of the model’s thinking process.\nTree of Thoughts (Yao et al. 2023) extends CoT by exploring multiple reasoning possibilities at each step. It first decomposes the problem into multiple thought steps and generates multiple thoughts per step, creating a tree structure. The search process can be BFS (breadth-first search) or DFS (depth-first search) with each state evaluated by a classifier (via a prompt) or majority vote.\nTask decomposition can be done (1) by LLM with simple prompting like &quot;Steps for XYZ.\\n1.&quot;, &quot;What are the subgoals for achieving XYZ?&quot;, (2) by using task-specific instructions; e.g. &quot;Write a story outline.&quot; for writing a novel, or (3) with human inputs.\nAnother quite distinct approach, LLM+P (Liu et al. 2023), involves relying on an external classical planner to do long-horizon planning. This approach utilizes the Planning Domain Definition Language (PDDL) as an intermediate interface to describe the planning problem. In this process, LLM (1) translates the problem into “Problem PDDL”, then (2) requests a classical planner to generate a PDDL plan based on an existing “Domain PDDL”, and finally (3) translates the PDDL plan back into natural language. Essentially, the planning step is outsourced to an external tool, assuming the availability of domain-specific PDDL and a suitable planner which is common in certain robotic setups but not in many other domains.\nSelf-Reflection#')
 </code></pre>
-<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">將文件載入 Milvus 向量儲存庫</h3><p>如上文的介紹，我們將準備好的文件初始化並載入 Milvus 向量存儲，其中包含兩個向量領域：<code translate="no">dense</code> 是 OpenAI 嵌入，<code translate="no">sparse</code> 是 BM25 函數。</p>
+<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">將文件載入 Milvus 向量儲存庫<button data-href="#Load-the-document-into-Milvus-vector-store" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如上文的介紹，我們將準備好的文件初始化並載入 Milvus 向量存儲，其中包含兩個向量領域：<code translate="no">dense</code> 是 OpenAI 嵌入，<code translate="no">sparse</code> 是 BM25 函數。</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=OpenAIEmbeddings(),
@@ -358,11 +448,26 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Build-RAG-chain" class="common-anchor-header">建立 RAG 鏈</h3><p>我們準備好 LLM 實例和提示，然後用 LangChain Expression Language 將它們結合成 RAG 管道。</p>
+<h3 id="Build-RAG-chain" class="common-anchor-header">建立 RAG 鏈<button data-href="#Build-RAG-chain" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>我們準備好 LLM 實例和提示，然後用 LangChain Expression Language 將它們結合成 RAG 管道。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnablePassthrough
 <span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate
 <span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser
@@ -411,7 +516,7 @@ rag_chain = (
 
 <span class="hljs-comment"># rag_chain.get_graph().print_ascii()</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>以特定的問題來呼叫 RAG 鏈，並擷取回應</p>
+<p>以特定的問題來啟動 RAG 鏈，並擷取回應</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
 res = rag_chain.invoke(query)
 res

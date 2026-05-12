@@ -64,7 +64,22 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 
 nest_asyncio.apply()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-data" class="common-anchor-header">Preparar dados</h3><p>Você pode baixar dados de amostra com os seguintes comandos:</p>
+<h3 id="Prepare-data" class="common-anchor-header">Preparar dados<button data-href="#Prepare-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Você pode baixar dados de amostra com os seguintes comandos:</p>
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">&#x27;data/&#x27;</span>
 $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt&#x27;</span> -O <span class="hljs-string">&#x27;data/paul_graham_essay.txt&#x27;</span>
 $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/uber_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/uber_2021.pdf&#x27;</span>
@@ -114,7 +129,7 @@ DIM = <span class="hljs-number">768</span>
         embedding_field=<span class="hljs-string">&quot;embedding&quot;</span>,
         id_field=<span class="hljs-string">&quot;id&quot;</span>,
         similarity_metric=<span class="hljs-string">&quot;COSINE&quot;</span>,
-        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
         overwrite=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># To overwrite the collection if it already exists</span>
     )
 
@@ -123,7 +138,7 @@ vector_store = init_vector_store()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">2025-01-24 20:04:39,414 [DEBUG][_create_connection]: Created new connection using: faa8be8753f74288bffc7e6d38942f8a (async_milvus_client.py:600)
 </code></pre>
-<p>Utilize SimpleDirectoryReader para envolver um objeto de documento LlamaIndex do ficheiro <code translate="no">paul_graham_essay.txt</code>.</p>
+<p>Utilize SimpleDirectoryReader para envolver um objeto de documento LlamaIndex a partir do ficheiro <code translate="no">paul_graham_essay.txt</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> SimpleDirectoryReader
 
 <span class="hljs-comment"># load documents</span>
@@ -159,7 +174,7 @@ index = VectorStoreIndex.from_documents(
 
 llm = OpenAI(model=<span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Ao criar o mecanismo de consulta, você também pode definir o parâmetro <code translate="no">use_async</code> para <code translate="no">True</code> para habilitar a pesquisa assíncrona.</p>
+<p>Ao criar o mecanismo de consulta, você também pode definir o parâmetro <code translate="no">use_async</code> como <code translate="no">True</code> para habilitar a pesquisa assíncrona.</p>
 <pre><code translate="no" class="language-python">query_engine = index.as_query_engine(use_async=<span class="hljs-literal">True</span>, llm=llm)
 response = <span class="hljs-keyword">await</span> query_engine.aquery(<span class="hljs-string">&quot;What did the author learn?&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -183,7 +198,22 @@ response = <span class="hljs-keyword">await</span> query_engine.aquery(<span cla
         ></path>
       </svg>
     </button></h2><p>Nesta secção, apresentaremos a utilização da API de nível inferior e compararemos o desempenho de execuções síncronas e assíncronas.</p>
-<h3 id="Async-add" class="common-anchor-header">Adição assíncrona</h3><p>Reinicialize o armazenamento de vetores.</p>
+<h3 id="Async-add" class="common-anchor-header">Adição assíncrona<button data-href="#Async-add" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Reinicialize o armazenamento de vetores.</p>
 <pre><code translate="no" class="language-python">vector_store = init_vector_store()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">2025-01-24 20:07:38,727 [DEBUG][_create_connection]: Created new connection using: 5e0d130f3b644555ad7ea6b8df5f1fc2 (async_milvus_client.py:600)
@@ -263,7 +293,22 @@ Sync add for 100 took 5.85 seconds
 Sync add for 1000 took 62.91 seconds
 </code></pre>
 <p>O resultado mostra que o processo de adição síncrona é muito mais lento do que o processo assíncrono.</p>
-<h3 id="Async-search" class="common-anchor-header">Pesquisa assíncrona</h3><p>Reinicialize o armazenamento de vectores e adicione alguns documentos antes de executar a pesquisa.</p>
+<h3 id="Async-search" class="common-anchor-header">Pesquisa assíncrona<button data-href="#Async-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Reinicialize o armazenamento de vectores e adicione alguns documentos antes de executar a pesquisa.</p>
 <pre><code translate="no" class="language-python">vector_store = init_vector_store()
 node_list = produce_nodes(num_adding=<span class="hljs-number">1000</span>)
 inserted_ids = vector_store.add(node_list)

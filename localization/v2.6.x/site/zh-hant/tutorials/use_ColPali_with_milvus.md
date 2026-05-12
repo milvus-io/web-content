@@ -27,14 +27,17 @@ title: 使用 ColPali 與 Milvus 進行多模式檢索
         ></path>
       </svg>
     </button></h1><p>現代的檢索模型通常使用單一的嵌入來表示文字或影像。然而，ColBERT 是一種神經模型，它利用每個資料實例的嵌入清單，並採用「MaxSim」運算來計算兩個文字之間的相似度。除了文字資料之外，圖形、表格和圖表也包含豐富的資訊，這些資訊在以文字為基礎的資訊檢索中往往被忽略。</p>
+<div class="alert warning">
+<p>此頁面已被廢棄。有關使用 CoPali 與 Milvus 的最新範例，請參考<a href="/docs/zh-hant/search-with-embedding-lists.md">Sesarch with Embedding Lists</a>。</p>
+</div>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>MaxSim 功能是透過查看查詢與文件 (您要搜尋的內容) 的代號嵌入 (token embeddings) 來比較它們。對於查詢中的每個單字，它會從文件中挑出最相似的單字 (使用余弦相似度或平方 L2 距離)，然後將查詢中所有單字的最大相似度相加。</p>
-<p>ColPali 是一種結合 ColBERT 的多向量表示法與 PaliGemma（多模態大語言模型）的方法，以利用其強大的理解能力。這種方法可以使用統一的多向量嵌入來表示包含文字和圖像的頁面。這個多向量表達中的嵌入可以捕捉到詳細的資訊，改善多模態資料的檢索增強生成 (RAG) 的效能。</p>
+<p>MaxSim 函式透過查看代號嵌入來比較查詢與文件 (您要搜尋的內容)。對於查詢中的每個單字，它會從文件中挑出最相似的單字 (使用余弦相似度或平方 L2 距離)，然後將查詢中所有單字的最大相似度相加。</p>
+<p>ColPali 是一種結合 ColBERT 的多向量表示法與 PaliGemma（多模態大語言模型）的方法，以利用其強大的理解能力。這種方法可以使用統一的多向量嵌入來表示包含文字和圖像的頁面。這個多向量表達中的嵌入可以捕捉到詳細的資訊，提高多模態資料的檢索增強生成 (RAG) 性能。</p>
 <p>在本筆記簿中，為了一般性起見，我們將這種多向量表示法稱為「ColBERT 嵌入」。然而，實際使用的模型是<strong>ColPali 模型</strong>。我們將示範如何使用 Milvus 進行多向量檢索。在此基礎上，我們將介紹如何使用 ColPali 根據給定的查詢來檢索網頁。</p>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -95,7 +98,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>
 <li>如果您使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">雲端</a>服務，請調整<code translate="no">uri</code> 和<code translate="no">token</code> ，它們對應於 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint 和 API key</a>。</li>
 </ul>
 </div>
-<p>我們將定義一個 MilvusColbertRetriever 類別，用來包圍 Milvus 用戶端進行多向量資料擷取。該實作會將 ColBERT embeddings 平面化，並將它們插入一個集合，其中每一行代表 ColBERT embedding 清單中的一個個別 embedding。它還記錄了 doc_id 和 seq_id，以便追蹤每個內嵌的來源。</p>
+<p>我們將定義一個 MilvusColbertRetriever 類別，用來包圍 Milvus 用戶端進行多向量資料擷取。該實作會將 ColBERT embeddings 平面化，並將它們插入一個集合，其中每一行代表 ColBERT embedding 清單中的單獨 embedding。它還記錄了 doc_id 和 seq_id，以便追蹤每個內嵌的來源。</p>
 <p>使用 ColBERT 嵌入列表進行搜尋時，會進行多次搜尋，每次搜尋一個 ColBERT 嵌入。擷取的 doc_ids 將被重複。將執行重新排序過程，在此過程中，每個 doc_id 的完整內嵌被擷取，並計算 MaxSim 得分，以產生最終的排序結果。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MilvusColbertRetriever</span>:
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, milvus_client, collection_name, dim=<span class="hljs-number">128</span></span>):

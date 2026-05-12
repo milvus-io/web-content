@@ -89,13 +89,13 @@ In addition to the key search features mentioned above, Milvus also provides a s
 
 ### API and SDK
 
-- [RESTful API](https://milvus.io/api-reference/restful/v2.4.x/About.md) (official)
-- [PyMilvus](https://milvus.io/api-reference/pymilvus/v2.4.x/About.md) (Python SDK) (official)
-- [Go SDK](https://milvus.io/api-reference/go/v2.4.x/About.md) (official)
-- [Java SDK](https://milvus.io/api-reference/java/v2.4.x/About.md) (official)
-- [Node.js](https://milvus.io/api-reference/node/v2.4.x/About.md) (JavaScript) SDK (official)
+- [RESTful API](https://milvus.io/api-reference/restful/v2.6.x/About.md) (official)
+- [PyMilvus](https://milvus.io/api-reference/pymilvus/v2.6.x/About.md) (Python SDK) (official)
+- [Go SDK](https://milvus.io/api-reference/go/v2.6.x/About.md) (official)
+- [Java SDK](https://milvus.io/api-reference/java/v2.6.x/About.md) (official)
+- [Node.js](https://milvus.io/api-reference/node/v2.6.x/About.md) (JavaScript) SDK (official)
 - [C#](https://milvus.io/api-reference/csharp/v2.2.x/About.md) (contributed by Microsoft)
-- C++ SDK (under development)
+- [C++ SDK](https://milvus.io/api-reference/cpp/v2.6.x/About.md) (official)
 - Rust SDK (under development)
 
 ### Advanced Data Types

@@ -26,7 +26,7 @@ title: بناء RAG مع Milvus و SiliconFlow
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_siliconflow.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>تلتزم شركة<a href="https://siliconflow.cn/">SiliconFlow</a> ببناء منصة ذكاء اصطناعي قابلة للتطوير وموحدة وعالية الأداء للذكاء الاصطناعي. SiliconCloud هي إحدى العروض الرئيسية من SiliconFlow، والتي توصف بأنها منصة نموذج كخدمة (MaaS). وهي توفر بيئة شاملة لنشر نماذج الذكاء الاصطناعي المختلفة، بما في ذلك النماذج اللغوية الكبيرة (LLMs) ونماذج التضمين. تجمع سيليكون كلاود العديد من النماذج مفتوحة المصدر، مما يتيح للمستخدمين الوصول إلى هذه الموارد والاستفادة منها بسهولة دون الحاجة إلى إعداد بنية تحتية واسعة النطاق.</p>
+<p>تلتزم شركة<a href="https://siliconflow.cn/">SiliconFlow</a> ببناء منصة ذكاء اصطناعي قابلة للتطوير وموحدة وعالية الأداء للذكاء الاصطناعي. SiliconCloud هي إحدى العروض الرئيسية من SiliconFlow، والتي توصف بأنها منصة نموذج كخدمة (MaaS). وهي توفر بيئة شاملة لنشر نماذج الذكاء الاصطناعي المختلفة، بما في ذلك النماذج اللغوية الكبيرة ونماذج التضمين. تجمع سيليكون كلاود العديد من النماذج مفتوحة المصدر، مما يتيح للمستخدمين الوصول إلى هذه الموارد والاستفادة منها بسهولة دون الحاجة إلى إعداد بنية تحتية واسعة النطاق.</p>
 <p>في هذا البرنامج التعليمي، سنوضح لك في هذا البرنامج التعليمي كيفية إنشاء خط أنابيب RAG (استرجاع-توليد معزز) باستخدام Milvus و SiliconFlow.</p>
 <h2 id="Preparation" class="common-anchor-header">الإعداد<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,7 +63,7 @@ title: بناء RAG مع Milvus و SiliconFlow
 <div class="alert note">
 <p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
 </div>
-<p>يقوم SiliconFlow بتمكين واجهة برمجة التطبيقات على غرار OpenAI. يمكنك تسجيل الدخول إلى موقعه الرسمي وإعداد <a href="https://docs.siliconflow.cn/quickstart">مفتاح واجهة برمجة التطبيقات</a> <code translate="no">SILICON_FLOW_API_KEY</code> كمتغير بيئة.</p>
+<p>يقوم SiliconFlow بتمكين واجهة برمجة التطبيقات على غرار OpenAI. يمكنك تسجيل الدخول إلى موقعه الرسمي وإعداد <a href="https://docs.siliconflow.cn/quickstart">مفتاح API</a> <code translate="no">SILICON_FLOW_API_KEY</code> كمتغير بيئة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;SILICON_FLOW_API_KEY&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>
@@ -192,7 +192,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">إدراج البيانات<button data-href="#Insert-data" class="anchor-icon" translate="no">

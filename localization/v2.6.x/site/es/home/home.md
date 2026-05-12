@@ -1,7 +1,6 @@
 ---
 id: home.md
 ---
-
 <div class="doc-h1-wrapper">
 <p><h1 class="title">
 ¡Bienvenido a Milvus Docs!</h1></p>
@@ -72,14 +71,15 @@ Aquí aprenderá qué es Milvus y cómo instalar, utilizar y desplegar Milvus pa
 <li><a href="/docs/es/insert-update-delete.md">Insertar, volver a insertar y eliminar</a></li>
 <li><a href="/docs/es/single-vector-search.md">Búsqueda monovectorial</a></li>
 <li><a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a></li>
-<li><a href="/docs/es/get-and-scalar-query.md">Consulta Get &amp; Scalar</a></li>
+<li><a href="/docs/es/get-and-scalar-query.md">Obtención y consulta escalar</a></li>
+<li><a href="/docs/es/milvus_for_agents.md">Milvus para agentes de IA</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Despliegue</p>
 <ul>
 <li><a href="/docs/es/configure-docker.md">Configurar Milvus</a></li>
-<li><a href="/docs/es/deploy_s3.md">Gestión de dependencias</a></li>
+<li><a href="/docs/es/deploy_s3.md">Gestionar dependencias</a></li>
 <li><a href="/docs/es/eks.md">Despliegue en nubes</a></li>
 <li><a href="/docs/es/scaleout.md">Escalar un clúster Milvus</a></li>
 <li><a href="/docs/es/monitor_overview.md">Supervisar y alertar</a></li>
@@ -112,12 +112,12 @@ Aquí aprenderá qué es Milvus y cómo instalar, utilizar y desplegar Milvus pa
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>Junio de 2025 - Lanzamiento de Milvus 2.6.0</em></p>
+    </button></h2><p><em>Marzo 2026 - Actualizaciones de Milvus 2.6.x</em></p>
 <ul>
-<li>Añadida guía sobre cómo <a href="/docs/es/embedding-function-overview.md">utilizar la función de incrustación</a>.</li>
-<li>Se ha añadido una guía sobre cómo <a href="/docs/es/decay-ranker-overview.md">utilizar el decay ranker</a>.</li>
-<li>Añadida guía sobre cómo <a href="/docs/es/add-fields-to-an-existing-collection.md">añadir campos a una colección existente</a>.</li>
-<li>Añadida una guía sobre cómo <a href="/docs/es/phrase-match.md">realizar la concordancia de frases</a>.</li>
-<li>Se han añadido descripciones del <a href="/docs/es/ivf-rabitq.md">índice IVF_RABITQ</a>.</li>
+<li>Añadida la sección <a href="/docs/es/milvus_for_agents.md">Milvus para Agentes de Inteligencia Artificial</a> con guías de instrucciones.</li>
+<li>Se ha añadido una guía sobre cómo utilizar <a href="/docs/es/google-gemini.md">la función de incrustación Gemini</a>.</li>
+<li>Añadida guía sobre cómo <a href="/docs/es/primary-key-search.md">buscar por claves primarias</a>.</li>
+<li>Se ha añadido una guía sobre cómo utilizar <a href="/docs/es/text-highlighter.md">el resaltador de texto</a> en los resultados de búsqueda.</li>
+<li>Se han añadido descripciones de los <a href="/docs/es/geometry-field.md">campos geometry</a>, <a href="/docs/es/timestamptz-field.md">timestamptz</a>, <a href="/docs/es/tiered-storage-overview.md">tiered storage</a> y <a href="/docs/es/array-of-structs.md">array of structs</a>.</li>
 </ul>
 </div>

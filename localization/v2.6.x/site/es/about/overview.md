@@ -58,7 +58,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Los datos no estructurados, como texto, imágenes y audio, varían de formato y contienen una rica semántica subyacente, lo que dificulta su análisis. Para gestionar esta complejidad, se utilizan embebimientos que convierten los datos no estructurados en vectores numéricos que capturan sus características esenciales. A continuación, estos vectores se almacenan en una base de datos vectorial, lo que permite realizar búsquedas y análisis rápidos y escalables.</p>
-<p>Milvus ofrece sólidas capacidades de modelado de datos, lo que le permite organizar sus datos no estructurados o multimodales en colecciones estructuradas. Es compatible con una amplia gama de tipos de datos para el modelado de atributos diferentes, incluidos los tipos numéricos y de caracteres comunes, varios tipos de vectores, matrices, conjuntos y JSON, lo que le ahorra el esfuerzo de mantener múltiples sistemas de bases de datos.</p>
+<p>Milvus ofrece sólidas capacidades de modelado de datos, lo que le permite organizar sus datos no estructurados o multimodales en colecciones estructuradas. Admite una amplia gama de tipos de datos para el modelado de diferentes atributos, incluidos los tipos numéricos y de caracteres comunes, varios tipos de vectores, matrices, conjuntos y JSON, lo que le ahorra el esfuerzo de mantener varios sistemas de bases de datos.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
@@ -153,17 +153,47 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Además de las funciones de búsqueda clave mencionadas anteriormente, Milvus también proporciona un conjunto de funciones implementadas en torno a las búsquedas RNA para que pueda utilizar plenamente sus capacidades.</p>
-<h3 id="API-and-SDK" class="common-anchor-header">API y SDK</h3><ul>
-<li><a href="https://milvus.io/api-reference/restful/v2.4.x/About.md">API RESTful</a> (oficial)</li>
-<li><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">PyMilvus</a> (Python SDK) (oficial)</li>
-<li><a href="https://milvus.io/api-reference/go/v2.4.x/About.md">Go SDK</a> (oficial)</li>
-<li><a href="https://milvus.io/api-reference/java/v2.4.x/About.md">Java SDK</a> (oficial)</li>
-<li>SDK de<a href="https://milvus.io/api-reference/node/v2.4.x/About.md">Node.js</a> (JavaScript) (oficial)</li>
-<li><a href="https://milvus.io/api-reference/csharp/v2.2.x/About.md">C#</a> (contribuido por Microsoft)</li>
-<li>C++ SDK (en desarrollo)</li>
+<h3 id="API-and-SDK" class="common-anchor-header">API y SDK<button data-href="#API-and-SDK" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li><a href="https://milvus.io/api-reference/restful/v2.6.x/About.md">API RESTful</a> (oficial)</li>
+<li><a href="https://milvus.io/api-reference/pymilvus/v2.6.x/About.md">PyMilvus</a> (Python SDK) (oficial)</li>
+<li><a href="https://milvus.io/api-reference/go/v2.6.x/About.md">Go SDK</a> (oficial)</li>
+<li><a href="https://milvus.io/api-reference/java/v2.6.x/About.md">Java SDK</a> (oficial)</li>
+<li>SDK de<a href="https://milvus.io/api-reference/node/v2.6.x/About.md">Node.js</a> (JavaScript) (oficial)</li>
+<li><a href="https://milvus.io/api-reference/csharp/v2.2.x/About.md">C#</a> (contribución de Microsoft)</li>
+<li><a href="https://milvus.io/api-reference/cpp/v2.6.x/About.md">SDK de C++</a> (oficial)</li>
 <li>SDK de Rust (en desarrollo)</li>
 </ul>
-<h3 id="Advanced-Data-Types" class="common-anchor-header">Tipos de datos avanzados</h3><p>Además de los tipos de datos primitivos, Milvus soporta varios tipos de datos avanzados y sus respectivas métricas de distancia aplicables.</p>
+<h3 id="Advanced-Data-Types" class="common-anchor-header">Tipos de datos avanzados<button data-href="#Advanced-Data-Types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Además de los tipos de datos primitivos, Milvus soporta varios tipos de datos avanzados y sus respectivas métricas de distancia aplicables.</p>
 <ul>
 <li><a href="/docs/es/sparse_vector.md">Vectores dispersos</a></li>
 <li><a href="/docs/es/index-vector-fields.md">Vectores binarios</a></li>
@@ -172,7 +202,22 @@ summary: >-
 <li>Texto (en desarrollo)</li>
 <li>Geolocalización (en desarrollo)</li>
 </ul>
-<h3 id="Why-Milvus" class="common-anchor-header">¿Por qué Milvus?</h3><ul>
+<h3 id="Why-Milvus" class="common-anchor-header">¿Por qué Milvus?<button data-href="#Why-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>Alto rendimiento a escala y alta disponibilidad</strong></p>
 <p>Milvus presenta una <a href="/docs/es/architecture_overview.md">arquitectura distribuida</a> que separa la <a href="/docs/es/data_processing.md#Data-query">computación</a> del <a href="/docs/es/data_processing.md#Data-insertion">almacenamiento</a>. Milvus puede escalar horizontalmente y adaptarse a diversos patrones de tráfico, logrando un rendimiento óptimo mediante el aumento independiente de los nodos de consulta para la carga de trabajo de lectura pesada y el nodo de datos para la carga de trabajo de escritura pesada. Los microservicios sin estado de K8s permiten <a href="/docs/es/coordinator_ha.md#Coordinator-HA">una rápida recuperación</a> en caso de fallo, lo que garantiza una alta disponibilidad. La compatibilidad con <a href="/docs/es/replica.md">réplicas</a> mejora aún más la tolerancia a fallos y el rendimiento mediante la carga de segmentos de datos en varios nodos de consulta. Consulte la comparativa de <a href="https://zilliz.com/vector-database-benchmark-tool">rendimiento</a>.</p></li>
 <li><p><strong>Soporte para varios tipos de índices vectoriales y aceleración por hardware</strong></p>
@@ -184,12 +229,42 @@ summary: >-
 <li><p><strong>Seguridad de datos y control de acceso de grano fino</strong></p>
 <p>Milvus garantiza la seguridad de los datos implementando la <a href="/docs/es/authenticate.md">autenticación obligatoria de usuarios</a>, el <a href="/docs/es/tls.md">cifrado TLS</a> y el <a href="/docs/es/rbac.md">control de acceso basado en roles (RBAC)</a>. La autenticación de usuarios garantiza que sólo los usuarios autorizados con credenciales válidas puedan acceder a la base de datos, mientras que el cifrado TLS protege todas las comunicaciones dentro de la red. Además, RBAC permite un control de acceso detallado mediante la asignación de permisos específicos a los usuarios en función de sus funciones. Estas características hacen de Milvus una opción sólida y segura para las aplicaciones empresariales, protegiendo los datos confidenciales de accesos no autorizados y posibles infracciones.</p></li>
 </ul>
-<h3 id="AI-Integrations" class="common-anchor-header">Integraciones de IA</h3><ul>
+<h3 id="AI-Integrations" class="common-anchor-header">Integraciones de IA<button data-href="#AI-Integrations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Integraciones de modelos de incrustación Los modelos de incrustación convierten los datos no estructurados en su representación numérica en un espacio de datos de alta dimensión para que pueda almacenarlos en Milvus. Actualmente, PyMilvus, el SDK de Python, integra varios modelos de incrustación para que pueda preparar rápidamente sus datos en incrustaciones vectoriales. Para más detalles, consulte <a href="/docs/es/embeddings.md">Visión general de la incrustación</a>.</p></li>
 <li><p>Integración de modelos de reordenación En el ámbito de la recuperación de información y la IA generativa, un reordenador es una herramienta esencial que optimiza el orden de los resultados de las búsquedas iniciales. PyMilvus también integra varios modelos de reordenación para optimizar el orden de los resultados obtenidos en las búsquedas iniciales. Para más detalles, consulte <a href="/docs/es/rerankers-overview.md">Visión general de los rerankers</a>.</p></li>
 <li><p>LangChain y otras integraciones de herramientas de IA En la era GenAI, las herramientas, como LangChain, reciben mucha atención por parte de los desarrolladores de aplicaciones. Como componente central, Milvus suele servir como almacén de vectores en dichas herramientas. Para saber cómo integrar Milvus en sus herramientas de IA favoritas, consulte nuestras <a href="/docs/es/integrate_with_openai.md">Integraciones</a> y <a href="/docs/es/build-rag-with-milvus.md">tutoriales</a>.</p></li>
 </ul>
-<h3 id="Tools-and-Ecosystem" class="common-anchor-header">Herramientas y ecosistema</h3><ul>
+<h3 id="Tools-and-Ecosystem" class="common-anchor-header">Herramientas y ecosistema<button data-href="#Tools-and-Ecosystem" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Attu Attu es una GUI intuitiva todo-en-uno que le ayuda a gestionar Milvus y los datos que almacena. Para más detalles, consulte el repositorio de <a href="https://github.com/zilliztech/attu">Attu</a>.</p></li>
 <li><p>Birdwatcher Birdwatcher es una herramienta de depuración para Milvus. Usándola para conectarse a etcd, puede comprobar el estado de su sistema Milvus o configurarlo sobre la marcha. Para más detalles, consulte <a href="/docs/es/birdwatcher_overview.md">BirdWatcher</a>.</p></li>
 <li><p>Integraciones de Promethus y Grafana Prometheus es un conjunto de herramientas de alerta y supervisión de sistemas de código abierto para Kubernetes. Grafana es una pila de visualización de código abierto que puede conectarse con todas las fuentes de datos. Puede utilizar Promethus y Grafana como proveedor de servicios de supervisión para supervisar visualmente el rendimiento de Milvus distributed. Para obtener más información, consulte <a href="/docs/es/monitor.md">Despliegue de servicios de supervisión</a>.</p></li>

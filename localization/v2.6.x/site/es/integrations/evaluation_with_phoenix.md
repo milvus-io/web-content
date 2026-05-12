@@ -123,7 +123,7 @@ title: Evaluación con Arize Pheonix
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -298,7 +298,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
     <tr>
       <th>1</th>
       <td>¿Cuál es el lenguaje de programación utilizado...</td>
-      <td>[CMake &amp; Conan\n\nLa biblioteca de algoritmos de Mil...</td>
+      <td>[CMake &amp; Conan\nLa biblioteca de algoritmos de Mil...</td>
       <td>El lenguaje de programación utilizado para escribir Knowher...</td>
       <td>¿Cuál es el lenguaje de programación utilizado...</td>
     </tr>
@@ -464,7 +464,7 @@ results_df.head()
       <td>[CMake &amp; Conan\n\nLa biblioteca de algoritmos de Mil...</td>
       <td>El lenguaje de programación utilizado para escribir Knowher...</td>
       <td>El lenguaje de programación utilizado para escribir Knowher...</td>
-      <td>[CMake &amp; Conan La librería de algoritmos de Mil...</td>
+      <td>[CMake &amp; Conan\nLa biblioteca de algoritmos de Mil...</td>
       <td>[CMake &amp; Conan La biblioteca de algoritmos de Mil...</td>
       <td>factual</td>
       <td>Determinar si la respuesta es factual o hallu...</td>

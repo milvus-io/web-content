@@ -66,7 +66,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <li><p>Prima di installare Milvus, si consiglia di utilizzare <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> per stimare i requisiti hardware in base alle dimensioni dei dati. Questo aiuta a garantire prestazioni e allocazione delle risorse ottimali per l'installazione di Milvus.</p></li>
 </ul>
 <div class="alert note">
-<p>Se si riscontrano problemi nell'estrazione dell'immagine, contattateci all'indirizzo <a href="mailto:community@zilliz.com">community@zilliz.com</a> con i dettagli del problema e vi forniremo l'assistenza necessaria.</p>
+<p>Se si riscontrano problemi nell'estrazione dell'immagine, contattateci all'indirizzo <a href="mailto:community@zilliz.com">community@zilliz.com</a> con i dettagli del problema e vi forniremo il supporto necessario.</p>
 </div>
 <h2 id="Install-Milvus-Operator" class="common-anchor-header">Installare Milvus Operator<button data-href="#Install-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -175,7 +175,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Una volta che il pod Milvus Operator è in esecuzione, è possibile distribuire un cluster Milvus come segue.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Il comando precedente distribuisce un cluster Milvus con <strong>Woodpecker</strong> come coda di messaggi (consigliato per la versione 2.6.13) e tutti i nuovi componenti architettonici, compreso lo Streaming Node.</p>
+<p>Il comando precedente distribuisce un cluster Milvus con <strong>Woodpecker</strong> come coda di messaggi (consigliato per la versione 2.6.15) e tutti i nuovi componenti architettonici, compreso lo Streaming Node.</p>
 <p><strong>I punti salienti dell'architettura in questa distribuzione:</strong></p>
 <ul>
 <li><strong>Coda dei messaggi</strong>: <a href="/docs/it/use-woodpecker.md">Utilizza Woodpecker</a> (riduce la manutenzione dell'infrastruttura).</li>

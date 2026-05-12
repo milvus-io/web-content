@@ -43,7 +43,7 @@ title: クイックスタート
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <blockquote>
-<p>Google Colabを使用している場合、インストールした依存関係を有効にするために、<strong>ランタイムを再起動する</strong>必要があるかもしれません。(画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください)。</p>
+<p>Google Colabを使用している場合、インストールした依存関係を有効にするために、<strong>ランタイムを再起動する</strong>必要があるかもしれません。(画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
 </blockquote>
 </div>
 <h2 id="Set-Up-Vector-Database" class="common-anchor-header">ベクターデータベースのセットアップ<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
@@ -81,7 +81,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでは、ベクターとそれに関連するメタデータを保存するコレクションが必要です。これは従来のSQLデータベースでいうテーブルのようなものです。コレクションを作成する際、スキーマとインデックスのパラメータを定義して、次元数、インデックスタイプ、遠隔メトリックなどのベクター仕様を設定することができます。また、ベクトル検索のパフォーマンスのためにインデックスを最適化する複雑な概念もあります。とりあえず、基本的なことに集中して、可能な限りデフォルトを使用することにしましょう。最低限必要なのは、コレクション名とコレクションのベクトル・フィールドの次元だけです。</p>
+    </button></h2><p>Milvusでは、ベクターとそれに関連するメタデータを保存するコレクションが必要です。これは従来のSQLデータベースでいうテーブルのようなものです。コレクションを作成する際、スキーマとインデックスのパラメータを定義して、次元数、インデックスタイプ、遠隔メトリクスなどのベクター仕様を設定することができます。また、ベクトル検索のパフォーマンスのためにインデックスを最適化する複雑な概念もあります。とりあえず、基本的なことに集中して、可能な限りデフォルトを使用することにしましょう。最低限必要なのは、コレクション名とコレクションのベクトル・フィールドの次元だけです。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>):
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
@@ -179,7 +179,7 @@ Vector dim: <span class="hljs-number">768</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ネットワークの問題でモデルをダウンロードできなかった場合、ウォークアラウンドとして、ランダムベクターを使ってテキストを表現することができます。ただ、そのベクトルは偽物なので、検索結果に意味的類似性が反映されないことに注意してください。</p>
+    </button></h2><p>ネットワークの問題でモデルをダウンロードできなかった場合、ウォークアラウンドとして、ランダムなベクトルを使ってテキストを表現することができます。ただ、そのベクトルは偽物なので、検索結果に意味的類似性が反映されないことに注意してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 
 <span class="hljs-comment"># Text strings to search from.</span>
@@ -432,9 +432,26 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus LiteはローカルのPythonプログラムで始めるには最適です。大規模なデータをお持ちの場合や、Milvusを本番環境で使用したい場合は、<a href="https://milvus.io/docs/install_standalone-docker.md">Dockerや</a> <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>上でのMilvusのデプロイについて学ぶことができます。Milvusのすべてのデプロイメントモードは同じAPIを共有しているため、他のデプロイメントモードに移行する場合でもクライアント側のコードを大きく変更する必要はありません。どこにでもデプロイされたMilvusサーバーの<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URIとTokenを</a>指定するだけです：</p>
+    </button></h2><p>Milvus LiteはローカルのPythonプログラムで始めるには最適です。大規模なデータをお持ちの場合や、本番環境でMilvusを使用したい場合は、<a href="https://milvus.io/docs/install_standalone-docker.md">Dockerや</a> <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>上でのMilvusのデプロイについて学ぶことができます。Milvusのすべてのデプロイメントモードは同じAPIを共有しているため、他のデプロイメントモードに移行する場合でもクライアント側のコードを大きく変更する必要はありません。どこにでもデプロイされたMilvusサーバの<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URIとTokenを</a>指定するだけです：</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus LiteからDockerまたはKubernetes上にデプロイされたMilvusにデータを移行するには、<a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">Milvus Liteからのデータ移行を</a>参照してください。</p>
-<p>MilvusはRESTおよびgRPC APIを提供しており、<a href="https://milvus.io/docs/install-pymilvus.md">Python</a>、<a href="https://milvus.io/docs/install-java.md">Java</a>、<a href="https://milvus.io/docs/install-go.md">Go</a>、C#、<a href="https://milvus.io/docs/install-node.md">Node.jsなどの</a>言語でクライアントライブラリを提供しています。</p>
-<p>スキーマ設計については、Milvusは柔軟なスキーマ設計をサポートしており、ベクトルフィールドを含むフィールドとそのデータ型を定義することができます。また、各フィールドのインデックスタイプとパラメータを定義することもできます。詳細については、<a href="https://milvus.io/docs/schema-hands-on.md">検索のためのデータモデル設計を</a>参照してください。</p>
+<p>MilvusはRESTおよびgRPC APIを提供し、<a href="https://milvus.io/docs/install-pymilvus.md">Python</a>、<a href="https://milvus.io/docs/install-java.md">Java</a>、<a href="https://milvus.io/docs/install-go.md">Go</a>、C#、<a href="https://milvus.io/docs/install-node.md">Node.jsなどの</a>言語によるクライアントライブラリを用意しています。</p>
+<p>スキーマ設計については、Milvusは柔軟なスキーマ設計をサポートしており、ベクトルフィールドを含むフィールドとそのデータ型を定義することができます。また、各フィールドのインデックスタイプとパラメータを定義することもできます。詳しくは、<a href="https://milvus.io/docs/schema-hands-on.md">検索のためのデータモデル設計を</a>ご覧ください。</p>
+<h2 id="Milvus-for-AI-Agents" class="common-anchor-header">AIエージェント向けMilvus<button data-href="#Milvus-for-AI-Agents" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Claude CodeやCursorのようなAIコーディングアシスタントを使用している場合、<a href="https://github.com/zilliztech/milvus-skill">Milvus Skillを</a>インストールすることで、AIツールが正しいMilvusコードを記述できるようになります。</p>
+<p>MCPサーバーやキュレーションプロンプトを含むその他のエージェントツールについては、<a href="/docs/ja/milvus_for_agents.md">Milvus for AI Agentsを</a>ご覧ください。</p>

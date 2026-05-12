@@ -1,7 +1,6 @@
 ---
 id: home.md
 ---
-
 <div class="doc-h1-wrapper">
 <p><h1 class="title">
 欢迎来到 Milvus 文档！</h1></p>
@@ -73,6 +72,7 @@ id: home.md
 <li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
 <li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
 <li><a href="/docs/zh/get-and-scalar-query.md">获取和标量查询</a></li>
+<li><a href="/docs/zh/milvus_for_agents.md">用于人工智能代理的 Milvus</a></li>
 </ul>
 </div>
 <div class="recomment-item">
@@ -112,12 +112,12 @@ id: home.md
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>2025 年 6 月 - Milvus 2.6.0 发布</em></p>
+    </button></h2><p><em>2026 年 3 月 - Milvus 2.6.x 更新</em></p>
 <ul>
-<li>添加了如何<a href="/docs/zh/embedding-function-overview.md">使用 Embdings 函数</a>的指导。</li>
-<li>添加了如何<a href="/docs/zh/decay-ranker-overview.md">使用衰减排名器的</a>指导。</li>
-<li>添加了如何<a href="/docs/zh/add-fields-to-an-existing-collection.md">向现有 Collections 添加字段的</a>指导。</li>
-<li>已添加如何<a href="/docs/zh/phrase-match.md">执行短语匹配的</a>指导。</li>
-<li>添加了<a href="/docs/zh/ivf-rabitq.md">IVF_RABITQ 索引</a>的说明。</li>
+<li><a href="/docs/zh/milvus_for_agents.md">为人工智能 Agents</a>添加了<a href="/docs/zh/milvus_for_agents.md">Milvus</a>部分，其中包含提示指南。</li>
+<li>添加了如何使用<a href="/docs/zh/google-gemini.md">双子座嵌入功能</a>的指导。</li>
+<li>添加了如何<a href="/docs/zh/primary-key-search.md">通过主键搜索的</a>指导。</li>
+<li>添加了如何在搜索结果中使用<a href="/docs/zh/text-highlighter.md">文本高亮显示的</a>指导。</li>
+<li>已添加<a href="/docs/zh/geometry-field.md">几何字段</a>、<a href="/docs/zh/timestamptz-field.md">timestamptz 字段</a>、<a href="/docs/zh/tiered-storage-overview.md">分层存储</a>和<a href="/docs/zh/array-of-structs.md">结构数组的</a>说明。</li>
 </ul>
 </div>

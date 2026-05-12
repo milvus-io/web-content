@@ -90,7 +90,7 @@ title: إدارة مجموعات الموارد
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>جميع نماذج التعليمات البرمجية في هذه الصفحة موجودة في PyMilvus 2.6.10. قم بترقية تثبيت PyMilvus قبل تشغيلها.</p>
+<p>جميع نماذج التعليمات البرمجية في هذه الصفحة موجودة في PyMilvus 2.6.12. قم بترقية تثبيت PyMilvus قبل تشغيلها.</p>
 </div>
 <ol>
 <li><p>إنشاء مجموعة موارد.</p>
@@ -213,7 +213,7 @@ except Exception:
     print(f&quot;</span>Something went wrong <span class="hljs-keyword">while</span> dropping {resource_group}.<span class="hljs-string">&quot;)
 </span><button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<p>لمزيد من التفاصيل، يُرجى الرجوع إلى <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">الأمثلة ذات الصلة في pymilvus</a></p>
+<p>لمزيد من التفاصيل، يرجى الرجوع إلى <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">الأمثلة ذات الصلة في pymilvus</a></p>
 <h2 id="A-good-practice-to-manage-cluster-scaling" class="common-anchor-header">ممارسة جيدة لإدارة توسيع نطاق المجموعة<button data-href="#A-good-practice-to-manage-cluster-scaling" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

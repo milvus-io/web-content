@@ -31,13 +31,16 @@ title: Gunakan ColPali untuk Pengambilan Multi-Modal dengan Milvus
         ></path>
       </svg>
     </button></h1><p>Model pengambilan modern biasanya menggunakan satu penyematan untuk merepresentasikan teks atau gambar. Akan tetapi, ColBERT adalah model neural yang menggunakan daftar penyematan untuk setiap contoh data dan menggunakan operasi "MaxSim" untuk menghitung kemiripan antara dua teks. Selain data tekstual, gambar, tabel, dan diagram juga mengandung informasi yang kaya, yang sering diabaikan dalam pencarian informasi berbasis teks.</p>
+<div class="alert warning">
+<p>Halaman ini sudah tidak digunakan lagi. Untuk contoh terbaru dari penggunaan CoPali dengan Milvus, lihat <a href="/docs/id/search-with-embedding-lists.md">Sesarch dengan Daftar Penyisipan</a>.</p>
+</div>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>Fungsi MaxSim membandingkan kueri dengan dokumen (yang Anda cari) dengan melihat penyematan tokennya. Untuk setiap kata dalam kueri, ia memilih kata yang paling mirip dari dokumen (menggunakan cosine similarity atau jarak L2 kuadrat) dan menjumlahkan kemiripan maksimum ini di semua kata dalam kueri</p>
+<p>Fungsi MaxSim membandingkan kueri dengan dokumen (apa yang Anda cari) dengan melihat penyematan tokennya. Untuk setiap kata dalam kueri, fungsi ini memilih kata yang paling mirip dari dokumen (menggunakan cosine similarity atau jarak L2 kuadrat) dan menjumlahkan kemiripan maksimum ini di semua kata dalam kueri</p>
 <p>ColPali adalah metode yang menggabungkan representasi multi-vektor ColBERT dengan PaliGemma (model bahasa besar multimodal) untuk meningkatkan kemampuan pemahamannya yang kuat. Pendekatan ini memungkinkan sebuah halaman dengan teks dan gambar direpresentasikan menggunakan penyematan multi-vektor terpadu. Penyematan dalam representasi multi-vektor ini dapat menangkap informasi yang terperinci, meningkatkan kinerja pengambilan-penambahan generasi (RAG) untuk data multimodal.</p>
 <p>Dalam buku catatan ini, kami menyebut representasi multi-vektor semacam ini sebagai "embeddings ColBERT" untuk keumumannya. Namun, model sebenarnya yang digunakan adalah <strong>model ColPali</strong>. Kami akan mendemonstrasikan bagaimana cara menggunakan Milvus untuk pengambilan multi-vektor. Selanjutnya, kami akan memperkenalkan cara menggunakan ColPali untuk mengambil halaman berdasarkan kueri yang diberikan.</p>
 <h2 id="Preparation" class="common-anchor-header">Persiapan<button data-href="#Preparation" class="anchor-icon" translate="no">

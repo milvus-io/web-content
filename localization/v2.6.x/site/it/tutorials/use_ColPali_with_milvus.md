@@ -31,13 +31,16 @@ title: Utilizzare ColPali per il recupero multimodale con Milvus
         ></path>
       </svg>
     </button></h1><p>I moderni modelli di recupero utilizzano in genere un singolo embedding per rappresentare il testo o le immagini. ColBERT, invece, è un modello neurale che utilizza un elenco di incorporazioni per ogni istanza di dati e impiega un'operazione "MaxSim" per calcolare la somiglianza tra due testi. Oltre ai dati testuali, anche le figure, le tabelle e i diagrammi contengono informazioni ricche, che spesso non vengono prese in considerazione nel recupero delle informazioni basato sul testo.</p>
+<div class="alert warning">
+<p>Questa pagina è stata deprecata. Per l'ultimo esempio di utilizzo di CoPali con Milvus, consultare <a href="/docs/it/search-with-embedding-lists.md">Sesarch with Embedding Lists</a>.</p>
+</div>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>La funzione MaxSim confronta una query con un documento (quello che si sta cercando) osservando le loro incorporazioni di token. Per ogni parola della query, sceglie la parola più simile dal documento (usando la somiglianza coseno o la distanza L2 al quadrato) e somma queste somiglianze massime tra tutte le parole della query.</p>
+<p>La funzione MaxSim confronta una query con un documento (quello in cui si sta effettuando la ricerca) osservando le loro incorporazioni di token. Per ogni parola della query, sceglie la parola più simile dal documento (usando la somiglianza coseno o la distanza L2 al quadrato) e somma queste somiglianze massime tra tutte le parole della query.</p>
 <p>ColPali è un metodo che combina la rappresentazione multivettoriale di ColBERT con PaliGemma (un modello linguistico multimodale di grandi dimensioni) per sfruttare le sue forti capacità di comprensione. Questo approccio consente di rappresentare una pagina con testo e immagini utilizzando un embedding multivettoriale unificato. Gli embedding all'interno di questa rappresentazione multivettoriale possono catturare informazioni dettagliate, migliorando le prestazioni della retrieval-augmented generation (RAG) per i dati multimodali.</p>
 <p>In questo quaderno, per generalità, ci riferiamo a questo tipo di rappresentazione multivettoriale come "embeddings ColBERT". Tuttavia, il modello effettivamente utilizzato è il <strong>modello ColPali</strong>. Dimostreremo come utilizzare Milvus per il reperimento di dati multivettoriali. A partire da questo, introdurremo l'uso di ColPali per il reperimento di pagine basate su una determinata query.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparazione<button data-href="#Preparation" class="anchor-icon" translate="no">
@@ -100,7 +103,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>
 </ul>
 </div>
 <p>Definiremo una classe MilvusColbertRetriever per avvolgere il client Milvus per il recupero di dati multivettoriali. L'implementazione appiattisce le incorporazioni ColBERT e le inserisce in una raccolta, dove ogni riga rappresenta una singola incorporazione dall'elenco delle incorporazioni ColBERT. Inoltre, registra il doc_id e il seq_id per risalire all'origine di ogni embedding.</p>
-<p>Quando si effettua una ricerca con un elenco di incorporazioni ColBERT, vengono effettuate più ricerche, una per ogni incorporazione ColBERT. I doc_id recuperati saranno quindi deduplicati. Verrà eseguito un processo di reranking, in cui verranno recuperati gli embedding completi per ogni doc_id e verrà calcolato il punteggio MaxSim per produrre i risultati finali classificati.</p>
+<p>Quando si effettua una ricerca con un elenco di incorporazioni ColBERT, vengono condotte più ricerche, una per ogni incorporazione ColBERT. I doc_id recuperati saranno quindi deduplicati. Verrà eseguito un processo di reranking, in cui verranno recuperati gli embedding completi per ogni doc_id e verrà calcolato il punteggio MaxSim per produrre i risultati finali classificati.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MilvusColbertRetriever</span>:
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, milvus_client, collection_name, dim=<span class="hljs-number">128</span></span>):
         <span class="hljs-comment"># Initialize the retriever with a Milvus client, collection name, and dimensionality of the vector embeddings.</span>

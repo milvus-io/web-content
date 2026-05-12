@@ -43,9 +43,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Numeric fields (e.g., <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>). For details, refer to <a href="/docs/number.md">Boolean & Number</a>.</p></li>
-<li><p><code translate="no">VARCHAR</code> fields. For details, refer to <a href="/docs/string.md">String Field</a>.</p></li>
-<li><p><code translate="no">TIMESTAMPTZ</code> fields. For details, refer to <a href="/docs/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p></li>
+<li><p>Numeric fields (e.g., <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>). For details, refer to <a href="/docs/v2.6.x/number.md">Boolean & Number</a>.</p></li>
+<li><p><code translate="no">VARCHAR</code> fields. For details, refer to <a href="/docs/v2.6.x/string.md">String Field</a>.</p></li>
+<li><p><code translate="no">TIMESTAMPTZ</code> fields. For details, refer to <a href="/docs/v2.6.x/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">How it works<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -158,7 +158,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Field types:</strong> Works with numeric and <code translate="no">TIMESTAMPTZ</code> fields. For more information on data types, refer to <a href="/docs/number.md">Boolean & Number</a> and <a href="/docs/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p></li>
+<li><p><strong>Field types:</strong> Works with numeric and <code translate="no">TIMESTAMPTZ</code> fields. For more information on data types, refer to <a href="/docs/v2.6.x/number.md">Boolean & Number</a> and <a href="/docs/v2.6.x/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p></li>
 <li><p><strong>Parameters:</strong> No index parameters are needed.</p></li>
 <li><p><strong>Mmap not supported:</strong> Memory-mapped mode is not available for <code translate="no">STL_SORT</code>.</p></li>
 </ul>

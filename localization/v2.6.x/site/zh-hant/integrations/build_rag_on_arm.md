@@ -68,9 +68,24 @@ $ <span class="hljs-built_in">source</span> venv/bin/activate
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">建立資料集</h3><p>我們使用部署在 AWS 上的<a href="https://zilliz.com/cloud">Zilliz Cloud</a>與 Arm 型機器來儲存與擷取向量資料。若要快速上手，只需在 Zilliz Cloud 免費<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">註冊一個帳號</a>。</p>
+    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">建立資料集<button data-href="#Create-the-Collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>我們使用部署在 AWS 上的<a href="https://zilliz.com/cloud">Zilliz Cloud</a>與 Arm 型機器來儲存與擷取向量資料。若要快速上手，只需在 Zilliz Cloud 免費<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">註冊一個帳號</a>。</p>
 <div class="alert note">
-<p>除了 Zilliz Cloud 之外，自我託管的 Milvus 也是一個選擇（設定較複雜）。我們也可以在以 ARM 為基礎的機器上部署<a href="https://milvus.io/docs/install_standalone-docker-compose.md">Milvus Standalone</a>和<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>。有關 Milvus 安裝的詳細資訊，請參閱安裝<a href="https://milvus.io/docs/install-overview.md">說明文件</a>。</p>
+<p>除了 Zilliz Cloud 之外，自我託管的 Milvus 也是一個選擇（設定比較複雜）。我們也可以在以 ARM 為基礎的機器上部署<a href="https://milvus.io/docs/install_standalone-docker-compose.md">Milvus Standalone</a>和<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>。有關 Milvus 安裝的詳細資訊，請參閱安裝<a href="https://milvus.io/docs/install-overview.md">說明文件</a>。</p>
 </div>
 <p>我們在 Zilliz Cloud 設定<code translate="no">uri</code> 和<code translate="no">token</code> 為<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint 和 Api key</a>。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -92,16 +107,31 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=<span class="hljs-number">384</span>,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>我們使用內乘距離作為預設的度量類型。如需更多關於距離類型的資訊，您可以參考<a href="https://milvus.io/docs/metric.md?tab=floating">相似度量頁面</a></p>
-<h3 id="Prepare-the-data" class="common-anchor-header">準備資料</h3><p>我們使用<a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus 文件 2.4.x</a>中的常見問題頁面作為 RAG 中的私有知識，對於簡單的 RAG 管道來說，這是一個很好的資料來源。</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">準備資料<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>我們使用<a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus 文件 2.4.x</a>中的常見問題頁面作為 RAG 中的私有知識，對於簡單的 RAG 管道來說，這是一個很好的資料來源。</p>
 <p>下載 zip 檔案並解壓縮文件到資料夾<code translate="no">milvus_docs</code> 。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>我們從資料夾<code translate="no">milvus_docs/en/faq</code> 載入所有 markdown 檔案。對於每個文件，我們只需簡單地使用「#」來分隔文件中的內容，這樣就可以大致分隔出 markdown 文件中每個主要部分的內容。</p>
+<p>我們從資料夾<code translate="no">milvus_docs/en/faq</code> 載入所有 markdown 檔案。對於每個文件，我們只需簡單地使用「#」來分隔文件中的內容，這樣就可以大致分隔出 markdown 檔案中每個主要部分的內容。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -112,7 +142,22 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">插入資料</h3><p>我們準備了一個簡單但有效率的嵌入模型<a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2</a>，可以將文字轉換成嵌入向量。</p>
+<h3 id="Insert-data" class="common-anchor-header">插入資料<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>我們準備了一個簡單但有效率的嵌入模型<a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2</a>，可以將文字轉換成嵌入向量。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_huggingface <span class="hljs-keyword">import</span> HuggingFaceEmbeddings
 
 embedding_model = HuggingFaceEmbeddings(model_name=<span class="hljs-string">&quot;all-MiniLM-L6-v2&quot;</span>)
@@ -150,9 +195,39 @@ milvus_client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h2><p>在本節中，我們將在 Arm-based CPU 上建立並啟動<code translate="no">llama.cpp</code> 服務。</p>
-<h3 id="Llama-31-model--llamacpp" class="common-anchor-header">Llama 3.1 模型與 llama.cpp</h3><p>Meta 的<a href="https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf">Llama-3.1-8B 模型</a>屬於 Llama 3.1 模型系列，可免費用於研究與商業用途。在使用該模型之前，請造訪 Llama<a href="https://llama.meta.com/llama-downloads/">網站</a>並填寫表格以申請存取權限。</p>
-<p><a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a>是一個開放原始碼的 C/C++ 專案，可在各種硬體上實現高效率的 LLM 推論 - 包括本機和雲端。您可以使用<code translate="no">llama.cpp</code> 方便地託管 Llama 3.1 模型。</p>
-<h3 id="Download-and-build-llamacpp" class="common-anchor-header">下載並建立 llama.cpp</h3><p>執行下列指令以安裝 make、cmake、gcc、g++ 及其他從原始碼建立 llama.cpp 所需的基本工具：</p>
+<h3 id="Llama-31-model--llamacpp" class="common-anchor-header">Llama 3.1 模型與 llama.cpp<button data-href="#Llama-31-model--llamacpp" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Meta 的<a href="https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf">Llama-3.1-8B 模型</a>屬於 Llama 3.1 模型系列，可免費用於研究與商業用途。在使用該模型之前，請造訪 Llama<a href="https://llama.meta.com/llama-downloads/">網站</a>並填寫表格以申請存取權限。</p>
+<p><a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a>是一個開放原始碼的 C/C++ 專案，可在各種硬體上實現有效的 LLM 推論 - 包括本機和雲端。您可以使用<code translate="no">llama.cpp</code> 方便地託管 Llama 3.1 模型。</p>
+<h3 id="Download-and-build-llamacpp" class="common-anchor-header">下載並建立 llama.cpp<button data-href="#Download-and-build-llamacpp" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>執行下列指令以安裝 make、cmake、gcc、g++ 及其他從原始碼建立 llama.cpp 所需的基本工具：</p>
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">sudo</span> apt install make cmake -y
 $ <span class="hljs-built_in">sudo</span> apt install gcc g++ -y
 $ <span class="hljs-built_in">sudo</span> apt install build-essential -y
@@ -179,15 +254,45 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
 <p>現在您可以使用 huggingface cli 下載模型：</p>
 <pre><code translate="no" class="language-bash">$ huggingface-cli download cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf dolphin-2.9.4-llama3.1-8b-Q4_0.gguf --local-dir . --local-dir-use-symlinks False
 <button class="copy-code-btn"></button></code></pre>
-<p>由 llama.cpp 團隊推出的 GGUF 模型格式，使用壓縮和量化將權值精確度降低為 4 位元整數，大幅降低計算和記憶體需求，使 Arm CPU 有效運用於 LLM 推論。</p>
-<h3 id="Re-quantize-the-model-weights" class="common-anchor-header">重新量化模型權值</h3><p>要重新量化，請執行</p>
+<p>由 llama.cpp 團隊推出的 GGUF 模型格式，使用壓縮與量化的方式，將權值精確度降低為 4 位元整數，大幅降低計算與記憶體需求，讓 Arm CPU 有效運用於 LLM 推論。</p>
+<h3 id="Re-quantize-the-model-weights" class="common-anchor-header">重新量化模型權值<button data-href="#Re-quantize-the-model-weights" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要重新量化，請執行</p>
 <pre><code translate="no" class="language-bash">$ ./llama-quantize --allow-requantize dolphin-2.9.4-llama3.1-8b-Q4_0.gguf dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf Q4_0_8_8
 <button class="copy-code-btn"></button></code></pre>
 <p>這將會輸出一個新檔案<code translate="no">dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf</code> ，其中包含重新配置的權值，讓<code translate="no">llama-cli</code> 可以使用 SVE 256 和 MATMUL_INT8 支援。</p>
 <div class="alert note">
 <p>此重新量化特別針對 Graviton3 而言是最佳的。對於 Graviton2，最佳的重新量化應以<code translate="no">Q4_0_4_4</code> 格式執行，而對於 Graviton4，<code translate="no">Q4_0_4_8</code> 格式最適合重新量化。</p>
 </div>
-<h3 id="Start-the-LLM-Service" class="common-anchor-header">啟動 LLM 服務</h3><p>您可以利用 llama.cpp 伺服器程式，並透過 OpenAI 相容的 API 傳送請求。這可讓您開發與 LLM 多次互動的應用程式，而無須重複啟動和停止 LLM。此外，您也可以從另一台透過網路託管 LLM 的機器存取伺服器。</p>
+<h3 id="Start-the-LLM-Service" class="common-anchor-header">啟動 LLM 服務<button data-href="#Start-the-LLM-Service" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您可以利用 llama.cpp 伺服器程式，並透過 OpenAI 相容的 API 傳送請求。這可讓您開發與 LLM 多次互動的應用程式，而無須重複啟動和停止 LLM。此外，您也可以從另一台透過網路託管 LLM 的機器存取伺服器。</p>
 <p>從命令列啟動伺服器，它會在 8080 連接埠監聽：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./llama-server -m dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf -n 2048 -t 64 -c 65536  --port 8080</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -211,7 +316,22 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="LLM-Client-and-Embedding-Model" class="common-anchor-header">LLM 用戶端與嵌入模型</h3><p>我們初始化 LLM 用戶端並準備嵌入模型。</p>
+    </button></h2><h3 id="LLM-Client-and-Embedding-Model" class="common-anchor-header">LLM 用戶端與嵌入模型<button data-href="#LLM-Client-and-Embedding-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>我們初始化 LLM 用戶端並準備嵌入模型。</p>
 <p>對於 LLM，我們使用 OpenAI SDK 來請求之前啟動的 Llama 服務。我們不需要使用任何 API key，因為它實際上是我們本機的 llama.cpp 服務。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
@@ -226,7 +346,22 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <pre><code translate="no">384
 [0.03061249852180481, 0.013831384479999542, -0.02084377221763134, 0.016327863559126854, -0.010231520049273968, -0.0479842908680439, -0.017313342541456223, 0.03728749603033066, 0.04588735103607178, 0.034405000507831573]
 </code></pre>
-<h3 id="Retrieve-data-for-a-query" class="common-anchor-header">擷取查詢資料</h3><p>讓我們指定一個關於 Milvus 的常見問題。</p>
+<h3 id="Retrieve-data-for-a-query" class="common-anchor-header">擷取查詢資料<button data-href="#Retrieve-data-for-a-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>讓我們指定一個關於 Milvus 的常見問題。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>在集合中搜尋該問題，並擷取語義上前三名的符合資料。</p>
@@ -263,7 +398,22 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">使用 LLM 獲得 RAG 回應</h3><p>將擷取的文件轉換成字串格式。</p>
+<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">使用 LLM 獲得 RAG 回應<button data-href="#Use-LLM-to-get-a-RAG-response" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>將擷取的文件轉換成字串格式。</p>
 <pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.join(
     [line_with_distance[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )

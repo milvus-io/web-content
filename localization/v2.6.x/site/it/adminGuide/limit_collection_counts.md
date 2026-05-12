@@ -22,7 +22,7 @@ title: Stabilire limiti al numero di raccolte
 <p>La configurazione varia a seconda del modo in cui si installa l'istanza Milvus.</p>
 <ul>
 <li><p>Per le istanze Milvus installate utilizzando Helm Charts</p>
-<p>Aggiungere la configurazione al file <code translate="no">values.yaml</code> nella sezione <code translate="no">config</code>. Per i dettagli, consultare <a href="/docs/it/configure-helm.md">Configurazione di Milvus con Helm Charts</a>.</p></li>
+<p>Aggiungete la configurazione al file <code translate="no">values.yaml</code> nella sezione <code translate="no">config</code>. Per i dettagli, consultare <a href="/docs/it/configure-helm.md">Configurazione di Milvus con Helm Charts</a>.</p></li>
 <li><p>Per le istanze Milvus installate usando Docker Compose</p>
 <p>Aggiungere la configurazione al file <code translate="no">milvus.yaml</code> utilizzato per avviare l'istanza Milvus. Per i dettagli, fate riferimento a <a href="/docs/it/configure-docker.md">Configurare Milvus con Docker Compose</a>.</p></li>
 <li><p>Per le istanze Milvus installate con Operator</p>
@@ -45,9 +45,36 @@ title: Stabilire limiti al numero di raccolte
       </svg>
     </button></h2><pre><code translate="no" class="language-yaml"><span class="hljs-attr">rootCoord:</span>
     <span class="hljs-attr">maxGeneralCapacity:</span> <span class="hljs-number">65536</span>
+
+<span class="hljs-attr">quotaAndLimits:</span>
+    <span class="hljs-attr">limits:</span>
+        <span class="hljs-attr">maxCollectionNum:</span> <span class="hljs-number">65536</span>
+        <span class="hljs-attr">maxCollectionNumPerDB:</span> <span class="hljs-number">65536</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Il parametro <code translate="no">maxGeneralCapacity</code> imposta il numero massimo di collezioni che l'istanza Milvus corrente può contenere. Il valore predefinito è <code translate="no">65536</code>.</p>
-<h2 id="Calculating-the-number-of-collections" class="common-anchor-header">Calcolo del numero di collezioni<button data-href="#Calculating-the-number-of-collections" class="anchor-icon" translate="no">
+<p>Per modificare il limite di raccolta, è necessario modificare tutti e tre i parametri insieme:</p>
+<table>
+<thead>
+<tr><th>Parametro</th><th>Descrizione</th><th>Valore predefinito</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">rootCoord.maxGeneralCapacity</code></td><td>Numero massimo di unità di raccolta (shard × partizioni) che l'istanza corrente può contenere.</td><td><code translate="no">65536</code></td></tr>
+<tr><td><code translate="no">quotaAndLimits.limits.maxCollectionNum</code></td><td>Numero massimo di raccolte consentite in tutti i database dell'istanza corrente.</td><td><code translate="no">65536</code></td></tr>
+<tr><td><code translate="no">quotaAndLimits.limits.maxCollectionNumPerDB</code></td><td>Numero massimo di raccolte consentite in un singolo database.</td><td><code translate="no">65536</code></td></tr>
+</tbody>
+</table>
+<p>Ad esempio, per aumentare il limite a 200.000 raccolte:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">rootCoord:</span>
+    <span class="hljs-attr">maxGeneralCapacity:</span> <span class="hljs-number">200000</span>
+
+<span class="hljs-attr">quotaAndLimits:</span>
+    <span class="hljs-attr">limits:</span>
+        <span class="hljs-attr">maxCollectionNum:</span> <span class="hljs-number">200000</span>
+        <span class="hljs-attr">maxCollectionNumPerDB:</span> <span class="hljs-number">200000</span>
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>L'impostazione del solo <code translate="no">maxGeneralCapacity</code> senza regolare anche <code translate="no">maxCollectionNum</code> e <code translate="no">maxCollectionNumPerDB</code> non avrà effetto. Tutti e tre i parametri devono essere impostati sullo stesso valore o su un valore superiore per aumentare il limite delle raccolte.</p>
+</div>
+<h2 id="Calculating-the-number-of-collections" class="common-anchor-header">Calcolo del numero di raccolte<button data-href="#Calculating-the-number-of-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -69,4 +96,4 @@ title: Stabilire limiti al numero di raccolte
 <p>In questo esempio, il totale calcolato di 960 unità di raccolta rappresenta l'utilizzo attuale. Il parametro <code translate="no">maxGeneralCapacity</code> definisce il numero massimo di unità di raccolta che un'istanza può supportare, che per impostazione predefinita è <code translate="no">65536</code>. Ciò significa che l'istanza può ospitare fino a 65.536 unità di raccolta. Se il numero totale supera questo limite, il sistema visualizza il seguente messaggio di errore:</p>
 <pre><code translate="no" class="language-shell">failed checking constraint: sum_collections(parition*shard) exceeding the max general capacity:
 <button class="copy-code-btn"></button></code></pre>
-<p>Per evitare questo errore, è possibile ridurre il numero di frammenti o partizioni nelle raccolte esistenti o nuove, eliminare alcune raccolte o aumentare il valore <code translate="no">maxGeneralCapacity</code>.</p>
+<p>Per evitare questo errore, è possibile ridurre il numero di shard o partizioni nelle raccolte esistenti o in quelle nuove, eliminare alcune raccolte o aumentare il limite di raccolta modificando insieme <code translate="no">maxGeneralCapacity</code>, <code translate="no">maxCollectionNum</code> e <code translate="no">maxCollectionNumPerDB</code>.</p>

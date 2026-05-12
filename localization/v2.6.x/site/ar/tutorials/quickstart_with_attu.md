@@ -55,7 +55,22 @@ title: بداية سريعة مع Attu - واجهة مستخدم الويب ال
         ></path>
       </svg>
     </button></h2><p>قم بتنزيل إصدار سطح المكتب من Attu من خلال زيارة <a href="https://github.com/zilliztech/attu/releases">صفحة إصدارات Attu GitHub</a>. حدد الإصدار المناسب لنظام التشغيل الخاص بك واتبع خطوات التثبيت.</p>
-<h3 id="Note-for-macOS-M-series-chip" class="common-anchor-header">ملاحظة لنظام macOS (شريحة سلسلة M):</h3><p>إذا واجهت الخطأ:</p>
+<h3 id="Note-for-macOS-M-series-chip" class="common-anchor-header">ملاحظة لنظام macOS (شريحة سلسلة M):<button data-href="#Note-for-macOS-M-series-chip" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>إذا واجهت الخطأ:</p>
 <pre><code translate="no">attu.app <span class="hljs-keyword">is</span> damaged <span class="hljs-keyword">and</span> cannot be opened.
 <button class="copy-code-btn"></button></code></pre>
 <p>قم بتشغيل الأمر التالي في المحطة الطرفية لتجاوز هذه المشكلة:</p>
@@ -112,7 +127,22 @@ title: بداية سريعة مع Attu - واجهة مستخدم الويب ال
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="41-Prepare-the-Data" class="common-anchor-header">4.1 إعداد البيانات</h3><p>نستخدم صفحات الأسئلة الشائعة من <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">وثائق ميلفوس 2.4.x</a> كمجموعة بيانات لهذا المثال.</p>
+    </button></h2><h3 id="41-Prepare-the-Data" class="common-anchor-header">4.1 إعداد البيانات<button data-href="#41-Prepare-the-Data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>نستخدم صفحات الأسئلة الشائعة من <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">وثائق ميلفوس 2.4.x</a> كمجموعة بيانات لهذا المثال.</p>
 <h4 id="Download-and-Extract-Data" class="common-anchor-header">تنزيل البيانات واستخراجها:</h4><pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip
 unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs
 <button class="copy-code-btn"></button></code></pre>
@@ -125,7 +155,22 @@ text_lines = []
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="42-Generate-Embeddings" class="common-anchor-header">4.2 توليد التضمينات</h3><p>حدد نموذج تضمين لتوليد تضمينات نصية باستخدام <code translate="no">milvus_model</code>. نستخدم نموذج <code translate="no">DefaultEmbeddingFunction</code> كمثال، وهو نموذج تضمين خفيف الوزن ومدرب مسبقًا.</p>
+<h3 id="42-Generate-Embeddings" class="common-anchor-header">4.2 توليد التضمينات<button data-href="#42-Generate-Embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>حدد نموذج تضمين لتوليد تضمينات نصية باستخدام <code translate="no">milvus_model</code>. نستخدم نموذج <code translate="no">DefaultEmbeddingFunction</code> كمثال، وهو نموذج تضمين خفيف الوزن ومدرب مسبقًا.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model <span class="hljs-keyword">as</span> milvus_model
 
 embedding_model = milvus_model.DefaultEmbeddingFunction()
@@ -141,7 +186,22 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
  -0.03041712 -0.02269499 -0.02317863 -0.00426028]
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="43-Create-Collection" class="common-anchor-header">4.3 إنشاء مجموعة</h3><p>اتصل بميلفوس وأنشئ مجموعة:</p>
+<h3 id="43-Create-Collection" class="common-anchor-header">4.3 إنشاء مجموعة<button data-href="#43-Create-Collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>اتصل بميلفوس وأنشئ مجموعة:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Connect to Milvus Standalone</span>
@@ -158,11 +218,26 @@ client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="44-Insert-Data" class="common-anchor-header">4.4 إدراج البيانات</h3><p>قم بتكرار الأسطر النصية وإنشاء تضمينات وإدراج البيانات في ملفوس:</p>
+<h3 id="44-Insert-Data" class="common-anchor-header">4.4 إدراج البيانات<button data-href="#44-Insert-Data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قم بتكرار الأسطر النصية وإنشاء تضمينات وإدراج البيانات في ملفوس:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
@@ -174,7 +249,22 @@ doc_embeddings = embedding_model.encode_documents(text_lines)
 client.insert(collection_name=collection_name, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="45-Visualize-Data-and-Schema" class="common-anchor-header">4.5 تصور البيانات والمخطط</h3><p>يمكننا الآن تصور مخطط البيانات والكيانات المدرجة باستخدام واجهة أتو. يعرض المخطط الحقول المحددة، بما في ذلك حقل <code translate="no">id</code> من النوع <code translate="no">Int64</code> وحقل <code translate="no">vector</code> من النوع <code translate="no">FloatVector(768)</code> مع مقياس <code translate="no">Inner Product (IP)</code>. يتم تحميل المجموعة بـ <strong>72 كيانًا</strong>.</p>
+<h3 id="45-Visualize-Data-and-Schema" class="common-anchor-header">4.5 تصور البيانات والمخطط<button data-href="#45-Visualize-Data-and-Schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكننا الآن تصور مخطط البيانات والكيانات المدرجة باستخدام واجهة أتو. يعرض المخطط الحقول المحددة، بما في ذلك حقل <code translate="no">id</code> من النوع <code translate="no">Int64</code> وحقل <code translate="no">vector</code> من النوع <code translate="no">FloatVector(768)</code> مع مقياس <code translate="no">Inner Product (IP)</code>. يتم تحميل المجموعة بـ <strong>72 كيانًا</strong>.</p>
 <p>بالإضافة إلى ذلك، يمكننا عرض البيانات المدرجة، بما في ذلك المعرف، والتضمينات المتجهة، والحقول الديناميكية التي تخزن البيانات الوصفية مثل المحتوى النصي. تدعم الواجهة التصفية والاستعلام بناءً على شروط محددة أو حقول ديناميكية.</p>
 <p align="center">
   <img translate="no" src="/docs/v2.6.x/assets/attu_after_data_insertion_1.png" alt="Schema View" width="45%" />
@@ -196,7 +286,22 @@ client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h2><p>يوفر Attu واجهة قوية لتصور علاقات البيانات واستكشافها. لفحص نقاط البيانات المدرجة وعلاقات التشابه بينها، اتبع الخطوات التالية:</p>
-<h3 id="51-Perform-a-Search" class="common-anchor-header">5.1 <strong>إجراء بحث</strong></h3><p>انتقل إلى علامة التبويب <strong>بحث المتجهات</strong> في أتو.</p>
+<h3 id="51-Perform-a-Search" class="common-anchor-header">5.1 <strong>إجراء بحث</strong><button data-href="#51-Perform-a-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>انتقل إلى علامة التبويب <strong>بحث المتجهات</strong> في أتو.</p>
 <ol>
 <li>انقر على زر <strong>توليد بيانات عشوائية</strong> لإنشاء استعلامات اختبارية.</li>
 <li>انقر فوق <strong>بحث</strong> لاسترداد النتائج بناءً على البيانات التي تم إنشاؤها.</li>
@@ -206,7 +311,22 @@ client.insert(collection_name=collection_name, data=data)
   <img translate="no" src="/docs/v2.6.x/assets/attu_searched_table.png" alt="Search Results Table" width="80%">
 </p>
 <hr>
-<h3 id="52-Explore-Data-Relationships" class="common-anchor-header">5.2 <strong>استكشاف علاقات البيانات</strong></h3><p>انقر فوق الزر <strong>استكشاف</strong> في لوحة النتائج لتصور العلاقات بين متجه الاستعلام ونتائج البحث في <strong>بنية تشبه الرسم البياني المعرفي</strong>.</p>
+<h3 id="52-Explore-Data-Relationships" class="common-anchor-header">5.2 <strong>استكشاف علاقات البيانات</strong><button data-href="#52-Explore-Data-Relationships" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>انقر فوق الزر <strong>استكشاف</strong> في لوحة النتائج لتصور العلاقات بين متجه الاستعلام ونتائج البحث في <strong>بنية تشبه الرسم البياني المعرفي</strong>.</p>
 <ul>
 <li>تمثل <strong>العقدة المركزية</strong> متجه البحث.</li>
 <li>تمثل <strong>العقد المتصلة</strong> نتائج البحث، وسيؤدي النقر فوقها إلى عرض المعلومات التفصيلية للعقدة المقابلة.</li>
@@ -215,7 +335,22 @@ client.insert(collection_name=collection_name, data=data)
   <img translate="no" src="/docs/v2.6.x/assets/attu_searched_graph.png" alt="Knowledge Graph Visualization" width="80%">
 </p>
 <hr>
-<h3 id="53-Expand-the-Graph" class="common-anchor-header">5.3 <strong>توسيع الرسم البياني</strong></h3><p>انقر نقرًا مزدوجًا فوق أي عقدة نتيجة لتوسيع اتصالاتها. يكشف هذا الإجراء عن علاقات إضافية بين العقدة المحددة ونقاط البيانات الأخرى في المجموعة، مما يؤدي إلى إنشاء <strong>رسم بياني معرفي أكبر ومترابط</strong>.</p>
+<h3 id="53-Expand-the-Graph" class="common-anchor-header">5.3 <strong>توسيع الرسم البياني</strong><button data-href="#53-Expand-the-Graph" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>انقر نقرًا مزدوجًا فوق أي عقدة نتيجة لتوسيع اتصالاتها. يكشف هذا الإجراء عن علاقات إضافية بين العقدة المحددة ونقاط البيانات الأخرى في المجموعة، مما يؤدي إلى إنشاء <strong>رسم بياني معرفي أكبر ومترابط</strong>.</p>
 <p>يتيح هذا العرض الموسّع استكشافًا أعمق لكيفية ارتباط نقاط البيانات ببعضها البعض، استنادًا إلى تشابه المتجهات.</p>
 <p align="center">
   <img translate="no" src="/docs/v2.6.x/assets/attu_expanded_searched_graph.png" alt="Expanded Knowledge Graph" width="80%">
@@ -236,6 +371,6 @@ client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يعمل Attu على تبسيط إدارة وتصور البيانات المتجهة المخزنة في ميلفوس. من إدخال البيانات إلى تنفيذ الاستعلام والاستكشاف التفاعلي، يوفر واجهة سهلة الاستخدام للتعامل مع مهام البحث المتجه المعقدة. وبفضل ميزات مثل دعم المخطط الديناميكي وتصورات البحث الرسومية ومرشحات الاستعلام المرنة، يمكّن Attu المستخدمين من تحليل مجموعات البيانات واسعة النطاق بفعالية.</p>
+    </button></h2><p>يعمل Attu على تبسيط إدارة وتصور البيانات المتجهة المخزنة في ميلفوس. من إدخال البيانات إلى تنفيذ الاستعلام والاستكشاف التفاعلي، يوفر واجهة سهلة الاستخدام للتعامل مع مهام البحث المتجه المعقدة. وبفضل ميزات مثل دعم المخطط الديناميكي، وتصورات البحث الرسومية، ومرشحات الاستعلام المرنة، يمكّن Attu المستخدمين من تحليل مجموعات البيانات واسعة النطاق بفعالية.</p>
 <p>من خلال الاستفادة من أدوات الاستكشاف المرئي في Attu، يمكن للمستخدمين فهم بياناتهم بشكل أفضل، وتحديد العلاقات الخفية، واتخاذ قرارات قائمة على البيانات. ابدأ في استكشاف مجموعات البيانات الخاصة بك اليوم مع Attu وMilvus!</p>
 <hr>

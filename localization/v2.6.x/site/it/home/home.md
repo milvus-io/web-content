@@ -1,7 +1,6 @@
 ---
 id: home.md
 ---
-
 <div class="doc-h1-wrapper">
 <p><h1 class="title">
 Benvenuti in Milvus Docs!</h1></p>
@@ -73,6 +72,7 @@ Qui imparerete cos'è Milvus e come installare, usare e distribuire Milvus per c
 <li><a href="/docs/it/single-vector-search.md">Ricerca a vettore singolo</a></li>
 <li><a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a></li>
 <li><a href="/docs/it/get-and-scalar-query.md">Ottenere e interrogare in modo scalare</a></li>
+<li><a href="/docs/it/milvus_for_agents.md">Milvus per gli agenti AI</a></li>
 </ul>
 </div>
 <div class="recomment-item">
@@ -112,12 +112,12 @@ Qui imparerete cos'è Milvus e come installare, usare e distribuire Milvus per c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>Giugno 2025 - Rilascio di Milvus 2.6.0</em></p>
+    </button></h2><p><em>Marzo 2026 - Aggiornamenti di Milvus 2.6.x</em></p>
 <ul>
-<li>Aggiunta una guida all'<a href="/docs/it/embedding-function-overview.md">uso della funzione di incorporazione</a>.</li>
-<li>Aggiunta una guida su come <a href="/docs/it/decay-ranker-overview.md">usare il ranker di decadimento</a>.</li>
-<li>Aggiunta una guida su come <a href="/docs/it/add-fields-to-an-existing-collection.md">aggiungere campi a una raccolta esistente</a>.</li>
-<li>Aggiunta una guida su come <a href="/docs/it/phrase-match.md">eseguire la corrispondenza di frasi</a>.</li>
-<li>Aggiunta la descrizione dell'<a href="/docs/it/ivf-rabitq.md">indice IVF_RABITQ</a>.</li>
+<li>Aggiunta la sezione <a href="/docs/it/milvus_for_agents.md">Milvus per gli agenti di intelligenza artificiale</a> con guide immediate.</li>
+<li>Aggiunta una guida su come usare <a href="/docs/it/google-gemini.md">la funzione di incorporazione Gemini</a>.</li>
+<li>Aggiunta una guida su come <a href="/docs/it/primary-key-search.md">cercare per chiavi primarie</a>.</li>
+<li>Aggiunta guida all'uso dell <a href="/docs/it/text-highlighter.md">'evidenziatore di testo</a> nei risultati della ricerca.</li>
+<li>Aggiunte le descrizioni del <a href="/docs/it/geometry-field.md">campo geometria</a>, del <a href="/docs/it/timestamptz-field.md">campo timestamptz</a>, dell'<a href="/docs/it/tiered-storage-overview.md">archiviazione a livelli</a> e dell'<a href="/docs/it/array-of-structs.md">array di strutture</a>.</li>
 </ul>
 </div>

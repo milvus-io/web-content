@@ -84,14 +84,14 @@ summary: >-
 <li><p>Introdurre un nuovo motore per le code di messaggi: <strong>Woodpecker</strong>.</p></li>
 </ul>
 <h4 id="🔹-HotCold-Tiering--Storage-Architecture-StorageV2" class="common-anchor-header"><strong>Architettura di storage e tiering caldo/freddo (StorageV2)</strong></h4><ul>
-<li><p>Supporto di due formati di storage: <strong>Parquet</strong> e <strong>Vortex</strong>, che migliorano la concorrenza e l'efficienza della memoria.</p></li>
+<li><p>Supporto di due formati di archiviazione: <strong>Parquet</strong> e <strong>Vortex</strong>, che migliorano la concorrenza e l'efficienza della memoria.</p></li>
 <li><p>Implementazione dello storage a livelli con separazione automatica dei dati caldi/freddi e pianificazione intelligente.</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-Prototype-v01" class="common-anchor-header">🔹 <strong>Prototipo Vector Lake (v0.1)</strong></h4><ul>
 <li><p>Integrazione con <strong>Spark</strong> / <strong>DuckDB</strong> / <strong>DataFusion</strong> tramite FFI, che consente l'evoluzione offline dello schema e le query KNN.</p></li>
 <li><p>Fornisce una visualizzazione multimodale dei dati e una demo di Spark ETL, stabilendo l'architettura di base del lago di dati.</p></li>
 </ul>
-<h2 id="🌠-Milvus-v30-Targeted-for-Late-2026" class="common-anchor-header">🌠 Milvus v3.0 (previsto per la fine del 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Late-2026" class="anchor-icon" translate="no">
+<h2 id="🌠-Milvus-v30-Targeted-for-Early-2026" class="common-anchor-header">🌠 Milvus v3.0 (previsto per l'inizio del 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Early-2026" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -126,7 +126,7 @@ summary: >-
     </button></h3><h4 id="🔹-Search-Experience-Overhaul" class="common-anchor-header"><strong>Revisione dell'esperienza di ricerca</strong></h4><ul>
 <li><p>Introduzione della ricerca per similarità <strong>More Like This (MLT)</strong> con supporto per ricerche con esempi di posizione o negativi.</p></li>
 <li><p>Aggiunta di funzionalità di ricerca semantica come l'<strong>evidenziazione</strong> e il <strong>boosting</strong>.</p></li>
-<li><p>Supporto di <strong>dizionari</strong> e <strong>tabelle di sinonimi</strong> <strong>personalizzati</strong>, per consentire la definizione di regole lessicali e semantiche a livello di analizzatore.</p></li>
+<li><p>Supporto di <strong>dizionari personalizzati</strong> e <strong>tabelle di sinonimi</strong>, per consentire la definizione di regole lessicali e semantiche a livello di analizzatore.</p></li>
 <li><p>Introdurre funzionalità <strong>di aggregazione</strong> per le query.</p></li>
 </ul>
 <h4 id="🔹-Multi-Tenancy--Resource-Management" class="common-anchor-header">🔹 <strong>Gestione delle risorse e dei multi-tenant</strong></h4><ul>
@@ -231,7 +231,7 @@ summary: >-
 <ul>
 <li><p>💬 <strong>Condividere il feedback</strong>: Proporre nuove funzionalità o idee di ottimizzazione</p></li>
 <li><p>🐛 S <strong>egnalare problemi</strong>: Segnalare i bug tramite GitHub Issues</p></li>
-<li><p>🔧 <strong>Contribuire al codice</strong>: Invia PR e contribuisci alla creazione di funzionalità di base</p>
+<li><p>🔧 <strong>Contribuire al codice</strong>: Invia PR e contribuisci alla creazione delle funzionalità principali</p>
 <ul>
 <li><p><strong>Richieste di prelievo</strong>: Contribuire direttamente alla nostra <a href="https://github.com/milvus-io/milvus/pulls">base di codice</a>. Che si tratti di correggere bug, aggiungere funzionalità o migliorare la documentazione, i vostri contributi sono benvenuti.</p></li>
 <li><p><strong>Guida allo sviluppo</strong>: Consultate la nostra <a href="https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md">Guida per i collaboratori</a> per le linee guida sui contributi al codice.</p></li>

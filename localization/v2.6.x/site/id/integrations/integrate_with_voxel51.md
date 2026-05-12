@@ -98,7 +98,22 @@ title: Melakukan Pencarian Visi dengan Milvus dan FiftyOne
         ></path>
       </svg>
     </button></h2><p>Contoh di bawah ini menunjukkan alur kerja di atas.</p>
-<h3 id="1-Load-a-dataset-into-FiftyOne-and-compute-embeddings-for-the-samples" class="common-anchor-header">1. Muat set data ke FiftyOne dan hitung penyematan untuk sampel</h3><p>Kode berikut ini menggunakan kumpulan gambar sampel yang disediakan oleh FiftyOne untuk mendemonstrasikan integrasi. Anda dapat menyiapkan set gambar Anda sendiri dengan merujuk ke <a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">artikel ini</a>.</p>
+<h3 id="1-Load-a-dataset-into-FiftyOne-and-compute-embeddings-for-the-samples" class="common-anchor-header">1. Muat set data ke FiftyOne dan hitung penyematan untuk sampel<button data-href="#1-Load-a-dataset-into-FiftyOne-and-compute-embeddings-for-the-samples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kode berikut ini menggunakan kumpulan gambar sampel yang disediakan oleh FiftyOne untuk mendemonstrasikan integrasi. Anda dapat menyiapkan set gambar Anda sendiri dengan merujuk ke <a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">artikel ini</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> fiftyone <span class="hljs-keyword">as</span> fo
 <span class="hljs-keyword">import</span> fiftyone.brain <span class="hljs-keyword">as</span> fob
 <span class="hljs-keyword">import</span> fiftyone.zoo <span class="hljs-keyword">as</span> foz
@@ -113,7 +128,22 @@ milvus_index = fob.compute_similarity(
     backend=<span class="hljs-string">&quot;milvus&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Conduct-vision-similarity-searches" class="common-anchor-header">2. Melakukan pencarian kemiripan penglihatan</h3><p>Sekarang Anda dapat menggunakan indeks kesamaan Milvus untuk melakukan pencarian kesamaan visi pada kumpulan data Anda.</p>
+<h3 id="2-Conduct-vision-similarity-searches" class="common-anchor-header">2. Melakukan pencarian kemiripan penglihatan<button data-href="#2-Conduct-vision-similarity-searches" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sekarang Anda dapat menggunakan indeks kesamaan Milvus untuk melakukan pencarian kesamaan visi pada kumpulan data Anda.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Step 4: Query your data</span>
 query = dataset.first().<span class="hljs-built_in">id</span>  <span class="hljs-comment"># query by sample ID</span>
 view = dataset.sort_by_similarity(
@@ -130,11 +160,26 @@ milvus_index.cleanup()
 <span class="hljs-comment"># Delete run record from FiftyOne</span>
 dataset.delete_brain_run(<span class="hljs-string">&quot;milvus_index&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Delete-the-index" class="common-anchor-header">3. Menghapus indeks</h3><p>Jika Anda tidak lagi memerlukan indeks kemiripan Milvus, Anda dapat menghapusnya dengan menggunakan kode berikut:</p>
+<h3 id="3-Delete-the-index" class="common-anchor-header">3. Menghapus indeks<button data-href="#3-Delete-the-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jika Anda tidak lagi memerlukan indeks kemiripan Milvus, Anda dapat menghapusnya dengan menggunakan kode berikut:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Step 5: Delete the index</span>
 milvus_index.delete()
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-the-Milvus-backend" class="common-anchor-header">Menggunakan backend Milvus<button data-href="#Use-the-Milvus-backend" class="anchor-icon" translate="no">
+<h2 id="Use-the-Milvus-backend" class="common-anchor-header">Gunakan backend Milvus<button data-href="#Use-the-Milvus-backend" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -179,7 +224,22 @@ fob.compute_similarity(..., backend=<span class="hljs-string">&quot;milvus&quot;
         ></path>
       </svg>
     </button></h2><p>Jika Anda menggunakan server Milvus khusus, Anda dapat memberikan kredensial Anda dengan berbagai cara.</p>
-<h3 id="Environment-variables-recommended" class="common-anchor-header">Variabel lingkungan (disarankan)</h3><p>Cara yang disarankan untuk mengonfigurasi kredensial Milvus Anda adalah dengan menyimpannya dalam variabel lingkungan yang ditunjukkan di bawah ini, yang secara otomatis diakses oleh FiftyOne setiap kali koneksi ke Milvus dibuat.</p>
+<h3 id="Environment-variables-recommended" class="common-anchor-header">Variabel lingkungan (disarankan)<button data-href="#Environment-variables-recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Cara yang disarankan untuk mengonfigurasi kredensial Milvus Anda adalah dengan menyimpannya dalam variabel lingkungan yang ditunjukkan di bawah ini, yang secara otomatis diakses oleh FiftyOne setiap kali koneksi ke Milvus dibuat.</p>
 <pre><code translate="no" class="language-python">export FIFTYONE_BRAIN_SIMILARITY_MILVUS_URI=XXXXXX
 export FIFTYONE_BRAIN_SIMILARITY_MILVUS_USER=XXXXXX
 export FIFTYONE_BRAIN_SIMILARITY_MILVUS_PASSWORD=XXXXXX
@@ -194,7 +254,22 @@ export FIFTYONE_BRAIN_SIMILARITY_MILVUS_CA_PEM_PATH=XXXXXX
 export FIFTYONE_BRAIN_SIMILARITY_MILVUS_SERVER_PEM_PATH=XXXXXX
 export FIFTYONE_BRAIN_SIMILARITY_MILVUS_SERVER_NAME=XXXXXX
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="FiftyOne-Brain-config" class="common-anchor-header">Konfigurasi FiftyOne Brain</h3><p>Anda juga dapat menyimpan kredensial Anda dalam <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">konfigurasi otak</a> Anda yang terletak di <code translate="no">~/.fiftyone/brain_config.json</code>:</p>
+<h3 id="FiftyOne-Brain-config" class="common-anchor-header">Konfigurasi FiftyOne Brain<button data-href="#FiftyOne-Brain-config" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Anda juga dapat menyimpan kredensial Anda dalam <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">konfigurasi otak</a> Anda yang terletak di <code translate="no">~/.fiftyone/brain_config.json</code>:</p>
 <pre><code translate="no" class="language-python">{
     <span class="hljs-string">&quot;similarity_backends&quot;</span>: {
         <span class="hljs-string">&quot;milvus&quot;</span>: {
@@ -216,7 +291,22 @@ export FIFTYONE_BRAIN_SIMILARITY_MILVUS_SERVER_NAME=XXXXXX
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>Perhatikan bahwa file ini tidak akan ada sampai Anda membuatnya.</p>
-<h3 id="Keyword-arguments" class="common-anchor-header">Argumen kata kunci</h3><p>Anda dapat secara manual memberikan kredensial Milvus Anda sebagai argumen kata kunci setiap kali Anda memanggil metode seperti <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> yang membutuhkan koneksi ke Milvus:</p>
+<h3 id="Keyword-arguments" class="common-anchor-header">Argumen kata kunci<button data-href="#Keyword-arguments" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Anda dapat secara manual memberikan kredensial Milvus Anda sebagai argumen kata kunci setiap kali Anda memanggil metode seperti <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> yang membutuhkan koneksi ke Milvus:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> fiftyone.brain <span class="hljs-keyword">as</span> fob
 
 milvus_index = fob.compute_similarity(
@@ -256,13 +346,28 @@ milvus_index = fob.compute_similarity(
     server_name=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Milvus-config-parameters" class="common-anchor-header">Parameter konfigurasi Milvus</h3><p>Backend Milvus mendukung berbagai parameter kueri yang dapat digunakan untuk menyesuaikan kueri kemiripan Anda. Parameter-parameter ini meliputi:</p>
+<h3 id="Milvus-config-parameters" class="common-anchor-header">Parameter konfigurasi Milvus<button data-href="#Milvus-config-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Backend Milvus mendukung berbagai parameter kueri yang dapat digunakan untuk menyesuaikan kueri kemiripan Anda. Parameter-parameter ini meliputi:</p>
 <ul>
 <li><p><strong>collection_name</strong><em>(Tidak ada</em>): nama koleksi Milvus yang akan digunakan atau dibuat. Jika tidak ada yang disediakan, koleksi baru akan dibuat</p></li>
 <li><p><strong>metrik</strong> (<em>"dotproduct")</em>: metrik jarak sematan yang akan digunakan saat membuat indeks baru. Nilai yang didukung adalah (<code translate="no">&quot;dotproduct&quot;</code>, <code translate="no">&quot;euclidean&quot;</code>)</p></li>
 <li><p><strong>consistency_level</strong> (<em>"Session")</em>: tingkat konsistensi yang akan digunakan. Nilai yang didukung adalah (<code translate="no">&quot;Strong&quot;</code>, <code translate="no">&quot;Session&quot;</code>, <code translate="no">&quot;Bounded&quot;</code>, <code translate="no">&quot;Eventually&quot;</code>)</p></li>
 </ul>
-<p>Untuk informasi terperinci tentang parameter ini, lihat <a href="/docs/id/authenticate.md">dokumentasi otentikasi Milvus</a> dan <a href="/docs/id/consistency.md">dokumentasi tingkat konsistensi Milvus</a>.</p>
+<p>Untuk informasi terperinci tentang parameter ini, lihat <a href="/docs/id/authenticate.md">dokumentasi otentikasi Milvus</a> dan <a href="/docs/id/tune_consistency.md">dokumentasi tingkat konsistensi Milvus</a>.</p>
 <p>Anda dapat menentukan parameter-parameter ini melalui salah satu strategi yang dijelaskan di bagian sebelumnya. Berikut ini contoh <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">konfigurasi otak</a> yang mencakup semua parameter yang tersedia:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;similarity_backends&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -281,7 +386,7 @@ milvus_index = fob.compute_similarity(
     brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     metric=<span class="hljs-string">&quot;dotproduct&quot;</span>,
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Manage-brain-runs" class="common-anchor-header">Mengelola brain run<button data-href="#Manage-brain-runs" class="anchor-icon" translate="no">
@@ -320,7 +425,7 @@ dataset.list_brain_runs(
 <pre><code translate="no" class="language-python">info = dataset.get_brain_info(brain_key)
 <span class="hljs-built_in">print</span>(info)
 <button class="copy-code-btn"></button></code></pre>
-<p>Gunakan <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.load_brain_results"><code translate="no">load_brain_results()</code></a> untuk memuat <a href="https://docs.voxel51.com/api/fiftyone.brain.similarity.html#fiftyone.brain.similarity.SimilarityIndex"><code translate="no">SimilarityIndex</code></a> contoh untuk menjalankan brain run.</p>
+<p>Gunakan <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.load_brain_results"><code translate="no">load_brain_results()</code></a> untuk memuat <a href="https://docs.voxel51.com/api/fiftyone.brain.similarity.html#fiftyone.brain.similarity.SimilarityIndex"><code translate="no">SimilarityIndex</code></a> untuk menjalankan brain run.</p>
 <p>Anda dapat menggunakan <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.rename_brain_run"><code translate="no">rename_brain_run()</code></a> untuk mengganti nama kunci otak yang terkait dengan hasil run kemiripan yang sudah ada:</p>
 <pre><code translate="no" class="language-python">dataset.rename_brain_run(brain_key, new_brain_key)
 <button class="copy-code-btn"></button></code></pre>
@@ -328,7 +433,7 @@ dataset.list_brain_runs(
 <pre><code translate="no" class="language-python">dataset.delete_brain_run(brain_key)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Memanggil <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.delete_brain_run"><code translate="no">delete_brain_run()</code></a> hanya akan menghapus rekaman brain run dari kumpulan data FiftyOne Anda; ini tidak akan menghapus koleksi Milvus yang terkait, yang dapat Anda lakukan sebagai berikut:</p>
+<p>Memanggil <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.delete_brain_run"><code translate="no">delete_brain_run()</code></a> hanya akan menghapus catatan brain run dari kumpulan data FiftyOne Anda; ini tidak akan menghapus koleksi Milvus yang terkait, yang dapat Anda lakukan sebagai berikut:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Delete the Milvus collection</span>
 milvus_index = dataset.load_brain_results(brain_key)
 milvus_index.cleanup()

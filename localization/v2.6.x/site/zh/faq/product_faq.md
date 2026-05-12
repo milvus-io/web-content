@@ -33,7 +33,7 @@ title: 产品常见问题
 <p>如果出现这种情况，查询时将返回哪个数据副本仍是未知行为。这一限制将在今后的版本中修复。</p>
 <h4 id="What-is-the-maximum-length-of-self-defined-entity-primary-keys" class="common-anchor-header">自定义实体主键的最大长度是多少？</h4><p>实体主键必须是非负 64 位整数。</p>
 <h4 id="What-is-the-maximum-amount-of-data-that-can-be-added-per-insert-operation" class="common-anchor-header">每次插入操作可添加的最大数据量是多少？</h4><p>插入操作的大小不得超过 1,024 MB。这是 gRPC 规定的限制。</p>
-<h4 id="Does-collection-size-impact-query-performance-when-searching-in-a-specific-partition" class="common-anchor-header">在特定分区中搜索时，Collection 的大小会影响查询性能吗？</h4><p>不会。如果为搜索指定了分区，Milvus 只搜索指定的分区。</p>
+<h4 id="Does-collection-size-impact-query-performance-when-searching-in-a-specific-partition" class="common-anchor-header">在特定分区中搜索时，Collection 的大小会影响查询性能吗？</h4><p>不会。如果指定了搜索的分区，Milvus 只搜索指定的分区。</p>
 <h4 id="Does-Milvus-need-to-load-the-entire-collection-when-partitions-are-specified-for-a-search" class="common-anchor-header">为搜索指定分区时，Milvus 是否需要加载整个 Collections？</h4><p>这取决于搜索需要哪些数据。搜索前必须加载搜索结果中可能显示的所有分区。</p>
 <ul>
 <li>例如，如果只想搜索特定分区，则不需要加载所有分区。调用<code translate="no">load_partition()</code> 加载目标分区，<em>然后</em>在<code translate="no">search()</code> 方法调用中指定分区。</li>
@@ -60,7 +60,7 @@ title: 产品常见问题
 <h4 id="Does-Milvus-support-Apple-M1-CPU" class="common-anchor-header">Milvus 是否支持苹果 M1 CPU？</h4><p>是的，Milvus 支持苹果 M1/M2 CPU 和其他苹果硅处理器。通过 Docker 映像、RPM/DEB 包和 Milvus Lite，可支持 ARM64，使其与包括 M1、M2 和更新处理器在内的苹果硅芯片兼容。</p>
 <h4 id="What-data-types-does-Milvus-support-on-the-primary-key-field" class="common-anchor-header">Milvus 在主键字段上支持哪些数据类型？</h4><p>在当前版本中，Milvus 支持 INT64 和字符串。</p>
 <h4 id="Is-Milvus-scalable" class="common-anchor-header">Milvus 可以扩展吗？</h4><p>是的。您可以在 Kubernetes 上使用 Helm Chart 部署多节点的 Milvus 集群。更多说明请参阅《<a href="/docs/zh/scaleout.md">扩展指南》</a>。</p>
-<h4 id="What-are-growing-segment-and-sealed-segment" class="common-anchor-header">什么是增长段和封存段？</h4><p>当有搜索请求时，Milvus 会同时搜索增量数据和历史数据。增量数据是最近更新的数据，它们存储在增长段中，在达到在对象存储中持久化的阈值之前在内存中缓冲，并为它们建立更高效的索引。历史数据是一段时间前的更新，它们位于已在对象存储中持久化的封存段中。增量数据和历史数据共同构成了整个搜索数据集。这种设计使任何输入到 Milvus 的数据都可以即时搜索。对于 Milvus Distributed 而言，有更复杂的因素来决定刚录入的记录何时可以显示在搜索结果中。在<a href="https://milvus.io/docs/consistency.md">一致性级别</a>了解更多细微差别。</p>
+<h4 id="What-are-growing-segment-and-sealed-segment" class="common-anchor-header">什么是增长段和封存段？</h4><p>当有搜索请求时，Milvus 会同时搜索增量数据和历史数据。增量数据是最近更新的数据，它们存储在增长段中，在达到在对象存储中持久化的阈值之前在内存中缓冲，并为它们建立更高效的索引。历史数据是一段时间前的更新，它们位于已在对象存储中持久化的封存段中。增量数据和历史数据共同构成了整个搜索数据集。这种设计使任何输入到 Milvus 的数据都可以即时搜索。对于 Milvus Distributed 而言，有更复杂的因素来决定刚录入的记录何时可以显示在搜索结果中。在<a href="https://milvus.io/docs/tune_consistency.md">一致性级别</a>了解更多细微差别。</p>
 <h4 id="Is-Milvus-available-for-concurrent-search" class="common-anchor-header">Milvus 可用于并发搜索吗？</h4><p>是的。对于同一 Collections 的查询，Milvus 会同时搜索增量数据和历史数据。不过，对不同 Collection 的查询是串联进行的。历史数据可能是一个极其庞大的数据集，因此对历史数据的搜索相对更耗时，而且基本上是串联进行的。</p>
 <h4 id="Why-does-the-data-in-MinIO-remain-after-the-corresponding-collection-is-dropped" class="common-anchor-header">为什么相应的 Collections 被删除后，MinIO 中的数据仍会保留？</h4><p>MinIO 中的数据被设计为保留一段时间，以方便数据回滚。</p>
 <h4 id="Does-Milvus-support-message-engines-other-than-Pulsar" class="common-anchor-header">Milvus 是否支持 Pulsar 以外的消息引擎？</h4><p>支持。Milvus 2.1.0 支持 Kafka。</p>
@@ -69,7 +69,7 @@ title: 产品常见问题
 <h4 id="How-does-Milvus-handle-vector-data-types-and-precision" class="common-anchor-header">Milvus 如何处理向量数据类型和精度？</h4><p>Milvus 支持二进制、Float32、Float16 和 BFloat16 向量类型。</p>
 <ul>
 <li>二进制向量：将二进制数据存储为 0 和 1 的序列，用于图像处理和信息检索。</li>
-<li>Float32 向量：默认存储精度约为小数点后 7 位。即使是 Float64 值也是以 Float32 精度存储的，这可能会导致检索时的精度损失。</li>
+<li>Float32 向量：默认存储精度约为十进制 7 位数。即使是 Float64 值，也是以 Float32 精度存储的，因此在检索时可能会丢失精度。</li>
 <li>Float16 和 BFloat16 向量：可降低精度和内存使用量。Float16 适用于带宽和存储有限的应用，而 BFloat16 则兼顾了范围和效率，常用于深度学习，在不显著影响精度的情况下降低计算要求。</li>
 </ul>
 <h4 id="Does-Milvus-support-specifying-default-values-for-scalar-or-vector-fields" class="common-anchor-header">Milvus 是否支持为标量或向量场指定默认值？</h4><p>目前，Milvus 2.4.x 不支持为标量或向量场指定默认值。该功能计划在未来版本中推出。</p>
@@ -79,7 +79,7 @@ title: 产品常见问题
 <li><strong>垃圾收集</strong>：一个名为 Garbage Collection (GC) 的独立进程会定期删除这些 "已删除 "的数据段，从而释放它们占用的存储空间。这样可以确保存储空间的有效利用，但在删除和空间回收之间会有轻微延迟。</li>
 </ul>
 <h4 id="Can-I-see-inserted-deleted-or-upserted-data-immediately-after-the-operation-without-waiting-for-a-flush" class="common-anchor-header">操作符插入、删除或上插数据后，我能否立即看到这些数据，而无需等待刷新？</h4><p>是的，在 Milvus，由于其存储-计算分解架构，数据可见性与刷新操作没有直接联系。您可以使用一致性级别管理数据可读性。</p>
-<p>选择一致性级别时，请考虑一致性和性能之间的权衡。对于需要即时可见性的操作符，请使用 "强 "一致性级别。对于更快的写入，优先考虑较弱的一致性（数据可能不会立即可见）。有关详细信息，请参阅<a href="/docs/zh/consistency.md">一致性</a>。</p>
+<p>选择一致性级别时，请考虑一致性和性能之间的权衡。对于需要即时可见性的操作符，请使用 "强 "一致性级别。对于更快的写入，优先考虑较弱的一致性（数据可能不会立即可见）。有关详细信息，请参阅<a href="/docs/zh/tune_consistency.md">一致性</a>。</p>
 <h4 id="After-enabling-the-partition-key-feature-what-is-the-default-value-of-numpartitions-in-Milvus-and-why" class="common-anchor-header">启用分区密钥功能后，Milvus 中<code translate="no">num_partitions</code> 的默认值是多少，为什么？</h4><p>启用分区密钥功能后，Milvus 中<code translate="no">num_partitions</code> 的默认值设置为<code translate="no">16</code> 。选择这一默认值是出于稳定性和性能方面的考虑。您可以根据需要在<code translate="no">create_collection</code> 功能中指定<code translate="no">num_partitions</code> 值。</p>
 <h4 id="Is-there-a-maximum-length-limit-for-scalar-filtering-expressions" class="common-anchor-header">标量过滤表达式有最大长度限制吗？</h4><p>有，标量过滤表达式的最大长度受 RPC 传输限制的约束，该限制在<code translate="no">milvus.yaml</code> 配置文件中定义。具体来说，该限制由代理部分下的<code translate="no">serverMaxRecvSize</code> 参数设置：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
@@ -93,7 +93,7 @@ title: 产品常见问题
     <span class="hljs-attr">serverMaxRecvSize:</span> <span class="hljs-number">67108864</span> <span class="hljs-comment"># The maximum size of each RPC request that the proxy can receive, unit: byte</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>默认情况下，每个 RPC 请求的最大大小为 64MB。因此，输入向量（包括其维度数据和元数据）的总大小必须小于此限制，以确保成功执行。</p>
-<h4 id="How-can-I-get-all-the-unique-value-of-a-given-scalar-field-from-a-collection" class="common-anchor-header">如何从 Collections 中获取给定标量字段的所有唯一值？</h4><p>目前还没有直接的方法来实现这一目标。作为一种变通方法，我们建议使用查询迭代器检索特定字段的所有值，然后手动执行重复数据删除。我们计划在 Milvus 2.6 中添加对该功能的直接支持。使用 query_iterator 的示例：</p>
+<h4 id="How-can-I-get-all-the-unique-value-of-a-given-scalar-field-from-a-collection" class="common-anchor-header">如何从 Collections 中获取给定标量字段的所有唯一值？</h4><p>目前还没有直接的方法来实现这一目标。作为一种变通方法，我们建议使用查询迭代器获取特定字段的所有值，然后手动执行重复数据删除。我们计划在 Milvus 2.6 中添加对该功能的直接支持。使用 query_iterator 的示例：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># set up iterator</span>
 iterator = client.query_iterator(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,

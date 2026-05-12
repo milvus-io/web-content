@@ -27,7 +27,7 @@ title: Vektor-Visualisierung
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>In diesem Beispiel wird gezeigt, wie die Einbettungen (Vektoren) in Milvus mit <a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE</a> visualisiert werden können.</p>
-<p>Dimensionalitätsreduktionstechniken wie t-SNE sind von unschätzbarem Wert für die Visualisierung komplexer, hochdimensionaler Daten in einem 2D- oder 3D-Raum unter Beibehaltung der lokalen Struktur. Dies ermöglicht die Mustererkennung, verbessert das Verständnis von Merkmalsbeziehungen und erleichtert die Interpretation der Ergebnisse von Modellen des maschinellen Lernens. Darüber hinaus hilft es bei der Bewertung von Algorithmen durch den visuellen Vergleich von Clustering-Ergebnissen, vereinfacht die Datenpräsentation für ein nicht spezialisiertes Publikum und kann durch die Arbeit mit niedrigdimensionalen Darstellungen die Rechenkosten senken. Durch diese Anwendungen hilft t-SNE nicht nur dabei, tiefere Einblicke in Datensätze zu gewinnen, sondern unterstützt auch fundiertere Entscheidungsprozesse.</p>
+<p>Techniken zur Dimensionalitätsreduktion, wie t-SNE, sind von unschätzbarem Wert für die Visualisierung komplexer, hochdimensionaler Daten in einem 2D- oder 3D-Raum, wobei die lokale Struktur erhalten bleibt. Dies ermöglicht die Mustererkennung, verbessert das Verständnis von Merkmalsbeziehungen und erleichtert die Interpretation der Ergebnisse von Modellen des maschinellen Lernens. Darüber hinaus hilft es bei der Bewertung von Algorithmen durch den visuellen Vergleich von Clustering-Ergebnissen, vereinfacht die Datenpräsentation für ein nicht spezialisiertes Publikum und kann durch die Arbeit mit niedrigdimensionalen Darstellungen die Rechenkosten senken. Durch diese Anwendungen hilft t-SNE nicht nur dabei, tiefere Einblicke in Datensätze zu gewinnen, sondern unterstützt auch fundiertere Entscheidungsprozesse.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +43,22 @@ title: Vektor-Visualisierung
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Abhängigkeiten und Umgebung</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai requests tqdm matplotlib seaborn</span>
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Abhängigkeiten und Umgebung<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai requests tqdm matplotlib seaborn</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Wir werden in diesem Beispiel das Einbettungsmodell von OpenAI verwenden. Sie sollten den Api-Schlüssel OPENAI_API_KEY als Umgebungsvariable vorbereiten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -133,7 +148,22 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">Erstellen Sie die Sammlung</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">Erstellen Sie die Sammlung<button data-href="#Create-the-Collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
@@ -157,7 +187,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-data" class="common-anchor-header">Daten einfügen<button data-href="#Insert-data" class="anchor-icon" translate="no">
@@ -176,7 +206,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
         ></path>
       </svg>
     </button></h2><p>Iterieren Sie durch die Textzeilen, erstellen Sie Einbettungen und fügen Sie dann die Daten in Milvus ein.</p>
-<p>Hier ist ein neues Feld <code translate="no">text</code>, das ein nicht definiertes Feld im Sammelschema ist. Es wird automatisch dem reservierten dynamischen JSON-Feld hinzugefügt, das auf hoher Ebene als normales Feld behandelt werden kann.</p>
+<p>Hier ist ein neues Feld <code translate="no">text</code>, das ein nicht definiertes Feld im Sammelschema ist. Es wird automatisch dem reservierten dynamischen JSON-Feld hinzugefügt, das auf hoher Ebene wie ein normales Feld behandelt werden kann.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
@@ -210,7 +240,22 @@ milvus_client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h2><p>In diesem Abschnitt führen wir eine Milvus-Suche durch und visualisieren dann den Abfragevektor und den abgerufenen Vektor zusammen in reduzierter Dimension.</p>
-<h3 id="Retrieve-Data-for-a-Query" class="common-anchor-header">Abrufen von Daten für eine Abfrage</h3><p>Lassen Sie uns eine Frage für die Suche vorbereiten.</p>
+<h3 id="Retrieve-Data-for-a-Query" class="common-anchor-header">Abrufen von Daten für eine Abfrage<button data-href="#Retrieve-Data-for-a-Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Lassen Sie uns eine Frage für die Suche vorbereiten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Modify the question to test it with your own query!</span>
 
 question = <span class="hljs-string">&quot;How is data stored in Milvus?&quot;</span>
@@ -277,7 +322,22 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Dimensionality-reduction-to-2-d-by-t-SNE" class="common-anchor-header">Dimensionalitätsreduktion auf 2-d durch t-SNE</h3><p>Reduzieren wir die Dimension der Einbettungen mit t-SNE auf 2-d. Wir verwenden die Bibliothek <code translate="no">sklearn</code>, um die t-SNE-Transformation durchzuführen.</p>
+<h3 id="Dimensionality-reduction-to-2-d-by-t-SNE" class="common-anchor-header">Dimensionalitätsreduktion auf 2-d durch t-SNE<button data-href="#Dimensionality-reduction-to-2-d-by-t-SNE" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Reduzieren wir die Dimension der Einbettungen mit t-SNE auf 2-d. Wir verwenden die Bibliothek <code translate="no">sklearn</code>, um die t-SNE-Transformation durchzuführen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> sklearn.manifold <span class="hljs-keyword">import</span> TSNE
@@ -373,7 +433,22 @@ df_tsne
 </table>
 <p>74 Zeilen × 2 Spalten</p>
 </div>
-<h3 id="Visualizing-Milvus-search-results-on-a-2d-plane" class="common-anchor-header">Visualisierung der Milvus-Suchergebnisse auf einer 2d-Ebene</h3><p>Wir stellen den Abfragevektor in grün, die gefundenen Vektoren in rot und die übrigen Vektoren in blau dar.</p>
+<h3 id="Visualizing-Milvus-search-results-on-a-2d-plane" class="common-anchor-header">Visualisierung der Milvus-Suchergebnisse auf einer 2d-Ebene<button data-href="#Visualizing-Milvus-search-results-on-a-2d-plane" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Wir stellen den Abfragevektor in grün, die gefundenen Vektoren in rot und die übrigen Vektoren in blau dar.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 <span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
 
@@ -431,4 +506,4 @@ plt.show()
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <p>Wie wir sehen können, liegt der Abfragevektor nahe bei den gefundenen Vektoren. Obwohl die abgerufenen Vektoren nicht innerhalb eines Standardkreises mit festem Radius liegen, der auf die Abfrage zentriert ist, können wir sehen, dass sie dem Abfragevektor auf der 2D-Ebene immer noch sehr nahe sind.</p>
-<p>Der Einsatz von Techniken zur Dimensionalitätsreduktion kann das Verständnis von Vektoren und die Fehlerbehebung erleichtern. Ich hoffe, dass Sie durch dieses Lernprogramm ein besseres Verständnis von Vektoren bekommen.</p>
+<p>Der Einsatz von Techniken zur Dimensionalitätsreduktion kann das Verständnis von Vektoren und die Fehlerbehebung erleichtern. Ich hoffe, dass Sie durch dieses Tutorial ein besseres Verständnis von Vektoren erlangen können.</p>

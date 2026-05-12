@@ -1,7 +1,7 @@
 ---
 id: build_RAG_with_milvus_and_firecrawl.md
 summary: >-
-  В этом руководстве мы покажем вам, как построить конвейер Retrieval-Augmented
+  В этом уроке мы покажем вам, как построить конвейер Retrieval-Augmented
   Generation (RAG) с использованием Milvus и Firecrawl. Конвейер объединяет
   Firecrawl для сбора веб-данных, Milvus для хранения векторов и OpenAI для
   генерации проницательных, учитывающих контекст ответов.
@@ -28,7 +28,7 @@ title: Создание RAG с помощью Milvus и Firecrawl
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_firecrawl.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://www.firecrawl.dev/">Firecrawl</a> позволяет разработчикам создавать приложения ИИ на основе чистых данных, полученных с любого веб-сайта. Благодаря расширенным возможностям скраппинга, ползания и извлечения данных Firecrawl упрощает процесс преобразования содержимого сайта в чистые данные в формате markdown или структурированные данные для последующих процессов ИИ.</p>
+<p><a href="https://www.firecrawl.dev/">Firecrawl</a> позволяет разработчикам создавать приложения ИИ на основе чистых данных, полученных с любого веб-сайта. Благодаря расширенным возможностям соскабливания, наползания и извлечения данных Firecrawl упрощает процесс преобразования содержимого веб-сайта в чистую разметку или структурированные данные для последующих рабочих процессов ИИ.</p>
 <p>В этом руководстве мы покажем вам, как построить конвейер Retrieval-Augmented Generation (RAG) с использованием Milvus и Firecrawl. Конвейер объединяет Firecrawl для сбора веб-данных, Milvus для хранения векторов и OpenAI для генерации проницательных, учитывающих контекст ответов.</p>
 <h2 id="Preparation" class="common-anchor-header">Подготовка<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -64,7 +64,7 @@ title: Создание RAG с помощью Milvus и Firecrawl
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install firecrawl-py pymilvus milvus-lite openai requests tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Если вы используете Google Colab, для включения только что установленных зависимостей может потребоваться <strong>перезапуск среды выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
+<p>Если вы используете Google Colab, для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
 </div>
 <h3 id="Setting-Up-API-Keys" class="common-anchor-header">Настройка ключей API<button data-href="#Setting-Up-API-Keys" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -290,7 +290,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Вставка данных<button data-href="#Insert-data" class="anchor-icon" translate="no">

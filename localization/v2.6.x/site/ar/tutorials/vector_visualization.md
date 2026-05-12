@@ -27,7 +27,7 @@ title: تصوّر المتجهات
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>في هذا المثال، سنوضح في هذا المثال كيفية تصور التضمينات (المتجهات) في ميلفوس باستخدام <a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE</a>.</p>
-<p>تقنيات تقليل الأبعاد، مثل t-SNE، لا تقدر بثمن لتصور البيانات المعقدة عالية الأبعاد في فضاء ثنائي الأبعاد أو ثلاثي الأبعاد مع الحفاظ على البنية المحلية. يتيح ذلك التعرف على الأنماط ويعزز فهم العلاقات بين السمات ويسهل تفسير نتائج نموذج التعلم الآلي. بالإضافة إلى ذلك، يساعد في تقييم الخوارزمية من خلال المقارنة البصرية لنتائج التجميع، ويبسط عرض البيانات للجمهور غير المتخصص، ويمكن أن يقلل من التكاليف الحسابية من خلال العمل مع تمثيلات ذات أبعاد أقل. من خلال هذه التطبيقات، لا يساعد t-SNE في اكتساب رؤى أعمق في مجموعات البيانات فحسب، بل يدعم أيضًا عمليات اتخاذ قرارات أكثر استنارة.</p>
+<p>تقنيات تقليل الأبعاد، مثل t-SNE، لا تقدر بثمن لتصور البيانات المعقدة عالية الأبعاد في فضاء ثنائي الأبعاد أو ثلاثي الأبعاد مع الحفاظ على البنية المحلية. يتيح ذلك التعرف على الأنماط ويعزز فهم العلاقات بين السمات ويسهل تفسير نتائج نموذج التعلم الآلي. بالإضافة إلى ذلك، يساعد في تقييم الخوارزمية من خلال المقارنة البصرية لنتائج التجميع، ويبسط عرض البيانات للجمهور غير المتخصص، ويمكن أن يقلل من التكاليف الحسابية من خلال العمل مع تمثيلات ذات أبعاد أقل. من خلال هذه التطبيقات، لا تساعد t-SNE في اكتساب رؤى أعمق في مجموعات البيانات فحسب، بل تدعم أيضًا عمليات اتخاذ قرارات أكثر استنارة.</p>
 <h2 id="Preparation" class="common-anchor-header">الإعداد<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +43,22 @@ title: تصوّر المتجهات
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">التبعيات والبيئة</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai requests tqdm matplotlib seaborn</span>
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">التبعيات والبيئة<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai requests tqdm matplotlib seaborn</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>سنستخدم نموذج تضمين OpenAI في هذا المثال. يجب إعداد مفتاح واجهة برمجة التطبيقات OPENAI_API_KEY كمتغير بيئة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -133,7 +148,22 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">إنشاء المجموعة</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">إنشاء المجموعة<button data-href="#Create-the-Collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
@@ -157,7 +187,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-data" class="common-anchor-header">إدراج البيانات<button data-href="#Insert-data" class="anchor-icon" translate="no">
@@ -210,7 +240,22 @@ milvus_client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h2><p>في هذا القسم، نقوم في هذا القسم بإجراء بحث ميليفوس ثم نقوم بتصور متجه الاستعلام والمتجه المسترجع معًا في بُعد مختزل.</p>
-<h3 id="Retrieve-Data-for-a-Query" class="common-anchor-header">استرجاع البيانات لاستعلام</h3><p>لنقم بإعداد سؤال للبحث.</p>
+<h3 id="Retrieve-Data-for-a-Query" class="common-anchor-header">استرجاع البيانات لاستعلام<button data-href="#Retrieve-Data-for-a-Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لنقم بإعداد سؤال للبحث.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Modify the question to test it with your own query!</span>
 
 question = <span class="hljs-string">&quot;How is data stored in Milvus?&quot;</span>
@@ -277,7 +322,22 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Dimensionality-reduction-to-2-d-by-t-SNE" class="common-anchor-header">تقليل البُعد إلى 2-د بواسطة t-SNE</h3><p>لنختزل أبعاد التضمينات إلى 2-د بواسطة t-SNE. سنستخدم مكتبة <code translate="no">sklearn</code> لإجراء تحويل t-SNE.</p>
+<h3 id="Dimensionality-reduction-to-2-d-by-t-SNE" class="common-anchor-header">تقليل البُعد إلى 2-د بواسطة t-SNE<button data-href="#Dimensionality-reduction-to-2-d-by-t-SNE" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لنختزل أبعاد التضمينات إلى 2-د بواسطة t-SNE. سنستخدم مكتبة <code translate="no">sklearn</code> لإجراء تحويل t-SNE.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> sklearn.manifold <span class="hljs-keyword">import</span> TSNE
@@ -373,7 +433,22 @@ df_tsne
 </table>
 <p>74 صفاً × 2 عمود</p>
 </div>
-<h3 id="Visualizing-Milvus-search-results-on-a-2d-plane" class="common-anchor-header">تمثيل نتائج بحث ميلفوس على مستوى ثنائي الأبعاد</h3><p>سنرسم متجه الاستعلام باللون الأخضر، والمتجهات المسترجعة باللون الأحمر، والمتجهات المتبقية باللون الأزرق.</p>
+<h3 id="Visualizing-Milvus-search-results-on-a-2d-plane" class="common-anchor-header">تمثيل نتائج بحث ميلفوس على مستوى ثنائي الأبعاد<button data-href="#Visualizing-Milvus-search-results-on-a-2d-plane" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>سنرسم متجه الاستعلام باللون الأخضر، والمتجهات المسترجعة باللون الأحمر، والمتجهات المتبقية باللون الأزرق.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 <span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
 
@@ -431,4 +506,4 @@ plt.show()
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>بنج</span> </span></p>
 <p>كما نرى، متجه الاستعلام قريب من المتجهات المسترجعة. على الرغم من أن المتجهات المسترجعة ليست ضمن دائرة قياسية ذات نصف قطر ثابت مركزها الاستعلام، يمكننا أن نرى أنها لا تزال قريبة جدًا من متجه الاستعلام على المستوى ثنائي الأبعاد.</p>
-<p>يمكن أن يسهّل استخدام تقنيات تقليل الأبعاد فهم المتجهات واستكشاف الأخطاء وإصلاحها. آمل أن تتمكن من الحصول على فهم أفضل للمتجهات من خلال هذا البرنامج التعليمي.</p>
+<p>يمكن أن يؤدي استخدام تقنيات تقليل الأبعاد إلى تسهيل فهم المتجهات واستكشاف الأخطاء وإصلاحها. آمل أن تتمكن من الحصول على فهم أفضل للمتجهات من خلال هذا البرنامج التعليمي.</p>

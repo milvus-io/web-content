@@ -175,7 +175,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Setelah pod Milvus Operator berjalan, Anda dapat men-deploy cluster Milvus sebagai berikut.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Perintah di atas men-deploy cluster Milvus dengan <strong>Woodpecker</strong> sebagai antrean pesan (disarankan untuk v2.6.13) dan semua komponen arsitektur baru termasuk Streaming Node.</p>
+<p>Perintah di atas men-deploy cluster Milvus dengan <strong>Woodpecker</strong> sebagai antrean pesan (disarankan untuk v2.6.15) dan semua komponen arsitektur baru termasuk Streaming Node.</p>
 <p><strong>Sorotan arsitektur dalam penerapan ini:</strong></p>
 <ul>
 <li><strong>Antrian Pesan</strong>: <a href="/docs/id/use-woodpecker.md">Menggunakan Woodpecker</a> (mengurangi pemeliharaan infrastruktur)</li>
@@ -415,7 +415,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p><a href="/docs/id/upgrade_milvus_cluster-helm.md">Tingkatkan Milvus Menggunakan Bagan Helm</a>.</p></li>
 <li><p>Mengatur<a href="/docs/id/scaleout.md">skala cluster Milvus Anda</a>.</p></li>
-<li><p>Menerapkan cluster Milvu Anda di awan:</p>
+<li><p>Menerapkan cluster Milvu Anda di cloud:</p>
 <ul>
 <li><a href="/docs/id/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/id/gcp.md">Google Cloud</a></li>

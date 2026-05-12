@@ -138,11 +138,11 @@ beta: Milvus 2.6.x
 </table>
 <p>For detailed information about implementation of each model service, refer to the dedicated documentation:</p>
 <ul>
-<li><p><a href="/docs/vllm-ranker.md">vLLM Ranker</a></p></li>
-<li><p><a href="/docs/tei-ranker.md">TEI Ranker</a></p></li>
-<li><p><a href="/docs/cohere-ranker.md">Cohere Ranker</a></p></li>
-<li><p><a href="/docs/voyage-ai-ranker.md">Voyage AI Ranker</a></p></li>
-<li><p><a href="/docs/siliconflow-ranker.md">SiliconFlow Ranker</a></p></li>
+<li><p><a href="/docs/v2.6.x/vllm-ranker.md">vLLM Ranker</a></p></li>
+<li><p><a href="/docs/v2.6.x/tei-ranker.md">TEI Ranker</a></p></li>
+<li><p><a href="/docs/v2.6.x/cohere-ranker.md">Cohere Ranker</a></p></li>
+<li><p><a href="/docs/v2.6.x/voyage-ai-ranker.md">Voyage AI Ranker</a></p></li>
+<li><p><a href="/docs/v2.6.x/siliconflow-ranker.md">SiliconFlow Ranker</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementation<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"

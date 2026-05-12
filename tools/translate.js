@@ -21,10 +21,10 @@ import {
   getTitleFromMarkdown,
 } from "./utils.js";
 import { remarkToHtml } from "./remark.js";
-import versionJson from "../version.json" assert { type: "json" };
+import versionJson from "../version.json" with { type: "json" };
 
 const MOCK_TRANSLATE = false;
-const VERSIONS = ["v2.6.x", "v2.5.x"];
+const VERSIONS = ["v3.0.x", "v2.6.x"];
 const LATEST_VERSION = versionJson.version;
 const sourceFilePath = "site/en";
 const sourceLang = "en";
@@ -198,13 +198,13 @@ async function bootstrap() {
         fs.writeFileSync(
           targetFilePath.replace(".md", ".json"),
           JSON.stringify({ codeList, headingContent, anchorList }),
-          "utf8"
+          "utf8",
         );
 
         console.info(
           `-> ${targetLang.toUpperCase()}: file translated successfully:`,
           targetFilePath,
-          ` (${total}/${updatedFiles.length})`
+          ` (${total}/${updatedFiles.length})`,
         );
       }
 

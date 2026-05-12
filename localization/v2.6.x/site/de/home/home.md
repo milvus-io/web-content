@@ -1,7 +1,6 @@
 ---
 id: home.md
 ---
-
 <div class="doc-h1-wrapper">
 <p><h1 class="title">
 Willkommen bei Milvus Docs!</h1></p>
@@ -72,7 +71,8 @@ Hier erfahren Sie, was Milvus ist und wie Sie Milvus installieren, verwenden und
 <li><a href="/docs/de/insert-update-delete.md">Einfügen, Upsert und Löschen</a></li>
 <li><a href="/docs/de/single-vector-search.md">Ein-Vektor-Suche</a></li>
 <li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a></li>
-<li><a href="/docs/de/get-and-scalar-query.md">Hole &amp; Skalare Abfrage</a></li>
+<li><a href="/docs/de/get-and-scalar-query.md">Get &amp; Skalare Abfrage</a></li>
+<li><a href="/docs/de/milvus_for_agents.md">Milvus für AI-Agenten</a></li>
 </ul>
 </div>
 <div class="recomment-item">
@@ -112,12 +112,12 @@ Hier erfahren Sie, was Milvus ist und wie Sie Milvus installieren, verwenden und
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>Juni 2025 - Veröffentlichung von Milvus 2.6.0</em></p>
+    </button></h2><p><em>März 2026 - Milvus 2.6.x Aktualisierungen</em></p>
 <ul>
-<li>Anleitung für die <a href="/docs/de/embedding-function-overview.md">Verwendung der Einbettungsfunktion</a> hinzugefügt.</li>
-<li>Anleitung für die <a href="/docs/de/decay-ranker-overview.md">Verwendung des Decay Rankers</a> hinzugefügt.</li>
-<li>Anleitung hinzugefügt, wie man <a href="/docs/de/add-fields-to-an-existing-collection.md">Felder zu einer bestehenden Sammlung hinzufügt</a>.</li>
-<li>Anleitung für die <a href="/docs/de/phrase-match.md">Durchführung von Phrasenabgleich</a> hinzugefügt.</li>
-<li>Beschreibungen des <a href="/docs/de/ivf-rabitq.md">IVF_RABITQ-Index</a> wurden hinzugefügt.</li>
+<li>Abschnitt <a href="/docs/de/milvus_for_agents.md">Milvus für KI-Agenten</a> mit Anleitungen hinzugefügt.</li>
+<li>Anleitung für die Verwendung der <a href="/docs/de/google-gemini.md">Gemini-Einbettungsfunktion</a> hinzugefügt.</li>
+<li>Anleitung für die <a href="/docs/de/primary-key-search.md">Suche nach Primärschlüsseln</a> hinzugefügt.</li>
+<li>Anleitung zur Verwendung des <a href="/docs/de/text-highlighter.md">Textmarkers</a> in den Suchergebnissen hinzugefügt.</li>
+<li>Beschreibungen des <a href="/docs/de/geometry-field.md">Geometriefeldes</a>, des <a href="/docs/de/timestamptz-field.md">Timestamptz-Feldes</a>, des <a href="/docs/de/tiered-storage-overview.md">Tiered Storage</a> und des <a href="/docs/de/array-of-structs.md">Arrays of Structs</a> wurden hinzugefügt.</li>
 </ul>
 </div>

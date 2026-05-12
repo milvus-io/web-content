@@ -56,7 +56,22 @@ title: Schnellstart mit Attu - der Web-UI von Milvus
         ></path>
       </svg>
     </button></h2><p>Laden Sie die Desktop-Version von Attu herunter, indem Sie die <a href="https://github.com/zilliztech/attu/releases">Attu GitHub Releases-Seite</a> besuchen. Wählen Sie die entsprechende Version für Ihr Betriebssystem aus und folgen Sie den Installationsschritten.</p>
-<h3 id="Note-for-macOS-M-series-chip" class="common-anchor-header">Hinweis für macOS (Chip der M-Serie):</h3><p>Wenn Sie auf den Fehler stoßen:</p>
+<h3 id="Note-for-macOS-M-series-chip" class="common-anchor-header">Hinweis für macOS (Chip der M-Serie):<button data-href="#Note-for-macOS-M-series-chip" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Wenn Sie auf den Fehler stoßen:</p>
 <pre><code translate="no">attu.app <span class="hljs-keyword">is</span> damaged <span class="hljs-keyword">and</span> cannot be opened.
 <button class="copy-code-btn"></button></code></pre>
 <p>Führen Sie den folgenden Befehl im Terminal aus, um dieses Problem zu umgehen:</p>
@@ -113,7 +128,22 @@ title: Schnellstart mit Attu - der Web-UI von Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="41-Prepare-the-Data" class="common-anchor-header">4.1 Bereiten Sie die Daten vor</h3><p>Wir verwenden die FAQ-Seiten aus der <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus-Dokumentation 2.4.x</a> als Datensatz für dieses Beispiel.</p>
+    </button></h2><h3 id="41-Prepare-the-Data" class="common-anchor-header">4.1 Bereiten Sie die Daten vor<button data-href="#41-Prepare-the-Data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Wir verwenden die FAQ-Seiten aus der <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus-Dokumentation 2.4.x</a> als Datensatz für dieses Beispiel.</p>
 <h4 id="Download-and-Extract-Data" class="common-anchor-header">Daten herunterladen und extrahieren:</h4><pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip
 unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs
 <button class="copy-code-btn"></button></code></pre>
@@ -126,7 +156,22 @@ text_lines = []
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="42-Generate-Embeddings" class="common-anchor-header">4.2 Einbettungen generieren</h3><p>Definieren Sie ein Einbettungsmodell, um Texteinbettungen unter Verwendung von <code translate="no">milvus_model</code> zu generieren. Wir verwenden das Modell <code translate="no">DefaultEmbeddingFunction</code> als Beispiel, das ein vortrainiertes und leichtgewichtiges Einbettungsmodell ist.</p>
+<h3 id="42-Generate-Embeddings" class="common-anchor-header">4.2 Einbettungen generieren<button data-href="#42-Generate-Embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Definieren Sie ein Einbettungsmodell, um Texteinbettungen unter Verwendung von <code translate="no">milvus_model</code> zu generieren. Wir verwenden das Modell <code translate="no">DefaultEmbeddingFunction</code> als Beispiel, das ein vortrainiertes und leichtgewichtiges Einbettungsmodell ist.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model <span class="hljs-keyword">as</span> milvus_model
 
 embedding_model = milvus_model.DefaultEmbeddingFunction()
@@ -142,7 +187,22 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
  -0.03041712 -0.02269499 -0.02317863 -0.00426028]
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="43-Create-Collection" class="common-anchor-header">4.3 Sammlung erstellen</h3><p>Verbinden Sie sich mit Milvus und erstellen Sie eine Sammlung:</p>
+<h3 id="43-Create-Collection" class="common-anchor-header">4.3 Sammlung erstellen<button data-href="#43-Create-Collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Verbinden Sie sich mit Milvus und erstellen Sie eine Sammlung:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Connect to Milvus Standalone</span>
@@ -159,11 +219,26 @@ client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="44-Insert-Data" class="common-anchor-header">4.4 Daten einfügen</h3><p>Iterieren Sie durch die Textzeilen, erstellen Sie Einbettungen und fügen Sie die Daten in Milvus ein:</p>
+<h3 id="44-Insert-Data" class="common-anchor-header">4.4 Daten einfügen<button data-href="#44-Insert-Data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Iterieren Sie durch die Textzeilen, erstellen Sie Einbettungen und fügen Sie die Daten in Milvus ein:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
@@ -175,7 +250,22 @@ doc_embeddings = embedding_model.encode_documents(text_lines)
 client.insert(collection_name=collection_name, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="45-Visualize-Data-and-Schema" class="common-anchor-header">4.5 Daten und Schema visualisieren</h3><p>Nun können wir das Datenschema und die eingefügten Entitäten mit Hilfe der Attu-Schnittstelle visualisieren. Das Schema zeigt definierte Felder an, darunter ein Feld <code translate="no">id</code> vom Typ <code translate="no">Int64</code> und ein Feld <code translate="no">vector</code> vom Typ <code translate="no">FloatVector(768)</code> mit einer Metrik <code translate="no">Inner Product (IP)</code>. Die Sammlung ist mit <strong>72 Entitäten</strong> geladen.</p>
+<h3 id="45-Visualize-Data-and-Schema" class="common-anchor-header">4.5 Daten und Schema visualisieren<button data-href="#45-Visualize-Data-and-Schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nun können wir das Datenschema und die eingefügten Entitäten mit Hilfe der Attu-Schnittstelle visualisieren. Das Schema zeigt definierte Felder an, darunter ein Feld <code translate="no">id</code> vom Typ <code translate="no">Int64</code> und ein Feld <code translate="no">vector</code> vom Typ <code translate="no">FloatVector(768)</code> mit einer Metrik <code translate="no">Inner Product (IP)</code>. Die Sammlung ist mit <strong>72 Entitäten</strong> geladen.</p>
 <p>Darüber hinaus können die eingefügten Daten angezeigt werden, einschließlich ID, Vektoreinbettungen und dynamische Felder, die Metadaten wie Textinhalte speichern. Die Schnittstelle unterstützt die Filterung und Abfrage auf der Grundlage bestimmter Bedingungen oder dynamischer Felder.</p>
 <p align="center">
   <img translate="no" src="/docs/v2.6.x/assets/attu_after_data_insertion_1.png" alt="Schema View" width="45%" />
@@ -197,7 +287,22 @@ client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h2><p>Attu bietet eine leistungsstarke Schnittstelle zur Visualisierung und Erkundung von Datenbeziehungen. Um die eingefügten Datenpunkte und ihre Ähnlichkeitsbeziehungen zu untersuchen, gehen Sie wie folgt vor:</p>
-<h3 id="51-Perform-a-Search" class="common-anchor-header">5.1 <strong>Durchführen einer Suche</strong></h3><p>Navigieren Sie zur Registerkarte <strong>Vektorsuche</strong> in Attu.</p>
+<h3 id="51-Perform-a-Search" class="common-anchor-header">5.1 <strong>Durchführen einer Suche</strong><button data-href="#51-Perform-a-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Navigieren Sie zur Registerkarte <strong>Vektorsuche</strong> in Attu.</p>
 <ol>
 <li>Klicken Sie auf die Schaltfläche <strong>Zufallsdaten generieren</strong>, um Testabfragen zu erstellen.</li>
 <li>Klicken Sie auf <strong>Suchen</strong>, um die Ergebnisse auf der Grundlage der generierten Daten abzurufen.</li>
@@ -207,7 +312,22 @@ client.insert(collection_name=collection_name, data=data)
   <img translate="no" src="/docs/v2.6.x/assets/attu_searched_table.png" alt="Search Results Table" width="80%">
 </p>
 <hr>
-<h3 id="52-Explore-Data-Relationships" class="common-anchor-header">5.2 <strong>Untersuchen von Datenbeziehungen</strong></h3><p>Klicken Sie auf die Schaltfläche <strong>Erkunden</strong> im Ergebnisbereich, um die Beziehungen zwischen dem Suchvektor und den Suchergebnissen in einer <strong>wissensgraphenähnlichen Struktur</strong> zu visualisieren.</p>
+<h3 id="52-Explore-Data-Relationships" class="common-anchor-header">5.2 <strong>Untersuchen von Datenbeziehungen</strong><button data-href="#52-Explore-Data-Relationships" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Klicken Sie auf die Schaltfläche <strong>Erkunden</strong> im Ergebnisbereich, um die Beziehungen zwischen dem Suchvektor und den Suchergebnissen in einer <strong>wissensgraphenähnlichen Struktur</strong> zu visualisieren.</p>
 <ul>
 <li>Der <strong>zentrale Knoten</strong> stellt den Suchvektor dar.</li>
 <li>Die <strong>verbundenen Knoten</strong> stellen die Suchergebnisse dar. Wenn Sie auf sie klicken, werden die detaillierten Informationen des entsprechenden Knotens angezeigt.</li>
@@ -216,7 +336,22 @@ client.insert(collection_name=collection_name, data=data)
   <img translate="no" src="/docs/v2.6.x/assets/attu_searched_graph.png" alt="Knowledge Graph Visualization" width="80%">
 </p>
 <hr>
-<h3 id="53-Expand-the-Graph" class="common-anchor-header">5.3 <strong>Erweitern des Graphen</strong></h3><p>Doppelklicken Sie auf einen beliebigen Ergebnisknoten, um seine Verbindungen zu erweitern. Dadurch werden zusätzliche Beziehungen zwischen dem ausgewählten Knoten und anderen Datenpunkten in der Sammlung sichtbar, wodurch ein <strong>größerer, miteinander verbundener Wissensgraph</strong> entsteht.</p>
+<h3 id="53-Expand-the-Graph" class="common-anchor-header">5.3 <strong>Erweitern des Graphen</strong><button data-href="#53-Expand-the-Graph" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Doppelklicken Sie auf einen beliebigen Ergebnisknoten, um seine Verbindungen zu erweitern. Dadurch werden zusätzliche Beziehungen zwischen dem ausgewählten Knoten und anderen Datenpunkten in der Sammlung sichtbar, wodurch ein <strong>größerer, miteinander verbundener Wissensgraph</strong> entsteht.</p>
 <p>Diese erweiterte Ansicht ermöglicht eine genauere Untersuchung der Beziehungen zwischen den Datenpunkten auf der Grundlage der Vektorähnlichkeit.</p>
 <p align="center">
   <img translate="no" src="/docs/v2.6.x/assets/attu_expanded_searched_graph.png" alt="Expanded Knowledge Graph" width="80%">

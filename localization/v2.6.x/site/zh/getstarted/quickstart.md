@@ -126,7 +126,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>首先，安装模型库。该软件包包含 PyTorch 等基本 ML 工具。如果您的本地环境从未安装过 PyTorch，下载软件包可能需要一些时间。</p>
+    </button></h2><p>首先，安装模型库。该软件包包含 PyTorch 等基本 ML 工具。如果您的本地环境从未安装过 PyTorch，则软件包下载可能需要一些时间。</p>
 <pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>用默认模型生成向量 Embeddings。Milvus 希望数据以字典列表的形式插入，每个字典代表一条数据记录，称为实体。</p>
@@ -314,7 +314,7 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.27030569314956665, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Computational synthesis with AI algorithms predicts molecular properties.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}, {&#x27;id&#x27;: 3, &#x27;distance&#x27;: 0.16425910592079163, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Machine learning has been used for drug design.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>默认情况下，标量字段不编制索引。如果需要在大型数据集中执行元数据过滤搜索，可以考虑使用固定 Schema，同时打开<a href="https://milvus.io/docs/scalar_index.md">索引</a>以提高搜索性能。</p>
+<p>默认情况下，标量字段不编制索引。如果需要在大型数据集中执行元数据过滤搜索，可以考虑使用固定 Schema，同时开启<a href="https://milvus.io/docs/scalar_index.md">索引</a>以提高搜索性能。</p>
 <p>除了向量搜索，还可以执行其他类型的搜索：</p>
 <h3 id="Query" class="common-anchor-header">查询<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -437,4 +437,21 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <button class="copy-code-btn"></button></code></pre>
 <p>要将数据从 Milvus Lite 迁移到部署在 Docker 或 Kubernetes 上的 Milvus，请参阅<a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">从 Milvus Lite 迁移数据</a>。</p>
 <p>Milvus 提供 REST 和 gRPC API，以及<a href="https://milvus.io/docs/install-pymilvus.md">Python</a>、<a href="https://milvus.io/docs/install-java.md">Java</a>、<a href="https://milvus.io/docs/install-go.md">Go</a>、C# 和<a href="https://milvus.io/docs/install-node.md">Node.js</a> 等语言的客户端库。</p>
-<p>在模式设计方面，Milvus 支持灵活的模式设计，你可以定义字段及其数据类型，包括向量字段。您还可以为每个字段定义索引类型和参数。如需了解更多信息，请参阅<a href="https://milvus.io/docs/schema-hands-on.md">搜索的数据模型设计</a>。</p>
+<p>在模式设计方面，Milvus 支持灵活的模式设计，你可以定义字段及其数据类型，包括向量字段。您还可以为每个字段定义索引类型和参数。更多信息，请参阅<a href="https://milvus.io/docs/schema-hands-on.md">搜索的数据模型设计</a>。</p>
+<h2 id="Milvus-for-AI-Agents" class="common-anchor-header">适用于 AI 代理的 Milvus<button data-href="#Milvus-for-AI-Agents" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>如果您正在使用克劳德代码或光标等人工智能编码助手，您可以安装<a href="https://github.com/zilliztech/milvus-skill">Milvus Skill</a>，以帮助您的人工智能工具编写正确的 Milvus 代码。</p>
+<p>有关包括 MCP 服务器和策划提示在内的更多代理工具，请参阅<a href="/docs/zh/milvus_for_agents.md">Milvus for AI Agents</a>。</p>

@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus verwendet RocksMQ, Pulsar oder Kafka für die Verwaltung von Protokollen der letzten Änderungen, die Ausgabe von Stream-Protokollen und die Bereitstellung von Protokollabonnements. In diesem Thema wird erläutert, wie Sie die Abhängigkeiten für den Nachrichtenspeicher konfigurieren, wenn Sie Milvus mit Milvus Operator installieren. Weitere Details finden Sie unter <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Konfigurieren des Nachrichtenspeichers mit Milvus Operator</a> im Milvus Operator Repository.</p>
+    </button></h1><p>Milvus verwendet RocksMQ, Pulsar oder Kafka zur Verwaltung von Protokollen der letzten Änderungen, zur Ausgabe von Stream-Protokollen und zur Bereitstellung von Protokollabonnements. In diesem Thema wird beschrieben, wie Sie die Abhängigkeiten für den Nachrichtenspeicher konfigurieren, wenn Sie Milvus mit Milvus Operator installieren. Weitere Details finden Sie unter <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Konfigurieren des Nachrichtenspeichers mit Milvus Operator</a> im Milvus Operator Repository.</p>
 <p>Dieses Thema setzt voraus, dass Sie Milvus Operator installiert haben.</p>
 <div class="alert note">Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">Bereitstellen von Milvus Operator</a>. </div>
 <p>Sie müssen eine Konfigurationsdatei für die Verwendung von Milvus Operator angeben, um einen Milvus-Cluster zu starten.</p>
@@ -55,13 +55,13 @@ summary: >-
 </table>
 <p>Es gibt noch weitere Einschränkungen bei der Angabe des Nachrichtenspeichers:</p>
 <ul>
-<li>Es wird nur ein Nachrichtenspeicher für eine Milvus-Instanz unterstützt. Wir haben jedoch immer noch Abwärtskompatibilität mit mehreren Nachrichtenspeichern für eine Instanz. Die Priorität ist wie folgt:<ul>
+<li>Es wird nur ein Nachrichtenspeicher für eine Milvus-Instanz unterstützt. Es besteht jedoch Abwärtskompatibilität mit mehreren Nachrichtenspeichern für eine Instanz. Die Priorität ist wie folgt:<ul>
 <li>Standalone-Modus:  RocksMQ (Standard) &gt; Pulsar &gt; Kafka</li>
 <li>Clustermodus: Pulsar (Standard) &gt; Kafka</li>
 </ul></li>
 <li>Der Nachrichtenspeicher kann nicht geändert werden, während das Milvus-System läuft.</li>
 <li>Es wird nur die Kafka-Version 2.x oder 3.x unterstützt.</li>
-<li><strong>Upgrade-Einschränkungen</strong>: <strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v2.6.13 müssen Sie Ihre aktuelle Auswahl an Nachrichtenwarteschlangen beibehalten. Ein Wechsel zwischen verschiedenen Message-Queue-Systemen während des Upgrades wird nicht unterstützt. Unterstützung für den Wechsel von Message-Queue-Systemen wird in zukünftigen Versionen verfügbar sein.</li>
+<li><strong>Upgrade-Einschränkungen</strong>: <strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v2.6.15 müssen Sie Ihre aktuelle Auswahl an Nachrichtenwarteschlangen beibehalten. Ein Wechsel zwischen verschiedenen Message-Queue-Systemen während des Upgrades wird nicht unterstützt. Unterstützung für den Wechsel von Message-Queue-Systemen wird in zukünftigen Versionen verfügbar sein.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Konfigurieren von RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -106,7 +106,7 @@ summary: >-
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
 <h5 id="Key-configuration-options" class="common-anchor-header">Die wichtigsten Konfigurationsoptionen:</h5><ul>
-<li><code translate="no">msgStreamType</code>: rocksmq: Legt explizit RocksMQ als Nachrichtenwarteschlange fest</li>
+<li><code translate="no">msgStreamType</code>: rocksmq: Legt RocksMQ explizit als Nachrichtenwarteschlange fest</li>
 <li><code translate="no">persistence.enabled</code>: Aktiviert persistente Speicherung für RocksMQ-Daten</li>
 <li><code translate="no">persistence.pvcDeletion</code>: Wenn true, wird die PVC gelöscht, wenn die Milvus-Instanz gelöscht wird</li>
 <li><code translate="no">persistentVolumeClaim.spec</code>: Standard-Kubernetes-PVC-Spezifikation</li>
@@ -201,7 +201,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">inCluster</code> zeigt an, dass beim Start eines Milvus-Clusters automatisch ein Pulsar-Dienst im Cluster gestartet wird.</p>
+    </button></h3><p><code translate="no">inCluster</code> gibt an, dass beim Start eines Milvus-Clusters automatisch ein Pulsar-Dienst im Cluster gestartet wird.</p>
 <h4 id="Example" class="common-anchor-header">Beispiel</h4><p>Das folgende Beispiel konfiguriert einen internen Pulsar-Dienst.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

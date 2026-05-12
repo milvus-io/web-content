@@ -153,17 +153,47 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Selain fitur-fitur pencarian utama yang disebutkan di atas, Milvus juga menyediakan serangkaian fitur yang diimplementasikan di sekitar pencarian ANN sehingga Anda dapat sepenuhnya memanfaatkan kemampuannya.</p>
-<h3 id="API-and-SDK" class="common-anchor-header">API dan SDK</h3><ul>
-<li><a href="https://milvus.io/api-reference/restful/v2.4.x/About.md">API RESTful</a> (resmi)</li>
-<li><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">PyMilvus</a> (Python SDK) (resmi)</li>
-<li><a href="https://milvus.io/api-reference/go/v2.4.x/About.md">Go SDK</a> (resmi)</li>
-<li><a href="https://milvus.io/api-reference/java/v2.4.x/About.md">Java SDK</a> (resmi)</li>
-<li><a href="https://milvus.io/api-reference/node/v2.4.x/About.md">Node.js</a> (JavaScript) SDK (resmi)</li>
+<h3 id="API-and-SDK" class="common-anchor-header">API dan SDK<button data-href="#API-and-SDK" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li><a href="https://milvus.io/api-reference/restful/v2.6.x/About.md">API RESTful</a> (resmi)</li>
+<li><a href="https://milvus.io/api-reference/pymilvus/v2.6.x/About.md">PyMilvus</a> (Python SDK) (resmi)</li>
+<li><a href="https://milvus.io/api-reference/go/v2.6.x/About.md">Go SDK</a> (resmi)</li>
+<li><a href="https://milvus.io/api-reference/java/v2.6.x/About.md">Java SDK</a> (resmi)</li>
+<li><a href="https://milvus.io/api-reference/node/v2.6.x/About.md">Node.js</a> (JavaScript) SDK (resmi)</li>
 <li><a href="https://milvus.io/api-reference/csharp/v2.2.x/About.md">C#</a> (dikontribusikan oleh Microsoft)</li>
-<li>C++ SDK (dalam pengembangan)</li>
-<li>Rust SDK (dalam pengembangan)</li>
+<li><a href="https://milvus.io/api-reference/cpp/v2.6.x/About.md">C++ SDK</a> (resmi)</li>
+<li>SDK Karat (dalam pengembangan)</li>
 </ul>
-<h3 id="Advanced-Data-Types" class="common-anchor-header">Tipe Data Tingkat Lanjut</h3><p>Selain tipe data primitif, Milvus mendukung berbagai tipe data tingkat lanjut dan metrik jarak yang dapat diterapkan.</p>
+<h3 id="Advanced-Data-Types" class="common-anchor-header">Tipe Data Tingkat Lanjut<button data-href="#Advanced-Data-Types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Selain tipe data primitif, Milvus mendukung berbagai tipe data tingkat lanjut dan metrik jarak yang dapat diterapkan.</p>
 <ul>
 <li><a href="/docs/id/sparse_vector.md">Vektor Jarang</a></li>
 <li><a href="/docs/id/index-vector-fields.md">Vektor Biner</a></li>
@@ -172,7 +202,22 @@ summary: >-
 <li>Teks (dalam pengembangan)</li>
 <li>Geolokasi (dalam pengembangan)</li>
 </ul>
-<h3 id="Why-Milvus" class="common-anchor-header">Mengapa Milvus?</h3><ul>
+<h3 id="Why-Milvus" class="common-anchor-header">Mengapa Milvus?<button data-href="#Why-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>Performa Tinggi dalam Skala Besar dan Ketersediaan Tinggi</strong></p>
 <p>Milvus memiliki <a href="/docs/id/architecture_overview.md">arsitektur terdistribusi</a> yang memisahkan <a href="/docs/id/data_processing.md#Data-query">komputasi</a> dan <a href="/docs/id/data_processing.md#Data-insertion">penyimpanan</a>. Milvus dapat mengukur dan beradaptasi secara horizontal dengan pola lalu lintas yang beragam, mencapai kinerja optimal dengan meningkatkan node kueri secara independen untuk beban kerja yang berat untuk membaca dan node data untuk beban kerja yang berat untuk menulis. Layanan mikro tanpa kewarganegaraan pada K8 memungkinkan <a href="/docs/id/coordinator_ha.md#Coordinator-HA">pemulihan cepat</a> dari kegagalan, memastikan ketersediaan yang tinggi. Dukungan untuk <a href="/docs/id/replica.md">replika</a> semakin meningkatkan toleransi kesalahan dan throughput dengan memuat segmen data pada beberapa node kueri. Lihat <a href="https://zilliz.com/vector-database-benchmark-tool">tolok ukur</a> untuk perbandingan kinerja.</p></li>
 <li><p><strong>Dukungan untuk Berbagai Jenis Indeks Vektor dan Akselerasi Perangkat Keras</strong></p>
@@ -184,12 +229,42 @@ summary: >-
 <li><p><strong>Keamanan Data dan Kontrol Akses yang Baik</strong></p>
 <p>Milvus memastikan keamanan data dengan menerapkan <a href="/docs/id/authenticate.md">otentikasi pengguna wajib</a>, <a href="/docs/id/tls.md">enkripsi TLS</a>, dan <a href="/docs/id/rbac.md">Kontrol Akses Berbasis Peran (RBAC)</a>. Otentikasi pengguna memastikan bahwa hanya pengguna yang berwenang dengan kredensial yang valid yang dapat mengakses basis data, sementara enkripsi TLS mengamankan semua komunikasi dalam jaringan. Selain itu, RBAC memungkinkan kontrol akses yang lebih baik dengan memberikan izin khusus kepada pengguna berdasarkan peran mereka. Fitur-fitur ini menjadikan Milvus pilihan yang kuat dan aman untuk aplikasi perusahaan, melindungi data sensitif dari akses yang tidak sah dan potensi pelanggaran.</p></li>
 </ul>
-<h3 id="AI-Integrations" class="common-anchor-header">Integrasi AI</h3><ul>
+<h3 id="AI-Integrations" class="common-anchor-header">Integrasi AI<button data-href="#AI-Integrations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Integrasi Model Embedding Model Embedding mengubah data yang tidak terstruktur menjadi representasi numerik dalam ruang data berdimensi tinggi sehingga Anda dapat menyimpannya di Milvus. Saat ini, PyMilvus, Python SDK, mengintegrasikan beberapa model embedding sehingga Anda dapat dengan cepat menyiapkan data Anda ke dalam embedding vektor. Untuk detailnya, lihat <a href="/docs/id/embeddings.md">Ikhtisar Penyematan</a>.</p></li>
 <li><p>Integrasi Model Perangkingan Dalam ranah pencarian informasi dan AI generatif, perangking ulang adalah alat penting yang mengoptimalkan urutan hasil dari pencarian awal. PyMilvus juga mengintegrasikan beberapa model perangkingan ulang untuk mengoptimalkan urutan hasil yang dikembalikan dari pencarian awal. Untuk detailnya, lihat <a href="/docs/id/rerankers-overview.md">Ikhtisar Perangking</a>.</p></li>
 <li><p>LangChain dan Integrasi Alat AI lainnya Di era GenAI, alat, seperti LangChain, mendapatkan banyak perhatian dari para pengembang aplikasi. Sebagai komponen inti, Milvus biasanya berfungsi sebagai penyimpan vektor dalam alat tersebut. Untuk mempelajari cara mengintegrasikan Milvus ke dalam alat AI favorit Anda, lihat <a href="/docs/id/integrate_with_openai.md">Integrasi</a> dan <a href="/docs/id/build-rag-with-milvus.md">Tutorial</a> kami.</p></li>
 </ul>
-<h3 id="Tools-and-Ecosystem" class="common-anchor-header">Alat dan Ekosistem</h3><ul>
+<h3 id="Tools-and-Ecosystem" class="common-anchor-header">Alat dan Ekosistem<button data-href="#Tools-and-Ecosystem" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Attu Attu adalah GUI intuitif lengkap yang membantu Anda mengelola Milvus dan data yang disimpannya. Untuk detailnya, lihat repositori <a href="https://github.com/zilliztech/attu">Attu</a>.</p></li>
 <li><p>Birdwatcher Birdwatcher adalah alat debugging untuk Milvus. Dengan menggunakannya untuk terhubung ke etcd, Anda dapat memeriksa status sistem Milvus Anda atau mengkonfigurasinya dengan cepat. Untuk detailnya, lihat <a href="/docs/id/birdwatcher_overview.md">BirdWatcher</a>.</p></li>
 <li><p>Integrasi Promethus &amp; Grafana Prometheus adalah perangkat pemantauan dan peringatan sistem sumber terbuka untuk Kubernetes. Grafana adalah tumpukan visualisasi sumber terbuka yang dapat terhubung dengan semua sumber data. Anda dapat menggunakan Promethus &amp; Grafana sebagai penyedia layanan pemantauan untuk memantau kinerja Milvus yang didistribusikan secara visual. Untuk detailnya, lihat Menerapkan <a href="/docs/id/monitor.md">Layanan Pemantauan</a>.</p></li>

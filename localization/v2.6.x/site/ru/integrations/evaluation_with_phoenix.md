@@ -123,7 +123,7 @@ title: Оценка с помощью Arize Pheonix
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -293,7 +293,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
       <td>Что такое спецификация требований к оборудованию...</td>
       <td>[Требования к аппаратному обеспечению\n\nСледующая специф...</td>
       <td>Спецификация требований к аппаратному обеспечению для бу...</td>
-      <td>Если вы хотите собрать Milvus и запустить его из источн...</td>
+      <td>Если вы хотите собрать Milvus и запустить его из источника...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -473,7 +473,7 @@ results_df.head()
     </tr>
     <tr>
       <th>2</th>
-      <td>Что необходимо убедиться перед выполнением проверки покрытия кода...</td>
+      <td>Что необходимо обеспечить перед запуском проверки покрытия кода...</td>
       <td>[Покрытие кода\n\nПеред отправкой вашего pull ...</td>
       <td>Перед запуском покрытия кода следует убедиться, что...</td>
       <td>Перед выполнением покрытия кода необходимо сделать ...</td>

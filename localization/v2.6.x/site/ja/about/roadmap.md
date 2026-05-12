@@ -88,7 +88,7 @@ summary: Milvusは、AIアプリケーションを強化するために構築さ
 <li><p>FFIを介して<strong>Spark</strong>/<strong>DuckDB</strong>/<strong>DataFusionと</strong>統合し、オフラインでのスキーマ進化とKNNクエリを実現。</p></li>
 <li><p>マルチモーダルなデータ可視化とSpark ETLデモを提供し、データレイク・アーキテクチャの基礎を確立。</p></li>
 </ul>
-<h2 id="🌠-Milvus-v30-Targeted-for-Late-2026" class="common-anchor-header">↪Milvus v3.0 (2026年後半目標)<button data-href="#🌠-Milvus-v30-Targeted-for-Late-2026" class="anchor-icon" translate="no">
+<h2 id="🌠-Milvus-v30-Targeted-for-Early-2026" class="common-anchor-header">↪Milvus v3.0 (2026年初頭目標)<button data-href="#🌠-Milvus-v30-Targeted-for-Early-2026" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

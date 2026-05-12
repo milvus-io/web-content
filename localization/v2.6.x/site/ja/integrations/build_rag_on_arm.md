@@ -2,7 +2,7 @@
 id: build_rag_on_arm.md
 summary: >-
   このチュートリアルでは、Armベースのインフラ上でRAG（Retrieval-Augmented
-  Generation）アプリケーションを構築する方法を学びます。ベクトルストレージには、フルマネージドMilvusベクトルデータベースであるZilliz
+  Generation）アプリケーションを構築する方法を学びます。ベクターストレージには、フルマネージドMilvusベクターデータベースであるZilliz
   Cloudを利用します。Zilliz
   Cloudは、AWS、GCP、Azureなどの主要なクラウドで利用できる。このデモでは、ArmマシンとAWS上にデプロイされたZilliz
   Cloudを使用している。LLMについては、llama.cppを使用してAWSのArmベースのサーバーCPU上でLlama-3.1-8Bモデルを使用しています。
@@ -24,7 +24,7 @@ title: ArmアーキテクチャでRAGを構築
         ></path>
       </svg>
     </button></h1><p><a href="https://www.arm.com/">Arm</a>CPUは、従来の機械学習（ML）や人工知能（AI）のユースケースを含め、幅広いアプリケーションで幅広く利用されています。</p>
-<p>このチュートリアルでは、Armベースのインフラストラクチャ上でRAG（Retrieval-Augmented Generation）アプリケーションを構築する方法を学びます。ベクトル・ストレージには、フルマネージドMilvusベクトル・データベースである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用します。Zilliz Cloudは、AWS、GCP、Azureなどの主要なクラウドで利用できる。このデモでは、ArmマシンとAWS上にデプロイされたZilliz Cloudを使用している。LLMについては、AWSのArmベースのサーバーCPU上で<code translate="no">llama.cpp</code> を用いて<code translate="no">Llama-3.1-8B</code> 。</p>
+<p>このチュートリアルでは、Armベースのインフラストラクチャ上でRAG（Retrieval-Augmented Generation）アプリケーションを構築する方法を学びます。ベクトル・ストレージには、フルマネージドMilvusベクトル・データベースである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用します。Zilliz Cloudは、AWS、GCP、Azureなどの主要なクラウドで利用できる。このデモでは、ArmマシンでAWS上にデプロイされたZilliz Cloudを使用している。LLMについては、AWSのArmベースのサーバーCPU上で<code translate="no">llama.cpp</code> を用いて<code translate="no">Llama-3.1-8B</code> 。</p>
 <h2 id="Prerequisite" class="common-anchor-header">前提条件<button data-href="#Prerequisite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,7 +69,22 @@ $ <span class="hljs-built_in">source</span> venv/bin/activate
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">コレクションの作成</h3><p>ArmベースのマシンでAWS上にデプロイされた<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>使用して、ベクトルデータを保存し、取得します。クイックスタートするには、Zilliz Cloudに無料で<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">アカウントを登録</a>するだけです。</p>
+    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">コレクションの作成<button data-href="#Create-the-Collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ArmベースのマシンでAWS上にデプロイされた<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>使用して、ベクトルデータを保存し、取得します。クイックスタートするには、Zilliz Cloudに無料で<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">アカウントを登録</a>するだけです。</p>
 <div class="alert note">
 <p>Zilliz Cloudに加えて、セルフホスティングのMilvusも（セットアップがより複雑な）オプションです。また、<a href="https://milvus.io/docs/install_standalone-docker-compose.md">Milvus Standaloneと</a> <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetesを</a>ARMベースのマシンにデプロイすることも可能です。Milvusのインストールの詳細については、<a href="https://milvus.io/docs/install-overview.md">インストールドキュメントを</a>参照してください。</p>
 </div>
@@ -93,11 +108,26 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=<span class="hljs-number">384</span>,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>デフォルトのメトリックタイプとして内積距離を使用する。距離タイプの詳細については、<a href="https://milvus.io/docs/metric.md?tab=floating">類似度メトリクスのページを</a>参照してください。</p>
-<h3 id="Prepare-the-data" class="common-anchor-header">データの準備</h3><p><a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvusドキュメント2.4.xの</a>FAQページをRAGのプライベートナレッジとして使用します。</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">データの準備<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvusドキュメント2.4.xの</a>FAQページをRAGのプライベートナレッジとして使用します。</p>
 <p>zipファイルをダウンロードし、<code translate="no">milvus_docs</code> フォルダにドキュメントを解凍する。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
@@ -113,7 +143,22 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">データの挿入</h3><p>テキストを埋め込みベクトルに変換できる、シンプルだが効率的な埋め込みモデル<a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2を</a>用意する。</p>
+<h3 id="Insert-data" class="common-anchor-header">データの挿入<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>テキストを埋め込みベクトルに変換できる、シンプルだが効率的な埋め込みモデル<a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2を</a>用意する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_huggingface <span class="hljs-keyword">import</span> HuggingFaceEmbeddings
 
 embedding_model = HuggingFaceEmbeddings(model_name=<span class="hljs-string">&quot;all-MiniLM-L6-v2&quot;</span>)
@@ -151,9 +196,39 @@ milvus_client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h2><p>このセクションでは、ArmベースのCPU上で<code translate="no">llama.cpp</code> サービスを構築し、起動します。</p>
-<h3 id="Llama-31-model--llamacpp" class="common-anchor-header">Llama 3.1モデルとllama.cpp</h3><p>Meta社の<a href="https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf">Llama-3.1-8Bモデルは</a>、Llama 3.1モデルファミリーに属し、研究および商用目的で自由に使用できます。このモデルを使用する前に、Llamaの<a href="https://llama.meta.com/llama-downloads/">ウェブサイトに</a>アクセスし、フォームに記入してアクセスをリクエストしてください。</p>
+<h3 id="Llama-31-model--llamacpp" class="common-anchor-header">Llama 3.1モデルとllama.cpp<button data-href="#Llama-31-model--llamacpp" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Meta社の<a href="https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf">Llama-3.1-8Bモデルは</a>、Llama 3.1モデルファミリーに属し、研究および商用目的で自由に使用できます。このモデルを使用する前に、Llamaの<a href="https://llama.meta.com/llama-downloads/">ウェブサイトに</a>アクセスし、フォームに記入してアクセスをリクエストしてください。</p>
 <p><a href="https://github.com/ggerganov/llama.cpp">llama.cppは</a>オープンソースのC/C++プロジェクトで、ローカルでもクラウドでも、様々なハードウェア上で効率的なLLM推論を可能にします。<code translate="no">llama.cpp</code> を使えば、Llama 3.1モデルを簡単にホストすることができます。</p>
-<h3 id="Download-and-build-llamacpp" class="common-anchor-header">llama.cppをダウンロードしてビルドする</h3><p>以下のコマンドを実行して、llama.cppをソースからビルドするのに必要なmake、cmake、gcc、g++、その他の必須ツールをインストールする：</p>
+<h3 id="Download-and-build-llamacpp" class="common-anchor-header">llama.cppをダウンロードしてビルドする。<button data-href="#Download-and-build-llamacpp" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下のコマンドを実行して、llama.cppをソースからビルドするのに必要なmake、cmake、gcc、g++、その他の必須ツールをインストールする：</p>
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">sudo</span> apt install make cmake -y
 $ <span class="hljs-built_in">sudo</span> apt install gcc g++ -y
 $ <span class="hljs-built_in">sudo</span> apt install build-essential -y
@@ -181,14 +256,44 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
 <pre><code translate="no" class="language-bash">$ huggingface-cli download cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf dolphin-2.9.4-llama3.1-8b-Q4_0.gguf --local-dir . --local-dir-use-symlinks False
 <button class="copy-code-btn"></button></code></pre>
 <p>llama.cppチームによって導入されたGGUFモデルフォーマットは、圧縮と量子化を用いて重みの精度を4ビット整数に落とし、計算量とメモリ需要を大幅に削減し、Arm CPUをLLM推論に有効にします。</p>
-<h3 id="Re-quantize-the-model-weights" class="common-anchor-header">モデル重みの再量子化</h3><p>再量子化するには、以下を実行します。</p>
+<h3 id="Re-quantize-the-model-weights" class="common-anchor-header">モデル重みの再量子化<button data-href="#Re-quantize-the-model-weights" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>再量子化するには、以下を実行します。</p>
 <pre><code translate="no" class="language-bash">$ ./llama-quantize --allow-requantize dolphin-2.9.4-llama3.1-8b-Q4_0.gguf dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf Q4_0_8_8
 <button class="copy-code-btn"></button></code></pre>
 <p>これは、<code translate="no">llama-cli</code> がSVE 256とMATMUL_INT8サポートを使用できるように再設定された重みを含む、新しいファイル<code translate="no">dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf</code> を出力します。</p>
 <div class="alert note">
 <p>この再量子化はGraviton3に特に最適である。Graviton2 については、最適な再量子化は<code translate="no">Q4_0_4_4</code> フォーマットで実行されるべきであり、Graviton4 については<code translate="no">Q4_0_4_8</code> フォーマットが再量子化に最も適している。</p>
 </div>
-<h3 id="Start-the-LLM-Service" class="common-anchor-header">LLMサービスの開始</h3><p>llama.cppサーバープログラムを利用し、OpenAI互換のAPI経由でリクエストを送信することができます。これにより、LLMの起動と停止を繰り返すことなく、LLMと何度もやりとりするアプリケーションを開発することができます。さらに、LLMがネットワーク経由でホストされている別のマシンからサーバーにアクセスすることもできます。</p>
+<h3 id="Start-the-LLM-Service" class="common-anchor-header">LLMサービスの開始<button data-href="#Start-the-LLM-Service" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>llama.cppサーバープログラムを利用し、OpenAI互換のAPI経由でリクエストを送信することができます。これにより、LLMの起動と停止を繰り返すことなく、LLMと何度もやりとりするアプリケーションを開発することができます。さらに、LLMがネットワーク経由でホストされている別のマシンからサーバーにアクセスすることもできます。</p>
 <p>コマンドラインからサーバーを起動すると、8080番ポートをリッスンします：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./llama-server -m dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf -n 2048 -t 64 -c 65536  --port 8080</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -196,7 +301,7 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
 </code></pre>
 <p>また、起動したLLMのパラメータを調整して、サーバーのハードウェアに適合させ、理想的なパフォーマンスを得ることもできます。パラメータの詳細については、<code translate="no">llama-server --help</code> コマンドを参照してください。</p>
 <p>このステップを実行するのに苦労した場合は、<a href="https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama-cpu/llama-chatbot/">公式ドキュメントを</a>参照してください。</p>
-<p>これで、ArmベースのCPU上でLLMサービスが開始されました。次に、OpenAI SDKを使用してサービスと直接対話します。</p>
+<p>これで、ArmベースのCPU上でLLMサービスが起動しました。次に、OpenAI SDKを使用してサービスと直接対話します。</p>
 <h2 id="Online-RAG" class="common-anchor-header">オンラインRAG<button data-href="#Online-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -212,7 +317,22 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="LLM-Client-and-Embedding-Model" class="common-anchor-header">LLMクライアントと埋め込みモデル</h3><p>LLMクライアントを初期化し、エンベッディングモデルを準備します。</p>
+    </button></h2><h3 id="LLM-Client-and-Embedding-Model" class="common-anchor-header">LLMクライアントと埋め込みモデル<button data-href="#LLM-Client-and-Embedding-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>LLMクライアントを初期化し、エンベッディングモデルを準備します。</p>
 <p>LLMでは、OpenAI SDKを使って、先に起動したLlamaサービスをリクエストします。実際にはローカルのllama.cppサービスなので、APIキーを使う必要はありません。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
@@ -227,7 +347,22 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <pre><code translate="no">384
 [0.03061249852180481, 0.013831384479999542, -0.02084377221763134, 0.016327863559126854, -0.010231520049273968, -0.0479842908680439, -0.017313342541456223, 0.03728749603033066, 0.04588735103607178, 0.034405000507831573]
 </code></pre>
-<h3 id="Retrieve-data-for-a-query" class="common-anchor-header">クエリのデータを取得する</h3><p>milvusに関するよくある質問を指定してみましょう。</p>
+<h3 id="Retrieve-data-for-a-query" class="common-anchor-header">クエリのデータを取得する<button data-href="#Retrieve-data-for-a-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>milvusに関するよくある質問を指定してみましょう。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>コレクションから質問を検索し、意味的にトップ3にマッチするものを取得します。</p>
@@ -264,7 +399,22 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">LLMを使ってRAGレスポンスを取得する</h3><p>検索されたドキュメントを文字列形式に変換する。</p>
+<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">LLMを使ってRAGレスポンスを取得する<button data-href="#Use-LLM-to-get-a-RAG-response" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>検索されたドキュメントを文字列形式に変換する。</p>
 <pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.join(
     [line_with_distance[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )

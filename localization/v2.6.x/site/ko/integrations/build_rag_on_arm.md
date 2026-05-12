@@ -68,9 +68,24 @@ $ <span class="hljs-built_in">source</span> venv/bin/activate
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">컬렉션 생성</h3><p>우리는 벡터 데이터를 저장하고 검색하기 위해 Arm 기반 머신과 함께 AWS에 배포된 <a href="https://zilliz.com/cloud">Zilliz Cloud를</a> 사용합니다. 빠르게 시작하려면 Zilliz Cloud에 무료로 <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">계정을 등록하기만</a> 하면 됩니다.</p>
+    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">컬렉션 생성<button data-href="#Create-the-Collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>우리는 벡터 데이터를 저장하고 검색하기 위해 Arm 기반 머신과 함께 AWS에 배포된 <a href="https://zilliz.com/cloud">Zilliz Cloud를</a> 사용합니다. 빠르게 시작하려면 Zilliz Cloud에 무료로 <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">계정을 등록하기만</a> 하면 됩니다.</p>
 <div class="alert note">
-<p>Zilliz Cloud 외에도 자체 호스팅 Milvus도 (설정이 좀 더 복잡한) 옵션입니다. 또한 ARM 기반 머신에 <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Milvus Standalone</a> 및 <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes를</a> 배포할 수도 있습니다. Milvus 설치에 대한 자세한 내용은 <a href="https://milvus.io/docs/install-overview.md">설치 설명서를</a> 참조하세요.</p>
+<p>Zilliz Cloud 외에도 자체 호스팅 Milvus도 (설정이 조금 더 복잡한) 옵션입니다. 또한 ARM 기반 머신에 <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Milvus Standalone</a> 및 <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes를</a> 배포할 수도 있습니다. Milvus 설치에 대한 자세한 내용은 <a href="https://milvus.io/docs/install-overview.md">설치 설명서를</a> 참조하세요.</p>
 </div>
 <p>질리즈 클라우드에서 <code translate="no">uri</code> 및 <code translate="no">token</code> 을 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">퍼블릭 엔드포인트 및 API 키로</a> 설정합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -92,11 +107,26 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=<span class="hljs-number">384</span>,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>기본 메트릭 유형으로는 내적 곱 거리를 사용합니다. 거리 유형에 대한 자세한 내용은 <a href="https://milvus.io/docs/metric.md?tab=floating">유사성 메트릭 페이지를</a> 참조하세요.</p>
-<h3 id="Prepare-the-data" class="common-anchor-header">데이터 준비</h3><p>저희는 <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus 문서 2.4.x의</a> FAQ 페이지를 RAG의 비공개 지식으로 사용하며, 이는 간단한 RAG 파이프라인을 위한 좋은 데이터 소스입니다.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">데이터 준비<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>저희는 <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus 문서 2.4.x의</a> FAQ 페이지를 RAG의 비공개 지식으로 사용하며, 이는 간단한 RAG 파이프라인을 위한 좋은 데이터 소스입니다.</p>
 <p>zip 파일을 다운로드하고 문서를 <code translate="no">milvus_docs</code> 폴더에 압축을 풉니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
@@ -112,7 +142,22 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">데이터 삽입</h3><p>텍스트를 임베딩 벡터로 변환할 수 있는 간단하지만 효율적인 임베딩 모델인 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2를</a> 준비합니다.</p>
+<h3 id="Insert-data" class="common-anchor-header">데이터 삽입<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>텍스트를 임베딩 벡터로 변환할 수 있는 간단하지만 효율적인 임베딩 모델인 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2를</a> 준비합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_huggingface <span class="hljs-keyword">import</span> HuggingFaceEmbeddings
 
 embedding_model = HuggingFaceEmbeddings(model_name=<span class="hljs-string">&quot;all-MiniLM-L6-v2&quot;</span>)
@@ -150,9 +195,39 @@ milvus_client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h2><p>이 섹션에서는 Arm 기반 CPU에서 <code translate="no">llama.cpp</code> 서비스를 빌드하고 실행해 보겠습니다.</p>
-<h3 id="Llama-31-model--llamacpp" class="common-anchor-header">Llama 3.1 모델 및 llama.cpp</h3><p>Meta의 <a href="https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf">Llama 3.1-8B 모델은</a> Llama 3.1 모델 제품군에 속하며 연구 및 상업적 목적으로 무료로 사용할 수 있습니다. 모델을 사용하기 전에 Llama <a href="https://llama.meta.com/llama-downloads/">웹사이트를</a> 방문하여 양식을 작성하여 액세스를 요청하세요.</p>
+<h3 id="Llama-31-model--llamacpp" class="common-anchor-header">Llama 3.1 모델 및 llama.cpp<button data-href="#Llama-31-model--llamacpp" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Meta의 <a href="https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf">Llama 3.1-8B 모델은</a> Llama 3.1 모델 제품군에 속하며 연구 및 상업적 목적으로 무료로 사용할 수 있습니다. 모델을 사용하기 전에 Llama <a href="https://llama.meta.com/llama-downloads/">웹사이트를</a> 방문하여 양식을 작성하여 액세스를 요청하세요.</p>
 <p><a href="https://github.com/ggerganov/llama.cpp">llama.cpp는</a> 로컬과 클라우드 모두에서 다양한 하드웨어에서 효율적인 LLM 추론을 가능하게 하는 오픈 소스 C/C++ 프로젝트입니다. <code translate="no">llama.cpp</code> 을 사용하여 Llama 3.1 모델을 편리하게 호스팅할 수 있습니다.</p>
-<h3 id="Download-and-build-llamacpp" class="common-anchor-header">llama.cpp 다운로드 및 빌드</h3><p>다음 명령을 실행하여 소스에서 llama.cpp를 빌드하는 데 필요한 make, cmake, gcc, g++ 및 기타 필수 도구를 설치합니다:</p>
+<h3 id="Download-and-build-llamacpp" class="common-anchor-header">llama.cpp 다운로드 및 빌드<button data-href="#Download-and-build-llamacpp" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 명령을 실행하여 소스에서 llama.cpp를 빌드하는 데 필요한 make, cmake, gcc, g++ 및 기타 필수 도구를 설치합니다:</p>
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">sudo</span> apt install make cmake -y
 $ <span class="hljs-built_in">sudo</span> apt install gcc g++ -y
 $ <span class="hljs-built_in">sudo</span> apt install build-essential -y
@@ -179,15 +254,45 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
 <p>이제 huggingface cli를 사용하여 모델을 다운로드할 수 있습니다:</p>
 <pre><code translate="no" class="language-bash">$ huggingface-cli download cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf dolphin-2.9.4-llama3.1-8b-Q4_0.gguf --local-dir . --local-dir-use-symlinks False
 <button class="copy-code-btn"></button></code></pre>
-<p>llama.cpp 팀에서 도입한 GGUF 모델 형식은 압축 및 양자화를 사용하여 가중치 정밀도를 4비트 정수로 줄여 계산 및 메모리 요구량을 크게 줄이고 Arm CPU가 LLM 추론에 효과적일 수 있도록 합니다.</p>
-<h3 id="Re-quantize-the-model-weights" class="common-anchor-header">모델 가중치 재정량화</h3><p>다시 정량화하려면 다음을 실행합니다.</p>
+<p>llama.cpp 팀에서 도입한 GGUF 모델 형식은 압축 및 양자화를 사용하여 가중치 정밀도를 4비트 정수로 줄여 계산 및 메모리 요구량을 크게 줄이고 Arm CPU를 LLM 추론에 효과적으로 사용할 수 있도록 합니다.</p>
+<h3 id="Re-quantize-the-model-weights" class="common-anchor-header">모델 가중치 재정량화<button data-href="#Re-quantize-the-model-weights" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다시 정량화하려면 다음을 실행합니다.</p>
 <pre><code translate="no" class="language-bash">$ ./llama-quantize --allow-requantize dolphin-2.9.4-llama3.1-8b-Q4_0.gguf dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf Q4_0_8_8
 <button class="copy-code-btn"></button></code></pre>
 <p>그러면 새 파일 <code translate="no">dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf</code> 이 출력되며, 여기에는 재구성된 가중치가 포함되어 <code translate="no">llama-cli</code> 이 SVE 256 및 MATMUL_INT8 지원을 사용할 수 있도록 합니다.</p>
 <div class="alert note">
 <p>이 리퀀트화는 특히 Graviton3에 최적입니다. Graviton2의 경우 <code translate="no">Q4_0_4_4</code> 형식의 리퀀타이제이션을 수행해야 하며, Graviton4의 경우 <code translate="no">Q4_0_4_8</code> 형식이 리퀀타이제이션에 가장 적합합니다.</p>
 </div>
-<h3 id="Start-the-LLM-Service" class="common-anchor-header">LLM 서비스 시작</h3><p>llama.cpp 서버 프로그램을 활용하고 OpenAI 호환 API를 통해 요청을 보낼 수 있습니다. 이를 통해 LLM을 반복적으로 시작하고 중지할 필요 없이 여러 번 상호 작용하는 애플리케이션을 개발할 수 있습니다. 또한 네트워크를 통해 LLM이 호스팅되는 다른 컴퓨터에서 서버에 액세스할 수도 있습니다.</p>
+<h3 id="Start-the-LLM-Service" class="common-anchor-header">LLM 서비스 시작<button data-href="#Start-the-LLM-Service" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>llama.cpp 서버 프로그램을 활용하고 OpenAI 호환 API를 통해 요청을 보낼 수 있습니다. 이를 통해 LLM을 반복적으로 시작하고 중지할 필요 없이 여러 번 상호 작용하는 애플리케이션을 개발할 수 있습니다. 또한 네트워크를 통해 LLM이 호스팅되는 다른 컴퓨터에서 서버에 액세스할 수도 있습니다.</p>
 <p>명령줄에서 서버를 시작하면 포트 8080에서 수신 대기합니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./llama-server -m dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf -n 2048 -t 64 -c 65536  --port 8080</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -211,7 +316,22 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="LLM-Client-and-Embedding-Model" class="common-anchor-header">LLM 클라이언트 및 임베딩 모델</h3><p>LLM 클라이언트를 초기화하고 임베딩 모델을 준비합니다.</p>
+    </button></h2><h3 id="LLM-Client-and-Embedding-Model" class="common-anchor-header">LLM 클라이언트 및 임베딩 모델<button data-href="#LLM-Client-and-Embedding-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>LLM 클라이언트를 초기화하고 임베딩 모델을 준비합니다.</p>
 <p>LLM의 경우, OpenAI SDK를 사용하여 이전에 실행된 라마 서비스를 요청합니다. 실제로는 로컬 llama.cpp 서비스이므로 API 키를 사용할 필요가 없습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
@@ -226,7 +346,22 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <pre><code translate="no">384
 [0.03061249852180481, 0.013831384479999542, -0.02084377221763134, 0.016327863559126854, -0.010231520049273968, -0.0479842908680439, -0.017313342541456223, 0.03728749603033066, 0.04588735103607178, 0.034405000507831573]
 </code></pre>
-<h3 id="Retrieve-data-for-a-query" class="common-anchor-header">쿼리에 대한 데이터 검색</h3><p>Milvus에 대해 자주 묻는 질문을 지정해 보겠습니다.</p>
+<h3 id="Retrieve-data-for-a-query" class="common-anchor-header">쿼리에 대한 데이터 검색<button data-href="#Retrieve-data-for-a-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus에 대해 자주 묻는 질문을 지정해 보겠습니다.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>컬렉션에서 해당 질문을 검색하고 시맨틱 상위 3개 일치 항목을 검색합니다.</p>
@@ -263,7 +398,22 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">LLM을 사용하여 RAG 응답 얻기</h3><p>검색된 문서를 문자열 형식으로 변환합니다.</p>
+<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">LLM을 사용하여 RAG 응답 얻기<button data-href="#Use-LLM-to-get-a-RAG-response" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>검색된 문서를 문자열 형식으로 변환합니다.</p>
 <pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.join(
     [line_with_distance[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )

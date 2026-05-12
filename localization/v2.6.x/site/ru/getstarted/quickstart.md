@@ -21,7 +21,7 @@ title: Быстрый старт
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Векторы, формат выходных данных нейросетевых моделей, могут эффективно кодировать информацию и играть ключевую роль в таких приложениях ИИ, как база знаний, семантический поиск, поиск с расширенной генерацией (Retrieval Augmented Generation, RAG) и других.</p>
-<p>Milvus - это векторная база данных с открытым исходным кодом, которая подходит для ИИ-приложений любого масштаба - от запуска демонстрационного чатбота в Jupyter notebook до создания веб-поиска, обслуживающего миллиарды пользователей. В этом руководстве мы расскажем вам, как установить Milvus локально за несколько минут и использовать клиентскую библиотеку Python для генерации, хранения и поиска векторов.</p>
+<p>Milvus - это векторная база данных с открытым исходным кодом, которая подходит для ИИ-приложений любого масштаба - от запуска демонстрационного чатбота в Jupyter notebook до создания веб-поиска, обслуживающего миллиарды пользователей. В этом руководстве мы расскажем вам, как за несколько минут установить Milvus локально и использовать клиентскую библиотеку Python для генерации, хранения и поиска векторов.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">Установка Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +43,7 @@ title: Быстрый старт
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <blockquote>
-<p>Если вы используете Google Colab, для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong>. (Нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
+<p>Если вы используете Google Colab, для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong>. (Нажмите на меню "Время выполнения" в верхней части экрана и выберите "Перезапустить сессию" из выпадающего меню).</p>
 </blockquote>
 </div>
 <h2 id="Set-Up-Vector-Database" class="common-anchor-header">Настройка базы данных векторов<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
@@ -81,7 +81,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В Milvus нам нужна коллекция для хранения векторов и связанных с ними метаданных. Ее можно представить себе как таблицу в традиционных базах данных SQL. При создании коллекции вы можете определить параметры схемы и индекса, чтобы настроить такие характеристики вектора, как размерность, типы индексов и метрики удаленности. Существуют также сложные концепции оптимизации индекса для повышения производительности векторного поиска. Пока давайте остановимся на основных принципах и будем использовать значение по умолчанию для всего, что возможно. Как минимум, вам нужно задать только имя коллекции и размерность векторного поля коллекции.</p>
+    </button></h2><p>В Milvus нам нужна коллекция для хранения векторов и связанных с ними метаданных. Ее можно представить себе как таблицу в традиционных базах данных SQL. При создании коллекции вы можете определить параметры схемы и индекса, чтобы настроить такие характеристики вектора, как размерность, типы индексов и метрики удаленности. Существуют также сложные концепции оптимизации индекса для повышения производительности векторного поиска. Пока остановимся на основных принципах и будем использовать значение по умолчанию для всего, что возможно. Как минимум, вам нужно задать только имя коллекции и размерность векторного поля коллекции.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>):
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
@@ -438,3 +438,20 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <p>Чтобы перенести данные с Milvus Lite на Milvus, развернутый на Docker или Kubernetes, обратитесь к разделу <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">Перенос данных с Milvus Lite</a>.</p>
 <p>Milvus предоставляет API REST и gRPC, а также клиентские библиотеки на таких языках, как <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C# и <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
 <p>Для проектирования схем Milvus поддерживает гибкое проектирование схем, где вы можете определять поля и их типы данных, включая векторные поля. Вы также можете определить тип индекса и параметры для каждого поля. Дополнительные сведения см. в разделе <a href="https://milvus.io/docs/schema-hands-on.md">Проектирование модели данных для поиска</a>.</p>
+<h2 id="Milvus-for-AI-Agents" class="common-anchor-header">Milvus для агентов искусственного интеллекта<button data-href="#Milvus-for-AI-Agents" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Если вы используете помощники по кодированию ИИ, такие как Claude Code или Cursor, вы можете установить <a href="https://github.com/zilliztech/milvus-skill">Milvus Skill</a>, чтобы помочь своим инструментам ИИ писать правильный код Milvus.</p>
+<p>Дополнительные инструменты для агентов, включая серверы MCP и курируемые подсказки, см. в разделе <a href="/docs/ru/milvus_for_agents.md">Milvus для агентов ИИ</a>.</p>

@@ -59,7 +59,7 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
 </ul></li>
 <li>O armazenamento de mensagens não pode ser alterado enquanto o sistema Milvus estiver a funcionar.</li>
 <li>Apenas a versão 2.x ou 3.x do Kafka é suportada.</li>
-<li><strong>Limitações da atualização</strong>: <strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.13, é necessário manter a escolha atual da fila de mensagens. Não é possível alternar entre diferentes sistemas de filas de mensagens durante a atualização. O suporte à mudança de sistemas de filas de mensagens estará disponível em versões futuras.</li>
+<li><strong>Limitações da atualização</strong>: <strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.15, é necessário manter a escolha atual da fila de mensagens. Não é possível alternar entre sistemas de filas de mensagens diferentes durante a atualização. O suporte à mudança de sistemas de filas de mensagens estará disponível em versões futuras.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurar o RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -165,7 +165,7 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
 <li><code translate="no">external</code>:  Um valor <code translate="no">true</code> indica que o Milvus usa um serviço Pulsar externo.</li>
 <li><code translate="no">endpoints</code>: Os endpoints do Pulsar.</li>
 </ul>
-<h4 id="Example" class="common-anchor-header">Exemplo de configuração</h4><p>O exemplo a seguir configura um serviço Pulsar externo.</p>
+<h4 id="Example" class="common-anchor-header">Exemplo de configuração</h4><p>O exemplo seguinte configura um serviço Pulsar externo.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
