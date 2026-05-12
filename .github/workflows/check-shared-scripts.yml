@@ -19,4 +19,6 @@ jobs:
         run: npm --prefix scripts ci
 
       - name: Check shared scripts drift
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm --prefix scripts run check:shared-scripts

@@ -2,7 +2,11 @@
 
 ## Source of truth
 
-Shared script content is sourced from the `milvus-io/milvus-docs` repository and synced into this repo according to `scripts/shared-sync-manifest.json`.
+Shared script content is sourced from:
+- `milvus-io/milvus-docs` (default branch) -> `scripts/lib`
+- `zilliztech/zdoc` (`master`) -> `scripts/apifox-docs`
+
+Sync mappings are defined in `scripts/sync-shared-scripts.manifest.js`.
 
 ## Commands
 

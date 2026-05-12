@@ -37,7 +37,7 @@ test('lark-docs entrypoint and translator import shared scripts/lib modules', ()
   assert.equal(tokenFetcherResolved, path.join(scriptsDir, 'lib', 'larkTokenFetcher.js'));
 });
 
-test('apifox entrypoint help exits successfully', () => {
+test('apifox entrypoint help prints CLI usage', () => {
   const repoRoot = path.resolve(__dirname, '..', '..');
   const result = spawnSync('node', ['scripts/apifox-docs/index.js', '--help'], {
     cwd: repoRoot,
@@ -45,6 +45,8 @@ test('apifox entrypoint help exits successfully', () => {
   });
 
   assert.equal(result.status, 0, result.stderr || result.stdout);
+  assert.match(result.stdout, /Usage:/);
+  assert.match(result.stdout, /fetch-apifox-docs/);
 });
 
 test('buildSyncPlan resolves milvus-docs default branch dynamically via fetch', async () => {
@@ -286,4 +288,5 @@ test('check-shared-scripts workflow exists and runs drift check command', () => 
 
   const workflow = fsSync.readFileSync(workflowPath, 'utf8');
   assert.match(workflow, /npm --prefix scripts run check:shared-scripts/);
+  assert.match(workflow, /GITHUB_TOKEN:\s*\$\{\{\s*secrets\.GITHUB_TOKEN\s*\}\}/);
 });

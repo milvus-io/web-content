@@ -38,6 +38,8 @@ jobs:
           echo IMAGE_BED_URL=${{ secrets.IMAGE_BED_URL }} >> scripts/.env
 
       - name: Check shared script drift
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm --prefix scripts run check:shared-scripts
 
       - name: Fetch pymilvus ${{ env.SDK_VERSION }}
