@@ -136,6 +136,18 @@
           "alt_texts": []
         }
       },
+      "node-v3.0.x": {
+        "base": "LlrPbysPZau2dGsSVuicHmvCn0e:tblT65LG94H2vobA",
+        "sourceType": "drive",
+        "language": "javascript",
+        "targets": {
+          "outputDir": "API_Reference/milvus-sdk-node/v3.0.x",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
       "go-v2.6.x": {
         "base": "Yc7gbtmgSal2ewsdqlhcLWVanbh:tblM12OyAwhSeXiC",
         "sourceType": "drive",
