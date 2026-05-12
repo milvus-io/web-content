@@ -1,8 +1,12 @@
 const nunjucks = require("nunjucks")
 const fs = require('node:fs')
+const path = require('node:path')
 const { resolveRefs } = require('./specLoader')
 
-const planeConfig = JSON.parse(fs.readFileSync('plugins/apifox-docs/meta/plane-config.json', 'utf-8'))
+const META_DIR = path.join(__dirname, 'meta')
+const TEMPLATES_DIR = path.join(__dirname, 'templates')
+
+const planeConfig = JSON.parse(fs.readFileSync(path.join(META_DIR, 'plane-config.json'), 'utf-8'))
 
 const CONFIG = {
   controlPlaneKeywords: planeConfig.controlPlaneKeywords,
@@ -22,18 +26,18 @@ class refGen {
       this.options.parents.push(this.options.specifications.tags[x].name)
     }
 
-    this.descriptions = JSON.parse(fs.readFileSync('plugins/apifox-docs/meta/descriptions.json', 'utf-8'))
+    this.descriptions = JSON.parse(fs.readFileSync(path.join(META_DIR, 'descriptions.json'), 'utf-8'))
 
     this.positions = { tags: {}, endpoints: {} }
     try {
-      this.positions = JSON.parse(fs.readFileSync('plugins/apifox-docs/meta/positions.json', 'utf-8'))
+      this.positions = JSON.parse(fs.readFileSync(path.join(META_DIR, 'positions.json'), 'utf-8'))
     } catch (err) {
       // Optional file — leave defaults empty
     }
 
     this.admonitions = {}
     try {
-      this.admonitions = JSON.parse(fs.readFileSync('plugins/apifox-docs/meta/admonitions.json', 'utf-8'))
+      this.admonitions = JSON.parse(fs.readFileSync(path.join(META_DIR, 'admonitions.json'), 'utf-8'))
     } catch (err) {
       // Optional file — leave defaults empty
     }
@@ -98,7 +102,7 @@ class refGen {
     const { lang, target, parents, specifications } = this.options
 
     const env = new nunjucks.Environment(
-      new nunjucks.FileSystemLoader(`plugins/apifox-docs/templates`),
+      new nunjucks.FileSystemLoader(TEMPLATES_DIR),
       {
         autoescape: false,
       }
@@ -256,7 +260,7 @@ class refGen {
   make_groups() {
     const { specifications, target, target_path } = this.options
     const env = new nunjucks.Environment(
-      new nunjucks.FileSystemLoader(`plugins/apifox-docs/templates`),
+      new nunjucks.FileSystemLoader(TEMPLATES_DIR),
       { autoescape: false }
     )
 
@@ -344,7 +348,7 @@ class refGen {
     var page_slug = 0
     const { lang } = this.options
     if (lang == 'zh-CN') {
-      const titles = JSON.parse(fs.readFileSync(`plugins/apifox-docs/meta/titles.json`, 'utf-8'))
+      const titles = JSON.parse(fs.readFileSync(path.join(META_DIR, 'titles.json'), 'utf-8'))
       page_slug = titles[page_title]
       if (!page_slug) {
         throw new Error(`Missing Chinese title mapping for: "${page_title}" in titles.json`)
@@ -354,7 +358,7 @@ class refGen {
     }
 
     if (target === 'milvus') {
-      const ruleSet = JSON.parse(fs.readFileSync('plugins/apifox-docs/meta/fileNameRuleSet.json', 'utf-8'))
+      const ruleSet = JSON.parse(fs.readFileSync(path.join(META_DIR, 'fileNameRuleSet.json'), 'utf-8'))
       var slug = undefined
       for (let rule of ruleSet) {
         switch (rule.match) {

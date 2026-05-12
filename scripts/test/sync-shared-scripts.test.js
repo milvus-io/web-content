@@ -4,6 +4,7 @@ const fs = require('node:fs/promises');
 const fsSync = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
+const { spawnSync } = require('node:child_process');
 
 const {
   buildSyncPlan,
@@ -34,6 +35,16 @@ test('lark-docs entrypoint and translator import shared scripts/lib modules', ()
   assert.equal(docsGenResolved, path.join(scriptsDir, 'lib', 'milvusDocsGen.js'));
   assert.equal(sdkDocsGenResolved, path.join(scriptsDir, 'lib', 'milvusSdkDocsGen.js'));
   assert.equal(tokenFetcherResolved, path.join(scriptsDir, 'lib', 'larkTokenFetcher.js'));
+});
+
+test('apifox entrypoint help exits successfully', () => {
+  const repoRoot = path.resolve(__dirname, '..', '..');
+  const result = spawnSync('node', ['scripts/apifox-docs/index.js', '--help'], {
+    cwd: repoRoot,
+    encoding: 'utf8',
+  });
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
 });
 
 test('buildSyncPlan resolves milvus-docs default branch dynamically via fetch', async () => {
