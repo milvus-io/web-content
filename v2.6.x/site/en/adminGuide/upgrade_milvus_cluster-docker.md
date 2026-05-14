@@ -10,11 +10,11 @@ title: Upgrade Milvus Cluster with Docker Compose
 
 This topic describes how to upgrade your Milvus using Docker Compose. 
 
-In normal cases, you can [upgrade Milvus by changing its image](#Upgrade-Milvus-by-changing-its-image). However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from v2.1.x to v2.6.15.
+In normal cases, you can [upgrade Milvus by changing its image](#Upgrade-Milvus-by-changing-its-image). However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from v2.1.x to v2.6.16.
 
 <div class="alert note">
 
-**Message Queue limitations**: When upgrading to Milvus v2.6.15, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
+**Message Queue limitations**: When upgrading to Milvus v2.6.16, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
 
 
 </div>
@@ -31,35 +31,35 @@ In normal cases, you can upgrade Milvus as follows:
     ...
     rootcoord:
       container_name: milvus-rootcoord
-      image: milvusdb/milvus:v2.6.15
+      image: milvusdb/milvus:v2.6.16
     ...
     proxy:
       container_name: milvus-proxy
-      image: milvusdb/milvus:v2.6.15
+      image: milvusdb/milvus:v2.6.16
     ...
     querycoord:
       container_name: milvus-querycoord
-      image: milvusdb/milvus:v2.6.15  
+      image: milvusdb/milvus:v2.6.16  
     ...
     querynode:
       container_name: milvus-querynode
-      image: milvusdb/milvus:v2.6.15
+      image: milvusdb/milvus:v2.6.16
     ...
     indexcoord:
       container_name: milvus-indexcoord
-      image: milvusdb/milvus:v2.6.15
+      image: milvusdb/milvus:v2.6.16
     ...
     indexnode:
       container_name: milvus-indexnode
-      image: milvusdb/milvus:v2.6.15 
+      image: milvusdb/milvus:v2.6.16 
     ...
     datacoord:
       container_name: milvus-datacoord
-      image: milvusdb/milvus:v2.6.15   
+      image: milvusdb/milvus:v2.6.16   
     ...
     datanode:
       container_name: milvus-datanode
-      image: milvusdb/milvus:v2.6.15
+      image: milvusdb/milvus:v2.6.16
     ```
 
 2. Run the following commands to perform the upgrade.
@@ -87,7 +87,7 @@ In normal cases, you can upgrade Milvus as follows:
       runWithBackup: true
     config:
       sourceVersion: 2.1.4   # Specify your milvus version
-      targetVersion: 2.6.15
+      targetVersion: 2.6.16
       backupFilePath: /tmp/migration.bak
     metastore:
       type: etcd
