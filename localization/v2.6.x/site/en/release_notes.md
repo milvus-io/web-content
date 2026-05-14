@@ -19,6 +19,102 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2616" class="common-anchor-header">v2.6.16<button data-href="#v2616" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: May 14, 2026</p>
+<table>
+<thead>
+<tr><th>Milvus Version</th><th>Python SDK Version</th><th>Node.js SDK Version</th><th>Java SDK Version</th><th>Go SDK Version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.6.16</td><td>2.6.13</td><td>2.6.14</td><td>2.6.19</td><td>2.6.4</td></tr>
+</tbody>
+</table>
+<p>We are excited to announce the release of Milvus v2.6.16! This release delivers major stability and performance improvements across L0 compaction, streaming node resource isolation, and proxy query failover, along with critical fixes for delete consistency, replica scaling, and rolling upgrade scenarios.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Increased the default L0 compaction deltalog max count from 30 to 1000 to reduce compaction backlog under high-delete workloads (<a href="https://github.com/milvus-io/milvus/pull/47214">#47214</a>, <a href="https://github.com/milvus-io/milvus/pull/49122">#49122</a>)</li>
+<li>Introduced streaming node resource group isolation, allowing replicas to be assigned strictly within their configured resource groups, plus a new RESTful config inspection endpoint (<a href="https://github.com/milvus-io/milvus/pull/48632">#48632</a>)</li>
+<li>Rewrote sync manager’s key lock dispatcher with per-key FIFO queues and semaphore backpressure for non-blocking submission and graceful shutdown (<a href="https://github.com/milvus-io/milvus/pull/49101">#49101</a>)</li>
+<li>Added fast-fail retry capping and delegator stall detection so proxy queries failover to a healthy QueryNode immediately instead of burning the full backoff budget on a dead node (<a href="https://github.com/milvus-io/milvus/pull/49103">#49103</a>)</li>
+<li>Allowed simultaneous pchannel increase and cluster/topology changes in replication config validation (<a href="https://github.com/milvus-io/milvus/pull/49214">#49214</a>)</li>
+<li>Reduced proxy tail latency and memory pressure during traffic storms by fast-failing Enqueue before TSO/ID allocation and using a non-blocking edge-triggered task notifier (<a href="https://github.com/milvus-io/milvus/pull/49259">#49259</a>)</li>
+<li>Added a <code translate="no">$partial_update</code> field to the proxy access log for Upsert requests, exposing both explicit and implicitly promoted partial-update flags (<a href="https://github.com/milvus-io/milvus/pull/49361">#49361</a>)</li>
+<li>Accelerated <code translate="no">TermExpr IN</code> evaluation with a SIMD (AVX2/AVX512) batch filter, significantly improving query performance for <code translate="no">IN</code> predicates (<a href="https://github.com/milvus-io/milvus/pull/49427">#49427</a>)</li>
+<li>Bumped Go SDK to v2.6.4 with full struct-array support (vector sub-fields, EmbeddingList search, schema validation), gRPC authority configuration, and preserved default gRPC dial options when custom DialOptions are provided (<a href="https://github.com/milvus-io/milvus/pull/49443">#49443</a>)</li>
+<li>Upgraded lz4_flex to 0.11.6 in the Tantivy binding to remediate CVE-2026-32829 (<a href="https://github.com/milvus-io/milvus/pull/49507">#49507</a>)</li>
+<li>Bypassed Knowhere search-pool scheduling for vector iterators to reduce per-Next overhead in iterator-heavy group-by search paths (<a href="https://github.com/milvus-io/milvus/pull/49547">#49547</a>)</li>
+<li>Exposed Arrow IO thread pool capacity as a refreshable paramtable knob to relieve HIGH-pool stalls under heavy storage v2 read load (<a href="https://github.com/milvus-io/milvus/pull/49554">#49554</a>, <a href="https://github.com/milvus-io/milvus/pull/49561">#49561</a>)</li>
+<li>Parallelized text match index loading on QueryNode to speed up segment load for collections with text indexes (<a href="https://github.com/milvus-io/milvus/pull/49608">#49608</a>)</li>
+<li>Bumped milvus-storage to fix non-contiguous I/O issues when reading row groups (<a href="https://github.com/milvus-io/milvus/pull/49613">#49613</a>)</li>
+<li>Sealed growing segments under L0 compaction pressure to avoid prolonged write blocking (<a href="https://github.com/milvus-io/milvus/pull/49688">#49688</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Fixed silent delete loss caused by L0 compaction missing target segments due to inherited incorrect positions from imported data, and corrected DmlPosition aggregation in mix/clustering compaction (<a href="https://github.com/milvus-io/milvus/pull/47154">#47154</a>, <a href="https://github.com/milvus-io/milvus/pull/47187">#47187</a>, <a href="https://github.com/milvus-io/milvus/pull/48910">#48910</a>)</li>
+<li>Fixed an issue where collections with inverted indexes failed to load due to incorrect handling of sliced index files (<a href="https://github.com/milvus-io/milvus/pull/48542">#48542</a>)</li>
+<li>Fixed an issue where queries on nullable array fields with bitmap indexes could return incorrect results due to missing null value persistence (<a href="https://github.com/milvus-io/milvus/pull/49073">#49073</a>)</li>
+<li>Fixed an issue where queries using NOT over templated expressions (e.g. <code translate="no">not (field in {vals})</code>) returned wrong results or triggered QueryNode assertion failures (<a href="https://github.com/milvus-io/milvus/pull/49184">#49184</a>)</li>
+<li>Made config writes synchronously visible in the same process and ensured QueryCoord compliance reports Ready only after leaked segments/channels are released, preventing premature node termination during scale-down (<a href="https://github.com/milvus-io/milvus/pull/49212">#49212</a>)</li>
+<li>Fixed an issue where L0 deltas could be incorrectly skipped, causing stale or incorrect query results (<a href="https://github.com/milvus-io/milvus/pull/49228">#49228</a>)</li>
+<li>Fixed an internal error when using IS NULL / IS NOT NULL with ARRAY element access; the expression is now rejected at parse time with a clear validation error (<a href="https://github.com/milvus-io/milvus/pull/49244">#49244</a>)</li>
+<li>Fixed built-in RBAC privilege groups drifting from defaults by no longer shipping them in milvus.yaml; runtime now falls through to in-code constants when not explicitly overridden (<a href="https://github.com/milvus-io/milvus/pull/49276">#49276</a>)</li>
+<li>Fixed a collection-wide query outage triggered by replica-count changes; QueryCoord now honors withUnserviceableShards so the proxy can route through serviceable leaders while the new replica is loading (<a href="https://github.com/milvus-io/milvus/pull/49305">#49305</a>, <a href="https://github.com/milvus-io/milvus/pull/49311">#49311</a>)</li>
+<li>Fixed insert starvation that could occur when sync futures were blocked during write buffer eviction (<a href="https://github.com/milvus-io/milvus/pull/49331">#49331</a>)</li>
+<li>Fixed an issue where schema fields like EnableNamespace were silently dropped during DDL broadcasts from rootcoord, causing downstream components to see zero values after any DDL operation (<a href="https://github.com/milvus-io/milvus/pull/49364">#49364</a>)</li>
+<li>Improved L0 compaction to fast-finish when no matching L1/L2 segments are found (<a href="https://github.com/milvus-io/milvus/pull/49376">#49376</a>)</li>
+<li>Fixed expression rewriter to honor the disabled expression optimization config (<a href="https://github.com/milvus-io/milvus/pull/49430">#49430</a>)</li>
+<li>Fixed an issue where segment reopen tasks could stall in QueryCoord by routing them through the existing load segment dispatch path (<a href="https://github.com/milvus-io/milvus/pull/49466">#49466</a>)</li>
+<li>Fixed an issue where collection alias lookups missed the proxy meta cache, causing unnecessary metadata fetches (<a href="https://github.com/milvus-io/milvus/pull/49513">#49513</a>, <a href="https://github.com/milvus-io/milvus/pull/49548">#49548</a>)</li>
+<li>Fixed streaming node resource group handling during rolling upgrades so replicas remain correctly assigned when old and new nodes coexist (<a href="https://github.com/milvus-io/milvus/pull/49552">#49552</a>)</li>
+<li>Fixed a memory leak that occurred when search requests failed validation after placeholder parsing succeeded (<a href="https://github.com/milvus-io/milvus/pull/49612">#49612</a>)</li>
+<li>Fixed an issue where node shutdown could hang indefinitely when WAL release was blocked (<a href="https://github.com/milvus-io/milvus/pull/49625">#49625</a>)</li>
+<li>Fixed query visibility issues during rolling upgrades for streaming resource groups (<a href="https://github.com/milvus-io/milvus/pull/49629">#49629</a>)</li>
+<li>Improved WAL recovery to fail fast on timetick append errors instead of hanging (<a href="https://github.com/milvus-io/milvus/pull/49636">#49636</a>)</li>
+<li>Fixed JSON stats index build failure when binlogs were missing (<a href="https://github.com/milvus-io/milvus/pull/49673">#49673</a>)</li>
+<li>Fixed vector index version resolution during rolling upgrades when QueryNodes did not report MaximumIndexVersion (<a href="https://github.com/milvus-io/milvus/pull/49675">#49675</a>)</li>
+</ul>
 <h2 id="v2615" class="common-anchor-header">v2.6.15<button data-href="#v2615" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
