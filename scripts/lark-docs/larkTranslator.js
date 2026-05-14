@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 const Bottleneck = require('bottleneck')
-const larkTokenFetcher = require('./larkTokenFetcher.js')
+const larkTokenFetcher = require('../lib/larkTokenFetcher.js')
 require('dotenv').config()
 
 const FEISHU_HOST = process.env.FEISHU_HOST

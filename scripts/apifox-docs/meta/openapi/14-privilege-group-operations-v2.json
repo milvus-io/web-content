@@ -1,0 +1,605 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Privilege Group Operations (V2)",
+      "description": "Operations for managing privilege groups.",
+      "x-i18n": {
+        "zh-CN": {
+          "description": "用于管理权限组的接口。"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/vectordb/privilege_groups/create": {
+      "post": {
+        "summary": "Create Privilege Group",
+        "deprecated": false,
+        "description": "This operation creates a privilege group with the specified privileges.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建权限组",
+            "description": "本接口创建包含指定权限的权限组。"
+          }
+        },
+        "tags": [
+          "Privilege Group Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "privilegeGroupName": {
+                    "type": "string",
+                    "description": "The name of the privilege group to create.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建的权限组名称。"
+                      }
+                    }
+                  },
+                  "privileges": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "A list of privilege names to include in the group.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "权限组中包含的权限名称列表。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "privilegeGroupName"
+                ]
+              },
+              "example": {
+                "privilegeGroupName": "my_priv_group",
+                "privileges": [
+                  "Insert",
+                  "Search"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 800,
+                      "message": "not enough permission"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/privilege_groups/drop": {
+      "post": {
+        "summary": "Drop Privilege Group",
+        "deprecated": false,
+        "description": "This operation drops a privilege group.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除权限组",
+            "description": "本接口删除指定的权限组。"
+          }
+        },
+        "tags": [
+          "Privilege Group Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "privilegeGroupName": {
+                    "type": "string",
+                    "description": "The name of the privilege group to drop.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待删除的权限组名称。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "privilegeGroupName"
+                ]
+              },
+              "example": {
+                "privilegeGroupName": "my_priv_group"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 800,
+                      "message": "not enough permission"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/privilege_groups/list": {
+      "post": {
+        "summary": "List Privilege Groups",
+        "deprecated": false,
+        "description": "This operation lists all privilege groups in the current database.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "列出权限组",
+            "description": "本接口列出当前数据库中的所有权限组。"
+          }
+        },
+        "tags": [
+          "Privilege Group Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "数据库名称。"
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer"
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "privilegeGroupName": {
+                                "type": "string"
+                              },
+                              "privileges": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        {
+                          "privilegeGroupName": "my_priv_group",
+                          "privileges": [
+                            "Insert",
+                            "Search"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 800,
+                      "message": "not enough permission"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/privilege_groups/add_privileges_to_group": {
+      "post": {
+        "summary": "Add Privileges to Group",
+        "deprecated": false,
+        "description": "This operation adds one or more privileges to an existing privilege group.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "向权限组添加权限",
+            "description": "本接口将一个或多个权限添加到现有权限组中。"
+          }
+        },
+        "tags": [
+          "Privilege Group Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "privilegeGroupName": {
+                    "type": "string",
+                    "description": "The name of the privilege group.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "权限组名称。"
+                      }
+                    }
+                  },
+                  "privileges": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "A list of privilege names to add to the group.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待添加到权限组的权限名称列表。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "privilegeGroupName",
+                  "privileges"
+                ]
+              },
+              "example": {
+                "privilegeGroupName": "my_priv_group",
+                "privileges": [
+                  "Delete",
+                  "Upsert"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 800,
+                      "message": "not enough permission"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/privilege_groups/remove_privileges_from_group": {
+      "post": {
+        "summary": "Remove Privileges from Group",
+        "deprecated": false,
+        "description": "This operation removes one or more privileges from a privilege group.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "从权限组移除权限",
+            "description": "本接口从权限组中移除一个或多个权限。"
+          }
+        },
+        "tags": [
+          "Privilege Group Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "privilegeGroupName": {
+                    "type": "string",
+                    "description": "The name of the privilege group.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "权限组名称。"
+                      }
+                    }
+                  },
+                  "privileges": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "A list of privilege names to remove from the group.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待从权限组中移除的权限名称列表。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "privilegeGroupName",
+                  "privileges"
+                ]
+              },
+              "example": {
+                "privilegeGroupName": "my_priv_group",
+                "privileges": [
+                  "Delete"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 800,
+                      "message": "not enough permission"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "ErrorResponse": {
+        "x-tab-label": "failure",
+        "description": "Returns an error message.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "返回错误消息。"
+          }
+        },
+        "x-i18n-langs": [
+          "zh-CN"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Response code.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应码。"
+              }
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "错误描述。"
+              }
+            }
+          }
+        }
+      },
+      "EmptyResponse": {
+        "x-tab-label": "success",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Response code.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应码。"
+              }
+            }
+          },
+          "data": {
+            "type": "object",
+            "properties": {}
+          }
+        }
+      }
+    },
+    "parameters": {
+      "AuthorizationHeader": {
+        "name": "Authorization",
+        "in": "header",
+        "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`. If you are using a project endpoint, only a valid API key with sufficient permissions applies.",
+        "required": true,
+        "example": "Bearer {{TOKEN}}",
+        "schema": {
+          "type": "string"
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。如果您使用的是项目端点，则仅具备足够权限的有效 API 密钥适用。"
+          }
+        }
+      }
+    }
+  },
+  "servers": []
+}

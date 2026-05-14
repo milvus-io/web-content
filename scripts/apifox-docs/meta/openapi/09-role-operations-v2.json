@@ -1,0 +1,1523 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Role Operations (V2)",
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Role (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/vectordb/roles/list": {
+      "post": {
+        "summary": "List Roles",
+        "deprecated": false,
+        "description": "This operation lists the information about all existing roles.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看角色列表",
+            "description": "本接口可列出所有已创建角色的相关信息。"
+          }
+        },
+        "tags": [
+          "Role Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "Name of the database. If not specified, the default database is used."
+                  }
+                },
+                "description": "An empty object.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "空对象"
+                  }
+                }
+              },
+              "example": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A RoleInfo object that contains a list of RoleItem objects.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "包含 RoleItem 对象列表的 RoleInfo 对象"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "description": "A list of item objects."
+                          },
+                          "description": "Response payload which is a list of item objects.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，为元素对象列表。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "milvus"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        "admin",
+                        "public"
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "zilliz"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        "db_admin",
+                        "db_ro",
+                        "db_rw"
+                      ]
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/roles/describe": {
+      "post": {
+        "summary": "Describe Role",
+        "deprecated": false,
+        "description": "This operation describes the details of a specified role.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看角色详情",
+            "description": "本接口可列出指定角色的详细信息。"
+          }
+        },
+        "tags": [
+          "Role Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "roleName": {
+                    "type": "string",
+                    "description": "The name of the role.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "角色名称。"
+                      }
+                    }
+                  },
+                  "dbName": {
+                    "type": "string",
+                    "description": "Name of the database. If not specified, the default database is used."
+                  }
+                },
+                "required": [
+                  "roleName"
+                ],
+                "x-i18n-langs": [
+                  "zh-CN"
+                ]
+              },
+              "examples": {
+                "1": {
+                  "summary": "example",
+                  "x-include-target": [
+                    "milvus"
+                  ],
+                  "value": {
+                    "roleName": "root"
+                  }
+                },
+                "2": {
+                  "summary": "example",
+                  "x-include-target": [
+                    "zilliz"
+                  ],
+                  "value": {
+                    "roleName": "db_admin"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "An object that contains the detailed desription of a role.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回一个包含指定角色的详细信息对象。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "description": "A privilege item.",
+                            "type": "object",
+                            "properties": {
+                              "object_type": {
+                                "type": "string",
+                                "description": "The type of the object to which the privilege belongs.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "当前权限所属对象。"
+                                  }
+                                }
+                              },
+                              "privilege": {
+                                "type": "string",
+                                "description": "The privilege that is granted to the role.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "授予当前角色的权限名称。"
+                                  }
+                                }
+                              },
+                              "object_name": {
+                                "type": "string",
+                                "description": "The name of the object to which the role is granted the specified privilege.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "授予当前角色的权限所属的对象名称。"
+                                  }
+                                }
+                              },
+                              "db_name": {
+                                "type": "string",
+                                "description": "The name of the database in which this operation has been executed.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "当前操作所在数据库名称。"
+                                  }
+                                },
+                                "x-include-target": [
+                                  "milvus"
+                                ]
+                              },
+                              "grantor": {
+                                "type": "string",
+                                "description": "The name of the user who granted a specific role to a user.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "被授予当前权限的用户名称。"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "description": "Response payload which is a list of privilege items.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，为权限对象列表。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "milvus"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        {
+                          "dbName": "*",
+                          "grantor": "root",
+                          "objectName": "*",
+                          "objectType": "Collection",
+                          "privilege": "IndexDetail"
+                        },
+                        {
+                          "dbName": "*",
+                          "grantor": "root",
+                          "objectName": "*",
+                          "objectType": "Global",
+                          "privilege": "DescribeCollection"
+                        },
+                        {
+                          "dbName": "*",
+                          "grantor": "root",
+                          "objectName": "*",
+                          "objectType": "Global",
+                          "privilege": "ShowCollections"
+                        }
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "zilliz"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        {
+                          "dbName": "*",
+                          "grantor": "db_admin",
+                          "objectName": "*",
+                          "objectType": "Collection",
+                          "privilege": "IndexDetail"
+                        },
+                        {
+                          "dbName": "*",
+                          "grantor": "db_admin",
+                          "objectName": "*",
+                          "objectType": "Global",
+                          "privilege": "DescribeCollection"
+                        },
+                        {
+                          "dbName": "*",
+                          "grantor": "db_admin",
+                          "objectName": "*",
+                          "objectType": "Global",
+                          "privilege": "ShowCollections"
+                        }
+                      ]
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/roles/create": {
+      "post": {
+        "summary": "Create Role",
+        "deprecated": false,
+        "description": "This operation creates a role.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建角色",
+            "description": "本接口创建一个角色。"
+          }
+        },
+        "tags": [
+          "Role Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "roleName": {
+                    "type": "string",
+                    "description": "The name of the role.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "角色名称。"
+                      }
+                    }
+                  },
+                  "dbName": {
+                    "type": "string",
+                    "description": "Name of the database. If not specified, the default database is used."
+                  }
+                },
+                "required": [
+                  "roleName"
+                ],
+                "x-i18n-langs": [
+                  "zh-CN"
+                ]
+              },
+              "example": {
+                "roleName": "my_role"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/roles/grant_privilege": {
+      "post": {
+        "summary": "Grant Privilege To Role",
+        "deprecated": false,
+        "description": "This operation grants a privilege to the current role.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "授予角色权限",
+            "description": "本接口将相关权限授予当前角色。"
+          }
+        },
+        "tags": [
+          "Role Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "roleName": {
+                    "type": "string",
+                    "description": "The name of the role.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "角色名称。"
+                      }
+                    }
+                  },
+                  "objectType": {
+                    "type": "string",
+                    "description": " The type of the object to which the privilege belongs.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待授予权限所属的对象类型。"
+                      }
+                    }
+                  },
+                  "objectName": {
+                    "type": "string",
+                    "description": " The name of the object to which the role is granted the specified privilege.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待授予权限所属的对象名称。"
+                      }
+                    }
+                  },
+                  "privilege": {
+                    "type": "string",
+                    "description": " The privilege that is granted to the role.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待授予权限。"
+                      }
+                    }
+                  },
+                  "dbName": {
+                    "type": "string",
+                    "description": "Name of the database. If not specified, the default database is used."
+                  }
+                },
+                "required": [
+                  "objectType",
+                  "privilege",
+                  "objectName",
+                  "roleName"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/roles/revoke_privilege": {
+      "post": {
+        "summary": "Revoke Privilege From Role",
+        "deprecated": false,
+        "description": "This operation revokes a privilege granted to the current role.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "撤销角色权限",
+            "description": "本操作可撤销当前角色所授予的权限。"
+          }
+        },
+        "tags": [
+          "Role Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "roleName": {
+                    "type": "string",
+                    "description": "The name of the role.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "角色名称。"
+                      }
+                    }
+                  },
+                  "objectType": {
+                    "type": "string",
+                    "description": "The type of the object to which the specified privilege belongs.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "指定权限所属的对象类型。"
+                      }
+                    }
+                  },
+                  "objectName": {
+                    "type": "string",
+                    "description": "The name of the object to which the specified privilege belongs.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "指定权限所属的对象名称。"
+                      }
+                    }
+                  },
+                  "privilege": {
+                    "type": "string",
+                    "description": "The privilege that is revoked from the role.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "当前角色需撤销的权限名称。"
+                      }
+                    }
+                  },
+                  "dbName": {
+                    "type": "string",
+                    "description": "Name of the database. If not specified, the default database is used."
+                  }
+                },
+                "required": [
+                  "objectType",
+                  "privilege",
+                  "objectName",
+                  "roleName"
+                ],
+                "x-i18n-langs": [
+                  "zh-CN"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return an empty object or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/roles/drop": {
+      "post": {
+        "summary": "Drop Role",
+        "deprecated": false,
+        "description": "This operation drops an existing role. The operation will succeed if the specified role exists. Otherwise, this operation will fail.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除角色",
+            "description": "本接口可以删除指定角色。如果指定的角色存在，操作将成功。否则，操作将失败。"
+          }
+        },
+        "tags": [
+          "Role Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "roleName": {
+                    "type": "string",
+                    "description": "The name of the role.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "角色名称。"
+                      }
+                    }
+                  },
+                  "dbName": {
+                    "type": "string",
+                    "description": "Name of the database. If not specified, the default database is used."
+                  }
+                },
+                "required": [
+                  "roleName"
+                ],
+                "x-i18n-langs": [
+                  "zh-CN"
+                ]
+              },
+              "example": {
+                "roleName": "admin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return an empty object or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/vectordb/roles/grant_privilege_v2": {
+      "post": {
+        "summary": "Grant Privilege To Role (V2)",
+        "deprecated": false,
+        "description": "This operation grants a privilege to a role at the global, database, or collection level.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "授予角色权限（V2）",
+            "description": "本接口在全局、数据库或 Collection 级别将权限授予指定角色。"
+          }
+        },
+        "tags": [
+          "Role Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "roleName": {
+                    "type": "string",
+                    "description": "The name of the role.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "角色名称。"
+                      }
+                    }
+                  },
+                  "privilege": {
+                    "type": "string",
+                    "description": "The privilege to grant or revoke.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待授予或撤销的权限。"
+                      }
+                    }
+                  },
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database to which the privilege applies. Use `*` for all databases.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "权限适用的数据库名称。使用 `*` 表示所有数据库。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the collection to which the privilege applies. Use `*` for all collections.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "权限适用的 Collection 名称。使用 `*` 表示所有 Collection。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "roleName",
+                  "privilege"
+                ]
+              },
+              "example": {
+                "roleName": "my_role",
+                "privilege": "Insert",
+                "dbName": "my_database",
+                "collectionName": "my_collection"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 800,
+                      "message": "not enough permission"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/roles/revoke_privilege_v2": {
+      "post": {
+        "summary": "Revoke Privilege From Role (V2)",
+        "deprecated": false,
+        "description": "This operation revokes a privilege from a role at the global, database, or collection level.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "撤销角色权限（V2）",
+            "description": "本接口在全局、数据库或 Collection 级别撤销指定角色的权限。"
+          }
+        },
+        "tags": [
+          "Role Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthorizationHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "roleName": {
+                    "type": "string",
+                    "description": "The name of the role.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "角色名称。"
+                      }
+                    }
+                  },
+                  "privilege": {
+                    "type": "string",
+                    "description": "The privilege to grant or revoke.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待授予或撤销的权限。"
+                      }
+                    }
+                  },
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database to which the privilege applies. Use `*` for all databases.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "权限适用的数据库名称。使用 `*` 表示所有数据库。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the collection to which the privilege applies. Use `*` for all collections.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "权限适用的 Collection 名称。使用 `*` 表示所有 Collection。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "roleName",
+                  "privilege"
+                ]
+              },
+              "example": {
+                "roleName": "my_role",
+                "privilege": "Insert",
+                "dbName": "my_database",
+                "collectionName": "my_collection"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 800,
+                      "message": "not enough permission"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "ErrorResponse": {
+        "x-tab-label": "failure",
+        "description": "Returns an error message.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "返回错误消息。"
+          }
+        },
+        "x-i18n-langs": [
+          "zh-CN"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Response code.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应码。"
+              }
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "错误描述。"
+              }
+            }
+          }
+        }
+      },
+      "EmptyResponse": {
+        "x-tab-label": "success",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Response code.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应码。"
+              }
+            }
+          },
+          "data": {
+            "type": "object",
+            "properties": {}
+          }
+        }
+      }
+    },
+    "parameters": {
+      "AuthorizationHeader": {
+        "name": "Authorization",
+        "in": "header",
+        "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`. If you are using a project endpoint, only a valid API key with sufficient permissions applies.",
+        "required": true,
+        "example": "Bearer {{TOKEN}}",
+        "schema": {
+          "type": "string"
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。如果您使用的是项目端点，则仅具备足够权限的有效 API 密钥适用。"
+          }
+        }
+      }
+    }
+  },
+  "servers": []
+}

@@ -1,0 +1,779 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Cloud Migration (V2)",
+      "x-include-target": [
+        "zilliz"
+      ],
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Migration (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/migrations/startByRemote": {
+      "post": {
+        "summary": "Migrate from Remote",
+        "description": "Starts a migration from a remote bucket to the specified cluster.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "从远端迁移",
+            "description": "本接口用于从远端存储桶迁移数据到指定集群。"
+          }
+        },
+        "tags": [
+          "Cloud Migration (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "Use `application/json`.",
+            "required": false,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "使用 `application/json`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "object",
+                    "description": "Source storage configuration.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "源存储配置。"
+                      }
+                    },
+                    "properties": {
+                      "cloud": {
+                        "type": "string",
+                        "description": "Cloud provider.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "云提供商。"
+                          }
+                        }
+                      },
+                      "region": {
+                        "type": "string",
+                        "description": "Cloud region.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "云地域。"
+                          }
+                        }
+                      },
+                      "bucketName": {
+                        "type": "string",
+                        "description": "Name of the source bucket.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "源存储桶名称。"
+                          }
+                        }
+                      },
+                      "path": {
+                        "type": "string",
+                        "description": "Path within the source bucket.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "源存储桶内的路径。"
+                          }
+                        }
+                      },
+                      "objectUrl": {
+                        "type": "string",
+                        "description": "Object URL.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "对象 URL。"
+                          }
+                        }
+                      },
+                      "accessKey": {
+                        "type": "string",
+                        "description": "Access key.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "访问密钥。"
+                          }
+                        }
+                      },
+                      "secretKey": {
+                        "type": "string",
+                        "description": "Secret key.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "私有密钥。"
+                          }
+                        }
+                      },
+                      "token": {
+                        "type": "string",
+                        "description": "Security token.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "安全令牌。"
+                          }
+                        }
+                      },
+                      "stageName": {
+                        "type": "string",
+                        "description": "Stage name.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "Stage 名称。"
+                          }
+                        }
+                      },
+                      "dataPath": {
+                        "type": "string",
+                        "description": "Data path.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "数据路径。"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "destination": {
+                    "type": "object",
+                    "description": "Destination cluster configuration.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标集群配置。"
+                      }
+                    },
+                    "properties": {
+                      "clusterId": {
+                        "type": "string",
+                        "description": "ID of the destination cluster.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "目标集群 ID。"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the ID of the created migration job.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回已创建迁移任务的 ID。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "jobId": {
+                              "type": "string",
+                              "description": "ID of the created migration job.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "已创建迁移任务的 ID。"
+                                }
+                              }
+                            }
+                          },
+                          "description": "Response payload which contains the ID of the created migration job.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，包含已创建迁移任务的 ID。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      },
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/migrations/toExisting": {
+      "post": {
+        "summary": "Migrate to Existing Cluster",
+        "deprecated": false,
+        "description": "Migrate data from a cluster to another.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "迁移数据至现有集群",
+            "description": "本接口可将数据从一个集群迁移至另一个集群。"
+          }
+        },
+        "tags": [
+          "Cloud Migration (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "object",
+                    "description": "The source cluster information.",
+                    "properties": {
+                      "clusterId": {
+                        "type": "string",
+                        "description": "The ID of the source cluster.",
+                        "example": "inxx-xxxxxxxxxxxxxxxxx"
+                      }
+                    },
+                    "required": [
+                      "clusterId"
+                    ]
+                  },
+                  "destination": {
+                    "type": "object",
+                    "description": "The destination cluster information.",
+                    "properties": {
+                      "clusterId": {
+                        "type": "string",
+                        "description": "The ID of the destination cluster.",
+                        "example": "inxx-xxxxxxxxxxxxxxxxxx"
+                      }
+                    },
+                    "required": [
+                      "clusterId"
+                    ]
+                  },
+                  "dbCollections": {
+                    "type": "array",
+                    "description": "The collections that need to be migrated.",
+                    "items": {
+                      "type": "object",
+                      "description": "Collection information.",
+                      "properties": {
+                        "dbName": {
+                          "type": "string",
+                          "description": "The name of the source database. This is optional. If left unspecified, the default database applies."
+                        },
+                        "destDbName": {
+                          "type": "string",
+                          "description": "The name of the destination database."
+                        },
+                        "collections": {
+                          "type": "array",
+                          "description": "The names of the collections that need to be migrated in the above specified source database. If this is left unspecified, all collections in the source database will be migrated.",
+                          "items": {
+                            "type": "object",
+                            "description": "A list of collection names.",
+                            "properties": {
+                              "collectionName": {
+                                "type": "string",
+                                "description": "A collection name."
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ]
+              },
+              "example": {
+                "source": {
+                  "clusterId": "inxx-xxxxxxxxxxxxxxx"
+                },
+                "destination": {
+                  "clusterId": "inxx-xxxxxxxxxxxxxxx"
+                },
+                "dbCollections": [
+                  {
+                    "collections": [
+                      {
+                        "collectionName": "medium_articles"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns a job ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "jobId": {
+                              "type": "string",
+                              "description": "The ID of the job that has been created upon your request."
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "jobId": "job-xxxxxxxxxxxxxxxxxxxxxx"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/migrations/toNewDedicated": {
+      "post": {
+        "summary": "Migrate to New Dedicated Cluster",
+        "deprecated": false,
+        "description": "Create a dedicated cluster and migrate data from the source cluster to the new cluster.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "迁移数据至新集群",
+            "description": "本接口可创建一个新的 Dedicated 集群，并将源集群的数据迁移到新创建的集群。"
+          }
+        },
+        "tags": [
+          "Cloud Migration (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "object",
+                    "description": "The source cluster information.",
+                    "properties": {
+                      "clusterId": {
+                        "type": "string",
+                        "description": "The ID of the source cluster.",
+                        "example": "inxx-xxxxxxxxxxxxxxxxx"
+                      }
+                    },
+                    "required": [
+                      "clusterId"
+                    ]
+                  },
+                  "destination": {
+                    "type": "object",
+                    "properties": {
+                      "clusterName": {
+                        "type": "string",
+                        "description": "The name of the destination cluster to create."
+                      },
+                      "projectId": {
+                        "type": "string",
+                        "description": "The ID of the project to create the destination cluster in."
+                      },
+                      "regionId": {
+                        "type": "string",
+                        "description": "The ID of the cloud region to create the destination cluster in. The region should be bound to the specified project."
+                      },
+                      "plan": {
+                        "type": "string",
+                        "description": "The subscription plan to use for the destination cluster.",
+                        "enum": [
+                          "Standard",
+                          "Enterprise"
+                        ]
+                      },
+                      "cuType": {
+                        "type": "string",
+                        "description": "The CU type to use for the destination cluster.",
+                        "enum": [
+                          "Performance-optimized",
+                          "Capacity-optimized",
+                          "Tiered-storage"
+                        ]
+                      },
+                      "cuSize": {
+                        "minimum": 1,
+                        "maximum": 1024,
+                        "type": "integer",
+                        "description": "The CU size to use for the destination cluster."
+                      }
+                    },
+                    "required": [
+                      "clusterName",
+                      "projectId",
+                      "regionId",
+                      "plan",
+                      "cuType",
+                      "cuSize"
+                    ]
+                  },
+                  "dbCollections": {
+                    "type": "array",
+                    "description": "A list of source- and destination-database pairs in the migration.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "dbName": {
+                          "type": "string",
+                          "description": "The name of the source database. This is optional. If left unspecified, the default database applies."
+                        },
+                        "destDbName": {
+                          "type": "string",
+                          "description": "The name of the destination database."
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ]
+              },
+              "examples": {
+                "1": {
+                  "summary": "example",
+                  "x-target-lang": "en-US",
+                  "value": {
+                    "source": {
+                      "clusterId": "inxx-xxxxxxxxxxxxxx"
+                    },
+                    "destination": {
+                      "clusterName": "Cluster-01",
+                      "projectId": "proj-xxxxxxxxxxxxxxxxxxxx",
+                      "regionId": "aws-us-west-2",
+                      "plan": "Standard",
+                      "cuType": "Performance-optimized",
+                      "cuSize": 1
+                    }
+                  }
+                },
+                "2": {
+                  "summary": "example",
+                  "x-target-lang": "zh-CN",
+                  "value": {
+                    "source": {
+                      "clusterId": "inxx-xxxxxxxxxxxxxx"
+                    },
+                    "destination": {
+                      "clusterName": "Cluster-01",
+                      "projectId": "proj-xxxxxxxxxxxxxxxxxxxx",
+                      "regionId": "ali-cn-hangzhou",
+                      "plan": "Standard",
+                      "cuType": "Performance-optimized",
+                      "cuSize": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "clusterId": {
+                              "type": "string",
+                              "description": "The ID of the destination cluster."
+                            },
+                            "username": {
+                              "type": "string",
+                              "description": "The username used to access the destination cluster."
+                            },
+                            "password": {
+                              "type": "string",
+                              "description": "The password used to access the destination cluster. This will be shown to you only once. You are advised to note down the password and save it in a secure place."
+                            },
+                            "jobId": {
+                              "type": "string",
+                              "description": "The ID of the job that has been created upon your request."
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "clusterId": "inxx-xxxxxxxxxxxxxx",
+                      "username": "db_admin",
+                      "password": "xxxxxxxxx",
+                      "jobId": "job-xxxxxxxxxxxxxxxxxxxxxx"
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}

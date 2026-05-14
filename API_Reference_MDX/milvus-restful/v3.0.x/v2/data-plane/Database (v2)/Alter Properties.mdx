@@ -1,0 +1,29 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_position: 6
+slug: /restful/Alter Properties
+beta: FALSE
+title: "Alter Database Properties (V2) | RESTful"
+description: "This operation alters the properties of a database. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Alter Database Properties (V2)"
+sidebar_custom_props: { badges: ['post']}
+keywords: 
+  - zilliz cloud
+  - zilliz
+  - cloud
+  - "Alter Database Properties (V2)"
+  - "post"
+  - RESTful
+  - API
+---
+
+# Alter Database Properties (V2)
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="milvus" lang="en-US" />
+
+export const specs = {"summary":"Alter Database Properties","deprecated":false,"description":"This operation alters the properties of a database.","x-i18n":{"zh-CN":{"summary":"修改数据库属性","description":"本接口修改指定数据库的属性。"}},"tags":["Database Operations (V2)"],"x-base-urls":[{"key":"cluster","label":"Cluster Endpoint","url":"https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530","prompt":"Use the cluster endpoint if you are using serving clusters.\n<ul><li><p><b>Free & Serverless</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>","x-i18n":{"zh-CN":{"label":"集群端点","prompt":"如果您使用的是服务集群，请使用集群端点。\n<ul><li><p><b>Free 与 Serverless 版</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated 版</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>"}},"shell":"export CLUSTER_ENDPOINT=\"https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530\""},{"key":"on-demand-compute","label":"Project Endpoint (On-Demand)","url":"https://{project-id}.{region}.api.zillizcloud.com","prompt":"<p>Use the on-demand compute endpoint if you are using on-demand clusters.</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>","x-i18n":{"zh-CN":{"label":"项目端点（按需）","prompt":"<p>如果您使用的是按需集群，请使用项目端点（按需）。</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>"}},"shell":"export PROJECT_ENDPOINT=\"https://{project-id}.{region}.api.zillizcloud.com\""}],"parameters":[{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`. If you are using a project endpoint, only a valid API key with sufficient permissions applies.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。如果您使用的是项目端点，则仅具备足够权限的有效 API 密钥适用。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"dbName":{"type":"string","description":"The name of the database to alter.","x-i18n":{"zh-CN":{"description":"待修改的数据库名称。"}}},"properties":{"type":"object","description":"The properties to set on the database as key-value pairs.","x-i18n":{"zh-CN":{"description":"以键值对形式设置的数据库属性。"}}}},"required":["dbName"]},"example":{"dbName":"my_database","properties":{"database.replica.number":"2"}}}}},"responses":{"200":{"description":"None","content":{"application/json":{"schema":{"anyOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"data":{"type":"object","properties":{}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":800,"message":"not enough permission"}}}}}}}}
+export const endpoint = "/v2/vectordb/databases/alter_properties"
+export const method = "post"

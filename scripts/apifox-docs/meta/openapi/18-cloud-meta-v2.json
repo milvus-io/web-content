@@ -1,0 +1,463 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Cloud Meta (V2)",
+      "x-include-target": [
+        "zilliz"
+      ],
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Cloud (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/clouds": {
+      "get": {
+        "summary": "List Cloud Providers",
+        "deprecated": false,
+        "description": "Lists all cloud providers available on Zilliz Cloud.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看云服务提供商",
+            "description": "本接口可列出所有可用的云服务提供商的相关信息。"
+          }
+        },
+        "tags": [
+          "Cloud Meta (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of cloud providers in detail.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回可用的云服务商列表。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "cloudId": {
+                                "type": "string",
+                                "description": "ID of a cloud provider.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "云服务商 ID。"
+                                  }
+                                }
+                              },
+                              "description": {
+                                "type": "string",
+                                "description": "Description of the cloud provider.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "云服务商描述。"
+                                  }
+                                }
+                              }
+                            },
+                            "description": "List of applicable cloud providers.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "当前可用云服务商列表。"
+                              }
+                            }
+                          },
+                          "description": "Response payload which is a list of applicable cloud providers.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，是一个包含当前可用云服务商列表的数组。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        {
+                          "cloudId": "aws",
+                          "description": "Amazon Web Services"
+                        },
+                        {
+                          "cloudId": "gcp",
+                          "description": "Google Cloud Platform"
+                        },
+                        {
+                          "cloudId": "azure",
+                          "description": "Microsoft Azure"
+                        }
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        {
+                          "cloudId": "ali",
+                          "description": "Alibaba Cloud"
+                        },
+                        {
+                          "cloudId": "tc",
+                          "description": "Tencent Cloud"
+                        }
+                      ]
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 80002,
+                      "message": "Token not found or unauthorized: The provided token does not exist in our records, or you do not have the necessary permissions to use this token. Please ensure you have the correct token."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v2/regions": {
+      "get": {
+        "summary": "List Cloud Regions",
+        "deprecated": false,
+        "description": "Lists all available cloud regions. You may list only the applicable regions of a specific cloud provider.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看云服务区域",
+            "description": "本接口列出所有可用的云区域，也可以只列出特定云提供商的适用区域。"
+          }
+        },
+        "tags": [
+          "Cloud Meta (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "query",
+            "description": "ID of a cloud provider. You can list applicable cloud providers using [List Cloud Providers](/reference/restful/list-cloud-providers-v2)",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "云服务提供商 ID。可使用 [List Cloud Providers](/reference/restful/list-cloud-providers-v2) 接口列出适用云服务提供商。"
+              }
+            },
+            "required": false,
+            "examples": {
+              "1": {
+                "summary": "global",
+                "x-target-lang": "en-US",
+                "value": "aws"
+              },
+              "2": {
+                "summary": "china",
+                "x-target-lang": "zh-CN",
+                "value": "ali"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "Use `application/json`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "使用 `application/json`。"
+              }
+            },
+            "required": false,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return a list of cloud regions in detail.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定云地域的详细信息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "cloudId": {
+                                "type": "string",
+                                "description": "ID of the cloud provider that provides the region.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "提供指定云地域的云服务商 ID。"
+                                  }
+                                }
+                              },
+                              "regionId": {
+                                "type": "string",
+                                "description": "ID of the cloud region.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "云地域 ID。"
+                                  }
+                                }
+                              },
+                              "domain": {
+                                "type": "string",
+                                "description": "Base URL of the V2 API server at the control plane.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "控制面 V2 API 服务器的 Base URL。"
+                                  }
+                                }
+                              }
+                            },
+                            "description": "List of applicable cloud regions.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "可用云地域列表。"
+                              }
+                            }
+                          },
+                          "description": "Response payload.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        {
+                          "cloudId": "aws",
+                          "regionId": "aws-us-west-2",
+                          "domain": "api.cloud.zilliz.com"
+                        },
+                        {
+                          "cloudId": "gcp",
+                          "regionId": "gcp-us-west1",
+                          "domain": "api.cloud.zilliz.com"
+                        },
+                        {
+                          "cloudId": "azure",
+                          "regionId": "az-westus3",
+                          "domain": "api.cloud.zilliz.com"
+                        }
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        {
+                          "cloudId": "ali",
+                          "regionId": "ali-cn-hangzhou",
+                          "domain": "api.cloud.zilliz.com.cn"
+                        },
+                        {
+                          "cloudId": "tc",
+                          "regionId": "tc-ap-beijing",
+                          "domain": "api.cloud.zilliz.com.cn"
+                        }
+                      ]
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}

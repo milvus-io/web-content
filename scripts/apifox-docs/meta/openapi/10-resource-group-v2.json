@@ -1,0 +1,1428 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Resource Group (V2)",
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Resource Group (V2)"
+        }
+      },
+      "x-include-target": [
+        "milvus"
+      ]
+    }
+  ],
+  "paths": {
+    "/v2/vectordb/resource_groups/create": {
+      "post": {
+        "summary": "Create Resource Group",
+        "deprecated": false,
+        "description": "This operation creates a resource group. A Milvus instance begins with a default resource group that includes all available query nodes. You can create additional resource groups, reassign specific query nodes from the default group, and load collections into the query nodes in these newly configured groups. This operation always succeeds no matter whether the resource group exists.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建资源组",
+            "description": "本操作创建资源组。Milvus 实例在启动后创建一个默认资源组，包含所有可用的 QueryNodes。您可以创建其他资源组，将部分 QueryNodes 从默认组重新分配到这些新配置的组中，并将 Collection 加载到这些新配置的组中的 QueryNodes 上。无论资源组是否存在，此操作都始终成功。"
+          }
+        },
+        "x-include-target": [
+          "milvus"
+        ],
+        "tags": [
+          "Resource Group (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the resource group to create.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "资源组名称。"
+                      }
+                    }
+                  },
+                  "config": {
+                    "type": "object",
+                    "description": "The configurations of the resource group to create.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "资源组配置。"
+                      }
+                    },
+                    "properties": {
+                      "requests": {
+                        "type": "object",
+                        "description": "The number of query nodes to allocate to the resource group.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "资源组中需要的 QueryNodes 的数量。"
+                          }
+                        },
+                        "properties": {
+                          "node_num": {
+                            "type": "integer",
+                            "description": "The number of query nodes to allocate to the resource group.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "资源组中需要的 QueryNodes 的数量。"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "limits": {
+                        "type": "object",
+                        "description": "The maximum number of query nodes to allocate to the resource group.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "资源组中需要的 QueryNodes 的最大数量。"
+                          }
+                        },
+                        "properties": {
+                          "node_num": {
+                            "type": "integer",
+                            "description": "The maximum number of query nodes to allocate to the resource group.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "资源组中需要的 QueryNodes 的最大数量。"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "transfer_from": {
+                        "type": "array",
+                        "description": "The list of source resource groups to transfer query nodes from.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "需要从哪些源资源组中转移 QueryNodes。"
+                          }
+                        },
+                        "items": {
+                          "type": "object",
+                          "description": "A source resource group to transfer query nodes from.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "当前源资源组。"
+                            }
+                          },
+                          "properties": {
+                            "resource_group": {
+                              "type": "string",
+                              "description": "The name of the source resource group to transfer query nodes from.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前源资源组名称。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "transfer_to": {
+                        "type": "array",
+                        "description": "The list of target resource groups to transfer query nodes to.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "需要将 QueryNodes 转移到哪些目标资源组中。"
+                          }
+                        },
+                        "items": {
+                          "type": "object",
+                          "description": "A target resource group to transfer query nodes to.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "当前目标资源组。"
+                            }
+                          },
+                          "properties": {
+                            "resource_group": {
+                              "type": "string",
+                              "description": "The name of the target resource group to transfer query nodes to.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前目标资源组名称。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              "example": {
+                "name": "group1",
+                "config": {
+                  "requests": {
+                    "node_num": 1
+                  },
+                  "limits": {
+                    "node_num": 10000
+                  },
+                  "transfer_from": [
+                    {
+                      "resource_group": "default"
+                    }
+                  ],
+                  "transfer_to": [
+                    {
+                      "resource_group": "default"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回空对象。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "cost": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/resource_groups/alter": {
+      "post": {
+        "summary": "Update Resource Group",
+        "deprecated": false,
+        "description": "This operation updates the configuration of the specified resource group.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "更新资源组",
+            "description": "本操作更新指定资源组的配置。"
+          }
+        },
+        "x-include-target": [
+          "milvus"
+        ],
+        "tags": [
+          "Resource Group (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "resource_groups": {
+                    "type": "object",
+                    "description": "The configurations of the resource group to update. You can include multiple resource groups in the request body with the name of each resource group as the key and its configuration as the value.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "需要更新的资源组配置。请求体中可以包含多个资源组的配置，每个资源组的名称作为键，其配置作为值。"
+                      }
+                    },
+                    "properties": {
+                      "<resource_group_name>": {
+                        "type": "object",
+                        "description": "The updated configuration of the resource group specified by the key.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "指定资源组的更新配置。"
+                          }
+                        },
+                        "properties": {
+                          "requests": {
+                            "type": "object",
+                            "description": "The number of query nodes to allocate to the resource group.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "资源组中需要的 QueryNodes 的数量。"
+                              }
+                            },
+                            "properties": {
+                              "node_num": {
+                                "type": "integer",
+                                "description": "The number of query nodes to allocate to the resource group.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "资源组中需要的 QueryNodes 的数量。"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "limits": {
+                            "type": "object",
+                            "description": "The maximum number of query nodes to allocate to the resource group.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "资源组中需要的 QueryNodes 的最大数量。"
+                              }
+                            },
+                            "properties": {
+                              "node_num": {
+                                "type": "integer",
+                                "description": "The maximum number of query nodes to allocate to the resource group.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "资源组中需要的 QueryNodes 的最大数量。"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "transfer_from": {
+                            "type": "array",
+                            "description": "The list of source resource groups to transfer query nodes from.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "需要从哪些源资源组中转移 QueryNodes。"
+                              }
+                            },
+                            "items": {
+                              "type": "object",
+                              "description": "A source resource group to transfer query nodes from.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前源资源组。"
+                                }
+                              },
+                              "properties": {
+                                "resource_group": {
+                                  "type": "string",
+                                  "description": "The name of the source resource group to transfer query nodes from.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "当前源资源组名称。"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "transfer_to": {
+                            "type": "array",
+                            "description": "The list of target resource groups to transfer query nodes to.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "需要将 QueryNodes 转移到哪些目标资源组中。"
+                              }
+                            },
+                            "items": {
+                              "type": "object",
+                              "description": "A target resource group to transfer query nodes to.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前目标资源组。"
+                                }
+                              },
+                              "properties": {
+                                "resource_group": {
+                                  "type": "string",
+                                  "description": "The name of the target resource group to transfer query nodes to.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "当前目标资源组名称。"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "resource_groups"
+                ]
+              },
+              "example": {
+                "resource_groups": {
+                  "group1": {
+                    "requests": {
+                      "node_num": 1
+                    },
+                    "limits": {
+                      "node_num": 10000
+                    },
+                    "transfer_from": [
+                      {
+                        "resource_group": "default"
+                      }
+                    ],
+                    "transfer_to": [
+                      {
+                        "resource_group": "default"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回空对象。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/resource_groups/describe": {
+      "post": {
+        "summary": "Describe Resource Group",
+        "deprecated": false,
+        "description": "This operation returns the configuration of the specified resource group.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看资源组详情",
+            "description": "本操作返回指定资源组的配置。"
+          }
+        },
+        "x-include-target": [
+          "milvus"
+        ],
+        "tags": [
+          "Resource Group (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the resource group to describe.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "需要查看详情的资源组名称。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              "example": {
+                "name": "group1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the configuration of the specified resource group.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定资源组的配置。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "resource_groups": {
+                              "type": "object",
+                              "description": "The configurations of the resource group to update. You can include multiple resource groups in the request body with the name of each resource group as the key and its configuration as the value.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "需要更新的资源组配置。请求体中可以包含多个资源组的配置，每个资源组的名称作为键，其配置作为值。"
+                                }
+                              },
+                              "properties": {
+                                "<resource_group_name>": {
+                                  "type": "object",
+                                  "description": "The updated configuration of the resource group specified by the key.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "指定资源组的更新配置。"
+                                    }
+                                  },
+                                  "properties": {
+                                    "requests": {
+                                      "type": "object",
+                                      "description": "The number of query nodes to allocate to the resource group.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "资源组中需要的 QueryNodes 的数量。"
+                                        }
+                                      },
+                                      "properties": {
+                                        "node_num": {
+                                          "type": "integer",
+                                          "description": "The number of query nodes to allocate to the resource group.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "资源组中需要的 QueryNodes 的数量。"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "limits": {
+                                      "type": "object",
+                                      "description": "The maximum number of query nodes to allocate to the resource group.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "资源组中需要的 QueryNodes 的最大数量。"
+                                        }
+                                      },
+                                      "properties": {
+                                        "node_num": {
+                                          "type": "integer",
+                                          "description": "The maximum number of query nodes to allocate to the resource group.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "资源组中需要的 QueryNodes 的最大数量。"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "transfer_from": {
+                                      "type": "array",
+                                      "description": "The list of source resource groups to transfer query nodes from.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "需要从哪些源资源组中转移 QueryNodes。"
+                                        }
+                                      },
+                                      "items": {
+                                        "type": "object",
+                                        "description": "A source resource group to transfer query nodes from.",
+                                        "x-i18n": {
+                                          "zh-CN": {
+                                            "description": "当前源资源组。"
+                                          }
+                                        },
+                                        "properties": {
+                                          "resource_group": {
+                                            "type": "string",
+                                            "description": "The name of the source resource group to transfer query nodes from.",
+                                            "x-i18n": {
+                                              "zh-CN": {
+                                                "description": "当前源资源组名称。"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "transfer_to": {
+                                      "type": "array",
+                                      "description": "The list of target resource groups to transfer query nodes to.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "需要将 QueryNodes 转移到哪些目标资源组中。"
+                                        }
+                                      },
+                                      "items": {
+                                        "type": "object",
+                                        "description": "A target resource group to transfer query nodes to.",
+                                        "x-i18n": {
+                                          "zh-CN": {
+                                            "description": "当前目标资源组。"
+                                          }
+                                        },
+                                        "properties": {
+                                          "resource_group": {
+                                            "type": "string",
+                                            "description": "The name of the target resource group to transfer query nodes to.",
+                                            "x-i18n": {
+                                              "zh-CN": {
+                                                "description": "当前目标资源组名称。"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "resource_groups": {
+                          "group1": {
+                            "requests": {
+                              "node_num": 1
+                            },
+                            "limits": {
+                              "node_num": 10000
+                            },
+                            "transfer_from": [
+                              {
+                                "resource_group": "default"
+                              }
+                            ],
+                            "transfer_to": [
+                              {
+                                "resource_group": "default"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/resource_groups/list": {
+      "post": {
+        "summary": "List Resource Groups",
+        "deprecated": false,
+        "description": "This operation returns the list of resource group names.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看资源组列表",
+            "description": "本操作返回资源组名称列表。"
+          }
+        },
+        "x-include-target": [
+          "milvus"
+        ],
+        "tags": [
+          "Resource Group (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the list of resource group names.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回资源组名称列表。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "array",
+                          "description": "The list of resource group names.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "资源组名称列表。"
+                            }
+                          },
+                          "items": {
+                            "type": "string",
+                            "description": "The name of a resource group.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "资源组名称。"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        "__default_resource_group",
+                        "group1"
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/resource_groups/drop": {
+      "post": {
+        "summary": "Drop Resource Group",
+        "deprecated": false,
+        "description": "This operation drops the specified resource group.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除资源组",
+            "description": "本操作删除指定资源组。"
+          }
+        },
+        "x-include-target": [
+          "milvus"
+        ],
+        "tags": [
+          "Resource Group (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the resource group to drop.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "需要删除的资源组名称。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              "example": {
+                "name": "group1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回空对象。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/vectordb/resource_groups/transfer_replica": {
+      "post": {
+        "summary": "Transfer Collection Replica",
+        "deprecated": false,
+        "description": "This operation transfers the replicas of the specified collection from the source resource group to the target resource group.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "转移 Collection 副本",
+            "description": "本操作将指定 Collection 的副本从源资源组转移到目标资源组。"
+          }
+        },
+        "x-include-target": [
+          "milvus"
+        ],
+        "tags": [
+          "Resource Group (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sourceRgName": {
+                    "type": "string",
+                    "description": "The name of the source resource group.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "源资源组名称。"
+                      }
+                    }
+                  },
+                  "targetRgName": {
+                    "type": "string",
+                    "description": "The name of the target resource group.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标资源组名称。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the target collection.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标 Collection 名称。"
+                      }
+                    }
+                  },
+                  "replicaNum": {
+                    "type": "integer",
+                    "description": "The number of replicas to transfer.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "需要转移的副本数量。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "sourceRgName",
+                  "targetRgName",
+                  "collectionName",
+                  "replicaNum"
+                ]
+              },
+              "example": {
+                "sourceRgName": "__default_resource_group",
+                "targetRgName": "group1",
+                "collectionName": "test_collection",
+                "replicaNum": 1
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回空对象。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "cost": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}

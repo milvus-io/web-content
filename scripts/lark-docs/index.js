@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const { program } = require('commander')
-const MilvusDocsGen = require('./milvusDocsGen.js')
-const MilvusSdkDocsGen = require('./milvusSdkDocsGen.js')
+const MilvusDocsGen = require('../lib/milvusDocsGen.js')
+const MilvusSdkDocsGen = require('../lib/milvusSdkDocsGen.js')
 const fs = require('node:fs')
 const path = require('node:path')
 require('dotenv/config')

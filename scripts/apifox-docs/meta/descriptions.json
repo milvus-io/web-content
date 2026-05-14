@@ -142,5 +142,16 @@
     {
         "name": "project-operations-v2",
         "description": "This set of APIs provides a way to manage projects."
+    },
+    {
+        "name": "privilege-group-operations-v2",
+        "description": "This set of APIs provides a way to manage privilege groups.",
+        "milvus": {
+            "name": "Privilege Group (v2)"
+        }
+    },
+    {
+        "name": "on-demand-compute-v2",
+        "description": "This set of APIs provides a way to manage on-demand compute for projects."
     }
 ]

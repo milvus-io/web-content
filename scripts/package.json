@@ -4,7 +4,11 @@
   "description": "",
   "scripts": {
     "fetch-apifox-docs": "node apifox-docs/index.js",
-    "fetch-lark-docs": "node lark-docs/index.js"
+    "fetch-restful-docs": "node fetch-restful-docs.js",
+    "fetch-lark-docs": "node lark-docs/index.js",
+    "sync:shared-scripts": "node sync-shared-scripts.js",
+    "check:shared-scripts": "node sync-shared-scripts.js --check",
+    "test:shared-sync": "node --test test/sync-shared-scripts.test.js"
   },
   "bin": {
     "fetch-apifox-docs": "./apifox-docs/index.js",

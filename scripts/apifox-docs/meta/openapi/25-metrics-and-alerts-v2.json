@@ -1,0 +1,3193 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Metrics & Alerts (V2)",
+      "x-include-target": [
+        "zilliz"
+      ],
+      "x-i18n": {
+        "zh-CN": "Metrics & Alerts (V2)"
+      }
+    }
+  ],
+  "paths": {
+    "/v2/alertRules": {
+      "get": {
+        "summary": "List Alert Rules",
+        "deprecated": false,
+        "description": "Lists all alert rules in the specified project. The current user should be a project admin.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看告警规则列表",
+            "description": "本接口列出指定项目的所有告警规则。当前用户须为项目管理员。"
+          }
+        },
+        "tags": [
+          "Metrics & Alerts (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            },
+            "x-i18n-langs": [
+              "zh-CN"
+            ]
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "description": "The ID of the project to which the alert rules belong.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "告警规则所属项目 ID。"
+              }
+            },
+            "example": "proj-xxxxxxxxxxxxxxxxxxxxxx"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The number of items to return in each page.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "每页返回的项目数量。"
+              }
+            },
+            "example": 10
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "description": "The page number to return.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "要返回的页码。"
+              }
+            },
+            "example": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of alert rules in the specified project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定项目的所有告警规则列表。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "Returns a list of alert rules.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回告警规则列表。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "count": {
+                              "type": "integer",
+                              "description": "The total number of alert rules.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则总数。"
+                                }
+                              }
+                            },
+                            "currentPage": {
+                              "type": "integer",
+                              "description": "The current page number.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前页码。"
+                                }
+                              }
+                            },
+                            "pageSize": {
+                              "type": "integer",
+                              "description": "The number of records in each page.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "每页记录数。"
+                                }
+                              }
+                            },
+                            "alertRules": {
+                              "type": "array",
+                              "description": "A list of alert rules.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则列表。"
+                                }
+                              },
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "description": "The ID of the alert rule.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "告警规则 ID。"
+                                      }
+                                    }
+                                  },
+                                  "projectId": {
+                                    "type": "string",
+                                    "description": "The ID of the project to which the alert rule belongs.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "告警规则所属项目 ID。"
+                                      }
+                                    }
+                                  },
+                                  "ruleName": {
+                                    "type": "string",
+                                    "description": "The name of the alert rule.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "告警规则名称。"
+                                      }
+                                    }
+                                  },
+                                  "level": {
+                                    "type": "string",
+                                    "description": "The level of the alert rule.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "告警规则级别。"
+                                      }
+                                    },
+                                    "enum": [
+                                      "CRITICAL",
+                                      "WARNING"
+                                    ]
+                                  },
+                                  "metricName": {
+                                    "type": "string",
+                                    "description": "The name of the metric that the alert rule monitors.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "告警规则监控的指标名称。"
+                                      }
+                                    }
+                                  },
+                                  "threshold": {
+                                    "type": "string",
+                                    "description": "The threshold value of the alert rule.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "告警规则阈值。"
+                                      }
+                                    }
+                                  },
+                                  "windowSize": {
+                                    "type": "string",
+                                    "description": "The time window for the alert rule in minutes.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "告警规则的时间窗口，单位为分钟。"
+                                      }
+                                    }
+                                  },
+                                  "enabled": {
+                                    "type": "boolean",
+                                    "description": "Indicates whether the alert rule is enabled.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "告警规则是否启用。"
+                                      }
+                                    }
+                                  },
+                                  "sendResolved": {
+                                    "type": "boolean",
+                                    "description": "Indicates whether to send notifications when the alert rule is resolved.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "告警规则是否发送已解决的通知。"
+                                      }
+                                    }
+                                  },
+                                  "actions": {
+                                    "type": "array",
+                                    "description": "The actions to take when the alert rule is triggered.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "触发告警规则时采取的操作列表。"
+                                      }
+                                    },
+                                    "items": {
+                                      "type": "object",
+                                      "description": "An action to take when the alert rule is triggered.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "触发告警规则时采取的操作。"
+                                        }
+                                      },
+                                      "properties": {
+                                        "type": {
+                                          "type": "string",
+                                          "description": "The type of the action.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "操作类型。"
+                                            }
+                                          },
+                                          "enum": [
+                                            "EMAIL",
+                                            "SMS",
+                                            "WEBHOOK",
+                                            "SLACK",
+                                            "LARK",
+                                            "WECOM",
+                                            "PAGERDUTY",
+                                            "OPSGENIE"
+                                          ]
+                                        },
+                                        "config": {
+                                          "type": "object",
+                                          "description": "The configuration for the action.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "操作配置。"
+                                            }
+                                          },
+                                          "properties": {
+                                            "recipients": {
+                                              "type": "object",
+                                              "description": "The recipients of the alert notification. This applies only when the action type is EMAIL and SMS.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "告警通知的接收者。仅当操作类型为 EMAIL 和 SMS 时适用。"
+                                                }
+                                              },
+                                              "properties": {
+                                                "members": {
+                                                  "type": "array",
+                                                  "description": "A list of email addresses to receive the alert notification.",
+                                                  "x-i18n": {
+                                                    "zh-CN": {
+                                                      "description": "用于接收通知的邮件地址列表。"
+                                                    }
+                                                  },
+                                                  "items": {
+                                                    "type": "string",
+                                                    "description": "An email address to receive the alert notification.",
+                                                    "x-i18n": {
+                                                      "zh-CN": {
+                                                        "description": "用于接收通知的邮件地址。"
+                                                      }
+                                                    }
+                                                  }
+                                                },
+                                                "orgRoles": {
+                                                  "type": "array",
+                                                  "description": "A list of organization roles to receive the alert notification.",
+                                                  "x-i18n": {
+                                                    "zh-CN": {
+                                                      "description": "用于接收通知的组织角色列表。"
+                                                    }
+                                                  },
+                                                  "items": {
+                                                    "type": "string",
+                                                    "description": "An organization role to receive the alert notification.",
+                                                    "x-i18n": {
+                                                      "zh-CN": {
+                                                        "description": "用于接收通知的组织角色。"
+                                                      }
+                                                    },
+                                                    "enum": [
+                                                      "OWNER",
+                                                      "MEMBER",
+                                                      "BILLING_ADMIN"
+                                                    ]
+                                                  }
+                                                },
+                                                "projectRoles": {
+                                                  "type": "array",
+                                                  "description": "A list of project roles to receive the alert notification.",
+                                                  "x-i18n": {
+                                                    "zh-CN": {
+                                                      "description": "用于接收通知的项目角色列表。"
+                                                    }
+                                                  },
+                                                  "items": {
+                                                    "type": "string",
+                                                    "description": "A project role to receive the alert notification.",
+                                                    "x-i18n": {
+                                                      "zh-CN": {
+                                                        "description": "用于接收通知的项目角色。"
+                                                      }
+                                                    },
+                                                    "enum": [
+                                                      "OWNER",
+                                                      "MEMBER"
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "type": "string",
+                                              "description": "The URL to which the alert notification should be sent. This applies only when the action type is WEBHOOK.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "告警通知应发送到的 URL。仅当操作类型为 WEBHOOK 时适用。"
+                                                }
+                                              }
+                                            },
+                                            "webhookUrl": {
+                                              "type": "string",
+                                              "description": "The URL to which the alert notification should be sent. This applies only when the action type is SLACK, LARK, and WECOM.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "告警通知应发送到的 URL。仅当操作类型为 SLACK、LARK、WECOM 时适用。"
+                                                }
+                                              }
+                                            },
+                                            "region": {
+                                              "type": "string",
+                                              "description": "The region where your PagerDuty or OpsGenie service is located. This applies only when the action type is PAGERDUTY and OPSGENIE.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "您的 PagerDuty 或 OpsGenie 服务所在的区域。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                                }
+                                              }
+                                            },
+                                            "apiKey": {
+                                              "type": "string",
+                                              "description": "The API key for your PagerDuty or OpsGenie service. This applies only when the action type is PAGERDUTY and OPSGENIE.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "您的 PagerDuty 或 OpsGenie 服务的 API 密钥。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "comparisonMethod": {
+                                    "type": "string",
+                                    "description": "The comparison operator used in the alert rule.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "告警规则使用的比较运算符。"
+                                      }
+                                    },
+                                    "enum": [
+                                      "GREATER_THAN",
+                                      "EQUALS",
+                                      "LESS_THAN",
+                                      "GREATER_THAN_OR_EQUALS",
+                                      "LESS_THAN_OR_EQUALS"
+                                    ]
+                                  },
+                                  "targetInstanceIds": {
+                                    "type": "array",
+                                    "description": "The IDs of the clusters to which the alert rule applies.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "告警规则适用的集群 ID 列表。"
+                                      }
+                                    },
+                                    "items": {
+                                      "type": "string",
+                                      "description": "The ID of the cluster.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "集群 ID。"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "error",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "count": 1,
+                        "currentPage": 1,
+                        "pageSize": 10,
+                        "alertRules": [
+                          {
+                            "id": "12391290837zs09sad0d09123",
+                            "projectId": "proj-b44a39b0c51cf21791a841",
+                            "ruleName": "my alert name",
+                            "level": "CRITICAL|WARNING",
+                            "metricName": "REQUEST_LATENCY_SEARCH_P99",
+                            "threshold": "70",
+                            "windowSize": "10",
+                            "comparisonMethod": "GREATER_THAN",
+                            "enabled": true,
+                            "sendResolved": true,
+                            "actions": [
+                              {
+                                "type": "EMAIL",
+                                "config": {
+                                  "recipients": {
+                                    "members": [
+                                      "your-email@your-org.com"
+                                    ],
+                                    "orgRoles": [
+                                      "OWNER",
+                                      "MEMBER",
+                                      "BILLING_ADMIN"
+                                    ],
+                                    "projectRoles": [
+                                      "OWNER",
+                                      "MEMBER"
+                                    ]
+                                  }
+                                }
+                              },
+                              {
+                                "type": "SMS",
+                                "config": {
+                                  "recipients": {
+                                    "members": [
+                                      "your-email@your-org.com"
+                                    ],
+                                    "orgRoles": [
+                                      "OWNER",
+                                      "MEMBER",
+                                      "BILLING_ADMIN"
+                                    ],
+                                    "projectRoles": [
+                                      "OWNER",
+                                      "MEMBER"
+                                    ]
+                                  }
+                                }
+                              },
+                              {
+                                "type": "WEBHOOK",
+                                "config": {
+                                  "url": "https://xxxx"
+                                }
+                              },
+                              {
+                                "type": "SLACK",
+                                "config": {
+                                  "webhookUrl": "https://xxxx"
+                                }
+                              },
+                              {
+                                "type": "LARK",
+                                "config": {
+                                  "webhookUrl": "https://xxxx"
+                                }
+                              },
+                              {
+                                "type": "WECOM",
+                                "config": {
+                                  "webhookUrl": "https://xxxx"
+                                }
+                              },
+                              {
+                                "type": "PAGERDUTY",
+                                "config": {
+                                  "region": "US",
+                                  "apiKey": "..."
+                                }
+                              },
+                              {
+                                "type": "OPSGENIE",
+                                "config": {
+                                  "region": "US",
+                                  "apiKey": "..."
+                                }
+                              }
+                            ],
+                            "targetInstanceIds": [
+                              "in01-xxxxxxxxxxxx"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Alert Rule",
+        "deprecated": false,
+        "description": "Creates a new alert rule in the specified project. The current user should be a project admin.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建告警规则",
+            "description": "本接口在指定项目中创建新的告警规则。当前用户须为项目管理员。"
+          }
+        },
+        "tags": [
+          "Metrics & Alerts (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            },
+            "x-i18n-langs": [
+              "zh-CN"
+            ]
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "Use `application/json`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "使用 `application/json`。"
+              }
+            },
+            "required": false,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The details of the alert rule to create.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "string",
+                    "description": "The ID of the project to which the alert rule belongs.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则所属项目 ID。"
+                      }
+                    }
+                  },
+                  "ruleName": {
+                    "type": "string",
+                    "description": "The name of the alert rule.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则名称。"
+                      }
+                    }
+                  },
+                  "level": {
+                    "type": "string",
+                    "description": "The level of the alert rule.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则级别。"
+                      }
+                    },
+                    "enum": [
+                      "CRITICAL",
+                      "WARNING"
+                    ]
+                  },
+                  "metricName": {
+                    "type": "string",
+                    "description": "The name of the metric that the alert rule monitors.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则监控的指标名称。"
+                      }
+                    }
+                  },
+                  "threshold": {
+                    "type": "string",
+                    "description": "The threshold value of the alert rule.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则阈值。"
+                      }
+                    }
+                  },
+                  "windowSize": {
+                    "type": "string",
+                    "description": "The time window for the alert rule in minutes.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则的时间窗口，单位为分钟。"
+                      }
+                    }
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Indicates whether the alert rule is enabled.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则是否启用。"
+                      }
+                    }
+                  },
+                  "sendResolved": {
+                    "type": "boolean",
+                    "description": "Indicates whether to send notifications when the alert rule is resolved.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则是否发送已解决的通知。"
+                      }
+                    }
+                  },
+                  "actions": {
+                    "type": "array",
+                    "description": "The actions to take when the alert rule is triggered.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "触发告警规则时采取的操作列表。"
+                      }
+                    },
+                    "items": {
+                      "type": "object",
+                      "description": "An action to take when the alert rule is triggered.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "触发告警规则时采取的操作。"
+                        }
+                      },
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "description": "The type of the action.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "操作类型。"
+                            }
+                          },
+                          "enum": [
+                            "EMAIL",
+                            "SMS",
+                            "WEBHOOK",
+                            "SLACK",
+                            "LARK",
+                            "WECOM",
+                            "PAGERDUTY",
+                            "OPSGENIE"
+                          ]
+                        },
+                        "config": {
+                          "type": "object",
+                          "description": "The configuration for the action.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "操作配置。"
+                            }
+                          },
+                          "properties": {
+                            "recipients": {
+                              "type": "object",
+                              "description": "The recipients of the alert notification. This applies only when the action type is EMAIL and SMS.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警通知的接收者。仅当操作类型为 EMAIL 和 SMS 时适用。"
+                                }
+                              },
+                              "properties": {
+                                "members": {
+                                  "type": "array",
+                                  "description": "A list of email addresses to receive the alert notification.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "用于接收通知的邮件地址列表。"
+                                    }
+                                  },
+                                  "items": {
+                                    "type": "string",
+                                    "description": "An email address to receive the alert notification.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "用于接收通知的邮件地址。"
+                                      }
+                                    }
+                                  }
+                                },
+                                "orgRoles": {
+                                  "type": "array",
+                                  "description": "A list of organization roles to receive the alert notification.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "用于接收通知的组织角色列表。"
+                                    }
+                                  },
+                                  "items": {
+                                    "type": "string",
+                                    "description": "An organization role to receive the alert notification.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "用于接收通知的组织角色。"
+                                      }
+                                    },
+                                    "enum": [
+                                      "OWNER",
+                                      "MEMBER",
+                                      "BILLING_ADMIN"
+                                    ]
+                                  }
+                                },
+                                "projectRoles": {
+                                  "type": "array",
+                                  "description": "A list of project roles to receive the alert notification.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "用于接收通知的项目角色列表。"
+                                    }
+                                  },
+                                  "items": {
+                                    "type": "string",
+                                    "description": "A project role to receive the alert notification.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "用于接收通知的项目角色。"
+                                      }
+                                    },
+                                    "enum": [
+                                      "OWNER",
+                                      "MEMBER"
+                                    ]
+                                  }
+                                }
+                              }
+                            },
+                            "url": {
+                              "type": "string",
+                              "description": "The URL to which the alert notification should be sent. This applies only when the action type is WEBHOOK.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警通知应发送到的 URL。仅当操作类型为 WEBHOOK 时适用。"
+                                }
+                              }
+                            },
+                            "webhookUrl": {
+                              "type": "string",
+                              "description": "The URL to which the alert notification should be sent. This applies only when the action type is SLACK, LARK, and WECOM.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警通知应发送到的 URL。仅当操作类型为 SLACK、LARK、WECOM 时适用。"
+                                }
+                              }
+                            },
+                            "region": {
+                              "type": "string",
+                              "description": "The region where your PagerDuty or OpsGenie service is located. This applies only when the action type is PAGERDUTY and OPSGENIE.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "您的 PagerDuty 或 OpsGenie 服务所在的区域。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                }
+                              }
+                            },
+                            "apiKey": {
+                              "type": "string",
+                              "description": "The API key for your PagerDuty or OpsGenie service. This applies only when the action type is PAGERDUTY and OPSGENIE.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "您的 PagerDuty 或 OpsGenie 服务的 API 密钥。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "config"
+                      ]
+                    }
+                  },
+                  "comparisonMethod": {
+                    "type": "string",
+                    "description": "The comparison operator used in the alert rule.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则使用的比较运算符。"
+                      }
+                    },
+                    "enum": [
+                      "GREATER_THAN",
+                      "EQUALS",
+                      "LESS_THAN",
+                      "GREATER_THAN_OR_EQUALS",
+                      "LESS_THAN_OR_EQUALS"
+                    ]
+                  },
+                  "targetInstanceIds": {
+                    "type": "array",
+                    "description": "The IDs of the clusters to which the alert rule applies.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则适用的集群 ID 列表。"
+                      }
+                    },
+                    "items": {
+                      "type": "string",
+                      "description": "The ID of the cluster.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "集群 ID。"
+                        }
+                      }
+                    }
+                  },
+                  "metricUnit": {
+                    "type": "string",
+                    "description": "The unit of the metric (e.g., \"bytes\", \"percent\").",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "指标单位（如 \"bytes\"、\"percent\"）。"
+                      }
+                    }
+                  },
+                  "repeatIntervalSeconds": {
+                    "type": "integer",
+                    "description": "The interval in seconds between repeated alert notifications.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "重复告警通知的间隔时间（秒）。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "projectId",
+                  "ruleName",
+                  "level",
+                  "metricName",
+                  "enabled",
+                  "sendResolved",
+                  "actions"
+                ],
+                "example": {
+                  "projectId": "proj-b44a39b0c51cf21791a841",
+                  "ruleName": "my alert name",
+                  "level": "CRITICAL",
+                  "metricName": "REQUEST_LATENCY_SEARCH_P99",
+                  "threshold": "70",
+                  "windowSize": "10",
+                  "comparisonMethod": "GREATER_THAN",
+                  "targetClusterIds": [
+                    "in01-xxxxxxxxxxxx"
+                  ],
+                  "enabled": true,
+                  "sendResolved": true,
+                  "actions": [
+                    {
+                      "type": "EMAIL",
+                      "config": {
+                        "recipients": {
+                          "members": [
+                            "your-email@your-org.com"
+                          ],
+                          "orgRoles": [
+                            "OWNER",
+                            "MEMBER",
+                            "BILLING_ADMIN"
+                          ],
+                          "projectRoles": [
+                            "OWNER",
+                            "MEMBER"
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "SMS",
+                      "config": {
+                        "recipients": {
+                          "members": [
+                            "your-email@your-org.com"
+                          ],
+                          "orgRoles": [
+                            "OWNER",
+                            "MEMBER",
+                            "BILLING_ADMIN"
+                          ],
+                          "projectRoles": [
+                            "OWNER",
+                            "MEMBER"
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "WEBHOOK",
+                      "config": {
+                        "url": "https://xxxx"
+                      }
+                    },
+                    {
+                      "type": "SLACK",
+                      "config": {
+                        "webhookUrl": "https://xxxx"
+                      }
+                    },
+                    {
+                      "type": "LARK",
+                      "config": {
+                        "webhookUrl": "https://xxxx"
+                      }
+                    },
+                    {
+                      "type": "WECOM",
+                      "config": {
+                        "webhookUrl": "https://xxxx"
+                      }
+                    },
+                    {
+                      "type": "PAGERDUTY",
+                      "config": {
+                        "region": "US",
+                        "apiKey": "..."
+                      }
+                    },
+                    {
+                      "type": "OPSGENIE",
+                      "config": {
+                        "region": "US",
+                        "apiKey": "..."
+                      }
+                    }
+                  ]
+                }
+              },
+              "example": {
+                "id": "12391290837zs09sad0d09123",
+                "projectId": "proj-b44a39b0c51cf21791a841",
+                "ruleName": "my alert name",
+                "level": "CRITICAL",
+                "metricName": "REQUEST_LATENCY_SEARCH_P99",
+                "threshold": "70",
+                "windowSize": "10",
+                "targetClusterIds": [
+                  "in01-xxxxxxxxxxxx"
+                ],
+                "enabled": true,
+                "sendResolved": true,
+                "actions": [
+                  {
+                    "type": "EMAIL",
+                    "config": {
+                      "recipients": {
+                        "members": [
+                          "your-email@your-org.com"
+                        ],
+                        "orgRoles": [
+                          "OWNER",
+                          "MEMBER",
+                          "BILLING_ADMIN"
+                        ],
+                        "projectRoles": [
+                          "OWNER",
+                          "MEMBER"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "type": "SMS",
+                    "config": {
+                      "recipients": {
+                        "members": [
+                          "your-email@your-org.com"
+                        ],
+                        "orgRoles": [
+                          "OWNER",
+                          "MEMBER",
+                          "BILLING_ADMIN"
+                        ],
+                        "projectRoles": [
+                          "OWNER",
+                          "MEMBER"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "type": "WEBHOOK",
+                    "config": {
+                      "url": "https://xxxx"
+                    }
+                  },
+                  {
+                    "type": "SLACK",
+                    "config": {
+                      "webhookUrl": "https://xxxx"
+                    }
+                  },
+                  {
+                    "type": "LARK",
+                    "config": {
+                      "webhookUrl": "https://xxxx"
+                    }
+                  },
+                  {
+                    "type": "WECOM",
+                    "config": {
+                      "webhookUrl": "https://xxxx"
+                    }
+                  },
+                  {
+                    "type": "PAGERDUTY",
+                    "config": {
+                      "region": "US",
+                      "apiKey": "..."
+                    }
+                  },
+                  {
+                    "type": "OPSGENIE",
+                    "config": {
+                      "region": "US",
+                      "apiKey": "..."
+                    }
+                  }
+                ],
+                "comparisonMethod": "GREATER_THAN"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns a list of alert rules in the specified project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定项目的所有告警规则列表。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "Returns a list of alert rules.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回告警规则列表。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "The ID of the alert rule.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则 ID。"
+                                }
+                              }
+                            },
+                            "projectId": {
+                              "type": "string",
+                              "description": "The ID of the project to which the alert rule belongs.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则所属项目 ID。"
+                                }
+                              }
+                            },
+                            "ruleName": {
+                              "type": "string",
+                              "description": "The name of the alert rule.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则名称。"
+                                }
+                              }
+                            },
+                            "level": {
+                              "type": "string",
+                              "description": "The level of the alert rule.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则级别。"
+                                }
+                              },
+                              "enum": [
+                                "CRITICAL",
+                                "WARNING"
+                              ]
+                            },
+                            "metricName": {
+                              "type": "string",
+                              "description": "The name of the metric that the alert rule monitors.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则监控的指标名称。"
+                                }
+                              }
+                            },
+                            "threshold": {
+                              "type": "string",
+                              "description": "The threshold value of the alert rule.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则阈值。"
+                                }
+                              }
+                            },
+                            "windowSize": {
+                              "type": "string",
+                              "description": "The time window for the alert rule in minutes.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则的时间窗口，单位为分钟。"
+                                }
+                              }
+                            },
+                            "enabled": {
+                              "type": "boolean",
+                              "description": "Indicates whether the alert rule is enabled.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则是否启用。"
+                                }
+                              }
+                            },
+                            "sendResolved": {
+                              "type": "boolean",
+                              "description": "Indicates whether to send notifications when the alert rule is resolved.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则是否发送已解决的通知。"
+                                }
+                              }
+                            },
+                            "actions": {
+                              "type": "array",
+                              "description": "The actions to take when the alert rule is triggered.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "触发告警规则时采取的操作列表。"
+                                }
+                              },
+                              "items": {
+                                "type": "object",
+                                "description": "An action to take when the alert rule is triggered.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "触发告警规则时采取的操作。"
+                                  }
+                                },
+                                "properties": {
+                                  "type": {
+                                    "type": "string",
+                                    "description": "The type of the action.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "操作类型。"
+                                      }
+                                    },
+                                    "enum": [
+                                      "EMAIL",
+                                      "SMS",
+                                      "WEBHOOK",
+                                      "SLACK",
+                                      "LARK",
+                                      "WECOM",
+                                      "PAGERDUTY",
+                                      "OPSGENIE"
+                                    ]
+                                  },
+                                  "config": {
+                                    "type": "object",
+                                    "description": "The configuration for the action.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "操作配置。"
+                                      }
+                                    },
+                                    "properties": {
+                                      "recipients": {
+                                        "type": "object",
+                                        "description": "The recipients of the alert notification. This applies only when the action type is EMAIL and SMS.",
+                                        "x-i18n": {
+                                          "zh-CN": {
+                                            "description": "告警通知的接收者。仅当操作类型为 EMAIL 和 SMS 时适用。"
+                                          }
+                                        },
+                                        "properties": {
+                                          "members": {
+                                            "type": "array",
+                                            "description": "A list of email addresses to receive the alert notification.",
+                                            "x-i18n": {
+                                              "zh-CN": {
+                                                "description": "用于接收通知的邮件地址列表。"
+                                              }
+                                            },
+                                            "items": {
+                                              "type": "string",
+                                              "description": "An email address to receive the alert notification.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "用于接收通知的邮件地址。"
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "orgRoles": {
+                                            "type": "array",
+                                            "description": "A list of organization roles to receive the alert notification.",
+                                            "x-i18n": {
+                                              "zh-CN": {
+                                                "description": "用于接收通知的组织角色列表。"
+                                              }
+                                            },
+                                            "items": {
+                                              "type": "string",
+                                              "description": "An organization role to receive the alert notification.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "用于接收通知的组织角色。"
+                                                }
+                                              },
+                                              "enum": [
+                                                "OWNER",
+                                                "MEMBER",
+                                                "BILLING_ADMIN"
+                                              ]
+                                            }
+                                          },
+                                          "projectRoles": {
+                                            "type": "array",
+                                            "description": "A list of project roles to receive the alert notification.",
+                                            "x-i18n": {
+                                              "zh-CN": {
+                                                "description": "用于接收通知的项目角色列表。"
+                                              }
+                                            },
+                                            "items": {
+                                              "type": "string",
+                                              "description": "A project role to receive the alert notification.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "用于接收通知的项目角色。"
+                                                }
+                                              },
+                                              "enum": [
+                                                "OWNER",
+                                                "MEMBER"
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "url": {
+                                        "type": "string",
+                                        "description": "The URL to which the alert notification should be sent. This applies only when the action type is WEBHOOK.",
+                                        "x-i18n": {
+                                          "zh-CN": {
+                                            "description": "告警通知应发送到的 URL。仅当操作类型为 WEBHOOK 时适用。"
+                                          }
+                                        }
+                                      },
+                                      "webhookUrl": {
+                                        "type": "string",
+                                        "description": "The URL to which the alert notification should be sent. This applies only when the action type is SLACK, LARK, and WECOM.",
+                                        "x-i18n": {
+                                          "zh-CN": {
+                                            "description": "告警通知应发送到的 URL。仅当操作类型为 SLACK、LARK、WECOM 时适用。"
+                                          }
+                                        }
+                                      },
+                                      "region": {
+                                        "type": "string",
+                                        "description": "The region where your PagerDuty or OpsGenie service is located. This applies only when the action type is PAGERDUTY and OPSGENIE.",
+                                        "x-i18n": {
+                                          "zh-CN": {
+                                            "description": "您的 PagerDuty 或 OpsGenie 服务所在的区域。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                          }
+                                        }
+                                      },
+                                      "apiKey": {
+                                        "type": "string",
+                                        "description": "The API key for your PagerDuty or OpsGenie service. This applies only when the action type is PAGERDUTY and OPSGENIE.",
+                                        "x-i18n": {
+                                          "zh-CN": {
+                                            "description": "您的 PagerDuty 或 OpsGenie 服务的 API 密钥。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "comparisonMethod": {
+                              "type": "string",
+                              "description": "The comparison operator used in the alert rule.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则使用的比较运算符。"
+                                }
+                              },
+                              "enum": [
+                                "GREATER_THAN",
+                                "EQUALS",
+                                "LESS_THAN",
+                                "GREATER_THAN_OR_EQUALS",
+                                "LESS_THAN_OR_EQUALS"
+                              ]
+                            },
+                            "targetInstanceIds": {
+                              "type": "array",
+                              "description": "The IDs of the clusters to which the alert rule applies.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则适用的集群 ID 列表。"
+                                }
+                              },
+                              "items": {
+                                "type": "string",
+                                "description": "The ID of the cluster.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "集群 ID。"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "error",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "id": "12391290837zs09sad0d09123",
+                        "projectId": "proj-b44a39b0c51cf21791a841",
+                        "ruleName": "my alert name",
+                        "level": "CRITICAL",
+                        "metricName": "REQUEST_LATENCY_SEARCH_P99",
+                        "threshold": "70",
+                        "windowSize": "10",
+                        "enabled": true,
+                        "sendResolved": true,
+                        "actions": [
+                          {
+                            "type": "EMAIL",
+                            "config": {
+                              "recipients": {
+                                "members": [
+                                  "your-email@your-org.com"
+                                ],
+                                "orgRoles": [
+                                  "OWNER",
+                                  "MEMBER",
+                                  "BILLING_ADMIN"
+                                ],
+                                "projectRoles": [
+                                  "OWNER",
+                                  "MEMBER"
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "type": "SMS",
+                            "config": {
+                              "recipients": {
+                                "members": [
+                                  "your-email@your-org.com"
+                                ],
+                                "orgRoles": [
+                                  "OWNER",
+                                  "MEMBER",
+                                  "BILLING_ADMIN"
+                                ],
+                                "projectRoles": [
+                                  "OWNER",
+                                  "MEMBER"
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "type": "WEBHOOK",
+                            "config": {
+                              "url": "https://xxxx"
+                            }
+                          },
+                          {
+                            "type": "SLACK",
+                            "config": {
+                              "webhookUrl": "https://xxxx"
+                            }
+                          },
+                          {
+                            "type": "LARK",
+                            "config": {
+                              "webhookUrl": "https://xxxx"
+                            }
+                          },
+                          {
+                            "type": "WECOM",
+                            "config": {
+                              "webhookUrl": "https://xxxx"
+                            }
+                          },
+                          {
+                            "type": "PAGERDUTY",
+                            "config": {
+                              "region": "US",
+                              "apiKey": "..."
+                            }
+                          },
+                          {
+                            "type": "OPSGENIE",
+                            "config": {
+                              "region": "US",
+                              "apiKey": "..."
+                            }
+                          }
+                        ],
+                        "comparisonMethod": "GREATER_THAN",
+                        "targetInstanceIds": [
+                          "in01-xxxxxxxxxxxx"
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/alertRules/{ALERT_RULE_ID}": {
+      "put": {
+        "summary": "Update Alert Rule",
+        "deprecated": false,
+        "description": "Updates an existing alert rule by its ID. The current user should be a project admin.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "更新告警规则",
+            "description": "本接口通过 ID 更新现有的告警规则。当前用户须为项目管理员。"
+          }
+        },
+        "tags": [
+          "Metrics & Alerts (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            },
+            "x-i18n-langs": [
+              "zh-CN"
+            ]
+          },
+          {
+            "name": "ALERT_RULE_ID",
+            "in": "path",
+            "description": "The ID of the alert rule to update.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "要更新的告警规则 ID。"
+              }
+            },
+            "example": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          }
+        ],
+        "requestBody": {
+          "description": "The details of the alert rule to update. You need to provide the entire rule object, not just the fields to update.",
+          "x-i18n": {
+            "zh-CN": {
+              "description": "要更新的告警规则详细信息。您需要提供更新后的整个规则对象，而不仅仅是要更新的字段。"
+            }
+          },
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ruleName": {
+                    "type": "string",
+                    "description": "The name of the alert rule.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则名称。"
+                      }
+                    }
+                  },
+                  "level": {
+                    "type": "string",
+                    "description": "The level of the alert rule.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则级别。"
+                      }
+                    },
+                    "enum": [
+                      "CRITICAL",
+                      "WARNING"
+                    ]
+                  },
+                  "metricName": {
+                    "type": "string",
+                    "description": "The name of the metric that the alert rule monitors.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则监控的指标名称。"
+                      }
+                    }
+                  },
+                  "threshold": {
+                    "type": "string",
+                    "description": "The threshold value of the alert rule.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则阈值。"
+                      }
+                    }
+                  },
+                  "windowSize": {
+                    "type": "string",
+                    "description": "The time window for the alert rule in minutes.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则的时间窗口，单位为分钟。"
+                      }
+                    }
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Indicates whether the alert rule is enabled.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则是否启用。"
+                      }
+                    }
+                  },
+                  "sendResolved": {
+                    "type": "boolean",
+                    "description": "Indicates whether to send notifications when the alert rule is resolved.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则是否发送已解决的通知。"
+                      }
+                    }
+                  },
+                  "actions": {
+                    "type": "array",
+                    "description": "The actions to take when the alert rule is triggered.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "触发告警规则时采取的操作列表。"
+                      }
+                    },
+                    "items": {
+                      "type": "object",
+                      "description": "An action to take when the alert rule is triggered.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "触发告警规则时采取的操作。"
+                        }
+                      },
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "description": "The type of the action.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "操作类型。"
+                            }
+                          },
+                          "enum": [
+                            "EMAIL",
+                            "SMS",
+                            "WEBHOOK",
+                            "SLACK",
+                            "LARK",
+                            "WECOM",
+                            "PAGERDUTY",
+                            "OPSGENIE"
+                          ]
+                        },
+                        "config": {
+                          "type": "object",
+                          "description": "The configuration for the action.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "操作配置。"
+                            }
+                          },
+                          "properties": {
+                            "recipients": {
+                              "type": "object",
+                              "description": "The recipients of the alert notification. This applies only when the action type is EMAIL and SMS.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警通知的接收者。仅当操作类型为 EMAIL 和 SMS 时适用。"
+                                }
+                              },
+                              "properties": {
+                                "members": {
+                                  "type": "array",
+                                  "description": "A list of email addresses to receive the alert notification.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "用于接收通知的邮件地址列表。"
+                                    }
+                                  },
+                                  "items": {
+                                    "type": "string",
+                                    "description": "An email address to receive the alert notification.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "用于接收通知的邮件地址。"
+                                      }
+                                    }
+                                  }
+                                },
+                                "orgRoles": {
+                                  "type": "array",
+                                  "description": "A list of organization roles to receive the alert notification.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "用于接收通知的组织角色列表。"
+                                    }
+                                  },
+                                  "items": {
+                                    "type": "string",
+                                    "description": "An organization role to receive the alert notification.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "用于接收通知的组织角色。"
+                                      }
+                                    },
+                                    "enum": [
+                                      "OWNER",
+                                      "MEMBER",
+                                      "BILLING_ADMIN"
+                                    ]
+                                  }
+                                },
+                                "projectRoles": {
+                                  "type": "array",
+                                  "description": "A list of project roles to receive the alert notification.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "用于接收通知的项目角色列表。"
+                                    }
+                                  },
+                                  "items": {
+                                    "type": "string",
+                                    "description": "A project role to receive the alert notification.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "用于接收通知的项目角色。"
+                                      }
+                                    },
+                                    "enum": [
+                                      "OWNER",
+                                      "MEMBER"
+                                    ]
+                                  }
+                                }
+                              }
+                            },
+                            "url": {
+                              "type": "string",
+                              "description": "The URL to which the alert notification should be sent. This applies only when the action type is WEBHOOK.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警通知应发送到的 URL。仅当操作类型为 WEBHOOK 时适用。"
+                                }
+                              }
+                            },
+                            "webhookUrl": {
+                              "type": "string",
+                              "description": "The URL to which the alert notification should be sent. This applies only when the action type is SLACK, LARK, and WECOM.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警通知应发送到的 URL。仅当操作类型为 SLACK、LARK、WECOM 时适用。"
+                                }
+                              }
+                            },
+                            "region": {
+                              "type": "string",
+                              "description": "The region where your PagerDuty or OpsGenie service is located. This applies only when the action type is PAGERDUTY and OPSGENIE.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "您的 PagerDuty 或 OpsGenie 服务所在的区域。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                }
+                              }
+                            },
+                            "apiKey": {
+                              "type": "string",
+                              "description": "The API key for your PagerDuty or OpsGenie service. This applies only when the action type is PAGERDUTY and OPSGENIE.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "您的 PagerDuty 或 OpsGenie 服务的 API 密钥。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "config"
+                      ]
+                    }
+                  },
+                  "comparisonMethod": {
+                    "type": "string",
+                    "description": "The comparison operator used in the alert rule.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则使用的比较运算符。"
+                      }
+                    },
+                    "enum": [
+                      "GREATER_THAN",
+                      "EQUALS",
+                      "LESS_THAN",
+                      "GREATER_THAN_OR_EQUALS",
+                      "LESS_THAN_OR_EQUALS"
+                    ]
+                  },
+                  "targetInstanceIds": {
+                    "type": "array",
+                    "description": "The IDs of the clusters to which the alert rule applies.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "告警规则适用的集群 ID 列表。"
+                      }
+                    },
+                    "items": {
+                      "type": "string",
+                      "description": "The ID of the cluster.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "集群 ID。"
+                        }
+                      }
+                    }
+                  },
+                  "metricUnit": {
+                    "type": "string",
+                    "description": "The unit of the metric (e.g., \"bytes\", \"percent\").",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "指标单位（如 \"bytes\"、\"percent\"）。"
+                      }
+                    }
+                  },
+                  "repeatIntervalSeconds": {
+                    "type": "integer",
+                    "description": "The interval in seconds between repeated alert notifications.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "重复告警通知的间隔时间（秒）。"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "projectId": "proj-b44a39b0c51cf21791a841",
+                  "ruleName": "my alert name",
+                  "level": "CRITICAL",
+                  "metricName": "REQUEST_LATENCY_SEARCH_P99",
+                  "threshold": "70",
+                  "windowSize": "10",
+                  "comparisonMethod": "GREATER_THAN",
+                  "targetClusterIds": [
+                    "in01-xxxxxxxxxxxx"
+                  ],
+                  "enabled": true,
+                  "sendResolved": true,
+                  "actions": [
+                    {
+                      "type": "EMAIL",
+                      "config": {
+                        "recipients": {
+                          "members": [
+                            "your-email@your-org.com"
+                          ],
+                          "orgRoles": [
+                            "OWNER",
+                            "MEMBER",
+                            "BILLING_ADMIN"
+                          ],
+                          "projectRoles": [
+                            "OWNER",
+                            "MEMBER"
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "SMS",
+                      "config": {
+                        "recipients": {
+                          "members": [
+                            "your-email@your-org.com"
+                          ],
+                          "orgRoles": [
+                            "OWNER",
+                            "MEMBER",
+                            "BILLING_ADMIN"
+                          ],
+                          "projectRoles": [
+                            "OWNER",
+                            "MEMBER"
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "WEBHOOK",
+                      "config": {
+                        "url": "https://xxxx"
+                      }
+                    },
+                    {
+                      "type": "SLACK",
+                      "config": {
+                        "webhookUrl": "https://xxxx"
+                      }
+                    },
+                    {
+                      "type": "LARK",
+                      "config": {
+                        "webhookUrl": "https://xxxx"
+                      }
+                    },
+                    {
+                      "type": "WECOM",
+                      "config": {
+                        "webhookUrl": "https://xxxx"
+                      }
+                    },
+                    {
+                      "type": "PAGERDUTY",
+                      "config": {
+                        "region": "US",
+                        "apiKey": "..."
+                      }
+                    },
+                    {
+                      "type": "OPSGENIE",
+                      "config": {
+                        "region": "US",
+                        "apiKey": "..."
+                      }
+                    }
+                  ]
+                }
+              },
+              "example": {
+                "id": "12391290837zs09sad0d09123",
+                "projectId": "proj-b44a39b0c51cf21791a841",
+                "ruleName": "my alert name",
+                "level": "CRITICAL",
+                "metricName": "REQUEST_LATENCY_SEARCH_P99",
+                "threshold": "70",
+                "windowSize": "10",
+                "targetClusterIds": [
+                  "in01-xxxxxxxxxxxx"
+                ],
+                "enabled": true,
+                "sendResolved": true,
+                "actions": [
+                  {
+                    "type": "EMAIL",
+                    "config": {
+                      "recipients": {
+                        "members": [
+                          "your-email@your-org.com"
+                        ],
+                        "orgRoles": [
+                          "OWNER",
+                          "MEMBER",
+                          "BILLING_ADMIN"
+                        ],
+                        "projectRoles": [
+                          "OWNER",
+                          "MEMBER"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "type": "SMS",
+                    "config": {
+                      "recipients": {
+                        "members": [
+                          "your-email@your-org.com"
+                        ],
+                        "orgRoles": [
+                          "OWNER",
+                          "MEMBER",
+                          "BILLING_ADMIN"
+                        ],
+                        "projectRoles": [
+                          "OWNER",
+                          "MEMBER"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "type": "WEBHOOK",
+                    "config": {
+                      "url": "https://xxxx"
+                    }
+                  },
+                  {
+                    "type": "SLACK",
+                    "config": {
+                      "webhookUrl": "https://xxxx"
+                    }
+                  },
+                  {
+                    "type": "LARK",
+                    "config": {
+                      "webhookUrl": "https://xxxx"
+                    }
+                  },
+                  {
+                    "type": "WECOM",
+                    "config": {
+                      "webhookUrl": "https://xxxx"
+                    }
+                  },
+                  {
+                    "type": "PAGERDUTY",
+                    "config": {
+                      "region": "US",
+                      "apiKey": "..."
+                    }
+                  },
+                  {
+                    "type": "OPSGENIE",
+                    "config": {
+                      "region": "US",
+                      "apiKey": "..."
+                    }
+                  }
+                ],
+                "comparisonMethod": "GREATER_THAN"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns a list of alert rules in the specified project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定项目的所有告警规则列表。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "Returns a list of alert rules.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回告警规则列表。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "The ID of the alert rule.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则 ID。"
+                                }
+                              }
+                            },
+                            "projectId": {
+                              "type": "string",
+                              "description": "The ID of the project to which the alert rule belongs.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则所属项目 ID。"
+                                }
+                              }
+                            },
+                            "ruleName": {
+                              "type": "string",
+                              "description": "The name of the alert rule.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则名称。"
+                                }
+                              }
+                            },
+                            "level": {
+                              "type": "string",
+                              "description": "The level of the alert rule.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则级别。"
+                                }
+                              },
+                              "enum": [
+                                "CRITICAL",
+                                "WARNING"
+                              ]
+                            },
+                            "metricName": {
+                              "type": "string",
+                              "description": "The name of the metric that the alert rule monitors.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则监控的指标名称。"
+                                }
+                              }
+                            },
+                            "threshold": {
+                              "type": "string",
+                              "description": "The threshold value of the alert rule.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则阈值。"
+                                }
+                              }
+                            },
+                            "windowSize": {
+                              "type": "string",
+                              "description": "The time window for the alert rule in minutes.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则的时间窗口，单位为分钟。"
+                                }
+                              }
+                            },
+                            "enabled": {
+                              "type": "boolean",
+                              "description": "Indicates whether the alert rule is enabled.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则是否启用。"
+                                }
+                              }
+                            },
+                            "sendResolved": {
+                              "type": "boolean",
+                              "description": "Indicates whether to send notifications when the alert rule is resolved.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则是否发送已解决的通知。"
+                                }
+                              }
+                            },
+                            "actions": {
+                              "type": "array",
+                              "description": "The actions to take when the alert rule is triggered.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "触发告警规则时采取的操作列表。"
+                                }
+                              },
+                              "items": {
+                                "type": "object",
+                                "description": "An action to take when the alert rule is triggered.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "触发告警规则时采取的操作。"
+                                  }
+                                },
+                                "properties": {
+                                  "type": {
+                                    "type": "string",
+                                    "description": "The type of the action.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "操作类型。"
+                                      }
+                                    },
+                                    "enum": [
+                                      "EMAIL",
+                                      "SMS",
+                                      "WEBHOOK",
+                                      "SLACK",
+                                      "LARK",
+                                      "WECOM",
+                                      "PAGERDUTY",
+                                      "OPSGENIE"
+                                    ]
+                                  },
+                                  "config": {
+                                    "type": "object",
+                                    "description": "The configuration for the action.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "操作配置。"
+                                      }
+                                    },
+                                    "properties": {
+                                      "recipients": {
+                                        "type": "object",
+                                        "description": "The recipients of the alert notification. This applies only when the action type is EMAIL and SMS.",
+                                        "x-i18n": {
+                                          "zh-CN": {
+                                            "description": "告警通知的接收者。仅当操作类型为 EMAIL 和 SMS 时适用。"
+                                          }
+                                        },
+                                        "properties": {
+                                          "members": {
+                                            "type": "array",
+                                            "description": "A list of email addresses to receive the alert notification.",
+                                            "x-i18n": {
+                                              "zh-CN": {
+                                                "description": "用于接收通知的邮件地址列表。"
+                                              }
+                                            },
+                                            "items": {
+                                              "type": "string",
+                                              "description": "An email address to receive the alert notification.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "用于接收通知的邮件地址。"
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "orgRoles": {
+                                            "type": "array",
+                                            "description": "A list of organization roles to receive the alert notification.",
+                                            "x-i18n": {
+                                              "zh-CN": {
+                                                "description": "用于接收通知的组织角色列表。"
+                                              }
+                                            },
+                                            "items": {
+                                              "type": "string",
+                                              "description": "An organization role to receive the alert notification.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "用于接收通知的组织角色。"
+                                                }
+                                              },
+                                              "enum": [
+                                                "OWNER",
+                                                "MEMBER",
+                                                "BILLING_ADMIN"
+                                              ]
+                                            }
+                                          },
+                                          "projectRoles": {
+                                            "type": "array",
+                                            "description": "A list of project roles to receive the alert notification.",
+                                            "x-i18n": {
+                                              "zh-CN": {
+                                                "description": "用于接收通知的项目角色列表。"
+                                              }
+                                            },
+                                            "items": {
+                                              "type": "string",
+                                              "description": "A project role to receive the alert notification.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "用于接收通知的项目角色。"
+                                                }
+                                              },
+                                              "enum": [
+                                                "OWNER",
+                                                "MEMBER"
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "url": {
+                                        "type": "string",
+                                        "description": "The URL to which the alert notification should be sent. This applies only when the action type is WEBHOOK.",
+                                        "x-i18n": {
+                                          "zh-CN": {
+                                            "description": "告警通知应发送到的 URL。仅当操作类型为 WEBHOOK 时适用。"
+                                          }
+                                        }
+                                      },
+                                      "webhookUrl": {
+                                        "type": "string",
+                                        "description": "The URL to which the alert notification should be sent. This applies only when the action type is SLACK, LARK, and WECOM.",
+                                        "x-i18n": {
+                                          "zh-CN": {
+                                            "description": "告警通知应发送到的 URL。仅当操作类型为 SLACK、LARK、WECOM 时适用。"
+                                          }
+                                        }
+                                      },
+                                      "region": {
+                                        "type": "string",
+                                        "description": "The region where your PagerDuty or OpsGenie service is located. This applies only when the action type is PAGERDUTY and OPSGENIE.",
+                                        "x-i18n": {
+                                          "zh-CN": {
+                                            "description": "您的 PagerDuty 或 OpsGenie 服务所在的区域。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                          }
+                                        }
+                                      },
+                                      "apiKey": {
+                                        "type": "string",
+                                        "description": "The API key for your PagerDuty or OpsGenie service. This applies only when the action type is PAGERDUTY and OPSGENIE.",
+                                        "x-i18n": {
+                                          "zh-CN": {
+                                            "description": "您的 PagerDuty 或 OpsGenie 服务的 API 密钥。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "comparisonMethod": {
+                              "type": "string",
+                              "description": "The comparison operator used in the alert rule.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则使用的比较运算符。"
+                                }
+                              },
+                              "enum": [
+                                "GREATER_THAN",
+                                "EQUALS",
+                                "LESS_THAN",
+                                "GREATER_THAN_OR_EQUALS",
+                                "LESS_THAN_OR_EQUALS"
+                              ]
+                            },
+                            "targetInstanceIds": {
+                              "type": "array",
+                              "description": "The IDs of the clusters to which the alert rule applies.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则适用的集群 ID 列表。"
+                                }
+                              },
+                              "items": {
+                                "type": "string",
+                                "description": "The ID of the cluster.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "集群 ID。"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "error",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "id": "12391290837zs09sad0d09123",
+                        "projectId": "proj-b44a39b0c51cf21791a841",
+                        "ruleName": "my alert name",
+                        "level": "CRITICAL",
+                        "metricName": "REQUEST_LATENCY_SEARCH_P99",
+                        "threshold": "70",
+                        "windowSize": "10",
+                        "enabled": true,
+                        "sendResolved": true,
+                        "actions": [
+                          {
+                            "type": "EMAIL",
+                            "config": {
+                              "recipients": {
+                                "members": [
+                                  "your-email@your-org.com"
+                                ],
+                                "orgRoles": [
+                                  "OWNER",
+                                  "MEMBER",
+                                  "BILLING_ADMIN"
+                                ],
+                                "projectRoles": [
+                                  "OWNER",
+                                  "MEMBER"
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "type": "SMS",
+                            "config": {
+                              "recipients": {
+                                "members": [
+                                  "your-email@your-org.com"
+                                ],
+                                "orgRoles": [
+                                  "OWNER",
+                                  "MEMBER",
+                                  "BILLING_ADMIN"
+                                ],
+                                "projectRoles": [
+                                  "OWNER",
+                                  "MEMBER"
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "type": "WEBHOOK",
+                            "config": {
+                              "url": "https://xxxx"
+                            }
+                          },
+                          {
+                            "type": "SLACK",
+                            "config": {
+                              "webhookUrl": "https://xxxx"
+                            }
+                          },
+                          {
+                            "type": "LARK",
+                            "config": {
+                              "webhookUrl": "https://xxxx"
+                            }
+                          },
+                          {
+                            "type": "WECOM",
+                            "config": {
+                              "webhookUrl": "https://xxxx"
+                            }
+                          },
+                          {
+                            "type": "PAGERDUTY",
+                            "config": {
+                              "region": "US",
+                              "apiKey": "..."
+                            }
+                          },
+                          {
+                            "type": "OPSGENIE",
+                            "config": {
+                              "region": "US",
+                              "apiKey": "..."
+                            }
+                          }
+                        ],
+                        "comparisonMethod": "GREATER_THAN",
+                        "targetInstanceIds": [
+                          "in01-xxxxxxxxxxxx"
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Alert Rule",
+        "deprecated": false,
+        "description": "Deletes an existing alert rule by its ID. The current user should be a project admin.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除告警规则",
+            "description": "本接口通过 ID 删除现有的告警规则。当前用户须为项目管理员。"
+          }
+        },
+        "tags": [
+          "Metrics & Alerts (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            },
+            "x-i18n-langs": [
+              "zh-CN"
+            ]
+          },
+          {
+            "name": "ALERT_RULE_ID",
+            "in": "path",
+            "description": "The ID of the alert rule to delete.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "要删除的告警规则 ID。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an empty response indicating that the alert rule has been successfully deleted.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回一个空响应，表示告警规则已成功删除。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "Returns an empty response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回一个空响应。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "error",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/clusters/{CLUSTER_ID}/metrics/query": {
+      "post": {
+        "summary": "Query Cluster Metrics",
+        "deprecated": false,
+        "description": "Query the metrics of a specific cluster.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查询集群指标",
+            "description": "本接口可以查询指定集群的统计指标。"
+          }
+        },
+        "tags": [
+          "Metrics & Alerts (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "ID of the target cluster.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "目标集群的 ID。"
+              }
+            },
+            "required": true,
+            "example": "inxx-xxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "start": {
+                    "type": "string",
+                    "description": "The starting date and time for the metric reporting period, expressed in ISO 8601 timestamp format in UTC. Include this parameter and `end` when the `period` parameter is not set.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "指标报告期间的起始日期和时间，以 UTC 时间格式的 ISO 8601 时间戳表示。当 `period` 参数未设置时，需同时包含 `start` 和 `end` 参数。"
+                      }
+                    }
+                  },
+                  "end": {
+                    "type": "string",
+                    "description": "The ending date and time for the metric reporting period, expressed in ISO 8601 timestamp format in UTC. Include this parameter and `start` when the `period` parameter is not set.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "指标报告期间的结束日期和时间，以 UTC 时间格式的 ISO 8601 时间戳表示。当 `period` 参数未设置时，需同时包含 `start` 和 `end` 参数。"
+                      }
+                    }
+                  },
+                  "period": {
+                    "type": "string",
+                    "description": "The duration over which Zilliz Cloud reports the metrics, expressed in ISO 8601 duration format in UTC. Include this parameter when both `start` and `end` parameters are not set.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Zilliz Cloud 向用户报告指标的持续时间，以 UTC 时间格式的 ISO 8601 持续时间表示。当 `start` 和 `end` 参数未设置时，需同时包含 `period` 参数。"
+                      }
+                    }
+                  },
+                  "granularity": {
+                    "type": "string",
+                    "description": "The time interval at which Zilliz Cloud reports the metrics, expressed in ISO 8601 duration format in UTC. The minimum granularity is PT30S.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Zilliz Cloud 向用户报告指标的时间间隔，以 UTC 时间格式的 ISO 8601 持续时间表示。最小粒度为 PT30S。"
+                      }
+                    }
+                  },
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the target database.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标 Database 名称。"
+                      }
+                    }
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the target collection.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标 Collection 名称。"
+                      }
+                    }
+                  },
+                  "metricQueries": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "Name of a metric. <br/>For possible values, refer to the enumerations. <br/>For details on these metrics, refer to [Metrics & Alerts Reference](/docs/metrics-alerts-reference).",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "指标名称。<br/>可选值请参考枚举。<br/>关于这些指标的详细信息，请参考[指标与告警参考](/docs/metrics-alerts-reference)章节。"
+                            }
+                          },
+                          "enum": [
+                            "CU_COMPUTATION",
+                            "CU_CAPACITY",
+                            "STORAGE_USE",
+                            "READ_VCU",
+                            "WRITE_VCU",
+                            "REQ_INSERT_COUNT",
+                            "REQ_BULK_INSERT_COUNT",
+                            "REQ_UPSERT_COUNT",
+                            "REQ_DELETE_COUNT",
+                            "REQ_SEARCH_COUNT",
+                            "REQ_QUERY_COUNT",
+                            "VECTOR_REQ_INSERT_COUNT",
+                            "VECTOR_REQ_BULK_INSERT_COUNT",
+                            "VECTOR_REQ_UPSERT_COUNT",
+                            "VECTOR_REQ_DELETE_COUNT",
+                            "VECTOR_REQ_SEARCH_COUNT",
+                            "REQ_INSERT_LATENCY_AVG",
+                            "REQ_INSERT_LATENCY_P99",
+                            "REQ_UPSERT_LATENCY_AVG",
+                            "REQ_UPSERT_LATENCY_P99",
+                            "REQ_DELETE_LATENCY_AVG",
+                            "REQ_DELETE_LATENCY_P99",
+                            "REQ_SEARCH_LATENCY_AVG",
+                            "REQ_SEARCH_LATENCY_P99",
+                            "REQ_QUERY_LATENCY_AVG",
+                            "REQ_QUERY_LATENCY_P99",
+                            "SLOW_QUERY_COUNT",
+                            "REQ_FAIL_RATE_INSERT",
+                            "REQ_FAIL_RATE_BULK_INSERT",
+                            "REQ_FAIL_RATE_UPSERT",
+                            "REQ_FAIL_RATE_DELETE",
+                            "REQ_FAIL_RATE_SEARCH",
+                            "REQ_FAIL_RATE_QUERY",
+                            "ENTITIES_LOADED",
+                            "ENTITIES_INDEXED",
+                            "ENTITIES_COUNT",
+                            "COLLECTIONS_COUNT",
+                            "CLUSTER_WRITE_CAPACITY",
+                            "UNLOADED_COLLECTIONS_COUNT",
+                            "FLUSH_COUNT"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "name"
+                      ],
+                      "description": "A **MetricQuery** object.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "一个 **MetricQuery** 对象。"
+                        }
+                      }
+                    },
+                    "description": "List of **MetricQuery** objects.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "一个 **MetricQuery** 对象列表。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "granularity",
+                  "metricQueries"
+                ]
+              },
+              "example": {
+                "start": "2024-06-30T16:09:53Z",
+                "end": "2024-07-01T16:09:53Z",
+                "granularity": "PT6H",
+                "metricQueries": [
+                  {
+                    "name": "CU_COMPUTATION"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return the collected statistics on the specified metric in detail.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定指标的相关统计信息。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "results": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "type": "string",
+                                    "description": "A metric name.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "指标名称。"
+                                      }
+                                    }
+                                  },
+                                  "unit": {
+                                    "type": "string",
+                                    "description": "Unit of the value in the statistics.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "统计值单位。"
+                                      }
+                                    }
+                                  },
+                                  "values": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "timestamp": {
+                                          "type": "string",
+                                          "description": "The timestamp for the data point in ISO 8601 format.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "ISO 8601 格式的数据点时间戳。"
+                                            }
+                                          }
+                                        },
+                                        "value": {
+                                          "type": "string",
+                                          "description": "The value of the metric at the given timestamp.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "给定时间戳的指标值。"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "description": "Statistics collected within an interval period.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "在采集周期内收集到的统计信息。"
+                                        }
+                                      }
+                                    },
+                                    "description": "List of collected statistics at an interval.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "在采集周期内收集到的统计信息列表。"
+                                      }
+                                    }
+                                  }
+                                },
+                                "description": "A set of collected statistics.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "采集到的统计信息。"
+                                  }
+                                }
+                              },
+                              "description": "List of collected statistics on the specified metric.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "对指定指标采集到的统计信息列表。"
+                                }
+                              }
+                            }
+                          },
+                          "description": "Response payload.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "results": [
+                          {
+                            "name": "CU_COMPUTATION",
+                            "unit": "percent",
+                            "values": [
+                              {
+                                "timestamp": "2024-06-30T16:09:53Z",
+                                "value": null
+                              },
+                              {
+                                "timestamp": "2024-06-30T22:09:53Z",
+                                "value": "1.00"
+                              },
+                              {
+                                "timestamp": "2024-07-01T04:09:53Z",
+                                "value": "1.00"
+                              },
+                              {
+                                "timestamp": "2024-07-01T10:09:53Z",
+                                "value": "1.00"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}
