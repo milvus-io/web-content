@@ -552,6 +552,7 @@ curl --request POST \
 --url "${PROJECT_ENDPOINT}/v2/vectordb/collections/create" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d "{
     \"dbName\": \"my_database\",
     \"collectionName\": \"test_collection\",
@@ -671,6 +672,7 @@ curl --request POST \
 --url "${PROJECT_ENDPOINT}/v2/vectordb/indexes/create" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d "{
     \"dbName\": \"my_database\",
     \"collectionName\": \"test_collection\",
@@ -763,6 +765,7 @@ curl --request POST \
 --url "${PROJECT_ENDPOINT}/v2/vectordb/jobs/external_collection/refresh" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d "{
     \"dbName\": \"my_database\",
     \"collectionName\": \"test_collection\",

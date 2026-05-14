@@ -588,6 +588,7 @@ await milvusClient.createCollection({
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/create" \
   -H "Content-Type: application/json" \
+  -H "Request-Timeout: 10" \
   -d "{
     \"collectionName\": \"my_collection\",
     \"description\": \"A collection for storing book information with struct array chunks\",
@@ -707,6 +708,7 @@ await milvusClient.insert({
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/entities/insert" \
   -H "Content-Type: application/json" \
+  -H "Request-Timeout: 10" \
   -d '{
     "collectionName": "my_collection",
     "data": [
@@ -913,6 +915,7 @@ embeddingList1='[[0.2,0.9,0.4,-0.3,0.2]]'
 embeddingList2='[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]'
 curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
   -H "Content-Type: application/json" \
+  -H "Request-Timeout: 10" \
   -d "{
     \"collectionName\": \"my_collection\",
     \"data\": [$embeddingList1],
@@ -1041,6 +1044,7 @@ const results2 = await milvusClient.search({
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
   -H "Content-Type: application/json" \
+  -H "Request-Timeout: 10" \
   -d "{
     \"collectionName\": \"my_collection\",
     \"data\": [$embeddingList1, $embeddingList2],

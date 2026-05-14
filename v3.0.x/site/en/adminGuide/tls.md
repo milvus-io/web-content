@@ -473,11 +473,17 @@ For RESTful APIs, you can check tls by using the `curl` command.
 ### One-way TLS connection
 
 ```bash
-curl --cacert path_to/ca.pem https://localhost:8080/v2/vectordb/collections/list
+curl --cacert path_to/ca.pem \
+  -H "Request-Timeout: 10" \
+  https://localhost:8080/v2/vectordb/collections/list
 ```
 
 ### Two-way TLS connection
 
 ```bash
-curl --cert path_to/client.pem --key path_to/client.key --cacert path_to/ca.pem https://localhost:8080/v2/vectordb/collections/list
+curl --cert path_to/client.pem \
+  --key path_to/client.key \
+  --cacert path_to/ca.pem \
+  -H "Request-Timeout: 10" \
+  https://localhost:8080/v2/vectordb/collections/list
 ```

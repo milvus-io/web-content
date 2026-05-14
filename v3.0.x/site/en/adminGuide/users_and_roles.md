@@ -110,6 +110,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/users/create" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "userName": "user_1",
     "password": "P@ssw0rd"
@@ -178,6 +179,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/users/update_password" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "newPassword": "P@ssw0rd!",
     "userName": "user_1",
@@ -224,6 +226,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/users/list" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{}'
 ```
 
@@ -287,6 +290,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/roles/create" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "roleName": "role_a"
 }'
@@ -333,6 +337,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/roles/list" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{}'
 ```
 
