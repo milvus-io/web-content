@@ -246,6 +246,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/upsert" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "data": [
         {"id": 0, "vector": [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], "title": "Artificial Intelligence in Real Life", "issue": "vol.12"},
@@ -397,6 +398,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/upsert" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "data": [
         {"id": 10, "vector": [0.06998888224297328, 0.8582816610326578, -0.9657938677934292, 0.6527905683627726, -0.8668460657158576], "title": "Layour Design Reference", "issue": "vol.34"},
@@ -547,6 +549,7 @@ export UPSERT_DATA='[
 
 curl -X POST "http://localhost:19530/v2/vectordb/entities/upsert" \
   -H "Content-Type: application/json" \
+  -H "Request-Timeout: 10" \
   -H "Authorization: Bearer ${TOKEN}" \
   -d "{
     \"collectionName\": \"${COLLECTION_NAME}\",

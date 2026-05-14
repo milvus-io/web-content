@@ -90,6 +90,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/databases/create" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "dbName": "my_database_1"
 }'
@@ -148,6 +149,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/databases/create" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "dbName": "my_database_2",
     "properties": {
@@ -223,6 +225,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/databases/describe" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "dbName": "default"
 }'
@@ -328,6 +331,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/databases/alter" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "dbName": "my_database",
     "properties": {
@@ -386,6 +390,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/databases/alter" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "dbName": "my_database",
     "propertyKeys": [
@@ -491,6 +496,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/databases/drop" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "dbName": "my_database"
 }'

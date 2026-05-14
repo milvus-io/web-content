@@ -250,6 +250,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 --data "{
   \"collectionName\": \"my_collection\",
   \"schema\": $schema
@@ -370,6 +371,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 --data '{
   "data": [
     {
@@ -806,6 +808,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 --data "{
   \"collectionName\": \"my_collection\",
   \"indexParams\": $indexParams
@@ -980,6 +983,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 --data "{
   \"collectionName\": \"my_collection\",
   \"data\": [

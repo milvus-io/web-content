@@ -110,6 +110,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/rename" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "collectionName": "my_collection",
     "newCollectionName": "my_new_collection"
@@ -215,6 +216,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/alter_properties" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "collectionName": "test_collection",
     "properties": {
@@ -277,6 +279,7 @@ if err != nil {
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
   -H "Content-Type: application/json" \
+  -H "Request-Timeout: 10" \
   -d '{
     "collectionName": "my_collection",
     "properties": {
@@ -339,6 +342,7 @@ if err != nil {
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
   -H "Content-Type: application/json" \
+  -H "Request-Timeout: 10" \
   -H "Authorization: Bearer <token>" \
   -d '{
     "collectionName": "my_collection",
@@ -402,6 +406,7 @@ if err != nil {
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
   -H "Content-Type: application/json" \
+  -H "Request-Timeout: 10" \
   -H "Authorization: Bearer <token>" \
   -d '{
     "collectionName": "my_collection",
@@ -467,6 +472,7 @@ if err != nil {
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
   -H "Content-Type: application/json" \
+  -H "Request-Timeout: 10" \
   -H "Authorization: Bearer <token>" \
   -d '{
     "collectionName": "my_collection",
@@ -528,6 +534,7 @@ if err != nil {
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
   -H "Content-Type: application/json" \
+  -H "Request-Timeout: 10" \
   -H "Authorization: Bearer <token>" \
   -d '{
     "collectionName": "my_collection",
@@ -585,6 +592,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/drop_properties" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "collectionName": "my_collection",
     "propertyKeys": [

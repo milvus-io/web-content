@@ -68,6 +68,7 @@ export HOST="localhost:19530"
 
 curl -X POST "http://${HOST}/v2/vectordb/collections/list" \
     -H "Content-Type: application/json" \
+    -H "Request-Timeout: 10" \
     -d '{}'
 ```
 
@@ -139,6 +140,7 @@ export TOKEN="root:Milvus"
 curl -X POST "http://${HOST}/v2/vectordb/collections/list" \
     -H "Authorization: Bearer ${TOKEN}" \
     -H "Content-Type: application/json" \
+    -H "Request-Timeout: 10" \
     -d '{}'
 ```
 
@@ -210,7 +212,7 @@ export TOKEN="root:Milvus"
 curl -X POST "http://${HOST}/v2/vectordb/collections/list" \
     -H "Authorization: Bearer ${TOKEN}" \
     -H "Content-Type: application/json" \
-    -H "Request-Timeout: 5" \
+    -H "Request-Timeout: 10" \
     --max-time 7 \
     -d '{}'
 ```
@@ -299,6 +301,7 @@ export TOKEN="root:Milvus"
 curl -X POST "http://${HOST}/v2/vectordb/collections/list" \
     -H "Authorization: Bearer ${TOKEN}" \
     -H "Content-Type: application/json" \
+    -H "Request-Timeout: 10" \
     -d '{
       "dbName": "analytics"
     }'
