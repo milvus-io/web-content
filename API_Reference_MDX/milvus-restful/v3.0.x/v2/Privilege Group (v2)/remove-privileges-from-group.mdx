@@ -1,0 +1,29 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 4
+slug: /restful/remove-privileges-from-group
+beta: FALSE
+title: "Remove Privileges from Group | RESTful"
+description: "This operation removes one or more privileges from a privilege group. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Remove Privileges from Group"
+sidebar_custom_props: { badges: ['post']}
+keywords: 
+  - zilliz cloud
+  - zilliz
+  - cloud
+  - "Remove Privileges from Group"
+  - "post"
+  - RESTful
+  - API
+---
+
+# Remove Privileges from Group
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="milvus" lang="en-US" />
+
+export const specs = {"summary":"Remove Privileges from Group","deprecated":false,"description":"This operation removes one or more privileges from a privilege group.","x-i18n":{"zh-CN":{"summary":"从权限组移除权限","description":"本接口从权限组中移除一个或多个权限。"}},"tags":["Privilege Group Operations (V2)"],"parameters":[{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`. If you are using a project endpoint, only a valid API key with sufficient permissions applies.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。如果您使用的是项目端点，则仅具备足够权限的有效 API 密钥适用。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"privilegeGroupName":{"type":"string","description":"The name of the privilege group.","x-i18n":{"zh-CN":{"description":"权限组名称。"}}},"privileges":{"type":"array","items":{"type":"string"},"description":"A list of privilege names to remove from the group.","x-i18n":{"zh-CN":{"description":"待从权限组中移除的权限名称列表。"}}}},"required":["privilegeGroupName","privileges"]},"example":{"privilegeGroupName":"my_priv_group","privileges":["Delete"]}}}},"responses":{"200":{"description":"None","content":{"application/json":{"schema":{"anyOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"data":{"type":"object","properties":{}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":800,"message":"not enough permission"}}}}}}}}
+export const endpoint = "/v2/vectordb/privilege_groups/remove_privileges_from_group"
+export const method = "post"

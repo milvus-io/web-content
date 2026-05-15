@@ -40,6 +40,24 @@ curl --request POST \
     }'
 ```
 
+## Request Timeout
+
+You can set a `Request-Timeout` header for a request RESTful request to determine the timeout duration for it at the server side. For example, the following request has its request timeout set to 5, indicating that the request fails with HTTP 408 if no response is received 5 seconds after the request is sent.
+
+A proper request timeout may help your Zilliz Cloud clusters to release resources in time. In common cases, a timeout duration of 5 to 10 seconds suffices. However, you should set it based on your actual situations, such as network conditions and service payload.
+
+```shell
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:milvus"
+
+curl --request GET \
+    --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/list" \
+    --header "Authorization: Bearer ${TOKEN}" \
+    --header "Request-Timeout: 10"
+    --header "Content-Type: application/json" \
+    -d '{}'
+```
+
 ## API endpoint versioning
 
 Milvus offers two sets of API endpoints, namely v1 and v2. The v1 endpoints only covers collection and vector operations, while the v2 endpoints cover more operations such as index management, partition management, and role-based access control (RBAC) operations. The v1 endpoints are to be deprecated in the near future, and the v2 endpoints are the recommended ones to use.

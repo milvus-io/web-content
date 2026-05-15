@@ -6,6 +6,13 @@ const { program } = require('commander')
 
 const DEFAULT_CONFIG_PATH = path.resolve(__dirname, 'config.json')
 const DEFAULT_SPAWN_CWD = path.resolve(__dirname, '..')
+const PLANE_DIRS = ['data-plane', 'control-plane']
+const VERSION_DIRS = ['v1', 'v2']
+const LEGACY_MILVUS_RENAMES = {
+    'import-operations': 'Import',
+    'import.mdx': 'Import.mdx',
+    'get-import-progress.mdx': 'Get Progress.mdx',
+}
 
 function resolveRestfulOptions({ config, entryName, cli }) {
     const apifoxConfig = config?.apifox
@@ -75,6 +82,118 @@ function defaultEntryName(config) {
     return keys[0]
 }
 
+function movePath(sourcePath, targetPath) {
+    if (sourcePath === targetPath) {
+        return
+    }
+
+    const sourceStats = fs.statSync(sourcePath)
+
+    if (sourceStats.isDirectory()) {
+        if (!fs.existsSync(targetPath)) {
+            fs.renameSync(sourcePath, targetPath)
+            return
+        }
+
+        for (const name of fs.readdirSync(sourcePath)) {
+            movePath(path.join(sourcePath, name), path.join(targetPath, name))
+        }
+        fs.rmSync(sourcePath, { recursive: true, force: true })
+        return
+    }
+
+    if (sourcePath.toLowerCase() === targetPath.toLowerCase()) {
+        const tempPath = `${sourcePath}.__rename_tmp__`
+        fs.renameSync(sourcePath, tempPath)
+        fs.renameSync(tempPath, targetPath)
+        return
+    }
+
+    if (fs.existsSync(targetPath)) {
+        fs.rmSync(targetPath, { force: true })
+    }
+    fs.renameSync(sourcePath, targetPath)
+}
+
+function flattenPlaneDirs(versionPath) {
+    for (const planeName of PLANE_DIRS) {
+        const planePath = path.join(versionPath, planeName)
+        if (!fs.existsSync(planePath)) {
+            continue
+        }
+
+        for (const name of fs.readdirSync(planePath)) {
+            movePath(path.join(planePath, name), path.join(versionPath, name))
+        }
+
+        fs.rmSync(planePath, { recursive: true, force: true })
+    }
+}
+
+function applyLegacyMilvusNames(basePath) {
+    const entries = fs.readdirSync(basePath, { withFileTypes: true })
+
+    for (const entry of entries) {
+        let currentPath = path.join(basePath, entry.name)
+        const renamed = LEGACY_MILVUS_RENAMES[entry.name]
+        if (renamed) {
+            const renamedPath = path.join(basePath, renamed)
+            movePath(currentPath, renamedPath)
+            currentPath = renamedPath
+        }
+
+        if (entry.isDirectory()) {
+            applyLegacyMilvusNames(currentPath)
+        }
+    }
+}
+
+function normalizeLegacyMilvusMdxContent(basePath) {
+    const entries = fs.readdirSync(basePath, { withFileTypes: true })
+
+    for (const entry of entries) {
+        const absolutePath = path.join(basePath, entry.name)
+        if (entry.isDirectory()) {
+            normalizeLegacyMilvusMdxContent(absolutePath)
+            continue
+        }
+
+        if (!entry.name.endsWith('.mdx')) {
+            continue
+        }
+
+        const original = fs.readFileSync(absolutePath, 'utf-8')
+        const normalized = original
+            .replace('sidebar_position:', 'sidebar_positition:')
+            .replace(/title: "([^"]+) \(V[12]\) \| RESTful"/g, 'title: "$1 | RESTful"')
+            .replace(/sidebar_label: "([^"]+) \(V[12]\)"/g, 'sidebar_label: "$1"')
+            .replace(/- "([^"]+) \(V[12]\)"/g, '- "$1"')
+            .replace(/^# (.+) \(V[12]\)$/gm, '# $1')
+
+        if (normalized !== original) {
+            fs.writeFileSync(absolutePath, normalized)
+        }
+    }
+}
+
+function applyMilvusLegacyCompatibility(outputPath) {
+    const absoluteOutputPath = path.resolve(outputPath)
+    if (!fs.existsSync(absoluteOutputPath)) {
+        return
+    }
+
+    for (const version of VERSION_DIRS) {
+        const versionPath = path.join(absoluteOutputPath, version)
+        if (!fs.existsSync(versionPath)) {
+            continue
+        }
+
+        flattenPlaneDirs(versionPath)
+        applyLegacyMilvusNames(versionPath)
+        normalizeLegacyMilvusMdxContent(versionPath)
+    }
+}
+
 function runCli() {
     program
         .name('fetch-restful-docs')
@@ -117,6 +236,13 @@ function runCli() {
             if (result.status !== 0) {
                 process.exit(result.status || 1)
             }
+
+            if (resolved.target === 'milvus') {
+                const compatibilityOutputPath = path.isAbsolute(resolved.outputPath)
+                    ? resolved.outputPath
+                    : path.join(DEFAULT_SPAWN_CWD, resolved.outputPath)
+                applyMilvusLegacyCompatibility(compatibilityOutputPath)
+            }
         })
 
     program.parse()
@@ -128,6 +254,7 @@ module.exports = {
     resolveRestfulOptions,
     buildApifoxArgs,
     loadConfig,
+    applyMilvusLegacyCompatibility,
 }
 
 if (require.main === module) {
