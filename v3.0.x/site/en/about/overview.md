@@ -157,7 +157,7 @@ In addition to primitive data types, Milvus supports various advanced data types
   Milvus Backup is a tool that allows users to back up and restore Milvus data. It provides both CLI and API to fit itself into different application scenarios. For details, refer to [Milvus Backup](milvus_backup_overview.md).
 
 - Milvus Capture Data Change (CDC)
-  Milvus-CDC can capture and synchronize incremental data in Milvus instances and ensures the reliability of business data by seamlessly transferring it between source and target instances, allowing for easy incremental backup and disaster recovery. For details, refer to [Milvus CDC](milvus-cdc-overview.md).
+  Milvus CDC can replicate data changes from one Milvus cluster to another for primary-standby disaster recovery. For details, refer to [Milvus CDC](milvus_cdc_overview.md).
 
 - Milvus Connectors
   Milvus has planned a set of connectors for you to seamlessly integrate Milvus with third-party tools, such as Apache Spark. Currently, you can use our Spark Connector to feed your Milvus data to Apache Spark for machine-learning processing. For details, refer to [Spark-Milvus Connector](integrate_with_spark.md).
